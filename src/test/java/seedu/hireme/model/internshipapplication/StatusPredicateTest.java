@@ -3,7 +3,10 @@ package seedu.hireme.model.internshipapplication;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.hireme.testutil.TypicalInternshipApplications.APPLE;
+import static seedu.hireme.testutil.TypicalInternshipApplications.BYTEDANCE;
 import static seedu.hireme.testutil.TypicalInternshipApplications.GOOGLE;
+import static seedu.hireme.testutil.TypicalInternshipApplications.GOVTECH;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +14,8 @@ public class StatusPredicateTest {
 
     @Test
     public void equals() {
-        String firstStatus = "pending";
-        String secondStatus = "rejected";
+        Status firstStatus = Status.PENDING;
+        Status secondStatus = Status.ACCEPTED;
 
         StatusPredicate firstPredicate = new StatusPredicate(firstStatus);
         StatusPredicate secondPredicate = new StatusPredicate(secondStatus);
@@ -37,25 +40,46 @@ public class StatusPredicateTest {
     @Test
     public void test_matchingStatus_returnsTrue() {
         // pending
-        StatusPredicate predicate = new StatusPredicate("pending");
+        StatusPredicate predicate = new StatusPredicate(Status.PENDING);
         assertTrue(predicate.test(GOOGLE));
+
+        // accepted
+        predicate = new StatusPredicate(Status.ACCEPTED);
+        assertTrue(predicate.test(GOVTECH));
+
+        // rejected
+        predicate = new StatusPredicate(Status.REJECTED);
+        assertTrue(predicate.test(BYTEDANCE));
 
     }
 
     @Test
-    public void test_notMatchingStatus_returnsFalse() {
-        // Non-matching status
-        StatusPredicate predicate = new StatusPredicate("accepted");
+    public void test_nonMatchingStatus_returnsFalse() {
+        StatusPredicate predicate = new StatusPredicate(Status.ACCEPTED);
         assertFalse(predicate.test(GOOGLE));
 
+        predicate = new StatusPredicate(Status.REJECTED);
+        assertFalse(predicate.test(APPLE));
+
+        predicate = new StatusPredicate(Status.PENDING);
+        assertFalse(predicate.test(GOVTECH));
     }
 
     @Test
     public void toStringMethod() {
         String pending = "PENDING";
-        StatusPredicate predicate = new StatusPredicate("PENDING");
-
+        StatusPredicate predicate = new StatusPredicate(Status.PENDING);
         String expected = StatusPredicate.class.getCanonicalName() + "{statusToFilterBy=" + pending + "}";
+        assertEquals(expected, predicate.toString());
+
+        String accepted = "ACCEPTED";
+        predicate = new StatusPredicate(Status.ACCEPTED);
+        expected = StatusPredicate.class.getCanonicalName() + "{statusToFilterBy=" + accepted + "}";
+        assertEquals(expected, predicate.toString());
+
+        String rejected = "REJECTED";
+        predicate = new StatusPredicate(Status.REJECTED);
+        expected = StatusPredicate.class.getCanonicalName() + "{statusToFilterBy=" + rejected + "}";
         assertEquals(expected, predicate.toString());
     }
 }

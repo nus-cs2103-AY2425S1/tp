@@ -5,7 +5,7 @@ import java.util.Objects;
 import javafx.beans.DefaultProperty;
 
 /**
- * A test object which can be constructed via an FXML file.
+ * Represents a test object which can be constructed via an FXML file.
  * Unlike other JavaFX classes, this class can be constructed without the JavaFX toolkit being initialized.
  */
 @DefaultProperty("text")

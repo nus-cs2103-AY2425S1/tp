@@ -10,7 +10,7 @@ import seedu.hireme.model.Model;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
- * A utility class for test cases.
+ * Represents a utility class for test cases.
  */
 public class TestUtil {
 
@@ -33,21 +33,21 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the internship application in the {@code model}'s internship application list.
+     * Fetches the middle index of the internship application in the {@code model}'s internship application list.
      */
     public static Index getMidIndex(Model model) {
         return Index.fromOneBased(model.getFilteredList().size() / 2);
     }
 
     /**
-     * Returns the last index of the internship application in the {@code model}'s internship application list.
+     * Fetches the last index of the internship application in the {@code model}'s internship application list.
      */
     public static Index getLastIndex(Model model) {
         return Index.fromOneBased(model.getFilteredList().size());
     }
 
     /**
-     * Returns the internship application in the {@code model}'s internship application list at {@code index}.
+     * Fetches the internship application in the {@code model}'s internship application list at {@code index}.
      */
     public static InternshipApplication getInternshipApplication(Model model, Index index) {
         return model.getFilteredList().get(index.getZeroBased());

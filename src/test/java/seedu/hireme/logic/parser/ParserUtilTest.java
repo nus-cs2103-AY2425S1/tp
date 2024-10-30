@@ -17,22 +17,22 @@ import seedu.hireme.model.internshipapplication.Role;
 import seedu.hireme.model.internshipapplication.Status;
 
 public class ParserUtilTest {
-    private static final String INVALID_COMPANY_NAME = "!!";
-    private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_SORTING_ORDER = "??";
-    private static final String INVALID_ROLE = ".";
-    private static final String INVALID_DATE = "4 Sep 1998";
-    private static final String INVALID_STATUS = "bad-status";
+    public static final String INVALID_COMPANY_NAME = "!!";
+    public static final String INVALID_EMAIL = "example.com";
+    public static final String INVALID_SORTING_ORDER = "??";
+    public static final String INVALID_ROLE = ".";
+    public static final String INVALID_DATE = "4 Sep 1998";
+    public static final String INVALID_STATUS = "bad-status";
 
-    private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_SORTING_ORDER = "earliest";
-    private static final String VALID_COMPANY_NAME = GOOGLE.getCompany().getName().toString();
-    private static final String VALID_COMPANY_EMAIL = GOOGLE.getCompany().getEmail().toString();
-    private static final String VALID_ROLE = GOOGLE.getRole().toString();
-    private static final String VALID_DATE = GOOGLE.getDateOfApplication().toString();
-    private static final String VALID_STATUS = GOOGLE.getStatus().getValue();
-    private static final String WHITESPACE = " \t\r\n";
+    public static final String VALID_NAME = "Rachel Walker";
+    public static final String VALID_EMAIL = "rachel@example.com";
+    public static final String VALID_SORTING_ORDER = "earliest";
+    public static final String VALID_COMPANY_NAME = GOOGLE.getCompany().getName().toString();
+    public static final String VALID_COMPANY_EMAIL = GOOGLE.getCompany().getEmail().toString();
+    public static final String VALID_ROLE = GOOGLE.getRole().toString();
+    public static final String VALID_DATE = GOOGLE.getDateOfApplication().toString();
+    public static final String VALID_STATUS = GOOGLE.getStatus().toString();
+    public static final String WHITESPACE = " \t\r\n";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {

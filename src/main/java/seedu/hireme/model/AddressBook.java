@@ -115,8 +115,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return map;
     }
 
-    //// util methods
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)

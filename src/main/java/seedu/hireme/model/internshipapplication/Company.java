@@ -26,8 +26,8 @@ public class Company {
     public Company(Email email, Name name) {
         requireNonNull(email);
         requireNonNull(name);
-        AppUtil.checkArgument(EmailValidator.of().validate(email.getValue()), Email.MESSAGE_CONSTRAINTS);
-        AppUtil.checkArgument(NameValidator.of().validate(name.getValue()), Name.MESSAGE_CONSTRAINTS);
+        AppUtil.checkArgument(EmailValidator.of().validate(email.toString()), Email.MESSAGE_CONSTRAINTS);
+        AppUtil.checkArgument(NameValidator.of().validate(name.toString()), Name.MESSAGE_CONSTRAINTS);
         this.email = email;
         this.name = name;
     }
@@ -56,7 +56,7 @@ public class Company {
      * @return The string representation of the company's name.
      */
     public String getNameValue() {
-        return name.getValue();
+        return name.toString();
     }
 
     /**

@@ -128,10 +128,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_filter() throws Exception {
-        String status = "pending";
+    public void parseCommand_filter_success() throws Exception {
+        Status status = Status.PENDING;
         FilterCommand command = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " " + String.join(" ", status));
+                FilterCommand.COMMAND_WORD + " " + String.join(" ", status.toString()));
         assertEquals(new FilterCommand(new StatusPredicate(status)), command);
     }
 }

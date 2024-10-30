@@ -31,6 +31,7 @@ public class InternshipApplication {
         requireNonNull(company);
         requireNonNull(dateOfApplication);
         requireNonNull(role);
+
         this.company = company;
         this.dateOfApplication = dateOfApplication;
         this.role = role;
@@ -51,6 +52,8 @@ public class InternshipApplication {
         requireNonNull(company);
         requireNonNull(dateOfApplication);
         requireNonNull(role);
+        requireNonNull(status);
+
         this.company = company;
         this.dateOfApplication = dateOfApplication;
         this.role = role;
@@ -117,7 +120,8 @@ public class InternshipApplication {
      * @param status The new status to be set.
      */
     public void setStatus(Status status) {
-        this.status = requireNonNull(status);
+        requireNonNull(status);
+        this.status = status;
     }
 
     /**

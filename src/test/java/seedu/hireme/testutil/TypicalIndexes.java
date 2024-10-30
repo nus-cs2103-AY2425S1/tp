@@ -3,7 +3,7 @@ package seedu.hireme.testutil;
 import seedu.hireme.commons.core.index.Index;
 
 /**
- * A utility class containing a list of {@code Index} objects to be used in tests.
+ * Represents a utility class containing a list of {@code Index} objects to be used in tests.
  */
 public class TypicalIndexes {
     public static final Index INDEX_FIRST_INTERNSHIP_APPLICATION = Index.fromOneBased(1);

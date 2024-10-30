@@ -26,7 +26,7 @@ public class StatusValidator extends Validator<String> {
 
     private static boolean isValid(String status) {
         for (Status s : Status.values()) {
-            if (status.equalsIgnoreCase(s.getValue())) {
+            if (status.equalsIgnoreCase(s.toString())) {
                 return true;
             }
         }

@@ -73,6 +73,11 @@ public class UniqueListTest {
     }
 
     @Test
+    public void setItem_nullParams_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueList.setItem(null, null));
+    }
+
+    @Test
     public void setItem_targetInternshipNotInList_throwsInternshipNotFoundException() {
         assertThrows(InternshipNotFoundException.class, () -> uniqueList.setItem(GOOGLE, GOOGLE));
     }
@@ -109,7 +114,7 @@ public class UniqueListTest {
     }
 
     @Test
-    public void setItem_editedInternshipHasNonUniqueIdentity_throwsDuplicateInternshipException() {
+    public void setItem_editedInternshipIsDuplicate_throwsDuplicateInternshipException() {
         uniqueList.add(GOOGLE);
         uniqueList.add(YAHOO);
         assertThrows(DuplicateInternshipException.class, () -> uniqueList.setItem(GOOGLE, YAHOO));
@@ -139,7 +144,7 @@ public class UniqueListTest {
     }
 
     @Test
-    public void setItems_uniqueList_replacesOwnListWithProvidedUniqueList() {
+    public void setItems_uniqueList_success() {
         uniqueList.add(GOOGLE);
         UniqueList expectedUniqueList = new UniqueList();
         expectedUniqueList.add(YAHOO);
@@ -153,7 +158,7 @@ public class UniqueListTest {
     }
 
     @Test
-    public void setItems_list_replacesOwnListWithProvidedList() {
+    public void setItems_list_success() {
         uniqueList.add(GOOGLE);
         List<InternshipApplication> internshipList = Collections.singletonList(YAHOO);
         uniqueList.setItems(internshipList);

@@ -52,11 +52,11 @@ class JsonAdaptedInternship {
      * Converts a given {@code InternshipApplication} into this class for Jackson use.
      */
     public JsonAdaptedInternship(InternshipApplication source) {
-        companyName = source.getCompany().getName().getValue();
-        companyEmail = source.getCompany().getEmail().getValue();
-        role = source.getRole().getValue();
-        dateString = source.getDateOfApplication().getValue().format(DateValidator.FORMATTER);
-        statusString = source.getStatus().getValue();
+        companyName = source.getCompany().getName().toString();
+        companyEmail = source.getCompany().getEmail().toString();
+        role = source.getRole().toString();
+        dateString = source.getDateOfApplication().toString();
+        statusString = source.getStatus().toString();
     }
 
     /**

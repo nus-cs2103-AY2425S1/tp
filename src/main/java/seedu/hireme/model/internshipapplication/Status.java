@@ -44,7 +44,8 @@ public enum Status {
      *
      * @return The string value of the status.
      */
-    public String getValue() {
+    @Override
+    public String toString() {
         return this.value;
     }
 }

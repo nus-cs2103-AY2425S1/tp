@@ -36,15 +36,6 @@ public class Role {
     }
 
     /**
-     * Returns the string representation of the role.
-     *
-     * @return The role as a string.
-     */
-    public String getValue() {
-        return this.value;
-    }
-
-    /**
      * Returns a string representation of the role.
      *
      * @return The role as a string.

@@ -13,11 +13,13 @@ public class CompanyTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Company(null, null));
+        assertThrows(NullPointerException.class, () -> new Company(new Email("valid@gmail.com"), null));
+        assertThrows(NullPointerException.class, () -> new Company(null, new Name("Valid name")));
     }
 
     @Test
     public void constructor_invalidEmail_throwsIllegalArgumentException() {
-        String invalidEmail = "email";
+        String invalidEmail = "";
         assertThrows(IllegalArgumentException.class, () ->
                 new Company(new Email(invalidEmail), new Name("name")));
     }

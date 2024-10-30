@@ -25,7 +25,7 @@ public class JsonAdaptedInternshipTest {
     private static final String VALID_COMPANY_EMAIL = GOOGLE.getCompany().getEmail().toString();
     private static final String VALID_ROLE = GOOGLE.getRole().toString();
     private static final String VALID_DATE = GOOGLE.getDateOfApplication().toString();
-    private static final String VALID_STATUS = GOOGLE.getStatus().getValue();
+    private static final String VALID_STATUS = GOOGLE.getStatus().toString();
 
     @Test
     public void toModelType_validInternshipApplicationDetails_returnsInternshipApplication() throws Exception {

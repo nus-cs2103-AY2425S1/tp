@@ -35,7 +35,7 @@ public class StatusCommandTest {
         StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
 
         String expectedMessage = String.format(StatusCommand.MESSAGE_STATUS_CHANGE_SUCCESS,
-                Messages.format(internshipApplicationToUpdate), Status.ACCEPTED.getValue());
+                Messages.format(internshipApplicationToUpdate), Status.ACCEPTED);
 
         ModelManager expectedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
 

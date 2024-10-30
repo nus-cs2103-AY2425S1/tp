@@ -45,12 +45,12 @@ public class InternshipApplicationCard extends UiPart<Region> {
         super(FXML);
         this.internshipApplication = internshipApplication;
         id.setText(displayedIndex + ". ");
-        name.setText(internshipApplication.getCompany().getName().getValue());
-        email.setText(internshipApplication.getCompany().getEmail().getValue());
-        role.setText(internshipApplication.getRole().getValue());
-        date.setText(internshipApplication.getDateOfApplication().getValue().toString());
+        name.setText(internshipApplication.getCompany().getName().toString());
+        email.setText(internshipApplication.getCompany().getEmail().toString());
+        role.setText(internshipApplication.getRole().toString());
+        date.setText(internshipApplication.getDateOfApplication().toString());
 
-        String statusValue = internshipApplication.getStatus().getValue().toUpperCase();
+        String statusValue = internshipApplication.getStatus().toString().toUpperCase();
         status.setText(statusValue);
 
         switch (statusValue) {

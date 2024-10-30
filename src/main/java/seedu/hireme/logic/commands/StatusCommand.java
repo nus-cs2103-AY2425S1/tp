@@ -82,7 +82,7 @@ public class StatusCommand extends Command {
         model.setItem(internshipApplicationToUpdate, updatedInternshipApplication);
         model.updateFilteredList(prevPredicate);
         return new CommandResult(String.format(MESSAGE_STATUS_CHANGE_SUCCESS,
-                Messages.format(internshipApplicationToUpdate), newStatus.getValue()));
+                Messages.format(internshipApplicationToUpdate), newStatus.toString()));
     }
 
     /**
@@ -114,6 +114,6 @@ public class StatusCommand extends Command {
     @Override
     public String toString() {
         return StatusCommand.class.getCanonicalName()
-                + "{targetIndex=" + targetIndex + ", newStatus=" + newStatus.getValue() + "}";
+                + "{targetIndex=" + targetIndex + ", newStatus=" + newStatus.toString() + "}";
     }
 }

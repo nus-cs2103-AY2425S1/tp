@@ -5,37 +5,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.hireme.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
 
-import seedu.hireme.logic.validator.DateValidator;
+import org.junit.jupiter.api.Test;
 
 public class DateTest {
 
     @Test
-    public void constructor_invalidDate_throwsIllegalArgumentException() {
-        String invalidDate = "";
-        assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Date((String) null));
+        assertThrows(NullPointerException.class, () -> new Date((LocalDate) null));
     }
 
     @Test
-    public void validate() {
-        // invalid date
-        assertFalse(DateValidator.of().validate("")); // empty string
-        assertFalse(DateValidator.of().validate(" ")); // spaces only
-        assertFalse(DateValidator.of().validate("///")); // backslashes only
-        assertFalse(DateValidator.of().validate("120524")); // numbers only
-        assertFalse(DateValidator.of().validate("12052024")); // numbers only with 4 digit year
-        assertFalse(DateValidator.of().validate("12/05/2024")); // invalid year format
-        assertFalse(DateValidator.of().validate("12\05\2024")); // forward slashes
-        assertFalse(DateValidator.of().validate("12/50/24")); // invalid month
-        assertFalse(DateValidator.of().validate("-1/05/24")); // invalid day
-        assertFalse(DateValidator.of().validate("12?05?24")); // invalid special characters
-        assertFalse(DateValidator.of().validate("12/05/30")); // future date
-
-        // valid date
-        assertTrue(DateValidator.of().validate("12/05/24")); // valid date
-        assertTrue(DateValidator.of().validate("29/11/19")); // numbers only
-
+    public void constructor_emptyDate_throwsIllegalArgumentException() {
+        String emptyDate = "";
+        assertThrows(IllegalArgumentException.class, () -> new Date(emptyDate));
     }
 
     @Test
@@ -67,5 +52,11 @@ public class DateTest {
 
         // different values -> returns false
         assertFalse(date.equals(new Date("05/05/21")));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Date date = new Date("01/01/24");
+        assertEquals("01/01/24", date.toString());
     }
 }

@@ -7,6 +7,7 @@ import static seedu.hireme.logic.parser.CommandParserTestUtil.assertParseSuccess
 import org.junit.jupiter.api.Test;
 
 import seedu.hireme.logic.commands.FilterCommand;
+import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.model.internshipapplication.StatusPredicate;
 
 public class FilterCommandParserTest {
@@ -15,14 +16,14 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
-        FilterCommand expectedFilterCommand =
-                new FilterCommand(new StatusPredicate("PENDING"));
+        FilterCommand expectedFilterCommand = new FilterCommand(new StatusPredicate(Status.PENDING));
         assertParseSuccess(parser, "PENDING", expectedFilterCommand);
     }
 

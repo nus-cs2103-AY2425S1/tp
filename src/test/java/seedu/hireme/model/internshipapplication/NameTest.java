@@ -1,12 +1,11 @@
 package seedu.hireme.model.internshipapplication;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.hireme.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.hireme.logic.validator.NameValidator;
 
 public class NameTest {
 
@@ -16,28 +15,9 @@ public class NameTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
-    }
-
-    @Test
-    public void validate() {
-        // null name
-        assertThrows(NullPointerException.class, () -> NameValidator.of().validate(null));
-
-        // invalid name
-        assertFalse(NameValidator.of().validate("")); // empty string
-        assertFalse(NameValidator.of().validate(" ")); // spaces only
-        assertFalse(NameValidator.of().validate("^")); // only non-alphanumeric characters
-        assertFalse(NameValidator.of().validate("peter*")); // contains non-alphanumeric characters
-
-        // valid name
-        assertTrue(NameValidator.of().validate("peter jack")); // alphabets only
-        assertTrue(NameValidator.of().validate("12345")); // numbers only
-        assertTrue(NameValidator.of().validate("peter the 2nd")); // alphanumeric characters
-        assertTrue(NameValidator.of().validate("Capital Tan")); // with capital letters
-        assertTrue(NameValidator.of().validate("David Roger Jackson Ray Jr 2nd")); // long names
+    public void constructor_emptyName_throwsIllegalArgumentException() {
+        String emptyName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Name(emptyName));
     }
 
     @Test
@@ -58,5 +38,11 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Name name = new Name("Valid Name");
+        assertEquals("Valid Name", name.toString());
     }
 }

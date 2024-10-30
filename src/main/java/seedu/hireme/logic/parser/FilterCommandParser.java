@@ -24,7 +24,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
         Status status = ParserUtil.parseStatus(trimmedArgs);
-        return new FilterCommand(new StatusPredicate(status.getValue()));
+        return new FilterCommand(new StatusPredicate(status));
     }
 
 }

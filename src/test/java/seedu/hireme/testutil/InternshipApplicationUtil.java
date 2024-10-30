@@ -16,44 +16,23 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
 public class InternshipApplicationUtil {
 
     /**
-     * Returns an add command string for adding the {@code InternshipApplication}.
+     * Creates an add command string for adding the {@code InternshipApplication}.
      */
     public static String getAddCommand(InternshipApplication application) {
         return AddCommand.COMMAND_WORD + " " + getApplicationDetails(application);
     }
 
     /**
-     * Returns the part of command string for the given {@code InternshipApplication}'s details.
+     * Creates the part of command string for the given {@code InternshipApplication}'s details.
      */
     public static String getApplicationDetails(InternshipApplication application) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + application.getCompany().getName().getValue() + " ");
-        sb.append(PREFIX_ROLE + application.getRole().getValue() + " ");
-        sb.append(PREFIX_EMAIL + application.getCompany().getEmail().getValue() + " ");
-        sb.append(PREFIX_DATE + application.getDateOfApplication().getValue().format(DateValidator.FORMATTER) + " ");
+        sb.append(PREFIX_NAME + application.getCompany().getName().toString() + " ");
+        sb.append(PREFIX_ROLE + application.getRole().toString() + " ");
+        sb.append(PREFIX_EMAIL + application.getCompany().getEmail().toString() + " ");
+        sb.append(PREFIX_DATE + application.getDateOfApplication().toString() + " ");
 
         return sb.toString();
     }
 
-    // Todo when EDIT feature is implemented
-    //
-    //    /**
-    //     * Returns the part of command string for the given {@code EditPApplicationDescriptor}'s details.
-    //     */
-    //    public static String getEditApplicationDescriptorDetails(EditCommand.EditPersonDescriptor descriptor) {
-    //        StringBuilder sb = new StringBuilder();
-    //        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.getValue()).append(" "));
-    //        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-    //        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.getValue()).append(" "));
-    //        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-    //        if (descriptor.getTags().isPresent()) {
-    //            Set<Tag> tags = descriptor.getTags().get();
-    //            if (tags.isEmpty()) {
-    //                sb.append(PREFIX_TAG);
-    //            } else {
-    //                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-    //            }
-    //        }
-    //        return sb.toString();
-    //    }
 }

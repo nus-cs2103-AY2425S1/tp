@@ -39,15 +39,6 @@ public class Email {
     }
 
     /**
-     * Returns the value of the email.
-     *
-     * @return The email string.
-     */
-    public String getValue() {
-        return this.value;
-    }
-
-    /**
      * Returns a string representation of the email.
      *
      * @return The email string.
