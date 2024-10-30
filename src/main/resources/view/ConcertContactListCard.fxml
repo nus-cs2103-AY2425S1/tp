@@ -28,7 +28,7 @@
             </HBox>
 
             <HBox fx:id="personConcertContainer" minWidth="680" prefWidth="680" VBox.vgrow="ALWAYS">
-                <VBox fx:id="personDetails" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0"
+                <VBox fx:id="personDetails" minHeight="105" GridPane.columnIndex="0"
                       minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" >
                     <HBox spacing="0.5" alignment="CENTER_LEFT">
                         <Label fx:id="personName" styleClass="cell_big_label" text="\$person's name" >
@@ -45,7 +45,7 @@
                     <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
                 </VBox>
 
-                <VBox fx:id="concertDetails" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0"
+                <VBox fx:id="concertDetails" minHeight="105" GridPane.columnIndex="0"
                       minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" >
                     <padding>
                         <Insets top="5" right="5" bottom="5" left="15" />
