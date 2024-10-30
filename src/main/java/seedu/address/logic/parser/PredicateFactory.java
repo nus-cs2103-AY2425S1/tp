@@ -8,6 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
+import static seedu.address.model.predicate.FieldContainsKeywordsPredicate.ADDRESS_IDENTIFIER;
+import static seedu.address.model.predicate.FieldContainsKeywordsPredicate.EMAIL_IDENTIFIER;
+import static seedu.address.model.predicate.FieldContainsKeywordsPredicate.NAME_IDENTIFIER;
+import static seedu.address.model.predicate.FieldContainsKeywordsPredicate.PHONE_IDENTIFIER;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -56,23 +60,26 @@ public class PredicateFactory {
 
     private static void processFieldPredicates(ArgumentMultimap argMultimap, List<Predicate<Person>> personPredicates)
             throws ParseException {
-        addFieldPredicate(argMultimap, PREFIX_NAME, Person::getFullName, personPredicates, true);
-        addFieldPredicate(argMultimap, PREFIX_PHONE, Person::getPhoneValue, personPredicates, false);
-        addFieldPredicate(argMultimap, PREFIX_EMAIL, Person::getEmailValue, personPredicates, false);
-        addFieldPredicate(argMultimap, PREFIX_ADDRESS, Person::getAddressValue, personPredicates, true);
+        addFieldPredicate(argMultimap, PREFIX_NAME, Person::getFullName, personPredicates, true, NAME_IDENTIFIER);
+        addFieldPredicate(argMultimap, PREFIX_PHONE, Person::getPhoneValue, personPredicates, false, PHONE_IDENTIFIER);
+        addFieldPredicate(argMultimap, PREFIX_EMAIL, Person::getEmailValue, personPredicates, false, EMAIL_IDENTIFIER);
+        addFieldPredicate(argMultimap, PREFIX_ADDRESS, Person::getAddressValue, personPredicates,
+                true, ADDRESS_IDENTIFIER);
     }
 
     private static void addFieldPredicate(
             ArgumentMultimap argMultimap, Prefix prefix,
             Function<Person, String> fieldExtractor,
-            List<Predicate<Person>> personPredicates, boolean hasMultipleKeywords) throws ParseException {
+            List<Predicate<Person>> personPredicates,
+            boolean hasMultipleKeywords,
+            String fieldIdentifier) throws ParseException {
         if (argMultimap.getValue(prefix).isPresent()) {
             String value = argMultimap.getValue(prefix).get();
             String trimmedValue = hasMultipleKeywords
                     ? ParserUtil.parseMultipleWordsFromFindCommand(value)
                     : ParserUtil.parseSingleWordFromFindCommand(value);
             personPredicates.add(new FieldContainsKeywordsPredicate<>(Arrays.asList(trimmedValue.split("\\s+")),
-                    fieldExtractor, hasMultipleKeywords));
+                    fieldExtractor, hasMultipleKeywords, fieldIdentifier));
         }
     }
 

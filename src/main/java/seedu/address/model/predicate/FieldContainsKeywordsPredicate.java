@@ -21,9 +21,14 @@ import seedu.address.logic.commands.FindCommand;
  * @param <T> the type of the objects being tested
  */
 public class FieldContainsKeywordsPredicate<T> implements Predicate<T> {
+    public static final String NAME_IDENTIFIER = "name";
+    public static final String EMAIL_IDENTIFIER = "email";
+    public static final String PHONE_IDENTIFIER = "phone";
+    public static final String ADDRESS_IDENTIFIER = "address";
     private final List<String> keywords;
     private final Function<T, String> fieldExtractor;
     private final boolean isMultipleKeywords; // Flag to control multiple keyword behavior
+    private final String fieldIdentifier;
 
     /**
      * Constructs a {@code FieldContainsKeywordsPredicate} with a list of keywords.
@@ -33,13 +38,15 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<T> {
      */
     public FieldContainsKeywordsPredicate(List<String> keywords,
                                           Function<T, String> fieldExtractor,
-                                          boolean isMultipleKeywords) throws IllegalArgumentException {
+                                          boolean isMultipleKeywords,
+                                          String fieldIdentifier) throws IllegalArgumentException {
         if (!isMultipleKeywords && keywords.size() > 1) {
             throw new IllegalArgumentException(
                     String.format(MESSAGE_INVALID_WITH_SPACES, FindCommand.MESSAGE_USAGE));
         }
         this.keywords = keywords;
         this.fieldExtractor = fieldExtractor;
+        this.fieldIdentifier = fieldIdentifier;
         this.isMultipleKeywords = isMultipleKeywords;
     }
 
@@ -71,7 +78,7 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<T> {
         FieldContainsKeywordsPredicate<?> otherFieldContainsKeywordPredicate =
                 (FieldContainsKeywordsPredicate<?>) other;
         return this.keywords.equals(otherFieldContainsKeywordPredicate.keywords)
-                && this.fieldExtractor.equals(otherFieldContainsKeywordPredicate.fieldExtractor)
+                && this.fieldIdentifier.equals(otherFieldContainsKeywordPredicate.fieldIdentifier)
                 && this.isMultipleKeywords == otherFieldContainsKeywordPredicate.isMultipleKeywords;
     }
 
