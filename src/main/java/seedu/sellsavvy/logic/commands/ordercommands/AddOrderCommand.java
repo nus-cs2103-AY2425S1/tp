@@ -70,6 +70,7 @@ public class AddOrderCommand extends Command {
         OrderList orderList = personToAddUnder.getOrderList();
         String feedbackToUser = orderList.contains(toAdd) ? MESSAGE_DUPLICATE_ORDER_WARNING : "";
         orderList.add(toAdd);
+        personToAddUnder.resetFilteredOrderList();
 
         return new CommandResult(feedbackToUser + String.format(MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(toAdd)));
