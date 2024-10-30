@@ -2,9 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.collections.ObservableList;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.student.Student;
 
 
 /**
@@ -18,14 +17,9 @@ public class IncomeCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        double totalOwedAmount = 0;
-        double totalPaidAmount = 0;
-        ObservableList<Student> studentList = model.getFilteredStudentList();
+        double totalPaidAmount = model.getTotalPaidAmount();
+        double totalOwedAmount = model.getTotalOwedAmount();
 
-        for (Student student: studentList) {
-            totalOwedAmount += student.getOwedAmount().value;
-            totalPaidAmount += student.getPaidAmount().value;
-        }
-        return new CommandResult("Total PaidAmount: " + totalPaidAmount + "   Total OwedAmount: " + totalOwedAmount);
+        return new CommandResult(Messages.getIncomeMessage(totalPaidAmount, totalOwedAmount));
     }
 }

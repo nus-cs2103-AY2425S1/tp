@@ -158,10 +158,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public long checkClashes(Student student) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public List<Student> getClashingStudents(Student student) {
@@ -170,6 +166,15 @@ public class AddCommandTest {
 
         @Override
         public List<Student> getScheduledStudents(Days day) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public double getTotalPaidAmount() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public double getTotalOwedAmount() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -234,12 +239,6 @@ public class AddCommandTest {
             requireNonNull(student);
             studentsAdded.add(student);
             System.out.println("added");
-        }
-
-        @Override
-        public long checkClashes(Student student) {
-            requireNonNull(student);
-            return studentsAdded.stream().filter(student::isClash).count();
         }
 
         @Override
