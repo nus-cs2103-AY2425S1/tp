@@ -16,9 +16,9 @@ public class CreateTutorialCommand extends Command {
     public static final String COMMAND_WORD = "createtut";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new tutorial. \n"
             + "Parameters: "
-            + PREFIX_TUTORIAL + "English \t"
+            + PREFIX_TUTORIAL + "TUTORIAL \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TUTORIAL + "English";
-    public static final String MESSAGE_SUCCESS_TUTORIAL = "New tutorial added: %1$s";
+    public static final String MESSAGE_SUCCESS_TUTORIAL = "New tutorial added.\n%1$s";
     public static final String MESSAGE_DUPLICATE_TUTORIAL = "This tutorial already exists in the address book";
     private final Tutorial toAdd;
 
