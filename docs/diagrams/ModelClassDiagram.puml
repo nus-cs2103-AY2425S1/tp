@@ -4,26 +4,33 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+package Model as ModelPackage <<Rectangle>> {
+  class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+  class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+  class "<<interface>>\nModel" as Model
+  class AddressBook
+  class ModelManager
+  class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+  class UniqueList
+  class InternshipApplication
 
-Class I #FFFFFF
+  class Status <<enumeration>> {
+    PENDING
+    ACCEPTED
+    REJECTED
+  }
+  class Email
+  class Name
+  class Date
+  class Company
+  class Role
+
+  class I #FFFFFF
+
 }
 
-Class HiddenOutside #FFFFFF
+class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
@@ -35,20 +42,22 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueList
+UniqueList --> "~* all" InternshipApplication
+InternshipApplication *--> Date
+InternshipApplication *--> Status
+InternshipApplication *--> Company
+InternshipApplication *--> Role
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Company *--> Name
+Company *--> Email
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+InternshipApplication -[hidden]up--> I
+UniqueList -[hidden]right-> I
 
-ModelManager --> "~* filtered" Person
+Name -[hidden]right-> Date
+Date -[hidden]right-> Status
+Status -[hidden]right-> Email
+
+ModelManager --> "~* filtered" InternshipApplication
 @enduml
