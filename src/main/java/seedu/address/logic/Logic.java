@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplierOrder;
 import seedu.address.model.person.Person;
 
 /**
@@ -50,7 +50,7 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    ObservableList<SupplyOrder> getSupplyOrderList();
+    ObservableList<SupplierOrder> getSupplyOrderList();
 
     ObservableList<CustomerOrder> getCustomerOrderList();
 }
