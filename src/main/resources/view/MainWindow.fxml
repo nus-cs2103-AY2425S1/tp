@@ -8,6 +8,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
@@ -20,14 +22,23 @@
     <Scene>
 
       <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" styleClass="menu-button" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" styleClass="menu-button" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" styleClass="menu-button" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" styleClass="menu-button" text="Help" />
-          </Menu>
-        </MenuBar>
+            <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="340.0" styleClass="menu-bar">
+               <children>
+              <MenuBar fx:id="menuBar" HBox.hgrow="ALWAYS">
+                <Menu mnemonicParsing="false" styleClass="menu-button" text="File">
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" styleClass="menu-button" text="Exit" />
+                </Menu>
+                <Menu mnemonicParsing="false" styleClass="menu-button" text="Help">
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" styleClass="menu-button" text="Help" />
+                </Menu>
+              </MenuBar>
+                  <ImageView fitHeight="28.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/doctrack.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
 
         <StackPane fx:id="commandBoxPlaceholder" VBox.vgrow="NEVER">
           <padding>

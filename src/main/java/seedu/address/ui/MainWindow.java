@@ -149,7 +149,8 @@ public class MainWindow extends UiPart<Stage> {
         hbox.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(hbox, Priority.ALWAYS);
 
-        StatusBarFooter addressBookFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter addressBookFooter = new StatusBarFooter(
+            logic.getAddressBookFilePath(), logic.getAppointmentBookFilePath());
         statusbarPlaceholder.getChildren().add(addressBookFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -158,16 +159,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private void showPersonListPanel() {
         hbox.getChildren().add(personVBox);
-        statusbarPlaceholder.getChildren().clear();
-        StatusBarFooter addressBookFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(addressBookFooter.getRoot());
     }
 
     private void showAppointmentListPanel() {
         hbox.getChildren().add(appointmentVBox);
-        statusbarPlaceholder.getChildren().clear();
-        StatusBarFooter appointmentBookFooter = new StatusBarFooter(logic.getAppointmentBookFilePath());
-        statusbarPlaceholder.getChildren().add(appointmentBookFooter.getRoot());
     }
 
     /**
