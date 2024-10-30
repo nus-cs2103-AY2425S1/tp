@@ -2,7 +2,7 @@ package seedu.eventtory.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.eventtory.testutil.TypicalVendors.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendors.getTypicalEventTory;
 
 import java.nio.file.Path;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.eventtory.commons.core.GuiSettings;
-import seedu.eventtory.model.AddressBook;
-import seedu.eventtory.model.ReadOnlyAddressBook;
+import seedu.eventtory.model.EventTory;
+import seedu.eventtory.model.ReadOnlyEventTory;
 import seedu.eventtory.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonEventToryStorage eventToryStorage = new JsonEventToryStorage(getTempFilePath("et"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(eventToryStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +48,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void eventToryReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
+         * {@link JsonEventToryStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        EventTory original = getTypicalEventTory();
+        storageManager.saveEventTory(original);
+        ReadOnlyEventTory retrieved = storageManager.readEventTory().get();
+        assertEquals(original, new EventTory(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getEventToryFilePath() {
+        assertNotNull(storageManager.getEventToryFilePath());
     }
 
 }

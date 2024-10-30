@@ -8,7 +8,7 @@ import static seedu.eventtory.logic.commands.CommandTestUtil.showVendorAtIndex;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_SECOND_VENDOR;
-import static seedu.eventtory.testutil.TypicalVendorsEventsCombined.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendorsEventsCombined.getTypicalEventTory;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ import seedu.eventtory.model.vendor.Vendor;
  */
 public class DeleteVendorCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEventTory(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -36,7 +36,7 @@ public class DeleteVendorCommandTest {
         String expectedMessage = String.format(DeleteVendorCommand.MESSAGE_DELETE_VENDOR_SUCCESS,
                 Messages.format(vendorToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
         expectedModel.deleteVendor(vendorToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -60,7 +60,7 @@ public class DeleteVendorCommandTest {
         String expectedMessage = String.format(DeleteVendorCommand.MESSAGE_DELETE_VENDOR_SUCCESS,
                 Messages.format(vendorToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
         expectedModel.deleteVendor(vendorToDelete);
         showNoVendor(expectedModel);
 
@@ -72,8 +72,8 @@ public class DeleteVendorCommandTest {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
 
         Index outOfBoundIndex = INDEX_SECOND_VENDOR;
-        // ensures that outOfBoundIndex is still in bounds of eventtory book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getVendorList().size());
+        // ensures that outOfBoundIndex is still in bounds of eventTory book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getEventTory().getVendorList().size());
 
         DeleteVendorCommand deleteCommand = new DeleteVendorCommand(outOfBoundIndex);
 

@@ -27,7 +27,7 @@ class AssignCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalVendors.getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalVendors.getTypicalEventTory(), new UserPrefs());
         vendor = TypicalVendors.ALICE; // Customize with utility
         event = TypicalEvents.ALICE; // Use the predefined event
         model.addEvent(event);

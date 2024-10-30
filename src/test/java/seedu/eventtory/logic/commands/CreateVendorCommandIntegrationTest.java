@@ -2,7 +2,7 @@ package seedu.eventtory.logic.commands;
 
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.eventtory.testutil.TypicalVendors.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendors.getTypicalEventTory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,14 +24,14 @@ public class CreateVendorCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalEventTory(), new UserPrefs());
     }
 
     @Test
     public void execute_newVendor_success() {
         Vendor validVendor = new VendorBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
         expectedModel.addVendor(validVendor);
 
         assertCommandSuccess(new CreateVendorCommand(validVendor), model,
@@ -40,7 +40,7 @@ public class CreateVendorCommandIntegrationTest {
 
     @Test
     public void execute_duplicateVendor_throwsCommandException() {
-        Vendor vendorInList = model.getAddressBook().getVendorList().get(0);
+        Vendor vendorInList = model.getEventTory().getVendorList().get(0);
         assertCommandFailure(new CreateVendorCommand(vendorInList), model,
                 CreateVendorCommand.MESSAGE_DUPLICATE_VENDOR);
     }

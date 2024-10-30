@@ -13,14 +13,14 @@ import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSucces
 import static seedu.eventtory.logic.commands.CommandTestUtil.showVendorAtIndex;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_SECOND_VENDOR;
-import static seedu.eventtory.testutil.TypicalVendors.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendors.getTypicalEventTory;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.EditVendorCommand.EditVendorDescriptor;
-import seedu.eventtory.model.AddressBook;
+import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
@@ -33,7 +33,7 @@ import seedu.eventtory.testutil.VendorBuilder;
  */
 public class EditVendorCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEventTory(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -44,7 +44,7 @@ public class EditVendorCommandTest {
         String expectedMessage = String.format(EditVendorCommand.MESSAGE_EDIT_VENDOR_SUCCESS,
                 Messages.format(editedVendor));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventTory(model.getEventTory()), new UserPrefs());
         expectedModel.setVendor(model.getFilteredVendorList().get(0), editedVendor);
 
         assertCommandSuccess(editVendorCommand, model, expectedMessage, expectedModel);
@@ -66,7 +66,7 @@ public class EditVendorCommandTest {
         String expectedMessage = String.format(EditVendorCommand.MESSAGE_EDIT_VENDOR_SUCCESS,
                 Messages.format(editedVendor));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventTory(model.getEventTory()), new UserPrefs());
         expectedModel.setVendor(lastVendor, editedVendor);
 
         assertCommandSuccess(editVendorCommand, model, expectedMessage, expectedModel);
@@ -80,7 +80,7 @@ public class EditVendorCommandTest {
         String expectedMessage = String.format(EditVendorCommand.MESSAGE_EDIT_VENDOR_SUCCESS,
                 Messages.format(editedVendor));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventTory(model.getEventTory()), new UserPrefs());
 
         assertCommandSuccess(editVendorCommand, model, expectedMessage, expectedModel);
     }
@@ -97,7 +97,7 @@ public class EditVendorCommandTest {
         String expectedMessage = String.format(EditVendorCommand.MESSAGE_EDIT_VENDOR_SUCCESS,
                 Messages.format(editedVendor));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventTory(model.getEventTory()), new UserPrefs());
         expectedModel.setVendor(model.getFilteredVendorList().get(0), editedVendor);
 
         assertCommandSuccess(editVendorCommand, model, expectedMessage, expectedModel);
@@ -117,7 +117,7 @@ public class EditVendorCommandTest {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
 
         // edit vendor in filtered list into a duplicate in eventtory book
-        Vendor vendorInList = model.getAddressBook().getVendorList().get(INDEX_SECOND_VENDOR.getZeroBased());
+        Vendor vendorInList = model.getEventTory().getVendorList().get(INDEX_SECOND_VENDOR.getZeroBased());
         EditVendorCommand editVendorCommand = new EditVendorCommand(INDEX_FIRST_VENDOR,
                 new EditVendorDescriptorBuilder(vendorInList).build());
 
@@ -135,14 +135,14 @@ public class EditVendorCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of eventtory book
+     * but smaller than size of EventTory list.
      */
     @Test
     public void execute_invalidVendorIndexFilteredList_failure() {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
         Index outOfBoundIndex = INDEX_SECOND_VENDOR;
-        // ensures that outOfBoundIndex is still in bounds of eventtory book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getVendorList().size());
+        // ensures that outOfBoundIndex is still in bounds of EventTory list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getEventTory().getVendorList().size());
 
         EditVendorCommand editVendorCommand = new EditVendorCommand(outOfBoundIndex,
                 new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB).build());

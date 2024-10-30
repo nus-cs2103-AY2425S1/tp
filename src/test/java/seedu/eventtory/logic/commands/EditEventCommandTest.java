@@ -9,7 +9,7 @@ import static seedu.eventtory.logic.commands.CommandTestUtil.VALID_NAME_BIRTHDAY
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.eventtory.logic.commands.CommandTestUtil.showEventAtIndex;
-import static seedu.eventtory.testutil.TypicalEvents.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalEvents.getTypicalEventTory;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.EditEventCommand.EditEventDescriptor;
-import seedu.eventtory.model.AddressBook;
+import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
@@ -31,7 +31,7 @@ import seedu.eventtory.testutil.EventBuilder;
  */
 public class EditEventCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEventTory(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -42,7 +42,7 @@ public class EditEventCommandTest {
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS,
                 Messages.format(editedEvent));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventTory(model.getEventTory()), new UserPrefs());
         expectedModel.setEvent(model.getFilteredEventList().get(0), editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -62,7 +62,7 @@ public class EditEventCommandTest {
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS,
                 Messages.format(editedEvent));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventTory(model.getEventTory()), new UserPrefs());
         expectedModel.setEvent(lastEvent, editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -76,7 +76,7 @@ public class EditEventCommandTest {
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS,
                 Messages.format(editedEvent));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventTory(model.getEventTory()), new UserPrefs());
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +93,7 @@ public class EditEventCommandTest {
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS,
                 Messages.format(editedEvent));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventTory(model.getEventTory()), new UserPrefs());
         expectedModel.setEvent(model.getFilteredEventList().get(0), editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -113,7 +113,7 @@ public class EditEventCommandTest {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         // edit event in filtered list into a duplicate in eventtory book
-        Event eventInList = model.getAddressBook().getEventList().get(INDEX_SECOND_EVENT.getZeroBased());
+        Event eventInList = model.getEventTory().getEventList().get(INDEX_SECOND_EVENT.getZeroBased());
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT,
                 new EditEventDescriptorBuilder(eventInList).build());
 
@@ -138,7 +138,7 @@ public class EditEventCommandTest {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
         Index outOfBoundIndex = INDEX_SECOND_EVENT;
         // ensures that outOfBoundIndex is still in bounds of eventtory book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEventList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getEventTory().getEventList().size());
 
         EditEventCommand editEventCommand = new EditEventCommand(outOfBoundIndex,
                 new EditEventDescriptorBuilder().withName(VALID_NAME_BIRTHDAY).build());

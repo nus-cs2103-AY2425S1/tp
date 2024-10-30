@@ -10,7 +10,7 @@ import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSucces
 import static seedu.eventtory.testutil.TypicalEvents.CARL;
 import static seedu.eventtory.testutil.TypicalEvents.ELLE;
 import static seedu.eventtory.testutil.TypicalEvents.FIONA;
-import static seedu.eventtory.testutil.TypicalEvents.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalEvents.getTypicalEventTory;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,8 +26,8 @@ import seedu.eventtory.model.event.EventNameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindEventCommand}.
  */
 public class FindEventCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEventTory(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalEventTory(), new UserPrefs());
 
     @Test
     public void equals() {

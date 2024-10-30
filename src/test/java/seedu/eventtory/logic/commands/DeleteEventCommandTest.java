@@ -8,7 +8,7 @@ import static seedu.eventtory.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
-import static seedu.eventtory.testutil.TypicalVendorsEventsCombined.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendorsEventsCombined.getTypicalEventTory;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ import seedu.eventtory.model.vendor.Vendor;
  */
 public class DeleteEventCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEventTory(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -36,7 +36,7 @@ public class DeleteEventCommandTest {
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.format(eventToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -60,7 +60,7 @@ public class DeleteEventCommandTest {
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.format(eventToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
         showNoEvent(expectedModel);
 
@@ -72,8 +72,8 @@ public class DeleteEventCommandTest {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         Index outOfBoundIndex = INDEX_SECOND_EVENT;
-        // ensures that outOfBoundIndex is still in bounds of eventtory book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEventList().size());
+        // ensures that outOfBoundIndex is still in bounds of eventTory book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getEventTory().getEventList().size());
 
         DeleteEventCommand deleteCommand = new DeleteEventCommand(outOfBoundIndex);
 

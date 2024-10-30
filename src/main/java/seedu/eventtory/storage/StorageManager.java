@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import seedu.eventtory.commons.core.LogsCenter;
 import seedu.eventtory.commons.exceptions.DataLoadingException;
-import seedu.eventtory.model.ReadOnlyAddressBook;
 import seedu.eventtory.model.ReadOnlyEventTory;
 import seedu.eventtory.model.ReadOnlyUserPrefs;
 import seedu.eventtory.model.UserPrefs;

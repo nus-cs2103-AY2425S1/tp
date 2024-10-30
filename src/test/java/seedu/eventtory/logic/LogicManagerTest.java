@@ -29,14 +29,14 @@ import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.logic.parser.exceptions.ParseException;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ModelManager;
-import seedu.eventtory.model.ReadOnlyAddressBook;
+import seedu.eventtory.model.ReadOnlyEventTory;
 import seedu.eventtory.model.UserPrefs;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.event.UniqueEventList;
 import seedu.eventtory.model.vendor.UniqueVendorList;
 import seedu.eventtory.model.vendor.Vendor;
-import seedu.eventtory.storage.JsonAddressBookStorage;
+import seedu.eventtory.storage.JsonEventToryStorage;
 import seedu.eventtory.storage.JsonUserPrefsStorage;
 import seedu.eventtory.storage.StorageManager;
 import seedu.eventtory.testutil.EventBuilder;
@@ -57,10 +57,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(
-                temporaryFolder.resolve("addressBook.json"));
+        JsonEventToryStorage eventToryStorage = new JsonEventToryStorage(
+                temporaryFolder.resolve("eventTory.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(eventToryStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -281,7 +281,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -305,22 +305,22 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e
+        // Inject LogicManager with an EventToryStorage that throws the IOException e
         // when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+        JsonEventToryStorage eventToryStorage = new JsonEventToryStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+            public void saveEventTory(ReadOnlyEventTory eventTory, Path filePath) throws IOException {
                 throw e;
             }
         };
 
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
                 temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(eventToryStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveEventTory method by executing an add command
         String addCommand = CreateVendorCommand.COMMAND_WORD + " " + PREFIX_VENDOR + NAME_DESC_AMY + PHONE_DESC_AMY
                 + DESCRIPTION_DESC_AMY;
         Vendor expectedVendor = new VendorBuilder(AMY).withTags().build();

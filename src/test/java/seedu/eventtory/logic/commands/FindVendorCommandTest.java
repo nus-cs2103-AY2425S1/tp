@@ -10,7 +10,7 @@ import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSucces
 import static seedu.eventtory.testutil.TypicalVendors.CARL;
 import static seedu.eventtory.testutil.TypicalVendors.ELLE;
 import static seedu.eventtory.testutil.TypicalVendors.FIONA;
-import static seedu.eventtory.testutil.TypicalVendors.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendors.getTypicalEventTory;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,8 +26,8 @@ import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindVendorCommand}.
  */
 public class FindVendorCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEventTory(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalEventTory(), new UserPrefs());
 
     @Test
     public void equals() {

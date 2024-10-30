@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
-import seedu.eventtory.model.AddressBook;
+import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.Model;
-import seedu.eventtory.model.ReadOnlyAddressBook;
+import seedu.eventtory.model.ReadOnlyEventTory;
 import seedu.eventtory.model.ReadOnlyUserPrefs;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.event.Event;
@@ -112,12 +112,12 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getEventToryFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setEventToryFilePath(Path eventToryFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -127,12 +127,12 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setEventTory(ReadOnlyEventTory newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyEventTory getEventTory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -289,8 +289,8 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyEventTory getEventTory() {
+            return new EventTory();
         }
     }
 }

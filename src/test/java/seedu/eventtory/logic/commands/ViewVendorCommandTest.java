@@ -7,7 +7,7 @@ import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSucces
 import static seedu.eventtory.logic.commands.CommandTestUtil.showVendorAtIndex;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_SECOND_VENDOR;
-import static seedu.eventtory.testutil.TypicalVendors.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendors.getTypicalEventTory;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ import seedu.eventtory.model.vendor.Vendor;
  */
 public class ViewVendorCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEventTory(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -32,7 +32,7 @@ public class ViewVendorCommandTest {
 
         String expectedMessage = String.format(ViewVendorCommand.MESSAGE_SUCCESS, Messages.format(vendorToView));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
         expectedModel.viewVendor(vendorToView);
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
@@ -51,8 +51,8 @@ public class ViewVendorCommandTest {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
 
         Index outOfBoundIndex = INDEX_SECOND_VENDOR;
-        // ensures that outOfBoundIndex is still in bounds of eventtory book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getVendorList().size());
+        // ensures that outOfBoundIndex is still in bounds of EventTory list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getEventTory().getVendorList().size());
 
         ViewVendorCommand viewCommand = new ViewVendorCommand(outOfBoundIndex);
 

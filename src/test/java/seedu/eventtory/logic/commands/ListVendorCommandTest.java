@@ -3,7 +3,7 @@ package seedu.eventtory.logic.commands;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.eventtory.logic.commands.CommandTestUtil.showVendorAtIndex;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
-import static seedu.eventtory.testutil.TypicalVendors.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendors.getTypicalEventTory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ public class ListVendorCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalEventTory(), new UserPrefs());
+        expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
     }
 
     @Test

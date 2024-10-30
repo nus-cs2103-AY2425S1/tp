@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.eventtory.logic.commands.CommandTestUtil.showEventAtIndex;
-import static seedu.eventtory.testutil.TypicalEvents.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalEvents.getTypicalEventTory;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
@@ -23,7 +23,7 @@ import seedu.eventtory.model.event.Event;
  */
 public class ViewEventCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEventTory(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -32,7 +32,7 @@ public class ViewEventCommandTest {
 
         String expectedMessage = String.format(ViewEventCommand.MESSAGE_SUCCESS, Messages.format(eventToView));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
         expectedModel.viewEvent(eventToView);
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
@@ -51,8 +51,8 @@ public class ViewEventCommandTest {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         Index outOfBoundIndex = INDEX_SECOND_EVENT;
-        // ensures that outOfBoundIndex is still in bounds of eventtory book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEventList().size());
+        // ensures that outOfBoundIndex is still in bounds of EventTory list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getEventTory().getEventList().size());
 
         ViewEventCommand viewCommand = new ViewEventCommand(outOfBoundIndex);
 

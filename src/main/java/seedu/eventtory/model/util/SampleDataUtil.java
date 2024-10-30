@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.eventtory.model.AddressBook;
 import seedu.eventtory.model.EventTory;
-import seedu.eventtory.model.ReadOnlyAddressBook;
 import seedu.eventtory.model.ReadOnlyEventTory;
 import seedu.eventtory.model.commons.name.Name;
 import seedu.eventtory.model.commons.tag.Tag;

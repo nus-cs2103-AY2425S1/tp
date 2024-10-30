@@ -28,8 +28,8 @@ import seedu.eventtory.model.event.UniqueEventList;
 import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.UniqueVendorList;
 import seedu.eventtory.model.vendor.Vendor;
-import seedu.eventtory.testutil.AddressBookBuilder;
 import seedu.eventtory.testutil.EventBuilder;
+import seedu.eventtory.testutil.EventToryBuilder;
 import seedu.eventtory.testutil.TypicalEvents;
 import seedu.eventtory.testutil.TypicalVendors;
 import seedu.eventtory.testutil.VendorBuilder;
@@ -43,7 +43,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new EventTory(), new EventTory(modelManager.getEventTory()));
     }
 
     @Test
@@ -54,14 +54,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("eventtory/book/file/path"));
+        userPrefs.setEventToryFilePath(Paths.get("eventtory/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/eventtory/book/file/path"));
+        userPrefs.setEventToryFilePath(Paths.get("new/eventtory/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -78,15 +78,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setEventToryFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setEventToryFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setEventToryFilePath_validPath_setsEventToryFilePath() {
         Path path = Paths.get("eventtory/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setEventToryFilePath(path);
+        assertEquals(path, modelManager.getEventToryFilePath());
     }
 
     @Test
@@ -95,12 +95,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasVendor_vendorNotInAddressBook_returnsFalse() {
+    public void hasVendor_vendorNotInEventTory_returnsFalse() {
         assertFalse(modelManager.hasVendor(ALICE));
     }
 
     @Test
-    public void hasVendor_vendorInAddressBook_returnsTrue() {
+    public void hasVendor_vendorInEventTory_returnsTrue() {
         modelManager.addVendor(ALICE);
         assertTrue(modelManager.hasVendor(ALICE));
     }
@@ -111,12 +111,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+    public void hasEvent_eventNotInEventTory_returnsFalse() {
         assertFalse(modelManager.hasEvent(WEDDING));
     }
 
     @Test
-    public void hasEvent_eventInAddressBook_returnsTrue() {
+    public void hasEvent_eventInEventTory_returnsTrue() {
         modelManager.addEvent(WEDDING);
         assertTrue(modelManager.hasEvent(WEDDING));
     }
@@ -268,13 +268,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withVendor(ALICE).withVendor(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        EventTory eventTory = new EventToryBuilder().withVendor(ALICE).withVendor(BENSON).build();
+        EventTory differentEventTory = new EventTory();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(eventTory, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(eventTory, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -286,21 +286,21 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different eventTory -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentEventTory, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredVendorList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(eventTory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredVendorList(PREDICATE_SHOW_ALL_VENDORS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setEventToryFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(eventTory, differentUserPrefs)));
     }
 }
 

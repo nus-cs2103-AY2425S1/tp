@@ -14,9 +14,9 @@ public class TypicalVendorsEventsCombined {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical events and vendors.
+     * Returns an {@code EventTory} with all the typical events and vendors.
      */
-    public static EventTory getTypicalAddressBook() {
+    public static EventTory getTypicalEventTory() {
         EventTory et = new EventTory();
         for (Event event : TypicalEvents.getTypicalEvents()) {
             et.addEvent(event);

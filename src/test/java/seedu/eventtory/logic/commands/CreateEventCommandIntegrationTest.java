@@ -2,7 +2,7 @@ package seedu.eventtory.logic.commands;
 
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.eventtory.testutil.TypicalEvents.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalEvents.getTypicalEventTory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,14 +23,14 @@ public class CreateEventCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalEventTory(), new UserPrefs());
     }
 
     @Test
     public void execute_newEvent_success() {
         Event validEvent = new EventBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEventTory(), new UserPrefs());
         expectedModel.addEvent(validEvent);
 
         assertCommandSuccess(new CreateEventCommand(validEvent), model,
@@ -39,7 +39,7 @@ public class CreateEventCommandIntegrationTest {
 
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
-        Event eventInList = model.getAddressBook().getEventList().get(0);
+        Event eventInList = model.getEventTory().getEventList().get(0);
         assertCommandFailure(new CreateEventCommand(eventInList), model,
                 CreateEventCommand.MESSAGE_DUPLICATE_EVENT);
     }

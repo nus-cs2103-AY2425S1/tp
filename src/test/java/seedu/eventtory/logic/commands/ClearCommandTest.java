@@ -1,11 +1,11 @@
 package seedu.eventtory.logic.commands;
 
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.eventtory.testutil.TypicalVendors.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendors.getTypicalEventTory;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.eventtory.model.AddressBook;
+import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
@@ -13,7 +13,7 @@ import seedu.eventtory.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyEventTory_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,10 +21,10 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+    public void execute_nonEmptyEventTory_success() {
+        Model model = new ModelManager(getTypicalEventTory(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalEventTory(), new UserPrefs());
+        expectedModel.setEventTory(new EventTory());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
