@@ -608,10 +608,11 @@ Deleting a patient while all patients are being shown
    4. Other incorrect delete commands to try: `delete`, `delete x`(where x is an `NRIC` that does not exist in the patient list)
       Expected: Similar to previous.
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Setting Priority for a patient
 
 Setting a specified Priority for a patient
-
 
 1. Prerequisites: Ensure that a patient with the NRIC `S1234567A` is in the patient list.
     
@@ -623,10 +624,11 @@ Setting a specified Priority for a patient
 
    Expected: No Priority is set to any patient. An error message is shown with details of the error.
 
-4. Other incorrect find commands to try: `setPriority x` (where x is neither `NONE`, `LOW`, `MEDIUM` OR `HIGH`)
+4. Other incorrect setPriority command to try: `setPriority x` (where x is neither `NONE`, `LOW`, `MEDIUM` OR `HIGH`)
    Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
+
 ### Finding a patient by their medical condition
 
 Finding a patient by providing keyword(s) from their medical condition
@@ -645,5 +647,22 @@ Finding a patient by providing keyword(s) from their medical condition
 
    4. Other incorrect find commands to try: `findMedCon x` (where x is a keyword that does not exist in any patient's medical condition)
       Expected: Similar to previous.
+
+[Back to Table of Contents](#table-of-contents)
+
+### Listing patients by Priority
+
+Listing patients with specified Priority
+
+1. Test case: `listPrio !/high`
+
+   Expected: Patient(s) with the Priority Level `HIGH` will be shown. A message is shown with the number of patients listed.
+
+2. Test case: `listPrio`
+
+   Expected: No patient is listed. An error message is shown with details of the error.
+
+3. Other incorrect listPrio command to try: `listPrio x` (where x is neither `NONE`, `LOW`, `MEDIUM` OR `HIGH`)
+   Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
