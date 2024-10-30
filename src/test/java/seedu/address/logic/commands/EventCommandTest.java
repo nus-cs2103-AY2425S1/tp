@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.EventBuilder.DEFAULT_DATE;
+import static seedu.address.testutil.EventBuilder.DEFAULT_END_DATE;
 import static seedu.address.testutil.EventBuilder.DEFAULT_INDEXES;
 import static seedu.address.testutil.EventBuilder.DEFAULT_LOCATION;
 import static seedu.address.testutil.EventBuilder.DEFAULT_NAME;
+import static seedu.address.testutil.EventBuilder.DEFAULT_START_DATE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,17 +32,22 @@ public class EventCommandTest {
 
     @Test
     public void constructor_nullParameters_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new EventCommand(null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new EventCommand(null,
+                null, null, null, null));
 
         // test if any field is null
-        assertThrows(NullPointerException.class, () -> new EventCommand(null, DEFAULT_DATE, DEFAULT_LOCATION,
-                DEFAULT_INDEXES));
-        assertThrows(NullPointerException.class, () -> new EventCommand(DEFAULT_NAME, null, DEFAULT_LOCATION,
-                DEFAULT_INDEXES));
-        assertThrows(NullPointerException.class, () -> new EventCommand(DEFAULT_NAME, DEFAULT_DATE, null,
-                DEFAULT_INDEXES));
-        assertThrows(NullPointerException.class, () -> new EventCommand(DEFAULT_NAME, DEFAULT_DATE,
-                DEFAULT_LOCATION, null));
+        assertThrows(NullPointerException.class, () ->
+                new EventCommand(null, DEFAULT_START_DATE, DEFAULT_END_DATE,
+                        DEFAULT_LOCATION, DEFAULT_INDEXES));
+        assertThrows(NullPointerException.class, () ->
+                new EventCommand(DEFAULT_NAME, null, DEFAULT_END_DATE,
+                        DEFAULT_LOCATION, DEFAULT_INDEXES));
+        assertThrows(NullPointerException.class, () ->
+                new EventCommand(DEFAULT_NAME, DEFAULT_START_DATE, null,
+                        DEFAULT_LOCATION, DEFAULT_INDEXES));
+        assertThrows(NullPointerException.class, () ->
+                new EventCommand(DEFAULT_NAME, DEFAULT_START_DATE, DEFAULT_END_DATE,
+                        DEFAULT_LOCATION, null));
 
     }
 
@@ -50,7 +56,8 @@ public class EventCommandTest {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().build();
         CommandResult commandResult =
-                new EventCommand(DEFAULT_NAME, DEFAULT_DATE, DEFAULT_LOCATION, DEFAULT_INDEXES).execute(modelStub);
+                new EventCommand(DEFAULT_NAME, DEFAULT_START_DATE, DEFAULT_END_DATE,
+                        DEFAULT_LOCATION, DEFAULT_INDEXES).execute(modelStub);
 
         assertEquals(String.format(EventCommand.MESSAGE_SUCCESS, Messages.formatEvent(validEvent)),
                 commandResult.getFeedbackToUser());
@@ -64,7 +71,8 @@ public class EventCommandTest {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().buildWithNoAttendees();
         CommandResult commandResult =
-                new EventCommand(DEFAULT_NAME, DEFAULT_DATE, DEFAULT_LOCATION, emptyIndexes).execute(modelStub);
+                new EventCommand(DEFAULT_NAME, DEFAULT_START_DATE, DEFAULT_END_DATE,
+                        DEFAULT_LOCATION, emptyIndexes).execute(modelStub);
 
         assertEquals(String.format(EventCommand.MESSAGE_SUCCESS, Messages.formatEvent(validEvent)),
                 commandResult.getFeedbackToUser());
@@ -74,7 +82,8 @@ public class EventCommandTest {
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
         Event validEvent = new EventBuilder().build();
-        EventCommand eventCommand = new EventCommand(DEFAULT_NAME, DEFAULT_DATE, DEFAULT_LOCATION, DEFAULT_INDEXES);
+        EventCommand eventCommand = new EventCommand(DEFAULT_NAME, DEFAULT_START_DATE, DEFAULT_END_DATE,
+                DEFAULT_LOCATION, DEFAULT_INDEXES);
         ModelStubWithEvent modelStub = new ModelStubWithEvent(validEvent);
 
         assertThrows(CommandException.class,
@@ -86,7 +95,8 @@ public class EventCommandTest {
         Index index = Index.fromOneBased(SampleDataUtil.ADDRESSBOOK_SIZE + 1);
         Set<Index> indexes = new HashSet<>();
         indexes.add(index);
-        EventCommand eventCommand = new EventCommand(DEFAULT_NAME, DEFAULT_DATE, DEFAULT_LOCATION, indexes);
+        EventCommand eventCommand = new EventCommand(DEFAULT_NAME, DEFAULT_START_DATE, DEFAULT_END_DATE,
+                DEFAULT_LOCATION, indexes);
 
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         assertThrows(CommandException.class,
@@ -95,14 +105,17 @@ public class EventCommandTest {
 
     @Test
     public void equals() {
-        EventCommand eventCommand1 = new EventCommand("event1", DEFAULT_DATE, DEFAULT_LOCATION, DEFAULT_INDEXES);
-        EventCommand eventCommand2 = new EventCommand("event2", DEFAULT_DATE, DEFAULT_LOCATION, DEFAULT_INDEXES);
+        EventCommand eventCommand1 = new EventCommand("event1", DEFAULT_START_DATE, DEFAULT_END_DATE,
+                DEFAULT_LOCATION, DEFAULT_INDEXES);
+        EventCommand eventCommand2 = new EventCommand("event2", DEFAULT_START_DATE, DEFAULT_END_DATE,
+                DEFAULT_LOCATION, DEFAULT_INDEXES);
 
         // same object -> returns true
         assertTrue(eventCommand1.equals(eventCommand1));
 
         // same values -> returns true
-        EventCommand eventCommandCopy = new EventCommand("event1", DEFAULT_DATE, DEFAULT_LOCATION, DEFAULT_INDEXES);
+        EventCommand eventCommandCopy = new EventCommand("event1", DEFAULT_START_DATE, DEFAULT_END_DATE,
+                DEFAULT_LOCATION, DEFAULT_INDEXES);
         assertTrue(eventCommand1.equals(eventCommandCopy));
 
         // different types -> returns false
@@ -117,10 +130,12 @@ public class EventCommandTest {
 
     @Test
     public void toStringMethod() {
-        EventCommand eventCommand = new EventCommand(DEFAULT_NAME, DEFAULT_DATE, DEFAULT_LOCATION, DEFAULT_INDEXES);
+        EventCommand eventCommand = new EventCommand(DEFAULT_NAME, DEFAULT_START_DATE, DEFAULT_END_DATE,
+                DEFAULT_LOCATION, DEFAULT_INDEXES);
         String expected = EventCommand.class.getCanonicalName()
                 + "{eventName=" + DEFAULT_NAME + ", "
-                + "eventDate=" + DEFAULT_DATE + ", "
+                + "eventStartDate=" + DEFAULT_START_DATE + ", "
+                + "eventEndDate=" + DEFAULT_END_DATE + ", "
                 + "location=" + DEFAULT_LOCATION + ", "
                 + "attendeeIndexes=" + DEFAULT_INDEXES + "}";
         assertEquals(expected, eventCommand.toString());

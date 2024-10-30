@@ -14,11 +14,14 @@ import seedu.address.model.event.Event;
 public class TypicalEvents {
 
     public static final Event EVENT_A = new EventBuilder()
-            .withName("Event A").withDate(LocalDate.of(2023, 10, 01)).build();
+            .withName("Event A").withDate(LocalDate.of(2023, 10, 01),
+                    LocalDate.of(2023, 10, 01)).build();
     public static final Event EVENT_B = new EventBuilder()
-            .withName("Event B").withDate(LocalDate.of(2023, 10, 02)).build();
+            .withName("Event B").withDate(LocalDate.of(2023, 10, 02),
+                    LocalDate.of(2023, 10, 10)).build();
     public static final Event EVENT_C = new EventBuilder()
-            .withName("Event C").withDate(LocalDate.of(2023, 10, 03)).build();
+            .withName("Event C").withDate(LocalDate.of(2023, 10, 03),
+                    LocalDate.of(2023, 10, 11)).build();
 
     private TypicalEvents() {} // prevents instantiation
 

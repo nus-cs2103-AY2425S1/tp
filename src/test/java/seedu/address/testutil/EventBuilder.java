@@ -16,13 +16,15 @@ import seedu.address.model.util.SampleDataUtil;
 public class EventBuilder {
 
     public static final String DEFAULT_NAME = "Event A";
-    public static final LocalDate DEFAULT_DATE = LocalDate.of(2023, 10, 1);
+    public static final LocalDate DEFAULT_START_DATE = LocalDate.of(2023, 10, 1);
+    public static final LocalDate DEFAULT_END_DATE = LocalDate.of(2023, 10, 2);
     public static final Address DEFAULT_LOCATION = new Address("123, Kent Ridge Street");
     public static final Set<Person> DEFAULT_ATTENDEES = SampleDataUtil.getSampleAttendees();
     public static final Set<Index> DEFAULT_INDEXES = SampleDataUtil.getSampleIndexes();
 
     private String name;
-    private LocalDate date;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Address location;
     private Set<Person> attendees;
     private Set<Index> indexes;
@@ -32,7 +34,8 @@ public class EventBuilder {
      */
     public EventBuilder() {
         name = DEFAULT_NAME;
-        date = DEFAULT_DATE;
+        startDate = DEFAULT_START_DATE;
+        endDate = DEFAULT_END_DATE;
         location = DEFAULT_LOCATION;
         attendees = DEFAULT_ATTENDEES;
         this.indexes = DEFAULT_INDEXES;
@@ -43,7 +46,8 @@ public class EventBuilder {
      */
     public EventBuilder(Event eventToCopy) {
         name = eventToCopy.getEventName();
-        date = eventToCopy.getDate();
+        startDate = eventToCopy.getStartDate();
+        endDate = eventToCopy.getEndDate();
         location = eventToCopy.getLocation();
         attendees = new HashSet<>(eventToCopy.getAttendees());
     }
@@ -57,10 +61,11 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@code date} of the {@code Event} that we are building.
+     * Sets the {@code startDate} and {@code endDate} of the {@code Event} that we are building.
      */
-    public EventBuilder withDate(LocalDate date) {
-        this.date = date;
+    public EventBuilder withDate(LocalDate startDate, LocalDate endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         return this;
     }
 
@@ -81,10 +86,10 @@ public class EventBuilder {
     }
 
     public Event build() {
-        return new Event(name, date, location, attendees);
+        return new Event(name, startDate, endDate, location, attendees);
     }
 
     public Event buildWithNoAttendees() {
-        return new Event(name, date, location, new HashSet<>());
+        return new Event(name, startDate, endDate, location, new HashSet<>());
     }
 }
