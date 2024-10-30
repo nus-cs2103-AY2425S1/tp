@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
@@ -39,7 +40,9 @@ public class ParserUtil {
             + "dd-MM-yyyy\n"
             + "dd MM yyyy";
 
-    public static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("HH:mm");
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format HH:mm";
+
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     public static final DateTimeFormatter ENGLISH_FORMAT = DateTimeFormatter.ofPattern(
             "dd MMMM yyyy",
@@ -201,10 +204,22 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a String {@code time} into a LocalTime. Leading and trailing whitspaces will be trimmed.
+     * @throws ParseException - if given {@code time} is invalid
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        try {
+            return LocalTime.parse(time, TIME_FORMATTER);
+        } catch (DateTimeParseException ignored) {
+            throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
+        }
+    }
+
+    /**
      * Parses a {@code String date} into an {@code LocalDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
     public static LocalDate parseDate(String date) throws ParseException {
         for (DateTimeFormatter formatter : DATE_FORMATTERS) {

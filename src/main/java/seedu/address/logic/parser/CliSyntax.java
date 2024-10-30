@@ -15,5 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("h/"); // no longer '/a'
     public static final Prefix PREFIX_APPOINTMENT = new Prefix("apt/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_OPENINGHOURS = new Prefix("o/");
+    public static final Prefix PREFIX_CLOSINGHOURS = new Prefix("c/");
 
 }

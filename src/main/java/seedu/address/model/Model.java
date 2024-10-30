@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -87,6 +89,12 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    OperatingHours getOperatingHours();
+
+    boolean setOperatingHours(LocalTime openingHour, LocalTime closingHour);
+
+    boolean appointmentWithinOperatingHours(Appointment appointment);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
