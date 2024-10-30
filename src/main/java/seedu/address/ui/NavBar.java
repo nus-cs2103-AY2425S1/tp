@@ -61,17 +61,10 @@ public class NavBar extends UiPart<HBox> {
     }
 
     public void setActiveButton(Button activeButton) {
-        if (activeButton != contactsButton) {
-            contactsButton.getStyleClass().remove("active");
-        } else {
-            contactsButton.getStyleClass().add("active");
-        }
-
-        if (activeButton != eventsButton) {
-            eventsButton.getStyleClass().remove("active");
-        } else {
-            eventsButton.getStyleClass().add("active");
-        }
+        contactsButton.getStyleClass().remove("active");
+        eventsButton.getStyleClass().remove("active");
+    
+        activeButton.getStyleClass().add("active");
     }
 
     public Button getContactsButton() {
