@@ -3,36 +3,39 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
+skinparam linetype ortho
+skinparam nodesep 150
 
-Class "{abstract}\nCommand" as Command
-Class XYZCommand
-
-package "Parser classes"{
-Class "<<interface>>\nParser" as Parser
-Class AddressBookParser
-Class XYZCommandParser
-Class CliSyntax
-Class ParserUtil
-Class ArgumentMultimap
-Class ArgumentTokenizer
-Class Prefix
+package "Parser classes" {
+  class "<<interface>>\nParser" as Parser
+  class XYZCommandParser
+  class AddressBookParser
+  class ArgumentTokenizer
+  class ArgumentMultimap
+  class CliSyntax
+  class ParserUtil
+  class Prefix
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> AddressBookParser
-
-AddressBookParser .down.> XYZCommandParser: <<create>>
-
-XYZCommandParser ..> XYZCommand : <<create>>
-AddressBookParser ..> Command : <<use>>
 XYZCommandParser .up.|> Parser
-XYZCommandParser ..> ArgumentMultimap
-XYZCommandParser ..> ArgumentTokenizer
-ArgumentTokenizer .left.> ArgumentMultimap
-XYZCommandParser ..> CliSyntax
-CliSyntax ..> Prefix
-XYZCommandParser ..> ParserUtil
-ParserUtil .down.> Prefix
-ArgumentTokenizer .down.> Prefix
-XYZCommand -up-|> Command
+AddressBookParser -left- XYZCommandParser : > creates
+
+class "{abstract}\nCommand" as Command
+class XYZCommand
+XYZCommand .up.|> Command
+
+AddressBookParser -u- XYZCommand: > "\ncreates and returns"
+
+ArgumentTokenizer -u- XYZCommandParser : < uses
+ArgumentTokenizer -l- ArgumentMultimap : > returns
+XYZCommandParser -l ArgumentMultimap : > uses
+
+CliSyntax -u-- XYZCommandParser : < uses
+ParserUtil -u- XYZCommandParser : < "uses\n"
+Prefix <-l-- CliSyntax : < contains
+Prefix -l-- ArgumentTokenizer : < maps
+
+Class HiddenOutside #FFFFFF
+HiddenOutside .d..> AddressBookParser
+
 @enduml
