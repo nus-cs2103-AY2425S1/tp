@@ -52,4 +52,16 @@ public class MeetingContactsCommand extends Command {
         return new FindCommand(new FieldContainsKeywordsPredicate(argumentMultimap))
                 .execute(model);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof MeetingContactsCommand
+                && targetMeetingIndex.equals(((MeetingContactsCommand) other).targetMeetingIndex));
+    }
+
+    @Override
+    public String toString() {
+        return "MeetingContactsCommand{" + "targetMeetingIndex=" + targetMeetingIndex + '}';
+    }
 }
