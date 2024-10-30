@@ -58,7 +58,6 @@ public class ConsultationCard extends UiPart<Region> {
             id.getStyleClass().add("consultation-card-strikethrough");
             date.getStyleClass().add("consultation-card-strikethrough");
             time.getStyleClass().add("consultation-card-strikethrough");
-            students.getStyleClass().add("consultation-card-strikethrough");
         }
     }
 }
