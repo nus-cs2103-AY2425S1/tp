@@ -10,14 +10,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindAppointmentCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.criteria.AppointmentSearchCriteria;
+import seedu.address.logic.parser.criteria.SearchCriteria;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,12 +35,14 @@ public class FindAppointmentCommandTest {
 
     @Test
     public void equals_sameObject_returnsTrue() {
-        // Setup ArgumentMultimap with date and time
-        ArgumentMultimap mapForPredicate = new ArgumentMultimap();
-        mapForPredicate.put(PREFIX_START_DATE, "01/01/2025");
-        mapForPredicate.put(PREFIX_START_TIME, "12:00");
+        // Setup list with AppointmentSearchCriteria for start and end date and time
+        List<SearchCriteria> criteriaList = List.of(
+                new AppointmentSearchCriteria(
+                        LocalDate.of(2025, 1, 1), LocalTime.of(12, 0),
+                        LocalDate.of(2025, 1, 2), LocalTime.of(13, 0))
+        );
 
-        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForPredicate);
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(criteriaList);
         FindAppointmentCommand findCommand = new FindAppointmentCommand(predicate);
 
         // same object -> returns true
@@ -44,12 +51,14 @@ public class FindAppointmentCommandTest {
 
     @Test
     public void equals_sameValues_returnsTrue() {
-        // Setup ArgumentMultimap with date and time
-        ArgumentMultimap mapForPredicate = new ArgumentMultimap();
-        mapForPredicate.put(PREFIX_START_DATE, "01/01/2025");
-        mapForPredicate.put(PREFIX_START_TIME, "12:00");
+        // Setup list with AppointmentSearchCriteria for start and end date and time
+        List<SearchCriteria> criteriaList = List.of(
+                new AppointmentSearchCriteria(
+                        LocalDate.of(2025, 1, 1), LocalTime.of(12, 0),
+                        LocalDate.of(2025, 1, 2), LocalTime.of(13, 0))
+        );
 
-        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForPredicate);
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(criteriaList);
         FindAppointmentCommand findCommand1 = new FindAppointmentCommand(predicate);
         FindAppointmentCommand findCommand2 = new FindAppointmentCommand(predicate);
 
@@ -59,17 +68,21 @@ public class FindAppointmentCommandTest {
 
     @Test
     public void equals_differentValues_returnsFalse() {
-        // Setup ArgumentMultimap with different date and time
-        ArgumentMultimap mapForPredicate1 = new ArgumentMultimap();
-        mapForPredicate1.put(PREFIX_START_DATE, "01/01/2025");
-        mapForPredicate1.put(PREFIX_START_TIME, "12:00");
+        // Setup lists with different AppointmentSearchCriteria for date and time
+        List<SearchCriteria> criteriaList1 = List.of(
+                new AppointmentSearchCriteria(
+                        LocalDate.of(2025, 1, 1), LocalTime.of(12, 0),
+                        LocalDate.of(2025, 1, 2), LocalTime.of(13, 0))
+        );
 
-        ArgumentMultimap mapForPredicate2 = new ArgumentMultimap();
-        mapForPredicate2.put(PREFIX_START_DATE, "02/01/2025");
-        mapForPredicate2.put(PREFIX_START_TIME, "13:00");
+        List<SearchCriteria> criteriaList2 = List.of(
+                new AppointmentSearchCriteria(
+                        LocalDate.of(2025, 2, 1), LocalTime.of(14, 0),
+                        LocalDate.of(2025, 2, 3), LocalTime.of(15, 0))
+        );
 
-        ContainsKeywordsPredicate predicate1 = new ContainsKeywordsPredicate(mapForPredicate1);
-        ContainsKeywordsPredicate predicate2 = new ContainsKeywordsPredicate(mapForPredicate2);
+        ContainsKeywordsPredicate predicate1 = new ContainsKeywordsPredicate(criteriaList1);
+        ContainsKeywordsPredicate predicate2 = new ContainsKeywordsPredicate(criteriaList2);
 
         FindAppointmentCommand findCommand1 = new FindAppointmentCommand(predicate1);
         FindAppointmentCommand findCommand2 = new FindAppointmentCommand(predicate2);
@@ -80,12 +93,14 @@ public class FindAppointmentCommandTest {
 
     @Test
     public void equals_nullObject_returnsFalse() {
-        // Setup ArgumentMultimap with date and time
-        ArgumentMultimap mapForPredicate = new ArgumentMultimap();
-        mapForPredicate.put(PREFIX_START_DATE, "01/01/2025");
-        mapForPredicate.put(PREFIX_START_TIME, "12:00");
+        // Setup list with AppointmentSearchCriteria for date and time
+        List<SearchCriteria> criteriaList = List.of(
+                new AppointmentSearchCriteria(
+                        LocalDate.of(2025, 1, 1), LocalTime.of(12, 0),
+                        LocalDate.of(2025, 1, 2), LocalTime.of(13, 0))
+        );
 
-        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForPredicate);
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(criteriaList);
         FindAppointmentCommand findCommand = new FindAppointmentCommand(predicate);
 
         // null -> returns false
@@ -94,14 +109,14 @@ public class FindAppointmentCommandTest {
 
     @Test
     public void execute_noMatchingAppointments_noAppointmentsFound() {
-        // Setup ArgumentMultimap with non-matching date and time
-        ArgumentMultimap mapForPredicate = new ArgumentMultimap();
-        mapForPredicate.put(PREFIX_START_DATE, "01/01/2025");
-        mapForPredicate.put(PREFIX_START_TIME, "12:00");
-        mapForPredicate.put(PREFIX_END_DATE, "02/01/2025");
-        mapForPredicate.put(PREFIX_END_TIME, "13:00");
+        // Setup list with non-matching AppointmentSearchCriteria for date and time
+        List<SearchCriteria> criteriaList = List.of(
+                new AppointmentSearchCriteria(
+                        LocalDate.of(2025, 1, 1), LocalTime.of(12, 0),
+                        LocalDate.of(2025, 1, 2), LocalTime.of(13, 0))
+        );
 
-        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForPredicate);
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(criteriaList);
         FindAppointmentCommand command = new FindAppointmentCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -113,14 +128,14 @@ public class FindAppointmentCommandTest {
 
     @Test
     public void execute_matchingAppointments_multipleAppointmentsFound() {
-        // Setup ArgumentMultimap with matching date and time
-        ArgumentMultimap mapForPredicate = new ArgumentMultimap();
-        mapForPredicate.put(PREFIX_START_DATE, "01/01/2025");
-        mapForPredicate.put(PREFIX_START_TIME, "12:00");
-        mapForPredicate.put(PREFIX_END_DATE, "02/01/2025");
-        mapForPredicate.put(PREFIX_END_TIME, "13:00");
+        // Setup list with matching AppointmentSearchCriteria for date and time
+        List<SearchCriteria> criteriaList = List.of(
+                new AppointmentSearchCriteria(
+                        LocalDate.of(2025, 1, 1), LocalTime.of(12, 0),
+                        LocalDate.of(2025, 1, 2), LocalTime.of(13, 0))
+        );
 
-        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForPredicate);
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(criteriaList);
         FindAppointmentCommand command = new FindAppointmentCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -131,3 +146,4 @@ public class FindAppointmentCommandTest {
         assertEquals(model.getFilteredPersonList().size(), expectedModel.getFilteredPersonList().size());
     }
 }
+
