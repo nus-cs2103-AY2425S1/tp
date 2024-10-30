@@ -15,8 +15,6 @@ import seedu.ddd.model.event.common.Event;
  */
 public class ListClientCommand extends ListContactCommand {
 
-    private static final Predicate<Event> CLEAR_EVENTS = any -> false;
-
     public ListClientCommand(Predicate<Contact> predicate) {
         super(predicate);
     }
@@ -24,11 +22,11 @@ public class ListClientCommand extends ListContactCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredEventList(CLEAR_EVENTS);
         model.updateFilteredContactList(this.getPredicate());
         return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
                 model.getFilteredContactListSize()));
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -41,6 +39,7 @@ public class ListClientCommand extends ListContactCommand {
         ListClientCommand otherListClientCommand = (ListClientCommand) other;
         return this.getPredicate().equals(otherListClientCommand.getPredicate());
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

@@ -45,25 +45,20 @@ public class ContactPredicateBuilder {
      */
     public Predicate<Contact> build() throws ParseException {
         Predicate<Contact> combinedPredicate = contact -> true; // Start with a default predicate (all contacts).
+        return addAllPredicates(combinedPredicate);
+    }
 
+    protected Predicate<Contact> addAllPredicates(Predicate<Contact> combinedPredicate) throws ParseException {
         // Check for each prefix and chain predicates accordingly.
-
-        if (argMultimap.getValue(FLAG_CLIENT).isPresent()) {
-            combinedPredicate = combinedPredicate.and(new ClientTypePredicate());
-        }
-
-        if (argMultimap.getValue(FLAG_VENDOR).isPresent()) {
-            combinedPredicate = combinedPredicate.and(new VendorTypePredicate());
-        }
         combinedPredicate = addNamePredicate(argMultimap, combinedPredicate);
         combinedPredicate = addTagPredicate(argMultimap, combinedPredicate);
         combinedPredicate = addIdPredicate(argMultimap, combinedPredicate);
         combinedPredicate = addPhonePredicate(argMultimap, combinedPredicate);
         combinedPredicate = addEmailPredicate(argMultimap, combinedPredicate);
         combinedPredicate = addAddressPredicate(argMultimap, combinedPredicate);
-
         return combinedPredicate;
     }
+
     private Predicate<Contact> addAddressPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
@@ -76,6 +71,7 @@ public class ContactPredicateBuilder {
         }
         return combinedPredicate;
     }
+
     private Predicate<Contact> addEmailPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
@@ -84,6 +80,7 @@ public class ContactPredicateBuilder {
         }
         return combinedPredicate;
     }
+
     private Predicate<Contact> addPhonePredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
@@ -97,6 +94,7 @@ public class ContactPredicateBuilder {
         }
         return combinedPredicate;
     }
+
     private Predicate<Contact> addIdPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
@@ -110,6 +108,7 @@ public class ContactPredicateBuilder {
         }
         return combinedPredicate;
     }
+
     private Predicate<Contact> addTagPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
@@ -118,6 +117,7 @@ public class ContactPredicateBuilder {
         }
         return combinedPredicate;
     }
+
     private Predicate<Contact> addNamePredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -131,6 +131,7 @@ public class ContactPredicateBuilder {
         }
         return combinedPredicate;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
