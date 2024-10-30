@@ -17,19 +17,19 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600.0" minWidth="1024.0" onCloseRequest="#handleExit" title="TalentSG" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root height="840.0" maxHeight="840.0" minHeight="840.0" maxWidth="1200.0" minWidth="1200.0" onCloseRequest="#handleExit" title="TalentSG" type="javafx.stage.Stage" width="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
     <scene>
-        <Scene fill="#0b0f14">
+        <Scene fill="#0b0f14" height="800.0" width="1200">
             <stylesheets>
                 <URL value="@/view/NewTheme.css" />
                 <URL value="@/view/Extensions.css" />
             </stylesheets>
-            <AnchorPane id="anchor_pane" minHeight="600.0" minWidth="1024.0" style="-fx-background-color: #0b0f14;">
+            <AnchorPane id="anchor_pane" maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #0b0f14;">
                 <children>
-                    <MenuBar id="menu_bar" minHeight="25.0" minWidth="1024.0" style="-fx-background-color: #141a21" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+                    <MenuBar id="menu_bar" maxHeight="30.0" maxWidth="1200.0" minHeight="30.0" minWidth="1200.0" prefHeight="30.0" prefWidth="1200.0" style="-fx-background-color: #141a21" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                         <menus>
                             <Menu id="menu" mnemonicParsing="false" style="-fx-background-color: #0b0f14;" text="File">
                                     <MenuItem fx:id="closeMenuItem" text="Close" />
@@ -44,15 +44,15 @@
                             </Menu>
                         </menus>
                     </MenuBar>
-                    <SplitPane id="split_pane" dividerPositions="0.88" layoutY="30.0" orientation="VERTICAL" prefHeight="564.0" prefWidth="1024.0" style="-fx-background-color: #0b0f14;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="30.0">
+                    <SplitPane id="split_pane" dividerPositions="0.88" layoutY="30.0" maxHeight="770.0" maxWidth="1200.0" minHeight="770.0" minWidth="1200.0" orientation="VERTICAL" prefHeight="770.0" prefWidth="1200.0" style="-fx-background-color: #0b0f14;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="30.0">
                         <items>
-                            <AnchorPane id="anchor_pane" minHeight="0.0" minWidth="0.0" prefHeight="317.0" prefWidth="1024.0" style="-fx-background-color: #0b0f14;">
+                            <AnchorPane id="anchor_pane" maxHeight="610.0" maxWidth="1196.0" minHeight="610.0" minWidth="1196.0" prefHeight="610.0" prefWidth="1196.0" style="-fx-background-color: #0b0f14;">
                                 <children>
                                     <SplitPane id="split_pane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" style="-fx-border-color: #0b0f14; -fx-background-color: #0b0f14;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                                         <items>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                            <AnchorPane maxHeight="608.0" maxWidth="592.0" minHeight="608.0" minWidth="592.0" prefHeight="608.0" prefWidth="592.0">
                                                 <children>
-                                       <GridPane layoutY="-1.0" prefHeight="489.0" prefWidth="512.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-1.0">
+                                       <GridPane layoutY="-1.0" maxHeight="606.0" minHeight="606.0" prefHeight="606.0" prefWidth="512.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                                          <columnConstraints>
                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                          </columnConstraints>
@@ -66,12 +66,12 @@
                                                       <Font name="PT Serif" size="26.0" />
                                                   </font>
                                               </Text>
-                                              <StackPane id="personListPanelPlaceholder" fx:id="personListPanelPlaceholder" prefHeight="150.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
+                                              <StackPane id="personListPanelPlaceholder" fx:id="personListPanelPlaceholder" maxHeight="570.0" maxWidth="590.0" minHeight="570.0" minWidth="590.0" prefHeight="570.0" prefWidth="590.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
                                           </children>
                                        </GridPane>
                                                 </children>
                                             </AnchorPane>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                            <AnchorPane maxHeight="608.0" maxWidth="592.0" minHeight="608.0" minWidth="592.0" prefHeight="608.0" prefWidth="592.0">
                                     <children>
                                        <GridPane prefHeight="487.0" prefWidth="503.0" style="fx-background-color: derive(#141a21, 50%);" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                                           <columnConstraints>
@@ -87,7 +87,7 @@
                                                    <Font name="PT Serif" size="26.0" />
                                                 </font>
                                              </Text>
-                                             <StackPane id="overviewPanelPlaceholder" fx:id="overviewPanelPlaceholder" prefHeight="150.0" prefWidth="200.0" style="fx-background-color: derive(#141a21, 50%);" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
+                                             <StackPane id="overviewPanelPlaceholder" fx:id="overviewPanelPlaceholder" maxHeight="570.0" maxWidth="590.0" minHeight="570.0" minWidth="590.0" prefHeight="570.0" prefWidth="590.0" style="fx-background-color: derive(#141a21, 50%);" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
                                           </children>
                                        </GridPane>
                                     </children>
@@ -96,16 +96,16 @@
                                     </SplitPane>
                                 </children>
                             </AnchorPane>
-                            <AnchorPane id="anchor_pane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #0b0f14;">
+                            <AnchorPane id="anchor_pane" maxHeight="160.0" maxWidth="1196.0" minHeight="160.0" minWidth="1196.0" prefHeight="160.0" prefWidth="1196.0" style="-fx-background-color: #0b0f14;">
                                 <children>
-                                    <SplitPane id="split_pane" dividerPositions="0.9" orientation="VERTICAL" prefHeight="150.0" prefWidth="160.0" style="-fx-background-color: #0b0f14;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+                                    <SplitPane id="split_pane" dividerPositions="0.9" maxHeight="158.0" maxWidth="1194.0" minHeight="158.0" minWidth="1194.0" orientation="VERTICAL" prefHeight="158.0" prefWidth="1194.0" style="-fx-background-color: #0b0f14;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                                         <items>
-                                            <AnchorPane id="resultDisplayPlaceholder" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                            <AnchorPane id="resultDisplayPlaceholder" maxHeight="99.0" maxWidth="1194.0" minHeight="99.0" minWidth="1194.0" prefHeight="99.0" prefWidth="1194.0">
                                                 <children>
-                                                    <StackPane fx:id="resultDisplayPlaceholder" layoutY="35.0" prefHeight="150.0" prefWidth="1006.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="35.0" />
+                                                    <StackPane fx:id="resultDisplayPlaceholder" layoutY="35.0" maxHeight="99.0" maxWidth="1192.0" minHeight="99.0" minWidth="1192.0" prefHeight="99.0" prefWidth="1192.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
                                                 </children>
                                             </AnchorPane>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-border-color: #0b0f14;">
+                                            <AnchorPane maxHeight="50.0" maxWidth="1194.0" minHeight="50.0" minWidth="1194.0" prefHeight="50.0" prefWidth="1194.0" style="-fx-border-color: #0b0f14;">
                                                 <children>
                                                     <StackPane fx:id="commandBoxPlaceholder" prefHeight="150.0" prefWidth="1024.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
                                                 </children>
