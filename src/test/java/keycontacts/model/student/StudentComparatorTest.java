@@ -1,7 +1,8 @@
 package keycontacts.model.student;
 
-import static keycontacts.model.student.StudentComparator.NAME_ASCENDING;
-import static keycontacts.model.student.StudentComparator.PHONE_DESCENDING;
+import static keycontacts.model.student.StudentComparator.MESSAGE_NAME_ASCENDING;
+import static keycontacts.model.student.StudentComparator.MESSAGE_PHONE_DESCENDING;
+import static keycontacts.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -149,7 +150,12 @@ public class StudentComparatorTest {
         comparator.addComparator(StudentComparator.getComparatorForName(new StudentComparator.SortOrder("ASC")));
         comparator.addComparator(StudentComparator.getComparatorForPhone(new StudentComparator.SortOrder("DESC")));
 
-        assertEquals(String.join(", ", NAME_ASCENDING, PHONE_DESCENDING), comparator.getSortDescription());
+        assertEquals(String.join(", ", MESSAGE_NAME_ASCENDING, MESSAGE_PHONE_DESCENDING), comparator.getSortDescription());
     }
 
+    @Test
+    public void sortOrder_invalidSortOrder_throwsException() {
+        assertThrows(IllegalArgumentException.class, StudentComparator.SortOrder.MESSAGE_INVALID_SORT_ORDER, ()
+                -> new StudentComparator.SortOrder("invalid sort order"));
+    }
 }
