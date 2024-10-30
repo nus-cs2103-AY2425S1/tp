@@ -16,7 +16,7 @@ import seedu.address.model.wedding.Wedding;
  */
 public class DeleteYCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-y";
+    public static final String COMMAND_WORD = "y";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person:\n%1$s";
     public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding:\n%1$s";
