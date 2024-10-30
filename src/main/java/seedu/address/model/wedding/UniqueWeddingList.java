@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
+import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
 
 /**
  * A list of wedding that enforces uniqueness between its elements and does not allow nulls.
@@ -43,7 +45,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
     public void add(Wedding toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            // throw new DuplicateWeddingException();
+            throw new DuplicateWeddingException();
         }
         internalList.add(toAdd);
     }
@@ -58,11 +60,11 @@ public class UniqueWeddingList implements Iterable<Wedding> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            // throw new WeddingNotFoundException();
+            throw new WeddingNotFoundException();
         }
 
         if (!target.isSameWedding(editedWedding) && contains(editedWedding)) {
-            // throw new DuplicateWeddingException();
+            throw new DuplicateWeddingException();
         }
 
         internalList.set(index, editedWedding);
@@ -75,7 +77,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
     public void remove(Wedding toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            // throw new WeddingNotFoundException();
+            throw new WeddingNotFoundException();
         }
     }
 
@@ -86,7 +88,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
     public void setWeddings(List<Wedding> weddings) {
         requireAllNonNull(weddings);
         if (!weddingsAreUnique(weddings)) {
-            //throw new DuplicateWeddingException();
+            throw new DuplicateWeddingException();
         }
 
         internalList.setAll(weddings);

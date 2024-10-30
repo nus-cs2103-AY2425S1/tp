@@ -53,7 +53,7 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void containsPhone_personWithSamePhoneInList_returnsTrue() {
+    public void containsPhone_personWithSamePhoneInList_returnsFalse() {
         uniquePersonList.add(AMY);
         Person editedBenson = new PersonBuilder(BENSON).withPhone(VALID_PHONE_AMY)
                 .build();
