@@ -5,16 +5,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.FavouriteGameCommand;
+import seedu.address.logic.commands.UnfavouriteGameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses inputs arguments and creates a new FavouriteGameCommand object
+ * Parses nputs arguments and creates a new UnfavouriteGameCommand object
  */
-public class FavouriteGameCommandParser implements Parser<FavouriteGameCommand> {
+public class UnfavouriteGameCommandParser implements Parser<UnfavouriteGameCommand> {
 
     @Override
-    public FavouriteGameCommand parse(String args) throws ParseException {
+    public UnfavouriteGameCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GAME);
 
@@ -25,11 +25,11 @@ public class FavouriteGameCommandParser implements Parser<FavouriteGameCommand> 
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    FavouriteGameCommand.MESSAGE_USAGE), pe);
+                    UnfavouriteGameCommand.MESSAGE_USAGE), pe);
         }
 
         gameName = argMultimap.getValue(PREFIX_GAME).orElse("");
 
-        return new FavouriteGameCommand(index, gameName);
+        return new UnfavouriteGameCommand(index, gameName);
     }
 }

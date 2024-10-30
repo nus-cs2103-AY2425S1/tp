@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -78,18 +80,21 @@ public class PersonCard extends UiPart<Region> {
         Role role = game.getRole();
         boolean isFavourite = game.getFavouriteStatus();
         sb.append(game.getGameName()).append("\n");
-        if (username != null) {
+        if (!username.getUsername().toString().isEmpty()) {
             sb.append("Username: ").append(game.getUsername()).append("\n");
         }
-        if (skillLevel != null) {
+        if (!skillLevel.toString().isEmpty()) {
             sb.append("Skill Lvl: ").append(game.getSkillLevel()).append("\n");
         }
-        if (role != null) {
+        if (!role.toString().isEmpty()) {
             sb.append("Role: ").append(game.getRole()).append("\n");
         }
         if (isFavourite) {
-            sb.append("Favourite!");
+            Image image = new Image(String.valueOf(PersonCard.class.getResource("/images/star.png")));
+            ImageView iw = new ImageView(image);
+            return new Label(sb.toString(), iw);
         }
+        assert !sb.isEmpty();
         return new Label(sb.toString());
     }
 

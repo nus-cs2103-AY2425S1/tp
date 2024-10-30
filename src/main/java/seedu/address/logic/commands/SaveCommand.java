@@ -12,4 +12,9 @@ public class SaveCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
     }
+
+    @Override
+    public void undo(Model model) {
+
+    }
 }

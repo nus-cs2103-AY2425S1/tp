@@ -50,6 +50,10 @@ public class FindTimeCommand extends Command {
         return predicate.equals(otherFindTimeCommand.predicate);
     }
 
+    @Override
+    public void undo(Model model) {
+
+    }
 
     @Override
     public String toString() {
