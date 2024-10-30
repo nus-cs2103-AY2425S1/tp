@@ -181,6 +181,7 @@ public class EventTest {
     public void toString_containsEventDetails() {
         String expected = "Event{name='" + EVENT_MULTIPLE_ATTENDEE.getEventName()
                 + "', date=" + EVENT_MULTIPLE_ATTENDEE.getDate()
+                + ", location=" + EVENT_MULTIPLE_ATTENDEE.getLocation().value
                 + ", \nattendees=";
 
         // Build the string for each attendee, adding a newline after each one
