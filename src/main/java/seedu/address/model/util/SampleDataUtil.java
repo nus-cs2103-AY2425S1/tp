@@ -34,8 +34,8 @@ public class SampleDataUtil {
                 getClientTypeSet("Healthcare", "Savings"), new Description("Started a podcast")),
             new Person(new Name("Harith Nurhisham"), new Phone("92492021"), new Email("harithnurhisham@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getClientTypeSet("Insurance Plan", "Investment"), new Description("Does not like to travel " +
-                    "out of the east")),
+                getClientTypeSet("Insurance Plan", "Investment"), new Description("Does not like to travel "
+                    + "out of the east")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getClientTypeSet("Investment Plan"), new Description("Recently married")),
