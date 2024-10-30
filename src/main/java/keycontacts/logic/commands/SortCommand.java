@@ -21,7 +21,8 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SORT_CLEAR = "Cleared sorting conditions!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the displayed students by the specified field in specified order.\n"
+            + ": Sorts the displayed students by the specified field(s) in specified order. "
+            + "Use 'sort clear' to clear existing sorting conditions\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "ASC/DESC] "
             + "[" + PREFIX_PHONE + "ASC/DESC] "

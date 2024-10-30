@@ -28,7 +28,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         ArgumentList argList = ArgumentTokenizer.tokenizeToList(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS,
                 PREFIX_GRADE_LEVEL, PREFIX_GROUP);
 
-        if (argList.getValue(0).equals("clear")) {
+        if (argList.getValue(0).equalsIgnoreCase("clear")) {
             return new SortCommand(null);
         }
 
