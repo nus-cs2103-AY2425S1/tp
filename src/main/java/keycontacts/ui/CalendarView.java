@@ -188,7 +188,8 @@ public class CalendarView extends UiPart<Region> {
                 }
             }
 
-            if (!groupPresent) {
+            if (!groupPresent && (student.getRegularLessonOptional().isPresent()
+                    || !student.getMakeupLessons().isEmpty())) {
                 uniqueGroupStudents.add(student);
             }
         }
