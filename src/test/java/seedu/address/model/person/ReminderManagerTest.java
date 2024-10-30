@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,81 +18,194 @@ public class ReminderManagerTest {
     private ObservableList<Person> personList;
     private ReminderManager reminderManager;
 
-    private Person person1;
-    private Person person2;
-    private Person person3;
+    private Person personDueToday;
+    private Person personDueInFuture;
+    private Person personOverdue;
 
     @BeforeEach
     public void setUp() {
         personList = FXCollections.observableArrayList();
 
-        // Set up persons with different deadlines
-        person1 = new PersonBuilder().withName("John")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER)) // Due today
+        // Set up persons with different deadlines (all in progress by default and active client status)
+        personDueToday = new PersonBuilder().withName("John")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
                 .build();
-        person2 = new PersonBuilder().withName("Alice")
-                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER)) // Due in 2 days
+        personDueInFuture = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
                 .build();
-        person3 = new PersonBuilder().withName("Bob")
-                .withDeadline(LocalDate.now().minusDays(1).format(DATE_FORMATTER)) // Overdue
+        personOverdue = new PersonBuilder().withName("Bob")
+                .withDeadline(LocalDate.now().minusDays(1).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
                 .build();
 
-        // Add persons to the list
-        personList.add(person1);
-        personList.add(person2);
-        personList.add(person3);
-
-        // Initialize ReminderManager with the person list
         reminderManager = new ReminderManager(personList);
     }
 
     @Test
-    public void getLatestReminders_dueToday() {
-        List<String> reminders = reminderManager.getLatestReminders();
-        assertEquals(1, reminders.size());
-        assertEquals("John's deadline is due today.", reminders.get(0)); // John is due today
+    public void getCurrentReminder_noPersons_returnsNoReminders() {
+        assertEquals("No upcoming or overdue reminders.", reminderManager.currentReminderProperty().get());
     }
 
     @Test
-    public void getLatestReminders_dueInFuture() {
-        personList.remove(person1); // Remove John to test future deadlines
-
-        List<String> reminders = reminderManager.getLatestReminders();
-        assertEquals(1, reminders.size());
-        assertEquals("Alice's deadline is in 2 days.", reminders.get(0)); // Alice is due in 2 days
+    public void getCurrentReminder_singleIncompletePerson_showsCorrectFormat() {
+        personList.add(personDueToday);
+        assertEquals("John has deadline due today.", reminderManager.currentReminderProperty().get());
     }
 
     @Test
-    public void getNextReminder_sameDeadline_rotation() {
-        // Add another person with the same deadline as John
-        Person person4 = new PersonBuilder().withName("Chris")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER)) // Also due today
+    public void getCurrentReminder_completedProject_notShownInReminder() {
+        Person completedPerson = new PersonBuilder().withName("John")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("completed")
+                .withClientStatus("active")
                 .build();
-        personList.add(person4);
+        personList.add(completedPerson);
 
-        // First reminder should be for John, who is due today
-        assertEquals("John's deadline is due today.", reminderManager.getNextReminder());
-
-        // Second reminder should be for Chris, who shares the same deadline
-        assertEquals("Chris's deadline is due today.", reminderManager.getNextReminder());
-
-        // Should rotate back to John
-        assertEquals("John's deadline is due today.", reminderManager.getNextReminder());
+        assertEquals("No upcoming or overdue reminders.", reminderManager.currentReminderProperty().get());
     }
 
     @Test
-    public void getNextReminder_noReminders() {
-        personList.clear(); // Clear the list to simulate no upcoming reminders
+    public void getCurrentReminder_inactiveClients_notShownInReminder() {
+        Person oldPerson = new PersonBuilder().withName("John")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("old")
+                .build();
+        Person potentialPerson = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("potential")
+                .build();
+        Person unresponsivePerson = new PersonBuilder().withName("Bob")
+                .withDeadline(LocalDate.now().minusDays(1).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("unresponsive")
+                .build();
+        Person blacklistedPerson = new PersonBuilder().withName("Charlie")
+                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("blacklisted")
+                .build();
 
-        String reminder = reminderManager.getNextReminder();
-        assertEquals("No upcoming reminders.", reminder); // No reminders available
+        personList.addAll(oldPerson, potentialPerson, unresponsivePerson, blacklistedPerson);
+        assertEquals("No upcoming or overdue reminders.", reminderManager.currentReminderProperty().get());
     }
 
     @Test
-    public void getNextReminder_futureDeadline_doesNotRotate() {
-        // Future deadlines should not rotate until they are the latest
-        personList.remove(person1); // Remove John to test future deadlines
-        assertEquals("Alice's deadline is in 2 days.", reminderManager.getNextReminder());
-        assertEquals("Alice's deadline is in 2 days.", reminderManager.getNextReminder());
+    public void getCurrentReminder_activePersonAndOtherStatuses_showsOnlyActive() {
+        Person oldPerson = new PersonBuilder().withName("John")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("old")
+                .build();
+        Person potentialPerson = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("potential")
+                .build();
+        Person unresponsivePerson = new PersonBuilder().withName("Bob")
+                .withDeadline(LocalDate.now().minusDays(1).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("unresponsive")
+                .build();
+        Person blacklistedPerson = new PersonBuilder().withName("Charlie")
+                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("blacklisted")
+                .build();
+        Person activePerson = new PersonBuilder().withName("David")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+
+        personList.addAll(oldPerson, potentialPerson, unresponsivePerson, blacklistedPerson, activePerson);
+        assertEquals("David has deadline due today.", reminderManager.currentReminderProperty().get());
+    }
+
+    @Test
+    public void getCurrentReminder_twoActivePersons_showsBothNames() {
+        Person person2 = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        personList.addAll(personDueToday, person2);
+
+        assertEquals("John and Alice have deadlines due today.", reminderManager.currentReminderProperty().get());
+    }
+
+    @Test
+    public void getCurrentReminder_threeActivePersons_showsAllNames() {
+        Person person2 = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        Person person3 = new PersonBuilder().withName("Charlie")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        personList.addAll(personDueToday, person2, person3);
+
+        assertEquals("John, Alice and Charlie have deadlines due today.", reminderManager
+                .currentReminderProperty().get());
+    }
+
+    @Test
+    public void getCurrentReminder_fourActivePersons_showsThreeNamesAndMore() {
+        Person person2 = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        Person person3 = new PersonBuilder().withName("Charlie")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        Person person4 = new PersonBuilder().withName("David")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        personList.addAll(personDueToday, person2, person3, person4);
+
+        assertEquals("John, Alice, Charlie and 1 more have deadlines due today.",
+                reminderManager.currentReminderProperty().get());
+    }
+
+    @Test
+    public void getCurrentReminder_fiveActivePersons_showsThreeNamesAndMore() {
+        Person person2 = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        Person person3 = new PersonBuilder().withName("Charlie")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        Person person4 = new PersonBuilder().withName("David")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        Person person5 = new PersonBuilder().withName("Eve")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .withClientStatus("active")
+                .build();
+        personList.addAll(personDueToday, person2, person3, person4, person5);
+
+        assertEquals("John, Alice, Charlie and 2 more have deadlines due today.",
+                reminderManager.currentReminderProperty().get());
     }
 }

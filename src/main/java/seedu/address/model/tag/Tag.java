@@ -11,7 +11,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and may contain spaces.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
-
+    public static final String TAG_KEY = "tags";
     public final String tagName;
 
     /**
@@ -44,12 +44,12 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equalsIgnoreCase(otherTag.tagName);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tagName.toLowerCase().hashCode();
     }
 
     /**

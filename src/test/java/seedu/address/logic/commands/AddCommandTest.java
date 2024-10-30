@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -24,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReminderManager;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -161,6 +163,16 @@ public class AddCommandTest {
 
         @Override
         public void sortByComparator(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReminderManager getReminderManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StringProperty getCurrentReminderProperty() {
             throw new AssertionError("This method should not be called.");
         }
     }
