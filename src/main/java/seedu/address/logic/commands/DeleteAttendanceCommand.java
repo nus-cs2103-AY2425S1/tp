@@ -12,6 +12,9 @@ import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
 
+/**
+ * Deletes the attendance of a student for a specific date.
+ */
 public class DeleteAttendanceCommand extends Command{
 
     public static final String COMMAND_WORD = "deleteat";
@@ -31,6 +34,11 @@ public class DeleteAttendanceCommand extends Command{
     private final LocalDate date;
     private Attendance previousAttendance;
 
+    /**
+     * Creates a DeleteAttendanceCommand to delete the attendance of the specified student.
+     * @param name The name of the student.
+     * @param date The date for which to delete attendance.
+     */
     public DeleteAttendanceCommand(Name name, LocalDate date) {
         this.name = name;
         this.date = date;
@@ -57,6 +65,18 @@ public class DeleteAttendanceCommand extends Command{
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 name, DateTimeFormatter.ofPattern("dd MMM yyyy").format(date)));
 
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        Student student = model.getStudentByName(name);
+        if (student == null) return false;
+
+        if (previousAttendance == null) {
+            student.deleteAttendance(date);
+        }
+        student.markAttendance(date, previousAttendance.value);
+        return true;
     }
 
 }
