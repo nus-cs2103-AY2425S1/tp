@@ -29,13 +29,13 @@ class ParticipationTest {
     private List<Attendance> attendanceList3 = new ArrayList<>(attendanceList1);
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         attendanceList1.add(new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)));
         attendanceList2.add(new Attendance(LocalDate.parse("02/10/2024", Attendance.VALID_DATE_FORMAT)));
     }
 
     @Test
-    void constructor_validInput_success() {
+    public void constructor_validInput_success() {
         Participation participation = new Participation(student1, tutorial1, attendanceList1);
         assertNotNull(participation);
         assertEquals(student1, participation.getStudent());
@@ -44,34 +44,34 @@ class ParticipationTest {
     }
 
     @Test
-    void constructor_nullStudent_throwsNullPointerException() {
+    public void constructor_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> {
             new Participation(null, tutorial1, attendanceList1);
         });
     }
 
     @Test
-    void constructor_nullTutorial_throwsNullPointerException() {
+    public void constructor_nullTutorial_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> {
             new Participation(student1, null, attendanceList1);
         });
     }
 
     @Test
-    void constructor_nullAttendanceList_throwsNullPointerException() {
+    public void constructor_nullAttendanceList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> {
             new Participation(student1, tutorial1, null);
         });
     }
 
     @Test
-    void isValidParticipationList_validInput_success() {
+    public void isValidParticipationList_validInput_success() {
         String validInput = "Valid input";
         assertTrue(Participation.isValidParticipationList(validInput));
     }
 
     @Test
-    void isValidParticipationList_invalidInput_returnsFalse() {
+    public void isValidParticipationList_invalidInput_returnsFalse() {
         String invalidInput1 = " "; // Starts with whitespace character
         String invalidInput2 = ""; // Empty string
         assertFalse(Participation.isValidParticipationList(invalidInput1));
@@ -79,7 +79,12 @@ class ParticipationTest {
     }
 
     @Test
-    void isSameParticipation() {
+    public void equals() {
+        
+    }
+
+    @Test
+    public void isSameParticipation() {
         Participation participation1 = new Participation(student1, tutorial1, attendanceList1);
         Participation participation2 = new Participation(student2, tutorial2, attendanceList2);
         Participation participation3 = new Participation(student1, tutorial2, attendanceList1);
@@ -102,7 +107,7 @@ class ParticipationTest {
     }
 
     @Test
-    void toString_success() {
+    public void toString_success() {
         Participation participation = new Participation(student1, tutorial1, attendanceList1);
         String expectedString = String.format("Attends: %s", tutorial1.toString());
         assertEquals(expectedString, participation.toString());
