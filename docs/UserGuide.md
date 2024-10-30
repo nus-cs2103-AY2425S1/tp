@@ -174,16 +174,30 @@ Examples:
 ### Favourite a restaurant : `fav`
 
 Set the specified restaurant from the address book as favourite.
+Favourite items will be highlighted and pushed to the top of the list. 
 
 Format: `fav INDEX`
 
-* Deletes the restaurant at the specified `INDEX`.
+* Favourites the restaurant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed restaurant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 *  `fav 1` Favourite the 1st restaurant.
 
+### Unfavourite a restaurant : `unfav`
+
+Remove the specified restaurant from the address book from favourites.
+Unfavourite items will not be highlighted and will be re-added to the list.
+
+Format: `unfav INDEX`
+
+* Unfavourites the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+*  `unfav 1` Unfavourite the 1st restaurant.
 
 ### Clearing all entries : `clear`
 
