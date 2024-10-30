@@ -82,7 +82,7 @@ public class AddressBookParser {
             return new DeleteStudentCommandParser().parse(arguments);
 
         case DeleteAllStudentsCommand.COMMAND_WORD:
-            return new DeleteAllStudentsCommandParser().parse(arguments);
+            return new DeleteAllStudentsCommand();
 
         case MarkAttendanceCommand.COMMAND_WORD:
             return new MarkAttendanceCommandParser().parse(arguments);
@@ -97,7 +97,7 @@ public class AddressBookParser {
             return new EditStudentCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommandParser().parse(arguments);
+            return new UndoCommand();
 
         case GetAttendanceByTgCommand.COMMAND_WORD:
             return new GetAttendanceByTgCommandParser().parse(arguments);

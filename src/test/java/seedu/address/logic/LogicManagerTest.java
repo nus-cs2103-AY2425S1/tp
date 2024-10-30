@@ -22,7 +22,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -43,7 +42,6 @@ public class LogicManagerTest {
 
     private Model model = new ModelManager();
     private Logic logic;
-    private AddressBookParser addressBookParser = new AddressBookParser();
 
     @BeforeEach
     public void setUp() {
