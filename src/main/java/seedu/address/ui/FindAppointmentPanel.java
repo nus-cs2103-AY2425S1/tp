@@ -18,21 +18,21 @@ public class FindAppointmentPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(FindAppointmentPanel.class);
 
     @FXML
-    private ListView<Person> findPersonListView;
+    private ListView<Person> findAppointmentListView;
 
     /**
      * Creates a {@code FindPersonPanel} with the given {@code ObservableList}.
      */
     public FindAppointmentPanel(ObservableList<Person> personList) {
         super(FXML);
-        findPersonListView.setItems(personList);
-        findPersonListView.setCellFactory(listView -> new FindPersonListViewCell());
+        findAppointmentListView.setItems(personList);
+        findAppointmentListView.setCellFactory(listView -> new FindAppointmentListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code FindPersonCard}.
      */
-    class FindPersonListViewCell extends ListCell<Person> {
+    class FindAppointmentListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);

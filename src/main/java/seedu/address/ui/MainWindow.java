@@ -128,6 +128,17 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        FindPersonPanel findPersonPanel = new FindPersonPanel(logic.getFilteredPersonList());
+        findPersonPanelPlaceholder.getChildren().add(findPersonPanel.getRoot());
+        findPersonPanelPlaceholder.setVisible(false);
+        findPersonPanelPlaceholder.setManaged(false);
+
+        FindAppointmentPanel findAppointmentPanel = new FindAppointmentPanel(logic.getFilteredPersonList());
+        findAppointmentPanelPlaceholder.getChildren().add(findAppointmentPanel.getRoot());
+        findAppointmentPanelPlaceholder.setVisible(false);
+        findAppointmentPanelPlaceholder.setManaged(false);
+
     }
 
     /**
@@ -179,9 +190,6 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.setManaged(false);
         findAppointmentPanelPlaceholder.setVisible(false);
         findAppointmentPanelPlaceholder.setManaged(false);
-
-        FindPersonPanel findPersonPanel = new FindPersonPanel(logic.getFilteredPersonList());
-        findPersonPanelPlaceholder.getChildren().add(findPersonPanel.getRoot());
         findPersonPanelPlaceholder.setVisible(true);
         findPersonPanelPlaceholder.setManaged(true);
         isFindNricCommand = true;
@@ -197,9 +205,6 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.setManaged(false);
         findPersonPanelPlaceholder.setVisible(false);
         findPersonPanelPlaceholder.setManaged(false);
-
-        FindAppointmentPanel findAppointmentPanel = new FindAppointmentPanel(logic.getFilteredPersonList());
-        findAppointmentPanelPlaceholder.getChildren().add(findAppointmentPanel.getRoot());
         findAppointmentPanelPlaceholder.setVisible(true);
         findAppointmentPanelPlaceholder.setManaged(true);
         isFindNricCommand = false;
@@ -210,7 +215,7 @@ public class MainWindow extends UiPart<Stage> {
      * Resets the view back to the original PersonListPanel.
      */
     private void resetToOriginal() {
-        if (isFindNricCommand) {
+        if (isFindNricCommand || isFindAppointmentCommand) {
             findPersonPanelPlaceholder.setVisible(false);
             findPersonPanelPlaceholder.setManaged(false);
             findAppointmentPanelPlaceholder.setVisible(false);
