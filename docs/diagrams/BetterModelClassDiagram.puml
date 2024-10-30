@@ -10,9 +10,9 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
+Person ---> "*" Tutorials
 Person *--> Name
 Person *--> StudentId
 Person *--> Phone
 Person *--> Email
-Person ---> "*" Tutorials
 @enduml
