@@ -21,9 +21,9 @@ public class WhitelistCommand extends Command {
 
     public static final String COMMAND_WORD = "whitelist";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " index cs/CLIENT_STATUS"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " INDEX cs/CLIENT_STATUS"
             + ": removes person from the blacklist and sets their client status to CLIENT STATUS."
-            + " CLIENT STATUS must be 'old', 'active' or 'potential'."
+            + " CLIENT STATUS must be 'old', 'active', 'potential' or 'unresponsive'."
             + "\nExample: '" + COMMAND_WORD + " 2 cs/old' sets the client status of the 2nd "
             + "client in the list as 'old' after removing them from the blacklist.";
 
