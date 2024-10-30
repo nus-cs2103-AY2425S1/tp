@@ -1,11 +1,16 @@
 package tuteez.model.person.lesson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
 import tuteez.logic.commands.AddCommand;
+import tuteez.model.person.Person;
+import tuteez.model.person.UniquePersonList;
 
 /**
  * A container for all Lesson instances
@@ -53,28 +58,39 @@ public class LessonManager {
     }
 
     /**
-     * Checks if the given lesson clashes with any existing lesson on the same day.
-     * A clash is determined if there is any overlap in lesson timings with another
-     * lesson already scheduled on the same day.
+     * Checks if a given lesson already exists in the schedule
      *
-     * <p> Note: Lessons can be back to back i.e. timings 1900-2000 & 2000-2100 do not clash </p>
-     *
-     * @param lesson The lesson to check for potential time conflicts.
-     * @return {@code true} if the lesson clashes with any existing lessons on the same day,
-     *         {@code false} otherwise.
+     * @param lesson The lesson to check for existence in the schedule.
+     * @return {@code true} if the lesson exists, {@code false} otherwise.
      */
-    public boolean isClashingWithExistingLesson(Lesson lesson) {
+    public boolean isExistingLesson(Lesson lesson) {
         Day lessonDay = lesson.getLessonDay();
-        TreeSet<Lesson> lessonsOnDay = dayLessonsMap.get(lessonDay);
-        for (Lesson lessonOnDay : lessonsOnDay) {
-            assert lessonOnDay != null;
-            if (Lesson.isClashingWithOtherLesson(lessonOnDay, lesson)) {
-                String logMessage = String.format("%s clashes with %s", lessonOnDay, lesson);
-                logger.info(logMessage);
-                return true;
+        return dayLessonsMap.get(lessonDay).contains(lesson);
+    }
+
+    /**
+     * Checks for any lessons in the given student list that clash with the specified lesson.
+     * A clash occurs if an existing lesson on the same day has overlapping timings with the given lesson.
+     *
+     * <p>Note: Consecutive lessons (e.g., timings 1900-2000 & 2000-2100) do not clash
+     * as they do not overlap in time.</p>
+     *
+     * @param studentList The list of students whose lessons are to be checked for potential clashes.
+     * @param lesson The lesson to check for time conflicts.
+     * @return A map where each entry consists of a {@code Person} whose lessons clash with the specified lesson,
+     *         and an {@code ArrayList} of the clashing lessons for that student.
+     */
+    public Map<Person, ArrayList<Lesson>> getClashingLessons(UniquePersonList studentList, Lesson lesson) {
+        Map<Person, ArrayList<Lesson>> clashingLessonMap = new HashMap<>();
+        Iterator<Person> students = studentList.iterator();
+        while (students.hasNext()) {
+            Person studentToCheck = students.next();
+            ArrayList<Lesson> clashedLessons = studentToCheck.getLessonsThatClash(lesson);
+            if (!clashedLessons.isEmpty()) {
+                clashingLessonMap.put(studentToCheck, clashedLessons);
             }
         }
-        return false;
+        return clashingLessonMap;
     }
 
     /**

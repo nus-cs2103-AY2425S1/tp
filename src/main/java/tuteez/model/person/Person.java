@@ -2,6 +2,7 @@ package tuteez.model.person;
 
 import static tuteez.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -105,6 +106,16 @@ public class Person {
         return Collections.unmodifiableSet(lessons);
     }
 
+    public ArrayList<Lesson> getLessonsThatClash(Lesson otherLesson) {
+        ArrayList<Lesson> clashedLessons = new ArrayList<>();
+        for (Lesson lesson: lessons) {
+            if (Lesson.isClashingWithOtherLesson(lesson, otherLesson)) {
+                clashedLessons.add(lesson);
+            }
+        }
+        return clashedLessons;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -125,6 +136,10 @@ public class Person {
      */
     public boolean isLessonScheduled(Lesson lesson) {
         return lessons.contains(lesson);
+    }
+
+    public boolean hasSameName(Person otherStudent) {
+        return this.name.equals(otherStudent.name);
     }
 
     /**

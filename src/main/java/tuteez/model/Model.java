@@ -1,6 +1,8 @@
 package tuteez.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -86,7 +88,7 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    boolean isClashingWithExistingLesson(Lesson lesson);
+    Map<Person, ArrayList<Lesson>> getClashingLessons(Lesson lesson);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -101,9 +103,14 @@ public interface Model {
     ObjectProperty<Optional<Person>> getLastViewedPerson();
 
     /**
-     * Updates the lastViewedPerson after a DisplayCommand is called.
+     * Updates the lastViewedPerson.
      */
     void updateLastViewedPerson(Person personOnDisplay);
+
+    /**
+     * Deletes the lastViewedPerson.
+     */
+    void removeLastViewedPerson();
 
     /**
      * Returns the {@code person} in the address book with the given name.

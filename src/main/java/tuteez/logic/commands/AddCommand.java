@@ -9,6 +9,9 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -51,8 +54,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This time slot is already taken by another "
-            + " student, please retype command";
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons: \n";
 
     private final Person toAdd;
     private final Logger logger = LogsCenter.getLogger(AddCommand.class);
@@ -74,14 +76,30 @@ public class AddCommand extends Command {
         }
 
         Set<Lesson> lessonSet = toAdd.getLessons();
+        Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
         for (Lesson lesson: lessonSet) {
             assert lesson != null;
-            if (model.isClashingWithExistingLesson(lesson)) {
-                String logMessage = String.format("Student: %s | Lessons: %s | Conflict: Clashes with "
-                        + "another student's lesson", toAdd.getName(), toAdd.getLessons().toString());
-                logger.info(logMessage);
-                throw new CommandException(MESSAGE_DUPLICATE_LESSON);
-            }
+            Map<Person, ArrayList<Lesson>> clashingLessons = model.getClashingLessons(lesson);
+
+            clashingLessons.forEach((person, lessons) -> {
+                assert !person.equals(toAdd) : "By this point a duplicate person should be flagged out";
+                resultMap.computeIfAbsent(person, k -> new ArrayList<>()).addAll(lessons);
+            });
+        }
+
+        if (!resultMap.isEmpty()) {
+            String logMessage = String.format("Student: %s | Lessons: %s | Conflict: Clashes with "
+                    + "another student's lesson", toAdd.getName(), toAdd.getLessons().toString());
+            logger.info(logMessage);
+
+            StringBuilder clashMsg = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
+            resultMap.keySet().forEach(student -> {
+                clashMsg.append(student.getName()).append(": ");
+
+                resultMap.get(student).forEach(ls -> clashMsg.append(ls.getDayAndTime()).append(" "));
+                clashMsg.append("\n");
+            });
+            throw new CommandException(clashMsg.toString());
         }
 
         model.addPerson(toAdd);

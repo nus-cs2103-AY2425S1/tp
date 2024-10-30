@@ -12,7 +12,7 @@ public class LessonManagerTest {
         LessonManager lessonManager = new LessonManager();
         Lesson l1 = new Lesson("friday 1200-1400");
         lessonManager.addLesson(l1);
-        assertTrue(lessonManager.isClashingWithExistingLesson(l1));
+        assertTrue(lessonManager.isExistingLesson(l1));
     }
 
     @Test
@@ -20,26 +20,26 @@ public class LessonManagerTest {
         LessonManager lessonManager = new LessonManager();
         Lesson l1 = new Lesson("friday 1200-1400");
         lessonManager.addLesson(l1);
-        assertTrue(lessonManager.isClashingWithExistingLesson(l1));
+        assertTrue(lessonManager.isExistingLesson(l1));
         lessonManager.deleteLesson(l1);
-        assertFalse(lessonManager.isClashingWithExistingLesson(l1));
+        assertFalse(lessonManager.isExistingLesson(l1));
     }
 
     @Test
-    public void isClashingWithExistingLesson_clashOccurs() {
+    public void isExistingLesson_existing() {
         LessonManager lessonManager = new LessonManager();
         Lesson l1 = new Lesson("friday 1200-1400");
-        Lesson l2 = new Lesson("friday 1230-1430");
+        Lesson l2 = new Lesson("friday 1200-1400");
         lessonManager.addLesson(l1);
-        assertTrue(lessonManager.isClashingWithExistingLesson(l2));
+        assertTrue(lessonManager.isExistingLesson(l2));
     }
 
     @Test
-    public void isClashingWithExistingLesson_noClash() {
+    public void isExistingLesson_notExisting() {
         LessonManager lessonManager = new LessonManager();
         Lesson l1 = new Lesson("friday 1200-1400");
         Lesson l2 = new Lesson("friday 1400-1500");
         lessonManager.addLesson(l1);
-        assertFalse(lessonManager.isClashingWithExistingLesson(l2));
+        assertFalse(lessonManager.isExistingLesson(l2));
     }
 }

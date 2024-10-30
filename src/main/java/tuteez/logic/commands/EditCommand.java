@@ -1,7 +1,6 @@
 package tuteez.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tuteez.logic.commands.AddCommand.MESSAGE_DUPLICATE_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
@@ -11,9 +10,12 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static tuteez.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -33,6 +35,7 @@ import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
+import tuteez.model.remark.RemarkList;
 import tuteez.model.tag.Tag;
 
 /**
@@ -62,6 +65,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons: \n";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -97,18 +101,34 @@ public class EditCommand extends Command {
 
         Optional<Set<Lesson>> lessons = editPersonDescriptor.getLessons();
         if (lessons.isPresent()) {
-            for (Lesson newLesson : lessons.get()) {
-                if (personToEdit.isLessonScheduled(newLesson)) {
-                    continue;
-                }
+            Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
+            for (Lesson newlesson: lessons.get()) {
+                assert newlesson != null;
+                Map<Person, ArrayList<Lesson>> clashingLessons = model.getClashingLessons(newlesson);
 
-                if (model.isClashingWithExistingLesson(newLesson)) {
-                    String logMessage = String.format("Student: %s | Lessons: %s "
-                            + "| Conflict: Clashes with another student's lesson",
-                            editedPerson.getName(), editedPerson.getLessons().toString());
-                    logger.info(logMessage);
-                    throw new CommandException(MESSAGE_DUPLICATE_LESSON);
-                }
+                clashingLessons.forEach((person, lessonArr) -> {
+                    /* Operation is safe because we do not allow student's with the exact same name */
+                    if (!editedPerson.hasSameName(person)) {
+                        System.out.println(editedPerson + " is edited");
+                        System.out.println(person + " is not edited");
+                        resultMap.computeIfAbsent(person, k -> new ArrayList<>()).addAll(lessonArr);
+                    }
+                });
+            }
+
+            if (!resultMap.isEmpty()) {
+                String logMessage = String.format("Student: %s | Lessons: %s "
+                        + "| Conflict: Clashes with another student's lesson",
+                        editedPerson.getName(), editedPerson.getLessons().toString());
+                logger.info(logMessage);
+                StringBuilder clashMsg = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
+                resultMap.keySet().forEach(student -> {
+                    clashMsg.append(student.getName()).append(": ");
+
+                    resultMap.get(student).forEach(ls -> clashMsg.append(ls.getDayAndTime()).append(" "));
+                    clashMsg.append("\n");
+                });
+                throw new CommandException(clashMsg.toString());
             }
         }
 
@@ -146,9 +166,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
 
+        RemarkList originalRemarkList = personToEdit.getRemarkList();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTelegramUser, updatedTags,
-                updatedLessons);
+                updatedLessons, originalRemarkList);
     }
 
     @Override

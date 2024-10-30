@@ -90,6 +90,24 @@ public class AddRemarkCommandTest {
     }
 
     @Test
+    public void execute_addRemark_updatesLastViewedPerson() {
+        Person personToAddRemark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person updatedPerson = new PersonBuilder(personToAddRemark).withRemarks(VALID_REMARKLIST).build();
+        AddRemarkCommand addRemarkCommand = new AddRemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK);
+
+        String expectedMessage = String.format("Added remark to Person %1$s: %2$s",
+                INDEX_FIRST_PERSON.getOneBased(), VALID_REMARK);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToAddRemark, updatedPerson);
+
+        assertCommandSuccess(addRemarkCommand, model, expectedMessage, expectedModel);
+
+        assertTrue(model.getLastViewedPerson().get().isPresent(), "Expected lastViewedPerson to be set");
+        assertTrue(model.getLastViewedPerson().get().get().equals(updatedPerson));
+    }
+
+    @Test
     public void equals() {
         AddRemarkCommand addFirstRemarkCommand = new AddRemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK);
         AddRemarkCommand addSecondRemarkCommand = new AddRemarkCommand(INDEX_SECOND_PERSON, VALID_REMARK);

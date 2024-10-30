@@ -2,7 +2,9 @@ package tuteez.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import tuteez.commons.util.ToStringBuilder;
@@ -129,8 +131,8 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .orElse(null);
     }
 
-    public boolean isClashingWithExistingLesson(Lesson lesson) {
-        return lessonManager.isClashingWithExistingLesson(lesson);
+    public Map<Person, ArrayList<Lesson>> getClashingLessons(Lesson lesson) {
+        return lessonManager.getClashingLessons(persons, lesson);
     }
 
     //// util methods
