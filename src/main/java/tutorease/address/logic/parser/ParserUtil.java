@@ -227,7 +227,8 @@ public class ParserUtil {
      * @param prefixes         The prefixes to check.
      * @throws ParseException  If the prefixes are missing.
      */
-    private static void findMissingPrefix(ArgumentMultimap argumentMultimap, String usage, Prefix[] prefixes) throws ParseException {
+    private static void findMissingPrefix(ArgumentMultimap argumentMultimap, String usage, Prefix[] prefixes)
+            throws ParseException {
         for (Prefix prefix : prefixes) {
             if (!argumentMultimap.getValue(prefix).isPresent()) {
                 throw new ParseException(String.format(MISSING_PREFIX, prefix, usage));
