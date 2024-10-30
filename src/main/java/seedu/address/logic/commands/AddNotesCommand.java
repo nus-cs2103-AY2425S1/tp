@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class AddNotesCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_notes";
+    public static final String COMMAND_WORD = "addnotes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the patient notes of the patient identified "
             + "by the index number used in the last patient listing. "

@@ -155,17 +155,17 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Adding notes to a patient : `addNotes`
+### Adding notes to a patient : `addnotes`
 
 Adds notes to an existing person in the address book.
 
-Format: `addNotes INDEX pn/NOTES`
+Format: `addnotes INDEX pn/NOTES`
 
 * Adds notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-*  `addNotes 1 pn/Patient is prone to falling`
-*  `addNotes 2 pn/Patient requires frequent checkups`
+*  `addnotes 1 pn/Patient is prone to falling`
+*  `addnotes 2 pn/Patient requires frequent checkups`
 
 [Back to Table of Contents](#table-of-contents)
 
