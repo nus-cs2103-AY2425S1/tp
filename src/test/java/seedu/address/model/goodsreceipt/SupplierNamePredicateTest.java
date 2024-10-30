@@ -26,7 +26,7 @@ public class SupplierNamePredicateTest {
     }
 
     @Test
-    public void goodsNamePredicateTest_invalid_predicateSuccess() {
+    public void goodsNamePredicateTest_invalid_predicateFailure() {
         GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
                 new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID), false, 1, 1.0);
 
