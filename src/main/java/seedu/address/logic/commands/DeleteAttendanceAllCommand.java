@@ -17,13 +17,15 @@ import seedu.address.model.attendance.Attendance;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 
-public class DeleteAttendanceAllCommand extends Command{
+/**
+ * Deletes the attendance of all students in a specified tutorial group for a specified date.
+ */
+public class DeleteAttendanceAllCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteatall";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the attendance of all students" +
-            " in the specified " +
-            "tutorial group "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the attendance of all students"
+            + " in the specified " + "tutorial group "
             + "for the specified date.\n"
             + "Parameters: " + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP " + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TUTORIAL_GROUP + "A01 " + PREFIX_DATE + "2019-10-09";
@@ -37,7 +39,8 @@ public class DeleteAttendanceAllCommand extends Command{
     private final Map<Student, Attendance> previousAttendances;
 
     /**
-     * Creates a DeleteAttendanceAllCommand to delete the attendance of all students in the specified {@code TutorialGroup}
+     * Creates a DeleteAttendanceAllCommand to delete the attendance of
+     * all students in the specified {@code TutorialGroup}
      * on the specified date.
      * @param tutorialGroup Tutorial group for which attendance is being deleted.
      * @param date Date that attendance is being deleted for.
@@ -77,7 +80,9 @@ public class DeleteAttendanceAllCommand extends Command{
     public boolean undo(Model model) {
         requireNonNull(model);
         List<Student> studentsFromSpecifiedTutorialGroup = model.getStudentsByTutorialGroup(tutorialGroup);
-        if (studentsFromSpecifiedTutorialGroup.isEmpty()) return false;
+        if (studentsFromSpecifiedTutorialGroup.isEmpty()) {
+            return false;
+        }
 
         for (Student student : studentsFromSpecifiedTutorialGroup) {
             Attendance previousAttendance = previousAttendances.get(student);

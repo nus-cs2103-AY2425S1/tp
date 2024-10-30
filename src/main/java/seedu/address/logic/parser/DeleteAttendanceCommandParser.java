@@ -15,7 +15,7 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new DeleteAttendanceCommand object
  */
 
-public class DeleteAttendanceCommandParser implements Parser<DeleteAttendanceCommand>{
+public class DeleteAttendanceCommandParser implements Parser<DeleteAttendanceCommand> {
 
     @Override
     public DeleteAttendanceCommand parse(String args) throws ParseException {

@@ -73,7 +73,7 @@ public class MarkAttendanceCommandTest {
     public void execute_undoMarkAttendanceCommand_success() throws Exception {
         Student validStudent = new StudentBuilder().withName("John Doe").build();
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
-        validStudent.undoAttendance(LocalDate.of(2020, 1, 1));
+        validStudent.deleteAttendance(LocalDate.of(2020, 1, 1));
         modelStub.addStudent(validStudent);
 
         Attendance attendance = new Attendance("p");

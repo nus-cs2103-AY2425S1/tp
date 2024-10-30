@@ -15,7 +15,7 @@ import seedu.address.model.student.Student;
 /**
  * Deletes the attendance of a student for a specific date.
  */
-public class DeleteAttendanceCommand extends Command{
+public class DeleteAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteat";
 
@@ -70,7 +70,9 @@ public class DeleteAttendanceCommand extends Command{
     @Override
     public boolean undo(Model model) {
         Student student = model.getStudentByName(name);
-        if (student == null) return false;
+        if (student == null) {
+            return false;
+        }
 
         if (previousAttendance == null) {
             student.deleteAttendance(date);
