@@ -256,7 +256,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, track student performance, and organize schedules using CLI.
+**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, and organize schedules using CLI.
 
 
 ### User stories
