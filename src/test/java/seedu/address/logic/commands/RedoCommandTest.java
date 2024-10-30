@@ -26,7 +26,7 @@ public class RedoCommandTest {
     @Test
     public void execute_redoAfterUndo_success() throws CommandException {
         // Add a person, commit, and then undo
-        model.addPerson(TypicalPersons.MICHAEL);
+        model.addPerson(TypicalPersons.STUDENT_MICHAEL);
         model.commitAddressBook();
         model.undoAddressBook();
 
@@ -34,7 +34,7 @@ public class RedoCommandTest {
         RedoCommand redoCommand = new RedoCommand();
         CommandResult result = redoCommand.execute(model);
 
-        expectedModel.addPerson(TypicalPersons.MICHAEL);
+        expectedModel.addPerson(TypicalPersons.STUDENT_MICHAEL);
         assertEquals(RedoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
         assertEquals(model.getAddressBook(), expectedModel.getAddressBook());
     }
