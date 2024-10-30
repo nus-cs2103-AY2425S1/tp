@@ -146,7 +146,7 @@ public class LessonTest {
         assertEquals(durationTillSecondLesson, correctDuration);
     }
 
-    private static class LessonStub extends Lesson {
+    public static class LessonStub extends Lesson {
 
         /**
          * Constructs a {@code Lesson}.

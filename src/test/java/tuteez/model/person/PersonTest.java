@@ -1,5 +1,10 @@
 package tuteez.model.person;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,6 +15,7 @@ import static tuteez.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import tuteez.model.person.lesson.Lesson;
 import static tuteez.testutil.Assert.assertThrows;
 import static tuteez.testutil.TypicalPersons.ALICE;
 import static tuteez.testutil.TypicalPersons.BOB;
@@ -52,6 +58,43 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void nextLessonBasedOnCurrentTimeTest() {
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        LocalDateTime lesson1DateTime = currentTime.plusDays(2).plusHours(10).plusMinutes(0);
+        LocalDateTime lesson1EndTime = lesson1DateTime.plusHours(1);
+
+        LocalDateTime lesson2DateTime = currentTime.plusHours(3).plusHours(15).plusMinutes(0);
+        LocalDateTime lesson2EndTime = lesson2DateTime.plusHours(1);
+
+        LocalDateTime lesson3DateTime = currentTime.plusHours(1).plusHours(3).plusMinutes(0);
+        LocalDateTime lesson3EndTime = lesson2DateTime.plusHours(1);
+
+        DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("EEEE");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
+        String lesson1Str = lesson1DateTime.format(dayFormatter) + " " +
+                lesson1DateTime.format(timeFormatter) + "-" +
+                lesson1EndTime.format(timeFormatter);
+
+        String lesson2Str = lesson2DateTime.format(dayFormatter) + " " +
+                lesson2DateTime.format(timeFormatter) + "-" +
+                lesson2EndTime.format(timeFormatter);
+
+        String lesson3Str = lesson3DateTime.format(dayFormatter) + " " +
+                lesson3DateTime.format(timeFormatter) + "-" +
+                lesson3EndTime.format(timeFormatter);
+
+        Lesson lesson3 = new Lesson(lesson3Str);
+
+        Person student = new PersonBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withLessons(lesson1Str, lesson2Str, lesson3Str).build();
+        assertEquals(student.nextLessonBasedOnCurrentTime(), lesson3);
+
     }
 
     @Test
