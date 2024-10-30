@@ -163,6 +163,10 @@ public class ModelManager implements Model {
         return isSuccessful;
     }
 
+    @Override public boolean deleteTag(Tag tag) {
+        return addressBook.deleteTag(tag);
+    }
+
     @Override
     public boolean deleteTags(List<Tag> tags) {
         boolean isSuccessful = true;
