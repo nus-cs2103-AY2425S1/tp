@@ -14,8 +14,8 @@ public class GuiSettings implements Serializable {
 
     private static final double DEFAULT_HEIGHT = 980;
     private static final double DEFAULT_WIDTH = 1440;
-    private static final double MIN_HEIGHT = 980;
-    private static final double MIN_WIDTH = 1440;
+    private static final double MIN_HEIGHT = 600;
+    private static final double MIN_WIDTH = 1150;
 
     private final double windowWidth;
     private final double windowHeight;

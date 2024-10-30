@@ -52,6 +52,8 @@ public class PersonCard extends UiPart<Region> {
     private Label clientStatus;
     @FXML
     private Label deadline;
+    @FXML
+    private Label overdue;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -64,17 +66,31 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        projectStatus.setText("Project status: " + person.getProjectStatus().toString());
+        projectStatus.setText("Project Status: " + person.getProjectStatus().toString());
         clientStatus.setText(person.getClientStatus().toString().toUpperCase());
-        deadline.setText("Deadline: " + person.checkAndGetDeadline());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        String deadlineString = person.checkAndGetDeadline();
+        overdue.setText("");
+        if (deadlineString.contains("[OVERDUE]")) {
+            overdue.setText("OVERDUE");
+            deadlineString = person.getDeadline().toString();
+            cardPane.getStyleClass().add("overdue_bar");
+        }
+        deadline.setText("Deadline: " + deadlineString);
+
+        Tooltip clientStatusTooltip = new Tooltip();
+        clientStatusTooltip.setShowDelay(Duration.seconds(0.01));
+        clientStatusTooltip.setText("Client Status");
+        Tooltip.install(clientStatus, clientStatusTooltip);
 
         String payStatus = person.getPaymentStatus().toString();
         paymentStatus.setText("$");
 
         Tooltip paymentTooltip = new Tooltip();
+
         paymentTooltip.setShowDelay(Duration.seconds(0.01));
 
         switch (payStatus) {
