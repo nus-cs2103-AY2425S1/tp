@@ -55,6 +55,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
     public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons: \n";
+    public static final String MESSAGE_NEW_LESSONS_CLASH = "Adding clashing lessons is not allowed";
 
     private final Person toAdd;
     private final Logger logger = LogsCenter.getLogger(AddCommand.class);
@@ -76,6 +77,10 @@ public class AddCommand extends Command {
         }
 
         Set<Lesson> lessonSet = toAdd.getLessons();
+        if (Lesson.containsClashes(lessonSet)) {
+            throw new CommandException(MESSAGE_NEW_LESSONS_CLASH);
+        }
+
         Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
         for (Lesson lesson: lessonSet) {
             assert lesson != null;
