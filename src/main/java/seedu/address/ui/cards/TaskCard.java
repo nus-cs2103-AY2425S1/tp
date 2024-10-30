@@ -6,12 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.task.Task;
 import seedu.address.ui.UiPart;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
