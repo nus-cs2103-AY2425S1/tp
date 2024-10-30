@@ -61,6 +61,9 @@ public class HealthService {
         return false;
     }
 
+    /**
+     * Returns true if object is a valid Health Service.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -76,6 +79,9 @@ public class HealthService {
         return healthServiceName.equals(otherhealthService.healthServiceName);
     }
 
+    /**
+     * Returns the hashcode of the health service's name.
+     */
     @Override
     public int hashCode() {
         return healthServiceName.hashCode();
@@ -84,8 +90,8 @@ public class HealthService {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
-        return '[' + healthServiceName + ']';
+        return healthServiceName;
     }
-
 }
