@@ -131,12 +131,22 @@ public class AddwCommand extends Command {
         }
 
         AddwCommand otherAddwCommand = (AddwCommand) other;
-        return toAdd.equals(otherAddwCommand.toAdd);
+
+        boolean indexEqual = (index == null && otherAddwCommand.index == null)
+                || (index != null && index.equals(otherAddwCommand.index));
+
+        boolean predicateEqual = (predicate == null && otherAddwCommand.predicate == null)
+                || (predicate != null && predicate.equals(otherAddwCommand.predicate));
+
+        return indexEqual && predicateEqual && toAdd.equals(otherAddwCommand.toAdd);
+
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("index", index)
+                .add("predicate", predicate)
                 .add("toAddw", toAdd)
                 .toString();
     }
