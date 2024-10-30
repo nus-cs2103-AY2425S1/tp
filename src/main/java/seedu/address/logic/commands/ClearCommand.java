@@ -44,6 +44,7 @@ public class ClearCommand extends Command {
 
     public void setConfirmed(boolean confirmed) {
         isConfirmed = confirmed;
+        setPrompted(true);
     }
 
     public void setPrompted(boolean prompted) {

@@ -20,7 +20,7 @@ public class ClearEventCommand extends ClearCommand {
     public static final String MESSAGE_SUCCESS = "All events has been cleared!";
 
     public static final String MESSAGE_CONFIRMATION = "Are you sure you want to clear all your events?\n"
-            + "Type \"y\" to confirm or \"n\" to abort.";
+            + "Type \"y\" to confirm or any key to abort.";
 
     @Override
     public CommandResult execute(Model model) {
