@@ -24,25 +24,42 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         String trimmedArgs = args.trim();
         String[] splitArgs = trimmedArgs.split("\\s+");
 
-        if (splitArgs.length != 2) {
+        if (splitArgs.length < 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         String entityType = splitArgs[0];
-        String indexString = splitArgs[1];
 
         switch (entityType) {
         case PERSON_ENTITY_STRING:
+
+            if (splitArgs.length < 2) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
+            }
+            String personIndexString = splitArgs[1];
+
             try {
-                Index index = ParserUtil.parseIndex(indexString);
+                Index index = ParserUtil.parseIndex(personIndexString);
                 return new DeletePersonCommand(index);
             } catch (ParseException pe) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
             }
         case APPOINTMENT_ENTITY_STRING:
+
+            if (splitArgs.length < 2) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
+            }
+            String apptIndexString = splitArgs[1];
+
             try {
-                Index index = ParserUtil.parseIndex(indexString);
+                if (splitArgs.length < 2) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                }
+                Index index = ParserUtil.parseIndex(apptIndexString);
                 return new DeleteAppointmentCommand(index);
             } catch (ParseException pe) {
                 throw new ParseException(

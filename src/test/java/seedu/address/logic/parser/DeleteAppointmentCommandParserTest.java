@@ -29,6 +29,14 @@ public class DeleteAppointmentCommandParserTest {
     }
 
     @Test
+    public void parse_nullAppointmentIndex_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE);
+
+        // null appointment index
+        assertParseFailure(parser, APPOINTMENT_ENTITY_STRING, expectedMessage);
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));

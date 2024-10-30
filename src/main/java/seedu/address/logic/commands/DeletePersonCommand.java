@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -16,10 +17,10 @@ import seedu.address.model.person.Person;
  */
 public class DeletePersonCommand extends DeleteCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " person"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + "person" + " " + "1";
+            + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " " + "1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 

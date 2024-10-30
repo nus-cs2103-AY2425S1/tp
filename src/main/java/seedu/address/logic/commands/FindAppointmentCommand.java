@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 import java.util.function.Predicate;
 
 import seedu.address.logic.Messages;
@@ -15,11 +18,13 @@ public class FindAppointmentCommand extends FindCommand<Appointment> {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + " appt : Finds all appointments matching the following parameters.\n"
-        + "To specify name, use the parameter n/[NAME] where [NAME] is a list of names, non-case-sensitive,"
+        + "To specify name, use the parameter n/[NAME] where [NAME] is a list of person names, non-case-sensitive,"
         + "separated by spaces.\n"
         + "To specify date, use the parameter d/[DATE] where [DATE] is a list of dates, in the format"
         + "YYYY-MM-DD, separated by spaces. (Note that there is no time stated here.)\n"
-        + "Parameters: [n/[NAME]] [d/[DATE]]\n"
+        + "Parameters: "
+        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_DATETIME + "DATE]\n"
         + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " n/alice d/2024-10-20";
 
     /**
