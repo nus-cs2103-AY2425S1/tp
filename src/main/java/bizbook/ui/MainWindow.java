@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private PersonListPanel pinnedPersonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ContactDetails contactDetailsPanel;
@@ -48,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane pinnedListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -125,6 +129,9 @@ public class MainWindow extends UiPart<Stage> {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFocusedPerson());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        pinnedPersonListPanel = new PersonListPanel(logic.getPinnedPersonList(), logic.getFocusedPerson());
+        pinnedListPanelPlaceholder.getChildren().add(pinnedPersonListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

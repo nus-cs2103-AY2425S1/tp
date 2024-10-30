@@ -41,6 +41,7 @@
           <VBox fx:id="personList" styleClass="pane-with-border" minWidth="400" prefWidth="400">
             <StackPane fx:id="searchBoxPlaceholder" VBox.vgrow="NEVER" styleClass="pane-with-border" />
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="pinnedListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
           <!-- Contact details panel -->
           <VBox fx:id="contactDetails" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
