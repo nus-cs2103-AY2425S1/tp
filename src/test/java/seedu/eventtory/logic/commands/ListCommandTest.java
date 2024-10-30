@@ -1,0 +1,39 @@
+package seedu.eventtory.logic.commands;
+
+import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.eventtory.logic.commands.CommandTestUtil.showVendorAtIndex;
+import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
+import static seedu.eventtory.testutil.TypicalVendors.getTypicalAddressBook;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.eventtory.model.Model;
+import seedu.eventtory.model.ModelManager;
+import seedu.eventtory.model.UserPrefs;
+
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ */
+public class ListCommandTest {
+
+    private Model model;
+    private Model expectedModel;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    }
+
+    @Test
+    public void execute_listIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_MULTIVIEW_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsEverything() {
+        showVendorAtIndex(model, INDEX_FIRST_VENDOR);
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_MULTIVIEW_SUCCESS, expectedModel);
+    }
+}
