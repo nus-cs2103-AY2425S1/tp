@@ -8,12 +8,14 @@ public enum CommandKeywords {
     addf,
     appt,
     clear,
+    deleteappt,
     delete,
     edit,
     exit,
+    filter,
     find,
-    view,
-    list;
+    list,
+    view;
 
     /**
      * Checks if the given keyword is a valid command keyword.
