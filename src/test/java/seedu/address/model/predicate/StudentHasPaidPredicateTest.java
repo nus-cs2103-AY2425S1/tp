@@ -1,5 +1,9 @@
 package seedu.address.model.predicate;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,13 +51,13 @@ public class StudentHasPaidPredicateTest {
     @Test
     public void test_equalsSameObject_returnsTrue() {
         predicatePaid = new StudentHasPaidPredicate(true);
-        assertTrue(predicatePaid.equals(predicatePaid)); // Same object should be equal
+        assertEquals(predicatePaid, predicatePaid); // Same object should be equal
     }
 
     @Test
     public void test_equalsDifferentTypes_returnsFalse() {
         predicatePaid = new StudentHasPaidPredicate(true);
-        assertFalse(predicatePaid.equals("some string")); // Different types should not be equal
+        assertNotEquals("some string", predicatePaid); // Different types should not be equal
     }
 
     @Test
