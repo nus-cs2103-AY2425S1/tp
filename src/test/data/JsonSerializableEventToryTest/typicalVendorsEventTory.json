@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Vendor values as in TypicalVendors#getTypicalAddressBook()",
+  "_comment": "EventTory save file which contains the same Vendor values as in TypicalVendors#getTypicalEventTory()",
   "vendors": [
     {
       "id": "a1e2c3d4-5f67-4890-8a1b-123456789abc",

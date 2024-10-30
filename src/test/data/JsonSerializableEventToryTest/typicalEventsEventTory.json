@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Event values as in TypicalEvents#getTypicalAddressBook()",
+  "_comment": "EventTory save file which contains the same Event values as in TypicalEvents#getTypicalEventTory()",
   "vendors": [],
   "events": [
     {
