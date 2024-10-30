@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import java.util.List;
@@ -42,8 +42,7 @@ public class EnrollCommand extends Command {
      * Creates an EnrollCommand to add the specified {@code Person} into the specified {@code Tutorial}
      */
     public EnrollCommand(Index index, String subject) {
-        requireNonNull(index);
-        requireNonNull(subject);
+        requireAllNonNull(index, subject);
         this.index = index;
         this.subject = subject.toLowerCase();
     }

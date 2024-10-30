@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import java.util.ArrayList;
@@ -41,8 +41,7 @@ public class UnenrollCommand extends Command {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public UnenrollCommand(Index index, String subject) {
-        requireNonNull(index);
-        requireNonNull(subject);
+        requireAllNonNull(index, subject);
         this.index = index;
         this.subject = subject.toLowerCase();
     }

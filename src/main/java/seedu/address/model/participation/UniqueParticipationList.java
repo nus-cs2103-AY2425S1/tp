@@ -15,12 +15,13 @@ import seedu.address.model.participation.exceptions.DuplicateParticipationExcept
 import seedu.address.model.participation.exceptions.ParticipationNotFoundException;
 
 /**
- * A list of participation that enforces uniqueness between its elements and does not allow nulls.
+ * Manages {@code participation} objects
+ * Enforces uniqueness between its elements and does not allow nulls.
  * A participation is considered unique by comparing using {@code Participation#isSameParticipation(Participation)}.
  * As such, adding and updating of participations uses Participation#isSameParticipation(Participation)
- * for equality so as to ensure that the participation being
+ * for equality to ensure that the participation being
  * added or updated is unique in terms of identity in the UniqueParticipationList. However, the removal of a
- * participation uses Participation#equals(Object) so as to ensure that the participation with exactly the same fields
+ * participation uses Participation#equals(Object) to ensure that the participation with exactly the same fields
  * will be removed.
  *
  * Supports a minimal set of list operations.
@@ -36,11 +37,13 @@ public class UniqueParticipationList implements Iterable<Participation> {
     private final ObservableList<Participation> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+
     /**
      * Returns true if the list contains an equivalent participation as the given argument.
      */
     public boolean contains(Participation toCheck) {
         requireNonNull(toCheck);
+        assert !internalList.contains(null) : "Internal list should not contain null elements";
         return internalList.stream().anyMatch(toCheck::isSameParticipation);
     }
 
@@ -59,10 +62,14 @@ public class UniqueParticipationList implements Iterable<Participation> {
 
     /**
      * Replaces the participation {@code target} in the list with {@code editedParticipation}.
-     * {@code target} must exist in the list.
-     * The participation identity of {@code editedParticipation} must not be the same as another existing participation
-     * in the list.
+     *
+     * @param target The participation to be replaced. Must already exist in the list.
+     * @param editedParticipation The new participation to replace {@code target}.
+     *        Must not duplicate any existing participation in the list.
+     * @throws ParticipationNotFoundException if {@code target} does not exist.
+     * @throws DuplicateParticipationException if {@code editedParticipation} duplicates an existing participation.
      */
+
     public void setParticipation(Participation target, Participation editedParticipation) {
         requireAllNonNull(target, editedParticipation);
 
@@ -80,14 +87,20 @@ public class UniqueParticipationList implements Iterable<Participation> {
         internalList.set(index, editedParticipation);
     }
 
+    /**
+     * Replaces the list {@code internalList} with Participation objects from a new list{@code replacement}.
+     *
+     * @param replacement new UniqueParticipationList
+     */
     public void setParticipation(UniqueParticipationList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code participation}.
-     * {@code participations} must not contain duplicate participation.
+     * Replaces the list {@code internalList} with Participation objects from a new list{@code participation}.
+     *
+     * @param participation new List of Participation
      */
     public void setParticipation(List<Participation> participation) {
         requireAllNonNull(participation);
@@ -100,8 +113,8 @@ public class UniqueParticipationList implements Iterable<Participation> {
     }
 
     /**
-     * Removes the equivalent participation from the list.
-     * The participation must exist in the list.
+     * Removes a participation from the list.
+     * The participation must already exist in the list.
      */
     public void remove(Participation toRemove) {
         requireNonNull(toRemove);
@@ -149,7 +162,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
     }
 
     /**
-     * Returns true if {@code participation} contains only unique participations.
+     * Returns true if {@code participation} contains only unique participations
      */
     private boolean participationAreUnique(List<Participation> participation) {
         for (int i = 0; i < participation.size() - 1; i++) {
