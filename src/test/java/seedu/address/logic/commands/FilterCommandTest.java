@@ -31,7 +31,7 @@ public class FilterCommandTest {
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_oneValidTag_listView_success() {
+    public void execute_oneValidTagListView_success() {
         FilterCommand command = new FilterCommand(TAG_SET_FRIENDS);
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, TAG_SET_FRIENDS);
@@ -41,7 +41,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_twoValidTags_listView_success() {
+    public void execute_twoValidTagsListView_success() {
         FilterCommand command = new FilterCommand(TAG_SET_FRIENDS_OWESMONEY);
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, TAG_SET_FRIENDS_OWESMONEY);
@@ -51,7 +51,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_oneValidTag_weddingView_success() throws CommandException {
+    public void execute_oneValidTagWeddingView_success() throws CommandException {
         FilterCommand command = new FilterCommand(TAG_SET_FRIENDS);
         model.addWedding(WEDDING_ONE);
         expectedModel.addWedding(WEDDING_ONE);
@@ -68,7 +68,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_twoValidTags_weddingView_success() throws CommandException {
+    public void execute_twoValidTagsWeddingView_success() throws CommandException {
         FilterCommand command = new FilterCommand(TAG_SET_FRIENDS_OWESMONEY);
         model.addWedding(WEDDING_ONE);
         expectedModel.addWedding(WEDDING_ONE);
