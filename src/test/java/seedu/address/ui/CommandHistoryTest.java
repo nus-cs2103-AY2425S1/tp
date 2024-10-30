@@ -31,6 +31,16 @@ public class CommandHistoryTest {
     }
 
     @Test
+    public void testPrevCommand() {
+        commandHistory.addCommand("first command");
+        commandHistory.addCommand("second command");
+
+        assertEquals("second command", commandHistory.getPreviousCommand());
+        assertEquals("first command", commandHistory.getPreviousCommand());
+        assertNull(commandHistory.getPreviousCommand());
+    }
+
+    @Test
     public void testNextCommand() {
         commandHistory.addCommand("first command");
         commandHistory.addCommand("second command");
@@ -41,14 +51,14 @@ public class CommandHistoryTest {
 
         // Moving forward in history
         assertEquals("second command", commandHistory.getNextCommand());
-        assertNull(commandHistory.getNextCommand()); // No further next command after latest
+        assertEquals("",commandHistory.getNextCommand()); // No further next command after latest
     }
 
     @Test
     public void testEmptyHistory() {
         // Initially, history should return null when getting previous/next command
         assertNull(commandHistory.getPreviousCommand());
-        assertNull(commandHistory.getNextCommand());
+        assertEquals("",commandHistory.getNextCommand());
     }
 
     @Test
@@ -64,7 +74,7 @@ public class CommandHistoryTest {
         // Moving forward should bring back "third command"
         assertEquals("third command", commandHistory.getNextCommand());
 
-        // After the latest command, there should be no more next command
-        assertNull(commandHistory.getNextCommand());
+        // After the latest command, there should be no more next command and change the textfield back to a blank
+        assertEquals("",commandHistory.getNextCommand());
     }
 }

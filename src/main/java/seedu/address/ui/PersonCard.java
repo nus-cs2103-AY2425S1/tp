@@ -104,7 +104,6 @@ public class PersonCard extends UiPart<Region> {
         Username username = game.getUsername();
         SkillLevel skillLevel = game.getSkillLevel();
         Role role = game.getRole();
-
         if (!username.getUsername().toString().isEmpty()) {
             sb.append("Username: ").append(username);
         }
