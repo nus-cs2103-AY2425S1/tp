@@ -9,28 +9,29 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="detailsPane" fx:id="detailsPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <ScrollPane fitToWidth="true" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="details-pane">
-        <content >
-            <GridPane >
+<HBox id="detailsPane" fx:id="detailsPane" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <ScrollPane fitToWidth="true" styleClass="details-pane" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+        <content>
+            <GridPane>
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
                 </columnConstraints>
                 <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
                     <padding>
-                        <Insets top="5" right="5" bottom="5" left="15" />
+                        <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
-                    <HBox spacing="0.5" alignment="CENTER_LEFT">
+                    <HBox alignment="CENTER_LEFT" spacing="0.5">
                         <Label fx:id="id" styleClass="details_big_label">
                             <minWidth>
                                 <Region fx:constant="USE_PREF_SIZE" />
                             </minWidth>
                         </Label>
-                        <Label fx:id="name" text="\$first" styleClass="details_big_label" />
+                        <Label fx:id="name" styleClass="details_big_label" text="\$first" />
                         <padding>
-                            <Insets top="5" right="5" bottom="3" left="5" />
+                            <Insets bottom="3" left="5" right="5" top="5" />
                         </padding>
                     </HBox>
                     <Separator>
@@ -38,45 +39,48 @@
                             -fx-background-color: #1d1b1a;
                         </style>
                     </Separator>
-                    <FlowPane fx:id="detailsTags" >
+                    <FlowPane fx:id="detailsTags">
                         <padding>
-                            <Insets top="10" bottom="8" left="5"/>
+                            <Insets bottom="8" left="5" top="10" />
                         </padding>
                     </FlowPane>
 
                     <HBox alignment="CENTER_LEFT">
-                        <VBox alignment="CENTER_LEFT" spacing="10" minWidth="70">
+                        <VBox minWidth="70" spacing="10">
                             <padding>
                                 <Insets left="8" />
                             </padding>
-                            <Label text="Phone:" styleClass="details_field_headers" />
-                            <Label text="Email:" styleClass="details_field_headers" />
-                            <Label text="Remark:" styleClass="details_field_headers" />
+                            <Label styleClass="details_field_headers" text="Phone:" />
+                            <Label styleClass="details_field_headers" text="Email:" />
+                            <Label styleClass="details_field_headers" text="Remark:" />
                         </VBox>
-                        <VBox alignment="CENTER_LEFT" spacing="3">
-                            <Label fx:id="phone" text="\$phone" styleClass="details_small_label" />
-                            <Label fx:id="email" text="\$email" styleClass="details_small_label" />
-                            <Label fx:id="remark" text="\$remark" styleClass="details_small_label" />
+                        <VBox spacing="3">
+                            <Label fx:id="phone" styleClass="details_small_label" text="\$phone" />
+                            <Label fx:id="email" styleClass="details_small_label" text="\$email" />
+                            <Label fx:id="remark" styleClass="details_small_label" text="\$remark" wrapText="true" />
                         </VBox>
                     </HBox>
 
-                    <HBox spacing="5" alignment="CENTER_LEFT">
+                    <HBox alignment="CENTER_LEFT" spacing="5">
                         <padding>
-                            <Insets top="10" left="8"/>
+                            <Insets left="8" top="10" />
                         </padding>
-                        <Label text="Assignments:" styleClass="details_field_headers" />
+                        <Label styleClass="details_field_headers" text="Assignments:" />
                     </HBox>
-                    <HBox spacing="5" alignment="CENTER_LEFT">
+                    <HBox alignment="CENTER_LEFT" spacing="5">
                         <padding>
-                            <Insets left="8" bottom="5"/>
+                            <Insets bottom="5" left="8" />
                         </padding>
-                        <FlowPane fx:id="assignments" vgap="10" hgap="10" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                        <FlowPane fx:id="assignments" alignment="CENTER_LEFT" hgap="10" vgap="10" HBox.hgrow="ALWAYS">
                             <padding>
-                                <Insets top="10" bottom="8" left="5"/>
+                                <Insets bottom="8" left="5" top="10" />
                             </padding>
                         </FlowPane>
                     </HBox>
                 </VBox>
+            <rowConstraints>
+               <RowConstraints />
+            </rowConstraints>
             </GridPane>
         </content>
     </ScrollPane>
