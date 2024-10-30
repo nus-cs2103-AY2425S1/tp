@@ -22,6 +22,9 @@ Class PriorityLevel
 Class EmergencyContact
 Class Tag
 
+Class UniqueTaskList
+Class Task
+
 Class I #FFFFFF
 }
 
@@ -38,14 +41,17 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" UniqueTaskList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "1..3" PriorityLevel
+Person *--> "1" PriorityLevel
 Person *--> EmergencyContact
 Person *--> "*" Tag
+UniqueTaskList *--> "~* all" Task
+Task --> "1" Person
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

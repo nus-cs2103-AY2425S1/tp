@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -54,7 +57,10 @@ public class PriorityCommand extends Command {
                     personToEdit.getTags(),
                     new PriorityLevel(isReset ? 3 : priorityLevel));
 
+            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.setPerson(personToEdit, editedPerson);
+            model.updateTasksForPerson(personToEdit, editedPerson);
             return new CommandResult(String.format("Priority level %d successfully set for %s",
                     priorityLevel, editedPerson.getName()));
         } catch (IndexOutOfBoundsException e) {

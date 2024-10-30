@@ -16,8 +16,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TaskBuilder;
 
 public class ModelManagerTest {
@@ -204,4 +206,32 @@ public class ModelManagerTest {
         // Verify the priority level remains 3 after multiple resets
         assertEquals(3, ALICE.getPriorityLevel().getValue());
     }
+
+    @Test
+    public void updateTasksForPerson_personWithTasks_updatesPriority() {
+        // Create a person and add to address book
+        modelManager.addPerson(ALICE);
+
+        // Create tasks associated with the person and add to address book
+        Task task1 = new TaskBuilder().withDescription("Task 1").withPatient(ALICE).build();
+        Task task2 = new TaskBuilder().withDescription("Task 2").withPatient(ALICE).build();
+        modelManager.addTask(task1);
+        modelManager.addTask(task2);
+
+        // Create an edited person with a different priority level
+        Person editedAlice = new PersonBuilder(ALICE).withPriorityLevel(1).build();
+
+        // Update tasks for the person
+        modelManager.updateTasksForPerson(ALICE, editedAlice);
+
+        // Verify that tasks have been updated with the edited person
+        for (Task task : modelManager.getFilteredTaskList()) {
+            if (task.getPatient().equals(editedAlice)) {
+                assertEquals(1, task.getPatient().getPriorityLevel().getValue());
+            }
+        }
+    }
+
+
+
 }
