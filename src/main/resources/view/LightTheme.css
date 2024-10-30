@@ -387,9 +387,8 @@
     -fx-background-radius: 0;
     -fx-font-size: 13;
     -fx-line-spacing: 5;
-    -fx-min-width: 200;   /* Minimum width to allow expansion */
-    -fx-min-height: 100;   /* Minimum height to allow expansion */
-
-    -fx-alignment: TOP_LEFT;
+    -fx-min-width: 200;
+    -fx-min-height: 100;
+    /*-fx-alignment: TOP_LEFT;*/
     -fx-wrap-text: true;
 }

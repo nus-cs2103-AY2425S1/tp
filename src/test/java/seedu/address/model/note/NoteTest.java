@@ -86,7 +86,7 @@ public class NoteTest {
     }
 
     @Test
-    public void toString_test() {
+    public void toString_nonEmptyNote() {
         Set<Appointment> appointmentSet = new HashSet<>();
         appointmentSet.add(new Appointment("01/01/2025 0000"));
         Set<String> remarksSet = new HashSet<>();
@@ -100,6 +100,16 @@ public class NoteTest {
                                 + "Medications: Test medications\n"
                                 + "Remarks: Test remark";
 
+        assertEquals(expectedString, note.toString());
+    }
+
+    @Test
+    public void toString_emptyNote() {
+        Set<Appointment> appointmentSet = new HashSet<>();
+        Set<String> remarksSet = new HashSet<>();
+        Set<String> medicationSet = new HashSet<>();
+        Note note = new Note(appointmentSet, remarksSet, medicationSet);
+        String expectedString = "This note is currently empty.";
         assertEquals(expectedString, note.toString());
     }
 }

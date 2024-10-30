@@ -122,6 +122,9 @@ public class Note {
 
     @Override
     public String toString() {
+        if (previousAppointments.isEmpty() && remarks.isEmpty() && medications.isEmpty()) {
+            return "This note is currently empty.";
+        }
         String appointment = "Previous Appointments: "
             + String.join(", ", previousAppointments.stream().map(Appointment::toString).toList()) + "\n";
         String medication = "Medications: " + String.join(", ", this.medications) + "\n";
