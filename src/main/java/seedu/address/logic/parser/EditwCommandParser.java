@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditwCommand;
@@ -22,12 +23,17 @@ public class EditwCommandParser implements Parser<EditwCommand> {
      */
     public EditwCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_VENUE);
+                ArgumentTokenizer.tokenize(args, PREFIX_WEDDING, PREFIX_NAME, PREFIX_DATE, PREFIX_VENUE);
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditwCommand.MESSAGE_USAGE));
+        }
 
         Index index;
-
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_WEDDING).orElseThrow(() ->
+                    new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditwCommand.MESSAGE_USAGE))
+            ));
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditwCommand.MESSAGE_USAGE), pe);
         }
