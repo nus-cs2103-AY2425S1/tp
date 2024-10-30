@@ -8,11 +8,12 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Log;
+import seedu.address.model.person.LogList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private final String appointment; // Appointment stored as String in the correct format
     private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<String> logEntries = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -48,7 +50,8 @@ class JsonAdaptedPerson {
             @JsonProperty("address") String address,
             @JsonProperty("remark") String remark,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("appointment") String appointment) {
+            @JsonProperty("appointment") String appointment,
+            @JsonProperty("logEntries") List<String> logEntries) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,6 +61,9 @@ class JsonAdaptedPerson {
         this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (logEntries != null) {
+            this.logEntries.addAll(logEntries);
         }
     }
 
@@ -146,8 +152,15 @@ class JsonAdaptedPerson {
         }
         final Remark modelRemark = new Remark(remark);
 
+        for (String logEntry : logEntries) {
+            if (!Log.isValidLog(logEntry)) {
+                throw new IllegalValueException(Log.MESSAGE_CONSTRAINTS);
+            }
+        }
+        final LogList modelLogEntries = new LogList(logEntries);
+
         return new Person(modelName, modelPhone, modelEmail, modelNric, modelAddress,
-            modelRemark, modelTags, modelAppointment);
+            modelRemark, modelTags, modelAppointment, modelLogEntries);
     }
 
 }
