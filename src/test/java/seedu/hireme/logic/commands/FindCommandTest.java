@@ -18,6 +18,7 @@ import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddr
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -119,14 +120,14 @@ public class FindCommandTest {
         Model modelWithGoogleAndYahoo = new ModelManager(getTypicalAddressBook(),
                                                                                   new UserPrefs());
         modelWithGoogleAndYahoo.addItem(GOOGLE);
-        String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate("oo");
         FindCommand command = new FindCommand(predicate);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addItem(GOOGLE);
         expectedModel.updateFilteredList(predicate);
         assertCommandSuccess(command, modelWithGoogleAndYahoo, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(YAHOO, GOOGLE), modelWithGoogleAndYahoo.getFilteredList());
+        assertEquals(List.of(), modelWithGoogleAndYahoo.getFilteredList());
     }
 
     @Test

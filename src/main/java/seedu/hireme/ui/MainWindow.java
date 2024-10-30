@@ -36,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private InternshipApplicationListPanel internshipApplicationListPanel;
     private ResultDisplay resultDisplay;
     private final HelpWindow helpWindow;
-    private final InsightsWindow insightsWindow;
+    private final ChartWindow chartWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -69,7 +69,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        insightsWindow = new InsightsWindow();
+        chartWindow = new ChartWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -155,11 +155,12 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the insights window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleInsights(Map<Status, Integer> insights) {
-        if (!insightsWindow.isShowing()) {
-            insightsWindow.show(insights);
+    public void handleChart(Map<Status, Integer> insights) {
+        if (!chartWindow.isShowing()) {
+            chartWindow.show(insights);
         } else {
-            insightsWindow.focus();
+            chartWindow.update(insights);
+            chartWindow.focus();
         }
     }
 
@@ -176,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
-        insightsWindow.hide();
+        chartWindow.hide();
         primaryStage.hide();
     }
 
@@ -197,8 +198,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            } else if (commandResult.getInsights() != null) {
-                handleInsights(commandResult.getInsights());
+            }
+
+            if (commandResult.isChart()) {
+                handleChart(commandResult.getChartData());
+            } else if (commandResult.getChartData() != null) {
+                chartWindow.update(commandResult.getChartData());
             }
 
             if (commandResult.isExit()) {

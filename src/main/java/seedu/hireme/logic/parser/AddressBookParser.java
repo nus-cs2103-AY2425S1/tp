@@ -1,6 +1,5 @@
 package seedu.hireme.logic.parser;
 
-import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.hireme.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
@@ -9,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.hireme.commons.core.LogsCenter;
 import seedu.hireme.logic.commands.AddCommand;
+import seedu.hireme.logic.commands.ChartCommand;
 import seedu.hireme.logic.commands.ClearCommand;
 import seedu.hireme.logic.commands.Command;
 import seedu.hireme.logic.commands.DeleteCommand;
@@ -16,7 +16,6 @@ import seedu.hireme.logic.commands.ExitCommand;
 import seedu.hireme.logic.commands.FilterCommand;
 import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
-import seedu.hireme.logic.commands.InsightsCommand;
 import seedu.hireme.logic.commands.ListCommand;
 import seedu.hireme.logic.commands.SortCommand;
 import seedu.hireme.logic.commands.StatusCommand;
@@ -44,7 +43,7 @@ public class AddressBookParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -93,8 +92,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case InsightsCommand.COMMAND_WORD:
-            return new InsightsCommand();
+        case ChartCommand.COMMAND_WORD:
+            return new ChartCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -223,8 +223,8 @@ public class ModelManager implements Model {
      * Provides status insights of items in the list
      */
     @Override
-    public Map<Status, Integer> getInsights() {
-        return addressBook.getInsights();
+    public Map<Status, Integer> getChartData() {
+        return addressBook.getChartData();
     }
 
     /**

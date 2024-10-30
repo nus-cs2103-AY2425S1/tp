@@ -81,8 +81,10 @@ public class StatusCommand extends Command {
         updatedInternshipApplication.setStatus(newStatus);
         model.setItem(internshipApplicationToUpdate, updatedInternshipApplication);
         model.updateFilteredList(prevPredicate);
+
         return new CommandResult(String.format(MESSAGE_STATUS_CHANGE_SUCCESS,
-                Messages.format(internshipApplicationToUpdate), newStatus.toString()));
+                Messages.format(internshipApplicationToUpdate), newStatus.toString()), false,
+                false, false, model.getChartData());
     }
 
     /**

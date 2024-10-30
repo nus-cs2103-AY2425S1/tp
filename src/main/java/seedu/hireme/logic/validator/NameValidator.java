@@ -4,7 +4,8 @@ package seedu.hireme.logic.validator;
  * Validates name of company strings
  */
 public class NameValidator extends Validator<String> {
-    public static final String VALIDATION_REGEX = "[ A-Za-z0-9_&/]*";
+    public static final String VALIDATION_REGEX = "[ A-Za-z0-9_&/.:()]*";
+
     private static NameValidator instance;
 
     private NameValidator() {}
