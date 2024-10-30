@@ -41,22 +41,22 @@ public class SampleDataUtil {
         return new Person[]{
             new Guest(new Name("Alex Yeoh"), new Phone("83238717"), new Email("alexyeoh@example.com"),
                 new Address("Blk 50 Geylang Street 31, #03-40"),
-                getTagSet("friends"), new Rsvp("Pending")),
+                getTagSet("friends"), new Rsvp("P")),
             new Guest(new Name("Brian Smith"), new Phone("99311258"), new Email("brainsmith@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #10-20"),
-                getTagSet("colleagues", "friends"), new Rsvp("Accepted")),
+                getTagSet("colleagues", "friends"), new Rsvp("A")),
             new Guest(new Name("Catherine Lee"), new Phone("93212323"), new Email("catherine@example.com"),
                 new Address("Blk 131 Ang Mo Kio Street 77, #01-04"),
-                getTagSet("neighbours"), new Rsvp("Declined")),
+                getTagSet("neighbours"), new Rsvp("D")),
             new Guest(new Name("David Nguyen"), new Phone("87134653"), new Email("nguyen@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), new Rsvp("Pending")),
+                getTagSet("family"), new Rsvp("P")),
             new Guest(new Name("Mohammad Ismal"), new Phone("90783445"), new Email("ismal@example.com"),
                 new Address("Blk 47 Tampines Street 20, #20-35"),
-                getTagSet("classmates"), new Rsvp("Accepted")),
+                getTagSet("classmates"), new Rsvp("A")),
             new Guest(new Name("Tony Stark"), new Phone("83129340"), new Email("stark@example.com"),
                 new Address("Blk 50 Aljunied Street 91, #05-31"),
-                getTagSet("colleagues"), new Rsvp("Pending"))
+                getTagSet("colleagues"), new Rsvp("P"))
         };
     }
 

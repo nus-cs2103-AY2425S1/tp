@@ -30,21 +30,20 @@ public class RsvpTest {
         assertFalse(Rsvp.isValidRsvp("peter*")); // contains non-alphanumeric characters
 
         // valid Rsvp
-        assertTrue(Rsvp.isValidRsvp("Accepted"));
-        assertTrue(Rsvp.isValidRsvp("Pending"));
-        assertTrue(Rsvp.isValidRsvp("Declined"));
-        assertTrue(Rsvp.isValidRsvp("accePted"));
-        assertTrue(Rsvp.isValidRsvp("pending"));
-        assertTrue(Rsvp.isValidRsvp("declineD"));
-
+        assertTrue(Rsvp.isValidRsvp("P"));
+        assertTrue(Rsvp.isValidRsvp("A"));
+        assertTrue(Rsvp.isValidRsvp("D"));
+        assertTrue(Rsvp.isValidRsvp("p"));
+        assertTrue(Rsvp.isValidRsvp("a"));
+        assertTrue(Rsvp.isValidRsvp("d"));
     }
 
     @Test
     public void equals() {
-        Rsvp rsvp = new Rsvp("Accepted");
+        Rsvp rsvp = new Rsvp("A");
 
         // same values -> returns true
-        assertTrue(rsvp.equals(new Rsvp("Accepted")));
+        assertTrue(rsvp.equals(new Rsvp("A")));
 
         // same object -> returns true
         assertTrue(rsvp.equals(rsvp));
@@ -56,7 +55,7 @@ public class RsvpTest {
         assertFalse(rsvp.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(rsvp.equals(new Rsvp("Pending")));
+        assertFalse(rsvp.equals(new Rsvp("P")));
     }
 
 }

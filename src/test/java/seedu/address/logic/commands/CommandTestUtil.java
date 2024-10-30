@@ -43,9 +43,9 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_RSVP_ACCEPTED = "ACCEPTED";
-    public static final String VALID_RSVP_DECLINED = "DECLINED";
-    public static final String VALID_RSVP_PENDING = "PENDING";
+    public static final String VALID_RSVP_PENDING = "P";
+    public static final String VALID_RSVP_ACCEPTED = "A";
+    public static final String VALID_RSVP_DECLINED = "D";
     public static final String VALID_COMPANY_AMY = "Wedding here";
     public static final String VALID_COMPANY_BOB = "Wedding anywhere";
     public static final String VALID_BUDGET_AMY = "2000.00";

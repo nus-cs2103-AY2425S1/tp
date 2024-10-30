@@ -49,7 +49,6 @@ public class Rsvp {
      * @return true if the string is a valid RSVP status; false otherwise.
      */
     public static boolean isValidRsvp(String str) {
-
         if (!str.matches(VALIDATION_REGEX)) {
             return false;
         }

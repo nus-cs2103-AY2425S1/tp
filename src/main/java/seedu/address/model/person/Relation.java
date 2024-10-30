@@ -62,7 +62,6 @@ public class Relation {
      * @return true if the string is a valid relation; false otherwise.
      */
     public static boolean isValidRelation(String str) {
-
         if (!str.matches(VALIDATION_REGEX)) {
             return false;
         }

@@ -36,7 +36,7 @@ public class GuestUtil {
         sb.append(PREFIX_PHONE + guest.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + guest.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + guest.getAddress().value + " ");
-        sb.append(PREFIX_RSVP + guest.getRsvp().value + " ");
+        sb.append(PREFIX_RSVP + guest.getRsvp().rsvp + " ");
         sb.append(PREFIX_RELATION + guest.getRelation().relation + " ");
         guest.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -53,7 +53,7 @@ public class GuestUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getRsvp().ifPresent(rsvp -> sb.append(PREFIX_RSVP).append(rsvp.value).append(" "));
+        descriptor.getRsvp().ifPresent(rsvp -> sb.append(PREFIX_RSVP).append(rsvp.rsvp).append(" "));
         descriptor.getRelation().ifPresent(relation -> sb.append(PREFIX_RELATION)
                 .append(relation.relation).append(" "));
         if (descriptor.getTags().isPresent()) {
