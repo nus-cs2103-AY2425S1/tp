@@ -16,6 +16,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_SUPPORT
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalGuardians.CHICK;
 import static tutorease.address.testutil.TypicalGuardians.MEG;
+import static tutorease.address.testutil.TypicalStudents.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -100,5 +101,21 @@ public class GuardianTest {
                 + ", email=" + MEG.getEmail() + ", address=" + MEG.getAddress() + ", tags=" + MEG.getTags()
                 + ", role=" + MEG.getRole() + "}";
         assertEquals(expected, MEG.toString());
+    }
+    @Test
+    public void guardianIsGuardian() {
+        assertTrue(MEG.isGuardian());
+    }
+    @Test
+    public void guardianIsNotStudent() {
+        assertFalse(MEG.isStudent());
+    }
+    @Test
+    public void studentIsStudent() {
+        assertTrue(ALICE.isStudent());
+    }
+    @Test
+    public void studentIsNotGuardian() {
+        assertFalse(ALICE.isGuardian());
     }
 }

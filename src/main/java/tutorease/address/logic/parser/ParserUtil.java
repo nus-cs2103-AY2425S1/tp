@@ -1,6 +1,7 @@
 package tutorease.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -182,9 +183,7 @@ public class ParserUtil {
     public static StartDateTime parseStartDateTime(String startDateTime) throws ParseException {
         requireNonNull(startDateTime);
         String trimmedStartDateTime = startDateTime.trim();
-        if (!StartDateTime.isValidDateTime(trimmedStartDateTime)) {
-            throw new ParseException(StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
-        }
+        checkValidDateTime(startDateTime);
         return StartDateTime.createStartDateTime(trimmedStartDateTime);
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.UniqueLessonList;
+import tutorease.address.model.person.Person;
 
 /**
  * Wraps all data at the lesson-schedule level
@@ -90,7 +91,6 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
     public void resetData(ReadOnlyLessonSchedule newData) {
         lessons.setLessons(newData.getLessonList());
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -104,5 +104,14 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
 
         LessonSchedule otherLessonSchedule = (LessonSchedule) other;
         return lessons.equals(otherLessonSchedule.lessons);
+    }
+    /**
+     * Updates the person in all lessons in the list.
+     *
+     * @param target The person to be updated.
+     * @param editedPerson The updated person.
+     */
+    public void updatePersonInLessons(Person target, Person editedPerson) {
+        this.lessons.updatePersonInLessons(target, editedPerson);
     }
 }
