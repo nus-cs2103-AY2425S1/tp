@@ -31,9 +31,9 @@ public class FindClientTypeCommandParser implements Parser<FindClientTypeCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindClientTypeCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] clientTypeKeywords = trimmedArgs.split("\\s+");
 
-        return new FindClientTypeCommand(new ClientTypeContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindClientTypeCommand(new ClientTypeContainsKeywordsPredicate(Arrays.asList(clientTypeKeywords)));
     }
 
 }
