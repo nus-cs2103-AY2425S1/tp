@@ -133,6 +133,11 @@ public class AdvFilterCommand extends Command {
                 .toString();
     }
 
+    /**
+     * Compares Person's existing tag value with given filter tag value
+     * using Operator.
+     * Returns true if existing tag value matches filter criteria, false otherwise.
+     */
     public boolean compare(Operator operator, Tag tag, String tagValue) {
         return switch (operator) {
         case EQUAL -> tag.tagValue.equalsIgnoreCase(tagValue);
@@ -217,6 +222,10 @@ public class AdvFilterCommand extends Command {
         return operatorType;
     }
 
+    /**
+     * Tries to parse given String into a Double.
+     * Returns a valid Double object if parsable, null otherwise.
+     */
     public Double tryParseDouble(String value) {
         try {
             double d = Double.parseDouble(value);
