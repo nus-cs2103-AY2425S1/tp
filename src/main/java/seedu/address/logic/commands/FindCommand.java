@@ -18,7 +18,7 @@ public abstract class FindCommand<T> extends Command {
         + ": Finds all entities whose names contain any of "
         + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
         + "Parameters: ENTITY_TYPE (person/appt) KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + "person alice bob charlie";
+        + "Example: " + COMMAND_WORD + "person n/alice bob charlie";
 
     protected final Predicate<T> predicate;
 
