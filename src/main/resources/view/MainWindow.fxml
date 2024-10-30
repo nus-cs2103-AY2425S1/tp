@@ -7,11 +7,11 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="ClinicBuddy" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -33,7 +33,10 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-        <Label fx:id="date" styleClass="time_label" text="\$date" maxWidth="Infinity"/>
+        <HBox>
+          <Label fx:id="date" styleClass="time_label" text="\$date" maxHeight="Infinity"/>
+          <Label fx:id="operatingHours" styleClass="operating_hours_label"  maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+        </HBox>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>

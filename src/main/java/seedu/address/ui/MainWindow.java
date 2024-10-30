@@ -43,6 +43,9 @@ public class MainWindow extends UiPart<Stage> {
     private Label date;
 
     @FXML
+    private Label operatingHours;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
@@ -62,8 +65,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
-        System.out.println(TODAY.format(ENGLISH_FORMAT));
+
         date.setText("Today's Date is " + TODAY.format(ENGLISH_FORMAT));
+        operatingHours.setText("Operating hours are " + logic.getOperatingHours().getOpeningHour()
+                                + " to " + logic.getOperatingHours().getClosingHour());
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -185,6 +190,9 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            operatingHours.setText("Operating hours are " + logic.getOperatingHours().getOpeningHour()
+                    + " to " + logic.getOperatingHours().getClosingHour());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
