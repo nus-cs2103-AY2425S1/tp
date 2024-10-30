@@ -85,7 +85,7 @@ public class PriorityCommandParserTest {
 
     @Test
     public void parse_missingLevelArgument_throwsParseException() {
-        assertParseFailure(parser, "1 l/", // Missing level argument
+        assertParseFailure(parser, "1 l/",
                 PriorityCommandParser.MESSAGE_INVALID_PRIORITY_LEVEL);
     }
 
@@ -108,6 +108,24 @@ public class PriorityCommandParserTest {
         String userInput = "2 l/reset";
         PriorityCommand expectedCommand = new PriorityCommand(2, 3, true);
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_extraPrefix_throwsParseException() {
+        assertParseFailure(parser, "1 l/2 p/test",
+                String.format(PriorityCommandParser.MESSAGE_INVALID_PRIORITY_LEVEL));
+    }
+
+    @Test
+    public void parse_missingIndex_throwsParseException() {
+        assertParseFailure(parser, "l/2",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleIndexes_throwsParseException() {
+        assertParseFailure(parser, "1 2 l/2",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
     }
 
 }
