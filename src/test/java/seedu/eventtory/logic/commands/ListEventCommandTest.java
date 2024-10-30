@@ -1,5 +1,7 @@
 package seedu.eventtory.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.eventtory.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.eventtory.testutil.TypicalEvents.getTypicalEventTory;
@@ -35,5 +37,18 @@ public class ListEventCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
         assertCommandSuccess(new ListEventCommand(), model, ListEventCommand.MESSAGE_LIST_EVENT_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ListEventCommand listEventCommand = new ListEventCommand();
+        ListEventCommand other = new ListEventCommand();
+        ListVendorCommand listVendorCommand = new ListVendorCommand();
+        ListCommand listCommand = new ListCommand();
+
+        assertTrue(listEventCommand.equals(other));
+        // ListEventCommand != ListVendorCommand
+        assertFalse(listEventCommand.equals(listVendorCommand));
+        assertFalse(listEventCommand.equals(listCommand));
     }
 }

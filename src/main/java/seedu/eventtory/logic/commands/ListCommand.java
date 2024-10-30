@@ -36,6 +36,14 @@ public class ListCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this || (other instanceof ListCommand);
+        if (other == this) {
+            return true;
+        }
+
+        if (other instanceof ListCommand) {
+            return !(other instanceof ListEventCommand || other instanceof ListVendorCommand);
+        }
+
+        return false;
     }
 }
