@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,6 +21,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.storage.BackupManager;
 import seedu.address.storage.Storage;
@@ -33,6 +39,7 @@ public class ModelManager implements Model {
     private final BackupManager backupManager;
     private final FilteredList<Person> filteredPersons;
     private final Calendar calendar;
+    private OperatingHours operatingHours;
 
     /**
      * Initializes a ModelManager with the given address book, user preferences, and storage.
@@ -61,6 +68,7 @@ public class ModelManager implements Model {
         }
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.calendar = new Calendar(this.addressBook);
+        this.operatingHours = new OperatingHours(); // TBC currently only sets default
     }
 
     public ModelManager() throws IOException {
@@ -126,6 +134,8 @@ public class ModelManager implements Model {
         return calendar;
     }
 
+
+
     @Override
     public boolean hasAppointment(Person person) {
         return calendar.hasAppointment(person);
@@ -152,13 +162,33 @@ public class ModelManager implements Model {
         calendar.setAppointment(target, editedPerson);
     }
 
+
     private void triggerBackup(String actionDescription, Person target) {
         try {
             int index = backupManager.createIndexedBackup(storage.getAddressBookFilePath(), actionDescription);
             logger.info("Backup triggered for action: " + actionDescription + " at index " + index);
         } catch (IOException e) {
             logger.warning("Backup failed for action: " + actionDescription + " - " + e.getMessage());
+
+    @Override
+    public OperatingHours getOperatingHours() {
+        return operatingHours;
+    }
+
+    @Override
+    public boolean setOperatingHours(LocalTime openingHour, LocalTime closingHour) {
+        OperatingHours newOperatingHours = new OperatingHours(openingHour, closingHour);
+        if (newOperatingHours.isCalenderValid(calendar.getAppointments())) {
+            operatingHours = newOperatingHours;
+            return true;
         }
+        return false;
+    }
+
+    @Override
+    public boolean appointmentWithinOperatingHours(Appointment appointment) {
+        requireNonNull(appointment);
+        return operatingHours.isWithinOperatingHours(appointment);
     }
 
     // ============ Filtered Person List Accessors =======================================================

@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.isNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.ParserUtil.ENGLISH_FORMAT_WITH_TIME;
-import static seedu.address.logic.parser.ParserUtil.TIME;
+import static seedu.address.logic.parser.ParserUtil.TIME_FORMATTER;
 import static seedu.address.logic.parser.ParserUtil.parseDateTime;
 
 import java.time.LocalDate;
@@ -18,8 +18,7 @@ import seedu.address.model.person.exceptions.TimeParseException;
 public class Appointment {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in a format of \n"
-            + "dd/MM/yyyy HH:mm or dd MM yyyy HH:mm or dd-MM-yyyy HH:mm"
-            + "and must be between 8:30 - 21:30 inclusive";
+            + "dd/MM/yyyy HH:mm or dd MM yyyy HH:mm or dd-MM-yyyy HH:mm";
 
     public static final LocalDate TODAY = LocalDate.now();
 
@@ -111,7 +110,7 @@ public class Appointment {
             return LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME)
                                 .toLocalTime()
                                 .plusMinutes(15)
-                                .format(TIME);
+                                .format(TIME_FORMATTER);
         }
     }
 
@@ -151,10 +150,5 @@ public class Appointment {
      */
     public String toString() {
         return dateTime;
-    }
-
-    public static void main(String[] args) {
-        Appointment a = new Appointment("2024-01-01 12:30");
-        System.out.println(a);
     }
 }
