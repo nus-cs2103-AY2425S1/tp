@@ -1,4 +1,4 @@
-package seedu.address.model.util;
+package seedu.eventtory.model.util;
 
 import java.util.function.Predicate;
 

@@ -11,7 +11,7 @@ import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
-import seedu.address.ui.UiState;
+import seedu.eventtory.ui.UiState;
 
 /**
  * Unassigns a vendor from an event.
