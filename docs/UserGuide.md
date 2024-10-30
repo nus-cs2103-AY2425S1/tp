@@ -532,18 +532,18 @@ MATER's data is saved automatically as a JSON file at `[JAR file location]/data/
 
 <h2 style="color: #2980B9;"> <i class="fas fa-terminal icon"></i> Command Summary</h2>
 
-Action             | Format & Examples
--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Client**     | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br> e.g., `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br> e.g., `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels`
-**Add Car**   | `add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL ` <br>e.g., `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
-**Delete Car**   | `del-car INDEX`<br>e.g., `del-car 1`
-**List Clients**   | `list`
-**Edit Client**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>e.g., `edit 1 p/91234567 e/johndoe@example.com`<br>e.g., `edit 2 n/Betsy Crower i/`
-**Find Clients**   | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find John`<br>e.g., `find SJH9514P`
-**View Client**   | `view INDEX`<br>e.g., `view 1`
-**Delete Client**  | `del-client INDEX`<br>e.g., `del-client 3`
-**Clear**          | `clear`
-**Exit**           | `exit`
-**Help**           | `help`
+| Action            | Format         | Examples              |
+|-------------------|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Client**    | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>`add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels` |
+| **Add Car**       | `add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL`   | `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`           |
+| **Delete Car**    | `del-car INDEX`            | `del-car 1`    |
+| **List Clients**  | `list` |   |
+| **Edit Client**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `edit 1 p/91234567 e/johndoe@example.com`<br>`edit 2 n/Betsy Crower i/`    |
+| **Find Clients**  | `find KEYWORD [MORE_KEYWORDS]`      | `find John`<br>`find SJH9514P`             |
+| **View Client**   | `view INDEX`                    | `view 1`     |
+| **Delete Client** | `del-client INDEX`   | `del-client 3`          |
+| **Clear**         | `clear`       |              |
+| **Exit**          | `exit`                |                 |
+| **Help**          | `help`               |                 |
 
 Back to Features [section](#features).
