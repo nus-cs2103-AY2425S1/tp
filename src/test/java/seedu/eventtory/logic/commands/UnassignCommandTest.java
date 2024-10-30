@@ -43,7 +43,8 @@ class UnassignCommandTest {
         UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
         CommandResult result = unassignCommand.execute(model);
 
-        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS, vendor.getName(), event.getName()), result.getFeedbackToUser());
+        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS,
+            vendor.getName(), event.getName()), result.getFeedbackToUser());
         assertFalse(model.isVendorAssignedToEvent(vendor, event));
     }
 
@@ -67,7 +68,8 @@ class UnassignCommandTest {
         UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
         CommandResult result = unassignCommand.execute(model);
 
-        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS, vendor.getName(), event.getName()), result.getFeedbackToUser());
+        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS, vendor.getName(),
+            event.getName()), result.getFeedbackToUser());
         assertFalse(model.isVendorAssignedToEvent(vendor, event));
     }
 
