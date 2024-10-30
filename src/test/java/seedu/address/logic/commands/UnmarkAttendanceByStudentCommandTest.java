@@ -11,15 +11,19 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Attendance;
+import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -61,6 +65,26 @@ public class UnmarkAttendanceByStudentCommandTest {
                 outOfBoundsIndex, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
                 new Tutorial("Mathematics"));
         assertCommandFailure(unmarkAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void exceute_validInputs_unmarksAttendance() throws CommandException {
+        Index index = Index.fromOneBased(1);
+        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Tutorial tutorial = new Tutorial("Math");
+
+        UnmarkAttendanceByStudentCommand unmarkAttendanceByStudentCommand =
+                new UnmarkAttendanceByStudentCommand(index, attendance, tutorial);
+        CommandResult result = unmarkAttendanceByStudentCommand.execute(model);
+
+        Person student = model.getFilteredPersonList().get(0);
+
+        assertEquals(String.format(UnmarkAttendanceByStudentCommand.MESSAGE_UNMARK_ATTENDANCE_STUDENT_SUCCESS,
+                student.getName(), tutorial.getSubject(), attendance), result.getFeedbackToUser());
+
+        Participation updatedParticipation = new Participation(student, tutorial, List.of(attendance));
+
+        assertTrue(model.getParticipationList().contains(updatedParticipation));
     }
 
     @Test
