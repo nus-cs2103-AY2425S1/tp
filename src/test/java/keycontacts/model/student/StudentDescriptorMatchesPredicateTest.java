@@ -108,6 +108,30 @@ public class StudentDescriptorMatchesPredicateTest {
     }
 
     @Test
+    public void test_studentGroupMatches_returnsTrue() {
+        // Arrange
+        FindStudentDescriptor descriptor = new FindStudentDescriptor();
+        descriptor.setGroup("Group 1");
+        StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
+        Student student = new StudentBuilder().withGroup("Group 1").build();
+
+        // Act & Assert
+        assertTrue(predicate.test(student));
+    }
+
+    @Test
+    public void test_studentGroupDoesNotMatch_returnsFalse() {
+        // Arrange
+        FindStudentDescriptor descriptor = new FindStudentDescriptor();
+        descriptor.setGradeLevel("Group 2");
+        StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
+        Student student = new StudentBuilder().withGradeLevel("Group 1").build();
+
+        // Act & Assert
+        assertFalse(predicate.test(student));
+    }
+
+    @Test
     public void test_studentMultipleFieldMatches_returnsTrue() {
         // Arrange
         FindStudentDescriptor descriptor = new FindStudentDescriptor();

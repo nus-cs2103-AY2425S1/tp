@@ -3,6 +3,7 @@ package keycontacts.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GROUP;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -23,11 +24,12 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: \n"
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_GRADE_LEVEL + "GRADE_LEVEL]\n"
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME_KEYWORD] "
+            + "[" + PREFIX_PHONE + "PHONE_KEYWORD] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORD] "
+            + "[" + PREFIX_GRADE_LEVEL + "GRADE_LEVEL_KEYWORD] "
+            + "[" + PREFIX_GROUP + "GROUP_KEYWORD]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Alice " + PREFIX_PHONE + "91234567";
 
     private final StudentDescriptorMatchesPredicate predicate;
@@ -78,6 +80,7 @@ public class FindCommand extends Command {
         private String address;
         private String phone;
         private String gradeLevel;
+        private String group;
 
         /**
          * Default constructor that initializes all value to emtpy string
@@ -87,28 +90,29 @@ public class FindCommand extends Command {
             this.address = "";
             this.phone = "";
             this.gradeLevel = "";
+            this.group = "";
         }
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
-        public FindStudentDescriptor(String name, String address, String phone, String gradeLevel) {
+        public FindStudentDescriptor(String name, String address, String phone, String gradeLevel, String group) {
             setName(name);
             setAddress(address);
             setPhone(phone);
             setGradeLevel(gradeLevel);
+            setGroup(group);
         }
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public FindStudentDescriptor(FindStudentDescriptor toCopy) {
             setName(toCopy.name);
             setAddress(toCopy.address);
             setPhone(toCopy.phone);
             setGradeLevel(toCopy.gradeLevel);
+            setGroup(toCopy.group);
         }
 
         public void setName(String name) {
@@ -127,6 +131,10 @@ public class FindCommand extends Command {
             this.gradeLevel = gradeLevel;
         }
 
+        public void setGroup(String group) {
+            this.group = group;
+        }
+
         public String getName() {
             return name;
         }
@@ -141,6 +149,10 @@ public class FindCommand extends Command {
 
         public String getGradeLevel() {
             return gradeLevel;
+        }
+
+        public String getGroup() {
+            return group;
         }
 
         /**
@@ -163,6 +175,9 @@ public class FindCommand extends Command {
             if (!gradeLevel.isEmpty()) {
                 matches = matches && student.getGradeLevel().value.toLowerCase().contains(gradeLevel.toLowerCase());
             }
+            if (!group.isEmpty()) {
+                matches = matches && student.getGroup().groupName.toLowerCase().contains(group.toLowerCase());
+            }
             return matches;
         }
 
@@ -177,11 +192,12 @@ public class FindCommand extends Command {
             }
 
             FindStudentDescriptor otherDescriptor = (FindStudentDescriptor) other;
-            boolean result = name.equals(otherDescriptor.name)
+            // state check
+            return name.equals(otherDescriptor.name)
                     && address.equals(otherDescriptor.address)
                     && phone.equals(otherDescriptor.phone)
-                    && gradeLevel.equals(otherDescriptor.gradeLevel); // state check
-            return result;
+                    && gradeLevel.equals(otherDescriptor.gradeLevel)
+                    && group.equals(otherDescriptor.group);
         }
     }
 }

@@ -10,7 +10,16 @@ import java.util.List;
  * field
  */
 public class StudentComparator implements Comparator<Student> {
-
+    public static final String MESSAGE_NAME_ASCENDING = "Name (ascending)";
+    public static final String MESSAGE_NAME_DESCENDING = "Name (descending)";
+    public static final String MESSAGE_PHONE_ASCENDING = "Phone (ascending)";
+    public static final String MESSAGE_PHONE_DESCENDING = "Phone (descending)";
+    public static final String MESSAGE_ADDRESS_ASCENDING = "Address (ascending)";
+    public static final String MESSAGE_ADDRESS_DESCENDING = "Address (descending)";
+    public static final String MESSAGE_GRADE_LEVEL_ASCENDING = "Grade level (ascending)";
+    public static final String MESSAGE_GRADE_LEVEL_DESCENDING = "Grade level (descending)";
+    public static final String MESSAGE_GROUP_ASCENDING = "Group (ascending)";
+    public static final String MESSAGE_GROUP_DESCENDING = "Group (descending)";
     private final List<Comparator<Student>> comparators;
     private final List<String> comparatorMessages;
 
@@ -48,33 +57,42 @@ public class StudentComparator implements Comparator<Student> {
 
     public static StudentComparatorByField getComparatorForName(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
-            return new StudentComparatorByField(Comparator.comparing(Student::getName), "Name (ascending)");
+            return new StudentComparatorByField(Comparator.comparing(Student::getName), MESSAGE_NAME_ASCENDING);
         }
-        return new StudentComparatorByField(Comparator.comparing(Student::getName).reversed(), "Name (descending)");
+        return new StudentComparatorByField(Comparator.comparing(Student::getName).reversed(), MESSAGE_NAME_DESCENDING);
     }
 
     public static StudentComparatorByField getComparatorForPhone(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
-            return new StudentComparatorByField(Comparator.comparing(Student::getPhone), "Phone (ascending)");
+            return new StudentComparatorByField(Comparator.comparing(Student::getPhone), MESSAGE_PHONE_ASCENDING);
         }
-        return new StudentComparatorByField(Comparator.comparing(Student::getPhone).reversed(), "Phone (descending)");
+        return new StudentComparatorByField(Comparator.comparing(Student::getPhone).reversed(),
+                MESSAGE_PHONE_DESCENDING);
     }
 
     public static StudentComparatorByField getComparatorForAddress(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
-            return new StudentComparatorByField(Comparator.comparing(Student::getAddress), "Address (ascending)");
+            return new StudentComparatorByField(Comparator.comparing(Student::getAddress), MESSAGE_ADDRESS_ASCENDING);
         }
         return new StudentComparatorByField(Comparator.comparing(Student::getAddress).reversed(),
-                "Address (descending)");
+                MESSAGE_ADDRESS_DESCENDING);
     }
 
     public static StudentComparatorByField getComparatorForGradeLevel(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
             return new StudentComparatorByField(Comparator.comparing(Student::getGradeLevel),
-                    "Grade Level (ascending)");
+                    MESSAGE_GRADE_LEVEL_ASCENDING);
         }
         return new StudentComparatorByField(Comparator.comparing(Student::getGradeLevel).reversed(),
-                "Grade Level (descending)");
+                MESSAGE_GRADE_LEVEL_DESCENDING);
+    }
+
+    public static StudentComparatorByField getComparatorForGroup(SortOrder sortOrder) {
+        if (sortOrder.isAscending()) {
+            return new StudentComparatorByField(Comparator.comparing(Student::getGroup), MESSAGE_GROUP_ASCENDING);
+        }
+        return new StudentComparatorByField(Comparator.comparing(Student::getGroup).reversed(),
+                MESSAGE_GROUP_DESCENDING);
     }
 
     /**
@@ -82,6 +100,7 @@ public class StudentComparator implements Comparator<Student> {
      * Can be either ascending (ASC) or descending (DESC)
      */
     public static class SortOrder {
+        public static final String MESSAGE_INVALID_SORT_ORDER = "Invalid sort order";
 
         private static final String ASCENDING = "ASC";
         private static final String DESCENDING = "DESC";
@@ -94,7 +113,7 @@ public class StudentComparator implements Comparator<Student> {
          */
         public SortOrder(String sortOrder) {
             if (!isValidSortOrder(sortOrder)) {
-                throw new IllegalArgumentException("Invalid sort order");
+                throw new IllegalArgumentException(MESSAGE_INVALID_SORT_ORDER);
             }
             this.sortOrder = sortOrder;
         }

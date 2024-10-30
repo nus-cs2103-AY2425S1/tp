@@ -23,20 +23,24 @@ public class FindStudentDescriptorTest {
         assertEquals("", descriptor.getAddress());
         assertEquals("", descriptor.getPhone());
         assertEquals("", descriptor.getGradeLevel());
+        assertEquals("", descriptor.getGroup());
     }
 
     @Test
     public void testParameterizedConstructor() {
-        FindStudentDescriptor descriptor = new FindStudentDescriptor("John", "123 Street", "12345678", "ABRSM 5");
+        FindStudentDescriptor descriptor = new FindStudentDescriptor("John", "123 Street", "12345678", "ABRSM 5",
+                "John's Group");
         assertEquals("John", descriptor.getName());
         assertEquals("123 Street", descriptor.getAddress());
         assertEquals("12345678", descriptor.getPhone());
         assertEquals("ABRSM 5", descriptor.getGradeLevel());
+        assertEquals("John's Group", descriptor.getGroup());
     }
 
     @Test
     public void testCopyConstructor() {
-        FindStudentDescriptor original = new FindStudentDescriptor("John", "123 Street", "12345678", "ABRSM 10");
+        FindStudentDescriptor original = new FindStudentDescriptor("John", "123 Street", "12345678", "ABRSM 10",
+                "John's Group");
         FindStudentDescriptor copy = new FindStudentDescriptor(original);
         assertEquals(original, copy);
     }
@@ -57,30 +61,36 @@ public class FindStudentDescriptorTest {
 
     @Test
     public void testMatches() {
-        FindStudentDescriptor descriptor = new FindStudentDescriptor("John", "", "", "");
+        FindStudentDescriptor descriptor = new FindStudentDescriptor("John", "", "", "", "");
         Student student = new Student(new Name("John"), new Phone("12345678"), new Address("123 Street"),
-                new GradeLevel("ABRSM 3"), new Group(""));
+                new GradeLevel("ABRSM 3"), new Group("John's Group"));
 
         assertTrue(descriptor.matches(student));
 
-        descriptor = new FindStudentDescriptor("", "123 Street", "", "");
+        descriptor = new FindStudentDescriptor("", "123 Street", "", "", " ");
         assertTrue(descriptor.matches(student));
 
-        descriptor = new FindStudentDescriptor("", "", "12345678", "");
+        descriptor = new FindStudentDescriptor("", "", "12345678", "", "");
         assertTrue(descriptor.matches(student));
 
-        descriptor = new FindStudentDescriptor("", "", "", "ABRSM 3");
+        descriptor = new FindStudentDescriptor("", "", "", "ABRSM 3", "");
         assertTrue(descriptor.matches(student));
 
-        descriptor = new FindStudentDescriptor("Jane", "", "", "");
+        descriptor = new FindStudentDescriptor("", "", "", "", "John");
+        assertTrue(descriptor.matches(student));
+
+        descriptor = new FindStudentDescriptor("Jane", "", "", "", "");
         assertFalse(descriptor.matches(student));
     }
 
     @Test
     public void testEquals() {
-        FindStudentDescriptor descriptor1 = new FindStudentDescriptor("John", "123 Street", "12345678", "Grade 10");
-        FindStudentDescriptor descriptor2 = new FindStudentDescriptor("John", "123 Street", "12345678", "Grade 10");
-        FindStudentDescriptor descriptor3 = new FindStudentDescriptor("Jane", "456 Avenue", "87654321", "Grade 11");
+        FindStudentDescriptor descriptor1 = new FindStudentDescriptor("John", "123 Street", "12345678", "Grade 10",
+                "Group 1");
+        FindStudentDescriptor descriptor2 = new FindStudentDescriptor("John", "123 Street", "12345678", "Grade 10",
+                "Group 1");
+        FindStudentDescriptor descriptor3 = new FindStudentDescriptor("Jane", "456 Avenue", "87654321", "Grade 11",
+                "Group 2");
 
         assertTrue(descriptor1.equals(descriptor2));
         assertFalse(descriptor1.equals(descriptor3));

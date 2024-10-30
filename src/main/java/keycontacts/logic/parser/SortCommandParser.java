@@ -3,6 +3,7 @@ package keycontacts.logic.parser;
 import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GROUP;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -25,18 +26,19 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
 
         ArgumentList argList = ArgumentTokenizer.tokenizeToList(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS,
-                PREFIX_GRADE_LEVEL);
+                PREFIX_GRADE_LEVEL, PREFIX_GROUP);
 
-        if (argList.getValue(0).equals("clear")) {
+        if (argList.getValue(0).equalsIgnoreCase("clear")) {
             return new SortCommand(null);
         }
 
-        if (!argList.anyPrefixesPresent(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_GRADE_LEVEL)) {
+        if (!argList.anyPrefixesPresent(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_GRADE_LEVEL, PREFIX_GROUP)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        argList.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_GRADE_LEVEL);
+        argList.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_GRADE_LEVEL,
+                PREFIX_GROUP);
 
         StudentComparator studentComparator = new StudentComparator();
 
@@ -54,6 +56,8 @@ public class SortCommandParser implements Parser<SortCommand> {
                 studentComparator.addComparator(StudentComparator.getComparatorForAddress(new SortOrder(sortOrder)));
             } else if (argList.getPrefix(i).equals(PREFIX_GRADE_LEVEL)) {
                 studentComparator.addComparator(StudentComparator.getComparatorForGradeLevel(new SortOrder(sortOrder)));
+            } else if (argList.getPrefix(i).equals(PREFIX_GROUP)) {
+                studentComparator.addComparator(StudentComparator.getComparatorForGroup(new SortOrder(sortOrder)));
             }
         }
 

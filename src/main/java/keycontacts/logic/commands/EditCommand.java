@@ -90,8 +90,7 @@ public class EditCommand extends Command {
 
             // handle the case where the student is removed from a group
             // in this case we clear the student's lessons (as they are being removed from the group)
-            if (!studentToEdit.getGroup().isNoGroup()
-                    && !editedStudent.getGroup().isSameGroup(studentToEdit.getGroup())) {
+            if (!studentToEdit.getGroup().isNoGroup()) {
                 model.setStudent(studentToEdit, editedStudent.withLessons(null, new HashSet<>(), new HashSet<>()));
             } else {
                 model.setStudent(studentToEdit, editedStudent);

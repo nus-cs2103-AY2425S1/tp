@@ -18,6 +18,7 @@ import keycontacts.logic.Logic;
 import keycontacts.logic.commands.CommandResult;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.Date;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CalendarView calendarView;
 
     @FXML
     private AnchorPane leftPage;
@@ -147,7 +149,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        CalendarView calendarView = new CalendarView();
+        calendarView = new CalendarView(logic.getUnfilteredStudentList());
         calendarDisplayPlaceholder.getChildren().add(calendarView.getRoot());
 
         Binder binder = new Binder(primaryStage.getScene().getHeight());
@@ -177,6 +179,13 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Updates the calendar with a new date.
+     */
+    public void handleCalendar(Date date) {
+        calendarView.update(date);
     }
 
     void show() {
@@ -212,6 +221,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.getDate() != null) {
+                handleCalendar(commandResult.getDate());
             }
 
             if (commandResult.isExit()) {
