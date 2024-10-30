@@ -2,11 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.AbstractMap;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +11,9 @@ import java.util.stream.Collectors;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Person in the address book.
@@ -30,20 +29,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Map<Network, Set<PublicAddress>> publicAddresses;
+    private final PublicAddressesComposition publicAddressesComposition;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Map<Network, Set<PublicAddress>> publicAddresses, Set<Tag> tags) {
+                  PublicAddressesComposition publicAddresses, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, publicAddresses, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.publicAddresses = new HashMap<>(publicAddresses);
-        publicAddresses.forEach((network, addresses) -> this.publicAddresses.put(network, new HashSet<>(addresses)));
+        this.publicAddressesComposition = publicAddresses;
         this.tags.addAll(tags);
     }
 
@@ -64,7 +62,7 @@ public class Person {
     }
 
     public Set<PublicAddress> getPublicAddressesByNetwork(Network network) {
-        return Collections.unmodifiableSet(publicAddresses.getOrDefault(network, new HashSet<>()));
+        return publicAddressesComposition.getByNetwork(network);
     }
 
 
@@ -75,39 +73,17 @@ public class Person {
      * @return
      */
     public Boolean hasPublicAddressStringAmongAllNetworks(String publicAddressString) {
-        return publicAddresses.values().stream()
-                .flatMap(Set::stream)
-                .anyMatch(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString));
-    }
-
-    public Set<PublicAddress> getPublicAddressObjectByPublicAddressStringMap(String publicAddressString) {
-        return publicAddresses.values().stream()
-                .flatMap(Set::stream)
-                .filter(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString))
-                .collect(Collectors.toSet());
-    }
-
-    public Map<Network, Set<PublicAddress>> getPublicAddressObjectByPublicAddressMap(String publicAddressString) {
-        return publicAddresses.entrySet().stream()
-                .map(entry -> {
-                    Set<PublicAddress> filteredAddresses = entry.getValue().stream()
-                            .filter(pa -> pa.isPublicAddressStringEquals(publicAddressString))
-                            .collect(Collectors.toSet());
-                    return new AbstractMap.SimpleEntry<>(entry.getKey(), filteredAddresses);
-                })
-                .filter(entry -> !entry.getValue().isEmpty())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return publicAddressesComposition.hasPublicAddress(publicAddressString);
     }
 
 
-    public void setPublicAddressesByNetwork(Network network, Set<PublicAddress> addresses) {
-        requireAllNonNull(network, addresses);
-        if (addresses.isEmpty()) {
-            this.publicAddresses.remove(network);
-            return;
+    public PublicAddressesComposition getPublicAddressObjectByPublicAddressMap(String publicAddressString) {
+        return publicAddressesComposition.filterByPublicAddress(publicAddressString);
+    }
 
-        }
-        this.publicAddresses.put(network, new HashSet<>(addresses));
+
+    public void addPublicAddressToNetwork(Network network, Set<PublicAddress> addresses) {
+        publicAddressesComposition.addPublicAddressesToNetwork(network, addresses);
     }
 
     /**
@@ -115,8 +91,8 @@ public class Person {
      *
      * @return publicAddresses
      */
-    public Map<Network, Set<PublicAddress>> getPublicAddresses() {
-        return Collections.unmodifiableMap(publicAddresses);
+    public PublicAddressesComposition getPublicAddressesComposition() {
+        return publicAddressesComposition.copy();
     }
 
     /**
@@ -126,11 +102,8 @@ public class Person {
      * @param label   The label to match against the public addresses
      * @return true if a public address with the specified label exists for the given network, false otherwise
      */
-    public boolean hasPublicAddressWithLabel(Network network, String label) {
-        return publicAddresses
-                .getOrDefault(network, Collections.emptySet())
-                .stream()
-                .anyMatch(addr -> addr.label.equals(label));
+    public boolean hasPublicAddressWithLabelWithinNetwork(Network network, String label) {
+        return publicAddressesComposition.hasPublicAddressWithLabelWithinNetwork(network, label);
     }
 
     /**
@@ -141,26 +114,16 @@ public class Person {
      * @return A new {@code Person} object with the updated public address
      */
     public Person withUpdatedPublicAddress(PublicAddress newPublicAddress) {
-        Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses
-                .entrySet()
-                .stream()
-                .map(entry -> Map.entry(
-                        entry.getKey(),
-                        entry.getKey().equals(newPublicAddress.getNetwork())
-                        ? updateAddressSet(entry.getValue(), newPublicAddress)
-                        : entry.getValue()
-                ))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.add(newPublicAddress);
         return new Person(name, phone, email, address, updatedPublicAddresses, tags);
     }
 
     private Set<PublicAddress> updateAddressSet(Set<PublicAddress> addresses, PublicAddress newAddress) {
         return addresses.stream()
-                .map(addr -> addr.label.equals(newAddress.label)
-                             ? newAddress
-                             : addr)
-                .collect(Collectors.toSet());
+            .map(addr -> addr.label.equals(newAddress.label)
+                ? newAddress
+                : addr)
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -181,7 +144,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -200,29 +163,29 @@ public class Person {
         }
 
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && publicAddresses.equals(otherPerson.publicAddresses)
-                && tags.equals(otherPerson.tags);
+            && phone.equals(otherPerson.phone)
+            && email.equals(otherPerson.email)
+            && address.equals(otherPerson.address)
+            && publicAddressesComposition.equals(otherPerson.publicAddressesComposition)
+            && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, publicAddresses, tags);
+        return Objects.hash(name, phone, email, address, publicAddressesComposition, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("publicAddresses", publicAddresses)
-                .add("tags", tags)
-                .toString();
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("address", address)
+            .add("publicAddresses", publicAddressesComposition)
+            .add("tags", tags)
+            .toString();
     }
 
 }

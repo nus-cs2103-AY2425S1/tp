@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,8 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AbstractEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.addresses.Network;
-import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -76,13 +74,14 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         return new EditCommand(index, editPersonDescriptor);
     }
+
     /**
      * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>}
      * if {@code publicAddresses} is non-empty.
      * If {@code publicAddresses} contain only one element which is an empty string, it will be parsed into a
      * {@code Map<Network, Set<PublicAddress>>} containing zero networks.
      */
-    private Optional<Map<Network, Set<PublicAddress>>> parsePublicAddressesForEdit(Collection<String> publicAddresses)
+    private Optional<PublicAddressesComposition> parsePublicAddressesForEdit(Collection<String> publicAddresses)
             throws ParseException {
         assert publicAddresses != null;
 

@@ -22,6 +22,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -64,8 +65,8 @@ public class AbstractEditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Map<Network, Set<PublicAddress>> updatedPublicAddresses =
-                editPersonDescriptor.getPublicAddresses().orElse(personToEdit.getPublicAddresses());
+        PublicAddressesComposition updatedPublicAddresses =
+            editPersonDescriptor.getPublicAddresses().orElse(personToEdit.getPublicAddressesComposition());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPublicAddresses, updatedTags);
@@ -83,10 +84,10 @@ public class AbstractEditCommand extends Command {
     }
 
     private CommandResult saveEditedPerson(
-            Model model,
-            Person personToEdit,
-            Person editedPerson,
-            String successMessage
+        Model model,
+        Person personToEdit,
+        Person editedPerson,
+        String successMessage
     ) throws CommandException {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -99,6 +100,7 @@ public class AbstractEditCommand extends Command {
 
     /**
      * Executes the edit command with the given model.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult with the success message.
      * @throws CommandException
@@ -113,15 +115,15 @@ public class AbstractEditCommand extends Command {
     /**
      * Executes the edit command with the given function to create the edited person.
      *
-     * @param model               {@code Model} which the command should operate on.
-     * @param makeEditedPerson    Function to create the edited person.
+     * @param model            {@code Model} which the command should operate on.
+     * @param makeEditedPerson Function to create the edited person.
      * @return CommandResult with the success message.
      * @throws CommandException If the index is invalid or the person to edit does not exist.
      */
     CommandResult execute(
-            Model model,
-            BiFunction<? super Person, ? super EditPersonDescriptor, ? extends Person> makeEditedPerson,
-            String successMessage
+        Model model,
+        BiFunction<? super Person, ? super EditPersonDescriptor, ? extends Person> makeEditedPerson,
+        String successMessage
     ) throws CommandException {
         Person personToEdit = getPersonToEdit(model);
         Person editedPerson = makeEditedPerson.apply(personToEdit, editPersonDescriptor);
@@ -135,21 +137,20 @@ public class AbstractEditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AbstractEditCommand)) {
+        if (!(other instanceof AbstractEditCommand otherEditCommand)) {
             return false;
         }
 
-        AbstractEditCommand otherEditCommand = (AbstractEditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                   && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
+                   .add("index", index)
+                   .add("editPersonDescriptor", editPersonDescriptor)
+                   .toString();
     }
 
     /**
@@ -161,7 +162,7 @@ public class AbstractEditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Map<Network, Set<PublicAddress>> publicAddresses;
+        private PublicAddressesComposition publicAddresses;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {
@@ -224,24 +225,26 @@ public class AbstractEditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code publicAddresses} is null.
          */
-        public Optional<Map<Network, Set<PublicAddress>>> getPublicAddresses() {
+        public Optional<PublicAddressesComposition> getPublicAddresses() {
             return (publicAddresses != null)
-                    ? Optional.of(Collections.unmodifiableMap(publicAddresses)) : Optional.empty();
+                       ? Optional.of(publicAddresses) : Optional.empty();
         }
 
         /**
          * Sets {@code publicAddresses} to this object's {@code publicAddresses}.
          * A defensive copy of {@code publicAddresses} is used internally.
          */
-        public void setPublicAddresses(Map<Network, Set<PublicAddress>> publicAddresses) {
-            if (publicAddresses != null) {
-                this.publicAddresses = publicAddresses.entrySet().stream()
+        public void setPublicAddresses(PublicAddressesComposition publicAddressesComposition) {
+            if (publicAddressesComposition != null) {
+                Map<Network, Set<PublicAddress>> publicAddresses =
+                    publicAddressesComposition.getPublicAddresses().entrySet().stream()
                         .collect(Collectors.toMap(
-                                entry -> entry.getKey(), // Assuming Network is immutable
-                                entry -> new HashSet<>(entry.getValue()), (
-                                        v1, v2) -> v1,
-                                HashMap::new
+                            entry -> entry.getKey(), // Assuming Network is immutable
+                            entry -> new HashSet<>(entry.getValue()), (
+                                v1, v2) -> v1,
+                            HashMap::new
                         ));
+                this.publicAddresses = new PublicAddressesComposition(publicAddresses);
             } else {
                 this.publicAddresses = null;
             }
@@ -271,29 +274,27 @@ public class AbstractEditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditPersonDescriptor otherEditPersonDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(publicAddresses, otherEditPersonDescriptor.publicAddresses)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                       && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                       && Objects.equals(email, otherEditPersonDescriptor.email)
+                       && Objects.equals(address, otherEditPersonDescriptor.address)
+                       && Objects.equals(publicAddresses, otherEditPersonDescriptor.publicAddresses)
+                       && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+                       .add("name", name)
+                       .add("phone", phone)
+                       .add("email", email)
+                       .add("address", address)
+                       .add("tags", tags)
+                       .toString();
         }
     }
 }

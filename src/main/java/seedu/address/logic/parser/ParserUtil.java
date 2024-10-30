@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressFactory;
+import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -125,7 +126,7 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>}.
      */
-    public static Map<Network, Set<PublicAddress>> parsePublicAddresses(Collection<String> publicAddresses)
+    public static PublicAddressesComposition parsePublicAddresses(Collection<String> publicAddresses)
             throws ParseException {
         requireNonNull(publicAddresses);
         Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
@@ -151,7 +152,7 @@ public class ParserUtil {
             }
             publicAddressesMap.get(parsedNetwork).add(parsedPublicAddress);
         }
-        return publicAddressesMap;
+        return new PublicAddressesComposition(publicAddressesMap);
     }
 
     /**

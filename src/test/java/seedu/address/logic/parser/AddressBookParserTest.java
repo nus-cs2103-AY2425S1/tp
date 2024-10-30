@@ -33,6 +33,7 @@ import seedu.address.logic.commands.SearchPublicAddressCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.BtcAddress;
 import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -56,14 +57,15 @@ public class AddressBookParserTest {
     public void parseCommand_addPublicAddress() throws Exception {
         final String publicAddress = "Some public address.";
         AddPublicAddressCommand command = (AddPublicAddressCommand) parser.parseCommand(
-                AddPublicAddressCommand.COMMAND_WORD + " "
-                        + "1 "
-                        + PREFIX_PUBLIC_ADDRESS + publicAddress + " "
-                        + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
-                        + PREFIX_PUBLIC_ADDRESS_LABEL + "wallet1");
+            AddPublicAddressCommand.COMMAND_WORD + " "
+                + "1 "
+                + PREFIX_PUBLIC_ADDRESS + publicAddress + " "
+                + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "wallet1");
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        editPersonDescriptor.setPublicAddresses(Map.of(Network.BTC, Set.of(new BtcAddress(publicAddress, "wallet1"))));
+        editPersonDescriptor.setPublicAddresses(new PublicAddressesComposition(Map.of(Network.BTC,
+            Set.of(new BtcAddress(publicAddress, "wallet1")))));
 
         assertEquals(new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor), command);
     }
@@ -77,7 +79,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+            DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -86,7 +88,7 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+            + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -100,7 +102,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -120,25 +122,25 @@ public class AddressBookParserTest {
     public void parseCommand_searchPublicAddress() throws Exception {
         final String publicAddress = "Some public address.";
         SearchPublicAddressCommand command = (SearchPublicAddressCommand) parser.parseCommand(
-                SearchPublicAddressCommand.COMMAND_WORD + " "
-                        + PREFIX_PUBLIC_ADDRESS + publicAddress);
+            SearchPublicAddressCommand.COMMAND_WORD + " "
+                + PREFIX_PUBLIC_ADDRESS + publicAddress);
         assertEquals(new SearchPublicAddressCommand(publicAddress), command);
     }
 
     @Test
     public void parseCommand_editPublicAddress() throws Exception {
         EditPublicAddressCommand command = (EditPublicAddressCommand) parser.parseCommand(
-                EditPublicAddressCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL + "label "
-                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS);
+            EditPublicAddressCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL + "label "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS);
         assertEquals(new EditPublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, VALID_PUBLIC_ADDRESS, "label"),
-                command);
+            command);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+            -> parser.parseCommand(""));
     }
 
     @Test
