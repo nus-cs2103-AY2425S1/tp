@@ -55,6 +55,28 @@ public class DeleteNCommandTest {
     }
 
     @Test
+    public void execute_cancelClearAddressBook_success() throws CommandException {
+        StaticContext.setClearAddressBookPending(true);
+
+        DeleteNCommand deleteNCommand = new DeleteNCommand();
+        CommandResult commandResult = deleteNCommand.execute(model);
+
+        assertCommandSuccess(deleteNCommand, model, DeleteNCommand.MESSAGE_CANCEL_DELETE, model);
+        assertEquals(false, StaticContext.isClearAddressBookPending());
+    }
+
+    @Test
+    public void execute_cancelClearWeddingBook_success() throws CommandException {
+        StaticContext.setClearWeddingBookPending(true);
+
+        DeleteNCommand deleteNCommand = new DeleteNCommand();
+        CommandResult commandResult = deleteNCommand.execute(model);
+
+        assertCommandSuccess(deleteNCommand, model, DeleteNCommand.MESSAGE_CANCEL_DELETE, model);
+        assertEquals(false, StaticContext.isClearWeddingBookPending());
+    }
+
+    @Test
     public void equals() {
         DeleteNCommand deleteNCommand1 = new DeleteNCommand();
         DeleteNCommand deleteNCommand2 = new DeleteNCommand();

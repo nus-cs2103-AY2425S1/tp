@@ -7,7 +7,9 @@ import java.util.Set;
 
 import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.WeddingBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
 
@@ -20,6 +22,9 @@ public class DeleteYCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person:\n%1$s";
     public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding:\n%1$s";
+    public static final String MESSAGE_DELETE_ADDRESS_BOOK_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_DELETE_WEDDING_BOOK_SUCCESS = "Wedding book has been cleared!";
+    public static final String MESSAGE_NO_PENDING_OPERATION = "No pending delete operation.";
 
     private final Person personToDelete;
     private final Wedding weddingToDelete;
@@ -42,9 +47,30 @@ public class DeleteYCommand extends Command {
         this.personToDelete = null;
     }
 
+    /**
+     * Creates a DeleteYCommand to clear the address book or wedding book once the confirmation is given.
+     * Initializes personToDelete and weddingToDelete to null.
+     */
+    public DeleteYCommand() {
+        this.personToDelete = null;
+        this.weddingToDelete = null;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (StaticContext.isClearAddressBookPending()) {
+            model.setAddressBook(new AddressBook());
+            StaticContext.setClearAddressBookPending(false);
+            return new CommandResult(MESSAGE_DELETE_ADDRESS_BOOK_SUCCESS);
+        }
+
+        if (StaticContext.isClearWeddingBookPending()) {
+            model.setWeddingBook(new WeddingBook());
+            StaticContext.setClearWeddingBookPending(false);
+            return new CommandResult(MESSAGE_DELETE_WEDDING_BOOK_SUCCESS);
+        }
 
         if (!(weddingToDelete == null)) {
             deleteTagsWithWedding(model);
@@ -54,10 +80,14 @@ public class DeleteYCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS, weddingToDelete.getWeddingName()));
         }
 
-        model.deletePerson(personToDelete);
-        // Clear history of personToDelete from StaticContext once delete operation is done
-        StaticContext.setPersonToDelete(null);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        if (!(personToDelete == null)) {
+            model.deletePerson(personToDelete);
+            // Clear history of personToDelete from StaticContext once delete operation is done
+            StaticContext.setPersonToDelete(null);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        }
+
+        return new CommandResult(MESSAGE_NO_PENDING_OPERATION);
     }
 
     /**
