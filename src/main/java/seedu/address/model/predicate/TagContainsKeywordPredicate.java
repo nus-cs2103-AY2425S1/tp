@@ -24,7 +24,7 @@ public class TagContainsKeywordPredicate implements Predicate<Person> {
 
         // Check if any keyword matches any tag's name (case-insensitive)
         return personTags.stream()
-                        .anyMatch(tag -> StringUtil.isWordInSentenceIgnoreCase(tag.tagName, keyword));
+                        .anyMatch(tag -> StringUtil.isWordPresentIgnoreCase(tag.tagName, keyword));
     }
 
     @Override
