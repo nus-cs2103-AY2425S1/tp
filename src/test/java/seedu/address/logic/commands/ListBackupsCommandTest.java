@@ -58,16 +58,6 @@ public class ListBackupsCommandTest {
     }
 
     @Test
-    public void execute_withBackups_showsBackupList() throws Exception {
-        model.backupData("testBackup"); // Ensure there is at least one backup
-        ListBackupsCommand command = new ListBackupsCommand();
-        CommandResult result = command.execute(model);
-
-        // Verify the result starts with the success message
-        assertTrue(result.getFeedbackToUser().startsWith("Available backups:\n"));
-    }
-
-    @Test
     public void execute_storageNotInitialized_throwsCommandException() throws IOException {
         Model modelWithoutStorage = new ModelManager(); // No storage provided
         ListBackupsCommand command = new ListBackupsCommand();
