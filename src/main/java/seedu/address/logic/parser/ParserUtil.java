@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
@@ -152,5 +153,14 @@ public class ParserUtil {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
         return new Appointment(trimmedAppointment);
+    }
+
+    public static Log parseLog(String logEntry) throws ParseException {
+        requireNonNull(logEntry);
+        String trimmedLogEntry = logEntry.trim();
+        if (!Log.isValidLog(trimmedLogEntry)) {
+            throw new ParseException(Log.MESSAGE_CONSTRAINTS);
+        }
+        return new Log(trimmedLogEntry);
     }
 }

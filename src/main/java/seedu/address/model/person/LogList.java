@@ -19,6 +19,13 @@ public class LogList {
         logs = new ArrayList<>();
     }
 
+    public LogList(List<String> logEntries) {
+        logs = new ArrayList<>();
+        for (String logEntry : logEntries) {
+            logs.add(new Log(logEntry));
+        }
+    }
+
     /**
      * Adds a log entry to the list.
      *

@@ -62,7 +62,7 @@ public class LogCommand extends Command {
                 personToEdit.getAppointment(), personToEdit.getLogEntries().addLog(log));
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult("Log added to " + personToEdit.getName() + ".");
+        return new CommandResult("Log added to " + personToEdit.getName());
     }
 
     /**
