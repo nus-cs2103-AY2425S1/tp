@@ -1,0 +1,41 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "  <<interface>>  \nParser" as Parser<AddCommand>
+Class AddCommandParser
+
+Class AddCommand {
+  -toAdd : Student
+  -tutorialId : TutorialId
+  execute(Model) : CommandResult
+}
+Class CommandResult
+
+Class ArgumentMultimap
+Class ParserUtil
+
+Class Student {
+  -name : Name
+  -studentId : StudentId
+  -tutorialId : TutorialId
+}
+Class Name
+Class StudentId
+Class TutorialId
+
+AddCommandParser .up.|> Parser
+
+AddCommandParser .down.> AddCommand: initialize >
+AddCommandParser .right.> ArgumentMultimap: utilizes >
+AddCommandParser .right.> ParserUtil: utilizes >
+
+AddCommand .down.> CommandResult: outputs >
+
+
+AddCommand -right-> Student: adds >
+Student *-down-> Name: has >
+Student *-down-> StudentId: has >
+Student *-down-> TutorialId: has >
+
+@enduml
