@@ -199,7 +199,17 @@ public class AddCommandTest {
 
         @Override
         public void removeLastViewedPerson() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean isLastViewPersonAvailable() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean isSamePersonAsPersonOnDisplay(Person person) {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override

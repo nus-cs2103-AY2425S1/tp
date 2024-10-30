@@ -61,13 +61,11 @@ public class DeleteCommand extends Command {
             personToDelete = getPersonToDeleteByName(model, targetName);
         }
 
-        if (model.getLastViewedPerson().get().isPresent()) {
-            if (personToDelete.equals(model.getLastViewedPerson().get().get())) {
-                model.removeLastViewedPerson();
-                String logMessageForPerson =
-                        String.format("Student on display is deleted, Student: %s", personToDelete);
-                logger.info(logMessageForPerson);
-            }
+        if (model.isSamePersonAsPersonOnDisplay(personToDelete)) {
+            model.removeLastViewedPerson();
+            String logMessageForPerson =
+                    String.format("Student on display is deleted, Student: %s", personToDelete);
+            logger.info(logMessageForPerson);
         }
 
         logger.info("Student deleted - " + personToDelete);
