@@ -54,9 +54,7 @@ public class DeleteCommand extends Command {
     private void removePersonFromEvent(Model model, Person personToRemove) {
         ObservableList<Event> eventsList = model.getEventList();
         for (Event event : eventsList) {
-            if (event.isPersonAttending(personToRemove)) {
-                event.removeAttendee(personToRemove);
-            }
+            event.removeAttendee(personToRemove);
         }
     }
 
