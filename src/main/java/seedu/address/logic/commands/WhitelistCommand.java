@@ -15,19 +15,20 @@ import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Person;
 
 /**
- * Whitelists and existing person.
+ * Whitelists a previously-blacklisted person.
  */
 public class WhitelistCommand extends Command {
 
     public static final String COMMAND_WORD = "whitelist";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " INDEX cs/CLIENT_STATUS"
-            + ": removes person from the blacklist and sets their client status to CLIENT STATUS."
-            + " CLIENT STATUS must be 'old', 'active', 'potential' or 'unresponsive'."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " INDEX cs/NEW_CLIENT_STATUS"
+            + ": removes person from the blacklist and sets their client status to NEW_CLIENT_STATUS."
+            + " NEW_CLIENT_STATUS must be 'old', 'active', 'potential' or 'unresponsive'."
             + "\nExample: '" + COMMAND_WORD + " 2 cs/old' sets the client status of the 2nd "
             + "client in the list as 'old' after removing them from the blacklist.";
 
     public static final String MESSAGE_WHITELIST_PERSON_SUCCESS = "Whitelisted Person: %1$s";
+    public static final String MESSAGE_CANNOT_WHITELIST = "This person is not on the blacklist: %1$s";
 
     private final Index index;
     private final ClientStatus clientStatus;
@@ -69,12 +70,18 @@ public class WhitelistCommand extends Command {
         }
 
         Person personToWhitelist = lastShownList.get(index.getZeroBased());
-        Person whitelistedPerson = createWhitelistedPerson(personToWhitelist);
+        if (personToWhitelist.isBlacklisted()) {
+            Person whitelistedPerson = createWhitelistedPerson(personToWhitelist);
 
-        model.setPerson(personToWhitelist, whitelistedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.setPerson(personToWhitelist, whitelistedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_WHITELIST_PERSON_SUCCESS, Messages.format(personToWhitelist)));
+            return new CommandResult(String.format(MESSAGE_WHITELIST_PERSON_SUCCESS,
+                    Messages.format(personToWhitelist)));
+        } else {
+            throw new CommandException(String.format(MESSAGE_CANNOT_WHITELIST,
+                    Messages.format(personToWhitelist)));
+        }
     }
 
     @Override
