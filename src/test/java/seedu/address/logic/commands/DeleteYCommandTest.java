@@ -97,6 +97,22 @@ public class DeleteYCommandTest {
     }
 
     @Test
+    public void execute_noPendingOperation_returnsNoPendingOperationMessage() throws CommandException {
+        // Ensure no pending operations
+        StaticContext.setClearAddressBookPending(false);
+        StaticContext.setClearWeddingBookPending(false);
+        StaticContext.setPersonToDelete(null);
+        StaticContext.setWeddingToDelete(null);
+
+        DeleteYCommand deleteYCommand = new DeleteYCommand();
+        CommandResult commandResult = deleteYCommand.execute(model);
+
+        String expectedMessage = DeleteYCommand.MESSAGE_NO_PENDING_OPERATION;
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+    }
+
+    @Test
     public void equals() {
         Person personToDelete = new PersonBuilder().withName("Alice Pauline").build();
         DeleteYCommand deleteYCommand1 = new DeleteYCommand(personToDelete);
