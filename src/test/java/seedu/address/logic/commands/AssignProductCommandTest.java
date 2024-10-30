@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_APPLE_PIE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -70,17 +71,49 @@ public class AssignProductCommandTest {
 
     @Test
     public void execute_productAlreadyAssigned_throwsCommandException() {
-        Supplier supplier = new SupplierBuilder().withName(VALID_NAME_AMY).withProducts(Set.of(new ProductBuilder()
-                .withName(VALID_PRODUCT_APPLE_PIE).build())).build();
-        model.addSupplier(supplier);
-
-        Product product = new ProductBuilder().withName(VALID_PRODUCT_APPLE_PIE).build();
+        Product product = new ProductBuilder()
+                .withName(VALID_PRODUCT_APPLE_PIE)
+                .withSupplierName(VALID_NAME_AMY)
+                .build();
         model.addProduct(product);
+
+        Supplier supplier = new SupplierBuilder()
+                .withName(VALID_NAME_AMY)
+                .withProducts(Set.of(product))
+                .build();
+        model.addSupplier(supplier);
 
         AssignProductCommand assignProductCommand = new AssignProductCommand(
                 new ProductName(VALID_PRODUCT_APPLE_PIE),
                 new Name(VALID_NAME_AMY));
 
         assertCommandFailure(assignProductCommand, model, AssignProductCommand.MESSAGE_PRODUCT_ALREADY_ASSIGNED);
+    }
+
+    @Test
+    public void execute_productAssignedToDifferentSupplier_throwsCommandException() {
+
+        Supplier supplierAmy = new SupplierBuilder().withName(VALID_NAME_AMY).build();
+        Supplier supplierBob = new SupplierBuilder().withName(VALID_NAME_BOB).build();
+        Product product = new ProductBuilder().withName(VALID_PRODUCT_APPLE_PIE)
+                .withSupplierName(VALID_NAME_AMY)
+                .build();
+
+        model.addSupplier(supplierAmy);
+        model.addSupplier(supplierBob);
+        model.addProduct(product);
+
+        Supplier updatedSupplierAmy = new SupplierBuilder(supplierAmy)
+                .withProducts(Set.of(product)).build();
+        model.setSupplier(supplierAmy, updatedSupplierAmy);
+
+        AssignProductCommand assignProductCommand = new AssignProductCommand(
+                new ProductName(VALID_PRODUCT_APPLE_PIE),
+                new Name(VALID_NAME_BOB));
+
+        String expectedMessage = String.format(AssignProductCommand.MESSAGE_PRODUCT_ALREADY_ASSIGNED_TO_OTHER,
+                VALID_NAME_AMY);
+
+        assertCommandFailure(assignProductCommand, model, expectedMessage);
     }
 }

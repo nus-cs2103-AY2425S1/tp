@@ -50,6 +50,17 @@ public class Product {
     }
 
     /**
+     * Constructs a {@code Product} with the specified name, stock levels, tags and supplierName.
+     */
+    public Product(ProductName name, StockLevel stockLevel, Name supplierName, Set<Tag> tags) {
+        requireAllNonNull(name, stockLevel, tags, supplierName);
+        this.name = name;
+        this.stockLevel = stockLevel;
+        this.supplierName = supplierName;
+        this.tags.addAll(tags);
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */

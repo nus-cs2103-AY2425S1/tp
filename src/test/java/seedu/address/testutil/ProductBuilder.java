@@ -9,6 +9,7 @@ import seedu.address.model.product.exceptions.InvalidMaxStockLevelException;
 import seedu.address.model.product.exceptions.InvalidMinStockLevelException;
 import seedu.address.model.product.exceptions.InvalidStockLevelException;
 import seedu.address.model.product.exceptions.StockLevelOutOfBoundsException;
+import seedu.address.model.supplier.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -23,6 +24,7 @@ public class ProductBuilder {
     public static final int DEFAULT_MAX_STOCK = 100;
 
     private ProductName name;
+    private Name supplierName;
     private int currentStock;
     private int minStock;
     private int maxStock;
@@ -55,6 +57,13 @@ public class ProductBuilder {
      */
     public ProductBuilder withName(String name) {
         this.name = new ProductName(name);
+        return this;
+    }
+    /**
+     * Sets the Supplier name of the {@code Product} that we are building.
+     */
+    public ProductBuilder withSupplierName(String supplierName) {
+        this.supplierName = new Name(supplierName);
         return this;
     }
 
@@ -109,6 +118,9 @@ public class ProductBuilder {
     public Product build() {
         try {
             StockLevel stockLevel = new StockLevel(currentStock, minStock, maxStock);
+            if (supplierName != null) {
+                return new Product(name, stockLevel, supplierName, tags);
+            }
             return new Product(name, stockLevel);
         } catch (InvalidStockLevelException | InvalidMinStockLevelException
                 | InvalidMaxStockLevelException | StockLevelOutOfBoundsException e) {

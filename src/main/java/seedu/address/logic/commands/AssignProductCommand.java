@@ -67,18 +67,20 @@ public class AssignProductCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_PRODUCT_NOT_FOUND, productName)));
 
-        //Check if product is already assigned to another supplier
-        if (!productToAssign.getSupplierName().equals(supplierName)) {
+        // Check if product is assigned to another supplier
+        if (productToAssign.getSupplierName() != null && !productToAssign.getSupplierName().equals(supplierName)) {
             throw new CommandException(String.format(MESSAGE_PRODUCT_ALREADY_ASSIGNED_TO_OTHER,
                     productToAssign.getSupplierName()));
         }
+
+        // Check if product is already assigned to the specified supplier
+        if (supplierToAssign.getProducts().contains(productToAssign)) {
+            throw new CommandException(MESSAGE_PRODUCT_ALREADY_ASSIGNED);
+        }
+
         // Create a new supplier with the updated product list
         Set<Product> updatedProductList = new HashSet<>(supplierToAssign.getProducts());
-        if (updatedProductList.contains(productToAssign)) {
-            throw new CommandException(MESSAGE_PRODUCT_ALREADY_ASSIGNED);
-        } else {
-            updatedProductList.add(productToAssign);
-        }
+        updatedProductList.add(productToAssign);
         Supplier updatedSupplier = new Supplier(
                 supplierToAssign.getName(),
                 supplierToAssign.getPhone(),
@@ -87,7 +89,7 @@ public class AssignProductCommand extends Command {
                 supplierToAssign.getTags(),
                 updatedProductList
         );
-
+        // Update the product to contain the supplierName too
         productToAssign.setSupplierName(supplierName);
 
         model.setSupplier(supplierToAssign, updatedSupplier);
@@ -110,7 +112,6 @@ public class AssignProductCommand extends Command {
 
     @Override
     public int hashCode() {
-        // Use Objects.hash to generate a hash code based on the fields
         return Objects.hash(productName, supplierName);
     }
 }
