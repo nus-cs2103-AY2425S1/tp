@@ -28,7 +28,7 @@ Given below are my contributions to the project.
   * Refactored `AddCommand` to `AddContactCommand` to improve specificity and clarity.
   * Refactored the original functionality of `DeleteCommand` into `DeleteContactCommand` to allow the user to delete a specific contact from the address book.
   * Refactored `DeleteCommand` into a generic command `DeleteCommand<T>` to support future implementations of `DeleteContactCommand`,`DeleteJobCommand` and `DeleteCompanyCommand`.
-  * Refactored `Person` class from tags to skills
+  * Refactored `Person` class from tags to skills.
 
 * 
 * **Documentation**:
