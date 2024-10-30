@@ -179,6 +179,30 @@ The sequence diagram below models the interactions between the different compone
 2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached. 
 3. The new appointment is then displayed in the UI, reflecting the updated schedule for "Alice Tan".
 
+### Reminder Feature
+
+#### Overview
+The `reminder` command helps to set a reminder for a client's most upcoming appointment.
+
+The reminder diagram below models the interaction between the different components of PhysioPal for the execution of the `reminder` command.
+
+![ReminderSequenceDiagram](images/ReminderSequenceDiagram.png)
+
+#### Details
+1. The user executes the command `reminder John Doe r/1 day` to set a reminder for a client named John Doe's appointment.
+2. The `ReminderCommandParser` object calls its parse method to interpret the user input.
+3. A `ReminderCommand` object is created.
+4. The `ReminderCommandParser` object returns the `ReminderCommand` object.
+5. The `LogicManager` object calls the `execute` method of `ReminderCommand`.
+6. The `execute` method then invokes the `setPerson` method of its `Model` argument to create a reminder with the specified reminder time.
+7. The `execute` method then invokes the `updateFilteredPersonList` method of its `Model` argument to update the view of PhysioPal to show all contacts with their reminders.
+8. The `execute` method returns a `CommandResult` which contains data including the completion of the `ReminderCommand`.
+
+#### Example Usage
+1. User inputs the command `reminder Alice Tan r/3 hours`.
+2. This creates a reminder for a person named "Alice Tan", with reminder time "3 hours".
+3. The reminder is then displayed in the UI, reflecting that a reminder has been set for "Alice Tan"'s appointment.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
