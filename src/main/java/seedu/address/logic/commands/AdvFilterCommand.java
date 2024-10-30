@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -17,12 +18,17 @@ public class AdvFilterCommand extends Command {
 
     public static final String COMMAND_WORD = "advfilter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the contact list by tag values.\n"
-            + "Parameters: [t/TAG OPERATOR VALUE]\n"
-            + "Available Operators: [=, !=, <, <=, >, >=]\n"
-            + "Example 1: " + COMMAND_WORD + " t/friends >= 1\n"
-            + "Example 2: " + COMMAND_WORD + " t/priority != low\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the contact list by tag values.\n"
+            + "Parameters: "
+            + PREFIX_TAG + "TAG "
+            + "OPERATOR "
+            + "VALUE\n"
+            + "Available Operators: =, !=, <, <=, >, >=\n"
+            + "Example 1: " + COMMAND_WORD + " "
+            + PREFIX_TAG + "friends >= 1\n"
+            + "Example 2: " + COMMAND_WORD + " "
+            + PREFIX_TAG + "priority != low";
+
 
     public static final String MESSAGE_NO_CONTACT_FOUND = "No contacts match the filter criteria.";
 
