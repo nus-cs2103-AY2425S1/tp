@@ -63,7 +63,7 @@ public class EmergencyContactCommand extends Command {
         if (personToEdit.getEmergencyContact() != null
                 && !personToEdit.getEmergencyContact().contactName.isEmpty()
                 && !personToEdit.getEmergencyContact().contactNumber.isEmpty()) {
-            throw new CommandException(generateEmergencyContactExistsMessage(personToEdit));
+            return new CommandResult(generateEmergencyContactExistsMessage(personToEdit));
         }
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), emergencyContact, personToEdit.getTags(), personToEdit.getPriorityLevel());

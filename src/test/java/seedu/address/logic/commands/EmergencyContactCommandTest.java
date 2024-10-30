@@ -140,7 +140,7 @@ public class EmergencyContactCommandTest {
     }
 
     @Test
-    public void execute_overrideEmergencyContactUnfilteredList_failure() {
+    public void execute_overrideEmergencyContactUnfilteredListErrorMessage_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).build();
         EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_FIRST_PERSON,
@@ -148,7 +148,8 @@ public class EmergencyContactCommandTest {
                         editedPerson.getEmergencyContact().contactNumber));
         String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_EMERGENCY_CONTACT_EXISTS,
                 editedPerson);
-        assertCommandFailure(emergencyContactCommand, model, expectedMessage);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
