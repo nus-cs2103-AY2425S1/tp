@@ -170,17 +170,17 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Deleting notes from a patient : `delNotes`
+### Deleting notes from a patient : `delnotes`
 
 Deletes notes from an existing person in the address book.
 
-Format: `delNotes INDEX`
+Format: `delnotes INDEX`
 
 * Deletes notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ 
 * The person specified must have notes for this command to work.
 
 Examples:
-*  `delNotes 1`
+*  `delnotes 1`
 
 [Back to Table of Contents](#table-of-contents)
 
