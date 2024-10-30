@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.RoleType;
@@ -30,10 +31,14 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
      * @return A new ModuleRoleMap with module role pairs deleted.
      */
     @Override
-    protected ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) {
+    protected ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) throws CommandException {
         HashMap<ModuleCode, RoleType> roles = new HashMap<>(moduleRoleMapToEdit.getRoles());
         ModuleRoleMap ret = new ModuleRoleMap(roles);
-        ret.removeAll(moduleRoleMapToDelete);
+        ModuleRoleMap failed = ret.removeAll(moduleRoleMapToDelete);
+        if (!failed.isEmpty()) {
+            throw new CommandException("You wish to delete these module role pair(s) but they do not exist: "
+                    + failed.getData());
+        }
         logger.info("Deleted module roles: " + moduleRoleMapToDelete.getData()
                 + "from: " + moduleRoleMapToEdit.getData());
         return ret;

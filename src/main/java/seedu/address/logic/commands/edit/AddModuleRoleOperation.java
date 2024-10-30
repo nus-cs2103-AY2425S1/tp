@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.RoleType;
@@ -30,10 +31,14 @@ public class AddModuleRoleOperation extends EditModuleRoleOperation {
      * @return A new ModuleRoleMap with module role pairs added.
      */
     @Override
-    protected ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) {
+    protected ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) throws CommandException {
         HashMap<ModuleCode, RoleType> roles = new HashMap<>(moduleRoleMapToEdit.getRoles());
         ModuleRoleMap ret = new ModuleRoleMap(roles);
-        ret.putAll(moduleRoleMapToAdd);
+        ModuleRoleMap failed = ret.putAll(moduleRoleMapToAdd);
+        if (!failed.isEmpty()) {
+            throw new CommandException("You wish to add these module role pair(s) but they clash with existing ones: "
+                    + failed.getData());
+        }
         logger.info("Added module roles: " + moduleRoleMapToAdd.getData()
                 + "to: " + moduleRoleMapToEdit.getData());
         return ret;

@@ -223,7 +223,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void getChangeDescription_hasChanges_success() {
+    public void getChangesDescription_hasChanges_success() {
         // changed all fields
         Person person = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).withEmptyAddress()
@@ -240,7 +240,7 @@ public class EditCommandTest {
                 + "\nAddress: " + person.getAddress().map(Object::toString).orElse("<no address>")
                 + " -> " + editedPerson.getAddress().map(Object::toString).orElse("<no address>")
                 + "\nTags: " + person.getTags() + " -> " + editedPerson.getTags()
-                + "\n" + EditModuleRoleOperation.getModuleCodeChangeDescription(
+                + "\n" + EditModuleRoleOperation.getModuleCodeChangesDescription(
                         person.getModuleRoleMap(),
                         editedPerson.getModuleRoleMap()) + "\n";
 
@@ -248,7 +248,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void getChangeDescription_noChanges_success() {
+    public void getChangesDescription_noChanges_success() {
         Person person = new PersonBuilder().build();
         String expected = "No changes made.";
         assertEquals(expected, EditCommand.getChangesDescription(person, person));

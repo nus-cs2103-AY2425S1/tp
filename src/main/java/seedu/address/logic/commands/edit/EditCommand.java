@@ -56,6 +56,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "%1$s\nEdited Person: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_INVALID_VALUES = "Edit failed due to invalid values provided: %1$s";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -91,16 +92,19 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        String changeDescription = getChangesDescription(personToEdit, editedPerson);
+        String changesDescription = getChangesDescription(personToEdit, editedPerson);
+
         return new CommandResult(
-                String.format(MESSAGE_EDIT_PERSON_SUCCESS, changeDescription, Messages.format(editedPerson)));
+                String.format(MESSAGE_EDIT_PERSON_SUCCESS, changesDescription, Messages.format(editedPerson)));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     * @throws CommandException if there is an error in creating the edited person.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -108,8 +112,20 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().or(personToEdit :: getEmail).orElse(null);
         Address updatedAddress = editPersonDescriptor.getAddress().or(personToEdit :: getAddress).orElse(null);
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        ModuleRoleMap updatedModuleRoleMap = editPersonDescriptor.getModuleRoleOperation()
-                .map(o -> o.execute(personToEdit.getModuleRoleMap())).orElse(personToEdit.getModuleRoleMap());
+
+        ModuleRoleMap updatedModuleRoleMap;
+        try {
+            // The following code intentionally avoids the use of functional programming.
+            // Reason being Optional.map() does not allow throwing checked exceptions.
+            Optional<EditModuleRoleOperation> editModuleRoleOperation = editPersonDescriptor.getModuleRoleOperation();
+            if (editModuleRoleOperation.isPresent()) {
+                updatedModuleRoleMap = editModuleRoleOperation.get().execute(personToEdit.getModuleRoleMap());
+            } else {
+                updatedModuleRoleMap = personToEdit.getModuleRoleMap();
+            }
+        } catch (CommandException e) {
+            throw new CommandException(String.format(MESSAGE_INVALID_VALUES, "\n" + e.getMessage())); // Re-throw
+        }
 
         return new Person(updatedName, Optional.ofNullable(updatedPhone), Optional.ofNullable(updatedEmail),
                 Optional.ofNullable(updatedAddress),
@@ -120,41 +136,41 @@ public class EditCommand extends Command {
      * Returns a description of the changes made to the person.
      */
     public static String getChangesDescription(Person personBefore, Person personAfter) {
-        StringBuilder changeDescription = new StringBuilder("Change(s) made: \n");
+        StringBuilder changesDescription = new StringBuilder("Change(s) made: \n");
         boolean isChanged = false;
         if (!personBefore.getName().equals(personAfter.getName())) {
             isChanged = true;
-            changeDescription.append("Name: ").append(personBefore.getName()).append(" -> ")
+            changesDescription.append("Name: ").append(personBefore.getName()).append(" -> ")
                     .append(personAfter.getName()).append("\n");
         }
         if (!personBefore.getPhone().equals(personAfter.getPhone())) {
             isChanged = true;
-            changeDescription.append("Phone: ").append(personBefore.getPhone()).append(" -> ")
+            changesDescription.append("Phone: ").append(personBefore.getPhone()).append(" -> ")
                     .append(personAfter.getPhone()).append("\n");
         }
         if (!personBefore.getEmail().equals(personAfter.getEmail())) {
             isChanged = true;
-            changeDescription.append("Email: ").append(personBefore.getEmail()).append(" -> ")
+            changesDescription.append("Email: ").append(personBefore.getEmail()).append(" -> ")
                     .append(personAfter.getEmail()).append("\n");
         }
         if (!personBefore.getAddress().equals(personAfter.getAddress())) {
             isChanged = true;
-            changeDescription.append("Address: ")
+            changesDescription.append("Address: ")
                     .append(personBefore.getAddress().map(Object::toString).orElse("<no address>")).append(" -> ")
                     .append(personAfter.getAddress().map(Object::toString).orElse("<no address>")).append("\n");
         }
         if (!personBefore.getTags().equals(personAfter.getTags())) {
             isChanged = true;
-            changeDescription.append("Tags: ").append(personBefore.getTags()).append(" -> ")
+            changesDescription.append("Tags: ").append(personBefore.getTags()).append(" -> ")
                     .append(personAfter.getTags()).append("\n");
         }
         if (!personBefore.getModuleRoleMap().equals(personAfter.getModuleRoleMap())) {
             isChanged = true;
-            changeDescription.append(EditModuleRoleOperation.getModuleCodeChangeDescription(
+            changesDescription.append(EditModuleRoleOperation.getModuleCodeChangesDescription(
                     personBefore.getModuleRoleMap(), personAfter.getModuleRoleMap())).append("\n");
         }
 
-        return isChanged ? changeDescription.toString() : "No changes made.";
+        return isChanged ? changesDescription.toString() : "No changes made.";
     }
 
     @Override
