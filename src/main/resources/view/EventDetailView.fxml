@@ -42,7 +42,8 @@
                         </ImageView>
                         <Text styleClass="detail-contents"> Date </Text>
                     </HBox>
-                    <Label fx:id="date" styleClass="detail-contents" text="\$date"/>
+                    <Label fx:id="startDate" styleClass="detail-contents" text="\$date"/>
+                    <Label fx:id="endDate" styleClass="detail-contents" text="\$date"/>
                 </HBox>
 
 

@@ -2,9 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -29,17 +30,21 @@ public class EventCommandParser implements Parser<EventCommand> {
      */
     public EventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_LOCATION, PREFIX_ATTENDEES);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_START_DATE, PREFIX_END_DATE,
+                        PREFIX_LOCATION, PREFIX_ATTENDEES);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_LOCATION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_LOCATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_START_DATE, PREFIX_END_DATE);
         String name = argMultimap.getValue(PREFIX_NAME).get().trim();
         try {
-            LocalDate date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get().trim());
+            LocalDate startDate = LocalDate.parse(argMultimap.getValue(PREFIX_START_DATE).get().trim());
+            LocalDate endDate = LocalDate.parse(argMultimap.getValue(PREFIX_END_DATE).get().trim());
+            ParserUtil.checkValidDates(startDate, endDate);
+
             Address location = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_LOCATION).get().trim());
 
             String indexes = (arePrefixesPresent(argMultimap, PREFIX_ATTENDEES))
@@ -47,7 +52,7 @@ public class EventCommandParser implements Parser<EventCommand> {
                              : " ";
             Set<Index> attendeeIndexes = ParserUtil.parseIndexes(indexes);
 
-            return new EventCommand(name, date, location, attendeeIndexes);
+            return new EventCommand(name, startDate, endDate, location, attendeeIndexes);
         } catch (DateTimeParseException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_DATE_FORMAT);
         }

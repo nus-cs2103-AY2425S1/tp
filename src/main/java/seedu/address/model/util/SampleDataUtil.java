@@ -81,10 +81,19 @@ public class SampleDataUtil {
 
         Set<Person> sampleAttendees = new HashSet<>(Arrays.asList(getSamplePersons()));
         return new Event[] {
-            new Event("Emily's Birthday Party", LocalDate.of(2024, 10, 1), new Address("123 Party Lane"),
+            new Event("Emily's Birthday Party",
+                    LocalDate.of(2024, 10, 1),
+                    LocalDate.of(2024, 10, 1),
+                    new Address("123 Party Lane"),
                     sampleAttendees),
-            new Event("Family Reunion", LocalDate.of(2024, 10, 5), new Address("456 Family St"), sampleAttendees),
-            new Event("Grandpa's Wedding Day", LocalDate.of(2024, 10, 10), new Address("789 Wedding Blvd"),
+            new Event("Family Reunion",
+                    LocalDate.of(2024, 10, 5),
+                    LocalDate.of(2024, 10, 10),
+                    new Address("456 Family St"), sampleAttendees),
+            new Event("Grandpa's Wedding Day",
+                    LocalDate.of(2024, 10, 10),
+                    LocalDate.of(2024, 10, 10),
+                    new Address("789 Wedding Blvd"),
                     sampleAttendees)
         };
     }

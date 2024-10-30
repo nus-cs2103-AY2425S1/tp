@@ -41,7 +41,8 @@
                 <ImageView fx:id="calendarIcon" fitHeight="15" fitWidth="15">
                     <Image url="@/images/calendar_light.png"/>
                 </ImageView>
-                <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+                <Label fx:id="startDate" styleClass="cell_small_label" text="\$date" />
+                <Label fx:id="endDate" styleClass="cell_small_label" text="\$date" />
             </HBox>
 
             <HBox spacing="5">

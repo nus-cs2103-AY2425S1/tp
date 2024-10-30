@@ -25,6 +25,8 @@ public class Messages {
                 "Duplicate indexes found";
     public static final String MESSAGE_ATTENDEE_NOT_FOUND =
                 "Attendee was not found in the address book";
+    public static final String MESSAGE_INVALID_DATES =
+                "Event start date must be before event end date!";
 
 
     /**
@@ -67,7 +69,9 @@ public class Messages {
 
         builder.append(event.getEventName())
                 .append("; Date: ")
-                .append(event.getDate())
+                .append(event.getStartDate())
+                .append(" - ")
+                .append(event.getEndDate())
                 .append("; \nAttendees: ")
                 .append(attendeesString);
         return builder.toString();

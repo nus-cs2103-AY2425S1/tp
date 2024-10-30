@@ -55,7 +55,9 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label date;
+    private Label startDate;
+    @FXML
+    private Label endDate;
     @FXML
     private Label locationLabel;
 
@@ -78,7 +80,8 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getEventName());
-        date.setText(event.getDate().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+        startDate.setText(event.getStartDate().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+        endDate.setText(event.getEndDate().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         locationLabel.setText(event.getLocation().value);
         attendees.getChildren().addAll(generateAttendeesLabels());
     }

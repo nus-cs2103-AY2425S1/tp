@@ -19,7 +19,8 @@ import seedu.address.model.person.Person;
  */
 public class JsonAdaptedEvent {
     private final String eventName;
-    private final LocalDate eventDate;
+    private final LocalDate eventStartDate;
+    private final LocalDate eventEndDate;
     private final Set<JsonAdaptedPerson> attendees = new HashSet<>();
     private final String location;
 
@@ -28,11 +29,13 @@ public class JsonAdaptedEvent {
      */
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("eventName") String eventName,
-                            @JsonProperty("eventDate") LocalDate eventDate,
+                            @JsonProperty("eventStartDate") LocalDate eventStartDate,
+                            @JsonProperty("eventEndDate") LocalDate eventEndDate,
                             @JsonProperty("attendees") Set<JsonAdaptedPerson> attendees,
                             @JsonProperty("location") String location) {
         this.eventName = eventName;
-        this.eventDate = eventDate;
+        this.eventStartDate = eventStartDate;
+        this.eventEndDate = eventEndDate;
         if (attendees != null) {
             this.attendees.addAll(attendees);
         }
@@ -44,7 +47,8 @@ public class JsonAdaptedEvent {
      */
     public JsonAdaptedEvent(Event source) {
         eventName = source.getEventName();
-        eventDate = source.getDate();
+        eventStartDate = source.getStartDate();
+        eventEndDate = source.getEndDate();
         attendees.addAll(source.getAttendees().stream().map(JsonAdaptedPerson::new).collect(Collectors.toSet()));
         location = source.getLocation().toString();
     }
@@ -59,7 +63,7 @@ public class JsonAdaptedEvent {
         for (JsonAdaptedPerson attendee : attendees) {
             modelAttendees.add(attendee.toModelType());
         }
-        return new Event(eventName, eventDate, new Address(location), modelAttendees);
+        return new Event(eventName, eventStartDate, eventEndDate, new Address(location), modelAttendees);
 
     }
 }

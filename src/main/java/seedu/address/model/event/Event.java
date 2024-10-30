@@ -19,7 +19,8 @@ import seedu.address.model.person.Person;
  */
 public class Event {
     private final String eventName;
-    private final LocalDate date;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
     private final Set<Person> attendees = new HashSet<>();
     private final Address location;
 
@@ -27,13 +28,15 @@ public class Event {
      * Constructs an {@code Event}.
      *
      * @param eventName A valid event name.
-     * @param date A valid date.
+     * @param startDate A valid start date.
+     * @param endDate A valid end date.
      * @param attendees A set of {@code Person} attending the event.
      */
-    public Event(String eventName, LocalDate date, Address location, Set<Person> attendees) {
-        requireAllNonNull(eventName, date, location, attendees);
+    public Event(String eventName, LocalDate startDate, LocalDate endDate, Address location, Set<Person> attendees) {
+        requireAllNonNull(eventName, startDate, endDate, location, attendees);
         this.eventName = eventName;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.location = location;
         this.attendees.addAll(attendees);
 
@@ -43,8 +46,12 @@ public class Event {
         return eventName;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
     public Set<Person> getAttendees() {
@@ -70,7 +77,8 @@ public class Event {
 
         return otherEvent != null
                 && otherEvent.getEventName().equals(getEventName())
-                && otherEvent.getDate().equals(getDate())
+                && otherEvent.startDate.equals(startDate)
+                && otherEvent.endDate.equals(endDate)
                 && otherEvent.getAttendees().equals(getAttendees())
                 && location.equals(otherEvent.location);
     }
@@ -87,13 +95,13 @@ public class Event {
 
         Event otherEvent = (Event) other;
         return eventName.equals(otherEvent.eventName)
-                && date.equals(otherEvent.date)
+                && startDate.equals(otherEvent.startDate)
                 && attendees.equals(otherEvent.attendees);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventName, date, attendees);
+        return Objects.hash(eventName, startDate, endDate, attendees);
     }
 
     @Override
@@ -106,7 +114,8 @@ public class Event {
 
         return "Event{"
                 + "name='" + eventName + '\''
-                + ", date=" + date
+                + ", startDate=" + startDate
+                + ", endDate=" + endDate
                 + ", \nattendees=" + attendeesString
                 + '}';
     }

@@ -90,7 +90,7 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
         int rowIndex = 2; // Start after the header and separator (which are row 0 and 1)
 
         List<Event> sortedEventsList = new ArrayList<>(eventsList); // Create a modifiable copy
-        sortedEventsList.sort(Comparator.comparing(Event::getDate)); // Sort the copy by date
+        sortedEventsList.sort(Comparator.comparing(Event::getStartDate)); // Sort the copy by start date
 
         for (Event event : sortedEventsList) {
             if (event.isPersonAttending(person)) {
@@ -98,13 +98,13 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
                 eventName.getStyleClass().add("grid-content-name");
                 Label eventLocation = new Label(event.getLocation().toString());
                 eventLocation.getStyleClass().add("grid-content-location");
-                Label eventDate = new Label(event.getDate().format(DATE_FORMATTER));
-                eventDate.getStyleClass().add("grid-content-date");
+                Label eventStartDate = new Label(event.getStartDate().format(DATE_FORMATTER));
+                eventStartDate.getStyleClass().add("grid-content-date");
 
 
                 eventsAttending.add(eventName, 0, rowIndex);
                 eventsAttending.add(eventLocation, 1, rowIndex);
-                eventsAttending.add(eventDate, 2, rowIndex);
+                eventsAttending.add(eventStartDate, 2, rowIndex);
 
                 rowIndex++;
             }

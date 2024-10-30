@@ -4,9 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_ATTENDEE_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -33,13 +34,15 @@ public class EventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book.\n"
             + "Parameters: "
             + PREFIX_NAME + "EVENT NAME "
-            + PREFIX_DATE + "DATE (yyyy-mm-dd) "
+            + PREFIX_START_DATE + "START DATE (yyyy-mm-dd) "
+            + PREFIX_END_DATE + "END DATE (yyyy-mm-dd) "
             + PREFIX_LOCATION + "LOCATION \n"
             + PREFIX_ATTENDEES + "ATTENDEES BASED ON ADDRESS BOOK INDEXING \n"
             + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_NAME + "New Year's Party "
-            + PREFIX_DATE + "2025-01-01 "
+            + PREFIX_START_DATE + "2025-01-01 "
+            + PREFIX_END_DATE + "2025-01-02 "
             + PREFIX_LOCATION + "Times Square"
             + PREFIX_ATTENDEES + "1 2 4 5";
 
@@ -47,17 +50,20 @@ public class EventCommand extends Command {
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
 
     private final String eventName;
-    private final LocalDate eventDate;
+    private final LocalDate eventStartDate;
+    private final LocalDate eventEndDate;
     private final Address location;
     private final Set<Index> attendeeIndexes;
 
     /**
      * Creates an EventCommand to add the specified {@code Event}
      */
-    public EventCommand(String eventName, LocalDate eventDate, Address location, Set<Index> attendeeIndexes) {
-        requireAllNonNull(eventName, eventDate, location, attendeeIndexes);
+    public EventCommand(String eventName, LocalDate eventStartDate, LocalDate eventEndDate,
+                        Address location, Set<Index> attendeeIndexes) {
+        requireAllNonNull(eventName, eventStartDate, eventEndDate, location, attendeeIndexes);
         this.eventName = eventName;
-        this.eventDate = eventDate;
+        this.eventStartDate = eventStartDate;
+        this.eventEndDate = eventEndDate;
         this.location = location;
         this.attendeeIndexes = attendeeIndexes;
     }
@@ -76,7 +82,7 @@ public class EventCommand extends Command {
             attendees.add(attendee);
         }
 
-        Event toAdd = new Event(eventName, eventDate, location, attendees);
+        Event toAdd = new Event(eventName, eventStartDate, eventEndDate, location, attendees);
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
@@ -99,7 +105,8 @@ public class EventCommand extends Command {
 
         EventCommand otherEventCommand = (EventCommand) other;
         return eventName.equals(otherEventCommand.eventName)
-                && eventDate.equals(otherEventCommand.eventDate)
+                && eventStartDate.equals(otherEventCommand.eventStartDate)
+                && eventEndDate.equals(otherEventCommand.eventEndDate)
                 && location.equals(otherEventCommand.location)
                 && attendeeIndexes.equals(otherEventCommand.attendeeIndexes);
     }
@@ -108,7 +115,8 @@ public class EventCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("eventName", eventName)
-                .add("eventDate", eventDate)
+                .add("eventStartDate", eventStartDate)
+                .add("eventEndDate", eventEndDate)
                 .add("location", location)
                 .add("attendeeIndexes", attendeeIndexes)
                 .toString();
