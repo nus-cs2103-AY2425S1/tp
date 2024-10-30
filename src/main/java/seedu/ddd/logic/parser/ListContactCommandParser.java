@@ -14,7 +14,7 @@ import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.contact.common.predicate.ContactPredicateBuilder;
 
 /**
- * Parses input arguments and creates a new ListCommand object
+ * Parses input arguments and creates a new ListContactCommand object
  */
 public class ListContactCommandParser implements Parser<ListContactCommand> {
     /**
