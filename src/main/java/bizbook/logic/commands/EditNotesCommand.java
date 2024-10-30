@@ -57,16 +57,16 @@ public class EditNotesCommand extends Command {
 
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
 
-        // Update notes with new note
-        ArrayList<Note> notesToEdit = new ArrayList<>(personToEdit.getNotes());
+        ArrayList<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
-        if (notesToEdit.contains(note)) {
+        if (notesList.contains(note)) {
             throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
         }
-        if (noteIndex.getZeroBased() >= notesToEdit.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_NOTED_INDEX);
+        else if (noteIndex.getZeroBased() >= notesList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_NOTE_INDEX);
         }
-        Person editedPerson = updateNote(personToEdit, notesToEdit);
+
+        Person editedPerson = updateNote(personToEdit, notesList);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -62,22 +62,22 @@ public class DeleteNotesCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        List<Note> notesToEdit = new ArrayList<>(personToEdit.getNotes());
+        List<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
         // if there are no notes with this index
-        if (noteIndex.getOneBased() > notesToEdit.size()) {
-            throw new CommandException(Messages.NO_EXISTING_NOTE);
+        if (noteIndex.getOneBased() > notesList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_NOTE_INDEX);
         }
 
         // remove the specified note
-        Note noteToRemove = notesToEdit.get(noteIndex.getZeroBased());
-        notesToEdit.remove(noteToRemove);
+        Note noteToRemove = notesList.get(noteIndex.getZeroBased());
+        notesList.remove(noteToRemove);
 
-        ArrayList<Note> updatedNotes = new ArrayList<>(notesToEdit);
+        ArrayList<Note> updatedNotesList = new ArrayList<>(notesList);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), updatedNotes);
+                personToEdit.getAddress(), personToEdit.getTags(), updatedNotesList);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
