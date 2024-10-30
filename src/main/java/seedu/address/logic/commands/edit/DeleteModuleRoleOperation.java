@@ -37,10 +37,10 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
         ModuleRoleMap failed = ret.removeAll(moduleRoleMapToDelete);
         if (!failed.isEmpty()) {
             throw new CommandException("You wish to delete these module role pair(s) but they do not exist: "
-                    + failed.getData());
+                    + failed.getData(true));
         }
         logger.info("Deleted module roles: " + moduleRoleMapToDelete.getData()
-                + "from: " + moduleRoleMapToEdit.getData());
+                + "from: " + moduleRoleMapToEdit.getData(true));
         return ret;
     }
 

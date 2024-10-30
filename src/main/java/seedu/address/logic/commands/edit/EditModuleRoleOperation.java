@@ -56,8 +56,7 @@ public abstract class EditModuleRoleOperation {
             ModuleRoleMap moduleRoleMapBefore, ModuleRoleMap moduleRoleMapAfter) {
 
         StringBuilder stringBuilderAdded = new StringBuilder();
-        moduleRoleMapAfter.getData().stream()
-                .sorted(Comparator.comparing(ModuleRolePair::toString))
+        moduleRoleMapAfter.getData(true)
                 .forEach(moduleRolePair -> {
                     if (!moduleRoleMapBefore.containsModuleRolePair(moduleRolePair)) {
                         stringBuilderAdded.append(moduleRolePair).append(" ");
@@ -65,8 +64,7 @@ public abstract class EditModuleRoleOperation {
                 });
 
         StringBuilder stringBuilderDeleted = new StringBuilder();
-        moduleRoleMapBefore.getData().stream()
-                .sorted(Comparator.comparing(ModuleRolePair::toString))
+        moduleRoleMapBefore.getData(true)
                 .forEach(moduleRolePair -> {
                     if (!moduleRoleMapAfter.containsModuleRolePair(moduleRolePair)) {
                         stringBuilderDeleted.append(moduleRolePair).append(" ");
