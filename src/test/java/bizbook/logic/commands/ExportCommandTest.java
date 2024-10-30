@@ -38,8 +38,6 @@ public class ExportCommandTest {
         model.getFilteredPersonList().clear();
         expectedModel.getFilteredPersonList().clear();
 
-        CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS, FILE_TYPE_CSV),
-                false, false);
         assertCommandFailure(new ExportCommand(FILE_TYPE_CSV), model, MESSAGE_EMPTY_ADDRESS_BOOK);
     }
 
