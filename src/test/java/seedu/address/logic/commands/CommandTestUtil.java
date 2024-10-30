@@ -64,8 +64,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String LESSON_TIME_DESC_AMY = " " + PREFIX_LESSON_TIME + VALID_EDUCATION_AMY;
-    public static final String LESSON_TIME_DESC_BOB = " " + PREFIX_LESSON_TIME + VALID_EDUCATION_BOB;
+    public static final String LESSON_TIME_DESC_AMY = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_AMY;
+    public static final String LESSON_TIME_DESC_BOB = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_AMY;
     public static final String EDUCATION_DESC_AMY = " " + PREFIX_EDUCATION + VALID_EDUCATION_AMY;
     public static final String EDUCATION_DESC_BOB = " " + PREFIX_EDUCATION + VALID_EDUCATION_BOB;
     public static final String PARENT_NAME_DESC_AMY = " " + PREFIX_PARENT_NAME + VALID_PARENT_NAME_AMY;
