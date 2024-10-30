@@ -70,13 +70,18 @@ public class DaysAttended {
 
     /**
      * Increments the days attended by 1.
+     *
+     * @return A new {@code DaysAttended} instance representing the updated days attended.
      */
     public DaysAttended incremented() {
         return new DaysAttended(getDaysAttended() + 1);
     }
 
     /**
-     * Decrements the days attended by 1.
+     * Decrements the days attended by 1, ensuring it does not fall below 0.
+     *
+     * @return A new {@code DaysAttended} instance representing the updated days attended,
+     *         or 0 if the current days attended is 0.
      */
     public DaysAttended decremented() {
         int newDays = Math.max(getDaysAttended() - 1, 0);
@@ -85,6 +90,8 @@ public class DaysAttended {
 
     /**
      * Resets the days attended to 0.
+     *
+     * @return A new {@code DaysAttended} instance with days attended set to 0.
      */
     public DaysAttended reset() {
         return new DaysAttended(0);
