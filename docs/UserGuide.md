@@ -141,7 +141,7 @@ Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
 Examples:
 * `delete 2` deletes the 2nd person in the displayed list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and  7th person in the displayed list.
+* `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
 
 ### Clearing all entries : `clear`
 
