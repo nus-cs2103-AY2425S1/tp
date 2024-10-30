@@ -343,12 +343,12 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public Task getMostRecentTaskDisplay() {
+        public void setMostRecentTaskDisplay() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setMostRecentTaskDisplay() {
+        public Task getMostRecentTaskDisplay() {
             throw new AssertionError("This method should not be called.");
         }
     }
