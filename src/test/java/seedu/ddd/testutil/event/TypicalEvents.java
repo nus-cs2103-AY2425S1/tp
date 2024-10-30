@@ -13,9 +13,9 @@ import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DATE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.ddd.model.event.common.Event;
 
@@ -50,7 +50,8 @@ public class TypicalEvents {
     private TypicalEvents() {} // prevents instantiation
 
     public static List<Event> getTypicalEvents() {
-        return new ArrayList<>(Arrays.asList(WEDDING_A, WEDDING_B));
+        return Stream.of(WEDDING_A, WEDDING_B)
+                .map(event -> new EventBuilder(event).build())
+                .collect(Collectors.toList());
     }
-
 }

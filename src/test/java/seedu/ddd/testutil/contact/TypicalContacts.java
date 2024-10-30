@@ -14,9 +14,9 @@ import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_NAME;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_PHONE;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_SERVICE_1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
@@ -127,6 +127,11 @@ public class TypicalContacts {
     private TypicalContacts() {} // prevents instantiation
 
     public static List<Contact> getTypicalContacts() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return Stream.of(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE)
+                .map(contact -> contact instanceof Client
+                        ? new ClientBuilder((Client) contact).build()
+                        : new VendorBuilder((Vendor) contact).build()
+                )
+                .collect(Collectors.toList());
     }
 }
