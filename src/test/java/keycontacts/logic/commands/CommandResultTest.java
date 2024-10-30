@@ -1,11 +1,14 @@
 package keycontacts.logic.commands;
 
+import static keycontacts.logic.commands.CommandTestUtil.VALID_DATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import keycontacts.model.lesson.Date;
 
 public class CommandResultTest {
     @Test
@@ -30,6 +33,9 @@ public class CommandResultTest {
 
         // different showHelp value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", true, null, false)));
+
+        // different date value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, new Date(VALID_DATE), false)));
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, null, true)));
