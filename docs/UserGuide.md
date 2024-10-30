@@ -49,13 +49,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/STUDY_GROUP_TAG]` can be used as `n/John Doe t/1A` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/STUDY_GROUP_TAG]…​` can be used as ` ` (i.e. 0 times), `t/1A`, `t/1B t/Control` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -76,15 +76,16 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+* Email, gender and study group tags are **case-insensitive**
+* Valid entries for gender are M/m/F/f
+* Age must be a positive integer less than 150
+* Two contacts are considered **duplicates** if they share the same **email** address
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe e/johnd@example.com g/M a/30 d/to be assigned t/1A t/2B`
+* `add n/Betsy Crowe e/betsycrowe@example.com g/F a/40`
 
 ### Listing all persons : `list`
 
@@ -127,21 +128,20 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 * `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`
 
-### Deleting a person : `delete`
+### Deleting persons : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified persons from the address book.
 
-Format: `delete INDEX [INDEX...]` or `delete INDEX-INDEX`
+Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
 
-* Deletes the person at the specified `INDEX` or range of indices.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* When using ranges, ensure there are **no spaces** around the hyphen (e.g., 1-5 is valid, while 1 - 5 is not).
+* Deletes the person at the specified `INDEX` or range of indices
+* The index must be within the range
+* When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `delete 2` deletes the 2nd person in the displayed list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete 1 3 5-7` deletes the 1st, 3rd, and persons from the 5th to the 7th
+* `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
 
 ### Clearing all entries : `clear`
 
@@ -192,9 +192,9 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX [INDEX...] [INDEX-INDEX]...`<br> e.g., `delete 3 6 10-15 20 30-40`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
