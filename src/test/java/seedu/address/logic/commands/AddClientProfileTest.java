@@ -27,6 +27,7 @@ import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddClientProfileTest {
@@ -84,8 +85,8 @@ public class AddClientProfileTest {
 
     @Test
     public void toStringMethod() {
-        AddBuyerProfile addCommand = new AddBuyerProfile((Buyer) ALICE);
-        String expected = AddBuyerProfile.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddSellerProfile addCommand = new AddSellerProfile((Seller) ALICE);
+        String expected = AddSellerProfile.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
 

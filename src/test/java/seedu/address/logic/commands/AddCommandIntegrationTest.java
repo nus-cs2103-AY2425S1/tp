@@ -56,7 +56,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateBuyer_throwsCommandException() {
-        Buyer buyerInList = (Buyer) model.getAddressBook().getPersonList().get(0);
+        Buyer buyerInList = (Buyer) model.getAddressBook().getPersonList().get(3);
         assertCommandFailure(new AddBuyerProfile(buyerInList), model,
                 AddBuyerProfile.MESSAGE_DUPLICATE_PERSON);
     }

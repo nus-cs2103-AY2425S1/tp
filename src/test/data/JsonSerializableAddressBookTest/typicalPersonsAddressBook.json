@@ -40,8 +40,8 @@
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
-      "tags": [],
-      "role": "buyer"
+      "tags": ["friends"],
+      "role": "seller"
     },
     {
       "name": "Daniel Meier",
@@ -54,7 +54,7 @@
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
-      "tags": [],
+      "tags": ["friends"],
       "role": "seller"
     },
     {
@@ -68,7 +68,7 @@
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
-      "tags": [],
+      "tags": ["friends"],
       "role": "seller"
     },
     {
@@ -82,7 +82,7 @@
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
-      "tags": [],
+      "tags": ["friends"],
       "role": "buyer"
     },
     {
@@ -96,7 +96,7 @@
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
-      "tags": [],
+      "tags": ["friends"],
       "role": "seller"
     }
   ]

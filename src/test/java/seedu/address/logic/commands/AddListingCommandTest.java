@@ -5,18 +5,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalListings.PASIR_RIS;
+import static seedu.address.testutil.TypicalListings.TAMPINES;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 
-import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,140 +32,187 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyListings;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
-import seedu.address.model.listing.Price;
-import seedu.address.model.listing.Region;
-import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ListingBuilder;
 
 public class AddListingCommandTest {
-    private static final Name VALID_LISTING_NAME = new Name("Valid Listing Name");
-    private static final Address VALID_ADDRESS = new Address("Valid Address");
-    private static final Price VALID_PRICE = new Price("500k",
-            new BigDecimal(5000000));
-    private static final Area VALID_AREA = new Area(999);
-    private static final Region VALID_REGION_1 = Region.WEST;
-    private static final Region VALID_REGION_2 = Region.CENTRAL;
-    private static final Seller VALID_SELLER = new PersonBuilder().buildSeller();
-    private static final Set<Buyer> VALID_BUYERS =
-            Set.of(new PersonBuilder().withName("Jack").buildBuyer());
-    private static final Set<Person> VALID_BUYERS_PERSON =
-            Set.of(new PersonBuilder().withName("Jack").buildBuyer());
-    private static final Set<Person> VALID_BUYERS_AND_SELLERS =
-            Set.of(new PersonBuilder().withName("Jack").buildBuyer(), VALID_SELLER);
-    private static final Name VALID_SELLER_NAME = new PersonBuilder().buildSeller().getName();
-    private static final Set<Name> VALID_BUYERS_NAMES =
-            Set.of(new PersonBuilder().withName("Jack").buildBuyer().getName());
 
     @Test
-    public void execute_invalidSeller_throwsCommandException() {
-        Seller alice = new PersonBuilder().withName("Alice").buildSeller();
-        AddListingCommandTest.ModelStubWithoutListing modelStub =
-                new AddListingCommandTest.ModelStubWithoutListing(VALID_BUYERS_AND_SELLERS);
-        AddListingCommand addListingCommand =
-                new AddListingCommand(VALID_LISTING_NAME,
-                        VALID_PRICE,
-                        VALID_AREA,
-                        VALID_ADDRESS,
-                        VALID_REGION_1,
-                        alice.getName(),
-                        VALID_BUYERS_NAMES);
+    public void constructor_nulllistingName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddListingCommand(null, PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+    }
+
+    @Test
+    public void constructor_nullPrice_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), null,
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+    }
+
+    @Test
+    public void constructor_nullArea_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                null, PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+    }
+
+    @Test
+    public void constructor_nullAddress_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), null, PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+    }
+
+    @Test
+    public void constructor_nullRegion_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), null, ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+    }
+
+    @Test
+    public void constructor_nullSeller_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), null,
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+    }
+
+    @Test
+    public void constructor_nullBuyers_success() throws CommandException {
+        ModelStubAcceptingListingAdded modelStub = new ModelStubAcceptingListingAdded();
+        modelStub.addPerson(ALICE);
+        CommandResult commandResult = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                null).execute(modelStub);
+        Listing listingWithNoBuyers = new ListingBuilder(PASIR_RIS).withBuyers().build();
+
+        assertEquals(String.format(AddListingCommand.MESSAGE_SUCCESS, Messages.format(listingWithNoBuyers)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(PASIR_RIS), modelStub.listingsAdded);
+    }
+
+    @Test
+    public void execute_listingAcceptedByModel_addSuccessful() throws CommandException {
+        ModelStubAcceptingListingAdded modelStub = new ModelStubAcceptingListingAdded();
+        modelStub.addPerson(ALICE);
+        modelStub.addPerson(DANIEL);
+        modelStub.addPerson(GEORGE);
+
+        CommandResult commandResult = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))).execute(modelStub);
+        assertEquals(String.format(AddListingCommand.MESSAGE_SUCCESS, Messages.format(PASIR_RIS)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(PASIR_RIS), modelStub.listingsAdded);
+    }
+
+    @Test
+    public void execute_duplicateListing_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
+        modelStub.addPerson(ALICE);
+        modelStub.addPerson(DANIEL);
+        modelStub.addPerson(GEORGE);
+
+        assertThrows(CommandException.class,
+                AddListingCommand.MESSAGE_DUPLICATE_LISTING, () -> addListingCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_buyerAsSeller_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), FIONA.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
+        modelStub.addPerson(FIONA);
+        modelStub.addPerson(DANIEL);
+        modelStub.addPerson(GEORGE);
+
+        assertThrows(CommandException.class,
+                AddListingCommand.MESSAGE_NOT_SELLER, () -> addListingCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_sellerDoesNotExist_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), FIONA.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
+        modelStub.addPerson(DANIEL);
+        modelStub.addPerson(GEORGE);
 
         assertThrows(CommandException.class,
                 Messages.MESSAGE_INVALID_PERSON_INPUT, () -> addListingCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_invalidBuyer_throwsCommandException() {
-        Buyer alice = new PersonBuilder().withName("Alice").buildBuyer();
-        Set<Name> aliceNameInSet = Set.of(alice.getName());
-        AddListingCommandTest.ModelStubWithoutListing modelStub =
-                new AddListingCommandTest.ModelStubWithoutListing(VALID_BUYERS_AND_SELLERS);
-        AddListingCommand addListingCommand =
-                new AddListingCommand(VALID_LISTING_NAME,
-                        VALID_PRICE,
-                        VALID_AREA,
-                        VALID_ADDRESS,
-                        VALID_REGION_1,
-                        VALID_SELLER_NAME,
-                        aliceNameInSet);
+    public void execute_buyerDoesNotExist_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), FIONA.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
+        modelStub.addPerson(ALICE);
+        // DANIEL does not exist
+        modelStub.addPerson(GEORGE);
 
         assertThrows(CommandException.class,
                 Messages.MESSAGE_INVALID_PERSON_INPUT, () -> addListingCommand.execute(modelStub));
     }
 
-    @Test
-    public void execute_addListing_success() throws CommandException {
-        AddListingCommandTest.ModelStubWithoutListing modelStub =
-                new AddListingCommandTest.ModelStubWithoutListing(VALID_BUYERS_AND_SELLERS);
-        CommandResult commandResult =
-                new AddListingCommand(VALID_LISTING_NAME,
-                        VALID_PRICE,
-                        VALID_AREA,
-                        VALID_ADDRESS,
-                        VALID_REGION_1,
-                        VALID_SELLER_NAME,
-                        VALID_BUYERS_NAMES)
-                        .execute(modelStub);
-        Listing listingToBeAdded = new Listing(
-                VALID_LISTING_NAME,
-                VALID_ADDRESS,
-                VALID_PRICE,
-                VALID_AREA,
-                VALID_REGION_1,
-                VALID_SELLER,
-                VALID_BUYERS_PERSON);
-
-        assertEquals(String.format(AddListingCommand.MESSAGE_SUCCESS,
-                Messages.format(listingToBeAdded)), commandResult.getFeedbackToUser());
-    }
-
+    // equals and toString methods
     @Test
     public void equals() {
-        AddListingCommand addListingCommandOne =
-                new AddListingCommand(VALID_LISTING_NAME,
-                        VALID_PRICE,
-                        VALID_AREA,
-                        VALID_ADDRESS,
-                        VALID_REGION_1,
-                        VALID_SELLER_NAME,
-                        VALID_BUYERS_NAMES);
-        AddListingCommand addListingCommandTwo =
-                new AddListingCommand(VALID_LISTING_NAME,
-                        VALID_PRICE,
-                        VALID_AREA,
-                        VALID_ADDRESS,
-                        VALID_REGION_2,
-                        VALID_SELLER_NAME,
-                        VALID_BUYERS_NAMES);
+        AddListingCommand addPasirRisCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
 
-        // same object -> returns true
-        assertTrue(addListingCommandOne.equals(addListingCommandOne));
+        AddListingCommand addTampinesCommand = new AddListingCommand(TAMPINES.getName(), TAMPINES.getPrice(),
+                TAMPINES.getArea(), TAMPINES.getAddress(), TAMPINES.getRegion(), BENSON.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), ELLE.getName())));
+
+        // same object -> return true
+        assertTrue(addPasirRisCommand.equals(addPasirRisCommand));
 
         // same values -> returns true
-        AddListingCommand addListingCommandOneCopy =
-                new AddListingCommand(VALID_LISTING_NAME,
-                        VALID_PRICE,
-                        VALID_AREA,
-                        VALID_ADDRESS,
-                        VALID_REGION_1,
-                        VALID_SELLER_NAME,
-                        VALID_BUYERS_NAMES);
-        assertTrue(addListingCommandOne.equals(addListingCommandOneCopy));
+        AddListingCommand addPasirRisCommandCopy = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        assertTrue(addPasirRisCommand.equals(addPasirRisCommandCopy));
 
-        // different types -> returns false
-        assertFalse(addListingCommandOne.equals(1));
+        // different values -> return false
+        assertFalse(addPasirRisCommand.equals(addTampinesCommand));
 
-        // null -> returns false
-        assertFalse(addListingCommandOne.equals(null));
+        // different types -> return false
+        assertFalse(addPasirRisCommand.equals(1));
 
-        // different person -> returns false
-        assertFalse(addListingCommandOne.equals(addListingCommandTwo));
+        // null -> return false
+        assertFalse(addPasirRisCommand.equals(null));
+
+        // any one value is different -> return false
+        AddListingCommand differentArea = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                new Area(50), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        assertFalse(addPasirRisCommand.equals(differentArea));
+    }
+
+    @Test
+    public void toStringMethod() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        String expected = AddListingCommand.class.getCanonicalName()
+                + "{toAdd=" + PASIR_RIS.getName()
+                + ", address=" + PASIR_RIS.getAddress()
+                + ", seller=" + ALICE.getName()
+                + "}";
+        assertEquals(expected, addListingCommand.toString());
     }
 
     /**
@@ -226,6 +280,16 @@ public class AddListingCommandTest {
         }
 
         @Override
+        public boolean hasListingsForSeller(Person seller) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Listing getListingByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyListings getListings() {
             throw new AssertionError("This method should not be called.");
         }
@@ -280,16 +344,6 @@ public class AddListingCommandTest {
         }
 
         @Override
-        public Listing getListingByName(Name name) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasListingsForSeller(Person seller) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Listing> getFilteredListingList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -301,35 +355,106 @@ public class AddListingCommandTest {
     }
 
     /**
-     * A Model stub with no listing.
+     * A Model stub that contains a single listing.
      */
-    private class ModelStubWithoutListing extends AddListingCommandTest.ModelStub {
-        final ArrayList<Person> persons = new ArrayList<>();
-        private final Listings listings = new Listings();
+    private class ModelStubWithListing extends AddListingCommandTest.ModelStub {
+        private final Listing listing;
+        private final ArrayList<Listing> listingsAdded = new ArrayList<>();
+        private final ArrayList<Person> persons = new ArrayList<>();
 
-        ModelStubWithoutListing(Set<Person> persons) {
-            requireNonNull(persons);
-            this.persons.addAll(persons);
+        ModelStubWithListing(Listing listing) {
+            requireNonNull(listing);
+            this.listing = listing;
         }
+
+        @Override
+        public void addListing(Listing listing) {
+            requireNonNull(listing);
+            listingsAdded.add(listing);
+        }
+
+        @Override
+        public boolean hasListing(Listing listing) {
+            requireNonNull(listing);
+            return this.listing.isSameListing(listing);
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            persons.add(person);
+        }
+
+        @Override
+        public ObservableList<Listing> getFilteredListingList() {
+            return javafx.collections.FXCollections.observableList(listingsAdded);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return javafx.collections.FXCollections.observableList(persons);
+        }
+
         @Override
         public Person getPersonByName(Name name) {
             requireNonNull(name);
-            return persons.stream()
+            return this.getFilteredPersonList()
+                    .stream()
                     .filter(person -> person.getName().equals(name))
                     .findFirst()
                     .orElse(null);
         }
 
+    }
+
+    /**
+     * A Model stub that always accept the listing being added.
+     */
+    private class ModelStubAcceptingListingAdded extends AddListingCommandTest.ModelStub {
+        private final ArrayList<Listing> listingsAdded = new ArrayList<>();
+        private final ArrayList<Person> persons = new ArrayList<>();
+
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            ObservableList<Person> observablePersons = FXCollections.observableArrayList(persons);
-            System.out.println(persons);
-            return new FilteredList<>(observablePersons);
+        public boolean hasListing(Listing listing) {
+            requireNonNull(listing);
+            return listingsAdded.stream().anyMatch(listing::isSameListing);
         }
 
         @Override
         public void addListing(Listing listing) {
-            listings.addListing(listing);
+            requireNonNull(listing);
+            listingsAdded.add(listing);
+        }
+
+        @Override
+        public ReadOnlyListings getListings() {
+            return new Listings();
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            persons.add(person);
+        }
+
+        @Override
+        public ObservableList<Listing> getFilteredListingList() {
+            return javafx.collections.FXCollections.observableList(listingsAdded);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return javafx.collections.FXCollections.observableList(persons);
+        }
+
+        @Override
+        public Person getPersonByName(Name name) {
+            requireNonNull(name);
+            return this.getFilteredPersonList()
+                    .stream()
+                    .filter(person -> person.getName().equals(name))
+                    .findFirst()
+                    .orElse(null);
         }
     }
 }

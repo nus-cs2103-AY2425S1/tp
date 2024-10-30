@@ -101,7 +101,10 @@ public abstract class Person {
     public String getRemark() {
         return remark;
     }
-    public void updateRemark(String newRemark) { remark = newRemark; }
+    public void updateRemark(String newRemark) {
+        remark = newRemark;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
