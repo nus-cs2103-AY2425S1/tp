@@ -12,6 +12,10 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents the result of a command execution.
  */
 public class CommandResult {
+    /**
+     * Represents the lack of an index returned in a {@code CommandResult}.
+     * Declared as public so that {@code HelpCommand} and {@code ExitCommand} are able to use it.
+     */
     public static final Index NO_INDEX_TO_VIEW = null;
 
     private final String feedbackToUser;
@@ -27,10 +31,7 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-
-    /** Focus Index on UI after this command */
-//    private final Index focusIndex;
-
+    
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
