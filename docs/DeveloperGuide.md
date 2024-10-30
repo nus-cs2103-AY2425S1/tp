@@ -3,13 +3,19 @@
   title: "Developer Guide"
   pageNav: 3
 ---
+<br>
 
+![](images/doctrack.png)
 # DocTrack Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Acknowledgements**
 
@@ -20,13 +26,21 @@
     - [JavaFX](https://openjfx.io/)
     - [Jackson](https://github.com/FasterXML/jackson)
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Design**
 
@@ -70,6 +84,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<br>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -86,6 +102,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` or `Appointment` object residing in the `Model`.
+
+<br>
 
 ### Logic component
 
@@ -120,6 +138,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<br>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -148,6 +168,7 @@ The `Model` component,
 
 </box>
 
+<br>
 
 ### Storage component
 
@@ -168,11 +189,17 @@ The `Storage` component,
     * data is saved in `UserPrefsStorage` interface and saves as `JsonUserPrefsStorage`
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<br>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Flow**
 
@@ -187,7 +214,11 @@ The activity diagram shows the general sequence of steps when a user interacts w
 4. The `Command` object is executed.
 5. The `UI` displays the result of the command execution to the user.
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Implementation of main features**
 
@@ -197,6 +228,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Edit person feature
 
@@ -204,6 +236,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Delete person feature
 
@@ -211,6 +244,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Find person feature
 
@@ -218,6 +252,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### List person feature
 
@@ -225,6 +260,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Clear person feature
 
@@ -232,6 +268,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Add appointment feature
 
@@ -239,6 +276,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Edit appointment feature
 
@@ -246,6 +284,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Delete appointment feature
 
@@ -253,6 +292,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Find appointment feature
 
@@ -260,6 +300,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### List appointment feature
 
@@ -267,6 +308,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Clear appointment feature
 
@@ -274,24 +316,85 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
+
 ---
+
+<br>
 
 ## Implementation of general features
 
 ### Exit feature
-
 #### Implementation
+When a user types an `exit` command, the DocTrack application will exit.
+
+The sequence diagram shows how an `exit` command is executed:
+<puml src="diagrams/ExitSequenceDiagram.puml" width="600"></puml>
+
+**Step 1.** The user types the `exit` command in the `CommandBox`, which is then passed to the `LogicManager`.
+
+**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `exit` command.
+
+**Step 3.** The `AddressBookParser` creates an `ExitCommand` object, which is returned to the `LogicManager`.
+
+**Step 4.** The `LogicManager` calls the `ExitCommand::execute` method, which creates a new `CommandResult` object.
+
+**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
+
 
 #### Design considerations
 
+**Aspect: How to handle unsaved data on exit:**
+
+* **Alternative 1 (current choice):** Automatically save all changes on exit.
+  * Pros: Simplifies the exit process for the user. Ensures no data is lost.
+  * Cons: May be slow if there are many changes to save.
+
+
+* **Alternative 2:** Prompt the user to save changes before exiting.
+    * Pros: Gives the user more control over the saving process.
+    * Cons: May be annoying for users who do not want an additional step to save changes.
+  
+<br>
 
 ### Help feature
-
 #### Implementation
+
+When a user types a `help` command, the DocTrack application will display a `HelpWindow`.
+
+The sequence diagram shows how a `help` command is executed:
+
+<puml src="diagrams/HelpSequenceDiagram.puml" width="600"></puml>
+
+**Step 1.** The user types the `help` command in the `CommandBox`, which is then passed to the `LogicManager`.
+
+**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `help` command.
+
+**Step 3.** The `AddressBookParser` creates a `HelpCommand` object, which is returned to the `LogicManager`.
+
+**Step 4.** The `LogicManager` calls the `HelpCommand::execute` method, which creates a new 
+`CommandResult` object.
+
+**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
+
 
 #### Design considerations
 
+**Aspect: How to display help information:**
+
+* **Alternative 1 (current choice):** Display help information in a new window.
+  * Pros: Keeps the main application window uncluttered.
+  * Cons: Requires managing an additional window.
+
+* **Alternative 2:** Display help information in a modal dialog.
+  * Pros: Simpler to implement.
+  * Cons: Can clutter the main application window and interrupt the user's workflow.
+
+<br>
+
 ---
+
+<br>
 
 ## Proposed features
 
@@ -309,15 +412,15 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+**Step 1.** The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+**Step 2.** The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+**Step 3.** The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -327,7 +430,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+**Step 4.** The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -361,11 +464,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+**Step 5.** The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+**Step 6.** The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -391,14 +494,11 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -408,7 +508,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Appendix: Data storage and files**
 - The data of the patients and appointments is stored in the `data` folder.
@@ -422,9 +526,15 @@ For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if 
 is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
 </box>
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
+<br>
+
 ## **Appendix: Requirements**
+
+<br>
 
 ### Product scope
 
@@ -433,6 +543,7 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 
 **Value proposition**: Time spent looking through paper medical documents should be spent in other life-saving activities. Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment/treatment details, allowing GPs to contact and monitor their patients easily.
 
+<br>
 
 ### User stories
 
@@ -478,6 +589,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | doctor               | receive reminders on upcoming appointments         | prepare for them                                                     |
 | `*`      | doctor               | retrieve specific treatment information            | treat them appropriately                                             |
 | `*`      | doctor               | generate an automated document for a patient       | give it to them as reference                                         |
+
+<br>
 
 ### Use cases
 
@@ -692,6 +805,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+<br>
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -711,6 +826,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 14. Data file must remain usable and intact even with invalid input from the application
 15. Errors must trigger clear, user-friendly messages
 
+<br>
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -718,7 +835,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Reasonable system**: A system with an OS matching the criteria above, with parts with a release date maximum 10 years from the current date
 * **Standard resolutions**: 1920x1080 and 1080x720
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -730,6 +851,8 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
+
+<br>
 
 ### Launch and shutdown
 
@@ -787,14 +910,22 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Appendix: Planned enhancements**
 Team size: 5
 
 1.
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Appendix: Effort**
 
@@ -803,3 +934,5 @@ We highly recommend adding an appendix named Appendix: Effort that evaluators ca
 - Explain the difficulty level, challenges faced, effort required, and achievements of the project. 
 - If a significant part (e.g., more than 5%) of the effort was saved through reuse, mention what you reused and how it affected the effort e.g., the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java. 
 - Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
+
+<br>
