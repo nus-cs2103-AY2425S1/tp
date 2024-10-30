@@ -48,9 +48,9 @@ import seedu.eventtory.testutil.EventUtil;
 import seedu.eventtory.testutil.VendorBuilder;
 import seedu.eventtory.testutil.VendorUtil;
 
-public class AddressBookParserTest {
+public class EventToryParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final EventToryParser parser = new EventToryParser();
 
     @Test
     public void parseCommand_assign() throws Exception {

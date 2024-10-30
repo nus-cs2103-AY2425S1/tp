@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.eventtory.model.AddressBook;
+import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.vendor.Vendor;
 
 /**
@@ -60,14 +60,14 @@ public class TypicalVendors {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical vendors.
+     * Returns an {@code EventTory} with all the typical vendors.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static EventTory getTypicalEventTory() {
+        EventTory et = new EventTory();
         for (Vendor vendor : getTypicalVendors()) {
-            ab.addVendor(vendor);
+            et.addVendor(vendor);
         }
-        return ab;
+        return et;
     }
 
     public static List<Vendor> getTypicalVendors() {

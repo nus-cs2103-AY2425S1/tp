@@ -1,6 +1,6 @@
 package seedu.eventtory.testutil;
 
-import seedu.eventtory.model.AddressBook;
+import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
 
@@ -16,14 +16,14 @@ public class TypicalVendorsEventsCombined {
     /**
      * Returns an {@code AddressBook} with all the typical events and vendors.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static EventTory getTypicalAddressBook() {
+        EventTory et = new EventTory();
         for (Event event : TypicalEvents.getTypicalEvents()) {
-            ab.addEvent(event);
+            et.addEvent(event);
         }
         for (Vendor vendor : TypicalVendors.getTypicalVendors()) {
-            ab.addVendor(vendor);
+            et.addVendor(vendor);
         }
-        return ab;
+        return et;
     }
 }
