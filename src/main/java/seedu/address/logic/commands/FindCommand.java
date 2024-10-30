@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 
 
@@ -23,8 +22,8 @@ public abstract class FindCommand<T> extends Command {
         + ": Finds all entities whose data contain any of "
         + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
         + "Parameters: ENTITY_TYPE (person/appt) KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " n/John\n"
-        + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " n/John d/2024-10-20";
+        + "Example: " + COMMAND_WORD + " " + PERSON_ENTITY_STRING + " n/John\n"
+        + "Example: " + COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING + " n/John d/2024-10-20";
 
     protected final Predicate<T> predicate;
 
