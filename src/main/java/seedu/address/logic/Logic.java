@@ -8,7 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventTory;
 import seedu.address.model.association.Association;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
@@ -28,11 +28,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the EventTory.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getEventTory()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyEventTory getEventTory();
 
     /** Returns an unmodifiable view of the filtered list of vendors */
     ObservableList<Vendor> getFilteredVendorList();
@@ -59,9 +59,9 @@ public interface Logic {
     ObservableList<Association> getAssociationList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' EventTory file path.
      */
-    Path getAddressBookFilePath();
+    Path getEventToryFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
