@@ -23,26 +23,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      */
     public HelpCommand parse(String args) throws ParseException {
         args.trim();
-        /*
-        String message;
-        if (args.isEmpty()) {
-            message = HelpCommand.SHOWING_HELP_MESSAGE;
-        } else if (args.equalsIgnoreCase(new String("add"))) {
-            message = HelpCommand.HELP_ADD;
-        } else if (args.equalsIgnoreCase(new String("delete"))) {
-            message = HelpCommand.HELP_DELETE;
-        } else if (args.equalsIgnoreCase(new String("edit"))) {
-            message = HelpCommand.HELP_EDIT;
-        } else if (args.equalsIgnoreCase(new String("find"))) {
-            message = HelpCommand.HELP_FIND;
-        } else if (args.equalsIgnoreCase(new String("list"))) {
-            message = HelpCommand.HELP_LIST;
-        } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        }
-
-         */
         switch (args.trim()) {
         case AddCommand.COMMAND_WORD:
             return new HelpCommand(HelpCommand.HELP_ADD);
