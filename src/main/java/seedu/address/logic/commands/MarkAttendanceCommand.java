@@ -59,8 +59,8 @@ public class MarkAttendanceCommand extends Command {
      * @param date The date for which to mark attendance.
      * @param attendance The attendance status (present/absent).
      */
-    public MarkAttendanceCommand(Name name, LocalDate date, Attendance attendance,
-                                 Optional<StudentNumber> studentNumber) {
+    public MarkAttendanceCommand(Name name, Optional<StudentNumber> studentNumber,
+                                 LocalDate date, Attendance attendance) {
         this.name = name;
         this.date = date;
         this.attendance = attendance;
