@@ -6,6 +6,9 @@ import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.contact.common.Contact;
 
+/**
+ * {@code ContactPredicateBuilder} for {@code Client}.
+ */
 public class ClientPredicateBuilder extends ContactPredicateBuilder {
 
     public ClientPredicateBuilder(ArgumentMultimap argMultimap) {

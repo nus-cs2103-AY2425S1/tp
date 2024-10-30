@@ -1,7 +1,6 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;

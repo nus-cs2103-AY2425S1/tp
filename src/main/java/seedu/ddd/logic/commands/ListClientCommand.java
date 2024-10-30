@@ -8,7 +8,6 @@ import java.util.function.Predicate;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.event.common.Event;
 
 /**
  * Lists clients in the address book to the user.

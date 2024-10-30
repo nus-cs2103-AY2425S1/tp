@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
-import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
@@ -71,38 +69,6 @@ public class ContactPredicateBuilderTest {
         assertFalse(predicateBuilder.build().test(new ClientBuilder().withName("Benson Nguyen").build()));
         assertFalse(predicateBuilder.build().test(new ClientBuilder().withName("Harry Potter").build()));
         assertFalse(predicateBuilder.build().test(new ClientBuilder().withName("benSOn Nguyen").build()));
-    }
-
-    @Test
-    public void testArgumentMultimap_containsClient_returnsTrue() throws ParseException {
-        ArgumentMultimap argMultimap = new ArgumentMultimap();
-        argMultimap.put(FLAG_CLIENT, "");
-        ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
-        assertTrue(predicateBuilder.build().test(ALICE));
-    }
-
-    @Test
-    public void testArgumentMultimap_doesNotContainClient_returnsFalse() throws ParseException {
-        ArgumentMultimap argMultimap = new ArgumentMultimap();
-        argMultimap.put(FLAG_CLIENT, "");
-        ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
-        assertFalse(predicateBuilder.build().test(BENSON));
-    }
-
-    @Test
-    public void testArgumentMultimap_containsVendor_returnsTrue() throws ParseException {
-        ArgumentMultimap argMultimap = new ArgumentMultimap();
-        argMultimap.put(FLAG_VENDOR, "");
-        ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
-        assertTrue(predicateBuilder.build().test(BENSON));
-    }
-
-    @Test
-    public void testArgumentMultimap_doesNotContainVendor_returnsFalse() throws ParseException {
-        ArgumentMultimap argMultimap = new ArgumentMultimap();
-        argMultimap.put(FLAG_VENDOR, "");
-        ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
-        assertFalse(predicateBuilder.build().test(ALICE));
     }
 
     @Test
