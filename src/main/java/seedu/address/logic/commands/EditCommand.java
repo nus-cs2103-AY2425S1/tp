@@ -421,7 +421,8 @@ public class EditCommand extends Command {
         }
 
         public Optional<Set<ItemName>> getItems() {
-            return (items != null && !items.isEmpty()) ? Optional.of(Collections.unmodifiableSet(items)) : Optional.empty();
+            return (items != null && !items.isEmpty())
+                    ? Optional.of(Collections.unmodifiableSet(items)) : Optional.empty();
         }
 
         public void setAddress(Address address) {
