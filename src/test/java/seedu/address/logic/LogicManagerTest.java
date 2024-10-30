@@ -20,8 +20,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.SetChangeListener;
-import javafx.util.Pair;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -31,7 +31,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.association.Association;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.vendor.UniqueVendorList;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -152,14 +155,95 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getAssociatedEvents_vendorHasAssociations_returnsCorrectEvents() {
+        // Create vendor and events, and set up associations
+        Vendor vendor = new VendorBuilder().withName("Vendor 1").build();
+        Event event1 = new EventBuilder().withName("Event 1").build();
+        Event event2 = new EventBuilder().withName("Event 2").build();
+
+        // Add vendor and events to the model
+        model.addVendor(vendor);
+        model.addEvent(event1);
+        model.addEvent(event2);
+
+        // Assign the vendor to the events
+        model.assignVendorToEvent(vendor, event1);
+        model.assignVendorToEvent(vendor, event2);
+
+        // Get associated events through LogicManager and verify
+        ObservableList<Event> associatedEvents = logic.getAssociatedEvents(vendor);
+        assertEquals(2, associatedEvents.size());
+        assertEquals(event1, associatedEvents.get(0));
+        assertEquals(event2, associatedEvents.get(1));
+    }
+
+    @Test
+    public void getAssociatedVendors_eventHasAssociations_returnsCorrectVendors() {
+        // Create event and vendors, and set up associations
+        Event event = new EventBuilder().withName("Event 1").build();
+        Vendor vendor1 = new VendorBuilder().withName("Vendor 1").build();
+        Vendor vendor2 = new VendorBuilder().withName("Vendor 2").build();
+
+        // Add event and vendors to the model
+        model.addEvent(event);
+        model.addVendor(vendor1);
+        model.addVendor(vendor2);
+
+        // Assign the vendors to the event
+        model.assignVendorToEvent(vendor1, event);
+        model.assignVendorToEvent(vendor2, event);
+
+        // Get associated vendors through LogicManager and verify
+        ObservableList<Vendor> associatedVendors = logic.getAssociatedVendors(event);
+        assertEquals(2, associatedVendors.size());
+        assertEquals(vendor1, associatedVendors.get(0));
+        assertEquals(vendor2, associatedVendors.get(1));
+    }
+
+    @Test
     public void getAssociation_newAssociation_updateSuccessful() {
-        ObjectProperty<Pair<Vendor, Event>> observedState = new SimpleObjectProperty<>();
-        logic.getAssociations().addListener((SetChangeListener.Change<? extends Pair<Vendor, Event>> change) -> {
-            observedState.set(change.getElementAdded());
+        ObjectProperty<Association> observedState = new SimpleObjectProperty<>();
+        ObservableList<Association> associations = logic.getAssociationList();
+        associations.addListener((ListChangeListener<? super Association>) change -> {
+            if (change.next() && change.wasAdded()) {
+                observedState.set(change.getAddedSubList().get(0));
+            }
         });
 
         model.assignVendorToEvent(TypicalVendors.AMY, TypicalEvents.BIRTHDAY);
-        assertEquals(observedState.get(), new Pair<>(TypicalVendors.AMY, TypicalEvents.BIRTHDAY));
+
+        UniqueVendorList uniqueVendorList = new UniqueVendorList();
+        uniqueVendorList.add(TypicalVendors.AMY);
+
+        UniqueEventList uniqueEventList = new UniqueEventList();
+        uniqueEventList.add(TypicalEvents.BIRTHDAY);
+
+        Vendor uniqueVendor = null;
+        for (Vendor vendor : uniqueVendorList) {
+            if (vendor.equals(TypicalVendors.AMY)) {
+                uniqueVendor = vendor;
+                break;
+            }
+        }
+
+        if (uniqueVendor == null) {
+            throw new IllegalArgumentException("Vendor not found");
+        }
+
+        Event uniqueEvent = null;
+        for (Event event : uniqueEventList) {
+            if (event.equals(TypicalEvents.BIRTHDAY)) {
+                uniqueEvent = event;
+                break;
+            }
+        }
+
+        if (uniqueEvent == null) {
+            throw new IllegalArgumentException("Event not found");
+        }
+
+        Association expectedAssociation = new Association(uniqueVendor.getId(), uniqueEvent.getId());
+        assertEquals(observedState.get(), expectedAssociation);
     }
 
     /**
