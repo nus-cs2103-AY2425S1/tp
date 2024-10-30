@@ -88,6 +88,10 @@ public interface Model {
     void unmarkAllStudents();
 
     /**
+     * Get total revenue
+     */
+    int getRevenue();
+    /**
      * Adds the given student.
      * {@code student} must not already exist in the address book.
      */
