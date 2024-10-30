@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static final EmergencyContact EMPTY_EMERGENCY_CONTACT =
-            new EmergencyContact("", "");
+            new EmergencyContact(new Name(""), new Phone(""));
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),

@@ -10,7 +10,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Deletes the emergency contact of an existing patient in the address book.
@@ -45,27 +47,27 @@ public class DeleteEmergencyContactCommand extends Command {
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (personToEdit.getEmergencyContact() == null
-                || (personToEdit.getEmergencyContact().contactName.isEmpty()
-                && personToEdit.getEmergencyContact().contactNumber.isEmpty())) {
+                || (personToEdit.getEmergencyContact().contactName == null
+                && personToEdit.getEmergencyContact().contactNumber == null)) {
             return new CommandResult(generateNoEmergencyContactMessage(personToEdit));
         }
 
-        String nameToBeDeleted = personToEdit.getEmergencyContact().contactName;
-        String numberToBeDeleted = personToEdit.getEmergencyContact().contactNumber;
+        EmergencyContact toBeDeleted = personToEdit.getEmergencyContact();
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), new EmergencyContact("", ""),
+                personToEdit.getAddress(), new EmergencyContact(new Name("No Name Entered"), new Phone("000")),
                 personToEdit.getTags(), personToEdit.getPriorityLevel());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(generateSuccessMessage(editedPerson, nameToBeDeleted, numberToBeDeleted));
+        return new CommandResult(generateSuccessMessage(editedPerson, toBeDeleted));
     }
 
     /**
      * Generates a command execution success message based on whether the emergency contact is deleted
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit, String name, String number) {
-        return String.format(MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS, name, number, personToEdit.getName());
+    private String generateSuccessMessage(Person personToEdit, EmergencyContact toBeDeleted) {
+        return String.format(MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS, toBeDeleted.getName(), toBeDeleted.getNumber(),
+                personToEdit.getName());
     }
 
     private String generateNoEmergencyContactMessage(Person personToEdit) {

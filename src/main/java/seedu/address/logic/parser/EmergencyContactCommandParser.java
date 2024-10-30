@@ -40,14 +40,14 @@ public class EmergencyContactCommandParser implements Parser<EmergencyContactCom
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         } else {
-            name = new Name("");
+            name = new Name("No Name Entered");
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         } else {
-            phone = new Phone("");
+            phone = new Phone("000");
         }
 
-        return new EmergencyContactCommand(index, new EmergencyContact(name.toString(), phone.toString()));
+        return new EmergencyContactCommand(index, new EmergencyContact(name, phone));
     }
 }

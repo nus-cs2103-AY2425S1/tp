@@ -66,8 +66,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        emergencyContactName = source.getEmergencyContact().contactName;
-        emergencyContactNumber = source.getEmergencyContact().contactNumber;
+        emergencyContactName = source.getEmergencyContact().getName().fullName;
+        emergencyContactNumber = source.getEmergencyContact().getNumber().value;
         priorityLevel = source.getPriorityLevel().getValue();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -121,8 +121,8 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     EmergencyContact.class.getSimpleName()));
         }
-        final EmergencyContact modelEmergencyContact = new EmergencyContact(emergencyContactName,
-                emergencyContactNumber);
+        final EmergencyContact modelEmergencyContact = new EmergencyContact(new Name(emergencyContactName),
+                new Phone(emergencyContactNumber));
 
         final PriorityLevel modelPriorityLevel;
 

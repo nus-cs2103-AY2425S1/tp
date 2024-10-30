@@ -12,7 +12,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Changes the emergency contact of an existing person in the address book.
@@ -56,13 +58,14 @@ public class EmergencyContactCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if (emergencyContact.contactNumber.isEmpty() || emergencyContact.contactName.isEmpty()) {
+        if (emergencyContact.contactNumber.equals(new Phone("000"))
+                || emergencyContact.contactName.equals(new Name("No Name Entered"))) {
             throw new CommandException(MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (personToEdit.getEmergencyContact() != null
-                && !personToEdit.getEmergencyContact().contactName.isEmpty()
-                && !personToEdit.getEmergencyContact().contactNumber.isEmpty()) {
+                && !personToEdit.getEmergencyContact().contactName.equals(new Name("No Name Entered"))
+                && !personToEdit.getEmergencyContact().contactNumber.equals(new Phone("000"))) {
             return new CommandResult(generateEmergencyContactExistsMessage(personToEdit));
         }
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
@@ -78,7 +81,7 @@ public class EmergencyContactCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         return String.format(MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS, personToEdit.getName(),
-                emergencyContact.contactName, emergencyContact.contactNumber);
+                emergencyContact.getName(), emergencyContact.getNumber());
     }
 
     private String generateEmergencyContactExistsMessage(Person personToEdit) {
