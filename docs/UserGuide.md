@@ -184,7 +184,7 @@ Parameter | Requirements | Explanation
 `vrn/CAR_VRN` | Optional; Required if adding a car; Must follow the [VRN format](#glossary) and be unique | Car's [Vehicle Registration Number](#glossary).
 `vin/CAR_VIN` | Optional; Required if adding a car; Must be a unique 17-character alphanumeric string | Car's [Vehicle Identification Number](#glossary).
 `make/CAR_MAKE` | Optional; Required if adding a car; First letter must be capitalized; Must be at most 40 characters; No spaces | Car's make.
-`model/CAR_MODEL` | Optional; Required if adding a car; First letter must be capitalized; Must be at most 40 characters; No spaces | Car's model.
+`model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalized letter or a number; Must be at most 40 characters; No spaces | Car's model.
 `i/ISSUE` | Optional; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.
 
 **Notes:**
@@ -226,7 +226,7 @@ Parameter | Requirements | Explanation
 `vrn/CAR_VRN` | Required; Must follow the [VRN format](#glossary) and be unique | Car's [Vehicle Registration Number](#glossary).
 `vin/CAR_VIN` | Required; Must be a unique 17-character alphanumeric string | Car's [Vehicle Identification Number](#glossary).
 `make/CAR_MAKE` | Required; First letter must be capitalized; Must be at most 40 characters; No spaces | Car's make.
-`model/CAR_MODEL` | Required; First letter must be capitalized; Must be at most 40 characters; No spaces | Car's model.
+`model/CAR_MODEL` | Required; First character is a capitalized letter or a number; Must be at most 40 characters; No spaces | Car's model.
 
 **Notes:**
 
@@ -336,7 +336,7 @@ Parameter | Requirements | Explanation
 `vrn/CAR_VRN` | Optional; Must follow [VRN format](#glossary) and be unique | New [Vehicle Registration Number](#glossary) of the client's car.
 `vin/CAR_VIN` | Optional; Must be a unique 17-character alphanumeric string | New [Vehicle Identification Number](#glossary) of the client's car.
 `make/CAR_MAKE` | Optional; First letter must be capitalized; Must be at most 40 characters; No spaces | New make of the client's car.
-`model/CAR_MODEL` | Optional; First letter must be capitalized; Must be at most 40 characters; No spaces | New model of the client's car.
+`model/CAR_MODEL` | Optional; First character is a capitalized letter or a number; Must be at most 40 characters; No spaces | New model of the client's car.
 `i/ISSUE` | Optional; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Updates list of the client's current issues.
 
 **Notes:**
