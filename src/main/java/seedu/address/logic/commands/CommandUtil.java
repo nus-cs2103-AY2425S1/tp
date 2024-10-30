@@ -23,7 +23,7 @@ public class CommandUtil {
      */
     public static List<Person> filterPersonsByIndex(
             List<Person> currDisplayedList, Index index) throws CommandException {
-
+        assert currDisplayedList != null : "currDisplayedList should not be null";
         List<Person> personList = new ArrayList<>();
         if (index.getZeroBased() >= currDisplayedList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
