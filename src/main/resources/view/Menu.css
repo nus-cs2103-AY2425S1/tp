@@ -1,31 +1,24 @@
-.menu-bar {
+#menuBar {
     -fx-background-color: #F0A89F;
+    -fx-padding: 0 0 1 0;
+    -fx-border-insets: 0 0 1 0;
+    -fx-background-insets: 0 0 1 0;
 }
 
-.context-menu {
-    -fx-background-color: #F0A89F;
-    -fx-background-insets: 0 3 0 3;
-    -fx-padding: 0 2 0 0;
-}
-
-.menu-bar .label, .menu-item .label {
+#helpButton, #exitButton {
+    -fx-background-color: transparent;
     -fx-font-size: 14pt;
     -fx-font-family: "Inter";
     -fx-text-fill: black;
     -fx-opacity: 0.9;
-    -fx-padding: 0 2 0 2;
+    -fx-padding: 4 11 4 11;
 }
 
-.menu, .menu-item {
-    -fx-background-color: #F0A89F;
+.button {
+  -fx-content-display: center;
 }
 
-.menu:hover, .menu-item:hover {
-    -fx-background-color: #FAE4E1;
+#helpButton:hover, #exitButton:hover {
+     -fx-background-color: #FAE4E1;
+     -fx-background-radius: 0;
 }
-
-
-
-
-
-
