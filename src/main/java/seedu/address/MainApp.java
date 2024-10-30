@@ -105,6 +105,8 @@ public class MainApp extends Application {
         }
 
         ModelManager modelManager = new ModelManager(initialData, appointments, userPrefs);
+
+        // ensures initial list shown to user are current (i.e. unarchived) persons
         modelManager.updateFilteredPersonList(Model.PREDICATE_SHOW_CURRENT_PERSONS);
 
         return modelManager;
