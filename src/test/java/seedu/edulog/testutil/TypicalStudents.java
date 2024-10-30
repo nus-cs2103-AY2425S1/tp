@@ -61,4 +61,13 @@ public class TypicalStudents {
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+
+    /**
+     * Returns a deep copy of a list of typical students
+     */
+    public static List<Student> getCopyOfTypicalStudents() {
+        return new ArrayList<>(Arrays.asList(new StudentBuilder(ALICE).build(), new StudentBuilder(BENSON).build(),
+                new StudentBuilder(CARL).build(), new StudentBuilder(DANIEL).build(), new StudentBuilder(ELLE).build(),
+                        new StudentBuilder(FIONA).build(), new StudentBuilder(GEORGE).build()));
+    }
 }

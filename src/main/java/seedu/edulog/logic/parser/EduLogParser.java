@@ -23,6 +23,7 @@ import seedu.edulog.logic.commands.HelpCommand;
 import seedu.edulog.logic.commands.ListCommand;
 import seedu.edulog.logic.commands.MarkAllCommand;
 import seedu.edulog.logic.commands.MarkCommand;
+import seedu.edulog.logic.commands.RevenueCommand;
 import seedu.edulog.logic.commands.UnmarkAllCommand;
 import seedu.edulog.logic.commands.UnmarkCommand;
 import seedu.edulog.logic.parser.exceptions.ParseException;
@@ -108,6 +109,9 @@ public class EduLogParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case RevenueCommand.COMMAND_WORD:
+            return new RevenueCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
