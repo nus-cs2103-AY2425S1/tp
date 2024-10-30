@@ -71,6 +71,10 @@ public class OwedAmount extends Fee {
         return value > super.value;
     }
 
+    public double getValue() {
+        return this.value;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
