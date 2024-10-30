@@ -407,15 +407,35 @@
 }
 
 .divider {
-    -fx-background-color: #DDDDDD;
-    -fx-min-width: 100%;
+    -fx-background-color: derive(#757575, 90%);
+    -fx-pref-height: 1;
+    -fx-max-height: 1;
+    -fx-min-height: 1;
+}
+
+.header-container {
+    -fx-padding: 32px;
+    -fx-background-color: white;
+    -fx-border-color: derive(#757575, 90%);
+    -fx-border-radius: 5 5 0 0;
+    -fx-background-radius: 5 5 0 0;
+    -fx-border-width: 1 1 0 1;
 }
 
 .section-container {
     -fx-padding: 32px;
     -fx-background-color: white;
-    -fx-border-width: 1;
-    -fx-border-color: #e8def8;
+    -fx-border-color: derive(#757575, 90%);
+    -fx-border-width: 0 1 0 1;
+}
+
+.bottom-container {
+    -fx-padding: 32px;
+    -fx-background-color: white;
+    -fx-border-color: derive(#757575, 90%);
+    -fx-border-radius: 0 0 5 5;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-width: 0 1 1 1;
 }
 
 .section-heading {
@@ -457,3 +477,6 @@
     -fx-padding: 5 10;
 }
 
+#displayCardContainer {
+    -fx-border-width: 1;
+}

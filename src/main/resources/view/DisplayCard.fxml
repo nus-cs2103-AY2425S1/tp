@@ -8,9 +8,8 @@
 <ScrollPane fx:id="scrollPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fitToWidth="true" styleClass="display-scroll-pane">
     <VBox fx:id="cardPane" styleClass="student-information">
-        <HBox styleClass="divider"/>
         <!-- Contact Information Section -->
-        <VBox styleClass="section-container" spacing="16">
+        <VBox styleClass="header-container" spacing="16">
             <Label styleClass="section-heading" fx:id="name" wrapText="true"/>
 
             <VBox spacing="8">
@@ -38,7 +37,7 @@
 
         <!-- Lessons Section -->
         <VBox styleClass="section-container" spacing="8">
-            <Label text="Lessons" styleClass="section-heading"/>
+            <Label text="Lessons:" styleClass="label-heading"/>
             <FlowPane fx:id="displayLessons" styleClass="content-flow-pane"
                       hgap="10" vgap="10"/>
         </VBox>
@@ -47,7 +46,7 @@
 
         <!-- Tags Section -->
         <VBox styleClass="section-container" spacing="8">
-            <Label text="Tags" styleClass="section-heading"/>
+            <Label text="Tags:" styleClass="label-heading"/>
             <FlowPane fx:id="displayTags" styleClass="content-flow-pane"
                       hgap="10" vgap="10"/>
         </VBox>
@@ -55,8 +54,8 @@
         <HBox styleClass="divider"/>
 
         <!-- Remarks Section -->
-        <VBox styleClass="section-container" spacing="8">
-            <Label text="Remarks" styleClass="section-heading"/>
+        <VBox styleClass="bottom-container" spacing="8">
+            <Label text="Remarks:" styleClass="label-heading"/>
             <VBox fx:id="displayRemarks" styleClass="remarks-container" spacing="10"/>
         </VBox>
     </VBox>
