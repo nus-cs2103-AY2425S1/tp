@@ -3,13 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkSupplierCommand;
-import seedu.address.model.person.SupplierStatus;
+import seedu.address.model.supplier.SupplierStatus;
 
 
 public class MarkSupplierCommandParserTest {
@@ -18,9 +18,9 @@ public class MarkSupplierCommandParserTest {
     @Test
     public void parse_indexSpecified_success() {
         // have remark
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_SUPPLIER;
         String userInput = "-s " + targetIndex.getOneBased() + " " + nonEmptyStatus;
-        MarkSupplierCommand expectedCommand = new MarkSupplierCommand(INDEX_FIRST_PERSON,
+        MarkSupplierCommand expectedCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(nonEmptyStatus));
         assertParseSuccess(parser, userInput, expectedCommand);
     }

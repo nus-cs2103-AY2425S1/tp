@@ -37,7 +37,7 @@
 
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@/images/person.png" />
+                    <Image url="@/images/supplier.png" />
                 </ImageView>
                 <Label fx:id="senderName" styleClass="cell_small_label" text="\$senderName">
                 <HBox.margin>

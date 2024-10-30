@@ -15,7 +15,7 @@ public class TypicalDeliveries {
 
     public static final Delivery APPLE = new DeliveryBuilder().build();
     public static final Delivery BREAD = new DeliveryBuilder().withProduct("bread")
-            .withSender(TypicalPersons.BENSON)
+            .withSender(TypicalSuppliers.BENSON)
             .withDeliveryTime("12-10-2024 17:30")
             .withStatus(Status.PENDING)
             .withCost("150")
@@ -24,14 +24,14 @@ public class TypicalDeliveries {
             .build();
 
     public static final Delivery CAN = new DeliveryBuilder().withProduct("cannedDrinks")
-            .withSender(TypicalPersons.CARL)
+            .withSender(TypicalSuppliers.CARL)
             .withDeliveryTime("03-03-2025 10:30")
             .withStatus(Status.PENDING)
             .withCost("200")
             .withQuantity("250 units")
             .build();
     public static final Delivery DURIAN = new DeliveryBuilder().withProduct("durian")
-            .withSender(TypicalPersons.DANIEL)
+            .withSender(TypicalSuppliers.DANIEL)
             .withDeliveryTime("03-03-2025 10:30")
             .withStatus(Status.DELIVERED)
             .withCost("200")

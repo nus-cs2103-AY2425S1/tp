@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
@@ -18,7 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliverySupplierPredicate;
 import seedu.address.model.delivery.SupplierIndex;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Finds and lists all deliveries in the address book that match the specified criteria.
@@ -61,13 +61,13 @@ public class FindDeliveryCommand extends Command {
 
         // If supplier index is provided, retrieve the supplier and filter by that supplier
         if (supplierIndex.isPresent()) {
-            List<Person> lastShownList = model.getFilteredPersonList();
+            List<Supplier> lastShownList = model.getFilteredSupplierList();
             SupplierIndex index = supplierIndex.get();
             if (index.getZeroBased() >= lastShownList.size()) {
-                return new CommandResult(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                return new CommandResult(MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
             }
 
-            Person supplier = lastShownList.get(index.getZeroBased());
+            Supplier supplier = lastShownList.get(index.getZeroBased());
             finalPredicate = finalPredicate.and(new DeliverySupplierPredicate(supplier));
         }
 

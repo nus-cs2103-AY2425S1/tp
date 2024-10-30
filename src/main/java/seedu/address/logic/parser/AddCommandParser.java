@@ -13,13 +13,13 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Company;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.SupplierStatus;
 import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Company;
+import seedu.address.model.supplier.Email;
+import seedu.address.model.supplier.Name;
+import seedu.address.model.supplier.Phone;
+import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.SupplierStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,9 +50,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Product> productList = ParserUtil.parseProducts(argMultimap.getAllValues(PREFIX_PRODUCT));
         // SupplierStatus status = ParserUtil.parseSupplierStatus(argMultimap.getValue(PREFIX_SUPPLIER_STATUS).get());
         SupplierStatus status = new SupplierStatus("active");
-        Person person = new Person(name, phone, email, company, tagList, productList, status);
+        Supplier supplier = new Supplier(name, phone, email, company, tagList, productList, status);
 
-        return new AddCommand(person);
+        return new AddCommand(supplier);
     }
 
     /**

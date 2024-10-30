@@ -28,7 +28,7 @@ import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.product.Product;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalSuppliers;
 
 public class FindDeliveryCommandParserTest {
 
@@ -149,7 +149,7 @@ public class FindDeliveryCommandParserTest {
 
         // Create a mock delivery object that would match the expected filters
         Delivery matchingDelivery = new Delivery(
-                expectedProduct, TypicalPersons.ALICE, expectedStatus, expectedDateTime,
+                expectedProduct, TypicalSuppliers.ALICE, expectedStatus, expectedDateTime,
                 new Cost("10.00"), new Quantity("5 kg"));
 
         // Verify that the parsed command's predicate works as expected
@@ -157,7 +157,7 @@ public class FindDeliveryCommandParserTest {
                 "The command's predicate should return true for a matching delivery");
 
         // Create another delivery that does not match the filters
-        Delivery nonMatchingDelivery = new Delivery(new Product("Oranges"), TypicalPersons.BOB, Status.PENDING,
+        Delivery nonMatchingDelivery = new Delivery(new Product("Oranges"), TypicalSuppliers.BOB, Status.PENDING,
                 new DateTime("19-10-2024 10:00"), new Cost("10.00"), new Quantity("5 kg"));
 
         // Verify that the parsed command's predicate correctly filters out non-matching deliveries

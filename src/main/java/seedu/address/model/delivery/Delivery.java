@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 import seedu.address.model.product.Product;
 
 /**
@@ -15,7 +15,7 @@ import seedu.address.model.product.Product;
 public class Delivery {
 
     private final Product product;
-    private Person sender; // CHANGE TO SUPPLIER LATER ON
+    private Supplier sender; // CHANGE TO SUPPLIER LATER ON
     private Status status;
     private final DateTime deliveryDateTime;
     private final Cost cost;
@@ -25,7 +25,7 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Product product, Person sender, Status status,
+    public Delivery(Product product, Supplier sender, Status status,
                     DateTime deliveryDateTime, Cost cost, Quantity quantity) {
         requireAllNonNull(product, sender, status, deliveryDateTime, cost, quantity);
         this.product = product;
@@ -51,7 +51,7 @@ public class Delivery {
      * @param quantity Quantity of product to be delivered.
      * @param supplierIndex Index of supplier inside the UniqueDeliveryList.
      */
-    public Delivery(Product product, Person sender, Status status, DateTime deliveryDateTime, Cost cost,
+    public Delivery(Product product, Supplier sender, Status status, DateTime deliveryDateTime, Cost cost,
                     Quantity quantity, SupplierIndex supplierIndex) {
         requireAllNonNull(product, status, deliveryDateTime, cost, quantity, supplierIndex);
         this.product = product;
@@ -70,7 +70,7 @@ public class Delivery {
         return this.product;
     }
 
-    public Person getDeliverySender() {
+    public Supplier getDeliverySender() {
         return this.sender;
     }
 
@@ -89,7 +89,7 @@ public class Delivery {
     public Quantity getDeliveryQuantity() {
         return this.quantity;
     }
-    public void setDeliverySender(Person sender) {
+    public void setDeliverySender(Supplier sender) {
         this.sender = sender;
     }
 

@@ -7,8 +7,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.SupplierStatus;
+import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.SupplierStatus;
 
 
 /**
@@ -39,12 +39,12 @@ public class MarkSupplierCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (targetIndex.getZeroBased() >= model.getFilteredPersonList().size()) {
+        if (targetIndex.getZeroBased() >= model.getFilteredSupplierList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
 
-        Person supplierToMark = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        Person markedSupplier = new Person(
+        Supplier supplierToMark = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
+        Supplier markedSupplier = new Supplier(
                 supplierToMark.getName(),
                 supplierToMark.getPhone(),
                 supplierToMark.getEmail(),
@@ -53,8 +53,8 @@ public class MarkSupplierCommand extends Command {
                 supplierToMark.getProducts(),
                 status);
 
-        model.setPerson(supplierToMark, markedSupplier);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.setSupplier(supplierToMark, markedSupplier);
+        model.updateFilteredSupplierList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
         return new CommandResult(String.format(MESSAGE_MARK_SUPPLIER_SUCCESS, targetIndex.getOneBased(), status));
     }
 

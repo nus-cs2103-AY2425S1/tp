@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_RICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.APPLE;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSuppliers.ALICE;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,10 +23,10 @@ import javafx.collections.ObservableList;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.exceptions.DuplicateDeliveryException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.exceptions.DuplicateSupplierException;
 import seedu.address.testutil.DeliveryBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SupplierBuilder;
 
 public class AddressBookTest {
 
@@ -34,7 +34,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getSupplierList());
     }
 
     @Test
@@ -50,14 +50,14 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicateSuppliers_throwsDuplicateSupplierException() {
+        // Two suppliers with the same identity fields
+        Supplier editedAlice = new SupplierBuilder(ALICE).withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
                 .withProducts(VALID_PRODUCT_RICE).build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = AddressBookStub.withPersons(newPersons);
+        List<Supplier> newSuppliers = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = AddressBookStub.withSuppliers(newSuppliers);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateSupplierException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
@@ -71,32 +71,32 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasSupplier_nullSupplier_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasSupplier(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasSupplier_supplierNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasSupplier(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasSupplier_supplierInAddressBook_returnsTrue() {
+        addressBook.addSupplier(ALICE);
+        assertTrue(addressBook.hasSupplier(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasSupplier_supplierWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addSupplier(ALICE);
+        Supplier editedAlice = new SupplierBuilder(ALICE).withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
                 .withProducts(VALID_PRODUCT_RICE).build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasSupplier(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getSupplierList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getSupplierList().remove(0));
     }
 
     @Test
@@ -113,21 +113,21 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{suppliers=" + addressBook.getSupplierList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose suppliers list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
         private final ObservableList<Delivery> deliveries = FXCollections.observableArrayList();
 
 
-        public static AddressBookStub withPersons(Collection<Person> persons) {
+        public static AddressBookStub withSuppliers(Collection<Supplier> suppliers) {
             AddressBookStub stub = new AddressBookStub();
-            stub.persons.setAll(persons);
+            stub.suppliers.setAll(suppliers);
             return stub;
         }
 
@@ -137,8 +137,8 @@ public class AddressBookTest {
             return stub;
         }
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Supplier> getSupplierList() {
+            return suppliers;
         }
 
         @Override

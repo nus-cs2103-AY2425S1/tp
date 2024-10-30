@@ -16,14 +16,14 @@ import seedu.address.model.delivery.Delivery;
 public class DeliveryUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code supplier}.
      */
     public static String getDeliveryCommand(Delivery delivery) {
         return AddDeliveryCommand.COMMAND_WORD + " " + PREFIX_DELIVERY + " " + getDeliveryDetails(delivery);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code supplier}'s details.
      *
      * @param delivery Delivery object to be tested
      * @return String value of user arguments input

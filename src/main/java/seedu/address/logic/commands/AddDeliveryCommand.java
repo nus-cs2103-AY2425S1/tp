@@ -16,7 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.SupplierIndex;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Adds a delivery to the address book.
@@ -53,12 +53,12 @@ public class AddDeliveryCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         //Need to update when list changes name
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Supplier> lastShownList = model.getFilteredSupplierList();
         SupplierIndex supplierIndex = this.deliveryToAdd.getSupplierIndex();
         if (supplierIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
-        Person sender = lastShownList.get(supplierIndex.getZeroBased());
+        Supplier sender = lastShownList.get(supplierIndex.getZeroBased());
         this.deliveryToAdd.setDeliverySender(sender);
         if (model.hasDelivery(deliveryToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_DELIVERY);

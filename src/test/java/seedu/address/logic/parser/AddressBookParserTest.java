@@ -12,7 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.model.delivery.Status.DELIVERED;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DELIVERY;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeliveryCommand;
 import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditSupplierDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -41,17 +41,17 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryIsUpcomingPredicate;
 import seedu.address.model.delivery.Status;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.SupplierSortComparator;
-import seedu.address.model.person.SupplierSortNameComparator;
-import seedu.address.model.person.SupplierStatus;
-import seedu.address.model.person.predicates.NameContainsPredicate;
-import seedu.address.model.person.predicates.ProductContainsKeywordPredicate;
+import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.SupplierSortComparator;
+import seedu.address.model.supplier.SupplierSortNameComparator;
+import seedu.address.model.supplier.SupplierStatus;
+import seedu.address.model.supplier.predicates.NameContainsPredicate;
+import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.DeliveryUtil;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.EditSupplierDescriptorBuilder;
+import seedu.address.testutil.SupplierBuilder;
+import seedu.address.testutil.SupplierUtil;
 
 public class AddressBookParserTest {
 
@@ -59,9 +59,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Supplier supplier = new SupplierBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(SupplierUtil.getAddCommand(supplier));
+        assertEquals(new AddCommand(supplier), command);
     }
 
     @Test
@@ -94,8 +94,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteSupplierCommand command = (DeleteSupplierCommand) parser.parseCommand(
-                DeleteSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteSupplierCommand(INDEX_FIRST_PERSON), command);
+                DeleteSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + INDEX_FIRST_SUPPLIER.getOneBased());
+        assertEquals(new DeleteSupplierCommand(INDEX_FIRST_SUPPLIER), command);
     }
 
     @Test
@@ -107,8 +107,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete_supplier() throws Exception {
         DeleteSupplierCommand command = (DeleteSupplierCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " -s " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteSupplierCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " -s " + INDEX_FIRST_SUPPLIER.getOneBased());
+        assertEquals(new DeleteSupplierCommand(INDEX_FIRST_SUPPLIER), command);
     }
     @Test
     public void parseCommand_mark_delivery() throws Exception {
@@ -120,17 +120,17 @@ public class AddressBookParserTest {
     public void parseCommand_mark_supplier() throws Exception {
         final String status = " active";
         MarkSupplierCommand command = (MarkSupplierCommand) parser.parseCommand(
-                MarkSupplierCommand.COMMAND_WORD + " -s " + INDEX_FIRST_PERSON.getOneBased() + status);
-        assertEquals(new MarkSupplierCommand(INDEX_FIRST_PERSON, new SupplierStatus(status)), command);
+                MarkSupplierCommand.COMMAND_WORD + " -s " + INDEX_FIRST_SUPPLIER.getOneBased() + status);
+        assertEquals(new MarkSupplierCommand(INDEX_FIRST_SUPPLIER, new SupplierStatus(status)), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Supplier supplier = new SupplierBuilder().build();
+        EditSupplierDescriptor descriptor = new EditSupplierDescriptorBuilder(supplier).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_SUPPLIER.getOneBased() + " " + SupplierUtil.getEditSupplierDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_SUPPLIER, descriptor), command);
     }
 
     @Test
@@ -142,7 +142,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_findSupplier() throws Exception {
         String commandInput = "find -s n/Linkes pro/Iphone";
-        List<Predicate<Person>> listOfPredicates = new ArrayList<>();
+        List<Predicate<Supplier>> listOfPredicates = new ArrayList<>();
         listOfPredicates.add(new NameContainsPredicate("Linkes"));
         listOfPredicates.add(new ProductContainsKeywordPredicate("Iphone"));
 

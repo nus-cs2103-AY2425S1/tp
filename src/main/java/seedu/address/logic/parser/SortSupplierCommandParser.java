@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.SupplierSortBy;
-import seedu.address.model.person.SupplierSortComparator;
+import seedu.address.model.supplier.SupplierSortBy;
+import seedu.address.model.supplier.SupplierSortComparator;
 
 /**
  * Parses input arguments and creates a new SortSupplierCommand object.

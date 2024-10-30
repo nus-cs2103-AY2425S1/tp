@@ -6,8 +6,8 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.SupplierIndex;
-import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * A utility class to help with building Delivery objects.
@@ -20,7 +20,7 @@ public class DeliveryBuilder {
     public static final String DEFAULT_QUANTITY = "200 units";
 
     private Product product;
-    private Person sender; // CHANGE TO SUPPLIER LATER ON
+    private Supplier sender; // CHANGE TO SUPPLIER LATER ON
     private Status status;
     private DateTime deliveryDateTime;
     private Cost cost;
@@ -32,7 +32,7 @@ public class DeliveryBuilder {
      */
     public DeliveryBuilder() {
         product = new Product(DEFAULT_PRODUCT);
-        sender = TypicalPersons.ALICE;
+        sender = TypicalSuppliers.ALICE;
         deliveryDateTime = new DateTime(DEFAULT_DELIVERY_TIME);
         status = Status.PENDING;
         cost = new Cost(DEFAULT_COST);
@@ -71,7 +71,7 @@ public class DeliveryBuilder {
     /**
      * Sets the {@code Sender} of the {@code Delivery} that we are building.
      */
-    public DeliveryBuilder withSender(Person sender) {
+    public DeliveryBuilder withSender(Supplier sender) {
         this.sender = sender;
         return this;
     }

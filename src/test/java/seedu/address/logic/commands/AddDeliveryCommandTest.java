@@ -23,12 +23,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.UniqueSupplierList;
 import seedu.address.testutil.DeliveryBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SupplierBuilder;
 import seedu.address.testutil.TypicalDeliveriesWithoutSender;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalSuppliers;
 
 public class AddDeliveryCommandTest {
 
@@ -39,8 +39,8 @@ public class AddDeliveryCommandTest {
 
     @Test
     public void execute_deliveryAcceptedByModel_addSuccessful() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        ModelStubAcceptingDeliveryAdded modelStub = new ModelStubAcceptingDeliveryAdded(validPerson);
+        Supplier validSupplier = new SupplierBuilder().build();
+        ModelStubAcceptingDeliveryAdded modelStub = new ModelStubAcceptingDeliveryAdded(validSupplier);
         Delivery deliveryWithNullSender = new DeliveryBuilder().buildWithNullSender();
         CommandResult commandResult = new AddDeliveryCommand(deliveryWithNullSender).execute(modelStub);
         assertEquals(String.format(AddDeliveryCommand.MESSAGE_SUCCESS, Messages.format(deliveryWithNullSender)),
@@ -51,7 +51,7 @@ public class AddDeliveryCommandTest {
     @Test
     public void execute_duplicateDelivery_throwsCommandException() {
         Delivery validDelivery = new DeliveryBuilder().buildWithNullSender();
-        validDelivery.setDeliverySender(TypicalPersons.ALICE);
+        validDelivery.setDeliverySender(TypicalSuppliers.ALICE);
         AddDeliveryCommand addDeliveryCommand = new AddDeliveryCommand(validDelivery);
         ModelStub modelStub = new ModelStubWithDelivery(validDelivery);
         assertThrows(CommandException.class, AddDeliveryCommand.MESSAGE_DUPLICATE_DELIVERY, () ->
@@ -117,7 +117,7 @@ public class AddDeliveryCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addSupplier(Supplier supplier) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -132,27 +132,27 @@ public class AddDeliveryCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasSupplier(Supplier supplier) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deleteSupplier(Supplier target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setSupplier(Supplier target, Supplier editedSupplier) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Supplier> getFilteredSupplierList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -200,16 +200,16 @@ public class AddDeliveryCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getModifiedSupplierList() {
+        public ObservableList<Supplier> getModifiedSupplierList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getSortedSupplierList() {
+        public ObservableList<Supplier> getSortedSupplierList() {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public void updateSortedSupplierList(Comparator<Person> comparator) {
+        public void updateSortedSupplierList(Comparator<Supplier> comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -219,17 +219,17 @@ public class AddDeliveryCommandTest {
      */
     private class ModelStubWithDelivery extends ModelStub {
         private final Delivery delivery;
-        private final Person person = TypicalPersons.ALICE;
-        private final UniquePersonList uniquePersonList = new UniquePersonList();
+        private final Supplier supplier = TypicalSuppliers.ALICE;
+        private final UniqueSupplierList uniqueSupplierList = new UniqueSupplierList();
         ModelStubWithDelivery(Delivery delivery) {
             requireNonNull(delivery);
             this.delivery = delivery;
-            uniquePersonList.add(person);
+            uniqueSupplierList.add(supplier);
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            return uniquePersonList.asUnmodifiableObservableList();
+        public ObservableList<Supplier> getFilteredSupplierList() {
+            return uniqueSupplierList.asUnmodifiableObservableList();
         }
 
         @Override
@@ -244,18 +244,18 @@ public class AddDeliveryCommandTest {
      */
     private class ModelStubAcceptingDeliveryAdded extends ModelStub {
         final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
-        private final Person person;
-        private final UniquePersonList uniquePersonList = new UniquePersonList();
+        private final Supplier supplier;
+        private final UniqueSupplierList uniqueSupplierList = new UniqueSupplierList();
 
-        ModelStubAcceptingDeliveryAdded(Person person) {
-            requireNonNull(person);
-            this.person = person;
-            uniquePersonList.add(person);
+        ModelStubAcceptingDeliveryAdded(Supplier supplier) {
+            requireNonNull(supplier);
+            this.supplier = supplier;
+            uniqueSupplierList.add(supplier);
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            return uniquePersonList.asUnmodifiableObservableList();
+        public ObservableList<Supplier> getFilteredSupplierList() {
+            return uniqueSupplierList.asUnmodifiableObservableList();
         }
 
         @Override

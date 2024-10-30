@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Finds and lists all suppliers in vendor whose name contains any of the argument keywords.
@@ -35,7 +35,7 @@ public class FindSupplierCommand extends Command {
             + PREFIX_PRODUCT + "m";
 
 
-    private final List<Predicate<Person>> listOfPredicates;
+    private final List<Predicate<Supplier>> listOfPredicates;
 
     /**
      * Constructs a {@code FindSupplierCommand} with the specified list of predicates.
@@ -44,7 +44,7 @@ public class FindSupplierCommand extends Command {
      *                         Each predicate corresponds to a specific criterion
      *                         (e.g., name, company, product).
      */
-    public FindSupplierCommand(List<Predicate<Person>> listOfPredicates) {
+    public FindSupplierCommand(List<Predicate<Supplier>> listOfPredicates) {
         requireNonNull(listOfPredicates);
         assert !listOfPredicates.isEmpty();
         this.listOfPredicates = listOfPredicates;
@@ -53,11 +53,11 @@ public class FindSupplierCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        Predicate<Person> combinedPredicate = listOfPredicates.stream().reduce(x -> true, Predicate::and);
-        model.updateFilteredPersonList(combinedPredicate);
+        Predicate<Supplier> combinedPredicate = listOfPredicates.stream().reduce(x -> true, Predicate::and);
+        model.updateFilteredSupplierList(combinedPredicate);
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_SUPPLIERS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_SUPPLIERS_FOUND_OVERVIEW, model.getFilteredSupplierList().size()));
     }
 
     @Override

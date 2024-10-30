@@ -5,7 +5,7 @@ import static seedu.address.storage.JsonAdaptedDelivery.MISSING_FIELD_MESSAGE_FO
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.APPLE;
 import static seedu.address.testutil.TypicalDeliveries.BREAD;
-import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalSuppliers.CARL;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +14,8 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
-import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Supplier;
 
 
 public class JsonAdaptedDeliveryTest {
@@ -25,7 +25,7 @@ public class JsonAdaptedDeliveryTest {
     private static final String INVALID_QUANTITY = "500 PCS";
     private static final String INVALID_SUPPLIER_INDEX = "abc";
     private static final String VALID_PRODUCT = BREAD.getDeliveryProduct().toString();
-    private static final JsonAdaptedPerson VALID_SENDER = new JsonAdaptedPerson(CARL);
+    private static final JsonAdaptedSupplier VALID_SENDER = new JsonAdaptedSupplier(CARL);
     private static final String VALID_TIME = APPLE.getDeliveryDate().toString();
     private static final String VALID_COST = APPLE.getDeliveryCost().toString();
     private static final String VALID_QUANTITY = APPLE.getDeliveryQuantity().toString();
@@ -106,7 +106,7 @@ public class JsonAdaptedDeliveryTest {
     public void toModelType_nullSender_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
                 VALID_COST, VALID_QUANTITY, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Supplier.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
 

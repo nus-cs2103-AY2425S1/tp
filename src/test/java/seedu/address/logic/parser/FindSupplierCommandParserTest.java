@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.CompanyContainsKeywordPredicate;
-import seedu.address.model.person.predicates.NameContainsPredicate;
-import seedu.address.model.person.predicates.ProductContainsKeywordPredicate;
+import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.predicates.CompanyContainsKeywordPredicate;
+import seedu.address.model.supplier.predicates.NameContainsPredicate;
+import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
 
 public class FindSupplierCommandParserTest {
     private final FindSupplierCommandParser parser = new FindSupplierCommandParser();
@@ -27,7 +27,7 @@ public class FindSupplierCommandParserTest {
 
         String input = " " + PREFIX_NAME + "Linkes " + PREFIX_COMPANY + "NUS " + PREFIX_PRODUCT + "Iphone";
 
-        List<Predicate<Person>> expectedPredicate = new ArrayList<>();
+        List<Predicate<Supplier>> expectedPredicate = new ArrayList<>();
 
         expectedPredicate.add(new NameContainsPredicate("Linkes"));
         expectedPredicate.add(new CompanyContainsKeywordPredicate("NUS"));
@@ -43,7 +43,7 @@ public class FindSupplierCommandParserTest {
 
         String input = " " + PREFIX_NAME + "Linkes ";
 
-        List<Predicate<Person>> expectedPredicate = new ArrayList<>();
+        List<Predicate<Supplier>> expectedPredicate = new ArrayList<>();
 
         expectedPredicate.add(new NameContainsPredicate("Linkes"));
 

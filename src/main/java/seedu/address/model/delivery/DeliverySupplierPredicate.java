@@ -2,15 +2,15 @@ package seedu.address.model.delivery;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Tests that a {@code Delivery}'s {@code Supplier} matches the given supplier.
  */
 public class DeliverySupplierPredicate implements Predicate<Delivery> {
-    private final Person supplier;
+    private final Supplier supplier;
 
-    public DeliverySupplierPredicate(Person supplier) {
+    public DeliverySupplierPredicate(Supplier supplier) {
         this.supplier = supplier;
     }
 
