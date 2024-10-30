@@ -9,11 +9,6 @@ TalentConnect is a desktop address book application optimized for solo freelance
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added `DeleteContactCommand`.
-  * **What it does**: Allows the user to delete a specific contact from the address book.
-  * **Justification**: This feature is essential for recruitment workflows, enabling users to manage and clean up their contact lists.
-  * **Highlights**: This command was refactored from `DeleteCommand` to `DeleteContactCommand`, with `DeleteCommand` made generic to support future deletions of other entity types, such as jobs and companies.
-
 * **New Feature**: Added `ScreenCommand`.
   * **What it does**: Allows the user to filter and display contacts that match specific job requirements.
   * **Justification**: This command enhances the recruiter’s efficiency by enabling faster matching of candidates to job listings.
@@ -31,8 +26,11 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Refactored `AddCommand` to `AddContactCommand` to improve specificity and clarity.
-  * Refactored `DeleteCommand` into a generic command `DeleteCommand<T>` to support future implementations of `DeleteJob` and `DeleteCompany`.
+  * Refactored the original functionality of `DeleteCommand` into `DeleteContactCommand` to allow the user to delete a specific contact from the address book.
+  * Refactored `DeleteCommand` into a generic command `DeleteCommand<T>` to support future implementations of `DeleteContactCommand`,`DeleteJobCommand` and `DeleteCompanyCommand`.
+  * Refactored `Person` class from tags to skills
 
+* 
 * **Documentation**:
   * User Guide: NIL
   * Developer Guide:
