@@ -33,7 +33,8 @@ public class FilterCommand extends Command {
             + PREFIX_ENDDATE + "2024-11-30 "
             + PREFIX_HEALTHSERVICE + "VACCINATION";
 
-    public static final String MESSAGE_SUCCESS = "List of patients sorted based on their appointment dates";
+    public static final String MESSAGE_SUCCESS = "List of patients sorted based on their appointment dates\n"
+            + "Input \"home\" to return to home page";
 
     private final AppointmentDateFilter dateFilter;
 
