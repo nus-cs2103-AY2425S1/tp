@@ -5,7 +5,7 @@
 
 # UGTeach
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F14a-1/tp/actions)
+[![CI Status](https://github.com/AY2425S1-CS2103T-F14a-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F14a-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F14a-1/tp/graph/badge.svg?token=XH80L1OD62)](https://codecov.io/gh/AY2425S1-CS2103T-F14a-1/tp)
 
 ![Ui](images/Ui.png)
