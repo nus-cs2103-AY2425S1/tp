@@ -2,12 +2,16 @@ package seedu.address.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -30,13 +34,13 @@ public class EditGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Edits the details of the group "
-        + "by the group name used in the displayed student list. "
-        + "Existing values will be overwritten by the input values.\n"
+        + "by the index in the displayed group list.\n"
         + "Parameters: "
+        + "INDEX (must be an integer)"
         + "[" + PREFIX_GROUP_NAME + "GROUP NAME]\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "TEAM 1 "
-        + PREFIX_GROUP_NAME + "Update Group Name";
+        + PREFIX_INDEX + "1 "
+        + PREFIX_GROUP_NAME + "New Group Name";
 
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -44,28 +48,29 @@ public class EditGroupCommand extends Command {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Exactly 2 group names (original and updated)"
         + "are required, but %d were provided.";
 
-    private final GroupName groupName;
+    private final Index index;
     private final EditGroupDescriptor editGroupDescriptor;
 
     /**
-     * @param groupName               of the group to edit
+     * @param index              of the group to edit
      * @param editGroupDescriptor details to edit the student with
      */
-    public EditGroupCommand(GroupName groupName, EditGroupDescriptor editGroupDescriptor) {
-        requireNonNull(groupName);
+    public EditGroupCommand(Index index, EditGroupDescriptor editGroupDescriptor) {
+        requireNonNull(index);
         requireNonNull(editGroupDescriptor);
 
-        this.groupName = groupName;
+        this.index = index;
         this.editGroupDescriptor = new EditGroupDescriptor(editGroupDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.containsGroupName(groupName)) {
-            throw new CommandException(Messages.MESSAGE_GROUP_NAME_NOT_FOUND);
+        List<Group> lastShownList = model.getFilteredGroupList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
-        Group groupToEdit = model.getGroupByName(groupName);
+        Group groupToEdit = lastShownList.get(index.getZeroBased());
         Group editedGroup = createEditedGroup(groupToEdit, editGroupDescriptor);
 
         if (!groupToEdit.isSameGroup(editedGroup) && model.hasGroup(editedGroup)) {
@@ -111,14 +116,14 @@ public class EditGroupCommand extends Command {
         }
 
         EditGroupCommand otherEditCommand = (EditGroupCommand) other;
-        return groupName.equals(otherEditCommand.groupName)
+        return index.equals(otherEditCommand.index)
             && editGroupDescriptor.equals(otherEditCommand.editGroupDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("groupName", groupName)
+            .add("Index", index)
             .add("editPersonDescriptor", editGroupDescriptor)
             .toString();
     }
@@ -147,6 +152,10 @@ public class EditGroupCommand extends Command {
 
         public Optional<GroupName> getName() {
             return Optional.ofNullable(groupName);
+        }
+
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(groupName);
         }
 
         @Override
