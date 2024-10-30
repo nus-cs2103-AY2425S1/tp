@@ -207,10 +207,11 @@ Format: `mark n/NAME w/[WEEK NUMBER]`
 * Marks the particular student as present in that week.
 * The name and week number is compulsory.
 * The name is case-sensitive.
+* The range of the WEEK NUMBER is between 1 and 13, both inclusive. Rationale being there are 13 weeks per semester.
 
 Examples:
 * `mark n/Viswa w/1` marks the student named `Viswa` as present for week 1.
-  ![result for mark](images/markViswaPresent.png)
+  ![result for mark](images/markPresent.png)
 
 ### Unmarking a student as present : `unmark`
 
@@ -224,7 +225,7 @@ Format: `unmark n/NAME w/[WEEK NUMBER]`
 
 Examples:
 * `unmarks n/John Doe w/1` unmarks the student named `JohnDoe` as present for week 1.
-  ![result for unmark](images/unmarkViswa.png)
+  ![result for unmark](images/unmarkStudent.png)
 
 ### Sorting the displayed lsit : `sort`
 
