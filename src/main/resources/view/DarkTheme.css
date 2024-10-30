@@ -112,8 +112,9 @@
 }
 
 .split-pane .split-pane-divider {
-    -fx-background-color: #888888;
-    -fx-padding: 1; /* Makes the divider look smaller */
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
     -fx-cursor: default;
 }
 

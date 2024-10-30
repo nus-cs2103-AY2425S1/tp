@@ -173,7 +173,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void lockSplitPaneDivider() {
         splitPane.lookupAll(".split-pane-divider").stream()
-                .forEach(div -> div.setMouseTransparent(true) );
+                .forEach(div -> div.setMouseTransparent(true));
     }
 
     /**

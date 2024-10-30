@@ -5,9 +5,7 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import tuteez.model.person.Person;
 import tuteez.model.person.TelegramUsername;
 
@@ -27,9 +25,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-
-    @FXML
-    private HBox cardPane;
     @FXML
     private Label name;
     @FXML

@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import tuteez.commons.core.LogsCenter;
@@ -47,22 +46,5 @@ public class DisplayCardPanel extends UiPart<Region> {
             DisplayCard displayCard = new DisplayCard(Optional.of(person));
             displayCardContainer.getChildren().add(displayCard.getRoot()); // Add display card to container
         });
-    }
-
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code DisplayCard}.
-     */
-    class DisplayCardListViewCell extends ListCell<Person> {
-        @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
-
-            if (empty || person == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new DisplayCard(Optional.of(person)).getRoot());
-            }
-        }
     }
 }
