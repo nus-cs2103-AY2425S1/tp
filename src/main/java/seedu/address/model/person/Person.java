@@ -122,5 +122,4 @@ public class Person {
                 .add("description", description)
                 .toString();
     }
-
 }

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Container for user visible messages.
@@ -55,4 +56,22 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats a {@code Reminder} object into a specific string representation.
+     *
+     * <p>The formatted string includes the person associated with the reminder,
+     * the date and time of the reminder, and a description of the reminder, separated by semicolons.
+     *
+     * @param reminder The {@code Reminder} object to format.
+     * @return A formatted string containing the person's name, date and time, and description of the reminder.
+     */
+    public static String format(Reminder reminder) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(reminder.getPerson())
+                .append("; Date and Time: ")
+                .append(reminder.getDateTime())
+                .append("; Description: ")
+                .append(reminder.getDescription());
+        return builder.toString();
+    }
 }
