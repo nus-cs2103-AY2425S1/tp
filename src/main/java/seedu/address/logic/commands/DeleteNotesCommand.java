@@ -17,11 +17,11 @@ import seedu.address.model.person.Person;
  */
 public class DeleteNotesCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_notes";
+    public static final String COMMAND_WORD = "delNotes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient notes from the person identified by the index number used in the "
-            + "displayed person list.\n"
+            + "displayed person list if they have notes.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
