@@ -44,9 +44,7 @@ public class DeleteCustomerOrderCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
-        String phoneNumber = customerOrderList.getOrderByIndex(targetIndex - 1).getPhoneNumber();
-
-        customerOrderList.removeOrder(phoneNumber);
+        customerOrderList.removeOrder(targetIndex - 1);
 
         return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS, targetIndex));
     }
