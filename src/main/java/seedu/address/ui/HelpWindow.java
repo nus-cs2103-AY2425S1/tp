@@ -25,13 +25,13 @@ public class HelpWindow extends UiPart<Stage> {
             Adds a new patient record (with additional information) into the system
             Records appointment times for registered patients into the system
             Clears all existing system records
-            Deletes the identified appointment for a specific patient
+            Deletes the specified appointment for the identified patient
             Deletes an existing patient record from the system
             Edits patient's detail(s) for an existing patient record in the system
             Exits the system
             Filters existing patient records based on the specified parameters
-            Lists all existing patient records in the system
-            Views full profile of a patient in the system
+            Returns to home page
+            Views full profile of identified patient in the system
             """;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
