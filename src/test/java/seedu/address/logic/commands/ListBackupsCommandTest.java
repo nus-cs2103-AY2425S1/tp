@@ -1,3 +1,5 @@
+package seedu.address.logic.commands;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,8 +10,6 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListBackupsCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -19,13 +19,18 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.TypicalPersons;
 
-class ListBackupsCommandTest {
+public class ListBackupsCommandTest {
 
     private Model model;
     private Path backupDirectory = Path.of("backups");
 
     @BeforeEach
     public void setUp() throws IOException {
+        // Create the backup directory if it doesn't exist
+        if (!Files.exists(backupDirectory)) {
+            Files.createDirectories(backupDirectory);
+        }
+
         // Clear the backup directory before each test
         Files.list(backupDirectory)
                 .filter(Files::isRegularFile)
@@ -43,6 +48,7 @@ class ListBackupsCommandTest {
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(), storage);
     }
+
 
     @Test
     public void execute_noBackups_showsNoBackupsMessage() throws CommandException {
