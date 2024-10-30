@@ -5,7 +5,6 @@ import static tutorease.address.commons.util.AppUtil.checkArgument;
 import static tutorease.address.commons.util.DateTimeUtil.INVALID_DATETIME_FORMAT_MESSAGE;
 import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.commons.util.DateTimeUtil.parseDateTime;
-import static tutorease.address.model.lesson.StartDateTime.START_DATE_MESSAGE_CONSTRAINTS;
 
 import java.time.LocalDateTime;
 
