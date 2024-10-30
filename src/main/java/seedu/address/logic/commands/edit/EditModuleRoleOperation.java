@@ -1,13 +1,11 @@
 package seedu.address.logic.commands.edit;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
-import seedu.address.model.person.ModuleRolePair;
 
 /**
  * Represents an operation to edit a person's module roles.
