@@ -33,7 +33,7 @@ public abstract class EditCommand extends Command {
             + "Parameters: ENTITY_TYPE (person/appt) INDEX (must be a positive integer) [DATA_FIELDS]...\n"
             + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com\n" 
+            + PREFIX_EMAIL + "johndoe@example.com\n"
             + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " 1 "
             + PREFIX_APPOINTMENT_TYPE + "Health Checkup "
             + PREFIX_MEDICINE + "Panadol";
