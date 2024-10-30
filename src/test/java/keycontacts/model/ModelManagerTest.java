@@ -95,6 +95,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getUnfilteredStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getStudentList().remove(0));
+    }
+
+
+    @Test
     public void equals() {
         StudentDirectory studentDirectory = new StudentDirectoryBuilder().withStudent(ALICE).withStudent(BENSON)
                 .build();
