@@ -1,40 +1,37 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.BackupCommand;
 
+/**
+ * Contains unit tests for {@code BackupCommandParser}.
+ */
 public class BackupCommandParserTest {
 
-    private BackupCommandParser parser = new BackupCommandParser();
+    private final BackupCommandParser parser = new BackupCommandParser();
 
     @Test
-    public void parse_noArguments_returnsBackupCommandWithNullFileName() throws Exception {
+    public void parse_noArguments_returnsBackupCommandWithNullActionDescription() throws Exception {
         BackupCommand expectedCommand = new BackupCommand(null);
         BackupCommand actualCommand = parser.parse("");
         assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
-    public void parse_withFileName_returnsBackupCommandWithFileName() throws Exception {
-        String fileName = "myBackup";
-        BackupCommand expectedCommand = new BackupCommand(fileName);
-        BackupCommand actualCommand = parser.parse(" " + fileName);
+    public void parse_withActionDescription_returnsBackupCommandWithActionDescription() throws Exception {
+        String actionDescription = "myBackup";
+        BackupCommand expectedCommand = new BackupCommand(actionDescription);
+        BackupCommand actualCommand = parser.parse(" " + actionDescription);
         assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
-    public void parse_withWhitespaceOnly_returnsBackupCommandWithNullFileName() throws Exception {
+    public void parse_withWhitespaceOnly_returnsBackupCommandWithNullActionDescription() throws Exception {
         BackupCommand expectedCommand = new BackupCommand(null);
         BackupCommand actualCommand = parser.parse("   ");
         assertEquals(expectedCommand, actualCommand);
-    }
-
-    @Test
-    public void parse_nullArgs_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> parser.parse(null));
     }
 }

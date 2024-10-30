@@ -1,113 +1,182 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileTime;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Test class for BackupManager.
  */
 public class BackupManagerTest {
 
-    private static final Path TEMP_BACKUP_DIR = Paths.get("test-backups");
-    private static final Path TEMP_FILE = TEMP_BACKUP_DIR.resolve("test-addressbook.json");
+    @TempDir
+    public Path temporaryFolder;
     private BackupManager backupManager;
+    private Path backupDirectory;
+    private Path sourceFile;
 
     @BeforeEach
     public void setUp() throws IOException {
-        // Ensure backup directory exists before each test
-        Files.createDirectories(TEMP_BACKUP_DIR);
-        backupManager = new BackupManager(TEMP_BACKUP_DIR);
+        // Set up the backup directory and source file in the temporary folder
+        backupDirectory = temporaryFolder.resolve("backups");
+        Files.createDirectories(backupDirectory);
 
-        // Create a temporary file to simulate address book data
-        Files.writeString(TEMP_FILE, "Sample AddressBook Data");
+        sourceFile = temporaryFolder.resolve("addressBook.json");
+        Files.writeString(sourceFile, "Sample AddressBook Data");
+
+        backupManager = new BackupManager(backupDirectory);
     }
 
+    /**
+     * Cleans up the backup directory after each test by deleting any files created.
+     */
     @AfterEach
-    public void tearDown() throws IOException {
-        // Clean up any backup files created during the test
-        try (Stream<Path> paths = Files.walk(TEMP_BACKUP_DIR)) {
-            paths.filter(Files::isRegularFile)
+    public void cleanUpDefaultBackupDirectory() throws IOException {
+        Path defaultBackupDirectory = Paths.get("backups");
+        if (Files.exists(defaultBackupDirectory)) {
+            Files.walk(defaultBackupDirectory)
+                    .filter(Files::isRegularFile)
                     .forEach(path -> {
                         try {
                             Files.deleteIfExists(path);
                         } catch (IOException e) {
-                            System.err.println("Failed to delete file: " + path);
-                            e.printStackTrace();
+                            System.err.println("Failed to delete file: " + path + " - " + e.getMessage());
                         }
                     });
         }
     }
 
     @Test
-    public void cleanOldBackups_throwsExceptionForInvalidMaxBackups() throws IOException {
-        try {
-            backupManager.cleanOldBackups(0); // Should trigger IllegalArgumentException
-            fail("Expected IllegalArgumentException to be thrown for maxBackups < 1.");
-        } catch (IllegalArgumentException e) {
-            assertEquals("maxBackups must be at least 1.", e.getMessage(),
-                    "The exception message should match the expected message.");
+    public void createIndexedBackup_validParameters_backupCreated() throws IOException {
+        String actionDescription = "testAction";
+        int index = backupManager.createIndexedBackup(sourceFile, actionDescription);
+
+        // Verify that the backup file exists
+        assertTrue(index >= 0 && index < 10, "Backup index should be between 0 and 9.");
+
+        // Check that a backup file with the correct index and description exists
+        boolean backupFileExists = Files.list(backupDirectory)
+                .anyMatch(path -> path
+                        .getFileName()
+                        .toString()
+                        .matches(index + "_" + actionDescription + "_.*\\.json"));
+
+        assertTrue(backupFileExists, "Backup file with specified index and description should exist.");
+    }
+
+    @Test
+    public void createIndexedBackup_nullActionDescription_backupCreated() throws IOException {
+        int index = backupManager.createIndexedBackup(sourceFile, null);
+
+        // Verify that the backup file exists
+        assertTrue(index >= 0 && index < 10, "Backup index should be between 0 and 9.");
+
+        // Check that a backup file with the correct index exists
+        boolean backupFileExists = Files.list(backupDirectory)
+                .anyMatch(path -> path.getFileName().toString().matches(index + "_null_.*\\.json"));
+
+        assertTrue(backupFileExists, "Backup file with specified index should exist.");
+    }
+
+    @Test
+    public void createIndexedBackup_multipleBackups_indicesRotate() throws IOException {
+        // Create multiple backups to test index rotation
+        for (int i = 0; i < 15; i++) { // Exceeds MAX_BACKUPS to test rotation
+            int index = backupManager.createIndexedBackup(sourceFile, "action" + i);
+
+            // Verify that the index cycles between 0 and 9
+            assertEquals(i % 10, index, "Backup index should cycle between 0 and 9.");
         }
     }
 
     @Test
-    public void backupDirectoryInitialization_createsDirectorySuccessfully() throws IOException {
-        Path newBackupDir = TEMP_BACKUP_DIR.resolve("new-backup-dir");
-        new BackupManager(newBackupDir);
-        assertTrue(Files.exists(newBackupDir), "Backup directory should be created successfully.");
+    public void restoreBackupByIndex_validIndex_backupRestored() throws IOException {
+        // Create a backup at index 0
+        int index = backupManager.createIndexedBackup(sourceFile, "restoreTest");
+
+        // Attempt to restore the backup
+        Path restoredPath = backupManager.restoreBackupByIndex(index);
+
+        // Verify that the restored path exists and matches the backup file
+        assertNotNull(restoredPath, "Restored path should not be null.");
+        assertTrue(Files.exists(restoredPath), "Restored backup file should exist.");
     }
 
     @Test
-    public void backupDirectoryInitialization_throwsExceptionForNullPath() {
+    public void restoreBackupByIndex_invalidIndex_throwsIoException() {
+        int invalidIndex = 9; // Assuming index 9 has no backup
+
+        // Expect IOException when restoring a non-existent backup
+        IOException exception = assertThrows(IOException.class, () -> backupManager.restoreBackupByIndex(invalidIndex));
+        assertEquals("Backup with index " + invalidIndex + " not found.", exception.getMessage());
+    }
+
+    @Test
+    public void backupManager_initializationWithNullPath_throwsIoException() {
         assertThrows(IOException.class, () -> new BackupManager(null));
     }
 
     @Test
-    public void restoreMostRecentBackup_noBackupAvailable_returnsEmptyOptional() throws IOException {
-        Files.deleteIfExists(TEMP_FILE); // Ensure no backups exist
-        Optional<Path> restoredBackup = backupManager.restoreMostRecentBackup();
-        assertFalse(restoredBackup.isPresent(), "No backup should be available.");
+    public void getFormattedBackupList_withBackups_returnsFormattedList() throws IOException {
+        // Create a few backups with different descriptions
+        backupManager.createIndexedBackup(sourceFile, "backup1");
+        backupManager.createIndexedBackup(sourceFile, "backup2");
+        backupManager.createIndexedBackup(sourceFile, "backup3");
+
+        String formattedList = backupManager.getFormattedBackupList();
+
+        // Check that the formatted list contains each description in the correct format
+        assertTrue(formattedList.contains("[backup1]"));
+        assertTrue(formattedList.contains("[backup2]"));
+        assertTrue(formattedList.contains("[backup3]"));
+        assertTrue(formattedList.contains("Created on:")); // Ensure timestamp is included
     }
 
     @Test
-    public void getFileCreationTime_fileNotFound_returnsCurrentTime() {
-        // Provide a non-existent path to simulate IOException
-        Path nonExistentPath = TEMP_BACKUP_DIR.resolve("non-existent-file.json");
+    public void extractIndex_validFilename_returnsCorrectIndex() {
+        // Manually create paths to simulate different backup files
+        Path backupPath = backupDirectory.resolve("3_testAction_2024-10-30_15-45-00-000.json");
+        int index = backupManager.extractIndex(backupPath);
 
-        // Call the method and capture the result
-        FileTime result = backupManager.getFileCreationTime(nonExistentPath);
-
-        // Verify that the fallback time is set to the current time
-        long now = System.currentTimeMillis();
-        assertTrue(Math.abs(result.toMillis() - now) < 1000,
-                "The returned FileTime should be close to the current system time.");
+        assertEquals(3, index, "Extracted index should be 3");
     }
 
     @Test
-    public void triggerBackup_createsBackupFileWithCorrectFormat() throws IOException {
-        // Use triggerBackup to create a backup with a specific description.
-        String description = "delete ALICE";
-        backupManager.triggerBackup(TEMP_FILE, description);
+    public void extractIndex_invalidFilename_returnsNegativeOne() {
+        // Provide an incorrectly formatted filename
+        Path invalidPath = backupDirectory.resolve("invalid_backup_name.json");
+        int index = backupManager.extractIndex(invalidPath);
 
-        // Verify the backup file is created in the directory with the correct format.
-        boolean backupFileExists = Files.list(TEMP_BACKUP_DIR).anyMatch(path ->
-                path.getFileName().toString().contains(description)
-                        && path.getFileName().toString().endsWith(".json"));
-        assertTrue(backupFileExists, "The backup file should exist and be named with the correct format.");
+        assertEquals(-1, index, "Invalid filenames should return -1 as index");
     }
+
+    @Test
+    public void extractActionDescription_validFilename_returnsCorrectDescription() {
+        Path backupPath = backupDirectory.resolve("2_actionDescription_2024-10-30_15-45-00-000.json");
+        String actionDescription = backupManager.extractActionDescription(backupPath);
+
+        assertEquals("actionDescription", actionDescription, "Extracted description should match");
+    }
+
+    @Test
+    public void extractActionDescription_invalidFilename_returnsUnknown() {
+        Path invalidPath = backupDirectory.resolve("wrong_format.json");
+        String actionDescription = backupManager.extractActionDescription(invalidPath);
+
+        assertEquals("Unknown", actionDescription, "Invalid filenames should return 'Unknown' as action description");
+    }
+
+
 
 }

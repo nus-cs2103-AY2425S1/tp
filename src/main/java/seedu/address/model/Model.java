@@ -1,11 +1,13 @@
 package seedu.address.model;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
@@ -108,10 +110,23 @@ public interface Model {
     /**
      * Backup current patient record by the file name specified by user.
      */
-    void backupData(String fileName) throws CommandException;
+    int backupData(String actionDescription) throws CommandException;
+
+    /**
+     * Restores the data from a backup by index.
+     */
+    Path restoreBackup(int index) throws IOException, DataLoadingException;
 
     /**
      * Returns the Storage object associated with the model.
      */
     Storage getStorage();
+
+    /**
+     * Lists all backup files in the backups directory.
+     *
+     * @return A formatted string with the list of backup files.
+     * @throws IOException If an error occurs while accessing the backup directory.
+     */
+    String listAllBackups() throws IOException;
 }

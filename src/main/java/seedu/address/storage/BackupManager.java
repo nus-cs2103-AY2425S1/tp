@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.FileTime;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,6 +11,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
@@ -20,18 +24,20 @@ import seedu.address.commons.core.LogsCenter;
 public class BackupManager {
 
     private static final Logger logger = LogsCenter.getLogger(BackupManager.class);
-
-    private static final String BACKUP_PREFIX = "clinicbuddy-backup-";
-    private static final String BACKUP_EXTENSION = ".json";
-
-    private static final DateTimeFormatter FORMATTER =
+    private static final DateTimeFormatter FILE_TIMESTAMP_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
-    private static final int MAX_BACKUPS = 10;
-    private static final long MIN_BACKUP_INTERVAL_MS = 3000; // 3 seconds debounce to prevent multiple backups
+    private static final DateTimeFormatter DISPLAY_TIMESTAMP_FORMATTER =
+            DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss");
+    private static final String BACKUP_FILE_REGEX =
+            "(\\d+)_(.*?)_(\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}-\\d{3})\\.json";
+    private static final Pattern BACKUP_FILE_PATTERN =
+            Pattern.compile(BACKUP_FILE_REGEX);
 
+    private static final int MAX_BACKUPS = 10; // indexed from 0 to 9
     private final Path backupDirectory;
-    private long lastBackupTime = 0; // Stores the last backup time to avoid multiple backups
     private final Object backupLock = new Object(); // Lock object to synchronize backup operations
+    private int currentIndex;
+
 
     /**
      * Constructs a {@code BackupManager} with the specified backup directory.
@@ -50,38 +56,176 @@ public class BackupManager {
             Files.createDirectories(backupDirectory);
             logger.info("Created backup directory at: " + backupDirectory);
         }
+        initializeCurrentIndex();
     }
 
-    /**
-     * Triggers a backup with a specified action description.
-     * This captures the pre-modification state of the address book.
-     *
-     * @param filePath    The file path of the address book.
-     * @param description A description for the backup file (e.g., "delete John Doe").
-     * @throws IOException if an error occurs during backup creation.
-     */
-    public void triggerBackup(Path filePath, String description) throws IOException {
-        synchronized (backupLock) {
-            if (!Files.exists(filePath)) {
-                throw new IOException("The file to back up does not exist: " + filePath);
+    private void initializeCurrentIndex() throws IOException {
+        try (Stream<Path> backups = Files.list(backupDirectory)) {
+            List<Path> sortedBackups = backups
+                    .filter(Files::isRegularFile)
+                    .sorted(Comparator.comparing(this::getFileTimestamp)) // Sort by timestamp
+                    .collect(Collectors.toList());
+
+            if (sortedBackups.isEmpty()) {
+                currentIndex = 0;
+            } else {
+                // Find the oldest backup by timestamp and use its index for the next overwrite
+                Path oldestBackup = sortedBackups.get(0);
+                int oldestIndex = extractIndex(oldestBackup);
+                currentIndex = (oldestIndex + 1) % MAX_BACKUPS;
             }
+        }
+    }
 
-            String timestamp = LocalDateTime.now().format(FORMATTER);
-            String backupFileName = String.format("%s_%s.json", description, timestamp);
-            Path backupPath = backupDirectory.resolve(backupFileName);
-
-            Files.copy(filePath, backupPath);
-            logger.info("Backup created: " + backupPath);
-
-            cleanOldBackups(MAX_BACKUPS);
+    private LocalDateTime getFileTimestamp(Path backupPath) {
+        String filename = backupPath.getFileName().toString();
+        Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
+        if (matcher.matches()) {
+            String timestampStr = matcher.group(3);
+            try {
+                return LocalDateTime.parse(timestampStr, FILE_TIMESTAMP_FORMATTER);
+            } catch (Exception e) {
+                logger.warning("Failed to parse timestamp from filename: " + filename + " - " + e.getMessage());
+                return LocalDateTime.MIN;
+            }
+        } else {
+            logger.warning("Invalid backup file format: " + filename);
+            return LocalDateTime.MIN;
         }
     }
 
     /**
-     * Deletes old backups, keeping only the latest `maxBackups` files.
+     * Creates a backup of the specified source file with a fixed index (from 0 to 9),
+     * replacing any existing backup at that index. Each backup file name includes
+     * the action description and a timestamp, allowing easy identification of backups.
+     */
+    public int createIndexedBackup(Path sourcePath, String actionDescription) throws IOException {
+        String timestamp = LocalDateTime.now().format(FILE_TIMESTAMP_FORMATTER);
+        String backupFileName = String.format("%d_%s_%s.json", currentIndex, actionDescription, timestamp);
+        Path backupPath = backupDirectory.resolve(backupFileName);
+
+        // Delete existing backup at currentIndex if it exists
+        deleteBackupByIndex(currentIndex);
+
+        // Copy source to the backup path
+        Files.copy(sourcePath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+        logger.info("Backup created with index: " + currentIndex);
+
+        int usedIndex = currentIndex;
+        // Update currentIndex
+        currentIndex = (currentIndex + 1) % MAX_BACKUPS;
+
+        return usedIndex;
+    }
+
+    private void deleteBackupByIndex(int index) throws IOException {
+        try (Stream<Path> backups = Files.list(backupDirectory)) {
+            backups.filter(path -> extractIndex(path) == index)
+                    .forEach(path -> {
+                        try {
+                            Files.deleteIfExists(path);
+                            logger.info("Deleted old backup at index " + index + ": " + path);
+                        } catch (IOException e) {
+                            logger.warning("Failed to delete backup: " + path + " - " + e.getMessage());
+                        }
+                    });
+        }
+    }
+
+    protected int extractIndex(Path backupPath) {
+        String filename = backupPath.getFileName().toString();
+        Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
+        if (matcher.matches()) {
+            return Integer.parseInt(matcher.group(1));
+        } else {
+            logger.warning("Invalid backup file format: " + filename);
+            return -1;
+        }
+    }
+
+    protected String extractActionDescription(Path backupPath) {
+        String filename = backupPath.getFileName().toString();
+        Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
+        if (matcher.matches()) {
+            return matcher.group(2);
+        } else {
+            logger.warning("Invalid backup file format: " + filename);
+            return "Unknown";
+        }
+    }
+
+    /**
+     * Restores a backup by its index.
      *
-     * @param maxBackups The maximum number of backups to retain.
-     * @throws IOException If there is an error accessing the backup directory.
+     * @param index The index of the backup to restore.
+     * @return The path to the backup file.
+     * @throws IOException If the backup file is not found or cannot be accessed.
+     */
+    public Path restoreBackupByIndex(int index) throws IOException {
+        try (Stream<Path> backups = Files.list(backupDirectory)) {
+            Optional<Path> backupToRestore = backups
+                    .filter(path -> extractIndex(path) == index)
+                    .findFirst();
+
+            if (backupToRestore.isPresent()) {
+                return backupToRestore.get();
+            } else {
+                throw new IOException("Backup with index " + index + " not found.");
+            }
+        }
+    }
+
+    /**
+     * Retrieves a formatted list of all backup files in the backups directory.
+     *
+     * @return A string with each backup file listed on a new line, with index, description, and timestamp.
+     * @throws IOException If an error occurs while accessing the backup directory.
+     */
+    public String getFormattedBackupList() throws IOException {
+        if (!Files.exists(backupDirectory)) {
+            return "";
+        }
+
+        try (Stream<Path> stream = Files.list(backupDirectory)) {
+            List<Path> backupFiles = stream
+                    .filter(Files::isRegularFile)
+                    .filter(path -> path.toString().endsWith(".json"))
+                    .sorted(Comparator.comparingInt(this::extractIndex))
+                    .collect(Collectors.toList());
+
+            if (backupFiles.isEmpty()) {
+                return "";
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (Path path : backupFiles) {
+                String filename = path.getFileName().toString();
+                Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
+                if (matcher.matches()) {
+                    int index = Integer.parseInt(matcher.group(1));
+                    String description = matcher.group(2);
+                    String timestampStr = matcher.group(3);
+                    LocalDateTime timestamp = LocalDateTime.parse(timestampStr, FILE_TIMESTAMP_FORMATTER);
+
+                    String formattedTimestamp = timestamp.format(DISPLAY_TIMESTAMP_FORMATTER);
+                    sb.append(String.format("%d [%s] Created on: %s\n",
+                            index,
+                            description,
+                            formattedTimestamp));
+                } else {
+                    logger.warning("Invalid backup file format: " + filename);
+                }
+            }
+
+            return sb.toString().trim();
+        }
+    }
+
+    /**
+     * Cleans up old backups, keeping only the most recent `maxBackups`.
+     *
+     * @param maxBackups The number of backups to retain.
+     * @throws IOException If an error occurs during cleanup.
      */
     public void cleanOldBackups(int maxBackups) throws IOException {
         if (maxBackups < 1) {
@@ -90,59 +234,22 @@ public class BackupManager {
 
         try (Stream<Path> backups = Files.list(backupDirectory)) {
             List<Path> backupFiles = backups.filter(Files::isRegularFile)
-                    .sorted(Comparator.comparing(this::getFileCreationTime).reversed()) // Newest first
-                    .toList();
+                    .sorted(Comparator.comparing(this::getFileCreationTime).reversed())
+                    .collect(Collectors.toList());
 
-            // Delete only the oldest files if we exceed the maxBackups limit
-            if (backupFiles.size() > maxBackups) {
-                for (int i = maxBackups; i < backupFiles.size(); i++) {
-                    deleteBackup(backupFiles.get(i));
-                }
+            for (int i = maxBackups; i < backupFiles.size(); i++) {
+                Files.deleteIfExists(backupFiles.get(i));
+                logger.info("Deleted old backup: " + backupFiles.get(i));
             }
         }
     }
 
-    /**
-     * Restores the second-most recent backup from the backup directory, if available.
-     *
-     * @return An {@code Optional<Path>} containing the path to the second-most recent backup, if it exists.
-     * @throws IOException If an I/O error occurs while listing files in the backup directory.
-     */
-    public Optional<Path> restoreMostRecentBackup() throws IOException {
-        try (Stream<Path> backups = Files.list(backupDirectory)) {
-            List<Path> backupFiles = backups.filter(Files::isRegularFile)
-                    .sorted(Comparator.comparing(this::getFileCreationTime).reversed()) // Newest first
-                    .toList();
-
-            if (!backupFiles.isEmpty()) {
-                return Optional.of(backupFiles.get(0)); // Return the most recent backup
-            } else {
-                return Optional.empty(); // No backups available
-            }
-        }
-    }
-
-
-    protected FileTime getFileCreationTime(Path path) {
+    private FileTime getFileCreationTime(Path path) {
         try {
             return Files.getLastModifiedTime(path);
         } catch (IOException e) {
-            logger.warning("Unable to retrieve creation time for " + path + ": " + e.getMessage());
-            return FileTime.fromMillis(System.currentTimeMillis());
-        }
-    }
-
-    /**
-     * Deletes the specified backup file if it exists.
-     *
-     * @param backupPath The path to the backup file to be deleted.
-     */
-    protected void deleteBackup(Path backupPath) {
-        try {
-            Files.deleteIfExists(backupPath);
-            logger.info("Deleted old backup: " + backupPath);
-        } catch (IOException e) {
-            logger.warning("Failed to delete backup: " + backupPath + " - " + e.getMessage());
+            logger.warning("Failed to get file creation time for " + path + ": " + e.getMessage());
+            return FileTime.fromMillis(0);
         }
     }
 }

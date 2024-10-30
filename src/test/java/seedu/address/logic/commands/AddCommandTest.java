@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -34,7 +36,7 @@ import seedu.address.storage.Storage;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains unit tests for {@code AddCommand}.
  */
 public class AddCommandTest {
 
@@ -122,13 +124,14 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        Person alice = new PersonBuilder().withName("Alice").build();
+        AddCommand addCommand = new AddCommand(alice);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + alice + "}";
         assertEquals(expected, addCommand.toString());
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all of the methods failing by default.
      */
     private class ModelStub implements Model {
         @Override
@@ -162,12 +165,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyAddressBook addressBook) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -188,11 +186,16 @@ public class AddCommandTest {
 
         @Override
         public boolean hasAppointment(Person person) {
-            throw new AssertionError("this method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -227,13 +230,24 @@ public class AddCommandTest {
         }
 
         @Override
-        public void backupData(String fileName) throws CommandException {
+        public int backupData(String actionDescription) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path restoreBackup(int index) throws IOException, DataLoadingException {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Storage getStorage() {
-            return null;
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String listAllBackups() throws IOException {
+            // Return an empty string or default message
+            return "";
         }
     }
 
@@ -290,17 +304,18 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accepts the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        final AddressBook addressBook = new AddressBook();
         final ArrayList<Appointment> calendar = new ArrayList<>();
         final OperatingHours operatingHours = new OperatingHours();
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+            return addressBook.hasPerson(person);
         }
 
         @Override
@@ -334,8 +349,8 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return addressBook;
         }
-    }
 
+    }
 }

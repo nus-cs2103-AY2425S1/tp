@@ -1,34 +1,43 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.nio.file.Path;
-import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.RestoreCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Contains unit tests for {@code RestoreCommandParser}.
+ */
 public class RestoreCommandParserTest {
 
     private final RestoreCommandParser parser = new RestoreCommandParser();
 
     @Test
-    public void parse_emptyArgs_returnsRestoreCommandWithNoFilePath() throws Exception {
-        RestoreCommand command = parser.parse("");
-        assertTrue(command instanceof RestoreCommand);
-
-        // Verify that the filePath is empty, which means it will restore from the most recent backup
-        assertEquals(Optional.empty(), command.getFilePath());
+    public void parse_validIndex_returnsRestoreCommand() throws Exception {
+        int index = 3;
+        RestoreCommand expectedCommand = new RestoreCommand(index);
+        RestoreCommand actualCommand = parser.parse(" " + index);
+        assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
-    public void parse_specificFilePath_returnsRestoreCommandWithFilePath() throws Exception {
-        String filePath = "backups/specificBackup.json";
-        RestoreCommand command = parser.parse(filePath);
+    public void parse_invalidIndex_throwsParseException() {
+        // Non-integer input
+        assertThrows(ParseException.class, () -> parser.parse("abc"));
 
-        // Verify that the filePath is present and matches the specified path
-        assertEquals(Optional.of(Path.of(filePath)), command.getFilePath());
+        // Negative index
+        assertThrows(ParseException.class, () -> parser.parse("-1"));
+
+        // Index out of range
+        assertThrows(ParseException.class, () -> parser.parse("10"));
+    }
+
+    @Test
+    public void parse_emptyArgs_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(""));
+        assertThrows(ParseException.class, () -> parser.parse("   "));
     }
 }

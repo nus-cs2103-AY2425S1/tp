@@ -7,24 +7,26 @@ import seedu.address.model.Model;
 
 /**
  * Represents a command to manually create a backup of the current data.
- * Allows an optional file name for the backup, otherwise generates a backup with a default timestamp-based name.
+ * Allows an optional action description for the backup.
  */
 public class BackupCommand extends Command {
     public static final String COMMAND_WORD = "backup";
-    public static final String MESSAGE_SUCCESS = "Manual backup completed successfully.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a backup with an optional file name.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Creates a backup with an optional action description.\n"
             + "Example: " + COMMAND_WORD + " myBackup";
+    public static final String MESSAGE_SUCCESS = "Backup %d is created successfully.";
 
-    private final String fileName;
+    private final String actionDescription;
 
-    public BackupCommand(String fileName) {
-        this.fileName = fileName;
+    public BackupCommand(String actionDescription) {
+        this.actionDescription = actionDescription;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.backupData(fileName); // Pass filename to model
-        return new CommandResult(MESSAGE_SUCCESS);
+        int backupIndex = model.backupData(actionDescription); // Get the index used
+        String message = String.format(MESSAGE_SUCCESS, backupIndex);
+        return new CommandResult(message);
     }
 
     @Override
@@ -35,12 +37,12 @@ public class BackupCommand extends Command {
             return false;
         } else {
             BackupCommand otherCommand = (BackupCommand) other;
-            return Objects.equals(this.fileName, otherCommand.fileName);
+            return Objects.equals(this.actionDescription, otherCommand.actionDescription);
         }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fileName);
+        return Objects.hash(actionDescription);
     }
 }

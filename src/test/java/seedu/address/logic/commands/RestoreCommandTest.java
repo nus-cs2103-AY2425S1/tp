@@ -1,104 +1,104 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Optional;
+import java.nio.file.Paths;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.BackupManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code RestoreCommand}.
+ */
 public class RestoreCommandTest {
 
     @TempDir
     public Path temporaryFolder;
 
-    private Model model;
-    private Storage storage;
-
-    @BeforeEach
-    public void setUp() throws IOException {
-        Path addressBookPath = temporaryFolder.resolve("addressBook.json");
-        Path userPrefsPath = temporaryFolder.resolve("userPrefs.json");
-
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookPath);
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsPath);
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
-        model = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+    @AfterEach
+    public void cleanUpDefaultBackupDirectory() throws IOException {
+        Path defaultBackupDirectory = Paths.get("backups");
+        if (Files.exists(defaultBackupDirectory)) {
+            Files.walk(defaultBackupDirectory)
+                    .filter(Files::isRegularFile)
+                    .forEach(path -> {
+                        try {
+                            Files.deleteIfExists(path);
+                        } catch (IOException e) {
+                            System.err.println("Failed to delete file: " + path + " - " + e.getMessage());
+                        }
+                    });
+        }
     }
 
     @Test
-    public void execute_restoreFromMostRecentBackup_success() throws Exception {
-        // Setup - Create a backup file to restore from
-        Path backupPath = temporaryFolder.resolve("backup.json");
-        AddressBook backupData = new AddressBook();
-        storage.saveAddressBook(backupData, backupPath);
+    public void execute_restoreSuccessful() throws Exception {
+        // Set up the storage and model with temporary directory
+        Path addressBookFilePath = temporaryFolder.resolve("addressBook.json");
+        Path userPrefsFilePath = temporaryFolder.resolve("userPrefs.json");
+        Path backupDirectoryPath = temporaryFolder.resolve("backups");
+        Files.createDirectories(backupDirectoryPath);
 
-        // Perform the restore
-        RestoreCommand restoreCommand = new RestoreCommand(Optional.of(backupPath));
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
+
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
+
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage.setBackupManager(new BackupManager(backupDirectoryPath));
+
+        Model model = new ModelManager(new AddressBook(), userPrefs, storage);
+
+        // Save the address book to ensure the file exists
+        storage.saveAddressBook(model.getAddressBook());
+
+        // Simulate creating a backup at index 0
+        int backupIndex = 0;
+        String actionDescription = "testBackup";
+        model.backupData(actionDescription);
+
+        // Create RestoreCommand with the backup index
+        RestoreCommand restoreCommand = new RestoreCommand(backupIndex);
+
+        // Execute the command
         CommandResult result = restoreCommand.execute(model);
 
-        // Assert the successful restoration
-        assertEquals(
-                String.format(
-                        RestoreCommand.MESSAGE_RESTORE_SUCCESS, backupPath.toString()), result.getFeedbackToUser());
+        // Check that the command result is as expected
+        String expectedMessage = String.format(RestoreCommand.MESSAGE_RESTORE_SUCCESS, backupIndex);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
     @Test
-    public void execute_restoreFromSpecificPath_success() throws Exception {
-        // Setup - Create a backup file to restore from
-        Path specificPath = temporaryFolder.resolve("specificBackup.json");
-        AddressBook specificBackupData = new AddressBook();
-        storage.saveAddressBook(specificBackupData, specificPath);
+    public void equals() {
+        RestoreCommand restoreCommand1 = new RestoreCommand(1);
+        RestoreCommand restoreCommand2 = new RestoreCommand(2);
 
-        // Perform the restore from a specific path
-        RestoreCommand restoreCommand = new RestoreCommand(Optional.of(specificPath));
-        CommandResult result = restoreCommand.execute(model);
+        // Same object
+        assertEquals(restoreCommand1, restoreCommand1);
 
-        // Assert the successful restoration
-        assertEquals(
-                String.format(
-                        RestoreCommand.MESSAGE_RESTORE_SUCCESS, specificPath.toString()), result.getFeedbackToUser());
-    }
+        // Different objects, same index
+        RestoreCommand restoreCommand1Copy = new RestoreCommand(1);
+        assertEquals(restoreCommand1, restoreCommand1Copy);
 
-    @Test
-    public void execute_restoreBackupFileNotFound_failure() throws Exception {
-        // Setup - No backup file exists
-        Path nonexistentBackupPath = temporaryFolder.resolve("nonexistentBackup.json");
+        // Different index
+        assertEquals(false, restoreCommand1.equals(restoreCommand2));
 
-        RestoreCommand restoreCommand = new RestoreCommand(Optional.of(nonexistentBackupPath));
-
-        // Assert that trying to restore from a nonexistent backup file throws an exception
-        assertThrows(CommandException.class, () -> restoreCommand.execute(model),
-                RestoreCommand.MESSAGE_RESTORE_FAILURE);
-    }
-
-    @Test
-    public void execute_restoreFromInvalidPath_failure() throws Exception {
-        // Setup - Create an invalid/corrupt backup file
-        Path invalidPath = temporaryFolder.resolve("invalidBackup.json");
-        Files.writeString(invalidPath, "{ invalid json }");
-
-        // Try to restore from the invalid backup file
-        RestoreCommand restoreCommand = new RestoreCommand(Optional.of(invalidPath));
-
-        // Assert that trying to restore from an invalid file throws an exception
-        assertThrows(CommandException.class, () -> restoreCommand.execute(model),
-                RestoreCommand.MESSAGE_RESTORE_FAILURE);
+        // Different types
+        assertEquals(false, restoreCommand1.equals(null));
+        assertEquals(false, restoreCommand1.equals("some string"));
     }
 }
