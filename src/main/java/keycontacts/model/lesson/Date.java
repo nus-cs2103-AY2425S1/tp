@@ -5,6 +5,8 @@ import static keycontacts.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a student's lesson date in the student directory.
@@ -12,11 +14,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Date implements Comparable<Date> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date should be in DD-MM-YYYY format";
-    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final String MESSAGE_INVALID_DATE = "Date should be a valid date in \"DD-MM-YYYY\" format.";
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT); // uses "uuuu" instead of "yyyy" since strict style needs an era
     public static final DateTimeFormatter DATE_TIME_FORMATTER_DISPLAY = DateTimeFormatter.ofPattern("MMM dd, yyyy");
-    public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-\\d{4}$";
-
     public final LocalDate value;
 
     /**
@@ -26,12 +27,17 @@ public class Date implements Comparable<Date> {
      */
     public Date(String date) {
         requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDate(date), MESSAGE_INVALID_DATE);
         this.value = LocalDate.parse(date, DATE_TIME_FORMATTER);
     }
 
     public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            LocalDate.parse(test, DATE_TIME_FORMATTER);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override

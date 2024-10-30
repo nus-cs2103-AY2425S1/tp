@@ -41,7 +41,7 @@ public class JsonAdaptedCancelledLesson {
      */
     public CancelledLesson toModelType() throws IllegalValueException {
         if (!Date.isValidDate(cancelledLessonDate)) {
-            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Date.MESSAGE_INVALID_DATE);
         }
         return new CancelledLesson(new Date(cancelledLessonDate));
     }
