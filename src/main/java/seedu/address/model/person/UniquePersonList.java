@@ -62,6 +62,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with the same car as the given argument.
+     */
+    public boolean carWithSameVrnAndVin(Car car) {
+        requireNonNull(car);
+        return internalList.stream().anyMatch(person -> {
+            Car personCar = person.getCar();
+            return personCar != null && personCar.hasMatchingVrnAndVin(car);
+        });
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

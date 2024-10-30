@@ -69,6 +69,11 @@ public interface Model {
     int getCarsWithSameVrnOrVinCount(Car car);
 
     /**
+     * Returns true if a car with the same VRN and VIN as {@code car} exists in the address book.
+     */
+    boolean hasCarWithSameVrnAndVin(Car car);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
