@@ -4,9 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -32,8 +30,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
-    private Label personLabel = new Label("Persons");
-    private Label appointmentLabel = new Label("Appointments");
 
     private final Stage primaryStage;
     private final Logic logic;
@@ -126,29 +122,15 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
         listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        personVBox.getChildren().addAll(personLabel, personListPanel.getRoot());
-        appointmentVBox.getChildren().addAll(appointmentLabel, appointmentListPanel.getRoot());
+        personVBox.getChildren().addAll(personListPanel.getRoot());
+        appointmentVBox.getChildren().addAll(appointmentListPanel.getRoot());
 
-
-        hbox.setSpacing(16);
-        hbox.setPadding(new Insets(15, 12, 15, 12));
         hbox.setAlignment(Pos.CENTER);
         HBox.setHgrow(personVBox, Priority.ALWAYS);
         HBox.setHgrow(appointmentVBox, Priority.ALWAYS);
 
         listPanelPlaceholder.getChildren().add(hbox);
         hbox.setMinWidth(listPanelPlaceholder.getWidth());
-
-
-        personLabel.setStyle("-fx-font-weight: bold;");
-        appointmentLabel.setStyle("-fx-font-weight: bold;");
-        personLabel.setStyle("-fx-text-fill: #3c3c3c; -fx-font-weight: bold;");
-        appointmentLabel.setStyle("-fx-text-fill: #3c3c3c; -fx-font-weight: bold;");
-        hbox.setStyle("-fx-background-color: #f2e1b3;");
-        commandBoxPlaceholder.setStyle("-fx-min-height: 65px");
-
-        personVBox.setSpacing(5);
-        appointmentVBox.setSpacing(5);
 
         VBox.setVgrow(personListPanel.getRoot(), Priority.ALWAYS);
         VBox.setVgrow(appointmentListPanel.getRoot(), Priority.ALWAYS);
@@ -159,10 +141,8 @@ public class MainWindow extends UiPart<Stage> {
         appointmentVBox.setMaxWidth(Double.MAX_VALUE);
         appointmentVBox.setPrefWidth(Region.USE_COMPUTED_SIZE);
 
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-        resultDisplay.getRoot().setStyle("-fx-background-color: #f2e1b3;");
 
         hbox.getChildren().add(personVBox);
         hbox.getChildren().add(appointmentVBox);
