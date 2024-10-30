@@ -21,6 +21,7 @@ public class ViewEventCommand extends Command{
             + "e.g. view sumobot festival";
 
     public static final String MESSAGE_SUCCESS = "Viewing event: %1$s";
+    public static final String EVENT_DOES_NOT_EXIST = "The event you entered does not exist!";
 
     public final Event eventToView;
 
@@ -35,6 +36,11 @@ public class ViewEventCommand extends Command{
     @Override
     public CommandResult execute(Model model, EventManager eventManager) throws CommandException {
         requireNonNull(eventManager);
+
+        if (!eventManager.hasEvent(eventToView)) {
+            throw new CommandException(EVENT_DOES_NOT_EXIST);
+        }
+
         throw new CommandException("This command has not been implemented yet!");
     }
 
