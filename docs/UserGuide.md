@@ -111,20 +111,23 @@ Examples:
 
 ### Locating persons by criteria: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose fields contain the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ...] [t/STUDY_GROUP_TAGS ...]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* At least one of the optional criteria must be provided.
+* Each criteria can have more than one keyword. e.g. `n/alice bob hans`
+* The search is case-insensitive. e.g. `n/hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `n/Hans Bo` will match `Bo Hans`
+* Only full words will be matched e.g. `n/Han` will not match `Hans`
+* Persons matching at least one keyword for **every specified criteria** will be returned.
+  e.g. `n/Alice Bob g/f` will return `{Alice Wang, ..., Female, ...}` but not `{Bob Tan, ..., Male, ...}`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+* `find n/roy li alex e/example.com g/m t/1A 1B 2B` returns records for `Alex Yeoh`, `David Li` and `Roy Balakrishnan`<br>
+  ![result for 'find' multiple](images/findMultipleCriteria.png)
+
 * `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`
 
 ### Deleting a person : `delete`
@@ -149,9 +152,26 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Assigning persons to Study Groups (randomly) : `assign`
+
+Assigns persons in the list to given Study Groups (randomly).
+
+Format: `assign STUDY_GROUP [STUDY_GROUP ...]`
+
+* Randomly assigns persons in the displayed list to the given `STUDY_GROUP`s.
+* No person in the displayed list can be tagged with any of the given study group name before assigning.
+* Input study group names must not have duplicates.
+
+Examples:
+* `list` followed by `assign P90-Placebo P90-Experimental` assigns every person in the addressbook to either `P90-Placebo` or `P90-Experimental` study group, but not both.<br>
+  ![result for 'assign P90-Placebo P90-Experimental'](images/assignP90Result.png)
+
+* `find g/M` followed by `assign Male-Group` assigns every male in the addressbook to `Male-Group` study group.<br>
+  ![result for 'assign Male-Group'](images/assignMaleGroupResult.png)
+
 ### Exiting the program : `exit`
 
-Exits the program.
+Displays an exit message, then exits the program.
 
 Format: `exit`
 
