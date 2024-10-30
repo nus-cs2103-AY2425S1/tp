@@ -60,7 +60,7 @@ public class Email {
         }
 
         Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        return value.equalsIgnoreCase(otherEmail.value);
     }
 
     @Override
