@@ -86,7 +86,7 @@ public class EditTaskCommand extends Command {
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
+        if (taskToEdit.isSameTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.setTask(taskToEdit, editedTask, group);
