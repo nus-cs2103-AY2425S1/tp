@@ -23,7 +23,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.schedule.Meeting;
 
 public class MeetingContactsCommandTest {
-    private final static Meeting NO_UID_MEETING = new Meeting(List.<UUID>of(), "meeting with no uid",
+    private static final Meeting NO_UID_MEETING = new Meeting(List.<UUID>of(), "meeting with no uid",
             LocalDate.of(2022, 10, 10), LocalTime.of(10, 0));
 
     private final Model model = new ModelManager(getTypicalAddressBook(),
@@ -49,7 +49,7 @@ public class MeetingContactsCommandTest {
     }
 
     @Test
-    public void execute_indexOutOfRangeUpperBound_Failure() {
+    public void execute_indexOutOfRangeUpperBound_failure() {
         MeetingContactsCommand meetingContactsCommand =
             new MeetingContactsCommand(new IndexStub(100));
 
@@ -58,7 +58,7 @@ public class MeetingContactsCommandTest {
     }
 
     @Test
-    public void execute_assertMeetingHasContactUid_Failure() {
+    public void execute_assertMeetingHasContactUid_failure() {
         ScheduleList scheduleList = new ScheduleList();
         scheduleList.addMeeting(NO_UID_MEETING);
         Model modelAnother = new ModelManager(new AddressBook(), new UserPrefs(), scheduleList);
