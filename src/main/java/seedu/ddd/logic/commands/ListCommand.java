@@ -48,5 +48,4 @@ public abstract class ListCommand extends Command {
             + CLIENT_EXAMPLE_USAGE + "\n"
             + VENDOR_EXAMPLE_USAGE + "\n"
             + EVENT_EXAMPLE_USAGE + "\n";
-    public abstract CommandResult execute(Model model);
 }
