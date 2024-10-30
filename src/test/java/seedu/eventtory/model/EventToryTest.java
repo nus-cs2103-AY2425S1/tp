@@ -11,7 +11,7 @@ import static seedu.eventtory.testutil.TypicalEvents.BIRTHDAY;
 import static seedu.eventtory.testutil.TypicalEvents.WEDDING;
 import static seedu.eventtory.testutil.TypicalVendors.ALICE;
 import static seedu.eventtory.testutil.TypicalVendors.BOB;
-import static seedu.eventtory.testutil.TypicalVendors.getTypicalAddressBook;
+import static seedu.eventtory.testutil.TypicalVendors.getTypicalEventTory;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,25 +31,25 @@ import seedu.eventtory.model.vendor.exceptions.DuplicateVendorException;
 import seedu.eventtory.testutil.EventBuilder;
 import seedu.eventtory.testutil.VendorBuilder;
 
-public class AddressBookTest {
+public class EventToryTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final EventTory eventTory = new EventTory();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getVendorList());
+        assertEquals(Collections.emptyList(), eventTory.getVendorList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> eventTory.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyEventTory_replacesData() {
+        EventTory newData = getTypicalEventTory();
+        eventTory.resetData(newData);
+        assertEquals(newData, eventTory);
     }
 
     @Test
@@ -58,146 +58,146 @@ public class AddressBookTest {
         Vendor editedAlice = new VendorBuilder(ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Vendor> newVendors = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newVendors);
+        EventToryStub newData = new EventToryStub(newVendors);
 
-        assertThrows(DuplicateVendorException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateVendorException.class, () -> eventTory.resetData(newData));
     }
 
     @Test
     public void hasVendor_nullVendor_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasVendor(null));
+        assertThrows(NullPointerException.class, () -> eventTory.hasVendor(null));
     }
 
     @Test
-    public void hasVendor_vendorNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasVendor(ALICE));
+    public void hasVendor_vendorNotInEventTory_returnsFalse() {
+        assertFalse(eventTory.hasVendor(ALICE));
     }
 
     @Test
-    public void hasVendor_vendorInAddressBook_returnsTrue() {
-        addressBook.addVendor(ALICE);
-        assertTrue(addressBook.hasVendor(ALICE));
+    public void hasVendor_vendorInEventTory_returnsTrue() {
+        eventTory.addVendor(ALICE);
+        assertTrue(eventTory.hasVendor(ALICE));
     }
 
     @Test
-    public void hasVendor_vendorWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addVendor(ALICE);
+    public void hasVendor_vendorWithSameIdentityFieldsInEventTory_returnsTrue() {
+        eventTory.addVendor(ALICE);
         Vendor editedAlice = new VendorBuilder(ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasVendor(editedAlice));
+        assertTrue(eventTory.hasVendor(editedAlice));
     }
 
     @Test
     public void hasEvent_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
+        assertThrows(NullPointerException.class, () -> eventTory.hasEvent(null));
     }
 
     @Test
-    public void hasEvent_eventNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasEvent(WEDDING));
+    public void hasEvent_eventNotInEventTory_returnsFalse() {
+        assertFalse(eventTory.hasEvent(WEDDING));
     }
 
     @Test
-    public void hasEvent_eventInAddressBook_returnsTrue() {
-        addressBook.addEvent(WEDDING);
-        assertTrue(addressBook.hasEvent(WEDDING));
+    public void hasEvent_eventInEventTory_returnsTrue() {
+        eventTory.addEvent(WEDDING);
+        assertTrue(eventTory.hasEvent(WEDDING));
     }
 
     @Test
-    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasEvent_eventWithSameIdentityFieldsInEventTory_returnsTrue() {
         Event similarWedding = new EventBuilder(WEDDING).withDate(VALID_DATE_BIRTHDAY).build();
-        addressBook.addEvent(WEDDING);
-        assertTrue(addressBook.hasEvent(similarWedding));
+        eventTory.addEvent(WEDDING);
+        assertTrue(eventTory.hasEvent(similarWedding));
     }
 
     // might be redundant has this is already tested in UniqueEventListTest.java
     @Test
     public void addEvent_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.addEvent(null));
+        assertThrows(NullPointerException.class, () -> eventTory.addEvent(null));
     }
 
     // might be redundant has this is already tested in UniqueEventListTest.java
     @Test
-    public void addEvent_eventInAddressBook_throwsDuplicateEventException() {
-        addressBook.addEvent(WEDDING);
-        assertThrows(DuplicateEventException.class, () -> addressBook.addEvent(WEDDING));
+    public void addEvent_eventInEventTory_throwsDuplicateEventException() {
+        eventTory.addEvent(WEDDING);
+        assertThrows(DuplicateEventException.class, () -> eventTory.addEvent(WEDDING));
     }
 
     // might be redundant has this is already tested in UniqueEventListTest.java
     @Test
-    public void addEvent_eventWithSameIdentityFieldsInAddressBook_throwsDuplicateEventException() {
+    public void addEvent_eventWithSameIdentityFieldsInEventTory_throwsDuplicateEventException() {
         Event similarWedding = new EventBuilder(WEDDING).withDate(VALID_DATE_BIRTHDAY).build();
-        addressBook.addEvent(WEDDING);
-        assertThrows(DuplicateEventException.class, () -> addressBook.addEvent(similarWedding));
+        eventTory.addEvent(WEDDING);
+        assertThrows(DuplicateEventException.class, () -> eventTory.addEvent(similarWedding));
     }
 
     @Test
     public void getVendorList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getVendorList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> eventTory.getVendorList().remove(0));
     }
 
     @Test
     public void getEventList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> eventTory.getEventList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName()
-                + "{vendors=" + addressBook.getVendorList() + ", "
-                + "events=" + addressBook.getEventList() + ", "
-                + "associations=" + addressBook.getAssociationList()
+        String expected = EventTory.class.getCanonicalName()
+                + "{vendors=" + eventTory.getVendorList() + ", "
+                + "events=" + eventTory.getEventList() + ", "
+                + "associations=" + eventTory.getAssociationList()
                 + "}";
-        assertEquals(expected, addressBook.toString());
+        assertEquals(expected, eventTory.toString());
     }
 
     @Test
     public void removeVendor_vendorNotAssociated_success() {
-        addressBook.addVendor(ALICE);
-        addressBook.removeVendor(ALICE);
-        assertFalse(addressBook.hasVendor(ALICE));
+        eventTory.addVendor(ALICE);
+        eventTory.removeVendor(ALICE);
+        assertFalse(eventTory.hasVendor(ALICE));
     }
 
     @Test
     public void removeVendor_vendorIsAssociatedWithEvent_throwsAssociationDeleteException() {
-        addressBook.addVendor(ALICE);
-        addressBook.addEvent(WEDDING);
-        addressBook.assignVendorToEvent(ALICE, WEDDING);
+        eventTory.addVendor(ALICE);
+        eventTory.addEvent(WEDDING);
+        eventTory.assignVendorToEvent(ALICE, WEDDING);
 
-        assertThrows(AssociationDeleteException.class, () -> addressBook.removeVendor(ALICE));
+        assertThrows(AssociationDeleteException.class, () -> eventTory.removeVendor(ALICE));
     }
 
     @Test
     public void removeEvent_eventNotAssociated_success() {
-        addressBook.addEvent(WEDDING);
-        addressBook.removeEvent(WEDDING);
-        assertFalse(addressBook.hasEvent(WEDDING));
+        eventTory.addEvent(WEDDING);
+        eventTory.removeEvent(WEDDING);
+        assertFalse(eventTory.hasEvent(WEDDING));
     }
 
     @Test
     public void removeEvent_eventIsAssociatedWithVendor_throwsAssociationDeleteException() {
-        addressBook.addVendor(ALICE);
-        addressBook.addEvent(WEDDING);
-        addressBook.assignVendorToEvent(ALICE, WEDDING);
+        eventTory.addVendor(ALICE);
+        eventTory.addEvent(WEDDING);
+        eventTory.assignVendorToEvent(ALICE, WEDDING);
 
-        assertThrows(AssociationDeleteException.class, () -> addressBook.removeEvent(WEDDING));
+        assertThrows(AssociationDeleteException.class, () -> eventTory.removeEvent(WEDDING));
     }
 
     @Test
     public void getAssociatedVendors_noAssociations_returnsEmptyList() {
-        ObservableList<Vendor> associatedVendors = addressBook.getAssociatedVendors(WEDDING);
+        ObservableList<Vendor> associatedVendors = eventTory.getAssociatedVendors(WEDDING);
         assertEquals(FXCollections.observableArrayList(), associatedVendors);
     }
 
     @Test
     public void getAssociatedVendors_withAssociations_returnsCorrectVendors() {
-        addressBook.addVendor(ALICE);
-        addressBook.addVendor(BOB);
-        addressBook.addEvent(WEDDING);
-        addressBook.assignVendorToEvent(ALICE, WEDDING);
-        addressBook.assignVendorToEvent(BOB, WEDDING);
+        eventTory.addVendor(ALICE);
+        eventTory.addVendor(BOB);
+        eventTory.addEvent(WEDDING);
+        eventTory.assignVendorToEvent(ALICE, WEDDING);
+        eventTory.assignVendorToEvent(BOB, WEDDING);
 
-        ObservableList<Vendor> associatedVendors = addressBook.getAssociatedVendors(WEDDING);
+        ObservableList<Vendor> associatedVendors = eventTory.getAssociatedVendors(WEDDING);
         ObservableList<Vendor> expectedVendors = FXCollections.observableArrayList(ALICE, BOB);
 
         associatedVendors.sort((v1, v2) -> v1.getName().fullName.compareTo(v2.getName().fullName));
@@ -208,19 +208,19 @@ public class AddressBookTest {
 
     @Test
     public void getAssociatedEvents_noAssociations_returnsEmptyList() {
-        ObservableList<Event> associatedEvents = addressBook.getAssociatedEvents(ALICE);
+        ObservableList<Event> associatedEvents = eventTory.getAssociatedEvents(ALICE);
         assertEquals(FXCollections.observableArrayList(), associatedEvents);
     }
 
     @Test
     public void getAssociatedEvents_withAssociations_returnsCorrectEvents() {
-        addressBook.addVendor(ALICE);
-        addressBook.addEvent(WEDDING);
-        addressBook.addEvent(BIRTHDAY);
-        addressBook.assignVendorToEvent(ALICE, WEDDING);
-        addressBook.assignVendorToEvent(ALICE, BIRTHDAY);
+        eventTory.addVendor(ALICE);
+        eventTory.addEvent(WEDDING);
+        eventTory.addEvent(BIRTHDAY);
+        eventTory.assignVendorToEvent(ALICE, WEDDING);
+        eventTory.assignVendorToEvent(ALICE, BIRTHDAY);
 
-        ObservableList<Event> associatedEvents = addressBook.getAssociatedEvents(ALICE);
+        ObservableList<Event> associatedEvents = eventTory.getAssociatedEvents(ALICE);
         ObservableList<Event> expectedEvents = FXCollections.observableArrayList(WEDDING, BIRTHDAY);
 
         associatedEvents.sort((e1, e2) -> e1.getName().fullName.compareTo(e2.getName().fullName));
@@ -230,14 +230,14 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose vendors list can violate interface
+     * A stub ReadOnlyEventTory whose vendors list can violate interface
      * constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class EventToryStub implements ReadOnlyEventTory {
         private final ObservableList<Vendor> vendors = FXCollections.observableArrayList();
         private final ObservableList<Event> events = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Vendor> vendors) {
+        EventToryStub(Collection<Vendor> vendors) {
             this.vendors.setAll(vendors);
         }
 
