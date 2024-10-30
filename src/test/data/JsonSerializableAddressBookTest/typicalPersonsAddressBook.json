@@ -9,7 +9,7 @@
       "skills": [
         "architecture"
       ],
-      "match": ""
+      "match": null
     },
     {
       "name": "Benson Meier",
@@ -20,7 +20,7 @@
         "Blender",
         "AfterEffects"
       ],
-      "match": ""
+      "match": null
     },
     {
       "name": "Carl Kurz",
@@ -28,7 +28,7 @@
       "email": "heinz@example.com",
       "role": "Banker",
       "skills": [],
-      "match": ""
+      "match": null
     },
     {
       "name": "Daniel Meier",
@@ -38,7 +38,7 @@
       "skills": [
         "Western"
       ],
-      "match": ""
+      "match": null
     },
     {
       "name": "Elle Meyer",
@@ -46,7 +46,7 @@
       "email": "werner@example.com",
       "role": "Logistics Supervisor",
       "skills": [],
-      "match": ""
+      "match": null
     },
     {
       "name": "Fiona Kunz",
@@ -54,7 +54,7 @@
       "email": "lydia@example.com",
       "role": "Botanist",
       "skills": [],
-      "match": ""
+      "match": null
     },
     {
       "name": "George Best",
@@ -62,7 +62,7 @@
       "email": "anna@example.com",
       "role": "QA",
       "skills": [],
-      "match": ""
+      "match": null
     }
   ],
   "jobs": [],

@@ -8,14 +8,14 @@
       "tags": [
         "friends"
       ],
-      "match": ""
+      "match": null
     },
     {
       "name": "Alice Pauline",
       "phone": "94351253",
       "email": "pauline@example.com",
       "role": "Teacher",
-      "match": ""
+      "match": null
     }
   ],
   "jobs": [],
