@@ -287,7 +287,7 @@ The following sequence diagram illustrate how an archive operation is processed 
 
 ![ArchiveSequenceDiagram](images/ArchiveSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. Some details like parameters of function is omitted for simplicity.
 
 Scenario 3 Loading from a file
 
@@ -298,7 +298,7 @@ The following sequence diagram illustrate how an archive operation is processed 
 
 ![LoadSequenceDiagram](images/LoadSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `LoadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `LoadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. Some details like parameters of function is omitted for simplicity.
 
 -------------------------------------------------------------------------------
 
