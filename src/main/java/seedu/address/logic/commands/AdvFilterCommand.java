@@ -128,7 +128,7 @@ public class AdvFilterCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("tagName", tagName)
-                .add("operator", operator)
+                .add("operator", operator.getKeyword())
                 .add("tagValue", tagValue)
                 .toString();
     }
