@@ -14,19 +14,19 @@ public class LessonTimeTest {
     }
 
     @Test
-    public void constructor_invalidEducationLevel_throwsIllegalArgumentException() {
+    public void constructor_invalidLessonTime_throwsIllegalArgumentException() {
         String invalidLessonTime = "";
         assertThrows(IllegalArgumentException.class, () -> new LessonTime(invalidLessonTime));
     }
 
     @Test
-    public void constructor_validEducationLevel() {
+    public void constructor_validLessonTime() {
         String validLessonTime = "mon:12:00";
         assertEquals(LessonTime.class, new LessonTime(validLessonTime).getClass());
     }
 
     @Test
-    public void isValidEducationLevel() {
+    public void isValidLessonTime() {
         // null education level
         assertThrows(NullPointerException.class, () -> LessonTime.isValidLessonTime(null));
     }

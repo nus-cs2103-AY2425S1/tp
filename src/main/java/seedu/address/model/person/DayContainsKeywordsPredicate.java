@@ -34,7 +34,7 @@ public class DayContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof DayContainsKeywordsPredicate)) {
             return false;
         }
 
