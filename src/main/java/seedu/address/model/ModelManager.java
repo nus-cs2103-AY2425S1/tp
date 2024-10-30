@@ -336,7 +336,7 @@ public class ModelManager implements Model {
      * @param actionDescription A description for the action being backed up.
      * @param target            The person involved in the action.
      */
-    private void triggerBackup(String actionDescription, Person target) {
+    protected void triggerBackup(String actionDescription, Person target) {
         try {
             int index = backupManager.createIndexedBackup(storage.getAddressBookFilePath(), actionDescription);
             logger.info("Backup triggered for action: " + actionDescription + " at index " + index);

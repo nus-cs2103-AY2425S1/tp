@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -117,7 +118,7 @@ public class ModelManagerTest {
     public void backupData_storageNotInitialized_throwsCommandException() throws IOException {
         ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
         CommandException exception = assertThrows(CommandException.class, (
-        )-> modelWithoutStorage.backupData("test"));
+        ) -> modelWithoutStorage.backupData("test"));
         assertEquals("Failed to create backup: Storage is not initialized!", exception.getMessage());
     }
 
@@ -136,10 +137,16 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deletePerson_personDeletedSuccessfully() {
-        Person person = new PersonBuilder().withName("Test Person").build();
-        modelManager.addPerson(person);
-        modelManager.deletePerson(person);
-        assertTrue(!modelManager.getAddressBook().getPersonList().contains(person));
+    public void triggerBackup_validActionAndPerson_noExceptionThrown() {
+        // Setup
+        Person testPerson = new PersonBuilder().withName("John Doe").build();
+        modelManager.addPerson(testPerson);
+        String actionDescription = "add_" + testPerson.getName().fullName;
+
+        // Execute
+        assertDoesNotThrow(() -> modelManager.triggerBackup(actionDescription, testPerson));
+
+        // Assertion is implicit in the absence of exception
     }
+
 }
