@@ -56,9 +56,6 @@ ClientGrid is an **address book** designed for real estate agents to efficiently
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addbuyer n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe e/bob@gmail.com` or as `n/John Doe`.
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -85,7 +82,7 @@ Format: `list k/KEY`
   * `sellers`: Lists all sellers in the database.
   * `clients`: Lists all buyers and sellers (i.e. clients) combined.
   * `properties`: Lists all properties in the database.
-  * `meetings`: Lists all meetings in th e database.
+  * `meetings`: Lists all meetings in the database.
 
 * If an invalid `KEY` is provided, an error message will be displayed.
 
@@ -203,9 +200,9 @@ Format: `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
 * The `UNIT_NUMBER` comprises of two numbers delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digits. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash, other non-integer characters or spaces are not accepted.
 
 Examples:
-* `deleteproperty c/124894 u/15-20` deletes a property with postal code `124894` and unit number `15-20`.
+* `deleteproperty c/123456 u/01-01` deletes a property with postal code `123456` and unit number `01-01`.
 
-  ![result for 'deleteproperty c/124894 u/15-20'](images/deleteproperty.png)
+  ![result for 'deleteproperty c/123456 u/01-01'](images/deleteproperty.png)
 
 ### Filtering clients : `filterclient`
 
@@ -246,20 +243,21 @@ Examples:
 
 Adds a specified meeting to the meeting book of ClientGrid.
 
-Format: `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE_NUMBER sp/SELLER_PHONE_NUMBER t/TYPE c/POSTALCODE`
+Format: `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTALCODE`
 
 * Adds a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
 * The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
 * The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
-* `bp/BUYER_PHONE_NUMBER` refers to a buyer's phone number. There must be an existing buyer in the client book that has a phone number that is equal to the `BUYER_PHONE_NUMBER`. The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
-* `sp/SELLER_PHONE_NUMBER` refers to a seller's phone number. There must be an existing seller in the client book that has a phone number that is equal to the `SELLER_PHONE_NUMBER`. The `SELLER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
-* `TYPE` refers to a property type. It must be either `CONDO`, `HDB`, or `LANDED`. `TYPE` is case-insensitive.
-* `POSTALCODE` refers to a postal code. The postal code must belong to some property to the property book.
+* `BUYER_PHONE` refers to a buyer's phone number. There must be an existing buyer in the client book that has a phone number that is equal to the `BUYER_PHONE`.
+* `SELLER_PHONE` refers to a seller's phone number. Likewise, there must be an existing seller in the client book with a phone number equal to `SELLER_PHONE`.
+* Both `BUYER_PHONE` and `SELLER_PHONE` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
+* `TYPE` refers to a property type. It must be one of the following values (case-insensitive): `CONDO`, `HDB`, or `LANDED`.
+* `POSTALCODE` refers to a postal code. The postal code must belong to some existing property in the property book of the specified `TYPE`.
 
 Examples:
-* `addmeeting mt/Meeting 1 d/01-01-2024 b/Alice Pauline s/Daniel Meier t/HDB c/123456` adds a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
+* `addmeeting mt/Meeting 1 d/01-01-2025 bp/95352563 sp/87652533 t/HDB c/123456` adds a meeting with meeting title `Meeting 1` and meeting date `01-01-2025`.
 
-  ![result for 'addmeeting mt/Meeting 1 d/01-01-2024 b/Alice Pauline s/Daniel Meier t/HDB c/123456'](images/addmeeting.png)
+  ![result for 'addmeeting mt/Meeting 1 d/01-01-2025 bp/95352563 sp/87652533 t/HDB c/123456'](images/addmeeting.png)
 
 ### Deleting a meeting : `deletemeeting`
 
@@ -318,7 +316,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data of your previous ClientGrid home folder. ([See Data File Structure](#editing-the-data-file))
+**A**: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data of your previous ClientGrid home folder. ([See Data File Structure](#editing-the-data-file))<br>
 **Q**: Can buyers and sellers have the same phone number?<br>
 **A**: Yes. A single client can be both a buyer and a seller of properties and can use the same phone number in both roles. However, two different buyers or two different sellers cannot share the same phone number.
 
@@ -333,20 +331,20 @@ _Details coming soon ..._
 
 ## Command Summary
 
-| Action                | Format, Examples                                                                  |
-|-----------------------|-----------------------------------------------------------------------------------|
-| **Help**              | `help`                                                                            |
-| **List**              | `list k/KEY`                                                                      |
-| **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                        |
-| **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                    |
-| **Delete Buyer**      | `deletebuyer p/PHONE_NUMBER`                                                      |
-| **Delete Seller**     | `deleteseller p/PHONE_NUMBER`                                                     |
-| **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                      |
-| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                      |
-| **Filter Clients**    | `filterclient n/NAME`                                                             |
-| **Filter Properties** | `filterproperty t/TYPE gte/MATCHING_PRICE lte/MATCHING_PRICE`                     |
-| **Add Meeting**       | `addmeeting mt/TITLE d/DATE b/BUYER s/SELLER t/TYPE c/POSTALCODE`                 |
-| **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                   |
-| **Exit**              | `exit`                                                                            |
+| Action                | Format, Examples                                                                               |
+|-----------------------|------------------------------------------------------------------------------------------------|
+| **Help**              | `help`                                                                                         |
+| **List**              | `list k/KEY`                                                                                   |
+| **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                                     |
+| **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                                 |
+| **Delete Buyer**      | `deletebuyer p/PHONE_NUMBER`                                                                   |
+| **Delete Seller**     | `deleteseller p/PHONE_NUMBER`                                                                  |
+| **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                                   |
+| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                                   |
+| **Filter Clients**    | `filterclient n/NAME`                                                                          |
+| **Filter Properties** | `filterproperty t/TYPE gte/MATCHING_PRICE lte/MATCHING_PRICE`                                  |
+| **Add Meeting**       | `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTALCODE` |
+| **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                                |
+| **Exit**              | `exit`                                                                                         |
 
 

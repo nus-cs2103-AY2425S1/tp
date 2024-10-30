@@ -291,25 +291,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**:
 
-ClientGrid is an address book designed for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor properties the agent is in charge of while maintaining core address book functionality.
 
+ClientGrid is an all-in-one address book tailored for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data, monitor properties, and schedule meetings —all within a single app, eliminating the need to juggle multiple apps. With offline access, agents can stay productive with ClientGrid anywhere.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​           | I want to …​                                               | So that I can…​                                                        |
-|----------|-------------------|------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | real estate agent | add a new client (buyer or seller) to ClientGrid           | keep all their contact information organized in one place
-| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid          | keep all their contact information organized in one place              |
-| `* * *`  | real estate agent | add new properties to client grid | keep track of my client's property details                             |
-| `* * *`  | real estate agent | delete a property entry from ClientGrid                    | remove entries that I no longer need                                   |
-| `* * *`  | real estate agent    | list information about properties                          | easily manage my portfolio of available properties                     |
-| `* * *`  | real estate agent    | list information about buyers                              | match buyers with suitable properties based on their preferences        |
-| `* * *`  | real estate agent    | list information about sellers                             | manage relationships and property listings efficiently                 |
-| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction         |
-| `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
+| Priority | As a …​           | I want to …​                                               | So that I can…​                                              |
+|----------|-------------------|------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | real estate agent | add a new client (buyer or seller) to ClientGrid           | keep all their contact information organized in one place    
+| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid          | keep all their contact information organized in one place    |
+| `* * *`  | real estate agent | add new properties to client grid                          | keep track of my client's property details                   |
+| `* * *`  | real estate agent | delete a property entry from ClientGrid                    | remove entries that I no longer need                         |
+| `* * *`  | real estate agent | add a meeting with my client(s) on ClientGrid              | keep track of all my scheduled meetings in one place         |
+| `* * *`  | real estate agent    | list information about properties                          | easily manage my portfolio of available properties           |
+| `* * *`  | real estate agent    | list information about buyers                              | match buyers with suitable properties based on their preferences |
+| `* * *`  | real estate agent    | list information about sellers                             | manage relationships and property listings efficiently       |
+| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction |
+| `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction |
 
 *{More to be added}*
 
@@ -451,13 +452,13 @@ Extensions:
 **Use case: UC7 - Add Meeting**
 
 MSS:
-1. Real estate agent requests to add a meeting based on the meeting’s meeting title and meeting date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
+1. Real estate agent requests to add a meeting based on the meeting’s title and date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
 2. ClientGrid will add the meeting and indicate success.
    Use case ends.
 
 Extensions:
 
-* 1a. ClientGrid detects an error in the meeting title or meeting date format provided by the real estate agent.
+* 1a. ClientGrid detects an error in the format of the meeting title, meeting date, buyer phone number, seller phone number, property type, or postal code provided by the real estate agent.
 
     * 1a1. ClientGrid requests for the correct data.
 
@@ -467,9 +468,15 @@ Extensions:
 
     * Use case resumes from step 2.
 
-* 1b. ClientGrid is unable to find a matching buyer, seller, or property entry in the meeting book.
+* 1b. ClientGrid detects there is a meeting of the same meeting title and meeting date in the client book.
 
-    * 1b1. ClientGrid informs real estate agent that the buyer, seller, or property does not exist in the meeting book.
+    * 1b1. ClientGrid notifies the user of an existing meeting with the same title and date in the client book and prompts the user to modify either the meeting title or date before resubmitting.
+
+    * Use case ends.
+
+* 1c. ClientGrid is unable to find a matching buyer, seller, or property entry in the ClientBook or PropertyBook.
+
+    * 1c1. ClientGrid informs real estate agent that the buyer, seller, or property does not exist in the ClientBook or PropertyBook.
 
     * Use case ends.
 
@@ -504,9 +511,9 @@ Extensions:
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 clients and 500 properties without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients, 500 properties, and 500 meetings without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The client and property databases should be updated after every command successfully executed by ClientGrid.
+4. The client, property, and meeting databases should be updated after every command successfully executed by ClientGrid.
 5. Should be able to handle case of corrupted file
 
 ### Glossary
@@ -515,7 +522,6 @@ Extensions:
 * **Client Book**: In-memory JSON file containing the clients stored in ClientGrid
 * **Property Book**: In-memory JSON file containing the properties stored in ClientGrid
 * **Meeting Book**: In-memory JSON file containing the meetings stored in ClientGrid
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Corrupted file**: Missing file and invalid data
 --------------------------------------------------------------------------------------------------------------------
 
