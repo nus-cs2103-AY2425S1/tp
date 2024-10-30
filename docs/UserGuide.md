@@ -39,7 +39,11 @@ Upon running ResearchRoster, a GUI similar to below should be displayed.
 
 [screenshot of GUI]
 
-//point and list out important components, e.g., command box, output area, (list of) person cards etc.]
+1. **Tabs**: Provides access to file options and help.
+2. **Participant List**: Shows a contact list of participants.
+3. **Participant Card**: Displays detailed information for a specific participant.
+4. **Command Box**: Enter user commands here.
+5. **Output Box**: Shows feedback messages after each command.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 ResearchRoster provides sample data upon first run.
