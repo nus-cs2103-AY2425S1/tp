@@ -21,8 +21,8 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the patient identified by either the index number used in the displayed person list or" +
-            " the Identity Number.\n"
+            + ": Deletes the patient identified by either the index number used in the displayed person list or"
+            + " the Identity Number.\n"
             + "Parameters: INDEX(must be a positive integer) or i/NRIC (must be 9 characters)\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " " + PREFIX_IDENTITY_NUMBER + "S1234567A";
 
@@ -31,11 +31,17 @@ public class DeleteCommand extends Command {
     private final IdentityNumber identityNumber;
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteCommand to delete the person with the specified {@code identityNumber}.
+     */
     public DeleteCommand(IdentityNumber identityNumber) {
         this.identityNumber = identityNumber;
         this.targetIndex = null;
     }
 
+    /**
+     * Creates a DeleteCommand to delete the person at the specified {@code targetIndex}.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.identityNumber = null;
@@ -51,7 +57,7 @@ public class DeleteCommand extends Command {
         }
     }
 
-    private CommandResult deleteByIdentityNumber(Model model) throws CommandException{
+    private CommandResult deleteByIdentityNumber(Model model) throws CommandException {
         List<Person> lastShownList = model.getPersonList();
         Person personToDelete = null;
 
