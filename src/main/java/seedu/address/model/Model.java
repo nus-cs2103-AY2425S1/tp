@@ -123,6 +123,11 @@ public interface Model {
     boolean hasTag(Tag tag);
 
     /**
+     * Removes the deleted {@code Tag} from all persons in the address book.
+     */
+    void removeTagFromPersons(Tag tag);
+
+    /**
      * Checks if the size of the tag list is below or equal
      * to the maximum size allowed.
      *

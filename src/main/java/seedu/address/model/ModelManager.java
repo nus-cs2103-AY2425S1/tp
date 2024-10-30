@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -172,6 +174,19 @@ public class ModelManager implements Model {
     @Override
     public String getTagList() {
         return addressBook.tagsToString();
+    }
+
+    @Override
+    public void removeTagFromPersons(Tag tag) {
+        List<Person> persons = getFullPersonList();
+        for (Person person : persons) {
+            Set<Tag> newTags = new HashSet<>(person.getTags());
+            newTags.remove(tag);
+
+            Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getRsvpStatus(), newTags);
+            setPerson(person, updatedPerson);
+        }
     }
 
     @Override

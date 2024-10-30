@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
@@ -66,5 +67,12 @@ public class NewtagCommand extends Command {
 
         NewtagCommand otherCommand = (NewtagCommand) other;
         return tags.equals(otherCommand.tags);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("tags", tags)
+                .toString();
     }
 }
