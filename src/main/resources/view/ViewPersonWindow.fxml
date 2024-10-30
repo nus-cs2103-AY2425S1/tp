@@ -53,7 +53,7 @@
                 <Label text="Description:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
                 <ScrollPane style="-fx-background-color: transparent; -fx-border-color: transparent;" fitToWidth="true">
                     <HBox style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-background-radius: 5;
-                    -fx-pref-width: 300; -fx-pref-height: 100;">
+                    -fx-pref-width: 300; -fx-pref-height: 200;">
                         <Label fx:id="description" wrapText="true"/>
                     </HBox>
                 </ScrollPane>
