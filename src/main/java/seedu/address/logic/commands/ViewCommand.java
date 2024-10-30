@@ -37,8 +37,10 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Filters the displayed {@code ObservableList} in the {@code Model} to just the selected index.
-     * Returns a {@code CommandResult} that indicates the user has requested to View a person.
+     * Checks that the selected index is valid and within
+     * the range of the {@code ObservableList} in the {@code Model}.
+     * Returns a {@code CommandResult} that indicates the user
+     * has requested to view a person at the given {@code Index}.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -50,11 +52,9 @@ public class ViewCommand extends Command {
         }
 
         Person personToView = lastShownList.get(index.getZeroBased());
-        model.updateFilteredPersonList(person -> person.isSamePerson(personToView));
-
         String commandResultMessage = String.format(MESSAGE_VIEW_SUCCESS, Messages.format(personToView));
 
-        return new CommandResult(commandResultMessage, true, false, false);
+        return new CommandResult(commandResultMessage, index, false, false);
     }
 
     @Override
