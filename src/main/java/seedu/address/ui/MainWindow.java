@@ -212,7 +212,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleFilterByName() {
-        fillCommandBox("filter n/");
+        fillCommandBox("filter n\\");
     }
 
     /**
@@ -220,7 +220,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleFilterByTags() {
-        fillCommandBox("filter t/");
+        fillCommandBox("filter t\\");
     }
 
     /**
@@ -228,7 +228,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleAdvancedFilterByTags() {
-        fillCommandBox("advfilter t/TAG OPERATOR VALUE");
+        fillCommandBox("advfilter t\\[TAG] [OPERATOR] [VALUE]");
     }
 
     /**

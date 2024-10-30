@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.Set;
@@ -19,10 +21,15 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters the contact list by name and/or tags.\n"
-            + "Parameters: [n/NAME] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " n/John t/client t/friend";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the contact list by name and/or tags.\n"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John "
+            + PREFIX_TAG + "client "
+            + PREFIX_TAG + "friend";
+
 
     public static final String MESSAGE_NO_CONTACT_FOUND = "No contacts match the filter criteria.";
 

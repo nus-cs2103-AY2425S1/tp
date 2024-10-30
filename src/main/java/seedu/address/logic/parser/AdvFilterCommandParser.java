@@ -14,7 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class AdvFilterCommandParser implements Parser<AdvFilterCommand> {
     //regex to filter the input to extract TAG name, comparison operator and TAG value
     private static final Pattern ADVFILTER_COMMAND_FORMAT =
-            Pattern.compile("(?i)(t/(?<tag>\\S+)){1}\\s+(?<operator>\\S+){1}\\s+(?<value>\\S+){1}");
+            Pattern.compile("(?i)(t\\\\(?<tag>\\S+))\\s+(?<operator>\\S+)\\s+(?<value>\\S+)");
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
