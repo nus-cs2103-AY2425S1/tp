@@ -27,7 +27,7 @@ public class SortCommand extends Command {
             + "[" + PREFIX_PHONE + "ASC/DESC] "
             + "[" + PREFIX_ADDRESS + "ASC/DESC] "
             + "[" + PREFIX_GRADE_LEVEL + "ASC/DESC] "
-            + "[" + PREFIX_GROUP + "ASC/DESC\n"
+            + "[" + PREFIX_GROUP + "ASC/DESC]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GRADE_LEVEL + "ASC " + PREFIX_NAME + "DESC";
 
     private final StudentComparator comparator;
