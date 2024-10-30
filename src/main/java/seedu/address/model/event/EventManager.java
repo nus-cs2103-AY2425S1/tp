@@ -6,7 +6,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonInEventPredicate;
 
 /**
@@ -96,7 +95,7 @@ public class EventManager implements ReadOnlyEventManager {
      * @return {@code PersonInEventPredicate} object.
      */
     public PersonInEventPredicate getPersonInEventPredicate(Event event) {
-        assert this.eventList.contains(event): "This method should only take in events that exist in the eventList.";
+        assert this.eventList.contains(event) : "This method should only take in events that exist in the eventList.";
 
         // Search through the unmodifiable list for the event, else throw EventNotFoundException
         // Unmodifiable List is not strong enough to ensure that the event is not modified

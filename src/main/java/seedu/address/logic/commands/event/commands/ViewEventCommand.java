@@ -14,7 +14,7 @@ import seedu.address.model.event.EventManager;
 /**
  * View the list of persons who are in an event.
  */
-public class ViewEventCommand extends Command{
+public class ViewEventCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT NAME: View list of persons in an event.\n"
