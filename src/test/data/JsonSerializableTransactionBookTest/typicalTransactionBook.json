@@ -8,6 +8,7 @@
       },
       "description": "Sean owes me a lot for a landed property in Sentosa",
       "date": "10102024",
+      "isDone": false,
       "categories": [
         "FOOD"
       ]
@@ -20,6 +21,7 @@
       },
       "description": "Jenkins owed me for a loan of $1,000,000",
       "date": "11102025",
+      "isDone": true,
       "categories": [
         "FOOD"
       ]

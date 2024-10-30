@@ -5,6 +5,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.image.ImageView?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" HBox.hgrow="ALWAYS">
     <padding>
         <Insets top="5" right="5" bottom="5" left="15"/>
@@ -16,7 +18,10 @@
     </VBox>
 
     <VBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS">
-        <Label fx:id="name" styleClass="transaction-name"/>
+        <HBox spacing="5">
+            <Label fx:id="name" styleClass="transaction-name"/>
+            <ImageView fx:id="done" />
+        </HBox>
         <Label fx:id="description" styleClass="transaction-description"/>
     </VBox>
 

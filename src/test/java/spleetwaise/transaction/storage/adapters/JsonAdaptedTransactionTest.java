@@ -31,6 +31,7 @@ public class JsonAdaptedTransactionTest {
     private static final JsonAdaptedCategory VALID_CAT = new JsonAdaptedCategory("FOOD");
     private static final JsonAdaptedCategory INVALID_CAT = new JsonAdaptedCategory(" FOOD");
     private static final List<JsonAdaptedCategory> VALID_CATS = new ArrayList<>(List.of(VALID_CAT));
+    private static final boolean VALID_STAT = false;
     private AddressBookModel addressBookModel;
 
 
@@ -53,6 +54,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_AMT,
                 VALID_DESCRIPTION,
                 DateUtil.VALID_DATE,
+                VALID_STAT,
                 VALID_CATS
         );
         Transaction t = new Transaction(jTrans.getId(), jPerson.toModelType(), VALID_AMT.toModelType(),
@@ -70,6 +72,7 @@ public class JsonAdaptedTransactionTest {
         assertEquals(VALID_AMT.getAmount(), jTrans.getAmount().getAmount());
         assertEquals(VALID_DESCRIPTION, jTrans.getDescription());
         assertEquals(DateUtil.VALID_DATE, jTrans.getDate());
+        assertEquals(VALID_STAT, jTrans.getIsDone());
     }
 
     @Test
@@ -77,6 +80,7 @@ public class JsonAdaptedTransactionTest {
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(null, TypicalPersons.BENSON.getId(), VALID_AMT,
                 VALID_DESCRIPTION,
                 DateUtil.VALID_DATE,
+                VALID_STAT,
                 VALID_CATS
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
@@ -87,6 +91,7 @@ public class JsonAdaptedTransactionTest {
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(IdUtil.getId(), null, VALID_AMT,
                 VALID_DESCRIPTION,
                 DateUtil.VALID_DATE,
+                VALID_STAT,
                 VALID_CATS
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
@@ -98,6 +103,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_AMT,
                 VALID_DESCRIPTION,
                 DateUtil.VALID_DATE,
+                VALID_STAT,
                 VALID_CATS
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
@@ -109,6 +115,7 @@ public class JsonAdaptedTransactionTest {
                 null,
                 VALID_DESCRIPTION,
                 DateUtil.VALID_DATE,
+                VALID_STAT,
                 VALID_CATS
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
@@ -120,6 +127,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_AMT,
                 null,
                 DateUtil.VALID_DATE,
+                VALID_STAT,
                 VALID_CATS
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
@@ -131,6 +139,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_AMT,
                 VALID_DESCRIPTION,
                 null,
+                VALID_STAT,
                 VALID_CATS
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
@@ -142,6 +151,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_AMT,
                 VALID_DESCRIPTION,
                 DateUtil.INVALID_DATE,
+                VALID_STAT,
                 VALID_CATS
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
@@ -153,6 +163,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_AMT,
                 INVALID_DESCRIPTION,
                 DateUtil.VALID_DATE,
+                VALID_STAT,
                 VALID_CATS
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
@@ -166,6 +177,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_AMT,
                 INVALID_DESCRIPTION,
                 DateUtil.VALID_DATE,
+                VALID_STAT,
                 invalidCats
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));

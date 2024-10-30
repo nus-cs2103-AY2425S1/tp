@@ -1,9 +1,12 @@
 package spleetwaise.transaction.ui;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import spleetwaise.address.ui.UiPart;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -26,6 +29,8 @@ public class TransactionCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private ImageView done;
+    @FXML
     private Label status;
     @FXML
     private Label amount;
@@ -45,6 +50,13 @@ public class TransactionCard extends UiPart<Region> {
         month.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("MMM")));
         day.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("d")));
         name.setText(displayedIndex + ". " + transaction.getPerson().getName().fullName);
+        if (transaction.getStatus().isDone()) {
+            Image doneIcon = new Image(
+                    Objects.requireNonNull(getClass().getResource("/images/done_icon.png")).toExternalForm(),
+                    25, 0, true, true
+            );
+            done.setImage(doneIcon);
+        }
         description.setText(transaction.getDescription().toString());
         if (transaction.getAmount().isNegative()) {
             status.setText("you owe");

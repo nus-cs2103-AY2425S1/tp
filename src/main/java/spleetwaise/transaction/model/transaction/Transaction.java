@@ -22,6 +22,7 @@ public class Transaction {
     private final Description description;
     private final Date date;
     private final Set<Category> categories = new HashSet<>();
+    private final Status status;
 
     /**
      * Represents a Transaction in the transaction book.
@@ -37,6 +38,13 @@ public class Transaction {
             String id, Person person, Amount amount, Description description, Date date,
             Set<Category> categories
     ) {
+        this(id, person, amount, description, date, categories, new Status(false));
+    }
+
+    private Transaction(
+            String id, Person person, Amount amount, Description description, Date date,
+            Set<Category> categories, Status status
+    ) {
         CollectionUtil.requireAllNonNull(person, amount, description, date, categories);
         this.id = id;
         this.person = person;
@@ -44,6 +52,7 @@ public class Transaction {
         this.description = description;
         this.date = date;
         this.categories.addAll(categories);
+        this.status = status;
     }
 
     /**
@@ -79,6 +88,10 @@ public class Transaction {
         return date;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     /**
      * Returns a boolean value if the transaction contains the category
      */
@@ -92,6 +105,16 @@ public class Transaction {
      */
     public Set<Category> getCategories() {
         return Collections.unmodifiableSet(categories);
+    }
+
+    /**
+     * Returns a new transaction with specified status.
+     *
+     * @param status The done status to be set
+     * @return new transaction with updated status
+     */
+    public Transaction setStatus(Status status) {
+        return new Transaction(id, person, amount, description, date, categories, status);
     }
 
     /**
@@ -113,7 +136,8 @@ public class Transaction {
                 && this.amount.equals(otherTransaction.getAmount())
                 && this.description.equals(otherTransaction.getDescription())
                 && this.date.equals(otherTransaction.getDate())
-                && this.categories.equals(otherTransaction.getCategories());
+                && this.categories.equals(otherTransaction.getCategories())
+                && this.status.equals(otherTransaction.getStatus());
     }
 
     /**
@@ -139,8 +163,8 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s(%s): %s on %s for $%s with categories: %s", id, person.getName(),
-                person.getPhone(), description, date, amount, categories
+        return String.format("[%s] %s [%s] (%s): %s on %s for $%s with categories: %s", id, person.getName(),
+                status, person.getPhone(), description, date, amount, categories
         );
     }
 }

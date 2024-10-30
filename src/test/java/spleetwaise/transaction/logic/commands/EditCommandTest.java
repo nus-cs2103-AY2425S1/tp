@@ -155,6 +155,7 @@ public class EditCommandTest {
         descriptor.setAmount(transactionToEdit.getAmount());
         descriptor.setDescription(transactionToEdit.getDescription());
         descriptor.setDate(transactionToEdit.getDate());
+        descriptor.setStatus(transactionToEdit.getStatus());
         descriptor.setCategories(transactionToEdit.getCategories());
 
         return descriptor;

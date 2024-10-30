@@ -47,7 +47,7 @@ public class AddCommandTest {
         CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
         String expectedString = String.format(
-                "[%s] Alice Pauline(94351253): description on 01/01/2024 for $1.23 with categories: [FOOD]",
+                "[%s] Alice Pauline [Not Done] (94351253): description on 01/01/2024 for $1.23 with categories: [FOOD]",
                 testTxn.getId()
         );
         assertEquals(
