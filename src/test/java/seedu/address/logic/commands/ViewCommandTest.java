@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.ViewCommand.MESSAGE_FIELD_MISSING;
 import static seedu.address.logic.commands.ViewCommand.MESSAGE_INDEX_NOT_FOUND;
 import static seedu.address.logic.commands.ViewCommand.MESSAGE_NAME_NOT_FOUND;
 import static seedu.address.logic.commands.ViewCommand.MESSAGE_VIEW_SUCCESS;
@@ -93,5 +94,12 @@ public class ViewCommandTest {
         ViewCommand command = new ViewCommand(invalidName);
 
         assertCommandFailure(command, model, MESSAGE_NAME_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_null_throwsCommandException() {
+        ViewCommand command = new ViewCommand((Name) null);
+
+        assertCommandFailure(command, model, MESSAGE_FIELD_MISSING);
     }
 }
