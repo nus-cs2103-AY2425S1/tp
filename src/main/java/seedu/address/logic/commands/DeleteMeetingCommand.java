@@ -29,7 +29,7 @@ public class DeleteMeetingCommand extends Command {
             "%s: Deletes the meeting identified by its title and date from the meeting book.\n"
                     + "Parameters: %sMEETING_TITLE %sMEETING_DATE\n"
                     + "Restrictions:\n"
-                    + "\t%s\n\t%s\n\t%s\n\t%s",
+                    + "\t%s\n\t%s",
             COMMAND_WORD, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, MeetingTitle.MESSAGE_CONSTRAINTS,
             MeetingDate.MESSAGE_CONSTRAINTS);
 
