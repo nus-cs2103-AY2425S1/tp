@@ -491,6 +491,30 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Editing a person
+
+1. Editing a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `edit 1 n/NAME`<br>
+       Expected: First contact has name field edited to NAME. Details of edited contact shown in the status message. Timestamp in the status bar is updated.
+   
+    1. Test case: `edit Alice n/Alice Teo`<br>
+       Expected (No duplicated Alice): Contact with name field containing Alice has name field edited to Alice Teo. Details of edited contact shown in the status message. Timestamp in the status bar is updated.
+       Expected (Duplicated Alice): No contact edited. Person list is filtered to show only contacts with name field containing Alice. Status message shows message to input person by indexing.
+
+### Viewing a person
+1. Viewing a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `view Alice` <br>
+       Expected: Contacts with name field containing Alice shown. Status message shows number of contacts shown.
+   
+    1. Test case: `view Alice Pauline` <br>
+       Expected: Contacts with name field containing Alice and Pauline shown. Status message shows number of contacts shown.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown

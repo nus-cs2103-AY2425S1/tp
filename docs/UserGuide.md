@@ -79,16 +79,17 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING]`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have either 0 or 1 role.
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/12345678 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 r/Florist`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 w/1`
 
 ### Listing all persons : `list`
 
@@ -193,6 +194,20 @@ Format: `filter t/KEYWORD t/[MORE_KEYWORDS]...`
 * Only full words will be matched e.g. `t/col` will not match `t/colleague`
 
 Example: `filter t/friends t/family` Lists all persons in the address book whose tags match any of the specified keywords.
+
+### Adding a wedding : `addw`
+Adds a wedding to the address book.
+
+Format: `addw n/WEDDING NAME c/CLIENT [d/DATE] [v/VENUE]`
+
+Tip: CLIENT can be inputted by index or name.
+
+Examples:
+* `addw n/Alice's Wedding c/Alice`
+* `addw n/Alice's Wedding c/1`
+* `addw n/Bob's Wedding c/Bob d/2024-12-31`
+* `addw n/Bob's Wedding c/Bob v/Sentosa`
+* `addw n/Bob's Wedding c/Bob d/2024-12-31 v/Sentosa`
 
 ### Exiting the program : `exit`
 
