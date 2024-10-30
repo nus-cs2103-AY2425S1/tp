@@ -1,64 +1,64 @@
 package seedu.address.model.reminder;
 import java.time.LocalDateTime;
+import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a reminder with a description and a time.
+ * Represents a Reminder associated with a person in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Reminder {
-    private ReminderDescription description;
-    private LocalDateTime time;
+    private final String person;
+    private final LocalDateTime dateTime;
+    private final ReminderDescription description;
 
     /**
-     * Constructs a {@code Reminder} with the specified description and time.
+     * Creates a Reminder with the specified person, date and time, and description.
      *
-     * @param description The description of the reminder.
-     * @param time The time of the reminder.
+     * @param person       the person associated with the reminder
+     * @param dateTime     the date and time of the reminder
+     * @param description  the description of the reminder
      */
-    public Reminder(ReminderDescription description, LocalDateTime time) {
-        this.description = description;
-        this.time = time;
+    public Reminder(String person, LocalDateTime dateTime, ReminderDescription description) {
+        this.person = Objects.requireNonNull(person, "Person cannot be null");
+        this.dateTime = Objects.requireNonNull(dateTime, "DateTime cannot be null");
+        this.description = Objects.requireNonNull(description, "Description cannot be null");
     }
 
-    /**
-     * Returns the description of the reminder.
-     *
-     * @return The reminder's description.
-     */
+    public String getPerson() {
+        return person;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
     public ReminderDescription getDescription() {
         return description;
     }
 
     /**
-     * Returns the time of the reminder.
+     * Returns true if both reminders are associated with the same person, date and time,
+     * and have the same description. This defines a stronger notion of equality between two reminders.
      *
-     * @return The reminder's time.
-     */
-    public LocalDateTime getTime() {
-        return time;
-    }
-
-    /**
-     * Checks if this reminder is equal to another object.
-     *
-     * @param other The object to compare with.
-     * @return True if equal, false otherwise.
+     * @param other the other object to compare to
+     * @return true if both reminders are equal, false otherwise
      */
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Reminder // instanceof handles nulls
-                && description.equals(((Reminder) other).description)
-                && time.equals(((Reminder) other).time)); // state check
-    }
+        if (this == other) {
+            return true;
+        }
 
-    /**
-     * Returns the hash code of this reminder.
-     *
-     * @return The hash code.
-     */
-    @Override
-    public int hashCode() {
-        return description.hashCode() + time.hashCode();
+        if (!(other instanceof Reminder)) {
+            return false;
+        }
+
+        Reminder otherReminder = (Reminder) other;
+        return person.equals(otherReminder.person)
+                && dateTime.equals(otherReminder.dateTime)
+                && description.equals(otherReminder.description);
     }
 
     /**
@@ -75,16 +75,19 @@ public class Reminder {
 
         return otherReminder != null
                 && otherReminder.getDescription().equals(getDescription())
-                && otherReminder.getTime().equals(getTime());
+                && otherReminder.getDateTime().equals(getDateTime());
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(person, dateTime, description);
     }
 
-    /**
-     * Returns a string representation of the reminder, including its description and time.
-     *
-     * @return A string representation of the reminder.
-     */
     @Override
     public String toString() {
-        return description + " at " + time;
+        return new ToStringBuilder(this)
+                .add("name", person)
+                .add("Date and time", dateTime)
+                .add("description", description)
+                .toString();
     }
 }
