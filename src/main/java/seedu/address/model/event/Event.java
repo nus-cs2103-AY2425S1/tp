@@ -107,6 +107,7 @@ public class Event {
         return "Event{"
                 + "name='" + eventName + '\''
                 + ", date=" + date
+                + ", location=" + location
                 + ", \nattendees=" + attendeesString
                 + '}';
     }
