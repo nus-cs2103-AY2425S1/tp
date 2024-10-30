@@ -31,14 +31,14 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Lesson> lessons = new HashSet<>();
+    private final List<Lesson> lessons = new ArrayList<>();
     private final RemarkList remarkList;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, TelegramUsername teleHandle, Set<Tag> tags,
-                  Set<Lesson> lessons) {
+                  List<Lesson> lessons) {
         requireAllNonNull(name, phone, email, address, teleHandle, tags, lessons);
 
         this.name = name;
@@ -55,7 +55,6 @@ public class Person {
      * Returns a person object.
      */
     public Person(Name name, Phone phone, Email email, Address address, TelegramUsername teleHandle, Set<Tag> tags,
-                  Set<Lesson> lessons, RemarkList remarkList) {
                   List<Lesson> lessons, RemarkList remarkList) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
@@ -106,8 +105,6 @@ public class Person {
      * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Lesson> getLessons() {
-        return Collections.unmodifiableSet(lessons);
     public List<Lesson> getLessons() {
         return Collections.unmodifiableList(lessons);
     }

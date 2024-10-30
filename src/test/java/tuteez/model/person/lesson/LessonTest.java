@@ -1,14 +1,14 @@
 package tuteez.model.person.lesson;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.model.person.lesson.Lesson.isValidLesson;
 import static tuteez.testutil.Assert.assertThrows;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

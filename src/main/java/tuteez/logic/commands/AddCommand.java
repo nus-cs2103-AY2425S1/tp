@@ -11,8 +11,8 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
@@ -75,9 +75,9 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Set<Lesson> lessonSet = toAdd.getLessons();
+        List<Lesson> lessonLst = toAdd.getLessons();
         Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
-        for (Lesson lesson: lessonSet) {
+        for (Lesson lesson: lessonLst) {
             assert lesson != null;
             Map<Person, ArrayList<Lesson>> clashingLessons = model.getClashingLessons(lesson);
 

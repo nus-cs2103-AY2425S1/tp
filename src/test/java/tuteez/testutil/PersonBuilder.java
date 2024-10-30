@@ -2,6 +2,7 @@ package tuteez.testutil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import tuteez.model.person.Address;
@@ -32,7 +33,7 @@ public class PersonBuilder {
     private Address address;
     private TelegramUsername telegramUsername;
     private Set<Tag> tags;
-    private Set<Lesson> lessons;
+    private List<Lesson> lessons;
     private RemarkList remarkList;
 
     /**
@@ -45,7 +46,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         telegramUsername = TelegramUsername.of(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
-        lessons = new HashSet<>();
+        lessons = new ArrayList<>();
         remarkList = new RemarkList();
     }
 
@@ -60,7 +61,7 @@ public class PersonBuilder {
         telegramUsername = personToCopy.getTelegramUsername();
         tags = new HashSet<>(personToCopy.getTags());
         remarkList = new RemarkList(new ArrayList<>(personToCopy.getRemarkList().getRemarks()));
-        lessons = new HashSet<>(personToCopy.getLessons());
+        lessons = new ArrayList<>(personToCopy.getLessons());
     }
 
     /**
@@ -83,7 +84,7 @@ public class PersonBuilder {
      * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withLessons(String ... lessons) {
-        this.lessons = SampleDataUtil.getLessonSet(lessons);
+        this.lessons = SampleDataUtil.getLessonLst(lessons);
         return this;
     }
 

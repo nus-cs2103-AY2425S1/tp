@@ -6,9 +6,11 @@ import static tuteez.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static tuteez.testutil.Assert.assertThrows;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -261,10 +263,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseLessons_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Lesson> actualLessonSet = ParserUtil.parseLessons(Arrays.asList(VALID_LESSON, VALID_LESSON_2));
-        Set<Lesson> expectedLessonSet =
-                new HashSet<>(Arrays.asList(new Lesson(VALID_LESSON), new Lesson(VALID_LESSON_2)));
+        List<Lesson> actualLessonSet = ParserUtil.parseLessons(Arrays.asList(VALID_LESSON, VALID_LESSON_2));
+        List<Lesson> expectedLessonList =
+                new ArrayList<>(Arrays.asList(new Lesson(VALID_LESSON), new Lesson(VALID_LESSON_2)));
 
-        assertEquals(actualLessonSet, expectedLessonSet);
+        assertEquals(actualLessonSet, expectedLessonList);
     }
 }
