@@ -46,6 +46,7 @@ public class ListEventCommandTest {
         ListVendorCommand listVendorCommand = new ListVendorCommand();
         ListCommand listCommand = new ListCommand();
 
+        assertTrue(listEventCommand.equals(listEventCommand));
         assertTrue(listEventCommand.equals(other));
         // ListEventCommand != ListVendorCommand
         assertFalse(listEventCommand.equals(listVendorCommand));
