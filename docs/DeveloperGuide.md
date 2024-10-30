@@ -123,10 +123,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the contact data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+  * a `Person` object stores `StudentId`, `Name`, `Address`, `Phone`, `Email`, `Tag`, `Course` objects.
+  * contains an ArrayList of `Module` objects which is optional.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* is intentionally designed to be independent of other components (e.g., UI, Logic, Storage) to maintain a clean separation of concerns. This ensures that the Model layer is solely responsible for managing data and that data structures make sense on their own. This independence enables easier maintenance, testing, and adaptability of the data structures, as changes in one component (e.g., UI) do not affect the Model.
 
 <box type="info" seamless>
 
@@ -250,11 +252,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -655,5 +652,31 @@ _{to work on in the future}_
 
 ## **Appendix: Planned Enhancements**
 
-_{to work on in the future}_
+### Data archiving
+
+* Description: Allow users to move inactive or irrelevant entries to an archive.
+* Benefits:
+  * Reduces clutter in the main data set, making it easier to manage and navigate active records without losing historical data.
+  * Lower the load on real-time data processing by isolating inactive records.
+  * Retain archived data for historical records or compliance requirements.
+  * Provide a safe way to store inactive data without risking deletion or loss.
+
+### Importing contact data
+
+* Description: Allow users to import contact data from multiple formats (e.g. CSV, vCard)
+* Benefits:
+    * Saves time and effort by allowing users to easily populate the app with data, eliminating the need for manual data entry.
+    * Maintain consistent contact records across different applications and devices.
+    * Simplify the process for new users by letting them import contacts directly.
+    * Enable users to restore contacts from external files in case of data loss.
+
+### Exporting contact data
+
+* Description: Allow users to export contact data to multiple formats (e.g. CSV, vCard)
+* Benefits:
+    * Allow users to easily transfer their contact information to other applications or storage solutions.
+    * Provide users with the ability to create backups of their contact data.
+    * Enable users to share their contact lists with others.
+    * Allow users to organize and manipulate their contact data externally.
+    * Help users comply with data export regulations or organizational policies.
 
