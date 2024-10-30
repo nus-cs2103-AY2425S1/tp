@@ -142,7 +142,7 @@ public class EditStudentCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new DeleteAllStudentsCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditStudentCommand(INDEX_SECOND_PERSON, DESC_HUGH)));

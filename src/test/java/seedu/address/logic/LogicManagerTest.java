@@ -1,14 +1,13 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DIDDY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_DIDDY;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_DIDDY;
+import static seedu.address.logic.commands.CommandTestUtil.TUTORIAL_GROUP_DESC_DIDDY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalStudents.DIDDY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,10 +17,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandStack;
+import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
@@ -30,11 +28,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -64,8 +62,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteStudentCommand = "deletes n/John Doe";
+        assertCommandException(deleteStudentCommand, DeleteStudentCommand.MESSAGE_NONEXISTENT_STUDENT);
     }
 
     @Test
@@ -101,10 +99,8 @@ public class LogicManagerTest {
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
             Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
-        Command command = addressBookParser.parseCommand(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
-        assertEquals(CommandStack.getInstance().peek(), command);
     }
 
     /**
@@ -171,11 +167,11 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addStudentCommand = AddStudentCommand.COMMAND_WORD + NAME_DESC_DIDDY + PHONE_DESC_DIDDY
+                + TUTORIAL_GROUP_DESC_DIDDY + STUDENT_NUMBER_DESC_DIDDY;
+        Student expectedPerson = new StudentBuilder(DIDDY).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        expectedModel.addStudent(expectedPerson);
+        assertCommandFailure(addStudentCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }
