@@ -23,7 +23,7 @@ import seedu.address.testutil.PersonBuilder;
 
 
 
-public class UnEnrollCommandTest {
+public class UnenrollCommandTest {
 
     private Model model;
     private Person testStudent;
@@ -52,8 +52,8 @@ public class UnEnrollCommandTest {
         // First, add participation to the model to simulate an enrolled student
         model.addParticipation(testParticipation);
 
-        // Create UnEnrollCommand with a valid index and existing tutorial subject
-        UnEnrollCommand command = new UnEnrollCommand(Index.fromZeroBased(0), "physics");
+        // Create UnenrollCommand with a valid index and existing tutorial subject
+        UnenrollCommand command = new UnenrollCommand(Index.fromZeroBased(0), "physics");
 
         // Execute the command and check for successful unenrollment
         CommandResult result = command.execute(model);
@@ -64,8 +64,8 @@ public class UnEnrollCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        // Create an UnEnrollCommand with an invalid index (out of bounds)
-        UnEnrollCommand command = new UnEnrollCommand(Index.fromZeroBased(1), "physics");
+        // Create an UnenrollCommand with an invalid index (out of bounds)
+        UnenrollCommand command = new UnenrollCommand(Index.fromZeroBased(1), "physics");
 
         Exception exception = assertThrows(CommandException.class, () -> command.execute(model));
         assertEquals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
@@ -73,8 +73,8 @@ public class UnEnrollCommandTest {
 
     @Test
     public void execute_tutorialNotFound_throwsCommandException() {
-        // Create an UnEnrollCommand with a tutorial subject that does not exist
-        UnEnrollCommand command = new UnEnrollCommand(Index.fromZeroBased(0), "math");
+        // Create an UnenrollCommand with a tutorial subject that does not exist
+        UnenrollCommand command = new UnenrollCommand(Index.fromZeroBased(0), "math");
 
         Exception exception = assertThrows(CommandException.class, () -> command.execute(model));
         assertEquals(Messages.MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT, exception.getMessage());
@@ -82,32 +82,32 @@ public class UnEnrollCommandTest {
 
     @Test
     public void execute_noSuchParticipation_throwsCommandException() {
-        // Create an UnEnrollCommand for a student not enrolled in the tutorial
-        UnEnrollCommand command = new UnEnrollCommand(Index.fromZeroBased(0), "physics");
+        // Create an UnenrollCommand for a student not enrolled in the tutorial
+        UnenrollCommand command = new UnenrollCommand(Index.fromZeroBased(0), "physics");
 
         Exception exception = assertThrows(CommandException.class, () -> command.execute(model));
-        assertEquals(UnEnrollCommand.MESSAGE_NO_SUCH_PARTICIPATION, exception.getMessage());
+        assertEquals(UnenrollCommand.MESSAGE_NO_SUCH_PARTICIPATION, exception.getMessage());
     }
 
     @Test
     public void equals_sameValues_returnsTrue() {
-        UnEnrollCommand command1 = new UnEnrollCommand(Index.fromZeroBased(0), "physics");
-        UnEnrollCommand command2 = new UnEnrollCommand(Index.fromZeroBased(0), "physics");
+        UnenrollCommand command1 = new UnenrollCommand(Index.fromZeroBased(0), "physics");
+        UnenrollCommand command2 = new UnenrollCommand(Index.fromZeroBased(0), "physics");
 
         assertEquals(command1, command2);
     }
 
     @Test
     public void equals_differentValues_returnsFalse() {
-        UnEnrollCommand command1 = new UnEnrollCommand(Index.fromZeroBased(0), "physics");
-        UnEnrollCommand command2 = new UnEnrollCommand(Index.fromZeroBased(1), "math");
+        UnenrollCommand command1 = new UnenrollCommand(Index.fromZeroBased(0), "physics");
+        UnenrollCommand command2 = new UnenrollCommand(Index.fromZeroBased(1), "math");
 
         assertNotEquals(command1, command2);
     }
 
     @Test
     public void toString_containsIndexAndSubject() {
-        UnEnrollCommand command = new UnEnrollCommand(Index.fromZeroBased(0), "physics");
+        UnenrollCommand command = new UnenrollCommand(Index.fromZeroBased(0), "physics");
 
         String result = command.toString();
 
@@ -117,7 +117,7 @@ public class UnEnrollCommandTest {
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        UnEnrollCommand command = new UnEnrollCommand(Index.fromZeroBased(0), "physics");
+        UnenrollCommand command = new UnenrollCommand(Index.fromZeroBased(0), "physics");
 
         assertThrows(NullPointerException.class, () -> command.execute(null));
     }
@@ -125,10 +125,10 @@ public class UnEnrollCommandTest {
     @Test
     public void constructor_nullIndexOrSubject_throwsNullPointerException() {
         // Test null index
-        assertThrows(NullPointerException.class, () -> new UnEnrollCommand(null, "physics"));
+        assertThrows(NullPointerException.class, () -> new UnenrollCommand(null, "physics"));
 
         // Test null subject
-        assertThrows(NullPointerException.class, () -> new UnEnrollCommand(Index.fromZeroBased(0), null));
+        assertThrows(NullPointerException.class, () -> new UnenrollCommand(Index.fromZeroBased(0), null));
     }
 }
 

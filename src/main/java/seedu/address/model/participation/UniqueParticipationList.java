@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
-import seedu.address.logic.parser.UnEnrollCommandParser;
 import seedu.address.model.participation.exceptions.DuplicateParticipationException;
 import seedu.address.model.participation.exceptions.ParticipationNotFoundException;
 
@@ -29,10 +28,10 @@ import seedu.address.model.participation.exceptions.ParticipationNotFoundExcepti
  * @see seedu.address.model.participation.Participation#isSameParticipation(Participation)
  */
 public class UniqueParticipationList implements Iterable<Participation> {
-    private static final Logger logger = LogsCenter.getLogger(UniqueParticipationList.class);
 
     public static final String MESSAGE_PARTICIPATION_NOT_FOUND = "No such participation exists in EduVault now";
 
+    private static final Logger logger = LogsCenter.getLogger(UniqueParticipationList.class);
     private final ObservableList<Participation> internalList = FXCollections.observableArrayList();
     private final ObservableList<Participation> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);

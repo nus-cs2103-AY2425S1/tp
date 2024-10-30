@@ -12,7 +12,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.UnEnrollCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Fees;
@@ -23,8 +22,6 @@ import seedu.address.model.person.Person;
  * Marks the payment for a person as true
  */
 public class MarkPaidCommand extends Command {
-    private static final Logger logger = LogsCenter.getLogger(MarkPaidCommand.class);
-
     public static final String COMMAND_WORD = "markpaid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records amount of fees the student has paid\n"
@@ -32,6 +29,8 @@ public class MarkPaidCommand extends Command {
             + PREFIX_PAYMENT + "PAYMENT\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PAYMENT + "200";
     public static final String MESSAGE_MARKED_PAID_SUCCESS = "Fees updated for student %1$s \n%2$s";
+
+    private static final Logger logger = LogsCenter.getLogger(MarkPaidCommand.class);
     private final Index targetIndex;
     private final Fees fees;
 

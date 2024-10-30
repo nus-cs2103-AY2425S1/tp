@@ -13,7 +13,7 @@ import seedu.address.logic.commands.EnrollCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EnrollCommand object
+ * Parses input String and creates a new EnrollCommand object
  */
 public class EnrollCommandParser implements Parser<EnrollCommand> {
     private static final Logger logger = LogsCenter.getLogger(EnrollCommandParser.class);
@@ -25,14 +25,15 @@ public class EnrollCommandParser implements Parser<EnrollCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EnrollCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL);
-        Index index;
+        assert args != null : "Input arguments for EnrollCommand cannot be null";
 
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL);
         if (!arePrefixesPresent(argMultimap, PREFIX_TUTORIAL)) {
             logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, EnrollCommandParser.class));
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE));
         }
+
+        Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -41,6 +42,7 @@ public class EnrollCommandParser implements Parser<EnrollCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL);
         String subject = argMultimap.getValue(PREFIX_TUTORIAL).get();
+
         return new EnrollCommand(index, subject);
     }
 
