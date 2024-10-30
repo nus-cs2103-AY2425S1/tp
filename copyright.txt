@@ -7,5 +7,5 @@ Copyright by Jan Jan Kovařík - http://glyphicons.com/
 - calendar.png
 - edit.png
 
-Copyright by IconDuck - https://iconduck.com/emojis/39183/medical-symbol
+Copyright by IconDuck - https://iconduck.com
 - medical-symbol.png
