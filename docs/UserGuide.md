@@ -160,11 +160,11 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in CampusConnect.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting a person's tag : `deletetag`
+### Deleting a person's tag : `deltag`
 
 Deletes the specified person's tag.
 
-Format: `deletetag INDEX t/KEYWORD`
+Format: `deltag INDEX t/KEYWORD`
 
 * Deletes the tag with the specified name `KEYWORD` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -172,10 +172,10 @@ Format: `deletetag INDEX t/KEYWORD`
 * Only one tag can be deleted at a time.
 
 Examples:
-* `deletetag 1 t/friend` deletes the friend tag of the first person in the list.
+* `deltag 1 t/friend` deletes the friend tag of the first person in the list.
 
 Disallowed examples:
-* `deletetag 2 t/classmate t/neighbour` will not succeed as it tries to delete 2 tags at once.
+* `deltag 2 t/classmate t/neighbour` will not succeed as it tries to delete 2 tags at once.
 
 ### Undo a command : `undo`
 
@@ -253,7 +253,7 @@ Action     | Format, Examples
 **Find by email**   | `find e/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e/bigman123@email.com bobbyrick@example.com`
 **Find by phone number**   | `find p/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p/91234657 85432789`
 **Find by tag**   | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friend roommate`
-**Delete tag** | `deletetag INDEX t/KEYWORD` <br> e.g. `deletetag 1 t/friend`
+**Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
 **Undo action** | `undo`
 **Redo action** | `redo`
 **List**   | `list`

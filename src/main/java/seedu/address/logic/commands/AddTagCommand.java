@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
  * Add new tag(s) for an existing person
  */
 public class AddTagCommand extends Command {
-    public static final String COMMAND_WORD = "addTag";
+    public static final String COMMAND_WORD = "addtag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Add tag(s) for the person identified "
             + "by the index number used in the displayed person list "
