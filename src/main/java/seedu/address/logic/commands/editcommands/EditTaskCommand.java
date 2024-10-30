@@ -117,7 +117,7 @@ public class EditTaskCommand extends Command {
         TaskName updatedName = editTaskDescriptor.getTaskName().orElse(taskToEdit.getTaskName());
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElse(taskToEdit.getDeadline());
         Status status = taskToEdit.getStatus();
-        int numGroupHasTask = taskToEdit.getGroupsWithTask();
+        int numGroupHasTask = 1;
         return new Task(updatedName, updatedDeadline, status, numGroupHasTask);
     }
 

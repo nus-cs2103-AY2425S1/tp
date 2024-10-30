@@ -316,7 +316,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(target);
         requireNonNull(editedTask);
         requireNonNull(group);
-        tasks.setTask(target, editedTask);
+        // tasks.setTask(target, editedTask);
         group.setTask(target, editedTask);
     }
 
