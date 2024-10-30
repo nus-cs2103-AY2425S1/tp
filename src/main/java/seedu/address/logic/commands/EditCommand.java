@@ -5,8 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
+import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
 import java.util.List;
 

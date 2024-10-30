@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
+import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
 import seedu.address.model.Model;
 
