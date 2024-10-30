@@ -20,24 +20,29 @@ import seedu.address.model.person.Phone;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Person(new Name("Ahmad Syuaib"), new Phone("87438807"), new Email("ahmadsyuaib@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getClientTypeSet("friends"), new Description("Likes to swim")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                getClientTypeSet("Investment"), new Description("Only free on weekends")),
+            new Person(new Name("Jeremy Sim"), new Phone("99272758"), new Email("jeremysim@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getClientTypeSet("colleagues", "friends"), new Description("Likes to play basketball")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+                getClientTypeSet("Investment", "Healthcare"), new Description("Likes to play basketball")),
+            new Person(new Name("Liu Rui"), new Phone("93210283"), new Email("liurui@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getClientTypeSet("neighbours"), new Description("Likes to play the piano")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                getClientTypeSet("Insurance Plan", "Savings"), new Description("Plans to retire early")),
+            new Person(new Name("Rubin Lin"), new Phone("91031282"), new Email("rubinlin@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getClientTypeSet("family"), new Description("Likes to play the guitar")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                getClientTypeSet("Healthcare", "Savings"), new Description("Started a podcast")),
+            new Person(new Name("Harith Nurhisham"), new Phone("92492021"), new Email("harithnurhisham@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getClientTypeSet("classmates"), new Description("Likes to play the violin")),
+                getClientTypeSet("Insurance Plan", "Investment"), new Description("Does not like to travel "
+                    + "out of the east")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getClientTypeSet("colleagues"), new Description("Likes to play the drums"))
+                getClientTypeSet("Investment Plan"), new Description("Recently married")),
+            new Person(new Name("Sarah Lee"), new Phone("89732145"), new Email("sarahlee@example.com"),
+                    new Address("Blk 38 Boon Lay Street 43, #32-03"),
+                    getClientTypeSet("Healthcare", "Insurance Plan"),
+                    new Description("Takes care of old parents"))
         };
     }
 

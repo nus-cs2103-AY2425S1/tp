@@ -362,3 +362,11 @@
     -fx-font-family: "Arial Rounded MT Bold";
 }
 
+.reminder-card {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: derive(#1d1d1d, 20%);
+    -fx-padding: 6 4 6 4;
+}
+
+
