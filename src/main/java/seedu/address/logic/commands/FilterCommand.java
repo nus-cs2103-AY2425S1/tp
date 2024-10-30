@@ -55,8 +55,10 @@ public class FilterCommand extends Command {
             boolean nameMatches = names.isEmpty() || names.stream()
                     .anyMatch(name -> person.getName().toString().toLowerCase().contains(name.toLowerCase()));
 
-            // Check if the person's tags contain all filter tags (if provided)
-            boolean tagsMatch = tags.isEmpty() || person.getTags().containsAll(tags);
+            // Check if the person's tags contain any of the tags in this.tags
+            boolean tagsMatch = tags.isEmpty() || person.getTags().stream()
+                    .anyMatch(tag -> tags.stream()
+                            .anyMatch(filterTag -> tag.tagName.equalsIgnoreCase(filterTag.tagName)));
 
             return nameMatches && tagsMatch;
         };
