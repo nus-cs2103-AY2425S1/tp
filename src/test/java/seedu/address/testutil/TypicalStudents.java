@@ -61,7 +61,7 @@ public class TypicalStudents {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street")
-            .withLessonTime("sun:22:00")
+            .withLessonTime("mon:22:00")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")

@@ -29,7 +29,7 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "lessonTime" : "sun:22:00",
+    "lessonTime" : "mon:22:00",
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
