@@ -336,6 +336,21 @@ public class AddStudentCommandTest {
         public void decreaseGroupWithTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setMostRecentTaskDisplay(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Task getMostRecentTaskDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMostRecentTaskDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

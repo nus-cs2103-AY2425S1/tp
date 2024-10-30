@@ -340,6 +340,21 @@ public class DeleteStudentFromGroupCommandTest {
         public void decreaseGroupWithTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setMostRecentTaskDisplay(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Task getMostRecentTaskDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMostRecentTaskDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     private class ModelStubDeleteStudentFromGroup extends ModelStub {
