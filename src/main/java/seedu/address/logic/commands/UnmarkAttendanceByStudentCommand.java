@@ -72,7 +72,7 @@ public class UnmarkAttendanceByStudentCommand extends Command {
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial)));
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(attendance);
+        updatedAttendance.remove(attendance);
 
         Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                 currentParticipation.getTutorial(), updatedAttendance);
