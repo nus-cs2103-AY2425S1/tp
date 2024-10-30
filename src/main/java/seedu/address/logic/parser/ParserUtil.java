@@ -183,9 +183,9 @@ public class ParserUtil {
     public static boolean parsePaidStatus(String paidStatus) throws ParseException {
         requireNonNull(paidStatus);
         String trimmedStatus = paidStatus.trim().toLowerCase();
-        if (trimmedStatus.equals("true") || trimmedStatus.equals("paid")) {
+        if (trimmedStatus.equals("paid")) {
             return true;
-        } else if (trimmedStatus.equals("false") || trimmedStatus.equals("unpaid")) {
+        } else if (trimmedStatus.equals("unpaid")) {
             return false;
         } else {
             throw new ParseException(PaymentCommand.MESSAGE_PAYMENT_STATUS_INVALID);

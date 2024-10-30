@@ -29,18 +29,6 @@ public class PaymentCommandParserTest {
                         + PREFIX_DATE + "2024-10-24 1000 "
                         + PREFIX_PAID + "unpaid",
                 new PaymentCommand(new Name("John Doe"), "2024-10-24 1000", false));
-
-        // Test with boolean "true"
-        assertParseSuccess(parser, "John Doe "
-                        + PREFIX_DATE + "2024-10-24 1000 "
-                        + PREFIX_PAID + "true",
-                new PaymentCommand(new Name("John Doe"), "2024-10-24 1000", true));
-
-        // Test with boolean "false"
-        assertParseSuccess(parser, "John Doe "
-                        + PREFIX_DATE + "2024-10-24 1000 "
-                        + PREFIX_PAID + "false",
-                new PaymentCommand(new Name("John Doe"), "2024-10-24 1000", false));
     }
 
     @Test
