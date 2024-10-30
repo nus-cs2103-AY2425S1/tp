@@ -7,14 +7,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class ArgumentPredicateTest {
     @Test

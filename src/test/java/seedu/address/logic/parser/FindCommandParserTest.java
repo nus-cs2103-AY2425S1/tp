@@ -8,15 +8,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.HashSet;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.ArgumentPredicate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-
-import java.util.HashSet;
-import java.util.Map;
 
 public class FindCommandParserTest {
 

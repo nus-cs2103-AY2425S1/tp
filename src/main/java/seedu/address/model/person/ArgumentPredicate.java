@@ -2,14 +2,12 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
