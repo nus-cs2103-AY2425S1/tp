@@ -17,22 +17,22 @@ AgentConnect will help you manage your contacts faster than traditional apps.
 
 1. [Quick Start](#quick-start)
 2. [Features](#features)
-    - [Viewing Help](#viewing-help)
-    - [Adding a Client](#adding-a-client)
-    - [Assigning a Policy](#assigning-a-policy)
-    - [Listing All Clients](#listing-all-clients)
-    - [Editing a Client Details](#editing-a-client)
-    - [Locating Clients by Name](#finding-clients-by-name)
-    - [Searching Appointments](#searching-appointment-by-date)
-    - [Searching Birthdays](#searching-birthday-by-date)
-    - [Searching Policy](#searching-policy-by-policy-name)
-    - [Sorting Clients](#sorting-client-data)
-    - [Deleting a client or policy](#deleting-a-client)
-    - [Undo a command](#undo work)
-    - [Redo a command](#redo work)
-    - [Clearing All Entries](#clearing-all-entries)
-    - [Exiting the Program](#exiting-the-program)
-    - [Saving Your Data](#saving-your-data)
+    - [Viewing Help](#viewing-help--help)
+    - [Adding a Client](#adding-a-client--add)
+    - [Assigning a Policy](#assigning-a-policy--assign)
+    - [Listing All Clients](#listing-all-clients--list)
+    - [Editing a Client Details](#editing-a-client-details--edit)
+    - [Locating Clients by Name](#locating-clients-by-name--find)
+    - [Searching Appointments](#searching-appointments--search-a)
+    - [Searching Birthdays](#searching-birthdays--search-b)
+    - [Searching Policy](#searching-policy--search-p)
+    - [Sorting Clients](#sorting-clients--sort)
+    - [Deleting a client or policy](#deleting-a-client-or-policy--delete)
+    - [Undo a command](#undo-a-command--undo)
+    - [Redo a command](#redo-a-command--redo)
+    - [Clearing All Entries](#clearing-all-entries--clear)
+    - [Exiting the Program](#exiting-the-program--exit)
+    - [Saving Your Data](#saving-the-data)
 3. [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
 4. [Known Issues](#known-issues)
 5. [Command Summary](#command-summary)
@@ -95,7 +95,7 @@ AgentConnect offers a range of features to help you manage your clients effectiv
 
 ---
 
-### Viewing help : `help`
+### Viewing Help : `help`
 
 Shows a message explaning how to access the help page.
 
