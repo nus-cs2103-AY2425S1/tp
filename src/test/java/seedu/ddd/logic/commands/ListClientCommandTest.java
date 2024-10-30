@@ -73,7 +73,7 @@ public class ListClientCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noContactFound() {
+    public void execute_zeroKeywords_noClientsFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         ListClientCommand command = new ListClientCommand(predicate);
@@ -82,7 +82,7 @@ public class ListClientCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
     @Test
-    public void execute_multipleKeywords_multipleContactsFound() {
+    public void execute_multipleKeywords_multipleClientsFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         ListClientCommand command = new ListClientCommand(predicate);

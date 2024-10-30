@@ -13,8 +13,6 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.ddd.model.Model;
-
 /**
  * Lists either Contacts or Events in the address book to the user.
  */

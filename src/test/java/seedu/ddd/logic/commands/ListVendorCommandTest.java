@@ -73,7 +73,7 @@ public class ListVendorCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noContactFound() {
+    public void execute_zeroKeywords_noVendorFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         ListVendorCommand command = new ListVendorCommand(predicate);
@@ -82,7 +82,7 @@ public class ListVendorCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
     @Test
-    public void execute_multipleKeywords_multipleContactsFound() {
+    public void execute_multipleKeywords_multipleVendorFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         ListVendorCommand command = new ListVendorCommand(predicate);
