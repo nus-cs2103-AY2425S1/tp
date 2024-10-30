@@ -21,9 +21,10 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the patient in the patient list identified by their Identity Number.\n"
-            + "Parameters: i/NRIC (must be 9 characters)\n"
-            + "Example: " + COMMAND_WORD + PREFIX_IDENTITY_NUMBER + "S1234567A";
+            + ": Deletes the patient identified by either the index number used in the displayed person list or" +
+            " the Identity Number.\n"
+            + "Parameters: INDEX(must be a positive integer) or i/NRIC (must be 9 characters)\n"
+            + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " " + PREFIX_IDENTITY_NUMBER + "S1234567A";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
