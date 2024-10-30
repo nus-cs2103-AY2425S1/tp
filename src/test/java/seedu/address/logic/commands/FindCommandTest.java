@@ -26,6 +26,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.InFilteredListPredicate;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -150,6 +151,32 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(namePredicate.and(moduleRolePredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void executeTwice_nameAndModuleRoleKeywordsChained_multiplePersonsFound() throws ParseException {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2,
+                "(Kurz OR Elle) AND (CS1101S-Student), among the previously displayed results");
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle");
+        ModuleRoleContainsKeywordsPredicate moduleRolePredicate = prepareModuleRolePredicate("CS1101S");
+        InFilteredListPredicate inFilteredListPredicate = new InFilteredListPredicate(
+                new ArrayList<>(model.getFilteredPersonList()));
+
+        FindCommand command = new FindCommand(List.of(namePredicate, moduleRolePredicate), true);
+        expectedModel.updateFilteredPersonList(namePredicate.and(moduleRolePredicate).and(inFilteredListPredicate));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE), model.getFilteredPersonList());
+
+        // find again
+        String expectedMessage2 = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1,
+                "(e), among the previously displayed results");
+        NameContainsKeywordsPredicate namePredicate2 = prepareNamePredicate("e");
+        InFilteredListPredicate inFilteredListPredicate2 = new InFilteredListPredicate(
+                new ArrayList<>(model.getFilteredPersonList()));
+        FindCommand command2 = new FindCommand(List.of(namePredicate2), true);
+        expectedModel.updateFilteredPersonList(namePredicate2.and(inFilteredListPredicate2));
+        assertCommandSuccess(command2, model, expectedMessage2, expectedModel);
+        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
     }
 
     @Test
