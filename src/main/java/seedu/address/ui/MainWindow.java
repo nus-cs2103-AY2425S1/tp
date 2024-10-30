@@ -127,16 +127,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Directs users to the UserGuide page for help.
      */
     @FXML
     public void handleHelp() {
-        try {
-            URI uri = new URI(USER_GUIDE_URl);
-            Desktop.getDesktop().browse(uri);
-        } catch (Exception e) {
-            logger.severe("Error occurred while opening the help URL:\n" + e);
-        }
+        PauseTransition pause = new PauseTransition(Duration.seconds(1.3));
+        pause.setOnFinished(unused -> {
+            try {
+                URI uri = new URI(USER_GUIDE_URl);
+                Desktop.getDesktop().browse(uri);
+            } catch (Exception e) {
+                logger.severe("Error occurred while opening the help URL:\n" + e);
+            }
+        });
+        pause.play();
     }
 
     void show() {
