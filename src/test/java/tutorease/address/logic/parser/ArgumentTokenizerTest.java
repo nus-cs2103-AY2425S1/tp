@@ -48,6 +48,18 @@ public class ArgumentTokenizerTest {
             assertEquals(expectedValues[i], argMultimap.getAllValues(prefix).get(i));
         }
     }
+    @Test
+    public void isMissingAllPrefix_empty() {
+        String argsString = "  ";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        assertTrue(argMultimap.isMissingAllPrefix());
+    }
+    @Test
+    public void isMissingAllPrefix_nonEmpty() {
+        String argsString = "  " + pSlash;
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        assertFalse(argMultimap.isMissingAllPrefix());
+    }
 
     private void assertArgumentAbsent(ArgumentMultimap argMultimap, Prefix prefix) {
         assertFalse(argMultimap.getValue(prefix).isPresent());

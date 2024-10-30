@@ -60,6 +60,9 @@ public class AddLessonCommandParserTest {
 
     @Test
     public void parse_missingFields_failure() {
+        // missing all fields
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "", expectedMessage);
         // missing studentId
         String expectedStudentIdMessage = String.format(Messages.MISSING_PREFIX, PREFIX_STUDENT_ID,
                 AddLessonCommand.MESSAGE_USAGE);
