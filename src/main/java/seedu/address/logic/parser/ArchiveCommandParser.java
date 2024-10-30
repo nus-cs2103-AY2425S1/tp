@@ -29,8 +29,6 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args);
         Index index;
 
-        System.out.println(argumentMultimap.getPreamble());
-
         try {
             index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
         } catch (ParseException pe) {
