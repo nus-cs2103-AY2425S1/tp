@@ -75,12 +75,14 @@ public interface Model {
     public List<Student> getClashingStudents(Student student);
 
     /**
-     * Retrieves the list of students, adds up their paid amount, and returns the total paid amount
+     * Adds up all the paidAmount from each {@code student} in a list of students
+     * @return total paid amount from the list of students
      */
     public double getTotalPaidAmount();
 
     /**
-     * Retrieves the list of students, adds up their owed amonut, and returns the total owed amount
+     * Adds up all the owedAmount from each {@code student} in a list of students
+     * @return total owed amount from the list of students
      */
     public double getTotalOwedAmount();
 
