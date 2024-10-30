@@ -80,7 +80,7 @@ public class PersonCard extends UiPart<Region> {
             weekLabel.getChildren().add(new Label("Weeks attended: "));
             person.getWeeksPresent().stream()
                     .sorted(Comparator.comparing(Integer::intValue))
-                    .forEach(weekNumber ->  {
+                    .forEach(weekNumber -> {
                         Label weekLabelNode = new Label(weekNumber.toString());
                         weekLabelNode.getStyleClass().add("week-number");
                         weekLabel.getChildren().add(weekLabelNode);
