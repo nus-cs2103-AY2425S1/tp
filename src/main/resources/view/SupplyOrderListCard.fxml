@@ -28,9 +28,16 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="status" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="phone" />
-      <Label fx:id="date" styleClass="cell_small_label" text="date" />
-      <Label fx:id="items" styleClass="cell_small_label" text="items" />
+      <GridPane vgap="5" hgap="5">
+        <Label text="Phone:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="phone" styleClass="cell_small_label" text="$phone" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Date:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label fx:id="date" styleClass="cell_small_label" text="$date" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Items:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="items" styleClass="cell_small_label" text="$items" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+      </GridPane>
     </VBox>
   </GridPane>
 </HBox>
