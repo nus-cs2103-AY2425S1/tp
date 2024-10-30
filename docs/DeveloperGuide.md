@@ -159,7 +159,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `AddressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -371,13 +371,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given NRIC is invalid.
 
-    * 2a1. AddressBook shows an error message
+    * 2a1. ClinicConnect shows an error message
 
         Use case ends.
 
 * 3a. The given NRIC does not exist in the system.
 
-    * 3a1. AddressBook shows an error message
+    * 3a1. ClinicConnect shows an error message
 
       Use case ends.
 
