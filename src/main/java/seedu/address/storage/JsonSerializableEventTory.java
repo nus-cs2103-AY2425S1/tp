@@ -9,18 +9,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.EventTory;
+import seedu.address.model.ReadOnlyEventTory;
 import seedu.address.model.association.Association;
 import seedu.address.model.event.Event;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.vendor.Vendor;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable EventTory that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-public class JsonSerializableAddressBook {
+@JsonRootName(value = "eventTory")
+public class JsonSerializableEventTory {
 
     public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Event list contains duplicate event(s).";
@@ -33,10 +33,10 @@ public class JsonSerializableAddressBook {
     private final List<JsonAdaptedAssociation> associations = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given vendors.
+     * Constructs a {@code JsonSerializableEventTory} with the given vendors, events and associations.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("vendors") List<JsonAdaptedVendor> vendors,
+    public JsonSerializableEventTory(@JsonProperty("vendors") List<JsonAdaptedVendor> vendors,
                                        @JsonProperty("events") List<JsonAdaptedEvent> events,
                                        @JsonProperty("associations") List<JsonAdaptedAssociation> associations) {
         this.vendors.addAll(vendors);
@@ -45,11 +45,11 @@ public class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyEventTory} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableEventTory(ReadOnlyEventTory source) {
         vendors.addAll(source.getVendorList().stream().map(JsonAdaptedVendor::new).toList());
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).toList());
         associations.addAll(source.getAssociationList().stream()
@@ -57,31 +57,31 @@ public class JsonSerializableAddressBook {
     }
 
     /**
-    * Converts this address book into the model's {@code AddressBook} object.
+    * Converts this EventTory into the model's {@code EventTory} object.
     *
     * @throws IllegalValueException if there were any data constraints violated.
     */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public EventTory toModelType() throws IllegalValueException {
+        EventTory eventTory = new EventTory();
 
         HashMap<UniqueId, Vendor> vendorMap = new HashMap<>();
         HashMap<UniqueId, Event> eventMap = new HashMap<>();
 
         for (JsonAdaptedVendor jsonAdaptedVendor : vendors) {
             Vendor vendor = jsonAdaptedVendor.toModelType();
-            if (addressBook.hasVendor(vendor) || vendorMap.containsKey(vendor.getId())) {
+            if (eventTory.hasVendor(vendor) || vendorMap.containsKey(vendor.getId())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_VENDOR);
             }
-            addressBook.addVendor(vendor);
+            eventTory.addVendor(vendor);
             vendorMap.put(vendor.getId(), vendor);
         }
 
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
-            if (addressBook.hasEvent(event) || eventMap.containsKey(event.getId())) {
+            if (eventTory.hasEvent(event) || eventMap.containsKey(event.getId())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
-            addressBook.addEvent(event);
+            eventTory.addEvent(event);
             eventMap.put(event.getId(), event);
         }
 
@@ -101,13 +101,13 @@ public class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_NON_EXISTENT_EVENT);
             }
 
-            if (addressBook.isVendorAssignedToEvent(vendor, event)) {
+            if (eventTory.isVendorAssignedToEvent(vendor, event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ASSOCIATION);
             }
 
-            addressBook.assignVendorToEvent(vendor, event);
+            eventTory.assignVendorToEvent(vendor, event);
         }
 
-        return addressBook;
+        return eventTory;
     }
 }
