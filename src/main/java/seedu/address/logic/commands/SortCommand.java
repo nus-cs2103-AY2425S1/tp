@@ -67,7 +67,7 @@ public class SortCommand extends Command {
         }
 
         if (!model.hasPersonsOfType(sortOption.getRelatedClass())) {
-            logger.warning("No persons of type " + sortOption.getRelatedClass()
+            logger.fine("No persons of type " + sortOption.getRelatedClass()
                     + " found. Reset list to default order");
             return new CommandResult(String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND,
                     sortOption.getRoleAsString()));
@@ -76,7 +76,7 @@ public class SortCommand extends Command {
         logger.fine("Updating sort with sort option: " + sortOption);
         updateSort(model);
 
-        logger.info("SortCommand executed successfully, sorted by " + sortOption);
+        logger.fine("SortCommand executed successfully, sorted by " + sortOption);
         return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, sortOption));
     }
 
