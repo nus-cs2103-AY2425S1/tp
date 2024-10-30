@@ -7,7 +7,6 @@ import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.product.Product;
 
 import java.util.ArrayList;
@@ -18,8 +17,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 
-public class AddSupplyOrderCommand extends Command {
-    public static final String COMMAND_WORD = "addSupplyOrder";
+public class AddSupplierOrderCommand extends Command {
+    public static final String COMMAND_WORD = "addSupplierOrder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new supply order to the bakery's order list. "
             + "Parameters: PHONE_NUMBER PRODUCT_ID\n"
@@ -30,7 +29,7 @@ public class AddSupplyOrderCommand extends Command {
     private final String phoneNumber;
     private final ArrayList<Integer> idList;
 
-    public AddSupplyOrderCommand(String phoneNumber, ArrayList<Integer> idList) {
+    public AddSupplierOrderCommand(String phoneNumber, ArrayList<Integer> idList) {
         requireAllNonNull(phoneNumber);
         this.phoneNumber = phoneNumber;
         this.idList = idList;
@@ -71,11 +70,11 @@ public class AddSupplyOrderCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddSupplyOrderCommand)) {
+        if (!(other instanceof AddSupplierOrderCommand)) {
             return false;
         }
 
-        AddSupplyOrderCommand otherCommand = (AddSupplyOrderCommand) other;
+        AddSupplierOrderCommand otherCommand = (AddSupplierOrderCommand) other;
         return phoneNumber.equals(otherCommand.phoneNumber) && idList.equals(otherCommand.idList);
     }
 }

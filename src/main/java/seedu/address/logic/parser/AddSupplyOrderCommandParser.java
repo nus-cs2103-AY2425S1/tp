@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddSupplyOrderCommand;
+import seedu.address.logic.commands.AddSupplierOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import java.util.ArrayList;
@@ -9,16 +9,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 
-public class AddSupplyOrderCommandParser implements Parser<AddSupplyOrderCommand> {
+public class AddSupplyOrderCommandParser implements Parser<AddSupplierOrderCommand> {
 
-    public AddSupplyOrderCommand parse(String args) throws ParseException {
+    public AddSupplierOrderCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         String[] splitArgs = args.trim().split("\\s+");
 
         if (splitArgs.length < 2) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplyOrderCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierOrderCommand.MESSAGE_USAGE));
         }
 
         String phoneNumber = splitArgs[0];
@@ -37,6 +37,6 @@ public class AddSupplyOrderCommandParser implements Parser<AddSupplyOrderCommand
         }
 
 
-        return new AddSupplyOrderCommand(phoneNumber, idList);
+        return new AddSupplierOrderCommand(phoneNumber, idList);
     }
 }
