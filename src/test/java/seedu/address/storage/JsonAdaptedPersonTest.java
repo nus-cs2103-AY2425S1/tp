@@ -147,7 +147,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedDate invalidDate = new JsonAdaptedDate(INVALID_DATE_VALUE_LEAP);
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAG, VALID_ALLERGY, invalidDate);
-        String expectedMessage = "Invalid date: February 29 is only valid in leap years.";
+        String expectedMessage = "Invalid date: FEBRUARY 29 is only valid in leap years.";
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

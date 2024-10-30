@@ -80,7 +80,7 @@ public class ScheduleCommandParserTest {
     void parseInvalidDateValuesNonLeapYear_throwsParseException() {
         String invalidDate = "29/2/2023 1800"; // 2023 is not a leap year
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
-        assertEquals("Invalid date: February 29 is only valid in leap years.", thrown.getMessage());
+        assertEquals("Invalid date: FEBRUARY 29 is only valid in leap years.", thrown.getMessage());
     }
 
     // Invalid date values - month with 30 days
