@@ -108,24 +108,25 @@ public class InternshipApplicationTest {
         // null -> returns false
         assertFalse(APPLE.isSame(null));
 
+        // different internship application -> returns false
+        assertFalse(APPLE.isSame(BOFA));
+
         // same name, all other attributes different -> returns false
         InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).withRole(VALID_ROLE_BOFA)
-                 .withDate(VALID_DATE_BOFA).build();
+                .withDate(VALID_DATE_BOFA).build();
         assertFalse(APPLE.isSame(editedApple));
 
-        // different name, all other attributes same -> returns false
-        editedApple = new InternshipApplicationBuilder(APPLE).withName(VALID_COMPANY_NAME_BOFA).build();
+        // same name, role, all other attributes different -> returns false
+        editedApple = new InternshipApplicationBuilder(APPLE).withDate(VALID_DATE_BOFA).build();
         assertFalse(APPLE.isSame(editedApple));
 
-        // name differs in case, all other attributes same -> returns true
-        InternshipApplication editedBofa = new InternshipApplicationBuilder(BOFA).withName(VALID_COMPANY_NAME_BOFA
-                    .toLowerCase()).build();
-        assertTrue(BOFA.isSame(editedBofa));
+        // same name, role, date but different status -> returns true
+        editedApple = new InternshipApplicationBuilder(APPLE).withStatus(Status.REJECTED).build();
+        assertTrue(APPLE.isSame(editedApple));
 
-        // name has trailing spaces, all other attributes same -> returns true
-        String nameWithTrailingSpaces = VALID_COMPANY_NAME_BOFA + " ";
-        editedBofa = new InternshipApplicationBuilder(BOFA).withName(nameWithTrailingSpaces).build();
-        assertTrue(BOFA.isSame(editedBofa));
+        // same attributes -> returns true
+        editedApple = new InternshipApplicationBuilder(APPLE).build();
+        assertTrue(APPLE.isSame(editedApple));
     }
 
     @Test
@@ -161,6 +162,10 @@ public class InternshipApplicationTest {
 
         // different date -> returns false
         editedApple = new InternshipApplicationBuilder(APPLE).withDate("02/01/24").build();
+        assertFalse(APPLE.equals(editedApple));
+
+        // different status -> returns false
+        editedApple = new InternshipApplicationBuilder(APPLE).withStatus(Status.REJECTED).build();
         assertFalse(APPLE.equals(editedApple));
     }
 

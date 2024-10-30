@@ -139,8 +139,7 @@ public class InternshipApplication {
         return otherInternship != null
                 && otherInternship.getCompany().equals(getCompany())
                 && otherInternship.getDateOfApplication().equals(getDateOfApplication())
-                && otherInternship.getRole().equals(getRole())
-                && otherInternship.getStatus().equals(getStatus());
+                && otherInternship.getRole().equals(getRole());
     }
 
     /**
