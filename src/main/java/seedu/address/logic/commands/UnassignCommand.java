@@ -62,12 +62,12 @@ public class UnassignCommand extends Command {
 
         ObservableValue<UiState> uiState = model.getUiState();
         switch (uiState.getValue()) {
-            case VENDOR_DETAILS:
-                return handleVendorDetailsView(model);
-            case EVENT_DETAILS:
-                return handleEventDetailsView(model);
-            default:
-                return handleMainView(model);
+        case VENDOR_DETAILS:
+            return handleVendorDetailsView(model);
+        case EVENT_DETAILS:
+            return handleEventDetailsView(model);
+        default:
+            return handleMainView(model);
         }
     }
 

@@ -258,7 +258,8 @@ public class ModelManager implements Model {
 
     private Predicate<Vendor> getVendorPredicateForUiState() {
         if (currentUiState.getValue() == UiState.EVENT_DETAILS) {
-            Predicate<Vendor> notAssociatedPredicate = vendor -> !isVendorAssignedToEvent(vendor, selectedEvent.getValue());
+            Predicate<Vendor> notAssociatedPredicate = vendor ->
+                !isVendorAssignedToEvent(vendor, selectedEvent.getValue());
             return combinePredicates(notAssociatedPredicate, currentVendorListUserPredicate.getValue());
         }
         return currentVendorListUserPredicate.getValue();
@@ -266,7 +267,8 @@ public class ModelManager implements Model {
 
     private Predicate<Event> getEventPredicateForUiState() {
         if (currentUiState.getValue() == UiState.VENDOR_DETAILS) {
-            Predicate<Event> notAssociatedPredicate = event -> !isVendorAssignedToEvent(selectedVendor.getValue(), event);
+            Predicate<Event> notAssociatedPredicate = event ->
+                !isVendorAssignedToEvent(selectedVendor.getValue(), event);
             return combinePredicates(notAssociatedPredicate, currentEventListUserPredicate.getValue());
         }
         return currentEventListUserPredicate.getValue();
