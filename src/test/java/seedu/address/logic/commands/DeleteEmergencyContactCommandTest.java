@@ -30,10 +30,12 @@ public class DeleteEmergencyContactCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact("",
                 "").build();
+        String firstPersonEmergencyContactName = firstPerson.getEmergencyContact().contactName;
+        String firstPersonEmergencyContactNumber = firstPerson.getEmergencyContact().contactNumber;
         DeleteEmergencyContactCommand deleteEmergencyContactCommand =
                 new DeleteEmergencyContactCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(DeleteEmergencyContactCommand.MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS,
-                editedPerson);
+                firstPersonEmergencyContactName, firstPersonEmergencyContactNumber, editedPerson.getName());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(deleteEmergencyContactCommand, model, expectedMessage, expectedModel);
@@ -44,10 +46,12 @@ public class DeleteEmergencyContactCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact("",
                 "").build();
+        String firstPersonEmergencyContactName = firstPerson.getEmergencyContact().contactName;
+        String firstPersonEmergencyContactNumber = firstPerson.getEmergencyContact().contactNumber;
         DeleteEmergencyContactCommand deleteEmergencyContactCommand =
                 new DeleteEmergencyContactCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(DeleteEmergencyContactCommand.MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS,
-                editedPerson);
+                firstPersonEmergencyContactName, firstPersonEmergencyContactNumber, editedPerson.getName());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(deleteEmergencyContactCommand, model, expectedMessage, expectedModel);
@@ -68,7 +72,7 @@ public class DeleteEmergencyContactCommandTest {
         DeleteEmergencyContactCommand deleteEmergencyContactCommand =
                 new DeleteEmergencyContactCommand(INDEX_THIRD_PERSON);
         String expectedMessage = String.format(DeleteEmergencyContactCommand.MESSAGE_NO_EMERGENCY_CONTACT,
-                editedPerson);
+                editedPerson.getName());
         assertCommandFailure(deleteEmergencyContactCommand, model, expectedMessage);
     }
 
