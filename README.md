@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/se-edu/clinicconnectsystem-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F10-2/tp/actions)
+[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F10-2/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 
@@ -9,4 +9,4 @@ ClinicConnect is a unified platform for clinic assistants in private health scre
 
 * For the detailed documentation of this project, see the **[ClinicConnect Product Website](https://ay2425s1-cs2103t-f10-2.github.io/tp/)**.
 
-This project is based on the ClinicConnectSystem-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
