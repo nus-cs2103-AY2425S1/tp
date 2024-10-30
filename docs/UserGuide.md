@@ -29,6 +29,7 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
     - 4.2 [Commands](#42-commands)
     - 4.3 [Flags](#43-flags)
     - 4.4 [Arguments](#44-arguments)
+
 5. [Commands Overview](#5-commands-overview)
     - 5.1 [General Commands](#51-general-commands)
         - 5.1.1 [Viewing Help](#511-viewing-help--help)
@@ -49,10 +50,11 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
         - 5.3.4 [Listing All Policies](#534-listing-all-policies-list-policy)
         - 5.3.5 [Listing Expiring Policies](#535-listing-expiring-policies-listexpiringpolicies)
     - 5.4 [Claims Management Commands](#54-claims-management-commands)
-        - [Adding Claims [coming in v2.0]](#adding-claims-coming-in-v20)
-6.[FAQ](#faq)
-7.[Known Issues](#known-issues)
-8.[Command Summary](#command-summary)
+        - 5.4.1 [Adding Claims \[coming in v2.0\]](#514-saving-the-data)
+
+6. [FAQ](#6-faq)
+7. [Known Issues](#7-known-issues)
+8. [Command Summary](#8-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -60,27 +62,49 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
 
 Before you begin using Prudy, here are a few essential prerequisites to ensure a smooth experience, especially for beginner users:
 
-1. **Basic Command Line Interface (CLI) Knowledge**:  
+1. **Opening a Command Terminal**:  
+   To use Prudy effectively, you’ll need to know how to open a terminal on your operating system:
+
+    - **Windows**:
+        1. Press `Windows Key + R` to open the Run dialog.
+        2. Type `cmd` and press `Enter`.
+        3. This will open the Command Prompt, which can be used as a terminal.
+
+    - **MacOS**:
+        1. Press `Command + Space` to open Spotlight Search.
+        2. Type `Terminal` and press `Enter`.
+        3. The Terminal application will open, ready for use.
+
+    - **Linux**:
+        1. Depending on your distribution, you can usually open the terminal by pressing `Ctrl + Alt + T`.
+        2. Alternatively, look for the Terminal application in your system’s application menu.
+
+
+2. **Basic Command Line Interface (CLI) Knowledge**:  
    Prudy is optimized for CLI, allowing you to perform actions quickly through typed commands. If you're new to CLI, start by familiarizing yourself with basic commands such as:
     - `cd` to change directories
     - `ls` (or `dir` on Windows) to list files
     - `exit` to close the terminal  
       This knowledge will help you navigate the system and use Prudy more efficiently.
 
-2. **Keyboard Navigation Skills**:  
+
+3. **Keyboard Navigation Skills**:  
    Prudy is designed to enhance speed and productivity, especially when using keyboard shortcuts. Familiarize yourself with basic keyboard shortcuts, such as:
     - `Enter` to execute a command
     - `Tab` to auto-complete directory paths
     - `Arrow keys` to navigate through previous commands  
       These shortcuts will make it easier to work with Prudy’s CLI-based interface.
 
-3. **Basic Understanding of Data Fields**:  
+
+4. **Basic Understanding of Data Fields**:  
    Prudy keeps track of essential client information such as names, phone numbers, emails, addresses, tags, policies, and claims. Familiarizing yourself with these data fields will make it easier to add, edit, and filter client information efficiently.
 
-4. **Java 17 or Above Installed**:  
+
+5. **Java 17 or Above Installed**:  
    Prudy requires Java 17 or later. If you don’t have Java installed, you’ll need to install it before proceeding. Refer to the [Getting Started](#3-getting-started) section for installation instructions.
 
 💡 **Tip for Beginners**: Taking the time to review these prerequisites will help you become comfortable with Prudy’s interface and enable you to manage client data efficiently.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -97,11 +121,14 @@ java -version
 You should see java version 17
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T14-1/tp/releases).
 
+
 3. Copy the file to the folder you want to use as the _home folder_ for Prudy.
+
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar prudy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+
 
 5. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -115,6 +142,7 @@ You should see java version 17
    * `clear` : Deletes all clients.
 
    * `exit` : Exits the app.
+
 
 6. If you are a beginner, we recommend that you check out the [Command Structure]() section to find out more about command syntaxes. You may also choose to skip and proceed directly to the [Features](#features) section for details of each command.
 
@@ -145,33 +173,37 @@ In this command:
 
 Commands represent the primary actions Prudy will perform. Each command initiates a specific function within the app. Here are the main commands:
 
-| Command | Description                                                         |
-|---------|---------------------------------------------------------------------|
-| `add`   | Adds a new client.                                                  |
-| `edit`  | Modifies an existing client’s details.                              |
-| `delete`| Removes a client from Prudy.                                        |
-| `list`  | Lists all clients stored in Prudy.                                  |
-| `filter`| Searches clients based on specified criteria.                       |
-| `view`  | Displays detailed information for a selected client.                |
-| `clear` | Deletes all client data, resetting Prudy.                           |
-| `exit`  | Closes the Prudy application.                                       |
+| Command       | Description                                                         |
+|---------------|---------------------------------------------------------------------|
+| `add`         | Adds a new client.                                                  |
+| `edit`        | Modifies an existing client’s details.                              |
+| `delete`      | Removes a client from Prudy.                                        |
+| `list`        | Lists all clients stored in Prudy.                                  |
+| `find-client` | Searches clients based on specified criteria.                       |
+| `clear`       | Deletes all client data, resetting Prudy.                           |
+| `exit`        | Closes the Prudy application.                                       |
+
+These are just some of the basic commands, please refer to [Commands Overview](#5-commands-overview) for a comprehensive list of Prudy's features.
 
 ### 4.3 Flags
 
 Flags are used within commands to define specific types of data that Prudy will handle. They allow you to quickly indicate what information you’re providing. Below is a list of flags you can use:
 
-| Flag | Data Type         |
-|------|--------------------|
-| `n/` | Name              |
-| `p/` | Phone Number      |
-| `e/` | Email Address     |
-| `a/` | Address           |
-| `j/` | Job Title         |
-| `i/` | Income            |
-| `t/` | Tier              |
-| `r/` | Remarks           |
-| `ra/`| Append to Remark  |
-| `rn/`| New Remark        |
+| Flag  | Data Type               |
+|-------|--------------------------|
+| `n/`  | Name                    |
+| `p/`  | Phone Number            |
+| `e/`  | Email Address           |
+| `a/`  | Address                 |
+| `t/`  | Tags                    |
+| `pt/` | Policy Type             |
+| `pa/` | Policy Premium Amount   |
+| `ca/` | Policy Coverage Amount  |
+| `ed/` | Policy Expiry Date      |
+| `s/`  | Claim Status            |
+| `d/`  | Claim Description       |
+| `c/`  | Claim Index             |
+
 
 💡 **Tip**: Flags are generally derived from the first letter of the data type, making them easy to remember.
 
@@ -179,22 +211,29 @@ Flags are used within commands to define specific types of data that Prudy will 
 
 Arguments are the values provided for each flag in a command. They must meet certain requirements to be valid. Here’s a list of common arguments in Prudy and their expected formats:
 
-| Flag | Expected Argument    | Description             | Requirements                                   |
-|------|-----------------------|-------------------------|-----------------------------------------------|
-| `n/` | Client’s Full Name    | Full name of the client | Letters and spaces only                        |
-| `p/` | Phone Number          | Contact number          | 8-digit number starting with 8 or 9            |
-| `e/` | Email                 | Email address           | Standard format (e.g., user@example.com)       |
-| `a/` | Address               | Client’s address        | Any alphanumeric and symbol                    |
-| `j/` | Job Title             | Profession/occupation   | Letters and spaces only                        |
-| `i/` | Income                | Annual income           | Positive integer, no symbols                   |
-| `t/` | Tier                  | Client classification   | `Gold`, `Silver`, `Bronze`, `Reject`           |
-| `r/` | Remark                | Additional information  | Any alphanumeric and symbol                    |
+| Flag  | Expected Argument         | Description                      | Requirements                                            |
+|-------|----------------------------|----------------------------------|---------------------------------------------------------|
+| `n/`  | Client’s Full Name         | Full name of the client          | Letters and spaces only                                 |
+| `p/`  | Phone Number               | Contact number                   | 8-digit number starting with 8 or 9                     |
+| `e/`  | Email                      | Email address                    | Standard format (e.g., user@example.com)                |
+| `a/`  | Address                    | Client’s address                 | Any alphanumeric and symbol                             |
+| `t/`  | Tags                       | Custom descriptor of client      | Letters and spaces only                                 |
+| `pt/` | Policy Type                | Type of insurance policy         | Predefined types (e.g., life, health, education)        |
+| `pa/` | Policy Premium Amount      | Premium amount for the policy    | Positive decimal number (up to 2 decimal places)        |
+| `ca/` | Policy Coverage Amount     | Coverage amount of the policy    | Positive decimal number                                 |
+| `ed/` | Policy Expiry Date         | Expiry date of the policy        | Date format: MM/dd/yyyy                                 |
+| `s/`  | Claim Status               | Status of the claim              | Predefined statuses (e.g., pending, approved, rejected) |
+| `d/`  | Claim Description          | Description of the claim         | Any alphanumeric and symbol                             |
+| `c/`  | Claim Index                | Claim index for reference        | Positive integer, used for identifying claims           |
+
 
 In Prudy, arguments ensure that the command functions as expected. Without correct arguments, Prudy may display an error message indicating the input is invalid.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. Commands Overview
+
+This section will guide you on the commands available and how to use them correctly to optimise your workflow. If you have trouble understanding the command syntax, we highly recommend that you refer back to [Command Structure](#4-command-structure) as  basic knowledge of the command structure will give you a better understanding of our commands.
 
 Prudy uses a command-line interface with four primary categories of commands to manage various aspects of client data, policies, and claims. Each command type serves a distinct purpose:
 
@@ -218,9 +257,9 @@ Format: `help`
 Clears all entries from Prudy, resetting the data.  
 Format: `clear`
 
-  <box type=warning seamless>
-  **Warning:** This action is destructive and irreversible.
-  </box>
+<box type=warning seamless>
+**Warning:** This action is destructive and irreversible.
+</box>
 
 ### 5.1.3 Exiting the Program: `exit`
 Exits the program.  
@@ -232,11 +271,11 @@ Prudy data are saved on the hard disk automatically after any command that chang
 ### 5.1.5 Editing the Data File
 Prudy data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing this file.
 
-  <box type="warning" seamless>
-  **Caution:**  
+<box type="warning" seamless>
+**Caution:**  
 If your changes to the data file makes its format invalid, Prudy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause Prudy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-  </box>
+</box>
 
 ---
 
@@ -383,34 +422,35 @@ Details coming soon ...
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 6. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Prudy home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## 7. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 8. Command summary
 
-Action                     | Format, Examples
----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**                   | `help`
-**Add**                    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**List**                   | `list`
-**Find client**            | `find-client [n/name] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…` <br> e.g., `find-client n/alex pt/life`
-**Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Delete**                 | `delete INDEX` <br> e.g., `delete 3`
-**Add policy**             | `add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]` <br> e.g., `add-policy 1 pt/life pa/100`
-**Delete policy**          | `delete-policy INDEX pt/POLICY_TYPE…` <br> e.g., `delete-policy 1 pt/life`
-**Edit policy**            | `edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]` <br> e.g., `edit-policy 1 pt/health ca/40000`
-**List policies**          | `list-policy`
-**List expiring policies** | `listExpiringPolicies [DAYS]` <br> e.g., `listExpiringPolicies 50`
-**Clear**                  | `clear`
-**Exit**                   | `exit`
+| **Keyword**           | **Format**                                                                  | **Examples**                                                                                       |
+|-----------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| `help`                | `help`                                                                      | `help`                                                                                             |
+| `add`                 | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                     | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| `list`                | `list`                                                                      | `list`                                                                                             |
+| `find-client`         | `find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…`    | `find-client n/alex pt/life`                                                                       |
+| `edit`                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`      | `edit 2 n/James Lee e/jameslee@example.com`                                                        |
+| `delete`              | `delete INDEX`                                                              | `delete 3`                                                                                         |
+| `add-policy`          | `add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]` | `add-policy 1 pt/life pa/100`                                                                      |
+| `delete-policy`       | `delete-policy INDEX pt/POLICY_TYPE…`                                       | `delete-policy 1 pt/life`                                                                          |
+| `edit-policy`         | `edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]` | `edit-policy 1 pt/health ca/40000`                                                                 |
+| `list-policies`       | `list-policy`                                                               |                                                                                                    |
+| `ListExpiringPolicies` | `listExpiringPolicies [DAYS]`                                               | `listExpiringPolicies 50`                                                                          |
+| `clear`               | `clear`                                                                     | `clear`                                                                                            |
+| `exit`                | `exit`                                                                      | `exit`                                                                                              |
+
