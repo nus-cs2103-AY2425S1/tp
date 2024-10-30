@@ -34,8 +34,8 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private final ObjectProperty<Event> selectedEvent;
     private final ObjectProperty<UiState> currentUiState;
-    private final ObjectProperty<Predicate<Vendor>> currentVendorListUserPredicate;
-    private final ObjectProperty<Predicate<Event>> currentEventListUserPredicate;
+    private final ObjectProperty<Predicate<Vendor>> suppliedVendorFilterPredicate;
+    private final ObjectProperty<Predicate<Event>> suppliedEventFilterPredicate;
 
     /**
      * Initializes a ModelManager with the given eventTory and userPrefs.
@@ -52,8 +52,8 @@ public class ModelManager implements Model {
         selectedVendor = new SimpleObjectProperty<>(null);
         selectedEvent = new SimpleObjectProperty<>(null);
         currentUiState = new SimpleObjectProperty<>(UiState.DEFAULT);
-        currentVendorListUserPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_VENDORS);
-        currentEventListUserPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_EVENTS);
+        suppliedVendorFilterPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_VENDORS);
+        suppliedEventFilterPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     public ModelManager() {
@@ -208,7 +208,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredVendorList(Predicate<Vendor> predicate) {
         requireNonNull(predicate);
-        currentVendorListUserPredicate.setValue(predicate);
+        suppliedVendorFilterPredicate.setValue(predicate);
         applyFiltersBasedOnUiState();
     }
 
@@ -226,7 +226,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
-        currentEventListUserPredicate.setValue(predicate);
+        suppliedEventFilterPredicate.setValue(predicate);
         applyFiltersBasedOnUiState();
     }
 
@@ -260,18 +260,18 @@ public class ModelManager implements Model {
         if (currentUiState.getValue() == UiState.EVENT_DETAILS) {
             Predicate<Vendor> notAssociatedPredicate = vendor ->
                 !isVendorAssignedToEvent(vendor, selectedEvent.getValue());
-            return combinePredicates(notAssociatedPredicate, currentVendorListUserPredicate.getValue());
+            return combinePredicates(notAssociatedPredicate, suppliedVendorFilterPredicate.getValue());
         }
-        return currentVendorListUserPredicate.getValue();
+        return suppliedVendorFilterPredicate.getValue();
     }
 
     private Predicate<Event> getEventPredicateForUiState() {
         if (currentUiState.getValue() == UiState.VENDOR_DETAILS) {
             Predicate<Event> notAssociatedPredicate = event ->
                 !isVendorAssignedToEvent(selectedVendor.getValue(), event);
-            return combinePredicates(notAssociatedPredicate, currentEventListUserPredicate.getValue());
+            return combinePredicates(notAssociatedPredicate, suppliedEventFilterPredicate.getValue());
         }
-        return currentEventListUserPredicate.getValue();
+        return suppliedEventFilterPredicate.getValue();
     }
 
     // =========== Viewed Vendor Accessors =============================================================
