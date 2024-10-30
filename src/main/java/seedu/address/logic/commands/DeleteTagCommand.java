@@ -6,12 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.UserConfirmation;
 
 /**
  * Adds a new predefined tag.
@@ -28,7 +30,13 @@ public class DeleteTagCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Tag(s) deleted: ";
     public static final String MESSAGE_TAGLIST_PREFIX = "Your tags: ";
     public static final String MESSAGE_NONEXISTENT = "Some tag(s) provided have not been added before.\n";
+    public static final String MESSAGE_CONFIRMATION = "The following tags are tagged on some guests:\n"
+            + "%s\n"
+            + "Deleting the tags will remove them from the guests.\n"
+            + "Are you sure you want to delete? Click 'OK' to confirm.";
     private final List<Tag> tags;
+
+    private String tagToDelete;
 
     /**
      * @param tags The tag object to be added.
@@ -41,9 +49,31 @@ public class DeleteTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
-        boolean isSuccessful = model.deleteTags(tags);
-        if (!isSuccessful) {
-            throw new CommandException(MESSAGE_NONEXISTENT);
+
+        // Check if all tags exist in the model's tag list
+        Set<Tag> existingTags = new HashSet<>(model.getTagListAsObservableList());
+        for (Tag tag : tags) {
+            if (!existingTags.contains(tag)) {
+                throw new CommandException(MESSAGE_NONEXISTENT);
+            }
+        }
+
+        // Check if tags is in use
+        Set<Tag> tagsInUse = getTagsInUse(model);
+
+        if (!tagsInUse.isEmpty()) {
+            String tagsInUseString = tagsInUse.stream()
+                    .map(Tag::toString)
+                    .collect(Collectors.joining(", "));
+
+            tagToDelete = tagsInUseString;
+            String confirmationMessage = String.format(MESSAGE_CONFIRMATION, tagsInUseString);
+            boolean isConfirmed = UserConfirmation.getConfirmation(confirmationMessage);
+
+            if (!isConfirmed) {
+                return new CommandResult("Tag deletion canceled by user.");
+            }
+
         }
 
         for (Tag tag : tags) {
@@ -56,13 +86,45 @@ public class DeleteTagCommand extends Command {
     }
 
     /**
+     * Returns a set of tags that are in use by the persons in the address book.
+     * @param model
+     */
+    private Set<Tag> getTagsInUse(Model model) {
+        Set<Tag> tagsInUse = new HashSet<>();
+        List<Person> persons = model.getFullPersonList();
+        for (Person person : persons) {
+            Set<Tag> personTags = person.getTags();
+            addPersonTags(tagsInUse, personTags);
+        }
+        return tagsInUse;
+    }
+
+    private void addPersonTags(Set<Tag> tagsInUse, Set<Tag> personTags) {
+        for (Tag tag : tags) {
+            if (personTags.contains(tag)) {
+                tagsInUse.add(tag);
+            }
+        }
+    }
+
+    /**
      * Removes the deleted {@code Tag} from all persons in the address book.
      */
     private void removeTagFromPersons(Model model, Tag tag) {
+        model.getTagListAsObservableList().remove(tag);
         List<Person> persons = model.getFullPersonList();
         for (Person person : persons) {
             if (person.hasTag(tag)) {
-                replacePerson(model, person, tag);
+                // Create a new Set with the tag removed
+                Set<Tag> updatedTags = new HashSet<>(person.getTags());
+                updatedTags.remove(tag);
+
+                // Create an updated Person instance with the modified tags
+                Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                        person.getEmail(), person.getRsvpStatus(), updatedTags);
+
+                // Replace the original person with the updated person in the model
+                model.setPerson(person, updatedPerson);
             }
         }
     }

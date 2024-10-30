@@ -108,8 +108,15 @@ public interface Model {
 
     /**
      * Deletes a tag from the tag list.
+     * @param tag The tag to be deleted
+     * @return true if the tag was successfully deleted, false if the tag does not exist.
+     */
+    boolean deleteTag(Tag tag);
+
+    /**
+     * Deletes a tag from the tag list.
      *
-     * @param tags The tag to be deleted.
+     * @param tags The tags to be deleted.
      * @return true if the tag was successfully deleted, false if the tag does not exist.
      */
     boolean deleteTags(List<Tag> tags);
