@@ -14,7 +14,6 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class HistoryCommandListTest {

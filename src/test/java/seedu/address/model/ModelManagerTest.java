@@ -20,7 +20,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.model.history.HistoryCommand;
-import seedu.address.model.history.HistoryCommandList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
