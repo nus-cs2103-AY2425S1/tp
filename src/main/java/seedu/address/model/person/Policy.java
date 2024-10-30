@@ -215,5 +215,4 @@ public class Policy {
     public String toString() {
         return policyName + " (" + startDate + " to " + endDate + ") " + payment.toString();
     }
-
 }
