@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Nric;
@@ -24,14 +25,14 @@ public class ViewCommand extends Command {
             + "Format: view i/NRIC\n"
             + "Example: " + COMMAND_WORD + " i/S1234567A";
 
-    private final Nric nric;
+    private final Nric targetNric;
 
     /**
      * Creates a ViewCommand to view the patient with the specified {@code Nric}.
      */
-    public ViewCommand(Nric nric) {
-        this.nric = nric;
-        assert nric != null : "Nric should not be null";
+    public ViewCommand(Nric targetNric) {
+        this.targetNric = targetNric;
+        assert targetNric != null : "Nric should not be null";
     }
 
     @Override
@@ -41,7 +42,7 @@ public class ViewCommand extends Command {
 
         // Find the patient with the given nric
         Optional<Patient> optionalPatient = lastShownList.stream()
-                .filter(patient -> patient.getNric().equals(nric))
+                .filter(patient -> patient.getNric().equals(targetNric))
                 .findFirst();
 
         if (!optionalPatient.isPresent()) {
@@ -67,7 +68,14 @@ public class ViewCommand extends Command {
         }
 
         ViewCommand e = (ViewCommand) other;
-        return nric.equals(e.nric);
+        return targetNric.equals(e.targetNric);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetNric", targetNric)
+                .toString();
     }
 
     private String generateSuccessMessage(Patient patient) {
