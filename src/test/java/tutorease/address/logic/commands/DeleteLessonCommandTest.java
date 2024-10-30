@@ -65,7 +65,7 @@ public class DeleteLessonCommandTest {
         @Override
         public Lesson getFilteredLesson(int index) {
             return lessons.get(index);
-        }deegit a
+        }
 
         @Override
         public int getLessonScheduleSize() {
