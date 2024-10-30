@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label university;
     @FXML
     private Label major;
+    @FXML
+    private Label birthday;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -70,5 +72,6 @@ public class PersonCard extends UiPart<Region> {
                 .map(interest -> interest.interestName)
                 .collect(Collectors.joining(", "));
         interests.setText(interestText);
+        birthday.setText(person.getBirthday().value.toString());
     }
 }

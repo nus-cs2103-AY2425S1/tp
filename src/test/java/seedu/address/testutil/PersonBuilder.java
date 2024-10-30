@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Interest;
 import seedu.address.model.person.Major;
@@ -28,6 +29,7 @@ public class PersonBuilder {
     public static final String DEFAULT_UNIVERSITY = "NUS";
     public static final String DEFAULT_MAJOR = "Computer Science";
     public static final String DEFAULT_INTEREST = "Swimming";
+    public static final String DEFAULT_BIRTHDAY = "06-12-2003";
 
     private Name name;
     private Phone phone;
@@ -38,6 +40,7 @@ public class PersonBuilder {
     private University university;
     private Major major;
     private Set<Interest> interests;
+    private Birthday birthday;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -52,6 +55,8 @@ public class PersonBuilder {
         university = new University(DEFAULT_UNIVERSITY);
         major = new Major(DEFAULT_MAJOR);
         interests = new HashSet<>();
+        birthday = new Birthday(DEFAULT_BIRTHDAY);
+
     }
 
     /**
@@ -67,6 +72,7 @@ public class PersonBuilder {
         university = personToCopy.getUniversity();
         major = personToCopy.getMajor();
         interests = new HashSet<>(personToCopy.getInterests());
+        birthday = personToCopy.getBirthday();
     }
 
     /**
@@ -93,6 +99,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Birthday} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthday(String birthday) {
+        this.birthday = new Birthday(birthday);
+        return this;
+    }
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
@@ -145,7 +158,7 @@ public class PersonBuilder {
      * Builds and returns a {@code Person} object with the attributes that have been set for this {@code PersonBuilder}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, workExp, tags, university, major, interests);
+        return new Person(name, phone, email, address, workExp, tags, university, major, interests, birthday);
     }
 
 }

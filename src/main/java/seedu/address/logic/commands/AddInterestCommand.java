@@ -97,7 +97,8 @@ public class AddInterestCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getWorkExp(),
-                personToEdit.getTags(), personToEdit.getUniversity(), personToEdit.getMajor(), currentInterests);
+                personToEdit.getTags(), personToEdit.getUniversity(), personToEdit.getMajor(), currentInterests,
+                personToEdit.getBirthday());
 
         // Update the person in the model
         model.setPerson(personToEdit, editedPerson);

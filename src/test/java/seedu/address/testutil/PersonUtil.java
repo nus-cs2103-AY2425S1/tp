@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTEREST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -10,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
@@ -47,6 +49,7 @@ public class PersonUtil {
         );
         sb.append(PREFIX_UNIVERSITY + person.getUniversity().value + " ");
         sb.append(PREFIX_MAJOR + person.getMajor().value + " ");
+        sb.append(PREFIX_BIRTHDAY + person.getBirthday().value.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " ");
         person.getInterests().forEach(s -> sb.append(PREFIX_INTEREST + s.interestName + " "));
         return sb.toString();
     }
@@ -62,6 +65,7 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getWorkExp().ifPresent(workExp -> sb.append(PREFIX_WORKEXP).append(workExp.value)
                 .append(" "));
+
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
@@ -82,6 +86,9 @@ public class PersonUtil {
                 .append(" "));
         descriptor.getMajor().ifPresent(major -> sb.append(PREFIX_MAJOR).append(major.value)
                 .append(" "));
+        descriptor.getBirthday().ifPresent(birthday -> sb.append(PREFIX_BIRTHDAY)
+                .append(birthday.value.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))).append(" "));
+
         return sb.toString();
     }
 }

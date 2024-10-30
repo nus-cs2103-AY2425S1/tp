@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class Person {
     private final University university;
     private final Major major;
     private final WorkExp workExp;
+    private final Birthday birthday;
 
     /**
      * Every field must be present and not null.
@@ -37,8 +39,8 @@ public class Person {
      * Interest and experience are initialized to empty strings.
      */
     public Person(Name name, Phone phone, Email email, Address address, WorkExp workExp, Set<Tag> tags,
-                  University university, Major major, Set<Interest> interests) {
-        requireAllNonNull(name, phone, email, address, tags, university, major);
+                  University university, Major major, Set<Interest> interests, Birthday birthday) {
+        requireAllNonNull(name, phone, email, address, tags, university, major, birthday);
 
         this.name = name;
         this.phone = phone;
@@ -49,6 +51,7 @@ public class Person {
         this.university = university;
         this.major = major;
         this.interests.addAll(interests);
+        this.birthday = birthday;
     }
 
     public Name getName() {
@@ -73,6 +76,10 @@ public class Person {
 
     public Major getMajor() {
         return major;
+    }
+
+    public Birthday getBirthday() {
+        return birthday;
     }
 
     public Set<Interest> getInterests() {
@@ -128,7 +135,8 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && university.equals(otherPerson.university)
                 && major.equals(otherPerson.major)
-                && interests.equals(otherPerson.interests);
+                && interests.equals(otherPerson.interests)
+                && birthday.equals(otherPerson.birthday);
     }
 
     @Override
@@ -149,6 +157,7 @@ public class Person {
                 .add("university", university)
                 .add("major", major)
                 .add("interests", interests)
+                .add("birthday", birthday.value.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .toString();
     }
 }
