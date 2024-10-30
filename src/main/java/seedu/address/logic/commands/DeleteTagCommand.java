@@ -25,9 +25,9 @@ public class DeleteTagCommand extends Command {
             + "Parameters: " + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
-    public static final String MESSAGE_SUCCESS = "Tag(s) deleted: ";
-    public static final String MESSAGE_TAGLIST_PREFIX = "Your tags: ";
-    public static final String MESSAGE_NONEXISTENT = "Some tag(s) provided have not been added before.\n";
+    public static final String MESSAGE_SUCCESS = "Tag(s) deleted.\n";
+    public static final String MESSAGE_NONEXISTENT = "Some tag(s) provided have not been added before.\n"
+            + "Existing tags (if any) have been deleted successfully.\n";;
     private final List<Tag> tags;
 
     /**
@@ -38,21 +38,25 @@ public class DeleteTagCommand extends Command {
         this.tags = tags;
     }
 
+    private void removeTagsFromPersons(Model model) {
+        for (Tag tag : tags) {
+            model.removeTagFromPersons(tag);
+        }
+    }
+
+    private CommandResult createCommandResult(boolean isSuccessful) {
+        if (!isSuccessful) {
+            return new CommandResult(MESSAGE_NONEXISTENT);
+        }
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
         boolean isSuccessful = model.deleteTags(tags);
-        if (!isSuccessful) {
-            throw new CommandException(MESSAGE_NONEXISTENT);
-        }
-
-        for (Tag tag : tags) {
-            model.removeTagFromPersons(tag);
-        }
-
-        String successMessage = MESSAGE_SUCCESS + tags + "\n";
-        String currentTags = MESSAGE_TAGLIST_PREFIX + model.getTagList();
-        return new CommandResult(successMessage + currentTags);
+        removeTagsFromPersons(model);
+        return createCommandResult(isSuccessful);
     }
 
     @Override

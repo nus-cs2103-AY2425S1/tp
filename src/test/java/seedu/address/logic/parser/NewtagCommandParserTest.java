@@ -71,7 +71,7 @@ public class NewtagCommandParserTest {
      * EP: Mix of valid and invalid arguments.
      */
     @Test
-    public void parse_multipleArgsOneInvalid_throwsParseException() {
+    public void parse_multipleArgsOneInvalidChars_throwsParseException() {
         assertParseFailure(parser, " t/bride's side t/^@%",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
     }
@@ -117,7 +117,7 @@ public class NewtagCommandParserTest {
     }
 
     /**
-     * EP: Invalid tag names.
+     * EP: Single invalid tag name.
      */
     @Test
     public void parse_exceedsMaxLength_throwsParseException() {
