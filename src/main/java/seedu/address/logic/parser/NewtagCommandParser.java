@@ -15,6 +15,8 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new NewtagCommand object.
  */
 public class NewtagCommandParser implements Parser<NewtagCommand> {
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}' ]+";
+
     /**
      * Parses the given {@code String} of arguments in the context of the NewtagCommand
      * and returns a NewtagCommand object for execution.

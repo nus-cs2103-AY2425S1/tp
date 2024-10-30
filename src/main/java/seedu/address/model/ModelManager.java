@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons;
     private ObservableList<Tag> tagList;
 
     /**
@@ -137,7 +137,15 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+
+        @SuppressWarnings("unchecked")
+        Predicate<Person> currentPredicate = (Predicate<Person>) filteredPersons.getPredicate();
+
+        if (currentPredicate == null || predicate.equals(PREDICATE_SHOW_ALL_PERSONS)) {
+            filteredPersons.setPredicate(predicate);
+        } else {
+            filteredPersons.setPredicate(currentPredicate.and(predicate));
+        }
     }
 
     //=========== Tags ================================================================================

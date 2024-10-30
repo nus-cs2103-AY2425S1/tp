@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 
@@ -14,14 +15,17 @@ import seedu.address.model.tag.TagList;
  */
 public class NewtagCommand extends Command {
     public static final String COMMAND_WORD = "newtag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new tag (case insensitive).\n"
-            + "Parameters: TAG_NAME (MAX 50 alphanumeric characters, spaces, parenthesis and apostrophes)\n"
-            + "Example: " + COMMAND_WORD + " t/Bride's Friend";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Creates new tag(s) (case insensitive). Maximum of 50 alphanumeric characters, spaces, parenthesis "
+            + "and apostrophes per tag.\n"
+            + "Parameters: " + PREFIX_TAG + "TAG...\n"
+            + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
-    public static final String MESSAGE_SUCCESS = "New tag(s) added: ";
-    public static final String MESSAGE_DUPLICATE = "One or more of the tags already exist.\n";
+    public static final String MESSAGE_SUCCESS = "New tag(s) created: ";
+    public static final String MESSAGE_DUPLICATE = "Some tag(s) already exists.\n";
+    public static final String MESSAGE_TAGLIST_PREFIX = "Your tags: ";
     public static final String MESSAGE_TOO_MANY_TAGS = "You have more than " + TagList.MAXIMUM_TAGLIST_SIZE
-            + " tags.\nPlease remove some using deletetag.\n";
+            + " tags.\nPlease remove some using 'deletetag'.\n";
 
     private final List<Tag> tags;
 
@@ -50,7 +54,7 @@ public class NewtagCommand extends Command {
 
         model.updateTagList();
 
-        String currentTags = "Your tags: " + model.getTagList();
+        String currentTags = MESSAGE_TAGLIST_PREFIX + model.getTagList();
         return new CommandResult(successMessage + currentTags);
     }
 
