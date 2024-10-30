@@ -89,7 +89,6 @@ public class AddEventCommand extends AddCommand {
         }
 
         model.addEvent(toAdd);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.eventFormat(toAdd)), false,
                 false, CommandTabChange.EVENT, CommandDetailChange.NONE);
     }

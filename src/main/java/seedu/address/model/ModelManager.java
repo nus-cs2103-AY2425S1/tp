@@ -4,13 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
@@ -26,7 +24,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Event> filteredEvents;
-    private final SortedList<Event> sortedFilteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,9 +37,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredEvents = new FilteredList<>(this.addressBook.getSortedEventList());
-        this.sortedFilteredEvents = new SortedList<>(filteredEvents);
-        
-        this.sortedFilteredEvents.setComparator(Comparator.comparing(e -> e.getStartTime()));
     }
 
     public ModelManager() {
@@ -175,7 +169,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Event> getFilteredEventList() {
-        return sortedFilteredEvents;
+        return filteredEvents;
     }
 
     @Override

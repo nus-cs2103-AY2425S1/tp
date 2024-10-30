@@ -127,6 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addEvent(Event e) {
         events.add(e);
+        events.sortByStartTime();
     }
 
     /**
@@ -138,6 +139,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedEvent);
 
         events.setEvent(target, editedEvent);
+        events.sortByStartTime();
     }
 
     /**
