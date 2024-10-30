@@ -32,16 +32,16 @@ deactivate ViewClientCommand
 AddressBookParser --> LogicManager : v
 deactivate AddressBookParser
 
-LogicManager -> ViewClientCommand : execute()
+LogicManager -> ViewClientCommand : execute(model)
 activate ViewClientCommand
 
 ViewClientCommand -> MainWindow
 activate MainWindow
 
-MainWindow -> ViewClientWindow : show()
+MainWindow -> ViewClientWindow : show(client)
 activate ViewClientWindow
 
-ViewClientWindow -> ViewClientWindow : fillClientDetails()
+ViewClientWindow -> ViewClientWindow : fillClientDetails(client)
 activate ViewClientWindow
 
 ViewClientWindow --> ViewClientWindow
