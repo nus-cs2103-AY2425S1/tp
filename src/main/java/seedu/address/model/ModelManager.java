@@ -41,6 +41,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredEvents = new FilteredList<>(this.addressBook.getSortedEventList());
         this.sortedFilteredEvents = new SortedList<>(filteredEvents);
+        
         this.sortedFilteredEvents.setComparator(Comparator.comparing(e -> e.getStartTime()));
     }
 
