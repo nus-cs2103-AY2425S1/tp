@@ -1,10 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;

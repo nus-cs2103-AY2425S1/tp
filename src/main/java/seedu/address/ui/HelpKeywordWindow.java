@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -59,6 +59,8 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         setHelpKeywordContent(keyword);
         getRoot().setWidth(500);
         getRoot().setHeight(400);
+
+        closeWindowKeyboardShortcut();
     }
 
     /**
@@ -115,11 +117,8 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         header.setText("Add Command: Adds a new patient record into the system.");
         description.setText("All parameters are compulsory and can be typed in any order.");
         parametersHeader.setText("Parameters:");
-        parameters.setText("""
-                NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO.
-                
-                SEX - M / F
-                DATE OF BIRTH - YYYY-MM-DD""");
+        parameters.setText("NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO.\n\n"
+                        + "SEX - M / F\n" + "DATE OF BIRTH - YYYY-MM-DD");
         usageHeader.setText("Command Usage:");
         usage.setText("add n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.]");
         exampleHeader.setText("Example:");
@@ -346,5 +345,20 @@ public class HelpKeywordWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Closes the help keyword window.
+     */
+    public void closeWindowKeyboardShortcut() {
+        Stage stage = (Stage) getRoot().getScene().getWindow();
+        if (stage != null) {
+            stage.addEventHandler(KeyEvent.KEY_PRESSED, t -> {
+                if (t.getCode() == KeyCode.ESCAPE) {
+                    stage.close();
+                    t.consume();
+                }
+            });
+        }
     }
 }

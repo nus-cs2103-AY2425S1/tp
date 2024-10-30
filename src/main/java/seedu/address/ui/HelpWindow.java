@@ -4,7 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -70,6 +71,8 @@ public class HelpWindow extends UiPart<Stage> {
 
         getRoot().setWidth(500);
         getRoot().setHeight(400);
+
+        closeWindowKeyboardShortcut();
     }
 
     /**
@@ -123,5 +126,20 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Closes the help window.
+     */
+    public void closeWindowKeyboardShortcut() {
+        Stage stage = (Stage) getRoot().getScene().getWindow();
+        if (stage != null) {
+            stage.addEventHandler(KeyEvent.KEY_PRESSED, t -> {
+                if (t.getCode() == KeyCode.ESCAPE) {
+                    stage.close();
+                    t.consume();
+                }
+            });
+        }
     }
 }
