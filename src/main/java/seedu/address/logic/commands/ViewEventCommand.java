@@ -39,6 +39,7 @@ public class ViewEventCommand extends ViewCommand {
 
         Event eventToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewEvent(eventToView);
+        model.updateFilteredVendorList(Model.PREDICATE_SHOW_ALL_VENDORS);
         model.setUiState(UiState.EVENT_DETAILS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(eventToView)));
