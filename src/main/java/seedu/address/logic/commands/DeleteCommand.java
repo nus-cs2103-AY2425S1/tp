@@ -105,9 +105,13 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
+        if (identityNumber != null) {
+            return new ToStringBuilder(this)
+                    .add("identityNumber", identityNumber)
+                    .toString();
+        }
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
-                .add("identityNumber", identityNumber)
                 .toString();
     }
 }
