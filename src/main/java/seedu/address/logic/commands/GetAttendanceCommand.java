@@ -29,20 +29,21 @@ public class GetAttendanceCommand extends Command {
             + ": Retrieves the attendance of a student for a specific date.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER (Optional) "
-            + PREFIX_DATE + "DATE\n"
+            + PREFIX_DATE + "DATE "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER (Optional) \n"
             + "Example: "
             + COMMAND_WORD + " "
-            + PREFIX_NAME + " John Doe "
-            + PREFIX_DATE + "2019-10-09";
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_DATE + "2019-10-09 "
+            + PREFIX_STUDENT_NUMBER + "A0123456L";
 
     public static final String MESSAGE_SUCCESS = "Attendance for %1$s on %2$s: %3$s";
     public static final String MESSAGE_NO_ATTENDANCE = "No attendance record found for %1$s on %2$s.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n"
             + "Their student numbers are as follows: %s" + "\n"
             + "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s "
-            + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
             + PREFIX_DATE + "DATE "
+            + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
             + "to get the Attendance for the correct Student.";
 
     private final Name name;
@@ -55,10 +56,10 @@ public class GetAttendanceCommand extends Command {
      * @param name The name of the student.
      * @param date The date for which to retrieve attendance.
      */
-    public GetAttendanceCommand(Name name, Optional<StudentNumber> studentNumber, LocalDate date) {
+    public GetAttendanceCommand(Name name, LocalDate date, Optional<StudentNumber> studentNumber) {
         this.name = name;
-        this.studentNumber = studentNumber;
         this.date = date;
+        this.studentNumber = studentNumber;
 
     }
 

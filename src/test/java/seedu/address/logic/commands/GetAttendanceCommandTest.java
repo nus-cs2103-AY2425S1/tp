@@ -41,7 +41,7 @@ class GetAttendanceCommandTest {
         studentWithAttendance.markAttendance(validDate, "p");
         model.addStudent(studentWithAttendance);
 
-        GetAttendanceCommand command = new GetAttendanceCommand(validName, studentNumber, validDate);
+        GetAttendanceCommand command = new GetAttendanceCommand(validName, validDate, studentNumber);
         CommandResult result = command.execute(model);
 
         String expectedMessage = String.format(GetAttendanceCommand.MESSAGE_SUCCESS, validName, validDate, "Present");
@@ -53,7 +53,7 @@ class GetAttendanceCommandTest {
         Model model = new ModelManager();
         model.addStudent(studentWithAttendance);
 
-        GetAttendanceCommand command = new GetAttendanceCommand(validName, studentNumber, invalidDate);
+        GetAttendanceCommand command = new GetAttendanceCommand(validName, invalidDate, studentNumber);
         CommandResult result = command.execute(model);
 
         String expectedMessage = String.format(GetAttendanceCommand.MESSAGE_NO_ATTENDANCE, validName, invalidDate);
@@ -65,7 +65,7 @@ class GetAttendanceCommandTest {
         Model model = new ModelManager();
         model.addStudent(studentWithoutAttendance);
 
-        GetAttendanceCommand command = new GetAttendanceCommand(new Name("Jane Doe"), studentNumber, validDate);
+        GetAttendanceCommand command = new GetAttendanceCommand(new Name("Jane Doe"), validDate, studentNumber);
         CommandResult result = command.execute(model);
 
         String expectedMessage = String.format(GetAttendanceCommand.MESSAGE_NO_ATTENDANCE,
@@ -77,7 +77,7 @@ class GetAttendanceCommandTest {
     void execute_invalidStudent_throwsCommandException() {
         Model model = new ModelManager();
 
-        GetAttendanceCommand command = new GetAttendanceCommand(invalidName, studentNumber, validDate);
+        GetAttendanceCommand command = new GetAttendanceCommand(invalidName, validDate, studentNumber);
 
         assertThrows(CommandException.class, "Student not found: " + invalidName, () ->
                 command.execute(model));
@@ -90,10 +90,10 @@ class GetAttendanceCommandTest {
         LocalDate date1 = LocalDate.parse("2023-10-09");
         LocalDate date2 = LocalDate.parse("2023-10-10");
 
-        GetAttendanceCommand command1 = new GetAttendanceCommand(name1, studentNumber, date1);
-        GetAttendanceCommand command2 = new GetAttendanceCommand(name1, studentNumber, date1);
-        GetAttendanceCommand command3 = new GetAttendanceCommand(name2, studentNumber, date1);
-        GetAttendanceCommand command4 = new GetAttendanceCommand(name1, studentNumber, date2);
+        GetAttendanceCommand command1 = new GetAttendanceCommand(name1, date1, studentNumber);
+        GetAttendanceCommand command2 = new GetAttendanceCommand(name1, date1, studentNumber);
+        GetAttendanceCommand command3 = new GetAttendanceCommand(name2, date1, studentNumber);
+        GetAttendanceCommand command4 = new GetAttendanceCommand(name1, date2, studentNumber);
 
         // Same object
         assertEquals(command1, command1);
@@ -118,7 +118,7 @@ class GetAttendanceCommandTest {
     public void toStringMethod() {
         Name name = new Name("John Doe");
         LocalDate date = LocalDate.parse("2023-10-09");
-        GetAttendanceCommand command = new GetAttendanceCommand(name, studentNumber, date);
+        GetAttendanceCommand command = new GetAttendanceCommand(name, date, studentNumber);
         String expectedString = GetAttendanceCommand.class.getCanonicalName()
                 + "{name=" + name + ", date=" + date + "}";
         assertEquals(expectedString, command.toString());

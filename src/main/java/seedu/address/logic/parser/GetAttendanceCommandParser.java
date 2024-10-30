@@ -35,7 +35,7 @@ public class GetAttendanceCommandParser implements Parser<GetAttendanceCommand> 
                 ? Optional.of(ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get()))
                 : Optional.empty();
 
-        return new GetAttendanceCommand(name, studentNumber, date);
+        return new GetAttendanceCommand(name, date, studentNumber);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

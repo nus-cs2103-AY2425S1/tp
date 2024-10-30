@@ -31,14 +31,15 @@ public class MarkAttendanceCommand extends Command {
             + ": Marks the attendance of a student for a specific date.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER (Optional) "
             + PREFIX_DATE + "DATE "
-            + PREFIX_PRESENT + "STATUS : 'p' or 'a'\n"
+            + PREFIX_PRESENT + "STATUS : 'p' or 'a' "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER (Optional) \n"
             + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_DATE + "2019-10-09 "
-            + PREFIX_PRESENT + "p";
+            + PREFIX_PRESENT + "p "
+            + PREFIX_STUDENT_NUMBER + "A0123456L";
 
     public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s is %2$s on %3$s";
 
@@ -64,8 +65,8 @@ public class MarkAttendanceCommand extends Command {
      * @param date The date for which to mark attendance.
      * @param attendance The attendance status (present/absent).
      */
-    public MarkAttendanceCommand(Name name, Optional<StudentNumber> studentNumber,
-                                 LocalDate date, Attendance attendance) {
+    public MarkAttendanceCommand(Name name, LocalDate date,
+                                 Attendance attendance, Optional<StudentNumber> studentNumber) {
         this.name = name;
         this.date = date;
         this.attendance = attendance;
