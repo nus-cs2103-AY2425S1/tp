@@ -10,7 +10,7 @@ public class Role {
 
     public static final String MESSAGE_CONSTRAINTS = "Role should be one word, alphanumeric, "
             + "and should not be blank.";
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9]*$";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9]+$";
 
 
     public final String roleName;
@@ -29,7 +29,7 @@ public class Role {
      * Returns true if a given string is a valid role name.
      */
     public static boolean isValidRoleName(String test) {
-        return test.isEmpty() || test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
@@ -43,9 +43,9 @@ public class Role {
             return false;
         }
 
-        Role otherTag = (Role) other;
+        Role otherRole = (Role) other;
         return roleName.toLowerCase()
-                .equals(otherTag.roleName.toLowerCase());
+                .equals(otherRole.roleName.toLowerCase());
     }
 
     @Override

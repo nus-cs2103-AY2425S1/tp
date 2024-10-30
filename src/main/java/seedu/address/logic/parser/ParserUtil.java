@@ -108,9 +108,13 @@ public class ParserUtil {
     public static String parseClient(String client) throws ParseException {
         requireNonNull(client);
         String trimmedClient = client.trim();
-        if (!Client.isValidClientName(trimmedClient) && Client.isValidClientIndex(trimmedClient)) {
-            throw new ParseException(Client.MESSAGE_CONSTRAINTS);
+
+        if (!Client.isValidClientIndex(trimmedClient)) {
+            if (!Client.isValidClientName(trimmedClient)) {
+                throw new ParseException(Client.MESSAGE_CONSTRAINTS);
+            }
         }
+
         return trimmedClient;
     }
 
@@ -143,7 +147,7 @@ public class ParserUtil {
         }
         String trimmedVenue = venue.trim();
         if (!Venue.isValidVenue(trimmedVenue)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
         }
         return new Venue(trimmedVenue);
     }
@@ -158,9 +162,6 @@ public class ParserUtil {
     public static Optional<Role> parseRole(String role) throws ParseException {
         requireNonNull(role);
         String trimmedRole = role.trim();
-        if (trimmedRole.isEmpty()) {
-            return Optional.empty();
-        }
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }

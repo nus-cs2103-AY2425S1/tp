@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedWedding.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalWeddings.ALICE_WEDDING;
@@ -29,6 +31,9 @@ public class JsonAdaptedWeddingTest {
     private static final String VALID_DATE = ALICE_WEDDING.getDate().toString();
     private static final String VALID_VENUE = ALICE_WEDDING.getVenue().toString();
     private static final List<Wedding> VALID_WEDDING_LIST = new ArrayList<>();
+
+    private static final JsonAdaptedWedding ALICE_JSON = new JsonAdaptedWedding(
+            VALID_NAME, VALID_CLIENT, VALID_DATE, VALID_VENUE);
 
     @Test
     public void toModelType_validWeddingDetails_returnsWedding() throws Exception {
@@ -97,5 +102,55 @@ public class JsonAdaptedWeddingTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () ->
                 wedding.toModelType(VALID_WEDDING_LIST));
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        assertTrue(ALICE_JSON.equals(ALICE_JSON));
+    }
+
+    @Test
+    public void equals_nullObject_returnsFalse() {
+        assertFalse(ALICE_JSON.equals(null));
+    }
+
+    @Test
+    public void equals_differentClass_returnsFalse() {
+        assertFalse(ALICE_JSON.equals("not a wedding"));
+    }
+
+    @Test
+    public void equals_sameValues_returnsTrue() {
+        JsonAdaptedWedding wedding1 = new JsonAdaptedWedding(
+                VALID_NAME, VALID_CLIENT, VALID_DATE, VALID_VENUE);
+        assertTrue(ALICE_JSON.equals(wedding1));
+    }
+
+    @Test
+    public void equals_differentValues_returnsFalse() {
+        JsonAdaptedWedding wedding1 = new JsonAdaptedWedding(
+                "Not Alice", VALID_CLIENT, VALID_DATE, VALID_VENUE);
+        assertFalse(ALICE_JSON.equals(wedding1));
+    }
+    @Test
+    public void hashCode_sameValues_sameHashCode() {
+        JsonAdaptedWedding wedding1 = new JsonAdaptedWedding(
+                VALID_NAME, VALID_CLIENT, VALID_DATE, VALID_VENUE);
+        assertEquals(ALICE_JSON.hashCode(), wedding1.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentValues_differentHashCode() {
+        JsonAdaptedWedding wedding1 = new JsonAdaptedWedding(
+                "Not Alice", VALID_CLIENT, VALID_DATE, VALID_VENUE);
+        assertFalse(ALICE_WEDDING.hashCode() == wedding1.hashCode());
+    }
+
+    @Test
+    public void hashCode_consistentResults() {
+        // Hash code should be consistent across multiple calls
+        int initialHashCode = ALICE_JSON.hashCode();
+        assertEquals(initialHashCode, ALICE_JSON.hashCode());
+        assertEquals(initialHashCode, ALICE_JSON.hashCode());
     }
 }
