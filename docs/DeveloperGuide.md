@@ -101,7 +101,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `EduContactsParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -112,7 +112,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `EduContactsParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `EduContactsParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -159,6 +159,56 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+<box type="info" seamless>
+
+**Note:** The execution of commands mentioned in this section follows a similar path to that depicted in the sequence diagram under the [Logic component](#logic-component) section and will not be discussed in this section.
+
+</box>
+
+### Module feature
+
+The module feature allows users to keep track of modules a `Person` in `EduContacts` is taking. Each `Person` object has a `List<Module>` field that encapsulates the list of modules the Person is taking.
+
+<br>
+
+**Adding a `Module`:**
+
+Users are able to add a `Module` to a `Person`'s list of modules using the `ModuleCommand`. Given below is an example usage scenario of the ModuleCommand.
+
+Step 1. The user launches the application, which is populated with a list of their students. One of the students has `StudentId` of 12345678. Let's refer to this `Person` as Alex.
+
+Step 2. The user executes `module 12345678 m/CS2103T` command to add the CS2103T `Module` to Alex's list of modules. Alex now has a CS2103T `Module` in their list of modules.
+
+<br>
+
+**Editing a `Module`:**
+
+The user is able to edit a `Module` in a `Person`'s list of modules using the `EditCommand`. Given below is an example usage scenario of the EditCommand.
+
+Step 1. The user launches the application, which is populated with a list of their students. One of the students has `StudentId` of 87654321 and a CS2103T `Module` in their list of modules. Let's refer to this `Person` as Bernice.
+
+Step 2. The user executes `edit 12345678 m/CS2103T CS2103` command to edit the CS2103T `Module` to CS2103. Bernice now has a CS2103 `Module` in their list of modules instead of a CS2103T `Module`.
+
+<br>
+
+**Deleting a `Module`:**
+
+The user is able to delete a `Module` from a `Person`'s list of modules using the `DeleteCommand`. Given below is an example usage scenario of the DeleteCommand.
+
+Step 1. The user launches the application, which is populated with a list of their students. One of the students has `StudentId` of 87654321 and a CS2103T `Module` in their list of modules. Let's refer to this `Person` as Bernice.
+
+Step 2. The user executes `delete 12345678 m/CS2103T` command to delete the CS2103T `Module` from Bernice's list of modules. Bernice now no longer has a CS2103T `Module` in their list of modules.
+
+### Grade feature
+
+The grade feature allows users to assign a `Grade` to a `Module` of a `Student` in `EduContacts`. Each `Module` object has a `Grade` field.
+
+Users are able to assign a `Grade` to a `Module` using the `GradeCommand`. Given below is an example usage scenario of the GradeCommand.
+
+Step 1. The user launches the application, which is populated with a list of their students. One of the students has `StudentId` of 87654321 and a CS2103T `Module` in their list of modules. Let's refer to this `Student` as Bernice.
+
+Step 2. The user executes `grade 87654321 m/CS2103T g/A` command to assign an A `Grade` to Bernice's CS2103T `Module`. Bernice now has a CS2103T `Module` graded A in their list of modules.
 
 ### \[Proposed\] Undo/redo feature
 
