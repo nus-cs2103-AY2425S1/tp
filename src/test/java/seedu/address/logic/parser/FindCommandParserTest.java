@@ -8,12 +8,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.HashSet;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.ArgumentPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 
 public class FindCommandParserTest {
 
@@ -27,25 +30,22 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // Person with 1 parameter
-        Person testPerson = new PersonBuilder().withName(VALID_NAME_BOB)
-                .withPhone("__No_Phone__").withEmail("__No_Email__")
-                .withAddress("__No_Address__")
-                .withProjectStatus("__No_Project_Status__")
-                .withPaymentStatus("__No_Payment_Status__").withClientStatus("__No_Client_Status__")
-                .withDeadline("__No_Deadline__").build();
+        Map<String, Object> testParameters = Map.of(
+                "name", new Name(VALID_NAME_BOB),
+                "tags", new HashSet<>()
+                );
         FindCommand expectedFindCommand =
-                new FindCommand(new ArgumentPredicate(testPerson));
+                new FindCommand(new ArgumentPredicate(testParameters));
         assertParseSuccess(parser, NAME_DESC_BOB, expectedFindCommand);
 
         // Person with multiple parameters
-        Person testPersonMultiple = new PersonBuilder().withName(VALID_NAME_BOB)
-                .withPhone("__No_Phone__").withEmail(VALID_EMAIL_BOB)
-                .withAddress("__No_Address__")
-                .withProjectStatus("__No_Project_Status__")
-                .withPaymentStatus("__No_Payment_Status__").withClientStatus("__No_Client_Status__")
-                .withDeadline("__No_Deadline__").build();
+        Map<String, Object> testMultipleParameters = Map.of(
+                "name", new Name(VALID_NAME_BOB),
+                "email", new Email(VALID_EMAIL_BOB),
+                "tags", new HashSet<>()
+        );
         FindCommand expectedSecondFindCommand =
-                new FindCommand(new ArgumentPredicate(testPersonMultiple));
+                new FindCommand(new ArgumentPredicate(testMultipleParameters));
         assertParseSuccess(parser, NAME_DESC_BOB + EMAIL_DESC_BOB, expectedSecondFindCommand);
     }
 

@@ -11,12 +11,10 @@ public class ProjectStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Project status must be either 'in progress' or 'completed' (case insensitive)";
-    public static final String NO_PROJECT_STATUS = "__No_Project_Status__";
+    public static final String PROJECT_STATUS_KEY = "project status";
     private static final String IN_PROGRESS = "in progress";
     private static final String COMPLETE = "completed";
-
     public final boolean isComplete;
-    private boolean isEmpty = false;
 
     /**
      * Constructs a {@code ProjectStatus}.
@@ -25,13 +23,8 @@ public class ProjectStatus {
      */
     public ProjectStatus(String status) {
         requireNonNull(status);
-        if (status.equals(NO_PROJECT_STATUS)) {
-            isComplete = parseStatus("");
-            isEmpty = true;
-        } else {
-            checkArgument(isValidProjectStatus(status), MESSAGE_CONSTRAINTS);
-            isComplete = parseStatus(status);
-        }
+        checkArgument(isValidProjectStatus(status), MESSAGE_CONSTRAINTS);
+        isComplete = parseStatus(status);
     }
 
     /**
@@ -52,9 +45,6 @@ public class ProjectStatus {
 
     @Override
     public String toString() {
-        if (isEmpty) {
-            return "";
-        }
         return isComplete ? COMPLETE : IN_PROGRESS;
     }
 

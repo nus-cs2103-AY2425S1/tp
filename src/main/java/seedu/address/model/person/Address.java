@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Address {
 
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
-    public static final String NO_ADDRESS = "__No_Address__";
+    public static final String ADDRESS_KEY = "address";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -26,12 +26,8 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        if (address.equals(NO_ADDRESS)) {
-            value = "";
-        } else {
-            checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-            value = address;
-        }
+        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        value = address;
     }
 
     /**
@@ -58,7 +54,7 @@ public class Address {
         }
 
         Address otherAddress = (Address) other;
-        return value.equals(otherAddress.value);
+        return value.equalsIgnoreCase(otherAddress.value);
     }
 
     @Override
