@@ -11,7 +11,9 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalTasks;
 
 public class MessagesTest {
 
@@ -60,6 +62,15 @@ public class MessagesTest {
         String expectedOutput = "friend";
 
         String actualOutput = Messages.format(tag);
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void format_task_success() {
+        Task task = TypicalTasks.TODO_TASK;
+        String expectedOutput = task.getDescription();
+
+        String actualOutput = Messages.format(task);
         assertEquals(expectedOutput, actualOutput);
     }
 }

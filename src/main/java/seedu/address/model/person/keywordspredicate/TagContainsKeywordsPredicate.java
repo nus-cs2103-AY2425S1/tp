@@ -27,10 +27,10 @@ public class TagContainsKeywordsPredicate extends TraitContainsKeywordsPredicate
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagContainsKeywordsPredicate otherNameContainsKeywordsPredicate)) {
+        if (!(other instanceof TagContainsKeywordsPredicate otherTagContainsKeywordsPredicate)) {
             return false;
         }
 
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        return keywords.equals(otherTagContainsKeywordsPredicate.keywords);
     }
 }

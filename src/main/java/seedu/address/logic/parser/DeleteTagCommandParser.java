@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FORCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.stream.Stream;
@@ -20,7 +21,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
      */
     public DeleteTagCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_FORCE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -29,7 +30,11 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
-        return new DeleteTagCommand(tag);
+        if (arePrefixesPresent(argMultimap, PREFIX_FORCE)) {
+            return new DeleteTagCommand(tag, true);
+        } else {
+            return new DeleteTagCommand(tag);
+        }
     }
 
     /**

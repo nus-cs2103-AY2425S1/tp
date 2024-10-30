@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.FLORIST;
+import static seedu.address.testutil.TypicalTasks.TODO_TASK;
 import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 
 import java.util.Arrays;
@@ -21,8 +22,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
 
@@ -55,7 +58,8 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         List<Tag> tags = Arrays.asList(FLORIST);
         List<Wedding> weddings = Arrays.asList(AMY_WEDDING);
-        AddressBookStub newData = new AddressBookStub(newPersons, tags, weddings);
+        List<Task> tasks = Arrays.asList(TODO_TASK);
+        AddressBookStub newData = new AddressBookStub(newPersons, tags, weddings, tasks);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -90,6 +94,22 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasVendor_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasVendor(null));
+    }
+
+    @Test
+    public void hasVendor_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasVendor(ALICE));
+    }
+
+    @Test
+    public void hasVendor_vendorInAddressBook_returnsTrue() {
+        addressBook.addVendor(ALICE);
+        assertTrue(addressBook.hasVendor(ALICE));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
@@ -100,18 +120,29 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Vendor> vendors = FXCollections.observableArrayList();
+
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
         private final ObservableList<Wedding> weddings = FXCollections.observableArrayList();
+        private final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Tag> tags, Collection<Wedding> weddings) {
+        AddressBookStub(Collection<Person> persons, Collection<Tag> tags,
+                        Collection<Wedding> weddings, Collection<Task> tasks) {
             this.persons.setAll(persons);
+            this.vendors.setAll(vendors);
             this.tags.setAll(tags);
             this.weddings.setAll(weddings);
+            this.tasks.setAll(tasks);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Vendor> getVendorList() {
+            return vendors;
         }
 
         @Override
@@ -122,6 +153,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Wedding> getWeddingList() {
             return weddings;
+        }
+
+        @Override
+        public ObservableList<Task> getTaskList() {
+            return tasks;
         }
     }
 

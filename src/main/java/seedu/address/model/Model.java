@@ -6,7 +6,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -17,6 +19,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
     Predicate<Wedding> PREDICATE_SHOW_ALL_WEDDINGS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -74,6 +77,23 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Returns true if a vendor with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasVendor(Person person);
+
+    /**
+     * Assigns the given person to be a vendor.
+     * {@code vendor} must not already exist as a vendor in the address book.
+     */
+    void assignVendor(Person person);
+
+    /**
+     * Unassigns the vendor to just be a normal person contact in the WedLinker.
+     */
+    void unassignVendor(Person person);
+
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -85,17 +105,26 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered vendors list */
+    ObservableList<Vendor> getFilteredVendorList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code personPredicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * @throws NullPointerException if {@code personPredicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> personPredicate);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code tagPredicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * @throws NullPointerException if {@code tagPredicate} is null.
      */
     void updateFilteredPersonListByTag(Predicate<Tag> tagPredicate);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code weddingPredicate}.
+     * @throws NullPointerException if {@code weddingPredicate} is null.
+     */
+    void updateFilteredPersonListByWedding(Predicate<Wedding> weddingPredicate);
 
     /**
      * Returns true if a tag with the same name as {@code toAdd} exists in the Wedlinker.
@@ -122,6 +151,39 @@ public interface Model {
      * The tag must exist in the Wedlinker.
      */
     void deleteTag(Tag toDelete);
+
+    /**
+     * Returns true if a task with the same name as {@code toAdd} exists in the Wedlinker.
+     */
+    boolean hasTask(Task toAdd);
+
+    /**
+     * Adds the given task.
+     * {@code task} must not already exist in the address book.
+     */
+    void addTask(Task toAdd);
+
+    /** Returns an unmodifiable view of the filtered task list */
+    ObservableList<Task> getFilteredTaskList();
+
+    /**
+     * Replaces the given Task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     * The task identity of {@code editedTask} must not be the same as another existing Task in the address book.
+     */
+    void setTask(Task target, Task editedTask);
+
+    /**
+     * Deletes the given task.
+     * The task must exist in the Wedlinker.
+     */
+    void deleteTask(Task toDelete);
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTaskList(Predicate<Task> predicate);
 
     /**
      * Returns true if a wedding with the same name as {@code toAdd} exists in the Wedlinker.

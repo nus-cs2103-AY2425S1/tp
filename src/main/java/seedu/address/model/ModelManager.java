@@ -12,7 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -24,8 +26,11 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Vendor> filteredVendors;
     private final FilteredList<Tag> filteredTags;
     private final FilteredList<Wedding> filteredWeddings;
+
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,8 +43,10 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredVendors = new FilteredList<>(this.addressBook.getVendorList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -102,6 +109,9 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        if (addressBook.hasVendor(target)) {
+            addressBook.removeVendor(target);
+        }
     }
 
     @Override
@@ -115,6 +125,25 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
     }
+
+    @Override
+    public boolean hasVendor(Person person) {
+        requireNonNull(person);
+        return addressBook.hasVendor(person);
+    }
+
+    @Override
+    public void assignVendor(Person person) {
+        requireNonNull(person);
+        addressBook.addVendor(person);
+    }
+
+    @Override
+    public void unassignVendor(Person person) {
+        requireNonNull(person);
+        addressBook.removeVendor(person);
+    }
+
 
     @Override
     public void addTag(Tag tag) {
@@ -137,6 +166,28 @@ public class ModelManager implements Model {
     @Override
     public void deleteTag(Tag target) {
         addressBook.removeTag(target);
+    }
+
+    @Override
+    public void addTask(Task task) {
+        addressBook.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+        addressBook.setTask(target, editedTask);
+    }
+
+    @Override
+    public void deleteTask(Task target) {
+        addressBook.removeTask(target);
     }
 
     @Override
@@ -174,6 +225,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Vendor> getFilteredVendorList() {
+        return filteredVendors;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
@@ -197,6 +253,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+    @Override
     public ObservableList<Wedding> getFilteredWeddingList() {
         return filteredWeddings;
     }
@@ -205,6 +271,12 @@ public class ModelManager implements Model {
     public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
         requireNonNull(predicate);
         filteredWeddings.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredPersonListByWedding(Predicate<Wedding> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(person -> person.getWeddings().stream().anyMatch(predicate));
     }
 
     @Override
@@ -223,6 +295,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTags.equals(otherModelManager.filteredTags)
+                && filteredTasks.equals(otherModelManager.filteredTasks)
                 && filteredWeddings.equals(otherModelManager.filteredWeddings);
     }
 }
