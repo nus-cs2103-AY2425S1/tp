@@ -37,6 +37,12 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
+    /**
+     * Remakes the {@code ListView<Person> personListView} such that contact cards
+     * that the user has requested to view are expanded {@code PersonCardFull}.
+     *
+     * @param indexToToggle The index that the user wishes to toggle the view status on.
+     */
     public void updateViewedPersons(Optional<Index> indexToToggle) {
         assert indexToToggle.isPresent() : "Index should not be empty at this point";
         int index = indexToToggle.get().getZeroBased();
