@@ -142,6 +142,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        // Fix undefined behaviour while help window is closed
+        if (helpWindow.getRoot().isIconified()) {
+            helpWindow.getRoot().setIconified(false);
+            helpWindow.getRoot().toFront();
+        }
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {

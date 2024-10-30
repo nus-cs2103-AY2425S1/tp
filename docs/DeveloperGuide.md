@@ -160,6 +160,24 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Implemented Undo feature
+
+Each `Command` has its `undo()` method that undoes what the command executed.
+Each command stores the necessary information to undo the execution.
+All successful commands done by the user is stored in a `CommandLog`.
+
+When `undo` is executed, the latest command in `CommandLog` is retrieved and that command's `undo()` method is called.
+
+The following sequence diagram shows how an undo operation goes through the `Logic` component:
+
+<puml src="diagrams/UndoSequenceDiagramNew-Logic.puml" alt="UndoSequenceDiagramNew-Logic" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `UndoCommand` and `Command` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -242,11 +260,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1:** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 2 (current choice):** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.

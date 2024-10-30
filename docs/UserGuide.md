@@ -17,7 +17,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
+1. Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).
 
@@ -30,7 +30,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all contacts, this is useful after you filter the address book using commands such as `find`.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -40,8 +40,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
-
+1. Refer to the [Features](#features) below for more details.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -50,32 +49,79 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.  
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets are **optional**.  
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can be used multiple times.  
+  e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order.  
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.  
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+**Commamnd PopUp:**<br>
+
+![CommandPopUp](images/commandpopup.png)
+
+We have implemented a Command Suggestion PopUp for your convenience!
+
+As long as the command box is currently the UI element **in focus** and **at least one** character is detected inside the command box, it will suggest the possible commands that you can autocomplete it to.
+
+Underneath each suggested command is the syntax for that command and what parameters are needed to complete it
+* To access the autocomplete functionality press `shift + up` or `shift + down` while the popup is open and it will highlight the **current selection** in **blue**.  
+   _In the image the **current selection** would be `editgame`._
+
+* If your **current selection** is correct press `tab` to autocomplete it within the command box.
+
+* The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
+
 </box>
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+| Action        | Format, Examples                                                                                                                                                                                               |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**      | `help`                                                                                                                                                                                                         |
+| **List**      | `list`                                                                                                                                                                                                         |
+| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague pt/2130` |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]… [pt/TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
+| **EditGame**  | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                                       |
+| **FavGame**   | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                        |
+| **UnFavGame** | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                    |
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                     |
+| **FindTime**  | `find TIME-TIME [TIME-TIME]`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                         |
+| **Clear**     | `clear`                                                                                                                                                                                                        |
+| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                            |
+| **Save**      | `save`                                                                                                                                                                                                         |
+| **Load**      | `load`                                                                                                                                                                                                         |
+| **Exit**      | `exit`                                                                                                                                                                                                         |
+
+--------------------------------------------------------------------------------------------------------------------
+## Commands
 
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
+ 
+Can also be accessed by pressing `F1`. Pressing `F1` again or `esc` will close the window if it is in **focus**.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
 
 ### Adding a person: `add`
 
@@ -85,7 +131,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... [pt/
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags, games and preferred times(including 0)   
+**Tip:** A person can have any number of tags, games and preferred times (including 0)   
 **Tip:** PREFERRED TIME should be in the form of "Day HHmm" with exactly 1 space in between
 </box>
 
@@ -93,11 +139,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal pt/Monday 2100`
 
-### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
-
-Format: `list`
 
 ### Editing a person : `edit`
 
@@ -114,7 +156,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Matthew g/Overwatch` Edits the name of the 2nd person to be `Matthew` with game `Overwatch`.
+*  `edit 2 n/Matthew g/Overwatch g/Valorant` Edits the name of the 2nd person to be `Matthew` with games `Overwatch` and `Valorant`.
 *  `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and preferred times.
 
 ### Editing a game : `editgame`
@@ -130,6 +172,32 @@ Format: `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`
 Examples:
 *  `editgame 1 g/Overwatch u/Potato` Edits the username of game `Overwatch` of the 1st person to be `Potato`.
 *  `editgame 2 g/League of Legends u/Potato s/Pro r/Support` Edits the game `League of Legends` of the 2nd person to have the following information: Username: `Potato` Skill level: `Pro` Role: `Support`
+
+### Favouriting a game : `favgame`
+
+Gives a **singular** game under an existing person in the address book the "favourite" status.
+
+Format: `favgame INDEX g/GAME`
+
+* Favourites the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Favourited games are denoted by a star icon.
+* There will be no observable change if this command is used on a game that is already given the "favourite" status.
+
+Examples:
+* `favgame 2 g/Overwatch` Sets the game "Overwatch" of the 2nd person to "favourite".
+
+### Un-favouriting a game : `unfavgame`
+
+Removes the "favourite" status from a **singular** game under an existing person in the address book.
+
+Format: `unfavgame INDEX g/GAME`
+
+* Un-favourites the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Once un-favourited, the star icon for that particular game should disappear.
+* There will be no observable change if this command is used on a game that is not set to "favourite".
+
+Examples:
+* `unfavgame 3 g/LoL` Remove the "favourite" status from the game "LoL" of the 3rd person.
 
 ### Locating persons by name: `find`
 
@@ -148,6 +216,27 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating persons by time range: `findtime`
+
+Finds persons whose preferred time ranges overlap with any of given time range.
+
+Format: `findtime RANGE [MORE_RANGE]`
+
+<box type="tip" seamless>
+
+**Tip:** RANGE should be in the form of "HHmm-HHmm" with no extra space 
+and `HHmm` should be valid 0000-2359 4-digit number, while the first time should be before the second time
+</box>
+
+* The search is border-insensitive. e.g. `1200-1300` will not match `1300-1400`
+* The order of ranges does not matter.
+* Persons matching at least one range will be returned(i.e. `OR` search).
+
+Examples:
+* `findtime 2030-2100` returns persons who have at least one preferred time range overlaps with the specified range.
+* `findtime 2030-2100 2230-2330` returns persons with any preferred time range overlapping with any 
+one of the specified ranges<br>
 
 ### Deleting a person : `delete`
 
@@ -221,18 +310,3 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/PREFERRED TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]… [pt/PREFERRED TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Edit Game**   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Save**   | `save`
-**Load**   | `load`

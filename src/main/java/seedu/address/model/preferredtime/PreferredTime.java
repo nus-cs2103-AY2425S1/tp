@@ -5,9 +5,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents a Person's preferred time to play games in the gamer book.
@@ -23,6 +25,7 @@ public class PreferredTime {
     public static final Pattern VALIDATED_PATTERN = Pattern.compile(VALIDATION_REGEX);
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
+    private static final Logger logger = LogsCenter.getLogger(PreferredTime.class);
 
     public final String preferredTime;
     public final LocalTime start;
@@ -53,6 +56,7 @@ public class PreferredTime {
      */
     public static boolean isValidPreferredTime(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
+            logger.finer("This user input doesn't align with validation pattern: " + VALIDATION_REGEX);
             return false;
         }
 
@@ -68,13 +72,16 @@ public class PreferredTime {
         Matcher matchEnd = Pattern.compile(TIME_CHECK).matcher(end);
 
         if (!matchStart.matches() || !matchEnd.matches()) {
+            logger.finer("This user input has invalid time: " + test);
             return false;
         }
+
+        logger.fine("This user input matches the requirement!");
         return LocalTime.parse(start, TIME_FORMATTER).isBefore(LocalTime.parse(end, TIME_FORMATTER));
     }
 
     public boolean overlaps(PreferredTime other) {
-        return !(end.isBefore(other.start) || start.isAfter(other.end));
+        return !(!end.isAfter(other.start) || !start.isBefore(other.end));
     }
 
     @Override

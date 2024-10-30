@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.CommandLog;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,6 +25,9 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    private CommandLog commandLog;
+    private Predicate<Person> currentPredicate = PREDICATE_SHOW_ALL_PERSONS;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -34,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        commandLog = new CommandLog();
     }
 
     public ModelManager() {
@@ -111,6 +117,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void insertPerson(Person person, int index) {
+        requireNonNull(person);
+        addressBook.insertPerson(person, index);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -125,7 +137,18 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        currentPredicate = predicate;
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Predicate<Person> getCurrentPredicate() {
+        return currentPredicate;
+    }
+
+    @Override
+    public int getAddressBookIndex(int index) {
+        return filteredPersons.getSourceIndex(index);
     }
 
     @Override
@@ -143,6 +166,18 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Command Log =============================================================
+
+    @Override
+    public void addCommandToLog(Command command) {
+        commandLog.add(command);
+    }
+
+    @Override
+    public Command getPreviousCommand() {
+        return commandLog.undo();
     }
 
 }
