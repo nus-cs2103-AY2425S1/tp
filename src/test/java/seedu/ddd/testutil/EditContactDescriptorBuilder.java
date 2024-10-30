@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditContactCommand.EditContactDescriptor;
 import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;

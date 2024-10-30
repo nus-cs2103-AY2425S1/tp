@@ -20,8 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.ddd.commons.core.index.Index;
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
+import seedu.ddd.logic.commands.EditContactCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditContactCommand.EditVendorDescriptor;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.logic.parser.CliFlags;
 import seedu.ddd.model.AddressBook;

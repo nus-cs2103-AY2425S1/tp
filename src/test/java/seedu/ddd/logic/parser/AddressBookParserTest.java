@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.logic.commands.ClearCommand;
 import seedu.ddd.logic.commands.DeleteCommand;
 import seedu.ddd.logic.commands.EditCommand;
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditContactCommand;
+import seedu.ddd.logic.commands.EditContactCommand.EditContactDescriptor;
 import seedu.ddd.logic.commands.ExitCommand;
 import seedu.ddd.logic.commands.HelpCommand;
 import seedu.ddd.logic.commands.ListCommand;
@@ -55,7 +56,7 @@ public class AddressBookParserTest {
         descriptor.setId(null);
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_CONTACT.getOneBased() + " " + ContactUtil.getEditContactDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_CONTACT, descriptor), command);
+        assertEquals(new EditContactCommand(INDEX_FIRST_CONTACT, descriptor), command);
     }
 
     @Test

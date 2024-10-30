@@ -1,6 +1,6 @@
 package seedu.ddd.testutil;
 
-import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
+import seedu.ddd.logic.commands.EditContactCommand.EditVendorDescriptor;
 import seedu.ddd.model.contact.vendor.Service;
 import seedu.ddd.model.contact.vendor.Vendor;
 

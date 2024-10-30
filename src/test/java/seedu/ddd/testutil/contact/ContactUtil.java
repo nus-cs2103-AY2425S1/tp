@@ -9,7 +9,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditContactCommand.EditContactDescriptor;
 import seedu.ddd.model.common.Tag;
 
 /**

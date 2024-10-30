@@ -12,7 +12,6 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
  * Edits the details of either a contact or an event in the address book.
  */
 public abstract class EditCommand extends Command {
-
     public static final String COMMAND_WORD = "edit";
 
     public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": edits a contact";
@@ -33,4 +32,5 @@ public abstract class EditCommand extends Command {
             + COMMAND_USAGE + "\n"
             + INDEX_EXAMPLE_USAGE + "\n"
             + ID_EXAMPLE_USAGE;
+
 }
