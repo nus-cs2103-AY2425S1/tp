@@ -34,8 +34,8 @@ class JsonAdaptedEvent {
     public JsonAdaptedEvent(@JsonProperty("name") String name,
                             @JsonProperty("time") JsonAdaptedTime time,
                             @JsonProperty("venue") String venue,
-                            @JsonProperty("celebrity") String celebrityName,
-                            @JsonProperty("contacts") List<String> contactNames) {
+                            @JsonProperty("celebrityName") String celebrityName,
+                            @JsonProperty("contactNames") List<String> contactNames) {
         this.name = name;
         this.time = time;
         this.venue = venue;
