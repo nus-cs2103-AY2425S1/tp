@@ -145,6 +145,80 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void removeLastViewedPerson_personExists_removesSuccessfully() {
+        modelManager.addPerson(ALICE);
+        modelManager.updateLastViewedPerson(ALICE);
+
+        modelManager.removeLastViewedPerson();
+
+        assertTrue(modelManager.getLastViewedPerson().get().isEmpty());
+    }
+
+    @Test
+    public void removeLastViewedPerson_noPersonExists_remainsEmpty() {
+        modelManager.removeLastViewedPerson();
+
+        assertTrue(modelManager.getLastViewedPerson().get().isEmpty());
+    }
+
+    @Test
+    public void isLastViewPersonAvailable_personExists_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.updateLastViewedPerson(ALICE);
+
+        assertTrue(modelManager.isLastViewPersonAvailable());
+    }
+
+    @Test
+    public void isLastViewPersonAvailable_noPersonExists_returnsFalse() {
+        assertFalse(modelManager.isLastViewPersonAvailable());
+    }
+
+    @Test
+    public void isLastViewPersonAvailable_afterRemoval_returnsFalse() {
+        modelManager.addPerson(ALICE);
+        modelManager.updateLastViewedPerson(ALICE);
+        modelManager.removeLastViewedPerson();
+
+        assertFalse(modelManager.isLastViewPersonAvailable());
+    }
+
+    @Test
+    public void isSamePersonAsPersonOnDisplay_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.isSamePersonAsPersonOnDisplay(null));
+    }
+
+    @Test
+    public void isSamePersonAsPersonOnDisplay_noPersonOnDisplay_returnsFalse() {
+        assertFalse(modelManager.isSamePersonAsPersonOnDisplay(ALICE));
+    }
+
+    @Test
+    public void isSamePersonAsPersonOnDisplay_samePerson_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.updateLastViewedPerson(ALICE);
+
+        assertTrue(modelManager.isSamePersonAsPersonOnDisplay(ALICE));
+    }
+
+    @Test
+    public void isSamePersonAsPersonOnDisplay_differentPerson_returnsFalse() {
+        modelManager.addPerson(ALICE);
+        modelManager.updateLastViewedPerson(ALICE);
+
+        assertFalse(modelManager.isSamePersonAsPersonOnDisplay(BENSON));
+    }
+
+    @Test
+    public void isSamePersonAsPersonOnDisplay_afterRemoval_returnsFalse() {
+        modelManager.addPerson(ALICE);
+        modelManager.updateLastViewedPerson(ALICE);
+        modelManager.removeLastViewedPerson();
+
+        assertFalse(modelManager.isSamePersonAsPersonOnDisplay(ALICE));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
