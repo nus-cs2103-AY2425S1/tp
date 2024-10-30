@@ -32,4 +32,11 @@ public enum Status {
             throw new IllegalValueException(MESSAGE_CONSTRAINTS);
         }
     }
+
+    /**
+     * Returns value of the status as a string.
+     */
+    public String getValue() {
+        return this.toString().toLowerCase();
+    }
 }

@@ -12,10 +12,10 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 
 /**
@@ -31,8 +31,7 @@ public class UnmarkOrderCommand extends Command {
 
     public static final String MESSAGE_UNMARK_ORDER_SUCCESS =
             "The order has been reverted to the pending status: %1$s";
-    public static final String MESSAGE_ORDER_ALREADY_UNMARKED_WARNING = "Note: "
-            + "This order is already in the pending status";
+    public static final String MESSAGE_ORDER_ALREADY_UNMARKED = "The order has not been marked as completed.";
 
     private final Index index;
 
@@ -60,12 +59,13 @@ public class UnmarkOrderCommand extends Command {
         }
 
         Order orderToUnmark = filteredOrderList.get(index.getZeroBased());
+        if (orderToUnmark.getStatus() == Status.PENDING) {
+            throw new CommandException(MESSAGE_ORDER_ALREADY_UNMARKED);
+        }
+
         Order newOrder = createUnmarkedOrder(orderToUnmark);
         model.setOrder(orderToUnmark, newOrder);
-        String feedbackToUser = (orderToUnmark.getStatus() == Status.PENDING)
-                ? MESSAGE_ORDER_ALREADY_UNMARKED_WARNING : "";
-        return new CommandResult(
-                feedbackToUser + String.format(MESSAGE_UNMARK_ORDER_SUCCESS, Messages.format(newOrder)));
+        return new CommandResult(String.format(MESSAGE_UNMARK_ORDER_SUCCESS, Messages.format(newOrder)));
     }
 
     /**
@@ -76,10 +76,10 @@ public class UnmarkOrderCommand extends Command {
 
         Item item = order.getItem();
         Date date = order.getDate();
-        Count count = order.getCount();
+        Quantity quantity = order.getQuantity();
         Status status = Status.PENDING;
 
-        return new Order(item, count, date, status);
+        return new Order(item, quantity, date, status);
     }
 
     @Override

@@ -12,10 +12,10 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 
 /**
@@ -30,8 +30,7 @@ public class MarkOrderCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_MARK_ORDER_SUCCESS = "The order has been marked as completed: %1$s";
-    public static final String MESSAGE_ORDER_ALREADY_MARKED_WARNING = "Note: "
-            + "This order is already marked as completed";
+    public static final String MESSAGE_ORDER_ALREADY_MARKED = "The order has already been marked as completed.";
 
     private final Index index;
 
@@ -59,13 +58,13 @@ public class MarkOrderCommand extends Command {
         }
 
         Order orderToMark = filteredOrderList.get(index.getZeroBased());
+        if (orderToMark.getStatus() == Status.COMPLETED) {
+            throw new CommandException(MESSAGE_ORDER_ALREADY_MARKED);
+        }
+
         Order newOrder = createMarkedOrder(orderToMark);
         model.setOrder(orderToMark, newOrder);
-        String feedbackToUser = (orderToMark.getStatus() == Status.COMPLETED)
-                ? MESSAGE_ORDER_ALREADY_MARKED_WARNING : "";
-        return new CommandResult(
-                feedbackToUser + String.format(MESSAGE_MARK_ORDER_SUCCESS, Messages.format(newOrder)));
-
+        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, Messages.format(newOrder)));
     }
 
     /**
@@ -76,10 +75,10 @@ public class MarkOrderCommand extends Command {
 
         Item item = order.getItem();
         Date date = order.getDate();
-        Count count = order.getCount();
+        Quantity quantity = order.getQuantity();
         Status status = Status.COMPLETED;
 
-        return new Order(item, count, date, status);
+        return new Order(item, quantity, date, status);
     }
 
     @Override

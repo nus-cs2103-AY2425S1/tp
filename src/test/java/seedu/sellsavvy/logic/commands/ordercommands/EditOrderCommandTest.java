@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DESC_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DESC_BOTTLE;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_COUNT_ATLAS;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_COUNT_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_OUTDATED;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_ATLAS;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
@@ -63,10 +65,10 @@ public class EditOrderCommandTest {
         Order lastOrder = model.getFilteredOrderList().get(indexLastOrder.getZeroBased());
 
         OrderBuilder orderInList = new OrderBuilder(lastOrder);
-        Order editedOrder = orderInList.withCount(VALID_COUNT_ATLAS)
+        Order editedOrder = orderInList.withQuantity(VALID_QUANTITY_ATLAS)
                 .withDate(VALID_DATE_ATLAS).build();
 
-        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withQuantity(VALID_COUNT_ATLAS)
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withQuantity(VALID_QUANTITY_ATLAS)
                 .withDate(VALID_DATE_ATLAS).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(indexLastOrder, descriptor);
 
@@ -105,7 +107,7 @@ public class EditOrderCommandTest {
     }
 
     @Test
-    public void execute_duplicateOrderUnfilteredList_warning() {
+    public void execute_duplicateOrderUnfilteredList_warningGiven() {
         Order firstOrder = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(firstOrder).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_THIRD_PERSON, descriptor);
@@ -121,9 +123,29 @@ public class EditOrderCommandTest {
     }
 
     @Test
+    public void execute_orderHasElapsed_warningGiven() {
+        Index indexLastOrder = Index.fromOneBased(model.getFilteredOrderList().size());
+        Order lastOrder = model.getFilteredOrderList().get(indexLastOrder.getZeroBased());
+
+        OrderBuilder orderInList = new OrderBuilder(lastOrder);
+        Order editedOrder = orderInList.withDate(VALID_DATE_OUTDATED).build();
+
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withDate(VALID_DATE_OUTDATED).build();
+        EditOrderCommand editOrderCommand = new EditOrderCommand(indexLastOrder, descriptor);
+
+        String expectedMessage = String.format(MESSAGE_OUTDATED_WARNING
+                + EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder));
+
+        Model expectedModel = model.createCopy();
+        expectedModel.setOrder(expectedModel.getFilteredOrderList().get(indexLastOrder.getZeroBased()), editedOrder);
+
+        assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidOrderIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
-        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withQuantity(VALID_COUNT_BOTTLE).build();
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withQuantity(VALID_QUANTITY_BOTTLE).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);

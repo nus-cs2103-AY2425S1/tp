@@ -104,6 +104,6 @@ public class DeleteOrderCommandTest {
     private void showNoOrder(Model model) {
         model.updateFilteredPersonList(p -> false);
 
-        assertTrue(model.getSelectedPerson().get().getOrderList().size() == 0);
+        assertTrue(model.getSelectedOrderList().size() == 0);
     }
 }
