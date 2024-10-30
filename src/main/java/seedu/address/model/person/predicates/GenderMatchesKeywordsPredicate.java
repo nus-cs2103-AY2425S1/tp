@@ -18,6 +18,11 @@ public class GenderMatchesKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
 
+    /**
+     * Constructs a {@code GenderMatchesKeywordsPredicate}.
+     *
+     * @param keywords A list of valid keywords
+     */
     public GenderMatchesKeywordsPredicate(List<String> keywords) {
         for (String k : keywords) {
             checkArgument(isValidInput(k), MESSAGE_CONSTRAINTS);
