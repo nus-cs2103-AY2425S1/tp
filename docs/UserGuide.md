@@ -120,7 +120,7 @@ Format: `list`
 
 Edits an existing student in the app.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​ [r/REMARK]`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -132,6 +132,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 r/Weak in Science` Edits the remark of the 3rd student to be `Weak in Science`
 
 ### Locating students by name: `find`
 
@@ -214,6 +215,13 @@ Format: `grade studentIndex/INDEX assignmentIndex/INDEX score/ASSIGNMENT_SCORE`
 Examples:
 * `grade studentIndex/1 assignmentIndex/1 score/100`
 
+### Adding a remark to a student: `remark`
+Adds a remark to a existing student in the displayed list.
+
+Format: `remark studentIndex/INDEX r/REMARK`
+
+Examples:
+* `remark studentIndex/1 r/Weak in Math`
 
 ### Clearing all entries : `clear`
 
@@ -270,7 +278,7 @@ Action            | Format, Examples
 **View**          | `view INDEX`<br> e.g., `view_student 3`
 **Clear**         | `clear`
 **Delete**        | `delete INDEX`<br> e.g., `delete 3`
-**Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [r/REMARK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**          | `list`
 **Help**          | `help`
