@@ -197,18 +197,27 @@ public class MainWindow extends UiPart<Stage> {
 
     private void applyTheme(String theme) {
         primaryStage.getScene().getStylesheets().clear();
+
         if (theme.equals("light")) {
-            primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/LightTheme.css")
-                    .toExternalForm());
-            primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/LightExtensions.css")
-                    .toExternalForm());
+            String lightTheme = getClass().getResource("/view/LightTheme.css").toExternalForm();
+            assert lightTheme != null : "LightTheme.css is not found";
+            primaryStage.getScene().getStylesheets().add(lightTheme);
+
+            String lightExtensions = getClass().getResource("/view/LightExtensions.css").toExternalForm();
+            assert lightExtensions != null : "LightExtensions.css is not found";
+            primaryStage.getScene().getStylesheets().add(lightExtensions);
+
         } else if (theme.equals("dark")) {
-            primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/DarkTheme.css")
-                    .toExternalForm());
-            primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/DarkExtensions.css")
-                    .toExternalForm());
+            String darkTheme = getClass().getResource("/view/DarkTheme.css").toExternalForm();
+            assert darkTheme != null : "DarkTheme.css is not found";
+            primaryStage.getScene().getStylesheets().add(darkTheme);
+
+            String darkExtensions = getClass().getResource("/view/DarkExtensions.css").toExternalForm();
+            assert darkExtensions != null : "DarkExtensions.css is not found";
+            primaryStage.getScene().getStylesheets().add(darkExtensions);
         }
     }
+
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
