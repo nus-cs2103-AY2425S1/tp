@@ -23,10 +23,9 @@ public class ApptCommand extends Command {
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
     public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds an appointment to the patient with the given NRIC. "
-        + "Format: appt dt/YYYY-MM-DDTHH:MM h/HEALTHSERVICE i/NRIC \n"
-        + "Example: " + COMMAND_WORD + " dt/2022-12-31T14:00 h/Blood Test i/S1234567A";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records appointment times for registered patients "
+            + "into the system\n"
+            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
     private final Appt appt;
     private final Nric nric;

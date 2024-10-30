@@ -23,17 +23,12 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters patients based on their appointment dates and"
-            + " healthservices. Parameters : "
-            + PREFIX_STARTDATE + "START_DATE "
-            + PREFIX_ENDDATE + "END_DATE "
-            + "[" + PREFIX_HEALTHSERVICE + "HEALTHSERVICE] ...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STARTDATE + "2024-08-30 "
-            + PREFIX_ENDDATE + "2024-11-30 "
-            + PREFIX_HEALTHSERVICE + "VACCINATION";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters existing patient records based on their"
+            + "appointment dates and health services\n"
+            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
-    public static final String MESSAGE_SUCCESS = "List of patients sorted based on their appointment dates";
+    public static final String MESSAGE_SUCCESS = "List of patients sorted based on their appointment dates\n"
+            + "Input \"home\" to return to home page";
 
     private final AppointmentDateFilter dateFilter;
 

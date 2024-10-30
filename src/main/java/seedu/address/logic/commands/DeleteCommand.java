@@ -19,9 +19,8 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the patient identified by the NRIC used in the displayed patient list.\n"
-            + "Parameters: NRIC (must be a valid NRIC)\n"
-            + "Example: " + COMMAND_WORD + " S1234567A";
+            + ": Deletes an existing patient record from the system\n"
+            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
     public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
 
