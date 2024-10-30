@@ -54,7 +54,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
-**Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/yeoh d/Friday`
+**Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **List**   | `list`
 **Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
@@ -182,14 +182,14 @@ Format: `income`
 
 ### Finding students' information: `find`
 
-Finds students whose names contain any of the given keywords or whose tuition day contains any of the given days.
+Finds students whose names contain any of the given keywords *and* their tuition day contains any of the given days.
 
-Format: `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`
+Format: `find [n/KEYWORD [MORE_KEYWORDS...]] [d/DAY [MORE_DAYS...]]`
 
 Examples:
 * `find n/alex` returns `Alex Yeoh` and `Alex Tan`
-* `find n/yeoh d/Friday` returns `Alex Yeoh`, `Alex Tan`<br>
-  ![result for `find n/yeoh d/Friday`](images/findResult.png)
+* `find n/Alex d/Friday` returns `Alex Yeoh`<br>
+  ![result for `find n/Alex d/Friday`](images/findResult.png)
 
 <box type="important" header="##### Constraints">
 <markdown>
@@ -201,18 +201,20 @@ Examples:
 
 <box type="tip" header="##### Tips">
 <markdown>
+* The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list).
+<br> i.e. The `find` command will not be affected by the previous `find` command. 
 * The search is case-insensitive. e.g. `alex` will match `Alex`
 * Only full words will be matched e.g. `alex` will not match `Alexander`
 * The order of the parameters does not matter. 
-<br/>e.g. `find d/Friday n/yeoh` will return the same result as `find n/yeoh d/Friday`
+<br/>e.g. `find d/Friday n/Alex` will return the same result as `find n/Alex d/Friday`
 * The search finds all the students whose 
-    1. names matches at least one of the keywords **OR** 
+    1. names matches at least one of the keywords **AND** 
     2. the tuition day matches the days.
 
-  e.g. `find n/yeoh d/Friday` returns `Alex Yeoh`, `Alex Tan` because:
+  e.g. `find n/Alex d/Friday` returns `Alex Tan` because:
 
-* `Alex Yeoh` matches keyword `yeoh`
-* `Alex Tan` has a tuition on `Friday`.
+* while `Alex Yeoh` and `Alex Tan` matches keyword `Alex`,
+* only `Alex Tan` has a tuition on `Friday`.
 </markdown>
 </box>
 
