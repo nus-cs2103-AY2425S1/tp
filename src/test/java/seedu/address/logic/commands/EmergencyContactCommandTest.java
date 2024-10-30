@@ -43,7 +43,7 @@ public class EmergencyContactCommandTest {
                 new EmergencyContact(editedPerson.getEmergencyContact().contactName,
                         editedPerson.getEmergencyContact().contactNumber));
         String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS,
-                editedPerson);
+                editedPerson.getName(), EMERGENCY_CONTACT_NAME_STUB, EMERGENCY_CONTACT_NUMBER_STUB);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(thirdPerson, editedPerson);
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
@@ -59,7 +59,7 @@ public class EmergencyContactCommandTest {
                 new EmergencyContact(editedPerson.getEmergencyContact().contactName,
                         editedPerson.getEmergencyContact().contactNumber));
         String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS,
-                editedPerson);
+                editedPerson.getName(), EMERGENCY_CONTACT_NAME_STUB, EMERGENCY_CONTACT_NUMBER_STUB);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
@@ -74,7 +74,7 @@ public class EmergencyContactCommandTest {
                 new EmergencyContact(editedPerson.getEmergencyContact().contactName,
                         editedPerson.getEmergencyContact().contactNumber));
         String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS,
-                editedPerson);
+                editedPerson.getName(), EMERGENCY_CONTACT_NAME_STUB, EMERGENCY_CONTACT_NUMBER_STUB);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(fourthPerson, editedPerson);
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
@@ -89,7 +89,7 @@ public class EmergencyContactCommandTest {
                 new EmergencyContact(editedPerson.getEmergencyContact().contactName,
                         editedPerson.getEmergencyContact().contactNumber));
         String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS,
-                editedPerson);
+                editedPerson.getName(), EMERGENCY_CONTACT_NAME_STUB, EMERGENCY_CONTACT_NUMBER_STUB);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(fifthPerson, editedPerson);
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
@@ -147,7 +147,7 @@ public class EmergencyContactCommandTest {
                 new EmergencyContact(editedPerson.getEmergencyContact().contactName,
                         editedPerson.getEmergencyContact().contactNumber));
         String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_EMERGENCY_CONTACT_EXISTS,
-                editedPerson);
+                editedPerson.getName());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
     }

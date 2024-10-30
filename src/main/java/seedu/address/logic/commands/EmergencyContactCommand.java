@@ -31,8 +31,8 @@ public class EmergencyContactCommand extends Command {
             + PREFIX_NAME + "Richard Ng "
             + PREFIX_PHONE + "82943718";
 
-    public static final String MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS = "Added emergency contact to Person: %1$s";
-    public static final String MESSAGE_EMERGENCY_CONTACT_EXISTS = "Person: %1$s Already has a saved emergency contact";
+    public static final String MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS = "Added emergency contact to %1$s: %2$s, %3$s";
+    public static final String MESSAGE_EMERGENCY_CONTACT_EXISTS = "%1$s already has a saved emergency contact";
 
     public static final String MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS = "Please make sure both name and phone "
             + "number is filled! Command details:\n" + MESSAGE_USAGE;
@@ -77,11 +77,12 @@ public class EmergencyContactCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS, personToEdit);
+        return String.format(MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS, personToEdit.getName(),
+                emergencyContact.contactName, emergencyContact.contactNumber);
     }
 
     private String generateEmergencyContactExistsMessage(Person personToEdit) {
-        return String.format(MESSAGE_EMERGENCY_CONTACT_EXISTS, personToEdit);
+        return String.format(MESSAGE_EMERGENCY_CONTACT_EXISTS, personToEdit.getName());
     }
 
     @Override
