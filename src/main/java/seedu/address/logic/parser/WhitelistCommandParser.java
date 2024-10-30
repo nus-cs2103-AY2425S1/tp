@@ -31,6 +31,7 @@ public class WhitelistCommandParser implements Parser<WhitelistCommand> {
     public WhitelistCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CLIENT_STATUS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CLIENT_STATUS);
 
         Index index;
         ClientStatus newClientStatus;
