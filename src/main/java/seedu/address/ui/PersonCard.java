@@ -68,6 +68,11 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().getValueForUI());
         Image email = new Image(getClass().getResourceAsStream("/images/email_icon.png"));
         emailIcon.setImage(email);
+        String notesText = person.getNotes().toString();
+        if (!notesText.isBlank()) {
+            Label notesLabel = new Label("Notes"); // Create a label with notes
+            tags.getChildren().add(notesLabel); // Add notes label to the tags FlowPane
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
