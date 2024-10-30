@@ -608,6 +608,25 @@ Deleting a patient while all patients are being shown
    4. Other incorrect delete commands to try: `delete`, `delete x`(where x is an `NRIC` that does not exist in the patient list)
       Expected: Similar to previous.
 
+### Setting Priority for a patient
+
+Setting a specified Priority for a patient
+
+
+1. Prerequisites: Ensure that a patient with the NRIC `S1234567A` is in the patient list.
+    
+2. Test case: `setPriority i/S1234567A !/HIGH`
+
+   Expected: Patient with the NRIC `S1234567A` will have its Priority Level set to `HIGH`. A success message is shown with the patient's NRIC.
+
+3. Test case: `setPriority`
+
+   Expected: No Priority is set to any patient. An error message is shown with details of the error.
+
+4. Other incorrect find commands to try: `setPriority x` (where x is neither `NONE`, `LOW`, `MEDIUM` OR `HIGH`)
+   Expected: Similar to previous.
+
+[Back to Table of Contents](#table-of-contents)
 ### Finding a patient by their medical condition
 
 Finding a patient by providing keyword(s) from their medical condition
