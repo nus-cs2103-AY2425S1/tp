@@ -272,12 +272,6 @@ public class InspectWindow extends UiPart<Stage> {
         windowY = primaryStage.getY();
         isMaximized = primaryStage.isMaximized();
         isFullScreen = primaryStage.isFullScreen();
-        System.out.println(windowWidth);
-        System.out.println(windowHeight);
-        System.out.println(windowX);
-        System.out.println(windowY);
-        System.out.println(isMaximized);
-        System.out.println(isFullScreen);
     }
 
     /**

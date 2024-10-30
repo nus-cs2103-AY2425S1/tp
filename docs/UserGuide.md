@@ -62,9 +62,9 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
 <box type="info" seamless>
 
 **Notes about the command format:**
-* There are two windows in this program:<br>
-  - Main window: the default window you see when opening LogiLink.<br> 
-  - Inspect window: the window you see when inspecting a contact.
+* There are two windows in this program:
+  - Main window: the default window you see when opening LogiLink.
+  - Inspect window: the window you see when inspecting a contact.<br></br>
 
 * Words in `UPPER_CASE` are parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -85,7 +85,8 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
 </box>
 
 ### Viewing help : `help`
-#### <mark>When in the main or inspect window<br>
+**<ins>When in the main or inspect window**
+
 Shows a message explaning how to access the help page.
 
 Format: `help`
@@ -93,29 +94,42 @@ Format: `help`
 ![help message](images/helpMessage.png)
 
 ### Adding a contact or delivery: `add`
-#### <mark>When in the main window<br>
+**<ins>When in the main window**
 
 Adds a contact to the contacts list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01, S123456`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Worker a/Newgate Prison, S123456 p/1234567 t/criminal`
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+**<ins>When in the inspect window**
+
+Adds a delivery to the delivery list of a contact.
+
+Format: `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Worker a/Newgate Prison p/1234567 t/criminal`
+* `add i/Chair e/2025-04-04 a/John street, block 123, #01-01, S123456 c/$20 s/delivered`
+* `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver t/Best before Wednesday`
+
+<box type="tip" seamless>
+
+**Tip:** A contact or delivery can have any number of tags (including 0)
+</box>
 
 ### Listing all contacts : `list`
-#### <mark>When in the main window<br>
-Shows a list of all contacts added to the contacts list.
+
+**<ins>When in the main or inspect window**
+
+Shows a list of all contacts added to the contacts list. When you enter this command in either window, you will end up in the main window after this command.
 
 Format: `list`
 
 ### Editing a contact or delivery: `edit`
-#### <mark>When in the main window<br>
+**<ins>When in the main window**
+
 Edits an existing contact in the contacts list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [t/TAG]…​`
@@ -131,8 +145,22 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
+**<ins>When in the inspect window**
+
+Edits an existing delivery in the delivery list of a contact.
+
+Format: `edit INDEX [i/ITEM]…​ [e/ETA] [a/ADDRESS] [c/COST] [s/STATUS] [t/TAG]…​`
+
+* Same parameter constraints as mentioned in the main window section of this command.
+* You can not remove all the delivery's items by typing `i/` without specifying any items after it. One item must be present at the least.
+
+Examples:
+*  `edit 1 i/Speaker c/$50` Edits the items and cost of the 1st delivery to be `Speaker` and `$50` respectively.
+*  `edit 2 s/delivered t/` Edits the status of the 2nd delivery to be `delivered` and clears all existing tags.
+
 ### Locating contacts or deliveries by name: `find`
-#### <mark>When in the main window<br>
+**<ins>When in the main window**
+
 Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -146,27 +174,42 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex david` returns `Alex Yeoh`, `David Li`
+
+![result for 'find alex david'](images/findAlexDavidResult.png)
+
+**<ins>When in the inspect window**
+
+Find command does not work in the inspect window.
 
 ### Deleting a contact or delivery : `delete`
-#### <mark>When in the main window<br>
+**<ins>When in the main window**
+
 Deletes the specified contact from the contacts list.
 
 Format: `delete [INDEXES]...` 
 
 * Deletes the contact(s) at the specified `INDEXES`.
-* The index refers to the index number shown in the displayed contacts list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The indexes refer to the indexes shown in the displayed contacts list.
+* The indexes **must be positive integers** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2 3` deletes the 2nd and 3rd contact in the contacts list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+**<ins>When in the inspect window**
+
+Deletes the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+
+Examples:
+* `delete 2` deletes the 2nd delivery in the delivery list of the inspected contact.
+* `delete 2 3` deletes the 2nd and 3rd deliveries in the delivery list of the inspected contact.
+
 ### Inspecting a contact : `inspect`
+**<ins>When in the main window**
 
 Inspects a specified contact from the contacts list to see their delivery list.
-#### <mark>When in the main window<br>
+
 Format: `inspect [INDEX]`
 
 * Inspects the contact at the specified `INDEX`.
@@ -176,14 +219,24 @@ Format: `inspect [INDEX]`
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
 
+**<ins>When in the inspect window**
+
+inspect command does not work in the inspect window.
+
 ### Clearing all entries : `clear`
-#### <mark>When in the main or inspect window<br>
+**<ins>When in the main or inspect window**
+
 Clears all entries from the contacts list.
 
 Format: `clear`
 
+**<ins>When in the main or inspect window**
+
+clear command does not work in the inspect window.
+
 ### Exiting the program : `exit`
-#### <mark>When in the main or inspect window<br>
+**<ins>When in the main or inspect window**
+
 Exits the program.
 
 Format: `exit`
@@ -202,10 +255,6 @@ LogiLink data is saved automatically as a JSON file `[JAR file location]/data/ad
 If your changes to the data file makes its format invalid, LogiLink will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the LogiLink to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
