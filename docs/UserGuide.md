@@ -72,16 +72,18 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 
 ## Command Summary
 
-| Index |        Action         |                                                        Format                                                        |                                           examples                                            |
+### Command Table
+
+| Index |        Action         |                                                        Format                                                        |                                          Example(s)                                           |
 |:-----:|:---------------------:|:--------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------:|
 |   1   |          Add          |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`         | `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 l/S1 NT s/MATH s/CHEMISTRY` |
 |   2   |        Delete         |                                                   `delete i/INDEX`                                                   |                                         `delete i/2`                                          |
 |   3   |        Update         | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​` |                           `update Alex Yeoh n/James Lee e/99999999`                           |
-|   4   |         Find          |                        `find n/KEYWORD [MORE_KEYWORDS]` or `find l/LEVEL` or `find s/SUBJECT`                        |                       `find n/Alex` or `find l/S2 NA` or `find s/MATH`                        |
+|   4   |         Find          |                         `find n/KEYWORDS` or `find l/LEVEL` or `find s/SUBJECT [SUBJECT]…​`                          |                    `find n/Alex David` or `find l/S2 NA` or `find s/MATH`                     |
 |   5   |         List          |                                                        `list`                                                        |                                            `list`                                             |
 |   6   |          Tag          |                                         `tag n/NAME [l/LEVEL] [s/SUBJECT]…​`                                         |                                `tag n/John Doe l/S1 NT s/MATH`                                |
 |   7   |      Record Note      |                                                `note n/NAME nt/NOTE`                                                 |                        `note n/John Doe nt/Doing well in all subjects`                        |
-|   8   | View Specific Student |                                                    `view n/NAME`                                                     |                                      `view n/John Doe`                                        |
+|   8   | View Specific Student |                                                    `view n/NAME`                                                     |                                       `view n/John Doe`                                       |
 |   9   |       Add Task        |                                 `addtask n/NAME t/TASK_DESCRIPTION d/TASK_DEADLINE`                                  |                         `addtask n/John Doe t/Mark CA1 d/2024-10-15`                          |
 |  10   |      Delete Task      |                                          `deletetask n/NAME ti/TASK_INDEX`                                           |                                 `deletetask n/John Doe ti/1`                                  |
 |  11   |      Update Task      |                       `updatetask n/NAME ti/TASK_INDEX [t/TASK_DESCRIPTION] [d/TASK_DEADLINE]`                       |                        `updatetask n/Joht Doe ti/2 t/Mark assignment`                         |
@@ -90,9 +92,22 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 |  14   |         Help          |                                                        `help`                                                        |                                            `help`                                             |
 |  15   |         Exit          |                                                        `exit`                                                        |                                            `exit`                                             |
 
---------------------------------------------------------------------------------------------------------------------
+### Parameter Table
 
-## Features
+| Index |     Parameter     |                     Format                     |                                                                                                                                                                                                                                        Constraints                                                                                                                                                                                                                                        |
+|:-----:|:-----------------:|:----------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|   1   |      Address      |                  `a/ADDRESS`                   |                                                                                                                                                                                                                       Can take any values, but should not be blank                                                                                                                                                                                                                        |
+|   2   | Emergency Contact |             `e/EMERGENCY_CONTACT`              |                                                                                                                                                                                                             Should only contain numbers, and should be at least 3 digits long                                                                                                                                                                                                             |
+|   3   |       Index       |                    `INDEX`                     |                                                                                                                                                                                             Should be a positive integer equal to or less than the size of the current displayed student list                                                                                                                                                                                             |
+|   4   |    Lesson Time    |                `lt/LESSON_TIME`                |                                                                                                  Should be in format DAY-STARTTIME-ENDTIME, where DAY is in:<br/>[MON, TUE, WED, THU, FRI, SAT, SUN], and STARTTIME and ENDTIME are in the format HH:MM, `HH` must be between 0 and 23 inclusive, `MM` must be between 0 and 59 inclusive, and `ENDTIME` must be later than `STARTTIME`                                                                                                   |
+|   5   |       Level       |                   `l/LEVEL`                    |                                                                                                                                             Should be in the format YEAR TRACK, where YEAR is one of:<br/>[S1, S2, S3, S4, S5] and TRACK is one of: [EXPRESS, NA, NT, IP] with the exception of S5 which is only allowed to have the Track NA                                                                                                                                             |
+|   6   |       Name        | `n/NAME` or `update NAME` or `find n/KEYWORDS` |                                                                                                                              Should only contain alphanumeric characters and spaces, and should not be blank. Other than in `add n/NAME`, `update [n/NAME]` and `find n/KEYWORDS`, should be equal to the name of a student that exists in the address book.                                                                                                                              |
+|   7   |       Note        |                   `nt/NOTE`                    |                                                                                                                                                                                                                           Can take any values, and can be blank                                                                                                                                                                                                                           |
+|   8   |   Phone Number    |                `p/PHONE_NUMBER`                |                                                                                                                                                                                                             Should only contain numbers, and should be at least 3 digits long                                                                                                                                                                                                             |
+|   9   |      Subject      |                  `s/SUBJECT`                   | Should be valid for given level. Lower Secondary:<br/>[MATH, SCIENCE, PHYSICS, CHEMISTRY, BIOLOGY, LITERATURE, HISTORY, GEOGRAPHY, SOCIAL_STUDIES, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]<br/>Upper Secondary:<br/>[A_MATH, E_MATH, PHYSICS, CHEMISTRY, BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI] |
+|  10   |   Task Deadline   |               `d/TASK_DEADLINE`                |                                                                                                                                                                                                                            Should be in the format YYYY-MM-DD                                                                                                                                                                                                                             |
+|  11   | Task Description  |              `t/TASK_DESCRIPTION`              |                                                                                                                                                                                                                       Can take any values, but should not be blank                                                                                                                                                                                                                        |
+|  12   |    Task Index     |                 `t/TASK_INDEX`                 |                                                                                                                                                                                             Should be a positive integer equal to or less than the size of the specified student's task list                                                                                                                                                                                              |
 
 <box type="info" seamless>
 
@@ -104,18 +119,15 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 * Names with multiple spaces are treated as if they contain a single space, and names are not case-sensitive.<br>
   e.g. `alex yeoh` and `Alex  yeoh` are the same as `Alex Yeoh`.
 
+* During comparison, addresses, task descriptions and notes with multiple spaces are treated as if they contain a single space, and comparison is not case-sensitive.<br>
+  e.g. `nt/Test  1` and `nt/  TeST 1` are treated as the same.
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [s/SUBJECT]` can be used as `n/John Doe s/MATH` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/MATH`, `s/MATH s/PHYSICS` etc.<br>
   e.g. `[lt/LESSON_TIME]…​` can be used as ` ` (i.e. 0 times), `lt/SUN-11:00-13:00`, `lt/SUN-11:00-13:00 lt/WED-17:00-19:00` etc.
-
-* `lt/LESSON_TIME` must follow the format:`lt/day-start-end`<br>
-  e.g. `lt/SUN-13:00-15:00`
-  * Acceptable values for `day` are `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
-  * `start` must be in `HH:MM`, `HH` must be between 0 and 23 inclusive, `MM` must be between 0 and 59 inclusive.
-  * `end` must be in `HH:MM`, `HH` must be between 0 and 23 inclusive, `MM` must be between 0 and 59 inclusive, and `end` must be later than `start`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -124,9 +136,11 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
-***
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
 
 ### Student Management
 
@@ -183,12 +197,12 @@ Updates the details of an existing student in the address book.
 
 #### Finding Students
 
-Find students by either their name, level or subject.
+Find students by either their name, level or subject(s).
 
 **Format:**
-1. `find n/KEYWORD [MORE_KEYWORDS]`
+1. `find n/KEYWORDS`
 1. `find l/LEVEL`
-1. `find s/SUBJECT`
+1. `find s/SUBJECT [SUBJECT]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`

@@ -19,13 +19,12 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students based on name, subject or level, "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students based on either name, subject(s) or level, "
             + "using the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: " + "[" + PREFIX_NAME + "KEYWORD] "
-            + "[" + PREFIX_LEVEL + "LEVEL] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT] " + "\n"
+            + "Parameters (choose only one): " +  PREFIX_NAME + "KEYWORDS or "
+            + PREFIX_LEVEL + "LEVEL or "
+            + PREFIX_SUBJECT + "SUBJECT [SUBJECT]..." + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice";
-    // todo: CHANGE MESSAGE
 
     private final ContainsKeywordsPredicate predicate;
 

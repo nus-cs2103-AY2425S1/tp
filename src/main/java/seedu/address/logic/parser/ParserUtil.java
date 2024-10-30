@@ -27,7 +27,7 @@ import seedu.address.model.student.task.TaskDescription;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a positive integer.";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

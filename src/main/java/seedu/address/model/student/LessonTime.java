@@ -19,9 +19,9 @@ public class LessonTime {
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Lesson time should be in format DAY-STARTTIME-ENDTIME, where: "
-            + "\n" + "DAY is in " + Arrays.toString(Days.values()) + ";\n"
+            + "\n" + "DAY is in: " + Arrays.toString(Days.values()) + ";\n"
             + "STARTTIME and ENDTIME are in the format HH:MM;\n"
-            + "ENDTIME is later than STARTTIME.";
+            + "ENDTIME is later than STARTTIME";
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private final String lessonDay;
     private final LocalTime lessonStart;

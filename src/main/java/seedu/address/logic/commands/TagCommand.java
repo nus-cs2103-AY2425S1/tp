@@ -37,12 +37,12 @@ public class TagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags students with a given subject, level or both. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]"
-            + PREFIX_LEVEL + "LEVEL...\n"
+            + PREFIX_LEVEL + "LEVEL "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_SUBJECT + "MATH "
-            + PREFIX_LEVEL + "S1 NT";
+            + PREFIX_LEVEL + "S1 NT "
+            + PREFIX_SUBJECT + "MATH";
 
     public static final String MESSAGE_TAG_STUDENT_SUCCESS = "Tagged Student: %1$s";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student does not exist in address book.";
