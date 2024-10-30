@@ -131,7 +131,6 @@ public class Policy {
         String endDate = policyDetails.get(END_DATE);
         String paymentAmount = policyDetails.get(PAYMENT_AMOUNT);
         String paymentDate = policyDetails.get(PAYMENT_DATE);
-        System.out.println(paymentDate + " " + paymentAmount);
         return isValidPolicy(policyName, startDate, endDate, paymentDate + " " + paymentAmount);
     }
 
@@ -216,5 +215,4 @@ public class Policy {
     public String toString() {
         return policyName + " (" + startDate + " to " + endDate + ") " + payment.toString();
     }
-
 }
