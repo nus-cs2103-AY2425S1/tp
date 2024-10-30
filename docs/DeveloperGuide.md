@@ -377,6 +377,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 2b1-2b2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
 
+
+**Use case: UC05 - Find student entries**
+
+**MSS**
+
+1. User enters command to find students.
+1. System displays list with students with matching details.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use case resumes from step 2.
+
+
 **Use case: UC06 - Receiving tuition fee from a student**
 
 **MSS**
@@ -400,24 +420,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User enters new command.
 * Steps 2a1-2a2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
-
-**Use case: UC05 - Find student entries**
-
-**MSS**
-
-1. User enters command to find students.
-1. System displays list with students with matching details.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. System detects error in entered command.
-    * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
 
 **Use case: UC07 - Settle outstanding fees for student**
 
