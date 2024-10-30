@@ -168,7 +168,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void setCommandHistoryText(String input) {
-        historyCommandList.setCommandHistoryText(input);
+        HistoryCommandList.setCommandHistoryText(input);
     }
 
     /**

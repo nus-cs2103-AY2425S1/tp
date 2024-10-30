@@ -23,7 +23,7 @@ public class HistoryCommandList implements Iterable<HistoryCommand> {
     }
 
     /**
-     * Adds a history command to the list. The person must not already exist in the list.
+     * Adds a history command to the list.
      */
     public void add(Command toAdd) {
         requireNonNull(toAdd);
@@ -39,7 +39,6 @@ public class HistoryCommandList implements Iterable<HistoryCommand> {
     public static void setCommandHistoryText(String input) {
         originalCommandText = input;
     }
-
     public ObservableList<HistoryCommand> getHistoryCommands() {
         return this.internalList;
     }
@@ -47,6 +46,22 @@ public class HistoryCommandList implements Iterable<HistoryCommand> {
     @Override
     public Iterator<HistoryCommand> iterator() {
         return internalList.iterator();
+    }
+
+    @Override
+    public boolean equals(Object otherList) {
+        if (this == otherList) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(otherList instanceof HistoryCommandList)) {
+            return false;
+        }
+
+        HistoryCommandList other = (HistoryCommandList) otherList;
+
+        return internalList.equals(other.getHistoryCommands());
     }
 
     @Override
