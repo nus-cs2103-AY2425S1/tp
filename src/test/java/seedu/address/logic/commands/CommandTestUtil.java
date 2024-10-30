@@ -76,7 +76,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "P12D45"; // Alphabets not allowed in numeric portion
-    public static final String INVALID_WARD_DESC = " " + PREFIX_WARD + "A!"; // No special characters allowed
+    public static final String INVALID_WARD_DESC = " " + PREFIX_WARD + ""; // No empty string allowed
     public static final String INVALID_DIAGNOSIS_DESC = " " + PREFIX_DIAGNOSIS + "$<>"; // Only a-z and .()/- allowed
     public static final String INVALID_MEDICATION_DESC = " " + PREFIX_MEDICATION + "$<>"; // Only a-z and .()/- allowed
 

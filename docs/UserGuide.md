@@ -118,7 +118,6 @@ Format: `add n/NAME i/ID w/WARD d/DIAGNOSIS m/MEDICATION`
 
 * `ID` must be in the form of `PXXXXX` where `XXXXX` is a 5 digit integer.
 * `ID` of patients must be unique.
-* `Ward` must take the form of `WX` where `X` is an integer.
 
 
 [//]: # (<box type="tip" seamless>)

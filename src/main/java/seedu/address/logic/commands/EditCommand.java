@@ -84,7 +84,13 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+
+        if (editedPerson.wardContainsSpecialCharacters()) {
+            return new CommandResult(String.format(Ward.WARNING_SPECIAL_CHARACTER
+                    + MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        } else {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        }
     }
 
     /**

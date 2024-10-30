@@ -12,6 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Ward;
 
 /**
  * Adds a person to the address book.
@@ -57,7 +58,14 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+
+        if (toAdd.wardContainsSpecialCharacters()) {
+            return new CommandResult(String.format(Ward.WARNING_SPECIAL_CHARACTER
+                    + MESSAGE_SUCCESS, Messages.format(toAdd)));
+        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        }
+
     }
 
     @Override
