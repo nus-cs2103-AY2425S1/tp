@@ -25,8 +25,8 @@ class JsonAdaptedEvent {
     private final String name;
     private final JsonAdaptedTime time;
     private final String venue;
-    private final JsonAdaptedPerson celebrity;
-    private final Set<JsonAdaptedPerson> contacts = new HashSet<>();
+    private final String celebrityName;
+    private final Set<String> contactNames = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
@@ -35,13 +35,13 @@ class JsonAdaptedEvent {
     public JsonAdaptedEvent(@JsonProperty("name") String name,
                             @JsonProperty("time") JsonAdaptedTime time,
                             @JsonProperty("venue") String venue,
-                            @JsonProperty("celebrity") JsonAdaptedPerson celebrity,
-                            @JsonProperty("contacts") List<JsonAdaptedPerson> contacts) {
+                            @JsonProperty("celebrity") String celebrityName,
+                            @JsonProperty("contacts") List<String> contactNames) {
         this.name = name;
         this.time = time;
         this.venue = venue;
-        this.celebrity = celebrity;
-        this.contacts.addAll(contacts);
+        this.celebrityName = celebrityName;
+        this.contactNames.addAll(contactNames);
     }
 
     /**
@@ -51,10 +51,18 @@ class JsonAdaptedEvent {
         name = source.getName().getEventName();
         time = new JsonAdaptedTime(source.getTime());
         venue = source.getVenue().getVenue();
-        celebrity = new JsonAdaptedPerson(source.getCelebrity());
-        contacts.addAll(source.getContacts().stream()
-                .map(JsonAdaptedPerson::new)
-                .collect(Collectors.toList()));
+        celebrityName = source.getCelebrity().getName().fullName;
+        contactNames.addAll(source.getContacts().stream()
+                .map(contact -> contact.getName().fullName)
+                .toList());
+    }
+
+    public String getCelebrityName() {
+        return celebrityName;
+    }
+
+    public Set<String> getContactNames() {
+        return contactNames;
     }
 
     /**
@@ -62,12 +70,7 @@ class JsonAdaptedEvent {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
-    public Event toModelType() throws IllegalValueException {
-        final Set<Person> eventContacts = new HashSet<>();
-        for (JsonAdaptedPerson contact : contacts) {
-            eventContacts.add(contact.toModelType());
-        }
-
+    public Event toModelType(Person celebrity, Set<Person> eventContacts) throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName())
@@ -88,9 +91,8 @@ class JsonAdaptedEvent {
         if (celebrity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
-        final Person eventCelebrity = celebrity.toModelType();
 
-        return new Event(eventName, eventTime, eventVenue, eventCelebrity, eventContacts);
+        return new Event(eventName, eventTime, eventVenue, celebrity, eventContacts);
     }
 
 }
