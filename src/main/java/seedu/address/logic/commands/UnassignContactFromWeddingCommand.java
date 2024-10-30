@@ -57,9 +57,9 @@ public class UnassignContactFromWeddingCommand extends Command {
         requireNonNull(model);
         List<Wedding> lastShownWeddingList = model.getFilteredWeddingList();
 
-        ObjectProperty<WeddingName> specific_wedding_name = model.getCurrentWeddingName();
+        ObjectProperty<WeddingName> specificWeddingName = model.getCurrentWeddingName();
 
-        if (specific_wedding_name.get() == null) {
+        if (specificWeddingName.get() == null) {
             throw new CommandException("You need to be viewing a wedding to unassign contacts.");
         }
 
@@ -67,7 +67,7 @@ public class UnassignContactFromWeddingCommand extends Command {
         Wedding weddingToModify = new Wedding(null, null);
         List<PersonId> existingPersonsInWedding = new ArrayList<>();
         for (Wedding w : lastShownWeddingList) {
-            if (w.getWeddingName().equals(specific_wedding_name.get())) {
+            if (w.getWeddingName().equals(specificWeddingName.get())) {
                 weddingToModify = w;
                 existingPersonsInWedding = w.getAssignees();
             }
