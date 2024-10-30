@@ -17,10 +17,6 @@ public class ViewStudentCommandParser implements Parser<ViewStudentCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewStudentCommand parse(String args) throws ParseException {
-        if (args.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewStudentCommand.MESSAGE_USAGE));
-        }
         try {
             Index index = ParserUtil.parseIndex(args);
             return new ViewStudentCommand(index);

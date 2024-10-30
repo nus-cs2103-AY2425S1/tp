@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddAssignmentCommand;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.testutil.AssignmentBuilder;
 
@@ -69,8 +70,7 @@ public class AddAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_NAME + VALID_ASSIGNMENT_NAME_MATH
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE + VALID_SCORE_MATH;
 
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -79,8 +79,7 @@ public class AddAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_NAME
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE + VALID_SCORE_MATH;
 
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, AssignmentName.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -89,7 +88,6 @@ public class AddAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_NAME + VALID_ASSIGNMENT_NAME_MATH
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE;
 
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, Assignment.MAX_SCORE_MESSAGE_CONSTRAINTS);
     }
 }
