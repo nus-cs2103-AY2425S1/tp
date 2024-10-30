@@ -1,10 +1,5 @@
 package tuteez.model.person;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,13 +10,16 @@ import static tuteez.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
-import tuteez.model.person.lesson.Lesson;
 import static tuteez.testutil.Assert.assertThrows;
 import static tuteez.testutil.TypicalPersons.ALICE;
 import static tuteez.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
+import tuteez.model.person.lesson.Lesson;
 import tuteez.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -76,17 +74,17 @@ public class PersonTest {
         DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("EEEE");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
-        String lesson1Str = lesson1DateTime.format(dayFormatter) + " " +
-                lesson1DateTime.format(timeFormatter) + "-" +
-                lesson1EndTime.format(timeFormatter);
+        String lesson1Str = lesson1DateTime.format(dayFormatter) + " "
+                + lesson1DateTime.format(timeFormatter) + "-"
+                + lesson1EndTime.format(timeFormatter);
 
-        String lesson2Str = lesson2DateTime.format(dayFormatter) + " " +
-                lesson2DateTime.format(timeFormatter) + "-" +
-                lesson2EndTime.format(timeFormatter);
+        String lesson2Str = lesson2DateTime.format(dayFormatter) + " "
+                + lesson2DateTime.format(timeFormatter) + "-"
+                + lesson2EndTime.format(timeFormatter);
 
-        String lesson3Str = lesson3DateTime.format(dayFormatter) + " " +
-                lesson3DateTime.format(timeFormatter) + "-" +
-                lesson3EndTime.format(timeFormatter);
+        String lesson3Str = lesson3DateTime.format(dayFormatter) + " "
+                + lesson3DateTime.format(timeFormatter) + "-"
+                + lesson3EndTime.format(timeFormatter);
 
         Lesson lesson3 = new Lesson(lesson3Str);
 
