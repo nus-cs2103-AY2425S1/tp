@@ -58,7 +58,6 @@ public class AddNotesCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        // Update notes with new note
         ArrayList<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
         if (notesList.contains(note)) {
