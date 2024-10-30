@@ -250,8 +250,8 @@ public class StudentTest {
         student.markAttendance(LocalDate.of(2024, 10, 22), "p");
         student.markAttendance(LocalDate.of(2024, 10, 23), "a");
 
-        String expectedString = "2024-10-22 [x]\n"
-                + "2024-10-23 [ ]\n";
+        String expectedString = "2024-10-22: Present\n"
+                + "2024-10-23: Absent\n";
         assertEquals(expectedString, student.getAttendanceRecordsString());
     }
 
