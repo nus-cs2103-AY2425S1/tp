@@ -45,6 +45,8 @@ public class DeleteAttendanceCommand extends Command {
     private final Name name;
     private final LocalDate date;
     private final Optional<StudentNumber> studentNumber;
+
+    private Optional<Student> student;
     private Attendance previousAttendance;
 
     /**
@@ -56,6 +58,7 @@ public class DeleteAttendanceCommand extends Command {
         this.name = name;
         this.date = date;
         this.studentNumber = studentNumber;
+        this.student = Optional.empty();
     }
 
     @Override
@@ -66,7 +69,6 @@ public class DeleteAttendanceCommand extends Command {
             throw new CommandException("Student not found: " + name);
         }
 
-        Student student;
         if (studentNumber.isPresent()) {
             List<Student> filteredStudentList = studentList.stream()
                     .filter(s -> s.getStudentNumber().equals(studentNumber.get()))
@@ -75,7 +77,7 @@ public class DeleteAttendanceCommand extends Command {
                 throw new CommandException("Student not found: " + name + " with student number: "
                         + studentNumber.get());
             }
-            student = filteredStudentList.get(0);
+            student = Optional.of(filteredStudentList.get(0));
         } else {
             if (studentList.size() > 1) {
                 String duplicateStudentNumbers = studentList.stream()
@@ -83,9 +85,9 @@ public class DeleteAttendanceCommand extends Command {
                         .collect(Collectors.joining(", "));
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, duplicateStudentNumbers, name));
             }
-            student = studentList.get(0);
+            student = Optional.of(studentList.get(0));
         }
-        previousAttendance = student.getAttendanceRecord().stream()
+        previousAttendance = student.get().getAttendanceRecord().stream()
                 .filter(record -> record.getDate().equals(date))
                 .findFirst()
                 .map(record -> record.getAttendance())
@@ -95,7 +97,7 @@ public class DeleteAttendanceCommand extends Command {
             throw new CommandException("No attendance record found for " + name + " on " + date);
         }
 
-        student.deleteAttendance(date);
+        student.get().deleteAttendance(date);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 name, DateTimeFormatter.ofPattern("dd MMM yyyy").format(date)));
 
@@ -103,10 +105,10 @@ public class DeleteAttendanceCommand extends Command {
 
     @Override
     public boolean undo(Model model) {
-        Student student = model.getStudentByName(name);
-        if (student == null) {
+        if (student.isEmpty()) {
             return false;
         }
+        Student student = this.student.get();
 
         if (previousAttendance != null) {
             student.markAttendance(date, previousAttendance.value);
