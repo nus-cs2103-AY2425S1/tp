@@ -63,7 +63,7 @@ Format: `/a n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 
 Examples:
 * `/a n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
-* `/a n/Facebook r/Data Scientist Intern t/high_priority e/fb@example.com d/21/10/24`
+* `/a n/Facebook r/Data Scientist Intern e/fb@example.com d/21/10/24`
 
 ### Listing all internship applications : `/list`
 
@@ -89,7 +89,7 @@ Examples:
 
 ### Filtering internship applications by status: `/filter`
 
-Filters internship applications with specified status.
+Filters through all the existing internship applications with specified status. Using /filter after /find resets the search and are not stackable.
 
 Format: `/filter STATUS`
 
@@ -175,6 +175,7 @@ Action     | Format, Examples
 **Clear**  | `/clear`
 **Delete** | `/d INDEX`<br> e.g., `/d 3`
 **Find**   | `/f KEYWORD [MORE_KEYWORDS]`<br> e.g., `/f Google Facebook`
+**Filter**   | `/filter STATUS`<br> e.g., `/filter pending`
 **List**   | `/list`
 **Help**   | `/help`
 **Accept** | `/accept INDEX`<br> e.g., `/accept 2`
