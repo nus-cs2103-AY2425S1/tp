@@ -21,6 +21,7 @@ public class ConfirmPrompt extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        savedCommand.validateInput(model);
         model.setSavedCommand(savedCommand);
 
         return new CommandResult(MESSAGE_CONFIRM_PROMPT, false, false, true, false, -1);

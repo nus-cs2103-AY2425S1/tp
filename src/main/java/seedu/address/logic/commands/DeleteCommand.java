@@ -35,6 +35,24 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        validateInput(model);
+
+        List<Person> lastShownList = model.getPersonList();
+        Person personToDelete = null;
+
+        // Find the person by identity number
+        for (Person person : lastShownList) {
+            if (person.getIdentityNumber().equals(identityNumber)) {
+                personToDelete = person;
+                break;
+            }
+        }
+
+        model.deletePerson(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    public void validateInput(Model model) throws CommandException {
         List<Person> lastShownList = model.getPersonList();
         Person personToDelete = null;
 
@@ -50,9 +68,6 @@ public class DeleteCommand extends Command {
         if (personToDelete == null) {
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
-
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override
