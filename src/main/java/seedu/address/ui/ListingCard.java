@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -51,6 +53,7 @@ public class ListingCard extends UiPart<Region> {
         initializeRegion();
         initializeAddress();
         initializeSeller();
+        initializeBuyers();
     }
 
     private void initializeName() {
@@ -85,6 +88,19 @@ public class ListingCard extends UiPart<Region> {
     private void initializeSeller() {
         seller.setText(listing.getSeller().getName().fullName);
     }
+
+    private void initializeBuyers() {
+        buyers.setHgap(10);
+        buyers.setVgap(10);
+
+        listing.getBuyers().stream()
+                .sorted(Comparator.comparing(buyer -> buyer.getName().fullName))
+                .forEach(buyer -> {
+                    Label buyerLabel = new Label(buyer.getName().fullName);
+                    buyers.getChildren().add(buyerLabel);
+                });
+    }
+
 
     // Getter methods for private fields
     public Label getId() {
