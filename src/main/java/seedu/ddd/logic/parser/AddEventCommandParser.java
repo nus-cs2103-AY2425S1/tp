@@ -31,7 +31,6 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddEventCommand parse(String args) throws ParseException {
-        System.out.println(args);
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_DESC, PREFIX_DATE, PREFIX_CLIENTS, PREFIX_VENDORS, FLAG_EVENT);

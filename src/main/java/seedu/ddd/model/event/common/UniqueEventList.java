@@ -61,7 +61,7 @@ public class UniqueEventList implements Iterable<Event> {
         CollectionUtil.requireAllNonNull(target, editedEvent);
 
         int index = internalList.indexOf(target);
-        if (index < 0) {
+        if (index == -1) {
             throw new EventNotFoundException();
         }
 
