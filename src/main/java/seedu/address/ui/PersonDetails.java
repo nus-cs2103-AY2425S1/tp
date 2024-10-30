@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -34,6 +36,18 @@ public class PersonDetails extends UiPart<Region> {
     private Label course;
     @FXML
     private Label module;
+    @FXML
+    private ImageView profileImage;
+    @FXML
+    private Label studentIdHeader;
+    @FXML
+    private Label contactHeader;
+    @FXML
+    private Label addressHeader;
+    @FXML
+    private Label emailHeader;
+    @FXML
+    private Label moduleHeader;
     /**
      * Creates a {@code PersonDetails} with the given {@code Person}.
      *
@@ -43,6 +57,8 @@ public class PersonDetails extends UiPart<Region> {
         super(FXML);
         this.person = person;
         updateDetails(person);
+        Image image = new Image(getClass().getResourceAsStream("/images/user.png"));
+        profileImage.setImage(image);
     }
 
     /**
@@ -51,16 +67,23 @@ public class PersonDetails extends UiPart<Region> {
     public void updateDetails(Person person) {
         if (person != null) {
             name.setText(person.getName().fullName);
-            studentId.setText("StudentID\n" + person.getStudentId().value);
-            phone.setText("Contact Number\n" + person.getPhone().value);
+            studentId.setText(person.getStudentId().value);
+            phone.setText(person.getPhone().value);
             tag.setText(person.getTag().role.getRole());
-            address.setText("Address\n" + person.getAddress().value);
-            email.setText("Email Address\n" + person.getEmail().value);
-            course.setText("Course\n" + person.getCourse().course);
+            address.setText(person.getAddress().value);
+            email.setText(person.getEmail().value);
+            course.setText(person.getCourse().course);
             String modulesAsString = person.getModules().stream()
                     .map(m -> m.toString() + "\n")
                     .reduce("", (x, y) -> x + y);
-            module.setText("Modules\n" + (modulesAsString.isEmpty() ? "No enrolled modules" : modulesAsString));
+            module.setText((modulesAsString.isEmpty() ? "No enrolled modules" : modulesAsString));
+            profileImage.setVisible(true);
+            studentIdHeader.setVisible(true);
+            contactHeader.setVisible(true);
+            addressHeader.setVisible(true);
+            emailHeader.setVisible(true);
+            moduleHeader.setVisible(true);
+
         } else {
             name.setText("");
             studentId.setText("");
