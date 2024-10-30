@@ -54,7 +54,8 @@ public class DeliveryList {
     }
 
     /**
-     * Returns the index of the first archived delivery in the list.
+     *
+     * Gets the index of the first archived delivery in the list.
      */
     public Index getFirstArchivedIndex() {
         for (int i = 0; i < size(); i++) {
@@ -162,7 +163,7 @@ public class DeliveryList {
     }
 
     /**
-     * Sorts the backing list using the {@code Date} attribute of each delivery, in ascending order.
+     * Sorts the backing list using the {@code Date} and {@code Time }attribute of each delivery, in ascending order.
      * <p>
      * If the dates of the compared deliveries are the same, {@code Time} attribute of each delivery is
      * used for tie-breaking.
