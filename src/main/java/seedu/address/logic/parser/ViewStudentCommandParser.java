@@ -25,8 +25,7 @@ public class ViewStudentCommandParser implements Parser<ViewStudentCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new ViewStudentCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(pe.getMessage(), ViewStudentCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage());
         }
     }
 
