@@ -1,6 +1,6 @@
 /* General Background */
 .background {
-    -fx-background-color: #cfe1b9;
+    -fx-background-color: #f9f9f9;
 }
 
 /* background */
@@ -213,9 +213,16 @@
 #resultDisplay {
     -fx-background-color: #f9f9f9;
     -fx-border-color: #f9f9f9;
-}
-#resultDisplay .content {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #333333;
     -fx-background-color: #f9f9f9;
+    -fx-border-color: #f9f9f9;
+    -fx-control-inner-background: #f9f9f9;
+}
+
+#resultDisplay .content {
+    -fx-background-color: #ffffff;
     -fx-border-color: #cccccc;
     -fx-border-width: 1px;
     -fx-border-radius: 10px;
