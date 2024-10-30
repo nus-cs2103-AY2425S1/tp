@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.EnumUtil.inEnum;
 
-import java.util.Arrays;
-
 /**
  * Represents a Level in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidLevelName(String)}
