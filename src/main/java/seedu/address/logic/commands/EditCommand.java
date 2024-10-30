@@ -97,6 +97,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery %d: %2$s";
+    public static final String MESSAGE_EMPTY_ITEMS = "At least one item has to be entered";
 
 
     private final Index index;
@@ -184,6 +185,11 @@ public class EditCommand extends Command {
 
         Delivery deliveryToEdit = deliveryList.get(index.getZeroBased());
         assert editDeliveryDescriptor != null;
+
+        if (editDeliveryDescriptor.getItems().isEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_ITEMS);
+        }
+
         Delivery editedDelivery = createEditedDelivery(deliveryToEdit, editDeliveryDescriptor);
         inspectedPerson.setDelivery(deliveryToEdit, editedDelivery);
         return new CommandResult(
@@ -415,7 +421,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Set<ItemName>> getItems() {
-            return (items != null) ? Optional.of(Collections.unmodifiableSet(items)) : Optional.empty();
+            return (items != null && !items.isEmpty()) ? Optional.of(Collections.unmodifiableSet(items)) : Optional.empty();
         }
 
         public void setAddress(Address address) {
