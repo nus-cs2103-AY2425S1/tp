@@ -16,6 +16,7 @@ import seedu.address.logic.commands.MarkTaskCommand;
 import seedu.address.logic.commands.addcommands.AddGroupCommand;
 import seedu.address.logic.commands.addcommands.AddStudentCommand;
 import seedu.address.logic.commands.addcommands.AddStudentToGroupCommand;
+import seedu.address.logic.commands.addcommands.AddTaskToAllGroupsCommand;
 import seedu.address.logic.commands.addcommands.AddTaskToGroupCommand;
 import seedu.address.logic.commands.deletecommands.DeleteGroupCommand;
 import seedu.address.logic.commands.deletecommands.DeleteStudentCommand;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.deletecommands.DeleteStudentFromGroupCommand
 import seedu.address.logic.commands.deletecommands.DeleteTaskFromGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditStudentCommand;
+import seedu.address.logic.commands.editcommands.EditTaskAllGroupCommand;
 import seedu.address.logic.commands.editcommands.EditTaskCommand;
 import seedu.address.logic.commands.findcommands.FindGroupCommand;
 import seedu.address.logic.commands.findcommands.FindStudentCommand;
@@ -38,6 +40,7 @@ import seedu.address.logic.commands.versionhistorycommands.UndoCommand;
 import seedu.address.logic.parser.addcommands.AddGroupCommandParser;
 import seedu.address.logic.parser.addcommands.AddStudentCommandParser;
 import seedu.address.logic.parser.addcommands.AddStudentToGroupCommandParser;
+import seedu.address.logic.parser.addcommands.AddTaskToAllGroupsCommandParser;
 import seedu.address.logic.parser.addcommands.AddTaskToGroupCommandParser;
 import seedu.address.logic.parser.deletecommands.DeleteGroupCommandParser;
 import seedu.address.logic.parser.deletecommands.DeleteStudentCommandParser;
@@ -45,6 +48,7 @@ import seedu.address.logic.parser.deletecommands.DeleteStudentFromGroupCommandPa
 import seedu.address.logic.parser.deletecommands.DeleteTaskFromGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
+import seedu.address.logic.parser.editcommands.EditTaskAllGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditTaskCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.findcommands.FindGroupCommandParser;
@@ -81,7 +85,7 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
@@ -154,6 +158,10 @@ public class AddressBookParser {
         case AddTaskToGroupCommand.COMMAND_WORD:
             return new AddTaskToGroupCommandParser().parse(arguments);
 
+        case AddTaskToAllGroupsCommand.COMMAND_WORD_ALIAS:
+        case AddTaskToAllGroupsCommand.COMMAND_WORD:
+            return new AddTaskToAllGroupsCommandParser().parse(arguments);
+
         case DeleteTaskFromGroupCommand.COMMAND_WORD_ALIAS:
         case DeleteTaskFromGroupCommand.COMMAND_WORD:
             return new DeleteTaskFromGroupCommandParser().parse(arguments);
@@ -165,6 +173,9 @@ public class AddressBookParser {
         case EditTaskCommand.COMMAND_WORD_ALIAS:
         case EditTaskCommand.COMMAND_WORD:
             return new EditTaskCommandParser().parse(arguments);
+        case EditTaskAllGroupCommand.COMMAND_WORD_ALIAS:
+        case EditTaskAllGroupCommand.COMMAND_WORD:
+            return new EditTaskAllGroupCommandParser().parse(arguments);
 
         case SortStudentCommand.COMMAND_WORD_ALIAS:
         case SortStudentCommand.COMMAND_WORD:

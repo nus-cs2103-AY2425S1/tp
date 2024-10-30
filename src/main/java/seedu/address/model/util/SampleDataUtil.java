@@ -56,10 +56,10 @@ public class SampleDataUtil {
         return new Task[]{
             new Task(new TaskName("Add postmortem to team docs"),
                 new Deadline(LocalDateTime.of(2024, 10, 24, 23, 59)), Status.PENDING,
-                1),
+                2),
             new Task(new TaskName("Consultation slot"),
                 new Deadline(LocalDateTime.of(2024, 10, 25, 12, 0)), Status.PENDING,
-                0)
+                1)
         };
     }
 

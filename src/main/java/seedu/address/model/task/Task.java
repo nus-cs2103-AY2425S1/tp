@@ -18,6 +18,15 @@ public class Task {
     private int groupsWithTask = 1;
 
     /**
+     * Allows serialization.
+     */
+    public Task() {
+        name = new TaskName("default");
+        deadline = new Deadline(LocalDateTime.now());
+        status = Status.PENDING;
+    }
+
+    /**
      * Creates a Task with {@code name} and {@code deadline}.
      * Every field must be present and not null.
      */

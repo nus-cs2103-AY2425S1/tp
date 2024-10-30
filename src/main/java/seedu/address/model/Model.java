@@ -51,6 +51,12 @@ public interface Model {
 
     void setMostRecentGroupTaskDisplay(String string);
 
+    Task getMostRecentTaskDisplay();
+
+    void setMostRecentTaskDisplay();
+
+    void setMostRecentTaskDisplay(Task task);
+
     /**
      * Returns the user prefs' address book file path.
      */

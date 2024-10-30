@@ -149,7 +149,12 @@ public class Group {
         return otherGroup != null
             && otherGroup.getGroupName().equals(getGroupName());
     }
-
+    /**
+     * Returns true if the group has given task.
+     */
+    public boolean hasTask(Task task) {
+        return tasks.contains(task);
+    }
     /**
      * Returns true if both group have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

@@ -135,6 +135,7 @@ public class MainWindow extends UiPart<Stage> {
             informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
         } else {
             informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+            logic.setMostRecentTaskDisplay();
         }
 
         resultDisplay = new ResultDisplay();

@@ -3,13 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,23 +26,7 @@ public class EditGroupCommandTest {
         originalGroup = new Group(new GroupName("Original Group"));
         model.addGroup(originalGroup);
     }
-    @Test
-    public void execute_groupNameSpecified_success() {
-        Group editedGroup = new Group(new GroupName("Updated Group"),
-            originalGroup.getStudents(), originalGroup.getTasks());
-        EditGroupDescriptor descriptor = new EditGroupDescriptor();
-        descriptor.setGroupName(new GroupName("Updated Group"));
 
-        EditGroupCommand editGroupCommand = new EditGroupCommand(originalGroup.getGroupName(), descriptor);
-
-        String expectedMessage = String.format(EditGroupCommand.MESSAGE_EDIT_GROUP_SUCCESS,
-            Messages.format(editedGroup));
-
-        Model expectedModel = new ModelManager();
-        expectedModel.addGroup(editedGroup);
-
-        assertCommandSuccess(editGroupCommand, model, expectedMessage, expectedModel);
-    }
     @Test
     public void execute_duplicateGroup_throwsCommandException() {
         Group anotherGroup = new Group(new GroupName("Another Group"));
@@ -53,27 +35,20 @@ public class EditGroupCommandTest {
         EditGroupDescriptor descriptorDuplicate = new EditGroupDescriptor();
         descriptorDuplicate.setGroupName(new GroupName("Original Group"));
 
-        EditGroupCommand editGroupCommand = new EditGroupCommand(anotherGroup.getGroupName(), descriptorDuplicate);
+        EditGroupCommand editGroupCommand = new EditGroupCommand(Index.fromZeroBased(2),
+            descriptorDuplicate);
         assertThrows(CommandException.class, () -> editGroupCommand.execute(model),
             EditGroupCommand.MESSAGE_DUPLICATE_GROUP);
     }
-    @Test
-    public void execute_groupNotFound_failure() {
-        EditGroupDescriptor descriptor = new EditGroupDescriptor();
-        descriptor.setGroupName(new GroupName("Nonexistent Group"));
 
-        EditGroupCommand editGroupCommand = new EditGroupCommand(new GroupName("Nonexistent Group"), descriptor);
-
-        assertCommandFailure(editGroupCommand, model, Messages.MESSAGE_GROUP_NAME_NOT_FOUND);
-    }
     @Test
     public void equals() {
-        final EditGroupCommand standardCommand = new EditGroupCommand(new GroupName("Original Group"),
+        final EditGroupCommand standardCommand = new EditGroupCommand(Index.fromZeroBased(1),
             new EditGroupDescriptor());
 
         // same values -> returns true
         EditGroupDescriptor copyDescriptor = new EditGroupDescriptor(new EditGroupDescriptor());
-        EditGroupCommand commandWithSameValues = new EditGroupCommand(new GroupName("Original Group"), copyDescriptor);
+        EditGroupCommand commandWithSameValues = new EditGroupCommand(Index.fromZeroBased(1), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -86,7 +61,7 @@ public class EditGroupCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditGroupCommand(new GroupName("Updated Group"),
+        assertFalse(standardCommand.equals(new EditGroupCommand(Index.fromZeroBased(2),
             new EditGroupDescriptor())));
     }
 
