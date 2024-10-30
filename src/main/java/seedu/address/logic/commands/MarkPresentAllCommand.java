@@ -85,7 +85,7 @@ public class MarkPresentAllCommand extends Command {
             if (previousAttendance != null) {
                 student.markAttendance(date, previousAttendance.value);
             } else {
-                student.undoAttendance(date);
+                student.deleteAttendance(date);
             }
         }
         return true;

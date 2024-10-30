@@ -53,7 +53,7 @@ public class DeleteAttendanceCommand extends Command{
             throw new CommandException("No attendance record found for " + name + " on " + date);
         }
 
-        student.undoAttendance(date);
+        student.deleteAttendance(date);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 name, DateTimeFormatter.ofPattern("dd MMM yyyy").format(date)));
 
