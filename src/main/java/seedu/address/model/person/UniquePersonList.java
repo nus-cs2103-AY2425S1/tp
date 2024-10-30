@@ -54,10 +54,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        Class<? extends Person> personType = getPersonType(toAdd);
-        ObservableList<Person> filteredList = getFilteredList(personType);
-
-        if (contains(toAdd, filteredList)) {
+        if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
@@ -103,9 +100,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        Class<? extends Person> personType = getPersonType(editedPerson);
-        ObservableList<Person> filteredList = getFilteredList(personType);
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson, filteredList)) {
+        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
 
