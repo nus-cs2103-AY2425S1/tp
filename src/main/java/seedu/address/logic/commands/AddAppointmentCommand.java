@@ -74,7 +74,7 @@ public class AddAppointmentCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
 
         //return new CommandResult(null);
-        return new CommandResult(String.format(MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_APPOINTMENT_SUCCESS, Messages.format(editedPerson)));
     }
 
     @Override
