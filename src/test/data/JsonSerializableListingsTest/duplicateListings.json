@@ -1,0 +1,60 @@
+{
+  "listings": [
+    {
+      "price" : "20000",
+      "area" : "100",
+      "region" : "EAST",
+      "address" : "213 Tampines St",
+      "seller" : {
+        "name" : "Dias",
+        "phone" : "12354623",
+        "email" : "seans@example.com",
+        "appointment" : {
+          "date" : {
+            "value" : "EMPTY_DATE"
+          },
+          "from" : {
+            "value" : "EMPTY_FROM"
+          },
+          "to" : {
+            "value" : "EMPTY_TO"
+          }
+        },
+        "property" : "",
+        "remark": "",
+        "tags" : [ "friends" ],
+        "role" : "seller"
+      },
+      "buyers" : [ ],
+      "listingName" : "Valid listingName"
+    },
+    {
+      "price" : "20000",
+      "area" : "100",
+      "region" : "EAST",
+      "address" : "213 Tampines St",
+      "seller" : {
+        "name" : "Dias",
+        "phone" : "12354623",
+        "email" : "seans@example.com",
+        "appointment" : {
+          "date" : {
+            "value" : "EMPTY_DATE"
+          },
+          "from" : {
+            "value" : "EMPTY_FROM"
+          },
+          "to" : {
+            "value" : "EMPTY_TO"
+          }
+        },
+        "property" : "",
+        "remark": "",
+        "tags" : [ "friends" ],
+        "role" : "seller"
+      },
+      "buyers" : [ ],
+      "listingName" : "Valid listingName"
+    }
+  ]
+}

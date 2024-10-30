@@ -24,20 +24,25 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withPhone("94351253").withEmail("alice@example.com").withProperty("Pasir Ris")
-            .withAppointment("01/01/2024", "0800", "0900").withTags("friends").buildSeller();
+            .withAppointment("01-01-24", "0800", "0900").withTags("friends").buildSeller();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("benson@example.com").withPhone("98765432").withProperty("Tampines")
-            .withAppointment("14/12/2020", "1000", "2330").withTags("owesMoney", "friends").buildSeller();
+            .withAppointment("14-12-20", "1000", "2330").withTags("owesMoney", "friends").buildSeller();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("carl@example.com").withProperty("Orchard Road").buildSeller();
+            .withEmail("carl@example.com").withProperty("Orchard Road")
+            .withAppointment("01-01-24", "0800", "0900").withTags("friends").buildSeller();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").buildBuyer();
+            .withEmail("cornelia@example.com")
+            .withAppointment("01-01-24", "0800", "0900").withTags("friends").buildBuyer();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("elle@example.com").buildBuyer();
+            .withEmail("elle@example.com")
+            .withAppointment("01-01-24", "0800", "0900").withTags("friends").buildBuyer();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("fiona@example.com").buildBuyer();
+            .withEmail("fiona@example.com")
+            .withAppointment("01-01-24", "0800", "0900").withTags("friends").buildBuyer();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").buildBuyer();
+            .withEmail("anna@example.com")
+            .withAppointment("01-01-24", "0800", "0900").withTags("friends").buildBuyer();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

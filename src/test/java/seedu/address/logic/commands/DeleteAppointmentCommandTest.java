@@ -22,9 +22,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Date;
-import seedu.address.model.appointment.From;
-import seedu.address.model.appointment.To;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -54,14 +51,14 @@ public class DeleteAppointmentCommandTest {
                     personToDeleteAppointment.getPhone(),
                     personToDeleteAppointment.getEmail(),
                     personToDeleteAppointment.getTags(),
-                    new Appointment(new Date(""), new From(""), new To("")),
+                    Appointment.EMPTY_APPOINTMENT,
                     personToDeleteAppointment.getProperty());
         } else { // Assuming it's a Seller if not a Buyer
             personWithoutAppointment = new Seller(personToDeleteAppointment.getName(),
                     personToDeleteAppointment.getPhone(),
                     personToDeleteAppointment.getEmail(),
                     personToDeleteAppointment.getTags(),
-                    new Appointment(new Date(""), new From(""), new To("")),
+                    Appointment.EMPTY_APPOINTMENT,
                     personToDeleteAppointment.getProperty());
         }
         expectedModel.setPerson(personToDeleteAppointment, personWithoutAppointment);

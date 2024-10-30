@@ -9,9 +9,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Date;
-import seedu.address.model.appointment.From;
-import seedu.address.model.appointment.To;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -73,13 +70,13 @@ public class DeleteAppointmentCommand extends Command {
             Buyer buyer = (Buyer) personToDeleteAppointment;
             personWithoutAppointment = new Buyer(buyer.getName(), buyer.getPhone(),
                     buyer.getEmail(), buyer.getTags(),
-                    new Appointment(new Date(""), new From(""), new To("")),
+                    Appointment.EMPTY_APPOINTMENT,
                     buyer.getProperty());
         } else { // Must be a Seller
             Seller seller = (Seller) personToDeleteAppointment;
             personWithoutAppointment = new Seller(seller.getName(), seller.getPhone(),
                     seller.getEmail(), seller.getTags(),
-                    new Appointment(new Date(""), new From(""), new To("")),
+                    Appointment.EMPTY_APPOINTMENT,
                     seller.getProperty());
         }
         model.setPerson(personToDeleteAppointment, personWithoutAppointment);

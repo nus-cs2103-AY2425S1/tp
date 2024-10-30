@@ -14,9 +14,6 @@ import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Date;
-import seedu.address.model.appointment.From;
-import seedu.address.model.appointment.To;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -62,7 +59,7 @@ public class AddClientParser implements Parser<Command> {
         // add command does not allow adding properties straight away
         Property property = new Property("");
         //  add command does not allow adding appointment straight away
-        Appointment appointment = new Appointment(new Date(""), new From(""), new To(""));
+        Appointment appointment = Appointment.EMPTY_APPOINTMENT;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());

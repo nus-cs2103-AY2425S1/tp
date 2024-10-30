@@ -46,11 +46,12 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private Model model;
     private Logic logic;
 
     @BeforeEach
     public void setUp() {
+        model = new ModelManager();
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
@@ -76,8 +77,8 @@ public class LogicManagerTest {
         Buyer expectedBuyer = new PersonBuilder(AMY).buildBuyer();
 
         // Adjust the expected message to match the actual message format
-        String expectedMessage = String.format("New buyer added: %s; Phone: %s; Email: %s; Appointment: Date:  "
-                        + "(From:  To: ); Tags: ",
+        String expectedMessage = String.format("New buyer added: %s; Phone: %s; Email: %s; Appointment: "
+                        + "-; Tags: ",
                 expectedBuyer.getName(), expectedBuyer.getPhone(), expectedBuyer.getEmail());
 
         model.addPerson(expectedBuyer);
@@ -94,14 +95,13 @@ public class LogicManagerTest {
 
         // Creating a seller with empty appointment, property, and no tags
         Seller expectedSeller = new PersonBuilder(AMY)
-                .withAppointment("", "", "") // Empty appointment details
                 .withProperty("") // Empty property
                 .withTags() // No tags
                 .buildSeller();
 
         // Construct the expected message based on the actual format produced by the application
         String expectedMessage = String.format("New seller added: %s; Phone: %s; Email: %s; Appointment: "
-                        + "Date:  (From:  To: ); Tags: ",
+                        + "-; Tags: ",
                 expectedSeller.getName(), expectedSeller.getPhone(), expectedSeller.getEmail());
 
         // Execute the command and check for success
@@ -149,12 +149,11 @@ public class LogicManagerTest {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
-
+    */
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
-    */
 
     /**
      * Executes the command and confirms that

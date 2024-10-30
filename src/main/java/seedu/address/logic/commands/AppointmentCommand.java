@@ -89,7 +89,7 @@ public class AppointmentCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !personToEdit.getAppointment().isEmpty()
+        String message = personToEdit.hasAppointment()
                 ? MESSAGE_ADD_APPOINTMENT_SUCCESS
                 : MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
