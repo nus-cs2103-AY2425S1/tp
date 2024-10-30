@@ -16,6 +16,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.OperatingHours;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Appointment;
@@ -40,7 +41,7 @@ public class ParserUtil {
             + "dd-MM-yyyy\n"
             + "dd MM yyyy";
 
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format HH:mm";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format o/HH:mm or c/HH:mm.";
 
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 

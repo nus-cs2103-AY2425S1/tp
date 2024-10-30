@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSINGHOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENINGHOURS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,7 +16,9 @@ public class UpdateOperatingHoursCommand extends Command {
 
     public static final String COMMAND_WORD = "hours";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Updates operating hours in the address book";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates operating hours in the address book.\n"
+            + "Parameters: " +  "[" + PREFIX_OPENINGHOURS + "08:30] [" + PREFIX_CLOSINGHOURS + "18:30] \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_OPENINGHOURS + "08:30 " + PREFIX_CLOSINGHOURS + "18:30";
 
     public static final String MESSAGE_SUCCESS = "Operating Hours updated: ";
     public static final String MESSAGE_FAILED = "There are some appointments are "
