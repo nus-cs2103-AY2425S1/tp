@@ -22,6 +22,8 @@ public abstract class LessonCommand extends Command {
             + "Example to add lesson: " + COMMAND_WORD + " 1 -a Monday 0900-1100\n"
             + "Example to delete lesson: " + COMMAND_WORD + " 1 -d 1";
 
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
+
     protected final Index personIndex;
 
     /**

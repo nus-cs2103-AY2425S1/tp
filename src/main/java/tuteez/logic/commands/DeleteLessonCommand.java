@@ -17,7 +17,6 @@ import tuteez.model.person.lesson.Lesson;
  * Deletes a lesson from a specified student.
  */
 public class DeleteLessonCommand extends LessonCommand {
-    public static final String DELETE_LESSON_PARAM = "-d";
 
     private final Index lessonIndex;
 

@@ -17,7 +17,6 @@ import tuteez.model.person.lesson.Lesson;
  * Adds a lesson to a specified student.
  */
 public class AddLessonCommand extends LessonCommand {
-    public static final String ADD_LESSON_PARAM = "-a";
 
     private final Lesson lessonToAdd;
 
@@ -37,7 +36,7 @@ public class AddLessonCommand extends LessonCommand {
         Person personToUpdate = getPersonFromModel(model);
         Map<Person, ArrayList<Lesson>> clashingLessons = model.getClashingLessons(lessonToAdd);
         if (!clashingLessons.isEmpty()) {
-            StringBuilder sb = new StringBuilder(AddCommand.MESSAGE_CLASHING_LESSON).append("\n");
+            StringBuilder sb = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
             clashingLessons.forEach((student, lessons) -> {
                 sb.append(student.getName()).append(": ");
                 lessons.forEach(ls -> sb.append(ls.getDayAndTime()).append(" "));
