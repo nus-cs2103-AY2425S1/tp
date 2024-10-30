@@ -61,6 +61,8 @@ public class EventCommand extends Command {
     public EventCommand(String eventName, LocalDate eventStartDate, LocalDate eventEndDate,
                         Address location, Set<Index> attendeeIndexes) {
         requireAllNonNull(eventName, eventStartDate, eventEndDate, location, attendeeIndexes);
+        assert eventStartDate.isBefore(eventEndDate) || eventStartDate.isEqual(eventEndDate);
+
         this.eventName = eventName;
         this.eventStartDate = eventStartDate;
         this.eventEndDate = eventEndDate;
