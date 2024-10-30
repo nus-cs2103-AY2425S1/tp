@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ListWeddingCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -196,7 +197,7 @@ public class MainWindow extends UiPart<Stage> {
             // allows for the corresponding person or wedding list to be shown
             listPanelPlaceholder.getChildren().clear();
 
-            if (commandText.startsWith("list-wedding")) {
+            if (commandText.startsWith(ListWeddingCommand.COMMAND_WORD)) {
                 weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
                 listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
             } else if (commandText.startsWith("view-wed")) {
