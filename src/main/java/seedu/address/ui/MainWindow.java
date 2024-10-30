@@ -196,7 +196,7 @@ public class MainWindow extends UiPart<Stage> {
             // allows for the corresponding person or wedding list to be shown
             listPanelPlaceholder.getChildren().clear();
 
-            if (commandText.startsWith("list-wed")) {
+            if (commandText.startsWith("list-wedding")) {
                 weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
                 listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
             } else if (commandText.startsWith("view-wed")) {
