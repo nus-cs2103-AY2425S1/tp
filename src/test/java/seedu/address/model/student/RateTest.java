@@ -23,6 +23,7 @@ public class RateTest {
 
     @Test
     void isValidRate() {
+        String maxValueString = Double.toString(Double.MAX_VALUE);
         // null rate
         assertThrows(NullPointerException.class, () -> Rate.isValidRate(null));
 
@@ -32,12 +33,19 @@ public class RateTest {
         assertFalse(Rate.isValidRate("1.234")); // more than 2 decimal places
         assertFalse(Rate.isValidRate("1.2.3")); // more than 1 decimal point
         assertFalse(Rate.isValidRate("-1.23")); // negative number
+        assertFalse(Rate.isValidRate("1000.01")); // more than max value
+        assertFalse(Rate.isValidRate("0")); // 0 rate
+
 
         // valid rates
         assertTrue(Rate.isValidRate("1")); // 0 decimal places
         assertTrue(Rate.isValidRate("1.2")); // 1 decimal place
         assertTrue(Rate.isValidRate("123.23")); // 2 decimal places
-        assertTrue(Rate.isValidRate("0")); // 3 digits
+
+        // boundary value
+        assertTrue(Rate.isValidRate("0.01"));
+        assertTrue(Rate.isValidRate("1000")); // boundary value
+
     }
 
     @Test

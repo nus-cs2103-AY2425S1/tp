@@ -97,12 +97,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public long checkClashes(Student student) {
-        requireNonNull(student);
-        return addressBook.countClashes(student);
-    }
-
-    @Override
     public List<Student> getClashingStudents(Student student) {
         requireNonNull(student);
         return addressBook.getClashingStudents(student);

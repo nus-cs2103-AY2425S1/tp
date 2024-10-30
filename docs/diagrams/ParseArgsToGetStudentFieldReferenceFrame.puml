@@ -1,0 +1,40 @@
+@startuml
+
+!include style.puml
+skinparam ArrowFontStyle plan
+
+mainframe **sd** parse args to create student
+    box Logic LOGIC_COLOR_T1
+
+        participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+        participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+    end box
+
+    box Model MODEL_COLOR_T1
+    participant ":Student" as Student MODEL_COLOR
+    end box
+
+
+
+
+    AddCommandParser -> ParserUtil : parse args
+    note right of ParserUtil
+    details of how arguments
+    are parsed to get each field is
+    omitted for simplicity
+    end note
+    activate ParserUtil
+    ParserUtil --> AddCommandParser : Return fields of student
+    deactivate ParserUtil
+    create Student
+    AddCommandParser -> Student : create new student with fields
+    activate Student
+    Student --> AddCommandParser : student
+    deactivate Student
+
+    'extend the life line slightly
+    Student -[hidden]-> AddCommandParser
+
+
+
+@enduml

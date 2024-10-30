@@ -6,8 +6,12 @@ import java.util.Objects;
  * Represents a Student's tuition fee rate in the address book.
  */
 public class Rate extends Fee {
+    public static final double MAX_VALUE = 1000.00;
 
-    public static final String MESSAGE_CONSTRAINTS = "Rate " + Fee.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_CONSTRAINTS = "Rate "
+            + Fee.MESSAGE_CONSTRAINTS
+            + "2. is between the range of 0.01 to " + MAX_VALUE;
+
 
     /**
     * Constructs a {@code Rate}.
@@ -18,8 +22,16 @@ public class Rate extends Fee {
         super(rate);
     }
 
+    /**
+     * Returns true if a given string is a valid rate.
+     */
     public static boolean isValidRate(String test) {
-        return Fee.isValidFee(test);
+        if (!Fee.isValidFee(test)) {
+            return false;
+        }
+
+        double rate = Double.parseDouble(test);
+        return rate > 0 && rate <= MAX_VALUE;
     }
 
     @Override

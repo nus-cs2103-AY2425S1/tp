@@ -38,16 +38,6 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
-     * Returns number of existing students with clashing schedules with given argument.
-     * @param toCheck Student to check against.
-     * @return Number of students with clashes.
-     */
-    public long countClash(Student toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().filter(toCheck::isClash).count();
-    }
-
-    /**
      * Returns a list of students with clashing schedules with given argument.
      * @param toCheck Student to check against.
      * @return List of students with clashes.

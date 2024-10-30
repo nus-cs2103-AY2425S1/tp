@@ -28,7 +28,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
    <br>
-   ![Ui](images/UGTeach.png)
+   ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
@@ -54,7 +54,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/yeoh d/Friday`
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **List**   | `list`
 **Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
@@ -64,20 +64,25 @@ Action     | Format, Examples
 
 ## Features
 
-<box type="info" seamless>**Notes about the command format:**<br>
+<box type="info">
+
+##### Notes about the command format
+
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [owe/OWED_AMOUNT]` can be used as `n/John Doe owe/100.00` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* No two students can have both same **NAME** and **PHONE**.
+* No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER** number.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+> Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -85,18 +90,18 @@ Action     | Format, Examples
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+**Format**: `help`
 
 
 ### Adding a student: `add`
 
 Adds a student to the address book.
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]`
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
 **Example:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`
@@ -104,25 +109,28 @@ Adds a student to the address book.
 **Output:**
 ![addResult.jpeg](images/addResult.jpeg)
 
-<box type="important" header="##### Constraints">
+<box type="important">
 
-1. **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
-2. **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`
-3. **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
-4. **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
-5. **RATE**, **PAID** and **OWED** must be at least 0 with at most 2 decimal places.
-      <i>Example: </i> `12.00`, `0.0` or `7`
-6. **SUBJECT** should only be:
+##### Constraints
+
+* **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
+* **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
+* **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
+* **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
+* **RATE**, **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
+      <i>Example: </i> `12.00`, `0.0` or `7`.
+* **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
-`English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics`  `GP`
+`English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
 
 </box>
 
 <box type="tip" header="##### Tips">
 
-1. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit)
-2. <b>RATE</b> is the tuition fee per hour.
-    
+
+* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit).
+* <b>RATE</b> is the tuition fee per hour.
+* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.   
 </box>
 
 ### Listing all students : `list`
@@ -135,26 +143,36 @@ Format: `list`
 
 Edits an existing student in the address book.
 
-**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
+**Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
 **Examples:**
 
-`edit 1 p/87438808 e/alexyeoh100@example.com` </br> Edits the phone number and email address of the 1st student to be `87438808` and `alexyeoh100@examnple.com` respectively.
+* `edit 1 p/87438808 e/alexyeoh100@example.com` edits the phone number and email address of the 1st student to be `87438808` and `alexyeoh100@examnple.com` respectively.
 
-`edit 2 paid/1200.00 owed/0` </br> Edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
+* `edit 2 paid/1200.00 owed/0` edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
+
+**Output:**
+
 ![editResult.png](images/editResult.png)
 
 <box type="important" header="##### Constraints">
 
-1. The <md>**INDEX**</md> refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* The <md>**INDEX**</md> refers to the index number shown in the **displayed student** list. The index **must be a positive integer** 1, 2, 3, …​
 
-2. At least one of the optional fields must be provided.
+* At least one of the optional fields must be provided. You may refer to
+[Constraints of Add command](#constraints) for acceptable values of each field.
 
-3. Existing values will be updated to the input values.
+* Existing values will be updated to the input values.
 </box>
 
+<box type="tip" header="##### Tips">
 
+* You may refer to [`pay`](#receiving-payment-from-a-student--pay), 
+[`owe`](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle`](#settle-payments-from-students-settle) commands 
+for convenient ways to update the paid amount and owed amount.
 
+* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+</box>
 
 ### Showing income data: `income`
 
@@ -232,7 +250,7 @@ Example:
 
 <box type="tip" header="##### Tips">
 
-In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the OWE_AMOUNT as your preference.
+In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the OWE_AMOUNT as your preference.
 
 </box>
 
@@ -258,25 +276,34 @@ Examples:<br>`settle 1 amount/500.00`
 
 Deletes the specified student from the address book.
 
-Format: `delete INDEX`
+**Format:** `delete INDEX`
 
-* Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
+**Examples:**
+* `list` followed by `delete 2` deletes the 2nd student stored in UGTeach.
+* `find n/Bernice` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+**Output:**
+![deleteResult.png](images/deleteResult.png)
+
+<box type="important" header="##### Constraints">
+
+* The **INDEX** refers to the index number shown in the **displayed** student list.
+* The **INDEX must be a positive integer** 1, 2, 3, …​
+
+</box>
 
 ### Getting a reminder for today : `remind`
 
-Get a reminder on all your lessons scheduled for `today`. Automatically reminds you when you launch the app.
+Reminds you of all your lessons scheduled for `today`. UGTeach automatically reminds you when you launch it.
 
-Format: `remind`
+**Format:** `remind`
+
+**Output:**
+![remindResult.png](images/remindResult.png)
 
 <box type="tip" header="##### Tips">
 
-If you would like to see your schedule for other days, you can use the [`find` command](#finding-students-information-find) 
+* If you would like to see your schedule for other days, you can use the [`find` command](#finding-students-information-find) 
 to find your schedule for a specific day of the week.
 
 </box>
