@@ -103,6 +103,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getCarsWithSameVrnOrVinCount(Car car) {
+        requireNonNull(car);
+        return addressBook.getCarsWithSameVrnOrVinCount(car);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

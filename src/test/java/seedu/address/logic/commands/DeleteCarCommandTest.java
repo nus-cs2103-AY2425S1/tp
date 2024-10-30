@@ -103,6 +103,11 @@ public class DeleteCarCommandTest {
         }
 
         @Override
+        public int getCarsWithSameVrnOrVinCount(Car car) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }

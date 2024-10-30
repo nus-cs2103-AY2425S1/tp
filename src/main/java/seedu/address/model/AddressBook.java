@@ -80,6 +80,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns total number of cars with the same VRN or VIN as {@code car}.
+     * @param car the car to check
+     */
+    public int getCarsWithSameVrnOrVinCount(Car car) {
+        requireNonNull(car);
+        return persons.getCarsWithSameVrnOrVinCount(car);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

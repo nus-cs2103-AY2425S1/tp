@@ -114,7 +114,8 @@ public class EditClientCommand extends Command {
             if (carToEdit.equals(editedCar) && isCarEdited) {
                 throw new CommandException(MESSAGE_FIELD_VALUES_SAME);
             }
-            if ((!carToEdit.hasMatchingVrnAndVin(editedCar)) && model.hasCar(editedCar) && isCarEdited) {
+            if ((!carToEdit.hasMatchingVrnAndVin(editedCar))
+                && model.getCarsWithSameVrnOrVinCount(editedCar) > 1 && isCarEdited) {
                 throw new CommandException(MESSAGE_DUPLICATE_CAR);
             }
         }
