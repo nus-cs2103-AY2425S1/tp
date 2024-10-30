@@ -13,9 +13,9 @@ import java.util.Set;
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.commons.util.StringUtil;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
-import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.person.Address;
 import seedu.sellsavvy.model.person.Email;
 import seedu.sellsavvy.model.person.Name;
@@ -145,18 +145,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String count} into an {@code Count}.
+     * Parses a {@code String quantity} into an {@code Quantity}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code count} is invalid.
+     * @throws ParseException if the given {@code quantity} is invalid.
      */
-    public static Count parseCount(String count) throws ParseException {
-        requireNonNull(count);
-        String trimmedCount = count.trim();
-        if (!Count.isValidCount(trimmedCount)) {
-            throw new ParseException(Count.MESSAGE_CONSTRAINTS);
+    public static Quantity parseQuantity(String quantity) throws ParseException {
+        requireNonNull(quantity);
+        String trimmedQuantity = quantity.trim();
+        if (!Quantity.isValidQuantity(trimmedQuantity)) {
+            throw new ParseException(Quantity.MESSAGE_CONSTRAINTS);
         }
-        return new Count(trimmedCount);
+        return new Quantity(trimmedQuantity);
     }
 
     /**
@@ -168,8 +168,10 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
+        if (!Date.isValidDateRegex(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        } else if (!Date.isValidCalendarDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_INVALID_DATE);
         }
         return new Date(trimmedDate);
     }
@@ -187,7 +189,7 @@ public class ParserUtil {
                     .withResolverStyle(ResolverStyle.STRICT);
             return LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_INVALID_DATE);
         }
     }
 }

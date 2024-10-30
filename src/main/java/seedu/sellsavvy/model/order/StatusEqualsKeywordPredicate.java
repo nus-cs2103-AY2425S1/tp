@@ -16,7 +16,7 @@ public class StatusEqualsKeywordPredicate implements Predicate<Order> {
 
     /** Returns the value of the predicate as a string. */
     public String getValue() {
-        return status.toString();
+        return status.getValue();
     }
 
     @Override

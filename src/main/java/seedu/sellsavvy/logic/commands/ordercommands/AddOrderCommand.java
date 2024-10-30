@@ -2,9 +2,10 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
+import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 
 import java.util.List;
 
@@ -30,17 +31,17 @@ public class AddOrderCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ITEM + "ITEM "
             + PREFIX_DATE + "DELIVERY_BY "
-            + "[" + PREFIX_COUNT + "QUANTITY]\n"
+            + "[" + PREFIX_QUANTITY + "QUANTITY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + "Lamp "
             + PREFIX_DATE + "20-12-2024 "
-            + PREFIX_COUNT + "2\n"
-            + "If [" + PREFIX_COUNT + "QUANTITY] is not provided, the quantity will be set to 1";
+            + PREFIX_QUANTITY + "2\n"
+            + "If [" + PREFIX_QUANTITY + "QUANTITY] is not provided, the quantity will be set to 1";
 
     public static final String MESSAGE_ADD_ORDER_SUCCESS = "New order added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
-            + "This customer already has an order for this item"
-            + ", verify if this is a mistake\n";
+            + "This customer already has an order for this item, "
+            + "verify if this is a mistake\n";
 
     private final Index index;
     private final Order toAdd;
@@ -68,11 +69,16 @@ public class AddOrderCommand extends Command {
 
         Person personToAddUnder = lastShownList.get(index.getZeroBased());
         OrderList orderList = personToAddUnder.getOrderList();
-        String feedbackToUser = orderList.contains(toAdd) ? MESSAGE_DUPLICATE_ORDER_WARNING : "";
+        String feedbackToUser = orderList.contains(toAdd)
+                ? MESSAGE_DUPLICATE_ORDER_WARNING
+                : "";
+        feedbackToUser += toAdd.hasDateElapsed()
+                ? MESSAGE_OUTDATED_WARNING
+                : "";
         orderList.add(toAdd);
 
-        return new CommandResult(feedbackToUser + String.format(MESSAGE_ADD_ORDER_SUCCESS,
-                personToAddUnder.getName(), Messages.format(toAdd)));
+        return new CommandResult(feedbackToUser
+                + String.format(MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(toAdd)));
     }
 
     @Override

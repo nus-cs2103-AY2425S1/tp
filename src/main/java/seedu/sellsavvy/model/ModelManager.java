@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final ReadOnlyObjectWrapper<Person> selectedPerson;
+    private final ReadOnlyObjectWrapper<Person> selectedPersonPropery;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,7 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        selectedPerson = new ReadOnlyObjectWrapper<>(); // initially no order is displayed
+        selectedPersonPropery = new ReadOnlyObjectWrapper<>(); // initially no order is displayed
     }
 
     public ModelManager() {
@@ -120,7 +120,7 @@ public class ModelManager implements Model {
     @Override
     public Model createCopy() {
         Model modelCopy = new ModelManager(addressBook.createCopy(), userPrefs);
-        Person selectedPersonCopy = modelCopy.findEquivalentPerson(getSelectedPerson2());
+        Person selectedPersonCopy = modelCopy.findEquivalentPerson(getSelectedPerson());
         modelCopy.updateSelectedPerson(selectedPersonCopy);
         return modelCopy;
     }
@@ -153,44 +153,49 @@ public class ModelManager implements Model {
 
     //=========== Selected Person Accessors ==================================================================
 
-    /**
-     * Returns an unmodifiable view of selected {@code Person}
-     */
     @Override
-    public ReadOnlyObjectProperty<Person> getSelectedPerson() {
-        return selectedPerson.getReadOnlyProperty();
+    public ReadOnlyObjectProperty<Person> getSelectedPersonProperty() {
+        return selectedPersonPropery.getReadOnlyProperty();
     }
 
     @Override
     public void updateSelectedPerson(Person person) {
-        selectedPerson.set(person);
+        selectedPersonPropery.set(person);
     }
 
     @Override
     public boolean isSelectedPerson(Person person) {
-        if (getSelectedPerson2() == null) {
+        if (getSelectedPerson() == null) {
             return person == null;
         }
-        return getSelectedPerson2().equals(person);
+        return getSelectedPerson().equals(person);
     }
 
     @Override
-    public Person getSelectedPerson2() {
-        return selectedPerson.get();
+    public Person getSelectedPerson() {
+        return selectedPersonPropery.get();
+    }
+
+    @Override
+    public OrderList getSelectedOrderList() {
+        if (getSelectedPerson() == null) {
+            return null;
+        }
+        return getSelectedPerson().getOrderList();
     }
 
     @Override
     public FilteredList<Order> getFilteredOrderList() {
-        if (getSelectedPerson2() == null) {
+        if (getSelectedPerson() == null) {
             return null;
         }
-        return getSelectedPerson2().getFilteredOrderList();
+        return getSelectedPerson().getFilteredOrderList();
     }
 
     @Override
     public void setOrder(Order target, Order editedOrder) {
-        assert getSelectedPerson2() != null; // we shouldn't be calling this method if there is no selectedPerson
-        OrderList orderList = getSelectedPerson2().getOrderList();
+        assert getSelectedPerson() != null; // we shouldn't be calling this method if there is no selectedPerson
+        OrderList orderList = getSelectedPerson().getOrderList();
         orderList.setOrder(target, editedOrder);
     }
 
@@ -207,9 +212,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
 
-        boolean isSameDisplayedPerson = getSelectedPerson2() == null
-                ? otherModelManager.getSelectedPerson2() == null
-                : getSelectedPerson2().equals(otherModelManager.getSelectedPerson2());
+        boolean isSameDisplayedPerson = getSelectedPerson() == null
+                ? otherModelManager.getSelectedPerson() == null
+                : getSelectedPerson().equals(otherModelManager.getSelectedPerson());
 
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)

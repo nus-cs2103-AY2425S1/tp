@@ -90,10 +90,10 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getSelectedPerson_innerContent_isNullInitially() {
-        assertNotNull(logic.getSelectedPerson());
+    public void getSelectedPersonProperty_innerContent_isNullInitially() {
+        assertNotNull(logic.getSelectedPersonProperty());
         //ensures that when first initiated no person's order will be displayed
-        assertNull(logic.getSelectedPerson().get());
+        assertNull(logic.getSelectedPersonProperty().get());
     }
 
     /**

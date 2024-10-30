@@ -10,13 +10,21 @@ import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names can only contain alphanumeric characters, spaces,"
+                    + "and one of the following symbols: hyphen, comma, and apostrophe.\n"
+                    + "Names should have alphanumeric characters before and after the symbol, "
+                    + "and it should not be blank."
+                    + "Relationship indicator preceded \"S/O\" or \"D/O\" can be included, but must be followed "
+                    + "with the name of person with stated relationship.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String ALPHANUMERIC_WITH_SPACE = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String NAME_REGEX = ALPHANUMERIC_WITH_SPACE + "((,\\s|'|-)" + ALPHANUMERIC_WITH_SPACE + ")?";
+    public static final String RELATIONSHIP_REGEX = "\\s(S/O|D/O)\\s" + NAME_REGEX;
+    public static final String VALIDATION_REGEX = "^" + NAME_REGEX + "(" + RELATIONSHIP_REGEX + ")?$";
 
     public final String fullName;
 

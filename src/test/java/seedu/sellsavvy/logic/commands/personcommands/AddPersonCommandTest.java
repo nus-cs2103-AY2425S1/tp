@@ -26,6 +26,7 @@ import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;
 import seedu.sellsavvy.model.ReadOnlyUserPrefs;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.PersonBuilder;
 
@@ -169,7 +170,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public ReadOnlyObjectProperty<Person> getSelectedPerson() {
+        public ReadOnlyObjectProperty<Person> getSelectedPersonProperty() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -184,12 +185,17 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public Person getSelectedPerson2() {
+        public Person getSelectedPerson() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public FilteredList<Order> getFilteredOrderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public OrderList getSelectedOrderList() {
             throw new AssertionError("This method should not be called.");
         }
 

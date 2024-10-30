@@ -15,7 +15,6 @@ import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
-import seedu.sellsavvy.model.person.Person;
 
 /**
  * Deletes an order identified using it's displayed index from the displayed order list of a specified person.
@@ -45,18 +44,17 @@ public class DeleteOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person selectedPerson = model.getSelectedPerson().get();
-        if (selectedPerson == null) {
+        List<Order> lastShownOrderList = model.getFilteredOrderList();
+        if (lastShownOrderList == null) {
             throw new CommandException(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
         }
 
-        List<Order> lastShownOrderList = selectedPerson.getFilteredOrderList();
         if (index.getZeroBased() >= lastShownOrderList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
         Order orderToDelete = lastShownOrderList.get(this.index.getZeroBased());
 
-        OrderList orderList = selectedPerson.getOrderList();
+        OrderList orderList = model.getSelectedOrderList();
         orderList.remove(orderToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ORDER_SUCCESS, Messages.format(orderToDelete)));
     }

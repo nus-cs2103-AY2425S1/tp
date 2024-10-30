@@ -1,10 +1,10 @@
 package seedu.sellsavvy.testutil;
 
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDescriptor;
-import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Quantity;
 
 /**
  * A utility class to help with building EditOrderDescriptor objects.
@@ -27,7 +27,7 @@ public class EditOrderDescriptorBuilder {
     public EditOrderDescriptorBuilder(Order order) {
         descriptor = new EditOrderDescriptor();
         descriptor.setDate(order.getDate());
-        descriptor.setQuantity(order.getCount());
+        descriptor.setQuantity(order.getQuantity());
         descriptor.setItem(order.getItem());
     }
 
@@ -43,7 +43,7 @@ public class EditOrderDescriptorBuilder {
      * Sets the {@code Quantity} of the {@code EditOrderDescriptor} that we are building.
      */
     public EditOrderDescriptorBuilder withQuantity(String quantity) {
-        descriptor.setQuantity(new Count(quantity));
+        descriptor.setQuantity(new Quantity(quantity));
         return this;
     }
 
