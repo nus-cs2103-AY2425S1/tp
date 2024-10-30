@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.datetime.Date;
 import seedu.address.model.datetime.Time;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.StudentLessonInfo;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.ModelStub;
@@ -70,10 +70,10 @@ public class RemoveFromLessonCommandTest {
         private final Lesson lesson = new Lesson(
                 new Date("2024-10-20"),
                 new Time("14:00"),
-                FXCollections.observableArrayList(student1, student2),
-                Map.of(student1, true, student2, false));
+                List.of(new StudentLessonInfo(student1, true, 1),
+                        new StudentLessonInfo(student2, false, 0)));
 
-        private ArrayList<Lesson> lessons;
+        private final ArrayList<Lesson> lessons;
 
         ModelStubWithLesson() {
             this.lessons = new ArrayList<>();
