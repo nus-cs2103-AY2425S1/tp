@@ -18,6 +18,9 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     private String lastRememberedSyncStatus;
     private String lastRememberedSaveLocation;
 
+    /**
+     * Constructor for {@code StatusFooterHandle}.
+     */
     public StatusBarFooterHandle(Node statusBarFooterNode) {
         super(statusBarFooterNode);
 

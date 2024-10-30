@@ -1,6 +1,5 @@
 package seedu.address;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
@@ -8,12 +7,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
-
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.UserPrefsStorage;
 
 
@@ -27,22 +22,15 @@ public class TestApp extends MainApp {
     private Path saveFileLocation;
     private Path prefFileLocation;
 
+    /**
+     * Constructor for {@code TestApp}.
+     */
     public TestApp(Supplier<ReadOnlyAddressBook> initialDataSupplier, Path saveFileLocation, Path prefFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;
         this.prefFileLocation = prefFileLocation;
 
-        /*  If some initial local data has been provided, write those to the file
-        if (initialDataSupplier.get() != null) {
-            JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(saveFileLocation);
-            try {
-                jsonAddressBookStorage.saveAddressBook(initialDataSupplier.get());
-            } catch (IOException ioe) {
-                throw new AssertionError(ioe);
-            }
-        }
-        */
     }
 
     @Override

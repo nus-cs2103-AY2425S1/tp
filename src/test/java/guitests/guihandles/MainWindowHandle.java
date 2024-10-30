@@ -13,6 +13,9 @@ public class MainWindowHandle extends StageHandle {
     private final StatusBarFooterHandle statusBarFooter;
     private final MainMenuHandle mainMenu;
 
+    /**
+     * Constructor for{@code MainWindow}.
+     */
     public MainWindowHandle(Stage stage) {
         super(stage);
 

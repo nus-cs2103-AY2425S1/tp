@@ -10,6 +10,9 @@ import seedu.address.ui.UiManager;
 public class AlertDialogHandle extends StageHandle {
     private final DialogPane dialogPane;
 
+    /**
+     * Constructor for AlertDialoghandle, takes in a {@code Stage} to set as the root
+     */
     public AlertDialogHandle(Stage stage) {
         super(stage);
 
