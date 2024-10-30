@@ -8,7 +8,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
     "subjects" : [ "Mathematics" ],
-    "classes" : [ "7A" ]
+    "classes" : [ "7A" ],
+    "daysAttended" : null
   }, {
     "name" : "Benson Meier",
     "gender": "male",
@@ -17,7 +18,8 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
     "subjects" : [ "Chemistry", "Physics" ],
-    "classes" : [ "7A" ]
+    "classes" : [ "7A" ],
+    "daysAttended" : 0
   }, {
     "name" : "Carl Kurz",
     "gender": "male",
@@ -26,7 +28,8 @@
     "address" : "wall street",
     "tags" : [ ],
     "subjects" : [ "Mathematics" ],
-    "classes" : [ "7B" ]
+    "classes" : [ "7B" ],
+    "daysAttended" : 0
   }, {
     "name" : "Daniel Meier",
     "gender": "male",
@@ -35,7 +38,8 @@
     "address" : "10th street",
     "tags" : [ "friends" ],
     "subjects" : [ "Physics" ],
-    "classes" : [ "8A", "8C" ]
+    "classes" : [ "8A", "8C" ],
+    "daysAttended" : null
   }, {
     "name" : "Elle Meyer",
     "gender": "female",
@@ -44,7 +48,8 @@
     "address" : "michegan ave",
     "tags" : [ ],
     "subjects" : [ "Mathematics" ],
-    "classes" : [ "7A" ]
+    "classes" : [ "7A" ],
+    "daysAttended" : 0
   }, {
     "name" : "Fiona Kunz",
     "gender": "female",
@@ -53,15 +58,7 @@
     "address" : "little tokyo",
     "tags" : [ ],
     "subjects" : [ "Physics" ],
-    "classes" : [ "7B" ]
-  }, {
-    "name" : "George Best",
-    "gender": "male",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ],
-    "subjects" : [ "Mathematics", "Physics" ],
-    "classes" : [ "7A" ]
+    "classes" : [ "7B" ],
+    "daysAttended" : 0
   } ]
 }

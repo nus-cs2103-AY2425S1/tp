@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,6 +12,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
+    public static final String STUDENT_TYPE = "student";
     private final DaysAttended daysAttended;
 
     /**
@@ -29,16 +29,11 @@ public class Student extends Person {
      */
     public Student(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
                    Set<Subject> subjects, Set<String> classes, DaysAttended daysAttended) {
-        super(name, gender, phone, email, address, addStudentTag(tags), subjects, classes);
+        super(name, gender, phone, email, address, tags, subjects, classes);
         this.daysAttended = daysAttended;
     }
 
-    private static Set<Tag> addStudentTag(Set<Tag> tags) {
-        Set<Tag> modifiedTags = new HashSet<>(tags);
-        modifiedTags.add(new Tag("student"));
-        return modifiedTags;
-    }
-
+    @Override
     public DaysAttended getDaysAttended() {
         return daysAttended;
     }
@@ -121,4 +116,22 @@ public class Student extends Person {
         this.daysAttended.reset();
     }
 
+    /**
+     * Returns true if both are students with the same name and email address.
+     * This defines a weaker notion of equality between two persons.
+     */
+    @Override
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson instanceof Student
+            && otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail());
+    }
+
+    @Override
+    public String getType() {
+        return STUDENT_TYPE;
+    }
 }

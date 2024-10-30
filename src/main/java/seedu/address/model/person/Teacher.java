@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,6 +12,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Teacher extends Person {
+
+
+    public static final String TEACHER_TYPE = "teacher";
 
     /**
      * Constructs a {@code Teacher} with the specified details.
@@ -29,13 +31,7 @@ public class Teacher extends Person {
      */
     public Teacher(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
                    Set<Subject> subjects, Set<String> classes) {
-        super(name, gender, phone, email, address, addTeacherTag(tags), subjects, classes);
-    }
-
-    private static Set<Tag> addTeacherTag(Set<Tag> tags) {
-        Set<Tag> modifiedTags = new HashSet<>(tags);
-        modifiedTags.add(new Tag("teacher"));
-        return modifiedTags;
+        super(name, gender, phone, email, address, tags, subjects, classes);
     }
 
     /**
@@ -97,4 +93,23 @@ public class Teacher extends Person {
             getTags(), getSubjects(), getClasses());
     }
 
+    /**
+     * Returns true if both are teachers with the same name and email address.
+     * This defines a weaker notion of equality between two persons.
+     */
+    @Override
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson instanceof Teacher
+            && otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail());
+    }
+
+    @Override
+    public String getType() {
+        return TEACHER_TYPE;
+
+    }
 }

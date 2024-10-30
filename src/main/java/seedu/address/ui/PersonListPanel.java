@@ -9,8 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Student;
-import seedu.address.model.person.Teacher;
+import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 
 /**
  * Panel containing the list of persons.
@@ -46,24 +45,15 @@ public class PersonListPanel extends UiPart<Region> {
                 getStyleClass().removeAll("student-card", "teacher-card"); // Clear any previous styles
             } else {
                 // Set the PersonCard as the graphic for the ListCell
-                PersonCard personCard = new PersonCard(person, getIndex() + 1);
-                setGraphic(personCard.getRoot());
+                try {
+                    PersonCard personCard = PersonCard.createPersonCard(person, getIndex() + 1);
+                    setGraphic(personCard.getRoot());
+                } catch (InvalidPersonTypeException e) {
+                    logger.warning("Invalid person type encountered: " + person.getName());
+                }
 
                 // Remove any previous styles applied to the cell
                 getStyleClass().removeAll("student-card", "teacher-card");
-
-                // Apply the appropriate style based on whether the person is a Student or Teacher
-                if (person instanceof Student) {
-                    // Apply inline style for student
-                    setStyle("-fx-background-color: #349beb;");
-
-                } else if (person instanceof Teacher) {
-                    // Apply inline style for teacher
-                    setStyle("-fx-background-color: #269e2e;");
-                } else {
-                    // Optionally, clear the style for other types of people
-                    setStyle("");
-                }
             }
         }
 

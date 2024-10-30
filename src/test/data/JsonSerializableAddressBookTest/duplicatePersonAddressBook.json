@@ -6,15 +6,17 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ],
-    "subjects" : [ "Mathematics" ],
-    "classes" : [ "7A" ]
+    "subjects" : [ "Mathematics", "teacher" ],
+    "classes" : [ "7A" ],
+    "daysAttended" : null
   }, {
     "name": "Alice Pauline",
     "gender": "female",
     "phone": "94351253",
-    "email": "pauline@example.com",
+    "email": "alice@example.com",
     "address": "4th street",
-    "subjects" : [ "Mathematics" ],
-    "classes" : [ "7A" ]
+    "subjects" : [ "Mathematics", "teacher" ],
+    "classes" : [ "7A" ],
+    "daysAttended" : null
   } ]
 }

@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MICHAEL;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.MICHAEL;
+import static seedu.address.testutil.TypicalPersons.STUDENT_MICHAEL;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -172,7 +172,7 @@ public class LogicManagerTest {
         String addStudentCommand = AddStudentCommand.COMMAND_WORD + NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL
                 + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL
                 + CLASSES_DESC_MICHAEL + ATTENDANCE_DESC_MICHAEL;
-        Student expectedStudent = new StudentBuilder(MICHAEL).withTags().build();
+        Student expectedStudent = new StudentBuilder(STUDENT_MICHAEL).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedStudent);
         assertCommandFailure(addStudentCommand, CommandException.class, expectedMessage, expectedModel);

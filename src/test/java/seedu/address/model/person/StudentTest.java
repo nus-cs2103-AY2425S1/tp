@@ -1,8 +1,10 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,7 @@ public class StudentTest {
         assertEquals(new Email("amy@gmail.com"), student.getEmail());
         assertEquals(new Address("123, Jurong West Ave 6, #08-111"), student.getAddress());
         assertEquals(1, student.getSubjects().size());
-        assertEquals(1, student.getTags().size());
+        assertEquals(0, student.getTags().size());
         assertEquals(0, student.getClasses().size());
     }
 
@@ -39,7 +41,7 @@ public class StudentTest {
         assertEquals(new Email("john@example.com"), student.getEmail());
         assertEquals(new Address("456, Clementi Ave 3, #12-34"), student.getAddress());
         assertEquals(2, student.getSubjects().size());
-        assertEquals(3, student.getTags().size());
+        assertEquals(2, student.getTags().size());
         assertEquals(2, student.getClasses().size());
     }
 
@@ -93,6 +95,46 @@ public class StudentTest {
         // Reset attendance and verify if property reflects the reset value
         student.getDaysAttended().reset();
         assertEquals(0, student.daysAttendedProperty().get(), "daysAttended value should reset to 0");
+    }
+
+    @Test
+    public void isSamePerson_sameObject_returnsTrue() {
+        Student student = new StudentBuilder().withName("John Doe").build();
+        assertTrue(student.isSamePerson(student));
+    }
+
+    @Test
+    public void isSamePerson_differentObjectSameIdentityFields_returnsTrue() {
+        Student student1 = new StudentBuilder().withName("John Doe").withPhone("12345678").build();
+        Student student2 = new StudentBuilder().withName("John Doe").withPhone("12345678").build();
+        assertTrue(student1.isSamePerson(student2));
+    }
+
+    @Test
+    public void isSamePerson_differentObjectDifferentName_returnsFalse() {
+        Student student1 = new StudentBuilder().withName("John Doe").withPhone("12345678").build();
+        Student student2 = new StudentBuilder().withName("Jane Doe").withPhone("87654321").build();
+        assertFalse(student1.isSamePerson(student2));
+    }
+
+    @Test
+    public void isSamePerson_differentObjectDifferentEmail_returnsFalse() {
+        Student student1 = new StudentBuilder().withName("John Doe").withEmail("johndoe@example.com").build();
+        Student student2 = new StudentBuilder().withName("John Doe").withEmail("janedoe@example.com").build();
+        assertFalse(student1.isSamePerson(student2));
+    }
+
+    @Test
+    public void isSamePerson_differentObjectSameNameSameEmail_returnsTrue() {
+        Student student1 = new StudentBuilder().withPhone("12345678").build();
+        Student student2 = new StudentBuilder().withPhone("87654321").build();
+        assertTrue(student1.isSamePerson(student2));
+    }
+
+    @Test
+    public void isSamePerson_nullObject_returnsFalse() {
+        Student student = new StudentBuilder().withName("John Doe").build();
+        assertFalse(student.isSamePerson(null));
     }
 
 }

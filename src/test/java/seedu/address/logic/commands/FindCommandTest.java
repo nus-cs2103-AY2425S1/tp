@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.STUDENT_BENSON;
+import static seedu.address.testutil.TypicalPersons.STUDENT_CARL;
+import static seedu.address.testutil.TypicalPersons.STUDENT_ELLE;
+import static seedu.address.testutil.TypicalPersons.STUDENT_FIONA;
+import static seedu.address.testutil.TypicalPersons.TEACHER_ALICE;
+import static seedu.address.testutil.TypicalPersons.TEACHER_DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -76,17 +76,17 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(BENSON), model.getFilteredPersonList());
+        assertEquals(List.of(STUDENT_BENSON), model.getFilteredPersonList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() throws ParseException {
         String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 3);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/name Carl Elle Fiona");
+        PersonContainsKeywordsPredicate predicate = preparePredicate("/name Carl Benson Elle");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(STUDENT_BENSON, STUDENT_CARL, STUDENT_ELLE), model.getFilteredPersonList());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(STUDENT_CARL, STUDENT_ELLE, STUDENT_FIONA), model.getFilteredPersonList());
     }
 
     @Test
@@ -106,7 +106,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE), model.getFilteredPersonList());
+        assertEquals(List.of(TEACHER_ALICE), model.getFilteredPersonList());
     }
 
     @Test
@@ -116,7 +116,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE), model.getFilteredPersonList());
+        assertEquals(List.of(TEACHER_ALICE), model.getFilteredPersonList());
     }
 
     @Test
@@ -127,7 +127,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE, BENSON, ELLE), model.getFilteredPersonList());
+        assertEquals(List.of(TEACHER_ALICE, STUDENT_BENSON, STUDENT_ELLE), model.getFilteredPersonList());
     }
 
     @Test
@@ -137,7 +137,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE), model.getFilteredPersonList());
+        assertEquals(List.of(TEACHER_ALICE), model.getFilteredPersonList());
     }
 
     @Test
@@ -147,7 +147,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(List.of(TEACHER_ALICE, STUDENT_BENSON, TEACHER_DANIEL), model.getFilteredPersonList());
     }
 
     @Test
@@ -178,7 +178,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE), model.getFilteredPersonList());
+        assertEquals(List.of(TEACHER_ALICE), model.getFilteredPersonList());
     }
 
     @Test

@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.Teacher;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,24 +25,28 @@ public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Gender("male"), new Phone("87438807"),
+            Person.createPerson(Teacher.TEACHER_TYPE, new Name("Alex Yeoh"), new Gender("male"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), getSubjectSet("Math"), getClassSet("P1")),
-            new Person(new Name("Bernice Yu"), new Gender("female"), new Phone("99272758"),
+                getTagSet("friends"), getSubjectSet("Math"), getClassSet("P1"), null),
+            Person.createPerson(Teacher.TEACHER_TYPE, new Name("Bernice Yu"), new Gender("female"),
+                new Phone("99272758"),
                 new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), getSubjectSet("English"), getClassSet("P2")),
-            new Person(new Name("Charlotte Oliveiro"), new Gender("female"), new Phone("93210283"),
+                getTagSet("colleagues", "friends"), getSubjectSet("English"), getClassSet("P2"), null),
+            Person.createPerson(Student.STUDENT_TYPE, new Name("Charlotte Oliveiro"), new Gender("female"),
+                new Phone("93210283"),
                 new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), getSubjectSet("Science"), getClassSet("P3")),
-            new Person(new Name("David Li"), new Gender("male"), new Phone("91031282"),
+                getTagSet("neighbours"), getSubjectSet("Science"), getClassSet("P3"), new DaysAttended(1)),
+            Person.createPerson(Teacher.TEACHER_TYPE, new Name("David Li"), new Gender("male"), new Phone("91031282"),
                 new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), getSubjectSet("Math", "Science"), getClassSet("P4")),
-            new Person(new Name("Irfan Ibrahim"), new Gender("male"), new Phone("92492021"),
+                getTagSet("family"), getSubjectSet("Math", "Science"), getClassSet("P4"), null),
+            Person.createPerson(Student.STUDENT_TYPE, new Name("Irfan Ibrahim"), new Gender("male"),
+                new Phone("92492021"),
                 new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), getSubjectSet("Math"), getClassSet("P5", "P6")),
-            new Person(new Name("Roy Balakrishnan"), new Gender("male"), new Phone("92624417"),
+                getTagSet("classmates"), getSubjectSet("Math"), getClassSet("P5", "P6"), new DaysAttended(3)),
+            Person.createPerson(Student.STUDENT_TYPE, new Name("Roy Balakrishnan"), new Gender("male"),
+                new Phone("92624417"),
                 new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), getSubjectSet("Math"), getClassSet("P6"))
+                getTagSet("colleagues"), getSubjectSet("Math"), getClassSet("P6"), new DaysAttended(0))
         };
     }
 

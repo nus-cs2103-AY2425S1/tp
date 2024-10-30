@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Student.STUDENT_TYPE;
+import static seedu.address.model.person.Teacher.TEACHER_TYPE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,13 +10,16 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
+
 
     // Identity fields
     private final Name name;
@@ -72,6 +77,10 @@ public class Person {
         return this.classes;
     }
 
+    public DaysAttended getDaysAttended() {
+        return null;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -85,12 +94,7 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        throw new InvalidPersonTypeException();
     }
 
     /**
@@ -139,4 +143,52 @@ public class Person {
             .toString();
     }
 
+    public void markAttendance(){
+    }
+
+    public void unmarkAttendance() {
+        throw new UnsupportedOperationException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
+    }
+
+    public void resetAttendance() {
+    }
+
+    /**
+     * Creates a new Person object based on the specified type.
+     *
+     * @param type The type of person to create (e.g., "student" or "teacher").
+     * @param name The name of the person.
+     * @param gender The gender of the person.
+     * @param phone The phone number of the person.
+     * @param email The email address of the person.
+     * @param address The address of the person.
+     * @param tags The set of tags associated with the person.
+     * @param subjects The set of subjects associated with the person.
+     * @param classes The set of classes associated with the person.
+     * @param daysAttended The number of days attended by the person (applicable for students).
+     * @return A new Person object of the specified type.
+     * @throws InvalidPersonTypeException if the specified type is not recognized.
+     */
+    public static Person createPerson(String type, Name name, Gender gender, Phone phone, Email email, Address address,
+                                      Set<Tag> tags, Set<Subject> subjects, Set<String> classes,
+                                      DaysAttended daysAttended) {
+        switch (type) {
+        case STUDENT_TYPE:
+            return new Student(name, gender, phone, email, address, tags, subjects, classes, daysAttended);
+        case TEACHER_TYPE:
+            return new Teacher(name, gender, phone, email, address, tags, subjects, classes);
+        default:
+            throw new InvalidPersonTypeException();
+        }
+    }
+
+    /**
+     * Returns the type of the person.
+     *
+     * @return The type of the person.
+     * @throws InvalidPersonTypeException if the type of the person is not recognized.
+     */
+    public String getType() {
+        throw new InvalidPersonTypeException();
+    }
 }
