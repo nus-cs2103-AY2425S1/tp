@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -10,6 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Log;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,17 +26,19 @@ public class LogCommand extends Command {
             + "INFO (non-empty)\n"
             + "Example: " + COMMAND_WORD + " 1 25-12-2024 14:30 Attended appointment";
 
-    private final Index index;
+    //private final Index index;
+    private final Nric nric;
     private final Log log;
 
     /**
      * Creates a LogCommand to add the specified {@code Log} to the person at the specified {@code Index}.
      *
-     * @param targetIndex The index of the person in the filtered person list.
+     * @param targetNric The nric of the person in the filtered person list.
      * @param log The log entry to add.
      */
-    public LogCommand(Index targetIndex, Log log) {
-        this.index = targetIndex;
+    public LogCommand(Nric targetNric, Log log) {
+        //this.index = targetIndex;
+        this.nric = targetNric;
         this.log = log;
     }
 
@@ -51,13 +55,22 @@ public class LogCommand extends Command {
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        /*if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToLog = lastShownList.get(index.getZeroBased());
-        personToLog.addLogEntry(log);
-        return new CommandResult(MESSAGE_SUCCESS);
+        Person personToLog = lastShownList.get(index.getZeroBased());*/
+        Optional<Person> personWithMatchingNric = lastShownList.stream()
+                .filter(person -> nric.equals(person.getNric()))
+                .findFirst();
+
+        if (personWithMatchingNric.isPresent()) {
+            Person personToLog = personWithMatchingNric.get();
+            personToLog.addLogEntry(log);
+            return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
+        }
     }
 
     /**
@@ -70,7 +83,8 @@ public class LogCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LogCommand // instanceof handles nulls
-                && index.equals(((LogCommand) other).index)
+                //&& index.equals(((LogCommand) other).index)
+                && nric.equals(((LogCommand) other).nric)
                 && log.equals(((LogCommand) other).log));
     }
 
@@ -82,7 +96,8 @@ public class LogCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                //.add("index", index)
+                .add("nric", nric)
                 .add("log", log)
                 .toString();
     }
