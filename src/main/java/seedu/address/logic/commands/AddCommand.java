@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_LEVEL + "LEVEL] "
             + "[" + PREFIX_SUBJECT + "SUBJECT]... "
             + "[" + PREFIX_LESSON_TIME + "LESSON_TIME]...\n"
-            + " Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMERGENCY_CONTACT + "93838420 "

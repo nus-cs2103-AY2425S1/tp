@@ -44,13 +44,14 @@ public class TaskDeadline {
      * Returns true if a given string is a valid task deadline.
      */
     public static boolean isValidTaskDeadline(String test) {
-        boolean valid = true;
+        boolean isValidDeadline;
         try {
-            LocalDate.parse(test, formatter);
+            LocalDate parsedDate = LocalDate.parse(test, formatter);
+            isValidDeadline = parsedDate.format(formatter).equals(test);
         } catch (DateTimeParseException e) {
-            valid = false;
+            isValidDeadline = false;
         }
-        return valid;
+        return isValidDeadline;
     }
 
     @Override
