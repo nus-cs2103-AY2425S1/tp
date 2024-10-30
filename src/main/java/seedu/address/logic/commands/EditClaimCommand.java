@@ -22,6 +22,9 @@ import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
+/**
+ * Represents a command to edit a claim for a specific policy of a person in the address book.
+ */
 public class EditClaimCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-claim";
@@ -40,6 +43,7 @@ public class EditClaimCommand extends Command {
             + PREFIX_CLAIM_INDEX + "1 "
             + PREFIX_CLAIM_STATUS + "approved "
             + PREFIX_CLAIM_DESC + "Updated claim details.\n";
+
     public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
     public static final String MESSAGE_EDIT_CLAIM_SUCCESS = "Claim edited for policy type '%1$s' of person: %2$s.\n\n"
             + "Updated Claim Details:\nStatus: %3$s | Description: %4$s.";
@@ -54,6 +58,14 @@ public class EditClaimCommand extends Command {
     private final Index claimIndex;
     private final EditClaimDescriptor editClaimDescriptor;
 
+    /**
+     * Creates an EditClaimCommand to edit the specified claim for a person.
+     *
+     * @param personIndex       The index of the person whose claim is to be edited.
+     * @param policyType        The type of policy associated with the claim.
+     * @param claimIndex        The index of the claim to be edited.
+     * @param editClaimDescriptor The descriptor containing the details to edit the claim.
+     */
     public EditClaimCommand(Index personIndex, PolicyType policyType, Index claimIndex,
                             EditClaimDescriptor editClaimDescriptor) {
         requireAllNonNull(personIndex, policyType, claimIndex, editClaimDescriptor);
@@ -63,6 +75,13 @@ public class EditClaimCommand extends Command {
         this.editClaimDescriptor = editClaimDescriptor;
     }
 
+    /**
+     * Executes the command to edit a claim in the model.
+     *
+     * @param model The model where the command will be executed.
+     * @return A CommandResult indicating the result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -90,6 +109,14 @@ public class EditClaimCommand extends Command {
                 editedClaim.getStatus(), editedClaim.getClaimDescription()));
     }
 
+    /**
+     * Retrieves a person from the model's filtered person list using the specified index.
+     *
+     * @param model       The model containing the list of persons.
+     * @param personIndex The index of the person to retrieve.
+     * @return The person corresponding to the specified index.
+     * @throws CommandException If the provided index is invalid.
+     */
     private Person getPersonFromList(Model model, Index personIndex) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (personIndex.getZeroBased() >= lastShownList.size()) {
@@ -98,6 +125,14 @@ public class EditClaimCommand extends Command {
         return lastShownList.get(personIndex.getZeroBased());
     }
 
+    /**
+     * Retrieves the policy of the specified type from the person.
+     *
+     * @param person     The person whose policies are to be checked.
+     * @param policyType The type of policy to look for.
+     * @return The policy of the specified type.
+     * @throws CommandException If no policy of the specified type is found.
+     */
     private Policy getPolicyFromPerson(Person person, PolicyType policyType) throws CommandException {
         return person.getPolicies().stream()
                 .filter(x -> x.getType().equals(policyType))
@@ -106,6 +141,14 @@ public class EditClaimCommand extends Command {
                         String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType, person.getName())));
     }
 
+    /**
+     * Retrieves the old claim at the specified index from the given policy.
+     *
+     * @param policy     The policy containing the claims.
+     * @param claimIndex The index of the claim to retrieve.
+     * @return The claim at the specified index.
+     * @throws CommandException If no claim is found at the specified index.
+     */
     public Claim getOldClaim(Policy policy, Index claimIndex) throws CommandException {
         try {
             return policy.getClaimList().getList().get(claimIndex.getZeroBased());
@@ -114,6 +157,15 @@ public class EditClaimCommand extends Command {
         }
     }
 
+    /**
+     * Creates an edited policy with the updated claim.
+     *
+     * @param policy     The original policy.
+     * @param oldClaim   The old claim that is being edited.
+     * @param newClaim   The new claim to replace the old claim.
+     * @return The edited policy with the updated claims.
+     * @throws CommandException If the claim has not been changed or if there is a duplicate claim.
+     */
     public Policy createEditedPolicy(Policy policy, Claim oldClaim, Claim newClaim) throws CommandException {
         ClaimList updatedClaims = new ClaimList();
         updatedClaims.addAll(policy.getClaimList());
@@ -140,6 +192,13 @@ public class EditClaimCommand extends Command {
                 policy.getType(), policy.getPremiumAmount(), policy.getCoverageAmount(), policy.getExpiryDate(), updatedClaims);
     }
 
+    /**
+     * Creates a new claim with the updated details based on the given descriptor.
+     *
+     * @param claim    The original claim to be edited.
+     * @param descriptor The descriptor containing the new claim details.
+     * @return The newly created claim with updated details.
+     */
     public Claim createEditedClaim(Claim claim, EditClaimDescriptor descriptor) {
         ClaimStatus updatedStatus = descriptor.getStatus().orElse(claim.getStatus());
         String updatedDesc = descriptor.getDescription().orElse(claim.getClaimDescription());
@@ -147,6 +206,12 @@ public class EditClaimCommand extends Command {
         return new Claim(updatedStatus, updatedDesc);
     }
 
+    /**
+     * Checks if this command is equal to another command.
+     *
+     * @param other The object to compare this command against.
+     * @return boolean if it is the same object
+     */
     @Override
     public boolean equals(Object other) {
         return other == this || (other instanceof EditClaimCommand
