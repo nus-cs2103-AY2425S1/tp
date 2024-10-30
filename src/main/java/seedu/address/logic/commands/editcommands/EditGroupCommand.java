@@ -73,7 +73,7 @@ public class EditGroupCommand extends Command {
         Group groupToEdit = lastShownList.get(index.getZeroBased());
         Group editedGroup = createEditedGroup(groupToEdit, editGroupDescriptor);
 
-        if (!groupToEdit.isSameGroup(editedGroup) && model.hasGroup(editedGroup)) {
+        if (groupToEdit.isSameGroup(editedGroup)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
         if (model.containsGroupName(editedGroup.getGroupName())) {
