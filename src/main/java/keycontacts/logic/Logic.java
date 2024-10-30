@@ -35,6 +35,11 @@ public interface Logic {
     ObservableList<Student> getStudentList();
 
     /**
+     * Returns an unmodifiable view of the students list, unaffected by any search filters.
+     */
+    ObservableList<Student> getUnfilteredStudentList();
+
+    /**
      * Returns the user prefs' student directory file path.
      */
     Path getStudentDirectoryFilePath();

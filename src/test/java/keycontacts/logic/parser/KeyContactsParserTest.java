@@ -2,6 +2,8 @@ package keycontacts.logic.parser;
 
 import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static keycontacts.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_DATE;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_DATE_DESC;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PIECE_NAME;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -29,7 +31,9 @@ import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
 import keycontacts.logic.commands.ScheduleCommand;
 import keycontacts.logic.commands.UnassignPiecesCommand;
+import keycontacts.logic.commands.ViewCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Student;
@@ -139,6 +143,12 @@ public class KeyContactsParserTest {
                 ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + StudentUtil.getRegularLessonDetails(regularLesson));
         assertEquals(new ScheduleCommand(INDEX_FIRST_STUDENT, regularLesson), command);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(ViewCommand.COMMAND_WORD + VALID_DATE_DESC);
+        assertEquals(new ViewCommand(new Date(VALID_DATE)), command);
     }
 
     @Test
