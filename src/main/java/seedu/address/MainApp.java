@@ -59,8 +59,6 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        Optional<Path> restoredBackup = storage.restoreBackup(); // Restore backup if available.
-
         model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model, storage);

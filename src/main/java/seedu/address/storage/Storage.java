@@ -32,19 +32,26 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
     /**
-     * Restores the most recent backup of the address book, if available.
-     *
-     * @return An Optional containing the Path to the most recent backup, if found.
-     * @throws IOException If there is an error accessing the backup.
-     */
-    Optional<Path> restoreBackup() throws IOException;
-
-    /**
      * Cleans up old backups, retaining only the specified number of the most recent backups.
      *
      * @param maxBackups The number of recent backups to retain.
      * @throws IOException If there is an error during cleanup.
      */
     void cleanOldBackups(int maxBackups) throws IOException;
+
+    /**
+     * Lists all available backups in a formatted manner.
+     *
+     * @return A string listing all backup files in the /backups/ directory.
+     * @throws IOException If an error occurs while accessing the backup directory.
+     */
+    String listBackups() throws IOException;
+
+    /**
+     * Returns the BackupManager used by this Storage.
+     *
+     * @return The BackupManager instance.
+     */
+    BackupManager getBackupManager();
 
 }

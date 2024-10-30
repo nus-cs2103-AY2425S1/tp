@@ -11,6 +11,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,8 +24,15 @@ import seedu.address.commons.core.LogsCenter;
 public class BackupManager {
 
     private static final Logger logger = LogsCenter.getLogger(BackupManager.class);
-    private static final DateTimeFormatter FORMATTER =
+    private static final DateTimeFormatter FILE_TIMESTAMP_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
+    private static final DateTimeFormatter DISPLAY_TIMESTAMP_FORMATTER =
+            DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss");
+    private static final String BACKUP_FILE_REGEX =
+            "(\\d+)_(.*?)_(\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}-\\d{3})\\.json";
+    private static final Pattern BACKUP_FILE_PATTERN =
+            Pattern.compile(BACKUP_FILE_REGEX);
+
     private static final int MAX_BACKUPS = 10; // indexed from 0 to 9
     private final Path backupDirectory;
     private final Object backupLock = new Object(); // Lock object to synchronize backup operations
@@ -68,14 +77,20 @@ public class BackupManager {
         }
     }
 
-    private LocalDateTime getFileTimestamp(Path path) {
-        String filename = path.getFileName().toString();
-        try {
-            String timestampPart = filename.substring(filename.lastIndexOf('_') + 1, filename.lastIndexOf('.'));
-            return LocalDateTime.parse(timestampPart, FORMATTER);
-        } catch (Exception e) {
-            logger.warning("Failed to parse timestamp from filename: " + filename + " - " + e.getMessage());
-            return LocalDateTime.MIN; // Return a minimum timestamp for sorting
+    private LocalDateTime getFileTimestamp(Path backupPath) {
+        String filename = backupPath.getFileName().toString();
+        Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
+        if (matcher.matches()) {
+            String timestampStr = matcher.group(3);
+            try {
+                return LocalDateTime.parse(timestampStr, FILE_TIMESTAMP_FORMATTER);
+            } catch (Exception e) {
+                logger.warning("Failed to parse timestamp from filename: " + filename + " - " + e.getMessage());
+                return LocalDateTime.MIN;
+            }
+        } else {
+            logger.warning("Invalid backup file format: " + filename);
+            return LocalDateTime.MIN;
         }
     }
 
@@ -85,7 +100,7 @@ public class BackupManager {
      * the action description and a timestamp, allowing easy identification of backups.
      */
     public int createIndexedBackup(Path sourcePath, String actionDescription) throws IOException {
-        String timestamp = LocalDateTime.now().format(FORMATTER);
+        String timestamp = LocalDateTime.now().format(FILE_TIMESTAMP_FORMATTER);
         String backupFileName = String.format("%d_%s_%s.json", currentIndex, actionDescription, timestamp);
         Path backupPath = backupDirectory.resolve(backupFileName);
 
@@ -117,18 +132,25 @@ public class BackupManager {
         }
     }
 
-    int extractIndex(Path backupPath) {
+    private int extractIndex(Path backupPath) {
         String filename = backupPath.getFileName().toString();
-        try {
-            int underscoreIndex = filename.indexOf('_');
-            if (underscoreIndex == -1) {
-                return -1;
-            }
-            String indexStr = filename.substring(0, underscoreIndex);
-            return Integer.parseInt(indexStr);
-        } catch (NumberFormatException e) {
-            logger.warning("Invalid backup file index format: " + filename);
+        Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
+        if (matcher.matches()) {
+            return Integer.parseInt(matcher.group(1));
+        } else {
+            logger.warning("Invalid backup file format: " + filename);
             return -1;
+        }
+    }
+
+    private String extractActionDescription(Path backupPath) {
+        String filename = backupPath.getFileName().toString();
+        Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
+        if (matcher.matches()) {
+            return matcher.group(2);
+        } else {
+            logger.warning("Invalid backup file format: " + filename);
+            return "Unknown";
         }
     }
 
@@ -154,16 +176,48 @@ public class BackupManager {
     }
 
     /**
-     * Lists all available backups with their indices.
+     * Retrieves a formatted list of all backup files in the backups directory.
      *
-     * @return A list of backup file paths.
+     * @return A string with each backup file listed on a new line, with index, description, and timestamp.
      * @throws IOException If an error occurs while accessing the backup directory.
      */
-    public List<Path> listBackups() throws IOException {
-        try (Stream<Path> backups = Files.list(backupDirectory)) {
-            return backups.filter(Files::isRegularFile)
+    public String getFormattedBackupList() throws IOException {
+        if (!Files.exists(backupDirectory)) {
+            return "";
+        }
+
+        try (Stream<Path> stream = Files.list(backupDirectory)) {
+            List<Path> backupFiles = stream
+                    .filter(Files::isRegularFile)
+                    .filter(path -> path.toString().endsWith(".json"))
                     .sorted(Comparator.comparingInt(this::extractIndex))
                     .collect(Collectors.toList());
+
+            if (backupFiles.isEmpty()) {
+                return "";
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (Path path : backupFiles) {
+                String filename = path.getFileName().toString();
+                Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
+                if (matcher.matches()) {
+                    int index = Integer.parseInt(matcher.group(1));
+                    String description = matcher.group(2);
+                    String timestampStr = matcher.group(3);
+                    LocalDateTime timestamp = LocalDateTime.parse(timestampStr, FILE_TIMESTAMP_FORMATTER);
+
+                    String formattedTimestamp = timestamp.format(DISPLAY_TIMESTAMP_FORMATTER);
+                    sb.append(String.format("%d [%s] Created on: %s\n",
+                            index,
+                            description,
+                            formattedTimestamp));
+                } else {
+                    logger.warning("Invalid backup file format: " + filename);
+                }
+            }
+
+            return sb.toString().trim();
         }
     }
 

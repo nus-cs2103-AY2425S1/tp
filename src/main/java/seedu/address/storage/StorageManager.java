@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -38,6 +37,11 @@ public class StorageManager implements Storage {
 
     public void setBackupManager(BackupManager backupManager) {
         this.backupManager = backupManager;
+    }
+
+    @Override
+    public BackupManager getBackupManager() {
+        return this.backupManager;
     }
 
     // =================== User Preferences Methods ===================
@@ -87,36 +91,6 @@ public class StorageManager implements Storage {
     }
 
     // =================== Backup and Restore Methods ===================
-
-    @Override
-    public Optional<Path> restoreBackup() throws IOException {
-        // Attempt to restore the most recent backup
-        List<Path> backups = backupManager.listBackups();
-        if (backups.isEmpty()) {
-            logger.warning("No backup available to restore.");
-            return Optional.empty();
-        }
-
-        // Find the backup with the highest index (most recent based on index rotation)
-        int latestIndex = backups.stream()
-                .mapToInt(backupManager::extractIndex)
-                .max()
-                .orElse(-1);
-
-        if (latestIndex == -1) {
-            logger.warning("No valid backup indices found.");
-            return Optional.empty();
-        }
-
-        try {
-            Path backupPath = backupManager.restoreBackupByIndex(latestIndex);
-            return Optional.of(backupPath);
-        } catch (IOException e) {
-            logger.warning("Failed to restore backup: " + e.getMessage());
-            return Optional.empty();
-        }
-    }
-
     /**
      * Restores a backup by its index.
      *
@@ -146,12 +120,14 @@ public class StorageManager implements Storage {
     }
 
     /**
-     * Lists all available backups with their indices.
+     * Lists all available backups in a formatted manner.
      *
-     * @return A list of backup file paths.
+     * @return A string listing all backup files in the /backups/ directory.
      * @throws IOException If an error occurs while accessing the backup directory.
      */
-    public List<Path> listBackups() throws IOException {
-        return backupManager.listBackups();
+    @Override
+    public String listBackups() throws IOException {
+        return backupManager.getFormattedBackupList();
     }
+
 }

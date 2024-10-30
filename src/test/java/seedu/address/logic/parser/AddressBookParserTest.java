@@ -16,10 +16,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BackupCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListBackupsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -122,6 +124,19 @@ public class AddressBookParserTest {
         String fileName = "myBackup";
         BackupCommand command = (BackupCommand) parser.parseCommand(BackupCommand.COMMAND_WORD + " " + fileName);
         assertEquals(new BackupCommand(fileName), command);
+    }
+
+    @Test
+    public void parseCommandListBackups_noArgs_success() throws Exception {
+        // Check if listbackups command without arguments is parsed correctly
+        Command command = parser.parseCommand(ListBackupsCommand.COMMAND_WORD);
+        assertTrue(command instanceof ListBackupsCommand);
+    }
+
+    @Test
+    public void parseCommandListBackups_withArgs_throwsParseException() {
+        // Ensure listbackups command fails if arguments are provided
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListBackupsCommand.COMMAND_WORD + " extraArg"));
     }
 
 }

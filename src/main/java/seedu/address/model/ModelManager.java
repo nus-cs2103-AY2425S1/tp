@@ -54,7 +54,11 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.storage = storage;
-        this.backupManager = new BackupManager(Paths.get("backups"));
+        if (storage != null) {
+            this.backupManager = storage.getBackupManager();
+        } else {
+            this.backupManager = new BackupManager(Paths.get("backups"));
+        }
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.calendar = new Calendar(this.addressBook);
     }
@@ -168,6 +172,14 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public String listAllBackups() throws IOException {
+        if (storage == null) {
+            throw new IOException("Storage is not initialized!");
+        }
+        return storage.listBackups();
     }
 
     // ============ Backup and Restore Methods ===========================================================

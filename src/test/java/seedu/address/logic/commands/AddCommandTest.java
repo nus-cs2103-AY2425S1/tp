@@ -199,6 +199,12 @@ public class AddCommandTest {
         public Storage getStorage() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String listAllBackups() throws IOException {
+            // Return an empty string or default message
+            return "";
+        }
     }
 
     /**

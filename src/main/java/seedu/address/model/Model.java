@@ -113,4 +113,12 @@ public interface Model {
      * Returns the Storage object associated with the model.
      */
     Storage getStorage();
+
+    /**
+     * Lists all backup files in the backups directory.
+     *
+     * @return A formatted string with the list of backup files.
+     * @throws IOException If an error occurs while accessing the backup directory.
+     */
+    String listAllBackups() throws IOException;
 }

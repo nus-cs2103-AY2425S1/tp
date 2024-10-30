@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -117,22 +116,6 @@ public class BackupManagerTest {
         // Expect IOException when restoring a non-existent backup
         IOException exception = assertThrows(IOException.class, () -> backupManager.restoreBackupByIndex(invalidIndex));
         assertEquals("Backup with index " + invalidIndex + " not found.", exception.getMessage());
-    }
-
-    @Test
-    public void listBackups_noBackups_returnsEmptyList() throws IOException {
-        List<Path> backups = backupManager.listBackups();
-        assertTrue(backups.isEmpty(), "Backup list should be empty when no backups exist.");
-    }
-
-    @Test
-    public void listBackups_withBackups_returnsBackupList() throws IOException {
-        // Create some backups
-        backupManager.createIndexedBackup(sourceFile, "listTest1");
-        backupManager.createIndexedBackup(sourceFile, "listTest2");
-
-        List<Path> backups = backupManager.listBackups();
-        assertEquals(2, backups.size(), "Backup list should contain 2 backups.");
     }
 
     @Test
