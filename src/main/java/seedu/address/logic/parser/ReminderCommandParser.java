@@ -29,7 +29,7 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ReminderCommand.MESSAGE_USAGE));
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_REMINDER);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMINDER);
         String name = argMultimap.getPreamble();
         String reminderTime = argMultimap.getValue(PREFIX_REMINDER).orElse("");
 
