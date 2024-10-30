@@ -27,7 +27,8 @@ public class FilterCommand extends Command {
             + "appointment dates and health services\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
-    public static final String MESSAGE_SUCCESS = "List of patients sorted based on their appointment dates";
+    public static final String MESSAGE_SUCCESS = "List of patients sorted based on their appointment dates\n"
+            + "Input \"home\" to return to home page";
 
     private final AppointmentDateFilter dateFilter;
 

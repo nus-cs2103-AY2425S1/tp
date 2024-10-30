@@ -17,7 +17,8 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_ARGUMENTS = "View: %2$s, Nric: %1$s";
     public static final String COMMAND_WORD = "view";
-    public static final String MESSAGE_VIEW_SUCCESS = "Here are the patient details.";
+    public static final String MESSAGE_VIEW_SUCCESS = "Here are the patient details\n"
+            + "Input \"home\" to return to home page";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views full profile of identified patient in the system\n"
