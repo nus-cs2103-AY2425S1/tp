@@ -12,7 +12,8 @@ public class ExitCommand extends Command {
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
     public static final String HELP_EXIT_COMMAND = "Exit Command\n"
             + "- Format: exit\n"
-            + "- Example: exit";
+            + "- Example: exit"
+            + "- Closes the program.";
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
