@@ -205,6 +205,22 @@ Examples:
 *  `note John Doe ap/01/01/2025 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
 *  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
 
+### Viewing a person's notes : `view`
+
+Views an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
+
+Format: `view INDEX` / `view NAME`
+
+Views the person's note at the specified `INDEX` or with the specified `NAME`.
+* The name refers to the full name as shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The name provided must be the person's full name.
+
+Examples:
+*  `view John Doe`
+*  `view 1` shows all details of the 1st person's details including notes.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -215,6 +231,7 @@ Format: `delete INDEX` / `delete NAME`
 * The name refers to the full name as shown in the displayed person list.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The name provided must be the person's full name.
 
 Examples:
 * `list` followed by `delete Alex Yeoh` deletes the person with name `Alex Yeoh` in the address book.
@@ -357,3 +374,4 @@ _Details coming soon ..._
 | **Sort**   | `sort` (to sort contacts based on appointment dates)                                                                                                                                                                                |
 | **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh`                                                                                                                                                                  |
 | **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh`                                                                                                                                                          |
+| **View**   | `view INDEX` or `uview NAME` <br/> e.g., `view 3`, `view Alex Yeoh`                                                                                                                                                                 |

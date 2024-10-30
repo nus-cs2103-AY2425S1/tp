@@ -69,6 +69,7 @@ public interface Model {
      */
     void deletePerson(Person target);
 
+
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
@@ -81,6 +82,12 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * View note of a given person {@code person}
+     * {@code person} must exist in the address book.
+     */
+    void viewNote(Person person);
 
     /**
      * Replaces person list with the specified person list

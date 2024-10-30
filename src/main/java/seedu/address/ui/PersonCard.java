@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.ModelManager.getDisplayNote;
+
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
@@ -47,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane appointments;
+    @FXML
+    private Label note;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -67,5 +71,9 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        note.setVisible(getDisplayNote());
+        note.setText(person.getNote().toString());
+
     }
 }

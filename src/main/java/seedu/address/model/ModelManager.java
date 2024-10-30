@@ -19,6 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static boolean displayNote = false;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -113,6 +114,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void viewNote(Person person) {
+        requireNonNull(person);
+        displayNote = true;
+        updateFilteredPersonList(person);
+        displayNote = false;
+    }
+
+    @Override
     public boolean hasName(Name name) {
         requireNonNull(name);
         return addressBook.hasName(name);
@@ -143,6 +152,23 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Updates the filter of the filtered person list to include only the specified target person.
+     *
+     * @param targetPerson given person.
+     * @throws NullPointerException if {@code targetPerson} is null.
+     */
+    public void updateFilteredPersonList(Person targetPerson) {
+        requireNonNull(targetPerson);
+        Predicate<Person> predicate = new Predicate<>() {
+            @Override
+            public boolean test(Person person) {
+                return person.equals(targetPerson);
+            }
+        };
+        filteredPersons.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -158,6 +184,15 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    /**
+     * Returns the current display status of note.
+     *
+     * @return {@code true} if the note is set to be displayed; {@code false} otherwise.
+     */
+    public static boolean getDisplayNote() {
+        return displayNote;
     }
 
 }

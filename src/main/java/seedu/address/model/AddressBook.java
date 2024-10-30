@@ -95,6 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+
     public void sortByAppointments() {
         persons.sortByAppointment();
     }

@@ -76,7 +76,7 @@ public class Appointment {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + appointment.format(FORMATTER) + ']';
+        return appointment.format(FORMATTER);
     }
 
 }

@@ -149,7 +149,8 @@ public class HelpWindow extends UiPart<Stage> {
                         + "e.g., note John Doe m/10mg Ibuprofen"),
                 new CommandSummary("Sort", "sort \ne.g., sort"),
                 new CommandSummary("Star", "star INDEX / star NAME\ne.g., star 3, star Alex Yeoh"),
-                new CommandSummary("Unstar", "unstar INDEX / unstar NAME\ne.g., unstar 3, unstar Alex Yeoh")
+                new CommandSummary("Unstar", "unstar INDEX / unstar NAME\ne.g., unstar 3, unstar Alex Yeoh"),
+                new CommandSummary("View", "view INDEX / view NAME\ne.g., view 3, view Alex Yeoh")
         );
     }
 
