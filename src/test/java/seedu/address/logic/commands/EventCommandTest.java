@@ -104,6 +104,20 @@ public class EventCommandTest {
     }
 
     @Test
+    public void execute_sameDayDates_addSuccessful() throws Exception {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+
+        Event validEvent = new EventBuilder().buildWithSameStartAndEndDate();
+        CommandResult commandResult =
+                new EventCommand(DEFAULT_NAME, DEFAULT_START_DATE, DEFAULT_START_DATE,
+                        DEFAULT_LOCATION, DEFAULT_INDEXES).execute(modelStub);
+
+        assertEquals(String.format(EventCommand.MESSAGE_SUCCESS, Messages.formatEvent(validEvent)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
+    }
+
+    @Test
     public void equals() {
         EventCommand eventCommand1 = new EventCommand("event1", DEFAULT_START_DATE, DEFAULT_END_DATE,
                 DEFAULT_LOCATION, DEFAULT_INDEXES);

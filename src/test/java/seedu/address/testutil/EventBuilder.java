@@ -89,6 +89,10 @@ public class EventBuilder {
         return new Event(name, startDate, endDate, location, attendees);
     }
 
+    public Event buildWithSameStartAndEndDate() {
+        return new Event(name, startDate, startDate, location, attendees);
+    }
+
     public Event buildWithNoAttendees() {
         return new Event(name, startDate, endDate, location, new HashSet<>());
     }
