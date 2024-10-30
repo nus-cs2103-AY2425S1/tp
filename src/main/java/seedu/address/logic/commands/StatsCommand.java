@@ -16,7 +16,7 @@ public class StatsCommand extends Command {
 
     public static final String COMMAND_WORD = "stats";
 
-    public static final String MESSAGE_SUCCESS = "There are %d guests. (%d pending, %d coming, %d not coming)"
+    public static final String MESSAGE_SUCCESS = "There are %d guests. (%d pending, %d coming, %d not coming)\n"
                     + "There are %d vendors.";
 
     @Override
