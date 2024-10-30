@@ -40,17 +40,25 @@ public class LessonCard extends UiPart<Region> {
         lesson.getStudents().stream()
                 .sorted(Comparator.comparing(student -> student.getName().fullName))
                 .forEach(student -> {
-                    Label studentLabel = new Label(student.getName().fullName);
+                    // Student Name
+                    Label studentNameLabel = new Label(student.getName().fullName);
                     boolean hasAttendance = lesson.getAttendance(student);
 
-                    // Set Student Background Colour based on Attendance
+                    // Student Attendance - Set Green (hasAttendance) or Red (NoAttendance)
                     if (hasAttendance) {
-                        studentLabel.setStyle("-fx-background-color: #275918"); // Green If Attendance
+                        studentNameLabel.getStyleClass().add("lesson-card-has-attendance");
                     } else {
-                        studentLabel.setStyle("-fx-background-color: #CF4748"); // Red If No Attendance
+                        studentNameLabel.getStyleClass().add("lesson-card-no-attendance");
                     }
 
-                    students.getChildren().add(studentLabel);
+                    // Student Participation
+                    Label participationLabel = new Label(String.valueOf(lesson.getParticipation(student)));
+                    participationLabel.getStyleClass().add("participation-score");
+
+                    // Combine All Details into Student Box
+                    HBox studentBox = new HBox(0);
+                    studentBox.getChildren().addAll(studentNameLabel, participationLabel);
+                    students.getChildren().add(studentBox);
                 });
     }
 }
