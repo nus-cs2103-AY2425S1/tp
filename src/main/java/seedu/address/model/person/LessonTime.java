@@ -60,15 +60,13 @@ public class LessonTime {
     public static boolean isValidLessonTime(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
-    public static DayOfWeek parseDay(String day) {
+    private static DayOfWeek parseDay(String day) {
         DayOfWeek dayOfWeek = DAY_ABBREVIATION_MAP.get(day.toLowerCase());
         if (dayOfWeek == null) {
             throw new IllegalArgumentException("Invalid day abbreviation: " + day);
         }
         return dayOfWeek;
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
