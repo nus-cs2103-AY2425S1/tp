@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,6 +52,7 @@ public class DateTest {
         assertFalse(Date.isValidDate("10-Dec-2020")); // wrong format
         assertFalse(Date.isValidDate("10/Dec/2020")); // wrong format
         assertFalse(Date.isValidDate("31 Feb 2014")); // invalid day
+        assertFalse(Date.isValidDate("3 Feb 2014")); // invalid day
         assertFalse(Date.isValidDate("05 Mno 2001")); // invalid month
         assertFalse(Date.isValidDate("05 Jan 190")); // invalid year
 
@@ -64,6 +66,7 @@ public class DateTest {
         assertFalse(Date.isValidDate("10/December/2020")); // wrong format
         assertFalse(Date.isValidDate("10December2020")); // wrong format
         assertFalse(Date.isValidDate("31 February 2014")); // invalid day
+        assertFalse(Date.isValidDate("1 February 2014")); // invalid day
         assertFalse(Date.isValidDate("05 Augus 2001")); // invalid month
         assertFalse(Date.isValidDate("05 April 120")); // invalid year
 
@@ -90,6 +93,22 @@ public class DateTest {
 
         // different values -> returns false
         assertFalse(date.equals(new Date("2024-12-31")));
+    }
+
+    @Test
+    public void toString_checkFormat() {
+        // regardless of input, the Date object will always output dates in the same format
+        String expectedString = "01-02-2024";
+
+        Date testDate1 = new Date("01-02-2024");
+        Date testDate2 = new Date("2024-02-01");
+        Date testDate3 = new Date("01 Feb 2024");
+        Date testDate4 = new Date("01 February 2024");
+
+        assertEquals(expectedString, testDate1.toString());
+        assertEquals(expectedString, testDate2.toString());
+        assertEquals(expectedString, testDate3.toString());
+        assertEquals(expectedString, testDate4.toString());
     }
 }
 
