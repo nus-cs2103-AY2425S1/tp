@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.CustomerOrderList;
-import seedu.address.model.order.SupplierOrderList;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.*;
@@ -109,7 +109,7 @@ public interface Model {
 
     CustomerOrderList getCustomerOrderList();
 
-    SupplierOrderList getSupplierOrderList();
+    SupplyOrderList getSupplyOrderList();
 
     Inventory getInventory();
 }
