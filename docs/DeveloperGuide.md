@@ -588,6 +588,28 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>Expected: Similar to previous.
 
+### Setting a reminder for an appointment
+
+1. Setting a reminder for a scheduled appointment for a client while all clients are being shown.
+
+    1. Prerequisites: Only **one** contact with the name John Doe should exist in PhysioPal. If not, run the appropriate command to add John Doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name John Doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        
+        At **least one** appointment must be scheduled for John Doe. If not, run the appropriate command to add an appointment for John Doe. <br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`
+
+    1. Test case: `reminder John Doe r/1 hour`<br>Expected: Contact name John Doe will be updated with a reminder set for 1 hour before Oct 29 2024, 12:00pm
+
+    1. Test case: `reminder John Doee r/1 hour`<br>Expected: No contact is updated with the corresponding reminder time. Error details shown in the status message.
+
+    1. Test case: `reminder John Doe r/1 cycle`<br>Expected: No contact is updated with the corresponding reminder time due to invalid reminder format. Error details shown in the status message.
+
+    1. Test case: `reminder John Doe r/1 days`<br>Expected: Similar to previous.
+
+    1. Test case: `reminder John Doe r/3 day`<br>Expected: Similar to previous.
+
+    1. Test case: `reminder John Doe r/8 days`<br>Expected: Similar to previous.
+
+    1. Test case: `reminder John Doe r/25 hours`<br>Expected: Similar to previous.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
