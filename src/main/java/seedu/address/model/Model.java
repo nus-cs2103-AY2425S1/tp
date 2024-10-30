@@ -88,6 +88,39 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Date} and {@code Time} attribute of each {@code Person},
+     * in ascending order.
+     */
+    void sortByDate();
+
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Name} attribute of each {@code Person}, in ascending order.
+     */
+    void sortByName();
+
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Phone} attribute of each {@code Person}, in ascending order.
+     */
+    void sortByPhone();
+
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Email} attribute of each {@code Person}, in ascending order.
+     */
+    void sortByEmail();
+
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Role} attribute of each {@code Person}, in ascending order.
+     */
+    void sortByRole();
+
+    /**
+     * Reverses the {@code UniquePersonList}.
+     * <p>
+     * Used when sorting the {@code UniquePersonList} by a specified attribute, in descending order.
+     */
+    void reversePersonList();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

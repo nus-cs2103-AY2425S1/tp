@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Address App" minWidth="750" minHeight="600" onCloseRequest="#handleExit">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -46,16 +46,24 @@
                     </padding>
                 </StackPane>
 
-                <SplitPane fx:id="mainSplitPane" VBox.vgrow="ALWAYS" dividerPositions="0.5">
+                <SplitPane fx:id="mainSplitPane" styleClass="pane-with-border" VBox.vgrow="ALWAYS"
+                           dividerPositions="0.35">
                     <items>
-                        <VBox fx:id="personInfoSection">
-                            <StackPane fx:id="personInfoPlaceholder" />
+                        <VBox fx:id="personInfoSection" VBox.vgrow="ALWAYS">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10" />
+                            </padding>
+                            <StackPane fx:id="personInfoPlaceholder" VBox.vgrow="ALWAYS" />
                         </VBox>
-                        <VBox fx:id="deliveryListSection">
-                            <StackPane fx:id="deliveryListPlaceholder" />
+                        <VBox fx:id="deliveryListSection" VBox.vgrow="ALWAYS">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10" />
+                            </padding>
+                            <StackPane fx:id="deliveryListPlaceholder" VBox.vgrow="ALWAYS" />
                         </VBox>
                     </items>
                 </SplitPane>
+
                 <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
             </VBox>
         </Scene>

@@ -52,12 +52,10 @@ public class StringUtil {
     public static boolean containsIgnoreCase(String sentence, String substring) {
         requireNonNull(sentence);
         requireNonNull(substring);
-
         String preppedSubString = substring.trim().toLowerCase();
         checkArgument(!preppedSubString.isEmpty(), "Substring parameter cannot be empty");
         checkArgument(preppedSubString.split("\\s+").length == 1,
                 "Substring parameter should be a single string");
-
         String preppedSentence = sentence.toLowerCase();
         return preppedSentence.contains(preppedSubString);
     }
