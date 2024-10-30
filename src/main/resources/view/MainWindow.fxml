@@ -42,12 +42,9 @@
                    VBox.vgrow="ALWAYS"
                    styleClass="pane-with-border">
           <!-- Left: Person List -->
-          <StackPane fx:id="personListPanelPlaceholder"
-                     minWidth="300"
-                     maxWidth="300"/>
+          <StackPane fx:id="personListPanelPlaceholder"/>
           <!-- Right: Display Card -->
-          <StackPane fx:id="displayCardPanelPlaceholder"
-                     minWidth="400"/>
+          <StackPane fx:id="displayCardPanelPlaceholder"/>
         </SplitPane>
 
         <!-- Result Display -->

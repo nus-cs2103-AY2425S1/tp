@@ -8,22 +8,10 @@
 <ScrollPane fx:id="scrollPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fitToWidth="true" styleClass="display-scroll-pane">
     <VBox fx:id="cardPane" styleClass="student-information">
-        <!-- Title Section -->
-        <VBox styleClass="title-container" alignment="CENTER">
-            <Label text="Student Information" styleClass="title-label" wrapText="true"/>
-        </VBox>
-        <!-- Divider -->
-        <HBox styleClass="divider"/>
-        <!-- Name Section -->
-        <VBox styleClass="section-container" spacing="8">
-            <Label text="Name:" styleClass="label-heading"/>
-            <Label fx:id="name" styleClass="content-label" wrapText="true"/>
-        </VBox>
-        <!-- Divider -->
         <HBox styleClass="divider"/>
         <!-- Contact Information Section -->
         <VBox styleClass="section-container" spacing="16">
-            <Label text="Contact Information" styleClass="section-heading" wrapText="true"/>
+            <Label styleClass="section-heading" fx:id="name" wrapText="true"/>
 
             <VBox spacing="8">
                 <Label text="Phone Number:" styleClass="label-heading"/>
