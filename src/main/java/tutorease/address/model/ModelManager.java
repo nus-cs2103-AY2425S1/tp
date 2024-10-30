@@ -115,6 +115,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         tutorEase.setPerson(target, editedPerson);
+        lessonSchedule.updatePersonInLessons(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
