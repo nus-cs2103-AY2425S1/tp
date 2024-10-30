@@ -103,7 +103,7 @@ public class Person {
     }
 
     /**
-     *
+     * Returns a string of the person's employment status to be used within a UI component.
      */
     public String getMatchToUiText() {
         if (!isMatchPresent()) {
