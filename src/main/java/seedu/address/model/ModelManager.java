@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final HistoryCommandList historyCommandlist;
+    private final HistoryCommandList historyCommandList;
     private final ObservableList<HistoryCommand> historyCommands;
 
     /**
@@ -39,8 +39,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        historyCommandlist = new HistoryCommandList();
-        historyCommands = historyCommandlist.getHistoryCommands(); // Initialize with an empty ObservableList
+        historyCommandList = new HistoryCommandList();
+        historyCommands = historyCommandList.getHistoryCommands(); // Initialize with an empty ObservableList
     }
 
     public ModelManager() {
@@ -168,7 +168,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void setCommandHistoryText(String input) {
-        historyCommandlist.setCommandHistoryText(input);
+        historyCommandList.setCommandHistoryText(input);
     }
 
     /**
@@ -176,6 +176,6 @@ public class ModelManager implements Model {
      */
     @Override
     public void addHistoryCommand(Command toAdd) {
-        historyCommandlist.add(toAdd);
+        historyCommandList.add(toAdd);
     }
 }

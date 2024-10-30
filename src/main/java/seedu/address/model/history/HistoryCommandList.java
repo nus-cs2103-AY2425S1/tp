@@ -18,8 +18,6 @@ import seedu.address.logic.commands.edit.EditCommand;
  */
 public class HistoryCommandList implements Iterable<HistoryCommand> {
     private final ObservableList<HistoryCommand> internalList = FXCollections.observableArrayList();
-    private final ObservableList<HistoryCommand> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
     private static String originalCommandText;
 
     public HistoryCommandList() {
@@ -37,7 +35,7 @@ public class HistoryCommandList implements Iterable<HistoryCommand> {
                 || toAdd instanceof DeleteCommand
                 || toAdd instanceof EditCommand : "History command is not changing the person list";
 
-        internalList.add(HistoryCommand.of(toAdd, originalCommandText));
+        internalList.add(0, HistoryCommand.of(toAdd, originalCommandText));
     }
 
     public static void setCommandHistoryText(String input) {
