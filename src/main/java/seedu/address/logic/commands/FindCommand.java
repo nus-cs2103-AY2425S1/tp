@@ -26,8 +26,9 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose attribute match the "
-            + "specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all guests and vendors whose attribute match the "
+            + "specified keywords (case-insensitive) and displays them.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -40,7 +41,6 @@ public class FindCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Note: Only 1 type of prefix can be specified per command use!\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Amy";
-
 
     private final Predicate<Person> predicate;
 
