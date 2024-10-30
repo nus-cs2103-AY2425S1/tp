@@ -65,10 +65,7 @@ public class Person {
      * Returns a string representation of the tags.
      */
     public String getTagsString() {
-        if (tags.isEmpty()) {
-            return "";
-        }
-        return tags.stream().findFirst().map(t -> t.tagName).orElse("");
+        return tags.stream().findFirst().map(t -> t.tagName).orElse("-");
     }
 
     /**
