@@ -184,8 +184,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void isSamePersonAsPersonOnDisplay_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.isSamePersonAsPersonOnDisplay(null));
+    public void isSamePersonAsPersonOnDisplay_nullPerson_returnsFalse() {
+        assertFalse(modelManager.isSamePersonAsPersonOnDisplay(null));
     }
 
     @Test
