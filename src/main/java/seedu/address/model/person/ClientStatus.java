@@ -12,7 +12,7 @@ public class ClientStatus {
     public static final String MESSAGE_CONSTRAINTS =
             "Client status must be either “active”, “unresponsive”,"
             + " “potential”, “blacklisted” or “old” (case insensitive).";
-    public static final String NO_CLIENT_STATUS = "__No_Client_Status__";
+    public static final String CLIENT_STATUS_KEY = "client status";
     private static final String ACTIVE = "active";
     private static final String OLD = "old";
     private static final String POTENTIAL = "potential";
@@ -28,12 +28,8 @@ public class ClientStatus {
      */
     public ClientStatus(String status) {
         requireNonNull(status);
-        if (status.equals(NO_CLIENT_STATUS)) {
-            value = parseStatus("");
-        } else {
-            checkArgument(isValidClientStatus(status), MESSAGE_CONSTRAINTS);
-            value = parseStatus(status);
-        }
+        checkArgument(isValidClientStatus(status), MESSAGE_CONSTRAINTS);
+        value = parseStatus(status);
     }
 
     /**

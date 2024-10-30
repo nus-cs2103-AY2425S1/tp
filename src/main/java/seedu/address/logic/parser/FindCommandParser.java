@@ -11,6 +11,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -23,7 +26,6 @@ import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentStatus;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ProjectStatus;
 import seedu.address.model.tag.Tag;
@@ -62,26 +64,50 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_CLIENT_STATUS, PREFIX_DEADLINE) : "At least 1 prefix is present";
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_DEADLINE, PREFIX_PROJECT_STATUS,
+                PREFIX_ADDRESS, PREFIX_PROJECT_STATUS,
                 PREFIX_PAYMENT_STATUS, PREFIX_CLIENT_STATUS, PREFIX_DEADLINE);
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse("__No_Name__"));
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElse("__No_Phone__"));
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse("__No_Email__"));
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse("__No_Address__"));
+        Map<String, Object> parameterMap = new HashMap<>();
+        Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
+        Optional<String> optionalPhone = argMultimap.getValue(PREFIX_PHONE);
+        Optional<String> optionalEmail = argMultimap.getValue(PREFIX_EMAIL);
+        Optional<String> optionalAddress = argMultimap.getValue(PREFIX_ADDRESS);
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        ProjectStatus projectStatus = ParserUtil.parseProjectStatus(argMultimap.getValue(PREFIX_PROJECT_STATUS)
-                .orElse("__No_Project_Status__"));
-        PaymentStatus paymentStatus = ParserUtil.parsePaymentStatus(argMultimap.getValue(PREFIX_PAYMENT_STATUS)
-                .orElse("__No_Payment_Status__"));
-        ClientStatus clientStatus = ParserUtil.parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS)
-                .orElse("__No_Client_Status__"));
-        Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE)
-                .orElse("__No_Deadline__"));
+        Optional<String> optionalProjectStatus = argMultimap.getValue(PREFIX_PROJECT_STATUS);
+        Optional<String> optionalPaymentStatus = argMultimap.getValue(PREFIX_PAYMENT_STATUS);
+        Optional<String> optionalClientStatus = argMultimap.getValue(PREFIX_CLIENT_STATUS);
+        Optional<String> optionalDeadline = argMultimap.getValue(PREFIX_DEADLINE);
 
-        Person person = new Person(name, phone, email, address, tagList, projectStatus,
-                paymentStatus, clientStatus, deadline);
-        return new FindCommand(new ArgumentPredicate(person));
+        if (optionalName.isPresent()) {
+            parameterMap.put(Name.NAME_KEY, ParserUtil.parseName(optionalName.get()));
+        }
+        if (optionalPhone.isPresent()) {
+            parameterMap.put(Phone.PHONE_KEY, ParserUtil.parsePhone(optionalPhone.get()));
+        }
+        if (optionalEmail.isPresent()) {
+            parameterMap.put(Email.EMAIL_KEY, ParserUtil.parseEmail(optionalEmail.get()));
+        }
+        if (optionalAddress.isPresent()) {
+            parameterMap.put(Address.ADDRESS_KEY, ParserUtil.parseAddress(optionalAddress.get()));
+        }
+        if (optionalProjectStatus.isPresent()) {
+            parameterMap.put(ProjectStatus.PROJECT_STATUS_KEY,
+                    ParserUtil.parseProjectStatus(optionalProjectStatus.get()));
+        }
+        if (optionalPaymentStatus.isPresent()) {
+            parameterMap.put(PaymentStatus.PAYMENT_STATUS_KEY,
+                    ParserUtil.parsePaymentStatus(optionalPaymentStatus.get()));
+        }
+        if (optionalClientStatus.isPresent()) {
+            parameterMap.put(ClientStatus.CLIENT_STATUS_KEY, ParserUtil.parseClientStatus(optionalClientStatus.get()));
+        }
+        if (optionalDeadline.isPresent()) {
+            parameterMap.put(Deadline.DEADLINE_KEY, ParserUtil.parseDeadline(optionalDeadline.get()));
+        }
+
+        parameterMap.put(Tag.TAG_KEY, tagList);
+
+        return new FindCommand(new ArgumentPredicate(parameterMap));
     }
 
     /**

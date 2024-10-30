@@ -16,7 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ReminderManager;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -117,8 +116,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        ReminderManager reminderManager = new ReminderManager(logic.getFilteredPersonList());
-        StatusBarFooter statusBarFooter = new StatusBarFooter(reminderManager);
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getReminderManager());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);

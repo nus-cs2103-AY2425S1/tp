@@ -9,7 +9,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +26,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ArgumentPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -73,13 +76,11 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " n/Mei");
-        Person testPerson = new PersonBuilder().withName("Mei")
-                .withPhone("__No_Phone__").withEmail("__No_Email__")
-                .withAddress("__No_Address__")
-                .withProjectStatus("__No_Project_Status__")
-                .withPaymentStatus("__No_Payment_Status__").withClientStatus("__No_Client_Status__")
-                .withDeadline("__No_Deadline__").build();
-        ArgumentPredicate predicate = new ArgumentPredicate(testPerson);
+        Map<String, Object> testParameters = Map.of(
+                "name", new Name("Mei"),
+                "tags", new HashSet<>()
+        );
+        ArgumentPredicate predicate = new ArgumentPredicate(testParameters);
         assertEquals(new FindCommand(predicate), command);
     }
 

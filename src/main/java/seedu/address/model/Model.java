@@ -4,9 +4,11 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReminderManager;
 
 /**
  * The API of the Model component.
@@ -91,4 +93,14 @@ public interface Model {
      * @param comparator the comparator used to sort the persons.
      */
     void sortByComparator(Comparator<Person> comparator);
+
+    /**
+     * Returns the ReminderManager instance.
+     */
+    ReminderManager getReminderManager();
+
+    /**
+     * Returns the current reminder property for binding to UI components.
+     */
+    StringProperty getCurrentReminderProperty();
 }

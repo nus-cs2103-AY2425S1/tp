@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
-    public static final String NO_EMAIL = "__No_Email__";
+    public static final String EMAIL_KEY = "email";
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -40,12 +40,8 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        if (email.equals(NO_EMAIL)) {
-            value = "";
-        } else {
-            checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-            value = email;
-        }
+        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        value = email;
     }
 
     /**
@@ -72,7 +68,7 @@ public class Email {
         }
 
         Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        return value.equalsIgnoreCase(otherEmail.value);
     }
 
     @Override
