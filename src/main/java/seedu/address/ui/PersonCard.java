@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
@@ -12,7 +13,7 @@ import javafx.util.Duration;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -50,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     private Label clientStatus;
     @FXML
     private Label deadline;
+    @FXML
+    private Label overdue;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -62,22 +65,37 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        projectStatus.setText("Project status: " + person.getProjectStatus().toString());
-        clientStatus.setText("Client Status: " + person.getClientStatus().toString());
-        deadline.setText("Deadline: " + person.checkAndGetDeadline());
+        projectStatus.setText("Project Status: " + person.getProjectStatus().toString());
+        clientStatus.setText(person.getClientStatus().toString().toUpperCase());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        String deadlineString = person.checkAndGetDeadline();
+        overdue.setText("");
+        if (deadlineString.contains("[OVERDUE]")) {
+            overdue.setText("OVERDUE");
+            deadlineString = person.getDeadline().toString();
+            cardPane.getStyleClass().add("overdue_bar");
+        }
+        deadline.setText("Deadline: " + deadlineString);
+
+        Tooltip clientStatusTooltip = new Tooltip();
+        clientStatusTooltip.setShowDelay(Duration.seconds(0.01));
+        clientStatusTooltip.setText("Client Status");
+        Tooltip.install(clientStatus, clientStatusTooltip);
 
         String payStatus = person.getPaymentStatus().toString();
         paymentStatus.setText("$");
 
         Tooltip paymentTooltip = new Tooltip();
+
         paymentTooltip.setShowDelay(Duration.seconds(0.01));
 
         paymentStatus.getStyleClass().add(String.format("payment_status_%s", payStatus));
         paymentTooltip.setText(String.format("Payment Status: %s", payStatus));
 
         Tooltip.install(paymentStatus, paymentTooltip);
+        HBox.setMargin(cardPane, new Insets(10, 10, 10, 10));
     }
 }

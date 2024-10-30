@@ -6,55 +6,126 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
-    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-    </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
-      </padding>
-      <!-- Name and Payment Status HBox -->
-      <HBox spacing="5" alignment="CENTER_LEFT" GridPane.rowIndex="0">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" text="\$first" styleClass="name_label" />
-        <Label fx:id="paymentStatus" />
-      </HBox>
+<HBox minHeight="10"
+      id="cardPane"
+      fx:id="cardPane"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1" >
 
-      <VBox spacing="5" alignment="CENTER_LEFT" GridPane.rowIndex="1">
-        <GridPane VBox.vgrow="ALWAYS">
-          <Label fx:id="deadline" styleClass="cell_small_label" GridPane.rowIndex="0" />
-          <Label fx:id="projectStatus" styleClass="cell_small_label" GridPane.rowIndex="1" />
-          <Label fx:id="clientStatus" styleClass="cell_small_label" GridPane.rowIndex="2" />
-          <FlowPane fx:id="tags" GridPane.rowIndex="4"/>
+  <HBox.margin>
+    <Insets bottom="50.0" />
+  </HBox.margin>
+
+  <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="false">
+    <columnConstraints>
+      <ColumnConstraints minWidth="40" />
+      <ColumnConstraints minWidth="200" maxWidth="200" />
+
+      <ColumnConstraints minWidth="2" />
+
+      <ColumnConstraints minWidth="150" hgrow="ALWAYS" />
+
+      <ColumnConstraints minWidth="2" />
+
+      <ColumnConstraints minWidth="100" />
+    </columnConstraints>
+
+<!--    Index Box-->
+    <HBox GridPane.columnIndex="0">
+      <padding>
+        <Insets top="15" right="15" bottom="0" left="15" />
+      </padding>
+      <VBox alignment="TOP_CENTER">
+        <Label fx:id="id" styleClass="cell_big_label" />
+      </VBox>
+    </HBox>
+
+<!--    Name, Payment Status and Client Status Box-->
+    <HBox GridPane.columnIndex="1">
+      <padding>
+        <Insets top="10" right="10" bottom="5" left="15" />
+      </padding>
+      <VBox>
+        <GridPane VBox.vgrow="ALWAYS" vgap="40">
+          <HBox GridPane.rowIndex="0" minHeight="10">
+            <GridPane HBox.hgrow="ALWAYS">
+              <Label fx:id="name" text="\$first" styleClass="name_label" GridPane.columnIndex="0"
+                     wrapText="true" GridPane.valignment="TOP" maxWidth="150" />
+              <Label fx:id="paymentStatus" GridPane.columnIndex="1" GridPane.valignment="TOP" />
+            </GridPane>
+          </HBox>
+          <HBox GridPane.rowIndex="1">
+            <GridPane HBox.hgrow="ALWAYS" hgap="5">
+              <Label fx:id="clientStatus" styleClass="cell_small_label" GridPane.columnIndex="1" />
+            </GridPane>
+          </HBox>
         </GridPane>
       </VBox>
+    </HBox>
 
-      <HBox spacing="5" alignment="CENTER_LEFT" GridPane.rowIndex="2">
+<!--    Divider-->
+    <HBox GridPane.columnIndex="2">
+      <padding>
+        <Insets top="10" right="15" left="15" />
+      </padding>
+    </HBox>
+
+<!--    Email, phone, address, tags Box-->
+    <HBox GridPane.columnIndex="3">
+      <padding>
+        <Insets top="0" right="15" left="15" />
+      </padding>
+
+      <VBox alignment="CENTER">
         <padding>
-          <Insets top="5" right="5" bottom="5" left="0" />
+          <Insets top="10" right="5" />
         </padding>
-        <GridPane HBox.hgrow="ALWAYS">
-          <VBox spacing="10" alignment="CENTER_LEFT" styleClass="person_info_box" GridPane.columnIndex="0">
-            <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="NEVER">
-              <Label fx:id="email" styleClass="cell_small_label" text="\$email" GridPane.rowIndex="0" />
-              <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" GridPane.rowIndex="1" />
-              <Label fx:id="address" styleClass="cell_small_label" text="\$address" GridPane.rowIndex="2" />
-            </GridPane>
-          </VBox>
-          <VBox spacing="10" GridPane.columnIndex="1" />
-        </GridPane>
-      </HBox>
 
-    </VBox>
+        <GridPane VBox.vgrow="ALWAYS" vgap="20">
+
+          <HBox spacing="5" alignment="CENTER_LEFT" GridPane.rowIndex="0">
+            <GridPane HBox.hgrow="ALWAYS">
+              <VBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="0" minHeight="10">
+                <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="NEVER" vgap="2">
+                  <Label fx:id="email" styleClass="cell_small_label" text="\$email" GridPane.rowIndex="0" />
+                  <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" GridPane.rowIndex="1" />
+                  <Label fx:id="address" styleClass="cell_small_label" text="\$address" GridPane.rowIndex="2" />
+                </GridPane>
+              </VBox>
+            </GridPane>
+          </HBox>
+
+          <FlowPane fx:id="tags" GridPane.rowIndex="1" />
+        </GridPane>
+      </VBox>
+    </HBox>
+
+<!--    Divider-->
+    <HBox GridPane.columnIndex="4">
+      <padding>
+        <Insets top="10" right="15" left="15" />
+      </padding>
+    </HBox>
+
+<!--   Project Status, Deadline Box-->
+    <HBox GridPane.columnIndex="5">
+      <padding>
+        <Insets top="10" right="35" left="15" />
+      </padding>
+      <VBox alignment="CENTER">
+        <padding>
+          <Insets top="10" right="5" bottom="5" left="15" />
+        </padding>
+        <GridPane VBox.vgrow="ALWAYS" vgap="20">
+          <Label fx:id="projectStatus" styleClass="project_status_label" GridPane.rowIndex="0" />
+          <Label fx:id="deadline" styleClass="deadline_label" GridPane.rowIndex="1" />
+          <Label fx:id="overdue" styleClass="overdue_label" GridPane.rowIndex="2" GridPane.halignment="CENTER" />
+        </GridPane>
+      </VBox>
+    </HBox>
+
   </GridPane>
+
 </HBox>
