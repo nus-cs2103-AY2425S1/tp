@@ -138,4 +138,14 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    @Test
+    void parseCommand_clearCommand_caseInsensitive() throws Exception {
+        String[] variations = {"clear", "Clear", "CLEAR", "cLear", "CleaR", "clear ", "   CLEAR   "};
+        for (String variation : variations) {
+            assertTrue(parser.parseCommand(variation) instanceof ClearCommand);
+            assertTrue(parser.parseCommand(variation + " 3") instanceof ClearCommand);
+
+        }
+    }
 }

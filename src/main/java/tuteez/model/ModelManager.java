@@ -162,8 +162,16 @@ public class ModelManager implements Model {
     @Override
     public void updateLastViewedPerson(Person personOnDisplay) {
         requireNonNull(personOnDisplay);
+        // Clear existing person to ensure each time updateLastViewedPerson is called, personOnDisplay is updated
+        lastViewedPerson.set(Optional.empty());
         lastViewedPerson.set(Optional.of(personOnDisplay));
         logger.info("Last viewed person updated: " + personOnDisplay.getName().fullName);
+    }
+
+    @Override
+    public void removeLastViewedPerson() {
+        lastViewedPerson.set(Optional.empty());
+        logger.info("Last viewed person removed");
     }
 
     @Override

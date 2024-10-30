@@ -1,7 +1,9 @@
 package tuteez.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.logic.commands.CommandTestUtil.DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.DESC_BOB;
@@ -20,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import tuteez.commons.core.index.Index;
 import tuteez.logic.Messages;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
+import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.AddressBook;
 import tuteez.model.Model;
 import tuteez.model.ModelManager;
@@ -121,6 +124,50 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_lessonClashesWithExistingLesson_noClashOccurs() {
+        Person secondPersonInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        EditPersonDescriptor secondPersonDescriptor = new EditPersonDescriptorBuilder(secondPersonInList)
+                .withLessons("friday 1830-2000").build();
+        EditCommand firstEdit = new EditCommand(INDEX_SECOND_PERSON, secondPersonDescriptor);
+        assertDoesNotThrow(() -> firstEdit.execute(model));
+
+        Person firstPersonInList = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor firstPersonDescriptor = new EditPersonDescriptorBuilder(firstPersonInList)
+                .withLessons("friday 1730-1830").build();
+        EditCommand secondEdit = new EditCommand(INDEX_FIRST_PERSON, firstPersonDescriptor);
+        assertDoesNotThrow(() -> secondEdit.execute(model));
+    }
+
+    @Test
+    public void execute_lessonClashesWithExistingLesson_clashOccurs() {
+        Person secondPersonInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        EditPersonDescriptor secondPersonDescriptor = new EditPersonDescriptorBuilder(secondPersonInList)
+                .withLessons("friday 1800-2000").build();
+        EditCommand firstEdit = new EditCommand(INDEX_SECOND_PERSON, secondPersonDescriptor);
+        assertDoesNotThrow(() -> firstEdit.execute(model));
+
+        Person firstPersonInList = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor firstPersonDescriptor = new EditPersonDescriptorBuilder(firstPersonInList)
+                .withLessons("friday 1730-1830").build();
+        EditCommand secondEdit = new EditCommand(INDEX_FIRST_PERSON, firstPersonDescriptor);
+        assertThrows(CommandException.class, () -> secondEdit.execute(model));
+    }
+
+    @Test
+    public void execute_lessonClashesWithSameStudentsExistingLesson_noClashOccurs() {
+        Person firstPersonInList = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor firstDescriptor = new EditPersonDescriptorBuilder(firstPersonInList)
+                .withLessons("friday 1800-2000").build();
+        EditCommand firstEdit = new EditCommand(INDEX_FIRST_PERSON, firstDescriptor);
+        assertDoesNotThrow(() -> firstEdit.execute(model));
+
+        EditPersonDescriptor secondDescriptor = new EditPersonDescriptorBuilder(firstPersonInList)
+                .withLessons("friday 1730-1830").build();
+        EditCommand secondEdit = new EditCommand(INDEX_FIRST_PERSON, secondDescriptor);
+        assertDoesNotThrow(() -> secondEdit.execute(model));
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
@@ -144,6 +191,41 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editLastViewedPerson_success() {
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(originalPerson).withName(VALID_NAME_BOB).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(originalPerson, editedPerson);
+        expectedModel.updateLastViewedPerson(editedPerson);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editNonLastViewedPerson_noUpdateLastViewed() {
+        Person lastViewedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.updateLastViewedPerson(lastViewedPerson);
+
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(personToEdit).withName(VALID_NAME_BOB).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.updateLastViewedPerson(lastViewedPerson);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

@@ -103,9 +103,14 @@ public interface Model {
     ObjectProperty<Optional<Person>> getLastViewedPerson();
 
     /**
-     * Updates the lastViewedPerson after a DisplayCommand is called.
+     * Updates the lastViewedPerson.
      */
     void updateLastViewedPerson(Person personOnDisplay);
+
+    /**
+     * Deletes the lastViewedPerson.
+     */
+    void removeLastViewedPerson();
 
     /**
      * Returns the {@code person} in the address book with the given name.

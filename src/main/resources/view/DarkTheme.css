@@ -77,19 +77,18 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: transparent transparent transparent #4d4d4d;
+    -fx-background-color: #fdf5f5;
+    -fx-border-width: 0;
 }
 
 .split-pane {
-    -fx-border-radius: 1;
-    -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #fdf5f5;
+    -fx-border-width: 0;
 }
 
 .list-view {
     -fx-background-insets: 0;
-    -fx-padding: 5;
+    -fx-padding: 5 0 0 5; /* top right bottom left */
     -fx-background-color: #fdf5f5
 }
 
@@ -129,34 +128,30 @@
 .cell_big_label {
     -fx-font-family: "Raleway Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: derive(#757575, -10%);
+    -fx-text-fill: derive(#757575, -50%);
 }
 
 .cell_small_label {
     -fx-font-family: "Raleway";
     -fx-font-size: 12px;
-    -fx-text-fill: derive(#757575, -10%);
+    -fx-text-fill: derive(#757575, -50%);
 }
 
 .card_big_label {
-    -fx-font-family: "Raleway Semibold";
-        -fx-font-size: 16px;
-        -fx-text-fill: derive(#757575, -10%);
+    -fx-font-family: "Raleway Black";
+        -fx-font-size: 26px;
+        -fx-text-fill: derive(#757575, -50%);
+    -fx-padding: 8 0 5 0;
 }
 
 .card_small_label {
     -fx-font-family: "Raleway";
-    -fx-font-size: 12px;
-    -fx-text-fill: derive(#757575, -10%);
+    -fx-font-size: 16px;
+    -fx-text-fill: derive(#757575, -50%);
 }
 
 .stack-pane {
      -fx-background-color: #fdf5f5;
-     /*-fx-padding: 10px;*/
-}
-
-.right-pane {
-    -fx-background-color: #fdf5f5;
 }
 
 .pane-with-border {
@@ -387,4 +382,22 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 12;
+}
+
+#remarks {
+    -fx-spacing: 2;
+    -fx-padding: 5 0 10 0;
+}
+
+#remarks .label {
+    -fx-font-family: "Raleway";
+        -fx-font-style: italic;
+    -fx-font-size: 12px;
+    -fx-text-fill: derive(#e8def8, -50%);
+    -fx-background-color: #fdf5f5;
+    -fx-padding: 3 5 3 5;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
 }

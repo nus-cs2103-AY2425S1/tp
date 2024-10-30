@@ -155,7 +155,7 @@ The `Model` component,
 
 **API** : [`LessonManager.java`]()
 
-<puml src="diagrams/LessonManagerClassDiagram.puml" width="450" />
+<puml src="diagrams/LessonClassDiagram.puml" width="450" />
 
 The `LessonManager` component,
 * stores all the info regarding `Lesson` objects.`LessonManager.dayLessonsMap` is a `HashMap` where keys are `Day`s, intuitively there are only 7 keys in the `HashMap`. One for each day of the week.

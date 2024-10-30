@@ -54,7 +54,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
-    public static final String MESSAGE_CLASHING_LESSON = "This lesson time slot clashes with the following lessons: ";
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
 
     private final Person toAdd;
     private final Logger logger = LogsCenter.getLogger(AddCommand.class);
@@ -92,14 +92,14 @@ public class AddCommand extends Command {
                     + "another student's lesson", toAdd.getName(), toAdd.getLessons().toString());
             logger.info(logMessage);
 
-            StringBuilder sb = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
+            StringBuilder clashMsg = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
             resultMap.keySet().forEach(student -> {
-                sb.append(student.getName()).append(": ");
+                clashMsg.append(student.getName()).append(": ");
 
-                resultMap.get(student).forEach(ls -> sb.append(ls.getDayAndTime()).append(" "));
-                sb.append("\n");
+                resultMap.get(student).forEach(ls -> clashMsg.append(ls.getDayAndTime()).append(" "));
+                clashMsg.append("\n");
             });
-            throw new CommandException(sb.toString());
+            throw new CommandException(clashMsg.toString());
         }
 
         model.addPerson(toAdd);

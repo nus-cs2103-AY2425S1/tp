@@ -30,11 +30,20 @@ public class DisplayCardPanel extends UiPart<Region> {
     public DisplayCardPanel(ObjectProperty<Optional<Person>> lastViewedPerson) {
         super(FXML);
         this.lastViewedPerson = lastViewedPerson;
+
+        displayCardListView.setMouseTransparent(true);
+        displayCardListView.setFocusTraversable(false);
+
         displayCardListView.setItems(FXCollections.observableArrayList());
 
-        lastViewedPerson.addListener((observable, oldPerson, newPerson) -> updateDisplayCard(newPerson));
+        lastViewedPerson.addListener((observable, oldValue, newValue) -> {
+            logger.fine("Last viewed person changed to: " + newValue);
+            updateDisplayCard(newValue);
+        });
 
         displayCardListView.setCellFactory(listView -> new DisplayCardListViewCell());
+
+        updateDisplayCard(lastViewedPerson.get());
     }
 
     /**

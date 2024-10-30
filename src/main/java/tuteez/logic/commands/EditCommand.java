@@ -1,7 +1,6 @@
 package tuteez.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tuteez.logic.commands.AddCommand.MESSAGE_CLASHING_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
@@ -36,6 +35,7 @@ import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
+import tuteez.model.remark.RemarkList;
 import tuteez.model.tag.Tag;
 
 /**
@@ -65,6 +65,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -117,21 +118,31 @@ public class EditCommand extends Command {
 
             if (!resultMap.isEmpty()) {
                 String logMessage = String.format("Student: %s | Lessons: %s "
-                                + "| Conflict: Clashes with another student's lesson",
+                        + "| Conflict: Clashes with another student's lesson",
                         editedPerson.getName(), editedPerson.getLessons().toString());
                 logger.info(logMessage);
-                StringBuilder sb = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
+                StringBuilder clashMsg = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
                 resultMap.keySet().forEach(student -> {
-                    sb.append(student.getName()).append(": ");
+                    clashMsg.append(student.getName()).append(": ");
 
-                    resultMap.get(student).forEach(ls -> sb.append(ls.getDayAndTime()).append(" "));
-                    sb.append("\n");
+                    resultMap.get(student).forEach(ls -> clashMsg.append(ls.getDayAndTime()).append(" "));
+                    clashMsg.append("\n");
                 });
-                throw new CommandException(sb.toString());
+                throw new CommandException(clashMsg.toString());
             }
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        if (model.getLastViewedPerson().get().isPresent()) {
+            if (personToEdit.equals(model.getLastViewedPerson().get().get())) {
+                model.updateLastViewedPerson(editedPerson);
+                String logMessageForPerson =
+                        String.format("Student on display is edited, After Edit - Student: %s", editedPerson);
+                logger.info(logMessageForPerson);
+            }
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         String logMessage = String.format("Before Edit - Student: %s%nAfter Edit - Student: %s",
                 personToEdit, editedPerson);
@@ -155,9 +166,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
 
+        RemarkList originalRemarkList = personToEdit.getRemarkList();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTelegramUser, updatedTags,
-                updatedLessons);
+                updatedLessons, originalRemarkList);
     }
 
     @Override
