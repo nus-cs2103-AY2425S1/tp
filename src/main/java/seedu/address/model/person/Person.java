@@ -40,7 +40,8 @@ public class Person {
             Address address,
             Remark remark,
             Set<Tag> tags,
-            Appointment appointment) {
+            Appointment appointment,
+            LogList logEntries) {
         requireAllNonNull(name, phone, email, nric, address, tags);
         this.name = name;
         this.phone = phone;
@@ -50,7 +51,7 @@ public class Person {
         this.remark = remark;
         this.tags.addAll(tags);
         this.appointment = appointment; // Appointment field initialized
-        this.logEntries = new LogList();
+        this.logEntries = logEntries;
     }
 
     public Name getName() {
@@ -95,10 +96,6 @@ public class Person {
 
     public LogList getLogEntries() {
         return logEntries;
-    }
-
-    public void addLogEntry(Log log) {
-        logEntries.addLog(log);
     }
 
     /**

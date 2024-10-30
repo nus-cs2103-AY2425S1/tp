@@ -24,8 +24,11 @@ public class LogList {
      *
      * @param log The log entry to add.
      */
-    public void addLog(Log log) {
-        logs.add(log);
+    public LogList addLog(Log log) {
+        LogList newList = new LogList();
+        newList.logs.addAll(logs);
+        newList.logs.add(log);
+        return newList;
     }
 
     /**

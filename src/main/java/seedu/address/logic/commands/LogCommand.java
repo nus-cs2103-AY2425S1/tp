@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -17,7 +18,6 @@ import seedu.address.model.person.Person;
  */
 public class LogCommand extends Command {
     public static final String COMMAND_WORD = "log";
-    public static final String MESSAGE_SUCCESS = "Log added!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Logs information of a patient.\n"
             + "Parameters: INDEX (must be a positive integer), "
             + "TIMESTAMP (in the format DD-MM-YYYY HH:MM),"
@@ -55,9 +55,14 @@ public class LogCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToLog = lastShownList.get(index.getZeroBased());
-        personToLog.addLogEntry(log);
-        return new CommandResult(MESSAGE_SUCCESS);
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
+                personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(),
+                personToEdit.getAppointment(), personToEdit.getLogEntries().addLog(log));
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult("Log added to " + personToEdit.getName() + ".");
     }
 
     /**
