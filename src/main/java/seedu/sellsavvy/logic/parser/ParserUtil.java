@@ -168,8 +168,10 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
+        if (!Date.isValidDateRegex(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        } else if (!Date.isValidCalendarDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_INVALID_DATE);
         }
         return new Date(trimmedDate);
     }
@@ -187,7 +189,7 @@ public class ParserUtil {
                     .withResolverStyle(ResolverStyle.STRICT);
             return LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_INVALID_DATE);
         }
     }
 }

@@ -81,7 +81,7 @@ public class EditOrderCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_ITEM_DESC, Item.MESSAGE_CONSTRAINTS); // invalid item
         assertParseFailure(parser, "1" + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS); // invalid date
-        assertParseFailure(parser, "1" + INVALID_DATE_VALUE, Date.MESSAGE_CONSTRAINTS); // invalid date
+        assertParseFailure(parser, "1" + INVALID_DATE_VALUE, Date.MESSAGE_INVALID_DATE); // invalid date
         assertParseFailure(parser, "1" + INVALID_DATE_DIGIT, Date.MESSAGE_CONSTRAINTS); // invalid date
         assertParseFailure(parser, "1" + INVALID_DATE_NO_HYPHEN, Date.MESSAGE_CONSTRAINTS); // invalid date
         assertParseFailure(parser, "1" + INVALID_QUANTITY_NEGATIVE, Quantity.MESSAGE_CONSTRAINTS); // invalid quantity
@@ -89,7 +89,7 @@ public class EditOrderCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_QUANTITY_STRING, Quantity.MESSAGE_CONSTRAINTS); // invalid quantity
 
         // invalid date followed by valid quantity
-        assertParseFailure(parser, "1" + INVALID_DATE_DESC + QUANTITY_DESC_ATLAS, Date.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_DATE_VALUE + QUANTITY_DESC_ATLAS, Date.MESSAGE_INVALID_DATE);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_ITEM_DESC + INVALID_DATE_DESC + VALID_QUANTITY_ATLAS,

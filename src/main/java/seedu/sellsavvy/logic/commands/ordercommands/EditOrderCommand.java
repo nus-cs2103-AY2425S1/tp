@@ -5,6 +5,7 @@ import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
+import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 
 import java.util.List;
 import java.util.Objects;
@@ -46,8 +47,8 @@ public class EditOrderCommand extends Command {
     public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Order: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
-            + "This customer already has an order for this item"
-            + ", verify if this is a mistake\n";
+            + "This customer already has an order for this item, "
+            + "verify if this is a mistake\n";
 
     private final Index index;
     private final EditOrderDescriptor editOrderDescriptor;
@@ -84,6 +85,9 @@ public class EditOrderCommand extends Command {
         String feedbackToUser = !orderToEdit.isSameOrder(editedOrder)
                 && orderList.contains(editedOrder)
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
+                : "";
+        feedbackToUser += editedOrder.hasDateElapsed()
+                ? MESSAGE_OUTDATED_WARNING
                 : "";
 
         model.setOrder(orderToEdit, editedOrder);

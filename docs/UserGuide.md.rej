@@ -3,6 +3,6 @@ diff a/docs/UserGuide.md b/docs/UserGuide.md	(rejected hunks)
  **Edit a person**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
  **Find person(s)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
  **List all persons**  | `list`
--**Add an order**      | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 c/3`
+-**Add an order**      | `addOrder INDEX i/ITEM d/DATE [q/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 q/3`
  **List all orders**   | `listOrder INDEX`<br> e.g., `listOrder 3`
  **Help**              | `help`

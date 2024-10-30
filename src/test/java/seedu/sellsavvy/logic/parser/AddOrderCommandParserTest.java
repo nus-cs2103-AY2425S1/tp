@@ -122,7 +122,7 @@ public class AddOrderCommandParserTest {
         assertParseFailure(parser, "1" + ITEM_DESC_ATLAS + INVALID_DATE_NO_HYPHEN + QUANTITY_DESC_ATLAS,
                 Date.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + ITEM_DESC_ATLAS + INVALID_DATE_VALUE + QUANTITY_DESC_ATLAS,
-                Date.MESSAGE_CONSTRAINTS);
+                Date.MESSAGE_INVALID_DATE);
 
         // invalid quantity
         assertParseFailure(parser, "1" + ITEM_DESC_ATLAS + DATE_DESC_ATLAS + INVALID_QUANTITY_ZERO,
