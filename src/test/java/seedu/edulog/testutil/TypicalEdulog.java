@@ -13,7 +13,7 @@ public class TypicalEdulog {
      */
     public static EduLog getTypicalEduLog() {
         EduLog eduLog = new EduLog();
-        for (Student student : TypicalStudents.getTypicalStudents()) {
+        for (Student student : TypicalStudents.getCopyOfTypicalStudents()) {
             eduLog.addStudent(student);
         }
 

@@ -18,6 +18,7 @@ public class RevenueCommandTest {
     public void execute_noHasPaid_successful() {
         RevenueCommand command = new RevenueCommand();
         Model model = new ModelManager(getTypicalEduLog(), new UserPrefs());
+        model.unmarkAllStudents();
 
         // none of the student has paid
         String expectedMessage = String.format(RevenueCommand.COMMAND_SUCCESS, 0);
