@@ -15,6 +15,15 @@ import seedu.address.model.person.ClientStatus;
 public class WhitelistCommandParser implements Parser<WhitelistCommand> {
 
     /**
+     * Checks if the new client status is valid.
+     * The new client status must be 'old', 'active' or 'potential',
+     * it cannot be 'blaclisted' (despite that being a valid client status).
+     */
+    public boolean isValidNewClientStatus(ClientStatus clientStatus) {
+        return !clientStatus.isBlacklisted();
+    }
+
+    /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
@@ -38,6 +47,10 @@ public class WhitelistCommandParser implements Parser<WhitelistCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WhitelistCommand.MESSAGE_USAGE));
         }
 
-        return new WhitelistCommand(index, newClientStatus);
+        if (isValidNewClientStatus(newClientStatus)) {
+            return new WhitelistCommand(index, newClientStatus);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WhitelistCommand.MESSAGE_USAGE));
+        }
     }
 }
