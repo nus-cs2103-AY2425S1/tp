@@ -42,6 +42,9 @@ public class HistoryCommand {
         return this.command;
     }
 
+    /**
+     * Checks the two {@Code HistoryCommand} instance to see if they are equal.
+     */
     public boolean equals(Object other) {
         if (this == other) {
             return true;

@@ -39,6 +39,7 @@ public class HistoryCommandList implements Iterable<HistoryCommand> {
     public static void setCommandHistoryText(String input) {
         originalCommandText = input;
     }
+
     public ObservableList<HistoryCommand> getHistoryCommands() {
         return this.internalList;
     }
