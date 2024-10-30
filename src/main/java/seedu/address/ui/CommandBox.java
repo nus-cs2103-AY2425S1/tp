@@ -23,9 +23,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-    // Store available commands for autocomplete
     private static final Map<String, String> commandSyntaxMap = new HashMap<>();
     private static final Map<String, List<String>> commandParametersMap = new HashMap<>();
+    private static final String TAG_PREFIX = "t/";
     private final CommandExecutor commandExecutor;
     private String currentSuggestion = ""; // Tracks current suggestion part
     private int tabIndex = 0; // Tracks the current position for tab completion
@@ -36,7 +36,9 @@ public class CommandBox extends UiPart<Region> {
     private Label suggestionLabel; // For greyed-out suggestion -> refer to fxml file
 
     static {
-        commandSyntaxMap.put("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS edu/EDUCATION tele/TELEGRAM_HANDLE");
+        commandSyntaxMap.put("add", "add n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY CONTACT NAME "
+                + "ecphone/EMERGENCY CONTACT PHONE ecrs/EMERGENCY CONTACT RELATIONSHIP "
+                + "dname/DOCTOR NAME dphone/DOCTOR PHONE demail/DOCTOR EMAIL t/TAG");
         commandSyntaxMap.put("clear", "clear");
         commandSyntaxMap.put("delete", "delete INDEX");
         commandSyntaxMap.put("edit", "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] "
@@ -118,7 +120,6 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-
     /**
      * Extract all parameters ending with "/"
      */
@@ -127,22 +128,27 @@ public class CommandBox extends UiPart<Region> {
             String command = entry.getKey();
             String syntax = entry.getValue();
 
-            // Extract all parameters ending with "/"
             List<String> parameters = new ArrayList<>();
             String[] parts = syntax.split(" ");
 
             for (String part : parts) {
                 if (part.contains("/") && part.indexOf("/") > 0) {
-                    // Extract just the parameter prefix (including the slash)
-                    String prefix = part.substring(0, part.indexOf("/") + 1);
-                    parameters.add(prefix);
+                    // Skip the [...] notation for tags
+                    if (!part.startsWith("[")) {
+                        String prefix = part.substring(0, part.indexOf("/") + 1);
+                        parameters.add(prefix);
+                    }
                 }
+            }
+
+            // Add tag parameter separately for "add" command
+            if (command.equals("add")) {
+                parameters.add(TAG_PREFIX);
             }
 
             commandParametersMap.put(command, parameters);
         }
     }
-
 
     /**
      * This method helps with auto-completion of command parameters when the user presses the Tab key.
@@ -151,18 +157,14 @@ public class CommandBox extends UiPart<Region> {
      * This will be used to suggest commands as the user types.
      */
     private void handleParameterCompletion(String input) {
-        String[] parts = input.split("\\s+", 2); //match 1 or more whitespace characters in a str
+        String[] parts = input.split("\\s+", 2);
         String command = parts[0];
-        //parts[0] = "add"; command
-        //parts[1] = "n/Saajid p/PHONE_NUMBER"; parameters
 
         if (commandParametersMap.containsKey(command)) {
             List<String> parameters = commandParametersMap.get(command);
             String currentInput = parts.length > 1 ? parts[1] : "";
-            //For the "add" command, the parameters list might look like: ["n/", "p/", "e/", "a/"].
-            //If parts[1] exists, ("n/Saajid p/PHONE_NUMBER"), then currentInput will store, else ->empty string
 
-            // Find current parameter index by looking for the last parameter used
+            // Find current parameter index
             int currentParamIndex = -1;
             for (int i = 0; i < parameters.size(); i++) {
                 if (currentInput.endsWith(parameters.get(i))) {
@@ -170,9 +172,6 @@ public class CommandBox extends UiPart<Region> {
                     break;
                 }
             }
-            //Let's say the user has typed: "add n/Saajid ".The currentInput is "n/Saajid ".
-            //The loop compares currentInput with each parameter in ["n/", "p/", "e/"].
-            //Since currentInput ends with "n/Saajid", it will identify that the current parameter is n/ (index 0)
 
             // Check if we're in the middle of a parameter
             for (int i = 0; i < parameters.size(); i++) {
@@ -187,10 +186,8 @@ public class CommandBox extends UiPart<Region> {
                     }
                 }
             }
-            //Input: "add n/Saajid p/9876. The method finds that the user is in the middle of typing the phone number.
-            //Since "p/" is alr present but there’s no / after 9876, it identifies the user is working on the p/ param
 
-            // Move to next parameter
+            // Move to next parameter or tag
             if (currentParamIndex < parameters.size() - 1) {
                 StringBuilder newText = new StringBuilder(command + " ");
 
@@ -261,19 +258,38 @@ public class CommandBox extends UiPart<Region> {
         for (String part : inputParts) {
             if (part.contains("/")) {
                 String prefix = part.substring(0, part.indexOf("/") + 1);
-                usedParams.add(prefix);
+                // Don't add tag prefix to used parameters since it can be used multiple times
+                if (!prefix.equals(TAG_PREFIX)) {
+                    usedParams.add(prefix);
+                }
             }
         }
 
-        // Find next unused parameter
+        // Special handling for tags - always suggest as an option after other parameters
+        boolean hasRequiredParams = usedParams.size() == parameters.size() - 1; // -1 for tag parameter
+        boolean lastPartIsTag = inputParts[inputParts.length - 1].startsWith(TAG_PREFIX);
+
+        // Find next unused parameter or suggest tag
         for (String param : parameters) {
-            if (!usedParams.contains(param)) {
+            if (!usedParams.contains(param) || (param.equals(TAG_PREFIX) && (hasRequiredParams || lastPartIsTag))) {
                 String fullSyntax = commandSyntaxMap.get(command);
-                String paramDescription = getParameterDescription(fullSyntax, param);
+                String paramDescription;
+                if (param.equals(TAG_PREFIX) && (hasRequiredParams || lastPartIsTag)) {
+                    paramDescription = "TAG";
+                } else {
+                    paramDescription = getParameterDescription(fullSyntax, param);
+                }
                 suggestionLabel.setText(input + param + paramDescription);
                 suggestionLabel.setVisible(true);
                 return;
             }
+        }
+
+        // If all required parameters are used, suggest tag
+        if (hasRequiredParams) {
+            suggestionLabel.setText(input + TAG_PREFIX + "TAG");
+            suggestionLabel.setVisible(true);
+            return;
         }
 
         // Hide suggestion if all parameters are used
@@ -334,7 +350,14 @@ public class CommandBox extends UiPart<Region> {
         for (String command : commandSyntaxMap.keySet()) {
             if (command.startsWith(input.toLowerCase())) {
                 List<String> parameters = commandParametersMap.get(command);
-                if (!parameters.isEmpty()) {
+                if (parameters.isEmpty()) {
+                    // For commands without parameters (like delete, list, clear)
+                    commandTextField.setText(command + " ");
+                    commandTextField.positionCaret(commandTextField.getText().length());
+                    currentSuggestion = commandSyntaxMap.get(command);
+                    validCommand = true;
+                } else {
+                    // For commands with parameters
                     commandTextField.setText(command + " " + parameters.get(0));
                     commandTextField.positionCaret(commandTextField.getText().length());
                     currentSuggestion = commandSyntaxMap.get(command);
