@@ -18,9 +18,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
-import javax.swing.text.html.Option;
-
-
 /**
  * Marks the attendance of a student for a specific date.
  */
@@ -117,16 +114,15 @@ public class MarkAttendanceCommand extends Command {
 
     @Override
     public boolean undo(Model model) {
-        if (student.isPresent()) {
-            Student student = this.student.get();
-            // Revert to the previous attendance state
-            if (previousAttendance != null) {
-                student.markAttendance(date, previousAttendance.value);
-            } else {
-                student.deleteAttendance(date);
-            }
-            return true;
+        if (student.isEmpty()) {
+            return false;
         }
-        return false;
+        Student student = this.student.get();
+        if (previousAttendance != null) {
+            student.markAttendance(date, previousAttendance.value);
+        } else {
+            student.deleteAttendance(date);
+        }
+        return true;
     }
 }
