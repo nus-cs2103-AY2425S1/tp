@@ -49,9 +49,10 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getStudentId().ifPresent(phone -> sb.append(PREFIX_STUDENTID).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_NETID).append(email.value).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_NETID)
+                .append(email.value, 0, 8).append(" "));
         descriptor.getMajor().ifPresent(address -> sb.append(PREFIX_MAJOR).append(address.value).append(" "));
-        descriptor.getYear().ifPresent(year -> sb.append(PREFIX_MAJOR).append(year.value).append(" "));
+        descriptor.getYear().ifPresent(year -> sb.append(PREFIX_YEAR).append(year.value).append(" "));
         if (descriptor.getGroups().isPresent()) {
             Set<Group> groups = descriptor.getGroups().get();
             if (groups.isEmpty()) {

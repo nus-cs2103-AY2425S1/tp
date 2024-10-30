@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "e1234567@u.nus.edu";
     public static final String DEFAULT_MAJOR = "Computer Science";
     public static final String DEFAULT_YEAR = "1";
+    public static final String DEFAULT_GROUP = "group 1";
     public static final String DEFAULT_COMMENT = "Shes a very vocal person";
 
 
@@ -43,7 +45,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         major = new Major(DEFAULT_MAJOR);
         year = new Year(DEFAULT_YEAR);
-        groups = new HashSet<>();
+        groups = new HashSet<>(Collections.singleton(new Group(DEFAULT_GROUP)));
         comment = new Comment(DEFAULT_COMMENT);
     }
 
