@@ -59,7 +59,8 @@ public class FilterCommand extends Command {
             model.updateFilteredPersonList(p -> predicatePersonTaggedWithTag.test(p)
                     && personInWeddingPredicate.test(p));
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tagSet));
+        String tagSetString = Tag.tagSetToString(tagSet);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tagSetString));
     }
 
     @Override

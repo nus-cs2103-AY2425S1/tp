@@ -20,6 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.PersonInWeddingPredicate;
 import seedu.address.model.person.PersonTaggedWithPredicate;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -34,7 +35,8 @@ public class FilterCommandTest {
     public void execute_oneValidTagListView_success() {
         FilterCommand command = new FilterCommand(TAG_SET_FRIENDS);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, TAG_SET_FRIENDS);
+        String expectedTagString = Tag.tagSetToString(TAG_SET_FRIENDS);
+        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, expectedTagString);
         PersonTaggedWithPredicate predicate = new PersonTaggedWithPredicate(TAG_SET_FRIENDS);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -44,7 +46,8 @@ public class FilterCommandTest {
     public void execute_twoValidTagsListView_success() {
         FilterCommand command = new FilterCommand(TAG_SET_FRIENDS_OWESMONEY);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, TAG_SET_FRIENDS_OWESMONEY);
+        String expectedTagString = Tag.tagSetToString(TAG_SET_FRIENDS_OWESMONEY);
+        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, expectedTagString);
         PersonTaggedWithPredicate predicate = new PersonTaggedWithPredicate(TAG_SET_FRIENDS_OWESMONEY);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -59,7 +62,8 @@ public class FilterCommandTest {
         ViewWeddingCommand viewWeddingCommand = new ViewWeddingCommand(INDEX_FIRST_PERSON);
         viewWeddingCommand.execute(model);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, TAG_SET_FRIENDS);
+        String expectedTagString = Tag.tagSetToString(TAG_SET_FRIENDS);
+        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, expectedTagString);
         PersonTaggedWithPredicate personTaggedWithPredicate = new PersonTaggedWithPredicate(TAG_SET_FRIENDS);
         PersonInWeddingPredicate personInWeddingPredicate = new PersonInWeddingPredicate(WEDDING_ONE);
         expectedModel.updateFilteredPersonList(p -> personTaggedWithPredicate.test(p)
@@ -76,7 +80,8 @@ public class FilterCommandTest {
         ViewWeddingCommand viewWeddingCommand = new ViewWeddingCommand(INDEX_FIRST_PERSON);
         viewWeddingCommand.execute(model);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, TAG_SET_FRIENDS_OWESMONEY);
+        String expectedTagString = Tag.tagSetToString(TAG_SET_FRIENDS_OWESMONEY);
+        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, expectedTagString);
         PersonTaggedWithPredicate personTaggedWithPredicate = new PersonTaggedWithPredicate(TAG_SET_FRIENDS_OWESMONEY);
         PersonInWeddingPredicate personInWeddingPredicate = new PersonInWeddingPredicate(WEDDING_ONE);
         expectedModel.updateFilteredPersonList(p -> personTaggedWithPredicate.test(p)
