@@ -23,7 +23,7 @@ public class ListCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_LIST_ARCHIVE + "] "
             + "[" + PREFIX_LIST_ALL + "]\n"
-            + "Example: " + COMMAND_WORD;
+            + "Examples: " + COMMAND_WORD + ", " + COMMAND_WORD + " archive/, " + COMMAND_WORD + " all/";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all persons";
     public static final String MESSAGE_SUCCESS_CURRENT = "Listed all current persons";

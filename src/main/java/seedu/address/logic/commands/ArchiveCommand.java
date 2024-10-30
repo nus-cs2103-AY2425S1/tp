@@ -24,8 +24,9 @@ public class ArchiveCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD_ARCHIVE + "/" + COMMAND_WORD_UNARCHIVE
             + ": Archives/unarchives the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Parameters: INDEX (must be a positive integer)";
+            + "by the index number used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Examples: " + COMMAND_WORD_ARCHIVE + " 1, " + COMMAND_WORD_UNARCHIVE + " 1";
     public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Person: %1$s";
 
     public static final String MESSAGE_PERSON_IS_ALREADY_ARCHIVED =
@@ -45,6 +46,7 @@ public class ArchiveCommand extends Command {
 
     /**
      * @param index of the person in the filtered person list to archive/unarchive
+     * @param isArchive depending on whether the person should be archived or not
      */
     public ArchiveCommand(Index index, boolean isArchive) {
         requireNonNull(index);
