@@ -85,6 +85,7 @@ public class AddOrderCommandTest {
         Model expectedModel = model.createCopy();
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
         personToAddUnder.getOrderList().add(ABACUS);
+        expectedModel.updateSelectedPerson(personToAddUnder);
         String expectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(ABACUS));
 
