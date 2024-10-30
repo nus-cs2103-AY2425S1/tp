@@ -1,8 +1,9 @@
 package seedu.address.model.person.predicates;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -10,20 +11,23 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests that a {@code Person}'s {@code Gender} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Gender} matches any of the keywords given. Tests that a {@code Person}'s
+ * {@code Gender} matches any of the keywords given.
  */
 public class GenderMatchesKeywordsPredicate implements Predicate<Person> {
     public static final String VALIDATION_REGEX = "^[FfMm]$";
-    public static final String MESSAGE_CONSTRAINTS = "Gender should only be 'F' / 'f' (Female) or 'M' / 'm' (Male)";
+    public static final String MESSAGE_CONSTRAINTS = "Each gender criteria should only be 'F' / 'f' (Female) or "
+            + "'M' / 'm' (Male)";
 
-    private final List<String> keywords;
+    private final Set<String> keywords;
 
     /**
      * Constructs a {@code GenderMatchesKeywordsPredicate}.
      *
-     * @param keywords A list of valid keywords
+     * @param keywords A list of valid gender keywords
      */
-    public GenderMatchesKeywordsPredicate(List<String> keywords) {
+    public GenderMatchesKeywordsPredicate(Set<String> keywords) {
+        requireNonNull(keywords);
         for (String k : keywords) {
             checkArgument(isValidInput(k), MESSAGE_CONSTRAINTS);
         }
