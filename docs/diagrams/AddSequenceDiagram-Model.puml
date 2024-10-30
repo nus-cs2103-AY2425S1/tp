@@ -7,16 +7,16 @@ participant ":AddCommand" as AddCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
 participant ":AddressBook" as AddressBook MODEL_COLOR
 participant ":UniqueStudentList" as UniqueStudentList MODEL_COLOR
 end box
 
 activate AddCommand
-AddCommand -> Model : hasStudent(student)
-activate Model
+AddCommand -> ModelManager : hasStudent(student)
+activate ModelManager
 
-Model -> AddressBook : hasStudent(student)
+ModelManager -> AddressBook : hasStudent(student)
 activate AddressBook
 
 
@@ -26,17 +26,17 @@ activate UniqueStudentList
 UniqueStudentList --> AddressBook : Whether student exists
 deactivate UniqueStudentList
 
-AddressBook --> Model : Whether student exists
+AddressBook --> ModelManager : Whether student exists
 deactivate AddressBook
 
-AddCommand <-- Model : Whether student exists
-deactivate Model
+AddCommand <-- ModelManager : Whether student exists
+deactivate ModelManager
 
 group opt[hasStudent is false]
-    AddCommand -> Model : addStudent(student)
-    activate Model
+    AddCommand -> ModelManager : addStudent(student)
+    activate ModelManager
 
-    Model -> AddressBook : addStudent(student)
+    ModelManager -> AddressBook : addStudent(student)
     activate AddressBook
 
     AddressBook -> UniqueStudentList : add(student)
@@ -45,12 +45,12 @@ group opt[hasStudent is false]
 '    AddCommand <-- Model
     deactivate UniqueStudentList
     deactivate AddressBook
-    deactivate Model
+    deactivate ModelManager
 
-    AddCommand -> Model : getClashingStudents(student)
-    activate Model
+    AddCommand -> ModelManager : getClashingStudents(student)
+    activate ModelManager
 
-    Model -> AddressBook : getClashingStudents(student)
+    ModelManager -> AddressBook : getClashingStudents(student)
     activate AddressBook
 
     AddressBook -> UniqueStudentList : getClashingStudents(student)
@@ -59,11 +59,11 @@ group opt[hasStudent is false]
     UniqueStudentList --> AddressBook : List of clashing students
     deactivate UniqueStudentList
 
-    AddressBook --> Model : List of clashing students
+    AddressBook --> ModelManager : List of clashing students
     deactivate AddressBook
 
-    AddCommand <-- Model : List of clashing students
-    deactivate Model
+    AddCommand <-- ModelManager : List of clashing students
+    deactivate ModelManager
 end
 
 
