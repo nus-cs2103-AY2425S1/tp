@@ -305,9 +305,10 @@ Format: `sort <CRITERIA> <ORDER>`
 
 - **Parameters**:
   - `CRITERIA`: The attribute by which you want to sort the clients. Available criteria include:
-      - `name`: Sort by client's name (A-Z).
-      - `birthday`: Sort by client's birthday (earliest to latest).
-      - `appointment`: Sort by upcoming appointment dates (soonest to latest).
+      - `n/`: Sort by client's name (A-Z by default).
+      - `b/`: Sort by client's birthday (earliest to latest by default).
+      - `appt`: Sort by upcoming appointment dates (soonest to latest by default).
+      - `paydate`: Sort by policy payment due date (earliest to latest by default).
   - `ORDER`: The direction of sort. Available order includes:
     - `asc`: Sort in ascending order
     - `dsc`: Sort in descending order
@@ -321,27 +322,35 @@ Format: `sort <CRITERIA> <ORDER>`
 Examples:
   - **Sort by Name in Ascending Order**:
     ```
-    sort name asc
+    sort n/ asc
     ```
     *Sorts the client list alphabetically by each client's name.*
 
     ![Sort by Name](images/sortnameUI.png)
 
-  - **Sort by Birthday**:
+  - **Sort by Birthday in Descending Order**:
     ```
-    sort birthday dsc
+    sort b/ dsc
     ```
-    *Sorts the client list from the earliest to the latest birthday.*
+    *Sorts the client list from the latest to the earliest birthday.*
 
     ![Sort by Birthday](images/sortUI.png)
 
-  - **Sort by Appointment**:
+  - **Sort by Appointment Date in Ascending Order**:
     ```
-    sort appointment_date asc
+    sort appt/ asc
     ```
-    *Sorts the client list based on the earliest upcoming appointments.*
+    *Sorts the client list based on the earliest to the latest upcoming appointments.*
 
-    ![Sort by Appointment](images/sortapptUI.png)
+    ![Sort by Appointment Date](images/sortapptUI.png)
+
+  - **Sort by Policy Payment Due Date in Ascending Order**:
+  ```
+  sort paydate/ asc
+  ```
+  *Sorts the client list based on the earliest to the latest payment due date of the policy.*
+
+  ![Sort by Policy Payment Due Date](images/sortpaydateUI.png)
 
 ---
 
