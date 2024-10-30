@@ -18,7 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
-
+import javax.swing.text.html.Option;
 
 
 /**
@@ -55,7 +55,7 @@ public class MarkAttendanceCommand extends Command {
     private final Attendance attendance;
     private final Optional<StudentNumber> studentNumber;
     private Attendance previousAttendance;
-
+    private Optional<Student> student;
 
 
     /**
@@ -71,6 +71,7 @@ public class MarkAttendanceCommand extends Command {
         this.date = date;
         this.attendance = attendance;
         this.studentNumber = studentNumber;
+        this.student = Optional.empty();
     }
 
     @Override
@@ -82,7 +83,6 @@ public class MarkAttendanceCommand extends Command {
             throw new CommandException("Student not found: " + name);
         }
 
-        Student student;
         if (studentNumber.isPresent()) {
             List<Student> filteredStudentList = studentList.stream()
                     .filter(s -> s.getStudentNumber().equals(studentNumber.get()))
@@ -91,7 +91,7 @@ public class MarkAttendanceCommand extends Command {
                 throw new CommandException("Student not found: " + name + " with Student Number: "
                         + studentNumber.get());
             }
-            student = filteredStudentList.get(0);
+            student = Optional.of(filteredStudentList.get(0));
         } else {
             if (studentList.size() > 1) {
                 String duplicateStudentNumbers = studentList.stream()
@@ -99,37 +99,34 @@ public class MarkAttendanceCommand extends Command {
                         .collect(Collectors.joining(", "));
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, duplicateStudentNumbers, name));
             }
-            student = studentList.get(0);
+            student = Optional.of(studentList.get(0));
         }
 
 
         // Save the previous attendance state
-        previousAttendance = student.getAttendanceRecord().stream()
+        previousAttendance = student.get().getAttendanceRecord().stream()
                 .filter(record -> record.getDate().equals(date))
                 .findFirst()
                 .map(record -> record.getAttendance())
                 .orElse(null);
-
         // Mark attendance
-        student.markAttendance(date, attendance.value);
+        student.get().markAttendance(date, attendance.value);
         return new CommandResult(String.format(MESSAGE_SUCCESS, name, attendance,
                 DateTimeFormatter.ofPattern("MMM d yyyy").format(date)));
     }
 
     @Override
     public boolean undo(Model model) {
-        // Find the student by name
-        Student student = model.getStudentByName(name);
-        if (student == null) {
-            return false;
+        if (student.isPresent()) {
+            Student student = this.student.get();
+            // Revert to the previous attendance state
+            if (previousAttendance != null) {
+                student.markAttendance(date, previousAttendance.value);
+            } else {
+                student.deleteAttendance(date);
+            }
+            return true;
         }
-
-        // Revert to the previous attendance state
-        if (previousAttendance != null) {
-            student.markAttendance(date, previousAttendance.value);
-        } else {
-            student.deleteAttendance(date);
-        }
-        return true;
+        return false;
     }
 }
