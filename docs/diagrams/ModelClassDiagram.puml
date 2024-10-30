@@ -46,20 +46,24 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueSupplierList
-UniqueSupplierList -left-> "~* all" Supplier
+UniqueSupplierList -down-> "~* all" Supplier
 Supplier *--> Name
 Supplier *--> Phone
 Supplier *--> Email
 Supplier *--> Address
 Supplier *--> "*" Tag
 
-AddressBook *--> "1" UniqueProductList
-UniqueProductList --> "~*all" Product
+AddressBook *-down-> "1" UniqueProductList
+UniqueProductList --> "~* all" Product
 Product *--> ProductName
 Product *--> StockLevel
+Product *--> "*" Tag
 
-Supplier -[hidden]up--> I
-UniqueSupplierList -[hidden]right-> I
+Supplier -[hidden]left-> I
+UniqueSupplierList -[hidden]left-> I
+
+Product -[hidden]up--> I
+UniqueProductList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
