@@ -21,9 +21,8 @@ public class ViewCommand extends Command {
             + "Input \"home\" to return to home page";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views patient details with the given NRIC. "
-            + "Format: view i/NRIC\n"
-            + "Example: " + COMMAND_WORD + " i/S1234567A";
+            + ": Views full profile of identified patient in the system\n"
+            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
     private final Nric nric;
 

@@ -49,38 +49,9 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified by the "
-            + "NRIC input. Existing values will be overwritten by the input values.\n"
-            + "Parameters: NRIC (must be a valid NRIC in the system) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_NRIC + "NRIC] "
-            + "[" + PREFIX_BIRTHDATE + "BIRTHDATE] "
-            + "[" + PREFIX_SEX + "SEX] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_BLOODTYPE + "BLOOD TYPE] "
-            + "[" + PREFIX_NOKNAME + "NEXT-OF-KIN NAME] "
-            + "[" + PREFIX_NOKPHONE + "NEXT-OF-KIN PHONE] "
-            + "[" + PREFIX_ALLERGY + "ALLERGY] "
-            + "[" + PREFIX_HEALTHRISK + "HEALTH RISK] "
-            + "[" + PREFIX_EXISTINGCONDITION + "PAST HEALTH RECORD] "
-            + "[" + PREFIX_NOTE + "ADDITIONAL NOTES]\n"
-            + "Example: " + COMMAND_WORD + " T0489364Y "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_NRIC + "T0123456A "
-            + PREFIX_BIRTHDATE + "2001-12-31 "
-            + PREFIX_SEX + "M "
-            + PREFIX_PHONE + "81234567 "
-            + PREFIX_EMAIL + "johndoe123@gmail.com "
-            + PREFIX_ADDRESS + "Block 123, NUS Road, S123123 "
-            + PREFIX_BLOODTYPE + "A+ "
-            + PREFIX_NOKNAME + "Jack Doe "
-            + PREFIX_NOKPHONE + "91234567 "
-            + PREFIX_ALLERGY + "nuts, shellfish "
-            + PREFIX_HEALTHRISK + "HIGH "
-            + PREFIX_EXISTINGCONDITION + "Diabetes "
-            + PREFIX_NOTE + "Patient needs extra care";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits patient's detail(s) for an existing patient "
+            + "record in the system\n"
+            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

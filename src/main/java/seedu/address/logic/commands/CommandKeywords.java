@@ -8,11 +8,13 @@ public enum CommandKeywords {
     addf,
     appt,
     clear,
+    deleteappt,
     delete,
     edit,
     exit,
+    filter,
     find,
-    home,
+    list,
     view;
 
     /**
