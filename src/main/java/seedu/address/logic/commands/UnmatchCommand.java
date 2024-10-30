@@ -29,7 +29,7 @@ public class UnmatchCommand extends Command {
             COMMAND_WORD + ": Unmatch a contact from a job\nParameters: <CONTACT_INDEX> <JOB_INDEX>\nExample: "
                     + COMMAND_WORD + " 2 1";
 
-    public static final String MESSAGE_UNMATCH_SUCCESS = "Unmatched Contact: %1$s with Job:";
+    public static final String MESSAGE_UNMATCH_SUCCESS = "Unmatched Contact: %1$s with Job: %2$s";
     public static final String MESSAGE_CONTACT_NOT_MATCHED = "This contact is not matched with this job!";
     public static final String MESSAGE_CONTACT_HAS_NO_JOBS = "The contact %1$s is not associated with any job";
 
@@ -74,8 +74,8 @@ public class UnmatchCommand extends Command {
         model.setPerson(contactToUnmatch, unmatchedContact);
 
         return new CommandResult(
-                String.format(MESSAGE_UNMATCH_SUCCESS, Messages.format(unmatchedContact))
-        );
+                String.format(MESSAGE_UNMATCH_SUCCESS, Messages.format(unmatchedContact),
+                        Messages.format(jobToUnmatch)));
     }
 
     /**
