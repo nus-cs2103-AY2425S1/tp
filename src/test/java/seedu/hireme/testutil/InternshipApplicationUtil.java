@@ -6,7 +6,6 @@ import static seedu.hireme.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.hireme.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import seedu.hireme.logic.commands.AddCommand;
-import seedu.hireme.logic.validator.DateValidator;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 

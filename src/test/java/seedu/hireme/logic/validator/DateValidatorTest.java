@@ -3,11 +3,6 @@ package seedu.hireme.logic.validator;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
-
 import org.junit.jupiter.api.Test;
 
 public class DateValidatorTest {

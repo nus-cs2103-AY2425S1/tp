@@ -23,19 +23,28 @@ public class InternshipApplicationTest {
 
     @Test
     public void constructorNoStatus_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new InternshipApplication(null, new Date("01/01/24"), new Role("SWE")));
-        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(), null, new Role("SWE")));
-        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(), new Date("01/01/24"), null));
-        assertThrows(NullPointerException.class, () -> new InternshipApplication(null, null, null));
+        assertThrows(NullPointerException.class, () -> new InternshipApplication(null,
+                new Date("01/01/24"), new Role("SWE")));
+        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(),
+                null, new Role("SWE")));
+        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(),
+                new Date("01/01/24"), null));
+        assertThrows(NullPointerException.class, () -> new InternshipApplication(null,
+                null, null));
     }
 
     @Test
     public void constructorWithStatus_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new InternshipApplication(null, new Date("01/01/24"), new Role("SWE"), Status.PENDING));
-        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(), null, new Role("SWE"), Status.PENDING));
-        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(), new Date("01/01/24"), null, Status.PENDING));
-        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(), new Date("01/01/24"), new Role("SWE"), null));
-        assertThrows(NullPointerException.class, () -> new InternshipApplication(null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new InternshipApplication(null,
+                new Date("01/01/24"), new Role("SWE"), Status.PENDING));
+        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(),
+                null, new Role("SWE"), Status.PENDING));
+        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(),
+                new Date("01/01/24"), null, Status.PENDING));
+        assertThrows(NullPointerException.class, () -> new InternshipApplication(APPLE.getCompany(),
+                new Date("01/01/24"), new Role("SWE"), null));
+        assertThrows(NullPointerException.class, () -> new InternshipApplication(null,
+                null, null, null));
     }
 
     @Test
