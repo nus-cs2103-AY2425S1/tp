@@ -2,7 +2,6 @@ package seedu.address.model.history;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
 import java.util.Iterator;
 
 import javafx.collections.FXCollections;
@@ -24,8 +23,7 @@ public class HistoryCommandList implements Iterable<HistoryCommand> {
     }
 
     /**
-     * Adds a history command to the list.
-     * The person must not already exist in the list.
+     * Adds a history command to the list. The person must not already exist in the list.
      */
     public void add(Command toAdd) {
         requireNonNull(toAdd);

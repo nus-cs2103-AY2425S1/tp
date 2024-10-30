@@ -10,6 +10,7 @@ public class HistoryCommand {
     private final String input;
     private static int value = 0;
     private int index;
+
     private HistoryCommand(Command command, String input, int index) {
         this.command = command;
         this.input = input;
