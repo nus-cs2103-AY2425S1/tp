@@ -21,7 +21,7 @@
       </stylesheets>
 
       <VBox fx:id="mainContainer">
-          <HBox fx:id="menuBar" alignment="BASELINE_LEFT" spacing="0" VBox.vgrow="NEVER">
+          <HBox fx:id="menuBar" alignment="BASELINE_LEFT" VBox.vgrow="NEVER">
               <Button text="Exit" id="exitButton" onAction="#handleExit" />
               <Button text="Help" id="helpButton" onAction="#handleHelp" />
           </HBox>

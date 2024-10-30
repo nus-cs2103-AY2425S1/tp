@@ -5,7 +5,6 @@ import java.net.URI;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -25,6 +24,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+
+    private static final String USER_GUIDE_URl = "https://ay2425s1-cs2103t-f09-3.github.io/tp/UserGuide.html";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -126,10 +127,10 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleHelp() {
         try {
-            URI uri = new URI("https://ay2425s1-cs2103t-f09-3.github.io/tp/UserGuide.html");
+            URI uri = new URI(USER_GUIDE_URl);
             Desktop.getDesktop().browse(uri);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.severe("Error occurred while opening the help URL:\n" + e);
         }
     }
 
