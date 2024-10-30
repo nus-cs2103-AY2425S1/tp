@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant "d:DateComparator" as DateComparator LOGIC_COLOR
+participant "s:SortCommand" as SortCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("/sort " + order)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("/sort " + order)
+activate AddressBookParser
+
+create SortCommandParser
+AddressBookParser -> SortCommandParser
+activate SortCommandParser
+
+SortCommandParser --> AddressBookParser
+deactivate SortCommandParser
+
+AddressBookParser -> SortCommandParser : parse(order)
+activate SortCommandParser
+
+create DateComparator
+SortCommandParser -> DateComparator
+activate DateComparator
+
+DateComparator -> SortCommandParser
+deactivate DateComparator
+
+create SortCommand
+SortCommandParser -> SortCommand : new SortCommand(d)
+activate SortCommand
+
+SortCommand --> SortCommandParser :
+deactivate SortCommand
+
+SortCommandParser --> AddressBookParser : s
+deactivate SortCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommandParser -[hidden]-> AddressBookParser
+destroy SortCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SortCommand : execute(m)
+activate SortCommand
+
+SortCommand -> Model : sortFilteredList(d)
+activate Model
+
+Model --> SortCommand
+deactivate Model
+
+create CommandResult
+SortCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortCommand
+deactivate CommandResult
+
+SortCommand --> LogicManager : r
+deactivate SortCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

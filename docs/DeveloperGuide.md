@@ -149,6 +149,7 @@ Classes used by multiple components are in the `seedu.hireme.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
 ### Create new internship application
 The implementation of the create command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 In this case, `AddressBookParser` creates `AddCommandParser` to parse user input string.
@@ -175,9 +176,9 @@ In this case, `AddressBookParser` creates `FindCommandParser` to parse user inpu
 Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
   `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
 
-
 Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
-`setPredicate` updates the `filteredList` in `model` to contain all InternshipApplication that contains the keyword
+`setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword
+
 
 ### Filter internship applications
 
@@ -195,17 +196,32 @@ Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the 
 
 
 ### Delete an internship application
-The implementation of the command command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 In this case, `AddressBookParser` creates `DeleteCommandParser` to parse user input string.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
 
 `AddressBookParser` first obtains the index from the user's input.
-`AddressBookParser` ensures that there is at least 1 keyword found which is a number. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
+`AddressBookParser` ensures that there is only 1 keyword found which is a number. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
 Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the user input.
 `DeleteCommand` comprises of a targetIndex which is the zero based index number of the internship application to be deleted.
 
 Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
+
+
+### Sort internship application list
+The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+In this case, `AddressBookParser` creates `SortCommandParser` to parse user input string.
+
+<puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
+
+`AddressBookParser` first obtains the order from the user's input.
+`AddressBookParser` ensures that there is only 1 keyword found which is the sorting order. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
+Otherwise, it creates a new instance of `SortCommand` that corresponds to the user input.
+`SortCommand` comprises of a DateComparator which contains the sorting order, according to date of application, that the internship application list should be sorted by.
+
+Upon execution, `SortCommand` calls on `model::sortFilteredList` which in turns calls on `addressBook::sortItems`.
+`sortItems` updates the `filteredList` in `model` to sort the internship applications in the list according to the order specified by the user.
 
 --------------------------------------------------------------------------------------------------------------------
 
