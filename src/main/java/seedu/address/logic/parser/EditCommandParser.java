@@ -56,13 +56,13 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setStudentId(ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get()));
         }
         if (argMultimap.getValue(PREFIX_NETID).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseNetId(argMultimap.getValue(PREFIX_NETID).get()));
+            editPersonDescriptor.setEmail(ParserUtil.parseOptionalNetId(argMultimap.getValue(PREFIX_NETID).get()));
         }
         if (argMultimap.getValue(PREFIX_YEAR).isPresent()) {
-            editPersonDescriptor.setYear(ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get()));
+            editPersonDescriptor.setYear(ParserUtil.parseOptionalYear(argMultimap.getValue(PREFIX_YEAR).get()));
         }
         if (argMultimap.getValue(PREFIX_MAJOR).isPresent()) {
-            editPersonDescriptor.setMajor(ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get()));
+            editPersonDescriptor.setMajor(ParserUtil.parseOptionalMajor(argMultimap.getValue(PREFIX_MAJOR).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_GROUP)).ifPresent(editPersonDescriptor::setTags);
 
