@@ -1,15 +1,16 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.person.ContainsKeywordsPredicate;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.person.ContainsKeywordsPredicate;
+
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -18,8 +19,8 @@ public class FindAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "findapp";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all appointments based on the specified criteria "
-            + "and displays them as a list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all appointments based on the specified criteria"
+            + " and displays them as a list.\n"
             + "Parameters: "
             + "[" + PREFIX_START_DATE + "START_DATE] "
             + "[" + PREFIX_START_TIME + "START_TIME] "
@@ -27,7 +28,7 @@ public class FindAppointmentCommand extends Command {
             + "[" + PREFIX_END_TIME + "END_TIME]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_START_DATE + "01/01/2025 "
-            + PREFIX_START_TIME  + "12:00 "
+            + PREFIX_START_TIME + "12:00 "
             + PREFIX_END_DATE + "02/01/2025 "
             + PREFIX_END_TIME + "13:00";
 

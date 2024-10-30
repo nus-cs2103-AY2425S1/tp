@@ -1,12 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,6 +15,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FindAppointmentCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.criteria.AppointmentSearchCriteria;
 import seedu.address.logic.parser.criteria.SearchCriteria;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContainsKeywordsPredicate;
@@ -24,7 +23,7 @@ import seedu.address.model.person.ContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindAppointmentCommandParser implements Parser<FindCommand> {
+public class FindAppointmentCommandParser implements Parser<FindAppointmentCommand> {
     private static final Logger logger = LogsCenter.getLogger(FindCommandParser.class);
 
     /**
