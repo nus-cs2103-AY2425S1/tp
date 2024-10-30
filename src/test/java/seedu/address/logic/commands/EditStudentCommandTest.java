@@ -68,7 +68,7 @@ public class EditStudentCommandTest {
     @Test
     public void execute_duplicatedStudentEdited_throwsCommandException() {
         EditStudentCommand command = new EditStudentCommand(INDEX_FIRST_PERSON, editPersonDescriptorDuplicate);
-        assertThrows(CommandException.class,  ()->command.execute(model), EditStudentCommand.MESSAGE_DUPLICATE_PERSON);
+        assertThrows(CommandException.class, ()->command.execute(model), EditStudentCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
