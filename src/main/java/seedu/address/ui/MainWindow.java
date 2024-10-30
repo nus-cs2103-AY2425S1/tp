@@ -111,14 +111,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        paginationPanel = new PaginationPanel(logic.getFilteredPersonList());
+        paginationPanel = new PaginationPanel(logic.getFilteredContactList());
         paginationPlaceholder.getChildren().add(paginationPanel);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter =
-                new StatusBarFooter(logic.getAddressBookFilePath(), logic.getFilteredPersonList());
+                new StatusBarFooter(logic.getAddressBookFilePath(), logic.getFilteredContactList());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);

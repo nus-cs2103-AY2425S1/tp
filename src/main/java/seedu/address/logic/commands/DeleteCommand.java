@@ -9,19 +9,19 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a contact identified using it's displayed index from the address book.
  */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the contact identified by the index number used in the displayed contact list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -51,7 +51,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Contact> lastShownList = model.getFilteredContactList();
 
         if (targetIndex == null) {
             setTargetIndex(lastShownList);
@@ -60,21 +60,21 @@ public class DeleteCommand extends Command {
         assert(targetIndex != null);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteContact(contactToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(contactToDelete)));
     }
 
-    private void setTargetIndex(List<Person> lastShownList) throws CommandException {
+    private void setTargetIndex(List<Contact> lastShownList) throws CommandException {
         int temp = lastShownList.stream()
-                .filter(person -> person.getName().equalsIgnoreCase(targetName))
+                .filter(contact -> contact.getName().equalsIgnoreCase(targetName))
                 .map(lastShownList::indexOf)
                 .reduce(invalidTargetIndex, (x, y) -> y);
         if (temp == invalidTargetIndex) {
-            throw new CommandException(Messages.MESSAGE_PERSON_NOT_IN_ADDRESS_BOOK);
+            throw new CommandException(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK);
         }
         this.targetIndex = Index.fromZeroBased(temp);
     }

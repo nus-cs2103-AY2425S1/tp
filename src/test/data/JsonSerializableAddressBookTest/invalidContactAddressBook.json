@@ -1,0 +1,10 @@
+{
+  "contacts": [ {
+    "name": "Hans Muster",
+    "telegram": "9482424",
+    "email": "invalid@email!3e",
+    "studentStatus": "phd",
+    "roles": [ "President" ],
+    "nickname": ""
+  } ]
+}

@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,49 +53,50 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasContact(Contact contact);
 
     /**
-     * Returns true if a person with the same fields as {@code person} exists in the address book.
+     * Returns true if a contact with the same fields as {@code contact} exists in the address book.
      */
-    boolean hasDuplicateFields(Person person);
+    boolean hasDuplicateFields(Contact contact);
 
     /**
-     * Returns true if a person with the same fields as {@code person} exists in the address book
-     * with personToExclude excluded.
+     * Returns true if a contact with the same fields as {@code contact} exists in the address book
+     * with contactToExclude excluded.
      *
-     * @param personToExclude Person to exclude from checking for duplicate fields.
-     * @param person Target person to check for duplicate fields.
+     * @param contactToExclude Contact to exclude from checking for duplicate fields.
+     * @param contact Target contact to check for duplicate fields.
      * @return True if there is no duplicate field, otherwise False.
      */
-    boolean hasDuplicateFieldsWithException(Person personToExclude, Person person);
+    boolean hasDuplicateFieldsWithException(Contact contactToExclude, Contact contact);
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given contact.
+     * The contact must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteContact(Contact target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given contact.
+     * {@code contact} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addContact(Contact contact);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given contact {@code target} with {@code editedContact}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The contact identity of {@code editedContact} must not be the same as another existing contact
+     * in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setContact(Contact target, Contact editedContact);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered contact list */
+    ObservableList<Contact> getFilteredContactList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered contact list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredContactList(Predicate<Contact> predicate);
 }

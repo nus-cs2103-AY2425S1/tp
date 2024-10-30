@@ -13,11 +13,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentStatus;
-import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.StudentStatus;
+import seedu.address.model.contact.TelegramHandle;
 import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
 
@@ -53,9 +53,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
         Nickname nickname = ParserUtil.parseNickname(argMultimap.getValue(PREFIX_NICKNAME).orElse(" "));
 
-        Person person = new Person(name, telegramHandle, email, studentStatus, roleList, nickname);
+        Contact contact = new Contact(name, telegramHandle, email, studentStatus, roleList, nickname);
 
-        return new AddCommand(person);
+        return new AddCommand(contact);
     }
 
     /**
