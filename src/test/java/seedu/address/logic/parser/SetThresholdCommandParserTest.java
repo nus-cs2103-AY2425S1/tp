@@ -55,7 +55,7 @@ public class SetThresholdCommandParserTest {
     }
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
+    public void parse_compulsoryAndMissingField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SetThresholdCommand.MESSAGE_USAGE);
 
@@ -70,23 +70,30 @@ public class SetThresholdCommandParserTest {
 
         // missing values with prefix present
         assertParseFailure(parser, " pr/ min/50", ProductName.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, " pr/Product1 min/", MESSAGE_INVALID_THRESHOLD);
-        assertParseFailure(parser, " pr/Product1 max/", MESSAGE_INVALID_THRESHOLD);
+
     }
 
     @Test
     public void parse_invalidValue_failure() {
+
+        //no value provided for min or max prefix
+        assertParseFailure(parser, " pr/Product1 min/", "Stock level is empty, please provide a value.");
+        assertParseFailure(parser, " pr/Product1 max/", "Stock level is empty, please provide a value.");
+
         // invalid product name
         assertParseFailure(parser, " pr/Product#1 min/50", ProductName.MESSAGE_CONSTRAINTS);
 
         // invalid min stock level (non-numeric)
-        assertParseFailure(parser, " pr/Product1 min/abc", MESSAGE_INVALID_THRESHOLD);
+        assertParseFailure(parser, " pr/Product1 min/abc",
+                "Invalid stock level: Threshold levels should be positive integers.");
 
         // invalid max stock level (non-numeric)
-        assertParseFailure(parser, " pr/Product1 max/abc", MESSAGE_INVALID_THRESHOLD);
+        assertParseFailure(parser, " pr/Product1 max/abc",
+                "Invalid stock level: Threshold levels should be positive integers.");
 
         // both invalid stock levels
-        assertParseFailure(parser, " pr/Product1 min/abc max/def", MESSAGE_INVALID_THRESHOLD);
+        assertParseFailure(parser, " pr/Product1 min/abc max/def",
+                "Invalid stock level: Threshold levels should be positive integers.");
 
         // invalid product name and invalid stock levels
         assertParseFailure(parser, " pr/Product#1 min/abc", ProductName.MESSAGE_CONSTRAINTS);

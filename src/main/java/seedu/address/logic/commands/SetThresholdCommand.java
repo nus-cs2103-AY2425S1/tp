@@ -8,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 
 import java.util.List;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.product.Product;
@@ -15,7 +16,6 @@ import seedu.address.model.product.ProductName;
 import seedu.address.model.product.StockLevel;
 import seedu.address.model.product.exceptions.InvalidMaxStockLevelException;
 import seedu.address.model.product.exceptions.InvalidMinStockLevelException;
-import seedu.address.model.product.exceptions.StockLevelOutOfBoundsException;
 
 /**
  * Sets the minimum and/or maximum stock levels (thresholds) of a product.
@@ -85,7 +85,7 @@ public class SetThresholdCommand extends Command {
         StockLevel updatedStockLevel;
         try {
             updatedStockLevel = new StockLevel(currentStock, newMinStock, newMaxStock);
-        } catch (InvalidMinStockLevelException | InvalidMaxStockLevelException | StockLevelOutOfBoundsException e) {
+        } catch (InvalidMinStockLevelException | InvalidMaxStockLevelException e) {
             throw new CommandException(e.getMessage());
         }
 
@@ -95,7 +95,8 @@ public class SetThresholdCommand extends Command {
 
         model.setProduct(productToEdit, editedProduct);
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
-        return new CommandResult(String.format(MESSAGE_SET_THRESHOLD_SUCCESS, editedProduct));
+        return new CommandResult(String.format(MESSAGE_SET_THRESHOLD_SUCCESS,
+                Messages.format(editedProduct)) + "\nSuccessfully set the specified stock levels!");
     }
 
     @Override

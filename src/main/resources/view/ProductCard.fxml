@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -30,6 +31,9 @@
       <Label fx:id="supplierName" styleClass="cell_small_label" />
       <Label fx:id="minStockLevel" styleClass="cell_small_label" />
       <Label fx:id="maxStockLevel" styleClass="cell_small_label" />
+      
+      <!-- New FlowPane for tags -->
+      <FlowPane fx:id="tags" hgap="5" vgap="5" styleClass="tag_flow_pane" />
     </VBox>
   </GridPane>
 </HBox>

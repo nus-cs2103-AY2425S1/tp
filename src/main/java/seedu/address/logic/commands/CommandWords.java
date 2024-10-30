@@ -19,12 +19,12 @@ public class CommandWords {
     public static final String EXIT_COMMAND = "exit";
     public static final String HELP_COMMAND = "help";
     public static final String LIST_COMMAND = "list";
-    public static final String SET_THRESHOLD_COMMAND = "threshold";
+    public static final String SET_THRESHOLD_COMMAND = "set_threshold";
     public static final String UNASSIGN_PRODUCT_COMMAND = "unassign";
     public static final String UPDATE_MAX_STOCK_LEVEL_COMMAND = "update_max_stock";
     public static final String UPDATE_STOCK_COMMAND = "update_stock";
-    public static final String VIEW_PRODUCT_COMMAND = "viewproduct";
-    public static final String VIEW_SUPPLIER_COMMAND = "viewsupplier";
+    public static final String VIEW_PRODUCT_COMMAND = "view_product";
+    public static final String VIEW_SUPPLIER_COMMAND = "view_supplier";
 
     /**
      * Returns a list of all command keywords.

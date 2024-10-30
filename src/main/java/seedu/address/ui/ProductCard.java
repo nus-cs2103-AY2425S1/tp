@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.product.Product;
@@ -29,6 +30,8 @@ public class ProductCard extends UiPart<Region> {
     private Label minStockLevel;
     @FXML
     private Label maxStockLevel;
+    @FXML
+    private FlowPane tags; // FlowPane for displaying tags
 
     /**
      * Creates a {@code ProductCard} with the given {@code Product} and index to display.
@@ -42,12 +45,18 @@ public class ProductCard extends UiPart<Region> {
 
         // Retrieve StockLevel object
         StockLevel stock = product.getStockLevel();
-
         stockLevel.setText("Stock Level: " + stock.getStockLevel());
         minStockLevel.setText("Min Stock Level: " + stock.getMinStockLevel());
         maxStockLevel.setText("Max Stock Level: " + stock.getMaxStockLevel());
 
         supplierName.setText("Supplier: " + (product.isAssigned() ? product.getSupplierName().toString() : "None"));
+
+        // Populate tags in the FlowPane
+        product.getTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.toString());
+            tagLabel.getStyleClass().add("tag_label"); // Optional: add a style class for custom styling
+            tags.getChildren().add(tagLabel);
+        });
     }
 
     @Override
