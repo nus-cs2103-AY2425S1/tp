@@ -537,9 +537,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to export the contact list.
-2. KonTActs requests for the format.
-3. User selects the desired format.
-4. KonTActs exports the contact list to the specified format and shows successful import.
+2. KonTActs requests for the file path.
+3. User gives the file path.
+4. KonTActs exports the contact list in CSV format and shows successful export.
 
    Use case ends.
 
