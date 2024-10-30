@@ -2,6 +2,7 @@ package seedu.edulog.logic.commands;
 
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLogWithCopiedStudents;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class RevenueCommandTest {
     @Test
     public void execute_noHasPaid_successful() {
         RevenueCommand command = new RevenueCommand();
-        Model model = new ModelManager(getTypicalEduLog(), new UserPrefs());
+        Model model = new ModelManager(getTypicalEduLogWithCopiedStudents(), new UserPrefs());
         model.unmarkAllStudents();
 
         // none of the student has paid
@@ -28,7 +29,7 @@ public class RevenueCommandTest {
     @Test
     public void execute_allHasPaid_successful() {
         RevenueCommand command = new RevenueCommand();
-        Model model = new ModelManager(getTypicalEduLog(), new UserPrefs());
+        Model model = new ModelManager(getTypicalEduLogWithCopiedStudents(), new UserPrefs());
         model.markAllStudents();
 
         // all of the student has paid

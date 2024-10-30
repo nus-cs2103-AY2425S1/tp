@@ -13,6 +13,22 @@ public class TypicalEdulog {
      */
     public static EduLog getTypicalEduLog() {
         EduLog eduLog = new EduLog();
+        for (Student student : TypicalStudents.getTypicalStudents()) {
+            eduLog.addStudent(student);
+        }
+
+        for (Lesson lesson : TypicalLessons.getTypicalLessons()) {
+            eduLog.addLesson(lesson);
+        }
+
+        return eduLog;
+    }
+
+    /**
+     * Returns an {@code EduLog} with the typical students being a copy
+     */
+    public static EduLog getTypicalEduLogWithCopiedStudents() {
+        EduLog eduLog = new EduLog();
         for (Student student : TypicalStudents.getCopyOfTypicalStudents()) {
             eduLog.addStudent(student);
         }
