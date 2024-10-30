@@ -21,8 +21,6 @@ import seedu.address.model.ReceiptLog;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.testutil.GoodsReceiptBuilder;
 
-
-
 public class CsvGoodsStorageTest {
 
     @TempDir
