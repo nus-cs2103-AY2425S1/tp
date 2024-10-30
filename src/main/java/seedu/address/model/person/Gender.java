@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's gender in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidGender(String)}
+ * Represents a Person's gender in the address book. Guarantees: immutable; is valid as declared in
+ * {@link #isValidGender(String)}
  */
 public class Gender {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Gender should only be 'F' / 'f' (Female) or 'M' / 'm' (Male)";
+    public static final String MESSAGE_CONSTRAINTS = "Gender should only be 'F' / 'f' (Female) "
+            + "or 'M' / 'm' (Male)!";
 
     /*
      * The gender must be either 'F', 'f', 'M' or 'm'.
@@ -22,8 +22,7 @@ public class Gender {
     /**
      * Constructs a {@code Gender}.
      *
-     * @param gender A valid gender ('F', 'f', 'M' or 'm').
-     *               'f' is stored as 'F'; 'm' is stored as 'M'.
+     * @param gender A valid gender ('F', 'f', 'M' or 'm'). 'f' is stored as 'F'; 'm' is stored as 'M'.
      */
     public Gender(String gender) {
         requireNonNull(gender);
