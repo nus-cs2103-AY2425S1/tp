@@ -1,14 +1,10 @@
 package tutorease.address.logic.parser;
 
-import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorease.address.logic.Messages.MISSING_PREFIX;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static tutorease.address.logic.parser.ParserUtil.validatePrefixesPresent;
-
-import java.util.stream.Stream;
 
 import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
