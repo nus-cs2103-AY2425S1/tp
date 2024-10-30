@@ -20,13 +20,13 @@ public class CloseTutorialCommand extends Command {
 
     public static final String COMMAND_WORD = "closetut";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Closes the tutorial identified by the subject used in the displayed tutorial list.\n"
+            + ": Closes the tutorial identified by the tutorial name.\n"
             + "Parameters: "
-            + PREFIX_TUTORIAL + "SUBJECT_NAME\n"
+            + PREFIX_TUTORIAL + "TUTORIAL\n"
             + "Example: " + COMMAND_WORD
             + PREFIX_TUTORIAL + "Chemistry";
 
-    public static final String MESSAGE_CLOSE_TUTORIAL_SUCCESS = "Successfully closed tutorial: %1$s class";
+    public static final String MESSAGE_CLOSE_TUTORIAL_SUCCESS = "Successfully closed tutorial.\n%1$s";
 
     private final Tutorial toCloseTutorial;
 
