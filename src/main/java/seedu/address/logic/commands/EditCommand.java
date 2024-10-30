@@ -24,6 +24,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -106,12 +107,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        DaysAttended updatedDaysAttended = editPersonDescriptor.getDaysAttended().orElse(personToEdit
+            .getDaysAttended());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
         Set<String> updatedClasses = editPersonDescriptor.getClasses().orElse(personToEdit.getClasses());
 
-        return new Person(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            updatedSubjects, updatedClasses);
+        return Person.createPerson(personToEdit.getType(), updatedName, updatedGender, updatedPhone, updatedEmail,
+            updatedAddress, updatedTags, updatedSubjects, updatedClasses, updatedDaysAttended);
     }
 
     @Override
@@ -143,6 +146,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+
         private Name name;
         private Gender gender;
         private Phone phone;
@@ -151,6 +155,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Set<Subject> subjects;
         private Set<String> classes;
+        private DaysAttended daysAttended;
 
         public EditPersonDescriptor() {}
 
@@ -167,6 +172,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setSubjects(toCopy.subjects);
             setClasses(toCopy.classes);
+            setDaysAttended(toCopy.daysAttended);
         }
 
 
@@ -216,6 +222,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setDaysAttended(DaysAttended daysAttended) {
+            this.daysAttended = daysAttended;
+        }
+
+        public Optional<DaysAttended> getDaysAttended() {
+            return Optional.ofNullable(daysAttended);
         }
 
         /**

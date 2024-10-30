@@ -42,7 +42,7 @@ public class VersionedAddressBookTest {
     public void undo_withPreviousStates_success() throws CommandException {
         // Add a person and commit
         AddressBook updatedAddressBook = new AddressBook();
-        updatedAddressBook.addPerson(TypicalPersons.ALICE);
+        updatedAddressBook.addPerson(TypicalPersons.TEACHER_ALICE);
         versionedAddressBook.commit(updatedAddressBook, PREDICATE_SHOW_ALL_PERSONS);
 
         // Undo once and assert that the state is reverted to previous original state
@@ -55,13 +55,13 @@ public class VersionedAddressBookTest {
     public void redo_withNextStates_success() throws CommandException {
         // Add a person, commit, and then undo
         AddressBook updatedAddressBook = new AddressBook();
-        updatedAddressBook.addPerson(TypicalPersons.ALICE);
+        updatedAddressBook.addPerson(TypicalPersons.TEACHER_ALICE);
         versionedAddressBook.commit(updatedAddressBook, PREDICATE_SHOW_ALL_PERSONS);
         versionedAddressBook.undo();
 
         // Redo and assert that the state is restored to the updated state
         AddressBook expectedAddressBook = new AddressBook();
-        expectedAddressBook.addPerson(TypicalPersons.ALICE);
+        expectedAddressBook.addPerson(TypicalPersons.TEACHER_ALICE);
         ReadOnlyAddressBook redoneState = versionedAddressBook.redo();
         assertEquals(redoneState, expectedAddressBook);
     }
