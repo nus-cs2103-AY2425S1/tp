@@ -47,9 +47,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
 
-        Year year = new Year();
-        Major major = new Major();
-        Email email = new Email();
+        Year year = Year.makeYear("");
+        Major major = Major.makeMajor("");
+        Email email = Email.makeEmail("");
 
         if (isPrefixPresent(argMultimap, PREFIX_YEAR)) {
             year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());

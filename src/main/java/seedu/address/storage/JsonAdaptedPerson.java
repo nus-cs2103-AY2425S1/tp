@@ -99,43 +99,30 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
 
-        Email modelEmail;
-
-        if (email.isEmpty()) {
-            modelEmail = new Email();
-        } else if (Email.isValidEmail(email)) {
-            modelEmail = new Email(email);
-        } else {
+        if (!Email.isValidEmail(email) && !email.isEmpty()) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
+        final Email modelEmail = Email.makeEmail(email);
 
         if (major == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Major.class.getSimpleName()));
         }
 
-        Major modelMajor;
-
-        if (major.isEmpty()) {
-            modelMajor = new Major();
-        } else if (Major.isValidMajor(major)) {
-            modelMajor = new Major(major);
-        } else {
+        if (!Major.isValidMajor(major) && !major.isEmpty()) {
             throw new IllegalValueException(Major.MESSAGE_CONSTRAINTS);
         }
+        final Major modelMajor = Major.makeMajor(major);
+
 
         if (year == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Year.class.getSimpleName()));
         }
 
-        Year modelYear;
-
-        if (year.isEmpty()) {
-            modelYear = new Year();
-        } else if (Year.isValidYear(year)) {
-            modelYear = new Year(year);
-        } else {
+        if (!Year.isValidYear(year) && !year.isEmpty()) {
             throw new IllegalValueException(Year.MESSAGE_CONSTRAINTS);
         }
+        final Year modelYear = Year.makeYear(year);
+
 
         if (comment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
