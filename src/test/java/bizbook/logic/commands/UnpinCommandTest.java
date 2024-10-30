@@ -1,13 +1,13 @@
 package bizbook.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static bizbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static bizbook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static bizbook.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static bizbook.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -97,7 +97,7 @@ public class AddressBookParser {
             return new PinCommandParser().parse(arguments);
 
         case UnpinCommand.COMMAND_WORD:
-            return new PinCommandParser().parse(arguments);
+            return new UnpinCommandParser().parse(arguments);
 
         case DeleteNotesCommand.COMMAND_WORD:
             return new DeleteNotesCommandParser().parse(arguments);
