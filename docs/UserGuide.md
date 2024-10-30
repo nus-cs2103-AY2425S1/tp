@@ -175,7 +175,7 @@ Action     | Format, Examples
 **Clear**  | `/clear`
 **Delete** | `/d INDEX`<br> e.g., `/d 3`
 **Find**   | `/f KEYWORD [MORE_KEYWORDS]`<br> e.g., `/f Google Facebook`
-**Filter**   | `/filter STATUS`<br> e.g., `/filter pending`
+**Filter** | `/filter STATUS`<br> e.g., `/filter pending`
 **List**   | `/list`
 **Help**   | `/help`
 **Accept** | `/accept INDEX`<br> e.g., `/accept 2`
