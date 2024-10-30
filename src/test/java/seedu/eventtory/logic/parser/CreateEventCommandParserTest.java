@@ -101,7 +101,7 @@ public class CreateEventCommandParserTest {
 
         // invalid date
         assertParseFailure(parser, " " + PREFIX_EVENT + " " + PREFIX_NAME + "Zoo Excursion" + " "
-                        + PREFIX_DATE + "10 October 2024",
+                        + PREFIX_DATE + "40 October 2024",
                 Date.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
