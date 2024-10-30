@@ -2,16 +2,24 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
+' Define colors
+!define USER_COLOR #ff6666
+!define UI_COLOR #66b3ff
+!define LOGIC_COLOR #ffcc66
+!define MODEL_COLOR #99ff99
+!define STORAGE_COLOR #ff99cc
+!define STORAGE_COLOR_T1 #ffb3e6
+
 Actor User as user USER_COLOR
 Participant ":UI" as ui UI_COLOR
 Participant ":Logic" as logic LOGIC_COLOR
 Participant ":Model" as model MODEL_COLOR
 Participant ":Storage" as storage STORAGE_COLOR
 
-user -[USER_COLOR]> ui : "delete 1"
+user -[USER_COLOR]> ui : "delete n/Jason p/ 88781234"
 activate ui UI_COLOR
 
-ui -[UI_COLOR]> logic : execute("delete 1")
+ui -[UI_COLOR]> logic : execute(m)
 activate logic LOGIC_COLOR
 
 logic -[LOGIC_COLOR]> model : deletePerson(p)
@@ -34,6 +42,7 @@ deactivate storage
 logic --[LOGIC_COLOR]> ui
 deactivate logic
 
-ui--[UI_COLOR]> user
+ui --[UI_COLOR]> user
 deactivate ui
 @enduml
+

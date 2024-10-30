@@ -37,6 +37,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label allergy;
+    @FXML
     private FlowPane tags;
     @FXML
     private Label date;
@@ -52,6 +54,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        allergy.setText(person.getAllergy().toString());
         tags.getChildren().add(new Label(person.getTag().tagName));
         date.setText(person.getDate().value);
     }
