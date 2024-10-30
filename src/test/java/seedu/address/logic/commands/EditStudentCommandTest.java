@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INVALID_INDEX_STUDENT;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +34,6 @@ public class EditStudentCommandTest {
     private EditPersonDescriptor editPersonDescriptor;
 
     private final StudentNumber validStudentNumber = new StudentNumber("A0123456P");
-    private final StudentNumber nonExistentStudentNumber = new StudentNumber("A0999999K");
     @BeforeEach
     public void setUp() {
         model = new ModelManager();
@@ -53,7 +55,7 @@ public class EditStudentCommandTest {
     }
     @Test
     public void execute_studentEdited_success() throws CommandException {
-        EditStudentCommand command = new EditStudentCommand(validStudentNumber, editPersonDescriptor);
+        EditStudentCommand command = new EditStudentCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
         CommandResult result = command.execute(model);
         assertEquals(String.format(EditStudentCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent)),
             result.getFeedbackToUser());
@@ -62,7 +64,7 @@ public class EditStudentCommandTest {
 
     @Test
     public void execute_studentNotFound_throwsCommandException() {
-        EditStudentCommand command = new EditStudentCommand(nonExistentStudentNumber, editPersonDescriptor);
+        EditStudentCommand command = new EditStudentCommand(INVALID_INDEX_STUDENT, editPersonDescriptor);
         assertThrows(CommandException.class, ()->command.execute(model), EditStudentCommand.MESSAGE_STUDENT_NOT_FOUND);
     }
     @Test
@@ -76,9 +78,9 @@ public class EditStudentCommandTest {
         descriptorTwo.setName(new Name("John Doe"));
         descriptorTwo.setEmail(new Email("e1111111@u.nus.edu"));
 
-        EditStudentCommand commandOne = new EditStudentCommand(studentNumberOne, descriptorOne);
-        EditStudentCommand commandTwo = new EditStudentCommand(studentNumberTwo, descriptorTwo);
-        EditStudentCommand commandOneCopy = new EditStudentCommand(studentNumberOne, descriptorOne);
+        EditStudentCommand commandOne = new EditStudentCommand(INDEX_FIRST_PERSON, descriptorOne);
+        EditStudentCommand commandTwo = new EditStudentCommand(INDEX_SECOND_PERSON, descriptorTwo);
+        EditStudentCommand commandOneCopy = new EditStudentCommand(INDEX_FIRST_PERSON, descriptorOne);
         assertTrue(commandOne.equals(commandOne));
         assertTrue(commandOne.equals(commandOneCopy));
         assertFalse(commandTwo.equals(commandOne));

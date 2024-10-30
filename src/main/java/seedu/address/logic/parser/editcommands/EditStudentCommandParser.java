@@ -3,9 +3,11 @@ package seedu.address.logic.parser.editcommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_ILLEGAL_PREFIX_USED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,6 +21,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.editcommands.EditStudentCommand;
 import seedu.address.logic.commands.editcommands.EditStudentCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -27,7 +30,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,7 +45,7 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
      */
     public EditStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_STUDENT_NUMBER,
+        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_INDEX, PREFIX_STUDENT_NUMBER,
             PREFIX_STUDENT_NAME, PREFIX_EMAIL, PREFIX_TAG, PREFIX_GROUP_NAME));
         List<Prefix> invalidPrefixes = ALL_PREFIX;
         invalidPrefixes.removeAll(allowedPrefix);
@@ -51,33 +53,44 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
             throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + EditStudentCommand.MESSAGE_USAGE);
         }
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER, PREFIX_STUDENT_NAME, PREFIX_EMAIL,
+            ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_STUDENT_NUMBER, PREFIX_STUDENT_NAME, PREFIX_EMAIL,
                 PREFIX_TAG, PREFIX_GROUP_NAME);
-        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_NUMBER)
-            || !argMultimap.getPreamble().isEmpty()) {
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditStudentCommand.MESSAGE_USAGE));
         }
-        StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NAME, PREFIX_EMAIL,
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_DISPLAYED_INDEX, pe);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX, PREFIX_STUDENT_NAME, PREFIX_EMAIL,
             PREFIX_STUDENT_NUMBER, PREFIX_GROUP_NAME);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        if (argMultimap.getValue(PREFIX_GROUP_NAME).isPresent()) {
+            throw new ParseException(EditStudentCommand.MESSAGE_INVALID_FIELD_GROUP_NAME);
+        }
+        if (argMultimap.getValue(PREFIX_STUDENT_NUMBER).isPresent()) {
+            throw new ParseException(EditStudentCommand.MESSAGE_INVALID_FIELD_STUDENT_NUMBER);
+        }
         if (argMultimap.getValue(PREFIX_STUDENT_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_STUDENT_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_GROUP_NAME).isPresent()) {
-            throw new ParseException(EditStudentCommand.MESSAGE_INVALID_FIELD_GROUP_NAME);
-        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditStudentCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditStudentCommand(studentNumber, editPersonDescriptor);
+        return new EditStudentCommand(index, editPersonDescriptor);
     }
 
     /**
@@ -99,13 +112,8 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPreFixes) {
-        for (Prefix prefix : invalidPreFixes) {
-            if (arg.contains(prefix.getPrefix())) {
-                return true;
-            }
-        }
-        return false;
+    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPrefixes) {
+        return invalidPrefixes.stream().anyMatch(prefix -> arg.contains(prefix.getPrefix()));
     }
 }
 
