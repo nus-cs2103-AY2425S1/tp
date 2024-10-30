@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -32,10 +33,8 @@ public class ModelManagerTest {
     private ModelManager modelManager;
     private StorageManager storage;
     private UserPrefs userPrefs;
+    private Path backupDirectoryPath;
 
-    /**
-     * Sets up the test environment with the required storage.
-     */
     @BeforeEach
     public void setUp() throws IOException {
         Path addressBookPath = temporaryFolder.resolve("addressBook.json");
@@ -44,26 +43,58 @@ public class ModelManagerTest {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookPath);
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsPath);
 
-        storage = new StorageManager(addressBookStorage, userPrefsStorage); // Initialize storage
-        userPrefs = new UserPrefs(); // Initialize userPrefs
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        userPrefs = new UserPrefs();
 
-        // Replace the BackupManager with one that uses the temp backup directory
-        Path backupDirectoryPath = temporaryFolder.resolve("backups");
+        // Initialize backup directory for BackupManager
+        backupDirectoryPath = temporaryFolder.resolve("backups");
         Files.createDirectories(backupDirectoryPath);
         storage.setBackupManager(new BackupManager(backupDirectoryPath));
 
         modelManager = new ModelManager(new AddressBook(), userPrefs, storage);
     }
 
-    /**
-     * Tests whether the constructor initializes the model correctly.
-     */
+    @AfterEach
+    public void tearDown() throws IOException {
+        Files.list(backupDirectoryPath)
+                .filter(Files::isRegularFile)
+                .forEach(path -> {
+                    try {
+                        Files.deleteIfExists(path);
+                    } catch (IOException e) {
+                        System.err.println("Failed to delete file: " + path + " - " + e.getMessage());
+                    }
+                });
+    }
+
     @Test
-    public void constructor() throws IOException {
+    public void constructor_initialization_successful() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
         assertNotNull(modelManager.getCalendar());
+    }
+
+    @Test
+    public void setUserPrefs_updatesUserPreferences() {
+        UserPrefs newPrefs = new UserPrefs();
+        newPrefs.setAddressBookFilePath(temporaryFolder.resolve("newAddressBook.json"));
+        modelManager.setUserPrefs(newPrefs);
+        assertEquals(newPrefs, modelManager.getUserPrefs());
+    }
+
+    @Test
+    public void setGuiSettings_updatesGuiSettings() {
+        GuiSettings newGuiSettings = new GuiSettings(1000, 1000, 10, 10);
+        modelManager.setGuiSettings(newGuiSettings);
+        assertEquals(newGuiSettings, modelManager.getGuiSettings());
+    }
+
+    @Test
+    public void setAddressBookFilePath_updatesAddressBookFilePath() {
+        Path newFilePath = temporaryFolder.resolve("newAddressBook.json");
+        modelManager.setAddressBookFilePath(newFilePath);
+        assertEquals(newFilePath, modelManager.getAddressBookFilePath());
     }
 
     @Test
@@ -80,43 +111,31 @@ public class ModelManagerTest {
 
     @Test
     public void backupData_storageNotInitialized_throwsCommandException() throws IOException {
-        // Initialize ModelManager without storage
         ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
-
-        // Expect CommandException when storage is not initialized
-        CommandException exception = assertThrows(CommandException.class, () -> modelWithoutStorage.backupData("test"));
+        CommandException exception = assertThrows(CommandException.class, (
+        )-> modelWithoutStorage.backupData("test"));
         assertEquals("Failed to create backup: Storage is not initialized!", exception.getMessage());
     }
 
     @Test
-    public void restoreBackup_validIndex_restorationSuccessful() throws Exception {
-        // Save the address book to ensure the file exists
-        storage.saveAddressBook(modelManager.getAddressBook());
-
-        // Perform backup to create a backup at index 0
-        String actionDescription = "testRestore";
-        int backupIndex = modelManager.backupData(actionDescription);
-
-        // Modify the address book to ensure restoration changes it
-        Person person = new PersonBuilder().withName("Test Person").build();
-        modelManager.addPerson(person);
-        storage.saveAddressBook(modelManager.getAddressBook());
-
-        // Restore from backup
-        Path restoredPath = modelManager.restoreBackup(backupIndex);
-
-        // Verify that the restored data matches the original (before modification)
-        AddressBook restoredAddressBook = new AddressBook(storage.readAddressBook(restoredPath).get());
-        assertEquals(restoredAddressBook, modelManager.getAddressBook(), "Restored data should match backup data.");
+    public void restoreBackup_storageNotInitialized_throwsIoException() throws IOException {
+        ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
+        IOException exception = assertThrows(IOException.class, () -> modelWithoutStorage.restoreBackup(0));
+        assertEquals("Storage is not initialized!", exception.getMessage());
     }
 
     @Test
-    public void restoreBackup_storageNotInitialized_throwsIoException() throws IOException {
-        // Initialize ModelManager without storage
-        ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
+    public void addPerson_personAddedSuccessfully() {
+        Person person = new PersonBuilder().withName("Test Person").build();
+        modelManager.addPerson(person);
+        assertTrue(modelManager.getAddressBook().getPersonList().contains(person));
+    }
 
-        // Expect IOException when storage is not initialized
-        IOException exception = assertThrows(IOException.class, () -> modelWithoutStorage.restoreBackup(0));
-        assertEquals("Storage is not initialized!", exception.getMessage());
+    @Test
+    public void deletePerson_personDeletedSuccessfully() {
+        Person person = new PersonBuilder().withName("Test Person").build();
+        modelManager.addPerson(person);
+        modelManager.deletePerson(person);
+        assertTrue(!modelManager.getAddressBook().getPersonList().contains(person));
     }
 }

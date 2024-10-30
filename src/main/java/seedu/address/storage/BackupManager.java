@@ -51,51 +51,56 @@ public class BackupManager {
     }
 
     private void initializeCurrentIndex() throws IOException {
-        // Initialize currentIndex based on existing backups
-        // Find the highest index, and set currentIndex to (highest index + 1) % MAX_BACKUPS
         try (Stream<Path> backups = Files.list(backupDirectory)) {
-            List<Integer> indices = backups
+            List<Path> sortedBackups = backups
                     .filter(Files::isRegularFile)
-                    .map(this::extractIndex)
-                    .filter(index -> index >= 0)
-                    .sorted()
+                    .sorted(Comparator.comparing(this::getFileTimestamp)) // Sort by timestamp
                     .collect(Collectors.toList());
-            if (indices.isEmpty()) {
+
+            if (sortedBackups.isEmpty()) {
                 currentIndex = 0;
             } else {
-                int highestIndex = indices.get(indices.size() - 1);
-                currentIndex = (highestIndex + 1) % MAX_BACKUPS;
+                // Find the oldest backup by timestamp and use its index for the next overwrite
+                Path oldestBackup = sortedBackups.get(0);
+                int oldestIndex = extractIndex(oldestBackup);
+                currentIndex = (oldestIndex + 1) % MAX_BACKUPS;
             }
         }
     }
 
+    private LocalDateTime getFileTimestamp(Path path) {
+        String filename = path.getFileName().toString();
+        try {
+            String timestampPart = filename.substring(filename.lastIndexOf('_') + 1, filename.lastIndexOf('.'));
+            return LocalDateTime.parse(timestampPart, FORMATTER);
+        } catch (Exception e) {
+            logger.warning("Failed to parse timestamp from filename: " + filename + " - " + e.getMessage());
+            return LocalDateTime.MIN; // Return a minimum timestamp for sorting
+        }
+    }
+
     /**
-     * Creates a backup with a fixed index, from 0 to 9, replacing the existing backup at that index.
-     *
-     * @param sourcePath        The path to the current address book file.
-     * @param actionDescription A description for the backup file (e.g., "delete_John").
-     * @return The index used for the backup.
-     * @throws IOException If an error occurs during backup creation.
+     * Creates a backup of the specified source file with a fixed index (from 0 to 9),
+     * replacing any existing backup at that index. Each backup file name includes
+     * the action description and a timestamp, allowing easy identification of backups.
      */
     public int createIndexedBackup(Path sourcePath, String actionDescription) throws IOException {
-        synchronized (backupLock) {
-            String timestamp = LocalDateTime.now().format(FORMATTER);
-            String backupFileName = String.format("%d_%s_%s.json", currentIndex, actionDescription, timestamp);
-            Path backupPath = backupDirectory.resolve(backupFileName);
+        String timestamp = LocalDateTime.now().format(FORMATTER);
+        String backupFileName = String.format("%d_%s_%s.json", currentIndex, actionDescription, timestamp);
+        Path backupPath = backupDirectory.resolve(backupFileName);
 
-            // Delete existing backup at currentIndex if it exists
-            deleteBackupByIndex(currentIndex);
+        // Delete existing backup at currentIndex if it exists
+        deleteBackupByIndex(currentIndex);
 
-            // Copy source to the backup path
-            Files.copy(sourcePath, backupPath, StandardCopyOption.REPLACE_EXISTING);
-            logger.info("Backup created with index: " + currentIndex);
+        // Copy source to the backup path
+        Files.copy(sourcePath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+        logger.info("Backup created with index: " + currentIndex);
 
-            int usedIndex = currentIndex;
-            // Update currentIndex
-            currentIndex = (currentIndex + 1) % MAX_BACKUPS;
+        int usedIndex = currentIndex;
+        // Update currentIndex
+        currentIndex = (currentIndex + 1) % MAX_BACKUPS;
 
-            return usedIndex;
-        }
+        return usedIndex;
     }
 
     private void deleteBackupByIndex(int index) throws IOException {
@@ -112,7 +117,6 @@ public class BackupManager {
         }
     }
 
-    // Changed from private to package-private (default access)
     int extractIndex(Path backupPath) {
         String filename = backupPath.getFileName().toString();
         try {

@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -35,6 +36,22 @@ public class BackupManagerTest {
         Files.writeString(sourceFile, "Sample AddressBook Data");
 
         backupManager = new BackupManager(backupDirectory);
+    }
+
+    /**
+     * Cleans up the backup directory after each test by deleting any files created.
+     */
+    @AfterEach
+    public void tearDown() throws IOException {
+        Files.list(backupDirectory)
+                .filter(Files::isRegularFile)
+                .forEach(path -> {
+                    try {
+                        Files.deleteIfExists(path);
+                    } catch (IOException e) {
+                        System.err.println("Failed to delete file: " + path + " - " + e.getMessage());
+                    }
+                });
     }
 
     @Test
