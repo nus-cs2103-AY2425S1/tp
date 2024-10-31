@@ -35,7 +35,6 @@ public class BackupManager {
 
     private static final int MAX_BACKUPS = 10; // indexed from 0 to 9
     private final Path backupDirectory;
-    private final Object backupLock = new Object(); // Lock object to synchronize backup operations
     private int currentIndex;
 
 
@@ -59,6 +58,12 @@ public class BackupManager {
         initializeCurrentIndex();
     }
 
+    /**
+     * Initializes the current index to the next available position based on existing backups.
+     * Starts from the index following the oldest backup.
+     *
+     * @throws IOException If an error occurs while accessing the backup directory.
+     */
     private void initializeCurrentIndex() throws IOException {
         try (Stream<Path> backups = Files.list(backupDirectory)) {
             List<Path> sortedBackups = backups
@@ -77,6 +82,12 @@ public class BackupManager {
         }
     }
 
+    /**
+     * Retrieves the timestamp from the backup file name for sorting purposes.
+     *
+     * @param backupPath The path of the backup file.
+     * @return LocalDateTime representing the timestamp, or LocalDateTime.MIN if parsing fails.
+     */
     private LocalDateTime getFileTimestamp(Path backupPath) {
         String filename = backupPath.getFileName().toString();
         Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
@@ -98,6 +109,11 @@ public class BackupManager {
      * Creates a backup of the specified source file with a fixed index (from 0 to 9),
      * replacing any existing backup at that index. Each backup file name includes
      * the action description and a timestamp, allowing easy identification of backups.
+     *
+     * @param sourcePath        The path of the source file to back up.
+     * @param actionDescription A description of the backup action.
+     * @return The index used for the backup.
+     * @throws IOException If an error occurs during file copying or deletion.
      */
     public int createIndexedBackup(Path sourcePath, String actionDescription) throws IOException {
         String timestamp = LocalDateTime.now().format(FILE_TIMESTAMP_FORMATTER);
@@ -118,6 +134,12 @@ public class BackupManager {
         return usedIndex;
     }
 
+    /**
+     * Deletes a backup file by index if it exists.
+     *
+     * @param index The index of the backup to delete.
+     * @throws IOException If an error occurs during file deletion.
+     */
     private void deleteBackupByIndex(int index) throws IOException {
         try (Stream<Path> backups = Files.list(backupDirectory)) {
             backups.filter(path -> extractIndex(path) == index)
@@ -132,6 +154,12 @@ public class BackupManager {
         }
     }
 
+    /**
+     * Extracts the index from a backup file name.
+     *
+     * @param backupPath The path of the backup file.
+     * @return The integer index, or -1 if the filename is invalid.
+     */
     protected int extractIndex(Path backupPath) {
         String filename = backupPath.getFileName().toString();
         Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
@@ -143,6 +171,12 @@ public class BackupManager {
         }
     }
 
+    /**
+     * Extracts the action description from a backup file name.
+     *
+     * @param backupPath The path of the backup file.
+     * @return The action description, or "Unknown" if the filename is invalid.
+     */
     protected String extractActionDescription(Path backupPath) {
         String filename = backupPath.getFileName().toString();
         Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
@@ -244,6 +278,12 @@ public class BackupManager {
         }
     }
 
+    /**
+     * Retrieves the file creation time of a given backup file.
+     *
+     * @param path The path to the file.
+     * @return The file's creation time.
+     */
     private FileTime getFileCreationTime(Path path) {
         try {
             return Files.getLastModifiedTime(path);

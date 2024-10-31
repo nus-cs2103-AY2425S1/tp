@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -117,7 +119,7 @@ public class ModelManagerTest {
     public void backupData_storageNotInitialized_throwsCommandException() throws IOException {
         ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
         CommandException exception = assertThrows(CommandException.class, (
-        )-> modelWithoutStorage.backupData("test"));
+        ) -> modelWithoutStorage.backupData("test"));
         assertEquals("Failed to create backup: Storage is not initialized!", exception.getMessage());
     }
 
@@ -136,10 +138,30 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deletePerson_personDeletedSuccessfully() {
-        Person person = new PersonBuilder().withName("Test Person").build();
-        modelManager.addPerson(person);
-        modelManager.deletePerson(person);
-        assertTrue(!modelManager.getAddressBook().getPersonList().contains(person));
+    public void triggerBackup_successfulBackup() throws IOException {
+        // Setup test person and description
+        Person testPerson = new PersonBuilder().withName("Test Person").build();
+        String actionDescription = "test_action";
+
+        // Ensure the address book is saved so the source file exists
+        storage.saveAddressBook(modelManager.getAddressBook());
+
+        // Trigger backup
+        modelManager.triggerBackup(actionDescription, testPerson);
+
+        // Verify if backup file exists in the backup directory
+        boolean backupCreated = false;
+        try (Stream<Path> files = Files.list(backupDirectoryPath)) {
+            // Look for a file containing the action description to ensure it was created
+            backupCreated = files
+                    .anyMatch(path -> path.getFileName().toString().contains(actionDescription));
+        } catch (IOException e) {
+            Assertions.fail("IOException occurred during backup file existence check: " + e.getMessage());
+        }
+
+        // Assert that the backup file was indeed created
+        assertTrue(backupCreated, "A new backup file should be created.");
     }
+
+
 }

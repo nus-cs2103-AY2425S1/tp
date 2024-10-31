@@ -10,6 +10,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+- [PlantUML](https://plantuml.com) - used for creating diagrams.
+- [JavaFX](https://openjfx.io) - framework for UI development.
+- [JUnit](https://junit.org/junit5/) - for unit testing framework.
+
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
   original source as well}
 
@@ -510,15 +514,14 @@ Example
       installed.
 
 2. **Performance**:
-    - Should be able to hold up to **1,000 patient records** within 2 seconds for typical usage.
+    - Should perform patient data retrieval and UI update operations within **2 seconds** with up to **1,000 patient records** under normal operating conditions.
     - The system must support up to **10,000 patient records** without performance degradation under heavy load.
 
 3. **User Efficiency**:
-    - A user with typing speed above **40 words per minute** for regular English text (i.e., not code, not system admin
-      commands) should be able to accomplish most tasks faster using commands than the mouse.
+    - A typical user should be able to perform all primary functions (e.g., add, delete, search, backup) via commands at least **20% faster** than using a graphical interface.
 
 4. **Scalability**:
-    - The system should be able to scale to handle **up to 10,000 patient records** without performance degradation.
+    - The system should handle up to **10,000 patient records** with retrieval operations completing within **5 seconds**.
 
 5. **Security**:
     - **Sensitive patient information** (e.g., medical records, contact details) must be accessible only by **authorized
@@ -535,13 +538,11 @@ Example
       *clear and easy to understand**.
 
 8. **Error Handling**:
-    - The system must provide **clear error messages** in case of invalid input and revert to a stable state in the
-      event of system errors.
+    - The system must display specific error messages for invalid inputs and revert to the last saved state on critical errors.
 
 9. **Data Recovery**:
     - In the event of a system crash, patient data should not be lost.
-    - The system must recover data from the **last automatic backup**, with no more than **5% data loss** in the
-      worst-case scenario.
+    - Automatic backups should occur every **30 minutes**, and the system should recover data from the latest backup, with data loss **not exceeding 5%** in a system crash.
 
 10. **Maintainability and Extensibility**:
     - The system should be designed in a way that future updates (e.g., adding new features or fixing bugs) can be made
