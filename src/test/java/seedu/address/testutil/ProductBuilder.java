@@ -109,7 +109,7 @@ public class ProductBuilder {
     public Product build() {
         try {
             StockLevel stockLevel = new StockLevel(currentStock, minStock, maxStock);
-            return new Product(name, stockLevel);
+            return new Product(name, stockLevel, tags);
         } catch (InvalidStockLevelException | InvalidMinStockLevelException
                 | InvalidMaxStockLevelException | StockLevelOutOfBoundsException e) {
             // For testing purposes, wrap checked exceptions into unchecked exceptions

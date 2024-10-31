@@ -31,15 +31,6 @@ public class Product {
     }
 
     /**
-     * Constructs a {@code Product} with the specified name and stock levels.
-     */
-    public Product(ProductName name, StockLevel stockLevel) {
-        requireAllNonNull(name, stockLevel);
-        this.name = name;
-        this.stockLevel = stockLevel;
-    }
-
-    /**
      * Constructs a {@code Product} with the specified name, stock levels, and tags.
      */
     public Product(ProductName name, StockLevel stockLevel, Set<Tag> tags) {
@@ -68,7 +59,7 @@ public class Product {
      * Removes assigned supplier if is supplied by the specified supplier.
      */
     public void removeSupplier(Name supplierName) {
-        if (this.supplierName.equals(supplierName)) {
+        if (supplierName != null && this.supplierName.equals(supplierName)) {
             this.supplierName = null;
         }
     }
