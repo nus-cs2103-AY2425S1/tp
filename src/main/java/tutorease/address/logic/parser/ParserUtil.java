@@ -6,6 +6,7 @@ import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.commons.util.StringUtil;
@@ -207,5 +208,14 @@ public class ParserUtil {
         return EndDateTime.createEndDateTime(startDateTime, hoursToAdd);
     }
 
-
+    /**
+     * Checks if all the prefixes are present in the ArgumentMultimap.
+     *
+     * @param argumentMultimap The ArgumentMultimap to check.
+     * @param prefixes The prefixes to check.
+     * @return True if all the prefixes are present, false otherwise.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }

@@ -91,11 +91,19 @@ public class CommandTestUtil {
     public static final String TAG_DESC_SUPPORTIVE = " " + PREFIX_TAG + VALID_TAG_SUPPORTIVE;
     public static final String TAG_DESC_MENTOR = " " + PREFIX_TAG + VALID_TAG_MENTOR;
     public static final String STUDENT_ID_DESC = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID;
+    public static final String UPPERCASE_STUDENT_ID_DESC = " " + PREFIX_STUDENT_ID.toStringUpperCase()
+            + VALID_STUDENT_ID;
+
     public static final String FEE_DESC = " " + PREFIX_FEE + VALID_FEE;
+    public static final String UPPERCASE_FEE_DESC = " " + PREFIX_FEE.toStringUpperCase() + VALID_FEE;
     public static final String START_DATE_TIME_DESC = " " + PREFIX_START_DATE + VALID_START_DATE;
+    public static final String UPPERCASE_START_DATE_TIME_DESC = " " + PREFIX_START_DATE.toStringUpperCase()
+            + VALID_START_DATE;
     public static final String START_DATE_TIME_LEAP_YEAR_DESC = " " + PREFIX_START_DATE
             + VALID_START_DATE_LEAP_YEAR;
     public static final String DURATION_DESC = " " + PREFIX_DURATION + VALID_DURATION;
+    public static final String UPPERCASE_DURATION_DESC = " " + PREFIX_DURATION.toStringUpperCase() + VALID_DURATION;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
