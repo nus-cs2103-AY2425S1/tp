@@ -135,7 +135,7 @@ class JsonAdaptedPerson {
         if (isFieldEmpty(income)) {
             modelIncome = Income.createEmpty();
         } else if (!Income.isValidIncome(income)) {
-            throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Income.MESSAGE_CONSTRAINTS);
         } else {
             modelIncome = new Income(income);
         }

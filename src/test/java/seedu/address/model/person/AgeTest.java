@@ -41,6 +41,9 @@ public class AgeTest {
         assertTrue(Age.isValidAge(0));
         assertTrue(Age.isValidAge(150));
         assertTrue(Age.isValidAge(75));
+        assertTrue(Age.isValidAge("0"));
+        assertTrue(Age.isValidAge("150"));
+        assertTrue(Age.isValidAge("75"));
     }
 
     @Test
