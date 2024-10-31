@@ -25,6 +25,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_HELP_KEYWORD = "Unknown search keyword for help command: %1$s\n"
             + "Input \"help\" keyword only to get full list of command instructions";
 
+    public static final String MESSAGE_CHAINED_FIND_PREFIX = "In the current filtered list: ";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

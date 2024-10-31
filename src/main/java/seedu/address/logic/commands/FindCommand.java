@@ -77,6 +77,8 @@ public class FindCommand extends Command {
                 .reduce(Predicate::and)
                 .orElse(t -> false);
 
+        // If we are chaining, on top of the searching conditions, we need to perform an additional check
+        // that the person is in the previously displayed results.
         if (isChained) {
             // We HAVE to copy the list here, or it will have been emptied by the time Predicate.test() is called
             Predicate<Person> inFilteredListPredicate = new InFilteredListPredicate(
@@ -84,10 +86,23 @@ public class FindCommand extends Command {
             combinedPredicate = combinedPredicate.and(inFilteredListPredicate);
         }
 
+        if (isChained) {
+            combinedPredicate = predicates.stream()
+                    .reduce(Predicate::and)
+                    .orElse(t -> false);
+            Predicate<Person> inFilteredListPredicate = new InFilteredListPredicate(
+                    new ArrayList<>(model.getFilteredPersonList()));
+            combinedPredicate = combinedPredicate.and(inFilteredListPredicate);
+        } else {
+            combinedPredicate = predicates.stream()
+                    .reduce(Predicate::and)
+                    .orElse(t -> false);
+        }
+
         model.updateFilteredPersonList(combinedPredicate);
         String conditions = getAllKeywordsFromPredicates(predicates);
         if (isChained) {
-            conditions = conditions + ", among the previously displayed results";
+            conditions = Messages.MESSAGE_CHAINED_FIND_PREFIX + conditions;
         }
 
         return new CommandResult(
