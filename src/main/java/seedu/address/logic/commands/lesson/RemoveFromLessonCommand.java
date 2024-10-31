@@ -20,7 +20,7 @@ import seedu.address.model.student.Student;
 public class RemoveFromLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "removefromlesson";
-    public static final CommandType COMMAND_TYPE = CommandType.REMOVEFROMLESSON;
+    public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes students from the lesson identified by the index.\n"

@@ -24,7 +24,7 @@ import seedu.address.model.lesson.Lesson;
 public class DeleteLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "deletelesson";
-    public static final CommandType COMMAND_TYPE = CommandType.DELETELESSON;
+    public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the lesson(s) identified by the index number(s) used in the displayed lesson list.\n"

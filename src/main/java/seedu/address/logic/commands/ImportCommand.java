@@ -29,7 +29,7 @@ import seedu.address.model.student.Student;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
-    public static final CommandType COMMAND_TYPE = CommandType.IMPORTSTUDENT;
+    public static final CommandType COMMAND_TYPE = CommandType.STUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports students from a CSV file.\n"
             + "For files in parent directory: " + COMMAND_WORD + " filename.csv\n"

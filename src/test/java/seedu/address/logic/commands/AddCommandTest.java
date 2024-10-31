@@ -82,7 +82,7 @@ public class AddCommandTest {
     @Test
     public void getCommandTypeMethod() {
         AddCommand addCommand = new AddCommand(ALICE);
-        assertEquals(addCommand.getCommandType(), CommandType.ADDSTUDENT);
+        assertEquals(addCommand.getCommandType(), CommandType.STUDENT);
     }
 
     /**

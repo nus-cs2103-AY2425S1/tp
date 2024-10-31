@@ -19,7 +19,7 @@ import seedu.address.model.lesson.Lesson;
 public class AddLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "addlesson";
-    public static final CommandType COMMAND_TYPE = CommandType.ADDLESSON;
+    public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to TAHub. "
             + "Parameters: "

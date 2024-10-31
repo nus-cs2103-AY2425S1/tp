@@ -170,6 +170,6 @@ public class DeleteLessonCommandTest {
         Set<Index> targetIndexSet = new HashSet<>();
         targetIndexSet.add(targetIndex);
         DeleteLessonCommand deleteCommand = new DeleteLessonCommand(targetIndexSet);
-        assertEquals(deleteCommand.getCommandType(), CommandType.DELETELESSON);
+        assertEquals(deleteCommand.getCommandType(), CommandType.LESSON);
     }
 }

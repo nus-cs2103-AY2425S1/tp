@@ -20,7 +20,7 @@ import seedu.address.model.student.Student;
 public class RemoveFromConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "removefromconsult";
-    public static final CommandType COMMAND_TYPE = CommandType.REMOVEFROMCONSULT;
+    public static final CommandType COMMAND_TYPE = CommandType.CONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes students from the consultation identified by the index.\n"

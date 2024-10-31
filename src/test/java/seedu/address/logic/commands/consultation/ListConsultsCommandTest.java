@@ -34,6 +34,6 @@ public class ListConsultsCommandTest {
     public void commandType_isCorrect() {
         ListConsultsCommand command = new ListConsultsCommand();
         CommandResult result = command.execute(model);
-        assert result.getCommandType() == CommandType.LISTCONSULT;
+        assert result.getCommandType() == CommandType.CONSULT;
     }
 }

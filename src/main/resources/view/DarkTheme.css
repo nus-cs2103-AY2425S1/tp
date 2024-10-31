@@ -24,6 +24,25 @@
     -fx-opacity: 1;
 }
 
+.label-list {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #F0F0F0;
+    -fx-letter-spacing: 1.5px;
+    -fx-opacity: 1;
+    -fx-background-color: #4D4D4D;
+    -fx-background-radius: 10;
+    -fx-border-color: #888888;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 2);
+    -fx-alignment: center;
+}
+
+.label-list:hover {
+    -fx-background-color: #5a5a5a;
+}
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -167,7 +186,6 @@
      -fx-border-top-width: 1px;
      -fx-border-width: 2;
      -fx-border-radius: 4;
-     -fx-padding: 10;
 }
 
 .status-bar {

@@ -193,7 +193,7 @@ public class DeleteCommandTest {
         Set<Index> targetIndexSet = new HashSet<>();
         targetIndexSet.add(INDEX_FIRST_STUDENT);
         DeleteCommand deleteCommand = new DeleteCommand(targetIndexSet);
-        assertEquals(deleteCommand.getCommandType(), CommandType.DELETESTUDENT);
+        assertEquals(deleteCommand.getCommandType(), CommandType.STUDENT);
     }
 
     /**

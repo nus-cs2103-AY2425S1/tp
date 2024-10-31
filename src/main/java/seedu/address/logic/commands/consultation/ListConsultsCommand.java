@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 public class ListConsultsCommand extends Command {
 
     public static final String COMMAND_WORD = "listconsults";
-    public static final CommandType COMMAND_TYPE = CommandType.LISTCONSULT;
+    public static final CommandType COMMAND_TYPE = CommandType.CONSULT;
     public static final String MESSAGE_SUCCESS = "Listed all consultations";
 
     @Override

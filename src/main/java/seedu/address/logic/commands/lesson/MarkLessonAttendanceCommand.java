@@ -27,7 +27,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 public class MarkLessonAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "marka";
-    public static final CommandType COMMAND_TYPE = CommandType.MARKLESSONATTENDANCE;
+    public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the attendance of student(s) "
             + "in a lesson at the chosen index in the lesson list to the specified value. "
