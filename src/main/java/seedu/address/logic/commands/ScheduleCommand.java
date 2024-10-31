@@ -40,7 +40,7 @@ public class ScheduleCommand extends Command {
             + "If no date is provided, the existing schedule will be removed.\n"
             + "If a date is provided, it must be of the format yyyy-MM-dd.\n"
             + "If a time is provided, it must be of the format HH:mm.\n"
-            + "Parameters: INDEX, SCHEDULE_NAME, DATE, TIME"
+            + "Parameters: INDEX, SCHEDULE_NAME, DATE, TIME.\n"
             + "Example: " + COMMAND_WORD + " 1 sn/appointment sd/2024-10-21 st/16:00";
 
     public static final String MESSAGE_MAKE_SCHEDULE_SUCCESS = "Scheduled an event for %s: %s";
