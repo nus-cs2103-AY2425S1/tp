@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.consultation.Consultation;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
@@ -25,6 +27,22 @@ public class AddressBookBuilder {
      */
     public AddressBookBuilder withStudent(Student student) {
         addressBook.addStudent(student);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Consultation} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withConsultation(Consultation consultation) {
+        addressBook.addConsult(consultation);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Lesson} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withLesson(Lesson lesson) {
+        addressBook.addLesson(lesson);
         return this;
     }
 

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
@@ -23,6 +26,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Consultation> filteredConsultations;
+    private final FilteredList<Lesson> filteredLessons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,13 +40,16 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        filteredConsultations = new FilteredList<>(this.addressBook.getConsultList());
+        filteredLessons = new FilteredList<>(this.addressBook.getLessonList());
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -76,7 +84,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -108,16 +117,12 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         addressBook.setStudent(target, editedStudent);
     }
 
-    //=========== Filtered Student List Accessors =============================================================
+    // =========== Filtered Student List Accessors
+    // =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
@@ -129,21 +134,23 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(predicate);
     }
 
+    // =========== Filtered Consultation List Accessors
+    // =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Consultation} backed by
+     * the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+    public ObservableList<Consultation> getFilteredConsultationList() {
+        return filteredConsultations;
+    }
 
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
-            return false;
-        }
-
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredStudents.equals(otherModelManager.filteredStudents);
+    @Override
+    public void updateFilteredConsultationList(Predicate<Consultation> predicate) {
+        requireNonNull(predicate);
+        filteredConsultations.setPredicate(predicate);
     }
 
     // ========== Consultation Commands ==========
@@ -151,6 +158,13 @@ public class ModelManager implements Model {
     @Override
     public void addConsult(Consultation consult) {
         addressBook.addConsult(consult);
+        updateFilteredConsultationList(PREDICATE_SHOW_ALL_CONSULTATIONS);
+    }
+
+    @Override
+    public void setConsult(Consultation target, Consultation newConsult) {
+        requireAllNonNull(target, newConsult);
+        addressBook.setConsult(target, newConsult);
     }
 
     @Override
@@ -158,4 +172,70 @@ public class ModelManager implements Model {
         return addressBook.hasConsult(consult);
     }
 
+    @Override
+    public Optional<Student> findStudentByName(Name name) {
+        requireNonNull(name);
+        return filteredStudents.stream()
+                .filter(student -> student.getName().equals(name))
+                .findFirst(); // Find and return the student by name
+    }
+
+    @Override
+    public void deleteConsult(Consultation consult) {
+        addressBook.removeConsult(consult);
+    }
+
+    // ========== Lesson Commands ==========
+
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasLesson(lesson);
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        addressBook.addLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+    }
+
+    @Override
+    public void setLesson(Lesson target, Lesson newLesson) {
+        requireAllNonNull(target, newLesson);
+        addressBook.setLesson(target, newLesson);
+    }
+
+    @Override
+    public void deleteLesson(Lesson lesson) {
+        addressBook.removeLesson(lesson);
+    }
+
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return filteredLessons;
+    }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLessons.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ModelManager)) {
+            return false;
+        }
+
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredStudents.equals(otherModelManager.filteredStudents)
+                && filteredConsultations.equals(otherModelManager.filteredConsultations)
+                && filteredLessons.equals(otherModelManager.filteredLessons);
+    }
 }

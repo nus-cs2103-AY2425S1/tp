@@ -28,6 +28,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final int TAB_STUDENTS_INDEX = 0;
     private static final int TAB_CONSULTATIONS_INDEX = 1;
+    private static final int TAB_LESSONS_INDEX = 2;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -36,6 +37,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
+    private ConsultationListPanel consultationListPanel;
+    private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -47,6 +50,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane consultationListPanelPlaceholder;
+
+    @FXML
+    private StackPane lessonListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -120,6 +129,12 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
+        consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
+        consultationListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
+
+        lessonListPanel = new LessonListPanel(logic.getFilteredLessonList());
+        lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -179,6 +194,14 @@ public class MainWindow extends UiPart<Stage> {
         return studentListPanel;
     }
 
+    public ConsultationListPanel getConsultationListPanel() {
+        return consultationListPanel;
+    }
+
+    public LessonListPanel getLessonListPanel() {
+        return lessonListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -199,17 +222,29 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
                 break;
             // Student Commands
+            case LISTSTUDENT:
             case ADDSTUDENT:
             case EDITSTUDENT:
             case FINDSTUDENT:
             case DELETESTUDENT:
             case EXPORTSTUDENT:
+            case IMPORTSTUDENT:
                 handleTab(TAB_STUDENTS_INDEX);
                 break;
             // Consultation Commands
+            case LISTCONSULT:
             case ADDCONSULT:
             case DELETECONSULT:
+            case ADDTOCONSULT:
+            case REMOVEFROMCONSULT:
                 handleTab(TAB_CONSULTATIONS_INDEX);
+                break;
+            case LISTLESSONS:
+            case ADDLESSON:
+            case DELETELESSON:
+            case ADDTOLESSON:
+            case REMOVEFROMLESSON:
+                handleTab(TAB_LESSONS_INDEX);
                 break;
             default:
                 // Do Nothing

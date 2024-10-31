@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.consultation.AddConsultCommand;
 import seedu.address.model.consultation.Consultation;
-import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Time;
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 
 public class AddConsultCommandParserTest {
     private AddConsultCommandParser parser = new AddConsultCommandParser();

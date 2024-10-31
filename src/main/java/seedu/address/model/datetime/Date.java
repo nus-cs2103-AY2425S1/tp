@@ -1,4 +1,4 @@
-package seedu.address.model.consultation;
+package seedu.address.model.datetime;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -39,6 +39,16 @@ public class Date {
     }
 
     /**
+     * Returns the LocalDate of String value.
+     *
+     * @return LocalDate of the date.
+     */
+    public LocalDate getLocalDateValue() {
+        assert !value.isEmpty();
+        return LocalDate.parse(value, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    /**
      * Returns true if a given string is a valid date format (YYYY-MM-DD) and represents a real date.
      *
      * @param test The string to test for validity.
@@ -53,6 +63,19 @@ public class Date {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Compares this date with another date for ordering.
+     * Returns a negative integer, zero, or a positive integer as this date is before, equal to,
+     * or after the specified date.
+     *
+     * @param otherDate The date to be compared.
+     * @return A negative integer, zero, or a positive integer as this date is less than, equal to,
+     *         or greater than the specified date.
+     */
+    public int compareTo(Date otherDate) {
+        return this.value.compareTo(otherDate.value); // Compare LocalDate objects
     }
 
     @Override

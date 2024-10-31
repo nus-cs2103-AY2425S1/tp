@@ -24,7 +24,7 @@
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "courses" : [ ]
+    "courses" : [ "CS2101" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -34,6 +34,6 @@
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "courses" : [ ]
+    "courses" : [ "CS2030" ]
   } ]
 }

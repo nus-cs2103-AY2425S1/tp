@@ -13,8 +13,8 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.consultation.Consultation;
-import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Time;
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 
 /**
  * Parses input arguments and creates a new AddCommand object

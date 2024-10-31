@@ -87,9 +87,9 @@ The `UI` component,
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here is a fuller diagram of how the `Logic` component might interact with adjacent classes:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/FullerLogicClassDiagram.png"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -239,9 +239,153 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+### \[Proposed\] Consultation Management
+
+The consultation management feature enables TAs to schedule and manage consultation sessions with students. This section describes the implementation details of the consultation system.
+
+#### Architecture
+
+The consultation feature comprises these key components:
+
+* `Consultation`: Core class representing a consultation session
+* `Date`: Represents and validates consultation dates
+* `Time`: Represents and validates consultation times
+* `AddConsultCommand`: Handles adding new consultations
+* `AddConsultCommandParser`: Parses user input for consultation commands
+
+[//]: # (The class diagram below shows the structure of the consultation feature:)
+
+[//]: # (<img src="images/ConsultationClassDiagram.png" width="450" />)
+
+#### Implementation
+
+The consultation management system is implemented through several key mechanisms:
+
+**1. Date and Time Validation**
+
+The system enforces strict validation for consultation scheduling:
+* Dates must be in `YYYY-MM-DD` format and represent valid calendar dates
+* Times must be in 24-hour `HH:mm` format
+* Both use Java's built-in `LocalDate` and `LocalTime` for validation
+
+Example:
+```java
+Date date = new Date("2024-10-20"); // Valid
+Time time = new Time("14:00");      // Valid
+Date invalidDate = new Date("2024-13-45"); // Throws IllegalArgumentException
+```
+
+**2. Consultation Management**
+
+The `Consultation` class manages:
+* Immutable date and time properties
+* Thread-safe student list management
+* Equality based on date, time, and enrolled students
+
+Core operations:
+```java
+// Creating a consultation
+Consultation consult = new Consultation(date, time, students);
+
+// Adding/removing students
+consult.addStudent(student);
+consult.removeStudent(student);
+
+// Getting immutable student list
+List<Student> students = consult.getStudents(); // Returns unmodifiable list
+```
+
+**3. Command Processing**
+
+The system supports these consultation management commands:
+- `addconsult`: Creates new consultation sessions
+- `addtoconsult`: Adds students to existing consultations
+- `deleteconsult`: Removes consultation sessions
+- `removefromconsults`: Removes students from consultations
+
+Command examples:
+```
+addconsult d/2024-10-20 t/14:00
+addtoconsult 1 n/John Doe n/Harry Ng
+deleteconsult 1
+removefromconsult 1 n/John Doe
+```
+
+**Aspect 1: Date and Time Representation**
+
+* **Alternative 1 (current choice)**: Separate `Date` and `Time` classes
+    * Pros: Clear separation of concerns, focused validation
+    * Cons: Two objects to manage instead of one
+
+* **Alternative 2**: Combined `DateTime` class
+    * Pros: Unified handling of temporal data
+    * Cons: More complex validation, reduced modularity
+
+**Aspect 2: Student List Management**
+
+* **Alternative 1 (current choice)**: Immutable view with mutable internal list
+    * Pros: Thread-safe external access, flexible internal updates
+    * Cons: Complex implementation
+
+* **Alternative 2**: Fully immutable list
+    * Pros: Simpler thread-safety
+    * Cons: Higher memory usage for modifications
+
+
+### \[Proposed\] Data Archiving / Export Feature
+
+[//]: # (_{Explain here how the data archiving feature will be implemented}_)
+
+The export feature allows TAs to export their current list of students to a CSV file for external use. This feature is particularly useful for creating backups, sharing data with other applications, or generating reports.
+
+#### Proposed Implementation
+
+The export functionality is implemented through the `ExportCommand` class which converts the current student list into CSV format and saves it to a file in the project's `data` folder. It is then ready for further use, which could be in the form of a download/import functionality in a separate feature.
+
+Currently, the exported CSV includes the following student information:
+- Name
+- Phone number
+- Email address
+- Enrolled courses (semicolon separated)
+
+#### Implementation Details
+
+1. File Handling
+The system aims to implement several safety features:
+- Creates a `data` directory if it does not exist
+- Validates filename for illegal characters
+- Prevents accidental file overwriting
+- Properly escapes special characters in CSV output
+2. Force Flag
+The `-f` flag allows overwriting of existing files:
+```
+export students     // Creates a new file students.csv
+export students     // Warns the user
+export -f students  // Overwrites the students.csv file
+```
+
+#### Design Considerations
+
+**Aspect: Export File Format**
+
+* **Alternative 1 (current choice)**: CSV format
+    * Pros: Wide compatibility, easy to read/edit
+    * Cons: Limited formatting options
+
+* **Alternative 2**: JSON format
+    * Pros: Preserves data structures better
+    * Cons: Less user-friendly for direct editing
+
+**Aspect: File Location**
+
+* **Alternative 1 (current choice)**: Fixed `data` directory
+    * Pros: Consistent location, prevents scattered files
+    * Cons: Less flexibility for users
+
+* **Alternative 2**: User-specified directory
+    * Pros: More user control
+    * Cons: More complex input validation needed
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -289,6 +433,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | teaching assistant | mark students' attendance in my tutorial                                  | leverage my fast typing to quickly take attendance                       |
 | `* * *`  | teaching assistant | assign participation marks to each student                                | keep track of student participation easily to assign a grade later       |
 | `* * *`  | teaching assistant | export student data as a CSV                                              | easily share information with professors or use in other applications    |
+| `* * *`  | teaching assistant | schedule consultation sessions                                            | set aside dedicated time slots to meet with students                     |
+| `* * *`  | teaching assistant | add students to consultation slots                                        | keep track of which students are attending each consultation             |
+| `* * *`  | teaching assistant | view all my upcoming consultations                                        | prepare for and manage my consultation schedule                          |
 | `* *`    | teaching assistant | assign tasks and deadlines to students                                    | track their responsibilities and ensure they stay on schedule            |
 | `* *`    | teaching assistant | set reminders for important tasks or deadlines                            | stay notified of upcoming responsibilities and avoid missing them        |
 | `* *`    | teaching assistant | view a calendar showing all upcoming student deadlines and my TA duties   | manage my time effectively and avoid scheduling conflicts                |
@@ -301,12 +448,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | teaching assistant | merge duplicate student entries                                           | maintain a clean and accurate database                                   |
 | `* *`    | teaching assistant | backup my student database to a local file                                | ensure data safety and practice file management                          |
 | `* *`    | teaching assistant | use a command to import student data from a CSV file                      | quickly populate my database at the start of a semester                  |
+| `* *`    | teaching assistant | get alerts for consultation timing conflicts                              | avoid double booking consultation slots                                  |
+| `* *`    | teaching assistant | see the history of consultations with each student                        | track how often I meet with specific students                            |
+| `* *`    | teaching assistant | add notes to consultation sessions                                        | record what was discussed and any follow-up actions needed               |
 | `*`      | teaching assistant | add notes to a student's profile                                          | keep track of special considerations for each student                    |
 | `*`      | teaching assistant | assign a profile picture to each student                                  | have a visual aid to recognise who is who in my tutorial                 |
 | `*`      | teaching assistant | toggle between light and dark mode                                        | select my preferred viewing mode                                         |
 | `*`      | teaching assistant | redesign the TAHub GUI layout                                             | select my preferred visual layout                                        |
 | `*`      | teaching assistant | press up and down to navigate command history                             | quickly reuse recently used commands                                     |
 | `*`      | teaching assistant | generate a statistical summary of class performance                       | quickly assess overall class trends in scores/attendance etc.            |
+| `*`      | teaching assistant | export my consultation schedule to my calendar                            | integrate consultation timings with my other appointments                |
+| `*`      | teaching assistant | set recurring consultation slots                                          | establish regular consultation hours without manual scheduling           |
 
 *{More to be added}*
 
@@ -409,6 +561,131 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given index is invalid.
   * 2a1. TAHub shows an error message stating that the index is invalid.
   * 2a2. Use case ends.
+
+<br>
+
+**<u>Use case: UC6 - Export Student List</u>**
+
+**MSS**
+
+1. TA enters export command with desired filename
+2. System validates filename
+3. System creates CSV file
+4. System writes current student list to file
+5. Success message shows number of students exported
+
+**Extensions**
+
+* 2a. Invalid filename
+    * 2a1. System shows error message about invalid characters
+    * 2a2. Use case resumes from step 1
+
+* 3a. File already exists
+    * 3a1. System shows error message suggesting force flag
+    * 3a2. Use case resumes from step 1
+
+* 3b. Directory creation fails
+    * 3b1. System shows error message about directory creation
+    * 3b2. Use case ends
+
+* 4a. Write operation fails
+    * 4a1. System shows error message about write failure
+    * 4a2. Use case ends
+
+**<u>Use case: UC7 - Create a Consultation</u>**
+
+**MSS**
+
+1. User enters: `addconsult d/2024-10-20 t/14:00`
+2. System validates date and time are
+   - In valid format
+   - Not in the past
+   - Not already booked
+3. System creates consultation
+4. Success message shown
+
+**Extensions**
+
+* 1a. Invalid date/time format
+    * 1a1. System shows error message
+    * 1a2. Use case ends
+
+* 1b. Date/time already booked
+    * 1b1. System shows conflict error
+    * 1b2. Use case ends
+
+**<u>Use case: UC8 - Add Student to Consultation</u>**
+
+**MSS**
+
+1. TA lists existing consultations
+   - If no future consultations exist, system shows an appropriate message
+2. TA selects consultation
+3. TA adds student
+4. System updates consultation
+
+**Extensions**
+
+* 1a. No existing consultations
+    * 1a1. System shows message that no future consultations are available
+    * 1a2. Use case ends
+
+* 2a. Invalid consultation selection
+    * 2a1. System shows error message
+    * 2a2. Use case resumes from step 1
+
+* 3a. Student does not exist in system
+    * 3a1. System shows error message that student cannot be found
+    * 3a2. Use case resumes from step 3
+
+* 3b. Student already in consultation
+    * 3b1. System shows error message that student is already registered
+    * 3b2. Use case resumes from step 3
+
+**<u>Use case: UC9 - Delete Consultation</u>**
+
+**MSS**
+
+1. TA lists existing consultations
+2. TA enters command to delete specific consultation(s) by index
+3. System removes the consultation(s)
+4. Success message shown with deleted consultation details
+
+**Extensions**
+
+* 1a. No existing consultations
+    * 1a1. System shows message that no consultations are available
+    * 1a2. Use case ends
+
+* 2a. Invalid consultation index
+    * 2a1. System shows error message listing invalid indices
+    * 2a2. Use case resumes from step 2
+
+**<u>Use case: UC10 - Remove Students from Consultation</u>**
+
+**MSS**
+
+1. TA lists existing consultations
+2. TA selects consultation by index
+3. TA specifies students to remove by name
+4. System validates student existence in consultation
+5. System removes specified students from consultation 
+6. Success message shown
+
+**Extensions**
+
+* 2a. Invalid consultation index
+    * 2a1. System shows error message
+    * 2a2. Use case resumes from step 2
+
+* 3a. Student not found in system
+    * 3a1. System shows error message identifying missing student
+    * 3a2. Use case resumes from step 3
+
+* 4a. Student not in consultation
+    * 4a1. System shows error message that student is not in consultation
+    * 4a2. Use case resumes from step 3
+
 
 *{More to be added}*
 
