@@ -318,6 +318,43 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### Listing Upcoming Appointments Feature
+
+#### Overview
+
+The user can view upcoming appointments through the `appointment-list` command.
+The command can be supplied with optional filters date and time to list
+upcoming appointments on the specified date or date and time.
+
+Command: `appointment-list [d/DATE][TIME]`
+
+The following sequence diagram models the interactions between the different components of PhysioPal
+for the execution of `appointment-list` command.
+
+![ListAppointmentSequenceDiagram](images/ListAppointmentSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Details
+
+1. The user executes the command `appointment-list` to view all upcoming appointments.
+2. The `LogicManager` object receives this command and calls the `parseCommand` method of `AddressBookParser` to interpret the input.
+3. The `AddressBookParser` then creates a `ListAppointmentsCommandParser` object to handle parsing.
+4. The `ListAppointmentsCommandParser` object calls its `parse` method to extract any present date and time filters
+5. The `ListAppointmentsCommandParser` creates a `ListAppointmentsCommand` object.
+6. The `ListAppointmentsCommandParser` returns the `ListAppointmentsCommand` object to `AddressBookParser`, which then returns it to `LogicManager`.
+7. The `LogicManager` object invokes the `execute` method of `ListAppointmentsCommand`.
+8. The `execute` method calls `getFilteredPersonList` on the `Model` to retrieve the list of persons with upcoming appointments matching the filter(if any).
+9. The `execute` method creates a `CommandResult` object containing the list of upcoming appointments.
+10. The `CommandResult` object is returned to `LogicManager`, which then displays the list of upcoming appointments to the user.
+
+#### Example Usage
+1. User inputs the command `appointment-list`.
+2. The system displays the number and list of all upcoming appointments," including notes of the appointments(if any)
+3. This information is shown in the status message.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -584,6 +621,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
         Use case ends.
 
+**Use case: UC03 - List all upcoming appointments**
+
+**MSS**
+
+1.  Physiotherapist requests to list all upcoming appointments
+2.  PhysioPal displays a list of all upcoming appointments, ordered by date and time from the closest next appointment.
+
+    Use case ends.
+
+
+**Use case: UC04 - List upcoming appointments on a specified date**
+
+**MSS**
+
+1.  Physiotherapist requests to list all upcoming appointments on specified date.
+2.  PhysioPal displays a list of upcoming appointments on the specified date, ordered by date and time from the closest next appointment
+
+    Use case ends.
+
+
+**Extensions**
+* 1a. The format for date is wrong
+  * 1a1. PhysioPal requests for correct data.
+  * 1a2. Physiotherapist enters new data.
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
+           Use case resumes from step 2.
+
+**Use case: UC05 - Marking payment for appointment as paid**
+
+**MSS**
+
+1. Physiotherapist requests to mark payment for an appointment of a patient as paid
+2. PhysioPal marks payment status of the appointment as paid and displays a success status message.
+
+   Use case ends.
+
+**Extensions**
+* 1a. Client do not exist.
+
+    * 1a1. PhysioPal requests for correct data.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+      Use case resumes from step 2.
+
+* 1b. The format for date is wrong
+    * 1b1. PhysioPal requests for correct data.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+      Use case resumes from step 2.
+
+* 1c. The appointment does not exist
+    * 1c1. PhysioPal displays an error message that no such appointment found.
+    
+    Use case ends.
+
+
+
 ### Non-Functional Requirements
 
 1.  Should be able to handle  all operations of at least 100 clients without a delay of more than 0.5 seconds
@@ -693,6 +787,40 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `reminder-delete John Doe`<br>Expected: Contact named John Doe will be updated without the reminder. Success message of the reminder deletion shown in the status message.
 
     1. Test case: `reminder-delete John Doe`<br>Expected: No contact is updated. Error details shown in the status message.
+
+### Listing upcoming appointments
+
+1. Listing all upcoming appointments
+
+   1. Test case: `appointment-list`<br>
+    Expected: Lists all upcoming appointments in chronological order. Total number of appointments and 
+    details of the appointments shown in the status message.
+   
+   2. Test case: `appointment-list d/2024-11-25`<br>
+    Expected: Lists upcoming appointments on 25 Nov 2024. Total number of appointments and
+    details of the appointments shown in the status message.
+   
+   3. Test case: `appointment-list d/2024-11-10 1000`<br>
+      Expected: Lists upcoming appointments on 10 Nov 2024 at 10am. Total number of appointments and
+      details of the appointments shown in the status message.
+   
+   4. Other incorrect appointment-list commands to try: `appointment-list d/`, `appointment-list d/2025-13-32`, `...`<br>
+    Expected: No appointments listed. Error details shown in the status message.
+
+### Making payment for an appointment
+
+1. Marking payment as paid
+    1. Test case: `payment John Doe d/2024-10-14 1200 pay/paid`<br>
+       Expected: Payment status for John Doe's appointment on 14 Oct 2024 at 12pm is marked as paid. 
+       Details of the status change shown in the status message.
+    2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
+      Expected: No payment made. Error details shown in the status message.
+2. Marking payment as unpaid
+    1. Test case: `payment John Doe d/2024-10-14 1200 pay/unpaid`<br>
+       Expected: Payment status for John Doe's appointment on 14 Oct 2024 at 12pm is marked as unpaid.
+       Details of the status change shown in the status message.
+    2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
+       Expected: No payment made. Error details shown in the status message.
 
 ### Saving data
 
