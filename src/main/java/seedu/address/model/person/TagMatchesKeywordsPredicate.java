@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Tests that a {@code Person}'s {@code tag} strictly matches the keywords given.
