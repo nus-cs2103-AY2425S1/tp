@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.volunteer.Date;
+import seedu.address.model.volunteer.VolunteerDates;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
@@ -47,7 +47,7 @@ class JsonAdaptedVolunteer {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        availableDate = source.getAvailableDate().toParsableString();
+        availableDate = source.getAvailableDates().toParsableString();
         involvedIn = source.getEvents();
     }
 
@@ -72,10 +72,10 @@ class JsonAdaptedVolunteer {
         }
         final Email modelEmail = new Email(email);
 
-        if (availableDate == null || !Date.isValidDate(availableDate)) {
-            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        if (availableDate == null || !VolunteerDates.isValidListOfDate(availableDate)) {
+            throw new IllegalValueException(VolunteerDates.MESSAGE_CONSTRAINTS);
         }
-        final Date modelAvailableDate = new Date(availableDate);
+        final VolunteerDates modelAvailableDate = new VolunteerDates(availableDate);
 
         if (involvedIn == null) {
             throw new IllegalValueException("Involved events list is missing!");

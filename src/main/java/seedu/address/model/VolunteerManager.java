@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
+import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.volunteer.UniqueVolunteerList;
 import seedu.address.model.volunteer.Volunteer;
 
@@ -105,4 +107,8 @@ public class VolunteerManager {
         return volunteers.hashCode();
     }
 
+    public void addDatesToVolunteer(Volunteer volunteerToAddDate, String dateList) throws
+            VolunteerDuplicateDateException {
+        volunteerToAddDate.addDatesToVolunteerDates(dateList);
+    }
 }

@@ -5,6 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Objects;
 
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,7 +25,7 @@ public class Volunteer {
     private final Email email;
 
     // Data fields
-    private final Date availableDate;
+    private final VolunteerDates availableDates;
     private final ObservableList<String> involvedIn;
 
     /**
@@ -34,21 +37,21 @@ public class Volunteer {
      * @param availableDate The date the volunteer is available.
      * @param involvedIn The list of events the volunteer has.
      */
-    public Volunteer(Name name, Phone phone, Email email, Date availableDate, List<String> involvedIn) {
+    public Volunteer(Name name, Phone phone, Email email, VolunteerDates availableDate, List<String> involvedIn) {
         requireAllNonNull(name, phone, email, availableDate);
 
         this.id = nextId++;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.availableDate = availableDate;
+        this.availableDates = availableDate;
         this.involvedIn = FXCollections.observableArrayList(involvedIn);
     }
 
     /**
      * Constructs an {@code Volunteer} without events.
      */
-    public Volunteer(Name name, Phone phone, Email email, Date availableDate) {
+    public Volunteer(Name name, Phone phone, Email email, VolunteerDates availableDate) {
         this(name, phone, email, availableDate, FXCollections.observableArrayList());
     }
 
@@ -72,8 +75,8 @@ public class Volunteer {
         return email;
     }
 
-    public Date getAvailableDate() {
-        return availableDate;
+    public VolunteerDates getAvailableDates() {
+        return availableDates;
     }
 
     public ObservableList<String> getInvolvedIn() {
@@ -113,7 +116,7 @@ public class Volunteer {
         return name.equals(otherVolunteer.name)
                 && phone.equals(otherVolunteer.phone)
                 && email.equals(otherVolunteer.email)
-                && availableDate.equals(otherVolunteer.availableDate);
+                && availableDates.equals(otherVolunteer.availableDates);
     }
 
     /**
@@ -134,6 +137,11 @@ public class Volunteer {
         involvedIn.remove(eventToRemove);
     }
 
+    public void addDatesToVolunteerDates(String date) {
+        String[] dates = date.split(", ");
+        this.availableDates.addStringOfDatesToAvailList(dates);
+    }
+
     /**
      * Returns the list of events the volunteer is involved in as an unmodifiable list.
      *
@@ -145,7 +153,7 @@ public class Volunteer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, availableDate);
+        return Objects.hash(name, phone, email, availableDates);
     }
 
     @Override
@@ -153,6 +161,7 @@ public class Volunteer {
         return "Volunteer{name=" + name
                 + ", phone=" + phone
                 + ", email=" + email
-                + ", availableDate=" + availableDate + "}";
+                + ", availableDate=" + availableDates + "}";
     }
+
 }

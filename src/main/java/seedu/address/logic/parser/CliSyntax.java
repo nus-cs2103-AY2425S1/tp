@@ -21,6 +21,8 @@ public class CliSyntax {
     public static final Prefix VOLUNTEER_PREFIX_EMAIL = new Prefix("em/");
     public static final Prefix VOLUNTEER_PREFIX_AVAILABLE_DATE = new Prefix("d/");
 
+    public static final Prefix VOLUNTEER_PREFIX_INDEX = new Prefix("i/");
+
     /* Prefix meant for assigning */
     public static final Prefix ASSIGN_VOLUNTEER_PREFIX_NAME = new Prefix("v/");
     public static final Prefix ASSIGN_EVENT_PREFIX_NAME = new Prefix("e/");

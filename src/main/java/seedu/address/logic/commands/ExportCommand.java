@@ -50,7 +50,7 @@ public class ExportCommand extends Command {
             volunteerCsvOutput.append("\"").append(volunteer.getName()).append("\",")
                     .append(volunteer.getPhone()).append(",")
                     .append(volunteer.getEmail()).append(",")
-                    .append(volunteer.getAvailableDate()).append(",")
+                    .append(volunteer.getAvailableDates()).append(",")
                     .append(events)
                     .append("\n");
         }
