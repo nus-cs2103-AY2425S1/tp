@@ -142,8 +142,8 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, event manager data, and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `EventManagerStorage`, and `UserPrefsStorage`, meaning it can be treated as any of these (if only the functionality of one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -155,6 +155,20 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Events: Adding Event
+![[Event Sequence Diagram](images/AddEventCommandSequenceDiagram.png)](images/AddEventCommandSequenceDiagram.png)
+
+Above shows the sequence diagram when a user wants to add an event.
+1. The user types the command `new [EVENT NAME]`
+2. Logic Manager receives the text input and passes it to addressBookParser
+3. AddressBookParser creates a new NewEventCommandParser and calls its .parse method
+4. NewEventCommandParser creates a new AddEventCommand object
+5. AddEventCommand object calls ParserUtil.parseEvent method to parse the event name
+6. ParserUtil creates and returns a new Event Object, which is then passed back to Logic Manager
+7. Logic Manager calls the execute method of the AddEventCommand object
+8. AddEventCommand object calls the addEvent method of eventManager
+9. AddEventCommand object returns a CommandResult object to Logic Manager
 
 ### \[Proposed\] Undo/redo feature
 

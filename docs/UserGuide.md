@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-PlanPal is an **address book** designed for **student event planners** at NUS who need to manage contacts 
-(e.g., attendees, vendors, sponsors, and volunteers) for their events. 
+PlanPal is an **address book** designed for **student event planners** at NUS who need to manage contacts
+(e.g., attendees, vendors, sponsors, and volunteers) for their events.
 
 PlanPal offers a **centralized platform** to organize, track, and access contact information, ensuring 
 efficient coordination and smooth communication throughout the event planning process.
@@ -86,7 +86,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of roles (including 0).
+A person can have any number of roles (including 0) and Telegram username is optional.
 </div>
 
 Examples:
@@ -109,8 +109,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAM
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When adding roles, only the following are valid roles: attendee, sponsor, vendor, volunteer
-* You can remove all the person’s roles by typing `r/` without
-    specifying any role after it.
+
+:bulb: **Tip:** You can remove all the person’s roles by typing `r/` without
+    specifying any role after it. Likewise for telegram handle, typing `t/` will remove the person's telegram handle
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -149,6 +150,18 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a new Event : `new`
+
+Adds a new Event to address book.
+
+Format: `new EVENT NAME`
+
+* Event name cannot be blank
+
+Examples:
+* `new Sumo Bot Festival`
+* `new RC Horror Night`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -173,6 +186,10 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+### Navigating through command history
+The `up` and `down` arrow keys can be used to navigate through your command history. When you press the up arrow, the command box displays the previous commands you have executed, allowing you to re-run or edit past commands 
+without retyping them. Pressing the down arrow lets you move forward through the command history, returning to more recent commands.
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -202,6 +219,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAME] [r/ROLE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**new** | `new EVENT NAME` <br> e.g. `new Sumo Bot Festival`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
