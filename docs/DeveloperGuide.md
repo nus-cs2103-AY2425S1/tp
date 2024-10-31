@@ -123,8 +123,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Supplier` objects (which are contained in a `UniqueSupplierList` object).
+* stores the address book data i.e., all `Supplier` and `Product` objects (which are contained in a `UniqueSupplierList` and `UniqueProductList`object respectively).
 * stores the currently 'selected' `Supplier` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Supplier>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* Similarly, stores the 'selected' `Product` objects as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Product>`.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -340,9 +341,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. Inventory Manager tries to assign a product to a supplier.
 2. System validates that the product name & supplier name exists in the list.
-3. The system assigns the specified product to the specified supplier.
-4. System updates the product-supplier relationship in the list.
-5. System confirms the assignment with a success message.
+3. System validates the product is not assigned to any supplier.
+4. The system assigns the specified product to the specified supplier.
+5. System updates the product-supplier relationship in the list.
+6. System confirms the assignment with a success message.
 
     Use case ends.
 
@@ -368,7 +370,8 @@ Preconditions:
 1. Inventory Manager tries to delete a particular product or supplier.
 2. System checks if product or supplier exists which is to be deleted.
 3. System removes the specified supplier or product from the list.
-4. System confirms the deletion with a success message.
+4. System removes any supplier-product relationship.
+5. System confirms the deletion with a success message.
 
     Use case ends.
 
@@ -515,4 +518,3 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
-
