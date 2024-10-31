@@ -474,7 +474,7 @@ Use case ends.
 
 **Extensions**
 * 1a. User tries to edit a game that does not exist.
-    * 1b1. GamerBook notifies the user that the game could not be found.
+    * 1a1. GamerBook notifies the user that the game could not be found.
 
       Use case ends.
 
