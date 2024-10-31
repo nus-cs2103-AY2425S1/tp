@@ -7,7 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.SupplierStatus;
+import seedu.address.model.supplier.SupplierStatus;
 
 /**
  * Parses input arguments and creates a new MarkSupplierCommand object

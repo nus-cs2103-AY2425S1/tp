@@ -16,7 +16,8 @@ import seedu.address.model.delivery.exceptions.DuplicateDeliveryException;
  * A delivery is considered unique by comparing using {@code Delivery#isSameDelivery(Delivery)}. As such,
  * adding and updating of deliveries uses Delivery#isSameDelivery(Delivery) for equality so as to ensure that the
  * delivery being added or updated is unique in terms of identity in the UniqueDeliveryList. However, the removal
- * of a person uses Person#equals(Object) so as to ensure that the person with exactly the same fields will be removed.
+ * of a supplier uses Supplier#equals(Object) so as to ensure that the supplier
+ * with exactly the same fields will be removed.
  */
 
 public class UniqueDeliveryList implements Iterable<Delivery> {

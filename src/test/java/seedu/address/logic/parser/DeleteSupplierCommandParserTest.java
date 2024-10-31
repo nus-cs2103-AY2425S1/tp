@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +13,8 @@ public class DeleteSupplierCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteSupplierCommand() {
         // Test valid index input for DeleteSupplierCommand
-        assertParseSuccess(parser, "-s " + INDEX_FIRST_PERSON.getOneBased(),
-                new DeleteSupplierCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "-s " + INDEX_FIRST_SUPPLIER.getOneBased(),
+                new DeleteSupplierCommand(INDEX_FIRST_SUPPLIER));
     }
     @Test
     public void parse_invalidArgs_throwsParseException() {
@@ -27,7 +27,7 @@ public class DeleteSupplierCommandParserTest {
                 DeleteSupplierCommand.MESSAGE_USAGE));
 
         // Test command with wrong prefix
-        assertParseFailure(parser, "-x " + INDEX_FIRST_PERSON.getOneBased(),
+        assertParseFailure(parser, "-x " + INDEX_FIRST_SUPPLIER.getOneBased(),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSupplierCommand.MESSAGE_USAGE));
 
         // Test with empty input

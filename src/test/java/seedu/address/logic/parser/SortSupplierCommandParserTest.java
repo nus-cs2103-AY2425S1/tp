@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortSupplierCommand;
-import seedu.address.model.person.SupplierSortNameComparator;
+import seedu.address.model.supplier.SupplierSortNameComparator;
 
 
 public class SortSupplierCommandParserTest {

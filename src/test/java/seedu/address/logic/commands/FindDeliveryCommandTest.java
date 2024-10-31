@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalSuppliers.BENSON;
 
 import java.util.Optional;
 
@@ -96,7 +96,7 @@ public class FindDeliveryCommandTest {
         FindDeliveryCommand command = new FindDeliveryCommand(predicate, supplierIndex);
 
         CommandResult result = command.execute(model);
-        assertEquals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, result.getFeedbackToUser());
+        assertEquals(MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX, result.getFeedbackToUser());
     }
 
     /**

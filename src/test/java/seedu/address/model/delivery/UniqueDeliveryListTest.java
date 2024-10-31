@@ -37,7 +37,7 @@ public class UniqueDeliveryListTest {
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
+    public void add_nullSupplier_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueDeliveryList.add(null));
     }
 
@@ -58,7 +58,7 @@ public class UniqueDeliveryListTest {
     }
 
     @Test
-    public void setDelivery_targetDeliveryNotInList_throwsPersonNotFoundException() {
+    public void setDelivery_targetDeliveryNotInList_throwsSupplierNotFoundException() {
         assertThrows(DeliveryNotFoundException.class, () -> uniqueDeliveryList.setDelivery(APPLE, APPLE));
     }
 

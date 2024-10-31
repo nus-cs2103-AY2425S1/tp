@@ -383,7 +383,7 @@
     -fx-prompt-text-fill: black;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #supplierListPanel, #supplierWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

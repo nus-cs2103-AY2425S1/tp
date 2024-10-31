@@ -9,8 +9,8 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
-import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Jackson-friendly version of {@link Delivery}.
@@ -19,13 +19,13 @@ public class JsonAdaptedDelivery {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Delivery's %s field is missing!";
     private final String product;
-    private final JsonAdaptedPerson sender; // CHANGE TO SUPPLIER LATER ON
+    private final JsonAdaptedSupplier sender; // CHANGE TO SUPPLIER LATER ON
     private final String status;
     private final String deliveryTime;
     private final String cost;
     private final String quantity;
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedSupplier} with the given supplier details.
      */
     @JsonCreator
     public JsonAdaptedDelivery(@JsonProperty("product") String product,
@@ -33,7 +33,7 @@ public class JsonAdaptedDelivery {
                                @JsonProperty("deliveryTime") String deliveryTime,
                                @JsonProperty("cost") String cost,
                                @JsonProperty("quantity") String quantity,
-                               @JsonProperty("sender") JsonAdaptedPerson sender) {
+                               @JsonProperty("sender") JsonAdaptedSupplier sender) {
         this.product = product;
         this.sender = sender;
         this.status = status;
@@ -47,7 +47,7 @@ public class JsonAdaptedDelivery {
      */
     public JsonAdaptedDelivery(Delivery source) {
         this.product = source.getDeliveryProduct().productName;
-        this.sender = new JsonAdaptedPerson(source.getDeliverySender());
+        this.sender = new JsonAdaptedSupplier(source.getDeliverySender());
         this.status = source.getDeliveryStatus().toString();
         this.deliveryTime = source.getDeliveryDate().toString();
         this.cost = source.getDeliveryCost().value;
@@ -71,10 +71,11 @@ public class JsonAdaptedDelivery {
 
 
         if (sender == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Supplier.class.getSimpleName()));
         }
-        // Check if sender is valid ?? --> JsonAdaptedPerson class will check for us
-        final Person senderObj = this.sender.toModelType();
+        // Check if sender is valid ?? --> JsonAdaptedSupplier class will check for us
+        final Supplier senderObj = this.sender.toModelType();
 
 
         if (status == null) {

@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Container for user visible messages.
@@ -15,8 +15,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The supplier index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_SUPPLIERS_LISTED_OVERVIEW = "%1$d suppliers listed!";
     public static final String MESSAGE_SUPPLIERS_FOUND_OVERVIEW =
             "%1$d suppliers found by matching with the given keyword(s)!";
     public static final String MESSAGE_SUPPLIER_SORTED_OVERVIEW = "%1$d suppliers sorted by %2$s in %3$s order!";
@@ -42,21 +41,21 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code supplier} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Supplier supplier) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(supplier.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(supplier.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(supplier.getEmail())
                 .append("; Company: ")
-                .append(person.getCompany())
+                .append(supplier.getCompany())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        supplier.getTags().forEach(builder::append);
         builder.append("; Products ");
-        person.getProducts().forEach(builder::append);
+        supplier.getProducts().forEach(builder::append);
         return builder.toString();
     }
 

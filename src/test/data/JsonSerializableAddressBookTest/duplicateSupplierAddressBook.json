@@ -1,0 +1,21 @@
+{
+  "suppliers": [ {
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "company" : "companya",
+    "tags" : [ "owesMoney", "friends" ],
+    "products" : [ "bread", "rice" ],
+    "status": "active"
+  }, {
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "company" : "companya",
+    "tags" : [ "owesMoney", "friends" ],
+    "products" : [ "bread", "rice" ],
+    "status": "active"
+  } ],
+
+  "deliveries" : []
+}

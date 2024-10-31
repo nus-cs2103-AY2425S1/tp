@@ -1,0 +1,13 @@
+{
+  "suppliers": [ {
+    "name": "Valid Supplier",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "address": "4th street"
+  }, {
+    "name": "Supplier With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "email": "hans@example.com",
+    "address": "4th street"
+  } ]
+}

@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_SUPPLIER_SORTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.GEORGE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSuppliers.ALICE;
+import static seedu.address.testutil.TypicalSuppliers.BENSON;
+import static seedu.address.testutil.TypicalSuppliers.CARL;
+import static seedu.address.testutil.TypicalSuppliers.DANIEL;
+import static seedu.address.testutil.TypicalSuppliers.ELLE;
+import static seedu.address.testutil.TypicalSuppliers.FIONA;
+import static seedu.address.testutil.TypicalSuppliers.GEORGE;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,9 +23,9 @@ import seedu.address.logic.parser.SortOrder;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.SupplierSortComparator;
-import seedu.address.model.person.SupplierSortNameComparator;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.model.supplier.SupplierSortComparator;
+import seedu.address.model.supplier.SupplierSortNameComparator;
+import seedu.address.testutil.TypicalSuppliers;
 
 
 public class SortSupplierCommandTest {
@@ -56,7 +56,7 @@ public class SortSupplierCommandTest {
         SortSupplierCommand command = new SortSupplierCommand(comparator);
         expectedModel.updateSortedSupplierList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(TypicalPersons.getTypicalPersons(), model.getSortedSupplierList());
+        assertEquals(TypicalSuppliers.getTypicalSuppliers(), model.getSortedSupplierList());
     }
     @Test
     public void execute_descendingName_sortedByDescendingName() {

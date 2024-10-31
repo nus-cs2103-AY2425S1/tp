@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BREAD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BREAD;
 import static seedu.address.testutil.TypicalDeliveries.APPLE;
 import static seedu.address.testutil.TypicalDeliveries.BREAD;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalSuppliers.BOB;
 
 import org.junit.jupiter.api.Test;
 

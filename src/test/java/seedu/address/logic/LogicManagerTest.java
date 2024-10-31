@@ -1,7 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalSuppliers.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -29,11 +29,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SupplierBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -63,7 +63,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete -s 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
     }
 
     @Test
@@ -85,8 +85,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredSupplierList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredSupplierList().remove(0));
     }
 
     /**
@@ -169,9 +169,9 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + COMPANY_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withProducts().build();
+        Supplier expectedSupplier = new SupplierBuilder(AMY).withTags().withProducts().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addSupplier(expectedSupplier);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
@@ -179,8 +179,8 @@ public class LogicManagerTest {
     public void getSortedSupplierList_returnsSortedSupplierList() {
         // Setup expected model with sorted suppliers
         Model expectedModel = new ModelManager();
-        Person amy = new PersonBuilder(AMY).withTags().withProducts().build();
-        expectedModel.addPerson(amy);
+        Supplier amy = new SupplierBuilder(AMY).withTags().withProducts().build();
+        expectedModel.addSupplier(amy);
         // Add more suppliers to the expected model as needed
 
         // Create a new instance of Logic with the expectedModel and a storage instance
@@ -191,7 +191,7 @@ public class LogicManagerTest {
         Logic logicWithExpectedModel = new LogicManager(expectedModel, storage);
 
         // Ensure the list is sorted
-        ObservableList<Person> sortedSupplierList = expectedModel.getSortedSupplierList();
+        ObservableList<Supplier> sortedSupplierList = expectedModel.getSortedSupplierList();
         assertEquals(sortedSupplierList, logicWithExpectedModel.getSortedSupplierList());
     }
 }

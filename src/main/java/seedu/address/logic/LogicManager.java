@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 import seedu.address.storage.Storage;
 
 /**
@@ -68,8 +68,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Supplier> getFilteredSupplierList() {
+        return model.getFilteredSupplierList();
     }
 
     @Override
@@ -83,11 +83,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getModifiedSupplierList() {
+    public ObservableList<Supplier> getModifiedSupplierList() {
         return model.getModifiedSupplierList();
     }
     @Override
-    public ObservableList<Person> getSortedSupplierList() {
+    public ObservableList<Supplier> getSortedSupplierList() {
         return model.getSortedSupplierList();
     }
 

@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.SupplierSortComparator;
+import seedu.address.model.supplier.SupplierSortComparator;
 /**
  * Sorts and lists all suppliers in address book by the field.
  */

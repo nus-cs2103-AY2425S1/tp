@@ -6,10 +6,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showSupplierAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUPPLIER;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +19,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.SupplierStatus;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.SupplierStatus;
+import seedu.address.testutil.SupplierBuilder;
 
 
 public class MarkSupplierCommandTest {
@@ -29,33 +29,34 @@ public class MarkSupplierCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void execute_addRemarkUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withStatus(SUPPLIER_STATUS_STUB).build();
-        MarkSupplierCommand markCommand = new MarkSupplierCommand(INDEX_FIRST_PERSON,
-                new SupplierStatus(editedPerson.getStatus().status));
+        Supplier firstSupplier = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier editedSupplier = new SupplierBuilder(firstSupplier).withStatus(SUPPLIER_STATUS_STUB).build();
+        MarkSupplierCommand markCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
+                new SupplierStatus(editedSupplier.getStatus().status));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                INDEX_FIRST_PERSON.getOneBased(), editedPerson.getStatus().status);
+                INDEX_FIRST_SUPPLIER.getOneBased(), editedSupplier.getStatus().status);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+        showSupplierAtIndex(model, INDEX_FIRST_SUPPLIER);
+        Supplier firstSupplier = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier editedSupplier = new SupplierBuilder(
+                model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased()))
                 .withStatus(SUPPLIER_STATUS_STUB).build();
-        MarkSupplierCommand remarkCommand = new MarkSupplierCommand(INDEX_FIRST_PERSON,
-                new SupplierStatus(editedPerson.getStatus().status));
+        MarkSupplierCommand remarkCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
+                new SupplierStatus(editedSupplier.getStatus().status));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                INDEX_FIRST_PERSON.getOneBased(), editedPerson.getStatus().status);
+                INDEX_FIRST_SUPPLIER.getOneBased(), editedSupplier.getStatus().status);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
     }
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+    public void execute_invalidSupplierIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredSupplierList().size() + 1);
         MarkSupplierCommand remarkCommand = new MarkSupplierCommand(outOfBoundIndex,
                 new SupplierStatus(SUPPLIER_STATUS_STUB));
         assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
@@ -65,11 +66,11 @@ public class MarkSupplierCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+    public void execute_invalidSupplierIndexFilteredList_failure() {
+        showSupplierAtIndex(model, INDEX_FIRST_SUPPLIER);
+        Index outOfBoundIndex = INDEX_SECOND_SUPPLIER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getSupplierList().size());
         MarkSupplierCommand remarkCommand = new MarkSupplierCommand(outOfBoundIndex,
                 new SupplierStatus(SUPPLIER_STATUS_STUB));
 
@@ -77,11 +78,11 @@ public class MarkSupplierCommandTest {
     }
     @Test
     public void equals() {
-        final MarkSupplierCommand standardCommand = new MarkSupplierCommand(INDEX_FIRST_PERSON,
+        final MarkSupplierCommand standardCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(SUPPLIER_STATUS_STUB));
 
         // same values -> returns true
-        MarkSupplierCommand commandWithSameValues = new MarkSupplierCommand(INDEX_FIRST_PERSON,
+        MarkSupplierCommand commandWithSameValues = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(SUPPLIER_STATUS_STUB));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -95,11 +96,11 @@ public class MarkSupplierCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new MarkSupplierCommand(INDEX_SECOND_PERSON,
+        assertFalse(standardCommand.equals(new MarkSupplierCommand(INDEX_SECOND_SUPPLIER,
                 new SupplierStatus(VALID_STATUS_AMY))));
 
         // different status -> returns false
-        assertFalse(standardCommand.equals(new MarkSupplierCommand(INDEX_FIRST_PERSON,
+        assertFalse(standardCommand.equals(new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(VALID_STATUS_BOB))));
     }
 }

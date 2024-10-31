@@ -6,7 +6,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Deletes a supplier identified using it's displayed index from the address book.
@@ -26,11 +26,11 @@ public class DeleteSupplierCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (targetIndex.getZeroBased() >= model.getFilteredPersonList().size()) {
+        if (targetIndex.getZeroBased() >= model.getFilteredSupplierList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
-        Person supplierToDelete = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        model.deletePerson(supplierToDelete);
+        Supplier supplierToDelete = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
+        model.deleteSupplier(supplierToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_SUPPLIER_SUCCESS, targetIndex.getOneBased()));
     }
     @Override

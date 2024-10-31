@@ -12,10 +12,10 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.CompanyContainsKeywordPredicate;
-import seedu.address.model.person.predicates.NameContainsPredicate;
-import seedu.address.model.person.predicates.ProductContainsKeywordPredicate;
+import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.predicates.CompanyContainsKeywordPredicate;
+import seedu.address.model.supplier.predicates.NameContainsPredicate;
+import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new FindSupplierCommand object.
@@ -38,7 +38,7 @@ public class FindSupplierCommandParser implements Parser<FindSupplierCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PRODUCT, PREFIX_COMPANY);
-        List<Predicate<Person>> supplierPredicates = new ArrayList<>();
+        List<Predicate<Supplier>> supplierPredicates = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String nameKeyword = argMultimap.getValue(PREFIX_NAME).get();
