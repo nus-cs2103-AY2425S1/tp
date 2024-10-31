@@ -59,6 +59,7 @@ Person *--> "*" Tag
 Volunteer -left-|> Person
 Donor -left-|> Person
 Partner -left-|> Person
+Person -[hidden]right- Group
 Volunteer *-->Hours
 Donor *--> DonatedAmount
 Partner *--> Date
