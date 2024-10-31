@@ -42,6 +42,7 @@ public class EditPublicAddressCommandTest {
         Person editedPerson = personToEdit.withUpdatedPublicAddress(
             PublicAddressFactory.createPublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS_1,
                 BTC_MAIN_ADDRESS.label));
+
         expectedModel.setPerson(personToEdit, editedPerson);
 
         String expectedMessage = String.format(EditPublicAddressCommand.MESSAGE_SUCCESS,
@@ -72,6 +73,7 @@ public class EditPublicAddressCommandTest {
         EditPublicAddressCommand editCommand = new EditPublicAddressCommand(outOfBoundIndex,
             Network.BTC, VALID_PUBLIC_ADDRESS_1, BTC_MAIN_ADDRESS.label);
 
+
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -79,9 +81,9 @@ public class EditPublicAddressCommandTest {
     public void execute_nonExistentLabel_throwsCommandException() {
         model.addPerson(JOE);
         Index index = Index.fromOneBased(model.getFilteredPersonList().size());
-
         EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index,
             Network.BTC, VALID_PUBLIC_ADDRESS_1,
+
             "nonExistentLabel");
 
         Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());

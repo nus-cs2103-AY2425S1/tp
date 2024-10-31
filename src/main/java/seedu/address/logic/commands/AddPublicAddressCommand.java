@@ -68,10 +68,10 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         PublicAddressesComposition addedPublicAddresses =
             editPersonDescriptor.getPublicAddresses().orElse(new PublicAddressesComposition());
 
-        PublicAddress publicAddress = addedPublicAddresses.getFirstPublicAddress();
+        PublicAddress publicAddress = addedPublicAddresses.getAnyPublicAddress();
         Network network = publicAddress.getNetwork();
 
-        if (currentPublicAddresses.isPublicAddressStringAmongAllNetworks(publicAddress)) {
+        if (currentPublicAddresses.containsPublicAddressStringAmongAllNetworks(publicAddress)) {
             throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
                 updatedName, publicAddress, network));
         }

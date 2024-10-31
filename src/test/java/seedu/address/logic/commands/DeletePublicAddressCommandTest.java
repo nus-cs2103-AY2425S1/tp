@@ -21,8 +21,6 @@ import seedu.address.model.addresses.Network;
  */
 public class DeletePublicAddressCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    //
     //    @Test
     //    public void execute_validIndexValidNetwork_success() throws Exception {
     //        Person personToDeleteAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -39,9 +37,11 @@ public class DeletePublicAddressCommandTest {
     //
     //        assertCommandSuccess(deletePublicAddressCommand, model, expectedMessage, expectedModel);
     //    }
-    //
+
+
     //    @Test
-    //    public void execute_validIndexValidNetworkValidLabel_success() throws Exception {
+    //    public void execute_validIndexValidNetworkValidLabel1_success() throws Exception {
+    //        //disabled this test as get filtered list returns a person that is modifies the original person in model
     //        Person personToDeleteAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
     //        HashSet<PublicAddress> addresses = new HashSet<>(
     //            personToDeleteAddress.getPublicAddressesByNetwork(Network.BTC)
@@ -64,7 +64,7 @@ public class DeletePublicAddressCommandTest {
     //
     //        assertCommandSuccess(deletePublicAddressCommand, model, expectedMessage, expectedModel);
     //    }
-    //
+
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);

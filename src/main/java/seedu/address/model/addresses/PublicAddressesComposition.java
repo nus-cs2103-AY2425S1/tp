@@ -29,6 +29,10 @@ public class PublicAddressesComposition {
      * @param publicAddresses A map of networks to sets of public addresses.
      */
     public PublicAddressesComposition(Map<Network, Set<PublicAddress>> publicAddresses) {
+        //assert that for each network there is no empty set of public addresses;
+        assert publicAddresses != null;
+        assert !publicAddresses.values().stream().anyMatch(Set::isEmpty);
+
         this.publicAddresses = publicAddresses.entrySet().stream()
             .collect(HashMap::new, (m, e) -> m.put(e.getKey(), new HashSet<>(e.getValue())), HashMap::putAll);
     }
@@ -47,7 +51,7 @@ public class PublicAddressesComposition {
     }
 
     /**
-     * Sets the public addresses for the specified network.
+     * Sets the public addresses for the specified network and replaces the existing set of public addresses.
      *
      * @param network         The network to set the public addresses for.
      * @param publicAddresses The set of public addresses to be set.
@@ -87,11 +91,7 @@ public class PublicAddressesComposition {
     public void addPublicAddressesToNetwork(Network network, Set<PublicAddress> addresses) {
         assert network != null;
         assert addresses != null;
-        if (addresses.isEmpty()) {
-            this.publicAddresses.remove(network);
-            return;
-        }
-        this.publicAddresses.put(network, new HashSet<>(addresses));
+        this.publicAddresses.computeIfAbsent(network, k -> new HashSet<>()).addAll(addresses);
     }
 
     /**
@@ -115,10 +115,11 @@ public class PublicAddressesComposition {
      * @return True if a public address with the specified label exists for the given network, false otherwise.
      */
     public boolean hasPublicAddressWithLabelWithinNetwork(Network network, String label) {
-        return publicAddresses
-            .getOrDefault(network, Collections.emptySet())
-            .stream()
-            .anyMatch(addr -> addr.label.equals(label));
+        return publicAddresses.entrySet().stream()
+            .filter(entry -> entry.getKey().equals(network))
+            .flatMap(entry -> entry.getValue().stream())
+            .anyMatch(publicAddress -> publicAddress.getLabel().equals(label));
+
     }
 
     /**
@@ -147,6 +148,7 @@ public class PublicAddressesComposition {
      * @return A new PublicAddressesComposition with the updated public addresses.
      */
     public PublicAddressesComposition add(PublicAddress newPublicAddress) {
+        assert newPublicAddress != null;
         Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
             .map(entry -> {
                 Set<PublicAddress> updatedAddresses = entry.getValue().stream()
@@ -214,18 +216,18 @@ public class PublicAddressesComposition {
      * @param publicAddress The public address to check.
      * @return True if the public address string exists, false otherwise.
      */
-    public Boolean isPublicAddressStringAmongAllNetworks(PublicAddress publicAddress) {
+    public Boolean containsPublicAddressStringAmongAllNetworks(PublicAddress publicAddress) {
         return publicAddresses.values().stream()
             .flatMap(Set::stream)
             .anyMatch(pa -> pa.isPublicAddressStringEquals(publicAddress.getPublicAddressString()));
     }
 
     /**
-     * Returns the first public address in the composition.
+     * Returns any public address in the composition, this public address is randomly selected.
      *
-     * @return The first public address, or null if the composition is empty.
+     * @return a any public address, or null if the composition is empty.
      */
-    public PublicAddress getFirstPublicAddress() {
+    public PublicAddress getAnyPublicAddress() {
         // publicAddresses map should not be null
         assert publicAddresses != null;
         // map should not be empty
@@ -234,10 +236,10 @@ public class PublicAddressesComposition {
         // each set should not be empty
         assert !publicAddresses.values().stream().anyMatch(Set::isEmpty);
 
-        // flatten map to get first public address
+        // flatten map to get any public address
         PublicAddress publicAddress =
             publicAddresses.values().stream().flatMap(Set::stream).findFirst().orElse(null);
-        // get first public address
+        // get any public address
         return publicAddress;
     }
 
