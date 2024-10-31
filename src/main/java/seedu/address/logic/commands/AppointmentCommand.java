@@ -55,7 +55,7 @@ public class AppointmentCommand extends Command {
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> nric.equals(person.getNric()))
                 .findFirst();
-        
+
         if (personWithMatchingNric.isPresent()) {
             Person personToEdit = personWithMatchingNric.get();
             Person editedPerson = new Person(
