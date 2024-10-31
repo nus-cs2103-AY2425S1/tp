@@ -548,19 +548,30 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add i/S6516486H n/Bernard Lim p/98375489 e/b.lim@me.com a/80, Lorong 4 Toa Payoh, #12-34 c/7`<br>
       Expected: No new person is added. Error message is shown in the status bar.
 
+### Editing a person
+
+1. Editing a person's details
+   1. Prerequisites: List all people using the `list` command. There must be at least one person in the list.
+   
+   2. Test case: `edit 1 n/Jamus Lim p/97758933`
+      Expected: The person at index 1 is updated with the new name (Jamus Lim) and phone number (97758933). The updated details are shown in the list.
+   
+   3. Test case: `edit S1486256J a/Lorong 3 Toa Payoh, #12-34`
+      Expected: The person with NRIC S1486256J is updated with the new address (Lorong 3 Toa Payoh). The updated details are shown in the list.
+
 ### Deleting an elderly
 
 1. Deleting an elderly while all people are listed in the `personList`.
 
    1. Prerequisites: List all people using the `list` command. There must be at least one elderly in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First elderly shown in the list is deleted from the list. Details of the deleted elderly are displayed in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No elderly is deleted. Error details is displayed in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an integer larger than the size of the list)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an integer larger than the size of the list)<br>
       Expected: Similar to the previous case.
 
 ### Finding a person
