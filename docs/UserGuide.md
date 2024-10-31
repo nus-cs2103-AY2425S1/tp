@@ -175,7 +175,9 @@ Examples:
 
 Adds a grade to a person's module
 
-Format: `grade ID m/MODULE g/GRADE`
+```bash
+grade ID m/MODULE g/GRADE
+```
 
 * Adds a grade to a person according to the specified ID and Module
 * Module specified must exist prior to execution grade command
