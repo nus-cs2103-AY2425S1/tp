@@ -233,6 +233,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+### Email Feature
+
+The email feature allows users to add, edit, and view email addresses for each person in the address book.
+
+#### Implementation
+
+The `Email` class represents a person's email address and is stored as a `String` in the `Person` class.
+
 ### Allergy Feature
 
 The allergy feature allows users to add, edit and view allergies for each person in the address book.
@@ -248,6 +256,14 @@ The tag feature allows users to add, edit, and view tags for each person in the 
 ### Implementation
 
 A tag is represented by the 'Tag' class and 'JsonAdaptedTag' is used for JSON serialization and deserialization.
+
+### Date Feature
+
+The date feature allows users to add, edit, and view dates for each person in the address book.
+
+#### Implementation
+
+The `Date` class represents a date.
 
 #### Design considerations:
 
