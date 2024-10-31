@@ -29,7 +29,7 @@ public class MarkAttendanceByTutorialCommand extends Command {
             + "Parameters: "
             + PREFIX_ATTENDANCE + "ATTENDANCE "
             + PREFIX_TUTORIAL + "TUTORIAL\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_ATTENDANCE + "20/10/2024 "
             + PREFIX_TUTORIAL + "Math";
 
@@ -79,7 +79,7 @@ public class MarkAttendanceByTutorialCommand extends Command {
 
         for (Participation currentParticipation : participationList) {
             if (containsMarkedAttendance(currentParticipation.getAttendanceList())) {
-                duplicateAttendanceStudents.append(currentParticipation.getStudentName() + " ");
+                duplicateAttendanceStudents.append(currentParticipation.getStudentName()).append(" ");
                 duplicateStudents++;
                 continue;
             }
@@ -92,7 +92,7 @@ public class MarkAttendanceByTutorialCommand extends Command {
 
             model.setParticipation(currentParticipation, updatedParticipation);
 
-            markedStudents.append(currentParticipation.getStudentName());
+            markedStudents.append(currentParticipation.getStudentName()).append(" ");
         }
 
         if (duplicateStudents == participationList.size()) {

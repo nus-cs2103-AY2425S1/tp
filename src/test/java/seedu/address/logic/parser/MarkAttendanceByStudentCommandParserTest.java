@@ -24,8 +24,9 @@ public class MarkAttendanceByStudentCommandParserTest {
     public void parse_validArgs_returnsMarkAttendanceByStudentCommand() {
         Attendance attendance = new Attendance(LocalDate.parse("12/12/2024",
                 Attendance.VALID_DATE_FORMAT));
+        Tutorial tutorial = new Tutorial("Math");
         MarkAttendanceByStudentCommand expectedCommand =
-                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, new Tutorial("Math"));
+                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, tutorial);
 
         assertParseSuccess(parser, "1 attend/12/12/2024 tut/Math", expectedCommand);
         assertParseSuccess(parser, "1 tut/Math attend/12/12/2024", expectedCommand);
@@ -88,7 +89,7 @@ public class MarkAttendanceByStudentCommandParserTest {
         assertParseFailure(parser, "1 attend/   tut/Math", Attendance.MESSAGE_CONSTRAINTS);
 
         assertParseFailure(parser, "1 attend/12/12/24 tut/Math", Attendance.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1 attend/12-12-2024 tut/@Math", Attendance.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 attend/12-12-2024 tut/Math", Attendance.MESSAGE_CONSTRAINTS);
     }
 
     @Test

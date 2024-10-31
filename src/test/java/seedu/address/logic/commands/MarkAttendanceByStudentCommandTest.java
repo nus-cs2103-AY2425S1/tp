@@ -143,20 +143,20 @@ public class MarkAttendanceByStudentCommandTest {
     }
 
     @Test
-    public void execute_NotEnrolledInTutorialUnfilteredList_throwsCommandException() {
+    public void execute_notEnrolledInTutorialUnfilteredList_throwsCommandException() {
         Tutorial tutorial = new Tutorial("Science");
         Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
 
         MarkAttendanceByStudentCommand markAttendanceCommand =
                 new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance, tutorial);
 
-        String expectedMessage = String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial);
+        String expectedMessage = String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject());
 
         assertCommandFailure(markAttendanceCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_DuplicateWeeklyAttendanceUnfilteredList_throwsCommandException() {
+    public void execute_duplicateWeeklyAttendanceUnfilteredList_throwsCommandException() {
         Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
 
         Tutorial tutorial = new Tutorial("Math");
@@ -225,7 +225,7 @@ public class MarkAttendanceByStudentCommandTest {
     }
 
     @Test
-    public void execute_NotEnrolledInTutorialFilteredList_throwsCommandException() {
+    public void execute_notEnrolledInTutorialFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Tutorial tutorial = new Tutorial("Science");
         Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
@@ -233,13 +233,13 @@ public class MarkAttendanceByStudentCommandTest {
         MarkAttendanceByStudentCommand markAttendanceCommand =
                 new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, tutorial);
 
-        String expectedMessage = String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial);
+        String expectedMessage = String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject());
 
         assertCommandFailure(markAttendanceCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_DuplicateWeeklyAttendanceFilteredList_throwsCommandException() {
+    public void execute_duplicateWeeklyAttendanceFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 

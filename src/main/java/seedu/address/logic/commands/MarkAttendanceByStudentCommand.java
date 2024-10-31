@@ -5,8 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
-import java.time.LocalDate;
-import java.time.temporal.IsoFields;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +74,7 @@ public class MarkAttendanceByStudentCommand extends Command {
                         && participation.getTutorial().equals(this.tutorial))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(
-                        String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial)));
+                        String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject())));
 
         for (Attendance currentAttendance : currentParticipation.getAttendanceList()) {
             if (currentAttendance.isSameWeek(attendance)) {
