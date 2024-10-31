@@ -47,11 +47,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_ADDRESS, PREFIX_COURSE);
         argMultimap.verifyNoDuplicateStudentId(args);
         StudentId studentId = ParserUtil.parseStudentId(preamble);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get().toUpperCase());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get().toUpperCase());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get().toUpperCase());
+        Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get().toUpperCase());
         Tag tag;
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());

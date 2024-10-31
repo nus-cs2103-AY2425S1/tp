@@ -24,6 +24,7 @@
     -fx-opacity: 1;
 }
 
+
 /* Text field styling */
 .text-field {
     -fx-font-size: 12pt;
@@ -135,6 +136,27 @@
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
+.field-header {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 5px;
+}
+
+.details_name {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 21px;
+    -fx-text-fill: #007BFF;
+    -fx-font-weight: bold;
+}
+
+.details_subinfo {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
     -fx-text-fill: #333333;
 }
 
@@ -396,6 +418,18 @@
     -fx-font-family: "Segoe UI";
 }
 
+.rounded_button {
+    -fx-background-radius: 20;
+    -fx-background-color: #1fbbe2;
+    -fx-text-fill: white;
+    -fx-padding: 5px 15px;
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-traversable: false;
+}
+
+
 .custom-title {
     -fx-font-size: 20px;
     -fx-font-family: "Segoe UI";
@@ -406,7 +440,7 @@
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: #007BFF;
-    -fx-border-width: 1px;
+    -fx-border-width: 0px;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-padding: 10px;
