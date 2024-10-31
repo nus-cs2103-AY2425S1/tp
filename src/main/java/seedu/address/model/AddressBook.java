@@ -26,13 +26,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
         groups = new GroupList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -52,6 +52,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    /**
+     * Replaces the contents of the groups list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -60,6 +67,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setGroups(newData.getGroupList());
     }
 
     //// person-level operations
@@ -71,6 +79,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
+
     /**
      * Returns true if a group with the same identity as {@code group} exists in the address book.
      */

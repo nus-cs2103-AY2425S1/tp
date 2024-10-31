@@ -172,7 +172,7 @@ public class ModelManager implements Model {
      * Deletes the specified group from the list of groups.
      *
      * @param groupToDelete The group to be deleted.
-     * @throws NullPointerException if {@code groupToDelete} is null.
+     * @throws NullPointerException     if {@code groupToDelete} is null.
      * @throws IllegalArgumentException if the group does not exist in the list.
      */
     @Override
