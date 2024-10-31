@@ -46,7 +46,7 @@ destroy ListAppointmentsCommandParser
 AddressBookParser --> LogicManager : l
 deactivate AddressBookParser
 
-LogicManager -> ListAppointmentsCommand : execute()
+LogicManager -> ListAppointmentsCommand : execute(m)
 activate ListAppointmentsCommand
 
 ListAppointmentsCommand -> Model : getFilteredPersonList()
