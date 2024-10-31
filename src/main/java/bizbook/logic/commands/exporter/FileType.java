@@ -15,7 +15,7 @@ public enum FileType {
     /**
      * Creates an {@link Exporter} for this file type
      */
-    public Exporter export(ReadOnlyUserPrefs userPrefs) {
+    public Exporter exporter(ReadOnlyUserPrefs userPrefs) {
         return switch (this) {
         case CSV -> new CsvExporter(userPrefs);
         case VCF -> new VcfExporter(userPrefs);

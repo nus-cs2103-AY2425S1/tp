@@ -44,7 +44,7 @@ public class ExportCommand extends Command {
         requireNonNull(model);
 
         try {
-            Exporter exporter = fileType.export(model.getUserPrefs());
+            Exporter exporter = fileType.exporter(model.getUserPrefs());
             exporter.exportAddressBook(model.getAddressBook());
         } catch (IOException io) {
             throw new CommandException(String.format(MESSAGE_FAILED_TO_SAVE, fileType));
