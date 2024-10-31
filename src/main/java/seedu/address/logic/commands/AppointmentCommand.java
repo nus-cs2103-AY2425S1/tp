@@ -25,7 +25,7 @@ public class AppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets an appointment for the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer), a/APPOINTMENT (in the format DD-MM-YYYY HH:MM)\n"
+            + "Parameters: NRIC, a/APPOINTMENT (in the format DD-MM-YYYY HH:MM)\n"
             + "Example: " + COMMAND_WORD + " 1 a/25-12-2024 14:30";
 
     public static final String MESSAGE_SET_APPOINTMENT_SUCCESS = "Set Appointment for Person: %1$s";

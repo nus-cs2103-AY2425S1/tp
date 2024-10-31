@@ -23,10 +23,10 @@ public class RemarkCommand extends Command {
 
     public static final String COMMAND_WORD_SHORT = "r";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remarks section of the patient identified "
+            + "by the patient's NRIC. "
             + "Existing remark will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: NRIC "
             + PREFIX_REMARK + "[REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_REMARK + "Likes to swim.";

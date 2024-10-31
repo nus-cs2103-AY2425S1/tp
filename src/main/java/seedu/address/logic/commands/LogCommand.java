@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
 public class LogCommand extends Command {
     public static final String COMMAND_WORD = "log";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Logs information of a patient.\n"
-            + "Parameters: INDEX (must be a positive integer), "
+            + "Parameters: NRIC, "
             + "TIMESTAMP (in the format DD-MM-YYYY HH:MM),"
             + "INFO (non-empty)\n"
             + "Example: " + COMMAND_WORD + " S1234567A 25-12-2024 14:30 Attended appointment";
