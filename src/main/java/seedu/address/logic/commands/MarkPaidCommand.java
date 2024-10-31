@@ -64,10 +64,10 @@ public class MarkPaidCommand extends Command {
             throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, personToMarkPayment.getName()));
         }
 
-        for (Participation participation : participationsToDelete) {
+        for (int i = 0; i < participationsToDelete.size(); i++) {
             Participation updatedParticipation = new Participation(markedPerson,
-                    participation.getTutorial(), participation.getAttendanceList());
-            model.setParticipation(participation, updatedParticipation);
+                    participationsToDelete.get(i).getTutorial(), participationsToDelete.get(i).getAttendanceList());
+            model.setParticipation(participationsToDelete.get(i), updatedParticipation);
         }
 
         model.setPerson(personToMarkPayment, markedPerson);
