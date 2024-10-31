@@ -55,9 +55,9 @@ public class PersonCard extends UiPart<Region> {
                     Label tagLabel = new Label(tag.tagName);
 
                     // Apply the CSS class for "customer" tag
-                    if (tag.tagName.equals("customer")) {
+                    if (tag.tagName.equals("Customer")) {
                         tagLabel.getStyleClass().add("tag-customer");  // Ensure that the "tag-customer" style is defined in your CSS
-                    } else if (tag.tagName.equals("supplier")) {
+                    } else if (tag.tagName.equals("Supplier")) {
                             tagLabel.getStyleClass().add("tag-supplier");
                         }
                     tags.getChildren().add(tagLabel);

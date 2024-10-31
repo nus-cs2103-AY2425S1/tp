@@ -41,7 +41,7 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
 
 
         // Add the "customer" tag explicitly
-        tagList.add(new Tag("customer"));
+        tagList.add(new Tag("Customer"));
 
         Customer customer = new Customer(name, phone, email, address, information, remark, tagList);
 
