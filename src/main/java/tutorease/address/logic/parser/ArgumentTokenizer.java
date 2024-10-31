@@ -36,22 +36,23 @@ public class ArgumentTokenizer {
      * @return           List of zero-based prefix positions in the given arguments string
      */
     private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
+        String lowerCaseArgsString = argsString.toLowerCase();
         return Arrays.stream(prefixes)
-                .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
+                .flatMap(prefix -> findPrefixPositions(lowerCaseArgsString, prefix, prefix.getPrefix().toLowerCase()).stream())
                 .collect(Collectors.toList());
     }
 
     /**
      * {@see findAllPrefixPositions}
      */
-    private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
+    private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix, String prefixString) {
         List<PrefixPosition> positions = new ArrayList<>();
 
-        int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
+        int prefixPosition = findPrefixPosition(argsString, prefixString, 0);
         while (prefixPosition != -1) {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
             positions.add(extendedPrefix);
-            prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
+            prefixPosition = findPrefixPosition(argsString, prefixString, prefixPosition + prefixString.length());
         }
 
         return positions;
