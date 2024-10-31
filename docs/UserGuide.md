@@ -95,7 +95,7 @@ Examples:
 
 ### Filtering internship applications by status: `/filter`
 
-Filters internship applications with specified status.
+Filters through all the existing internship applications with specified status. Using /filter after /find resets the search and are not stackable.
 
 Format: `/filter STATUS`
 
@@ -185,8 +185,9 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE` <br> e.g., `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 **Clear**  | `/clear`
-**Delete** | `/delete INDEX`<br> e.g., `/delete 3`
-**Find**   | `/find KEYWORD [MORE_KEYWORDS]`<br> e.g., `/find Google Facebook`
+**Delete** | `/d INDEX`<br> e.g., `/delete 3`
+**Find**   | `/f KEYWORD [MORE_KEYWORDS]`<br> e.g., `/find Google Facebook`
+**Filter** | `/filter STATUS`<br> e.g., `/filter pending`
 **List**   | `/list`
 **Help**   | `/help`
 **Accept** | `/accept INDEX`<br> e.g., `/accept 2`
