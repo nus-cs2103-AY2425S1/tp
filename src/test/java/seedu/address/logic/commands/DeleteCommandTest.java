@@ -88,7 +88,7 @@ public class DeleteCommandTest {
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         IdentityNumber identityNumber = person.getIdentityNumber();
         DeleteCommand deleteCommand = new DeleteCommand(identityNumber);
-        String expected = DeleteCommand.class.getCanonicalName() + "{identityNumber=" + identityNumber + "}";
+        String expected = "Delete person with NRIC: " + identityNumber;
         assertEquals(expected, deleteCommand.toString());
     }
 

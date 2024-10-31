@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 
 import java.util.List;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -52,6 +51,12 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
+    /**
+     * Validates the input of the command.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @throws CommandException if the input is invalid.
+     */
     public void validateInput(Model model) throws CommandException {
         List<Person> lastShownList = model.getPersonList();
         Person personToDelete = null;
