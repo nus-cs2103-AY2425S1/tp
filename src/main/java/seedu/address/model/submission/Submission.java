@@ -13,7 +13,7 @@ public class Submission {
     public static final String NAME_MESSAGE_CONSTRAINTS =
             "Submission names should only contain alphanumeric characters and spaces, and it should not be blank.";
     public static final String STATUS_MESSAGE_CONSTRAINTS =
-            "Submission status should only be \"Y\" or \"N\".";
+            "Submission status should only be \"Y\", \"N\" or \"NIL\".";
 
     /**
      * The first character of the submission name must not be a whitespace,
@@ -61,14 +61,6 @@ public class Submission {
      */
     public static boolean isValidSubmissionStatus(String submissionStatus) {
         return submissionStatus.matches(STATUS_VALIDATION_REGEX);
-    }
-
-    public String getSubmissionName() {
-        return submissionName;
-    }
-
-    public String getSubmissionStatus() {
-        return submissionStatus;
     }
 
     @Override
