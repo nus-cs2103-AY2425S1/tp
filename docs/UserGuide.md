@@ -39,6 +39,12 @@ your contact management tasks done faster than traditional GUI apps.
 
    * `appointment-list` : Lists all upcoming scheduled appointments.
 
+   * `edit John Doe n/John Doo` : Edits the name of John Doe to John Doo.
+
+   * `view John Doe` : Shows the details of John Doe.
+
+   * `find John Doe` : Searches for John Doe in the current list.
+
    * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
 
    * `reminder-delete John Doe` : Deletes the reminder set for John Doe.
@@ -308,6 +314,21 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+* **Client**: A person receiving services from the physiotherapist. He/she should have 
+a unique name (not case-sensitive).
+* **Client contact detail**: A contact detail that includes name, phone number, email address,
+  address, appointment details, tags etc.
+* **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
+* **Appointment details**: Information on the appointment including date, time, notes and payment details.
+* **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement,
+strength, flexibility, or overall physical function.
+* **Tag**: A label to indicate the treatment type of the client.
+* **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -327,17 +348,16 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/anklesprain t/acltear`
+**Appointment Delete** | `appointment-delete NAME d/DATE_AND_TIME`<br> e.g., `appointment-delete John Doe d/2024-10-20 1100`
+**Appointment List** | `appointment-list [d/DATE][TIME]` <br> e.g., `appointment-list d/2024-10-20 1100`
 **Clear** | `clear`
 **Delete** | `delete NAME`<br> e.g., `delete John Doe`
-**Schedule** | `schedule NAME d/DATE_AND_TIME…​ [note/NOTES]…​`
-**Appointment Delete** | `appointment-delete NAME d/DATE_AND_TIME`<br> e.g., `appointment-delete John Doe d/2024-10-20 1100`
-**Appointment List** | `appointment-list [DATE_AND_TIME]` <br> e.g., `appointment-list 2024-10-20 1100`
-**Reminder** | `reminder NAME r/REMINDER_TIME`
-**Reminder Delete** | `reminder-delete NAME`
 **Edit** | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee e/jameslee@example.com`
 **Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find p/8357 2348`
-**Payment** | `payment NAME d/DATE_and_TIME pay/PAYMENT_STATUS` <br> e.g., `payment John Doe 2024-10-20 1100 pay/paid`
-**Appointment List** | `appointment-list [d/DATE][TIME]` <br> e.g., `appointment-list d/2024-10-20 1100`
-**List** | `list`
 **Help** | `help`
-**View** | `view [NAME]`
+**List** | `list`
+**Payment** | `payment NAME d/DATE_and_TIME pay/PAYMENT_STATUS` <br> e.g., `payment John Doe 2024-10-20 1100 pay/paid`
+**Reminder** | `reminder NAME r/REMINDER_TIME`
+**Reminder Delete** | `reminder-delete NAME`
+**Schedule** | `schedule NAME d/DATE_AND_TIME…​ note/NOTES…​`
+**View** | `view NAME`

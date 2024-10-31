@@ -626,7 +626,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 and Personal Data Protection Act (PDPA), so that I manage client data in a compliant manner.
 4.  Should be compatible with any Operating System supporting Java 17 (Windows, macOS, Linux).
 5.  Should function completely offline.
-6.  Jar file size should not exceed 150MB.
+6.  Jar file size should not exceed 100MB.
 
 
 ### Glossary
