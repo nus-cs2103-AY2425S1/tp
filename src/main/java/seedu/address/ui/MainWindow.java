@@ -163,9 +163,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleTheme() {
         if (isDarkTheme) {
-            getRoot().getScene().getStylesheets().setAll(getClass().getResource("/view/GrubTheme.css").toExternalForm());
+            getRoot().getScene().getStylesheets().setAll(getClass()
+                    .getResource("/view/GrubTheme.css").toExternalForm());
         } else {
-            getRoot().getScene().getStylesheets().setAll(getClass().getResource("/view/AB3/DarkTheme.css").toExternalForm());
+            getRoot().getScene().getStylesheets().setAll(getClass()
+                    .getResource("/view/AB3/DarkTheme.css").toExternalForm());
         }
         isDarkTheme = !isDarkTheme;
     }
