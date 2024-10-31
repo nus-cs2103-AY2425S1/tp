@@ -12,6 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 
+import java.util.List;
+
 /**
  * Adds a group to the address book.
  */
@@ -28,30 +30,40 @@ public class AddGroupCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GROUP_NAME + "Group 1 ";
 
-    public static final String MESSAGE_SUCCESS = "New group added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New group(s) added: %1$s";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group detected";
 
-    private final Group toAdd;
+    private final List<Group> toAdd;
 
     /**
      * Creates an AddGroupCommand to add the specified {@code Group}.
      */
-    public AddGroupCommand(Group group) {
-        requireNonNull(group);
-        toAdd = group;
+    public AddGroupCommand(List<Group> groups) {
+        requireNonNull(groups);
+        toAdd = groups;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (model.hasGroup(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        String resultMessage = "";
+        if (toAdd.size() > 1) {
+            resultMessage += "\n";
         }
-
-        model.addGroup(toAdd);
+        int count = 0;
+        for (Group g: toAdd) {
+            if (model.hasGroup(g)) {
+                throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+            }
+            count++;
+            resultMessage += Messages.format(g);
+            if (count < toAdd.size()) {
+                resultMessage += "\n";
+            }
+            model.addGroup(g);
+        }
         model.setStateGroups();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), LIST_GROUP_MARKER);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, resultMessage), LIST_GROUP_MARKER);
     }
 
     @Override
