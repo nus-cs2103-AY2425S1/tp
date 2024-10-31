@@ -17,6 +17,7 @@ title: AcademyAssist User Guide
    * [Viewing all student](#viewing-all-students--view)
    * [Finding a student](#finding-a-student--find)
    * [Sorting students](#sorting-students--sort)
+   * [Tracking student count for each subject](#tracking-student-count-for-each-subject--tracksubject)
    * [Clearing all entries](#clearing-all-entries--clear)
    * [Getting help](#getting-help--help)
    * [Exiting the program](#exiting-the-program--exit)
@@ -196,6 +197,14 @@ Examples:
 
 ![Sort Success Message](/images/sort.png)
 
+### Tracking student count for each subject : `tracksubject`
+
+Displays a window that shows how many students are taking each of the 4 subjects.
+
+Format: `tracksubject`
+
+![TrackSubject Success Message](/images/tracksubject.png)
+
 ### Clearing all entries : `clear`
 
 Clears all student entries from the system.
@@ -206,7 +215,7 @@ Format: `clear`
 
 ### Getting help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a help window with details of how to use the different commands.
 
 Format: `help`
 
@@ -275,15 +284,16 @@ the data of your previous AcademyAssist folder.
 
 ## Command summary
 
-| Action | Format, Examples                                                                                                                                                                        |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
-| **Delete** | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
-| **Edit** | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
-| **View** | `view`                                                                                                                                                                                  |
-| **Find** | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
-| **Add Class** | `addc STUDENT_ID s/SUBJECT`<br> e.g., `addc S00003 Science`                                                                                                                             |
-| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
-| **Clear** | `clear`                                                                                                                                                                                 |
-| **Help** | `help`                                                                                                                                                                                  |
-| **Exit** | `exit`                                                                                                                                                                                  |
+| Action            | Format, Examples                                                                                                                                                                        |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
+| **Delete**        | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
+| **Edit**          | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
+| **View**          | `view`                                                                                                                                                                                  |
+| **Find**          | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
+| **Add Class**     | `addc STUDENT_ID s/SUBJECT`<br> e.g., `addc S00003 Science`                                                                                                                             |
+| **Sort**          | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
+| **Track Subject** | `tracksubject`                                                                                                                                                                           |
+| **Clear**         | `clear`                                                                                                                                                                                 |
+| **Help**          | `help`                                                                                                                                                                                  |
+| **Exit**          | `exit`                                                                                                                                                                                  |
