@@ -67,7 +67,7 @@ public class Messages {
                 .append("; Venue: ")
                 .append(event.getVenue())
                 .append("; Celebrity: ")
-                .append(event.getCelebrity())
+                .append(event.getCelebrityName())
                 .append("; Contacts: ")
                 .append(event.getContactsString());
         return builder.toString();
