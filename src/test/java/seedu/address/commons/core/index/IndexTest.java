@@ -60,6 +60,7 @@ public class IndexTest {
         // wildcard comparison
         Index wildcardIndex = Index.getWildcardIndex();
         assertTrue(wildcardIndex.equals(Index.getWildcardIndex()));
+        assertFalse(wildcardIndex.equals(Index.fromZeroBased(0)));
     }
 
     @Test

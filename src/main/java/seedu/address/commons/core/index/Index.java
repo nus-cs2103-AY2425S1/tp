@@ -31,14 +31,14 @@ public class Index {
     };
 
     public int getZeroBased() {
-        if (this.equals(Index.WILDCARD)) {
+        if (this == Index.WILDCARD) {
             throw new UnsupportedOperationException("Wildcard index does not have a zero-based index.");
         }
         return zeroBasedIndex;
     }
 
     public int getOneBased() {
-        if (this.equals(Index.WILDCARD)) {
+        if (this == Index.WILDCARD) {
             throw new UnsupportedOperationException("Wildcard index does not have a one-based index.");
         }
         return zeroBasedIndex + 1;
@@ -74,10 +74,6 @@ public class Index {
         // instanceof handles nulls
         if (!(other instanceof Index)) {
             return false;
-        }
-
-        if (other == Index.WILDCARD) {
-            return this == other;
         }
 
         Index otherIndex = (Index) other;

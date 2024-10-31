@@ -26,7 +26,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_SORT_ORDER = "Sort order is not 1 or -1, or invalid field provided.";
-    public static final String WILDCARD = "*";
+    public static final String INDEX_WILDCARD = "*";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -48,7 +48,7 @@ public class ParserUtil {
      */
     public static Index parseIndexAllowWildcard(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (trimmedIndex.equals(ParserUtil.WILDCARD)) {
+        if (trimmedIndex.equals(ParserUtil.INDEX_WILDCARD)) {
             return Index.getWildcardIndex();
         }
         return ParserUtil.parseIndex(trimmedIndex);
