@@ -3,13 +3,17 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -30,6 +34,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_PATIENT_NAME_JOHN = "John Doe";
+    public static final String VALID_DOCTOR_NAME_JANE = "Jane Doe";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -42,11 +48,15 @@ public class CommandTestUtil {
     public static final String VALID_DOB_BOB = "15-06-1984";
     public static final String VALID_GENDER_AMY = "F";
     public static final String VALID_GENDER_BOB = "M";
+    public static final String VALID_DATE = "28-10-2024";
+    public static final String VALID_TIME = "1400";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String PATIENT_NAME_DESC_JOHN = " " + PREFIX_PATIENT_NAME + VALID_PATIENT_NAME_JOHN;
+    public static final String DOCTOR_NAME_DESC_JANE = " " + PREFIX_DOCTOR_NAME + VALID_DOCTOR_NAME_JANE;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -59,10 +69,16 @@ public class CommandTestUtil {
     public static final String DOB_DESC_BOB = " " + PREFIX_DOB + VALID_DOB_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
+    public static final String DATE_DESC = " " + PREFIX_DATE + VALID_DATE;
+    public static final String TIME_DESC = " " + PREFIX_TIME + VALID_TIME;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_PATIENT_NAME_DESC = " " + PREFIX_PATIENT_NAME
+            + "Roy&"; // '&' not allowed in patient names
+    public static final String INVALID_DOCTOR_NAME_DESC = " " + PREFIX_DOCTOR_NAME
+            + "Tim&"; // '&' not allowed in doctor names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
@@ -70,6 +86,8 @@ public class CommandTestUtil {
             + "ortho123"; // only alphabets allowed in specialties
     public static final String INVALID_DOB_DESC = " " + PREFIX_DOB + "2024/09/20/"; // dob must use DD-MM-YYYY format
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "G"; // gender must be either F or M or O
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2024/09/20/"; // date must use DD-MM-YYYY format
+    public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "9.00"; // time must use HHmm format
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
