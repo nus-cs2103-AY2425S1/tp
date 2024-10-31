@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.group.DeleteGroupCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
