@@ -2,8 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.NoSuchElementException;
 
@@ -27,19 +28,16 @@ public class CreateTutorialCommandParserTest {
     @Test
     public void parse_validInput_returnsCreateTutorialCommand() throws Exception {
         String args = " tut/Math";
-        CreateTutorialCommand command = parser.parse(args);
-
         // Check that the parser returns a CreateTutorialCommand with the correct parameters
-        assertEquals(new CreateTutorialCommand(new Tutorial("Math")), command);
+        assertParseSuccess(parser, args, new CreateTutorialCommand(new Tutorial("Math")));
     }
 
     @Test
     public void parse_missingTutorialPrefix_throwsParseException() {
         String args = "Math";
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(args));
-
-        // Verify that the exception message contains the expected usage message
-        assertTrue(exception.getMessage().contains(CreateTutorialCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, args, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                CreateTutorialCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -48,7 +46,8 @@ public class CreateTutorialCommandParserTest {
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(args));
 
         // Verify exception message matches expected usage information
-        assertTrue(exception.getMessage().contains(CreateTutorialCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, args, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                CreateTutorialCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -56,8 +55,7 @@ public class CreateTutorialCommandParserTest {
         String args = " tut/Math tut/Science"; // Duplicate tutorial prefix
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(args));
 
-        // Check exception message for usage details
-        assertEquals(exception.getMessage(), Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL));
+        assertParseFailure(parser, args, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL));
     }
 
     @Test
@@ -65,17 +63,16 @@ public class CreateTutorialCommandParserTest {
         String args = "tut/";
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(args));
 
-        // Ensure exception message contains expected usage format
-        assertTrue(exception.getMessage().contains(CreateTutorialCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, args, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                CreateTutorialCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_extraWhitespace_returnsCreateTutorialCommand() throws Exception {
         String args = "   tut/History   "; // Valid input with extra whitespace
         CreateTutorialCommand command = parser.parse(args);
-
         // Check that the parser returns a CreateTutorialCommand with the correct parameters
-        assertEquals(new CreateTutorialCommand(new Tutorial("History")), command);
+        assertParseSuccess(parser, args, new CreateTutorialCommand(new Tutorial("History")));
     }
 
     @Test
@@ -83,8 +80,7 @@ public class CreateTutorialCommandParserTest {
         String args = " tut/Math123!";
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(args));
 
-        // Check if the exception message matches expected output
-        assertTrue(exception.getMessage().contains(Tutorial.MESSAGE_CONSTRAINTS));
+        assertParseFailure(parser, args, Tutorial.MESSAGE_CONSTRAINTS);
     }
 
     @Test
