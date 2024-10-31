@@ -3,9 +3,9 @@ package seedu.address.model.job;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BARISTA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REQUIREMENTS_BARISTA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BARISTA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_DESCRIPTION_BARISTA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_REQUIREMENTS_BARISTA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_SALARY_BARISTA;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalJobs.BARISTA;
 import static seedu.address.testutil.TypicalJobs.SWE;
@@ -42,9 +42,9 @@ class UniqueJobListTest {
     public void contains_jobWithSameIdentityFieldsInList_returnsTrue() {
         uniqueJobList.add(SWE);
         Job editedSwe = new JobBuilder(SWE)
-                .withSalary(VALID_SALARY_BARISTA)
-                .withRequirements(VALID_REQUIREMENTS_BARISTA)
-                .withDescription(VALID_DESCRIPTION_BARISTA)
+                .withSalary(VALID_JOB_SALARY_BARISTA)
+                .withRequirements(VALID_JOB_REQUIREMENTS_BARISTA)
+                .withDescription(VALID_JOB_DESCRIPTION_BARISTA)
                 .build();
         assertTrue(uniqueJobList.contains(editedSwe));
     }

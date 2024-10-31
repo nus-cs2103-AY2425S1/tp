@@ -68,34 +68,46 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withRole(VALID_ROLE_AMY)
-                .withSkills(VALID_SKILL_PYTHON).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withRole(VALID_ROLE_BOB)
-                .withSkills(VALID_SKILL_CUDA, VALID_SKILL_PYTHON).build();
+        DESC_AMY = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY)
+                .withRole(VALID_ROLE_AMY)
+                .withSkills(VALID_SKILL_PYTHON)
+                .build();
+        DESC_BOB = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withRole(VALID_ROLE_BOB)
+                .withSkills(VALID_SKILL_CUDA, VALID_SKILL_PYTHON)
+                .build();
     }
 
     // Test data for Jobs
-    public static final String VALID_JOBNAME_BARISTA = "Full-time Barista";
-    public static final String VALID_COMPANY_BARISTA = "Starbucks, Singapore";
-    public static final String VALID_SALARY_BARISTA = "2500";
-    public static final String[] VALID_REQUIREMENTS_BARISTA = {"Strong", "Pleasant"};
-    public static final String VALID_DESCRIPTION_BARISTA =
+    public static final String VALID_JOB_NAME_BARISTA = "Full-time Barista";
+    public static final String VALID_JOB_COMPANY_BARISTA = "Starbucks, Singapore";
+    public static final String VALID_JOB_SALARY_BARISTA = "2500";
+    public static final String[] VALID_JOB_REQUIREMENTS_BARISTA = {"Strong", "Pleasant"};
+    public static final String VALID_JOB_DESCRIPTION_BARISTA =
             "At Starbucks, we are looking for someone who brings a " + "lot to the table";
 
-    public static final String JOBNAME_DESC_BARISTA = " " + PREFIX_NAME + VALID_JOBNAME_BARISTA;
-    public static final String COMPANY_DESC_BARISTA = " " + PREFIX_COMPANY + VALID_COMPANY_BARISTA;
-    public static final String SALARY_DESC_BARISTA = " " + PREFIX_SALARY + VALID_SALARY_BARISTA;
-    public static final String REQUIREMENTS_DESC_BARISTA = " " + PREFIX_REQUIREMENTS + VALID_REQUIREMENTS_BARISTA;
-    public static final String DESCRIPTION_DESC_BARISTA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BARISTA;
+    public static final String JOB_NAME_DESC_BARISTA = " " + PREFIX_NAME + VALID_JOB_NAME_BARISTA;
+    public static final String JOB_COMPANY_DESC_BARISTA = " " + PREFIX_COMPANY + VALID_JOB_COMPANY_BARISTA;
+    public static final String JOB_SALARY_DESC_BARISTA = " " + PREFIX_SALARY + VALID_JOB_SALARY_BARISTA;
+    public static final String JOB_REQUIREMENTS_DESC_BARISTA =
+            " " + PREFIX_REQUIREMENTS + VALID_JOB_REQUIREMENTS_BARISTA;
+    public static final String JOB_DESCRIPTION_DESC_BARISTA = " " + PREFIX_DESCRIPTION + VALID_JOB_DESCRIPTION_BARISTA;
 
-    public static final String INVALID_JOBNAME_DESC = " " + PREFIX_NAME + "!val!d"; // '!' not allowed in name
-    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "!val!d"; // '!' not allowed in name
-    public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "$100/day"; // only numbers are allowed
-    public static final String INVALID_REQUIREMENTS_DESC = " " + PREFIX_REQUIREMENTS + "!val!d"; // '!' not allowed
-    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "!val!d"; //'!' not allowed
+    public static final String INVALID_JOB_NAME_DESC = " " + PREFIX_NAME + "!val!d"; // '!' not allowed in name
+    public static final String INVALID_JOB_COMPANY_DESC = " " + PREFIX_COMPANY + "!val!d"; // '!' not allowed in name
+    public static final String INVALID_JOB_SALARY_DESC = " " + PREFIX_SALARY + "$100/day"; // only numbers are allowed
+    public static final String INVALID_JOB_REQUIREMENTS_DESC = " " + PREFIX_REQUIREMENTS + "!val!d"; // '!' not allowed
+    public static final String INVALID_JOB_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "!val!d"; //'!' not allowed
 
+    // Test data for Companies
+    public static final String VALID_COMPANY_NAME_GOOGLE = "Google LLC";
+    public static final String VALID_COMPANY_NAME_NUS = "NUS";
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -143,6 +155,7 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredJobList, actualModel.getFilteredJobList());
         assertEquals(expectedFilteredCompanyList, actualModel.getFilteredCompanyList());
     }
+
     /**
      * Updates {@code model}'s person filtered list to show only the person at the
      * given {@code targetIndex} in the {@code model}'s address book.
