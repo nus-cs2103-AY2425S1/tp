@@ -15,7 +15,7 @@ import java.time.format.ResolverStyle;
  */
 public class MeetingDate {
     public static final String MESSAGE_CONSTRAINTS =
-            "Meeting dates should be in the format dd-MM-yyyy and must be a valid date.";
+            "Meeting dates need to be in the format dd-MM-yyyy and must be a valid date.";
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu")
             .withResolverStyle(ResolverStyle.STRICT);
     public final String value;
