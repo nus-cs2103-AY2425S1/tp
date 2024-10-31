@@ -94,7 +94,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    static Person createEditedPerson(Person personToEdit, Name newName,
+    private static Person createEditedPerson(Person personToEdit, Name newName,
                                      EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 

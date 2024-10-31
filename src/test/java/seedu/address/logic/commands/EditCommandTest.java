@@ -17,6 +17,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalWeddings.getTypicalWeddingBook;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -163,10 +166,13 @@ public class EditCommandTest {
     }
 
     @Test
-    public void createEditedPerson_nullPerson_throwsAssertionError() {
+    public void createEditedPerson_nullPerson_throwsAssertionError() throws Exception {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        assertThrows(AssertionError.class, () ->
-                EditCommand.createEditedPerson(null, new Name(VALID_NAME_BOB), descriptor));
+        Method createEditedPersonMethod = EditCommand.class.getDeclaredMethod("createEditedPerson",
+                Person.class, Name.class, EditPersonDescriptor.class);
+        createEditedPersonMethod.setAccessible(true);
+        assertThrows(InvocationTargetException.class, () ->
+                createEditedPersonMethod.invoke(null, null, new Name(VALID_NAME_BOB), descriptor));
     }
 
     @Test
