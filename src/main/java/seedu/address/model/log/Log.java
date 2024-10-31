@@ -49,7 +49,7 @@ public class Log {
      * Return to string in the format "date|description" for JsonStorage
      */
     public String toStorageString() {
-        return appointmentDate.toString() + "|" + entry;
+        return appointmentDate.toString() + "|" + entry.getEntry();
     }
 
     /**
