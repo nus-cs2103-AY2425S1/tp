@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.controller.ConfirmationBypassController;
 import seedu.address.logic.commands.controller.ConfirmationController;
+import seedu.address.logic.commands.controller.ConfirmationWindowController;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
@@ -20,7 +20,7 @@ public class ClearCommand extends Command {
     private final ConfirmationController confirmationController;
 
     public ClearCommand() {
-        this.confirmationController = new ConfirmationBypassController();
+        this.confirmationController = new ConfirmationWindowController();
     }
 
     /**
