@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/maoxiongkai.png" width="200px">
 
 [[github](https://github.com/MAOXIONGKAI)]
-[[portfolio](team/maoxiongkai)]
+[[portfolio](team/maoxiongkai.md)]
 
 * Role: Team Lead
 
