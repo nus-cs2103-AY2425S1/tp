@@ -13,6 +13,7 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
+Class FilteredPersons
 Class GroupList
 Class Group
 Class Person
@@ -41,16 +42,19 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager *-down-> "1" FilteredPersons
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 AddressBook *--> "1" GroupList
 GroupList -[hidden]right-> UniquePersonList
+UniquePersonList -[hidden]right-> FilteredPersons
 
 GroupList --> "*" Group
 Group -up-|> UniquePersonList
 
 UniquePersonList --> "~* all" Person
+FilteredPersons --> "~* filtered" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
@@ -71,5 +75,4 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager -[norank]-> "~* filtered" Person
 @enduml
