@@ -160,19 +160,19 @@ public class ParserUtil {
         try {
             String from = trimmedTime[0].replaceFirst("from: ", "");
             fromDate = LocalDateTime.parse(from, formatter);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ParseException(Messages.MESSAGE_INVALID_TIME);
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
         }
 
         try {
             String to = trimmedTime[1].replaceFirst("to: ", "");
             toDate = LocalDateTime.parse(to, formatter);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
+        }
+
+        if (!Time.isValidTime(fromDate, toDate)) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ParseException(Messages.MESSAGE_INVALID_TIME);
         }
 
         return new Time(fromDate, toDate);
