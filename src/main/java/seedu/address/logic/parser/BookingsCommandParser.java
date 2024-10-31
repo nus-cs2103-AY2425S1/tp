@@ -19,7 +19,6 @@ public class BookingsCommandParser implements Parser<BookingsCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, BookingsCommand.MESSAGE_USAGE));
         }
-
         return new BookingsCommand(ParserUtil.parseDate(trimmedArgs));
     }
 }

@@ -26,7 +26,14 @@ public class BookingsCommand extends Command {
             + COMMAND_WORD + " 23/10/2024\n";
 
     private final LocalDate date;
+
+    /**
+     * Creates a BookingsCommand.
+     *
+     * @param date Date of appointments.
+     */
     public BookingsCommand(LocalDate date) {
+        requireNonNull(date);
         this.date = date;
     }
 
