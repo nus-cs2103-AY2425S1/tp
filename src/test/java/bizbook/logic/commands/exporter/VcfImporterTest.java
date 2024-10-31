@@ -41,7 +41,7 @@ public class VcfImporterTest {
     }
 
     @Test
-    public void import_fullPath_success() throws IOException {
+    public void import_fullPath_success() throws IOException, InvalidFileException {
         Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, TYPICAL_VCF_FILE_PATH);
         assertTrue(path.isAbsolute());
 
@@ -52,7 +52,7 @@ public class VcfImporterTest {
     }
 
     @Test
-    public void import_relativePath_success() throws IOException {
+    public void import_relativePath_success() throws IOException, InvalidFileException {
         // Convert absolute path to be relative to current directory
         Path path = convertToRelative(
                 TestUtil.getResourceFilePath(VcfImporter.class, TYPICAL_VCF_FILE_PATH));
@@ -65,7 +65,7 @@ public class VcfImporterTest {
     }
 
     @Test
-    public void import_single_success() throws IOException {
+    public void import_single_success() throws IOException, InvalidFileException {
         Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, SINGLE_VCF_FILE_PATH);
 
         AddressBook expectedAddressBook = new AddressBook();
