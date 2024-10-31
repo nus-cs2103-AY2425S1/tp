@@ -54,7 +54,7 @@ public class Address {
         }
 
         Address otherAddress = (Address) other;
-        return value.equals(otherAddress.value);
+        return value.toUpperCase().equals(otherAddress.value.toUpperCase());
     }
 
     @Override

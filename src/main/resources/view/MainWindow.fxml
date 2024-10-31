@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Button?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -30,14 +31,10 @@
         <HBox spacing="10" alignment="center" style="-fx-padding: 10px;">
           <Label text="EduContacts" styleClass="custom-title" />
           <Region HBox.hgrow="ALWAYS" />
-          <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" styleClass="custom-menu-bar">
-            <Menu mnemonicParsing="false" text="File" styleClass="custom-menu">
-              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help" styleClass="custom-menu">
-              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-            </Menu>
-          </MenuBar>
+          <HBox spacing="10" alignment="CENTER" styleClass="button-container">
+            <Button fx:id="exitButton" text="Exit" onAction="#handleExit" styleClass="rounded_button"/>
+            <Button fx:id="helpButton" text="Help" onAction="#handleHelp" styleClass="rounded_button"/>
+          </HBox>
         </HBox>
         <SplitPane dividerPositions="0.7" VBox.vgrow="ALWAYS">
           <VBox fx:id="leftPane" minWidth="340" prefWidth="340">

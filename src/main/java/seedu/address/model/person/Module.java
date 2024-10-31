@@ -67,7 +67,7 @@ public class Module {
         }
 
         Module otherModule = (Module) other;
-        return value.equals(otherModule.value);
+        return value.toUpperCase().equals(otherModule.value.toUpperCase());
     }
 
     @Override
