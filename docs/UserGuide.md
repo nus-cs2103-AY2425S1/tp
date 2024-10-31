@@ -197,9 +197,9 @@ No duplicate properties are allowed. Duplicate properties are checked based on:
 2. if the two properties are CONDO and HDB type, then the comparison is done based on postal code.
 3. if the two properties are both CONDO or HDB type, then the comparison is done based on postal code and unit.
 </box>
-<box type="important" seamless>
+<box type="warning" seamless>
 
-**Unit defaults**
+**Unit Defaults:**
 The Unit parameter for `LANDED` properties will default to 00-00 regardless of the unit value placed. This is because, a landed property is not segmented into multiple apartments and therefore, deemed to be a unit in itself.
 </box>
 
@@ -218,16 +218,16 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 * The `TYPE` is case-insensitive HDB, CONDO or LANDED.
 * The `MATCHING_PRICE` is a non-negative integer (i.e. No non-numeric symbols such as decimal points, currency symbols, etc.).
 
-* <box type="definition" seamless>
+<box type="definition" seamless>
 
-**Matching Price**: The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
+**Matching Price:** The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
 </box>
 <box type="warning" seamless>
 
 **Important**
 1. At least one optional prefix needs to be present for any filtering to be possible.
 2. Prices denoted in `gte/` and `lte/` parameters are checked based on the 'AND' condition. For example, `filterproperty gte/500 lte/60000` filters for properties greater than $500 and less than $60000.
-   </box>
+</box>
 
 Examples:
 * `filterproperty t/HDB gte/500 lte/60000` filters the properties for HDB with a lower bounded matching price of $500 and upper bounded matching price of $60000.
