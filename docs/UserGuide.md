@@ -108,7 +108,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 * `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`).
 * `PHONE_NUMBER` should be **numeric** digits, may include “-” or spaces. Example: `555-1234` or `555 1234`.
 * `EMAIL`  Standard email format: “user@example.com”.
-* `PAYMENT STATUS` Acceptable values are `pending`, `partial`, `paid`, `late`. Case-insensitive.
+* `PAYMENT STATUS` Acceptable values are `pending`, `partial`, `paid`, `late`. Case-insensitive. These values are displayed as an icon with the colours orange, yellow, green and red respectively.
 * `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case-insensitive.
 * `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case-insensitive.
 * `TAG` Should be alphanumeric. May contain spaces.
@@ -120,8 +120,9 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-1. The deadline could be the date you need to submit the project to the client
-2. The deadline could be the date by which you need to follow up with a potential client
+1. The deadline could be the date you need to submit the project to the client <br>
+2. The deadline could be the date by which you need to follow up with a potential client <br>
+3. You may hover over the Payment Status icon to view the Payment Status as text
 </div>
 
 ### Update Client Details : `edit`
@@ -152,7 +153,7 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-1. The deadline field will show an `[OVERDUE]` tag if the deadline has passed and the client status is still `active`, so if the client has paid, and you're business with them is finished, remember to set their client status to 'old' so the deadline field doesn't show `[OVERDUE]`.
+1. The deadline field will show an `OVERDUE` label if the deadline has passed and the client status is still `active`, so if the client has paid, and you're business with them is finished, remember to set their client status to 'old' so the deadline field doesn't show `OVERDUE`.
 </div>
 
 ### Locating Clients By Name: `find`
