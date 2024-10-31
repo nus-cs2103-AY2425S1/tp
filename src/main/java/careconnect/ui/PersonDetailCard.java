@@ -13,6 +13,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 /**
  * An UI component that displays detailed information of a {@code Person} in the right pane of
@@ -41,7 +42,7 @@ public class PersonDetailCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Text address;
     @FXML
     private Label addressLink;
     @FXML
