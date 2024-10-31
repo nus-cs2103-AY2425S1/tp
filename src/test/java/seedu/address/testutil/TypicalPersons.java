@@ -23,35 +23,63 @@ import seedu.address.model.person.Student;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-
-    public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withRole("student")
-            .withTags("friends").withAttendanceCount("3").build();
-    public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
-            .withRole("Student").withAttendanceCount("3")
+    public static final Student ALICE = new StudentBuilder()
+            .withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111")
+            .withEmail("alice@example.com")
+            .withPhone("94351253")
+            .withRole("student")
+            .withTags("friends")
+            .withAttendanceCount("3").build();
+    public static final Student BENSON = new StudentBuilder()
+            .withName("Benson Meier")
+            .withRole("Student")
+            .withAttendanceCount("3")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com")
+            .withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withRole("Student").withAttendanceCount("3")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-                            .withRole("Parent")
-                            .withEmail("cornelia@example.com").withAddress("10th street")
-                            .withTags("friends").build();
-    public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withRole("student").withAttendanceCount("3")
-            .withEmail("cornelia@example.com").withAddress("michegan ave").build();
-    public static final Person CARLMEIER = new PersonBuilder().withName("Carl Meier").withPhone("876452533")
+    public static final Student CARL = new StudentBuilder()
+            .withName("Carl Kurz")
+            .withPhone("95352563")
+            .withRole("Student")
+            .withAttendanceCount("3")
+            .withEmail("heinz@example.com")
+            .withAddress("wall street").build();
+    public static final Person DANIEL = new PersonBuilder()
+            .withName("Daniel Meier")
+            .withPhone("87652533")
             .withRole("Parent")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("omg").build();
-    public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withRole("sTuDenT").withAttendanceCount("3")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+            .withEmail("cornelia@example.com")
+            .withAddress("10th street")
+            .withTags("friends").build();
+    public static final Student ELLE = new StudentBuilder()
+            .withName("Elle Meyer")
+            .withPhone("9482224")
+            .withRole("student")
+            .withAttendanceCount("3")
+            .withEmail("cornelia@example.com")
+            .withAddress("michegan ave").build();
+    public static final Person CARLMEIER = new PersonBuilder()
+            .withName("Carl Meier")
+            .withPhone("876452533")
+            .withRole("Parent")
+            .withEmail("cornelia@example.com")
+            .withAddress("10th street")
+            .withTags("omg").build();
+    public static final Student FIONA = new StudentBuilder()
+            .withName("Fiona Kunz")
+            .withPhone("9482427")
+            .withRole("sTuDenT")
+            .withAttendanceCount("3")
+            .withEmail("lydia@example.com")
+            .withAddress("little tokyo").build();
+    public static final Person GEORGE = new PersonBuilder()
+            .withName("George Best")
+            .withPhone("9482442")
             .withRole("parent")
-            .withEmail("anna@example.com").withAddress("4th street").build();
+            .withEmail("anna@example.com")
+            .withAddress("4th street").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
