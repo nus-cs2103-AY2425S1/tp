@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -22,9 +23,13 @@ public class ExportCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsExportCommand() {
-        Path validPath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
+        Path validPath = TEST_DATA_FOLDER.resolve("validExportFile");
         File exportFile = validPath.toFile();
-        assertParseSuccess(parser, exportFile.toString(), new ExportCommand(exportFile));
+
+        Path afterParsePath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
+        File afterParseExportFile = afterParsePath.toFile();
+
+        assertParseSuccess(parser, exportFile.toString(), new ExportCommand(afterParseExportFile));
     }
 
     @Test
@@ -34,6 +39,6 @@ public class ExportCommandParserTest {
 
     @Test
     public void parse_nullPathInvalidArgs_throwsParseException() {
-        assertParseFailure(parser, null, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+        assertThrows(NullPointerException.class, () -> parser.parse(null));
     }
 }
