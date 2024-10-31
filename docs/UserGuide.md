@@ -86,7 +86,7 @@ Format: `help`
 
 Allows changing of a theme from Light Mode to Dark Mode and vice versa
 
-Under the `File` menu, select `Change Themes` button to switch between the 2 different themes
+Under the `File` menu, select `Change Theme` button to switch between the 2 different themes
 
 ![change themes](images/Changing-Themes.png)
 
