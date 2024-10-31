@@ -92,8 +92,8 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: #f0f8ff; 
-    -fx-background: #f0f8ff;  
+    -fx-background-color: #f0f8ff;
+    -fx-background: #f0f8ff;
 }
 
 .list-view .list-cell {
