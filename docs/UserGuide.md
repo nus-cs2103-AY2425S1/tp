@@ -82,6 +82,13 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Changing themes:
+
+Allows changing of a theme from Light Mode to Dark Mode and vice versa
+
+Under the `File` menu, select `Change Themes` button to switch between the 2 different themes
+
+![change themes](images/Changing-Themes.png)
 
 ### Adding a student: `student`
 
