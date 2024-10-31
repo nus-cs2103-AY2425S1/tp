@@ -239,7 +239,7 @@ Examples:
 
 ### Adding a Submission : `addSubmission`
 
-Adds a submission to every person in the address book.
+Adds a submission to every student in the address book.
 
 Format: `addSubmission sm/SUBMISSION_NAME`
 
@@ -255,7 +255,7 @@ Examples:
 
 ### Adding a Submission Status: `addSubmissionStatus`
 
-Adds a submission status for the specified submission for the person at the specified index.
+Adds a submission status for the specified submission for the student at the specified index.
 
 Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
 
@@ -267,6 +267,18 @@ Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
 Examples:
 * `addSubmissionStatus 1 sm/Assignment 1 ss/Y`
 * `addSubmissionStatus 1 sm/Tutorial 2 ss/NIL`
+
+### Deleting a Submission : `deleteSubmission`
+
+Deletes the specified submission from every student in the address book.
+
+Format: `deleteSubmission sm/SUBMISSION_NAME`
+
+* The submission name can only contain alphanumeric characters and spaces.
+* The submission name is case-sensitive. e.g. "Assignment 1" will be treated differently from "assignment 1".
+
+Examples:
+* `deleteSubmission sm/Assignment 1`
 
 ### Sorting the list : `sort`
 
