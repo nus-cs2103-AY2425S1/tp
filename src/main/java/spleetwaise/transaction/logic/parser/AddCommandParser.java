@@ -15,6 +15,7 @@ import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.parser.ArgumentMultimap;
 import spleetwaise.address.logic.parser.ArgumentTokenizer;
 import spleetwaise.address.logic.parser.Prefix;
+import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.logic.parser.Parser;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.AddCommand;
@@ -22,6 +23,7 @@ import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
  * Parses input arguments and creates a new transaction AddCommand object.
@@ -61,11 +63,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
 
+        Person person = ParserUtil.getPersonFromAddressBookIndex(index);
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(getNowDate()));
         Set<Category> categories = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY));
 
-        return new AddCommand(index, amount, description, date, categories);
+        Transaction transaction = new Transaction(person, amount, description, date, categories);
+
+        return new AddCommand(transaction);
     }
 }

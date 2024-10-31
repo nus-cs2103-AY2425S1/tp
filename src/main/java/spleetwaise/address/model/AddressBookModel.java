@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import spleetwaise.address.commons.core.GuiSettings;
+import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 
@@ -96,4 +97,9 @@ public interface AddressBookModel {
      * Searches for a person with the given Phone
      */
     Optional<Person> getPersonByPhone(Phone phone);
+
+    /**
+     * Searches for a person with the given index
+     */
+    Optional<Person> getPersonByIndex(Index index);
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
@@ -74,6 +75,17 @@ public class AddressBook implements ReadOnlyAddressBook {
             return Optional.empty();
         }
         return Optional.of(filteredPersonList.get(0));
+    }
+
+    public Optional<Person> getPersonByIndex(Index index) {
+        requireNonNull(index);
+
+        ObservableList<Person> PersonList = getPersonList();
+
+        if (PersonList.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(PersonList.get(index.getZeroBased()));
     }
 
     /**

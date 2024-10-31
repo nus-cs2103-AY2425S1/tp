@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
@@ -28,6 +29,7 @@ public class ParserUtilTest {
     private static final String VALID_DATE = "01012024";
 
     private static final Phone TEST_PHONE = TypicalPersons.ALICE.getPhone();
+    private static final Index TEST_INDEX = Index.fromOneBased(1);
 
     @Test
     public void parseAmount_null_exceptionThrown() {
@@ -97,6 +99,30 @@ public class ParserUtilTest {
         abModel.addPerson(TypicalPersons.ALICE);
 
         Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromPhone(TEST_PHONE));
+        assertEquals(TypicalPersons.ALICE, testPerson);
+    }
+
+
+    @Test
+    public void getPersonFromIndex_null_exceptionThrown() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.getPersonFromAddressBookIndex(null));
+    }
+
+    @Test
+    public void getPersonFromIndex_personNotFound_exceptionThrown() {
+        AddressBookModel abModel = new AddressBookModelManager();
+        CommonModel.initialise(abModel, null);
+
+        assertThrows(ParseException.class, () -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+    }
+
+    @Test
+    public void getPersonFromIndex_personFound_success() {
+        AddressBookModel abModel = new AddressBookModelManager();
+        CommonModel.initialise(abModel, null);
+        abModel.addPerson(TypicalPersons.ALICE);
+
+        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
         assertEquals(TypicalPersons.ALICE, testPerson);
     }
 }

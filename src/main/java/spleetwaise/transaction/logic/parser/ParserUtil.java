@@ -9,6 +9,7 @@ import java.util.Set;
 
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.commons.util.StringUtil;
+import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
@@ -121,6 +122,16 @@ public class ParserUtil {
         if (p.isEmpty()) {
             throw new ParseException(MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
         }
+        return p.get();
+    }
+
+    public static Person getPersonFromAddressBookIndex(Index index) throws ParseException {
+        requireNonNull(index);
+        Optional<Person> p = CommonModel.getInstance().getPersonByIndex(index);
+        if (p.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
         return p.get();
     }
 }

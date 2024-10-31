@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import spleetwaise.address.commons.core.GuiSettings;
+import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
@@ -174,6 +175,11 @@ public class AddCommandTest {
 
         @Override
         public Optional<Person> getPersonByPhone(Phone phone) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Person> getPersonByIndex(Index index) {
             return Optional.empty();
         }
     }

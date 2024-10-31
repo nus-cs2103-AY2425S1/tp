@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.commons.core.LogsCenter;
+import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 
@@ -143,6 +144,12 @@ public class AddressBookModelManager implements AddressBookModel {
     public Optional<Person> getPersonByPhone(Phone phone) {
         requireNonNull(phone);
         return addressBook.getPersonByPhone(phone);
+    }
+
+    @Override
+    public Optional<Person> getPersonByIndex(Index index) {
+        requireNonNull(index);
+        return addressBook.getPersonByIndex(index);
     }
 
     @Override
