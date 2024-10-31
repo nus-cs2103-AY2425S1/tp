@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -25,8 +26,16 @@ public class ListTransactionCommandTest {
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListTransactionCommand(INDEX_FIRST_PERSON), model,
                 String.format(ListTransactionCommand.MESSAGE_SUCCESS,
+                        1,
                         Messages.format(expectedModel.getFilteredPersonList().get(0))),
                 expectedModel);
+    }
+
+    @Test
+    public void execute_listTransactionsInvalidIndex_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        ListTransactionCommand command = new ListTransactionCommand(outOfBoundIndex);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
