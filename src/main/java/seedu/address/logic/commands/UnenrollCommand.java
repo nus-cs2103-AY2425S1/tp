@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -17,35 +18,35 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Assigns a student to a tutorial by creating a participation object.
+ * Removes a student from a tutorial by deleting the related participation object.
  */
-public class EnrollCommand extends Command {
+public class UnenrollCommand extends Command {
+    public static final String COMMAND_WORD = "unenroll";
 
-    public static final String COMMAND_WORD = "enroll";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrolls a student to a tutorial\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a student from a tutorial\n"
             + "Parameters: "
             + "INDEX (Must be a positive integer) "
-            + PREFIX_TUTORIAL + "TUTORIAL\n"
+            + PREFIX_TUTORIAL + "TUTORIAL \n"
             + "Example: " + COMMAND_WORD + " "
             + "2 "
             + PREFIX_TUTORIAL + "physics";
-    public static final String MESSAGE_SUCCESS = "%1$s(student) enrolled in %2$s(tutorial)";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person is already in the tutorial";
+    public static final String MESSAGE_SUCCESS = "%1$s(student) no longer enrolled in %2$s(tutorial)";
+    public static final String MESSAGE_NO_SUCH_PARTICIPATION = "Cannot unenroll %s from %s, as the student is "
+            + "currently not enrolled in %s";
 
-    private static final Logger logger = LogsCenter.getLogger(EnrollCommand.class);
+    private static final Logger logger = LogsCenter.getLogger(UnenrollCommand.class);
     private final Index index;
     private final String subject;
 
-
     /**
-     * Creates an EnrollCommand to add the specified {@code Person} into the specified {@code Tutorial}
+     * Creates an AddCommand to add the specified {@code Person}
      */
-    public EnrollCommand(Index index, String subject) {
+    public UnenrollCommand(Index index, String subject) {
         requireAllNonNull(index, subject);
         this.index = index;
         this.subject = subject.toLowerCase();
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -57,13 +58,15 @@ public class EnrollCommand extends Command {
         assert tutorial != null : "Input tutorial for participation should not be null";
         assert student != null : "Input student for participation should not be null";
 
-        Participation participation = new Participation(student, tutorial);
-        if (model.hasParticipation(participation)) {
-            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, EnrollCommand.class));
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        Participation participation = new Participation(student, tutorial, new ArrayList<>());
+        if (!model.hasParticipation(participation)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UnenrollCommand.class));
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_PARTICIPATION, student.getFullName(),
+                    tutorial.getSubject(),
+                    tutorial.getSubject()));
         }
 
-        model.addParticipation(participation);
+        model.deleteParticipation(participation);
         return new CommandResult(String.format(MESSAGE_SUCCESS, student.getFullName(), tutorial.getSubject()));
     }
 
@@ -76,7 +79,7 @@ public class EnrollCommand extends Command {
     private Person getStudentFromList(Model model) throws CommandException {
         List<Person> lastShownStudentList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownStudentList.size()) {
-            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, EnrollCommand.class));
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UnenrollCommand.class));
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -91,11 +94,12 @@ public class EnrollCommand extends Command {
      */
     private Tutorial getTutorialFromList(Model model) throws CommandException {
         List<Tutorial> lastShownTutorialList = model.getFilteredTutorialList();
+
         return lastShownTutorialList.stream()
                 .filter(tut -> tut.getSubject().equalsIgnoreCase(subject))
                 .findFirst()
                 .orElseThrow(() -> {
-                    logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, EnrollCommand.class));
+                    logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UnenrollCommand.class));
                     return new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT);
                 });
     }
@@ -108,18 +112,18 @@ public class EnrollCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EnrollCommand)) {
+        if (!(other instanceof UnenrollCommand)) {
             return false;
         }
 
-        EnrollCommand otherEnrollCommand = (EnrollCommand) other;
-        return index.equals(otherEnrollCommand.index);
+        UnenrollCommand otherUnenrollCommand = (UnenrollCommand) other;
+        return index.equals(otherUnenrollCommand.index);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toEnroll", index)
+                .add("toUnenroll", index)
                 .toString();
     }
 }
