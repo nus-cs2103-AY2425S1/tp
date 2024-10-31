@@ -22,11 +22,12 @@ public class Messages {
             "The transaction index provided is invalid";
     public static final String MESSAGE_PERSONS_FOUND_OVERVIEW =
             "Listed %d person(s) whose names or companies contain any of the keywords: %s";
-    public static final String MESSAGE_TRANSACTIONS_LISTED_OVERVIEW = "Listed %1$d transactions of %2$s";
+    public static final String MESSAGE_TRANSACTIONS_LISTED_OVERVIEW = "Listed %1$d transaction(s) of %2$s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format!\nDate format: yyyy-MM-DD";
-    public static final String MESSAGE_INVALID_MONTH_FORMAT = "Invalid month format!\nMonth format: yyyy-MM";
+    public static final String MESSAGE_INVALID_MONTH_FORMAT = "Incorrect month format or invalid month!\n"
+            + "Month format: yyyy-mm\nValid month is between [1, 12]. Valid year is a positive integer.";
     public static final String MESSAGE_INVALID_DATE_RANGE = "Invalid date range!\n"
             + "Start date must be before or equal to end date";
     public static final String MESSAGE_MUST_BE_TRANSACTION_LIST = "%1$s must only be used in transaction list view!";
