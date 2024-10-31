@@ -43,13 +43,6 @@ public class PaidAmount extends Fee {
     }
 
     /**
-     * Returns true if a given double is a valid paid amount.
-     */
-    public static boolean isValidPaidAmount(double test) {
-        return test >= 0 && test <= MAX_VALUE;
-    }
-
-    /**
      * Returns a new {@code PaidAmount} with the updated value by adding the specified amount
      * to the current paid amount.
      *

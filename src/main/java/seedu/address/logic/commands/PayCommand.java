@@ -105,17 +105,18 @@ public class PayCommand extends Command {
     private static PaidAmount updatePaidAmount(Student student, double amountPaid) throws CommandException {
         assert student != null && amountPaid > 0;
         double updatedPaid = student.getPaidAmount().value + amountPaid;
-        if (!PaidAmount.isValidPaidAmount(updatedPaid)) {
+        String amount = String.format("%.2f", updatedPaid);
+
+        if (!PaidAmount.isValidPaidAmount(amount)) {
             throw new CommandException(Messages.MESSAGE_LIMIT);
         }
-        String amount = String.format("%.2f", updatedPaid);
 
         return new PaidAmount(amount);
     }
 
     private static double calculatePaid(Student student, double hour) throws CommandException {
         double paid = student.getRate().value * hour;
-        if (!PaidAmount.isValidPaidAmount(paid)) {
+        if (!PaidAmount.isValidPaidAmount(String.format("%.2f", paid))) {
             throw new CommandException(Messages.MESSAGE_LIMIT);
         }
         return BigDecimal.valueOf(paid)
