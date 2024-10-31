@@ -21,22 +21,27 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Notes notes;
+    private final Age age;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Income income;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Notes notes, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(
+        Name name, Phone phone, Email email, Address address, Notes notes, Set<Tag> tags, Income income, Age age) {
+        requireAllNonNull(name, phone, email, address, notes, tags, income, age);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.notes = notes;
         this.tags.addAll(tags);
+        this.income = income;
+        this.age = age;
     }
 
     public Name getName() {
@@ -57,6 +62,14 @@ public class Person {
 
     public Notes getNotes() {
         return notes;
+    }
+
+    public Income getIncome() {
+        return income;
+    }
+
+    public Age getAge() {
+        return age;
     }
 
     /**
@@ -101,13 +114,15 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && notes.equals(otherPerson.notes)
+                && income.equals(otherPerson.income)
+                && age.equals(otherPerson.age)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, notes, tags);
+        return Objects.hash(name, phone, email, address, notes, tags, income, age);
     }
 
     @Override
@@ -118,6 +133,8 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("notes", notes)
+                .add("income", income)
+                .add("age", age)
                 .add("tags", tags)
                 .toString();
     }

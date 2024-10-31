@@ -43,7 +43,7 @@ public class AddressTest {
 
         assertEquals(address.toString(), "<REPRESENTATION FOR EMPTY ADDRESS>");
 
-        assertEquals(address.getValueForUI(), "No address provided");
+        assertEquals(address.getValueForUi(), "No address provided");
     }
 
     @Test

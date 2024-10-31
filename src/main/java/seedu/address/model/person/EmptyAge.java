@@ -1,24 +1,24 @@
 package seedu.address.model.person;
 
 /**
- * Represents an empty Email of a Person in the address book.
+ * Represents an empty Age of a Person in the address book.
  * Guarantees: immutable
  */
-class EmptyEmail extends Email {
+class EmptyAge extends Age {
 
-    public static final String INTERNAL_REPRESENTATION = "<REPRESENTATION FOR EMPTY EMAIL>";
+    public static final String INTERNAL_REPRESENTATION = "<REPRESENTATION FOR EMPTY AGE>";
 
-    private static final EmptyEmail emptyEmail = new EmptyEmail();
+    private static final EmptyAge emptyAge = new EmptyAge();
 
-    private EmptyEmail() {
+    private EmptyAge() {
         super();
     }
 
     /**
-     * Provides an object representing an empty email.
+     * Provides an object representing an empty age.
      */
-    public static EmptyEmail get() {
-        return emptyEmail;
+    public static EmptyAge get() {
+        return emptyAge;
     }
 
     /**
@@ -39,6 +39,6 @@ class EmptyEmail extends Email {
      */
     @Override
     public String getValueForUi() {
-        return "No email provided";
+        return "-";
     }
 }

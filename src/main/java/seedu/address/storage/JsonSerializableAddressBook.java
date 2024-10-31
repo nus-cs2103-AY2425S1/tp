@@ -69,9 +69,6 @@ class JsonSerializableAddressBook {
                 Person person = jsonAdaptedPerson.toModelType();
                 logger.info("Successfully converted person: "
                     + person.getName());
-                if (addressBook.hasPerson(person)) {
-                    throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-                }
                 addressBook.addPerson(person);
             } catch (IllegalValueException e) {
                 logger.info("Error converting person: " + e.getMessage()); // Debug
