@@ -14,6 +14,11 @@ public class LogEntry {
     public static final String VALIDATION_REGEX = ".+";
     private final String entry;
 
+    /**
+     * Constructs a {@code LogEntry}.
+     *
+     * @param entry A valid log entry.
+     */
     public LogEntry(String entry) {
         checkArgument(isValidEntry(entry), MESSAGE_CONSTRAINTS);
         this.entry = entry;
@@ -24,6 +29,15 @@ public class LogEntry {
      */
     public String getEntry() {
         return entry;
+    }
+
+    /**
+     * Returns the truncated log entry.
+     */
+    public String getTruncatedEntry() {
+        return entry.length() > 100
+                ? entry.substring(0, 100) + "..."
+                : entry;
     }
 
     /**
@@ -43,12 +57,5 @@ public class LogEntry {
     @Override
     public int hashCode() {
         return entry.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return entry.length() > 100
-                ? entry.substring(0, 100) + "..."
-                : entry;
     }
 }

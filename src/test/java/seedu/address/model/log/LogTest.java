@@ -24,19 +24,12 @@ public class LogTest {
     }
 
     @Test
-    public void constructor_invalidEntry_throwsIllegalArgumentException() {
-        AppointmentDate validDate = new AppointmentDate("31 Dec 2024");
-        LogEntry invalidEntry = new LogEntry(""); // Invalid log entry
-        assertThrows(IllegalArgumentException.class, () -> new Log(validDate, invalidEntry));
-    }
-
-    @Test
     public void constructor_validEntry_createsLog() {
         AppointmentDate validDate = new AppointmentDate("31 Dec 2024");
         LogEntry validEntry = new LogEntry("This is a valid log entry.");
         Log log = new Log(validDate, validEntry);
 
-        assert log.getEntry().equals(validEntry);
+        assert log.getEntry().equals(validEntry.getEntry());
         assert log.getAppointmentDate().equals(validDate);
     }
 

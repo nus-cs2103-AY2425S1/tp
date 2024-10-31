@@ -50,6 +50,10 @@ public class JsonAdaptedLog {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "entry"));
         }
 
+        if (!LogEntry.isValidEntry(entry)) {
+            throw new IllegalValueException(LogEntry.MESSAGE_CONSTRAINTS);
+        }
+
         // Parse the appointment date from the string
         LocalDate parsedDate;
         try {

@@ -1,7 +1,6 @@
 package seedu.address.model.log;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
@@ -114,6 +113,7 @@ public class Log {
      */
     @Override
     public String toString() {
-        return String.format("Log{Appointment Date=%s, Entry=%s}", appointmentDate.toString(), entry.toString());
+        return String.format("Log{Appointment Date=%s, Entry=%s}", appointmentDate.toString(),
+                entry.getTruncatedEntry());
     }
 }
