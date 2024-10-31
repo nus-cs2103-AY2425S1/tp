@@ -21,6 +21,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -156,7 +157,7 @@ public class FindCommandTest {
     @Test
     public void executeTwice_nameAndModuleRoleKeywordsChained_multiplePersonsFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2,
-                "(Kurz OR Elle) AND (CS1101S-Student), among the previously displayed results");
+                Messages.MESSAGE_CHAINED_FIND_PREFIX + "(Kurz OR Elle) AND (CS1101S-Student)");
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle");
         ModuleRoleContainsKeywordsPredicate moduleRolePredicate = prepareModuleRolePredicate("CS1101S");
         InFilteredListPredicate inFilteredListPredicate = new InFilteredListPredicate(
@@ -169,7 +170,7 @@ public class FindCommandTest {
 
         // find again
         String expectedMessage2 = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1,
-                "(e), among the previously displayed results");
+                Messages.MESSAGE_CHAINED_FIND_PREFIX + "(e)");
         NameContainsKeywordsPredicate namePredicate2 = prepareNamePredicate("e");
         InFilteredListPredicate inFilteredListPredicate2 = new InFilteredListPredicate(
                 new ArrayList<>(model.getFilteredPersonList()));
