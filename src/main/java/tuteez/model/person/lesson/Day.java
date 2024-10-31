@@ -59,6 +59,15 @@ public enum Day {
         return day != null && DAY_NAME_MAP.containsKey(day.toLowerCase());
     }
 
+    /**
+     * Gets the shortened name of the day in the week.
+     *
+     * @return The abbreviated name of the day (e.g., "mon" for Monday)
+     */
+    public String getShortName() {
+        return shortName;
+    }
+
     @Override
     public String toString() {
         return name();
