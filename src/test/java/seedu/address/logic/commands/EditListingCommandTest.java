@@ -9,7 +9,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.listing.Listing;
 import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
-import seedu.address.model.listing.Region;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditListingDescriptorBuilder;
 import seedu.address.testutil.ListingBuilder;
