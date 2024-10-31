@@ -11,6 +11,10 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_EXPORT_ACKNOWLEDGEMENT = "Address book data has been exported!";
+    public static final String HELP_EXPORT_COMMAND = "Export Command\n"
+            + "- Format: export\n"
+            + "- Example: export\n"
+            + "- Exports the current contacts in PROperty to a Comma-seperated Value (CSV) file format";
 
     @Override
     public CommandResult execute(Model model) {
