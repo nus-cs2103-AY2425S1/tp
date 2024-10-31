@@ -188,8 +188,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteLesson(int index) {
-        lessonSchedule.deleteLesson(index);
+    public void deleteLesson(Lesson lesson) {
+        lessonSchedule.deleteLesson(lesson);
     }
 
     @Override
@@ -214,7 +214,7 @@ public class ModelManager implements Model {
         while (currentIndex < this.getLessonScheduleSize()) {
             Lesson lesson = this.getLesson(currentIndex);
             if (student.equals(lesson.getStudent())) {
-                this.deleteLesson(currentIndex);
+                this.deleteLesson(lesson);
             } else {
                 currentIndex++;
             }

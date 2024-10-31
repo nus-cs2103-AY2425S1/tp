@@ -49,8 +49,8 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
-        public void deleteLesson(int index) {
-            lessonsAdded.remove(index);
+        public void deleteLesson(Lesson lesson) {
+            lessonsAdded.remove(lesson);
         }
 
         @Override
@@ -238,7 +238,7 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
-        public void deleteLesson(int index) {
+        public void deleteLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

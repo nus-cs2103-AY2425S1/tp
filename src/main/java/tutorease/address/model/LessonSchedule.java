@@ -58,12 +58,12 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
     }
 
     /**
-     * Deletes the lesson at the specified index from the lesson list.
+     * Deletes the lesson from the lesson list.
      *
-     * @param index The index of the lesson to be removed. Must be a valid index.
+     * @param lesson The lesson to be removed.
      */
-    public void deleteLesson(int index) {
-        lessons.remove(index);
+    public void deleteLesson(Lesson lesson) {
+        lessons.remove(lesson);
     }
 
     /**
