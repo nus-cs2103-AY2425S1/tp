@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
@@ -21,7 +22,8 @@ public class ScheduleServices {
      *         If there are fewer than three schedules, it returns all of them
      */
     public static List<String> getTopThreeSchedules(List<Person> personList) {
-        List<Map.Entry<Person, LocalDateTime>> allAppointments = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+        List<Map.Entry<Person, LocalDateTime>> upcomingAppointments = new ArrayList<>();
 
         for (Person person : personList) {
             for (Schedule schedule : person.getSchedules()) {
@@ -32,27 +34,27 @@ public class ScheduleServices {
                 LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.getDateTime(),
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
 
-                allAppointments.add(Map.entry(person, appointmentDateTime));
+                if (appointmentDateTime.isAfter(now)) {
+                    upcomingAppointments.add(Map.entry(person, appointmentDateTime));
+                }
             }
         }
 
-        allAppointments.sort(Map.Entry.comparingByValue());
+        // Sort appointments by date and time
+        List<Map.Entry<Person, LocalDateTime>> sortedAppointments = upcomingAppointments.stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toList());
 
         List<String> result = new ArrayList<>();
-        int count = 1;
-        for (Map.Entry<Person, LocalDateTime> entry : allAppointments) {
-            if (count > 3) {
-                break;
-            }
-
+        for (int i = 0; i < Math.min(3, sortedAppointments.size()); i++) {
+            Map.Entry<Person, LocalDateTime> entry = sortedAppointments.get(i);
             String formattedAppointment = String.format("%d. %s: %s",
-                    count,
+                    i + 1,
                     entry.getKey().getName(),
-                    entry.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
-            );
+                    entry.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
             result.add(formattedAppointment);
-            count++;
         }
+
         return result;
     }
 }

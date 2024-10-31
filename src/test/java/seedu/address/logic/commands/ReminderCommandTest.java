@@ -56,6 +56,44 @@ public class ReminderCommandTest {
     }
 
     @Test
+    public void execute_singularFormatError_throwsCommandException() {
+        Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Schedule validSchedule = new Schedule("2024-10-04 1000", "");
+        Reminder singularReminder = new Reminder("1 days");
+
+        // Set the schedule first
+        Person personWithSchedule = new PersonBuilder(personToRemind)
+                .withSchedule(new String[]{validSchedule.getDateTime()},
+                        new String[]{validSchedule.getNotes()}).build();
+        model.setPerson(personToRemind, personWithSchedule);
+
+        // Create reminder command
+        ReminderCommand command = new ReminderCommand(personWithSchedule.getName().toString(),
+                singularReminder.getReminderTime());
+
+        assertCommandFailure(command, model, ReminderCommand.MESSAGE_SINGULAR_FORMAT_ERROR);
+    }
+
+    @Test
+    public void execute_pluralFormatError_throwsCommandException() {
+        Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Schedule validSchedule = new Schedule("2024-10-04 1000", "");
+        Reminder singularReminder = new Reminder("2 day");
+
+        // Set the schedule first
+        Person personWithSchedule = new PersonBuilder(personToRemind)
+                .withSchedule(new String[]{validSchedule.getDateTime()},
+                        new String[]{validSchedule.getNotes()}).build();
+        model.setPerson(personToRemind, personWithSchedule);
+
+        // Create reminder command
+        ReminderCommand command = new ReminderCommand(personWithSchedule.getName().toString(),
+                singularReminder.getReminderTime());
+
+        assertCommandFailure(command, model, ReminderCommand.MESSAGE_PLURAL_FORMAT_ERROR);
+    }
+
+    @Test
     public void execute_invalidReminderTime_throwsCommandException() {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Schedule validSchedule = new Schedule("2024-10-04 1000", "");

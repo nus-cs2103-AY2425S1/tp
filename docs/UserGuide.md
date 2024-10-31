@@ -124,11 +124,16 @@ Sets a reminder for a client before their appointment in the address book.
 
 Format: `reminder NAME r/REMINDER_TIME`
 
+* The NAME refers to the full name of the client you want to set a reminder for.
+* The REMINDER_TIME specifies how early you want to be reminded before the appointment. It must be in the form of either "X day(s)" or "Y hour(s)".
+* ***Allowed reminder times***:
+    * Days: You can specify 1 to 7 days (e.g 1 day, 7 days)
+    * Hours: You can specify 1 to 23 hours (e.g 1 hour, 23 hours)
 * You can only set a reminder for a person who already has a scheduled appointment.
-* The reminder time must be a valid expression (e.g. "1 day", "2 hours").
+* Multiple reminder times (r/) cannot be specified in a single command. Only one reminder time can be set per command.
 
 Examples:
-* `reminder John Doe r/10 days`
+* `reminder John Doe r/6 days`
 * `reminder Betsy Crowe r/3 hours`
 
 ### Deleting a reminder: `reminder-delete`
