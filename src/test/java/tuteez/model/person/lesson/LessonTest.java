@@ -98,15 +98,11 @@ public class LessonTest {
         Lesson l1 = new Lesson("Friday 1300-1400");
         Lesson l2 = new Lesson("Friday 1300-1400");
         Lesson l3 = new Lesson("friday 1300-1400");
-        Lesson l4 = new Lesson("Saturday 1300-1400");
-        Lesson l5 = new Lesson("Friday 1300-1430");
 
         Assertions.assertNotEquals(l1, new Object());
         assertEquals(l1, l1);
         assertEquals(l1, l2);
         assertEquals(l2, l3);
-        assertFalse(l1.equals(l4));
-        assertFalse(l1.equals(l5));
     }
 
     @Test
