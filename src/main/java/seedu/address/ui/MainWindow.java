@@ -158,6 +158,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    @FXML
+    public void handleRefresh() {
+        fillInnerParts();
+    }
+
     void show() {
         primaryStage.show();
     }
