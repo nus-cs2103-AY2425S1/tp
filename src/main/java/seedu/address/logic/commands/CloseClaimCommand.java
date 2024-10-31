@@ -103,10 +103,4 @@ public class CloseClaimCommand extends Command {
                 && insuranceId == otherCloseClaimCommand.insuranceId
                 && claimId.equals(otherCloseClaimCommand.claimId);
     }
-
-    @Override
-    public String toString() {
-        return " " + index + insuranceId + claimId;
-    }
-
 }
