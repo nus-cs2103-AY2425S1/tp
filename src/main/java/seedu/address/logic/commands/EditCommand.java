@@ -26,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LogList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -114,9 +115,10 @@ public class EditCommand extends Command {
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Appointment updatedAppointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
+        LogList updatedLog = editPersonDescriptor.getLogEntries().orElse(personToEdit.getLogEntries());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric,
-                          updatedAddress, updatedRemark, updatedTags, updatedAppointment);
+                          updatedAddress, updatedRemark, updatedTags, updatedAppointment, updatedLog);
     }
 
     @Override
@@ -155,6 +157,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Appointment appointment;
+        private LogList logEntries;
 
         public EditPersonDescriptor() {}
 
@@ -170,6 +173,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setAppointment(toCopy.appointment);
+            setLogEntries(toCopy.logEntries);
         }
 
         /**
@@ -242,6 +246,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setLogEntries(LogList logEntries) {
+            this.logEntries = logEntries;
+        }
+
+        public Optional<LogList> getLogEntries() {
+            return Optional.ofNullable(logEntries);
         }
 
         @Override

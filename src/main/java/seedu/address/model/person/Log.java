@@ -1,11 +1,18 @@
 package seedu.address.model.person;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Represents a log entry with a timestamp and a log message.
  */
 public class Log {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Timestamp must be in format of DD-MM-YYYY HH:MM and log messages should not be blank";
+    public static final String VALIDATION_REGEX =
+            "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4}) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$";
     private final String logString;
     private final LocalDateTime timestamp;
 
@@ -18,6 +25,39 @@ public class Log {
     public Log(String logString, LocalDateTime timestamp) {
         this.logString = logString;
         this.timestamp = timestamp;
+    }
+
+    /**
+     * Constructs a {@code Log} from a log entry string.
+     * The log entry string should contain a timestamp and a log message.
+     *
+     * @param logEntry The log entry string.
+     */
+    public Log(String logEntry) {
+        String[] logEntryParts = logEntry.split(" ");
+        this.timestamp = LocalDateTime.parse(logEntryParts[0] + " " + logEntryParts[1],
+                DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.logString = Arrays.stream(logEntryParts, 2, logEntryParts.length)
+                .collect(Collectors.joining(" "));
+    }
+
+    /**
+     * Checks if a given string is a valid log entry.
+     * A valid log entry should contain a valid timestamp and a non-blank log message.
+     *
+     * @param test The string to test.
+     * @return True if the string is a valid log entry, false otherwise.
+     */
+    public static boolean isValidLog(String test) {
+        String[] logEntryParts = test.split(" ", 3);
+        if (logEntryParts.length != 3) {
+            return false;
+        }
+
+        String timestamp = logEntryParts[0] + " " + logEntryParts[1];
+        String logMessage = logEntryParts[2];
+
+        return timestamp.matches(VALIDATION_REGEX) && !logMessage.isBlank();
     }
 
     /**
@@ -45,7 +85,7 @@ public class Log {
      */
     @Override
     public String toString() {
-        return "[" + timestamp + "] " + logString;
+        return timestamp.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " " + logString;
     }
 
     /**
