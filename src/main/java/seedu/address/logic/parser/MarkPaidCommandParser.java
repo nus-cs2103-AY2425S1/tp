@@ -11,7 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.MarkPaidCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Fees;
+import seedu.address.model.person.FeesPaidByStudent;
 
 /**
  * Parses input arguments and creates a new MarkPaidCommand object
@@ -42,9 +42,9 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PAYMENT);
-        Fees fees = ParserUtil.parseFees(argMultimap.getValue(PREFIX_PAYMENT).get());
+        FeesPaidByStudent feesPaidByStudent = ParserUtil.parseFees(argMultimap.getValue(PREFIX_PAYMENT).get());
 
-        return new MarkPaidCommand(index, fees);
+        return new MarkPaidCommand(index, feesPaidByStudent);
     }
 
     /**

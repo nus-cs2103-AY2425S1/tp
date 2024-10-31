@@ -79,6 +79,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
             throw new ParticipationNotFoundException(MESSAGE_PARTICIPATION_NOT_FOUND);
         }
 
+        // New participation that replaces the target cannot be a duplicate of another participation in the list
         if (!target.isSameParticipation(editedParticipation) && contains(editedParticipation)) {
             logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UniqueParticipationList.class));
             throw new DuplicateParticipationException();
@@ -165,6 +166,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
      * Returns true if {@code participation} contains only unique participations
      */
     private boolean participationAreUnique(List<Participation> participation) {
+        // double loop required here to check every element against each other
         for (int i = 0; i < participation.size() - 1; i++) {
             for (int j = i + 1; j < participation.size(); j++) {
                 if (participation.get(i).isSameParticipation(participation.get(j))) {

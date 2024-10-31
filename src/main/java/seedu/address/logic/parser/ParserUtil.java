@@ -23,7 +23,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Fees;
+import seedu.address.model.person.FeesPaidByStudent;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
@@ -127,16 +127,16 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String fee} into an {@code Fees}.
+     * Parses a {@code String fee} into an {@code FeesPaidByStudent}.
      * Leading and trailing whitespaces will be trimmed, all characters are converted to lower case
      */
-    public static Fees parseFees(String payment) throws ParseException {
+    public static FeesPaidByStudent parseFees(String payment) throws ParseException {
         String trimmedFees = payment.trim().toLowerCase();
-        if (!Fees.isValidFees(trimmedFees)) {
+        if (!FeesPaidByStudent.isValidFees(trimmedFees)) {
             logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
-            throw new ParseException(Fees.MESSAGE_CONSTRAINTS);
+            throw new ParseException(FeesPaidByStudent.MESSAGE_CONSTRAINTS);
         }
-        return new Fees(trimmedFees);
+        return new FeesPaidByStudent(trimmedFees);
     }
 
     /**
