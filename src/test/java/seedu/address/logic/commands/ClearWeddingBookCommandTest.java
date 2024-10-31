@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.WeddingBook;
 
 public class ClearWeddingBookCommandTest {
 
@@ -18,7 +17,7 @@ public class ClearWeddingBookCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearWeddingBookCommand(), model, ClearWeddingBookCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess(new ClearWeddingBookCommand(), model, ClearWeddingBookCommand.CONFIRMATION_PROMPT,
                 expectedModel);
     }
 
@@ -26,10 +25,8 @@ public class ClearWeddingBookCommandTest {
     public void execute_nonEmptyWeddingBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalWeddingBook());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalWeddingBook());
-        expectedModel.setWeddingBook(new WeddingBook());
 
-        assertCommandSuccess(new ClearWeddingBookCommand(), model, ClearWeddingBookCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess(new ClearWeddingBookCommand(), model, ClearWeddingBookCommand.CONFIRMATION_PROMPT,
                 expectedModel);
     }
-
 }

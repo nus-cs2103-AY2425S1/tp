@@ -58,9 +58,56 @@ public class DeleteYCommandTest {
 
         String expectedMessage = String.format(DeleteYCommand.MESSAGE_DELETE_WEDDING_SUCCESS,
                 weddingToDelete.getWeddingName());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalWeddingBook());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                getTypicalWeddingBook());
 
         assertEquals(model, expectedModel);
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_confirmClearAddressBook_success() throws CommandException {
+        Model expectedModel = new ModelManager(new seedu.address.model.AddressBook(), new UserPrefs(),
+                getTypicalWeddingBook());
+
+        StaticContext.setClearAddressBookPending(true);
+        DeleteYCommand deleteYCommand = new DeleteYCommand();
+        CommandResult commandResult = deleteYCommand.execute(model);
+
+        String expectedMessage = DeleteYCommand.MESSAGE_DELETE_ADDRESS_BOOK_SUCCESS;
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+        assertEquals(model, expectedModel);
+    }
+
+    @Test
+    public void execute_confirmClearWeddingBook_success() throws CommandException {
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                new seedu.address.model.WeddingBook());
+
+        StaticContext.setClearWeddingBookPending(true);
+        DeleteYCommand deleteYCommand = new DeleteYCommand();
+        CommandResult commandResult = deleteYCommand.execute(model);
+
+        String expectedMessage = DeleteYCommand.MESSAGE_DELETE_WEDDING_BOOK_SUCCESS;
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+        assertEquals(model, expectedModel);
+    }
+
+    @Test
+    public void execute_noPendingOperation_returnsNoPendingOperationMessage() throws CommandException {
+        // Ensure no pending operations
+        StaticContext.setClearAddressBookPending(false);
+        StaticContext.setClearWeddingBookPending(false);
+        StaticContext.setPersonToDelete(null);
+        StaticContext.setWeddingToDelete(null);
+
+        DeleteYCommand deleteYCommand = new DeleteYCommand();
+        CommandResult commandResult = deleteYCommand.execute(model);
+
+        String expectedMessage = DeleteYCommand.MESSAGE_NO_PENDING_OPERATION;
+
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 

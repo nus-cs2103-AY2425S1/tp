@@ -19,6 +19,10 @@ public class DeleteNCommand extends Command {
         StaticContext.setPersonToDelete(null);
         // Clear the weddingToDelete from StaticContext
         StaticContext.setWeddingToDelete(null);
+        // Clear the clearAddressBookPending flag from StaticContext
+        StaticContext.setClearAddressBookPending(false);
+        // Clear the clearWeddingBookPending flag from StaticContext
+        StaticContext.setClearWeddingBookPending(false);
         return new CommandResult(MESSAGE_CANCEL_DELETE);
     }
 

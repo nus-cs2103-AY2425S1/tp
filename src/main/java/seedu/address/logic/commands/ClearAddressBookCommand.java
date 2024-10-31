@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.AddressBook;
+import seedu.address.logic.StaticContext;
 import seedu.address.model.Model;
 
 /**
@@ -12,13 +12,16 @@ public class ClearAddressBookCommand extends Command {
 
     public static final String COMMAND_WORD = "clear-ab";
     public static final String COMMAND_FUNCTION = ": Clears the entire address book";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
-
+    public static final String CONFIRMATION_PROMPT = "Are you sure you want to delete entire address book?\n"
+            + "Enter 'y' to confirm, or 'n' to cancel.";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        //Store the address book to be deleted in StaticContext
+        StaticContext.setClearAddressBookPending(true);
+
+        return new CommandResult(CONFIRMATION_PROMPT);
     }
 }
