@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -127,6 +128,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasEventOverlap(Event event) {
         requireNonNull(event);
         return events.containsOverlap(event);
+    }
+
+    /**
+     * Returns true if an event clashes with another event in the address book, ignoring a specific event.
+     */
+    public boolean hasEventOverlap(Event event, Event eventToIgnore) {
+        requireAllNonNull(event, eventToIgnore);
+        return events.containsOverlap(event, eventToIgnore);
     }
 
     /**

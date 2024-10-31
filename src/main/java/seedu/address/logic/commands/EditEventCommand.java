@@ -99,7 +99,7 @@ public class EditEventCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        if (!eventToEdit.isSameEvent(editedEvent) && model.hasEventOverlap(editedEvent)) {
+        if (model.hasEventOverlap(editedEvent, eventToEdit)) {
             throw new CommandException(
                     String.format(MESSAGE_EVENT_OVERLAP, editedEvent.getCelebrity().getName().fullName));
         }
