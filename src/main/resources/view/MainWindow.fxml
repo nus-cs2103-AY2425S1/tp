@@ -49,8 +49,8 @@
           </padding>
         </StackPane>
 
-        <!-- SplitPane to place the personListPanelPlaceholder and viewPersonPanelPlaceholder side by side -->
-        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.4">
+        <!-- SplitPane to place the personListPanel and viewPersonPanel side by side -->
+        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.4" style="-fx-padding: 0 5 0 0;">
           <!-- Person List Panel on the left -->
           <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340">
             <padding>
