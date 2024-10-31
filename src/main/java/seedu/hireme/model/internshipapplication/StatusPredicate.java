@@ -10,15 +10,15 @@ import seedu.hireme.commons.util.ToStringBuilder;
  */
 public class StatusPredicate implements Predicate<InternshipApplication> {
 
-    private final String statusToFilterBy;
+    private final Status statusToFilterBy;
 
     /**
-     * Constructs a {@code StatusPredicate} with the string of statusToFilterBy.
+     * Constructs a {@code StatusPredicate} with the statusToFilterBy.
      *
-     * @param statusToFilterBy A string that specifies the status to filter internship applications.
+     * @param statusToFilterBy A status that specifies which status to filter the internship applications by.
      */
-    public StatusPredicate(String statusToFilterBy) {
-        this.statusToFilterBy = statusToFilterBy.toUpperCase();
+    public StatusPredicate(Status statusToFilterBy) {
+        this.statusToFilterBy = statusToFilterBy;
     }
 
     /**
@@ -29,8 +29,7 @@ public class StatusPredicate implements Predicate<InternshipApplication> {
      */
     @Override
     public boolean test(InternshipApplication internshipApplication) {
-        return statusToFilterBy.equalsIgnoreCase(
-                        internshipApplication.getStatus().getValue());
+        return statusToFilterBy.equals(internshipApplication.getStatus());
     }
 
     /**

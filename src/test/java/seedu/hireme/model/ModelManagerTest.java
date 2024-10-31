@@ -118,7 +118,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = GOOGLE.getCompany().getName().getValue().split("\\s+");
+        String[] keywords = GOOGLE.getCompany().getName().toString().split("\\s+");
         modelManager.updateFilteredList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

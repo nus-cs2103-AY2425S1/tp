@@ -189,6 +189,7 @@ public class UniqueList implements Iterable<InternshipApplication> {
                 }
             }
         }
+
         return true;
     }
 }

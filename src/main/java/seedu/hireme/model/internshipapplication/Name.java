@@ -18,7 +18,7 @@ public class Name {
     /**
      * Constructs a {@code Name}.
      *
-     * @param name A valid company name.
+     * @param name A valid name.
      * @throws NullPointerException if the {@code name} is null.
      * @throws IllegalArgumentException if the {@code name} does not satisfy the constraints.
      */
@@ -28,18 +28,9 @@ public class Name {
         this.value = name.trim();
     }
 
-    /**
-     * Returns the string representation of this company name.
-     *
-     * @return the company name as a string.
-     */
-    public String getValue() {
-        return this.value;
-    }
-
 
     /**
-     * Returns a string representation of the company name.
+     * Returns a string representation of the name.
      *
      * @return the name as a string.
      */
@@ -49,7 +40,7 @@ public class Name {
     }
 
     /**
-     * Compares this company name to another object.
+     * Compares this name to another object.
      *
      * @param other the object to compare.
      * @return true if the object is an instance of {@code Name} and has the same value, false otherwise.
@@ -69,9 +60,9 @@ public class Name {
     }
 
     /**
-     * Returns the hash code of the company name.
+     * Returns the hash code of the name.
      *
-     * @return the hash code of the company name value.
+     * @return the hash code of the name value.
      */
     @Override
     public int hashCode() {

@@ -12,6 +12,7 @@ import static seedu.hireme.testutil.TypicalInternshipApplications.DELL;
 import static seedu.hireme.testutil.TypicalInternshipApplications.EY;
 import static seedu.hireme.testutil.TypicalInternshipApplications.FIGMA;
 import static seedu.hireme.testutil.TypicalInternshipApplications.GOOGLE;
+import static seedu.hireme.testutil.TypicalInternshipApplications.GOVTECH;
 import static seedu.hireme.testutil.TypicalInternshipApplications.YAHOO;
 import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
@@ -105,13 +106,13 @@ public class FindCommandTest {
 
     @Test
     public void execute_entireAlphabetAsKeywords_allInternshipApplicationsFound() {
-        String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 8);
         NameContainsKeywordsPredicate predicate =
                 preparePredicate("a b c d e f g h i j k l m n o p q r s t u v w x y z");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, YAHOO), model.getFilteredList());
+        assertEquals(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, YAHOO, GOVTECH), model.getFilteredList());
     }
 
     @Test

@@ -48,15 +48,6 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Returns the {@code LocalDate} representation of the date.
-     *
-     * @return The date as a {@code LocalDate} object.
-     */
-    public LocalDate getValue() {
-        return this.date;
-    }
-
-    /**
      * Returns a string representation of the date using the 'dd/MM/yy' format.
      *
      * @return The formatted date as a string.

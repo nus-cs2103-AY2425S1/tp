@@ -13,9 +13,10 @@ import java.util.List;
 
 import seedu.hireme.model.AddressBook;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
- * A utility class containing a list of {@code InternshipApplication} objects to be used in tests.
+ * Represents a utility class containing a list of {@code InternshipApplication} objects to be used in tests.
  */
 public class TypicalInternshipApplications {
 
@@ -60,6 +61,14 @@ public class TypicalInternshipApplications {
             .withEmail("bytedance@example.com")
             .withRole("Frontend Developer Intern")
             .withDate("01/01/08")
+            .withStatus(Status.REJECTED)
+            .build();
+
+    public static final InternshipApplication GOVTECH = new InternshipApplicationBuilder().withName("GovTech")
+            .withEmail("govtech@example.com")
+            .withRole("Software Developer Intern")
+            .withDate("01/01/11")
+            .withStatus(Status.ACCEPTED)
             .build();
 
 
@@ -93,6 +102,6 @@ public class TypicalInternshipApplications {
     }
 
     public static List<InternshipApplication> getTypicalInternshipApplications() {
-        return new ArrayList<>(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, YAHOO));
+        return new ArrayList<>(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, YAHOO, GOVTECH));
     }
 }

@@ -9,7 +9,7 @@ import seedu.hireme.model.internshipapplication.Role;
 import seedu.hireme.model.internshipapplication.Status;
 
 /**
- * A utility class to help with building InternshipApplication objects.
+ * Represents a utility class to help with building InternshipApplication objects.
  */
 public class InternshipApplicationBuilder {
 
@@ -22,7 +22,7 @@ public class InternshipApplicationBuilder {
     private Company company;
     private Date date;
     private Role role;
-    private Status status;
+    private Status status = Status.valueOf(DEFAULT_STATUS);
 
     /**
      * Creates a {@code InternshipApplicationBuilder} with the default details.
@@ -33,7 +33,6 @@ public class InternshipApplicationBuilder {
         company = new Company(email, name);
         date = new Date(DEFAULT_DATE);
         role = new Role(DEFAULT_ROLE);
-        status = Status.valueOf(DEFAULT_STATUS);
     }
 
     /**
@@ -94,6 +93,6 @@ public class InternshipApplicationBuilder {
     }
 
     public InternshipApplication build() {
-        return new InternshipApplication(company, date, role);
+        return new InternshipApplication(company, date, role, status);
     }
 }

@@ -47,5 +47,12 @@
       "role" : "Clerk",
       "date" : "01/01/07",
       "status" : "PENDING"
+    },
+    {
+      "companyName" : "GovTech",
+      "companyEmail" : "govtech@example.com",
+      "role" : "Software Developer Intern",
+      "date" : "01/01/11",
+      "status" : "ACCEPTED"
     }]
 }

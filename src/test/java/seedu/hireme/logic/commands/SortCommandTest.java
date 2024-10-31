@@ -11,6 +11,7 @@ import static seedu.hireme.testutil.TypicalInternshipApplications.CITIBANK;
 import static seedu.hireme.testutil.TypicalInternshipApplications.DELL;
 import static seedu.hireme.testutil.TypicalInternshipApplications.EY;
 import static seedu.hireme.testutil.TypicalInternshipApplications.FIGMA;
+import static seedu.hireme.testutil.TypicalInternshipApplications.GOVTECH;
 import static seedu.hireme.testutil.TypicalInternshipApplications.YAHOO;
 import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
@@ -64,7 +65,7 @@ public class SortCommandTest {
         SortCommand command = new SortCommand(comparator);
         expectedModel.sortFilteredList(comparator);
         assertCommandSuccess(command, model, MESSAGE_INTERNSHIP_APPLICATIONS_SORTED_OVERVIEW, expectedModel);
-        assertEquals(Arrays.asList(CITIBANK, DELL, EY, FIGMA, YAHOO, APPLE, BOFA), model.getFilteredList());
+        assertEquals(Arrays.asList(CITIBANK, DELL, EY, FIGMA, YAHOO, APPLE, BOFA, GOVTECH), model.getFilteredList());
     }
 
     @Test
@@ -73,7 +74,7 @@ public class SortCommandTest {
         SortCommand command = new SortCommand(comparator);
         expectedModel.sortFilteredList(comparator);
         assertCommandSuccess(command, model, MESSAGE_INTERNSHIP_APPLICATIONS_SORTED_OVERVIEW, expectedModel);
-        assertEquals(Arrays.asList(BOFA, APPLE, YAHOO, FIGMA, EY, DELL, CITIBANK), model.getFilteredList());
+        assertEquals(Arrays.asList(GOVTECH, BOFA, APPLE, YAHOO, FIGMA, EY, DELL, CITIBANK), model.getFilteredList());
     }
 
     @Test

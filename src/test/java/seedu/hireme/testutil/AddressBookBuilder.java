@@ -4,7 +4,7 @@ import seedu.hireme.model.AddressBook;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * Represents a utility class to help with building Addressbook objects.
  * Example usage: <br>
  *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
  */
