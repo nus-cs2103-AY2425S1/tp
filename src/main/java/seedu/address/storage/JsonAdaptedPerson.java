@@ -123,6 +123,10 @@ public class JsonAdaptedPerson {
         return id;
     }
 
+    public void setId() {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
