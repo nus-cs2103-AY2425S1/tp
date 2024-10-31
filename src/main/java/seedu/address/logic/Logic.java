@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyClientHub;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * API of the Logic component
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of reminders */
+    ObservableList<Reminder> getReminderList();
 
     /**
      * Returns the user prefs' client hub file path.

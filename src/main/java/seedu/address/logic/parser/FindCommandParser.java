@@ -74,6 +74,7 @@ public class FindCommandParser implements Parser<Command> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNameCommand.MESSAGE_USAGE));
             }
             return new FindNameCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+
         } else if (trimmedArgs.startsWith(PREFIX_PHONE)) {
             String phoneKeywords = trimmedArgs.substring(PREFIX_PHONE.length()).trim();
             if (phoneKeywords.isEmpty() || !phoneKeywords.matches("\\d+")) {
@@ -81,6 +82,7 @@ public class FindCommandParser implements Parser<Command> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPhoneCommand.MESSAGE_USAGE));
             }
             return new FindPhoneCommand(new PhoneBeginsWithKeywordPredicate(phoneKeywords));
+
         } else if (trimmedArgs.startsWith(PREFIX_ADDRESS)) {
             String addressKeywords = trimmedArgs.substring(PREFIX_ADDRESS.length()).trim();
             if (addressKeywords.isEmpty()) {
@@ -88,13 +90,16 @@ public class FindCommandParser implements Parser<Command> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAddressCommand.MESSAGE_USAGE));
             }
             return new FindAddressCommand(new AddressContainsKeywordsPredicate(addressKeywords));
+
         } else if (trimmedArgs.startsWith(PREFIX_CLIENT_TYPE)) {
             String clientTypeKeywords = trimmedArgs.substring(PREFIX_CLIENT_TYPE.length()).trim();
             if (clientTypeKeywords.isEmpty() || !clientTypeKeywords.matches("^[a-zA-Z0-9\\s]+$")) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindClientTypeCommand.MESSAGE_USAGE));
             }
-            return new FindClientTypeCommand(new ClientTypeContainsKeywordsPredicate(List.of(clientTypeKeywords)));
+            String[] clientTypeKeywordsArr = clientTypeKeywords.split("\\s+");
+
+            return new FindClientTypeCommand(new ClientTypeContainsKeywordsPredicate(List.of(clientTypeKeywordsArr)));
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
