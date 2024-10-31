@@ -221,6 +221,11 @@ public class AddCommandTest {
         public void updateTasksForPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updatePersonAndTasks(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

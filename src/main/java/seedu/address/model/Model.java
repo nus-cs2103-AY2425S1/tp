@@ -137,4 +137,12 @@ public interface Model {
      * {@code target} must exist in the address book.
      */
     void setTask(Task target, Task editedTask);
+
+    /**
+     * Updates the model with a newly edited person and refreshes the task and person lists.
+     *
+     * @param target The original person to replace.
+     * @param editedPerson The new edited person to update in the model.
+     */
+    void updatePersonAndTasks(Person target, Person editedPerson);
 }
