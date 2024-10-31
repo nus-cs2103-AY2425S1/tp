@@ -157,6 +157,13 @@ Format: `view n/NAME j/JOB`
   `Software Engineer`.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
   `Software Engineer`.
+* Details of the person being viewed will be displayed in the display panel
+
+Examples:
+* `view n/Alex Yeoh j/Software Engineer` displays the details of candidate Alex Yeoh in the display panel.
+
+
+* ![display-panel](images/Display-Panel.png)
 
 ### Locating persons by name: `find`
 
