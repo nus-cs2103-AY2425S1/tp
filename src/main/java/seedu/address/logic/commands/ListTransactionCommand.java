@@ -50,7 +50,7 @@ public class ListTransactionCommand extends Command {
         model.updateFilteredPersonList(new IsSelectedPredicate(model, index));
         model.updateTransactionList(selected.getTransactions());
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                model.getFilteredTransactionList().size(), Messages.format(selected)));
+                selected.getTransactions().size(), Messages.format(selected)));
     }
 
     @Override
