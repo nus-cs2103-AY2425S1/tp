@@ -61,10 +61,10 @@ This combination of efficiency and clarity ensures that you can manage your wedd
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/guest` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/guest`, `t/guest t/photographer` etc.
 
 * Commands in WedLinker uses prefix to specify the parameters, the prefixes are stated as such:
   * n/ Name
@@ -104,9 +104,13 @@ Format: `list`
 
 Shows a list of all [Weddings](#wedding-features) in the WedLinker.
 
+Format: `list-weddings`
+
 ### Listing all Tasks : `list-tasks`
 
 Shows a list of all [Tasks](#task-features) in the WedLinker
+
+Format: `list-tasks`
 
 ### Locating contacts by any field, similar to a search function: `find`
 
@@ -132,6 +136,10 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+**Caution:**
+This action is irreversible and cannot be undone. Please ensure you have backed up any important information before proceeding.
+</box>
 
 ### Exiting the program : `exit`
 
