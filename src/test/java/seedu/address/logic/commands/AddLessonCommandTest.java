@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -108,7 +107,7 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void execute_InvalidSubjectTutorial_throwsCommandException() {
+    public void execute_invalidSubjectTutorial_throwsCommandException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         AddLessonCommand addLessonCommand = new AddLessonCommand(Index.fromZeroBased(0),
                 Index.fromZeroBased(3), new Subject("English"));
@@ -117,7 +116,7 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void execute_InvalidSubjectTutee_throwsCommandException() {
+    public void execute_invalidSubjectTutee_throwsCommandException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         AddLessonCommand addLessonCommand = new AddLessonCommand(Index.fromZeroBased(0),
                 Index.fromZeroBased(4), subject);
