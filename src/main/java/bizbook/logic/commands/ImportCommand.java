@@ -28,7 +28,7 @@ public class ImportCommand extends Command {
             + PREFIX_PATH + "./path/to/contacts.vcf";
 
     public static final String MESSAGE_SUCCESS = "%1$d contacts were successfully imported from file";
-    public static final String MESSAGE_FAILED_TO_LOAD = "Unable to load the file to import the contact list";
+    public static final String MESSAGE_FAILED_TO_LOAD = "Unable to find or load the file to import the contact list";
 
     private final FileType fileType;
     private final Path path;
@@ -51,8 +51,6 @@ public class ImportCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        int beforeNumContacts = model.getAddressBook().getPersonList().size();
-
         try {
             Importer importer = fileType.importer();
             model.setAddressBook(importer.importAddressBook(path));
@@ -62,9 +60,8 @@ public class ImportCommand extends Command {
             throw new CommandException(ife.getMessage());
         }
 
-        int afterNumContacts = model.getAddressBook().getPersonList().size();
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, afterNumContacts - beforeNumContacts));
+        int numContacts = model.getAddressBook().getPersonList().size();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, numContacts));
     }
 
     @Override
