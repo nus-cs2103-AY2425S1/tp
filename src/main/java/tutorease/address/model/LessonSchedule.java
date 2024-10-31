@@ -5,12 +5,13 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.UniqueLessonList;
+import tutorease.address.model.person.Person;
 
 /**
  * Wraps all data at the lesson-schedule level
  * Duplicates are not allowed (by .isOverlapping comparison)
  */
-public class LessonSchedule {
+public class LessonSchedule implements ReadOnlyLessonSchedule {
     private final UniqueLessonList lessons;
 
     {
@@ -23,7 +24,7 @@ public class LessonSchedule {
     /**
      * Creates an LessonSchedule using the Lessons in the {@code toBeCopied}
      */
-    public LessonSchedule(LessonSchedule toBeCopied) {
+    public LessonSchedule(ReadOnlyLessonSchedule toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -87,10 +88,9 @@ public class LessonSchedule {
     /**
      * Replaces the contents of this lesson schedule with {@code newData}.
      */
-    public void resetData(LessonSchedule newData) {
+    public void resetData(ReadOnlyLessonSchedule newData) {
         lessons.setLessons(newData.getLessonList());
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -104,5 +104,14 @@ public class LessonSchedule {
 
         LessonSchedule otherLessonSchedule = (LessonSchedule) other;
         return lessons.equals(otherLessonSchedule.lessons);
+    }
+    /**
+     * Updates the person in all lessons in the list.
+     *
+     * @param target The person to be updated.
+     * @param editedPerson The updated person.
+     */
+    public void updatePersonInLessons(Person target, Person editedPerson) {
+        this.lessons.updatePersonInLessons(target, editedPerson);
     }
 }

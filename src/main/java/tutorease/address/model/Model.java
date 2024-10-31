@@ -91,7 +91,9 @@ public interface Model {
      *
      * @return The lesson schedule.
      */
-    LessonSchedule getLessonSchedule();
+    ReadOnlyLessonSchedule getLessonSchedule();
+
+    void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule);
 
     ObservableList<Lesson> getFilteredLessonList();
 

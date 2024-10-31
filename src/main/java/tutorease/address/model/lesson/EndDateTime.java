@@ -2,9 +2,9 @@ package tutorease.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
-import static tutorease.address.commons.util.DateTimeUtil.INVALID_DATETIME_FORMAT;
+import static tutorease.address.commons.util.DateTimeUtil.INVALID_DATETIME_FORMAT_MESSAGE;
+import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.commons.util.DateTimeUtil.parseDateTime;
-import static tutorease.address.model.lesson.StartDateTime.START_DATE_MESSAGE_CONSTRAINTS;
 
 import java.time.LocalDateTime;
 
@@ -17,9 +17,9 @@ import tutorease.address.logic.parser.exceptions.ParseException;
 public class EndDateTime extends DateTime {
     public static final String HOURS_MESSAGE_CONSTRAINTS = "Hours to add must be in multiples of 0.5. "
             + "They also have to be more than 0 and be at most 24";
-    public static final String END_DATE_MESSAGE_CONSTRAINTS = String.format(INVALID_DATETIME_FORMAT, "End");
+    public static final String END_DATE_MESSAGE_CONSTRAINTS = String.format(INVALID_DATETIME_FORMAT_MESSAGE, "End");
 
-    private EndDateTime(LocalDateTime dateTime) {
+    private EndDateTime(LocalDateTime dateTime) throws ParseException {
         super(dateTime);
     }
 
@@ -50,7 +50,7 @@ public class EndDateTime extends DateTime {
     public static EndDateTime createEndDateTime(String dateTime) throws ParseException {
         dateTime = dateTime.trim();
         requireNonNull(dateTime);
-        checkArgument(isValidDateTime(dateTime), START_DATE_MESSAGE_CONSTRAINTS);
+        checkValidDateTime(dateTime);
         return new EndDateTime(parseDateTime(dateTime));
     }
 
