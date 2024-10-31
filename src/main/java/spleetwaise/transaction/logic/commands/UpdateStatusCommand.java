@@ -11,7 +11,6 @@ import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.Messages;
-import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
