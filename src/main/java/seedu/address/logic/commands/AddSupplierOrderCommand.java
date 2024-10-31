@@ -19,7 +19,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 
 public class AddSupplierOrderCommand extends Command {
-    public static final String COMMAND_WORD = "addSupplierOrder";
+    public static final String COMMAND_WORD = "addSupplyOrder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new supplier order to the bakery's order list. "
             + "Parameters: PHONE_NUMBER PRODUCT_ID\n"
