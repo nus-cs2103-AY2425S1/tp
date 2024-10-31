@@ -6,10 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonByNric;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -18,9 +15,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -37,7 +32,6 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validNricUnfilteredList_success() {
-        /*Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());*/
         Optional<Person> personWithMatchingNric = model.getFilteredPersonList().stream()
                 .filter(person -> NRIC_FIRST_PERSON.equals(person.getNric()))
                 .findFirst();
@@ -60,7 +54,6 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidNricUnfilteredList_throwsCommandException() {
-        //Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         Nric invalidNric = new Nric("A0000000A");
         DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
 
@@ -69,11 +62,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validNricFilteredList_success() {
-        //showPersonAtIndex(model, NRIC_FIRST_PERSON);
         showPersonByNric(model, NRIC_FIRST_PERSON);
-
-        /*Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);*/
 
         Optional<Person> personWithMatchingNric = model.getFilteredPersonList().stream()
                 .filter(person -> NRIC_FIRST_PERSON.equals(person.getNric()))
@@ -95,20 +84,16 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidNricFilteredList_throwsCommandException() {
-        //showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonByNric(model, NRIC_FIRST_PERSON);
 
-        //Index outOfBoundIndex = INDEX_SECOND_PERSON;
         Nric invalidNric = NRIC_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        //assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        // ensures that invalidNric is still in bounds of address book list
         Person invalidNricPerson = model.getAddressBook().getPersonList().stream()
                 .filter(p -> p.getNric().equals(NRIC_SECOND_PERSON))
                 .findFirst()
                 .orElse(null);
         assertNotNull(invalidNricPerson);
 
-        //DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
         DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
@@ -138,7 +123,6 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        //Index targetIndex = Index.fromOneBased(1);
         Nric targetNric = new Nric("S1231231D");
         DeleteCommand deleteCommand = new DeleteCommand(targetNric);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetNric=" + targetNric + "}";

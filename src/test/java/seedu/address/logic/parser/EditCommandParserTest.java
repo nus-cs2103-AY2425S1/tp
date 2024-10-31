@@ -26,16 +26,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
@@ -113,7 +109,6 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        //Index targetIndex = INDEX_SECOND_PERSON;
         Nric targetNric = NRIC_SECOND_PERSON;
         String userInput = targetNric + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + APPOINTMENT_DESC_AMY;
@@ -128,7 +123,6 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        //Index targetIndex = INDEX_FIRST_PERSON;
         Nric targetNric = NRIC_FIRST_PERSON;
         String userInput = targetNric + PHONE_DESC_BOB + EMAIL_DESC_AMY + APPOINTMENT_DESC_AMY;
 
@@ -141,8 +135,6 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
-        // name
-        //Index targetIndex = INDEX_THIRD_PERSON;
         Nric targetNric = NRIC_THIRD_PERSON;
         String userInput = targetNric + NAME_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
@@ -182,7 +174,6 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        //Index targetIndex = INDEX_THIRD_PERSON;
         Nric targetNric = NRIC_THIRD_PERSON;
         String userInput = targetNric + TAG_EMPTY;
 

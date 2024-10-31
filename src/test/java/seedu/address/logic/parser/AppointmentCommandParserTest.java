@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.model.person.Nric;
 
@@ -68,14 +67,6 @@ public class AppointmentCommandParserTest {
         // invalid nric
         assertParseFailure(parser, "1 a/15-08-2024 14:30",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
-
-        /*// zero index (not allowed)
-        assertParseFailure(parser, "S1231231D a/15-08-2024 14:30",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
-
-        // negative index
-        assertParseFailure(parser, "S1231231D a/15-08-2024 14:30",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));*/
     }
 
     @Test

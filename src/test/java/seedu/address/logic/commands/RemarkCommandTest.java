@@ -10,14 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonByNric;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -79,7 +77,6 @@ public class RemarkCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        //Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         Nric invalidNric = new Nric("A0000000A");
         RemarkCommand remarkCommand = new RemarkCommand(invalidNric, new Remark(VALID_REMARK_BOB));
         assertCommandFailure(remarkCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
@@ -91,12 +88,9 @@ public class RemarkCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        //showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonByNric(model, NRIC_FIRST_PERSON);
-        //Index outOfBoundIndex = INDEX_SECOND_PERSON;
         Nric invalidNric = NRIC_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        //assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        // ensures that invalidNric is still in bounds of address book list
         Person invalidNricPerson = model.getAddressBook().getPersonList().stream()
                 .filter(p -> p.getNric().equals(NRIC_SECOND_PERSON))
                 .findFirst()
