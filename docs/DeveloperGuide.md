@@ -458,6 +458,18 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person
+
+1. Adding a person with all fields
+
+   1. Prerequisites: No persons in the list.
+
+   1. Test case: `add n/Mario St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2105`<br>
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. There will be a new Person Card shown in the UI.
+   2. Test case: `add n/Mario  St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2105`<br>
+      Expected: No person added. Error details shown in the status message. Status bar remains the same, no new person card added.
+   3. 
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
