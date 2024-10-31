@@ -11,7 +11,8 @@ import seedu.address.model.log.Log;
 public class SessionLogCard extends UiPart<Region> {
 
     private static final String FXML = "SessionLogCard.fxml";
-
+    @FXML
+    private Label id;
     @FXML
     private Label appointmentDate;
     @FXML
@@ -20,9 +21,10 @@ public class SessionLogCard extends UiPart<Region> {
     /**
      * Creates a {@code SessionLogCard} with the given {@code log}.
      */
-    public SessionLogCard(Log log) {
+    public SessionLogCard(Log log, int index) {
         super(FXML);
+        this.id.setText("Session log " + index);
         this.appointmentDate.setText(log.getAppointmentDateString());
-        this.sessionEntry.setText(log.getEntry());
+        this.sessionEntry.setText(log.getTruncatedEntry());
     }
 }
