@@ -34,7 +34,7 @@ public class PaymentCard extends UiPart<Region> {
     private ImageView paymentStatusIcon;
 
     /**
-     * Creates a {@code PaymentCard} with the given {@code Payment} tp display.
+     * Creates a {@code PaymentCard} with the given {@code Payment} to display.
      */
     public PaymentCard(Payment payment) {
         super(FXML);
