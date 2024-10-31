@@ -20,7 +20,8 @@ public class FindCommandParserTest {
 
     @Test
     public void test_parseWithEmptyArg_failure() {
-        assertParseFailure(parser, "     ", String.format(FindCommand.NO_SEARCH_FIELDS_PROVIDED));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
     }
 
     @Test
