@@ -117,7 +117,7 @@ Format: `schedule NAME d/DATE_AND_TIME…​ [note/NOTES]…​`
 Examples:
 * `schedule John Doe d/2024-10-14 1200`
 * `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`
-* `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting` The note "important meeting" will be associated with the first date only. The second date will have no note.
+* `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting` 
 
 ### Setting a reminder: `reminder`
 
