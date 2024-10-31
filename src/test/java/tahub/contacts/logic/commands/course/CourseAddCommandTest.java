@@ -1,4 +1,4 @@
-package tahub.contacts.logic.commands;
+package tahub.contacts.logic.commands.course;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import tahub.contacts.commons.core.GuiSettings;
 import tahub.contacts.logic.Messages;
+import tahub.contacts.logic.commands.CommandResult;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ReadOnlyAddressBook;
@@ -31,11 +32,11 @@ import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.model.tutorial.Tutorial;
 
-public class CourseCommandTest {
+public class CourseAddCommandTest {
 
     @Test
     public void constructor_nullCourse_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CourseCommand(null));
+        assertThrows(NullPointerException.class, () -> new CourseAddCommand(null));
     }
 
     @Test
@@ -43,9 +44,9 @@ public class CourseCommandTest {
         ModelStubAcceptingCourseAdded modelStub = new ModelStubAcceptingCourseAdded();
         Course validCourse = new Course(new CourseCode("CS2103T"), new CourseName("Software Engineering"));
 
-        CommandResult commandResult = new CourseCommand(validCourse).execute(modelStub);
+        CommandResult commandResult = new CourseAddCommand(validCourse).execute(modelStub);
 
-        assertEquals(String.format(CourseCommand.MESSAGE_SUCCESS, Messages.format(validCourse)),
+        assertEquals(String.format(CourseAddCommand.MESSAGE_SUCCESS, Messages.format(validCourse)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCourse), modelStub.coursesAdded);
     }
@@ -53,25 +54,25 @@ public class CourseCommandTest {
     @Test
     public void execute_duplicateCourse_throwsCommandException() {
         Course validCourse = new Course(new CourseCode("CS2103T"), new CourseName("Software Engineering"));
-        CourseCommand courseCommand = new CourseCommand(validCourse);
+        CourseAddCommand courseAddCommand = new CourseAddCommand(validCourse);
         ModelStub modelStub = new ModelStubWithCourse(validCourse);
 
         assertThrows(CommandException.class,
-                CourseCommand.MESSAGE_DUPLICATE_PERSON, () -> courseCommand.execute(modelStub));
+                CourseAddCommand.MESSAGE_DUPLICATE_PERSON, () -> courseAddCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Course course1 = new Course(new CourseCode("CS2103T"), new CourseName("Software Engineering"));
         Course course2 = new Course(new CourseCode("CS2101"), new CourseName("Effective Communication"));
-        CourseCommand addCourse1Command = new CourseCommand(course1);
-        CourseCommand addCourse2Command = new CourseCommand(course2);
+        CourseAddCommand addCourse1Command = new CourseAddCommand(course1);
+        CourseAddCommand addCourse2Command = new CourseAddCommand(course2);
 
         // same object -> returns true
         assertTrue(addCourse1Command.equals(addCourse1Command));
 
         // same values -> returns true
-        CourseCommand addCourse1CommandCopy = new CourseCommand(course1);
+        CourseAddCommand addCourse1CommandCopy = new CourseAddCommand(course1);
         assertTrue(addCourse1Command.equals(addCourse1CommandCopy));
 
         // different types -> returns false
@@ -86,9 +87,10 @@ public class CourseCommandTest {
 
     @Test
     public void toStringMethod() {
-        CourseCommand command = new CourseCommand(new Course(new CourseCode("CS2103T"),
+        CourseAddCommand command = new CourseAddCommand(new Course(new CourseCode("CS2103T"),
                 new CourseName("Software Engineering")));
-        String expected = "tahub.contacts.logic.commands.CourseCommand{toAdd=[CS2103T: Software Engineering]}";
+        String expected = "tahub.contacts.logic.commands.course."
+                + "CourseAddCommand{toAdd=[CS2103T: Software Engineering]}";
         assertEquals(expected, command.toString());
     }
 

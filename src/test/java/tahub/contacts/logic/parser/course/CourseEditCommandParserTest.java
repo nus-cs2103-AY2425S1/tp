@@ -1,4 +1,4 @@
-package tahub.contacts.logic.parser;
+package tahub.contacts.logic.parser.course;
 
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.commands.CommandTestUtil.COURSE_CODE_DESC;
@@ -13,21 +13,21 @@ import static tahub.contacts.logic.parser.CommandParserTestUtil.assertParseSucce
 
 import org.junit.jupiter.api.Test;
 
-import tahub.contacts.logic.commands.EditCourseCommand;
+import tahub.contacts.logic.commands.course.CourseEditCommand;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
 import tahub.contacts.testutil.EditCourseDescriptorBuilder;
 
-public class EditCourseCommandParserTest {
+public class CourseEditCommandParserTest {
 
-    private final EditCourseCommandParser parser = new EditCourseCommandParser();
+    private final CourseEditCommandParser parser = new CourseEditCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
         CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
-        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder()
+        CourseEditCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder()
                 .withCourseName(VALID_COURSE_NAME).build();
-        EditCourseCommand expectedCommand = new EditCourseCommand(courseCode, descriptor);
+        CourseEditCommand expectedCommand = new CourseEditCommand(courseCode, descriptor);
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + COURSE_CODE_DESC + COURSE_NAME_DESC, expectedCommand);
@@ -37,7 +37,7 @@ public class EditCourseCommandParserTest {
     public void parse_missingParts_failure() {
         // no course code
         assertParseFailure(parser, COURSE_NAME_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditCourseCommand.MESSAGE_USAGE));
+                CourseEditCommand.MESSAGE_USAGE));
     }
 
     @Test
