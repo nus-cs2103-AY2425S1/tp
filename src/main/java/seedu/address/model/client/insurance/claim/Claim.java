@@ -118,13 +118,15 @@ public class Claim {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Claim c)) {
-            return false;
+        if (other instanceof Claim) {
+            Claim otherClaim = (Claim) other;
+
+            return this.claimId.equals(otherClaim.claimId)
+                    && this.isOpen == otherClaim.isOpen
+                    && this.claimAmount == otherClaim.claimAmount;
         }
 
-        return claimId.equals(c.getClaimId())
-                && isOpen == c.getClaimStatus()
-                && claimAmount == c.getClaimAmount();
+        return false;
     }
 
     /**
