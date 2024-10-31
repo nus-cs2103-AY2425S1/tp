@@ -103,7 +103,7 @@ Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help` 
+Format: `help`
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -188,7 +188,7 @@ Edits an existing client in the address book.
 
 Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
-Note: 
+Note:
 * To edit a client's information, it must have at least **one** of the optional fields.
 * Edits the client at the specified `CLIENT_INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
@@ -214,7 +214,7 @@ Edits a specific client's rental information in the address book.
 
 Format: `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`
 
-Note: 
+Note:
 * To edit a client's rental information, it must have at least **one** of the optional fields.
 * Edits the client's rental information at the specified `CLIENT_INDEX` and `RENTAL_INDEX`. The `CLIENT_INDEX` refers to the client index number shown in the displayed client list and the `RENTAL_INDEX` refers to the client's rental index number shown in the displayed rental information list. All indexes **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
@@ -350,5 +350,3 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
