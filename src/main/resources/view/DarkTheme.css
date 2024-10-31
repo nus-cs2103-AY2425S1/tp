@@ -348,37 +348,16 @@
     -fx-font-size: 16;
 }
 
-#remarks {
-    -fx-spacing: 2;
-    -fx-padding: 5 0 10 0;
-}
-
-#remarks .label {
-    -fx-font-family: "Raleway";
-    -fx-font-style: italic;
-    -fx-font-size: 16px;
-    -fx-text-fill: derive(#e8def8, -50%);
-    -fx-background-color: #fdf5f5;
-    -fx-padding: 3 5 3 5;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
-    -fx-border-color: #e0e0e0;
-    -fx-border-width: 1;
-}
-
 #displayLessons {
-    -fx-hgap: 7;
-    -fx-vgap: 3;
-    -fx-margin-top: 10px;
+    -fx-spacing: 8;
+    -fx-padding: 10;
 
 }
 #displayLessons .label{
-    -fx-text-fill: white;
+    -fx-padding: 5 10;
+    -fx-text-fill: #555555;
     -fx-font-size: 24px;
-    -fx-background-color: #88c1d0;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
+    -fx-opacity: 0.9;
 }
 
 #displayTags {

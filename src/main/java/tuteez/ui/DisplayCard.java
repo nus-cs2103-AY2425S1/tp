@@ -1,6 +1,7 @@
 package tuteez.ui;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -11,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import tuteez.model.person.Person;
 import tuteez.model.person.TelegramUsername;
+import tuteez.model.person.lesson.Lesson;
 
 /**
  * A UI component that displays all detailed information of a {@code Person}.
@@ -38,7 +40,7 @@ public class DisplayCard extends UiPart<Region> {
     @FXML
     private FlowPane displayTags;
     @FXML
-    private FlowPane displayLessons;
+    private VBox displayLessons;
     @FXML
     private VBox displayRemarks;
 
@@ -62,8 +64,7 @@ public class DisplayCard extends UiPart<Region> {
                         String remark = person.getRemarkList().getRemarks().get(i).toString();
                         displayRemarks.getChildren().add(new Label((i + 1) + ". " + remark));
                     });
-            person.getLessons().stream()
-                    .forEach(lesson -> displayLessons.getChildren().add(new Label(lesson.getDayAndTime())));
+            setDisplayLessons(person);
         }
     }
 
@@ -84,5 +85,15 @@ public class DisplayCard extends UiPart<Region> {
         } else {
             telegram.setVisible(false);
         }
+    }
+
+    private void setDisplayLessons(Person person) {
+        List<Lesson> sortedLessons = person.getLessons().stream()
+                .sorted(new Lesson.LessonComparator())
+                .toList(); // Collect sorted lessons to a list.
+
+        IntStream.range(0, sortedLessons.size())
+                .mapToObj(i -> new Label((i + 1) + ". " + sortedLessons.get(i).getDayAndTime()))
+                .forEach(label -> displayLessons.getChildren().add(label));
     }
 }
