@@ -63,7 +63,6 @@ public class MarkCommand extends Command {
         Person updatedPerson = new Person(
                 personToMark.getName(),
                 personToMark.getPhone(),
-                personToMark.getAddress(),
                 personToMark.getEmail(),
                 personToMark.getTelegram(),
                 personToMark.getGithub(),

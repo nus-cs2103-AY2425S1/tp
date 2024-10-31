@@ -22,7 +22,7 @@ public class TelegramTest {
 
     @Test
     public void isValidTelegram() {
-        // null address
+        // null telegram
         assertThrows(NullPointerException.class, () -> Telegram.isValidTelegram(null));
 
         // invalid telegram IDs
