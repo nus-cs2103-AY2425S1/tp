@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -34,5 +35,27 @@ public class ViewClientCommand extends Command {
         }
         String showClientViewMessage = clientName + "'s Client tab displayed!";
         return new CommandResult(showClientViewMessage, false, true, false);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewClientCommand)) {
+            return false;
+        }
+
+        ViewClientCommand otherViewClientCommand = (ViewClientCommand) other;
+        return clientName.equals(otherViewClientCommand.clientName);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toShowClient", clientName)
+                .toString();
     }
 }
