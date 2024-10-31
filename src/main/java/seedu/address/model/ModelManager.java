@@ -132,6 +132,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEventOverlap(Event event, Event eventToIgnore) {
+        requireAllNonNull(event, eventToIgnore);
+        return addressBook.hasEventOverlap(event, eventToIgnore);
+    }
+
+    @Override
     public void addEvent(Event toAdd) {
         requireNonNull(toAdd);
         addressBook.addEvent(toAdd);
