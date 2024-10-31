@@ -26,8 +26,8 @@ public class AddCommand extends ConcreteCommand {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + "[" + PREFIX_ROOM_NUMBER + "ROOM NUMBER] "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_ROOM_NUMBER + "ROOM_NUMBER] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -35,8 +35,8 @@ public class AddCommand extends ConcreteCommand {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ROOM_NUMBER + "05-0523 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "Floor10 "
+            + PREFIX_TAG + "Table Tennis ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PHONE = "This phone number already exists in the address book";
