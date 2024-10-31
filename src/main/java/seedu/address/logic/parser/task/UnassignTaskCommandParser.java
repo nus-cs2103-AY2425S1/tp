@@ -3,6 +3,9 @@ package seedu.address.logic.parser.task;
 import seedu.address.logic.commands.task.UnassignTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new {@code UnassignTaskCommand} object.
+ */
 public class UnassignTaskCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the UnassignTaskCommand

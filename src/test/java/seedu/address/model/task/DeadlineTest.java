@@ -19,19 +19,19 @@ public class DeadlineTest {
     @Test
     public void constructor_validStringDescriptionAndByDate_success() {
         Deadline deadline = new Deadline(VALID_DESCRIPTION, VALID_BY_DATE);
-        assertEquals("[D][ ] Submit assignment (by: Dec 31 2023)", deadline.toString());
+        assertEquals("[ ] Submit assignment (by: Dec 31 2023)", deadline.toString());
     }
 
     @Test
     public void constructor_validDescriptionObject_success() {
         Deadline deadline = new Deadline(DESCRIPTION_OBJ.toString(), VALID_BY_DATE);
-        assertEquals("[D][ ] Submit assignment (by: Dec 31 2023)", deadline.toString());
+        assertEquals("[ ] Submit assignment (by: Dec 31 2023)", deadline.toString());
     }
 
     @Test
     public void constructor_withDoneStatus_success() {
         Deadline deadline = new Deadline(VALID_DESCRIPTION, VALID_BY_DATE, true);
-        assertEquals("[D][X] Submit assignment (by: Dec 31 2023)", deadline.toString());
+        assertEquals("[X] Submit assignment (by: Dec 31 2023)", deadline.toString());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class DeadlineTest {
         Deadline deadline = new Deadline(VALID_DESCRIPTION, VALID_BY_DATE);
         deadline.markAsDone();
         assertTrue(deadline.getIsDone());
-        assertEquals("[D][X] Submit assignment (by: Dec 31 2023)", deadline.toString());
+        assertEquals("[X] Submit assignment (by: Dec 31 2023)", deadline.toString());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class DeadlineTest {
         Deadline deadline = new Deadline(VALID_DESCRIPTION, VALID_BY_DATE, true);
         deadline.markAsUndone();
         assertFalse(deadline.getIsDone());
-        assertEquals("[D][ ] Submit assignment (by: Dec 31 2023)", deadline.toString());
+        assertEquals("[ ] Submit assignment (by: Dec 31 2023)", deadline.toString());
     }
 
     @Test
@@ -87,6 +87,6 @@ public class DeadlineTest {
     @Test
     public void toString_correctlyFormatsDeadline() {
         Deadline deadline = new Deadline(VALID_DESCRIPTION, VALID_BY_DATE);
-        assertEquals("[D][ ] Submit assignment (by: Dec 31 2023)", deadline.toString());
+        assertEquals("[ ] Submit assignment (by: Dec 31 2023)", deadline.toString());
     }
 }

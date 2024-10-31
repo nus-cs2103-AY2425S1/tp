@@ -41,7 +41,8 @@ public class Messages {
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag(s) %1$s to %2$s.";
     public static final String MESSAGE_ADD_TASK_SUCCESS = "Added task(s) %1$s to %2$s.";
     public static final String MESSAGE_UNASSIGN_TASK_SUCCESS = "Removed task(s) %1$s from %2$s.";
-    public static final String MESSAGE_TASK_NOT_FOUND_IN_CONTACT = "Some task(s) were not found in the person's task list.";
+    public static final String MESSAGE_TASK_NOT_FOUND_IN_CONTACT = "Some task(s) "
+            + "were not found in the person's task list.";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
 
     public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "The index specified does not refer "

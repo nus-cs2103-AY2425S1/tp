@@ -20,6 +20,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.task.Task;
 
+
+/**
+ * Assigns one or more tasks to a person in the person list.
+ * The person must be a Vendor, as only vendors can be assigned tasks.
+ */
 public class AssignTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "assign-task";

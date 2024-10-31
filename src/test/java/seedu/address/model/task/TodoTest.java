@@ -15,25 +15,25 @@ public class TodoTest {
     @Test
     public void constructor_validStringDescription_success() {
         Todo todo = new Todo(VALID_DESCRIPTION);
-        assertEquals("[T][ ] Buy groceries", todo.toString());
+        assertEquals("[ ] Buy groceries", todo.toString());
     }
 
     @Test
     public void constructor_validDescriptionObject_success() {
         Todo todo = new Todo(DESCRIPTION_OBJ);
-        assertEquals("[T][ ] Complete homework", todo.toString());
+        assertEquals("[ ] Complete homework", todo.toString());
     }
 
     @Test
     public void constructor_withDoneStatus_success() {
         Todo todo = new Todo(VALID_DESCRIPTION, true);
-        assertEquals("[T][X] Buy groceries", todo.toString());
+        assertEquals("[X] Buy groceries", todo.toString());
     }
 
     @Test
     public void constructor_withDescriptionObjectAndDoneStatus_success() {
         Todo todo = new Todo(DESCRIPTION_OBJ, true);
-        assertEquals("[T][X] Complete homework", todo.toString());
+        assertEquals("[X] Complete homework", todo.toString());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TodoTest {
         Todo todo = new Todo(VALID_DESCRIPTION);
         todo.markAsDone();
         assertTrue(todo.getIsDone());
-        assertEquals("[T][X] Buy groceries", todo.toString());
+        assertEquals("[X] Buy groceries", todo.toString());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class TodoTest {
         Todo todo = new Todo(VALID_DESCRIPTION, true);
         todo.markAsUndone();
         assertFalse(todo.getIsDone());
-        assertEquals("[T][ ] Buy groceries", todo.toString());
+        assertEquals("[ ] Buy groceries", todo.toString());
     }
 
     @Test
@@ -83,6 +83,6 @@ public class TodoTest {
     @Test
     public void toString_trimsWhitespaceCorrectly() {
         Todo todo = new Todo(VALID_DESCRIPTION_TRIMMED.trim());
-        assertEquals("[T][ ] Clean the house", todo.toString());
+        assertEquals("[ ] Clean the house", todo.toString());
     }
 }

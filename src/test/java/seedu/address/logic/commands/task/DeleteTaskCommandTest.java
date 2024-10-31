@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.task.DeleteTaskCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.task.Task;
@@ -57,8 +57,7 @@ public class DeleteTaskCommandTest {
     @Test
     public void toString_validIndex_returnsCorrectString() {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
-        System.out.println(deleteTaskCommand.toString());
-        String expectedString = "seedu.address.logic.commands."
+        String expectedString = "seedu.address.logic.commands.task."
                 + "DeleteTaskCommand{targetIndex=seedu.address.commons.core.index.Index{zeroBasedIndex=0}}";
         assertEquals(expectedString, deleteTaskCommand.toString());
     }

@@ -10,6 +10,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Utility class for parsing task assignment-related commands.
+ * This class provides methods to extract a person index and task indexes from command arguments.
+ */
 public class TaskAssignmentParserUtil {
     /**
      * Parses the given {@code String} of arguments and returns a person index and set of task indexes.
@@ -36,10 +40,19 @@ public class TaskAssignmentParserUtil {
         }
     }
 
+    /**
+     * Data structure to hold the parsed person index and set of task indexes.
+     */
     public static class ParsedCommandData {
         public final Index personIndex;
         public final Set<Index> taskIndexes;
 
+        /**
+         * Constructs a {@code ParsedCommandData} object.
+         *
+         * @param personIndex the index of the person in the command.
+         * @param taskIndexes the set of task indexes parsed from the command.
+         */
         public ParsedCommandData(Index personIndex, Set<Index> taskIndexes) {
             this.personIndex = personIndex;
             this.taskIndexes = taskIndexes;

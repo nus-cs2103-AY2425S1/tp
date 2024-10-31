@@ -5,6 +5,11 @@ import java.util.Set;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
+/**
+ * Utility class for editing a {@code Person}'s task assignments.
+ * This class provides methods to create a new {@code Person} object
+ * with an updated set of tasks, either assigning or unassigning tasks.
+ */
 public class PersonTaskEditorUtil {
 
     /**
