@@ -27,6 +27,7 @@ public class MatchCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchCommand.MESSAGE_USAGE);
 
         // Too few arguments
+        assertParseFailure(parser, "", expectedMessage);
         assertParseFailure(parser, "1", expectedMessage);
 
         // Too many arguments
