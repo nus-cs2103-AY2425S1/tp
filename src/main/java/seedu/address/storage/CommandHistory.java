@@ -44,7 +44,12 @@ public class CommandHistory {
      * @param command command to add.
      */
     public void addCommand(String command) {
-        assert(!command.isEmpty());
+        if (command == null) {
+            return;
+        }
+
+        assert(command != null && !command.isEmpty());
+
         logger.log(Level.INFO, "Adding command into command history");
         listOfCommands.add(command);
         index = listOfCommands.size();
@@ -113,5 +118,13 @@ public class CommandHistory {
         String command = listOfCommands.get(index + 1);
         index++;
         return command;
+    }
+
+    /**
+     * Clears the command history.
+     */
+    public void clearListOfCommands() {
+        this.listOfCommands.clear();
+        this.index = 0;
     }
 }
