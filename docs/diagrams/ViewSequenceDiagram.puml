@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewClientCommandParser" as ViewClientCommandParser LOGIC_COLOR
+participant "<<class>> ClientUtil" as ClientUtil LOGIC_COLOR_T1
+participant "v:ViewClientCommand" as ViewClientCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("view John Doe")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("view John Doe")
+activate AddressBookParser
+
+create ViewClientCommandParser
+AddressBookParser -> ViewClientCommandParser
+activate ViewClientCommandParser
+
+ViewClientCommandParser --> AddressBookParser
+deactivate ViewClientCommandParser
+
+AddressBookParser -> ViewClientCommandParser : parse("view John Doe")
+activate ViewClientCommandParser
+
+activate ClientUtil
+ViewClientCommandParser -> ClientUtil : parseName("John Doe")
+ClientUtil --> ViewClientCommandParser: "John Doe" name object
+deactivate ClientUtil
+
+create ViewClientCommand
+ViewClientCommandParser -> ViewClientCommand
+activate ViewClientCommand
+
+ViewClientCommand --> ViewClientCommandParser :
+deactivate ViewClientCommand
+
+ViewClientCommandParser --> AddressBookParser : v
+deactivate ViewClientCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewClientCommandParser -[hidden]-> AddressBookParser
+destroy ViewClientCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewClientCommand : execute(m)
+activate ViewClientCommand
+
+ViewClientCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ViewClientCommand
+deactivate Model
+
+create CommandResult
+ViewClientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewClientCommand
+deactivate CommandResult
+
+ViewClientCommand --> LogicManager : r
+deactivate ViewClientCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

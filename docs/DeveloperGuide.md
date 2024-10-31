@@ -176,9 +176,36 @@ The sequence diagram below models the interactions between the different compone
 
 #### Example Usage
 1. User inputs the command `schedule Alice Tan d/2024-10-29 1200 note/Second Appointment`.
-2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached. 
+2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached.
 3. The new appointment is then displayed in the UI, reflecting the updated schedule for "Alice Tan".
 
+<<<<<<< HEAD
+### View Client Feature
+
+#### Overview
+The `view` command enables users to access and display detailed information for a specific client in the address book.
+
+The sequence diagram below models the interactions between the different components of PhysioPal for the execution of the `view` command.
+
+![ViewClientSequenceDiagram](images/ViewSequenceDiagram.png)
+
+#### Details
+1. The user executes the command `view John Doe` to display the details of a client named John Doe.
+2. The `LogicManager` object receives this command and calls the `parseCommand` method of `AddressBookParser` to interpret the input.
+3. The `AddressBookParser` then creates a `ViewClientCommandParser` object to handle parsing.
+4. The `ViewClientCommandParser` object calls its `parse` method to extract the client name, and the `ClientUtil` utility class is used to confirm the full name "John Doe."
+5. The `ViewClientCommandParser` creates a `ViewClientCommand` object.
+6. The `ViewClientCommandParser` returns the `ViewClientCommand` object to `AddressBookParser`, which then returns it to `LogicManager`.
+7. The `LogicManager` object invokes the `execute` method of `ViewClientCommand`.
+8. The `execute` method calls `getFilteredPersonList` on the `Model` to retrieve the details of the specified client.
+9. The `execute` method creates a `CommandResult` object containing the client’s information.
+10. The `CommandResult` object is returned to `LogicManager`, which then displays the client’s information to the user.
+
+#### Example Usage
+1. User inputs the command `view Alice Tan`.
+2. The system displays the details of "Alice Tan," including name, contact information, address, condition, and any scheduled appointments.
+3. This information is shown in a pop-up or a designated UI section for easy access by the user.
+=======
 
 ### Reminder Feature
 
@@ -228,6 +255,7 @@ The sequence diagram below models the interactions between the different compone
 2. This deletes the appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm.
 3. The updated schedule for "Alice Tan" is then displayed in the UI.
 
+>>>>>>> origin
 
 ### \[Proposed\] Undo/redo feature
 
@@ -390,15 +418,17 @@ allowing flexibility to tailor the address book to specific needs.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                | I want to …​                                        | So that I can…​                                                  |
-|----------|----------------------------------------|-----------------------------------------------------|------------------------------------------------------------------|
-| `* * *`  | new user                               | see usage instructions                              | refer to instructions when I forget how to use the App           |
-| `* * *`  | physiotherapist                        | add new client contact information                  | retrieve client details when needed.                             |
-| `* * *`  | physiotherapist                        | delete outdated or irrelevant patient information   | keep my database clean and relevant                              |
-| `* * *`  | physiotherapist                        | search for client contact information by name or ID | quickly access the required client’s details                     |
-| `* * *`  | physiotherapist                        | schedule appointments for my clients                | keep track of my daily sessions and avoid double bookings        |
-| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments | ensure that no patient is missed                                 |
-| `* *`    | physiotherapist with many appointments | see upcoming appointments listed at the top         | prominently see what I need to do in order to manage my schedule |
+| Priority | As a …​                                | I want to …​                                         | So that I can…​                                                  |
+|----------|----------------------------------------|------------------------------------------------------|------------------------------------------------------------------|
+| `* * *`  | new user                               | see usage instructions                               | refer to instructions when I forget how to use the App           |
+| `* * *`  | physiotherapist                        | add new client contact information                   | retrieve client details when needed.                             |
+| `* * *`  | physiotherapist                        | delete outdated or irrelevant patient information    | keep my database clean and relevant                              |
+| `* * *`  | physiotherapist                        | search for client contact information by name        | enables swift retrieval of specific client details               |
+| `* * *`  | physiotherapist                        | search for client contact information by number      | access the client’s details when name is not readily recalled    |
+| `* * *`  | physiotherapist                        | view client information in a neatly displayed format | look through the client's details in depth                       |
+| `* * *`  | physiotherapist                        | schedule appointments for my clients                 | keep track of my daily sessions and avoid double bookings        |
+| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments  | ensure that no patient is missed                                 |
+| `* *`    | physiotherapist with many appointments | see upcoming appointments listed at the top          | prominently see what I need to do in order to manage my schedule |
 
 ### Use cases
 
@@ -431,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Physiotherapist requests to schedule a new appointment for a client. 
+1. Physiotherapist requests to schedule a new appointment for a client.
 2. PhysioPal creates appointment for client with the appointment details provided.
 3. PhysioPal confirms creation of appointment and displays a success message.
 
@@ -732,13 +762,63 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete XXX`, `...` (where XXX is not a name in the address book)<br>
        Expected: Similar to previous.
 
+<<<<<<< HEAD
+1. _{ more test cases …​ }_
+
+### Locating Persons
+
+1. Locating a person by name while all clients are being shown.
+
+    1. **Prerequisites**: Ensure at least one contact with the name "John Doe" exists in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+    2. **Test case**: `find John`<br>**Expected**: All contacts with names containing "John" (case-insensitive) should appear in the results, e.g., "John Doe." The search should be able to display "john" and "John Doe" regardless of casing.
+
+    3. **Test case**: `find alex david`<br>**Expected**: Contacts containing "alex" or "david" in any order should appear in the results, e.g., "Alex Yeoh" and "David Li." The results should display all contacts that match at least one keyword in a case-insensitive manner.
+
+    4. **Test case**: `find Han`<br>**Expected**: No contact is shown in the results if only partial matches exist, such as "Hans," since the system only matches full words.
+
+2. Locating a person by phone number while all clients are being shown.
+
+    1. **Test case**: `find p/88`<br>**Expected**: All contacts with phone numbers containing "88" should be shown. For instance, if "John Doo" has the phone number "88765432," he should appear in the results, allowing partial phone number matches.
+
+
+=======
+>>>>>>> origin
 ### Scheduling an appointment
 
 1. Scheduling an appointment for a client while all clients are being shown.
 
     1. Prerequisites: Only **one** contact with the name John Doe should exist in PhysioPal. If not, run the appropriate command to add John Doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name John Doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-   
+
     1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: Contact named John Doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
+<<<<<<< HEAD
+
+    1. Test case: `schedule John Doee d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
+
+    1. Test case: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>Expected: Similar to previous.
+
+### Viewing a Person
+
+1. Viewing a person’s details in the address book.
+
+    1. **Prerequisites**: Ensure that the contact with the exact name exists in PhysioPal. And that he or she has a scheduled appointment. If not, add the required contact or appointment using a command similar to:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` and `schedule John Doe d/2024-10-29 1200 note/First Appointment` respectively
+
+    2. **Test case**: `view John Doe`<br>**Expected**: A pop-up window should display the full details for John Doe, including:
+        - Name
+        - Phone Number
+        - Email
+        - Address
+        - Condition
+        - Schedule
+        - Reminder
+
+    3. **Test case**: `view Betsy Crowe`<br>**Expected**: A pop-up window displays Betsy Crowe’s details with all specified fields shown.
+
+    4. **Test case**: `view John`<br>**Expected**: An error message appears, as the name entered does not match the full name exactly.
+
+    5. **Test case**: `view Nonexistent Name`<br>**Expected**: An error message appears indicating that no matching contact is found.
+
+=======
    
     1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
 
@@ -787,6 +867,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `reminder-delete John Doe`<br>Expected: Contact named John Doe will be updated without the reminder. Success message of the reminder deletion shown in the status message.
 
     1. Test case: `reminder-delete John Doe`<br>Expected: No contact is updated. Error details shown in the status message.
+>>>>>>> origin
 
 ### Listing upcoming appointments
 

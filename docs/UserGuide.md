@@ -32,7 +32,7 @@ your contact management tasks done faster than traditional GUI apps.
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete John Doe` : Deletes the contact named `John Doe` in the current list.
-   
+
    * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for John Doe on October 14, 2024, at 12pm with the given note.
 
    * `appointment-delete John Doe d/2024-10-14 1200` : Deletes a specified appointment for John Doe.
@@ -116,7 +116,7 @@ Format: `schedule NAME d/DATE_AND_TIME…​ note/NOTES…​`
 Examples:
 * `schedule John Doe d/2024-10-14 1200 note/first appointment`
 * `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`
-* `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting note/not so important meeting` The note "important meeting" will be associated with the first date only. The second date will have no note.
+* `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting note/not so important meeting`
 
 ### Setting a reminder: `reminder`
 
@@ -218,6 +218,7 @@ The name must match the full name exactly.
 
 **Examples:**
 * `view John Doe`
+* ![result for 'view John Doe'](images/viewJohnDoe.png)
 * `view Betsy Crowe`
 
 ### Editing a person : `edit`
@@ -237,7 +238,7 @@ Examples:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `John Doe` to be `91234567` and `johndoe@example.com` respectively.
 *  `edit Betsy Crowe n/Betsy Crower t/` Edits the person with the name `Betsy Crowe` to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
 Finds persons whose names contain any of the given keywords.
 
