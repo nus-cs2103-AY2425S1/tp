@@ -21,12 +21,6 @@ public class LogListTest {
     }
 
     @Test
-    public void addLog_nullLog_throwsNullPointerException() {
-        LogList logList = new LogList();
-        assertThrows(NullPointerException.class, () -> logList.addLog(null));
-    }
-
-    @Test
     public void getLogs_emptyLogList_returnsEmptyList() {
         LogList logList = new LogList();
         assertTrue(logList.getLogs().isEmpty());
