@@ -20,6 +20,7 @@ import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.lesson.Lesson;
@@ -142,6 +143,10 @@ class DeleteContactCommandTest {
 
         @Override
         public void setTutorEase(ReadOnlyTutorEase newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
             throw new AssertionError("This method should not be called.");
         }
 
