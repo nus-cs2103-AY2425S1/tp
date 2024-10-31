@@ -67,7 +67,7 @@ public class Messages {
      */
     public static String format(Reminder reminder) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(reminder.getPerson())
+        builder.append(reminder.getPersonName())
                 .append("; Date and Time: ")
                 .append(reminder.getDateTime())
                 .append("; Description: ")

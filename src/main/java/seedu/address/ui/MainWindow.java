@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         // initialise reminder list panel
-        reminderListPanel = new ReminderListPanel();
+        reminderListPanel = new ReminderListPanel(logic.getReminderList());
         reminderListPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
 
         // initialise status bar

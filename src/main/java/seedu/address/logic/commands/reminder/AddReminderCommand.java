@@ -27,7 +27,7 @@ public class AddReminderCommand extends Command {
             + "Description\n"
             + "Example: " + COMMAND_WORD + " "
             + "John "
-            + "2021-12-31 2359 "
+            + "2021-12-31 23:59"
             + "New Year's Eve";
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
@@ -64,13 +64,16 @@ public class AddReminderCommand extends Command {
         requireNonNull(model);
 
         // Parse input using the NameContainsKeywordsPredicate
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(List.of(toAdd.getPerson()));
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(List.of(toAdd.getPersonName()));
         List<Person> matchingPersons = model.getClientHub().getPersonList().filtered(predicate);
 
         // Check if there is exactly one match
         if (matchingPersons.size() == 1) {
             Person person = matchingPersons.get(0);
-            model.addReminder(toAdd);
+            String personFullName = person.getName().fullName;
+            Reminder reminderWithFullName = toAdd.getReminderWithFullName(personFullName);
+            model.addReminder(reminderWithFullName);
+
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else if (matchingPersons.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_PERSON);
