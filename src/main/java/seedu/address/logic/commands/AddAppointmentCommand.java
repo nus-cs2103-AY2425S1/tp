@@ -67,7 +67,7 @@ public class AddAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getAddressBook().getPersonList();
 
         Optional<Person> patient = lastShownList.stream()
                 .filter(person -> person instanceof Patient && person.getName().equals(patientName))
