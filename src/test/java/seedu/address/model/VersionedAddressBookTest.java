@@ -27,6 +27,11 @@ public class VersionedAddressBookTest {
     }
 
     @Test
+    public void redo_initialState_throwsCommandException() {
+        assertThrows(CommandException.class, () -> versionedAddressBook.redo());
+    }
+
+    @Test
     public void getCurrentPredicate_initialState_returnsPredicateShowAllPersons() {
         Predicate<? super Person> currentPredicate = versionedAddressBook.getCurrentPredicate();
 
@@ -38,12 +43,27 @@ public class VersionedAddressBookTest {
         // Add a person and commit
         AddressBook updatedAddressBook = new AddressBook();
         updatedAddressBook.addPerson(TypicalPersons.TEACHER_ALICE);
-        versionedAddressBook.commit(updatedAddressBook, person -> true);
+        versionedAddressBook.commit(updatedAddressBook, PREDICATE_SHOW_ALL_PERSONS);
 
         // Undo once and assert that the state is reverted to previous original state
         ReadOnlyAddressBook expectedAddressBook = new AddressBook();
         ReadOnlyAddressBook previousState = versionedAddressBook.undo();
         assertEquals(previousState, expectedAddressBook);
+    }
+
+    @Test
+    public void redo_withNextStates_success() throws CommandException {
+        // Add a person, commit, and then undo
+        AddressBook updatedAddressBook = new AddressBook();
+        updatedAddressBook.addPerson(TypicalPersons.TEACHER_ALICE);
+        versionedAddressBook.commit(updatedAddressBook, PREDICATE_SHOW_ALL_PERSONS);
+        versionedAddressBook.undo();
+
+        // Redo and assert that the state is restored to the updated state
+        AddressBook expectedAddressBook = new AddressBook();
+        expectedAddressBook.addPerson(TypicalPersons.TEACHER_ALICE);
+        ReadOnlyAddressBook redoneState = versionedAddressBook.redo();
+        assertEquals(redoneState, expectedAddressBook);
     }
 
     @Test
