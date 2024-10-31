@@ -71,14 +71,18 @@ public class ImportCommand extends Command {
         requireNonNull(model);
         requireNonNull(importCsvFilePath);
         requireNonNull(storage);
-        int studentsImported = readCsvFile(model);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, studentsImported));
+        int numStudentsImported = addStudentsFromCsv(model);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, numStudentsImported));
     }
 
-    /*
-     * Reads the CSV file and imports the data into the address book
+    /**
+     * Method that reads the csv file and adds students to the model
+     * Returns the number of students imported as well
+     * @param model
+     * @return int
+     * @throws CommandException
      */
-    private int readCsvFile(Model model) throws CommandException {
+    private int addStudentsFromCsv(Model model) throws CommandException {
         List<String> duplicatePersonsNames = new ArrayList<>();
         try {
             CSVReader reader = new CSVReader(new FileReader(importCsvFilePath.toFile()));
