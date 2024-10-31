@@ -23,9 +23,7 @@ import ezvcard.VCard;
  * Represents a class that can import an address book from a VCF file
  */
 public class VcfImporter implements Importer {
-    public static final String MESSAGE_EMPTY_FILE = "There are no people to import from the file.";
     public static final String MESSAGE_MISSING_INFORMATION = "vCard $1 is missing information.";
-    public static final String MESSAGE_INVALID_FORMAT = "File is not in the proper format or the file is corrupted.";
 
     @Override
     public AddressBook importAddressBook(Path filePath) throws IOException, InvalidFileException {
