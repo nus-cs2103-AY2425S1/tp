@@ -99,7 +99,7 @@ public class ExportWindow extends UiPart<Stage> {
         String filePath = inputDir.getText();
         if (isValidCsvPath(filePath)) {
             try {
-                String[] header = {"Name", "Number", "Email", "Address", "Tags", "isFavourite", "Department"};
+                String[] header = {"Name", "Number", "Email", "Address", "Tags", "isFavourite", "Department", "Leaves"};
                 BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false));
                 writer.write(String.join(",", header));
                 writer.newLine();
@@ -120,8 +120,10 @@ public class ExportWindow extends UiPart<Stage> {
 
                     String department = person.getDepartment().toString();
 
+                    String leaves = person.getLeave().toString();
+
                     String result = toCsv(name, phone, email, address,
-                            formattedTags.toString(), isFavourite, department);
+                            formattedTags.toString(), isFavourite, department, leaves);
                     writer.write(result);
                     writer.newLine();
                     System.out.println(result);

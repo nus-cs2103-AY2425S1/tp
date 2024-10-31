@@ -112,8 +112,9 @@ public class ImportWindow extends UiPart<Stage> {
                         favourite = " /f ";
                     }
                     String department = data[6];
-                    String command = String.format("add n/%s p/%s e/%s a/%s %s%sd/%s",
-                            name, number, email, address, tagCommand, favourite, department);
+                    String leaves = data[7];
+                    String command = String.format("add n/%s p/%s e/%s a/%s %s%sd/%s l/%s",
+                            name, number, email, address, tagCommand, favourite, department, leaves);
                     System.out.println(command);
                     this.logic.execute(command);
                 }
