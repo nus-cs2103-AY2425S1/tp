@@ -41,6 +41,7 @@ task coverage(type: JacocoReport) {
 }
 
 dependencies {
+//    classpath "com.github.johnrengelman.shadow:7.1.2"
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
 
@@ -75,6 +76,17 @@ dependencies {
 
 shadowJar {
     archiveFileName = 'AgentAssist.jar'
+    zip64 = true
+    minimize()
+    exclude('**/META-INF/*.SF', '**/META-INF/*.DSA', '**/META-INF/*.RSA')
+    exclude('**/*.md') // Markdown files
+    exclude('**/*.txt') // Text files
+//    exclude('**/*.png', '**/*.jpg') // Images, if not required
+    exclude('**/docs/**')
+    exclude('**/src/test/**')
 }
-
+task analyzeJar(type: Copy) {
+    from(zipTree(file('build/libs/AgentAssist.jar')))
+    into 'build/analyzedJar'
+}
 defaultTasks 'clean', 'test'
