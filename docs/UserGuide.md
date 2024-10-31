@@ -279,7 +279,7 @@ Examples:
 
 - `listing add 1 t/condo a/NUS street 123` adds a property listing to the person at index `1` with a listing type of `condo` and address of `NUS street 123`
 
-### Adding a property listing : `listing delete`
+### Deleting a property listing : `listing delete`
 
 Deletes the property listing with index `LISTING_INDEX` from the person specified by `INDEX` 
 
