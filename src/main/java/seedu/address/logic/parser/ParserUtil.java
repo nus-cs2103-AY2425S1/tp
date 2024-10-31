@@ -95,7 +95,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code ingredientsSuppliedString} is invalid.
      */
     public static Ingredients parseIngredients(String ingredientsSuppliedString) throws ParseException {
-        requireNonNull(ingredientsSuppliedString);
+        if (ingredientsSuppliedString == null) {
+            return new Ingredients(new ArrayList<>());
+        }
         String trimmedIngredients = ingredientsSuppliedString.trim();
 
         if (trimmedIngredients.isEmpty()) {
