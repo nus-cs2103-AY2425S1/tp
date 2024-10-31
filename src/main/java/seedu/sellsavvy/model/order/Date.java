@@ -18,10 +18,10 @@ public class Date {
     public static final String DATE_FORMATTER = "dd-MM-uuuu";
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format dd-mm-yyyy "
             + "and adhere to the following constraints:\n"
-            + "1. The day \"dd\" should be a 2-digit number representing a valid day the specified calender month\n"
-            + "2. The month \"mm\" should be a 2-digit number representing a valid month in the calender year\n"
-            + "3. The year \"yyyy\" should be a 4-digit number representing a valid year within the 21st century\n"
-            + "4. The day, month and year are separated by a hyphen '-'."
+            + "1. The day \"dd\" should be a 2-digit number representing a valid day the specified calender month.\n"
+            + "2. The month \"mm\" should be a 2-digit number representing a valid month in the calender year.\n"
+            + "3. The year \"yyyy\" should be a 4-digit number representing a valid year within the 21st century.\n"
+            + "4. The day, month and year are separated by a hyphen '-'.\n"
             + "e.g. 31-03-2024";
     public static final String MESSAGE_INVALID_DATE = "Date provided is not a valid calendar date";
     public static final String MESSAGE_OUTDATED_WARNING = "Note: "
