@@ -71,6 +71,8 @@ public class Age implements OptionalField {
      * Returns if a given string is a valid age.
      */
     public static boolean isValidAge(String test) {
+        requireNonNull(test);
+
         int converted;
 
         // Verify if the String is an integer first
@@ -92,7 +94,7 @@ public class Age implements OptionalField {
      * Returns the String to be presented on the UI.
      */
     @Override
-    public String getValueForUI() {
+    public String getValueForUi() {
         return toString();
     }
 

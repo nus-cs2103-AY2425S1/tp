@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's Income group in the address book.
@@ -40,7 +41,7 @@ public class Income implements OptionalField {
      */
     public Income(String incomeGroup) {
         requireNonNull(incomeGroup);
-
+        checkArgument(isValidIncome(incomeGroup), MESSAGE_CONSTRAINTS);
         value = getIncomeGroupFromString(incomeGroup);
     }
 
@@ -116,7 +117,7 @@ public class Income implements OptionalField {
      * Returns the String to be presented on the UI.
      */
     @Override
-    public String getValueForUI() {
+    public String getValueForUi() {
         if (value == IncomeGroup.NONE) {
             return "No income";
         } else {

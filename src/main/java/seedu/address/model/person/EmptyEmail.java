@@ -38,7 +38,7 @@ class EmptyEmail extends Email {
      * Returns the String to be presented on the UI.
      */
     @Override
-    public String getValueForUI() {
+    public String getValueForUi() {
         return "No email provided";
     }
 }

@@ -71,23 +71,23 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName + " [" + person.getAge().getValueForUI() + " y/o]");
+        name.setText(person.getName().fullName + " [" + person.getAge().getValueForUi() + " y/o]");
         phone.setText(person.getPhone().value);
         Image phoneImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(theme.equals("dark")
                 ? DARK_PHONE_ICON : LIGHT_PHONE_ICON)));
         phoneIcon.setImage(phoneImage);
 
-        address.setText(person.getAddress().getValueForUI());
+        address.setText(person.getAddress().getValueForUi());
         Image addressImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(theme.equals("dark")
             ? DARK_ADDRESS_ICON : LIGHT_ADDRESS_ICON)));
         addressIcon.setImage(addressImage);
 
-        email.setText(person.getEmail().getValueForUI());
+        email.setText(person.getEmail().getValueForUi());
         Image emailImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(theme.equals("dark")
                 ? DARK_EMAIL_ICON : LIGHT_EMAIL_ICON)));
         emailIcon.setImage(emailImage);
 
-        income.setText(person.getIncome().getValueForUI());
+        income.setText(person.getIncome().getValueForUi());
         Image incomeImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(theme.equals("dark")
             ? DARK_INCOME_ICON : LIGHT_INCOME_ICON)));
         incomeIcon.setImage(incomeImage);

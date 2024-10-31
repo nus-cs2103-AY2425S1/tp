@@ -41,15 +41,15 @@ public class Messages {
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail().getValueForUI())
+                .append(person.getEmail().getValueForUi())
                 .append("; Address: ")
-                .append(person.getAddress().getValueForUI())
+                .append(person.getAddress().getValueForUi())
                 .append("; Income: ")
-                .append(person.getIncome().getValueForUI())
+                .append(person.getIncome().getValueForUi())
                 .append("; Age: ")
-                .append(person.getAge().getValueForUI())
+                .append(person.getAge().getValueForUi())
                 .append("; Notes: ")
-                .append(person.getNotes().getValueForUI())
+                .append(person.getNotes().getValueForUi())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

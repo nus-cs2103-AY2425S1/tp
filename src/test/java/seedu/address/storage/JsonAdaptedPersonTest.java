@@ -124,44 +124,44 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_emptyEmail() throws Exception {
-        List<JsonAdaptedTag> validTags = new ArrayList<>();
-        validTags.add(new JsonAdaptedTag("friend"));
-        Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
-            .withEmptyEmail().withAddress(VALID_ADDRESS).withTags("friend").build();
+        Person testPerson = new PersonBuilder(BENSON).withEmptyEmail().build();
 
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, EMPTY_FIELD_FORMAT, VALID_ADDRESS,
-            EMPTY_FIELD_FORMAT, validTags, VALID_INCOME, VALID_AGE);
+            VALID_NOTES, VALID_TAGS, VALID_INCOME, VALID_AGE);
         assertEquals(testPerson, person.toModelType());
     }
 
     @Test
     public void toModelType_emptyAddress() throws Exception {
-        List<JsonAdaptedTag> validTags = new ArrayList<>();
-        validTags.add(new JsonAdaptedTag("friend"));
-        Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
-            .withEmail(VALID_EMAIL).withEmptyAddress().withTags("friend").build();
+        Person testPerson = new PersonBuilder(BENSON).withEmptyAddress().build();
 
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, EMPTY_FIELD_FORMAT,
-            EMPTY_FIELD_FORMAT, validTags, VALID_INCOME, VALID_AGE);
+            VALID_NOTES, VALID_TAGS, VALID_INCOME, VALID_AGE);
         assertEquals(testPerson, person.toModelType());
     }
 
     @Test
-    public void toModelType_emptyEmail_emptyAddress() throws Exception {
-        List<JsonAdaptedTag> validTags = new ArrayList<>();
-        validTags.add(new JsonAdaptedTag("friend"));
-        Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
-            .withEmptyEmail().withEmptyAddress().withTags("friend").build();
+    public void toModelType_emptyIncome() throws Exception {
+        Person testPerson = new PersonBuilder(BENSON).withEmptyIncome().build();
 
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, EMPTY_FIELD_FORMAT,
-            EMPTY_FIELD_FORMAT, EMPTY_FIELD_FORMAT, validTags, VALID_INCOME, VALID_AGE);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+            VALID_NOTES, VALID_TAGS, EMPTY_FIELD_FORMAT, VALID_AGE);
+        assertEquals(testPerson, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_emptyAge() throws Exception {
+        Person testPerson = new PersonBuilder(BENSON).withEmptyAge().build();
+
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+            VALID_NOTES, VALID_TAGS, VALID_INCOME, EMPTY_FIELD_FORMAT);
         assertEquals(testPerson, person.toModelType());
     }
 
     @Test
     public void toModelType_emptyFields_returnsPerson() throws Exception {
         Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
-            .withEmptyEmail().withEmptyAddress().withTags("friend").build();
+            .withEmptyEmail().withEmptyAddress().withEmptyIncome().withEmptyAge().withTags("friend").build();
         JsonAdaptedPerson person = new JsonAdaptedPerson(testPerson);
         assertEquals(testPerson, person.toModelType());
     }
