@@ -97,6 +97,19 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
+    /**
+     * Finds all lessons that clash with the provided list of lessons for different students.
+     *
+     * <p>This method checks each lesson in the given list against the existing lessons in the model
+     * to identify any scheduling conflicts with lessons for other students. If any clashes are found,
+     * they are added to a map with the student and their conflicting lessons.</p>
+     *
+     * @param model The model, representing in-memory model for app
+     * @param lessonLst The list of lessons to check for clashes.
+     * @return A map where each key is a {@code Person} representing a student, and the value is an
+     *         {@code ArrayList} of {@code Lesson} objects that are allocated to student and
+     *         conflict with the given lessons.
+     */
     public Map<Person, ArrayList<Lesson>> findAllClashingLessonsMap(Model model, List<Lesson> lessonLst) {
         Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
         for (Lesson lesson: lessonLst) {
@@ -111,6 +124,17 @@ public class AddCommand extends Command {
         return resultMap;
     }
 
+    /**
+     * Generates a message listing all clashing lessons for each student.
+     *
+     * <p>This method formats a user-friendly message based on the provided map of students and their
+     * clashing lessons. The message includes each student's name followed by the day and time of their
+     * clashing lessons.</p>
+     *
+     * @param studentLessonMap A map where each key is a {@code Person} (student) and the value is an
+     *                         {@code ArrayList} of {@code Lesson} objects representing clashing lessons.
+     * @return A formatted {@code String} message listing each student and their clashing lessons.
+     */
     public String generateClashMessage(Map<Person, ArrayList<Lesson>> studentLessonMap) {
         StringBuilder clashMsg = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
         studentLessonMap.keySet().forEach(student -> {

@@ -2,13 +2,9 @@ package tuteez.model.person.lesson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeSet;
-import java.util.logging.Logger;
 
-import tuteez.commons.core.LogsCenter;
-import tuteez.logic.commands.AddCommand;
 import tuteez.model.person.Person;
 import tuteez.model.person.UniquePersonList;
 
