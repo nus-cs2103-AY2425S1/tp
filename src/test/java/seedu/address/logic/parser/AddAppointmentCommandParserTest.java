@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DOCTOR_NAME_D
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PATIENT_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PATIENT_NAME_DESC_JOHN;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOCTOR_NAME_JANE;
