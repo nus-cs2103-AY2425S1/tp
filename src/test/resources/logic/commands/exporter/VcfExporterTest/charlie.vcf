@@ -2,6 +2,7 @@ BEGIN:VCARD
 VERSION:3.0
 PRODID:ez-vcard 0.12.1
 FN:Charlie Dee
+N:;Charlie Dee
 TEL:81111111
 EMAIL:charlie@example.com
 ADR:;;Block 987\, Charlie Street 2
