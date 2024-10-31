@@ -199,7 +199,7 @@ Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Partial words will be matched. e.g. `Hans B` will match `Hans Bo`
 * Only doctors matching all keywords provided will be returned (i.e. `AND` search).
   e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
 
@@ -220,7 +220,7 @@ Format: `find-patient KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Partial words will be matched. e.g. `Hans B` will match `Hans Bo`
 * Patients matching all keywords provided will be returned (i.e. `AND` search).
   e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
 
@@ -290,5 +290,3 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-
