@@ -32,6 +32,9 @@ public class AddNotesCommandParserTest {
         // Non alphanumerical note
         assertParseFailure(parser, "1 n/note!", ADDNOTE_INVALID_FORMAT);
 
+        // Invalid index
+        assertParseFailure(parser, "-1 n/note1", ADDNOTE_INVALID_FORMAT);
+
         // No index
         assertParseFailure(parser, "n/note!", ADDNOTE_INVALID_FORMAT);
 
