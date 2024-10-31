@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.capitalizeFirstLetter;
 
 /**
  * Represents a Person's subject teaching or learning in the address book.
@@ -22,7 +23,7 @@ public class Subject {
         if (!isValidSubject(subject)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
-        this.subject = subject;
+        this.subject = capitalizeFirstLetter(subject);
     }
 
     public String getSubject() {
