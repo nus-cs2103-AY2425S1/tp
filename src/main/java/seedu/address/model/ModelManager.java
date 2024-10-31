@@ -125,11 +125,13 @@ public class ModelManager implements Model {
 
     @Override
     public void addParticipation(Participation participation) {
+        requireNonNull(participation);
         addressBook.addParticipation(participation);
     }
 
     @Override
     public void deleteParticipation(Participation target) {
+        requireNonNull(target);
         addressBook.removeParticipation(target);
     }
 

@@ -3,17 +3,22 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.MarkPaidCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Fees;
+import seedu.address.model.person.FeesPaidByStudent;
 
 /**
  * Parses input arguments and creates a new MarkPaidCommand object
  */
 public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
+    private static final Logger logger = LogsCenter.getLogger(MarkPaidCommandParser.class);
+
 
     /**
      * Parses the given {@code String} of arguments in the context of the MarkPaidCommand
@@ -21,13 +26,15 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkPaidCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT);
-        Index index;
+        assert args != null : "Input arguments for EnrollCommand cannot be null";
 
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT);
         if (!arePrefixesPresent(argMultimap, PREFIX_PAYMENT)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, MarkPaidCommandParser.class));
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
         }
+
+        Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -35,9 +42,9 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PAYMENT);
-        Fees fees = ParserUtil.parseFees(argMultimap.getValue(PREFIX_PAYMENT).get());
-        return new MarkPaidCommand(index, fees);
+        FeesPaidByStudent feesPaidByStudent = ParserUtil.parseFees(argMultimap.getValue(PREFIX_PAYMENT).get());
 
+        return new MarkPaidCommand(index, feesPaidByStudent);
     }
 
     /**

@@ -63,9 +63,22 @@ public class JsonAdaptedParticipationTest {
     }
 
     @Test
-    public void toModelType_nullPerson_throwsIllegalValueException() {
+    public void toModelType_nullPersonName_throwsIllegalValueException() {
         JsonAdaptedParticipation jsonAdaptedParticipation =
-                new JsonAdaptedParticipation(null, "Math", new ArrayList<>());
+                new JsonAdaptedParticipation(null, BENSON.getPhoneValue(), "Math", new ArrayList<>());
+        AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, MATH);
+        String expectedMessage = String.format(
+                MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName());
+
+        // Using an Anonymous Class to fit the assertThrows method descriptor
+        Executable toModelTypeMethod = () -> jsonAdaptedParticipation.toModelType(model);
+        assertThrows(IllegalValueException.class, expectedMessage, toModelTypeMethod);
+    }
+
+    @Test
+    public void toModelType_nullPersonPhone_throwsIllegalValueException() {
+        JsonAdaptedParticipation jsonAdaptedParticipation =
+                new JsonAdaptedParticipation(BENSON.getName().fullName, null, "Math", new ArrayList<>());
         AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, MATH);
         String expectedMessage = String.format(
                 MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName());
@@ -78,7 +91,8 @@ public class JsonAdaptedParticipationTest {
     @Test
     public void toModelType_nullTutorial_throwsIllegalValueException() {
         JsonAdaptedParticipation jsonAdaptedParticipation =
-                new JsonAdaptedParticipation("Benson", null, new ArrayList<>());
+                new JsonAdaptedParticipation(BENSON.getName().fullName, BENSON.getPhoneValue(),
+                        null, new ArrayList<>());
         AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, MATH);
         String expectedMessage = String.format(
                 MISSING_FIELD_MESSAGE_FORMAT, Tutorial.class.getSimpleName());
