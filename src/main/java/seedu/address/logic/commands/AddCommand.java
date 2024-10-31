@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             + PREFIX_LAST_SEEN + "23-09-2024 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney "
-            + PREFIX_PRIORITY + "low"
+            + PREFIX_PRIORITY + "low "
             + PREFIX_REMARK + "likes apple ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
