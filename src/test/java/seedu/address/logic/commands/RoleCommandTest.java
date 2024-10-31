@@ -47,7 +47,7 @@ public class RoleCommandTest {
 
         // Execute the command and assert success
         CommandResult result = roleCommand.execute(model);
-        assertEquals(String.format(RoleCommand.MESSAGE_ADD_PERSON_ROLE_SUCCESS, Messages.format(expectedPerson)),
+        assertEquals(String.format(RoleCommand.MESSAGE_ASSIGN_PERSON_ROLE_SUCCESS, Messages.format(expectedPerson)),
                 result.getFeedbackToUser());
         assertTrue(expectedModel.equals(model));
 

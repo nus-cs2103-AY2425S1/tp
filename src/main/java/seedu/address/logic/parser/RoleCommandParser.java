@@ -4,9 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RoleCommand;
@@ -26,9 +27,9 @@ public class RoleCommandParser implements Parser<RoleCommand> {
      */
     public RoleCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_WEDDING);
 
-        Index index = null;
+        Index personIndex = null;
         NameMatchesKeywordPredicate predicate = null;
 
         try {
@@ -38,9 +39,9 @@ public class RoleCommandParser implements Parser<RoleCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RoleCommand.MESSAGE_USAGE));
             }
 
-            // Determine if the target is an index or a name
+            // Determine if the target is an personIndex or a name
             if (isNumeric(target)) {
-                index = ParserUtil.parseIndex(target);
+                personIndex = ParserUtil.parseIndex(target);
             } else {
                 String[] nameKeywords = target.split("\\s+");
                 predicate = new NameMatchesKeywordPredicate(Arrays.asList(nameKeywords));
@@ -52,21 +53,28 @@ public class RoleCommandParser implements Parser<RoleCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ROLE);
 
+        boolean isAssignRole = argMultimap.getValue(PREFIX_ROLE).isPresent();
+        boolean isAssignWedding = !argMultimap.getAllValues(PREFIX_WEDDING).isEmpty();
+
         RoleCommand.PersonWithRoleDescriptor personWithRoleDescriptor = new RoleCommand.PersonWithRoleDescriptor();
 
-        // Check if role is provided and is non-empty, otherwise set it to Optional.empty()
-        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+        if (isAssignRole & !isAssignWedding) {
+            // assign role only
             String roleValue = argMultimap.getValue(PREFIX_ROLE).get();
-            if (roleValue.isEmpty()) {
-                personWithRoleDescriptor.setRole(Optional.empty());
-            } else {
-                personWithRoleDescriptor.setRole(ParserUtil.parseRole(roleValue));
-            }
-        } else {
-            personWithRoleDescriptor.setRole(Optional.empty());
-        }
+            personWithRoleDescriptor.setRole(ParserUtil.parseRole(roleValue));
 
-        return new RoleCommand(index, predicate, personWithRoleDescriptor);
+            return new RoleCommand(personIndex, predicate, personWithRoleDescriptor, null);
+        } else if (isAssignWedding & !isAssignRole) {
+            // assign to wedding only
+            Set<Index> weddingIndices = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING));
+            return new RoleCommand(personIndex, predicate, personWithRoleDescriptor, weddingIndices);
+        } else {
+            // assign role and wedding
+            String roleValue = argMultimap.getValue(PREFIX_ROLE).get();
+            personWithRoleDescriptor.setRole(ParserUtil.parseRole(roleValue));
+            Set<Index> weddingIndices = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING));
+            return new RoleCommand(personIndex, predicate, personWithRoleDescriptor, weddingIndices);
+        }
     }
 
     /**

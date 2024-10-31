@@ -2,15 +2,17 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_EMPTY_LIST_ERROR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -33,14 +35,18 @@ public class RoleCommand extends Command {
 
     public static final String COMMAND_WORD = "assign";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": assigns a role to person identified "
-            + "by full name. "
-            + "Example: " + COMMAND_WORD + PREFIX_NAME
-            + " Alex Yeoh " + PREFIX_ROLE + "food vendor";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": assigns a role and/or wedding(s) to person identified "
+            + "by index or name. Weddings are identified by index.\n"
+            + "For example: \n" + COMMAND_WORD
+            + " Alex Yeoh " + PREFIX_ROLE + "food vendor\n"
+            + COMMAND_WORD + " Alex Yeoh " + PREFIX_WEDDING + "1\n"
+            + COMMAND_WORD + " 1 " + PREFIX_ROLE + "florist " + PREFIX_WEDDING + "1";
 
-    public static final String MESSAGE_ADD_PERSON_ROLE_SUCCESS = "Assigned role to: %1$s";
+    public static final String MESSAGE_ASSIGN_PERSON_ROLE_SUCCESS = "Assigned role to: %1$s";
+
+    public static final String MESSAGE_ASSIGN_PERSON_TO_WEDDING_SUCCESS = "Assigned %1$s to wedding(s):\n %2$s";
+
     public static final String MESSAGE_DUPLICATE_ROLE = "This role has already been assigned to %1$s.";
-
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to assign.\n"
                     + "Find the index from the list below and type edit INDEX ...\n"
@@ -48,18 +54,20 @@ public class RoleCommand extends Command {
     private final Index index;
     private final NameMatchesKeywordPredicate predicate;
     private final PersonWithRoleDescriptor personWithRoleDescriptor;
+    private final Set<Index> weddingIndices;
 
     /**
      * @param index of the person in the filtered person list to assign role
      * @param personWithRoleDescriptor details of the person to assign role
      */
     public RoleCommand(Index index, NameMatchesKeywordPredicate predicate,
-                       PersonWithRoleDescriptor personWithRoleDescriptor) {
+                       PersonWithRoleDescriptor personWithRoleDescriptor, Set<Index> weddingIndices) {
         requireNonNull(personWithRoleDescriptor);
 
         this.index = index;
         this.predicate = predicate;
         this.personWithRoleDescriptor = new PersonWithRoleDescriptor(personWithRoleDescriptor);
+        this.weddingIndices = weddingIndices;
     }
 
     @Override
@@ -75,15 +83,31 @@ public class RoleCommand extends Command {
             personToAssign = assignWithKeyword(model);
         }
 
-        Person assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
+        Person assignedPerson;
+        if (weddingIndices != null) {
+            generateWeddingJobs(model);
+            assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
+            model.setPerson(personToAssign, assignedPerson);
+            model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+            return new CommandResult(String.format(
+                    MESSAGE_ASSIGN_PERSON_TO_WEDDING_SUCCESS,
+                    Messages.format(assignedPerson),
+                    assignedPerson.getWeddingJobs().stream()
+                            .map(Messages::format)
+                            .collect(Collectors.joining(", "))
+            ));
 
-        if (personToAssign.getRole().equals(assignedPerson.getRole())) {
-            throw new CommandException(MESSAGE_DUPLICATE_ROLE);
+        } else {
+            assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
+            if (personToAssign.getRole().equals(assignedPerson.getRole())) {
+                throw new CommandException(MESSAGE_DUPLICATE_ROLE);
+
+            }
+            model.setPerson(personToAssign, assignedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_ASSIGN_PERSON_ROLE_SUCCESS,
+                    Messages.format(assignedPerson)));
         }
-
-        model.setPerson(personToAssign, assignedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_PERSON_ROLE_SUCCESS, Messages.format(assignedPerson)));
     }
 
     /**
@@ -141,9 +165,26 @@ public class RoleCommand extends Command {
         Phone updatedPhone = personWithRoleDescriptor.getPhone().orElse(personToAddRole.getPhone());
         Email updatedEmail = personWithRoleDescriptor.getEmail().orElse(personToAddRole.getEmail());
         Address updatedAddress = personWithRoleDescriptor.getAddress().orElse(personToAddRole.getAddress());
-        Optional<Role> updatedRole = personWithRoleDescriptor.getRole();
+        Optional<Role> updatedRole = personWithRoleDescriptor.getRole().or(personToAddRole::getRole);
+        Person person = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, null);
+        person.setWeddingJobs(personToAddRole.getWeddingJobs());
+        person.setWeddingJobs(personWithRoleDescriptor.getWeddingJobs());
+        return person;
+    }
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, null);
+    /**
+     * Associates the person with wedding jobs based on the provided indices.
+     *
+     * @param model The model containing the list of weddings.
+     */
+    public void generateWeddingJobs(Model model) {
+        List<Wedding> weddingList = model.getFilteredWeddingList();
+
+        for (Index index : weddingIndices) {
+            personWithRoleDescriptor.addWeddingJob(weddingList.get(index.getZeroBased()));
+            System.out.println(personWithRoleDescriptor.weddingJobs);
+
+        }
     }
 
     @Override
@@ -179,7 +220,7 @@ public class RoleCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Optional<Role> role;
+        private Optional<Role> role = Optional.empty();
         private Wedding ownWedding;
         private Set<Wedding> weddingJobs = new HashSet<>();
 
@@ -231,22 +272,42 @@ public class RoleCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code role} to this object's {@code role}.
-         * A defensive copy of {@code role} is used internally.
-         */
         public void setRole(Optional<Role> role) {
             this.role = role;
         }
 
-        /**
-         * Returns an unmodifiable role set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code role} is null.
-         */
         public Optional<Role> getRole() {
             return this.role;
         }
+
+        public Set<Wedding> getWeddingJobs() {
+            return weddingJobs;
+        }
+
+        /**
+         * Adds a wedding to the list of wedding jobs.
+         *
+         * @param wedding {@code Wedding} to be added to the list of wedding jobs
+         */
+        public void addWeddingJob(Wedding wedding) {
+            if (ownWedding == null || !ownWedding.isSameWedding(wedding)) {
+                weddingJobs.add(wedding);
+            } else {
+                throw new IllegalArgumentException("Cannot add own wedding as a job.");
+            }
+        }
+
+        /**
+         * Adds a list of wedding jobs to the pre-existing list.
+         *
+         * @param weddingJobs {@code Set<Wedding>} to be added to the list of wedding jobs
+         */
+        public void setWeddingJobs(Set<Wedding> weddingJobs) {
+            for (Wedding wedding : weddingJobs) {
+                this.addWeddingJob(wedding);
+            }
+        }
+
 
         @Override
         public boolean equals(Object other) {
