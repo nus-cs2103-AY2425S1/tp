@@ -16,7 +16,24 @@ If you can type fast, WedLinker can get your contact management tasks done faste
 
 ## Quick start
 
-1. Ensure you have `Java 17` or above installed in your Computer. If you do not have Java 17 installed, or you are unsure, refer to the guide below.
+1. Ensure you have `Java 17` or above installed on your computer by performing the following:
+   1. Open your system terminal
+      1. Windows: <br>
+         1. Hold down Windows button and R (⊞ Win + R ) 
+         2. Type `cmd` and press enter
+         
+      1. MacOS -- do one of the following: <br>
+          - Click the Launchpad icon in the Dock, type `Terminal` in the search field, then click Terminal, OR
+          - In the Finder, open the `/Applications/Utilities` folder, then double-click Terminal.
+   1. Type `java -version` and press enter
+   1. If you have `Java 17 installed, the terminal should look something like:
+   ```
+         C:\Users\UserName>java -version
+         java version "17.0.12" 2024-07-16 LTS
+         Java(TM) SE Runtime Environment (build 17.0.12+8-LTS-286)
+         Java HotSpot(TM) 64-Bit Server VM (build 17.0.12+8-LTS-286, mixed mode, sharing)
+    ```
+2. If you do not have Java 17 installed, or you are unsure, refer to the guide below.
    1. Download `Java 17` from the official website: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
    2. Select the installation package based on your Operating System. For Apple users select macOS, for Windows users select Windows.
    3. Follow the instruction guide to install Java on your device. For more information use this guide: https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html
