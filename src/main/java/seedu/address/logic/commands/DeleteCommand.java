@@ -20,10 +20,11 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by their name in the displayed person list.\n"
-            + "Parameters: Name (must be non-empty)\n"
-            + "Example: " + COMMAND_WORD + " John Doe"
-            + "Example: " + SHORT_COMMAND_WORD + " John Doe"
-            + "To delete a person with a common name, please provide fullname";
+            + "Parameters: Name (String & must be non-empty)\n"
+            + "Example: " + COMMAND_WORD + " John Doe " + " " + " or " + " "
+            + " Example: " + SHORT_COMMAND_WORD + " John Doe \n"
+            + "To delete a person with a common name, please provide fullname or use /"
+            + " to indicate the end of the name eg Jon snow/ \n";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 

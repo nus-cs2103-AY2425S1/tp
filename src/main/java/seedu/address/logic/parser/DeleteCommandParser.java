@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsDeletePredicate;
 
 /**
@@ -20,6 +21,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         String personNames = args.trim();
+        if (!Name.isValidName(personNames)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteCommand.MESSAGE_USAGE));
+        }
         if (personNames.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
@@ -28,5 +33,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         String[] nameKeywords = personNames.split("\\s+");
         return new DeleteCommand(new NameContainsKeywordsDeletePredicate(Arrays.asList(nameKeywords)));
     }
+
 
 }
