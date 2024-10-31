@@ -45,36 +45,90 @@ public class AddMeetingCommand extends Command {
         toAdd = meeting;
     }
 
+    /**
+     * Executes the command to add a meeting.
+     * Firstly Checks for duplicate meetings, verifies the existence of the buyer, seller, and property,
+     * then adds the meeting to the model.
+     *
+     * @param model the model which contains the data and operations for the application
+     * @return CommandResult indicating the success of adding the meeting
+     * @throws CommandException if there are any validation issues, such as duplicate meetings,
+     *                          or missing buyer, seller, or property
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
 
+        checkForDuplicateMeeting(model);
+        checkBuyerExists(model);
+        checkSellerExists(model);
+        checkPropertyExists(model);
+
+        model.addMeeting(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    /**
+     * Checks if a meeting with the same details already exists in the model.
+     *
+     * @param model the model to check for existing meetings
+     * @throws CommandException if a meeting with the same details already exists
+     */
+    private void checkForDuplicateMeeting(Model model) throws CommandException {
         if (model.hasMeeting(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
         }
+    }
 
+    /**
+     * Verifies the existence of a buyer in the client list by checking the buyer's phone number.
+     *
+     * @param model the model containing the client list
+     * @throws CommandException if the buyer with the specified phone number is not found
+     */
+    private void checkBuyerExists(Model model) throws CommandException {
         model.getFilteredClientList().stream()
                 .filter(Client::isBuyer)
                 .filter(client -> client.getPhone().equals(toAdd.getBuyerPhone()))
                 .findFirst().orElseThrow(() ->
-                        new CommandException(
-                                String.format("Buyer with phone number: "
-                                        + toAdd.getBuyerPhone().toString() + " not found.")));
+                        new CommandException(String.format("Buyer with phone number: %s not found.",
+                                toAdd.getBuyerPhone().toString())
+                        ));
+    }
+
+    /**
+     * Verifies the existence of a seller in the client list by checking the seller's phone number.
+     *
+     * @param model the model containing the client list
+     * @throws CommandException if the seller with the specified phone number is not found
+     */
+    private void checkSellerExists(Model model) throws CommandException {
         model.getFilteredClientList().stream()
                 .filter(Client::isSeller)
                 .filter(client -> client.getPhone().equals(toAdd.getSellerPhone()))
                 .findFirst().orElseThrow(() ->
                         new CommandException(
-                                String.format("Seller with phone number: "
-                                        + toAdd.getSellerPhone().toString() + " not found.")));
-        model.getFilteredPropertyList().stream().filter(p ->
-                p.getType().equals(toAdd.getType()) && p.getPostalCode().equals(toAdd.getPostalCode()))
-                .findFirst().orElseThrow(() ->
-                        new CommandException(String.format("Property not found. ", toAdd.getPostalCode())));
+                                String.format("Seller with phone number: %s not found.",
+                                        toAdd.getSellerPhone().toString())
+                        ));
+    }
 
-        model.addMeeting(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    /**
+     * Verifies the existence of a property with the specified type and postal code in the property list.
+     *
+     * @param model the model containing the property list
+     * @throws CommandException if the property with the specified type and postal code is not found
+     */
+    private void checkPropertyExists(Model model) throws CommandException {
+        model.getFilteredPropertyList().stream()
+                .filter(property ->
+                        property.getType().equals(toAdd.getType())
+                                && property.getPostalCode().equals(toAdd.getPostalCode())
+                )
+                .findFirst().orElseThrow(() ->
+                        new CommandException(String.format("Property not found. Postal code: %s",
+                                toAdd.getPostalCode())));
     }
 
     @Override
