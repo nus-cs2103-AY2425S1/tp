@@ -133,8 +133,7 @@ public class Person {
                 && nric.equals(otherPerson.nric)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && Objects.equals(appointment, otherPerson.appointment) // Include appointment in equality check
-                && logEntries.equals(otherPerson.logEntries);
+                && Objects.equals(appointment, otherPerson.appointment); // Include appointment in equality check
     }
 
     @Override
