@@ -133,9 +133,9 @@ public class Name {
     }
 
     /**
-     * Compares the name of another contact contact in alphabetical order.
+     * Compares the name of another contact in alphabetical order.
      *
-     * @param otherName Name of another contact contact
+     * @param otherName Name of another contact
      * @return Integer status of the comparison
      */
     public int compareTo(Name otherName) {
