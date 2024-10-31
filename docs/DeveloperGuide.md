@@ -336,17 +336,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                    | So that I can…​                                                                                |
-|----------|--------------------------------------------|---------------------------------|------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions          | refer to instructions when I forget how to use the App                                         |
-| `* * *`  | user                                       | add a new person                |                                                                                                |
-| `* * *`  | user                                       | delete a person                 | remove entries that I no longer need                                                           |
-| `* * *`  | user with many persons in the address book | find a person by name           | locate details of persons without having to go through the entire list                         |
-| `* * *`  | user with many persons in the address book | find people by catatory         | view a collection of persons in the same catagory without having to go through the entire list |
-| `* *`    | user                                       | add history log to a person     | keep a record of past activities for future references                                         |
-| `* *`    | user                                       | hide private contact details    | minimize chance of someone else seeing them by accident                                        |
-| `* *`    | user                                       | be reminded of important events | minimize chance of missing these important events                                              |
-| `*`      | user with many persons in the address book | sort persons by name            | locate a person easily                                                                         |
+| Priority | As a …​                                    | I want to …​                        | So that I can…​                                                                                |
+|----------|--------------------------------------------|-------------------------------------|------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions              | refer to instructions when I forget how to use the App                                         |
+| `* * *`  | user                                       | add a new person                    |                                                                                                |
+| `* * *`  | user                                       | delete a person                     | remove entries that I no longer need                                                           |
+| `* * *`  | user with many persons in the address book | find a person by name               | locate details of persons without having to go through the entire list                         |
+| `* * *`  | user with many persons in the address book | find people by category             | view a collection of persons in the same category without having to go through the entire list |
+| `* *`    | user                                       | add history log to a person         | keep a record of past activities for future references                                         |
+| `* *`    | user                                       | hide private contact details        | minimize chance of someone else seeing them by accident                                        |
+| `* *`    | user                                       | be reminded of important events     | minimize chance of missing these important events                                              |
+| `* *`    | real estate agent                          | add notes and remarks for a contact | remeber snippets of information about my clients                                               |
+| `* *`    | real estate agent                          | attach properties to a contact      | easily identify what properties a client is looking at                                         |
+| `*`      | user with many persons in the address book | sort persons by name                | locate a person easily                                                                         |
+| `*`      | user with many persons in the address book | keep track of important contacts    | locate an important person easily                                                              |
 
 *{More to be added}*
 
@@ -1082,7 +1085,8 @@ To allow users to add or update a remark for a contact, providing additional not
 
 **Error Message:**
 
-- If invalid: `Error: Invalid index. Please provide a valid contact index.`
+- Invalid Index (range): `Error: The person index provided is invalid`
+- Invalid Index (format): `Error: Invalid command format! <command format>`
 
 **Rationale:**
 
@@ -1094,10 +1098,10 @@ To allow users to add or update a remark for a contact, providing additional not
 
 - Any string can be entered as a remark (e.g., client notes, preferences, etc.).
 - Leading/trailing spaces are ignored.
+- Empty strings are treated as an empty remark.
 
 **Error Message:**
 
-- If missing: `Error: Remark message is required.`
 
 **Rationale:**
 
@@ -1114,8 +1118,8 @@ To allow users to add or update a remark for a contact, providing additional not
 
 #### **Failure:**
 
-- Invalid Index: `Error: Invalid index. Please provide a valid contact index.`
-- Missing Remark: `Error: Remark message is required.`
+- Invalid Index (range): `Error: The person index provided is invalid`
+- Invalid Index (format): `Error: Invalid command format! <command format>`
 
 ---
 
@@ -1123,11 +1127,81 @@ To allow users to add or update a remark for a contact, providing additional not
 
 - **Invalid Index:**
   Example: `remark abc r/Important client`
-  `Error: Invalid index. Please provide a valid contact index.`
+  `Error: Invalid command format! <command format>`
+
+
+---
+
+### 9. **Feature: Single Page View for a Contact**
+
+**Purpose:**
+To allow users to view the full information of a selected contact in the application
+in another pop-out window
+
+#### **Command Format:**
+
+`view <index>`
+
+**Example Commands:**
+
+- `view 1`
+- `view 3`
+
+
+### **Main Success Scenario (MSS):**
+
+1. The user issues the `view` command with a valid index.
+2. The system displays the pop-out GUI window.
+
+
+Use case ends.
+
+---
+
+### **Parameters:**
+
+#### **Index:**
+
+**Acceptable Values:**
+
+- Must be a valid index number referencing a contact in the current contact list.
+- Must be a positive integer.
+
+**Error Message:**
+
+- If invalid: `Error: Invalid index. Please provide a valid contact index.`
+
+**Rationale:**
+
+- Ensures the correct contact is being displayed, preventing UI errors.
+
+---
+
+### **Outputs:**
+
+#### **Success:**
+
+- Message: `Person details displayed`
+- GUI Change: The updated pop-up window is displayed.
+
+#### **Failure:**
+
+- Invalid Index (range): `Error: The person index provided is invalid`
+- Invalid Index (format): `Error: Invalid command format! <command format>`
+
+---
+
+### **Error Scenarios:**
+
+- **Invalid Index:**
+  Example: `view 0`
+  `Error: The person index provided is invalid`
 
 - **Missing Remark:**
-  Example: `remark 1`
-  `Error: Remark message is required.`
+  Example: `view 1.1`
+  `Error: Invalid command format! <command format>`
+
+---
 
 
 *{More to be added}*

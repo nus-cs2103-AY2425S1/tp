@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 public class PropertyListTest {
 
     private PropertyList propertyList;
+    private PropertyList emptyPropertyList;
     private Property sampleProperty;
 
     @BeforeEach
@@ -27,6 +29,7 @@ public class PropertyListTest {
                 500000.00
         );
         propertyList = new PropertyList(); // Initialize empty list for each test
+        emptyPropertyList = new PropertyList();
     }
 
     @Test
@@ -110,6 +113,11 @@ public class PropertyListTest {
         // Verify the toString output for an empty list
         String expectedString = "Property List:\n";
         assertEquals(expectedString, propertyList.toString());
+    }
+
+    @Test
+    public void emptyPropertyList_returnTrue() {
+        assertTrue(emptyPropertyList.isEmpty());
     }
 
     @Test

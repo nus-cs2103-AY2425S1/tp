@@ -79,7 +79,9 @@ public class SampleDataUtil {
     public static final History HISTORY_SIGMA_RIZZLER = History.addActivity(
             new History(LocalDate.of(2024, 2, 1)),
             LocalDate.of(2024, 3, 5), "Rizzling at National University of Skibidi");
-
+    public static final PropertyList EMPTY_PROPERTY_LIST = new PropertyList(
+            List.of()
+    );
     public static final PropertyList PROPERTY_LIST_JOHN_DOE = new PropertyList(
             List.of(
                     Property.of("123 Maple Street", "Woodlands", "Condo", 120.5, 3, 2, 850000),
@@ -236,7 +238,7 @@ public class SampleDataUtil {
                         new Address("Based Estate"), new Remark("Cool dude"), new Birthday("2000-06-09"),
                         getTagSet("favourite"),
                         new DateOfCreation(LocalDate.of(2000, 1, 1)),
-                        HISTORY_SIGMA_RIZZLER, PROPERTY_LIST_SIGMA_RIZZLER)
+                        HISTORY_SIGMA_RIZZLER, EMPTY_PROPERTY_LIST)
         };
     }
 

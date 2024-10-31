@@ -2,7 +2,9 @@ package seedu.address.model.person;
 
 import static java.time.LocalDate.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.DateTimeException;
@@ -19,10 +21,13 @@ import org.junit.jupiter.api.Test;
 public class HistoryTest {
 
     private History history;
+    private History emptyHistory;
+    private final String activity = "activity message";
 
     @BeforeEach
     public void setUp() {
         history = new History(of(2024, 1, 1)); // Date of creation for history is 2024-01-01
+        emptyHistory = new History(of(2024, 1, 1)); // No activity to be added in empty history
     }
 
     @Test
@@ -101,6 +106,14 @@ public class HistoryTest {
     }
 
     @Test
+    public void getActivitiesOnDay_afterToday_throwsDateTimeException() {
+        LocalDate invalidDate = LocalDate.now().plusDays(1); // Date before creation
+
+        // Expect DateTimeException for date before the date of creation
+        assertThrows(DateTimeException.class, () -> history.getActivitiesOnDay(invalidDate));
+    }
+
+    @Test
     public void addActivity_immutableAdd_returnsNewHistoryObject() {
         LocalDate validDate = of(2024, 1, 10);
         String message = "Completed task A";
@@ -156,6 +169,14 @@ public class HistoryTest {
         assertNotEquals(history, new Object());
     }
 
+    @Test
+    public void defaultNewHistory_empty() {
+        assertTrue(emptyHistory.hasNoEntry());
+        assertTrue(history.hasNoEntry());
+        history = History.addActivity(history, LocalDate.now(), activity);
+        System.out.println(history);
+        assertFalse(history.hasNoEntry());
+    }
     @Test
     public void toString_validHistory_success() {
         LocalDate validDate = of(2024, 1, 10);
