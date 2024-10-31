@@ -63,7 +63,6 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete person 9";
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         try {
             logic.execute(deleteCommand);
         } catch (ParseException | CommandException e) {
