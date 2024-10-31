@@ -170,6 +170,12 @@ Using `AddScheduleCommand`, we add a meeting to a schedule.
 
 <puml src="diagrams/AddScheduleSequenceDiagram.puml"/>
 
+### Load schedule storage
+
+Implementation of loading schedule storage. Includes behavior for when to generate sample schedule list.
+
+<puml src="diagrams/LoadScheduleActivityDiagram.puml"/>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
