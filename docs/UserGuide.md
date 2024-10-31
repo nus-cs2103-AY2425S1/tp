@@ -33,7 +33,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 1. **Start the App**
    - Enter the following command: `java -jar tp.jar`
    - Within a few seconds, the BA€ Address Book interface should display and should look something like this:
-   ![Ui](images/Ui.png)
+   ![Ui](images/NewUi.png)
 
 ### Using BA€
 
