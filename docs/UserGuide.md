@@ -1,7 +1,7 @@
 # HireMe User Guide
 
-HireMe is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). 
+HireMe is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI)
+while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, HireMe can get your internship tracking tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ If you can type fast, HireMe can get your internship tracking tasks done faster 
     * `/delete 1` : Deletes the 1st internship application shown in the current list.
 
     * `/clear` : Deletes all internship applications.
-   
+
     * `/chart` : Shows an pie chart with your applications statistics.
 
     * `/exit` : Exits the app.
