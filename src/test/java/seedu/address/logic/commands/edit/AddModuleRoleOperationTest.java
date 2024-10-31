@@ -2,9 +2,12 @@ package seedu.address.logic.commands.edit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.RoleType;
@@ -40,46 +43,55 @@ public class AddModuleRoleOperationTest {
     public void execute_addsModuleRolePairs_success() {
         // Add single module role pair
         ModuleRoleMap initialMap = new ModuleRoleMap(
-                new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
+                new ModuleCode[]{new ModuleCode("CS1101S")},
+                new RoleType[]{RoleType.STUDENT});
         ModuleRoleMap mapToAdd = new ModuleRoleMap(
-                new ModuleCode[]{new ModuleCode("CS2103T")}, new RoleType[]{RoleType.TUTOR});
+                new ModuleCode[]{new ModuleCode("CS2103T")},
+                new RoleType[]{RoleType.TUTOR});
+
         ModuleRoleMap expectedMap = DEFAULT_MODULE_ROLE_MAP;
 
-        assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+        try {
+            assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+        } catch (CommandException e) {
+            fail("CommandException should not be thrown.");
+        }
 
         // Add multiple module role pairs
         initialMap = new ModuleRoleMap(new ModuleCode[]{}, new RoleType[]{});
         mapToAdd = new ModuleRoleMap(DEFAULT_MODULE_CODES, DEFAULT_ROLE_TYPES);
 
-        assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+        try {
+            assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+        } catch (CommandException e) {
+            fail("CommandException should not be thrown.");
+        }
     }
 
     @Test
     public void execute_addsModuleRolePairs_failure() {
-        // Add module role pair already exists -> returns same map
+        // Add module role pair already exists -> throws CommandException
         ModuleRoleMap initialMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
-        ModuleRoleMap mapToAdd = initialMap;
-        ModuleRoleMap expectedMap = initialMap;
+        final ModuleRoleMap mapToAdd1 = initialMap;
 
-        assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+        assertThrows(CommandException.class, () -> new AddModuleRoleOperation(mapToAdd1).execute(initialMap));
 
         // Add module role pair having same module code but different role as pre-existing one -> returns same map
-        mapToAdd = new ModuleRoleMap(
+        final ModuleRoleMap mapToAdd2 = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.TUTOR});
 
-        assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+        assertThrows(CommandException.class, () -> new AddModuleRoleOperation(mapToAdd2).execute(initialMap));
     }
 
     @Test
-    public void execute_addsModuleRolePairs_partialSuccess() {
-        // Add multiple module role pairs, some already exist
+    public void execute_addsModuleRolePairs_partialFailure() {
+        // Add multiple module role pairs, some already exist -> throws CommandException
         ModuleRoleMap initialMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
         ModuleRoleMap mapToAdd = new ModuleRoleMap(DEFAULT_MODULE_CODES, DEFAULT_ROLE_TYPES);
-        ModuleRoleMap expectedMap = DEFAULT_MODULE_ROLE_MAP;
 
-        assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+        assertThrows(CommandException.class, () -> new AddModuleRoleOperation(mapToAdd).execute(initialMap));
     }
 
     @Test

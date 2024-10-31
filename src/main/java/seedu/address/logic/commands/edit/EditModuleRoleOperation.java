@@ -3,6 +3,7 @@ package seedu.address.logic.commands.edit;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.ModuleRolePair;
@@ -27,7 +28,7 @@ public abstract class EditModuleRoleOperation {
      * @param moduleRoleMapToEdit The module role map to edit.
      * @return The module role map after the operation.
      */
-    protected abstract ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit);
+    protected abstract ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) throws CommandException;
 
     /**
      * Checks if the given operation is a valid module role operation.
@@ -50,7 +51,7 @@ public abstract class EditModuleRoleOperation {
      * @param moduleRoleMapAfter The module role map after the change.
      * @return A description of the change in module roles.
      */
-    public static String getModuleCodeChangeDescription(
+    public static String getModuleCodeChangesDescription(
             ModuleRoleMap moduleRoleMapBefore, ModuleRoleMap moduleRoleMapAfter) {
 
         StringBuilder stringBuilderAdded = new StringBuilder();
