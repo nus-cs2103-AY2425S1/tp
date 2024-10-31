@@ -27,24 +27,25 @@ public class TelegramHandleTest {
         // invalid telegram Handles
         assertFalse(TelegramHandle.isValidTelegramHandle("")); // empty string
         assertFalse(TelegramHandle.isValidTelegramHandle(" ")); // spaces only
-        assertFalse(TelegramHandle.isValidTelegramHandle("91")); // less than 3 numbers
+        assertFalse(TelegramHandle.isValidTelegramHandle("91")); // less than 5 characters
         assertFalse(TelegramHandle.isValidTelegramHandle("9312 1534")); // spaces within digits
         assertFalse(TelegramHandle.isValidTelegramHandle("@93121534")); // contains @
 
         // valid telegrams
-        assertTrue(TelegramHandle.isValidTelegramHandle("911")); // exactly 3 numbers
-        assertTrue(TelegramHandle.isValidTelegramHandle("93121534"));
-        assertTrue(TelegramHandle.isValidTelegramHandle("124293842033123")); // long phone numbers
+        assertTrue(TelegramHandle.isValidTelegramHandle("911_P")); // exactly 5 characters
+        // exactly 32 characters
+        assertTrue(TelegramHandle.isValidTelegramHandle("somethingIsNotRightHelp_12345678"));
+        assertTrue(TelegramHandle.isValidTelegramHandle("124293842033123")); // long Telegram handle
         assertTrue(TelegramHandle.isValidTelegramHandle("phone")); // non-numeric
         assertTrue(TelegramHandle.isValidTelegramHandle("9011p041")); // alphabets within digits
     }
 
     @Test
     public void equals() {
-        TelegramHandle telegramHandle = new TelegramHandle("999");
+        TelegramHandle telegramHandle = new TelegramHandle("Tele9");
 
         // same values -> returns true
-        assertTrue(telegramHandle.equals(new TelegramHandle("999")));
+        assertTrue(telegramHandle.equals(new TelegramHandle("Tele9")));
 
         // same object -> returns true
         assertTrue(telegramHandle.equals(telegramHandle));
@@ -56,6 +57,6 @@ public class TelegramHandleTest {
         assertFalse(telegramHandle.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(telegramHandle.equals(new TelegramHandle("995")));
+        assertFalse(telegramHandle.equals(new TelegramHandle("995k1")));
     }
 }
