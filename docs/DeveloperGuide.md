@@ -709,7 +709,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters invalid characters in the attendance data.
-    * 2a1. System displays an error message asking for valid attendance format, with no special characters.
+    * 2a1. System displays an error message asking for valid attendance format.
       Use case ends.
 
 * 3a. User leaves the absent reason blank (indicating deletion of attendance).
@@ -720,13 +720,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System displays an error message asking for a valid absent date format.
       Use case ends.
 
-* 3c. User enters absent reason in an invalid format.
-    * 3c1. System displays an error message asking for a valid absent reason format.
+* 3c. User enters a date that does not exist (e.g., 30-02-2024).
+    * 3c1. System displays an error message asking for a valid absent date.
+      Use case ends
+
+* 3d. User enters absent reason in an invalid format.
+    * 3d1. System displays an error message asking for a valid absent reason format.
       Use case ends.
 
-* 3d. User tries to add attendance for a student that does not exist.
-    * 3d1. System displays an error message notifying that the student does not exist in the system.
+* 3e. User tries to add attendance for a student that does not exist.
+    * 3e1. System displays an error message notifying that the student does not exist in the system.
       Use case ends.
+
+* 3f. User tries to add multiple attendances for a student at one go.
+    * 3f1. System displays an error message notifying that input with multiple attendances is not allowed.
 
 
 ### Non-Functional Requirements
