@@ -66,6 +66,7 @@ public class PersonBuilder {
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
         appointment = personToCopy.getAppointment();
+        logEntries = personToCopy.getLogEntries();
     }
 
     /**
