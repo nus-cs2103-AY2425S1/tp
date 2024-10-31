@@ -15,6 +15,7 @@ import seedu.address.model.person.Sex;
 import seedu.address.model.person.StarredStatus;
 import seedu.address.model.tag.Tag;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,6 +42,7 @@ public class ImportCommand extends Command {
             + "array or null";
     private static final String MESSAGE_FILE_FORMAT_FAIL_INVALID_NOTE = "Invalid file format: 'note' should be an "
             + "object or null";
+    private static final String ADDRESSBOOK_FILE_PATH = "data/addressbook.json";
     private final String fileName;
 
     public ImportCommand(String fileName) {
@@ -56,7 +58,7 @@ public class ImportCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
         }
 
-        // Check that the file is a json file
+        // Check that the file is a JSON file
         if (!fileName.endsWith(".json")) {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_JSON, fileName));
         }
@@ -65,12 +67,29 @@ public class ImportCommand extends Command {
         try {
             String fileContent = Files.readString(filePath);
             validateDataFormat(fileContent);
-            Files.writeString(Path.of("data", "addressbook.json"), fileContent);
-        } catch (IOException e) {
-            throw new CommandException(String.format(MESSAGE_IMPORT_FAIL, fileName));
-        }
 
-        return new CommandResult(MESSAGE_IMPORT_SUCCESS);
+            File file = new File(ADDRESSBOOK_FILE_PATH);
+            File dir = file.getParentFile();
+
+            // if directory does not exist, make it
+            if (dir != null && !dir.exists()) {
+                dir.mkdirs();
+            }
+
+            // if file doesn't exist, make it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            Path path = Path.of(System.getProperty("user.dir"),"data","addressbook.json");
+            System.out.println("Writing to file:" + path.toAbsolutePath());
+            Files.writeString(path, fileContent);
+            String verifyContent = Files.readString(path);
+            System.out.println("File written successfully. Content: \n" + verifyContent);
+            return new CommandResult(MESSAGE_IMPORT_SUCCESS);
+        } catch (IOException e) {
+            throw new CommandException(String.format(MESSAGE_IMPORT_FAIL, fileName), e);
+        }
     }
 
     /**
