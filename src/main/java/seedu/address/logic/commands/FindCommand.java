@@ -24,12 +24,17 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Use either of the parameters below\n "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds person(s) in the address book "
+            + "by their details. "
+            + "Use at least one of the parameters below.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME \n"
-            + PREFIX_PHONE + "PHONE \n"
-            + PREFIX_ROOM_NUMBER + "ROOM_NUMBER \n"
-            + PREFIX_TAG + "TAGS";
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_ROOM_NUMBER + "ROOM_NUMBER] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 ";
 
     private final Predicate<Person> combinedPredicate;
 
