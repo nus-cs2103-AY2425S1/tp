@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.CancelPendingCommand;
 import seedu.address.logic.commands.ClearAllCommand;
-import seedu.address.logic.commands.ClearCancelCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ClearConfirmationCommand;
 import seedu.address.logic.commands.ClearEventCommand;
+import seedu.address.logic.commands.ConfirmPendingCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
@@ -52,11 +52,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         String clearAllCommand = ClearCommand.COMMAND_WORD + " " + ClearAllCommand.COMMAND_FIELD;
-        assertTrue(parser.parseCommand(clearAllCommand) instanceof ClearConfirmationCommand);
+        assertTrue(parser.parseCommand(clearAllCommand) instanceof ConfirmPendingCommand);
         assertTrue(parser.parseCommand("Y") instanceof ClearCommand);
 
         String clearEventsCommand = ClearCommand.COMMAND_WORD + " " + ClearEventCommand.COMMAND_FIELD;
-        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ClearConfirmationCommand);
+        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ConfirmPendingCommand);
         assertTrue(parser.parseCommand("Y") instanceof ClearCommand);
 
         try {
@@ -69,12 +69,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clearCancelled() throws Exception {
         String clearAllCommand = ClearCommand.COMMAND_WORD + " " + ClearAllCommand.COMMAND_FIELD;
-        assertTrue(parser.parseCommand(clearAllCommand) instanceof ClearConfirmationCommand);
-        assertTrue(parser.parseCommand("N") instanceof ClearCancelCommand);
+        assertTrue(parser.parseCommand(clearAllCommand) instanceof ConfirmPendingCommand);
+        assertTrue(parser.parseCommand("N") instanceof CancelPendingCommand);
 
         String clearEventsCommand = ClearCommand.COMMAND_WORD + " " + ClearEventCommand.COMMAND_FIELD;
-        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ClearConfirmationCommand);
-        assertTrue(parser.parseCommand("N") instanceof ClearCancelCommand);
+        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ConfirmPendingCommand);
+        assertTrue(parser.parseCommand("N") instanceof CancelPendingCommand);
     }
 
     @Test
