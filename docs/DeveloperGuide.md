@@ -549,6 +549,7 @@ Use case ends.
 * **Patient List**: A list of patients and their details displayed in the right hand side of the application.
 
 [Back to Table of Contents](#table-of-contents)
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -558,6 +559,7 @@ Given below are instructions to test the app manually.
 > testers are expected to do more *exploratory* testing.
 
 [Back to Table of Contents](#table-of-contents)
+
 ### Launch and shutdown
 
 1. Initial launch
@@ -574,6 +576,8 @@ Given below are instructions to test the app manually.
    
        Expected: The most recent window size and location is retained.
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Adding a patient
 
 Adding a patient while all patients are being shown
@@ -589,7 +593,10 @@ Adding a patient while all patients are being shown
       Expected: No patient is added to the patient list. An error message is shown with details of the error.
 
    4. Other incorrect add commands to try: `add`, `add S1234567A`
+      
       Expected: Similar to previous.
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Editing a patient
 
@@ -605,8 +612,11 @@ Editing an existing patient while all patients are being shown
 
       Expected: No patient is updated. An error message is shown with details of the error.
 
-   4. Other incorrect edit commands to try: `edit`, `edit i/S1234567A` Expected: Similar to previous.
+   4. Other incorrect edit commands to try: `edit`, `edit i/S1234567A` 
+      
+      Expected: Similar to previous.
 
+[Back to Table of Contents](#table-of-contents)
 
 ### Deleting a patient
 
@@ -623,6 +633,7 @@ Deleting a patient while all patients are being shown
       Expected: No patient is deleted from the patient list. An error message is shown with details of the error.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`(where x is an `NRIC` that does not exist in the patient list)
+
       Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
@@ -642,6 +653,7 @@ Setting a specified Priority for a patient
       Expected: No Priority is set to any patient. An error message is shown with details of the error.
 
    4. Other incorrect setPriority command to try: `setPriority x` (where x is neither `NONE`, `LOW`, `MEDIUM` OR `HIGH`)
+
       Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
@@ -660,7 +672,9 @@ Finding a patient by providing keyword(s) from their name
 
       Expected: No patient is found. An error message is shown with details of the error.
 
-   4. Other incorrect find commands to try: `find i/x` (where x is a keyword that does not exist in any patient's name) Expected: Similar to previous.
+   4. Other incorrect find commands to try: `find i/x` (where x is a keyword that does not exist in any patient's name) 
+
+      Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -686,9 +700,7 @@ Finding a patient by providing their `NRIC`
 
 Finding a patient by providing keyword(s) from their medical condition
 
-   1. Prerequisites:
-         1. Add a patient with the medical condition `diabetes` using the addMedCon command.
-         2. List all patients using the `list` command. Multiple patients in the list.
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
 
    2. Test case: `findMedCon diabetes`
    
@@ -699,6 +711,7 @@ Finding a patient by providing keyword(s) from their medical condition
       Expected: No patient is found. An error message is shown with details of the error.
 
    4. Other incorrect find commands to try: `findMedCon x` (where x is a keyword that does not exist in any patient's medical condition)
+      
       Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
@@ -710,12 +723,16 @@ Adding a medical condition to an existing patient
    1. Prerequisites: List all patients using the `list` command. Ensure there is at least one patient in the list.
 
    2. Test case: `addMedCon i/S1234567A c/Diabetes`  
+      
       Expected: The medical condition `Diabetes` is added to the patient with NRIC `S1234567A`. A success message is shown summarising which medical condition(s) have been added to which patient.
 
    3. Test case: `addMedCon c/Diabetes`  
+      
       Expected: No medical condition is added. An error message is shown, indicating that the command format is incorrect.
 
-   4. Other incorrect commands to try: `addMedCon`, `addMedCon i/S1234567A` Expected: Similar to previous.
+   4. Other incorrect commands to try: `addMedCon`, `addMedCon i/S1234567A` 
+
+      Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -726,12 +743,16 @@ Deleting an existing medical condition from a patient
    1. Prerequisites: List all patients using the `list` command. Ensure the patient has the added medical condition.
 
    2. Test case: `delMedCon i/S1234567A c/Diabetes`  
+      
       Expected: The medical condition `Diabetes` is removed from the patient with NRIC `S1234567A`. A success message is shown summarising which medical condition(s) have been removed from which patient.
 
    3. Test case: `delMedCon i/S1234567A c/Hypertension`  
+      
       Expected: No medical condition is deleted. An error message is shown, indicating that the specified medical condition does not exist for the patient.
 
-   4. Other incorrect commands to try**: `delMedCon`, `delMedCon i/S1234567A` Expected: Similar to previous.
+   4. Other incorrect commands to try**: `delMedCon`, `delMedCon i/S1234567A` 
+
+      Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -742,12 +763,16 @@ Adding an allergy to an existing patient
    1. Prerequisites: List all patients using the `list` command. Ensure there is at least one patient in the list.
 
    2. Test case: `addAllergy i/S1234567A al/Peanut`  
+      
       Expected: The allergy `Peanut` is added to the existing patient with NRIC `S1234567A`. A success message is shown summarising which allergy/allergies have been added to which patient.
 
    3. Test case: `addAllergy i/S9999999Z al/Peanut`
+      
       Expected: No allergy is added. An error message is shown, indicating that the specified patient does not exist.
 
-   4. Other incorrect `addAllergy` commands to try: `addAllergy`, `addAllergy al/Peanut` Expected: Similar to previous.
+   4. Other incorrect `addAllergy` commands to try: `addAllergy`, `addAllergy al/Peanut` 
+
+      Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -758,12 +783,15 @@ Deleting an existing allergy from a patient
    1. Prerequisites: List all patients using the `list` command. Ensure the patient has the added allergy.
 
    2. Test case: `delAllergy i/S1234567A al/Peanut`  
+      
       Expected: The allergy `Peanut` is removed from the patient with NRIC `S1234567A`. A success message is shown summarising which allergy/allergies have been removed from which patient.
 
    3. Test case: `delAllergy i/S1234567A al/Dust`  
+      
       Expected: No allergy is deleted. An error message is shown, indicating that the specified allergy does not exist for the patient.
 
    4. Other incorrect commands to try: `delAllergy`, `delAllergy i/S1234567A`  
+      
       Expected: An error message is shown, indicating that the command format is incorrect.
 
 [Back to Table of Contents](#table-of-contents)
