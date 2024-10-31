@@ -3,6 +3,8 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -33,6 +35,14 @@ public class CommandBox extends UiPart<Region> {
         this.commandCompleter = commandCompleter;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        // handle tab keypress event to auto-complete command
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.TAB) {
+               handleAutocomplete();
+               event.consume();
+            }
+        });
     }
 
     /**
@@ -51,6 +61,20 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Updates the command text on autocompletion of command name.
+     */
+    private void handleAutocomplete() {
+        String commandText = commandTextField.getText();
+        if (commandText.isEmpty() || commandText.contains(" ")) return;
+
+        Optional<String> possibleCommandName = commandCompleter.completeCommand(commandText);
+
+        if (possibleCommandName.isEmpty()) return;
+        commandTextField.setText(possibleCommandName.get() + " ");
+        commandTextField.end(); // set cursor to the end
     }
 
     /**
