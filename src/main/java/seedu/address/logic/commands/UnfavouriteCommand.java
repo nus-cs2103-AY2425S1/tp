@@ -26,6 +26,8 @@ public class UnfavouriteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Restaurant removed from favourite: %1$s";
 
+    public static final String MESSAGE_ALREADY_UNFAVOURITE = "This restaurant was not previously set as a favourite.";
+
     private final Index targetIndex;
 
     public UnfavouriteCommand(Index targetIndex) {
@@ -42,6 +44,11 @@ public class UnfavouriteCommand extends Command {
         }
 
         Restaurant restaurantToUnfavourite = lastShownList.get(targetIndex.getZeroBased());
+
+        if (!restaurantToUnfavourite.isFavourite()) {
+            throw new CommandException(MESSAGE_ALREADY_UNFAVOURITE);
+        }
+
         model.unfavouriteRestaurant(restaurantToUnfavourite);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(restaurantToUnfavourite)));
     }
