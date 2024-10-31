@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.person.Person;
 
 /**
@@ -137,7 +138,19 @@ public interface Model {
      */
     void addDelivery(Person person, Delivery delivery);
 
+    /**
+     * Returns an unmodifiable view of the filtered delivery list
+     */
     ObservableList<Delivery> getFilteredDeliveryList();
 
+    /**
+     * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
+
+    /**
+     * Sets the filtered delivery list to the deliveryList given
+     */
+    void setFilteredDeliveryList(DeliveryList deliveryList);
 }
