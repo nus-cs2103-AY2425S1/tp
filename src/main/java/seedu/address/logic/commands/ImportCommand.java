@@ -91,7 +91,7 @@ public class ImportCommand extends Command {
                 String[] weeksArray = fields[7].split(",");
                 for (String week : weeksArray) {
                     int weekPresent = ParserUtil.parseWeek(week.trim());
-                    weeksPresent.add(Integer.parseInt(week.trim()));
+                    weeksPresent.add(weekPresent);
                 }
             }
 
@@ -129,7 +129,8 @@ public class ImportCommand extends Command {
     /**
      * Parses a set of tags from a string with tags in the format "assignmentName | score".
      */
-    private Map<String, Assignment> parseAssignment(String assignmentField, Model model) throws NumberFormatException, CommandException {
+    private Map<String, Assignment> parseAssignment(String assignmentField, Model model) throws NumberFormatException,
+            CommandException {
         Map<String, Assignment> assignments = new HashMap<>();
         assignmentField = assignmentField.trim();
         if (!assignmentField.isEmpty()) {
@@ -139,7 +140,7 @@ public class ImportCommand extends Command {
                 List<String> individual = Stream.of(assignment.split("\\|"))
                         .map(String::trim).toList(); // | used as delimiter between name and score
                 String asgnName = individual.get(0);
-                Float asgnScore = Float.parseFloat(individual.get(1));
+                float asgnScore = Float.parseFloat(individual.get(1));
                 if (!model.hasAssignment(asgnName)) {
                     throw new CommandException("Invalid assignment name: " + asgnName);
                 }
