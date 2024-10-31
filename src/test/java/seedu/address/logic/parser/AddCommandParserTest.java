@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -35,6 +34,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.parser.AddCommandParser.MESSAGE_MISSING_NAME;
+import static seedu.address.logic.parser.AddCommandParser.MESSAGE_MISSING_PHONE_OR_EMAIL;
+import static seedu.address.logic.parser.AddCommandParser.MESSAGE_UNEXPECTED_PREAMBLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -188,19 +190,18 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        // missing name
+        assertParseFailure(parser, PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + MODULE_ROLE_DESC,
+                "Error:" + MESSAGE_MISSING_NAME + "\nUsage:\n" + AddCommand.MESSAGE_USAGE);
 
-        // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + MODULE_ROLE_DESC, expectedMessage);
-
-        // missing phone prefix and email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                + MODULE_ROLE_DESC, expectedMessage);
+        // missing phone and email
+        assertParseFailure(parser, NAME_DESC_BOB + ADDRESS_DESC_BOB + MODULE_ROLE_DESC, "Error: "
+                + MESSAGE_MISSING_PHONE_OR_EMAIL + "\nUsage:\n" + AddCommand.MESSAGE_USAGE);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                + VALID_MODULE_ROLE, expectedMessage);
+                + VALID_MODULE_ROLE, "Error: " + MESSAGE_UNEXPECTED_PREAMBLE + "\nUsage:\n"
+                + AddCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -242,6 +243,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MODULE_ROLE_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                "Error: " + MESSAGE_UNEXPECTED_PREAMBLE + "\nUsage:\n" + AddCommand.MESSAGE_USAGE);
     }
 }
