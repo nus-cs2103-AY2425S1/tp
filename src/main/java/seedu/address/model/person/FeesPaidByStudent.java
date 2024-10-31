@@ -4,24 +4,24 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the amount of fees that a student has paid.
+ * Different from payment class as this represents the action of student making the payment
  * Guarantees: immutable;
  */
-public class Fees {
+public class FeesPaidByStudent {
 
-    public static final String MESSAGE_CONSTRAINTS = "Fees must be an positive integer amount \n"
-            + "Leading zeros are allowed but not recommended"
-            + "The value zero is allowed, but what's the point?";
+    public static final String MESSAGE_CONSTRAINTS = "Fees paid must be an positive integer amount";
     public static final String VALIDATION_REGEX = "^[0-9]\\d*|0$\n";
     public final String value;
 
     /**
-     * Constructs an {@code Fees}.
+     * Constructs an {@code FeesPaidByStudent}.
      *
-     * @param balance String for payment status
+     * @param fees String for payment status
      */
-    public Fees(String balance) {
-        requireNonNull(balance);
-        this.value = balance;
+    public FeesPaidByStudent(String fees) {
+        requireNonNull(fees);
+        assert fees.matches("\\d+") : "The string should represent an positive integer";
+        this.value = fees;
     }
 
     /**
@@ -43,11 +43,11 @@ public class Fees {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Fees)) {
+        if (!(other instanceof FeesPaidByStudent)) {
             return false;
         }
 
-        Fees otherFees = (Fees) other;
+        FeesPaidByStudent otherFees = (FeesPaidByStudent) other;
         return value.equals(otherFees.value);
     }
 

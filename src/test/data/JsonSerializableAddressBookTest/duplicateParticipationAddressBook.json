@@ -1,0 +1,25 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "payment" : "200",
+    "tags" : [ "friends" ]
+  } ],
+  "tutorials" : [  {
+    "subject" : "Math"
+  } ],
+  "participations" : [ {
+    "student" : "Alice Pauline",
+    "phone" : "94351253",
+    "tutorial" : "Math",
+    "attendances" : []
+  },  {
+    "student" : "Alice Pauline",
+    "phone" : "94351253",
+    "tutorial" : "Math",
+    "attendances" : []
+  }]
+}

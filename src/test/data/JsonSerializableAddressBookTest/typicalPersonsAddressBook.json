@@ -6,7 +6,6 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "payment" : "200",
-    "attendance": "08/10/2024",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -14,7 +13,6 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "payment" : "200",
-    "attendance": "09/10/2024",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +20,6 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "payment" : "200",
-    "attendance": "10/10/2024",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -30,7 +27,6 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "payment" : "200",
-    "attendance": "11/10/2024",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -38,7 +34,6 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "payment" : "200",
-    "attendance": "12/10/2024",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -46,7 +41,6 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "payment" : "200",
-    "attendance": "13/10/2024",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -54,12 +48,17 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "payment" : "200",
-    "attendance": "14/10/2024",
     "tags" : [ ]
   } ],
   "tutorials" : [  {
     "subject" : "Math"
   }, {
     "subject" : "Science"
-  } ]
+  } ],
+  "participations" : [ {
+    "student" : "Alice Pauline",
+    "phone" : "94351253",
+    "tutorial" : "Math",
+    "attendances" : []
+  }]
 }
