@@ -27,7 +27,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL);
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Index index = ParserUtil.parseIndexAllowWildcard(argMultimap.getPreamble());
         List<Tutorial> tutorials = ParserUtil.parseTutorials(argMultimap.getValue(PREFIX_TUTORIAL).get());
 
         return new MarkCommand(index, tutorials);

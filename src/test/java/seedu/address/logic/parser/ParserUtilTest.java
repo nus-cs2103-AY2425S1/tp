@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_SORT_ORDER;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ALL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -49,6 +50,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("-2"));
     }
 
     @Test
@@ -64,6 +66,21 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseIndexAllowWildcard_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexAllowWildcard("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexAllowWildcard("-2"));
+    }
+
+    @Test
+    public void parseIndexAllowWildcard_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(INDEX_ALL, ParserUtil.parseIndexAllowWildcard("*"));
+
+        // Leading and trailing whitespaces
+        assertEquals(INDEX_ALL, ParserUtil.parseIndexAllowWildcard("  *  "));
     }
 
     @Test
