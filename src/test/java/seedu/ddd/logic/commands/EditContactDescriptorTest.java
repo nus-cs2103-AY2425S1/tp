@@ -14,7 +14,7 @@ import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_PHONE
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditContactCommand.EditContactDescriptor;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
 
 public class EditContactDescriptorTest {

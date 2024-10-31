@@ -17,8 +17,9 @@ import java.util.Set;
 
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.commands.EditCommand;
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
+import seedu.ddd.logic.commands.EditContactCommand;
+import seedu.ddd.logic.commands.EditContactCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditContactCommand.EditVendorDescriptor;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.common.Tag;
 
@@ -57,7 +58,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_SERVICE, PREFIX_ID);
 
         EditContactDescriptor editContactDescriptor = parseArgumentMultimap(argMultimap);
-        return new EditCommand(index, editContactDescriptor);
+        return new EditContactCommand(index, editContactDescriptor);
     }
 
     /**
@@ -101,7 +102,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editContactDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditContactCommand.MESSAGE_NOT_EDITED);
         }
 
         return editContactDescriptor;
