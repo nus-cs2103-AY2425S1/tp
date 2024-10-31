@@ -4,15 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.SupplyOrder;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class CustomerOrderCard extends UiPart<Region> {
+public class SupplierOrderCard extends UiPart<Region> {
 
-    private static final String FXML = "CustomerOrderListCard.fxml";
+    private static final String FXML = "SupplierOrderListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -39,7 +39,7 @@ public class CustomerOrderCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public CustomerOrderCard(CustomerOrder order, int displayedIndex) {
+    public SupplierOrderCard(SupplyOrder order, int displayedIndex) {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");
@@ -47,12 +47,7 @@ public class CustomerOrderCard extends UiPart<Region> {
         phone.setText(order.getPerson().getPhone().value);
         date.setText(order.getOrderDate());
         items.setText(order.viewOrder());
-
-        Label tagLabel = new Label(order.getStatus().toString());
-        if (order.getStatus().toString().equals("Pending")) {
-            tagLabel.getStyleClass().add("tag-pending");
-        }
-        status.getChildren().add(tagLabel);
+        status.getChildren().add(new Label(order.getStatus().toString()));
 
     }
 }

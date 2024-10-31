@@ -15,36 +15,22 @@ import java.util.Map;
 public abstract class Order {
     private static int nextId = 1; // Static field to track the next available order ID
     private int orderId;           // Unique ID for each order
-    private String phoneNumber; //may be better to store "person" object or "Phone" in the future
     private LocalDateTime orderDate;
     private List<? extends Product> items; //stores list of pastries/ingredients
     private OrderStatus status;
     private Person person;
 
     // Constructor
-    public Order(String phoneNumber, List<? extends Product> items, OrderStatus status) {
+    public Order(Person person, List<? extends Product> items, OrderStatus status) {
         this.orderId = nextId++;  // Assign the current value of nextId and increment
-        this.phoneNumber = phoneNumber;
         this.orderDate = LocalDateTime.now();
         this.items = items;
         this.status = status;
-    }
-
-    public void setPerson(Person person) {
         this.person = person;
     }
 
     public Person getPerson() {
         return person;
-    }
-
-    // Getters and Setters
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getOrderDate() {
@@ -78,12 +64,12 @@ public abstract class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "PhoneNumber='" + phoneNumber + '\'' +
-                ", orderDate=" + orderDate +
-                ", items=" + items +
-                ", status='" + status + '\'' +
-                '}';
+
+        return "Order Type: " + getOrderType() + "\n" +
+                "Order Date: " + orderDate + "\n" +
+                "Status: " + status + "\n" +
+                "Items: " + "\n" +
+                viewOrder();
     }
 
     public String viewOrder() {
@@ -95,8 +81,5 @@ public abstract class Order {
         }
 
         return sb.toString();
-//        return "Phone Number: " + phoneNumber + "\n" +
-//                "Order Date: " + orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
-//                "Items: \n" + sb.toString();
     }
 }

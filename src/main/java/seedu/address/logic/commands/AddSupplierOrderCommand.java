@@ -1,42 +1,37 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderList;
 import seedu.address.model.order.OrderStatus;
+import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.product.Pastry;
-import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 
-public class AddCustomerOrderCommand extends Command {
-    public static final String COMMAND_WORD = "addCustomerOrder";
+public class AddSupplierOrderCommand extends Command {
+    public static final String COMMAND_WORD = "addSupplyOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new customer order to the bakery's order list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new supplier order to the bakery's order list. "
             + "Parameters: PHONE_NUMBER PRODUCT_ID\n"
             + "Example: " + COMMAND_WORD + " 87654321 1";
 
-    public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "New customer order added: \n%1$s";
+    public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "New supplier order added: \n%1$s";
 
     private final Name name;
     private final Phone phone;
     private final ArrayList<Integer> idList;
 
-    public AddCustomerOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
+    public AddSupplierOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
         requireAllNonNull(phone);
         this.name = name;
         this.phone = phone;
@@ -47,10 +42,10 @@ public class AddCustomerOrderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        PastryCatalogue pastryCatalogue = model.getPastryCatalogue();
+        IngredientCatalogue ingredientCatalogue = model.getIngredientCatalogue();
 
         List<Product> productList = idList.stream()
-                                        .map(pastryCatalogue::getProductById)
+                                        .map(ingredientCatalogue::getProductById)
                 .                       filter(Objects::nonNull)
                                         .toList();
 
@@ -59,7 +54,7 @@ public class AddCustomerOrderCommand extends Command {
 
         for (Person p : personList) {
             if (p.getPhone().equals(phone)) {
-                 person = p;
+                person = p;
 
             }
         }
@@ -68,13 +63,13 @@ public class AddCustomerOrderCommand extends Command {
             model.addPerson(person);
         }
 
-        CustomerOrder customerOrder = new CustomerOrder(person, productList, OrderStatus.PENDING);
+        SupplyOrder supplyOrder = new SupplyOrder(person, productList, OrderStatus.PENDING);
 
-        person.addOrder(customerOrder);
+        person.addOrder(supplyOrder);
 
-        model.addCustomerOrder(customerOrder);
+        model.addSupplyOrder(supplyOrder);
 
-        return new CommandResult(String.format(MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS, customerOrder.viewOrder()));
+        return new CommandResult(String.format(MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS, supplyOrder.viewOrder()));
     }
 
 
@@ -84,11 +79,11 @@ public class AddCustomerOrderCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddCustomerOrderCommand)) {
+        if (!(other instanceof AddSupplierOrderCommand)) {
             return false;
         }
 
-        AddCustomerOrderCommand otherCommand = (AddCustomerOrderCommand) other;
+        AddSupplierOrderCommand otherCommand = (AddSupplierOrderCommand) other;
         return phone.equals(otherCommand.phone) && idList.equals(otherCommand.idList);
     }
 }

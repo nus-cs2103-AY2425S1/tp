@@ -30,6 +30,10 @@ public class Information {
         this.value = information;
     }
 
+    public Information() {
+        this.value = "";
+    }
+
     /**
      * Returns true if the given string is a valid information string.
      */

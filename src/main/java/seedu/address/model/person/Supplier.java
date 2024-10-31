@@ -1,11 +1,8 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
@@ -14,8 +11,6 @@ import seedu.address.model.tag.Tag;
  * Inherits from Person and adds additional fields for Supplier-specific information.
  */
 public class Supplier extends Person {
-
-    private final List<SupplyOrder> openSupplyOrders; // stores a list of open/unfulfilled supply orders
     private final Ingredients ingredientsSupplied; // list of ingredients supplied by the supplier
 
     /**
@@ -26,20 +21,8 @@ public class Supplier extends Person {
                     Remark remark, Set<Tag> tags) {
         super(name, phone, email, address, remark, tags);
         this.ingredientsSupplied = ingredientsSupplied;
-        this.openSupplyOrders = new ArrayList<>();
     }
 
-    public List<SupplyOrder> getOpenSupplyOrders() {
-        return openSupplyOrders;
-    }
-
-    public void addSupplyOrder(SupplyOrder supplyOrder) {
-        openSupplyOrders.add(supplyOrder);
-    }
-
-    public void removeSupplyOrder(SupplyOrder supplyOrder) {
-        openSupplyOrders.remove(supplyOrder);
-    }
 
     public Ingredients getIngredientsSupplied() {
         return ingredientsSupplied;
