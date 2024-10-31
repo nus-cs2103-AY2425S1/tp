@@ -139,7 +139,9 @@ public class ParserUtil {
     public static EventName parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedEventName = name.trim();
-        //Add validation logic
+        if (!EventName.isValidName(trimmedEventName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
         return new EventName(trimmedEventName);
     }
 
@@ -187,8 +189,53 @@ public class ParserUtil {
     public static Venue parseVenue(String venue) throws ParseException {
         requireNonNull(venue);
         String trimmedVenue = venue.trim();
-        //add validation logic
+        if (!Venue.isValidName(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+        }
         return new Venue(trimmedVenue);
     }
 
+    /**
+     * Parses a {@code String celebrity} in Event.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code celebrity} is invalid.
+     */
+    public static String parseEventCelebrity(String celebrity) throws ParseException {
+        requireNonNull(celebrity);
+        String trimmedCelebrity = celebrity.trim();
+        if (trimmedCelebrity.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_CELEBRITY_FORMAT);
+        }
+        return trimmedCelebrity;
+    }
+    /**
+     * Parses a {@code String contact} in Event.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code contact} is invalid.
+     */
+    public static String parseEventContact(String contact) throws ParseException {
+        requireNonNull(contact);
+        String trimmedContact = contact.trim();
+        if (trimmedContact.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_EVENT_CONTACT_FORMAT);
+        }
+        return trimmedContact;
+    }
+
+    /**
+     * Parses a {@code Collection<String> contacts} into a {@code Set<String>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code contact} is invalid.
+     */
+    public static Set<String> parseEventContacts(Collection<String> contacts) throws ParseException {
+        requireNonNull(contacts);
+        final Set<String> contactsSet = new HashSet<>();
+        for (String contact : contacts) {
+            contactsSet.add(parseEventContact(contact));
+        }
+        return contactsSet;
+    }
 }

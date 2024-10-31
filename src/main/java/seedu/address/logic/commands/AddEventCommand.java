@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -45,7 +44,8 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_TIME + "from: 2024-03-01 12:10, to: 2024-03-01 18:30 "
             + PREFIX_EVENT_VENUE + "Hollywood "
             + PREFIX_EVENT_CELEBRITY + "John Doe "
-            + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";
+            + PREFIX_EVENT_CONTACTS + "Alex Yeoh "
+            + PREFIX_EVENT_CONTACTS + "Bernice Yu";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
@@ -54,13 +54,13 @@ public class AddEventCommand extends AddCommand {
     private final Time time;
     private final Venue venue;
     private final String celebrityName;
-    private final List<String> contactNames;
+    private final Set<String> contactNames;
 
     /**
      * Creates an AddEventCommand to add the specified {@code Event}
      */
     public AddEventCommand(EventName eventName, Time time, Venue venue, String celebrityName,
-                           List<String> contactNames) {
+                           Set<String> contactNames) {
         requireAllNonNull(eventName, time, venue, celebrityName);
         this.eventName = eventName;
         this.time = time;

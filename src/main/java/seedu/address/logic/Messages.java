@@ -26,6 +26,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_TIME_FORMAT = "Incorrect time field! "
             + "Please the follow format: "
             + "\"t/from: YYYY-MM-DD HH:mm, to: YYYY-MM-DD HH:mm\"";
+    public static final String MESSAGE_INVALID_CELEBRITY_FORMAT = "Celebrity name cannot be blank";
+    public static final String MESSAGE_INVALID_EVENT_CONTACT_FORMAT = "Contact name cannot be blank";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
