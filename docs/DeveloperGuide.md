@@ -928,11 +928,23 @@ Team size: 5
 <br>
 
 ## **Appendix: Effort**
+#### Difficulty Level
+Our project presented a higher level of complexity compared to AB3. Our project involved handling multiple entity types, mainly persons and appointments, whereas AB3 manages only a single entity. This increased the requirements for command processing as each entity type has additional attributes and methods.
 
-We highly recommend adding an appendix named Appendix: Effort that evaluators can use to estimate the total project effort.
-- Keep it brief (~1 page)
-- Explain the difficulty level, challenges faced, effort required, and achievements of the project. 
-- If a significant part (e.g., more than 5%) of the effort was saved through reuse, mention what you reused and how it affected the effort e.g., the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java. 
-- Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
+#### Challenges Faced
+- **Integration of person and appointment entities**: To ensure that each appointment correctly linked to each patient, we introduced a `Patient` attribute to the `Appointment` class. 
+- **Command Implementation**: Implementing commands for both entities required careful design to ensure that each command worked correctly for both entities.
+- **Unique IDs**: To ensure each patient and appointment had a 
+  unique ID to allow for easy retrieval and updating of data, we added a `personId` and `appointmentId` attribute to the `Person` and `Appointment` classes respectively.
+
+#### Effort Required
+Our project involved substantial effort in several key areas:
+- **Design and Refactoring**: Extending the AB3 framework to handle two separate entity types required refactoring and designing new classes. 
+- **Command Implementation**: In creating patient- and appointment-specific commands, we implemented additional parser classes and commands.
+- **Testing and Debugging**: To ensure robust funtionality, we implemented comprehensive test cases. This was necessary to ensure 
+  that each command and feature worked as expected for both entity types.
+
+#### Achievements
+Our project successfully expanded AB3’s functionality, enabling the application to manage patients and appointments. Despite the challenges, our final solution provides a user-friendly interface and coherent command structure. Additionally, the design allows for potential future expansion to include other entity types without extensive restructuring, making the system both flexible and scalable.
 
 <br>
