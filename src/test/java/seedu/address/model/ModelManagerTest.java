@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +21,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.model.history.HistoryCommand;
+import seedu.address.model.history.VersionedAddressBook;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -66,6 +68,20 @@ public class ModelManagerTest {
         // Check that the list contains one command and that it matches the added command
         assertEquals(1, historyCommands.size());
         HistoryCommand historyCommand = historyCommands.get(0);
+    }
+
+    @Test
+    public void testCommitAndUndoAddressBook() {
+        AddressBook addressBook1 = new AddressBook();
+        AddressBook addressBook2 = getTypicalAddressBook();
+        ModelManager model = new ModelManager(addressBook1, new UserPrefs());
+        model.commitAddressBook(addressBook2);
+        model.setAddressBook(addressBook2);
+
+        assertEquals(addressBook2, model.getAddressBook());
+
+        model.undoAddressBook();
+        assertEquals(addressBook1, model.getAddressBook());
     }
 
     @Test

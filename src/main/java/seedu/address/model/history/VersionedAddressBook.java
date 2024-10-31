@@ -30,7 +30,7 @@ public class VersionedAddressBook {
     }
 
     /**
-     * Reverses the AddressBook to the previous state.
+     * Reverses the given AddressBook to the previous state.
      */
     public void undoAddressBook(AddressBook addressBook) {
         assert currentStatePointer >= 0 : "This is the earliest version that user can retrieve";
