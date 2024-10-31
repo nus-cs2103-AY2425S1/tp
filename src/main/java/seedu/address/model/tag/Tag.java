@@ -67,10 +67,4 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
-    public static void main(String[] args) {
-        Tag tag = new Tag("A+");
-        Tag tag1 = new Tag("asd");
-        System.out.println(tag.isBloodType);
-        System.out.println(tag1.isBloodType);
-    }
 }

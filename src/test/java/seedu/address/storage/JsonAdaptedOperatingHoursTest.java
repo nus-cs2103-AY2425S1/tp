@@ -12,22 +12,22 @@ public class JsonAdaptedOperatingHoursTest {
 
     @Test
     public void constructor_validOperatingHoursString_initializesCorrectly() {
-        JsonAdaptedOperatingHours jsonAdaptedOperatingHours = new JsonAdaptedOperatingHours("09:00 18:00");
-        assertEquals("09:00 18:00", jsonAdaptedOperatingHours.getOperatingHours());
+        JsonAdaptedOperatingHours jsonAdaptedOperatingHours = new JsonAdaptedOperatingHours("09:00 to 18:00");
+        assertEquals("09:00 to 18:00", jsonAdaptedOperatingHours.getOperatingHours());
     }
 
     @Test
     public void constructor_fromOperatingHoursObject_initializesCorrectly() {
-        OperatingHours operatingHours = new OperatingHours("09:00 18:00");
+        OperatingHours operatingHours = new OperatingHours("09:00 to 18:00");
         JsonAdaptedOperatingHours jsonAdaptedOperatingHours = new JsonAdaptedOperatingHours(operatingHours);
-        assertEquals("09:00 18:00", jsonAdaptedOperatingHours.getOperatingHours());
+        assertEquals("09:00 to 18:00", jsonAdaptedOperatingHours.getOperatingHours());
     }
 
     @Test
     public void toModelType_validOperatingHoursString_returnsOperatingHours() throws Exception {
-        JsonAdaptedOperatingHours jsonAdaptedOperatingHours = new JsonAdaptedOperatingHours("09:00 18:00");
+        JsonAdaptedOperatingHours jsonAdaptedOperatingHours = new JsonAdaptedOperatingHours("09:00 to 18:00");
         OperatingHours operatingHours = jsonAdaptedOperatingHours.toModelType();
-        assertEquals(new OperatingHours("09:00 18:00"), operatingHours);
+        assertEquals(new OperatingHours("09:00 to 18:00"), operatingHours);
     }
 
     @Test
