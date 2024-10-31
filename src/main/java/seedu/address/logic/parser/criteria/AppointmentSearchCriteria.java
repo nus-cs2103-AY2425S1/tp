@@ -58,4 +58,16 @@ public class AppointmentSearchCriteria implements SearchCriteria {
                 && !appointmentEndDate.isAfter(this.endDate) && !appointmentEndTime.isAfter(this.endTime);
 
     }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof AppointmentSearchCriteria)) {
+            return false;
+        }
+        AppointmentSearchCriteria otherCriteria = (AppointmentSearchCriteria) other;
+        return this.startDate.equals(otherCriteria.startDate) && this.startTime.equals(otherCriteria.startTime)
+                && this.endDate.equals(otherCriteria.endDate) && this.endTime.equals(otherCriteria.endTime);
+    }
 }
