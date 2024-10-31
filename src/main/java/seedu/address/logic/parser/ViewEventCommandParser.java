@@ -13,7 +13,7 @@ import seedu.address.model.event.Event;
  * Parses input arguments and creates a new ViewEventCommand object
  */
 public class ViewEventCommandParser implements Parser<ViewEventCommand> {
-    private static final Logger logger = Logger.getLogger(NewEventCommandParser.class.getName());
+    private static final Logger logger = Logger.getLogger(ViewEventCommandParser.class.getName());
     /**
      * Parses the given {@code String userInput} and returns a {@code NewEventCommand} object
      * for execution.
