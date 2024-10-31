@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -57,16 +56,20 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
-    @Disabled
+
     @Test
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
+                + editPersonDescriptor.getName().orElse(null) + ", nric="
+                + editPersonDescriptor.getNric().orElse(null) + ", gender="
+                + editPersonDescriptor.getGender().orElse(null) + ", dateOfBirth="
+                + editPersonDescriptor.getDateOfBirth().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", allergies="
-                + editPersonDescriptor.getAllergies().orElse(null) + "}";
+                + editPersonDescriptor.getAllergies().orElse(null) + ", appointments="
+                + editPersonDescriptor.getAppointments().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
