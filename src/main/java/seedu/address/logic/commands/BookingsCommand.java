@@ -27,6 +27,7 @@ public class BookingsCommand extends Command {
 
     private final LocalDate date;
     public BookingsCommand(LocalDate date) {
+        requireNonNull(date);
         this.date = date;
     }
 

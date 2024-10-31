@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.util.function.Predicate;
 
@@ -12,6 +14,7 @@ public class BookingIsOnDate implements Predicate<Person> {
 
     private final LocalDate date;
     public BookingIsOnDate(LocalDate date) {
+        requireNonNull(date);
         this.date = date;
     }
 

@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.time.LocalDate;
+
 import seedu.address.logic.commands.BookingsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 /**
@@ -19,7 +21,6 @@ public class BookingsCommandParser implements Parser<BookingsCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, BookingsCommand.MESSAGE_USAGE));
         }
-
         return new BookingsCommand(ParserUtil.parseDate(trimmedArgs));
     }
 }
