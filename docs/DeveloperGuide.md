@@ -497,6 +497,22 @@ Use case ends.
     * 1c1. GamerBook notifies the user that no contacts were found for the specified game.
 
       Use case ends.
+
+#### Use Case: UC8 - Find Contacts by Time
+**MSS**
+1. User requests to find contacts that play games in a specific time range.
+2. GamerBook shows a list of contacts that play games in the specified time.
+   Use case ends.
+
+**Extensions**
+* 1a. User enters an invalid or wrongly-formatted time.
+    * 1a1. GamerBook notifies user the correct input format.
+
+      Use case ends.
+* 1b. User enters only the start of the range.
+    * 1b1. GamerBook returns all contacts that overlaps with the single time point.
+
+      Use case ends.
   
 <!-- 
 TEMPLATE FOR ADDING USE CASE
