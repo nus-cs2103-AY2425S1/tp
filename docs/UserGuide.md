@@ -25,7 +25,6 @@ GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for u
    ![Ui](images/Ui.png)
 
    Examples:
-
    - cd /users/desktop/goonbook/goonbook.jar
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -162,8 +161,6 @@ Format: `findGroup KEYWORD [MORE_KEYWORDS]`
 - Only full words will be matched e.g. `class` will not match `clas`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `class` will return `class A`, `class B`
-
-Examples:
 
 - `findGroup 19S13` returns `19S13`
 - `findGroup GroupA GroupB` returns `GroupA`, `GroupB<br>
