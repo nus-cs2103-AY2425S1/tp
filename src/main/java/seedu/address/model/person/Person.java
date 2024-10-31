@@ -55,7 +55,7 @@ public class Person {
      * Constructor for Person without Email
      * All fields must not be null.
      */
-    public Person (Name name, Phone phone, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, address);
         this.name = name;
         this.phone = phone;
@@ -67,7 +67,7 @@ public class Person {
      * Constructor for Person without Email and Address
      * All fields must not be null.
      */
-    public Person (Name name, Phone phone, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Set<Tag> tags) {
         requireAllNonNull(name, phone);
         this.name = name;
         this.phone = phone;
