@@ -120,8 +120,8 @@ public class DeleteNotesCommandTest {
         DeleteNotesCommand deleteNotesCommand = new DeleteNotesCommand(validPersonIndex, invalidNoteIndex);
 
         // Assert that the expected error is thrown
-        assertThrows(CommandException.class, Messages.NO_EXISTING_NOTE, () ->
-                deleteNotesCommand.execute(modelMock));
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NOTED_INDEX, ()
+                -> deleteNotesCommand.execute(modelMock));
     }
 
     @Test

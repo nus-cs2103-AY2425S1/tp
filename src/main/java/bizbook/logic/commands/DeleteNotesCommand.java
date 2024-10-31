@@ -68,7 +68,7 @@ public class DeleteNotesCommand extends Command {
 
         // if there are no notes with this index
         if (noteIndex.getOneBased() > notesToEdit.size()) {
-            throw new CommandException(Messages.NO_EXISTING_NOTE);
+            throw new CommandException(Messages.MESSAGE_INVALID_NOTED_INDEX);
         }
 
         // remove the specified note
