@@ -159,11 +159,56 @@ Exits the program.
 
 Format: `exit`
 
+## Attendance Commands
+
+<box type="tip" seamless>
+
+**Tip:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
+</box>
+
+
 ### Marking Attendance : `markat`
 
-Marks attendance of student for a particular date
+* Marks attendance of student for a particular date with the specified details.
 
-Format: `markat n/STUDENT_NAME d/DATE`
+* Format: `markat n/STUDENT_NAME d/DATE pr/ATTENDANCE sn/STUDENT_NUMBER (Optional)`
+
+### Marking Tutorial Group Attendance : `markpresentall`
+
+* Marks all students in a tutorial group as present for a particular date
+
+* Format: `markpresentall tg/TUTORIAL_GROUP d/DATE`
+
+### Unmarking Tutorial Group Attendance : `Unmarkpresentall`
+
+* Marks all students in a tutorial group as absent for a particular date
+
+* Format: `unmarkpresentall tg/TUTORIAL_GROUP d/DATE`
+
+### Deleting Attendance : `deleteat`
+
+* Deletes attendance of student for a particular date with the specified details.
+
+* Format : `deleteat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+
+### Deleting Tutorial Group Attendance : `deleteatall`
+
+* Deletes attendance of all students in a tutorial group for a particular date
+
+* Format : `deleteatall tg/TUTORIAL_GROUP d/DATE`
+
+### Getting Attendance : `getat`
+
+* Gets attendance of student for a particular date
+
+* Format: `getat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+
+### Getting Tutorial Group Attendance : `getattg`
+
+* Opens an attendance window for all students in a tutorial group for a particular date
+
+* Format: `getattg tg/TUTORIAL_GROUP d/DATE`
+
 
 ### Saving the data
 
