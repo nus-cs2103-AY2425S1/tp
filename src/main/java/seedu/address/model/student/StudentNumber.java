@@ -16,9 +16,9 @@ public class StudentNumber {
             + "2. This is followed by exactly 7 numerical digits.\n"
             + "3. Lastly, it ends with another letter, which could be A or any other uppercase letter.";
 
-    private static final String START_PART_REGEX = "^A0";
+    private static final String START_PART_REGEX = "(?i)^A0";
     private static final String DIGIT_PART_REGEX = "\\d{6}";
-    private static final String END_PART_REGEX = "[A-Z]$";
+    private static final String END_PART_REGEX = "(?i)[A-Z]$";
     public static final String VALIDATION_REGEX = START_PART_REGEX + DIGIT_PART_REGEX + END_PART_REGEX;
 
     public final String value;
@@ -31,7 +31,7 @@ public class StudentNumber {
     public StudentNumber(String studentNumber) {
         requireNonNull(studentNumber);
         checkArgument(isValidStudentNumber(studentNumber), MESSAGE_CONSTRAINTS);
-        value = studentNumber;
+        value = studentNumber.toUpperCase();
     }
 
     /**
