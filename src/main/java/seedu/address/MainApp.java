@@ -158,12 +158,12 @@ public class MainApp extends Application {
             initializedPrefs = new UserPrefs();
         }
 
-//        //Update prefs file in case it was missing to begin with or there are new/unused fields
-//        try {
-//            storage.saveUserPrefs(initializedPrefs);
-//        } catch (IOException e) {
-//            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
-//        }
+        // Update prefs file in case it was missing to begin with or there are new/unused fields
+        // try {
+        //     storage.saveUserPrefs(initializedPrefs);
+        // } catch (IOException e) {
+        //     logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        // }
 
         return initializedPrefs;
     }

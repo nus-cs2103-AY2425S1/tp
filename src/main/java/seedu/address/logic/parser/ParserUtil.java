@@ -109,7 +109,7 @@ public class ParserUtil {
         List<String> ingredientNames = Arrays.asList(trimmedIngredients.split("\\s*,\\s*"));
         List<Ingredient> ingredientList = new ArrayList<>();
 
-        int ingredientId = 1;  // For now, we use hardcoded IDs.
+        int ingredientId = 1; // For now, we use hardcoded IDs.
         for (String ingredientName : ingredientNames) {
             Ingredient ingredient = new Ingredient(ingredientId++, ingredientName, 0.0); // Assuming cost is 0 for MVP
             ingredientList.add(ingredient);
