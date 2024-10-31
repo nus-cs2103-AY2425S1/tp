@@ -6,6 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 public class DateOfLastVisitTest {
 
     @Test
@@ -35,6 +37,14 @@ public class DateOfLastVisitTest {
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("03-14-20240")); // invalid month and year
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("31-04-2024")); // 31st of even month
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("29-02-2023")); // 29th feb of non leap year
+
+        // date later than today
+        String tomorrow = LocalDate.now().plusDays(1).format(DateOfLastVisit.DATE_TIME_FORMATTER);
+        assertFalse(DateOfLastVisit.isValidDateOfLastVisit(tomorrow)); // date is later than today
+
+        // date is today
+        String today = LocalDate.now().format(DateOfLastVisit.DATE_TIME_FORMATTER);
+        assertTrue(DateOfLastVisit.isValidDateOfLastVisit(today)); // date is equal to today
 
         // valid dateOfLastVisits
         assertTrue(DateOfLastVisit.isValidDateOfLastVisit("01-01-0000")); // year 0000
