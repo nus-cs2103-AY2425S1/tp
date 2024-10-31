@@ -37,7 +37,7 @@ public class UntagCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + CliSyntax.PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_TAG + "high priority";
+            + CliSyntax.PREFIX_TAG + "high-priority";
 
     public static final String MESSAGE_SUCCESS = "Deleted tag: %1$s from person %2$s";
 
