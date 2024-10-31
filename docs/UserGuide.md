@@ -132,7 +132,7 @@ Examples:
 * `find n/alex yeo` returns `Alex Yeoh`
 
 Result for `find n/roy`:
-![result for 'find n/roy'](images/FindRoyResult.png) // need to change this image
+![result for 'find n/roy'](images/FindRoyResult.png) 
 
 
 #### Locating by phone number: `find p/PHONE_NUMBER`
@@ -184,7 +184,7 @@ Examples:
 * `find c/Invest` returns every contact that has `client_type` beginning with `Invest`
 
 Result for `find c/Investment`:
-![result for 'find c/Investment`](images/FindInvestmentresult.png)
+![result for 'find c/Investment`](images/FindInvestmentResult.png)
 
 
 ### Shortcuts for `find` command
