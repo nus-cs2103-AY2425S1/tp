@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import bizbook.commons.util.FileUtil;
-import bizbook.logic.commands.exporter.exceptions.EmptyAddressBookException;
 import bizbook.logic.commands.exporter.exceptions.InvalidFileException;
 import bizbook.model.AddressBook;
 import bizbook.model.person.Address;
@@ -29,7 +28,7 @@ public class VcfImporter implements Importer {
     public static final String MESSAGE_INVALID_FORMAT = "File is not in the proper format or the file is corrupted.";
 
     @Override
-    public AddressBook importAddressBook(Path filePath) throws IOException, EmptyAddressBookException {
+    public AddressBook importAddressBook(Path filePath) throws IOException, InvalidFileException {
         String contents = FileUtil.readFromFile(filePath);
         List<VCard> vCards = Ezvcard.parse(contents).all();
 

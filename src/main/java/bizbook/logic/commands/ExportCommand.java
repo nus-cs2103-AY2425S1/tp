@@ -9,7 +9,7 @@ import bizbook.commons.util.ToStringBuilder;
 import bizbook.logic.commands.exceptions.CommandException;
 import bizbook.logic.commands.exporter.Exporter;
 import bizbook.logic.commands.exporter.FileType;
-import bizbook.logic.commands.exporter.exceptions.EmptyAddressBookException;
+import bizbook.logic.commands.exporter.exceptions.InvalidAddressBookException;
 import bizbook.model.Model;
 
 /**
@@ -26,7 +26,6 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Contact list successfully exported to a %1$s file";
     public static final String MESSAGE_FAILED_TO_SAVE = "Unable to export contact list to a %1$s file"
             + ", please ensure that the file is closed before exporting";
-    public static final String MESSAGE_EMPTY_ADDRESS_BOOK = "Address book is empty. Consider adding a person first.";
 
     private final FileType fileType;
 
@@ -49,8 +48,8 @@ public class ExportCommand extends Command {
             exporter.exportAddressBook(model.getAddressBook());
         } catch (IOException io) {
             throw new CommandException(String.format(MESSAGE_FAILED_TO_SAVE, fileType));
-        } catch (EmptyAddressBookException eabe) {
-            throw new CommandException(MESSAGE_EMPTY_ADDRESS_BOOK);
+        } catch (InvalidAddressBookException iabe) {
+            throw new CommandException(iabe.getMessage());
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, fileType));

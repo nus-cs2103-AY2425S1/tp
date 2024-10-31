@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import bizbook.commons.util.FileUtil;
-import bizbook.logic.commands.exporter.exceptions.EmptyAddressBookException;
+import bizbook.logic.commands.exporter.exceptions.InvalidAddressBookException;
 import bizbook.model.ReadOnlyAddressBook;
 import bizbook.model.ReadOnlyUserPrefs;
 import bizbook.model.person.Person;
@@ -30,9 +30,9 @@ public class VcfExporter implements Exporter {
     }
 
     @Override
-    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException, EmptyAddressBookException {
+    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException, InvalidAddressBookException {
         if (addressBook.getPersonList().isEmpty()) {
-            throw new EmptyAddressBookException();
+            throw new InvalidAddressBookException(MESSAGE_EMPTY_ADDRESS_BOOK);
         }
 
         List<VCard> vCards = addressBook.getPersonList()

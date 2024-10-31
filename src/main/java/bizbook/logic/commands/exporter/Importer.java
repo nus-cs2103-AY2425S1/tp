@@ -3,7 +3,7 @@ package bizbook.logic.commands.exporter;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import bizbook.logic.commands.exporter.exceptions.EmptyAddressBookException;
+import bizbook.logic.commands.exporter.exceptions.InvalidFileException;
 import bizbook.model.AddressBook;
 
 /**
@@ -13,5 +13,5 @@ public interface Importer {
     /**
      * Imports an address book
      */
-    public AddressBook importAddressBook(Path filePath) throws IOException, EmptyAddressBookException;
+    public AddressBook importAddressBook(Path filePath) throws IOException, InvalidFileException;
 }

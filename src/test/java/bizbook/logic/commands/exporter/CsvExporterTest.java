@@ -1,5 +1,6 @@
 package bizbook.logic.commands.exporter;
 
+import static bizbook.logic.commands.exporter.Exporter.MESSAGE_EMPTY_ADDRESS_BOOK;
 import static bizbook.testutil.TypicalPersons.AMY;
 import static bizbook.testutil.TypicalPersons.BOB;
 import static bizbook.testutil.TypicalPersons.CHARLIE;
@@ -18,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import bizbook.commons.util.FileUtil;
-import bizbook.logic.commands.exporter.exceptions.EmptyAddressBookException;
+import bizbook.logic.commands.exporter.exceptions.InvalidAddressBookException;
 import bizbook.model.AddressBook;
 import bizbook.model.UserPrefs;
 import bizbook.testutil.TestUtil;
@@ -46,7 +47,8 @@ public class CsvExporterTest {
         assertFalse(FileUtil.isFileExists(exportPath));
 
         AddressBook addressBook = new AddressBook();
-        assertThrows(EmptyAddressBookException.class, () -> csvExporter.exportAddressBook(addressBook));
+        assertThrows(InvalidAddressBookException.class, () -> csvExporter.exportAddressBook(addressBook),
+                MESSAGE_EMPTY_ADDRESS_BOOK);
         assertFalse(FileUtil.isFileExists(exportPath));
     }
 
