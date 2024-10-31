@@ -104,20 +104,19 @@ Examples:
 
 Schedules an appointment for a client in the address book.
 
-Format: `schedule NAME d/DATE_AND_TIME…​ [note/NOTES]…​`
+Format: `schedule NAME d/DATE_AND_TIME…​ note/NOTES…​`
 
 * You can schedule multiple appointments using the `d/` prefix for each date and time.
-* If multiple `note/` prefixes are used, each note will correspond to the `d/` in the same order. If there are fewer notes than dates, the remaining dates will not have any notes.
+* If multiple `note/` prefixes are used, each note will correspond to the `d/` in the same order. Same number of notes and dates must be provided.
 * The given date must fall on a weekday.
 * The given time must be on the hour between 0900 and 1700.
 * Format for the date and time must be in yyyy-MM-dd HHmm.
-* The field for notes is optional.
 * When scheduling appointments, the existing schedules of the person will be removed i.e adding of schedules is not cumulative.
 
 Examples:
-* `schedule John Doe d/2024-10-14 1200`
+* `schedule John Doe d/2024-10-14 1200 note/first appointment`
 * `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`
-* `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting` The note "important meeting" will be associated with the first date only. The second date will have no note.
+* `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting note/not so important meeting` The note "important meeting" will be associated with the first date only. The second date will have no note.
 
 ### Setting a reminder: `reminder`
 
@@ -125,11 +124,16 @@ Sets a reminder for a client before their appointment in the address book.
 
 Format: `reminder NAME r/REMINDER_TIME`
 
+* The NAME refers to the full name of the client you want to set a reminder for.
+* The REMINDER_TIME specifies how early you want to be reminded before the appointment. It must be in the form of either "X day(s)" or "Y hour(s)".
+* ***Allowed reminder times***:
+    * Days: You can specify 1 to 7 days (e.g 1 day, 7 days)
+    * Hours: You can specify 1 to 23 hours (e.g 1 hour, 23 hours)
 * You can only set a reminder for a person who already has a scheduled appointment.
-* The reminder time must be a valid expression (e.g. "1 day", "2 hours").
+* Multiple reminder times (r/) cannot be specified in a single command. Only one reminder time can be set per command.
 
 Examples:
-* `reminder John Doe r/10 days`
+* `reminder John Doe r/6 days`
 * `reminder Betsy Crowe r/3 hours`
 
 ### Deleting a reminder: `reminder-delete`

@@ -23,7 +23,7 @@
         <stylesheets>
             <URL value="@ViewWindow.css" />
         </stylesheets>
-        <VBox fx:id="viewClientContainer" alignment="CENTER" prefHeight="372.0" prefWidth="507.0">
+        <VBox fx:id="viewClientContainer" alignment="CENTER" prefHeight="392.0" prefWidth="507.0">
             <children>
                 <HBox fx:id="clientProfileContainer" prefHeight="104.0" prefWidth="507.0" stylesheets="@ViewWindow.css">
                     <children>
@@ -91,11 +91,6 @@
                      <Insets bottom="10.0" top="20.0" />
                   </padding>
                 </HBox>
-               <Label text="Features to be implemented">
-                  <font>
-                     <Font name="Times New Roman" size="15.0" />
-                  </font>
-               </Label>
                 <Label text="Condition:">
                     <font>
                         <Font name="Times New Roman" size="15.0" />
@@ -106,26 +101,45 @@
                         <Font name="Times New Roman" size="15.0" />
                     </font>
                 </Label>
-                <Label text="Schedule:">
-                    <font>
-                        <Font name="Times New Roman" size="15.0" />
-                    </font>
-                </Label>
-                <Label fx:id="clientSchedule" text="Label">
-                    <font>
-                        <Font name="Times New Roman" size="15.0" />
-                    </font>
-                </Label>
-                <TableView prefHeight="161.0" prefWidth="507.0" stylesheets="@ViewWindow.css" VBox.vgrow="ALWAYS">
-                    <columns>
-                        <TableColumn prefWidth="120.0" text="Date" />
-                        <TableColumn prefWidth="265.0" text="Details" />
-                        <TableColumn prefWidth="120.0" text="Paid" />
-                    </columns>
-                    <VBox.margin>
-                        <Insets top="30.0" />
-                    </VBox.margin>
-                </TableView>
+               <HBox alignment="BOTTOM_CENTER" prefHeight="89.0" prefWidth="507.0">
+                  <children>
+                     <Label fx:id="clientCondition1" text="Reminder: ">
+                        <font>
+                           <Font name="Times New Roman" size="15.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="clientReminder" text="Label" textFill="#389472">
+                        <font>
+                           <Font name="Times New Roman" size="15.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+               <VBox prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                      <Label text="Schedule:">
+                          <font>
+                              <Font name="Times New Roman" size="15.0" />
+                          </font>
+                        <VBox.margin>
+                           <Insets left="10.0" />
+                        </VBox.margin>
+                      </Label>
+                      <TableView fx:id="clientScheduleTable" prefHeight="161.0" prefWidth="507.0" stylesheets="@ViewWindow.css" VBox.vgrow="ALWAYS">
+                          <columns>
+                              <TableColumn fx:id="clientScheduleDate" prefWidth="120.0" text="Date" />
+                              <TableColumn fx:id="clientScheduleDetails" prefWidth="265.0" text="Details" />
+                              <TableColumn fx:id="clientSchedulePaymentStatus" prefWidth="120.0" text="Paid" />
+                          </columns>
+                          <VBox.margin>
+                              <Insets top="5.0" />
+                          </VBox.margin>
+                      </TableView>
+                  </children>
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin>
+               </VBox>
             </children>
         </VBox>
     </Scene>

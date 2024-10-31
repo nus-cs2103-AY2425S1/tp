@@ -1,9 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_DISPLAYED;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_REMINDER_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
 
 import seedu.address.logic.commands.ReminderCommand;
@@ -24,15 +23,21 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
     @Override
     public ReminderCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_REMINDER);
+        // Show usage if no arguments are provided or if only whitespace is provided
+        if (args.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ReminderCommand.MESSAGE_USAGE));
+        }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMINDER);
         String name = argMultimap.getPreamble();
         String reminderTime = argMultimap.getValue(PREFIX_REMINDER).orElse("");
 
-        // Check for missing name, date, or reminder
-        if (name.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_NAME_DISPLAYED);
-        }
+        // Check for missing reminder
         if (reminderTime.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
+        }
+        // Check for multiple prefixes
+        if (argMultimap.getAllValues(PREFIX_REMINDER).size() > 1) {
             throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
         }
 

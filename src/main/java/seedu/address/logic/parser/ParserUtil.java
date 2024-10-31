@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.PaymentCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -167,7 +168,7 @@ public class ParserUtil {
             if (noteIterator.hasNext()) {
                 scheduleSet.add(parseSchedule(dateTimeIterator.next(), noteIterator.next()));
             } else {
-                scheduleSet.add(parseSchedule(dateTimeIterator.next(), ""));
+                throw new ParseException(ScheduleCommand.MESSAGE_UNEQUAL_NOTES);
             }
         }
         return scheduleSet;
@@ -183,9 +184,9 @@ public class ParserUtil {
     public static boolean parsePaidStatus(String paidStatus) throws ParseException {
         requireNonNull(paidStatus);
         String trimmedStatus = paidStatus.trim().toLowerCase();
-        if (trimmedStatus.equals("true") || trimmedStatus.equals("paid")) {
+        if (trimmedStatus.equals("paid")) {
             return true;
-        } else if (trimmedStatus.equals("false") || trimmedStatus.equals("unpaid")) {
+        } else if (trimmedStatus.equals("unpaid")) {
             return false;
         } else {
             throw new ParseException(PaymentCommand.MESSAGE_PAYMENT_STATUS_INVALID);

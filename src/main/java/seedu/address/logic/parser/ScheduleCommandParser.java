@@ -27,7 +27,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     public ScheduleCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NOTE);
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_NOTE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
         String name = argMultimap.getPreamble();

@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 
 import java.util.HashSet;
@@ -27,9 +26,9 @@ public class PaymentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks payment as paid or unpaid for the person identified by the name.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + "NAME "
             + PREFIX_DATE + "DATE & TIME (in the format: YYYY-MM-DD HHmm) "
-            + PREFIX_PAID + "PAID_STATUS (paid/unpaid/true/false)\n"
+            + PREFIX_PAID + "PAID_STATUS (paid/unpaid)\n"
             + "Example: " + COMMAND_WORD + " "
             + "John Doe "
             + PREFIX_DATE + "2024-10-24 1000 "
@@ -39,7 +38,7 @@ public class PaymentCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with name: %1$s";
     public static final String MESSAGE_SCHEDULE_NOT_FOUND = "No appointment found for %1$s at %2$s";
     public static final String MESSAGE_PAYMENT_STATUS_INVALID =
-            "Payment status must be either 'paid', 'unpaid', 'true', or 'false'";
+            "Payment status must be either 'paid' or 'unpaid'";
 
     private final Name name;
     private final String dateTime;

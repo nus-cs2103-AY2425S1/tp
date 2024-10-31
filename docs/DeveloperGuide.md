@@ -179,6 +179,7 @@ The sequence diagram below models the interactions between the different compone
 2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached. 
 3. The new appointment is then displayed in the UI, reflecting the updated schedule for "Alice Tan".
 
+
 ### Reminder Feature
 
 #### Overview
@@ -202,6 +203,31 @@ The reminder diagram below models the interaction between the different componen
 1. User inputs the command `reminder Alice Tan r/3 hours`.
 2. This creates a reminder for a person named "Alice Tan", with reminder time "3 hours".
 3. The reminder is then displayed in the UI, reflecting that a reminder has been set for "Alice Tan"'s appointment.
+
+### Delete Appointment Feature
+
+#### Overview
+The `appointment-delete` command helps to delete scheduled appointments for a client.
+
+The sequence diagram below models the interactions between the different components of PhysioPal for the execution of the `appointment-delete` command.
+
+![DeleteAppointmentSequenceDiagram](images/DeleteAppointmentSequenceDiagram.png)
+
+#### Details
+1. The user executes the command `appointment-delete John Doe d/2024-10-28 1200` to delete a specified appointment for a client named John Doe.
+2. The `DeleteAppointmentCommandParser` object calls its `parse` method to interpret the user input.
+3. A `DeleteAppointmentCommand` object is created.
+4. The `DeleteAppointmentCommandParser` object returns the `DeleteAppointmentCommand` object.
+5. The `LogicManager` object calls the `execute` method of `DeleteAppointmentCommand`.
+6. The `execute` method then invokes the `deleteAppointment` method of its `Model` argument to delete the specified appointment.
+7. The `execute` method then invokes the `updateFilteredPersonList` method of its `Model` argument to update the view of PhysioPal to show all contacts with their appointments.
+8. The `execute` method returns a `CommandResult` which contains data indicating the completion of the `DeleteAppointmentCommand`.
+
+#### Example Usage
+1. User inputs the command `appointment-delete Alice Tan d/2024-10-29 1200`.
+2. This deletes the appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm.
+3. The updated schedule for "Alice Tan" is then displayed in the UI.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -381,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. PhysioPal displays error message.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
-      Use case resumes from step 2.
+      <br>Use case resumes from step 2.<br>
 
 
 * 1b. PhysioPal detects an invalid name.
@@ -389,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. PhysioPal displays error message.
     * 1b2. Physiotherapist enters new data.
     * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
-      Use case resumes from step 2.
+      <br>Use case resumes from step 2.<br>
 
 
 * 1c. PhysioPal detects an empty input for date and time.
@@ -397,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. PhysioPal displays error message.
     * 1c2. Physiotherapist enters new data.
     * Steps 1c1-1c2 are repeated until a valid date and time is input by the Physiotherapist.
-      Use case resumes from step 2.
+      <br>Use case resumes from step 2.<br>
 
 
 * 1d. PhysioPal detects an invalid date and time or the given date and time already contains an appointment.
@@ -405,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. PhysioPal displays error message.
     * 1d2. Physiotherapist enters new data.
     * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
-      Use case resumes from step 2.
+      <br>Use case resumes from step 2.<br>
 
 
 * 1e. PhysioPal detects an empty input for note.
@@ -413,7 +439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1e1. PhysioPal displays error message.
     * 1e2. Physiotherapist enters new data.
     * Steps 1e1-1e2 are repeated until a valid note is input by the Physiotherapist.
-      Use case resumes from step 2.
+      <br>Use case resumes from step 2.<br>
 
 
 **Use case: UC03 - Deleting an appointment**
@@ -435,31 +461,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. PhysioPal displays error message.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
-      Use case resumes from step 2.
-
+      <br>Use case resumes from step 2.<br>
 
 * 1b. PhysioPal detects an invalid name.
 
     * 1b1. PhysioPal displays error message.
     * 1b2. Physiotherapist enters new data.
     * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
-      Use case resumes from step 2.
-
+      <br>Use case resumes from step 2.<br>
 
 * 1c. PhysioPal detects an empty input for date and time.
 
     * 1c1. PhysioPal displays error message.
     * 1c2. Physiotherapist enters new data.
     * Steps 1c1-1c2 are repeated until a valid date and time is input by the Physiotherapist.
-      Use case resumes from step 2.
-
+      <br>Use case resumes from step 2.<br>
 
 * 1d. PhysioPal detects that the client does not have an appointment on given date and time.
 
     * 1d1. PhysioPal displays error message.
     * 1d2. Physiotherapist enters new data.
     * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
-      Use case resumes from step 2.
+      <br>Use case resumes from step 2.<br>
+
+**Use case: UC04 - Deleting a reminder**
+
+**MSS**
+
+1. Physiotherapist requests to delete the reminder for a client.
+2. PhysioPal deletes the reminder for client.
+3. PhysioPal confirms deletion of reminder and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      <br>Use case resumes from step 2.<br>
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+      <br>Use case resumes from step 2.<br>
+
+* 1c. PhysioPal detects that the client does not have a reminder set.
+
+    * 1c1. PhysioPal displays error message.
+      <br>Use case ends.<br>
+
+**Use case: UC05 - Deleting an appointment**
+
+**Preconditions: Client has one appointment.**
+
+**MSS**
+
+1. Physiotherapist <u>deletes a scheduled appointment for a client (UC03)</u>.
+2. PhysioPal <u>deletes the reminder for client (UC04)</u>.
+3. PhysioPal confirms deletion of appointment and displays a success message.
+
+   Use case ends.
 
 **Use case: UC04 - Setting a reminder for an appointment**
 
@@ -557,24 +623,20 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `delete John Doe`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `delete John Doe`<br>
        Expected: No person is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `delete`, `delete XXX`, `...` (where XXX is not a name in the address book)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Scheduling an appointment
 
@@ -584,9 +646,21 @@ testers are expected to do more *exploratory* testing.
    
     1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: Contact named John Doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
    
-    1. Test case: `schedule John Doee d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
+    1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
 
     1. Test case: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>Expected: Similar to previous.
+
+### Deleting an appointment
+
+1. Deleting an appointment for a client while all clients are being shown.
+
+    1. Prerequisites: Name John Doe should exist in the contact list. At least **one** appointment should exist for the client John Doe. If not, run the appropriate command to schedule an appointment for John Doe.<br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>
+
+    1. Test case: `appointment-delete John Doe d/2024-10-29 1200`<br>Expected: Contact named John Doe will be updated without the appointment on Oct 29 2024, 12:00 pm. Success message of the appointment deletion shown in the status message.
+
+    1. Test case: `appointment-delete John Doe d/2024-10-29 1200`<br>Expected: No contact is updated. Error details shown in the status message.
+
+    1. Test case: `appointment-delete John Doe d/2024-10-29 1800`<br>Expected: Similar to previous.
 
 ### Setting a reminder for an appointment
 
@@ -609,6 +683,16 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `reminder John Doe r/8 days`<br>Expected: Similar to previous.
 
     1. Test case: `reminder John Doe r/25 hours`<br>Expected: Similar to previous.
+
+### Deleting a reminder
+
+1. Deleting a reminder for a client while all clients are being shown.
+
+    1. Prerequisites: Name John Doe should exist in the contact list. A reminder should be set for the client John Doe. If not, run the appropriate command to set a reminder for John Doe.<br>`reminder John Doe r/1 day`<br>
+
+    1. Test case: `reminder-delete John Doe`<br>Expected: Contact named John Doe will be updated without the reminder. Success message of the reminder deletion shown in the status message.
+
+    1. Test case: `reminder-delete John Doe`<br>Expected: No contact is updated. Error details shown in the status message.
 
 ### Saving data
 
