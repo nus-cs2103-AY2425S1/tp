@@ -294,7 +294,6 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
-    @Disabled
     @Test
     public void execute_addSubjectsTutee_success() {
         // Arrange

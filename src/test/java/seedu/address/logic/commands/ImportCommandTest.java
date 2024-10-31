@@ -23,7 +23,6 @@ public class ImportCommandTest {
     private Model expectedModel = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
 
-    @Disabled
     @Test
     public void execute_import_success() throws CommandException {
         Path typicalPersons = TEST_DATA_FOLDER.resolve("typicalPersonsCsv.csv");
@@ -44,7 +43,6 @@ public class ImportCommandTest {
         assertCommandSuccess(importCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
-    @Disabled
     @Test
     public void execute_import_duplicatePersons() throws CommandException {
         Path duplicatePersons = TEST_DATA_FOLDER.resolve("duplicatePersonsCsv.csv");
