@@ -20,6 +20,7 @@ Action | Format (with examples)
 [**Add Doctor**](#adding-a-doctor-add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br><br> e.g. `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
 [**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br><br> e.g. `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1987 g/M`
 [**Add Appointment**](#adding-an-appointment-add-appt) | `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME` <br><br> e.g. `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100`
+[**Delete Appointment**](#deleting-an-appointment-delete-appt) | `delete-appt UNIQUE_ID` <br><br> e.g. `delete-appt 1355`
 [**List**](#listing-all-persons-list) | `list`
 [**List Doctors**](#listing-all-doctors-list-doctor) | `list-doctor`
 [**List Patients**](#listing-all-patients-list-patient) | `list-patient`
@@ -149,6 +150,17 @@ The parameter `PATIENT_NAME` and `DOCTOR_NAME` are case-sensitive, and must be a
 
 **Examples:**
 * `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100`
+
+### Deleting an appointment: `delete-appt`
+
+Deletes the specified appointment from the address book.
+
+Format: `delete-appt UNIQUE_ID`
+
+* Deletes the appointment tagged to the `UNIQUE_ID`.
+
+**Examples:**
+* `delete-appt 1355`
 
 ### Listing all persons: `list`
 
