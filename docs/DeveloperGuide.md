@@ -184,8 +184,8 @@ Currently, there are 3 possible states a tutorial class' attendance can be displ
 
 ![TutorialsAttended.png](images/TutorialsAttendedPlaceholder.png)
 
-Each Person in the address book holds a LinkedHashMap<Tutorial, AttendanceStatus>. 
-Upon using one of the mark attendance commands (eg: `mark`, `unmark`, `reset`), the AttendanceStatus 
+Each Person in the address book holds a `LinkedHashMap<Tutorial, AttendanceStatus>`. 
+Upon using one of the mark attendance commands (eg: `mark`, `unmark`, `reset`), the `AttendanceStatus` 
 of the tutorial indices provided will be modified to one of the enumerations accordingly.
 ![PersonClassDiagram.png](images/PersonClassDiagram.png)
 
