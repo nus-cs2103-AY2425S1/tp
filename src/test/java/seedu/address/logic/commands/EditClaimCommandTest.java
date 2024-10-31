@@ -119,7 +119,7 @@ public class EditClaimCommandTest {
 
         assertCommandSuccess(editClaimsCommand, model, expectedMessage, model);
     }
-    
+
     @Test
     public void equals() {
         EditClaimCommand editClaimCommand1 = new EditClaimCommand(INDEX_FIRST_PERSON, validPolicyType,
