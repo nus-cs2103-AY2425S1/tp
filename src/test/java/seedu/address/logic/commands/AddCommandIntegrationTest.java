@@ -44,5 +44,4 @@ public class AddCommandIntegrationTest {
         assertCommandFailure(new AddCommand(personInList), model,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
-
 }
