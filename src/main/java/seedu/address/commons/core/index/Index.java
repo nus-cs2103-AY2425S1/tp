@@ -11,25 +11,36 @@ import seedu.address.commons.util.ToStringBuilder;
  * convert it back to an int if the index will not be passed to a different component again.
  */
 public class Index {
-    private int zeroBasedIndex;
+    private static final Index WILDCARD = new Index();
+    private Integer zeroBasedIndex;
 
     /**
      * Index can only be created by calling {@link Index#fromZeroBased(int)} or
-     * {@link Index#fromOneBased(int)}.
+     * {@link Index#fromOneBased(int)} or retrieved from {@link #getWildcardIndex()}.
      */
     private Index(int zeroBasedIndex) {
-        if (zeroBasedIndex < -1) {
+        if (zeroBasedIndex < 0) {
             throw new IndexOutOfBoundsException();
         }
-
         this.zeroBasedIndex = zeroBasedIndex;
     }
 
+    private Index() {
+        // prevent zeroBasedIndex from being defaulted to 0
+        this.zeroBasedIndex = null;
+    };
+
     public int getZeroBased() {
+        if (this.equals(Index.WILDCARD)) {
+            throw new UnsupportedOperationException("Wildcard index does not have a zero-based index.");
+        }
         return zeroBasedIndex;
     }
 
     public int getOneBased() {
+        if (this.equals(Index.WILDCARD)) {
+            throw new UnsupportedOperationException("Wildcard index does not have a one-based index.");
+        }
         return zeroBasedIndex + 1;
     }
 
@@ -47,6 +58,13 @@ public class Index {
         return new Index(oneBasedIndex - 1);
     }
 
+    /**
+     * Returns the wildcard index.
+     */
+    public static Index getWildcardIndex() {
+        return Index.WILDCARD;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -58,12 +76,19 @@ public class Index {
             return false;
         }
 
+        if (other == Index.WILDCARD) {
+            return this == other;
+        }
+
         Index otherIndex = (Index) other;
         return zeroBasedIndex == otherIndex.zeroBasedIndex;
     }
 
     @Override
     public String toString() {
+        if (this.equals(Index.WILDCARD)) {
+            return Index.class.getCanonicalName() + "{wildcard}";
+        }
         return new ToStringBuilder(this).add("zeroBasedIndex", zeroBasedIndex).toString();
     }
 }
