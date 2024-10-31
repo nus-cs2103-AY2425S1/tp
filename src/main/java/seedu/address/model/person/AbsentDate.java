@@ -55,13 +55,9 @@ public class AbsentDate {
             return false;
         }
 
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDate parsedDate = LocalDate.parse(absentDate, formatter);
-            return !parsedDate.isAfter(LocalDate.now());
-        } catch (DateTimeParseException e) {
-            return false;
-        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate parsedDate = LocalDate.parse(absentDate, formatter);
+        return !parsedDate.isAfter(LocalDate.now());
     }
 
     @Override
