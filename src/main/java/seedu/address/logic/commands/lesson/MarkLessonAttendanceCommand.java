@@ -36,7 +36,7 @@ public class MarkLessonAttendanceCommand extends Command {
             + PREFIX_ATTENDANCE + "ATTENDANCE (1/y/Y or 0/n/N) "
             + "\nExample: " + COMMAND_WORD + " 1 n/John Doe n/Jane Doe a/y";
 
-    public static final String MESSAGE_MARK_SUCCESS = "Marked the attendance of %s as %s";
+    public static final String MESSAGE_SUCCESS = "Marked the attendance of %s as %s";
     public static final String MESSAGE_STUDENT_NOT_FOUND_IN_ADDRESS_BOOK = "Student not found in TAHub: %s";
     public static final String MESSAGE_STUDENT_NOT_FOUND_IN_LESSON = "Student not found in the lesson: %s";
 
@@ -86,7 +86,7 @@ public class MarkLessonAttendanceCommand extends Command {
         logger.fine("Successfully marked attendance of students in lesson " + targetLesson.toString());
         String names = String.join(", ", studentNames.stream().map(x -> x.fullName).toList());
         return new CommandResult(
-                String.format(MESSAGE_MARK_SUCCESS, names, attendance ? "true" : "false"),
+                String.format(MESSAGE_SUCCESS, names, attendance ? "true" : "false"),
                 COMMAND_TYPE);
     }
 
