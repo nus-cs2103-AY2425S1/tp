@@ -29,7 +29,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given tutorEase and userPrefs.
      */
-    public ModelManager(ReadOnlyTutorEase tutorEase, ReadOnlyUserPrefs userPrefs, LessonSchedule lessonSchedule) {
+    public ModelManager(ReadOnlyTutorEase tutorEase, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyLessonSchedule lessonSchedule) {
         requireAllNonNull(tutorEase, userPrefs, lessonSchedule);
 
         logger.fine("Initializing with address book: " + tutorEase + " and user prefs " + userPrefs
@@ -115,6 +116,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         tutorEase.setPerson(target, editedPerson);
+        lessonSchedule.updatePersonInLessons(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -154,8 +156,14 @@ public class ModelManager implements Model {
     //=========== LessonSchedule ================================================================================
 
     @Override
-    public LessonSchedule getLessonSchedule() {
+    public ReadOnlyLessonSchedule getLessonSchedule() {
         return lessonSchedule;
+    }
+
+
+    @Override
+    public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
+        this.lessonSchedule.resetData(lessonSchedule);
     }
 
     /**

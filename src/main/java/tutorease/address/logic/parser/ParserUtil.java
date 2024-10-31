@@ -1,6 +1,7 @@
 package tutorease.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -183,9 +184,7 @@ public class ParserUtil {
     public static StartDateTime parseStartDateTime(String startDateTime) throws ParseException {
         requireNonNull(startDateTime);
         String trimmedStartDateTime = startDateTime.trim();
-        if (!StartDateTime.isValidDateTime(trimmedStartDateTime)) {
-            throw new ParseException(StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
-        }
+        checkValidDateTime(startDateTime);
         return StartDateTime.createStartDateTime(trimmedStartDateTime);
     }
 
@@ -207,8 +206,11 @@ public class ParserUtil {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Checks if all the prefixes are present in the ArgumentMultimap.
+     *
+     * @param argumentMultimap The ArgumentMultimap to check.
+     * @param prefixes The prefixes to check.
+     * @return True if all the prefixes are present, false otherwise.
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

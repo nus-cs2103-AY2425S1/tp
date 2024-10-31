@@ -62,6 +62,8 @@ public class CommandTestUtil {
     public static final String VALID_FEE = "10";
     public static final String VALID_START_DATE = "01-01-2024 12:00";
     public static final String VALID_END_DATE = "01-01-2024 13:00";
+    public static final String VALID_START_DATE_LEAP_YEAR = "29-02-2024 12:00";
+    public static final String VALID_END_DATE_LEAP_YEAR = "29-02-2024 13:00";
 
     public static final String VALID_DURATION = "1";
     public static final String VALID_DURATION_WITH_POINT_FIVE = "1.5";
@@ -97,7 +99,8 @@ public class CommandTestUtil {
     public static final String START_DATE_TIME_DESC = " " + PREFIX_START_DATE + VALID_START_DATE;
     public static final String UPPERCASE_START_DATE_TIME_DESC = " " + PREFIX_START_DATE.toStringUpperCase()
             + VALID_START_DATE;
-
+    public static final String START_DATE_TIME_LEAP_YEAR_DESC = " " + PREFIX_START_DATE
+            + VALID_START_DATE_LEAP_YEAR;
     public static final String DURATION_DESC = " " + PREFIX_DURATION + VALID_DURATION;
     public static final String UPPERCASE_DURATION_DESC = " " + PREFIX_DURATION.toStringUpperCase() + VALID_DURATION;
 
@@ -126,6 +129,8 @@ public class CommandTestUtil {
     public static final String INVALID_DURATION_TWENTY_FIVE_POINT_FIVE = "25.5";
     public static final String INVALID_DURATION_NOT_MULTIPLE_OF_POINT_FIVE = "1.33";
     public static final String INVALID_DURATION_NEGATIVE = "-1";
+    public static final String INVALID_LEAP_YEAR = "29-02-2025 12:00";
+    public static final String INVALID_START_DATE_LEAP_YEAR = " " + PREFIX_START_DATE + INVALID_LEAP_YEAR;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

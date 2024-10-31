@@ -25,4 +25,14 @@ public class Guardian extends Person {
     public Role getRole() {
         return new Role(Role.GUARDIAN);
     }
+
+    @Override
+    public boolean isGuardian() {
+        return true;
+    }
+
+    @Override
+    public boolean isStudent() {
+        return false;
+    }
 }

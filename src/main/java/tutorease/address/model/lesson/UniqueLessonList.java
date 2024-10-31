@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutorease.address.model.lesson.exceptions.LessonIndexOutOfRange;
 import tutorease.address.model.lesson.exceptions.OverlappingLessonException;
+import tutorease.address.model.person.Person;
+import tutorease.address.model.person.Student;
 
 // adapted from UniquePersonList
 
@@ -45,7 +47,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * The lesson must not already exist in the list.
      *
      * @param toAdd The lesson to add.
-     * @throws NullPointerException If {@code toAdd} is null.
+     * @throws NullPointerException       If {@code toAdd} is null.
      * @throws OverlappingLessonException If the lesson overlaps with an existing lesson in the list.
      */
     public void add(Lesson toAdd) {
@@ -62,7 +64,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      *
      * @param index The index of the lesson to be removed.
      * @throws LessonIndexOutOfRange If the index is invalid (less than 0 or greater than the size of the
-     *     list).
+     *                               list).
      */
     public void remove(int index) {
         if (!isValidIndex(index)) {
@@ -78,7 +80,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @param index The index of the lesson to retrieve.
      * @return The lesson at the specified index.
      * @throws LessonIndexOutOfRange If the index is invalid (less than 0 or greater than or equal to the
-     *     size of the list).
+     *                               size of the list).
      */
     public Lesson get(int index) {
         if (!isValidIndex(index)) {
@@ -102,7 +104,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * {@code lessons} must not contain duplicate lessons.
      *
      * @param lessons The list of lessons to replace the current list.
-     * @throws NullPointerException If {@code lessons} is null.
+     * @throws NullPointerException       If {@code lessons} is null.
      * @throws OverlappingLessonException If any lessons in the list overlap with each other.
      */
     public void setLessons(UniqueLessonList lessons) {
@@ -122,13 +124,12 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
         internalList.setAll(lessons);
     }
-
     /**
      * Checks if the index is valid.
      *
      * @param index The index to check.
      * @return True if the index is within bounds (greater than or equal to 0 and less than the size of the
-     *     list), false otherwise.
+     *         list), false otherwise.
      */
     public boolean isValidIndex(int index) {
         // index is 0-based
@@ -179,5 +180,30 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
         UniqueLessonList otherUniqueLessonList = (UniqueLessonList) other;
         return internalList.equals(otherUniqueLessonList.internalList);
+    }
+
+    /**
+     * Updates the person in all lessons in the list.
+     *
+     * @param target       The person to be updated.
+     * @param editedPerson The updated person.
+     */
+    public void updatePersonInLessons(Person target, Person editedPerson) {
+        if (target.isStudent() && editedPerson.isStudent()) {
+            assert target instanceof Student && editedPerson instanceof Student;
+            for (int i = 0; i < internalList.size(); i++) {
+                updatePersonInLesson(target, editedPerson, i);
+            }
+        }
+    }
+
+    private void updatePersonInLesson(Person target, Person editedPerson, int i) {
+        assert target.isStudent() && editedPerson.isStudent();
+        Lesson lesson = internalList.get(i);
+        if (lesson.getStudent().equals(target)) {
+            Lesson updatedLesson = new Lesson(editedPerson, lesson.getFee(),
+                    lesson.getStartDateTime(), lesson.getEndDateTime());
+            internalList.set(i, updatedLesson);
+        }
     }
 }
