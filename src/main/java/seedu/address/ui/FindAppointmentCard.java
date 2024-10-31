@@ -57,7 +57,7 @@ public class FindAppointmentCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getCaregivers().stream()
                 .forEach(caregiver -> caregivers.getChildren().add(new Label(caregiver.toString())));
-        person.getAppointments().stream()
+        person.getFilteredAppointments().stream()
                 .sorted(Comparator.comparing(appointment -> appointment.getStartTime()))
                 .forEach(appointment -> {
                     Label appointmentLabel = new Label(appointment.getAppointmentDetails());
