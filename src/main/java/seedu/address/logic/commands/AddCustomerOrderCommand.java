@@ -3,26 +3,23 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderList;
 import seedu.address.model.order.OrderStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.product.Product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-
+/**
+ * Command to add a new customer order to the bakery's order list.
+ */
 public class AddCustomerOrderCommand extends Command {
     public static final String COMMAND_WORD = "addCustomerOrder";
 
@@ -36,6 +33,13 @@ public class AddCustomerOrderCommand extends Command {
     private final Phone phone;
     private final ArrayList<Integer> idList;
 
+    /**
+     * Constructs an {@code AddCustomerOrderCommand} with the specified customer's name, phone number, and product IDs.
+     *
+     * @param name   the name of the customer.
+     * @param phone  the phone number of the customer (must not be null).
+     * @param idList a list of product IDs for the order (must not be null).
+     */
     public AddCustomerOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
         requireAllNonNull(phone);
         this.name = name;
@@ -51,7 +55,7 @@ public class AddCustomerOrderCommand extends Command {
 
         List<Product> productList = idList.stream()
                                         .map(pastryCatalogue::getProductById)
-                .                       filter(Objects::nonNull)
+                                        .filter(Objects::nonNull)
                                         .toList();
 
         List<Person> personList = model.getFilteredPersonList();
@@ -59,8 +63,7 @@ public class AddCustomerOrderCommand extends Command {
 
         for (Person p : personList) {
             if (p.getPhone().equals(phone)) {
-                 person = p;
-
+                person = p;
             }
         }
         if (person == null) {

@@ -1,17 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.SupplyOrderList;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-
+/**
+ * Deletes a supply order at the specified index.
+ */
 public class DeleteSupplyOrderCommand extends Command {
     public static final String COMMAND_WORD = "deleteSupplyOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete the supply order at the given index of the displayed supplier orders. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Delete the supply order at the given index of the displayed supplier orders. "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -35,10 +37,8 @@ public class DeleteSupplyOrderCommand extends Command {
         }
 
         supplyOrderList.removeOrder(targetIndex - 1);
-        
         return new CommandResult(String.format(MESSAGE_DELETE_SUPPLY_ORDER_SUCCESS, targetIndex));
     }
-
 
     @Override
     public boolean equals(Object other) {

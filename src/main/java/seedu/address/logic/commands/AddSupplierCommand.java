@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENTS_SUPPLIED;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -22,7 +27,6 @@ public class AddSupplierCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_PREFERENCE + "PREFERENCE "
             + PREFIX_INGREDIENTS_SUPPLIED + "INGREDIENTS SUPPLIED "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -30,7 +34,6 @@ public class AddSupplierCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "supplierabc@example.com "
             + PREFIX_ADDRESS + "123, Clementi Rd, #04-01 "
-            + PREFIX_PREFERENCE + "Organic "
             + PREFIX_INGREDIENTS_SUPPLIED + "Flour, Sugar, Butter "
             + PREFIX_TAG + "wholesale";
 

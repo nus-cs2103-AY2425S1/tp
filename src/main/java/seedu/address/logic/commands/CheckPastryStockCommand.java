@@ -15,7 +15,8 @@ public class CheckPastryStockCommand extends Command {
 
     public static final String COMMAND_WORD = "checkPastryStock";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks if there is enough stock to make a specific pastry. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Checks if there is enough stock to make a specific pastry. "
             + "Parameters: NAME\n"
             + "Example: " + COMMAND_WORD + " Croissant";
 

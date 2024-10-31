@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrder;
@@ -7,17 +11,16 @@ import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.OrderStatus;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.Pastry;
-import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Product;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+/**
+ * Marks a customer order as completed and updates the inventory accordingly.
+ */
 public class MarkCustomerOrderCommand extends Command {
     public static final String COMMAND_WORD = "markCustomerOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the customer order at the given index as completed and updates the inventory.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Marks the customer order at the given index as completed and updates the inventory.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -35,7 +38,6 @@ public class MarkCustomerOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         CustomerOrderList customerOrderList = model.getCustomerOrderList();
-        Inventory inventory = model.getInventory();  // Get inventory from the model
 
         if (targetIndex <= 0 || targetIndex > customerOrderList.getOrders().size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX);
@@ -55,7 +57,8 @@ public class MarkCustomerOrderCommand extends Command {
             if (product instanceof Pastry pastry) {
                 for (Ingredient ingredient : pastry.getIngredients()) {
                     int ingredientId = ingredient.getProductId();
-                    requiredIngredients.put(ingredientId, requiredIngredients.getOrDefault(ingredientId, 0) + 1);
+                    requiredIngredients.put(ingredientId,
+                            requiredIngredients.getOrDefault(ingredientId, 0) + 1);
                 }
             }
         }
@@ -65,7 +68,6 @@ public class MarkCustomerOrderCommand extends Command {
         customerOrderList.addOrder(customerOrder);
         return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, targetIndex));
     }
-
 
     @Override
     public boolean equals(Object other) {
