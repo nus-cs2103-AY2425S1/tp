@@ -234,7 +234,7 @@ public class Student extends Person {
      * Deletes the last attendance record in the list.
      * @param date The date of the attendance record to be deleted.
      */
-    public void undoAttendance(LocalDate date) {
+    public void deleteAttendance(LocalDate date) {
         Iterator<AttendanceRecord> iterator = attendanceRecords.iterator();
         while (iterator.hasNext()) {
             AttendanceRecord record = iterator.next();

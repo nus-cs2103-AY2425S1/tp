@@ -18,18 +18,20 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 
 /**
- * Marks the attendance of all students in a specified tutorial group as absent for a specified date.
+ * Deletes the attendance of all students in a specified tutorial group for a specified date.
  */
-public class UnmarkPresentAllCommand extends Command {
+public class DeleteAttendanceAllCommand extends Command {
 
-    public static final String COMMAND_WORD = "unmarkpresentall";
+    public static final String COMMAND_WORD = "deleteatall";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks all students in the specified tutorial group "
-            + "as absent for the specified date.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the attendance of all students"
+            + " in the specified " + "tutorial group "
+            + "for the specified date.\n"
             + "Parameters: " + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP " + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TUTORIAL_GROUP + "A01 " + PREFIX_DATE + "2019-10-09";
 
-    public static final String MESSAGE_SUCCESS = "Marked all students from tutorial group %1$s as absent on %2$s.";
+    public static final String MESSAGE_SUCCESS = "Deleted attendance of all students from tutorial group %1$s on %2$s.";
+
     public static final String MESSAGE_EMPTY_TG = "The specified tutorial group is empty.";
 
     private final TutorialGroup tutorialGroup;
@@ -37,19 +39,20 @@ public class UnmarkPresentAllCommand extends Command {
     private final Map<Student, Attendance> previousAttendances;
 
     /**
-     * Creates a UnmarkPresentAllCommand to mark the attendance of all students in the specified {@code TutorialGroup}
-     * as absent on the specified date.
-     * @param tutorialGroup Tutorial group for which attendance is being marked.
-     * @param date Date that students are marked absent for.
+     * Creates a DeleteAttendanceAllCommand to delete the attendance of
+     * all students in the specified {@code TutorialGroup}
+     * on the specified date.
+     * @param tutorialGroup Tutorial group for which attendance is being deleted.
+     * @param date Date that attendance is being deleted for.
      */
-    public UnmarkPresentAllCommand(TutorialGroup tutorialGroup, LocalDate date) {
+    public DeleteAttendanceAllCommand(TutorialGroup tutorialGroup, LocalDate date) {
         requireNonNull(tutorialGroup);
         requireNonNull(date);
         this.tutorialGroup = tutorialGroup;
         this.date = date;
         this.previousAttendances = new HashMap<>();
-    }
 
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -60,33 +63,31 @@ public class UnmarkPresentAllCommand extends Command {
         }
 
         for (Student student : studentsFromSpecifiedTutorialGroup) {
-
             previousAttendances.put(student, student.getAttendanceRecord().stream()
-                   .filter(record -> record.getDate().equals(date))
-                   .findFirst()
-                   .map(record -> record.getAttendance())
+                    .filter(record -> record.getDate().equals(date))
+                    .findFirst()
+                    .map(record -> record.getAttendance())
                     .orElse(null));
-            student.markAttendance(date, "a");
+            student.deleteAttendance(date);
         }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup,
-                DateTimeFormatter.ofPattern("MMM d yyyy").format(date)));
+                DateTimeFormatter.ofPattern("yyyy-MM-dd").format(date)));
+
     }
 
     @Override
     public boolean undo(Model model) {
         requireNonNull(model);
         List<Student> studentsFromSpecifiedTutorialGroup = model.getStudentsByTutorialGroup(tutorialGroup);
-
         if (studentsFromSpecifiedTutorialGroup.isEmpty()) {
             return false;
         }
 
-        for (Student student: studentsFromSpecifiedTutorialGroup) {
+        for (Student student : studentsFromSpecifiedTutorialGroup) {
             Attendance previousAttendance = previousAttendances.get(student);
             if (previousAttendance != null) {
                 student.markAttendance(date, previousAttendance.value);
-            } else {
-                student.deleteAttendance(date);
             }
         }
         return true;
@@ -98,14 +99,12 @@ public class UnmarkPresentAllCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof UnmarkPresentAllCommand)) {
+        if (!(other instanceof DeleteAttendanceAllCommand)) {
             return false;
         }
 
-        UnmarkPresentAllCommand otherUnmarkPresentAllCommand = (UnmarkPresentAllCommand) other;
-        return tutorialGroup.equals(otherUnmarkPresentAllCommand.tutorialGroup)
-                && date.equals(otherUnmarkPresentAllCommand.date);
+        DeleteAttendanceAllCommand e = (DeleteAttendanceAllCommand) other;
+        return tutorialGroup.equals(e.tutorialGroup) && date.equals(e.date);
     }
 
     @Override
@@ -116,3 +115,5 @@ public class UnmarkPresentAllCommand extends Command {
                 .toString();
     }
 }
+
+
