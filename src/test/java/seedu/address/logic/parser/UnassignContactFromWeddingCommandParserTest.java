@@ -24,7 +24,8 @@ public class UnassignContactFromWeddingCommandParserTest {
     public void parse_invalidWeddingIndex_failure() {
         String userInput = "1 c/1 2";
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                "Wedding indexes are not required in the unassign command, view a wedding to unassign contacts from it.");
+                "Wedding indexes are not required in the unassign command, " +
+                        "view a wedding to unassign contacts from it.");
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
