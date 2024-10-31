@@ -1203,6 +1203,90 @@ Use case ends.
 
 ---
 
+### 10. **Feature: Add Property for a Contact**
+
+**Purpose:**
+To allow users to add a property listing for a contact, providing detailed information about the property being sold.
+
+#### **Command Format:**
+
+`addProperty <index> address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUMBER_OF_BEDROOMS bath/NUMBER_OF_BATHROOMS price/PRICE`
+
+**Example Commands:**
+
+- `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000`
+- `addProperty 3 address/45 Elm St town/Anytown type/HDB size/70 bed/3 bath/1 price/350000`
+
+### **Main Success Scenario (MSS):**
+
+1. The user issues the addProperty command with a valid index and valid property details.
+2. The system adds the property to the contact at the specified index.
+3. The property listing for the contact is updated and displayed.
+
+   Use case ends.
+
+---
+
+### **Parameters:**
+
+#### **Index:**
+
+**Acceptable Values:**
+
+- Must be a valid positive integer referencing a contact in the current contact list.
+
+**Error Message:**
+
+- Invalid Index (range): `Error: The person index provided is invalid`.
+- Invalid Index (format): `Error: Invalid command format! <command format>`.
+
+**Rationale:**
+
+- Ensures the correct contact is being updated with the new property, preventing errors.
+
+#### **Property Details:**
+
+- **PROPERTY_ADDRESS:** The address of the property.
+- **TOWN:** The town where the property is located.
+- **PROPERTY_TYPE:** The type of the property (e.g., condo, landed, HDB).
+- **SIZE:** The size of the property in square meters (must be a valid number).
+- **BEDROOMS:** The number of bedrooms (must be a non-negative integer).
+- **BATHROOMS:** The number of bathrooms (must be a non-negative integer).
+- **PRICE:** The asking price of the property (must be a valid number).
+
+**Error Messages:**
+
+- **Missing Address:** Error: Address must be provided.
+- **Invalid Size:** Error: Size must be a valid number.
+- **Invalid Bedrooms:** Error: Bedrooms must be a valid integer.
+- **Invalid Bathrooms:** Error: Bathrooms must be a valid integer.
+- **Invalid Price:** Error: Price must be a valid number.
+
+**Rationale:**
+
+- Allows flexibility in entering comprehensive property details for recording purposes.
+
+---
+
+### **Outputs:**
+
+#### **Success:**
+
+- GUI Change:  The new property is added and shown in the contact's property list.
+
+#### **Failure:**
+
+- Invalid Index (range): `Error: The person index provided is invalid.`
+- Invalid Index (format): `Error: Invalid command format! <command format>.`
+
+---
+
+### **Error Scenarios:**
+
+- **Invalid Index:**
+  Example: `addProperty abc PROPERTY_ADDRESS/Important property TOWN/City PROPERTY_TYPE/Condo SIZE/85 BEDROOMS/2 BATHROOMS/2 PRICE/500000`
+  Error: `Invalid command format! <command format>.`
+
 
 *{More to be added}*
 
