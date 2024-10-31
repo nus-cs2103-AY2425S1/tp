@@ -458,6 +458,54 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person
+
+1. Adding a person with all fields
+
+   1. Prerequisites: No persons in the list.
+
+   1. Test case: `add n/Mario St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2105`<br>
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. There will be a new Person Card shown in the UI.
+   2. Test case: `add n/Mario  St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2106`<br>
+      Expected: No person added. Error details shown in the status message. Status bar remains the same, no new person card added.
+   3. Test case: `add n/Alice d/o Sally p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2107`<br>
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. There will be a new Person Card shown in the UI.
+
+### Editing a person
+
+1. Editing a person with all fields
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `edit 1 c/CS2106`<br>
+      Expected: The first contact is updated with the new course code. Details of the updated contact shown in the status message. The person card in the UI is updated.
+   2. Test case: `edit 0 c/CS2106`<br>
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `edit 1 f/200`<br>
+      Expected: The second contact is updated with the new fee. Details of the updated contact shown in the status message. The person card in the UI is updated.
+   4. Test case: `edit 2 f/200 c/CS2106`<br>
+      Expected: The second contact is updated with the new fee and course code. Details of the updated contact shown in the status message. The person card in the UI is updated.
+   5. Other incorrect edit commands to try: `edit`, `edit x`, `edit x f/200` (where x is larger than the list size)<br>
+      Expected: Similar to 2nd test case above.
+
+### Displaying a pie chart of the number of students in each class
+
+1. Displaying a pie chart
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `pie`<br>
+      Expected: A pie chart is displayed showing the number of students in each class. The pie chart is displayed in a new window.
+
+### Displaying a bar chart of the distribution of students against the number of months paid
+
+1. Displaying a bar chart
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `bar`<br>
+      Expected: A bar chart is displayed showing the distribution of students against the number of months paid. The bar chart is displayed in a new window.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
