@@ -41,11 +41,20 @@ public class DateOfLastVisit implements Comparable<DateOfLastVisit> {
      */
     public static boolean isValidDateOfLastVisit(String date) {
         try {
-            DATE_TIME_FORMATTER.parse(date);
+            LocalDate.parse(date, DATE_TIME_FORMATTER);
         } catch (DateTimeException e) {
             return false;
         }
-        return true;
+        return isTodayOrEarlierThanToday(date);
+    }
+
+    /**
+     * Returns true if date is today or earlier than today's date.
+     */
+    public static boolean isTodayOrEarlierThanToday(String date) {
+        LocalDate today = LocalDate.now();
+        return today.isEqual(LocalDate.parse(date, DATE_TIME_FORMATTER))
+                || today.isAfter(LocalDate.parse(date, DATE_TIME_FORMATTER));
     }
 
     /**
