@@ -149,4 +149,15 @@ public class ParserUtil {
         }
         return new Time(trimmedTime);
     }
+
+    public static boolean parseAttendance(String attendance) throws ParseException {
+        requireNonNull(attendance);
+        String trimmedAttendance = attendance.trim();
+        return switch (trimmedAttendance) {
+            case "1", "Y", "y" -> true;
+            case "0", "N", "n" -> false;
+            default ->
+                    throw new ParseException("Invalid attendance entry. Please enter 1/Y/y for yes and 0/N/n for no.");
+        };
+    }
 }

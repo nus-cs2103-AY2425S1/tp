@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Consultation> filteredConsultations;
     private final FilteredList<Lesson> filteredLessons;
+    private Predicate<Lesson> latestLessonFilter;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +43,7 @@ public class ModelManager implements Model {
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         filteredConsultations = new FilteredList<>(this.addressBook.getConsultList());
         filteredLessons = new FilteredList<>(this.addressBook.getLessonList());
+        latestLessonFilter = lesson -> true;
     }
 
     public ModelManager() {
@@ -218,7 +220,13 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
+        latestLessonFilter = predicate;
         filteredLessons.setPredicate(predicate);
+    }
+
+    @Override
+    public void refreshFilteredLessonList() {
+        filteredLessons.setPredicate(latestLessonFilter);
     }
 
     @Override

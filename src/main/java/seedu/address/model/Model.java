@@ -185,4 +185,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
+
+    /**
+     * Refreshes the UI of the filtered lesson list.
+     */
+    void refreshFilteredLessonList();
 }
