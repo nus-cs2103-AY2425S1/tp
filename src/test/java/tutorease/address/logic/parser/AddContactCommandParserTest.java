@@ -28,8 +28,8 @@ import static tutorease.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static tutorease.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static tutorease.address.logic.commands.CommandTestUtil.TAG_DESC_MENTOR;
 import static tutorease.address.logic.commands.CommandTestUtil.TAG_DESC_SUPPORTIVE;
-import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_NAME_DESC_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_EMAIL_DESC_BOB;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_NAME_DESC_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -73,7 +73,7 @@ public class AddContactCommandParserTest {
         Student expectedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + ROLE_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedStudent));
 
         //

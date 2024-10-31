@@ -12,8 +12,8 @@ import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static tutorease.address.logic.parser.CliSyntax.UPPERCASE_PREFIX_NAME;
 import static tutorease.address.logic.parser.CliSyntax.UPPERCASE_PREFIX_EMAIL;
+import static tutorease.address.logic.parser.CliSyntax.UPPERCASE_PREFIX_NAME;
 import static tutorease.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
