@@ -13,7 +13,7 @@ import careconnect.commons.util.ToStringBuilder;
  */
 public class Log {
     public static final String MESSAGE_CONSTRAINTS = "Log remark can take any values, and it "
-            + "should not be blank."
+            + "should not be blank. "
             + "Log date should be in the format yyyy-MM-dd HH:mm, if provided.";
 
     /*
