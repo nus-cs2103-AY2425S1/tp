@@ -1,7 +1,10 @@
 package bizbook.logic.commands;
 
+import static bizbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static bizbook.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static bizbook.logic.commands.ImportCommand.MESSAGE_FAILED_TO_LOAD;
 import static bizbook.logic.commands.ImportCommand.MESSAGE_SUCCESS;
+import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_INVALID_INFORMATION;
 import static bizbook.testutil.TypicalFileTypes.FILE_TYPE_CSV;
 import static bizbook.testutil.TypicalFileTypes.FILE_TYPE_VCF;
 import static bizbook.testutil.TypicalPersons.getTypicalAddressBook;
@@ -25,6 +28,8 @@ import bizbook.testutil.TestUtil;
  */
 public class ImportCommandTest {
     private static final String TYPICAL_VCF_FILE_PATH = "ImportCommandTest/typical.vcf";
+    private static final String MISSING_VCF_FILE_PATH = "ImportCommandTest/missing.vcf";
+    private static final String INVALID_INFO_VCF_FILE_PATH = "ImportCommandTest/invalid_info.vcf";
 
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
@@ -57,6 +62,18 @@ public class ImportCommandTest {
                 String.format(MESSAGE_SUCCESS, addressBook.getPersonList().size()), false, false);
 
         assertCommandSuccess(new ImportCommand(FILE_TYPE_VCF, path), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_importMissingFile_throwsCommandException() {
+        Path path = Path.of(MISSING_VCF_FILE_PATH);
+        assertCommandFailure(new ImportCommand(FILE_TYPE_VCF, path), model, MESSAGE_FAILED_TO_LOAD);
+    }
+
+    @Test
+    public void execute_importInvalidFile_throwsCommandException() {
+        Path path = TestUtil.getResourceFilePath(ImportCommandTest.class, INVALID_INFO_VCF_FILE_PATH);
+        assertCommandFailure(new ImportCommand(FILE_TYPE_VCF, path), model, MESSAGE_INVALID_INFORMATION);
     }
 
     @Test
