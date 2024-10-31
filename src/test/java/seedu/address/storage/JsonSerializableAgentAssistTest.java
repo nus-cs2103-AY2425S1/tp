@@ -26,7 +26,6 @@ public class JsonSerializableAgentAssistTest {
                 JsonSerializableAgentAssist.class).get();
         AgentAssist agentAssistFromFile = dataFromFile.toModelType();
         AgentAssist typicalPersonsAgentAssist = TypicalPersons.getTypicalAgentAssist();
-        System.out.println("Agent Assist: " + agentAssistFromFile);
         assertEquals(agentAssistFromFile, typicalPersonsAgentAssist);
     }
 

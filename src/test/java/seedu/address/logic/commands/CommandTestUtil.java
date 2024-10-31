@@ -64,6 +64,7 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
     public static final String TIER_DESC_REJECT = " " + PREFIX_TIER + VALID_TIER_REJECT;
     public static final String TIER_DESC_GOLD = " " + PREFIX_TIER + VALID_TIER_GOLD;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String NEW_REMARK_DESC_BOB = " " + PREFIX_NEW_REMARK + VALID_REMARK_BOB;
     public static final String APPEND_REMARK_DESC_BOB = " " + PREFIX_APPEND_REMARK + VALID_REMARK_BOB;
     public static final String VALID_STATUS_NON_URGENT = "non_urgent";
@@ -79,7 +80,7 @@ public class CommandTestUtil {
     public static final String INVALID_INCOME_DESC = " " + PREFIX_INCOME + "-999"; // negative numbers should not be
     // allowed
     public static final String INVALID_TIER_DESC = " " + PREFIX_TIER + "platinum"; // not one of the 4 TierEnums
-    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK;
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "漢";
     public static final String INVALID_NEW_REMARK_DESC = " " + PREFIX_NEW_REMARK;
     public static final String INVALID_APPEND_REMARK_DESC = " " + PREFIX_APPEND_REMARK;
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "null";

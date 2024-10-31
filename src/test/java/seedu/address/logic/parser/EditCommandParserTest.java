@@ -99,34 +99,50 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, "1" + INVALID_INCOME_DESC, Income.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + INVALID_TIER_DESC, Tier.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Name.MESSAGE_CONSTRAINTS)); // invalid name
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Phone.MESSAGE_CONSTRAINTS)); // invalid phone
+        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Email.MESSAGE_CONSTRAINTS)); // invalid email
+        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Address.MESSAGE_CONSTRAINTS)); // invalid address
+        assertParseFailure(parser, "1" + INVALID_INCOME_DESC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Income.MESSAGE_CONSTRAINTS));
+        assertParseFailure(parser, "1" + INVALID_TIER_DESC,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Tier.MESSAGE_CONSTRAINTS));
         // invalid new remark which is empty
-        assertParseFailure(parser, "1" + INVALID_NEW_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NEW_REMARK_DESC,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Remark.MESSAGE_CONSTRAINTS));
         // invalid appended remark which is empty
-        assertParseFailure(parser, "1" + INVALID_APPEND_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + INVALID_STATUS_DESC, Status.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_APPEND_REMARK_DESC,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Remark.MESSAGE_CONSTRAINTS));
+        assertParseFailure(parser, "1" + INVALID_STATUS_DESC,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Status.MESSAGE_CONSTRAINTS));
 
-        // multiple invalid values, but only the first invalid value is captured
+        // multiple invalid values, all are expected
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
-                + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + INVALID_TIER_DESC, Tier.MESSAGE_CONSTRAINTS); // invalid tier
+                + VALID_PHONE_AMY, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                Name.MESSAGE_CONSTRAINTS) + "\n" + Email.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser, "1" + INVALID_TIER_DESC,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Tier.MESSAGE_CONSTRAINTS));
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Phone.MESSAGE_CONSTRAINTS));
 
-        // multiple invalid values, but only the first invalid value is captured
+        // multiple invalid values, all are captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
-                + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
+                + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Name.MESSAGE_CONSTRAINTS)
+                        + "\n" + Email.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values but with purely optional fields, only the first in order of logical parsing is
-        // captured
         assertParseFailure(parser, "1" + INVALID_STATUS_DESC + INVALID_TIER_DESC
-                + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Tier.MESSAGE_CONSTRAINTS);
+                + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Tier.MESSAGE_CONSTRAINTS)
+                + "\n" + Status.MESSAGE_CONSTRAINTS);
     }
 
     @Test

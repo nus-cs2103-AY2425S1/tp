@@ -20,11 +20,11 @@ import static seedu.address.logic.commands.CommandTestUtil.JOB_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.JOB_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.NEW_REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TIER_DESC_GOLD;
 import static seedu.address.logic.commands.CommandTestUtil.TIER_DESC_REJECT;
@@ -41,8 +41,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -65,6 +65,7 @@ import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 import seedu.address.testutil.PersonBuilder;
@@ -78,15 +79,15 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + JOB_DESC_BOB + INCOME_DESC_BOB + TIER_DESC_GOLD + NEW_REMARK_DESC_BOB,
-                new AddCommand(expectedPerson));
+                        + ADDRESS_DESC_BOB + JOB_DESC_BOB + INCOME_DESC_BOB + TIER_DESC_GOLD + REMARK_DESC_BOB
+                        + STATUS_DESC_BOB, new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_repeatedNonTierValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + JOB_DESC_BOB + INCOME_DESC_BOB + TIER_DESC_GOLD
-                + NEW_REMARK_DESC_BOB + STATUS_DESC_BOB;
+                + REMARK_DESC_BOB + STATUS_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -121,8 +122,8 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TIER));
 
         // multiple remarks
-        assertParseFailure(parser, NEW_REMARK_DESC_BOB + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NEW_REMARK));
+        assertParseFailure(parser, REMARK_DESC_BOB + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
 
         // multiple status
         assertParseFailure(parser, STATUS_DESC_BOB + validExpectedPersonString,
@@ -132,7 +133,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 validExpectedPersonString + validExpectedPersonString + VALID_STATUS_NONE,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_JOB, PREFIX_INCOME, PREFIX_TIER, PREFIX_NEW_REMARK, PREFIX_STATUS));
+                        PREFIX_JOB, PREFIX_INCOME, PREFIX_TIER, PREFIX_REMARK, PREFIX_STATUS));
 
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
@@ -223,43 +224,64 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD, Name.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Name.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD, Phone.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Phone.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD, Email.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Email.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD, Address.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Address.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
         // invalid income
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_INCOME_DESC + JOB_DESC_BOB + TIER_DESC_GOLD, Income.MESSAGE_CONSTRAINTS);
+                + INVALID_INCOME_DESC + JOB_DESC_BOB + TIER_DESC_GOLD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Income.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
         // invalid job
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INCOME_DESC_BOB + INVALID_JOB_DESC + TIER_DESC_GOLD, Job.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + INVALID_JOB_DESC + TIER_DESC_GOLD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Job.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
         // invalid tier
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INCOME_DESC_BOB + JOB_DESC_BOB + INVALID_TIER_DESC + VALID_TIER_GOLD, Tier.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + JOB_DESC_BOB + INVALID_TIER_DESC + VALID_TIER_GOLD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Tier.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
         // invalid remark
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD + INVALID_REMARK_DESC, Tier.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD + INVALID_REMARK_DESC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Remark.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
         // invalid status
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD + INVALID_STATUS_DESC, Status.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + JOB_DESC_BOB + TIER_DESC_GOLD + INVALID_STATUS_DESC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Status.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
-        // two invalid values, only first invalid value reported
+        // two invalid values, both are shown
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + INCOME_DESC_BOB + JOB_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + JOB_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        Name.MESSAGE_CONSTRAINTS + "\n" + Address.MESSAGE_CONSTRAINTS + "\n"
+                        + AddCommand.MESSAGE_USAGE));
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
