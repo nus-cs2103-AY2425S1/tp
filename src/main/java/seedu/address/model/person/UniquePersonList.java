@@ -105,9 +105,9 @@ public class UniquePersonList implements Iterable<Person> {
      * @return person of with the required name, null if not found
      */
     public Person findPersonByName(Name name) {
-        for (int i = 0; i < internalList.size() - 1; i++) {
-            if (internalList.get(i).getName().equals(name)) {
-                return internalList.get(i);
+        for (Person person : internalList) {
+            if (person.getName().equals(name)) {
+                return person;
             }
         }
         return null;
