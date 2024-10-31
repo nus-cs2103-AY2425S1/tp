@@ -83,6 +83,10 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        logEntries.addAll(source.getLogEntries()
+                .getLogs().stream()
+                .map(Log::toString)
+                .toList());
     }
 
     /**
