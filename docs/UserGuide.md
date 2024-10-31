@@ -56,6 +56,8 @@ benefits of a Graphical User Interface (GUI).
     * `update S1234567Z p/91234567 e/johndoe@example.com` : Updates the email address of the patient with provided NRIC.
 
     * `update 1 p/91234567 e/johndoe@example.com` : Updates the email address of the first patient in the list.
+   
+    *  `hours o/08:30 c/18:30` : Updates the Operating Hours to 8:30 to 18:30.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -106,7 +108,7 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [ap
 A person can have any number of tags (including 0)
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-There is a unique tag for Blood Type, Try putting a tag named A+
+There is a unique tag for Blood Type, Try putting a tag named 'A+'
 </div>
 
 Examples:
@@ -115,7 +117,7 @@ Examples:
 * `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BloodDonor`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An appointment can be entered in the following formats : '-' , '02 10 2024 12:30' , '02/10/2024 12:30' , '02-10-2024 12:30'
+An appointment can be entered in the following formats : '-' , '02 10 2024 12:30' , '02/10/2024 12:30' , '02-10-2024 12:30' and timings must fall within the Operating Hours displayed above
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Appointments can only be made between '08:30' to '21:30' and only one appointment can be made per timeslot
@@ -220,6 +222,22 @@ Examples:
 * `bookings 01-02-2024`
 
   ![result for 'bookings 01/02/2024'](./images/bookings01-02-2024.png)
+
+### Updating Operating Hours : `hours`
+
+Updates Operating Hours 
+
+Format: `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]`
+
+* Opening & Closing hours have to be of the format `HH:mm`.
+* Default Opening & Closing hours are 00:00 & 23:59 respectively.
+* If an argument is empty, it will set the hours to default.
+* All current appointments must fall within operating hours for update to take effect.
+
+Examples:
+* `hours`
+* `hours o/09:30 c/18:00`
+* `hours c/18:00`
 
 ### Clearing all entries : `clear`
 

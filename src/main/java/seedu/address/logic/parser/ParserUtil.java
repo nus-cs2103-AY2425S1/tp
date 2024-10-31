@@ -40,7 +40,7 @@ public class ParserUtil {
             + "dd-MM-yyyy\n"
             + "dd MM yyyy";
 
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format HH:mm";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format o/HH:mm or c/HH:mm.";
 
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 

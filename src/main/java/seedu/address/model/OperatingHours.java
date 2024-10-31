@@ -107,6 +107,6 @@ public class OperatingHours {
     @Override
     public String toString() {
         // to be changed
-        return openingHour.toString() + " " + closingHour.toString();
+        return openingHour.toString() + " to " + closingHour.toString();
     }
 }
