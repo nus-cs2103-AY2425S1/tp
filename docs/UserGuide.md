@@ -79,7 +79,7 @@ Format: `help`
 
 Adds a student to the student directory.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
+Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
 
 * If a group is not provided, or left blank (`g/`), the student will not be assigned to any group.
 * The student will be assigned all the lessons of other students in the group.
@@ -196,29 +196,27 @@ Finds students whose personal details match inputs
 Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `[n/Hans] [p/88197184]` will fetch same list as `[p/88197184] [n/Hans]`
+* The order of the keywords does not matter. e.g. `n/Hans p/88197184` will fetch same list as `p/88197184 n/Hans`
 * Prefixes other than `n/`, `p/`, `a/`, `gl/` will be ignored.
 * Any keyword before the first valid prefix will be ignored
-* Only the name, phone number, address, and grade level is searched.
+* Only the name, phone number, address, grade level and group is searched.
 * Partial inclusion of keyword will be considered a match
 * Students matching all field will be returned (i.e. `AND` search).
   e.g. `n/Hans p/88191784` will return `Hans Gruber; 88197184`, but not`Hans Goretzka; 88197188`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+*  TODO: ADD BETTER EXAMPLES
 
 ### Sorting students : `sort`
 
 Sorts students with personal details
 
-Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC]`
+Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`
 
-* The order of prefixes DOES matter. If there are ties in first field, it will use later fields to tie-break.
-* Prefixes other than `n/`, `p/`, `a/`, `gl/` will be ignored.
-* Only name, phone number, address, and grade level are valid fields to be sorted against
-* The sorting order must be `ASC` or  `DESC`, and is case-insensitive
+* The order of prefixes DOES matter. If there are ties in the first field, it will use later fields to tie-break.
+* Only name, phone number, address, grade level and group are valid fields to sort by.
+* The sorting order must be `ASC` or  `DESC`, and is case-insensitive.
 
 To clear the sorting conditions, use command `sort clear`
 
@@ -238,7 +236,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the student directory.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
