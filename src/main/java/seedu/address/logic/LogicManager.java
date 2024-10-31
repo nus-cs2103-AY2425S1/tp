@@ -17,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
+import seedu.address.ui.CommandHistory;
 
 /**
  * The main LogicManager of the app.
@@ -33,6 +34,8 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
 
+    private final CommandHistory commandHistory;
+
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
@@ -40,6 +43,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        commandHistory = new CommandHistory();
     }
 
     @Override
@@ -49,6 +53,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        commandHistory.addCommand(commandText);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -59,6 +64,10 @@ public class LogicManager implements Logic {
         }
 
         return commandResult;
+    }
+
+    public CommandHistory getCommandHistory() {
+        return commandHistory;
     }
 
     @Override
