@@ -1,5 +1,6 @@
 package bizbook.testutil;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -84,11 +85,11 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code notes} into a {@code Set<Note>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code notes} into a {@code ArrayList<Note>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withNotes(String... notes) {
-        Set<Note> noteSet = Stream.of(notes).map(Note::new).collect(Collectors.toSet());
+        ArrayList<Note> noteSet = Stream.of(notes).map(Note::new).collect(Collectors.toCollection(ArrayList::new));
         descriptor.setNotes(noteSet);
         return this;
     }
