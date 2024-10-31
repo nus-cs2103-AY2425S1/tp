@@ -10,8 +10,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.Pastry;
-import seedu.address.model.product.Product;
 import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.product.Product;
 
 /**
  * Adds a new pastry to the bakery's pastry catalogue.
@@ -71,9 +71,9 @@ public class AddPastryCommand extends Command {
                 .filter(product -> product instanceof Pastry)
                 .map(product -> (Pastry) product)
                 .anyMatch(existingPastry ->
-                        existingPastry.getName().equalsIgnoreCase(newPastry.getName()) &&
-                                Double.compare(existingPastry.getCost(), newPastry.getCost()) == 0 &&
-                                existingPastry.getIngredients().equals(newPastry.getIngredients()));
+                        existingPastry.getName().equalsIgnoreCase(newPastry.getName())
+                                && Double.compare(existingPastry.getCost(), newPastry.getCost()) == 0
+                                && existingPastry.getIngredients().equals(newPastry.getIngredients()));
     }
 
     @Override

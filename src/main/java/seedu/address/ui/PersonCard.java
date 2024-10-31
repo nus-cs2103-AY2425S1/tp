@@ -40,6 +40,7 @@ public class PersonCard extends UiPart<Region> {
     private Label details;
     @FXML
     private Label orders;
+
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
@@ -53,18 +54,18 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
         orders.setText(person.getOrders());
-        // Sort and display the tags
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
 
-                    // Apply the CSS class for "customer" tag
                     if (tag.tagName.equals("Customer")) {
-                        tagLabel.getStyleClass().add("tag-customer");  // Ensure that the "tag-customer" style is defined in your CSS
+                        tagLabel.getStyleClass().add("tag-customer");
                     } else if (tag.tagName.equals("Supplier")) {
-                            tagLabel.getStyleClass().add("tag-supplier");
-                        }
+                        tagLabel.getStyleClass().add("tag-supplier");
+
+                    }
                     tags.getChildren().add(tagLabel);
                 });
 

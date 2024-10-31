@@ -1,22 +1,33 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
+import java.util.ArrayList;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.AddCustomerCommand;
 import seedu.address.logic.commands.AddCustomerOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
-import java.util.ArrayList;
-import java.util.stream.Stream;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-
+/**
+ * Parses input arguments and creates a new AddCustomerOrderCommand object.
+ */
 public class AddCustomerOrderCommandParser implements Parser<AddCustomerOrderCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the {@code AddCustomerOrderCommand}
+     * and returns an {@code AddCustomerOrderCommand} object for execution.
+     *
+     * @param args the user input containing customer name, phone number, and order IDs.
+     * @return an {@code AddCustomerOrderCommand} object with the parsed customer name, phone number, and order IDs.
+     * @throws ParseException if the user input does not conform to the expected format.
+     */
     public AddCustomerOrderCommand parse(String args) throws ParseException {
         requireNonNull(args);
 

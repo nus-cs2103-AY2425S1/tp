@@ -1,5 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.OrderStatus;
@@ -10,15 +17,10 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-
-public class AddSupplierOrderCommand extends Command {
+/**
+ * Command to add a new supply order to the bakery's order list.
+ */
+public class AddSupplyOrderCommand extends Command {
     public static final String COMMAND_WORD = "addSupplyOrder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new supplier order to the bakery's order list. "
@@ -31,7 +33,14 @@ public class AddSupplierOrderCommand extends Command {
     private final Phone phone;
     private final ArrayList<Integer> idList;
 
-    public AddSupplierOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
+    /**
+     * Constructs an {@code AddSupplyOrderCommand} with the specified supplier's name, phone number, and product IDs.
+     *
+     * @param name   the name of the supplier.
+     * @param phone  the phone number of the supplier (must not be null).
+     * @param idList a list of product IDs for the order (must not be null).
+     */
+    public AddSupplyOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
         requireAllNonNull(phone);
         this.name = name;
         this.phone = phone;
@@ -46,7 +55,7 @@ public class AddSupplierOrderCommand extends Command {
 
         List<Product> productList = idList.stream()
                                         .map(ingredientCatalogue::getProductById)
-                .                       filter(Objects::nonNull)
+                                        .filter(Objects::nonNull)
                                         .toList();
 
         List<Person> personList = model.getFilteredPersonList();
@@ -59,7 +68,7 @@ public class AddSupplierOrderCommand extends Command {
             }
         }
         if (person == null) {
-            person = Person.getGuest(name, phone);
+            person = Person.getSupplier(name, phone);
             model.addPerson(person);
         }
 
@@ -79,11 +88,11 @@ public class AddSupplierOrderCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddSupplierOrderCommand)) {
+        if (!(other instanceof AddSupplyOrderCommand)) {
             return false;
         }
 
-        AddSupplierOrderCommand otherCommand = (AddSupplierOrderCommand) other;
+        AddSupplyOrderCommand otherCommand = (AddSupplyOrderCommand) other;
         return phone.equals(otherCommand.phone) && idList.equals(otherCommand.idList);
     }
 }

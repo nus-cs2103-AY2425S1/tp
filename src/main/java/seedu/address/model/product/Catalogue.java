@@ -4,55 +4,60 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+/**
+ * Abstract base class representing a product catalogue.
+ * Provides a common structure for managing different types of products.
+ */
 public abstract class Catalogue {
     protected final Map<Integer, Product> productCatalogue = new HashMap<>();
-    protected int nextProductId = 1;  // ID counter, ensures
+    protected int nextProductId = 1;
 
+    /**
+     * Adds default products to the catalogue.
+     * This method must be implemented by subclasses to add specific types of products.
+     */
     public abstract void addDefaultProducts();
 
+    /**
+     * Retrieves a product by its unique ID.
+     *
+     * @param id The ID of the product.
+     * @return The product with the specified ID, or {@code null} if not found.
+     */
     public Product getProductById(int id) {
         return productCatalogue.get(id);
     }
 
-    public String getProductNameById(int id) {
-        Product product = productCatalogue.get(id);
-        return (product != null) ? product.getName() : null;
-    }
-
-    public int getProductIdByName(String name) {
-        for (Map.Entry<Integer, Product> entry : productCatalogue.entrySet()) {
-            if (entry.getValue().getName().equalsIgnoreCase(name)) {
-                return entry.getKey();
-            }
-        }
-        return -1;  // Not found
-    }
-
+    /**
+     * Returns the entire catalogue of products.
+     *
+     * @return A map of product IDs to products.
+     */
     public Map<Integer, Product> getCatalogue() {
         return productCatalogue;
     }
 
+    /**
+     * Returns the next available product ID.
+     *
+     * @return The next product ID as an integer.
+     */
+    public int getNextProductId() {
+        return nextProductId;
+    }
+
+    /**
+     * Deletes a product from the catalogue by its ID.
+     *
+     * @param id The ID of the product to be deleted.
+     * @throws NoSuchElementException if the product ID does not exist in the catalogue.
+     */
     public void deleteProduct(int id) {
         if (!productCatalogue.containsKey(id)) {
             throw new NoSuchElementException("Product ID " + id + " not found.");
         }
-
         productCatalogue.remove(id);
         System.out.println("Deleted product with ID: " + id);
-
-    }
-
-    public void setProductId(int oldId, int newId) {
-        if (!productCatalogue.containsKey(oldId)) {
-            throw new NoSuchElementException("Product ID " + oldId + " not found.");  // Product with old ID not found
-        }
-        if (productCatalogue.containsKey(newId)) {
-             throw new NoSuchElementException("ID: " + newId + " is taken.");  // New ID is already in use
-        }
-
-        Product product = productCatalogue.remove(oldId);  // Remove product with old ID
-        productCatalogue.put(newId, product);  // Add product with new ID
-        System.out.println("ID of " + product.getName() + " changed from " + oldId + "to ID: " + newId);  // ID changed successfully
     }
 
     @Override

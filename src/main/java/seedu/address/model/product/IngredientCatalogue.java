@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
- * Catalogue for managing ingredients.
+ * Catalogue for managing ingredients. Provides methods to add and retrieve ingredients
+ * by ID or name, and initializes with a set of default ingredients.
  */
 public class IngredientCatalogue extends Catalogue {
     // Static references to default ingredients for direct access
@@ -16,16 +17,20 @@ public class IngredientCatalogue extends Catalogue {
     public static final Ingredient CHEESE = new Ingredient(5, "Cheese", 4.00);
     public static final Ingredient CREAM = new Ingredient(6, "Cream", 2.00);
 
-    // Map to store ingredient names for quick lookups
     private final Map<String, Ingredient> ingredientByName = new HashMap<>();
 
+    /**
+     * Initializes the ingredient catalogue with default ingredients.
+     */
     public IngredientCatalogue() {
         addDefaultProducts();
     }
 
+    /**
+     * Adds default ingredients to the catalogue.
+     */
     @Override
     public void addDefaultProducts() {
-        // add 6 default ingredients
         addIngredient(FLOUR);
         addIngredient(SUGAR);
         addIngredient(STRAWBERRY);
@@ -34,20 +39,22 @@ public class IngredientCatalogue extends Catalogue {
         addIngredient(CREAM);
     }
 
-    public int getNextProductId() {
-        return nextProductId;
-    }
-
+    /**
+     * Adds an ingredient to the catalogue and maps it by name for quick retrieval.
+     *
+     * @param ingredient The ingredient to add.
+     */
     public void addIngredient(Ingredient ingredient) {
         productCatalogue.put(ingredient.getProductId(), ingredient);
-        ingredientByName.put(ingredient.getName().toLowerCase(), ingredient);  // Store by lowercase name
+        ingredientByName.put(ingredient.getName().toLowerCase(), ingredient);
         nextProductId++;
     }
 
     /**
-     * Retrieves an ingredient by its name (case-insensitive).
+     * Retrieves an ingredient by its name, case-insensitive.
+     *
      * @param name The name of the ingredient.
-     * @return The matching Ingredient object.
+     * @return The matching {@code Ingredient} object.
      * @throws NoSuchElementException if the ingredient is not found.
      */
     public Ingredient getIngredientByName(String name) {
@@ -58,7 +65,13 @@ public class IngredientCatalogue extends Catalogue {
         return ingredient;
     }
 
-    // Retrieves an ingredient by its ID
+    /**
+     * Retrieves an ingredient by its unique ID.
+     *
+     * @param id The ID of the ingredient.
+     * @return The matching {@code Ingredient} object.
+     * @throws NoSuchElementException if the ingredient is not found.
+     */
     public Ingredient getIngredientById(int id) {
         Product product = productCatalogue.get(id);
         if (product instanceof Ingredient) {
@@ -66,5 +79,4 @@ public class IngredientCatalogue extends Catalogue {
         }
         throw new NoSuchElementException("Ingredient with ID " + id + " not found.");
     }
-
 }
