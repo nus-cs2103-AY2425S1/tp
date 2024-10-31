@@ -5,9 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
@@ -31,9 +34,9 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports person data from a CSV file.\n"
-        + "Parameters: FILE_PATH"
-        + "[" + PREFIX_PATH + "FILE_PATH]\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
+            + "Parameters: FILE_PATH"
+            + "[" + PREFIX_PATH + "FILE_PATH]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
 
     private final String csvFilePath;
 
@@ -51,7 +54,7 @@ public class ImportCommand extends Command {
             csvReader.readNext();
 
             while ((fields = csvReader.readNext()) != null) {
-                if (fields.length < 9) {
+                if (fields.length < 8) {
                     throw new CommandException("Invalid CSV format.");
                 }
                 Person person = parsePerson(fields);
@@ -81,16 +84,7 @@ public class ImportCommand extends Command {
             // Process tags
             Set<Tag> tags = parseTags(fields[5].trim());
 
-            // Process assignment (name and score)
-            String assignmentNameStr = fields[7].trim();
-            String assignmentScoreStr = fields[8].trim();
-
-            if (assignmentNameStr.equals("N/A") || assignmentNameStr.isEmpty()) {
-                return new Person(name, phone, email, address, telegram, tags, github);
-            }
-
-            float assignmentScore = Float.parseFloat(assignmentScoreStr);
-            Assignment assignment = new Assignment(assignmentNameStr, assignmentScore);
+            Map<String, Assignment> assignment = parseAssignment(fields[7].trim());
 
             return new Person(name, phone, email, address, telegram, tags, github, assignment);
 
@@ -123,15 +117,36 @@ public class ImportCommand extends Command {
         return tags;
     }
 
+    /**
+     * Parses a set of tags from a string with tags in the format "assignmentName | score".
+     */
+    private Map<String, Assignment> parseAssignment(String assignmentField) throws NumberFormatException {
+        Map<String, Assignment> assignments = new HashMap<>();
+        assignmentField = assignmentField.trim();
+        if (!assignmentField.isEmpty()) {
+            String[] assignmentArray = assignmentField.split(",");
+            for (String assignment : assignmentArray) {
+                assignment = assignment.trim();
+                List<String> individual = Stream.of(assignment.split("\\|"))
+                        .map(String::trim).toList(); // | used as delimiter between name and score
+
+                assignments.put(individual.get(0),
+                        new Assignment(individual.get(0),
+                                Float.parseFloat(individual.get(1))));
+
+            }
+        }
+        return assignments;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof ImportCommand)) {
+        if (!(obj instanceof ImportCommand other)) {
             return false;
         }
-        ImportCommand other = (ImportCommand) obj;
         return this.csvFilePath.equals(other.csvFilePath);
     }
 }
