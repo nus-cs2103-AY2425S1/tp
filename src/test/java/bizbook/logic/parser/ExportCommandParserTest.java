@@ -1,6 +1,7 @@
 package bizbook.logic.parser;
 
 import static bizbook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static bizbook.logic.parser.CliSyntax.PREFIX_FILE;
 import static bizbook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static bizbook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static bizbook.testutil.TypicalFileTypes.FILE_TYPE_CSV;
@@ -16,7 +17,7 @@ public class ExportCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsExportCommand() {
-        assertParseSuccess(parser, " f/csv", new ExportCommand(FILE_TYPE_CSV));
+        assertParseSuccess(parser, " " + PREFIX_FILE + "csv", new ExportCommand(FILE_TYPE_CSV));
     }
 
     @Test
