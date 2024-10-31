@@ -157,7 +157,9 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         for (String logEntry : logEntries) {
-            if (!Log.isValidLog(logEntry)) {
+            try {
+                new Log(logEntry);
+            } catch (IllegalArgumentException e) {
                 throw new IllegalValueException(Log.MESSAGE_CONSTRAINTS);
             }
         }

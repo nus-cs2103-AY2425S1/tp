@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Represents a log entry with a timestamp and a log message.
@@ -26,19 +28,21 @@ public class Log {
     }
 
     public Log(String logEntry) {
-        String[] logEntryParts = logEntry.split(" ", 2);
-        this.timestamp = LocalDateTime.parse(logEntryParts[0], DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-        this.logString = logEntryParts[1];
+        String[] logEntryParts = logEntry.split(" ");
+        this.timestamp = LocalDateTime.parse(logEntryParts[0] + " " + logEntryParts[1],
+                DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.logString = Arrays.stream(logEntryParts, 2, logEntryParts.length)
+                .collect(Collectors.joining(" "));
     }
 
     public static boolean isValidLog(String test) {
-        String[] logEntryParts = test.split(" ", 2);
-        if (logEntryParts.length != 2) {
+        String[] logEntryParts = test.split(" ", 3);
+        if (logEntryParts.length != 3) {
             return false;
         }
 
-        String timestamp = logEntryParts[0];
-        String logMessage = logEntryParts[1];
+        String timestamp = logEntryParts[0] + " " + logEntryParts[1];
+        String logMessage = logEntryParts[2];
 
         return timestamp.matches(VALIDATION_REGEX) && !logMessage.isBlank();
     }
@@ -68,7 +72,7 @@ public class Log {
      */
     @Override
     public String toString() {
-        return timestamp + " " + logString;
+        return timestamp.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " " + logString;
     }
 
     /**
