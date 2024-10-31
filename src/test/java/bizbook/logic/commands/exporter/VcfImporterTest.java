@@ -93,7 +93,7 @@ public class VcfImporterTest {
     public void import_missingInformation_throwsInvalidFileException() {
         Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, MISSING_INFO_FILE_PATH);
 
-        assertThrows(InvalidFileException.class, String.format(MESSAGE_MISSING_INFORMATION, "1"), () ->
+        assertThrows(InvalidFileException.class, MESSAGE_MISSING_INFORMATION, () ->
                 vcfImporter.importAddressBook(path));
     }
 }

@@ -21,12 +21,16 @@ import bizbook.model.person.Phone;
 import bizbook.model.tag.Tag;
 import ezvcard.Ezvcard;
 import ezvcard.VCard;
+import ezvcard.property.Categories;
+import ezvcard.property.FormattedName;
+import ezvcard.property.Telephone;
 
 /**
  * Represents a class that can import an address book from a VCF file
  */
 public class VcfImporter implements Importer {
-    public static final String MESSAGE_MISSING_INFORMATION = "vCard %s is missing information.";
+    public static final String MESSAGE_MISSING_INFORMATION = "A vCard inside the file is missing information needed to "
+            + "make a person.";
 
     // ================ Validation methods ==============================
     private void validateNotEmpty(List<VCard> vCards) throws InvalidFileException {
@@ -88,27 +92,83 @@ public class VcfImporter implements Importer {
         return addressBook;
     }
 
+    /**
+     * Converts a {@link VCard} to a {@link Person}
+     *
+     * @throws InvalidFileException when the vCard cannot be converted
+     */
     private Person convertToPerson(VCard vCard) throws InvalidFileException {
         validateVCard(vCard);
 
-        Set<Tag> categories = new LinkedHashSet<>();
-        if (vCard.getCategories() != null) {
-            categories = vCard.getCategories().getValues().parallelStream()
+        PersonVCard personVCard = new PersonVCard(vCard);
+
+        return new Person(
+                personVCard.getName(),
+                personVCard.getPhone(),
+                personVCard.getEmail(),
+                personVCard.getAddress(),
+                personVCard.getTags(),
+                personVCard.getNotes()
+        );
+    }
+
+    private static class PersonVCard {
+        private final VCard vCard;
+        PersonVCard(VCard vCard) {
+            this.vCard = vCard;
+        }
+
+        private void validateInfoNotNull(Object object) throws InvalidFileException {
+            if (object == null) {
+                throw new InvalidFileException(MESSAGE_MISSING_INFORMATION);
+            }
+        }
+
+        private void validateNotEmpty(List<?> objects) throws InvalidFileException {
+            if (objects.isEmpty()) {
+                throw new InvalidFileException(MESSAGE_MISSING_INFORMATION);
+            }
+        }
+
+        Name getName() throws InvalidFileException {
+            FormattedName name = vCard.getFormattedName();
+            validateInfoNotNull(name);
+            return new Name(name.getValue());
+        }
+
+        Phone getPhone() throws InvalidFileException {
+            List<Telephone> numbers = vCard.getTelephoneNumbers();
+            validateNotEmpty(numbers);
+            return new Phone(numbers.get(0).getText());
+        }
+
+        Email getEmail() throws InvalidFileException {
+            List<ezvcard.property.Email> emails = vCard.getEmails();
+            validateNotEmpty(emails);
+            return new Email(emails.get(0).getValue());
+        }
+
+        Address getAddress() throws InvalidFileException {
+            List<ezvcard.property.Address> addresses = vCard.getAddresses();
+            validateNotEmpty(addresses);
+            return new Address(addresses.get(0).getStreetAddressFull());
+        }
+
+        Set<Tag> getTags() {
+            Categories categories = vCard.getCategories();
+            if (categories == null) {
+                return new LinkedHashSet<>();
+            }
+
+            return vCard.getCategories().getValues().parallelStream()
                     .map(Tag::new)
                     .collect(Collectors.toSet());
         }
 
-        Set<Note> notes = vCard.getNotes().parallelStream()
-                .map(note -> new Note(note.getValue()))
-                .collect(Collectors.toSet());
-
-        return new Person(
-            new Name(vCard.getFormattedName().getValue()),
-            new Phone(vCard.getTelephoneNumbers().get(0).getText()),
-            new Email(vCard.getEmails().get(0).getValue()),
-            new Address(vCard.getAddresses().get(0).getStreetAddressFull()),
-            categories,
-            notes
-        );
+        Set<Note> getNotes() {
+            return vCard.getNotes().parallelStream()
+                    .map(note -> new Note(note.getValue()))
+                    .collect(Collectors.toSet());
+        }
     }
 }
