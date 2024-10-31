@@ -178,28 +178,22 @@ public class ModelManager implements Model {
         this.savedCommand = command;
     }
 
-    /**
-     * Returns true if there is a saved command in the model.
-     */
     @Override
     public boolean hasSavedCommand() {
         return this.savedCommand != null;
     }
 
-    /**
-     * Clears the saved command in the model.
-     */
+
     @Override
     public void clearSavedCommand() {
         this.savedCommand = null;
     }
 
-    /**
-     * Executes the saved command in the model.
-     *
-     * @return The result of the command execution.
-     * @throws CommandException If saved command does not exist or error occurs during command execution.
-     */
+    @Override
+    public Command getSavedCommand() {
+        return this.savedCommand;
+    }
+
     @Override
     public CommandResult executeSavedCommand() throws CommandException {
         if (!hasSavedCommand()) {

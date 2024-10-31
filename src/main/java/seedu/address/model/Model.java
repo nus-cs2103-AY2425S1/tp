@@ -41,6 +41,11 @@ public interface Model {
     boolean hasSavedCommand();
 
     /**
+     * Returns the saved command.
+     */
+    Command getSavedCommand();
+
+    /**
      * Executes the saved command.
      */
     CommandResult executeSavedCommand() throws CommandException;

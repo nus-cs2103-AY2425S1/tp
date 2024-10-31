@@ -87,8 +87,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("identityNumber", identityNumber)
-                .toString();
+        return "Delete person with NRIC: " + identityNumber;
     }
 }

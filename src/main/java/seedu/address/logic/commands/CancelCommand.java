@@ -19,8 +19,13 @@ public class CancelCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (!model.hasSavedCommand()) {
+            throw new CommandException("No operation to cancel.");
+        }
+
+        String result = model.getSavedCommand().toString();
         model.clearSavedCommand();
-        return new CommandResult("Operation cancelled.");
+        return new CommandResult("Cancelled operation: " + result);
     }
 
     @Override

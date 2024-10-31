@@ -199,6 +199,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Command getSavedCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public CommandResult executeSavedCommand() throws CommandException {
             throw new AssertionError("This method should not be called.");
         }

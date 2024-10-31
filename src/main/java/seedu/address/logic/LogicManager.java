@@ -71,9 +71,20 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
-        } catch (Exception e) {
-            model.clearSavedCommand();
-            throw e;
+        } catch (CommandException ce) {
+            String message = "";
+            if (model.hasSavedCommand()) {
+                message = "\nCanceled command: " + model.getSavedCommand().toString();
+                model.clearSavedCommand();
+            }
+            throw new CommandException(ce.getMessage() + message , ce);
+        } catch (ParseException pe) {
+            String message = "";
+            if (model.hasSavedCommand()) {
+                message = "\nCanceled command: " + model.getSavedCommand().toString();
+                model.clearSavedCommand();
+            }
+            throw new ParseException(pe.getMessage() + message , pe);
         }
     }
 
