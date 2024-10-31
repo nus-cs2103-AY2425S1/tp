@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -95,13 +96,12 @@ public class EditCommand extends Command {
                 .filtered(participation -> participation.getStudent().equals(personToEdit));
 
         if (participationsToDelete.size() < 1) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, personToEdit.getName()));
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, personToEdit));
         }
 
-        for (Participation participation: participationsToDelete) {
-            Participation updatedParticipation = new Participation(editedPerson, participation.getTutorial(),
-                    participation.getAttendanceList());
-            model.setParticipation(participation, updatedParticipation);
+        for (int i = 0; i < participationsToDelete.size(); i++) {
+            Participation updated = new Participation(editedPerson,
+                    participationsToDelete.get(i).getTutorial(), participationsToDelete.get(i).getAttendanceList());
         }
 
         model.setPerson(personToEdit, editedPerson);
