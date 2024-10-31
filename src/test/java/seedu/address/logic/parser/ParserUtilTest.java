@@ -108,14 +108,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseMajor_validValueWithoutWhitespace_returnsMajor() throws Exception {
-        Major expectedAddress = new Major(VALID_MAJOR);
+        Major expectedAddress = Major.makeMajor(VALID_MAJOR);
         assertEquals(expectedAddress, ParserUtil.parseMajor(VALID_MAJOR));
     }
 
     @Test
     public void parseMajor_validValueWithWhitespace_returnsTrimmedMajor() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_MAJOR + WHITESPACE;
-        Major expectedAddress = new Major(VALID_MAJOR);
+        Major expectedAddress = Major.makeMajor(VALID_MAJOR);
         assertEquals(expectedAddress, ParserUtil.parseMajor(addressWithWhitespace));
     }
 
@@ -131,14 +131,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseNetId_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
+        Email expectedEmail = Email.makeEmail(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseNetId(VALID_NETID));
     }
 
     @Test
     public void parseNetId_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String netIdWithWhitespace = WHITESPACE + VALID_NETID + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
+        Email expectedEmail = Email.makeEmail(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseNetId(netIdWithWhitespace));
     }
 

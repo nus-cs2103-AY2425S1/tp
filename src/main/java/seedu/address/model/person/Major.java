@@ -16,6 +16,7 @@ public class Major {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+    private static final Major EMPTY_MAJOR = new Major();
 
     public final String value;
 
@@ -24,7 +25,7 @@ public class Major {
      *
      * @param major A valid major.
      */
-    public Major(String major) {
+    private Major(String major) {
         requireNonNull(major);
         checkArgument(isValidMajor(major), MESSAGE_CONSTRAINTS);
         value = major;
@@ -34,8 +35,23 @@ public class Major {
      * Constructs an empty {@code Major}.
      *
      */
-    public Major() {
+    private Major() {
         value = "";
+    }
+
+    /**
+     * Constructs a {@code Major} or an empty {@code Major} instance.
+     *
+     * @param major A valid major or an empty string
+     */
+    public static Major makeMajor(String major) {
+        requireNonNull(major);
+
+        if (major.isEmpty()) {
+            return EMPTY_MAJOR;
+        }
+
+        return new Major(major);
     }
 
     /**

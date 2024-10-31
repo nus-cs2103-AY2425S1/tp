@@ -10,6 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Year {
     public static final String MESSAGE_CONSTRAINTS = "Year should be a positive number";
     public static final String VALIDATION_REGEX = "[1-9]\\d*";
+    private static final Year EMPTY_YEAR = new Year();
+
     public final String value;
 
     /**
@@ -17,7 +19,7 @@ public class Year {
      *
      * @param year A valid year.
      */
-    public Year(String year) {
+    private Year(String year) {
         requireNonNull(year);
         checkArgument(isValidYear(year), MESSAGE_CONSTRAINTS);
         value = year;
@@ -27,8 +29,23 @@ public class Year {
      * Constructs an empty {@code Year}.
      *
      */
-    public Year() {
+    private Year() {
         value = "";
+    }
+
+    /**
+     * Constructs a {@code Year} or an empty {@code Year} instance.
+     *
+     * @param year A valid year or an empty string
+     */
+    public static Year makeYear(String year) {
+        requireNonNull(year);
+
+        if (year.isEmpty()) {
+            return EMPTY_YEAR;
+        }
+
+        return new Year(year);
     }
 
     /**

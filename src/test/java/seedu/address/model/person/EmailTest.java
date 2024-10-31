@@ -10,13 +10,13 @@ public class EmailTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Email(null));
+        assertThrows(NullPointerException.class, () -> Email.makeEmail(null));
     }
 
     @Test
     public void constructor_invalidEmail_throwsIllegalArgumentException() {
-        String invalidEmail = "";
-        assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
+        String invalidEmail = "Tom@Jerry.com";
+        assertThrows(IllegalArgumentException.class, () -> Email.makeEmail(invalidEmail));
     }
 
     @Test
@@ -66,10 +66,10 @@ public class EmailTest {
 
     @Test
     public void equals() {
-        Email email = new Email("e1234567@u.nus.edu");
+        Email email = Email.makeEmail("e1234567@u.nus.edu");
 
         // same values -> returns true
-        assertTrue(email.equals(new Email("e1234567@u.nus.edu")));
+        assertTrue(email.equals(Email.makeEmail("e1234567@u.nus.edu")));
 
         // same object -> returns true
         assertTrue(email.equals(email));
@@ -81,6 +81,6 @@ public class EmailTest {
         assertFalse(email.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(email.equals(new Email("e9999999@u.nus.edu")));
+        assertFalse(email.equals(Email.makeEmail("e9999999@u.nus.edu")));
     }
 }

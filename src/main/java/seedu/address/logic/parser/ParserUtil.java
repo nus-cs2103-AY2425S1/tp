@@ -60,7 +60,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String studentId} into a {@code StudenId}.
+     * Parses a {@code String studentId} into a {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code studentId} is invalid.
@@ -75,33 +75,67 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String major} into a {@code Major}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code major} is invalid.
      */
-    public static Major parseMajor(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Major.isValidMajor(trimmedAddress)) {
+    public static Major parseMajor(String major) throws ParseException {
+        requireNonNull(major);
+        String trimmedMajor = major.trim();
+        if (!Major.isValidMajor(trimmedMajor)) {
             throw new ParseException(Major.MESSAGE_CONSTRAINTS);
         }
-        return new Major(trimmedAddress);
+        return Major.makeMajor(trimmedMajor);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String major} into a {@code Major} but allows empty major to be supplied.
+     *
+     * @throws ParseException if the given {@code major} is invalid or not empty.
+     */
+    public static Major parseOptionalMajor(String major) throws ParseException {
+        requireNonNull(major);
+        String trimmedMajor = major.trim();
+
+        if (trimmedMajor.isEmpty()) {
+            return Major.makeMajor(trimmedMajor);
+        }
+
+        return parseMajor(trimmedMajor);
+    }
+
+    /**
+     * Parses a {@code String netId} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code netId} is invalid.
      */
     public static Email parseNetId(String netId) throws ParseException {
         requireNonNull(netId);
         String trimmedNetId = netId.trim();
+
         if (!Email.isValidNetId(trimmedNetId)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedNetId + Email.DOMAIN);
+
+        return Email.makeEmail(trimmedNetId + Email.DOMAIN);
+    }
+
+    /**
+     * Parses a {@code String netId} into an {@code Email} but allows empty netid to be supplied.
+     *
+     * @throws ParseException if the given {@code netId} is invalid or not empty.
+     */
+    public static Email parseOptionalNetId(String netId) throws ParseException {
+        requireNonNull(netId);
+        String trimmedNetId = netId.trim();
+
+        if (trimmedNetId.isEmpty()) {
+            return Email.makeEmail(trimmedNetId);
+        }
+
+        return parseNetId(trimmedNetId);
     }
 
     /**
@@ -116,7 +150,23 @@ public class ParserUtil {
         if (!Year.isValidYear(trimmedYear)) {
             throw new ParseException(Year.MESSAGE_CONSTRAINTS);
         }
-        return new Year(trimmedYear);
+        return Year.makeYear(trimmedYear);
+    }
+
+    /**
+     * Parses a {@code String year} into a {@code Year} but allows empty year to be supplied.
+     *
+     * @throws ParseException if the given {@code year} is invalid or not empty.
+     */
+    public static Year parseOptionalYear(String year) throws ParseException {
+        requireNonNull(year);
+        String trimmedYear = year.trim();
+
+        if (trimmedYear.isEmpty()) {
+            return Year.makeYear(trimmedYear);
+        }
+
+        return parseYear(trimmedYear);
     }
 
     /**
