@@ -153,10 +153,10 @@ Examples:
 
 #### You can display members in a group easily
 
-#### <span style="color:#4CAF50;">Format: show INDEX</span>
+#### <span style="color:#4CAF50;">Format: show GROUP_NUMBER</span>
 
-* The INDEX is the group you would like to search for in your current list. For instance, use `1` (for group 1), `2` (for group 2), …​
-* Ensure the INDEX is an integer greater than or equal to 0.
+* The GROUP_NUMBER is the group you would like to search for in your current list. For instance, use `1` (for group 1), `2` (for group 2), …​
+* Ensure that GROUP_NUMBER is an integer greater than or equal to 0.
 
 Examples:
 * `show 1` returns persons with who are in group 1.
@@ -279,13 +279,13 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]` <br> e.g., `add n/James Ho id/A1234567X nid/E1234567 m/Computer Science y/2 g/group 4`
 **Clear** | `clear`
 **Comment** | `comment INDEX c/ COMMENT`<br> e.g., `comment 1 c/ Is always late to class`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`<br> e.g.,`edit 1 n/James Lee m/4`
 **Find** | `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`<br> e.g., `find n/ James Jake`, `find id/ A1234567E A2345678B`, `find n/ Alice id/ A1234567E`
-**Show** | `show INDEX`
+**Show** | `show GROUP_NUMBER`
 **List** | `list`
 **Help** | `help`
 **Offline Help** | `offlinehelp`
