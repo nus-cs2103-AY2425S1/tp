@@ -75,12 +75,12 @@ public class TypicalContacts {
             .withEmail(VALID_EMAIL_BOB).withStudentStatus(VALID_STUDENT_STATUS_BOB)
             .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN)
             .build();
-    public static final Contact BOB_HASSAMETELE_ALICE = new ContactBuilder().withName(VALID_NAME_BOB + "1")
+    public static final Contact BOB_HASSAMETELE_ALICE = new ContactBuilder().withName(VALID_NAME_BOB + "ONE")
             .withTelegramHandle(ALICE_TELEGRAMHANDLE)
             .withEmail(VALID_EMAIL_BOB + "1").withStudentStatus(VALID_STUDENT_STATUS_BOB)
             .withRoles(VALID_ROLE_ADMIN)
             .build();
-    public static final Contact BOB_HASSAMEEMAIL_ALICE = new ContactBuilder().withName(VALID_NAME_BOB + "2")
+    public static final Contact BOB_HASSAMEEMAIL_ALICE = new ContactBuilder().withName(VALID_NAME_BOB + "TWO")
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
             .withEmail(ALICE_EMAIL).withStudentStatus(VALID_STUDENT_STATUS_BOB)
             .withRoles(VALID_ROLE_ADMIN)

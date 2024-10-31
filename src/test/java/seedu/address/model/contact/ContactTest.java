@@ -46,14 +46,16 @@ public class ContactTest {
         editedAlice = new ContactBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameContact(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true (auto convert to nameCase)
         Contact editedBob = new ContactBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameContact(editedBob));
+        assertTrue(BOB.isSameContact(editedBob));
+        // DEBATABLE, CHANGED FROM FALSE TO TRUE
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new ContactBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameContact(editedBob));
+        assertTrue(BOB.isSameContact(editedBob));
+        // DEBATABLE, CHANGED FROM FALSE TO TRUE
     }
 
 
