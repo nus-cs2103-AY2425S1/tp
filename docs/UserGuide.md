@@ -308,6 +308,21 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+* **Client**: A person receiving services from the physiotherapist. He/she should have 
+a unique name (not case-sensitive).
+* **Client contact detail**: A contact detail that includes name, phone number, email address,
+  address, appointment details, tags etc.
+* **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
+* **Appointment details**: Information on the appointment including date, time, notes and payment details.
+* **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement,
+strength, flexibility, or overall physical function.
+* **Tag**: A label to indicate the treatment type of the client.
+* **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
