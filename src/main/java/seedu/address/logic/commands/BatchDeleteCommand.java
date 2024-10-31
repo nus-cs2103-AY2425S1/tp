@@ -30,6 +30,7 @@ public class BatchDeleteCommand extends Command {
             + PREFIX_TAG + "TAG...";
 
     public static final String MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS = "Deleted: %1$s\n";
+    public static final String MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG = "No person with Tag= %s is found";
 
     private final Set<Tag> tags;
 
@@ -38,7 +39,7 @@ public class BatchDeleteCommand extends Command {
     /**
      * Initializes command to batch delete all person with tags from the address book.
      *
-     * @param tags Tags belonging to a person.
+     * @param tags      Tags belonging to a person.
      * @param predicate Predicate to find all people with specified tags.
      */
     public BatchDeleteCommand(Set<Tag> tags, PersonContainsTagsPredicate predicate) {
@@ -55,9 +56,13 @@ public class BatchDeleteCommand extends Command {
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = new ArrayList<>(model.getFilteredPersonList());
 
+        if (lastShownList.isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG, tags));
+        }
+
         StringBuilder feedbackToUser = new StringBuilder();
 
-        for (Person person: lastShownList) {
+        for (Person person : lastShownList) {
             feedbackToUser.append(String
                     .format(MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
                             Messages.format(person))

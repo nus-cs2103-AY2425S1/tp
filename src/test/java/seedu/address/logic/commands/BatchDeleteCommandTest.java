@@ -63,6 +63,14 @@ class BatchDeleteCommandTest {
 
         assertCommandSuccess(batchDeleteFriendsOwesMoneyCommand, model, expectedMessage, expectedModel);
 
+        // Two tags but no person found
+        expectedMessage = String.format(
+                BatchDeleteCommand.MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG,
+                friendsOwesMoneyTag
+        );
+
+        assertCommandSuccess(batchDeleteFriendsOwesMoneyCommand, model, expectedMessage, expectedModel);
+
         // Deletes two persons, single tag
         expectedMessage = String.format(
                 BatchDeleteCommand.MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
@@ -74,6 +82,14 @@ class BatchDeleteCommandTest {
         expectedModel.deletePerson(ALICE);
         expectedModel.deletePerson(DANIEL);
         expectedModel.updateFilteredPersonList(Predicate.not(Model.PREDICATE_SHOW_ALL_PERSONS));
+        assertCommandSuccess(batchDeleteFriendsCommand, model, expectedMessage, expectedModel);
+
+        // One tag but no person found
+        expectedMessage = String.format(
+                BatchDeleteCommand.MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG,
+                friendsTag
+        );
+
         assertCommandSuccess(batchDeleteFriendsCommand, model, expectedMessage, expectedModel);
     }
 
