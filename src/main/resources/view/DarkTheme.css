@@ -353,6 +353,14 @@ background {
     -fx-background-radius: 6px !important;
 }
 
+.tag-pending {
+    -fx-background-color: #ef4444 !important;
+    -fx-text-fill: #ffffff !important;
+    -fx-padding: 4px 8px !important;
+    -fx-border-radius: 6px !important;
+    -fx-background-radius: 6px !important;
+}
+
 .tag-supplier {
     -fx-background-color: #22c55e !important;
     -fx-text-fill: #ffffff !important;
