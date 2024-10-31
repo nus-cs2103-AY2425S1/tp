@@ -28,16 +28,6 @@ public class ExportCommand extends FileAccessCommand {
     private static final DateTimeFormatter EXPORT_FORMATTER = DateTimeFormatter.ofPattern("MM-dd-yyyy-hhmmssa");
 
     @Override
-    public CommandResult execute(Model model) {
-        // This version of execute should never be run
-        assert false;
-        requireNotExecuted();
-        requireNonNull(model);
-        isExecuted = true;
-        return new CommandResult(MESSAGE_SUCCESS);
-    }
-
-    @Override
     public CommandResult execute(Model model, Storage storage) throws CommandException {
         requireNotExecuted();
         requireNonNull(model);
