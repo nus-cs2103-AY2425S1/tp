@@ -3,13 +3,16 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -49,6 +52,21 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+
+        if (command instanceof ImportCommand) {
+            String fileContent = ((ImportCommand) command).getFileContent();
+            try {
+                ReadOnlyAddressBook importedAddressBook = storage.readAddressBook(fileContent);
+                model.setAddressBook(importedAddressBook);
+                storage.saveAddressBook(model.getAddressBook());
+            } catch (DataLoadingException dle) {
+                throw new CommandException("Data loading exception: " + dle);
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+            }
+
+            return commandResult;
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());

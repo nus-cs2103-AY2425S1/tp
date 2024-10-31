@@ -65,6 +65,13 @@ public class StorageManager implements Storage {
     }
 
     @Override
+    public ReadOnlyAddressBook readAddressBook(String jsonContent) throws DataLoadingException {
+        logger.fine("Attempting to read data from json file");
+        return addressBookStorage.readAddressBook(jsonContent);
+    }
+
+
+    @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
         saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
     }
