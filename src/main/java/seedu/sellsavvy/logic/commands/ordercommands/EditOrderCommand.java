@@ -86,7 +86,7 @@ public class EditOrderCommand extends Command {
                 && orderList.contains(editedOrder)
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
                 : "";
-        feedbackToUser += editedOrder.hasDateElapsed()
+        feedbackToUser += editedOrder.hasDateElapsed() && editOrderDescriptor.isDateEdited()
                 ? MESSAGE_OUTDATED_WARNING
                 : "";
 
@@ -185,6 +185,10 @@ public class EditOrderCommand extends Command {
 
         public Optional<Date> getDate() {
             return Optional.ofNullable(date);
+        }
+
+        public boolean isDateEdited() {
+            return date != null;
         }
 
 
