@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-MediContacts is a **desktop app for managing contacts of patients and doctors, as well as keeping track of appointments.**  
+MediContacts is a **desktop app for managing contacts of patients and doctors**, as well as **keeping track of their appointments.**  
 
-It is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediContacts can not only get your patient and doctor contacts management tasks done faster than traditional systems adopted by our clinics, but also efficiently keep track of appointments between registered doctors and patients.
+It is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediContacts can not only get your contact management tasks done faster than traditional systems adopted by clinics, but also efficiently keep track of appointments between registered doctors and patients.
 
 * Table of Contents
 {:toc}
@@ -14,21 +14,22 @@ It is **optimised for use via a Command Line Interface** (CLI) while still havin
 
 ## Command summary
 
-Action | Format, Examples
+Action | Format (with examples)
 --------|------------------
-[**Add Doctor**](#adding-a-doctor-add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br> e.g., `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
-[**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br> e.g., `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1987 g/M`
+[**Help**](#viewing-help-help) | `help`
+[**Add Doctor**](#adding-a-doctor-add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br><br> e.g. `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
+[**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br><br> e.g. `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1987 g/M`
+[**Add Appointment**](#adding-an-appointment-add-appt) | `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME` <br><br> e.g. `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100`
 [**Delete Appointment**](#deleting-an-appointment-delete-appt) | `delete-appt UNIQUE_ID` <br><br> e.g. `delete-appt 1355`
-[**Clear**](#clearing-all-entries--clear) | `clear`
-[**Delete**](#deleting-a-person--delete) | `delete INDEX`<br> e.g., `delete 3`
-[**Exit**](#exiting-the-program--exit) | `exit`
-[**Find**](#locating-persons-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-[**Find Doctor**](#locating-doctors-by-name-find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-doctor James Jake`
-[**Find Patient**](#locating-patients-by-name-find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-patient James Jake`
-[**List**](#listing-all-persons--list) | `list`
+[**List**](#listing-all-persons-list) | `list`
 [**List Doctors**](#listing-all-doctors-list-doctor) | `list-doctor`
 [**List Patients**](#listing-all-patients-list-patient) | `list-patient`
-[**Help**](#viewing-help--help) | `help`
+[**Find**](#finding-persons-by-name-find) | `find KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find James Jake`
+[**Find Doctor**](#finding-doctors-by-name-find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-doctor James Jake`
+[**Find Patient**](#finding-patients-by-name-find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-patient James Jake`
+[**Delete**](#deleting-a-person-delete) | `delete INDEX` <br><br> e.g. `delete 3`
+[**Clear**](#clearing-all-entries-clear) | `clear`
+[**Exit**](#exiting-the-program-exit) | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,6 +58,10 @@ Action | Format, Examples
    
    * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M` : Adds a patient named John Doe to the Address Book.
 
+   * `add-appt pn/John Doe dn/Jane Doe d/23-12-2024 t/1100` : Adds an appointment between a patient named John Doe and a doctor named Jane Doe on 23rd December 2024 (1100hrs).
+
+   * `delete-appt 12345678` : Deletes the appointment with the unique ID `12345678`.  
+
    * `find John` : Finds contacts whose names contain the keyword `John`.
 
    * `find-doctor John` : Finds doctors whose names contain the keyword `John`.
@@ -80,10 +85,10 @@ Action | Format, Examples
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add-patient n/NAME`, `NAME` is a parameter which can be used as `add-patient n/John Doe`.
+  e.g. in `add-patient n/NAME`, `NAME` is a parameter which can be supplied as `add-patient n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -97,7 +102,7 @@ Action | Format, Examples
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaning how to access the help page.
 
@@ -133,6 +138,19 @@ The parameter `NAME` only accepts alphabets and spaces. The app will reject the 
 * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`
 * `add-patient n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 d/01-05-1990 g/F t/friend`
 
+### Adding an appointment: `add-appt`
+
+Adds an appointment between a doctor and patient, at a specified date and time, to the address book.
+
+Format: `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The parameter `PATIENT_NAME` and `DOCTOR_NAME` are case-sensitive, and must be an exact match of respective names in the address book. The app will reject the input if it contains unknown doctors or patients.
+</div>
+
+**Examples:**
+* `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100`
+
 ### Deleting an appointment: `delete-appt`
 
 Deletes the specified appointment from the address book.
@@ -144,7 +162,7 @@ Format: `delete-appt UNIQUE_ID`
 **Examples:**
 * `delete-appt 1355`
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
 
@@ -162,7 +180,7 @@ Shows a list of all patients in the address book.
 
 Format: `list-patient`
 
-### Locating persons by name: `find`
+### Finding persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -174,14 +192,17 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
 
-Examples:
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+</div>
+
+**Examples:**
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating doctors by name: `find-doctor`
+### Finding doctors by name: `find-doctor`
 
 Finds doctors whose names contain any of the given keywords.
 
@@ -193,13 +214,16 @@ Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Only doctors matching all keywords provided will be returned (i.e. `AND` search).
   e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
-* Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+</div>
 
 **Examples:**
 * `find-doctor John` returns `John Doe`.
 * `find-doctor Alex Yeoh` returns `Alex Yeoh`.
 
-### Locating patients by name: `find-patient`
+### Finding patients by name: `find-patient`
 
 Finds patients whose names contain any of the given keywords.
 
@@ -211,13 +235,16 @@ Format: `find-patient KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Patients matching all keywords provided will be returned (i.e. `AND` search).
   e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
-* Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+</div>
 
 **Examples:**
 * `find-patient John` returns `John Doe`.
 * `find-patient Alex Yeoh` returns `Alex Yeoh`.
 
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
 Deletes the specified person from the address book.
 
@@ -227,17 +254,17 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+**Examples:**
 * `list-patient` followed by `delete 2` deletes the 2nd patient in the address book.
 * `find-doctor Betsy` followed by `delete 1` deletes the 1st doctor in the results of the `find-doctor` command.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
