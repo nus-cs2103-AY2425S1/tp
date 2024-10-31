@@ -314,9 +314,8 @@ public class AddressBookParserTest {
                 Index.fromOneBased(1),
                 List.of(TypicalStudents.ALICE.getName(), TypicalStudents.BENSON.getName()),
                 true);
-        
         assertEquals(expectedCommand,
-                parser.parseCommand(MarkLessonAttendanceCommand.COMMAND_WORD +
-                        " 1 n/Alice Pauline n/Benson Meier a/y"));
+                parser.parseCommand(MarkLessonAttendanceCommand.COMMAND_WORD
+                        + " 1 n/Alice Pauline n/Benson Meier a/y"));
     }
 }
