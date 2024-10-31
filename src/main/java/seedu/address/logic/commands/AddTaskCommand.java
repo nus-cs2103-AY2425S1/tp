@@ -33,8 +33,12 @@ public class AddTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to a student. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_TASK_DESCRIPTION + "TASK DESCRIPTION "
-            + PREFIX_TASK_DEADLINE + "TASK DEADLINE (YYYY-MM-DD)";
+            + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION "
+            + PREFIX_TASK_DEADLINE + "TASK_DEADLINE (YYYY-MM-DD)\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_TASK_DESCRIPTION + "Mark assignment "
+            + PREFIX_TASK_DEADLINE + "2024-12-25";
 
     public static final String MESSAGE_SUCCESS = "Added task: %1$s for Student %2$s by %3$s";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "This student does not exist in the address book.";

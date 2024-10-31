@@ -38,6 +38,21 @@ public class AddTaskCommandParserTest {
 
         assertParseSuccess(parser, NAME_DESC_BOB + TASK_DESCRIPTION_DESC_BOB + TASK_DEADLINE_DESC_BOB,
                 new AddTaskCommand(new Name(VALID_NAME_BOB), expectedTask));
+
+        // multiple spaces in name
+        String multiSpaceName = " " + PREFIX_NAME + "Bob   Choo   ";
+        assertParseSuccess(parser, multiSpaceName + TASK_DESCRIPTION_DESC_BOB + TASK_DEADLINE_DESC_BOB,
+                new AddTaskCommand(new Name(VALID_NAME_BOB), expectedTask));
+
+        // different casing in name
+        String differentCasingName = " " + PREFIX_NAME + "BOB ChoO";
+        assertParseSuccess(parser, differentCasingName + TASK_DESCRIPTION_DESC_BOB + TASK_DEADLINE_DESC_BOB,
+                new AddTaskCommand(new Name(VALID_NAME_BOB), expectedTask));
+
+        // multiple spaces and different casing in name
+        String validName = " " + PREFIX_NAME + "   BoB    cHoO  ";
+        assertParseSuccess(parser, validName + TASK_DESCRIPTION_DESC_BOB + TASK_DEADLINE_DESC_BOB,
+                new AddTaskCommand(new Name(VALID_NAME_BOB), expectedTask));
     }
 
     @Test

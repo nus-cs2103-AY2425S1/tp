@@ -50,11 +50,13 @@ public class TaskDescription {
         }
 
         TaskDescription otherTaskDescription = (TaskDescription) other;
-        return taskDescription.equals(otherTaskDescription.taskDescription);
+        String thisValue = String.join(" ", taskDescription.trim().split("\\s+"));
+        String otherValue = String.join(" ", otherTaskDescription.taskDescription.trim().split("\\s+"));
+        return thisValue.equalsIgnoreCase(otherValue);
     }
 
     @Override
     public int hashCode() {
-        return taskDescription.hashCode();
+        return String.join(" ", taskDescription.split("\\s+")).toLowerCase().hashCode();
     }
 }

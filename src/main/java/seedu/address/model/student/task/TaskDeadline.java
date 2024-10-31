@@ -44,13 +44,19 @@ public class TaskDeadline {
      * Returns true if a given string is a valid task deadline.
      */
     public static boolean isValidTaskDeadline(String test) {
-        boolean valid = true;
+        boolean isValidDeadline;
         try {
-            LocalDate.parse(test, formatter);
+            LocalDate parsedDate = LocalDate.parse(test, formatter);
+
+            // LocalDate.parse automatically adjusts the input date to last valid date of month,
+            // as long as the day (DD) is less than or equal to 31.
+            // This behavior is not intended; we expect an error for invalid dates.
+            // Therefore, we perform an equality check to ensure that the formatted parsedDate matches the input date.
+            isValidDeadline = parsedDate.format(formatter).equals(test);
         } catch (DateTimeParseException e) {
-            valid = false;
+            isValidDeadline = false;
         }
-        return valid;
+        return isValidDeadline;
     }
 
     @Override
