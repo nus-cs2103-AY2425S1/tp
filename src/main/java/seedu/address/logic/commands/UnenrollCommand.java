@@ -31,7 +31,7 @@ public class UnenrollCommand extends Command {
             + "2 "
             + PREFIX_TUTORIAL + "physics";
     public static final String MESSAGE_SUCCESS = "%1$s(student) no longer enrolled in %2$s(tutorial)";
-    public static final String MESSAGE_NO_SUCH_PARTICIPATION = "Cannot unenroll %s from %s, as he is "
+    public static final String MESSAGE_NO_SUCH_PARTICIPATION = "Cannot unenroll %s from %s, as the student is "
             + "currently not enrolled in %s";
 
     private static final Logger logger = LogsCenter.getLogger(UnenrollCommand.class);

@@ -97,7 +97,9 @@ public class UnenrollCommandTest {
         UnenrollCommand command = new UnenrollCommand(Index.fromZeroBased(0), "physics");
 
         Exception exception = assertThrows(CommandException.class, () -> command.execute(model));
-        assertEquals(UnenrollCommand.MESSAGE_NO_SUCH_PARTICIPATION, exception.getMessage());
+        assertEquals("Cannot unenroll Amy Bee from physics, "
+                       +  "as the student is currently not enrolled in physics",
+                exception.getMessage());
     }
 
     @Test
