@@ -1,5 +1,8 @@
 package bizbook.testutil;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -9,12 +12,9 @@ import java.nio.file.Paths;
 
 import bizbook.commons.core.index.Index;
 import bizbook.commons.util.FileUtil;
-import bizbook.logic.commands.exporter.VcfExporterTest;
 import bizbook.model.Model;
 import bizbook.model.person.Person;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * A utility class for test cases.
