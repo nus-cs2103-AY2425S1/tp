@@ -17,6 +17,7 @@ import tuteez.model.person.lesson.Lesson;
  * Adds a lesson to a specified student.
  */
 public class AddLessonCommand extends LessonCommand {
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
 
     private final Lesson lessonToAdd;
 

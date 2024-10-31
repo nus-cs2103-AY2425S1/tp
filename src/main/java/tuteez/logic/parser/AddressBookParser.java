@@ -88,8 +88,8 @@ public class AddressBookParser {
         case RemarkCommand.COMMAND_WORD_ALT:
             return new RemarkCommandParser().parse(arguments);
 
-        case LessonCommand.COMMAND_WORD:
-        case LessonCommand.COMMAND_WORD_ALT:
+        case LessonCommand.COMMAND_WORD_ADD:
+        case LessonCommand.COMMAND_WORD_ADD_ALT:
             return new LessonCommandParser().parse(arguments);
 
         default:

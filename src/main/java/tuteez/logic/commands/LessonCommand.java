@@ -12,17 +12,20 @@ import tuteez.model.person.Person;
  * Adds or deletes a lesson for a student using its identified index in the displayed person list.
  */
 public abstract class LessonCommand extends Command {
-    public static final String COMMAND_WORD = "lesson";
-    public static final String COMMAND_WORD_ALT = "lsn"; // "l" or "lsn" ?
+    public static final String COMMAND_WORD_ADD = "addlesson";
+    public static final String COMMAND_WORD_ADD_ALT = "addlsn";
+    public static final String COMMAND_WORD_DELETE = "deletelesson";
+    public static final String COMMAND_WORD_DELETE_ALT = "dellsn";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " (short form: " + COMMAND_WORD_ALT + ")"
-            + ": Adds or deletes a lesson for the student identified by the index number in the displayed student list."
-            + "\nParameters: INDEX (must be a positive integer) -a LESSON or "
-            + "-d LESSON_INDEX (must be a positive integer)\n"
-            + "Example to add lesson: " + COMMAND_WORD + " 1 -a Monday 0900-1100\n"
-            + "Example to delete lesson: " + COMMAND_WORD + " 1 -d 1";
-
-    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
+    public static final String MESSAGE_USAGE = "Add lessons by index in displayed student list: " + COMMAND_WORD_ADD
+            + " (short form: " + COMMAND_WORD_ADD_ALT + ")"
+            + " INDEX l/LESSON [l/LESSON]...\n"
+            + "Example: " + COMMAND_WORD_ADD + " 1 l/monday 0900-1100 l/wednesday 1400-1600\n"
+            + "\n"
+            + "Delete lessons by index in displayed student list: " + COMMAND_WORD_DELETE
+            + " (short form: " + COMMAND_WORD_DELETE_ALT + ")"
+            + " INDEX li/LESSON_INDEX [li/LESSON_INDEX]...\n"
+            + "Example: " + COMMAND_WORD_DELETE + " 1 li/2 li/4";
 
     protected final Index personIndex;
 
