@@ -46,7 +46,12 @@ public class Binder extends UiPart<Region> {
     private void updateArcs(double height) {
         loopParent.getChildren().clear();
 
-        int numArcs = (int) (height / (ARC_RADIUS_Y * 2 + loopParent.getSpacing())) - 5;
+        // The number of arcs that makes the difference between scene height and binder height
+        int bufferArcs = 3;
+        // For some reason, there is an extra one pixel of spacing between loops than expected
+        int extraSpacing = 1;
+
+        int numArcs = (int) (height / (ARC_RADIUS_Y * 2 + loopParent.getSpacing() + extraSpacing)) - bufferArcs;
 
         addArcs(numArcs);
     }
