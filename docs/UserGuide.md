@@ -65,7 +65,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -98,9 +98,23 @@ Format: `edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-
 Examples:
 *  `edit 12345678 m/CS2103T CS2101`
+
+### Adding a grade : `grade`
+
+Adds a grade to a person's module
+
+Format: `grade ID m/MODULE g/GRADE`
+
+* Adds a grade to a person according to the specified ID and Module
+* Module specified must exist prior to execution grade command
+* Acceptable grades: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
+* Existing grade will be updated to the input grade
+
+Examples:
+* `grade 23876767 m/CS2103T g/A` will assign an A grade to the CS2103T module of a Person whose ID is 23876767
+
 
 ### Listing students by certain attributes : `filter`
 
