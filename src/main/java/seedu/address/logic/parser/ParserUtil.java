@@ -212,10 +212,10 @@ public class ParserUtil {
     public static PreferredTime parsePreferredTime(String preferredTime) throws ParseException {
         requireNonNull(preferredTime);
         String trimmedPreferredTime = preferredTime.trim();
-        if (!PreferredTime.isValidPreferredTime(trimmedPreferredTime)) {
+        if (!PreferredTime.isValidPreferredTime(trimmedPreferredTime, false)) {
             throw new ParseException(PreferredTime.MESSAGE_CONSTRAINTS);
         }
-        return new PreferredTime(trimmedPreferredTime);
+        return new PreferredTime(trimmedPreferredTime, false);
     }
 
     /**

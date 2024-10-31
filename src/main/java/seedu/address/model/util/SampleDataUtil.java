@@ -90,7 +90,7 @@ public class SampleDataUtil {
      */
     public static Set<PreferredTime> getPreferredTimeSet(String... strings) {
         return Arrays.stream(strings)
-                .map(PreferredTime::new)
+                .map(preferredTime -> new PreferredTime(preferredTime, false))
                 .collect(Collectors.toSet());
     }
 

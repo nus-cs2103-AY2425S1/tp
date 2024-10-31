@@ -30,7 +30,7 @@ public class FindTimeCommandParser implements Parser<FindTimeCommand> {
 
         String[] timeKeywords = trimmedArgs.split("\\s+");
         List<String> validRanges = Arrays.stream(timeKeywords)
-                .filter(PreferredTime::isValidPreferredTime).toList();
+                .filter(time -> PreferredTime.isValidPreferredTime(time, true)).toList();
 
         if (validRanges.isEmpty()) {
             throw new ParseException(

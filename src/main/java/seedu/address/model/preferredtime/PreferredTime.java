@@ -13,7 +13,7 @@ import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents a Person's preferred time to play games in the gamer book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPreferredTime(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPreferredTime(String, Boolean)}
  */
 public class PreferredTime {
 
@@ -37,9 +37,9 @@ public class PreferredTime {
      *
      * @param preferredTime A valid preferredTime input that can be break down to valid day and valid time.
      */
-    public PreferredTime(String preferredTime) {
+    public PreferredTime(String preferredTime, Boolean isFindTime) {
         requireNonNull(preferredTime);
-        checkArgument(isValidPreferredTime(preferredTime), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPreferredTime(preferredTime, isFindTime), MESSAGE_CONSTRAINTS);
 
         this.preferredTime = preferredTime;
         Matcher matcher = VALIDATED_PATTERN.matcher(preferredTime); // should always match as checked
@@ -53,8 +53,11 @@ public class PreferredTime {
 
     /**
      * Returns true if a given string is a valid PreferredTime.
+     * Generally, start < end. If isFindTime == true, start == end is allowed.
+     *
+     * @param isFindTime A boolean value to flag if the usage is for FindTimeCommand.
      */
-    public static boolean isValidPreferredTime(String test) {
+    public static boolean isValidPreferredTime(String test, Boolean isFindTime) {
         if (!test.matches(VALIDATION_REGEX)) {
             logger.finer("This user input doesn't align with validation pattern: " + VALIDATION_REGEX);
             return false;
@@ -77,11 +80,24 @@ public class PreferredTime {
         }
 
         logger.fine("This user input matches the requirement!");
+
+        // if is FindTime, check that the start is no later than the end.
+        if (isFindTime) {
+            return !LocalTime.parse(start, TIME_FORMATTER).isAfter(LocalTime.parse(end, TIME_FORMATTER));
+        }
+
+        // otherwise check that the start is before the end.
         return LocalTime.parse(start, TIME_FORMATTER).isBefore(LocalTime.parse(end, TIME_FORMATTER));
     }
 
+    /**
+     * Checks if the current PreferredTime object overlaps with the given PreferredTime object.
+     * If only overlaps on a point of time will still return true.
+     *
+     * @param other Another PreferredTime object to check if overlaps with.
+     */
     public boolean overlaps(PreferredTime other) {
-        return !(!end.isAfter(other.start) || !start.isBefore(other.end));
+        return !end.isBefore(other.start) && !start.isAfter(other.end);
     }
 
     @Override
