@@ -44,7 +44,14 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        person.getTags().forEach(tag -> {
+            builder.append("[");
+            builder.append(tag.tagName);
+            if (tag.tagValue != null) {
+                builder.append("=").append(tag.tagValue);
+            }
+            builder.append("] ");
+        });
         return builder.toString();
     }
 
