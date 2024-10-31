@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,6 +59,13 @@ public class AddressBookParser {
         commands.put(RemarkCommand.COMMAND_WORD, arguments -> new RemarkCommandParser().parse(arguments));
         commands.put(ShowCommand.COMMAND_WORD, arguments -> new ShowCommandParser().parse(arguments));
         commands.put(ListingAddCommand.COMMAND_WORD_PREFIX, arguments -> new ListingCommandsParser().parse(arguments));
+    }
+
+    /**
+     * Returns an unmodifiable set of command names currently registered.
+     */
+    public Set<String> getCommandNames() {
+        return Set.copyOf(commands.keySet());
     }
 
     /**
