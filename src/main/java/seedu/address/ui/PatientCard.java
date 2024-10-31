@@ -51,8 +51,12 @@ public class PatientCard extends UiPart<Region> {
         birthDate.setText(patient.getBirthdate().value);
         if (patient.getAppts().size() == 0) {
             appointmentDateTime.setText("No appointments currently");
+        } else if (patient.getMostRecentPastAppt() == null) {
+            appointmentDateTime.setText(patient.getLatestFutureAppt().toString());
+        } else if (patient.getLatestFutureAppt() == null) {
+            appointmentDateTime.setText(patient.getMostRecentPastAppt().toString());
         } else {
-            appointmentDateTime.setText(patient.getApptsString());
+            appointmentDateTime.setText(patient.getMostRecentPastAppt().toString() + "\n" + patient.getLatestFutureAppt().toString());
         }
     }
 }
