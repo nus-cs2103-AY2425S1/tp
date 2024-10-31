@@ -52,22 +52,6 @@ public class Participation {
         return test.matches(VALIDATION_REGEX);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Participation)) {
-            return false;
-        }
-
-        Participation otherParticipation = (Participation) other;
-        return this.student.equals(otherParticipation.student)
-                && this.tutorial.equals(otherParticipation.tutorial);
-    }
-
     /**
      * ensures the immutability of the class
      * @return a new List of attendance
@@ -88,16 +72,27 @@ public class Participation {
                                         && otherParticipation.getStudent().equals(getStudent());
     }
 
+
+
     @Override
     public String toString() {
-        return String.format("Attends: %s", tutorial.toString());
+        return String.format("%s attends: %s", student.getFullName(), tutorial.getSubject());
     }
 
-    /**
-     * Adds itself to the student and tutorial participation lists
-     */
-    public void addSelfToStudentTutorial() {
-        student.addParticipation(this);
-        tutorial.addParticipation(this);
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Participation)) {
+            return false;
+        }
+
+        Participation otherParticipation = (Participation) other;
+        return this.student.equals(otherParticipation.student)
+                && this.tutorial.equals(otherParticipation.tutorial);
     }
+
 }

@@ -4,12 +4,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.participation.Participation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,21 +24,19 @@ public class Person {
     // Data fields
     private Address address;
     private Payment payment;
-    private List<Participation> participationList;
     private Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Payment payment, List<Participation> participationList, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, payment, participationList, tags);
+                  Payment payment, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, payment, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.payment = payment;
-        this.participationList = participationList;
         this.tags.addAll(tags);
     }
 
@@ -64,9 +60,6 @@ public class Person {
         return payment;
     }
 
-    public List<Participation> getParticipation() {
-        return participationList;
-    }
     public String getFullName() {
         return name.fullName;
     }
@@ -103,9 +96,6 @@ public class Person {
         this.payment = changedPayment;
     }
 
-    public void setParticipationList(List<Participation> changedList) {
-        this.participationList = changedList;
-    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -113,33 +103,6 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Checks if the person already contains a participation
-     * @param participation the participation object to check
-     * @return true if it already contains the participation. false otherwise
-     */
-    public boolean hasParticipation(Participation participation) {
-        return participationList.stream()
-                .anyMatch(currentParticipation -> currentParticipation.isSameParticipation(participation));
-
-    }
-
-    /**
-     * Adds a participation object to the participation list
-     * @param participation object to be added
-     */
-    public void addParticipation(Participation participation) {
-        participationList.add(participation);
-    }
-
-    /**
-     * Removes a participation object from the participation list
-     * @param participation object to be removed
-     */
-    public void removeParticipation(Participation participation) {
-        participationList.remove(participation);
     }
 
     /**
@@ -177,14 +140,13 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && payment.equals(otherPerson.payment)
-                && participationList.equals(otherPerson.participationList)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, payment, participationList, tags);
+        return Objects.hash(name, phone, email, address, payment, tags);
     }
 
     @Override
@@ -195,7 +157,6 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("payment", payment)
-                .add("participation", participationList)
                 .add("tags", tags)
                 .toString();
     }

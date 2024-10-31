@@ -75,7 +75,7 @@ class ParticipationTest {
     @Test
     void toString_success() {
         Participation participation = new Participation(student, tutorial, attendanceList);
-        String expectedString = String.format("Attends: %s", tutorial.toString());
+        String expectedString = String.format("%s attends: %s", student.getFullName(), tutorial.getSubject());
         assertEquals(expectedString, participation.toString());
     }
 }

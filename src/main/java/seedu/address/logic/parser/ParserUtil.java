@@ -18,12 +18,13 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Fees;
+import seedu.address.model.person.FeesPaidByStudent;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
@@ -37,6 +38,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     private static final Logger logger = LogsCenter.getLogger(ParserUtil.class);
 
+    private static final Logger logger = LogsCenter.getLogger(ParserUtil.class);
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -45,6 +48,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
@@ -117,21 +121,23 @@ public class ParserUtil {
     public static Payment parsePayment(String payment) throws ParseException {
         String trimmedPayment = payment.trim();
         if (!Payment.isValidPayment(trimmedPayment)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
         }
         return new Payment(trimmedPayment);
     }
 
     /**
-     * Parses a {@code String fee} into an {@code Fees}.
+     * Parses a {@code String fee} into an {@code FeesPaidByStudent}.
      * Leading and trailing whitespaces will be trimmed, all characters are converted to lower case
      */
-    public static Fees parseFees(String payment) throws ParseException {
+    public static FeesPaidByStudent parseFees(String payment) throws ParseException {
         String trimmedFees = payment.trim().toLowerCase();
-        if (!Fees.isValidFees(trimmedFees)) {
-            throw new ParseException(Fees.MESSAGE_CONSTRAINTS);
+        if (!FeesPaidByStudent.isValidFees(trimmedFees)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
+            throw new ParseException(FeesPaidByStudent.MESSAGE_CONSTRAINTS);
         }
-        return new Fees(trimmedFees);
+        return new FeesPaidByStudent(trimmedFees);
     }
 
     /**
