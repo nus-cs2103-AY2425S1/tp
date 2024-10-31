@@ -89,8 +89,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT] [t/TAG]…​`
 
-- `PHONE_NUMBER` must only contain characters 0-9 and must be exactly 8 digits long. 
-- `EMAIL` should be in the format **local-part@domain** whereby the local-part contains only alphanumeric characters and some special characters like +_.- but may not start with the special characters. The domain name must end with a domain label at least 2 characters long and start and end with alphanumeric characters. The domain label should consist of alphanumeric characters separated only be hyphens, if any. 
+- `PHONE_NUMBER` must only contain characters 0-9 and must be exactly 8 digits long.
+- `EMAIL` should be in the format **local-part@domain** whereby the local-part contains only alphanumeric characters and some special characters like +_.- but may not start with the special characters. The domain name must end with a domain label at least 2 characters long and start and end with alphanumeric characters. The domain label should consist of alphanumeric characters separated only be hyphens, if any.
 - `AGE` must only contain characters 0-9 and must be 1-3 digits long.
 - `SEX` must only contain alphanumeric characters.
 - `APPOINTMENT` should be in the format **dd/MM/yyyy HHmm**.
@@ -167,7 +167,7 @@ Filter persons whose age and/or appointment dates are within the specified range
 
 Format: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`
 
-* The order of the keywords does not matter. 
+* The order of the keywords does not matter.
 * Only appointment dates and/or age group and/or tags can be used to filter.
 * Dates must be in `dd-MM-yyyy` format.
 * Tags can be specified multiple times.
@@ -300,9 +300,7 @@ Format: `export`
 
 
 ### Exiting the program : `exit`
-
 Exits the program.
-
 Format: `exit`
 
 ### Saving the data

@@ -280,8 +280,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * should be apt with technology and trained to be familiar with the software as their primary job
 
 **Value proposition**:
-Patient / Contact management systems might be outdated in GP clinics, introducing MediContact might improve user-friendliness. 
-MediContact also centralizes the details of patients at the clinic with a command line interface to enable efficient contact between patient and clinic. 
+Patient / Contact management systems might be outdated in GP clinics, introducing MediContact might improve user-friendliness.
+MediContact also centralizes the details of patients at the clinic with a command line interface to enable efficient contact between patient and clinic.
 Furthermore, it can provide easy categorisation and filtering of patients.
 
 
@@ -406,18 +406,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Technical: 
+1. Technical:
    - Should work on any *mainstream OS* as long as it has Java 17 or above installed.
    - Should work on both 32-bit and 64-bit environments.
 2. Performance:
    - Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
    - The response to any use action should become visible within 3 seconds.
    - Should not crash when the input is too long.
-3. Quality: 
+3. Quality:
    - Should be easy to learn for a novice who has never used CLI before.
    - The product is offered as a free downloadable application.
 
-Note to project: Security measures like encryption will not be implemented in this project 
+Note to project: Security measures like encryption will not be implemented in this project.
 
 ### Glossary
 
@@ -455,7 +455,7 @@ testers are expected to do more *exploratory* testing.
 1. Ensure data is saved
 
    1. Launch and close the app without carrying out any commands.
-    
+
    1. Re-launch the app.<br>
       Expected: List of contacts are the same as before.
 
@@ -472,7 +472,7 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `add n/Bryan Lim p/000 e/bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
       Expected: No contact is added to the list, error message regarding phone number should be shown.
-   
+
    5. Test case: `add n/Bryan Lim p/98765432 e/bryan a/5 Hilly Road b/23 s/Male`<br>
       Expected: No contact is added to the list, error message regarding email should be shown.
 
@@ -500,10 +500,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `clear`<br>
        Expected: Alert pop up confirming whether you want to clear the address book.
-    
+
     2. Test case: Click on `OKAY`<br>
        Expected: Address book is cleared
- 
+
     3. Test case: Click on `Cancel`<br>
        Expected: Address book is unchanged
 
@@ -552,7 +552,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `edit John Doe n/Jane Doe`<br>
        Expected: Error message reflecting provided name is invalid
- 
+
     3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
        Expected: Similar to previous results.
 
@@ -687,7 +687,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `star John`<br>
        Expected: Contact with exact name `John` is starred
-   
+
     4. Test case: `star 0`, `star -1`, `star x` (where x is larger than the list size)<br>
        Expected: Error message reflecting index provided is invalid
 
