@@ -46,9 +46,15 @@
           </padding>
         </StackPane>
 
+        <StackPane fx:id="personCountPlaceholder" VBox.vgrow="NEVER" styleClass="pane-with-border">
+          <padding>
+            <Insets top="5" right="10" bottom="0" left="10" />
+          </padding>
+        </StackPane>
+
         <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets top="0" right="10" bottom="10" left="10" />
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
