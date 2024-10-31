@@ -21,11 +21,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         String personNames = args.trim();
-        try {
-            Name name = ParserUtil.parseName(personNames);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        if (!Name.isValidName(personNames)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteCommand.MESSAGE_USAGE));
         }
         if (personNames.isEmpty()) {
             throw new ParseException(

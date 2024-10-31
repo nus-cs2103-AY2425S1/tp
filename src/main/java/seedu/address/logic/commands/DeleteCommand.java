@@ -41,14 +41,12 @@ public class DeleteCommand extends Command {
         model.updateFilteredPersonList(predicate);
         if (model.getDisplayPersons().isEmpty()) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND + "\n"
-                    + "Use the list command to see all clients!");
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
 
         }
         if (model.getDisplayPersons().size() > 1) {
             model.updateFilteredPersonList(predicate);
-            throw new CommandException(Messages.MESSAGE_VAGUE_DELETE + "\n"
-                    + "or use / to indicate the end of an EXACT name");
+            throw new CommandException(Messages.MESSAGE_VAGUE_DELETE);
         }
         Person personToDelete = model.getDisplayPersons().get(0);
         model.deletePerson(personToDelete);
