@@ -41,26 +41,73 @@ public class DeleteEmergencyContactCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Executes the command to delete the emergency contact of a specified person.
+     *
+     * @param model The model to operate on.
+     * @return A CommandResult with the appropriate success or error message.
+     * @throws CommandException if the specified index is out of bounds or if no emergency contact exists.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+
+        validateIndexWithinBounds(lastShownList);
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        if (personToEdit.getEmergencyContact() == null
-                || (personToEdit.getEmergencyContact().contactName.equals(new Name(NO_NAME))
-                && personToEdit.getEmergencyContact().contactNumber.equals(new Phone(NO_NUMBER)))) {
+
+        if (isNoEmergencyContact(personToEdit)) {
             return new CommandResult(generateNoEmergencyContactMessage(personToEdit));
         }
 
-        EmergencyContact toBeDeleted = personToEdit.getEmergencyContact();
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), new EmergencyContact(new Name(NO_NAME), new Phone(NO_NUMBER)),
-                personToEdit.getTags(), personToEdit.getPriorityLevel());
-        model.setPerson(personToEdit, editedPerson);
+        EmergencyContact oldEmergencyContact = personToEdit.getEmergencyContact();
+        Person editedPerson = createPersonWithoutEmergencyContact(personToEdit);
+
+        model.updatePersonAndTasks(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(generateSuccessMessage(editedPerson, toBeDeleted));
+
+        return new CommandResult(generateSuccessMessage(editedPerson, oldEmergencyContact));
+    }
+
+    /**
+     * Validates that the specified index is within the bounds of the displayed person list.
+     *
+     * @param lastShownList The list of persons currently displayed.
+     * @throws CommandException if the index is out of bounds.
+     */
+    private void validateIndexWithinBounds(List<Person> lastShownList) throws CommandException {
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+    }
+
+    /**
+     * Checks if a person does not have an emergency contact.
+     *
+     * @param person The person whose emergency contact status is being checked.
+     * @return true if no emergency contact exists or the contact details are empty; false otherwise.
+     */
+    private boolean isNoEmergencyContact(Person person) {
+        EmergencyContact contact = person.getEmergencyContact();
+        return contact == null || (contact.getName().equals(new Name(NO_NAME))
+                && contact.getNumber().equals(new Phone(NO_NUMBER)));
+    }
+
+    /**
+     * Creates a copy of the given person with an empty emergency contact.
+     *
+     * @param personToEdit The original person to edit.
+     * @return A new Person object with an empty emergency contact.
+     */
+    private Person createPersonWithoutEmergencyContact(Person personToEdit) {
+        return new Person(
+                personToEdit.getName(),
+                personToEdit.getPhone(),
+                personToEdit.getEmail(),
+                personToEdit.getAddress(),
+                new EmergencyContact(new Name(NO_NAME), new Phone(NO_NUMBER)),
+                personToEdit.getTags(),
+                personToEdit.getPriorityLevel()
+        );
     }
 
     /**

@@ -54,27 +54,85 @@ public class EmergencyContactCommand extends Command {
         this.emergencyContact = emergencyContact;
     }
 
+    /**
+     * Edits a person's emergency contact information.
+     *
+     * @param model The model to operate on.
+     * @return CommandResult with success or error message.
+     * @throws CommandException if index is out of bounds or emergency contact parameters are invalid.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        validateIndexWithinBounds(lastShownList);
+        validateEmergencyContactParameters();
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        if (isExistingEmergencyContact(personToEdit)) {
+            return new CommandResult(generateEmergencyContactExistsMessage(personToEdit));
+        }
+
+        Person editedPerson = createEditedPerson(personToEdit);
+        model.updatePersonAndTasks(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    /**
+     * Validates that the specified index is within the bounds of the displayed person list.
+     *
+     * @param lastShownList The list of persons currently displayed.
+     * @throws CommandException if the index is out of bounds.
+     */
+    private void validateIndexWithinBounds(List<Person> lastShownList) throws CommandException {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if (emergencyContact.contactNumber.equals(new Phone(NO_NUMBER))
-                || emergencyContact.contactName.equals(new Name(NO_NAME))) {
+    }
+
+    /**
+     * Validates that the emergency contact parameters are non-empty.
+     *
+     * @throws CommandException if the emergency contact parameters are invalid (empty contact name or number).
+     */
+    private void validateEmergencyContactParameters() throws CommandException {
+        if (emergencyContact.getNumber().equals(new Phone(NO_NUMBER))
+                || emergencyContact.getName().equals(new Name(NO_NAME))) {
             throw new CommandException(MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS);
         }
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        if (personToEdit.getEmergencyContact() != null
-                && !personToEdit.getEmergencyContact().contactName.equals(new Name(NO_NAME))
-                && !personToEdit.getEmergencyContact().contactNumber.equals(new Phone(NO_NUMBER))) {
-            return new CommandResult(generateEmergencyContactExistsMessage(personToEdit));
-        }
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), emergencyContact, personToEdit.getTags(), personToEdit.getPriorityLevel());
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    /**
+     * Checks if a person already has a non-empty emergency contact.
+     *
+     * @param personToEdit The person whose emergency contact is being checked.
+     * @return true if an emergency contact already exists and is non-empty; false otherwise.
+     */
+    private boolean isExistingEmergencyContact(Person personToEdit) {
+        EmergencyContact contact = personToEdit.getEmergencyContact();
+        return contact != null && !contact.getName().equals(new Name(NO_NAME))
+                && !contact.getNumber().equals(new Phone(NO_NUMBER));
+    }
+
+    /**
+     * Creates an edited person with the specified emergency contact while retaining other attributes.
+     *
+     * @param personToEdit The original person to edit.
+     * @return A new Person object with updated emergency contact details.
+     */
+    private Person createEditedPerson(Person personToEdit) {
+        return new Person(
+                personToEdit.getName(),
+                personToEdit.getPhone(),
+                personToEdit.getEmail(),
+                personToEdit.getAddress(),
+                emergencyContact,
+                personToEdit.getTags(),
+                personToEdit.getPriorityLevel()
+        );
     }
 
     /**
