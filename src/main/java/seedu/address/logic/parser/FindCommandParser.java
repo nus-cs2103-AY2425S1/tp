@@ -23,24 +23,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        // Check if the user provided the /h prefix for Telegram handle search
-        if (trimmedArgs.startsWith("/h ")) {
-            // Remove the "/h" prefix and search by Telegram handle
-            String handleArgs = trimmedArgs.substring(3).trim();
-            if (handleArgs.isEmpty()) {
+        if (trimmedArgs.startsWith("/h")) {
+            if (trimmedArgs.length() <= 3) {
                 throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
+
+            String handleArgs = trimmedArgs.substring(3).trim();
             String[] handleKeywords = handleArgs.split("\\s+");
             return new FindCommand(new TelegramHandleContainsKeywordsPredicate(Arrays.asList(handleKeywords)));
         }
 
-        // If no prefix is provided, perform a name search
         String[] nameKeywords = trimmedArgs.split("\\s+");
         return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
+
 
 }
