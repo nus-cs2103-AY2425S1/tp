@@ -57,7 +57,7 @@ public class VersionedAddressBookTest {
         assertEquals(addressBook2, versionedAddressBook.getAddressBookStateList().get(1));
 
         versionedAddressBook.undoAddressBook(addressBook2);
-        assertEquals(addressBook1, addressBook2);  // Check if the current state is reverted to addressBook1
+        assertEquals(addressBook1, addressBook2); // Check if the current state is reverted to addressBook1
     }
 
     @Test
