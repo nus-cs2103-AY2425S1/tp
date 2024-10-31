@@ -39,6 +39,6 @@ class EmptyAge extends Age {
      */
     @Override
     public String getValueForUI() {
-        return "No age provided";
+        return "-";
     }
 }

@@ -115,7 +115,11 @@ public class Income implements OptionalField {
      */
     @Override
     public String getValueForUI() {
-        return toString().toUpperCase();
+        if (value == IncomeGroup.NONE) {
+            return "No income";
+        } else {
+            return toString().substring(0, 1).toUpperCase() + toString().substring(1) + " income";
+        }
     }
 
     @Override
