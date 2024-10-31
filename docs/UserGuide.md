@@ -162,6 +162,19 @@ Examples:
 * `new Sumo Bot Festival`
 * `new RC Horror Night`
 
+### Viewing an Event: `view`
+
+View the list of Persons in an Event.
+
+Format: `view EVENT NAME`
+
+* Event name cannot be blank
+* Event must exist in PlanPal.
+
+Examples:
+* `view Sumo Bot Festival`
+* `view RC Horror Night`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -219,7 +232,8 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAME] [r/ROLE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**new** | `new EVENT NAME` <br> e.g. `new Sumo Bot Festival`
+**New** | `new EVENT NAME` <br> e.g. `new Sumo Bot Festival`
+**View** | `view EVENT NAME` <br> e.g. `view Sumo Bot Festival`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
