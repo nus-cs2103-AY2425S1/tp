@@ -739,3 +739,55 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `view somebody`<br>
        Expected: Error message reflecting name provided is invalid.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+### Difficulty Level
+The project was moderately challenging due to the complexity of managing multiple entity types and integrating various functionalities. Unlike AB3, which deals with a single entity type (Person), our project handles multiple entities such as Appointments, and Notes, increasing the complexity of the data model and interactions.
+
+### Challenges Faced
+1. **Data Management**: Handling multiple entity types required a robust data model and efficient data handling mechanisms.
+2. **User Interface**: Designing a user-friendly interface that integrates seamlessly with the underlying logic and data models.
+3. **Integration with JavaFX**: Ensuring smooth integration with JavaFX for the UI components, especially given the non-modular setup.
+4. **Performance Optimization**: Ensuring the application performs efficiently with a large dataset (up to 1000 contacts) without noticeable sluggishness.
+5. **Testing**: Comprehensive testing to ensure all functionalities work as expected and the application is robust against invalid inputs.
+
+### Effort Required
+The project required significant effort in the following areas:
+1. **Design and Architecture**: Planning the architecture to handle multiple entities and their interactions.
+2. **Implementation**: Coding the functionalities, ensuring they work together seamlessly.
+3. **Testing**: Writing and executing test cases to ensure the application is bug-free and performs well.
+4. **Documentation**: Creating detailed documentation to help future developers understand the system and its components.
+
+### Achievements
+1. **Robust Data Model**: Successfully designed and implemented a data model that handles multiple entity types efficiently.
+2. **User-Friendly Interface**: Developed a user-friendly interface that integrates well with the underlying logic.
+3. **Performance**: Optimized the application to handle large datasets without performance issues.
+4. **Comprehensive Testing**: Ensured the application is robust and handles invalid inputs gracefully.
+
+### Reuse and Effort Savings
+A significant part of the effort was saved through the reuse of components from the AB3 project:
+1. **UI Components**: Reused and adapted UI components from AB3, saving time on designing and implementing new UI elements.
+2. **Command Parsing**: Leveraged the command parsing logic from AB3, adapting it to handle the additional commands required for our project.
+3. **Storage**: Utilized the storage mechanisms from AB3, modifying them to handle the additional data types.<br>
+
+The reuse of these components allowed us to focus more on the unique aspects of our project, such as handling multiple entity types and optimizing performance, thereby saving approximately 20% of the total effort.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+### Team size: 5
+
+1. Ritvi
+2. Ritvi
+3. Lynette
+4. Lynette
+5. Nasya
+6. Nasya
+7. Kelly
+8. Kelly
+9. Otto
+10. Otto
