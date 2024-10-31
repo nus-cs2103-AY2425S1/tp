@@ -233,6 +233,22 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+### Allergy Feature
+
+The allergy feature allows users to add, edit and view allergies for each person in the address book.
+
+### Implementation
+
+The 'Allergy' class represents a persons Allergy.
+
+### Tag Feature
+
+The tag feature allows users to add, edit, and view tags for each person in the address book.
+
+### Implementation
+
+A tag is represented by the 'Tag' class and 'JsonAdaptedTag' is used for JSON serialization and deserialization.
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
