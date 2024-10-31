@@ -34,10 +34,11 @@ public class DeleteTaskCommand extends Command {
     public static final String COMMAND_WORD = "deletetask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the student and index number used in the displayed task list.\n"
+            + ": Deletes the task identified by the student's full name and "
+            + "the task's index number (in the displayed task list).\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME (must be exact name of an existing student) "
-            + PREFIX_TASK_INDEX + "TASK_INDEX (should be a positive integer)\n"
+            + PREFIX_NAME + "NAME "
+            + PREFIX_TASK_INDEX + "TASK_INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TASK_INDEX + "1";

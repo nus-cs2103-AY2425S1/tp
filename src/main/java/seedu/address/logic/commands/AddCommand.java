@@ -23,7 +23,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE_NUMBER "
@@ -33,13 +33,12 @@ public class AddCommand extends Command {
             + "[" + PREFIX_SUBJECT + "SUBJECT]... "
             + "[" + PREFIX_LESSON_TIME + "LESSON_TIME]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_NAME + "James Ho "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMERGENCY_CONTACT + "93838420 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_LEVEL + "P5 "
+            + PREFIX_LEVEL + "S1 NT "
             + PREFIX_SUBJECT + "MATH "
-            + PREFIX_SUBJECT + "CHEMISTRY "
             + PREFIX_LESSON_TIME + "SUN-11:00-13:00";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";

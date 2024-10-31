@@ -78,23 +78,23 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 
 ### Command Table
 
-| Index |        Action         |                                                        Format                                                        |                                          Example(s)                                           |
-|:-----:|:---------------------:|:--------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------:|
-|   1   |          Add          |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`         | `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 l/S1 NT s/MATH s/CHEMISTRY` |
-|   2   |        Delete         |                                                    `delete INDEX`                                                    |                                          `delete 2`                                           |
-|   3   |        Update         | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​` |                           `update Alex Yeoh n/James Lee e/99999999`                           |
-|   4   |         Find          |                         `find n/KEYWORDS` or `find l/LEVEL` or `find s/SUBJECT [SUBJECT]…​`                          |                    `find n/Alex David` or `find l/S2 NA` or `find s/MATH`                     |
-|   5   |         List          |                                                        `list`                                                        |                                            `list`                                             |
-|   6   |          Tag          |                                         `tag n/NAME [l/LEVEL] [s/SUBJECT]…​`                                         |                                `tag n/John Doe l/S1 NT s/MATH`                                |
-|   7   |      Record Note      |                                                `note n/NAME nt/NOTE`                                                 |                        `note n/John Doe nt/Doing well in all subjects`                        |
-|   8   | View Specific Student |                                                    `view n/NAME`                                                     |                                       `view n/John Doe`                                       |
-|   9   |       Add Task        |                                 `addtask n/NAME t/TASK_DESCRIPTION d/TASK_DEADLINE`                                  |                         `addtask n/John Doe t/Mark CA1 d/2024-10-15`                          |
-|  10   |      Delete Task      |                                          `deletetask n/NAME ti/TASK_INDEX`                                           |                                 `deletetask n/John Doe ti/1`                                  |
-|  11   |      Update Task      |                       `updatetask n/NAME ti/TASK_INDEX [t/TASK_DESCRIPTION] [d/TASK_DEADLINE]`                       |                        `updatetask n/Joht Doe ti/2 t/Mark assignment`                         |
-|  12   |    View All Tasks     |                                                     `viewtasks`                                                      |                                          `viewtasks`                                          |
-|  13   |         Clear         |                                                       `clear`                                                        |                                            `clear`                                            |
-|  14   |         Help          |                                                        `help`                                                        |                                            `help`                                             |
-|  15   |         Exit          |                                                        `exit`                                                        |                                            `exit`                                             |
+| Index |        Action         |                                                        Format                                                        |                                               Example(s)                                               |
+|:-----:|:---------------------:|:--------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:|
+|   1   |          Add          |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`         | `add n/James Ho p/98765432 e/93838420 a/311, Clementi Ave 2, #02-25 l/S1 NT s/MATH lt/SUN-11:00-13:00` |
+|   2   |        Delete         |                                                    `delete INDEX`                                                    |                                               `delete 2`                                               |
+|   3   |        Update         | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​` |                               `update Alex Yeoh n/James Lee e/99999999`                                |
+|   4   |         Find          |                         `find n/KEYWORDS` or `find l/LEVEL` or `find s/SUBJECT [SUBJECT]…​`                          |                         `find n/Alex David` or `find l/S2 NA` or `find s/MATH`                         |
+|   5   |         List          |                                                        `list`                                                        |                                                 `list`                                                 |
+|   6   |          Tag          |                                         `tag n/NAME [l/LEVEL] [s/SUBJECT]…​`                                         |                                    `tag n/John Doe l/S1 NT s/MATH`                                     |
+|   7   |      Record Note      |                                                `note n/NAME nt/NOTE`                                                 |                            `note n/John Doe nt/Doing well in all subjects`                             |
+|   8   | View Specific Student |                                                    `view n/NAME`                                                     |                                           `view n/John Doe`                                            |
+|   9   |       Add Task        |                                 `addtask n/NAME t/TASK_DESCRIPTION d/TASK_DEADLINE`                                  |                          `addtask n/John Doe t/Mark assignment d/2024-12-25`                           |
+|  10   |      Delete Task      |                                          `deletetask n/NAME ti/TASK_INDEX`                                           |                                      `deletetask n/John Doe ti/1`                                      |
+|  11   |      Update Task      |                       `updatetask n/NAME ti/TASK_INDEX [t/TASK_DESCRIPTION] [d/TASK_DEADLINE]`                       |                              `updatetask n/John Doe ti/2 t/Mark homework`                              |
+|  12   |    View All Tasks     |                                                     `viewtasks`                                                      |                                              `viewtasks`                                               |
+|  13   |         Clear         |                                                       `clear`                                                        |                                                `clear`                                                 |
+|  14   |         Help          |                                                        `help`                                                        |                                                 `help`                                                 |
+|  15   |         Exit          |                                                        `exit`                                                        |                                                 `exit`                                                 |
 
 ### Parameter Table
 
@@ -163,7 +163,7 @@ Adds a student to the address book.
 
 **Examples:**
 * `add n/John Doe p/98765432 e/99999999 a/John street, block 123, #01-01`
-* `add n/Betsy Crowe s/MATH e/88888888 a/Newgate Prison p/1234567 l/S1 NA s/ENGLISH`
+* `add n/Betsy Crowe s/MATH e/88888888 a/Newgate Prison p/1234567 l/S1 NA s/ENGLISH lt/SAT-11:00-13:00`
 
 ***
 
@@ -283,7 +283,7 @@ Adds a task to the task list of the specified student.
 * Deadline must be a valid date in the format of `YYYY-MM-DD`
 
 **Examples:**
-* `addtask n/John Doe t/Mark CA1 d/2024-10-15`
+* `addtask n/John Doe t/Mark assignment d/2024-12-25`
 * `addtask n/Jane Smith t/Handle MC d/2024-02-13`
 
 ***
@@ -310,7 +310,7 @@ Updates the details of an existing task in a student's task list.
 * Existing values will be updated to the input values.
 
 **Examples:**
-* `updatetask n/John Doe ti/2 t/Mark assignment` updates the 2nd task in John Doe's task list to be `Mark assignment`
+* `updatetask n/John Doe ti/2 t/Mark homework` updates the 2nd task in John Doe's task list to be `Mark homework`
 * `updatetask n/Jane Smith ti/1 t/Handle MC d/2024-10-13` updates the 1st task in Jane Smith's task list to be `Handle MC` with a deadline `2024-10-13`
 
 ***

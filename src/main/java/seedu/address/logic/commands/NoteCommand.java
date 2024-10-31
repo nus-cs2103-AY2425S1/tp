@@ -29,7 +29,7 @@ public class NoteCommand extends Command {
             + PREFIX_NOTE + "NOTE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_NOTE + "Very mischievous.";
+            + PREFIX_NOTE + "Doing well in all subjects";
 
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added note to Student: %1$s";
     public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed note from Student: %1$s";

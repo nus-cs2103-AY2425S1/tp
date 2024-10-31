@@ -45,7 +45,7 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the student identified "
             + "by their full name in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: NAME (full name) "
+            + "Parameters: NAME "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE_NUMBER] "
             + "[" + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_CONTACT] "
@@ -53,8 +53,9 @@ public class UpdateCommand extends Command {
             + "[" + PREFIX_LEVEL + "LEVEL] "
             + "[" + PREFIX_SUBJECT + "SUBJECT]... "
             + "[" + PREFIX_LESSON_TIME + "LESSON_TIME]...\n"
-            + "Example: " + COMMAND_WORD + " Cristiano Ronaldo "
-            + PREFIX_PHONE + "91234567 ";
+            + "Example: " + COMMAND_WORD + " Alex Yeoh "
+            + PREFIX_NAME + "James Lee "
+            + PREFIX_PHONE + "99999999 ";
 
     public static final String MESSAGE_UPDATE_STUDENT_SUCCESS = "Updated Student: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to be updated must be provided.";
