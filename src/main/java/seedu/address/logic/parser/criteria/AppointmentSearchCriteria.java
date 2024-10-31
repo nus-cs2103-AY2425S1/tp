@@ -3,6 +3,7 @@ package seedu.address.logic.parser.criteria;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
@@ -39,8 +40,10 @@ public class AppointmentSearchCriteria implements SearchCriteria {
      */
     @Override
     public boolean test(Person person) {
-        Set<Appointment> appointments = person.getAppointments();
-        return appointments.stream().anyMatch(this::test);
+        Set<Appointment> matchingAppointments = person.getAppointments()
+                .stream().filter(this::test).collect(Collectors.toSet());
+        person.setFilteredAppointments(matchingAppointments);
+        return !matchingAppointments.isEmpty();
     }
 
     /**
