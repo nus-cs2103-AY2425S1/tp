@@ -47,6 +47,11 @@ public class TaskDeadline {
         boolean isValidDeadline;
         try {
             LocalDate parsedDate = LocalDate.parse(test, formatter);
+
+            // Check if the parsed date, when formatted back to a string, matches the original input
+            // This is crucial to validate that the input was a valid date representation.
+            // For example, the input "2024-02-31" will be parsed to "2024-02-29"
+            // (as February only has 29 days in leap years), and thus will not equal the original input.
             isValidDeadline = parsedDate.format(formatter).equals(test);
         } catch (DateTimeParseException e) {
             isValidDeadline = false;

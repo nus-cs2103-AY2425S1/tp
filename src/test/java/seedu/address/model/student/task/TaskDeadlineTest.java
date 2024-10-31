@@ -23,6 +23,12 @@ public class TaskDeadlineTest {
         // null deadline
         assertThrows(NullPointerException.class, () -> TaskDeadline.isValidTaskDeadline(null));
 
+        // valid date for comparison
+        assertTrue(TaskDeadline.isValidTaskDeadline("2024-02-29")); // Should be true in a leap year
+        assertTrue(TaskDeadline.isValidTaskDeadline("2023-02-28"));
+        assertTrue(TaskDeadline.isValidTaskDeadline("2026-12-31"));
+        assertTrue(TaskDeadline.isValidTaskDeadline("2024-01-01"));
+
         // invalid deadline
         assertFalse(TaskDeadline.isValidTaskDeadline(""));
         assertFalse(TaskDeadline.isValidTaskDeadline(" "));
@@ -30,9 +36,13 @@ public class TaskDeadlineTest {
         assertFalse(TaskDeadline.isValidTaskDeadline("2024"));
         assertFalse(TaskDeadline.isValidTaskDeadline("2024-1-1"));
 
-        // valid deadline
-        assertTrue(TaskDeadline.isValidTaskDeadline("2026-12-31"));
-        assertTrue(TaskDeadline.isValidTaskDeadline("2024-01-01"));
+        // invalid date: February 31 does not exist
+        assertFalse(TaskDeadline.isValidTaskDeadline("2024-02-31")); // Should be false
+
+        // other invalid dates
+        assertFalse(TaskDeadline.isValidTaskDeadline("2024-04-31")); // April has only 30 days
+        assertFalse(TaskDeadline.isValidTaskDeadline("2024-06-31")); // June has only 30 days
+        assertFalse(TaskDeadline.isValidTaskDeadline("2024-09-31")); // September has only 30 days
     }
 
     @Test
