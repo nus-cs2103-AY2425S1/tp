@@ -43,7 +43,7 @@ public class DeleteGroupCommandTest {
         String validGroupName = "test";
         DeleteGroupCommand command = new DeleteGroupCommand(validGroupName);
 
-        assertCommandSuccess(command, model, String.format(DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS, validGroupName),
-                expectedModel);
+        assertCommandSuccess(command, model,
+                String.format(DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS, validGroupName), expectedModel);
     }
 }
