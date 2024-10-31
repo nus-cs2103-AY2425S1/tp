@@ -34,6 +34,7 @@ public class ArchiveCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
+        model.clearAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, archivePath));
     }
 

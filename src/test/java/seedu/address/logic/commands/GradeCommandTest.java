@@ -221,6 +221,10 @@ public class GradeCommandTest {
         public void saveAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void clearAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
 
     }
 
