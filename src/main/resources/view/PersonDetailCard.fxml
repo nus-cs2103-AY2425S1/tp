@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.VBox?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane"
       xmlns="http://javafx.com/javafx/17">
@@ -39,17 +41,19 @@
                 <VBox>
                     <Label styleClass="label-title" text="Home Address"/>
                     <HBox spacing="4" VBox.vgrow="ALWAYS">
-                        <Label fx:id="address" styleClass="label-content" text="\$address"/>
-                        <Label fx:id="addressLink" styleClass="link" text="(click to view map)"/>
+                        <TextFlow VBox.vgrow="ALWAYS">
+                            <Text fx:id="address" styleClass="label-content" text="\$address"/>
+                            <Label fx:id="addressLink" styleClass="link" text="(click to view map)"/>
+                        </TextFlow>
                     </HBox>
                 </VBox>
-            </VBox>
-            <VBox fx:id="logsList" minWidth="380" styleClass="pane" >
-                <padding>
-                    <Insets left="10.0" top="10.0"/>
-                </padding>
-                <StackPane fx:id="logsListPanelPlaceHolder" styleClass="pane-without-border"
-                           VBox.vgrow="ALWAYS"/>
+                <VBox fx:id="logsList" minWidth="380" styleClass="pane" >
+                    <padding>
+                        <Insets left="10.0" top="10.0"/>
+                    </padding>
+                    <StackPane fx:id="logsListPanelPlaceHolder" styleClass="pane-without-border"
+                               VBox.vgrow="ALWAYS"/>
+                </VBox>
             </VBox>
         </VBox>
         <rowConstraints>
