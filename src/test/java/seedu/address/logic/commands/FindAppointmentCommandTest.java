@@ -4,23 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.FindAppointmentCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.criteria.AppointmentSearchCriteria;
 import seedu.address.logic.parser.criteria.SearchCriteria;
 import seedu.address.model.Model;
@@ -141,7 +134,7 @@ public class FindAppointmentCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
 
         assertCommandSuccess(command, model,
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredPersonList().size()),
                 expectedModel);
         assertEquals(model.getFilteredPersonList().size(), expectedModel.getFilteredPersonList().size());
     }
