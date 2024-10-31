@@ -55,13 +55,13 @@ public class AppointmentCommand extends Command {
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> nric.equals(person.getNric()))
                 .findFirst();
-
+        
         if (personWithMatchingNric.isPresent()) {
             Person personToEdit = personWithMatchingNric.get();
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
                     personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(),
-                    new Appointment(this.appointmentString));
+                    new Appointment(this.appointmentString), personToEdit.getLogEntries());
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult("Set appointment for " + personToEdit.getName() + " on " + this.appointmentString);

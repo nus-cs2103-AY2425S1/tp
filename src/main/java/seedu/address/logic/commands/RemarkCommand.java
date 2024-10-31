@@ -32,7 +32,6 @@ public class RemarkCommand extends Command {
             + PREFIX_REMARK + "Likes to swim.";
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
-    //private final Index index;
     private final Nric nric;
     private final Remark remark;
 
@@ -44,7 +43,6 @@ public class RemarkCommand extends Command {
     public RemarkCommand(Nric nric, Remark remark) {
         requireAllNonNull(nric, remark);
 
-        //this.index = index;
         this.nric = nric;
         this.remark = remark;
     }
@@ -61,7 +59,8 @@ public class RemarkCommand extends Command {
             Person personToEdit = personWithMatchingNric.get();
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
-                    personToEdit.getAddress(), remark, personToEdit.getTags(), personToEdit.getAppointment());
+                    personToEdit.getAddress(), remark, personToEdit.getTags(), personToEdit.getAppointment(),
+                    personToEdit.getLogEntries());
 
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

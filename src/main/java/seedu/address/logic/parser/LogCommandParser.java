@@ -56,9 +56,9 @@ public class LogCommandParser implements Parser<LogCommand> {
         String dateTimeString = argParts[1] + " " + argParts[2];
         LocalDateTime dateTime;
         try {
-            dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("dd-MM-yy HH:mm"));
+            dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         } catch (Exception e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LogCommand.MESSAGE_USAGE));
         }
 
         // Join the remaining parts to form the logString

@@ -20,12 +20,27 @@ public class LogList {
     }
 
     /**
+     * Constructs a {@code LogList} with the given log entries.
+     *
+     * @param logEntries The list of log entries to initialize the log list with.
+     */
+    public LogList(List<String> logEntries) {
+        logs = new ArrayList<>();
+        for (String logEntry : logEntries) {
+            logs.add(new Log(logEntry));
+        }
+    }
+
+    /**
      * Adds a log entry to the list.
      *
      * @param log The log entry to add.
      */
-    public void addLog(Log log) {
-        logs.add(log);
+    public LogList addLog(Log log) {
+        LogList newList = new LogList();
+        newList.logs.addAll(logs);
+        newList.logs.add(log);
+        return newList;
     }
 
     /**
