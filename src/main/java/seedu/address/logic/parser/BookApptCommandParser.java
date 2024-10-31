@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.ApptCommand;
+import seedu.address.logic.commands.BookApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Nric;
@@ -17,7 +16,7 @@ import seedu.address.model.patient.Nric;
  * Parses input arguments and creates a new ApptCommand object
  * @throws ParseException
  */
-public class ApptCommandParser implements Parser<ApptCommand> {
+public class BookApptCommandParser implements Parser<BookApptCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ApptCommand
@@ -26,25 +25,25 @@ public class ApptCommandParser implements Parser<ApptCommand> {
      * @return ApptCommand
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ApptCommand parse(String args) throws ParseException {
+    public BookApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME,
-            PREFIX_HEALTHSERVICE, PREFIX_NRIC);
+            PREFIX_HEALTHSERVICE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_HEALTHSERVICE, PREFIX_NRIC)
-            || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_HEALTHSERVICE)
+            || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ApptCommand.MESSAGE_USAGE));
+                BookApptCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATETIME, PREFIX_HEALTHSERVICE, PREFIX_NRIC);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATETIME, PREFIX_HEALTHSERVICE);
         String dateTime = argMultimap.getValue(PREFIX_DATETIME).get();
         String healthService = argMultimap.getValue(PREFIX_HEALTHSERVICE).get();
 
         Appt appt = ParserUtil.parseSingleAppt(dateTime, healthService);
-        Nric nric = new Nric(argMultimap.getValue(PREFIX_NRIC).get());
+        Nric nric = ParserUtil.parseNric(argMultimap.getPreamble());
 
-        return new ApptCommand(appt, nric);
+        return new BookApptCommand(nric, appt);
     }
 
     /**

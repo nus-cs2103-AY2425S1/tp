@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
@@ -27,18 +26,18 @@ public class DeleteApptCommandParser implements Parser<DeleteApptCommand> {
     public DeleteApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_NRIC);
+                ArgumentTokenizer.tokenize(args, PREFIX_DATETIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_NRIC)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME)
+                || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteApptCommand.MESSAGE_USAGE));
         }
 
         LocalDateTime apptDateTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_DATETIME).get(),
                 Appt.FORMATTER);
-        Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        Nric nric = ParserUtil.parseNric(argMultimap.getPreamble());
 
-        return new DeleteApptCommand(apptDateTime, nric);
+        return new DeleteApptCommand(nric, apptDateTime);
     }
 
     /**

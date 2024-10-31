@@ -35,7 +35,7 @@ public class DeleteApptCommand extends Command {
      * @param apptDateTime
      * @param nric
      */
-    public DeleteApptCommand(LocalDateTime apptDateTime, Nric nric) {
+    public DeleteApptCommand(Nric nric, LocalDateTime apptDateTime) {
         this.apptDateTime = apptDateTime;
         this.nric = nric;
     }
