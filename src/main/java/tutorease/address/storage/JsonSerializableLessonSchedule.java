@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.model.LessonSchedule;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.lesson.Lesson;
 
@@ -36,7 +37,7 @@ public class JsonSerializableLessonSchedule {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableLessonSchedule}.
      */
-    public JsonSerializableLessonSchedule(LessonSchedule source) {
+    public JsonSerializableLessonSchedule(ReadOnlyLessonSchedule source) {
         this.lessons.addAll(source.getLessonList().stream().map(JsonAdaptedLesson::new).collect(Collectors.toList()));
     }
 

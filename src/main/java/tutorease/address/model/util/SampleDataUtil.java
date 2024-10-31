@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import tutorease.address.model.LessonSchedule;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.TutorEase;
 import tutorease.address.model.person.Address;
@@ -54,7 +55,7 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
-    public static LessonSchedule getSampleLessonSchedule() {
+    public static ReadOnlyLessonSchedule getSampleLessonSchedule() {
         return new LessonSchedule();
     }
 
