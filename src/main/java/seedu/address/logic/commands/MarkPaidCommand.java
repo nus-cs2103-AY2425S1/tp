@@ -14,7 +14,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.participation.Participation;
-import seedu.address.model.person.FeesPaidByStudent;
+import seedu.address.model.person.Fees;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 
@@ -25,21 +25,21 @@ public class MarkPaidCommand extends Command {
     public static final String COMMAND_WORD = "markpaid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Records amount of feesPaidByStudent the student has paid\n"
+            + ": Records amount of fees the student has paid\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_PAYMENT + "PAYMENT\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PAYMENT + "200";
-    public static final String MESSAGE_MARKED_PAID_SUCCESS = "FeesPaidByStudent updated for student %1$s \n%2$s";
+    public static final String MESSAGE_MARKED_PAID_SUCCESS = "Fees updated for student %1$s \n%2$s";
 
     private static final Logger logger = LogsCenter.getLogger(MarkPaidCommand.class);
     private final Index targetIndex;
-    private final FeesPaidByStudent feesPaid;
+    private final Fees feesPaid;
 
     /**
      * Marks whether an existing person has paid their feesPaidByStudent for the month
      * @param targetIndex index of the student to mark payment based on the displayed list
      */
-    public MarkPaidCommand(Index targetIndex, FeesPaidByStudent feesPaid) {
+    public MarkPaidCommand(Index targetIndex, Fees feesPaid) {
         this.targetIndex = targetIndex;
         this.feesPaid = feesPaid;
     }
@@ -100,7 +100,8 @@ public class MarkPaidCommand extends Command {
         }
 
         MarkPaidCommand e = (MarkPaidCommand) other;
-        return targetIndex.equals(e.targetIndex);
+        return targetIndex.equals(e.targetIndex)
+                && feesPaid.equals(e.feesPaid);
     }
 
     @Override
@@ -113,10 +114,10 @@ public class MarkPaidCommand extends Command {
     /**
      * Calculates the new overdue amount after feesPaidByStudent paid by student
      * @param currentPayment current overdue amount
-     * @param feesPaid FeesPaidByStudent paid by student
+     * @param feesPaid Fees paid by student
      * @return new overdue amount
      */
-    private Payment calculatePayment(Payment currentPayment, FeesPaidByStudent feesPaid) {
+    private Payment calculatePayment(Payment currentPayment, Fees feesPaid) {
         int currentBalance = Integer.parseInt(currentPayment.overdueAmount);
         int amountPaid = Integer.parseInt(feesPaid.value);
 

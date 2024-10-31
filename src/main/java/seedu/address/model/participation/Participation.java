@@ -60,20 +60,6 @@ public class Participation {
         return attendanceList;
     }
 
-    /**
-     * Returns true if both participation are of the same subject.
-     * This defines a weaker notion of equality between two participations.
-     */
-    public boolean isSameParticipation(Participation otherParticipation) {
-        if (otherParticipation == this) {
-            return true;
-        }
-        return otherParticipation != null && otherParticipation.getTutorial().equals(getTutorial())
-                                        && otherParticipation.getStudent().equals(getStudent());
-    }
-
-
-
     @Override
     public String toString() {
         return String.format("%s attends: %s", student.getFullName(), tutorial.getSubject());
@@ -91,8 +77,8 @@ public class Participation {
         }
 
         Participation otherParticipation = (Participation) other;
-        return this.student.equals(otherParticipation.student)
-                && this.tutorial.equals(otherParticipation.tutorial);
+        return this.getStudent().equals(otherParticipation.getStudent())
+                && this.getTutorial().equals(otherParticipation.getTutorial());
     }
 
 }
