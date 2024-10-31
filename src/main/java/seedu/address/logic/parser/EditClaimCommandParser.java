@@ -32,32 +32,55 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX,
                         PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
 
-        if (argMultimap.getPreamble().isEmpty() || !argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent()
-                || !argMultimap.getValue(PREFIX_CLAIM_INDEX).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE));
-        }
+        validateRequiredFields(argMultimap);
 
         Index personIndex = parsePersonIndex(argMultimap);
         Index claimIndex = parseClaimIndex(argMultimap);
         PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
 
-        EditClaimDescriptor editClaimDescriptor = new EditClaimDescriptor();
-
-        if (argMultimap.getValue(PREFIX_CLAIM_STATUS).isPresent()
-                && !argMultimap.getValue(PREFIX_CLAIM_STATUS).get().trim().isEmpty()) {
-            editClaimDescriptor.setStatus(ParserUtil.parseClaimStatus(argMultimap.getValue(PREFIX_CLAIM_STATUS).get()));
-        }
-
-        if (argMultimap.getValue(PREFIX_CLAIM_DESC).isPresent()
-                && !argMultimap.getValue(PREFIX_CLAIM_DESC).get().trim().isEmpty()) {
-            editClaimDescriptor.setDescription(argMultimap.getValue(PREFIX_CLAIM_DESC).get());
-        }
+        EditClaimDescriptor editClaimDescriptor = buildEditClaimDescriptor(argMultimap);
 
         if (!editClaimDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditClaimCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditClaimCommand(personIndex, policyType, claimIndex, editClaimDescriptor);
+    }
+
+    /**
+     * Validates that essential fields like preamble, policy type, and claim index are present.
+     *
+     * @param argMultimap Argument multimap containing parsed arguments.
+     * @throws ParseException if any required field is missing.
+     */
+    private void validateRequiredFields(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getPreamble().isEmpty()
+                || !argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent()
+                || !argMultimap.getValue(PREFIX_CLAIM_INDEX).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE));
+        }
+    }
+
+    /**
+     * Constructs an EditClaimDescriptor based on available fields in the ArgumentMultimap.
+     *
+     * @param argMultimap Argument multimap containing parsed arguments.
+     * @return EditClaimDescriptor containing the fields to edit.
+     * @throws ParseException if any field parsing fails.
+     */
+    private EditClaimDescriptor buildEditClaimDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+        EditClaimDescriptor descriptor = new EditClaimDescriptor();
+
+        if (argMultimap.getValue(PREFIX_CLAIM_STATUS).isPresent()
+                && !argMultimap.getValue(PREFIX_CLAIM_STATUS).get().trim().isEmpty()) {
+            descriptor.setStatus(ParserUtil.parseClaimStatus(argMultimap.getValue(PREFIX_CLAIM_STATUS).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_CLAIM_DESC).isPresent()
+                && !argMultimap.getValue(PREFIX_CLAIM_DESC).get().trim().isEmpty()) {
+            descriptor.setDescription(argMultimap.getValue(PREFIX_CLAIM_DESC).get());
+        }
+        return descriptor;
     }
 
     /**
