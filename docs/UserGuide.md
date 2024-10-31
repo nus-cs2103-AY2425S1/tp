@@ -39,6 +39,12 @@ your contact management tasks done faster than traditional GUI apps.
 
    * `appointment-list` : Lists all upcoming scheduled appointments.
 
+   * `edit John Doe n/John Doo` : Edits the name of John Doe to John Doo.
+
+   * `view John Doe` : Shows the details of John Doe.
+
+   * `find John Doe` : Searches for John Doe in the current list.
+
    * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
 
    * `reminder-delete John Doe` : Deletes the reminder set for John Doe.
