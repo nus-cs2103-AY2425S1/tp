@@ -274,6 +274,45 @@ Examples:
   and `Hello world` respectively.
 * `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
 
+### Marking a transaction as done : `markTxn`
+
+Marks a specified transaction from the transaction book as done.
+
+Format: `markTxn INDEX`
+
+* Marks a transaction at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed transaction list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If a transaction is marked as done, a done icon appears for the transaction in GUI. 
+</div>
+
+Examples:
+
+* `listTxn` followed by `markTxn 2` marks the 2nd transaction in the transaction book as done.
+* if a done transaction is marked as done again, the transaction remains done.
+
+### Unmarking a transaction as done : `unmarkTxn`
+
+Unmarks a specified transaction from the transaction book as undone.
+
+Format: `unmarkTxn INDEX`
+
+* Unmarks a transaction at the specified `INDEX` as undone.
+* The index refers to the index number shown in the displayed transaction list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:** By default, a new transaction is undone. <br />
+:bulb: **Tip:** If a done transaction is marked as undone, the existing done icon for the transaction in GUI disappears. 
+</div>
+
+Examples:
+
+* `listTxn` followed by `unmarkTxn 2` unmarks the 2nd transaction in the transaction book as undone.
+* if an undone transaction is marked as undone again, the transaction remains undone.
+
 ### Exiting the program : `exit`
 
 Exits the program.
