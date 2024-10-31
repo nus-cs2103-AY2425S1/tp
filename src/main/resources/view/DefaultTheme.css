@@ -324,6 +324,7 @@
 
 .project_status_label {
     -fx-font-size: 16px;
+    -fx-text-fill: text-color;
 }
 
 .overdue_label {
