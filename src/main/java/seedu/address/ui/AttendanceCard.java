@@ -35,7 +35,7 @@ public class AttendanceCard extends UiPart<Region> {
     private ImageView attendanceStatusIcon;
 
     /**
-     * Creates a {@code AttendanceCard} of the given tutorial
+     * Creates a {@code AttendanceCard} of the given tutorial.
      */
     public AttendanceCard(String tutorial, List<Attendance> attendanceList) {
         super(FXML);
@@ -52,7 +52,7 @@ public class AttendanceCard extends UiPart<Region> {
     }
 
     /**
-     * Sets the UI component to display current week's attendance and other attendance
+     * Sets the UI component to display current week's attendance and other attendance.
      */
     private void setAttendance() {
         Attendance currentWeekAttendance = getCurrentWeekAttendance();
@@ -83,9 +83,11 @@ public class AttendanceCard extends UiPart<Region> {
      */
     private Attendance getCurrentWeekAttendance() {
         int currentWeek = LocalDate.now().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+        int currentYear = LocalDate.now().get(IsoFields.WEEK_BASED_YEAR);
         for (Attendance attendance : attendanceList) {
             int attendanceWeek = attendance.attendanceDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
-            if (attendanceWeek == currentWeek) {
+            int attendanceYear = attendance.attendanceDate.get(IsoFields.WEEK_BASED_YEAR);
+            if (attendanceWeek == currentWeek && attendanceYear == currentYear) {
                 return attendance;
             }
         }
@@ -95,7 +97,7 @@ public class AttendanceCard extends UiPart<Region> {
     /**
      * Returns a string representation of the list to be displayed in the UI.
      *
-     * @param attendanceList The list of attendance that does not belong to the current week
+     * @param attendanceList The list of attendance that does not belong to the current week.
      */
     private String formatOtherAttendance(List<Attendance> attendanceList) {
         if (attendanceList.isEmpty()) {
@@ -104,7 +106,7 @@ public class AttendanceCard extends UiPart<Region> {
 
         StringBuilder attendance = new StringBuilder();
         for (int i = 0; i < attendanceList.size(); i++) {
-            attendance.append(attendanceList.get(i).toDisplayString());
+            attendance.append(attendanceList.get(i).toString());
             if (i != attendanceList.size() - 1) {
                 attendance.append(", ");
             }
@@ -113,7 +115,7 @@ public class AttendanceCard extends UiPart<Region> {
     }
 
     /**
-     * Sets the style for label if there is no {@code Attendance} for the current week
+     * Sets the style for label if there is no {@code Attendance} for the current week.
      */
     private void setAttendanceLabelNotAttendedStyle() {
         attendance.getStyleClass().clear();
@@ -124,7 +126,7 @@ public class AttendanceCard extends UiPart<Region> {
     }
 
     /**
-     * Sets the style for label if there is an {@code Attendance} for the current week
+     * Sets the style for label if there is an {@code Attendance} for the current week.
      */
     private void setAttendanceLabelAttendedStyle() {
         attendance.getStyleClass().clear();

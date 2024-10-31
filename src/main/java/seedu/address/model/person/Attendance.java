@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.IsoFields;
 
 /**
  * Represents a Person's attendance in the address book.
@@ -73,6 +74,24 @@ public class Attendance {
     public int hashCode() {
         return attendanceDate.hashCode();
     }
+
+    /**
+     * Checks if the date of this attendance is in the same week and year
+     * as the date of the attendance to be marked.
+     *
+     * @param attendanceToBeMarked The attendance record to be marked, containing the date to compare.
+     * @return true if both dates fall within the same week and year and false otherwise.
+     */
+    public boolean isSameWeek(Attendance attendanceToBeMarked) {
+        int attendanceWeek = attendanceDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+        int attendanceYear = attendanceDate.get(IsoFields.WEEK_BASED_YEAR);
+
+        int weekOfAttendanceToBeMarked = attendanceToBeMarked.attendanceDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+        int yearOfAttendanceToBeMarked = attendanceToBeMarked.attendanceDate.get(IsoFields.WEEK_BASED_YEAR);
+
+        return attendanceWeek == weekOfAttendanceToBeMarked && attendanceYear == yearOfAttendanceToBeMarked;
+    }
+
 
 }
 

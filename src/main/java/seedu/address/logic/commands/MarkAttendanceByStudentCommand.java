@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
+import java.time.LocalDate;
+import java.time.temporal.IsoFields;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,15 +41,17 @@ public class MarkAttendanceByStudentCommand extends Command {
             "Marked attendance of %1$s student for %2$s tutorial on %3$s";
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
             "The student does not take %1$s tutorial";
+    public static final String MESSAGE_WEEKLY_ATTENDANCE_MARKED =
+            "Student %1$s has attendance marked for the corresponding week of date %2$s";
 
     private final Index targetIndex;
     private final Attendance attendance;
     private final Tutorial tutorial;
 
     /**
-     * @param targetIndex Index of the person in the filtered person list to mark
-     * @param attendance Attendance of the person specified by index
-     * @param tutorial Tutorial the student attended
+     * @param targetIndex Index of the person in the filtered person list to mark.
+     * @param attendance Attendance of the person specified by index.
+     * @param tutorial Tutorial the student attended.
      */
     public MarkAttendanceByStudentCommand(Index targetIndex, Attendance attendance, Tutorial tutorial) {
         requireAllNonNull(targetIndex, attendance, tutorial);
@@ -66,12 +70,20 @@ public class MarkAttendanceByStudentCommand extends Command {
         }
 
         Person studentToMarkAttendance = lastShownList.get(targetIndex.getZeroBased());
+
         Participation currentParticipation = model.getParticipationList().stream()
                 .filter(participation -> participation.getStudent().equals(studentToMarkAttendance)
                         && participation.getTutorial().equals(this.tutorial))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(
                         String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial)));
+
+        for (Attendance currentAttendance : currentParticipation.getAttendanceList()) {
+            if (currentAttendance.isSameWeek(attendance)) {
+                throw new CommandException(String.format(MESSAGE_WEEKLY_ATTENDANCE_MARKED,
+                        studentToMarkAttendance.getName(), attendance));
+            }
+        }
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
         updatedAttendance.add(attendance);
@@ -110,4 +122,5 @@ public class MarkAttendanceByStudentCommand extends Command {
                 .add("tutorial", tutorial)
                 .toString();
     }
+
 }

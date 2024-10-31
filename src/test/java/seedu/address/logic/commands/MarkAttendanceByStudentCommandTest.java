@@ -226,15 +226,15 @@ public class MarkAttendanceByStudentCommandTest {
         Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
         Tutorial tutorial = new Tutorial("Math");
 
-        // Null index
+        // null index
         assertThrows(NullPointerException.class, () -> new MarkAttendanceByStudentCommand(
                 null, attendance, tutorial));
 
-        // Null attendance
+        // null attendance
         assertThrows(NullPointerException.class, () -> new MarkAttendanceByStudentCommand(
                 Index.fromZeroBased(0), null, tutorial));
 
-        // Null tutorial
+        // null tutorial
         assertThrows(NullPointerException.class, () -> new MarkAttendanceByStudentCommand(
                 Index.fromZeroBased(0), attendance, null));
     }
