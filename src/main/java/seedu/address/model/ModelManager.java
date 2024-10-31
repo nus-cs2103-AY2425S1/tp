@@ -160,8 +160,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredPersonList(String order) {
-        addressBook.sortPersons(order);
+    public void sortFilteredPersonList(String order, Boolean toSortBySchedule) {
+        addressBook.sortPersons(order, toSortBySchedule);
     }
 
     @Override
