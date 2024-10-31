@@ -24,6 +24,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
  */
 public class MarkLessonAttendanceCommandParser implements Parser<MarkLessonAttendanceCommand> {
 
+    public static final String MESSAGE_TOO_MANY_ATTENDANCE_ARGUMENTS =
+            "Number of attendance arguments must be exactly 1!";
     private final Logger logger = LogsCenter.getLogger(MarkLessonAttendanceCommandParser.class);
 
     /**
@@ -40,6 +42,11 @@ public class MarkLessonAttendanceCommandParser implements Parser<MarkLessonAtten
         if (argMultimap.getPreamble().isEmpty() || !argMultimap.arePrefixesPresent(PREFIX_NAME, PREFIX_ATTENDANCE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkLessonAttendanceCommand.MESSAGE_USAGE));
+        }
+
+        // too many attendance arguments
+        if (argMultimap.getAllValues(PREFIX_ATTENDANCE).size() > 1) {
+            throw new ParseException(MESSAGE_TOO_MANY_ATTENDANCE_ARGUMENTS);
         }
 
         // Parse index

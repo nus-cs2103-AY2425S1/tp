@@ -31,10 +31,10 @@ public class MarkLessonAttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the attendance of student(s) "
             + "in a lesson at the chosen index in the lesson list to the specified value. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + "NAME[;NAME...] "
-            + PREFIX_ATTENDANCE + "ATTENDANCE (y or n) "
-            + "\nExample: " + COMMAND_WORD + " 1 n/John Doe;Jane Doe a/y";
+            + "\nParameters: LESSON_INDEX (must be a positive integer) "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_ATTENDANCE + "ATTENDANCE (1/y/Y or 0/n/N) "
+            + "\nExample: " + COMMAND_WORD + " 1 n/John Doe n/Jane Doe a/y";
 
     public static final String MESSAGE_MARK_SUCCESS = "Marked the attendance of %s as %s";
     public static final String MESSAGE_STUDENT_NOT_FOUND_IN_ADDRESS_BOOK = "Student not found in TAHub: %s";
@@ -68,19 +68,20 @@ public class MarkLessonAttendanceCommand extends Command {
         }
 
         Lesson targetLesson = lastShownLessonList.get(index.getZeroBased());
+        Lesson newLesson = new Lesson(targetLesson);
 
         for (Name studentName : studentNames) {
             Student student = model.findStudentByName(studentName)
                     .orElseThrow(() -> new CommandException(
                             String.format(MESSAGE_STUDENT_NOT_FOUND_IN_ADDRESS_BOOK, studentName)));
             try {
-                targetLesson.setAttendance(student, attendance);
+                newLesson.setAttendance(student, attendance);
             } catch (StudentNotFoundException e) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND_IN_LESSON, studentName));
             }
         }
 
-        model.updateFilteredLessonList(x -> true);
+        model.setLesson(targetLesson, newLesson);
 
         logger.fine("Successfully marked attendance of students in lesson " + targetLesson.toString());
         String names = String.join(", ", studentNames.stream().map(x -> x.fullName).toList());
