@@ -14,7 +14,7 @@ public class ReminderDescription {
     // Allow printable characters excluding control characters
     public static final String VALIDATION_REGEX = "^[\\p{Print}&&[^\\p{Cntrl}]]*$";
 
-    public static final int MAX_LENGTH = 500;
+    public static final int MAX_LENGTH = 300;
     public static final int MIN_LENGTH = 1;
 
     public final String description;
@@ -36,11 +36,11 @@ public class ReminderDescription {
             return true;
         }
 
-        if (!(other instanceof seedu.address.model.person.Description)) {
+        if (!(other instanceof ReminderDescription)) {
             return false;
         }
 
-        seedu.address.model.person.Description otherDescription = (seedu.address.model.person.Description) other;
+        ReminderDescription otherDescription = (ReminderDescription) other;
         return description.equals(otherDescription.description);
     }
 
