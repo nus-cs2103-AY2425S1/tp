@@ -4,54 +4,41 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
-package UI <<Rectangle>>{
-Class "<<interface>>\nUi" as Ui
-Class "{abstract}\nUiPart" as UiPart
-Class UiManager
-Class MainWindow
-Class HelpWindow
-Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
-Class CommandBox
-}
-
-package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
-}
-
-package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
-}
-
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
-
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" VendorListPanel
+MainWindow *-down-> "1" EventListPanel
+MainWindow *-down-> "1" VendorDetailsPanel
+MainWindow *-down-> "1" EventDetailsPanel
+MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down->  "1" CommandBox
 
-PersonListPanel -down-> "*" PersonCard
+VendorListPanel -down-> "*" VendorCard
+EventListPanel -down-> "*" EventCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+VendorListPanel --|> UiPart
+VendorCard --|> UiPart
+EventListPanel --|> UiPart
+EventCard --|> UiPart
+VendorDetailsPanel --|> UiPart
+EventDetailsPanel --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
+VendorCard ..> Model
+EventCard ..> Model
+VendorDetailsPanel ..> Model
+EventDetailsPanel ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+VendorListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
