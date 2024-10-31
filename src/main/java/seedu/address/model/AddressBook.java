@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
@@ -165,10 +166,25 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
+     * Also removes the student from all consultations and lessons.
      * {@code key} must exist in the address book.
      */
     public void removeStudent(Student key) {
         students.remove(key);
+        // remove from consultations
+        FilteredList<Consultation> consultsWithDeletedStudent = consults.filtered(c -> c.hasStudent(key));
+        consultsWithDeletedStudent.forEach(c -> {
+            Consultation newConsult = new Consultation(c);
+            newConsult.removeStudent(key);
+            setConsult(c, newConsult);
+        });
+        // remove from lessons
+        FilteredList<Lesson> lessonsWithDeletedStudent = lessons.filtered(l -> l.hasStudent(key));
+        lessonsWithDeletedStudent.forEach(l -> {
+            Lesson newLesson = new Lesson(l);
+            newLesson.removeStudent(key);
+            setLesson(l, newLesson);
+        });
     }
 
     /**
