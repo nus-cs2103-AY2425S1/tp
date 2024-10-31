@@ -36,12 +36,12 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
-                MESSAGE_INVALID_INDEX + ": a\nUsage:\n" + DeleteCommand.MESSAGE_USAGE);
+                String.format(MESSAGE_INVALID_INDEX, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidMultipleArgs_throwsParseException() {
         assertParseFailure(parser, "1 a",
-                MESSAGE_INVALID_INDEX + ": a\nUsage:\n" + DeleteCommand.MESSAGE_USAGE);
+                String.format(MESSAGE_INVALID_INDEX, DeleteCommand.MESSAGE_USAGE));
     }
 }
