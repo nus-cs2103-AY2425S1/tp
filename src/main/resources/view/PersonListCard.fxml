@@ -33,8 +33,6 @@
       <HBox alignment="CENTER_LEFT">
         <Label fx:id="job" styleClass="job-label" text="\$job" />
       </HBox>
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="interviewScore" styleClass="cell_small_label" text="\$interviewScore" />
     </VBox>
   </GridPane>
