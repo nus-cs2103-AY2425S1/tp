@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_POLICY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,8 +67,8 @@ public class SearchPolicyCommandTest {
         Policy lifeInsurance = new Policy("life insurance", "2024-10-10",
                 "2030-10-10", "2024-11-10 100.00");
 
-        String nonExistentPolicyName = "non-existent insurance";
-        String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, nonExistentPolicyName);
+        String nonExistentPolicyName = "nonexistent insurance";
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_POLICY, nonExistentPolicyName);
 
         // create a person with health insurance policy
         Person alice = new PersonBuilder().withName("Alice").build();
@@ -104,7 +105,7 @@ public class SearchPolicyCommandTest {
         model.addPerson(alice);
 
         String policyName = "health insurance";
-        String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, policyName);
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_POLICY, policyName);
 
         try {
             SearchPolicyCommand command = new SearchPolicyCommand(policyName);
@@ -143,7 +144,7 @@ public class SearchPolicyCommandTest {
         model.addPerson(bob);
 
         String policyName = "HealthInsurance";
-        String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, policyName);
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_POLICY, policyName);
 
         try {
             SearchPolicyCommand command = new SearchPolicyCommand(policyName);

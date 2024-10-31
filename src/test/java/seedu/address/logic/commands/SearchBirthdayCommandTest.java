@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATERANGE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_START_DATE_AFTER_END_DATE;
+import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_BIRTHDAY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -74,7 +78,7 @@ public class SearchBirthdayCommandTest {
         try {
             new SearchBirthdayCommand(invalidDate);
         } catch (CommandException e) {
-            assertEquals(SearchBirthdayCommand.MESSAGE_INVALID_DATE_FORMAT, e.getMessage());
+            assertEquals(MESSAGE_INVALID_DATE_FORMAT, e.getMessage());
         }
 
         String invalidDateRange = "2000-04-25 to";
@@ -82,7 +86,7 @@ public class SearchBirthdayCommandTest {
             new SearchBirthdayCommand(invalidDateRange);
             assertFalse(true, "Expected CommandException was not thrown.");
         } catch (CommandException e) {
-            assertEquals(SearchBirthdayCommand.MESSAGE_INVALID_DATERANGE_FORMAT, e.getMessage());
+            assertEquals(MESSAGE_INVALID_DATERANGE_FORMAT, e.getMessage());
         }
 
         invalidDateRange = "04-25 to 05-25";
@@ -90,7 +94,7 @@ public class SearchBirthdayCommandTest {
             new SearchBirthdayCommand(invalidDateRange);
             assertFalse(true, "Expected CommandException was not thrown.");
         } catch (CommandException e) {
-            assertEquals(SearchBirthdayCommand.MESSAGE_INVALID_DATE_FORMAT, e.getMessage());
+            assertEquals(MESSAGE_INVALID_DATE_FORMAT, e.getMessage());
         }
 
         // Start date after end date
@@ -99,14 +103,14 @@ public class SearchBirthdayCommandTest {
             new SearchBirthdayCommand(startAfterEndDate);
             assertFalse(true, "Expected CommandException was not thrown.");
         } catch (CommandException e) {
-            assertEquals(SearchBirthdayCommand.MESSAGE_START_DATE_AFTER_END_DATE, e.getMessage());
+            assertEquals(MESSAGE_START_DATE_AFTER_END_DATE, e.getMessage());
         }
     }
 
     @Test
     public void execute_zeroMatches_noPersonFound() {
         String date = "2000-12-31";
-        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, "on " + date);
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_BIRTHDAY, "on " + date);
         try {
             SearchBirthdayCommand command = new SearchBirthdayCommand(date);
             expectedModel.updateFilteredPersonList(person -> false); // No one matches
@@ -121,7 +125,7 @@ public class SearchBirthdayCommandTest {
     @Test
     public void execute_oneMatch_personFound() {
         String date = "2000-12-12";
-        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, "on " + date);
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_BIRTHDAY, "on " + date);
         try {
             SearchBirthdayCommand command = new SearchBirthdayCommand(date);
 
@@ -138,7 +142,7 @@ public class SearchBirthdayCommandTest {
     @Test
     public void execute_multipleMatches_multiplePersonsFound() {
         String date = "1990-10-10";
-        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, "on " + date);
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_BIRTHDAY, "on " + date);
         try {
             SearchBirthdayCommand command = new SearchBirthdayCommand(date);
 
@@ -162,7 +166,7 @@ public class SearchBirthdayCommandTest {
         try {
             new SearchBirthdayCommand(invalidDate);
         } catch (CommandException e) {
-            assertEquals(SearchBirthdayCommand.MESSAGE_INVALID_DATE_FORMAT, e.getMessage());
+            assertEquals(MESSAGE_INVALID_DATE_FORMAT, e.getMessage());
         }
     }
 
@@ -177,7 +181,7 @@ public class SearchBirthdayCommandTest {
         model.addPerson(charles);
 
         String dateRange = "2000-10-01 to 2000-11-30";
-        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, "from 2000-10-01 to 2000-11-30");
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_BIRTHDAY, "from 2000-10-01 to 2000-11-30");
         try {
             Model expectedModel = new ModelManager();
             expectedModel.addPerson(alice);
