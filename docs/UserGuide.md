@@ -212,11 +212,11 @@ Examples:
 
 Filters the properties based on any combination of type, lower bound for matching price and upper bound for matching price.
 
-Format: `filterclient [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
+Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 
 * Filters the properties with any combination of `TYPE`, lower bounded `MATCHING_PRICE` and upper bounded `MATCHING_PRICE`.
-* The `TYPE` is case-insensetive HDB, CONDO or LANDED.
-* The `MATCHING_PRICE` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
+* The `TYPE` is case-insensitive HDB, CONDO or LANDED.
+* The `MATCHING_PRICE` is a non-negative integer (i.e. No non-numeric symbols such as decimal points, currency symbols, etc.).
 
 * <box type="definition" seamless>
 
@@ -265,7 +265,7 @@ Format: `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHO
 * `POSTALCODE` refers to a postal code. The postal code must belong to some existing property in the property book of the specified `TYPE`.
 
 Examples:
-* `addmeeting mt/Meeting 1 d/01-01-2025 bp/95352563 sp/87652533 t/HDB c/123456` adds a meeting with meeting title `Meeting 1` and meeting date `01-01-2025`.
+* `addmeeting mt/Meeting 1 d/01-01-2025 bp/95352563 sp/87652533 t/HDB c/123456` adds a meeting with meeting title `Meeting 1`, meeting date `01-01-2025`, buyer's phone number `95352563`, seller's phone number `87652533`, property type `HDB` and postal code `321456`.
 
   ![result for 'addmeeting mt/Meeting 1 d/01-01-2025 bp/95352563 sp/87652533 t/HDB c/123456'](images/addmeeting.png)
 

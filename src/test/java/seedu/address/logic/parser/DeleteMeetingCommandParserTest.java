@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_DATE_DESC_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_TITLE_DESC_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_ADMIRALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
@@ -32,6 +33,13 @@ public class DeleteMeetingCommandParserTest {
         DeleteMeetingCommand expectedCommand = new DeleteMeetingCommand(validMeetingTitle, validMeetingDate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_allFieldsPresentWithExtraPrefix_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE);
+        String userInput = MEETING_TITLE_DESC_ADMIRALTY + " " + MEETING_DATE_DESC_ADMIRALTY + NAME_DESC_AMY;
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
