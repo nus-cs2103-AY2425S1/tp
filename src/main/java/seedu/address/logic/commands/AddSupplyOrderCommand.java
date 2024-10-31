@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 
-public class AddSupplierOrderCommand extends Command {
+public class AddSupplyOrderCommand extends Command {
     public static final String COMMAND_WORD = "addSupplyOrder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new supplier order to the bakery's order list. "
@@ -31,7 +31,7 @@ public class AddSupplierOrderCommand extends Command {
     private final Phone phone;
     private final ArrayList<Integer> idList;
 
-    public AddSupplierOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
+    public AddSupplyOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
         requireAllNonNull(phone);
         this.name = name;
         this.phone = phone;
@@ -79,11 +79,11 @@ public class AddSupplierOrderCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddSupplierOrderCommand)) {
+        if (!(other instanceof AddSupplyOrderCommand)) {
             return false;
         }
 
-        AddSupplierOrderCommand otherCommand = (AddSupplierOrderCommand) other;
+        AddSupplyOrderCommand otherCommand = (AddSupplyOrderCommand) other;
         return phone.equals(otherCommand.phone) && idList.equals(otherCommand.idList);
     }
 }

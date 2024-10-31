@@ -13,14 +13,14 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.CustomerOrderList;
-import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
-import seedu.address.model.product.Inventory;
 
 /**
  * Represents the in-memory model of the address book data.

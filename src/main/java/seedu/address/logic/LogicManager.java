@@ -73,14 +73,6 @@ public class LogicManager implements Logic {
         return model.getFilteredPersonList();
     }
 
-    public ObservableList<SupplyOrder> getSupplyOrderList() {
-        return model.getSupplyOrderList().getOrders();
-    }
-
-    public ObservableList<CustomerOrder> getCustomerOrderList() {
-        return model.getCustomerOrderList().getOrders();
-    }
-
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
@@ -94,5 +86,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<SupplyOrder> getSupplyOrderList() {
+        return model.getSupplyOrderList().getOrders();
+    }
+
+    @Override
+    public ObservableList<CustomerOrder> getCustomerOrderList() {
+        return model.getCustomerOrderList().getOrders();
     }
 }
