@@ -42,6 +42,11 @@ public class ListCommandParser implements Parser<ListCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
+        if (hasExcessToken(args, PREFIX_KEY)) {
+            logger.warning("Excess prefixes.");
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
 
         String keyArgLower = keyArg.toLowerCase();
         logger.info("Key argument received: " + keyArgLower);
@@ -96,5 +101,16 @@ public class ListCommandParser implements Parser<ListCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
+    }
+
+    /**
+     * Returns true if number of tokens in args string exceeds specified prefixes.
+     */
+    private boolean hasExcessToken(String args, Prefix... prefixes) {
+        String[] splits = args.trim().split("\\s(?=\\S+/)");
+        if (splits[0].equals("/")) {
+            return false;
+        }
+        return splits.length > prefixes.length;
     }
 }

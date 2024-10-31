@@ -4,8 +4,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Buyer;
@@ -18,6 +20,7 @@ import seedu.address.model.client.Phone;
  * (name, phone, and email) for creating a {@link Buyer}.
  */
 public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
+    private static final Logger logger = LogsCenter.getLogger(AddBuyerCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@link AddBuyerCommand}
@@ -31,6 +34,13 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         // Tokenize the input arguments based on the expected prefixes (name, phone, email)
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
+
+        if (hasExcessToken(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
+            logger.warning("Excess prefixes.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerCommand.MESSAGE_USAGE));
+        }
+
         // Check if all required prefixes are present and if the preamble is empty
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -38,7 +48,7 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         }
 
         // Verify there are no duplicate prefixes in the input
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
+
 
         // Parse the name, phone, and email from the argument map
         Name name = ParserUtil.parseClientName(argMultimap.getValue(PREFIX_NAME).get());
@@ -60,5 +70,17 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+
+    /**
+     * Returns true if number of tokens in args string exceeds specified prefixes.
+     */
+    private boolean hasExcessToken(String args, Prefix... prefixes) {
+        String[] splits = args.trim().split("\\s(?=\\S+/)");
+        if (splits[0].equals("/")) {
+            return false;
+        }
+        return splits.length > prefixes.length;
     }
 }

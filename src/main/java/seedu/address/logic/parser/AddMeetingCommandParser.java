@@ -8,8 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Phone;
@@ -23,6 +25,7 @@ import seedu.address.model.property.Type;
  * Parses input arguments and creates a new AddMeetingCommand object
  */
 public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
+    private static final Logger logger = LogsCenter.getLogger(AddMeetingCommandParser.class);
     /**
      * Parses the given {@code String} of arguments in the context of the AddMeetingCommand
      * and returns an AddMeetingCommand object for execution.
@@ -33,14 +36,18 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
                         PREFIX_SELLER_PHONE, PREFIX_TYPE, PREFIX_POSTALCODE);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
+                PREFIX_SELLER_PHONE, PREFIX_TYPE, PREFIX_POSTALCODE);
+        if (hasExcessToken(args, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
+                PREFIX_SELLER_PHONE, PREFIX_TYPE, PREFIX_POSTALCODE)) {
+            logger.warning("Excess prefixes.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
+        }
         if (!arePrefixesPresent(argMultimap, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
                 PREFIX_SELLER_PHONE, PREFIX_TYPE, PREFIX_POSTALCODE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
-                PREFIX_SELLER_PHONE, PREFIX_TYPE, PREFIX_POSTALCODE);
         MeetingTitle meetingTitle = ParserUtil.parseMeetingTitle(argMultimap.getValue(PREFIX_MEETING_TITLE).get());
         MeetingDate meetingDate = ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE).get());
         Phone buyerPhone = ParserUtil.parseClientPhone(argMultimap.getValue(PREFIX_BUYER_PHONE).get());
@@ -60,6 +67,17 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if number of tokens in args string exceeds specified prefixes.
+     */
+    private boolean hasExcessToken(String args, Prefix... prefixes) {
+        String[] splits = args.trim().split("\\s(?=\\S+/)");
+        if (splits[0].equals("/")) {
+            return false;
+        }
+        return splits.length > prefixes.length;
     }
 
 }
