@@ -297,14 +297,53 @@ The activity diagram shows the general sequence of steps when a user interacts w
 ### Find appointment feature
 
 #### Implementation
+When a user types a `find appt` command, the DocTrack application will 
+find the appointment based on the parameters provided.
+
+**Step 1**. The user types the `find appt` command in the `CommandBox` followed by the name or a date
+The date is specified using a `\d` prefix and the name is specified using `\n` prefix.
+
+**Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand`
+method to parse the `find appt` command
+
+**Step 3**. The `AddressBookParser` creates a `FindAppointmentCommand` by passing the string to `FindCommandParser` 
+and is then returned to the `LogicManager`.
+
+**Step 4**. The `LogicManager` calls the `FindAppointmentCommand:execute` method which creates a new `CommandResult` Object
+
+**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
 #### Design considerations
+**Aspect**: How to show find appointment.
+
+- **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
+
+- **Alternative 2**: Create different find commands, find by date, find by name etc. 
 
 <br>
 
 ### List appointment feature
 
 #### Implementation
+When a user types a `list appt` command, the DocTrack application will
+return a list of all the appointments in the appointment book.
+
+**Step 1**. The user types the `list` command in the `CommandBox`. The command is passed to the `LogicManager`. 
+
+**Step 2**. `LogicManager` then calls the `AddressBookParser::parseCommand`
+method to parse the `list appt` command
+
+**Step 3**. The `AddressBookParser` creates a `ListAppointmentCommand` by passing the string to `ListCommandParser`
+and is then returned to the `LogicManager`.
+
+**Step 4**. The `LogicManager` calls the `ListAppointmentCommand:execute` method which creates a new `CommandResult` Object
+
+**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
+
+**Aspect**: How to show list 
+
+- **Alternative 1 (Current choice)**: Print them out individually on the listpanel
+
 
 #### Design considerations
 
@@ -313,6 +352,25 @@ The activity diagram shows the general sequence of steps when a user interacts w
 ### Clear appointment feature
 
 #### Implementation
+When a user types a `clear appt` command, the DocTrack application will
+return a list of all the appointments in the appointment book.
+
+**Step 1**. The user types the `clear appt` command in the `CommandBox`. The command is passed to the `LogicManager`.
+
+**Step 2**. `LogicManager` then calls the `AddressBookParser::parseCommand`
+method to parse the `clear appt` command
+
+**Step 3**. The `AddressBookParser` creates a `ClearAppointmentCommand` by passing the string to `CLearAppointmentCommandParser`
+and is then returned to the `LogicManager`.
+
+**Step 4**. The `LogicManager` calls the `ClearAppointmentCommand:execute` method which creates a new `CommandResult` Object
+
+**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
+
+**Aspect**: How to show list
+
+- **Alternative 1 (Current choice)**: Replace the appointment book with a new appointment book.
+
 
 #### Design considerations
 
