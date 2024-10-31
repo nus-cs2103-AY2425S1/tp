@@ -21,7 +21,7 @@ public class ListTransactionCommand extends Command {
             + "the index number used in the displayed person list.\n"
             + "Parameter: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_SUCCESS = "Listed transactions for %1$s";
+    public static final String MESSAGE_SUCCESS = "Listed %1$d transaction(s) for %2$s";
 
     private final Index index;
 
@@ -49,7 +49,8 @@ public class ListTransactionCommand extends Command {
         Person selected = lastShownList.get(index.getZeroBased());
         model.updateFilteredPersonList(new IsSelectedPredicate(model, index));
         model.updateTransactionList(selected.getTransactions());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(selected)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                model.getFilteredTransactionList().size(), Messages.format(selected)));
     }
 
     @Override
