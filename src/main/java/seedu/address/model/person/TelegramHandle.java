@@ -5,12 +5,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's telegram handle in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTelegramHandle(String)}
  */
 public class TelegramHandle {
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram handles should not contain @, and it should have a length of 3 to 29 characters inclusive";
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9_]{3,29}$";
+            "Telegram handles should not contain @, and it should have a length of 5 to 32 characters "
+                    + "inclusive, containing alphabets, numbers and/or underscores only";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9_]{5,32}$";
     public final String value;
 
     /**
