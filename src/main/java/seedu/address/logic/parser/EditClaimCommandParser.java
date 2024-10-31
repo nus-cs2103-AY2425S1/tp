@@ -65,7 +65,7 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
      *
      * @param argMultimap Argument multimap containing parsed arguments.
      * @return Index of the person.
-     * @throws ParseException if the person index is invalid.
+     * @throws ParseException if the person index is invalid when not found.
      */
     private Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
         try {
