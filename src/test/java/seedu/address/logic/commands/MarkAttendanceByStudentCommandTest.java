@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.MarkAttendanceByStudentCommand.MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE;
 import static seedu.address.logic.commands.MarkAttendanceByStudentCommand.MESSAGE_INVALID_TUTORIAL_FOR_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -17,7 +18,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -49,16 +49,11 @@ public class MarkAttendanceByStudentCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Tutorial tutorial = new Tutorial("Math");
+
+        // current participation of second person
+        Participation currentParticipation = BENSON_MATH;
+
         Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
-
-        // get participation of second person
-        Participation currentParticipation = model.getParticipationList().stream()
-                .filter(participation -> participation.getStudent().equals(studentToMarkAttendance)
-                        && participation.getTutorial().equals(tutorial))
-                .findFirst()
-                .orElseGet(Assertions::fail);
-
-        assertEquals(currentParticipation, BENSON_MATH);
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
         updatedAttendance.add(new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT)));
@@ -66,11 +61,11 @@ public class MarkAttendanceByStudentCommandTest {
         Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                 currentParticipation.getTutorial(), updatedAttendance);
 
-        MarkAttendanceByStudentCommand markAttendanceCommand =
-                new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance, tutorial);
-
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setParticipation(currentParticipation, updatedParticipation);
+
+        MarkAttendanceByStudentCommand markAttendanceCommand =
+                new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance, tutorial);
 
         String expectedMessage = String.format(MarkAttendanceByStudentCommand.MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
                 studentToMarkAttendance.getName(), tutorial.getSubject(), attendance);
@@ -79,11 +74,69 @@ public class MarkAttendanceByStudentCommandTest {
     }
 
     @Test
+    public void execute_markPreviousWeekUnfilteredList_success() {
+        Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Tutorial tutorial = new Tutorial("Math");
+
+        // current participation of second person with attendance for 12/12/2024
+        Participation currentParticipation = BENSON_MATH;
+
+        // create participation to mark attendance for sun of previous week of 12/12/2024
+        Attendance attendance = new Attendance(LocalDate.parse("08/12/2024", Attendance.VALID_DATE_FORMAT));
+
+        List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
+        updatedAttendance.add(new Attendance(LocalDate.parse("08/12/2024", Attendance.VALID_DATE_FORMAT)));
+
+        Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
+                currentParticipation.getTutorial(), updatedAttendance);
+
+        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setParticipation(currentParticipation, updatedParticipation);
+
+        MarkAttendanceByStudentCommand markAttendanceCommand1 =
+                new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance, tutorial);
+
+        String expectedMessage = String.format(MarkAttendanceByStudentCommand.MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
+                studentToMarkAttendance.getName(), tutorial.getSubject(), attendance);
+
+        assertCommandSuccess(markAttendanceCommand1, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_markNextWeekUnfilteredList_success() {
+        Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Tutorial tutorial = new Tutorial("Math");
+
+        // current participation of second person with attendance for 12/12/2024
+        Participation currentParticipation = BENSON_MATH;
+
+        // create participation to mark attendance for mon of next week of 12/12/2024
+        Attendance attendance = new Attendance(LocalDate.parse("16/12/2024", Attendance.VALID_DATE_FORMAT));
+
+        List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
+        updatedAttendance.add(new Attendance(LocalDate.parse("16/12/2024", Attendance.VALID_DATE_FORMAT)));
+
+        Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
+                currentParticipation.getTutorial(), updatedAttendance);
+
+        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setParticipation(currentParticipation, updatedParticipation);
+
+        MarkAttendanceByStudentCommand markAttendanceCommand1 =
+                new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance, tutorial);
+
+        String expectedMessage = String.format(MarkAttendanceByStudentCommand.MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
+                studentToMarkAttendance.getName(), tutorial.getSubject(), attendance);
+
+        assertCommandSuccess(markAttendanceCommand1, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(
                 outOfBoundIndex,
-                new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
+                new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT)),
                 new Tutorial("Math"));
 
         assertCommandFailure(markAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -103,6 +156,31 @@ public class MarkAttendanceByStudentCommandTest {
     }
 
     @Test
+    public void execute_DuplicateWeeklyAttendanceUnfilteredList_throwsCommandException() {
+        Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        Tutorial tutorial = new Tutorial("Math");
+
+        // mon of week for 12/12/2024
+        Attendance attendance1 = new Attendance(LocalDate.parse("09/12/2024", Attendance.VALID_DATE_FORMAT));
+        // sun of week for 12/12/2024
+        Attendance attendance2 = new Attendance(LocalDate.parse("15/12/2024", Attendance.VALID_DATE_FORMAT));
+
+        MarkAttendanceByStudentCommand markAttendanceCommand1 =
+                new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance1, tutorial);
+        MarkAttendanceByStudentCommand markAttendanceCommand2 =
+                new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance2, tutorial);
+
+        String expectedMessage1 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
+                studentToMarkAttendance.getName(), attendance1);
+        String expectedMessage2 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
+                studentToMarkAttendance.getName(), attendance2);
+
+        assertCommandFailure(markAttendanceCommand1, model, expectedMessage1);
+        assertCommandFailure(markAttendanceCommand2, model, expectedMessage2);
+    }
+
+    @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
 
@@ -110,13 +188,7 @@ public class MarkAttendanceByStudentCommandTest {
         Tutorial tutorial = new Tutorial("Math");
         Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
 
-        Participation currentParticipation = model.getParticipationList().stream()
-                .filter(participation -> participation.getStudent().equals(studentToMarkAttendance)
-                        && participation.getTutorial().equals(tutorial))
-                .findFirst()
-                .orElseGet(Assertions::fail);
-
-        assertEquals(currentParticipation, BENSON_MATH);
+        Participation currentParticipation = BENSON_MATH;
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
         updatedAttendance.add(new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT)));
@@ -124,12 +196,12 @@ public class MarkAttendanceByStudentCommandTest {
         Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                 currentParticipation.getTutorial(), updatedAttendance);
 
-        MarkAttendanceByStudentCommand markAttendanceCommand =
-                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, tutorial);
-
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_SECOND_PERSON);
         expectedModel.setParticipation(currentParticipation, updatedParticipation);
+
+        MarkAttendanceByStudentCommand markAttendanceCommand =
+                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, tutorial);
 
         String expectedMessage = String.format(MarkAttendanceByStudentCommand.MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
                 studentToMarkAttendance.getName(), tutorial.getSubject(), attendance);
@@ -146,7 +218,7 @@ public class MarkAttendanceByStudentCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(
-                outOfBoundIndex, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
+                outOfBoundIndex, new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT)),
                 new Tutorial("Math"));
 
         assertCommandFailure(markAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -164,6 +236,32 @@ public class MarkAttendanceByStudentCommandTest {
         String expectedMessage = String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial);
 
         assertCommandFailure(markAttendanceCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_DuplicateWeeklyAttendanceFilteredList_throwsCommandException() {
+        showPersonAtIndex(model, INDEX_SECOND_PERSON);
+        Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        Tutorial tutorial = new Tutorial("Math");
+
+        // mon of week for 12/12/2024
+        Attendance attendance1 = new Attendance(LocalDate.parse("09/12/2024", Attendance.VALID_DATE_FORMAT));
+        // sun of week for 12/12/2024
+        Attendance attendance2 = new Attendance(LocalDate.parse("15/12/2024", Attendance.VALID_DATE_FORMAT));
+
+        MarkAttendanceByStudentCommand markAttendanceCommand1 =
+                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance1, tutorial);
+        MarkAttendanceByStudentCommand markAttendanceCommand2 =
+                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance2, tutorial);
+
+        String expectedMessage1 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
+                studentToMarkAttendance.getName(), attendance1);
+        String expectedMessage2 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
+                studentToMarkAttendance.getName(), attendance2);
+
+        assertCommandFailure(markAttendanceCommand1, model, expectedMessage1);
+        assertCommandFailure(markAttendanceCommand2, model, expectedMessage2);
     }
 
     @Test

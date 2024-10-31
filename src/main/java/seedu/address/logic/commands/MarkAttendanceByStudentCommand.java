@@ -41,7 +41,7 @@ public class MarkAttendanceByStudentCommand extends Command {
             "Marked attendance of %1$s student for %2$s tutorial on %3$s";
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
             "The student does not take %1$s tutorial";
-    public static final String MESSAGE_WEEKLY_ATTENDANCE_MARKED =
+    public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE =
             "Student %1$s has attendance marked for the corresponding week of date %2$s";
 
     private final Index targetIndex;
@@ -80,7 +80,7 @@ public class MarkAttendanceByStudentCommand extends Command {
 
         for (Attendance currentAttendance : currentParticipation.getAttendanceList()) {
             if (currentAttendance.isSameWeek(attendance)) {
-                throw new CommandException(String.format(MESSAGE_WEEKLY_ATTENDANCE_MARKED,
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
                         studentToMarkAttendance.getName(), attendance));
             }
         }
