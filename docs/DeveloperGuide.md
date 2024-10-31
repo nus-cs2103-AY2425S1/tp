@@ -627,4 +627,47 @@ Finding a patient by providing keyword(s) from their medical condition
    4. Other incorrect find commands to try: `findMedCon x` (where x is a keyword that does not exist in any patient's medical condition)
       Expected: Similar to previous.
 
+### Adding a medical condition to a patient
+
+1. **Prerequisites**: List all patients using the `list` command. Ensure there is at least one patient in the list.
+
+2. **Test case**: `addMedCon i/S1234567A c/Diabetes`  
+   **Expected**: The medical condition `Diabetes` is added to the patient with NRIC `S1234567A`. A success message is shown summarising which medical condition(s) have been added to which patient.
+
+3. **Test case**: `addMedCon c/Diabetes`  
+   **Expected**: No medical condition is added. An error message is shown, indicating that the command format is incorrect.
+
+4. **Other incorrect commands to try**: `addMedCon`, `addMedCon i/S1234567A`  
+   **Expected**: An error message is shown, indicating that the command format is incorrect.
+
+### Deleting a medical condition from a patient
+
+1. **Prerequisites**:
+    - Add a medical condition to a patient using the `addMedCon` command, e.g., `Diabetes`.
+    - List all patients using the `list` command. Ensure the patient has the added medical condition.
+
+2. **Test case**: `delMedCon i/S1234567A c/Diabetes`  
+   **Expected**: The medical condition `Diabetes` is removed from the patient with NRIC `S1234567A`. A success message is shown summarising which medical condition(s) have been removed from which patient.
+
+3. **Test case**: `delMedCon i/S1234567A c/Hypertension`  
+   **Expected**: No medical condition is deleted. An error message is shown, indicating that the specified medical condition does not exist for the patient.
+
+4. **Other incorrect commands to try**: `delMedCon`, `delMedCon i/S1234567A`  
+   **Expected**: An error message is shown, indicating that the command format is incorrect.
+
+### Deleting an allergy from a patient
+
+1. **Prerequisites**:
+    - Add an allergy to a patient using the `addAllergy` command, e.g., `Peanut`.
+    - List all patients using the `list` command. Ensure the patient has the added allergy.
+
+2. **Test case**: `delAllergy i/S1234567A al/Peanut`  
+   **Expected**: The allergy `Peanut` is removed from the patient with NRIC `S1234567A`. A success message is shown summarising which allergy/allergies have been removed from which patient.
+
+3. **Test case**: `delAllergy i/S1234567A al/Dust`  
+   **Expected**: No allergy is deleted. An error message is shown, indicating that the specified allergy does not exist for the patient.
+
+4. **Other incorrect commands to try**: `delAllergy`, `delAllergy i/S1234567A`  
+   **Expected**: An error message is shown, indicating that the command format is incorrect.
+
 [Back to Table of Contents](#table-of-contents)
