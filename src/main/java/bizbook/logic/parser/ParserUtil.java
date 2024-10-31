@@ -141,7 +141,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String fileType} into a valid {@code Exporter}.
+     * Parses a {@code String fileType} into a valid {@code fileType}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code fileType} is invalid.
@@ -151,8 +151,7 @@ public class ParserUtil {
         String trimmedFileType = fileType.trim().toUpperCase();
 
         try {
-            FileType type = FileType.valueOf(trimmedFileType);
-            return type;
+            return FileType.valueOf(trimmedFileType);
         } catch (IllegalArgumentException argex) {
             throw new ParseException(FileType.MESSAGE_CONSTRAINTS);
         }
