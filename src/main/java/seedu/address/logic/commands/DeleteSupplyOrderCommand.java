@@ -35,7 +35,7 @@ public class DeleteSupplyOrderCommand extends Command {
         }
 
         supplyOrderList.removeOrder(targetIndex - 1);
-
+        
         return new CommandResult(String.format(MESSAGE_DELETE_SUPPLY_ORDER_SUCCESS, targetIndex));
     }
 
