@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-MediContacts is a **desktop app for managing contacts of patients and doctors, as well as keeping track of appointments.**  
+MediContacts is a **desktop app for managing contacts of patients and doctors**, as well as **keeping track of their appointments.**  
 
-It is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediContacts can not only get your patient and doctor contacts management tasks done faster than traditional systems adopted by our clinics, but also efficiently keep track of appointments between registered doctors and patients.
+It is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediContacts can not only get your contact management tasks done faster than traditional systems adopted by clinics, but also efficiently keep track of appointments between registered doctors and patients.
 
 * Table of Contents
 {:toc}
@@ -14,20 +14,20 @@ It is **optimised for use via a Command Line Interface** (CLI) while still havin
 
 ## Command summary
 
-Action | Format, Examples
+Action | Format (with examples)
 --------|------------------
-[**Add Doctor**](#adding-a-doctor-add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br> e.g., `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
-[**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br> e.g., `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1987 g/M`
-[**Clear**](#clearing-all-entries--clear) | `clear`
-[**Delete**](#deleting-a-person--delete) | `delete INDEX`<br> e.g., `delete 3`
-[**Exit**](#exiting-the-program--exit) | `exit`
-[**Find**](#locating-persons-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-[**Find Doctor**](#locating-doctors-by-name-find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-doctor James Jake`
-[**Find Patient**](#locating-patients-by-name-find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-patient James Jake`
-[**List**](#listing-all-persons--list) | `list`
-[**List Doctors**](#listing-all-doctors-list-doctor) | `list-doctor`
-[**List Patients**](#listing-all-patients-list-patient) | `list-patient`
 [**Help**](#viewing-help--help) | `help`
+[**Add Doctor**](#adding-a-doctor--add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br><br> e.g. `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
+[**Add Patient**](#adding-a-patient--add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br><br> e.g. `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1987 g/M`
+[**List**](#listing-all-persons--list) | `list`
+[**List Doctors**](#listing-all-doctors--list-doctor) | `list-doctor`
+[**List Patients**](#listing-all-patients--list-patient) | `list-patient`
+[**Find**](#finding-a-person-by-name--find) | `find KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find James Jake`
+[**Find Doctor**](#finding-a-doctor-by-name--find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-doctor James Jake`
+[**Find Patient**](#finding-a-patient-by-name--find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-patient James Jake`
+[**Delete**](#deleting-a-person--delete) | `delete INDEX` <br><br> e.g. `delete 3`
+[**Clear**](#clearing-all-entries--clear) | `clear`
+[**Exit**](#exiting-the-program--exit) | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
