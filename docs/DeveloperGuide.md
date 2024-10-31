@@ -168,10 +168,14 @@ The `Model` component,
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+The `Storage` component has a key role in persisting data across user sessions. Specifically, it,
+* can save both EduContacts data and user preference data in JSON format. Upon application startup, it reads the saved JSON data back into the app, reconstructing it into the corresponding objects in the `Model` component.
+
+* inherits from both `EduContactsStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+
+* depends on some classes in the `Model` component to serialize and deserialize data, because the `Storage` component's job is to save/retrieve objects that belong to the `Model`. This dependency allows it to handle domain-specific structures, like `Person` and `UserPrefs`, ensuring the saved data aligns with the current application state and structure.
+
+* uses exception handling to manage file I/O issues (e.g., missing or corrupted files) and provides feedback to the user if data loading or saving encounters an issue, ensuring that the application can gracefully handle storage-related errors.
 
 ### Common classes
 
