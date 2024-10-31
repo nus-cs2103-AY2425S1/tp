@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.criteria;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,13 +54,13 @@ public class AppointmentSearchCriteria implements SearchCriteria {
      * @return true if the given {@code Appointment} matches the search criteria
      */
     public boolean test(Appointment appointment) {
-        LocalDate appointmentStartDate = appointment.getStartTime().toLocalDate();
-        LocalDate appointmentEndDate = appointment.getEndTime().toLocalDate();
-        LocalTime appointmentStartTime = appointment.getStartTime().toLocalTime();
-        LocalTime appointmentEndTime = appointment.getEndTime().toLocalTime();
-        return !appointmentStartDate.isBefore(this.startDate) && !appointmentStartTime.isBefore(this.startTime)
-                && !appointmentEndDate.isAfter(this.endDate) && !appointmentEndTime.isAfter(this.endTime);
+        LocalDateTime appointmentStart = appointment.getStartTime();
+        LocalDateTime appointmentEnd = appointment.getEndTime();
 
+        LocalDateTime criteriaStart = LocalDateTime.of(this.startDate, this.startTime);
+        LocalDateTime criteriaEnd = LocalDateTime.of(this.endDate, this.endTime);
+
+        return !appointmentStart.isBefore(criteriaStart) && !appointmentEnd.isAfter(criteriaEnd);
     }
     @Override
     public boolean equals(Object other) {
