@@ -1,6 +1,6 @@
 package seedu.address.model;
 
-import seedu.address.model.person.Age;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the command information that users reference.
@@ -14,6 +14,7 @@ public class CommandInfo {
      * Creates a CommandInfo object.
      */
     public CommandInfo(String commandUsage) {
+        requireNonNull(commandUsage);
         this.commandUsage = commandUsage;
     }
 
@@ -36,7 +37,7 @@ public class CommandInfo {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Age)) {
+        if (!(other instanceof CommandInfo)) {
             return false;
         }
 
