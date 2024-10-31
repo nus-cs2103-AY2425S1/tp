@@ -48,9 +48,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         PrefixCheckResult prefixCheckResult = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS,
                 PREFIX_JOB, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_INCOME);
         if (!prefixCheckResult.isAllPrefixPresent()) {
-            String missingPrefixMessage =
-                    String.format("The following mandatory prefixes are missing: %s",
-                            prefixCheckResult.getMissingPrefixes());
+            String missingPrefixMessage = AddCommand.MISSING_PREFIX_MESSAGE_START
+                    + prefixCheckResult.getMissingPrefixes();
             throw new ParseException(missingPrefixMessage + "\n" + String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.MESSAGE_USAGE));
         } else if (!argMultimap.getPreamble().isEmpty()) {
@@ -81,7 +80,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         List<Prefix> listOfMissingPrefixes = Stream.of(prefixes)
                 .filter(prefix -> !argumentMultimap.getValue(prefix).isPresent())
                 .collect(Collectors.toList());
-        boolean isAllPrefixPresent =  listOfMissingPrefixes.isEmpty();
+        boolean isAllPrefixPresent = listOfMissingPrefixes.isEmpty();
         return new PrefixCheckResult(isAllPrefixPresent, listOfMissingPrefixes);
     }
 

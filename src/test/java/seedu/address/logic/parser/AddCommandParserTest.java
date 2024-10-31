@@ -50,6 +50,10 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -180,37 +184,39 @@ public class AddCommandParserTest {
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + JOB_DESC_BOB + INCOME_DESC_BOB,
-                expectedMessage);
+                AddCommand.MISSING_PREFIX_MESSAGE_START + "[" + PREFIX_NAME + "]\n" + expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + JOB_DESC_BOB + INCOME_DESC_BOB,
-                expectedMessage);
+                AddCommand.MISSING_PREFIX_MESSAGE_START + "[" + PREFIX_PHONE + "]\n" + expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
                         + JOB_DESC_BOB + INCOME_DESC_BOB,
-                expectedMessage);
+                AddCommand.MISSING_PREFIX_MESSAGE_START + "[" + PREFIX_EMAIL + "]\n" + expectedMessage);
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                         + JOB_DESC_BOB + INCOME_DESC_BOB,
-                expectedMessage);
+                AddCommand.MISSING_PREFIX_MESSAGE_START + "[" + PREFIX_ADDRESS + "]\n" + expectedMessage);
 
         // missing job prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + VALID_JOB_BOB + INCOME_DESC_BOB,
-                expectedMessage);
+                AddCommand.MISSING_PREFIX_MESSAGE_START + "[" + PREFIX_JOB + "]\n" + expectedMessage);
 
         // missing income prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + JOB_DESC_BOB + VALID_INCOME_BOB,
-                expectedMessage);
+                AddCommand.MISSING_PREFIX_MESSAGE_START + "[" + PREFIX_INCOME + "]\n" + expectedMessage);
 
         // all prefixes missing
+        List<Prefix> missingPrefixList = new ArrayList<>(Arrays.asList(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_JOB,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_INCOME));
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
                 + VALID_JOB_BOB + VALID_INCOME_BOB,
-                expectedMessage);
+                AddCommand.MISSING_PREFIX_MESSAGE_START + missingPrefixList + "\n" + expectedMessage);
     }
 
     @Test

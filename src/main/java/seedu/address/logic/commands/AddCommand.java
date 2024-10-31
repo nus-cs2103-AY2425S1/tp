@@ -24,18 +24,22 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_JOB + "JOB "
-            + PREFIX_INCOME + "INCOME "
-            + "[" + PREFIX_TIER + "TIER]...\n"
-            + "[" + PREFIX_NEW_REMARK + "NEW REMARK]..."
-            + "[" + PREFIX_STATUS + "STATUS]...\n"
-            + "Example: " + COMMAND_WORD + " "
+    public static final String MISSING_PREFIX_MESSAGE_START = "The following mandatory prefixes are missing: ";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
+            + "Required Parameters: "
+            + PREFIX_NAME + " NAME "
+            + PREFIX_PHONE + " PHONE "
+            + PREFIX_EMAIL + " EMAIL "
+            + PREFIX_ADDRESS + " ADDRESS "
+            + PREFIX_JOB + " JOB "
+            + PREFIX_INCOME + " INCOME\n"
+            + "Optional Parameters: "
+            + "[" + PREFIX_TIER + " TIER] "
+            + "[" + PREFIX_NEW_REMARK + " NEW REMARK] "
+            + "[" + PREFIX_STATUS + " STATUS] \n"
+            + "Example Usage: '"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -44,7 +48,8 @@ public class AddCommand extends Command {
             + PREFIX_INCOME + "300 "
             + PREFIX_TIER + "GOLD "
             + PREFIX_NEW_REMARK + "He is very smart "
-            + PREFIX_STATUS + "NON_URGENT";
+            + PREFIX_STATUS + "NON_URGENT"
+            + "'";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

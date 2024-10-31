@@ -20,8 +20,8 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches for all customers whose specified field "
             + "contains the given substring (case-insensitive) and displays the results in a numbered list.\n"
             + "Parameters: <FLAG>/ <SEARCH TERM>\n"
-            + "Flags: n/ (name), p/ (phone), e/ (email), a/ (address), j/ (job), r/ (remarks)\n"
-            + "Example: " + COMMAND_WORD + " n/ Alice" + " p/ 91112222\n"
+            + "Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, r/ REMARK\n"
+            + "Example: '" + COMMAND_WORD + " n/ Alice" + " p/ 91112222'\n"
             + "This will find all customers whose names contain 'Alice' and whose phone number is '91112222'.";
 
     private final Predicate<Person> predicate;
