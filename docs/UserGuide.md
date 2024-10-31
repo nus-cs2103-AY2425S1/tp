@@ -212,11 +212,11 @@ Examples:
 
 Filters the properties based on any combination of type, lower bound for matching price and upper bound for matching price.
 
-Format: `filterclient [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
+Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 
 * Filters the properties with any combination of `TYPE`, lower bounded `MATCHING_PRICE` and upper bounded `MATCHING_PRICE`.
-* The `TYPE` is case-insensetive HDB, CONDO or LANDED.
-* The `MATCHING_PRICE` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
+* The `TYPE` is case-insensitive HDB, CONDO or LANDED.
+* The `MATCHING_PRICE` is a non-negative integer (i.e. No non-numeric symbols such as decimal points, currency symbols, etc.).
 
 * <box type="definition" seamless>
 

@@ -153,16 +153,14 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Add Buyer Feature
+### Add Buyer Feature
 
-#### Proposed Implementation
 The addbuyer command takes in the name, phone number, and email address of the buyer and adds the buyer to the client book.
 The sequence diagram is shown as such:
 <puml src="diagrams/AddBuyerSequenceDiagram.puml" alt="AddBuyer" />
 
-### \[Proposed\] Filter property feature
+### Filter property feature
 
-#### Proposed Implementation
 The filterproperty command gets the matching price between the ask and bid and is implemented as a static variable.
 The sequence diagram is shown as such:
 <puml src="diagrams/FilterPropertySequenceDiagram.puml" alt="FilterProperty" />
@@ -260,11 +258,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -292,7 +285,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**:
 
 
-ClientGrid is an all-in-one address book tailored for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data, monitor properties, and schedule meetings —all within a single app, eliminating the need to juggle multiple apps. With offline access, agents can stay productive with ClientGrid anywhere.
+ClientGrid is an all-in-one address book tailored for English-speaking real estate agents within Singapore to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data, monitor properties, and schedule meetings —all within a single app, eliminating the need to juggle multiple apps. With offline access, agents can stay productive with ClientGrid anywhere. The default language of communication of ClientGrid is English.
 
 ### User stories
 
@@ -311,8 +304,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | real estate agent    | list information about sellers                             | manage relationships and property listings efficiently       |
 | `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction |
 | `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -343,7 +334,34 @@ Extensions:
 
       Use case ends.
 
-**Use case: UC2 - Delete Client (Buyer or Seller)**
+**Use case: UC2 - List Clients (i.e. Buyers and/or Sellers), Properties or Meetings**
+
+MSS:
+
+1. Real Estate Agent requests to view a list of clients (i.e. buyers and/or sellers), properties or meetings
+2. ClientGrid will display the corresponding list with each entry presented inside a card
+
+Use case ends.
+
+**Use case: UC3 - Filter Client**
+
+MSS:
+1. Real estate agent requests to filter the clients by entering a name prefix.
+2. ClientGrid will filter and display the clients whose names start with the provided prefix.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
+
+    * 1a1. ClientGrid detects the error and requests for the correct data
+
+    * 1a2. Real estate agent enters a new name prefix
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+      Use case ends.
+  
+**Use case: UC4 - Delete Client (Buyer or Seller)**
 
 Guarantees:
 * If the buyer/ seller was in the database originally, it would be removed from client database with no side effects.
@@ -365,36 +383,51 @@ Extensions:
 
        Use case ends.
 
-**Use case: UC3 - Add a property**
+**Use case: UC5 - Add a property**
 
 **MSS**
 
-1.  User inputs details of property
-2.  System outputs success message
-
+1.  Real estate agent requests to add a property to ClientGrid and passes in the property's postal code, unit number, housing type, ask price and bid price. 
+2.  ClientGrid will add the property's postal code, unit number, housing type, ask price and bid price specified by the real estate agent.
     Use case ends.
 
 **Extensions**
 
-* 1a. Invalid command detail symbols
+* 1a. ClientGrid detects an error in the postal code / unit / type / ask / bid format provided by the real estate agent.
 
-    * 1a1. System outputs error message in user console
+    * 1a1. ClientGrid requests for the correct data.
 
-      Use case ends.
+    * 1a2. Real estate agent enters new data.
 
-* 1b. Postal code number contains invalid symbols and format typical in Singapore
-
-    * 1b1. System outputs error message in user console
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
 
       Use case ends.
 
-* 1c. Unit number contains invalid symbols and format
+* 2a. ClientGrid detects that the property already exists in the property book
 
-    * 1c1. System outputs error message in user console
+    * 2a1. ClientGrid informs the real estate agent that the property already exists in the property book and does not add the duplicate property.
 
       Use case ends.
 
-**Use case: UC4 - Delete Property**
+**Use case: UC6 - Filter Property**
+
+MSS:
+1. Real estate agent requests to filter the propertiess by entering property type and matching price bounds.
+2. ClientGrid will filter and display the properties that match the property type and has a matching price within the matching price bounds.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the type / matching price format prefix provided by the real estate agent.
+
+    * 1a1. ClientGrid detects the error and requests for the correct data
+
+    * 1a2. Real estate agent enters a new type / matching price prefix
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+      Use case ends.
+  
+**Use case: UC7 - Delete Property**
 
 Guarantees:
 * If property listing was in the database originally, it would be removed from property database with no side effects.
@@ -422,34 +455,7 @@ Extensions:
 
     * Use case ends.
 
-**Use case: UC5 - List Clients (i.e. Buyers and/or Sellers), Properties or Meetings**
-
-MSS:
-
-1. Real Estate Agent requests to view a list of clients (i.e. buyers and/or sellers), properties or meetings
-2. ClientGrid will display the corresponding list with each entry presented inside a card
-
-Use case ends.
-
-**Use case: UC6 - Filter Client**
-
-MSS:
-1. Real estate agent requests to filter the clients by entering a name prefix.
-2. ClientGrid will filter and display the clients whose names start with the provided prefix.
-
-Extensions:
-
-* 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
-
-    * 1a1. ClientGrid detects the error and requests for the correct data
-
-    * 1a2. Real estate agent enters a new name prefix
-
-    * Steps 1a1-1a2 are repeated until the data entered are correct.
-
-      Use case ends.
-
-**Use case: UC7 - Add Meeting**
+**Use case: UC8 - Add Meeting**
 
 MSS:
 1. Real estate agent requests to add a meeting based on the meeting’s title and date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
@@ -480,7 +486,7 @@ Extensions:
 
     * Use case ends.
 
-**Use case: UC8 - Delete Meeting**
+**Use case: UC9 - Delete Meeting**
 
 Guarantees:
 * If meeting was in the meeting book originally, it would be removed from meeting book with no side effects.
@@ -517,12 +523,14 @@ Extensions:
 5. Should be able to handle case of corrupted file
 
 ### Glossary
+
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Clients**: Buyers or Sellers of properties the real estate agent is managing
 * **Client Book**: In-memory JSON file containing the clients stored in ClientGrid
 * **Property Book**: In-memory JSON file containing the properties stored in ClientGrid
 * **Meeting Book**: In-memory JSON file containing the meetings stored in ClientGrid
 * **Corrupted file**: Missing file and invalid data
+* **Matching Price**: The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
