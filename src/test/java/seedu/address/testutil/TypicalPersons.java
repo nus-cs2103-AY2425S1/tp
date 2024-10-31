@@ -106,13 +106,6 @@ public class TypicalPersons {
             .withAddress("chicago ave")
             .withAppointment("22-10-2024 01:14")
             .build();
-    public static final Person PERSONNONRICPRESENT = new PersonBuilder()
-            .withName("NO NRIC FOUND")
-            .withPhone("00000000")
-            .withNric("A0000000A")
-            .withEmail("nonric@nonric.com")
-            .withAddress("no nric found")
-            .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder()

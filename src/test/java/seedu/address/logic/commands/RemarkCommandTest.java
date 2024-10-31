@@ -82,7 +82,7 @@ public class RemarkCommandTest {
         //Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         Nric invalidNric = new Nric("A0000000A");
         RemarkCommand remarkCommand = new RemarkCommand(invalidNric, new Remark(VALID_REMARK_BOB));
-        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
     }
 
     /**
@@ -105,7 +105,7 @@ public class RemarkCommandTest {
 
         RemarkCommand remarkCommand = new RemarkCommand(invalidNric, new Remark(VALID_REMARK_BOB));
 
-        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
     }
 
     @Test
@@ -123,6 +123,6 @@ public class RemarkCommandTest {
         // different index -> returns false
         assertFalse(standardCommand.equals(new RemarkCommand(NRIC_SECOND_PERSON, new Remark(VALID_REMARK_AMY))));
         // different remark -> returns false
-        assertFalse(standardCommand.equals(new RemarkCommand(NRIC_SECOND_PERSON, new Remark(VALID_REMARK_BOB))));
+        assertFalse(standardCommand.equals(new RemarkCommand(NRIC_FIRST_PERSON, new Remark(VALID_REMARK_BOB))));
     }
 }

@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.PERSONNONRICPRESENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Optional;
@@ -62,7 +61,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidNricUnfilteredList_throwsCommandException() {
         //Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        Nric invalidNric = new Nric("1231231");
+        Nric invalidNric = new Nric("A0000000A");
         DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);

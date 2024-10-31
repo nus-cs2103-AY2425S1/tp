@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
+import static seedu.address.testutil.TypicalNrics.NRIC_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -323,7 +324,7 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(NRIC_FIRST_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(NRIC_SECOND_PERSON, DESC_AMY)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(NRIC_FIRST_PERSON, DESC_BOB)));

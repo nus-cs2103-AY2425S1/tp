@@ -65,17 +65,17 @@ public class AppointmentCommandParserTest {
 
     @Test
     public void parse_invalidIndex_failure() {
-        // invalid non-numeric index
-        assertParseFailure(parser, "S1231231D a/15-08-2024 14:30",
+        // invalid nric
+        assertParseFailure(parser, "1 a/15-08-2024 14:30",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
 
-        // zero index (not allowed)
+        /*// zero index (not allowed)
         assertParseFailure(parser, "S1231231D a/15-08-2024 14:30",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
 
         // negative index
         assertParseFailure(parser, "S1231231D a/15-08-2024 14:30",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));*/
     }
 
     @Test
