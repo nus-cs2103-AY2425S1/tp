@@ -30,7 +30,9 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String CLEAR_ENTRIES_HELP = "Clear all entries: "
             + "Use the command 'clear' to remove all contacts.";
     private static final String EXIT_HELP = "Exit the program: Use the command 'exit' to close the application.";
-
+    private static final String COUNT_HELP = "Count shown entries: "
+            + "Use the command 'count' to find count of shown entries";
+    private static final String FAVORITE_HELP = "Favorite a person: Use the command 'favorite' followed by the index.";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
@@ -68,6 +70,8 @@ public class HelpWindow extends UiPart<Stage> {
         helpContent.append(FIND_PERSON_HELP).append("\n");
         helpContent.append(DELETE_PERSON_HELP).append("\n");
         helpContent.append(CLEAR_ENTRIES_HELP).append("\n");
+        helpContent.append(COUNT_HELP).append("\n");
+        helpContent.append(FAVORITE_HELP).append("\n");
         helpContent.append(EXIT_HELP).append("\n");
 
         helpMessage.setText(helpContent.toString());
