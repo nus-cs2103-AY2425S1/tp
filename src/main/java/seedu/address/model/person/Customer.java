@@ -15,7 +15,6 @@ import seedu.address.model.tag.Tag;
  */
 public class Customer extends Person {
 
-    private final List<CustomerOrder> openCustomerOrders; // Stores a list of open/unfulfilled customer orders.
     private final Information information; // Stores additional information about the customer.
 
     /**
@@ -25,20 +24,8 @@ public class Customer extends Person {
                     Information information, Remark remark, Set<Tag> tags) {
         super(name, phone, email, address, remark, tags);
         this.information = information;
-        this.openCustomerOrders = new ArrayList<>();
     }
 
-    public List<CustomerOrder> getOpenCustomerOrders() {
-        return openCustomerOrders;
-    }
-
-    public void addCustomerOrder(CustomerOrder customerOrder) {
-        openCustomerOrders.add(customerOrder);
-    }
-
-    public void removeCustomerOrder(CustomerOrder customerOrder) {
-        openCustomerOrders.remove(customerOrder);
-    }
 
     public Information getInformation() {
         return information;

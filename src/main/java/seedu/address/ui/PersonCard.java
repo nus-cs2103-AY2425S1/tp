@@ -38,7 +38,8 @@ public class PersonCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private Label details;
-
+    @FXML
+    private Label orders;
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
@@ -51,7 +52,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
-
+        orders.setText(person.getOrders());
         // Sort and display the tags
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

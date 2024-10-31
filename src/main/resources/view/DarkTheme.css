@@ -133,6 +133,7 @@ background {
     -fx-font-family: "PT Sans", Arial, sans-serif;
     -fx-font-size: 13px;
     -fx-text-fill: #64748b;
+
 }
 
 .stack-pane {

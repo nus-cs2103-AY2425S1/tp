@@ -14,8 +14,6 @@ import seedu.address.model.tag.Tag;
  * Inherits from Person and adds additional fields for Supplier-specific information.
  */
 public class Supplier extends Person {
-
-    private final List<SupplierOrder> openSupplyOrders; // stores a list of open/unfulfilled supply orders
     private final Ingredients ingredientsSupplied; // list of ingredients supplied by the supplier
 
     /**
@@ -26,20 +24,8 @@ public class Supplier extends Person {
                     Remark remark, Set<Tag> tags) {
         super(name, phone, email, address, remark, tags);
         this.ingredientsSupplied = ingredientsSupplied;
-        this.openSupplyOrders = new ArrayList<>();
     }
 
-    public List<SupplierOrder> getOpenSupplyOrders() {
-        return openSupplyOrders;
-    }
-
-    public void addSupplyOrder(SupplierOrder supplyOrder) {
-        openSupplyOrders.add(supplyOrder);
-    }
-
-    public void removeSupplyOrder(SupplierOrder supplyOrder) {
-        openSupplyOrders.remove(supplyOrder);
-    }
 
     public Ingredients getIngredientsSupplied() {
         return ingredientsSupplied;

@@ -46,17 +46,18 @@ public class AddSupplierOrderCommand extends Command {
                 .                       filter(Objects::nonNull)
                                         .toList();
 
-        SupplierOrder supplyOrder = new SupplierOrder(phoneNumber, productList, OrderStatus.PENDING);
-
         List<Person> personList = model.getFilteredPersonList();
-        Person person = Person.getSupplier();
+        Person person = Person.getSupplier(new Phone(phoneNumber));
 
         for (Person p : personList) {
             if (p.getPhone().equals(new Phone(phoneNumber))) {
                 person = p;
             }
         }
-        supplyOrder.setPerson(person);
+
+        SupplierOrder supplyOrder = new SupplierOrder(person, productList, OrderStatus.PENDING);
+
+        person.addOrder(supplyOrder);
 
         model.addSupplyOrder(supplyOrder);
 

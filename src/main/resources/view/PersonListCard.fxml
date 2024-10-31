@@ -47,6 +47,9 @@
           <Label text="Additional Details:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
           <Label fx:id="details" styleClass="cell_small_label" text="$details" GridPane.columnIndex="1" wrapText="true"  GridPane.rowIndex="4"/>
 
+          <Label text="Orders:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+          <Label fx:id="orders" styleClass="cell_small_label" text="$orders" GridPane.columnIndex="1" wrapText="true"  GridPane.rowIndex="5"/>
+
         </GridPane>
       </TitledPane>
 

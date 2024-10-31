@@ -2,11 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
+import seedu.address.model.order.Order;
+import seedu.address.model.order.SupplierOrder;
+import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +25,7 @@ public class Person {
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
+    private final List<Order> orders = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -40,28 +41,42 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    private static Person guest = new Person(new Name("Guest"),
-            new Phone(),
-            new Email(),
-            new Address(),
-            new Remark(),
-            Collections.emptySet());
-
-
-    public static Person getGuest() {
-        return guest;
+    public String getOrders() {
+        StringBuilder builder = new StringBuilder();
+        for (Order order : orders) {
+            builder.append(order.toString()).append("\n");
+        }
+        return builder.toString();
     }
 
-    private static Person supplier = new Person(new Name("Supplier"),
-            new Phone(),
-            new Email(),
-            new Address(),
-            new Remark(),
-            Collections.emptySet());
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
+    public void removeOrder(Order order) {
+        orders.remove(order);
+    }
 
 
-    public static Person getSupplier() {
-        return guest;
+    public static Person getGuest(Phone p) {
+        return new Customer(new Name("Guest"),
+                p,
+                new Email(),
+                new Address(),
+                new Information(),
+                new Remark(),
+                Collections.emptySet());
+    }
+
+
+    public static Person getSupplier(Phone p) {
+        return new Supplier(new Name("Guest"),
+                p,
+                new Email(),
+                new Address(),
+                new Ingredients(new ArrayList<>()),
+                new Remark(),
+                Collections.emptySet());
     }
 
     public Name getName() {

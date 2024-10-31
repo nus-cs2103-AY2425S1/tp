@@ -51,16 +51,18 @@ public class AddCustomerOrderCommand extends Command {
                 .                       filter(Objects::nonNull)
                                         .toList();
 
-        CustomerOrder customerOrder = new CustomerOrder(phoneNumber, productList, OrderStatus.PENDING);
         List<Person> personList = model.getFilteredPersonList();
-        Person person = Person.getGuest();
+        Person person = Person.getGuest(new Phone(phoneNumber));
 
         for (Person p : personList) {
             if (p.getPhone().equals(new Phone(phoneNumber))) {
                  person = p;
             }
         }
-        customerOrder.setPerson(person);
+
+        CustomerOrder customerOrder = new CustomerOrder(person, productList, OrderStatus.PENDING);
+
+        person.addOrder(customerOrder);
 
         model.addCustomerOrder(customerOrder);
 

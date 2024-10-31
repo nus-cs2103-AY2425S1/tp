@@ -67,7 +67,7 @@ public abstract class OrderList<T extends Order> {
     public T findOrderByPhoneNumber(String phoneNumber) {
         assert phoneNumber != null : "Phone number cannot be null";
         for (T order : orders) {
-            if (order.getPhoneNumber().equals(phoneNumber)) {
+            if (order.getPerson().getPhone().value.equals(phoneNumber)) {
                 return order;
             }
         }

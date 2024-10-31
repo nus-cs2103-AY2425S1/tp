@@ -44,7 +44,7 @@ public class CustomerOrderCard extends UiPart<Region> {
         this.order = order;
         id.setText(displayedIndex + ". ");
         name.setText(order.getPerson().getName().fullName);
-        phone.setText(order.getPhoneNumber());
+        phone.setText(order.getPerson().getPhone().value);
         date.setText(order.getOrderDate());
         items.setText(order.viewOrder());
 
