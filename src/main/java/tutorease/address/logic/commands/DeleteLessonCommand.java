@@ -50,7 +50,7 @@ public class DeleteLessonCommand extends LessonCommand {
         }
 
         Lesson lesson = model.getLesson(listIndex);
-        model.deleteLesson(listIndex);
+        model.deleteLesson(lesson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, lesson));
     }
 

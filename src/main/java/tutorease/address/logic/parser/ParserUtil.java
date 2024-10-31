@@ -1,10 +1,12 @@
 package tutorease.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.commons.util.StringUtil;
@@ -50,6 +52,9 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!Name.hasNoSlash(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS_NO_SLASHES);
+        }
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -182,9 +187,7 @@ public class ParserUtil {
     public static StartDateTime parseStartDateTime(String startDateTime) throws ParseException {
         requireNonNull(startDateTime);
         String trimmedStartDateTime = startDateTime.trim();
-        if (!StartDateTime.isValidDateTime(trimmedStartDateTime)) {
-            throw new ParseException(StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
-        }
+        checkValidDateTime(startDateTime);
         return StartDateTime.createStartDateTime(trimmedStartDateTime);
     }
 
@@ -205,5 +208,14 @@ public class ParserUtil {
         return EndDateTime.createEndDateTime(startDateTime, hoursToAdd);
     }
 
-
+    /**
+     * Checks if all the prefixes are present in the ArgumentMultimap.
+     *
+     * @param argumentMultimap The ArgumentMultimap to check.
+     * @param prefixes The prefixes to check.
+     * @return True if all the prefixes are present, false otherwise.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }

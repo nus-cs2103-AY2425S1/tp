@@ -100,18 +100,18 @@ public class ModelManagerTest {
 
     @Test
     public void deleteLesson_success() throws ParseException {
-        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
         LessonBuilder lessonBuilder = new LessonBuilder();
         Lesson lesson = lessonBuilder.build();
         lessonSchedule.addLesson(lesson);
         assertTrue(lessonSchedule.hasLesson(lesson));
-        lessonSchedule.deleteLesson(0);
+        lessonSchedule.deleteLesson(lesson);
         assertFalse(lessonSchedule.hasLesson(lesson));
     }
 
     @Test
     public void getLesson_success() throws ParseException {
-        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
         LessonBuilder lessonBuilder = new LessonBuilder();
         Lesson lesson = lessonBuilder.build();
         lessonSchedule.addLesson(lesson);
@@ -121,12 +121,12 @@ public class ModelManagerTest {
 
     @Test
     public void getLessonScheduleSize_success() throws ParseException {
-        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
         LessonBuilder lessonBuilder = new LessonBuilder();
         Lesson lesson = lessonBuilder.build();
-        assertEquals(0, modelManager.getLessonScheduleSize());
+        assertEquals(0, lessonSchedule.getSize());
         lessonSchedule.addLesson(lesson);
-        assertEquals(1, modelManager.getLessonScheduleSize());
+        assertEquals(1, lessonSchedule.getSize());
     }
 
     @Test
@@ -169,19 +169,20 @@ public class ModelManagerTest {
 
     @Test
     public void deleteStudentLesson_oneStudent_success() throws ParseException {
-        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
         LessonBuilder lessonBuilder = new LessonBuilder();
         Lesson lesson = lessonBuilder.build();
         Person student = lesson.getStudent();
         lessonSchedule.addLesson(lesson);
         assertTrue(lessonSchedule.hasLesson(lesson));
         modelManager.deleteStudentLesson(student);
+        lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
         assertFalse(lessonSchedule.hasLesson(lesson));
     }
 
     @Test
     public void deleteStudentLesson_noStudent_success() throws ParseException {
-        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
         LessonBuilder lessonBuilder = new LessonBuilder();
         Lesson lesson = lessonBuilder.build();
         Person student = lesson.getStudent();
@@ -192,7 +193,7 @@ public class ModelManagerTest {
 
     @Test
     public void deleteStudentLesson_multipleStudent_success() throws ParseException {
-        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
 
         // Create Alice's Lesson
         LessonBuilder lessonBuilderAlice = new LessonBuilder();
@@ -210,14 +211,16 @@ public class ModelManagerTest {
         assertEquals(bob, lessonBob.getStudent());
 
         // Add both Alice's and Bob's lesson
-        lessonSchedule.addLesson(lessonAlice);
-        lessonSchedule.addLesson(lessonBob);
+        modelManager.addLesson(lessonAlice);
+        modelManager.addLesson(lessonBob);
+        lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
         assertEquals(2, lessonSchedule.getSize());
         assertTrue(lessonSchedule.hasLesson(lessonAlice));
         assertTrue(lessonSchedule.hasLesson(lessonBob));
 
         // Only remove Bob's lesson so only Alice's remain
         modelManager.deleteStudentLesson(bob);
+        lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
         assertEquals(1, lessonSchedule.getSize());
         assertTrue(lessonSchedule.hasLesson(lessonAlice));
         assertFalse(lessonSchedule.hasLesson(lessonBob));

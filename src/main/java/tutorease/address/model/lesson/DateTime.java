@@ -1,28 +1,26 @@
 package tutorease.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
-import static tutorease.address.commons.util.AppUtil.checkArgument;
+import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.commons.util.DateTimeUtil.dateTimeToString;
-import static tutorease.address.commons.util.DateTimeUtil.getDateTimeFormat;
 
 import java.time.LocalDateTime;
 
-import tutorease.address.commons.util.DateTimeUtil;
+import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a DateTime in the address book.
  */
 public class DateTime implements Comparable<DateTime> {
-    private static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format of " + getDateTimeFormat();
     private final LocalDateTime dateTime;
     /**
      * Constructs a {@code DateTime}.
      *
      * @param dateTime A valid date and time.
      */
-    public DateTime(LocalDateTime dateTime) {
+    public DateTime(LocalDateTime dateTime) throws ParseException {
         requireNonNull(dateTime);
-        checkArgument(DateTimeUtil.isValidDateTime(dateTimeToString(dateTime)), MESSAGE_CONSTRAINTS);
+        checkValidDateTime(dateTimeToString(dateTime));
         this.dateTime = dateTime;
     }
 
@@ -91,6 +89,11 @@ public class DateTime implements Comparable<DateTime> {
      * @return True if the date and time is valid, false otherwise.
      */
     public static boolean isValidDateTime(String dateTime) {
-        return DateTimeUtil.isValidDateTime(dateTime);
+        try {
+            checkValidDateTime(dateTime);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
     }
 }
