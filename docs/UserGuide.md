@@ -139,6 +139,10 @@ Adds an appointment between a doctor and patient, at a specified date and time, 
 
 Format: `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The parameter `PATIENT_NAME` and `DOCTOR_NAME` are case-sensitive, and must be an exact match of respective names in the address book. The app will reject the input if it contains unknown doctors or patients.
+</div>
+
 **Examples:**
 * `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100`
 
@@ -172,7 +176,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+</div>
 
 **Examples:**
 * `find John` returns `john` and `John Doe`
@@ -191,7 +198,10 @@ Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Only doctors matching all keywords provided will be returned (i.e. `AND` search).
   e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
-* Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+</div>
 
 **Examples:**
 * `find-doctor John` returns `John Doe`.
@@ -209,7 +219,10 @@ Format: `find-patient KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Patients matching all keywords provided will be returned (i.e. `AND` search).
   e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
-* Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+</div>
 
 **Examples:**
 * `find-patient John` returns `John Doe`.
