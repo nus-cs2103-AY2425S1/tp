@@ -37,7 +37,7 @@ public class OperatingHours {
     public OperatingHours(String source) {
         checkArgument(isValidOperatingHours(source), MESSAGE_CONSTRAINTS);
 
-        String[] tmp = source.split(" ", 2);
+        String[] tmp = source.split(" to ", 2);
 
         if (tmp.length != 2) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
@@ -100,10 +100,8 @@ public class OperatingHours {
      * check if a given string a valid OperatingHours
      */
     public static boolean isValidOperatingHours(String test) {
-        String[] tmp = test.split(" ", 2);
+        String[] tmp = test.split(" to ", 2);
         try {
-            System.out.println(tmp[0]);
-            System.out.println(tmp[1]);
             parseTime(tmp[0]);
             parseTime(tmp[1]);
             return true;
