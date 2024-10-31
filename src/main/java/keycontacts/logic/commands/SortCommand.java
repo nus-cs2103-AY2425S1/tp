@@ -24,11 +24,11 @@ public class SortCommand extends Command {
             + ": Sorts the displayed students by the specified field(s) in specified order. "
             + "Use 'sort clear' to clear existing sorting conditions\n"
             + "Parameters: "
-            + "[" + PREFIX_NAME + "ASC/DESC] "
-            + "[" + PREFIX_PHONE + "ASC/DESC] "
-            + "[" + PREFIX_ADDRESS + "ASC/DESC] "
-            + "[" + PREFIX_GRADE_LEVEL + "ASC/DESC] "
-            + "[" + PREFIX_GROUP + "ASC/DESC]\n"
+            + "[" + PREFIX_NAME + "ASC or DESC] "
+            + "[" + PREFIX_PHONE + "ASC or DESC] "
+            + "[" + PREFIX_ADDRESS + "ASC or DESC] "
+            + "[" + PREFIX_GRADE_LEVEL + "ASC or DESC] "
+            + "[" + PREFIX_GROUP + "ASC or DESC]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GRADE_LEVEL + "ASC " + PREFIX_NAME + "DESC";
 
     private final StudentComparator comparator;

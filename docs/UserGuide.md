@@ -196,18 +196,17 @@ Finds students whose personal details match inputs
 Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `[n/Hans] [p/88197184]` will fetch same list as `[p/88197184] [n/Hans]`
+* The order of the keywords does not matter. e.g. `n/Hans p/88197184` will fetch same list as `p/88197184 n/Hans`
 * Prefixes other than `n/`, `p/`, `a/`, `gl/` will be ignored.
 * Any keyword before the first valid prefix will be ignored
-* Only the name, phone number, address, and grade level is searched.
+* Only the name, phone number, address, grade level and group is searched.
 * Partial inclusion of keyword will be considered a match
 * Students matching all field will be returned (i.e. `AND` search).
   e.g. `n/Hans p/88191784` will return `Hans Gruber; 88197184`, but not`Hans Goretzka; 88197188`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+*  TODO: ADD BETTER EXAMPLES
 
 ### Sorting students : `sort`
 
@@ -238,7 +237,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the student directory.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
