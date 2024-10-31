@@ -13,7 +13,12 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Phone;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingDate;
+import seedu.address.model.meeting.MeetingTitle;
+import seedu.address.model.property.PostalCode;
+import seedu.address.model.property.Type;
 
 /**
  * Adds a {@code Meeting} to the meeting book.
@@ -22,14 +27,18 @@ public class AddMeetingCommand extends Command {
 
     public static final String COMMAND_WORD = "addmeeting";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting to the meeting log. \n"
-            + "Parameters: "
-            + PREFIX_MEETING_TITLE + "MEETING_TITLE "
-            + PREFIX_MEETING_DATE + "MEETING_DATE "
-            + PREFIX_BUYER_PHONE + "BUYER_PHONE "
-            + PREFIX_SELLER_PHONE + "SELLER_PHONE "
-            + PREFIX_TYPE + "TYPE "
-            + PREFIX_POSTALCODE + "POSTALCODE ";
+    public static final String MESSAGE_USAGE = String
+            .format("%s: Adds a meeting to the meeting book.\n"
+                            + "Parameters: %sMEETING_TITLE %sMEETING_DATE %sBUYER_PHONE %sSELLER_PHONE %sTYPE "
+                            + "%sPOSTALCODE\n"
+                            + "Restrictions:\n"
+                            + "\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
+                    COMMAND_WORD, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE, PREFIX_SELLER_PHONE,
+                    PREFIX_TYPE, PREFIX_POSTALCODE, MeetingTitle.MESSAGE_CONSTRAINTS, MeetingDate.MESSAGE_CONSTRAINTS,
+                    Phone.MESSAGE_CONSTRAINTS, Type.MESSAGE_CONSTRAINTS, PostalCode.MESSAGE_CONSTRAINTS,
+                    "There must be an existing buyer in the client book with a phone number equal to BUYER_PHONE. "
+                            + "Likewise for SELLER_PHONE.", "Postal Code must belong to some existing property "
+                            + "in the property book of the specified Type.");
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "There is already a meeting of the same title "
@@ -48,6 +57,7 @@ public class AddMeetingCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
 
         if (model.hasMeeting(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);

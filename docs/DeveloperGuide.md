@@ -90,20 +90,15 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deletebuyer p/91234567")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</box>
+<puml src="diagrams/DeleteBuyerSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `deletebuyer p/91234567` Command" />
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, it is passed to an `ClientBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteBuyerCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteBuyerCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -164,13 +159,6 @@ This section describes some noteworthy details on how certain features are imple
 The addbuyer command takes in the name, phone number, and email address of the buyer and adds the buyer to the client book.
 The sequence diagram is shown as such:
 <puml src="diagrams/AddBuyerSequenceDiagram.puml" alt="AddBuyer" />
-
-### \[Proposed\] Delete Buyer Feature
-
-#### Proposed Implementation
-The deletebuyer command takes in the phone number of the buyer and deletes the buyer from the client book based on the phone number.
-The sequence diagram is shown as such:
-<puml src="diagrams/DeleteBuyerSequenceDiagram.puml" alt="DeleteBuyer" />
 
 ### \[Proposed\] Filter property feature
 
@@ -303,25 +291,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**:
 
-ClientGrid is an address book designed for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor properties the agent is in charge of while maintaining core address book functionality.
 
+ClientGrid is an all-in-one address book tailored for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data, monitor properties, and schedule meetings —all within a single app, eliminating the need to juggle multiple apps. With offline access, agents can stay productive with ClientGrid anywhere.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​           | I want to …​                                               | So that I can…​                                                        |
-|----------|-------------------|------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | real estate agent | add a new client (buyer or seller) to ClientGrid           | keep all their contact information organized in one place
-| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid          | keep all their contact information organized in one place              |
-| `* * *`  | real estate agent | add new properties to client grid | keep track of my client's property details                             |
-| `* * *`  | real estate agent | delete a property entry from ClientGrid                    | remove entries that I no longer need                                   |
-| `* * *`  | real estate agent    | list information about properties                          | easily manage my portfolio of available properties                     |
-| `* * *`  | real estate agent    | list information about buyers                              | match buyers with suitable properties based on their preferences        |
-| `* * *`  | real estate agent    | list information about sellers                             | manage relationships and property listings efficiently                 |
-| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction         |
-| `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
+| Priority | As a …​           | I want to …​                                               | So that I can…​                                              |
+|----------|-------------------|------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | real estate agent | add a new client (buyer or seller) to ClientGrid           | keep all their contact information organized in one place    
+| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid          | keep all their contact information organized in one place    |
+| `* * *`  | real estate agent | add new properties to client grid                          | keep track of my client's property details                   |
+| `* * *`  | real estate agent | delete a property entry from ClientGrid                    | remove entries that I no longer need                         |
+| `* * *`  | real estate agent | add a meeting with my client(s) on ClientGrid              | keep track of all my scheduled meetings in one place         |
+| `* * *`  | real estate agent    | list information about properties                          | easily manage my portfolio of available properties           |
+| `* * *`  | real estate agent    | list information about buyers                              | match buyers with suitable properties based on their preferences |
+| `* * *`  | real estate agent    | list information about sellers                             | manage relationships and property listings efficiently       |
+| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction |
+| `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction |
 
 *{More to be added}*
 
@@ -356,14 +345,17 @@ Extensions:
 
 **Use case: UC2 - Delete Client (Buyer or Seller)**
 
+Guarantees:
+* If the buyer/ seller was in the database originally, it would be removed from client database with no side effects.
+
 MSS:
-1. Real estate agent requests to delete a buyer or seller based on their phone number.
-2. ClientGrid will delete the respective client based on the phone number.
+1. Real estate agent requests to delete a buyer/ seller and passes in the buyer/ seller's phone number.
+2. ClientGrid will delete the buyer/ seller with the phone number provided by the real estate agent.
 Use case ends.
 
 Extensions:
 
-* 1a. ClientGrid detects an error in the phone number format provided by the real estate agent .
+* 1a. ClientGrid detects an error in the phone number format provided by the real estate agent.
 
    * 1a1. ClientGrid requests for the correct data 
 
@@ -430,12 +422,12 @@ Extensions:
 
     * Use case ends.
 
-**Use case: UC5 - List buyers, sellers, clients or properties**
+**Use case: UC5 - List Clients (i.e. Buyers and/or Sellers), Properties or Meetings**
 
 MSS:
 
-1. Real Estate Agent requests to view a list of buyers, sellers, clients or properties
-2. ClientGrid will respond with the corresponding list
+1. Real Estate Agent requests to view a list of clients (i.e. buyers and/or sellers), properties or meetings
+2. ClientGrid will display the corresponding list with each entry presented inside a card
 
 Use case ends.
 
@@ -460,13 +452,13 @@ Extensions:
 **Use case: UC7 - Add Meeting**
 
 MSS:
-1. Real estate agent requests to add a meeting based on the meeting’s meeting title and meeting date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
+1. Real estate agent requests to add a meeting based on the meeting’s title and date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
 2. ClientGrid will add the meeting and indicate success.
    Use case ends.
 
 Extensions:
 
-* 1a. ClientGrid detects an error in the meeting title or meeting date format provided by the real estate agent.
+* 1a. ClientGrid detects an error in the format of the meeting title, meeting date, buyer phone number, seller phone number, property type, or postal code provided by the real estate agent.
 
     * 1a1. ClientGrid requests for the correct data.
 
@@ -476,9 +468,15 @@ Extensions:
 
     * Use case resumes from step 2.
 
-* 1b. ClientGrid is unable to find a matching buyer, seller, or property entry in the meeting book.
+* 1b. ClientGrid detects there is a meeting of the same meeting title and meeting date in the client book.
 
-    * 1b1. ClientGrid informs real estate agent that the buyer, seller, or property does not exist in the meeting book.
+    * 1b1. ClientGrid notifies the user of an existing meeting with the same title and date in the client book and prompts the user to modify either the meeting title or date before resubmitting.
+
+    * Use case ends.
+
+* 1c. ClientGrid is unable to find a matching buyer, seller, or property entry in the ClientBook or PropertyBook.
+
+    * 1c1. ClientGrid informs real estate agent that the buyer, seller, or property does not exist in the ClientBook or PropertyBook.
 
     * Use case ends.
 
@@ -513,9 +511,9 @@ Extensions:
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 clients and 500 properties without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients, 500 properties, and 500 meetings without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The client and property databases should be updated after every command successfully executed by ClientGrid.
+4. The client, property, and meeting databases should be updated after every command successfully executed by ClientGrid.
 5. Should be able to handle case of corrupted file
 
 ### Glossary
@@ -524,7 +522,6 @@ Extensions:
 * **Client Book**: In-memory JSON file containing the clients stored in ClientGrid
 * **Property Book**: In-memory JSON file containing the properties stored in ClientGrid
 * **Meeting Book**: In-memory JSON file containing the meetings stored in ClientGrid
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Corrupted file**: Missing file and invalid data
 --------------------------------------------------------------------------------------------------------------------
 

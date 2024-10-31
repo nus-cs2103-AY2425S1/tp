@@ -41,14 +41,19 @@ public class AddPropertyCommandParser implements Parser<AddPropertyCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_POSTALCODE, PREFIX_UNITNUMBER, PREFIX_TYPE, PREFIX_ASK,
                         PREFIX_BID);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POSTALCODE, PREFIX_UNITNUMBER, PREFIX_TYPE, PREFIX_ASK,
+                PREFIX_BID);
+        if (hasExcessToken(args, PREFIX_POSTALCODE, PREFIX_UNITNUMBER, PREFIX_TYPE, PREFIX_ASK, PREFIX_BID)) {
+            logger.warning("Excess prefixes.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPropertyCommand.MESSAGE_USAGE));
+        }
         if (!arePrefixesPresent(argMultimap, PREFIX_POSTALCODE, PREFIX_UNITNUMBER, PREFIX_TYPE, PREFIX_ASK, PREFIX_BID)
                 || !argMultimap.getPreamble().isEmpty()) {
             logger.warning("Wrong prefixes.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPropertyCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POSTALCODE, PREFIX_UNITNUMBER, PREFIX_TYPE, PREFIX_ASK,
-                PREFIX_BID);
+
         PostalCode postalCode = ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTALCODE).get());
         Unit unit = ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNITNUMBER).get());
         Type type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
@@ -67,5 +72,16 @@ public class AddPropertyCommandParser implements Parser<AddPropertyCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if number of tokens in args string exceeds specified prefixes.
+     */
+    private boolean hasExcessToken(String args, Prefix... prefixes) {
+        String[] splits = args.trim().split("\\s(?=\\S+/)");
+        if (splits[0].equals("/")) {
+            return false;
+        }
+        return splits.length > prefixes.length;
     }
 }

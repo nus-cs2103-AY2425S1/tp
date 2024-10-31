@@ -18,12 +18,6 @@ public class UserPrefsTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        UserPrefs userPrefs = new UserPrefs();
-        assertThrows(NullPointerException.class, () -> userPrefs.setAddressBookFilePath(null));
-    }
-
-    @Test
     public void setClientBookFilePath_nullPath_throwsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
         assertThrows(NullPointerException.class, () -> userPrefs.setClientBookFilePath(null));
@@ -39,14 +33,6 @@ public class UserPrefsTest {
     public void setMeetingBookFilePath_nullPath_throwsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
         assertThrows(NullPointerException.class, () -> userPrefs.setMeetingBookFilePath(null));
-    }
-
-    @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        UserPrefs userPrefs = new UserPrefs();
-        Path path = Paths.get("address/book/file/path");
-        userPrefs.setAddressBookFilePath(path);
-        assertEquals(path, userPrefs.getAddressBookFilePath());
     }
 
     @Test
@@ -85,7 +71,7 @@ public class UserPrefsTest {
         assertEquals(userPrefs1, userPrefs2);
 
         // Modify one of the userPrefs and they should not be equal
-        userPrefs1.setAddressBookFilePath(Paths.get("different/address/book/file/path"));
+        userPrefs1.setClientBookFilePath(Paths.get("different/address/book/file/path"));
         assertNotEquals(userPrefs1, userPrefs2);
     }
 
@@ -98,7 +84,7 @@ public class UserPrefsTest {
         assertEquals(userPrefs1.hashCode(), userPrefs2.hashCode());
 
         // Modifying one object should result in different hashcodes
-        userPrefs1.setAddressBookFilePath(Paths.get("different/address/book/file/path"));
+        userPrefs1.setClientBookFilePath(Paths.get("different/address/book/file/path"));
         assertNotEquals(userPrefs1.hashCode(), userPrefs2.hashCode());
     }
 }

@@ -13,8 +13,10 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class Ask {
     public static final String MESSAGE_CONSTRAINTS =
-            "Ask price should be an integer";
+            "Ask price must be a non-negative integer smaller than 1,000,000 (thousand) with only numeric characters";
     public static final String VALIDATION_REGEX = "\\d+";
+    public static final String REMOVE_ZERO_PADDING_REGEX = "^0+(?!$)";
+    public static final int MAX_PRICE = 999999;
     private static final Logger logger = LogsCenter.getLogger(Ask.class);
     public final String value;
 
@@ -30,14 +32,26 @@ public class Ask {
         checkArgument(isValidAsk(ask), MESSAGE_CONSTRAINTS);
         assert isValidAsk(ask) != false : "Ask string must be non-negative integer";
         logger.info("Ask object created: " + ask);
-        value = ask;
+        value = ask.replaceFirst(REMOVE_ZERO_PADDING_REGEX, "");
     }
 
     /**
      * Returns true if a given string is a valid ask.
      */
     public static boolean isValidAsk(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+        test = test.replaceFirst(REMOVE_ZERO_PADDING_REGEX, "");
+        try {
+            Integer.parseInt(test);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        if (Integer.parseInt(test) > MAX_PRICE) {
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -2,17 +2,15 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
-import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager.DisplayMode;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 
 /**
@@ -30,18 +28,6 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
-     *
-     * @see seedu.address.model.Model#getAddressBook()
-     */
-    ReadOnlyAddressBook getAddressBook();
-
-    /**
-     * Returns an unmodifiable view of the filtered list of persons
-     */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
      * Returns an unmodifiable view of the filtered list of clients (containing both buyers and sellers)
      */
     ObservableList<Client> getFilteredClientList();
@@ -56,9 +42,9 @@ public interface Logic {
     ObservableList<Meeting> getFilteredMeetingList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' client book file path.
      */
-    Path getAddressBookFilePath();
+    Path getClientBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -70,5 +56,5 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    ObjectProperty<DisplayMode> getDisplayMode();
+    ReadOnlyObjectProperty<DisplayMode> getReadOnlyDisplayMode();
 }

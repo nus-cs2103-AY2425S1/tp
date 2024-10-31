@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
 import seedu.address.model.Model;
 
 /**
@@ -13,6 +15,15 @@ public class ListMeetingsCommand extends ListCommand {
      * The keyword used to trigger the listing of meetings in the database.
      */
     public static final String KEY_WORD = "meetings";
+    private static final Logger logger = Logger.getLogger(ListMeetingsCommand.class.getName());
+
+    /**
+     * Constructor for ListMeetingsCommand.
+     * Logs the creation of the command.
+     */
+    public ListMeetingsCommand() {
+        logger.info("ListMeetingsCommand object created");
+    }
 
     /**
      * Executes the command to list all meetings in the address book.
@@ -24,8 +35,12 @@ public class ListMeetingsCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
+        logger.info("Executing ListMeetingsCommand to list all meetings");
+
         // Logic to display meetings
         model.setDisplayMeetings();
+        logger.info("Display updated to show all meetings");
+
         return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
     }
 
