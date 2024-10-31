@@ -19,7 +19,7 @@ background {
 
 .label-header {
     -fx-font-size: 24pt;
-    -fx-font-family: "PT Sans", Arial, sans-serif;
+    -fx-font-family: "Optima", Arial, sans-serif;
     -fx-font-weight: bold;
     -fx-text-fill: #0f172a;
     -fx-opacity: 1;
@@ -101,16 +101,16 @@ background {
     -fx-padding: 0 0 0 0;
 }
 
+.list-view .list-cell:empty {
+    -fx-background-color: #ffffff;
+}
+
 .list-cell:filled:even {
     -fx-background-color: #f8fafc;
 }
 
 .list-cell:filled:odd {
     -fx-background-color: #ffffff;
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #3b82f6;
 }
 
 .list-cell:filled:selected #cardPane {
