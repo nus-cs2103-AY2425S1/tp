@@ -88,8 +88,7 @@ public class PersonCard extends UiPart<Region> {
 
         // Add module role pairs
         Integer roleLabelFontSize = 14;
-        person.getModuleRoleMap().getData().stream()
-                .sorted(Comparator.comparing(moduleRolePair -> moduleRolePair.moduleCode.toString()))
+        person.getModuleRoleMap().getData(true).stream()
                 .forEach(moduleRolePair -> {
                     Label curLabel = new Label(moduleRolePair.toString());
 
