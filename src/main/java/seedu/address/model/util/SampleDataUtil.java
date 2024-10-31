@@ -28,15 +28,15 @@ public class SampleDataUtil {
     // Create sample doctors and patients for the address book
     private static Doctor doctor1 = new Doctor(new Name("Alex Yeoh"), new Phone("87438807"),
             new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
-            new Speciality("General"), getTagSet("Permanent"));
+            new Speciality("Orthopedics"), getTagSet("Permanent"));
 
     private static Doctor doctor2 = new Doctor(new Name("Bernice Yu"), new Phone("99272758"),
             new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-            new Speciality("General"), getTagSet("Locum"));
+            new Speciality("Cardiology"), getTagSet("Locum"));
 
     private static Doctor doctor3 = new Doctor(new Name("Charlotte Oliveiro"), new Phone("93210283"),
             new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-            new Speciality("General"), getTagSet("Locum"));
+            new Speciality("Oncology"), getTagSet("Locum"));
 
     private static Patient patient1 = new Patient(new Name("David Li"), new Phone("91031282"),
             new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
@@ -72,7 +72,10 @@ public class SampleDataUtil {
         Appointment appointment3 = new Appointment(doctor2, patient3,
                 new Date("28-11-2024"), new Time("0900"));
 
-        return new Appointment[] {appointment1, appointment2, appointment3};
+        Appointment appointment4 = new Appointment(doctor3, patient3,
+                new Date("30-11-2024"), new Time("1400"));
+
+        return new Appointment[] {appointment1, appointment2, appointment3, appointment4};
     }
 
     /**
