@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -44,6 +45,7 @@ public class AddGradeCommand extends Command {
                     + "Ex09 "
                     + PREFIX_SCORE
                     + "9 ";
+    public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
 
     private final Name personName;
     private final Float score;
@@ -69,8 +71,9 @@ public class AddGradeCommand extends Command {
         Set<Tag> tags = person.getTags();
         Telegram telegram = person.getTelegram();
         Github github = person.getGithub();
-        Assignment assignment =
-                new Assignment(assignmentName, score);
+
+        Map<String, Assignment> assignment = person.getAssignment();
+        assignment.put(assignmentName, new Assignment(assignmentName, score));
 
         return new Person(name, phone, email, telegram, tags, github, assignment);
     }
@@ -87,17 +90,12 @@ public class AddGradeCommand extends Command {
             throw new CommandException("Score must be between 0.0 and " + model.maxScore(assignmentName));
         }
 
-        if (!model.hasName(personName)) {
-            throw new CommandException("Person " + personName + " not in address book");
-        }
+        Person person = model.getPerson(personName)
+                .orElseThrow(() ->
+                        new CommandException("Person " + personName + " not in address book"));
 
-        Person person =
-                model.getAddressBook().getPersonList().stream()
-                        .filter(p -> p.getName().equalIgnoreCase(personName))
-                        .toList()
-                        .get(0);
         model.setPerson(person, createGradeToAddToPerson(person, model.getAssignmentName(assignmentName), score));
-        return new CommandResult(""); // placeholder string to be added
+        return new CommandResult(String.format(MESSAGE_SUCCESS, assignmentName));
     }
 
     @Override
@@ -111,7 +109,6 @@ public class AddGradeCommand extends Command {
             return otherCommand.personName.equals(personName)
                     && Objects.equals(otherCommand.assignmentName, assignmentName)
                     && Objects.equals(otherCommand.score, score);
-
         }
         return false;
     }

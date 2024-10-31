@@ -64,17 +64,19 @@ public class AddGradeCommandTest {
     @Test
     public void execute_validPersonGrade_success() throws Exception {
         Person testPerson = TypicalPersons.ALICE;
+        final String name = "Ex02";
         AddGradeCommand command = new AddGradeCommand(
                 testPerson.getName().toString(),
                 9.0f,
-                "Ex02");
+                name);
         command.execute(model);
         assertEquals(model
                 .getAddressBook()
                 .getPersonList()
                 .stream().filter(person -> person
                         .getName()
-                        .equalIgnoreCase(testPerson.getName())).toList().get(0).getAssignment().getScore(), 9.0f);
+                        .equalIgnoreCase(testPerson.getName()))
+                .toList().get(0).getAssignment().get(name).getScore(), 9.0f);
 
     }
 
