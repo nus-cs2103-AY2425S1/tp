@@ -21,7 +21,7 @@ public class JsonAdaptedEvent {
     private final String eventName;
     private final LocalDate eventDate;
     private final Set<JsonAdaptedPerson> attendees = new HashSet<>();
-    private final Address location;
+    private final String location;
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
@@ -30,7 +30,7 @@ public class JsonAdaptedEvent {
     public JsonAdaptedEvent(@JsonProperty("eventName") String eventName,
                             @JsonProperty("eventDate") LocalDate eventDate,
                             @JsonProperty("attendees") Set<JsonAdaptedPerson> attendees,
-                            @JsonProperty("location") Address location) {
+                            @JsonProperty("location") String location) {
         this.eventName = eventName;
         this.eventDate = eventDate;
         if (attendees != null) {
@@ -46,7 +46,7 @@ public class JsonAdaptedEvent {
         eventName = source.getEventName();
         eventDate = source.getDate();
         attendees.addAll(source.getAttendees().stream().map(JsonAdaptedPerson::new).collect(Collectors.toSet()));
-        location = source.getLocation();
+        location = source.getLocation().toString();
     }
 
     /**
@@ -59,7 +59,7 @@ public class JsonAdaptedEvent {
         for (JsonAdaptedPerson attendee : attendees) {
             modelAttendees.add(attendee.toModelType());
         }
-        return new Event(eventName, eventDate, location, modelAttendees);
+        return new Event(eventName, eventDate, new Address(location), modelAttendees);
 
     }
 }

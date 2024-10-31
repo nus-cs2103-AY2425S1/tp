@@ -102,4 +102,16 @@ public class Person {
                 .toString();
     }
 
+    /**
+     * Returns a human-readable version of the data stored in the Person object.
+     */
+    public String toDisplayString() {
+        return new StringBuilder()
+                .append("Name: " + name + ", ")
+                .append("Phone: " + phone + ", ")
+                .append("Email: " + email + ", ")
+                .append("Relationship: " + relationship)
+                .toString();
+    }
+
 }

@@ -62,14 +62,16 @@ public class Messages {
         StringBuilder attendeesString = new StringBuilder();
 
         for (Person attendee : event.getAttendees()) {
-            attendeesString.append('\n').append(attendee.toString());
+            attendeesString.append('\n').append(attendee.toDisplayString());
         }
 
         builder.append(event.getEventName())
                 .append("; Date: ")
                 .append(event.getDate())
-                .append("; \nAttendees: ")
-                .append(attendeesString);
+                .append("; Location: ")
+                .append(event.getLocation())
+                .append(event.getAttendees().isEmpty() ? "; \nNo Attendees." : "; \nAttendees: " + attendeesString);
+
         return builder.toString();
     }
 
