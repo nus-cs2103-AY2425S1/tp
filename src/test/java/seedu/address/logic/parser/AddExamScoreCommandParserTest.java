@@ -3,10 +3,12 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EXAM_DESC_MIDTERM;
 import static seedu.address.logic.commands.CommandTestUtil.EXAM_SCORE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXAM_SCORE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_MIDTERM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_SCORE_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.exam.Exam.SCORE_MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +30,12 @@ public class AddExamScoreCommandParserTest {
 
     @Test
     public void parse_invalidParams_failure() {
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + EXAM_DESC_MIDTERM + INVALID_EXAM_SCORE_DESC,
+                SCORE_MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_missingPrefix_failure() {
         // missing exam prefix
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + VALID_EXAM_MIDTERM + EXAM_SCORE_DESC_AMY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamScoreCommand.MESSAGE_USAGE));

@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EXAM_DESC_MIDTERM;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_MIDTERM;
@@ -25,5 +26,11 @@ public class DeleteExamCommandParserTest {
     @Test
     public void parse_invalidParams_failure() {
         assertParseFailure(parser, INVALID_EXAM_DESC, NAME_MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_missingPrefix_failure() {
+        assertParseFailure(parser, VALID_EXAM_MIDTERM, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteExamCommand.MESSAGE_USAGE));
     }
 }
