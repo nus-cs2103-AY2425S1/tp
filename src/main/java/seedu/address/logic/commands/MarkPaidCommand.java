@@ -23,18 +23,17 @@ public class MarkPaidCommand extends Command {
     public static final String COMMAND_WORD = "markpaid";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks that the amounts of fees the student has paid "
-            + "Parameters: \n"
-            + "{INDEX} (must be a positive integer) \n"
-            + PREFIX_PAYMENT + "{AMOUNT} (must be a positive integer) \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records amount of fees the student has paid\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_PAYMENT + "PAYMENT\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PAYMENT + "200";
-    public static final String MESSAGE_MARKED_PAID_SUCCESS = "Fees updated for Person %1$s";
+    public static final String MESSAGE_MARKED_PAID_SUCCESS = "Fees updated for student %1$s \n%2$s";
     private final Index targetIndex;
     private final Fees fees;
 
     /**
      * Marks whether an existing person has paid their fees for the month
-     * @param targetIndex
+     * @param targetIndex index of the student to mark payment based on the displayed list
      */
     public MarkPaidCommand(Index targetIndex, Fees fees) {
         this.targetIndex = targetIndex;
@@ -55,7 +54,7 @@ public class MarkPaidCommand extends Command {
 
         Person markedPerson = new Person(personToMarkPayment.getName(), personToMarkPayment.getPhone(),
                 personToMarkPayment.getEmail(), personToMarkPayment.getAddress(),
-                updatedPayment, personToMarkPayment.getParticipation(), personToMarkPayment.getTags());
+                updatedPayment, personToMarkPayment.getTags());
 
         //List of participations to delete
         List<Participation> participationsToDelete = model.getParticipationList()
@@ -80,7 +79,8 @@ public class MarkPaidCommand extends Command {
 
         model.setPerson(personToMarkPayment, markedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARKED_PAID_SUCCESS, Messages.format(markedPerson)));
+        return new CommandResult(String.format(MESSAGE_MARKED_PAID_SUCCESS, markedPerson.getFullName(),
+                markedPerson.getPayment().toString()));
     }
 
     @Override

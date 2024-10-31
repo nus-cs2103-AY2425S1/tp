@@ -54,11 +54,5 @@
     "subject" : "Math"
   }, {
     "subject" : "Science"
-  } ],
-  "participations" : [ {
-    "student" : "Alice Pauline",
-    "phone" : "94351253",
-    "tutorial" : "Math",
-    "attendances" : []
-  }]
+  } ]
 }

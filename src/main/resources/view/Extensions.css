@@ -19,8 +19,8 @@
     -fx-text-fill: white;
 }
 
-.attendance_card {
-    -fx-background-color: #F3F8FB;
+.attendance-card {
+    -fx-background-color: #f5f9fc;
     -fx-background-radius: 5;
     -fx-padding: 8;
 }
@@ -43,3 +43,27 @@
 .attendance-pane .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
     -fx-padding: 0 4 0 4;
 }
+
+.payment-pane {
+
+}
+.payment-card {
+    -fx-background-color: #f3fbfb;
+    -fx-background-radius: 5;
+    -fx-padding: 8;
+}
+
+#paymentStatusContainer {
+    -fx-padding: 3 7;
+    -fx-background-radius: 5;
+}
+
+#paymentStatus {
+    -fx-font-size: 12;
+    -fx-padding: 0 2 0 0;
+}
+
+#paymentCardPlaceholder {
+    -fx-padding : 0 15 0 0;
+}
+

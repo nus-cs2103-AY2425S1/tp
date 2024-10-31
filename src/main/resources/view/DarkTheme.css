@@ -135,14 +135,14 @@
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: white;
 }
 
 .result-display {
     -fx-background-color: #EDF8ED;
-    -fx-background-radius: 10;
     -fx-padding: 10;
-    -fx-max-width: 800;
+    -fx-background-radius: 10;
+    -fx-max-width: 950;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: #262626;
@@ -154,7 +154,7 @@
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #262626;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -180,7 +180,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: white;
 }
 
 .context-menu .label {
@@ -188,13 +188,14 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: white;
+    -fx-padding: 0 0 7 0;
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #262626;
     -fx-opacity: 0.9;
 }
 
@@ -300,14 +301,14 @@
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-padding: 3.5 0 3.5 0;
 }
 
 #cardPane {
     -fx-background-color: white;
     -fx-border-width: 0 0 2.5 0;
     -fx-border-color: #EDEDED;
-    -fx-padding: 12 15;
+    -fx-padding: 15 20;
 }
 
 #commandTypeLabel {
@@ -322,11 +323,16 @@
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-border-radius: 20;
-    -fx-max-width: 800;
+    -fx-max-width: 950;
     -fx-padding: 8;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13;
     -fx-text-fill: #262626;
+}
+
+#commandTextField:focused {
+    -fx-border-width: 1.5;
+    -fx-border-color: #B3C1C2;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -341,7 +347,7 @@
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
-    -fx-padding: 0 0 10 0;
+    -fx-padding: 0 0 0 0;
 }
 
 #tags .label {

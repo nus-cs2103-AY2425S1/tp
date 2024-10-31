@@ -13,12 +13,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.participation.Participation;
+<<<<<<< HEAD
+=======
+import seedu.address.model.person.Attendance;
+>>>>>>> master
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -62,8 +67,11 @@ public class TypicalPersons {
     public static final Tutorial MATH = new TutorialBuilder().withSubject("Math").build();
     public static final Tutorial SCIENCE = new TutorialBuilder().withSubject("Science").build();
 
-    public static final Participation ALICE_MATH = new Participation(ALICE, MATH);
-    public static final Participation BENSON_MATH = new Participation(BENSON, MATH);
+    public static final Participation ALICE_MATH_12122024 =
+            new Participation(
+                    ALICE,
+                    MATH,
+                    List.of(new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT))));
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -95,6 +103,10 @@ public class TypicalPersons {
     }
 
     public static List<Participation> getTypicalParticipations() {
+<<<<<<< HEAD
         return new ArrayList<>(Arrays.asList(ALICE_MATH, BENSON_MATH));
+=======
+        return new ArrayList<>(Arrays.asList(ALICE_MATH_12122024));
+>>>>>>> master
     }
 }
