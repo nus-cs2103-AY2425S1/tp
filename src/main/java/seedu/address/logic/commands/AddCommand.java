@@ -8,11 +8,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Adds a person to the address book.
@@ -42,7 +51,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-
+    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet." + "\n"
+            + "Wedding needs to be created with Tag(s): '%2$s' using command 'add-wedding' first.";
     private final Person toAdd;
 
     /**
@@ -61,8 +71,78 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        String tagMsg = handleWeddingDoesntExist(model, toAdd.getTags());
+
+        if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        setPersonInWedding(toAdd, model);
+        return new CommandResult(tagMsg + "\n" + String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    /**
+     * Gets a list of weddings whose name matches that of the tags in the set.
+     * @param model current Model containing necessary wedding address book.
+     * @param tags Set of tags input by the user.
+     * @return a List of weddings that match the tag.
+     */
+    private List<Wedding> getWeddingfromTags(Model model, Set<Tag> tags) {
+        List<String> predicate = tags
+                .stream().map(Tag::getTagName).toList();
+        List<Wedding> list = new ArrayList<>();
+        for (Wedding wedding : model.getFilteredWeddingList()) {
+            for (String tagName : predicate) {
+                if (wedding.getWeddingName().toString().equals(tagName)) {
+                    list.add(wedding);
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
+     * Generates message based on whether tag can be added, which depends on whether wedding exists or not.
+     * @param model current Model containing necessary wedding address book.
+     * @param editedTags Set of tags that exist as a wedding as well.
+     * @return String message stating whether tag exists as a wedding or not.
+     * @throws CommandException
+     */
+    private String handleWeddingDoesntExist(Model model, Set<Tag> editedTags) {
+        List<Wedding> weddingList = getWeddingfromTags(model, editedTags);
+        if (weddingList.isEmpty() && !editedTags.isEmpty()) {
+            Set<Tag> tagsDontExist = new HashSet<>(editedTags);
+            editedTags.removeAll(editedTags);
+            return String.format(MESSAGE_WEDDING_DOESNT_EXIST,
+                    Messages.tagSetToString(tagsDontExist), Messages.tagSetToString(tagsDontExist));
+        }
+        if (weddingList.size() < editedTags.size()) {
+            Set<Tag> weddingSet = weddingList.stream().map(Wedding::getWeddingName)
+                    .map(WeddingName::toString).map(Tag::new).collect(Collectors.toSet());
+            Set<Tag> tagsDontExist = new HashSet<>(editedTags);
+            editedTags.retainAll(weddingSet);
+            tagsDontExist.removeAll(weddingSet);
+            return String.format(MESSAGE_WEDDING_DOESNT_EXIST, Messages.tagSetToString(tagsDontExist),
+                    Messages.tagSetToString(tagsDontExist));
+        }
+        return "";
+    }
+
+    /**
+     * Sets the new person with tags as a participant in the wedding that matches the tag.
+     * @param person new Person being created with matching wedding tag.
+     * @param model current Model containing necessary wedding address book.
+     */
+    private void setPersonInWedding(Person person, Model model) {
+        List<Wedding> weddingList = getWeddingfromTags(model, person.getTags());
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            set.add(person);
+        }
     }
 
     @Override

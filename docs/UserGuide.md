@@ -124,6 +124,29 @@ Examples:
 * `add-wedding w/John Loh & Jean Tan v/Orchard Hotel d/15/10/2022`
 * `add-wedding w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/02/11/2022`
 
+### Deleting a wedding: `delete-wedding`
+
+You can delete a person from your list of contacts.
+
+* Deletes the wedding with the specified `NAME & NAME` from the address book.
+* The wedding's details are shown for confirmation.
+* The wedding is deleted if `delete-y` is entered.
+* The wedding is not deleted if `delete-n` is entered, cancelling the delete operation and nothing will occur.
+
+Format: `delete w/NAME & NAME` followed by `delete-y` or `delete-n`
+
+**IMPORTANT:** `delete n/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
+affected.
+
+</box>
+
+![add wedding message](images/deleteWeddingMsg.png)
+
+Examples:
+* `delete-wedding w/John Loh & Jean Tan`
+* `delete-wedding w/Jonus Ho & Izzat Syazani`
+
+
 ### Editing A Contact : `edit`
 
 You can edit an existing contact's details(name, phone number, email, address and job).
