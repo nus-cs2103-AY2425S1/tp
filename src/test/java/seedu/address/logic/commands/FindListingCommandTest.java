@@ -6,73 +6,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_LISTINGS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.listing.Address;
-import seedu.address.model.listing.Area;
-import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.ListingContainsKeywordsPredicate;
-import seedu.address.model.listing.Price;
-import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalListings;
 
 public class FindListingCommandTest {
-    private static final Listing WOODLANDS_LISTING = new Listing(
-            new Name("Woodlands"),
-            new Address("Woodlands"),
-            new Price("600k", new BigDecimal(600000)),
-            new Area(100),
-            Region.NORTH,
-            new PersonBuilder().withName("Jack").buildSeller(),
-            Set.of(new PersonBuilder().withName("Jimmy").buildBuyer())
-    );
-    private static final Listing SENGKANG_LISTING = new Listing(
-            new Name("Sengkang"),
-            new Address("Sengkang"),
-            new Price("300", new BigDecimal(300000)),
-            new Area(99),
-            Region.EAST,
-            new PersonBuilder().withName("Tom").buildSeller(),
-            Set.of(new PersonBuilder().withName("Alex").buildBuyer())
-    );
-    private static final Listing CLEMENTI_LISTING = new Listing(
-            new Name("Clementi"),
-            new Address("Clementi"),
-            new Price("500k", new BigDecimal(500000)),
-            new Area(98),
-            Region.SOUTHWEST,
-            new PersonBuilder().withName("Alice").buildSeller(),
-            Set.of(new PersonBuilder().withName("Veronica").buildBuyer())
-    );
-    private static final Listings typicalListings;
 
-    static {
-        typicalListings = new Listings();
-        typicalListings.addListing(WOODLANDS_LISTING);
-        typicalListings.addListing(SENGKANG_LISTING);
-        typicalListings.addListing(CLEMENTI_LISTING);
-    }
-
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), typicalListings);
-    private Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), typicalListings);
-
+    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
+    private Model expectedModel =
+            new ModelManager(new AddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
     @Test
     public void equals() {
         ListingContainsKeywordsPredicate firstPredicate =
-                new ListingContainsKeywordsPredicate(Collections.singletonList("Woodlands"));
+                new ListingContainsKeywordsPredicate(Collections.singletonList("Pasir Ris Condo"));
         ListingContainsKeywordsPredicate secondPredicate =
-                new ListingContainsKeywordsPredicate(Collections.singletonList("Sengkang"));
+                new ListingContainsKeywordsPredicate(Collections.singletonList("Tampines HDB"));
 
         FindListingCommand findListingFirstCommand = new FindListingCommand(firstPredicate);
         FindListingCommand findListingSecondCommand = new FindListingCommand(secondPredicate);
@@ -106,13 +62,13 @@ public class FindListingCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleListingsFound() {
-        String expectedMessage = String.format(MESSAGE_LISTINGS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_LISTINGS_LISTED_OVERVIEW, 2);
         ListingContainsKeywordsPredicate predicate =
-                preparePredicate("Woodlands Sengkang Clementi");
+                preparePredicate("Kent Ridge Buona Vista");
         FindListingCommand command = new FindListingCommand(predicate);
         expectedModel.updateFilteredListingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(WOODLANDS_LISTING, SENGKANG_LISTING, CLEMENTI_LISTING),
+        assertEquals(Arrays.asList(TypicalListings.KENT_RIDGE, TypicalListings.BUONA_VISTA),
                 model.getFilteredListingList());
     }
 
