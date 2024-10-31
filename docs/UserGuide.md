@@ -171,6 +171,22 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Locating persons by their features: `filter`
+
+Filters the list to return persons who have the given features.
+
+Format: `find PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
+
+* The search is case-sensitive.
+* The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
+* In this version, you can only filter by tag and phone number
+* Only full words will be matched e.g. `99999999` will not match `999`
+* Persons matching all features listed will be returned (i.e. `AND` search).
+* There can only be one of each feature as a maximum (ie cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not  accepted.
+  *filter requires at least one feature to filter by (eg. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
+  e.g. `t/ High Risk p/99999999` will return all patients with tag High Risk and phone number 99999999
+
+
 ### Exiting the program : `exit`
 
 Exits the program.
