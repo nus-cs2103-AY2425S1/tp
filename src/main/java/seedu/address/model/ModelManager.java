@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.history.HistoryCommandList;
+import seedu.address.model.history.VersionedAddressBook;
 import seedu.address.model.person.Person;
 
 /**
@@ -27,6 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final HistoryCommandList historyCommandList;
     private final ObservableList<HistoryCommand> historyCommands;
+    private final VersionedAddressBook versionedAddressBook;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +43,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         historyCommandList = new HistoryCommandList();
         historyCommands = historyCommandList.getHistoryCommands(); // Initialize with an empty ObservableList
+        versionedAddressBook = new VersionedAddressBook();
     }
 
     public ModelManager() {
@@ -169,5 +172,22 @@ public class ModelManager implements Model {
     @Override
     public void addHistoryCommand(Command toAdd, String originalCommandText) {
         historyCommandList.add(toAdd, originalCommandText);
+    }
+
+    //=========== Versioned Address Book Accessors =============================================================
+
+    /**
+     * Saves the current AddressBook state in the history.
+     */
+    public void commitAddressBook(AddressBook addressBook) {
+        versionedAddressBook.commitAddressBook(addressBook);
+    }
+
+    /**
+     * Reverses the AddressBook to the previous state.
+     */
+    public void undoAddressBook() {
+        AddressBook previousState = versionedAddressBook.getPreviousAddressBook();
+        addressBook.resetData(previousState);
     }
 }

@@ -65,6 +65,16 @@ public interface Model {
     ObservableList<HistoryCommand> getHistoryCommandList();
 
     /**
+     * Saves the current AddressBook state in the history.
+     */
+    public void commitAddressBook();
+
+    /**
+     * Reverses the AddressBook to the previous state.
+     */
+    public void undoAddressBook();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
