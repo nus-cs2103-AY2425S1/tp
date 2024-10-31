@@ -2,11 +2,11 @@ package seedu.address.model.person.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +15,14 @@ import seedu.address.testutil.PersonBuilder;
 public class EmailContainsKeywordsPredicateTest {
 
     @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new EmailContainsKeywordsPredicate(null));
+    }
+
+    @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        Set<String> firstPredicateKeywordList = Set.of("first");
+        Set<String> secondPredicateKeywordList = Set.of("first", "second");
 
         EmailContainsKeywordsPredicate firstPredicate = new EmailContainsKeywordsPredicate(firstPredicateKeywordList);
         EmailContainsKeywordsPredicate secondPredicate = new EmailContainsKeywordsPredicate(secondPredicateKeywordList);
@@ -44,40 +49,40 @@ public class EmailContainsKeywordsPredicateTest {
     public void test_emailContainsKeywords_returnsTrue() {
         // One keyword
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(
-                Collections.singletonList("alice"));
+                Set.of("alice"));
         assertTrue(predicate.test(new PersonBuilder().withEmail("alice@wonderland.com").build()));
 
         // Multiple keywords
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("alice", "wonderland"));
+        predicate = new EmailContainsKeywordsPredicate(Set.of("alice", "wonderland"));
         assertTrue(predicate.test(new PersonBuilder().withEmail("alice@wonderland.com").build()));
 
         // Only one matching keyword
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("wonderland", "oz"));
+        predicate = new EmailContainsKeywordsPredicate(Set.of("wonderland", "oz"));
         assertTrue(predicate.test(new PersonBuilder().withEmail("alice@wonderland.com").build()));
 
         // Mixed-case keywords
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("aLIce", "WoNDeRlaNd"));
+        predicate = new EmailContainsKeywordsPredicate(Set.of("aLIce", "WoNDeRlaNd"));
         assertTrue(predicate.test(new PersonBuilder().withEmail("alice@wonderland.com").build()));
     }
 
     @Test
     public void test_emailDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(Collections.emptyList());
+        EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(Collections.emptySet());
         assertFalse(predicate.test(new PersonBuilder().withEmail("alice@wonderland.com").build()));
 
         // Non-matching keyword
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("Carol"));
+        predicate = new EmailContainsKeywordsPredicate(Set.of("Carol"));
         assertFalse(predicate.test(new PersonBuilder().withEmail("alice@wonderland.com").build()));
 
         // Keywords match name, but does not match email
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("12345", "Pauline", "gmail"));
+        predicate = new EmailContainsKeywordsPredicate(Set.of("12345", "Pauline", "gmail"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Pauline").withEmail("alice@email.com").build()));
     }
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("keyword1", "keyword2");
+        Set<String> keywords = Set.of("keyword1", "keyword2");
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(keywords);
 
         String expected = EmailContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";

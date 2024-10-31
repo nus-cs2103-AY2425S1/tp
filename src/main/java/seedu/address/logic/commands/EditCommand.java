@@ -56,7 +56,11 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited successfully!\n"
-            + "Edited participant: %1$s";
+            + "%s%s"
+            + "Edited participant: %s";
+
+    public static final String SUBMESSAGE_DUPLICATE_TAG = "You tried adding an already existing study group tag.\n";
+    public static final String SUBMESSAGE_NONEXISTENT_TAG = "You tried removing a nonexistent study group tag.\n";
 
     public static final String MESSAGE_NOT_EDITED = "Provide at least one field to edit!";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book!";
@@ -92,9 +96,17 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        boolean isDuplicateTag = editPersonDescriptor.getStudyGroupTags().orElse(Collections.emptySet()).stream()
+                .anyMatch(studyGroup -> personToEdit.getStudyGroupTags().contains(studyGroup));
+        boolean isNonexistentTag = editPersonDescriptor.getTagsToRemove().orElse(Collections.emptySet()).stream()
+                .anyMatch(studyGroup -> !personToEdit.getStudyGroupTags().contains(studyGroup));
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+                isDuplicateTag ? SUBMESSAGE_DUPLICATE_TAG : "",
+                isNonexistentTag ? SUBMESSAGE_NONEXISTENT_TAG : "",
+                Messages.format(editedPerson).toString()));
     }
 
     /**

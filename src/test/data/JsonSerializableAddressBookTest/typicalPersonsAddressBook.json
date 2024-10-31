@@ -9,42 +9,42 @@
     "study groups" : [ "1A" ]
   }, {
     "name" : "Benson Meier",
-    "email" : "johnd@example.com",
+    "email" : "benson@example.com",
     "gender" : "M",
     "age" : "40",
     "detail" : "Study completed",
     "study groups" : [ "Control", "1A" ]
   }, {
     "name" : "Carl Kurz",
-    "email" : "heinz@example.com",
+    "email" : "carl@example.com",
     "gender" : "M",
     "age" : "30",
     "detail" : "To be assigned",
     "study groups" : [ "1A" ]
   }, {
     "name" : "Daniel Meier",
-    "email" : "cornelia@example.com",
+    "email" : "daniel@example.com",
     "gender" : "M",
     "age" : "50",
     "detail" : "To be assigned",
     "study groups" : [ "1B" ]
   }, {
     "name" : "Elle Meyer",
-    "email" : "werner@example.com",
+    "email" : "elle@example.com",
     "gender" : "F",
     "age" : "60",
     "detail" : "",
     "study groups" : [ "2A" ]
   }, {
     "name" : "Fiona Kunz",
-    "email" : "lydia@example.com",
+    "email" : "fiona@example.com",
     "gender" : "F",
     "age" : "35",
     "detail" : "To follow up",
     "study groups" : [ ]
   }, {
     "name" : "George Best",
-    "email" : "anna@example.com",
+    "email" : "george@example.com",
     "gender" : "M",
     "age" : "36",
     "detail" : "",

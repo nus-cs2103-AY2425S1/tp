@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+participant "pg:PredicateGroup" as PredicateGroup MODEL_COLOR
+participant ":XYZPredicate" as Predicate MODEL_COLOR
+end box
+
+
+[-> PredicateGroup : test(person)
+activate PredicateGroup
+
+loop for each criteria until return false
+    PredicateGroup -> Predicate : test(person)
+    activate Predicate
+    Predicate --> PredicateGroup
+    deactivate Predicate
+end loop
+
+[<-- PredicateGroup
+@enduml

@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +16,8 @@ public class PredicateGroupTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        Set<String> firstPredicateKeywordList = Set.of("first");
+        Set<String> secondPredicateKeywordList = Set.of("first", "second");
         NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(
                 firstPredicateKeywordList);
         NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(
@@ -51,17 +49,17 @@ public class PredicateGroupTest {
     @Test
     public void test_personDoesNotPassAllPredicate_returnsFalse() {
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(
-                Arrays.asList("Kingsleigh", "Burton", "Lewis"));
+                Set.of("Kingsleigh", "Burton", "Lewis"));
         EmailContainsKeywordsPredicate emailPredicate = new EmailContainsKeywordsPredicate(
-                Collections.singletonList("wonderland"));
+                Set.of("wonderland"));
         GenderMatchesKeywordsPredicate genderPredicate = new GenderMatchesKeywordsPredicate(
-                Collections.singletonList("M"));
+                Set.of("M"));
         AgeContainsKeywordsPredicate agePredicate = new AgeContainsKeywordsPredicate(
-                Arrays.asList("20", "21", "22", "23"));
+                Set.of("20", "21-23"));
         DetailContainsKeywordsPredicate detailsPredicate = new DetailContainsKeywordsPredicate(
-                Arrays.asList("wizard", "looking", "yellow"));
+                Set.of("wizard", "looking", "yellow"));
         StudyGroupsContainKeywordsPredicate studyGroupsPredicate = new StudyGroupsContainKeywordsPredicate(
-                Arrays.asList("H1", "G3", "G4"));
+                Set.of("H1", "G3", "G4"));
 
         // Fail all predicates
         Person person = new PersonBuilder().withName("Dorothy Gale").withEmail("dorothy@land.oz")
@@ -84,7 +82,7 @@ public class PredicateGroupTest {
     @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(
-                Arrays.asList("keyword1", "keyword2"));
+                Set.of("keyword1", "keyword2"));
         PredicateGroup predicateGroup = FindUtil.getPredicateGroup(predicate);
 
         String expected = PredicateGroup.class.getCanonicalName() + "{predicates=[" + predicate + "]}";

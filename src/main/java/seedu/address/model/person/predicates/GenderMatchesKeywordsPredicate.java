@@ -1,6 +1,9 @@
 package seedu.address.model.person.predicates;
 
-import java.util.List;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -8,14 +11,34 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests that a {@code Person}'s {@code Gender} matches any of the keywords
- * given.
+ * Tests that a {@code Person}'s {@code Gender} matches any of the keywords given. Tests that a {@code Person}'s
+ * {@code Gender} matches any of the keywords given.
  */
 public class GenderMatchesKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    public static final String VALIDATION_REGEX = "^[FfMm]$";
+    public static final String MESSAGE_CONSTRAINTS = "Each gender criteria should only be 'F' / 'f' (Female) or "
+            + "'M' / 'm' (Male)";
 
-    public GenderMatchesKeywordsPredicate(List<String> keywords) {
+    private final Set<String> keywords;
+
+    /**
+     * Constructs a {@code GenderMatchesKeywordsPredicate}.
+     *
+     * @param keywords A list of valid gender keywords
+     */
+    public GenderMatchesKeywordsPredicate(Set<String> keywords) {
+        requireNonNull(keywords);
+        for (String k : keywords) {
+            checkArgument(isValidInput(k), MESSAGE_CONSTRAINTS);
+        }
         this.keywords = keywords;
+    }
+
+    /**
+     * Returns true if a given string is a valid gender.
+     */
+    public static boolean isValidInput(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
