@@ -131,6 +131,9 @@ help
 ```
 ![help message](images/helpMessage.png)
 
+Alternatively, you can click the button on the top right hand corner as indicated here:
+![alternative_help](images/alternativeHelp.png)
+
 
 ### Adding a person: `add`
 
@@ -142,8 +145,9 @@ add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE t/TAG
 ```
 
 Examples:
-* `add 87654321 n/Betsy Crowe t/ Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/1234567 c/Business Analytics`
+* `add 87654321 n/Betsy Crowe t/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/1234567 c/Business Analytics`
 * `add 12345678 n/John Doe p/98981212 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
+* `add 71271222 n/Benson Boon p/89229191 e/benson@example.com a/Blk 12 Benson Street c/Economics t/Student`
   ![result for 'add command result'](images/addCommandResult.png)
 
 ### Listing all persons : `list`
@@ -154,6 +158,7 @@ Format:
 ```bash
 list
 ```
+![result for 'list command result'](images/listCommandResult.png)
 
 ### Editing a person : `edit`
 
@@ -164,6 +169,7 @@ Format:
 edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 ```
 
+
 * Edits a student's details according to the fields specified.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -171,7 +177,8 @@ edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 
 Examples:
 *  To edit the module CS2103T to CS2101 of a student with ID 12345678, type  `edit 12345678 m/CS2103T CS2101` utilizing the `m/` prefix for modules
-
+*  To edit the course of a student with ID 12121212 to Computer Science type `edit 12121212 c/Computer Science`
+   ![result for 'edit command result'](images/editCommandResult.png)
 ### Listing students by certain attributes : `filter`
 
 Filter students based on their Names, Courses and Modules.
@@ -228,7 +235,8 @@ delete ID
 * Deletes student with the specified `ID`.
 
 Examples:
-* `delete 12345678` will delete student contact with `ID: 12345678`.
+* `delete 71271222` will delete student contact with `ID: 71271222`.
+  ![result for 'delete_71271222'](images/filterAlexDavidResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -316,3 +324,4 @@ Action     | Format, Examples
 **Filter**   | `find [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `find n/James Jake`
 **List**   | `list`
 **Help**   | `help`
+
