@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label telegram;
     @FXML
     private Label github;
+    @FXML
+    private Label assignment;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.

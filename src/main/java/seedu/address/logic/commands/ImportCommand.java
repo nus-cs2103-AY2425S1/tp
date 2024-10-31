@@ -53,7 +53,7 @@ public class ImportCommand extends Command {
             csvReader.readNext();
 
             while ((fields = csvReader.readNext()) != null) {
-                if (fields.length < 8) {
+                if (fields.length < 7) {
                     throw new CommandException("Invalid CSV format.");
                 }
                 Person person = parsePerson(fields);
@@ -82,7 +82,7 @@ public class ImportCommand extends Command {
             // Process tags
             Set<Tag> tags = parseTags(fields[4].trim());
 
-            Map<String, Assignment> assignment = parseAssignment(fields[7].trim());
+            Map<String, Assignment> assignment = parseAssignment(fields[6].trim());
 
             return new Person(name, phone, email, telegram, tags, github, assignment);
 
