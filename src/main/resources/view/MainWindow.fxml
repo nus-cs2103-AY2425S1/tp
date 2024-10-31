@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root minHeight="600" minWidth="660" onCloseRequest="#handleExit" title="TAHub" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="720" onCloseRequest="#handleExit" title="TAHub" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -46,7 +46,7 @@
         <HBox VBox.vgrow="ALWAYS">
           <TabPane fx:id="tabList" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <Tab text="Students">
-              <VBox fx:id="studentList" alignment="TOP_CENTER" minWidth="200" prefWidth="200" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+              <VBox fx:id="studentList" alignment="TOP_CENTER" minWidth="240" prefWidth="240" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
@@ -56,7 +56,7 @@
           </TabPane>
           <TabPane fx:id="tabList" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <Tab text="Consultations">
-              <VBox fx:id="consultationList" minWidth="200" prefWidth="200" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+              <VBox fx:id="consultationList" minWidth="240" prefWidth="240" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
@@ -66,7 +66,7 @@
           </TabPane>
           <TabPane fx:id="tabList" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <Tab text="Lessons">
-              <VBox fx:id="lessonList" minWidth="200" prefWidth="200" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+              <VBox fx:id="lessonList" minWidth="240" prefWidth="240" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
