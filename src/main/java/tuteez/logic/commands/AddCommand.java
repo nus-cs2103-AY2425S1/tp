@@ -11,8 +11,8 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
@@ -55,7 +55,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
     public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons: \n";
-    public static final String MESSAGE_NEW_LESSONS_CLASH = "Adding clashing lessons is not allowed";
+    public static final String MESSAGE_NEW_LESSONS_CLASH = "Added lessons clash with one another";
 
     private final Person toAdd;
     private final Logger logger = LogsCenter.getLogger(AddCommand.class);
@@ -76,13 +76,13 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Set<Lesson> lessonSet = toAdd.getLessons();
-        if (Lesson.containsClashes(lessonSet)) {
+        List<Lesson> lessonLst = toAdd.getLessons();
+        if (Lesson.containsClashes(lessonLst)) {
             throw new CommandException(MESSAGE_NEW_LESSONS_CLASH);
         }
 
         Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
-        for (Lesson lesson: lessonSet) {
+        for (Lesson lesson: lessonLst) {
             assert lesson != null;
             Map<Person, ArrayList<Lesson>> clashingLessons = model.getClashingLessons(lesson);
 

@@ -30,6 +30,10 @@ public enum Day {
         };
     }
 
+    public int getValue() {
+        return ordinal() + 1;
+    }
+
     @Override
     public String toString() {
         return name();

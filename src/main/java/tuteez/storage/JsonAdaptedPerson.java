@@ -99,7 +99,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = getModelTags(tags);
 
-        final Set<Lesson> modelLessons = getModelLessons(lessons);
+        final List<Lesson> modelLessons = getModelLessons(lessons);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTelegramUsername, modelTags,
                 modelLessons, modelRemarkList);
@@ -157,12 +157,12 @@ class JsonAdaptedPerson {
         return new HashSet<>(personTags);
     }
 
-    private Set<Lesson> getModelLessons(List<JsonAdaptedLesson> lessons) throws IllegalValueException {
+    private List<Lesson> getModelLessons(List<JsonAdaptedLesson> lessons) throws IllegalValueException {
         final List<Lesson> personLessons = new ArrayList<>();
         for (JsonAdaptedLesson lesson : lessons) {
             personLessons.add(lesson.toModelType());
         }
-        return new HashSet<>(personLessons);
+        return new ArrayList<>(personLessons);
     }
 
     private RemarkList getModelRemarkList(JsonAdaptedRemarkList remarkList) throws IllegalValueException {
