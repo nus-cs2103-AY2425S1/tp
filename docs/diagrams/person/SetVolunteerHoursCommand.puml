@@ -1,0 +1,23 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "{abstract}\nCommand" as Command {
+  +execute(Model): CommandResult
+}
+Class SetVolunteerHoursCommand {
+  +COMMAND_WORD: String
+  +MESSAGE_USAGE: String
+  +MESSAGE_SET_VOLUNTEER_HOURS_SUCCESS: String
+  +MESSAGE_NOT_EDITED: String
+  -index: Index
+  -newHours: String
+  <u>-createUpdated(volunteerToEdit: Person, Hours newHours)</u>
+  +execute(Model): CommandResult
+}
+Class CommandException
+
+SetVolunteerHoursCommand -up-|> Command
+Command ..> CommandException: throws >
+SetVolunteerHoursCommand .right.> CommandException: throws >
+@enduml
