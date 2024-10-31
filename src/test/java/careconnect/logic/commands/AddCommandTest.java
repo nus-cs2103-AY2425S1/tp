@@ -13,7 +13,6 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import careconnect.commons.core.GuiSettings;
-import careconnect.logic.Messages;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.AddressBook;
 import careconnect.model.Model;
