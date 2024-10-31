@@ -285,9 +285,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​           | I want to …​                                                                | So that I can…​                                        |
 |----------|-------------------|-----------------------------------------------------------------------------|--------------------------------------------------------|
-| `* * *`  | organised doctor  | add new records                                                             | keep track of my existing patients' details            |
-| `* * *`  | organised doctor  | delete records                                                              | remove entries of patients no longer existing          |
-| `* * *`  | organised doctor  | edit records                                                                | amend outdated information in the patients' record     |
+| `* * *`  | doctor            | add new records                                                             | keep track of my existing patients' details            |
+| `* * *`  | doctor            | delete records                                                              | remove entries of patients no longer existing          |
+| `* * *`  | doctor            | edit records                                                                | amend outdated information in the patients' record     |
 | `* * *`  | busy doctor       | search for a patient by name                                                | quickly access their records                           |
 | `* * *`  | busy doctor       | search for a patient by NRIC                                                | quickly access their records                           |
 | `* * *`  | doctor            | schedule an appointment with a patient                                      | manage my daily workload effectively                   |
