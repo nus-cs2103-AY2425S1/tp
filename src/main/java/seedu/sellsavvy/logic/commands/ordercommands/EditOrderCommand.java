@@ -85,7 +85,7 @@ public class EditOrderCommand extends Command {
         String feedbackToUser = !orderToEdit.isSameOrder(editedOrder)
                 && orderList.contains(editedOrder)
                 ? String.format(MESSAGE_DUPLICATE_ORDER_WARNING,
-                editedOrder.getStatus().toString().toLowerCase())
+                editedOrder.getStatus().getValue())
                 : "";
         feedbackToUser += editedOrder.hasDateElapsed()
                 ? MESSAGE_OUTDATED_WARNING

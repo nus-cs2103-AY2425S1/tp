@@ -113,7 +113,7 @@ public class EditOrderCommandTest {
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_THIRD_PERSON, descriptor);
 
         String warningMessage = String.format(EditOrderCommand.MESSAGE_DUPLICATE_ORDER_WARNING,
-                firstOrder.getStatus().toString().toLowerCase());
+                firstOrder.getStatus().getValue());
         String expectedMessage = warningMessage
                 + String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(firstOrder));
 
