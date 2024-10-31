@@ -22,19 +22,21 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
 
         // Tokenize the input arguments
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_SCORE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_SCORE);
 
         // Check that all required prefixes are present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_SCORE)
-            || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGradeCommand.MESSAGE_USAGE));
         }
-
         // Parse and validate the name
         String name = argMultimap.getValue(PREFIX_NAME).orElse("").trim();
         if (name.isEmpty()) {
             throw new ParseException("Name cannot be empty.");
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SCORE, PREFIX_ASSIGNMENT);
+
         // Get and validate the assignment name
         String assignmentName = argMultimap.getValue(PREFIX_ASSIGNMENT).orElse("").trim();
         if (assignmentName.isEmpty()) {
