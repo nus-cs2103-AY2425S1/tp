@@ -27,6 +27,11 @@ public class StudentListPanel extends UiPart<Region> {
         super(FXML);
         studentListView.setItems(studentList);
         studentListView.setCellFactory(listView -> new StudentListViewCell());
+        studentListView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                studentListView.scrollTo(studentListView.getSelectionModel().getSelectedIndex());
+            }
+        });
     }
 
     /**
