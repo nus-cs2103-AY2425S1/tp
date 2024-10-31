@@ -27,6 +27,8 @@ public class UnpinContactCommand extends Command {
 
     public static final String MESSAGE_UNPIN_PERSON_SUCCESS = "Unpinned Person: %1$s";
 
+    public static final String MESSAGE_UNPIN_PERSON_ALREADY_UNPINNED = "This contact is already unpinned.";
+
     private static Logger logger = LogsCenter.getLogger(UnpinContactCommand.class);
 
     private final Index targetIndex;
@@ -51,6 +53,11 @@ public class UnpinContactCommand extends Command {
         }
 
         Person personToUnpin = lastShownList.get(targetIndex.getZeroBased());
+        if (!personToUnpin.isPinned()) {
+            logger.warning("Attempted to unpin a contact that is already unpinned: " + targetIndex);
+            throw new CommandException(MESSAGE_UNPIN_PERSON_ALREADY_UNPINNED);
+        }
+
         model.unpinPerson(personToUnpin);
         logger.info("Unpinned person info: " + Messages.format(personToUnpin));
         return new CommandResult(String.format(MESSAGE_UNPIN_PERSON_SUCCESS, Messages.format(personToUnpin)));

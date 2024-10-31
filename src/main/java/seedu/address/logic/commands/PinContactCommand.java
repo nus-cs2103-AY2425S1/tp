@@ -27,6 +27,8 @@ public class PinContactCommand extends Command {
 
     public static final String MESSAGE_PIN_PERSON_SUCCESS = "Pinned Person: %1$s";
 
+    public static final String MESSAGE_PERSON_ALREADY_PINNED = "This contact is already pinned.";
+
     private static Logger logger = LogsCenter.getLogger(PinContactCommand.class);
 
     private final Index targetIndex;
@@ -52,6 +54,11 @@ public class PinContactCommand extends Command {
         }
 
         Person personToPin = lastShownList.get(targetIndex.getZeroBased());
+        if (personToPin.isPinned()) {
+            logger.warning("Attempted to pin a contact that is already pinned: " + targetIndex);
+            throw new CommandException(MESSAGE_PERSON_ALREADY_PINNED);
+        }
+
         model.pinPerson(personToPin);
         logger.info("Pinned person info: " + Messages.format(personToPin));
         return new CommandResult(String.format(MESSAGE_PIN_PERSON_SUCCESS, Messages.format(personToPin)));
