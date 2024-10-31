@@ -51,7 +51,7 @@ public class ImportCommand extends FileAccessCommand {
             addressBookOptional = storage.readAddressBook(filePath);
             importedData = addressBookOptional.orElseGet(model::getAddressBook);
         } catch (DataLoadingException e) {
-            throw new CommandException(String.format(FILE_DATA_LOAD_ERROR_FORMAT, e.getMessage()), e);
+            throw new CommandException(String.format(FILE_DATA_LOAD_ERROR_FORMAT, this.filePath.toString()), e);
         }
 
         model.setAddressBook(importedData);

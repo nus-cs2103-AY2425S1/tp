@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -177,6 +178,10 @@ public class ParserUtil {
         try {
             filePathObject = Paths.get(trimmedFilePath);
         } catch (InvalidPathException ipe) {
+            throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+        }
+
+        if (!Files.exists(filePathObject)) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
         }
 
