@@ -541,7 +541,9 @@ Use case ends.
 
 * **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
 
-* **Appointment**: A scheduled meeting between a patient and a medical professional, stored with details like date, time, and purpose.
+* **Appointment**: A scheduled meeting between a patient and a medical professional, encompassing a specific date, time period and description.
+
+* **Appointment List**: A list of appointments of all patients, displayed chronologically in the right hand side of the application.
 
 * **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient or medical worker.
 
@@ -549,7 +551,7 @@ Use case ends.
 
 * **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
 
-* **Patient List**: A list of patients and their details displayed in the right hand side of the application.
+* **Patient List**: A list of patients and their details displayed in the left hand side of the application.
 
 [Back to Table of Contents](#table-of-contents)
 
