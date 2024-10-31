@@ -53,7 +53,13 @@ public class Appointment {
      * Automatically assigns a new random unique ID.
      */
     public Appointment(Doctor doctor, Patient patient, Date date, Time time) {
-        this(getNewId(), doctor, patient, date, time);
+        requireAllNonNull(doctor, patient, date, time);
+
+        this.id = getNewId();
+        this.doctor = doctor;
+        this.patient = patient;
+        this.date = date;
+        this.time = time;
     }
 
     private static Integer getNewId() {
@@ -64,6 +70,15 @@ public class Appointment {
         } while (appointmentById.containsKey(newId) || newId <= 0);
 
         return newId;
+    }
+
+    /**
+     * Factory method to create a new appointment from data fields.
+     * Automatically assigns a new random unique ID.
+     * Links the appointments to the doctor/patient and adds it to the hashtable.
+     */
+    public static Appointment createAppointment(Doctor doctor, Patient patient, Date date, Time time) {
+        return new Appointment(getNewId(), doctor, patient, date, time);
     }
 
     /**
@@ -123,7 +138,7 @@ public class Appointment {
     }
 
     /**
-     * Returns true if both appointments have the same ID.
+     * Returns true if both appointments have the same fields (excluding ID).
      * This defines a weaker notion of equality between two appointments.
      */
     public boolean isSameAppointment(Appointment otherAppointment) {
@@ -132,7 +147,10 @@ public class Appointment {
         }
 
         return otherAppointment != null
-                && getId().equals(otherAppointment.getId());
+            && doctor.equals(otherAppointment.doctor)
+            && patient.equals(otherAppointment.patient)
+            && date.equals(otherAppointment.date)
+            && time.equals(otherAppointment.time);
     }
 
     /**
