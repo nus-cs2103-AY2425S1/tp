@@ -36,6 +36,8 @@ public class ViewWindow extends UiPart<Region> {
     private Label telegram;
     @FXML
     private Label github;
+    @FXML
+    private FlowPane weekLabel;
 
     /**
      * Display the {@code PersonCode} with the given {@code Person}.
@@ -57,6 +59,19 @@ public class ViewWindow extends UiPart<Region> {
             github.setText(person.getGithub().toString());
         } else {
             github.setText("GitHub username unspecified");
+        }
+
+        if (!person.getWeeksPresent().isEmpty()) {
+            weekLabel.getChildren().add(new Label("Weeks attended: "));
+            person.getWeeksPresent().stream()
+                    .sorted(Comparator.comparing(Integer::intValue))
+                    .forEach(weekNumber -> {
+                        Label weekLabelNode = new Label(weekNumber.toString());
+                        weekLabelNode.getStyleClass().add("week-number");
+                        weekLabel.getChildren().add(weekLabelNode);
+                    });
+        } else {
+            weekLabel.getChildren().add(new Label("No weeks attended"));
         }
     }
 

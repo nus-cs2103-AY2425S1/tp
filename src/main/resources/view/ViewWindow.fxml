@@ -23,5 +23,6 @@
     <Label fx:id="assignment" text="\$assignment" />
     <Label fx:id="telegram" text="\$telegram"/>
     <Label fx:id="github" text="\$Github" />
+    <FlowPane fx:id="weekLabel"/>
 </VBox>
 
