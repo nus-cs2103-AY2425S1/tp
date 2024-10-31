@@ -70,4 +70,15 @@ public class FindCommandParserTest {
 
     }
 
+    @Test
+    public void test_parseWithValidPreambleEmptyKeywords_failure() {
+        assertParseFailure(parser, " n/ c/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " n/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " c/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " m/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " !m/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+    }
+
+
+
 }
