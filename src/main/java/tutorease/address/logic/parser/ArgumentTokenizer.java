@@ -38,7 +38,8 @@ public class ArgumentTokenizer {
     private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
         String lowerCaseArgsString = argsString.toLowerCase();
         return Arrays.stream(prefixes)
-                .flatMap(prefix -> findPrefixPositions(lowerCaseArgsString, prefix, prefix.getPrefix().toLowerCase()).stream())
+                .flatMap(prefix -> findPrefixPositions(lowerCaseArgsString, prefix,
+                        prefix.getPrefix().toLowerCase()).stream())
                 .collect(Collectors.toList());
     }
 
@@ -52,7 +53,8 @@ public class ArgumentTokenizer {
         while (prefixPosition != -1) {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
             positions.add(extendedPrefix);
-            prefixPosition = findPrefixPosition(argsString, prefixString, prefixPosition + prefixString.length());
+            prefixPosition = findPrefixPosition(argsString, prefixString, prefixPosition
+                    + prefixString.length());
         }
 
         return positions;
