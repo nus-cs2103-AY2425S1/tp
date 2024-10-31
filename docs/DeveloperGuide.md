@@ -283,20 +283,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​               | I want to …​                                 | So that I can…​                                       |
-|----------|-----------------------|----------------------------------------------|-------------------------------------------------------|
-| `* * *`  | time-sensitive doctor | have relevant contacts ready at fingertips   | no time is wasted tending to a patient's urgent needs |
-| `* * *`  | organised doctor      | able to add new contacts                     | keep track of my patients' details                    |
-| `* * *`  | busy doctor           | search for a patient by name                 | quickly access their records                          |
-| `* * *`  | doctor                | schedule an appointment with a patient       | manage their daily workload effectively               |
-| `* * *`  | doctor                | delete outdated or incorrect records         | keep the database clean and organised                 |
-| `* *`    | doctor                | view all my appointments                     | know the appointments I have on a certain day         |
-| `* *`    | meticulous doctor     | assign a specific condition to a patient     | locate a person easily                                |
-| `*`      | focused doctor        | want to search patients by medical condition | focus on those with similar treatment plans           |
-| `*`      | doctor                | assign a priority level to a patient         | manage urgent cases effectively                       |
-| `*`      | doctor                | update the contact information of a patient  | maintain accurate records                             |
-| `*`      | busy doctor           | view all my urgent cases                     | attend to those with urgent needs first               |
-| `*`      | doctor                | see a patient’s allergy information          | avoid prescribing harmful medications                 |
+| Priority | As a …​           | I want to …​                                                                | So that I can…​                                        |
+|----------|-------------------|-----------------------------------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | doctor            | add new records                                                             | keep track of my existing patients' details            |
+| `* * *`  | doctor            | delete records                                                              | remove entries of patients no longer existing          |
+| `* * *`  | doctor            | edit records                                                                | amend outdated information in the patients' record     |
+| `* * *`  | busy doctor       | search for a patient by name                                                | quickly access their records                           |
+| `* * *`  | busy doctor       | search for a patient by NRIC                                                | quickly access their records                           |
+| `* * *`  | doctor            | schedule an appointment with a patient                                      | manage my daily workload effectively                   |
+| `* * *`  | doctor            | delete an appointment with a patient                                        | cancel an appointment                                  |
+| `* * *`  | doctor            | list all records                                                            | look through all contacts                              |
+| `* *`    | doctor            | view all my appointments                                                    | know the appointments I have on a certain day          |
+| `* *`    | meticulous doctor | assign a specific condition to a patient                                    | pay extra care to it during consultation and diagnosis |
+| `*`      | focused doctor    | want to search patients by medical condition                                | focus on those with similar treatment plans            |
+| `*`      | busy doctor       | assign priority level to a patient                                          | manage urgent cases more effectively                   |
+| `*`      | busy doctor       | view all my urgent cases                                                    | attend to those with urgent needs first                |
+| `*`      | meticulous doctor | know a patients' allergy                                                    | pay extra care when prescribing medication             |
+| `*`      | doctor            | press [↑] to fill the command-line-box with the previous command I keyed in | amend errors in the last command I typed easily        |
 
 [Back to Table of Contents](#table-of-contents)
 ### Use cases
