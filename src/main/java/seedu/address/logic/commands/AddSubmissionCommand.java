@@ -43,7 +43,7 @@ public class AddSubmissionCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        boolean update = false;
+        boolean isUpdated = false;
         boolean skip = false;
 
         for (Person personToEdit : lastShownList) {
@@ -53,7 +53,7 @@ public class AddSubmissionCommand extends Command {
                 skip = true;
                 continue;
             }
-            update = true;
+            isUpdated = true;
             Set<Submission> updatedSubmissions = personToEdit.getSubmissions();
             updatedSubmissions.add(submission);
             Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
@@ -63,7 +63,7 @@ public class AddSubmissionCommand extends Command {
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
-        if (!update) {
+        if (!isUpdated) {
             // No updates, submission is a duplicate
             throw new CommandException(MESSAGE_DUPLICATE_SUBMISSION);
         } else if (!skip) {
