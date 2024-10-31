@@ -1,6 +1,7 @@
 package bizbook.logic.parser;
 
 import static bizbook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static bizbook.logic.Messages.MESSAGE_UNSUPPORTED_FILE_TYPE;
 import static bizbook.logic.parser.CliSyntax.PREFIX_FILE;
 import static java.util.Objects.requireNonNull;
 
@@ -24,13 +25,17 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FILE);
 
-        try {
-            String arg = argMultimap.getValue(PREFIX_FILE).orElse("");
-            FileType fileType = ParserUtil.parseFileType(arg);
-            return new ExportCommand(fileType);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getValue(PREFIX_FILE).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
+
+        FileType fileType = ParserUtil.parseFileType(argMultimap.getValue(PREFIX_FILE).get());
+
+        if (!fileType.hasExporter()) {
+            throw new ParseException(
+                    String.format(MESSAGE_UNSUPPORTED_FILE_TYPE, ExportCommand.MESSAGE_USAGE));
+        }
+
+        return new ExportCommand(fileType);
     }
 }

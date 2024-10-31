@@ -28,8 +28,7 @@ public enum FileType {
      */
     public boolean hasExporter() {
         return switch (this) {
-        case CSV -> true;
-        case VCF -> true;
+        case CSV, VCF -> true;
         default -> false;
         };
     }
