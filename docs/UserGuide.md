@@ -79,7 +79,7 @@ Format: `help`
 
 Adds a student to the student directory.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
+Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
 
 * If a group is not provided, or left blank (`g/`), the student will not be assigned to any group.
 * The student will be assigned all the lessons of other students in the group.
