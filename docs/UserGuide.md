@@ -21,9 +21,9 @@ Click on each command to jump to their subsection.
 | **[Add](#adding-a-person--add)**                  | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
 | **[List](#listing-all-persons--list)**            | `list`                                                                                                                                           |
 | **[Edit](#editing-a-person--edit)**               | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
-| **[Mark](#marking-person-as-attended--mark)**     | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
-| **[Unmark](#marking-person-as-absent--unmark)**   | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
-| **[Reset](#resetting-persons-attendance--reset)** | `reset INDEX tut/TUTORIAL`<br> e.g., `reset 2 tut/1`                                                                                             |
+| **[Mark](#marking-person-as-attended--mark)**     | `mark INDEX tut/TUTORIAL` <br>`INDEX` can be single, range (e.g., `1 - 12`), or `*` for all <br> e.g., `mark 2 tut/1`                            |
+| **[Unmark](#marking-person-as-absent--unmark)**   | `unmark INDEX tut/TUTORIAL` <br>`INDEX` can be single, range, or `*` for all <br> e.g., `unmark 2 tut/1`                                         |
+| **[Reset](#resetting-persons-attendance--reset)** | `reset INDEX tut/TUTORIAL`<br> `INDEX` can be single, range, or `*` for all <br> e.g., `reset 2 tut/1`                                           |
 | **[Find](#locating-persons-by-name--find)**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
 | **[Sort](#sorting-persons--sort)**                | `sort ORDER [n/][i/][tut/]`<br> e.g., `sort -1 i/`                                                                                               |
 | **[Delete](#deleting-a-person--delete)**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
@@ -189,7 +189,7 @@ Examples:
 - `reset * tut/1-3` Resets the attendance of all persons in the address book for tutorials 1 to 3.
 - `reset 1 tut/[2,4,12]` Resets the attendance of the 1st person in the address book for tutorials 2, 4 and 12.
 
-### Locating persons by name : `find`
+### Locating persons by name or tag: `find`
 
 Finds persons whose names or tags contain any of the given keywords.
 
@@ -199,7 +199,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [t/TAG]` or `find [KEYWORDS] t/TAG`
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - The name as well as the tags will be searched.
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
+- Persons matching at least one keyword or tag will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 - Searching for both name and tags will return all results that have either the name or the respective tag, which is basically the union of both groups.
 
@@ -209,8 +209,10 @@ Examples:
 - `find an` returns `armin` and `brian`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+- `find t/ri` returns all contacts marked with tag `friends` and `isRich` etc. <br>
 - `find alex t/colleagues` returns `Alex Yeoh` and all contacts marked with tag `colleagues`<br>
   ![result for 'find alex t/colleagues'](images/findAlexColleaguesResult.png)
+
 ### Sorting persons : `sort`
 
 Sorts the displayed list of persons by either name, student id or tutorial attendance.
