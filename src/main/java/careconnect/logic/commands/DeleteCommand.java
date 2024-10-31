@@ -43,6 +43,8 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNoUnconfirmedCommand();
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -50,8 +52,8 @@ public class DeleteCommand extends Command {
         }
 
         if (this.requireConfirmation) {
-            // Add a DeleteCommand to the stack
-            Command.STACK.add(new DeleteCommand(this.targetIndex, false));
+            // Queues a DeleteCommand
+            Command.commandToConfirm = new DeleteCommand(this.targetIndex, false);
             return new CommandResult(Command.CONFIRMATION_MESSAGE);
         }
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());

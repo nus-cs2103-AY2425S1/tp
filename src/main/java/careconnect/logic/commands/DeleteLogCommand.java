@@ -82,6 +82,8 @@ public class DeleteLogCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNoUnconfirmedCommand();
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (personIndex.getZeroBased() >= lastShownList.size()) {
@@ -92,8 +94,8 @@ public class DeleteLogCommand extends Command {
         }
 
         if (this.requireConfirmation) {
-            // Add a DeleteLogCommand to the stack
-            Command.STACK.add(new DeleteLogCommand(personIndex, logIndex, false));
+            // Queues a DeleteLogCommand
+            Command.commandToConfirm = new DeleteLogCommand(personIndex, logIndex, false);
             return new CommandResult(Command.CONFIRMATION_MESSAGE,
                     false, false, personIndex.getZeroBased());
         }

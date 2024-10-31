@@ -1,5 +1,6 @@
 package careconnect.logic.commands;
 
+import careconnect.logic.Messages;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.Model;
 
@@ -10,7 +11,22 @@ public abstract class Command {
 
     public static final String CONFIRMATION_MESSAGE =
             "This action is irreversible. Press y to continue, or n to cancel.";
+
+    public static void requireConfirmableCommand() throws CommandException {
+        if (Command.commandToConfirm == null) {
+            throw new CommandException(Messages.MESSAGE_NO_EXECUTABLE_COMMAND);
+        }
+    }
+
+    public static void requireNoUnconfirmedCommand() throws CommandException {
+        if (Command.commandToConfirm != null) {
+            throw new CommandException(Messages.MESSAGE_UNCOMFIRMED_COMMAND);
+        }
+    }
+
     protected static final CommandStack STACK = new CommandStack();
+
+    protected static Command commandToConfirm = null;
 
     protected final boolean requireConfirmation;
 

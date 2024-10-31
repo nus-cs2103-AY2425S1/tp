@@ -16,14 +16,12 @@ public class ConfirmationYesCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (Command.STACK.isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_NO_EXECUTABLE_COMMAND);
-        }
+        requireConfirmableCommand();
 
-        Command commandToExecute = Command.STACK.getLast();
+        Command commandToExecute = Command.commandToConfirm;
+        Command.commandToConfirm = null;
 
         // Wrap around the command to execute
         return commandToExecute.execute(model);
-
     }
 }
