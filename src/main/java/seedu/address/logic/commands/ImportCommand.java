@@ -97,7 +97,7 @@ public class ImportCommand extends Command {
 
             return new Person(name, phone, email, telegram, github, assignment, weeksPresent, tags);
 
-        } catch (IllegalArgumentException | ParseException e ) {
+        } catch (IllegalArgumentException | ParseException e) {
             throw new CommandException(e.getMessage());
         }
     }
