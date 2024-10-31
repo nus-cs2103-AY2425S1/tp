@@ -30,9 +30,9 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
     private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
-    private final SupplierOrderList supplierOrderList;
+    private final SupplyOrderList supplyOrderList;
     private final CustomerOrderList customerOrderList;
-    private final ObservableList<SupplierOrder> supplyOrderObservableList;
+    private final ObservableList<SupplyOrder> supplyOrderObservableList;
     private final ObservableList<CustomerOrder> customerOrderObservableList;
     private final Inventory inventory = new Inventory(ingredientCatalogue);
 
@@ -47,9 +47,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.supplierOrderList = this.addressBook.getSupplierOrderList();
+        this.supplyOrderList = this.addressBook.getSupplierOrderList();
         this.customerOrderList = this.addressBook.getCustomerOrderList();
-        this.supplyOrderObservableList = this.supplierOrderList.getOrders();
+        this.supplyOrderObservableList = this.supplyOrderList.getOrders();
         this.customerOrderObservableList = this.customerOrderList.getOrders();
     }
 
@@ -147,9 +147,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addSupplyOrder(SupplierOrder supplyOrder) {
-        supplierOrderList.addOrder(supplyOrder);
+    public void addSupplyOrder(SupplyOrder supplyOrder) {
+        supplyOrderList.addOrder(supplyOrder);
     }
+
 
     @Override
     public CustomerOrderList getCustomerOrderList() {
@@ -157,11 +158,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public SupplierOrderList getSupplierOrderList() {
-        return supplierOrderList;
+    public SupplyOrderList getSupplyOrderList() {
+        return supplyOrderList;
     }
 
-    public ObservableList<SupplierOrder> getSupplyOrderObservableList() {
+    public ObservableList<SupplyOrder> getSupplyOrderObservableList() {
         return supplyOrderObservableList;
     }
 

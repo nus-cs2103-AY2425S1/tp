@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.SupplierOrder;
+import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -73,7 +73,7 @@ public class LogicManager implements Logic {
         return model.getFilteredPersonList();
     }
 
-    public ObservableList<SupplierOrder> getSupplyOrderList() {
+    public ObservableList<SupplyOrder> getSupplyOrderList() {
         return model.getSupplyOrderObservableList();
     }
 

@@ -6,7 +6,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.order.SupplierOrder;
+import seedu.address.model.order.SupplyOrder;
 
 import java.util.logging.Logger;
 
@@ -18,12 +18,12 @@ public class SupplierOrderListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(SupplierOrderListPanel.class);
 
     @FXML
-    private ListView<SupplierOrder> orderListView;
+    private ListView<SupplyOrder> orderListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public SupplierOrderListPanel(ObservableList<SupplierOrder> orderList) {
+    public SupplierOrderListPanel(ObservableList<SupplyOrder> orderList) {
         super(FXML);
         orderListView.setItems(orderList);
         orderListView.setCellFactory(listView -> new OrderListViewCell());
@@ -32,9 +32,9 @@ public class SupplierOrderListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class OrderListViewCell extends ListCell<SupplierOrder> {
+    class OrderListViewCell extends ListCell<SupplyOrder> {
         @Override
-        protected void updateItem(SupplierOrder order, boolean empty) {
+        protected void updateItem(SupplyOrder order, boolean empty) {
             super.updateItem(order, empty);
 
             if (empty || order == null) {

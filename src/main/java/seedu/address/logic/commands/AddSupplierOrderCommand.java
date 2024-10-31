@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.OrderStatus;
-import seedu.address.model.order.SupplierOrder;
+import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -63,7 +63,7 @@ public class AddSupplierOrderCommand extends Command {
             model.addPerson(person);
         }
 
-        SupplierOrder supplyOrder = new SupplierOrder(person, productList, OrderStatus.PENDING);
+        SupplyOrder supplyOrder = new SupplyOrder(person, productList, OrderStatus.PENDING);
 
         person.addOrder(supplyOrder);
 

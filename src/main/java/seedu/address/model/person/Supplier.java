@@ -1,11 +1,8 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.order.SupplierOrder;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 

@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.*;
 
 import seedu.address.model.order.Order;
-import seedu.address.model.order.SupplierOrder;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
