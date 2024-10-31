@@ -301,6 +301,10 @@
     -fx-background-radius: 0;
 }
 
+#resultDisplay .corner {
+    -fx-background-color: transparent;
+}
+
 .group-chip {
     -fx-background-color: darkblue;
     -fx-background-radius: 20;
