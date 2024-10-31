@@ -67,12 +67,12 @@ public interface Model {
     /**
      * Saves the current AddressBook state in the history.
      */
-    public void commitAddressBook();
+    public void commitAddressBook(AddressBook addressBook);
 
     /**
      * Reverses the AddressBook to the previous state.
      */
-    public void undoAddressBook();
+    public void undoAddressBook(AddressBook addressBook);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

@@ -24,8 +24,9 @@ public class VersionedAddressBook {
     /**
      * Reverses the AddressBook to the previous state.
      */
-    public AddressBook getPreviousAddressBook() {
+    public void undoAddressBook(AddressBook addressBook) {
         assert currentStatePointer > 0 : "No command that change the AddressBook has been executed.";
-        return addressBookStateList.get(currentStatePointer--);
+        AddressBook previousState = addressBookStateList.get(currentStatePointer--);
+        addressBook.resetData(previousState);
     }
 }

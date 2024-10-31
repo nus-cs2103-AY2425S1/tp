@@ -179,6 +179,7 @@ public class ModelManager implements Model {
     /**
      * Saves the current AddressBook state in the history.
      */
+    @Override
     public void commitAddressBook(AddressBook addressBook) {
         versionedAddressBook.commitAddressBook(addressBook);
     }
@@ -186,8 +187,7 @@ public class ModelManager implements Model {
     /**
      * Reverses the AddressBook to the previous state.
      */
-    public void undoAddressBook() {
-        AddressBook previousState = versionedAddressBook.getPreviousAddressBook();
-        addressBook.resetData(previousState);
+    public void undoAddressBook(AddressBook addressBook) {
+        versionedAddressBook.undoAddressBook(addressBook);
     }
 }
