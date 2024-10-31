@@ -56,6 +56,9 @@ public class LogicManager implements Logic {
         } catch (DataLoadingException e) {
             tempVersionHistory = new VersionHistory();
         }
+        if (tempVersionHistory.getCurrentVersionIndex() == -1) {
+            tempVersionHistory.addVersion(model);
+        }
         this.versionHistory = tempVersionHistory;
     }
 
