@@ -20,6 +20,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String NO_EXISTING_NOTE = "There is no note with this index.";
+    public static final String MESSAGE_UNSUPPORTED_FILE_TYPE = "This file type is not supported. \n%1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

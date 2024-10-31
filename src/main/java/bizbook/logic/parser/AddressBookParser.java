@@ -20,6 +20,7 @@ import bizbook.logic.commands.ExitCommand;
 import bizbook.logic.commands.ExportCommand;
 import bizbook.logic.commands.FindCommand;
 import bizbook.logic.commands.HelpCommand;
+import bizbook.logic.commands.ImportCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
 import bizbook.logic.commands.ViewCommand;
@@ -101,10 +102,12 @@ public class AddressBookParser {
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
 
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
