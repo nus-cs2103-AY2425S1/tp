@@ -109,11 +109,7 @@ public class AddAppointmentCommand extends Command {
         }
 
         AddAppointmentCommand otherAddAppointmentCommand = (AddAppointmentCommand) other;
-        boolean patientNameCheck = this.patientName.equals(otherAddAppointmentCommand.patientName);
-        boolean doctorNameCheck = this.doctorName.equals(otherAddAppointmentCommand.doctorName);
-        boolean dateCheck = this.date.equals(otherAddAppointmentCommand.date);
-        boolean timeCheck = this.time.equals(otherAddAppointmentCommand.time);
-        return patientNameCheck && doctorNameCheck && dateCheck && timeCheck;
+        return appointmentToAdd.isSameAppointment(otherAddAppointmentCommand.appointmentToAdd);
     }
 
     @Override
