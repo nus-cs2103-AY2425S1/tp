@@ -8,10 +8,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.volunteer.VolunteerDates;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
+import seedu.address.model.volunteer.VolunteerDates;
 
 public class VolunteerParserUtilTest {
 

@@ -2,11 +2,11 @@ package seedu.address.testutil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.volunteer.VolunteerDates;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.VolunteerDates;
 
 /**
  * A test utility class to help with building Volunteer objects.

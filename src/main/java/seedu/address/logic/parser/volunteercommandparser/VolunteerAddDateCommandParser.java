@@ -1,5 +1,11 @@
 package seedu.address.logic.parser.volunteercommandparser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_AVAILABLE_DATE;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_INDEX;
+
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.volunteercommands.VolunteerAddDateCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -9,12 +15,9 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.VolunteerParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.stream.Stream;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_AVAILABLE_DATE;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_INDEX;
-
+/**
+ * Parses input arguments and returns a VolunteerAddDateCommandObject
+ */
 public class VolunteerAddDateCommandParser implements Parser<VolunteerAddDateCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the VolunteerNewCommand
@@ -28,7 +31,8 @@ public class VolunteerAddDateCommandParser implements Parser<VolunteerAddDateCom
         // Check if mandatory prefixes are present and preamble is empty
         if (!arePrefixesPresent(argMultimap, VOLUNTEER_PREFIX_AVAILABLE_DATE, VOLUNTEER_PREFIX_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VolunteerAddDateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    VolunteerAddDateCommand.MESSAGE_USAGE));
         }
 
         // Ensure no duplicate prefixes are provided
@@ -36,8 +40,8 @@ public class VolunteerAddDateCommandParser implements Parser<VolunteerAddDateCom
 
         try {
             Index index = VolunteerParserUtil.parseIndex(argMultimap.getValue(VOLUNTEER_PREFIX_INDEX).get());
-            String dateList = VolunteerParserUtil.checkStringListOfDates(argMultimap.
-                    getValue(VOLUNTEER_PREFIX_AVAILABLE_DATE).get());
+            String dateList = VolunteerParserUtil.checkStringListOfDates(argMultimap
+                    .getValue(VOLUNTEER_PREFIX_AVAILABLE_DATE).get());
             return new VolunteerAddDateCommand(index, dateList);
         } catch (ParseException pe) {
             throw new ParseException(

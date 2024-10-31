@@ -1,7 +1,7 @@
 package seedu.address.model.exceptions;
 
 /**
- * Singnals that assignment will result in a volunteer being assigned to two separate
+ * Signals that assignment will result in a volunteer being assigned to two separate
  * events that occur at the same time.
  */
 public class OverlappingAssignException extends RuntimeException {

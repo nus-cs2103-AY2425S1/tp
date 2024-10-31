@@ -5,9 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Objects;
 
-import javafx.beans.Observable;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -137,6 +134,10 @@ public class Volunteer {
         involvedIn.remove(eventToRemove);
     }
 
+    /**
+     * Adds a given string list of dates to the volunteer's available dates
+     * @param date
+     */
     public void addDatesToVolunteerDates(String date) {
         String[] dates = date.split(", ");
         this.availableDates.addStringOfDatesToAvailList(dates);

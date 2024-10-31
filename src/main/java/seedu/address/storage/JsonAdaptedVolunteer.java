@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.volunteer.VolunteerDates;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.VolunteerDates;
 
 /**
  * Jackson-friendly version of {@link Volunteer}.
@@ -72,7 +72,7 @@ class JsonAdaptedVolunteer {
         }
         final Email modelEmail = new Email(email);
 
-        if (availableDate == null || !VolunteerDates.isValidListOfDate(availableDate)) {
+        if (availableDate == null || !VolunteerDates.isValidListOfDates(availableDate)) {
             throw new IllegalValueException(VolunteerDates.MESSAGE_CONSTRAINTS);
         }
         final VolunteerDates modelAvailableDate = new VolunteerDates(availableDate);

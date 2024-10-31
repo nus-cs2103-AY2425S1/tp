@@ -1,5 +1,9 @@
 package seedu.address.logic.commands.volunteercommands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -10,10 +14,9 @@ import seedu.address.model.Model;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.volunteer.Volunteer;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Adds a list of dates to a volunteer's available dates
+ */
 public class VolunteerAddDateCommand extends Command {
 
 
@@ -23,13 +26,18 @@ public class VolunteerAddDateCommand extends Command {
             + ": Adds dates to the list of available dates of volunteer identified by the index number "
             + "used in the displayed volunteer list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " i/1 d/2202-01-12, 2022-02-11";
     private static final String MESSAGE_ADD_DATE_VOLUNTEER_SUCCESS =
             "Added dates to %s's list of available dates.";
 
     private final Index targetIndex;
     private final String dateList;
 
+    /**
+     * Constructor. Takes in a non-zero, non-negative index and a list of dates formatted as a single string.
+     * @param targetIndex
+     * @param dateList
+     */
     public VolunteerAddDateCommand(Index targetIndex, String dateList) {
         this.targetIndex = targetIndex;
         this.dateList = dateList;

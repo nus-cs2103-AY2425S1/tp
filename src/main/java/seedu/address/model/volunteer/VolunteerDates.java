@@ -1,9 +1,5 @@
 package seedu.address.model.volunteer;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import seedu.address.model.exceptions.VolunteerDuplicateDateException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -11,6 +7,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 
 /**
  * Represents a Event's date in the address book.
@@ -39,6 +39,12 @@ public class VolunteerDates {
         return this.datesListAsObservableString;
     }
 
+    /**
+     * Adds a given string of dates to its list of dates.
+     * @param dates
+     * @throws DateTimeParseException
+     * @throws VolunteerDuplicateDateException
+     */
     public void addStringOfDatesToAvailList(String... dates) throws DateTimeParseException,
             VolunteerDuplicateDateException {
         for (String date : dates) {
@@ -69,7 +75,12 @@ public class VolunteerDates {
         }
     }
 
-    public static boolean isValidListOfDate(String test) {
+    /**
+     * Returns true if a given string is a valid list of dates.
+     * @param test
+     * @return
+     */
+    public static boolean isValidListOfDates(String test) {
         String[] dates = test.split(", ");
         for (String s : dates) {
             if (!isValidDate(s)) {
@@ -85,7 +96,7 @@ public class VolunteerDates {
         StringBuilder s = new StringBuilder();
         for (LocalDate d : dates) {
             s.append(d.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            if (dates.indexOf(d) != dates.size()-1){
+            if (dates.indexOf(d) != dates.size() - 1) {
                 s.append(", ");
             }
         }
