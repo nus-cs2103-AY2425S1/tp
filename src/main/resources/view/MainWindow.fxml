@@ -22,7 +22,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@GrubTheme.css" />
+        <URL value="@/view/GrubTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
       <VBox>
@@ -31,6 +31,9 @@
             <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
               <Menu mnemonicParsing="false" text="File">
                 <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+              </Menu>
+              <Menu mnemonicParsing="false" text="Theme">
+                <MenuItem mnemonicParsing="false" onAction="#handleTheme" text="Switch Theme" />
               </Menu>
               <Menu mnemonicParsing="false" text="Help">
                 <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp"

@@ -30,6 +30,8 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
+    private boolean isDarkTheme = false;
+
     // Independent Ui parts residing in this Ui container
     private RestaurantListPanel restaurantListPanel;
     private ResultDisplay resultDisplay;
@@ -153,6 +155,19 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Toggles the theme of the app between dark and light theme
+     */
+    @FXML
+    public void handleTheme() {
+        if (isDarkTheme) {
+            getRoot().getScene().getStylesheets().setAll(getClass().getResource("/view/GrubTheme.css").toExternalForm());
+        } else {
+            getRoot().getScene().getStylesheets().setAll(getClass().getResource("/view/AB3/DarkTheme.css").toExternalForm());
+        }
+        isDarkTheme = !isDarkTheme;
     }
 
     /**
