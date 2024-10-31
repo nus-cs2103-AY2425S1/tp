@@ -40,7 +40,7 @@ public class JsonSerializableAddressBookTest {
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
         // remove the participation as files differ as such
-        typicalPersonsAddressBook.removeParticipation(TypicalPersons.ALICE_MATH_12122024);
+        typicalPersonsAddressBook.removeParticipation(TypicalPersons.ALICE_MATH);
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
