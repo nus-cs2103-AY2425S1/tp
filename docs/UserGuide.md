@@ -132,6 +132,17 @@ Format: `delete ID`
 Examples:
 * `delete 12345678` will delete student contact with `ID: 12345678`.
 
+### Finding a person : `find`
+
+Finds the specified person from EduContacts and displays their details.
+
+Format: `find ID`
+
+* Finds student with the specified `ID`.
+
+Examples:
+* `find 12345678` will find student contact with `ID: 12345678` and display their details.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -187,6 +198,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete ID`<br> e.g., `delete 12345678`
 **Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
-**Filter**   | `find [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `find n/James Jake`
+**Filter**   | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`
+**Find**   | `find ID`<br> e.g., `find 12345678`
 **List**   | `list`
 **Help**   | `help`
