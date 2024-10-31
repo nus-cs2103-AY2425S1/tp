@@ -427,12 +427,12 @@ Example:
 
 Allow doctors to delete an appointment. 
 
-Format: `delAppt i/NRIC @d/DATE @t/TIME`
+Format: `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 > 
-> * Unlike addAppt, there is no need for AppointmentName preamble.
+> * Unlike addAppt, there is no need for `APPOINTMENT_NAME` preamble.
 > * Deletes Appointment from the patient with the specified `NRIC` in MediBase3.
 > * You can delete an appointment from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been deleted.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
