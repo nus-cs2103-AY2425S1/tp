@@ -62,6 +62,10 @@ public class Event {
         return attendees.contains(person);
     }
 
+    public void removeAttendee(Person person) {
+        attendees.remove(person);
+    }
+
     public Address getLocation() {
         return location;
     }
@@ -116,6 +120,7 @@ public class Event {
                 + "name='" + eventName + '\''
                 + ", startDate=" + startDate
                 + ", endDate=" + endDate
+                + ", location=" + location
                 + ", \nattendees=" + attendeesString
                 + '}';
     }

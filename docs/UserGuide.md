@@ -147,6 +147,18 @@ Shows a list of all events in the event book.
 
 Format: `list -e`
 
+### Adding an event: `event`
+
+Adds an event to the event book.
+
+Format: `event -n EVENT_NAME -d EVENT_DATE (yyyy-mm-dd) -l LOCATION -a ATTENDEES`
+
+<box type="tip" seamless>
+
+**Tip:** All parameters `EVENT_NAME`, `EVENT_DATE`, `LOCATION` must be present but `ATTENDEES` is optional
+**Tip:** Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book
+</box>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -198,6 +210,7 @@ Action     | Format, Examples
 **Edit Person**   | `edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-rs RELATIONSHIP]`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
 **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Clear Person**  | `clear`
+**Add Event**     | `event -n EVENT_NAME -d EVENT_DATE -l LOCATION -a ATTENDEES` <br> e.g., `event -n party -d 2023-12-12 -l my house -a 1 2 3`
 **List Events**   | `list -e`
 **Help**   | `help`
 **Exit**   | `exit`

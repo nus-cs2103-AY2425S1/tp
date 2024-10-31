@@ -72,8 +72,10 @@ public class Messages {
                 .append(event.getStartDate())
                 .append(" - ")
                 .append(event.getEndDate())
-                .append("; \nAttendees: ")
-                .append(attendeesString);
+                .append("; Location: ")
+                .append(event.getLocation())
+                .append(event.getAttendees().isEmpty() ? "; \nNo Attendees." : "; \nAttendees: " + attendeesString);
+
         return builder.toString();
     }
 

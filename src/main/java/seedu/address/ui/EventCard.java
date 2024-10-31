@@ -107,6 +107,8 @@ public class EventCard extends UiPart<Region> {
 
         if (numOfAttendees == 0) {
             return List.of(NO_ATTENDEES_LABEL);
+        } else if (numOfAttendees == 1) {
+            return List.of(new Label(sortedAttendees.get(0).getName().toString()));
         }
 
         List<Label> attendeesLabels = new ArrayList<>();
