@@ -31,6 +31,27 @@ public class PersonTest {
     }
 
     @Test
+    public void deleteTags_tagsNotPresent_noChange() {
+        Person person = new PersonBuilder().withTags(VALID_TAG_HUSBAND).build();
+        Set<Tag> nonExistentTags = Set.of(new Tag("nonexistentTag"));
+        Person updatedPerson = person.deleteTags(nonExistentTags);
+
+        // Ensure tags remain the same
+        assertEquals(person.getTags(), updatedPerson.getTags());
+    }
+
+    @Test
+    public void addTags_emptySet_noChange() {
+        Person person = new PersonBuilder().withTags(VALID_TAG_HUSBAND).build();
+        Set<Tag> emptyTags = Set.of();
+        Person updatedPerson = person.addTags(emptyTags);
+
+        // Ensure tags remain the same
+        assertEquals(person.getTags(), updatedPerson.getTags());
+    }
+
+
+    @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
