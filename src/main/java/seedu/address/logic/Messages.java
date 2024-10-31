@@ -18,7 +18,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_FIND_KEYWORD = "Find keyword(s) cannot be empty!";
     public static final String MESSAGE_FIND_KEYWORD_CONTAINS_WHITESPACE =
             "Find keyword(s) cannot contain whitespace(s)!";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_PERSON_INDEX_OUT_OF_BOUND = "The person index provided is out of bound";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d person(s) found with condition: %2$s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";

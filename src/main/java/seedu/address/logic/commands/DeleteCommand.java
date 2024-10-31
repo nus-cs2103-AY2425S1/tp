@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
 
         for (Index targetIndex : targetIndexArray) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ": "
+                throw new CommandException(Messages.MESSAGE_PERSON_INDEX_OUT_OF_BOUND + ": "
                         + targetIndex.getOneBased());
             }
             personsToDelete.add(lastShownList.get(targetIndex.getZeroBased()));
