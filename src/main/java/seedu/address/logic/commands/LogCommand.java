@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,7 +25,6 @@ public class LogCommand extends Command {
             + "INFO (non-empty)\n"
             + "Example: " + COMMAND_WORD + " 1 25-12-2024 14:30 Attended appointment";
 
-    //private final Index index;
     private final Nric nric;
     private final Log log;
 
@@ -37,7 +35,6 @@ public class LogCommand extends Command {
      * @param log The log entry to add.
      */
     public LogCommand(Nric targetNric, Log log) {
-        //this.index = targetIndex;
         this.nric = targetNric;
         this.log = log;
     }
@@ -55,11 +52,6 @@ public class LogCommand extends Command {
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        /*if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToLog = lastShownList.get(index.getZeroBased());*/
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> nric.equals(person.getNric()))
                 .findFirst();
@@ -83,7 +75,6 @@ public class LogCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LogCommand // instanceof handles nulls
-                //&& index.equals(((LogCommand) other).index)
                 && nric.equals(((LogCommand) other).nric)
                 && log.equals(((LogCommand) other).log));
     }
@@ -96,7 +87,6 @@ public class LogCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                //.add("index", index)
                 .add("nric", nric)
                 .add("log", log)
                 .toString();

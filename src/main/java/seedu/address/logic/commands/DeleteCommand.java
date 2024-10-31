@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,12 +29,10 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    //private final Index targetIndex;
     private final Nric targetNric;
 
-    public DeleteCommand(Nric targetNRIC) {
-        //this.targetIndex = targetIndex;
-        this.targetNric = targetNRIC;
+    public DeleteCommand(Nric targetNric) {
+        this.targetNric = targetNric;
     }
 
     @Override
@@ -43,11 +40,6 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        /*if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());*/
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> targetNric.equals(person.getNric()))
                 .findFirst();
@@ -73,14 +65,12 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        //return targetIndex.equals(otherDeleteCommand.targetIndex);
         return targetNric.equals(otherDeleteCommand.targetNric);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                //.add("targetIndex", targetIndex)
                 .add("targetNric", targetNric)
                 .toString();
     }

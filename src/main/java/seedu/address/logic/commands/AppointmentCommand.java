@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,11 +42,6 @@ public class AppointmentCommand extends Command {
      * @param targetNric NRIC of the person to set the appointment for.
      * @param appointmentString String of the appointment in the format a/DD-MM-YYYY HH:MM.
      */
-    /*public AppointmentCommand(Index targetIndex, String appointmentString) {
-        this.index = targetIndex;
-        this.appointmentString = appointmentString.trim();
-    }*/
-
     public AppointmentCommand(Nric targetNric, String appointmentString) {
         this.nric = targetNric;
         this.appointmentString = appointmentString;
@@ -58,18 +52,6 @@ public class AppointmentCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        /*if (this.index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }*/
-
-        /*boolean doesNricExist = lastShownList.stream()
-                .anyMatch(person -> person.getNric().equals(nric));
-
-        if (!doesNricExist) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }*/
-
-        //Person personToEdit = lastShownList.get(index.getZeroBased());
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> nric.equals(person.getNric()))
                 .findFirst();
@@ -99,8 +81,6 @@ public class AppointmentCommand extends Command {
         }
 
         AppointmentCommand otherCommand = (AppointmentCommand) other;
-        /*return index.equals(otherCommand.index)
-                && appointmentString.equals(otherCommand.appointmentString);*/
         return nric.equals(otherCommand.nric)
                 && appointmentString.equals(otherCommand.appointmentString);
     }

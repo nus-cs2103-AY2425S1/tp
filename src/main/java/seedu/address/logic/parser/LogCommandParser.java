@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -43,21 +42,11 @@ public class LogCommandParser implements Parser<LogCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LogCommand.MESSAGE_USAGE));
         }
 
-        // Parse the index
-        /*String indexString = argParts[0];
-        Index index;*/
-
         //Parse the nric
         String nricString = argParts[0];
         Nric nric;
 
         try {
-            /*int indexValue = Integer.parseInt(indexString);
-            if (indexValue <= 0) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AppointmentCommand.MESSAGE_USAGE));
-            }
-            index = Index.fromZeroBased(indexValue - 1); // Adjust to zero-based index*/
             nric = new Nric(nricString);
         } catch (IllegalArgumentException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));

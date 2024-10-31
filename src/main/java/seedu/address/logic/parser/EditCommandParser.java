@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -42,7 +41,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         Nric nric;
 
         try {
-            //index = ParserUtil.parseIndex(argMultimap.getPreamble());
             nric = ParserUtil.parseNric(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);

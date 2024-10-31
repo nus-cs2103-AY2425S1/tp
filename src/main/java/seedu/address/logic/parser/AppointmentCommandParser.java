@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Nric;
@@ -100,23 +98,8 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
             throw new ParseException("Hour and minute must be valid.");
         }
 
-        // Parse the index
-        /*String indexString = argParts[0];
-        Index index;*/
-
         String nricString = argParts[0];
         Nric nric;
-
-        /*try {
-            int indexValue = Integer.parseInt(indexString);
-            if (indexValue <= 0) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AppointmentCommand.MESSAGE_USAGE));
-            }
-            index = Index.fromZeroBased(indexValue - 1); // Adjust to zero-based index
-        } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
-        }*/
 
         try {
             nric = new Nric(nricString);

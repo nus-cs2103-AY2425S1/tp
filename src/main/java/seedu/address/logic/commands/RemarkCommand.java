@@ -7,7 +7,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -39,7 +38,7 @@ public class RemarkCommand extends Command {
 
 
     /**
-     * @param index of the person in the filtered person list to edit the remark
+     * @param nric of the person in the filtered person list to edit the remark
      * @param remark of the person to be updated to
      */
     public RemarkCommand(Nric nric, Remark remark) {
@@ -54,11 +53,6 @@ public class RemarkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        /*if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());*/
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> nric.equals(person.getNric()))
                 .findFirst();
@@ -100,7 +94,6 @@ public class RemarkCommand extends Command {
         }
 
         RemarkCommand e = (RemarkCommand) other;
-        //return index.equals(e.index)
         return nric.equals(e.nric)
                 && remark.equals(e.remark);
     }
