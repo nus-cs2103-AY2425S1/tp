@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,23 +22,23 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentStatus;
-import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.StudentStatus;
+import seedu.address.model.contact.TelegramHandle;
 import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing contact in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the contact identified "
+            + "by the index number used in the displayed contact list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -51,48 +51,48 @@ public class EditCommand extends Command {
             + PREFIX_TELEGRAM_HANDLE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Edited Contact: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-            "One of the fields you want to add conflict with another person.";
+            "One of the fields you want to add conflict with another contact.";
 
     private static final int invalidTargetIndex = -1;
 
     private Index targetIndex;
     private final Name targetName;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditContactDescriptor editContactDescriptor;
 
     /**
-     * @param targetIndex of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param targetIndex of the contact in the filtered contact list to edit
+     * @param editContactDescriptor details to edit the contact with
      */
-    public EditCommand(Index targetIndex, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index targetIndex, EditContactDescriptor editContactDescriptor) {
         requireNonNull(targetIndex);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editContactDescriptor);
 
         this.targetIndex = targetIndex;
         this.targetName = null;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editContactDescriptor = new EditContactDescriptor(editContactDescriptor);
     }
 
     /**
-     * @param targetName of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param targetName of the contact in the filtered contact list to edit
+     * @param editContactDescriptor details to edit the contact with
      */
-    public EditCommand(Name targetName, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Name targetName, EditContactDescriptor editContactDescriptor) {
         requireNonNull(targetName);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editContactDescriptor);
 
         this.targetIndex = null;
         this.targetName = targetName;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editContactDescriptor = new EditContactDescriptor(editContactDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Contact> lastShownList = model.getFilteredContactList();
 
         System.out.println("attempting to execute EditCommand, targetIndex = " + targetIndex);
 
@@ -103,54 +103,54 @@ public class EditCommand extends Command {
         assert(targetIndex != null);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Contact contactToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
-        if (!personToEdit.isSamePerson(editedPerson)
-                && model.hasDuplicateFieldsWithException(personToEdit, editedPerson)) {
+        if (!contactToEdit.isSameContact(editedContact)
+                && model.hasDuplicateFieldsWithException(contactToEdit, editedContact)) {
             throw new CommandException(MESSAGE_DUPLICATE_FIELDS);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        model.setContact(contactToEdit, editedContact);
+        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
     }
 
-    private void setTargetIndex(List<Person> lastShownList) throws CommandException {
+    private void setTargetIndex(List<Contact> lastShownList) throws CommandException {
         int temp = lastShownList.stream()
-                .filter(person -> person.getName().equalsIgnoreCase(targetName))
+                .filter(contact -> contact.getName().equalsIgnoreCase(targetName))
                 .map(lastShownList::indexOf)
                 .reduce(invalidTargetIndex, (x, y) -> y);
         System.out.println("temp = " + temp);
         if (temp == invalidTargetIndex) {
-            throw new CommandException(Messages.MESSAGE_PERSON_NOT_IN_ADDRESS_BOOK);
+            throw new CommandException(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK);
         }
         this.targetIndex = Index.fromZeroBased(temp);
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Contact} with the details of {@code contactToEdit}
+     * edited with {@code editContactDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Contact createEditedContact(Contact contactToEdit, EditContactDescriptor editContactDescriptor) {
+        assert contactToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
-                .orElse(personToEdit.getTelegramHandle());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Name updatedName = editContactDescriptor.getName().orElse(contactToEdit.getName());
+        TelegramHandle updatedTelegramHandle = editContactDescriptor.getTelegramHandle()
+                .orElse(contactToEdit.getTelegramHandle());
+        Email updatedEmail = editContactDescriptor.getEmail().orElse(contactToEdit.getEmail());
         StudentStatus updatedStudentStatus =
-                editPersonDescriptor.getStudentStatus().orElse(personToEdit.getStudentStatus());
-        Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
-        Nickname updatedNickname = editPersonDescriptor.getNickname().orElse(personToEdit.getNickname());
-        return new Person(updatedName, updatedTelegramHandle, updatedEmail, updatedStudentStatus, updatedRoles,
+                editContactDescriptor.getStudentStatus().orElse(contactToEdit.getStudentStatus());
+        Set<Role> updatedRoles = editContactDescriptor.getRoles().orElse(contactToEdit.getRoles());
+        Nickname updatedNickname = editContactDescriptor.getNickname().orElse(contactToEdit.getNickname());
+        return new Contact(updatedName, updatedTelegramHandle, updatedEmail, updatedStudentStatus, updatedRoles,
                 updatedNickname);
     }
 
@@ -167,22 +167,22 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return targetIndex.equals(otherEditCommand.targetIndex)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                && editContactDescriptor.equals(otherEditCommand.editContactDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editContactDescriptor", editContactDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the contact with. Each non-empty field value will replace the
+     * corresponding field value of the contact.
      */
-    public static class EditPersonDescriptor {
+    public static class EditContactDescriptor {
         private Name name;
         private TelegramHandle telegramHandle;
         private Email email;
@@ -190,13 +190,13 @@ public class EditCommand extends Command {
         private Set<Role> roles;
         private Nickname nickname;
 
-        public EditPersonDescriptor() {}
+        public EditContactDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code roles} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditContactDescriptor(EditContactDescriptor toCopy) {
             setName(toCopy.name);
             setTelegramHandle(toCopy.telegramHandle);
             setEmail(toCopy.email);
@@ -276,17 +276,17 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditContactDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(studentStatus, otherEditPersonDescriptor.studentStatus)
-                    && Objects.equals(roles, otherEditPersonDescriptor.roles)
-                    && Objects.equals(nickname, otherEditPersonDescriptor.nickname);
+            EditContactDescriptor otherEditContactDescriptor = (EditContactDescriptor) other;
+            return Objects.equals(name, otherEditContactDescriptor.name)
+                    && Objects.equals(telegramHandle, otherEditContactDescriptor.telegramHandle)
+                    && Objects.equals(email, otherEditContactDescriptor.email)
+                    && Objects.equals(studentStatus, otherEditContactDescriptor.studentStatus)
+                    && Objects.equals(roles, otherEditContactDescriptor.roles)
+                    && Objects.equals(nickname, otherEditContactDescriptor.nickname);
         }
 
         @Override
