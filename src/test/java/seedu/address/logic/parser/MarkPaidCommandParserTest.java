@@ -21,7 +21,8 @@ public class MarkPaidCommandParserTest {
     public void parse_validArgs_returnsMarkPaidCommand() throws Exception {
         // Test input with valid index and payment
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_PAYMENT + VALID_FEES_PAID;
-        MarkPaidCommand expectedCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new FeesPaidByStudent(VALID_FEES_PAID));
+        MarkPaidCommand expectedCommand = new MarkPaidCommand(INDEX_FIRST_PERSON,
+                new FeesPaidByStudent(VALID_FEES_PAID));
         MarkPaidCommand result = parser.parse(userInput);
         assertEquals(expectedCommand, result);
     }

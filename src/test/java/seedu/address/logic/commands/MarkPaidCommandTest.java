@@ -84,7 +84,8 @@ public class MarkPaidCommandTest {
 
         assertTrue(markPaidFirstCommand.equals(markPaidFirstCommand));
 
-        MarkPaidCommand markPaidFirstCommandCopy = new MarkPaidCommand(INDEX_FIRST_PERSON, new FeesPaidByStudent("200"));
+        MarkPaidCommand markPaidFirstCommandCopy = new MarkPaidCommand(INDEX_FIRST_PERSON,
+                new FeesPaidByStudent("200"));
         assertTrue(markPaidFirstCommand.equals(markPaidFirstCommandCopy));
 
         assertFalse(markPaidFirstCommand.equals(1));

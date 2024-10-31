@@ -11,7 +11,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.ModelManager;
 import seedu.address.model.participation.exceptions.DuplicateParticipationException;
 import seedu.address.model.participation.exceptions.ParticipationNotFoundException;
 import seedu.address.model.person.Person;
@@ -73,23 +72,23 @@ public class UniqueParticipationListTest {
     @Test
     public void setParticipation_nullTargetParticipation_throwsNullPointerException() {
         Participation editedParticipation = new ParticipationBuilder().build();
-        assertThrows(NullPointerException.class,
-                () -> uniqueParticipationList.setParticipation(null, editedParticipation));
+        assertThrows(NullPointerException.class, (
+        ) -> uniqueParticipationList.setParticipation(null, editedParticipation));
     }
 
     @Test
     public void setParticipation_nullEditedParticipation_throwsNullPointerException() {
         Participation participation = new ParticipationBuilder().build();
         uniqueParticipationList.add(participation);
-        assertThrows(NullPointerException.class,
-                () -> uniqueParticipationList.setParticipation(participation, null));
+        assertThrows(NullPointerException.class, (
+        ) -> uniqueParticipationList.setParticipation(participation, null));
     }
 
     @Test
     public void setParticipation_targetParticipationNotInList_throwsParticipationNotFoundException() {
         Participation participation = new ParticipationBuilder().build();
-        assertThrows(ParticipationNotFoundException.class,
-                () -> uniqueParticipationList.setParticipation(participation, participation));
+        assertThrows(ParticipationNotFoundException.class, (
+        ) -> uniqueParticipationList.setParticipation(participation, participation));
     }
 
     @Test
@@ -115,13 +114,15 @@ public class UniqueParticipationListTest {
 
     @Test
     public void remove_nullParticipation_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueParticipationList.remove(null));
+        assertThrows(NullPointerException.class, (
+        ) -> uniqueParticipationList.remove(null));
     }
 
     @Test
     public void remove_participationDoesNotExist_throwsParticipationNotFoundException() {
         Participation participation = new ParticipationBuilder().build();
-        assertThrows(ParticipationNotFoundException.class, () -> uniqueParticipationList.remove(participation));
+        assertThrows(ParticipationNotFoundException.class, (
+        ) -> uniqueParticipationList.remove(participation));
     }
 
     @Test
@@ -135,7 +136,8 @@ public class UniqueParticipationListTest {
 
     @Test
     public void setParticipation_nullUniqueParticipationList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueParticipationList.setParticipation((UniqueParticipationList) null));
+        assertThrows(NullPointerException.class, (
+        ) -> uniqueParticipationList.setParticipation((UniqueParticipationList) null));
     }
 
     @Test
@@ -154,17 +156,20 @@ public class UniqueParticipationListTest {
         List<Participation> listWithDuplicateParticipations = Arrays.asList(
                 new ParticipationBuilder().build(),
                 new ParticipationBuilder().build());
-        assertThrows(DuplicateParticipationException.class, () -> uniqueParticipationList.setParticipation(listWithDuplicateParticipations));
+        assertThrows(DuplicateParticipationException.class, (
+        ) -> uniqueParticipationList.setParticipation(listWithDuplicateParticipations));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> uniqueParticipationList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, (
+        ) -> uniqueParticipationList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        assertEquals(uniqueParticipationList.asUnmodifiableObservableList().toString(), uniqueParticipationList.toString());
+        assertEquals(uniqueParticipationList.asUnmodifiableObservableList().toString(),
+                uniqueParticipationList.toString());
     }
 }
 
