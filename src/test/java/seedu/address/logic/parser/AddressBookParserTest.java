@@ -113,12 +113,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_schedule() throws Exception {
         String dateTime = "2024-10-04 1000";
+        String note = "Lumbago";
         Set<Schedule> scheduleSet = new HashSet<>();
         scheduleSet.add(new Schedule(dateTime, ""));
         ScheduleCommand expectedCommand = new ScheduleCommand("Jane", scheduleSet);
 
         ScheduleCommand actualCommand = (ScheduleCommand) parser.parseCommand(
-                ScheduleCommand.COMMAND_WORD + " Jane" + " d/" + dateTime);
+                ScheduleCommand.COMMAND_WORD + " Jane" + " d/" + dateTime + " note/" + note);
 
         // Assert that the expected command equals the actual command
         assertEquals(expectedCommand, actualCommand);

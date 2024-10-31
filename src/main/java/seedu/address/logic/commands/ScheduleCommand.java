@@ -29,11 +29,13 @@ public class ScheduleCommand extends Command {
             + "Parameters: "
             + "NAME "
             + PREFIX_DATE + "DATE_AND_TIME "
-            + "[" + PREFIX_NOTE + "NOTE]...\n"
+            + PREFIX_NOTE + "NOTE...\n"
             + "Example: " + COMMAND_WORD + " "
             + "John Doe "
             + PREFIX_DATE + "2024-10-17 1200 "
             + PREFIX_NOTE + "first appointment ";
+
+    public static final String MESSAGE_UNEQUAL_NOTES = "The number of notes must match the number of dates provided";
 
     public static final String MESSAGE_SUCCESS = "Scheduled %s for %s";
     public static final String MESSAGE_INVALID_TIME = "Scheduled time must be a weekday and "
