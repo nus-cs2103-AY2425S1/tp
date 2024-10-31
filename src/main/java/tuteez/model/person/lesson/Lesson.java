@@ -5,8 +5,13 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -70,7 +75,6 @@ public class Lesson {
         return false;
     }
 
-
     /**
      * Validates if the given lesson string is valid.
      * The lesson should consist of a day and a time range separated by a space.
@@ -116,6 +120,32 @@ public class Lesson {
                  || firstLs.startTime.equals(secondLs.endTime);
         return !(completelyBefore || completelyAfter);
     }
+
+    /**
+     * Checks if any two lessons in the provided set clash with each other.
+     *
+     * <p>This method iterates through lessons in and determines
+     * if there is a timing conflict between any two lessons.</p>
+     *
+     * @param lessons A set of {@code Lesson} objects to check for clashes.
+     * @return {@code true} if any two lessons in the set have a timing conflict,
+     *         {@code false} otherwise.
+     */
+    public static boolean containsClashes(Set<Lesson> lessons) {
+        List<Lesson> lessonList = new ArrayList<>(lessons); // Convert to list for easy indexing
+
+        for (int i = 0; i < lessonList.size(); i++) {
+            Lesson lesson1 = lessonList.get(i);
+            for (int j = i + 1; j < lessonList.size(); j++) {
+                Lesson lesson2 = lessonList.get(j);
+                if (isClashingWithOtherLesson(lesson1, lesson2)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Returns the day on which this lesson occurs.
