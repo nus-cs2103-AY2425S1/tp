@@ -40,7 +40,9 @@ public class AddContactCommand extends ContactCommand {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase. If you wish to "
+            + "save an alternative version of a person, "
+            + "you may add a unique identifier to his/her name e.g. Ryan Tan Sec 1";
     private final Person toAdd;
 
     /**

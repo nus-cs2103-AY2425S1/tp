@@ -51,6 +51,9 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!Name.hasNoSlash(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS_NO_SLASHES);
+        }
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
