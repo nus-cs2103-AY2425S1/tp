@@ -27,10 +27,10 @@ public class AddStudentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Adds a student to the address book.\n"
         + "Parameters: "
+        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER"
         + PREFIX_STUDENT_NAME + "NAME "
         + PREFIX_EMAIL + "EMAIL "
-        + "[" + PREFIX_TAG + "TAG]... "
-        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER\n"
+        + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_STUDENT_NAME + "John Doe "
         + PREFIX_EMAIL + "johnd@example.com "
