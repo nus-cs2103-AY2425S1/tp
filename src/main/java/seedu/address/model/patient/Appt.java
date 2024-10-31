@@ -5,10 +5,11 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Comparator;
+import java.util.Objects;
 
-import seedu.address.logic.commands.ApptCommand;
 import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.healthservice.HealthService;
 
@@ -17,7 +18,15 @@ import seedu.address.model.healthservice.HealthService;
  * Guarantees: immutable; is always valid
  */
 public class Appt {
-    public static final String MESSAGE_CONSTRAINTS = null;
+    public static final String DATETIME_MESSAGE_CONSTRAINTS = "Invalid date and time. "
+            + "Please enter a valid date and time.";
+    public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern("yyyy-MM-dd")
+            .optionalStart()
+            .appendLiteral(' ')
+            .optionalEnd()
+            .appendPattern("HH:mm")
+            .toFormatter();
 
     /**
      * Comparator to compare two appointments by their date and time.
@@ -86,7 +95,7 @@ public class Appt {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ApptCommand)) {
+        if (!(other instanceof Appt)) {
             return false;
         }
 
@@ -100,21 +109,21 @@ public class Appt {
      */
     @Override
     public int hashCode() {
-        return dateTime.hashCode();
+        return Objects.hash(dateTime, healthService);
     }
 
     /**
-     * Returns a string representation of the appointment
-     * @param trimmedDate
+     * Returns true if the appointment date is valid.
+     * @param trimmedDateTime
      * @return
      */
-    public static boolean isValidDateTime(LocalDateTime trimmedDate) {
+    public static boolean isValidDateTime(String trimmedDateTime) {
         try {
-            LocalDateTime.parse(trimmedDate.toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            LocalDateTime.parse(trimmedDateTime, FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             return false;
         }
     }
