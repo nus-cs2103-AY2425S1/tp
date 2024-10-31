@@ -10,9 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
+import seedu.address.model.person.MonthPaidContainsKeywordsPredicate;
 import seedu.address.model.person.NameAndClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-
+import seedu.address.model.person.NotMonthPaidContainsKeywordsPredicate;
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
@@ -61,6 +62,28 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " n/ Bob \n Alice c/ \n 1 \n \t 2  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void test_parseValidArgsWithMonthPaid_success() {
+
+        FindCommand expectedFindCommand =
+                new FindCommand(new MonthPaidContainsKeywordsPredicate(Arrays.asList("2022-12")));
+        assertParseSuccess(parser, " m/2022-12", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " m/ \n 2022-12  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void test_parseValidArgsWithNotMonthPaid_success() {
+
+        FindCommand expectedFindCommand =
+                new FindCommand(new NotMonthPaidContainsKeywordsPredicate(Arrays.asList("2022-12")));
+        assertParseSuccess(parser, " !m/2022-12", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " !m/ \n 2022-12  \t", expectedFindCommand);
     }
 
     @Test
