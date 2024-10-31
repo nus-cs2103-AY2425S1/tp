@@ -46,7 +46,7 @@ public class MarkAttendanceCommandTest {
 
         Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
-        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), studentNumber, date, attendance);
+        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance, studentNumber);
 
         CommandResult result = command.execute(modelStub);
 
@@ -62,7 +62,7 @@ public class MarkAttendanceCommandTest {
         ModelStubWithNoStudent modelStub = new ModelStubWithNoStudent();
         Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
-        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), studentNumber, date, attendance);
+        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance, studentNumber);
 
         assertThrows(CommandException.class, "Student not found: John", () -> command.execute(modelStub));
     }
@@ -86,7 +86,7 @@ public class MarkAttendanceCommandTest {
         Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
         MarkAttendanceCommand markCommand = new MarkAttendanceCommand(new Name("John Doe"),
-                studentNumber, date, attendance);
+                 date, attendance, studentNumber);
         markCommand.execute(modelStub);
 
         CommandStack commandStack = CommandStack.getInstance();
@@ -109,9 +109,9 @@ public class MarkAttendanceCommandTest {
         Attendance attendance2 = new Attendance("a");
         LocalDate date = LocalDate.of(2023, 10, 9);
         MarkAttendanceCommand markCommand = new MarkAttendanceCommand(new Name("John"),
-                studentNumber, date, attendance);
+                date, attendance, studentNumber);
         MarkAttendanceCommand markCommand2 = new MarkAttendanceCommand(new Name("John"),
-                studentNumber, date, attendance2);
+                date, attendance2, studentNumber);
         markCommand.execute(modelStub);
         markCommand2.execute(modelStub);
         markCommand2.undo(modelStub);

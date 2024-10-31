@@ -42,7 +42,7 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
                 ? Optional.of(ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get()))
                 : Optional.empty();
 
-        return new MarkAttendanceCommand(name, studentNumber, date, attendance);
+        return new MarkAttendanceCommand(name, date, attendance, studentNumber);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

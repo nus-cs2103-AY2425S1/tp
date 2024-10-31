@@ -131,15 +131,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a specific student : `deletes`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
-Format: `delete INDEX`
+Format: `deletes n/STUDENT_NAME`
+Format: `deletes n/STUDENT_NAME sn/STUDENT_NUMBER`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the student with the specified details.
+* The student name refers to the student name shown in the displayed list of students.
+* The student number refers to the student number shown in the displayed list of students.
+* The student number **must be in the following format** A1234567B …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -157,11 +159,56 @@ Exits the program.
 
 Format: `exit`
 
+## Attendance Commands
+
+<box type="tip" seamless>
+
+**Tip:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
+</box>
+
+
 ### Marking Attendance : `markat`
 
-Marks attendance of student for a particular date
+* Marks attendance of student for a particular date with the specified details.
 
-Format: `markat n/STUDENT_NAME d/DATE`
+* Format: `markat n/STUDENT_NAME d/DATE pr/ATTENDANCE sn/STUDENT_NUMBER (Optional)`
+
+### Marking Tutorial Group Attendance : `markpresentall`
+
+* Marks all students in a tutorial group as present for a particular date
+
+* Format: `markpresentall tg/TUTORIAL_GROUP d/DATE`
+
+### Unmarking Tutorial Group Attendance : `Unmarkpresentall`
+
+* Marks all students in a tutorial group as absent for a particular date
+
+* Format: `unmarkpresentall tg/TUTORIAL_GROUP d/DATE`
+
+### Deleting Attendance : `deleteat`
+
+* Deletes attendance of student for a particular date with the specified details.
+
+* Format : `deleteat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+
+### Deleting Tutorial Group Attendance : `deleteatall`
+
+* Deletes attendance of all students in a tutorial group for a particular date
+
+* Format : `deleteatall tg/TUTORIAL_GROUP d/DATE`
+
+### Getting Attendance : `getat`
+
+* Gets attendance of student for a particular date
+
+* Format: `getat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+
+### Getting Tutorial Group Attendance : `getattg`
+
+* Opens an attendance window for all students in a tutorial group for a particular date
+
+* Format: `getattg tg/TUTORIAL_GROUP d/DATE`
+
 
 ### Saving the data
 
