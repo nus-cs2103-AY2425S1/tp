@@ -119,6 +119,35 @@ public class FilterCommandTest {
     }
 
     @Test
+    public void execute_multipleTags_matchesAllTags() {
+        Set<Tag> tags = new HashSet<>(Arrays.asList(
+                new Tag("friends"),
+                new Tag("owesMoney")
+        ));
+        String expectedMessage = FilterCommand.constructSuccessMessage(new HashSet<>(), tags);
+        FilterCommand command = new FilterCommand(new HashSet<>(), tags);
+        CommandResult result = command.execute(model);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        // Should only return BENSON who has both tags
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleTags_excludesPartialMatches() {
+        Set<Tag> tags = new HashSet<>(Arrays.asList(
+                new Tag("friends"),
+                new Tag("owesMoney"),
+                new Tag("client")
+        ));
+        String expectedMessage = FilterCommand.MESSAGE_NO_CONTACT_FOUND;
+        FilterCommand command = new FilterCommand(new HashSet<>(), tags);
+        CommandResult result = command.execute(model);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        // Should return empty list since no one has all three tags
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
         Set<String> names = new HashSet<>(Arrays.asList("John", "Doe"));
         Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("client")));
