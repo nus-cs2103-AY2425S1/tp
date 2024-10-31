@@ -123,5 +123,10 @@ public class EventManagerTest {
         eventManager.addEvent(event1);
         assertFalse(eventManager.equals(anotherEventManager));
     }
+
+    @Test
+    public void getPersonInEventPredicate_eventNonExistent_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> eventManager.getPersonInEventPredicate(event1));
+    }
 }
 
