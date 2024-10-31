@@ -15,20 +15,20 @@ If you can type fast, ConTActs can get your contact management tasks done faster
 ## Command summary
 Click on each command to jump to their subsection.
 
-| Action                                            | Format, Examples                                                                                                                                 |
-|---------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help--help)**                   | `help`                                                                                                                                           |
-| **[Add](#adding-a-person--add)**                  | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
-| **[List](#listing-all-persons--list)**            | `list`                                                                                                                                           |
-| **[Edit](#editing-a-person--edit)**               | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
-| **[Mark](#marking-person-as-attended--mark)**     | `mark INDEX tut/TUTORIAL` <br>`INDEX` can be single, range (e.g., `1 - 12`), or `*` for all <br> e.g., `mark 2 tut/1`                            |
-| **[Unmark](#marking-person-as-absent--unmark)**   | `unmark INDEX tut/TUTORIAL` <br>`INDEX` can be single, range, or `*` for all <br> e.g., `unmark 2 tut/1`                                         |
-| **[Reset](#resetting-persons-attendance--reset)** | `reset INDEX tut/TUTORIAL`<br> `INDEX` can be single, range, or `*` for all <br> e.g., `reset 2 tut/1`                                           |
-| **[Find](#locating-persons-by-name--find)**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
-| **[Sort](#sorting-persons--sort)**                | `sort ORDER [n/][i/][tut/]`<br> e.g., `sort -1 i/`                                                                                               |
-| **[Delete](#deleting-a-person--delete)**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
-| **[Clear](#clearing-all-entries--clear)**         | `clear`                                                                                                                                          |
-| **[Exit](#exiting-the-program--exit)**            | `exit`                                                                                                                                           |
+| Action                                            | Format, Examples                                                                                                                                                            |
+|---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help--help)**                   | `help`                                                                                                                                                                      |
+| **[Add](#adding-a-person--add)**                  | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague`                            |
+| **[List](#listing-all-persons--list)**            | `list`                                                                                                                                                                      |
+| **[Edit](#editing-a-person--edit)**               | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                     |
+| **[Mark](#marking-person-as-attended--mark)**     | `mark INDEX tut/TUTORIAL` <br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list (e.g.,`tut/[1,3,7]`) or range (e.g.,`tut/1-12`) <br> e.g., `mark 2 tut/1` |
+| **[Unmark](#marking-person-as-absent--unmark)**   | `unmark INDEX tut/TUTORIAL` <br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list or range<br> e.g., `unmark 2 tut/1`                                     |
+| **[Reset](#resetting-persons-attendance--reset)** | `reset INDEX tut/TUTORIAL`<br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list or range <br> e.g., `reset 2 tut/1`                                       |
+| **[Find](#locating-persons-by-name--find)**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                  |
+| **[Sort](#sorting-persons--sort)**                | `sort ORDER [n/][i/][tut/]`<br> e.g., `sort -1 i/`                                                                                                                          |
+| **[Delete](#deleting-a-person--delete)**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                         |
+| **[Clear](#clearing-all-entries--clear)**         | `clear`                                                                                                                                                                     |
+| **[Exit](#exiting-the-program--exit)**            | `exit`                                                                                                                                                                      |
 
 ---
 
