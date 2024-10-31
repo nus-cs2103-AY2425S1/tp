@@ -58,8 +58,8 @@ public class Person {
     }
 
 
-    public static Person getGuest(Phone p) {
-        return new Customer(new Name("Guest"),
+    public static Person getGuest(Name n, Phone p) {
+        return new Customer(n,
                 p,
                 new Email(),
                 new Address(),
@@ -69,8 +69,8 @@ public class Person {
     }
 
 
-    public static Person getSupplier(Phone p) {
-        return new Supplier(new Name("Guest"),
+    public static Person getSupplier(Name n, Phone p) {
+        return new Supplier(n,
                 p,
                 new Email(),
                 new Address(),
@@ -117,7 +117,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+                && (otherPerson.getPhone().equals(getPhone()));
     }
 
     /**
