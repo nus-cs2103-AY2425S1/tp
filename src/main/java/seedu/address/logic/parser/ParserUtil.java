@@ -24,6 +24,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_ATTENDANCE =
             "Invalid attendance entry. Please enter 1/Y/y for yes and 0/N/n for no.";
+    public static final String MESSAGE_INVALID_POINTS = "Points must be an integer between -2147483548 and 2147483647.";
 
     /**
      * Parses a {@code String date} into a {@code Date}.
@@ -167,5 +168,15 @@ public class ParserUtil {
         default ->
                 throw new ParseException(MESSAGE_INVALID_ATTENDANCE);
         };
+    }
+
+    public static int parsePoints(String points) throws ParseException {
+        requireNonNull(points);
+        String trimmedPoints = points.trim();
+        try {
+            return Integer.parseInt(trimmedPoints);
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_POINTS);
+        }
     }
 }
