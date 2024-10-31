@@ -95,12 +95,12 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
     private static Property getSpecificPropertyObject(HousingType housingType, Price sellingPrice,
                                                       PostalCode postalCode, UnitNumber unitNumber, Set<Tag> tagList) {
         return switch (housingType) {
-            case CONDO -> new Condo(postalCode, unitNumber, sellingPrice, tagList);
-            case HDB -> new Hdb(postalCode, unitNumber, sellingPrice, tagList);
-            case APARTMENT -> new Apartment(postalCode, unitNumber, sellingPrice, tagList);
-            case BTO -> new Bto(postalCode, unitNumber, sellingPrice, tagList);
-            case OTHERS -> new OtherProperty(postalCode, unitNumber, sellingPrice, tagList);
-            default -> null;
+        case CONDO -> new Condo(postalCode, unitNumber, sellingPrice, tagList);
+        case HDB -> new Hdb(postalCode, unitNumber, sellingPrice, tagList);
+        case APARTMENT -> new Apartment(postalCode, unitNumber, sellingPrice, tagList);
+        case BTO -> new Bto(postalCode, unitNumber, sellingPrice, tagList);
+        case OTHERS -> new OtherProperty(postalCode, unitNumber, sellingPrice, tagList);
+        default -> null;
         };
     }
 }
