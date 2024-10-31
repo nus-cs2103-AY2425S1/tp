@@ -153,12 +153,10 @@ public class ImportCommand extends Command {
      */
     private int[] handleAddStudent(Model model, Person person,
             int[] importStudentNumbers, List<String> duplicatePersonsNames) {
-        System.out.println("eee");
         if (model.hasPerson(person)) {
             duplicatePersonsNames.add(person.getName().toString());
             importStudentNumbers[1]++;
         } else {
-            System.out.println("etst");
             model.addPerson(person);
             importStudentNumbers[0]++;
         }

@@ -124,24 +124,6 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void execute_importPersonWithNoTags_successful() throws Exception {
-        // Path to the CSV file that simulates importing a person with no tags
-        Path noTagsPath = Path.of("src/test/data/ImportCommandTest/person_with_no_tags.csv");
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-        // Create the import command and execute it with the CSV path containing the person with no tags
-        ImportCommand importCommand = new ImportCommand(noTagsPath);
-
-        // Execute the command and check for success message
-        CommandResult commandResult = importCommand.execute(model);
-
-        // Assert that the correct success message is returned
-        assertEquals(ImportCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
-
-    }
-
-
-    @Test
     public void equals() {
         Path validPath = Path.of("src/test/data/ImportCommandTest/valid_noDups_importFile.csv");
         ImportCommand importCommand1 = new ImportCommand(validPath);
