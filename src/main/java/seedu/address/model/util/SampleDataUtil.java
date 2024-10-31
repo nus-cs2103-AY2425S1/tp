@@ -50,7 +50,7 @@ public class SampleDataUtil {
                        getAllergiesSet("Peanuts", "Pollen"),
                        new Priority(),
                        getAppointmentSet("Orthopedic:2024-12-01:1200-1300", "Physio:2024-12-01:1500-1600"),
-                    getMedConSet("arthritis", "scoliosis")
+                       getMedConSet("arthritis", "scoliosis")
             ),
             new Person(new Name("Charlotte Oliveiro"),
                        new Phone("93210283"),
@@ -62,7 +62,7 @@ public class SampleDataUtil {
                        getAllergiesSet("Peanuts"),
                        new Priority(),
                        Collections.emptySet(),
-                       getMedConSet("skill issue")
+                       getMedConSet("IBS")
             ),
             new Person(new Name("David Li"),
                        new Phone("91031282"),
@@ -76,7 +76,7 @@ public class SampleDataUtil {
                        getAppointmentSet("OT:2025-01-12:1000-1300",
                                          "PT:2025-02-02:1200-1300",
                                          "Consult:2025-02-20:1400-1430"),
-                       getMedConSet("presley syndrome", "lung cancer", "arthritis")
+                       getMedConSet("Tourette syndrome", "lung cancer", "arthritis")
             ),
             new Person(new Name("Irfan Ibrahim"),
                        new Phone("92492021"),
