@@ -80,6 +80,14 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE…​`
 
+**PHONE NUMBER**
+- Must be exactly 8 digits long and start with 3, 6, 8 or 9.
+- Only numeric characters are allowed
+
+**EMAIL**
+- Must follow a valid email format and include a domain like name@example.com
+- Can contain alphanumeric characters like underscores, period and hyphens before the @ symbol
+
 **ALLERGY** should only include alphanumeric characters, spaces, and commas.
 **ALLERGY** must not be empty or contain special characters other than commas and spaces.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
