@@ -32,7 +32,7 @@ public class SortCommandTest {
     public void execute_sortByNameAscending_success() {
         SortCommand sortCommand = new SortCommand("Name", "L");
         Comparator<Person> comparator = Comparator.comparing((Person person) -> person.getName().getLowerCaseName());
-        expectedModel.sortPersonList(comparator);
+        expectedModel.sortPersonListWithComparator(comparator);
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SORT_SUCCESS, "Name", "L");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
@@ -43,7 +43,7 @@ public class SortCommandTest {
         SortCommand sortCommand = new SortCommand("Name", "H");
         Comparator<Person> comparator = Comparator.comparing((Person person) ->
                 person.getName().getLowerCaseName()).reversed();
-        expectedModel.sortPersonList(comparator);
+        expectedModel.sortPersonListWithComparator(comparator);
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SORT_SUCCESS, "Name", "H");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
@@ -53,7 +53,7 @@ public class SortCommandTest {
     public void execute_sortByNumPropAscending_success() {
         SortCommand sortCommand = new SortCommand("NumProp", "L");
         Comparator<Person> comparator = Comparator.comparingInt(Person::getTotalNumProps);
-        expectedModel.sortPersonList(comparator);
+        expectedModel.sortPersonListWithComparator(comparator);
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SORT_SUCCESS, "NumProp", "L");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
@@ -63,7 +63,7 @@ public class SortCommandTest {
     public void execute_sortByNumPropDescending_success() {
         SortCommand sortCommand = new SortCommand("NumProp", "H");
         Comparator<Person> comparator = Comparator.comparingInt(Person::getTotalNumProps).reversed();
-        expectedModel.sortPersonList(comparator);
+        expectedModel.sortPersonListWithComparator(comparator);
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SORT_SUCCESS, "NumProp", "H");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
