@@ -321,7 +321,12 @@ Format: `delete-wedding w/WEDDINGNAME [f/]`
 
 Creates a `Task` in WedLinker
 
-Format: `create-task tk/TASKTYPE TASKDESCRIPTION [REMARKS]`
+Format: `create-task tk/TASKDESCRIPTION [REMARKS]`
+
+* Tasks may have no dates, a single date indicating a deadline, or two dates to define a start and end period.
+* The dates can be specified under `REMARKS` with the format `d/YYYY-MM-DD`
+* Tasks are unique in WedLinker, there would not be any duplicated tasks.
+* Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task-) command.
 
 ### Delete a Task : `delete-task`
 
@@ -329,9 +334,43 @@ Deletes a `Task` from WedLinker
 
 Format: `delete-task INDEX`
 
-### Assigning a Task to a contact : `assign-task` **(WIP)**
+* Deletes the specific `Task` at the INDEX when in [list-tasks](#listing-all-tasks--list-tasks) view.
+* The index **must be a positive integer** 1, 2, 3, …​.
 
-### Unassigning a Task from a contact : `unassign-task` **(WIP)**
+### Assigning a Task to a contact : `assign-task` 
+
+Format: `assign-task PERSONINDEX TASKINDEX`
+
+* Assigns a `Task` to a contact.
+* The indexes correspond to the indexes when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The `PERSONINDEX` refers to the index of the person shown under the **People** column.
+* The `TASKINDEX` refers to the index of the task shown under the **Tasks** column
+* The indexes **must be positive integers** 1, 2, 3, …​.
+
+### Un-assigning a Task from a contact : `unassign-task` 
+
+Format: `unassign-task PERSONINDEX TASKINDEX_OFPERSON`
+
+* Un-assigns a `Task` from a contact.
+* The `PERSONINDEX` is the index of the person shown in the displayed person list.
+* The `TASKINDEX_OFPERSON` is the index of the task associated with the selected person.
+* The indexes **must be positive integers** 1, 2, 3, …​.
+
+### Mark a task as completed : `mark-task` 
+
+Format: `mark-task TASKINDEX`
+
+* Marks a `Task` as completed.
+* The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The index **must be a positive integers** 1, 2, 3, …​.
+
+### Un-mark a task  : `unmark-task` 
+
+Format: `unmark-task TASKINDEX`
+
+* Marks a `Task` as not completed.
+* The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The index **must be a positive integers** 1, 2, 3, …​.
 
 --------------------------------------------------------------------------------------------------------------------
 
