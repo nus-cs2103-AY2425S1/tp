@@ -23,7 +23,7 @@ public class LogCommand extends Command {
             + "Parameters: INDEX (must be a positive integer), "
             + "TIMESTAMP (in the format DD-MM-YYYY HH:MM),"
             + "INFO (non-empty)\n"
-            + "Example: " + COMMAND_WORD + " 1 25-12-2024 14:30 Attended appointment";
+            + "Example: " + COMMAND_WORD + " S1234567A 25-12-2024 14:30 Attended appointment";
 
     private final Nric nric;
     private final Log log;
