@@ -24,9 +24,11 @@ public class OrderListPanel extends UiPart<Region> {
     private static final String FXML = "OrderListPanel.fxml";
     private static final String DEFAULT_TITLE = "Order";
     private static final String TITLE_WITH_SELECTED_PERSON = "Order (%1$s)";
+    private static final String EMPTY_ORDER_LIST_MESSAGE = "This customer does not have any orders currently.";
 
     private final Logger logger = LogsCenter.getLogger(OrderListPanel.class);
     private final ListChangeListener<Order> orderChangeListener = change -> handleChangeInOrders();
+    private Person selectedPerson;
 
     @FXML
     private ListView<Order> orderListView;
@@ -44,7 +46,7 @@ public class OrderListPanel extends UiPart<Region> {
         super(FXML);
         orderGuide.setText("Use one of the following commands below to view order:\n" + "1. "
                 + ListOrderCommand.MESSAGE_USAGE);
-        orderListEmpty.setText("This customer does not have any orders currently");
+        orderListEmpty.setText(EMPTY_ORDER_LIST_MESSAGE);
         updateOrderList(selectedPerson.get());
 
         selectedPerson.addListener(((observable, oldPerson, newPerson) -> {
@@ -62,23 +64,25 @@ public class OrderListPanel extends UiPart<Region> {
             return;
         }
 
+        this.selectedPerson = person;
         orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON, person.getName().fullName));
         FilteredList<Order> orderList = person.getFilteredOrderList();
-        moveOrderChangeListener(orderList);
+        moveOrderChangeListenerTo(orderList);
+        orderListView.setItems(orderList);
+        orderListView.setCellFactory(listView -> new OrderListViewCell());
+
         if (orderList.isEmpty()) {
             showEmptyOrderLabel();
             return;
         }
 
-        orderListView.setItems(orderList);
-        orderListView.setCellFactory(listView -> new OrderListViewCell());
         showOrderList();
     }
 
     /**
      * Moves the {@code orderChangeListener} to the new {@code orderList}
      */
-    private void moveOrderChangeListener(FilteredList<Order> orderList) {
+    private void moveOrderChangeListenerTo(FilteredList<Order> orderList) {
         orderListView.getItems().removeListener(orderChangeListener);
         orderList.addListener(orderChangeListener);
     }
@@ -99,8 +103,7 @@ public class OrderListPanel extends UiPart<Region> {
      * Handles events whether a customer's orders changes.
      */
     private void handleChangeInOrders() {
-        System.out.println("called");
-        if (orderListView.getItems().isEmpty()) {
+        if (orderListView.getItems().isEmpty() && !selectedPerson.areOrdersFiltered()) {
             showEmptyOrderLabel();
         } else {
             showOrderList();
@@ -120,6 +123,7 @@ public class OrderListPanel extends UiPart<Region> {
      * Displays the label to show that the order list is empty.
      */
     private void showEmptyOrderLabel() {
+
         clearComponentVisibility();
         orderListEmpty.setManaged(true);
         orderListEmpty.setVisible(true);
