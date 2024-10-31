@@ -5,9 +5,8 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvException;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+
+import seedu.address.storage.CsvAdaptedPerson;
 
 import java.io.Writer;
 import java.nio.file.Files;
@@ -16,22 +15,15 @@ import java.util.List;
 
 public class CsvUtil {
 
-    public static void exportCsvFile (ReadOnlyAddressBook addressBook, Path filePath) {
-        ObservableList<Person> personList = addressBook.getPersonList();
-
+    public static void exportCsvFile (List<CsvAdaptedPerson> personsList, Path filePath) {
         try (Writer writer = Files.newBufferedWriter(filePath)) {
 
-            // Create StatefulBeanToCsv object
-            StatefulBeanToCsv<Person> beanToCsv = new StatefulBeanToCsvBuilder<Person>(writer)
+            StatefulBeanToCsv<CsvAdaptedPerson> beanToCsv = new StatefulBeanToCsvBuilder<CsvAdaptedPerson>(writer)
                     .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
                     .withQuotechar(CSVWriter.DEFAULT_QUOTE_CHARACTER)
                     .build();
 
-            // Write the list to CSV
-            beanToCsv.write(personList);
-
-            System.out.println("Data written to CSV file successfully.");
-
+            beanToCsv.write(personsList);
         } catch (CsvException e) {
             System.err.println("Error mapping Bean to CSV");
             e.printStackTrace();

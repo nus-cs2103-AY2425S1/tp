@@ -93,7 +93,7 @@ public class MultiFormatAddressBookStorage implements AddressBookStorage {
     @Override
     public void exportAddressBook(ReadOnlyAddressBook addressBook, Path exportFilePath) throws IOException {
         FileUtil.createExportFileIfMissing(exportFilePath);
-        CsvUtil.exportCsvFile(addressBook, exportFilePath);
+        CsvUtil.exportCsvFile(new CsvSerializableAddressBook(addressBook).getPersons(), exportFilePath);
     }
 
 }
