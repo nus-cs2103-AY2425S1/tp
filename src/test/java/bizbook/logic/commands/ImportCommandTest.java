@@ -21,7 +21,7 @@ import bizbook.testutil.TestUtil;
 
 
 /**
- * Contains integration tests (interaction with the Model) for {@code ExportCommand}.
+ * Contains integration tests (interaction with the Model) for {@code ImportCommand}.
  */
 public class ImportCommandTest {
     private static final String TYPICAL_VCF_FILE_PATH = "ImportCommandTest/typical.vcf";
