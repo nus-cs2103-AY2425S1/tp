@@ -3,11 +3,11 @@ package bizbook.logic.commands.exporter;
 import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_EMPTY_FILE;
 import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_INVALID_FORMAT;
 import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_MISSING_INFORMATION;
+import static bizbook.testutil.Assert.assertThrows;
 import static bizbook.testutil.TypicalPersons.CHARLIE;
 import static bizbook.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -79,21 +79,21 @@ public class VcfImporterTest {
     public void import_empty_throwsEmptyAddressBookException() {
         Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, EMPTY_VCF_FILE_PATH);
 
-        assertThrows(InvalidFileException.class, () -> vcfImporter.importAddressBook(path), MESSAGE_EMPTY_FILE);
+        assertThrows(InvalidFileException.class, MESSAGE_EMPTY_FILE, () -> vcfImporter.importAddressBook(path));
     }
 
     @Test
     public void import_wrongFormat_throwsInvalidFileException() {
         Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, WRONG_FORMAT_FILE_PATH);
 
-        assertThrows(InvalidFileException.class, () -> vcfImporter.importAddressBook(path), MESSAGE_INVALID_FORMAT);
+        assertThrows(InvalidFileException.class, MESSAGE_INVALID_FORMAT, () -> vcfImporter.importAddressBook(path));
     }
 
     @Test
     public void import_missingInformation_throwsInvalidFileException() {
         Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, MISSING_INFO_FILE_PATH);
 
-        assertThrows(InvalidFileException.class, () -> vcfImporter.importAddressBook(path),
-                MESSAGE_MISSING_INFORMATION);
+        assertThrows(InvalidFileException.class, String.format(MESSAGE_MISSING_INFORMATION, "1"), () ->
+                vcfImporter.importAddressBook(path));
     }
 }
