@@ -2,6 +2,11 @@ package seedu.address.storage;
 
 import com.opencsv.bean.CsvBindByName;
 
+import seedu.address.model.person.Person;
+
+/**
+ * Comma-seperated value-friendly version of {@link Person}.
+ */
 public class CsvAdaptedPerson {
 
     @CsvBindByName(column = "Name")
@@ -25,6 +30,9 @@ public class CsvAdaptedPerson {
     @CsvBindByName(column = "Listings")
     private String listings;
 
+    /**
+     * Constructs a {@code CsvAdaptedPerson} with the given person details.
+     */
     public CsvAdaptedPerson(String name, String phoneNumber, String address, String email, String remark, String tags,
                             String listings) {
         this.name = name;

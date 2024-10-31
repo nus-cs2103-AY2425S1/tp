@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
 
+/**
+ * Exports the current address book to a .csv file.
+ */
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";

@@ -32,7 +32,7 @@ public class FileUtil {
     }
 
     /**
-     * Creates a file if it does not exist along with its missing parent directories.
+     * Creates a .json save file if it does not exist along with its missing parent directories.
      * @throws IOException if the file or directory cannot be created.
      */
     public static void createSaveFileIfMissing(Path file) throws IOException {
@@ -41,6 +41,10 @@ public class FileUtil {
         }
     }
 
+    /**
+     * Creates a .csv save file if it does not exist along with its missing parent directories.
+     * @throws IOException if the file or directory cannot be created.
+     */
     public static void createExportFileIfMissing(Path file) throws IOException {
         if (!isFileExists(file)) {
             createExportFile(file);
@@ -48,7 +52,7 @@ public class FileUtil {
     }
 
     /**
-     * Creates a file if it does not exist along with its missing parent directories.
+     * Creates a .json save file if it does not exist along with its missing parent directories.
      */
     public static void createSaveFile(Path file) throws IOException {
         if (Files.exists(file)) {
@@ -60,6 +64,9 @@ public class FileUtil {
         Files.createFile(file);
     }
 
+    /**
+     * Creates a .csv save file if it does not exist along with its missing parent directories.
+     */
     public static void createExportFile(Path file) throws IOException {
         if (Files.exists(file)) {
             return;

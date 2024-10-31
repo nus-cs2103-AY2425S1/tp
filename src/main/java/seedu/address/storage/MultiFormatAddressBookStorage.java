@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -26,6 +25,11 @@ public class MultiFormatAddressBookStorage implements AddressBookStorage {
     private Path saveFilePath;
     private Path exportFilePath;
 
+    /**
+     * Constructs a {@code MultiFormatAddressBookStorage} object.
+     * @param saveFilePath file path for the save file.
+     * @param exportFilePath file path for the export file.
+     */
     public MultiFormatAddressBookStorage(Path saveFilePath, Path exportFilePath) {
         this.saveFilePath = saveFilePath;
         this.exportFilePath = exportFilePath;
