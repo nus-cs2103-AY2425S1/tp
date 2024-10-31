@@ -72,13 +72,7 @@ public class Participation {
                                         && otherParticipation.getStudent().equals(getStudent());
     }
 
-    /**
-     * Adds itself to the student and tutorial participation lists
-     */
-    public void addSelfToStudentTutorial() {
-        student.addParticipation(this);
-        tutorial.addParticipation(this);
-    }
+
 
     @Override
     public String toString() {
