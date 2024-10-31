@@ -167,6 +167,11 @@ public class Person {
         Email email = new Email(getEmail().toString());
         Set<Tag> tags = getTags();
         OrderList orderList = getOrderList().createCopy();
-        return new Person(name, phone, email, address, tags, orderList);
+        Person personCopy = new Person(name, phone, email, address, tags, orderList);
+
+        @SuppressWarnings("unchecked")
+        Predicate<Order> filterPredicate = (Predicate<Order>) filteredOrders.getPredicate();
+        personCopy.updateFilteredOrderList(filterPredicate);
+        return personCopy;
     }
 }
