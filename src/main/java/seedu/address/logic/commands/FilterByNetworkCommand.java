@@ -21,7 +21,8 @@ public class FilterByNetworkCommand extends Command {
             + "NETWORK\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC";
-    public static final String MESSAGE_FILTER_SUCCESS = "There are %1$d people with %2$s public addresses.";
+    public static final String MESSAGE_FILTER_SUCCESS = "There are %1$d people with %2$s public addresses.\n"
+            + "%3$s";
 
     private final Network specifiedNetwork;
 
@@ -44,9 +45,18 @@ public class FilterByNetworkCommand extends Command {
             throw new CommandException("No person with " + this.specifiedNetwork + " public address found.");
         }
 
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < personsWithSpecifiedNetwork.size(); i++) {
+            Person person = personsWithSpecifiedNetwork.get(i);
+            String newPerson = (i + 1) + ". " + person.getName() + "\n";
+            result.append(newPerson);
+        }
+        String personsListString = result.toString().trim();
+
         return new CommandResult(String.format(MESSAGE_FILTER_SUCCESS,
                 personsWithSpecifiedNetwork.size(),
-                this.specifiedNetwork));
+                this.specifiedNetwork,
+                personsListString));
     }
 
     @Override
