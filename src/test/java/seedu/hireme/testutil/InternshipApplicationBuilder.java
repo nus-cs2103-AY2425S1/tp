@@ -22,7 +22,7 @@ public class InternshipApplicationBuilder {
     private Company company;
     private Date date;
     private Role role;
-    private Status status = Status.valueOf(DEFAULT_STATUS);
+    private Status status = Status.createStatus(DEFAULT_STATUS);
 
     /**
      * Creates a {@code InternshipApplicationBuilder} with the default details.

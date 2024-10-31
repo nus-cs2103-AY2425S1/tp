@@ -141,7 +141,7 @@ public class ParserUtil {
         if (!StatusValidator.of().validate(trimmedStatus)) {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
-        return Status.valueOf(trimmedStatus);
+        return Status.createStatus(trimmedStatus);
     }
 
 }

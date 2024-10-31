@@ -191,14 +191,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseStatus_validValueWithoutWhitespace_returnsDate() throws Exception {
-        Status expectedStatus = Status.valueOf(VALID_STATUS);
+        Status expectedStatus = Status.createStatus(VALID_STATUS);
         assertEquals(expectedStatus, ParserUtil.parseStatus(VALID_STATUS));
     }
 
     @Test
     public void parseStatus_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
         String statusWithWhitespace = WHITESPACE + VALID_STATUS + WHITESPACE;
-        Status expectedStatus = Status.valueOf(VALID_STATUS);
+        Status expectedStatus = Status.createStatus(VALID_STATUS);
         assertEquals(expectedStatus, ParserUtil.parseStatus(statusWithWhitespace));
     }
 
