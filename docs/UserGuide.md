@@ -27,7 +27,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `view` : Displays all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -76,8 +76,10 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY …​`
 
+**ALLERGY** should only include alphanumeric characters, spaces, and commas.
+**ALLERGY** must not be empty or contain special characters other than commas and spaces.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A patient must have one tag (no more no less)
 The tag must be one of the following
@@ -87,8 +89,8 @@ The tag must be one of the following
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/ High Risk`
-* `add n/Betsy-Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/Low Risk`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Insulin`
+* `add n/Betsy-Crowe t/friend e/betsycrowe@example.com a/Newgate Estate #14-05 p/1234567 t/Low Risk m/None`
 
 ### Listing all persons : `list`
 
@@ -145,11 +147,45 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding or updating an appointment date and time to a person : `date`
+
+Adds or updates the next appointment date of the specified person in the address book.
+
+Format: `date n/NAME p/PHONE e/EMAIL d/DATE`
+
+* Adds or updates the next appointment date of person that uniquely matches at least one of the following three attributes NAME, PHONE and EMAIL
+* `NAME` should only include alphanumeric characters, spaces, and hyphens
+* `PHONE` must have 8 digits, starting with 3, 6, 8 or 9
+* `EMAIL` must follow the format of [name]@[domain].[TLD]
+* `DATE` must follow the format of dd/MM/YYYY HHmm
+* If the attribute provided matches more than one person, two of the attributes need to be provided to uniquely match to a person
+
+Examples:
+* `date n/Jason Tan p/93823871 e/jasontan@gmail.com d/23/10/2024 1830`
+* `date p/92938132 d/22/10/2024 1920`
+* `date e/johndoe@gmail.com d/10/02/2023 1520`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Locating persons by their features: `filter`
+
+Filters the list to return persons who have the given features.
+
+Format: `find PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
+
+* The search is case-sensitive.
+* The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
+* In this version, you can only filter by tag and phone number
+* Only full words will be matched e.g. `99999999` will not match `999`
+* Persons matching all features listed will be returned (i.e. `AND` search).
+* There can only be one of each feature as a maximum (ie cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not  accepted.
+  *filter requires at least one feature to filter by (eg. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
+  e.g. `t/ High Risk p/99999999` will return all patients with tag High Risk and phone number 99999999
+
 
 ### Exiting the program : `exit`
 
@@ -194,10 +230,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**View** | `view`
 **Help** | `help`
