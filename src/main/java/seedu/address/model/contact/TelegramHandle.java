@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TelegramHandle {
     public static final String MESSAGE_CONSTRAINTS =
             "Telegram handles should not contain @, and it should have a length of 5 to 32 characters "
-                    + "inclusive, containing alphabets, numbers and/or underscores only";
+                    + "inclusive. It must contain alphabets, numbers and/or underscores only";
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9_]{5,32}$";
     public final String value;
 
