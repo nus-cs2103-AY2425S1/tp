@@ -41,9 +41,13 @@ benefits of a Graphical User Interface (GUI).
 
     * `exit` : Exits the app.
 
-    * `backup` : Creates a backup of the current patient records.
-
-    * `restore` : Restores patient records from the most recent backup.
+    * `backup update John's age` : Creates a backup with a specific descriptive naming.
+   
+    * `backup` : Creates a backup by default naming.
+   
+    * `restore 0` : Restores backup file from the /backups/ path with the naming starts with index 0.
+   
+    * `listbackups` : Lists all available backup files in the /backups/ path.
 
     * `find S1234567Z` : Finds the patient that has the NRIC
 
@@ -52,6 +56,8 @@ benefits of a Graphical User Interface (GUI).
     * `update S1234567Z p/91234567 e/johndoe@example.com` : Updates the email address of the patient with provided NRIC.
 
     * `update 1 p/91234567 e/johndoe@example.com` : Updates the email address of the first patient in the list.
+   
+    *  `hours o/08:30 c/18:30` : Updates the Operating Hours to 8:30 to 18:30.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -102,7 +108,7 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [ap
 A person can have any number of tags (including 0)
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-There is a unique tag for Blood Type, Try putting a tag named A+
+There is a unique tag for Blood Type, Try putting a tag named 'A+'
 </div>
 
 Examples:
@@ -111,7 +117,7 @@ Examples:
 * `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BloodDonor`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An appointment can be entered in the following formats : '-' , '02 10 2024 12:30' , '02/10/2024 12:30' , '02-10-2024 12:30'
+An appointment can be entered in the following formats : '-' , '02 10 2024 12:30' , '02/10/2024 12:30' , '02-10-2024 12:30' and timings must fall within the Operating Hours displayed above
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Appointments can only be made between '08:30' to '21:30' and only one appointment can be made per timeslot
@@ -217,6 +223,22 @@ Examples:
 
   ![result for 'bookings 01/02/2024'](./images/bookings01-02-2024.png)
 
+### Updating Operating Hours : `hours`
+
+Updates Operating Hours 
+
+Format: `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]`
+
+* Opening & Closing hours have to be of the format `HH:mm`.
+* Default Opening & Closing hours are 00:00 & 23:59 respectively.
+* If an argument is empty, it will set the hours to default.
+* All current appointments must fall within operating hours for update to take effect.
+
+Examples:
+* `hours`
+* `hours o/09:30 c/18:00`
+* `hours c/18:00`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -246,77 +268,81 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ### Backup the records : `backup`
 
-The `backup` feature ensures your data is safe by **automatically creating backups** whenever patient records are
-modified. Backups are stored in the `backups` folder located in the root directory of the application.
+The `backup` feature allows you to manually create a backup of your current patient records with a specific descriptive naming.
+This is useful if you want to save the state of your current data at a specific point in time.
 
-#### **How Automatic Backups Works:**
+Format: `backup [DESCRIPTION]`
 
-- Each time the patient records are modified (e.g., adding, editing, or deleting a record), the system **automatically** creates a backup.
-- The program retains **only the 10 most recent backups** to manage storage effectively.
-- Older backups are automatically deleted when the limit is exceeded.
+#### **How Manual Backup Works:**
+
+- Creates a manual backup of the current patient records.
+- An optional `DESCRIPTION` can be provided for clarity of the content in the backup file to help user to identify the backup file effectively.
+- Without `DESCRIPTION`, the system will name the backup file using the default name: `manual_backup`.
+- Each backup file is assigned an index number from `0` to `9` and the index cycles back to `0` after reaching `9`.
+- Each backup file is also assigned the timestamp of the creation time.
+- The system retains only the 10 most recent backups, older backups are automatically overwritten.
 - These backups are stored in:
   ```
   [Application Directory]/backups/
   ```
 - Naming Format:
   ```
-  clinicbuddy-backup-[timestamp].json
+  <INDEX>_<DESCRIPTION>_<TIMESTAMP>.json
   ```
 - Example:
   ```
-  clinicbuddy-backup-2024-10-16_00-00-38-083.json
+  3_After updating John's contact info_2024-10-30_15-45-00-000.json
   ```
-
-#### **Accessing Backup Files:**
-
-1. Navigate to the backup directory:
-   ```
-   [Application Directory]/backups/
-   ```
-2. Identify the backup files using their **timestamp-based naming convention**.
-3. **Move or copy** the files if needed for external storage or manual restoration.
+#### **Automated Backup:** 🚨
+- Whenever a patient record is deleted, ClinicBuddy automatically creates a backup of all patient records before the deletion. 
+- This helps to ensure that no data is permanently lost in case of an accidental deletion.
+- Backups are stored in the same location as the manual backup whicch is the /backups/ folder within the application directory.
+  ```
+  0_delete_John Doe_2024-10-30_18-05-29-745.json
+  ```
 
 ### Restoring data from backups : `restore`
 
-The `restore` feature allows you to recover patient records from the most recent backup file or a specific backup file by its name. This is useful in case of unintended data loss or errors.
+The `restore` feature allows you to recover patient records from a specific backup file by the index in its name.
+This is useful in case of unintended data loss or errors.
 
-Format: `restore`
+Format: `restore <INDEX>`
 
 #### **How Restore Works:**
 
-1. **Restore from the Most Recent Backup:**
-- When you execute the `restore` command, ClinicBuddy will restore the patient records from the most recent backup file located in the `/backups/` directory.
-- Command Format:
-  ```
-  restore
-  ```
-2. **Restore from a specific backup file**
-- Command format:
-  ```
-  restore <file_path>
-  ```
+- Restores the patient records from the backup with the specified `INDEX`.
+- The `INDEX` must correspond to a valid backup file in the /backups/ directory.
+- Providing an invalid `INDEX` will result in an error message.
+- Use the `listbackups` command to view available backups and their indices.
 - Example:
   ```
-  restore backups/clinicbuddy-backup-2024-10-21_22-22-52_123.json
+  restore 2
   ```
-- This will restore the application to the state saved in that specific backup file. If no file path is provided, it will restore from the second most recent backup by default.
+- This will restore the patient records from the backup file with index 2.
 
-#### **Important Notes:**
-
+**Important Notes:**
 - Restoring from a backup will **overwrite** the current patient records in ClinicBuddy.
-- Ensure that you want to discard any changes made since the last backup before performing a restore.
+- Ensure that you want to discard any changes made since the backup before performing a restore.
 - The `restore` command will restore the entire set of patient records from the backup.
-- It is not possible to restore individual records.
+- It is safe to create a backup for current data before performing a restore.
 
-#### **After Restoring:**
+### Listing all backups : `listbackups`
+Displays a list of all available backups along with their details.
 
-- After the restore operation, ClinicBuddy will display a message indicating that the data has been successfully restored from the backup.
-- All patient records will reflect the state they were in at the time of the backup.
+Format: `listbackups`
 
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+#### **How ListBackups works:**
+- Shows all backups stored in the /backups/ directory.
+- Each backup is displayed with its index, description, and creation timestamp in a specific format.
+- Example:
+  ```
+  Available backups:
+  0 [delete_John Doe] Created on: 30 Jan 2024 18:05:29
+  1 [manual_backup] Created on: 13 May 2024 09:52:10
+  2 [clinicbuddy] Created on: 21 Jul 2024 13:20:07
+  ```
+- The date format used is dd MMM yyyy HH:mm:ss.
+- Only the 10 most recent backups are available for storage efficiency.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -325,19 +351,6 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AddressBook home folder.
-
-**Q**: Why Use Manual Backups?<br>
-**A**:
-
-- **Extra Control:** Save your data at any moment, even without making changes.
-- **Checkpointing:** Use manual backups before importing new data or making major changes.
-- **Peace of Mind:** Ensure you have a backup exactly when you need it.
-
-**Q**: Can I Save Backups to a Custom Path?<br>
-**A**: Currently, manual backups are saved to the **default path** (`/backups` folder). There is no option to specify a
-**custom path** within the application. However, you can **move the backup files** manually from the `/backups` folder
-to any desired location if needed.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -354,15 +367,17 @@ to any desired location if needed.
 
 ## Command summary
 
- Action     | Format, Examples                                                                                                                                 
-------------|--------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**    | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`                                     
- **Clear**  | `clear`                                                                                                                                          
- **Delete** | `delete NRIC`<br> e.g., `delete S1234567Z`                                                                                                       
- **Update**   | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
- **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       
- **List**   | `list`                                                                                                                                           
- **Help**   | `help`                                                                                                                                           
-| **Backup** | `backup` <br> e.g., `backup` creates a new backup of the patient records.                                                                        |
-**Restore** | `restore`<br> e.g., `restore` restores patient records from the most recent backup file.
+ Action     | Format, Examples                                                                                                                                                                                                                                 
+------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**    | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`   
+ **Clear**  | `clear`                                                                                                                                                                                                                                          
+ **Delete** | `delete NRIC`<br> e.g., `delete S1234567Z`                                                                                                                                                                                                       
+ **Update**   | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                        
+ **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                       
+ **List**   | `list`                                                                                                                                                                                                                                           
+ **Help**   | `help`                                                                                                                                                                                                                                           
+| **Backup** | `backup`  <br/>  `backup <DESCRIPTION>` <br/> e.g., `backup After updating John's contact info`  
+**Restore** | `restore <INDEX>`<br> e.g., `restore 1`       
+**ListBackups** | `listbackups`                                                                                                                                                         
+
 

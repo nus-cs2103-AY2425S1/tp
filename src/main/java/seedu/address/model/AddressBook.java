@@ -16,6 +16,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private OperatingHours operatingHours;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        operatingHours = new OperatingHours();
     }
 
     public AddressBook() {}
@@ -42,10 +44,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * {@code operatingHours} must not contain duplicate persons.
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+    }
+
+    /**
+     * Replaces the contents of the operatingHours list with {@code operatingHours}.
+     */
+    public void setOperatingHours(OperatingHours operatingHours) {
+        this.operatingHours = operatingHours;
     }
 
     /**
@@ -55,6 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setOperatingHours(newData.getOperatingHours());
     }
 
     //// person-level operations
@@ -100,12 +110,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("operatingHours", operatingHours)
                 .toString();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public OperatingHours getOperatingHours() {
+        return operatingHours;
     }
 
     @Override

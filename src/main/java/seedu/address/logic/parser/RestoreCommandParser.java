@@ -4,10 +4,19 @@ import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new RestoreCommand object.
+ * Parses input arguments to create a new RestoreCommand object.
+ * Expects an index argument to identify the specific backup to restore.
  */
 public class RestoreCommandParser implements Parser<RestoreCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments and returns a RestoreCommand object for execution.
+     * Ensures the index argument is a valid integer within the expected range.
+     *
+     * @param args The user input arguments.
+     * @return A RestoreCommand initialized with the parsed index.
+     * @throws ParseException If the index is missing, out of range, or not a valid integer.
+     */
     @Override
     public RestoreCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
