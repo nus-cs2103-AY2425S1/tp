@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.TitledPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -31,16 +32,20 @@
       <GridPane vgap="5" hgap="5">
         <Label text="Phone:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
         <Label fx:id="phone" styleClass="cell_small_label" text="$phone" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-
-        <Label text="Address:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <Label fx:id="address" styleClass="cell_small_label" text="$address" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-        <Label text="Email:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <Label fx:id="email" styleClass="cell_small_label" text="$email" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-
-        <Label text="Remarks:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <Label fx:id="remark" styleClass="cell_small_label" text="$remark" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
       </GridPane>
+      <TitledPane text="Additional Details" expanded="false" id="additionalDetailsPane" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+        <GridPane vgap="5" hgap="5">
+          <Label text="Address:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+          <Label fx:id="address" styleClass="cell_small_label" text="$address" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+          <Label text="Email:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+          <Label fx:id="email" styleClass="cell_small_label" text="$email" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+          <Label text="Remarks:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+          <Label fx:id="remark" styleClass="cell_small_label" text="$remark" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        </GridPane>
+      </TitledPane>
+
     </VBox>
   </GridPane>
 </HBox>
