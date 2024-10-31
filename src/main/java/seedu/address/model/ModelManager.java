@@ -35,7 +35,6 @@ public class ModelManager implements Model {
     private final BackupManager backupManager;
     private final FilteredList<Person> filteredPersons;
     private final Calendar calendar;
-    private OperatingHours operatingHours;
 
     /**
      * Initializes a ModelManager with the given address book, user preferences, and storage.
@@ -64,7 +63,6 @@ public class ModelManager implements Model {
         }
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.calendar = new Calendar(this.addressBook);
-        this.operatingHours = new OperatingHours(); // TBC currently only sets default
     }
 
     public ModelManager() throws IOException {
@@ -170,14 +168,14 @@ public class ModelManager implements Model {
 
     @Override
     public OperatingHours getOperatingHours() {
-        return operatingHours;
+        return addressBook.getOperatingHours();
     }
 
     @Override
     public boolean setOperatingHours(LocalTime openingHour, LocalTime closingHour) {
         OperatingHours newOperatingHours = new OperatingHours(openingHour, closingHour);
         if (newOperatingHours.isCalenderValid(calendar.getAppointments())) {
-            operatingHours = newOperatingHours;
+            addressBook.setOperatingHours(newOperatingHours);
             return true;
         }
         return false;
@@ -186,7 +184,7 @@ public class ModelManager implements Model {
     @Override
     public boolean appointmentWithinOperatingHours(Appointment appointment) {
         requireNonNull(appointment);
-        return operatingHours.isWithinOperatingHours(appointment);
+        return addressBook.getOperatingHours().isWithinOperatingHours(appointment);
     }
 
     // ============ Filtered Person List Accessors =======================================================
