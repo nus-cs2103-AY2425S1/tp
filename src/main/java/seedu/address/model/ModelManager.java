@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -28,6 +29,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> filteredAppointments;
     private final SortedList<Person> sortedAppointments;
+    private final FilteredList<Person> allAppointmentsList;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,7 +44,9 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.addressBook.getPersonList());
+        allAppointmentsList = new FilteredList<>(this.addressBook.getPersonList());
         initializeAppointmentList();
+        initializeAllAppointmentsList();
         sortedAppointments = new SortedList<>(filteredAppointments, Comparator.comparing(Person::getAppointmentStart));
     }
 
@@ -144,6 +149,10 @@ public class ModelManager implements Model {
         updateFilteredAppointmentList(predicate);
     }
 
+    private void initializeAllAppointmentsList() {
+        updateAllAppointmentsList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+    }
+
     /**
      * Returns an unmodifiable view of the list of sorted and filtered appointments backed by the internal list of
      * {@code versionedAddressBook}
@@ -157,6 +166,36 @@ public class ModelManager implements Model {
     public void updateFilteredAppointmentList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredAppointments.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Person> getAllAppointmentsList() {
+        return allAppointmentsList;
+    }
+
+    @Override
+    public void updateAllAppointmentsList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        allAppointmentsList.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean hasOverlappingAppointment(Person newAppointmentPerson) {
+        LocalDateTime newStart = newAppointmentPerson.getAppointmentStart();
+        LocalDateTime newEnd = newAppointmentPerson.getAppointmentEnd(); // Assuming Person has getAppointmentEnd()
+
+        for (Person person : allAppointmentsList) {
+            LocalDateTime existingStart = person.getAppointmentStart();
+            LocalDateTime existingEnd = person.getAppointmentEnd();
+            boolean startsBeforeExistingEnds = newStart.isBefore(existingEnd);
+            boolean endsAfterExistingStarts = newEnd.isAfter(existingStart);
+            boolean startsAtSameTime = newStart.isEqual(existingStart);
+            boolean endsAtSameTime = newEnd.isEqual(existingEnd);
+            if ((startsBeforeExistingEnds && endsAfterExistingStarts) || startsAtSameTime || endsAtSameTime) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

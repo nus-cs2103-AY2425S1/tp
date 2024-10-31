@@ -42,6 +42,8 @@ public class Appointment {
         return this.end;
     }
 
+    //public boolean doesOverlap ()
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
