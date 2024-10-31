@@ -77,7 +77,7 @@ public interface Model {
     /**
      * Get the AddressBook in previous state at specific index for testing purpose.
      */
-    public AddressBook getAddressBook(int index);
+    AddressBook getVersionedAddressBook(int index);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

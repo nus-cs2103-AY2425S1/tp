@@ -99,7 +99,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public AddressBook getAddressBook(int index) {
+        public AddressBook getVersionedAddressBook(int index) {
             throw new AssertionError("This method should not be called.");
         }
 

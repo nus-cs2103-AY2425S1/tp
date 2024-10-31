@@ -192,7 +192,7 @@ public class ModelManager implements Model {
     /**
      * Gets the AddressBook in previous state at specific index for testing purpose.
      */
-    public AddressBook getAddressBook(int index) {
+    public AddressBook getVersionedAddressBook(int index) {
         return versionedAddressBook.getAddressBookStateList().get(index);
     }
 }

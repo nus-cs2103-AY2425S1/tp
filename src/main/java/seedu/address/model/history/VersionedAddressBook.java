@@ -48,8 +48,12 @@ public class VersionedAddressBook {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
         VersionedAddressBook other = (VersionedAddressBook) o;
         return this.addressBookStateList.equals(other.getAddressBookStateList());
     }

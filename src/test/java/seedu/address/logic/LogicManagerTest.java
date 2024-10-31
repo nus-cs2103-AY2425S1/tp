@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -210,8 +208,8 @@ public class LogicManagerTest {
             throw new RuntimeException(e);
         }
         ReadOnlyAddressBook currentStatus = new AddressBook(model.getAddressBook());
-        AddressBook addressBookBeforeCommit = new AddressBook(model.getAddressBook(0));
-        AddressBook addressBookAfterCommit = new AddressBook(model.getAddressBook(1));
+        AddressBook addressBookBeforeCommit = new AddressBook(model.getVersionedAddressBook(0));
+        AddressBook addressBookAfterCommit = new AddressBook(model.getVersionedAddressBook(1));
         assertEquals(previousState, addressBookBeforeCommit);
         assertEquals(currentStatus, addressBookAfterCommit);
     }
