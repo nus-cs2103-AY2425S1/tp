@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.MEETING_BUYER;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_DATE_DESC_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_SELLER;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_TITLE_DESC_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.POSTALCODE;
 import static seedu.address.logic.commands.CommandTestUtil.TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_ADMIRALTY;
@@ -46,6 +47,15 @@ public class AddMeetingCommandParserTest {
         assertParseSuccess(parser, MEETING_TITLE_DESC_ADMIRALTY + MEETING_DATE_DESC_ADMIRALTY + MEETING_BUYER
                 + MEETING_SELLER + TYPE + POSTALCODE,
                 new AddMeetingCommand(expectedMeeting));
+    }
+
+    @Test
+    public void parse_allFieldsPresentWithExtraPrefix_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE);
+        // whitespace only preamble
+        assertParseFailure(parser, MEETING_TITLE_DESC_ADMIRALTY + MEETING_DATE_DESC_ADMIRALTY + MEETING_BUYER
+                        + MEETING_SELLER + TYPE + POSTALCODE + NAME_DESC_AMY,
+                expectedMessage);
     }
 
     @Test

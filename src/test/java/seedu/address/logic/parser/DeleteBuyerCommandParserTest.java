@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -18,6 +19,14 @@ public class DeleteBuyerCommandParserTest {
         // Test for valid phone number
         String userInput = String.format(" %s%s", PREFIX_PHONE, nonEmptyphoneNumber);
         assertParseSuccess(parser, userInput, new DeleteBuyerCommand(new Phone(nonEmptyphoneNumber)));
+    }
+
+    @Test
+    public void parse_phoneNumberSpecifiedWithExtraPrefix_failure() {
+        // Test for valid phone number
+        String userInput = String.format(" %s%s %s%s", PREFIX_PHONE, nonEmptyphoneNumber, PREFIX_NAME, "BOB");
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBuyerCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
