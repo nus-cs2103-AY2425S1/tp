@@ -1,5 +1,14 @@
 package seedu.address.logic.parser.lesson;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.lesson.MarkLessonAttendanceCommand;
@@ -9,15 +18,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
  * Parses input arguments and creates a new MarkLessonAttendanceCommand object.

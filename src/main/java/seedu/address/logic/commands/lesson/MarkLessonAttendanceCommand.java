@@ -1,5 +1,14 @@
 package seedu.address.logic.commands.lesson;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.List;
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -11,15 +20,6 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
-
-import java.util.List;
-import java.util.logging.Logger;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
  * Marks chosen students' attendance for a particular Lesson.
