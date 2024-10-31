@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILEPATH;
 
 import java.nio.file.Path;
 import java.time.format.DateTimeFormatter;
@@ -18,13 +19,13 @@ import seedu.address.storage.Storage;
  */
 public class ImportCommand extends FileAccessCommand {
     public static final String COMMAND_WORD = "import";
-    public static final String MESSAGE_SUCCESS = "Address book has been exported!";
+    public static final String MESSAGE_SUCCESS = "Address book has been imported!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Imports the current contacts to a json file with its "
-            + "name being the current time and date. ";
+            + ": Imports the contacts found in the provided file into the address book. \n"
+            + "Parameters: " + PREFIX_FILEPATH + " FILE_PATH\n"
+            + "Example: import " + PREFIX_FILEPATH + "./data/AY2324S1";
     public static final String FILE_DATA_LOAD_ERROR_FORMAT =
             "Could not read data from file %s due to inability to find or access the file.";
-    private static final DateTimeFormatter EXPORT_FORMATTER = DateTimeFormatter.ofPattern("MM-dd-yyyy-hhmmssa");
 
     private final Path filePath;
 
@@ -38,48 +39,22 @@ public class ImportCommand extends FileAccessCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) {
-        // This version of execute should never be run
-        assert false;
-        requireNotExecuted();
-        requireNonNull(model);
-        isExecuted = true;
-        return new CommandResult(MESSAGE_SUCCESS);
-    }
-
-    @Override
     public CommandResult execute(Model model, Storage storage) throws CommandException {
         requireNotExecuted();
         requireNonNull(model);
         isExecuted = true;
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook importedData;
 
         try {
             addressBookOptional = storage.readAddressBook(filePath);
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            importedData = addressBookOptional.orElseGet(model::getAddressBook);
         } catch (DataLoadingException e) {
             throw new CommandException(String.format(FILE_DATA_LOAD_ERROR_FORMAT, e.getMessage()), e);
         }
 
-        model.setAddressBook(initialData);
+        model.setAddressBook(importedData);
         return new CommandResult(MESSAGE_SUCCESS);
     }
-
-    //WIP
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ExportCommand)) {
-            return false;
-        }
-
-        return false;
-    }
-
 }
