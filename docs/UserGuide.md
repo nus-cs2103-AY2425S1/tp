@@ -74,7 +74,9 @@ Format: `help`
 
 ### Viewing help if user does not have access to internet: `offlinehelp`
 
-Shows you a full list of commands 
+Shows you a full list of commands within the jar file.
+
+![offlinehelp message](images/offlinehelp.png)
 
 Format: `offlinehelp`
 
