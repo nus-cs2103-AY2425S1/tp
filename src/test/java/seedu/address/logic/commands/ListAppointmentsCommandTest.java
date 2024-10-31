@@ -62,8 +62,8 @@ public class ListAppointmentsCommandTest {
         CommandResult result = new ListAppointmentsCommand(Optional.empty(),
                 Optional.empty()).execute(model);
 
-        String expectedMessage = String.format("Listed 3 upcoming appointments\n%s: %s - Appointment 1"
-                        + "\n%s: %s - Bob's appointment\n%s: %s - Appointment 2",
+        String expectedMessage = String.format("Listed 3 upcoming appointments\n%s: %s (Appointment 1)"
+                        + "\n%s: %s (Bob's appointment)\n%s: %s (Appointment 2)",
                 person1.getName(), now.plusDays(1).format(OUTPUT_FORMATTER),
                 person2.getName(), now.plusDays(2).format(OUTPUT_FORMATTER),
                 person1.getName(), now.plusDays(3).format(OUTPUT_FORMATTER));
@@ -88,7 +88,7 @@ public class ListAppointmentsCommandTest {
         CommandResult result = new ListAppointmentsCommand(Optional.of(now.plusDays(1).toLocalDate()),
                 Optional.empty()).execute(model);
 
-        String expectedMessage = String.format("Listed 1 upcoming appointments\n%s: %s - Alice's appointment",
+        String expectedMessage = String.format("Listed 1 upcoming appointments\n%s: %s (Alice's appointment)",
                 person1.getName(), now.plusDays(1).format(OUTPUT_FORMATTER));
         assertEquals(expectedMessage, result.getFeedbackToUser().trim());
         assertEquals(expectedModel, model);
@@ -120,7 +120,7 @@ public class ListAppointmentsCommandTest {
         ListAppointmentsCommand command = new ListAppointmentsCommand(Optional.of(testDate), Optional.of(testTime));
         CommandResult result = command.execute(model);
 
-        String expectedMessage = String.format("Listed 1 upcoming appointments\n%s: %s - Alice's appointment",
+        String expectedMessage = String.format("Listed 1 upcoming appointments\n%s: %s (Alice's appointment)",
                 person1.getName(), testDate.atTime(testTime).format(OUTPUT_FORMATTER));
 
         assertEquals(expectedMessage, result.getFeedbackToUser().trim());
@@ -150,11 +150,11 @@ public class ListAppointmentsCommandTest {
                 Optional.empty()).execute(model);
 
         String expectedMessage = String.format("Listed 5 upcoming appointments\n"
-                        + "%s: %s - App 1\n"
-                        + "%s: %s - Bob 1\n"
-                        + "%s: %s - App 2\n"
-                        + "%s: %s - Bob 2\n"
-                        + "%s: %s - App 3",
+                        + "%s: %s (App 1)\n"
+                        + "%s: %s (Bob 1)\n"
+                        + "%s: %s (App 2)\n"
+                        + "%s: %s (Bob 2)\n"
+                        + "%s: %s (App 3)",
                 person1.getName(), now.plusDays(1).format(OUTPUT_FORMATTER),
                 person2.getName(), now.plusDays(2).format(OUTPUT_FORMATTER),
                 person1.getName(), now.plusDays(3).format(OUTPUT_FORMATTER),

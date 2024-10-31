@@ -26,10 +26,10 @@ public class ListAppointmentsCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all upcoming appointments in the address book.\n"
-            + "Parameters: [" + PREFIX_DATE + "] [TIME]\n"
+            + "Parameters: [" + PREFIX_DATE + "DATE] [TIME]\n"
             + "DATE: Optional date filter in the format YYYY-MM-DD\n"
             + "TIME: Optional time filter in the format HHmm\n"
-            + "Example: " + COMMAND_WORD + PREFIX_DATE + "2024-10-15 1430";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "2024-10-15 1430";
 
     public static final String MESSAGE_SUCCESS = "Listed %d upcoming appointments";
 
@@ -102,7 +102,7 @@ public class ListAppointmentsCommand extends Command {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
 
         return appointments.stream()
-                .map(info -> String.format("%s: %s - %s",
+                .map(info -> String.format("%s: %s (%s)",
                         info.getPerson().getName(),
                         info.getDateTime().format(outputFormatter),
                         info.getSchedule().getNotes()))
