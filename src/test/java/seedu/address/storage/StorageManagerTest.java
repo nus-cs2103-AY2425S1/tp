@@ -24,7 +24,8 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        MultiFormatAddressBookStorage addressBookStorage = new MultiFormatAddressBookStorage(getTempFilePath("ab"));
+        MultiFormatAddressBookStorage addressBookStorage = new MultiFormatAddressBookStorage(getTempFilePath("ab"),
+                getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }

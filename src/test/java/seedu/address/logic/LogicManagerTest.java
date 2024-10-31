@@ -38,7 +38,8 @@ public class LogicManagerTest {
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
 
     @TempDir
-    public Path temporaryFolder;
+    public Path temporarySaveFolder;
+    public Path temporaryExportFolder;
 
     private Model model = new ModelManager();
     private Logic logic;
@@ -46,8 +47,10 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         MultiFormatAddressBookStorage addressBookStorage =
-                new MultiFormatAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+                new MultiFormatAddressBookStorage(temporarySaveFolder.resolve("addressBook.json"),
+                        temporarySaveFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporarySaveFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
@@ -147,10 +150,11 @@ public class LogicManagerTest {
      * @param expectedMessage the message expected inside exception thrown by the Logic component
      */
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
-        Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
+        Path prefSavePath = temporarySaveFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        MultiFormatAddressBookStorage addressBookStorage = new MultiFormatAddressBookStorage(prefPath) {
+        MultiFormatAddressBookStorage addressBookStorage = new MultiFormatAddressBookStorage(prefSavePath,
+                prefSavePath) {
             @Override
             public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
                     throws IOException {
@@ -159,7 +163,7 @@ public class LogicManagerTest {
         };
 
         JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+                new JsonUserPrefsStorage(temporarySaveFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);

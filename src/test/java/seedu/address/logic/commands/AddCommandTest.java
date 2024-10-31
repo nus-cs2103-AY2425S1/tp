@@ -119,6 +119,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getAddressBookExportFilePath()  {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAddressBookExportFilePath(Path addressBookExportFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
