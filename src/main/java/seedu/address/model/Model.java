@@ -60,19 +60,24 @@ public interface Model {
     void addHistoryCommand(Command command, String originalCommandText);
 
     /**
-     * Returns an unmodifiable view of the history command list
+     * Returns an unmodifiable view of the history command list.
      */
     ObservableList<HistoryCommand> getHistoryCommandList();
 
     /**
      * Saves the current AddressBook state in the history.
      */
-    public void commitAddressBook();
+    public void commitAddressBook(ReadOnlyAddressBook previousState);
 
     /**
      * Reverses the AddressBook to the previous state.
      */
     public void undoAddressBook();
+
+    /**
+     * Get the AddressBook in previous state at specific index for testing purpose.
+     */
+    public AddressBook getAddressBook(int index);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -106,4 +111,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
 }

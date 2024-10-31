@@ -17,6 +17,7 @@ import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.history.HistoryCommand;
@@ -53,16 +54,16 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+        ReadOnlyAddressBook previousState = model.getAddressBook();
+        commandResult = command.execute(model);
 
         if (command instanceof AddCommand
                 || command instanceof ClearCommand
                 || command instanceof DeleteCommand
                 || command instanceof EditCommand) {
             model.addHistoryCommand(command, commandText);
-            model.commitAddressBook();
+            model.commitAddressBook(previousState);
         }
-
-        commandResult = command.execute(model);
 
         try {
             storage.saveAddressBook(model.getAddressBook());

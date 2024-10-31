@@ -27,7 +27,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final HistoryCommandList historyCommandList;
-    private final ObservableList<HistoryCommand> historyCommands;
     private final VersionedAddressBook versionedAddressBook;
 
     /**
@@ -42,8 +41,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         historyCommandList = new HistoryCommandList();
-        historyCommands = historyCommandList.getHistoryCommands(); // Initialize with an empty ObservableList
-        versionedAddressBook = new VersionedAddressBook();
+        versionedAddressBook = new VersionedAddressBook(this.addressBook);
     }
 
     public ModelManager() {
@@ -163,7 +161,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<HistoryCommand> getHistoryCommandList() {
-        return historyCommands;
+        return historyCommandList.getHistoryCommands();
     }
 
     /**
@@ -180,7 +178,7 @@ public class ModelManager implements Model {
      * Saves the current AddressBook state in the history.
      */
     @Override
-    public void commitAddressBook() {
+    public void commitAddressBook(ReadOnlyAddressBook previousState) {
         versionedAddressBook.commitAddressBook(addressBook);
     }
 
@@ -189,5 +187,12 @@ public class ModelManager implements Model {
      */
     public void undoAddressBook() {
         versionedAddressBook.undoAddressBook(addressBook);
+    }
+
+    /**
+     * Gets the AddressBook in previous state at specific index for testing purpose.
+     */
+    public AddressBook getAddressBook(int index) {
+        return versionedAddressBook.getAddressBookStateList().get(index);
     }
 }

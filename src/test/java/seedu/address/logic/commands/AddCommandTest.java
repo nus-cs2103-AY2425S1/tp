@@ -89,6 +89,21 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitAddressBook(ReadOnlyAddressBook previousState) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public AddressBook getAddressBook(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<HistoryCommand> getHistoryCommandList() {
             throw new AssertionError("This method should not be called.");
         }
