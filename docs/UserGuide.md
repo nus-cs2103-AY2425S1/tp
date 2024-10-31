@@ -56,6 +56,10 @@ Action | Format, Examples
    
    * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M` : Adds a patient named John Doe to the Address Book.
 
+   * `add-appt pn/John Doe dn/Jane Doe d/23-12-2024 t/1100` : Adds an appointment between a patient named John Doe and a doctor named Jane Doe on 23rd December 2024 (1100hrs).
+
+   * `delete-appt 12345678` : Deletes the appointment with the unique ID `12345678`.  
+
    * `find John` : Finds contacts whose names contain the keyword `John`.
 
    * `find-doctor John` : Finds doctors whose names contain the keyword `John`.
