@@ -38,6 +38,7 @@ public class Person {
     private final Set<Nric> patients = new HashSet<>();
 
     private final Set<Appointment> appointments = new HashSet<>();
+    private final Set<Appointment> filteredAppointments = new HashSet<>();
 
     private final List<Note> notes = new ArrayList<>();
 
@@ -265,6 +266,27 @@ public class Person {
      */
     public Set<Appointment> getAppointments() {
         return Collections.unmodifiableSet(appointments);
+    }
+
+    /**
+     * Returns an immutable set of filtered appointments, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Appointment> getFilteredAppointments() {
+        return Collections.unmodifiableSet(filteredAppointments);
+    }
+    public void setFilteredAppointments(Set<Appointment> filteredAppointments) {
+        this.filteredAppointments.clear();
+        this.filteredAppointments.addAll(filteredAppointments);
+    }
+    /**
+     * Returns true if the person has no appointments.
+     *
+     * @return true if the person has no appointments.
+     */
+    public boolean hasNoAppointments() {
+        return appointments.isEmpty();
     }
 
     /**
