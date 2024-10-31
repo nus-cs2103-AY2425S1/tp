@@ -13,6 +13,12 @@ import seedu.address.commons.util.ToStringBuilder;
 public class BookingIsOnDate implements Predicate<Person> {
 
     private final LocalDate date;
+
+    /**
+     * Creates a BookingIsOnDate object.
+     *
+     * @param date Date to check appointment against.
+     */
     public BookingIsOnDate(LocalDate date) {
         requireNonNull(date);
         this.date = date;
