@@ -105,6 +105,7 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
+        int updatedId = editPersonDescriptor.getId().orElse(personToEdit.getId());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -115,11 +116,11 @@ public class EditCommand extends Command {
 
         // TODO CHANGE
         if (personToEdit instanceof Tutor) {
-            return new Tutor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags,
-                    updatedSubjects);
+            return new Tutor(updatedId, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours,
+                    updatedTags, updatedSubjects);
         } else {
-            return new Tutee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags,
-                    updatedSubjects);
+            return new Tutee(updatedId, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours,
+                    updatedTags, updatedSubjects);
         }
 
     }
@@ -153,6 +154,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+        private Integer id;
         private Name name;
         private Phone phone;
         private Email email;
@@ -168,6 +170,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            setId(toCopy.id);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -183,6 +186,10 @@ public class EditCommand extends Command {
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, hours, tags, subjects);
         }
+
+        public void setId(Integer id) { this.id = id; }
+
+        public Optional<Integer> getId() { return Optional.ofNullable(id); }
 
         public void setName(Name name) {
             this.name = name;
@@ -284,9 +291,5 @@ public class EditCommand extends Command {
                     .add("subjects", subjects)
                     .toString();
         }
-
-
-
-
     }
 }
