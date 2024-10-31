@@ -180,14 +180,14 @@ public class ModelManager implements Model {
      * Saves the current AddressBook state in the history.
      */
     @Override
-    public void commitAddressBook(AddressBook addressBook) {
+    public void commitAddressBook() {
         versionedAddressBook.commitAddressBook(addressBook);
     }
 
     /**
      * Reverses the AddressBook to the previous state.
      */
-    public void undoAddressBook(AddressBook addressBook) {
+    public void undoAddressBook() {
         versionedAddressBook.undoAddressBook(addressBook);
     }
 }

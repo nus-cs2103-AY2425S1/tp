@@ -60,6 +60,7 @@ public class LogicManager implements Logic {
                 || command instanceof DeleteCommand
                 || command instanceof EditCommand) {
             model.addHistoryCommand(command, commandText);
+            model.commitAddressBook();
         }
 
         try {
