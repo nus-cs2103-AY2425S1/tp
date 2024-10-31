@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's Income group in the address book.
@@ -11,6 +10,9 @@ public class Income implements OptionalField {
 
     public static final String MESSAGE_CONSTRAINTS = "Income group should be one of types: <none/low/mid/high>";
 
+    /**
+     * Represents the Income group of a Person, with NONE, LOW, MEDIUM, and HIGH.
+     */
     public enum IncomeGroup {
         NONE, // Represents unemployed, not empty value
         LOW,
@@ -80,9 +82,9 @@ public class Income implements OptionalField {
             return IncomeGroup.MEDIUM;
         case "high":
             return IncomeGroup.HIGH;
+        default:
+            return null;
         }
-
-        return null;
     }
 
     /**
@@ -105,9 +107,9 @@ public class Income implements OptionalField {
             return "mid";
         case HIGH:
             return "high";
+        default:
+            throw new RuntimeException("Invalid IncomeGroup enum type");
         }
-
-        throw new RuntimeException("Invalid IncomeGroup enum type");
     }
 
     /**

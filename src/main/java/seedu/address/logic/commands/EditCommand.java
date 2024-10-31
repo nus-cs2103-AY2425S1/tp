@@ -116,7 +116,8 @@ public class EditCommand extends Command {
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
         Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNotes, updatedTags, updatedIncome, updatedAge);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+            updatedNotes, updatedTags, updatedIncome, updatedAge);
     }
 
     @Override
