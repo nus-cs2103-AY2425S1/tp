@@ -6,14 +6,44 @@
 
 # NUStates User Guide
 
-NUStates is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) for Real Estate Agents to organize and categorize client and seller contacts, manage property listings, and easily search through client information. With NUStates, agents can add and categorize clients, list properties for sale or purchase,and find contacts by name or phone number.
+NUStates is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) for Real Estate Agents to organize and categorize client and seller contacts, manage property listings, and easily search through client information. With NUStates, agents can add and categorize clients, list properties for sale or purchase,and find contacts by name, phone number or tags.
+
+Additionally, NUStates allows agents to **segregate properties by bought or sold status**, and even **sort contacts and properties based on various criteria**. This powerful functionality helps streamline workflow, ensuring that agents have a clear, organized view of their contacts and listings, all within a highly optimized CLI environment.
 
 It has the benefits of a Graphical User Interface (GUI). If you can type fast, NUStates can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 # Table of Contents
 - [Quick Start](#quick-start)
-- [Features](#features)
+- [Features](#features) 
+  - [General Commands](#general-commands)
+    - [Viewing help: `help`](#viewing-help--help)
+    - [Clearing all entries: `clear`](#clearing-all-entries--clear)
+    - [Exiting the program: `exit`](#exiting-the-program--exit)
+  - [Adding Entries Commands](#adding-entries-commands)
+    - [Adding a person: `add`](#adding-a-person-add)
+    - [Adding a property to buy: `addBuy`](#adding-a-property-to-buy-addbuy)
+    - [Adding a property to sell: `addSell`](#adding-a-property-to-sell-addsell)
+  - [Editing Entries Command](#editing-entries-command)
+    - [Editing a person: `edit`](#editing-a-person--edit)
+  - [Deleting Entries Commands](#deleting-entries-commands)
+    - [Deleting a person: `delete`](#deleting-a-person--delete)
+    - [Deleting a property to be sold: `delSell`](#deleting-a-property-to-be-sold--delsell)
+    - [Deleting a property to be bought: `delBuy`](#deleting-a-property-to-be-bought--delbuy)
+  - [Finding Entries Commands](#finding-entries-commands)
+    - [Finding persons by name: `findn`](#finding-persons-by-name-findn)
+    - [Finding persons by phone number: `findp`](#finding-persons-by-phone-number-findp)
+    - [Finding persons by tags assigned to them: `findtc`](#finding-persons-by-tags-assigned-to-them-findtc)
+    - [Finding persons based on properties to buy: `findBuy`](#finding-persons-based-on-properties-to-buy-findbuy)
+    - [Finding properties based on properties to sell: `findSell`](#finding-persons-based-on-properties-to-sell-findsell)
+  - [Listing Entries Commands](#listing-entries-commands)
+    - [Listing all persons: `list`](#listing-all-persons--list)
+    - [Sort all persons: `sort`](#sort-all-persons-sort)
+    - [Sort all properties associated with a person: `sorti`](#sort-all-properties-associated-with-a-person-sorti)
+  - [Status Commands](#status-commands)
+    - [To mark property already bought: `bought`](#to-mark-property-as-bought-bought)
+    - [To mark property already sold: `sold`](#to-mark-property-already-sold-sold)
+    - [Pin Contact: `pin`](#pin-contact-pin)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -77,6 +107,8 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+## General Commands
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -85,10 +117,27 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+![clear message](images/clearMessage.png)
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+## Adding Entries Commands
 
 ### Adding a person: `add`
 
 Adds a person to the address book.
+
+![addName message](images/addName.png)
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -105,6 +154,8 @@ Examples:
 
 Adds a property which has to be bought to the address book. The property is associated to a contact in the Address Book.
 
+![addBuy message](images/addBuy.png)
+
 Format: `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
 
 <box type="tip" seamless>
@@ -120,6 +171,8 @@ Examples:
 
 Adds a property which has to be sold to the address book. The property is associated to a contact in the Address Book.
 
+![addSell message](images/addSell.png)
+
 Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
 
 <box type="tip" seamless>
@@ -129,17 +182,15 @@ Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un
 
 Examples:
 * `addSell 1 ht/c sp/1650000 pc/189651 un/5-10`
-* `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
+* `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Extremely spacious t/Near MRT`
 
-### Listing all persons : `list`
-
-Shows a list of all persons along with the properties associated with them in the address book.
-
-Format: `list`
+## Editing Entries Command
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
+
+![edit message](images/editMessage.png)
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -148,51 +199,19 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `findn`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `findn KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `findn John` returns `john` and `John Doe`
-* `findn alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'findn alex david'](images/findAlexDavidResult.png)
-
-### Locating persons by phone number: `findp`
-
-Finds persons whose phone number contain any of the given keywords.
-
-Format: `findp KEYWORD [MORE_KEYWORDS]`
-
-* The KEYWORD can only be numeric values
-* The order of the keywords does not matter. e.g. `86796692 98765432` will match `98765432 86796692`
-* Only the phone number is searched.
-* Only full phone numbers will be matched e.g. `867966` will not match `86796692`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` 87438807 99272758` will return `Alex Yeah`, `Bernice Yu`
-
-Examples:
-* `findp 87438807` returns `Alex Yeah`
-* `findp 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu`<br>
-  ![result for 'findp 87438807 99272758'](images/find87438807_99272758Result.png)
+## Deleting Entries Commands
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
+
+![delete contact](images/deleteContact.png)
 
 Format: `delete INDEX`
 
@@ -208,6 +227,8 @@ Examples:
 
 Deletes the specified property to be sold under specified person from the address book.
 
+![delete sell](images/delSell.png)
+
 Format: `delSell INDEX_PERSON INDEX_PROPERTY`
 
 * Deletes the property to be sold at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
@@ -217,9 +238,11 @@ Format: `delSell INDEX_PERSON INDEX_PROPERTY`
 Examples:
 * `list` followed by `delSell 2 1` deletes the 1st selling property under 2nd person in the address book.
 
-### Deleting a property to be bought : `delSell`
+### Deleting a property to be bought : `delBuy`
 
 Deletes the specified property to be bought under specified person from the address book.
+
+![delete buy](images/delBuy.png)
 
 Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
 
@@ -230,18 +253,187 @@ Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
 Examples:
 * `list` followed by `delBuy 2 1` deletes the 1st buying property under 2nd person in the address book.
 
+## Finding Entries Command
 
-### Clearing all entries : `clear`
+### Finding persons by name: `findn`
 
-Clears all entries from the address book.
+Finds persons whose names contain any of the given keywords.
 
-Format: `clear`
+![find name](images/findCommand.png)
 
-### Exiting the program : `exit`
+Format: `findn KEYWORD [MORE_KEYWORDS]`
 
-Exits the program.
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* No need for full words to be matched; For example, `Han` will match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Format: `exit`
+Examples:
+* `findn John` returns `john` and `John Doe`
+* `findn alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'findn alex david'](images/findAlexDavidResult.png)
+
+### Finding persons by phone number: `findp`
+
+Finds persons whose phone number contain any of the given keywords.
+
+![find contact](images/findCommand.png)
+
+Format: `findp KEYWORD [MORE_KEYWORDS]`
+
+* The KEYWORD can only be numeric values
+* The order of the keywords does not matter. e.g. `86796692 98765432` will match `98765432 86796692`
+* Only the phone number is searched.
+* No need for full phone numbers to be matched e.g. `867966` will match `86796692`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. ` 87438807 99272758` will return `Alex Yeah`, `Bernice Yu`
+
+Examples:
+* `findp 87438807` returns `Alex Yeah`
+* `findp 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu`<br>
+  ![result for 'findp 87438807 99272758'](images/find87438807_99272758Result.png)
+
+### Finding persons by tags assigned to them: `findtc`
+
+Finds persons whose phone number contain any of the given keywords.
+
+![find tag](images/findCommand.png)
+
+Format: `findtc KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `friend` will match `Friend`
+* The order of the keywords does not matter. e.g. `friend owes` will match `owes Friend`
+* Only the tag is searched.
+* No need for full words to be matched; For example, `friend` will match `friends`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `friends owes` will return `Alex Yeah`, `Bo Yang`
+
+Examples:
+* `findtc friend` returns `Alex Yeah`
+* `findp friend owes` returns `Alex Yeoh`, `Bernice Yu`<br>
+
+## Finding persons based on properties to buy: `findBuy`
+
+Finds properties in the buy list whose housing type, unit number, address, pin code and buying price  contain any of the given keywords.
+
+![find property_to_buy](images/findProperty.png)
+
+Format: `findBuy KEYWORD [MORE_KEYWORDS]`
+
+* The KEYWORD can contain any types of value: Strings, Numbers, Special Characters
+* The search is case-insensitive. e.g `condo` will match `Condo`
+* The order of the keywords does not matter. e.g. `condo #02-205` will match `#02-205 condo`
+* All the criterias for a property are searched.
+* No need for full keywords to be matched e.g. `cond` will match `condo`
+* Person having properties matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. ` condo #02-05` will return `Alex Yeah`, `Bernice Yu`
+
+Examples:
+* `findBuy condo` returns `Alex Yeah`
+* `findp condo #02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
+  
+
+## Finding persons based on properties to sell: `findSell`
+
+Finds properties in the sell list whose housing type, unit number, address, pin code and buying price  contain any of the given keywords.
+
+![find property_to_sell](images/findProperty.png)
+
+Format: `findSell KEYWORD [MORE_KEYWORDS]`
+
+* The KEYWORD can contain any types of value: Strings, Numbers, Special Characters
+* The search is case-insensitive. e.g `condo` will match `Condo`
+* The order of the keywords does not matter. e.g. `condo #02-205` will match `#02-205 condo`
+* All the criterias for a property are searched.
+* No need for full keywords to be matched e.g. `cond` will match `condo`
+* Person having properties matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. ` condo #02-05` will return `Alex Yeah`, `Bernice Yu`
+
+Examples:
+* `findSell condo` returns `Alex Yeah`
+* `findSell condo #02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
+  
+## Listing Entries Commands
+
+### Listing all persons : `list`
+
+Shows a list of all persons along with the properties associated with them in the address book.
+
+Format: `list`
+
+### Sort all persons: `sort`
+
+Sorts the list of contacts by a specified field and order
+
+![sort_command](images/SortCommand.png)
+
+Format: `sort f/FIELD o/ORDER`
+
+* The parameters FIELD and ORDER are case-sensitive.
+* The FIELD parameter can be `Name` or `NumProp`.
+* The ORDER parameter can be `L` for ascending and `H` for descending.
+
+Examples:
+* `sort f/Name o/L` returns the contact list sorted in ascending order with respect to the name associated with a contact.
+* `sort f/NumProp o/H` returns the contact list sorted in descending order with respect to the property list associated with the contact.
+
+### Sort all properties associated with a person: `sorti`
+
+Sorts the list of properties associated to a contact by a specified field and order
+
+![sorti_command](images/sortiCommand.png)
+
+Format: `sorti INDEX f/FIELD o/ORDER`
+
+* The INDEX **must be a positive integer** 1, 2, 3, …​
+* The parameters FIELD and ORDER are case-sensitive.
+* The FIELD parameter can be `Price` 
+* The ORDER parameter can be `L` for ascending and `H` for descending.
+
+Examples:
+* `sorti 1 f/Price o/L` returns the property list for contact at index 1 sorted in ascending order with respect to the price associated to it.
+
+## Status Commands
+
+### To mark property as bought: `bought`
+Records the property that has been purchased using the index number of the person and the index number of the property-to-buy in the displayed persons list. This command also removes the purchased property from the property-to-buy list.
+
+![bought_command](images/boughtCommand.png)
+
+Format `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL_PRICE`
+
+* The parameters PERSON_INDEX and PROPERTY_TO_BUY_INDEX must be positive integers.
+* The ACTUAL_PRICE must be a valid numerical value.
+
+Examples:
+* `bought 1 1 ap/1110000` marks property to buy 1 for contact 1 as bought and removes from list.
+
+### To mark property already sold: `sold`
+Records the property that has been sold using the index number of the person and the index number of the property-to-sell in the displayed persons list. This command also removes the purchased property from the property-to-sell list.
+
+![sold_command](images/soldCommand.png)
+
+Format `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL_PRICE`
+
+* The parameters PERSON_INDEX and PROPERTY_TO_BUY_INDEX must be positive integers.
+* The ACTUAL_PRICE must be a valid numerical value.
+
+Examples:
+* `sold 1 1 ap/1110000` marks property to sell 1 for contact 1 as sold and removes from list.
+
+### Pin Contact `pin`
+Pins a contact at a particular index to the top of the list.
+
+![pin_command](images/pinCommand.png)
+
+Format `pin INDEX`
+
+* The parameter INDEX must be a positive integer.
+
+Examples:
+* `pin 5` moves the contact at index 5 to index 1.
 
 ### Saving the data
 
