@@ -35,7 +35,12 @@ public class NameTest {
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+
+        // test for length of name
+        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // 30 characters
+        assertTrue(Name.isValidName("A".repeat(39))); // exactly 39 characters
+        assertTrue(Name.isValidName("A".repeat(40))); // exactly 40 characters
+        assertFalse(Name.isValidName("A".repeat(41))); // 41 characters
     }
 
     @Test
