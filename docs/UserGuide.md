@@ -18,6 +18,7 @@ Action | Format, Examples
 --------|------------------
 [**Add Doctor**](#adding-a-doctor-add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br> e.g., `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
 [**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br> e.g., `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1987 g/M`
+[**Delete Appointment**](#deleting-an-appointment-delete-appt) | `delete-appt UNIQUE_ID` <br><br> e.g. `delete-appt 1355`
 [**Clear**](#clearing-all-entries--clear) | `clear`
 [**Delete**](#deleting-a-person--delete) | `delete INDEX`<br> e.g., `delete 3`
 [**Exit**](#exiting-the-program--exit) | `exit`
@@ -132,6 +133,16 @@ The parameter `NAME` only accepts alphabets and spaces. The app will reject the 
 * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`
 * `add-patient n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 d/01-05-1990 g/F t/friend`
 
+### Deleting an appointment: `delete-appt`
+
+Deletes the specified appointment from the address book.
+
+Format: `delete-appt UNIQUE_ID`
+
+* Deletes the appointment tagged to the `UNIQUE_ID`.
+
+**Examples:**
+* `delete-appt 1355`
 
 ### Listing all persons : `list`
 
