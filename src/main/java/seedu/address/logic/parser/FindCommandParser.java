@@ -37,19 +37,44 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CLASSID, PREFIX_MONTHPAID, PREFIX_NOT_MONTHPAID);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_CLASSID).isPresent()) {
-            return createNameAndClassIdFindCommand(argMultimap);
-        } else if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_CLASSID).isEmpty()) {
-            return createNameFindCommand(argMultimap);
-        } else if (argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_CLASSID).isPresent()) {
-            return createClassIdFindCommand(argMultimap);
-        } else if (argMultimap.getValue(PREFIX_MONTHPAID).isPresent()) {
-            return createMonthsPaidFindCommand(argMultimap);
-        } else if (argMultimap.getValue(PREFIX_NOT_MONTHPAID).isPresent()) {
-            return createNotMonthsPaidFindCommand(argMultimap);
-        }
+        FindCommandType findCommandType = getFindCommandType(argMultimap);
 
-        throw new ParseException(FindCommand.NO_SEARCH_FIELDS_PROVIDED);
+        switch (findCommandType) {
+        case NAMEANDCLASSID:
+            return createNameAndClassIdFindCommand(argMultimap);
+        case NAME:
+            return createNameFindCommand(argMultimap);
+        case CLASSID:
+            return createClassIdFindCommand(argMultimap);
+        case MONTHPAID:
+            return createMonthsPaidFindCommand(argMultimap);
+        case NOTMONTHPAID:
+            return createNotMonthsPaidFindCommand(argMultimap);
+        case NONE:
+        default:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private FindCommandType getFindCommandType(ArgumentMultimap argMultiMap) {
+        boolean isNamePresent = argMultiMap.getValue(PREFIX_NAME).isPresent();
+        boolean isClassIdPresent = argMultiMap.getValue(PREFIX_CLASSID).isPresent();
+        boolean isMonthPaidPresent = argMultiMap.getValue(PREFIX_MONTHPAID).isPresent();
+        boolean isNotMonthPaidPresent = argMultiMap.getValue(PREFIX_NOT_MONTHPAID).isPresent();
+
+        if (isMonthPaidPresent && !isNamePresent && !isClassIdPresent && !isNotMonthPaidPresent) {
+            return FindCommandType.MONTHPAID;
+        } else if (isNamePresent && isClassIdPresent && !isMonthPaidPresent && !isNotMonthPaidPresent) {
+            return FindCommandType.NAMEANDCLASSID;
+        } else if (isNamePresent && !isClassIdPresent && !isMonthPaidPresent && !isNotMonthPaidPresent) {
+            return FindCommandType.NAME;
+        } else if (!isNamePresent && isClassIdPresent && !isMonthPaidPresent && !isNotMonthPaidPresent) {
+            return FindCommandType.CLASSID;
+        } else if (isNotMonthPaidPresent && !isNamePresent && !isClassIdPresent && !isMonthPaidPresent) {
+            return FindCommandType.NOTMONTHPAID;
+        } else {
+            return FindCommandType.NONE;
+        }
     }
 
     private FindCommand createNameAndClassIdFindCommand(ArgumentMultimap argMultimap) throws ParseException {
