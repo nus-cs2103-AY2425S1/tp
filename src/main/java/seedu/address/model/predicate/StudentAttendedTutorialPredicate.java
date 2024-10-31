@@ -1,5 +1,7 @@
 package seedu.address.model.predicate;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDate;
 import java.util.function.Predicate;
 
@@ -20,8 +22,11 @@ public class StudentAttendedTutorialPredicate implements Predicate<Participation
      *
      * @param startDate The start date for the attendance period.
      * @param endDate The end date for the attendance period.
+     * @throws NullPointerException if any of the provided dates is null.
      */
     public StudentAttendedTutorialPredicate(LocalDate startDate, LocalDate endDate) {
+        requireAllNonNull(startDate, endDate);
+        assert startDate.isBefore(endDate) : "Start date must be before the end date for date range";
         this.startDate = startDate;
         this.endDate = endDate;
     }

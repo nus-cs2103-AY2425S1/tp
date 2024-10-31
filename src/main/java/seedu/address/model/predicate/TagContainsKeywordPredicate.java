@@ -1,5 +1,7 @@
 package seedu.address.model.predicate;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -14,7 +16,14 @@ import seedu.address.model.tag.Tag;
 public class TagContainsKeywordPredicate implements Predicate<Person> {
     private final String keyword;
 
+    /**
+     * Constructs a {@code TagContainsKeywordPredicate} with the specified keyword.
+     *
+     * @param keyword The keyword to check within a person's tags.
+     * @throws NullPointerException if the provided keyword is null.
+     */
     public TagContainsKeywordPredicate(String keyword) {
+        requireNonNull(keyword);
         this.keyword = keyword;
     }
 

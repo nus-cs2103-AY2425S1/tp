@@ -1,5 +1,7 @@
 package seedu.address.model.predicate;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -17,8 +19,10 @@ public class SubjectMatchesKeywordsPredicate implements Predicate<Participation>
      * Constructs a {@code SubjectMatchesKeywordsPredicate} with the given keyword.
      *
      * @param keyword The keyword to match against tutorial subjects.
+     * @throws NullPointerException if the provided keyword is null.
      */
     public SubjectMatchesKeywordsPredicate(String keyword) {
+        requireNonNull(keyword);
         this.keyword = keyword;
     }
 

@@ -1,5 +1,6 @@
 package seedu.address.model.predicate;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_WITH_SPACES;
 
 import java.util.List;
@@ -35,11 +36,13 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<T> {
      *
      * @param keywords the list of keywords to search for
      * @param fieldExtractor a function to extract the field's string representation from the object
+     * @throws NullPointerException if any of the parameters is null.
      */
     public FieldContainsKeywordsPredicate(List<String> keywords,
                                           Function<T, String> fieldExtractor,
                                           boolean isMultipleKeywords,
                                           String fieldIdentifier) throws IllegalArgumentException {
+        requireAllNonNull(keywords, fieldExtractor, isMultipleKeywords, fieldIdentifier);
         if (!isMultipleKeywords && keywords.size() > 1) {
             throw new IllegalArgumentException(
                     String.format(MESSAGE_INVALID_WITH_SPACES, FindCommand.MESSAGE_USAGE));
