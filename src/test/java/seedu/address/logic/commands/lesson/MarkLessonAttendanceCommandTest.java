@@ -81,7 +81,8 @@ public class MarkLessonAttendanceCommandTest {
     public void execute_studentNotInLesson_failure() {
         ModelManager model = new ModelManager();
         // setup
-        model.addLesson(LESSON);
+        model.addStudent(TypicalStudents.BENSON);
+        model.addLesson(LESSON); // does not have BENSON
 
         MarkLessonAttendanceCommand command = new MarkLessonAttendanceCommand(
                 Index.fromOneBased(1), List.of(TypicalStudents.BENSON.getName()), true);
@@ -104,10 +105,12 @@ public class MarkLessonAttendanceCommandTest {
         MarkLessonAttendanceCommand command5 = new MarkLessonAttendanceCommand(
                 Index.fromOneBased(1), List.of(TypicalStudents.ALICE.getName()), false);
 
+        assertTrue(command1.equals(command1));
         assertTrue(command1.equals(command2));
         assertFalse(command1.equals(command3));
         assertFalse(command1.equals(command4));
         assertFalse(command1.equals(command5));
+        assertFalse(command1.equals("hello codecov"));
     }
 
     @Test
