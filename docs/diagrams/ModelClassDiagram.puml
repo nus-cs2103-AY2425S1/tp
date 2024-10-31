@@ -24,6 +24,12 @@ Class UniqueEventList
 Class Event
 Class Date
 
+Class UniqueAssociationList
+Class Association {
+  vendorId : UniqueId
+  eventId : UniqueId
+}
+
 Class I #FFFFFF
 }
 
@@ -39,6 +45,7 @@ ModelManager -left-> "1" EventTory
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+EventTory *--> "1" UniqueAssociationList
 EventTory *--> "1" UniqueVendorList
 EventTory *--> "1" UniqueEventList
 UniqueVendorList --> "~* all" Vendor
@@ -65,4 +72,10 @@ UniqueId -[hidden]right-> Date
 
 ModelManager --> "~* filtered" Vendor
 ModelManager --> "~* filtered" Event
+
+UniqueAssociationList --> "*" Association
+Vendor "1" -- "1" Event
+(Vendor, Event) .. Association
+Association *--> "2" UniqueId
+
 @enduml
