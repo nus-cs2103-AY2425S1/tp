@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FindAppointmentCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.criteria.AppointmentSearchCriteria;
 import seedu.address.logic.parser.criteria.SearchCriteria;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -39,7 +38,7 @@ public class FindAppointmentCommandParser implements Parser<FindAppointmentComma
         // a key-value pair between Prefix("") and the preamble (the values before the first valid prefix)
         if (keywords.getPrefixes().size() < 2) {
             throw new ParseException("Please enter at least one keyword!\n"
-                    + FindCommand.MESSAGE_USAGE);
+                    + FindAppointmentCommand.MESSAGE_USAGE);
         }
 
         if (!keywords.getPreamble().equals("")) {
