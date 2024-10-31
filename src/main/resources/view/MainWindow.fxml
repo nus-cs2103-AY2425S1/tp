@@ -44,36 +44,32 @@
         </VBox>
 
         <HBox VBox.vgrow="ALWAYS">
-          <TabPane fx:id="tabList" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-            <Tab text="Students">
-              <VBox fx:id="studentList" alignment="TOP_CENTER" minWidth="240" prefWidth="240" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-                <padding>
-                  <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-                <StackPane fx:id="studentListPanelPlaceholder" prefHeight="540.0" prefWidth="318.0" VBox.vgrow="ALWAYS" />
-              </VBox>
-            </Tab>
-          </TabPane>
-          <TabPane fx:id="tabList" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-            <Tab text="Consultations">
-              <VBox fx:id="consultationList" minWidth="240" prefWidth="240" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-                <padding>
-                  <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-                <StackPane fx:id="consultationListPanelPlaceholder" prefHeight="550.0" prefWidth="500.0" VBox.vgrow="ALWAYS" />
-              </VBox>
-            </Tab>
-          </TabPane>
-          <TabPane fx:id="tabList" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-            <Tab text="Lessons">
-              <VBox fx:id="lessonList" minWidth="240" prefWidth="240" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-                <padding>
-                  <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-                <StackPane fx:id="lessonListPanelPlaceholder" prefHeight="550.0" prefWidth="500.0" VBox.vgrow="ALWAYS" />
-              </VBox>
-            </Tab>
-          </TabPane>
+          <VBox fx:id="studentList" alignment="TOP_CENTER" minWidth="240" prefWidth="240" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <Label text="Students" styleClass="label-list">
+              <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+              </padding>
+            </Label>
+            <StackPane fx:id="studentListPanelPlaceholder" prefHeight="540.0" prefWidth="318.0" VBox.vgrow="ALWAYS" />
+          </VBox>
+
+          <VBox fx:id="consultationList" alignment="TOP_CENTER" minWidth="240" prefWidth="240" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <Label text="Consultations" styleClass="label-list">
+              <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+              </padding>
+            </Label>
+            <StackPane fx:id="consultationListPanelPlaceholder" prefHeight="550.0" prefWidth="500.0" VBox.vgrow="ALWAYS" />
+          </VBox>
+
+          <VBox fx:id="lessonList" alignment="TOP_CENTER" minWidth="240" prefWidth="240" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <Label text="Lessons" styleClass="label-list">
+              <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+              </padding>
+            </Label>
+            <StackPane fx:id="lessonListPanelPlaceholder" prefHeight="550.0" prefWidth="500.0" VBox.vgrow="ALWAYS" />
+          </VBox>
         </HBox>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
