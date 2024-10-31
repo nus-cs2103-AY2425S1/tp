@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -41,6 +42,10 @@ public class Event {
 
     public Person getCelebrity() {
         return celebrity;
+    }
+
+    public Name getCelebrityName() {
+        return celebrity.getName();
     }
 
     public Set<Person> getContacts() {
