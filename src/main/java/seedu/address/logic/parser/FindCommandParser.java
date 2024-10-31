@@ -46,7 +46,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         } else if (argMultimap.getValue(PREFIX_MONTHPAID).isPresent()) {
             return createMonthsPaidFindCommand(argMultimap);
         } else if (argMultimap.getValue(PREFIX_NOT_MONTHPAID).isPresent()) {
-            createNotMonthsPaidFindCommand(argMultimap);
+            return createNotMonthsPaidFindCommand(argMultimap);
         }
 
         throw new ParseException(FindCommand.NO_SEARCH_FIELDS_PROVIDED);
