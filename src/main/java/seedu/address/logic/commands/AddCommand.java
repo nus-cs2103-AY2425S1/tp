@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE_NUMBER"
+            + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_CALL_FREQUENCY + "CALL_FREQUENCY "

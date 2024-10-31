@@ -32,7 +32,7 @@ public class MarkCommand extends Command {
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_NOTES + "NOTES]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "2021-10-10 "
+            + PREFIX_DATE + "2024-10-31 "
             + PREFIX_NOTES + "Feeling sad "
             + "or " + COMMAND_WORD + " S6253285H "
             + PREFIX_NOTES + "Feeling happy";

@@ -170,10 +170,10 @@ Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 * This command is only allowed in `personList` view. You can first `list` all elderly to use this command.
 
 Examples:
-* `mark 1 d/2021-10-01 o/This person is sad`
-* `mark S6878830G d/2021-10-01`
+* `mark 1 d/2024-10-29 o/This person is sad`
+* `mark S6878830G d/2024-10-31`
 * `list` followed by `mark 2` marks the 2nd elderly in the list with the current date and no notes.
-* `find Betsy` followed by `mark 1 d/2021-10-01 o/Feeling sick` marks the 1st elderly in the results of the `find` command with the specified date and note.
+* `find Betsy` followed by `mark 1 d/2024-11-01 o/Feeling sick` marks the 1st elderly in the results of the `find` command with the specified date and note.
 
 ### Getting call history : `history`
 
