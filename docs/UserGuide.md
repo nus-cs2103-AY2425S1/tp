@@ -13,8 +13,10 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 
 - [Quick Start](#quick-start)
 - [Command Summary](#command-summary)
-- [Features](#features)
+    * [Command Table](#command-table)
+    * [Parameter Table](#parameter-table)
     * [Notes on the Command Format](#notes-on-the-command-format)
+- [Features](#features)
     * [Student Management](#student-management)
         * [Adding a Student](#adding-a-student)
         * [Deleting a Student](#deleting-a-student)
@@ -67,6 +69,8 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+[(Back to Top)](#edumanage-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -132,11 +136,13 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `viewtasks`, `clear`, `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
+
+[(Back to Top)](#edumanage-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -262,6 +268,8 @@ Views a specific student on the right side window.
 
 ![view student](images/view_student.png)
 
+[(Back to Top)](#edumanage-user-guide)
+
 ***
 
 ### Task Management
@@ -313,6 +321,8 @@ Views all tasks, organized by student.
 
 **Format:** `viewtasks`
 
+[(Back to Top)](#edumanage-user-guide)
+
 ***
 
 ### Data Management
@@ -342,6 +352,8 @@ Clears all entries from the address book.
 
 **Format:** `clear`
 
+[(Back to Top)](#edumanage-user-guide)
+
 ***
 
 ### Navigation
@@ -362,12 +374,16 @@ Exits EduManage.
 
 **Format:** `exit`
 
+[(Back to Top)](#edumanage-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduManage home folder.
+
+[(Back to Top)](#edumanage-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -376,5 +392,6 @@ Exits EduManage.
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+[(Back to Top)](#edumanage-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
-[(Back to top)](#edumanage-user-guide)
