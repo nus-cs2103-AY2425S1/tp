@@ -31,6 +31,8 @@ import ezvcard.property.Telephone;
 public class VcfImporter implements Importer {
     public static final String MESSAGE_MISSING_INFORMATION = "A vCard inside the file is missing information needed to "
             + "make a person.";
+    public static final String MESSAGE_INVALID_INFORMATION = "A vCard inside the file contains information that "
+            + "cannot be converted to make a person.";
 
     // ================ Validation methods ==============================
     private void validateNotEmpty(List<VCard> vCards) throws InvalidFileException {
@@ -102,14 +104,18 @@ public class VcfImporter implements Importer {
 
         PersonVCard personVCard = new PersonVCard(vCard);
 
-        return new Person(
-                personVCard.getName(),
-                personVCard.getPhone(),
-                personVCard.getEmail(),
-                personVCard.getAddress(),
-                personVCard.getTags(),
-                personVCard.getNotes()
-        );
+        try {
+            return new Person(
+                    personVCard.getName(),
+                    personVCard.getPhone(),
+                    personVCard.getEmail(),
+                    personVCard.getAddress(),
+                    personVCard.getTags(),
+                    personVCard.getNotes()
+            );
+        } catch (IllegalArgumentException iae) {
+            throw new InvalidFileException(MESSAGE_INVALID_INFORMATION);
+        }
     }
 
     private static class PersonVCard {
