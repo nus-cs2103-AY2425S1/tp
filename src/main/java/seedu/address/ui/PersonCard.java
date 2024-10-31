@@ -96,9 +96,9 @@ public class PersonCard extends UiPart<Region> {
         if (person.getAppointment().isToday()) {
             appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #80ef80;"); // Green
         } else if (person.getAppointment().hasPassed()) {
-            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #ff746c;"); // Red
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #DE1738;"); // Red
         } else if (person.getAppointment().hasNotPassed()) {
-            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #b3ebf2;"); // Blue
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #ffb347;"); // Orange
         } else {
             appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: white;"); // White
         }
