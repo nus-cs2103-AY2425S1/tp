@@ -6,8 +6,10 @@
 
 # LegacyLink User Guide
 
-LegacyLink is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LegacyLink can get your contact management tasks done faster than traditional GUI apps.
 
+LegacyLink is a **desktop app designed to help you manage your family contacts and events effortlessly, especially optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LegacyLink can get your contact and event management tasks done faster than traditional GUI apps.
+
+Whether you have a small, close-knit family or a large extended family, LegacyLink provides the tools you need to stay organized and connected!
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -34,7 +36,7 @@ LegacyLink is a **desktop app for managing contacts, optimized for use via a  Li
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear -e` : Deletes all events.
 
    * `exit` : Exits the app.
 
@@ -135,11 +137,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all persons : `clear`
+### Clearing all persons : `clear -p`
 
-Clears all persons from the address book.
+Clears all persons from the contact book.
 
-Format: `clear`
+Format: `clear -p`
+
+### Clearing all events : `clear -e`
+
+Clears all events from the contact book.
+
+Format: `clear -e`
 
 ### Listing all events : `list -e`
 
@@ -209,8 +217,9 @@ Action     | Format, Examples
 **Delete Person** | `delete INDEX`<br> e.g., `delete 3`
 **Edit Person**   | `edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-rs RELATIONSHIP]`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
 **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Clear Person**  | `clear`
+**Clear Person**  | `clear -p`
 **Add Event**     | `event -n EVENT_NAME -d EVENT_DATE -l LOCATION -a ATTENDEES` <br> e.g., `event -n party -d 2023-12-12 -l my house -a 1 2 3`
 **List Events**   | `list -e`
+**Clear Event**  | `clear -e`
 **Help**   | `help`
 **Exit**   | `exit`
