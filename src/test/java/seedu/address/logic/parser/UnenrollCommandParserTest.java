@@ -32,25 +32,23 @@ public class UnenrollCommandParserTest {
     }
 
     @Test
+    public void parse_validArgsExtraSpace_returnsUnEnrollCommand() throws Exception {
+        String args = " 1  tut/  physics ";
+        UnenrollCommand command = parser.parse(args);
+
+        assertEquals(new UnenrollCommand(Index.fromOneBased(1), "physics"), command);
+    }
+
+    @Test
     public void parse_missingTutorialPrefix_throwsParseException() {
         String args = "1 physics"; // Missing prefix "t/"
         assertThrows(ParseException.class, () -> parser.parse(args), UnenrollCommand.MESSAGE_USAGE);
     }
 
     @Test
-    public void parse_invalidIndex_throwsParseException() {
-        String args = "a t/physics"; // Non-integer index
-        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(args));
-
-        // Check error message format
-        assertTrue(exception.getMessage().contains(UnenrollCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_noArgs_throwsParseException() {
-        String args = ""; // Empty input
-        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(args));
-        assertTrue(exception.getMessage().contains(UnenrollCommand.MESSAGE_USAGE));
+    public void parse_wrongTutorialPrefix_throwsParseException() {
+        String args = String.format("1 %sphysics", "fghudfhbd" + PREFIX_TUTORIAL); // Missing prefix "t/"
+        assertThrows(ParseException.class, () -> parser.parse(args), UnenrollCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -69,6 +67,23 @@ public class UnenrollCommandParserTest {
 
         assertTrue(exception.getMessage().contains(UnenrollCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_invalidIndex_throwsParseException() {
+        String args = "a t/physics"; // Non-integer index
+        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(args));
+
+        // Check error message format
+        assertTrue(exception.getMessage().contains(UnenrollCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_noArgs_throwsParseException() {
+        String args = ""; // Empty input
+        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(args));
+        assertTrue(exception.getMessage().contains(UnenrollCommand.MESSAGE_USAGE));
+    }
+
 
     @Test
     public void parse_emptyTutorialValue_throwsParseException() {

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,13 +58,23 @@ public class EnrollCommandTest {
     }
 
     @Test
+    void execute_studentIndexOutOfBounds_throwsCommandException() {
+        // Only 1 student in list
+        Index invalidIndex = Index.fromOneBased(2);
+        EnrollCommand enrollCommand = new EnrollCommand(invalidIndex, "Physics");
+
+        Exception exception = assertThrows(CommandException.class, () -> enrollCommand.execute(testModel));
+        assertEquals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
+    }
+
+    @Test
     public void execute_invalidIndex_throwsCommandException() {
         // Create an EnrollCommand with an invalid index (out of bounds)
         EnrollCommand command = new EnrollCommand(Index.fromZeroBased(1), "physics");
 
         // Expect a CommandException due to invalid index
         Exception exception = assertThrows(CommandException.class, () -> command.execute(testModel));
-        assertEquals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
+        assertEquals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
     }
 
     @Test

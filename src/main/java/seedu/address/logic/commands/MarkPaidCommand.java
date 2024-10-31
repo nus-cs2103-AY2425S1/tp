@@ -24,7 +24,8 @@ import seedu.address.model.person.Person;
 public class MarkPaidCommand extends Command {
     public static final String COMMAND_WORD = "markpaid";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records amount of feesPaidByStudent the student has paid\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Records amount of feesPaidByStudent the student has paid\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_PAYMENT + "PAYMENT\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PAYMENT + "200";

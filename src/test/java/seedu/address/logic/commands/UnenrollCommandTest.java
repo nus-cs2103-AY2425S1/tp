@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class UnenrollCommandTest {
     }
 
     @Test
-    public void execute_successfulUnenrollment() throws CommandException {
+    public void execute_successfulUnenroll() throws CommandException {
         // First, add participation to the model to simulate an enrolled student
         model.addParticipation(testParticipation);
 
@@ -69,6 +70,16 @@ public class UnenrollCommandTest {
 
         Exception exception = assertThrows(CommandException.class, () -> command.execute(model));
         assertEquals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
+    }
+
+    @Test
+    void execute_studentIndexOutOfBounds_throwsCommandException() {
+        // Only 1 student in list
+        Index invalidIndex = Index.fromOneBased(2);
+        EnrollCommand enrollCommand = new EnrollCommand(invalidIndex, "Physics");
+
+        Exception exception = assertThrows(CommandException.class, () -> enrollCommand.execute(model));
+        assertEquals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
     }
 
     @Test
