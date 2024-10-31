@@ -6,7 +6,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Undoes the latest command. Throws an error if there is no previous command/ if previous command does
+ * not make changes to the Model.
  */
 public class UndoCommand extends Command {
 

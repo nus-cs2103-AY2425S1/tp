@@ -50,7 +50,7 @@ public class ModelManager implements Model {
     /**
      * Save the history of the AgentAssist.
      */
-    private void safeHistory() {
+    private void saveHistory() {
         historyAgentAssist = currentAgentAssist.getCopy();
     }
 
@@ -94,7 +94,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setAgentAssist(ReadOnlyAgentAssist agentAssist) {
-        safeHistory();
+        saveHistory();
         this.currentAgentAssist.resetData(agentAssist);
     }
 
@@ -111,13 +111,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        safeHistory();
+        saveHistory();
         currentAgentAssist.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        safeHistory();
+        saveHistory();
         currentAgentAssist.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -125,7 +125,7 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-        safeHistory();
+        saveHistory();
         currentAgentAssist.setPerson(target, editedPerson);
     }
 
