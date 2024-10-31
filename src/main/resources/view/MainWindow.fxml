@@ -44,17 +44,19 @@
         </VBox>
 
         <HBox VBox.vgrow="ALWAYS">
+          <TabPane fx:id="tabList" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <Tab text="Students">
+              <VBox fx:id="studentList" alignment="TOP_CENTER" minWidth="225" prefWidth="225" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                <padding>
+                  <Insets bottom="10" left="10" right="10" top="10" />
+                </padding>
+                <StackPane fx:id="studentListPanelPlaceholder" prefHeight="540.0" prefWidth="318.0" VBox.vgrow="ALWAYS" />
+              </VBox>
+            </Tab>
+          </TabPane>
             <TabPane fx:id="tabList" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-              <Tab text="Students">
-                  <VBox fx:id="studentList" alignment="TOP_CENTER" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-                    <padding>
-                      <Insets bottom="10" left="10" right="10" top="10" />
-                    </padding>
-                    <StackPane fx:id="studentListPanelPlaceholder" prefHeight="540.0" prefWidth="318.0" VBox.vgrow="ALWAYS" />
-                  </VBox>
-                </Tab>
                 <Tab text="Consultations">
-                  <VBox fx:id="consultationList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                  <VBox fx:id="consultationList" minWidth="225" prefWidth="225" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                     <padding>
                       <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
@@ -62,7 +64,7 @@
                   </VBox>
                 </Tab>
               <Tab text="Lessons">
-                <VBox fx:id="lessonList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                <VBox fx:id="lessonList" minWidth="225" prefWidth="225" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                   <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                   </padding>
