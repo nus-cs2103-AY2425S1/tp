@@ -115,24 +115,25 @@ Format: `list-tasks`
 ### Locating contacts by any field, similar to a search function: `find`
 
 Finds all persons based on the specified keywords (case-insensitive) after the prefix representing the field, and displays them as a list with index numbers.
-Only one field can be searched at a time, but multiple keywords can be searched for the same field. 
 
 Format: `find PREFIX KEYWORD [KEYWORD]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The search will return partial matches and full matches
-* You can search multiple keywords for the same field by using the appropriate prefixes. For example, use find `n/` for names and separate each name with an additional `n/`.
-* Only the first prefix entered will be used for the search. For example, if you enter find n/ a/, the search will only look for matches in the name field and ignore the address field. Make sure to specify the prefix that corresponds to the field you want to search.
-* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will match `n/Bo n/Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
+* The search will return partial matches and full matches.
+* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate prefix. 
+* Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
+* `find p/973` returns all Contacts whose phone number contains 973
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
-![result for 'find n/alex david'](images/findCommandName.png)
-* `find t/friends` returns all Contacts tagged with Friends <br>
-![result for `find t/friends](images/findCommandTag.png)
-* `find w/Amy's Wedding` returns all Contacts involved with Amy's Wedding <br>
-![result for 'find w/Casey'](images/findCommandWedding.png)
+![result for 'find n/alex n/david'](images/findCommandName.png)
+* `find t/friends` returns all Contacts tagged with 'guest' <br>
+![result for `find t/guest](images/findCommandTag.png)
+* `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
+![result for 'find w/Casey's Wedding](images/findCommandWedding.png)
 
 ### Clearing all entries : `clear`
 
