@@ -15,7 +15,6 @@ public enum Day {
     SATURDAY("sat"),
     SUNDAY("sun");
 
-    private final String shortName;
     private static final Map<String, Day> DAY_NAME_MAP = new HashMap<>();
 
     static {
@@ -24,6 +23,7 @@ public enum Day {
             DAY_NAME_MAP.put(day.shortName, day);
         }
     }
+    private final String shortName;
 
     /**
      * Constructs a Day enum value with its corresponding short name.
@@ -45,7 +45,7 @@ public enum Day {
      * @throws IllegalArgumentException If the provided string does not match a valid day.
      */
     public static Day convertDayToEnum(String dayInStr) {
-        assert dayInStr!= null;
+        assert dayInStr != null;
         return DAY_NAME_MAP.get(dayInStr.toLowerCase());
     }
 
