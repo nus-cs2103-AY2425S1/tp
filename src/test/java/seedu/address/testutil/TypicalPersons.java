@@ -20,10 +20,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.participation.Participation;
-<<<<<<< HEAD
-=======
 import seedu.address.model.person.Attendance;
->>>>>>> master
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -103,10 +100,6 @@ public class TypicalPersons {
     }
 
     public static List<Participation> getTypicalParticipations() {
-<<<<<<< HEAD
-        return new ArrayList<>(Arrays.asList(ALICE_MATH, BENSON_MATH));
-=======
         return new ArrayList<>(Arrays.asList(ALICE_MATH_12122024));
->>>>>>> master
     }
 }
