@@ -13,6 +13,9 @@ import seedu.address.model.Model;
 public class ListBackupsCommand extends Command {
 
     public static final String COMMAND_WORD = "listbackups";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all backup files in the /backups/ directory";
+
     public static final String MESSAGE_SUCCESS = "Available backups:\n%s";
     public static final String MESSAGE_NO_BACKUPS = "No backups available.";
     public static final String MESSAGE_FAILURE = "Failed to list backups: %s";

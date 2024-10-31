@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -16,11 +18,20 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@HelpWindow.css" />
+        <URL value="@DarkTheme.css"/>
+        <URL value="@HelpWindow.css"/>
       </stylesheets>
 
-      <HBox alignment="CENTER" fx:id="helpMessageContainer">
+
+      <VBox alignment="CENTER" fx:id="helpMessageContainer">
         <children>
+          <VBox fx:id="helpList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="helpListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+
           <Label fx:id="helpMessage" text="Label">
             <HBox.margin>
               <Insets right="5.0" />
@@ -38,7 +49,7 @@
         <padding>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </padding>
-      </HBox>
+      </VBox>
     </Scene>
   </scene>
 </fx:root>
