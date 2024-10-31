@@ -19,6 +19,7 @@ import seedu.address.logic.commands.AddSubmissionStatusCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteSubmissionCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
@@ -43,7 +44,7 @@ public class AddressBookParser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -96,6 +97,9 @@ public class AddressBookParser {
 
         case AddSubmissionStatusCommand.COMMAND_WORD:
             return new AddSubmissionStatusCommandParser().parse(arguments);
+
+        case DeleteSubmissionCommand.COMMAND_WORD:
+            return new DeleteSubmissionCommandParser().parse(arguments);
 
         case AddAttendanceCommand.COMMAND_WORD:
             return new AddAttendanceCommandParser().parse(arguments);
