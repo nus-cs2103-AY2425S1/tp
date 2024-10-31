@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -39,7 +40,8 @@ public class BarChartCommand extends Command {
             });
         });
         assert distributionOfMonthsPaid != null : "distributionOfMonthsPaid map should not be null";
-        BarChartWindow.setData(distributionOfMonthsPaid);
+        Map<String, Integer> sorted = new TreeMap<>(distributionOfMonthsPaid);
+        BarChartWindow.setData(sorted);
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
     }
 }
