@@ -62,13 +62,13 @@ public class PersonTest {
     public void nextLessonBasedOnCurrentTimeTest() {
         LocalDateTime currentTime = LocalDateTime.now();
 
-        LocalDateTime lesson1DateTime = currentTime.plusDays(2).plusHours(10).plusMinutes(0);
+        LocalDateTime lesson1DateTime = currentTime.plusDays(2).minusHours(1).plusMinutes(0);
         LocalDateTime lesson1EndTime = lesson1DateTime.plusHours(1);
 
-        LocalDateTime lesson2DateTime = currentTime.plusHours(3).plusHours(15).plusMinutes(0);
+        LocalDateTime lesson2DateTime = currentTime.plusDays(3).minusHours(1).plusMinutes(0);
         LocalDateTime lesson2EndTime = lesson2DateTime.plusHours(1);
 
-        LocalDateTime lesson3DateTime = currentTime.plusHours(1).plusHours(3).plusMinutes(0);
+        LocalDateTime lesson3DateTime = currentTime.plusDays(1).minusHours(1).plusMinutes(0);
         LocalDateTime lesson3EndTime = lesson3DateTime.plusHours(1);
 
         DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("EEEE");
