@@ -33,17 +33,17 @@ public class TypicalPersons {
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533").withTags("friends").withModules("CS1101").withGender("male").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withPhone("9482224").withGender("female").withModules("MA1522").build();
+            .withPhone("94820224").withGender("female").withModules("MA1522").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withPhone("9482427").withGender("female").withModules("MA1522").build();
+            .withPhone("94824027").withGender("female").withModules("MA1522").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withPhone("9482442").withModules("EL1101").withGender("male").build();
+            .withPhone("94824042").withModules("EL1101").withGender("male").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
-            .withPhone("8482424").withGender("male").withModules("MA1522").build();
+            .withPhone("84082424").withGender("male").withModules("MA1522").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
-            .withPhone("8482131").withGender("female").withModules("CS2103T").build();
+            .withPhone("84821301").withGender("female").withModules("CS2103T").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

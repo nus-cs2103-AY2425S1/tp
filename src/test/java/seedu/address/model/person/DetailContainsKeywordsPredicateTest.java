@@ -74,7 +74,7 @@ public class DetailContainsKeywordsPredicateTest {
 
         // Keywords match phone and gender, but does not match name
         predicate = new DetailContainsKeywordsPredicate(Arrays.asList("12345", "female"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
                 .withGender("female").build()));
     }
 

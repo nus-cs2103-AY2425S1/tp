@@ -17,7 +17,8 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{L}\\-\\., ]{1,100}$";
+    public static final String VALIDATION_REGEX = "^(?=.*[\\p{L}\\p{N}])[\\p{L}\\-\\., ]{1,100}$";
+    private static final int MIN_LENGTH = 1;
     private static final int MAX_LENGTH = 100;
 
     public final String fullName;
@@ -47,7 +48,11 @@ public class Name {
      * @return the result of the test.
      */
     private boolean isValidLength(String test) {
-        return test.length() <= MAX_LENGTH;
+        if (test.trim().isEmpty()) {
+            return false;
+        } else {
+            return test.length() <= MAX_LENGTH;
+        }
     }
 
     @Override

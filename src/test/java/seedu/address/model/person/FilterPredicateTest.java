@@ -56,9 +56,9 @@ public class FilterPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withGender("male").build()));
 
         descriptor = new FilterPersonDescriptor();
-        descriptor.setPhone(new Phone("1234"));
+        descriptor.setPhone(new Phone("12345678"));
         predicate = preparePredicate(descriptor);
-        assertTrue(predicate.test(new PersonBuilder().withPhone("1234").build()));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("12345678").build()));
 
         descriptor = new FilterPersonDescriptor();
         descriptor.setModules(Set.of(new Module("CS1101S")));
@@ -99,9 +99,9 @@ public class FilterPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withGender("female").build()));
 
         descriptor = new FilterPersonDescriptor();
-        descriptor.setPhone(new Phone("1234"));
+        descriptor.setPhone(new Phone("12345678"));
         predicate = preparePredicate(descriptor);
-        assertFalse(predicate.test(new PersonBuilder().withPhone("3412").build()));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("34125678").build()));
 
         descriptor = new FilterPersonDescriptor();
         descriptor.setModules(Set.of(new Module("CS1101S")));
