@@ -17,3 +17,19 @@
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
+
+#helpMessage {
+    -fx-text-alignment: CENTER;
+    -fx-padding: 10px;
+
+}
+
+#commandUsageLabel {
+    -fx-padding: 10px 0px 10px 0px;
+
+}
+
+.label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 10pt;
+}

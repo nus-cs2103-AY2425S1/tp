@@ -14,7 +14,7 @@ public class UpdateOperatingHoursCommand extends Command {
 
     public static final String COMMAND_WORD = "hours";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Updates operating hours in the address book";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates operating hours in the address book";
 
     public static final String MESSAGE_SUCCESS = "Operating Hours updated: ";
     public static final String MESSAGE_FAILED = "There are some appointments are "
