@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPaths.DUPLICATE_IMPORT_FILE;
 import static seedu.address.testutil.TypicalPaths.EMPTY_IMPORT_FILE;
@@ -120,5 +121,44 @@ public class ImportCommandTest {
         ImportCommand importCommand = new ImportCommand(VALID_NO_DUPS_IMPORT_FILE);
         assertEquals(ImportCommand.class.getCanonicalName() + "{filepath: =" + VALID_NO_DUPS_IMPORT_FILE + "}",
             importCommand.toString());
+    }
+
+    @Test
+    public void execute_importPersonWithNoTags_successful() throws Exception {
+        // Path to the CSV file that simulates importing a person with no tags
+        Path noTagsPath = Path.of("src/test/data/ImportCommandTest/person_with_no_tags.csv");
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        // Create the import command and execute it with the CSV path containing the person with no tags
+        ImportCommand importCommand = new ImportCommand(noTagsPath);
+
+        // Execute the command and check for success message
+        CommandResult commandResult = importCommand.execute(model);
+
+        // Assert that the correct success message is returned
+        assertEquals(ImportCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+
+    }
+
+
+    @Test
+    public void equals() {
+        Path validPath = Path.of("src/test/data/ImportCommandTest/valid_noDups_importFile.csv");
+        ImportCommand importCommand1 = new ImportCommand(validPath);
+        ImportCommand importCommand2 = new ImportCommand(validPath);
+
+        // same object
+        assertEquals(importCommand1, importCommand1);
+
+        // different object, same path
+        assertEquals(importCommand1, importCommand2);
+
+        // null
+        assertNotEquals(importCommand1, null);
+
+        // different object, different path
+        Path differentPath = Path.of("src/test/data/ImportCommandTest/different.csv");
+        ImportCommand importCommand3 = new ImportCommand(differentPath);
+        assertNotEquals(importCommand1, importCommand3);
     }
 }

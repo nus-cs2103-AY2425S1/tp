@@ -86,13 +86,16 @@ public class ImportCommand extends Command {
             reader.readNext(); // skip header
             int[] importStudentNumbers = {0, 0}; // [0] = no. imported, [1] = no. duplicates
             while ((nextLine = reader.readNext()) != null) {
+
                 Name name = ParserUtil.parseName(nextLine[0]);
+
                 StudentClass studentClass = ParserUtil.parseClass(cleanDataString(nextLine[1]));
                 Phone phone = ParserUtil.parsePhone((nextLine[2].trim() == "") ? "00000000" : nextLine[2]);
                 List<String> tagList = Arrays.asList(nextLine[3].split(" "));
 
                 if (!"".equals(tagList.get(0))) {
                     Set<Tag> tags = ParserUtil.parseTags(tagList);
+
                     importStudentNumbers = handleAddStudent(model, new Person(name, studentClass, phone, tags),
                         importStudentNumbers, duplicatePersonsNames);
                 } else {
