@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_NAME_BOB;
@@ -140,6 +143,31 @@ public class ScheduleCommandParserTest {
         expectedCommand = new ScheduleCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidField_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+
+        // invalid schedule name
+        String userInput = targetIndex.getOneBased()
+                + " " + INVALID_SCHEDULE_NAME
+                + " " + PREFIX_SCHEDULE_DATE + VALID_SCHEDULE_DATE_AMY;
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // invalid schedule date
+        userInput = targetIndex.getOneBased()
+                + " " + INVALID_SCHEDULE_DATE;
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // name only
+        userInput = targetIndex.getOneBased()
+                + " " + PREFIX_SCHEDULE_DATE + VALID_SCHEDULE_DATE_AMY
+                + " " + INVALID_SCHEDULE_TIME;
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
