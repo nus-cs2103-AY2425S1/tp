@@ -20,22 +20,73 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Optional<Email> email;
+    private Email email; // Optional, can be unassigned
 
     // Data fields
-    private final Optional<Address> address;
+    private Address address; // Optional, can be unassigned
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * All fields must not be null. Name and Phone must be present.
+     * Constructor for Person with Email and Address
+     * All fields must not be null.
      */
-    public Person(Name name, Phone phone, Optional<Email> email, Optional<Address> address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructor for Person without Address
+     * All fields must not be null.
+     */
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructor for Person without Email
+     * All fields must not be null.
+     */
+    public Person (Name name, Phone phone, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, address);
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructor for Person without Email and Address
+     * All fields must not be null.
+     */
+    public Person (Name name, Phone phone, Set<Tag> tags) {
+        requireAllNonNull(name, phone);
+        this.name = name;
+        this.phone = phone;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Returns a Person object using the different constructors given the respective fields.
+     */
+    public static Person personConstructor(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        if (email == null && address == null) {
+            return new Person(name, phone, tags);
+        } else if (email == null) {
+            return new Person(name, phone, address, tags);
+        } else if (address == null) {
+            return new Person(name, phone, email, tags);
+        } else {
+            return new Person(name, phone, email, address, tags);
+        }
     }
 
     public Name getName() {
@@ -47,11 +98,11 @@ public class Person {
     }
 
     public Optional<Email> getEmail() {
-        return email;
+        return Optional.ofNullable(email);
     }
 
     public Optional<Address> getAddress() {
-        return address;
+        return Optional.ofNullable(address);
     }
 
     /**
@@ -107,21 +158,13 @@ public class Person {
     @Override
     public String toString() {
         ToStringBuilder result = new ToStringBuilder(this)
-                .add("name", name).add("phone", phone);
+                .add("name", name)
+                .add("phone", phone);
 
-        if (!email.isPresent()) {
-            result.add("email", " ");
-        } else {
-            result.add("email", email.get());
-        }
+        getEmail().ifPresent(email -> result.add("email", email));
+        getAddress().ifPresent(address -> result.add("address", address));
+        result.add("tags", tags);
 
-        if (!address.isPresent()) {
-            result.add("address", " ");
-        } else {
-            result.add("address", address.get());
-        }
-
-        return result.add("tags", tags).toString();
+        return result.toString();
     }
-
 }

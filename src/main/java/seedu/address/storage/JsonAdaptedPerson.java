@@ -27,8 +27,8 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
-    private final String email;
-    private final String address;
+    private String email; // Optional, can be unassigned
+    private String address; // Optional, can be unassigned
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -47,14 +47,16 @@ class JsonAdaptedPerson {
         }
     }
 
+    // Need to create constructors for each of the different constructors in Person.java
+
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().isPresent() ? source.getEmail().get().value : "";
-        address = source.getAddress().isPresent() ? source.getAddress().get().value : "";
+        email = source.getEmail().map(Email::toString).orElse(null);
+        address = source.getAddress().map(Address::toString).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -87,34 +89,24 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        final Optional<Email> modelEmail;
-        if (!Email.isValidEmail(email)) {
-            if (email.isEmpty()) {
+        Email modelEmail = null;
+        if (email != null) {
+            if (!Email.isValidEmail(email)) {
                 throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
             }
-            modelEmail = Optional.empty();
-        } else {
-            modelEmail = Optional.of(new Email(email));
+            modelEmail = new Email(email);
         }
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        final Optional<Address> modelAddress;
-        if (!Address.isValidAddress(address)) {
-            if (!address.isEmpty()) {
+        Address modelAddress = null;
+        if (address != null) {
+            if (!Address.isValidAddress(address)) {
                 throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
             }
-            modelAddress = Optional.empty();
-        } else {
-            modelAddress = Optional.of(new Address(address));
+            modelAddress = new Address(address);
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return Person.personConstructor(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }
