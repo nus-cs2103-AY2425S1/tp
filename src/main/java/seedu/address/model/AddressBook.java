@@ -109,7 +109,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// appointment-level operations
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if the appointment already exists in the address book.
      */
     public boolean hasAppointment(Appointment appointment) {
         requireNonNull(appointment);
@@ -117,16 +117,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds an appointment to the address book.
+     * The appointment must not already exist in the address book.
      */
     public void addAppointment(Appointment a) {
         appointments.add(a);
     }
 
     /**
-     * Deletes a person to the address book.
-     * The person must not already exist in the address book.
+     * Deletes an appointment in the address book.
+     * The appointment must exist in the address book.
      */
     public void deleteAppointment(Appointment a) {
         appointments.remove(a);
