@@ -33,7 +33,11 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE = "At least one of the dates is not in the right format."
             + " Please check the correct usage. \n%1$s";
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "No tutorial class with the name %1$s is found.";
+<<<<<<< HEAD
     public static final String MESSAGE_PERSON_NOT_FOUND = "No student with the name %1$s is found.";
+=======
+    public static final String MESSAGE_LOGGER_FOR_EXCEPTION = "An exception is thrown in: %s";
+>>>>>>> 7a9d067d6c0cea589c1fc6395461ab3584c7480b
 
 
     /**
@@ -62,8 +66,6 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Payment: ")
                 .append(person.getPayment())
-                .append("; Attendance: ")
-                .append(person.getParticipation())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
@@ -75,9 +77,7 @@ public class Messages {
     public static String formatTutorial(Tutorial tutorial) {
         final StringBuilder builder = new StringBuilder();
         builder.append("Tutorial Class Name: ")
-                .append(tutorial.getSubject())
-                .append("; Participation: ")
-                .append(tutorial.getParticipationList());
+                .append(tutorial.getSubject());
         return builder.toString();
     }
 

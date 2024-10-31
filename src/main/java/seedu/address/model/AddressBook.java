@@ -55,6 +55,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Person> persons) {
+        requireNonNull(persons);
         this.persons.setPersons(persons);
     }
 
@@ -63,6 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code tutorials} must not contain duplicate tutorials.
      */
     public void setTutorials(List<Tutorial> tutorials) {
+        requireNonNull(tutorials);
         this.tutorials.setTutorials(tutorials);
     }
 
@@ -71,6 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code participations} must not contain duplicate tutorials.
      */
     public void setParticipations(List<Participation> participation) {
+        requireNonNull(participation);
         this.participations.setParticipation(participation);
     }
 
@@ -100,6 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
+        requireNonNull(p);
         persons.add(p);
     }
 
@@ -110,7 +114,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
@@ -119,6 +122,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        requireNonNull(key);
         persons.remove(key);
     }
 
@@ -137,6 +141,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The tutorial must not already exist in the address book.
      */
     public void addTutorial(Tutorial t) {
+        requireNonNull(t);
         tutorials.add(t);
     }
 
@@ -155,6 +160,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The participation must not already exist in the address book.
      */
     public void addParticipation(Participation p) {
+        requireNonNull(p);
         participations.add(p);
     }
 
@@ -166,7 +172,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setParticipation(Participation target, Participation editedParticipation) {
         requireNonNull(editedParticipation);
-
         participations.setParticipation(target, editedParticipation);
     }
 
@@ -175,6 +180,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeParticipation(Participation key) {
+        requireNonNull(key);
         participations.remove(key);
     }
 
