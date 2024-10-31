@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_FIELD_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIELD_NUMPROP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ORDER_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ORDER_LOW;
+import static seedu.address.logic.commands.SortCommand.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -47,13 +48,15 @@ public class SortCommandParserTest {
     @Test
     public void parse_missingField_failure() {
         // missing field
-        assertParseFailure(parser, " " + PREFIX_ORDER + VALID_ORDER_LOW, SortCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, " " + PREFIX_ORDER + VALID_ORDER_LOW,
+                MESSAGE_INVALID_COMMAND_FORMAT + SortCommand.MESSAGE_USAGE);
     }
 
     @Test
     public void parse_missingOrder_failure() {
         // missing order
-        assertParseFailure(parser, " " + PREFIX_FIELD + VALID_FIELD_NAME, SortCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, " " + PREFIX_FIELD + VALID_FIELD_NAME,
+                MESSAGE_INVALID_COMMAND_FORMAT + SortCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -62,6 +65,6 @@ public class SortCommandParserTest {
         assertParseFailure(
                 parser, " " + PREFIX_FIELD + VALID_FIELD_NAME + " "
                         + PREFIX_FIELD + VALID_FIELD_NUMPROP + " " + PREFIX_ORDER + VALID_ORDER_LOW,
-                Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_FIELD);
+                 Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_FIELD);
     }
 }

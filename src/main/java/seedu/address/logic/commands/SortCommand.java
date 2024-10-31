@@ -27,6 +27,8 @@ public class SortCommand extends Command {
             + PREFIX_FIELD + "Name "
             + PREFIX_ORDER + "L";
 
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n";
+
     public static final String MESSAGE_AVAILABLE_FIELDS = "Available fields to sort by: Name, NumProp";
 
     public static final String MESSAGE_INVALID_ORDER =
