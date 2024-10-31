@@ -32,21 +32,20 @@ public class Restaurant {
     /**
      * Every field must be present and not null.
      */
-    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags) {
+    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags,
+                      boolean isFavourite) {
         requireAllNonNull(name, phone, email, address, rating, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.rating = rating;
+        this.isFavourite = isFavourite;
 
         // Extract the price tag and other tags
         Pair<Price, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
         this.price = priceTagAndOtherTags.getFirst();
         this.tags.addAll(priceTagAndOtherTags.getSecond());
-
-        // Default to not favourite
-        this.isFavourite = false;
     }
 
     public Name getName() {
