@@ -101,14 +101,15 @@ public class OweCommand extends Command {
     private static OwedAmount updateOwedAmount(Student student, double hour) throws CommandException {
         assert student != null && hour % 0.5 == 0;
         double updatedOwedAmount = student.getOwedAmount().value + calculateOwed(student, hour);
-        return new OwedAmount(String.format("%.2f", updatedOwedAmount));
+        String updatedOwedAmountString = String.format("%.2f", updatedOwedAmount);
+        if (!OwedAmount.isValidOwedAmount(updatedOwedAmountString)) {
+            throw new CommandException(Messages.MESSAGE_LIMIT);
+        }
+        return new OwedAmount(updatedOwedAmountString);
     }
 
     private static double calculateOwed(Student student, double hour) throws CommandException {
         double owedAmount = student.getRate().value * hour;
-        if (!OwedAmount.isValidOwedAmount(owedAmount)) {
-            throw new CommandException(Messages.MESSAGE_LIMIT);
-        }
         return BigDecimal.valueOf(owedAmount)
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
