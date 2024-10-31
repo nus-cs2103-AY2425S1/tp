@@ -1,33 +1,13 @@
 package seedu.address.logic.commands;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.JsonSerializable;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.note.Note;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Age;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Sex;
-import seedu.address.model.person.StarredStatus;
-import seedu.address.model.tag.Tag;
-import seedu.address.storage.Storage;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Optional;
-
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+
+/**
+ * Imports JSON file as addressbook data.
+ */
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports a json file with patient data if"
@@ -37,8 +17,8 @@ public class ImportCommand extends Command {
             + "Example: " + COMMAND_WORD + " addressbook.json ";
     public static final String MESSAGE_IMPORT_SUCCESS = "Data successfully imported into MediContact";
     public static final String MESSAGE_IMPORT_FAIL = "Error reading or writing '%1$s'";
-    public static final String MESSAGE_FILE_NOT_FOUND = "'%1$s' not found in the same directory as the " +
-            "application JAR file";
+    public static final String MESSAGE_FILE_NOT_FOUND = "'%1$s' not found in the same directory as the "
+            + "application JAR file";
     public static final String MESSAGE_FILE_NOT_JSON = "'%1$s' is not a JSON file";
     public static final String MESSAGE_FILE_FORMAT_FAIL_NO_PERSONS = "Invalid file format: 'persons' array is missing";
     public static final String MESSAGE_FILE_FORMAT_FAIL_INVALID_JSON = "Invalid file format: invalid JSON format";

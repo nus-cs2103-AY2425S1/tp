@@ -2,10 +2,14 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import seedu.address.logic.commands.ImportCommand;
-import seedu.address.logic.commands.UnstarCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
@@ -18,10 +22,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StarredStatus;
 import seedu.address.model.tag.Tag;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * Parses input arguments and creates a new ImportCommand object.
@@ -97,13 +97,13 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      * @throws CommandException If {@code person} is not a valid {@code Person} object.
      */
     private void validatePerson(JsonNode person) throws CommandException {
-        if (!Name.isValidName(person.get("name").asText()) ||
-                !Phone.isValidPhone(person.get("phone").asText()) ||
-                !Email.isValidEmail(person.get("email").asText()) ||
-                !Address.isValidAddress(person.get("address").asText()) ||
-                !Age.isValidAge(person.get("age").asText()) ||
-                !Sex.isValidSex(person.get("sex").asText()) ||
-                !StarredStatus.isValidStarredStatus(person.get("starredStatus").asText())) {
+        if (!Name.isValidName(person.get("name").asText())
+                || !Phone.isValidPhone(person.get("phone").asText())
+                || !Email.isValidEmail(person.get("email").asText())
+                || !Address.isValidAddress(person.get("address").asText())
+                || !Age.isValidAge(person.get("age").asText())
+                || !Sex.isValidSex(person.get("sex").asText())
+                || !StarredStatus.isValidStarredStatus(person.get("starredStatus").asText())) {
             throw new CommandException(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_FORMAT);
         }
 
@@ -120,7 +120,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         JsonNode appointmentsNode = person.get("appointments");
         if (appointmentsNode != null) {
             if (!appointmentsNode.isArray()) {
-                throw new CommandException(String.format(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "appointments"));
+                throw new CommandException(String.format(
+                        ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "appointments"));
             }
 
             for (JsonNode appointment : appointmentsNode) {
@@ -133,7 +134,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         JsonNode tagsNode = person.get("tags");
         if (tagsNode != null) {
             if (!tagsNode.isArray()) {
-                throw new CommandException(String.format(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "tags"));
+                throw new CommandException(String.format(
+                        ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "tags"));
             }
 
             for (JsonNode tag : tagsNode) {
@@ -164,7 +166,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         JsonNode medicationNode = noteNode.get("medication");
         if (medicationNode != null) {
             if (!medicationNode.isArray()) {
-                throw new CommandException(String.format(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "medication"));
+                throw new CommandException(String.format(
+                        ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "medication"));
             }
 
             for (JsonNode medication : medicationNode) {
@@ -178,7 +181,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         JsonNode appointmentsNode = noteNode.get("appointments");
         if (appointmentsNode != null) {
             if (!appointmentsNode.isArray()) {
-                throw new CommandException(String.format(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "appointments"));
+                throw new CommandException(String.format(
+                        ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "appointments"));
             }
 
             for (JsonNode appointment : appointmentsNode) {
@@ -192,7 +196,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         JsonNode remarkNode = noteNode.get("remark");
         if (remarkNode != null) {
             if (!remarkNode.isArray()) {
-                throw new CommandException(String.format(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "remark"));
+                throw new CommandException(String.format(
+                        ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "remark"));
             }
 
             for (JsonNode remark : remarkNode) {
