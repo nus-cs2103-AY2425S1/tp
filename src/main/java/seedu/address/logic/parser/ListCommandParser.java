@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
 import seedu.address.logic.commands.ListContactCommand;
@@ -37,6 +38,8 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListJobCommand();
         case ListCompanyCommand.ENTITY_WORD:
             return new ListCompanyCommand();
+        case ListAllCommand.ENTITY_WORD:
+            return new ListAllCommand();
         default:
             throw new ParseException(ListCommand.MESSAGE_USAGE);
         }
