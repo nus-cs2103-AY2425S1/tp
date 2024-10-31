@@ -215,7 +215,7 @@ Examples:
 
 ### Sorting persons : `sort`
 
-Sorts the displayed list of persons by either name, student id or tutorial attendance.
+Sorts the displayed list of persons by either name, student id or tutorial attendance. The sorting order will be maintained while edits to the list are made.
 
 Format: `sort ORDER [n/][i/][tut/TUTORIAL]`
 
