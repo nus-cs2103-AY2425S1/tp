@@ -50,10 +50,8 @@ public class ParserUtil {
         String trimmedIndex = oneBasedIndex.trim();
         if (trimmedIndex.equals(ParserUtil.WILDCARD)) {
             return Index.getWildcardIndex();
-        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return ParserUtil.parseIndex(trimmedIndex);
     }
 
     /**
