@@ -36,6 +36,8 @@ public class FindCommand extends Command {
 
     public static final String NO_SEARCH_FIELDS_PROVIDED = "At least one field to search by must be provided.";
 
+    public static final String EMPTY_SEARCH_VALUE_PROVIDED = "Search value cannot be empty.";
+
     private final NameContainsKeywordsPredicate predicate;
 
     private final ClassIdContainsKeywordsPredicate predicateClassId;

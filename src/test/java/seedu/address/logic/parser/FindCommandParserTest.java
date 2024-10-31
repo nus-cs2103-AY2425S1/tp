@@ -10,16 +10,18 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
+import seedu.address.model.person.MonthPaidContainsKeywordsPredicate;
 import seedu.address.model.person.NameAndClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-
+import seedu.address.model.person.NotMonthPaidContainsKeywordsPredicate;
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void test_parseWithEmptyArg_failure() {
-        assertParseFailure(parser, "     ", String.format(FindCommand.NO_SEARCH_FIELDS_PROVIDED));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -64,10 +66,43 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void test_parseValidArgsWithMonthPaid_success() {
+
+        FindCommand expectedFindCommand =
+                new FindCommand(new MonthPaidContainsKeywordsPredicate(Arrays.asList("2022-12")));
+        assertParseSuccess(parser, " m/2022-12", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " m/ \n 2022-12  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void test_parseValidArgsWithNotMonthPaid_success() {
+
+        FindCommand expectedFindCommand =
+                new FindCommand(new NotMonthPaidContainsKeywordsPredicate(Arrays.asList("2022-12")));
+        assertParseSuccess(parser, " !m/2022-12", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " !m/ \n 2022-12  \t", expectedFindCommand);
+    }
+
+    @Test
     public void test_nonEmptyPreambleWithValidArgsWithClassId_failure() {
         assertParseFailure(parser, "asdf n/Test",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 
     }
+
+    @Test
+    public void test_parseWithValidPreambleEmptyKeywords_failure() {
+        assertParseFailure(parser, " n/ c/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " n/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " c/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " m/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " !m/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+    }
+
+
 
 }
