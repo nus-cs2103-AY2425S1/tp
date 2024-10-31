@@ -1,17 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILEPATH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_PATH;
 
 import java.nio.file.Path;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
 
 /**
@@ -22,8 +20,8 @@ public class ImportCommand extends FileAccessCommand {
     public static final String MESSAGE_SUCCESS = "Address book has been imported!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Imports the contacts found in the provided file into the address book. \n"
-            + "Parameters: " + PREFIX_FILEPATH + " FILE_PATH\n"
-            + "Example: import " + PREFIX_FILEPATH + "./data/AY2324S1";
+            + "Parameters: " + PREFIX_FILE_PATH + "FILE_PATH\n"
+            + "Example: import " + PREFIX_FILE_PATH + "./data/AY2324S1";
     public static final String FILE_DATA_LOAD_ERROR_FORMAT =
             "Could not read data from file %s due to inability to find or access the file.";
 

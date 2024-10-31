@@ -15,7 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMERGENCY_PHONE = new Prefix("ep/");
     public static final Prefix PREFIX_GRAD_YEAR = new Prefix("g/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_FILEPATH = new Prefix("fp/");
+    public static final Prefix PREFIX_FILE_PATH = new Prefix("fp/");
 
 
 }

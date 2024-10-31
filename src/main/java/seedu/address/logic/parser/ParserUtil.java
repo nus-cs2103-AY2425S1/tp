@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -26,7 +25,6 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_FILE_PATH =
             "File paths must correspond to an existing path on the system";
@@ -175,12 +173,14 @@ public class ParserUtil {
         String trimmedFilePath = filePath.trim();
         Path filePathObject;
 
+        // Get the Path object, if the input is invalid throw an exception
         try {
             filePathObject = Paths.get(trimmedFilePath);
         } catch (InvalidPathException ipe) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
         }
 
+        // Check if the file exists on the system
         if (!Files.exists(filePathObject)) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
         }
