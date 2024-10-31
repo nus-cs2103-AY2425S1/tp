@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddFCommand;
-import seedu.address.logic.commands.ApptCommand;
+import seedu.address.logic.commands.BookApptCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteApptCommand;
@@ -81,8 +81,8 @@ public class ClinicConnectSystemParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommandParser().parse(arguments);
 
-        case ApptCommand.COMMAND_WORD:
-            return new ApptCommandParser().parse(arguments);
+        case BookApptCommand.COMMAND_WORD:
+            return new BookApptCommandParser().parse(arguments);
 
         case AddFCommand.COMMAND_WORD:
             return new AddFCommandParser().parse(arguments);

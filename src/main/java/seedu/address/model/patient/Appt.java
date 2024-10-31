@@ -211,6 +211,6 @@ public class Appt {
      */
     @Override
     public String toString() {
-        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + " " + healthService;
+        return dateTime.format(DateTimeFormatter.ofPattern("d MMM uuuu, h:mma")) + "   " + healthService;
     }
 }
