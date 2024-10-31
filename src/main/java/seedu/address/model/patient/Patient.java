@@ -25,13 +25,13 @@ public class Patient {
 
     // Data fields
     private Address address;
-    private AllergyMap allergies = new AllergyMap();
     private BloodType bloodType;
     private HealthRisk healthRisk;
     private ExistingCondition existingCondition;
     private Note note;
     private Name nokName;
     private Phone nokPhone;
+    private AllergyMap allergies = new AllergyMap();
     private ApptList appts = new ApptList();
 
     /**
@@ -139,13 +139,13 @@ public class Patient {
         return address;
     }
 
-    // ApptList access functions
+    public ApptList getAppointments() {
+        return appts;
+    }
 
     /**
      * Adds an appointment to the patient's list of appointments.
      * The appointments will be sorted by date and time.
-     *
-     * @param appt
      */
     public void addAppt(Appt appt) {
         appts.addAppt(appt);
@@ -173,8 +173,6 @@ public class Patient {
 
     /**
      * Deletes an appointment from the patient's list of appointments.
-     *
-     * @param appt
      */
     public void deleteAppt(Appt appt) {
         appts.deleteAppt(appt);
@@ -183,39 +181,33 @@ public class Patient {
     // AllergyList access functions
 
     /**
-     * Adds an appointment to the patient's list of appointments.
-     * The appointments will be sorted by date and time.
-     *
-     * @param appt
+     * Adds an allergy to the patient's set of allergies.
      */
     public void addAllergy(Allergy allergy) {
         allergies.addAllergy(allergy);
     }
 
     /**
-     * Returns an immutable list of appointments.
-     * This list will not contain any duplicate appointments.
+     * Returns an immutable list of allergies.
+     * This list will not contain any duplicate allergies.
      *
-     * @return List of appointments.
+     * @return List of allergies.
      */
     public List<Allergy> getAllergies() {
         return allergies.getAllergies();
     }
 
     /**
-     * Returns a string representation of the appointments
-     * in the form of a list of strings.
+     * Returns a string representation of all allergies of the patient, sorted in alphabetical order.
      *
-     * @return String representation of the appointments.
+     * @return String representation of the allergies.
      */
     public String getAllergiesString() {
         return allergies.toString();
     }
 
     /**
-     * Deletes an appointment from the patient's list of appointments.
-     *
-     * @param appt
+     * Deletes an allergy from the patient's set of allergies.
      */
     public void deleteAllergy(Allergy allergy) {
         allergies.deleteAllergy(allergy);

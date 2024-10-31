@@ -13,13 +13,28 @@ import java.util.Comparator;
 public class Allergy {
     public static final String MESSAGE_CONSTRAINTS = "Allergy can take any values";
     public static final String VALIDATION_REGEX = "[^\\s].*";
+    /**
+     * Comparator to compare two allergies by their name.
+     * Used for sorting allergies by alphabetical order.
+     *
+     * @param allergy1
+     * @param allergy2
+     * @return int
+     * @see Comparator
+     */
+    public static final Comparator<Allergy> NAME_COMPARATOR = new Comparator<Allergy>() {
+        @Override
+        public int compare(Allergy allergy1, Allergy allergy2) {
+            return allergy1.toString().compareTo(allergy2.toString());
+        }
+    };
 
     public final String value;
 
     /**
      * Constructs an {@code Allergies}.
      *
-     * @param allergy A valid allergies.
+     * @param allergy A valid allergy.
      */
     public Allergy(String allergy) {
         requireNonNull(allergy);
@@ -33,22 +48,6 @@ public class Allergy {
     public static boolean isValidAllergy(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
-    /**
-     * Comparator to compare two allergies by their date and time.
-     * Used for sorting allergies by date and time.
-     *
-     * @param allergy1
-     * @param allergy2
-     * @return int
-     * @see Comparator
-     */
-    public static final Comparator<Allergy> NAME_COMPARATOR = new Comparator<Allergy>() {
-        @Override
-        public int compare(Allergy allergy1, Allergy allergy2) {
-            return allergy1.toString().compareTo(allergy2.toString());
-        }
-    };
 
     @Override
     public String toString() {

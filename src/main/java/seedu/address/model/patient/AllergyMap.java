@@ -9,41 +9,37 @@ import java.util.Set;
 import seedu.address.model.AllergySorter;
 
 /**
- * Represents a list of allergies.
- * Guarantees: immutable; is always valid
+ * Represents a set of allergies.
  * @see Allergy
  * @see AllergySorter
  */
 public class AllergyMap {
-    //List is used because allergies are usually added, not deleted or edited. So adding should be fast.
+    //Set is used because staff searches for allergens that might be used during screenings
     private final Set<Allergy> allergies;
 
     /**
-     * Constructs an empty {@code AllergyList}.
+     * Constructs an empty {@code AllergySet}.
      */
     public AllergyMap() {
         this.allergies = new HashSet<>();
     }
 
     /**
-     * Constructs an {@code AllergyList} with the given allergies.
-     * @param allergies
+     * Constructs an {@code AllergySet} with the given allergies.
      */
     public AllergyMap(Set<Allergy> allergies) {
         this.allergies = allergies;
     }
 
     /**
-     * Adds an allergy to the list.
-     * Sorts the list after adding the allergy.
-     * @param Allergy
+     * Adds an allergy to the allergy set.
      */
     public void addAllergy(Allergy allergy) {
         allergies.add(allergy);
     }
 
     /**
-     * Deletes an allergy from the list.
+     * Deletes an allergy from the set.
      * @param allergy
      */
     public void deleteAllergy(Allergy allergy) {
@@ -51,7 +47,7 @@ public class AllergyMap {
     }
 
     /**
-     * Returns an immutable list of allergies.
+     * Returns an immutable list of allergies sorted by alphabetical order.
      */
     public List<Allergy> getAllergies() {
         List<Allergy> allergiesList = new ArrayList<>(allergies);
@@ -60,9 +56,7 @@ public class AllergyMap {
     }
 
     /**
-     * Returns a string representation of the allergies
-     * in the form of a list of strings.
-     * @return
+     * Returns a string representation of all allergies sorted by alphabetical order
      */
     @Override
     public String toString() {
