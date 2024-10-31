@@ -6,9 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalProducts.getTypicalAddressBook;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -36,10 +39,10 @@ public class SetThresholdCommandTest {
     public void setUp() throws InvalidStockLevelException,
             InvalidMinStockLevelException, InvalidMaxStockLevelException, StockLevelOutOfBoundsException {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        validProductName = new ProductName("TestProduct");
+        validProductName = new ProductName("Sweet buns");
         StockLevel initialStockLevel = new StockLevel(50, 10, 100);
-        validProduct = new Product(validProductName, initialStockLevel);
-        validProduct.setSupplierName(validSupplierName); // Assuming setSupplierName accepts a String
+        validProduct = new Product(validProductName, initialStockLevel, new HashSet<>());
+        validProduct.setSupplierName(validSupplierName);
         model.addProduct(validProduct);
     }
 
@@ -59,10 +62,11 @@ public class SetThresholdCommandTest {
                 .get();
 
         StockLevel expectedStockLevel = new StockLevel(50, 20, 80);
-        Product expectedProduct = new Product(validProductName, expectedStockLevel);
+        Product expectedProduct = new Product(validProductName, expectedStockLevel, new HashSet<>());
         expectedProduct.setSupplierName(validProduct.getSupplierName());
 
-        assertEquals(String.format(SetThresholdCommand.MESSAGE_SET_THRESHOLD_SUCCESS, editedProduct),
+        assertEquals(String.format(SetThresholdCommand.MESSAGE_SET_THRESHOLD_SUCCESS,
+                        Messages.format(editedProduct)) + "\nSuccessfully set the specified stock levels!",
                 result.getFeedbackToUser());
         assertEquals(expectedProduct, editedProduct);
     }
@@ -78,10 +82,11 @@ public class SetThresholdCommandTest {
                 .get();
 
         StockLevel expectedStockLevel = new StockLevel(50, 20, 100);
-        Product expectedProduct = new Product(validProductName, expectedStockLevel);
+        Product expectedProduct = new Product(validProductName, expectedStockLevel, new HashSet<>());
         expectedProduct.setSupplierName(validProduct.getSupplierName());
 
-        assertEquals(String.format(SetThresholdCommand.MESSAGE_SET_THRESHOLD_SUCCESS, editedProduct),
+        assertEquals(String.format(SetThresholdCommand.MESSAGE_SET_THRESHOLD_SUCCESS,
+                        Messages.format(editedProduct)) + "\nSuccessfully set the specified stock levels!",
                 result.getFeedbackToUser());
         assertEquals(expectedProduct, editedProduct);
     }
@@ -97,21 +102,28 @@ public class SetThresholdCommandTest {
                 .get();
 
         StockLevel expectedStockLevel = new StockLevel(50, 10, 80);
-        Product expectedProduct = new Product(validProductName, expectedStockLevel);
+        Product expectedProduct = new Product(validProductName, expectedStockLevel, new HashSet<>());
         expectedProduct.setSupplierName(validProduct.getSupplierName());
 
-        assertEquals(String.format(SetThresholdCommand.MESSAGE_SET_THRESHOLD_SUCCESS, editedProduct),
+        assertEquals(String.format(SetThresholdCommand.MESSAGE_SET_THRESHOLD_SUCCESS,
+                        Messages.format(editedProduct)) + "\nSuccessfully set the specified stock levels!",
                 result.getFeedbackToUser());
         assertEquals(expectedProduct, editedProduct);
     }
 
     @Test
     public void execute_invalidThresholds_throwsCommandException() {
-        // minStockLevel greater than maxStockLevel
-        SetThresholdCommand command = new SetThresholdCommand(validProductName, 100, 50);
 
+        //minStockLevel is negative integer
+        SetThresholdCommand command1 = new SetThresholdCommand(validProductName, -100, 450);
+        assertThrows(CommandException.class, "Minimum and Maximum stock levels cannot be negative.", (
+        ) -> command1.execute(model));
+
+        // minStockLevel greater than maxStockLevel
+        SetThresholdCommand command2 = new SetThresholdCommand(validProductName, 100, 50);
         assertThrows(CommandException.class, "Maximum stock level cannot be less than minimum stock level.", (
-            ) -> command.execute(model));
+            ) -> command2.execute(model));
+
     }
 
     @Test

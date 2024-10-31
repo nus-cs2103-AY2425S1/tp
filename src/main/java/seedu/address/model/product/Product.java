@@ -31,15 +31,6 @@ public class Product {
     }
 
     /**
-     * Constructs a {@code Product} with the specified name and stock levels.
-     */
-    public Product(ProductName name, StockLevel stockLevel) {
-        requireAllNonNull(name, stockLevel);
-        this.name = name;
-        this.stockLevel = stockLevel;
-    }
-
-    /**
      * Constructs a {@code Product} with the specified name, stock levels, and tags.
      */
     public Product(ProductName name, StockLevel stockLevel, Set<Tag> tags) {
@@ -68,7 +59,7 @@ public class Product {
      * Removes assigned supplier if is supplied by the specified supplier.
      */
     public void removeSupplier(Name supplierName) {
-        if (this.supplierName.equals(supplierName)) {
+        if (supplierName != null && this.supplierName.equals(supplierName)) {
             this.supplierName = null;
         }
     }
@@ -99,21 +90,28 @@ public class Product {
     }
 
     /**
-     * Returns the current stock level of the product.
+     * Sets the maximum stock level of the product.
      */
     public void setMaxStockLevel(int maxStockLevel) {
         stockLevel.setMaxStockLevel(maxStockLevel);
     }
 
+    /**
+     * Returns the maximum stock level object of the product.
+     */
     public int getMaxStockLevel() {
         return stockLevel.getMaxStockLevel();
     }
 
+    /**
+     * Sets the current stock level of the product.
+     */
     public void setStockLevel(int currentStockLevel) {
         stockLevel.setStockLevel(currentStockLevel);
     }
+
     /**
-     * Returns the stock level object of the product.
+     * Returns the current stock level object of the product.
      */
     public StockLevel getStockLevel() {
         return stockLevel;

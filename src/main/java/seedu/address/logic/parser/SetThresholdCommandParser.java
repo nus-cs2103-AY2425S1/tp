@@ -19,6 +19,7 @@ public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
 
     public static final String MESSAGE_INVALID_THRESHOLD = "Threshold levels should be positive integers.";
     public static final String MESSAGE_MISSING_THRESHOLD = "Either minimum or maximum stock levels must be provided.";
+    public static final String MESSAGE_INVALID_STOCK_VALUE = "Stock level is empty, please provide a value.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the SetThresholdCommand
@@ -52,12 +53,18 @@ public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
 
         // Parse minimum stock level if present
         if (argMultimap.getValue(PREFIX_MIN_STOCK_LEVEL).isPresent()) {
+            if (argMultimap.getValue(PREFIX_MIN_STOCK_LEVEL).get().isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_STOCK_VALUE);
+            }
             minStockLevel = parsePositiveInteger(
                     argMultimap.getValue(PREFIX_MIN_STOCK_LEVEL).get(), MESSAGE_INVALID_THRESHOLD);
         }
 
         // Parse maximum stock level if present
         if (argMultimap.getValue(PREFIX_MAX_STOCK_LEVEL).isPresent()) {
+            if (argMultimap.getValue(PREFIX_MAX_STOCK_LEVEL).get().isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_STOCK_VALUE);
+            }
             maxStockLevel = parsePositiveInteger(
                     argMultimap.getValue(PREFIX_MAX_STOCK_LEVEL).get(), MESSAGE_INVALID_THRESHOLD);
         }
@@ -86,7 +93,7 @@ public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
             }
             return intValue;
         } catch (NumberFormatException e) {
-            throw new ParseException(errorMessage);
+            throw new ParseException("Invalid stock level: " + errorMessage);
         }
     }
 

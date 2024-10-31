@@ -21,6 +21,8 @@ public class CommandResult {
 
     private final boolean updateCommandBox;
     private final boolean resultDisplay;
+    private boolean showSupplier;
+    private boolean showProduct;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -32,6 +34,8 @@ public class CommandResult {
         this.exit = exit;
         this.updateCommandBox = updateCommandBox;
         this.resultDisplay = resultDisplay;
+        this.showSupplier = false;
+        this.showProduct = false;
     }
 
     /**
@@ -68,6 +72,24 @@ public class CommandResult {
 
     public boolean getResultDisplay() {
         return resultDisplay;
+    }
+
+    public void setShowSupplier() {
+        assert(!showProduct);
+        showSupplier = true;
+    }
+
+    public boolean isShowSupplier() {
+        return showSupplier;
+    }
+
+    public void setShowProduct() {
+        assert(!showSupplier);
+        showProduct = true;
+    }
+
+    public boolean isShowProduct() {
+        return showProduct;
     }
 
     @Override

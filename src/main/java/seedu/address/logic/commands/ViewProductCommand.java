@@ -32,8 +32,10 @@ public class ViewProductCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredProductList(predicate);
-        return new CommandResult(
+        CommandResult commandResult = new CommandResult(
                 String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
+        commandResult.setShowProduct();
+        return commandResult;
     }
 
     @Override

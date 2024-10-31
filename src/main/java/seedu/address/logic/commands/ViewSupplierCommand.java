@@ -32,8 +32,10 @@ public class ViewSupplierCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredSupplierList(predicate);
-        return new CommandResult(
+        CommandResult commandResult = new CommandResult(
                 String.format(Messages.MESSAGE_SUPPLIERS_LISTED_OVERVIEW, model.getFilteredSupplierList().size()));
+        commandResult.setShowSupplier();
+        return commandResult;
     }
 
     @Override

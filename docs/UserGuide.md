@@ -74,11 +74,11 @@ You can now start using the application by typing commands into the command box.
 
 Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
-<box type="info" seamless>
+<box type="info" seamless><box>
 
 **Notes about the command format:**<br>
 
@@ -93,7 +93,6 @@ Refer to the [Features](#features) below for details of each command.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
 
 ### Viewing help : `help`
 
@@ -113,20 +112,12 @@ Adds a supplier to the address book.
 
 Format: `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
 
-**Tip:** A supplier can have any number of tags (including 0)
-</box>
+> **Tip:** A supplier can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all suppliers : `list`
-
-Shows a list of all suppliers in the address book.
-
-Format: `list`
 
 ### Editing a supplier : `edit`
 
@@ -195,15 +186,20 @@ Example Commands:
 > **Note:**
 > If product was not assigned to supplier, the system will notify you.
 
-### Setting threshold for a product: `threshold`
+### Setting threshold for a product: `set_threshold`
 
-Updates the minimum stock level for a product.
+Updates the minimum and maximum stock level for a product.
 
-Format: `threshold pr/PRODUCT_NAME stk/STOCK_LEVEL`
+Format: `set_threshold pr/PRODUCT_NAME min/MIN_STOCK_LEVEL max/MAX_STOCK_LEVEL`
+
+> **Note:**
+> At least one of the prefixes is mandatory: min/ OR max/ <br>
+> (Prefixes min/ AND max/ can be used together also, see examples)
 
 Examples:
-* `threshold pr/sweater stk/1000`
-* `threshold apr/chocolates stk/2623900`
+* `set_threshold pr/potato chips min/100`
+* `set_threshold pr/chocolates max/230`
+* `set_threshold pr/sweater min/380 max/900`
 
 ### Updating stock level for a product: `update_stock`
 
@@ -215,31 +211,33 @@ Examples:
 * `update_stock pr/sweater stk/1000`
 * `update_stock apr/chocolates stk/2623900`
 
-### Updating maximum stock level for a product: `update_maxstock`
-
-Updates the maximum stock level for a product.
-
-Format: `update_maxstock pr/PRODUCT_NAME stk/STOCK_LEVEL`
-
-Examples:
-* `update_maxstock pr/sweater stk/1000`
-* `update_maxstock apr/chocolates stk/2623900`
-
 ### Locating all suppliers: `view_supplier`
 
-Displays all the suppliers currently present in the supplier list.
+Displays:
+1. all the suppliers currently present in the supplier list
+2. specified suppliers with the keyword provided
 
-Format: `view_suppliers`
+Format:
 
-Examples: `view_suppliers`
+` view_supplier ` (For displaying details of all suppliers)
 
-### Locating all suppliers: `view_product`
+` view_supplier [KEYWORD] ` (For displaying details about specified supplier)
 
-Displays all the products currently present in the product list.
+Examples: `view_supplier` `view_supplier Sussane `
 
-Format: `view_products`
+### Locating all products: `view_product`
 
-Examples: `view_suppliers`
+Displays:
+1. all the products currently present in the supplier list
+2. specified products with the keyword provided
+
+Format:
+
+` view_product ` (For displaying details of all products)
+
+` view_product [KEYWORD] ` (For displaying details about specified product)
+
+Examples: `view_product` `view_product Socks `
 
 ### Deleting a supplier: `delete_supplier`
 
@@ -258,10 +256,6 @@ Format: `delete_product pr/PRODUCT_NAME stk/STOCK_LEVEL`
 
 Examples:
 * `delete_product n/sweater`
-
-### Locating suppliers and products by name: `view`
-
-### Locating suppliers and products by name: `view`
 
 ### Clearing all entries : `clear`
 
@@ -283,12 +277,9 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
-
-**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
+> **Caution:**
+> If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+> Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 ### Archiving data files `[coming in v2.0]`
 
