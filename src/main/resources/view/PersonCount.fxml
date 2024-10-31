@@ -10,5 +10,5 @@
     <columnConstraints>
         <ColumnConstraints hgrow="NEVER" minWidth="15" />
     </columnConstraints>
-    <Label fx:id="PersonCountDisplay" />
+    <Label fx:id="personCountDisplay" />
 </GridPane>
