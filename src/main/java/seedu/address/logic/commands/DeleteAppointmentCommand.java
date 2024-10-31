@@ -58,7 +58,7 @@ public class DeleteAppointmentCommand extends Command {
         this.targetNric = null;
         this.appointment = appointment;
     }
-    @Override // Change
+    @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -119,7 +119,6 @@ public class DeleteAppointmentCommand extends Command {
         if (targetNric != null && nextCommand.targetNric != null) {
             return targetNric.equals(nextCommand.targetNric) && appointment.equals(nextCommand.appointment);
         } else if (targetNric == null && nextCommand.targetNric == null) {
-            // If both NRICs are null, they are considered equal (in case of index-based deletions)
             return targetIndex.equals(nextCommand.targetIndex) && appointment.equals(nextCommand.appointment);
         } else {
             return false;
