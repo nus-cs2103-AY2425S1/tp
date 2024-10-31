@@ -150,6 +150,11 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void addLog(Person target, Log log) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         /**
          * Returns an unmodifiable view of the full person list
          */
