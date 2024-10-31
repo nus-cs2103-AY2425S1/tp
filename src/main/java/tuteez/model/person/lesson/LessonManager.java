@@ -21,7 +21,6 @@ import tuteez.model.person.UniquePersonList;
 public class LessonManager {
     private static final int NUMBER_OF_DAYS_IN_WEEK = 7;
     private final HashMap<Day, TreeSet<Lesson>> dayLessonsMap = new HashMap<>(NUMBER_OF_DAYS_IN_WEEK);
-    private final Logger logger = LogsCenter.getLogger(AddCommand.class);
 
     /**
      * Constructs a new {@code lessonManager} and initializes an empty schedule
@@ -82,9 +81,7 @@ public class LessonManager {
      */
     public Map<Person, ArrayList<Lesson>> getClashingLessons(UniquePersonList studentList, Lesson lesson) {
         Map<Person, ArrayList<Lesson>> clashingLessonMap = new HashMap<>();
-        Iterator<Person> students = studentList.iterator();
-        while (students.hasNext()) {
-            Person studentToCheck = students.next();
+        for (Person studentToCheck : studentList) {
             ArrayList<Lesson> clashedLessons = studentToCheck.getLessonsThatClash(lesson);
             if (!clashedLessons.isEmpty()) {
                 clashingLessonMap.put(studentToCheck, clashedLessons);

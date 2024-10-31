@@ -81,6 +81,23 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_NEW_LESSONS_CLASH);
         }
 
+        Map<Person, ArrayList<Lesson>> resultMap = findAllClashingLessonsMap(model, lessonLst);
+
+        if (!resultMap.isEmpty()) {
+            String logMessage = String.format("Student: %s | Lessons: %s | Conflict: Clashes with "
+                    + "another student's lesson", toAdd.getName(), toAdd.getLessons().toString());
+            logger.info(logMessage);
+
+            String clashMsg = generateClashMessage(resultMap);
+            throw new CommandException(clashMsg);
+        }
+
+        model.addPerson(toAdd);
+        logger.info("Student Added - " + toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    public Map<Person, ArrayList<Lesson>> findAllClashingLessonsMap(Model model, List<Lesson> lessonLst) {
         Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
         for (Lesson lesson: lessonLst) {
             assert lesson != null;
@@ -91,25 +108,18 @@ public class AddCommand extends Command {
                 resultMap.computeIfAbsent(person, k -> new ArrayList<>()).addAll(lessons);
             });
         }
+        return resultMap;
+    }
 
-        if (!resultMap.isEmpty()) {
-            String logMessage = String.format("Student: %s | Lessons: %s | Conflict: Clashes with "
-                    + "another student's lesson", toAdd.getName(), toAdd.getLessons().toString());
-            logger.info(logMessage);
+    public String generateClashMessage(Map<Person, ArrayList<Lesson>> studentLessonMap) {
+        StringBuilder clashMsg = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
+        studentLessonMap.keySet().forEach(student -> {
+            clashMsg.append(student.getName()).append(": ");
 
-            StringBuilder clashMsg = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
-            resultMap.keySet().forEach(student -> {
-                clashMsg.append(student.getName()).append(": ");
-
-                resultMap.get(student).forEach(ls -> clashMsg.append(ls.getDayAndTime()).append(" "));
-                clashMsg.append("\n");
-            });
-            throw new CommandException(clashMsg.toString());
-        }
-
-        model.addPerson(toAdd);
-        logger.info("Student Added - " + toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+            studentLessonMap.get(student).forEach(ls -> clashMsg.append(ls.getDayAndTime()).append(" "));
+            clashMsg.append("\n");
+        });
+        return clashMsg.toString();
     }
 
     @Override

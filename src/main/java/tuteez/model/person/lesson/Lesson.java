@@ -165,7 +165,7 @@ public class Lesson {
      *         {@code false} otherwise.
      */
     public static boolean containsClashes(List<Lesson> lessons) {
-        List<Lesson> lessonList = new ArrayList<>(lessons); // Convert to list for easy indexing
+        List<Lesson> lessonList = new ArrayList<>(lessons);
 
         for (int i = 0; i < lessonList.size(); i++) {
             Lesson lesson1 = lessonList.get(i);
@@ -283,15 +283,15 @@ public class Lesson {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + lessonDay.toString() + " " + startTime.toString().replace(":", "") + "-"
-                + endTime.toString().replace(":", "") + ']';
+        return '[' + getDayAndTime() + ']';
     }
 
     /**
      * @return A string with only day and time
      */
     public String getDayAndTime() {
-        return this.toString().replace("[", "").replace("]", "");
+        return lessonDay.toString() + " " + startTime.toString().replace(":", "") + "-"
+                + endTime.toString().replace(":", "");
     }
 
     /**
