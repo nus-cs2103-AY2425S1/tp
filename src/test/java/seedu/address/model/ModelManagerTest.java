@@ -14,7 +14,12 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -27,6 +32,40 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(FXCollections.observableArrayList(), modelManager.getHistoryCommandList());
+    }
+    @Test
+    public void testGetHistoryCommandList() {
+        Command command = new ClearCommand();
+        String commandText = "clear command";
+
+        modelManager.addHistoryCommand(command, commandText);
+
+        assertEquals(1, modelManager.getHistoryCommandList().size());
+        assertEquals(commandText, modelManager.getHistoryCommandList().get(0).getOriginalCommandText());
+        assertEquals(command, modelManager.getHistoryCommandList().get(0).getCommand());
+    }
+    @Test
+    public void testSetCommandHistoryText() {
+        ModelManager model = new ModelManager();
+        String commandText = "sample command text";
+        Command command = new ClearCommand();
+        model.addHistoryCommand(command, commandText);
+        assertEquals(commandText, model.getHistoryCommandList().get(0).getOriginalCommandText());
+    }
+
+    @Test
+    public void addAndGetHistoryCommand() {
+        ModelManager model = new ModelManager();
+        String commandText = "sample command text";
+        Command command = new ClearCommand();
+        model.addHistoryCommand(command, commandText);
+
+        ObservableList<HistoryCommand> historyCommands = model.getHistoryCommandList();
+
+        // Check that the list contains one command and that it matches the added command
+        assertEquals(1, historyCommands.size());
+        HistoryCommand historyCommand = historyCommands.get(0);
     }
 
     @Test
