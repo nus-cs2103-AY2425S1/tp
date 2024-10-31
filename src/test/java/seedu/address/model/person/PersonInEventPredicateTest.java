@@ -35,10 +35,10 @@ public class PersonInEventPredicateTest {
         assertNotEquals(firstPredicate, thirdPredicate);
 
         // null -> not equals
-        assertNotEquals(null, firstPredicate);
+        assertNotEquals(firstPredicate, null);
 
         // different type -> not equals
-        assertNotEquals(1, firstPredicate);
+        assertNotEquals(firstPredicate, 1);
     }
 
     @Test

@@ -74,6 +74,16 @@ public class ViewEventCommandTest {
     }
 
     @Test
+    public void equals_nullOrDifferentType_returnsFalse() {
+        Event inputEvent = TypicalEvents.TEST_EVENT;
+
+        ViewEventCommand commandInputEvent = new ViewEventCommand(inputEvent);
+
+        assertNotEquals(commandInputEvent, null);
+        assertNotEquals(commandInputEvent, 1);
+    }
+
+    @Test
     public void toString_returnsCorrectString() {
         Event testEvent = TypicalEvents.SPORTS_FESTIVAL;
         ViewEventCommand viewCommand = new ViewEventCommand(testEvent);
