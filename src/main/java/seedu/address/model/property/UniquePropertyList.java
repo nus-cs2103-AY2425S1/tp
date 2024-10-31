@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.meetup.exceptions.MeetUpNotFoundException;
 import seedu.address.model.property.exceptions.DuplicatePropertyException;
 import seedu.address.model.property.exceptions.PropertyNotFoundException;
 
@@ -76,7 +75,7 @@ public class UniquePropertyList implements Iterable<Property> {
     public void remove(Property toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new MeetUpNotFoundException();
+            throw new PropertyNotFoundException();
         }
     }
 

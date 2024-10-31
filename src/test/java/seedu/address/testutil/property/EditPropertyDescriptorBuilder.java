@@ -28,7 +28,7 @@ public class EditPropertyDescriptorBuilder {
      */
     public EditPropertyDescriptorBuilder(Property property) {
         descriptor = new EditPropertyDescriptor();
-        descriptor.setLandlordName(property.getName());
+        descriptor.setLandlordName(property.getLandlordName());
         descriptor.setPhone(property.getPhone());
         descriptor.setAddress(property.getAddress());
         descriptor.setAskingPrice(property.getAskingPrice());
