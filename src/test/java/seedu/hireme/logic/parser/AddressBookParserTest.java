@@ -2,7 +2,6 @@ package seedu.hireme.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.hireme.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.hireme.testutil.Assert.assertThrows;
 import static seedu.hireme.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP_APPLICATION;
@@ -13,13 +12,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.hireme.logic.commands.AddCommand;
+import seedu.hireme.logic.commands.ChartCommand;
 import seedu.hireme.logic.commands.ClearCommand;
 import seedu.hireme.logic.commands.DeleteCommand;
 import seedu.hireme.logic.commands.ExitCommand;
 import seedu.hireme.logic.commands.FilterCommand;
 import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
-import seedu.hireme.logic.commands.InsightsCommand;
 import seedu.hireme.logic.commands.ListCommand;
 import seedu.hireme.logic.commands.SortCommand;
 import seedu.hireme.logic.commands.StatusCommand;
@@ -93,14 +92,14 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_insights() throws Exception {
-        assertTrue(parser.parseCommand(InsightsCommand.COMMAND_WORD) instanceof InsightsCommand);
-        assertTrue(parser.parseCommand(InsightsCommand.COMMAND_WORD + " 3") instanceof InsightsCommand);
+    public void parseCommand_chart() throws Exception {
+        assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD) instanceof ChartCommand);
+        assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD + " 3") instanceof ChartCommand);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
             -> parser.parseCommand(""));
     }
 

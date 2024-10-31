@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":StatusCommandParser" as StatusCommandParser LOGIC_COLOR
+participant "s:StatusCommand" as StatusCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("/accept " + index)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("/accept " + index)
+activate AddressBookParser
+
+create StatusCommandParser
+AddressBookParser -> StatusCommandParser
+activate StatusCommandParser
+
+StatusCommandParser --> AddressBookParser
+deactivate StatusCommandParser
+
+AddressBookParser -> StatusCommandParser : parse(index)
+activate StatusCommandParser
+
+create StatusCommand
+StatusCommandParser -> StatusCommand
+activate StatusCommand
+
+StatusCommand --> StatusCommandParser :
+deactivate StatusCommand
+
+StatusCommandParser --> AddressBookParser : s
+deactivate StatusCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+StatusCommandParser -[hidden]-> AddressBookParser
+destroy StatusCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> StatusCommand : execute(m)
+activate StatusCommand
+
+note over StatusCommand
+Retrieve last shown list and validate index
+end note
+StatusCommand -> Model : Retrieve and Validate Data
+
+note over StatusCommand
+Create a deep copy of the internship application
+Update status and save back to model
+end note
+StatusCommand -> Model : Update Internship Application Status
+
+note over StatusCommand
+Apply previous filter to updated list
+end note
+StatusCommand -> Model : Refresh Filtered List
+
+create CommandResult
+StatusCommand -> CommandResult : Generate result message
+activate CommandResult
+
+CommandResult --> StatusCommand
+deactivate CommandResult
+
+StatusCommand --> LogicManager : r
+deactivate StatusCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

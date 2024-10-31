@@ -106,7 +106,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Provides status insights of items in the list
      */
-    public Map<Status, Integer> getInsights() {
+    public Map<Status, Integer> getChartData() {
         Map<Status, Integer> map = new HashMap<>();
         for (Status status : Status.values()) {
             int count = items.countItems(i -> i.getStatus().equals(status));
