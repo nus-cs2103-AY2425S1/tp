@@ -27,12 +27,17 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
+    public static final String CHAINED = "chained";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds persons by their names, module-role pairs"
             + "(or both), matching any (combination) of the specified keywords (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
+            + "To search from the previously displayed results, use 'find " + CHAINED + "'. \n"
             + "Parameters: "
+            + "[" + CHAINED + "] "
             + "(" + PREFIX_NAME + "KEYWORD | " + PREFIX_MODULE + "KEYWORD)+\n"
             + "Example: " + COMMAND_WORD + " "
+            + CHAINED + " "
             + PREFIX_NAME + "alice "
             + PREFIX_NAME + "bob "
             + PREFIX_MODULE + "CS1101S "

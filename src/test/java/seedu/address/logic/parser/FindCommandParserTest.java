@@ -141,11 +141,13 @@ public class FindCommandParserTest {
                         new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
                                 List.of("CS2103T")))
                 ), true);
-        assertParseSuccess(parser, " chained " + PREFIX_NAME + "Alice " + PREFIX_MODULE + "CS2103T",
+        assertParseSuccess(parser, " " + FindCommand.CHAINED + " " + PREFIX_NAME
+                        + "Alice " + PREFIX_MODULE + "CS2103T",
                 expectedFindCommand);
 
         // Test with multiple whitespaces between the name keywords and chained keyword
-        assertParseSuccess(parser, " chained \n " + PREFIX_NAME + "Alice \n \t " + PREFIX_MODULE + "CS2103T  \t",
+        assertParseSuccess(parser, " " + FindCommand.CHAINED
+                        + " \n " + PREFIX_NAME + "Alice \n \t " + PREFIX_MODULE + "CS2103T  \t",
                 expectedFindCommand);
     }
 

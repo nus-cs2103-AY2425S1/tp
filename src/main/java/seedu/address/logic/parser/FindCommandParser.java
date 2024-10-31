@@ -21,7 +21,6 @@ import seedu.address.model.person.Person;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-    private static final String CHAINED = "chained";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -37,13 +36,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (!argMultimap.getPreamble().isEmpty() && !argMultimap.getPreamble().equals(CHAINED)) {
+        if (!argMultimap.getPreamble().isEmpty() && !argMultimap.getPreamble().equals(FindCommand.CHAINED)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
         List<String> moduleRoleKeywords = argMultimap.getAllValues(PREFIX_MODULE);
-        boolean isChained = argMultimap.getPreamble().equals(CHAINED);
+        boolean isChained = argMultimap.getPreamble().equals(FindCommand.CHAINED);
 
         // all keywords must be non-empty and contain no whitespace
         if (nameKeywords.stream().anyMatch(String::isBlank) || moduleRoleKeywords.stream().anyMatch(String::isBlank)) {
