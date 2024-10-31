@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.commands.CommandCommons;
-import seedu.address.model.AddressBook;
+import seedu.address.model.AgentAssist;
 import seedu.address.model.person.Person;
 
 /**
@@ -80,10 +80,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AgentAssist} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static AgentAssist getTypicalAgentAssist() {
+        AgentAssist ab = new AgentAssist();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

@@ -1,7 +1,7 @@
 package seedu.address.model.util;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.AgentAssist;
+import seedu.address.model.ReadOnlyAgentAssist;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
@@ -14,7 +14,7 @@ import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code AgentAssist} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -41,8 +41,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyAgentAssist getSampleAgentAssist() {
+        AgentAssist sampleAb = new AgentAssist();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
