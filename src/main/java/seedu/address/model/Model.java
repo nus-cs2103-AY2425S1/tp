@@ -57,17 +57,12 @@ public interface Model {
     /**
      * Adds the given command that is executed without throwing exception.
      */
-    void addHistoryCommand(Command command);
+    void addHistoryCommand(Command command, String originalCommandText);
 
     /**
      * Returns an unmodifiable view of the history command list
      */
     ObservableList<HistoryCommand> getHistoryCommandList();
-
-    /**
-     * Stores the original command text from user
-     */
-    void setCommandHistoryText(String input);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

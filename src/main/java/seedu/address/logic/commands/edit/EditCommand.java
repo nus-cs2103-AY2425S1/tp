@@ -90,7 +90,6 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.addHistoryCommand(this);
 
         String changeDescription = getChangesDescription(personToEdit, editedPerson);
         return new CommandResult(

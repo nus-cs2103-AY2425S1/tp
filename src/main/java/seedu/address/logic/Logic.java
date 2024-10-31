@@ -40,11 +40,6 @@ public interface Logic {
     ObservableList<HistoryCommand> getHistoryCommandList();
 
     /**
-     * Store the original command text from user.
-     */
-    void setCommandHistoryText(String input);
-
-    /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();

@@ -58,7 +58,8 @@ public class HistoryCommand {
         HistoryCommand otherCommand = (HistoryCommand) other;
 
         return this.command.equals(otherCommand.getCommand())
-                && this.commandText.equals(otherCommand.getOriginalCommandText());
+                && this.commandText.equals(otherCommand.getOriginalCommandText())
+                && Integer.valueOf(this.index).equals(otherCommand.getIndex());
     }
 
     /**

@@ -68,18 +68,23 @@ public class HistoryCommandTest {
 
         HistoryCommand historyCommand1 = HistoryCommand.of(command, commandText);
         HistoryCommand historyCommand2 = HistoryCommand.of(command, commandText);
+        HistoryCommandList list = new HistoryCommandList();
+        HistoryCommand historyCommand3 = HistoryCommand.of(command, commandText);
 
         assertTrue(historyCommand1.equals(historyCommand1));
         assertNotEquals(historyCommand1, null);
 
-        // Check that two HistoryCommand instances with the same command and text are equal
-        assertEquals(historyCommand1, historyCommand2);
+        // Check that two HistoryCommand instances with the same command and text but different index are not equal
+        assertNotEquals(historyCommand1, historyCommand2);
+
+        // Check that two HistoryCommand instances with the same command, text and index are equal
+        assertEquals(historyCommand1, historyCommand3);
 
         // Modify the commandText for historyCommand2
-        HistoryCommand historyCommand3 = HistoryCommand.of(command, "different command text");
+        HistoryCommand historyCommand4 = HistoryCommand.of(command, "different command text");
 
         // Check that they are not equal if the command text differs
-        assertNotEquals(historyCommand1, historyCommand3);
+        assertNotEquals(historyCommand1, historyCommand4);
 
         // Check that they are not equal if the command differs
         assertNotEquals(historyCommand1, HistoryCommand.of(command2, commandText));

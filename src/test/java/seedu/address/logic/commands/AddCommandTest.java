@@ -94,12 +94,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setCommandHistoryText(String input) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addHistoryCommand(Command toAdd) {
+        public void addHistoryCommand(Command toAdd, String originalCommandText) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -215,12 +210,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setCommandHistoryText(String input) {
-
-        }
-
-        @Override
-        public void addHistoryCommand(Command toAdd) {
+        public void addHistoryCommand(Command toAdd, String originalCommandText) {
 
         }
     }

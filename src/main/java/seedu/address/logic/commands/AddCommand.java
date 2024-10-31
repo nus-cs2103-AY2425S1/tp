@@ -61,7 +61,6 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        model.addHistoryCommand(this);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

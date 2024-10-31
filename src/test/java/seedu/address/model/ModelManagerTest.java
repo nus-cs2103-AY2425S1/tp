@@ -39,8 +39,7 @@ public class ModelManagerTest {
         Command command = new ClearCommand();
         String commandText = "clear command";
 
-        modelManager.setCommandHistoryText(commandText);
-        modelManager.addHistoryCommand(command);
+        modelManager.addHistoryCommand(command, commandText);
 
         assertEquals(1, modelManager.getHistoryCommandList().size());
         assertEquals(commandText, modelManager.getHistoryCommandList().get(0).getOriginalCommandText());
@@ -50,19 +49,17 @@ public class ModelManagerTest {
     public void testSetCommandHistoryText() {
         ModelManager model = new ModelManager();
         String commandText = "sample command text";
-        modelManager.setCommandHistoryText(commandText);
         Command command = new ClearCommand();
-        model.addHistoryCommand(command);
-        assertEquals("sample command text", model.getHistoryCommandList().get(0).getOriginalCommandText());
+        model.addHistoryCommand(command, commandText);
+        assertEquals(commandText, model.getHistoryCommandList().get(0).getOriginalCommandText());
     }
 
     @Test
     public void addAndGetHistoryCommand() {
         ModelManager model = new ModelManager();
         String commandText = "sample command text";
-        model.setCommandHistoryText(commandText);
         Command command = new ClearCommand();
-        model.addHistoryCommand(command);
+        model.addHistoryCommand(command, commandText);
 
         ObservableList<HistoryCommand> historyCommands = model.getHistoryCommandList();
 

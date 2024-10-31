@@ -164,18 +164,10 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Stores the original command text.
-     */
-    @Override
-    public void setCommandHistoryText(String input) {
-        HistoryCommandList.setCommandHistoryText(input);
-    }
-
-    /**
      * Adds command to the history command list.
      */
     @Override
-    public void addHistoryCommand(Command toAdd) {
-        historyCommandList.add(toAdd);
+    public void addHistoryCommand(Command toAdd, String originalCommandText) {
+        historyCommandList.add(toAdd, originalCommandText);
     }
 }

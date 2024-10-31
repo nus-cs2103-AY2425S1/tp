@@ -22,14 +22,14 @@ public class HistoryCommandListTest {
     @BeforeEach
     public void setUp() {
         historyCommandList = new HistoryCommandList();
-        HistoryCommandList.setCommandHistoryText("Initial command text");
         HistoryCommand.resetIndex();
     }
 
     @Test
     public void addAndGetHistoryCommand() {
         Command command = new ClearCommand();
-        historyCommandList.add(command);
+        String commandText = "Initial command text";
+        historyCommandList.add(command, commandText);
 
         // Retrieve the history commands
         ObservableList<HistoryCommand> historyCommands = historyCommandList.getHistoryCommands();
@@ -38,37 +38,32 @@ public class HistoryCommandListTest {
         assertEquals(1, historyCommands.size());
         HistoryCommand historyCommand = historyCommands.get(0);
         assertEquals(command, historyCommand.getCommand());
-        assertEquals("Initial command text", historyCommand.getOriginalCommandText());
+        assertEquals(commandText, historyCommand.getOriginalCommandText());
     }
 
     @Test
     public void addCommandWithoutSettingText_throwsAssertionError() {
-        HistoryCommandList.setCommandHistoryText(null);
 
         Command command = new ClearCommand();
 
         // Assert that an AssertionError is thrown when adding a command
-        assertThrows(AssertionError.class, () -> historyCommandList.add(command));
+        assertThrows(AssertionError.class, () -> historyCommandList.add(command, null));
     }
 
     @Test
     public void addCommandWithInvalidCommand_throwsAssertionError() {
-        HistoryCommandList.setCommandHistoryText("sample text");
-
         Command command = new ExitCommand();
 
         // Assert that an AssertionError is thrown when adding a command that does not change the address book.
-        assertThrows(AssertionError.class, () -> historyCommandList.add(command));
+        assertThrows(AssertionError.class, () -> historyCommandList.add(command, "sample text"));
     }
 
     @Test
     public void addMultipleCommands_checkOrder() {
         Command command1 = new ClearCommand();
         Command command2 = new AddCommand(new PersonBuilder(ANDY).build());
-        HistoryCommandList.setCommandHistoryText("Command 1");
-        historyCommandList.add(command1);
-        HistoryCommandList.setCommandHistoryText("Command 2");
-        historyCommandList.add(command2);
+        historyCommandList.add(command1, "Command 1");
+        historyCommandList.add(command2, "Command 2");
 
         // Retrieve the history commands
         ObservableList<HistoryCommand> historyCommands = historyCommandList.getHistoryCommands();
@@ -91,16 +86,15 @@ public class HistoryCommandListTest {
         Command command1 = new ClearCommand();
         Command command2 = new AddCommand(new PersonBuilder(ANDY).build());
 
-        HistoryCommandList.setCommandHistoryText("Command 1");
-        historyCommandList.add(command1);
-        HistoryCommandList.setCommandHistoryText("Command 2");
-        historyCommandList.add(command2);
+        String str1 = "Command 1";
+        String str2 = "Command 2";
+
+        historyCommandList.add(command1, str1);
+        historyCommandList.add(command2, str2);
 
         HistoryCommandList anotherList = new HistoryCommandList();
-        HistoryCommandList.setCommandHistoryText("Command 1");
-        anotherList.add(command1);
-        HistoryCommandList.setCommandHistoryText("Command 2");
-        anotherList.add(command2);
+        anotherList.add(command1, str1);
+        anotherList.add(command2, str2);
 
         assertEquals(historyCommandList, anotherList);
         assertTrue(historyCommandList.equals(historyCommandList));
@@ -111,12 +105,10 @@ public class HistoryCommandListTest {
         Command command1 = new ClearCommand();
         Command command2 = new AddCommand(new PersonBuilder(ANDY).build());
 
-        HistoryCommandList.setCommandHistoryText("Command 1");
-        historyCommandList.add(command1);
+        historyCommandList.add(command1, "Command 1");
 
         HistoryCommandList anotherList = new HistoryCommandList();
-        HistoryCommandList.setCommandHistoryText("Command 1");
-        anotherList.add(command2); // Different command
+        anotherList.add(command2, "Command 1"); // Different command
 
         assertNotEquals(historyCommandList, anotherList);
         assertNotEquals(historyCommandList, null);

@@ -16,16 +16,16 @@ import seedu.address.logic.commands.edit.EditCommand;
  * A list of history commands.
  */
 public class HistoryCommandList implements Iterable<HistoryCommand> {
-    private static String originalCommandText;
     private final ObservableList<HistoryCommand> internalList = FXCollections.observableArrayList();
 
     public HistoryCommandList() {
+        HistoryCommand.resetIndex();
     }
 
     /**
      * Adds a history command to the list.
      */
-    public void add(Command toAdd) {
+    public void add(Command toAdd, String originalCommandText) {
         requireNonNull(toAdd);
         assert originalCommandText != null : "The original command text should not be null";
         assert toAdd instanceof AddCommand
@@ -34,10 +34,6 @@ public class HistoryCommandList implements Iterable<HistoryCommand> {
                 || toAdd instanceof EditCommand : "History command is not changing the person list";
 
         internalList.add(0, HistoryCommand.of(toAdd, originalCommandText));
-    }
-
-    public static void setCommandHistoryText(String input) {
-        originalCommandText = input;
     }
 
     public ObservableList<HistoryCommand> getHistoryCommands() {
