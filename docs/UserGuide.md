@@ -16,6 +16,8 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
   * [Listing all contacts: `list`](#listing-all-contacts--list)
   * [Editing a contact or delivery: `edit`](#editing-a-contact-or-delivery-edit)
   * [Locating contacts or deliveries by name: `find`](#locating-contacts-or-deliveries-by-name-find)
+  * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery--archive)
+  * [Unarchiving a contact or delivery: `unarchive`](#unarchiving-a-contact-or-delivery--unarchive)
   * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery--delete)
   * [Inspecting a contact: `inspect`](#inspecting-a-contact--inspect)
   * [Clearing all entries: `clear`](#clearing-all-entries--clear)
@@ -182,6 +184,52 @@ Examples:
 
 Find command does not work in the inspect window.
 
+### Archiving a contact or delivery : `archive`
+**<ins>When in the main window**
+
+Archives the specified contact from the contacts list.
+
+Format: `archive [INDEXES]...`
+
+* Archive the contact(s) at the specified `INDEXES`.
+* The indexes refer to the indexes shown in the displayed contacts list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `archive 2 3` reduces the visibility of the 2nd and 3rd contact and moves them to the end of the contacts list.
+* `find Betsy` followed by `archive 1` archives the 1st person in the results of the `find` command.
+
+**<ins>When in the inspect window**
+
+Archives the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+
+Examples:
+* `delete 2` archives the 2nd delivery in the delivery list of the inspected contact.
+* `delete 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
+
+### Unarchiving a contact or delivery : `unarchive`
+**<ins>When in the main window**
+
+Unarchive the specified contact from the contacts list if they are archived. 
+
+Format: `unarchive [INDEXES]...`
+
+* Unarchive the contact(s) at the specified `INDEXES`.
+* The indexes refer to the indexes shown in the displayed contacts list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
+* `find Betsy` followed by `unarchive 1` deletes the 1st person in the results of the `find` command.
+
+**<ins>When in the inspect window**
+
+Unarchives the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+
+Examples:
+* `unarchive 2` deletes the 2nd delivery in the delivery list of the inspected contact.
+* `unarchive 2 3` deletes the 2nd and 3rd deliveries in the delivery list of the inspected contact.
+
 ### Deleting a contact or delivery : `delete`
 **<ins>When in the main window**
 
@@ -277,6 +325,7 @@ Furthermore, certain edits can cause the LogiLink to behave in unexpected ways (
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/Client a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Archive** | `archive INDEXES`<br> e.g., `archive 3`, `archive 3 4`
 **Clear**  | `clear`
 **Delete** | `delete INDEXES`<br> e.g., `delete 3`, `delete 3 4`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
