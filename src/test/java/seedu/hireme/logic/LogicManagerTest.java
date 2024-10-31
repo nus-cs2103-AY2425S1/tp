@@ -1,7 +1,7 @@
 package seedu.hireme.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.hireme.logic.Messages.MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX;
+import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.hireme.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.hireme.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_APPLE;
 import static seedu.hireme.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_APPLE;
@@ -20,6 +20,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.hireme.logic.commands.AddCommand;
 import seedu.hireme.logic.commands.CommandResult;
+import seedu.hireme.logic.commands.DeleteCommand;
 import seedu.hireme.logic.commands.ListCommand;
 import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.logic.parser.exceptions.ParseException;
@@ -62,7 +63,8 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "/d 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test

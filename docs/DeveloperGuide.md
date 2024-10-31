@@ -123,10 +123,10 @@ How the parsing works:
 
 The `Model` component:
 
-- **Stores the HireMe application data**, which includes all `InternshipApplication` objects (contained in a `UniqueList<InternshipApplication>` object).
-- **Manages a filtered list** of currently 'selected' `InternshipApplication` objects (e.g., search results) as a separate _filtered_ list, exposed as an unmodifiable `ObservableList<InternshipApplication>`. This allows the UI to automatically update when the data changes, as the list is 'observable'.
-- **Stores a `UserPrefs` object**, which represents the user’s preferences. This is exposed externally as a `ReadOnlyUserPrefs` object.
-- **Is self-contained**, meaning the `Model` does not depend on any other components (as it represents the domain entities, which should be logically independent).
+- **Stores HireMe application data**, which includes all `InternshipApplication` objects. These objects are stored in a UniqueList, ensuring that each application is unique.
+- **Manages a filtered list** of currently 'selected' `InternshipApplication` objects (e.g., search results) as a separate, _filtered_ list. This filtered list is exposed as an unmodifiable `ObservableList<InternshipApplication>`, allowing the UI to automatically reflect any changes in the data, as the list is observable.
+- **Stores a `UserPrefs` object**, representing the user’s preferences. This object is exposed externally as a `ReadOnlyUserPrefs`, ensuring that the preferences can be accessed but not modified directly.
+- **Is self-contained**, meaning that the `Model` does not depend on any other external components. As it represents the core domain entities, it maintains logical independence to ensure modularity and encapsulation.
 
 
 ### Storage component
@@ -207,6 +207,7 @@ Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the 
 
 Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
 
+
 ### View chart
 The implementation of the chart command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 
@@ -214,6 +215,26 @@ The implementation of the chart command follows the convention of a normal comma
 
 `AddressBookParser` creates `ChartCommand`
 Upon execution, `ChartCommand` gets the chart data which is encapsulated in `CommandResult`
+
+### Update the Status of an Internship Application
+The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the command input, creating a `StatusCommandParser` to interpret the request.
+
+<puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
+
+The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`.
+
+`AddressBookParser`:
+1. Parses the command (e.g., `/accept 1`) and creates a `StatusCommandParser`.
+2. `StatusCommandParser` extracts the index and maps the command to the appropriate `Status` enum value (`PENDING`, `ACCEPTED`, or `REJECTED`). If either the index or status is invalid, a `ParseException` is thrown.
+3. If parsing succeeds, a `StatusCommand` is created with `targetIndex` and the specified `Status`.
+
+Upon execution, `StatusCommand`:
+1. **Retrieves and Validates** the internship application by calling `model::getFilteredList`. If `targetIndex` is invalid, it throws a `CommandException`.
+2. **Updates the Status**: It creates a deep copy of the application, sets the new `Status`, and saves the updated application back with `model::setItem`.
+3. **Refreshes the Filtered List**: The previous filter predicate is reapplied using `model::updateFilteredList`.
+
+Finally, `StatusCommand` generates a `CommandResult` with a confirmation message, reflecting the updated status. This is then returned to `LogicManager`, completing the command execution.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
