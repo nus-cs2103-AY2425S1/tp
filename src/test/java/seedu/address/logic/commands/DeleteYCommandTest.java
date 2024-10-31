@@ -29,7 +29,6 @@ public class DeleteYCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalWeddingBook());
     }
 
-
     @Test
     public void execute_confirmPersonDeletion_success() throws CommandException {
         // Use an existing person from the typical address book
