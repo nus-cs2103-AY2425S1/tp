@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     private boolean lastResultDisplayAutoComplete = false;
+    private boolean isShowSupplier = false;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -45,11 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane supplierListPanelPlaceholder;
-
-    @FXML
-    private StackPane productListPanelPlaceholder;
-
+    private StackPane viewListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -117,12 +114,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
-        supplierListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
 
-        productListPanel = new ProductListPanel(logic.getFilteredProductList());
-        productListPanelPlaceholder.getChildren().add(productListPanel.getRoot());
-
+        if (isShowSupplier) {
+            supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
+            viewListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
+        } else {
+            productListPanel = new ProductListPanel(logic.getFilteredProductList());
+            viewListPanelPlaceholder.getChildren().add(productListPanel.getRoot());
+        }
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -189,6 +188,17 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText, autoComplete);
             logger.info("Result: " + commandResult.getFeedbackToUser());
 
+            if (commandResult.isShowSupplier()) {
+                isShowSupplier = true;
+                viewListPanelPlaceholder.getChildren().clear();
+                supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
+                viewListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
+            } else if (commandResult.isShowProduct()) {
+                isShowSupplier = false;
+                viewListPanelPlaceholder.getChildren().clear();
+                productListPanel = new ProductListPanel(logic.getFilteredProductList());
+                viewListPanelPlaceholder.getChildren().add(productListPanel.getRoot());
+            }
 
             if (commandResult.getResultDisplay()) {
                 resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

@@ -46,18 +46,11 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="supplierList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <VBox fx:id="viewList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <StackPane fx:id="supplierListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-        <!-- Product List Panel - Initially hidden -->
-        <VBox fx:id="productList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" visible="false" managed="false">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="productListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <StackPane fx:id="viewListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

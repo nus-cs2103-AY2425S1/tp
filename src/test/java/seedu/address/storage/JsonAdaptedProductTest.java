@@ -35,14 +35,15 @@ public class JsonAdaptedProductTest {
                 VALID_SUPPLIER_NAME,
                 VALID_STOCK_LEVEL,
                 VALID_MIN_STOCK_LEVEL,
-                VALID_MAX_STOCK_LEVEL);
+                VALID_MAX_STOCK_LEVEL,
+                VALID_TAGS);
 
         // Create expected Product object
         StockLevel expectedStockLevel = new StockLevel(
                 VALID_STOCK_LEVEL,
                 VALID_MIN_STOCK_LEVEL,
                 VALID_MAX_STOCK_LEVEL);
-        Product expectedProduct = new Product(new ProductName(VALID_NAME), expectedStockLevel);
+        Product expectedProduct = new Product(new ProductName(VALID_NAME), expectedStockLevel, EXPECTED_TAGS);
         expectedProduct.setSupplierName(new Name(VALID_SUPPLIER_NAME));
 
         // Assert that the converted product matches the expected product
@@ -56,7 +57,8 @@ public class JsonAdaptedProductTest {
                 VALID_SUPPLIER_NAME,
                 VALID_STOCK_LEVEL,
                 VALID_MIN_STOCK_LEVEL,
-                VALID_MAX_STOCK_LEVEL);
+                VALID_MAX_STOCK_LEVEL,
+                VALID_TAGS);
         assertThrows(IllegalValueException.class, product::toModelType);
     }
 
@@ -67,14 +69,15 @@ public class JsonAdaptedProductTest {
                 VALID_SUPPLIER_NAME,
                 VALID_STOCK_LEVEL,
                 VALID_MIN_STOCK_LEVEL,
-                VALID_MAX_STOCK_LEVEL);
+                VALID_MAX_STOCK_LEVEL,
+                VALID_TAGS);
         assertThrows(IllegalValueException.class, product::toModelType);
     }
 
     @Test
     public void constructor_product_createsJsonAdaptedProduct() throws Exception {
         StockLevel stockLevel = new StockLevel(VALID_STOCK_LEVEL, VALID_MIN_STOCK_LEVEL, VALID_MAX_STOCK_LEVEL);
-        Product expectedProduct = new Product(new ProductName(VALID_NAME), stockLevel);
+        Product expectedProduct = new Product(new ProductName(VALID_NAME), stockLevel, EXPECTED_TAGS);
         JsonAdaptedProduct jsonAdaptedProduct = new JsonAdaptedProduct(expectedProduct);
         assertEquals(expectedProduct, jsonAdaptedProduct.toModelType());
     }

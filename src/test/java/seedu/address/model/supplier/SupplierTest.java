@@ -12,6 +12,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalSuppliers.ALICE;
 import static seedu.address.testutil.TypicalSuppliers.BOB;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.product.Product;
@@ -63,14 +65,14 @@ public class SupplierTest {
 
     @Test
     public void hasProduct_productInList_returnsTrue() {
-        Product product = new Product(new ProductName("Test Product"), new StockLevel(0, 0, 0));
+        Product product = new Product(new ProductName("Test Product"), new StockLevel(0, 0, 0), new HashSet<>());
         Supplier supplier = new SupplierBuilder().withProducts(SampleDataUtil.getProductSet("Test Product")).build();
         assertTrue(supplier.hasProduct(product));
     }
 
     @Test
     public void hasProduct_productNotInList_returnsFalse() {
-        Product product = new Product(new ProductName("Test Product"), new StockLevel(0, 0, 0));
+        Product product = new Product(new ProductName("Test Product"), new StockLevel(0, 0, 0), new HashSet<>());
         Supplier supplier = new SupplierBuilder().build();
         assertFalse(supplier.hasProduct(product));
     }

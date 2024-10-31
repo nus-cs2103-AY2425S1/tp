@@ -67,7 +67,7 @@ public class SampleDataUtil {
      */
     public static Set<Product> getProductSet(String... strings) {
         return Arrays.stream(strings)
-                .map(name -> new Product(new ProductName(name), new StockLevel(0, 0, 0)))
+                .map(name -> new Product(new ProductName(name), new StockLevel(0, 0, 0), new HashSet<>()))
                 .collect(Collectors.toSet());
     }
 

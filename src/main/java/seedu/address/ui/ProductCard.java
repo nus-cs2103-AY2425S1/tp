@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -31,7 +33,7 @@ public class ProductCard extends UiPart<Region> {
     @FXML
     private Label maxStockLevel;
     @FXML
-    private FlowPane tags; // FlowPane for displaying tags
+    private FlowPane tags;
 
     /**
      * Creates a {@code ProductCard} with the given {@code Product} and index to display.
@@ -51,12 +53,9 @@ public class ProductCard extends UiPart<Region> {
 
         supplierName.setText("Supplier: " + (product.isAssigned() ? product.getSupplierName().toString() : "None"));
 
-        // Populate tags in the FlowPane
-        product.getTags().forEach(tag -> {
-            Label tagLabel = new Label(tag.toString());
-            tagLabel.getStyleClass().add("tag_label"); // Optional: add a style class for custom styling
-            tags.getChildren().add(tagLabel);
-        });
+        product.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

@@ -121,7 +121,7 @@ public class ProductBuilder {
             if (supplierName != null) {
                 return new Product(name, stockLevel, supplierName, tags);
             }
-            return new Product(name, stockLevel);
+            return new Product(name, stockLevel, tags);
         } catch (InvalidStockLevelException | InvalidMinStockLevelException
                 | InvalidMaxStockLevelException | StockLevelOutOfBoundsException e) {
             // For testing purposes, wrap checked exceptions into unchecked exceptions

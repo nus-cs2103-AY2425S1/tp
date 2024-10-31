@@ -50,4 +50,34 @@ public class CommandResultTest {
         commandResult = new CommandResult("feedback", false, false, false, false);
         assertFalse(commandResult.getResultDisplay());
     }
+
+    @Test
+    public void setShowSupplier() {
+        CommandResult commandResult = new CommandResult("feedback");
+        commandResult.setShowSupplier();
+        assertTrue(commandResult.isShowSupplier());
+    }
+
+    @Test
+    public void setShowProduct() {
+        CommandResult commandResult = new CommandResult("feedback");
+        commandResult.setShowProduct();
+        assertTrue(commandResult.isShowProduct());
+    }
+
+    @Test
+    public void isShowSupplier() {
+        CommandResult commandResult = new CommandResult("feedback");
+        commandResult.setShowSupplier();
+        assertTrue(!commandResult.isShowProduct());
+        assertTrue(commandResult.isShowSupplier());
+    }
+
+    @Test
+    public void isShowProduct() {
+        CommandResult commandResult = new CommandResult("feedback");
+        commandResult.setShowProduct();
+        assertTrue(commandResult.isShowProduct());
+        assertTrue(!commandResult.isShowSupplier());
+    }
 }
