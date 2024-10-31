@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.log.AppointmentDate;
 import seedu.address.model.log.Log;
+import seedu.address.model.log.LogEntry;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.IdentityNumber;
@@ -151,16 +152,18 @@ public class ParserUtil {
 
         String[] parts = logDetails.split("\\|", 2); // Split into two parts only
         if (parts.length < 2) {
-            throw new ParseException(Log.MESSAGE_CONSTRAINTS);
+            throw new ParseException(LogEntry.MESSAGE_CONSTRAINTS);
         }
 
         AppointmentDate appointmentDate = new AppointmentDate(parts[0].trim());
 
         String details = parts[1].trim();
         if (details.isEmpty()) {
-            throw new ParseException(Log.MESSAGE_CONSTRAINTS);
+            throw new ParseException(LogEntry.MESSAGE_CONSTRAINTS);
         }
-        return new Log(appointmentDate, details);
+        LogEntry entryDetails = new LogEntry(details);
+
+        return new Log(appointmentDate, entryDetails);
     }
 
     /**
