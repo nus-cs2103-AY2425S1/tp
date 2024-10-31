@@ -22,7 +22,7 @@ public class Appointment implements Comparable<Appointment> {
 
     public static final String MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT = "Appointment date should be in the format"
                                                                             + " of yyyy-MM-dd";
-    public static final String MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1s = "Appointment date [%s] does not exist";
+    public static final String MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1S = "Appointment date [%s] does not exist";
     public static final String MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT = "Appointment time period should be"
                                                                                    + " in 24-Hour Format with start "
                                                                                    + "and end times: HHMM-HHMM";
@@ -54,7 +54,7 @@ public class Appointment implements Comparable<Appointment> {
 
         requireNonNull(appointmentDate);
         checkArgument(isCorrectDateFormat(appointmentDate), MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
-        checkArgument(isValidDate(appointmentDate), String.format(MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1s,
+        checkArgument(isValidDate(appointmentDate), String.format(MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1S,
                                                                   appointmentDate));
         this.appointmentDate = appointmentDate;
 
