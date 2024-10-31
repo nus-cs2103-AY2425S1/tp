@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -22,11 +24,13 @@ public class ExportCommandParserTest {
     private ExportCommandParser parser = new ExportCommandParser();
 
     @Test
-    public void parse_validArgs_returnsExportCommand() {
+    public void parse_validArgs_returnsExportCommand() throws IOException {
         Path validPath = TEST_DATA_FOLDER.resolve("validExportFile");
+        Files.deleteIfExists(validPath);
         File exportFile = validPath.toFile();
 
         Path afterParsePath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
+        Files.deleteIfExists(afterParsePath);
         File afterParseExportFile = afterParsePath.toFile();
 
         assertParseSuccess(parser, exportFile.toString(), new ExportCommand(afterParseExportFile));
