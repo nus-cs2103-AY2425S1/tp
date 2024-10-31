@@ -68,11 +68,69 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same phone as {@code person} exists in the address book.
+     */
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return persons.containPhone(person);
+    }
+
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return persons.containEmail(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Sorts the address book by date and time, in ascending order.
+     */
+    public void sortByDate() {
+        persons.sortByDate();
+    }
+
+    /**
+     * Sorts the address book by name, in ascending order.
+     */
+    public void sortByName() {
+        persons.sortByName();
+    }
+
+    /**
+     * Sorts the address book by phone number, in ascending order.
+     */
+    public void sortByPhone() {
+        persons.sortByPhone();
+    }
+
+    /**
+     * Sorts the address book by email, in ascending order.
+     */
+    public void sortByEmail() {
+        persons.sortByEmail();
+    }
+
+    /**
+     * Sorts the address book by role, in ascending order.
+     */
+    public void sortByRole() {
+        persons.sortByRole();
+    }
+
+    /**
+     * Sorts the address book by role, in ascending order.
+     */
+    public void reversePersonList() {
+        persons.reversePersonList();
     }
 
     /**

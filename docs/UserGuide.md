@@ -4,25 +4,40 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# LogiLink User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+LogiLink allows you to manage your contacts on your desktop with keyboard commands. If you type fast, you can complete your contact management tasks faster with LogiLink than with mouse-based apps.
 
 <!-- * Table of Contents -->
+* [Quick start](#quick-start)
+* [Features](#features)
+  * [Viewing help: `help`](#viewing-help--help)
+  * [Adding a contact or delivery: `add`](#adding-a-contact-or-delivery-add)
+  * [Listing all contacts: `list`](#listing-all-contacts--list)
+  * [Editing a contact or delivery: `edit`](#editing-a-contact-or-delivery-edit)
+  * [Locating contacts or deliveries by name: `find`](#locating-contacts-or-deliveries-by-name-find)
+  * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery--delete)
+  * [Inspecting a contact: `inspect`](#inspecting-a-contact--inspect)
+  * [Clearing all entries: `clear`](#clearing-all-entries--clear)
+  * [Exiting the program: `exit`](#exiting-the-program--exit)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   - If you do not, you can download the Java `17` installer from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the `.jar` file to the folder you want to use as the _home folder_ for LogiLink.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar addressbook.jar` to run LogiLink.<br>
+   - A window similar to the diagram should appear, and the program should contain some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -30,7 +45,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the contacts list.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -46,9 +61,12 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the command format:**
+* There are two windows in this program:
+  - Main window: the default window you see when opening LogiLink.
+  - Inspect window: the window you see when inspecting a contact.<br></br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -67,42 +85,56 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 </box>
 
 ### Viewing help : `help`
+**<ins>When in the main or inspect window**
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
+![help message](images/helpMessage.png)
 
-### Adding a person: `add`
+### Adding a contact or delivery: `add`
+**<ins>When in the main window**
 
-Adds a person to the address book.
+Adds a contact to the contacts list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​`
+
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01, S123456`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Worker a/Newgate Prison, S123456 p/1234567 t/criminal`
+
+**<ins>When in the inspect window**
+
+Adds a delivery to the delivery list of a contact.
+
+Format: `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​`
+
+Examples:
+* `add i/Chair e/2025-04-04 a/John street, block 123, #01-01, S123456 c/$20 s/delivered`
+* `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver t/Best before Wednesday`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A contact or delivery can have any number of tags (including 0)
 </box>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+### Listing all contacts : `list`
 
-### Listing all persons : `list`
+**<ins>When in the main or inspect window**
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts added to the contacts list. When you enter this command in either window, you will end up in the main window after this command.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a contact or delivery: `edit`
+**<ins>When in the main window**
 
-Edits an existing person in the address book.
+Edits an existing contact in the contacts list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contacts list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -110,12 +142,26 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+**<ins>When in the inspect window**
 
-Finds persons whose names contain any of the given keywords.
+Edits an existing delivery in the delivery list of a contact.
+
+Format: `edit INDEX [i/ITEM]…​ [e/ETA] [a/ADDRESS] [c/COST] [s/STATUS] [t/TAG]…​`
+
+* Same parameter constraints as mentioned in the main window section of this command.
+* You can not remove all the delivery's items by typing `i/` without specifying any items after it. One item must be present at the least.
+
+Examples:
+*  `edit 1 i/Speaker c/$50` Edits the items and cost of the 1st delivery to be `Speaker` and `$50` respectively.
+*  `edit 2 s/delivered t/` Edits the status of the 2nd delivery to be `delivered` and clears all existing tags.
+
+### Locating contacts or deliveries by name: `find`
+**<ins>When in the main window**
+
+Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -128,30 +174,68 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex david` returns `Alex Yeoh`, `David Li`
 
-### Deleting a person : `delete`
+![result for 'find alex david'](images/findAlexDavidResult.png)
 
-Deletes the specified person from the address book.
+**<ins>When in the inspect window**
 
-Format: `delete INDEX`
+Find command does not work in the inspect window.
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+### Deleting a contact or delivery : `delete`
+**<ins>When in the main window**
+
+Deletes the specified contact from the contacts list.
+
+Format: `delete [INDEXES]...` 
+
+* Deletes the contact(s) at the specified `INDEXES`.
+* The indexes refer to the indexes shown in the displayed contacts list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2 3` deletes the 2nd and 3rd contact in the contacts list.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+**<ins>When in the inspect window**
+
+Deletes the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+
+Examples:
+* `delete 2` deletes the 2nd delivery in the delivery list of the inspected contact.
+* `delete 2 3` deletes the 2nd and 3rd deliveries in the delivery list of the inspected contact.
+
+### Inspecting a contact : `inspect`
+**<ins>When in the main window**
+
+Inspects a specified contact from the contacts list to see their delivery list.
+
+Format: `inspect [INDEX]`
+
+* Inspects the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contacts list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
+
+**<ins>When in the inspect window**
+
+inspect command does not work in the inspect window.
 
 ### Clearing all entries : `clear`
+**<ins>When in the main or inspect window**
 
-Clears all entries from the address book.
+Clears all entries from the contacts list.
 
 Format: `clear`
 
+**<ins>When in the main or inspect window**
+
+clear command does not work in the inspect window.
+
 ### Exiting the program : `exit`
+**<ins>When in the main or inspect window**
 
 Exits the program.
 
@@ -159,29 +243,25 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+LogiLink data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+LogiLink data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, LogiLink will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the LogiLink to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous LogiLink home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -196,10 +276,11 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/Client a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEXES`<br> e.g., `delete 3`, `delete 3 4`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Inspect**| `inspect INDEX`<br> e.g., `inspect 2`
 **List**   | `list`
 **Help**   | `help`

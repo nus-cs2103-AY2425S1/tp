@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ONLY_CLIENTS = person -> person.getRole().getValue().equals("client");
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -58,6 +60,16 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same phone as {@code person} exists in the address book.
+     */
+    boolean hasPhone(Person person);
+
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    boolean hasEmail(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -76,12 +88,52 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Date} and {@code Time} attribute of each {@code Person},
+     * in ascending order.
+     */
+    void sortByDate();
+
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Name} attribute of each {@code Person}, in ascending order.
+     */
+    void sortByName();
+
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Phone} attribute of each {@code Person}, in ascending order.
+     */
+    void sortByPhone();
+
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Email} attribute of each {@code Person}, in ascending order.
+     */
+    void sortByEmail();
+
+    /**
+     * Sorts the {@code UniquePersonList} using the {@code Role} attribute of each {@code Person}, in ascending order.
+     */
+    void sortByRole();
+
+    /**
+     * Reverses the {@code UniquePersonList}.
+     * <p>
+     * Used when sorting the {@code UniquePersonList} by a specified attribute, in descending order.
+     */
+    void reversePersonList();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    ObservableList<Person> getOnlyClientList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Adds the given delivery.
+     */
+    void addDelivery(Person person, Delivery delivery);
 }

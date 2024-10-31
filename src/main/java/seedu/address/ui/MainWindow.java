@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -34,6 +35,13 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
+    private double windowWidth;
+    private double windowHeight;
+    private double windowX;
+    private double windowY;
+    private boolean isMaximized;
+    private boolean isFullScreen;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -110,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getOnlyClientList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -121,6 +129,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        this.commandBox = commandBox;
     }
 
     /**
@@ -141,7 +150,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
-            helpWindow.show();
+            helpWindow.show(false, commandBox);
         } else {
             helpWindow.focus();
         }
@@ -163,8 +172,55 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleInspect(CommandResult commandResult) {
+        logger.info("Changing UI...");
+
+        storeWindowSize();
+        InspectWindow inspectWindow = new InspectWindow(primaryStage, logic, commandResult.getPerson());
+        keepWindowSize(inspectWindow.getPrimaryStage());
+        inspectWindow.show();
+        inspectWindow.fillInnerParts();
+        inspectWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+        AddressBookParser.setInspect(true);
+
+        helpWindow.close();
+    }
+
+    /**
+     * Stores the current window size before changing windows.
+     */
+    private void storeWindowSize() {
+        windowWidth = primaryStage.getWidth();
+        windowHeight = primaryStage.getHeight();
+        windowX = primaryStage.getX();
+        windowY = primaryStage.getY();
+        isMaximized = primaryStage.isMaximized();
+        isFullScreen = primaryStage.isFullScreen();
+    }
+
+    /**
+     * Sets the window size of the next window to match the size of the current window
+     * @param stage (window to be switched to)
+     */
+    private void keepWindowSize(Stage stage) {
+        stage.setFullScreen(isFullScreen);
+        stage.setWidth(windowWidth);
+        stage.setHeight(windowHeight);
+        stage.setX(windowX);
+        stage.setY(windowY);
+        stage.setMaximized(isMaximized);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public ResultDisplay getResultDisplay() {
+        return resultDisplay;
+    }
+
+    public CommandBox getCommandBox() {
+        return commandBox;
     }
 
     /**
@@ -184,6 +240,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isInspect()) {
+                handleInspect(commandResult);
             }
 
             return commandResult;

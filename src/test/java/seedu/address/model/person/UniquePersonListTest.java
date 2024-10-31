@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.HOON;
+import static seedu.address.testutil.TypicalPersons.IDA;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -166,6 +169,107 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void reversePersonList_success() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(HOON);
+        uniquePersonList.add(IDA);
+        uniquePersonList.add(BOB);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(IDA);
+        expectedUniquePersonList.add(HOON);
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.reversePersonList();
+    }
+
+    @Test
+    public void sortByDate_success() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.sortByDate();
+
+        assertArrayEquals(uniquePersonList.asUnmodifiableObservableList().toArray(),
+                expectedUniquePersonList.asUnmodifiableObservableList().toArray());
+    }
+
+    @Test
+    public void sortByEmail_success() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(IDA);
+        uniquePersonList.add(HOON);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(HOON);
+        expectedUniquePersonList.add(IDA);
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.sortByEmail();
+
+        assertArrayEquals(uniquePersonList.asUnmodifiableObservableList().toArray(),
+                expectedUniquePersonList.asUnmodifiableObservableList().toArray());
+    }
+
+    @Test
+    public void sortByName_success() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(HOON);
+        uniquePersonList.add(IDA);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(HOON);
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(IDA);
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.sortByName();
+
+        assertArrayEquals(uniquePersonList.asUnmodifiableObservableList().toArray(),
+                expectedUniquePersonList.asUnmodifiableObservableList().toArray());
+    }
+
+    @Test
+    public void sortByPhone_success() {
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(IDA);
+        uniquePersonList.add(HOON);
+        uniquePersonList.add(ALICE);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(HOON);
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(IDA);
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.sortByPhone();
+
+        assertArrayEquals(uniquePersonList.asUnmodifiableObservableList().toArray(),
+                expectedUniquePersonList.asUnmodifiableObservableList().toArray());
+    }
+
+    @Test
+    public void sortByRole_success() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(HOON);
+        uniquePersonList.add(IDA);
+        uniquePersonList.add(BOB);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(HOON);
+        expectedUniquePersonList.add(IDA);
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.sortByRole();
+
+        assertArrayEquals(uniquePersonList.asUnmodifiableObservableList().toArray(),
+                expectedUniquePersonList.asUnmodifiableObservableList().toArray());
     }
 
     @Test
