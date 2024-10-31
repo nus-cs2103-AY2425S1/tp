@@ -28,6 +28,9 @@ import seedu.address.model.person.Name;
 import seedu.address.testutil.PersonBuilder;
 
 public class FindListingCommandTest {
+
+    // use TypicalListings
+
     private static final Listing WOODLANDS_LISTING = new Listing(
             new Name("Woodlands"),
             new Address("Woodlands"),

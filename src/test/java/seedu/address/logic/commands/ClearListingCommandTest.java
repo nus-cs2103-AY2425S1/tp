@@ -22,6 +22,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class ClearListingCommandTest {
+    // use TypicalListings
     private static final Name VALID_LISTING_NAME = new Name("Valid Listing Name");
     private static final Address VALID_ADDRESS = new Address("Valid Address");
     private static final Price VALID_PRICE = new Price("500k",

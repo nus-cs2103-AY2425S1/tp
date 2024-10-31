@@ -26,6 +26,8 @@ import seedu.address.model.person.Name;
 import seedu.address.testutil.PersonBuilder;
 
 public class DeleteListingCommandTest {
+
+    // use TypicalListings
     private static final Listing WOODLANDS_LISTING = new Listing(
             new Name("Woodlands"),
             new Address("Woodlands"),

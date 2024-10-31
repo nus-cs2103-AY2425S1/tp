@@ -183,6 +183,15 @@ public class ListingBuilder {
     }
 
     /**
+     * Sets the {@code Buyers} of the {@code Listing} that we are building.
+     *
+     * @param buyers The buyers to set.
+     * @return The current {@code ListingBuilder} object.
+     */
+
+
+
+    /**
      * Builds and returns the {@code Listing} with the current attributes.
      *
      * @return The constructed {@code Listing}.

@@ -12,6 +12,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Address;
@@ -99,7 +101,7 @@ public class EditListingCommand extends Command {
         }
 
         model.setListing(listingToEdit, editedListing);
-        return new CommandResult(String.format(MESSAGE_EDIT_LISTING_SUCCESS, editedListing));
+        return new CommandResult(String.format(MESSAGE_EDIT_LISTING_SUCCESS, Messages.format(editedListing)));
     }
 
     /**
@@ -133,6 +135,14 @@ public class EditListingCommand extends Command {
 
         return listingName.equals(otherEditCommand.listingName)
                 && editListingDescriptor.equals(otherEditCommand.editListingDescriptor);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("listingName", listingName)
+                .add("editListingDescriptor", editListingDescriptor)
+                .toString();
     }
 
     /**
@@ -234,6 +244,18 @@ public class EditListingCommand extends Command {
                     && Objects.equals(address, otherDescriptor.address)
                     && Objects.equals(region, otherDescriptor.region)
                     && Objects.equals(sellerName, otherDescriptor.sellerName);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("price", price)
+                    .add("area", area)
+                    .add("address", address)
+                    .add("region", region)
+                    .add("seller", sellerName)
+                    .toString();
         }
     }
 }
