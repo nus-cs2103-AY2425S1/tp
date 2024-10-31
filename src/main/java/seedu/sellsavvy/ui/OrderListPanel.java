@@ -14,7 +14,6 @@ import javafx.scene.layout.Region;
 import seedu.sellsavvy.commons.core.LogsCenter;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 
 /**
