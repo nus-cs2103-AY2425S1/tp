@@ -23,6 +23,7 @@ public class TagContainsKeywordPredicate implements Predicate<Person> {
      * @throws NullPointerException if the provided keyword is null.
      */
     public TagContainsKeywordPredicate(String keyword) {
+        assert !keyword.isEmpty() : "Tags cannot be empty!";
         requireNonNull(keyword);
         this.keyword = keyword;
     }

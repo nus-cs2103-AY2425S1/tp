@@ -22,6 +22,7 @@ public class SubjectMatchesKeywordsPredicate implements Predicate<Participation>
      * @throws NullPointerException if the provided keyword is null.
      */
     public SubjectMatchesKeywordsPredicate(String keyword) {
+        assert !keyword.isEmpty() : "Subject cannot be empty!";
         requireNonNull(keyword);
         this.keyword = keyword;
     }
