@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -30,6 +32,7 @@ import seedu.address.logic.commands.ListAppointmentsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.ViewClientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -61,6 +64,15 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + "John");
         assertEquals(new DeleteCommand(new Name("John")), command);
+    }
+
+    @Test
+    public void parseCommand_deleteAppointment() throws Exception {
+        String dateTime = "2024-10-04 1000";
+        Schedule schedule = new Schedule("2024-10-04 1000", "");
+        DeleteAppointmentCommand command = (DeleteAppointmentCommand)
+                parser.parseCommand(DeleteAppointmentCommand.COMMAND_WORD + " Bob" + " d/" + dateTime);
+        assertEquals(new DeleteAppointmentCommand(new Name("Bob"), schedule), command);
     }
 
     @Test
@@ -101,12 +113,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_schedule() throws Exception {
         String dateTime = "2024-10-04 1000";
+        String note = "Lumbago";
         Set<Schedule> scheduleSet = new HashSet<>();
         scheduleSet.add(new Schedule(dateTime, ""));
         ScheduleCommand expectedCommand = new ScheduleCommand("Jane", scheduleSet);
 
         ScheduleCommand actualCommand = (ScheduleCommand) parser.parseCommand(
-                ScheduleCommand.COMMAND_WORD + " Jane" + " d/" + dateTime);
+                ScheduleCommand.COMMAND_WORD + " Jane" + " d/" + dateTime + " note/" + note);
 
         // Assert that the expected command equals the actual command
         assertEquals(expectedCommand, actualCommand);
@@ -142,6 +155,22 @@ public class AddressBookParserTest {
 
         // Assert that the expected command equals the actual command
         assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parseCommand_viewClient() throws Exception {
+        ViewClientCommand commandFirstNameOnly = (ViewClientCommand) parser.parseCommand(
+                ViewClientCommand.COMMAND_WORD + " Bob");
+        ViewClientCommand commandFirstAndLastName = (ViewClientCommand) parser.parseCommand(
+                ViewClientCommand.COMMAND_WORD + " John Doe");
+        ViewClientCommand commandFirstNameIncomplete = (ViewClientCommand) parser.parseCommand(
+                ViewClientCommand.COMMAND_WORD + " Bo");
+
+        assertEquals(new ViewClientCommand(new Name("Bob")), commandFirstNameOnly);
+        assertEquals(new ViewClientCommand(new Name("John Doe")), commandFirstAndLastName);
+        assertNotEquals(new ViewClientCommand(new Name("Bob")), commandFirstNameIncomplete);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ViewClientCommand.MESSAGE_USAGE), () -> parser.parseCommand(ViewClientCommand.COMMAND_WORD));
     }
 
     @Test

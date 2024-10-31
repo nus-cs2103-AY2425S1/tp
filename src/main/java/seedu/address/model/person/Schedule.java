@@ -53,6 +53,10 @@ public class Schedule {
         return isPaid;
     }
 
+    public String getIsPaid() {
+        return isPaid ? "Paid" : "Unpaid";
+    }
+
     /**
      * Marks the payment as paid.
      */

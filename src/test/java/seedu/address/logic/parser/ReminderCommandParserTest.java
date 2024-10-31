@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_DISPLAYED;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_REMINDER_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -16,14 +16,8 @@ public class ReminderCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no name specified
-        assertParseFailure(parser, " r/" + VALID_REMINDER_TIME, MESSAGE_INVALID_NAME_DISPLAYED);
-
         // no reminder specified
         assertParseFailure(parser, VALID_NAME, MESSAGE_INVALID_REMINDER_FORMAT);
-
-        // no name and no date and no reminder specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_NAME_DISPLAYED);
     }
 
     @Test
@@ -42,5 +36,23 @@ public class ReminderCommandParserTest {
         ReminderCommand expectedCommand = new ReminderCommand(VALID_NAME, VALID_REMINDER_TIME);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleReminderPrefixes_failure() {
+        String userInput = VALID_NAME + "r/" + VALID_REMINDER_TIME + "r/3 days";
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_REMINDER_FORMAT);
+    }
+
+    @Test
+    public void parse_emptyOrWhiteSpaceInput_failure() {
+        // empty string
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ReminderCommand.MESSAGE_USAGE));
+
+        // only white space
+        assertParseFailure(parser, "   ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ReminderCommand.MESSAGE_USAGE));
     }
 }
