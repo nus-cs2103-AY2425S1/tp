@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithLesson;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import org.junit.jupiter.api.Test;
@@ -47,16 +48,12 @@ public class DeleteLessonCommandTest {
 
     @Test
     public void execute_validParamsUnfilteredList_success() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
+        model = new ModelManager(getTypicalAddressBookWithLesson(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBookWithLesson(), new UserPrefs());
         Tutor tutor = (Tutor) getTypicalPersons().get(0);
         Tutee tutee = (Tutee) getTypicalPersons().get(3);
         Lesson lesson = new Lesson(tutor, tutee, subject);
-        model.addLesson(lesson);
-        model.commitAddressBook();
-        expectedModel.addLesson(lesson);
-        expectedModel.commitAddressBook();
+
 
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(Index.fromZeroBased(0),
                 Index.fromZeroBased(3), subject);
@@ -73,7 +70,7 @@ public class DeleteLessonCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         model.updateFilteredPersonList(person -> person instanceof Tutee);
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(Index.fromZeroBased(0),
-                Index.fromZeroBased(3), subject);
+                Index.fromZeroBased(0), subject);
         String expectedMessage = DeleteLessonCommand.MESSAGE_INVALID_TUTOR_INDEX;
         assertCommandFailure(deleteLessonCommand, model, commandHistory, expectedMessage);
     }
@@ -83,7 +80,7 @@ public class DeleteLessonCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         model.updateFilteredPersonList(person -> person instanceof Tutor);
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(Index.fromZeroBased(0),
-                Index.fromZeroBased(2), subject);
+                Index.fromZeroBased(0), subject);
         String expectedMessage = DeleteLessonCommand.MESSAGE_INVALID_TUTEE_INDEX;
         assertCommandFailure(deleteLessonCommand, model, commandHistory, expectedMessage);
     }

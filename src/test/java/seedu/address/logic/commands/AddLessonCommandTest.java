@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -52,8 +53,6 @@ public class AddLessonCommandTest {
 
         Tutor tutor = (Tutor) getTypicalPersons().get(0);
         Tutee tutee = (Tutee) getTypicalPersons().get(3);
-        tutor.setSubject(subject);
-        tutee.setSubject(subject);
         Lesson lesson = new Lesson(tutor, tutee, subject);
 
         AddLessonCommand addLessonCommand = new AddLessonCommand(Index.fromZeroBased(0),
@@ -70,7 +69,6 @@ public class AddLessonCommandTest {
     public void execute_invalidTutorIndexFilteredList_throwsCommandException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         model.updateFilteredPersonList(person -> person instanceof Tutee);
-        model.getFilteredPersonList().forEach(person -> ((Tutee) person).setSubject(subject));
 
         AddLessonCommand addLessonCommand = new AddLessonCommand(Index.fromZeroBased(0),
                Index.fromZeroBased(0), subject);
@@ -83,7 +81,6 @@ public class AddLessonCommandTest {
     public void execute_invalidTuteeIndexFilteredList_throwsCommandException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         model.updateFilteredPersonList(person -> person instanceof Tutor);
-        model.getFilteredPersonList().forEach(person -> ((Tutor) person).setSubject(subject));
 
         AddLessonCommand addLessonCommand = new AddLessonCommand(Index.fromZeroBased(0),
                Index.fromZeroBased(0), subject);
@@ -96,8 +93,6 @@ public class AddLessonCommandTest {
     public void execute_duplicateLessonUnfilteredList_throwsCommandException() {
         Tutor tutor = (Tutor) getTypicalPersons().get(0);
         Tutee tutee = (Tutee) getTypicalPersons().get(3);
-        tutor.setSubject(subject);
-        tutee.setSubject(subject);
 
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -109,6 +104,24 @@ public class AddLessonCommandTest {
                 Index.fromZeroBased(3), subject);
         String expectedMessage = AddLessonCommand.MESSAGE_DUPLICATE_LESSON;
 
+        assertCommandFailure(addLessonCommand, model, commandHistory, expectedMessage);
+    }
+
+    @Test
+    public void execute_InvalidSubjectTutorial_throwsCommandException() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        AddLessonCommand addLessonCommand = new AddLessonCommand(Index.fromZeroBased(0),
+                Index.fromZeroBased(3), new Subject("English"));
+        String expectedMessage = AddLessonCommand.MESSAGE_INVALID_SUBJECT;
+        assertCommandFailure(addLessonCommand, model, commandHistory, expectedMessage);
+    }
+
+    @Test
+    public void execute_InvalidSubjectTutee_throwsCommandException() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        AddLessonCommand addLessonCommand = new AddLessonCommand(Index.fromZeroBased(0),
+                Index.fromZeroBased(4), subject);
+        String expectedMessage = AddLessonCommand.MESSAGE_INVALID_SUBJECT;
         assertCommandFailure(addLessonCommand, model, commandHistory, expectedMessage);
     }
 

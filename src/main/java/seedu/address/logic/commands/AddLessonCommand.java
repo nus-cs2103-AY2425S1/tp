@@ -84,11 +84,6 @@ public class AddLessonCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_TUTEE_INDEX);
         }
 
-        // check if the tutor, tutee and the lesson to be added have the same subject
-        if (!tutorToAdd.hasSubject(this.subject) || !tuteeToAdd.hasSubject(this.subject)) {
-            throw new CommandException(MESSAGE_INVALID_SUBJECT);
-        }
-
         Lesson lesson = new Lesson((Tutor) tutorToAdd, (Tutee) tuteeToAdd, this.subject);
 
         if (model.hasLesson(lesson)) {
