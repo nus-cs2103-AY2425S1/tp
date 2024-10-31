@@ -25,11 +25,7 @@ public class ExportCommandParserTest {
     public void parse_validArgs_returnsExportCommand() {
         Path validPath = TEST_DATA_FOLDER.resolve("validExportFile");
         File exportFile = validPath.toFile();
-
-        Path afterParsePath = TEST_DATA_FOLDER.resolve("validExportFile");
-        File afterParseExportFile = afterParsePath.toFile();
-
-        assertParseSuccess(parser, exportFile.toString(), new ExportCommand(afterParseExportFile));
+        assertParseSuccess(parser, exportFile.toString(), new ExportCommand(exportFile));
     }
 
     @Test
