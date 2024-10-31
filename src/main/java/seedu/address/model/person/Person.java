@@ -160,9 +160,16 @@ public class Person {
         ToStringBuilder result = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone);
-
-        getEmail().ifPresent(email -> result.add("email", email));
-        getAddress().ifPresent(address -> result.add("address", address));
+        if (this.getEmail().isPresent()) {
+            result.add("email", getEmail().get());
+        } else {
+            result.add("email", null);
+        }
+        if (this.getAddress().isPresent()) {
+            result.add("address", getAddress().get());
+        } else {
+            result.add("address", null);
+        }
         result.add("tags", tags);
 
         return result.toString();
