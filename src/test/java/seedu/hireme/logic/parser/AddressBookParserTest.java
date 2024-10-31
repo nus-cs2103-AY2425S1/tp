@@ -2,6 +2,7 @@ package seedu.hireme.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.hireme.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.hireme.testutil.Assert.assertThrows;
 import static seedu.hireme.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP_APPLICATION;
@@ -48,7 +49,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clear_success() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    }
+
+    @Test
+    public void parseCommand_clear_failure() throws Exception {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ClearCommand.MESSAGE_USAGE), () -> parser.parseCommand("/clear z"));
     }
 
     @Test
@@ -61,7 +67,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_exit_success() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+    @Test
+    public void parseCommand_exit_failure() throws Exception {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ExitCommand.MESSAGE_USAGE), () -> parser.parseCommand("/exit z"));
     }
 
     @Test
@@ -82,19 +92,31 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_help_success() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+    @Test
+    public void parseCommand_help_failure() throws Exception {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("/help z"));
     }
 
     @Test
     public void parseCommand_list_success() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+    @Test
+    public void parseCommand_list_failure() throws Exception {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListCommand.MESSAGE_USAGE), () -> parser.parseCommand("/list z"));
     }
 
     @Test
     public void parseCommand_chart_success() throws Exception {
         assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD) instanceof ChartCommand);
-        assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD + " 3") instanceof ChartCommand);
+    }
+    @Test
+    public void parseCommand_chart_failure() throws Exception {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ChartCommand.MESSAGE_USAGE), () -> parser.parseCommand("/chart z"));
     }
 
     @Test
