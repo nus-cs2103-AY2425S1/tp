@@ -26,7 +26,7 @@ class JsonAdaptedGroup {
      */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("groupName") String groupName,
-            @JsonProperty("members") List<JsonAdaptedPerson> members) {
+                            @JsonProperty("members") List<JsonAdaptedPerson> members) {
         this.groupName = groupName;
         if (members != null) {
             this.members.addAll(members);
