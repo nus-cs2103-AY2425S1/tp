@@ -144,7 +144,7 @@ public class StringUtilTest {
     //---------------- Tests for getPercentageString --------------------------------------
 
     /*
-     * Equivalence Partitions: x = 0, x < 0, x > 0 for both value and total
+     * Equivalence Partitions: x = 0, x < 0, x > 0, x is an int, x is a double for both value and total
      */
 
     @Test
