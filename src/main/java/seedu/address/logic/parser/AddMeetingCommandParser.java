@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddMeetingCommand;
@@ -38,12 +37,12 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
                 PREFIX_SELLER_PHONE, PREFIX_TYPE, PREFIX_POSTALCODE);
-        if (hasExcessToken(args, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
+        if (ParserUtil.hasExcessToken(args, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
                 PREFIX_SELLER_PHONE, PREFIX_TYPE, PREFIX_POSTALCODE)) {
             logger.warning("Excess prefixes.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
         }
-        if (!arePrefixesPresent(argMultimap, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE,
                 PREFIX_SELLER_PHONE, PREFIX_TYPE, PREFIX_POSTALCODE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
@@ -60,24 +59,4 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
 
         return new AddMeetingCommand(meeting);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    /**
-     * Returns true if number of tokens in args string exceeds specified prefixes.
-     */
-    private boolean hasExcessToken(String args, Prefix... prefixes) {
-        String[] splits = args.trim().split("\\s(?=\\S+/)");
-        if (splits[0].equals("/")) {
-            return false;
-        }
-        return splits.length > prefixes.length;
-    }
-
 }
