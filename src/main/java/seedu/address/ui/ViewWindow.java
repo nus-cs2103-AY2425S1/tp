@@ -2,12 +2,14 @@ package seedu.address.ui;
 
 
 import java.util.Comparator;
+import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
 /**
@@ -49,16 +51,26 @@ public class ViewWindow extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (person.getAssignment() != null) {
-            assignment.setText(person.getAssignment().toString());
-        } else {
-            assignment.setText("No assignment available"); // Optional: for better user feedback
-        }
+        setAssignmentText(person.getAssignment());
 
         if (person.getGithub() != null) {
             github.setText(person.getGithub().toString());
         } else {
             github.setText("GitHub username unspecified");
         }
+    }
+
+
+    private void setAssignmentText(Map<String, Assignment> assignmentMap) {
+        if (assignmentMap.isEmpty()) {
+            assignment.setText("No assignment available");
+            return;
+        }
+        StringBuilder sb = new StringBuilder(assignmentMap.size());
+        for (Assignment eachAssignment : assignmentMap.values()) {
+            sb.append(eachAssignment.toString()).append(", ");
+        }
+        sb.setLength(sb.length() - 2); //remove the last ,
+        assignment.setText(sb.toString());
     }
 }
