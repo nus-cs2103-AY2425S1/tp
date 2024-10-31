@@ -23,7 +23,10 @@ public class PersonMeetsCriteriaPredicateTest {
             new Email("john@example.com"),
             new Address("123 Street"),
             Notes.createEmpty(),
-            new HashSet<>(Collections.singleton(new Tag("friend"))));
+            new HashSet<>(Collections.singleton(new Tag("friend"))),
+            Income.createEmpty(),
+            Age.createEmpty()
+    );
 
     @Test
     public void test_phoneCriteriaMatches_returnsTrue() {

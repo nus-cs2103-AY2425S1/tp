@@ -23,7 +23,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -104,8 +106,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Notes updatedNotes = editPersonDescriptor.getNotes().orElse(personToEdit.getNotes());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
+        Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNotes, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNotes, updatedTags, updatedIncome, updatedAge);
     }
 
     @Override
@@ -143,6 +147,8 @@ public class EditCommand extends Command {
         private Address address;
         private Notes notes;
         private Set<Tag> tags;
+        private Income income;
+        private Age age;
 
         public EditPersonDescriptor() {}
 
@@ -157,13 +163,15 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setNotes(toCopy.notes);
             setTags(toCopy.tags);
+            setIncome(toCopy.income);
+            setAge(toCopy.age);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, notes, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, notes, tags, income, age);
         }
 
         public void setName(Name name) {
@@ -197,12 +205,29 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+
         public void setNotes(Notes notes) {
             this.notes = notes;
         }
 
         public Optional<Notes> getNotes() {
             return Optional.ofNullable(notes);
+        }
+
+        public void setIncome(Income income) {
+            this.income = income;
+        }
+
+        public Optional<Income> getIncome() {
+            return Optional.ofNullable(income);
+        }
+
+        public void setAge(Age age) {
+            this.age = age;
+        }
+
+        public Optional<Age> getAge() {
+            return Optional.ofNullable(age);
         }
 
         /**
