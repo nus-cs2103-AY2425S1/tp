@@ -186,7 +186,7 @@ The implementation of the filter command follows the convention of a normal comm
 
 <puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram"/>
 
-Refer to AddSequenceDiagram for how `AddressBookParser` creates FilterCommandParser and FilterCommand.
+Refer to AddSequenceDiagram for how `AddressBookParser` creates `FilterCommandParser` and `FilterCommand`.
 `FilterCommandParser` obtains the specified status value and ensures that it is valid.
 
 A new filter command is then created with a `StatusPredicate`.
@@ -195,7 +195,7 @@ Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the 
 
 
 ### Delete an internship application
-The implementation of the command command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+The implementation of the delete command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 In this case, `AddressBookParser` creates `DeleteCommandParser` to parse user input string.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
@@ -206,6 +206,15 @@ Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the 
 `DeleteCommand` comprises of a targetIndex which is the zero based index number of the internship application to be deleted.
 
 Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
+
+
+### View chart
+The implementation of the chart command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
+<puml src="diagrams/ChartSequenceDiagram.puml" alt="ChartSequenceDiagram" />
+
+`AddressBookParser` creates `ChartCommand`
+Upon execution, `ChartCommand` gets the chart data which is encapsulated in `CommandResult`
 
 ### Update the Status of an Internship Application
 The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the command input, creating a `StatusCommandParser` to interpret the request.
@@ -225,6 +234,7 @@ Upon execution, `StatusCommand`:
 3. **Refreshes the Filtered List**: The previous filter predicate is reapplied using `model::updateFilteredList`.
 
 Finally, `StatusCommand` generates a `CommandResult` with a confirmation message, reflecting the updated status. This is then returned to `LogicManager`, completing the command execution.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -37,7 +37,7 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_add_success() throws Exception {
         InternshipApplication application = new InternshipApplicationBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(InternshipApplicationUtil
                                                 .getAddCommand(application));
@@ -46,26 +46,26 @@ public class AddressBookParserTest {
 
 
     @Test
-    public void parseCommand_clear() throws Exception {
+    public void parseCommand_clear_success() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_delete_success() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP_APPLICATION.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_INTERNSHIP_APPLICATION), command);
     }
 
     @Test
-    public void parseCommand_exit() throws Exception {
+    public void parseCommand_exit_success() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_find_success() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
@@ -73,26 +73,26 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_sort() throws Exception {
+    public void parseCommand_sort_success() throws Exception {
         DateComparator comparator = new DateComparator(true);
         SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + "earliest");
         assertEquals(new SortCommand(comparator), command);
     }
 
     @Test
-    public void parseCommand_help() throws Exception {
+    public void parseCommand_help_success() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_list_success() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
-    public void parseCommand_chart() throws Exception {
+    public void parseCommand_chart_success() throws Exception {
         assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD) instanceof ChartCommand);
         assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD + " 3") instanceof ChartCommand);
     }

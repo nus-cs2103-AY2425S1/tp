@@ -27,4 +27,8 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "PENDING", expectedFilterCommand);
     }
 
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "a", Status.MESSAGE_CONSTRAINTS);
+    }
 }
