@@ -14,6 +14,7 @@ public class Parent extends Person {
 
     /**
      * Constructs a {@code Parent} with the given details.
+     * Parents initialised with this constructor will have isPinned set to false by default
      */
     public Parent(Name name, Phone phone, Email email, Address address, Name childName, Set<Tag> tags) {
         super(name, phone, email, address, tags);
@@ -21,10 +22,11 @@ public class Parent extends Person {
     }
 
     /**
-     * Constructs a {@code Parent} with the given {@code Person} as a base.
+     * Constructs a {@code Parent} with the given details.
      */
-    public Parent(Person person, Name childName) {
-        super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags());
+    public Parent(Name name, Phone phone, Email email, Address address, Name childName, Set<Tag> tags, boolean isPinned,
+            boolean isArchived) {
+        super(name, phone, email, address, tags, isPinned, isArchived);
         this.childName = childName;
     }
 
