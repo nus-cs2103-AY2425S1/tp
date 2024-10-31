@@ -79,6 +79,6 @@ public class Notes implements OptionalField {
 
     @Override
     public String getValueForUI() {
-        return isEmpty() ? "-" : value;
+        return isEmpty() ? "No" : "Yes";
     }
 }
