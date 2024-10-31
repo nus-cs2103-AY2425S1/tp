@@ -22,7 +22,7 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports contacts from a file into the address book."
             + " Only VCF is supported.\n"
-            + "Parameters: " + PREFIX_FILE + "FILETYPE [" + PREFIX_PATH + "PATH]\n"
+            + "Parameters: " + PREFIX_FILE + "FILETYPE " + PREFIX_PATH + "PATH\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_FILE + "vcf "
             + PREFIX_PATH + "./path/to/contacts.vcf";
