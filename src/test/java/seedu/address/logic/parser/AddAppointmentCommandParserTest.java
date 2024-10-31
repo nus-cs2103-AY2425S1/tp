@@ -2,18 +2,18 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.DOCTOR_NAME_DESC_JANE;
+import static seedu.address.logic.commands.CommandTestUtil.DOCTOR_NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DOCTOR_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PATIENT_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.PATIENT_NAME_DESC_JOHN;
+import static seedu.address.logic.commands.CommandTestUtil.PATIENT_NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DOCTOR_NAME_JANE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PATIENT_NAME_JOHN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOCTOR_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PATIENT_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR_NAME;
@@ -45,7 +45,7 @@ public class AddAppointmentCommandParserTest {
         Appointment expectedAppointment = new AppointmentBuilder().build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PATIENT_NAME_DESC_JOHN + DOCTOR_NAME_DESC_JANE
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PATIENT_NAME_DESC_AMY + DOCTOR_NAME_DESC_AMY
                 + DATE_DESC + TIME_DESC, new AddAppointmentCommand(expectedAppointment.getPatient().getName(),
                 expectedAppointment.getDoctor().getName(), expectedAppointment.getDate(),
                 expectedAppointment.getTime()));
@@ -53,7 +53,7 @@ public class AddAppointmentCommandParserTest {
 
     @Test
     public void parse_repeatedArguments_failure() {
-        String validExpectedAppointmentString = PATIENT_NAME_DESC_JOHN + DOCTOR_NAME_DESC_JANE + DATE_DESC + TIME_DESC;
+        String validExpectedAppointmentString = PATIENT_NAME_DESC_AMY + DOCTOR_NAME_DESC_AMY + DATE_DESC + TIME_DESC;
 
         // multiple patient names
         assertParseFailure(parser, APPOINTMENT_2.getPatientName() + validExpectedAppointmentString,
@@ -129,50 +129,50 @@ public class AddAppointmentCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE);
 
         // missing patient name prefix
-        assertParseFailure(parser, VALID_PATIENT_NAME_JOHN + DOCTOR_NAME_DESC_JANE + DATE_DESC + TIME_DESC,
+        assertParseFailure(parser, VALID_PATIENT_NAME_AMY + DOCTOR_NAME_DESC_AMY + DATE_DESC + TIME_DESC,
                 expectedMessage);
 
         // missing doctor name prefix
-        assertParseFailure(parser, PATIENT_NAME_DESC_JOHN + VALID_DOCTOR_NAME_JANE + DATE_DESC + TIME_DESC,
+        assertParseFailure(parser, PATIENT_NAME_DESC_AMY + VALID_DOCTOR_NAME_AMY + DATE_DESC + TIME_DESC,
                 expectedMessage);
 
         // missing date prefix
-        assertParseFailure(parser, PATIENT_NAME_DESC_JOHN + DOCTOR_NAME_DESC_JANE + VALID_DATE + TIME_DESC,
+        assertParseFailure(parser, PATIENT_NAME_DESC_AMY + DOCTOR_NAME_DESC_AMY + VALID_DATE + TIME_DESC,
                 expectedMessage);
 
         // missing time prefix
-        assertParseFailure(parser, PATIENT_NAME_DESC_JOHN + DOCTOR_NAME_DESC_JANE + DATE_DESC + VALID_TIME,
+        assertParseFailure(parser, PATIENT_NAME_DESC_AMY + DOCTOR_NAME_DESC_AMY + DATE_DESC + VALID_TIME,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_PATIENT_NAME_JOHN + VALID_DOCTOR_NAME_JANE + VALID_DATE + VALID_TIME,
+        assertParseFailure(parser, VALID_PATIENT_NAME_AMY + VALID_DOCTOR_NAME_AMY + VALID_DATE + VALID_TIME,
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid patient name
-        assertParseFailure(parser, INVALID_PATIENT_NAME_DESC + DOCTOR_NAME_DESC_JANE + DATE_DESC + TIME_DESC,
+        assertParseFailure(parser, INVALID_PATIENT_NAME_DESC + DOCTOR_NAME_DESC_AMY + DATE_DESC + TIME_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid doctor name
-        assertParseFailure(parser, PATIENT_NAME_DESC_JOHN + INVALID_DOCTOR_NAME_DESC + DATE_DESC + TIME_DESC,
+        assertParseFailure(parser, PATIENT_NAME_DESC_AMY + INVALID_DOCTOR_NAME_DESC + DATE_DESC + TIME_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid date
-        assertParseFailure(parser, PATIENT_NAME_DESC_JOHN + DOCTOR_NAME_DESC_JANE + INVALID_DATE_DESC
+        assertParseFailure(parser, PATIENT_NAME_DESC_AMY + DOCTOR_NAME_DESC_AMY + INVALID_DATE_DESC
                 + TIME_DESC, Date.MESSAGE_CONSTRAINTS);
 
         // invalid time
-        assertParseFailure(parser, PATIENT_NAME_DESC_JOHN + DOCTOR_NAME_DESC_JANE + DATE_DESC
+        assertParseFailure(parser, PATIENT_NAME_DESC_AMY + DOCTOR_NAME_DESC_AMY + DATE_DESC
                 + INVALID_TIME_DESC, Time.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_PATIENT_NAME_DESC + DOCTOR_NAME_DESC_JANE + DATE_DESC
+        assertParseFailure(parser, INVALID_PATIENT_NAME_DESC + DOCTOR_NAME_DESC_AMY + DATE_DESC
                 + INVALID_TIME_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PATIENT_NAME_DESC_JOHN + DOCTOR_NAME_DESC_JANE
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PATIENT_NAME_DESC_AMY + DOCTOR_NAME_DESC_AMY
                 + DATE_DESC + TIME_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
     }

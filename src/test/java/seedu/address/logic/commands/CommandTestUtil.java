@@ -34,8 +34,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PATIENT_NAME_JOHN = "John Doe";
-    public static final String VALID_DOCTOR_NAME_JANE = "Jane Doe";
+    public static final String VALID_PATIENT_NAME_AMY = "Amy Bee";
+    public static final String VALID_DOCTOR_NAME_AMY = "Amy Bee";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -48,15 +48,15 @@ public class CommandTestUtil {
     public static final String VALID_DOB_BOB = "15-06-1984";
     public static final String VALID_GENDER_AMY = "F";
     public static final String VALID_GENDER_BOB = "M";
-    public static final String VALID_DATE = "28-10-2024";
-    public static final String VALID_TIME = "1400";
+    public static final String VALID_DATE = "01-01-2024";
+    public static final String VALID_TIME = "0900";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PATIENT_NAME_DESC_JOHN = " " + PREFIX_PATIENT_NAME + VALID_PATIENT_NAME_JOHN;
-    public static final String DOCTOR_NAME_DESC_JANE = " " + PREFIX_DOCTOR_NAME + VALID_DOCTOR_NAME_JANE;
+    public static final String PATIENT_NAME_DESC_AMY = " " + PREFIX_PATIENT_NAME + VALID_PATIENT_NAME_AMY;
+    public static final String DOCTOR_NAME_DESC_AMY = " " + PREFIX_DOCTOR_NAME + VALID_DOCTOR_NAME_AMY;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
