@@ -65,6 +65,13 @@ public class Index {
         return Index.WILDCARD;
     }
 
+    /**
+     * Returns true if this index is a wildcard index.
+     */
+    public boolean isWildcard() {
+        return this == Index.WILDCARD;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -24,7 +24,7 @@ public class CommandUtil {
             List<Person> currDisplayedList, Index index) throws CommandException {
         assert currDisplayedList != null : "currDisplayedList should not be null";
         List<Person> personList = new ArrayList<>();
-        if (index.equals(Index.getWildcardIndex())) {
+        if (index.isWildcard()) {
             return new ArrayList<>(currDisplayedList);
         } else if (index.getZeroBased() >= currDisplayedList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

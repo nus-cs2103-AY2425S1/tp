@@ -76,6 +76,13 @@ public class IndexTest {
     }
 
     @Test
+    public void isWildcard() {
+        Index wildcardIndex = Index.getWildcardIndex();
+        assertTrue(wildcardIndex.isWildcard());
+        assertFalse(Index.fromZeroBased(0).isWildcard());
+    }
+
+    @Test
     public void toStringMethod() {
         Index index = Index.fromZeroBased(0);
         String expected = Index.class.getCanonicalName() + "{zeroBasedIndex=" + index.getZeroBased() + "}";
