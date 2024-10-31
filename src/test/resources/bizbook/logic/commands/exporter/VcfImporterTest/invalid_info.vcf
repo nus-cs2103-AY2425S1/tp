@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Charlie Dee1
+N:;Charlie Dee1
+TEL:71111111
+EMAIL:charlie@example.com^
+ADR:;;Block 987\, Charlie Street 2@
+CATEGORIES:friend
+NOTE:likes cats@
+END:VCARD
