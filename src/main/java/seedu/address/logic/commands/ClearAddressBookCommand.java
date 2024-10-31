@@ -15,7 +15,6 @@ public class ClearAddressBookCommand extends Command {
     public static final String CONFIRMATION_PROMPT = "Are you sure you want to delete entire address book?\n"
             + "Enter 'y' to confirm, or 'n' to cancel.";
 
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

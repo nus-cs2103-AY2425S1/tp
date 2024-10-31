@@ -25,7 +25,6 @@ public class DeleteYCommand extends Command {
     public static final String MESSAGE_DELETE_ADDRESS_BOOK_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_DELETE_WEDDING_BOOK_SUCCESS = "Wedding book has been cleared!";
     public static final String MESSAGE_NO_PENDING_OPERATION = "No pending delete operation.";
-
     private final Person personToDelete;
     private final Wedding weddingToDelete;
 
