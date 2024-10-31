@@ -38,24 +38,62 @@ public class FindCommandParser implements Parser<FindCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CLASSID, PREFIX_MONTHPAID, PREFIX_NOT_MONTHPAID);
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_CLASSID).isPresent()) {
-            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-            String[] classIdKeywords = argMultimap.getValue(PREFIX_CLASSID).get().split("\\s+");
-            return new FindCommand(new NameAndClassIdContainsKeywordsPredicate(Arrays.asList(nameKeywords),
-                    Arrays.asList(classIdKeywords)));
+            return createNameAndClassIdFindCommand(argMultimap);
         } else if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_CLASSID).isEmpty()) {
-            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return createNameFindCommand(argMultimap);
         } else if (argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_CLASSID).isPresent()) {
-            String[] classIdKeywords = argMultimap.getValue(PREFIX_CLASSID).get().split("\\s+");
-            return new FindCommand(new ClassIdContainsKeywordsPredicate(Arrays.asList(classIdKeywords)));
+            return createClassIdFindCommand(argMultimap);
         } else if (argMultimap.getValue(PREFIX_MONTHPAID).isPresent()) {
-            String[] monthPaidKeywords = argMultimap.getValue(PREFIX_MONTHPAID).get().split("\\s+");
-            return new FindCommand(new MonthPaidContainsKeywordsPredicate(Arrays.asList(monthPaidKeywords)));
+            return createMonthsPaidFindCommand(argMultimap);
         } else if (argMultimap.getValue(PREFIX_NOT_MONTHPAID).isPresent()) {
-            String[] notMonthPaidKeywords = argMultimap.getValue(PREFIX_NOT_MONTHPAID).get().split("\\s+");
-            return new FindCommand(new NotMonthPaidContainsKeywordsPredicate(Arrays.asList(notMonthPaidKeywords)));
+            createNotMonthsPaidFindCommand(argMultimap);
         }
 
         throw new ParseException(FindCommand.NO_SEARCH_FIELDS_PROVIDED);
     }
+
+    private FindCommand createNameAndClassIdFindCommand(ArgumentMultimap argMultimap) throws ParseException {
+
+        String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
+        String[] classIdKeywords = argMultimap.getValue(PREFIX_CLASSID).get().split("\\s+");
+        if (nameKeywords[0].isEmpty() && classIdKeywords[0].isEmpty()) {
+            throw new ParseException(FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        }
+        return new FindCommand(new NameAndClassIdContainsKeywordsPredicate(Arrays.asList(nameKeywords),
+                Arrays.asList(classIdKeywords)));
+    }
+
+    private FindCommand createNameFindCommand(ArgumentMultimap argumentMultimap) throws ParseException {
+        String[] nameKeywords = argumentMultimap.getValue(PREFIX_NAME).get().split("\\s+");
+        if (nameKeywords[0].isEmpty() && nameKeywords[0].isEmpty()) {
+            throw new ParseException(FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        }
+        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+    }
+
+    private FindCommand createClassIdFindCommand(ArgumentMultimap argumentMultimap) throws ParseException {
+        String[] classIdKeywords = argumentMultimap.getValue(PREFIX_CLASSID).get().split("\\s+");
+        if (classIdKeywords[0].isEmpty()) {
+            throw new ParseException(FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        }
+        return new FindCommand(new ClassIdContainsKeywordsPredicate(Arrays.asList(classIdKeywords)));
+    }
+
+    private FindCommand createMonthsPaidFindCommand(ArgumentMultimap argumentMultimap) throws ParseException {
+        String[] monthPaidKeywords = argumentMultimap.getValue(PREFIX_MONTHPAID).get().split("\\s+");
+        if (monthPaidKeywords[0].isEmpty()) {
+            throw new ParseException(FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        }
+        return new FindCommand(new MonthPaidContainsKeywordsPredicate(Arrays.asList(monthPaidKeywords)));
+    }
+
+    private FindCommand createNotMonthsPaidFindCommand(ArgumentMultimap argumentMultimap) throws ParseException {
+        String[] notMonthPaidKeywords = argumentMultimap.getValue(PREFIX_NOT_MONTHPAID).get().split("\\s+");
+        if (notMonthPaidKeywords[0].isEmpty()) {
+            throw new ParseException(FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        }
+        return new FindCommand(new NotMonthPaidContainsKeywordsPredicate(Arrays.asList(notMonthPaidKeywords)));
+    }
+
+
 }
