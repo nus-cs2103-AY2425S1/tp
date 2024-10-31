@@ -488,6 +488,19 @@ testers are expected to do more *exploratory* testing.
    5. Other incorrect edit commands to try: `edit`, `edit x`, `edit x f/200` (where x is larger than the list size)<br>
       Expected: Similar to 2nd test case above.
 
+### Finding a person
+
+1. Finding a person by name
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `find n/Mario`<br>
+      Expected: The person with the name Mario is shown in the list. The person card in the UI is highlighted.
+   2. Test case: `find n/Alice`<br>
+      Expected: The person with the name Alice is shown in the list. The person card in the UI is highlighted.
+   3. Test case: `find n/`
+      Expected: Error message shown in the status bar. No person found.
+
 ### Displaying a pie chart of the number of students in each class
 
 1. Displaying a pie chart
@@ -497,6 +510,14 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `pie`<br>
       Expected: A pie chart is displayed showing the number of students in each class. The pie chart is displayed in a new window.
 
+
+2. Displaying a pie chart error
+
+    1. Prerequisites: Empty list
+    
+    1. Test case: `pie`<br>
+        Expected: Error message shown in the status bar. No pie chart displayed.
+   
 ### Displaying a bar chart of the distribution of students against the number of months paid
 
 1. Displaying a bar chart
@@ -505,6 +526,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `bar`<br>
       Expected: A bar chart is displayed showing the distribution of students against the number of months paid. The bar chart is displayed in a new window.
+   
+2. Displaying a bar chart error
+    
+  1. Prerequisites: Empty list
+        
+  1. Test case: `bar`<br>
+      Expected: Error message shown in the status bar. No bar chart displayed.
 
 ### Deleting a person
 
