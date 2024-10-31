@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
  */
 public class AddressBookBuilder {
 
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
 
     public AddressBookBuilder() {
         addressBook = new AddressBook();

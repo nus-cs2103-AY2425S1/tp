@@ -17,7 +17,7 @@ import seedu.address.model.skill.Skill;
  */
 public class EditPersonDescriptorBuilder {
 
-    private final EditPersonDescriptor descriptor;
+    private EditPersonDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
         descriptor = new EditPersonDescriptor();
