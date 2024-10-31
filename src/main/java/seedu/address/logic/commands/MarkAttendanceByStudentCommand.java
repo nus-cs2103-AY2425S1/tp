@@ -38,7 +38,7 @@ public class MarkAttendanceByStudentCommand extends Command {
             + PREFIX_TUTORIAL + "Math";
 
     public static final String MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS =
-            "Marked attendance of %1$s student for %2$s tutorial on %3$s";
+            "Marked attendance of %1$s student for %2$s tutorial for %3$s";
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
             "The student does not take %1$s tutorial";
     public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE =

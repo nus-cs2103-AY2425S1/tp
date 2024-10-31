@@ -27,23 +27,30 @@ public class MarkAttendanceByTutorialCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of the all the students in the specified tutorial.\n"
             + "Parameters: "
-            + PREFIX_ATTENDANCE + "ATTENDANCE\n"
+            + PREFIX_ATTENDANCE + "ATTENDANCE "
             + PREFIX_TUTORIAL + "TUTORIAL\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ATTENDANCE + "20/10/2024"
+            + PREFIX_ATTENDANCE + "20/10/2024 "
             + PREFIX_TUTORIAL + "Math";
 
-    public static final String MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS =
+    public static final String MESSAGE_MARK_TUTORIAL_ATTENDANCE_SUCCESS =
             "Marked attendance of all students in %1$s tutorial for %2$s";
+    public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE_ALL_STUDENTS =
+            "All students in %1$s tutorial has attendance marked for the corresponding week of date %2$s";
+    public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE_SOME_STUDENTS = """
+            Some students in %1$s tutorial has attendance marked for the corresponding week of date %2$s
+            Marked attendance for the following students: %3$s
+            Students with duplicate weekly attendance: %4$s
+            """;
     public static final String MESSAGE_EMPTY_TUTORIAL =
-            "No tutorial with name %1$s or no students are enrolled in the tutorial.";
+            "No students are enrolled in tutorial %1$s.";
 
     private final Tutorial tutorial;
     private final Attendance attendance;
 
     /**
-     * @param tutorial Tutorial to mark the attendance of all students
-     * @param attendance Attendance of the students
+     * @param tutorial Tutorial to mark the attendance of all students.
+     * @param attendance Attendance of the students.
      */
     public MarkAttendanceByTutorialCommand(Tutorial tutorial, Attendance attendance) {
         requireAllNonNull(tutorial, attendance);
@@ -59,16 +66,23 @@ public class MarkAttendanceByTutorialCommand extends Command {
         }
 
         List<Participation> participationList = model.getParticipationList()
-                .stream()
-                .filter(participation -> participation.getTutorial().equals(tutorial))
-                .toList();
+                .filtered(participation -> participation.getTutorial().equals(tutorial));
 
         if (participationList.isEmpty()) {
             throw new CommandException(
                     String.format(MESSAGE_EMPTY_TUTORIAL, tutorial.getSubject()));
         }
 
+        StringBuilder markedStudents = new StringBuilder();
+        StringBuilder duplicateAttendanceStudents = new StringBuilder();
+        int duplicateStudents = 0;
+
         for (Participation currentParticipation : participationList) {
+            if (containsMarkedAttendance(currentParticipation.getAttendanceList())) {
+                duplicateAttendanceStudents.append(currentParticipation.getStudentName() + " ");
+                duplicateStudents++;
+                continue;
+            }
             List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
             LocalDate attendanceDate = LocalDate.parse(attendance.toString(), Attendance.VALID_DATE_FORMAT);
             updatedAttendance.add(new Attendance(attendanceDate));
@@ -77,9 +91,21 @@ public class MarkAttendanceByTutorialCommand extends Command {
                     currentParticipation.getTutorial(), updatedAttendance);
 
             model.setParticipation(currentParticipation, updatedParticipation);
+
+            markedStudents.append(currentParticipation.getStudentName());
         }
 
-        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS,
+        if (duplicateStudents == participationList.size()) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE_ALL_STUDENTS,
+                    tutorial.getSubject(), attendance));
+        }
+
+        if (duplicateStudents != 0) {
+            return new CommandResult(String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE_SOME_STUDENTS,
+                    tutorial.getSubject(), attendance, markedStudents, duplicateAttendanceStudents));
+        }
+
+        return new CommandResult(String.format(MESSAGE_MARK_TUTORIAL_ATTENDANCE_SUCCESS,
                 tutorial.getSubject(), attendance));
     }
 
@@ -105,5 +131,21 @@ public class MarkAttendanceByTutorialCommand extends Command {
                 .add("tutorial", tutorial)
                 .add("attendance", attendance)
                 .toString();
+    }
+
+    /**
+     * Checks if the list of attendance contains an {@code Attendance} with a date that falls in the same
+     * week and year as the specified {@code Attendance} to mark.
+     *
+     * @param attendanceList List of attendance to compare against.
+     * @return true if an attendance within the list exists in the same week and year; false otherwise.
+     */
+    private boolean containsMarkedAttendance(List<Attendance> attendanceList) {
+        for (Attendance attendance : attendanceList) {
+            if (attendance.isSameWeek(this.attendance)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
