@@ -47,7 +47,7 @@ public class EditOrderCommand extends Command {
     public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Order: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
-            + "This customer already has an order for this item, "
+            + "This customer already has a %1$s order with the same details, "
             + "verify if this is a mistake\n";
 
     private final Index index;
@@ -84,7 +84,8 @@ public class EditOrderCommand extends Command {
         OrderList orderList = model.getSelectedOrderList();
         String feedbackToUser = !orderToEdit.isSameOrder(editedOrder)
                 && orderList.contains(editedOrder)
-                ? MESSAGE_DUPLICATE_ORDER_WARNING
+                ? String.format(MESSAGE_DUPLICATE_ORDER_WARNING,
+                editedOrder.getStatus().toString().toLowerCase())
                 : "";
         feedbackToUser += editedOrder.hasDateElapsed()
                 ? MESSAGE_OUTDATED_WARNING
