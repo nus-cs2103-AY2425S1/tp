@@ -102,6 +102,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void clearEventsWithPerson(Person target) {
+        addressBook.clearEventsWithPerson(target);
+    }
+
+    @Override
+    public void clearPersonFromContacts(Person target) {
+        addressBook.clearPersonFromContacts(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

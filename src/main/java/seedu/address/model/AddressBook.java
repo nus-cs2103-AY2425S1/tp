@@ -108,6 +108,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Clears all events with the given person.
+     * The person must exist in the address book.
+     */
+    public void clearEventsWithPerson(Person target) {
+        events.clearEventsWithPerson(target);
+    }
+
+    /**
+     * Removes the given person from contacts of all events.
+     * The person must exist in the address book.
+     */
+    public void clearPersonFromContacts(Person target) {
+        events.clearPersonFromContacts(target);
+    }
+
     public Person findPerson(String personName) {
         return persons.findPerson(personName);
     }

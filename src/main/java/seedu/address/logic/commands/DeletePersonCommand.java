@@ -43,6 +43,8 @@ public class DeletePersonCommand extends DeleteCommand {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.clearEventsWithPerson(personToDelete);
+        model.clearPersonFromContacts(personToDelete);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)),
                 false, false, CommandTabChange.PERSON, CommandDetailChange.NONE);

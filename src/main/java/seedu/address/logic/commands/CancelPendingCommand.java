@@ -5,14 +5,13 @@ import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
- * Requests confirmation before clear operation.
+ * Cancels the pending command.
  */
-public class ClearConfirmationCommand extends Command {
-
-    public static final String CONFIRMATION_MESSAGE = "Are you sure you want to clear all data? (Y/N)";
+public class CancelPendingCommand extends Command {
+    public static final String MESSAGE_SUCCESS = "Pending command has been cancelled.";
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(CONFIRMATION_MESSAGE, false, false,
+        return new CommandResult(MESSAGE_SUCCESS, false, false,
                 CommandTabChange.NONE, CommandDetailChange.NONE);
     }
 }
