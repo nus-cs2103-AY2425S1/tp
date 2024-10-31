@@ -18,3 +18,7 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.grey-image {
+    -fx-opacity: 0.8;
+}

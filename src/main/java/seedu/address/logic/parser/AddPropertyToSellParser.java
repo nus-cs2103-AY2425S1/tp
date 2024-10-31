@@ -41,17 +41,18 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
                 ArgumentTokenizer.tokenize(args, PREFIX_HOUSING_TYPE, PREFIX_SELLING_PRICE,
                         PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER, PREFIX_TAG);
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_HOUSING_TYPE, PREFIX_SELLING_PRICE,
+                PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddPropertyToSellCommand.MESSAGE_USAGE));
+        }
+
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-        if (!arePrefixesPresent(argMultimap, PREFIX_HOUSING_TYPE, PREFIX_SELLING_PRICE,
-                PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddPropertyToSellCommand.MESSAGE_USAGE));
         }
 
         // Create a new Property object here and pass it to AddPropertyToSellCommand(Property property);
@@ -94,12 +95,12 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
     private static Property getSpecificPropertyObject(HousingType housingType, Price sellingPrice,
                                                       PostalCode postalCode, UnitNumber unitNumber, Set<Tag> tagList) {
         return switch (housingType) {
-        case CONDO -> new Condo(postalCode, unitNumber, sellingPrice, tagList);
-        case HDB -> new Hdb(postalCode, unitNumber, sellingPrice, tagList);
-        case APARTMENT -> new Apartment(postalCode, unitNumber, sellingPrice, tagList);
-        case BTO -> new Bto(postalCode, unitNumber, sellingPrice, tagList);
-        case OTHERS -> new OtherProperty(postalCode, unitNumber, sellingPrice, tagList);
-        default -> null;
+            case CONDO -> new Condo(postalCode, unitNumber, sellingPrice, tagList);
+            case HDB -> new Hdb(postalCode, unitNumber, sellingPrice, tagList);
+            case APARTMENT -> new Apartment(postalCode, unitNumber, sellingPrice, tagList);
+            case BTO -> new Bto(postalCode, unitNumber, sellingPrice, tagList);
+            case OTHERS -> new OtherProperty(postalCode, unitNumber, sellingPrice, tagList);
+            default -> null;
         };
     }
 }
