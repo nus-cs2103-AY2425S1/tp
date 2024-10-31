@@ -10,15 +10,15 @@ import bizbook.model.ReadOnlyAddressBook;
  * Represents a class that can export an address book to a particular format
  */
 public interface Exporter {
-    public static final String MESSAGE_EMPTY_ADDRESS_BOOK = "Address book is empty. Consider adding a person first.";
+    String MESSAGE_EMPTY_ADDRESS_BOOK = "Address book is empty. Consider adding a person first.";
 
     /**
      * Exports the address book
      */
-    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException, InvalidAddressBookException;
+    void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException, InvalidAddressBookException;
 
     /**
      * Returns the path that the addressbook will be exported to
      */
-    public Path getExportPath();
+    Path getExportPath();
 }
