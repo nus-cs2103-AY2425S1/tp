@@ -167,6 +167,14 @@ public class ModelManager implements Model {
     public void pinPerson(Person target) {
         requireNonNull(target);
         target.pin();
+        addressBook.sortPersonList();
+    }
+
+    @Override
+    public void unpinPerson(Person target) {
+        requireNonNull(target);
+        target.unpin();
+        addressBook.sortPersonList();
     }
 
     @Override

@@ -68,8 +68,8 @@ public class PinContactCommand extends Command {
             return false;
         }
 
-        PinContactCommand otherFindTagCommand = (PinContactCommand) other;
-        return targetIndex.equals(otherFindTagCommand.targetIndex);
+        PinContactCommand otherPinContactCommand = (PinContactCommand) other;
+        return targetIndex.equals(otherPinContactCommand.targetIndex);
     }
 
     @Override
