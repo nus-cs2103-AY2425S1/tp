@@ -1,8 +1,6 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,13 +16,6 @@ import seedu.address.model.patient.Appt;
  */
 public class JsonAdaptedAppt {
     private static final Logger logger = Logger.getLogger(JsonAdaptedAppt.class.getName());
-    public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("yyyy-MM-dd")
-            .optionalStart()
-            .appendLiteral(' ')
-            .optionalEnd()
-            .appendPattern("HH:mm")
-            .toFormatter();
 
     private final String dateTime;
     private final String healthService;
@@ -47,7 +38,7 @@ public class JsonAdaptedAppt {
      * @throws IllegalValueException
      */
     public JsonAdaptedAppt(Appt source) {
-        this.dateTime = source.getDateTime().format(FORMATTER).toString();
+        this.dateTime = source.getDateTime().format(Appt.FORMATTER).toString();
         this.healthService = source.getHealthService().toString();
     }
 
@@ -68,11 +59,11 @@ public class JsonAdaptedAppt {
             logger.severe("Invalid date and time.");
             throw new IllegalValueException(Appt.DATETIME_MESSAGE_CONSTRAINTS);
         }
-        
+
         if (!HealthService.isValidHealthserviceName(healthService)) {
             logger.severe("Invalid health service.");
             throw new IllegalValueException(HealthService.MESSAGE_CONSTRAINTS);
         }
-        return new Appt(LocalDateTime.parse(dateTime, FORMATTER), new HealthService(healthService));
+        return new Appt(LocalDateTime.parse(dateTime, Appt.FORMATTER), new HealthService(healthService));
     }
 }

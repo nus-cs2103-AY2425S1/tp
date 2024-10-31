@@ -6,12 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.DeleteApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Nric;
 
 /**
@@ -19,13 +18,6 @@ import seedu.address.model.patient.Nric;
  * @throws ParseException
  */
 public class DeleteApptCommandParser implements Parser<DeleteApptCommand> {
-    public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("yyyy-MM-dd")
-            .optionalStart()
-            .appendLiteral(' ')
-            .optionalEnd()
-            .appendPattern("HH:mm")
-            .toFormatter();
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteApptCommand
@@ -43,7 +35,7 @@ public class DeleteApptCommandParser implements Parser<DeleteApptCommand> {
         }
 
         LocalDateTime apptDateTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_DATETIME).get(),
-                FORMATTER);
+                Appt.FORMATTER);
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
 
         return new DeleteApptCommand(apptDateTime, nric);

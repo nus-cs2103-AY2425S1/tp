@@ -6,8 +6,6 @@ import static seedu.address.model.appointmentdatefilter.AppointmentDateFilter.is
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,13 +36,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("yyyy-MM-dd")
-            .optionalStart()
-            .appendLiteral(' ')
-            .optionalEnd()
-            .appendPattern("HH:mm")
-            .toFormatter();
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -357,7 +348,7 @@ public class ParserUtil {
         if (!Appt.isValidDateTime(dateTime)) {
             throw new ParseException(Appt.DATETIME_MESSAGE_CONSTRAINTS);
         }
-        return LocalDateTime.parse(trimmedDateTime, FORMATTER);
+        return LocalDateTime.parse(trimmedDateTime, Appt.FORMATTER);
     }
 
     /**
