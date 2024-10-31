@@ -95,7 +95,7 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel,
                                             CommandResult expectedCommandResult, Model expectedModel) {
         try {
-            CommandResult result = command.execute(actualModel, new EventManager());
+            CommandResult result = command.execute(actualModel, actualModel.getEventManager());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
