@@ -70,7 +70,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             return FindCommandType.NAME;
         } else if (!isNamePresent && isClassIdPresent && !isMonthPaidPresent && !isNotMonthPaidPresent) {
             return FindCommandType.CLASSID;
-        } else if (isNotMonthPaidPresent && !isNamePresent && !isClassIdPresent && !isMonthPaidPresent) {
+        } else if (!isNamePresent && !isClassIdPresent && !isMonthPaidPresent && isNotMonthPaidPresent) {
             return FindCommandType.NOTMONTHPAID;
         } else {
             return FindCommandType.NONE;
