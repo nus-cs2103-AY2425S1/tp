@@ -24,7 +24,7 @@ import seedu.address.model.consultation.Consultation;
 public class DeleteConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteconsult";
-    public static final CommandType COMMAND_TYPE = CommandType.DELETECONSULT;
+    public static final CommandType COMMAND_TYPE = CommandType.CONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the consultation identified by the index number used in the displayed consultation list.\n"

@@ -190,7 +190,7 @@ public class EditCommandTest {
     @Test
     public void getCommandTypeMethod() {
         final EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, DESC_AMY);
-        assertEquals(editCommand.getCommandType(), CommandType.EDITSTUDENT);
+        assertEquals(editCommand.getCommandType(), CommandType.STUDENT);
     }
 
 }

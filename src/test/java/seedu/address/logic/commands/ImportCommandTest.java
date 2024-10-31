@@ -80,7 +80,7 @@ public class ImportCommandTest {
     @Test
     public void getCommandTypeMethod() {
         ImportCommand importCommand = new ImportCommand("file1.csv");
-        assertEquals(CommandType.IMPORTSTUDENT, importCommand.getCommandType());
+        assertEquals(CommandType.STUDENT, importCommand.getCommandType());
     }
 
     @Test

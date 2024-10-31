@@ -25,7 +25,7 @@ public class ExportConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "exportconsult";
     public static final String FORCE_FLAG = "-f";
-    public static final CommandType COMMAND_TYPE = CommandType.EXPORTCONSULT;
+    public static final CommandType COMMAND_TYPE = CommandType.CONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the current list of consultations to a CSV file. "

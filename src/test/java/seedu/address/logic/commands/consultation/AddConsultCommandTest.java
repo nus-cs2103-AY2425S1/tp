@@ -75,7 +75,7 @@ public class AddConsultCommandTest {
     public void getCommandTypeMethod() {
         Consultation consult = new ConsultationBuilder().build();
         AddConsultCommand addConsultCommand = new AddConsultCommand(consult);
-        assertEquals(addConsultCommand.getCommandType(), CommandType.ADDCONSULT);
+        assertEquals(addConsultCommand.getCommandType(), CommandType.CONSULT);
     }
 
     /**
