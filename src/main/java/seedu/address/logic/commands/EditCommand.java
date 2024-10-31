@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -15,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.AllergyMap;
 import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
@@ -104,11 +104,11 @@ public class EditCommand extends Command {
         Note updatedNote = editPatientDescriptor.getNote().orElse(patientToEdit.getNote());
         Name updatedNokName = editPatientDescriptor.getNokName().orElse(patientToEdit.getNokName());
         Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
-        ApptList updatedAppt = patientToEdit.getAppointments();
+        ApptList updatedAppt = new ApptList(patientToEdit.getAppts()); // Improve abstraction
 
         // I changed the updatedAllergy, you will need to change it later @yuanch
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
-                updatedEmail, updatedAddress, new HashSet<>(), updatedBloodType, updatedHealthRisk,
+                updatedEmail, updatedAddress, new AllergyMap(), updatedBloodType, updatedHealthRisk,
                 updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, updatedAppt);
     }
 

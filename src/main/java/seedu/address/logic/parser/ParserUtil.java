@@ -18,6 +18,7 @@ import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.AllergyMap;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
@@ -228,13 +229,13 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> allergy} into a {@code Set<Allergy>}.
      */
-    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
+    public static AllergyMap parseAllergies(Collection<String> allergies) throws ParseException {
         requireNonNull(allergies);
-        final Set<Allergy> allergySet = new HashSet<>();
+        final AllergyMap allergyMap = new AllergyMap();
         for (String allergy : allergies) {
-            allergySet.add(parseAllergies(allergy));
+            allergyMap.addAllergy(parseAllergies(allergy));
         }
-        return allergySet;
+        return allergyMap;
     }
 
     /**

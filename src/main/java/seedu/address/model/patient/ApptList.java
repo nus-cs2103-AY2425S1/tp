@@ -68,5 +68,4 @@ public class ApptList {
         }
         return sb.toString();
     }
-
 }
