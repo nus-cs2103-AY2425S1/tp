@@ -26,18 +26,25 @@ public class UnfavouriteCommandTest {
     @Test
     public void execute_unfavouriteSuccessful() {
         Restaurant restaurantToUnfavourite = model.getFilteredRestaurantList()
-                .get(INDEX_SECOND_RESTAURANT.getZeroBased());
+                .get(INDEX_FIRST_RESTAURANT.getZeroBased());
 
-        restaurantToUnfavourite.setFavourite(true);
+        model.favouriteRestaurant(restaurantToUnfavourite);
 
-        UnfavouriteCommand unfavouriteCommand = new UnfavouriteCommand(INDEX_SECOND_RESTAURANT);
+        UnfavouriteCommand unfavouriteCommand = new UnfavouriteCommand(INDEX_FIRST_RESTAURANT);
+
+        Restaurant expectedRestaurantToUnfavourite = new Restaurant(
+                restaurantToUnfavourite.getName(), restaurantToUnfavourite.getPhone(),
+                restaurantToUnfavourite.getEmail(), restaurantToUnfavourite.getAddress(),
+                restaurantToUnfavourite.getRating(), restaurantToUnfavourite.getTags(),
+                restaurantToUnfavourite.isFavourite()
+        );
 
         String expectedMessage = String.format(UnfavouriteCommand.MESSAGE_SUCCESS,
                 Messages.format(restaurantToUnfavourite));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.favouriteRestaurant(restaurantToUnfavourite);
-        expectedModel.unfavouriteRestaurant(restaurantToUnfavourite);
+        expectedModel.favouriteRestaurant(expectedRestaurantToUnfavourite);
+        expectedModel.unfavouriteRestaurant(expectedRestaurantToUnfavourite);
 
         // Assert that the command executes successfully
         assertCommandSuccess(unfavouriteCommand, model, expectedMessage, expectedModel);
@@ -55,6 +62,18 @@ public class UnfavouriteCommandTest {
         UnfavouriteCommand unfavouriteCommand = new UnfavouriteCommand(outOfBoundIndex);
 
         assertCommandFailure(unfavouriteCommand, model, Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_restaurantNotFavourited_throwsCommandException() {
+        Restaurant restaurantToUnfavourite = model.getFilteredRestaurantList()
+                .get(INDEX_FIRST_RESTAURANT.getZeroBased());
+
+        assertFalse(restaurantToUnfavourite.isFavourite());
+
+        UnfavouriteCommand unfavouriteCommand = new UnfavouriteCommand(INDEX_FIRST_RESTAURANT);
+
+        assertCommandFailure(unfavouriteCommand, model, UnfavouriteCommand.MESSAGE_ALREADY_UNFAVOURITE);
     }
 
     @Test

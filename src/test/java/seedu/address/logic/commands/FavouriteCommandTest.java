@@ -25,14 +25,21 @@ public class FavouriteCommandTest {
     @Test
     public void execute_favouriteSuccessful() {
         Restaurant restaurantToFavourite = model.getFilteredRestaurantList()
-                .get(INDEX_SECOND_RESTAURANT.getZeroBased());
-        FavouriteCommand favouriteCommand = new FavouriteCommand(INDEX_SECOND_RESTAURANT);
+                .get(INDEX_FIRST_RESTAURANT.getZeroBased());
+
+        FavouriteCommand favouriteCommand = new FavouriteCommand(INDEX_FIRST_RESTAURANT);
+
+        Restaurant expectedRestaurantToFavourite = new Restaurant(
+                restaurantToFavourite.getName(), restaurantToFavourite.getPhone(), restaurantToFavourite.getEmail(),
+                restaurantToFavourite.getAddress(), restaurantToFavourite.getRating(), restaurantToFavourite.getTags(),
+                restaurantToFavourite.isFavourite()
+        );
 
         String expectedMessage = String.format(FavouriteCommand.MESSAGE_SUCCESS,
                 Messages.format(restaurantToFavourite));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.favouriteRestaurant(restaurantToFavourite);
+        expectedModel.favouriteRestaurant(expectedRestaurantToFavourite);
 
         // Assert that the command executes successfully
         assertCommandSuccess(favouriteCommand, model, expectedMessage, expectedModel);
@@ -50,6 +57,19 @@ public class FavouriteCommandTest {
         FavouriteCommand favouriteCommand = new FavouriteCommand(outOfBoundIndex);
 
         assertCommandFailure(favouriteCommand, model, Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_restaurantAlreadyFavourited_throwsCommandException() {
+        Restaurant restaurantToFavourite = model.getFilteredRestaurantList()
+                .get(INDEX_FIRST_RESTAURANT.getZeroBased());
+        model.favouriteRestaurant(restaurantToFavourite);
+
+        assertTrue(restaurantToFavourite.isFavourite());
+
+        FavouriteCommand favouriteCommand = new FavouriteCommand(INDEX_FIRST_RESTAURANT);
+
+        assertCommandFailure(favouriteCommand, model, FavouriteCommand.MESSAGE_ALREADY_FAVOURITE);
     }
 
     @Test
