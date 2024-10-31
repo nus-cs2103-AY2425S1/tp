@@ -22,7 +22,7 @@ public class SortCommand extends Command {
             + "Executing the 'list' function after will show the sorted full list.\n"
             + "When sorting by schedules:\n"
             + "1. Contacts with no schedules will appear at the end of the list.\n"
-            + "2. Contacts with a date but no time as schedule will be sorted under the assumption that their time is 00:00.\n"
+            + "2. Contacts that have a date but no time scheduled will be sorted as if their time is set to 00:00.\n"
             + "Parameters: "
             + PREFIX_NAME + "[ORDER] "
             + PREFIX_SCHEDULE + "[ORDER]\n "
