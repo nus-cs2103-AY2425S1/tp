@@ -31,8 +31,8 @@ public class Messages {
     public static final String MESSAGE_NO_EXECUTABLE_COMMAND = "There is no command to execute";
 
     public static final String MESSAGE_UNCOMFIRMED_COMMAND =
-            "Cannot execute other command as the previous command has not been confirmed. " +
-                    "Please press y to confirm or n to cancel.";
+            "Cannot execute other command as the previous command has not been confirmed. "
+                    + "Please press y to confirm or n to cancel.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

@@ -2,7 +2,6 @@ package careconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import careconnect.logic.Messages;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.Model;
 
