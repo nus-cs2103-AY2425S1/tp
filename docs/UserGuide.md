@@ -256,11 +256,11 @@ Format: `clearTxn`
 
 Edits an existing transaction in the transaction book.
 
-Format: `editTxn [INDEX] [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [cat/CATEGORY]...`
+Format: `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [cat/CATEGORY]...`
 
 * Edits the transaction at the specified `INDEX`. The index refers to the index number shown in the displayed person
   list.
-  The index **must be a positive integer** 1, 2, 3, …​
+  The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing categories, the existing categories of the person will be removed i.e adding of categories is not
@@ -376,10 +376,10 @@ the data of your previous AddressBook home folder.
 
 ## Command Summary for Transactions
 
-| Action     | Format, Examples                                                                                                                                                                                         |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `addTxn p/PHONE_NUMBER amt/AMOUNT desc/DESCRIPTION [date/DATE]` <br> e.g., `addTxn p/99999999 amt/-9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/TEST`           |
-| **Edit**   | `editTxn INDEX p/PHONE_NUMBER amt/AMOUNT desc/DESCRIPTION [date/DATE]` <br> e.g., `editTxn 1 p/99999999 amt/-9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/TEST` |
-| **List**   | `listTxn`                                                                                                                                                                                                |
-| **Filter** | `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]` <br> e.g. `filterTxn p/99999999`                                                                                                |
-| **Clear**  | `clearTxn`                                                                                                                                                                                               |
+| Action     | Format, Examples                                                                                                                                                                                                              |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `addTxn p/PHONE_NUMBER amt/AMOUNT desc/DESCRIPTION [date/DATE]` <br> e.g., `addTxn p/99999999 amt/-9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/TEST`                                |
+| **Edit**   | `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY]` <br> e.g., `editTxn 1 p/99999999 amt/-9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/TEST` |
+| **List**   | `listTxn`                                                                                                                                                                                                                     |
+| **Filter** | `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]` <br> e.g. `filterTxn p/99999999`                                                                                                                     |
+| **Clear**  | `clearTxn`                                                                                                                                                                                                                    |
