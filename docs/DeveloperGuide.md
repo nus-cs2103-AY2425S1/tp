@@ -625,7 +625,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to import the contact list.
-2. KonTActs requests for the CSV file.
+2. KonTActs requests for the file path.
 3. User gives the desired file (by its path).
 4. KonTActs import the contact list from the specified file path and shows successful import.
 
