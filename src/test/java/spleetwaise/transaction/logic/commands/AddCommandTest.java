@@ -66,18 +66,6 @@ public class AddCommandTest {
         );
         assertTrue(CommonModel.getInstance().hasTransaction(testTxn));
     }
-    /*
-    @Test
-    public void execute_invalidPersonIndex_throwsCommandException() {
-        Index invalidIndex = Index.fromZeroBased(TypicalPersons.getTypicalAddressBook().getPersonList().size());
-        AddCommand cmd = new AddCommand(invalidIndex, testAmount,
-                testDescription, testDate, testCategories
-        );
-
-        Assert.assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                cmd::execute
-        );
-    }*/
 
     @Test
     public void equals_sameTransaction_returnsTrue() {
@@ -109,8 +97,10 @@ public class AddCommandTest {
     @Test
     public void equals_null_returnsFalse() {
         AddCommand cmd1 = new AddCommand(testTxn);
+        ClearCommand cmd2 = new ClearCommand();
 
         assertNotEquals(null, cmd1);
+        assertNotEquals(cmd2, cmd1);
     }
 
     @Test
