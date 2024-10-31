@@ -814,6 +814,55 @@ Listing patients with specified Priority
    Expected: No patient is listed. An error message is shown with details of the error.
 
 3. Other incorrect listPrio command to try: `listPrio x` (where x is neither `NONE`, `LOW`, `MEDIUM` OR `HIGH`)
+
    Expected: Similar to previous.
+
+[Back to Table of Contents](#table-of-contents)
+
+### Adding an appointment to a patient
+
+Adding an appointment to an existing patient
+
+1. Prerequisites: List all patients using the `list` command. Ensure there is at least one patient in the list.
+
+2. Test case: `addAppt Physio i/S1234567A @t/1100-1230 @d/2024-05-19`
+
+   Expected: The appointment `Physio` is added to the existing patient with NRIC `S1234567A`. A success message is shown summarising which appointment has been added to which patient. The new appointment details can be seen on both under the target patient in the patient list, and on the right in the appointment list.
+
+3. Test case: `addAppt Physio i/S9999999A @t/1100-1230 @d/2024-05-19`
+
+   Expected: No appointment is added. An error message is shown, indicating that the specified patient does not exist.
+
+4. Test case: `addAppt i/S1234567A @t/1100-1230 @d/2024-05-19`
+
+   Expected: Similar to previous, with error message related to the blank appointment name being invalid.
+
+5. Test case: Enter `addAppt Physio i/S1234567A @t/1100-1230 @d/2024-05-19` twice. 
+
+   Expected: First time successful, similar to (1), but subsequent tries similar to previous with error message related to the clashing appointment timings.
+
+6. Other incorrect commands to try: `addAppt`, `addAppt Physio`, `addAppt i/S1234567A`, `addAppt @t/1100-1230`, `addAppt @d/2024-05-19`, `addAppt Physio @t/1100-1230 @d/2024-05-19`, `addAppt @t/1100-1230 @d/2024-05-19`, `addAppt Physio i/S1234567A @d/2024-05-19`, `addAppt Physio i/S1234567A @t/1100-1230`, `addAppt W i/X @t/Y @d/Z` where `W`, `X`, `Y` and `Z` are invalid parameter values.
+
+    Expected: Similar to previous.
+
+[Back to Table of Contents](#table-of-contents)
+
+### Deleting an appointment from a patient
+
+Deleting an existing appointment from a patient
+
+1. Prerequisites: List all patients using the `list` command. Ensure the patient has an appointment for `2024-05-19` during `1100-1230` already added.
+
+2. Test case: `delAppt i/S1234567A @t/1100-1230 @d/2024-05-19`
+
+   Expected: The appointment at `2024-05-19` during `1100-1230` is removed from the patient with NRIC `S1234567A`. A success message is shown summarising which appointment has been removed from which patient. The appointment no longer shows up under the target patient in the patient list, as well as in the appointment list. 
+
+3. Test case: `delAppt i/S1234567A @t/0000-1234 @d/2024-05-19`
+
+   Expected: No appointment is deleted. An error message is shown, indicating that the specified appointment does not exist for the patient.
+
+4. Other incorrect commands to try: `delAllergy`, `delAllergy i/S1234567A`, `delAppt i/S1234567A @t/1100-1230`, `delAppt i/S1234567A @d/2024-05-19`, , `delAppt @t/0000-1234 @d/2024-05-19`
+
+   Expected: An error message is shown, indicating that the command format is incorrect.
 
 [Back to Table of Contents](#table-of-contents)
