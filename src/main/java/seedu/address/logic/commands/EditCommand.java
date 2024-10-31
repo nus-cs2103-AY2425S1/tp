@@ -124,7 +124,7 @@ public class EditCommand extends Command {
         requireNonNull(editDeliveryDescriptor);
 
         this.index = index;
-        this.editDeliveryDescriptor = editDeliveryDescriptor;
+        this.editDeliveryDescriptor = new EditDeliveryDescriptor(editDeliveryDescriptor);
         this.editPersonDescriptor = null;
     }
 
@@ -148,8 +148,9 @@ public class EditCommand extends Command {
     private CommandResult editPerson(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (index.getZeroBased() >= lastShownList.size()
+                || index.getZeroBased() >= model.getFirstArchivedIndex().getZeroBased()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
