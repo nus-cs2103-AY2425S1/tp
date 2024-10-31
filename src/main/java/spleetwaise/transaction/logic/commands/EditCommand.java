@@ -112,7 +112,7 @@ public class EditCommand extends Command {
         }
 
         model.setTransaction(txnToEdit, editedTxn);
-        model.updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
+        model.updateFilteredTransactionList();
         return new CommandResult(String.format(MESSAGE_EDIT_TXN_SUCCESS, editedTxn));
     }
 

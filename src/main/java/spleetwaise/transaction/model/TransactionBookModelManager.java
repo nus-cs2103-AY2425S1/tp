@@ -17,6 +17,7 @@ import spleetwaise.transaction.model.transaction.Transaction;
 public class TransactionBookModelManager implements TransactionBookModel {
 
     private static final Logger logger = LogsCenter.getLogger(TransactionBookModelManager.class);
+    private Predicate<Transaction> currPredicate = TransactionBookModel.PREDICATE_SHOW_ALL_TXNS;
 
     private final TransactionBook transactionBook;
     private final FilteredList<Transaction> filteredTransactions;
@@ -63,7 +64,7 @@ public class TransactionBookModelManager implements TransactionBookModel {
     @Override
     public void addTransaction(Transaction transaction) {
         transactionBook.addTransaction(transaction);
-        updateFilteredTransactionList(PREDICATE_SHOW_ALL_TXNS);
+        updateFilteredTransactionList();
     }
 
     @Override
@@ -78,7 +79,13 @@ public class TransactionBookModelManager implements TransactionBookModel {
     }
 
     @Override
+    public void updateFilteredTransactionList() {
+        filteredTransactions.setPredicate(currPredicate);
+    }
+
+    @Override
     public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
+        currPredicate = predicate;
         filteredTransactions.setPredicate(predicate);
     }
 
@@ -92,7 +99,7 @@ public class TransactionBookModelManager implements TransactionBookModel {
     public void deleteTransaction(Transaction transaction) {
         requireNonNull(transaction);
         transactionBook.removeTransaction(transaction);
-        updateFilteredTransactionList(PREDICATE_SHOW_ALL_TXNS);
+        updateFilteredTransactionList();
     }
 
     @Override

@@ -10,6 +10,7 @@ import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -50,14 +51,14 @@ public abstract class UpdateStatusCommand extends Command {
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             logger.log(Level.WARNING, "Invalid transaction index: {0}", targetIndex.getZeroBased());
-            throw new CommandException("The transaction index provided is invalid");
+            throw new CommandException(Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
         }
 
         Transaction txnToUpdate = lastShownList.get(targetIndex.getZeroBased());
         Transaction updatedTxn = txnToUpdate.setStatus(getUpdatedStatus());
 
         model.setTransaction(txnToUpdate, updatedTxn);
-        model.updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
+        model.updateFilteredTransactionList();
 
         logger.log(Level.INFO, "Updated transaction: {0}", updatedTxn);
         return new CommandResult(String.format(getSuccessMessage(), updatedTxn));
