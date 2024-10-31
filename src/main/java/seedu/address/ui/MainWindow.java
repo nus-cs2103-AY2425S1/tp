@@ -70,11 +70,10 @@ public class MainWindow extends UiPart<Stage> {
         // Load the saved theme from GuiSettings
         GuiSettings guiSettings = logic.getGuiSettings();
         String savedTheme = guiSettings.getTheme();
+        helpWindow = new HelpWindow(savedTheme != null ? savedTheme : "light");
         applyTheme(savedTheme != null ? savedTheme : "light");
 
         setAccelerators();
-
-        helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -216,6 +215,7 @@ public class MainWindow extends UiPart<Stage> {
             assert darkExtensions != null : "DarkExtensions.css is not found";
             primaryStage.getScene().getStylesheets().add(darkExtensions);
         }
+        helpWindow.applyTheme(theme);
     }
 
 

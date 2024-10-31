@@ -61,8 +61,9 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
+    public HelpWindow(String savedTheme) {
         this(new Stage());
+        applyTheme(savedTheme);
     }
 
     /**
@@ -119,5 +120,21 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Applies the theme to the HelpWindow based on the given theme string.
+     *
+     * @param theme The theme to apply ("light" or "dark").
+     */
+    public void applyTheme(String theme) {
+        getRoot().getScene().getStylesheets().clear();
+        if ("dark".equals(theme)) {
+            getRoot().getScene().getStylesheets().add(getClass().getResource("/view/DarkHelpWindow.css")
+                    .toExternalForm());
+        } else {
+            getRoot().getScene().getStylesheets().add(getClass().getResource("/view/LightHelpWindow.css")
+                    .toExternalForm());
+        }
     }
 }
