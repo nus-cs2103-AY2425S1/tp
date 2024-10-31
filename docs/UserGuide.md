@@ -72,6 +72,14 @@ Format: `help`
 
 ---
 
+### Viewing help if user does not have access to internet: `offlinehelp`
+
+Shows you a full list of commands 
+
+Format: `offlinehelp`
+
+---
+
 ### Comment on a student: `add`
 
 Comments on a student in Teacher's Pet.
@@ -139,17 +147,17 @@ Examples:
 
 ---
 
-## [To be added in v1.4] <u>Displaying students in a group :</u> show
+## Displaying students in a group : `show`
 
 #### You can display members in a group easily
 
 #### <span style="color:#4CAF50;">Format: show INDEX</span>
 
-* The INDEX is the group you would like to search for in your current list. Like 1 (for group 1), 2 (for group 2), …​
-* Ensure the INDEX is a positive integer.
+* The INDEX is the group you would like to search for in your current list. For instance, use `1` (for group 1), `2` (for group 2), …​
+* Ensure the INDEX is an integer greater than or equal to 0.
 
 Examples:
-* show 1 returns persons with who are in group 1.
+* `show 1` returns persons with who are in group 1.
   ![result for 'show 1'](images/show_feature.png)
 
 ---
@@ -275,5 +283,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`<br> e.g., `find n/ James Jake`, `find id/ A1234567E A2345678B`, `find n/ Alice id/ A1234567E`
+**Show** | `show INDEX`
 **List** | `list`
 **Help** | `help`
+**Offline Help** | `offlinehelp`
