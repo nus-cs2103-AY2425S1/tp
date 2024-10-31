@@ -13,10 +13,10 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Implements command to delete a tag from a person
- * format: deletetag [INDEX] t/[TAG NAME]
+ * format: deltag [INDEX] t/[TAG NAME]
  */
 public class DeleteTagCommand extends Command {
-    public static final String COMMAND_WORD = "deletetag";
+    public static final String COMMAND_WORD = "deltag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes tag from the person identified by the index number used in the displayed person list.\n"
