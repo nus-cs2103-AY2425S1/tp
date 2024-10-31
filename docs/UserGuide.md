@@ -273,6 +273,15 @@ Examples:
 
 - `listing delete 1 1` deletes the `1`st property listing from the person with index `1`
 
+### Exporting your contacts : `export`
+
+Exports your contacts and their relevant data to a Comma-Separated Value (CSV) file format.
+
+Format: `export`
+
+- Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
+- If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
+
 ### Saving the data
 
 PROperty data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -318,9 +327,10 @@ _Details coming soon ..._
 | **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         |
 | **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                       |
 | **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                  |
-| **List**           | `list`                                                                                                                                                                          
+| **List**           | `list`                                                                                                                                                                          |
 | **Add Listing**    | `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
 | **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                            |
 | **Show**           | `show INDEX`<br> e.g., `show 1`                                                                                                                                                 |
 | **Help**           | `help`                                                                                                                                                                          |
 | **Remark**         | `remark INDEX r/[REMARKS]`                                                                                                                                                      |
+| **Export**         | `export`                                                                                                                                                                        |
