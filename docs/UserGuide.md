@@ -131,15 +131,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a specific student : `deletes`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
-Format: `delete INDEX`
+Format: `deletes n/STUDENT_NAME`
+Format: `deletes n/STUDENT_NAME sn/STUDENT_NUMBER`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the student with the specified details.
+* The student name refers to the student name shown in the displayed list of students.
+* The student number refers to the student number shown in the displayed list of students.
+* The student number **must be in the following format** A1234567B …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
