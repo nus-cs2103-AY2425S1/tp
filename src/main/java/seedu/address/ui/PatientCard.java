@@ -56,7 +56,8 @@ public class PatientCard extends UiPart<Region> {
         } else if (patient.getLatestFutureAppt() == null) {
             appointmentDateTime.setText(patient.getMostRecentPastAppt().toString());
         } else {
-            appointmentDateTime.setText(patient.getMostRecentPastAppt().toString() + "\n" + patient.getLatestFutureAppt().toString());
+            appointmentDateTime.setText(patient.getMostRecentPastAppt().toString() + "\n"
+                + patient.getLatestFutureAppt().toString());
         }
     }
 }
