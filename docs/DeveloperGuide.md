@@ -3,23 +3,23 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents
-{:toc}
+- Table of Contents
+  {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
+- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
   original source as well}
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Design**
 
@@ -28,13 +28,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [
 _PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create
 and edit diagrams.
+
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -45,29 +46,29 @@ classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/ma
 and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+- At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+- At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+- [**`UI`**](#ui-component): The UI of the App.
+- [**`Logic`**](#logic-component): The command executor.
+- [**`Model`**](#model-component): Holds the data of the App in memory.
+- [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues
 the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
+- defines its _API_ in an `interface` with the same name as the Component.
+- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
   API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
@@ -99,10 +100,10 @@ in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/
 
 The `UI` component,
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
 
@@ -138,11 +139,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
+- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
   placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
   the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
   a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -152,16 +153,15 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
+- stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+- stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
+- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
+- does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -179,18 +179,18 @@ The `Model` component,
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding
+- can save both address book data and user preference data in JSON format, and read them back into corresponding
   objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
+- depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Implementation**
 
@@ -204,9 +204,9 @@ The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It ex
 history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
 following operations:
 
-* `VersionedAddressBook#commit()`— Saves the current address book state in its history.
-* `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
+- `VersionedAddressBook#commit()`— Saves the current address book state in its history.
+- `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
+- `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
 and `Model#redoAddressBook()` respectively.
@@ -286,14 +286,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+- **Alternative 1 (current choice):** Saves the entire address book.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+  - Pros: Easy to implement.
+  - Cons: May have performance issues in terms of memory usage.
+
+- **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+  - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  - Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -301,18 +302,17 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+- [Documentation guide](Documentation.md)
+- [Testing guide](Testing.md)
+- [Logging guide](Logging.md)
+- [Configuration guide](Configuration.md)
+- [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Requirements**
 
@@ -320,11 +320,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* educators who need to micromanage multiple students
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+- educators who need to micromanage multiple students
+- prefer desktop apps over other types
+- can type fast
+- prefers typing to mouse interactions
+- is reasonably comfortable using CLI apps
 
 **Value proposition**: Goon Book is specialised to help educators with keeping track of their students. It can be used
 to record their students with their details, and access relevant information easily and conveniently
@@ -333,21 +333,20 @@ to record their students with their details, and access relevant information eas
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                                               | So that I can…​                                                                                                |
+| Priority | As a …​ | I want to …​ | So that I can…​ |
 
 |---------|----------|----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `* * *` | educator | add a new student                                                          | include all students I have currently in my app                                                                |
-| `* * *` | educator | delete a student                                                           | keep my database of students concise with only currently relevant students                                     |
-| `* * *` | educator | search for students by name                                                | find information about specific students                                                                       |
-| `* * `  | educator | search for groups by name                                                  | find information about specific groups of students                                                             |
-| `* *`   | educator | store additional information about students on grades, attendance or notes | better access and organise student information                                                                 |
-| `* *`   | educator | edit a student details                                                     | correct mistakes or update new information about the student                                                   |
-| `* *`   | educator | filter searched students by grades, attendance or notes                    | quickly find specific students or groups based on specific criteria                                            |
-| `*`     | educator | group students                                                             | efficiently manage classes, group-based activities, assignments, and projects                                  |
-| `*`     | educator | delete groups                                                              | correct mistakes by deleting group                                                                             |
-| `*`     | educator | import and export student data from other systems                          | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |
-| `*`     | educator | use security measures for student data                                     | protect sensitive information and control access to parental data                                              |
-
+| `* * *` | educator | add a new student | include all students I have currently in my app |
+| `* * *` | educator | delete a student | keep my database of students concise with only currently relevant students |
+| `* * *` | educator | search for students by name | find information about specific students |
+| `* * ` | educator | search for groups by name | find information about specific groups of students |
+| `* *` | educator | store additional information about students on grades, attendance or notes | better access and organise student information |
+| `* *` | educator | edit a student details | correct mistakes or update new information about the student |
+| `* *` | educator | filter searched students by grades, attendance or notes | quickly find specific students or groups based on specific criteria |
+| `*` | educator | group students | efficiently manage classes, group-based activities, assignments, and projects |
+| `*` | educator | delete groups | correct mistakes by deleting group |
+| `*` | educator | import and export student data from other systems | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |
+| `*` | educator | use security measures for student data | protect sensitive information and control access to parental data |
 
 ### Use cases
 
@@ -368,46 +367,46 @@ Use case ends.
 
 **Extensions**
 
-* 2a. Educator submits the form.
+- 2a. Educator submits the form.
 
-    * 2a1. New student without class and contact is added to list.
-
-  Use case ends.
-
-* 2b. Educator enters the student’s contacts.
-
-    * 2b1. Educator submits the form.
-
-    * 2b2. New student with contact is added to list.
+  - 2a1. New student without class and contact is added to list.
 
   Use case ends.
 
-* 3a. Educator submits the form.
+- 2b. Educator enters the student’s contacts.
 
-    * 3a1. New student with class is added to list.
+  - 2b1. Educator submits the form.
+
+  - 2b2. New student with contact is added to list.
 
   Use case ends.
 
-* 4a. Goon Book detects that the entered student is a duplicate.
+- 3a. Educator submits the form.
 
-    * 4a1. Goon Book cancels the adding.
+  - 3a1. New student with class is added to list.
+
+  Use case ends.
+
+- 4a. Goon Book detects that the entered student is a duplicate.
+
+  - 4a1. Goon Book cancels the adding.
 
   User case ends.
 
-* 4b. Goon Book detects a non-alphabet in the name input.
+- 4b. Goon Book detects a non-alphabet in the name input.
 
-    * 4b1. Goon Book requests for the correct input.
+  - 4b1. Goon Book requests for the correct input.
 
-    * 4b2. Educator enters new data.
+  - 4b2. Educator enters new data.
 
   Steps 4b1-4b2 are repeated until the data entered are correct.
   Use case resumes from step 5.
 
-* 4c. Goon Book detects a non-number in the contact input
+- 4c. Goon Book detects a non-number in the contact input
 
-    * 4c1. Goon Book requests for the correct input.
+  - 4c1. Goon Book requests for the correct input.
 
-    * 4c2. Educator enters new data.
+  - 4c2. Educator enters new data.
 
   Steps 4c1-4c2 are repeated until the data entered are correct.
   Use case resumes from step 5.
@@ -424,9 +423,9 @@ Use case ends.
 
 **Extensions**
 
-* 2a. GoonBook detects that the student does not exist.
+- 2a. GoonBook detects that the student does not exist.
 
-    * 2a1. GoonBook displays an error message.
+  - 2a1. GoonBook displays an error message.
 
   User case ends.
 
@@ -442,6 +441,44 @@ Use case ends.
 
 User case ends.
 
+**Use case: UC04 - Group students**
+
+**MSS**
+
+1. Educator selects the option to create a new group.
+2. Educator enters a group name.
+3. Educator selects students to add to the group.
+4. Educator confirms the selection.
+5. The new group with selected students is successfully created and added to the group list.
+
+Use case ends.
+
+**Extensions**
+
+- 2a. GoonBook detects that the entered group name already exists.
+
+  - 2a1. GoonBook displays an error message indicating the duplicate name.
+  - 2a2. Educator enters a new group name.
+
+  Use case resumes from step 3.
+
+- 3a. Educator tries to add the same student multiple times.
+
+  - 3a1. GoonBook automatically removes duplicate entries.
+
+  Use case resumes from step 4.
+
+- 3b. Educator does not select any students.
+
+  - 3b1. GoonBook displays an error message requesting at least one student for the group.
+
+  Use case resumes from step 3.
+
+- 4a. GoonBook detects a non-alphanumeric character in the group name.
+  - 4a1. GoonBook requests for a valid input.
+  - 4a2. Educator enters a corrected group name.
+    Use case resumes from step 5.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -454,11 +491,11 @@ User case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Educator**: Primary, secondary, JC, poly teacher
-* **Duplicate**: Student with the same name and contact number
+- **Mainstream OS**: Windows, Linux, Unix, MacOS
+- **Educator**: Primary, secondary, JC, poly teacher
+- **Duplicate**: Student with the same name and contact number
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Instructions for manual testing**
 
@@ -473,17 +510,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+      optimum.
 
 1. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   1. Re-launch the app by double-clicking the jar file.<br>
+      Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
@@ -491,17 +528,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+   1. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -509,6 +546,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
