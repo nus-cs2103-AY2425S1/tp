@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 import seedu.address.model.tag.Tag;
 
@@ -143,15 +143,32 @@ public abstract class Person {
             .toString();
     }
 
-    public void markAttendance(){
-    }
+    /**
+     * Returns a new {@code Person} object with attendance incremented by one day.
+     * Implementations of this method in subclasses should define how attendance
+     * is managed and incremented based on specific requirements.
+     *
+     * @return A new {@code Person} instance with incremented attendance.
+     */
+    public abstract Person withIncrementedAttendance();
 
-    public void unmarkAttendance() {
-        throw new UnsupportedOperationException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
-    }
+    /**
+     * Returns a new {@code Person} object with attendance decremented by one day.
+     * Implementations in subclasses should ensure that this method properly handles
+     * decrementing attendance, if applicable.
+     *
+     * @return A new {@code Person} instance with decremented attendance.
+     * @throws CommandException if attendance cannot be decremented (e.g., if unsupported for a given subclass).
+     */
+    public abstract Person withDecrementedAttendance() throws CommandException;
 
-    public void resetAttendance() {
-    }
+    /**
+     * Returns a new {@code Person} object with attendance reset.
+     * Implementations in subclasses should define what a reset means in the context of that specific type.
+     *
+     * @return A new {@code Person} instance with attendance reset.
+     */
+    public abstract Person withResetAttendance();
 
     /**
      * Creates a new Person object based on the specified type.

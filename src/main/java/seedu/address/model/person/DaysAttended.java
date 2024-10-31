@@ -24,7 +24,7 @@ public class DaysAttended {
         this.daysAttended = new SimpleIntegerProperty(daysAttended);
     }
 
-    public int getDaysAttended() {
+    public int getValue() {
         return daysAttended.get();
     }
 
@@ -57,7 +57,7 @@ public class DaysAttended {
         }
 
         DaysAttended otherDaysAttended = (DaysAttended) other;
-        return getDaysAttended() == otherDaysAttended.getDaysAttended();
+        return getValue() == otherDaysAttended.getValue();
     }
 
     /**
@@ -70,25 +70,31 @@ public class DaysAttended {
 
     /**
      * Increments the days attended by 1.
+     *
+     * @return A new {@code DaysAttended} instance representing the updated days attended.
      */
-    public void increment() {
-        daysAttended.set(getDaysAttended() + 1);
+    public DaysAttended incremented() {
+        return new DaysAttended(getValue() + 1);
     }
 
     /**
-     * Decrements the days attended by 1.
+     * Decrements the days attended by 1, ensuring it does not fall below 0.
+     *
+     * @return A new {@code DaysAttended} instance representing the updated days attended,
+     *         or 0 if the current days attended is 0.
      */
-    public void decrement() {
-        if (getDaysAttended() > 0) {
-            daysAttended.set(getDaysAttended() - 1);
-        }
+    public DaysAttended decremented() {
+        int newDays = Math.max(getValue() - 1, 0);
+        return new DaysAttended(newDays);
     }
 
     /**
      * Resets the days attended to 0.
+     *
+     * @return A new {@code DaysAttended} instance with days attended set to 0.
      */
-    public void reset() {
-        daysAttended.set(0);
+    public DaysAttended reset() {
+        return new DaysAttended(0);
     }
 
     /**

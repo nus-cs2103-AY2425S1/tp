@@ -96,24 +96,42 @@ public class Student extends Person {
     }
 
     /**
-     * Marks the attendance of the student.
+     * Increments the attendance of the student by one day.
+     * This method creates a new {@code Person} instance with updated attendance.
+     *
+     * @return A new {@code Person} instance representing the student with incremented attendance.
      */
-    public void markAttendance() {
-        this.daysAttended.increment();
+    public Person withIncrementedAttendance() {
+        DaysAttended updatedDaysAttended = daysAttended.incremented();
+
+        return Person.createPerson(STUDENT_TYPE, getName(), getGender(), getPhone(), getEmail(), getAddress(),
+                getTags(), getSubjects(), getClasses(), updatedDaysAttended);
     }
 
     /**
-     * Unmarks the attendance of the student.
+     * Decrements the attendance of the student by one day.
+     * This method creates a new {@code Person} instance with updated attendance.
+     *
+     * @return A new {@code Person} instance representing the student with decremented attendance.
      */
-    public void unmarkAttendance() {
-        this.daysAttended.decrement();
+    public Person withDecrementedAttendance() {
+        DaysAttended updatedDaysAttended = daysAttended.decremented();
+
+        return Person.createPerson(STUDENT_TYPE, getName(), getGender(), getPhone(), getEmail(), getAddress(),
+                getTags(), getSubjects(), getClasses(), updatedDaysAttended);
     }
 
     /**
-     * Resets the attendance of the student.
+     * Resets the attendance of the student to zero days.
+     * This method creates a new {@code Person} instance with attendance reset.
+     *
+     * @return A new {@code Person} instance representing the student with reset attendance.
      */
-    public void resetAttendance() {
-        this.daysAttended.reset();
+    public Person withResetAttendance() {
+        DaysAttended updatedDaysAttended = daysAttended.reset();
+
+        return Person.createPerson(STUDENT_TYPE, getName(), getGender(), getPhone(), getEmail(), getAddress(),
+                getTags(), getSubjects(), getClasses(), updatedDaysAttended);
     }
 
     /**

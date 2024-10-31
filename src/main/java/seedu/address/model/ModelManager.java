@@ -127,7 +127,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void unmarkAttendance(Person personToUnmark) {
+    public void unmarkAttendance(Person personToUnmark) throws CommandException {
         addressBook.unmarkAttendance(personToUnmark);
     }
 

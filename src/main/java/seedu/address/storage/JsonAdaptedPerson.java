@@ -115,7 +115,7 @@ class JsonAdaptedPerson {
         classes.addAll(source.getClasses().stream()
             .map(String::toString)
             .collect(Collectors.toList()));
-        this.daysAttended = source.getDaysAttended().getDaysAttended();
+        this.daysAttended = source.getDaysAttended().getValue();
     }
 
     /**

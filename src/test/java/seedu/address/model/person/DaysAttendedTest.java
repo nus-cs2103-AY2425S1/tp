@@ -21,12 +21,12 @@ public class DaysAttendedTest {
         // Zero value
         int zeroDays = 0;
         DaysAttended daysAttendedZero = new DaysAttended(zeroDays);
-        assertEquals(zeroDays, daysAttendedZero.getDaysAttended());
+        assertEquals(zeroDays, daysAttendedZero.getValue());
 
         // Positive value
         int positiveDays = 5;
         DaysAttended daysAttendedPositive = new DaysAttended(positiveDays);
-        assertEquals(positiveDays, daysAttendedPositive.getDaysAttended());
+        assertEquals(positiveDays, daysAttendedPositive.getValue());
     }
 
     @Test
@@ -42,30 +42,30 @@ public class DaysAttendedTest {
     }
 
     @Test
-    public void increment_success() {
+    public void incremented_success() {
         DaysAttended daysAttended = new DaysAttended(5);
-        daysAttended.increment();
-        assertEquals(6, daysAttended.getDaysAttended());
+        daysAttended = daysAttended.incremented();
+        assertEquals(6, daysAttended.getValue());
     }
 
     @Test
-    public void decrement_success() {
+    public void decremented_success() {
         // When days attended is greater than 0
         DaysAttended daysAttended = new DaysAttended(5);
-        daysAttended.decrement();
-        assertEquals(4, daysAttended.getDaysAttended());
+        daysAttended = daysAttended.decremented();
+        assertEquals(4, daysAttended.getValue());
 
         // When days attended is 0 (should not decrement below 0)
         daysAttended = new DaysAttended(0);
-        daysAttended.decrement();
-        assertEquals(0, daysAttended.getDaysAttended());
+        daysAttended = daysAttended.decremented();
+        assertEquals(0, daysAttended.getValue());
     }
 
     @Test
     public void reset_success() {
         DaysAttended daysAttended = new DaysAttended(5);
-        daysAttended.reset();
-        assertEquals(0, daysAttended.getDaysAttended());
+        daysAttended = daysAttended.reset();
+        assertEquals(0, daysAttended.getValue());
     }
 
     @Test
