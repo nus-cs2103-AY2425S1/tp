@@ -12,9 +12,13 @@ public class ViewToggler {
     public static final String LIST_OWNER_COMMAND = "List Owners";
     public static final String LIST_BOTH_COMMAND = "List Both";
     public static final String LINK_OWNER_TO_PET_COMMAND = "Link owner to pet";
+
+    public static final String FIND_PET_COMMAND = "Find pet";
+    public static final String FIND_OWNER_COMMAND = "Find owner";
     public static final String OTHER_COMMAND = "Command does not change GUI";
-    private static final String TEMPLATE = "Linked %1$s pet(s) to %2$s";
-    private static final String REGEX = "^Linked \\d+ pet\\(s\\) to .+$";
+    private static final String REGEX1 = "^Linked \\d+ pet\\(s\\) to .+$";
+    private static final String REGEX2 = "^\\d+ pet listed!$";
+    private static final String REGEX3 = "^\\d+ owner listed!$";
 
     private final String commandType;
 
@@ -27,7 +31,6 @@ public class ViewToggler {
      *                       that affect the view.
      */
     public ViewToggler(String feedbackToUser) {
-
         // Set command type based on feedback
         if (feedbackToUser.equals(ListPetCommand.MESSAGE_SUCCESS)) {
             this.commandType = LIST_PET_COMMAND;
@@ -35,9 +38,13 @@ public class ViewToggler {
             this.commandType = LIST_OWNER_COMMAND;
         } else if (feedbackToUser.equals(ListBothCommand.MESSAGE_SUCCESS)) {
             this.commandType = LIST_BOTH_COMMAND;
-        } else if (matchesTemplate(feedbackToUser)) {
+        } else if (matchesListTemplate(feedbackToUser)) {
             this.commandType = LINK_OWNER_TO_PET_COMMAND;
-        } else {
+        } else if (matchesFindPetTemplate(feedbackToUser)) {
+            this.commandType = FIND_PET_COMMAND;
+        } else if (matchesFindOwnerTemplate(feedbackToUser)) {
+            this.commandType = FIND_OWNER_COMMAND;
+        }else {
             this.commandType = OTHER_COMMAND;
         }
     }
@@ -61,8 +68,36 @@ public class ViewToggler {
      * @return {@code true} if the input matches the template for
      *         linking pets, {@code false} otherwise.
      */
-    public static boolean matchesTemplate(String input) {
-        Pattern pattern = Pattern.compile(REGEX);
+    public static boolean matchesListTemplate(String input) {
+        Pattern pattern = Pattern.compile(REGEX1);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
+    }
+
+    /**
+     * Checks whether the given input matches the feedback template
+     * for finding a pet.
+     *
+     * @param input The input string to be checked.
+     * @return {@code true} if the input matches the template for
+     *        finding pets, {@code false} otherwise.
+     */
+    public static boolean matchesFindPetTemplate(String input) {
+        Pattern pattern = Pattern.compile(REGEX2);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
+    }
+
+    /**
+     * Checks whether the given input matches the feedback template
+     * for finding an owner.
+     *
+     * @param input The input string to be checked.
+     * @return {@code true} if the input matches the template for
+     *        finding owners, {@code false} otherwise.
+     */
+    public static boolean matchesFindOwnerTemplate(String input) {
+        Pattern pattern = Pattern.compile(REGEX3);
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }

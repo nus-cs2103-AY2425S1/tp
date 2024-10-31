@@ -23,8 +23,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_OWNER_DISPLAYED_INDEX = "The owner index provided is invalid";
     public static final String MESSAGE_INVALID_PET_DISPLAYED_INDEX = "The pet index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_OWNERS_LISTED_OVERVIEW = "%1$d owners listed!";
-    public static final String MESSAGE_PETS_LISTED_OVERVIEW = "%1$d pets listed!";
+    public static final String MESSAGE_OWNERS_LISTED_OVERVIEW = "%1$d owner listed!";
+    public static final String MESSAGE_PETS_LISTED_OVERVIEW = "%1$d pet listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
         "Multiple values specified for the following single-valued field(s): ";
 
