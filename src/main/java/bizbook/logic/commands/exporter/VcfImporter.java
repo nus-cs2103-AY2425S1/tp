@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -171,10 +172,9 @@ public class VcfImporter implements Importer {
                     .collect(Collectors.toSet());
         }
 
-        Set<Note> getNotes() {
+        ArrayList<Note> getNotes() {
             return vCard.getNotes().parallelStream()
-                    .map(note -> new Note(note.getValue()))
-                    .collect(Collectors.toSet());
+                    .map(note -> new Note(note.getValue())).collect(Collectors.toCollection(ArrayList::new));
         }
     }
 }
