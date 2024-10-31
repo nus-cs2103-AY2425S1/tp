@@ -99,4 +99,19 @@ public class DeleteNotesCommand extends Command {
     private String generateSuccessMessage(Person personToEdit) {
         return String.format(MESSAGE_DELETE_NOTES_SUCCESS, Messages.format(personToEdit));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteNotesCommand)) {
+            return false;
+        }
+
+        DeleteNotesCommand otherDeleteNotesCommand = (DeleteNotesCommand) other;
+        return index.equals(otherDeleteNotesCommand.index) && noteIndex.equals(otherDeleteNotesCommand.noteIndex);
+    }
 }
