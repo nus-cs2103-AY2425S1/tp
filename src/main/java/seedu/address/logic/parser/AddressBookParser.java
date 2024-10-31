@@ -10,11 +10,12 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCancelCommand;
+import seedu.address.logic.commands.CancelPendingCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ClearConfirmationCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ConfirmPendingCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
@@ -71,11 +72,17 @@ public class AddressBookParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            DeleteCommand deleteCommand = new DeleteCommandParser().parse(arguments);
+            if (deleteCommand instanceof DeletePersonCommand) {
+                this.pendingCommand = deleteCommand;
+                return new ConfirmPendingCommand(ConfirmPendingCommand.PendingCommandType.DELETE);
+            } else {
+                return deleteCommand;
+            }
 
         case ClearCommand.COMMAND_WORD:
             this.pendingCommand = new ClearCommandParser().parse(arguments);
-            return new ClearConfirmationCommand();
+            return new ConfirmPendingCommand(ConfirmPendingCommand.PendingCommandType.CLEAR);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -122,7 +129,7 @@ public class AddressBookParser {
 
         if (userInput.equalsIgnoreCase("N")) {
             this.pendingCommand = null;
-            return new ClearCancelCommand();
+            return new CancelPendingCommand();
         }
 
         logger.finer("This user input caused a ParseException: " + userInput);
