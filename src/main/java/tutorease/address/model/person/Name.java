@@ -36,14 +36,20 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if the given string is a valid name.
+     *
+     * @param test The string to be tested.
+     * @return true if the string matches the valid name format, false otherwise.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
     /**
-     * Returns true if a given string does not contain slashes.
+     * Returns true if the given string does not contain slashes.
+     *
+     * @param test The string to be tested.
+     * @return true if the string does not contain slashes, false otherwise.
      */
     public static boolean hasNoSlash(String test) {
         return test.matches(REGEX_NO_SLASHES);
