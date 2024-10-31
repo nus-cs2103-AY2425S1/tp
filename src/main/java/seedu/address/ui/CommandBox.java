@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -10,7 +11,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.Optional;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -39,8 +39,8 @@ public class CommandBox extends UiPart<Region> {
         // handle tab keypress event to auto-complete command
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.TAB) {
-               handleAutocomplete();
-               event.consume();
+                handleAutocomplete();
+                event.consume();
             }
         });
     }
@@ -68,11 +68,15 @@ public class CommandBox extends UiPart<Region> {
      */
     private void handleAutocomplete() {
         String commandText = commandTextField.getText();
-        if (commandText.isEmpty() || commandText.contains(" ")) return;
+        if (commandText.isEmpty() || commandText.contains(" ")) {
+            return;
+        }
 
         Optional<String> possibleCommandName = commandCompleter.completeCommand(commandText);
 
-        if (possibleCommandName.isEmpty()) return;
+        if (possibleCommandName.isEmpty()) {
+            return;
+        }
         commandTextField.setText(possibleCommandName.get() + " ");
         commandTextField.end(); // set cursor to the end
     }
