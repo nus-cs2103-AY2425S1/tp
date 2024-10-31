@@ -6,7 +6,7 @@
 
 # NovaCare User Guide
 
-NovaCare is a **desktop app for managing patients, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+NovaCare is a **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
@@ -204,6 +204,19 @@ Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
 Examples:
 * `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in person list.
 
+### Deleting emergency contact : `delemergency`
+
+Delets an emergency contact and its details from a person in the address book.
+
+Format: `delemergency INDEX
+
+* Deletes an emergency contact and its details at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delemergency 1` deletes the emergency contact of the 1st indexed person in the patient list.
+
 ### Adding priority level : `priority`
 
 Adds an priority level to a person in the address book.
@@ -229,7 +242,7 @@ Format: `deletelevel INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `deletelevel 1` deletes priority level of the 1st index in person list.
+* `deletelevel 1` deletes priority level of the 1st indexed person in the patient list.
 
 ### Mark Task : `marktask`
 
