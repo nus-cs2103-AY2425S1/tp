@@ -2,15 +2,20 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.order.Order;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a person with contact details, address, remark, tags, and orders.
+ * Supports customer and supplier roles through subclasses.
  */
 public class Person {
 
@@ -18,7 +23,6 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    // Add the new dietary preference field
 
     // Data fields
     private final Address address;
@@ -27,7 +31,14 @@ public class Person {
     private final List<Order> orders = new ArrayList<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Person} with all required fields.
+     *
+     * @param name    The name of the person.
+     * @param phone   The person's phone number.
+     * @param email   The person's email.
+     * @param address The address of the person.
+     * @param remark  Any remark associated with the person.
+     * @param tags    A set of tags related to the person.
      */
     public Person(Name name, Phone phone, Email email, Address address,
                   Remark remark, Set<Tag> tags) {
@@ -40,6 +51,11 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Retrieves the orders associated with this person as a formatted string.
+     *
+     * @return A formatted string of all orders.
+     */
     public String getOrders() {
         StringBuilder builder = new StringBuilder();
         for (Order order : orders) {
@@ -48,34 +64,46 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Adds an order to the person's list of orders.
+     *
+     * @param order The order to be added.
+     */
     public void addOrder(Order order) {
         orders.add(order);
     }
 
+    /**
+     * Removes a specific order from the person's list of orders.
+     *
+     * @param order The order to be removed.
+     */
     public void removeOrder(Order order) {
         orders.remove(order);
     }
 
-
+    /**
+     * Creates a guest {@code Person} with minimal information (name and phone).
+     *
+     * @param n The guest's name.
+     * @param p The guest's phone.
+     * @return A {@code Customer} instance with default values for other fields.
+     */
     public static Person getGuest(Name n, Phone p) {
-        return new Customer(n,
-                p,
-                new Email(),
-                new Address(),
-                new Information(),
-                new Remark(),
-                Collections.emptySet());
+        return new Customer(n, p, new Email(), new Address(), new Information(),
+                new Remark(), Collections.emptySet());
     }
 
-
+    /**
+     * Creates a supplier {@code Person} with minimal information (name and phone).
+     *
+     * @param n The supplier's name.
+     * @param p The supplier's phone.
+     * @return A {@code Supplier} instance with default values for other fields.
+     */
     public static Person getSupplier(Name n, Phone p) {
-        return new Supplier(n,
-                p,
-                new Email(),
-                new Address(),
-                new Ingredients(new ArrayList<>()),
-                new Remark(),
-                Collections.emptySet());
+        return new Supplier(n, p, new Email(), new Address(), new Ingredients(new ArrayList<>()),
+                new Remark(), Collections.emptySet());
     }
 
     public Name getName() {
@@ -99,40 +127,41 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable view of the person's tags.
+     *
+     * @return An unmodifiable set of tags.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Checks if two persons have the same phone number, defining a weaker notion of equality.
+     *
+     * @param otherPerson The other person to compare with.
+     * @return {@code true} if the phone numbers match; {@code false} otherwise.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
-
-        return otherPerson != null
-                && (otherPerson.getPhone().equals(getPhone()));
+        return otherPerson != null && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Checks if two persons have the same identity and data fields, defining a stronger notion of equality.
+     *
+     * @param other The other person to compare with.
+     * @return {@code true} if all fields match; {@code false} otherwise.
      */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof Person)) {
             return false;
         }
-
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
@@ -143,7 +172,6 @@ public class Person {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags);
     }
 

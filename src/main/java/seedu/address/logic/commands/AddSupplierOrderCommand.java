@@ -59,7 +59,7 @@ public class AddSupplierOrderCommand extends Command {
             }
         }
         if (person == null) {
-            person = Person.getGuest(name, phone);
+            person = Person.getSupplier(name, phone);
             model.addPerson(person);
         }
 
