@@ -143,7 +143,7 @@ Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
 
 Examples:
 * `delete 2` deletes the 2nd person in the displayed list.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
 
 ### Clearing all entries : `clear`
@@ -216,6 +216,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX [INDEX...] [INDEX-INDEX]...`<br> e.g., `delete 3 6 10-15 20 30-40`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ...] [t/STUDY_GROUP_TAGS ...]`<br> e.g., `find n/James Jake`
 **List** | `list`
 **Help** | `help`
