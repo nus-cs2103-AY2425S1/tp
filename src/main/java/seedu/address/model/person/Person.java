@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -121,6 +122,7 @@ public class Person {
      * @return true if it already contains the participation. false otherwise
      */
     public boolean hasParticipation(Participation participation) {
+        requireNonNull(participation);
         return participationList.stream()
                 .anyMatch(currentParticipation -> currentParticipation.isSameParticipation(participation));
     }
@@ -130,6 +132,7 @@ public class Person {
      * @param participation object to be added
      */
     public void addParticipation(Participation participation) {
+        requireNonNull(participation);
         participationList.add(participation);
     }
 

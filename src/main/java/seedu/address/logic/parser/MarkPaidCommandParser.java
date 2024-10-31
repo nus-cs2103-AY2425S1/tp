@@ -26,14 +26,15 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkPaidCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT);
-        Index index;
+        assert args != null : "Input arguments for EnrollCommand cannot be null";
 
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT);
         if (!arePrefixesPresent(argMultimap, PREFIX_PAYMENT)) {
             logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, MarkPaidCommandParser.class));
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
         }
+
+        Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -42,8 +43,8 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PAYMENT);
         Fees fees = ParserUtil.parseFees(argMultimap.getValue(PREFIX_PAYMENT).get());
-        return new MarkPaidCommand(index, fees);
 
+        return new MarkPaidCommand(index, fees);
     }
 
     /**

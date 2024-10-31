@@ -109,6 +109,12 @@ public class MarkPaidCommand extends Command {
                 .toString();
     }
 
+    /**
+     * Calculates the new overdue amount after fees paid by student
+     * @param currentPayment current overdue amount
+     * @param paidFees Fees paid by student
+     * @return new overdue amount
+     */
     private Payment calculatePayment(Payment currentPayment, Fees paidFees) {
         int currentBalance = Integer.parseInt(currentPayment.overdueAmount);
         int amountPaid = Integer.parseInt(paidFees.value);

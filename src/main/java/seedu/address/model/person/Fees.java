@@ -9,18 +9,19 @@ import static java.util.Objects.requireNonNull;
  */
 public class Fees {
 
-    public static final String MESSAGE_CONSTRAINTS = "Payment made must be an positive integer amount";
+    public static final String MESSAGE_CONSTRAINTS = "Fees paid must be an positive integer amount";
     public static final String VALIDATION_REGEX = "^[0-9]\\d*|0$\n";
     public final String value;
 
     /**
      * Constructs an {@code Fees}.
      *
-     * @param balance String for payment status
+     * @param fees String for payment status
      */
-    public Fees(String balance) {
-        requireNonNull(balance);
-        this.value = balance;
+    public Fees(String fees) {
+        requireNonNull(fees);
+        assert fees.matches("\\d+") : "The string should represent an positive integer";
+        this.value = fees;
     }
 
     /**
