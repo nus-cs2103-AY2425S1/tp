@@ -24,6 +24,7 @@ public class OrderListPanel extends UiPart<Region> {
     private static final String DEFAULT_TITLE = "Order";
     private static final String TITLE_WITH_SELECTED_PERSON = "Order (%1$s)";
     private static final String EMPTY_ORDER_LIST_MESSAGE = "This customer does not have any orders currently.";
+    private static final String NO_RELATED_ORDERS_FOUND = "No related orders found.";
 
     private final Logger logger = LogsCenter.getLogger(OrderListPanel.class);
     private final ListChangeListener<Order> orderChangeListener = change -> handleChangeInOrders();
@@ -71,7 +72,7 @@ public class OrderListPanel extends UiPart<Region> {
         orderListView.setCellFactory(listView -> new OrderListViewCell());
 
         if (orderList.isEmpty()) {
-            showEmptyOrderLabel();
+            showNoOrdersLabel();
             return;
         }
 
@@ -102,8 +103,8 @@ public class OrderListPanel extends UiPart<Region> {
      * Handles events whether a customer's orders changes.
      */
     private void handleChangeInOrders() {
-        if (orderListView.getItems().isEmpty() && !selectedPerson.areOrdersFiltered()) {
-            showEmptyOrderLabel();
+        if (orderListView.getItems().isEmpty()) {
+            showNoOrdersLabel();
         } else {
             showOrderList();
         }
@@ -121,9 +122,14 @@ public class OrderListPanel extends UiPart<Region> {
     /**
      * Displays the label to show that the order list is empty.
      */
-    private void showEmptyOrderLabel() {
-
+    private void showNoOrdersLabel() {
         clearComponentVisibility();
+        if (selectedPerson.areOrdersFiltered()) {
+            orderListEmpty.setText(NO_RELATED_ORDERS_FOUND);
+        } else {
+            orderListEmpty.setText(EMPTY_ORDER_LIST_MESSAGE);
+        }
+
         orderListEmpty.setManaged(true);
         orderListEmpty.setVisible(true);
     }
