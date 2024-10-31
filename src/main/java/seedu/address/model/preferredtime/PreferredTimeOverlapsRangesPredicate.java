@@ -25,7 +25,7 @@ public class PreferredTimeOverlapsRangesPredicate implements Predicate<Person> {
 
     private static boolean overlapsRanges(Set<PreferredTime> preferredTimes, String range) {
         return preferredTimes.stream()
-                .anyMatch(preferredTime -> preferredTime.overlaps(new PreferredTime(range)));
+                .anyMatch(preferredTime -> preferredTime.overlaps(new PreferredTime(range, true)));
     }
 
     @Override

@@ -40,9 +40,9 @@ public class JsonAdaptedPreferredTime {
      * @throws IllegalValueException if there were any data constraints violated in the adapted preferred time.
      */
     public PreferredTime toModelType() throws IllegalValueException {
-        if (!PreferredTime.isValidPreferredTime(preferredTime)) {
+        if (!PreferredTime.isValidPreferredTime(preferredTime, false)) {
             throw new IllegalValueException(PreferredTime.MESSAGE_CONSTRAINTS);
         }
-        return new PreferredTime(preferredTime);
+        return new PreferredTime(preferredTime, false);
     }
 }
