@@ -8,11 +8,11 @@ import seedu.address.ui.CommandTabChange;
  * Requests confirmation before clear operation.
  */
 public class ConfirmPendingCommand extends Command {
-    public static final String DELETE_CONFIRMATION_MESSAGE = "Are you sure you want to delete this person? " +
-            "All events tied to this person will be deleted " +
-            "and this person will no longer show in any event's contact list. (Y/N)";
+    public static final String DELETE_CONFIRMATION_MESSAGE = "Are you sure you want to delete this person? "
+            + "All events tied to this person will be deleted "
+            + "and this person will no longer show in any event's contact list. (Y/N)";
     public static final String CLEAR_CONFIRMATION_MESSAGE = "Are you sure you want to clear all data? (Y/N)";
-    public PendingCommandType pendingCommandType;
+    private PendingCommandType pendingCommandType;
     public ConfirmPendingCommand(PendingCommandType pendingCommandType) {
         this.pendingCommandType = pendingCommandType;
     }
@@ -27,6 +27,9 @@ public class ConfirmPendingCommand extends Command {
         }
     }
 
+    /**
+     * Enum to represent the type of pending command.
+     */
     public enum PendingCommandType {
         DELETE, CLEAR
     }
