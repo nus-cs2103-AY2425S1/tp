@@ -30,11 +30,7 @@ public class MarkPaidCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personToMarkPaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person markedPerson = new PersonBuilder(personToMarkPaid).withPayment("200").build();
-<<<<<<< HEAD
-        MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new Fees("0"));
-=======
-        MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_SECOND_PERSON, new FeesPaidByStudent("0"));
->>>>>>> 7a9d067d6c0cea589c1fc6395461ab3584c7480b
+        MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new FeesPaidByStudent("0"));
 
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKED_PAID_SUCCESS,
                 markedPerson.getFullName(), markedPerson.getPayment().toString());
