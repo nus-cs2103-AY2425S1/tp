@@ -46,39 +46,6 @@ public class OrderTest {
     }
 
     @Test
-    public void isPendingDuplicateOf() {
-        Order completedAtlas = new OrderBuilder(ATLAS).withStatus(Status.COMPLETED).build();
-        Order differentQuantityAtlas = new OrderBuilder(ATLAS).withQuantity(VALID_QUANTITY_BOTTLE).build();
-
-        // is duplicate pending order of a pending order -> returns true
-        Order atlasCopy = new OrderBuilder(ATLAS).build();
-        assertTrue(atlasCopy.isPendingDuplicateOf(ATLAS));
-
-        // is duplicate pending order of a completed order -> returns true
-        assertTrue(ATLAS.isPendingDuplicateOf(completedAtlas));
-
-        // is duplicate pending order of an order with different quantity -> returns true
-        Order editedAtlas = new OrderBuilder(ATLAS).withQuantity(VALID_QUANTITY_BOTTLE).build();
-        assertTrue(ATLAS.isPendingDuplicateOf(editedAtlas));
-
-        // different item -> returns false
-        editedAtlas = new OrderBuilder(ATLAS).withItem(VALID_ITEM_BOTTLE).build();
-        assertFalse(ATLAS.isPendingDuplicateOf(editedAtlas));
-
-        // different date -> returns false
-        editedAtlas = new OrderBuilder(ATLAS).withDate(VALID_DATE_BOTTLE).build();
-        assertFalse(ATLAS.isPendingDuplicateOf(editedAtlas));
-
-        // is duplicate completed order -> returns false
-        assertFalse(completedAtlas.isPendingDuplicateOf(ATLAS));
-
-        // all fields except quantity is different -> returns false
-        editedAtlas = new OrderBuilder(ATLAS).withItem(VALID_ITEM_BOTTLE)
-                .withDate(VALID_DATE_BOTTLE).withStatus(Status.COMPLETED).build();
-        assertFalse(ATLAS.isPendingDuplicateOf(editedAtlas));
-    }
-
-    @Test
     public void hasDateElapsed() {
         // order date has elapsed
         Order editedAtlas = new OrderBuilder(ATLAS).withDate(VALID_DATE_OUTDATED).build();

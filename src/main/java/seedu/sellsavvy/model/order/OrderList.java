@@ -25,15 +25,7 @@ public class OrderList implements Iterable<Order> {
      */
     public boolean contains(Order toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameOrder);
-    }
-
-    /**
-     * Returns true if the list contains an order with the same item, date and is in pending status.
-     */
-    public boolean hasPendingDuplicateOrderOf(Order toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(order -> order.isPendingDuplicateOf(toCheck));
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
