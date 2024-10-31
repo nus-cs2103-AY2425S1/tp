@@ -2,10 +2,8 @@ package seedu.address.model.patient;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -27,7 +25,7 @@ public class Patient {
 
     // Data fields
     private Address address;
-    private Set<Allergy> allergies = new HashSet<>();
+    private AllergyMap allergies = new AllergyMap();
     private BloodType bloodType;
     private HealthRisk healthRisk;
     private ExistingCondition existingCondition;
@@ -47,7 +45,7 @@ public class Patient {
      * Every field must be present and not null.
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex,
-                   Phone phone, Email email) {
+            Phone phone, Email email) {
         requireAllNonNull(name, nric, birthdate, sex, phone, email);
         this.name = name;
         this.nric = nric;
@@ -56,7 +54,6 @@ public class Patient {
         this.phone = phone;
         this.email = email;
         this.address = null;
-        this.allergies.clear();
         this.bloodType = null;
         this.healthRisk = null;
         this.existingCondition = null;
@@ -70,8 +67,8 @@ public class Patient {
      * The other fields can be null
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex, Phone phone,
-                   Email email, Address address, Set<Allergy> allergies, BloodType bloodType, HealthRisk healthRisk,
-                   ExistingCondition existingCondition, Note note, Name nokName, Phone nokPhone, ApptList appts) {
+            Email email, Address address, AllergyMap allergies, BloodType bloodType, HealthRisk healthRisk,
+            ExistingCondition existingCondition, Note note, Name nokName, Phone nokPhone, ApptList appts) {
         requireAllNonNull(name, nric, birthdate, sex);
         this.name = name;
         this.nric = nric;
@@ -122,10 +119,6 @@ public class Patient {
         return nokPhone;
     }
 
-    public Set<Allergy> getAllergies() {
-        return allergies;
-    }
-
     public BloodType getBloodType() {
         return bloodType;
     }
@@ -146,9 +139,7 @@ public class Patient {
         return address;
     }
 
-    public ApptList getAppointments() {
-        return appts;
-    }
+    // ApptList access functions
 
     /**
      * Adds an appointment to the patient's list of appointments.
@@ -187,6 +178,47 @@ public class Patient {
      */
     public void deleteAppt(Appt appt) {
         appts.deleteAppt(appt);
+    }
+
+    // AllergyList access functions
+
+    /**
+     * Adds an appointment to the patient's list of appointments.
+     * The appointments will be sorted by date and time.
+     *
+     * @param appt
+     */
+    public void addAllergy(Allergy allergy) {
+        allergies.addAllergy(allergy);
+    }
+
+    /**
+     * Returns an immutable list of appointments.
+     * This list will not contain any duplicate appointments.
+     *
+     * @return List of appointments.
+     */
+    public List<Allergy> getAllergies() {
+        return allergies.getAllergies();
+    }
+
+    /**
+     * Returns a string representation of the appointments
+     * in the form of a list of strings.
+     *
+     * @return String representation of the appointments.
+     */
+    public String getAllergiesString() {
+        return allergies.toString();
+    }
+
+    /**
+     * Deletes an appointment from the patient's list of appointments.
+     *
+     * @param appt
+     */
+    public void deleteAllergy(Allergy allergy) {
+        allergies.deleteAllergy(allergy);
     }
 
     /**

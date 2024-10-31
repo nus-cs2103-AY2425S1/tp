@@ -35,9 +35,9 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientToDelete = lastShownList.stream()
-            .filter(patient -> patient.getNric().equals(targetNric))
-            .findFirst()
-            .orElse(null);
+                .filter(patient -> patient.getNric().equals(targetNric))
+                .findFirst()
+                .orElse(null);
         if (patientToDelete == null) {
             throw new CommandException(String.format(Messages.MESSAGE_PATIENT_NOT_FOUND, targetNric));
         }

@@ -16,13 +16,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddFCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Address;
-import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.AllergyMap;
 import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
@@ -80,7 +79,7 @@ public class AddFCommandParser implements Parser<AddFCommand> {
                 argMultimap.getValue(PREFIX_HEALTHRISK).orElse(""));
         Name nokName = ParserUtil.parseNokName(argMultimap.getValue(PREFIX_NOKNAME).orElse(""));
         Phone nokPhone = ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).orElse(""));
-        Set<Allergy> allergies = ParserUtil.parseAllergies(
+        AllergyMap allergies = ParserUtil.parseAllergies(
                 argMultimap.getAllValues(PREFIX_ALLERGY));
         ApptList appts = new ApptList();
 

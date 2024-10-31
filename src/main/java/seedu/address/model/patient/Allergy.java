@@ -3,6 +3,8 @@ package seedu.address.model.patient;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Comparator;
+
 /**
  * Represents a Patient's allergy in the address book.
  * Guarantees: immutable; is valid as declared in
@@ -31,6 +33,22 @@ public class Allergy {
     public static boolean isValidAllergy(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    /**
+     * Comparator to compare two allergies by their date and time.
+     * Used for sorting allergies by date and time.
+     *
+     * @param allergy1
+     * @param allergy2
+     * @return int
+     * @see Comparator
+     */
+    public static final Comparator<Allergy> NAME_COMPARATOR = new Comparator<Allergy>() {
+        @Override
+        public int compare(Allergy allergy1, Allergy allergy2) {
+            return allergy1.toString().compareTo(allergy2.toString());
+        }
+    };
 
     @Override
     public String toString() {
