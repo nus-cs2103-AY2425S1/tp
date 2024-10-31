@@ -41,9 +41,11 @@ public class CommandsUtil {
     }
 
     /**
-     * Returns an uppercase edit command string for editing {@code index}.
+     * Returns an uppercase edit command string for editing {@code descriptor} at the specified {@code index}.
      *
+     * @param commandWord Command word.
      * @param descriptor EditPersonDescriptor object.
+     * @param index Index of the person to be edited.
      * @return String of the uppercase edit command.
      */
     public static String getUpperCaseEditContactCommand(String commandWord,
