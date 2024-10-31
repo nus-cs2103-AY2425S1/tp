@@ -249,6 +249,7 @@ Format: `addSubmission sm/SUBMISSION_NAME`
 </box>
 
 * The submission name can only contain alphanumeric characters and spaces.
+* The submission name is case-sensitive. e.g. "Assignment 1" will be treated differently from "assignment 1"
 
 Examples:
 * `addSubmission sm/Assignment 1`
@@ -259,9 +260,13 @@ Adds a submission status for the specified submission for the person at the spec
 
 Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
 
-* The submission status must be "Y" or "N", or `NIL`.
+<box type="tip" seamless>
+
+**Tip:** The submission status can be deleted by entering the submission status as `NIL`.
+</box>
+
+* The submission status must be "Y", "N" or `NIL`.
 * The submission status can be edited using the same command with a different submission status.
-* The submission status can be deleted by entering the submission status as `NIL`.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
