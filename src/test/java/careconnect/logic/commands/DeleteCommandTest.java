@@ -29,7 +29,7 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedConfirmationMessage = Command.CONFIRMATION_MESSAGE;
+        String expectedConfirmationMessage = String.format(Command.CONFIRMATION_MESSAGE, DeleteCommand.COMMAND_WORD);
         CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedConfirmationMessage, model);
 
         // Now we confirm the deletion
@@ -59,7 +59,7 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedConfirmationMessage = Command.CONFIRMATION_MESSAGE;
+        String expectedConfirmationMessage = String.format(Command.CONFIRMATION_MESSAGE, DeleteCommand.COMMAND_WORD);
         CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedConfirmationMessage, model);
 
         // Now we confirm the deletion

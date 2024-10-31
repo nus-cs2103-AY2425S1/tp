@@ -96,7 +96,7 @@ public class DeleteLogCommand extends Command {
         if (this.requireConfirmation) {
             // Queues a DeleteLogCommand
             Command.commandToConfirm = new DeleteLogCommand(personIndex, logIndex, false);
-            return new CommandResult(Command.CONFIRMATION_MESSAGE,
+            return new CommandResult(String.format(Command.CONFIRMATION_MESSAGE, DeleteLogCommand.COMMAND_WORD),
                     false, false, personIndex.getZeroBased());
         }
         Person personToDeleteLog = lastShownList.get(personIndex.getZeroBased());

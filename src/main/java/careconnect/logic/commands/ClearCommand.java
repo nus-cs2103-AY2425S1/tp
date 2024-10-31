@@ -30,7 +30,7 @@ public class ClearCommand extends Command {
         if (this.requireConfirmation) {
             // Queues a ClearCommand
             Command.commandToConfirm = new ClearCommand(false);
-            return new CommandResult(Command.CONFIRMATION_MESSAGE);
+            return new CommandResult(String.format(Command.CONFIRMATION_MESSAGE, ClearCommand.COMMAND_WORD));
         }
         model.setAddressBook(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);

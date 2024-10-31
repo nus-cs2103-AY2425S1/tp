@@ -10,7 +10,7 @@ import careconnect.model.Model;
 public abstract class Command {
 
     public static final String CONFIRMATION_MESSAGE =
-            "This action is irreversible. Press y to continue, or n to cancel.";
+            "The %s command is irreversible. Press y to continue, or n to cancel.";
 
     public static void requireConfirmableCommand() throws CommandException {
         if (Command.commandToConfirm == null) {

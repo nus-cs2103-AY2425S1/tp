@@ -17,7 +17,7 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        String expectedConfirmationMessage = Command.CONFIRMATION_MESSAGE;
+        String expectedConfirmationMessage = String.format(Command.CONFIRMATION_MESSAGE, ClearCommand.COMMAND_WORD);
         CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, expectedConfirmationMessage, model);
 
         // Now we confirm the clear
@@ -30,7 +30,7 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        String expectedConfirmationMessage = Command.CONFIRMATION_MESSAGE;
+        String expectedConfirmationMessage = String.format(Command.CONFIRMATION_MESSAGE, ClearCommand.COMMAND_WORD);
         CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, expectedConfirmationMessage, model);
 
         // Now we confirm the clear

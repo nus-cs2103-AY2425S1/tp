@@ -54,7 +54,7 @@ public class DeleteCommand extends Command {
         if (this.requireConfirmation) {
             // Queues a DeleteCommand
             Command.commandToConfirm = new DeleteCommand(this.targetIndex, false);
-            return new CommandResult(Command.CONFIRMATION_MESSAGE);
+            return new CommandResult(String.format(Command.CONFIRMATION_MESSAGE, DeleteCommand.COMMAND_WORD));
         }
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
