@@ -25,10 +25,7 @@ Class Event
 Class Date
 
 Class UniqueAssociationList
-Class Association {
-  vendorId : UniqueId
-  eventId : UniqueId
-}
+Class Association
 
 Class I #FFFFFF
 }
