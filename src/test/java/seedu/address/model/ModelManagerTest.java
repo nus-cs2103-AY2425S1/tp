@@ -7,7 +7,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
-import static seedu.address.testutil.TypicalStudents.BOB;
 import static seedu.address.testutil.TypicalStudents.HOON;
 
 import java.nio.file.Path;
@@ -91,23 +90,6 @@ public class ModelManagerTest {
     public void hasStudent_studentInAddressBook_returnsTrue() {
         modelManager.addStudent(ALICE);
         assertTrue(modelManager.hasStudent(ALICE));
-    }
-
-    @Test
-    public void countClashes_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.checkClashes(null));
-    }
-
-    @Test
-    public void checkClashes_noClashes_returnsZero() {
-        modelManager.addStudent(ALICE);
-        assertEquals(modelManager.checkClashes(BOB), 0);
-    }
-
-    @Test
-    public void checkClashes_someClashes_returnsCorrectCount() {
-        modelManager.addStudent(ALICE);
-        assertEquals(modelManager.checkClashes(HOON), 1);
     }
 
     @Test

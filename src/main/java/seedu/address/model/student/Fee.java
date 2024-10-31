@@ -10,8 +10,7 @@ public abstract class Fee {
 
     public static final String MESSAGE_CONSTRAINTS = """
             should adhere to the following constraints:
-            1. is a non negative number
-            2. at most 2 decimal places
+            1. at most 2 decimal places
             """;
 
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";

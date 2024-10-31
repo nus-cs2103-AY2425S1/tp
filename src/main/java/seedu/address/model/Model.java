@@ -61,13 +61,6 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
-     * Checks for number of students with schedule clashes with {@code student}.
-     * @param student The student whose schedule is to be checked against others for clashes.
-     * @return Number of students with schedule clashes.
-     */
-    public long checkClashes(Student student);
-
-    /**
      * Retrieves a list of students with whom {@code student} has schedule clashes.
      * @param student The student whose schedule is to be checked against others for clashes.
      * @return List of students who have schedule conflicts with the given student.
