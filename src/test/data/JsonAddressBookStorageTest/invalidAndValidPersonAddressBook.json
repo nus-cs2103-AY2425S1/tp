@@ -17,5 +17,6 @@
     "email": "hans@example.com",
     "address": "4th street",
     "appointment" : "14 March 2024 19:30"
-  } ]
+  } ],
+  "operatingHours" : "00:00 23:59"
 }

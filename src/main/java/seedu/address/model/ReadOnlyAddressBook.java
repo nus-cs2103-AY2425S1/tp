@@ -14,4 +14,8 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns the operatingHours of the AddressBook.
+     */
+    OperatingHours getOperatingHours();
 }

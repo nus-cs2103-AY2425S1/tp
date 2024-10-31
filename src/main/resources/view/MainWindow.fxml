@@ -33,6 +33,7 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
+
         <HBox>
           <Label fx:id="date" styleClass="time_label" text="\$date" maxHeight="Infinity"/>
           <Label fx:id="operatingHours" styleClass="operating_hours_label"  maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
