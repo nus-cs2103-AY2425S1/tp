@@ -8,6 +8,7 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.List;
 import java.util.Set;
 
 import tuteez.logic.commands.AddCommand;
@@ -67,7 +68,7 @@ public class PersonUtil {
             }
         }
         if (descriptor.getLessons().isPresent()) {
-            Set<Lesson> lessons = descriptor.getLessons().get();
+            List<Lesson> lessons = descriptor.getLessons().get();
             if (lessons.isEmpty()) {
                 sb.append(PREFIX_LESSON);
             } else {

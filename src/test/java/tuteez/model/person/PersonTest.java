@@ -14,8 +14,12 @@ import static tuteez.testutil.Assert.assertThrows;
 import static tuteez.testutil.TypicalPersons.ALICE;
 import static tuteez.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
+import tuteez.model.person.lesson.Lesson;
 import tuteez.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -52,6 +56,47 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void nextLessonBasedOnCurrentTimeTest() {
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        LocalDateTime lesson1DateTime = currentTime.plusDays(2).plusHours(10).plusMinutes(0);
+        LocalDateTime lesson1EndTime = lesson1DateTime.plusHours(1);
+
+        LocalDateTime lesson2DateTime = currentTime.plusHours(3).plusHours(15).plusMinutes(0);
+        LocalDateTime lesson2EndTime = lesson2DateTime.plusHours(1);
+
+        LocalDateTime lesson3DateTime = currentTime.plusHours(1).plusHours(3).plusMinutes(0);
+        LocalDateTime lesson3EndTime = lesson3DateTime.plusHours(1);
+
+        DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("EEEE");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
+        String lesson1Str = lesson1DateTime.format(dayFormatter) + " "
+                + lesson1DateTime.format(timeFormatter) + "-"
+                + lesson1EndTime.format(timeFormatter);
+        lesson1Str = lesson1Str.toLowerCase();
+
+        String lesson2Str = lesson2DateTime.format(dayFormatter) + " "
+                + lesson2DateTime.format(timeFormatter) + "-"
+                + lesson2EndTime.format(timeFormatter);
+        lesson2Str = lesson2Str.toLowerCase();
+
+        String lesson3Str = lesson3DateTime.format(dayFormatter) + " "
+                + lesson3DateTime.format(timeFormatter) + "-"
+                + lesson3EndTime.format(timeFormatter);
+        lesson3Str = lesson3Str.toLowerCase();
+
+        Lesson lesson3 = new Lesson(lesson3Str);
+
+        Person student = new PersonBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withLessons(lesson1Str, lesson2Str, lesson3Str).build();
+
+        assertEquals(student.nextLessonBasedOnCurrentTime(), lesson3);
+
     }
 
     @Test

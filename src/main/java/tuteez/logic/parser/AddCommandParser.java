@@ -9,6 +9,7 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -53,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 argMultimap.getValue(PREFIX_TELEGRAM).orElse(null));
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Set<Lesson> lessonList = ParserUtil.parseLessons(argMultimap.getAllValues(PREFIX_LESSON));
+        List<Lesson> lessonList = ParserUtil.parseLessons(argMultimap.getAllValues(PREFIX_LESSON));
 
         Person person = new Person(name, phone, email, address, telegramUsername, tagList, lessonList);
 

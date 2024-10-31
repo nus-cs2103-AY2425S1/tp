@@ -2,8 +2,10 @@ package tuteez.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import tuteez.commons.core.index.Index;
@@ -166,9 +168,9 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> lessons} into a {@code Set<Lesson>}.
      */
-    public static Set<Lesson> parseLessons(Collection<String> lessons) throws ParseException {
+    public static List<Lesson> parseLessons(Collection<String> lessons) throws ParseException {
         requireNonNull(lessons);
-        final Set<Lesson> lessonSet = new HashSet<>();
+        final List<Lesson> lessonSet = new ArrayList<>();
         for (String lesson : lessons) {
             lessonSet.add(parseLesson(lesson));
         }
