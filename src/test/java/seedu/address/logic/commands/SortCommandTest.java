@@ -24,22 +24,22 @@ public class SortCommandTest {
 
     @Test
     public void execute_nameAscendingOrder_success() {
-        executeSuccessfulSortTest(PersonComparator.NAME, true, modelAscendingDateOfLastVisit);
+        executeSuccessfulSortTest(PersonComparator.NAME, true, modelAscendingName);
     }
 
     @Test
     public void execute_nameDescendingOrder_success() {
-        executeSuccessfulSortTest(PersonComparator.NAME, false, modelDescendingDateOfLastVisit);
+        executeSuccessfulSortTest(PersonComparator.NAME, false, modelDescendingName);
     }
 
     @Test
     public void execute_dateOfLastVisitAscending_success() {
-        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, true, modelDescendingName);
+        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, true, modelAscendingDateOfLastVisit);
     }
 
     @Test
     public void execute_dateOfLastVisitDescending_success() {
-        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, false, modelAscendingName);
+        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, false, modelDescendingDateOfLastVisit);
     }
 
     private void executeSuccessfulSortTest(String sortParameter, boolean isAscending, Model model) {
@@ -47,7 +47,7 @@ public class SortCommandTest {
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
                 sortParameter, isAscending ? "ascending" : "descending");
         Model expectedModel = new ModelManager(getTypicalAddressBook(sortParameter, isAscending), new UserPrefs());
-        assertCommandSuccess(sortCommand, modelDescendingName, expectedMessage, expectedModel);
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
