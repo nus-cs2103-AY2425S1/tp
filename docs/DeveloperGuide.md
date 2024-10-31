@@ -165,7 +165,7 @@ manage student profiles more efficiently.
 
 - **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified 
   tags already exist on the profile, an error message will notify the user, avoiding duplicate tags.
-- **Invalid Input**: If an invalid student name, level, or subject is provided, the system displays the constraints and 
+- **Invalid Input**: If an invalid student name, level, or subject is inputted, the system displays the constraints and 
   guidelines for tag parameters.
 - **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in 
   value (e.g., "Math" and "MATH"), only one instance of each unique tag will be added, preventing unnecessary 
@@ -368,12 +368,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
-* 1a. The provided student's name already exists in EduManage.
+* 1a. The inputted student's name already exists in EduManage.
     * 1a1 EduManage shows an error message indicating that the student already exists in EduManage.
 
       Use case resumes at step 1.
   
-* 1b. The provided student's information is missing fields that are not optional.
+* 1b. The inputted student's information is missing fields that are not optional.
   * 1b1 EduManage shows an error message and displays correct command format.
   
     Use case resumes at step 1.
@@ -397,7 +397,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The provided student index is invalid.
+* 3a. The inputted student index is invalid.
 
     * 3a1. EduManage shows an error message indicating inputted index is invalid.
 
@@ -640,7 +640,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Tuition teacher requests to list students.
 2. EduManage shows a list of all students.
 3. Tuition teacher requests to view all students with a common attribute by inputting a common attribute (e.g. a partial name, level or subject).
-4. EduManage displays all students that match the provided attribute (students with names, levels, or subjects that match the search term).
+4. EduManage displays all students that match the inputted attribute (students with names, levels, or subjects that match the search term).
 
    Use case ends.
 
@@ -650,7 +650,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The provided common attribute is invalid as it does not correspond to a valid attribute within EduManage.
+* 3a. The inputted common attribute is invalid as it does not correspond to a valid attribute within EduManage.
 
     * 3a1. EduManage shows an error message.
 
