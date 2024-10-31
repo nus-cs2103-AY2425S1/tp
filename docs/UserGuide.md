@@ -354,15 +354,17 @@ to any desired location if needed.
 
 ## Command summary
 
- Action     | Format, Examples                                                                                                                                 
-------------|--------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**    | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`                                     
- **Clear**  | `clear`                                                                                                                                          
- **Delete** | `delete NRIC`<br> e.g., `delete S1234567Z`                                                                                                       
- **Update**   | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
- **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       
- **List**   | `list`                                                                                                                                           
- **Help**   | `help`                                                                                                                                           
-| **Backup** | `backup` <br> e.g., `backup` creates a new backup of the patient records.                                                                        |
-**Restore** | `restore`<br> e.g., `restore` restores patient records from the most recent backup file.
+| Action                | Format, Examples                                                                                                                                                                                                                               |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**               | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient` |
+| **Clear**             | `clear`                                                                                                                                                                                                                                        |
+| **Delete**            | `delete NRIC`<br> e.g., `delete S1234567Z`                                                                                                                                                                                                     |
+| **Update**            | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                      |
+| **Find (by names)**   | `find NAME [MORE_NAMES]`<br> e.g., `find James Jake`                                                                                                                                                                                           |
+| **Find (by an NRIC)** | `find NRIC` <br> e.g., `find S1234567Z`                                                                                                                                                                                                        |
+| **Bookings**          | `bookings DATE`<br> e.g., `bookings 01/02/2024`                                                                                                                                                                                                |
+| **List**              | `list`                                                                                                                                                                                                                                         |
+| **Help**              | `help`                                                                                                                                                                                                                                         |
+| **Backup**            | `backup` <br> e.g., `backup` creates a new backup of the patient records.                                                                                                                                                                      |
+| **Restore**           | `restore`<br> e.g., `restore` restores patient records from the most recent backup file.                                                                                                                                                       |
 
