@@ -27,6 +27,12 @@ public class Log {
         this.timestamp = timestamp;
     }
 
+    /**
+     * Constructs a {@code Log} from a log entry string.
+     * The log entry string should contain a timestamp and a log message.
+     *
+     * @param logEntry The log entry string.
+     */
     public Log(String logEntry) {
         String[] logEntryParts = logEntry.split(" ");
         this.timestamp = LocalDateTime.parse(logEntryParts[0] + " " + logEntryParts[1],
@@ -35,6 +41,13 @@ public class Log {
                 .collect(Collectors.joining(" "));
     }
 
+    /**
+     * Checks if a given string is a valid log entry.
+     * A valid log entry should contain a valid timestamp and a non-blank log message.
+     *
+     * @param test The string to test.
+     * @return True if the string is a valid log entry, false otherwise.
+     */
     public static boolean isValidLog(String test) {
         String[] logEntryParts = test.split(" ", 3);
         if (logEntryParts.length != 3) {

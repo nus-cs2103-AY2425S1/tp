@@ -155,6 +155,13 @@ public class ParserUtil {
         return new Appointment(trimmedAppointment);
     }
 
+    /**
+     * Parses a {@code String logEntry} into a {@code Log}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @param logEntry The log entry to be parsed.
+     * @return The parsed {@code Log}.
+     * @throws ParseException if the given {@code logEntry} is invalid.
+     */
     public static Log parseLog(String logEntry) throws ParseException {
         requireNonNull(logEntry);
         String trimmedLogEntry = logEntry.trim();

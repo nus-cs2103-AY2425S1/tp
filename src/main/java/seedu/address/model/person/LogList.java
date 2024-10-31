@@ -19,6 +19,11 @@ public class LogList {
         logs = new ArrayList<>();
     }
 
+    /**
+     * Constructs a {@code LogList} with the given log entries.
+     *
+     * @param logEntries The list of log entries to initialize the log list with.
+     */
     public LogList(List<String> logEntries) {
         logs = new ArrayList<>();
         for (String logEntry : logEntries) {
