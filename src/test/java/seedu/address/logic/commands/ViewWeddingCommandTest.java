@@ -3,8 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.wedding.Date;
+import seedu.address.model.wedding.Venue;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.testutil.PersonBuilder;
 
 public class ViewWeddingCommandTest {
@@ -32,6 +37,12 @@ public class ViewWeddingCommandTest {
 
         model.addPerson(planner);
         model.addPerson(florist);
+
+        Set<Person> stubParticipantSet = new HashSet<>();
+        stubParticipantSet.add(planner);
+        model.addWedding(new Wedding(new WeddingName("Alice & Bob"), new Venue("woodlands"),
+                new Date("12/12/2024"), stubParticipantSet));
+
         modelMultiple.addPerson(planner);
         modelMultiple.addPerson(planner2);
     }
@@ -39,9 +50,9 @@ public class ViewWeddingCommandTest {
     @Test
     public void equals() {
         TagContainsKeywordsPredicate firstPredicate =
-                new TagContainsKeywordsPredicate(Arrays.asList("Alice & Bob"));
+                new TagContainsKeywordsPredicate("Alice & Bob");
         TagContainsKeywordsPredicate secondPredicate =
-                new TagContainsKeywordsPredicate(Arrays.asList("Charlie & Danielle"));
+                new TagContainsKeywordsPredicate("Charlie & Danielle");
 
         ViewWeddingCommand viewWeddingFirstCommand = new ViewWeddingCommand(firstPredicate);
         ViewWeddingCommand viewWeddingSecondCommand = new ViewWeddingCommand(secondPredicate);
@@ -67,23 +78,23 @@ public class ViewWeddingCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 0);
 
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("null"));
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(null);
         ViewWeddingCommand command = new ViewWeddingCommand(predicate);
         model.updateFilteredPersonList(predicate);
 
         assertEquals(expectedMessage, command.execute(model).getFeedbackToUser());
         assertEquals(List.of(), model.getFilteredPersonList());
     }
-    //
-    //    @Test
-    //    public void execute_singleMatchingKeyword_onePersonFound() {
-    //        String expectedMessage = String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 1);
-    //        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("wedding"));
-    //        ViewWeddingCommand command = new ViewWeddingCommand(predicate);
-    //        model.updateFilteredPersonList(predicate);
-    //        assertEquals(expectedMessage, command.execute(model).getFeedbackToUser());
-    //        assertEquals(1, model.getFilteredPersonList().size());
-    //    }
+
+    // @Test
+    // public void execute_singleMatchingKeyword_onePersonFound() {
+    //     String expectedMessage = String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 1);
+    //     TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("Alice & Bob");
+    //     ViewWeddingCommand command = new ViewWeddingCommand(predicate);
+    //     model.updateFilteredPersonList(predicate);
+    //     assertEquals(expectedMessage, command.execute(model).getFeedbackToUser());
+    //     assertEquals(1, model.getFilteredPersonList().size());
+    // }
     //
     //    @Test
     //    public void execute_singleMatchingKeywords_multiplePersonsFound() {
@@ -95,11 +106,11 @@ public class ViewWeddingCommandTest {
     //        assertEquals(2, modelMultiple.getFilteredPersonList().size());
     //    }
     //
-    //    @Test
-    //    public void toStringMethod() {
-    //        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("wedding"));
-    //        ViewWeddingCommand command = new ViewWeddingCommand(predicate);
-    //        String expected = "ViewWeddingCommand[predicate=" + predicate + "]";
-    //        assertEquals(expected, command.toString());
-    //    }
+    @Test
+    public void toStringMethod() {
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("wedding");
+        ViewWeddingCommand command = new ViewWeddingCommand(predicate);
+        String expected = "seedu.address.logic.commands.ViewWeddingCommand{predicate=" + predicate + "}";
+        assertEquals(expected, command.toString());
+    }
 }

@@ -2,10 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import seedu.address.logic.commands.ViewWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -22,17 +18,14 @@ public class ViewWeddingCommandParser implements Parser<ViewWeddingCommand> {
      */
     public ViewWeddingCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewWeddingCommand.MESSAGE_USAGE));
         }
 
-        String[] weddingNameKeywords = {};
+        String weddingNameKeyword = trimmedArgs.toLowerCase();
 
-        weddingNameKeywords = trimmedArgs.substring(2).split("\\s+");
-
-        List<String> weddingNameKeywordList = Arrays.stream(weddingNameKeywords).collect(Collectors.toList());
-
-        return new ViewWeddingCommand(new TagContainsKeywordsPredicate(weddingNameKeywordList));
+        return new ViewWeddingCommand(new TagContainsKeywordsPredicate(weddingNameKeyword));
     }
 }

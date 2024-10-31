@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -9,12 +8,12 @@ import java.util.stream.Collectors;
  * Tests that a {@code Person}'s {@code Tag} matches any of the keywords given.
  */
 public class TagContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> weddingKeywords;
+    private final String weddingKeywords;
 
     /**
      * Constructs a TagContainsKeywordsPredicate with the given tag keywords.
      */
-    public TagContainsKeywordsPredicate(List<String> weddingKeywords) {
+    public TagContainsKeywordsPredicate(String weddingKeywords) {
         this.weddingKeywords = weddingKeywords;
     }
 
@@ -24,15 +23,10 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
                 .map(Tag::getTagName)
                 .collect(Collectors.toList());
 
-        boolean matchesWedding = weddingKeywords.stream()
-                .anyMatch(keyword ->
-                        tagNames.stream()
-                                .anyMatch(tagName -> {
-                                    // Split the tag name into words and check if any word matches the keyword
-                                    String[] words = tagName.split("\\s+");
-                                    return Arrays.asList(words).contains(keyword.toLowerCase());
-                                })
-                );
+        boolean matchesWedding = tagNames.stream()
+                                    .anyMatch(tagName -> {
+                                        return tagName.toLowerCase().equals(weddingKeywords);
+                                    });
 
         return matchesWedding;
     }

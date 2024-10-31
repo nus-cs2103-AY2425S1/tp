@@ -4,8 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewWeddingCommand;
@@ -17,8 +15,8 @@ public class ViewWeddingCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsViewWeddingCommand() {
-        String input = "viAlice&Bob";
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("Alice&Bob"));
+        String input = "alice & bob";
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("alice & bob");
         ViewWeddingCommand expectedCommand = new ViewWeddingCommand(predicate);
         assertParseSuccess(parser, input, expectedCommand);
     }

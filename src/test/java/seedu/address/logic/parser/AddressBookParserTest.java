@@ -183,11 +183,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_viewWedding() throws Exception {
-        List<String> nameKeywords = List.of("Alice&Bob"); // have to restrict the spacing
-
+        String weddingNameKeyword = "Alice & Bob";
         ViewWeddingCommand command = (ViewWeddingCommand) parser.parseCommand(
-                ViewWeddingCommand.COMMAND_WORD + " n/" + String.join(" ", nameKeywords));
-        assertEquals(new ViewWeddingCommand(new TagContainsKeywordsPredicate(nameKeywords)), command);
+                ViewWeddingCommand.COMMAND_WORD + " " + weddingNameKeyword);
+        assertEquals(new ViewWeddingCommand(new TagContainsKeywordsPredicate(weddingNameKeyword.toLowerCase())),
+                command);
     }
 
     @Test
