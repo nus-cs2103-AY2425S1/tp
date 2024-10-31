@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are not null, Name and Phone are present, field values are validated, immutable.
+ * Guarantees: Name and Phone are present and not null, all field values are validated, immutable.
  */
 public class Person {
 
@@ -75,6 +75,7 @@ public class Person {
     }
 
     /**
+     * Constructor for Person in general
      * Returns a Person object using the different constructors given the respective fields.
      */
     public static Person personConstructor(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {

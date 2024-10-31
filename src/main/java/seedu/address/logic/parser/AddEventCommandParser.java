@@ -37,8 +37,8 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
                 PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CELEBRITY,
                 PREFIX_EVENT_CONTACTS);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE,
-                PREFIX_EVENT_CELEBRITY, PREFIX_EVENT_CONTACTS) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_CELEBRITY)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
@@ -46,7 +46,9 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
                 PREFIX_EVENT_VENUE, PREFIX_EVENT_CELEBRITY);
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT_NAME).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_EVENT_TIME).get());
-        Venue venue = ParserUtil.parseVenue((argMultimap.getValue(PREFIX_EVENT_VENUE)).get());
+        Venue venue = argMultimap.getValue(PREFIX_EVENT_VENUE).isPresent()
+                ? ParserUtil.parseVenue((argMultimap.getValue(PREFIX_EVENT_VENUE)).get())
+                : null;
         String celebrity = argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get();
         List<String> contacts = Arrays.stream(argMultimap.getValue(PREFIX_EVENT_CONTACTS).get().split(","))
                 .map(String::trim)

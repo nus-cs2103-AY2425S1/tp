@@ -81,7 +81,7 @@ public class AddEventCommand extends AddCommand {
             throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
         }
 
-        Event toAdd = new Event(this.eventName, this.time, this.venue, celebrity, contacts);
+        Event toAdd = Event.createEvent(this.eventName, this.time, this.venue, celebrity, contacts);
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
@@ -113,12 +113,17 @@ public class AddEventCommand extends AddCommand {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder result = new ToStringBuilder(this)
                 .add("eventName", eventName)
-                .add("time", time)
-                .add("venue", venue)
-                .add("Celebrity", celebrityName)
+                .add("time", time);
+        if (venue != null) {
+            result.add("venue", venue);
+        } else {
+            result.add("venue", null);
+        }
+        result.add("Celebrity", celebrityName)
                 .add("Contacts", contactNames)
                 .toString();
+        return result.toString();
     }
 }

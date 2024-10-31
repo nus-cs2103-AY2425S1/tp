@@ -13,6 +13,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 /**
@@ -50,7 +51,7 @@ class JsonAdaptedEvent {
     public JsonAdaptedEvent(Event source) {
         name = source.getName().getEventName();
         time = new JsonAdaptedTime(source.getTime());
-        venue = source.getVenue().getVenue();
+        venue = source.getVenue().map(Venue::toString).orElse(null);
         celebrity = new JsonAdaptedPerson(source.getCelebrity());
         contacts.addAll(source.getContacts().stream()
                 .map(JsonAdaptedPerson::new)
@@ -80,17 +81,17 @@ class JsonAdaptedEvent {
         }
         final Time eventTime = time.toModelType();
 
-        if (venue == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));
+        Venue eventVenue = null;
+        if (venue != null) {
+            eventVenue = new Venue(venue);
         }
-        final Venue eventVenue = new Venue(venue);
 
         if (celebrity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
         final Person eventCelebrity = celebrity.toModelType();
 
-        return new Event(eventName, eventTime, eventVenue, eventCelebrity, eventContacts);
+        return Event.createEvent(eventName, eventTime, eventVenue, eventCelebrity, eventContacts);
     }
 
 }

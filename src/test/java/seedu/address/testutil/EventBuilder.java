@@ -43,7 +43,7 @@ public class EventBuilder {
     public EventBuilder(Event eventToCopy) {
         name = eventToCopy.getName();
         time = eventToCopy.getTime();
-        venue = eventToCopy.getVenue();
+        venue = eventToCopy.getVenue().orElse(null);
         celebrity = eventToCopy.getCelebrity();
         contacts = eventToCopy.getContacts();
     }
