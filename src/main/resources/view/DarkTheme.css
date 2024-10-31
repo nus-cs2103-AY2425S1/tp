@@ -130,6 +130,7 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+    -fx-padding: 2 0 0 0;
 }
 
 .stack-pane {
@@ -138,6 +139,10 @@
      -fx-border-width: 0;
      -fx-border-color: #d06651;
      -fx-border-radius: 5;
+}
+
+.separator {
+    -fx-padding: 10 0 5 0;
 }
 
 .pane-with-border {
@@ -356,6 +361,7 @@
 #groups {
     -fx-hgap: 7;
     -fx-vgap: 3;
+    -fx-padding: 3 0 0 3;
 }
 
 #groups .label {

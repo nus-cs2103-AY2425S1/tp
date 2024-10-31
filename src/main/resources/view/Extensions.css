@@ -1,6 +1,6 @@
 
 .error {
-    -fx-text-fill: #d06651 !important;
+    -fx-text-fill: red !important;
 }
 
 .list-cell:empty {
