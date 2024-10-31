@@ -51,6 +51,10 @@ public class Event {
         this.eventId = eventId;
     }
 
+    public EventName getName() {
+        return eventName;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

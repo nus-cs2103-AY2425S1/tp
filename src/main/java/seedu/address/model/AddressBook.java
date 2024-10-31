@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.person.Name;
@@ -166,12 +167,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Gets all the events whose names are the same (case-insensitive) as the given argument.
+     */
+    public List<Event> findEventsWithName(EventName name) {
+        requireNonNull(name);
+        return events.getEventsWithName(name);
+    }
+
+    /**
      * Adds an event to the address book.
      * The event must not already exist in the address book and must have a unique ID.
      */
     public void addEvent(Event event) {
         assert event.getEventId() != -1 : "Event added should not have an ID of -1.";
         events.add(event);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeEvent(Event key) {
+        events.remove(key);
     }
 
     //// ID counter-level operations

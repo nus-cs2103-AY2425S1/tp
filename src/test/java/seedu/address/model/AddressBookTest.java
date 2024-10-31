@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.person.Name;
@@ -101,29 +102,6 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasEvent_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
-    }
-
-    @Test
-    public void hasEvent_eventNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasEvent(MEETING));
-    }
-
-    @Test
-    public void hasEvent_eventInAddressBook_returnsTrue() {
-        addressBook.addEvent(MEETING);
-        assertTrue(addressBook.hasEvent(MEETING));
-    }
-
-    @Test
-    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addEvent(MEETING);
-        Event editedMeeting = new EventBuilder(MEETING).build();
-        assertTrue(addressBook.hasEvent(editedMeeting));
-    }
-
-    @Test
     public void findPersonsWithName_nullName_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.findPersonsWithName(null));
     }
@@ -176,6 +154,84 @@ public class AddressBookTest {
         String upperCasedNameString = nameString.toUpperCase();
         Name upperCasedName = new Name(upperCasedNameString);
         assertEquals(addressBook.findPersonsWithName(upperCasedName), resultList);
+    }
+
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasEvent(MEETING));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        addressBook.addEvent(MEETING);
+        assertTrue(addressBook.hasEvent(MEETING));
+    }
+
+    @Test
+    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addEvent(MEETING);
+        Event editedMeeting = new EventBuilder(MEETING).build();
+        assertTrue(addressBook.hasEvent(editedMeeting));
+    }
+
+    @Test
+    public void findEventsWithName_nullName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.findEventsWithName(null));
+    }
+
+    @Test
+    public void findEventsWithName_eventNotInAddressBook_returnsEmptyList() {
+        List<Event> resultList = new ArrayList<>();
+        assertEquals(addressBook.findEventsWithName(MEETING.getName()), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventInAddressBook_returnsEventList() {
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+        addressBook.addEvent(MEETING);
+        assertEquals(addressBook.findEventsWithName(MEETING.getName()), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventWithPartOfNameNotInAddressBook_returnsEmptyList() {
+        List<Event> resultList = new ArrayList<>();
+
+        addressBook.addEvent(MEETING);
+        String nameString = MEETING.getName().toString();
+        String partOfNameString = nameString.substring(0, nameString.length() - 1);
+        EventName partOfName = new EventName(partOfNameString);
+
+        assertEquals(addressBook.findEventsWithName(partOfName), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventWithLowerCasedNameInAddressBook_returnsEventList() {
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+
+        addressBook.addEvent(MEETING);
+        String nameString = MEETING.getName().toString();
+        String lowerCasedNameString = nameString.toLowerCase();
+        EventName lowerCasedName = new EventName(lowerCasedNameString);
+        assertEquals(addressBook.findEventsWithName(lowerCasedName), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventWithUpperCasedNameInAddressBook_returnsEventList() {
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+
+        addressBook.addEvent(MEETING);
+        String nameString = MEETING.getName().toString();
+        String upperCasedNameString = nameString.toUpperCase();
+        EventName upperCasedName = new EventName(upperCasedNameString);
+        assertEquals(addressBook.findEventsWithName(upperCasedName), resultList);
     }
 
     @Test

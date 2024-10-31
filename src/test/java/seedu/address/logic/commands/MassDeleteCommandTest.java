@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -32,13 +32,13 @@ public class MassDeleteCommandTest {
 
     @Test
     public void execute_validIndicesUnfilteredList_success() {
-        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person secondPersonToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        List<Index> indicesToDelete = Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
+        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Person secondPersonToDelete = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
+        List<Index> indicesToDelete = Arrays.asList(INDEX_FIRST, INDEX_SECOND);
         MassDeleteCommand massDeleteCommand = new MassDeleteCommand(indicesToDelete, Collections.emptyList());
 
         String expectedMessage = String.format(MassDeleteCommand.MESSAGE_DELETE_PERSONS_SUCCESS,
-                Arrays.asList(INDEX_FIRST_PERSON.getOneBased(), INDEX_SECOND_PERSON.getOneBased()));
+                Arrays.asList(INDEX_FIRST.getOneBased(), INDEX_SECOND.getOneBased()));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(firstPersonToDelete);
@@ -49,14 +49,14 @@ public class MassDeleteCommandTest {
 
     @Test
     public void execute_validIndicesFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        List<Index> indicesToDelete = Arrays.asList(INDEX_FIRST_PERSON);
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        List<Index> indicesToDelete = Arrays.asList(INDEX_FIRST);
         MassDeleteCommand massDeleteCommand = new MassDeleteCommand(indicesToDelete, Collections.emptyList());
 
         String expectedMessage = String.format(MassDeleteCommand.MESSAGE_DELETE_PERSONS_SUCCESS,
-                Arrays.asList(INDEX_FIRST_PERSON.getOneBased()));
+                Arrays.asList(INDEX_FIRST.getOneBased()));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -74,13 +74,13 @@ public class MassDeleteCommandTest {
 
     @Test
     public void execute_mixedValidAndInvalidInputs_successWithInvalidInputsReported() {
-        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        List<Index> indicesToDelete = Arrays.asList(INDEX_FIRST_PERSON);
+        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        List<Index> indicesToDelete = Arrays.asList(INDEX_FIRST);
         List<String> invalidInputs = Arrays.asList("a", "b");
         MassDeleteCommand massDeleteCommand = new MassDeleteCommand(indicesToDelete, invalidInputs);
 
         String expectedMessage = String.format(MassDeleteCommand.MESSAGE_DELETE_PERSONS_SUCCESS,
-                Arrays.asList(INDEX_FIRST_PERSON.getOneBased())) + "\nInvalid inputs: [a, b]";
+                Arrays.asList(INDEX_FIRST.getOneBased())) + "\nInvalid inputs: [a, b]";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(firstPersonToDelete);
@@ -91,16 +91,16 @@ public class MassDeleteCommandTest {
     @Test
     public void equals() {
         MassDeleteCommand massDeleteFirstCommand = new
-                MassDeleteCommand(Arrays.asList(INDEX_FIRST_PERSON), Collections.emptyList());
+                MassDeleteCommand(Arrays.asList(INDEX_FIRST), Collections.emptyList());
         MassDeleteCommand massDeleteSecondCommand = new
-                MassDeleteCommand(Arrays.asList(INDEX_SECOND_PERSON), Collections.emptyList());
+                MassDeleteCommand(Arrays.asList(INDEX_SECOND), Collections.emptyList());
 
         // same object -> returns true
         assertTrue(massDeleteFirstCommand.equals(massDeleteFirstCommand));
 
         // same values -> returns true
         MassDeleteCommand massDeleteFirstCommandCopy = new
-                MassDeleteCommand(Arrays.asList(INDEX_FIRST_PERSON), Collections.emptyList());
+                MassDeleteCommand(Arrays.asList(INDEX_FIRST), Collections.emptyList());
         assertTrue(massDeleteFirstCommand.equals(massDeleteFirstCommandCopy));
 
         // different types -> returns false
@@ -115,7 +115,7 @@ public class MassDeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        List<Index> targetIndices = Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
+        List<Index> targetIndices = Arrays.asList(INDEX_FIRST, INDEX_SECOND);
         MassDeleteCommand massDeleteCommand = new MassDeleteCommand(targetIndices, Collections.emptyList());
         String expected = MassDeleteCommand.class.getCanonicalName()
                 + "{targetIndices=" + targetIndices + ", invalidInputs=[]}";

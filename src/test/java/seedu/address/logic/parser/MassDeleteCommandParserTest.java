@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +22,7 @@ public class MassDeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsMassDeleteCommand() {
-        List<Index> expectedIndices = Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON);
+        List<Index> expectedIndices = Arrays.asList(INDEX_FIRST, INDEX_SECOND, INDEX_THIRD);
         assertParseSuccess(parser, "1 2 3", new MassDeleteCommand(expectedIndices, Collections.emptyList()));
     }
 
@@ -34,7 +34,7 @@ public class MassDeleteCommandParserTest {
         assertParseSuccess(parser, "a b c", expectedCommand);
 
         // Test with mixed valid and invalid input
-        List<Index> expectedIndices = Arrays.asList(INDEX_FIRST_PERSON, INDEX_THIRD_PERSON);
+        List<Index> expectedIndices = Arrays.asList(INDEX_FIRST, INDEX_THIRD);
         List<String> singleInvalidInput = Collections.singletonList("a");
         MassDeleteCommand mixedInputCommand = new MassDeleteCommand(expectedIndices, singleInvalidInput);
         assertParseSuccess(parser, "1 a 3", mixedInputCommand);

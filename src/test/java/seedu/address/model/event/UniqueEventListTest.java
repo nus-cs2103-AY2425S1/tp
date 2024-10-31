@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_TO_DATE_1
 import static seedu.address.testutil.TypicalEvents.MEETING;
 import static seedu.address.testutil.TypicalEvents.WORKSHOP;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.EventBuilder;
 
 public class UniqueEventListTest {
@@ -26,21 +28,67 @@ public class UniqueEventListTest {
     public void contains_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueEventList.contains(null));
     }
+
     @Test
     public void contains_eventNotInList_returnsFalse() {
         assertFalse(uniqueEventList.contains(MEETING));
     }
+
     @Test
     public void contains_eventInList_returnsTrue() {
         uniqueEventList.add(MEETING);
         assertTrue(uniqueEventList.contains(MEETING));
     }
+
     @Test
     public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEventList.add(MEETING);
         Event editedMeeting = new EventBuilder(MEETING).withEventDescription(VALID_EVENT_DESCRIPTION_WORKSHOP)
                 .withEventDuration(VALID_EVENT_FROM_DATE_1, VALID_EVENT_TO_DATE_1).build();
         assertTrue(uniqueEventList.contains(editedMeeting));
+    }
+
+    @Test
+    public void containsName_nullEvent_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> uniqueEventList.containsName(null));
+    }
+
+    @Test
+    public void containsName_eventNotInList_returnsFalse() {
+        assertFalse(uniqueEventList.containsName(MEETING.getName()));
+    }
+
+    @Test
+    public void containsName_eventInList_returnsTrue() {
+        uniqueEventList.add(MEETING);
+        assertTrue(uniqueEventList.containsName(MEETING.getName()));
+    }
+
+    @Test
+    public void containsName_eventWithLowerCasedNameInList_returnsTrue() {
+        uniqueEventList.add(MEETING);
+        String nameString = MEETING.getName().toString();
+        String lowerCasedNameString = nameString.toLowerCase();
+        EventName lowerCasedName = new EventName(lowerCasedNameString);
+        assertTrue(uniqueEventList.containsName(lowerCasedName));
+    }
+
+    @Test
+    public void containsName_eventWithUpperCasedNameInList_returnsTrue() {
+        uniqueEventList.add(MEETING);
+        String nameString = MEETING.getName().toString();
+        String upperCasedNameString = nameString.toUpperCase();
+        EventName upperCasedName = new EventName(upperCasedNameString);
+        assertTrue(uniqueEventList.containsName(upperCasedName));
+    }
+
+    @Test
+    public void containsName_eventWithPartOfNameNotInList_returnsFalse() {
+        uniqueEventList.add(MEETING);
+        String nameString = MEETING.getName().toString();
+        String partOfNameString = nameString.substring(0, nameString.length() - 1);
+        EventName partOfName = new EventName(partOfNameString);
+        assertFalse(uniqueEventList.containsName(partOfName));
     }
 
     @Test
@@ -129,6 +177,58 @@ public class UniqueEventListTest {
         uniqueEventList.remove(MEETING);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         assertEquals(expectedUniqueEventList, uniqueEventList);
+    }
+
+    @Test
+    public void getEventsWithName_nullName_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> uniqueEventList.getEventsWithName(null));
+    }
+
+    @Test
+    public void getEventsWithName_existingEventName_returnsEventList() {
+        uniqueEventList.add(MEETING);
+        List<Event> eventList = uniqueEventList.getEventsWithName(MEETING.getName());
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+        assertEquals(eventList, resultList);
+    }
+
+    @Test
+    public void getEventsWithName_existingEventNameLowerCased_returnsEventList() {
+        uniqueEventList.add(MEETING);
+        EventName lowerCasedName = new EventName(MEETING.getName().toString().toLowerCase());
+        List<Event> eventList = uniqueEventList.getEventsWithName(lowerCasedName);
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+        assertEquals(eventList, resultList);
+    }
+
+    @Test
+    public void getEventsWithName_existingEventNameUpperCased_returnsEventList() {
+        uniqueEventList.add(MEETING);
+        EventName upperCasedName = new EventName(MEETING.getName().toString().toUpperCase());
+        List<Event> eventList = uniqueEventList.getEventsWithName(upperCasedName);
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+        assertEquals(eventList, resultList);
+    }
+
+    @Test
+    public void getEventsWithName_partOfExistingEventName_returnsEmptyList() {
+        uniqueEventList.add(MEETING);
+        String nameString = MEETING.getName().toString();
+        String partOfNameString = nameString.substring(0, nameString.length() - 1);
+        EventName partOfName = new EventName(partOfNameString);
+        List<Event> eventList = uniqueEventList.getEventsWithName(partOfName);
+        List<Event> resultList = new ArrayList<>();
+        assertEquals(eventList, resultList);
+    }
+
+    @Test
+    public void getEventsWithName_nonExistingEventName_returnsEmptyList() {
+        List<Event> eventList = uniqueEventList.getEventsWithName(MEETING.getName());
+        List<Event> resultList = new ArrayList<>();
+        assertEquals(eventList, resultList);
     }
 
     @Test

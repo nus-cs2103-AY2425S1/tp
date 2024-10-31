@@ -9,7 +9,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
- * Container for user visible messages.
+ * Container for user and event visible messages.
  */
 public class Messages {
 
@@ -20,6 +20,10 @@ public class Messages {
     public static final String MESSAGE_MORE_THAN_ONE_PERSON_DISPLAYED_NAME =
             "There is more than one person with the given name. Try again with the person's index instead.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
+    public static final String MESSAGE_INVALID_EVENT_DISPLAYED_NAME = "The event name provided does not exist";
+    public static final String MESSAGE_MORE_THAN_ONE_EVENT_DISPLAYED_NAME =
+            "There is more than one event with the given name. Try again with the event's index instead.";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 

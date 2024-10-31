@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -103,11 +104,11 @@ public interface Model {
      */
     boolean hasEvent(Event event);
 
-    //    /**
-    //     * Deletes the given event.
-    //     * The event must exist in the address book.
-    //     */
-    //    void deleteEvent(Event target);
+    /**
+     * Deletes the given event.
+     * The event must exist in the address book.
+     */
+    void deleteEvent(Event target);
 
     /**
      * Adds the given event
@@ -123,10 +124,10 @@ public interface Model {
     //     */
     //    void setEvent(Event target, Event editedEvent);
 
-    //    /**
-    //     * Find all the events whose names are the same as the given argument.
-    //     */
-    //    List<Event> findEventsWithName(EventName eventName);
+    /**
+     * Find all the events whose names are the same as the given argument.
+     */
+    List<Event> findEventsWithName(EventName eventName);
 
     /**
      * Returns true if an event with the given ID exists in the address book.
