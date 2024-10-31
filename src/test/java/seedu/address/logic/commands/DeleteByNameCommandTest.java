@@ -8,6 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -16,6 +19,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -98,6 +102,25 @@ public class DeleteByNameCommandTest {
         DeleteCommand deleteCommand = new DeleteByNameCommand(noSpacingNameToDelete);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+    }
+
+    @Test
+    public void execute_duplicateNamesButDifferentCasing_throwsCommandException() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Name nameToDelete = personToDelete.getName();
+        String nameStringToDelete = nameToDelete.toString();
+        String allLowerCasedNameString = nameStringToDelete.toLowerCase();
+        Name allLowerCasedNameToDelete = new Name(allLowerCasedNameString);
+        Set<Tag> emptyTags = new HashSet<Tag>();
+        Person duplicatePersonToDelete = new Person(allLowerCasedNameToDelete, personToDelete.getPhone(),
+                personToDelete.getEmail(), personToDelete.getAddress(), emptyTags);
+        int newPersonId = model.generateNewPersonId();
+        Person duplicatePersonToDeleteWithId = duplicatePersonToDelete.changeId(newPersonId);
+        model.addPerson(duplicatePersonToDeleteWithId);
+
+        DeleteCommand deleteCommand = new DeleteByNameCommand(nameToDelete);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_MORE_THAN_ONE_PERSON_DISPLAYED_NAME);
     }
 
     @Test
