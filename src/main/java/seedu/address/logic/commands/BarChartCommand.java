@@ -40,8 +40,8 @@ public class BarChartCommand extends Command {
             });
         });
         assert distributionOfMonthsPaid != null : "distributionOfMonthsPaid map should not be null";
-        Map<String, Integer> sorted = new TreeMap<>(distributionOfMonthsPaid);
-        BarChartWindow.setData(sorted);
+        Map<String, Integer> sortedDistributionOfMonthsPaid = new TreeMap<>(distributionOfMonthsPaid);
+        BarChartWindow.setData(sortedDistributionOfMonthsPaid);
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
     }
 }
