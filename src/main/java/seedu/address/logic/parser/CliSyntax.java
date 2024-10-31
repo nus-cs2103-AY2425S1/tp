@@ -22,4 +22,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_STATUS = new Prefix("stat/");
     public static final Prefix PREFIX_SORT_ORDER = new Prefix("so/");
     public static final Prefix PREFIX_SORT_BY = new Prefix("sb/");
+    public static final Prefix PREFIX_START_DATE = new Prefix("aft/");
+    public static final Prefix PREFIX_END_DATE = new Prefix("bef/");
+
+
 }

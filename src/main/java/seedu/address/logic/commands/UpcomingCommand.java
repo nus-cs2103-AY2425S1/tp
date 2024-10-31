@@ -1,32 +1,39 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.delivery.DeliveryIsUpcomingPredicate;
-
+import seedu.address.model.delivery.Delivery;
 /**
  * Lists all pending deliveries that are completed before a specified date.
  */
 public class UpcomingCommand extends Command {
     public static final String COMMAND_WORD = "upcoming";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " : Lists all pending deliveries with completion date before the specified date.\n"
-            + "Parameters: Completion_Date_Time (dd-mm-yyyy hh:mmr)\n"
-            + "Example: " + COMMAND_WORD + " 18-06-2023 17:00";
+            + " : Lists all pending deliveries with completion date before and after the specified dates.\n"
+            + "Parameters: "
+            + PREFIX_START_DATE + "START (optional) "
+            + PREFIX_END_DATE + "END (optional)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_START_DATE + "19-12-2022 08:00"
+            + " " + PREFIX_END_DATE + "18-06-2023 17:00";
     public static final String MESSAGE_SUCCESS = Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW;
-    private final DeliveryIsUpcomingPredicate predicate;
+    private final List<Predicate<Delivery>> predicates;
 
     /**
      * Creates an UpcomingCommand to display the list of pending deliveries before the
      * specified date.
      */
-    public UpcomingCommand(DeliveryIsUpcomingPredicate predicate) {
-        requireNonNull(predicate);
-        this.predicate = predicate;
+    public UpcomingCommand(List<Predicate<Delivery>> predicates) {
+        requireNonNull(predicates);
+        this.predicates = predicates;
     }
 
     /**
@@ -38,7 +45,8 @@ public class UpcomingCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.updateFilteredDeliveryList(predicate);
+        Predicate<Delivery> upcomingDeliveryPredicate = predicates.stream().reduce(Predicate::and).orElse(x -> true);
+        model.updateFilteredDeliveryList(upcomingDeliveryPredicate);
         return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredDeliveryList().size()));
     }
 
@@ -61,7 +69,7 @@ public class UpcomingCommand extends Command {
         }
 
         UpcomingCommand otherUpcomingCommand = (UpcomingCommand) other;
-        return this.predicate.equals(otherUpcomingCommand.predicate);
+        return this.predicates.equals(otherUpcomingCommand.predicates);
     }
 
     /**
@@ -70,7 +78,7 @@ public class UpcomingCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("completionDateTime", this.predicate)
+                .add("predicates", this.predicates)
                 .toString();
     }
 }
