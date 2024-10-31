@@ -146,6 +146,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setAppointment(int index, Appointment appointment) {
+        requireNonNull(appointment);
+        appointments.set(index, appointment);
+    }
+
+    @Override
     public void updateAppointments(Name oldName, Name newName) {
         for (int i = 0; i < appointments.size(); i++) {
             Appointment appointment = appointments.get(i);
@@ -168,6 +174,14 @@ public class ModelManager implements Model {
     @Override
     public List<Appointment> getConflictingAppointments(Appointment appointment) {
         return appointments.stream().filter(appointment::hasConflictWith).toList();
+    }
+
+    @Override
+    public List<Appointment> getConflictingAppointments(Appointment oldAppointment, Appointment newAppointment) {
+        return appointments.stream()
+                .filter(appointment -> !appointment.equals(oldAppointment))
+                .filter(newAppointment::hasConflictWith)
+                .toList();
     }
 
     //=========== Filtered Person List Accessors =============================================================

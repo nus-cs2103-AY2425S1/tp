@@ -1,11 +1,17 @@
 package seedu.address.ui;
 
+import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
+
 import java.util.logging.Logger;
+
+import com.calendarfx.view.CalendarView;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
@@ -26,20 +32,19 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final KeyCombination KEY_COMB_PREV_DAY = new KeyCodeCombination(KeyCode.P, CONTROL_DOWN);
+    private static final KeyCombination KEY_COMB_NEXT_DAY = new KeyCodeCombination(KeyCode.N, CONTROL_DOWN);
+    private static final KeyCombination KEY_COMB_TODAY = new KeyCodeCombination(KeyCode.T, CONTROL_DOWN);
 
+    private final Logger logger = LogsCenter.getLogger(MainWindow.class);
     private final Stage primaryStage;
     private final Logic logic;
-
-    // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
-    private AppointmentListPanel appointmentListPanel;
-    private CalendarViewPanel calendarViewPanel;
-    private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
 
     private Region personListPanelRoot;
     private Region appointmentListPanelRoot;
+    private ResultDisplay resultDisplay;
+    private CalendarView calendarView;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -75,6 +80,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        registerKeyboardShortcuts();
     }
 
     public Stage getPrimaryStage() {
@@ -115,12 +122,27 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    private void registerKeyboardShortcuts() {
+        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (KEY_COMB_PREV_DAY.match(event)) {
+                calendarView.goBack();
+                event.consume();
+            } else if (KEY_COMB_NEXT_DAY.match(event)) {
+                calendarView.goForward();
+                event.consume();
+            } else if (KEY_COMB_TODAY.match(event)) {
+                calendarView.goToday();
+                event.consume();
+            }
+        });
+    }
+
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
+        PersonListPanel personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        AppointmentListPanel appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
 
         personListPanelRoot = personListPanel.getRoot();
         appointmentListPanelRoot = appointmentListPanel.getRoot();
@@ -137,8 +159,9 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        calendarViewPanel = new CalendarViewPanel(logic.getFilteredAppointmentList());
-        calendarViewPanelPlaceholder.getChildren().add(calendarViewPanel.getCalendarView());
+        CalendarViewPanel calendarViewPanel = new CalendarViewPanel(logic.getFilteredAppointmentList());
+        calendarView = calendarViewPanel.getCalendarView();
+        calendarViewPanelPlaceholder.getChildren().add(calendarView);
     }
 
     /**

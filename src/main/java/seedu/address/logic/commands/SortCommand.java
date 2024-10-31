@@ -60,21 +60,22 @@ public class SortCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, parameter));
     }
+
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        if (!(other instanceof SortCommand)) {
+        if (!(other instanceof SortCommand otherSortCommand)) {
             return false;
         }
 
-        SortCommand otherSortCommand = (SortCommand) other;
         return this.parameter.equals(otherSortCommand.parameter);
     }
 }

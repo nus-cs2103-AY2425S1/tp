@@ -110,6 +110,11 @@ public interface Model {
     void addAppointment(Appointment appointment);
 
     /**
+     * Replaces the appointment at the specified index with {@code appointment}.
+     */
+    void setAppointment(int index, Appointment appointment);
+
+    /**
      * Updates all appointments with {@code oldName} to {@code newName}.
      */
     void updateAppointments(Name oldName, Name newName);
@@ -137,4 +142,9 @@ public interface Model {
      * Returns a list of appointments that conflict with the given appointment.
      */
     List<Appointment> getConflictingAppointments(Appointment appointment);
+
+    /**
+     * Returns a list of appointments that conflict with {@code newAppointment}, excluding {@code oldAppointment}.
+     */
+    List<Appointment> getConflictingAppointments(Appointment oldAppointment, Appointment newAppointment);
 }

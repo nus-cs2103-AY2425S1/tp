@@ -176,6 +176,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setAppointment(int index, Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateAppointments(Name oldName, Name newName) {
             throw new AssertionError("This method should not be called.");
         }
@@ -202,6 +207,11 @@ public class AddCommandTest {
 
         @Override
         public List<Appointment> getConflictingAppointments(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Appointment> getConflictingAppointments(Appointment oldAppointment, Appointment newAppointment) {
             throw new AssertionError("This method should not be called.");
         }
     }
