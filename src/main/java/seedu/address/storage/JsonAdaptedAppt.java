@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,8 @@ import seedu.address.model.patient.Appt;
  * This class is used to convert between JSON and Java objects.
  */
 public class JsonAdaptedAppt {
+    private static final Logger logger = Logger.getLogger(JsonAdaptedAppt.class.getName());
+
     private final String dateTime;
     private final String healthService;
 
@@ -35,7 +38,7 @@ public class JsonAdaptedAppt {
      * @throws IllegalValueException
      */
     public JsonAdaptedAppt(Appt source) {
-        this.dateTime = source.getDateTime().toString();
+        this.dateTime = source.getDateTime().format(Appt.FORMATTER).toString();
         this.healthService = source.getHealthService().toString();
     }
 
@@ -49,9 +52,18 @@ public class JsonAdaptedAppt {
 
     /**
      * Converts this Jackson-friendly adapted appointment object into the model's {@code Appt} object.
-     * @throws IllegalValueException
+     * @return Appt
      */
     public Appt toModelType() throws IllegalValueException {
-        return new Appt(LocalDateTime.parse(dateTime), new HealthService(healthService));
+        if (!Appt.isValidDateTime(dateTime)) {
+            logger.severe("Invalid date and time.");
+            throw new IllegalValueException(Appt.DATETIME_MESSAGE_CONSTRAINTS);
+        }
+
+        if (!HealthService.isValidHealthserviceName(healthService)) {
+            logger.severe("Invalid health service.");
+            throw new IllegalValueException(HealthService.MESSAGE_CONSTRAINTS);
+        }
+        return new Appt(LocalDateTime.parse(dateTime, Appt.FORMATTER), new HealthService(healthService));
     }
 }
