@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.UniversityContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose university contains the argument keyword.
+ * Finds and lists all persons in the address book whose university matches the specified keyword.
  * Keyword matching is case-insensitive.
  */
 public class FindByUniversityCommand extends Command {
@@ -29,7 +29,10 @@ public class FindByUniversityCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+
+        // Add this predicate to the current list of active filters
+        model.addPredicateToFilteredPersonList(predicate);
+
         int count = model.getFilteredPersonList().size();
         String university = predicate.getKeyword();
         university = university.toUpperCase();
@@ -46,13 +49,12 @@ public class FindByUniversityCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FindByUniversityCommand // instanceof handles nulls
+        return other == this || (other instanceof FindByUniversityCommand
                 && predicate.equals(((FindByUniversityCommand) other).predicate));
     }
+
     @Override
     public String toString() {
         return FindByUniversityCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
     }
-
 }

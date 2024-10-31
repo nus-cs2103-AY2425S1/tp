@@ -23,6 +23,9 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    // A predicate that accumulates all the filters applied
+    private Predicate<Person> currentPredicate;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -34,6 +37,10 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
+        // Initially, show all persons
+        this.currentPredicate = PREDICATE_SHOW_ALL_PERSONS;
+        filteredPersons.setPredicate(currentPredicate);
     }
 
     public ModelManager() {
@@ -122,10 +129,25 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Resets the filtered person list with a new predicate, clearing any existing filters.
+     */
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        currentPredicate = predicate; // Reset the current predicate to the new one
+        filteredPersons.setPredicate(currentPredicate);
+    }
+
+    /**
+     * Adds an additional predicate to the current filter, creating a combined filter.
+     * This method allows multiple filters to be applied cumulatively (AND logic).
+     */
+    @Override
+    public void addPredicateToFilteredPersonList(Predicate<Person> newPredicate) {
+        requireNonNull(newPredicate);
+        currentPredicate = currentPredicate.and(newPredicate); // Combine with existing predicate
+        filteredPersons.setPredicate(currentPredicate);
     }
 
     @Override
@@ -142,6 +164,5 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.containsAll(otherModelManager.filteredPersons)
                 && otherModelManager.filteredPersons.containsAll(filteredPersons);
-
     }
 }
