@@ -212,12 +212,11 @@ Examples:
 
 Sorts students with personal details
 
-Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC]`
+Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`
 
-* The order of prefixes DOES matter. If there are ties in first field, it will use later fields to tie-break.
-* Prefixes other than `n/`, `p/`, `a/`, `gl/` will be ignored.
-* Only name, phone number, address, and grade level are valid fields to be sorted against
-* The sorting order must be `ASC` or  `DESC`, and is case-insensitive
+* The order of prefixes DOES matter. If there are ties in the first field, it will use later fields to tie-break.
+* Only name, phone number, address, grade level and group are valid fields to sort by.
+* The sorting order must be `ASC` or  `DESC`, and is case-insensitive.
 
 To clear the sorting conditions, use command `sort clear`
 
