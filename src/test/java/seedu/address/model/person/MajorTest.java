@@ -10,13 +10,7 @@ public class MajorTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Major(null));
-    }
-
-    @Test
-    public void constructor_invalidMajor_throwsIllegalArgumentException() {
-        String invalidMajor = "";
-        assertThrows(IllegalArgumentException.class, () -> new Major(invalidMajor));
+        assertThrows(NullPointerException.class, () -> Major.makeMajor(null));
     }
 
     @Test
@@ -36,10 +30,10 @@ public class MajorTest {
 
     @Test
     public void equals() {
-        Major address = new Major("Valid Address");
+        Major address = Major.makeMajor("Valid Address");
 
         // same values -> returns true
-        assertTrue(address.equals(new Major("Valid Address")));
+        assertTrue(address.equals(Major.makeMajor("Valid Address")));
 
         // same object -> returns true
         assertTrue(address.equals(address));
@@ -51,6 +45,6 @@ public class MajorTest {
         assertFalse(address.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(address.equals(new Major("Other Valid Address")));
+        assertFalse(address.equals(Major.makeMajor("Other Valid Address")));
     }
 }

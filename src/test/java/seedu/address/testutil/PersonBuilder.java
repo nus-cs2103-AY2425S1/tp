@@ -42,9 +42,9 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         studentId = new StudentId(DEFAULT_STUDENTID);
-        email = new Email(DEFAULT_EMAIL);
-        major = new Major(DEFAULT_MAJOR);
-        year = new Year(DEFAULT_YEAR);
+        email = Email.makeEmail(DEFAULT_EMAIL);
+        major = Major.makeMajor(DEFAULT_MAJOR);
+        year = Year.makeYear(DEFAULT_YEAR);
         groups = new HashSet<>(Collections.singleton(new Group(DEFAULT_GROUP)));
         comment = new Comment(DEFAULT_COMMENT);
     }
@@ -82,7 +82,7 @@ public class PersonBuilder {
      * Sets the {@code Major} of the {@code Person} that we are building.
      */
     public PersonBuilder withMajor(String major) {
-        this.major = new Major(major);
+        this.major = Major.makeMajor(major);
         return this;
     }
 
@@ -98,7 +98,7 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.email = Email.makeEmail(email);
         return this;
     }
 
@@ -106,7 +106,7 @@ public class PersonBuilder {
      * Sets the {@code Year} of the {@code Person} that we are building.
      */
     public PersonBuilder withYear(String year) {
-        this.year = new Year(year);
+        this.year = Year.makeYear(year);
         return this;
     }
 

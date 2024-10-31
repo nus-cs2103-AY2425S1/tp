@@ -8,12 +8,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
-
     public static final String MESSAGE_CONSTRAINTS =
             "NUSNet ID should only contain alphanumeric characters, and it should be 8 characters long";
     public static final String DOMAIN = "@u.nus.edu";
     public static final String EMAIL_VALIDATION_REGEX = "[a-zA-Z]\\d{7}" + DOMAIN;
     public static final String NETID_VALIDATION_REGEX = "[a-zA-Z]\\d{7}";
+    private static final Email EMPTY_EMAIL = new Email();
+
     public final String value;
 
     /**
@@ -21,8 +22,7 @@ public class Email {
      *
      * @param email A valid email address.
      */
-    public Email(String email) {
-        requireNonNull(email);
+    private Email(String email) {
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
         value = email.toLowerCase();
     }
@@ -31,8 +31,23 @@ public class Email {
      * Constructs an empty {@code Email}.
      *
      */
-    public Email() {
+    private Email() {
         value = "";
+    }
+
+    /**
+     * Constructs an {@code Email} or an empty {@code Email} instance.
+     *
+     * @param email A valid email address or an empty string
+     */
+    public static Email makeEmail(String email) {
+        requireNonNull(email);
+
+        if (email.isEmpty()) {
+            return EMPTY_EMAIL;
+        }
+
+        return new Email(email);
     }
 
     /**
