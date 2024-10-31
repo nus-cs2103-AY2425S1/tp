@@ -16,8 +16,11 @@ import seedu.address.model.person.Person;
  */
 public class ListTransactionCommand extends Command {
     public static final String COMMAND_WORD = "listt";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": lists transactions for selected person. "
-            + "Parameter: index of person";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Lists the transactions of the person identified by "
+            + "the index number used in the displayed person list.\n"
+            + "Parameter: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Listed transactions for %1$s";
 
     private final Index index;
