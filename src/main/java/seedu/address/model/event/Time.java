@@ -34,6 +34,10 @@ public class Time {
         return this.startTime.format(formatter);
     }
 
+    public LocalDateTime getLocalDateStartTime() {
+        return this.startTime;
+    }
+
     public String getEndTime() {
         return this.endTime.format(formatter);
     }

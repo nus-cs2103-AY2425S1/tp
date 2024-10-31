@@ -135,6 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addEvent(Event e) {
         events.add(e);
+        events.sortByStartTime();
     }
 
     /**
@@ -146,6 +147,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedEvent);
 
         events.setEvent(target, editedEvent);
+        events.sortByStartTime();
     }
 
     /**
@@ -169,6 +171,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Event> getSortedEventList() {
+        events.sortByStartTime();
+        return events.asUnmodifiableObservableList();
     }
 
     @Override
