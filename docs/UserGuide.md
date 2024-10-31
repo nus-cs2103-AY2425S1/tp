@@ -160,6 +160,21 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in CampusConnect.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a person's tag : `addtag`
+
+Adds the specified person's tag.
+
+Format: `addtag INDEX t/KEYWORD`
+
+* Deletes the tag with the specified name `KEYWORD` of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Multiple tags can be added at a time.
+
+Examples:
+* `addtag 1 t/friend` adds a 'friend' tag to the first person in the list.
+* `addtag 2 t/classmate t/neighbour` adds both the 'classmate' and 'neighbour' tag to the second person in the list.
+
 ### Deleting a person's tag : `deltag`
 
 Deletes the specified person's tag.
@@ -172,7 +187,8 @@ Format: `deltag INDEX t/KEYWORD`
 * Only one tag can be deleted at a time.
 
 Examples:
-* `deltag 1 t/friend` deletes the friend tag of the first person in the list.
+* `deltag 1 t/friend` 
+deletes the friend tag of the first person in the list.
 
 Disallowed examples:
 * `deltag 2 t/classmate t/neighbour` will not succeed as it tries to delete 2 tags at once.
