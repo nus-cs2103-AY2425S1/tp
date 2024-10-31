@@ -37,7 +37,7 @@ public class DeleteTaskCommand extends Command {
             + ": Deletes the task identified by the student and index number used in the displayed task list.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME (must be exact name of an existing student) "
-            + PREFIX_TASK_INDEX + "TASK_INDEX (must be a positive integer)\n"
+            + PREFIX_TASK_INDEX + "TASK_INDEX (should be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TASK_INDEX + "1";
