@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIMERANGE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_START_DATETIME_AFTER_END_DATETIME;
 import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_APPOINTMENT;

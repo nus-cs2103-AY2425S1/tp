@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_POLICY;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_POLICY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_POLICY;
 
 import java.util.function.Predicate;
