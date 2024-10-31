@@ -18,12 +18,12 @@ public class SearchCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Search for schedules within the provided time period\n"
             + "Either begin time or end time or both has to be provided.\n"
-            + "Begin time and end time must be in format YYYY-MM-DD HH:MM.\n"
+            + "Begin time and end time must be in format yyyy-MM-dd HH:mm.\n"
             + "If begin time is not provided, it will search for all schedule before end time.\n"
             + "If end time is not provided, it will search for all schedule after begin time.\n"
             + "Parameters: "
-            + PREFIX_BEGIN + "start time"
-            + PREFIX_END + "end time"
+            + PREFIX_BEGIN + "start time "
+            + PREFIX_END + "end time "
             + "Example: " + COMMAND_WORD + PREFIX_BEGIN + " 2024-10-10 00:00 " + PREFIX_END + " 2024-10-12 00:00";
 
     public static final String MESSAGE_SUCCESS = "Search successful";
@@ -60,18 +60,18 @@ public class SearchCommand extends Command {
     }
     private boolean hasScheduleBeforeEnd(Person person) {
         Schedule schedule = person.getSchedule();
-        return schedule.getDateTime() != null && schedule.getDateTime().isBefore(end);
+        return schedule.getDateTime() != null && !schedule.getDateTime().isAfter(end);
     }
 
     private boolean hasScheduleAfterBegin(Person person) {
         Schedule schedule = person.getSchedule();
-        return schedule.getDateTime() != null && schedule.getDateTime().isAfter(begin);
+        return schedule.getDateTime() != null && !schedule.getDateTime().isBefore(begin);
     }
 
     private boolean hasScheduleBetweenBeginAndEnd(Person person) {
         Schedule schedule = person.getSchedule();
         return schedule.getDateTime() != null
-                && schedule.getDateTime().isAfter(begin) && schedule.getDateTime().isBefore(end);
+                && !schedule.getDateTime().isBefore(begin) && !schedule.getDateTime().isAfter(end);
     }
     @Override
     public boolean equals(Object other) {
