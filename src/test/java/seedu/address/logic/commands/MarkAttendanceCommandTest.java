@@ -10,10 +10,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,20 +29,24 @@ import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
 
+
 public class MarkAttendanceCommandTest {
+
+    private final Optional<StudentNumber> studentNumber = Optional.of(new StudentNumber("A0191222D"));
 
     @Test
     public void execute_studentFound_success() throws Exception {
-        Student validStudent = new StudentBuilder().withName("John").build();
+        Student validStudent = new StudentBuilder().withName("John").withStudentNumber("A0191222D").build();
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         modelStub.addStudent(validStudent);
 
         Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
-        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance);
+        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance, studentNumber);
 
         CommandResult result = command.execute(modelStub);
 
@@ -55,7 +62,7 @@ public class MarkAttendanceCommandTest {
         ModelStubWithNoStudent modelStub = new ModelStubWithNoStudent();
         Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
-        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance);
+        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance, studentNumber);
 
         assertThrows(CommandException.class, "Student not found: John", () -> command.execute(modelStub));
     }
@@ -63,7 +70,7 @@ public class MarkAttendanceCommandTest {
     @Test
     public void execute_invalidAttendanceStatus_throwsCommandException() {
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
-        Student validStudent = new StudentBuilder().withName("John Doe").build();
+        Student validStudent = new StudentBuilder().withName("John Doe").withStudentNumber("A0191222D").build();
         modelStub.addStudent(validStudent);
 
         assertThrows(IllegalArgumentException.class, () -> new Attendance("unknown"));
@@ -71,14 +78,15 @@ public class MarkAttendanceCommandTest {
 
     @Test
     public void execute_undoMarkAttendanceCommand_success() throws Exception {
-        Student validStudent = new StudentBuilder().withName("John Doe").build();
+        Student validStudent = new StudentBuilder().withName("John Doe").withStudentNumber("A0191222D").build();
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         validStudent.deleteAttendance(LocalDate.of(2020, 1, 1));
         modelStub.addStudent(validStudent);
 
         Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
-        MarkAttendanceCommand markCommand = new MarkAttendanceCommand(new Name("John Doe"), date, attendance);
+        MarkAttendanceCommand markCommand = new MarkAttendanceCommand(new Name("John Doe"),
+                 date, attendance, studentNumber);
         markCommand.execute(modelStub);
 
         CommandStack commandStack = CommandStack.getInstance();
@@ -93,15 +101,17 @@ public class MarkAttendanceCommandTest {
 
     @Test
     public void execute_undoMarkAttendanceCommandTwoAttendance_success() throws Exception {
-        Student validStudent = new StudentBuilder().withName("John").build();
+        Student validStudent = new StudentBuilder().withName("John").withStudentNumber("A0191222D").build();
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         modelStub.addStudent(validStudent);
 
         Attendance attendance = new Attendance("p");
         Attendance attendance2 = new Attendance("a");
         LocalDate date = LocalDate.of(2023, 10, 9);
-        MarkAttendanceCommand markCommand = new MarkAttendanceCommand(new Name("John"), date, attendance);
-        MarkAttendanceCommand markCommand2 = new MarkAttendanceCommand(new Name("John"), date, attendance2);
+        MarkAttendanceCommand markCommand = new MarkAttendanceCommand(new Name("John"),
+                date, attendance, studentNumber);
+        MarkAttendanceCommand markCommand2 = new MarkAttendanceCommand(new Name("John"),
+                date, attendance2, studentNumber);
         markCommand.execute(modelStub);
         markCommand2.execute(modelStub);
         markCommand2.undo(modelStub);
@@ -281,6 +291,13 @@ public class MarkAttendanceCommandTest {
             requireNonNull(student);
         }
 
+        @Override
+        public ObservableList<Student> getAllStudentsByName(Name name) {
+            return List.of(student).stream()
+                    .filter(s -> s.getName().equals(name))
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        }
+
     }
 
 
@@ -288,7 +305,7 @@ public class MarkAttendanceCommandTest {
      * A Model stub that always accept the student being added.
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
-        final ArrayList<Person> studentsAdded = new ArrayList<>();
+        final ArrayList<Student> studentsAdded = new ArrayList<>();
 
         @Override
         public boolean hasStudent(Student student) {
@@ -308,6 +325,13 @@ public class MarkAttendanceCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
+        @Override
+        public ObservableList<Student> getAllStudentsByName(Name name) {
+            return studentsAdded.stream()
+                    .filter(s -> s.getName().equals(name))
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        }
     }
 
     private class ModelStubWithNoStudent extends ModelStub {
@@ -319,6 +343,11 @@ public class MarkAttendanceCommandTest {
         @Override
         public boolean hasStudent(Student student) {
             return false;
+        }
+
+        @Override
+        public ObservableList<Student> getAllStudentsByName(Name name) {
+            return FXCollections.observableArrayList();
         }
     }
 }
