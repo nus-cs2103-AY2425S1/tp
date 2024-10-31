@@ -6,7 +6,7 @@
 
 # TrueRental User Guide
 
-TrueRental is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TrueRental can get your contact management tasks done faster than traditional GUI apps.
+TrueRental is a **desktop application for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TrueRental can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -34,11 +34,36 @@ TrueRental is a **desktop app for managing contacts, optimized for use via a Com
 
    * `cdelete 3` : Deletes the 3rd client shown in the current list.
 
-   * `clear` : Deletes all clients.
+   * `clear` : Deletes all clients and their associated rental information.
 
-   * `exit` : Exits the app.
+   * `exit` : Exits the application.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+<box type="info" seamless>
+
+**Please refer to "Notes about the command format" in [Features](#features) for a better understanding of the command format.**
+
+</box>
+
+| Action                                                                                               | Format, Examples                                                                                                                                                                                                                    |
+|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Show manual: **help**](#viewing-help-help)                                                          | `help`                                                                                                                                                                                                                              |
+| [Add a client: **cadd**](#adding-a-client-cadd)                                                      | `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL]` <br> e.g., `cadd n/Steven Tan e/steventan@abc.com p/98765432`                                                                                                                              |
+| [Add rental information for a client: **radd**](#adding-a-rental-information-for-a-client-radd)      | `radd c/CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {c/CUSTOMER_LIST}` <br> e.g., `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 c/Steven Lim dd/20 m/2750` |
+| [List all clients: **list**](#listing-all-clients-list)                                              | `list`                                                                                                                                                                                                                              |
+| [View rental information of a client: **rview**](#listing-rental-information-of-a-client-rview)      | `rview CLIENT_INDEX` <br> e.g., `rview 1`                                                                                                                                                                                           |
+| [Edit a client: **cedit**](#editing-a-client-cedit)                                                  | `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]` <br> e.g.,`cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`                                                                                                            |
+| [Edit rental information for a client: **redit**](#editing-a-client-s-rental-information-redit)      | `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [c/CUSTOMER_LIST]` <br> e.g.,`redit c/1 r/1 a/65 Anderson Road m/3000 d/0`               |
+| Find information: **find**                                                                           | `find k/KEYWORDS...`<br> e.g., `find k/Steven Tan k/98765432`                                                                                                                                                                       |
+| [Delete a client: **cdelete**](#deleting-a-client-cdelete)                                           | `cdelete CLIENT_INDEX` <br> e.g., `cdelete 3`                                                                                                                                                                                       |
+| [Delete rental information from a client: **rdelete**](#deleting-a-rental-information-rdelete)       | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX` <br> e.g., `rdelete c/1 r/2`                                                                                                                                                                |
+| [Delete all clients and their associated rental information: **clear**](#clearing-all-entries-clear) | `clear`                                                                                                                                                                                                                             |
+| [Exit the application: **exit**](#exiting-the-application-exit)                                      | `exit`                                                                                                                                                                                                                              |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -78,8 +103,13 @@ Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Format: `help` 
 
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
 
 ### Adding a client: `cadd`
 
@@ -89,12 +119,20 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 Note: To add a client, the client must have at least one **phone number** or **email address**.
 
 <box type="tip" seamless>
+
 **Tip:** A client can have any number of tags (including 0)
+
 </box>
 
 Examples:
 * `cadd n/John Doe p/98765432 e/johnd@example.com`
 * `cadd n/Betsy Crowe e/betsycrowe@example.com t/criminal t/friend `
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
 
 ### Adding a rental information for a client: `radd`
 
@@ -107,12 +145,23 @@ Examples:
 * `radd 1 a/65 Berkeley Road e/2024-10-31`
 * `radd 3 a/65 Den Road s/2024-09-01 e/2025-08-30 cl/Steven Lim dd/20 m/2750`
 
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
 ### Listing all clients : `list`
 
 Shows a list of all clients in the address book.
 
 Format: `list`
 
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
 
 ### Listing rental information of a client : `rview`
 
@@ -126,6 +175,12 @@ Format: `rview CLIENT_INDEX`
 
 Examples:
 * `rview 1` <br>
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
 
 ### Editing a client : `cedit`
 
@@ -147,6 +202,12 @@ Examples:
 *  `cedit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
 *  `cedit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
 ### Editing a client's rental information: `redit`
 
 Edits a specific client's rental information in the address book.
@@ -161,6 +222,12 @@ Note:
 Examples:
 *  `redit c/1 r/1 a/65 Anderson Road m/3000 d/0` Edits the first client, first rental information, address, monthly rent, and deposit amount to `Anderson Road` and `3000` respectively.
 *  `redit c/1 r/2 e/2024-10-31` Edits the first client, second rental information, rental end date to `2024-10-31`.
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
 
 ### Locating clients by name: `find`
 
@@ -180,6 +247,12 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
 ### Deleting a client : `cdelete`
 
 Deletes the specified client from the address book.
@@ -193,6 +266,12 @@ Format: `cdelete CLIENT_INDEX`
 Examples:
 * `list` followed by `cdelete 2` deletes the 2nd client in the address book.
 * `find Betsy` followed by `cdelete 1` deletes the 1st client in the results of the `find` command.
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
 
 ### Deleting a rental information : `rdelete`
 
@@ -209,17 +288,35 @@ Examples:
 * `list` followed by `rdelete c/2 r/1` deletes the 1st rental information from the 2nd client in the address book.
 * `find Betsy` followed by `rdelete c/1 r/2` deletes the 2nd rental information from the 1st client in the results of the `find` command.
 
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+### Exiting the application : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
 
 ### Saving the data
 
@@ -255,19 +352,3 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-| Action                                      | Format, Examples                                                                                                                                                                                                                    |
-|---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **List all clients**                        | `list`                                                                                                                                                                                                                              |
-| **Show manual (help)**                      | `help`                                                                                                                                                                                                                              |
-| **Clear**                                   | `clear`                                                                                                                                                                                                                             |
-| **Add a client**                            | `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL]` <br> e.g., `cadd n/Steven Tan e/steventan@abc.com p/98765432`                                                                                                                              |
-| **Add rental information for a client**     | `radd c/CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {c/CUSTOMER_LIST}` <br> e.g., `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 c/Steven Lim dd/20 m/2750` |
-| **Find information**                        | `find k/KEYWORDS...`<br> e.g., `find k/Steven Tan k/98765432`                                                                                                                                                                       |
-| **View rental information of a client**     | `rview CLIENT_INDEX` <br> e.g., `rview 1`                                                                                                                                                                                           |
-| **Edit a client**                           | `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]` <br> e.g.,`cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`                                                                                                            |
-| **Edit rental information for a client**    | `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [c/CUSTOMER_LIST]` <br> e.g.,`redit c/1 r/1 a/65 Anderson Road m/3000 d/0`               |
-| **Delete a client**                         | `cdelete CLIENT_INDEX` <br> e.g., `cdelete 3`                                                                                                                                                                                       |
-| **Delete rental information from a client** | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX` <br> e.g., `rdelete c/1 r/2`                                                                                                                                                                |
