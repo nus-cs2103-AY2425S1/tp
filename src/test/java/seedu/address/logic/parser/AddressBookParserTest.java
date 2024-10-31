@@ -15,9 +15,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -87,9 +87,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> generalKeywords = Arrays.asList("foo", "bar", "baz");
-        List<String> genderKeywords = Arrays.asList("m", "F");
-        List<String> ageKeywords = Arrays.asList("12", "34", "56");
+        Set<String> generalKeywords = Set.of("foo", "bar", "baz");
+        Set<String> genderKeywords = Set.of("m", "F");
+        Set<String> ageKeywords = Set.of("12", "34", "56");
 
         // parse name criteria
         FindCommand nameCommand = (FindCommand) parser.parseCommand(
@@ -184,6 +184,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("unknownCommand"));
     }
 }

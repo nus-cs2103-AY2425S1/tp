@@ -1,8 +1,9 @@
 package seedu.address.model.person.predicates;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -16,17 +17,19 @@ import seedu.address.model.person.Person;
 public class AgeContainsKeywordsPredicate implements Predicate<Person> {
     public static final String VALIDATION_REGEX = "\\d+|(\\d+-\\d+)";
     public static final String MESSAGE_CONSTRAINTS = "Each age criteria should contain non-negative integers, "
-            + "in the format 'number' or 'number-number'!";
+            + "in the format 'number' or 'number-number'!\n"
+            + "Example: a/23 30-34";
 
     private static final Pattern RANGE_PATTERN = Pattern.compile("(\\d+)-(\\d+)");
-    private final List<String> keywords;
+    private final Set<String> keywords;
 
     /**
      * Constructs a {@code AgeContainsKeywordsPredicate}.
      *
-     * @param keywords A list of valid keywords
+     * @param keywords A list of valid age keywords
      */
-    public AgeContainsKeywordsPredicate(List<String> keywords) {
+    public AgeContainsKeywordsPredicate(Set<String> keywords) {
+        requireNonNull(keywords);
         for (String k : keywords) {
             checkArgument(isValidInput(k), MESSAGE_CONSTRAINTS);
         }
