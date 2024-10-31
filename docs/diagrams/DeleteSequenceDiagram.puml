@@ -7,6 +7,8 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "cc:ConfirmCommand" as ConfirmCommand LOGIC_COLOR
+participant "cp:ConfirmPrompt" as ConfirmPrompt LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -14,10 +16,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete i/S1234567D")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("delete i/S1234567D")
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -43,13 +45,73 @@ deactivate DeleteCommandParser
 DeleteCommandParser -[hidden]-> AddressBookParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
+create ConfirmPrompt
+AddressBookParser --> ConfirmPrompt : d
+activate ConfirmPrompt
+
+ConfirmPrompt --> AddressBookParser : cp
+deactivate ConfirmPrompt
+
+AddressBookParser --> LogicManager : cp
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute(m)
+LogicManager -> ConfirmPrompt : execute(cp)
+activate ConfirmPrompt
+
+ConfirmPrompt -> Model : setSavedCommand(d)
+activate Model
+
+Model -[hidden]-> ConfirmPrompt
+deactivate Model
+
+create CommandResult
+ConfirmPrompt -> CommandResult
+activate CommandResult
+
+CommandResult --> ConfirmPrompt
+deactivate CommandResult
+
+ConfirmPrompt --> LogicManager : r
+deactivate ConfirmPrompt
+
+[<--LogicManager
+deactivate LogicManager
+
+[-> LogicManager : execute("confirm")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("confirm")
+activate AddressBookParser
+
+create ConfirmCommand
+AddressBookParser -> ConfirmCommand
+activate ConfirmCommand
+
+ConfirmCommand --> AddressBookParser
+deactivate ConfirmCommand
+
+AddressBookParser -> LogicManager : cc
+deactivate AddressBookParser
+
+LogicManager -> ConfirmCommand : execute(cc)
+activate ConfirmCommand
+
+ConfirmCommand -> Model : executeSavedCommand()
+activate Model
+
+Model -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+Model --> ConfirmCommand
+
+/' Not sure if need to include the getPersonList() call '/
+DeleteCommand -> Model : getPersonList()
+activate Model
+
+Model --> DeleteCommand : personList
+deactivate Model
+
+DeleteCommand -> Model : deletePerson(person)
 activate Model
 
 Model --> DeleteCommand
@@ -62,8 +124,14 @@ activate CommandResult
 CommandResult --> DeleteCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : r
+DeleteCommand --> Model : r
 deactivate DeleteCommand
+
+Model --> ConfirmCommand : r
+deactivate Model
+
+ConfirmCommand --> LogicManager : r
+deactivate ConfirmCommand
 
 [<--LogicManager
 deactivate LogicManager
