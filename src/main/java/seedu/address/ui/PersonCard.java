@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
 /**
@@ -35,19 +37,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private Label assignment;
-    @FXML
     private FlowPane tags;
     @FXML
     private Label telegram;
     @FXML
     private Label github;
     @FXML
-    private FlowPane weekLabel;
+    private Label assignment;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -57,37 +53,30 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        telegram.setText(person.getTelegram().value);
+        phone.setText("Phone number: " + person.getPhone().value);
+        telegram.setText("Tele: " + person.getTelegram().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (person.getAssignment() != null) {
-            assignment.setText(person.getAssignment().toString());
-        } else {
-            assignment.setText("No assignment available"); // Optional: for better user feedback
-        }
-
+        setAssignmentText(person.getAssignment());
         if (person.getGithub() != null) {
-            github.setText(person.getGithub().toString());
+            github.setText("Github: " + person.getGithub().toString());
         } else {
             github.setText("GitHub username unspecified");
         }
+    }
 
-        if (!person.getWeeksPresent().isEmpty()) {
-            weekLabel.getChildren().add(new Label("Weeks attended: "));
-            person.getWeeksPresent().stream()
-                    .sorted(Comparator.comparing(Integer::intValue))
-                    .forEach(weekNumber -> {
-                        Label weekLabelNode = new Label(weekNumber.toString());
-                        weekLabelNode.getStyleClass().add("week-number");
-                        weekLabel.getChildren().add(weekLabelNode);
-                    });
-        } else {
-            weekLabel.getChildren().add(new Label("No weeks attended"));
+    private void setAssignmentText(Map<String, Assignment> assignmentMap) {
+        if (assignmentMap.isEmpty()) {
+            assignment.setText("No assignment available");
+            return;
         }
+        StringBuilder sb = new StringBuilder(assignmentMap.size());
+        for (Assignment eachAssignment : assignmentMap.values()) {
+            sb.append(eachAssignment.toString()).append(", ");
+        }
+        sb.setLength(sb.length() - 2); //remove the last ,
+        assignment.setText(sb.toString());
     }
 
 }

@@ -1,11 +1,12 @@
 package seedu.address.testutil;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
@@ -23,20 +24,20 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_TELEGRAM = "@viswa";
     public static final String DEFAULT_GITHUB = "Amy";
     public static final String DEFAULT_ASSIGNMENT_NAME = "ex01";
     public static final Float DEFAULT_ASSIGNMENT_SCORE = 0f;
+    public static final Assignment DEFAULT_ASSIGNMENT =
+            new Assignment(DEFAULT_ASSIGNMENT_NAME, DEFAULT_ASSIGNMENT_SCORE);
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
     private Telegram telegram;
     private Set<Tag> tags;
     private Github github;
-    private Assignment assignment;
+    private Map<String, Assignment> assignment;
     private Set<Integer> attendance;
 
 
@@ -48,11 +49,11 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         telegram = new Telegram(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
         github = new Github(DEFAULT_GITHUB);
-        assignment = new Assignment(DEFAULT_ASSIGNMENT_NAME, DEFAULT_ASSIGNMENT_SCORE);
+        assignment = new HashMap<>();
+        assignment.put(DEFAULT_ASSIGNMENT_NAME, DEFAULT_ASSIGNMENT);
         this.attendance = new HashSet<>();
     }
 
@@ -63,7 +64,6 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
         telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
         github = personToCopy.getGithub();
@@ -85,14 +85,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 
@@ -132,7 +124,8 @@ public class PersonBuilder {
      * Sets the {@code Assignment} of the {@code Person} that we are building.
      */
     public PersonBuilder witAssignment(String assignment, Float score) {
-        this.assignment = new Assignment(assignment, score);
+        this.assignment = new HashMap<>();
+        this.assignment.put(assignment, new Assignment(assignment, score));
         return this;
     }
     /**
@@ -144,15 +137,15 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, telegram, tags, github);
+        return new Person(name, phone, email, telegram, tags, github);
     }
 
     public Person buildWithAssignment() {
-        return new Person(name, phone, email, address, telegram, tags, github, assignment);
+        return new Person(name, phone, email, telegram, tags, github, assignment);
     }
 
     public Person buildWithAttendance() {
-        return new Person(name, phone, address, email, telegram, github, assignment, attendance, tags);
+        return new Person(name, phone, email, telegram, github, assignment, attendance, tags);
     }
 
 }
