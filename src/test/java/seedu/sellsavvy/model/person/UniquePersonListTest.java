@@ -193,4 +193,11 @@ public class UniquePersonListTest {
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
     }
+
+    @Test
+    public void copyPersons() {
+        UniquePersonList uniquePersonListCopy = uniquePersonList.copyPersons();
+        assertEquals(uniquePersonList, uniquePersonListCopy);
+        assertNotSame(uniquePersonList, uniquePersonListCopy);
+    }
 }

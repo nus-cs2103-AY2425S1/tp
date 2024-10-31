@@ -2,6 +2,7 @@ package seedu.sellsavvy.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
@@ -97,5 +98,12 @@ public class OrderTest {
                 + "{item=" + ATLAS.getItem() + ", quantity=" + ATLAS.getQuantity()
                 + ", date=" + ATLAS.getDate() + ", status=" + ATLAS.getStatus() + "}";
         assertEquals(expected, ATLAS.toString());
+    }
+
+    @Test
+    public void createCopy() {
+        Order atlasCopy = ATLAS.createCopy();
+        assertEquals(ATLAS, atlasCopy);
+        assertNotSame(ATLAS, atlasCopy);
     }
 }
