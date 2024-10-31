@@ -324,4 +324,3 @@ Action     | Format, Examples
 **Filter**   | `find [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `find n/James Jake`
 **List**   | `list`
 **Help**   | `help`
-
