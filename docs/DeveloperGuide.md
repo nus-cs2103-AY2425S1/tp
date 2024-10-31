@@ -574,16 +574,168 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `edit John Doe ap/`<br>
        Expected: Contact with name `John Doe` has all existing appointments cleared
 
-### Export
+### Exporting the address book
 
 1. Exporting Data
     1. Test case: `export`<br>
        Expected: A .json file under `data` folder should be created in the folder where the MediContact.jar file is stored
 
-### Saving data
+### Filter the contacts list
 
-1. Dealing with missing/corrupted data files
+1. Filtering by Age range
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: Address book should have a number of contacts in order to make testing meaningful
 
-1. _{ more test cases …​ }_
+    2. Test case: `filter b/20 - 30`<br>Expected: All contacts with ages 20 - 30 inclusive should be displayed
+
+    3. Test case: `filter b/30 - 20`<br>
+       Expected: Error reflecting how upper bound should be at least equal or greater than lower bound is displayed
+
+    4. Test case: `filter b/200-200` (Assuming no contact has age 200)<br>
+       Expected: Message will display no contact fits the criteria, list of people remain the same
+
+2. Filtering by Appointment range
+
+    1. Test cases to try: `filter ap/01/01/2024 - 01/01/2025`, `filter ap/01/01/2025 - 01/01/2024`, `filter ap/01/01/2024 - 01/01/2024`<br>
+       Expected: Similar results to filtering by age
+
+3. Filtering by Tags
+
+    1. Prerequisites: Address book should have a number of contacts in order to make testing meaningful.
+
+    2. Test case: `filter t/patients`<br>Expected: All contacts with tag `patients` should be displayed.
+
+    3. Test case: `filter t/`<br>
+       Expected: Error reflecting how input should be alphanumerical.
+
+    4. Test case: `filter b/son` (Assuming no contact has tag `son`)<br>
+       Expected: Message will display no contact fits the criteria, list of people remain the same.
+
+4. Filtering using multiple criteria
+
+    1. Test cases to try: `filter b/20 - 30 t/patient`, `filter ap/01/01/2025 - 01/01/2024 t/diabetes`
+       Expected: Only contacts that satisfy all criteria are shown. If no matches, list is not changed and message will display no contact fits the criteria.
+
+### Finding a contact
+
+1. Finding someone that exists
+
+    1. Prerequisites: List should contain contacts with the names and phone numbers that you want to find.
+
+    2. Test case: `find bryan`
+       <br>Expected: All contacts with `bryan` in their name is displayed.
+
+    3. Test case: `find 987654321`
+       <br>Expected: All contacts with phone number `987654321` is displayed.
+
+    4. Test case: `find bry 9876`
+       <br>Expected: All contacts with `bry` in their name or `9876` in their phone number is displayed.
+
+2. Finding someone that does not exist
+
+    1. Prerequisites: List should not contain contacts with the names and phone numbers that you want to find.
+
+    2. Test case to try: `find somebody`, `find somebody 99999999`
+       <br>Expected: Message displays that no one matches the criteria and list of contacts remain the same.
+
+### Importing an address book
+
+### Listing contacts
+
+1. List all contacts
+
+    1. Test case: `list`<br>
+       Expected: All contacts are listed
+
+2. List all starred contacts (Contacts have been Starred)
+
+    1. Test case: `list *`<br>
+       Expected: All Starred contacts are listed
+
+3. List all starred contacts (No contacts have been Starred)
+
+    1. Test case: `list *`<br>
+       Expected: Message reflects that no contacts have been starred
+
+### Editing a contact's notes
+
+1. Adding new notes to an existing person
+
+    1. Test cases to try: `note Bryan ap/01/01/2025 r/Allergic to Ibuprofen`, `note John m/10mg Panadol`<br>
+       Expected: Notes are added to person (Behaviour is very similar to Edit Command's appointments and tags)
+
+2. Removing note's fields of an existing person
+
+    1. Test cases to try: `note Bryan ap/ r/`, `note John m/`<br>
+       Expected: Respective Note fields are removed (Behaviour is very similar to Edit Command's appointments and tags)
+
+### Sorting the list
+
+1. Sorting list by appointment dates
+
+    1. Test case: `sort`<br>
+       Expected: List is sorted by appointment dates. Contacts with no appointments are at the end, sorted alphabetically.
+
+### Starring a contact
+
+1. Starring an unstarred person
+
+    1. Prerequisite: Address book is populated with contacts.
+
+    2. Test case: `star 1`<br>
+       Expected: Contact at index 1 is starred
+
+    3. Test case: `star John`<br>
+       Expected: Contact with exact name `John` is starred
+   
+    4. Test case: `star 0`, `star -1`, `star x` (where x is larger than the list size)<br>
+       Expected: Error message reflecting index provided is invalid
+
+    5. Test case: `star somebody`<br>
+       Expected: Error message reflecting name provided is invalid
+
+2. Starring a starred person
+    1. Prerequisite: First contact is starred
+
+    2. Test case: `star 1`, `star x` (where x is the name of the first contact)<br>
+       Expected: Message reflects that contact has already been starred
+
+### Unstarring a contact
+
+1. Unstarring a starred person
+
+    1. Prerequisite: Address book is populated with contacts.
+
+    2. Test case: `unstar 1`<br>
+       Expected: Contact at index 1 is unstarred
+
+    3. Test case: `unstar John`<br>
+       Expected: Contact with exact name `John` is unstarred
+
+    4. Test case: `unstar 0`, `unstar -1`, `unstar x` (where x is larger than the list size)<br>
+       Expected: Error message reflecting index provided is invalid
+
+    5. Test case: `unstar somebody`<br>
+       Expected: Error message reflecting name provided is invalid
+
+2. Starring a starred person
+
+    1. Prerequisite: First contact is unstarred
+
+    2. Test case: `unstar 1`, `unstar x` (where x is the name of the first contact)<br>
+       Expected: Message reflects that contact is not starred
+
+### Viewing a contacts details
+
+1. Viewing an existent person
+
+    1. Test case: `view 1`, `view John`<br>
+       Expected: Person's details are shown
+
+2. Viewing a non-existent person
+
+    1. Test case: `view 0`, `view -1`, `view x` (where x is larger than the list size)<br>
+       Expected: Error message reflecting index provided is invalid.
+
+    2. Test case: `view somebody`<br>
+       Expected: Error message reflecting name provided is invalid.
