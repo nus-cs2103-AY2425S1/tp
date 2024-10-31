@@ -484,9 +484,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   
+   1. Open a command terminal, `cd` into the folder that you put the jar file in.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Run the jar file with the command in the terminal `java -jar ugteach.jar`
+      Expected: Shows the GUI with a set of sample contacts and a reminder for lessons scheduled today. 
+      The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -494,8 +498,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Finding students
 
@@ -548,25 +550,49 @@ testers are expected to do more *exploratory* testing.
    (where days supplied does not match any day or contains only whitespace)<br>
       Expected: Similar to previous.
 
-
-
-
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
+1. Deleting a student while all students are being shown.
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. UGTeach displays success message with details of the deleted student.
 
    1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. UGTeach displays error message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a student from a filtered list.
+
+    1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
+
+    1. Test case: `delete 1`<br>
+        Expected: First contact is deleted from the filtered list. UGTeach displays success message with details of the deleted student.
+
+    1. Test case: `delete 0`<br>
+       Expected: No student is deleted. UGTeach displays error message.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+        Expected: Similar to previous.
+   
+### Getting a reminder
+
+1. Getting a reminder when there are lessons scheduled for today.
+
+    1. Prerequisite: There should be **at least 1 lesson** scheduled for today.
+
+    1. Test case: `remind`<br>
+         Expected: UGTeach displays success message with details such as student's name, time of the lesson and the subject to be taught.
+
+1. Getting a reminder when there are no lessons scheduled for today.
+
+    1. Prerequisite: There should be **no lessons** scheduled for today.
+
+    1. Test case: `remind`<br>
+        Expected: UGTeach displays congratulatory message for having no lessons scheduled today.
 
 ### Saving data
 
