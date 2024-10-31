@@ -10,12 +10,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.log.AppointmentDate;
 import seedu.address.model.log.Log;
+import seedu.address.model.log.LogEntry;
 
 public class JsonAdaptedLogTest {
 
     private static final AppointmentDate APPOINTMENT_DATE = new AppointmentDate(LocalDate.of(2024, 10, 19));
     private static final String ENTRY = "Doctor's Appointment";
-    private static final Log LOG = new Log(APPOINTMENT_DATE, ENTRY);
+    private static final Log LOG = new Log(APPOINTMENT_DATE, new LogEntry(ENTRY));
     private static final String STORAGE_STRING = "19 Oct 2024|Doctor's Appointment";
 
     @Test
