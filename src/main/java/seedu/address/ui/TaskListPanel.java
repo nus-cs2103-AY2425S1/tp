@@ -6,14 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.task.Task;
 
 /**
  * Panel containing the list of tasks.
  */
-public class TaskListPanel extends UiPart<Region> {
+public class TaskListPanel extends ListPanel<Task> {
     private static final String FXML = "TaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 

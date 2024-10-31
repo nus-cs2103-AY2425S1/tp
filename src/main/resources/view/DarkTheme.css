@@ -143,6 +143,21 @@
     -fx-text-fill: black;
 }
 
+.pane-holder-with-border {
+    -fx-background-color: derive(#fde68a, 20%);
+    -fx-border-color: derive(#fde68a, 10%);
+    -fx-border-top-width: 1px;
+    -fx-text-fill: black;
+    -fx-text-alignment: center;
+}
+
+.panel-title {
+    -fx-background-insets: 0;
+    -fx-control-inner-background: #fde68a;
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-radius: 0, 0, 0, 0;
+}
+
 .status-bar {
     -fx-background-color: derive(#fde68a, 30%);
 }
@@ -330,7 +345,7 @@
     -fx-stroke-width: 500;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #personListPanel, #weddingListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

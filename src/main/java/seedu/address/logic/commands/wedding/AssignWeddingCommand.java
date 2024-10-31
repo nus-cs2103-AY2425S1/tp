@@ -26,6 +26,8 @@ public class AssignWeddingCommand extends Command {
 
     public static final String COMMAND_WORD = "assign-wedding";
 
+    public static final String COMMAND_KEYWORD = "asw";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds one or multiple weddings to the person identified "
             + "by the index number used in the last person listing.\n"
