@@ -251,6 +251,7 @@ Format: `delete NAME` or `d NAME` or `delete NAME/`
 * Deletes the person with specified NAME
 * / is used to indicate specific name to delete
     * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li/` will delete the contact with the name "David Li".
+    * However, deleting David Lim does not require / as it is already the **MOST** specific name.
     * Name written before / must be **EXACT** name of the contact to be deleted.
     * Order matters when using / to delete a contact.
 
