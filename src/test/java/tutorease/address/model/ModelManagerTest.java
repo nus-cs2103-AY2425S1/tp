@@ -105,7 +105,7 @@ public class ModelManagerTest {
         Lesson lesson = lessonBuilder.build();
         lessonSchedule.addLesson(lesson);
         assertTrue(lessonSchedule.hasLesson(lesson));
-        lessonSchedule.deleteLesson(0);
+        lessonSchedule.deleteLesson(lesson);
         assertFalse(lessonSchedule.hasLesson(lesson));
     }
 
