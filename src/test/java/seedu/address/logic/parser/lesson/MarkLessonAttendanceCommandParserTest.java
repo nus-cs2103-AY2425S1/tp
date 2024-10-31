@@ -16,9 +16,9 @@ import seedu.address.logic.commands.lesson.MarkLessonAttendanceCommand;
 import seedu.address.model.student.Name;
 
 public class MarkLessonAttendanceCommandParserTest {
-    private MarkLessonAttendanceCommandParser parser = new MarkLessonAttendanceCommandParser();
     private static final Index VALID_INDEX = Index.fromOneBased(1);
     private static final List<Name> VALID_NAMES = List.of(new Name("Alice Tan"), new Name("Benson Son"));
+    private MarkLessonAttendanceCommandParser parser = new MarkLessonAttendanceCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
