@@ -44,7 +44,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in MediBase3";
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
     private final Person toAdd;
 

@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
+import static seedu.address.testutil.TypicalPersons.TOM;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -92,12 +93,12 @@ public class ListPrioCommandTest {
 
     @Test
     public void execute_nonePriority_success() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PriorityMatchesPredicate predicate = new PriorityMatchesPredicate(noPriority);
         ListPrioCommand command = new ListPrioCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(GEORGE, TOM), model.getFilteredPersonList());
     }
 
     @Test
