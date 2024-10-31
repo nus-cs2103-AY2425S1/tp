@@ -44,8 +44,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_NETWORK = "BTC";
     private static final String VALID_LABEL = "My BTC Wallet";
-    private static final String VALID_BTC_ADDRESS_1 = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
-    private static final String VALID_BTC_ADDRESS_2 = "3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy";
+    private static final String VALID_PUBLIC_ADDRESS_STRING_BTC_1 = "bc1qa96vpa8ypgpkvzqw3xu9n4re5vhamg89v0q92j";
+    private static final String VALID_PUBLIC_ADDRESS_STRING_BTC_2 = "bc1qnmd6uvx49w57cqe7du5pg3htyah9xmxep7gc46";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -216,7 +216,7 @@ public class ParserUtilTest {
     @Test
     public void parsePublicAddress_nullLabel_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-            ParserUtil.parsePublicAddress(VALID_BTC_ADDRESS_1, null, VALID_NETWORK));
+            ParserUtil.parsePublicAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, null, VALID_NETWORK));
     }
 
     @Test
@@ -228,26 +228,27 @@ public class ParserUtilTest {
     @Test
     public void parsePublicAddress_invalidLabel_throwsParseException() {
         assertThrows(ParseException.class, () ->
-            ParserUtil.parsePublicAddress(VALID_BTC_ADDRESS_1, INVALID_LABEL, VALID_NETWORK));
+            ParserUtil.parsePublicAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, INVALID_LABEL, VALID_NETWORK));
     }
 
     @Test
     public void parsePublicAddress_invalidNetwork_throwsParseException() {
         assertThrows(ParseException.class, () ->
-            ParserUtil.parsePublicAddress(VALID_BTC_ADDRESS_1, VALID_LABEL, INVALID_NETWORK));
+            ParserUtil.parsePublicAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, VALID_LABEL, INVALID_NETWORK));
     }
 
     @Test
     public void parsePublicAddress_validInputs_returnsPublicAddress() throws Exception {
-        PublicAddress expectedAddress = new BtcAddress(VALID_BTC_ADDRESS_1, VALID_LABEL);
-        assertEquals(expectedAddress, ParserUtil.parsePublicAddress(VALID_BTC_ADDRESS_1, VALID_LABEL, VALID_NETWORK));
+        PublicAddress expectedAddress = new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, VALID_LABEL);
+        assertEquals(expectedAddress, ParserUtil.parsePublicAddress(
+            VALID_PUBLIC_ADDRESS_STRING_BTC_1, VALID_LABEL, VALID_NETWORK));
     }
 
     @Test
     public void parsePublicAddress_validInputsWithWhitespace_returnsPublicAddress() throws Exception {
-        String addressWithWhitespace = " " + VALID_BTC_ADDRESS_1 + " ";
+        String addressWithWhitespace = " " + VALID_PUBLIC_ADDRESS_STRING_BTC_1 + " ";
         String labelWithWhitespace = " " + VALID_LABEL + " ";
-        PublicAddress expectedAddress = new BtcAddress(VALID_BTC_ADDRESS_1, VALID_LABEL);
+        PublicAddress expectedAddress = new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, VALID_LABEL);
         assertEquals(expectedAddress,
             ParserUtil.parsePublicAddress(addressWithWhitespace, labelWithWhitespace, VALID_NETWORK));
     }
@@ -265,26 +266,26 @@ public class ParserUtilTest {
     @Test
     public void parsePublicAddresses_invalidFormat_throwsParseException() {
         assertThrows(ParseException.class, () ->
-            ParserUtil.parsePublicAddresses(List.of("BTC" + VALID_BTC_ADDRESS_1)));
+            ParserUtil.parsePublicAddresses(List.of("BTC" + VALID_PUBLIC_ADDRESS_STRING_BTC_1)));
     }
 
     @Test
     public void parsePublicAddresses_invalidNetwork_throwsParseException() {
         assertThrows(ParseException.class, () ->
-            ParserUtil.parsePublicAddresses(List.of(INVALID_NETWORK + ">" + VALID_BTC_ADDRESS_1)));
+            ParserUtil.parsePublicAddresses(List.of(INVALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_STRING_BTC_1)));
     }
 
     @Test
     public void parsePublicAddresses_validInputs_returnsMap() throws Exception {
         Collection<String> inputs = Arrays.asList(
-            VALID_NETWORK + ">" + VALID_BTC_ADDRESS_1,
-            VALID_NETWORK + ">" + VALID_BTC_ADDRESS_2
+            VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_STRING_BTC_1,
+            VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_STRING_BTC_2
         );
 
         PublicAddressesComposition expected = new PublicAddressesComposition();
         Set<PublicAddress> btcAddresses = new HashSet<>();
-        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL));
-        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_2, PublicAddress.DEFAULT_LABEL));
+        btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, PublicAddress.DEFAULT_LABEL));
+        btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_2, PublicAddress.DEFAULT_LABEL));
         expected.addPublicAddressesToNetwork(Network.BTC, btcAddresses);
 
         assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
@@ -293,14 +294,14 @@ public class ParserUtilTest {
     @Test
     public void parsePublicAddresses_validInputsWithWhitespace_returnsMap() throws Exception {
         Collection<String> inputs = Arrays.asList(
-            " " + VALID_NETWORK + " > " + VALID_BTC_ADDRESS_1 + " ",
-            " " + VALID_NETWORK + " > " + VALID_BTC_ADDRESS_2 + " "
+            " " + VALID_NETWORK + " > " + VALID_PUBLIC_ADDRESS_STRING_BTC_1 + " ",
+            " " + VALID_NETWORK + " > " + VALID_PUBLIC_ADDRESS_STRING_BTC_2 + " "
         );
 
         PublicAddressesComposition expected = new PublicAddressesComposition();
         Set<PublicAddress> btcAddresses = new HashSet<>();
-        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL));
-        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_2, PublicAddress.DEFAULT_LABEL));
+        btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, PublicAddress.DEFAULT_LABEL));
+        btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_2, PublicAddress.DEFAULT_LABEL));
         expected.addPublicAddressesToNetwork(Network.BTC, btcAddresses);
 
         assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));

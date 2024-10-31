@@ -1,14 +1,13 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.BTC_DAILY_ADDRESS;
-import static seedu.address.testutil.TypicalPersons.BTC_SPECIAL_ADDRESS;
+import static seedu.address.testutil.TypicalPersons.BTC_MAIN_ADDRESS;
+import static seedu.address.testutil.TypicalPersons.BTC_SUB_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.JOE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -26,17 +25,17 @@ import seedu.address.testutil.PersonBuilder;
 
 public class RetrievePublicAddressCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexValidNetwork_success() {
         model.addPerson(JOE);
 
         RetrievePublicAddressCommand retrieveCommand =
-                new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC);
+            new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC);
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-                2, Network.BTC, JOE.getName(), BTC_DAILY_ADDRESS + "\n" + BTC_SPECIAL_ADDRESS);
+            2, Network.BTC, JOE.getName(), BTC_MAIN_ADDRESS + "\n" + BTC_SUB_ADDRESS);
 
         assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
@@ -46,11 +45,11 @@ public class RetrievePublicAddressCommandTest {
         model.addPerson(JOE);
 
         RetrievePublicAddressCommand retrieveCommand =
-                new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC,
-                        BTC_DAILY_ADDRESS.label);
+            new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC,
+                BTC_MAIN_ADDRESS.label);
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-                1, Network.BTC, JOE.getName(), BTC_DAILY_ADDRESS);
+            1, Network.BTC, JOE.getName(), BTC_MAIN_ADDRESS);
 
         assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
@@ -60,11 +59,11 @@ public class RetrievePublicAddressCommandTest {
         model.addPerson(JOE);
 
         RetrievePublicAddressCommand retrieveCommand =
-                new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC,
-                        "Non-existent");
+            new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC,
+                "Non-existent");
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-                0, Network.BTC, JOE.getName(), "-");
+            0, Network.BTC, JOE.getName(), "-");
 
         assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
@@ -83,10 +82,10 @@ public class RetrievePublicAddressCommandTest {
         model.addPerson(personWithoutPublicAddresses);
 
         RetrievePublicAddressCommand retrieveCommand =
-                new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC);
+            new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC);
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-                0, Network.BTC, personWithoutPublicAddresses.getName(), "-");
+            0, Network.BTC, personWithoutPublicAddresses.getName(), "-");
 
         assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
@@ -94,26 +93,26 @@ public class RetrievePublicAddressCommandTest {
     @Test
     public void equals() {
         RetrievePublicAddressCommand retrieveFirstCommand =
-                new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
+            new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
         RetrievePublicAddressCommand retrieveSecondCommand =
-                new RetrievePublicAddressCommand(INDEX_SECOND_PERSON, Network.BTC);
+            new RetrievePublicAddressCommand(INDEX_SECOND_PERSON, Network.BTC);
 
         // same object -> returns true
-        assertTrue(retrieveFirstCommand.equals(retrieveFirstCommand));
+        assertEquals(retrieveFirstCommand, retrieveFirstCommand);
 
         // same values -> returns true
         RetrievePublicAddressCommand retrieveFirstCommandCopy =
-                new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
-        assertTrue(retrieveFirstCommand.equals(retrieveFirstCommandCopy));
+            new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
+        assertEquals(retrieveFirstCommand, retrieveFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(retrieveFirstCommand.equals(1));
+        assertNotEquals(1, retrieveFirstCommand);
 
         // null -> returns false
-        assertFalse(retrieveFirstCommand.equals(null));
+        assertNotEquals(null, retrieveFirstCommand);
 
         // different index -> returns false
-        assertFalse(retrieveFirstCommand.equals(retrieveSecondCommand));
+        assertNotEquals(retrieveFirstCommand, retrieveSecondCommand);
 
         // TODO: Re-enable after more networks supported
         // different network -> returns false
@@ -123,20 +122,21 @@ public class RetrievePublicAddressCommandTest {
 
         // different label -> returns false
         RetrievePublicAddressCommand retrieveFirstCommandLabelled =
-                new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "different");
-        assertFalse(retrieveFirstCommand.equals(retrieveFirstCommandLabelled));
+            new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "different");
+        assertNotEquals(retrieveFirstCommand, retrieveFirstCommandLabelled);
     }
 
     @Test
     public void toStringMethod() {
         RetrievePublicAddressCommand retrieveCommand =
-                new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "wallet1");
+            new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "wallet1");
         String expected = new ToStringBuilder(retrieveCommand)
-                .add("index", INDEX_FIRST_PERSON)
-                .add("network", Network.BTC)
-                .add("label", "wallet1")
-                .toString();
+            .add("index", INDEX_FIRST_PERSON)
+            .add("network", Network.BTC)
+            .add("label", "wallet1")
+            .toString();
         assertEquals(expected, retrieveCommand.toString());
     }
+
 
 }
