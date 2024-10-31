@@ -31,7 +31,8 @@ public class UnenrollCommand extends Command {
             + "2 "
             + PREFIX_TUTORIAL + "physics";
     public static final String MESSAGE_SUCCESS = "%1$s(student) no longer enrolled in %2$s(tutorial)";
-    public static final String MESSAGE_NO_SUCH_PARTICIPATION = "This person is not enrolled in this tutorial";
+    public static final String MESSAGE_NO_SUCH_PARTICIPATION = "Cannot unenroll %s from %s, as he is "
+            + "currently not enrolled in %s";
 
     private static final Logger logger = LogsCenter.getLogger(UnenrollCommand.class);
     private final Index index;
@@ -60,7 +61,9 @@ public class UnenrollCommand extends Command {
         Participation participation = new Participation(student, tutorial, new ArrayList<>());
         if (!model.hasParticipation(participation)) {
             logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UnenrollCommand.class));
-            throw new CommandException(MESSAGE_NO_SUCH_PARTICIPATION);
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_PARTICIPATION, student.getFullName(),
+                    tutorial.getSubject(),
+                    tutorial.getSubject()));
         }
 
         model.deleteParticipation(participation);
