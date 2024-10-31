@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -12,6 +14,7 @@ import javafx.scene.layout.Region;
 import seedu.sellsavvy.commons.core.LogsCenter;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 
 /**
@@ -23,11 +26,14 @@ public class OrderListPanel extends UiPart<Region> {
     private static final String TITLE_WITH_SELECTED_PERSON = "Order (%1$s)";
 
     private final Logger logger = LogsCenter.getLogger(OrderListPanel.class);
+    private final ListChangeListener<Order> orderChangeListener = change -> handleChangeInOrders();
 
     @FXML
     private ListView<Order> orderListView;
     @FXML
     private Label orderGuide;
+    @FXML
+    private Label orderListEmpty;
     @FXML
     private Label orderListTitle;
 
@@ -38,7 +44,9 @@ public class OrderListPanel extends UiPart<Region> {
         super(FXML);
         orderGuide.setText("Use one of the following commands below to view order:\n" + "1. "
                 + ListOrderCommand.MESSAGE_USAGE);
+        orderListEmpty.setText("This customer does not have any orders currently");
         updateOrderList(selectedPerson.get());
+
         selectedPerson.addListener(((observable, oldPerson, newPerson) -> {
             updateOrderList(newPerson);
         }));
@@ -54,10 +62,25 @@ public class OrderListPanel extends UiPart<Region> {
             return;
         }
 
-        orderListView.setItems(person.getFilteredOrderList());
-        orderListView.setCellFactory(listView -> new OrderListViewCell());
-        toggleOrderListVisibility(true);
         orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON, person.getName().fullName));
+        FilteredList<Order> orderList = person.getFilteredOrderList();
+        moveOrderChangeListener(orderList);
+        if (orderList.isEmpty()) {
+            showEmptyOrderLabel();
+            return;
+        }
+
+        orderListView.setItems(orderList);
+        orderListView.setCellFactory(listView -> new OrderListViewCell());
+        showOrderList();
+    }
+
+    /**
+     * Moves the {@code orderChangeListener} to the new {@code orderList}
+     */
+    private void moveOrderChangeListener(FilteredList<Order> orderList) {
+        orderListView.getItems().removeListener(orderChangeListener);
+        orderList.addListener(orderChangeListener);
     }
 
     /**
@@ -65,20 +88,53 @@ public class OrderListPanel extends UiPart<Region> {
      */
     private void clearOrderList() {
         orderListView.setItems(FXCollections.observableArrayList());
-        toggleOrderListVisibility(false);
+        clearComponentVisibility();
+        orderGuide.setManaged(true);
+        orderGuide.setVisible(true);
+
         orderListTitle.setText(DEFAULT_TITLE);
     }
 
     /**
-     * Toggles visibility of the order list and guide on how to see customer's order.
-     *
-     * @param showOrderList true to show the order list, false to show the guide.
+     * Handles events whether a customer's orders changes.
      */
-    private void toggleOrderListVisibility(boolean showOrderList) {
-        orderListView.setManaged(showOrderList);
-        orderListView.setVisible(showOrderList);
-        orderGuide.setManaged(!showOrderList);
-        orderGuide.setVisible(!showOrderList);
+    private void handleChangeInOrders() {
+        System.out.println("called");
+        if (orderListView.getItems().isEmpty()) {
+            showEmptyOrderLabel();
+        } else {
+            showOrderList();
+        }
+    }
+
+    /**
+     * Displays the list of customer's orders.
+     */
+    private void showOrderList() {
+        clearComponentVisibility();
+        orderListView.setManaged(true);
+        orderListView.setVisible(true);
+    }
+
+    /**
+     * Displays the label to show that the order list is empty.
+     */
+    private void showEmptyOrderLabel() {
+        clearComponentVisibility();
+        orderListEmpty.setManaged(true);
+        orderListEmpty.setVisible(true);
+    }
+
+    /**
+     * Makes all components invisible.
+     */
+    private void clearComponentVisibility() {
+        orderGuide.setManaged(false);
+        orderGuide.setVisible(false);
+        orderListView.setManaged(false);
+        orderListView.setVisible(false);
+        orderListEmpty.setManaged(false);
+        orderListEmpty.setVisible(false);
     }
 
     /**
