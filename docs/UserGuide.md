@@ -24,8 +24,8 @@ Action | Format (with examples)
 [**List Doctors**](#listing-all-doctors--list-doctor) | `list-doctor`
 [**List Patients**](#listing-all-patients--list-patient) | `list-patient`
 [**Find**](#finding-a-person-by-name--find) | `find KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find James Jake`
-[**Find Doctor**](#finding-a-doctor-by-name--find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-doctor James Jake`
-[**Find Patient**](#finding-a-patient-by-name--find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-patient James Jake`
+[**Find Doctor**](#finding-doctors-by-name--find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-doctor James Jake`
+[**Find Patient**](#finding-patients-by-name--find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-patient James Jake`
 [**Delete**](#deleting-a-person--delete) | `delete INDEX` <br><br> e.g. `delete 3`
 [**Clear**](#clearing-all-entries--clear) | `clear`
 [**Exit**](#exiting-the-program--exit) | `exit`
@@ -152,7 +152,7 @@ Shows a list of all patients in the address book.
 
 Format: `list-patient`
 
-### Locating persons by name: `find`
+### Finding a person by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -171,7 +171,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating doctors by name: `find-doctor`
+### Finding doctors by name: `find-doctor`
 
 Finds doctors whose names contain any of the given keywords.
 
@@ -189,7 +189,7 @@ Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
 * `find-doctor John` returns `John Doe`.
 * `find-doctor Alex Yeoh` returns `Alex Yeoh`.
 
-### Locating patients by name: `find-patient`
+### Finding patients by name: `find-patient`
 
 Finds patients whose names contain any of the given keywords.
 
