@@ -87,10 +87,23 @@ public class DisplayCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Sets the lessons for the provided person by sorting their lessons and displaying them in a numbered format.
+     *
+     * This method retrieves a list of lessons from the specified {@code Person},
+     * sorts the lessons by day and start time using {@code LessonComparator},
+     * and then displays each lesson in a numbered format (e.g., "1. MONDAY 0900-1100")
+     * within the {@code displayLessons} container.
+     *
+     * @param person The {@code Person} whose lessons will be displayed.
+     */
+
     private void setDisplayLessons(Person person) {
+        // This code might need to change once the method for getting sorted lessons
+        // is implemented in the person class.
         List<Lesson> sortedLessons = person.getLessons().stream()
                 .sorted(new Lesson.LessonComparator())
-                .toList(); // Collect sorted lessons to a list.
+                .toList();
 
         IntStream.range(0, sortedLessons.size())
                 .mapToObj(i -> new Label((i + 1) + ". " + sortedLessons.get(i).getDayAndTime()))

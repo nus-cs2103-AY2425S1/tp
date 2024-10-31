@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import tuteez.model.person.Person;
 import tuteez.model.person.TelegramUsername;
+import tuteez.model.person.lesson.Lesson;
 
 /**
  * A UI component that displays information of a {@code Person}.
@@ -57,10 +58,15 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getLessons().stream()
-                .forEach(lesson -> lessons.getChildren().add(new Label(lesson.getDayAndTime())));
+        setNextLesson(person);
     }
 
+    /**
+     * Sets the address label text if an address exists for the {@code Person}.
+     * Hides the address label if no address is present.
+     *
+     * @param person The {@code Person} whose address is to be displayed.
+     */
     private void setAddressText(Person person) {
         if (person.getAddress().value != null) {
             address.setText(person.getAddress().value);
@@ -70,6 +76,12 @@ public class PersonCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Sets the email label text if an email exists for the {@code Person}.
+     * Hides the email label if no email is present.
+     *
+     * @param person The {@code Person} whose email is to be displayed.
+     */
     private void setEmailText(Person person) {
         if (person.getEmail().value != null) {
             email.setText(person.getEmail().value);
@@ -79,6 +91,12 @@ public class PersonCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Sets the Telegram username label text if a Telegram username exists for the {@code Person}.
+     * Hides the Telegram label if no username is present.
+     *
+     * @param person The {@code Person} whose Telegram username is to be displayed.
+     */
     private void setTelegramUsernameText(Person person) {
         TelegramUsername username = person.getTelegramUsername();
         if (username != null && username.telegramUsername != null && !username.telegramUsername.isEmpty()) {
@@ -87,5 +105,21 @@ public class PersonCard extends UiPart<Region> {
         } else {
             telegram.setVisible(false);
         }
+    }
+
+    /**
+     * Displays the next lesson scheduled for the {@code Person}, based on the current time.
+     * If no lessons are scheduled, hides the lessons flow pane.
+     *
+     * @param person The {@code Person} whose next lesson is to be displayed.
+     */
+    private void setNextLesson(Person person) {
+        Lesson nextLesson = person.nextLessonBasedOnCurrentTime();
+        if (nextLesson != null) {
+            lessons.getChildren().add(new Label(person.nextLessonBasedOnCurrentTime().getDayAndTime()));
+        } else {
+            lessons.setVisible(false);
+        }
+
     }
 }
