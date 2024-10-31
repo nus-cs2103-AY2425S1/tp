@@ -191,7 +191,7 @@ The implementation of the filter command follows the convention of a normal comm
 
 <puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram"/>
 
-Refer to AddSequenceDiagram for how `AddressBookParser` creates FilterCommandParser and FilterCommand.
+Refer to AddSequenceDiagram for how `AddressBookParser` creates `FilterCommandParser` and `FilterCommand`.
 `FilterCommandParser` obtains the specified status value and ensures that it is valid.
 
 A new filter command is then created with a `StatusPredicate`.
@@ -200,7 +200,9 @@ Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the 
 
 
 ### Delete an internship application
-The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
+The implementation of the delete command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
 In this case, `AddressBookParser` creates `DeleteCommandParser` to parse user input string.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
@@ -211,7 +213,6 @@ Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the 
 `DeleteCommand` comprises of a targetIndex which is the zero based index number of the internship application to be deleted.
 
 Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
-
 
 
 ### Sort internship application list
@@ -227,6 +228,14 @@ Otherwise, it creates a new instance of `SortCommand` that corresponds to the us
 
 Upon execution, `SortCommand` calls on `model::sortFilteredList` which in turns calls on `addressBook::sortItems`.
 `sortItems` updates the `filteredList` in `model` to sort the internship applications in the list according to the order specified by the user.
+
+### View chart
+The implementation of the chart command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
+<puml src="diagrams/ChartSequenceDiagram.puml" alt="ChartSequenceDiagram" />
+
+`AddressBookParser` creates `ChartCommand`
+Upon execution, `ChartCommand` gets the chart data which is encapsulated in `CommandResult`
 
 
 ### Update the Status of an Internship Application

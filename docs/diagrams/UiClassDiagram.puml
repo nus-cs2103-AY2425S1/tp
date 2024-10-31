@@ -10,6 +10,7 @@ Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
+Class ChartWindow
 Class ResultDisplay
 Class InternshipApplicationListPanel
 Class InternshipApplicationCard

@@ -7,6 +7,7 @@ import static seedu.hireme.logic.parser.CommandParserTestUtil.assertParseSuccess
 import org.junit.jupiter.api.Test;
 
 import seedu.hireme.logic.commands.FilterCommand;
+import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.model.internshipapplication.StatusPredicate;
 
 public class FilterCommandParserTest {
@@ -26,4 +27,8 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "PENDING", expectedFilterCommand);
     }
 
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "a", Status.MESSAGE_CONSTRAINTS);
+    }
 }

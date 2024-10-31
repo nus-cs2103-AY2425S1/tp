@@ -112,7 +112,7 @@ Examples:
 * `/find app` returns `Apple`, but not `CashApp`
 * `/find young` returns `Ernest & Young`
 
-### Changing the status of an internship application : `/accept`, `/pending`, `/reject`
+### Updating the status of an internship application : `/accept`, `/pending`, `/reject`
 
 Updates the status of the specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
 
@@ -133,7 +133,7 @@ Examples:
 
 ### Filtering internship applications by status: `/filter`
 
-Filters internship applications with the specified status.
+Filters through all the existing internship applications with specified status. Using /filter after /find resets the search and are not stackable.
 
 Format: `/filter STATUS`
 
@@ -170,6 +170,12 @@ This removes all the internship applications that you have been tracking. You wi
 </box>
 
 Format: `/clear`
+
+### Viewing status chart: `/chart`
+
+Opens a new window that displays a pie chart with summary data of the statuses of the internship applications
+
+Format: `/chart`
 
 ### Exiting the program : `/exit`
 
