@@ -9,7 +9,7 @@ import seedu.address.model.AddressBook;
  * Represents the different states of the Address Book for the user.
  */
 public class VersionedAddressBook {
-    private ArrayList<AddressBook> addressBookStateList;
+    private final ArrayList<AddressBook> addressBookStateList;
     private int currentStatePointer;
 
     /**

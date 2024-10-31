@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -161,7 +162,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<HistoryCommand> getHistoryCommandList() {
-        return historyCommandList.getHistoryCommands();
+        return FXCollections.observableArrayList(historyCommandList.getHistoryCommands());
     }
 
     /**
@@ -193,6 +194,6 @@ public class ModelManager implements Model {
      * Gets the AddressBook in previous state at specific index for testing purpose.
      */
     public AddressBook getVersionedAddressBook(int index) {
-        return versionedAddressBook.getAddressBookStateList().get(index);
+        return new AddressBook(versionedAddressBook.getAddressBookStateList().get(index));
     }
 }
