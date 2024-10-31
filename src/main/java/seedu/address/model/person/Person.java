@@ -40,7 +40,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final DeliveryList deliveryList = new DeliveryList();
-    private Archive archive;
+    private final Archive archive;
     private final Date date; // Date and time are used for sorting purposes only.
 
     private final Time time;

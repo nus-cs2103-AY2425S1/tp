@@ -54,7 +54,6 @@ public class DeliveryList {
     }
 
     /**
-     *
      * Gets the index of the first archived delivery in the list.
      */
     public Index getFirstArchivedIndex() {
