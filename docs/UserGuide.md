@@ -208,6 +208,31 @@ Examples:
 * `clear /classes 7A` clears all entries related to class 7A (students or teachers).
 * `clear /name John /subject Physics` clears entries for all persons named John or anyone associated with the subject Physics.
 
+### Marking attendance of students : `mark`
+
+Increments the attendance of all students in EduConnect by 1.
+
+Format: `mark`
+
+### Unmarking attendance of a particular student : `unmark`
+
+Decrements the attendance of a particular student in EduConnect by 1.
+
+Format: `unmark INDEX`
+
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The person corresponding to the index must be a student.
+
+Example:
+* `unmark 1` decrements the attendance of the student at index 1 in EduConnect by 1.
+
+### Reset attendance of all students : `resetAttendance`
+
+Resets the attendance of all students in EduConnect to 0.
+
+Format: `resetAttendance`
+
 ### Exiting the program : `exit`
 
 Exits the program.
