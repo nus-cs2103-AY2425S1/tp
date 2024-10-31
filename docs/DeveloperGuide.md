@@ -179,6 +179,31 @@ The sequence diagram below models the interactions between the different compone
 2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached. 
 3. The new appointment is then displayed in the UI, reflecting the updated schedule for "Alice Tan".
 
+
+### Reminder Feature
+
+#### Overview
+The `reminder` command helps to set a reminder for a client's most upcoming appointment.
+
+The reminder diagram below models the interaction between the different components of PhysioPal for the execution of the `reminder` command.
+
+![ReminderSequenceDiagram](images/ReminderSequenceDiagram.png)
+
+#### Details
+1. The user executes the command `reminder John Doe r/1 day` to set a reminder for a client named John Doe's appointment.
+2. The `ReminderCommandParser` object calls its parse method to interpret the user input.
+3. A `ReminderCommand` object is created.
+4. The `ReminderCommandParser` object returns the `ReminderCommand` object.
+5. The `LogicManager` object calls the `execute` method of `ReminderCommand`.
+6. The `execute` method then invokes the `setPerson` method of its `Model` argument to create a reminder with the specified reminder time.
+7. The `execute` method then invokes the `updateFilteredPersonList` method of its `Model` argument to update the view of PhysioPal to show all contacts with their reminders.
+8. The `execute` method returns a `CommandResult` which contains data including the completion of the `ReminderCommand`.
+
+#### Example Usage
+1. User inputs the command `reminder Alice Tan r/3 hours`.
+2. This creates a reminder for a person named "Alice Tan", with reminder time "3 hours".
+3. The reminder is then displayed in the UI, reflecting that a reminder has been set for "Alice Tan"'s appointment.
+
 ### Delete Appointment Feature
 
 #### Overview
@@ -202,6 +227,7 @@ The sequence diagram below models the interactions between the different compone
 1. User inputs the command `appointment-delete Alice Tan d/2024-10-29 1200`.
 2. This deletes the appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm.
 3. The updated schedule for "Alice Tan" is then displayed in the UI.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -501,6 +527,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Use case: UC04 - Setting a reminder for an appointment**
+
+**Preconditions: Client must have at least one appointment.**
+
+**MSS**
+
+1. Physiotherapists sets a reminder for an appointment made for a client.
+2. PhysioPal creates a reminder for the client with the reminder time provided.
+3. PhysioPal confirms creation of reminder and displays a success message.
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
+
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
+
+
+* 1c. PhysioPal detects an empty input for reminder time.
+
+    * 1c1. PhysioPal displays error message.
+    * 1c2. Physiotherapist enters new data
+    * Steps 1c1-1c2 are repeated until a valid reminder time is input by the Physiotherapist. Use case resumes from step 2.
+
+
+* 1d. PhysioPal detects an invalid reminder time or the appointment already has the same reminder time.
+
+    * 1d1. PhysioPal displays error message.
+    * 1d2. Physiotherapist enters new data.
+    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist. Use case resumes from step 2.
+
+**Use Case: UC05 - Displaying upcoming appointments on launch screen**
+
+**MSS**
+1. Physiotherapist launches PhysioPal.
+2. PhysioPal retrieves the top three upcoming appointments.
+3. PhysioPal displays the top three upcoming appointments in the result display box.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No upcoming appointments are found.
+    * 2a1. PhysioPal displays a message indicating no upcoming appointments.
+  
+        Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should be able to handle  all operations of at least 100 clients without a delay of more than 0.5 seconds
@@ -578,6 +661,28 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `appointment-delete John Doe d/2024-10-29 1200`<br>Expected: No contact is updated. Error details shown in the status message.
 
     1. Test case: `appointment-delete John Doe d/2024-10-29 1800`<br>Expected: Similar to previous.
+
+### Setting a reminder for an appointment
+
+1. Setting a reminder for a scheduled appointment for a client while all clients are being shown.
+
+    1. Prerequisites: Only **one** contact with the name John Doe should exist in PhysioPal. If not, run the appropriate command to add John Doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name John Doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        
+        At **least one** appointment must be scheduled for John Doe. If not, run the appropriate command to add an appointment for John Doe. <br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`
+
+    1. Test case: `reminder John Doe r/1 hour`<br>Expected: Contact name John Doe will be updated with a reminder set for 1 hour before Oct 29 2024, 12:00pm
+
+    1. Test case: `reminder John Doee r/1 hour`<br>Expected: No contact is updated with the corresponding reminder time. Error details shown in the status message.
+
+    1. Test case: `reminder John Doe r/1 cycle`<br>Expected: No contact is updated with the corresponding reminder time due to invalid reminder format. Error details shown in the status message.
+
+    1. Test case: `reminder John Doe r/1 days`<br>Expected: Similar to previous.
+
+    1. Test case: `reminder John Doe r/3 day`<br>Expected: Similar to previous.
+
+    1. Test case: `reminder John Doe r/8 days`<br>Expected: Similar to previous.
+
+    1. Test case: `reminder John Doe r/25 hours`<br>Expected: Similar to previous.
 
 ### Deleting a reminder
 
