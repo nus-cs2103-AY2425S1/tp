@@ -1,28 +1,19 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ImportCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ImportCommandParserTest {
     private ImportCommandParser parser = new ImportCommandParser();
     private Path tempJson;
-    private static final String VALID_JSON_STRING = "{ \"persons\": ["
-            + "{ \"name\": \"John Doe\", \"phone\": \"12345678\", "
-            + "\"email\": \"johndoe@example.com\", \"address\": \"123 Main St\", "
-            + "\"age\": \"30\", \"sex\": \"M\", \"appointments\": [], \"tags\": [], \"note\": {"
-            + "\"appointments\": [], \"remark\": [], \"medication\": [] },"
-            + "\"starredStatus\": \"true\" }"
-            + "] }";
 
     @AfterEach
     public void cleanUp() throws IOException {

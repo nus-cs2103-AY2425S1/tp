@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,13 +11,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 public class ImportCommandTest {
     private Model model;
     private Model expectedModel;
 
-    // Initialize address book and user prefs
+    // Initialize address book and user preferences
     @BeforeEach
     public void setUp() {
         model = new ModelManager(new AddressBook(), new UserPrefs());
