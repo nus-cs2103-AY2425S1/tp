@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskDescription(String)}
  */
 public class TaskDescription {
-    public static final String MESSAGE_CONSTRAINTS = "Task description can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Task description can take any values, but it should not be blank";
 
     /*
      * The first character of the task description must not be a whitespace,

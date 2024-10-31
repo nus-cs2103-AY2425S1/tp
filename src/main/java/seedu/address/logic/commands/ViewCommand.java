@@ -19,7 +19,9 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the details of the student identified.\n"
-            + "Parameters: " + PREFIX_NAME + "NAME";
+            + "Parameters: " + PREFIX_NAME + "NAME\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe";
 
     public static final String MESSAGE_VIEW_SUCCESS = "Displayed details of Student: %1$s";
 

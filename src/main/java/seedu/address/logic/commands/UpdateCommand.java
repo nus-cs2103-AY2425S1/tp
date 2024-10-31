@@ -47,12 +47,12 @@ public class UpdateCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: NAME (full name) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_PHONE] "
+            + "[" + PREFIX_PHONE + "PHONE_NUMBER] "
+            + "[" + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_CONTACT] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_LEVEL + "LEVEL] "
             + "[" + PREFIX_SUBJECT + "SUBJECT]... "
-            + "[" + PREFIX_LESSON_TIME + "LESSON_TIMING]...\n"
+            + "[" + PREFIX_LESSON_TIME + "LESSON_TIME]...\n"
             + "Example: " + COMMAND_WORD + " Cristiano Ronaldo "
             + PREFIX_PHONE + "91234567 ";
 
