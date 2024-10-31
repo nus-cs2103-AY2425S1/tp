@@ -728,6 +728,68 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3d1. System displays an error message notifying that the student does not exist in the system.
       Use case ends.
 
+**System: StudentManagerPro**
+
+**Use case: UC12 Add a Submission**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the submission is added for all students currently in the system with a status of "NIL".
+* If an invalid submission name is given as input, an error message is displayed.
+
+**MSS**
+1. User gives the command to add submission in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the submission data.
+4. System adds the submission to every student currently in the system.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the submission name.
+    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
+      Use case ends.
+* 3a. User tries to add a submission that already exists in the system.
+    * 3a1. System displays an error message telling the user that the submission already exists.
+      Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC13 Add a Student's Submission Status**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the student's submission status is added to the specified submission in the student's profile and saved in the system.
+* If an invalid submission name or submission status is given as input, a corresponding error message is displayed.
+
+**MSS**
+1. User gives the command to add the status for a particular submission for a student in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the submission data.
+4. System adds the submission status to the specified submission in the student's profile.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the submission name.
+    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
+      Use case ends.
+* 2b. User enters invalid characters in the submission status.
+    * 2b1. System displays an error message asking for valid submission status format, "Y", "N" or "NIL".
+      Use case ends.
+* 3a. User tries to add a status to a submission that does not exist.
+    * 3a1. System displays an error message notifying that the submission does not exist in the system.
+      Use case ends.
+* 3b. User tries to add a status to a student that does not exist.
+    * 3b1. System displays an error message notifying that the student does not exist in the system.
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
