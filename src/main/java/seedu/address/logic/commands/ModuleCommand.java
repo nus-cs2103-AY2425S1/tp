@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -66,8 +67,12 @@ public class ModuleCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
-        ArrayList<Module> modules = person.getModules();
-        if (modules.contains(module)) {
+        ArrayList<String> modules = person.getModules()
+                .stream()
+                .map(x -> x.toString().toUpperCase())
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        if (modules.contains(module.toString().toUpperCase())) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, module.value));
         }
 
