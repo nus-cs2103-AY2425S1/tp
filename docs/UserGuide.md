@@ -151,6 +151,24 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Confirming a command : `confirm`
+
+Confirms the command that is currently being executed. This command is used to confirm the deletion of a person and the
+clearing of the address book.
+
+Examples:
+* `delete i/S1234567D` followed by `confirm` deletes the person with NRIC S1234567D in the address book.
+* `clear` followed by `confirm` clears all entries in the address book.
+
+### Canceling a command : `cancel`
+
+Cancels the command that is currently being executed. This command is used to cancel the deletion of a person and the
+clearing of the address book.
+
+Examples:
+* `delete i/S1234567D` followed by `cancel` cancels the deletion of the person with NRIC S1234567D in the address book.
+* `clear` followed by `cancel` cancels the clearing of the address book.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -201,5 +219,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Confirm**| `confirm`
+**Cancel** | `cancel`
 **List**   | `list`
 **Help**   | `help`
