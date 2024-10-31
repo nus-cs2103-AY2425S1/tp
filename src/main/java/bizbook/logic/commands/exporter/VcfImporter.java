@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import bizbook.commons.util.FileUtil;
 import bizbook.logic.commands.exporter.exceptions.EmptyAddressBookException;
+import bizbook.logic.commands.exporter.exceptions.InvalidFileException;
 import bizbook.model.AddressBook;
 import bizbook.model.person.Address;
 import bizbook.model.person.Email;
@@ -23,13 +24,17 @@ import ezvcard.VCard;
  * Represents a class that can import an address book from a VCF file
  */
 public class VcfImporter implements Importer {
+    public static final String MESSAGE_EMPTY_FILE = "There are no people to import from the file.";
+    public static final String MESSAGE_MISSING_INFORMATION = "vCard $1 is missing information.";
+    public static final String MESSAGE_INVALID_FORMAT = "File is not in the proper format or the file is corrupted.";
+
     @Override
     public AddressBook importAddressBook(Path filePath) throws IOException, EmptyAddressBookException {
         String contents = FileUtil.readFromFile(filePath);
         List<VCard> vCards = Ezvcard.parse(contents).all();
 
         if (vCards.isEmpty()) {
-            throw new EmptyAddressBookException();
+            throw new InvalidFileException(MESSAGE_EMPTY_FILE);
         }
 
         AddressBook addressBook = new AddressBook();

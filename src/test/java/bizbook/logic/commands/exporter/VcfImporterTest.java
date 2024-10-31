@@ -1,5 +1,8 @@
 package bizbook.logic.commands.exporter;
 
+import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_EMPTY_FILE;
+import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_INVALID_FORMAT;
+import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_MISSING_INFORMATION;
 import static bizbook.testutil.TypicalPersons.CHARLIE;
 import static bizbook.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +17,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import bizbook.logic.commands.exporter.exceptions.EmptyAddressBookException;
+import bizbook.logic.commands.exporter.exceptions.InvalidFileException;
 import bizbook.model.AddressBook;
 import bizbook.testutil.TestUtil;
 
@@ -22,6 +25,8 @@ public class VcfImporterTest {
     private static final String TYPICAL_VCF_FILE_PATH = "VcfImporterTest/typical.vcf";
     private static final String SINGLE_VCF_FILE_PATH = "VcfImporterTest/single.vcf";
     private static final String EMPTY_VCF_FILE_PATH = "VcfImporterTest/empty.vcf";
+    private static final String WRONG_FORMAT_FILE_PATH = "VcfImporterTest/wrong_format.vcf";
+    private static final String MISSING_INFO_FILE_PATH = "VcfImporterTest/missing_info.vcf";
 
     private VcfImporter vcfImporter;
 
@@ -74,6 +79,21 @@ public class VcfImporterTest {
     public void import_empty_throwsEmptyAddressBookException() {
         Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, EMPTY_VCF_FILE_PATH);
 
-        assertThrows(EmptyAddressBookException.class, () -> vcfImporter.importAddressBook(path));
+        assertThrows(InvalidFileException.class, () -> vcfImporter.importAddressBook(path), MESSAGE_EMPTY_FILE);
+    }
+
+    @Test
+    public void import_wrongFormat_throwsInvalidFileException() {
+        Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, WRONG_FORMAT_FILE_PATH);
+
+        assertThrows(InvalidFileException.class, () -> vcfImporter.importAddressBook(path), MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void import_missingInformation_throwsInvalidFileException() {
+        Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, MISSING_INFO_FILE_PATH);
+
+        assertThrows(InvalidFileException.class, () -> vcfImporter.importAddressBook(path),
+                MESSAGE_MISSING_INFORMATION);
     }
 }
