@@ -42,6 +42,10 @@ public class InspectCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        if (index.getZeroBased() >= model.getFirstArchivedIndex().getZeroBased()) {
+            throw new CommandException(Messages.MESSAGE_ARCHIVED_PERSON_DISPLAYED_INDEX);
+        }
+
         Person personToInspect = lastShownList.get(index.getZeroBased());
 
         return new CommandResult(generateSuccessMessage(personToInspect), personToInspect, false,

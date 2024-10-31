@@ -148,9 +148,12 @@ public class EditCommand extends Command {
     private CommandResult editPerson(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()
-                || index.getZeroBased() >= model.getFirstArchivedIndex().getZeroBased()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (index.getZeroBased() >= model.getFirstArchivedIndex().getZeroBased()) {
+            throw new CommandException(Messages.MESSAGE_ARCHIVED_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -177,9 +180,12 @@ public class EditCommand extends Command {
         //Currently no filtered list for delivery
 
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
-        if (index.getZeroBased() >= deliveryList.size()
-                || index.getZeroBased() >= inspectedPerson.getFirstArchivedIndex().getZeroBased()) {
+        if (index.getZeroBased() >= deliveryList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+        }
+
+        if (index.getZeroBased() >= inspectedPerson.getFirstArchivedIndex().getZeroBased()) {
+            throw new CommandException(Messages.MESSAGE_ARCHIVED_DELIVERY_DISPLAYED_INDEX);
         }
 
         Delivery deliveryToEdit = deliveryList.get(index.getZeroBased());
