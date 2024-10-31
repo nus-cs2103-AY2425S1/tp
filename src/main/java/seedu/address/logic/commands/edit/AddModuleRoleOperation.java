@@ -14,10 +14,10 @@ import seedu.address.model.person.RoleType;
  */
 public class AddModuleRoleOperation extends EditModuleRoleOperation {
 
-    private final ModuleRoleMap moduleRoleMapToAdd;
-    private final Logger logger = LogsCenter.getLogger(getClass());
     private static final String MESSAGE_MODULE_ROLE_PAIRS_CLASH = "You wish to add these module role pair(s) "
             + "but they clash with existing ones: %1$s";
+    private final ModuleRoleMap moduleRoleMapToAdd;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Constructor for AddModuleRoleOperation.

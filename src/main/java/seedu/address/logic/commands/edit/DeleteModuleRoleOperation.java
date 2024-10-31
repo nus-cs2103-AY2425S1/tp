@@ -14,10 +14,10 @@ import seedu.address.model.person.RoleType;
  */
 public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
-    private final ModuleRoleMap moduleRoleMapToDelete;
     private static final String MESSAGE_MODULE_ROLE_PAIRS_DO_NOT_EXIST = "You wish to delete these module role pair(s) "
             + "but they do not exist: %1$s";
+    private final Logger logger = LogsCenter.getLogger(getClass());
+    private final ModuleRoleMap moduleRoleMapToDelete;
 
     /**
      * Constructor for DeleteModuleRoleOperation.
