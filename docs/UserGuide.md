@@ -184,6 +184,101 @@ Examples:
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 t/medication t/Dr Tan`
 
+### Importing contacts: `filter`
+
+Imports contact info from the given json file into MediContact.
+
+Format: `import FILENAME.json`
+
+- **IMPORTANT**: Upon importing data, the original data will be entirely overridden with the new json file. If you wish to save the current data you may `export` the data first (see <u>Exporting contacts</u> for more details). If you wish to append current and new data, you may do so manually as long as you ensure that it adheres to the expected format (see <u>Expected format</u> for more details).
+- File **must** be a `json` file. Ensure that the extension `.json` follows the `FILENAME` 
+- File **must** be in the same folder as the application JAR file. 
+- File **must** be in the expected format of MediContact data (see <u>Expected format</u> for more details). 
+- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see <u>Summary of input constraints</u> for more details).
+
+Example:
+
+- `import patientRecords.json`
+
+**Guide:** 
+
+1. Place the `json` file to be imported in the same folder as the application JAR file. In the image below `data1.json` is the desired `json` file to be imported. Note that it has the file extension `.json` and assume that it adheres to the expected format and input constraints. 
+
+   <img src="images/importStep1.png"/>
+
+2. Run the application `jar` file as per usual (see <u>Quick start</u> for more details).
+
+3. Type `import FILENAME.json` (e.g. `import data1.json`) in the command box in the application. The following message will be displayed in the results box if the import is successful and the contacts will automatically be updated. 
+
+   <img src="images/importStep3.png"/>
+
+   Note that along a `data` folder containing the file `addressbook.json` will be generated in the folder as well if it was not already previously there (as seen below). Similarly to when `export` is executed, this `addressbook.json` file will reflect the latest patient records from the application. 
+
+   <img src="images/importStep3a.png"/>
+
+**Expected format:**
+
+The following is an example of a valid JSON file content. 
+
+````
+"persons" : [ {
+    "name" : "Alicia Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "age" : "24",
+    "sex" : "Female",
+    "appointments" : [ ],
+    "tags" : [ "friends" ],
+    "note" : {
+      "appointments" : [ "11/02/2023 1100", "11/03/2023 1600" ],
+      "remark" : [ ],
+      "medication" : [ ]
+    },
+    "starredStatus" : "false"
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "age" : "37",
+    "sex" : "Male",
+    "appointments" : [ ],
+    "tags" : [ "owesMoney", "friends" ],
+    "note" : {
+      "appointments" : [ ],
+      "remark" : [ ],
+      "medication" : [ ]
+    },
+    "starredStatus" : "true"
+  }] 
+````
+
+- All patient data must be enclosed with `"persons" : []`
+
+- Each patient data must be enclosed with `{}` and seperated by a comma `,`
+
+- The following is a blank template for each patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see <u>Summary of input constraints</u> for more details).
+
+  ````
+  {
+      "name" : " ",
+      "phone" : " ",
+      "email" : " ",
+      "address" : " ",
+      "age" : " ",
+      "sex" : " ",
+      "appointments" : [ ],
+      "tags" : [ ],
+      "note" : {
+        "appointments" : [ ],
+        "remark" : [ ],
+        "medication" : [ ]
+      },
+  ````
+
+  
+
 
 ### Editing a person's notes : `note`
 
@@ -307,7 +402,7 @@ the action will be aborted, and the address book will remain unchanged.
 
 ![clearConfirmation.png](images%2FclearConfirmation.png)
 
-### Exporting the contacts : `export`
+### Exporting contacts : `export`
 
 Exports contact info in file path `data/addressbook.json`.
 
@@ -359,19 +454,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                    |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action     | Format, Examples                                             |
+| ---------- | ------------------------------------------------------------ |
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/24 s/Male ap/01/01/2025 1200 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                                                                             |
-| **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`                                                                                                                                                           |
-| **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com`                                                                          |
-| **Export** | `export`                                                                                                                                                                                                                            |
-| **Filter** | `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`<br> e.g.,`filter b/70-79 t/medication t/Dr Tan``                                                         |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`                                                                                                                                                                      |
-| **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`                                                                                                                 |
-| **Help**   | `help`                                                                                                                                                                                                                              |
-| **List**   | `list` <br/>`list *` (to list starred contacts)                                                                                                                                                                                     |
-| **Sort**   | `sort` (to sort contacts based on appointment dates)                                                                                                                                                                                |
-| **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh`                                                                                                                                                                  |
-| **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh`                                                                                                                                                          |
-| **View**   | `view INDEX` or `uview NAME` <br/> e.g., `view 3`, `view Alex Yeoh`                                                                                                                                                                 |
+| **Clear**  | `clear`                                                      |
+| **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh` |
+| **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com` |
+| **Export** | `export`                                                     |
+| **Filter** | `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`<br> e.g.,`filter b/70-79 t/medication t/Dr Tan` |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777` |
+| **Help**   | `help`                                                       |
+| **Import** | `import FILENAME.json`<br>e.g. `import patientRecords.json`  |
+| **List**   | `list` <br/>`list *` (to list starred contacts)              |
+| **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen` |
+| **Sort**   | `sort` (to sort contacts based on appointment dates)         |
+| **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` |
+| **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` |
+| **View**   | `view INDEX` or `uview NAME` <br/> e.g., `view 3`, `view Alex Yeoh` |

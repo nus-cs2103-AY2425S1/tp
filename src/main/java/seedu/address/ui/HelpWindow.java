@@ -144,6 +144,7 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandSummary("Export", "export"),
                 new CommandSummary("Find", "find KEYWORD [MORE_KEYWORDS]\ne.g., find olive 87438"),
                 new CommandSummary("Help", "help"),
+                new CommandSummary("Import", "import FILENAME.json"),
                 new CommandSummary("List", "list"),
                 new CommandSummary("Note", "note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]\n"
                         + "e.g., note John Doe m/10mg Ibuprofen"),
