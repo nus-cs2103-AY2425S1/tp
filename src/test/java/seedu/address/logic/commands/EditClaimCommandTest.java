@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
@@ -9,7 +10,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLAIM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +23,17 @@ import seedu.address.logic.parser.EditClaimCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.ClaimList;
 import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.claim.EditClaimDescriptor;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.policy.HealthPolicy;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 import seedu.address.testutil.EditClaimDescriptorBuilder;
 
@@ -91,6 +104,25 @@ public class EditClaimCommandTest {
     }
 
     @Test
+    public void execute_validClaimEdit_updatesModelAndReturnsSuccessMessage() {
+        Person personWithClaim = createPersonWithHealthPolicyAndClaim(
+                "John Doe", "98765432", "john@example.com", "123 Main St");
+
+        // replace the person in the model with the person that includes a claim
+        model.setPerson(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()), personWithClaim);
+
+        EditClaimCommand editClaimsCommand = new EditClaimCommand(INDEX_SECOND_PERSON, PolicyType.HEALTH,
+                INDEX_FIRST_CLAIM, descriptor);
+
+        String expectedMessage = String.format(EditClaimCommand.MESSAGE_EDIT_CLAIM_SUCCESS, PolicyType.HEALTH,
+                personWithClaim.getName(), ClaimStatus.PENDING, "Surgery claim");
+
+        assertCommandSuccess(editClaimsCommand, model, expectedMessage, model);
+    }
+
+
+
+    @Test
     public void equals() {
         EditClaimCommand editClaimCommand1 = new EditClaimCommand(INDEX_FIRST_PERSON, validPolicyType,
                 validClaimIndex, descriptor);
@@ -117,5 +149,18 @@ public class EditClaimCommandTest {
         EditClaimCommand editClaimDifferentClaimIndex = new EditClaimCommand(INDEX_FIRST_PERSON, validPolicyType,
                 Index.fromOneBased(2), descriptor);
         assert(!editClaimCommand1.equals(editClaimDifferentClaimIndex));
+    }
+
+    public static Person createPersonWithHealthPolicyAndClaim(String name, String phone, String email, String address) {
+        Claim claim = new Claim(ClaimStatus.PENDING, "Surgery claim needed");
+
+        HealthPolicy healthPolicy = new HealthPolicy(null, null, null,
+                new ClaimList());
+        healthPolicy.addClaim(claim);
+        PolicySet policySet = new PolicySet();
+        policySet.add(healthPolicy);
+
+        return new Person(new Name(name), new Phone(phone), new Email(email),
+                new Address(address), Set.of(), policySet);
     }
 }

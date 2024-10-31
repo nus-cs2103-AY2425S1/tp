@@ -93,4 +93,24 @@ public class EditClaimCommandParserTest {
 
         assertEquals(expectedCommand, actualCommand);
     }
+
+    @Test
+    public void parse_invalidPersonIndex_throwsParseException() {
+        // Invalid person index (not a number)
+        String userInput = "invalid " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "2 "
+                + PREFIX_CLAIM_STATUS + "approved";
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidClaimIndex_throwsParseException() {
+        // Invalid claim index (not a number)
+        String userInput = "1 " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "invalid "
+                + PREFIX_CLAIM_STATUS + "approved";
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE));
+    }
 }
