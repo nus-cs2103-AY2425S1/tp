@@ -333,3 +333,5 @@ Action     | Format, Examples
 **Inspect**| `inspect INDEX`<br> e.g., `inspect 2`
 **List**   | `list`
 **Help**   | `help`
+**Unarchive** | `unarchive INDEXES`<br> e.g., `unarchive 3`, `unarchive 3 4`
+
