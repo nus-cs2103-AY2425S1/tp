@@ -63,7 +63,15 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete person 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        try {
+            logic.execute(deleteCommand);
+        } catch (ParseException | CommandException e) {
+            // Not expected to happen before confirmation command
+            assert(false);
+        }
+        String confirmCommand = "Y";
+        assertCommandException(confirmCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

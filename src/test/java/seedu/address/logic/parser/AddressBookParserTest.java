@@ -94,9 +94,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
+        parser.parseCommand(
                 DeletePersonCommand.COMMAND_WORD + " " + DeletePersonCommand.COMMAND_FIELD
                         + " " + INDEX_FIRST_PERSON.getOneBased());
+        DeletePersonCommand command = (DeletePersonCommand) parser.executePendingCommand("Y");
         assertEquals(new DeletePersonCommand(INDEX_FIRST_PERSON), command);
     }
 
