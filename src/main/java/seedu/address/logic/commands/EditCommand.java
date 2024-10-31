@@ -31,7 +31,7 @@ import seedu.address.model.student.Student;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final CommandType COMMAND_TYPE = CommandType.EDITSTUDENT;
+    public static final CommandType COMMAND_TYPE = CommandType.STUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the index number used in the displayed student list. "

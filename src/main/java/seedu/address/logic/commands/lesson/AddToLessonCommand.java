@@ -29,7 +29,7 @@ import seedu.address.model.student.exceptions.DuplicateStudentException;
 public class AddToLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "addtolesson";
-    public static final CommandType COMMAND_TYPE = CommandType.ADDTOLESSON;
+    public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds students to the lesson identified "
             + "by the index number used in the displayed lesson list. "

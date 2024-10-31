@@ -27,7 +27,7 @@ import seedu.address.model.student.exceptions.DuplicateStudentException;
 public class AddToConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "addtoconsult";
-    public static final CommandType COMMAND_TYPE = CommandType.ADDTOCONSULT;
+    public static final CommandType COMMAND_TYPE = CommandType.CONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds students to the consultation identified "
             + "by the index number used in the displayed consultation list. "

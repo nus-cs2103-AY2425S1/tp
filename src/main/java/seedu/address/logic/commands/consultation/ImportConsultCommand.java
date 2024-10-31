@@ -31,7 +31,7 @@ import seedu.address.model.student.Student;
 public class ImportConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "importconsult";
-    public static final CommandType COMMAND_TYPE = CommandType.IMPORTCONSULT;
+    public static final CommandType COMMAND_TYPE = CommandType.CONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports consultations from a CSV file.\n"
             + "For files in parent directory: " + COMMAND_WORD + " filename.csv\n"

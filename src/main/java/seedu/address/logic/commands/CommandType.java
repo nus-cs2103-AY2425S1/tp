@@ -8,29 +8,10 @@ public enum CommandType {
     CLEAR,
     HELP,
     EXIT,
-
     // Command Type for Students
-    LISTSTUDENT,
-    ADDSTUDENT,
-    EDITSTUDENT,
-    FINDSTUDENT,
-    DELETESTUDENT,
-    EXPORTSTUDENT,
-    IMPORTSTUDENT,
-
-    // Command Type for Consultations TODO
-    ADDCONSULT,
-    DELETECONSULT,
-    REMOVEFROMCONSULT,
-    ADDTOCONSULT,
-    LISTCONSULT,
-    EXPORTCONSULT,
-    IMPORTCONSULT,
-
+    STUDENT,
+    // Command Type for Consultations
+    CONSULT,
     // Command Type for Lesson
-    ADDLESSON,
-    DELETELESSON,
-    LISTLESSONS,
-    ADDTOLESSON,
-    REMOVEFROMLESSON
+    LESSON
 }
