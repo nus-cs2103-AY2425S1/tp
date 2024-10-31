@@ -1,12 +1,9 @@
 package seedu.address.testutil;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
@@ -36,7 +33,6 @@ public class PersonBuilder {
     private Address address;
     private Payment payment;
     private Attendance attendance;
-    private List<Participation> participation;
     private Set<Tag> tags;
 
     /**
@@ -48,7 +44,6 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         payment = new Payment(DEFAULT_PAYMENT);
-        participation = new ArrayList<Participation>();
         tags = new HashSet<>();
     }
 
@@ -61,7 +56,6 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         payment = personToCopy.getPayment();
-        participation = personToCopy.getParticipation();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -123,7 +117,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, payment, participation, tags);
+        return new Person(name, phone, email, address, payment, tags);
     }
 
 }

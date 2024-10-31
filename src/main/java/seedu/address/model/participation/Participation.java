@@ -93,11 +93,4 @@ public class Participation {
         return String.format("Attends: %s", tutorial.toString());
     }
 
-    /**
-     * Adds itself to the student and tutorial participation lists
-     */
-    public void addSelfToStudentTutorial() {
-        student.addParticipation(this);
-        tutorial.addParticipation(this);
-    }
 }

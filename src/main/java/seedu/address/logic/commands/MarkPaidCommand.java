@@ -54,7 +54,7 @@ public class MarkPaidCommand extends Command {
 
         Person markedPerson = new Person(personToMarkPayment.getName(), personToMarkPayment.getPhone(),
                 personToMarkPayment.getEmail(), personToMarkPayment.getAddress(),
-                updatedPayment, personToMarkPayment.getParticipation(), personToMarkPayment.getTags());
+                updatedPayment, personToMarkPayment.getTags());
 
         //List of participations to delete
         List<Participation> participationsToDelete = model.getParticipationList()
