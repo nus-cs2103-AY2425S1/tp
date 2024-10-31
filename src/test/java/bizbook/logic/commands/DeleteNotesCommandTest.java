@@ -120,7 +120,7 @@ public class DeleteNotesCommandTest {
         DeleteNotesCommand deleteNotesCommand = new DeleteNotesCommand(validPersonIndex, invalidNoteIndex);
 
         // Assert that the expected error is thrown
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NOTED_INDEX, ()
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NOTE_INDEX, ()
                 -> deleteNotesCommand.execute(modelMock));
     }
 
