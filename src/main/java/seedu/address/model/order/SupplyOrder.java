@@ -12,6 +12,6 @@ public class SupplyOrder extends Order {
 
     @Override
     public String getOrderType() {
-        return "Supplier Order";
+        return "Supply Order";
     }
 }

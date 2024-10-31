@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.SupplierOrder;
+import seedu.address.model.order.SupplyOrder;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -39,7 +39,7 @@ public class SupplierOrderCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public SupplierOrderCard(SupplierOrder order, int displayedIndex) {
+    public SupplierOrderCard(SupplyOrder order, int displayedIndex) {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");

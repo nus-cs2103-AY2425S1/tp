@@ -24,7 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.OrderList;
-import seedu.address.model.order.SupplierOrder;
+import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
@@ -167,7 +167,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addSupplyOrder(SupplierOrder order) {
+        public void addSupplyOrder(SupplyOrder order) {
             throw new AssertionError("This method should not be called.");
         }
 
