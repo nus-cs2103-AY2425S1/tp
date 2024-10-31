@@ -6,8 +6,12 @@
 
 # WedLinker User Guide
 
-WedLinker is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). </br>
-If you can type fast, WedLinker can get your contact management tasks done faster than traditional GUI apps.
+WedLinker is your **essential desktop app for managing wedding-related contacts**, designed specifically for professional wedding planners.
+**With a powerful Command Line Interface (CLI)**, WedLinker is optimised for fast typers, simplifying your contact management tasks 
+through quick, text-based commands. This means you can accomplish your tasks faster than with traditional GUI apps, giving you more time to focus on what matters most—creating memorable experiences for your clients.
+
+While WedLinker excels with its CLI for speed, it still offers the valuable visual elements of a Graphical User Interface (GUI). The GUI provides an organised and intuitive layout, making it easy to visualise your contacts, weddings, and tasks at a glance.
+This combination of efficiency and clarity ensures that you can manage your wedding planning responsibilities with ease and precision.
 
 <!-- * Table of Contents -->
 <page-nav-print />
