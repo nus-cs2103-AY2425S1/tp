@@ -67,7 +67,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound_courseFilter() {
+    public void executeNoKeywordsCourseFilter() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         CourseContainsKeywordsPredicate predicate =
                 new CourseContainsKeywordsPredicate(Collections.singletonList(" "));
@@ -78,7 +78,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound_moduleFilter() {
+    public void executeNoKeywordsModuleFilter() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         ModuleContainsKeywordsPredicate predicate =
                 new ModuleContainsKeywordsPredicate("  ");
