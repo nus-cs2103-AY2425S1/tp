@@ -15,11 +15,11 @@ public class AppointmentCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        // valid input with valid index, date, and time
+        // valid input with valid nric, date, and time
         assertParseSuccess(parser, "S1231231D a/15-08-2024 14:30",
                 new AppointmentCommand(new Nric("S1231231D"), "15-08-2024 14:30"));
 
-        // valid input with non-zero index
+        // valid input with non-zero nric
         assertParseSuccess(parser, "T1234567D a/01-01-2025 09:45",
                 new AppointmentCommand(new Nric("T1234567D"), "01-01-2025 09:45"));
     }
@@ -63,7 +63,7 @@ public class AppointmentCommandParserTest {
     }
 
     @Test
-    public void parse_invalidIndex_failure() {
+    public void parse_invalidNric_failure() {
         // invalid nric
         assertParseFailure(parser, "1 a/15-08-2024 14:30",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
@@ -89,7 +89,7 @@ public class AppointmentCommandParserTest {
 
     @Test
     public void parse_missingNric_failure() {
-        // missing index
+        // missing nric
         assertParseFailure(parser, "a/15-08-2024 14:30",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
     }

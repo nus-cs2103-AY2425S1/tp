@@ -15,7 +15,7 @@ public class RemarkCommandParserTest {
     private RemarkCommandParser parser = new RemarkCommandParser();
     private final String nonEmptyRemark = "Some remark.";
     @Test
-    public void parse_indexSpecified_success() {
+    public void parse_nricSpecified_success() {
         // have remark
         Nric targetNric = NRIC_FIRST_PERSON;
         String userInput = targetNric + " " + PREFIX_REMARK + nonEmptyRemark;
@@ -32,7 +32,7 @@ public class RemarkCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE);
         // no parameters
         assertParseFailure(parser, RemarkCommand.COMMAND_WORD, expectedMessage);
-        // no index
+        // no nric
         assertParseFailure(parser, RemarkCommand.COMMAND_WORD + " " + nonEmptyRemark, expectedMessage);
     }
 }
