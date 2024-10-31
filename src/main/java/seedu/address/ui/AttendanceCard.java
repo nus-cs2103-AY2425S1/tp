@@ -111,7 +111,7 @@ public class AttendanceCard extends UiPart<Region> {
                 attendance.append(", ");
             }
         }
-        return "Other attendance: " + attendance;
+        return "Other attendance (" + attendanceList.size() + ") : " + attendance;
     }
 
     /**
