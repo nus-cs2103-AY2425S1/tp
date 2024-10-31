@@ -6,7 +6,7 @@
 
 # Client Grid User guide
 
-ClientGrid is an **address book** designed for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor the buying or selling process while maintaining core address book functionality.
+ClientGrid is an **address book** targeted for English-speaking real estate agents within Singapore to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor the buying or selling process while maintaining core address book functionality. The default language of communication of ClientGrid is English.
 
 
 <!-- * Table of Contents -->
@@ -119,6 +119,20 @@ Examples:
 
   ![result for 'addbuyer n/John p/83456789 e/john@gmail.com'](images/addbuyer.png)
 
+### Filtering clients : `filterclient`
+
+Filters the clients that starts with the prefix provided.
+
+Format: `filterclient n/NAME`
+
+* Filters the client with the specified prefix `NAME`.
+* The `NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the clientbook.
+
+Examples:
+* `filterclient n/A` filters the clients that starts with the prefix `A`.
+
+  ![result for 'filterclient n/A'](images/filterclient.png)
+
 ### Adding a seller : `addseller`
 
 Add a specified seller into the client book of ClientGrid.
@@ -167,12 +181,12 @@ Add a specified property into the property book of ClientGrid.
 
 Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
 
-* Adds a property of `TYPE` with the specified `POSTAL_CODE` and `UNIT_NUMBER` with seller's `ASK` price and buyers `BID` price.
-* The `POSTAL_CODE` must be exactly 6 digits with each digit in the range [0-9]. It does not accept any non-integer characters or spaces.
-* The `UNIT_NUMBER` comprises of two numbers delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digits. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash, other non-integer characters or spaces are not accepted.
-* The `TYPE` is case-insensetive HDB,CONDO or LANDED.
-* The `ASK` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
-* The `BID` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
+* Adds a property of `TYPE` with the specified `POSTAL_CODE` and `UNIT_NUMBER` with seller's `ASK` price (in thousand) and buyers `BID` price (in thousand).
+* The `POSTAL_CODE` must be a non-negative integer and contain exactly 6 numeric characters.
+* The `UNIT_NUMBER` must contain numbers delimited by a dash, and numbers on either side of the dash must be at least 2 characters long with no excess padding. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]";
+* The `TYPE` must be one of the following values (case-insensitive): HDB, CONDO, or LANDED.
+* The `ASK` must be a non-negative integer smaller than 1,000,000 (thousand) with only numeric characters.
+* The `BID` must be a non-negative integer smaller than 1,000,000 (thousand) with only numeric characters.
 
 <box type="info" seamless>
 
@@ -183,11 +197,42 @@ No duplicate properties are allowed. Duplicate properties are checked based on:
 2. if the two properties are CONDO and HDB type, then the comparison is done based on postal code.
 3. if the two properties are both CONDO or HDB type, then the comparison is done based on postal code and unit.
 </box>
+<box type="important" seamless>
+
+**Unit defaults**
+The Unit parameter for `LANDED` properties will default to 00-00 regardless of the unit value placed. This is because, a landed property is not segmented into multiple apartments and therefore, deemed to be a unit in itself.
+</box>
 
 Examples:
 * `addproperty c/124894 u/15-20 t/HDB a/50000 b/10000` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $50000 and bid price of $10000.
 
   ![result for 'addproperty c/124894 u/15-20 t/HDB a/50000 b/10000'](images/addproperty.png)
+
+### Filtering properties : `filterproperty`
+
+Filters the properties based on any combination of type, lower bound for matching price and upper bound for matching price.
+
+Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
+
+* Filters the properties with any combination of `TYPE`, lower bounded `MATCHING_PRICE` and upper bounded `MATCHING_PRICE`.
+* The `TYPE` is case-insensitive HDB, CONDO or LANDED.
+* The `MATCHING_PRICE` is a non-negative integer (i.e. No non-numeric symbols such as decimal points, currency symbols, etc.).
+
+* <box type="definition" seamless>
+
+**Matching Price**: The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
+</box>
+<box type="warning" seamless>
+
+**Important**
+1. At least one optional prefix needs to be present for any filtering to be possible.
+2. Prices denoted in `gte/` and `lte/` parameters are checked based on the 'AND' condition. For example, `filterproperty gte/500 lte/60000` filters for properties greater than $500 and less than $60000.
+   </box>
+
+Examples:
+* `filterproperty t/HDB gte/500 lte/60000` filters the properties for HDB with a lower bounded matching price of $500 and upper bounded matching price of $60000.
+
+  ![result for 'filterproperty t/HDB gte/500 lte/60000'](images/filterproperty.png)
 
 ### Deleting a property : `deleteproperty`
 
@@ -203,41 +248,6 @@ Examples:
 * `deleteproperty c/123456 u/01-01` deletes a property with postal code `123456` and unit number `01-01`.
 
   ![result for 'deleteproperty c/123456 u/01-01'](images/deleteproperty.png)
-
-### Filtering clients : `filterclient`
-
-Filters the clients that starts with the prefix provided.
-
-Format: `filterclient n/NAME`
-
-* Filters the client with the specified prefix `NAME`.
-* The `NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the clientbook.
-
-Examples:
-* `filterclient n/A` filters the clients that starts with the prefix `A`.
-
-  ![result for 'filterclient n/A'](images/filterclient.png)
-
-### Filtering properties : `filterproperty`
-
-Filters the properties based on any combination of type, lower bound for matching price and upper bound for matching price.
-
-Format: `filterclient [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
-
-* Filters the properties with any combination of `TYPE`, lower bounded `MATCHING_PRICE` and upper bounded `MATCHING_PRICE`.
-* The `TYPE` is case-insensetive HDB, CONDO or LANDED.
-* The `MATCHING_PRICE` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
-
-<box type="warning" seamless>
-
-**Important:**
-At least one optional prefix needs to be present for any filtering to be possible.
-</box>
-
-Examples:
-* `filterproperty t/HDB gte/500 lte/60000` filters the properties for HDB with a lower bounded matching price of $500 and upper bounded matching price of $60000.
-
-  ![result for 'filterproperty t/HDB gte/500 lte/60000'](images/filterproperty.png)
 
 ### Adding a meeting : `addmeeting`
 
@@ -307,9 +317,6 @@ If your changes to the data file makes its format invalid, ClientGrid will disca
 Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -337,12 +344,12 @@ _Details coming soon ..._
 | **List**              | `list k/KEY`                                                                                   |
 | **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                                     |
 | **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                                 |
+| **Filter Clients**    | `filterclient n/NAME`                                                                          |
 | **Delete Buyer**      | `deletebuyer p/PHONE_NUMBER`                                                                   |
 | **Delete Seller**     | `deleteseller p/PHONE_NUMBER`                                                                  |
 | **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                                   |
-| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                                   |
-| **Filter Clients**    | `filterclient n/NAME`                                                                          |
 | **Filter Properties** | `filterproperty t/TYPE gte/MATCHING_PRICE lte/MATCHING_PRICE`                                  |
+| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                                   |
 | **Add Meeting**       | `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTALCODE` |
 | **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                                |
 | **Exit**              | `exit`                                                                                         |

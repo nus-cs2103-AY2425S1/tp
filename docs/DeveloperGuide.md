@@ -153,117 +153,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Add Buyer Feature
+### Add Buyer Feature
 
-#### Proposed Implementation
 The addbuyer command takes in the name, phone number, and email address of the buyer and adds the buyer to the client book.
 The sequence diagram is shown as such:
 <puml src="diagrams/AddBuyerSequenceDiagram.puml" alt="AddBuyer" />
 
-### \[Proposed\] Filter property feature
-
-#### Proposed Implementation
-The filterproperty command gets the matching price between the ask and bid and is implemented as a static variable.
-The sequence diagram is shown as such:
-<puml src="diagrams/FilterPropertySequenceDiagram.puml" alt="FilterProperty" />
-
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Note-taking feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed note-taking mechanism is facilitated by `NoteBook`. It extends `Meeting` by allowing users to take notes during the meeting. It implements the following operation:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `NoteBook#write()` — Appends notes to the meeting
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* These operations are exposed in the Model interface as Model#note().
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -292,7 +196,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**:
 
 
-ClientGrid is an all-in-one address book tailored for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data, monitor properties, and schedule meetings —all within a single app, eliminating the need to juggle multiple apps. With offline access, agents can stay productive with ClientGrid anywhere.
+ClientGrid is an all-in-one address book tailored for English-speaking real estate agents within Singapore to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data, monitor properties, and schedule meetings —all within a single app, eliminating the need to juggle multiple apps. With offline access, agents can stay productive with ClientGrid anywhere. The default language of communication of ClientGrid is English.
 
 ### User stories
 
@@ -311,8 +215,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | real estate agent    | list information about sellers                             | manage relationships and property listings efficiently       |
 | `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction |
 | `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -343,7 +245,34 @@ Extensions:
 
       Use case ends.
 
-**Use case: UC2 - Delete Client (Buyer or Seller)**
+**Use case: UC2 - List Clients (i.e. Buyers and/or Sellers), Properties or Meetings**
+
+MSS:
+
+1. Real Estate Agent requests to view a list of clients (i.e. buyers and/or sellers), properties or meetings
+2. ClientGrid will display the corresponding list with each entry presented inside a card
+
+Use case ends.
+
+**Use case: UC3 - Filter Client**
+
+MSS:
+1. Real estate agent requests to filter the clients by entering a name prefix.
+2. ClientGrid will filter and display the clients whose names start with the provided prefix.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
+
+    * 1a1. ClientGrid detects the error and requests for the correct data
+
+    * 1a2. Real estate agent enters a new name prefix
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+      Use case ends.
+  
+**Use case: UC4 - Delete Client (Buyer or Seller)**
 
 Guarantees:
 * If the buyer/ seller was in the database originally, it would be removed from client database with no side effects.
@@ -365,36 +294,51 @@ Extensions:
 
        Use case ends.
 
-**Use case: UC3 - Add a property**
+**Use case: UC5 - Add a property**
 
 **MSS**
 
-1.  User inputs details of property
-2.  System outputs success message
-
+1.  Real estate agent requests to add a property to ClientGrid and passes in the property's postal code, unit number, housing type, ask price and bid price. 
+2.  ClientGrid will add the property's postal code, unit number, housing type, ask price and bid price specified by the real estate agent.
     Use case ends.
 
 **Extensions**
 
-* 1a. Invalid command detail symbols
+* 1a. ClientGrid detects an error in the postal code / unit / type / ask / bid format provided by the real estate agent.
 
-    * 1a1. System outputs error message in user console
+    * 1a1. ClientGrid requests for the correct data.
 
-      Use case ends.
+    * 1a2. Real estate agent enters new data.
 
-* 1b. Postal code number contains invalid symbols and format typical in Singapore
-
-    * 1b1. System outputs error message in user console
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
 
       Use case ends.
 
-* 1c. Unit number contains invalid symbols and format
+* 2a. ClientGrid detects that the property already exists in the property book
 
-    * 1c1. System outputs error message in user console
+    * 2a1. ClientGrid informs the real estate agent that the property already exists in the property book and does not add the duplicate property.
 
       Use case ends.
 
-**Use case: UC4 - Delete Property**
+**Use case: UC6 - Filter Property**
+
+MSS:
+1. Real estate agent requests to filter the propertiess by entering property type and matching price bounds.
+2. ClientGrid will filter and display the properties that match the property type and has a matching price within the matching price bounds.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the type / matching price format prefix provided by the real estate agent.
+
+    * 1a1. ClientGrid detects the error and requests for the correct data
+
+    * 1a2. Real estate agent enters a new type / matching price prefix
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+      Use case ends.
+  
+**Use case: UC7 - Delete Property**
 
 Guarantees:
 * If property listing was in the database originally, it would be removed from property database with no side effects.
@@ -422,34 +366,7 @@ Extensions:
 
     * Use case ends.
 
-**Use case: UC5 - List Clients (i.e. Buyers and/or Sellers), Properties or Meetings**
-
-MSS:
-
-1. Real Estate Agent requests to view a list of clients (i.e. buyers and/or sellers), properties or meetings
-2. ClientGrid will display the corresponding list with each entry presented inside a card
-
-Use case ends.
-
-**Use case: UC6 - Filter Client**
-
-MSS:
-1. Real estate agent requests to filter the clients by entering a name prefix.
-2. ClientGrid will filter and display the clients whose names start with the provided prefix.
-
-Extensions:
-
-* 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
-
-    * 1a1. ClientGrid detects the error and requests for the correct data
-
-    * 1a2. Real estate agent enters a new name prefix
-
-    * Steps 1a1-1a2 are repeated until the data entered are correct.
-
-      Use case ends.
-
-**Use case: UC7 - Add Meeting**
+**Use case: UC8 - Add Meeting**
 
 MSS:
 1. Real estate agent requests to add a meeting based on the meeting’s title and date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
@@ -480,7 +397,7 @@ Extensions:
 
     * Use case ends.
 
-**Use case: UC8 - Delete Meeting**
+**Use case: UC9 - Delete Meeting**
 
 Guarantees:
 * If meeting was in the meeting book originally, it would be removed from meeting book with no side effects.
@@ -517,12 +434,14 @@ Extensions:
 5. Should be able to handle case of corrupted file
 
 ### Glossary
+
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Clients**: Buyers or Sellers of properties the real estate agent is managing
 * **Client Book**: In-memory JSON file containing the clients stored in ClientGrid
 * **Property Book**: In-memory JSON file containing the properties stored in ClientGrid
 * **Meeting Book**: In-memory JSON file containing the meetings stored in ClientGrid
 * **Corrupted file**: Missing file and invalid data
+* **Matching Price**: The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
