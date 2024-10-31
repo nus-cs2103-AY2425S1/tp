@@ -47,7 +47,7 @@ public class ExportCommand extends Command {
 
         try (CSVWriter writer = new CSVWriter(new FileWriter(file))) {
             // Write CSV Header
-            String[] header = {"Name", "Phone", "Email", "Address", "Telegram", "Tags", "Github",
+            String[] header = {"Name", "Phone", "Email", "Telegram", "Tags", "Github",
                 "Assignment", "Grade"};
             writer.writeNext(header);
 
@@ -62,7 +62,6 @@ public class ExportCommand extends Command {
                     person.getName().toString(),
                     person.getPhone().toString(),
                     person.getEmail().toString(),
-                    person.getAddress().toString(),
                     person.getTelegram().toString(),
                     String.join(",", person.getTags().stream().map(Tag::toString).toArray(String[]::new)),
                     person.getGithub().toString(),

@@ -15,7 +15,6 @@ import com.opencsv.exceptions.CsvValidationException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
@@ -51,7 +50,7 @@ public class ImportCommand extends Command {
             csvReader.readNext();
 
             while ((fields = csvReader.readNext()) != null) {
-                if (fields.length < 9) {
+                if (fields.length < 8) {
                     throw new CommandException("Invalid CSV format.");
                 }
                 Person person = parsePerson(fields);
@@ -74,25 +73,24 @@ public class ImportCommand extends Command {
             Name name = new Name(fields[0].trim());
             Phone phone = new Phone(fields[1].trim());
             Email email = new Email(fields[2].trim());
-            Address address = new Address(fields[3].trim());
-            Telegram telegram = new Telegram(fields[4].trim());
-            Github github = new Github(fields[6].trim());
+            Telegram telegram = new Telegram(fields[3].trim());
+            Github github = new Github(fields[5].trim());
 
             // Process tags
-            Set<Tag> tags = parseTags(fields[5].trim());
+            Set<Tag> tags = parseTags(fields[4].trim());
 
             // Process assignment (name and score)
-            String assignmentNameStr = fields[7].trim();
-            String assignmentScoreStr = fields[8].trim();
+            String assignmentNameStr = fields[6].trim();
+            String assignmentScoreStr = fields[7].trim();
 
             if (assignmentNameStr.equals("N/A") || assignmentNameStr.isEmpty()) {
-                return new Person(name, phone, email, address, telegram, tags, github);
+                return new Person(name, phone, email, telegram, tags, github);
             }
 
             float assignmentScore = Float.parseFloat(assignmentScoreStr);
             Assignment assignment = new Assignment(assignmentNameStr, assignmentScore);
 
-            return new Person(name, phone, email, address, telegram, tags, github, assignment);
+            return new Person(name, phone, email, telegram, tags, github, assignment);
 
         } catch (IllegalArgumentException e) {
             throw new CommandException(e.getMessage());
