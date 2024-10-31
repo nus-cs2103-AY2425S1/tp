@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -12,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -95,13 +93,10 @@ public class EditCommand extends Command {
         List<Participation> participationsToDelete = model.getParticipationList()
                 .filtered(participation -> participation.getStudent().equals(personToEdit));
 
-        if (participationsToDelete.size() < 1) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, personToEdit));
-        }
-
         for (int i = 0; i < participationsToDelete.size(); i++) {
             Participation updated = new Participation(editedPerson,
                     participationsToDelete.get(i).getTutorial(), participationsToDelete.get(i).getAttendanceList());
+            model.setParticipation(participationsToDelete.get(i), updated);
         }
 
         model.setPerson(personToEdit, editedPerson);
