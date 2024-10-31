@@ -54,10 +54,10 @@ activate DeleteCommand
 DeleteCommand -> LogicManager : showConfirmationPrompt("Are you sure you want to delete Alex?")
 deactivate DeleteCommand
 
-[-> LogicManager : execute("delete-y")
+[-> LogicManager : execute("y")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete-y")
+LogicManager -> AddressBookParser : parseCommand("y")
 activate AddressBookParser
 
 create DeleteYCommand
@@ -92,10 +92,10 @@ deactivate DeleteYCommand
 [<--LogicManager
 deactivate LogicManager
 
-[-> LogicManager : execute("delete-n")
+[-> LogicManager : execute("n")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete-n")
+LogicManager -> AddressBookParser : parseCommand("n")
 activate AddressBookParser
 
 create DeleteNCommand

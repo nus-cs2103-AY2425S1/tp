@@ -54,6 +54,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
+Another *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `add-wed w/John & Gina v/CHIJMES d/11/12/25`.
+
+<puml src="diagrams/ArchitectureSequenceDiagram2.puml" width="574" />
+
 The four main components (also shown in the diagram above, staticContext is not a main component),
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -90,7 +94,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete n/Alex")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
