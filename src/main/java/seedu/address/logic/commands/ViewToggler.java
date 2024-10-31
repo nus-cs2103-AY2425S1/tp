@@ -44,7 +44,7 @@ public class ViewToggler {
             this.commandType = FIND_PET_COMMAND;
         } else if (matchesFindOwnerTemplate(feedbackToUser)) {
             this.commandType = FIND_OWNER_COMMAND;
-        }else {
+        } else {
             this.commandType = OTHER_COMMAND;
         }
     }
