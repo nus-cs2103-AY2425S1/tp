@@ -61,7 +61,7 @@ public class DoctorCard extends UiPart<Region> {
         super(FXML);
         this.doctor = doctor;
         id.setText(displayedIndex + ". ");
-        doctorFlag.setText("[DOCTOR]");
+        doctorFlag.setText("DOCTOR");
         name.setText(doctor.getName().fullName);
         phone.setText(doctor.getPhone().value);
         address.setText(doctor.getAddress().value);
@@ -75,8 +75,8 @@ public class DoctorCard extends UiPart<Region> {
         appointmentsLabel.setText("Appointments: " + appointmentSet.size());
 
         ObservableList<String> appointmentStrings = FXCollections.observableArrayList(appointmentSet.stream()
-                .map(appointment -> "Appointment " + appointment.getId() + ": With Patient "
-                        + appointment.getPatientName() + " on "
+                .map(appointment -> appointment.getId() + " - Patient "
+                        + appointment.getPatientName() + " | Date: "
                         + appointment.getDate().toString() + " (" + appointment.getTime().toString() + "hrs)")
                 .toArray(String[]::new));
 
@@ -85,7 +85,7 @@ public class DoctorCard extends UiPart<Region> {
         if (appointmentSet.isEmpty()) {
             appointments.setPrefHeight(0);
         } else {
-            appointments.setPrefHeight(50);
+            appointments.setPrefHeight(60);
         }
     }
 }
