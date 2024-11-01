@@ -85,6 +85,9 @@ activate CommandResult
 CommandResult --> FindCommand
 deactivate CommandResult
 
+CommandResult -[hidden]-> FindCommand
+destroy CommandResult
+
 FindCommand --> LogicManager : r
 deactivate FindCommand
 
