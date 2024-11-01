@@ -275,7 +275,6 @@ public class Patient {
                 .add("sex", sex)
                 .add("birthdate", birthdate)
                 .add("phone", phone)
-                .add("email", email)
                 .toString();
     }
 
