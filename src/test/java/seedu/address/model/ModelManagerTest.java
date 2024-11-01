@@ -74,12 +74,13 @@ public class ModelManagerTest {
     public void testCommitAndUndoAddressBook() throws CommandException {
         AddressBook addressBook1 = new AddressBook();
         AddressBook addressBook2 = getTypicalAddressBook();
+
         ModelManager model = new ModelManager(addressBook1, new UserPrefs());
         model.commitAddressBook();
         model.setAddressBook(addressBook2);
-
         assertEquals(addressBook2, model.getAddressBook());
 
+        model.commitAddressBook();
         model.undoAddressBook();
         assertEquals(addressBook1, model.getAddressBook());
     }
