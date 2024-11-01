@@ -115,7 +115,91 @@ Alternatively, if you’d like to explore the application independently, refer t
 
 ## Tutorial for Beginners
 
-This section will walk you through all the basic features of BridalBuddy and will make sure you know everything you need to get started.
+Perfect if you are new to BridalBuddy, this section will walk you through all the basic features of BridalBuddy and will make sure you know everything you need to get started.
+
+
+### Tutorial Contents
+1. [**Starting a fresh template**](#starting-a-fresh-template)
+2. [**Adding guests**](#adding-guests)
+3. [**Adding vendors**](#adding-vendors)
+4. [**Editing details**](#editing-details)
+5. [**Deleting persons**](#deleting-persons)
+6. [**Exiting the program**](#exiting-the-program)
+
+
+**Let us explore the basic features of BridalBuddy's from the perspective of a wedding planner.**
+When you open up the application for the first time, you will see the interface below, with some sample guest and vendors on the guest list and the vendor list respectively.
+
+![Ui](images/firstUseUi.png)
+
+At the top of the screen, there is a text box we will refer to as the *Command Line*. This is where you type in your commands to BridalBuddy, and you confirm your instruction by pressing the <kbd>Enter</kbd> key on your keyboard.
+Below the Command Line is the *Outcome Box*, which will tell you the outcome of the commands you have entered, as well as other relevant information related to that command.
+Finally, below the Outcome Box is the *Display Panel*, which will contain the guest list and the vendor list for the wedding that you are planning.
+
+
+[_Back to Top_](#table-of-contents)
+
+
+### Starting a fresh template
+
+In order to get ready to use BridalBuddy, let's first remove the existing sample guests and vendors on our guest list and vendor list.
+All we have to do is to enter the command `clear` in the Command Line, and both the guest list and the vendor list will be emptied and ready for you to plan a new wedding.
+> :bulb: Remember to hit the <kbd>Enter</kbd> key on your keyboard to confirm an instruction/command to BridalBuddy.
+
+Once successful, you should see the following on your screen:
+
+![clear command](images/clearCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+
+### Adding guests
+
+Let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
+Let us familiarise ourselves with the `add_guest` command, which you will need in order to add a guest to the guest list.
+
+
+
+[_Back to Top_](#table-of-contents)
+
+
+### Adding vendors
+
+Let us now add your first vendor to the list of vendors we are intending to collaborate with.
+
+
+[_Back to Top_](#table-of-contents)
+
+
+### Editing details
+
+Let's say your customers have decided they want to allocate a larger budget to the flower decorations, and so we want to keep track of that properly, by reflecting that larger budget allocated to the florist.
+To do that,
+
+
+[_Back to Top_](#table-of-contents)
+
+
+### Deleting persons
+
+Suppose the bride tells us that she has a vendor in mind from which she wants to get her
+
+
+[_Back to Top_](#table-of-contents)
+
+
+### Exiting the program
+
+It's been a long day at work. Now let's take a break and exit the application. All you have to do is simply enter the command `exit` in the Command Line, and the program will exit automatically in a few seconds!
+
+* :information_source: Not to worry, your progress will be auto-saved and all your work will be reflected correctly the next time u open the app.
+
+[_Back to Top_](#table-of-contents)
+
+
+After trying out the tutorial, we recommend you to explore our [Features](#features) where you can discover the full range of tools and functionalities our app offers so that you can enhance your productivity and make the most out of BridalBuddy!
+
+[_Back to Top_](#table-of-contents)
 
 
 [_Back to Top_](#table-of-contents)
