@@ -56,6 +56,10 @@ public class PersonCard extends UiPart<Region> {
             Customer customer = (Customer) person;
             information.setText(customer.getInformation().value);
             information.setVisible(true); // Make the label visible for customers
+        } else {
+            // Hide or clear the information label for non-customers
+            information.setText("");
+            information.setVisible(false);
         }
 
         // Sort and display the tags
@@ -66,12 +70,11 @@ public class PersonCard extends UiPart<Region> {
 
                     // Apply the CSS class for "customer" tag
                     if (tag.tagName.equals("customer")) {
-                        tagLabel.getStyleClass().add("tag-customer");  // Ensure that the "tag-customer" style is defined in your CSS
+                        tagLabel.getStyleClass().add("tag-customer"); // Ensure that the "tag-customer" style is defined in your CSS
                     } else if (tag.tagName.equals("supplier")) {
-                            tagLabel.getStyleClass().add("tag-supplier");
-                        }
+                        tagLabel.getStyleClass().add("tag-supplier");
+                    }
                     tags.getChildren().add(tagLabel);
                 });
     }
 }
-
