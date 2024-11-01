@@ -78,7 +78,7 @@ public class AttendanceWindow extends UiPart<Stage> {
      * @param logic The logic component to handle backend operations
      * @param person The student whose attendance is being displayed
      */
-    public AttendanceWindow(Logic logic, Person person, Stage root) {
+    public AttendanceWindow(Person person, Logic logic, Stage root) {
         super(FXML, root);
         this.logic = logic;
         this.person = person;
@@ -218,7 +218,7 @@ public class AttendanceWindow extends UiPart<Stage> {
      * @param person The student whose attendance is being displayed
      */
     public AttendanceWindow(Logic logic, Person person) {
-        this(logic, person, new Stage());
+        this(person, logic, new Stage());
     }
 
     /**
