@@ -13,6 +13,7 @@ import seedu.address.model.exceptions.UndoException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagCategory;
 
 /**
  * Wraps all data at the CampusConnect level
@@ -168,6 +169,10 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     @Override
     public ObservableList<Tag> getTagList() {
         return persons.asTagList();
+    }
+
+    public void setTagCategory(Tag t, TagCategory cat) {
+        persons.updateTagCategory(t, cat);
     }
 
     @Override

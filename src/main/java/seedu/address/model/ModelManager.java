@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagCategory;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -166,6 +167,19 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Tag> getListOfCurrentTags() {
         return FXCollections.unmodifiableObservableList(currentlyDefinedTags);
+    }
+
+    @Override
+    public boolean containsTag(Tag t) {
+        requireAllNonNull(t);
+        return currentlyDefinedTags.contains(t);
+    }
+
+    @Override
+    public void setTagsCategory(Tag t, TagCategory cat) {
+        requireAllNonNull(t, cat);
+        campusConnect.setTagCategory(t, cat);
+        refreshTagList();
     }
 
     @Override
