@@ -35,7 +35,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * The UI component that is responsible for receiving user command inputs.
  */
 public class CommandBox extends UiPart<Region> {
-
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
     private static final String UP_COMMAND = "upCommand";
@@ -65,7 +64,14 @@ public class CommandBox extends UiPart<Region> {
             PREFIX_MONTHLY_RENT.getPrefix(), PREFIX_RENTAL_INDEX.getPrefix(), PREFIX_RENTAL_START_DATE.getPrefix()
     );
     private static final ObservableList<String> VALUES = FXCollections.observableArrayList(
-            "Ang Mo Kio", "Bishan", "Jurong", "99999999", "12345678", "Steven Tan", "Sebastian"
+            "Block", "Blk", "Ave", "Avenue", "Tan", "Lim", "Lee", "Ng", "Ong", "Wong", "Goh", "Chua", "Chan",
+            "Koh", "Teo", "Ang", "Yeo", "Tay", "Ho", "Low", "Toh", "Sim", "Chong", "Chia", "Seah", "Sarah", "Sofia",
+            "Sofea", "Sophia", "Hana", "Hannah", "Alyssa", "Emily", "Emma", "Charlotte", "Chloe", "Alesha", "Alicia",
+            "Amanda", "Sofie", "Sophie", "Elizabeth", "Natalie", "Aisyah", "Aishah", "Olivia", "Leia", "Keira", "Kiera",
+            "Haley", "Haily", "Megan", "Ethan", "Aden", "Aiden", "Aidan", "Eden", "Nathan", "Nathaniel", "Lucas",
+            "Isaac", "Caleb", "Evan", "Matthew", "Josh", "Joshua", "Adam", "Asher", "Jayden", "Rayyan", "Julian",
+            "Julien", "Ian", "Cayden", "Kayden", "Luke", "Matthias", "Matthew", "George", "Gabriel", "Winston", "block",
+            "BLOCK", "BLK", "AVE", "AVENUE", "Steven", "David", "Rayan", "Ryan"
     );
 
     private final CommandExecutor commandExecutor;
