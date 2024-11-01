@@ -175,11 +175,35 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
 
-### Clearing all entries : `clear`
+### Clearing listed persons : clear
 
-Clears all entries from the address book.
+Clears current listed persons from the address book.
 
-Format: `clear`
+Format: `clear` and then `confirm`
+
+* `clear` prompts user for confirmation to clear. To confirm clearing, type `confirm`.
+* Clearing a filtered list of persons will clear only those filtered persons from the address book.
+* To clear the entire address book, ensure the persons list is unfiltered.
+
+Examples:
+* `list` followed by `clear` then `confirm` clears the entire address book.
+* `find g/f` followed by `clear` then `confirm` clears only female persons.
+
+### Exporting persons' emails : export
+
+Exports the current listed persons' emails to a .txt file.
+
+Format: `export FILENAME`
+
+* Exports the current listed persons' emails to a .txt file with the specified filename.
+* Filepath can be specified by the user.
+* `FILENAME` should only have alphanumeric characters, `_` and `/`.
+* If the specified file already exists, a copy will be created for the new export.
+
+Examples:
+* `export data/MyEmailsList` exports current listed persons' emails to `MyEmailsList.txt` in the `data` directory.
+* `find g/f` followed by `export female_emails` exports only the emails of female persons.
+* If `MyExport.txt` already exists, `export MyExport` exports the emails to `MyExport(1).txt`.
 
 ### Assigning persons to Study Groups (randomly) : `assign`
 
