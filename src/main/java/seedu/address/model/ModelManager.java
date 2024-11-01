@@ -125,6 +125,13 @@ public class ModelManager implements Model {
         versionedAddressBook.undoAddressBook();
     }
 
+    /**
+     * Discards the unsaved changes in the current state.
+     */
+    public void discardUnsavedChanges() {
+        versionedAddressBook.discardUnsavedChanges();
+    }
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);

@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 public class VersionedAddressBook extends AddressBook {
     public static final String MESSAGE_NO_MORE_HISTORY = "This is the earliest version that user can retrieve";
     public static final String MESSAGE_UNSAVED_CHANGES = "There are unsaved changes in the current state. "
-            + "Please commit the changes before undoing.";
+            + "Please commit or discard the changes before undoing.";
     private final ArrayList<AddressBook> addressBookStateList;
     private int currentStatePointer;
     private AddressBook current;
@@ -61,6 +61,13 @@ public class VersionedAddressBook extends AddressBook {
         }
 
         currentStatePointer--;
+        current = new AddressBook(addressBookStateList.get(currentStatePointer));
+    }
+
+    /**
+     * Discards the unsaved changes in the current state.
+     */
+    public void discardUnsavedChanges() {
         current = new AddressBook(addressBookStateList.get(currentStatePointer));
     }
 
