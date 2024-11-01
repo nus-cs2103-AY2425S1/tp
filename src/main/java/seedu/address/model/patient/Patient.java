@@ -32,7 +32,6 @@ public class Patient {
     private Note note;
     private Name nokName;
     private Phone nokPhone;
-    private AllergyMap allergies = new AllergyMap();
     private ApptList appts = new ApptList();
 
     /**

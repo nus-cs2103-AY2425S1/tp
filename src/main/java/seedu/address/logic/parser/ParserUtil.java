@@ -230,11 +230,11 @@ public class ParserUtil {
      */
     public static AllergyList parseAllergies(Collection<String> allergies) throws ParseException {
         requireNonNull(allergies);
-        final AllergyList allergyMap = new AllergyList();
+        final AllergyList allergyList = new AllergyList();
         for (String allergy : allergies) {
-            allergyMap.addAllergy(parseAllergies(allergy));
+            allergyList.addAllergy(parseAllergies(allergy));
         }
-        return allergyMap;
+        return allergyList;
     }
 
     /**
