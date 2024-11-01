@@ -243,6 +243,24 @@ Notes:
 
 This ensures flexibility by allowing you to only modify the fields you need while keeping the others intact.
 
+### Viewing Contacts in Meeting : `meeting-contacts`
+
+Filter and view list of contacts that is in the specified meeting.
+
+Format: `meeting-contacts INDEX`
+- `INDEX`: Refers to the meeting you want to view the contacts in. The index is based on the current schedule view and **must** be specified.
+
+Example:
+
+![meeting contacts example](images/meeting-contacts_example.png)
+
+- `meeting-contacts 8`
+- **Before**: contact view shows all contacts.
+- **After**: only Alex and David contacts are shown.
+
+Notes:
+- You must always specify the `INDEX` of the meeting you want to view the contacts in.
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -259,12 +277,18 @@ This ensures flexibility by allowing you to only modify the fields you need whil
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+Action              | Format, Examples
+--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**           | `clear`
+**Delete**          | `delete INDEX`<br> e.g., `delete 3`
+**Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**            | `find n/NAME [n/ANOTHER_NAME] ... [t/TAG]...`<br> e.g. `find n/john t/family`
+**List**            | `list`
+**Help**            | `help`
+**add-schedule**    | `add-schedule c/CONTACT n/NAME d/DATE t/TIME`<br> e.g. `add-schedule n/meeting d/01-01-2001 t/1200 c/1 2`
+**delete-schedule** | `delete-schedule INDEX`<br> e.g. delete-schedule 2`
+**edit-schedule**   | `edit-schedule INDEX [n/NAME] [d/DATE] [t/TIME] [c/INDEX]`<br> e.g. `edit-schedule 1 c/2 3 4 n/Discussion t/1300 d/02-02-2001`
+**meeting-contacts**| `meeting-contacts INDEX`<br> e.g. `meeting-contacts 8`
+**list-schedule**   | `list-schedule`
+**see**             | `see d/dd-MM-YYYY`<br> e.g. `see d/10-10-2024`
