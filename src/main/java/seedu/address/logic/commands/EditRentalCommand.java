@@ -47,14 +47,14 @@ public class EditRentalCommand extends Command {
             + "by the index number used in the displayed client list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: CLIENT_INDEX (must be a positive integer) "
-            + "[" + PREFIX_RENTAL_INDEX + " RENTAL_INDEX (must be a positive integer)] "
+            + PREFIX_RENTAL_INDEX + " RENTAL_INDEX (must be a positive integer) "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_RENTAL_START_DATE + "RENTAL START DATE] "
-            + "[" + PREFIX_RENTAL_END_DATE + "RENTAL END DATE] "
-            + "[" + PREFIX_RENT_DUE_DATE + "RENT DUE DATE] "
-            + "[" + PREFIX_MONTHLY_RENT + "MONTHLY RENT] "
+            + "[" + PREFIX_RENTAL_START_DATE + "RENTAL_START_DATE] "
+            + "[" + PREFIX_RENTAL_END_DATE + "RENTAL_END_DATE] "
+            + "[" + PREFIX_RENT_DUE_DATE + "RENT_DUE_DATE] "
+            + "[" + PREFIX_MONTHLY_RENT + "MONTHLY_RENT] "
             + "[" + PREFIX_DEPOSIT + "DEPOSIT] "
-            + "[" + PREFIX_CUSTOMER_LIST + "CUSTOMER LIST]\n"
+            + "[" + PREFIX_CUSTOMER_LIST + "CUSTOMER_LIST]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_RENTAL_INDEX + "1 "
             + PREFIX_ADDRESS + "12 Holland Street "
@@ -68,6 +68,8 @@ public class EditRentalCommand extends Command {
     public static final String MESSAGE_EDIT_RENTAL_SUCCESS = "Edited Client's Rental Information: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_RENTAL = "This client already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_RENTAL_INFORMATION =
+            "The editing rental information already exists in the address book";
 
     private final Index clientIndex;
     private final Index rentalIndex;
@@ -91,20 +93,16 @@ public class EditRentalCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Client> lastShownList = model.getFilteredPersonList();
 
-        if (clientIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Client clientToEdit = lastShownList.get(clientIndex.getZeroBased());
-
-        if (rentalIndex.getZeroBased() >= clientToEdit.getRentalInformation().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_RENTAL_DISPLAYED_INDEX);
-        }
-
+        Client clientToEdit = getClientToEdit(model);
+        RentalInformation rentalInformationToEdit = clientToEdit.getRentalInformation().get(rentalIndex.getZeroBased());
         Client editedClient = createEditedPerson(rentalIndex, clientToEdit, editRentalDescriptor);
+        RentalInformation editedRentalInformation = editedClient.getRentalInformation().get(rentalIndex.getZeroBased());
 
+        if (model.hasRentalInformation(editedClient, editedRentalInformation)
+                && !rentalInformationToEdit.equals(editedRentalInformation)) {
+            throw new CommandException(MESSAGE_DUPLICATE_RENTAL_INFORMATION);
+        }
         if (!clientToEdit.isSamePerson(editedClient) && model.hasPerson(editedClient)) {
             throw new CommandException(MESSAGE_DUPLICATE_RENTAL);
         }
@@ -115,7 +113,22 @@ public class EditRentalCommand extends Command {
         model.setLastViewedClient(editedClient);
 
         return new CommandResult(String.format(MESSAGE_EDIT_RENTAL_SUCCESS,
-                Messages.formatRentalInformation(editedClient.getRentalInformation().get(rentalIndex.getZeroBased()))));
+                Messages.formatRentalInformation(editedRentalInformation)));
+    }
+
+    public Client getClientToEdit(Model model) throws CommandException {
+        List<Client> lastShownList = model.getFilteredPersonList();
+
+        if (clientIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Client clientToEdit = lastShownList.get(clientIndex.getZeroBased());
+        if (rentalIndex.getZeroBased() >= clientToEdit.getRentalInformation().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_RENTAL_DISPLAYED_INDEX);
+        }
+
+        return clientToEdit;
     }
 
     /**
@@ -215,9 +228,7 @@ public class EditRentalCommand extends Command {
             RentalInformation editRentalInformation = editRentalDescriptor.getRentalInformationEquivalent(
                     targetRentalInformation);
 
-            if (!targetRentalInformation.equals(editRentalInformation)) {
-                newList.set(index.getZeroBased(), editRentalInformation);
-            }
+            newList.set(index.getZeroBased(), editRentalInformation);
 
             return newList;
         }
