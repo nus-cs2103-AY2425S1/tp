@@ -17,6 +17,8 @@ import seedu.address.model.person.RoleType;
  */
 public class AddModuleRoleOperation extends EditModuleRoleOperation {
 
+    private static final String MESSAGE_MODULE_ROLE_PAIRS_CLASH = "You wish to add these module role pair(s) "
+            + "but they clash with existing ones: %1$s";
     private final AddModuleRoleDescriptor descriptor;
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -36,15 +38,15 @@ public class AddModuleRoleOperation extends EditModuleRoleOperation {
     @Override
     protected ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) throws CommandException {
         HashMap<ModuleCode, RoleType> roles = new HashMap<>(moduleRoleMapToEdit.getRoles());
-        ModuleRoleMap ret = new ModuleRoleMap(roles);
-        ModuleRoleMap failed = ret.putAll(descriptor.getToAdds());
+        ModuleRoleMap result = new ModuleRoleMap(roles);
+        ModuleRoleMap failed = result.putAll(descriptor.getToAdds());
         if (!failed.isEmpty()) {
-            throw new CommandException("You wish to add these module role pair(s) but they clash with existing ones: "
-                    + failed.getData());
+            throw new CommandException(String.format(MESSAGE_MODULE_ROLE_PAIRS_CLASH,
+                    failed.getData(true)));
         }
         logger.info("Added module roles: " + descriptor
                 + "to: " + moduleRoleMapToEdit.getData());
-        return ret;
+        return result;
     }
 
     @Override
