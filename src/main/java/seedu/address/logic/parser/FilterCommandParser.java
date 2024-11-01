@@ -17,31 +17,32 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
-    private static final Prefix ROLE_PREFIX = CliSyntax.PREFIX_ROLE;
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the FilterCommand
-     * and returns a FilterCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format.
-     */
+    @Override
     public FilterCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args.trim(), PREFIX_NAME, PREFIX_ROLE,
-                        PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS);
-
-        // Check if any valid prefixes are present
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE,
-                PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        // Get values, defaulting to empty string if not present
-        String name = argMultimap.getValue(PREFIX_NAME).orElse("").trim();
-        String email = argMultimap.getValue(PREFIX_EMAIL).orElse("").trim();
-        String phone = argMultimap.getValue(PREFIX_PHONE).orElse("").trim();
-        String address = argMultimap.getValue(PREFIX_ADDRESS).orElse("").trim();
-        String role = argMultimap.getValue(PREFIX_ROLE).orElse("").trim();
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+                args,
+                PREFIX_NAME, PREFIX_ROLE, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS
+        );
+
+        // Check if any prefix values are empty
+        if (areAnyPrefixesEmpty(argMultimap, PREFIX_NAME, PREFIX_ROLE, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
+        String name = argMultimap.getValue(PREFIX_NAME).orElse("");
+        String role = argMultimap.getValue(PREFIX_ROLE).orElse("");
+        String email = argMultimap.getValue(PREFIX_EMAIL).orElse("");
+        String phone = argMultimap.getValue(PREFIX_PHONE).orElse("");
+        String address = argMultimap.getValue(PREFIX_ADDRESS).orElse("");
 
         return new FilterCommand(name, role, email, phone, address);
     }
@@ -51,5 +52,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if any of the present prefixes has an empty value.
+     */
+    private static boolean areAnyPrefixesEmpty(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes)
+                .filter(prefix -> argumentMultimap.getValue(prefix).isPresent())
+                .anyMatch(prefix -> argumentMultimap.getValue(prefix).get().trim().isEmpty());
     }
 }
