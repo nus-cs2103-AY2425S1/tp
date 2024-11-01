@@ -44,6 +44,8 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
                     AddAttendanceCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ABSENT_DATE, PREFIX_ABSENT_REASON);
+
         return new AddAttendanceCommand(index, absentDate, absentReason);
     }
 }
