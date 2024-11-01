@@ -22,7 +22,7 @@ public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "ag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Adds a group to the address book. "
+        + ": Adds a group to the address book.\n"
         + "Parameters: "
         + PREFIX_GROUP_NAME + "GROUPNAME \n"
         + "Example: " + COMMAND_WORD + " "
