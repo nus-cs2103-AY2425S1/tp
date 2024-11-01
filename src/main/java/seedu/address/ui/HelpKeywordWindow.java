@@ -78,8 +78,8 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         case "addf":
             setTextAddfCommand();
             break;
-        case "appt":
-            setTextApptCommand();
+        case "bookappt":
+            setTextBookApptCommand();
             break;
         case "clear":
             setTextClearCommand();
@@ -118,7 +118,7 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         description.setText("All parameters are compulsory and can be typed in any order.");
         parametersHeader.setText("Parameters:");
         parameters.setText("NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO.\n\n"
-                        + "SEX - M / F\n" + "DATE OF BIRTH - YYYY-MM-DD");
+                        + "SEX - M / F\nDATE OF BIRTH - YYYY-MM-DD");
         usageHeader.setText("Command Usage:");
         usage.setText("add n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.]");
         exampleHeader.setText("Example:");
@@ -153,15 +153,21 @@ public class HelpKeywordWindow extends UiPart<Stage> {
     /**
      * Sets the content of the help window based on the appt keyword.
      */
-    private void setTextApptCommand() {
-        header.setText("Appointment Command: Records appointment times for registered patients into the system.");
-        description.setText("");
+    private void setTextBookApptCommand() {
+        header.setText("Book Appointment Command: Records appointments under a specified health service for registered "
+                + "patients.");
+        description.setText("""
+                Identifies the specific patient using NRIC and record appointments under a specified health service.
+                NRIC provided must be a valid NRIC currently in the system.
+                All parameters are compulsory.""");
         parametersHeader.setText("Parameters:");
-        parameters.setText("APPOINTMENT DATE(YYYY-MM-DD), APPOINTMENT TIME(24 HOURS FORMAT) | NRIC");
+        parameters.setText("NRIC | APPOINTMENT DATE-TIME | HEALTH SERVICE\n\n"
+                + "APPOINTMENT DATE-TIME - YYYY-MM-DD HH:mm\n"
+                + "HEALTH SERVICE - Blood Test, Cancer Screening, Vaccination, Consult");
         usageHeader.setText("Command Usage:");
-        usage.setText("appt dt/[APPOINTMENT DATE T APPOINTMENT TIME] i/[NRIC]");
+        usage.setText("bookappt [NRIC] dt/[APPOINTMENT DATE-TIME] h/[HEALTH SERVICE]");
         exampleHeader.setText("Example:");
-        example.setText("appt dt/2024-12-29T13:30 i/S9758366N");
+        example.setText("bookappt S9758366N dt/2024-12-29 13:30 h/Vaccination");
     }
 
     /**
@@ -182,16 +188,18 @@ public class HelpKeywordWindow extends UiPart<Stage> {
      * Sets the content of the help window based on the deleteappt keyword.
      */
     public void setTextDeleteApptCommand() {
-        header.setText("Delete Appt: Deletes the specified appointment for the identified patient.");
+        header.setText("Delete Appointment Command: Deletes the specified appointment for the identified patient.");
         description.setText("""
                 Identifies the specific patient using NRIC and deletes the appointment specified.
-                NRIC provided must be a valid NRIC currently in the system.""");
+                NRIC provided must be a valid NRIC currently in the system.
+                All parameters are compulsory.""");
         parametersHeader.setText("Parameters:");
-        parameters.setText("");
+        parameters.setText("NRIC | APPOINTMENT DATE-TIME\n\n"
+                + "APPOINTMENT DATE-TIME - YYYY-MM-DD HH:mm");
         usageHeader.setText("Command Usage:");
-        usage.setText("");
+        usage.setText("deleteappt [NRIC] dt/[APPOINTMENT DATE-TIME]");
         exampleHeader.setText("Example:");
-        example.setText("");
+        example.setText("deleteappt S9758366N dt/2024-12-29 13:30");
     }
 
     /**
@@ -219,8 +227,8 @@ public class HelpKeywordWindow extends UiPart<Stage> {
                 Identifies the specific patient using NRIC and edits the detail(s) specified in the input.
                 Details specified in the input will replace existing details in the system.
                 NRIC provided must be a valid NRIC currently in the system.
-                Input must contain at least one field to be edited.
-                Not all fields are compulsory.""");
+                Input must contain at least one parameter to be edited.
+                Not all parameters are compulsory.""");
         parametersHeader.setText("Parameters:");
         parameters.setText("NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO. | EMAIL | ADDRESS | BLOOD TYPE | "
                 + "NEXT-OF-KIN NAME | NEXT-OF-KIN PHONE NO. | ALLERGIES | HEALTH RISK LEVEL | EXISTING CONDITIONS | "
@@ -296,9 +304,9 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         parametersHeader.setText("Parameters:");
         parameters.setText("NRIC");
         usageHeader.setText("Command Usage:");
-        usage.setText("view i/[NRIC]");
+        usage.setText("view [NRIC]");
         exampleHeader.setText("Example:");
-        example.setText("view i/S9758366N");
+        example.setText("view S9758366N");
     }
 
     /**

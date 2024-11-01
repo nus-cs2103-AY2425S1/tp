@@ -32,8 +32,7 @@ public class ViewCommandTest {
         Patient patientToView = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         ModelManager expectedModel = new ModelManager(model.getClinicConnectSystem(), new UserPrefs());
         CommandResult expectedCommandResult = new CommandResult(String.format(ViewCommand.MESSAGE_VIEW_SUCCESS,
-                patientToView.getName()), null, false, patientToView, true,
-                false);
+                patientToView.getName()), null, false, patientToView, true, false);
 
         assertCommandSuccess(new ViewCommand(patientToView.getNric()), model, expectedCommandResult, expectedModel);
     }

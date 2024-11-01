@@ -19,12 +19,12 @@ public class HelpWindow extends UiPart<Stage> {
             + "For more information on any specific command, type help <command keyword>";
     private static final String KEYWORDS_HEADER = "Command Keywords";
     private static final String FUNCTIONS_HEADER = "Functions";
-    private static final String HELP_KEYWORDS = "add\naddf\nappt\nclear\ndeleteappt\ndelete\nedit\nexit\nfilter\nhome"
-            + "\nview";
+    private static final String HELP_KEYWORDS = "add\naddf\nbookappt\nclear\ndeleteappt\ndelete\nedit\nexit\nfilter"
+            + "\nhome\nview";
     private static final String HELP_FUNCTIONS = """
             Adds a new patient record into the system
             Adds a new patient record (with additional information) into the system
-            Records appointment times for registered patients into the system
+            Records appointments under a specified health service for registered patients
             Clears all existing system records
             Deletes the specified appointment for the identified patient
             Deletes an existing patient record from the system
