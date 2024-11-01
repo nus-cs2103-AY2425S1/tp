@@ -5,7 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_THREE;
 import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
@@ -29,7 +29,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_THREE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -69,12 +69,12 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
-                .withAppointments(VALID_APPOINTMENT_ONE).build();
+                .withAppointments(VALID_APPOINTMENT_TWO).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + AGE_DESC_BOB + SEX_DESC_BOB
-                           + APPOINTMENT_DESC_ONE + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                           + APPOINTMENT_DESC_TWO + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
@@ -87,11 +87,11 @@ public class AddCommandParserTest {
 
         // multiple appointments - all accepted
         Person expectedPersonMultipleAppointments = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
-                .withAppointments(VALID_APPOINTMENT_ONE, VALID_APPOINTMENT_TWO).build();
+                .withAppointments(VALID_APPOINTMENT_THREE, VALID_APPOINTMENT_TWO).build();
 
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + AGE_DESC_BOB + SEX_DESC_BOB
-                + APPOINTMENT_DESC_ONE + APPOINTMENT_DESC_TWO + TAG_DESC_FRIEND,
+                + APPOINTMENT_DESC_THREE + APPOINTMENT_DESC_TWO + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleAppointments));
     }
 
@@ -195,9 +195,9 @@ public class AddCommandParserTest {
 
         // zero tags and one appointment
         Person expectedPersonNoTagOneAppointment = new PersonBuilder(AMY).withTags()
-                .withAppointments(VALID_APPOINTMENT_ONE).build();
+                .withAppointments(VALID_APPOINTMENT_TWO).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                                   + ADDRESS_DESC_AMY + AGE_DESC_AMY + SEX_DESC_AMY + APPOINTMENT_DESC_ONE,
+                                   + ADDRESS_DESC_AMY + AGE_DESC_AMY + SEX_DESC_AMY + APPOINTMENT_DESC_TWO,
                 new AddCommand(expectedPersonNoTagOneAppointment));
 
         // one tag and zero appointments

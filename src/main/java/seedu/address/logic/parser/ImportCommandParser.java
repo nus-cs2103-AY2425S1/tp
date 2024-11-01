@@ -186,7 +186,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             }
 
             for (JsonNode appointment : appointmentsNode) {
-                if (!Note.isValidAppointment(new Appointment(appointment.asText()))) {
+                if (!Note.isValidAppointment(appointment.asText())) {
                     throw new CommandException(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_FORMAT);
                 }
             }

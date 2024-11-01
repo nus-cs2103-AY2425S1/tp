@@ -13,7 +13,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Appointment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Appointments should be form dd/MM/yyyy HHmm";
+    public static final String MESSAGE_CONSTRAINTS = "Appointments should be in form dd/MM/yyyy HHmm\n"
+            + "Appointments should also be after current time";;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public final LocalDateTime appointment;
@@ -41,12 +42,23 @@ public class Appointment {
     }
 
     /**
-     * Returns true if a given string is a valid appointment name.
+     * Returns true if a given string is a valid appointment.
      */
     public static boolean isValidAppointment(String test) {
         try {
             LocalDateTime.parse(test, FORMATTER);
             return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if a given string is a future appointment.
+     */
+    public static boolean isFutureAppointment(String test) {
+        try {
+            return LocalDateTime.parse(test, FORMATTER).isAfter(LocalDateTime.now());
         } catch (DateTimeParseException e) {
             return false;
         }

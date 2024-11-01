@@ -46,7 +46,7 @@ public class NoteCommandTest {
         NoteDescriptor descriptor = new NoteDescriptorBuilder(editedPerson).build();
         NoteCommand noteCommand = new NoteCommand(originalPerson.getName(), descriptor);
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_EDIT_NOTE_SUCCESS,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedPerson.getName(),
                 editedPerson.getNote().toString());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -65,7 +65,7 @@ public class NoteCommandTest {
         NoteDescriptor descriptor = new NoteDescriptorBuilder(editedPerson).build();
         NoteCommand noteCommand = new NoteCommand(originalPerson.getName(), descriptor);
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_EDIT_NOTE_SUCCESS,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedPerson.getName(),
                 editedPerson.getNote().toString());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -82,7 +82,7 @@ public class NoteCommandTest {
         NoteDescriptor descriptor = new NoteDescriptorBuilder(editedPerson).build();
         NoteCommand noteCommand = new NoteCommand(originalPerson.getName(), descriptor);
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_EDIT_NOTE_SUCCESS,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedPerson.getName(),
                 editedPerson.getNote().toString());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -102,7 +102,7 @@ public class NoteCommandTest {
         NoteDescriptor descriptor = new NoteDescriptorBuilder(editedPerson).build();
         NoteCommand noteCommand = new NoteCommand(personInFilteredList.getName(), descriptor);
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_EDIT_NOTE_SUCCESS,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedPerson.getName(),
                 editedPerson.getNote().toString());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -19,8 +21,10 @@ import seedu.address.model.appointment.Appointment;
 public class Note {
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9. ]*$";
     public static final String MESSAGE_CONSTRAINTS = "Field should only contain alphanumerical characters";
-    public static final String MESSAGE_CONSTRAINTS_APPOINTMENT = "Previous appointment should not be after today. "
-        + "If you want to add a future appointment, please use the edit command";
+    public static final String MESSAGE_CONSTRAINTS_APPOINTMENT = "Appointments should be in form dd/MM/yyyy HHmm\n"
+                                                                 + "Appointments should also be before current time";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+
     public final Set<Appointment> previousAppointments;
     public final Set<String> remarks;
     public final Set<String> medications;
@@ -59,8 +63,9 @@ public class Note {
      * @param appointment A valid date
      */
     public void addAppointment(String appointment) {
+        checkArgument(isValidAppointment(appointment), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAppointment(appointment), MESSAGE_CONSTRAINTS_APPOINTMENT);
         Appointment previousAppointment = new Appointment(appointment);
-        checkArgument(isValidAppointment(previousAppointment), MESSAGE_CONSTRAINTS_APPOINTMENT);
         this.previousAppointments.add(previousAppointment);
     }
 
@@ -90,8 +95,19 @@ public class Note {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public static boolean isValidAppointment(Appointment appointment) {
-        return appointment.appointment.isBefore(LocalDateTime.now());
+
+    /**
+     * Ensures appointment is in proper format and is before current date
+     *
+     * @param test Appointment string to be tested
+     */
+    public static boolean isValidAppointment(String test) {
+        try {
+            LocalDateTime.parse(test, FORMATTER);
+            return LocalDateTime.parse(test, FORMATTER).isBefore(LocalDateTime.now());
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     /**

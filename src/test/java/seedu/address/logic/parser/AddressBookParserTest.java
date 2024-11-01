@@ -89,7 +89,7 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         NoteDescriptor descriptor =
                 new NoteDescriptorBuilder(person)
-                        .withAppointments("01/01/2025 1200")
+                        .withAppointments("01/01/2024 1200")
                         .withMedications("Medicine")
                         .withRemarks("Remark").build();
         NoteCommand command = (NoteCommand) parser.parseCommand(NoteCommand.COMMAND_WORD + " "
