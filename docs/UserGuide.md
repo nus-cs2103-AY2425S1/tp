@@ -152,14 +152,14 @@ This section will walk you through all the basic features of BridalBuddy and wil
 
 ### **General Commands**
 
-Commands listed in this section are applicable to both guest management and vendor management.
+Commands listed in this section are applicable to both guest management and vendor management, or for using the app in general.
 
 [_Back to Top_](#table-of-contents)
 
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Redirects 
 
 **Format:** `help`
 
