@@ -21,8 +21,9 @@ public class DeleteRemarkCommand extends Command {
     public static final String COMMAND_WORD = "deleteremark";
     public static final String COMMAND_WORD_ALT = "delrmk";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " (short form: " + COMMAND_WORD_ALT + ")"
-            + ": Adds a remark for the student identified by the index number in the displayed student list."
-            + "\nParameters: INDEX (must be a positive integer) " + PREFIX_REMARK_INDEX + "REMARK_INDEX\n"
+            + ": Deletes a remark for the student identified by the index number in the displayed student list."
+            + "\nParameters: INDEX (must be a positive integer) " + PREFIX_REMARK_INDEX
+            + "REMARK_INDEX (must be a positive integer)\n"
             + "Example to add remark: " + COMMAND_WORD + " 2 " + PREFIX_REMARK_INDEX + "1\n";
 
     private static final Logger logger = LogsCenter.getLogger(DeleteRemarkCommand.class);
