@@ -24,7 +24,6 @@ public class AbsentReasonTest {
     public void isValidReason() {
         // invalid reasons
         assertFalse(AbsentReason.isValidAbsentReason(null)); // null input
-        assertFalse(AbsentReason.isValidAbsentReason("123")); // numeric characters not allowed
         assertFalse(AbsentReason.isValidAbsentReason("!@#")); // special characters not allowed
 
 

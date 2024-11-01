@@ -33,6 +33,14 @@ public class AddAttendanceParserTest {
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        // missing absent reason
+        String userInput = INDEX_SECOND_PERSON.getOneBased() + " " + PREFIX_ABSENT_DATE + "20-10-2024"; // No reason
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // missing absent date
+        userInput = INDEX_SECOND_PERSON.getOneBased() + " " + PREFIX_ABSENT_REASON + "MC"; // No date
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -72,13 +80,4 @@ public class AddAttendanceParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    @Test
-    public void absentDateSpecified_success() {
-        // absent reason is missing
-        Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_ABSENT_DATE + "20-10-2024"; // No reason
-        AddAttendanceCommand expectedCommand = new AddAttendanceCommand(targetIndex,
-                new AbsentDate("20-10-2024"), new AbsentReason(""));
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
 }

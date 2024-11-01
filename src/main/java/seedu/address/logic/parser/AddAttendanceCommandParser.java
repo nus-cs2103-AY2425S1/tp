@@ -29,8 +29,7 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ABSENT_DATE, PREFIX_ABSENT_REASON);
 
-        if (!argMultimap.getValue(PREFIX_ABSENT_DATE).isPresent()
-                || argMultimap.getValue(PREFIX_ABSENT_DATE).get().trim().isEmpty()) {
+        if (!argMultimap.getValue(PREFIX_ABSENT_DATE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAttendanceCommand.MESSAGE_USAGE));
         }
@@ -41,8 +40,11 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
         if (argMultimap.getValue(PREFIX_ABSENT_REASON).isPresent()) {
             absentReason = ParserUtil.parseAbsentReason(argMultimap.getValue(PREFIX_ABSENT_REASON).get());
         } else {
-            absentReason = new AbsentReason("");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAttendanceCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ABSENT_DATE, PREFIX_ABSENT_REASON);
 
         return new AddAttendanceCommand(index, absentDate, absentReason);
     }

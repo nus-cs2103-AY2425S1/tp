@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM_SCORE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBMISSION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBMISSION_STATUS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -25,8 +27,11 @@ import seedu.address.logic.commands.AddEcNameCommand;
 import seedu.address.logic.commands.AddEcNumberCommand;
 import seedu.address.logic.commands.AddExamCommand;
 import seedu.address.logic.commands.AddExamScoreCommand;
+import seedu.address.logic.commands.AddSubmissionCommand;
+import seedu.address.logic.commands.AddSubmissionStatusCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteExamCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -42,6 +47,7 @@ import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonPredicate;
+import seedu.address.model.submission.Submission;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -164,6 +170,37 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addSubmission() throws Exception {
+
+        final String submission = "Assignment 1";
+
+        AddSubmissionCommand expected = new AddSubmissionCommand(new Submission(submission));
+
+        AddSubmissionCommand command = (AddSubmissionCommand) parser.parseCommand(
+                AddSubmissionCommand.COMMAND_WORD + " "
+                        + PREFIX_SUBMISSION + submission);
+
+        assertEquals(expected, command);
+    }
+
+    @Test
+    public void parseCommand_addSubmissionStatus() throws Exception {
+
+        final String submission = "Assignment 1";
+        final String status = "Y";
+
+        AddSubmissionStatusCommand expected = new AddSubmissionStatusCommand(INDEX_FIRST_PERSON,
+                new Submission(submission), status);
+        AddSubmissionStatusCommand command = (AddSubmissionStatusCommand) parser.parseCommand(
+                AddSubmissionStatusCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_SUBMISSION + submission + " "
+                        + PREFIX_SUBMISSION_STATUS + status);
+
+        assertEquals(expected, command);
+    }
+
+    @Test
     public void parseCommand_addExam() throws Exception {
 
         final String exam = "Midterm";
@@ -189,6 +226,19 @@ public class AddressBookParserTest {
                         + INDEX_FIRST_PERSON.getOneBased() + " "
                         + PREFIX_EXAM + exam + " "
                         + PREFIX_EXAM_SCORE + score);
+
+        assertEquals(expected, command);
+    }
+
+    @Test
+    public void parseCommand_deleteExam() throws Exception {
+
+        final String exam = "Midterm";
+
+        DeleteExamCommand expected = new DeleteExamCommand(new Exam(exam));
+        DeleteExamCommand command = (DeleteExamCommand) parser.parseCommand(
+                DeleteExamCommand.COMMAND_WORD + " "
+                + PREFIX_EXAM + exam);
 
         assertEquals(expected, command);
     }

@@ -647,7 +647,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System displays an error message to ask for a valid class.
       Use case ends.
 
-
 **System: StudentManagerPro**
 
 **Use case: UC10 Remove Student from the System**
@@ -686,6 +685,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System displays an error message to ask for a valid name of a student in the system.
       Use case ends.
 
+**System: StudentManagerPro**
+
+**Use case: UC11 Add Student's Attendance**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the attendance record for the student is added to the system and can be used to track their attendance history.
+* If invalid data or reason is given as input, a corresponding error message is displayed.
+
+**MSS**
+
+1.  User gives the command to add attendance for a student in StudentManagerPro.
+2.  System validates the input’s format.
+3.  System validates the attendance data.
+4.  System adds the attendance record to the student’s profile.
+5.  System confirms the success by displaying a success message.
+    Use case ends.
+
+**Extensions**
+
+* 2a. User enters invalid characters in the attendance data.
+    * 2a1. System displays an error message asking for valid attendance format, with no special characters.
+      Use case ends.
+
+* 3a. User leaves the absent reason blank (indicating deletion of attendance).
+    * 3a1. System deletes the attendance record for that entry, and displays a confirmation message.
+      Use case ends.
+
+* 3b. User enters absent date in an invalid format.
+    * 3b1. System displays an error message asking for a valid absent date format.
+      Use case ends.
+
+* 3c. User enters absent reason in an invalid format.
+    * 3c1. System displays an error message asking for a valid absent reason format.
+      Use case ends.
+
+* 3d. User tries to add attendance for a student that does not exist.
+    * 3d1. System displays an error message notifying that the student does not exist in the system.
+      Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC12 Add Exam**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the exam is added for all students currently in the system with a score of "NIL".
+* If an invalid exam name is given as input, an error message is displayed.
+
+**MSS**
+1. User gives the command to add exam in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the exam data.
+4. System adds the exam to every student currently in the system.
+5. System confirms the success by displaying a success message. Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the exam name.
+    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces. Use case ends.
+* 3a. User tries to add an exam that already exists in the system.
+    * 3a1. System displays an error message telling the user that the exam already exists. Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC13 Add Student's Exam Score**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the student's exam score is added to the specified exam in the student's profile and saved in the system.
+* If an invalid exam name or exam score is given as input, a corresponding error message is displayed.
+
+**MSS**
+1. User gives the command to add the score for a particular exam for a student in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the exam data.
+4. System adds the exam score to the specified exam in the student's profile.
+5. System confirms the success by displaying a success message. Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the exam name.
+    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces. Use case ends.
+* 2b. User enters invalid characters in the exam score.
+    * 2b1. System displays an error message asking for valid exam score format, an integer between 0 and 100. Use case ends.
+* 3a. User tries to add a score to an exam that does not exist.
+    * 3a1. System displays an error message notifying that the exam does not exist in the system. Use case ends.
+* 3b. User tries to add a score to a student that does not exist.
+    * 3b1. System displays an error message notifying that the student does not exist in the system. Use case ends.
 
 ### Non-Functional Requirements
 
