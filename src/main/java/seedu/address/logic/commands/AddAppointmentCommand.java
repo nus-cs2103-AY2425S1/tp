@@ -78,14 +78,23 @@ public class AddAppointmentCommand extends Command {
 
         Person patientToEdit = patient.get();
         Person doctorToEdit = doctor.get();
-        this.appointmentToAdd = new Appointment((Doctor) doctorToEdit, (Patient) patientToEdit, this.date, this.time);
 
         Person editedPatient;
         Person editedDoctor;
 
-        if (model.hasAppointment(appointmentToAdd)) {
+        Appointment appointment = new Appointment((Doctor) doctorToEdit, (Patient) patientToEdit, this.date, this.time);
+        if (model.hasAppointment(appointment)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
+
+        // Only call createAppointment() if it isn't a duplicate
+        // This avoids linking a duplicate appointment to the Doctor and Patient classes
+        this.appointmentToAdd = Appointment.createAppointment(
+            (Doctor) doctorToEdit,
+            (Patient) patientToEdit,
+            this.date,
+            this.time
+        );
 
         editedPatient = patientToEdit;
         editedDoctor = doctorToEdit;

@@ -26,7 +26,7 @@ public class AppointmentTest {
     @Test
     public void deleteAppointmentById() {
         // Create new appointment
-        Appointment appointment = new Appointment(
+        Appointment appointment = Appointment.createAppointment(
             ALICE, DANIEL, new DateOfBirth("12-02-2024"), new Time("0900")
         );
 
@@ -42,6 +42,11 @@ public class AppointmentTest {
     public void isSameAppointment() {
         // same object -> returns true
         assertTrue(APPOINTMENT_A.isSameAppointment(APPOINTMENT_A));
+
+        // same fields -> returns true
+        assertTrue(APPOINTMENT_A.isSameAppointment(new Appointment(
+            ALICE, CARL, new DateOfBirth("11-02-2024"), new Time("2359")
+        )));
 
         // null -> returns false
         assertFalse(APPOINTMENT_A.isSameAppointment(null));
