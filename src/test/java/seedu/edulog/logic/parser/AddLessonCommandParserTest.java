@@ -15,7 +15,6 @@ import static seedu.edulog.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.edulog.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.edulog.logic.commands.CommandTestUtil.START_TIME_DESC_BIO;
 import static seedu.edulog.logic.commands.CommandTestUtil.START_TIME_DESC_MATH;
-import static seedu.edulog.logic.commands.CommandTestUtil.VALID_DAY_BIO;
 import static seedu.edulog.logic.commands.CommandTestUtil.VALID_DAY_MATH;
 import static seedu.edulog.logic.commands.CommandTestUtil.VALID_DESCRIPTION_MATH;
 import static seedu.edulog.logic.commands.CommandTestUtil.VALID_END_TIME_MATH;

@@ -99,13 +99,6 @@ public class Day {
 
     // Printing and identity fns ====================================================================================
 
-    /**
-     * Returns the ordinal numbering of days of the week, with 1 as Monday, up to 7 as Sunday.
-     */
-    public int dayRepresentation() {
-        return day.getValue();
-    }
-
     @Override
     public String toString() {
         return day.toString();
