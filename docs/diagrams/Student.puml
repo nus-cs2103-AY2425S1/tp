@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR_T4
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeIconSize 0
+
+show footbox
+show members
+
+skinparam class {
+    attributeFontStyle underline
+    methodFontStyle underline
+}
+
+
+class Name {
+    - String fullName <<final>>
+    + {static} isValidName() : boolean
+}
+
+class Phone {
+    - String value <<final>>
+    + {static} isValidPhone() : boolean
+}
+
+class Email {
+    - String value <<final>>
+    + {static} isValidEmail() : boolean
+}
+
+class Course {
+    - String courseCode <<final>>
+    + {static} isValidCourse() : boolean
+}
+
+class Student {
+    -  Name name <<final>>
+    -  Phone phone <<final>>
+    -  Email email <<final>>
+    -  Set<Course> courses <<final>>
+    + getName(): Name
+    + getPhone(): Phone
+    + getEmail(): Email
+    + getCourse(): Set<Course>
+}
+
+Student *-- Name
+Student *-- Email
+Student *-- Phone
+Student --> "0..*" Course
+
+@enduml

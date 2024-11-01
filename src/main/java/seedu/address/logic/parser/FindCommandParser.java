@@ -57,11 +57,11 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (prefix.equals(PREFIX_NAME)) {
                 argMultimap.getAllValues(prefix)
                         .forEach(pre -> predicateList.add(
-                                new NameContainsKeywordsPredicate(List.of(pre.split(";")))));
+                                new NameContainsKeywordsPredicate(ArgumentTokenizer.tokenizeWithDefault(pre))));
             } else if (prefix.equals(PREFIX_COURSE)) {
                 argMultimap.getAllValues(prefix)
                         .forEach(pre -> predicateList.add(
-                                new IsStudentOfCoursePredicate(List.of(pre.split(";")))));
+                                new IsStudentOfCoursePredicate(ArgumentTokenizer.tokenizeWithDefault(pre))));
             }
         }
     }

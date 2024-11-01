@@ -2,6 +2,8 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalStudentOnlyAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,12 +13,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.testutil.TypicalStudents;
 
 public class JsonSerializableAddressBookTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
     private static final Path TYPICAL_STUDENTS_FILE = TEST_DATA_FOLDER.resolve("typicalStudentsAddressBook.json");
+    private static final Path TYPICAL_ADDRESS_BOOK_FILE = TEST_DATA_FOLDER
+            .resolve("typicalAddressBook.json");
     private static final Path INVALID_STUDENT_FILE = TEST_DATA_FOLDER.resolve("invalidStudentAddressBook.json");
     private static final Path DUPLICATE_STUDENT_FILE = TEST_DATA_FOLDER.resolve("duplicateStudentAddressBook.json");
 
@@ -25,7 +28,7 @@ public class JsonSerializableAddressBookTest {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENTS_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalStudentsAddressBook = TypicalStudents.getTypicalAddressBook();
+        AddressBook typicalStudentsAddressBook = getTypicalStudentOnlyAddressBook();
         assertEquals(addressBookFromFile, typicalStudentsAddressBook);
     }
 
@@ -44,4 +47,17 @@ public class JsonSerializableAddressBookTest {
                 dataFromFile::toModelType);
     }
 
+    @Test
+    public void toModelType_typicalConsultsFile_success() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_ADDRESS_BOOK_FILE,
+                JsonSerializableAddressBook.class).get();
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook typicalAddressBook = getTypicalAddressBook();
+
+        // Check that the AddressBooks are equal, including students, consultations, and
+        // lessons
+        assertEquals(typicalAddressBook.getStudentList(), addressBookFromFile.getStudentList());
+        assertEquals(typicalAddressBook.getConsultList(), addressBookFromFile.getConsultList());
+        assertEquals(typicalAddressBook.getLessonList(), addressBookFromFile.getLessonList());
+    }
 }

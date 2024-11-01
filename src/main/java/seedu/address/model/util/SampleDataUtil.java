@@ -21,13 +21,13 @@ public class SampleDataUtil {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 getCourseSet("cs2103t")),
             new Student(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                getCourseSet("cs2103t, cs2109s")),
+                getCourseSet("cs2103t", "cs2109s")),
             new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 getCourseSet("ma1100")),
             new Student(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                getCourseSet("ma1100, ma2104, ma2108")),
+                getCourseSet("ma1100", "ma2104", "ma2108")),
             new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                getCourseSet("CS3230, CS3263, CS3264")),
+                getCourseSet("CS3230", "CS3263", "CS3264")),
             new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 getCourseSet())
         };

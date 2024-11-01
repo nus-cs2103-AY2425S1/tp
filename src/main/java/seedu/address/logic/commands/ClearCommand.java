@@ -11,13 +11,23 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
+    public static final CommandType COMMAND_TYPE = CommandType.CLEAR;
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
+    /**
+     * Returns Command Type CLEAR
+     *
+     * @return Command Type CLEAR
+     */
+    @Override
+    public CommandType getCommandType() {
+        return COMMAND_TYPE;
+    }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, COMMAND_TYPE);
     }
 }
