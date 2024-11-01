@@ -156,27 +156,25 @@ Examples:
 The deadline field will show an `OVERDUE` label if the deadline has passed and the client status is still `active`, so if the client has paid, and your business with them is finished, remember to set their client status to 'old' so the deadline field doesn't show `OVERDUE`.
 </div>
 
-### Locating Clients By Name: `find`
+### Locating Clients: `find`
 
-Finds persons in address book who match parameters specified. Values matched are case insensitive.
+Finds persons in client list who match parameters specified.
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Names only need to match the start of a word. e.g. `find n/Han` OR `find n/B`
-    matches `Hans Bo`
+* All values matched for any parameter are **case-insensitive**.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Persons matching at least one name keyword will be returned (i.e. `OR` search).
+  e.g. `find n/Han Bo` will return `Hans Gruber`, `Bo Yang`.
+* Names only need to match the start of a word. e.g. `find n/Han` OR `find n/B` matches `Hans Bo`.
 * Phone number, email, address, project status, payment status, client status must match the exact string
-  e.g. `cs/in progress` will not match `cs/in prog`
-* Only 1 tag needs to be matched for a person to be found
+  e.g. `ps/in progress` will not match `ps/in prog`.
+* All tags need to be matched for a person to be found.
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/John ps/completed` returns all names with John as a starting word in a name
-  if they have a completed project status
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`.
+* `find n/John ps/completed` returns all clients whose names start with "John" and project status is set to `completed`.
+* `find n/alex david` returns `Alex Yeoh`, `David Li`:<br>
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -184,27 +182,32 @@ Examples:
 
 Deletes the specified person from Clientele+.
 
-Format: `delete [n/NAME] [id/ID]`
+Format: `delete [n/NAME] [id/INDEX]`
 
-* Deletes clients identified by the specified `ID` or `NAME`.
-* `NAME` Acceptable values are same as in add command
-* `ID` refers to the index number shown in the displayed person list.
-* `ID` **must be a positive integer** 1, 2, 3, …​
+* Deletes clients identified by the specified `INDEX` or `NAME`.
+* `NAME` Acceptable values are same as in add command; the command looks for an **exact, case-insensitive** match in the name
+  * Ex: `delete n/John` will match `john`, `JOHN` and `John`, but not `John Doe`.
+* `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete n/John` deletes clients with the name `John`.
+* `delete n/John` deletes the client with the name `John`.
 * `list` followed by `delete id/2` deletes the 2nd person in the list.
-* `find Betsy` followed by `delete id/1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete id/1` deletes the 1st person in the result of the `find` command.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you try to delete by name but there are 2 or more clients in the list that same name, then you will be shown a list of those clients and prompted to delete by index instead.
+</div>
 
 ### Blacklist a Client : `blacklist`
 
 Marks a client as "blacklisted".
 
-Format: `blacklist index`
+Format: `blacklist INDEX`
 
-* Marks the client specified by the index `index` as "blacklisted".
-* `index` refers to the index number shown in the displayed person list.
-* `index` **must be a positive integer** 1, 2, 3, ...
+* Marks the client specified by the index `INDEX` as "blacklisted".
+* `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 * `blacklist 2` marks the second person in the list as blacklisted
@@ -213,25 +216,25 @@ Examples:
 
 Whitelists a previously-blacklisted client.
 
-Format: `whitelist index cs/NEW_CLIENT_STATUS`
+Format: `whitelist INDEX cs/NEW_CLIENT_STATUS`
 
-* Changes the status of the client specified by the index `index` from "blacklisted" to `NEW_CLIENT_STATUS`.
-* `index` refers to the index number shown in the displayed person list.
-* `index` **must be a positive integer** 1, 2, 3, ...
+* Changes the status of the client specified by the index `INDEX` from "blacklisted" to `NEW_CLIENT_STATUS`.
+* `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` **must be a positive integer** 1, 2, 3, ...
 * `NEW_CLIENT_STATUS` refers to the new status of the client. Acceptable values are `potential`, `unresponsive`, `old` and `active`.
 
 Examples:
 * `whitelist 2 cs/active` whitelists the second person in the list and marks them as an `active` client.
 * `whitelist 1 cs/old` whitelists the first person in the list and marks them as an `old` client.
 
-### Sort Clients list : `sort`
+### Sort Client list : `sort`
 
 Sorts the client list in ascending order by the specified field.
 
 Format: `sort FIELD ORDER`
 
-* `FIELD` can be either `deadline` or `name` (**case insensitive**)
-* `ORDER` can be either `ascending` or `descending` (**case insensitive**)
+* `FIELD` can be either `deadline` or `name` (**case-insensitive**)
+* `ORDER` can be either `ascending` or `descending` (**case-insensitive**)
 
 Examples:
 * `sort name ascending` sorts the client list alphabetically by name in ascending order.
