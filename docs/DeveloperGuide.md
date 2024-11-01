@@ -747,9 +747,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
    
-   1. Open a command window. Run the java -version command to ensure you are using Java 17.
+   1. Open a command window. Run the `java -version` command to ensure that you are using Java 17.
 
-   1. Launch the jar file using the java -jar command. Use double-clicking as a last resort. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Launch the jar file using the `java -jar` command. Use double-clicking as a last resort.<br> 
+   Expected: Shows the GUI with a set of sample contacts.
 
 1. Saving window preferences
 
@@ -763,83 +764,80 @@ testers are expected to do more *exploratory* testing.
        Expected: Exit message is displayed, followed by the application closing. 
    
 
-### Adding a person
+### Adding a person: `add`
 
-1. Adding a person to the address book
+1. Adds a person to the address book
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `add n/John Doe e/john@example.com g/M a/30 d/to be assigned t/1A t/2B`<br>
+       Expected: Contact is added successfully, with details of the added contact shown in the status message.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `add n/John Lee e/john@example.com g/M a/30`<br>
+       Expected: Error message "This person already exists in the address book!" is displayed due to duplicate emails.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Test case: `add n/Emma Lee e/emma@gmail.com`<br>
+       Expected: Error message "Invalid command format!" is displayed due to missing mandatory fields.
    
-### Editing a person
+### Editing a person : `edit`
 
-1. Adding a person to the address book
+1. Edits an existing person in the address book
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `edit 1 n/Betsy Crower t/1B -t/2B`<br> 
+       Expected: Edits the name of the 1st person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `edit 1`<br>
+       Expected: Error message "Provide at least one field to edit!" is displayed.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Test case: `edit 1 -t/10A`<br>
+       Expected: Message "You tried removing a nonexistent study group tag" is displayed.
 
-### Finding persons
+### Locating persons by criteria : `find`
 
-1. Locating persons based on criteria
+1. Finds persons whose fields contain the given keywords
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `find n/John`<br>
+       Expected: Returns `john` and `John Doe`.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `find a/30 40 50-60`<br>
+       Expected: Returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+   1. Test case: `find n/roy li alex e/example.com g/m t/1A 1B 2B`<br>
+      Expected: Returns records for `Alex Yeoh`, `David Li` and `Roy Balakrishnan`.
+      ![result for 'find' multiple](images/findMultipleCriteria.png)
 
 
-### Deleting persons
+### Deleting persons : `delete`
 
-1. Deleting a person while all persons are being shown
+1. Deletes the specified persons from the address book
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Test case: `delete 1 3 5-7`<br>
+      Expected: Deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `find John` followed by `delete 2`<br>
+      Expected: Deletes the 2nd person in the results of the `find` command.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete 100`<br>
+      Expected: Error message "Please enter an index within the size of the list. (Your list has 2 entries.)" is displayed.
+   1. Test case: `delete 2-`<br>
+         Expected: Error message "Both the lower and upper bounds should be present." is displayed.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Assigning persons to Study Groups (randomly) : `assign`
 
-1. _{ more test cases …​ }_
+1. Assigns persons in the list to given Study Groups (randomly)
 
-### Assigning persons
+    1. Test case: `list` followed by `assign P90-Placebo P90-Experimental`<br>
+       Expected: Assigns every person in the address book to either `P90-Placebo` or `P90-Experimental` study group, but not both.
 
-1. Assigning persons to study groups (randomly)
+    1. Test case: `find g/M` followed by `assign Male-Group`<br>
+       Expected: Assigns every male in the address book to `Male-Group` study group.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### Exporting persons' emails : `export`
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. Exports the current listed persons' emails to a .txt file
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    1. Test case: `export data/MyEmailsList`<br>
+       Expected: Exports current listed persons' emails to `MyEmailsList.txt` in the `data` directory.
+    1. Test case: `find g/f` followed by `export female_emails`<br>
+         Expected: Exports only the emails of female persons.
 
 --------------------------------------------------------------------------------------------------------------------
 
