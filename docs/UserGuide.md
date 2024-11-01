@@ -372,7 +372,9 @@ Deletes a vendor from your existing vendor list.
 
    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall vendor list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
-Entering the `delete_vendor` command returns the following result on your screen:
+**Example Usage:** `delete_vendor 1`
+
+Entering the `delete_vendor 1` command returns the following result on your screen:
 
 ![delete_vendor command](images/deleteVendorCommand.png)
 
