@@ -1,5 +1,6 @@
 package seedu.address.model.filteredappointment;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.patient.Appt.DATETIME_COMPARATOR;
 
 import java.util.Comparator;
@@ -9,7 +10,7 @@ import seedu.address.model.patient.Patient;
 
 
 /**
- * Represents a filteredappointment object that has
+ * Represents a filteredappointment object that has a {code@ Appt} and {code@ Patient}
  */
 public class FilteredAppointment {
 
@@ -27,11 +28,12 @@ public class FilteredAppointment {
     private final Patient patient;
 
     /**
-     * Creates a {@code FilteredAppointment} with the given {@Code Appt} and {@Code Patient}
+     * Creates a {@code filteredappointment} with the given {@Code Appt} and {@Code Patient}
      * @param appt
      * @param patient
      */
     public FilteredAppointment(Appt appt, Patient patient) {
+        requireAllNonNull(appt, patient);
         this.appt = appt;
         this.patient = patient;
     }

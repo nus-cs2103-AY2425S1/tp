@@ -45,7 +45,7 @@ public class EditPatientDescriptorBuilder {
         descriptor.setBloodType(patient.getBloodType());
         descriptor.setNokName(patient.getNokName());
         descriptor.setNokPhone(patient.getNokPhone());
-        //descriptor.setAllergy(patient.getAllergies());
+        //descriptor.setAllergy(patient.getAllergies/());
         descriptor.setHealthRisk(patient.getHealthRisk());
         descriptor.setExistingCondition(patient.getExistingCondition());
         descriptor.setNote(patient.getNote());

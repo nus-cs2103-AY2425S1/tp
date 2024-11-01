@@ -8,11 +8,13 @@ import java.nio.file.Path;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.filteredappointment.FilteredAppointment;
 import seedu.address.model.patient.Patient;
 
@@ -134,6 +136,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void filterAppts(AppointmentDateFilter dateFilter) {
+        TreeSet<FilteredAppointment> filteredAppts = filteredPatients.stream()
+                .flatMap(patient -> patient.getAppts().stream()
+                        .filter(appt -> appt.isBetweenDatesAndMatchService(dateFilter))
+                        .map(appt -> new FilteredAppointment(appt, patient)))
+                .collect(Collectors.toCollection(() -> new TreeSet<>(APPOINTMENT_COMPARATOR)));
+        this.setFilteredAppts(filteredAppts);;
+    }
+
+    @Override
     public void setFilteredAppts(TreeSet<FilteredAppointment> filteredAppointments) {
         this.filteredAppts.clear();
         this.filteredAppts.addAll(filteredAppointments);
@@ -158,7 +170,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return clinicConnectSystem.equals(otherModelManager.clinicConnectSystem)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPatients.equals(otherModelManager.filteredPatients);
+                && filteredPatients.equals(otherModelManager.filteredPatients)
+                && filteredAppts.equals(otherModelManager.filteredAppts);
     }
-
 }

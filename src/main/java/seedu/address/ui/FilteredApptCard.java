@@ -10,7 +10,7 @@ import seedu.address.model.patient.Patient;
 
 
 /**
- * An UI component that displays information of a {@code FilteredAppointment}
+ * An UI component that displays information of a {@code filteredappointment}
  */
 public class FilteredApptCard extends UiPart<Region> {
     private static final String FXML = "FilteredApptListCard.fxml";
@@ -31,7 +31,7 @@ public class FilteredApptCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code FilteredApptCard} with the given {@code FilteredAppointment} and index to display
+     * Creates a {@code FilteredApptCard} with the given {@code filteredappointment} and index to display
      */
     public FilteredApptCard(FilteredAppointment filteredAppointment, int displayedIndex) {
         super(FXML);
