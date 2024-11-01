@@ -32,8 +32,6 @@ public class PatientCard extends UiPart<Region> {
     @FXML
     private Label nric;
     @FXML
-    private Label birthDate;
-    @FXML
     private Label sex;
     @FXML
     private Label appointmentDateTime;
@@ -44,11 +42,9 @@ public class PatientCard extends UiPart<Region> {
     public PatientCard(Patient patient, int displayedIndex) {
         super(FXML);
         this.patient = patient;
-        id.setText(displayedIndex + ". ");
         name.setText(patient.getName().fullName);
         nric.setText(patient.getNric().value);
         sex.setText(patient.getSex().value);
-        birthDate.setText(patient.getBirthdate().value);
         if (patient.getAppts().size() == 0) {
             appointmentDateTime.setText("No appointments currently");
         } else if (patient.getMostRecentPastAppt() == null) {
