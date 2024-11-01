@@ -61,9 +61,7 @@ public class EdulogCalendar {
      */
     public boolean checkTimeslot(Lesson lesson) {
         return lessons.stream()
-            .filter(l -> l.getStartDay().equals(lesson.getStartDay()))
-            .filter(l -> l.getStartTime().isBefore(lesson.getEndTime())
-                && lesson.getStartTime().isBefore(l.getEndTime()))
+            .filter(lesson::hasOverlap)
             .count() < MAX_SIMULTANEOUS_TIMING;
     }
 

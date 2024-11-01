@@ -20,6 +20,9 @@ public class LessonTime {
 
     public static final DateTimeFormatter FORMAT_24H = DateTimeFormatter.ofPattern("HHmm");
 
+    public static final LessonTime EARLIEST_TIME = new LessonTime("0000");
+    public static final LessonTime LATEST_TIME = new LessonTime("2359");
+
     public final LocalTime time;
 
     /**
@@ -69,17 +72,40 @@ public class LessonTime {
      * Checks that 2 given times are not ambiguous, i.e. not the same start and end time.
      */
     public static boolean checkValidLessonTimes(String time1, String time2) {
-        return convertToLocalTime(time1).equals(convertToLocalTime(time2));
+        return !convertToLocalTime(time1).equals(convertToLocalTime(time2));
     }
 
-    // Printing and identity fns ================================================================================
 
+    // Utility fns ==============================================================================================
     /**
      * Returns if the lesson spans 2 days, e.g. Monday 2000 to 0000, or Tuesday 2200 to 0100.
      */
     public static boolean spansTwoDays(LessonTime startTime, LessonTime endTime) {
         return endTime.time.isBefore(startTime.time);
     }
+
+    /**
+     * Returns if the current lesson time occurs before the provided time in the argument.
+     */
+    public boolean isBefore(LessonTime otherTime) {
+        return time.isBefore(otherTime.time);
+    }
+
+    /**
+     * Returns if 2 lesson times provided contain the 3rd lesson time,
+     *     e.g. "1200" and "1400" containing "1230" or "1315" or "1400".
+     * @param lower start time.
+     * @param upper end time. Pre-condition: end time must be after (or equal to) the end time.
+     * @param between time to test if it is between the provided times.
+     */
+    public static boolean contains(LessonTime lower, LessonTime upper, LessonTime between) {
+        boolean boundedByLower = lower.isBefore(between) || lower.equals(between);
+        boolean boundedByUpper = between.isBefore(upper) || between.equals(upper);
+
+        return boundedByLower && boundedByUpper;
+    }
+
+    // Printing and identity fns ================================================================================
 
     /**
      * Getter function for internal representation of lesson time.
