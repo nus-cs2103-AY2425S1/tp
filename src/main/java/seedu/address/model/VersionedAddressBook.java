@@ -95,6 +95,11 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     @Override
+    public String toString() {
+        return getCurrentAddressBook().toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
