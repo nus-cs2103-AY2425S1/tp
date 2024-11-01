@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Group;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane groupListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +119,13 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        ObservableList<Group> groupList = logic.getGroupList();
+        groupListPanel = new GroupListPanel(groupList);
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        groupListPanelPlaceholder.setVisible(false); // Initially hide GroupListPanel if toggling
+
+        resultDisplay = new ResultDisplay();
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -151,6 +164,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.show();
     }
 
+    public void showPersonListPanel() {
+        personListPanelPlaceholder.setVisible(true);
+        groupListPanelPlaceholder.setVisible(false);
+    }
+
+    public void showGroupListPanel() {
+        System.out.println("shpwing group list panel");
+        personListPanelPlaceholder.setVisible(false);
+        groupListPanelPlaceholder.setVisible(true);
+    }
+
+
     /**
      * Closes the application.
      */
@@ -178,6 +203,13 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            // Toggle the view based on command type
+            if (commandResult.isGroupCommand()) {
+                showGroupListPanel();
+            } else {
+                showPersonListPanel();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -193,4 +225,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 }

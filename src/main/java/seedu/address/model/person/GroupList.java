@@ -107,6 +107,13 @@ public class GroupList {
     }
 
     /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Group> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+
+    /**
      * Returns the names of every {@code Group} in the {@code GroupList}.
      */
     public String getNames() {

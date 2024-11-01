@@ -13,6 +13,6 @@ public class ListGroupsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         String groupNames = model.getGroupNames();
-        return new CommandResult(groupNames);
+        return new CommandResult(groupNames, false, false, true);
     }
 }

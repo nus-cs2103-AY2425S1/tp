@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="10" styleClass="group-card">
+    <!-- ID Label -->
+    <Label fx:id="id" styleClass="group-id-label" />
+
+    <!-- Group Name -->
+    <Label fx:id="groupName" styleClass="group-name-label" />
+
+    <!-- List of Members (up to 3 members, followed by "..." if there are more) -->
+    <VBox fx:id="membersPane" spacing="2.0" />
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10" />
+    </padding>
+</HBox>

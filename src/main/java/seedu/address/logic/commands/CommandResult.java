@@ -19,6 +19,9 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Indicates if the command is a group-related command. */
+    private final boolean isGroupCommand;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -26,6 +29,14 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.isGroupCommand = false;
+    }
+
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isGroupCommand) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.isGroupCommand = isGroupCommand;
     }
 
     /**
@@ -48,6 +59,10 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isGroupCommand() {
+        return isGroupCommand;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -62,7 +77,8 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && isGroupCommand == otherCommandResult.isGroupCommand;
     }
 
     @Override
@@ -76,6 +92,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("isGroupCommand", isGroupCommand)
                 .toString();
     }
 

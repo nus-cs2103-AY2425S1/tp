@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
 
@@ -27,7 +28,7 @@ public class GroupCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private FlowPane membersPane; // A FlowPane to display members
+    private VBox membersPane; 
 
     /**
      * Creates a {@code GroupCard} with the given {@code Group} and index to display.

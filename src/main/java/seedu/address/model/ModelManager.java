@@ -14,6 +14,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Group;
+import seedu.address.model.person.GroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.GroupNotFoundException;
 
@@ -190,6 +191,12 @@ public class ModelManager implements Model {
     public void filterByGroup(String groupName) throws GroupNotFoundException {
         Group group = addressBook.getGroup(groupName);
         updateFilteredPersonList(group::containsExact);
+    }
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        GroupList groupList = addressBook.getGroupList();
+        return groupList.asUnmodifiableObservableList();
     }
 
     //=========== Sorted Person List Accessors =============================================================
