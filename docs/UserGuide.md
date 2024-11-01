@@ -269,7 +269,44 @@ Format:`export path/DESIRED FILE DESTINATION`
 Examples:
 * `Export path/data/tutorial12.csv` will export the contacts in the Address book as a csv file (tutorial12.csv at the relative path given)
 
+### Adding grades to a contact `addGrade`
 
+Add an assignment and its grades to a contact.
+
+Format: `addGrade n/NAME asgn/ASSIGNMENT_NAME s/SCORE`
+
+Assignments that can be added to a contact are specified in path `data/assignment.json`.
+
+Example with the following assignment.json file:
+```
+{
+  "assignments" : [
+    {
+      "name": "Assignment01",
+      "maxScore": 5
+    }, {
+      "name": "Assignment02",
+      "maxScore": 6
+    }, {
+      "name": "Assignment03",
+      "maxScore": 7
+    }
+  ]
+}
+```
+`addGrade n/JohnDoe asgn/Assignment01 s/5` will add an assignment name 
+Assignment01 with score 5 to contact JohnDoe.
+
+`addGrade n/JohnDoe asgn/Assignment01 s/6` will not add the assignment to contact JohnDoe
+as the input score is greater than the max, as specified in the `assignment.json` file.
+
+`addGrade n/JohnDoe asgn/Assignment01 s/6` will not add the assignment to contact JohnDoe
+as the input score is greater than the max, as specified in `assignment.json`.
+
+`addGrade  n/JohnDoe asgn/Assignment05 s/5` will not add the assignment to contact JohnDoe
+as the assignment is not specified `assignment.json`
+
+Tip: Calling `addGrade` without any fields will show the list of assignments in `assignment.json`.
 
 ### Exiting the program : `exit`
 
@@ -315,20 +352,21 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                        |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool` |
-| **Clear**  | `clear`                                                                                                                                                                                                                                 |
-| **Delete** | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                              |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                              |
-| **Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                   |
-| **List**   | `list`                                                                                                                                                                                                                                  |
-| **Help**   | `help`                                                                                                                                                                                                                                  |
-| **View**   | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
-| **GitHub** | `github n/NAME`                                                                                                                                                                                                                         |
-| **Mark**   | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                                                             |
-| **Unmark** | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                                                         |
-| **Sort**   | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                                                                |
-| **Import** | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                                                                    |
-| **Export** | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                                                                          |
+| Action        | Format, Examples                                                                                                                                                                                                                        |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool` |
+| **Clear**     | `clear`                                                                                                                                                                                                                                 |
+| **Delete**    | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                              |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                              |
+| **Filter**    | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                   |
+| **List**      | `list`                                                                                                                                                                                                                                  |
+| **Help**      | `help`                                                                                                                                                                                                                                  |
+| **View**      | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
+| **GitHub**    | `github n/NAME`                                                                                                                                                                                                                         |
+| **Mark**      | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                                                             |
+| **Unmark**    | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                                                         |
+| **Sort**      | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                                                                |
+| **Import**    | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                                                                    |
+| **Export**    | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                                                                         |
+| **Add grade** | `addGrade n/NAME asgn/ASSIGNMENT_NAME s/SCORE` <br> e.g. `addGrade n/JohnDoe asgn/Ex01 s/5`                                                                                                                                              |
