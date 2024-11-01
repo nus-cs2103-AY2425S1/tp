@@ -165,12 +165,16 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        contactDisplay.showHelpDisplay();
+    }
+
+    @FXML
+    public void handleHelpWindow() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
             helpWindow.focus();
         }
-        contactDisplay.showHelpDisplay();
     }
 
     void show() {
@@ -210,6 +214,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowHelpWindow()) {
+                handleHelpWindow();
             }
 
             if (commandResult.isExit()) {

@@ -17,6 +17,8 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
+    private final boolean showHelpWindow;
+
     /** The application should exit. */
     private final boolean exit;
     private final Person personToDisplay;
@@ -24,9 +26,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showHelpWindow, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
+        this.showHelpWindow = showHelpWindow;
         this.exit = exit;
         this.personToDisplay = null;
     }
@@ -37,6 +40,7 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Person personToDisplay) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
+        this.showHelpWindow = false;
         this.exit = exit;
         this.personToDisplay = personToDisplay;
     }
@@ -62,6 +66,10 @@ public class CommandResult {
 
     public boolean isShowHelp() {
         return showHelp;
+    }
+
+    public boolean isShowHelpWindow() {
+        return showHelpWindow;
     }
 
     public boolean isExit() {
