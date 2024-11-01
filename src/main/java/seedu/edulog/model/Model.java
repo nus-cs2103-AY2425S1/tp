@@ -111,7 +111,7 @@ public interface Model {
     boolean hasLesson(Lesson lesson);
 
     /**
-     * Returns true if a lesson with the same description as description exists in the calendar.
+     * Returns the lesson with the same description, if exists in the calendar (otherwise, null).
      */
     Lesson findLesson(Description description);
 

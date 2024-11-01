@@ -18,17 +18,20 @@ import seedu.edulog.commons.util.ToStringBuilder;
 public class Lesson {
     private Description description;
     private Day startDay;
-    private LessonTime times;
+    private LessonTime startTime;
+
+    private LessonTime endTime;
 
     /**
      * Every field must be present and not null.
      */
-    public Lesson(Description description, Day startDay, LessonTime times) {
-        requireAllNonNull(description, startDay, times);
+    public Lesson(Description description, Day startDay, LessonTime startTime, LessonTime endTime) {
+        requireAllNonNull(description, startDay, startTime, endTime);
 
         this.description = description;
         this.startDay = startDay;
-        this.times = times;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public Description getDescription() {
@@ -41,22 +44,22 @@ public class Lesson {
 
     /**
      * Getter method that attains the LocalTime representation of the start time for time-based methods. <br> <br>
-     * NOTE: Avoid breaking abstraction here - do not call this getter function for functional code!
+     * NOTE: Avoid breaking abstraction here - do not call this getter function for non-test code.
      * If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
      * instead, which ensures that times can be presented and stored in an acceptable 24-hour format.
      */
     public LocalTime getStartTime() {
-        return times.getStartTime();
+        return startTime.getTime();
     }
 
     /**
      * Getter method that attains the LocalTime representation of the end time for time-based methods. <br> <br>
-     * NOTE: Avoid breaking abstraction here - do not call this getter function for functional code!
+     * NOTE: Avoid breaking abstraction here - do not call this getter function for non-test code.
      * If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
      * instead, which ensures that times can be presented and stored in an acceptable 24-hour format.
      */
     public LocalTime getEndTime() {
-        return times.getEndTime();
+        return endTime.getTime();
     }
 
     /**
@@ -64,7 +67,7 @@ public class Lesson {
      * Example: "1100", "2359".
      */
     public String getFormattedStartTime() {
-        return times.getFormattedStartTime();
+        return startTime.getFormattedTime();
     }
 
     /**
@@ -72,7 +75,7 @@ public class Lesson {
      * Example: "1100", "2359".
      */
     public String getFormattedEndTime() {
-        return times.getFormattedEndTime();
+        return endTime.getFormattedTime();
     }
 
     // Validator methods. ===========================================================================================
@@ -114,13 +117,14 @@ public class Lesson {
         Lesson otherLesson = (Lesson) other;
         return description.equals(otherLesson.description)
                 && startDay.equals(otherLesson.startDay)
-                && times.equals(otherLesson.times);
+                && startTime.equals(otherLesson.startTime)
+                && endTime.equals(otherLesson.endTime);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, startDay, times);
+        return Objects.hash(description, startDay, startTime, endTime);
     }
 
     @Override
@@ -128,7 +132,10 @@ public class Lesson {
         return new ToStringBuilder(this)
                 .add("description", description)
                 .add("From", startDay + " " + getFormattedStartTime())
-                .add("To", startDay.plus(times.spansTwoDays() ? 1 : 0) + " " + getFormattedEndTime())
+                .add("To",
+                    startDay.plus(
+                        LessonTime.spansTwoDays(startTime, endTime) ? 1 : 0)
+                        + " " + getFormattedEndTime())
                 .toString();
     }
 }

@@ -19,29 +19,26 @@ public class JsonAdaptedLesson {
 
     private String description;
     private String startDay;
-    private String startTime;
-    private String endTime;
+    private String times;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("description") String description, @JsonProperty("startDay") String startDay,
-                             @JsonProperty("startTime") String startTime, @JsonProperty("endTime") String endTime) {
+                             @JsonProperty("times") String times) {
         this.description = description;
         this.startDay = startDay;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.times = times;
     }
 
     /**
      * Converts a given {@code Lesson} into this class for Jackson use.
      */
     public JsonAdaptedLesson(Lesson source) {
-        description = source.getDescription();
+        description = source.getDescription().toString();
         startDay = source.getStartDay().toString();
-        startTime = source.getFormattedStartTime();
-        endTime = source.getFormattedEndTime();
+        times = source.get
     }
 
     /**

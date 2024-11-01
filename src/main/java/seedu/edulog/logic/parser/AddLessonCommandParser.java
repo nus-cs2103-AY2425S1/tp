@@ -8,6 +8,7 @@ import static seedu.edulog.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.edulog.logic.commands.AddLessonCommand;
@@ -41,10 +42,16 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                 PREFIX_DESCRIPTION, PREFIX_START_DAY, PREFIX_START_TIME, PREFIX_END_TIME);
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Day day = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_START_DAY).get());
-        LessonTime times = ParserUtil.parseLessonTime(
-            argMultimap.getValue(PREFIX_START_TIME).get(), argMultimap.getValue(PREFIX_END_TIME).get());
 
-        Lesson lesson = new Lesson(description, day, times);
+        List<LessonTime> times = ParserUtil.parseLessonTimes(
+            argMultimap.getValue(PREFIX_START_TIME).get(),
+            argMultimap.getValue(PREFIX_END_TIME).get()
+        );
+
+        LessonTime startTime = times.get(0);
+        LessonTime endTime = times.get(1);
+
+        Lesson lesson = new Lesson(description, day, startTime, endTime);
 
         return new AddLessonCommand(lesson);
     }

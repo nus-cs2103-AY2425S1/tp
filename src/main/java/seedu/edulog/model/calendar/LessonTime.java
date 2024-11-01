@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
- * Holds the start and end times of a Lesson, given in 24-hour format.
+ * Holds a given time of a Lesson (either start or end time), given in 24-hour format.
  */
 public class LessonTime {
     public static final String NO_SAME_TIME =
@@ -21,33 +21,19 @@ public class LessonTime {
 
     public static final DateTimeFormatter FORMAT_24H = DateTimeFormatter.ofPattern("HHmm");
 
-    public final LocalTime startTime;
-    public final LocalTime endTime;
+    public final LocalTime time;
 
     /**
-     * Accepts string representations of 24-hour times denoting the start and end time of a Lesson. <br>
-     * If the start time provided is earlier than the end time, the lesson is interpreted to span a single day. <br>
-     * If the start time provided is later than the end time, the lesson is interpreted to continue past midnight
-     * and span 2 days. <br>
-     * Start time must not be the same as the end time to avoid ambiguity. <br>
-     * @param startTime A string representation of a 24-hour time, determined by {@link #checkValidLessonTime(String)}
-     * @param endTime A string representation of a 24-hour time, determined by {@link #checkValidLessonTime(String)}
+     * Accepts string representations of 24-hour times denoting the start or end time of a Lesson. <br>
+     * @param time A string representation of a 24-hour time, determined by {@link #checkValidLessonTime(String)}
      */
-    public LessonTime(String startTime, String endTime) {
-        requireAllNonNull(startTime, endTime);
+    public LessonTime(String time) {
+        requireNonNull(time);
 
         // per-time checks
-        checkArgument(checkValidLessonTime(startTime), LessonTime.NOT_24H_FORMAT);
-        checkArgument(checkValidLessonTime(endTime), LessonTime.NOT_24H_FORMAT);
+        checkArgument(checkValidLessonTime(time), LessonTime.NOT_24H_FORMAT);
 
-        LocalTime startTimeTmp = LessonTime.convertToLocalTime(startTime);
-        LocalTime endTimeTmp = LessonTime.convertToLocalTime(endTime);
-
-        // checks between both times
-        checkArgument(checkValidLessonTimes(startTimeTmp, endTimeTmp), LessonTime.NO_SAME_TIME);
-
-        this.startTime = startTimeTmp;
-        this.endTime = endTimeTmp;
+        this.time = LessonTime.convertToLocalTime(time);
     }
 
     // Validator and parsing fns ================================================================================
@@ -92,29 +78,24 @@ public class LessonTime {
     /**
      * Returns if the lesson spans 2 days, e.g. Monday 2000 to 0000, or Tuesday 2200 to 0100.
      */
-    public boolean spansTwoDays() {
-        return endTime.isBefore(startTime);
+    public static boolean spansTwoDays(LessonTime startTime, LessonTime endTime) {
+        return endTime.time.isBefore(startTime.time);
     }
 
-    public LocalTime getStartTime() {
-        return startTime;
+    /**
+     * Getter function for internal representation of lesson time.
+     * NOTE: Please avoid the use of this function in non-test code to maintain abstraction!
+     */
+    public LocalTime getTime() {
+        return time;
     }
 
-    public LocalTime getEndTime() {
-        return endTime;
+    public String getFormattedTime() {
+        return time.format(FORMAT_24H);
     }
-
-    public String getFormattedStartTime() {
-        return startTime.format(FORMAT_24H);
-    }
-
-    public String getFormattedEndTime() {
-        return endTime.format(FORMAT_24H);
-    }
-
     @Override
     public String toString() {
-        return getFormattedStartTime() + " - " + getFormattedEndTime();
+        return getFormattedTime();
     }
 
     @Override
@@ -129,11 +110,11 @@ public class LessonTime {
         }
 
         LessonTime otherLessonTime = (LessonTime) other;
-        return startTime.equals(otherLessonTime.startTime) && endTime.equals(otherLessonTime.endTime);
+        return time.equals(otherLessonTime.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(startTime, endTime);
+        return Objects.hash(time);
     }
 }

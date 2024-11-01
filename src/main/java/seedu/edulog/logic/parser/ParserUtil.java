@@ -5,8 +5,11 @@ import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.edulog.commons.core.index.Index;
@@ -180,27 +183,32 @@ public class ParserUtil {
     }
 
     /**
-     * Parses 2 Strings representing a 24-hour time format, the first representing the start time
-     * and the second representing the end time of a lesson.
+     * Parses 2 string representing a 24-hour time format, meant to denote the start and end time of a lesson.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if time provided is either not a 24-hour time format like "1200" or "2359" without spaces,
-     * or times provided are invalid when together as determined by {@link LessonTime#checkValidLessonTime(String)}
+     * @throws ParseException if time provided is not a 24-hour time format like "1200" or "2359" without spaces,
+     * as determined by {@link LessonTime#checkValidLessonTime(String)}, OR if the 2 times provided are ambiguous
+     * together, as determined by {@link LessonTime#checkValidLessonTimes(String, String)}.
+     *
+     * @return List of LessonTime, containing the start time and end time at index 0 and 1 respectively.
      */
-    public static LessonTime parseLessonTime(String startTime, String endTime) throws ParseException {
+    public static List<LessonTime> parseLessonTimes(String startTime, String endTime) throws ParseException {
         requireAllNonNull(startTime, endTime);
 
-        String startTimeTrimmed = startTime.trim();
-        String endTimeTrimmed = endTime.trim();
+        String trimmedStartTime = startTime.trim();
+        String trimmedEndTime = endTime.trim();
 
-        if (!LessonTime.checkValidLessonTime(startTimeTrimmed) || !LessonTime.checkValidLessonTime(endTimeTrimmed)) {
+        if (!LessonTime.checkValidLessonTime(trimmedStartTime) || !LessonTime.checkValidLessonTime(trimmedEndTime)) {
             throw new ParseException(LessonTime.NOT_24H_FORMAT);
         }
 
-        if (!LessonTime.checkValidLessonTimes(startTimeTrimmed, endTimeTrimmed)) {
+        if (!LessonTime.checkValidLessonTimes(trimmedStartTime, trimmedEndTime)) {
             throw new ParseException(LessonTime.NO_SAME_TIME);
         }
 
-        return new LessonTime(startTimeTrimmed, endTimeTrimmed);
+        return new ArrayList<>(Arrays.asList(
+            new LessonTime(trimmedStartTime),
+            new LessonTime(trimmedEndTime)
+        ));
     }
 }
