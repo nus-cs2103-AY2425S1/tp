@@ -11,8 +11,9 @@ import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
+
 /**
  * Parses input arguments and creates a new {@link AddBuyerCommand} object.
  * The parser processes the input string to extract the necessary parameters
@@ -50,7 +51,7 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
 
 
         // Parse the name, phone, and email from the argument map
-        Name name = ParserUtil.parseClientName(argMultimap.getValue(PREFIX_NAME).get());
+        NameWithoutNumber name = ParserUtil.parseClientNameWithoutNumber(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parseClientPhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseClientEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 
