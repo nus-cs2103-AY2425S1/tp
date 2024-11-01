@@ -66,7 +66,6 @@ public class UnfavouriteGameCommand extends Command {
 
         targetGame.removeFavourite();
         model.setPerson(targetPerson, targetPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_UNFAVOURITE_GAME_SUCCESS, gameName));
     }
