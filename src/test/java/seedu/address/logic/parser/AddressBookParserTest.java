@@ -40,11 +40,11 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
 import seedu.address.logic.commands.ListPoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.claim.ClaimStatus;
+import seedu.address.model.claim.EditClaimDescriptor;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.CompositePredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
-import seedu.address.model.claim.ClaimStatus;
-import seedu.address.model.claim.EditClaimDescriptor;
 import seedu.address.model.policy.EditPolicyDescriptor;
 import seedu.address.model.policy.LifePolicy;
 import seedu.address.model.policy.PolicyType;
@@ -143,7 +143,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_editClaim() throws Exception {
         EditClaimCommand actualCommand = (EditClaimCommand) parser.parseCommand(
-                EditClaimCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                EditClaimCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "health"
                         + " " + PREFIX_CLAIM_INDEX + "1"
                         + " " + PREFIX_CLAIM_STATUS + "approved"
@@ -151,7 +151,7 @@ public class AddressBookParserTest {
         EditClaimDescriptor claim = new EditClaimDescriptor();
         claim.setStatus(ClaimStatus.APPROVED);
         claim.setDescription("Claim approved for payment");
-        EditClaimCommand expectedCommand = new EditClaimCommand(INDEX_FIRST_PERSON, PolicyType.HEALTH,
+        EditClaimCommand expectedCommand = new EditClaimCommand(INDEX_FIRST_CLIENT, PolicyType.HEALTH,
                 INDEX_FIRST_CLAIM, claim);
         assertEquals(expectedCommand, actualCommand);
 

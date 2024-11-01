@@ -15,7 +15,7 @@ import seedu.address.model.policy.PolicyType;
 
 /**
  * Parses input arguments to create an EditClaimCommand.
- * This parser processes the user's command input, extracts the person and claim indices, and the fields to edit.
+ * This parser processes the user's command input, extracts the client and claim indices, and the fields to edit.
  * Ensures that mandatory fields like policy type and claim index are provided.
  */
 public class EditClaimCommandParser implements Parser<EditClaimCommand> {
@@ -34,7 +34,7 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
 
         validateRequiredFields(argMultimap);
 
-        Index personIndex = parsePersonIndex(argMultimap);
+        Index clientIndex = parseClientIndex(argMultimap);
         Index claimIndex = parseClaimIndex(argMultimap);
         PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
 
@@ -44,7 +44,7 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
             throw new ParseException(EditClaimCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditClaimCommand(personIndex, policyType, claimIndex, editClaimDescriptor);
+        return new EditClaimCommand(clientIndex, policyType, claimIndex, editClaimDescriptor);
     }
 
     /**
@@ -84,13 +84,13 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
     }
 
     /**
-     * Parses the person index from the argument multimap.
+     * Parses the client index from the argument multimap.
      *
      * @param argMultimap Argument multimap containing parsed arguments.
-     * @return Index of the person.
-     * @throws ParseException if the person index is invalid when not found.
+     * @return Index of the client.
+     * @throws ParseException if the client index is invalid when not found.
      */
-    private Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
+    private Index parseClientIndex(ArgumentMultimap argMultimap) throws ParseException {
         try {
             return ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {

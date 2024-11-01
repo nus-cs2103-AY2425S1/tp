@@ -59,8 +59,8 @@ public class EditClaimCommandParserTest {
     }
 
     @Test
-    public void parse_missingPersonIndex_throwsParseException() {
-        // Missing person index (preamble)
+    public void parse_missingClientIndex_throwsParseException() {
+        // Missing client index (preamble)
         String userInput = PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "2 "
                 + PREFIX_CLAIM_STATUS + "approved";
 
@@ -95,8 +95,8 @@ public class EditClaimCommandParserTest {
     }
 
     @Test
-    public void parse_invalidPersonIndex_throwsParseException() {
-        // Invalid person index (not a number)
+    public void parse_invalidClientIndex_throwsParseException() {
+        // Invalid client index (not a number)
         String userInput = "invalid " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "2 "
                 + PREFIX_CLAIM_STATUS + "approved";
 
