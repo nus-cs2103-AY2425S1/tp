@@ -140,7 +140,7 @@
 }
 
 .stack-pane {
-    -fx-background-color: derive(#f4f0f0, -20%);
+    -fx-background-color: #ffffff;
 }
 
 .pane-with-border {
