@@ -80,6 +80,21 @@ public class AddWeddingCommandTest {
     }
 
     @Test
+    public void execute_weddingWithDifferentPeople_addSuccessful() throws Exception {
+        Wedding weddingOne = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
+        Wedding weddingTwo = new WeddingBuilder().withWeddingName("Alice Tan & Bob Lee").build();
+        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(weddingTwo);
+        ModelStubAcceptingWeddingAdded modelStub = new ModelStubAcceptingWeddingAdded();
+        modelStub.addWedding(weddingOne);
+
+        CommandResult commandResult = addWeddingCommand.execute(modelStub);
+
+        assertEquals(String.format(AddWeddingCommand.MESSAGE_SUCCESS, Messages.format(weddingTwo)),
+                commandResult.getFeedbackToUser());
+        assertEquals(List.of(weddingOne, weddingTwo), modelStub.weddingsAdded);
+    }
+
+    @Test
     public void equals() {
         Wedding weddingOne = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
         Wedding weddingTwo = new WeddingBuilder().withWeddingName("Alice Tan & Bob Lee").build();
