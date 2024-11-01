@@ -185,8 +185,9 @@ Here is a reference table that briefly summarizes available commands:
 | `list`      | Displays all clients currently stored in the system.   |
 | `filter`    | Filters clients based on specified criteria            |
 | `view`      | Opens a split view showing detailed client information |
-| `close`     | Closes the split view of client details               |
+| `close`     | Closes the split view of client details                |
 | `clear`     | Deletes all clients from the system.                   |
+| `undo`      | Undoes latest command.                                 |
 | `help`      | Displays a list of available commands and their usage. |
 | `exit`      | Exits the AgentAssist application.                     |
 
@@ -726,8 +727,9 @@ Each credit card tier is visually distinguished in the UI: Gold is marked with a
 | **Edit Existing Client**   | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [rn/<NEW REMARK>] [ra/<APPEND REMARK>]` | `edit 69 n/ GORDON MOORE p/ 77337733 e/ gmoore_new@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ added info` |
 | **List All Clients**       | `list`                                                                                                                       | `list`                                                                                                    |
 | **Filter Client List**     | `filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/<INCOME>]`                     | `filter n/ GORDON MOORE j/ doctor t/ gold`                                                                |
-| **View Client Details**    | `view <INDEX>`                                                                                                              | `view 1`                                                                                                  |
+| **View Client Details**    | `view <INDEX>`                                                                                                               | `view 1`                                                                                                  |
 | **Close Client Details**   | `close`                                                                                                                      | `close`                                                                                                   |
 | **View Help**              | `help`                                                                                                                       | `help`                                                                                                    |
+| **Undo Command**           | `undo`                                                                                                                       | `undo`                                                                                                    |
 | **Exit Application**       | `exit`                                                                                                                       | `exit`                                                                                                    |
 | **Clear All Data**         | `clear`                                                                                                                      | `clear`                                                                                                   |

@@ -18,6 +18,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -85,6 +86,9 @@ public class AgentAssistParser {
 
         case CloseCommand.COMMAND_WORD:
             return new CloseCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

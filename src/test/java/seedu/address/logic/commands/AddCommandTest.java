@@ -150,6 +150,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void undoCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPreviousCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }

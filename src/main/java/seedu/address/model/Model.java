@@ -77,6 +77,16 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Undos previous command by setting currentAddressBook to historyAddressBook.
+     */
+    void undoCommand();
+
+    /**
+     * Returns true if a command has been executed before.
+     */
+    boolean hasPreviousCommand();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
