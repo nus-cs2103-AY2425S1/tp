@@ -129,8 +129,16 @@
     -fx-border-radius: 10px;
 }
 
-.list-cell:filled:selected {
+.list-cell:filled:selected #cardPane {
     -fx-background-color: #d1eaff;
+}
+
+.list-cell:filled {
+    -fx-background-color: #f9f9f9;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #f9f9f9;
 }
 
 .list-cell .label {
