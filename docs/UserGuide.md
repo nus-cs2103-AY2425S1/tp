@@ -166,7 +166,7 @@ Examples:
 Format: `add n/NAME sp/SPORT v/Venue [pa/PARTICIPANTS]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An event can have zero or more particpants.
+An event can have zero or more participants.
 Note that the participants must be valid persons in the database.
 </div>
 
@@ -176,7 +176,19 @@ Examples:
 
 ### Edits an event in the database.
 
-... _Details coming soon ..._
+Format: `edit INDEX [n/NAME] [sp/SPORT] [v/VENUE] [pa/PARTICIPANTS]…​`
+
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing participants, the existing participants of the events will be removed i.e adding of participants is not cumulative.
+* You can remove all the event's participants by typing `pa/` without
+  specifying any participants after it.
+
+Examples:
+*  `edit 1 n/200m sprint` Edits the name of the event to be `200m sprint`.
+*  `edit 2 sp/Basketball Women r/` Edits the sport of the event to be `Basketball Women` and clears all existing participants.
 
 ### Deletes an event from the database.
 
