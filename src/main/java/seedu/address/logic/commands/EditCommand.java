@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.ModelManager.isArchivedList;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -89,7 +88,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        isArchivedList = false;
+        model.setIsArchivedList(false);
         model.setArchivedListMode(false);
         List<Person> lastShownList = model.getFilteredPersonList();
 

@@ -119,4 +119,14 @@ public interface Model {
      * Returns the current reminder property for binding to UI components.
      */
     StringProperty getCurrentReminderProperty();
+
+    /**
+     * Returns the isArchived boolean
+     */
+    boolean getIsArchivedList();
+
+    /**
+     * Sets the isArchived boolean
+     */
+    void setIsArchivedList(boolean value);
 }

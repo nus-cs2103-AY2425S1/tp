@@ -23,9 +23,9 @@ import seedu.address.model.person.ReminderManager;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
-    public static boolean isArchivedList = false;
-    private final BooleanProperty showingArchived = new SimpleBooleanProperty(false);
+    private static boolean isArchivedList = false;
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private final BooleanProperty showingArchived = new SimpleBooleanProperty(false);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -158,6 +158,13 @@ public class ModelManager implements Model {
         return showingArchived;
     }
 
+    public boolean getIsArchivedList() {
+        return isArchivedList;
+    }
+
+    public void setIsArchivedList(boolean value) {
+        isArchivedList = value;
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**

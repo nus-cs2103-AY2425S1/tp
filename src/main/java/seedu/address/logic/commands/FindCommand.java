@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.ModelManager.isArchivedList;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -31,7 +30,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        isArchivedList = false;
+        model.setIsArchivedList(false);
         model.setArchivedListMode(false);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
