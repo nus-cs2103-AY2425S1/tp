@@ -242,21 +242,21 @@ the constraints of each parameter when used in a command.
 > Ensure that all parameters adhere to the constraints mentioned below. 
 > Otherwise, the command will not be executed, and an error message will be displayed.
 
-| Parameter         | Definition                                                                                                 | Constraints                                                                                                                                                                                                                                                                          | Examples                                                                                                                           |
-|-------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`            | Name of the patient                                                                                        | - Only alphanumeric characters are allowed.<br> - Should not be blank. <br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of` | :white_check_mark: `John Doe`<br>:x: `$ally`                                                                                       |
-| `NRIC`            | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should not be blank. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter.                                                                                                                                       | :white_check_mark: `S1234567A` <br> :white_check_mark: `t1234567b` <br> :x: `1234567A`                                             |
-| `DOB`             | Date of birth (DOB) of the patient.                                                                        | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank. <br> - Cannot be a date in the future.                                                                                                                                                                           | :white_check_mark: `2002-12-12` <br> :x: `2002/11/32`                                                                              |
-| `GENDER`          | Gender of the patient.                                                                                     | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). <br> - Should not be blank                                                                                                                                                                              | :white_check_mark: `m`<br>:white_check_mark: `F`<br>:x: `Male`                                                                     |
-| `EMAIL`           | Email address of the patient.                                                                              | - Should be in the format `local-part@domain`. <br> - Should not be blank.                                                                                                                                                                                                           | :white_check_mark: `raj@gmail.com`<br>:x: `raj@gmail`                                                                              |
-| `ADDRESS`         | Address of the patient.                                                                                    | - Any value is allowed. <br> - Should not be blank.                                                                                                                                                                                                                                  | :white_check_mark: `Orchard Road, Block 124, #02-01`                                                                               |
-| `PHONE_NUMBER`    | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed.                                                                                                                                         | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
-| `ALLERGY`         | Allergy of the patient.                                                                                    | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank.                                                                                                                                                                   | :white_check_mark: `Peanuts`<br>:x: `Pe@nuts`                                                                                      |
-| `PRIORITY`        | Priority of the patient.                                                                                   | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. <br> - Should not be blank.                                                                                                                                                                        | :white_check_mark: `NONE` <br> :white_check_mark: `high` <br> :x: `Highpriority`                                                   |
-| `CONDITION`       | Medical Condition of the patient.                                                                          | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. <br> - Should not be blank.                                                                                                                                                          | :white_check_mark: `High Blood Pressure` <br> :x: `@high-bp` <br>:x: `abcde fghijklmnopqrstuvwxyzabcde`                            |
-| `DATE`            | Appointment date of the patient.                                                                           | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank.                                                                                                                                                                                                                  | :white_check_mark: `2024-10-27` <br> :x: `2022/10/27`                                                                              |
-| `TIME`            | Appointment time of the patient.                                                                           | - Must be in the HHMM format (24-hour clock). <br> - Must be in interval. <br> - Time format should be (start time - end time) where start time < end time. <br> - The start time should not equal the end time. <br> - Should not be blank.                                         | :white_check_mark: `0900-1100` <br> :white_check_mark: `1400-1600` <br> :x: `0900-0900` <br> :x: `1400-1300`                       |
-| `APPOINTMENTNAME` | Description of the appointment with the patient.                                                           | - Must be less than 30 characters. <br> - Only alphanumeric characters are allowed. <br> - Should not be blank                                                                                                                                                                       | :white_check_mark: `Dental` <br> :white_check_mark: `FollowUp1` <br> :x: `Follow-up#1` <br> :x: `abcde fghijklmnopqrstuvwxyzabcde` |
+| Parameter          | Definition                                                                                                 | Constraints                                                                                                                                                                                                                                                                          | Examples                                                                                                                           |
+|--------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`             | Name of the patient                                                                                        | - Only alphanumeric characters are allowed.<br> - Should not be blank. <br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of` | :white_check_mark: `John Doe`<br>:x: `$ally`                                                                                       |
+| `NRIC`             | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should not be blank. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter.                                                                                                                                       | :white_check_mark: `S1234567A` <br> :white_check_mark: `t1234567b` <br> :x: `1234567A`                                             |
+| `DOB`              | Date of birth (DOB) of the patient.                                                                        | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank. <br> - Cannot be a date in the future.                                                                                                                                                                           | :white_check_mark: `2002-12-12` <br> :x: `2002/11/32`                                                                              |
+| `GENDER`           | Gender of the patient.                                                                                     | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). <br> - Should not be blank                                                                                                                                                                              | :white_check_mark: `m`<br> :white_check_mark: `F`<br> :x: `Male`                                                                   |
+| `EMAIL`            | Email address of the patient.                                                                              | - Should be in the format `local-part@domain`. <br> - Should not be blank.                                                                                                                                                                                                           | :white_check_mark: `raj@gmail.com`<br>:x: `raj@gmail`                                                                              |
+| `ADDRESS`          | Address of the patient.                                                                                    | - Any value is allowed. <br> - Should not be blank.                                                                                                                                                                                                                                  | :white_check_mark: `Orchard Road, Block 124, #02-01`                                                                               |
+| `PHONE_NUMBER`     | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed.                                                                                                                                         | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
+| `ALLERGY`          | Allergy of the patient.                                                                                    | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank.                                                                                                                                                                   | :white_check_mark: `Peanuts`<br>:x: `Pe@nuts`                                                                                      |
+| `PRIORITY`         | Priority of the patient.                                                                                   | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. <br> - Should not be blank.                                                                                                                                                                        | :white_check_mark: `NONE` <br> :white_check_mark: `high` <br> :x: `Highpriority`                                                   |
+| `CONDITION`        | Medical Condition of the patient.                                                                          | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. <br> - Should not be blank.                                                                                                                                                          | :white_check_mark: `High Blood Pressure` <br> :x: `@high-bp` <br>:x: `abcde fghijklmnopqrstuvwxyzabcde`                            |
+| `APPOINTMENT_DATE` | Appointment date of the patient.                                                                           | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank.                                                                                                                                                                                                                  | :white_check_mark: `2024-10-27` <br> :x: `2022/10/27` <br> :x: `2024-02-31`                                                        |
+| `APPOINTMENT_TIME` | Appointment time of the patient.                                                                           | - Must be in the format `HHMM-HHMM` (24-hour clock interval). <br> - Time format should be (start time - end time) with start time earlier than end time. <br> - Start and end times should not equal. <br> - Should not be blank.                                                   | :white_check_mark: `0900-1100` <br> :white_check_mark: `2330-2359` <br> :x: `0900-0900` <br> :x: `1400-1300` <br> :x: `2200-0000`  |
+| `APPOINTMENT_NAME` | Description of the appointment with the patient.                                                           | - Must be less than 30 characters. <br> - Only alphanumeric characters are allowed. <br> - Should not be blank                                                                                                                                                                       | :white_check_mark: `Dental` <br> :white_check_mark: `FollowUp1` <br> :x: `Follow-up#1` <br> :x: `abcde fghijklmnopqrstuvwxyzabcde` |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -373,15 +373,23 @@ to `91234567` and `johndoe@example.com` respectively.
 
 Allow doctors to schedule an appointment with a patient.
 
-Format: `addAppt APPOINTMENTNAME i/NRIC @d/DATE @t/TIME`
+Format: `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 >
 > * Adds Appointment Time and Appointment Name to the patient with the specified `NRIC` in MediBase3.
-> * Appointment time intervals cannot overlap with other existing appointment time intervals.
 > * You can schedule an appointment to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been added.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+
+
+{: .alert .alert-warning}
+> :exclamation: **Caution:**
+>
+> * For each patient, appointment time intervals cannot overlap with other existing appointment time intervals.
+> * Earliest valid appointment time is `0000`, and latest is `2359`.
+> * Appointments cannot span beyond date boundaries
+
 
 Example:
 * `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` will schedule an appointment for the patient with NRIC `S1234567A` on `2024-10-27`, from `1100` to `1200` titled `Dental`. 
@@ -391,6 +399,27 @@ Example:
 >
 > * Adding a new appointment will update the Appointment List Panel on the right with the new appointment details.
 > * Appointment List Panel is displayed in chronological order.
+> * Appointment names need not be unique.
+> * Different patients may have overlapping appointment timings, as long as overlapping appointments are not from  
+> the same patient 
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> Input two new appointments to represent any appointments that span across date boundaries. 
+> * Input the first ending at `2359`: e.g. `addAppt Transfusion i/S1234567A @d/2024-10-23 @t/2200-2359`; and
+> * Input the next starting on the following date at `0000`: e.g. `addAppt Transfusion i/S1234567A @d/2024-10-24 @t/0000-0100`.
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> Appointment end timings are **exclusive** - the next appointment can start immediately after the previous.
+>
+> If the time period of _Appointment A_ is `1200-1300`:
+> * the time period of _Appointment B_ can be `1300-1400`.
+> * the time period of _Appointment B_ can be `1300-1400`.
+> * _Appointment B_'s time period **cannot** start anywhere from `1200` to `1259`.
+> * _Appointment B_'s time period **cannot** end anywhere from `1201` to `1300`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -398,12 +427,12 @@ Example:
 
 Allow doctors to delete an appointment. 
 
-Format: `delAppt i/NRIC @d/DATE @t/TIME`
+Format: `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 > 
-> * Unlike addAppt, there is no need for AppointmentName preamble.
+> * Unlike addAppt, there is no need for `APPOINTMENT_NAME` preamble.
 > * Deletes Appointment from the patient with the specified `NRIC` in MediBase3.
 > * You can delete an appointment from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been deleted.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
@@ -816,12 +845,12 @@ This means that your machine is running Java version 17.0.11, which means that J
 |------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`                     | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
 | **AddAllergy**   | `addAllergy i/NRIC al/ALLERGY…`                                                         | `addAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
-| **AddAppt**      | `addAppt APPOINTMENTNAME i/NRIC @d/DATE @t/TIME`                                        | `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200`                                                        |
+| **AddAppt**      | `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`               | `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200`                                                        |
 | **AddMedCon**    | `addMedCon i/NRIC c/CONDITION...`                                                       | `addMedCon i/S1234567A c/High Blood Pressure`                                                                  |
 | **Clear**        | `clear`                                                                                 | -                                                                                                              |
 | **Delete**       | `delete NRIC`                                                                           | `delete S1234567A`                                                                                             |
 | **DelAllergy**   | `delAllergy i/NRIC al/ALLERGY…`                                                         | `delAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
-| **DelAppt**      | `delAppt i/NRIC @d/DATE @t/TIME`                                                        | `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200`                                                               |
+| **DelAppt**      | `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`                                | `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200`                                                               |
 | **DelMedCon**    | `delMedCon i/NRIC c/CONDITION...`                                                       | `delMedCon i/S1234567A c/High Blood Pressure`                                                                  |
 | **Edit**         | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
 | **Find**         | `find KEYWORD [MORE_KEYWORDS]`                                                          | `find James Jake`                                                                                              |
