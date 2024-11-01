@@ -38,7 +38,6 @@ public class DeleteGroupCommandTest {
                 groupToDelete.getGroupName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addGroup(groupToDelete); // Add the group to the expected model
         expectedModel.deleteGroup(groupToDelete);
 
         assertCommandSuccess(deleteGroupCommand, model, expectedMessage, expectedModel);
