@@ -3,15 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.filteredappointment.FilteredAppointment.APPOINTMENT_COMPARATOR;
 
-import java.util.List;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.filteredappointment.FilteredAppointment;
-import seedu.address.model.patient.Appt;
-import seedu.address.model.patient.Patient;
 
 /**
  * Filters the patients based on their appointment dates and health services.
@@ -24,8 +22,7 @@ public class FilterCommand extends Command {
             + "appointment dates and health services\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
-    public static final String MESSAGE_SUCCESS = "List of patients sorted based on their appointment dates\n"
-            + "Input \"home\" to return to home page";
+    public static final String RETURN_TO_HOME = "\nInput \"home\" to return to home page";
 
     private final AppointmentDateFilter dateFilter;
 
@@ -37,18 +34,24 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        TreeSet<FilteredAppointment> filteredAppts = new TreeSet<>(APPOINTMENT_COMPARATOR);
+        TreeSet<FilteredAppointment> filteredAppts = model.getFilteredPatientList().stream()
+                .flatMap(patient -> patient.getAppts().stream()
+                        .filter(appt -> appt.isBetweenDatesAndMatchService(dateFilter))
+                        .map(appt -> new FilteredAppointment(appt, patient)))
+                .collect(Collectors.toCollection(() -> new TreeSet<>(APPOINTMENT_COMPARATOR)));
 
-        List<Patient> patientList = model.getFilteredPatientList();
-        for (Patient patient : patientList) {
-            for (Appt appt : patient.getAppts()) {
-                if (appt.isBetweenDatesAndMatchService(dateFilter)) {
-                    FilteredAppointment filteredAppt = new FilteredAppointment(appt, patient);
-                    filteredAppts.add(filteredAppt);
-                }
-            }
-        }
         model.setFilteredAppts(filteredAppts);
-        return new CommandResult(MESSAGE_SUCCESS, "appts");
+
+        int patientsFiltered = filteredAppts.size();
+        String patientLabel = patientsFiltered == 1 ? "patient" : "patients";
+
+        String msg = patientsFiltered + " " + patientLabel + " found " + dateFilter;
+        if (patientsFiltered == 0) {
+            msg = "No " + patientLabel + " found " + dateFilter;
+        }
+
+        msg += RETURN_TO_HOME;
+
+        return new CommandResult(msg, "appts");
     }
 }
