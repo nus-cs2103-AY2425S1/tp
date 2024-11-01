@@ -866,9 +866,12 @@ For all use cases below, unless specified otherwise,
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Reasonable system**: A system with an OS matching the criteria above, with parts with a release date maximum 10 years from the current date
 * **Standard resolutions**: 1920x1080 and 1080x720
+* **Patient**: A person with details such as name, phone number, email, address, and status
+* **Appointment**: A scheduled meeting between a patient and the user, with details such as date, time, sickness, and medicine
+* **User**: The person using the application
+* **CLI**: Command Line Interface
 
 <br>
 
