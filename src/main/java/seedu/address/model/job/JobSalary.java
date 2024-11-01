@@ -8,15 +8,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class JobSalary {
     public static final String MESSAGE_CONSTRAINTS =
-            "Job salary should only contain numbers, and it should not be blank";
+            "Job salary should only contain numeric characters, be more than zero, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Digit}][\\p{Digit}]*";
+    public static final String VALIDATION_REGEX = "[1-9][\\p{Digit}]*";
 
-    public final int value;
+    public final String value;
 
     /**
      * Constructs a {@code JobSalary}.
@@ -26,7 +26,7 @@ public class JobSalary {
     public JobSalary(String salary) {
         requireNonNull(salary);
         checkArgument(isValidSalary(salary), MESSAGE_CONSTRAINTS);
-        value = Integer.parseInt(salary);
+        value = salary;
     }
 
     /**
@@ -48,7 +48,7 @@ public class JobSalary {
         }
 
         JobSalary otherSalary = (JobSalary) other;
-        return value == otherSalary.value;
+        return value.equals(otherSalary.value);
     }
 
     @Override
