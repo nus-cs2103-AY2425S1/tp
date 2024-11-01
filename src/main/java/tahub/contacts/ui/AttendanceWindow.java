@@ -9,7 +9,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-
 import tahub.contacts.commons.core.LogsCenter;
 import tahub.contacts.logic.Logic;
 import tahub.contacts.model.course.AttendanceSession;

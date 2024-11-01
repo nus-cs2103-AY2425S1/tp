@@ -7,8 +7,8 @@ import tahub.contacts.model.course.AttendanceSession;
 /**
  * A custom JavaFX ListCell implementation that displays attendance session information
  * with visual indicators for present/absent status.
- * This class extends {@link ListCell<AttendanceSession>} to provide a specialized cell
- * representation for attendance sessions in a ListView. Each cell displays the attendance
+ * This class extends to provide a specialized cell representation for attendance sessions
+ * in a ListView. Each cell displays the attendance
  * status with a colored label and an appropriate symbol (✓ for present, ✗ for absent).
  */
 public class AttendanceListCell extends ListCell<AttendanceSession> {
@@ -24,8 +24,6 @@ public class AttendanceListCell extends ListCell<AttendanceSession> {
      * @param session The AttendanceSession object to be displayed in the cell.
      *               Can be null if the cell is empty.
      * @param empty A boolean flag indicating whether the cell is empty.
-     *
-     * @see AttendanceSession#getIsSessionAttended()
      */
     @Override
     protected void updateItem(AttendanceSession session, boolean empty) {
