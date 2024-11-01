@@ -12,23 +12,25 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Shows the full view for a person with all of their information.
+ * Toggles the card status of a person to either show all of their information,
+ * or only an abridged version of it.
  */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows all information about the person identified by the index number in the displayed person list.\n"
+            + ": Toggles the amount of information shown about the person "
+            + "identified by the index number in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_SUCCESS = "Showing information for %1$s.";
+    public static final String MESSAGE_VIEW_SUCCESS = "Toggling the view of %1$s.";
 
     private final Index index;
 
     /**
-     * Creates a ViewCommand to view all information on a specified {@code Person}.
+     * Creates a ViewCommand to toggle the view on a specified {@code Person}.
      */
     public ViewCommand(Index index) {
         requireAllNonNull(index);
@@ -37,8 +39,10 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Filters the displayed {@code ObservableList} in the {@code Model} to just the selected index.
-     * Returns a {@code CommandResult} that indicates the user has requested to View a person.
+     * Checks that the selected index is valid and within
+     * the range of the {@code ObservableList} in the {@code Model}.
+     * Returns a {@code CommandResult} that indicates the user
+     * has requested to toggle the view of a person at the given {@code Index}.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -50,11 +54,9 @@ public class ViewCommand extends Command {
         }
 
         Person personToView = lastShownList.get(index.getZeroBased());
-        model.updateFilteredPersonList(person -> person.isSamePerson(personToView));
-
         String commandResultMessage = String.format(MESSAGE_VIEW_SUCCESS, Messages.format(personToView));
 
-        return new CommandResult(commandResultMessage, true, false, false);
+        return new CommandResult(commandResultMessage, index, false, false);
     }
 
     @Override
