@@ -13,8 +13,7 @@ public enum CommandKeywords {
     edit,
     exit,
     filter,
-    find,
-    list,
+    home,
     view;
 
     /**

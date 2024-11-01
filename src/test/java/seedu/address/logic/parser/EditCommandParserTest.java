@@ -375,17 +375,4 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(
                 PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX));
     }
-
-    /*
-    @Test
-    public void parse_resetHealthServices_success() {
-        Nric targetNric = new Nric("T0123456A");
-        String userInput = targetNric + HEALTHSERVICE_EMPTY;
-
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().build();
-        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-    */
 }
