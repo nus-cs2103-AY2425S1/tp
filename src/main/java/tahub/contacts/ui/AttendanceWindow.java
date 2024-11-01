@@ -11,7 +11,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import tahub.contacts.commons.core.LogsCenter;
+
 import tahub.contacts.logic.Logic;
+
 import tahub.contacts.model.course.AttendanceSession;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
