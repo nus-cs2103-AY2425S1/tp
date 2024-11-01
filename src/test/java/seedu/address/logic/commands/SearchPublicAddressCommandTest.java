@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PUBLIC_ADDRES
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PUBLIC_ADDRESS_TOO_LONG;
 import static seedu.address.logic.commands.CommandTestUtil.PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_SUB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -115,10 +115,10 @@ public class SearchPublicAddressCommandTest {
     @Test
     public void equals() {
         final SearchPublicAddressCommand standardCommand =
-            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH);
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH_MAIN);
         // same values -> returns true
         SearchPublicAddressCommand commandWithSameValues =
-            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH);
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH_MAIN);
         assertEquals(standardCommand, commandWithSameValues);
         // same object -> returns true
         assertEquals(standardCommand, standardCommand);

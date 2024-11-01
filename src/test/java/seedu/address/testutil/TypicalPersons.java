@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK_BTC_NOT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_SUB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_SUB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -40,7 +40,7 @@ public class TypicalPersons {
     public static final PublicAddress BTC_NOT_IN_ADDRESS_BOOK_ADDRESS =
         new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK_BTC_NOT, "Sub wallet");
     public static final PublicAddress ETH_ADDRESS =
-        new EthAddress(VALID_PUBLIC_ADDRESS_ETH, "Main wallet");
+        new EthAddress(VALID_PUBLIC_ADDRESS_ETH_MAIN, "Main wallet");
     public static final PublicAddress SOL_MAIN_ADDRESS =
         new SolAddress(VALID_PUBLIC_ADDRESS_SOL_MAIN, "Main wallet");
 

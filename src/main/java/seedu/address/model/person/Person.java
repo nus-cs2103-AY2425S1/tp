@@ -114,7 +114,7 @@ public class Person {
      * @return A new {@code Person} object with the updated public address
      */
     public Person withUpdatedPublicAddress(PublicAddress newPublicAddress) {
-        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.add(newPublicAddress);
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.copyAndAdd(newPublicAddress);
         return new Person(name, phone, email, address, updatedPublicAddresses, tags);
     }
 

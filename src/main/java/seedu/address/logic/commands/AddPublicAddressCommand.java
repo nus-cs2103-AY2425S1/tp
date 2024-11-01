@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
@@ -69,14 +68,13 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
             editPersonDescriptor.getPublicAddresses().orElse(new PublicAddressesComposition());
 
         PublicAddress publicAddress = addedPublicAddresses.getAnyPublicAddress();
-        Network network = publicAddress.getNetwork();
 
         if (currentPublicAddresses.containsPublicAddressStringAmongAllNetworks(publicAddress)) {
             throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
-                updatedName, publicAddress, network));
+                updatedName, publicAddress, publicAddress.getNetwork()));
         }
 
-        currentPublicAddresses.addPublicAddress(network, publicAddress);
+        currentPublicAddresses.addPublicAddress(publicAddress);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, currentPublicAddresses, updatedTags);
     }

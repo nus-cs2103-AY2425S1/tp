@@ -40,14 +40,14 @@ public class PublicAddressesComposition {
     /**
      * Adds a public address to the specified network. If the network does not exist, it is created.
      *
-     * @param network       The network to which the public address belongs.
      * @param publicAddress The public address to be added.
      */
-    public void addPublicAddress(Network network, PublicAddress publicAddress) {
-        assert network != null;
+    public void addPublicAddress(PublicAddress publicAddress) {
         assert publicAddress != null;
-        publicAddresses.computeIfAbsent(network, k -> new HashSet<>());
-        publicAddresses.get(network).add(publicAddress);
+        assert publicAddress.getNetwork() != null;
+
+        publicAddresses.computeIfAbsent(publicAddress.getNetwork(), k -> new HashSet<>());
+        publicAddresses.get(publicAddress.getNetwork()).add(publicAddress);
     }
 
     /**
@@ -129,6 +129,8 @@ public class PublicAddressesComposition {
      * @return A new PublicAddressesComposition containing the filtered public addresses.
      */
     public PublicAddressesComposition filterByPublicAddress(String publicAddressString) {
+        assert publicAddressString != null;
+        assert !publicAddressString.isEmpty();
         Map<Network, Set<PublicAddress>> filteredPublicAddresses = publicAddresses.entrySet().stream()
             .map(entry -> {
                 Set<PublicAddress> filteredAddresses = entry.getValue().stream()
@@ -147,7 +149,7 @@ public class PublicAddressesComposition {
      * @param newPublicAddress The new public address to be added.
      * @return A new PublicAddressesComposition with the updated public addresses.
      */
-    public PublicAddressesComposition add(PublicAddress newPublicAddress) {
+    public PublicAddressesComposition copyAndAdd(PublicAddress newPublicAddress) {
         assert newPublicAddress != null;
         Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
             .map(entry -> {
@@ -160,6 +162,26 @@ public class PublicAddressesComposition {
             })
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         return new PublicAddressesComposition(updatedPublicAddresses);
+    }
+
+
+    /**
+     * Removes the specified public address from the composition.
+     *
+     * @param existingPublicAddress The public address to be removed.
+     */
+
+    public void remove(PublicAddress existingPublicAddress) {
+        assert existingPublicAddress != null;
+
+        publicAddresses.get(existingPublicAddress.getNetwork())
+            .stream().filter(pa -> pa.equals(existingPublicAddress)).findFirst()
+            .ifPresent(pa -> {
+                publicAddresses.get(existingPublicAddress.getNetwork()).remove(pa);
+                if (publicAddresses.get(existingPublicAddress.getNetwork()).isEmpty()) {
+                    publicAddresses.remove(existingPublicAddress.getNetwork());
+                }
+            });
     }
 
     /**
