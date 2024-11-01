@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLAIM;
@@ -25,6 +28,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClaimsCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePolicyCommand;
+import seedu.address.logic.commands.EditClaimCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditPolicyCommand;
@@ -36,6 +40,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
 import seedu.address.logic.commands.ListPoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.claim.ClaimStatus;
+import seedu.address.model.claim.EditClaimDescriptor;
 import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -132,6 +138,24 @@ public class AddressBookParserTest {
         EditPolicyDescriptor policy = new EditPolicyDescriptor(PolicyType.LIFE);
         policy.setPremiumAmount(new PremiumAmount(200));
         assertEquals(new EditPolicyCommand(INDEX_FIRST_PERSON, policy), command);
+    }
+
+    @Test
+    public void parseCommand_editClaim() throws Exception {
+        EditClaimCommand actualCommand = (EditClaimCommand) parser.parseCommand(
+                EditClaimCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " " + PREFIX_POLICY_TYPE + "health"
+                        + " " + PREFIX_CLAIM_INDEX + "1"
+                        + " " + PREFIX_CLAIM_STATUS + "approved"
+                        + " " + PREFIX_CLAIM_DESC + "Claim approved for payment");
+        EditClaimDescriptor claim = new EditClaimDescriptor();
+        claim.setStatus(ClaimStatus.APPROVED);
+        claim.setDescription("Claim approved for payment");
+        EditClaimCommand expectedCommand = new EditClaimCommand(INDEX_FIRST_PERSON, PolicyType.HEALTH,
+                INDEX_FIRST_CLAIM, claim);
+        assertEquals(expectedCommand, actualCommand);
+
+
     }
     @Test
     public void parseCommand_deletePolicy() throws Exception {

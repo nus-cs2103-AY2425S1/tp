@@ -19,30 +19,30 @@ import seedu.address.model.policy.PolicyType;
 import seedu.address.model.policy.PremiumAmount;
 
 /**
- * Updates an existing policy for a client in Prudy.
+ * Edits an existing policy for a client in Prudy.
  */
 public class EditPolicyCommand extends Command {
     public static final String COMMAND_WORD = "edit-policy";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy updated to:\n%2$s";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy edited to:\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
     public static final String MESSAGE_POLICY_NOT_FOUND = "Policy of specified type does not exist for client.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Updates the specified policy for the person identified "
+            + ": Edits the specified policy for the person identified "
             + "by the index number used in the last person listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + "pt/[POLICY_TYPE] pa/[PREMIUM_AMOUNT] ca/[COVERAGE_AMOUNT] ed/[EXPIRY_DATE]\n"
             + "Example: "
             + COMMAND_WORD
-            + " 1 pt/health pa/1500 ca/10000.50 ed/14/09/2024 "
-            + " (The last 3 fields are optional but one of them needs to be updated at all times)\n ";
-    public static final String MESSAGE_SUCCESS = "Updated Policy:\n\n%1$s";
+            + " 1 pt/health pa/1500 ca/10000.50 ed/09/14/2024 "
+            + " (The last 3 fields are optional but one of them needs to be edited at all times)\n ";
+    public static final String MESSAGE_SUCCESS = "Edited Policy:\n\n%1$s";
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;
 
     /**
      * Creates an UpdatePolicyCommand to update the specified {@code PolicyMap} of a client.
      *
-     * @param index   Index of the client in the filtered client list to update the policy.
+     * @param index   Index of the client in the filtered client list to edit the policy.
      * @param editPolicyDescriptor The new optional fields in policy to be set.
      */
     public EditPolicyCommand(Index index, EditPolicyDescriptor editPolicyDescriptor) {
