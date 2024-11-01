@@ -86,4 +86,21 @@ public class CloseClaimCommand extends Command {
             throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToCloseClaim)));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (other instanceof CloseClaimCommand) {
+            CloseClaimCommand otherCloseClaimCommand = (CloseClaimCommand) other;
+            return index.equals(otherCloseClaimCommand.index)
+                    && insuranceId == otherCloseClaimCommand.insuranceId
+                    && claimId.equals(otherCloseClaimCommand.claimId);
+        }
+
+        return false;
+    }
 }
