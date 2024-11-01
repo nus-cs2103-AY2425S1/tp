@@ -752,13 +752,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input's format.
 3. System validates the exam data.
 4. System adds the exam to every student currently in the system.
-5. System confirms the success by displaying a success message. Use case ends.
+5. System confirms the success by displaying a success message.
+   Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the exam name.
-    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces. Use case ends.
+    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.
+      Use case ends.
 * 3a. User tries to add an exam that already exists in the system.
-    * 3a1. System displays an error message telling the user that the exam already exists. Use case ends.
+    * 3a1. System displays an error message telling the user that the exam already exists.
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -777,17 +780,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input's format.
 3. System validates the exam data.
 4. System adds the exam score to the specified exam in the student's profile.
-5. System confirms the success by displaying a success message. Use case ends.
+5. System confirms the success by displaying a success message.
+   Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the exam name.
-    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces. Use case ends.
+    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.
+      Use case ends.
 * 2b. User enters invalid characters in the exam score.
-    * 2b1. System displays an error message asking for valid exam score format, an integer between 0 and 100. Use case ends.
+    * 2b1. System displays an error message asking for valid exam score format, an integer between 0 and 100.
+      Use case ends.
 * 3a. User tries to add a score to an exam that does not exist.
-    * 3a1. System displays an error message notifying that the exam does not exist in the system. Use case ends.
+    * 3a1. System displays an error message notifying that the exam does not exist in the system.
+      Use case ends.
 * 3b. User tries to add a score to a student that does not exist.
-    * 3b1. System displays an error message notifying that the student does not exist in the system. Use case ends.
+    * 3b1. System displays an error message notifying that the student does not exist in the system.
+      Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC14 Delete a Submission**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the submission is deleted from all students currently in the system.
+* If an invalid submission name is given as input, an error message is displayed.
+
+**MSS**
+1. User gives the command to delete submission in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the submission data.
+4. System deletes the submission from every student currently in the system.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the submission name.
+    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
+      Use case ends.
+* 3a. User tries to delete a submission that does not exist in the system.
+    * 3a1. System displays an error message telling the user that the submission does not exist.
+      Use case ends.
+
 
 ### Non-Functional Requirements
 

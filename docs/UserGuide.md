@@ -239,7 +239,7 @@ Examples:
 
 ### Adding a Submission : `addSubmission`
 
-Adds a submission to every person in the address book.
+Adds a submission to every student in the address book.
 
 Format: `addSubmission sm/SUBMISSION_NAME`
 
@@ -255,7 +255,7 @@ Examples:
 
 ### Adding a Submission Status: `addSubmissionStatus`
 
-Adds a submission status for the specified submission for the person at the specified index.
+Adds a submission status for the specified submission for the student at the specified index.
 
 Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
 
@@ -267,6 +267,18 @@ Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
 Examples:
 * `addSubmissionStatus 1 sm/Assignment 1 ss/Y`
 * `addSubmissionStatus 1 sm/Tutorial 2 ss/NIL`
+
+### Deleting a Submission : `deleteSubmission`
+
+Deletes the specified submission from every student in the address book.
+
+Format: `deleteSubmission sm/SUBMISSION_NAME`
+
+* The submission name can only contain alphanumeric characters and spaces.
+* The submission name is case-sensitive. e.g. "Assignment 1" will be treated differently from "assignment 1".
+
+Examples:
+* `deleteSubmission sm/Assignment 1`
 
 ### Sorting the list : `sort`
 
@@ -336,20 +348,21 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                           | Format, Examples                                                                                                                                                                                               |
-|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                           | Format, Examples                                                                                                                                                                                                   |
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/SEX r/REGISTER_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/1A s/M r/1 t/friend t/colleague` |
-| **Clear**                        | `clear`                                                                                                                                                                                                        |
-| **Delete**                       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                            |
-| **Edit**                         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                    |
-| **Filter**                       | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`<br> e.g., `filter n/James p/90332234`                                       |
-| **List**                         | `list`                                                                                                                                                                                                         |
-| **Help**                         | `help`                                                                                                                                                                                                         |
-| **Add Emergency Contact Name**   | `addEcName INDEX [en/EMERGENCY CONTACT NAME]` <br> e.g., `addEcName 1 en/John Doe`                                                                                                                             |
-| **Add Emergency Contact Number** | `EcNumber INDEX [ep/EMERGENCY_CONTACT_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`                                                                                                                              |
-| **AddExam**                      | `addExam ex/EXAMNAME` <br> e.g., `addExam ex/Midterm`                                                                                                                                                          |
-| **AddExamScore**                 | `addExamScore INDEX ex/EXAMNAME sc/SCORE` <br> e.g., `addExamScore 1 ex/Midterm sc/70`                                                                                                                         |
-| **Add Attendance**               | `addAttendance INDEX ad/[DATE] ar/[REASON]`<br> e.g., `addAttendance 1 ad/24-09-2024 ar/Sick`                                                                                                                  |
-| **AddSubmission**                | `addSubmission sm/SUBMISSION_NAME` <br> e.g., `addSubmission sm/Assignment 1`                                                                                                                                  |
-| **AddSubmissionStatus**          | `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS` <br> e.g., `addSubmissionStatus 1 sm/Assignment 1 ss/Y`                                                                                    |
-| **Sort**                         | `sort [ATTRIBUTE]` <br> e.g., `sort student class`                                                                                                                                                             
+| **Clear**                        | `clear`                                                                                                                                                                                                            |
+| **Delete**                       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                |
+| **Edit**                         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                        |
+| **Filter**                       | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`<br> e.g., `filter n/James p/90332234`                                           |
+| **List**                         | `list`                                                                                                                                                                                                             |
+| **Help**                         | `help`                                                                                                                                                                                                             |
+| **Add Emergency Contact Name**   | `addEcName INDEX [en/EMERGENCY CONTACT NAME]` <br> e.g., `addEcName 1 en/John Doe`                                                                                                                                 |
+| **Add Emergency Contact Number** | `EcNumber INDEX [ep/EMERGENCY_CONTACT_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`                                                                                                                                  |
+| **AddExam**                      | `addExam ex/EXAMNAME` <br> e.g., `addExam ex/Midterm`                                                                                                                                                              |
+| **AddExamScore**                 | `addExamScore INDEX ex/EXAMNAME sc/SCORE` <br> e.g., `addExamScore 1 ex/Midterm sc/70`                                                                                                                             |
+| **Add Attendance**               | `addAttendance INDEX ad/[DATE] ar/[REASON]`<br> e.g., `addAttendance 1 ad/24-09-2024 ar/Sick`                                                                                                                      |
+| **AddSubmission**                | `addSubmission sm/SUBMISSION_NAME` <br> e.g., `addSubmission sm/Assignment 1`                                                                                                                                      |
+| **AddSubmissionStatus**          | `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS` <br> e.g., `addSubmissionStatus 1 sm/Assignment 1 ss/Y`                                                                                        |
+| **DeleteSubmission**             | `deleteSubmission sm/SUBMISSION_NAME` <br> e.g., `deleteSubmission sm/Assignment 1`                                                                                                                                |
+| **Sort**                         | `sort [ATTRIBUTE]` <br> e.g., `sort student class`                                                                                                                                                                 |

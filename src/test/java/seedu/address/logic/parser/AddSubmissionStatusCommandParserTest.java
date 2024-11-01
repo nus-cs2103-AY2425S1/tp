@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBMISSION_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.SUBMISSION_DESC_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.SUBMISSION_STATUS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBMISSION_ASSIGNMENT_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBMISSION_STATUS_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.submission.Submission.STATUS_MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,7 @@ public class AddSubmissionStatusCommandParserTest {
     }
 
     @Test
-    public void parse_invalidParams_failure() {
+    public void parse_missingPrefix_failure() {
         // missing submission prefix
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + VALID_SUBMISSION_ASSIGNMENT_1
                 + SUBMISSION_STATUS_DESC_AMY,
@@ -37,5 +39,11 @@ public class AddSubmissionStatusCommandParserTest {
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + SUBMISSION_DESC_ASSIGNMENT
                 + VALID_SUBMISSION_STATUS_AMY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSubmissionStatusCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidParams_failure() {
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + SUBMISSION_DESC_ASSIGNMENT
+                + INVALID_SUBMISSION_STATUS_DESC, STATUS_MESSAGE_CONSTRAINTS);
     }
 }
