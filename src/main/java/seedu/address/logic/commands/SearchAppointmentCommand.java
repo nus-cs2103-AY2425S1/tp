@@ -24,7 +24,8 @@ public class SearchAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "search " + PREFIX_SEARCH_APPOINTMENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Searches for clients who have appointments on the specified date and time.\n"
+            + ": Searches for clients who have appointments on the specified date "
+            + "and time or within a specified date time range.\n"
             + "Parameters: DATE TIME (must be in yyyy-MM-dd HH:mm format)\n"
             + "Example: " + COMMAND_WORD + " 2023-12-31 14:30\n"
             + "Example: " + COMMAND_WORD + "2023-12-31 14:30 to 2024-01-01 16:00";

@@ -37,6 +37,13 @@ public class Messages {
     public static final String MESSAGE_START_DATETIME_AFTER_END_DATETIME = "Start date-time cannot be "
             + "after end date-time.";
     public static final String MESSAGE_SUCCESS_SEARCH_POLICY = "Listed all clients with policy: %s";
+    public static final String MESSAGE_MISSING_PREFIX_SEARCH = """
+            Search command cannot be empty.
+            The available prefixes are: b/, a/ or /p.
+            b/ : search for client's birthday given a specified/range date
+            a/ : search for client's appointment given a specified/range datetime
+            p/ : search for client's policy given a policy name
+            """;
 
     /**
      * Returns an error message indicating the duplicate prefixes.
