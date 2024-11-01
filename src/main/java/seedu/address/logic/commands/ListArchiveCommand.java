@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.model.Model;
-import seedu.address.ui.MainWindow;
 
+/**
+ * Lists out all clients that have been archived
+ */
 public class ListArchiveCommand extends Command {
     public static final String COMMAND_WORD = "archive-list";
     public static final String MESSAGE_SUCCESS = "Listed all archived persons";

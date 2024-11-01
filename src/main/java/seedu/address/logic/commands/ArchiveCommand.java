@@ -7,11 +7,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 
 import java.util.List;
 
+/**
+ * Archives a person
+ */
 public class ArchiveCommand extends Command {
     public static final String COMMAND_WORD = "archive";
 
@@ -21,6 +23,9 @@ public class ArchiveCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 ";
     public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Person: %1$s";
     private final Index index;
+    /**
+     * Creates an ArchiveCommand to add the Person at the specified {@code Index}
+     */
     public ArchiveCommand(Index index) {
         requireNonNull(index);
         this.index = index;
