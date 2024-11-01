@@ -10,6 +10,8 @@ import seedu.address.model.ModelManager;
 public class ExitSearchModeCommandTest {
     private ModelManager model = new ModelManager();
 
+
+
     @Test
     public void execute() {
         ExitSearchModeCommand command = new ExitSearchModeCommand();
@@ -32,5 +34,10 @@ public class ExitSearchModeCommandTest {
         assertEquals(command.equals(command), true);
     }
 
+    @Test
+    public void equals_diffObject_returnFalse() {
+        ExitSearchModeCommand command = new ExitSearchModeCommand();
+        assertEquals(command.equals(new Object()), false);
+    }
 
 }
