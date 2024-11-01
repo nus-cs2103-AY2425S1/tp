@@ -147,6 +147,32 @@ Examples:
 * `list_members` followed by `delete_member 2` deletes the 2nd member in the address book.
 * `find_members Betsy` followed by `delete_member 1` deletes the 1st member in the results of the `find` command.
 
+### Adding a Session: `add_session`
+
+Adds a session to the address book and associates it with specified members.
+
+Format: `add_session s/NAME d/DATE p/POINTS m/INDEX...`
+
+* Adds a session with the specified `NAME`, `DATE`, and `POINTS`.
+* The index (`INDEX`) refers to the index number shown in the displayed member list and **must be a positive integer** (1, 2, 3, …).
+* If one or more `INDEX` values are provided, the session will be associated with those members.
+
+Examples:
+* `list_members` followed by `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3` Adds a session named "Rehearsal" on 24 Oct 2024 worth 2 points, associated with the members at indexes 1 and 3 in the displayed list.
+
+### Deleting a Session: `delete_session`
+
+Deletes a session associated with one or more specified members in the address book.
+
+Format: `delete_session s/NAME m/INDEX...`
+
+* Deletes the session with the specified `NAME`.
+* The index (`INDEX`) refers to the index number shown in the displayed member list and **must be a positive integer** (1, 2, 3, …).
+* If one or more `INDEX` values are provided, the session will be deleted only for those members.
+
+#### Examples:
+* `list_members` followed by `delete_session s/Rehearsal m/1 m/3` Deletes the session named "Rehearsal" for the members at indexes 1 and 3 in the displayed list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
