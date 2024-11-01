@@ -79,11 +79,13 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING]...​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have either 0 or 1 role.
+**Tips:** 
+* A person can have either 0 or 1 role.
+* A person can have any number of wedding jobs (including 0).
 </box>
 
 Examples:
