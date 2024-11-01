@@ -1,9 +1,8 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -12,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.AllergyList;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
@@ -91,17 +91,17 @@ class JsonAdaptedPatient {
         sex = source.getSex().value;
         birthDate = source.getBirthdate().value;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress() == null ? "" : source.getAddress().value;
+        email = Optional.ofNullable(source.getEmail()).map(email -> email.value).orElse("");
+        address = Optional.ofNullable(source.getAddress()).map(address -> address.value).orElse("");
         allergies.addAll(source.getAllergies().stream()
                 .map(JsonAdaptedAllergy::new)
                 .collect(Collectors.toList()));
-        bloodType = source.getBloodType() == null ? "" : source.getBloodType().value;
-        healthRisk = source.getHealthRisk() == null ? "" : source.getHealthRisk().value;
-        existingCondition = source.getExistingCondition() == null ? "" : source.getExistingCondition().value;
-        note = source.getNote() == null ? "" : source.getNote().value;
-        nokName = source.getNokName() == null ? "" : source.getNokName().fullName;
-        nokPhone = source.getNokPhone() == null ? "" : source.getNokPhone().value;
+        bloodType = Optional.ofNullable(source.getBloodType()).map(bloodType -> bloodType.value).orElse("");
+        healthRisk = Optional.ofNullable(source.getHealthRisk()).map(healthRisk -> healthRisk.value).orElse("");
+        existingCondition = Optional.ofNullable(source.getExistingCondition()).map(ec -> ec.value).orElse("");
+        note = Optional.ofNullable(source.getNote()).map(note -> note.value).orElse("");
+        nokName = Optional.ofNullable(source.getNokName()).map(name -> name.fullName).orElse("");
+        nokPhone = Optional.ofNullable(source.getNokPhone()).map(phone -> phone.value).orElse("");
         appts.addAll(source.getAppts().stream()
                 .map(JsonAdaptedAppt::new)
                 .collect(Collectors.toList()));
@@ -161,7 +161,7 @@ class JsonAdaptedPatient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Email.class.getSimpleName()));
         }
-        final Email modelEmail = new Email(email);
+        final Email modelEmail = email.isEmpty() ? null : new Email(email);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -216,7 +216,16 @@ class JsonAdaptedPatient {
             modelAppts.addAppt(appt.toModelType());
         }
 
-        final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
+        final AllergyList modelAllergies = new AllergyList();
+
+        for (JsonAdaptedAllergy allergy : allergies) {
+            if (allergy == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Allergy.class.getSimpleName()));
+            }
+
+            modelAllergies.addAllergy(allergy.toModelType());
+        }
 
         return new Patient(modelName, modelNric, modelBirthDate, modelSex, modelPhone, modelEmail,
                 modelAddress, modelAllergies, modelBloodType, modelHealthRisk, modelExistingCondition, modelNote,

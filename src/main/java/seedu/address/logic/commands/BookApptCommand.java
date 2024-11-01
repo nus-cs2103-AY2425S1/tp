@@ -23,8 +23,8 @@ public class BookApptCommand extends Command {
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
     public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date and time";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records appointment times for registered patients "
-            + "into the system\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records appointments under a specified health service "
+            + " for registered patients\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
     private final Appt appt;

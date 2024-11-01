@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -17,7 +18,7 @@ import seedu.address.testutil.PatientBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddFCommandIntegrationTest {
 
     private Model model;
 
@@ -27,7 +28,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPatient_success() {
+    public void execute_newPatient_success() throws CommandException {
         Patient validPatient = new PatientBuilder().build();
 
         Model expectedModel = new ModelManager(model.getClinicConnectSystem(), new UserPrefs());
@@ -35,13 +36,15 @@ public class AddCommandIntegrationTest {
         CommandResult expectedCommandResult =
                 new CommandResult(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
                         null, false, validPatient, false, false);
-        assertCommandSuccess(new AddCommand(validPatient), model, expectedCommandResult, expectedModel);
+
+
+        assertCommandSuccess(new AddFCommand(validPatient), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_duplicatePatient_throwsCommandException() {
         Patient patientInList = model.getClinicConnectSystem().getPatientList().get(0);
-        assertCommandFailure(new AddCommand(patientInList), model,
+        assertCommandFailure(new AddFCommand(patientInList), model,
                 AddCommand.MESSAGE_DUPLICATE_PATIENT);
     }
 

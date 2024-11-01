@@ -1,12 +1,8 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.AllergyList;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
@@ -20,7 +16,6 @@ import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
-
 
 /**
  * A utility class to help with building Patient objects.
@@ -41,7 +36,7 @@ public class PatientBuilder {
     public static final String DEFAULT_NOTE = "Requires special care";
     public static final String DEFAULT_NOKNAME = "Tay Bee";
     public static final String DEFAULT_NOKPHONE = "90184718";
-    public static final String DEFAULT_APPOINTMENT = "2001-12-10 14:30";
+    public static final String DEFAULT_APPOINTMENT = "2001-12-10 T 14:30";
 
     private Name name;
     private Phone phone;
@@ -50,7 +45,7 @@ public class PatientBuilder {
     private Birthdate birthdate;
     private Sex sex;
     private Address address;
-    private Set<Allergy> allergies;
+    private AllergyList allergies;
     private BloodType bloodType;
     private HealthRisk healthRisk;
     private ExistingCondition existingCondition;
@@ -72,8 +67,7 @@ public class PatientBuilder {
         nric = new Nric(DEFAULT_NRIC);
         birthdate = new Birthdate(DEFAULT_BIRTHDATE);
         sex = new Sex(DEFAULT_SEX);
-        allergies = new HashSet<>();
-
+        allergies = new AllergyList();
         bloodType = new BloodType(DEFAULT_BLOODTYPE);
         healthRisk = new HealthRisk(DEFAULT_HEALTHRISK);
         existingCondition = new ExistingCondition(DEFAULT_EXISTINGCONDITION);
@@ -94,7 +88,6 @@ public class PatientBuilder {
         nric = patientToCopy.getNric();
         birthdate = patientToCopy.getBirthdate();
         sex = patientToCopy.getSex();
-        allergies = patientToCopy.getAllergies();
         bloodType = patientToCopy.getBloodType();
         healthRisk = patientToCopy.getHealthRisk();
         existingCondition = patientToCopy.getExistingCondition();
@@ -103,6 +96,9 @@ public class PatientBuilder {
         nokPhone = patientToCopy.getNokPhone();
         for (Appt appt: patientToCopy.getAppts()) {
             appts.addAppt(new Appt(appt.getDateTime(), appt.getHealthService()));
+        }
+        for (Allergy allergy : patientToCopy.getAllergies()) {
+            allergies.addAllergy(allergy);
         }
     }
 
@@ -166,7 +162,7 @@ public class PatientBuilder {
      * Sets the {@code Allergy} of the {@code Patient} that we are building.
      */
     public PatientBuilder withAllergy(String allergy) {
-        this.allergies.add(new Allergy(allergy));
+        this.allergies.addAllergy(new Allergy(allergy));
         return this;
     }
 
@@ -216,19 +212,6 @@ public class PatientBuilder {
     public PatientBuilder withNokPhone(String nokPhone) {
         this.nokPhone = new Phone(nokPhone);
         return this;
-    }
-
-    /**
-     * Adds a {@code Appt} of the {@code Patient} that we are building
-     */
-    public PatientBuilder withAppts(String dateTime, String healthService) {
-        try {
-            Appt appt = ParserUtil.parseSingleAppt(dateTime, healthService);
-            this.appts.addAppt(appt);
-            return this;
-        } catch (ParseException e) {
-            return this;
-        }
     }
 
     /**
