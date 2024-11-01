@@ -253,6 +253,12 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseHour_overflow_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseHour(Double.toString(Double.MAX_VALUE + 1)));
+    }
+
+
+    @Test
     public void parseSchedule_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseSchedule((String) null));
     }
@@ -263,7 +269,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSchedule_validValueWithourWhitespace_returnsSchedule() throws Exception {
+    public void parseSchedule_validValueWithoutWhitespace_returnsSchedule() throws Exception {
         Schedule expectedSchedule = ParserUtil.parseSchedule(VALID_SCHEDULE);
         assertEquals(expectedSchedule, ParserUtil.parseSchedule(VALID_SCHEDULE));
     }

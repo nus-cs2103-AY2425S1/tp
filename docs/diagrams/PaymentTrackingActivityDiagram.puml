@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User conducted a lesson;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user receives a payment])
+    if () then ([student pays for today's lesson])
+    :User executes pay command;
+    else ([student pays for tuition fee owed])
+    :User executes settle command;
+    :UGTeach updates the total
+    amount that the student owes;
+    endif
+    :UGTeach updates the total
+    amount paid by the student;
+else ([student owes the user])
+    :User executes owe command;
+    :UGTeach updates the total
+    amount that the student owes;
+endif
+stop
+@enduml
