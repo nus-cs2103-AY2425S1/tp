@@ -100,14 +100,13 @@ public class EditCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        long clashes = model.checkClashes(editedStudent);
         List<Student> clashingStudents = model.getClashingStudents(editedStudent);
-        if (clashes == 0) {
+        if (clashingStudents.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
         } else {
             return new CommandResult(
                     String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent))
-                    + Messages.getWarningMessageForClashes(clashes, clashingStudents)
+                    + Messages.getWarningMessageForClashes(clashingStudents.size(), clashingStudents)
             );
         }
 

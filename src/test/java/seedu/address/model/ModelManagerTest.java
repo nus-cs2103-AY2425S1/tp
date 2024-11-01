@@ -7,7 +7,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
-import static seedu.address.testutil.TypicalStudents.BOB;
 import static seedu.address.testutil.TypicalStudents.HOON;
 
 import java.nio.file.Path;
@@ -94,23 +93,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void countClashes_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.checkClashes(null));
-    }
-
-    @Test
-    public void checkClashes_noClashes_returnsZero() {
-        modelManager.addStudent(ALICE);
-        assertEquals(modelManager.checkClashes(BOB), 0);
-    }
-
-    @Test
-    public void checkClashes_someClashes_returnsCorrectCount() {
-        modelManager.addStudent(ALICE);
-        assertEquals(modelManager.checkClashes(HOON), 1);
-    }
-
-    @Test
     public void getClashingStudents_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.getClashingStudents(null));
     }
@@ -127,6 +109,28 @@ public class ModelManagerTest {
         ArrayList<Student> testList = new ArrayList<>();
         testList.add(ALICE);
         assertEquals(modelManager.getClashingStudents(HOON), testList);
+    }
+
+    @Test
+    public void getTotalPaidAmount_nullStudent_returnZeroPaidAmount() {
+        assertEquals(modelManager.getTotalPaidAmount(), 0);
+    }
+
+    @Test
+    public void getTotalPaidAmount_someStudents_returnCorrectTotalPaidAmount() {
+        modelManager.addStudent(ALICE);
+        assertEquals(modelManager.getTotalPaidAmount(), ALICE.getPaidAmountValue());
+    }
+
+    @Test
+    public void getTotalOwedAmount_nullStudent_returnZeroPaidAmount() {
+        assertEquals(modelManager.getTotalOwedAmount(), 0);
+    }
+
+    @Test
+    public void getTotalOwedAmount_someStudents_returnCorrectTotalPaidAmount() {
+        modelManager.addStudent(ALICE);
+        assertEquals(modelManager.getTotalOwedAmount(), ALICE.getOwedAmountValue());
     }
 
     @Test

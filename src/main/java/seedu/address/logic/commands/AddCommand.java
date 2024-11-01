@@ -45,7 +45,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SCHEDULE + "Sunday-1000-1200 "
             + PREFIX_SUBJECT + "Biology "
-            + PREFIX_RATE + "3000 "
+            + PREFIX_RATE + "900 "
             + PREFIX_PAID_AMOUNT + "6000 "
             + PREFIX_OWED_AMOUNT + "3000 ";
 
@@ -72,14 +72,13 @@ public class AddCommand extends Command {
 
         model.addStudent(toAdd);
 
-        long clashes = model.checkClashes(toAdd);
         List<Student> clashingStudents = model.getClashingStudents(toAdd);
-        if (clashes == 0) {
+        if (clashingStudents.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else {
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
-                    + Messages.getWarningMessageForClashes(clashes, clashingStudents)
+                    + Messages.getWarningMessageForClashes(clashingStudents.size(), clashingStudents)
             );
         }
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.student.Student;
@@ -15,19 +16,17 @@ public class IncomeCommandTest {
     @Test
     public void execute_emptyAddressBook_noPaidAmountNoOwedAmount() {
         CommandResult commandResult = new IncomeCommand().execute(model);
-        assertEquals(commandResult.getFeedbackToUser(), "Total PaidAmount: 0.0   Total OwedAmount: 0.0");
+        assertEquals(commandResult.getFeedbackToUser(), Messages.getIncomeMessage(0, 0));
     }
 
     @Test
-    public void execute_addStudent_showUpdatedPaidAndOwed() {
+    public void execute_addStudent_showUpdatedPaidAmountAndOwedAmount() {
         Student validStudent = new StudentBuilder().build();
         model.addStudent(validStudent);
         CommandResult commandResult = new IncomeCommand().execute(model);
 
-        String expectedOutput = "Total PaidAmount: " + validStudent.getPaidAmount().value
-                + "   Total OwedAmount: " + validStudent.getOwedAmount().value;
-
-        assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
+        assertEquals(commandResult.getFeedbackToUser(), Messages.getIncomeMessage(validStudent.getPaidAmountValue(),
+                validStudent.getOwedAmountValue()));
 
 
     }

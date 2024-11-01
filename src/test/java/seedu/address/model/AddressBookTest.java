@@ -82,23 +82,6 @@ public class AddressBookTest {
     }
 
     @Test
-    public void countClashes_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.countClashes(null));
-    }
-
-    @Test
-    public void countClashes_noClashes_returnsZero() {
-        addressBook.addStudent(ALICE);
-        assertEquals(addressBook.countClashes(BOB), 0);
-    }
-
-    @Test
-    public void countClashes_someClashes_returnsCorrectCount() {
-        addressBook.addStudent(ALICE);
-        assertEquals(addressBook.countClashes(HOON), 1);
-    }
-
-    @Test
     public void getClashingStudents_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.getClashingStudents(null));
     }
