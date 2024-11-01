@@ -13,8 +13,8 @@ Class ModelManager
 Class UserPrefs
 Class PianoPiece
 Class RegularLesson
-Class CancelledLessons
-Class MakeupLessons
+Class CancelledLesson
+Class MakeupLesson
 
 Class UniqueStudentList
 Class Student
@@ -44,10 +44,10 @@ Student *--> Name
 Student *--> Phone
 Student *--> Address
 Student *--> Group
-Student *--> PianoPiece
-Student *--> RegularLesson
-Student *--> CancelledLessons
-Student *--> MakeupLessons
+Student *--> "*" PianoPiece
+Student *--> "0..1"RegularLesson
+Student *--> "*" CancelledLesson
+Student *--> "*" MakeupLesson
 
 
 Student -[hidden]up--> I
