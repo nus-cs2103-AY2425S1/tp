@@ -74,16 +74,22 @@ public class CommandBox extends UiPart<Region> {
      */
     private void handleTextChanged(String commandText) {
         commandTextAutocomplete.setText("");
+        if (commandText.isEmpty() || commandText.contains(" ")) {
+            return;
+        }
 
-        if (commandText.isEmpty() || commandText.contains(" ")) return;
         String[] commandWords = commandText.split("\\s+");
+        if (commandWords.length != 1) {
+            return;
+        }
 
-        if (commandWords.length != 1) return;
         String commandName = commandWords[0];
-
         Optional<String> possibleCommandName = commandCompleter.completeCommand(commandName);
 
-        if (possibleCommandName.isEmpty()) return;
+        if (possibleCommandName.isEmpty()) {
+            return;
+        }
+        
         commandTextAutocomplete.setText(possibleCommandName.get());
     }
 
