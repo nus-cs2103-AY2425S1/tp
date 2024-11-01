@@ -3,7 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DUPLICATED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LIST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LIST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
@@ -55,6 +59,32 @@ public class ArchiveCommandTest {
         AddressBookParser.setInspect(false);
         assertCommandSuccess(archiveCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_outOfBoundIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        List<Index> outOfBoundIndexList = new ArrayList<>();
+        outOfBoundIndexList.add(outOfBoundIndex);
+        ArchiveCommand archiveCommand = new ArchiveCommand(outOfBoundIndexList);
+        String expectedErrorMessage = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                outOfBoundIndex.getOneBased());
+
+        assertCommandFailure(archiveCommand, model, expectedErrorMessage);
+    }
+
+    @Test
+    public void execute_duplicateIndexUnfilteredList_throwsCommandException() {
+        List<Index> duplicatedList = new ArrayList<>();
+        duplicatedList.add(INDEX_FIRST);
+        duplicatedList.add(INDEX_FIRST);
+        ArchiveCommand archiveCommand = new ArchiveCommand(duplicatedList);
+
+        String expectedErrorMessage = String.format(MESSAGE_INVALID_DUPLICATED_INDEX,
+                INDEX_FIRST.getOneBased());
+
+        assertCommandFailure(archiveCommand, model, expectedErrorMessage);
+    }
+
     //
     //@Test
     //public void execute_validSingleIndexUnfilteredDeliveryList_success() {

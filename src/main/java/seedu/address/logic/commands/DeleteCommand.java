@@ -108,12 +108,22 @@ public class DeleteCommand extends Command {
     private void validateIndexes(int listSize, List<Index> indexList, boolean isPersonIndex) throws CommandException {
         boolean duplicate = hasDuplicates(indexList);
         for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= listSize || duplicate) {
+            if (targetIndex.getZeroBased() >= listSize) {
                 if (isPersonIndex) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                    throw new CommandException(
+                            String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                                    targetIndex.getOneBased()));
                 } else {
-                    throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+                    throw new CommandException(
+                            String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                                    targetIndex.getOneBased()));
                 }
+            }
+
+            if (duplicate) {
+                throw new CommandException(
+                        String.format(Messages.MESSAGE_INVALID_DUPLICATED_INDEX,
+                                targetIndex.getOneBased()));
             }
         }
     }
