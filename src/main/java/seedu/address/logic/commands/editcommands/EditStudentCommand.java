@@ -23,6 +23,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
+import seedu.address.model.group.Group;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -91,6 +92,12 @@ public class EditStudentCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.setPerson(studentToEdit, editedStudent);
+        if (studentToEdit.getGroupName().isPresent()) {
+            Group originalStudentGroup = model.getGroupByName(studentToEdit.getGroupName().get());
+            originalStudentGroup.delete(studentToEdit);
+            model.addPersonToGroup(editedStudent, originalStudentGroup);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent)));
     }
