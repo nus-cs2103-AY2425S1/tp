@@ -25,4 +25,12 @@ public class ExitSearchModeCommandTest {
         ExitSearchModeCommand command = new ExitSearchModeCommand();
         assertEquals(command, new ExitSearchModeCommand());
     }
+
+    @Test
+    public void equals_sameObject_returnTrue() {
+        ExitSearchModeCommand command = new ExitSearchModeCommand();
+        assertEquals(command.equals(command), true);
+    }
+
+
 }
