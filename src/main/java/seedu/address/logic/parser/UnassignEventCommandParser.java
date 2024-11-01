@@ -7,11 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.UnassignEventCommand;
 import seedu.address.logic.commands.UnassignEventByPersonIndexEventIndexCommand;
 import seedu.address.logic.commands.UnassignEventByPersonIndexEventNameCommand;
 import seedu.address.logic.commands.UnassignEventByPersonNameEventIndexCommand;
 import seedu.address.logic.commands.UnassignEventByPersonNameEventNameCommand;
+import seedu.address.logic.commands.UnassignEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
@@ -51,7 +51,7 @@ public class UnassignEventCommandParser implements Parser<UnassignEventCommand> 
             return parsePersonNameEventName(personArgs, eventArgs);
         }
     }
-    
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -65,7 +65,8 @@ public class UnassignEventCommandParser implements Parser<UnassignEventCommand> 
      * and returns a {@code UnassignEventByPersonIndexEventIndexCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    private UnassignEventByPersonIndexEventIndexCommand parsePersonIndexEventIndex(String personArgs, String eventArgs) throws ParseException {
+    private UnassignEventByPersonIndexEventIndexCommand parsePersonIndexEventIndex(
+        String personArgs, String eventArgs) throws ParseException {
         try {
             Index personIndex = ParserUtil.parseIndex(personArgs);
             Index eventIndex = ParserUtil.parseIndex(eventArgs);
@@ -81,7 +82,8 @@ public class UnassignEventCommandParser implements Parser<UnassignEventCommand> 
      * and returns a {@code UnassignEventByPersonNameEventNameCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    private UnassignEventByPersonNameEventNameCommand parsePersonNameEventName(String personArgs, String eventArgs) throws ParseException {
+    private UnassignEventByPersonNameEventNameCommand parsePersonNameEventName(
+        String personArgs, String eventArgs) throws ParseException {
         try {
             Name personName = ParserUtil.parseName(personArgs);
             EventName eventName = ParserUtil.parseEventName(eventArgs);
@@ -97,7 +99,8 @@ public class UnassignEventCommandParser implements Parser<UnassignEventCommand> 
      * and returns a {@code UnassignEventByPersonIndexEventNameCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    private UnassignEventByPersonIndexEventNameCommand parsePersonIndexEventName(String personArgs, String eventArgs) throws ParseException {
+    private UnassignEventByPersonIndexEventNameCommand parsePersonIndexEventName(
+        String personArgs, String eventArgs) throws ParseException {
         try {
             Index personIndex = ParserUtil.parseIndex(personArgs);
             EventName eventName = ParserUtil.parseEventName(eventArgs);
@@ -113,7 +116,8 @@ public class UnassignEventCommandParser implements Parser<UnassignEventCommand> 
      * and returns a {@code UnassignEventByPersonNameEventIndexCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    private UnassignEventByPersonNameEventIndexCommand parsePersonNameEventIndex(String personArgs, String eventArgs) throws ParseException {
+    private UnassignEventByPersonNameEventIndexCommand parsePersonNameEventIndex(
+        String personArgs, String eventArgs) throws ParseException {
         try {
             Name personName = ParserUtil.parseName(personArgs);
             Index eventIndex = ParserUtil.parseIndex(eventArgs);
