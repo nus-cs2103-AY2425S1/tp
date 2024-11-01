@@ -24,7 +24,6 @@ public class InspectCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_INSPECT_SUCCESS = "Inspected person: %1$s";
-    public static final String MESSAGE_INSPECT_INVALID = "Inspected person: %1$s";
     private final Index index;
 
     /**
