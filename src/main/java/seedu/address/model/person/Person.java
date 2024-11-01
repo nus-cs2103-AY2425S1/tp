@@ -194,7 +194,6 @@ public class Person {
                 return true;
             }
         }
-        //return sellingProperties.contains(property);
         return false;
     }
 

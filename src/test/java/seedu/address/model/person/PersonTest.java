@@ -12,6 +12,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -131,13 +133,6 @@ public class PersonTest {
                 new Price("1500000"), ALICE.getTags());
         assertFalse(ALICE.containsBuyProperty(property));
     }
-    /*@Test
-    public void addBuyPropertyMethod() {
-        Apartment property = new Apartment(new PostalCode("123456"), new UnitNumber("10-65"),
-                new Price("1500000"), ALICE.getTags());
-        ALICE.addBuyProperty(property);
-        assertTrue(ALICE.containsBuyProperty(property));
-    }*/
     @Test
     public void isSamePersonMethod() {
         assertTrue(ALICE.isSamePerson(ALICE));
@@ -153,5 +148,10 @@ public class PersonTest {
     @Test
     public void hashCodeMethod2() {
         assertEquals(ALICE.hashCode(), ALICE.hashCode());
+    }
+    @Test
+    public void containSellPropertyTest() {
+        assertFalse(ALICE.containsSellProperty(new Apartment(new PostalCode("123456"), new UnitNumber("10-65"),
+                new Price("1500000"), ALICE.getTags()), new ArrayList<>()));
     }
 }
