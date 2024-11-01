@@ -117,6 +117,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.remove(group);
     }
 
+    /**
+     * Removes {@code Group} with name {@code groupName} from the groups in this {@code AddressBook}.
+     */
+    public void removeGroup(String groupName) throws GroupNotFoundException {
+        Group group = getGroup(groupName);
+        removeGroup(group);
+    }
+
     public void setGroup(Group oldGroup, Group newGroup) throws GroupNotFoundException, DuplicateGroupException {
         groups.setGroup(oldGroup, newGroup);
     }
