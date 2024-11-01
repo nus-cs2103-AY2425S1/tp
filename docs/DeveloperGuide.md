@@ -407,28 +407,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-Data Requirements
+**Data Requirements**
 1. Size: The system should support storage for up to 500 guests and 50 vendors per wedding. Data size should not exceed 10 MB for each wedding event.
 1. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
 1. Persistency: All guest, vendor, and event information must be saved persistently in a text file and remain accessible even after system shutdown or failure.
 1. Backup Frequency: Automatic backups of data should be created whenever the application is closed.
 
-Environment Requirements
+**Environment Requirements**
 1. Operating System: The system must be compatible with Windows, macOS, and Linux operating systems.
 1. Dependencies: Java 17 should be the core language.
 
-Accessibility
+**Accessibility**
 1. Provide command-line help documentation that can be accessed at any time with a simple command (help).
 
-Capacity
+**Capacity**
 1. The system should be able to handle data storage for up to 100 simultaneous weddings, each containing up to 500 guests and 50 vendors.
 
-Fault Tolerance
+**Fault Tolerance**
 
 1. The system should handle errors such as missing commands or invalid input gracefully, providing clear error messages without causing system crashes.
 1. Ensure that invalid input (e.g., incorrect phone format) does not result in data corruption.
 
-Performance Requirements
+**Performance Requirements**
 
 1. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors.
 1. Backup operations must complete within five seconds for a wedding list of up to 500 entries.
