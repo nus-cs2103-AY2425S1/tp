@@ -24,22 +24,22 @@ public class SortCommandTest {
 
     @Test
     public void execute_nameAscendingOrder_success() {
-        executeSuccessfulSortTest(PersonComparator.NAME, true, modelDescendingName);
+        executeSuccessfulSortTest(PersonComparator.NAME, true, modelAscendingDateOfLastVisit);
     }
 
     @Test
     public void execute_nameDescendingOrder_success() {
-        executeSuccessfulSortTest(PersonComparator.NAME, false, modelAscendingName);
+        executeSuccessfulSortTest(PersonComparator.NAME, false, modelDescendingDateOfLastVisit);
     }
 
     @Test
     public void execute_dateOfLastVisitAscending_success() {
-        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, true, modelAscendingDateOfLastVisit);
+        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, true, modelDescendingName);
     }
 
     @Test
     public void execute_dateOfLastVisitDescending_success() {
-        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, false, modelDescendingDateOfLastVisit);
+        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, false, modelAscendingName);
     }
 
     private void executeSuccessfulSortTest(String sortParameter, boolean isAscending, Model model) {
