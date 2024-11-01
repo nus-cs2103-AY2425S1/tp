@@ -13,7 +13,9 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
-
+   1. Go to [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
+   2. Download the appropriate installer for your operating system.
+   3. Run the installer and follow the instructions to install Java.
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for ContactMate.
@@ -26,13 +28,13 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all elderly.
 
-   * `add i/S5087089H n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7 t/wheelchairUser t/livingAlone` : Adds a contact named `John Doe` to ContactMate.
+   * `add i/S5087089H n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7 t/wheelchairUser t/livingAlone` : Adds an elderly named `John Doe` to ContactMate.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd elderly shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all elderly.
 
    * `exit` : Exits the app.
 
@@ -79,8 +81,8 @@ Adds an elderly to ContactMate.
 
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CALL_FREQUENCY [t/TAG]…​`
 
-* The call frequency is measured in days and must be a positive integer less than or equal to 7 (e.g. 1, 2, ..., 7)
-* `NRIC` must be a valid, government issued NRIC.
+* The parameters must adhere to the constraints specified in the [Elderly Fields](#elderly-fields) section.
+* The elderly will be added with a default call history, consisting of one call on the current date with no notes.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An elderly can have any number of tags (including 0)
@@ -102,9 +104,10 @@ Edits an existing elderly in ContactMate.
 
 Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CALL_FREQUENCY] [t/TAG]…​`
 
-* Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list. The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
-* Both `NRIC`'s must be a valid, government issued NRIC.
-* The `NRIC` used to select the elderly to edit must exist in the person list.
+* Edits the elderly at the specified `INDEX` or `NRIC`. 
+* The index refers to the index number shown in the displayed person list. The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
+* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the person list.
+* The parameters must adhere to the constraints specified in the [Elderly Fields](#elderly-fields) section.
 * At least one of the optional fields must be provided.
 * The existing values will be replaced with the new input values.
 * When editing tags, the existing tags of the elderly will be removed i.e adding of tags is not cumulative.
@@ -144,8 +147,7 @@ Format: `delete INDEX/NRIC`
 * Deletes the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
 * The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
-* `NRIC` must be a valid, government issued NRIC.
-* The `NRIC` used to select the elderly to delete must exist in the person list.
+* The `NRIC` used to select the elderly to delete must be a valid, government issued NRIC and must exist in the person list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd elderly in ContactMate.
@@ -163,8 +165,7 @@ Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
 * Marks the person at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list. The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
-* `NRIC` must be a valid, government issued NRIC.
-* The `NRIC` used to select the elderly to mark must exist in the person list.
+* The `NRIC` used to select the elderly to mark must be a valid, government issued NRIC and must exist in the person list.
 * The date must be in the format `YYYY-MM-DD` and must not be a future date.
 * If the parameter `d/DATE` is not provided, the current date will be used.
 
@@ -182,8 +183,7 @@ Format: `history INDEX/NRIC`
 * Shows the call history of the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
 * The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
-* `NRIC` must be a valid, government issued NRIC.
-* The `NRIC` used to select the elderly must exist in the person list.
+* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the person list.
 
 Examples:
 * `list` followed by `history 2` shows the call history of the 2nd elderly in ContactMate.
@@ -205,6 +205,20 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### Elderly Fields
+
+Field | Description                                                                                                                                        | Constraints, Examples
+--------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------
+**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Valid, government issued NRIC. e.g., `S1803269D`
+**Name** | Name of the elderly.                                                                                                                               | Any word consisting only of alphabets, numbers or spaces. e.g., `John Doe`, `Alice`, `Bob`
+**Phone Number** | Phone number of the elderly.                                                                                                                       | Any number, 3 digits or longer. e.g., `98765432`, `91234567`
+**Email** | Email address of the elderly.                                                                                                                      | Any valid email address. e.g., `bob@gmail.com`
+**Address** | Address of the elderly.                                                                                                                            | Any non-blank word. e.g., `311, Clementi Ave 2, #02-25`, `Blk 30 Geylang Street 28, #06-48`
+**Call Frequency** | Frequency of calls to the elderly in days.                                                                                                         | A positive integer less than or equal to 7. e.g., `1` ... `7`
+**Tags** | Tags associated with the elderly.                                                                                                                  | Any word consisting only of alphabets and numbers. e.g., `wheelchairUser`, `fallrisk`, `livingAlone`
+**Call History** | List of dates the elderly was called and any notes associated with the call.                                                                      | Dates in the format `YYYY-MM-DD` and notes in any format.
+**Next Contact Date** | **Calculated** based on the most recent call and the call frequency, with this formula: `Next Contact Date = Recent Contact Date + Call Frequency` | N.A.
 
 ### Navigating the Command History
 You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys.
