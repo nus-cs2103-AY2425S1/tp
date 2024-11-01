@@ -54,7 +54,7 @@ public class ContainsKeywordsPredicate implements Predicate<Contact> {
                 .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getStudentStatus().value, keyword));
         boolean containsRoleKeywords = roleKeywords.stream()
                 .allMatch(keyword -> contact.getRoles().stream()
-                        .anyMatch(role -> StringUtil.containsIgnoreCase(role.roleName, keyword)));
+                        .anyMatch(role -> role.roleName.equals(keyword)));
         boolean containsNicknameKeywords = nicknameKeywords.stream()
                 .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getNickname().value, keyword));
         return containsNameKeywords && containsTelegramHandleKeywords && containsEmailKeywords

@@ -46,10 +46,26 @@ public class ContainsKeywordsPredicateBuilder {
     }
 
     /**
+     * Sets the {@code nameKeywords} of the {@code ContainsKeywordsPredicate} that we are building.
+     */
+    public ContainsKeywordsPredicateBuilder withNameKeywords(List<String> nameKeywords) {
+        this.nameKeywords = nameKeywords;
+        return this;
+    }
+
+    /**
      * Sets the {@code telegramHandleKeywords} of the {@code ContainsKeywordsPredicate} that we are building.
      */
     public ContainsKeywordsPredicateBuilder withTelegramHandleKeywords(String ... telegramHandleKeywords) {
         this.telegramHandleKeywords = Arrays.asList(telegramHandleKeywords);
+        return this;
+    }
+
+    /**
+     * Sets the {@code telegramHandleKeywords} of the {@code ContainsKeywordsPredicate} that we are building.
+     */
+    public ContainsKeywordsPredicateBuilder withTelegramHandleKeywords(List<String> telegramHandleKeywords) {
+        this.telegramHandleKeywords = telegramHandleKeywords;
         return this;
     }
 
@@ -62,10 +78,26 @@ public class ContainsKeywordsPredicateBuilder {
     }
 
     /**
+     * Sets the {@code emailKeywords} of the {@code ContainsKeywordsPredicate} that we are building.
+     */
+    public ContainsKeywordsPredicateBuilder withEmailKeywords(List<String> emailKeywords) {
+        this.emailKeywords = emailKeywords;
+        return this;
+    }
+
+    /**
      * Sets the {@code studentStatusKeywords} of the {@code ContainsKeywordsPredicate} that we are building.
      */
     public ContainsKeywordsPredicateBuilder withStudentStatusKeywords(String ... studentStatusKeywords) {
         this.studentStatusKeywords = Arrays.asList(studentStatusKeywords);
+        return this;
+    }
+
+    /**
+     * Sets the {@code studentStatusKeywords} of the {@code ContainsKeywordsPredicate} that we are building.
+     */
+    public ContainsKeywordsPredicateBuilder withStudentStatusKeywords(List<String> studentStatusKeywords) {
+        this.studentStatusKeywords = studentStatusKeywords;
         return this;
     }
 
@@ -78,10 +110,26 @@ public class ContainsKeywordsPredicateBuilder {
     }
 
     /**
+     * Sets the {@code roleKeywords} of the {@code ContainsKeywordsPredicate} that we are building.
+     */
+    public ContainsKeywordsPredicateBuilder withRoleKeywords(List<String> roleKeywords) {
+        this.roleKeywords = roleKeywords;
+        return this;
+    }
+
+    /**
      * Sets the {@code nicknameKeywords} of the {@code ContainsKeywordsPredicate} that we are building.
      */
     public ContainsKeywordsPredicateBuilder withNicknameKeywords(String ... nicknameKeywords) {
         this.nicknameKeywords = Arrays.asList(nicknameKeywords);
+        return this;
+    }
+
+    /**
+     * Sets the {@code nicknameKeywords} of the {@code ContainsKeywordsPredicate} that we are building.
+     */
+    public ContainsKeywordsPredicateBuilder withNicknameKeywords(List<String> nicknameKeywords) {
+        this.nicknameKeywords = nicknameKeywords;
         return this;
     }
 

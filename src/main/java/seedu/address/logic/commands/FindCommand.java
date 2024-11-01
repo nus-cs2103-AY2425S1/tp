@@ -30,11 +30,11 @@ public class FindCommand extends Command {
             + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE KEYWORDS] "
             + "[" + PREFIX_EMAIL + "EMAIL KEYWORDS] "
             + "[" + PREFIX_STUDENT_STATUS + "STUDENT STATUS KEYWORDS] "
-            + "[" + PREFIX_ROLE + "ROLE KEYWORDS]"
+            + "[" + PREFIX_ROLE + "ROLE KEYWORDS]... "
             + "[" + PREFIX_NICKNAME + "NICKNAME KEYWORDS]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "alice bob charlie "
-            + PREFIX_ROLE + "pres admin";
+            + PREFIX_ROLE + "President " + PREFIX_ROLE + "Admin";
 
     private final Predicate<Contact> predicate;
 
