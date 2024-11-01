@@ -22,16 +22,16 @@ class JsonSerializableAcademyAssist {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-    private final int studentCount;
+    private final int idGeneratedCount;
 
     /**
      * Constructs a {@code JsonSerializableAcademyAssist} with the given persons.
      */
     @JsonCreator
     public JsonSerializableAcademyAssist(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                         @JsonProperty("student_count") int studentCount) {
+                                         @JsonProperty("id_generated_count") int idGeneratedCount) {
         this.persons.addAll(persons);
-        this.studentCount = studentCount;
+        this.idGeneratedCount = idGeneratedCount;
     }
 
     /**
@@ -41,7 +41,7 @@ class JsonSerializableAcademyAssist {
      */
     public JsonSerializableAcademyAssist(ReadOnlyAcademyAssist source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        studentCount = source.getStudentCount();
+        idGeneratedCount = source.getIdGeneratedCount();
     }
 
     /**
@@ -58,7 +58,7 @@ class JsonSerializableAcademyAssist {
             }
             academyAssist.addPerson(person);
         }
-        academyAssist.setStudentCount(studentCount);
+        academyAssist.setIdGeneratedCount(idGeneratedCount);
         return academyAssist;
     }
 

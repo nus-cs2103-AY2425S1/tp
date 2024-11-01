@@ -107,8 +107,8 @@ public class Person {
     /**
      * Returns a new {@code Person} with student ID assigned.
      */
-    public Person assignStudentId(int studentCount) {
-        StudentId idToAssign = StudentId.generateNewStudentId(studentCount);
+    public Person assignStudentId(int idGeneratedCount) {
+        StudentId idToAssign = StudentId.generateNewStudentId(idGeneratedCount);
 
         // Return a new Person object with student ID assigned
         return new Person(this.name, this.phone, this.email, this.address, this.ic, this.yearGroup, idToAssign,

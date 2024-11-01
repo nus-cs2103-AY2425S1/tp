@@ -75,14 +75,12 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        FilteredList<Person> filteredPersonList = new FilteredList<>(model.getFilteredPersonList());
-        filteredPersonList.setPredicate(new StudentIdMatchesPredicate(studentId));
 
-        if (filteredPersonList.isEmpty()) {
+        if (!model.hasPersonWithStudentId(studentId)) {
             throw new CommandException(Messages.MESSAGE_NO_STUDENT_FOUND);
         }
 
-        Person personToEdit = filteredPersonList.get(0);
+        Person personToEdit = model.getPersonWithStudentId(studentId);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         boolean hasIcModified = !personToEdit.getIc().equals(editedPerson.getIc());

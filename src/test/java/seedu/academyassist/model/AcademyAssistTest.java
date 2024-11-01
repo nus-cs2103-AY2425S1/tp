@@ -102,7 +102,7 @@ public class AcademyAssistTest {
         }
 
         @Override
-        public int getStudentCount() {
+        public int getIdGeneratedCount() {
             return 0;
         }
     }

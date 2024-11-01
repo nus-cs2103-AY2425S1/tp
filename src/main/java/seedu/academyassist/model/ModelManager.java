@@ -163,13 +163,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void incrementStudentCount() {
-        academyAssist.incrementStudentCount();
+    public void incrementIdGeneratedCount() {
+        academyAssist.incrementIdGeneratedCount();
     }
 
     @Override
-    public int getStudentCount() {
-        return academyAssist.getStudentCount();
+    public int getIdGeneratedCount() {
+        return academyAssist.getIdGeneratedCount();
     }
 
     //=========== Filtered Person List Accessors =============================================================
