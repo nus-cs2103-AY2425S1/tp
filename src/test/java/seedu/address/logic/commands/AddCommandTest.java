@@ -208,6 +208,21 @@ public class AddCommandTest {
         public boolean checkAcceptableTagListSize(int additionalTags) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updatePreviousCommand(Command nextCommand) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Command getPreviousCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<Person> getCurrentPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -12,6 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -24,6 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons;
     private ObservableList<Tag> tagList;
+    private Command previousCommand;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -199,6 +203,23 @@ public class ModelManager implements Model {
     @Override
     public void updateTagList() {
         tagList = this.addressBook.getTagList();
+    }
+
+    @Override
+    public void updatePreviousCommand(Command nextCommand) {
+        this.previousCommand = nextCommand;
+    }
+
+    @Override
+    public Command getPreviousCommand() {
+        return this.previousCommand;
+    }
+
+    @Override
+    public Predicate<Person> getCurrentPredicate() {
+        @SuppressWarnings("unchecked")
+        Predicate<Person> result = (Predicate<Person>) filteredPersons.getPredicate();
+        return result;
     }
 
     @Override

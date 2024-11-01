@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -157,4 +158,10 @@ public interface Model {
      * Updates the tag list in the model.
      */
     void updateTagList();
+
+    void updatePreviousCommand(Command nextCommand);
+
+    Predicate<Person> getCurrentPredicate();
+
+    Command getPreviousCommand();
 }

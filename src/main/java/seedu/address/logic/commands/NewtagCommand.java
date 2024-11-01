@@ -13,7 +13,7 @@ import seedu.address.model.tag.TagList;
 /**
  * Adds a new predefined tag.
  */
-public class NewtagCommand extends Command {
+public class NewtagCommand extends Command implements UndoableCommand {
     public static final String COMMAND_WORD = "newtag";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Creates new tag(s) (case insensitive). Maximum of 50 alphanumeric characters, spaces, parenthesis "
@@ -56,6 +56,11 @@ public class NewtagCommand extends Command {
 
         String currentTags = MESSAGE_TAGLIST_PREFIX + model.getTagList();
         return new CommandResult(successMessage + currentTags);
+    }
+
+    @Override
+    public void undo(Model model) {
+        model.deleteTags(tags);
     }
 
     @Override
