@@ -12,9 +12,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SICKNESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
+import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 
 /**
@@ -28,7 +29,7 @@ public abstract class AddCommand extends Command {
             + "Parameters: "
             + "ENTITY_TYPE (person/appt) "
             + "DATA_FIELDS [MORE_DATA_FIELDS]... \n"
-            + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " "
+            + "Example: " + COMMAND_WORD + " " + PERSON_ENTITY_STRING + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -36,7 +37,7 @@ public abstract class AddCommand extends Command {
             + PREFIX_STATUS + "recovering "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney \n"
-            + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " "
+            + "Example: " + COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING + " "
             + PREFIX_APPOINTMENT_TYPE + "Check up "
             + PREFIX_DATETIME + "2024-10-16 12:30:30 "
             + PREFIX_PERSON_ID + "1 "
