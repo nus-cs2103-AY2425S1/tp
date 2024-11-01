@@ -171,42 +171,43 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedCampusConnect`. It extends `CampusConnect` with an undo/redo history, stored internally as an `CampusConnectStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedCampusConnect`. It extends `CampusConnect` with an undo/redo history, stored internally as an `histort` and `future`. Additionally, it implements the following operations:
 
-* `VersionedCampusConnect#commit()` — Saves the current address book state in its history.
-* `VersionedCampusConnect#undo()` — Restores the previous address book state from its history.
-* `VersionedCampusConnect#redo()` — Restores a previously undone address book state from its history.
+* `VersionedCampusConnect#saveCurrentData()` — Saves the current address book state in its future.
+*  `VersionedCampusConnect#saveOldData()` — Saves the current address book state in its history.
+* `VersionedCampusConnect#extractOldData()` — Restores the previous address book state from its history.
+* `VersionedCampusConnect#extractUndoneData()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitCampusConnect()`, `Model#undoCampusConnect()` and `Model#redoCampusConnect()` respectively.
+These operations are exposed in the `Model` interface as `Model#saveCurrentCampusConnect()`, `Model#undoCampusConnect()` and `Model#redoCampusConnect()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedCampusConnect` will be initialized with the initial CampusConnect state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedCampusConnect` will be initialized with two stacks.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitCampusConnect()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `campusConnectStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitCampusConnect()`, causing another modified address book state to be saved into the `campusConnectStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitCampusConnect()`, so the CampusConnect state will not be saved into the `campusConnectStateList`.
+**Note:** If a command fails its execution, it will call `Model#undoCampusConnect()`, so the CampusConnect state will not be saved into the `history`.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCampusConnect()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCampusConnect()`, which will save the current CampusConnect state into `future` and pop the latest saved CampusConnect state from the `history`.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial CampusConnect state, then there are no previous CampusConnect states to restore. The `undo` command uses `Model#canUndoCampusConnect()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `hisotyr` is empty, then there are no previous CampusConnect states to restore. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -225,11 +226,11 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoCampusConnect()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoCampusConnect()`, which save current state into `history` and restores the CampusConnect to that state poped from the top of `future`.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `campusConnectStateList.size() - 1`, pointing to the latest CampusConnect state, then there are no undone CampusConnect states to restore. The `redo` command uses `Model#canRedoCampusConnect()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `future` stack is empty, then there are no undone CampusConnect states to restore. The `redo` command uses `Model#canRedoCampusConnect()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
@@ -237,7 +238,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitCampusConnect()`. Since the `currentStatePointer` is not pointing at the end of the `campusConnectStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitCampusConnect()`. All CampusConnectState in the future will be removed. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
