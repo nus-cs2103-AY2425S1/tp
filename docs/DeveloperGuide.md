@@ -305,17 +305,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                    | add a new contact                                               | easily connect with them                                                      |
 | `* * *`  | user                    | delete a contact                                                | remove entries that I no longer need                                          |
 | `* * *`  | user                    | find a person by name                                           | locate details of persons without having to go through the entire list        |
-| `* *`    | user                    | hide private contact details                                    | minimize chance of someone else seeing them by accident                       |
 | `* *`    | user                    | update my contacts information                                  | always keep an updated version of contact information                         |
 | `*`      | user with many contacts | search contacts by name                                         | locate a contact easily                                                       |
 | `*`      | user                    | add a tag information to contacts                               | easily locate and connect with individuals such as classmates or club members |
 | `*`      | student                 | filter contacts by tags such as "group project" or "internship" | easily access related contacts                                                |
-| `*`      | user                    | export my contacts in a CSV format                              | use them in other applications or share them with others or backup my data    |
-| `*`      | user                    | import contacts from a CSV format                               | easily upload contacts from an existing list or a spreadsheet in bulk         |
-| `*`      | student                 | add notes to my contacts                                        | remember the context of the contact                                           |
-| `*`      | student                 | modify the notes of contacts                                    | always update the context of the contact                                      |
 | `*`      | user                    | undo my last action                                             | prevent the accidental deletion of all my contacts                            |
-| `*`      | user                    | bookmark my contacts                                            | easily access important of frequently used contacts                           |
 
 *{More to be added}*
 
@@ -401,13 +395,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC04 - Add notes to a contact**\
-**Precondition**: Contact to add notes to already exists
+**Use case: UC04 - Add tags to a contact**\
+**Precondition**: Contact to add tags to already exists
 
 **MSS**
-1. User requests to add notes to a contact.
+1. User requests to add tags to a contact.
 2. CampusConnect searches the contact list and finds the correct contact.
-3. CampusConnect add notes to the contact.
+3. CampusConnect add tags to the contact.
 4. CampusConnect displays success message.
 
    Use case ends.
@@ -422,10 +416,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-* 1b. Note already exists for the contact
-    * 1b1. CampusConnect deletes old note from the contact.
-    * 1b2. CampusConnect adds new note for the contact.
-
+* 1b. Tag already exists for the contact
+    * 1b1. CampusConnect shows error message.
+    * 1b2. User enters input again
+        
+      Steps 1b1-1b2 repeat until non-duplicate tags are input
+      
       Use case ends.
 
 
