@@ -10,6 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.wedding.Wedding;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * List out all the wedding tags
@@ -55,15 +58,19 @@ public class AddWeddingCommand extends Command {
         }
 
         // Check if a wedding with the same two people already exists, regardless of the order
+        Set<String> toAddNamesSet = new HashSet<>(Arrays.asList(names[0].trim().toLowerCase(),
+                                                                names[1].trim().toLowerCase()));
+
         boolean hasDuplicate = model.getWeddingBook().getWeddingList().stream()
-                .anyMatch(existingWedding -> {
+                .map(existingWedding -> {
                     String[] existingNames = existingWedding.getName().split("&");
-                    return (existingNames.length == 2)
-                            && ((existingNames[0].trim().equalsIgnoreCase(names[0].trim())
-                            && existingNames[1].trim().equalsIgnoreCase(names[1].trim()))
-                            || (existingNames[0].trim().equalsIgnoreCase(names[1].trim())
-                            && existingNames[1].trim().equalsIgnoreCase(names[0].trim())));
-                });
+                    if (existingNames.length != 2) {
+                        return null;
+                    }
+                    return new HashSet<>(Arrays.asList(existingNames[0].trim().toLowerCase(),
+                            existingNames[1].trim().toLowerCase()));
+                })
+                .anyMatch(existingNamesSet -> toAddNamesSet.equals(existingNamesSet));
 
         if (hasDuplicate) {
             throw new CommandException(MESSAGE_DUPLICATE_WEDDING);

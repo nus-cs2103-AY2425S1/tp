@@ -104,7 +104,6 @@ public class AddWeddingCommandTest {
                 AddWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () -> addWeddingCommand.execute(modelStub));
     }
 
-
     @Test
     public void equals() {
         Wedding weddingOne = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
