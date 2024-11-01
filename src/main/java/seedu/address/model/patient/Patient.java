@@ -38,24 +38,17 @@ public class Patient {
     private ApptList appts = new ApptList();
 
     /**
-     * Name, Nric, Sex, Birthdate and healthservice must be present and not null
-     */
-    public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex) {
-        this(name, nric, birthdate, sex, new Phone("123"), new Email("dummy@gmail.com"));
-    }
-
-    /**
      * Every field must be present and not null.
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex,
-                   Phone phone, Email email) {
-        requireAllNonNull(name, nric, birthdate, sex, phone, email);
+                   Phone phone) {
+        requireAllNonNull(name, nric, birthdate, sex, phone);
         this.name = name;
         this.nric = nric;
         this.birthdate = birthdate;
         this.sex = sex;
         this.phone = phone;
-        this.email = email;
+        this.email = null;
         this.address = null;
         this.allergies.clear();
         this.bloodType = null;
