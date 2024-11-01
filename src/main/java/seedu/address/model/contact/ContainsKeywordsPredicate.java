@@ -1,5 +1,6 @@
 package seedu.address.model.contact;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -19,6 +20,7 @@ public class ContainsKeywordsPredicate implements Predicate<Contact> {
 
     /**
      * Constructs a {@code ContainsKeywordsPredicate}.
+     * At least one of the keyword lists must be non-empty.
      *
      * @param nameKeywords keywords to match with name
      * @param telegramHandleKeywords keywords to match with telegram handle
@@ -30,6 +32,8 @@ public class ContainsKeywordsPredicate implements Predicate<Contact> {
     public ContainsKeywordsPredicate(List<String> nameKeywords, List<String> telegramHandleKeywords,
                                      List<String> emailKeywords, List<String> studentStatusKeywords,
                                      List<String> roleKeywords, List<String> nicknameKeywords) {
+        assert !isAllEmpty(nameKeywords, telegramHandleKeywords, emailKeywords, studentStatusKeywords,
+                roleKeywords, nicknameKeywords);
         this.nameKeywords = nameKeywords;
         this.telegramHandleKeywords = telegramHandleKeywords;
         this.emailKeywords = emailKeywords;
@@ -90,5 +94,9 @@ public class ContainsKeywordsPredicate implements Predicate<Contact> {
                 .add("studentStatusKeywords", studentStatusKeywords)
                 .add("roleKeywords", roleKeywords)
                 .add("nicknameKeywords", nicknameKeywords).toString();
+    }
+
+    private static boolean isAllEmpty(List... lists) {
+        return Arrays.stream(lists).allMatch(List::isEmpty);
     }
 }
