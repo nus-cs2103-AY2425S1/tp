@@ -101,7 +101,7 @@ public class CommandTestUtil {
     public static final String COMPANY_PHONE_DESC_NUS = " " + PREFIX_PHONE + VALID_COMPANY_PHONE_NUS;
 
     public static final String INVALID_COMPANY_NAME_DESC = " " + PREFIX_NAME + "ඞ"; // unicode chars not allowed
-    public static final String INVALID_COMPANY_ADDRESS_DESC = " " + PREFIX_ADDRESS + "ඞ"; // unicode chars not allowed
+    public static final String INVALID_COMPANY_ADDRESS_DESC = " " + PREFIX_ADDRESS + " "; // blank space not allowed
     public static final String INVALID_COMPANY_BILLING_DATE_DESC = " " + PREFIX_BILLING_DATE + "0"; // 0 not allowed
     public static final String INVALID_COMPANY_PHONE_DESC = " " + PREFIX_PHONE + "phone"; // alphabets not allowed
 
