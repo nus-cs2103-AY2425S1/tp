@@ -8,7 +8,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.event.EventManager;
-import seedu.address.model.person.PersonIsRolePredicate;
+import seedu.address.model.person.predicates.PersonIsRolePredicate;
 
 /**
  * Finds and lists all persons in address book who has any role equal to any of the role keywords.

@@ -20,9 +20,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FieldContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.*;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonIsRolePredicate;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
@@ -55,30 +54,27 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             String phone = argMultimap.getValue(PREFIX_PHONE).get();
-            Predicate<Person> phonePred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(phone),
-                    Person::getPhone);
+            Predicate<Person> phonePred = new PhoneNumberContainsKeywordPredicate(
+                    Collections.singletonList(phone));
             predicates.add(phonePred);
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             String email = argMultimap.getValue(PREFIX_EMAIL).get();
-            Predicate<Person> emailPred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(email),
-                    Person::getEmail);
+            Predicate<Person> emailPred = new EmailContainsKeywordsPredicate(
+                    Collections.singletonList(email));
             predicates.add(emailPred);
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             String address = argMultimap.getValue(PREFIX_ADDRESS).get();
-            Predicate<Person> addressPred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(address),
-                    Person::getAddress);
+            Predicate<Person> addressPred = new AddressContainsKeywordsPredicate(
+                    Collections.singletonList(address));
+
             predicates.add(addressPred);
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
             String telegram = argMultimap.getValue(PREFIX_TELEGRAM).get();
-            Predicate<Person> telegramPred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(telegram),
-                    Person::getTelegramUsername);
+            Predicate<Person> telegramPred = new TelegramContainsKeywordsPredicate(
+                    Collections.singletonList(telegram));
             predicates.add(telegramPred);
         }
         //role have to use separate predicate

@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.role.Attendee;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.Sponsor;
