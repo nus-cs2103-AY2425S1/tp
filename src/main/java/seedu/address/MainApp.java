@@ -85,6 +85,8 @@ public class MainApp extends Application {
         Optional<ReadOnlyScheduleList> scheduleListOptional;
         ReadOnlyAddressBook initialData;
         ReadOnlyScheduleList initialScheduleList;
+
+        // load addresbook
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -100,17 +102,23 @@ public class MainApp extends Application {
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
         }
+
+        // load schedulelist
         try {
             scheduleListOptional = scheduleStorage.readScheduleList();
-            if (!scheduleListOptional.isPresent()) {
-                logger.info("Creating a new data file " + scheduleStorage.getScheduleListFilePath()
-                        + " populated with a sample ScheduleList.");
-            }
-            if (initialData.getPersonList().isEmpty()) {
-                initialScheduleList = new ScheduleList();
+            if (scheduleListOptional.isEmpty()) {
+                logger.info("Creating a new data file "
+                        + scheduleStorage.getScheduleListFilePath());
+                if (SampleDataUtil.getWasSampleAddressBookGenerated()) {
+                    initialScheduleList = SampleDataUtil.getSampleScheduleList(initialData);
+                    logger.info("Populated with sample ScheduleList.");
+                } else {
+                    initialScheduleList = new ScheduleList();
+                    logger.info("Populated with an empty ScheduleList.");
+                }
             } else {
-                initialScheduleList = scheduleListOptional
-                        .orElse(SampleDataUtil.getSampleScheduleList(initialData));
+                assert(scheduleListOptional.isPresent());
+                initialScheduleList = scheduleListOptional.get();
             }
             if (JsonSerializableScheduleStorage.hasErrorConvertingToModelType()) {
                 scheduleStorage.handleCorruptedFile();
@@ -120,6 +128,8 @@ public class MainApp extends Application {
                     + " could not be loaded. Will be starting with an empty ScheduleList.");
             initialScheduleList = new ScheduleList();
         }
+
+        // save initial data
         try {
             storage.saveAddressBook(initialData);
             scheduleStorage.saveScheduleList(initialScheduleList);
