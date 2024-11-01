@@ -70,7 +70,6 @@ public class PatientBuilder {
         birthdate = new Birthdate(DEFAULT_BIRTHDATE);
         sex = new Sex(DEFAULT_SEX);
         allergies = new HashSet<>();
-
         bloodType = new BloodType(DEFAULT_BLOODTYPE);
         healthRisk = new HealthRisk(DEFAULT_HEALTHRISK);
         existingCondition = new ExistingCondition(DEFAULT_EXISTINGCONDITION);

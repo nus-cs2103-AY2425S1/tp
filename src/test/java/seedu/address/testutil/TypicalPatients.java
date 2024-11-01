@@ -1,13 +1,41 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_KEANU;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOODTYPE_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOODTYPE_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXISTINGCONDITION_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXISTINGCONDITION_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHRISK_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHRISK_KEANU;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOKNAME_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOKNAME_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOKPHONE_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOKPHONE_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_KEANU;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_KEANU;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_KEANU;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,14 +93,19 @@ public class TypicalPatients {
     public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withNric(VALID_NRIC_BOB)
             .withSex(VALID_SEX_BOB).withBirthdate(VALID_BIRTHDATE_BOB).build();
 
-    public static final Patient JAKE = new PatientBuilder().withName("Jake Tio").withPhone("9982131")
-            .withEmail("jakers@example.com").withAddress("nus drive").build();
+    public static final Patient JAKE = new PatientBuilder().withName(VALID_NAME_JAKE).withNric(VALID_NRIC_JAKE)
+            .withSex(VALID_SEX_JAKE).withBirthdate(VALID_BIRTHDATE_JAKE).withPhone(VALID_PHONE_JAKE)
+            .withEmail(VALID_EMAIL_JAKE).withAddress(VALID_ADDRESS_JAKE).withBloodType(VALID_BLOODTYPE_JAKE)
+            .withNokName(VALID_NOKNAME_JAKE).withNokPhone(VALID_NOKPHONE_JAKE).withAllergy(VALID_ALLERGY_JAKE)
+            .withHealthRisk(VALID_HEALTHRISK_JAKE).withExistingCondition(VALID_EXISTINGCONDITION_JAKE)
+            .withNote(VALID_NOTE_JAKE).build();
 
-    public static final Patient KEANU = new PatientBuilder().withName("Keanu Reeves").withNric("S9975483H").withSex("M")
-            .withBirthdate("1997-11-30").withPhone("86526969").withEmail("keanureeves@example.com")
-            .withAddress("Blk 512 Ang Mo Kio Ave 2").withBloodType("O+").withNokName("Mila Kunis")
-            .withNokPhone("84126990").withAllergy("peanuts").withHealthRisk("LOW").withExistingCondition("diabetes")
-            .withNote("Patient has previous gunshot wound to chest").build();
+    public static final Patient KEANU = new PatientBuilder().withName(VALID_NAME_KEANU).withNric(VALID_NRIC_KEANU)
+            .withSex(VALID_SEX_KEANU).withBirthdate(VALID_BIRTHDATE_KEANU).withPhone(VALID_PHONE_KEANU)
+            .withEmail(VALID_EMAIL_KEANU).withAddress(VALID_ADDRESS_KEANU).withBloodType(VALID_BLOODTYPE_KEANU)
+            .withNokName(VALID_NOKNAME_KEANU).withNokPhone(VALID_NOKPHONE_KEANU).withAllergy(VALID_ALLERGY_KEANU)
+            .withHealthRisk(VALID_HEALTHRISK_KEANU).withExistingCondition(VALID_EXISTINGCONDITION_KEANU)
+            .withNote(VALID_NOTE_KEANU).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
