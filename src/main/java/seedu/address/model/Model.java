@@ -154,4 +154,6 @@ public interface Model {
      * @throws NullPointerException if {@code comparator} is null.
      */
     void updateSortedSupplierList(Comparator<Supplier> comparator);
+
+
 }
