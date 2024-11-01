@@ -30,6 +30,7 @@ import seedu.address.testutil.PersonBuilder;
 public class LogCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final String message = "placeholder log message";
     @Test
     public void execute_addLogUnfilteredList_success() {
         LocalDate logDate = LocalDate.now();
@@ -79,6 +80,32 @@ public class LogCommandTest {
 
         assertCommandFailure(logCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
+    @Test
+    public void execute_addLogDateBeforeDateOfCreation_failure() {
+        // Set up a date that is before the person's date of creation
+        LocalDate invalidDate = LocalDate.of(2023, 1, 1); // Assuming person's creation date is later than this date
+        LogCommand logCommand = new LogCommand(INDEX_FIRST_PERSON, invalidDate, message);
+
+        // Expect a CommandException with the message for date before the date of creation
+        String expectedMessage = String.format(Messages.MESSAGE_BEFORE_DATE_OF_CREATION, invalidDate,
+                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getDateOfCreation());
+
+        assertCommandFailure(logCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_addLogFutureDate_failure() {
+        // Set up a date that is in the future
+        LocalDate futureDate = LocalDate.now().plusDays(1); // Any date after today
+        LogCommand logCommand = new LogCommand(INDEX_FIRST_PERSON, futureDate, message);
+        // Expect a CommandException with the message for a date in the future
+        String expectedMessage = String.format(Messages.MESSAGE_AFTER_TODAY, futureDate);
+
+        assertCommandFailure(logCommand, model, expectedMessage);
+    }
+
+
 
     @Test
     public void equals() {
