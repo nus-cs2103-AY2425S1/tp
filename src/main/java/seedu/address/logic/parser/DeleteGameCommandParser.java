@@ -29,7 +29,8 @@ public class DeleteGameCommandParser implements Parser<DeleteGameCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             gameName = argMultimap.getValue(PREFIX_GAME).get();
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGameCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteGameCommand.MESSAGE_USAGE), pe);
         }
 
         return new DeleteGameCommand(index, gameName);
