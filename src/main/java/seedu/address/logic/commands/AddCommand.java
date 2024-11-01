@@ -9,5 +9,6 @@ package seedu.address.logic.commands;
  * model must be implemented by the subclasses.</p>
  */
 public abstract class AddCommand extends Command {
-    public static final String MESSAGE_USAGE = "Use \"add p\" or \"add e\" to specify person or event to be added";
+    public static final String MESSAGE_USAGE = "Use \"add p\" or \"add e\" to"
+        + " specify person or event to be added.";
 }

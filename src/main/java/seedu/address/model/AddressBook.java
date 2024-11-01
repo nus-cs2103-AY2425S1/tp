@@ -83,6 +83,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersonEventManager(newData.getPersonEventManager());
     }
 
+    /**
+     * Clears all events in the address book.
+     */
+    public void clearEvents(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+        setEvents(newData.getEventList());
+    }
+
+    /**
+     * Clears all persons in the address book.
+     */
+    public void clearPersons(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+        setPersons(newData.getPersonList());
+    }
+
     //// person-level operations
 
     /**

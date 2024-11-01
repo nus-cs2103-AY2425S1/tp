@@ -10,5 +10,5 @@ package seedu.address.logic.commands;
  */
 public abstract class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = "Use \"delete p\" or \"delete e\" to"
-            + " specify person or event to be deleted";
+            + " specify person or event to be deleted.";
 }

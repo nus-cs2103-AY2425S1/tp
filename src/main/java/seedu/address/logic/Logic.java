@@ -16,6 +16,14 @@ import seedu.address.model.types.person.Person;
  */
 public interface Logic {
     /**
+     * Provides a command hint based on the current input.
+     *
+     * @param commandText The partial command input provided by the user.
+     * @return a hint or suggestion based on the command entered so far.
+     */
+    public String getCommandHint(String commandText);
+
+    /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.

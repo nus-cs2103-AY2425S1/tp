@@ -34,15 +34,15 @@ import seedu.address.model.types.event.Event;
 public class EditEventCommand extends EditCommand {
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
-            + "by the index number used in the displayed event list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " e: Edits the details of the event identified "
+            + "by the index number used in the displayed event list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_START_TIME + "PHONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " e 1 "
             + PREFIX_ADDRESS + "80 Blockhome Lane "
             + PREFIX_START_TIME + "2024-10-15 14:30 ";
 
