@@ -111,7 +111,7 @@ Displays all persons stored in the address book.
 
 - Shows a list of all saved contacts.
 
----d
+---
 
 ### Sorting contacts: `sort`
 
@@ -325,7 +325,7 @@ Stores a contact’s birthday
 
 ### Birthday Reminder
 
-Displays contacts' birthday if they are happening within a week from the system's current date.
+Displays a contacts' birthday if they are happening within a week from the system's current date.
 
 **Command Format:**
 None, as it is an automatic feature.
