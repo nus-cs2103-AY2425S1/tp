@@ -13,7 +13,8 @@
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -377,30 +378,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 2b1-2b2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
 
-**Use case: UC06 - Receiving tuition fee from a student**
-
-**MSS**
-
-1. User requests to <ins>find a student(UC05)</ins>.
-2. User enters command to record payment received from the specified student after a lesson.
-3. System calculates the tuition fee paid by the student for the lesson.
-4. System updates the total tuition fee paid by the student.
-5. System displays success message.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
-* Use case resumes from step 1.
-
-* 2a. System detects error in entered command.
-    * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters new command.
-* Steps 2a1-2a2 are repeated until all details entered are correct.
-* Use case resumes from step 3.
-
 **Use case: UC05 - Find student entries**
 
 **MSS**
@@ -418,6 +395,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * Steps 1a1-1a2 are repeated until all details entered are correct.
 * Use case resumes from step 2.
+
+**Use case: UC06 - Receiving tuition fee from a student**
+
+**MSS**
+
+1. User requests to <ins>find a student(UC05)</ins>.
+1. User enters command to record payment received from the specified student after a lesson.
+1. System updates the total tuition fee paid by the student.
+1. System displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System cannot find the specified student.
+    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
+* Use case resumes from step 1.
+
+* 2a. System detects error in entered command.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters new command.
+* Steps 2a1-2a2 are repeated until all details entered are correct.
+* Use case resumes from step 3.
 
 *{More to be added}*
 
