@@ -210,18 +210,6 @@ public class ModuleRoleMap {
     }
 
     /**
-     * Adds all module role pairs from {@code moduleRoleMapToAdd} to {@code this}.
-     * This is equivalent to a set union operation.
-     * @param moduleRoleMapToAdd The module role map to add.
-     * @return A {@code ModuleRoleMap} containing all pairs failed to add.
-     *         (i.e. the moduleRoleMapToAdd U this)
-     */
-    public ModuleRoleMap putAll(ModuleRoleMap moduleRoleMapToAdd) {
-        requireNonNull(moduleRoleMapToAdd);
-        return putAll(moduleRoleMapToAdd.getData());
-    }
-
-    /**
      * Adds all module role pairs from {@code moduleRolePairsToAdd} to {@code this}.
      * This is equivalent to a set union operation.
      * @param moduleRolePairsToAdd The module role pairs to add.
@@ -242,34 +230,22 @@ public class ModuleRoleMap {
     }
 
     /**
-     * Removes all module role pairs from {@code moduleRoleMapToRemove} from {@code this}.
-     * This is equivalent to a set difference operation.
-     * @param moduleRoleMapToRemove The module role map to remove.
-     * @return A {@code ModuleRoleMap} containing all pairs failed to remove.
-     *         (i.e. moduleRoleMapToRemove \ this)
-     */
-    public ModuleRoleMap removeAll(ModuleRoleMap moduleRoleMapToRemove) {
-        requireNonNull(moduleRoleMapToRemove);
-        return removeAll(moduleRoleMapToRemove.getData());
-    }
-
-    /**
      * Removes all module role pairs from {@code moduleRolePairsToRemove} from {@code this}.
      * This is equivalent to a set difference operation.
      * @param moduleRolePairsToRemove The module role pairs to remove.
      * @return A {@code ModuleRoleMap} containing all pairs failed to remove.
      *         (i.e. moduleRolePairsToRemove \ this)
      */
-    public ModuleRoleMap removeAll(List<ModuleRolePair> moduleRolePairsToRemove) {
+    public List<ModuleRolePair> removeAll(List<ModuleRolePair> moduleRolePairsToRemove) {
         requireNonNull(moduleRolePairsToRemove);
-        Map<ModuleCode, RoleType> failedModuleRoleMap = new HashMap<>();
+        List<ModuleRolePair> failedModuleRolePairs = new ArrayList<>();
 
         for (ModuleRolePair moduleRolePair : moduleRolePairsToRemove) {
             if (!this.remove(moduleRolePair.moduleCode, moduleRolePair.roleType)) {
-                failedModuleRoleMap.put(moduleRolePair.moduleCode, moduleRolePair.roleType);
+                failedModuleRolePairs.add(moduleRolePair);
             }
         }
-        return new ModuleRoleMap(failedModuleRoleMap);
+        return failedModuleRolePairs;
     }
 
     /**

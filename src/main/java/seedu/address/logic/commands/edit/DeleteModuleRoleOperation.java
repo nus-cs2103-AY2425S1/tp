@@ -44,14 +44,20 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
     protected ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) throws CommandException {
         HashMap<ModuleCode, RoleType> roles = new HashMap<>(moduleRoleMapToEdit.getRoles());
         ModuleRoleMap result = new ModuleRoleMap(roles);
-        ModuleRoleMap failedModuleRoles = result.removeAll(descriptor.getToDeletes());
+        List<ModuleRolePair> failedModuleRoles = result.removeAll(descriptor.getToDeletes());
         List<ModuleCode> failedModuleCodes = result.removeAllIgnoringRoles(descriptor.getToDeleteAnyRoles());
+
+        List<String> exceptionMessages = new ArrayList<>();
         if (!failedModuleRoles.isEmpty()) {
-            throw new CommandException(MESSAGE_NONEXISTENT_MODULE_ROLE_PAIRS + failedModuleRoles.getData());
+            exceptionMessages.add(MESSAGE_NONEXISTENT_MODULE_ROLE_PAIRS + failedModuleRoles);
         }
         if (!failedModuleCodes.isEmpty()) {
-            throw new CommandException(MESSAGE_NONEXISTENT_MODULE_CODES + failedModuleCodes);
+            exceptionMessages.add(MESSAGE_NONEXISTENT_MODULE_CODES + failedModuleCodes);
         }
+        if (!exceptionMessages.isEmpty()) {
+            throw new CommandException(String.join("\n", exceptionMessages));
+        }
+
         logger.info("Deleted module roles with descriptor: " + descriptor);
         logger.info("Resulting module roles: " + result);
         logger.info("Failed to delete module roles: " + failedModuleRoles);
