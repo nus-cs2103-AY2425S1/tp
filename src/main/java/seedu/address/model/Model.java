@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -117,4 +119,6 @@ public interface Model {
      * Sorts the person list to put all pinned persons at the top of the list.
      */
     void sortByPin();
+
+    Person personFromName(Name name) throws IllegalValueException;
 }

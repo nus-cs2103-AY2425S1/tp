@@ -2,14 +2,23 @@ package seedu.address.ui;
 
 import static seedu.address.model.util.ContactType.STUDENT;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Parent;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
 /**
  * An UI component that displays information of a {@code Student}.
  */
 public class StudentCard extends PersonCard {
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private Label parentName;
@@ -25,8 +34,8 @@ public class StudentCard extends PersonCard {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public StudentCard(Student person, int displayedIndex) {
-        super(STUDENT, person, displayedIndex);
+    public StudentCard(Student person, int displayedIndex, Model model) {
+        super(STUDENT, person, displayedIndex, model);
         education.setText(person.getEducation().educationLevel);
         education.getStyleClass().add("education-label");
         grade.setText(person.getGrade().gradeIndexToName());
@@ -35,7 +44,17 @@ public class StudentCard extends PersonCard {
         parentPhone.setText("");
         parentEmail.setText("");
         if (person.getParentName() != null) {
-            parentName.setText(person.getParentName().fullName);
+            try {
+                Person parent = model.personFromName(person.getParentName());
+                if (!(parent instanceof Parent)) {
+                    throw new IllegalValueException("Parent of" + person.getName().fullName + "is not a Parent");
+                }
+                parentName.setText(parent.getName().fullName);
+                parentPhone.setText(parent.getPhone().value);
+                parentEmail.setText(parent.getEmail().value);
+            } catch (IllegalValueException e) {
+               logger.warning(e.getMessage());
+            }
         }
     }
 
