@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Arrays;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,8 +37,8 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBookFilteredList_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
-        expectedModel.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
+        model.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Set.of("m")));
+        expectedModel.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Set.of("m")));
         while (!expectedModel.getFilteredPersonList().isEmpty()) {
             Person personToDelete = expectedModel.getFilteredPersonList().get(0);
             expectedModel.deletePerson(personToDelete);

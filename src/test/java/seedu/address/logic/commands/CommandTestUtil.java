@@ -12,9 +12,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -71,7 +70,6 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
-
     public static final AssignCommand.AssignStudyGroupTagDescriptor DESC_3A;
     public static final AssignCommand.AssignStudyGroupTagDescriptor DESC_3B;
 
@@ -142,7 +140,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Set.of(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
@@ -153,7 +151,7 @@ public class CommandTestUtil {
      */
     public static void showPersonWithStudyGroupTag(Model model, String studyGroupName) {
         StudyGroupsContainKeywordsPredicate studyGroupPredicate = new StudyGroupsContainKeywordsPredicate(
-                Collections.singletonList(studyGroupName));
+                Set.of(studyGroupName));
         model.updateFilteredPersonList(studyGroupPredicate);
 
         for (Person p : model.getFilteredPersonList()) {

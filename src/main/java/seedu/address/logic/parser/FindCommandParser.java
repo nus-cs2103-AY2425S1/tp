@@ -8,8 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 
-import java.util.Arrays;
-
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AgeContainsKeywordsPredicate;
@@ -47,28 +45,34 @@ public class FindCommandParser implements Parser<FindCommand> {
         PredicateGroup predicateGroup = new PredicateGroup();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-            predicateGroup.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
+            predicateGroup.add(new NameContainsKeywordsPredicate(
+                    ParserUtil.parseKeywords(nameKeywords, PREFIX_NAME)));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            String[] emailKeywords = argMultimap.getValue(PREFIX_EMAIL).get().split("\\s+");
-            predicateGroup.add(new EmailContainsKeywordsPredicate(Arrays.asList(emailKeywords)));
+            String emailKeywords = argMultimap.getValue(PREFIX_EMAIL).get();
+            predicateGroup.add(new EmailContainsKeywordsPredicate(
+                    ParserUtil.parseKeywords(emailKeywords, PREFIX_EMAIL)));
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
-            String[] genderKeywords = argMultimap.getValue(PREFIX_GENDER).get().split("\\s+");
-            predicateGroup.add(new GenderMatchesKeywordsPredicate(Arrays.asList(genderKeywords)));
+            String genderKeywords = argMultimap.getValue(PREFIX_GENDER).get();
+            predicateGroup.add(new GenderMatchesKeywordsPredicate(
+                    ParserUtil.parseGenderKeywords(genderKeywords, PREFIX_GENDER)));
         }
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
-            String[] ageKeywords = argMultimap.getValue(PREFIX_AGE).get().split("\\s+");
-            predicateGroup.add(new AgeContainsKeywordsPredicate(Arrays.asList(ageKeywords)));
+            String ageKeywords = argMultimap.getValue(PREFIX_AGE).get();
+            predicateGroup.add(new AgeContainsKeywordsPredicate(
+                    ParserUtil.parseAgeKeywords(ageKeywords, PREFIX_AGE)));
         }
         if (argMultimap.getValue(PREFIX_STUDY_GROUP_TAG).isPresent()) {
-            String[] tagKeywords = argMultimap.getValue(PREFIX_STUDY_GROUP_TAG).get().split("\\s+");
-            predicateGroup.add(new StudyGroupsContainKeywordsPredicate(Arrays.asList(tagKeywords)));
+            String tagKeywords = argMultimap.getValue(PREFIX_STUDY_GROUP_TAG).get();
+            predicateGroup.add(new StudyGroupsContainKeywordsPredicate(
+                    ParserUtil.parseKeywords(tagKeywords, PREFIX_STUDY_GROUP_TAG)));
         }
         if (argMultimap.getValue(PREFIX_DETAIL).isPresent()) {
-            String[] detailKeywords = argMultimap.getValue(PREFIX_DETAIL).get().split("\\s+");
-            predicateGroup.add(new DetailContainsKeywordsPredicate(Arrays.asList(detailKeywords)));
+            String detailKeywords = argMultimap.getValue(PREFIX_DETAIL).get();
+            predicateGroup.add(new DetailContainsKeywordsPredicate(
+                    ParserUtil.parseKeywords(detailKeywords, PREFIX_DETAIL)));
         }
 
         if (!predicateGroup.isAnyPredicateAdded()) {

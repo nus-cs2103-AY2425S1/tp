@@ -34,6 +34,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie";
 
     public static final String MESSAGE_NO_CRITERIA = "Provide at least one criteria to find!";
+    public static final String MESSAGE_EMPTY_CRITERIA = "Criteria cannot be empty: %s";
 
     private final PredicateGroup predicates;
 

@@ -49,7 +49,7 @@ public class StudyGroupTag {
         }
 
         StudyGroupTag otherTag = (StudyGroupTag) other;
-        return studyGroupName.equals(otherTag.studyGroupName);
+        return studyGroupName.toLowerCase().equals(otherTag.studyGroupName.toLowerCase());
     }
 
     @Override
