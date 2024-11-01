@@ -27,7 +27,6 @@ public class AllergyList {
 
     /**
      * Constructs an {@code AllergyList} with the given allergies.
-     * @param allergies
      */
     public AllergyList(Set<Allergy> allergies) {
         this.allergies = allergies;
@@ -36,8 +35,6 @@ public class AllergyList {
     /**
      * Adds an allergy to the list.
      * Sorts the list after adding the allergy.
-     *
-     * @param allergy
      */
     public void addAllergy(Allergy allergy) {
         allergies.add(allergy);
@@ -45,8 +42,6 @@ public class AllergyList {
 
     /**
      * Deletes an allergy from the list.
-     *
-     * @param allergy
      */
     public void deleteAllergy(Allergy allergy) {
         allergies.remove(allergy);
@@ -64,7 +59,6 @@ public class AllergyList {
     /**
      * Returns a string representation of the allergies
      * in the form of a list of strings.
-     * @return
      */
     @Override
     public String toString() {
