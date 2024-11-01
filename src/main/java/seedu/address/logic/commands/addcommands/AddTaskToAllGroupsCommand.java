@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.Command;
@@ -35,6 +38,7 @@ public class AddTaskToAllGroupsCommand extends Command {
             + PREFIX_TASK_DEADLINE + "2024-01-01 1300 ";
 
     public static final String MESSAGE_SUCCESS = "Added task: %1$s";
+    public static final String MESSAGE_OVERDUE_WARNING = "WARNING: Task will be marked as overdue";
     public static final String NO_GROUPS = "There are currently no groups.";
 
     private final TaskName taskName;
@@ -71,6 +75,12 @@ public class AddTaskToAllGroupsCommand extends Command {
         model.setMostRecentTaskDisplay(task);
         model.updateFilteredTaskList(x -> x.equals(task));
         model.setStateTasks();
+        ZoneId zid = ZoneId.of("Asia/Singapore");
+        LocalDateTime currentTime = LocalDateTime.now(zid);
+        if (deadline.time.compareTo(currentTime) < 0) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS + "\n" + MESSAGE_OVERDUE_WARNING,
+                    task.getTaskName().toString()), LIST_TASK_MARKER);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
                 task.getTaskName().taskName), LIST_TASK_MARKER);
     }

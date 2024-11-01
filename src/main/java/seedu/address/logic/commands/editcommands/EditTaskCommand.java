@@ -51,7 +51,8 @@ public class EditTaskCommand extends Command {
         + PREFIX_TASK_DEADLINE + "2024-12-12 1800";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s in %2s";
-    public static final String MESSAGE_DUPLICATE_TASK = "Duplicated task.";
+    public static final String MESSAGE_DUPLICATE_TASK = "Duplicated task";
+    public static final String MESSAGE_DUPLICATE_TASK_IN_GROUP = "Task already exists in the group";
     public static final String MESSAGE_INVALID_FILED_STATUS = "Task status should not be modified";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
@@ -88,6 +89,9 @@ public class EditTaskCommand extends Command {
 
         if (taskToEdit.isSameTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+        if (group.hasTask(editedTask)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK_IN_GROUP);
         }
         model.setTask(taskToEdit, editedTask, group);
         model.decreaseGroupWithTask(taskToEdit);
