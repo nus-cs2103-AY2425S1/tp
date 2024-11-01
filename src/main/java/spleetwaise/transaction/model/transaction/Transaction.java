@@ -139,7 +139,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s(%s): %s on %s for $%s with categories: %s", id, person.getName(),
+        return String.format("%s(%s): %s on %s for $%s with categories: %s", person.getName(),
                 person.getPhone(), description, date, amount, categories
         );
     }
