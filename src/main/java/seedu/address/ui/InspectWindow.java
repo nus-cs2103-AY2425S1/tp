@@ -90,7 +90,7 @@ public class InspectWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = HelpWindow.getInstance();
     }
 
     public Stage getPrimaryStage() {
