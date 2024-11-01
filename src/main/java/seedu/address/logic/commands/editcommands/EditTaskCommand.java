@@ -38,7 +38,7 @@ public class EditTaskCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Edits the details of the task of given group.\n"
-        + "Fields like task status cannot be modified through this function."
+        + "Fields like task status cannot be modified through this function.\n"
         + "Parameters: "
         + PREFIX_GROUP_NAME + " GROUP NAME "
         + PREFIX_INDEX + "INDEX (must be a positive integer) "
