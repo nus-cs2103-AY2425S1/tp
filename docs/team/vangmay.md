@@ -11,6 +11,7 @@
 Role:
 - Developer
 - QA Tester
+- Responsible for overseeing Logic
 
 Given below are my contributions to the project:
 - Refactor Find Persons Command
