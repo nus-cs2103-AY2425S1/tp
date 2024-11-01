@@ -24,12 +24,12 @@ public class SortCommandTest {
 
     @Test
     public void execute_nameAscendingOrder_success() {
-        executeSuccessfulSortTest(PersonComparator.NAME, true, modelAscendingName);
+        executeSuccessfulSortTest(PersonComparator.NAME, true, modelDescendingName);
     }
 
     @Test
     public void execute_nameDescendingOrder_success() {
-        executeSuccessfulSortTest(PersonComparator.NAME, false, modelDescendingName);
+        executeSuccessfulSortTest(PersonComparator.NAME, false, modelAscendingName);
     }
 
     @Test
