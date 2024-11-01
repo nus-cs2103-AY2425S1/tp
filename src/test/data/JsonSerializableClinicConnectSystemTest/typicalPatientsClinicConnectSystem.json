@@ -1,5 +1,5 @@
 {
-  "_comment": "ClinicConnect save file which contains the same Patient values as in TypicalPatients#getTypicalAddressBook()",
+  "_comment": "ClinicConnect save file which contains the same Patient values as in TypicalPatients#getTypicalClinicConnectSystem()",
   "patients" : [ {
     "name" : "Alice Pauline",
     "healthServices" : [ "blood test", "vaccination" ],

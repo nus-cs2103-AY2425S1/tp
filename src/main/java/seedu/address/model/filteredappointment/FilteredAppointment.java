@@ -10,7 +10,11 @@ import seedu.address.model.patient.Patient;
 
 
 /**
+<<<<<<<< HEAD:src/main/java/seedu/address/model/FilteredAppointment/FilteredAppointment.java
  * Represents a filteredappointment object that has a {code@ Appt} and {code@ Patient}
+========
+ * Represents a filteredappointment object that has
+>>>>>>>> master:src/main/java/seedu/address/model/filteredappointment/FilteredAppointment.java
  */
 public class FilteredAppointment {
 

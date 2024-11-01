@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddFCommand;
-import seedu.address.logic.commands.ApptCommand;
+import seedu.address.logic.commands.BookApptCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteApptCommand;
@@ -20,20 +20,20 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class ClinicConnectSystemParser {
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final Logger logger = LogsCenter.getLogger(ClinicConnectSystemParser.class);
 
     /**
      * Parses user input into command for execution.
@@ -72,8 +72,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case HomeCommand.COMMAND_WORD:
+            return new HomeCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -81,8 +81,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommandParser().parse(arguments);
 
-        case ApptCommand.COMMAND_WORD:
-            return new ApptCommandParser().parse(arguments);
+        case BookApptCommand.COMMAND_WORD:
+            return new BookApptCommandParser().parse(arguments);
 
         case AddFCommand.COMMAND_WORD:
             return new AddFCommandParser().parse(arguments);

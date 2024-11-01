@@ -17,8 +17,8 @@ import seedu.address.model.healthservice.HealthService;
 public class AppointmentDateFilter {
 
     public static final String ONE_DATE_MESSAGE_CONSTRAINTS = "Dates should follow the format YYYY-MM-DD";
-    public static final String TWO_DATE_MESSAGE_CONSTRAINTS = ONE_DATE_MESSAGE_CONSTRAINTS + "\n"
-            + "end date should be after start date";
+    public static final String TWO_DATE_MESSAGE_CONSTRAINTS = ONE_DATE_MESSAGE_CONSTRAINTS
+            + " and end date should be after start date";
 
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -33,13 +33,12 @@ public class AppointmentDateFilter {
     public AppointmentDateFilter(LocalDate startDate, LocalDate endDate, HealthService healthService) {
         requireNonNull(endDate);
         this.endDate = endDate;
+        this.healthService = healthService;
         if (startDate != null) {
             checkArgument(isValidStartAndEndDate(startDate, endDate), TWO_DATE_MESSAGE_CONSTRAINTS);
             this.startDate = startDate;
-            this.healthService = healthService;
         } else {
             this.startDate = null;
-            this.healthService = healthService;
         }
     }
 

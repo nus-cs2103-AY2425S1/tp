@@ -18,7 +18,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_HEALTHSERVICE = new Prefix("h/");
     public static final Prefix PREFIX_ALLERGY = new Prefix("al/");
     public static final Prefix PREFIX_BLOODTYPE = new Prefix("b/");
-    public static final Prefix PREFIX_EXISTINGCONDITION = new Prefix("hr/");
+    public static final Prefix PREFIX_EXISTINGCONDITION = new Prefix("ec/");
     public static final Prefix PREFIX_NOTE = new Prefix("no/");
     public static final Prefix PREFIX_NOKNAME = new Prefix("nokn/");
     public static final Prefix PREFIX_NOKPHONE = new Prefix("nokp/");

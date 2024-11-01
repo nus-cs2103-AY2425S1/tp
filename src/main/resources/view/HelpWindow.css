@@ -1,21 +1,24 @@
 #helpMessage {
     -fx-text-fill: #87CEEB;
+    -fx-font-size: 14px;
 }
 
-#copyButton, #helpKeywords {
+#commandKeywordsHeader {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#functionsHeader {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#commandKeywords {
     -fx-text-fill: white;
 }
 
-#copyButton {
-    -fx-background-color: dimgray;
-}
-
-#copyButton:hover {
-    -fx-background-color: gray;
-}
-
-#copyButton:armed {
-    -fx-background-color: darkgray;
+#functions {
+    -fx-text-fill: white;
 }
 
 #helpMessageContainer {

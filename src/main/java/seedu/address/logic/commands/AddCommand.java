@@ -1,10 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -19,17 +15,8 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_NRIC + "NRIC "
-            + PREFIX_BIRTHDATE + "BIRTHDATE "
-            + PREFIX_SEX + "SEX\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_NRIC + "T0123456A "
-            + PREFIX_BIRTHDATE + "2001-06-24 "
-            + PREFIX_SEX + "M ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new patient record into the system\n"
+            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book";

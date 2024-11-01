@@ -22,9 +22,8 @@ public class DeleteApptCommand extends Command {
     public static final String COMMAND_WORD = "deleteappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the appointment identified by the NRIC used in the displayed appointment list.\n"
-            + "Parameters: DATE TIME NRIC (must be a valid NRIC)\n"
-            + "Example: " + COMMAND_WORD + " dt/2024-09-19T15:00 i/S1234567A";
+            + ": Deletes the specified appointment for the identified patient\n"
+            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
     public static final String MESSAGE_DELETE_APPT_SUCCESS = "Deleted Appointment: %1$s";
 
@@ -36,7 +35,7 @@ public class DeleteApptCommand extends Command {
      * @param apptDateTime
      * @param nric
      */
-    public DeleteApptCommand(LocalDateTime apptDateTime, Nric nric) {
+    public DeleteApptCommand(Nric nric, LocalDateTime apptDateTime) {
         this.apptDateTime = apptDateTime;
         this.nric = nric;
     }

@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.appointmentdatefilter.AppointmentDateFilter.isValidStartAndEndDate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -174,6 +174,17 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into a {@code LocalDate} and checks if startDate is before endDate
+     */
+    public static LocalDate parseDateAndCheck(String startDateString, LocalDate endDate) throws ParseException {
+        LocalDate startDate = parseDate(startDateString);
+        if (!isValidStartAndEndDate(startDate, endDate)) {
+            throw new ParseException(AppointmentDateFilter.TWO_DATE_MESSAGE_CONSTRAINTS);
+        }
+        return startDate;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -334,10 +345,10 @@ public class ParserUtil {
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        if (!Appt.isValidDateTime(LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME))) {
-            throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
+        if (!Appt.isValidDateTime(dateTime)) {
+            throw new ParseException(Appt.DATETIME_MESSAGE_CONSTRAINTS);
         }
-        return LocalDateTime.parse(trimmedDateTime.toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return LocalDateTime.parse(trimmedDateTime, Appt.FORMATTER);
     }
 
     /**
@@ -366,36 +377,4 @@ public class ParserUtil {
         HealthService healthService = parseHealthService(healthServiceName);
         return new Appt(dateTime, healthService);
     }
-
-    /*
-    public static ApptList parseAppts(Collection<String> dates, Collection<HealthService> healthServices)
-        throws ParseException {
-        requireNonNull(dates);
-        final ApptList apptList = new ApptList();
-        int i = 0;
-        for (String date : dates) {
-            String trimmedDate = date.trim();
-            if (!Appt.isValidAppt(trimmedDate)) {
-                throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
-            }
-            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-            apptList.addAppt(parseSingleAppt(trimmedDateTime, healthServices.toArray(new HealthService[0])[i]));
-            i++;
-        }
-        return apptList;
-    }
-    */
 }
-
-/*
-for (String date : dates) {
-            String trimmedDate = date.trim();
-            if (!Appt.isValidAppt(trimmedDate)) {
-                throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
-            }
-            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-            apptList.addAppt(parseSingleAppt(trimmedDateTime));
-        }
-        return apptList;
-    }
- */

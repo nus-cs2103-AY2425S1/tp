@@ -9,52 +9,52 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ClinicConnectSystem;
+import seedu.address.model.ReadOnlyClinicConnectSystem;
 import seedu.address.model.patient.Patient;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable ClinicConnectSystem that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "clinicconnectsystem")
+class JsonSerializableClinicConnectSystem {
 
     public static final String MESSAGE_DUPLICATE_PATIENT = "Patients list contains duplicate patient(s).";
 
     private final List<JsonAdaptedPatient> patients = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given patients.
+     * Constructs a {@code JsonSerializableClinicConnectSystem} with the given patients.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients) {
+    public JsonSerializableClinicConnectSystem(@JsonProperty("patients") List<JsonAdaptedPatient> patients) {
         this.patients.addAll(patients);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyClinicConnectSystem} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableClinicConnectSystem}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableClinicConnectSystem(ReadOnlyClinicConnectSystem source) {
         patients.addAll(source.getPatientList().stream().map(JsonAdaptedPatient::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code ClinicConnectSystem} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public ClinicConnectSystem toModelType() throws IllegalValueException {
+        ClinicConnectSystem clinicConnectSystem = new ClinicConnectSystem();
         for (JsonAdaptedPatient jsonAdaptedPatient : patients) {
             Patient patient = jsonAdaptedPatient.toModelType();
-            if (addressBook.hasPatient(patient)) {
+            if (clinicConnectSystem.hasPatient(patient)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PATIENT);
             }
-            addressBook.addPatient(patient);
+            clinicConnectSystem.addPatient(patient);
         }
-        return addressBook;
+        return clinicConnectSystem;
     }
 
 }

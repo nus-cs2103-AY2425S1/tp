@@ -16,17 +16,16 @@ import seedu.address.model.patient.Patient;
  * Adds an appointment to the patient with the given NRIC.
  * Format: appt dt/YYYY-MM-DDTHH:MM h/HEALTHSERVICE i/NRIC
  */
-public class ApptCommand extends Command {
+public class BookApptCommand extends Command {
 
-    public static final String MESSAGE_ARGUMENTS = "Appt: %2$s, Healthservice: %2$s, Nric: %1$s";
-    public static final String COMMAND_WORD = "appt";
+    public static final String MESSAGE_ARGUMENTS = "Nric: %1$s, Appt: %2$s";
+    public static final String COMMAND_WORD = "bookappt";
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
-    public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds an appointment to the patient with the given NRIC. "
-        + "Format: appt dt/YYYY-MM-DDTHH:MM h/HEALTHSERVICE i/NRIC \n"
-        + "Example: " + COMMAND_WORD + " dt/2022-12-31T14:00 h/Blood Test i/S1234567A";
+    public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date and time";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records appointment times for registered patients "
+            + "into the system\n"
+            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
     private final Appt appt;
     private final Nric nric;
@@ -36,7 +35,7 @@ public class ApptCommand extends Command {
      * @param healthService of the appointment
      * @param nric of the patient
      */
-    public ApptCommand(Appt appt, Nric nric) {
+    public BookApptCommand(Nric nric, Appt appt) {
         requireAllNonNull(appt, nric);
         this.appt = appt;
         this.nric = nric;
@@ -91,13 +90,13 @@ public class ApptCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ApptCommand)) {
+        if (!(other instanceof BookApptCommand)) {
             return false;
         }
 
-        ApptCommand e = (ApptCommand) other;
-        return appt.equals(e.appt)
-                && nric.equals(e.nric);
+        BookApptCommand e = (BookApptCommand) other;
+        return nric.equals(e.nric)
+                && appt.equals(e.appt);
     }
 
     /**

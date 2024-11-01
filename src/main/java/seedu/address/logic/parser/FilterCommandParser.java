@@ -39,8 +39,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         if (arePrefixesPresent(argMultimap, PREFIX_STARTDATE)) {
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STARTDATE);
-            startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
-        } else if (arePrefixesPresent(argMultimap, PREFIX_HEALTHSERVICE)) {
+            startDate = ParserUtil.parseDateAndCheck(argMultimap.getValue(PREFIX_STARTDATE).get(), endDate);
+        }
+        if (arePrefixesPresent(argMultimap, PREFIX_HEALTHSERVICE)) {
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HEALTHSERVICE);
             service = ParserUtil.parseHealthService(argMultimap.getValue(PREFIX_HEALTHSERVICE).get());
         }
