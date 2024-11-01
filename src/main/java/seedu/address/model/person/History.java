@@ -55,6 +55,10 @@ public class History {
             throw new IllegalArgumentException(String.format(MESSAGE_BEFORE_DATE_OF_CREATION,
                     date, this.dateOfCreation));
         }
+        if (date.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException(String.format(MESSAGE_AFTER_TODAY,
+                    date));
+        }
         if (!this.history.containsKey(date)) {
             this.history.put(date, new ArrayList<>());
         }
