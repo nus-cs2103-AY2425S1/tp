@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Supplier;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -37,6 +38,8 @@ public class PersonCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private Label information;
+    @FXML
+    private Label ingredients; // Added for Supplier
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -56,10 +59,23 @@ public class PersonCard extends UiPart<Region> {
             Customer customer = (Customer) person;
             information.setText(customer.getInformation().value);
             information.setVisible(true); // Make the label visible for customers
-        } else {
-            // Hide or clear the information label for non-customers
+            // Hide Supplier-specific fields
+            ingredients.setText("");
+            ingredients.setVisible(false);
+        } else if (person instanceof Supplier) {
+            Supplier supplier = (Supplier) person;
+            String joinedString = String.join(",", supplier.getIngredientsSupplied().getIngredientNames());
+            ingredients.setText(joinedString);
+            ingredients.setVisible(true); // Make the label visible for suppliers
+            // Hide Customer-specific fields
             information.setText("");
             information.setVisible(false);
+        } else {
+            // Hide or clear both Customer and Supplier-specific fields for generic Person
+            information.setText("");
+            information.setVisible(false);
+            ingredients.setText("");
+            ingredients.setVisible(false);
         }
 
         // Sort and display the tags
@@ -68,7 +84,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
 
-                    // Apply the CSS class for "customer" tag
+                    // Apply the CSS class for "customer" and "supplier" tags
                     if (tag.tagName.equals("customer")) {
                         tagLabel.getStyleClass().add("tag-customer"); // Ensure that the "tag-customer" style is defined in your CSS
                     } else if (tag.tagName.equals("supplier")) {
@@ -78,3 +94,5 @@ public class PersonCard extends UiPart<Region> {
                 });
     }
 }
+
+

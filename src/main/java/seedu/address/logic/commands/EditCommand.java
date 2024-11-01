@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENTS_SUPPLIED;
 
 
 import java.util.Collections;
@@ -32,16 +32,18 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 
+import seedu.address.model.person.Supplier;
+import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person or customer in the address book.
+ * Edits the details of an existing person, customer, or supplier in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person or customer identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person, customer, or supplier identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -49,15 +51,17 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_INFORMATION + "INFORMATION] "
+            + "[" + PREFIX_INFORMATION + "INFORMATION (for Customer only)] "
+            + "[" + PREFIX_INGREDIENTS_SUPPLIED + "INGREDIENTS SUPPLIED (for Supplier only)] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 e/johndoe@example.com i/Allergic to nuts";
+            + PREFIX_PHONE + "91234567 e/johndoe@example.com s/Flour, Sugar";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_INVALID_INFORMATION_EDIT = "Cannot edit the information field for a non-customer.";
+    public static final String MESSAGE_INVALID_INGREDIENTS_EDIT = "Cannot edit the ingredients supplied field for a non-supplier.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -86,6 +90,11 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_INFORMATION_EDIT);
         }
 
+        // Check if the ingredients supplied field is being edited for a non-supplier
+        if (!(personToEdit instanceof Supplier) && editPersonDescriptor.getIngredientsSupplied().isPresent()) {
+            throw new CommandException(MESSAGE_INVALID_INGREDIENTS_EDIT);
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -112,6 +121,9 @@ public class EditCommand extends Command {
             Information updatedInformation = editPersonDescriptor.getInformation().orElse(((Customer) personToEdit).getInformation());
             return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress,
                     updatedInformation, updatedRemark, updatedTags);
+        } else if (personToEdit instanceof Supplier) {
+            Ingredients updatedIngredients = editPersonDescriptor.getIngredientsSupplied().orElse(((Supplier) personToEdit).getIngredientsSupplied());
+            return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedIngredients, updatedRemark, updatedTags);
         }
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
@@ -141,10 +153,12 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Information information; // Added information field for Customer
+        private Information information; // For Customer
+        private Ingredients ingredientsSupplied; // For Supplier
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -152,11 +166,12 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setInformation(toCopy.information);
+            setIngredientsSupplied(toCopy.ingredientsSupplied);
             setTags(toCopy.tags);
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, information, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, information, ingredientsSupplied, tags);
         }
 
         public void setName(Name name) {
@@ -199,6 +214,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(information);
         }
 
+        public void setIngredientsSupplied(Ingredients ingredientsSupplied) {
+            this.ingredientsSupplied = ingredientsSupplied;
+        }
+
+        public Optional<Ingredients> getIngredientsSupplied() {
+            return Optional.ofNullable(ingredientsSupplied);
+        }
+
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
@@ -223,6 +246,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherDescriptor.email)
                     && Objects.equals(address, otherDescriptor.address)
                     && Objects.equals(information, otherDescriptor.information)
+                    && Objects.equals(ingredientsSupplied, otherDescriptor.ingredientsSupplied)
                     && Objects.equals(tags, otherDescriptor.tags);
         }
 
@@ -234,6 +258,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("information", information)
+                    .add("ingredients supplied", ingredientsSupplied)
                     .add("tags", tags)
                     .toString();
         }

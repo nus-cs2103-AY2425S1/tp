@@ -6,6 +6,11 @@ public class Ingredient extends Product {
     }
 
     @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }
