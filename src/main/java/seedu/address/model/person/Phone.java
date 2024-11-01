@@ -20,7 +20,7 @@ public class Phone {
      * After the first character, there must be 3 more numbers,
      * followed by any number of whitespaces before 4 more numbers.
      * This comes out to 8 numbers in total, with any number of whitespaces separating the phone
-     * number into 2 halves of 4 numbers each. Some software parses phone numbers
+     * number into 2 halves of 4 numbers each. Some software displays phone numbers
      * this way, so we want to support parsing of this phone number format too.
      */
     public static final String VALIDATION_REGEX = "[689]\\d{3}\\s*\\d{4}";
