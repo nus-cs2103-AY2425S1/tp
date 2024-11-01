@@ -151,6 +151,16 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+
+### Listing Session logs: `logs`
+
+Lists all logs of a specific patient.
+
+- **Format**: `logs i/[IDENTITY_NUMBER]`
+
+- **Examples**:
+  logs i/S8613282F
+
 ### Confirming a command : `confirm`
 
 Confirms the command that is currently being executed. This command is used to confirm the deletion of a person and the
@@ -168,6 +178,7 @@ clearing of the address book.
 Examples:
 * `delete i/S1234567D` followed by `cancel` cancels the deletion of the person with NRIC S1234567D in the address book.
 * `clear` followed by `cancel` cancels the clearing of the address book.
+
 
 ### Exiting the program : `exit`
 
