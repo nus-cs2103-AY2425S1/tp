@@ -795,9 +795,11 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-* As we were building off of AB3, we were able to reuse the model class and some of the commands.
+* As we were building off of AB3, we were able to reuse the model package and the existing commands.
 * In the beginning of our project (v1.2), this saved us time and effort as it was easy to build an MVP from an already
-functioning product (AB3).
+functioning product (AB3) by making basic modifications to suit our product.
+* We were also able to reuse the extensive test cases and utility in the testutil package, which saved us a lot of
+effort. Future test cases and utility were also designed after these existing ones.
 * However, challenges arose when we wanted to refine our MVP features to better suit ResearchRoster (v1.3)
 and add new features unlike what AB3 had (v1.3, v1.4, v1.5).
 * This was because we had to carefully look through the AB3 code to fully understand how it worked,
@@ -807,3 +809,10 @@ and methods in AB3, rather than simply creating new classes, methods and solutio
 existing classes and methods.
 * The high effort was also because some of the existing classes methods posed limitations to what we wanted to 
 implement, and we had to come up with workarounds to achieve our desired modifications.
+* For example, Edit command class and EditPersonDescriptor class needed lots of reworking because the initial
+functionality only allowed to overwrite list of tags whilst our product aimed to append to the list and delete from
+the list instead of resetting the whole list.
+* Achievements: We were able to achieve a product that is provides useful and efficient features for researchers,
+including the unique feature of randomly assigning participants to a different study groups. Thus, we believe we have
+achieved our aims of creating a product designed specifically for researchers, which sets ResearchRoster apart from
+other contact storing applications.
