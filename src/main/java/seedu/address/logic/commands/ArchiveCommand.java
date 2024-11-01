@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.ModelManager.isArchivedList;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -45,5 +46,27 @@ public class ArchiveCommand extends Command {
         model.addArchivedPerson(personToArchive); // Add person to archived list
         model.deletePerson(personToArchive);
         return new CommandResult(String.format(MESSAGE_ARCHIVE_PERSON_SUCCESS, Messages.format(personToArchive)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ArchiveCommand)) {
+            return false;
+        }
+
+        ArchiveCommand archiveCommand = (ArchiveCommand) other;
+        return index.equals(archiveCommand.index);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .toString();
     }
 }
