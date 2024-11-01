@@ -63,8 +63,6 @@ public class CommandHelpCard extends UiPart<Region> {
             helpWindow.focusPreviousCard(this);
         } else if (keyEvent.getCode() == KeyCode.DOWN) {
             helpWindow.focusNextCard(this);
-        } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
-            helpWindow.close();
         }
     }
 

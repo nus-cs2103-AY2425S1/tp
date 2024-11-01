@@ -164,7 +164,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Closes the help window
      */
     public void close() {
-        getRoot().close();
+        getRoot().hide();
     }
 
     /**
