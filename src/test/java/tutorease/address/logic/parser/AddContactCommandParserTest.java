@@ -11,6 +11,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_D
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -27,10 +28,13 @@ import static tutorease.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static tutorease.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static tutorease.address.logic.commands.CommandTestUtil.TAG_DESC_MENTOR;
 import static tutorease.address.logic.commands.CommandTestUtil.TAG_DESC_SUPPORTIVE;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_EMAIL_DESC_BOB;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_NAME_DESC_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_MENTOR;
@@ -69,8 +73,17 @@ public class AddContactCommandParserTest {
         Student expectedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + ROLE_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedStudent));
+
+        //
+        assertParseSuccess(parser, UPPERCASE_NAME_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + ROLE_DESC_BOB
+                + TAG_DESC_FRIEND, new AddContactCommand(expectedStudent));
+
+        assertParseSuccess(parser, NAME_DESC_BOB
+                + PHONE_DESC_BOB + UPPERCASE_EMAIL_DESC_BOB + ADDRESS_DESC_BOB + ROLE_DESC_BOB
+                + TAG_DESC_FRIEND, new AddContactCommand(expectedStudent));
 
 
         // multiple tags - all accepted
@@ -161,6 +174,10 @@ public class AddContactCommandParserTest {
         // invalid address
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+
+        // invalid role
+        assertParseFailure(parser, validExpectedPersonString + INVALID_ROLE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
     }
 
     @Test
@@ -184,12 +201,16 @@ public class AddContactCommandParserTest {
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
+                        + ROLE_DESC_BOB, expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                        + ROLE_DESC_BOB, expectedMessage);
+
+        // missing role prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + VALID_ROLE_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
