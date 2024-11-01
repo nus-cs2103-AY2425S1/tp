@@ -74,8 +74,8 @@ public class DeleteExamCommand extends Command {
             return false;
         }
 
-        DeleteExamCommand otherdeleteExamCommand = (DeleteExamCommand) other;
-        return exam.equals(otherdeleteExamCommand.exam);
+        DeleteExamCommand otherDeleteExamCommand = (DeleteExamCommand) other;
+        return exam.equals(otherDeleteExamCommand.exam);
     }
 
     @Override
