@@ -42,7 +42,7 @@ public class NewtagCommand extends Command {
 
     /**
      * @throws CommandException if the number of defined tags in the system will exceed the maximum
-     *      * allowable number if the new tags were to be added.
+     *      allowable number if the new tags were to be added.
      */
     private void validateTagListSize(Model model) throws CommandException {
         if (!model.checkAcceptableTagListSize(tags.size())) {
