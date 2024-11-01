@@ -109,6 +109,24 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void containsTag_tagInCampusConnect_returnsTrue() {
+        Tag tag = new Tag("friends");
+        modelManager.addPerson(new PersonBuilder().withTags("friends").build());
+        assertTrue(modelManager.containsTag(tag));
+    }
+
+    @Test
+    public void containsTag_tagNotInCampusConnect_returnsFalse() {
+        Tag tag = new Tag("non-existent-tag");
+        assertFalse(modelManager.containsTag(tag));
+    }
+
+    @Test
+    public void containsTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.containsTag(null));
+    }
+
+    @Test
     public void equals() {
         CampusConnect campusConnect = new CampusConnectBuilder().withPerson(ALICE).withPerson(BENSON).build();
         CampusConnect differentCampusConnect = new CampusConnect();

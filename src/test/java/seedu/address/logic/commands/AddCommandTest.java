@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyCampusConnect;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagCategory;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -191,6 +192,16 @@ public class AddCommandTest {
         }
         @Override
         public void addPersonTags(Person p, Set<? extends Tag> tags) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean containsTag(Tag tag) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void setTagsCategory(Tag t, TagCategory cat) {
             throw new AssertionError("This method should not be called");
         }
     }
