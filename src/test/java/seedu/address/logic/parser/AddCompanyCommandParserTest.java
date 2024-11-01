@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_ADDRESS_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_BILLING_DATE_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_NUS;
@@ -10,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_ADDRE
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_BILLING_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BILLING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
