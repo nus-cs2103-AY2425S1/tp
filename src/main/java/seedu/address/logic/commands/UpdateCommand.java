@@ -104,7 +104,8 @@ public class UpdateCommand extends Command {
      */
     private static Student createUpdatedStudent(Student studentToUpdate,
                                                 UpdateStudentDescriptor updateStudentDescriptor)
-    throws CommandException {
+            throws CommandException {
+
         assert studentToUpdate != null;
 
         Name updatedName = updateStudentDescriptor.getName().orElse(studentToUpdate.getName());
