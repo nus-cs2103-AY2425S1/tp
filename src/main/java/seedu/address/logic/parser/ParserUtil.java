@@ -176,12 +176,23 @@ public class ParserUtil {
     /**
      * Parses a {@code String date} into a {@code LocalDate} and checks if startDate is before endDate
      */
-    public static LocalDate parseDateAndCheck(String startDateString, LocalDate endDate) throws ParseException {
+    public static LocalDate parseStartDateAndCheck(String startDateString, LocalDate endDate) throws ParseException {
         LocalDate startDate = parseDate(startDateString);
         if (!isValidStartAndEndDate(startDate, endDate)) {
             throw new ParseException(AppointmentDateFilter.TWO_DATE_MESSAGE_CONSTRAINTS);
         }
         return startDate;
+    }
+
+    /**
+     * Checks whether the endDate is after today's date or same as today's date
+     */
+    public static LocalDate parseEndDateAndCheck(String endDateString) throws ParseException {
+        LocalDate endDate = parseDate(endDateString);
+        if (endDate.isBefore(LocalDate.now())) {
+            throw new ParseException(AppointmentDateFilter.END_DATE_MESSAGE_CONSTRAINTS);
+        }
+        return endDate;
     }
 
     /**

@@ -17,6 +17,8 @@ public class AppointmentDateFilter {
     public static final String ONE_DATE_MESSAGE_CONSTRAINTS = "Dates should follow the format YYYY-MM-DD";
     public static final String TWO_DATE_MESSAGE_CONSTRAINTS = ONE_DATE_MESSAGE_CONSTRAINTS
             + " and end date should be after start date";
+    public static final String END_DATE_MESSAGE_CONSTRAINTS = "If start date is not specified, "
+            + "end date should be after today's date: " + LocalDate.now();
 
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -36,7 +38,7 @@ public class AppointmentDateFilter {
             checkArgument(isValidStartAndEndDate(startDate, endDate), TWO_DATE_MESSAGE_CONSTRAINTS);
             this.startDate = startDate;
         } else {
-            this.startDate = null;
+            this.startDate = LocalDate.now();
         }
     }
 
@@ -68,7 +70,7 @@ public class AppointmentDateFilter {
      * returns true if start and end dates are valid and end date is after start date
      */
     public static boolean isValidStartAndEndDate(LocalDate startDate, LocalDate endDate) {
-        return endDate.isAfter(startDate);
+        return !endDate.isBefore(startDate);
     }
 
     public LocalDate getStartDate() {
@@ -83,4 +85,9 @@ public class AppointmentDateFilter {
         return healthService;
     }
 
+    @Override
+    public String toString() {
+        String healthService = this.healthService == null ? "" : " with service " + this.healthService;
+        return "within range " + startDate + " to " + endDate + healthService;
+    }
 }
