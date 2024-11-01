@@ -114,7 +114,6 @@ public class PayCommand extends Command {
         return new PaidAmount(amount);
     }
 
-  
     private static double calculatePaid(Student student, double hour) throws CommandException {
         double paid = student.getRate().value * hour;
         if (!PaidAmount.isValidPaidAmount(String.format("%.2f", paid))) {
