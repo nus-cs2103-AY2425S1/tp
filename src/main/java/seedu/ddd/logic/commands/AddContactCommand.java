@@ -22,16 +22,17 @@ import seedu.ddd.model.contact.vendor.Vendor;
 /**
  * Adds a contact to the address book.
  */
-public class AddContactCommand extends Command implements AddCommand {
-    public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": adds a contact.";
-    public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " {"
-            + FLAG_CLIENT + "| "
-            + FLAG_VENDOR + " " + PREFIX_SERVICE + "SERVICE} "
+public class AddContactCommand extends AddCommand {
+    public static final String COMMAND_DESCRIPTION_TEMPLATE = COMMAND_WORD + " %1$s: adds a %2$s.";
+    public static final String COMMAND_USAGE_TEMPLATE = "usage: " + COMMAND_WORD + " %1$s "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            // For service field in vendor
+            + "%2$s"
             + "[" + PREFIX_TAG + "TAG ...]";
+
     public static final String CLIENT_EXAMPLE_USAGE = "example: " + COMMAND_WORD + " "
             + FLAG_CLIENT + " "
             + PREFIX_NAME + "Jane Doe "
@@ -49,15 +50,19 @@ public class AddContactCommand extends Command implements AddCommand {
             + PREFIX_TAG + "vegan "
             + PREFIX_TAG + "budget";
 
-    public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
-            + COMMAND_USAGE + "\n"
+    public static final String MESSAGE_USAGE =
+            String.format(COMMAND_DESCRIPTION_TEMPLATE, FLAG_CLIENT + " | " + FLAG_VENDOR, "contact") + "\n"
+            + String.format(COMMAND_USAGE_TEMPLATE,
+                "{" + FLAG_CLIENT + " | " + FLAG_VENDOR + " " + PREFIX_SERVICE + "SERVICE}", "") + "\n"
             + CLIENT_EXAMPLE_USAGE + "\n"
             + VENDOR_EXAMPLE_USAGE;
-    public static final String VENDOR_MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
-            + COMMAND_USAGE + "\n"
+    public static final String VENDOR_MESSAGE_USAGE =
+            String.format(COMMAND_DESCRIPTION_TEMPLATE, FLAG_VENDOR, "vendor") + "\n"
+            + String.format(COMMAND_USAGE_TEMPLATE, FLAG_VENDOR, PREFIX_SERVICE + "SERVICE ") + "\n"
             + VENDOR_EXAMPLE_USAGE;
-    public static final String CLIENT_MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
-            + COMMAND_USAGE + "\n"
+    public static final String CLIENT_MESSAGE_USAGE =
+            String.format(COMMAND_DESCRIPTION_TEMPLATE, FLAG_CLIENT, "client") + "\n"
+            + String.format(COMMAND_USAGE_TEMPLATE, FLAG_CLIENT, "") + "\n"
             + CLIENT_EXAMPLE_USAGE;
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
