@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
@@ -79,6 +80,18 @@ public class Messages {
             .append("; ")
             .append(delivery.getTime());
         return builder.toString();
+    }
+
+    /**
+     * Formats the list of {@code index} for display to the user.
+     */
+    public static String formatIndexList(List<Index> indexList) {
+        final StringBuilder builder = new StringBuilder();
+        for (Index index : indexList) {
+            builder.append(" ").append(index.getOneBased());
+        }
+
+        return builder.toString().trim();
     }
 
     /**

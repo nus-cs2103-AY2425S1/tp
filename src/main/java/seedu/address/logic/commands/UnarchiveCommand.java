@@ -197,22 +197,6 @@ public class UnarchiveCommand extends Command {
     }
 
     /**
-     * Checks if a list of indexes has any duplicates.
-     *
-     * @param indexList the list of indexes to check
-     * @return true if the list has duplicates, false otherwise
-     */
-    private boolean hasDuplicates(List<Index> indexList) {
-        Set<Integer> uniqueIndices = new HashSet<>();
-        for (Index index : indexList) {
-            if (!uniqueIndices.add(index.getZeroBased())) {
-                return true; // duplicate found
-            }
-        }
-        return false; // no duplicates found
-    }
-
-    /**
      * Validates the indexes in the indexList to ensure none are out of bounds or duplicates.
      *
      * @param listSize The size of the list from which items are to be deleted.
@@ -220,26 +204,70 @@ public class UnarchiveCommand extends Command {
      * @throws CommandException if any index is out of bounds or if duplicates are found.
      */
     private void validateIndexes(int listSize, List<Index> indexList, boolean isDelivery) throws CommandException {
-        boolean hasDuplicate = hasDuplicates(indexList);
-        for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= listSize) {
-                if (isDelivery) {
-                    throw new CommandException(
-                            String.format(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX,
-                                    targetIndex.getOneBased()));
-                } else {
-                    throw new CommandException(
-                            String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                                    targetIndex.getOneBased()));
-                }
-            }
+        List<Index> outOfBoundList = getOutOfBoundList(indexList, listSize);
+        List<Index> duplicateList = getDuplicateList(indexList);
+        String exceptionMessage = "";
 
-            if (hasDuplicate) {
-                throw new CommandException(
-                        String.format(Messages.MESSAGE_INVALID_DUPLICATED_INDEX,
-                                targetIndex.getOneBased()));
+        if (!outOfBoundList.isEmpty()) {
+            if (isDelivery) {
+                exceptionMessage = String.format(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX,
+                        Messages.formatIndexList(outOfBoundList));
+            } else {
+                exceptionMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        Messages.formatIndexList(outOfBoundList));
             }
         }
+
+        if (!duplicateList.isEmpty()) {
+            if (!exceptionMessage.isEmpty()) {
+                exceptionMessage = exceptionMessage + "\n";
+            }
+            exceptionMessage = exceptionMessage + String.format(Messages.MESSAGE_INVALID_DUPLICATED_INDEX,
+                    Messages.formatIndexList(duplicateList));
+        }
+
+        if (!outOfBoundList.isEmpty() || !duplicateList.isEmpty()) {
+            throw new CommandException(exceptionMessage);
+        }
+    }
+
+    /**
+     * Returns a list of indexes containing duplicates.
+     *
+     * @param indexList the list of indexes to check
+     * @return a list containing duplicates, an empty list otherwise
+     */
+    private List<Index> getDuplicateList(List<Index> indexList) {
+        List<Index> duplicateList = new ArrayList<>();
+        Set<Integer> uniqueIndices = new HashSet<>();
+        for (Index index : indexList) {
+            if (!uniqueIndices.add(index.getZeroBased()) && !duplicateList.contains(index)) {
+                duplicateList.add(index);
+            }
+        }
+        duplicateList.sort(Comparator.comparingInt(Index::getOneBased));
+        return duplicateList;
+    }
+
+    /**
+     * Returns a list of out-of-bound indexes.
+     *
+     * @param indexList the list of indexes to check
+     * @return list of index containing out-of-bound indexes
+     */
+    private List<Index> getOutOfBoundList(List<Index> indexList, int listSize) {
+        List<Index> invalidIndexList = new ArrayList<>();
+        for (Index index : indexList) {
+            if (invalidIndexList.contains(index)) {
+                continue;
+            }
+
+            if (index.getZeroBased() >= listSize || index.getZeroBased() < 0) {
+                invalidIndexList.add(index);
+            }
+        }
+        invalidIndexList.sort(Comparator.comparingInt(Index::getOneBased));
+        return invalidIndexList;
     }
 
     /**
