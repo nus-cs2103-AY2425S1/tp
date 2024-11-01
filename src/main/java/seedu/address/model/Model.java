@@ -103,6 +103,9 @@ public interface Model {
      */
     void updateSortingOrder(Comparator<Person> comparator);
 
+    /** Returns an unmodifiable view of the appointment list */
+    List<Appointment> getAppointments();
+
     /**
      * Adds the given appointment.
      * {@code appointment} must not conflict with any existing appointments.

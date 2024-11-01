@@ -1,26 +1,33 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MULTIPLE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalParams.PARAMS_ARRAY_FIRST;
 import static seedu.address.testutil.TypicalParams.PARAMS_INPUT_FIRST;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -28,6 +35,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListAppointmentCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StatisticsCommand;
@@ -49,19 +57,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    public void parseCommand_addAppointment() throws Exception {
+        LocalDate date = LocalDate.of(2024, 11, 1);
+        LocalTime startTime = LocalTime.of(9, 0);
+        LocalTime endTime = LocalTime.of(10, 0);
+
+        String input = AddAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_DATE + date + " " + PREFIX_FROM + startTime + " " + PREFIX_TO + endTime;
+
+        AddAppointmentCommand command = (AddAppointmentCommand) parser.parseCommand(input);
+        assertEquals(new AddAppointmentCommand(INDEX_FIRST_PERSON, date, startTime, endTime), command);
     }
-
-
-    @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_MULTIPLE), command);
-    }
-
 
     @Test
     public void parseCommand_edit() throws Exception {
@@ -73,9 +79,23 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    public void parseCommand_delete() throws Exception {
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_MULTIPLE), command);
+    }
+
+    @Test
+    public void parseCommand_deleteAppointment() throws Exception {
+        DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
+                DeleteAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteAppointmentCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_clear() throws Exception {
+        assertInstanceOf(ClearCommand.class, parser.parseCommand(ClearCommand.COMMAND_WORD));
+        assertInstanceOf(ClearCommand.class, parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -103,21 +123,34 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " add") instanceof HelpCommand);
+    public void parseCommand_list() throws Exception {
+        assertInstanceOf(ListCommand.class, parser.parseCommand(ListCommand.COMMAND_WORD));
+        assertInstanceOf(ListCommand.class, parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    public void parseCommand_listAppointment() throws Exception {
+        assertInstanceOf(ListAppointmentCommand.class, parser.parseCommand(ListAppointmentCommand.COMMAND_WORD));
+        assertInstanceOf(ListAppointmentCommand.class,
+                parser.parseCommand(ListAppointmentCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_exit() throws Exception {
+        assertInstanceOf(ExitCommand.class, parser.parseCommand(ExitCommand.COMMAND_WORD));
+        assertInstanceOf(ExitCommand.class, parser.parseCommand(ExitCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_help() throws Exception {
+        assertInstanceOf(HelpCommand.class, parser.parseCommand(HelpCommand.COMMAND_WORD));
+        assertInstanceOf(HelpCommand.class, parser.parseCommand(HelpCommand.COMMAND_WORD + " add"));
     }
 
     @Test
     public void parseCommand_statistics() throws Exception {
-        assertTrue(parser.parseCommand(StatisticsCommand.COMMAND_WORD) instanceof StatisticsCommand);
-        assertTrue(parser.parseCommand(StatisticsCommand.COMMAND_WORD + " 3") instanceof StatisticsCommand);
+        assertInstanceOf(StatisticsCommand.class, parser.parseCommand(StatisticsCommand.COMMAND_WORD));
+        assertInstanceOf(StatisticsCommand.class, parser.parseCommand(StatisticsCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -128,8 +161,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
+        assertThrows(ParseException.class, expectedMessage, () -> parser.parseCommand(""));
     }
 
     @Test
