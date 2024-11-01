@@ -904,12 +904,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input attribute.
 3. System sorts the displayed list based on the attribute.
 4. System displays the sorted list.
-5. System confirms the success by displaying a success message. Use case ends.
+5. System confirms the success by displaying a success message.
+   Use case ends.
 
 **Extensions**
 * 2a. System detects an invalid attribute.
     * 2a1. System displays an error message asking for valid input.
-    * Use case ends.
+      Use case ends.
 
 
 ### Non-Functional Requirements
