@@ -35,8 +35,8 @@ public class Description {
      */
     public Description(String description) {
         requireNonNull(description);
-        checkArgument(checkEmptyDescription(description), DESCRIPTION_EMPTY);
-        checkArgument(checkTooLongDescription(description), DESCRIPTION_TOO_LONG);
+        checkArgument(!checkEmptyDescription(description), DESCRIPTION_EMPTY);
+        checkArgument(!checkTooLongDescription(description), DESCRIPTION_TOO_LONG);
 
         this.description = description;
     }

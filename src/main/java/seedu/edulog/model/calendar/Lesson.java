@@ -130,7 +130,7 @@ public class Lesson {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("description", description)
+                .add("description", description.toString())
                 .add("From", startDay + " " + getFormattedStartTime())
                 .add("To",
                     startDay.plus(
