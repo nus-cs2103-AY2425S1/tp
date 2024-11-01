@@ -6,8 +6,12 @@
 
 # WedLinker User Guide
 
-WedLinker is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). </br>
-If you can type fast, WedLinker can get your contact management tasks done faster than traditional GUI apps.
+WedLinker is your **essential desktop app for managing wedding-related contacts**, designed specifically for professional wedding planners.
+**With a powerful Command Line Interface (CLI)**, WedLinker is optimised for fast typers, simplifying your contact management tasks 
+through quick, text-based commands. This means you can accomplish your tasks faster than with traditional GUI apps, giving you more time to focus on what matters most—creating memorable experiences for your clients.
+
+While WedLinker excels with its CLI for speed, it still offers the valuable visual elements of a Graphical User Interface (GUI). The GUI provides an organised and intuitive layout, making it easy to visualise your contacts, weddings, and tasks at a glance.
+This combination of efficiency and clarity ensures that you can manage your wedding planning responsibilities with ease and precision.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -16,7 +20,24 @@ If you can type fast, WedLinker can get your contact management tasks done faste
 
 ## Quick start
 
-1. Ensure you have `Java 17` or above installed in your Computer. If you do not have Java 17 installed, or you are unsure, refer to the guide below.
+1. Ensure you have `Java 17` or above installed on your computer by performing the following:
+   1. Open your system terminal
+      1. Windows: <br>
+         1. Hold down Windows button and R (⊞ Win + R ) 
+         2. Type `cmd` and press enter
+         
+      1. MacOS -- do one of the following: <br>
+          - Click the Launchpad icon in the Dock, type `Terminal` in the search field, then click Terminal, OR
+          - In the Finder, open the `/Applications/Utilities` folder, then double-click Terminal.
+   1. Type `java -version` and press enter
+   1. If you have `Java 17 installed, the terminal should look something like:
+   ```
+         C:\Users\UserName>java -version
+         java version "17.0.12" 2024-07-16 LTS
+         Java(TM) SE Runtime Environment (build 17.0.12+8-LTS-286)
+         Java HotSpot(TM) 64-Bit Server VM (build 17.0.12+8-LTS-286, mixed mode, sharing)
+    ```
+2. If you do not have Java 17 installed, or you are unsure, refer to the guide below.
    1. Download `Java 17` from the official website: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
    2. Select the installation package based on your Operating System. For Apple users select macOS, for Windows users select Windows.
    3. Follow the instruction guide to install Java on your device. For more information use this guide: https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html
@@ -35,7 +56,7 @@ If you can type fast, WedLinker can get your contact management tasks done faste
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/ABC Photography Studio` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -57,10 +78,10 @@ If you can type fast, WedLinker can get your contact management tasks done faste
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/guest` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/guest`, `t/guest t/photographer` etc.
 
 * Commands in WedLinker uses prefix to specify the parameters, the prefixes are stated as such:
   * n/ Name
@@ -100,9 +121,13 @@ Format: `list`
 
 Shows a list of all [Weddings](#wedding-features) in the WedLinker.
 
+Format: `list-weddings`
+
 ### Listing all Tasks : `list-tasks`
 
 Shows a list of all [Tasks](#task-features) in the WedLinker
+
+Format: `list-tasks`
 
 ### Locating contacts by any field, similar to a search function: `find`
 
@@ -110,24 +135,32 @@ Finds all persons based on the specified keywords (case-insensitive) after the p
 
 Format: `find PREFIX KEYWORD [KEYWORD]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The search will return partial matches and full matches
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
+* The search will return partial matches and full matches.
+* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate prefix. 
+* Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-![result for 'find n/alex david'](images/findCommandName.png)
-* `find t/friends` returns all Contacts tagged with Friends <br>
-![result for `find t/friends](images/findCommandTag.png)
-* `find w/Amy's Wedding` returns all Contacts involved with Amy's Wedding <br>
-![result for 'find w/Casey'](images/findCommandWedding.png)
+* `find p/973` returns all Contacts whose phone number contains 973
+* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
+![result for 'find n/alex n/david'](images/findCommandName.png)
+* `find t/friends` returns all Contacts tagged with 'guest' <br>
+![result for `find t/guest](images/findCommandTag.png)
+* `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
+![result for 'find w/Casey's Wedding](images/findCommandWedding.png)
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+**Caution:**
+This action is irreversible and cannot be undone. Please ensure you have backed up any important information before proceeding.
+</box>
 
 ### Exiting the program : `exit`
 
@@ -300,7 +333,12 @@ Format: `delete-wedding w/WEDDINGNAME [f/]`
 
 Creates a `Task` in WedLinker
 
-Format: `create-task tk/TASKTYPE TASKDESCRIPTION [REMARKS]`
+Format: `create-task tk/TASKDESCRIPTION [REMARKS]`
+
+* Tasks may have no dates, a single date indicating a deadline, or two dates to define a start and end period.
+* The dates can be specified under `REMARKS` with the format `d/YYYY-MM-DD`
+* Tasks are unique in WedLinker, there would not be any duplicated tasks.
+* Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task-) command.
 
 ### Delete a Task : `delete-task`
 
@@ -308,9 +346,43 @@ Deletes a `Task` from WedLinker
 
 Format: `delete-task INDEX`
 
-### Assigning a Task to a contact : `assign-task` **(WIP)**
+* Deletes the specific `Task` at the INDEX when in [list-tasks](#listing-all-tasks--list-tasks) view.
+* The index **must be a positive integer** 1, 2, 3, …​.
 
-### Unassigning a Task from a contact : `unassign-task` **(WIP)**
+### Assigning a Task to a contact : `assign-task` 
+
+Format: `assign-task PERSONINDEX TASKINDEX`
+
+* Assigns a `Task` to a contact.
+* The indexes correspond to the indexes when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The `PERSONINDEX` refers to the index of the person shown under the **People** column.
+* The `TASKINDEX` refers to the index of the task shown under the **Tasks** column
+* The indexes **must be positive integers** 1, 2, 3, …​.
+
+### Un-assigning a Task from a contact : `unassign-task` 
+
+Format: `unassign-task PERSONINDEX TASKINDEX_OFPERSON`
+
+* Un-assigns a `Task` from a contact.
+* The `PERSONINDEX` is the index of the person shown in the displayed person list.
+* The `TASKINDEX_OFPERSON` is the index of the task associated with the selected person.
+* The indexes **must be positive integers** 1, 2, 3, …​.
+
+### Mark a task as completed : `mark-task` 
+
+Format: `mark-task TASKINDEX`
+
+* Marks a `Task` as completed.
+* The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The index **must be a positive integers** 1, 2, 3, …​.
+
+### Un-mark a task  : `unmark-task` 
+
+Format: `unmark-task TASKINDEX`
+
+* Marks a `Task` as not completed.
+* The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The index **must be a positive integers** 1, 2, 3, …​.
 
 --------------------------------------------------------------------------------------------------------------------
 
