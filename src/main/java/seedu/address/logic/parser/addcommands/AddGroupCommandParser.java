@@ -18,7 +18,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -46,12 +45,12 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME);
-        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
-        Group group = new Group(groupName);
-
-        return new AddGroupCommand(group);
+        List<String> groupNames = argMultimap.getAllValues(PREFIX_GROUP_NAME);
+        List<Group> groups = new ArrayList<Group>();
+        for (String s: groupNames) {
+            groups.add(new Group(ParserUtil.parseGroupName(s)));
+        }
+        return new AddGroupCommand(groups);
     }
 
     /**
