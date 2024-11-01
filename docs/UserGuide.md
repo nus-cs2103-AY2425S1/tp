@@ -63,9 +63,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### **Viewing Help**
-
-Shows a message explaining how to access the help page.
+### Viewing help : `help`
 
 **Command Format:**  
 `help`
@@ -76,7 +74,7 @@ Shows a message explaining how to access the help page.
 
 ---
 
-### **Add Contact**
+### Adding a person: `add`
 
 Adds a new contact with details such as name, phone number, physical address, birthday, email, social media handles, and remarks.
 
@@ -104,7 +102,7 @@ A person can have any number of tags (including 0)
 
 ---
 
-### **List All Contacts**
+### Listing all persons : `list`
 
 Displays all persons stored in the address book.
 
@@ -113,38 +111,39 @@ Displays all persons stored in the address book.
 
 - Shows a list of all saved contacts.
 
----
+---d
 
-### **Sort Contacts Alphabetically**
+### Sorting contacts: `sort`
 
 Sorts the contact list by name, either in ascending (A-Z) or descending (Z-A) order.
 
 **Command Format:**  
 `sort <asc/desc>`
 
-- `asc` for ascending order
-- `desc` for descending order
+- `ORDER` must be either `asc` for ascending (A-Z) or `desc` for descending (Z-A).
+- If an invalid or no order is provided, an error message will be shown.
 
-**Examples:**
-- `sort asc`
-- `sort desc`
+Examples:
+* `sort asc` – Sorts contacts in alphabetical order (A-Z).
+* `sort desc` – Sorts contacts in reverse alphabetical order (Z-A).
 
 ---
 
-
-### Editing a Person : `edit`
+### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
 **Command Format:**  
 `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index is the number next to the person's name in the displayed list and must be a positive integer (e.g., 1, 2, 3, …).
-- At least one optional field must be included for the edit to proceed.
-- Any provided values will replace the person’s existing values.
-- Editing tags will replace the current tags with the new ones; tags are not added cumulatively.
-- To remove all tags from a person, use `t/` without adding any tags after it.
+- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+- You can remove all the person’s tags by typing `t/` without
+    specifying any tags after it.
 - Note that history and property **cannot be edited**
+
 
 **Examples:**
 -  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -153,7 +152,78 @@ Edits an existing person in the address book.
 -  `edit 4 n/James Lee b/1989-07-20 t/friend t/premium` Edits the name of the 4th person to `James Lee`, sets their birthday to `1989-07-20`, and updates their tags to `friend` and `premium`.
 -  `edit 5 p/98765432 t/` Edits the phone number of the 5th person to `98765432` and removes all existing tags.
 
-### **Locating Persons by Name**
+### Adding history to a person : `log`
+
+Edits an existing person in the address book.
+
+Format: `log INDEX [d/DATE] l/LOG`
+
+* Adds a new history entry to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
+* Date is optional, and must be no earlier than the date of creation of the person, and not in the future, if to be included.
+* If date is not included the date of the history entry to be added will be today, system time, by default.
+* Date format must be in `yyyy-mm-dd`.
+
+Examples:
+* `log 1 d/2024-08-08 l/meet up` add a log entry to the first person in the address book, `meet up` on 2024-08-08.
+  ![result for 'log 1 d/2024-08-08 l/meet up'](images/wxy2003-xy.png)
+  ![result for 'view 1'](images/wxy2003-xy.png)
+
+* `log 2 l/had lunch together` add a log entry to the 2nd person in the address book, `had lunch together` on today.
+  ![result for 'log 2 l/had lunch together'](images/wxy2003-xy.png)
+  ![result for 'view 2'](images/wxy2003-xy.png)
+
+### Remarking a person : `remark`
+
+Add or edit remark to an existing person in the address book.
+
+Format: `remark INDEX r/REMARK`
+
+* Add or edit remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
+
+Examples:
+* `remark 1 r/remark message` adds remark message `remark message` to the 1st person, existing remark will be overwritten.
+
+### Single page person view: `view`
+
+Shows all the information related to a contact on a single page.
+
+Format: `view INDEX`
+
+* The search is based on the most updated contact list.
+* Opening a new window will automatically close the previously opened window.
+* Shows the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+*   `view 1` Shows the person located as index position 1 in the address book.
+    ![result for 'viewWindow'](images/viewWindow.png)
+
+
+### Adding a Property: `addProperty`
+
+Add a property listing to an existing person in the address book.
+
+Format: `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUMBER_OF_BEDROOMS bath/NUMBER_OF_BATHROOMS price/PRICE`
+
+* Add a property to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
+* The property details include the address, town, property type, size, number of bedrooms, number of bathrooms, and price. All fields are required.
+* Size is in square meters.
+
+Examples:
+* `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` adds a property with the specified details to the 1st person in the list.
+* `addProperty 2 address/45 Elm St town/Anytown type/HDB size/70 bed/3 bath/1 price/350000` adds a property to the 2nd person in the list.
+
+### Closing single page person view: `close`
+
+Closes the UI page that shows the information of the person.
+
+Format: `close`
+
+* This will close the last opened window.
+
+Examples:
+*   `close` Will close the window that is currently open, and do nothing if there is no window open.
+
+### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -172,7 +242,29 @@ Finds persons whose names contain any of the given keywords.
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### **Deleting a Person**
+### Marking a person as favourite: `favourite`
+
+Mark a specific person from the address book as favourite by assigning a special favourite label.
+
+Format: `favourite INDEX`
+
+* Mark the person at the specified `INDEX` as favourite.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `favourite 2` marks the 2nd person in the address book as favourite.
+  ![result for 'favourite 2'](images/wxy2003-xy.png)
+
+Format: `favourite`
+
+* Bring all persons marked as favourite to the front.
+
+Examples:
+* `favourite` followed by `favourite 2` brings the previously 2nd person who has been marked to the front (1st).
+  ![result for 'favourite'](images/wxy2003-xy.png)
+
+### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
@@ -187,14 +279,14 @@ Deletes the specified person from the address book.
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing All Entries
+### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 **Command Format:**  
 `clear`
 
-### Exiting the Program
+### Exiting the program : `exit`
 
 Exits the program.
 
@@ -216,70 +308,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
-### **Favourite Contacts**
+### Store Birthday of a Contact: `birthday`
 
-Marks a contact as a favourite for quick access or displays all favourite contacts.
-
-**Command Format:**  
-`favourite <ContactID>` or `favourite`
-
-- When `ContactID` is provided, it marks that contact as a favourite.
-- If `ContactID` is absent, all favourite contacts are moved to the front of the list for easy access.
-
-**Examples:**
-- `favourite 123` marks the contact with ID `123` as a favourite.
-- `favourite` brings all favourite contacts to the top of the list.
-
----
-
-### **Add or Edit Remarks for a Contact**
-
-Adds or updates a remark for a specific contact.
-
-**Command Format:**  
-`remark <index> r/<remark message>`
-
-- `index` is the contact's index in the list.
-- `r/` The message to be added as a remark.
-
-**Example:**
-- `remark 1 r/Interested in waterfront property`
-
----
-
-### **View Full Contact Details**
-
-Displays detailed information of a specific contact on a single page.
-
-**Command Format:**  
-`view <ContactID>`
-
-- Shows all the contact’s details.
-
-**Example:**
-- `view 123`
-
-![View Contact Example](images/view_contact.png)
-
----
-
-### **Favourite Contacts**
-
-Marks a contact as a favourite for quick access.
-
-**Command Format:**  
-`favourite <ContactID>`
-
-- Marks the contact with the specified `ContactID` as a favourite.
-
-**Example:**
-- `favourite 123`
-
----
-
-### **Birthday Reminder for a Contact**
-
-Stores a contact’s birthday and sets up a reminder for the birthday.
+Stores a contact’s birthday
 
 **Command Format:**  
 `birthday <ContactID> d/<Birthday Date>`
@@ -289,6 +320,15 @@ Stores a contact’s birthday and sets up a reminder for the birthday.
 **Examples:**
 - `birthday 123 d/1990-05-15`
 - `birthday 456 d/09-25`
+
+---
+
+### Birthday Reminder
+
+Displays contacts' birthday if they are happening within a week from the system's current date.
+
+**Command Format:**
+None, as it is an automatic feature.
 
 ![Birthday Reminder Example](images/birthday_reminder.png)
 

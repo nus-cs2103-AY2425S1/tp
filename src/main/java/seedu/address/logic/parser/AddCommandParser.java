@@ -23,6 +23,7 @@ import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PropertyList;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
@@ -58,7 +59,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         DateOfCreation dateOfCreation = new DateOfCreation(LocalDate.now());
         History history = History.addActivity(new History(dateOfCreation.getDateOfCreation()),
                 dateOfCreation.getDateOfCreation(), "Created");
-        Person person = new Person(name, phone, email, address, remark, birthday, tagList, dateOfCreation, history);
+        PropertyList propertyList = new PropertyList();
+        Person person = new Person(name, phone, email, address, remark,
+                birthday, tagList, dateOfCreation, history, propertyList);
         return new AddCommand(person);
     }
 

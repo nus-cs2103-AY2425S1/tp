@@ -75,12 +75,12 @@ public class LogCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getBirthday(),
                 personToEdit.getTags(),
                 personToEdit.getDateOfCreation(),
-                editedHistory);
-
+                editedHistory,
+                personToEdit.getPropertyList());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_HISTORY_SUCCESS,
+                Messages.format(editedPerson)));
     }
 
     @Override

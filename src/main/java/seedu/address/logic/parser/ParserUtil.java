@@ -26,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DOUBLE = "Invalid double value: %s";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -163,6 +164,39 @@ public class ParserUtil {
             return parsedDate;
         } catch (DateTimeException e) {
             throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        }
+    }
+
+    /**
+     * Parses a {@code String} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code input} is not a valid double.
+     */
+    public static double parseDouble(String input) throws ParseException {
+        requireNonNull(input);
+        String trimmedInput = input.trim();
+        try {
+            return Double.parseDouble(trimmedInput);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid double value: " + input);
+        }
+    }
+
+
+    /**
+     * Parses a {@code String} into an {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code input} is not a valid integer.
+     */
+    public static int parseInteger(String input) throws ParseException {
+        requireNonNull(input);
+        String trimmedInput = input.trim();
+        try {
+            return Integer.parseInt(trimmedInput);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid integer value: " + input);
         }
     }
 }

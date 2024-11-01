@@ -82,7 +82,8 @@ public class FavouriteCommand extends Command {
                     personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getBirthday(),
                     addedFavouriteTagSet,
                     personToEdit.getDateOfCreation(),
-                    personToEdit.getHistory());
+                    personToEdit.getHistory(),
+                    personToEdit.getPropertyList());
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_FAVOURITE_ADDED, editedPerson));

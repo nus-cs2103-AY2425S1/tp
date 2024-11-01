@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.logic.Messages.MESSAGE_ACTIVITY_LIST_NOT_INITIALIZED;
+import static seedu.address.logic.Messages.MESSAGE_AFTER_TODAY;
 import static seedu.address.logic.Messages.MESSAGE_BEFORE_DATE_OF_CREATION;
 
 import java.time.DateTimeException;
@@ -104,6 +105,9 @@ public class History {
             throw new DateTimeException(String.format(MESSAGE_BEFORE_DATE_OF_CREATION, date,
                     this.dateOfCreation));
         }
+        if (date.isAfter(LocalDate.now())) {
+            throw new DateTimeException(String.format(MESSAGE_AFTER_TODAY, date));
+        }
         try {
             ArrayList<String> listOfActivitiesMessage = this.history.get(date);
             return listOfActivitiesMessage.stream()
@@ -161,6 +165,12 @@ public class History {
         // Compare dateOfCreation and history fields for equality
         return this.dateOfCreation.equals(otherHistory.dateOfCreation)
                 && this.history.equals(otherHistory.history);
+    }
+    /**
+     * @return if the history object contains entries other than the default creation entry {@code boolean}.
+     */
+    public boolean hasNoEntry() {
+        return this.history.entrySet().stream().flatMap(e -> e.getValue().stream()).count() < 1;
     }
     @Override
     public String toString() {

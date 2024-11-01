@@ -49,8 +49,6 @@
         <Label text="Remark:" styleClass="cell_small_label"/>
         <Label fx:id="remark" styleClass="cell_small_label" />
       </HBox>
-
-
     </VBox>
   </GridPane>
 </HBox>

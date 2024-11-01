@@ -31,10 +31,9 @@ import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PropertyList;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
-
-
 
 /**
  * Edits the details of an existing person in the address book.
@@ -95,14 +94,16 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson)));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit,
+                                             EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -115,8 +116,11 @@ public class EditCommand extends Command {
         DateOfCreation updatedDateOfCreation = editPersonDescriptor.getDateofCreation()
                 .orElse(personToEdit.getDateOfCreation());
         History updatedHistory = editPersonDescriptor.getHistory().orElse(personToEdit.getHistory());
+        PropertyList updatedPropertyList = editPersonDescriptor.getPropertyList()
+                .orElse(personToEdit.getPropertyList());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRemark, updatedBirthday, updatedTags, updatedDateOfCreation, updatedHistory);
+                updatedRemark, updatedBirthday, updatedTags, updatedDateOfCreation,
+                updatedHistory, updatedPropertyList);
     }
 
     @Override
@@ -157,6 +161,7 @@ public class EditCommand extends Command {
         private DateOfCreation dateOfCreation;
         private History history;
         private Birthday birthday;
+        private PropertyList propertyList;
         public EditPersonDescriptor() {}
 
         /**
@@ -173,6 +178,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setDateOfCreation(toCopy.dateOfCreation);
             setHistory(toCopy.history);
+            setPropertyList(toCopy.propertyList);
         }
 
         /**
@@ -230,6 +236,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(birthday);
         }
 
+        public void setPropertyList(PropertyList propertyList) {
+            this.propertyList = propertyList;
+        }
+
+        public Optional<PropertyList> getPropertyList() {
+            return Optional.ofNullable(propertyList);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -277,7 +291,9 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(dateOfCreation, otherEditPersonDescriptor.dateOfCreation)
-                    && Objects.equals(birthday, otherEditPersonDescriptor.birthday);
+                    && Objects.equals(birthday, otherEditPersonDescriptor.birthday)
+                    && Objects.equals(propertyList, otherEditPersonDescriptor.propertyList);
+
         }
 
         @Override
@@ -292,6 +308,7 @@ public class EditCommand extends Command {
                     .add("tags", tags)
                     .add("dateOfCreation", dateOfCreation)
                     .add("history", history)
+                    .add("propertyList", propertyList)
                     .toString();
         }
     }
