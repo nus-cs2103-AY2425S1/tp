@@ -3,10 +3,14 @@ package seedu.edulog.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.edulog.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.edulog.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.edulog.logic.parser.CliSyntax.PREFIX_START_DAY;
+import static seedu.edulog.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.edulog.testutil.Assert.assertThrows;
 
@@ -18,6 +22,7 @@ import seedu.edulog.commons.core.index.Index;
 import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.EduLog;
 import seedu.edulog.model.Model;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.student.NameContainsKeywordsPredicate;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.testutil.EditStudentDescriptorBuilder;
@@ -27,6 +32,7 @@ import seedu.edulog.testutil.EditStudentDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // Student command Strings
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -73,6 +79,38 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    // Lesson command Strings
+    public static final String VALID_DESCRIPTION_MATH = "MATH";
+    public static final String VALID_DESCRIPTION_BIO = "BIO";
+    public static final String VALID_DAY_BIO = "MONDAY";
+    public static final String VALID_DAY_MATH = "wED";
+    public static final String VALID_START_TIME_BIO = "1400";
+    public static final String VALID_START_TIME_MATH = "2300";
+    public static final String VALID_END_TIME_BIO = "1700";
+    public static final String VALID_END_TIME_MATH = "0100";
+
+    public static final String DESCRIPTION_DESC_BIO = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BIO;
+    public static final String DESCRIPTION_DESC_MATH = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_MATH;
+    public static final String DAY_DESC_BIO = " " + PREFIX_START_DAY + VALID_DAY_BIO;
+    public static final String DAY_DESC_MATH = " " + PREFIX_START_DAY + VALID_DAY_MATH;
+    public static final String START_TIME_DESC_BIO = " " + PREFIX_START_TIME + VALID_START_TIME_BIO;
+    public static final String START_TIME_DESC_MATH = " " + PREFIX_START_TIME + VALID_START_TIME_MATH;
+    public static final String END_TIME_DESC_BIO = " " + PREFIX_END_TIME + VALID_END_TIME_BIO;
+    public static final String END_TIME_DESC_MATH = " " + PREFIX_END_TIME + VALID_END_TIME_MATH;
+
+    // lesson descriptions cannot be purely whitespace
+    public static final String INVALID_DESCRIPTION_DESC_EMPTY = " " + PREFIX_DESCRIPTION + "   ";
+
+    // lesson descriptions must fit within the provided description space
+    public static final String INVALID_DESCRIPTION_DESC_TOO_LONG =
+        " " + PREFIX_DESCRIPTION + "A".repeat(Description.MAX_CHARACTER_LIMIT + 1);
+
+    // Day of week not spelt properly
+    public static final String INVALID_DAY_DESC = " " + PREFIX_START_DAY + "Mondya";
+
+    // Time does not fit in 24-hour format
+    public static final String INVALID_TIME_DESC = " " + PREFIX_START_TIME + "2469";
 
     /**
      * Executes the given {@code command}, confirms that <br>
