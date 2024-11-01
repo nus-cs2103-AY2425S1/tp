@@ -16,7 +16,6 @@ import seedu.address.model.tag.Role;
 public class ContactCard extends UiPart<Region> {
 
     private static final String FXML = "ContactListCard.fxml";
-
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -50,18 +49,19 @@ public class ContactCard extends UiPart<Region> {
     public ContactCard(Contact contact, int displayedIndex) {
         super(FXML);
         this.contact = contact;
+        final String nicknamePrelabel = "aka ";
+        final String telegramPrelabel = "@";
         id.setText(displayedIndex + ". ");
         name.setText(contact.getName().fullName);
-        telegramHandle.setText(contact.getTelegramHandle().value);
+        telegramHandle.setText(telegramPrelabel + contact.getTelegramHandle().value);
         studentStatus.setText(contact.getStudentStatus().value);
         email.setText(contact.getEmail().value);
         contact.getRoles().stream()
                 .sorted(Comparator.comparing(tag -> tag.roleName))
                 .forEach(role -> roles.getChildren().add(getRoleLabel(role)));
-
         String nicknameObtained = contact.getNickname().value;
         if (!nicknameObtained.isEmpty()) {
-            nickname.getChildren().add(new Label(nicknameObtained));
+            nickname.getChildren().add(new Label(nicknamePrelabel + nicknameObtained));
         }
     }
 

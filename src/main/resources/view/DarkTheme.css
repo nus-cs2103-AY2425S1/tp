@@ -337,6 +337,11 @@
     -fx-background-radius: 0;
 }
 
+
+#nickname .label {
+    -fx-font-size: 15;
+}
+
 #roles {
     -fx-hgap: 7;
     -fx-vgap: 3;
