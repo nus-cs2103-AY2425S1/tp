@@ -7,6 +7,11 @@ PROperty is a **desktop app for property agents managing contacts and their prop
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, PROperty can get your contact and property management tasks done faster than traditional GUI apps.
 
+PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
+and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It taps on the
+fact that it is a lot less complicated to operate than its competitors such as Microsoft Excel while being faster to
+operate than graphical user interfaces commonly found in smartphones.
+
 ## Table of Contents
 * [Quick start](#quick-start)
 * [Features](#features)
@@ -29,7 +34,6 @@ If you can type fast, PROperty can get your contact and property management task
 * [FAQ](#faq)
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -294,6 +298,12 @@ Examples:
 
 - `listing delete 1 1` deletes the `1`st property listing from the person with index `1`
 
+### Sorting all persons : `sort`
+
+Sorts the list of all persons in the address book by name in alphabetical order.
+
+Format: sort
+
 ### Saving the data
 
 PROperty data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -343,5 +353,6 @@ _Details coming soon ..._
 | **Add Listing**    | `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
 | **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                            |
 | **Show**           | `show INDEX`<br> e.g., `show 1`                                                                                                                                                 |
+| **Sort**           | `sort`                                                                                                                                                                          |
 | **Help**           | `help`                                                                                                                                                                          |
 | **Remark**         | `remark INDEX r/[REMARKS]`                                                                                                                                                      |
