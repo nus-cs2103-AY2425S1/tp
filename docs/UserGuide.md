@@ -321,11 +321,11 @@ Each client's record includes their name, contact number, email, occupation, and
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
 **Examples:**
-- Add new customer (without optional fields):
+- Add new client (without optional fields):
   ```
   add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999
   ```
-- Add new customer with tier and remark:
+- Add new client with tier and remark:
   ```
   add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue
   ```
@@ -350,7 +350,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 > When this happens, you will see the following message:
 >
 > ```
-> This customer is already saved as a contact.
+> This client is already saved as a contact.
 > ```
 >
 > **The duplicate contact will not be saved** to prevent redundancy.
@@ -403,36 +403,36 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success:**
     - Message:
       ```
-      Customer <INDEX> has been updated successfully.
+      client <INDEX> has been updated successfully.
       ```
 - **On Error:**
     - Message:
       ```
-      Failed to update customer <INDEX>.
+      Failed to update client <INDEX>.
       ```
 
 > 💡 **Pro Tip:**  
-> No need to worry about duplicate indexes—AgentAssist guarantees that every customer has a unique index automatically.
+> No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 
 
 
 
 ### 5.2.3 Delete an Existing Client {#delete-command}
 
-**Purpose:** Remove records of customers who are no longer using your credit card services.
+**Purpose:** Remove records of clients who are no longer using your credit card services.
 
 **Command Format:**
 ```
 delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
-* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of customers in the list**.
+* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
 **Examples:**
-- Remove a customer with a specific index (e.g. at index 12):
+- Remove a client with a specific index (e.g. at index 12):
     ```
     delete 12
     ```
@@ -445,7 +445,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success (after confirming with y/yes):**
     - Message:
       ```
-      Customer <INDEX> has been deleted.
+      client <INDEX> has been deleted.
       ```
 - **On Cancellation (if confirmation is declined):**
     - Message:
@@ -455,11 +455,11 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Error:**
     - Invalid index error message:
       ```
-      No customer with <INDEX> exists. Please recheck the index.
+      No client with <INDEX> exists. Please recheck the index.
       ```
 
 > 💡 **Pro Tip:**  
-> No need to worry about duplicate indexes—AgentAssist guarantees that every customer has a unique index automatically.
+> No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 
 
 
@@ -526,50 +526,50 @@ filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARKS> t/ <TI
 - **Mandatory Field**: One or more flags with corresponding search terms.
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
-    - Example: `i/ >5000` will filter customers with an income greater than 5000.
+    - Example: `i/ >5000` will filter clients with an income greater than 5000.
     - See [Filtering By Income](#filtering-by-income) for more information.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
 **Examples:**
-- Filter customers by name:
+- Filter clients by name:
   ```
   filter n/ John Doe
   ```
-- Filter customers by job:
+- Filter clients by job:
   ```
   filter j/ doctor
   ```
-- Filter customers by name, job and remark:
+- Filter clients by name, job and remark:
   ```
   filter n/ Gordon Moore j/ doctor r/ award winner
   ```
 **Matching Criteria & Filter Behavior:**
 
 - **Substring Matching: (For most fields)**  
-  Searches for most fields use **substring matching**, meaning the search term must match part of the field in the same order as it appears in the customer record.
+  Searches for most fields use **substring matching**, meaning the search term must match part of the field in the same order as it appears in the client record.
     - **Example:**  
-      If a customer’s name is `Gordon Moore`, the search term `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
+      If a client’s name is `Gordon Moore`, the search term `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
 
 - **Filtering by Tier (Prefix Matching):**  
   Tier searches use **prefix matching**, meaning the search term must match the beginning of the tier exactly.
     - **Example:**  
-      If a customer has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
+      If a client has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
 
 - **Filtering by Income (Using Comparison Operators):**
-  Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find customers whose income meets certain criteria.
+  Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find clients whose income meets certain criteria.
 
     - **Equal to (`=`):**  
-      Use `=` to find customers with a specific income.
-      Example: `i/ =5000` will match customers with an income of exactly 5000.
+      Use `=` to find clients with a specific income.
+      Example: `i/ =5000` will match clients with an income of exactly 5000.
 
     - **Greater than (`>`):**  
-      Use `>` to find customers with an income higher than the specified threshold.
-      Example: `i/ >5000` will match customers with incomes greater than 5000.
+      Use `>` to find clients with an income higher than the specified threshold.
+      Example: `i/ >5000` will match clients with incomes greater than 5000.
 
     - **Less than (`<`):**  
-      Use `<` to find customers with an income lower than the specified threshold.
-      Example: `i/ <5000` will match customers with incomes below 5000.
+      Use `<` to find clients with an income lower than the specified threshold.
+      Example: `i/ <5000` will match clients with incomes below 5000.
 
 **What to Expect:**
 - **On Success:**
@@ -581,7 +581,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Error:**
     - If no valid flags are used:
       ```
-      filter: Searches for all customers whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
+      filter: Searches for all clients whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
   
       Parameters: <FLAG>/ <SEARCH TERM>
     
@@ -605,7 +605,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 view index
 ```
 * Mandatory Field: `<INDEX>`
-* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of customers in the list**.
+* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
 
 **Examples:**
 - **View client no.1**
@@ -699,14 +699,14 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 ### How do I transfer my data to another Computer?
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
-### How do I change the remarks or credit card tier of an existing customer?
-Use the [`edit` command](#feature-4-edit-the-existing-customer), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remarks. If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
+### How do I change the remarks or credit card tier of an existing client?
+Use the [`edit` command](#feature-4-edit-the-existing-client), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remarks. If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
 
-### Why am I getting an error when trying to edit the remark of an existing customer?
+### Why am I getting an error when trying to edit the remark of an existing client?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark, while `ra/` appends to the current remark.
 
 ### What do the different tier colors represent in the UI?
-Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a red banner. This makes it easy to see at a glance the tier of each customer.
+Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a red banner. This makes it easy to see at a glance the tier of each client.
 
 --------------------------------------------------------------------------------------------------------------------
 
