@@ -30,7 +30,7 @@ public class MarkPaidCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
         Index index = INDEX_FIRST_PERSON;
         MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(index);
-        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
+        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
         Person modifiedPerson = createMarkedPerson(
                 model.getFilteredPersonList().get(index.getZeroBased()), VALID_MONTHSPAID);
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKPAID_PERSON_SUCCESS,
@@ -43,7 +43,7 @@ public class MarkPaidCommandTest {
     @Test
     public void toStringMethod() {
         MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
-        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
+        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
         assertEquals("seedu.address.logic.commands.MarkPaidCommand{target="
                         + target.toString()
                         + ", monthsPaid=[[" + VALID_MONTHPAID_STRING + "]]}",
@@ -52,10 +52,10 @@ public class MarkPaidCommandTest {
     @Test
     public void equals() {
         MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
-        MarkPaidCommand command1 = new MarkPaidCommand(target, VALID_MONTHSPAID);
-        MarkPaidCommand command2 = new MarkPaidCommand(target, VALID_MONTHSPAID);
-        MarkPaidCommand command3 = new MarkPaidCommand(target, VALID_MONTHSPAID);
-        MarkPaidCommand command4 = new MarkPaidCommand(target, Collections.emptySet());
+        MarkPaidCommand command1 = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
+        MarkPaidCommand command2 = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
+        MarkPaidCommand command3 = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
+        MarkPaidCommand command4 = new MarkPaidCommand(target, Collections.emptySet(), false);
         assertTrue(command1.equals(command2));
         assertFalse(command1.equals(command4));
         assertTrue(command1.equals(command3));

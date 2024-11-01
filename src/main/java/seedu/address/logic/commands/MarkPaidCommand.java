@@ -36,26 +36,32 @@ public class MarkPaidCommand extends Command {
             + "Existing months paid of that person will be overwritten by input to this command.\n"
             + "Parameters: MarkPaidTarget (must be a positive integer index or 'all') "
             + "MONTHSPAID... (yyyy-mm format)\n"
+            + "Note: m/ and !m/ prefixes cannot be used together.\n"
             + "Example 1: " + COMMAND_WORD + " 1 " + PREFIX_MONTHPAID + "2024-01\n"
             + "Example 2: " + COMMAND_WORD + " all "
             + PREFIX_MONTHPAID + "2024-01"
             + PREFIX_MONTHPAID + "2024-12";
 
     public static final String MESSAGE_MARKPAID_PERSON_SUCCESS = "Marked person as paid: %1$s";
+    public static final String MESSAGE_UNMARKPAID_PERSON_SUCCESS = "Unmarked person as paid: %1$s";
     public static final String MESSAGE_MARKPAID_ALL_SUCCESS = "Marked all displayed persons as paid for: %1$s";
+    public static final String MESSAGE_UNMARKPAID_ALL_SUCCESS = "Unmarked all displayed persons as paid for: %1$s";
 
     private final MarkPaidTarget target;
     private final Set<MonthPaid> monthsPaid;
+    private final boolean isRemoving;
+
     /**
      * @param target of the person in the filtered person list to edit
      * @param monthsPaid the month to mark the person as paid
      */
-    public MarkPaidCommand(MarkPaidTarget target, Set<MonthPaid> monthsPaid) {
+    public MarkPaidCommand(MarkPaidTarget target, Set<MonthPaid> monthsPaid, boolean isRemoving) {
         requireNonNull(target);
         requireNonNull(monthsPaid);
-
+        requireNonNull(isRemoving);
         this.target = target;
         this.monthsPaid = monthsPaid;
+        this.isRemoving = isRemoving;
     }
 
     @Override
@@ -73,7 +79,7 @@ public class MarkPaidCommand extends Command {
 
     private void markAllPersons(List<Person> persons, Set<MonthPaid> monthsPaid, Model model) {
         for (Person person : persons) {
-            Person markedPerson = createMarkedPerson(person, monthsPaid);
+            Person markedPerson = createMarkedPerson(person, monthsPaid, isRemoving);
             model.setPerson(person, markedPerson);
         }
         model.updateFilteredPersonList(person -> person.getMonthsPaid().containsAll(monthsPaid));
@@ -85,7 +91,7 @@ public class MarkPaidCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToMark = lastShownList.get(index.getZeroBased());
-        Person markedPerson = createMarkedPerson(personToMark, monthsPaid);
+        Person markedPerson = createMarkedPerson(personToMark, monthsPaid, isRemoving);
         model.setPerson(personToMark, markedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_MARKPAID_PERSON_SUCCESS,
@@ -95,9 +101,9 @@ public class MarkPaidCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * marked with {@code monthPaid}.
      */
-    private static Person createMarkedPerson(Person personToMark, Set<MonthPaid> monthPaid) {
+    private static Person createMarkedPerson(Person personToMark, Set<MonthPaid> monthsPaid, boolean isRemoving) {
         assert personToMark != null;
-        assert monthPaid != null;
+        assert monthsPaid != null;
         // TODO: should we use editPersonDescriptor here instead?
         Name name = personToMark.getName();
         Phone phone = personToMark.getPhone();
@@ -105,13 +111,16 @@ public class MarkPaidCommand extends Command {
         Address address = personToMark.getAddress();
         Fees fees = personToMark.getFees();
         ClassId classId = personToMark.getClassId();
-        Set<MonthPaid> existingMonthsPaid = personToMark.getMonthsPaid();
-        Set<MonthPaid> combinedMonthsPaid = new HashSet<>(existingMonthsPaid);
-        combinedMonthsPaid.addAll(monthPaid);
+        Set<MonthPaid> updatedMonthsPaid = new HashSet<>(personToMark.getMonthsPaid());
+        if (isRemoving) {
+            updatedMonthsPaid.removeAll(monthsPaid);
+        } else {
+            updatedMonthsPaid.addAll(monthsPaid);
+        }
         Set<Tag> tags = personToMark.getTags();
 
         return new Person(name, phone, email, address, fees, classId,
-                combinedMonthsPaid, tags);
+                updatedMonthsPaid, tags);
     }
 
     @Override
@@ -125,7 +134,8 @@ public class MarkPaidCommand extends Command {
         }
         MarkPaidCommand otherMarkPaidCommand = (MarkPaidCommand) other;
         return target.equals(otherMarkPaidCommand.target)
-                && monthsPaid.equals(otherMarkPaidCommand.monthsPaid);
+                && monthsPaid.equals(otherMarkPaidCommand.monthsPaid)
+                && isRemoving == otherMarkPaidCommand.isRemoving;
     }
 
     @Override
