@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProfilePicFilePath;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -33,6 +35,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Boolean hasPaid;
     private Frequency frequency;
+    private ProfilePicFilePath profilePicFilePath;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -46,6 +49,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         hasPaid = DEFAULT_HASPAID;
         frequency = new Frequency(DEFAULT_FREQUENCY);
+        profilePicFilePath = ProfilePicFilePath.getDefaultProfilePic();
     }
 
     /**
@@ -60,6 +64,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         hasPaid = personToCopy.getHasPaid();
         frequency = personToCopy.getFrequency();
+        profilePicFilePath = personToCopy.getProfilePicFilePath();
     }
 
     /**
@@ -125,8 +130,18 @@ public class PersonBuilder {
         this.frequency = new Frequency(frequency);
         return this;
     }
+
+    /**
+     * Sets the {@code ProfilePicFilePath} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFrequency(Path path) {
+        this.profilePicFilePath = new ProfilePicFilePath(path);
+        return this;
+    }
+
+
     public Person build() {
-        return new Person(name, phone, email, address, birthday, tags, hasPaid, frequency);
+        return new Person(name, phone, email, address, birthday, tags, hasPaid, frequency, profilePicFilePath);
     }
 
 }

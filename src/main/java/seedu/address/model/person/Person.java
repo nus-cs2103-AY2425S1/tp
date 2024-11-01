@@ -28,12 +28,13 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Boolean hasPaid;
     private final Frequency frequency;
+    private final ProfilePicFilePath profilePicFilePath;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Birthday birthday,
-                  Set<Tag> tags, Boolean hasPaid, Frequency frequency) {
+                  Set<Tag> tags, Boolean hasPaid, Frequency frequency, ProfilePicFilePath profilePicFilePath) {
 
         requireAllNonNull(name, phone, email, address, tags);
         //hasPaid not required to be non-null for testing of commands that do not interact with paid status
@@ -47,6 +48,7 @@ public class Person {
         this.tags.addAll(tags);
         this.hasPaid = hasPaid;
         this.frequency = frequency;
+        this.profilePicFilePath = profilePicFilePath;
     }
 
     public Name getName() {
@@ -87,7 +89,9 @@ public class Person {
     public Frequency getFrequency() {
         return frequency;
     }
-
+    public ProfilePicFilePath getProfilePicFilePath() {
+        return profilePicFilePath;
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

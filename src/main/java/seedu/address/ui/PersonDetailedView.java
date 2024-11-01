@@ -74,8 +74,9 @@ public class PersonDetailedView extends UiPart<Region> {
     }
 
     private void initialiseView() {
-        Image profileImg = new Image(getClass().getResourceAsStream(
-                "/images/profilepicture.png"));
+        Image profileImg = new Image(getClass()
+                .getResourceAsStream("/" + this.person.getProfilePicFilePath().toString()));
+
         profileImage.setImage(profileImg);
 
         name.setText(contentManager.getName());
