@@ -253,6 +253,23 @@ Examples:
 * `filter n/caterer` returns `Adam` whose job is a caterer
 * `filter n/John` returns `John` whose name is John
 
+### View Wedding: `view-wed`
+
+If you are looking for participants tagged to a particular wedding, you can use `view-wed` to view a list of contacts tagged to the specified wedding.
+
+Format: `view-wed KEYWORD`
+
+* `view-wed` shows based on wedding names that match the keyword
+* `KEYWORD` is the name of the wedding and is not case-sensitive e.g `alice & bob` will match `Alice & Bob`
+* Only full words will be matched e.g. `jak` will not match `Jake`
+* Persons matching at least one keyword will be returned (i.e. `AND` search).
+  e.g. `Alice` will not return `Alice & Bob`
+
+![filter message](images/viewWeddingMsg.png)
+
+Examples:
+* `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding
+
 ### Clearing all entries : `clear-ab` & `clear-wb`
 
 You can delete ALL contacts in the address book from the application.
