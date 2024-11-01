@@ -15,7 +15,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 
 /**
  * Parses input arguments and creates a new AddCommand object
