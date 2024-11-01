@@ -1,12 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DELETION;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DATEOFLASTVISIT_DELETION;
 import static seedu.address.logic.commands.CommandTestUtil.DATEOFLASTVISIT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATEOFLASTVISIT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DELETION;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMERGENCY_CONTACT_DELETION;
 import static seedu.address.logic.commands.CommandTestUtil.EMERGENCY_CONTACT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMERGENCY_CONTACT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -46,7 +50,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
@@ -226,6 +229,15 @@ public class AddCommandParserTest {
                 .withTags().withEmergencyContact().build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + DATEOFLASTVISIT_DESC_BOB,
                 new AddCommand(expectedPersonWithoutAddressOrEmergencyContact));
+
+        // Providing empty ("") email, address, dateoflastvisit, emergency contact
+        Person expectedPersonWithoutAnyOptionalFields = new PersonBuilder(BOB).withEmail().withAddress()
+                .withDateOfLastVisit().withEmergencyContact().withTags().build();
+        assertParseSuccess(
+                //Note DELETION refers to the empty string ex. EMAIL DELETION = "e/"
+                parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DELETION + EMERGENCY_CONTACT_DELETION
+                + ADDRESS_DELETION + DATEOFLASTVISIT_DELETION,
+                new AddCommand(expectedPersonWithoutAnyOptionalFields));
     }
 
     @Test
@@ -273,12 +285,6 @@ public class AddCommandParserTest {
                 parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
                 Email.MESSAGE_CONSTRAINTS);
-
-        // invalid address
-        assertParseFailure(
-                parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
-                Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

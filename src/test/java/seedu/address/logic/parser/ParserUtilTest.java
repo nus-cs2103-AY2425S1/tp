@@ -24,15 +24,18 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
+    private static final String EMPTY_ENTRY = "   ";
+
     private static final String INVALID_NAME = "      \t   \n  ";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_SHORT_PHONE = "999";
     private static final String INVALID_LONG_PHONE = "123456789";
-    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_EMERGENCY_CONTACT = INVALID_PHONE;
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATEOFLASTVISIT = "13/13/2024";
+
+    private static final String NO_ENTRY = "";
 
     private static final String VALID_NAME = "Rachel Walker-Runner";
     private static final String VALID_PHONE = "12345678";
@@ -114,13 +117,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_optionalEmpty() throws Exception {
-        assertEquals(Optional.empty(), ParserUtil.parseAddress(Optional.ofNullable((String) null)));
+    public void parseAddress_emptyValue_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseAddress(Optional.of(EMPTY_ENTRY)));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(Optional.of(INVALID_ADDRESS)));
+    public void parseAddress_noValue_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseAddress(Optional.of(NO_ENTRY)));
+    }
+
+    @Test
+    public void parseAddress_null_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseAddress(Optional.ofNullable((String) null)));
     }
 
     @Test
@@ -136,6 +144,17 @@ public class ParserUtilTest {
         assertEquals(Optional.of(expectedAddress),
                 ParserUtil.parseAddress(Optional.of(addressWithWhitespace)));
     }
+
+    @Test
+    public void parseEmail_emptyValue_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseEmail(Optional.of(EMPTY_ENTRY)));
+    }
+
+    @Test
+    public void parseEmail_noValue_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseEmail(Optional.of(NO_ENTRY)));
+    }
+
 
     @Test
     public void parseEmail_null_optionalEmpty() throws Exception {
@@ -207,7 +226,17 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDateOfLastVisit_null_throwsNullPointerException() throws Exception {
+    public void parseDateOfLastVisit_emptyValue_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseDateOfLastVisit(Optional.of(EMPTY_ENTRY)));
+    }
+
+    @Test
+    public void parseDateOfLastVisit_noValue_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseDateOfLastVisit(Optional.of(NO_ENTRY)));
+    }
+
+    @Test
+    public void parseDateOfLastVisit_null_optionalEmpty() throws Exception {
         assertEquals(Optional.empty(), ParserUtil.parseDateOfLastVisit(Optional.ofNullable((String) null)));
     }
 
@@ -232,6 +261,17 @@ public class ParserUtilTest {
         assertEquals(Optional.of(expectedDateOfLastVisit),
                 ParserUtil.parseDateOfLastVisit(Optional.of(dateOfLastVisitWithWhitespace)));
     }
+
+    @Test
+    public void parseEmergencyContact_emptyValue_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseEmergencyContact(Optional.of(EMPTY_ENTRY)));
+    }
+
+    @Test
+    public void parseEmergencyContact_noValue_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseEmergencyContact(Optional.of(NO_ENTRY)));
+    }
+
 
     @Test
     public void parseEmergencyContact_null_optionalEmpty() throws Exception {
