@@ -68,7 +68,7 @@ public class DeleteCommand extends Command {
     private CommandResult handlePersonDeletion(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        validateIndexes(lastShownList.size(), indexList, true);
+        validateIndexes(lastShownList.size(), indexList, false);
 
         List<Person> personToDeleteList = deletePersons(model, lastShownList);
 
@@ -87,7 +87,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
-        validateIndexes(deliveryList.size(), indexList, false);
+        validateIndexes(deliveryList.size(), indexList, true);
 
         List<Delivery> deliveryToDeleteList = deleteDeliveries(inspectedPerson, deliveryList);
 
