@@ -267,9 +267,14 @@ Commands listed in this section are applicable to managing your guest list (gues
 
 Adds a guest to the bottom of the existing overall guest list.
 
-**Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP_STATUS] [t/TAG]...`
+**Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
-Entering the `add_guest` command returns the following result on your screen:
+* :warning: You can only enter 'P' for pending, 'A' for accepted or 'D' for declined for the optional `RSVP` field.
+* :warning: You can only enter 'H' for related to husband, 'W' for related to wife or 'U' for unknown for the optional `RELATION` field.
+
+**Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
+
+Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
 
 ![add_guest command](images/addGuestCommand.png)
 
