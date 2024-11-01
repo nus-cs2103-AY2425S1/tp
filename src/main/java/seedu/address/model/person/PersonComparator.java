@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.time.LocalDate;
 import java.util.Comparator;
 
 import seedu.address.logic.commands.exceptions.CommandException;
