@@ -11,7 +11,7 @@ import seedu.address.model.person.PriorityHighToLowComparator;
 import seedu.address.model.person.PriorityLowToHighComparator;
 
 /**
- * Parses input arguments and creates a new {@code SortByPriorityCommand} object
+ * Parses input arguments and creates a new {@code SortCommand} object
  */
 public class SortCommandParser implements Parser<SortCommand> {
     @Override

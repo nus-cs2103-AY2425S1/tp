@@ -27,7 +27,7 @@ import seedu.address.model.person.PriorityHighToLowComparator;
 import seedu.address.model.person.PriorityLowToHighComparator;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SortByDateCommand}.
+ * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
 public class SortCommandTest {
 
