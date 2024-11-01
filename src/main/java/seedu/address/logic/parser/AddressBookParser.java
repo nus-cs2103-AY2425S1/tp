@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ConsecutiveCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -38,6 +39,8 @@ public class AddressBookParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
+    private String lastCommandWord = null; // Track the last command executed
+
     /**
      * Parses user input into command for execution.
      *
@@ -58,6 +61,15 @@ public class AddressBookParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+
+        // Check if the command is consecutive
+        if (commandWord.equals(lastCommandWord)) {
+            return new ConsecutiveCommand(commandWord);
+        }
+
+        // Update lastCommandWord to the current command
+        lastCommandWord = commandWord;
+
 
         switch (commandWord) {
 
