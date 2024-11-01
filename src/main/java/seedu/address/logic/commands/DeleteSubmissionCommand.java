@@ -13,27 +13,26 @@ import seedu.address.model.person.Person;
 import seedu.address.model.submission.Submission;
 
 /**
- * Adds a submission to all current persons in the address book.
+ * Deletes the specified submission for all current persons in the address book.
  */
-public class AddSubmissionCommand extends Command {
+public class DeleteSubmissionCommand extends Command {
 
-    public static final String COMMAND_WORD = "addSubmission";
+    public static final String COMMAND_WORD = "deleteSubmission";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a submission to every student in the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified submission for every student "
+            + "in the address book.\n"
             + "Parameters: sm/SUBMISSION_NAME\n"
             + "Example: " + COMMAND_WORD + " sm/Assignment 1";
 
-    public static final String MESSAGE_ADDSUBMISSION_SUCCESS = "New submission added: %1$s";
-    public static final String MESSAGE_DUPLICATE_SUBMISSION = "This submission already exists.";
-    public static final String MESSAGE_UPDATE_SUBMISSION = "Submission updated for all students: %1$s";
+    public static final String MESSAGE_DELETESUBMISSION_SUCCESS = "Submission deleted: %1$s";
+    public static final String MESSAGE_SUBMISSION_NOT_FOUND = "This submission was not found.";
 
     private final Submission submission;
 
     /**
-     * Creates an AddSubmissionCommand to add the specified {@code Submission}
+     * Creates an DeleteSubmissionCommand to delete the specified {@code Submission}.
      */
-    public AddSubmissionCommand(Submission submission) {
+    public DeleteSubmissionCommand(Submission submission) {
         requireNonNull(submission);
         this.submission = submission;
     }
@@ -44,18 +43,12 @@ public class AddSubmissionCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         boolean isUpdated = false;
-        boolean skip = false;
 
         for (Person personToEdit : lastShownList) {
-            // If a student is added to the address book after a submission is added, adding the same submission will
-            // result in the submission being added to the new student without duplicates in existing students.
-            if (personToEdit.getSubmissions().contains(submission)) {
-                skip = true;
-                continue;
-            }
-            isUpdated = true;
             Set<Submission> updatedSubmissions = personToEdit.getSubmissions();
-            updatedSubmissions.add(submission);
+            if (updatedSubmissions.remove(submission)) {
+                isUpdated = true;
+            }
             Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                     personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
                     personToEdit.getStudentClass(), personToEdit.getEcName(), personToEdit.getEcNumber(),
@@ -64,14 +57,10 @@ public class AddSubmissionCommand extends Command {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
         if (!isUpdated) {
-            // No updates, submission is a duplicate
-            throw new CommandException(MESSAGE_DUPLICATE_SUBMISSION);
-        } else if (!skip) {
-            // No skips, submission is a new submission
-            return new CommandResult(String.format(MESSAGE_ADDSUBMISSION_SUCCESS, submission));
+            // No updates, submission not found in any students
+            throw new CommandException(MESSAGE_SUBMISSION_NOT_FOUND);
         }
-        // Both skips and updates, submission is added for newly added students
-        return new CommandResult(String.format(MESSAGE_UPDATE_SUBMISSION, submission));
+        return new CommandResult(String.format(MESSAGE_DELETESUBMISSION_SUCCESS, submission));
     }
 
     @Override
@@ -81,12 +70,12 @@ public class AddSubmissionCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddSubmissionCommand)) {
+        if (!(other instanceof DeleteSubmissionCommand)) {
             return false;
         }
 
-        AddSubmissionCommand otherAddSubmissionCommand = (AddSubmissionCommand) other;
-        return submission.equals(otherAddSubmissionCommand.submission);
+        DeleteSubmissionCommand otherDeleteSubmissionCommand = (DeleteSubmissionCommand) other;
+        return submission.equals(otherDeleteSubmissionCommand.submission);
     }
 
     @Override

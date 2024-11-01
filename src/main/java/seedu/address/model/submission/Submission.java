@@ -13,7 +13,7 @@ public class Submission {
     public static final String NAME_MESSAGE_CONSTRAINTS =
             "Submission names should only contain alphanumeric characters and spaces, and it should not be blank.";
     public static final String STATUS_MESSAGE_CONSTRAINTS =
-            "Submission status should only be \"Y\" or \"N\".";
+            "Submission status should only be \"Y\", \"N\" or \"NIL\".";
 
     /**
      * The first character of the submission name must not be a whitespace,

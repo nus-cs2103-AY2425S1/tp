@@ -190,7 +190,7 @@ Examples:
 
 Adds the date and reason as to why the specified person in the address book is absent.
 
-Format: `addAttendance INDEX aa/[DATE] ar/[REASON]`
+Format: `addAttendance INDEX ad/[DATE] ar/[REASON]`
 
 <box type="tip" seamless>
 
@@ -200,11 +200,11 @@ Format: `addAttendance INDEX aa/[DATE] ar/[REASON]`
 * Adds the date where student is absent `DATE` and the reason `REASON` to the person at the specified `INDEX`
 * Deletes the attendance at the specified `INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
-* The date **must be in the form of DD-MM-YYYY**.
+* The date **must be in the form of DD-MM-YYYY** and within the current year.
 
 Examples:
-* `addAttendance 1 aa/[24-09-2024] ar/[Sick]` to add the date where the 1st person in the list is absent and the reason.
-* `addAttendance 1 aa/[24-09-2024] ar/` to delete the attendance from the 1st person in the list.
+* `addAttendance 1 ad/[24-09-2024] ar/[Sick]` to add the date where the 1st person in the list is absent and the reason.
+* `addAttendance 1 ad/[24-09-2024] ar/` to delete the attendance from the 1st person in the list.
 
 ### Adding an Exam : `addExam`
 
@@ -239,7 +239,7 @@ Examples:
 
 ### Adding a Submission : `addSubmission`
 
-Adds a submission to every person in the address book.
+Adds a submission to every student in the address book.
 
 Format: `addSubmission sm/SUBMISSION_NAME`
 
@@ -249,24 +249,41 @@ Format: `addSubmission sm/SUBMISSION_NAME`
 </box>
 
 * The submission name can only contain alphanumeric characters and spaces.
+* The submission name is case-sensitive. e.g. "Assignment 1" will be treated differently from "assignment 1"
 
 Examples:
 * `addSubmission sm/Assignment 1`
 
 ### Adding a Submission Status: `addSubmissionStatus`
 
-Adds a submission status for the specified submission for the person at the specified index.
+Adds a submission status for the specified submission for the student at the specified index.
 
 Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
 
-* The submission status must be "Y" or "N", or `NIL`.
+<box type="tip" seamless>
+
+**Tip:** The submission status can be deleted by entering the submission status as `NIL`.
+</box>
+
+* The submission status must be "Y", "N" or `NIL`.
 * The submission status can be edited using the same command with a different submission status.
-* The submission status can be deleted by entering the submission status as `NIL`.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `addSubmissionStatus 1 sm/Assignment 1 ss/Y`
 * `addSubmissionStatus 1 sm/Tutorial 2 ss/NIL`
+
+### Deleting a Submission : `deleteSubmission`
+
+Deletes the specified submission from every student in the address book.
+
+Format: `deleteSubmission sm/SUBMISSION_NAME`
+
+* The submission name can only contain alphanumeric characters and spaces.
+* The submission name is case-sensitive. e.g. "Assignment 1" will be treated differently from "assignment 1".
+
+Examples:
+* `deleteSubmission sm/Assignment 1`
 
 ### Sorting the list : `sort`
 
@@ -349,7 +366,8 @@ _Details coming soon ..._
 | **Add Emergency Contact Number** | `EcNumber INDEX [ep/EMERGENCY_CONTACT_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`                                                                                                                                  |
 | **AddExam**                      | `addExam ex/EXAMNAME` <br> e.g., `addExam ex/Midterm`                                                                                                                                                              |
 | **AddExamScore**                 | `addExamScore INDEX ex/EXAMNAME sc/SCORE` <br> e.g., `addExamScore 1 ex/Midterm sc/70`                                                                                                                             |
-| **Add Attendance**               | `addAttendance INDEX aa/[DATE] ar/[REASON]`<br> e.g., `addAttendance 1 aa/[24-09-2024] ar/[Sick]`                                                                                                                  |
+| **Add Attendance**               | `addAttendance INDEX ad/[DATE] ar/[REASON]`<br> e.g., `addAttendance 1 ad/24-09-2024 ar/Sick`                                                                                                                      |
 | **AddSubmission**                | `addSubmission sm/SUBMISSION_NAME` <br> e.g., `addSubmission sm/Assignment 1`                                                                                                                                      |
 | **AddSubmissionStatus**          | `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS` <br> e.g., `addSubmissionStatus 1 sm/Assignment 1 ss/Y`                                                                                        |
-| **Sort**                         | `sort [ATTRIBUTE]` <br> e.g., `sort student class`                                                                                                                                                                 
+| **DeleteSubmission**             | `deleteSubmission sm/SUBMISSION_NAME` <br> e.g., `deleteSubmission sm/Assignment 1`                                                                                                                                |
+| **Sort**                         | `sort [ATTRIBUTE]` <br> e.g., `sort student class`                                                                                                                                                                 |
