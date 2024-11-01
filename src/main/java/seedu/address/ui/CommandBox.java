@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -27,6 +28,9 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
 
+    @FXML
+    private Label commandTextAutocomplete;
+
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
@@ -36,6 +40,7 @@ public class CommandBox extends UiPart<Region> {
         this.commandCompleter = commandCompleter;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.textProperty().addListener((unused1, unused2, commandText) -> handleTextChanged(commandText));
 
         // handle tab keypress event to auto-complete command
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
@@ -62,6 +67,24 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Handles when the command input text is changed.
+     */
+    private void handleTextChanged(String commandText) {
+        commandTextAutocomplete.setText("");
+
+        if (commandText.isEmpty() || commandText.contains(" ")) return;
+        String[] commandWords = commandText.split("\\s+");
+
+        if (commandWords.length != 1) return;
+        String commandName = commandWords[0];
+
+        Optional<String> possibleCommandName = commandCompleter.completeCommand(commandName);
+
+        if (possibleCommandName.isEmpty()) return;
+        commandTextAutocomplete.setText(possibleCommandName.get());
     }
 
     /**
