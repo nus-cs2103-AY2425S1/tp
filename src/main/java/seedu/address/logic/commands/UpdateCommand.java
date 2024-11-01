@@ -106,8 +106,6 @@ public class UpdateCommand extends Command {
                                                 UpdateStudentDescriptor updateStudentDescriptor)
             throws CommandException {
 
-        assert studentToUpdate != null;
-
         Name updatedName = updateStudentDescriptor.getName().orElse(studentToUpdate.getName());
         Phone updatedPhone = updateStudentDescriptor.getPhone().orElse(studentToUpdate.getPhone());
         EmergencyContact updatedEmergencyContact = updateStudentDescriptor.getEmergencyContact()

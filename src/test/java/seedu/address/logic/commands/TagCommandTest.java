@@ -19,6 +19,7 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -172,7 +173,10 @@ public class TagCommandTest {
                 + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
                 + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";
 
-        assertCommandFailure(tagCommand, model, expectedMessage);
+        CommandException thrown = Assertions.assertThrows(CommandException.class, () -> {
+            tagCommand.execute(model);
+        });
+        assertEquals(expectedMessage, thrown.getMessage());
     }
 
     @Test

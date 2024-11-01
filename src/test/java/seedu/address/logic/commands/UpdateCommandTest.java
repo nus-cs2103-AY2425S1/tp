@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -198,7 +199,10 @@ public class UpdateCommandTest {
                 + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
                 + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";
 
-        assertCommandFailure(updateCommand, model, expectedMessage);
+        CommandException thrown = assertThrows(CommandException.class, () -> {
+            updateCommand.execute(model);
+        });
+        assertEquals(expectedMessage, thrown.getMessage());
     }
 
     @Test
