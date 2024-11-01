@@ -19,6 +19,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PaidCommand;
 import seedu.address.logic.commands.UnpaidCommand;
+import seedu.address.logic.commands.UploadCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +85,9 @@ public class AddressBookParser {
 
         case UnpaidCommand.COMMAND_WORD:
             return new UnpaidCommandParser().parse(arguments);
+
+        case UploadCommand.COMMAND_WORD:
+            return new UploadCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +18,7 @@ import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProfilePicFilePath;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,6 +36,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String hasPaid;
     private final String frequency;
+    private final String profilePicFilePath;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,7 +45,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("hasPaid") String hasPaid, @JsonProperty("frequency") String frequency) {
+            @JsonProperty("hasPaid") String hasPaid, @JsonProperty("frequency") String frequency,
+                             @JsonProperty("profilePicFilePath") String profilePicFilePath) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +57,7 @@ class JsonAdaptedPerson {
         }
         this.hasPaid = hasPaid;
         this.frequency = frequency;
+        this.profilePicFilePath = profilePicFilePath;
     }
 
     /**
@@ -69,6 +74,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         hasPaid = source.getHasPaid().toString();
         frequency = source.getFrequency().value;
+        profilePicFilePath = source.getProfilePicFilePath().toString();
     }
 
     /**
@@ -140,8 +146,14 @@ class JsonAdaptedPerson {
         }
         final Frequency modelFrequency = new Frequency(frequency);
 
+        if (profilePicFilePath == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ProfilePicFilePath.class.getSimpleName()));
+        }
+        final ProfilePicFilePath modelProfilePicFilePath = new ProfilePicFilePath(Paths.get(profilePicFilePath));
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday,
-                modelTags, modelHasPaid, modelFrequency);
+                modelTags, modelHasPaid, modelFrequency, modelProfilePicFilePath);
     }
 
 }
