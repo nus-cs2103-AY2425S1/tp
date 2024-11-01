@@ -7,6 +7,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,12 +39,16 @@ public class ModuleRoleMap {
      */
     public static final String VALIDATION_REGEX = "^$|student|tutor|ta|professor|prof";
 
-    private final HashMap<ModuleCode, RoleType> roles;
+    /**
+     * The roles will follow the order of the input.
+     */
+    private final LinkedHashMap<ModuleCode, RoleType> roles;
 
     /**
      * Default constructor for a {@code ModuleRoleMap}.
      * This is for creating roles for a Person based on the module code and role types
      * extracted from an add command.
+     * The order follows the order of the input lists.
      *
      * @param moduleCodes Array of modules codes
      * @param roleTypes Array of role type String
@@ -54,7 +59,7 @@ public class ModuleRoleMap {
 
         checkArgument(areOfSameSize(moduleCodes, roleTypes), MESSAGE_INPUT_SIZE_CONSTRAINTS);
 
-        HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> newRoles = new LinkedHashMap<>();
         for (int i = 0; i < moduleCodes.length; i++) {
             newRoles.put(moduleCodes[i], roleTypes[i]);
         }
@@ -64,12 +69,13 @@ public class ModuleRoleMap {
     /**
      * Constructor for a {@code ModuleRoleMap}.
      * Copy of the hashmap is performed to make the class immutable.
+     * The order follows the order of the input map.
      *
      * @param roles new roles which are assigned to the Person
      */
     public ModuleRoleMap(Map<ModuleCode, RoleType> roles) {
         requireAllNonNull(roles);
-        this.roles = new HashMap<>(roles);
+        this.roles = new LinkedHashMap<>(roles);
     }
 
     /**
@@ -166,7 +172,7 @@ public class ModuleRoleMap {
      * Gets the roles in HashMap.
      *
      */
-    public HashMap<ModuleCode, RoleType> getRoles() {
+    public LinkedHashMap<ModuleCode, RoleType> getRoles() {
         return this.roles;
     }
 

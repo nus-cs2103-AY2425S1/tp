@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -232,7 +233,7 @@ public class ParserUtil {
     public static ModuleRoleMap parseModuleRolePairs(Collection<String> moduleRolePairs) throws ParseException {
         requireNonNull(moduleRolePairs);
 
-        final HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
+        final LinkedHashMap<ModuleCode, RoleType> hashMap = new LinkedHashMap<>();
         final List<ModuleCode> moduleCodes = new ArrayList<>();
 
         for (String moduleRolePair : moduleRolePairs) {
