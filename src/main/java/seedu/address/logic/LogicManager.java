@@ -53,9 +53,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveBuyerList(model.getBuyerList());
-            storage.saveMeetUpList(model.getMeetUpList());
-            storage.savePropertyList(model.getPropertyList());
+            storage.saveAddressBook(model.getBuyerList(), model.getMeetUpList(), model.getPropertyList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
