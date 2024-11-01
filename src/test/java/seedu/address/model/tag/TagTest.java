@@ -23,4 +23,10 @@ public class TagTest {
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
     }
 
+    @Test
+    public void constructor_tagExceedsLengthLimit_throwsIllegalArgumentException() {
+        String longTagName = "abcdefghijklmnopqrstuvwxyz123456789";
+        assertThrows(IllegalArgumentException.class, () -> new Tag(longTagName));
+    }
+
 }
