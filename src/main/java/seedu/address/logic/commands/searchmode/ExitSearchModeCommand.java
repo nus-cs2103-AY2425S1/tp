@@ -29,4 +29,10 @@ public class ExitSearchModeCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || other instanceof ExitSearchModeCommand; // instanceof handles nulls
+    }
+
 }

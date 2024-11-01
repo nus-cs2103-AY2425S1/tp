@@ -27,6 +27,8 @@ import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
+import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
+import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
@@ -137,4 +139,25 @@ public class AddressBookParserTest {
         assertEquals(expected, new AddressBookParser()
                 .parseCommand(RemovePersonFromEventCommand.COMMAND_WORD + " ei/1 pi/1"));
     }
+
+    @Test
+    public void parseSearchCommand_searchModeSearchCommand() throws ParseException {
+        Command expected = new SearchModeSearchCommand(new NameContainsKeywordsPredicate(Arrays.asList("Amy")));
+        assertEquals(expected, new AddressBookParser()
+                .parseSearchCommand(SearchModeSearchCommand.COMMAND_WORD + " n/Amy"));
+    }
+
+    @Test
+    public void parseSearchCommand_exitSearchModeCommand() throws ParseException {
+        Command expected = new ExitSearchModeCommand();
+        assertEquals(expected, new AddressBookParser()
+                .parseSearchCommand(ExitSearchModeCommand.COMMAND_WORD));
+    }
+
+    @Test
+    public void parseSearchCommand_unrecognisedInput_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseSearchCommand(""));
+    }
+
 }
