@@ -41,7 +41,9 @@ public class DeletePersonCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        assert targetIndex.getZeroBased() < lastShownList.size() : "Index out of bounds";
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.clearEventsWithPerson(personToDelete);
         model.clearPersonFromContacts(personToDelete);

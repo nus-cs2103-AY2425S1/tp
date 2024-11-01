@@ -63,14 +63,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete person 9";
-        try {
-            logic.execute(deleteCommand);
-        } catch (ParseException | CommandException e) {
-            // Not expected to happen before confirmation command
-            assert(false);
-        }
-        String confirmCommand = "Y";
-        assertCommandException(confirmCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
