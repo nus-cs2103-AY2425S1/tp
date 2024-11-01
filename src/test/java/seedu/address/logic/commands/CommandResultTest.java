@@ -15,6 +15,7 @@ public class CommandResultTest {
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
         assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", null)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -59,6 +60,7 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
+                + ", showHelpWindow=" + commandResult.isShowHelpWindow()
                 + ", exit=" + commandResult.isExit() + ", personToDisplay="
                 + commandResult.getPersonToDisplay() + "}";
         assertEquals(expected, commandResult.toString());

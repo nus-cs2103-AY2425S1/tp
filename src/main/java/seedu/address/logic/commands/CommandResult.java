@@ -108,6 +108,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
+                .add("showHelpWindow", showHelpWindow)
                 .add("exit", exit)
                 .add("personToDisplay", personToDisplay)
                 .toString();
