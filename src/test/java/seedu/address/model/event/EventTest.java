@@ -36,7 +36,9 @@ public class EventTest {
         attendees.add(person1);
         attendees.add(person2);
 
-        event = new Event("Conference", LocalDate.of(2023, 10, 29), address, attendees);
+        event = new Event("Conference",
+                LocalDate.of(2023, 10, 29),
+                LocalDate.of(2023, 10, 29), address, attendees);
     }
 
     @Test
@@ -45,8 +47,13 @@ public class EventTest {
     }
 
     @Test
-    public void getDate_returnsCorrectDate() {
-        assertEquals(LocalDate.of(2023, 10, 01), EVENT_NO_ATTENDEE.getDate());
+    public void getStartDate_returnsCorrectDate() {
+        assertEquals(LocalDate.of(2023, 10, 01), EVENT_NO_ATTENDEE.getStartDate());
+    }
+
+    @Test
+    public void getEndDate_returnsCorrectDate() {
+        assertEquals(LocalDate.of(2023, 10, 01), EVENT_NO_ATTENDEE.getEndDate());
     }
 
     @Test
@@ -103,27 +110,32 @@ public class EventTest {
 
         // same attributes -> returns true
         Event otherEvent = new Event("Family Gathering", LocalDate.of(2023, 10, 01),
+                LocalDate.of(2023, 10, 01),
                 new Address("89 City Hall"), DEFAULT_ATTENDEES);
         assertFalse(EVENT_MULTIPLE_ATTENDEE.isSameEvent(otherEvent));
 
         // different name -> returns false
         otherEvent = new Event("Conference", LocalDate.of(2023, 10, 01),
+                LocalDate.of(2023, 10, 01),
                 location, attendees);
         assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
 
         // different date -> returns false
         otherEvent = new Event("Workshop", LocalDate.of(2023, 11, 1),
+                LocalDate.of(2023, 11, 1),
                 location, attendees);
         assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
 
         // different location -> returns false
         otherEvent = new Event("Workshop", LocalDate.of(2023, 10, 01),
+                LocalDate.of(2023, 10, 01),
                 new Address("456 Other St, City"), attendees);
         assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
 
         // different attendees -> returns false
         attendees.add(ALICE);
         otherEvent = new Event("Workshop", LocalDate.of(2023, 10, 01),
+                LocalDate.of(2023, 10, 01),
                 location, attendees);
         assertFalse(EVENT_MULTIPLE_ATTENDEE.isSameEvent(otherEvent));
     }
@@ -132,6 +144,7 @@ public class EventTest {
     public void equals() {
         // same values -> returns true
         Event eventCopy = new Event("Family Gathering", LocalDate.of(2023, 10, 03),
+                LocalDate.of(2023, 10, 03),
                 new Address("89 City Hall"), DEFAULT_ATTENDEES);
         assertTrue(EVENT_MULTIPLE_ATTENDEE.equals(eventCopy));
 
@@ -152,27 +165,32 @@ public class EventTest {
 
         // same attributes -> returns true
         Event otherEvent = new Event("Family Gathering", LocalDate.of(2023, 10, 01),
+                LocalDate.of(2023, 10, 01),
                 new Address("89 City Hall"), DEFAULT_ATTENDEES);
         assertFalse(EVENT_MULTIPLE_ATTENDEE.isSameEvent(otherEvent));
 
         // different name -> returns false
         otherEvent = new Event("Conference", LocalDate.of(2023, 10, 01),
+                LocalDate.of(2023, 10, 01),
                 location, attendees);
         assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
 
         // different date -> returns false
         otherEvent = new Event("Workshop", LocalDate.of(2023, 11, 01),
+                LocalDate.of(2023, 11, 01),
                 location, attendees);
         assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
 
         // different location -> returns false
         otherEvent = new Event("Workshop", LocalDate.of(2023, 10, 01),
+                LocalDate.of(2023, 10, 01),
                 new Address("456 Other St, City"), attendees);
         assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
 
         // different attendees -> returns false
         attendees.add(ALICE);
         otherEvent = new Event("Workshop", LocalDate.of(2023, 10, 01),
+                LocalDate.of(2023, 10, 01),
                 location, attendees);
         assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
     }
@@ -180,7 +198,8 @@ public class EventTest {
     @Test
     public void toString_containsEventDetails() {
         String expected = "Event{name='" + EVENT_MULTIPLE_ATTENDEE.getEventName()
-                + "', date=" + EVENT_MULTIPLE_ATTENDEE.getDate()
+                + "', startDate=" + EVENT_MULTIPLE_ATTENDEE.getStartDate()
+                + ", endDate=" + EVENT_MULTIPLE_ATTENDEE.getEndDate()
                 + ", location=" + EVENT_MULTIPLE_ATTENDEE.getLocation().value
                 + ", \nattendees=";
 

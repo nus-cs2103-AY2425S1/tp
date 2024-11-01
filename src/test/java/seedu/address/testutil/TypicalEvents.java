@@ -30,14 +30,14 @@ public class TypicalEvents {
     // Event with no attendees
     public static final Event EVENT_NO_ATTENDEE = new EventBuilder()
             .withName("Workshop")
-            .withDate(LocalDate.of(2023, 10, 01))
+            .withDate(LocalDate.of(2023, 10, 01), LocalDate.of(2023, 10, 01))
             .withLocation(new Address("123 Main Street"))
             .build();
 
     // Event with multiple attendees
     public static final Event EVENT_MULTIPLE_ATTENDEE = new EventBuilder()
             .withName("Family Gathering")
-            .withDate(LocalDate.of(2023, 10, 03))
+            .withDate(LocalDate.of(2023, 10, 03), LocalDate.of(2023, 10, 03))
             .withLocation(new Address("89 City Hall"))
             .withAttendees(DEFAULT_ATTENDEES)
             .build();

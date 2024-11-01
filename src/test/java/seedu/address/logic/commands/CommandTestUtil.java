@@ -59,6 +59,7 @@ public class CommandTestUtil {
     public static final String INVALID_RELATIONSHIP_DESC = " " + PREFIX_RELATIONSHIP
             + "Father1"; // '1' is not allowed in relationships
 
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
