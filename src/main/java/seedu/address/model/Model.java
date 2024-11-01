@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.types.common.Name;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
@@ -130,7 +131,7 @@ public interface Model {
     /**
      * Returns the event with the same name as {@code event}.
      */
-    Event getEventByName(Event event);
+    Event getEventByName(Name name);
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
