@@ -116,6 +116,14 @@ public class EditRentalCommand extends Command {
                 Messages.formatRentalInformation(editedRentalInformation)));
     }
 
+    /**
+     * Returns the client to be edited based on client index.
+     *
+     * @param model The model containing the filtered list of clients.
+     * @return The {@code Client} object corresponding to the specified index.
+     * @throws CommandException If the specified client index is invalid or
+     *         if the rental index for the client is invalid.
+     */
     public Client getClientToEdit(Model model) throws CommandException {
         List<Client> lastShownList = model.getFilteredPersonList();
 
