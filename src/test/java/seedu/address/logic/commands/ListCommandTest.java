@@ -55,6 +55,6 @@ public class ListCommandTest {
         assert !listFirstCommand.equals(null);
 
         // different student -> returns false
-        assert !listFirstCommand.equals(new ClearCommand());
+        assert !listFirstCommand.equals(new UndoCommand());
     }
 }
