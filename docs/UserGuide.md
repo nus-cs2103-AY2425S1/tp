@@ -195,6 +195,7 @@ Format: `import FILENAME.json`
 - File **must** be in the same folder as the application JAR file. 
 - File **must** be in the expected format of MediContact data (see <u>Expected format</u> for more details). 
 - Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see <u>Summary of input constraints</u> for more details).
+- **Warning**: Upon execution of `import` folder `data` containing `addressbook.json` will be created in the same directory as the application JAR if not already existing. Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting  which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal. 
 
 Example:
 
@@ -409,6 +410,7 @@ Exports contact info in file path `data/addressbook.json`.
 Format: `export`
 
 - Locate file `addressbook.json` under the folder `data` that will be added to the current folder of `addressbook.jar` upon executing `export`.
+- **Warning**: Upon execution of `export` folder `data` containing `addressbook.json` will be created in the same directory as the application JAR if not already existing. Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting  which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
 
 
 ### Exiting the program : `exit`
