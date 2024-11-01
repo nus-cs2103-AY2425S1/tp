@@ -2,6 +2,7 @@ package careconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import careconnect.logic.LogicManager;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.AddressBook;
 import careconnect.model.Model;
@@ -25,11 +26,10 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        requireNoUnconfirmedCommand();
 
         if (this.requireConfirmation) {
             // Queues a ClearCommand
-            Command.commandToConfirm = new ClearCommand(false);
+            LogicManager.setCommandToConfirm(new ClearCommand(false));
             return new CommandResult(String.format(Command.CONFIRMATION_MESSAGE, ClearCommand.COMMAND_WORD));
         }
         model.setAddressBook(new AddressBook());

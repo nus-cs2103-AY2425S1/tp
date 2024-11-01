@@ -1,6 +1,5 @@
 package careconnect.logic.commands;
 
-import careconnect.logic.Messages;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.Model;
 
@@ -13,8 +12,6 @@ public abstract class Command {
 
     protected static final CommandStack STACK = new CommandStack();
 
-    protected static Command commandToConfirm = null;
-
     protected final boolean requireConfirmation;
 
     protected Command() {
@@ -23,28 +20,6 @@ public abstract class Command {
 
     protected Command(boolean requireConfirmation) {
         this.requireConfirmation = requireConfirmation;
-    }
-
-    /**
-     * Validates that there exists a command waiting to be confirmed
-     *
-     * @throws CommandException if no such command is found
-     */
-    public static void requireConfirmableCommand() throws CommandException {
-        if (Command.commandToConfirm == null) {
-            throw new CommandException(Messages.MESSAGE_NO_EXECUTABLE_COMMAND);
-        }
-    }
-
-    /**
-     * Validates that there is no unconfirmed command
-     *
-     * @throws CommandException if an unconfirmed command exist
-     */
-    public static void requireNoUnconfirmedCommand() throws CommandException {
-        if (Command.commandToConfirm != null) {
-            throw new CommandException(Messages.MESSAGE_UNCOMFIRMED_COMMAND);
-        }
     }
 
     /**

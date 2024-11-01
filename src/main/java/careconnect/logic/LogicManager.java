@@ -50,6 +50,8 @@ public class LogicManager implements Logic {
             "Could not save data to file %s due to insufficient permissions to write to the file "
                     + "or the folder.";
 
+    private static Command commandToConfirm = null;
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -75,6 +77,11 @@ public class LogicManager implements Logic {
             SetAppointmentCommand.COMMAND_WORD
     ));
 
+    private final ArrayList<Class<? extends Command>> confirmationCommandsList = new ArrayList<>(Arrays.asList(
+            ConfirmationNoCommand.class,
+            ConfirmationYesCommand.class
+    ));
+
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
@@ -85,11 +92,36 @@ public class LogicManager implements Logic {
         autocompleter = new Autocompleter();
     }
 
+    public static void setCommandToConfirm(Command command) {
+        commandToConfirm = command;
+    }
+
+    public static Command getCommandToConfirm() {
+        return commandToConfirm;
+    }
+
+    private boolean isConfirmationCommand(Command command) {
+        return confirmationCommandsList.contains(command.getClass());
+    }
+
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+
+        // If there is no command to confirm, we should not
+        // expect ConfirmationYesCommand or ConfirmationNoCommand
+        if (commandToConfirm == null && isConfirmationCommand(command)) {
+            throw new CommandException(Messages.MESSAGE_NO_EXECUTABLE_COMMAND);
+        }
+
+        // If there is a command waiting to be confirmed,
+        // the user should not be allowed to execute other command
+        if (commandToConfirm != null && !isConfirmationCommand(command)) {
+            throw new CommandException(Messages.MESSAGE_UNCOMFIRMED_COMMAND);
+        }
+
         commandResult = command.execute(model);
 
         try {

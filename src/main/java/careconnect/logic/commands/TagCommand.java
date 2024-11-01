@@ -76,7 +76,6 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        requireNoUnconfirmedCommand();
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
