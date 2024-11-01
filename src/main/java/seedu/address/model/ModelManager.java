@@ -14,6 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -147,6 +148,18 @@ public class ModelManager implements Model {
         assert event.getEventId() != -1 : "Event ID should not be -1 when adding the event to the address book.";
         addressBook.addEvent(event);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+    @Override
+    public List<Event> findEventsWithName(EventName eventName) {
+        requireNonNull(eventName);
+        return addressBook.findEventsWithName(eventName);
+    }
+
+    @Override
+    public void unassignEventFromPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        addressBook.unassignEventFromPerson(person, event);
     }
 
     @Override

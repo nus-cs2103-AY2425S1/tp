@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -140,6 +141,11 @@ public interface Model {
     Event getEventById(int eventId);
 
     /**
+     * Find all the events whose names are the same as the given argument.
+     */
+    List<Event> findEventsWithName(EventName eventName);
+
+    /**
      * Replaces the given event {@code target} with {@code editedEvent}.
      * {@code target} must exist in the address book.
      */
@@ -155,6 +161,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Removes an assigned event from a person.
+     */
+    void unassignEventFromPerson(Person person, Event event);
 
     /**
      * Generates a new unique person ID.

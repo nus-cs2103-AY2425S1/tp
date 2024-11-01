@@ -95,6 +95,10 @@ public class Person {
         return new Person(name, phone, email, address, tags, eventIds, newId);
     }
 
+    public void removeEventId(int eventId) {
+        eventIds.remove(eventId);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
