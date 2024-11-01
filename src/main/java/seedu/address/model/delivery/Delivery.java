@@ -28,6 +28,7 @@ public class Delivery {
     private Status status;
     private final Set<Tag> tags = new HashSet<>();
     private Archive archive;
+
     /**
      * Every field must be present and not null.
      */

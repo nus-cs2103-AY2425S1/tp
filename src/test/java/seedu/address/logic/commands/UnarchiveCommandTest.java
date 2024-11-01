@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LIST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LIST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -14,9 +14,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 
 /**
@@ -28,20 +33,26 @@ public class UnarchiveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_throwsCommandException() {
-        UnarchiveCommand unarchiveCommand = new UnarchiveCommand(INDEX_FIRST_LIST);
+    public void execute_validSingleIndexUnfilteredPersonList_success() {
+        Index lastIndex = Index.fromZeroBased(model.getFilteredPersonList().size());
+        List<Index> lastIndexList = new ArrayList<>();
+        lastIndexList.add(lastIndex);
 
-        assertCommandFailure(unarchiveCommand, model, UnarchiveCommand.MESSAGE_INVALID_WINDOW);
-    }
+        Person archivedPerson = new PersonBuilder().withArchive("true").build();
 
-    @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        List<Index> outOfBoundIndexList = new ArrayList<>();
-        outOfBoundIndexList.add(outOfBoundIndex);
-        UnarchiveCommand unarchiveCommand = new UnarchiveCommand(outOfBoundIndexList);
+        Person unarchivedPerson = new PersonBuilder().build();
 
-        assertCommandFailure(unarchiveCommand, model, UnarchiveCommand.MESSAGE_INVALID_WINDOW);
+        UnarchiveCommand unarchiveCommand = new UnarchiveCommand(lastIndexList);
+
+        String expectedMessage = String.format(UnarchiveCommand.MESSAGE_UNARCHIVED_PERSON_SUCCESS,
+                "\n" + Messages.format(archivedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.addPerson(unarchivedPerson);
+
+        AddressBookParser.setInspect(false);
+        model.addPerson(archivedPerson);
+        assertCommandSuccess(unarchiveCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

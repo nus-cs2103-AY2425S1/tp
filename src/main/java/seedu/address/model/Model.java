@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
 
@@ -125,6 +126,9 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     ObservableList<Person> getOnlyClientList();
+
+    /** Returns the {@code Index} of the first archived person in the list. */
+    Index getFirstArchivedIndex();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

@@ -70,7 +70,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_outOfBoundIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         List<Index> outOfBoundIndexList = new ArrayList<>();
         outOfBoundIndexList.add(outOfBoundIndex);

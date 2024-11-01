@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LIST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LIST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_LIST;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -14,9 +17,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 
 /**
@@ -28,21 +36,58 @@ public class ArchiveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_throwsCommandException() {
-        ArchiveCommand archiveCommand = new ArchiveCommand(INDEX_FIRST_LIST);
+    public void execute_validSingleIndexUnfilteredPersonList_success() {
+        Person personToArchive = model.getFilteredPersonList().get(INDEX_THIRD.getZeroBased());
+        Person archivedPerson = new PersonBuilder().withName(CARL.getName().toString())
+                .withPhone(CARL.getPhone().value)
+                .withAddress(CARL.getAddress().value).withEmail(CARL.getEmail().value)
+                .withArchive("true").build();
 
-        assertCommandFailure(archiveCommand, model, ArchiveCommand.MESSAGE_INVALID_WINDOW);
+        ArchiveCommand archiveCommand = new ArchiveCommand(INDEX_THIRD_LIST);
+
+        String expectedMessage = String.format(ArchiveCommand.MESSAGE_ARCHIVED_PERSON_SUCCESS,
+                "\n" + Messages.format(personToArchive));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.deletePerson(personToArchive);
+        expectedModel.addPerson(archivedPerson);
+
+        AddressBookParser.setInspect(false);
+        assertCommandSuccess(archiveCommand, model, expectedMessage, expectedModel);
     }
-
-    @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        List<Index> outOfBoundIndexList = new ArrayList<>();
-        outOfBoundIndexList.add(outOfBoundIndex);
-        ArchiveCommand archiveCommand = new ArchiveCommand(outOfBoundIndexList);
-
-        assertCommandFailure(archiveCommand, model, ArchiveCommand.MESSAGE_INVALID_WINDOW);
-    }
+    //
+    //@Test
+    //public void execute_validSingleIndexUnfilteredDeliveryList_success() {
+    //    Person inspectedPerson = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
+    //    Person inspectedPersonWithArchivedDelivery = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
+    //
+    //    InspectWindow.getInspectedPerson();
+    //    Delivery deliveryToArchive = inspectedPerson.getDeliveryList().asUnmodifiableObservableList().get(0);
+    //    Delivery archivedDelivery = new Delivery(
+    //            new DeliveryId("2"),
+    //            new HashSet<>(Arrays.asList(new ItemName("Apples"))),
+    //            new Address("311, Clementi Ave 2, #01-25, S120300"),
+    //            new Cost("$300"),
+    //            new Date("2010-05-05"), new Time("09:05:12"),
+    //            new Eta("1990-04-04"),
+    //            new Status("delivered"),
+    //            new HashSet<>(Arrays.asList(new Tag("Early delivery"))),
+    //            new Archive("true"));
+    //
+    //    ArchiveCommand archiveCommand = new ArchiveCommand(INDEX_FIRST_LIST);
+    //
+    //    String expectedMessage = String.format(ArchiveCommand.MESSAGE_ARCHIVED_DELIVERY_SUCCESS,
+    //            "\n" + Messages.format(deliveryToArchive));
+    //
+    //    Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+    //    expectedModel.setPerson(inspectedPerson, inspectedPersonWithArchivedDelivery);
+    //
+    //    inspectedPersonWithArchivedDelivery.deleteDelivery(INDEX_FIRST);
+    //    inspectedPersonWithArchivedDelivery.addDelivery(archivedDelivery);
+    //
+    //    AddressBookParser.setInspect(true);
+    //    assertCommandSuccess(archiveCommand, model, expectedMessage, expectedModel);
+    //}
 
     @Test
     public void equals() {
