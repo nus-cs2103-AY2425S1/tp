@@ -12,7 +12,8 @@ public class UnmarkCommand extends UpdateStatusCommand {
     public static final String COMMAND_WORD = "markUndone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the transaction as undone identified by the index number used in the displayed transaction list.\n"
+            + ": Marks the transaction as undone identified by the index number used in the displayed transaction "
+            + "list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
