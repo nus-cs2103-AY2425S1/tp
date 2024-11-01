@@ -20,13 +20,15 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters contacts for a given tag.\n"
-            + "The given tag must be an exact match with the intended tag to find.\n"
-            + "If there is no contact with the given tag, "
+            + ": Filters contacts for given tag(s).\n"
+            + "The given tag(s) must be an exact match with the intended tag(s) to find.\n"
+            + "If there is no contact with the given tag(s), "
             + "an empty list of contacts will be displayed.\n"
-            + "Ensure that tag only contains alphanumeric characters. \n"
+            + "Ensure that the tag(s) only contains alphanumeric characters. \n"
             + "Parameters: " + PREFIX_TAG + "TAG...\n"
-            + "Example: " + COMMAND_WORD + " t/supplier";
+            + "Examples:\n"
+            + COMMAND_WORD + " t/supplier\n"
+            + COMMAND_WORD + " t/supplier" + " t/partner";
 
     public static final String MESSAGE_SUCCESS = "Filtered for tag(s): %s";
     public static final String MESSAGE_FAILURE =

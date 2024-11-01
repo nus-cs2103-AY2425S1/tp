@@ -184,14 +184,14 @@ Examples:
 
 ### Filter persons by tag: `filter`
 
-Filters the list of contacts and displays those with the provided tag.
+Filters the list of contacts and displays those with the provided tag(s).
 
 Format: `filter [t/TAG]...`
 
 * The filter is case-sensitive.
 * Filters for users whose tags contains all the input tags.
 * The tag provided must only contain alphanumeric characters
-* If the provided tag does not match any contact, an empty list will be shown.
+* If the provided tag(s) does not match any contact, an empty list will be shown.
 
 Examples:
 * `filter t/friends` will filter for contacts that has tag `friends`<br>
@@ -238,6 +238,11 @@ Format: `sort {n/[ORDER], sch/[ORDER]}`
 * `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive).
 * If no order is provided, persons will be sorted in ascending order by default.
 * Contact list will be sorted alphabetically by name with `n/` and by schedule with `sch/`.
+* If the list is filtered before executing the sort command, it will display the sorted filter list.
+* Executing the `list` function after will show the sorted full list.
+* When sorting by schedules:
+  1. Contacts with no schedules will appear at the end of the list.
+  2. Contacts with a date but no time as schedule will be sorted under the assumption that their time is 00:00.
 
 Examples:
 * `sort n/` will sort by persons names alphabetically in ascending order
