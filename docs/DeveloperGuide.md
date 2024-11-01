@@ -541,13 +541,15 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 **Target user profile**:
 * General Practitioners (GPs) at small clinics
 
-**Value proposition**: Time spent looking through paper medical documents should be spent in other life-saving activities. Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment/treatment details, allowing GPs to contact and monitor their patients easily.
+**Value proposition**: 
+- Time spent looking through paper medical documents should be spent in other life-saving activities. 
+- Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment details, allowing GPs to contact and monitor their patients easily.
 
 <br>
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High `* * *` (must have), Medium `* *` (nice to have) , Low `*` (unlikely to have)
 
 | Priority | As a …​              | I want to …​                                       | So that I can…​                                                      |
 |----------|----------------------|----------------------------------------------------|----------------------------------------------------------------------|
@@ -594,9 +596,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `DocTrack` application and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, unless specified otherwise, 
+- The **System** is the `DocTrack` application
+- The **Actor** is the `user`
 
-**Use case: Update a patient**
+<br>
+
+#### Use case: Update a patient
 
 **MSS**
 
@@ -625,7 +631,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Delete a patient**
+<br>
+
+#### Use case: Delete a patient
 
 **MSS**
 
@@ -648,7 +656,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Find appointments for a specific patient**
+<br>
+
+#### Use case: Find appointments for a specific patient
 
 **MSS**
 
@@ -671,13 +681,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Add an appointment**
+<br>
+
+#### Use case: Add an appointment
 
 **MSS**
 
 1.  User requests to list patients.
 2.  DocTrack shows a list of patients.
-3.  User requests to add an appoinment for a specific patient in the list.
+3.  User requests to add an appointment for a specific patient in the list.
 4.  DocTrack adds appointment.
 
     Use case ends.
@@ -700,7 +712,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Duplicate an appointment**
+<br>
+
+#### Use case: Duplicate an appointment
 
 **MSS**
 
@@ -729,7 +743,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Update an appointment**
+<br>
+
+#### Use case: Update an appointment
 
 **MSS**
 
@@ -758,7 +774,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Delete an appointment**
+<br>
+
+#### Use case: Delete an appointment
 
 **MSS**
 
@@ -781,8 +799,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+<br>
 
-**Use case: Find patient for a specific appointment**
+#### Use case: Find patient for a specific appointment
 
 **MSS**
 
