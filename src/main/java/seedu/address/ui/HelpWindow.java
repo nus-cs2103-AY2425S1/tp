@@ -36,7 +36,7 @@ public class HelpWindow extends UiPart<Stage> {
                 2. view WEDDING_INDEX: List the contacts assigned to the wedding at the specified index.
                 3. editw WEDDING_INDEX [n/WEDDING_NAME] [d/DATE]: Edit a wedding's detail(s).
                 4. assign WEDDING_INDEX c/CONTACT1_INDEX ... : Assign 1 or more contacts to the specified wedding.
-                5. unassign WEDDING_INDEX c/CONTACT1_INDEX ... : Unassign 1 or more contacts from the specified wedding.
+                5. unassign c/CONTACT1_INDEX ... : Unassign 1 or more contacts from inside a wedding view.
                 6. deletew WEDDING_INDEX: Delete the specified wedding from PlanPerfect (contacts are not deleted).\n
             Other Commands:
                 1. taglist: List all tags currently in use in PlanPerfect.
