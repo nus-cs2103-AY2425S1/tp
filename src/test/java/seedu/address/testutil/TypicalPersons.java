@@ -30,7 +30,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
@@ -42,7 +44,7 @@ public class TypicalPersons {
     public static final Tutor ALICE = new TutorBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withHours("1")
-            .withTags("friends").build();
+            .withTags("friends").withSubjects("Math").build();
     public static final Tutor BENSON = new TutorBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withHours("2")
@@ -51,9 +53,9 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withAddress("wall street").withHours("3").build();
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withHours("4")
-            .withTags("friends").build();
+            .withTags("friends").withSubjects("Math").build();
     public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").withHours("5").build();
+            .withEmail("werner@example.com").withAddress("michegan ave").withHours("5").withSubjects("English").build();
     public static final Tutee FIONA = new TuteeBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withHours("6").build();
     public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("9482442")
@@ -92,6 +94,15 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        return ab;
+    }
+
+    public static AddressBook getTypicalAddressBookWithLesson() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        ab.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
         return ab;
     }
 
