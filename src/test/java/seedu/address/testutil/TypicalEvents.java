@@ -52,6 +52,7 @@ public class TypicalEvents {
             .withVolunteers(getPersonSet(TypicalPersons.ELLE))
             .build();
 
+
     private TypicalEvents() {} // prevents instantiation
 
     /**

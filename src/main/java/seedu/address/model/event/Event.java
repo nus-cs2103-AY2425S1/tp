@@ -163,7 +163,9 @@ public class Event {
         try {
             Role personRole = RoleHandler.getRole(role);
             if (!person.hasRole(personRole)) {
-                throw new IllegalValueException("Person does not have the role " + role);
+                throw new IllegalValueException("One or more person(s) to be added does not have the " + role
+                        + " role that you are adding him or her to. For example, to add a person as an attendee of "
+                        + "Event X, make sure he or she has the attendee role.");
             }
             Set<Person> roleSet;
             switch (personRole.getRoleName()) {
@@ -183,14 +185,14 @@ public class Event {
                 throw new InvalidRoleException();
             }
             if (roleSet.contains(person)) {
-                throw new IllegalValueException("Person already has role in event: " + this.name);
+                throw new IllegalValueException("Contact " + person.getName() + " already has role in event: "
+                        + this.name);
             }
             roleSet.add(person);
         } catch (InvalidRoleException e) {
             throw new IllegalValueException(e.getMessage());
         }
     }
-
 
 
     /**
