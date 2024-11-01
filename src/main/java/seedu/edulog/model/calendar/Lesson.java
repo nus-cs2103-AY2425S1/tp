@@ -2,7 +2,6 @@ package seedu.edulog.model.calendar;
 
 import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalTime;
 import java.util.Objects;
 
 import seedu.edulog.commons.util.ToStringBuilder;
