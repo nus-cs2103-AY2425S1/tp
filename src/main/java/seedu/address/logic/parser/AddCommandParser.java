@@ -80,8 +80,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_ETA,
                 PREFIX_ADDRESS,
                 PREFIX_COST,
-                PREFIX_STATUS,
-                PREFIX_TAG
+                PREFIX_STATUS
             ) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_USAGE_DELIVERY));

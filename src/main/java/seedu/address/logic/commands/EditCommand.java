@@ -192,10 +192,6 @@ public class EditCommand extends Command {
         Delivery deliveryToEdit = deliveryList.get(index.getZeroBased());
         assert editDeliveryDescriptor != null;
 
-        if (editDeliveryDescriptor.getItems().isEmpty()) {
-            throw new CommandException(MESSAGE_EMPTY_ITEMS);
-        }
-
         Delivery editedDelivery = createEditedDelivery(deliveryToEdit, editDeliveryDescriptor);
         inspectedPerson.setDelivery(deliveryToEdit, editedDelivery);
         return new CommandResult(
