@@ -94,13 +94,13 @@ public class CloseClaimCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CloseClaimCommand)) {
-            return false;
+        if (other instanceof CloseClaimCommand) {
+            CloseClaimCommand otherCloseClaimCommand = (CloseClaimCommand) other;
+            return index.equals(otherCloseClaimCommand.index)
+                    && insuranceId == otherCloseClaimCommand.insuranceId
+                    && claimId.equals(otherCloseClaimCommand.claimId);
         }
 
-        CloseClaimCommand otherCloseClaimCommand = (CloseClaimCommand) other;
-        return index.equals(otherCloseClaimCommand.index)
-                && insuranceId == otherCloseClaimCommand.insuranceId
-                && claimId.equals(otherCloseClaimCommand.claimId);
+        return false;
     }
 }
