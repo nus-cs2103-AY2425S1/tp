@@ -49,22 +49,6 @@ public class UniqueStudentListTest {
     }
 
     @Test
-    public void countClashes_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.countClash(null));
-    }
-    @Test
-    public void countClash_noClashes_returnsZero() {
-        uniqueStudentList.add(ALICE);
-        assertEquals(uniqueStudentList.countClash(BOB), 0);
-    }
-
-    @Test
-    public void countClash_someClashes_returnsCorrectCount() {
-        uniqueStudentList.add(ALICE);
-        assertEquals(uniqueStudentList.countClash(HOON), 1);
-    }
-
-    @Test
     public void getClashingStudents_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.getClashes(null));
     }

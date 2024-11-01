@@ -53,6 +53,10 @@ public class PaidAmount extends Fee {
         return new PaidAmount(Double.toString(super.value + value));
     }
 
+    public double getValue() {
+        return this.value;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
