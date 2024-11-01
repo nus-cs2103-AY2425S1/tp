@@ -81,6 +81,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the full person list */
+    ObservableList<Person> getFullPersonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -96,12 +99,36 @@ public interface Model {
     boolean addTag(Tag tag);
 
     /**
+     * Adds a tag to the tag list.
+     *
+     * @param tags The tags to be added.
+     * @return true if all tags were successfully added, false if any tag already exists.
+     */
+    boolean addTags(List<Tag> tags);
+
+    /**
+     * Deletes a tag from the tag list.
+     * @param tag The tag to be deleted
+     * @return true if the tag was successfully deleted, false if the tag does not exist.
+     */
+    boolean deleteTag(Tag tag);
+
+    /**
      * Deletes a tag from the tag list.
      *
-     * @param tags The tag to be deleted.
+     * @param tags The tags to be deleted.
      * @return true if the tag was successfully deleted, false if the tag does not exist.
      */
     boolean deleteTags(List<Tag> tags);
+
+    /**
+     * Renames a tag from the tag list.
+     *
+     * @param existingTag The tag to be renamed.
+     * @param newTagName The new name of the tag after renaming.
+     * @return true if the tag was successfully renamed.
+     */
+    boolean renameTag(Tag existingTag, String newTagName);
 
     /**
      * Checks if a tag exists in the tag list.
@@ -110,6 +137,14 @@ public interface Model {
      * @return true if the tag exists, false otherwise.
      */
     boolean hasTag(Tag tag);
+
+    /**
+     * Checks if the size of the tag list is below or equal
+     * to the maximum size allowed.
+     *
+     * @return true if the size is acceptable, false otherwise.
+     */
+    boolean checkAcceptableTagListSize(int additionalSize);
 
     /**
      * Returns the String representation of the

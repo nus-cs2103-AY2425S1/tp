@@ -12,7 +12,7 @@ import seedu.address.model.person.RsvpStatus;
  * Set RSVP status for guests
  */
 public class SetRsvpCommand extends Command {
-    public static final String COMMAND_WORD = "setRsvp";
+    public static final String COMMAND_WORD = "setrsvp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets the RSVP status of a guest. "

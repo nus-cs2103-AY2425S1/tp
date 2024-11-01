@@ -1,5 +1,7 @@
 package seedu.address.model.tag;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -9,6 +11,7 @@ import javafx.collections.ObservableList;
  * Constructs an {@code ObservableList} of {@code Tag}s that are predefined by the user.
  */
 public class TagList {
+    public static final int MAXIMUM_TAGLIST_SIZE = 30;
     private final ObservableList<Tag> tags;
 
     public TagList() {
@@ -40,11 +43,33 @@ public class TagList {
     }
 
     /**
+     * Renames a tag if it is already present.
+     *
+     * @param tag The tag to be renamed.
+     * @return true if the tag was renamed, false if it does not exist.
+     */
+    public boolean renameTag(Tag tag, String newTagName) {
+        int index = tags.indexOf(tag);
+        if (index == -1) {
+            return false;
+        }
+
+        if (tags.contains(new Tag(newTagName))) {
+            return false;
+        }
+
+        Tag tagToEdit = tags.get(index);
+        tagToEdit.setTagName(newTagName);
+        return true;
+    }
+
+    /**
      * Sets the TagList based on a list from Storage.
      *
      * @param tags The tags to add.
      */
     public void setTags(List<Tag> tags) {
+        requireNonNull(tags);
         this.tags.setAll(tags);
     }
 
@@ -56,9 +81,16 @@ public class TagList {
     }
 
     /**
+     * Returns true if the size of the tag list is below
+     * or equal to the maximum size allowed.
+     */
+    public boolean checkAcceptableSize(int additionalTags) {
+        return tags.size() + additionalTags <= MAXIMUM_TAGLIST_SIZE;
+    }
+
+    /**
      * Returns the backing set as an observable {@code ObservableList}.
      */
-
     public ObservableList<Tag> asObservableList() {
         return tags;
     }

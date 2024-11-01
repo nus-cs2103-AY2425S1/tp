@@ -156,6 +156,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFullPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -179,14 +184,32 @@ public class AddCommandTest {
         public boolean addTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public boolean addTags(List<Tag> tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean deleteTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public boolean deleteTags(List<Tag> tag) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public boolean renameTag(Tag existingTag, String newName) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public boolean hasTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkAcceptableTagListSize(int additionalTags) {
             throw new AssertionError("This method should not be called.");
         }
     }
