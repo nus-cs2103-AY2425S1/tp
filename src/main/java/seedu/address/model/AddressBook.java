@@ -165,10 +165,27 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
+     * Also removes the student from all consultations and lessons.
      * {@code key} must exist in the address book.
      */
     public void removeStudent(Student key) {
         students.remove(key);
+        // Note that we need to create a copy of the filtered list so that modifying consults within the forEach
+        // call does not cause an IndexOutOfBoundsException.
+        // remove from consultations
+        List<Consultation> consultsWithDeletedStudent = consults.filtered(c -> c.hasStudent(key)).stream().toList();
+        consultsWithDeletedStudent.forEach(c -> {
+            Consultation newConsult = new Consultation(c);
+            newConsult.removeStudent(key);
+            setConsult(c, newConsult);
+        });
+        // remove from lessons
+        List<Lesson> lessonsWithDeletedStudent = lessons.filtered(l -> l.hasStudent(key)).stream().toList();
+        lessonsWithDeletedStudent.forEach(l -> {
+            Lesson newLesson = new Lesson(l);
+            newLesson.removeStudent(key);
+            setLesson(l, newLesson);
+        });
     }
 
     /**
