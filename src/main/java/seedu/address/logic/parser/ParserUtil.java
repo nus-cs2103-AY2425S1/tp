@@ -22,7 +22,7 @@ import seedu.address.model.person.Year;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Error: Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Error: Index is not a single non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -32,10 +32,10 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
 
-        if (StringUtil.isNotNumber(trimmedIndex)) {
+        if (StringUtil.verifyNotNumber(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        if (!StringUtil.isNotIntegerOverflow(trimmedIndex)) {
+        if (!StringUtil.verifyNotIntOverflow(trimmedIndex)) {
             throw new ParseException(MESSAGE_OVERFLOW_INDEX);
         }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {

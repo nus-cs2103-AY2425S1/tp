@@ -20,14 +20,15 @@ public class CommentCommand extends Command {
     public static final String COMMAND_WORD = "comment";
 
     public static final String MESSAGE_USAGE =
-            "Ensure the correct Format: " + COMMAND_WORD + " INDEX c/ COMMENT\n"
-                    + "Ensure the Prefix: c/ is after the INDEX and before the COMMENT \n"
-                    + "Required Parameter: Ensure INDEX is a valid positive integer within your current"
-                    + " list size shown \n"
-                    + "Optional Parameter: Ensure COMMENT is empty to remove comments, "
-                    + "or any value to add a comment \n"
-                    + "Example: " + "comment 1 c/ Is always late to class. \n"
-                    + "This will add a comment to the person identified by the index number used";
+            "Correct Format: " + COMMAND_WORD + " INDEX c/COMMENT,"
+                        + " the index must be single unsigned positive Integer within your shown list size\n"
+                        + "Ensure the Prefix: c/ is after the INDEX and before the COMMENT \n"
+                        + "Required Parameter: Ensure INDEX is a valid positive integer within your current"
+                        + " list size shown \n"
+                        + "Optional Parameter: Ensure COMMENT is empty to remove comments, "
+                        + "or any value to add a comment \n"
+                        + "Example: " + "comment 1 c/Is always late to class. \n"
+                        + "This will add a comment to the person identified by the index number used";
 
     public static final String MESSAGE_ADD_COMMENT_SUCCESS = "Added comment to Person: %1$s";
     public static final String MESSAGE_DELETE_COMMENT_SUCCESS = "Removed comment from Person: %1$s";
@@ -51,7 +52,13 @@ public class CommentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        assert lastShownList != null;
+
         if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (index.getZeroBased() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 

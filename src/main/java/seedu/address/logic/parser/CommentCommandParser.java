@@ -12,12 +12,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Comment;
 
 /**
- * Parses input arguments and creates a new {@code RemarkCommand} object
+ * Parses input arguments and creates a new {@code CommentCommand} object
  */
 public class CommentCommandParser implements Parser<CommentCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
-     * and returns a {@code RemarkCommand} object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code CommentCommand}
+     * and returns a {@code CommentCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public CommentCommand parse(String args) throws ParseException {
