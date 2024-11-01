@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
