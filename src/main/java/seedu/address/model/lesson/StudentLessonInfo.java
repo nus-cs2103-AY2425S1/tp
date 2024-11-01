@@ -78,6 +78,15 @@ public class StudentLessonInfo implements Serializable {
     }
 
     /**
+     * Returns a new StudentLessonInfo instance with its student modified to the given value.
+     *
+     * @param student An Edited Student.
+     */
+    public StudentLessonInfo setStudent(Student student) {
+        return new StudentLessonInfo(student, attendance, participationScore);
+    }
+
+    /**
      * Returns a new StudentLessonInfo instance with its attendance modified to the given value.
      *
      * @param attendance True if the student has attended the lesson.

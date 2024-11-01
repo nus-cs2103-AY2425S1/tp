@@ -154,6 +154,22 @@ public class Lesson {
     }
 
     /**
+     * Sets a student in the lesson.
+     * Method works by removing a Student & Adding a new Student.
+     * Attendance & Participation Score are transferred from target to editedStudent.
+     *
+     * @param target The student to remove.
+     * @param editedStudent The student to add.
+     */
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        StudentLessonInfo oldEntry = getStudentLessonInfo(target);
+        studentLessonInfoList.remove(oldEntry);
+        StudentLessonInfo newEntry = oldEntry.setStudent(editedStudent);
+        studentLessonInfoList.add(newEntry);
+    }
+
+    /**
      * Sets the attendance of the student to the specified value.
      *
      * @param student The student to mark.
