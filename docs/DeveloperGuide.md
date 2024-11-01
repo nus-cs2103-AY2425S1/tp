@@ -370,27 +370,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
-**Use Case: Categorise Persons**
-
-**MSS**
-1. User requests to categorise a person (e.g., family, friends, coworkers).
-2. System assigns attendees to the category.
-
-   Use case ends.
-
-**Extensions**
-* 1a. User tries to create a duplicate category.
-    * 1a1. System shows an error message.
-
-      Use case ends.
-
-* 1b. The input command was invalid (i.e. spelling error, etc.).
-    * 1b1. System tells the user the command is unrecognised.
-
-      Use case ends.
-
-
 **Use Case: Search and Filter Persons**
 
 **MSS**
@@ -409,6 +388,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. No matching entries are found.
     * 4a1. System shows a message indicating no results.
+
+      Use case ends.
+
+**Use Case: Get statistics**
+
+**MSS**
+1. User requests to get statistics of entries.
+2. System displays the statistics.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The input command was invalid (i.e. spelling error, etc.).
+    * 1a1. System tells the user the command is unrecognised.
 
       Use case ends.
 
