@@ -23,6 +23,16 @@ public class Tag {
      * @param tagName A valid tag name.
      */
     public Tag(String tagName) {
+        this(tagName, TagCategory.GENERAL);
+    }
+
+    /**
+     * Constructs a {@code Tag}.
+     *
+     * @param tagName A valid tag name.
+     * @param category A valid {@code TagCategory}.
+     */
+    public Tag(String tagName, TagCategory category) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;

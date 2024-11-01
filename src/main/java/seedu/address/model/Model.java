@@ -9,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagCategory;
 
 /**
  * The API of the Model component.
@@ -102,6 +103,16 @@ public interface Model {
      * Returns a list of tags currently defined in CampusConnect
      */
     ObservableList<Tag> getListOfCurrentTags();
+
+    /**
+     * Returns true if the specified {@code Tag} exists in CampusConnect
+     */
+    boolean containsTag(Tag tag);
+
+    /**
+     * Sets {@code TagCategory cat} to be the category of {@code Tag t}.
+     */
+    void setTagsCategory(Tag t, TagCategory cat);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

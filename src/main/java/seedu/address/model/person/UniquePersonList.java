@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagCategory;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -147,6 +148,29 @@ public class UniquePersonList implements Iterable<Person> {
             tagSet.addAll(person.getTags());
         }
         return FXCollections.observableArrayList(tagSet);
+    }
+
+    /**
+     * Update the category of all occurrences of a {@code Tag}
+     * @param t {@code Tag} to be updated
+     * @param cat updated {@code TagCategory}
+     */
+    public void updateTagCategory(Tag t, TagCategory cat) {
+        t.setTagCategory(cat);
+        for (Person person : internalList) {
+            Set<Tag> tagSet = person.getTags();
+            if (tagSet.contains(t)) {
+                replacePersonTag(person, t, cat);
+            }
+        }
+    }
+
+    private void replacePersonTag(Person p, Tag t, TagCategory cat) {
+        Set<Tag> tagsToReplace = new HashSet<>();
+        tagsToReplace.add(new Tag(t.tagName, cat));
+        Person replace = p.removeTag(t);
+        replace = replace.addTag(tagsToReplace);
+        setPerson(p, replace);
     }
 
     @Override
