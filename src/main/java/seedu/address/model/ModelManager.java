@@ -40,7 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         historyCommandList = new HistoryCommandList();
         versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(this.versionedAddressBook.getCurrentAddressBook().getPersonList());
+        filteredPersons = new FilteredList<>(this.versionedAddressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -86,12 +86,12 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.versionedAddressBook.getCurrentAddressBook().resetData(addressBook);
+        this.versionedAddressBook.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook.getCurrentAddressBook();
+        return versionedAddressBook;
     }
 
     /**
@@ -128,17 +128,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return versionedAddressBook.getCurrentAddressBook().hasPerson(person);
+        return versionedAddressBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        versionedAddressBook.getCurrentAddressBook().removePerson(target);
+        versionedAddressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        versionedAddressBook.getCurrentAddressBook().addPerson(person);
+        versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -146,7 +146,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        versionedAddressBook.getCurrentAddressBook().setPerson(target, editedPerson);
+        versionedAddressBook.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================

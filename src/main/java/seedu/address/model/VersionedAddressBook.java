@@ -1,9 +1,12 @@
 package seedu.address.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the different states of the Address Book for the user.
@@ -19,7 +22,6 @@ public class VersionedAddressBook extends AddressBook {
      * Constructs a state list for the address book and saves the initial copy.
      */
     public VersionedAddressBook(ReadOnlyAddressBook addressBook) {
-        super(addressBook);
         addressBookStateList = new ArrayList<>();
         addressBookStateList.add(new AddressBook(addressBook));
         currentStatePointer = 0;
@@ -32,7 +34,6 @@ public class VersionedAddressBook extends AddressBook {
     public void commitAddressBook() {
         currentStatePointer++;
         addressBookStateList.add(currentStatePointer, new AddressBook(current));
-        current = new AddressBook(addressBookStateList.get(currentStatePointer));
     }
 
     /**
@@ -42,6 +43,7 @@ public class VersionedAddressBook extends AddressBook {
         if (currentStatePointer == 0) {
             throw new CommandException(MESSAGE_CONSTRAINTS);
         }
+        assert current.equals(addressBookStateList.get(currentStatePointer));
         currentStatePointer--;
         current = new AddressBook(addressBookStateList.get(currentStatePointer));
     }
@@ -58,6 +60,41 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     @Override
+    public void setPersons(List<Person> persons) {
+        getCurrentAddressBook().setPersons(persons);
+    }
+
+    @Override
+    public void resetData(ReadOnlyAddressBook newData) {
+        getCurrentAddressBook().resetData(newData);
+    }
+
+    @Override
+    public boolean hasPerson(Person person) {
+        return getCurrentAddressBook().hasPerson(person);
+    }
+
+    @Override
+    public void addPerson(Person p) {
+        getCurrentAddressBook().addPerson(p);
+    }
+
+    @Override
+    public void setPerson(Person target, Person editedPerson) {
+        getCurrentAddressBook().setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void removePerson(Person key) {
+        getCurrentAddressBook().removePerson(key);
+    }
+
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return getCurrentAddressBook().getPersonList();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -65,16 +102,20 @@ public class VersionedAddressBook extends AddressBook {
         if (o == null) {
             return false;
         }
+        if (!(o instanceof VersionedAddressBook)) {
+            return false;
+        }
         VersionedAddressBook other = (VersionedAddressBook) o;
 
         // Compare addressBookStateList and currentStatePointer
         return currentStatePointer == other.currentStatePointer
-                && addressBookStateList.equals(other.addressBookStateList);
+                && addressBookStateList.equals(other.addressBookStateList)
+                && current.equals(other.current);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(addressBookStateList);
+        return Objects.hash(addressBookStateList, currentStatePointer);
     }
 
     /**
