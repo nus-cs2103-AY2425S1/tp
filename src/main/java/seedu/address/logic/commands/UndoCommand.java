@@ -24,10 +24,10 @@ public class UndoCommand extends Command {
         if (previousCommand == null) {
             throw new CommandException(MESSAGE_NO_PREVIOUS_COMMAND);
         }
-        if (!(previousCommand instanceof UndoableCommand)) {
+        if (!(previousCommand instanceof UndoableCommand command)) {
             throw new CommandException(MESSAGE_COMMAND_CANNOT_BE_UNDONE);
         }
-        ((UndoableCommand) previousCommand).undo(model);
+        command.undo(model);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
