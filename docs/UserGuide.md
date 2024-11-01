@@ -155,6 +155,8 @@ Format: `socialMedia [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
 * `ig`,`fb`, and `cs` is used to represent Instagram, Facebook, and Carousell handles respectively.
 * If the contact already has an existing social media handle, their handle will be updated.
 * Hence, we can only add one social media handle to each contact.
+* Handles must be non empty, have a limit of 30 characters,and consist only of alphanumeric characters, or `-`, `_` and `.`.
+* If multiple handles are entered, only the last handle will be accepted. Eg. `socialMedia 1 ig/first cs/second` will only add the handle `[cs-second]` to the user.
 
 Examples:
 *  `socialMedia 3 ig/charlotteo` Adds the handle `[ig-charlotteo]` to the third contact Charlotte.
