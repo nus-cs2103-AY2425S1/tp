@@ -188,20 +188,20 @@ Find command does not work in the inspect window.
 ### Archiving a contact or delivery : `archive`
 **<ins>When in the main window**
 
-Archives the specified contact from the contacts list. Archived items will have its visibility reduced and be moved to the end of the list. 
+Archives the specified contact from the contacts list. Archived items will have its visibility reduced and be moved to the end of the list.
 
 Format: `archive [INDEXES]...`
 
 * Archive the contact(s) at the specified `INDEXES`.
 * The indexes refer to the indexes shown in the displayed contacts list.
 * The indexes **must be positive integers** 1, 2, 3, …​
-* The indexes **must not have duplicates**. For example, `archive 1 2 2 4` is not allowed. 
+* The indexes **must not have duplicates**. For example, `archive 1 2 2 4` is not allowed.
 
 Examples:
-* `list` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list. 
+* `list` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
-Note: 
-* `inspect INDEX` and `edit INDEX` would not work for archived contact.  
+Note:
+* `inspect INDEX` and `edit INDEX` would not work for archived contact.
 
 **<ins>When in the inspect window**
 
@@ -217,7 +217,7 @@ Note:
 ### Unarchive a contact or delivery : `unarchive`
 **<ins>When in the main window**
 
-Unarchive the specified contact from the contacts list if they are archived, the visibility of the contact would be restored.  
+Unarchive the specified contact from the contacts list if they are archived, the visibility of the contact would be restored.
 
 Format: `unarchive [INDEXES]...`
 
@@ -242,7 +242,7 @@ Examples:
 
 Deletes the specified contact from the contacts list.
 
-Format: `delete [INDEXES]...` 
+Format: `delete [INDEXES]...`
 
 * Deletes the contact(s) at the specified `INDEXES`.
 * The indexes refer to the indexes shown in the displayed contacts list.
