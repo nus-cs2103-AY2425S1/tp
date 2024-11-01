@@ -796,14 +796,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User gives the command to sort students based on a particular attribute.
-2. System validates the input's format.
+2. System validates the input attribute.
 3. System sorts the displayed list based on the attribute.
 4. System displays the sorted list.
 5. System confirms the success by displaying a success message. Use case ends.
 
 **Extensions**
-* 2a. System detects an invalid input.
-    * 2a1. System displays an error message asking for valid input. Use case ends.
+* 2a. System detects an invalid attribute.
+    * 2a1. System displays an error message asking for valid input.
+    * Use case ends.
 
 
 ### Non-Functional Requirements
