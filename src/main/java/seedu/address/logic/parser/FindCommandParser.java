@@ -44,19 +44,19 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        // Keep as list now for future keywords
-        List<String> keywordList = new ArrayList<>();
+        // Declare lists for keywords and initialize all of them to an empty list.
+        List<String> keywordList, nameList, phoneList, emailList;
+        keywordList = nameList = phoneList = emailList = List.of();
 
-        if (arePrefixesPresent(argMultimap, PREFIX_KEYWORD)) {
-            String keyword = argMultimap.getValue(PREFIX_KEYWORD).get();
-            requireNonNull(keyword);
-            String trimmedKeyword = keyword.trim();
+        if (argMultimap.getValue(PREFIX_KEYWORD).isPresent()) {
+            List<String> keywords = argMultimap.getAllValues(PREFIX_KEYWORD);
+            List<String> trimmedKeywords = keywords.stream().map(String::trim).toList();
 
-            if (!isValidKeyword(trimmedKeyword)) {
+            if (!trimmedKeywords.stream().allMatch(FindCommandParser::isValidKeyword)) {
                 throw new ParseException(MESSAGE_CONSTRAINTS);
             }
 
-            keywordList.add(trimmedKeyword);
+            keywordList = trimmedKeywords;
         }
 
         return new FindCommand(new NameContainsKeywordsPredicate(keywordList),
@@ -65,7 +65,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 new RentalInformationContainsKeywordsPredicate(keywordList));
     }
 
-    private boolean isValidKeyword(String keyword) {
+    private static boolean isValidKeyword(String keyword) {
         return keyword.matches(VALIDATION_REGEX);
     }
 
