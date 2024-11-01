@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
@@ -104,7 +103,8 @@ public class UpdateCommand extends Command {
      * updated with {@code updateStudentDescriptor}.
      */
     private static Student createUpdatedStudent(Student studentToUpdate,
-                                                UpdateStudentDescriptor updateStudentDescriptor) {
+                                                UpdateStudentDescriptor updateStudentDescriptor)
+    throws CommandException {
         assert studentToUpdate != null;
 
         Name updatedName = updateStudentDescriptor.getName().orElse(studentToUpdate.getName());
@@ -114,15 +114,15 @@ public class UpdateCommand extends Command {
         Address updatedAddress = updateStudentDescriptor.getAddress().orElse(studentToUpdate.getAddress());
         Note updatedNote = updateStudentDescriptor.getNote().orElse(studentToUpdate.getNote());
         Level updatedLevel = updateStudentDescriptor.getLevel().orElse(studentToUpdate.getLevel());
-        if (updatedLevel != null && updateStudentDescriptor.getSubjects().isPresent()) {
-            checkArgument(
-                    Subject.isValidSubjectsByLevel(updatedLevel,
-                            updateStudentDescriptor
-                                    .getSubjects()
-                                    .get()),
-                    Subject.MESSAGE_LEVEL_NEEDED);
-        }
         Set<Subject> updatedSubjects = updateStudentDescriptor.getSubjects().orElse(studentToUpdate.getSubjects());
+
+        if (updatedLevel != null && updatedSubjects != null) {
+            if (!Subject.isValidSubjectsByLevel(updatedLevel,
+                    updatedSubjects)) {
+                throw new CommandException(Subject.getValidSubjectMessage());
+            }
+        }
+
         TaskList updatedTaskList = updateStudentDescriptor.getTaskList().orElse(studentToUpdate.getTaskList());
         Set<LessonTime> updatedLessonTimes = updateStudentDescriptor.getLessonTimes()
                 .orElse(studentToUpdate.getLessonTimes());
