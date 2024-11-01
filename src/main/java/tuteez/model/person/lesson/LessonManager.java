@@ -75,7 +75,8 @@ public class LessonManager {
      * <p>Note: Consecutive lessons (e.g., timings 1900-2000 & 2000-2100) do not clash
      * as they do not overlap in time.</p>
      *
-     * @param studentList The {@code UniquePersonList} of students whose lessons are to be checked for potential clashes.
+     * @param studentList The {@code UniquePersonList} of students whose lessons are to be checked for potential
+     *                    clashes.
      * @param lesson The lesson to check for time conflicts.
      * @return A map where each entry consists of a {@code Person} whose lessons clash with the specified lesson,
      *         and an {@code ArrayList} of the clashing lessons for that student.
