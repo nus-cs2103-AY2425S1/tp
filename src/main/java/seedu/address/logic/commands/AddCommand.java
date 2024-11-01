@@ -37,9 +37,8 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMERGENCY_CONTACT + "93838420 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_LEVEL + "S3 NA "
-            + PREFIX_SUBJECT + "A_MATH "
-            + PREFIX_SUBJECT + "CHEMISTRY "
+            + PREFIX_LEVEL + "S1 NT "
+            + PREFIX_SUBJECT + "MATH "
             + PREFIX_LESSON_TIME + "SUN-11:00-13:00";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
