@@ -266,7 +266,7 @@ Views a specific student on the right side window.
 **Examples:**
 * `view n/Alex Yeoh`
 
-![view student](images/view_student.png)
+  ![view student](images/view_student.png)
 
 [(Back to Top)](#edumanage-user-guide)
 
