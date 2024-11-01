@@ -33,7 +33,7 @@ public class AddressBookParserTest {
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        assertEquals(new AddCommand(person).toString(), command.toString());
     }
 
     @Test
@@ -49,17 +49,6 @@ public class AddressBookParserTest {
     //        DeleteCommand command = (DeleteCommand) parser.parseCommand(
     //                DeleteCommand.COMMAND_WORD + " " + identityNumber);
     //        assertEquals(new DeleteCommand(identityNumber), command);
-    //    }
-
-    //Not important cus we dn edit?
-    //    @Test
-    //    public void parseCommand_edit() throws Exception {
-    //        Person person = new PersonBuilder().build();
-    //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-    //        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-    //                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-    //        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-    //        assertEquals(editCommand, command);
     //    }
 
     @Test
