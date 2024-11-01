@@ -76,7 +76,6 @@ public class PersonCard extends UiPart<Region> {
                     Label tagLabel = new Label(tag.tagName);
                     if (tag.getTagType().equals("property")) {
                         tagLabel.getStyleClass().add("tag-property");
-                        System.out.println(tagLabel.getStyleClass());
                     }
 
                     tags.getChildren().add(tagLabel);

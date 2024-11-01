@@ -103,7 +103,7 @@ Adds a person to PROperty.
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [r/REMARKS]…​`
 
 - `NAME` and `PHONE_NUMBER` fields must be provided.
-- `PERSON_TAG` can be `Buyer`, `Seller`, `Landlord`, `Tenant`
+-  Refer to the [Tag Table](#tag-table) for a complete list of person tags.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including no tags)
@@ -179,7 +179,7 @@ Format: `findtag TAG [MORE_TAGS]`
 - The search is case-insensitive. e.g., `HDB` will match `hdb`.
 - The order of the tags does not matter.
 - Persons with at least one matching tag will be returned (i.e., an `OR` search).
-- List of possible tags you can search are: `condo`, `hdb`, `landed`, `buyer`, `seller`, `tenant` or `landlord`
+- List of possible tags you can search for are found in the [Tag Table](#tag-table)
 
 Examples:
 
@@ -277,7 +277,7 @@ Format: `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`
 - Adds a property listing to the person specified by `INDEX`
 - The `INDEX` refers to the index number shown in the displayed person list.
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
-- `PROPERTY_TAG` can be either: `condo`, `landed` or `hdb`
+- Refer to the [Tag Table](#tag-table) for a complete list of property tags.
 
 Examples:
 
@@ -356,3 +356,12 @@ _Details coming soon ..._
 | **Sort**           | `sort`                                                                                                                                                                          |
 | **Help**           | `help`                                                                                                                                                                          |
 | **Remark**         | `remark INDEX r/[REMARKS]`                                                                                                                                                      |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Tag Table
+
+| Tag Type | Tags                                                                                                                                                                      |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Property | HDB, CONDO, RESIDENTIAL, LANDED, EC, COMMERCIAL, RETAIL, INDUSTRIAL, OFFICE, WAREHOUSE, SHOPHOUSE, TERRACE, SEMIDET, BUNGALOW, DETACHED, GCB, PENTHOUSE, MIXED, SERVAPT, DORM |
+| Person   | BUYER, SELLER, LANDLORD, TENANT, DEVELOPER, INVESTOR, MANAGER, CONTRACTOR                                                                                                     |
