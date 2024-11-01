@@ -26,7 +26,7 @@ public class SortTaskCommand extends Command {
             + ": Sorts all tasks.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Sorted all tasks";
+    public static final String MESSAGE_SUCCESS = "Sorted all tasks by deadline (earliest to latest)";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
