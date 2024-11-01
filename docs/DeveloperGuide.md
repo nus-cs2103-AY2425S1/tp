@@ -240,7 +240,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user       | add a new person                                                                 | store a new person in my contact list                                                |
 | `* * *`  | user       | add details to contacts                                                          | store details of people in my contact list                                           |
 | `* * *`  | researcher | add multiple tags to participants                                                | tag participants to multiple study groups                                                |
-| `* * *`  | user       | delete contacts                                                                  | remove old/ contacts that I no longer need                                           |
+| `* * *`  | user       | delete contacts                                                                  | remove old contacts that I no longer need                                           |
 | `* *`    | user       | save my contact list                                                             | keep my contacts between sessions                                                    |
 | `*`      | user       | exit the program                                                                 | clear up my processes                                                                |
 | `* * *`  | user       | use a program that is fast                                                       | retrieve information quickly                                                         |
