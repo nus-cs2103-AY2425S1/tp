@@ -3,6 +3,7 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.log.Log;
 
 /**
@@ -21,9 +22,9 @@ public class SessionLogCard extends UiPart<Region> {
     /**
      * Creates a {@code SessionLogCard} with the given {@code log}.
      */
-    public SessionLogCard(Log log, int index) {
+    public SessionLogCard(Log log, Index index) {
         super(FXML);
-        this.id.setText("Session log " + index);
+        this.id.setText("Session log " + index.getOneBased());
         this.appointmentDate.setText(log.getAppointmentDateString());
         this.sessionEntry.setText(log.getTruncatedEntry());
     }
