@@ -14,7 +14,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.academyassist.commons.util.CollectionUtil;
 import seedu.academyassist.commons.util.ToStringBuilder;
 import seedu.academyassist.logic.Messages;
@@ -27,7 +26,6 @@ import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.StudentId;
-import seedu.academyassist.model.person.StudentIdMatchesPredicate;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
 
