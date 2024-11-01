@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_WORKEXP;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_FOUND_WORKEXP;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.WorkExperienceContainsKeywordsPredicate;
 
@@ -17,8 +19,8 @@ public class FindByWorkExperienceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose work experience contains "
             + "the specified role, company, and year, and displays them as a list with index numbers.\n"
-            + "Parameters: ROLE, COMPANY, YEAR\n"
-            + "Example: " + COMMAND_WORD + " w/Intern, Google, 2024";
+            + "Parameters: ROLE,COMPANY,YEAR\n"
+            + "Example: " + COMMAND_WORD + " w/Intern,Google,2024";
 
     private final WorkExperienceContainsKeywordsPredicate predicate;
 
@@ -30,8 +32,17 @@ public class FindByWorkExperienceCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        int count = model.getFilteredPersonList().size();
+        String workExp = predicate.getRole();
+        String message;
+        if (count == 0) {
+            message = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        } else if (count == 1) {
+            message = String.format(MESSAGE_PERSON_FOUND_WORKEXP, workExp);
+        } else {
+            message = String.format(MESSAGE_PERSONS_FOUND_WORKEXP, count, workExp);
+        }
+        return new CommandResult(message);
     }
 
     @Override

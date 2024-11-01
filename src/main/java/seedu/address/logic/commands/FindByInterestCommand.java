@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_INTEREST;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_FOUND_INTEREST;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.InterestContainsKeywordsPredicate;
 
@@ -30,8 +32,16 @@ public class FindByInterestCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        int count = model.getFilteredPersonList().size();
+        String message;
+        if (count == 0) {
+            message = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        } else if (count == 1) {
+            message = MESSAGE_PERSON_FOUND_INTEREST;
+        } else {
+            message = String.format(MESSAGE_PERSONS_FOUND_INTEREST, count);
+        }
+        return new CommandResult(message);
     }
 
     @Override
