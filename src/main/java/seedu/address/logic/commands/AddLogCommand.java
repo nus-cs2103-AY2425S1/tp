@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -47,25 +45,9 @@ public class AddLogCommand extends Command {
         requireNonNull(model);
         Person personToUpdate = getPerson(model);
 
-        // Create a new Set of logs that includes the new log
-        Set<Log> updatedLogs = new HashSet<>(personToUpdate.getLogs());
-        updatedLogs.add(log);
+        model.addLog(personToUpdate, log);
 
-        // Create a new updated person with the additional log
-        Person updatedPerson = new Person(
-                personToUpdate.getName(),
-                personToUpdate.getIdentityNumber(),
-                personToUpdate.getPhone(),
-                personToUpdate.getEmail(),
-                personToUpdate.getAddress(),
-                personToUpdate.getTags(),
-                updatedLogs // Updated logs set
-        );
-
-        // Update the model with the new person (with the added log)
-        model.setPerson(personToUpdate, updatedPerson);
-
-        return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, updatedPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, personToUpdate.getName()));
     }
 
     private Person getPerson(Model model) throws CommandException {
