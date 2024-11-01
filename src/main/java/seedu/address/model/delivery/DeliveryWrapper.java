@@ -1,5 +1,7 @@
 package seedu.address.model.delivery;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.model.supplier.Supplier;
 
 /**
@@ -16,6 +18,7 @@ public class DeliveryWrapper {
      * @param supplierIndex The index of supplier in addressbook currently.
      */
     public DeliveryWrapper(Delivery delivery, SupplierIndex supplierIndex) {
+        requireAllNonNull(delivery, supplierIndex);
         this.delivery = delivery;
         this.supplierIndex = supplierIndex;
     }
@@ -44,6 +47,8 @@ public class DeliveryWrapper {
      * @param supplier Supplier instance to be paired with delivery.
      */
     public void setDeliverySupplier(Supplier supplier) {
+        requireAllNonNull(supplier);
+        assert supplier != null;
         this.delivery.setDeliverySender(supplier);
     }
 
