@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-
 import java.util.List;
 import java.util.Set;
 
@@ -51,8 +50,8 @@ public class AddTaskToGroupCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_TASK_IN_GROUP = "This task is already in the group";
 
-    public static final String MESSAGE_TASK_EXISTS_GLOBAL = "This task (%1$s) already exists.\n" +
-        " Please use the add existing task command instead.";
+    public static final String MESSAGE_TASK_EXISTS_GLOBAL = "This task (%1$s) already exists.\n"
+            + " Please use the add existing task command instead.";
 
     private final TaskName taskName;
 

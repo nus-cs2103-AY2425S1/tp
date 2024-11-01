@@ -9,8 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
