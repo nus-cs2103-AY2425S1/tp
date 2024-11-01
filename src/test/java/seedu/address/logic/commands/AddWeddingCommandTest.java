@@ -50,12 +50,33 @@ public class AddWeddingCommandTest {
 
     @Test
     public void execute_duplicateWedding_throwsCommandException() {
-        Wedding validWedding = new WeddingBuilder().build();
+        Wedding validWedding = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
         AddWeddingCommand addWeddingCommand = new AddWeddingCommand(validWedding);
         ModelStub modelStub = new ModelStubWithWedding(validWedding);
 
         assertThrows(CommandException.class,
                 AddWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () -> addWeddingCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_weddingWithSamePeopleDifferentOrder_throwsCommandException() {
+        Wedding weddingOne = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
+        Wedding weddingTwo = new WeddingBuilder().withWeddingName("Jean Tan & John Loh").build();
+        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(weddingTwo);
+        ModelStub modelStub = new ModelStubWithWedding(weddingOne);
+
+        assertThrows(CommandException.class,
+                AddWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () -> addWeddingCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_weddingWithSamePersonTwice_throwsCommandException() {
+        Wedding invalidWedding = new WeddingBuilder().withWeddingName("John Loh & John Loh").build();
+        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(invalidWedding);
+        ModelStub modelStub = new ModelStubAcceptingWeddingAdded();
+
+        assertThrows(CommandException.class,
+                "A wedding cannot involve marrying oneself", () -> addWeddingCommand.execute(modelStub));
     }
 
     @Test
@@ -240,6 +261,13 @@ public class AddWeddingCommandTest {
         public boolean hasWedding(Wedding wedding) {
             requireNonNull(wedding);
             return this.wedding.isSameWedding(wedding);
+        }
+
+        @Override
+        public ReadOnlyWeddingBook getWeddingBook() {
+            WeddingBook weddingBook = new WeddingBook();
+            weddingBook.addWedding(wedding);
+            return weddingBook;
         }
     }
 

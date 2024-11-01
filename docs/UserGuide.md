@@ -154,11 +154,20 @@ Format: `list`
 
 You can add a wedding to the list of weddings.
 
+* Adds a wedding with the specified `NAME & NAME`, `VENUE` and `DATE` to the wedding book.
+* The wedding's details are shown.
+
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE`
 
-<box type="tip" seamless>
+<box type="important" seamless>
 
-**Tip:** Date must be a valid date in the format of **dd/MM/yyyy**
+**IMPORTANT:** Date must be a valid date in the format of **dd/MM/yyyy**
+
+</box>
+
+<box type = "warning" seamless>
+
+Limitations of the add-wedding command: Adding James & June for one wedding and James **Tan** & June for another wedding will be treated as separate weddings. Hence, it is important to ensure that the names are consistent.
 
 </box>
 
@@ -179,8 +188,9 @@ You can delete a person from your list of contacts.
 
 Format: `delete-wedding w/NAME & NAME` followed by `delete-y` or `delete-n`
 
-**IMPORTANT:** `delete-wedding w/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
-affected.
+<box type="important" seamless>
+
+**IMPORTANT:** `delete-wedding w/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be affected.
 
 </box>
 
@@ -338,8 +348,8 @@ _Details coming soon ..._
 | **Delete**         | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                            |
 | **List**           | `list`                                                                                                                                                                                       |
 | **Edit**           | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                             |
-| **Add Wedding**    | `add-wed w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                                 |
-| **Delete Wedding** | `delete-wedding w/NAME & NAME` followed by `y` or `n`                                                                                                                                         |
+| **Add Wedding**    | `add-wed w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2025`                                                                                          |
+| **Delete Wedding** | `delete-wedding w/NAME & NAME` followed by `y` or `n`                                                                                                                                        |
 | **Clear**          | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                            |
 | **Adding Tags**    | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                                     |
 | **Deleting Tags**  | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                                     |

@@ -26,9 +26,9 @@ public class AddWeddingCommand extends Command {
             + PREFIX_VENUE + "VENUE "
             + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_WEDDING_NAME + "Jonus Ho & Izzat Syazani "
-            + PREFIX_VENUE + "Pasir Ris Hotel "
-            + PREFIX_DATE + "11/11/2024 ";
+            + PREFIX_WEDDING_NAME + "James Hauw & Rachel Loh "
+            + PREFIX_VENUE + "Pan Pacific Hotel "
+            + PREFIX_DATE + "11/03/2025 ";
 
     public static final String MESSAGE_SUCCESS = "New Wedding added: %1$s";
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
@@ -48,14 +48,30 @@ public class AddWeddingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasWedding(toAdd)) {
+        // Check if the wedding involves the same person twice aka marrying oneself
+        String[] names = toAdd.getName().split("&");
+        if (names.length == 2 && names[0].trim().equalsIgnoreCase(names[1].trim())) {
+            throw new CommandException("A wedding cannot involve marrying oneself");
+        }
+
+        // Check if a wedding with the same two people already exists, regardless of the order
+        boolean hasDuplicate = model.getWeddingBook().getWeddingList().stream()
+                .anyMatch(existingWedding -> {
+                    String[] existingNames = existingWedding.getName().split("&");
+                    return (existingNames.length == 2)
+                            && ((existingNames[0].trim().equalsIgnoreCase(names[0].trim())
+                            && existingNames[1].trim().equalsIgnoreCase(names[1].trim()))
+                            || (existingNames[0].trim().equalsIgnoreCase(names[1].trim())
+                            && existingNames[1].trim().equalsIgnoreCase(names[0].trim())));
+                });
+
+        if (hasDuplicate) {
             throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
         }
 
         model.addWedding(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
