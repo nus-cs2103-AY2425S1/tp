@@ -20,12 +20,13 @@ import seedu.address.model.healthservice.HealthService;
 public class FilterCommandParserTest {
     private FilterCommandParser parser = new FilterCommandParser();
     private String validStartdate = " " + PREFIX_STARTDATE + "2000-10-10";
-    private String validEnddate = " " + PREFIX_ENDDATE + "2010-10-10";
+    private String validEnddate = " " + PREFIX_ENDDATE + "2025-10-10";
     private String validHealthService = " " + PREFIX_HEALTHSERVICE + "BLOOD TYPE";
     private String validFilterString = validStartdate + validEnddate + validHealthService;
 
+    private String invalidEndDateWithNoStartDate = " " + PREFIX_ENDDATE + "2010-10-10";
     private String invalidStartDate = " " + PREFIX_STARTDATE + "2000-10/10";
-    private String invalidEndDate = " " + PREFIX_ENDDATE + "2010-10/10";
+    private String invalidEndDate = " " + PREFIX_ENDDATE + "2025-10/10";
     private String invalidHealthSerivce = " " + PREFIX_HEALTHSERVICE + "burger";
     private String EndDateBeforeStartDate = " " + PREFIX_ENDDATE + "1990-10-10";
 
@@ -40,9 +41,9 @@ public class FilterCommandParserTest {
         LocalDate startDate = null;
         HealthService service = null;
         AppointmentDateFilter filter = new AppointmentDateFilter(startDate,
-                LocalDate.parse("2000-10-10"), service);
+                LocalDate.parse("2025-10-10"), service);
         FilterCommand expectedFilterCommand = new FilterCommand(filter);
-        assertParseSuccess(parser, " ed/2000-10-10", expectedFilterCommand);
+        assertParseSuccess(parser, " ed/2025-10-10", expectedFilterCommand);
     }
 
     @Test
@@ -126,6 +127,11 @@ public class FilterCommandParserTest {
         assertParseFailure(parser, invalidEndDate + invalidHealthSerivce + validStartdate,
                 AppointmentDateFilter.ONE_DATE_MESSAGE_CONSTRAINTS);
 
+        // end date earlier than today's date when no start date is specified
+        assertParseFailure(parser, invalidEndDateWithNoStartDate + validHealthService,
+                AppointmentDateFilter.END_DATE_MESSAGE_CONSTRAINTS);
+
+        // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + validEnddate,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }

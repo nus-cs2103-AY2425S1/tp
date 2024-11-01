@@ -38,15 +38,10 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        TreeSet<FilteredAppointment> filteredAppts = model.getFilteredPatientList().stream()
-                .flatMap(patient -> patient.getAppts().stream()
-                        .filter(appt -> appt.isBetweenDatesAndMatchService(dateFilter))
-                        .map(appt -> new FilteredAppointment(appt, patient)))
-                .collect(Collectors.toCollection(() -> new TreeSet<>(APPOINTMENT_COMPARATOR)));
+        model.filterAppts(dateFilter);
 
-        model.setFilteredAppts(filteredAppts);
+        int patientsFiltered = model.getFilteredAppts().size();
 
-        int patientsFiltered = filteredAppts.size();
         String patientLabel = patientsFiltered == 1 ? "patient" : "patients";
 
         String msg = patientsFiltered + " " + patientLabel + " found " + dateFilter;

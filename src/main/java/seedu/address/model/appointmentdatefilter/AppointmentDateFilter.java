@@ -17,6 +17,8 @@ public class AppointmentDateFilter {
     public static final String ONE_DATE_MESSAGE_CONSTRAINTS = "Dates should follow the format YYYY-MM-DD";
     public static final String TWO_DATE_MESSAGE_CONSTRAINTS = ONE_DATE_MESSAGE_CONSTRAINTS
             + " and end date should be after start date";
+    public static final String END_DATE_MESSAGE_CONSTRAINTS = "If start date is not specified, "
+            + "end date should be after today's date: " + LocalDate.now();
 
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -36,7 +38,7 @@ public class AppointmentDateFilter {
             checkArgument(isValidStartAndEndDate(startDate, endDate), TWO_DATE_MESSAGE_CONSTRAINTS);
             this.startDate = startDate;
         } else {
-            this.startDate = null;
+            this.startDate = LocalDate.now();
         }
     }
 
@@ -84,11 +86,6 @@ public class AppointmentDateFilter {
     }
 
     @Override
-    public String toString() {
-        String healthService = this.healthService == null ? "" : " with service " + this.healthService;
-        return "within range " + startDate + " to " + endDate + healthService;
-    }
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -100,18 +97,20 @@ public class AppointmentDateFilter {
         }
 
         AppointmentDateFilter otherFilter = (AppointmentDateFilter) other;
-        if (startDate == null && otherFilter.startDate == null && healthService == null
-                && otherFilter.healthService == null) {
-            return endDate.isEqual(otherFilter.endDate);
-        } else if ((startDate != null && otherFilter.startDate == null)
-                || (startDate == null && otherFilter.startDate != null)) {
-            return false;
+        if (healthService == null && otherFilter.healthService == null) {
+            return endDate.isEqual(otherFilter.endDate) && startDate.isEqual(otherFilter.startDate);
         } else if ((healthService != null && otherFilter.healthService == null)
                 || (healthService == null && otherFilter.healthService != null)) {
             return false;
         }
         return startDate.isEqual(otherFilter.startDate) && endDate.isEqual(otherFilter.endDate)
                 && healthService.equals(otherFilter.healthService);
+    }
+
+    @Override
+    public String toString() {
+        String healthService = this.healthService == null ? "" : " with service " + this.healthService;
+        return "within range " + startDate + " to " + endDate + healthService;
     }
 
 }
