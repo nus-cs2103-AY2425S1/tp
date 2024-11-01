@@ -69,18 +69,22 @@ public class LogCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        History editedHistory = History.addActivity(personToEdit.getHistory(), date, message);
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getBirthday(),
-                personToEdit.getTags(),
-                personToEdit.getDateOfCreation(),
-                editedHistory,
-                personToEdit.getPropertyList());
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_HISTORY_SUCCESS,
-                Messages.format(editedPerson)));
+        try {
+            History editedHistory = History.addActivity(personToEdit.getHistory(), date, message);
+            Person editedPerson = new Person(
+                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                    personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getBirthday(),
+                    personToEdit.getTags(),
+                    personToEdit.getDateOfCreation(),
+                    editedHistory,
+                    personToEdit.getPropertyList());
+            model.setPerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_ADD_HISTORY_SUCCESS,
+                    Messages.format(editedPerson)));
+        } catch (IllegalArgumentException ie) {
+            throw new CommandException(ie.getMessage());
+        }
     }
 
     @Override

@@ -74,13 +74,18 @@ public class History {
      * @param message The activity message to be added for the specified date.
      * @return A new {@code History} object with the added activity.
      */
-    public static History addActivity(History originalHistory, LocalDate date, String message) {
+    public static History addActivity(History originalHistory, LocalDate date, String message)
+            throws IllegalArgumentException {
         // Check if the date is valid based on the date of creation.
         if (!originalHistory.dateOfCreation.isAfter(date)) {
             throw new IllegalArgumentException(String.format(MESSAGE_BEFORE_DATE_OF_CREATION,
                     date, originalHistory.dateOfCreation));
         }
-
+        // Check if the date is valid based on current date.
+        if (date.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException(String.format(MESSAGE_AFTER_TODAY,
+                    date));
+        }
         // Create a copy of the history map to ensure immutability of the original
         TreeMap<LocalDate, ArrayList<String>> newHistoryMap = new TreeMap<>(originalHistory.history);
 
