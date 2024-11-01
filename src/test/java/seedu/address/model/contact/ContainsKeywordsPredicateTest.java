@@ -131,7 +131,7 @@ public class ContainsKeywordsPredicateTest {
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
         ContainsKeywordsPredicate predicate =
-                new ContainsKeywordsPredicateBuilder().withNameKeywords("keyword1", "keyword2").build();
+                new ContainsKeywordsPredicateBuilder().withNameKeywords(keywords).build();
 
         String expected = ContainsKeywordsPredicate.class.getCanonicalName() + "{nameKeywords=" + keywords + ", "
                 + "telegramHandleKeywords=[], emailKeywords=[], studentStatusKeywords=[], roleKeywords=[], "
