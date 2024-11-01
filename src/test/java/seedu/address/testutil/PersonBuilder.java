@@ -100,6 +100,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Removes any existing match for the {@code Person} that we are building.
+     */
+    public PersonBuilder withoutMatch() {
+        this.match = null;
+        return this;
+    }
+
+    /**
      * Builds a Person with the initialized attributes.
      *
      * @return Persons object.
@@ -111,5 +119,4 @@ public class PersonBuilder {
             return new Person(name, phone, email, role, skills, match);
         }
     }
-
 }
