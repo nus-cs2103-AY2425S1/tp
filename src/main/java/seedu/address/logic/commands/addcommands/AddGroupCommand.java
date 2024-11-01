@@ -28,7 +28,7 @@ public class AddGroupCommand extends Command {
         + "Parameters: "
         + PREFIX_GROUP_NAME + "GROUPNAME \n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "Group 1 ";
+        + PREFIX_GROUP_NAME + "Group 1 "; 
 
     public static final String MESSAGE_SUCCESS = "New group(s) added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group detected";
