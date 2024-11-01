@@ -35,6 +35,8 @@ public class NameTest {
         assertFalse(Name.isValidName("Ravin d/o Sandra @ Joseph")); // more than 1 special characters
         assertFalse(Name.isValidName("(Chen Zi Hao")); // bracket portion only
         assertFalse(Name.isValidName("Liu Jun Ning, Gladys, Hock")); // more than 1 comma
+        assertFalse(Name.isValidName("Liu Huan, Gladys")); // long names
+        assertFalse(Name.isValidName("Tan Sock Chew, Timothy @ Lim Yong June, Brandon")); // D/O cannot hmm
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
@@ -42,9 +44,7 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("Ravi s/o Sandra"));
         assertTrue(Name.isValidName("Lynette Cheryl Luth @ Ong Jia Yi")); // long names
-        assertTrue(Name.isValidName("Liu Huan, Gladys")); // long names
         assertTrue(Name.isValidName("Dave Tan Tze How (Chen Zi Hao)")); // long names
-        assertTrue(Name.isValidName("Tan Sock Chew, Timothy @ Lim Yong June, Brandon")); // D/O cannot hmm
         assertTrue(Name.isValidName("Ravi @Sandra")); // no need spacing
     }
 
