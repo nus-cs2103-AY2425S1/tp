@@ -128,6 +128,27 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Task getMostRecentTaskDisplay() {
+        return userPrefs.getMostRecentTaskDisplay();
+    }
+
+    @Override
+    public void setMostRecentTaskDisplay() {
+        Task taskToUpdate = userPrefs.getMostRecentTaskDisplay();
+        if (taskToUpdate.getTaskName() != null && taskToUpdate.getDeadline() != null) {
+            updateFilteredTaskList(x -> taskToUpdate.equals(x));
+        } else {
+            updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        }
+    }
+
+    @Override
+    public void setMostRecentTaskDisplay(Task task) {
+        userPrefs.setMostRecentTaskDisplay(task);
+        updateFilteredTaskList(x -> x.equals(task));
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }

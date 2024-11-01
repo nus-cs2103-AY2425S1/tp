@@ -64,6 +64,12 @@ public interface Logic {
 
     void setMostRecentGroupTaskDisplay();
 
+    Task getMostRecentTaskDisplay();
+
+    void setMostRecentTaskDisplay(Task task);
+
+    void setMostRecentTaskDisplay();
+
     void setStateStudents();
 
     void setStateGroups();

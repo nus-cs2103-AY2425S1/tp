@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Objects;
 
@@ -16,6 +17,15 @@ public class Task {
     private final Deadline deadline;
     private Status status;
     private int groupsWithTask = 1;
+
+    /**
+     * Allows serialization.
+     */
+    public Task() {
+        name = new TaskName("default");
+        deadline = new Deadline(LocalDateTime.now());
+        status = Status.PENDING;
+    }
 
     /**
      * Creates a Task with {@code name} and {@code deadline}.

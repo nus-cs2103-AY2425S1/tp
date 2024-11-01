@@ -21,9 +21,11 @@ public class GroupNameContainsKeywordsPredicate implements Predicate<Group> {
     @Override
     public boolean test(Group group) {
         return keywords.stream()
-            .anyMatch(keyword ->
-                FuzzySearch.tokenSetPartialRatio(group.getGroupName().getGroupName().toLowerCase(),
-                    keyword.toLowerCase()) > MATCH_RATIO);
+            .anyMatch(keyword -> {
+                GroupName groupName = group.getGroupName();
+                String groupNameString = groupName.getGroupName().toLowerCase();
+                return FuzzySearch.tokenSortPartialRatio(groupNameString, keyword.toLowerCase()) > MATCH_RATIO;
+            });
     }
 
     @Override

@@ -26,11 +26,12 @@ public class SortStudentCommand extends Command {
             + ": Sorts all students.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Sorted all students";
+    public static final String MESSAGE_SUCCESS = "Sorted all students by student name in alphabetical order";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.sortPersonList(new Comparator<Student>() {
             @Override
             public int compare(Student s1, Student s2) {

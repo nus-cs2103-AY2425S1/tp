@@ -56,6 +56,9 @@ public class LogicManager implements Logic {
         } catch (DataLoadingException e) {
             tempVersionHistory = new VersionHistory();
         }
+        if (tempVersionHistory.getCurrentVersionIndex() == -1) {
+            tempVersionHistory.addVersion(model);
+        }
         this.versionHistory = tempVersionHistory;
         model.setStatus();
     }
@@ -68,18 +71,20 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
         this.versionHistory = command.updateVersionHistory(versionHistory, model);
-        ReadOnlyAddressBook tempAddressBook = versionHistory.getVersions().get(versionHistory.getCurrentVersionIndex());
-        ReadOnlyAddressBook currentAddressBook = new AddressBook().duplicateCopy(tempAddressBook);
-        model.setAddressBook(currentAddressBook);
-        model.setStatus();
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            ReadOnlyAddressBook tempAddressBook =
+                    versionHistory.getVersions().get(versionHistory.getCurrentVersionIndex());
+            ReadOnlyAddressBook currentAddressBook = new AddressBook().duplicateCopy(tempAddressBook);
+            model.setAddressBook(currentAddressBook);
+            storage.saveAddressBook(currentAddressBook);
             storage.saveUserPrefs(model.getUserPrefs());
             versionHistoryStorage.saveVersionHistory(versionHistory);
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        } catch (IndexOutOfBoundsException iob) {
+            return commandResult;
         }
 
         return commandResult;
@@ -126,6 +131,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Task getMostRecentTaskDisplay() {
+        return model.getMostRecentTaskDisplay();
+    }
+
+    @Override
     public void setStateStudents() {
         this.model.setStateStudents();
     }
@@ -153,5 +163,15 @@ public class LogicManager implements Logic {
     @Override
     public void setMostRecentGroupTaskDisplay() {
         this.model.setMostRecentGroupTaskDisplay();
+    }
+
+    @Override
+    public void setMostRecentTaskDisplay(Task task) {
+        model.setMostRecentTaskDisplay(task);
+    }
+
+    @Override
+    public void setMostRecentTaskDisplay() {
+        this.model.setMostRecentTaskDisplay();
     }
 }

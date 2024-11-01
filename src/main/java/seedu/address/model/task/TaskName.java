@@ -55,7 +55,7 @@ public class TaskName {
         if (!(other instanceof TaskName otherName)) {
             return false;
         }
-        return taskName.equals(otherName.taskName);
+        return taskName.equalsIgnoreCase(otherName.taskName);
     }
 
     @Override

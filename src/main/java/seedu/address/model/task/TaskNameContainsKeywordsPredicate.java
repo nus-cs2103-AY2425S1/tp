@@ -21,8 +21,11 @@ public class TaskNameContainsKeywordsPredicate implements Predicate<Task> {
 
     @Override
     public boolean test(Task task) {
-        return keywords.stream().anyMatch(keyword ->
-            FuzzySearch.tokenSetPartialRatio(task.getTaskName().getTaskName().toLowerCase(), keyword) > MATCH_RATIO);
+        return keywords.stream().anyMatch(keyword -> {
+            TaskName taskName = task.getTaskName();
+            String taskNameString = taskName.toString().toLowerCase();
+            return FuzzySearch.tokenSortPartialRatio(taskNameString, keyword.toLowerCase()) > MATCH_RATIO;
+        });
     }
 
     @Override
