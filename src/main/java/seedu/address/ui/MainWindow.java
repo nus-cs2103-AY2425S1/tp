@@ -23,7 +23,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "MainWindowNew.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private UniversityListPanel universityListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane universityListPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +125,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        universityListPanel = new UniversityListPanel(logic.getFilteredPersonList());
+        universityListPlaceholder.getChildren().add(universityListPanel.getRoot());
     }
 
     /**
@@ -174,6 +181,21 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            // Check for `findu` command and extract university name
+            if (commandText.startsWith("findu u/")) {
+                String universityName = commandText.substring(8).trim();
+                universityListPanel.highlightUniversity(universityName);
+                resultDisplay.setFeedbackToUser("Highlighted university: " + universityName);
+                return new CommandResult("Highlighted university: " + universityName);
+            }
+
+            // Check for `list` command to clear highlights
+            if (commandText.equals("list")) {
+                universityListPanel.clearHighlight();
+                resultDisplay.setFeedbackToUser("Cleared university highlights.");
+                return new CommandResult("Cleared university highlights.");
+            }
+
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
