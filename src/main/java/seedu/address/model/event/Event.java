@@ -1,7 +1,7 @@
 package seedu.address.model.event;
 
-import java.util.HashSet;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
