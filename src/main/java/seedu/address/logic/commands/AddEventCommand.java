@@ -37,7 +37,7 @@ public class AddEventCommand extends AddCommand {
             + "Parameters: "
             + PREFIX_EVENT_NAME + "NAME "
             + PREFIX_EVENT_TIME + "TIME "
-            + PREFIX_EVENT_VENUE + "VENUE "
+            + "[" + PREFIX_EVENT_VENUE + "VENUE] "
             + PREFIX_EVENT_CELEBRITY + "CELEBRITY "
             + PREFIX_EVENT_CONTACTS + "CONTACTS...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
@@ -60,7 +60,7 @@ public class AddEventCommand extends AddCommand {
      */
     public AddEventCommand(EventName eventName, Time time, Venue venue, String celebrityName,
                            List<String> contactNames) {
-        requireAllNonNull(eventName, time, venue, celebrityName);
+        requireAllNonNull(eventName, time, celebrityName);
         this.eventName = eventName;
         this.time = time;
         this.venue = venue;
@@ -119,7 +119,7 @@ public class AddEventCommand extends AddCommand {
         if (venue != null) {
             result.add("venue", venue);
         } else {
-            result.add("venue", null);
+            result.add("venue", "");
         }
         result.add("Celebrity", celebrityName)
                 .add("Contacts", contactNames)

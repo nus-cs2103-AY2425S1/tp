@@ -49,7 +49,7 @@ public class SimplifiedEventCard extends UiPart<Region> {
         time.setText(event.getTime().getTime());
         venue.setText(event.getVenue().isPresent()
                 ? event.getVenue().get().getVenue()
-                : "Edit to add venue");
+                : "(Edit to add venue)");
         celebrity.getChildren().add(new Label(event.getCelebrity().getName().fullName));
     }
 }

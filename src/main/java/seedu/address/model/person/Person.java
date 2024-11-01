@@ -20,10 +20,10 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private Email email; // Optional, can be unassigned
+    private final Email email; // Optional, can be null
 
     // Data fields
-    private Address address; // Optional, can be unassigned
+    private final Address address; // Optional, can be null
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -48,6 +48,7 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.address = null;
         this.tags.addAll(tags);
     }
 
@@ -59,6 +60,7 @@ public class Person {
         requireAllNonNull(name, phone, address);
         this.name = name;
         this.phone = phone;
+        this.email = null;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -71,6 +73,8 @@ public class Person {
         requireAllNonNull(name, phone);
         this.name = name;
         this.phone = phone;
+        this.email = null;
+        this.address = null;
         this.tags.addAll(tags);
     }
 
@@ -164,12 +168,12 @@ public class Person {
         if (this.getEmail().isPresent()) {
             result.add("email", getEmail().get());
         } else {
-            result.add("email", null);
+            result.add("email", "");
         }
         if (this.getAddress().isPresent()) {
             result.add("address", getAddress().get());
         } else {
-            result.add("address", null);
+            result.add("address", "");
         }
         result.add("tags", tags);
 

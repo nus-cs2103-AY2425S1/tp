@@ -13,7 +13,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 /**

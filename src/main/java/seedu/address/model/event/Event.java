@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 public class Event {
     private final EventName name;
     private final Time time;
-    private Venue venue; // Optional field, can be unassigned
+    private final Venue venue; // Optional, can be null
     private final Person celebrity;
     private final Set<Person> contacts = new HashSet<>();
 
@@ -36,6 +36,7 @@ public class Event {
     public Event(EventName name, Time time, Person person, Set<Person> contacts) {
         this.name = name;
         this.time = time;
+        this.venue = null;
         this.celebrity = person;
         this.contacts.addAll(contacts);
     }
@@ -95,6 +96,9 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
+        if ((venue == null) || (otherEvent.venue == null)) {
+            return false;
+        }
         return name.equals(otherEvent.name)
                 && time.equals(otherEvent.time)
                 && venue.equals(otherEvent.venue)
