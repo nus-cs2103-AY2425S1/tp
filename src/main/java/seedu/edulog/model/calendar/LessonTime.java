@@ -2,6 +2,7 @@ package seedu.edulog.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edulog.commons.util.AppUtil.checkArgument;
+import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -44,6 +45,7 @@ public class LessonTime {
      * Checks if a provided String conforms to a 24-hour time format specifier, e.g. "2130".
      */
     public static boolean checkValidLessonTime(String time) {
+        requireNonNull(time);
         if (time.length() != 4) {
             return false;
         }
@@ -72,6 +74,7 @@ public class LessonTime {
      * Checks that 2 given times are not ambiguous, i.e. not the same start and end time.
      */
     public static boolean checkValidLessonTimes(String time1, String time2) {
+        requireAllNonNull(time1, time2);
         return !convertToLocalTime(time1).equals(convertToLocalTime(time2));
     }
 
@@ -81,6 +84,7 @@ public class LessonTime {
      * Returns if the lesson spans 2 days, e.g. Monday 2000 to 0000, or Tuesday 2200 to 0100.
      */
     public static boolean spansTwoDays(LessonTime startTime, LessonTime endTime) {
+        requireAllNonNull(startTime, endTime);
         return endTime.time.isBefore(startTime.time);
     }
 
@@ -99,6 +103,8 @@ public class LessonTime {
      * @param between time to test if it is between the provided times.
      */
     public static boolean contains(LessonTime lower, LessonTime upper, LessonTime between) {
+        requireAllNonNull(lower, upper, between);
+
         boolean boundedByLower = lower.isBefore(between) || lower.equals(between);
         boolean boundedByUpper = between.isBefore(upper) || between.equals(upper);
 

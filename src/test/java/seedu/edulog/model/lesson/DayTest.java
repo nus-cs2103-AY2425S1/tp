@@ -2,6 +2,7 @@ package seedu.edulog.model.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulog.testutil.Assert.assertThrows;
 
@@ -64,13 +65,13 @@ public class DayTest {
         assertEquals(day, new Day("mon"));
 
         // null
-        assertFalse(day.equals(null));
+        assertNotEquals(null, day);
 
         // different types
-        assertEquals(day, 5.0f);
+        assertNotEquals(day, 5.0f);
 
         // different days
-        assertFalse(day.equals(new Day("Tuesday")));
+        assertNotEquals(day, new Day("Tuesday"));
     }
 
     // Test dependency: proper functioning of equals()
