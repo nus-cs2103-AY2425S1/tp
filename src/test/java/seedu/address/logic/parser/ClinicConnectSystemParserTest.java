@@ -96,13 +96,13 @@ public class ClinicConnectSystemParserTest {
     public void parseCommand_helpKeyword() throws Exception {
         HelpCommand commandAddKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " add");
         HelpCommand commandAddfKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " addf");
-        HelpCommand commandApptKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " appt");
+        HelpCommand commandApptKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " bookappt");
         HelpCommand commandDeleteKeyword = (HelpCommand) parser.parseCommand(
                 HelpCommand.COMMAND_WORD + " delete");
 
         assertEquals(new HelpCommand("add"), commandAddKeyword);
         assertEquals(new HelpCommand("addf"), commandAddfKeyword);
-        assertEquals(new HelpCommand("appt"), commandApptKeyword);
+        assertEquals(new HelpCommand("bookappt"), commandApptKeyword);
         assertEquals(new HelpCommand("delete"), commandDeleteKeyword);
     }
 

@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import seedu.address.logic.commands.AddCommand;
@@ -30,6 +31,7 @@ public class PatientUtil {
         sb.append(PREFIX_NRIC + patient.getNric().value + " ");
         sb.append(PREFIX_SEX + patient.getSex().value + " ");
         sb.append(PREFIX_BIRTHDATE + patient.getBirthdate().value + " ");
+        sb.append(PREFIX_PHONE + patient.getPhone().value);
         return sb.toString();
     }
 

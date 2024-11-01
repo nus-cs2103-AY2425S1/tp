@@ -96,6 +96,8 @@ public class PatientBuilder {
         note = patientToCopy.getNote();
         nokName = patientToCopy.getNokName();
         nokPhone = patientToCopy.getNokPhone();
+        allergies = new AllergyList();
+        appts = new ApptList();
         for (Appt appt: patientToCopy.getAppts()) {
             appts.addAppt(new Appt(appt.getDateTime(), appt.getHealthService()));
         }

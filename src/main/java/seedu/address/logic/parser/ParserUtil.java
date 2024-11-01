@@ -230,7 +230,7 @@ public class ParserUtil {
      * Parses a {@code String allergy} into a {@code Allergy}.
      * @throws ParseException if the given {@code allergy} is invalid.
      */
-    public static Allergy parseAllergies(String allergy) throws ParseException {
+    public static Allergy parseAllergy(String allergy) throws ParseException {
         requireNonNull(allergy);
         String trimmedAllergy = allergy.trim();
         if (!Allergy.isValidAllergy(trimmedAllergy)) {
@@ -244,9 +244,9 @@ public class ParserUtil {
      */
     public static AllergyList parseAllergies(Collection<String> allergies) throws ParseException {
         requireNonNull(allergies);
-        final AllergyList allergyList = new AllergyList();
+        AllergyList allergyList = new AllergyList();
         for (String allergy : allergies) {
-            allergyList.addAllergy(parseAllergies(allergy));
+            allergyList.addAllergy(parseAllergy(allergy));
         }
         return allergyList;
     }

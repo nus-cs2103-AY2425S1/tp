@@ -2,8 +2,7 @@
   "_comment": "ClinicConnect save file which contains the same Patient values as in TypicalPatients#getTypicalClinicConnectSystem()",
   "patients" : [ {
     "name" : "Alice Pauline",
-    "healthServices" : [ "blood test", "vaccination" ],
-    "allergy" : "",
+    "allergies" : [ ],
     "bloodType" : "",
     "healthRisk" : "",
     "existingCondition" : "",
@@ -19,8 +18,7 @@
     "address" : "123, Jurong West Ave 6, #08-111"
   }, {
     "name" : "Benson Meier",
-    "healthServices" : [ "vaccination" ],
-    "allergy" : "",
+    "allergies" : [ ],
     "bloodType" : "",
     "healthRisk" : "",
     "existingCondition" : "",
@@ -36,8 +34,7 @@
     "address" : "311, Clementi Ave 2, #02-25"
   }, {
     "name" : "Carl Kurz",
-    "healthServices" : [ "blood test" ],
-    "allergy" : "",
+    "allergies" : [ ],
     "bloodType" : "",
     "healthRisk" : "",
     "existingCondition" : "",
@@ -53,8 +50,7 @@
     "address" : "wall street"
   }, {
     "name" : "Daniel Meier",
-    "healthServices" : [ "vaccination" ],
-    "allergy" : "",
+    "allergies" : [ ],
     "bloodType" : "",
     "healthRisk" : "",
     "existingCondition" : "",
@@ -70,8 +66,7 @@
     "address" : "10th street"
   }, {
     "name" : "Elle Meyer",
-    "healthServices" : [ "Vaccination", "Cancer Screening" ],
-    "allergy" : "",
+    "allergies" : [ ],
     "bloodType" : "",
     "healthRisk" : "",
     "existingCondition" : "",
@@ -87,8 +82,7 @@
     "address" : "michegan ave"
   }, {
     "name" : "Fiona Kunz",
-    "healthServices" : [ "cancer screening" ],
-    "allergy" : "",
+    "allergies" : [ ],
     "bloodType" : "",
     "healthRisk" : "",
     "existingCondition" : "",
@@ -104,8 +98,7 @@
     "address" : "little tokyo"
   }, {
     "name" : "George Best",
-    "healthServices" : [ "blood test" ],
-    "allergy" : "",
+    "allergies" : [ ],
     "bloodType" : "",
     "healthRisk" : "",
     "existingCondition" : "",
@@ -121,8 +114,7 @@
     "address" : "4th street"
   }, {
     "name" : "Keanu Reeves",
-    "healthServices" : [ "vaccination" ],
-    "allergy" : "peanuts",
+    "allergy" : [ "peanuts" ],
     "bloodType" : "O+",
     "healthRisk" : "LOW",
     "existingCondition" : "diabetes",
@@ -137,7 +129,5 @@
     "email" : "keanureeves@example.com",
     "address" : "Blk 512 Ang Mo Kio Ave 2"
   }
-
-
   ]
 }
