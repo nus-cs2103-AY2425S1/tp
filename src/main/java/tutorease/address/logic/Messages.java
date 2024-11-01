@@ -21,7 +21,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NO_LESSONS_FOUND = "No lessons found!";
-
+    public static final String MISSING_PREFIX = "%s prefix is missing!\n" + "%s";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

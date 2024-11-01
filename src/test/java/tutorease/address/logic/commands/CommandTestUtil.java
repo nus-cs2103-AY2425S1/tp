@@ -12,6 +12,8 @@ import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static tutorease.address.logic.parser.CliSyntax.UPPERCASE_PREFIX_EMAIL;
+import static tutorease.address.logic.parser.CliSyntax.UPPERCASE_PREFIX_NAME;
 import static tutorease.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -56,8 +58,6 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_CHICK = "ChickenGuard@guardian.com";
     public static final String VALID_ADDRESS_CHICK = "Pasir Ris Chicken";
     public static final String VALID_ROLE_CHICK = "Guardian";
-
-
     public static final String VALID_STUDENT_ID = "1";
     public static final String VALID_FEE = "10";
     public static final String VALID_START_DATE = "01-01-2024 12:00";
@@ -73,6 +73,8 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String UPPERCASE_NAME_DESC_BOB = " " + UPPERCASE_PREFIX_NAME + VALID_NAME_BOB;
+    public static final String UPPERCASE_EMAIL_DESC_BOB = " " + UPPERCASE_PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String NAME_DESC_MEG = " " + PREFIX_NAME + VALID_NAME_MEG;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
@@ -108,8 +110,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE; // empty string not allowed for role
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
     public static final String INVALID_STUDENT_ID_CHAR = " " + PREFIX_STUDENT_ID + "a";
     public static final String INVALID_STUDENT_ID_ZERO = " " + PREFIX_STUDENT_ID + "0";
     public static final String INVALID_FEE = " " + PREFIX_FEE + "-1";
