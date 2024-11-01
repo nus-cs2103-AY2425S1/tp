@@ -220,6 +220,8 @@ Clears and empties out the entire guest list and vendor list. Could be good to s
 
 **Format:** `clear`
 
+**Example Usage:** `clear`
+
 Entering the `clear` command returns the following result on your screen:
 
 ![clear command](images/clearCommand.png)
@@ -232,6 +234,8 @@ Entering the `clear` command returns the following result on your screen:
 Displays the total number of guests invited to the wedding and the total number of vendors involved in the wedding.
 
 **Format:** `stats`
+
+**Example Usage:** `stats`
 
 Entering the `stats` command returns the following result on your screen:
 
