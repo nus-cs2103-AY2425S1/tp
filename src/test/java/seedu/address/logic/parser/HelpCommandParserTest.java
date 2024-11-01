@@ -20,19 +20,19 @@ public class HelpCommandParserTest {
     public void parse_args_returnsHelpCommandWithKeyword() {
         HelpCommand expectedHelpCommandAddKeyword = new HelpCommand("add");
         HelpCommand expectedHelpCommandAddfKeyword = new HelpCommand("addf");
-        HelpCommand expectedHelpCommandApptKeyword = new HelpCommand("appt");
+        HelpCommand expectedHelpCommandApptKeyword = new HelpCommand("bookappt");
         HelpCommand expectedHelpCommandDeleteKeyword = new HelpCommand("delete");
 
         // no leading and trailing whitespaces
         assertParseSuccess(parser, "add", expectedHelpCommandAddKeyword);
         assertParseSuccess(parser, "addf", expectedHelpCommandAddfKeyword);
-        assertParseSuccess(parser, "appt", expectedHelpCommandApptKeyword);
+        assertParseSuccess(parser, "bookappt", expectedHelpCommandApptKeyword);
         assertParseSuccess(parser, "delete", expectedHelpCommandDeleteKeyword);
 
         // multiple whitespaces before and after keyword
         assertParseSuccess(parser, " \n add \n", expectedHelpCommandAddKeyword);
         assertParseSuccess(parser, " \n addf \n", expectedHelpCommandAddfKeyword);
-        assertParseSuccess(parser, " \n appt \n", expectedHelpCommandApptKeyword);
+        assertParseSuccess(parser, " \n bookappt \n", expectedHelpCommandApptKeyword);
         assertParseSuccess(parser, " \n delete \n", expectedHelpCommandDeleteKeyword);
 
     }

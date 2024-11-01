@@ -75,12 +75,10 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         ExistingCondition existingCondition = ParserUtil.parseExistingCondition(
                 argMultimap.getValue(PREFIX_EXISTINGCONDITION).orElse(""));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
-        HealthRisk healthRIsk = ParserUtil.parseHealthRisk(
-                argMultimap.getValue(PREFIX_HEALTHRISK).orElse(""));
+        HealthRisk healthRIsk = ParserUtil.parseHealthRisk(argMultimap.getValue(PREFIX_HEALTHRISK).orElse(""));
         Name nokName = ParserUtil.parseNokName(argMultimap.getValue(PREFIX_NOKNAME).orElse(""));
         Phone nokPhone = ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).orElse(""));
-        AllergyList allergies = ParserUtil.parseAllergies(
-                argMultimap.getAllValues(PREFIX_ALLERGY));
+        AllergyList allergies = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
         ApptList appts = new ApptList();
 
         //Create the new patient object

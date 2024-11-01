@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_JAKE;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_BOB;
@@ -101,7 +102,7 @@ public class AddFCommandParserTest {
                 NAME_DESC_JAKE + NRIC_DESC_JAKE + SEX_DESC_JAKE
                         + BIRTHDATE_DESC_JAKE + PHONE_DESC_JAKE + EMAIL_DESC_JAKE + ADDRESS_DESC_JAKE
                         + BLOODTYPE_DESC_JAKE + HEALTHRISK_DESC_JAKE + EXISTINGCONDITION_DESC_JAKE + NOTE_DESC_JAKE
-                        + NOKNAME_DESC_JAKE + NOKPHONE_DESC_JAKE + ALLERGY_DESC_JAKE + VALID_ALLERGY_AMY,
+                        + NOKNAME_DESC_JAKE + NOKPHONE_DESC_JAKE + ALLERGY_DESC_JAKE + ALLERGY_DESC_AMY,
                 new AddFCommand(expectedPatientMultipleHealthServices));
     }
 
