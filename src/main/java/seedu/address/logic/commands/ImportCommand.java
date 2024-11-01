@@ -16,9 +16,10 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
@@ -54,10 +55,10 @@ public class ImportCommand extends Command {
             csvReader.readNext();
 
             while ((fields = csvReader.readNext()) != null) {
-                if (fields.length < 8) {
+                if (fields.length < 7) {
                     throw new CommandException("Invalid CSV format.");
                 }
-                Person person = parsePerson(fields);
+                Person person = parsePerson(fields, model);
                 newPersons.add(person);
             }
         } catch (IOException | CsvValidationException e) {
@@ -72,23 +73,31 @@ public class ImportCommand extends Command {
     /**
      * Parses a person from CSV fields.
      */
-    private Person parsePerson(String[] fields) throws CommandException {
+    private Person parsePerson(String[] fields, Model model) throws CommandException {
         try {
-            Name name = new Name(fields[0].trim());
-            Phone phone = new Phone(fields[1].trim());
-            Email email = new Email(fields[2].trim());
-            Address address = new Address(fields[3].trim());
-            Telegram telegram = new Telegram(fields[4].trim());
-            Github github = new Github(fields[6].trim());
+            Name name = ParserUtil.parseName(fields[0].trim());
+            Phone phone = ParserUtil.parsePhone(fields[1].trim());
+            Email email = ParserUtil.parseEmail(fields[2].trim());
+            Telegram telegram = ParserUtil.parseTelegram(fields[3].trim());
+            Github github = ParserUtil.parseGithub(fields[5].trim());
 
             // Process tags
-            Set<Tag> tags = parseTags(fields[5].trim());
+            Set<Tag> tags = parseTags(fields[4].trim());
 
-            Map<String, Assignment> assignment = parseAssignment(fields[7].trim());
+            Map<String, Assignment> assignment = parseAssignment(fields[6].trim(), model);
 
-            return new Person(name, phone, email, address, telegram, tags, github, assignment);
+            Set<Integer> weeksPresent = new HashSet<>();
+            if (!fields[7].trim().isEmpty()) {
+                String[] weeksArray = fields[7].split(",");
+                for (String week : weeksArray) {
+                    int weekPresent = ParserUtil.parseWeek(week.trim());
+                    weeksPresent.add(weekPresent);
+                }
+            }
 
-        } catch (IllegalArgumentException e) {
+            return new Person(name, phone, email, telegram, github, assignment, weeksPresent, tags);
+
+        } catch (IllegalArgumentException | ParseException e) {
             throw new CommandException(e.getMessage());
         }
     }
@@ -120,7 +129,8 @@ public class ImportCommand extends Command {
     /**
      * Parses a set of tags from a string with tags in the format "assignmentName | score".
      */
-    private Map<String, Assignment> parseAssignment(String assignmentField) throws NumberFormatException {
+    private Map<String, Assignment> parseAssignment(String assignmentField, Model model) throws NumberFormatException,
+            CommandException {
         Map<String, Assignment> assignments = new HashMap<>();
         assignmentField = assignmentField.trim();
         if (!assignmentField.isEmpty()) {
@@ -129,11 +139,16 @@ public class ImportCommand extends Command {
                 assignment = assignment.trim();
                 List<String> individual = Stream.of(assignment.split("\\|"))
                         .map(String::trim).toList(); // | used as delimiter between name and score
+                String asgnName = individual.get(0);
+                float asgnScore = Float.parseFloat(individual.get(1));
+                if (!model.hasAssignment(asgnName)) {
+                    throw new CommandException("Invalid assignment name: " + asgnName);
+                }
 
-                assignments.put(individual.get(0),
-                        new Assignment(individual.get(0),
-                                Float.parseFloat(individual.get(1))));
-
+                if (asgnScore > model.maxScore(asgnName) || asgnScore < 0) {
+                    throw new CommandException("Score must be between 0.0 and " + model.maxScore(asgnName));
+                }
+                assignments.put(asgnName, new Assignment(asgnName, asgnScore));
             }
         }
         return assignments;

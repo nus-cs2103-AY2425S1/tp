@@ -27,8 +27,6 @@ public class Person {
     private final Github github;
 
     // Data fields
-    private final Address address;
-
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
     private final Map<String, Assignment> assignment = new HashMap<>();
@@ -41,7 +39,6 @@ public class Person {
             Name name,
             Phone phone,
             Email email,
-            Address address,
             Telegram telegram,
             Set<Tag> tags,
             Github github) {
@@ -49,7 +46,6 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.telegram = telegram;
         this.tags.addAll(tags);
         this.github = github;
@@ -65,18 +61,16 @@ public class Person {
             Name name,
             Phone phone,
             Email email,
-            Address address,
             Telegram telegram,
             Set<Tag> tags,
             Github github,
             Map<String, Assignment> assignment) {
-        requireAllNonNull(name, phone, email, address, telegram, tags, github, assignment);
+        requireAllNonNull(name, phone, email, telegram, tags, github, assignment);
         this.github = github;
         this.telegram = telegram;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         this.assignment.putAll(assignment);
         this.weeksPresent = new HashSet<>();
@@ -87,7 +81,6 @@ public class Person {
      *
      * @param name the name of the person.
      * @param phone the phone number of the person.
-     * @param address the address of the person.
      * @param email the email of the person.
      * @param telegram the telegram ID of the person.
      * @param github the github username of the person.
@@ -96,20 +89,18 @@ public class Person {
      */
     public Person(Name name,
                   Phone phone,
-                  Address address,
                   Email email,
                   Telegram telegram,
                   Github github,
                   Map<String, Assignment> assignment,
                   Set<Integer> weeksPresent,
                   Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, telegram, tags, github);
+        requireAllNonNull(name, phone, email, telegram, tags, github);
         this.github = github;
         this.telegram = telegram;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         this.assignment.putAll(assignment);
         this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
@@ -127,10 +118,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public Telegram getTelegram() {
@@ -215,7 +202,6 @@ public class Person {
                 name.equals(otherPerson.name)
                         && phone.equals(otherPerson.phone)
                         && email.equals(otherPerson.email)
-                        && address.equals(otherPerson.address)
                         && telegram.equals(otherPerson.telegram)
                         && tags.equals(otherPerson.tags)
                         && github.equals(otherPerson.github);
@@ -224,7 +210,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
@@ -233,7 +219,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("telegram", telegram)
                 .add("tags", tags)
                 .add("github", github)

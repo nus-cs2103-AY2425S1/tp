@@ -19,10 +19,10 @@
     <Label fx:id="name" text="\$first" />
     <FlowPane fx:id="tags" />
     <Label fx:id="phone"  text="\$phone" />
-    <Label fx:id="address" text="\$address" />
     <Label fx:id="email" text="\$email" />
     <Label fx:id="assignment" text="\$assignment" />
     <Label fx:id="telegram" text="\$telegram"/>
     <Label fx:id="github" text="\$Github" />
+    <FlowPane fx:id="weekLabel"/>
 </VBox>
 

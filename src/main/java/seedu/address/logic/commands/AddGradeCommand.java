@@ -13,7 +13,6 @@ import java.util.Set;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
@@ -69,7 +68,6 @@ public class AddGradeCommand extends Command {
         Name name = person.getName();
         Phone phone = person.getPhone();
         Email email = person.getEmail();
-        Address address = person.getAddress();
         Set<Tag> tags = person.getTags();
         Telegram telegram = person.getTelegram();
         Github github = person.getGithub();
@@ -77,7 +75,7 @@ public class AddGradeCommand extends Command {
         Map<String, Assignment> assignment = person.getAssignment();
         assignment.put(assignmentName, new Assignment(assignmentName, score));
 
-        return new Person(name, phone, email, address, telegram, tags, github, assignment);
+        return new Person(name, phone, email, telegram, tags, github, assignment);
     }
 
     @Override
