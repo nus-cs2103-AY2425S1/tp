@@ -177,15 +177,17 @@ public class ModuleRoleMap {
     }
 
     /**
-     * Returns a list of strings representing module role pairs for the GUI.
+     * Returns a list of strings representing module role pairs.
+     * Retains the original input order.
      */
     public List<ModuleRolePair> getData() {
         return getData(false);
     }
 
     /**
-     * Returns a list of strings representing module role pairs for the GUI.
-     * @param sorted whether to sort the list based on the {@code ModuleRolePair}'s natural ordering.
+     * Returns a list of strings representing module role pairs.
+     * @param sorted true to sort the list based on the {@code ModuleRolePair}'s natural ordering;
+     *               false to retain the original input order.
      */
     public List<ModuleRolePair> getData(boolean sorted) {
         if (sorted) {

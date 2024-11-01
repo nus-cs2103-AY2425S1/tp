@@ -105,9 +105,9 @@ public class ModuleRoleMapTest {
         roles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         roles.put(new ModuleCode("CS3230"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(roles);
-        assertArrayEquals(Stream.of(new ModuleCode("MA1522"),
-                        new ModuleCode("CS3230"),
-                        new ModuleCode("CS1101S")).toArray(ModuleCode[]::new),
+        assertArrayEquals(Stream.of(new ModuleCode("CS1101S"),
+                        new ModuleCode("MA1522"),
+                        new ModuleCode("CS3230")).toArray(ModuleCode[]::new),
                 moduleRoleMap.getFilteredModuleCodes(RoleType.TUTOR).toArray(ModuleCode[]::new));
     }
 
@@ -255,7 +255,7 @@ public class ModuleRoleMapTest {
         newRoles.put(new ModuleCode("CS2107"), RoleType.PROFESSOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(newRoles);
         assertEquals(
-                "Student of: CS1011S, MA1522\nTutor of: CS3241, CS2105\nProfessor of: CS2106, CS2107\n",
+                "Student of: CS1101S, MA1522\nTutor of: CS3241, CS2105\nProfessor of: CS2106, CS2107\n",
                 moduleRoleMap.toString());
     }
 
