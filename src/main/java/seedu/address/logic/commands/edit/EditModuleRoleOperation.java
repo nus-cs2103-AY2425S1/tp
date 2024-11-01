@@ -6,7 +6,6 @@ import java.util.List;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
-import seedu.address.model.person.ModuleRolePair;
 
 /**
  * Represents an operation to edit a person's module roles.
@@ -22,6 +21,8 @@ public abstract class EditModuleRoleOperation {
             e.g. +CS1101S MA1521-TA
             adds CS1101S-Student and MA1521-Tutor to the person
             """;
+    private static final String MODULE_ROLE_ADDED = "Module role(s) added: ";
+    private static final String MODULE_ROLE_DELETED = "Module role(s) deleted: ";
 
     /**
      * Executes the operation on the given module role map.
@@ -55,28 +56,26 @@ public abstract class EditModuleRoleOperation {
             ModuleRoleMap moduleRoleMapBefore, ModuleRoleMap moduleRoleMapAfter) {
 
         StringBuilder stringBuilderAdded = new StringBuilder();
-        boolean hasAdded = false;
-        for (ModuleRolePair moduleRolePair : moduleRoleMapAfter.getData()) {
-            if (!moduleRoleMapBefore.containsModuleRolePair(moduleRolePair)) {
-                hasAdded = true;
-                stringBuilderAdded.append(moduleRolePair).append(" ");
-            }
-        }
+        moduleRoleMapAfter.getData(true)
+                .forEach(moduleRolePair -> {
+                    if (!moduleRoleMapBefore.containsModuleRolePair(moduleRolePair)) {
+                        stringBuilderAdded.append(moduleRolePair).append(" ");
+                    }
+                });
 
         StringBuilder stringBuilderDeleted = new StringBuilder();
-        boolean hasDeleted = false;
-        for (ModuleRolePair moduleRolePair : moduleRoleMapBefore.getData()) {
-            if (!moduleRoleMapAfter.containsModuleRolePair(moduleRolePair)) {
-                hasDeleted = true;
-                stringBuilderDeleted.append(moduleRolePair).append(" ");
-            }
-        }
+        moduleRoleMapBefore.getData(true)
+                .forEach(moduleRolePair -> {
+                    if (!moduleRoleMapAfter.containsModuleRolePair(moduleRolePair)) {
+                        stringBuilderDeleted.append(moduleRolePair).append(" ");
+                    }
+                });
         List<String> finalDescription = new ArrayList<>();
-        if (hasAdded) {
-            finalDescription.add("Module role(s) added: " + stringBuilderAdded.toString().strip());
+        if (!stringBuilderAdded.toString().isEmpty()) {
+            finalDescription.add(MODULE_ROLE_ADDED + stringBuilderAdded.toString().strip());
         }
-        if (hasDeleted) {
-            finalDescription.add("Module role(s) deleted: " + stringBuilderDeleted.toString().strip());
+        if (!stringBuilderDeleted.toString().isEmpty()) {
+            finalDescription.add(MODULE_ROLE_DELETED + stringBuilderDeleted.toString().strip());
         }
 
         return String.join("\n", finalDescription);
