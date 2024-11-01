@@ -304,7 +304,7 @@ public class EditContactCommandTest {
         targetContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
         assertEquals(ALICE.getId(), targetContact.getId());
 
-        // first event is WEDDING_A, which should contains ALICE
+        // first event is WEDDING_A, which should contain ALICE
         Index targetEventIndex = INDEX_FIRST_EVENT;
         Event targetEvent = model.getFilteredEventList().get(targetEventIndex.getZeroBased());
 
@@ -349,7 +349,7 @@ public class EditContactCommandTest {
         targetContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
         assertEquals(BENSON.getId(), targetContact.getId());
 
-        // first event is WEDDING_A, which should contains BENSON
+        // first event is WEDDING_A, which should contain BENSON
         Index targetEventIndex = INDEX_FIRST_EVENT;
         Event targetEvent = model.getFilteredEventList().get(targetEventIndex.getZeroBased());
 
