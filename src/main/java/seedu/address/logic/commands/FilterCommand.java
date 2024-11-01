@@ -31,9 +31,8 @@ public class FilterCommand extends Command {
             + COMMAND_WORD + " t/supplier" + " t/partner";
 
     public static final String MESSAGE_SUCCESS = "Filtered for tag(s): %s";
-    public static final String MESSAGE_FAILURE =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE)
-            + "\nListing all contacts instead.";
+    public static final String MESSAGE_NOT_FOUND =
+            "No users found with the tag(s): %s";
 
     private final Set<Tag> tags = new HashSet<>();
 
@@ -55,7 +54,10 @@ public class FilterCommand extends Command {
         String filteredTags = tags.stream()
                 .map(Tag::getTagName)
                 .collect(Collectors.joining(", "));
-
+        //if no contacts matches the tag
+        if (model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_NOT_FOUND, filteredTags));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, filteredTags));
     }
 
