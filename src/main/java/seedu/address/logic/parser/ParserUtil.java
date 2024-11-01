@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.edit.DeleteModuleRoleOperation.DeleteModuleRoleDescriptor;
+import static seedu.address.logic.commands.edit.AddModuleRoleOperation.AddModuleRoleDescriptor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -266,6 +267,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a list of {@code String moduleRolePairs} into an {@code AddModuleRoleDescriptor}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param moduleRolePairs the list of strings representing the module role pairs.
+     * @return the corresponding {@code AddModuleRoleDescriptor}.
+     * @throws ParseException if the given {@code moduleRolePairs} is invalid.
+     */
+    public static AddModuleRoleDescriptor parseAddModuleRoleDescriptor(List<String> moduleRolePairs)
+            throws ParseException {
+        return new AddModuleRoleDescriptor(parseModuleRolePairs(moduleRolePairs).getData());
+    }
+
+    /**
      * Parses a list of {@code String moduleRolePairs} into a {@code DeleteModuleRoleDescriptor}.
      * Leading and trailing whitespaces will be trimmed.
      * For each {@code String moduleRolePair}, if the role is not specified, the returned descriptor
@@ -321,7 +335,7 @@ public class ParserUtil {
         case '+':
             List<String> moduleRolesToAdd =
                     Arrays.asList(moduleRoleOperations.substring(1).split("\\s+"));
-            return new AddModuleRoleOperation(parseModuleRolePairs(moduleRolesToAdd));
+            return new AddModuleRoleOperation(parseAddModuleRoleDescriptor(moduleRolesToAdd));
         case '-':
             List<String> moduleRolesToRemove =
                     Arrays.asList(moduleRoleOperations.substring(1).split("\\s+"));

@@ -97,6 +97,9 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
             this.toDeleteAnyRoles = toDeleteAnyRoles == null ? new ArrayList<>() : new ArrayList<>(toDeleteAnyRoles);
         }
 
+        /**
+         * Copy constructor for DeleteModuleRoleDescriptor.
+         */
         public DeleteModuleRoleDescriptor(DeleteModuleRoleDescriptor toCopy) {
             this(toCopy.toDeletes, toCopy.toDeleteAnyRoles);
         }
