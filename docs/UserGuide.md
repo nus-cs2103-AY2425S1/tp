@@ -168,7 +168,7 @@ Examples:
 
 ### Deleting in a batch : `batch-delete`
 
-Delete all contacts from cher with contains **all** the specified tags.
+Delete all contacts from cher with containing **all** the specified tags.
 
 Format: `batch-delete t/TAG [t/TAG]...`
 
@@ -176,6 +176,16 @@ Examples:
 ![Batch delete example data](images/ForBatchDeleteExampleData.png)
 * `batch-delete t/friends` will delete both `Alex Yeoh` and `Bernice Yu`.
 * `batch-delete t/friends t/colleagues` will delete only `Bernice Yu`.
+
+### Editing tag in a batch: `batch-edit`
+Changes all contacts from cher with containing the specified tags with a new tag.
+
+Format: `batch-edit t/OLDTAG t/NEWTAG`
+
+Examples:
+![Batch delete example data](images/ForBatchDeleteExampleData.png)
+* `batch-edit t/friends t/fren` will change the `friends` tag of both `Alex Yeoh` and `Bernice Yu` to `fren`.
+
 
 ### Clearing all entries : `clear`
 

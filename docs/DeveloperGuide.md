@@ -408,6 +408,18 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 2. Cher displays all contacts in list in alphabetical order by name.<br>
    Use case ends.
 
+#### Use case: UC6 - Batch edit
+**MSS**
+1. User enters a command to edit all contacts with specific tags to new tag.
+2. Cher will change all contacts containing specified tags to the new tag.
+3. Cher will show the contacts that have been changed.<br>
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects error in user input.
+    - 1a1. Cher shows correct input format. <br>
+      Use case ends.
+
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
