@@ -155,6 +155,19 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Cleaning graduated students : `clean`
+
+Removes all graduated students from the address book based on the current year and their graduation date.
+
+Format: `clean`
+
+### Undoing the previous command : `undo`
+
+Undoes the previous command that changes the data in the address book.
+Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`.
+
+Format: `undo`
+
 ### Exiting the program : `exit`
 
 Exits the program.
