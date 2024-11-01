@@ -887,10 +887,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System displays an error message telling the user that the submission does not exist.
       Use case ends.
 
-
 **System: StudentManagerPro**
 
-**Use case: UC14 Sort Students**
+**Use case: UC17 Sort Students**
 
 **Actor: User**
 
