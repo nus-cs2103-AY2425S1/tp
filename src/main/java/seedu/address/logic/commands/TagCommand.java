@@ -103,7 +103,7 @@ public class TagCommand extends Command {
         Level updatedLevel = tagsToAdd.getLevel().orElse(studentToTag.getLevel());
         Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(studentToTag.getSubjects());
 
-        if (updatedLevel != null && updatedSubjects != null) {
+        if (!updatedSubjects.isEmpty()) {
             if (!Subject.isValidSubjectsByLevel(updatedLevel,
                     updatedSubjects)) {
                 throw new CommandException(Subject.getValidSubjectMessage());

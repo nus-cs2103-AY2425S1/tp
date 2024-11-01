@@ -115,7 +115,7 @@ public class UpdateCommand extends Command {
         Level updatedLevel = updateStudentDescriptor.getLevel().orElse(studentToUpdate.getLevel());
         Set<Subject> updatedSubjects = updateStudentDescriptor.getSubjects().orElse(studentToUpdate.getSubjects());
 
-        if (updatedLevel != null && updatedSubjects != null) {
+        if (!updatedSubjects.isEmpty()) {
             if (!Subject.isValidSubjectsByLevel(updatedLevel,
                     updatedSubjects)) {
                 throw new CommandException(Subject.getValidSubjectMessage());
