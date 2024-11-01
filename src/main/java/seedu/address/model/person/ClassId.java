@@ -4,17 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's fees in the address book.
+ * Represents a Person's class ID in the address book.
  */
 public class ClassId {
 
     public static final String MESSAGE_CONSTRAINTS =
             "ClassId should only contain alphanumeric characters and must be at least 1 character long.";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
     public final String value;
 
@@ -30,13 +25,7 @@ public class ClassId {
     /**
      * Returns true if a given string is a valid classId.
      */
-    //public static boolean isValidClassId(String test) {
-    // return test.isEmpty() || VALIDATION_REGEX.matches(test);
-    //}
-
     public static boolean isValidClassId(String test) {
-        System.out.println("Testing input: " + test);
-        System.out.println("Matches: " + test.matches(VALIDATION_REGEX));
         return test.matches(VALIDATION_REGEX);
     }
 
