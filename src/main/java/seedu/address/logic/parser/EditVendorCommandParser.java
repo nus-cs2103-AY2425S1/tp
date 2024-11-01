@@ -16,16 +16,21 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditVendorCommand;
 import seedu.address.logic.commands.util.EditVendorDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditVendorCommand object
  */
 public class EditVendorCommandParser implements Parser<EditVendorCommand> {
-
+    private final Model model;
+    public EditVendorCommandParser(Model model) {
+        this.model = model;
+    }
     /**
      * Parses the given {@code String} of arguments in the context of the EditVendorCommand
      * and returns an EditVendorCommand object for execution.
@@ -44,6 +49,10 @@ public class EditVendorCommandParser implements Parser<EditVendorCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditVendorCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (index.getOneBased() > this.model.getFilteredVendorList().size()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
