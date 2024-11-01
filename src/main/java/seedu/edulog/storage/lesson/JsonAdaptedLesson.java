@@ -1,7 +1,5 @@
 package seedu.edulog.storage.lesson;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;

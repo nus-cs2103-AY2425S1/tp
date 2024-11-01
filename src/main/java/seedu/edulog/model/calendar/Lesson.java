@@ -1,13 +1,8 @@
 package seedu.edulog.model.calendar;
 
-import static seedu.edulog.commons.util.AppUtil.checkArgument;
 import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import seedu.edulog.commons.util.ToStringBuilder;

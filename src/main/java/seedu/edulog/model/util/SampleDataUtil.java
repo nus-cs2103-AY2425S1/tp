@@ -1,7 +1,5 @@
 package seedu.edulog.model.util;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;

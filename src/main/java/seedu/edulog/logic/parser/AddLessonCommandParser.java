@@ -6,8 +6,6 @@ import static seedu.edulog.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_START_DAY;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_START_TIME;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Stream;
 

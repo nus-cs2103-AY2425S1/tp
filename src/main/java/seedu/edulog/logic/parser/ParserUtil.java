@@ -3,8 +3,6 @@ package seedu.edulog.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,7 +15,6 @@ import seedu.edulog.commons.util.StringUtil;
 import seedu.edulog.logic.parser.exceptions.ParseException;
 import seedu.edulog.model.calendar.Day;
 import seedu.edulog.model.calendar.Description;
-import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.calendar.LessonTime;
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
@@ -172,7 +169,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if not spelt as a day of the week or their 3-letter shorthand,
-     * like "Monday", "Wednesday", "fri" etc.
+     *     e.g. "Monday", "Wednesday", "fri" etc.
      */
     public static Day parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
@@ -186,11 +183,10 @@ public class ParserUtil {
      * Parses 2 string representing a 24-hour time format, meant to denote the start and end time of a lesson.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if time provided is not a 24-hour time format like "1200" or "2359" without spaces,
-     * as determined by {@link LessonTime#checkValidLessonTime(String)}, OR if the 2 times provided are ambiguous
-     * together, as determined by {@link LessonTime#checkValidLessonTimes(String, String)}.
-     *
      * @return List of LessonTime, containing the start time and end time at index 0 and 1 respectively.
+     * @throws ParseException if time provided is not a 24-hour time format like "1200" or "2359" without spaces,
+     *     as determined by {@link LessonTime#checkValidLessonTime(String)}, OR if the 2 times provided are ambiguous
+     *     together, as determined by {@link LessonTime#checkValidLessonTimes(String, String)}.
      */
     public static List<LessonTime> parseLessonTimes(String startTime, String endTime) throws ParseException {
         requireAllNonNull(startTime, endTime);

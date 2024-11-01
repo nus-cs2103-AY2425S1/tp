@@ -2,7 +2,6 @@ package seedu.edulog.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edulog.commons.util.AppUtil.checkArgument;
-import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

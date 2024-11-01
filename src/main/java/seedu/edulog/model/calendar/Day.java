@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Denotes the start day of a Lesson, which is displayed in the Calendar.
+ */
 public class Day {
     // Denotes the valid days of the week, spelt in full.
     public static final List<String> DAYS_OF_THE_WEEK = new ArrayList<String>(
