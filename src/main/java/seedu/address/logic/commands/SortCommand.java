@@ -49,6 +49,7 @@ public class SortCommand extends Command {
             return new CommandResult(MESSAGE_NO_PERSONS);
         }
 
+
         Comparator<Person> comparator;
         switch (sortByKeyword) {
         case "deadline":

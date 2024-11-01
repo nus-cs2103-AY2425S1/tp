@@ -143,13 +143,25 @@ public class ModelManager implements Model {
     @Override
     public void sortByComparator(Comparator<Person> comparator) {
         currentComparator = comparator;
-        int initialSize = sortedPersons.size();
+
+        // Initial size of the addressBook with all contacts
+        int initialSize = addressBook.getPersonList().size();
+
+        //Initial size of filtered persons i.e if a FindCommand has been executed
+        int initialSortedSize = sortedPersons.size();
+
         sortedPersons.setComparator(comparator);
 
-        // Assert that sortedPersons size remains same after sorting
-        assert sortedPersons.size() == initialSize;
+        SortedList<Person> sortedAllPersons = new SortedList<>(this.addressBook.getPersonList());
+        sortedAllPersons.setComparator(comparator);
 
-        addressBook.setPersons(sortedPersons);
+        // Assert that sortedPersons size remains same after sorting
+        assert sortedPersons.size() == initialSortedSize;
+
+        // Assert that no contacts get deleted during the sort command
+        assert sortedAllPersons.size() == addressBook.getPersonList().size();
+
+        addressBook.setPersons(sortedAllPersons);
     }
 
     //=========== Reminder Manager ==========================================================================
