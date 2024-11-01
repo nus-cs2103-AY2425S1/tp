@@ -144,7 +144,26 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
 
+        // Set Student in Student List
         students.setStudent(target, editedStudent);
+
+        // Set Student in Consultation List
+        List<Consultation> consultsWithEditedStudent = consults.filtered(c ->
+                c.hasStudent(target)).stream().toList();
+        consultsWithEditedStudent.forEach(c -> {
+            Consultation newConsult = new Consultation(c);
+            newConsult.setStudent(target, editedStudent);
+            setConsult(c, newConsult);
+        });
+
+        // Set Student in Lesson List
+        List<Lesson> lessonsWithEditedStudent = lessons.filtered(l ->
+                l.hasStudent(target)).stream().toList();
+        lessonsWithEditedStudent.forEach(l -> {
+            Lesson newLesson = new Lesson(l);
+            newLesson.setStudent(target, editedStudent);
+            setLesson(l, newLesson);
+        });
     }
 
     /**
