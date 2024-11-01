@@ -58,21 +58,21 @@ public class AddWeddingCommand extends Command {
         }
 
         // Check if a wedding with the same two people already exists, regardless of the order
+        Set<Set<String>> existingWeddingsNamesSet = new HashSet<>();
+
+        for (Wedding existingWedding : model.getWeddingBook().getWeddingList()) {
+            String[] existingNames = existingWedding.getName().split("&");
+            if (existingNames.length == 2) {
+                Set<String> existingNamesSet = new HashSet<>(Arrays.asList(existingNames[0].trim().toLowerCase(),
+                        existingNames[1].trim().toLowerCase()));
+                existingWeddingsNamesSet.add(existingNamesSet);
+            }
+        }
+
         Set<String> toAddNamesSet = new HashSet<>(Arrays.asList(names[0].trim().toLowerCase(),
-                                                                names[1].trim().toLowerCase()));
+                names[1].trim().toLowerCase()));
 
-        boolean hasDuplicate = model.getWeddingBook().getWeddingList().stream()
-                .map(existingWedding -> {
-                    String[] existingNames = existingWedding.getName().split("&");
-                    if (existingNames.length != 2) {
-                        return null;
-                    }
-                    return new HashSet<>(Arrays.asList(existingNames[0].trim().toLowerCase(),
-                            existingNames[1].trim().toLowerCase()));
-                })
-                .anyMatch(existingNamesSet -> toAddNamesSet.equals(existingNamesSet));
-
-        if (hasDuplicate) {
+        if (existingWeddingsNamesSet.contains(toAddNamesSet)) {
             throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
         }
 
