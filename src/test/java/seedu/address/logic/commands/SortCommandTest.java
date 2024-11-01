@@ -11,7 +11,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonDateComparator;
+import seedu.address.model.person.PersonDepartmentComparator;
 import seedu.address.model.person.PersonNameComparator;
+import seedu.address.model.person.PersonRoleComparator;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -34,7 +36,8 @@ public class SortCommandTest {
     @Test
     public void execute_listIsNotFiltered_sortsByName() {
         expectedModel.updateSortedPersonList(new PersonNameComparator());
-        assertCommandSuccess(new SortNameCommand(), model, SortNameCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new SortNameCommand(false), model,
+                SortNameCommand.MESSAGE_SUCCESS + SortCommand.ASCENDING_SUCCESS, expectedModel);
     }
 
     @Test
@@ -43,13 +46,69 @@ public class SortCommandTest {
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         expectedModel.updateSortedPersonList(new PersonNameComparator());
-        assertCommandSuccess(new SortNameCommand(), model, SortNameCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new SortNameCommand(false), model,
+                SortNameCommand.MESSAGE_SUCCESS + SortCommand.ASCENDING_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsNotFiltered_sortsByDate() {
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         expectedModel.updateSortedPersonList(new PersonDateComparator());
-        assertCommandSuccess(new SortDateCommand(), model, SortDateCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new SortDateCommand(false), model,
+                SortDateCommand.MESSAGE_SUCCESS + SortCommand.ASCENDING_SUCCESS, expectedModel);
     }
+
+    @Test
+    public void execute_listIsNotFiltered_sortsByDept() {
+        expectedModel.updateSortedPersonList(new PersonDepartmentComparator());
+        assertCommandSuccess(new SortDepartmentCommand(false), model,
+                SortDepartmentCommand.MESSAGE_SUCCESS + SortCommand.ASCENDING_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsNotFiltered_sortsByRole() {
+        expectedModel.updateSortedPersonList(new PersonRoleComparator());
+        assertCommandSuccess(new SortRoleCommand(false), model,
+                SortRoleCommand.MESSAGE_SUCCESS + SortCommand.ASCENDING_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_sortsByDepartment() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
+        expectedModel.updateSortedPersonList(new PersonDepartmentComparator());
+        assertCommandSuccess(new SortDepartmentCommand(false), model,
+                SortDepartmentCommand.MESSAGE_SUCCESS + SortCommand.ASCENDING_SUCCESS, expectedModel);
+    }
+
+
+    @Test
+    public void execute_listIsNotFiltered_sortsByDateDesc() {
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
+        expectedModel.updateSortedPersonList(new PersonDateComparator().reversed());
+        assertCommandSuccess(new SortDateCommand(true), model,
+                SortDateCommand.MESSAGE_SUCCESS + SortCommand.DESCENDING_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsNotFiltered_sortsByDeptDesc() {
+        expectedModel.updateSortedPersonList(new PersonDepartmentComparator().reversed());
+        assertCommandSuccess(new SortDepartmentCommand(true), model,
+                SortDepartmentCommand.MESSAGE_SUCCESS + SortCommand.DESCENDING_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsNotFiltered_sortsByNameDesc() {
+        expectedModel.updateSortedPersonList(new PersonNameComparator().reversed());
+        assertCommandSuccess(new SortNameCommand(true), model,
+                SortNameCommand.MESSAGE_SUCCESS + SortCommand.DESCENDING_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsNotFiltered_sortsByRoleDesc() {
+        expectedModel.updateSortedPersonList(new PersonRoleComparator().reversed());
+        assertCommandSuccess(new SortRoleCommand(true), model,
+                SortRoleCommand.MESSAGE_SUCCESS + SortCommand.DESCENDING_SUCCESS, expectedModel);
+    }
+
 }

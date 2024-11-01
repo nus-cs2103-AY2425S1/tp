@@ -34,7 +34,9 @@ import seedu.address.logic.commands.PotentialCommand;
 import seedu.address.logic.commands.PromoteCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortDateCommand;
+import seedu.address.logic.commands.SortDepartmentCommand;
 import seedu.address.logic.commands.SortNameCommand;
+import seedu.address.logic.commands.SortRoleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContractEndDate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
@@ -194,15 +196,65 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(
             SortCommand.COMMAND_WORD + " " + SortDateCommand.ARGUMENT_WORD) instanceof SortCommand);
 
+        //sort department command
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortDepartmentCommand.ARGUMENT_WORD) instanceof SortCommand);
+
+        //sort role command
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortRoleCommand.ARGUMENT_WORD) instanceof SortCommand);
+
+        //sort name command with ASC
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortNameCommand.ARGUMENT_WORD + " " + SortCommand.ARGUMENT_WORD_ASC)
+            instanceof SortCommand);
+
+        //sort date command with ASC
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortDateCommand.ARGUMENT_WORD + " " + SortCommand.ARGUMENT_WORD_ASC)
+            instanceof SortCommand);
+
+        //sort department command with ASC
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortDepartmentCommand.ARGUMENT_WORD + " " + SortCommand.ARGUMENT_WORD_ASC)
+            instanceof SortCommand);
+
+        //sort role command with ASC
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortRoleCommand.ARGUMENT_WORD + " " + SortCommand.ARGUMENT_WORD_ASC)
+            instanceof SortCommand);
+
+        //sort name command with DESC
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortNameCommand.ARGUMENT_WORD + " " + SortCommand.ARGUMENT_WORD_DESC)
+            instanceof SortCommand);
+
+        //sort date command with DESC
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortDateCommand.ARGUMENT_WORD + " " + SortCommand.ARGUMENT_WORD_DESC)
+            instanceof SortCommand);
+
+        //sort department command with DESC
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortDepartmentCommand.ARGUMENT_WORD + " " + SortCommand.ARGUMENT_WORD_DESC)
+            instanceof SortCommand);
+
+        //sort role command with DESC
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortRoleCommand.ARGUMENT_WORD + " " + SortCommand.ARGUMENT_WORD_DESC)
+            instanceof SortCommand);
+
         //no parameter
         assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD));
 
-        //wrong parameter (is not name/date)
+        //wrong parameter (is not name/date/dept/role)
         assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " 3"));
 
-        //additional text behind parameter should not work
+        //additional invalid text behind parameter should not work
         assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " name 3"));
         assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " date 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " dept ASC 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " role DESC 3"));
     }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
