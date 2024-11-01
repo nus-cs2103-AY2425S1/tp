@@ -4,7 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Patient;
+
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
  * An UI component that displays information of a {@code Patient}.
@@ -39,21 +43,14 @@ public class PatientCard extends UiPart<Region> {
     /**
      * Creates a {@code PatientCard} with the given {@code Patient} and index to display.
      */
-    public PatientCard(Patient patient, int displayedIndex) {
+    public PatientCard(Patient patient) {
         super(FXML);
         this.patient = patient;
         name.setText(patient.getName().fullName);
         nric.setText(patient.getNric().value);
         sex.setText(patient.getSex().value);
-        if (patient.getAppts().size() == 0) {
-            appointmentDateTime.setText("No appointments currently");
-        } else if (patient.getMostRecentPastAppt() == null) {
-            appointmentDateTime.setText(patient.getLatestFutureAppt().toString());
-        } else if (patient.getLatestFutureAppt() == null) {
-            appointmentDateTime.setText(patient.getMostRecentPastAppt().toString());
-        } else {
-            appointmentDateTime.setText(patient.getMostRecentPastAppt().toString() + "\n"
-                + patient.getLatestFutureAppt().toString());
-        }
+        appointmentDateTime.setText(Optional.ofNullable(patient.getLatestFutureAppt())
+                .map(appt -> appt.getDateTime().format(DateTimeFormatter.ofPattern("d MMM uuuu, h:mma")))
+                .orElse("No upcoming appointment"));
     }
 }
