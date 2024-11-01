@@ -220,6 +220,7 @@ Find students by either their name, level or subject(s).
 * `find l/S3 NA` returns all students tagged with level `S3 NA`
 * `find s/MATH` returns all students tagged with subject `MATH`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
 ***
