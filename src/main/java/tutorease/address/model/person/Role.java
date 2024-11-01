@@ -7,6 +7,8 @@ import static tutorease.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; its value is either "Guardian" or "Student"
  */
 public class Role {
+    public static final String GUARDIAN_LOWERCASE = "guardian";
+    public static final String STUDENT_LOWERCASE = "student";
     public static final String GUARDIAN = "Guardian";
     public static final String STUDENT = "Student";
     public static final String MESSAGE_CONSTRAINTS = "Roles can take 'Guardian' or 'Student', and it should not be "
@@ -21,7 +23,11 @@ public class Role {
     public Role(String role) {
         requireNonNull(role);
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
-        value = role;
+        if (GUARDIAN_LOWERCASE.equals(role.toLowerCase())) {
+            value = GUARDIAN;
+        } else {
+            value = STUDENT;
+        }
     }
 
     @Override
@@ -37,7 +43,7 @@ public class Role {
     }
     // Validation method
     public static boolean isValidRole(String role) {
-        return GUARDIAN.equals(role) || STUDENT.equals(role);
+        return GUARDIAN_LOWERCASE.equals(role.toLowerCase()) || STUDENT_LOWERCASE.equals(role.toLowerCase());
     }
 
     public String getRoleString() {
