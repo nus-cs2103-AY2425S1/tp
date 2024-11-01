@@ -13,18 +13,18 @@ import seedu.address.model.role.exceptions.InvalidRoleException;
 /**
  * Wrapper class for predicates that check if a field contains a keyword.
  */
-public class KeywordPredicateWrapper {
+public class PersonPredicateWrapper {
     private final List<String> keywords;
     private final String field;
 
     private final Predicate<Person> predicate;
 
     /**
-     * Constructor for KeywordPredicateWrapper.
+     * Constructor for PersonPredicateWrapper.
      * @param keywords list of keywords to check for
      * @param field field to check for keywords
      */
-    public KeywordPredicateWrapper(List<String> keywords, String field) {
+    public PersonPredicateWrapper(List<String> keywords, String field) {
         this.keywords = keywords;
         this.field = field;
         // predicate to check if field contains keyword
@@ -80,11 +80,11 @@ public class KeywordPredicateWrapper {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof KeywordPredicateWrapper)) {
+        if (!(other instanceof PersonPredicateWrapper)) {
             return false;
         }
 
-        KeywordPredicateWrapper otherPredicateWrapper = (KeywordPredicateWrapper) other;
+        PersonPredicateWrapper otherPredicateWrapper = (PersonPredicateWrapper) other;
         return keywords.equals(otherPredicateWrapper.keywords)
                 && field.equals(otherPredicateWrapper.field);
     }

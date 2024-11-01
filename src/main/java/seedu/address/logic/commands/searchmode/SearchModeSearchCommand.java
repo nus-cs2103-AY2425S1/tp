@@ -46,6 +46,9 @@ public class SearchModeSearchCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    public Set<Predicate<Person>> getPredicates() {
+        return predicates;
+    }
 
     @Override
     public boolean equals(Object other) {

@@ -39,6 +39,11 @@ public class PersonIsRolePredicate implements Predicate<Person> {
     }
 
     @Override
+    public int hashCode() {
+        return roles.hashCode();
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this).add("roles", roles).toString();
     }

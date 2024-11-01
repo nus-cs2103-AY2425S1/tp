@@ -48,4 +48,9 @@ public class PhoneNumberContainsKeywordPredicate implements Predicate<Person> {
                 (PhoneNumberContainsKeywordPredicate) other;
         return keywords.equals(otherPhoneNumberContainsKeywordPredicate.keywords);
     }
+
+    @Override
+    public int hashCode() {
+        return keywords.hashCode();
+    }
 }

@@ -9,14 +9,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -48,39 +46,48 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         Set<Predicate<Person>> predicates = new HashSet<>();
         // if a field is present, AND with the predicate for that field
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String name = argMultimap.getValue(PREFIX_NAME).get();
+            String name = argMultimap.getValue(PREFIX_NAME).get().trim();
+
+            String[] nameKeywords = name.split("\\s+");
+
             Predicate<Person> namePred = new NameContainsKeywordsPredicate(
-                    Collections.singletonList(name));
+                    Arrays.stream(nameKeywords).toList());
             predicates.add(namePred);
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            String phone = argMultimap.getValue(PREFIX_PHONE).get();
+            String phone = argMultimap.getValue(PREFIX_PHONE).get().trim();
+            String[] phoneKeywords = phone.split("\\s+");
+
             Predicate<Person> phonePred = new PhoneNumberContainsKeywordPredicate(
-                    Collections.singletonList(phone));
+                    Arrays.stream(phoneKeywords).toList());
             predicates.add(phonePred);
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            String email = argMultimap.getValue(PREFIX_EMAIL).get();
+            String email = argMultimap.getValue(PREFIX_EMAIL).get().trim();
+            String[] emailKeywords = email.split("\\s+");
+
             Predicate<Person> emailPred = new EmailContainsKeywordsPredicate(
-                    Collections.singletonList(email));
+                    Arrays.stream(emailKeywords).toList());
             predicates.add(emailPred);
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            String address = argMultimap.getValue(PREFIX_ADDRESS).get();
+            String address = argMultimap.getValue(PREFIX_ADDRESS).get().trim();
+            String[] addressKeywords = address.split("\\s+");
             Predicate<Person> addressPred = new AddressContainsKeywordsPredicate(
-                    Collections.singletonList(address));
+                    Arrays.stream(addressKeywords).toList());
 
             predicates.add(addressPred);
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
-            String telegram = argMultimap.getValue(PREFIX_TELEGRAM).get();
+            String telegram = argMultimap.getValue(PREFIX_TELEGRAM).get().trim();
+            String[] telegramKeywords = telegram.split("\\s+");
             Predicate<Person> telegramPred = new TelegramContainsKeywordsPredicate(
-                    Collections.singletonList(telegram));
+                    Arrays.stream(telegramKeywords).toList());
             predicates.add(telegramPred);
         }
         //role have to use separate predicate
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            String roles = argMultimap.getValue(PREFIX_ROLE).get();
+            String roles = argMultimap.getValue(PREFIX_ROLE).get().trim();
             // map each word in String roles to a Role object
 
 
@@ -91,7 +98,8 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
             predicates.add(rolePred);
         }
         if (predicates.isEmpty()) {
-            throw new ParseException(SearchModeSearchCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    SearchModeSearchCommand.MESSAGE_USAGE));
         }
         return new SearchModeSearchCommand(predicates);
     }

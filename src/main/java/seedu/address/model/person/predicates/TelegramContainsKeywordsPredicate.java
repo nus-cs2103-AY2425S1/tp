@@ -49,4 +49,8 @@ public class TelegramContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.equals(otherTelegramContainsKeywordsPredicate.keywords);
     }
 
+    @Override
+    public int hashCode() {
+        return keywords.hashCode();
+    }
 }

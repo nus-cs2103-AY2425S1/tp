@@ -35,6 +35,11 @@ public class AddressContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
+    public int hashCode() {
+        return keywords.hashCode();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
