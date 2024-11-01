@@ -13,6 +13,12 @@ import seedu.edulog.model.calendar.exceptions.DuplicateLessonException;
  */
 public class EdulogCalendar {
     public static final int MAX_SIMULTANEOUS_TIMING = 2;
+
+    public static final String OVERLOAD_SIMULTANEOUS_TIMING =
+        "There are already "
+            + MAX_SIMULTANEOUS_TIMING
+            + " or more lessons overlapping this lesson's time.";
+
     private ObservableList<Lesson> lessons;
 
     public EdulogCalendar() {
