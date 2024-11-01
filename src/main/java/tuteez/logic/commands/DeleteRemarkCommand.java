@@ -55,7 +55,7 @@ public class DeleteRemarkCommand extends Command {
         // Update the last viewed person in the model after updating remarks
         model.updateLastViewedPerson(updatedPerson);
 
-        return new CommandResult(String.format("Deleted remark at index %1$s from %s", remarkIndex.getOneBased(),
+        return new CommandResult(String.format("Deleted remark at index %1$s from %2$s", remarkIndex.getOneBased(),
                 updatedPerson.getName()));
     }
 

@@ -39,12 +39,12 @@ public class AddRemarkCommandTest {
     @Test
     public void execute_addRemarkUnfilteredList_success() {
         Person personToAddRemark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String personName = personToAddRemark.getName().toString();
         Person updatedPerson = new PersonBuilder(personToAddRemark).withRemarks(VALID_REMARKLIST).build();
 
         AddRemarkCommand addRemarkCommand = new AddRemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK);
 
-        String expectedMessage = String.format("Added remark to Person %1$s: %2$s",
-                INDEX_FIRST_PERSON.getOneBased(), VALID_REMARK);
+        String expectedMessage = String.format("Added remark to %1$s: %2$s", personName, VALID_REMARK);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToAddRemark, updatedPerson);
@@ -58,11 +58,11 @@ public class AddRemarkCommandTest {
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person updatedPerson = new PersonBuilder(personInFilteredList).withRemarks(VALID_REMARKLIST).build();
+        String personName = updatedPerson.getName().toString();
 
         AddRemarkCommand addRemarkCommand = new AddRemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK);
 
-        String expectedMessage = String.format("Added remark to Person %1$s: %2$s",
-                INDEX_FIRST_PERSON.getOneBased(), VALID_REMARK.toString());
+        String expectedMessage = String.format("Added remark to %1$s: %2$s", personName, VALID_REMARK);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personInFilteredList, updatedPerson);
@@ -93,10 +93,10 @@ public class AddRemarkCommandTest {
     public void execute_addRemark_updatesLastViewedPerson() {
         Person personToAddRemark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person updatedPerson = new PersonBuilder(personToAddRemark).withRemarks(VALID_REMARKLIST).build();
+        String personName = updatedPerson.getName().toString();
         AddRemarkCommand addRemarkCommand = new AddRemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK);
 
-        String expectedMessage = String.format("Added remark to Person %1$s: %2$s",
-                INDEX_FIRST_PERSON.getOneBased(), VALID_REMARK);
+        String expectedMessage = String.format("Added remark to %1$s: %2$s", personName, VALID_REMARK);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToAddRemark, updatedPerson);
