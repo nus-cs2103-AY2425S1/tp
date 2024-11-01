@@ -131,22 +131,24 @@ Examples:
 
 ### Locating contacts by name : `find`
 
-Finds contacts whose names contain any of the given keywords.
+Finds contacts whose details matches all given fields.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Substrings of the name will also be matched e.g. Query `Han` will match `Hans`
-* Contacts matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The role field(s), if any, have to take a valid role value (see [Tip](#Listing-all-contacts-list add))
+* The search for all other fields is case-insensitive. e.g query `hans` will match `Hans`
+* The order of the words does not matter. e.g. query `Hans Bo` will match `Bo Hans`
+* Queries that are substrings of details will also be matched e.g. query `Han` will match `Hans`
+  * Each word is treated as a separate substring e.g. query `Hans Ansbo` will match `Hansbo`
+  * However, by definition of substring, query `Hansbo` will match `Peter Hansbo` but not `Hans Bo`
+* Contacts matching only one keyword will not be returned (i.e. `AND` search).
+  e.g. query `Hans Bo` will match `Hans Boey` and `Hans Jobo` but not `Hans Gruber`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-* `find adele` returns `Adele Yang`, `Adelene Neo`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/john` returns `Johnny Tan` and `John Doe`<br>
+* `find n/harlot olive s/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`<br>
+* `find r/Admin r/President` returns `Bernice Yu` who holds both roles, but not `Alex Yeoh` who only holds the role `President`<br>
+  ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
 ### Deleting a contact : `delete`
 
@@ -218,6 +220,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/Admin r/Vice President nn/jl`
 **List**   | `list`
 **Help**   | `help`
