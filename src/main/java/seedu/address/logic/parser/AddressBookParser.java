@@ -12,7 +12,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.MarkTaskCommand;
+import seedu.address.logic.commands.markcommands.MarkTaskCommand;
 import seedu.address.logic.commands.addcommands.AddGroupCommand;
 import seedu.address.logic.commands.addcommands.AddStudentCommand;
 import seedu.address.logic.commands.addcommands.AddStudentToGroupCommand;

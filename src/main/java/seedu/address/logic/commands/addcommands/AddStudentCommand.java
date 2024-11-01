@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.addcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_STUDENT_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
@@ -22,7 +23,6 @@ public class AddStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "add_s";
     public static final String COMMAND_WORD_ALIAS = "as";
-    public static final int LIST_STUDENT_MARKER = 0;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Adds a student to the address book.\n"
@@ -61,7 +61,8 @@ public class AddStudentCommand extends Command {
 
         model.addPerson(toAdd);
         model.setStateStudents();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), LIST_STUDENT_MARKER);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)),
+            LIST_STUDENT_MARKER);
     }
 
     @Override

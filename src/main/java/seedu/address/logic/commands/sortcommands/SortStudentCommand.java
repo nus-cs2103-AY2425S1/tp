@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.sortcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_STUDENT_MARKER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Comparator;
@@ -20,11 +21,10 @@ public class SortStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "sort_s";
     public static final String COMMAND_WORD_ALIAS = "ss";
-    public static final int LIST_STUDENT_MARKER = 0;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-            + ": Sorts all students.\n"
-            + "Example: " + COMMAND_WORD;
+        + ": Sorts all students.\n"
+        + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Sorted all students";
 
@@ -51,6 +51,6 @@ public class SortStudentCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .toString();
+            .toString();
     }
 }

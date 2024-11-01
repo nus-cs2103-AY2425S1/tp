@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_TASK_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.ListMarkers;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -36,7 +38,7 @@ public class EditTaskAllGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Edits the details of the task of all group with given task.\n"
-        + "Field like task status should not be modified through this function."
+        + "Fields like task status cannot be modified through this function."
         + "Parameters: "
         + PREFIX_INDEX + "INDEX(must be an integer) "
         + "[" + PREFIX_TASK_NAME + "TASK NAME] "
@@ -55,7 +57,7 @@ public class EditTaskAllGroupCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param index of the task in the task list
+     * @param index              of the task in the task list
      * @param editTaskDescriptor details to edit the task with
      */
     public EditTaskAllGroupCommand(Index index, EditTaskDescriptor editTaskDescriptor) {
@@ -86,7 +88,7 @@ public class EditTaskAllGroupCommand extends Command {
         }
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS,
-            Messages.format(editedTask)));
+            Messages.format(editedTask)), LIST_TASK_MARKER);
     }
 
     private void updateTaskInGroup(Model model, Group group, Task taskToEdit, Task editedTask) {
@@ -181,12 +183,15 @@ public class EditTaskAllGroupCommand extends Command {
         public Optional<TaskName> getTaskName() {
             return Optional.ofNullable(taskName);
         }
+
         public void setDeadline(Deadline deadline) {
             this.deadline = deadline;
         }
+
         public Optional<Deadline> getDeadline() {
             return Optional.ofNullable(deadline);
         }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {

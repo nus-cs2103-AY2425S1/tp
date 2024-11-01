@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.findcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUERY;
 
 import java.util.logging.Logger;
@@ -22,12 +23,12 @@ import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 public class FindGroupCommand extends Command {
     public static final String COMMAND_WORD = "find_g";
     public static final String COMMAND_WORD_ALIAS = "fg";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Finds all groups whose names contain any of the specified keywords (case-insensitive) "
         + "and displays them as list with index numbers.\n"
         + "Parameters: " + PREFIX_QUERY + "KEYWORD [" + PREFIX_QUERY + "MORE_KEYWORDS]...\n"
         + "Example: " + COMMAND_WORD + "/" + COMMAND_WORD_ALIAS + " " + PREFIX_QUERY + " group 1";
-    public static final int LIST_GROUP_MARKER = 1;
 
     private static final Logger logger = LogsCenter.getLogger(FindGroupCommand.class);
 

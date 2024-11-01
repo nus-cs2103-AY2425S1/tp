@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_TASK_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
@@ -14,6 +15,7 @@ import java.util.Optional;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.ListMarkers;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -38,7 +40,7 @@ public class EditTaskCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Edits the details of the task of given group.\n"
-        + "Field like task status should not be modified through this function."
+        + "Fields like task status cannot be modified through this function."
         + "Parameters: "
         + PREFIX_GROUP_NAME + " GROUP NAME "
         + PREFIX_INDEX + "INDEX (must be a positive integer) "
@@ -96,9 +98,10 @@ public class EditTaskCommand extends Command {
         } else {
             model.increaseGroupWithTask(editedTask);
         }
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.updateFilteredGroupList(x -> x.getGroupName().equals(groupName));
+        model.setMostRecentGroupTaskDisplay(groupName.getGroupName());
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS,
-            Messages.format(editedTask), Messages.format(group)));
+            Messages.format(editedTask), Messages.format(group)), LIST_GROUP_TASK_MARKER);
     }
 
     @Override
