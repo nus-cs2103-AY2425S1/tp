@@ -72,7 +72,7 @@ public class Description {
         }
 
         Description otherDescription = (Description) other;
-        return description.equals(otherDescription.description);
+        return description.equalsIgnoreCase(otherDescription.description);
     }
 
     @Override
