@@ -7,12 +7,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Job's salary in the address book.
  */
 public class JobSalary {
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Job salary should only contain numeric characters, be more than zero, and it should not be blank";
+            "Job salary should only contain numeric characters, does not start with zero, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The first character of the address must be a digit ranging from 1 to 9. Subsequently, any digit can be inputted.
      */
     public static final String VALIDATION_REGEX = "[1-9][\\p{Digit}]*";
 
