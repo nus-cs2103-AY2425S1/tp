@@ -6,6 +6,7 @@ import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,7 +74,9 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
+        Predicate<? super Order> predicate = target.getOrderPredicate();
         internalList.set(index, editedPerson);
+        editedPerson.updateFilteredOrderList(predicate);
     }
 
     /**
