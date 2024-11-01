@@ -1,32 +1,52 @@
 package careconnect.logic.commands;
+import static careconnect.logic.commands.AddCommand.MESSAGE_SUCCESS;
 import static careconnect.testutil.Assert.assertThrows;
 import static careconnect.testutil.TypicalPersons.ALICE;
+import static careconnect.testutil.TypicalPersons.getTypicalAddressBook;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import careconnect.commons.core.GuiSettings;
+import careconnect.logic.Messages;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.AddressBook;
 import careconnect.model.Model;
+import careconnect.model.ModelManager;
 import careconnect.model.ReadOnlyAddressBook;
 import careconnect.model.ReadOnlyUserPrefs;
+import careconnect.model.UserPrefs;
 import careconnect.model.person.Person;
 import careconnect.testutil.PersonBuilder;
 import javafx.collections.ObservableList;
 
 public class AddCommandTest {
 
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    }
+
+    @Test
+    public void execute_personAcceptedByModel_addSuccessful() {
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_SUCCESS, Messages.format(validPerson)), false, false, 1
+        );
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.addPerson(validPerson);
+
+        CommandTestUtil.assertCommandSuccess(addCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -161,29 +181,4 @@ public class AddCommandTest {
             return this.person.isSamePerson(person);
         }
     }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }
