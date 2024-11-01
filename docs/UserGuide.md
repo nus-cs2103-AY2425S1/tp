@@ -214,14 +214,42 @@ For first-time users of the application, it is highly recommended for you to rea
 
 ![UserInterfaceOverview.png](images/UserInterfaceOverview.png)
 
-### Add UI Components descriptions here
+The designated names for each component of the User Interface will be used consistently throughout the User Guide to ensure clarity and minimize confusion. Below is a detailed description of each component.
+
+* **Menu Box:** Positioned at the top of the interface, the menu bar offers access to a variety of functions and features within TrackMate.
+
+* **Logo:** This represents the logo of our application, TrackMate.
+
+* **Command Box:** This designated area is where users can input commands for TrackMate to execute.
+
+* **Result Box:** Prominently displayed on the interface, this box shows the results of executed commands.
+
+* **Student List Panel:** This panel visually represents the roster of students stored within TrackMate.
+
+* **Student Panel Card:** Within the Student List Panel, each student is depicted in a concise overview displayed in card format.
+
+* **Student Card:** To view detailed information about an individual student, users can refer to the Student Card, which provides comprehensive details stored in the system.
 
 #### 3.2.2 Additional UI Components:
 
 <a id="additional-ui-components"></a>
 ![additionalUIComponents.png](images/additionalUIComponents.png)
 
-### Add additiona UI Components description here
+* **Index:** This component indicates the position of each student in the Student List Panel.
+
+* **Student Name:**  The Student Name appears in both the Student Card and Student Panel Card. It represents the name of the Student.
+
+* **Student Id:** Every student will be assigned to a student id before being added to a system. Take note that the student id is unique and is an easy way to identify a student.
+  
+* **Tutorial Classes allocated to student:** This component appears just below the student id. The component displays the list of tutorial classes that the student is allocated to.
+* Tutorial classes are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
+* However, if there are no tutorial classes added to the student. Then it will display "No Tutorial Assigned" instead. 
+
+* **Attendance Tag:** The attendance tag displays all of the dates in which the student has attended the tutorial class. 
+* The tag uses a datetime format of the form `yyyy/mm/dd`.
+
+
+* **Selected Student:** Highlighted in blue, this component indicates the selected Student Panel Card for viewing in the Student Card.
 
 ### 3.3 How to use TrackMate commands:
 <a id="how-to-use-track-mate-commands"></a>
