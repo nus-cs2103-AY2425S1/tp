@@ -28,6 +28,8 @@ public class Messages {
             + "matriculation number exists!";
     public static final String MESSAGE_COURSE_NOT_FOUND = "No course with this course code exists!";
     public static final String MESSAGE_NO_EXISTING_COURSE = "The course with course code provided does not exist";
+    public static final String MESSAGE_ENROLLMENT_EXISTS = "The student with matriculation number %s is already " +
+            "enrolled in tutorial session %s of the course %s!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

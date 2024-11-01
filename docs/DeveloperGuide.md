@@ -891,6 +891,37 @@ testers are expected to do more _exploratory_ testing.
 
 1. _{ more test cases …​ }_
 
+### Enrolling a student into a course and tutorial
+
+1. Enrolling an existing student into an existing course on TAHub
+    
+   1. Prerequisites: Ensure that both *student* and *course* objects have been created.
+      (In this case, the *student* object with matriculation number A2345678Y and the *course*
+       object with course code MA1521 must already be created.)
+    
+   2. Test case: `enroll m/A2345678Y c/MA1521 tut/T17`
+        
+       Expected: The student with matriculation number A2345678Y is enrolled into tutorial T17 of the course MA1521. A success message will be shown to the user.
+   
+   3. Test case: `enroll m/A2345678Y c/MA1521 tut/T17` (*again*)
+   
+       Expected: An error message will be displayed to the user and no new enrollment will occur.
+
+2. Enrolling an existing student into an invalid course on TAHub
+
+    1. Prerequisites: Ensure that a *student* object has been created but a course with course code *CS3233* has not been created
+    
+    2. Test case: Test case: `enroll m/A2345678Y c/CHUNITHM tut/T17`
+   
+        Expected: An error message will be displayed to the user and no enrollment will occur as the course code entered has an invalid format.
+   
+   3. Test case: Test case: `enroll m/A2345678Y c/CS3233 tut/T17`
+
+       Expected: An error message will be displayed to the user and no enrollment will occur as no such course with course code exists on TAHub.
+
+3. *{ more test cases... }*
+   
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
