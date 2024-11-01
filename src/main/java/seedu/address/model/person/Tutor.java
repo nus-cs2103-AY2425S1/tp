@@ -2,9 +2,6 @@ package seedu.address.model.person;
 
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
-
-
 /**
  * Represents a Tutor in the application.
  * A Tutor is a Person who teaches others.
@@ -19,17 +16,14 @@ public class Tutor extends Person {
      * @param email The email address of the Tutor.
      * @param address The residential address of the Tutor.
      * @param hours The hours the Tutor has taught.
-     * @param tags A set of tags associated with the Tutor.
      * @param subjects A set of subjects taught by the Tutor.
      */
-    public Tutor(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
-                 Set<Subject> subjects) {
-        super(name, phone, email, address, hours, tags, subjects);
+    public Tutor(Name name, Phone phone, Email email, Address address, Hours hours, Set<Subject> subjects) {
+        super(name, phone, email, address, hours, subjects);
     }
 
-    public Tutor(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
-                 Set<Subject> subjects) {
-        super(id, name, phone, email, address, hours, tags, subjects);
+    public Tutor(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Subject> subjects) {
+        super(id, name, phone, email, address, hours, subjects);
     }
 
 
@@ -86,7 +80,6 @@ public class Tutor extends Person {
                 && this.getEmail().equals(otherTutor.getEmail())
                 && this.getAddress().equals(otherTutor.getAddress())
                 && this.getHours().equals(otherTutor.getHours())
-                && this.getTags().equals(otherTutor.getTags())
                 && this.getSubjects().equals(otherTutor.getSubjects());
     }
 

@@ -33,7 +33,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -111,15 +110,14 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Hours updatedHours = editPersonDescriptor.getHours().orElse(personToEdit.getHours());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Subject> updatedSubjects = editPersonDescriptor.getSubjectsOp().orElse(personToEdit.getSubjects());
 
         if (personToEdit instanceof Tutor) {
             return new Tutor(updatedId, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours,
-                    updatedTags, updatedSubjects);
+                    updatedSubjects);
         } else {
             return new Tutee(updatedId, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours,
-                    updatedTags, updatedSubjects);
+                    updatedSubjects);
         }
 
     }
@@ -159,7 +157,6 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Hours hours;
-        private Set<Tag> tags;
         private Set<Subject> subjects;
 
         public EditPersonDescriptor() {}
@@ -175,7 +172,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setHours(toCopy.hours);
-            setTags(toCopy.tags);
             setSubjects(toCopy.subjects);
         }
 
@@ -183,7 +179,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, hours, tags, subjects);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, hours, subjects);
         }
 
         public void setId(Integer id) {
@@ -243,24 +239,6 @@ public class EditCommand extends Command {
             return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
 
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -278,7 +256,6 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(hours, otherEditPersonDescriptor.hours)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(subjects, otherEditPersonDescriptor.subjects);
         }
 
@@ -290,7 +267,6 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("hours", hours)
-                    .add("tags", tags)
                     .add("subjects", subjects)
                     .toString();
         }

@@ -10,7 +10,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -30,7 +29,6 @@ public class TuteeBuilder {
     private Email email;
     private Address address;
     private Hours hours;
-    private Set<Tag> tags;
     private Set<Subject> subjects;
 
 
@@ -43,7 +41,6 @@ public class TuteeBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         hours = new Hours(DEFAULT_HOURS);
-        tags = new HashSet<>();
         subjects = new HashSet<>();
     }
 
@@ -56,7 +53,6 @@ public class TuteeBuilder {
         email = tuteeToCopy.getEmail();
         address = tuteeToCopy.getAddress();
         hours = tuteeToCopy.getHours();
-        tags = new HashSet<>(tuteeToCopy.getTags());
         subjects = new HashSet<>(tuteeToCopy.getSubjects());
     }
 
@@ -65,14 +61,6 @@ public class TuteeBuilder {
      */
     public TuteeBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Tutee} that we are building.
-     */
-    public TuteeBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -117,7 +105,7 @@ public class TuteeBuilder {
     }
 
     public Tutee build() {
-        return new Tutee(name, phone, email, address, hours, tags, subjects);
+        return new Tutee(name, phone, email, address, hours, subjects);
     }
 
 }
