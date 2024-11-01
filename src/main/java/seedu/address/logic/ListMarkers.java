@@ -1,5 +1,8 @@
 package seedu.address.logic;
 
+/**
+ * Contains the markers to update the display panel for UI.
+ */
 public class ListMarkers {
     public static final int LIST_STUDENT_MARKER = 0;
     public static final int LIST_GROUP_MARKER = 1;

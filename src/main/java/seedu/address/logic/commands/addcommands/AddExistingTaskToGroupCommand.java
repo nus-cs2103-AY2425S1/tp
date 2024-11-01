@@ -20,6 +20,9 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Task;
 
+/**
+ * Adds an existing task to a set of groups.
+ */
 public class AddExistingTaskToGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "add_etask_grp";
@@ -42,6 +45,10 @@ public class AddExistingTaskToGroupCommand extends Command {
     private final Index targetIndex;
     private final Set<GroupName> groupNames;
 
+    /**
+     * Creates an AddExistingTaskToGroupCommand to add the specified {@code Task} at the given {@code Index}
+     * to the specified set of {@code Group}s.
+     */
     public AddExistingTaskToGroupCommand(Index targetIndex, Set<GroupName> groupNames) {
         requireNonNull(targetIndex);
         requireNonNull(groupNames);

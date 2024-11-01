@@ -30,12 +30,12 @@ public class AddStudentToGroupCommandParser implements Parser<AddStudentToGroupC
     @Override
     public AddStudentToGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER, PREFIX_GROUP_NAME);
+            ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER, PREFIX_GROUP_NAME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_NUMBER, PREFIX_GROUP_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddStudentToGroupCommand.MESSAGE_USAGE));
+                AddStudentToGroupCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER, PREFIX_GROUP_NAME);

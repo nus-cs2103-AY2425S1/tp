@@ -30,12 +30,12 @@ public class AddTaskToAllGroupsCommandParser implements Parser<AddTaskToAllGroup
     @Override
     public AddTaskToAllGroupsCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE);
+            ArgumentTokenizer.tokenize(args, PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddTaskToAllGroupsCommand.MESSAGE_USAGE));
+                AddTaskToAllGroupsCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE);

@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +14,6 @@ import java.util.Optional;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.ListMarkers;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -62,8 +60,8 @@ public class EditTaskCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param groupName of the target group
-     * @param index of the task in the task list belonging to the identified group
+     * @param groupName          of the target group
+     * @param index              of the task in the task list belonging to the identified group
      * @param editTaskDescriptor details to edit the task with
      */
     public EditTaskCommand(GroupName groupName, Index index, EditTaskDescriptor editTaskDescriptor) {
@@ -184,12 +182,15 @@ public class EditTaskCommand extends Command {
         public Optional<TaskName> getTaskName() {
             return Optional.ofNullable(taskName);
         }
+
         public void setDeadline(Deadline deadline) {
             this.deadline = deadline;
         }
+
         public Optional<Deadline> getDeadline() {
             return Optional.ofNullable(deadline);
         }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {

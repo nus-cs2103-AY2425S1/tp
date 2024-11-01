@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.List;
 
-import seedu.address.logic.ListMarkers;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;

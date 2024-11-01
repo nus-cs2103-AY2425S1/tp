@@ -10,7 +10,6 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.ListMarkers;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -73,7 +72,7 @@ public class DeleteTaskFromGroupCommand extends Command {
         model.setStateGroupTask();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)),
-                LIST_GROUP_TASK_MARKER);
+            LIST_GROUP_TASK_MARKER);
     }
 
     @Override

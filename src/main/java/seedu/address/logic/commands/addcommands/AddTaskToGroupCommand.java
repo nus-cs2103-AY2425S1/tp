@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.ListMarkers;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;

@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.ListMarkers;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -68,7 +67,7 @@ public class DeleteStudentCommand extends Command {
         model.deletePerson(studentToBeDeleted);
         model.setStateStudents();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(studentToBeDeleted)),
-                LIST_STUDENT_MARKER);
+            LIST_STUDENT_MARKER);
     }
 
     public StudentNumber getTargetStudentNo() {
