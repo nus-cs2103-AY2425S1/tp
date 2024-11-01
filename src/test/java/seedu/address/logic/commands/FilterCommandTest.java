@@ -68,7 +68,7 @@ public class FilterCommandTest {
         LocalDate endDate = LocalDate.parse("2024-12-12");
         HealthService service = null;
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
-        String expectedMessage = "2 patients found " + dateFilter + RETURN_TO_HOME;
+        String expectedMessage = "2 appts found " + dateFilter + RETURN_TO_HOME;
 
         FilterCommand command = new FilterCommand(dateFilter);
 
@@ -88,7 +88,7 @@ public class FilterCommandTest {
         HealthService service = new HealthService("Vaccination");
 
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
-        String expectedMessage = "2 patients found " + dateFilter + RETURN_TO_HOME;
+        String expectedMessage = "2 appts found " + dateFilter + RETURN_TO_HOME;
 
         FilterCommand command = new FilterCommand(dateFilter);
 
@@ -108,7 +108,7 @@ public class FilterCommandTest {
         LocalDate endDate = LocalDate.parse("2030-12-12");
         HealthService service = new HealthService("Vaccination");
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
-        String expectedMessage = "1 patient found " + dateFilter + RETURN_TO_HOME;
+        String expectedMessage = "1 appt found " + dateFilter + RETURN_TO_HOME;
 
         FilterCommand command = new FilterCommand(dateFilter);
 
@@ -126,7 +126,7 @@ public class FilterCommandTest {
         LocalDate endDate = LocalDate.parse("2030-12-12");
         HealthService service = new HealthService("Consult");
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
-        String expectedMessage = "No patients found " + dateFilter + RETURN_TO_HOME;
+        String expectedMessage = "No appts found " + dateFilter + RETURN_TO_HOME;
 
         FilterCommand command = new FilterCommand(dateFilter);
 

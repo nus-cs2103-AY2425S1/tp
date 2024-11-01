@@ -1,15 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.filteredappointment.FilteredAppointment.APPOINTMENT_COMPARATOR;
-
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
-import seedu.address.model.filteredappointment.FilteredAppointment;
 
 /**
  * Filters the patients based on their appointment dates and health services.
@@ -40,13 +35,13 @@ public class FilterCommand extends Command {
 
         model.filterAppts(dateFilter);
 
-        int patientsFiltered = model.getFilteredAppts().size();
+        int apptsFiltered = model.getFilteredAppts().size();
 
-        String patientLabel = patientsFiltered == 1 ? "patient" : "patients";
+        String apptLabel = apptsFiltered == 1 ? "appt" : "appts";
 
-        String msg = patientsFiltered + " " + patientLabel + " found " + dateFilter;
-        if (patientsFiltered == 0) {
-            msg = "No " + patientLabel + " found " + dateFilter;
+        String msg = apptsFiltered + " " + apptLabel + " found " + dateFilter;
+        if (apptsFiltered == 0) {
+            msg = "No " + apptLabel + " found " + dateFilter;
         }
 
         msg += RETURN_TO_HOME;

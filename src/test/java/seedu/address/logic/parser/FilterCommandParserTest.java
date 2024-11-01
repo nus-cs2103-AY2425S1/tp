@@ -28,7 +28,7 @@ public class FilterCommandParserTest {
     private String invalidStartDate = " " + PREFIX_STARTDATE + "2000-10/10";
     private String invalidEndDate = " " + PREFIX_ENDDATE + "2025-10/10";
     private String invalidHealthSerivce = " " + PREFIX_HEALTHSERVICE + "burger";
-    private String EndDateBeforeStartDate = " " + PREFIX_ENDDATE + "1990-10-10";
+    private String endDateBeforeStartDate = " " + PREFIX_ENDDATE + "1990-10-10";
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -59,7 +59,7 @@ public class FilterCommandParserTest {
 
         // multiple health services
         assertParseFailure(parser, validHealthService + validFilterString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HEALTHSERVICE ));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HEALTHSERVICE));
 
         //invalid value followed by valid value
 
@@ -120,7 +120,7 @@ public class FilterCommandParserTest {
                 HealthService.MESSAGE_CONSTRAINTS);
 
         // end date before start date
-        assertParseFailure(parser, EndDateBeforeStartDate + validStartdate + validHealthService,
+        assertParseFailure(parser, endDateBeforeStartDate + validStartdate + validHealthService,
                 AppointmentDateFilter.TWO_DATE_MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
