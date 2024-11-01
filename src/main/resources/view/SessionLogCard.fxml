@@ -25,11 +25,12 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="Log Number (WIP)" styleClass="cell_big_label" />
+                <Label fx:id="name" styleClass="cell_big_label" />
             </HBox>
             <FlowPane fx:id="tags" />
             <Label fx:id="appointmentDate" styleClass="cell_small_label" text="\$appointmentDate" />
-            <Label fx:id="sessionEntry" styleClass="cell_small_label" text="\$sessionEntry" />
+            <Label fx:id="sessionEntry" styleClass="cell_small_label" text="\$sessionEntry"
+                   wrapText="true" maxHeight="40.0" />
         </VBox>
     </GridPane>
 </HBox>

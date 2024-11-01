@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.address.model.log.Log;
 
@@ -16,7 +17,7 @@ public class SessionLogDetail extends UiPart<Region> {
     private Label detailDate;
 
     @FXML
-    private Label detailSessionEntry;
+    private TextArea detailSessionEntry;
 
     /**
      * Creates a {@code SessionLogDetail} with the given {@code Log}.
@@ -30,8 +31,8 @@ public class SessionLogDetail extends UiPart<Region> {
      * Sets the FXML labels with the given {@code Log}
      */
     public void setLogDetails(Log log) {
-        detailDate.setText(log.getAppointmentDate().toString());
-        detailSessionEntry.setText(log.toDetailedString());
+        detailDate.setText("Appointment Date: " + log.getAppointmentDate().toString());
+        detailSessionEntry.setText(log.getEntry());
     }
 }
 

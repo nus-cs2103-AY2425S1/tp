@@ -69,8 +69,8 @@ public class ListLogsCommand extends Command {
         }
 
         model.getSessionLog(personIndex);
-        return new CommandResult(String.format(MESSAGE_LIST_LOG_SUCCESS + sb.toString(),
-                identityNumber, person.getName()),
+        return new CommandResult(String.format(MESSAGE_LIST_LOG_SUCCESS,
+                person.getName(), identityNumber),
                 false, false, false, true, personIndex);
     }
 

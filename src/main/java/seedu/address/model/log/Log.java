@@ -42,6 +42,12 @@ public class Log implements Comparable<Log> {
         return entry.getEntry();
     }
     /**
+     * Returns the truncated log entry.
+     */
+    public String getTruncatedEntry() {
+        return entry.getTruncatedEntry();
+    }
+    /**
      * Returns the appointmentDate of the session.
      */
     public AppointmentDate getAppointmentDate() {
