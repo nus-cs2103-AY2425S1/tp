@@ -72,10 +72,10 @@ public class HelpContentManagerTest {
 
         // Verify that all expected keys are present
         String[] expectedKeys = {
-                "Introduction", "Quick Start", "Command Format Guidelines", "Adding a Contact",
-                "Listing All Contacts", "Editing a Contact", "Finding Contacts", "Deleting a Contact",
-                "Clearing All Entries", "Marking a Person as Paid/Unpaid", "Saving and Editing Data",
-                "Exiting the Program", "Command Summary"
+            "Introduction", "Quick Start", "Command Format Guidelines", "Adding a Contact",
+            "Listing All Contacts", "Editing a Contact", "Finding Contacts", "Deleting a Contact",
+            "Clearing All Entries", "Marking a Person as Paid/Unpaid", "Saving and Editing Data",
+            "Exiting the Program", "Command Summary"
         };
 
         for (String key : expectedKeys) {
