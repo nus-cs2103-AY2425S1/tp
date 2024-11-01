@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-EventfulNUS is a **desktop app for managing contacts and events. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
+EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually 
+at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -62,6 +63,8 @@ EventfulNUS is a **desktop app for managing contacts and events. While optimised
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+## Persons
 
 ### Viewing help : `help`
 
@@ -138,6 +141,8 @@ Format: `filter KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `athlete student` will match `Student Athlete`
 * Only the roles are searched.
 * Only full words will be matched e.g. `ath` will not match `athlete`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `athlete student` will return `Student Athlete`, `Athlete`
 
 
 ### Deleting a person : `delete`
@@ -154,6 +159,38 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+## Events
+
+### Adds an event to the database.
+
+Format: `add n/NAME sp/SPORT v/Venue [pa/PARTICIPANTS]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+An event can have zero or more particpants.
+Note that the participants must be valid persons in the database.
+</div>
+
+Examples:
+* `add n/Basketball Final s/Basketball Men v/USC pa/John Doe pa/Betsy Crowe`
+* `add n/100m Sprint s/Athletics v/USC pa/John Doe pa/Betsy Crowe pa/Alex Yeoh`
+
+### Edits an event in the database.
+
+... _Details coming soon ..._
+
+### Deletes an event from the database.
+
+... _Details coming soon ..._
+
+### Lists all events in the database.
+
+... _Details coming soon ..._
+
+### Finds events by name.
+
+... _Details coming soon ..._
+
+## More Features
 ### Clearing all entries : `clear`
 
 Clears all entries from the database. But remember, they're gone forever.
