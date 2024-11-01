@@ -34,7 +34,6 @@ public class FindCommandParser implements Parser<Command> {
 
     private FindPersonCommand parseForPerson(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        System.out.println(trimmedArgs);
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));

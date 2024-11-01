@@ -2,9 +2,9 @@ package seedu.address.model.types.common;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.types.common.DateTimeUtil.DATE_TIME_FORMATTER;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -21,8 +21,6 @@ public class DateTime {
      */
     public static final String VALIDATION_REGEX = "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"
         + " ([01][0-9]|2[0-3]):[0-5][0-9]";
-
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public final String value;
     public final LocalDateTime localDateTimeValue;

@@ -2,7 +2,7 @@
   "baseUrl": "",
   "titlePrefix": "Eventory",
   "titleSuffix": "Your Event Directory",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/iconblack512.png",
   "style": {
     "codeTheme": "light"
   },

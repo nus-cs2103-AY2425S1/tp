@@ -47,10 +47,10 @@ public class TypicalEvents {
 
     // Extra Unused Events if Fixed Time is needed, feel free to edit if needed
     public static final Event HIKING_TRIP = new EventBuilder().withName("Weekend Hiking Trip")
-            .withAddress("Trailhead at Bukit Timah").withStartTime("2024-11-22 08:00").build();
+            .withAddress("Trailhead at Bukit Timah").withStartTime("2025-12-01 08:00").build();
 
     public static final Event ICE_CREAM_FEST = new EventBuilder().withName("Ice Cream Festival")
-            .withAddress("5, Clarke Quay").withStartTime("2024-12-01 14:00").build();
+            .withAddress("5, Clarke Quay").withStartTime("2025-12-21 14:00").build();
 
     public static final Event ART_EXHIBIT = new EventBuilder().withName(VALID_NAME_ART_EXHIBIT)
             .withAddress(VALID_ADDRESS_ART_EXHIBIT).withStartTime(VALID_START_TIME_ART_EXHIBIT)
@@ -70,6 +70,21 @@ public class TypicalEvents {
         for (Event event : getTypicalEvents()) {
             ab.addEvent(event);
         }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the events.
+     */
+    public static AddressBook getExtendedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Event event : getTypicalEvents()) {
+            ab.addEvent(event);
+        }
+        ab.addEvent(HIKING_TRIP);
+        ab.addEvent(ICE_CREAM_FEST);
+        ab.addEvent(ART_EXHIBIT);
+        ab.addEvent(BOOK_FAIR);
         return ab;
     }
 
