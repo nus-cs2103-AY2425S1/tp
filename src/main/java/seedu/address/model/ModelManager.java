@@ -166,6 +166,10 @@ public class ModelManager implements Model {
         return isSuccessful;
     }
 
+    @Override public boolean deleteTag(Tag tag) {
+        return addressBook.deleteTag(tag);
+    }
+
     @Override
     public boolean deleteTags(List<Tag> tags) {
         boolean isSuccessful = true;
@@ -189,6 +193,17 @@ public class ModelManager implements Model {
     @Override
     public String getTagList() {
         return addressBook.tagsToString();
+    }
+
+    @Override
+    public Set<Tag> getTagsInUse() {
+        Set<Tag> tagsInUse = new HashSet<>();
+        List<Person> persons = getFullPersonList();
+        for (Person person : persons) {
+            Set<Tag> personTags = person.getTags();
+            tagsInUse.addAll(personTags);
+        }
+        return tagsInUse;
     }
 
     @Override
@@ -248,6 +263,11 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public String toString() {
+        return tagList.toString();
     }
 
 }

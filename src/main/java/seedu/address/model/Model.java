@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -108,8 +109,15 @@ public interface Model {
 
     /**
      * Deletes a tag from the tag list.
+     * @param tag The tag to be deleted
+     * @return true if the tag was successfully deleted, false if the tag does not exist.
+     */
+    boolean deleteTag(Tag tag);
+
+    /**
+     * Deletes a tag from the tag list.
      *
-     * @param tags The tag to be deleted.
+     * @param tags The tags to be deleted.
      * @return true if the tag was successfully deleted, false if the tag does not exist.
      */
     boolean deleteTags(List<Tag> tags);
@@ -130,6 +138,11 @@ public interface Model {
      * @return true if the tag exists, false otherwise.
      */
     boolean hasTag(Tag tag);
+
+    /**
+     * Returns a set of tags that are in use by the persons in the address book.
+     */
+    Set<Tag> getTagsInUse();
 
     /**
      * Removes the deleted {@code Tag} from all persons in the address book.

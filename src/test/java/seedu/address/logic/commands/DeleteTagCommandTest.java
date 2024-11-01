@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalTags.BRIDES_SIDE;
 import static seedu.address.testutil.TypicalTags.COLLEAGUES;
@@ -10,6 +9,7 @@ import static seedu.address.testutil.TypicalTags.FRIENDS;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -17,13 +17,18 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalTags;
+import seedu.address.ui.UserConfirmation;
 
 /**
  * Contains tests for DeleteTagCommand.
  */
 public class DeleteTagCommandTest {
 
-    private Model model = new ModelManager();
+    private Model model;
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager();
+    }
 
     /**
      * EP: Single existing tag.
@@ -31,6 +36,7 @@ public class DeleteTagCommandTest {
     @Test
     public void execute_existingTag_success() {
         Tag existingTag = BRIDES_SIDE;
+
         List<Tag> existingTags = List.of(existingTag);
         model.addTag(existingTag);
 
@@ -74,7 +80,6 @@ public class DeleteTagCommandTest {
         String expectedMessage = DeleteTagCommand.MESSAGE_NONEXISTENT;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addTags(nonExistentTags);
 
         // No exception is thrown, but the user will be notified of
         // non-existent tag(s).
