@@ -33,15 +33,15 @@ public class DeletePersonCommand extends DeleteCommand {
         this.targetIndex = targetIndex;
     }
 
+    public Index getTargetIndex() {
+        return targetIndex;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
+        assert targetIndex.getZeroBased() < lastShownList.size() : "Index out of bounds";
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.clearEventsWithPerson(personToDelete);
         model.clearPersonFromContacts(personToDelete);

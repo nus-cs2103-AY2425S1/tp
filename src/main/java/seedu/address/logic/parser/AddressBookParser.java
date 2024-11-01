@@ -13,7 +13,8 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CancelPendingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ConfirmPendingCommand;
+import seedu.address.logic.commands.ConfirmClearCommand;
+import seedu.address.logic.commands.ConfirmDeleteCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -73,16 +74,16 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             DeleteCommand deleteCommand = new DeleteCommandParser().parse(arguments);
-            if (deleteCommand instanceof DeletePersonCommand) {
-                this.pendingCommand = deleteCommand;
-                return new ConfirmPendingCommand(ConfirmPendingCommand.PendingCommandType.DELETE);
+            if (deleteCommand instanceof DeletePersonCommand deletePersonCommand) {
+                this.pendingCommand = deletePersonCommand;
+                return new ConfirmDeleteCommand(deletePersonCommand.getTargetIndex());
             } else {
                 return deleteCommand;
             }
 
         case ClearCommand.COMMAND_WORD:
             this.pendingCommand = new ClearCommandParser().parse(arguments);
-            return new ConfirmPendingCommand(ConfirmPendingCommand.PendingCommandType.CLEAR);
+            return new ConfirmClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
