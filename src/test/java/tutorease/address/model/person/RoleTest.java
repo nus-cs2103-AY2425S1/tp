@@ -53,4 +53,27 @@ public class RoleTest {
         assertNotEquals(role1.hashCode(), role2.hashCode(),
                 "Expected Role objects with different values to have different hashCodes");
     }
+
+
+    @Test
+    public void testCreateRole_validGuardianRole() {
+        assertEquals(Role.GUARDIAN, Role.createRole("guardian"));
+        assertEquals(Role.GUARDIAN, Role.createRole("Guardian"));
+        assertEquals(Role.GUARDIAN, Role.createRole("GUARDIAN"));
+    }
+
+    @Test
+    public void testCreateRole_validStudentRole() {
+        assertEquals(Role.STUDENT, Role.createRole("student"));
+        assertEquals(Role.STUDENT, Role.createRole("Student"));
+        assertEquals(Role.STUDENT, Role.createRole("STUDENT"));
+    }
+
+    @Test
+    public void testCreateRole_invalidRole() {
+        // Testing an invalid role name
+        assertThrows(IllegalArgumentException.class, Role.MESSAGE_CONSTRAINTS, () -> Role.createRole("teacher"));
+        // Testing null input
+        assertThrows(NullPointerException.class, () -> Role.createRole(null));
+    }
 }

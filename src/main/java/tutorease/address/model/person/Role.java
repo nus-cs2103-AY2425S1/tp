@@ -26,7 +26,12 @@ public class Role {
         value = createRole(role);
     }
 
-    private String createRole(String role) {
+    /**
+     * Returns a valid role string for {@code Role} construction.
+     *
+     * @param role A valid name, either GUARDIAN or STUDENT.
+     */
+    public static String createRole(String role) {
         final String value;
         if (GUARDIAN_LOWERCASE.equals(role.toLowerCase())) {
             value = GUARDIAN;
