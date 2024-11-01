@@ -184,7 +184,7 @@ Examples:
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 t/medication t/Dr Tan`
 
-### Importing contacts: `filter`
+### Importing contacts: `import`
 
 Imports contact info from the given json file into MediContact.
 
