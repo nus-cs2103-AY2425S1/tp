@@ -4,12 +4,14 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.exceptions.SampleDataLoadingException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.common.Address;
 import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
@@ -112,18 +114,22 @@ public class SampleDataUtil {
     }
 
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Company sampleCompany : getSampleCompanies()) {
-            sampleAb.addCompany(sampleCompany);
+    public static ReadOnlyAddressBook getSampleAddressBook() throws SampleDataLoadingException {
+        try {
+            AddressBook sampleAb = new AddressBook();
+            for (Company sampleCompany : getSampleCompanies()) {
+                sampleAb.addCompany(sampleCompany);
+            }
+            for (Job sampleJob : getSampleJobs()) {
+                sampleAb.addJob(sampleJob); // this can throw CompanyNotFoundException
+            }
+            for (Person samplePerson : getSamplePersons()) {
+                sampleAb.addPerson(samplePerson);
+            }
+            return sampleAb;
+        } catch (CompanyNotFoundException e) {
+            throw new SampleDataLoadingException(e);
         }
-        for (Job sampleJob : getSampleJobs()) {
-            sampleAb.addJob(sampleJob);
-        }
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
-        }
-        return sampleAb;
     }
 
     /**
