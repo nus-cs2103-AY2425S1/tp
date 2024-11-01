@@ -47,7 +47,7 @@ public class DeleteExamCommand extends Command {
         for (Person personToEdit : lastShownList) {
             Set<Exam> updatedExams = personToEdit.getExams();
             if (updatedExams.remove(exam)) {
-                update = true;
+                isUpdated = true;
             }
             Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                     personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
