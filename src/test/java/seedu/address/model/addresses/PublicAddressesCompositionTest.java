@@ -94,67 +94,51 @@ public class PublicAddressesCompositionTest {
         assertEquals(1000, composition.sizeOfAllPublicAddresses());
     }
 
-    //    @Test
-    //    public void copyAndAddPublicAddress_nullAddressString_throwsIllegalArgumentException() {
-    //        // EP: null address string
-    //        PublicAddressesComposition composition = new PublicAddressesComposition();
-    //        PublicAddress nullAddress = new BtcAddress(null, "Null Address");
-    //        assertThrows(AssertionError.class,
-    //            () -> composition.addPublicAddress(nullAddress));
-    //    }
-
-    //    @Test
-    //    public void addPublicAddress_invalidNetwork_throwsIllegalArgumentException() {
-    //        // EP: invalid network
-    //        PublicAddressesComposition composition = new PublicAddressesComposition();
-    //        assertThrows(IllegalArgumentException.class,
-    //        () -> composition.addPublicAddress(Network.INVALID, VALID_PUBLIC_ADDRESS_BTC_MAIN));
-    //    }
 
     //------------------ Remove Public Address Tests ------------------
-    //
-    //    @Test
-    //    public void removePublicAddress_existingAddress() {
-    //        // EP: remove existing address
-    //        PublicAddressesComposition composition = new PublicAddressesComposition();
-    //        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
-    //        composition.removePublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS_BTC_MAIN);
-    //
-    //        assertFalse(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN.getPublicAddressString()));
-    //    }
-    //
-    //    @Test
-    //    public void removePublicAddress_nonExistentAddress() {
-    //        // EP: remove non-existent address
-    //        PublicAddressesComposition composition = new PublicAddressesComposition();
-    //        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
-    //        composition.removePublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS_BTC_SUB);
-    //
-    //        assertTrue(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN.getPublicAddressString()));
-    //    }
-    //
-    //    //------------------ Update Public Address Tests ------------------
-    //
-    //    @Test
-    //    public void updatePublicAddress_existingAddress() {
-    //        // EP: update existing address
-    //        PublicAddressesComposition composition = new PublicAddressesComposition();
-    //        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
-    //        PublicAddress updatedAddress = new BtcAddress("updatedAddress", "Updated Label");
-    //        composition.updatePublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS_BTC_MAIN, updatedAddress);
-    //
-    //        assertTrue(composition.hasPublicAddress("updatedAddress"));
-    //        assertFalse(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN.getPublicAddressString()));
-    //    }
-    //
-    //    @Test
-    //    public void updatePublicAddress_nonExistentAddress() {
-    //        // EP: update non-existent address
-    //        PublicAddressesComposition composition = new PublicAddressesComposition();
-    //        PublicAddress updatedAddress = new BtcAddress("updatedAddress", "Updated Label");
-    //        assertThrows(IllegalArgumentException.class,
-    //        () -> composition.updatePublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS_BTC_MAIN, updatedAddress));
-    //    }
+
+    @Test
+    public void removePublicAddress_existingAddress() {
+        // EP: remove existing address
+        PublicAddressesComposition composition = new PublicAddressesComposition();
+        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+        composition.removePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+
+        assertFalse(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN.getPublicAddressString()));
+    }
+
+    @Test
+    public void removePublicAddress_nonExistentAddress() {
+        // EP: remove non-existent address
+        PublicAddressesComposition composition = new PublicAddressesComposition();
+        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+        composition.removePublicAddress(VALID_PUBLIC_ADDRESS_BTC_SUB);
+
+        assertTrue(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN.getPublicAddressString()));
+    }
+
+    //------------------ Update Public Address Tests ------------------
+
+    @Test
+    public void updatePublicAddress_existingAddress() {
+        // EP: update existing address
+        PublicAddressesComposition composition = new PublicAddressesComposition();
+        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+        PublicAddress updatedAddress = new BtcAddress("updatedAddress", "Updated Label");
+        composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, updatedAddress);
+
+        assertTrue(composition.hasPublicAddress("updatedAddress"));
+        assertFalse(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN.getPublicAddressString()));
+    }
+
+    @Test
+    public void updatePublicAddress_nonExistentAddress() {
+        // EP: update non-existent address
+        PublicAddressesComposition composition = new PublicAddressesComposition();
+        PublicAddress updatedAddress = new BtcAddress("updatedAddress", "Updated Label");
+        assertThrows(NullPointerException.class, ()
+            -> composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, updatedAddress));
+    }
 
     //------------------ Empty Network Tests ------------------
 
