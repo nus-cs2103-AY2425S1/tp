@@ -247,7 +247,7 @@ public class UpdateCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, age, gender, nric,
-                    phone, email, address, tags);
+                    phone, email, address, appointment, tags);
         }
 
         public Optional<Name> getName() {

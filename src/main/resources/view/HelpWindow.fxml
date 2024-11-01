@@ -23,7 +23,7 @@
       </stylesheets>
 
 
-      <VBox alignment="CENTER" fx:id="helpMessageContainer">
+      <VBox alignment="CENTER" fx:id="helpMessageContainer" >
         <children>
           <VBox fx:id="helpList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
             <padding>

@@ -5,5 +5,5 @@
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
 
-    <ListView fx:id="helpListView" VBox.vgrow="ALWAYS" />
+    <ListView fx:id="helpListView" VBox.vgrow="ALWAYS" styleClass="person-list-view"/>
 </VBox>
