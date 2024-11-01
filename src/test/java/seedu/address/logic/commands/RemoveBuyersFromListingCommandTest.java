@@ -1,16 +1,5 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.listing.Listing;
-import seedu.address.model.person.Name;
-import seedu.address.testutil.ListingBuilder;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -27,11 +16,24 @@ import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.listing.Listing;
+import seedu.address.model.person.Name;
+import seedu.address.testutil.ListingBuilder;
+
 public class RemoveBuyersFromListingCommandTest {
 
     private static final Set<Name> VALID_BUYERS = Set.of(DANIEL.getName());
     private static final Set<Name> INVALID_BUYERS = Set.of(AMY.getName());
-    private static final Set<Name> SELLER = Set.of(ALICE.getName());
+    private static final Name SELLER_NAME = ALICE.getName();
+    private static final Set<Name> SELLER = Set.of(SELLER_NAME);
     private static final Set<Name> EMPTY_SET = new HashSet<>();
     private static final Set<Name> NOT_BUYER_OF_LISTING = Set.of(ELLE.getName());
     private static final Listing VALID_LISTING = PASIR_RIS;
@@ -68,7 +70,7 @@ public class RemoveBuyersFromListingCommandTest {
     @Test
     public void execute_buyerNotInClientList_throwsCommandException() {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
-                new RemoveBuyersFromListingCommand(VALID_LISTING_NAME,INVALID_BUYERS);
+                new RemoveBuyersFromListingCommand(VALID_LISTING_NAME, INVALID_BUYERS);
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 String.format(RemoveBuyersFromListingCommand.MESSAGE_BUYER_NOT_FOUND, AMY.getName()));
     }
@@ -86,7 +88,7 @@ public class RemoveBuyersFromListingCommandTest {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(VALID_LISTING_NAME, SELLER);
         assertCommandFailure(removeBuyersFromListingCommand, model,
-                String.format(RemoveBuyersFromListingCommand.MESSAGE_PERSON_NOT_BUYER, ALICE.getName()));
+                String.format(RemoveBuyersFromListingCommand.MESSAGE_PERSON_NOT_BUYER, SELLER_NAME));
     }
 
     @Test
@@ -101,7 +103,7 @@ public class RemoveBuyersFromListingCommandTest {
     @Test
     public void execute_emptySet_throwsCommandException() {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
-                new RemoveBuyersFromListingCommand(VALID_LISTING_NAME,EMPTY_SET);
+                new RemoveBuyersFromListingCommand(VALID_LISTING_NAME, EMPTY_SET);
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 RemoveBuyersFromListingCommand.MESSAGE_EMPTY_SET);
     }

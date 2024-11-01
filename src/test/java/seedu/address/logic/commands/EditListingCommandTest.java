@@ -1,18 +1,5 @@
 package seedu.address.logic.commands;
 
-import net.bytebuddy.matcher.StringMatcher;
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.Messages;
-import seedu.address.model.Listings;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.listing.Listing;
-import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditListingDescriptorBuilder;
-import seedu.address.testutil.ListingBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,6 +13,19 @@ import static seedu.address.testutil.TypicalListings.TAMPINES;
 import static seedu.address.testutil.TypicalListings.getTypicalListings;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
+import seedu.address.model.Listings;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.listing.Listing;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.EditListingDescriptorBuilder;
+import seedu.address.testutil.ListingBuilder;
 
 public class EditListingCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
@@ -65,10 +65,12 @@ public class EditListingCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditListingCommand editListingCommand = new EditListingCommand(SENGKANG.getName(), new EditListingDescriptor());
+        EditListingCommand editListingCommand = new EditListingCommand(SENGKANG.getName(),
+                new EditListingDescriptor());
         Listing editedListing = SENGKANG;
 
-        String expectedMessage = String.format(EditListingCommand.MESSAGE_EDIT_LISTING_SUCCESS, Messages.format(editedListing));
+        String expectedMessage = String.format(EditListingCommand.MESSAGE_EDIT_LISTING_SUCCESS,
+                Messages.format(editedListing));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 new Listings(model.getListings()));
@@ -125,11 +127,13 @@ public class EditListingCommandTest {
 
     @Test
     public void equals() {
-        EditListingDescriptor editListingDescriptor = new EditListingDescriptorBuilder(PASIR_RIS).withName(SIMEI.getName()).build();
+        EditListingDescriptor editListingDescriptor = new EditListingDescriptorBuilder(PASIR_RIS)
+                .withName(SIMEI.getName()).build();
         final EditListingCommand standardCommand = new EditListingCommand(PASIR_RIS.getName(), editListingDescriptor);
 
         // same values -> returns true
-        EditListingDescriptor copyDescriptor = new EditListingDescriptorBuilder(PASIR_RIS).withName(SIMEI.getName()).build();
+        EditListingDescriptor copyDescriptor = new EditListingDescriptorBuilder(PASIR_RIS)
+                .withName(SIMEI.getName()).build();
         EditListingCommand commandWithSameValues = new EditListingCommand(PASIR_RIS.getName(), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -147,7 +151,8 @@ public class EditListingCommandTest {
         assertFalse(standardCommand.equals(differentName));
 
         // different descriptor -> returns false
-        EditListingDescriptor otherDescriptor = new EditListingDescriptorBuilder(TAMPINES).withName(SIMEI.getName()).build();
+        EditListingDescriptor otherDescriptor = new EditListingDescriptorBuilder(TAMPINES)
+                .withName(SIMEI.getName()).build();
         EditListingCommand differentDescriptor = new EditListingCommand(PASIR_RIS.getName(), otherDescriptor);
         assertFalse(standardCommand.equals(differentDescriptor));
     }

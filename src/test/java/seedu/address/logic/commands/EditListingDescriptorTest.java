@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
-import seedu.address.model.listing.Region;
-import seedu.address.testutil.EditListingDescriptorBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.TAMPINES;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
+import seedu.address.model.listing.Region;
+import seedu.address.testutil.EditListingDescriptorBuilder;
 
 public class EditListingDescriptorTest {
     @Test

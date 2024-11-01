@@ -15,12 +15,12 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ModelStub;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
 import seedu.address.model.person.Person;
-import seedu.address.model.ModelStub;
 import seedu.address.testutil.PersonBuilder;
 
 public class AppointmentCommandTest {
