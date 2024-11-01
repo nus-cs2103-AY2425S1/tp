@@ -7,8 +7,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.edulog.commons.exceptions.IllegalValueException;
+import seedu.edulog.model.calendar.Day;
 import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
+import seedu.edulog.model.calendar.LessonTime;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -19,17 +21,19 @@ public class JsonAdaptedLesson {
 
     private String description;
     private String startDay;
-    private String times;
+    private String startTime;
+    private String endTime;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("description") String description, @JsonProperty("startDay") String startDay,
-                             @JsonProperty("times") String times) {
+                             @JsonProperty("startTime") String startTime, @JsonProperty("endTime") String endTime) {
         this.description = description;
         this.startDay = startDay;
-        this.times = times;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -38,7 +42,8 @@ public class JsonAdaptedLesson {
     public JsonAdaptedLesson(Lesson source) {
         description = source.getDescription().toString();
         startDay = source.getStartDay().toString();
-        times = source.get
+        startTime = source.getFormattedStartTime();
+        endTime = source.getFormattedEndTime();
     }
 
     /**
@@ -60,43 +65,44 @@ public class JsonAdaptedLesson {
             throw new IllegalValueException(Description.DESCRIPTION_TOO_LONG);
         }
 
-        String modelDescription = description;
+        Description modelDescription = new Description(description);
 
         // Start day
 
         if (startDay == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "day of week"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
         }
-        if (!Lesson.checkValidDayOfWeek(startDay)) {
-            throw new IllegalValueException(Lesson.INVALID_DAY_OF_WEEK);
+        if (!Day.checkValidDayOfWeek(startDay)) {
+            throw new IllegalValueException(Day.INVALID_DAY_OF_WEEK);
         }
 
-        final DayOfWeek modelStartDay = Lesson.processDayOfWeek(startDay);
+        final Day modelStartDay = new Day(startDay);
 
         // Start time
         if (startTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "start time"));
         }
-        if (!Lesson.checkValidLocalTime(startTime)) {
-            throw new IllegalValueException(Lesson.NOT_24H_FORMAT);
-        }
 
-        final LocalTime modelStartTime = Lesson.processLocalTime(startTime);
+        if (!LessonTime.checkValidLessonTime(startTime)) {
+            throw new IllegalValueException(LessonTime.NOT_24H_FORMAT);
+        }
 
         // End time
         if (endTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "end time"));
         }
-        if (!Lesson.checkValidLocalTime(endTime)) {
-            throw new IllegalValueException(Lesson.NOT_24H_FORMAT);
+        if (!LessonTime.checkValidLessonTime(endTime)) {
+            throw new IllegalValueException(LessonTime.NOT_24H_FORMAT);
         }
-
-        final LocalTime modelEndTime = Lesson.processLocalTime(endTime);
 
         // Start time-end time interactions
-        if (!Lesson.checkValidTimes(modelStartTime, modelEndTime)) {
-            throw new IllegalValueException(Lesson.NO_SAME_TIME);
+        if (!LessonTime.checkValidLessonTimes(startTime, endTime)) {
+            throw new IllegalValueException(LessonTime.NO_SAME_TIME);
         }
+
+        final LessonTime modelStartTime = new LessonTime(startTime);
+        final LessonTime modelEndTime = new LessonTime(endTime);
+
 
         return new Lesson(modelDescription, modelStartDay, modelStartTime, modelEndTime);
     }
