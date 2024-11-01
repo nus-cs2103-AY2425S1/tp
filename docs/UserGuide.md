@@ -211,16 +211,15 @@ For first-time users of the application, it is highly recommended for you to rea
 
 #### 3.2.1 User Interface Overview:
 <a id="user-interface-overview"></a>
-TO BE DONE 
-## To update UI component picture here:
-![startingGUI.png](images/startingGUI.png)
+
+![UserInterfaceOverview.png](images/UserInterfaceOverview.png)
 
 ### Add UI Components descriptions here
 
 #### 3.2.2 Additional UI Components:
 
 <a id="additional-ui-components"></a>
-![startingGUI.png](images/startingGUI.png)
+![additionalUIComponents.png](images/additionalUIComponents.png)
 
 ### Add additiona UI Components description here
 
