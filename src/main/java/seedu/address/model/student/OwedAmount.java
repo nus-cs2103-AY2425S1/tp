@@ -40,6 +40,13 @@ public class OwedAmount extends Fee {
     }
 
     /**
+     * Returns true if a given value is a valid owed amount.
+     */
+    public static boolean isValidOwedAmount(double test) {
+        return test >= 0 && test <= MAX_VALUE;
+    }
+
+    /**
      * Returns a new {@code OwedAmount} with the increased value by adding the specified amount
      * to the current owed amount.
      *

@@ -13,6 +13,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -20,6 +23,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.student.OwedAmount;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -79,6 +83,31 @@ public class OweCommandTest {
     }
 
     @Test
+    public void execute_exceededLimitUnfilteredList_failure() {
+        Student chosenStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        double currentOwedAmountValue = chosenStudent.getOwedAmountValue();
+        double additionalOwedAmountValue = OwedAmount.MAX_VALUE - currentOwedAmountValue + 1;
+        double hour = BigDecimal.valueOf(additionalOwedAmountValue / chosenStudent.getRateValue())
+                                .setScale(0, RoundingMode.UP)
+                                .doubleValue();
+        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, hour);
+        assertCommandFailure(oweCommand, model, Messages.MESSAGE_LIMIT);
+    }
+
+    @Test
+    public void execute_exceededLimitFilteredList_failure() {
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        double currentOwedAmountValue = studentInFilteredList.getOwedAmountValue();
+        double additionalOwedAmountValue = OwedAmount.MAX_VALUE - currentOwedAmountValue;
+        double hour = BigDecimal.valueOf(additionalOwedAmountValue / studentInFilteredList.getRateValue())
+                                .setScale(0, RoundingMode.UP).doubleValue();
+        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, hour);
+
+        assertCommandFailure(oweCommand, model, Messages.MESSAGE_LIMIT);
+    }
+
+    @Test
     public void equals() {
         final OweCommand standardCommand = new OweCommand(INDEX_FIRST_STUDENT, Double.parseDouble(VALID_HOUR_BOB));
 
@@ -121,6 +150,6 @@ public class OweCommandTest {
      * Calculates addition owedAmount used to generate expected messages and expected students
      */
     private double calculateAdditionOwedAmount(Student student, double hourOwed) {
-        return student.getRate().value * hourOwed;
+        return student.getRateValue() * hourOwed;
     }
 }

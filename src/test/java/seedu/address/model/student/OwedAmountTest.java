@@ -26,7 +26,7 @@ public class OwedAmountTest {
         // null owed
         assertThrows(NullPointerException.class, () -> OwedAmount.isValidOwedAmount(null));
 
-        // invalid oweds
+        // invalid owedAmounts
         assertFalse(OwedAmount.isValidOwedAmount("")); // empty string
         assertFalse(OwedAmount.isValidOwedAmount(" ")); // spaces only
         assertFalse(OwedAmount.isValidOwedAmount("1.234")); // more than 2 decimal places
@@ -34,12 +34,26 @@ public class OwedAmountTest {
         assertFalse(OwedAmount.isValidOwedAmount("-1.23")); // negative number
         assertFalse(OwedAmount.isValidOwedAmount("10000000.00")); // more than max value
 
-        // valid oweds
+        // valid owedAmounts
         assertTrue(OwedAmount.isValidOwedAmount("1")); // 0 decimal places
         assertTrue(OwedAmount.isValidOwedAmount("1.2")); // 1 decimal place
         assertTrue(OwedAmount.isValidOwedAmount("123.23")); // 2 decimal places
         assertTrue(OwedAmount.isValidOwedAmount("0"));
         assertTrue(OwedAmount.isValidOwedAmount("9999999.99")); // boundary value
+    }
+
+    @Test
+    public void isValidOwedAmount_double() {
+        // null owed
+        assertThrows(NullPointerException.class, () -> OwedAmount.isValidOwedAmount(null));
+
+        // invalid owedAmounts
+        assertFalse(OwedAmount.isValidOwedAmount(OwedAmount.MAX_VALUE + 1));
+        assertFalse(OwedAmount.isValidOwedAmount(-1.5));
+
+        // valid owedAmounts
+        assertTrue(OwedAmount.isValidOwedAmount(OwedAmount.MAX_VALUE));
+        assertTrue(OwedAmount.isValidOwedAmount(0.000));
     }
 
     @Test

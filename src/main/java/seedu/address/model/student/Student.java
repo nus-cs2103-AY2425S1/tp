@@ -77,6 +77,10 @@ public class Student {
         return owedAmount;
     }
 
+    public double getRateValue() {
+        return rate.value;
+    }
+
     public double getPaidAmountValue() {
         return paidAmount.getValue();
     }

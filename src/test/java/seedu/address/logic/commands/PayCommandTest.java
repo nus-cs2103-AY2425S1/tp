@@ -34,7 +34,7 @@ public class PayCommandTest {
         PayCommand payCommand = new PayCommand(INDEX_FIRST_STUDENT, hoursPaid);
 
         Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        double amountPaid = studentToEdit.getRate().value * hoursPaid;
+        double amountPaid = studentToEdit.getRateValue() * hoursPaid;
         Student editedStudent = createEditedStudentWithUpdatedPaidAmount(studentToEdit, amountPaid);
 
         String expectedMessage = String.format(PayCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
@@ -62,7 +62,7 @@ public class PayCommandTest {
         PayCommand payCommand = new PayCommand(INDEX_FIRST_STUDENT, hoursPaid);
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        double amountPaid = studentInFilteredList.getRate().value * hoursPaid;
+        double amountPaid = studentInFilteredList.getRateValue() * hoursPaid;
         Student editedStudent = createEditedStudentWithUpdatedPaidAmount(studentInFilteredList, amountPaid);
 
         String expectedMessage = String.format(PayCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
@@ -139,4 +139,3 @@ public class PayCommandTest {
         assertEquals(expected, payCommand.toString());
     }
 }
-
