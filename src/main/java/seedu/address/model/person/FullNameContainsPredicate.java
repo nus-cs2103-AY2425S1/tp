@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code Name} contains the given name.
+ * Tests that a {@code Person}'s {@code Name} contains keywords given.
  */
 public class FullNameContainsPredicate implements Predicate<Person> {
     private final String fullName;
@@ -14,7 +14,6 @@ public class FullNameContainsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        // Check if the person's full name contains the given name (ignoring case)
         return person.getName().fullName.toUpperCase().contains(fullName);
     }
 
@@ -30,11 +29,6 @@ public class FullNameContainsPredicate implements Predicate<Person> {
         }
 
         FullNameContainsPredicate otherPredicate = (FullNameContainsPredicate) other;
-        return fullName.contains(otherPredicate.fullName);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("FullNameContainsPredicate[fullName=%s]", fullName);
+        return fullName.equals(otherPredicate.fullName);
     }
 }

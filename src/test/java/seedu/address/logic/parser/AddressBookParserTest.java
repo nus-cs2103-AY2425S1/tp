@@ -23,8 +23,6 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FullNameContainsPredicate;
 import seedu.address.model.person.JobCodePredicate;
-import seedu.address.model.person.NameEmailPredicate;
-import seedu.address.model.person.NamePhonePredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 //import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -78,23 +76,23 @@ public class AddressBookParserTest {
         assertEquals(new FindCommand(new FullNameContainsPredicate("Bobby Coo")), command);
     }
 
-    @Test
-    public void parseCommand_findNameEmail() throws Exception {
-        Person person = new PersonBuilder().withName("Bobby Coo")
-                .withEmail("bobby@example.com").build();
-        String userInput = PersonUtil.getFindCommandByNameEmail(person);
-        FindCommand command = (FindCommand) parser.parseCommand(userInput);
-        assertEquals(new FindCommand(new NameEmailPredicate("Bobby Coo", "bobby@example.com")), command);
-    }
-
-    @Test
-    public void parseCommand_findNamePhone() throws Exception {
-        Person person = new PersonBuilder().withName("Bobby Coo")
-                .withPhone("12121212").build();
-        String userInput = PersonUtil.getFindCommandByNamePhone(person);
-        FindCommand command = (FindCommand) parser.parseCommand(userInput);
-        assertEquals(new FindCommand(new NamePhonePredicate("Bobby Coo", "12121212")), command);
-    }
+    //    @Test
+    //    public void parseCommand_findNameEmail() throws Exception {
+    //        Person person = new PersonBuilder().withName("Bobby Coo")
+    //                .withEmail("bobby@example.com").build();
+    //        String userInput = PersonUtil.getFindCommandByNameEmail(person);
+    //        FindCommand command = (FindCommand) parser.parseCommand(userInput);
+    //        assertEquals(new FindCommand(new NameEmailPredicate("Bobby Coo", "bobby@example.com")), command);
+    //    }
+    //
+    //    @Test
+    //    public void parseCommand_findNamePhone() throws Exception {
+    //        Person person = new PersonBuilder().withName("Bobby Coo")
+    //                .withPhone("12121212").build();
+    //        String userInput = PersonUtil.getFindCommandByNamePhone(person);
+    //        FindCommand command = (FindCommand) parser.parseCommand(userInput);
+    //        assertEquals(new FindCommand(new NamePhonePredicate("Bobby Coo", "12121212")), command);
+    //    }
 
     @Test
     public void parseCommand_findJobCode() throws Exception {

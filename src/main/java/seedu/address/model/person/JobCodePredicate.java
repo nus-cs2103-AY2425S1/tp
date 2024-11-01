@@ -14,14 +14,20 @@ public class JobCodePredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        // Compare job code exactly (case-sensitive)
-        return person.getJobCode().value.equals(jobCode);
+        return person.getJobCode().value.toUpperCase().contains(jobCode);
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof JobCodePredicate // instanceof handles nulls
-                && jobCode.equals(((JobCodePredicate) other).jobCode)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof JobCodePredicate)) {
+            return false;
+        }
+
+        JobCodePredicate otherPredicate = (JobCodePredicate) other;
+        return jobCode.contains(otherPredicate.jobCode);
     }
 }
