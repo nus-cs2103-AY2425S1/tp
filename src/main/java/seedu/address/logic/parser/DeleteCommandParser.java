@@ -18,8 +18,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
-    public static final String MESSAGE_EMPTY_INDEX = "Index is not provided.";
-
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
@@ -27,24 +25,19 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
-        List<String> indicesList = List.of(argMultimap.getPreamble().split(","));
-
-        if (argMultimap.getPreamble().isEmpty()) {
+        List<String> indicesList = ArgumentTokenizer.tokenizeWithDefault(args);
+        if (indicesList.isEmpty() || indicesList.stream().anyMatch(String::isEmpty)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
 
         try {
             Set<Index> indices;
             Optional<Set<Index>> optionalIndices = parseIndicesForDelete(indicesList);
-            if (optionalIndices.isPresent() && !optionalIndices.get().isEmpty()) {
-                indices = optionalIndices.get();
-                return new DeleteCommand(indices);
-            } else {
-                throw new ParseException(MESSAGE_EMPTY_INDEX);
-            }
-
+            assert optionalIndices.isPresent() : "Optional set of indices should not be empty or return null";
+            indices = optionalIndices.get();
+            return new DeleteCommand(indices);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
@@ -65,5 +58,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Collection<String> indicesSet = indices.size() == 1 && indices.contains("") ? Collections.emptySet() : indices;
         return Optional.of(ParserUtil.parseIndices(indicesSet));
     }
+
 
 }

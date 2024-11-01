@@ -77,4 +77,14 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns true if the {@code ArgumentMultimap} contains all the given prefixes.
+     *
+     * @param prefixes Prefixes to test for.
+     * @return True if all prefixes are present.
+     */
+    public boolean arePrefixesPresent(Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> getValue(prefix).isPresent());
+    }
 }

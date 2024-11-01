@@ -82,7 +82,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         Collection<String> parsedCourses = new HashSet<>();
         for (String course : courses) {
-            String[] parsedCourse = course.split(",");
+            String[] parsedCourse = course.split(";");
             Arrays.stream(parsedCourse).forEach(parsedCourses::add);
         }
         Collection<String> courseSet = courses.size() == 1 && courses.contains("")

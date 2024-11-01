@@ -19,6 +19,8 @@ Class LogicManager
 
 package Model {
 Class HiddenModel #FFFFFF
+Class Consultation
+Class Student
 }
 
 package Storage {
@@ -36,6 +38,9 @@ LogicManager .left.> Command : <<call>>
 
 LogicManager --> Model
 LogicManager --> Storage
+LogicManager --> Consultation : <<manage>>
+LogicManager --> Student : <<access>>
+
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model

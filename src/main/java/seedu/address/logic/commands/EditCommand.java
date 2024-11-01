@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -32,6 +31,7 @@ import seedu.address.model.student.Student;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final CommandType COMMAND_TYPE = CommandType.STUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the index number used in the displayed student list. "
@@ -44,7 +44,7 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_COURSE + "CS2103T,CS2101";
+            + PREFIX_COURSE + "CS2103T;CS2101";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -65,13 +65,24 @@ public class EditCommand extends Command {
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
     }
 
+    /**
+     * Returns Command Type EDITSTUDENT
+     *
+     * @return Command Type EDITSTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return COMMAND_TYPE;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
+                    index.getOneBased()));
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
@@ -82,8 +93,8 @@ public class EditCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)),
+                COMMAND_TYPE);
     }
 
     /**

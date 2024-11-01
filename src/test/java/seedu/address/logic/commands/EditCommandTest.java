@@ -11,9 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -81,6 +81,7 @@ public class EditCommandTest {
                 Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -99,7 +100,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-
+        expectedModel.updateFilteredStudentList(x -> x.getName().equals(VALID_NAME_BOB));
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -130,7 +131,8 @@ public class EditCommandTest {
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model,
+                String.format(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, outOfBoundIndex.getOneBased()));
     }
 
     /**
@@ -147,7 +149,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model,
+                String.format(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, outOfBoundIndex.getOneBased()));
     }
 
     @Test
@@ -183,6 +186,12 @@ public class EditCommandTest {
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editStudentDescriptor="
                 + editStudentDescriptor + "}";
         assertEquals(expected, editCommand.toString());
+    }
+
+    @Test
+    public void getCommandTypeMethod() {
+        final EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, DESC_AMY);
+        assertEquals(editCommand.getCommandType(), CommandType.STUDENT);
     }
 
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.DEFAULT_DELIMITER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -13,10 +14,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.lesson.DeleteLessonCommand;
+import seedu.address.logic.parser.lesson.DeleteLessonCommandParser;
 
 /**
- * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the DeleteCommand code. For example, inputs "1" and "1 abc" take the
+ * As we are only doing white-box testing, our test cases do not cover path
+ * variations
+ * outside of the DeleteCommand code. For example, inputs "1" and "1 abc" take
+ * the
  * same path through the DeleteCommand, and therefore we test only one of them.
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
@@ -37,7 +42,7 @@ public class DeleteCommandParserTest {
         Set<Index> indexSet = new HashSet<>();
         indexSet.add(INDEX_FIRST_STUDENT);
         indexSet.add(INDEX_SECOND_STUDENT);
-        assertParseSuccess(parser, "1 ,2 ",
+        assertParseSuccess(parser, "1" + DEFAULT_DELIMITER + " 2",
                 new DeleteCommand(indexSet));
     }
 
@@ -48,26 +53,71 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgsNoTag_throwsParseException() {
+    public void parse_invalidArgsNotNum_throwsParseException() {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_someValidSomeInvalidArgsNoTag_throwsParseException() {
-        assertParseFailure(parser, "1, a",
+    public void parse_someValidSomeInvalidArgsNotNum_throwsParseException() {
+        assertParseFailure(parser, "1" + DEFAULT_DELIMITER + " a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidArgsNoNum_throwsParseException() {
+    public void parse_invalidArgsOnlyDelimiter_throwsParseException() {
+        assertParseFailure(parser, DEFAULT_DELIMITER.toString(),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgsEmptyString_throwsParseException() {
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgsOneEmptyString_throwsParseException() {
+        assertParseFailure(parser, "2 " + DEFAULT_DELIMITER + " 1" + DEFAULT_DELIMITER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgsAllEmptyString_throwsParseException() {
+        assertParseFailure(parser, "" + DEFAULT_DELIMITER + DEFAULT_DELIMITER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgsSomeEmptyString_throwsParseException() {
+        assertParseFailure(parser, DEFAULT_DELIMITER + "3" + DEFAULT_DELIMITER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgsSpaces_throwsParseException() {
+        assertParseFailure(parser, " " + DEFAULT_DELIMITER + " ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nonNumericArgs_throwsParseException() {
+        DeleteLessonCommandParser parser = new DeleteLessonCommandParser();
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyOrSpecialCharacterArgs_throwsParseException() {
+        DeleteLessonCommandParser parser = new DeleteLessonCommandParser();
         assertParseFailure(parser, ",",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidArgsSomeNoNum_throwsParseException() {
-        assertParseFailure(parser, ", 1,",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_mixedValidAndInvalidArgs_throwsParseException() {
+        DeleteLessonCommandParser parser = new DeleteLessonCommandParser();
+        assertParseFailure(parser, "1, a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
     }
 }

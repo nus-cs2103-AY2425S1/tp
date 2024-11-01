@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.DEFAULT_DELIMITER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,12 @@ import seedu.address.model.student.Student;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final CommandType COMMAND_TYPE = CommandType.STUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer)...\n"
-            + "Example: " + COMMAND_WORD + "1,2";
+            + "Parameters: INDEX (must be a positive integer) [;INDEX...]\n"
+            + "Example: " + COMMAND_WORD + " 1" + DEFAULT_DELIMITER + "2";
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student(s):\n%1$s";
 
@@ -32,6 +34,16 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(Set<Index> targetIndices) {
         this.targetIndices = targetIndices;
+    }
+
+    /**
+     * Returns Command Type DELETESTUDENT
+     *
+     * @return Command Type DELETESTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return COMMAND_TYPE;
     }
 
     @Override
@@ -68,7 +80,8 @@ public class DeleteCommand extends Command {
                 .collect(Collectors.joining("\n"));
 
 
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, formattedDeletedPeople));
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, formattedDeletedPeople),
+                COMMAND_TYPE);
     }
 
     @Override

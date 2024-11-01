@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
+    private ConsultationListPanel consultationListPanel;
+    private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +45,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane consultationListPanelPlaceholder;
+
+    @FXML
+    private StackPane lessonListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +121,12 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
+        consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
+        consultationListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
+
+        lessonListPanel = new LessonListPanel(logic.getFilteredLessonList());
+        lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -167,10 +181,18 @@ public class MainWindow extends UiPart<Stage> {
         return studentListPanel;
     }
 
+    public ConsultationListPanel getConsultationListPanel() {
+        return consultationListPanel;
+    }
+
+    public LessonListPanel getLessonListPanel() {
+        return lessonListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
@@ -178,12 +200,17 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getCommandType()) {
+            // General Use Commands
+            case HELP:
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+                break;
+            case EXIT:
                 handleExit();
+                break;
+            default:
+                // Do Nothing
+                break;
             }
 
             return commandResult;
