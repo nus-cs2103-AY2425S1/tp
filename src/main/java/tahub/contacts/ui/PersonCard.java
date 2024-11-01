@@ -1,7 +1,5 @@
 package tahub.contacts.ui;
 
-import java.util.Comparator;
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+
 import tahub.contacts.logic.Logic;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
@@ -57,31 +56,31 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private void onClickHandler(ActionEvent event) {
-        event.consume ();
-        if (!attendanceWindow.isShowing ()) {
-            attendanceWindow.show ();
+        event.consume();
+        if (!attendanceWindow.isShowing()) {
+            attendanceWindow.show();
         } else {
-            attendanceWindow.focus ();
+            attendanceWindow.focus();
         }
     }
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person , int displayedIndex , Logic logic) {
-        super (FXML);
+    public PersonCard(int displayedIndex, Logic logic, Person person) {
+        super(FXML);
         this.person = person;
-        attendanceWindow = new AttendanceWindow (logic , person);
-        id.setText (displayedIndex + ". ");
-        name.setText (person.getName ().fullName);
-        phone.setText (person.getPhone ().value);
-        matric.setText ("(" + person.getMatricNumber ().value + ")");
-        address.setText (person.getAddress ().value);
-        email.setText (person.getEmail ().value);
-        attendance.setText ("Attendance");
+        attendanceWindow = new AttendanceWindow(logic, person);
+        id.setText(displayedIndex + ". ");
+        name.setText(person.getName().fullName);
+        phone.setText(person.getPhone().value);
+        matric.setText("(" + person.getMatricNumber().value + ")");
+        address.setText(person.getAddress().value);
+        email.setText(person.getEmail().value);
+        attendance.setText("Attendance");
 
         // Get all courses the student is enrolled in
-        ObservableList<StudentCourseAssociation> scaList = logic.getStudentScas (person)
+        ObservableList<StudentCourseAssociation> scaList = logic.getStudentScas(person)
                 .getByMatric(person.getMatricNumber().value);
 
         // Add course codes as tags

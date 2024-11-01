@@ -1,7 +1,5 @@
 package tahub.contacts.model.studentcourseassociation;
 
-import java.util.Map;
-
 import tahub.contacts.model.course.Attendance;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.person.Person;
