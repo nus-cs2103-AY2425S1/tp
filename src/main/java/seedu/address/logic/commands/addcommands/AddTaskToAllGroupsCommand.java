@@ -22,7 +22,7 @@ import seedu.address.model.task.TaskName;
  */
 public class AddTaskToAllGroupsCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_task";
+    public static final String COMMAND_WORD = "add_t";
     public static final String COMMAND_WORD_ALIAS = "at";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS

@@ -31,7 +31,7 @@ import seedu.address.model.task.TaskName;
  */
 public class EditTaskAllGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit_task";
+    public static final String COMMAND_WORD = "edit_t";
     public static final String COMMAND_WORD_ALIAS = "et";
 
 

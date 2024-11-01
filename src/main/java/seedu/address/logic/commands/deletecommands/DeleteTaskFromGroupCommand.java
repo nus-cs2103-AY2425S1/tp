@@ -25,7 +25,7 @@ import seedu.address.model.task.Task;
  */
 public class DeleteTaskFromGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_task_grp";
+    public static final String COMMAND_WORD = "del_t_g";
     public static final String COMMAND_WORD_ALIAS = "dtg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS

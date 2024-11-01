@@ -27,7 +27,7 @@ import seedu.address.model.task.TaskName;
  */
 public class AddTaskToGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_task_grp";
+    public static final String COMMAND_WORD = "add_t_g";
     public static final String COMMAND_WORD_ALIAS = "atg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS

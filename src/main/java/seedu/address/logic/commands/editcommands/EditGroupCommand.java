@@ -30,7 +30,7 @@ import seedu.address.model.task.Task;
  */
 public class EditGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit_grp";
+    public static final String COMMAND_WORD = "edit_g";
     public static final String COMMAND_WORD_ALIAS = "eg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
