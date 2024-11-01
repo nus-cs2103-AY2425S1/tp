@@ -7,7 +7,7 @@ import static java.util.Objects.requireNonNull;
  * Represents a key-value pair for ModuleRoleMap.
  * Guarantees: immutable
  */
-public class ModuleRolePair {
+public class ModuleRolePair implements Comparable<ModuleRolePair> {
 
     public final ModuleCode moduleCode;
     public final RoleType roleType;
@@ -51,4 +51,15 @@ public class ModuleRolePair {
         return hash(moduleCode, roleType);
     }
 
+    /**
+     * Defines a natural ordering for {@code ModuleRolePair}.
+     * It is ordered by the lexicographical ordering of {@code ModuleCode} first,
+     * then by the declaration order of {@code RoleType}.
+     */
+    @Override
+    public int compareTo(ModuleRolePair o) {
+        return this.moduleCode.equals(o.moduleCode)
+            ? this.roleType.compareTo(o.roleType)
+            : this.moduleCode.compareTo(o.moduleCode);
+    }
 }
