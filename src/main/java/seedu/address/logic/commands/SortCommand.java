@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.ModelManager.isArchivedList;
 
 import java.util.Comparator;
 import java.util.logging.Logger;
@@ -44,6 +45,8 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        isArchivedList = false;
+        model.setArchivedListMode(false);
 
         if (model.getAddressBook().getPersonList().isEmpty()) {
             return new CommandResult(MESSAGE_NO_PERSONS);
