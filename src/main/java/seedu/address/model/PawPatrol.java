@@ -10,8 +10,6 @@ import seedu.address.model.link.Link;
 import seedu.address.model.link.UniqueLinkList;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.UniqueOwnerList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.UniquePetList;
 
@@ -21,7 +19,6 @@ import seedu.address.model.pet.UniquePetList;
  */
 public class PawPatrol implements ReadOnlyPawPatrol {
 
-    private final UniquePersonList persons;
     private final UniqueOwnerList owners;
     private final UniquePetList pets;
     private final UniqueLinkList links;
@@ -38,7 +35,6 @@ public class PawPatrol implements ReadOnlyPawPatrol {
     */
 
     {
-        persons = new UniquePersonList();
         owners = new UniqueOwnerList();
         pets = new UniquePetList();
         links = new UniqueLinkList();
@@ -56,14 +52,6 @@ public class PawPatrol implements ReadOnlyPawPatrol {
     }
 
     //// list overwrite operations
-
-    /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
-    }
 
     /**
      * Replaces the contents of the owner list with {@code owners}.
@@ -95,50 +83,9 @@ public class PawPatrol implements ReadOnlyPawPatrol {
     public void resetData(ReadOnlyPawPatrol newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
         setOwners(newData.getOwnerList());
         setPets(newData.getPetList());
         setLinks(newData.getLinkList());
-    }
-
-    // person-level operations
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in
-     * PawPatrol.
-     */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
-    }
-
-    /**
-     * Adds a person to PawPatrol.
-     * The person must not already exist in PawPatrol.
-     */
-    public void addPerson(Person p) {
-        persons.add(p);
-    }
-
-    /**
-     * Replaces the given person {@code target} in the list with
-     * {@code editedPerson}.
-     * {@code target} must exist in PawPatrol.
-     * The person identity of {@code editedPerson} must not be the same as another
-     * existing person in PawPatrol.
-     */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
-
-        persons.setPerson(target, editedPerson);
-    }
-
-    /**
-     * Removes {@code key} from this {@code PawPatrol}.
-     * {@code key} must exist in PawPatrol.
-     */
-    public void removePerson(Person key) {
-        persons.remove(key);
     }
 
     // owner-level operations
@@ -272,16 +219,10 @@ public class PawPatrol implements ReadOnlyPawPatrol {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("persons", persons)
             .add("owners", owners)
             .add("pets", pets)
             .add("links", links)
             .toString();
-    }
-
-    @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
     }
 
     @Override
@@ -312,12 +253,12 @@ public class PawPatrol implements ReadOnlyPawPatrol {
 
         PawPatrol otherPawPatrol = (PawPatrol) other;
 
-        return persons.equals(otherPawPatrol.persons) && owners.equals(otherPawPatrol.owners)
+        return owners.equals(otherPawPatrol.owners)
             && pets.equals(otherPawPatrol.pets);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return owners.hashCode() + pets.hashCode();
     }
 }

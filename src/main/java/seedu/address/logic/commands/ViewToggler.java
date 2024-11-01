@@ -13,7 +13,6 @@ public class ViewToggler {
     public static final String LIST_BOTH_COMMAND = "List Both";
     public static final String LINK_OWNER_TO_PET_COMMAND = "Link owner to pet";
     public static final String OTHER_COMMAND = "Command does not change GUI";
-    private static final String TEMPLATE = "Linked %1$s pet(s) to %2$s";
     private static final String REGEX = "^Linked \\d+ pet\\(s\\) to .+$";
 
     private final String commandType;

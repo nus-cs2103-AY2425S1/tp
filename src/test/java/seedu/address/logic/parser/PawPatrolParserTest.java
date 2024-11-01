@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddOwnerCommand;
 import seedu.address.logic.commands.AddPetCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -31,7 +30,6 @@ import seedu.address.logic.commands.EditPetCommand;
 import seedu.address.logic.commands.EditPetCommand.EditPetDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindOwnerCommand;
-import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.FindPetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LinkCommand;
@@ -42,29 +40,18 @@ import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.PetNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditOwnerDescriptorBuilder;
 import seedu.address.testutil.EditPetDescriptorBuilder;
 import seedu.address.testutil.OwnerBuilder;
 import seedu.address.testutil.OwnerUtil;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.PetBuilder;
 import seedu.address.testutil.PetUtil;
 
 public class PawPatrolParserTest {
 
     private final PawPatrolParser parser = new PawPatrolParser();
-
-    @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
-    }
 
     @Test
     public void parseCommand_addOwner() throws Exception {
@@ -149,14 +136,6 @@ public class PawPatrolParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
-    }
-
-    @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
-            FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

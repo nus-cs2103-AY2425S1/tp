@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.owner.Owner;
-import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -39,24 +38,6 @@ public class Messages {
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
-
-    /**
-     * Formats the {@code person} for display to the user.
-     */
-    public static String format(Person person) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-            .append("; Phone: ")
-            .append(person.getPhone())
-            .append("; Email: ")
-            .append(person.getEmail())
-            .append("; Address: ")
-            .append(person.getAddress())
-            .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        return builder.toString();
-    }
-
 
     /**
      * Formats the {@code owner} for display to the user.

@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
-import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -15,8 +14,6 @@ import seedu.address.model.pet.Pet;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
     Predicate<Owner> PREDICATE_SHOW_ALL_OWNERS = unused -> true;
 
     Predicate<Pet> PREDICATE_SHOW_ALL_PETS = unused -> true;
@@ -60,11 +57,6 @@ public interface Model {
     ReadOnlyPawPatrol getPawPatrol();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in PawPatrol.
-     */
-    boolean hasPerson(Person person);
-
-    /**
      * Returns true if an owner with the same identity as {@code person} exists in PawPatrol.
      */
     boolean hasOwner(Owner owner);
@@ -75,15 +67,9 @@ public interface Model {
     boolean hasPet(Pet pet);
 
     /***
-     * Returns true if a pet with the same identity as {@code pet} exists in PawPatrol.
+     * Returns true if a link with the same identity as {@code link} exists in PawPatrol.
      */
-    boolean hasLink(Link pet);
-
-    /**
-     * Deletes the given person.
-     * The person must exist in PawPatrol.
-     */
-    void deletePerson(Person target);
+    boolean hasLink(Link link);
 
     /**
      * Deletes the given owner.
@@ -120,12 +106,6 @@ public interface Model {
     void deleteLinksWithId(String id);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in PawPatrol.
-     */
-    void addPerson(Person person);
-
-    /**
      * Adds the given owner.
      * {@code owner} must not already exist in PawPatrol.
      */
@@ -144,13 +124,6 @@ public interface Model {
     void addLink(Link link);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in PawPatrol.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in PawPatrol.
-     */
-    void setPerson(Person target, Person editedPerson);
-
-    /**
      * Replaces the given person {@code target} with {@code editedOwner}.
      * {@code target} must exist in PawPatrol.
      * The person identity of {@code editedOwner} must not be the same as another existing owner in PawPatrol.
@@ -164,9 +137,6 @@ public interface Model {
      */
     void setPet(Pet target, Pet editedPet);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
     /** Returns an unmodifiable view of the filtered owner list */
     ObservableList<Owner> getFilteredOwnerList();
 
@@ -175,12 +145,6 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered link list */
     public ObservableList<Link> getFilteredLinkList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
      * Updates the filter of the filtered owner list to filter by the given {@code predicate}.
