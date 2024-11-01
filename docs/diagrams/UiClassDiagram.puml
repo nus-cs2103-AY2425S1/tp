@@ -4,6 +4,13 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
+skinparam package<<Layout>> {
+  borderColor Transparent
+  backgroundColor Transparent
+  fontColor Transparent
+  stereotypeFontColor Transparent
+}
+
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
@@ -11,10 +18,14 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class VendorListPanel
-Class VendorCard
-Class EventListPanel
-Class EventCard
+package VendorList <<Layout>>{
+    Class VendorListPanel
+    Class VendorCard
+}
+package EventList <<Layout>> {
+    Class EventListPanel
+    Class EventCard
+}
 Class VendorDetailsPanel
 Class EventDetailsPanel
 Class StatusBarFooter
@@ -46,27 +57,36 @@ MainWindow *-down->  "1" CommandBox
 VendorListPanel -down-> "*" VendorCard
 EventListPanel -down-> "*" EventCard
 
+VendorDetailsPanel -down-> "1" EventListPanel
+EventDetailsPanel -down-> "1" VendorListPanel
+
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-VendorListPanel --|> UiPart
-VendorCard --|> UiPart
-EventListPanel --|> UiPart
-EventCard --|> UiPart
 VendorDetailsPanel --|> UiPart
 EventDetailsPanel --|> UiPart
+VendorListPanel --|> UiPart
+EventListPanel --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+VendorCard --|> UiPart
+EventCard --|> UiPart
 
 VendorCard ..> Model
 EventCard ..> Model
-VendorDetailsPanel ..> Model
-EventDetailsPanel ..> Model
+VendorDetailsPanel .down.> Model
+EventDetailsPanel .down.> Model
+
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-VendorListPanel -[hidden]left- HelpWindow
+VendorList -[hidden]right- Model
+VendorList -[hidden]right-> Model
+EventList -[hidden]right- Model
+EventList -[hidden]right-> Model
+EventList -[hidden]right-|> Model
+VendorList -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
