@@ -19,6 +19,15 @@ public class VersionedAddressBook extends AddressBook {
 
 
     /**
+     * Constructs an empty state list for the address book.
+     */
+    public VersionedAddressBook() {
+        addressBookStateList = new ArrayList<>();
+        currentStatePointer = -1;
+        current = new AddressBook();
+    }
+
+    /**
      * Constructs a state list for the address book and saves the initial copy.
      */
     public VersionedAddressBook(ReadOnlyAddressBook addressBook) {
@@ -40,10 +49,15 @@ public class VersionedAddressBook extends AddressBook {
      * Reverts the given AddressBook to the previous state.
      */
     public void undoAddressBook() throws CommandException {
-        if (currentStatePointer == 0) {
+        if (currentStatePointer <= 0) {
             throw new CommandException(MESSAGE_CONSTRAINTS);
         }
-        assert current.equals(addressBookStateList.get(currentStatePointer));
+
+        if (!current.equals(addressBookStateList.get(currentStatePointer))) {
+            throw new CommandException("There are unsaved changes in the current state. "
+                    + "Please save the changes before undoing.");
+        }
+
         currentStatePointer--;
         current = new AddressBook(addressBookStateList.get(currentStatePointer));
     }
