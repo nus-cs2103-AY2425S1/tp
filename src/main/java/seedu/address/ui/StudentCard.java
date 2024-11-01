@@ -79,6 +79,7 @@ public class StudentCard extends UiPart<Region> {
             cardPane.getStyleClass().add("student-card-done");
             attendanceFlowPane.getStyleClass().add("attendanceFlowPane-done");
             attendanceBox.getStyleClass().add("attendanceFlowPane-done");
+
         } else {
             cardPane.getStyleClass().add("student-card-not-done");
             attendanceFlowPane.getStyleClass().add("attendanceFlowPane-not-done");
