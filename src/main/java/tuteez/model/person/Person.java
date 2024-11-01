@@ -102,7 +102,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable lesson list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public List<Lesson> getLessons() {
