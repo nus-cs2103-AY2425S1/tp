@@ -270,6 +270,29 @@ Examples:
 * `Export path/data/tutorial12.csv` will export the contacts in the Address book as a csv file (tutorial12.csv at the relative path given)
 
 
+### Accessing command history <kbd>↑</kbd> and <kbd>↓</kbd>
+
+KonTActs automatically saves every (valid or invalid) command entered which can then be retrieved later by using the <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys.
+
+<box type="warning">
+
+    Current input in the text field is erased when accessing the command history.
+</box>
+
+
+<box type="warning">
+
+    If the current session of KonTActs has no commands added, pressing the <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys will not have any effect.
+</box>
+
+
+Example:
+1. `github n/Harry` launches the github account of Harry on the browser
+2. The command text field box is now empty.
+3. Pressing <kbd>↑</kbd> will retrieve the last input command which will populate the command text field box with `github n/Harry`
+4. Continuously pressing <kbd>↑</kbd> will scroll through all commands that have been previously input.
+5. Pressing <kbd>↓</kbd> will scroll down to the more recent commands that was last input.
+
 
 ### Exiting the program : `exit`
 
