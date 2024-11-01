@@ -6,9 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -40,14 +37,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_EDUCATION_AMY = "Primary";
     public static final String VALID_EDUCATION_BOB = "Secondary";
-    public static final String VALID_GRADE_AMY = "1";
-    public static final String VALID_GRADE_BOB = "2";
-    public static final String VALID_PARENT_NAME_AMY = "Test parent";
-    public static final String VALID_PARENT_NAME_BOB = "Test parent";
-    public static final String VALID_PARENT_PHONE_AMY = "91234567";
-    public static final String VALID_PARENT_PHONE_BOB = "91234567";
-    public static final String VALID_PARENT_EMAIL_AMY = "testparent@example.com";
-    public static final String VALID_PARENT_EMAIL_BOB = "testparent@example.com";
+    public static final String VALID_GRADE_AMY = "0";
+    public static final String VALID_GRADE_BOB = "0";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -63,12 +54,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String EDUCATION_DESC_AMY = " " + PREFIX_EDUCATION + VALID_EDUCATION_AMY;
     public static final String EDUCATION_DESC_BOB = " " + PREFIX_EDUCATION + VALID_EDUCATION_BOB;
-    public static final String PARENT_NAME_DESC_AMY = " " + PREFIX_PARENT_NAME + VALID_PARENT_NAME_AMY;
-    public static final String PARENT_NAME_DESC_BOB = " " + PREFIX_PARENT_NAME + VALID_PARENT_NAME_BOB;
-    public static final String PARENT_PHONE_DESC_AMY = " " + PREFIX_PARENT_PHONE + VALID_PARENT_PHONE_AMY;
-    public static final String PARENT_PHONE_DESC_BOB = " " + PREFIX_PARENT_PHONE + VALID_PARENT_PHONE_BOB;
-    public static final String PARENT_EMAIL_DESC_AMY = " " + PREFIX_PARENT_EMAIL + VALID_PARENT_EMAIL_AMY;
-    public static final String PARENT_EMAIL_DESC_BOB = " " + PREFIX_PARENT_EMAIL + VALID_PARENT_EMAIL_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -85,14 +70,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withEducation(VALID_EDUCATION_AMY).withParentName(VALID_PARENT_NAME_AMY)
-                .withParentPhone(VALID_PARENT_PHONE_AMY).withParentEmail(VALID_PARENT_EMAIL_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withEducation(VALID_EDUCATION_AMY) .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withEducation(VALID_EDUCATION_BOB).withParentName(VALID_PARENT_NAME_BOB)
-                .withParentPhone(VALID_PARENT_PHONE_BOB).withParentEmail(VALID_PARENT_EMAIL_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withEducation(VALID_EDUCATION_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

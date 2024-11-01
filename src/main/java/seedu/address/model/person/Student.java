@@ -41,6 +41,17 @@ public class Student extends Person {
         this.parentName = parentName;
     }
 
+    /**
+     * Constructs a {@code Student} with the given {@code Person} as a base
+     */
+    public Student(Person person, Education education, Grade grade, Name parentName) {
+        super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags(),
+                person.getPinned(), person.isArchived());
+        this.education = education;
+        this.grade = grade;
+        this.parentName = parentName;
+    }
+
     public Education getEducation() {
         return education;
     }
@@ -68,7 +79,8 @@ public class Student extends Person {
         return super.equals(otherStudent)
                 && education.equals(otherStudent.education)
                 && grade.equals(otherStudent.grade)
-                && parentName.equals(otherStudent.parentName);
+                && ((parentName == null && otherStudent.parentName == null)
+                || (parentName != null && parentName.equals(otherStudent.parentName)));
     }
 
     @Override

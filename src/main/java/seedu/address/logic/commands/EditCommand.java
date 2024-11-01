@@ -5,9 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_PERSONS;
@@ -52,7 +49,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EDUCATION + "EDUCATION] "
-            + "[" + PREFIX_PARENT_NAME + "PARENT NAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -98,8 +94,10 @@ public class EditCommand extends Command {
 
         if (personToEdit instanceof Student studentToEdit) {
             editedPerson = createEditedPerson(studentToEdit, editPersonDescriptor);
+        } else if (personToEdit instanceof Parent parentToEdit) {
+            editedPerson = createEditedPerson(parentToEdit, editPersonDescriptor);
         } else {
-            editedPerson = createEditedPerson((Parent) personToEdit, editPersonDescriptor);
+            throw new IllegalArgumentException("Unsupported person type: " + personToEdit.getClass());
         }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {

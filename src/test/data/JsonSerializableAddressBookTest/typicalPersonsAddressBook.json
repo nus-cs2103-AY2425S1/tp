@@ -8,9 +8,8 @@
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "type" : "Student"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -19,9 +18,8 @@
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "type" : "Student"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -30,9 +28,8 @@
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
-    "tags" : [ ]
+    "tags" : [ ],
+    "type" : "Student"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -41,9 +38,8 @@
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
-    "tags" : [ "friends" ]
+    "tags" : [ ],
+    "type" : "Student"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -52,9 +48,8 @@
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
-    "tags" : [ ]
+    "tags" : [ ],
+    "type" : "Student"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -63,9 +58,8 @@
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
-    "tags" : [ ]
+    "tags" : [ ],
+    "type" : "Student"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -74,8 +68,7 @@
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
-    "tags" : [ ]
+    "tags" : [ ],
+    "type" : "Student"
   } ]
 }

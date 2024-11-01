@@ -4,6 +4,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Education;
+import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +32,16 @@ public class Parent extends Person {
         this.childName = childName;
     }
 
+    /**
+     * Constructs a {@code Parent} with the given {@code Person} as a base
+     */
+    public Parent(Person person, Name childName) {
+        super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags(),
+                person.getPinned(), person.isArchived());
+        this.childName = childName;
+    }
+
+
     public Name getChildName() {
         return childName;
     }
@@ -46,7 +58,8 @@ public class Parent extends Person {
         }
 
         Parent otherParent = (Parent) other;
-        return super.equals(otherParent) && getChildName().equals(otherParent.getChildName());
+        return super.equals(otherParent) && ((childName == null && otherParent.childName == null)
+                || (childName != null && childName.equals(otherParent.childName)));
     }
 
     @Override

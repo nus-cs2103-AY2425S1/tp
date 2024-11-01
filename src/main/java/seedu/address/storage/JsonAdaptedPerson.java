@@ -40,6 +40,7 @@ public abstract class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(String type, String name, String phone, String email, String address,
             List<JsonAdaptedTag> tags, boolean isPinned, boolean isArchived) {
+
         this.type = type;
         this.name = name;
         this.phone = phone;
