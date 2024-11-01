@@ -13,7 +13,6 @@
             <Insets bottom="4.0" left="2.0" right="2.0" top="4.0" />
         </padding>
     </Label>
-    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="37.0" prefWidth="150.0">
     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="37.0" prefHeight="250.0" prefWidth="150.0">
         <content>
             <AnchorPane layoutY="37.0" minWidth="0.0" prefWidth="150.0" styleClass="anchor-pane" stylesheets="@DarkTheme.css">
