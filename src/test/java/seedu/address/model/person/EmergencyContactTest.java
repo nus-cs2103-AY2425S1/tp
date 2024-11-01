@@ -26,12 +26,12 @@ public class EmergencyContactTest {
 
         // invalid emergency contacts
         assertFalse(EmergencyContact.isValidEmergencyContact("")); // empty string
-        assertFalse(EmergencyContact.isValidEmergencyContact(" ")); // spaces only
+        assertFalse(EmergencyContact.isValidEmergencyContact("   \t\n  ")); // whitespaces only
         assertFalse(EmergencyContact.isValidEmergencyContact("phone")); // non-numeric
         assertFalse(EmergencyContact.isValidEmergencyContact("9011p041")); // alphabets within digits
-        assertFalse(EmergencyContact.isValidEmergencyContact("1234")); // less than 8 digits
-        assertFalse(EmergencyContact.isValidEmergencyContact("123456789")); // more than 8 digits
-        assertFalse(EmergencyContact.isValidEmergencyContact("12345 678")); // whitespace in weird place
+        assertFalse(EmergencyContact.isValidEmergencyContact("9234")); // less than 8 digits
+        assertFalse(EmergencyContact.isValidEmergencyContact("623456789")); // more than 8 digits
+        assertFalse(EmergencyContact.isValidEmergencyContact("82345 678")); // whitespace in weird place
         assertFalse(EmergencyContact.isValidEmergencyContact("00000000")); // does not start with 6, 8, or 9
         assertFalse(EmergencyContact.isValidEmergencyContact("7918 2933")); // does not start with 6, 8, or 9
 
