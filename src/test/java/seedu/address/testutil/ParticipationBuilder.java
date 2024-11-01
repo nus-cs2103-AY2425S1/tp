@@ -1,6 +1,10 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.model.participation.Participation;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -14,6 +18,7 @@ public class ParticipationBuilder {
 
     private Person student;
     private Tutorial tutorial;
+    private List<Attendance> attendanceList;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -22,6 +27,16 @@ public class ParticipationBuilder {
 
         student = DEFAULT_STUDENT;
         tutorial = DEFAULT_TUTORIAL;
+        attendanceList = new ArrayList<>();
+    }
+
+    /**
+     * Initialises the ParticipationBuilder with the data of {@code participationToCopy}.
+     */
+    public ParticipationBuilder(Participation participationToCopy) {
+        this.student = participationToCopy.getStudent();
+        this.tutorial = participationToCopy.getTutorial();
+        this.attendanceList = participationToCopy.getAttendanceList();
     }
 
     /**
@@ -40,9 +55,17 @@ public class ParticipationBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Attendance} list of the {@code Participation} that we are building.
+     */
+    public ParticipationBuilder withAttendanceList(List<Attendance> attendanceList) {
+        this.attendanceList = attendanceList;
+        return this;
+    }
+
+
     public Participation build() {
-        return new Participation(student, tutorial);
+        return new Participation(student, tutorial, attendanceList);
     }
 
 }
-
