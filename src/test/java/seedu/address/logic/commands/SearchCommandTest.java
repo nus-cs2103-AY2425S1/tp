@@ -20,7 +20,7 @@ import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.PersonIsRolePredicate;
+import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.role.Sponsor;
 import seedu.address.model.role.Vendor;
 import seedu.address.model.role.Volunteer;

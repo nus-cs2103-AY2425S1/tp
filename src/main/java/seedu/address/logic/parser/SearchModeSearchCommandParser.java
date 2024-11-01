@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,14 +17,17 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonIsRolePredicate;
+import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PersonIsRolePredicate;
+import seedu.address.model.person.predicates.PhoneNumberContainsKeywordPredicate;
+import seedu.address.model.person.predicates.TelegramContainsKeywordsPredicate;
 import seedu.address.model.role.Role;
-import seedu.address.model.role.RoleHandler;
-import seedu.address.model.role.exceptions.InvalidRoleException;
 
 /**
  * Parses input arguments and creates a new SearchModeSearchCommand object
@@ -47,59 +49,60 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         Set<Predicate<Person>> predicates = new HashSet<>();
         // if a field is present, AND with the predicate for that field
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String name = argMultimap.getValue(PREFIX_NAME).get();
-            Predicate<Person> namePred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(name),
-                    Person::getName);
+            String name = argMultimap.getValue(PREFIX_NAME).get().trim();
+
+            String[] nameKeywords = name.split("\\s+");
+
+            Predicate<Person> namePred = new NameContainsKeywordsPredicate(
+                    Arrays.stream(nameKeywords).toList());
             predicates.add(namePred);
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            String phone = argMultimap.getValue(PREFIX_PHONE).get();
-            Predicate<Person> phonePred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(phone),
-                    Person::getPhone);
+            String phone = argMultimap.getValue(PREFIX_PHONE).get().trim();
+            String[] phoneKeywords = phone.split("\\s+");
+
+            Predicate<Person> phonePred = new PhoneNumberContainsKeywordPredicate(
+                    Arrays.stream(phoneKeywords).toList());
             predicates.add(phonePred);
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            String email = argMultimap.getValue(PREFIX_EMAIL).get();
-            Predicate<Person> emailPred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(email),
-                    Person::getEmail);
+            String email = argMultimap.getValue(PREFIX_EMAIL).get().trim();
+            String[] emailKeywords = email.split("\\s+");
+
+            Predicate<Person> emailPred = new EmailContainsKeywordsPredicate(
+                    Arrays.stream(emailKeywords).toList());
             predicates.add(emailPred);
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            String address = argMultimap.getValue(PREFIX_ADDRESS).get();
-            Predicate<Person> addressPred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(address),
-                    Person::getAddress);
+            String address = argMultimap.getValue(PREFIX_ADDRESS).get().trim();
+            String[] addressKeywords = address.split("\\s+");
+            Predicate<Person> addressPred = new AddressContainsKeywordsPredicate(
+                    Arrays.stream(addressKeywords).toList());
+
             predicates.add(addressPred);
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
-            String telegram = argMultimap.getValue(PREFIX_TELEGRAM).get();
-            Predicate<Person> telegramPred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(telegram),
-                    Person::getTelegramUsername);
+            String telegram = argMultimap.getValue(PREFIX_TELEGRAM).get().trim();
+            String[] telegramKeywords = telegram.split("\\s+");
+            Predicate<Person> telegramPred = new TelegramContainsKeywordsPredicate(
+                    Arrays.stream(telegramKeywords).toList());
             predicates.add(telegramPred);
         }
         //role have to use separate predicate
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            String roles = argMultimap.getValue(PREFIX_ROLE).get();
+            String roles = argMultimap.getValue(PREFIX_ROLE).get().trim();
             // map each word in String roles to a Role object
 
-            List<Role> roleList = Arrays.stream(roles.split("\\s+"))
-                    .filter(RoleHandler::isValidRoleName) // Filter valid roles
-                    .map(role -> {
-                        try {
-                            logger.info(String.format("Role: %s", role));
-                            return RoleHandler.getRole(role);
-                        } catch (InvalidRoleException e) {
-                            logger.warning(String.format("Invalid role, should not occur with filter: %s", role));
-                            throw new RuntimeException("Invalid role: " + role, e);
-                        }
-                    })
-                    .collect(Collectors.toList());
+
+            Set<Role> roleSet = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
+            List<Role> roleList = roleSet.stream().collect(Collectors.toList());
+
             Predicate<Person> rolePred = new PersonIsRolePredicate(roleList);
             predicates.add(rolePred);
+        }
+        if (predicates.isEmpty()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    SearchModeSearchCommand.MESSAGE_USAGE));
         }
         return new SearchModeSearchCommand(predicates);
     }
