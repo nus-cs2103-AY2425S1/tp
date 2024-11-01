@@ -168,7 +168,7 @@ Format: `delete_session s/NAME m/INDEX...`
 
 * Deletes the session with the specified `NAME`.
 * The index (`INDEX`) refers to the index number shown in the displayed member list and **must be a positive integer** (1, 2, 3, …).
-* If one or more `INDEX` values are provided, the session will be deleted only for those members.
+* The session will be deleted only for those members whose `INDEX` values are provided.
 
 #### Examples:
 * `list_members` followed by `delete_session s/Rehearsal m/1 m/3` Deletes the session named "Rehearsal" for the members at indexes 1 and 3 in the displayed list.
