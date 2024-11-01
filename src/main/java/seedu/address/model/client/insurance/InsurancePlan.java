@@ -103,13 +103,8 @@ public abstract class InsurancePlan {
             return true;
         } else if (other instanceof InsurancePlan) {
             InsurancePlan otherInsurancePlan = (InsurancePlan) other;
-            if (otherInsurancePlan.insurancePlanId != this.insurancePlanId) {
-                return false;
-            }
-            if (!otherInsurancePlan.claims.equals(this.claims)) {
-                return false;
-            }
-            return true;
+            return this.insurancePlanId == otherInsurancePlan.insurancePlanId
+                    && this.claims.equals(otherInsurancePlan.claims);
         }
         return false;
     }
