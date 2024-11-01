@@ -133,8 +133,8 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
 
         @Override
         public String toString() {
-            return this.toDeletes.stream().sorted().toList() + " "
-                    + this.toDeleteAnyRoles.stream().sorted().toList();
+            // note that deletion order should be preserved, so we can't sort the list
+            return this.toDeletes + " " + this.toDeleteAnyRoles;
         }
     }
 }

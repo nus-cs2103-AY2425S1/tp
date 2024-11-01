@@ -107,7 +107,8 @@ public class AddModuleRoleOperation extends EditModuleRoleOperation {
 
         @Override
         public String toString() {
-            return this.toAdds.stream().sorted().toList().toString();
+            // note that the addition order matters, so we can't sort the list
+            return this.toAdds.toString();
         }
     }
 }
