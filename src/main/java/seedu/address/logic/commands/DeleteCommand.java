@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
             + "identified by the index number used in the displayed emergency contact list.\n"
             + "Parameters: INDEX (must be a positive integer) [" + PREFIX_EMERGENCY_CONTACT_TO_EDIT
             + "EMERGENCY CONTACT INDEX (must be a positive integer)]\n"
-            + "Example: " + COMMAND_WORD + " 1 1";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_EMERGENCY_CONTACT_TO_EDIT + "1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
