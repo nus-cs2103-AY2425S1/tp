@@ -81,4 +81,17 @@ public class DeleteModuleRoleDescriptorTest {
         assertEquals(expectedModuleRolePairList1, descriptor.getToDeletes());
         assertEquals(expectedModuleCodeList1, descriptor.getToDeleteAnyRoles());
     }
+
+    @Test
+    public void copyConstructor() {
+        DeleteModuleRoleDescriptor descriptor = new DeleteModuleRoleDescriptor(
+                List.of(
+                        new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+                        new ModuleRolePair(new ModuleCode("CS2103T"), RoleType.TUTOR)
+                ),
+                List.of(new ModuleCode("CS2103T"), new ModuleCode("MA1522"))
+        );
+        DeleteModuleRoleDescriptor copy = new DeleteModuleRoleDescriptor(descriptor);
+        assertEquals(descriptor, copy);
+    }
 }

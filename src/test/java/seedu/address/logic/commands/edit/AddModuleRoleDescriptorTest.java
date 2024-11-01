@@ -75,4 +75,16 @@ public class AddModuleRoleDescriptorTest {
         assertEquals(expected2, descriptor);
         assertEquals(expectedList2, descriptor.getToAdds());
     }
+
+    @Test
+    public void copyConstructor() {
+        AddModuleRoleDescriptor descriptor = new AddModuleRoleDescriptor(
+                List.of(
+                        new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+                        new ModuleRolePair(new ModuleCode("CS2103T"), RoleType.TUTOR)
+                )
+        );
+        AddModuleRoleDescriptor copy = new AddModuleRoleDescriptor(descriptor);
+        assertEquals(descriptor, copy);
+    }
 }
