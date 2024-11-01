@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -177,7 +178,12 @@ public class AddCommandTest {
 
         @Override
         public void updateTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public Set<Tag> getTagsInUse() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -198,9 +204,23 @@ public class AddCommandTest {
         public boolean deleteTags(List<Tag> tag) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public boolean renameTag(Tag existingTag, String newName) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public boolean hasTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeTagFromPersons(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editTagInPersons(Tag existingTag, String newTagName) {
             throw new AssertionError("This method should not be called.");
         }
 

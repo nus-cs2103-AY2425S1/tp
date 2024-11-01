@@ -31,11 +31,11 @@
 }
 
 .label-header {
-    -fx-font-size: 24pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 42pt;
+    -fx-font-family: "Country Wedding";
+    -fx-font-style: italic;
     -fx-text-fill: black;
     -fx-opacity: 1;
-    -fx-font-weight: bold;
 }
 
 .label-subtitle {

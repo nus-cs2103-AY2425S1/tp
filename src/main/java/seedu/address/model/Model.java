@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -123,6 +124,15 @@ public interface Model {
     boolean deleteTags(List<Tag> tags);
 
     /**
+     * Renames a tag from the tag list.
+     *
+     * @param existingTag The tag to be renamed.
+     * @param newTagName The new name of the tag after renaming.
+     * @return true if the tag was successfully renamed.
+     */
+    boolean renameTag(Tag existingTag, String newTagName);
+
+    /**
      * Checks if a tag exists in the tag list.
      *
      * @param tag The tag to check for existence.
@@ -131,8 +141,25 @@ public interface Model {
     boolean hasTag(Tag tag);
 
     /**
+     * Returns a set of tags that are in use by the persons in the address book.
+     */
+    Set<Tag> getTagsInUse();
+
+    /**
+     * Removes the deleted {@code Tag} from all persons in the address book.
+     */
+    void removeTagFromPersons(Tag tag);
+
+    /**
+     * Edits the specified all persons in the address book with the tag.
+     * @param existingTag The existing tag to be renamed.
+     * @param newTagName The new tag name after renaming.
+     */
+    public void editTagInPersons(Tag existingTag, String newTagName);
+
+    /**
      * Checks if the size of the tag list is below or equal
-     * to the maximum size allowed.
+     * to the maximum size acceptable.
      *
      * @return true if the size is acceptable, false otherwise.
      */
