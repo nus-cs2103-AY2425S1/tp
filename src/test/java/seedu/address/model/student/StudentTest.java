@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_SUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_S4_NT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -99,7 +99,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(updatedAlice));
 
         // different lesson time -> returns false
-        updatedAlice = new StudentBuilder(ALICE).withLessonTimes(VALID_LESSON_TIME).build();
+        updatedAlice = new StudentBuilder(ALICE).withLessonTimes(VALID_LESSON_TIME_SUN).build();
         assertFalse(ALICE.equals(updatedAlice));
 
         // different subjects -> returns false

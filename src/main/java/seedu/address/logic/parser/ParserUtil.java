@@ -174,7 +174,7 @@ public class ParserUtil {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
         if (!Subject.isValidSubjectNameByLevel(level, trimmedSubject)) {
-            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Subject.getValidSubjectMessage());
         }
         return new Subject(trimmedSubject);
     }

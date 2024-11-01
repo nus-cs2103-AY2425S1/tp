@@ -63,6 +63,11 @@ public class Level {
         requireNonNull(year);
         requireNonNull(track);
 
+        // Check for NONE NONE as a valid input, but disallow other combinations with NONE
+        if (year.equals("NONE") || track.equals("NONE")) {
+            return year.equals("NONE") && track.equals("NONE");
+        }
+
         if (year.equalsIgnoreCase("S5")) {
             return track.equalsIgnoreCase("NA");
         }

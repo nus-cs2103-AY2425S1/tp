@@ -73,6 +73,8 @@ public class Subject {
      * Constructs a {@code Subject}.
      *
      * @param subjectName A valid subject name.
+     * @throws NullPointerException if subjectName is null.
+     * @throws IllegalArgumentException if subjectName is invalid.
      */
     public Subject(String subjectName) {
         requireNonNull(subjectName);
@@ -81,7 +83,11 @@ public class Subject {
     }
 
     /**
-     * Returns true if a given string is a valid subject name and correspondences to the correct level.
+     * Checks if a subject name is valid for a given level.
+     *
+     * @param level The level to validate against.
+     * @param subjectName The subject name to validate.
+     * @return true if subjectName is valid for the specified level, false otherwise.
      */
     public static boolean isValidSubjectNameByLevel(Level level, String subjectName) {
         requireNonNull(subjectName);
@@ -93,12 +99,37 @@ public class Subject {
                 .contains(Subjects.valueOf(subjectName.toUpperCase()));
     }
 
+    /**
+     * Retrieves the last generated validation message for valid subjects by level.
+     *
+     * @return The current validation message.
+     */
     public static String getValidSubjectMessage() {
         return messageValidSubjectsByLevel;
     }
 
     /**
-     * Returns true if a given string is a valid subject name.
+     * Retrieves the valid subject message for a given level.
+     *
+     * @param level The level for which to get valid subjects.
+     * @return A message listing valid subjects for the level, or a message indicating a level is required.
+     */
+    public static String getValidSubjectMessage(Level level) {
+        if (level == null || level.levelName.equals("NONE NONE")) {
+            return Subject.MESSAGE_LEVEL_NEEDED;
+        }
+
+        EnumSet<Subjects> validSubjects = validSubjectsByLevel.get(level);
+        messageValidSubjectsByLevel = String.format("%s %s: %s",
+                MESSAGE_VALID_SUBJECTS_BASE, level, validSubjects);
+        return messageValidSubjectsByLevel;
+    }
+
+    /**
+     * Checks if a given string is a valid subject name.
+     *
+     * @param subjectName The subject name to validate.
+     * @return true if subjectName is valid, false otherwise.
      */
     public static boolean isValidSubjectName(String subjectName) {
         requireNonNull(subjectName);
@@ -106,15 +137,19 @@ public class Subject {
     }
 
     /**
-     * Returns true if all subjects are valid according to the given level
-     * */
+     * Checks if all subjects in a set are valid for a given level.
+     *
+     * @param level The level to validate against.
+     * @param subjects A set of subjects to validate.
+     * @return true if all subjects are valid for the specified level, false otherwise.
+     */
     public static boolean isValidSubjectsByLevel(Level level, Set<Subject> subjects) {
         if (level == null || level.levelName.equals("NONE NONE")) {
             messageValidSubjectsByLevel = Subject.MESSAGE_LEVEL_NEEDED;
             return false;
         }
         EnumSet<Subjects> validSubjects = validSubjectsByLevel.get(level);
-        for (Subject s: subjects) {
+        for (Subject s : subjects) {
             if (!validSubjects.contains(Subjects.valueOf(s.subjectName))) {
                 messageValidSubjectsByLevel = String.format("%s %s: %s",
                         MESSAGE_VALID_SUBJECTS_BASE, level, validSubjects);
@@ -125,6 +160,12 @@ public class Subject {
         return true;
     }
 
+    /**
+     * Compares this subject to the specified object for equality.
+     *
+     * @param other The object to compare to.
+     * @return true if the specified object is equal to this subject, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -140,13 +181,20 @@ public class Subject {
         return subjectName.equals(otherSubject.subjectName);
     }
 
+    /**
+     * Returns the hash code for this subject.
+     *
+     * @return The hash code value of this subject.
+     */
     @Override
     public int hashCode() {
         return subjectName.hashCode();
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats this subject as a string for viewing.
+     *
+     * @return A string representation of this subject.
      */
     public String toString() {
         return '[' + subjectName + ']';

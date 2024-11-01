@@ -46,6 +46,20 @@ public class NameTest {
     }
 
     @Test
+    public void different_spacing_test() {
+        assertTrue((new Name("Valid      Name")).toString().equals("Valid Name"));
+        assertTrue((new Name("Valid Name       ")).toString().equals("Valid Name"));
+        assertTrue((new Name("Valid       Name     ")).toString().equals("Valid Name"));
+    }
+
+    @Test
+    public void differentCasingAndSpacingTest() {
+        assertTrue((new Name("VaLId    nAme")).toString().equals("Valid Name"));
+        assertTrue((new Name("ValiD NaME       ")).toString().equals("Valid Name"));
+        assertTrue((new Name("VALID       NamE     ")).toString().equals("Valid Name"));
+    }
+
+    @Test
     public void equals() {
         Name name = new Name("Valid Name");
 
