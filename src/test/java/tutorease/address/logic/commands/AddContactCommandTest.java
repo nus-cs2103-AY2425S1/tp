@@ -47,6 +47,7 @@ public class AddContactCommandTest {
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
+
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new StudentBuilder().build();
@@ -56,6 +57,31 @@ public class AddContactCommandTest {
         assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, ()
                 -> addContactCommand.execute(modelStub));
     }
+
+    @Test
+    public void execute_duplicatePhone_throwsCommandException() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person personWithDuplicatePhone = new StudentBuilder().withPhone("12345678").build();
+        Person newPerson = new StudentBuilder().withName("Alice").withPhone("12345678").build(); // Same phone number
+        CommandResult commandResult = new AddContactCommand(newPerson).execute(modelStub);
+
+        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PHONE, () ->
+                new AddContactCommand(personWithDuplicatePhone).execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateEmail_throwsCommandException() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person personWithDuplicateEmail = new StudentBuilder().withPhone("12345678")
+                .withEmail("test@example.com").build();
+        Person newPerson = new StudentBuilder().withName("Bob")
+                .withEmail("test@example.com").build(); // Same email address, but different phones and names.
+        CommandResult commandResult = new AddContactCommand(newPerson).execute(modelStub);
+
+        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_EMAIL, () ->
+                new AddContactCommand(personWithDuplicateEmail).execute(modelStub));
+    }
+
 
     @Test
     public void equals() {
