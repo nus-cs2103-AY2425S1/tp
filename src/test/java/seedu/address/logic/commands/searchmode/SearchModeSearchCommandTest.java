@@ -13,7 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.FieldContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
@@ -31,8 +31,8 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void execute_validPredicate_success() {
-        Predicate<Person> predicate = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Amy"), Person::getName);
+        Predicate<Person> predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
+
         SearchModeSearchCommand command = new SearchModeSearchCommand(predicate);
 
         model.updateFilteredPersonList(predicate);
@@ -44,8 +44,8 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void equals_samePredicate_returnsTrue() {
-        Predicate<Person> predicate = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Amy"), Person::getName);
+        Predicate<Person> predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
+
         SearchModeSearchCommand command1 = new SearchModeSearchCommand(predicate);
         SearchModeSearchCommand command2 = new SearchModeSearchCommand(predicate);
 
@@ -56,10 +56,8 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void equals_differentPredicate_returnsFalse() {
-        Predicate<Person> predicate1 = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Amy"), Person::getName);
-        Predicate<Person> predicate2 = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Bob"), Person::getName);
+        Predicate<Person> predicate1 = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
+        Predicate<Person> predicate2 = new NameContainsKeywordsPredicate(Collections.singletonList("Bob"));
         SearchModeSearchCommand command1 = new SearchModeSearchCommand(predicate1);
         SearchModeSearchCommand command2 = new SearchModeSearchCommand(predicate2);
 
@@ -68,8 +66,7 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void equals_differentObject_returnsFalse() {
-        Predicate<Person> predicate = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Amy"), Person::getName);
+        Predicate<Person> predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
         SearchModeSearchCommand command = new SearchModeSearchCommand(predicate);
 
         assertNotEquals(command, new Object());
@@ -77,8 +74,7 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void equals_null_returnsFalse() {
-        Predicate<Person> predicate = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Amy"), Person::getName);
+        Predicate<Person> predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
         SearchModeSearchCommand command = new SearchModeSearchCommand(predicate);
 
         assertNotEquals(command, null);
@@ -86,8 +82,7 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void execute_combinedPredicate_success() throws InvalidRoleException {
-        Predicate<Person> namePredicate = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Amy"), Person::getName);
+        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
         Predicate<Person> rolePredicate = new PersonIsRolePredicate(
                 Collections.singletonList(RoleHandler.getRole("vendor")));
         Predicate<Person> combinedPredicate = namePredicate.and(rolePredicate);
@@ -104,8 +99,7 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void execute_chainedPredicates_success() throws InvalidRoleException {
-        Predicate<Person> namePredicate = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Amy"), Person::getName);
+        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
         Predicate<Person> rolePredicate = new PersonIsRolePredicate(
                 Collections.singletonList(RoleHandler.getRole("vendor")));
         Predicate<Person> combinedPredicate = namePredicate.and(rolePredicate);
@@ -121,8 +115,7 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void execute_orPredicates_success() throws InvalidRoleException {
-        Predicate<Person> namePredicate = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Amy"), Person::getName);
+        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
         Predicate<Person> rolePredicate = new PersonIsRolePredicate(
                 Collections.singletonList(RoleHandler.getRole("vendor")));
         Predicate<Person> combinedPredicate = namePredicate.or(rolePredicate);
@@ -138,8 +131,7 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void execute_negatedPredicate_success() {
-        Predicate<Person> namePredicate = new FieldContainsKeywordsPredicate<>(
-                Collections.singletonList("Amy"), Person::getName);
+        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
         Predicate<Person> negatedPredicate = namePredicate.negate();
 
         SearchModeSearchCommand command = new SearchModeSearchCommand(negatedPredicate);

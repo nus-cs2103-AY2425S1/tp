@@ -17,10 +17,11 @@ import seedu.address.model.person.Person;
 public class SearchModeSearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches for all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Searches for all persons whose fields contain the specified keywords (case-insensitive) "
+            + "and displays them as a list with index numbers.\n"
+            + "Parameters: [Flag] [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " n/Amy Bob Charlie";
 
     public static final String MESSAGE_SUCCESS = "Added all Persons who fit search parameter";
 

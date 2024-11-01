@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -28,8 +27,6 @@ import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.person.predicates.PhoneNumberContainsKeywordPredicate;
 import seedu.address.model.person.predicates.TelegramContainsKeywordsPredicate;
 import seedu.address.model.role.Role;
-import seedu.address.model.role.RoleHandler;
-import seedu.address.model.role.exceptions.InvalidRoleException;
 
 /**
  * Parses input arguments and creates a new SearchModeSearchCommand object
@@ -86,20 +83,15 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
             String roles = argMultimap.getValue(PREFIX_ROLE).get();
             // map each word in String roles to a Role object
 
-            List<Role> roleList = Arrays.stream(roles.split("\\s+"))
-                    .filter(RoleHandler::isValidRoleName) // Filter valid roles
-                    .map(role -> {
-                        try {
-                            logger.info(String.format("Role: %s", role));
-                            return RoleHandler.getRole(role);
-                        } catch (InvalidRoleException e) {
-                            logger.warning(String.format("Invalid role, should not occur with filter: %s", role));
-                            throw new RuntimeException("Invalid role: " + role, e);
-                        }
-                    })
-                    .collect(Collectors.toList());
+
+            Set<Role> roleSet = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
+            List<Role> roleList = roleSet.stream().collect(Collectors.toList());
+
             Predicate<Person> rolePred = new PersonIsRolePredicate(roleList);
             predicates.add(rolePred);
+        }
+        if (predicates.isEmpty()) {
+            throw new ParseException(SearchModeSearchCommand.MESSAGE_USAGE);
         }
         return new SearchModeSearchCommand(predicates);
     }
