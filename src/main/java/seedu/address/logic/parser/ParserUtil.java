@@ -8,7 +8,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
 import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.meeting.MeetingDate;
@@ -136,22 +135,6 @@ public class ParserUtil {
             throw new ParseException(Bid.MESSAGE_CONSTRAINTS);
         }
         return new Bid(trimmedBid);
-    }
-
-
-    /**
-     * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code name} is invalid.
-     */
-    public static seedu.address.model.client.Name parseClientName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-        return new seedu.address.model.client.Name(trimmedName);
     }
 
     /**
