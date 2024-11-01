@@ -14,14 +14,15 @@ import seedu.address.model.tag.Tag;
 import seedu.address.ui.UserConfirmation;
 
 /**
- * Adds a new predefined tag.
+ * Deletes specified tags from the tag list and removes them from any persons tagged with these tags.
+ * Prompts the user for confirmation if the tags are used to tag existing persons.
  */
 public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes existing tag(s) in tag list(case insensitive). Maximum of 50 alphanumeric characters,"
-            + "spaces, parenthesis and apostrophes per tag.\n"
+            + ": Deletes existing tag(s) from the tag list (case insensitive). Each tag can contain a maximum of "
+            + "50 alphanumeric characters, spaces, parentheses, and apostrophes.\n"
             + "Parameters: " + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
@@ -37,19 +38,32 @@ public class DeleteTagCommand extends Command {
     private final List<Tag> tags;
 
     /**
-     * @param tags The tag object to be added.
+     * Constructs a DeleteTagCommand to delete the specified tags.
+     *
+     * @param tags The tags to be deleted.
      */
     public DeleteTagCommand(List<Tag> tags) {
         requireAllNonNull(tags);
         this.tags = tags;
     }
 
+    /**
+     * Removes the specified tags from all persons who are tagged with these tags.
+     *
+     * @param model Model that contains the list of persons to remove tags from.
+     */
     private void removeTagsFromPersons(Model model) {
         for (Tag tag : tags) {
             model.removeTagFromPersons(tag);
         }
     }
 
+    /**
+     * Creates and returns a CommandResult based on the success of the deletion.
+     *
+     * @param isSuccessful Boolean indicating if the deletion was successful.
+     * @return CommandResult indicating the outcome of the deletion attempt.
+     */
     private CommandResult createCommandResult(boolean isSuccessful) {
         if (!isSuccessful) {
             return new CommandResult(MESSAGE_NONEXISTENT);
@@ -57,6 +71,14 @@ public class DeleteTagCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Executes the DeleteTagCommand by deleting the specified tags from the tag list in the model.
+     * If the tags are currently being used to tag any persons, the user is prompted for confirmation.
+     *
+     * @param model Model containing the tags and persons to operate on.
+     * @return CommandResult indicating the result of the command.
+     * @throws CommandException If the user cancels the deletion confirmation.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
@@ -65,7 +87,7 @@ public class DeleteTagCommand extends Command {
         Set<Tag> tagsInUse = model.getTagsInUse();
 
         if (!tagsInUse.isEmpty()) {
-            // getUserConfirmation(tagsInUse);
+            getUserConfirmation(tagsInUse);
         }
 
         boolean isSuccessful = model.deleteTags(tags);
@@ -74,6 +96,12 @@ public class DeleteTagCommand extends Command {
         return createCommandResult(isSuccessful);
     }
 
+    /**
+     * Prompts the user for confirmation before deleting tags that are currently in use by any persons.
+     *
+     * @param tagsInUse Set of tags that are in use by persons in the model.
+     * @throws CommandException If the user chooses to cancel the deletion.
+     */
     private void getUserConfirmation(Set<Tag> tagsInUse) throws CommandException {
         String tagsInUseString = tagsInUse.stream()
                 .map(Tag::toString)
@@ -86,6 +114,12 @@ public class DeleteTagCommand extends Command {
         }
     }
 
+    /**
+     * Compares this DeleteTagCommand to another object for equality.
+     *
+     * @param other The other object to compare with.
+     * @return True if the other object is a DeleteTagCommand with the same tags.
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -100,6 +134,11 @@ public class DeleteTagCommand extends Command {
         return tags.equals(otherCommand.tags);
     }
 
+    /**
+     * Returns a string representation of this DeleteTagCommand for debugging purposes.
+     *
+     * @return String representation of the command.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

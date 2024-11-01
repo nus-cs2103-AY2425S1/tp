@@ -264,10 +264,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
-    @Override
-    public String toString() {
-        return tagList.toString();
-    }
-
 }
