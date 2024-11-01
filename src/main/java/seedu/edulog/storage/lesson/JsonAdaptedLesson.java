@@ -2,6 +2,7 @@ package seedu.edulog.storage.lesson;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -68,7 +69,6 @@ public class JsonAdaptedLesson {
         Description modelDescription = new Description(description);
 
         // Start day
-
         if (startDay == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
         }
@@ -78,31 +78,10 @@ public class JsonAdaptedLesson {
 
         final Day modelStartDay = new Day(startDay);
 
-        // Start time
-        if (startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "start time"));
-        }
+        List<LessonTime> lessonTimes = LessonTimeUtil.toLessonTimes(startTime, endTime);
 
-        if (!LessonTime.checkValidLessonTime(startTime)) {
-            throw new IllegalValueException(LessonTime.NOT_24H_FORMAT);
-        }
-
-        // End time
-        if (endTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "end time"));
-        }
-        if (!LessonTime.checkValidLessonTime(endTime)) {
-            throw new IllegalValueException(LessonTime.NOT_24H_FORMAT);
-        }
-
-        // Start time-end time interactions
-        if (!LessonTime.checkValidLessonTimes(startTime, endTime)) {
-            throw new IllegalValueException(LessonTime.NO_SAME_TIME);
-        }
-
-        final LessonTime modelStartTime = new LessonTime(startTime);
-        final LessonTime modelEndTime = new LessonTime(endTime);
-
+        final LessonTime modelStartTime = lessonTimes.get(0);
+        final LessonTime modelEndTime = lessonTimes.get(1);
 
         return new Lesson(modelDescription, modelStartDay, modelStartTime, modelEndTime);
     }
