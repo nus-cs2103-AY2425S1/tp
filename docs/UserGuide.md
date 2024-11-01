@@ -120,9 +120,9 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-1. The deadline could be the date you need to submit the project to the client <br>
-2. The deadline could be the date by which you need to follow up with a potential client <br>
-3. You may hover over the Payment Status icon to view the Payment Status as text
+<br>1. The deadline could be the date you need to submit the project to the client. <br>
+2. The deadline could instead be the date by which you need to follow up with a potential client. <br>
+3. You may hover over the Payment Status Icon to view the payment status as text.
 </div>
 
 ### Update Client Details : `edit`
