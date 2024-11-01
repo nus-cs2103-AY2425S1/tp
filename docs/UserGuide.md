@@ -222,6 +222,7 @@ Example:
 The following is an example of a valid JSON file content. 
 
 ````
+{
 "persons" : [ {
     "name" : "Alicia Pauline",
     "phone" : "94351253",
@@ -253,9 +254,10 @@ The following is an example of a valid JSON file content.
     },
     "starredStatus" : "true"
   }] 
+  }
 ````
 
-- All patient data must be enclosed with `"persons" : []`
+- All patient data must be enclosed with `{"persons" : []}`
 
 - Each patient data must be enclosed with `{}` and seperated by a comma `,`
 
@@ -276,8 +278,10 @@ The following is an example of a valid JSON file content.
         "remark" : [ ],
         "medication" : [ ]
       },
+      "starredStatus" : " "
+    },
   ````
-
+  
   
 
 
