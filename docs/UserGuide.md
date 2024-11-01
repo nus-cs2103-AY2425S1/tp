@@ -7,8 +7,7 @@
 # WedLinker User Guide
 
 WedLinker is your **essential desktop app for managing wedding-related contacts**, designed specifically for professional wedding planners.
-**With a powerful Command Line Interface (CLI)**, WedLinker is optimised for fast typers, simplifying your contact management tasks 
-through quick, text-based commands. This means you can accomplish your tasks faster than with traditional GUI apps, giving you more time to focus on what matters most—creating memorable experiences for your clients.
+**With a powerful Command Line Interface (CLI)**, WedLinker streamlines contact management through quick, intuitive commands. This means you can accomplish your tasks faster than with traditional GUI apps, giving you more time to focus on what matters most—creating memorable experiences for your clients.
 
 While WedLinker excels with its CLI for speed, it still offers the valuable visual elements of a Graphical User Interface (GUI). The GUI provides an organised and intuitive layout, making it easy to visualise your contacts, weddings, and tasks at a glance.
 This combination of efficiency and clarity ensures that you can manage your wedding planning responsibilities with ease and precision.
@@ -142,7 +141,6 @@ Examples:
 * `find t/friends` returns all Contacts tagged with Friends <br>
 ![result for `find t/friends](images/findCommandTag.png)
 * `find w/Amy's Wedding` returns all Contacts involved with Amy's Wedding <br>
-![result for 'find w/Casey'](images/findCommandWedding.png)
 
 ### Clearing all entries : `clear`
 
