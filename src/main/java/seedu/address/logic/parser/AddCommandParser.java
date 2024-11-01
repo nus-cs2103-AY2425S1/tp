@@ -68,9 +68,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Fees fees = ParserUtil.parseFees(argMultimap.getValue(PREFIX_FEES).get());
-
-        // multi-value prefixes
         ClassId classId = ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASSID).get());
+        
+        // multi-value prefixes
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         // prefix that cannot be set on Add
