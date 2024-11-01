@@ -15,9 +15,9 @@ import seedu.address.model.client.insurance.claim.Claim;
  */
 public class InsurancePlansManager {
 
-    public static final String DUPLICATE_PLAN_DETECTED_MESSAGE = "This plan with id: %1$s, "
+    public static final String DUPLICATE_PLAN_DETECTED_MESSAGE = "The plan with id: %1$s, "
             + "has already been added to this client: %2$s";
-    public static final String PLAN_NOT_DETECTED_MESSAGE = "This plan with id: %1$s, "
+    public static final String PLAN_NOT_DETECTED_MESSAGE = "The plan with id: %1$s, "
             + "has not been added to this client: %2$s";
     public static final String DUPLICATE_CLAIM_ID_MESSAGE = "A claim with id: %1$s "
             + "has already been added to this client: %2$s";
