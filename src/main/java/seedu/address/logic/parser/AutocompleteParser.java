@@ -232,7 +232,7 @@ public class AutocompleteParser {
         int index = caretPosition - 1;
         while (index >= 0 && !Character.isWhitespace(text.charAt(index))) {
             index--;
-        };
+        }
 
         return index;
     }
@@ -242,7 +242,7 @@ public class AutocompleteParser {
         while (endIndex < text.length()
                 && !Character.isWhitespace(text.charAt(endIndex))) {
             endIndex++;
-        };
+        }
 
         return endIndex;
     }
