@@ -445,7 +445,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success (after confirming with y/yes):**
     - Message:
       ```
-      client <INDEX> has been deleted.
+      Client <INDEX> has been deleted.
       ```
 - **On Cancellation (if confirmation is declined):**
     - Message:
