@@ -38,23 +38,23 @@ public class Lesson {
     }
 
     /**
-     * Getter method that attains the LocalTime representation of the start time for time-based methods. <br> <br>
+     * Getter method that attains the lesson's start time. <br> <br>
      * NOTE: Avoid breaking abstraction here - do not call this getter function for non-test code.
      * If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
      * instead, which ensures that times can be presented and stored in an acceptable 24-hour format.
      */
-    public LocalTime getStartTime() {
-        return startTime.getTime();
+    public LessonTime getStartTime() {
+        return startTime;
     }
 
     /**
-     * Getter method that attains the LocalTime representation of the end time for time-based methods. <br> <br>
+     * Getter method that attains the lesson's end time. <br> <br>
      * NOTE: Avoid breaking abstraction here - do not call this getter function for non-test code.
      * If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
      * instead, which ensures that times can be presented and stored in an acceptable 24-hour format.
      */
-    public LocalTime getEndTime() {
-        return endTime.getTime();
+    public LessonTime getEndTime() {
+        return endTime;
     }
 
     /**
