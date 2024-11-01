@@ -18,7 +18,11 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Static counter for generating unique IDs
+    private static int personCounter = 0;
+
     // Identity fields
+    private final int id; // Unique ID for each Person
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -32,10 +36,19 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email,
+    public Person(int id, Name name, Phone phone, Email email,
                   Address address, Set<Tag> tags, Remark remark,
                   UniqueListingList listings) {
         requireAllNonNull(name, phone, email, address, tags);
+        if (id > 0) {
+            this.id = id;
+            if (id > personCounter) {
+                personCounter = id;
+            }
+        } else {
+            this.id = ++personCounter;
+        }
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -62,19 +75,25 @@ public class Person {
     }
 
     /**
-     * A constructor for creating Person objects without a listing
-     * will create an empty UniqueListingList internally
+     * Constructor without an ID parameter, increments counter automatically.
+     */
+    public Person(Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Remark remark,
+                  UniqueListingList listings) {
+        this(++personCounter, name, phone, email, address, tags, remark, listings);
+    }
+
+    /**
+     * Constructor for creating Person objects without a listing
+     * creates an empty UniqueListingList internally.
      */
     public Person(Name name, Phone phone, Email email,
                   Address address, Set<Tag> tags, Remark remark) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.remark = remark;
-        this.listings = new UniqueListingList();
+        this(name, phone, email, address, tags, remark, new UniqueListingList());
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Name getName() {
@@ -149,13 +168,14 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(id, name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
 
         return new ToStringBuilder(this)
+                .add("id", id)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)

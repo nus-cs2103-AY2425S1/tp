@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.ListingAddCommand.HELP_LISTING_ADD_CO
 import static seedu.address.logic.commands.ListingDeleteCommand.HELP_LISTING_DELETE_COMMAND;
 import static seedu.address.logic.commands.RemarkCommand.HELP_REMARK_COMMAND;
 import static seedu.address.logic.commands.ShowCommand.HELP_SHOW_COMMAND;
+import static seedu.address.logic.commands.SortCommand.HELP_SORT_COMMAND;
 
 import java.util.logging.Logger;
 
@@ -55,6 +56,8 @@ public class HelpWindow extends UiPart<Stage> {
             + HELP_LISTING_DELETE_COMMAND
             + "\n\n"
             + HELP_SHOW_COMMAND
+            + "\n\n"
+            + HELP_SORT_COMMAND
             + "\n\n"
             + HELP_EXPORT_COMMAND
             + "\n\n"

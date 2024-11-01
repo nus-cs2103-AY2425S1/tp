@@ -273,6 +273,7 @@ Examples:
 
 - `listing delete 1 1` deletes the `1`st property listing from the person with index `1`
 
+
 ### Exporting your contacts : `export`
 
 Exports your contacts and their relevant data to a Comma-Separated Value (CSV) file format.
@@ -281,6 +282,12 @@ Format: `export`
 
 - Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
 - If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
+
+### Sorting all persons : `sort`
+
+Sorts the list of all persons in the address book by name in alphabetical order.
+
+Format: sort
 
 ### Saving the data
 
@@ -333,6 +340,7 @@ _Details coming soon ..._
 | **Add Listing**    | `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
 | **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                            |
 | **Show**           | `show INDEX`<br> e.g., `show 1`                                                                                                                                                 |
+| **Sort**           | `sort`                                                                                                                                                                          |
 | **Help**           | `help`                                                                                                                                                                          |
 | **Remark**         | `remark INDEX r/[REMARKS]`                                                                                                                                                      |
 | **Export**         | `export`                                                                                                                                                                        |
