@@ -59,6 +59,14 @@ public class ArchivedAddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasArchivedPerson(Person person) {
+        requireNonNull(person);
+        return persons.contains(person);
+    }
+
+    /**
      * Adds a person to the archived address book.
      * The person must not already exist in the archived address book.
      */

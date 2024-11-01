@@ -147,6 +147,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasArchivedPerson(Person person) {
+        requireNonNull(person);
+        return archivedAddressBook.hasArchivedPerson(person);
+    }
+
+    @Override
     public BooleanProperty showingArchived() {
         return showingArchived;
     }
@@ -160,10 +166,8 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         if (isArchivedList) {
-            LogsCenter.getLogger(MainApp.class).info("entered");
             return filteredArchivedPersons;
         } else {
-            LogsCenter.getLogger(MainApp.class).info("falied");
             return sortedPersons;
         }
     }
@@ -172,10 +176,8 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         if (isArchivedList) {
-            LogsCenter.getLogger(MainApp.class).info("update archived");
             filteredArchivedPersons.setPredicate(predicate);
         } else {
-            LogsCenter.getLogger(MainApp.class).info("normal update");
             filteredPersons.setPredicate(predicate); // Filter the list based on the predicate
         }
     }
