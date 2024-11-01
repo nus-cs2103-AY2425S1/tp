@@ -95,7 +95,7 @@ public class EditGuestCommand extends Command {
         List<Person> lastShownList = model.getFilteredGuestList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
         }
 
         Guest guestToEdit = (Guest) lastShownList.get(index.getZeroBased());

@@ -47,7 +47,7 @@ public class DeleteGuestCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGuestList().size() + 1);
         DeleteGuestCommand deleteGuestCommand = new DeleteGuestCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteGuestCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteGuestCommand, model, Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class DeleteGuestCommandTest {
 
         DeleteGuestCommand deleteGuestCommand = new DeleteGuestCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteGuestCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteGuestCommand, model, Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
     }
 
     @Test

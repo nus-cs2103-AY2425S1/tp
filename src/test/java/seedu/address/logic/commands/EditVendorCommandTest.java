@@ -110,7 +110,7 @@ public class EditVendorCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredVendorList().size() + 1);
         EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditVendorCommand editVendorCommand = new EditVendorCommand(outOfBoundIndex, descriptor);
-        assertCommandFailure(editVendorCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editVendorCommand, model, Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
 
     /**
@@ -125,7 +125,7 @@ public class EditVendorCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
         EditVendorCommand editVendorCommand = new EditVendorCommand(outOfBoundIndex,
                 new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB).build());
-        assertCommandFailure(editVendorCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editVendorCommand, model, Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
 
     @Test
