@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
@@ -24,15 +24,15 @@ import seedu.address.testutil.TypicalClients;
 
 public class ListPoliciesCommandTest {
 
-    // one index greater than the last index in the typical address book
+    // one index greater than the last index in the typical Prudy
     private static final Index INDEX_OUT_OF_BOUNDS = Index.fromOneBased(TypicalClients
-            .getTypicalAddressBook().getClientList().size() + 1);
+            .getTypicalPrudy().getClientList().size() + 1);
 
     private Model model;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalPrudy(), new UserPrefs());
     }
 
     @Test

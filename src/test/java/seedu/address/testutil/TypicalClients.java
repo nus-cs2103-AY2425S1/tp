@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.Prudy;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.EducationPolicy;
@@ -75,14 +75,14 @@ public class TypicalClients {
     private TypicalClients() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical clients.
+     * Returns an {@code Prudy} with all the typical clients.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Prudy getTypicalPrudy() {
+        Prudy prudy = new Prudy();
         for (Client client : getTypicalClients()) {
-            ab.addClient(client);
+            prudy.addClient(client);
         }
-        return ab;
+        return prudy;
     }
 
     public static List<Client> getTypicalClients() {

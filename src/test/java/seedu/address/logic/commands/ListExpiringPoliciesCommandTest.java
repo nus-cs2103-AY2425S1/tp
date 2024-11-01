@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPrudy;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.claim.ClaimList;
 import seedu.address.model.client.Client;
@@ -32,7 +32,7 @@ public class ListExpiringPoliciesCommandTest {
     @BeforeEach
     public void setUp() {
         // reset model before each test to ensure isolation between tests
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalPrudy(), new UserPrefs());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ListExpiringPoliciesCommandTest {
     }
     @Test
     public void execute_expiringPoliciesFound_showsExpiringPolicies() {
-        Model modelWithExpiringPolicies = new ModelManager(getTypicalAddressBookWithExpiringPolicies(),
+        Model modelWithExpiringPolicies = new ModelManager(getTypicalPrudyWithExpiringPolicies(),
                 new UserPrefs());
 
         // dynamically calculate the expected expiry date (25 days from now)
@@ -63,7 +63,7 @@ public class ListExpiringPoliciesCommandTest {
 
     @Test
     public void execute_customDaysSpecified_showsExpiringPolicies() {
-        Model modelWithExpiringPolicies = new ModelManager(getTypicalAddressBookWithExpiringPolicies(),
+        Model modelWithExpiringPolicies = new ModelManager(getTypicalPrudyWithExpiringPolicies(),
                 new UserPrefs());
 
         LocalDate expiringDateAlice = LocalDate.now().plusDays(25);
@@ -108,9 +108,9 @@ public class ListExpiringPoliciesCommandTest {
         assertFalse(command1.equals(new ClearCommand()));
     }
 
-    private ReadOnlyAddressBook getTypicalAddressBookWithExpiringPolicies() {
+    private ReadOnlyPrudy getTypicalPrudyWithExpiringPolicies() {
         // reset model to prevent any side effects across tests
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
 
         Client client = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         PolicySet policies = new PolicySet(); // Avoid mutating original policies
@@ -126,6 +126,6 @@ public class ListExpiringPoliciesCommandTest {
                 client.getAddress(), client.getTags(), policies);
 
         model.setClient(client, updatedClient);
-        return model.getAddressBook();
+        return model.getPrudy();
     }
 }

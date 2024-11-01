@@ -20,7 +20,7 @@ import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Deletes a claim from an existing policy in the address book.
+ * Deletes a claim from an existing policy in Prudy.
  * This command allows the user to remove a specified claim from a policy type of a client identified by their index.
  * If no matching client, policy type, or claim is found, an appropriate error message is returned.
  */

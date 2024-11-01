@@ -30,7 +30,7 @@ import seedu.address.model.policy.PolicySet;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing client in the address book.
+ * Edits the details of an existing client in Prudy.
  */
 public class EditCommand extends Command {
 
@@ -51,7 +51,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in Prudy.";
 
     private final Index index;
     private final EditClientDescriptor editClientDescriptor;

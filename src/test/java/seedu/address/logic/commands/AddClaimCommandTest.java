@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import org.junit.jupiter.api.Assertions;
@@ -59,7 +59,7 @@ public class AddClaimCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
         AddClaimCommand addClaimCommand = new AddClaimCommand(outOfBoundIndex, validClaim, validPolicyType);
         assertCommandFailure(addClaimCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);

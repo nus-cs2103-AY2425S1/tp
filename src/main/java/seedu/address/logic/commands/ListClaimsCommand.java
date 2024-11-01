@@ -16,7 +16,7 @@ import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Lists all claims of a specified policy type for a client in the address book.
+ * Lists all claims of a specified policy type for a client in Prudy.
  * If there are no claims under the specified policy type, or if the client index is invalid,
  * an appropriate message will be shown.
  */
@@ -42,7 +42,7 @@ public class ListClaimsCommand extends Command {
 
     /**
      * Creates a ListClaimsCommand to list claims for a specific policy type
-     * associated with a specified client in the address book.
+     * associated with a specified client in Prudy.
      *
      * @param clientIndex The index of the client in the filtered client list.
      * @param policyType The type of the policy whose claims are to be listed.

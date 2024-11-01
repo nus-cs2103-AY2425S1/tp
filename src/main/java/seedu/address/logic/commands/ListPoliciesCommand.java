@@ -12,7 +12,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 
 /**
- * Lists all policies of a specified client in the address book.
+ * Lists all policies of a specified client in Prudy.
  */
 public class ListPoliciesCommand extends Command {
 

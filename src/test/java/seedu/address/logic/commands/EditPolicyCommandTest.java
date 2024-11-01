@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
@@ -36,7 +36,7 @@ import seedu.address.model.policy.PremiumAmount;
  * Contains tests for EditPolicyCommand.
  */
 public class EditPolicyCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
     private final PolicyType validPolicyType = PolicyType.LIFE;
     private final PremiumAmount validPremiumAmount = new PremiumAmount("2000");
     private final CoverageAmount validCoverageAmount = new CoverageAmount("50000");

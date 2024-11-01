@@ -53,9 +53,9 @@ import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
-public class AddressBookParserTest {
+public class PrudyParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final PrudyParser parser = new PrudyParser();
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -102,7 +102,7 @@ public class AddressBookParserTest {
         Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
         FindCommand expectedCommand = new FindCommand(combinedPredicate);
 
-        // Parse command using AddressBookParser
+        // Parse command using PrudyParser
         Command command = parser.parseCommand(input);
 
         // Assert that the parsed command matches the expected command

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Prudy;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.PolicySet;
@@ -27,7 +27,7 @@ import seedu.address.testutil.ClientBuilder;
 
 
 public class DeletePolicyCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
 
     @Test
     public void execute_deletePolicyUnfilteredList_success() {
@@ -44,7 +44,7 @@ public class DeletePolicyCommandTest {
                 Messages.formatPolicies(expectedPolicies));
 
         // Create a new expected model with the client having the "health" policy (i.e., the "life" policy is removed)
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Prudy(model.getPrudy()), new UserPrefs());
         expectedModel.setClient(secondClient, editedClient);
 
         // Act and Assert: Execute the command and compare results

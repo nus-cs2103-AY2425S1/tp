@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 
 /**
- * Finds and lists all clients in address book that match the specified criteria.
+ * Finds and lists all clients Prudy that match the specified criteria.
  */
 public class FindCommand extends Command {
 

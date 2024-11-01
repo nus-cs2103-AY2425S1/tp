@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.testutil.ClientBuilder;
 
-public class AddressBookTest {
+public class PrudyTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Prudy prudy = new Prudy();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getClientList());
+        assertEquals(Collections.emptyList(), prudy.getClientList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> prudy.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyPrudy_replacesData() {
+        Prudy newData = getTypicalPrudy();
+        prudy.resetData(newData);
+        assertEquals(newData, prudy);
     }
 
     @Test
@@ -49,53 +49,53 @@ public class AddressBookTest {
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Client> newClients = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newClients);
+        PrudyStub newData = new PrudyStub(newClients);
 
-        assertThrows(DuplicateClientException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateClientException.class, () -> prudy.resetData(newData));
     }
 
     @Test
     public void hasClient_nullClient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasClient(null));
+        assertThrows(NullPointerException.class, () -> prudy.hasClient(null));
     }
 
     @Test
-    public void hasClient_clientNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasClient(ALICE));
+    public void hasClient_clientNotInPrudy_returnsFalse() {
+        assertFalse(prudy.hasClient(ALICE));
     }
 
     @Test
-    public void hasClient_clientInAddressBook_returnsTrue() {
-        addressBook.addClient(ALICE);
-        assertTrue(addressBook.hasClient(ALICE));
+    public void hasClient_clientInPrudy_returnsTrue() {
+        prudy.addClient(ALICE);
+        assertTrue(prudy.hasClient(ALICE));
     }
 
     @Test
-    public void hasClient_clientWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addClient(ALICE);
+    public void hasClient_clientWithSameIdentityFieldsInPrudy_returnsTrue() {
+        prudy.addClient(ALICE);
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasClient(editedAlice));
+        assertTrue(prudy.hasClient(editedAlice));
     }
 
     @Test
     public void getClientList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getClientList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> prudy.getClientList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{clients=" + addressBook.getClientList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = Prudy.class.getCanonicalName() + "{clients=" + prudy.getClientList() + "}";
+        assertEquals(expected, prudy.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose clients list can violate interface constraints.
+     * A stub ReadOnlyPrudy whose clients list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class PrudyStub implements ReadOnlyPrudy {
         private final ObservableList<Client> clients = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Client> clients) {
+        PrudyStub(Collection<Client> clients) {
             this.clients.setAll(clients);
         }
 

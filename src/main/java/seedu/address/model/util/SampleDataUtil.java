@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Prudy;
+import seedu.address.model.ReadOnlyPrudy;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimList;
 import seedu.address.model.claim.ClaimStatus;
@@ -25,7 +25,7 @@ import seedu.address.model.policy.PremiumAmount;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Prudy} with sample data.
  */
 public class SampleDataUtil {
 
@@ -55,12 +55,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyPrudy getSamplePrudy() {
+        Prudy samplePrudy = new Prudy();
         for (Client sampleClient : getSampleClients()) {
-            sampleAb.addClient(sampleClient);
+            samplePrudy.addClient(sampleClient);
         }
-        return sampleAb;
+        return samplePrudy;
     }
 
     /**

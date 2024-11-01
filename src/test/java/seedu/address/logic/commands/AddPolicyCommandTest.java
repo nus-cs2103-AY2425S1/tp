@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
@@ -31,7 +31,7 @@ public class AddPolicyCommandTest {
 
     @Test
     public void execute_addPolicy_success() throws Exception {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
 
         // Client at index has no health policies
         AddPolicyCommand command = new AddPolicyCommand(INDEX_FIRST_CLIENT, health);
@@ -50,7 +50,7 @@ public class AddPolicyCommandTest {
 
     @Test
     public void execute_duplicatePolicy_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
 
         // Client at second index already has health policy
         AddPolicyCommand command = new AddPolicyCommand(INDEX_SECOND_CLIENT, health);
@@ -60,7 +60,7 @@ public class AddPolicyCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
         AddPolicyCommand addPolicyCommand = new AddPolicyCommand(outOfBoundIndex, life);
         assertCommandFailure(addPolicyCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);

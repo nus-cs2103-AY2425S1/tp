@@ -13,7 +13,7 @@ import seedu.address.model.policy.PolicySet;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Client in the address book.
+ * Represents a Client in Prudy.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Client {

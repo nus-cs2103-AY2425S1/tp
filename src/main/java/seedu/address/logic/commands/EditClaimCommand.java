@@ -23,7 +23,7 @@ import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Represents a command to edit a claim for a specific policy of a client in the address book.
+ * Represents a command to edit a claim for a specific policy of a client in Prudy.
  */
 public class EditClaimCommand extends Command {
 

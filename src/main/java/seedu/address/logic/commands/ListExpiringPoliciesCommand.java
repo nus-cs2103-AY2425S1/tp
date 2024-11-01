@@ -13,7 +13,7 @@ import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyExpiryDatePredicate;
 
 /**
- * Lists all policies in the address book that are nearing expiry within the user-specified number of days.
+ * Lists all policies in Prudy that are nearing expiry within the user-specified number of days.
  * Defaults to 30 days if no argument is provided.
  */
 public class ListExpiringPoliciesCommand extends Command {

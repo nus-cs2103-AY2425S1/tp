@@ -21,7 +21,7 @@ import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Adds a claim to a client in the address book.
+ * Adds a claim to a client in Prudy.
  */
 public class AddClaimCommand extends Command {
 

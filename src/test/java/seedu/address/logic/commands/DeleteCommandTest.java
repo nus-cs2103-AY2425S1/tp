@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
@@ -25,7 +25,7 @@ import seedu.address.model.client.Client;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,7 +35,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CLIENT_SUCCESS,
                 Messages.format(clientToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getPrudy(), new UserPrefs());
         expectedModel.deleteClient(clientToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -59,7 +59,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CLIENT_SUCCESS,
                 Messages.format(clientToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getPrudy(), new UserPrefs());
         expectedModel.deleteClient(clientToDelete);
         showNoClient(expectedModel);
 
@@ -71,8 +71,8 @@ public class DeleteCommandTest {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
         Index outOfBoundIndex = INDEX_SECOND_CLIENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getClientList().size());
+        // ensures that outOfBoundIndex is still in bounds of Prudy's list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getPrudy().getClientList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 

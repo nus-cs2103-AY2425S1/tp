@@ -14,10 +14,10 @@ import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.policy.Policy;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data in the Prudy level
  * Duplicates are not allowed (by .isSameClient comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class Prudy implements ReadOnlyPrudy {
 
     private final UniqueClientList clients;
 
@@ -32,12 +32,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         clients = new UniqueClientList();
     }
 
-    public AddressBook() {}
+    public Prudy() {}
 
     /**
-     * Creates an AddressBook using the Clients in the {@code toBeCopied}
+     * Creates a Prudy using the Clients in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public Prudy(ReadOnlyPrudy toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -53,9 +53,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Prudy} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyPrudy newData) {
         requireNonNull(newData);
         setClients(newData.getClientList());
     }
@@ -63,7 +63,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// client-level operations
 
     /**
-     * Returns true if a client with the same identity as {@code client} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in Prudy.
      */
     public boolean hasClient(Client client) {
         requireNonNull(client);
@@ -71,8 +71,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a client to the address book.
-     * The client must not already exist in the address book.
+     * Adds a client to Prudy.
+     * The client must not already exist in Prudy.
      */
     public void addClient(Client c) {
         clients.add(c);
@@ -80,8 +80,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given client {@code target} in the list with {@code editedClient}.
-     * {@code target} must exist in the address book.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * {@code target} must exist in Prudy.
+     * The client identity of {@code editedClient} must not be the same as another existing client in Prudy.
      */
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
@@ -90,8 +90,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from {@code Prudy}.
+     * {@code key} must exist in Prudy.
      */
     public void removeClient(Client key) {
         clients.remove(key);
@@ -127,12 +127,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof Prudy)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return clients.equals(otherAddressBook.clients);
+        Prudy otherPrudy = (Prudy) other;
+        return clients.equals(otherPrudy.clients);
     }
 
     @Override
