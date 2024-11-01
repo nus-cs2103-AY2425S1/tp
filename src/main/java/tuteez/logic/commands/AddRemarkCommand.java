@@ -55,8 +55,8 @@ public class AddRemarkCommand extends Command {
         // Update the last viewed person in the model after updating remarks
         model.updateLastViewedPerson(updatedPerson);
 
-        return new CommandResult(String.format("Added remark to Person %1$s: %2$s",
-                personIndex.getOneBased(), remarkToAdd.toString()));
+        return new CommandResult(String.format("Added remark to %1$s: %2$s",
+                updatedPerson.getName(), remarkToAdd.toString()));
     }
 
     private Person getPersonFromModel(Model model) throws CommandException {
