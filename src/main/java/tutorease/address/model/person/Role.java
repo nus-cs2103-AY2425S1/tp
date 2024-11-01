@@ -12,7 +12,7 @@ public class Role {
     public static final String GUARDIAN = "Guardian";
     public static final String STUDENT = "Student";
     public static final String MESSAGE_CONSTRAINTS = "Roles can take 'Guardian' or 'Student', and it should not be "
-            + "blank." + "Also, roles are case-insensitive.";
+            + "blank.";
     public final String value;
 
     /**
