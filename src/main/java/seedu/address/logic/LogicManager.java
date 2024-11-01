@@ -22,10 +22,10 @@ import seedu.address.storage.Storage;
  * The main LogicManager of the app.
  */
 public class LogicManager implements Logic {
-    public static final String FILE_OPS_ERROR_FORMAT = "Unable save changes due to unexpected I/O error";
+    public static final String FILE_OPS_ERROR_FORMAT = "Unable save changes due to unexpected I/O error.";
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
-            "Unable to save changes due to denied storage data file access";
+            "Unable to save changes due to denied storage data file access.";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
