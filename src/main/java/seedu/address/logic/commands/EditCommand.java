@@ -114,7 +114,6 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Subject> updatedSubjects = editPersonDescriptor.getSubjectsOp().orElse(personToEdit.getSubjects());
 
-        // TODO CHANGE
         if (personToEdit instanceof Tutor) {
             return new Tutor(updatedId, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours,
                     updatedTags, updatedSubjects);

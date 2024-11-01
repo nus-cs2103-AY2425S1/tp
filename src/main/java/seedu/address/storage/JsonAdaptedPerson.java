@@ -74,7 +74,6 @@ public class JsonAdaptedPerson {
         if (subjects != null) {
             this.subjects.addAll(subjects);
         }
-        // TODO IMPLEMENT A BETTER ROLE, FOR NOW THIS WILL PLACEHOLDER
         this.role = role;
     }
 
@@ -97,7 +96,6 @@ public class JsonAdaptedPerson {
         if (subjects != null) {
             this.subjects.addAll(subjects);
         }
-        // TODO IMPLEMENT A BETTER ROLE, FOR NOW THIS WILL PLACEHOLDER
         this.role = role;
     }
 
