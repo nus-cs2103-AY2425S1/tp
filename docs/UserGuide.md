@@ -285,13 +285,15 @@ Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clement
 
 Edits the details of the guest identified by the index number used in the displayed guest list. Existing values will be overwritten by the input values.
 
-**Format:** `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [t/TAG]...`
+**Format:** `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
    * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
-Entering the `edit_guest` command returns the following result on your screen:
+**Example Usage:** `edit_guest 1 p/91234567 e/johndoe@example.com`
+
+Entering the `edit_guest 1 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
 ![edit_guest command](images/editGuestCommand.png)
 
