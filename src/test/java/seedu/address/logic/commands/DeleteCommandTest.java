@@ -2,21 +2,24 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonByNric;
+import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
+import static seedu.address.testutil.TypicalNrics.NRIC_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,9 +31,17 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+    public void execute_validNricUnfilteredList_success() {
+        Optional<Person> personWithMatchingNric = model.getFilteredPersonList().stream()
+                .filter(person -> NRIC_FIRST_PERSON.equals(person.getNric()))
+                .findFirst();
+        Person personToDelete;
+
+        personToDelete = personWithMatchingNric.orElse(null);
+
+        assertNotNull(personToDelete);
+
+        DeleteCommand deleteCommand = new DeleteCommand(NRIC_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -42,20 +53,25 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+    public void execute_invalidNricUnfilteredList_throwsCommandException() {
+        Nric invalidNric = new Nric("A0000000A");
+        DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_validNricFilteredList_success() {
+        showPersonByNric(model, NRIC_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Optional<Person> personWithMatchingNric = model.getFilteredPersonList().stream()
+                .filter(person -> NRIC_FIRST_PERSON.equals(person.getNric()))
+                .findFirst();
+        Person personToDelete = personWithMatchingNric.orElse(null);
 
+        assertNotNull(personToDelete);
+
+        DeleteCommand deleteCommand = new DeleteCommand(NRIC_FIRST_PERSON);
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
@@ -67,28 +83,32 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_invalidNricFilteredList_throwsCommandException() {
+        showPersonByNric(model, NRIC_FIRST_PERSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        Nric invalidNric = NRIC_SECOND_PERSON;
+        // ensures that invalidNric is still in bounds of address book list
+        Person invalidNricPerson = model.getAddressBook().getPersonList().stream()
+                .filter(p -> p.getNric().equals(NRIC_SECOND_PERSON))
+                .findFirst()
+                .orElse(null);
+        assertNotNull(invalidNricPerson);
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(NRIC_FIRST_PERSON);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(NRIC_SECOND_PERSON);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(NRIC_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -103,9 +123,9 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        Nric targetNric = new Nric("S1231231D");
+        DeleteCommand deleteCommand = new DeleteCommand(targetNric);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetNric=" + targetNric + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
