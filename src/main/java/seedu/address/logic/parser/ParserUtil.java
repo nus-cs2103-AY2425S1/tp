@@ -146,7 +146,7 @@ public class ParserUtil {
                 continue;
             }
             String trimmedHandle = socialMediaHandles[i].trim();
-            if (SocialMedia.isValidHandleName(trimmedHandle)) {
+            if (!SocialMedia.isValidHandleName(trimmedHandle)) {
                 throw new ParseException(SocialMedia.MESSAGE_CONSTRAINTS);
             }
             return new SocialMedia(trimmedHandle, platforms[i]);
