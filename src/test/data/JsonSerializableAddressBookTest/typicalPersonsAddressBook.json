@@ -22,7 +22,7 @@
         "friends"
       ],
       "moduleRoleMap": {"CS1101S" :  "TUTOR", "CS2040S" :  "STUDENT"},
-      "description": "This is the default description."
+      "description": ""
     },
     {
       "name": "Carl Kurz",
@@ -31,7 +31,7 @@
       "address": "wall street",
       "tags": [],
       "moduleRoleMap": {"CS1101S" : "STUDENT"},
-      "description": "This is the default description."
+      "description": ""
     },
     {
       "name": "Daniel Meier",
@@ -42,7 +42,7 @@
         "friends"
       ],
       "moduleRoleMap": {"CS1101S" : "STUDENT"},
-      "description": "This is the default description."
+      "description": "Hi! This is Daniel!"
     },
     {
       "name": "Elle Meyer",
@@ -51,7 +51,7 @@
       "address": "michegan ave",
       "tags": [],
       "moduleRoleMap": {"CS1101S" : "STUDENT"},
-      "description": "This is the default description."
+      "description": ""
     },
     {
       "name": "Fiona Kunz",
@@ -60,7 +60,7 @@
       "address": "little tokyo",
       "tags": [],
       "moduleRoleMap": {"CS1101S" : "STUDENT"},
-      "description": "This is the default description."
+      "description": ""
     },
     {
       "name": "George Best",
@@ -69,7 +69,7 @@
       "address": null,
       "tags": [],
       "moduleRoleMap": {"CS1101S" : "STUDENT"},
-      "description": "This is the default description."
+      "description": ""
     }
   ]
 }

@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_ROLE_DESC_MODULE_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_ROLE_DESC_ROLE_TYPE;
@@ -46,6 +47,7 @@ import static seedu.address.logic.parser.AddCommandParser.MESSAGE_MISSING_NAME;
 import static seedu.address.logic.parser.AddCommandParser.MESSAGE_MISSING_PHONE_OR_EMAIL;
 import static seedu.address.logic.parser.AddCommandParser.MESSAGE_UNEXPECTED_PREAMBLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -61,6 +63,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
@@ -101,7 +104,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagOrModuleRoleValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + MODULE_ROLE_DESC;
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + MODULE_ROLE_DESC + DESCRIPTION_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -119,11 +122,17 @@ public class AddCommandParserTest {
         assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
+        // multiple description repeated
+        assertParseFailure(parser,
+            validExpectedPersonString + DESCRIPTION_DESC_AMY,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION));
+
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
                         + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS,
+                    PREFIX_EMAIL, PREFIX_PHONE, PREFIX_DESCRIPTION));
 
         // invalid value followed by valid value
 
@@ -160,6 +169,10 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+
+        // invalid description
+        assertParseFailure(parser, validExpectedPersonString + INVALID_DESCRIPTION_DESC,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION));
     }
 
     @Test
@@ -221,6 +234,17 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_descriptionFieldMissing_success() {
+        // zero tags
+        Person expectedPerson = new PersonBuilder(ANDY).withTags("friend")
+            .withEmptyModuleRoleMap()
+            .withEmptyDescription()
+            .build();
+        assertParseSuccess(parser, NAME_DESC_ANDY + PHONE_DESC_ANDY + EMAIL_DESC_ANDY + ADDRESS_DESC_ANDY
+            + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+    }
+
+    @Test
     public void parse_compulsoryFieldMissing_failure() {
         // missing name
         assertParseFailure(parser, PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + MODULE_ROLE_DESC,
@@ -267,6 +291,11 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + VALID_TAG_FRIEND + INVALID_MODULE_ROLE_DESC_ROLE_TYPE,
                 ModuleRoleMap.MESSAGE_CONSTRAINTS);
+
+        // invalid description
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MODULE_ROLE_DESC + INVALID_DESCRIPTION_DESC,
+            Description.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC

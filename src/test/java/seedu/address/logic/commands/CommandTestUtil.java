@@ -92,6 +92,7 @@ public class CommandTestUtil {
         " " + PREFIX_MODULE + "CS1101S-role"; // invalid role type
     public static final String INVALID_ADD_MODULE_ROLE_DESC = " " + PREFIX_MODULE + "=" + VALID_MODULE_ROLE;
     public static final String INVALID_DESCRIPTION = "a".repeat(501);
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + " " + INVALID_DESCRIPTION;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

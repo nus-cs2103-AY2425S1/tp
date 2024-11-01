@@ -42,7 +42,8 @@ public class PersonUtil {
         person.getModuleRoleMap().getData().stream().forEach(
             s -> sb.append(PREFIX_MODULE + s.toString() + " ")
         );
-        person.getDescription().ifPresent((description -> sb.append(PREFIX_DESCRIPTION)
+        person.getDescription()
+            .ifPresent((description -> sb.append(PREFIX_DESCRIPTION)
             .append(description).append(" ")));
         return sb.toString();
     }

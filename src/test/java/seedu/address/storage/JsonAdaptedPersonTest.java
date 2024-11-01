@@ -158,6 +158,14 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
+    public void toModelType_nullDescription_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME_ANDY, VALID_PHONE_ANDY, VALID_EMAIL_ANDY,
+            VALID_ADDRESS_ANDY, VALID_TAGS_ANDY, VALID_EMPTY_MODULE_ROLE_MAP, null);
+        assertEquals(new PersonBuilder(ANDY).withEmptyDescription().build(),
+            person.toModelType());
+    }
+
+    @Test
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         JsonAdaptedPerson person =
             new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,

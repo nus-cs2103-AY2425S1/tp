@@ -28,6 +28,11 @@ public class DescriptionTest {
     }
 
     @Test
+    public void isValidDescription_emptyString_true() {
+        assertTrue(isValidDescription(""));
+    }
+
+    @Test
     public void isValidDescription_inputWith501Characters_true() {
         assertTrue(isValidDescription(validLongInput));
     }
@@ -35,6 +40,23 @@ public class DescriptionTest {
     @Test
     public void isValidDescription_inputWith501Characters_false() {
         assertFalse(isValidDescription(invalidLongInput));
+    }
+
+    @Test
+    public void isBlank_blankDescription_true() {
+        Description description = new Description("");
+        assertTrue(description.isBlank());
+    }
+
+    @Test
+    public void isBlank_descriptionWithText_false() {
+        Description description = new Description("Hello");
+        assertFalse(description.isBlank());
+    }
+
+    @Test
+    public void toString_emptyDescription_emptyString() {
+        assertEquals("", new Description("").toString());
     }
 
     @Test

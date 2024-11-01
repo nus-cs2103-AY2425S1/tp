@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalPersons.ANDY;
 import static seedu.address.testutil.TypicalPersons.BETTY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -66,6 +67,17 @@ public class PersonTest {
     }
 
     @Test
+    public void testPersonConstructorWithoutDescription() {
+        Person betty = new PersonBuilder(BETTY).withEmptyDescription().build();
+
+        Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
+            BETTY.getAddress(), BETTY.getTags(), BETTY.getModuleRoleMap(), Optional.empty());
+
+        assertNotNull(person, "The person object should not be null");
+        assertEquals(betty, person);
+    }
+
+    @Test
     public void testHasPhoneWithoutPhone() {
         Person betty = new PersonBuilder(BETTY).withEmptyPhone().build();
 
@@ -105,6 +117,13 @@ public class PersonTest {
         Person carl = new PersonBuilder(CARL).build();
 
         assertTrue(carl.hasAddress());
+    }
+
+    @Test
+    public void testHasDescriptionWithDescription() {
+        Person daniel = new PersonBuilder(DANIEL).build();
+
+        assertTrue(daniel.hasNonEmptyDescription());
     }
 
     @Test
@@ -180,6 +199,10 @@ public class PersonTest {
 
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different descriptions -> returns false
+        editedAlice = new PersonBuilder(ALICE).withDescription("This is Alice").build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

@@ -21,6 +21,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Objects;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -233,7 +235,8 @@ public class EditCommandTest {
 
         Person editedPerson = new PersonBuilder().withName(VALID_NAME_BETTY).withPhone(VALID_PHONE_BETTY)
                 .withEmail(VALID_EMAIL_BETTY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withModuleRoleMap(new ModuleCode("MA2001"), RoleType.PROFESSOR).build();
+                .withTags(VALID_TAG_FRIEND).withModuleRoleMap(new ModuleCode("MA2001"), RoleType.PROFESSOR)
+                .withDescription("Bob has been edited to Betty").build();
 
         String expected = "Change(s) made: "
                 + "\nName: " + person.getName() + " -> " + editedPerson.getName()
@@ -244,7 +247,15 @@ public class EditCommandTest {
                 + "\nTags: " + person.getTags() + " -> " + editedPerson.getTags()
                 + "\n" + EditModuleRoleOperation.getModuleCodeChangesDescription(
                         person.getModuleRoleMap(),
-                        editedPerson.getModuleRoleMap()) + "\n";
+                        editedPerson.getModuleRoleMap())
+                + "\nDescription: " + person.getDescription()
+                    .filter(value -> !value.isBlank())
+                    .map(Objects::toString)
+                    .orElse("<no description>")
+            + " -> " + editedPerson.getDescription()
+                    .filter(value -> !value.isBlank())
+                    .map(Objects::toString)
+                    .orElse("<no description>") + "\n";
 
         assertEquals(expected, EditCommand.getChangesDescription(person, editedPerson));
     }

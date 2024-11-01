@@ -31,7 +31,7 @@ public class PersonBuilder {
     public static final RoleType DEFAULT_ROLE_TYPE = RoleType.STUDENT;
 
     // Default description for any new Person is empty
-    public static final String DEFAULT_DESCRIPTION = "This is the default description.";
+    public static final String DEFAULT_DESCRIPTION = "";
 
     private Name name;
     private Optional<Phone> phone;
