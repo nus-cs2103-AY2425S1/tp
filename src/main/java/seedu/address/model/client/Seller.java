@@ -16,7 +16,7 @@ public class Seller extends Client {
      * @param phone The phone number of the seller.
      * @param email The email address of the seller.
      */
-    public Seller(Name name, Phone phone, Email email) {
+    public Seller(NameWithoutNumber name, Phone phone, Email email) {
         // null check enforced in Client constructor
         super(name, phone, email);
     }

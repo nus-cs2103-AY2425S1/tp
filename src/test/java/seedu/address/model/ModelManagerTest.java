@@ -29,7 +29,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.meeting.Meeting;
@@ -331,13 +331,13 @@ public class ModelManagerTest {
 
     @Test
     public void testBuyerPredicate() {
-        Name nameBuyer = mock(Name.class);
+        NameWithoutNumber nameBuyer = mock(NameWithoutNumber.class);
         Phone phoneBuyer = mock(Phone.class);
         Email emailBuyer = mock(Email.class);
 
         Client mockBuyer = new Buyer(nameBuyer, phoneBuyer, emailBuyer);
 
-        Name nameSeller = mock(Name.class);
+        NameWithoutNumber nameSeller = mock(NameWithoutNumber.class);
         Phone phoneSeller = mock(Phone.class);
         Email emailSeller = mock(Email.class);
 
@@ -355,13 +355,13 @@ public class ModelManagerTest {
     @Test
     public void testSellerPredicate() {
         // Mocking the buyer and seller details
-        Name nameBuyer = mock(Name.class);
+        NameWithoutNumber nameBuyer = mock(NameWithoutNumber.class);
         Phone phoneBuyer = mock(Phone.class);
         Email emailBuyer = mock(Email.class);
 
         Client mockBuyer = new Buyer(nameBuyer, phoneBuyer, emailBuyer);
 
-        Name nameSeller = mock(Name.class);
+        NameWithoutNumber nameSeller = mock(NameWithoutNumber.class);
         Phone phoneSeller = mock(Phone.class);
         Email emailSeller = mock(Email.class);
 

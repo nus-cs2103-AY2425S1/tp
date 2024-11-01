@@ -8,7 +8,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.meeting.Meeting;
@@ -51,7 +51,8 @@ class MessagesTest {
     @Test
     void formatBuyer_success() {
         // Arrange
-        Client buyer = new Buyer(new Name("Alice Bee"), new Phone("98765432"), new Email("alice@example.com"));
+        Client buyer = new Buyer(new NameWithoutNumber("Alice Bee"),
+                new Phone("98765432"), new Email("alice@example.com"));
 
         // Act
         String result = Messages.format(buyer);
@@ -64,7 +65,8 @@ class MessagesTest {
     @Test
     void formatSeller_success() {
         // Arrange
-        Client seller = new Seller(new Name("Bob Bee"), new Phone("87654321"), new Email("bob@example.com"));
+        Client seller = new Seller(new NameWithoutNumber("Bob Bee"),
+                new Phone("87654321"), new Email("bob@example.com"));
 
         // Act
         String result = Messages.format(seller);
