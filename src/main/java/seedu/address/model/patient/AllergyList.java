@@ -34,6 +34,25 @@ public class AllergyList {
     }
 
     /**
+     * Adds an allergy to the list.
+     * Sorts the list after adding the allergy.
+     * 
+     * @param Allergy
+     */
+    public void addAllergy(Allergy allergy) {
+        allergies.add(allergy);
+    }
+
+    /**
+     * Deletes an allergy from the list.
+     * 
+     * @param allergy
+     */
+    public void deleteAllergy(Allergy allergy) {
+        allergies.remove(allergy);
+    }
+    
+    /**
      * Returns an immutable list of allergies.
      */
     public List<Allergy> getAllergies() {
