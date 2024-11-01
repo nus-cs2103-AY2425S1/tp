@@ -31,6 +31,15 @@ public interface AddressBookStorage {
     Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
 
     /**
+     * Returns AddressBook data as a {@link ReadOnlyAddressBook} from a JSON string.
+     *
+     * @param jsonContent The JSON content to be read.
+     * @return The new {@code ReadOnlyAddressBook}.
+     * @throws DataLoadingException if loading the data from storage failed.
+     */
+    ReadOnlyAddressBook readAddressBook(String jsonContent) throws DataLoadingException;
+
+    /**
      * Saves the given {@link ReadOnlyAddressBook} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.

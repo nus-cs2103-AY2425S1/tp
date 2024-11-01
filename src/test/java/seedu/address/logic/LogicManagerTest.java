@@ -38,11 +38,13 @@ import seedu.address.testutil.PersonBuilder;
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
+    private static final String VALID_IMPORT_DATA = "{\"persons\": []}";
 
     @TempDir
     public Path temporaryFolder;
 
     private Model model = new ModelManager();
+    private Model expectedModel = new ModelManager();
     private Logic logic;
 
     @BeforeEach
