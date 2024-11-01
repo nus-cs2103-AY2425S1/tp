@@ -107,6 +107,31 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void discardUnsavedChanges() {
+        AddressBook addressBook1 = getTypicalAddressBook();
+        AddressBook addressBook2 = getTypicalAddressBook();
+        addressBook2.removePerson(GEORGE);
+
+        // discard one change
+        ModelManager model = new ModelManager(addressBook1, new UserPrefs());
+        model.deletePerson(GEORGE);
+        model.discardUnsavedChanges();
+        assertEquals(addressBook1, model.getAddressBook());
+
+        // discard all changes
+        model.deletePerson(ALICE);
+        model.setAddressBook(new AddressBook());
+        model.discardUnsavedChanges();
+        assertEquals(addressBook1, model.getAddressBook());
+
+        // discard no changes
+        model.setAddressBook(addressBook2);
+        model.commitAddressBook();
+        model.discardUnsavedChanges();
+        assertEquals(addressBook2, model.getAddressBook());
+    }
+
+    @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
     }
