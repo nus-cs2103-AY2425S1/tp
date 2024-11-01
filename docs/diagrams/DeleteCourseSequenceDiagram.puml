@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteCourseCommandParser" as DeleteCourseCommandParser LOGIC_COLOR
+participant "d:DeleteCourseCommand" as DeleteCourseCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete-course c/CS1101S")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete-course c/CS1101S")
+activate AddressBookParser
+
+create DeleteCourseCommandParser
+AddressBookParser -> DeleteCourseCommandParser
+activate DeleteCourseCommandParser
+
+DeleteCourseCommandParser --> AddressBookParser
+deactivate DeleteCourseCommandParser
+
+AddressBookParser -> DeleteCourseCommandParser : parse("delete-course c/CS1101S")
+activate DeleteCourseCommandParser
+
+create DeleteCourseCommand
+DeleteCourseCommandParser -> DeleteCourseCommand
+activate DeleteCourseCommand
+
+DeleteCourseCommand --> DeleteCourseCommandParser :
+deactivate DeleteCourseCommand
+
+DeleteCourseCommandParser --> AddressBookParser : d
+deactivate DeleteCourseCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCourseCommandParser -[hidden]-> AddressBookParser
+destroy DeleteCourseCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteCourseCommand : execute(m)
+activate DeleteCourseCommand
+
+DeleteCourseCommand -> Model : deleteCourse(Course CS1101S)
+activate Model
+
+Model --> DeleteCourseCommand
+deactivate Model
+
+create CommandResult
+DeleteCourseCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCourseCommand
+deactivate CommandResult
+
+DeleteCourseCommand --> LogicManager : r
+deactivate DeleteCourseCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

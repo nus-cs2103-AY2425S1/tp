@@ -19,14 +19,14 @@ import org.junit.jupiter.api.Test;
 import tahub.contacts.logic.commands.AddCommand;
 import tahub.contacts.logic.commands.ClearCommand;
 import tahub.contacts.logic.commands.DeleteCommand;
-import tahub.contacts.logic.commands.DeleteCourseCommand;
 import tahub.contacts.logic.commands.EditCommand;
 import tahub.contacts.logic.commands.EditCommand.EditPersonDescriptor;
-import tahub.contacts.logic.commands.EditCourseCommand;
 import tahub.contacts.logic.commands.ExitCommand;
 import tahub.contacts.logic.commands.FindCommand;
 import tahub.contacts.logic.commands.HelpCommand;
 import tahub.contacts.logic.commands.ListCommand;
+import tahub.contacts.logic.commands.course.CourseDeleteCommand;
+import tahub.contacts.logic.commands.course.CourseEditCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
@@ -72,19 +72,19 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_editCourse() throws Exception {
         CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
-        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder()
+        CourseEditCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder()
                 .withCourseName(VALID_COURSE_NAME).build();
-        EditCourseCommand command = (EditCourseCommand) parser
-                .parseCommand(EditCourseCommand.COMMAND_WORD + " c/" + courseCode + COURSE_NAME_DESC);
-        assertEquals(new EditCourseCommand(courseCode, descriptor), command);
+        CourseEditCommand command = (CourseEditCommand) parser
+                .parseCommand(CourseEditCommand.COMMAND_WORD + " c/" + courseCode + COURSE_NAME_DESC);
+        assertEquals(new CourseEditCommand(courseCode, descriptor), command);
     }
 
     @Test
     public void parseCommand_deleteCourse() throws Exception {
         CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
-        DeleteCourseCommand command = (DeleteCourseCommand) parser.parseCommand(DeleteCourseCommand
+        CourseDeleteCommand command = (CourseDeleteCommand) parser.parseCommand(CourseDeleteCommand
                 .COMMAND_WORD + " c/" + courseCode);
-        assertEquals(new DeleteCourseCommand(courseCode), command);
+        assertEquals(new CourseDeleteCommand(courseCode), command);
     }
 
     @Test

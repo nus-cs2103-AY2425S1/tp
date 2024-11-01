@@ -1,9 +1,11 @@
-package tahub.contacts.logic.commands;
+package tahub.contacts.logic.commands.course;
 
 import static java.util.Objects.requireNonNull;
 
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
+import tahub.contacts.logic.commands.Command;
+import tahub.contacts.logic.commands.CommandResult;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
@@ -11,9 +13,9 @@ import tahub.contacts.model.course.Course;
 /**
  * Adds a course to the course book.
  */
-public class CourseCommand extends Command {
+public class CourseAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "course";
+    public static final String COMMAND_WORD = "course-add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a course to the course book. "
             + "eg course c/CS2103T n/Software Engineering";
@@ -26,7 +28,7 @@ public class CourseCommand extends Command {
     /**
      * Creates a CourseCommand to add the specified {@code Course}
      */
-    public CourseCommand(Course course) {
+    public CourseAddCommand(Course course) {
         requireNonNull(course);
         toAdd = course;
     }
@@ -52,12 +54,12 @@ public class CourseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CourseCommand)) {
+        if (!(other instanceof CourseAddCommand)) {
             return false;
         }
 
-        CourseCommand otherCourseCommand = (CourseCommand) other;
-        return toAdd.equals(otherCourseCommand.toAdd);
+        CourseAddCommand otherCourseAddCommand = (CourseAddCommand) other;
+        return toAdd.equals(otherCourseAddCommand.toAdd);
     }
 
     @Override

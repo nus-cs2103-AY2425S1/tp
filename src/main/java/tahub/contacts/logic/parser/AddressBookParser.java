@@ -11,11 +11,8 @@ import tahub.contacts.commons.core.LogsCenter;
 import tahub.contacts.logic.commands.AddCommand;
 import tahub.contacts.logic.commands.ClearCommand;
 import tahub.contacts.logic.commands.Command;
-import tahub.contacts.logic.commands.CourseCommand;
 import tahub.contacts.logic.commands.DeleteCommand;
-import tahub.contacts.logic.commands.DeleteCourseCommand;
 import tahub.contacts.logic.commands.EditCommand;
-import tahub.contacts.logic.commands.EditCourseCommand;
 import tahub.contacts.logic.commands.EnrollCommand;
 import tahub.contacts.logic.commands.ExitCommand;
 import tahub.contacts.logic.commands.FindCommand;
@@ -25,10 +22,16 @@ import tahub.contacts.logic.commands.attend.AttendAbsentCommand;
 import tahub.contacts.logic.commands.attend.AttendClearCommand;
 import tahub.contacts.logic.commands.attend.AttendPresentCommand;
 import tahub.contacts.logic.commands.attend.AttendRemoveCommand;
+import tahub.contacts.logic.commands.course.CourseAddCommand;
+import tahub.contacts.logic.commands.course.CourseDeleteCommand;
+import tahub.contacts.logic.commands.course.CourseEditCommand;
 import tahub.contacts.logic.parser.attend.AttendAbsentCommandParser;
 import tahub.contacts.logic.parser.attend.AttendClearCommandParser;
 import tahub.contacts.logic.parser.attend.AttendPresentCommandParser;
 import tahub.contacts.logic.parser.attend.AttendRemoveCommandParser;
+import tahub.contacts.logic.parser.course.CourseAddCommandParser;
+import tahub.contacts.logic.parser.course.CourseDeleteCommandParser;
+import tahub.contacts.logic.parser.course.CourseEditCommandParser;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 
 /**
@@ -68,14 +71,14 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case CourseCommand.COMMAND_WORD:
-            return new CourseCommandParser().parse(arguments);
+        case CourseAddCommand.COMMAND_WORD:
+            return new CourseAddCommandParser().parse(arguments);
 
-        case EditCourseCommand.COMMAND_WORD:
-            return new EditCourseCommandParser().parse(arguments);
+        case CourseEditCommand.COMMAND_WORD:
+            return new CourseEditCommandParser().parse(arguments);
 
-        case DeleteCourseCommand.COMMAND_WORD:
-            return new DeleteCourseCommandParser().parse(arguments);
+        case CourseDeleteCommand.COMMAND_WORD:
+            return new CourseDeleteCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
