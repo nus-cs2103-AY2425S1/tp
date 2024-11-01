@@ -8,7 +8,10 @@ import java.util.stream.Collectors;
 
 import seedu.edulog.model.EduLog;
 import seedu.edulog.model.ReadOnlyEduLog;
+import seedu.edulog.model.calendar.Day;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
+import seedu.edulog.model.calendar.LessonTime;
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
 import seedu.edulog.model.student.Fee;
@@ -68,12 +71,12 @@ public class SampleDataUtil {
 
     private static Lesson[] getSampleLessons() {
         return new Lesson[] {
-            new Lesson("Sec 4 Chemistry Class A", DayOfWeek.MONDAY,
-                LocalTime.of(20, 0), LocalTime.of(22, 0)),
-            new Lesson("Late night math catchup for P6 students", DayOfWeek.FRIDAY,
-                LocalTime.of(23, 15), LocalTime.of(0, 45)),
-            new Lesson("(Relief slot) Sec 4 Chemistry Class B", DayOfWeek.MONDAY,
-                LocalTime.of(19, 0), LocalTime.of(21, 0))
+            new Lesson(new Description("Sec 4 Chemistry Class A"), new Day("Monday"),
+                new LessonTime("2000"), new LessonTime("2200")),
+            new Lesson(new Description("Late night math catchup for P6 students"), new Day("Friday"),
+                new LessonTime("2315"), new LessonTime("0045")),
+            new Lesson(new Description("(Relief slot) Sec 4 Chemistry Class B"), new Day("Saturday"),
+                new LessonTime("2030"), new LessonTime("2300"))
         };
     }
 
