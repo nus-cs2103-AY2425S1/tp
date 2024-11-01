@@ -30,7 +30,7 @@ public class DeleteExamCommand extends Command {
     private final Exam exam;
 
     /**
-     * Creates an DeleteExamCommand to delete the specified {@code Exam}
+     * Creates an DeleteExamCommand to delete the specified {@code Exam}.
      */
     public DeleteExamCommand(Exam exam) {
         requireNonNull(exam);
