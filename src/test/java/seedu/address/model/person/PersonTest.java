@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -150,8 +151,16 @@ public class PersonTest {
         assertEquals(ALICE.hashCode(), ALICE.hashCode());
     }
     @Test
-    public void containSellPropertyTest() {
+    public void containSellPropertyTestWithProperties() {
         assertFalse(ALICE.containsSellProperty(new Apartment(new PostalCode("123456"), new UnitNumber("10-65"),
                 new Price("1500000"), ALICE.getTags()), new ArrayList<>()));
+    }
+    @Test
+    public void containSellPropertyTestWithoutProperties() {
+        List<Person> properties = new ArrayList<>();
+        properties.add(ALICE);
+        assertFalse(ALICE.containsSellProperty(new Apartment(new PostalCode("123456"), new UnitNumber("10-65"),
+                new Price("1500000"), ALICE.getTags()),
+                properties));
     }
 }
