@@ -75,6 +75,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tasks.setTasks(tasks);
     }
 
+    public void setStatus() {
+        for (Group g: groups) {
+            g.setTaskStatus();
+        }
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */

@@ -114,6 +114,11 @@ public class AddGroupCommandTest {
     private class ModelStub implements Model {
 
         @Override
+        public void setStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasGroup(Group group) {
             throw new AssertionError("This method should not be called.");
         }

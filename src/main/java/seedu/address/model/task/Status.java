@@ -6,7 +6,9 @@ package seedu.address.model.task;
  */
 public enum Status {
     PENDING,
-    COMPLETED;
+    COMPLETED,
+    OVERDUE,
+    COMPLETE_LATE;
 
     public static final String MESSAGE_CONSTRAINTS = "Status has to be either PENDING or COMPLETED";
 

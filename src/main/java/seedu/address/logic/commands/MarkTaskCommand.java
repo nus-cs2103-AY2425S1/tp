@@ -67,7 +67,9 @@ public class MarkTaskCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_INDEX);
         }
         Task taskToMark = lastShownList.get(index.getZeroBased());
-        Status changedStatus = taskToMark.getStatus().equals(Status.PENDING) ? Status.COMPLETED : Status.PENDING;
+        Status changedStatus = (taskToMark.getStatus().equals(Status.PENDING)
+                || taskToMark.getStatus().equals(Status.OVERDUE))
+                ? Status.COMPLETED : Status.PENDING;
         Task editedTask = new Task(taskToMark.getTaskName(), taskToMark.getDeadline(), changedStatus,
             taskToMark.getGroupsWithTask());
 

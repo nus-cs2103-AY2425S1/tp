@@ -96,6 +96,10 @@ public class AddStudentCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        @Override
+        public void setStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public boolean hasGroup(Group group) {

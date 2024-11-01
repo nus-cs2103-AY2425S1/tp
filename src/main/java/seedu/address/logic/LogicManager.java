@@ -60,6 +60,7 @@ public class LogicManager implements Logic {
             tempVersionHistory.addVersion(model);
         }
         this.versionHistory = tempVersionHistory;
+        model.setStatus();
     }
 
     @Override

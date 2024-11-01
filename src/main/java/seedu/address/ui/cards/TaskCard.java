@@ -1,7 +1,12 @@
 package seedu.address.ui.cards;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
@@ -32,6 +37,8 @@ public class TaskCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label deadline;
+    @FXML
+    private ImageView imageView;
 
     /**
      * Creates a {@code GroupCode} with the given {@code Group} and index to display.
@@ -41,6 +48,12 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         name.setText(task.getTaskName().toString());
-        deadline.setText(task.getDeadline().toString());
+        deadline.setText("Deadline: " + task.getDeadline().toString());
+        Image image = new Image(getClass().getResourceAsStream("/images/overdue_icon.png"));
+        ZoneId zid = ZoneId.of("Asia/Singapore");
+        LocalDateTime currentTime = LocalDateTime.now(zid);
+        if (task.getDeadline().time.compareTo(currentTime) < 0) {
+            imageView.setImage(image);
+        }
     }
 }
