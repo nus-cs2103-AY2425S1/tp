@@ -3,9 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -19,7 +17,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Tags a guest identified using it's displayed index from the address book with a tag already created.
  */
-public class TagCommand extends Command {
+public class TagCommand extends Command implements UndoableCommand {
 
     public static final String COMMAND_WORD = "tag";
 
@@ -38,6 +36,7 @@ public class TagCommand extends Command {
 
     private final List<Index> targetIndexes;
     private final Set<Tag> tags;
+    private final Map<Index, Set<Tag>> addedTagsMap = new HashMap<>();
 
     /**
      * @param targetIndexes of the guest in the filtered person list to tag
@@ -67,6 +66,7 @@ public class TagCommand extends Command {
             }
             Person personToTag = lastShownList.get(targetIndex.getZeroBased());
             Set<Tag> newTags = new HashSet<>(personToTag.getTags());
+            Set<Tag> addedTags = new HashSet<>();
             boolean isUpdated = false;
 
             for (Tag tag : tags) {
@@ -76,12 +76,14 @@ public class TagCommand extends Command {
                     duplicateTags.add(tag);
                 } else {
                     newTags.add(tag);
+                    addedTags.add(tag);
                     isUpdated = true;
                 }
             }
 
             if (isUpdated) {
                 Person updatedPerson = setPerson(model, personToTag, newTags);
+                addedTagsMap.put(targetIndex, addedTags);
                 updateSuccessMessage(successMessage, updatedPerson);
             }
         }
@@ -92,6 +94,22 @@ public class TagCommand extends Command {
             updateFinalMessage(finalMessage, duplicateTags, missingTags);
         }
         return new CommandResult(finalMessage.toString());
+    }
+
+    @Override
+    public void undo(Model model) {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        for (Map.Entry<Index, Set<Tag>> entry: addedTagsMap.entrySet()) {
+            Index target = entry.getKey();
+            Person personToUntag = lastShownList.get(target.getZeroBased());
+            Set<Tag> restoredTags = new HashSet<>(personToUntag.getTags());
+            restoredTags.removeAll(entry.getValue());
+
+            Person restoredPerson = new Person(personToUntag.getName(), personToUntag.getPhone(),
+                    personToUntag.getEmail(), personToUntag.getRsvpStatus(), restoredTags);
+            model.setPerson(personToUntag, restoredPerson);
+        }
     }
 
     @Override
