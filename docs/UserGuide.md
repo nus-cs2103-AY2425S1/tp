@@ -135,7 +135,7 @@ Finds contacts whose details matches all given fields.
 
 Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`
 
-* The role field(s), if any, have to take a valid role value (see [Tip](#Listing-all-contacts-list add))
+* The role field(s), if any, have to take a valid role value (Refer to **Tip** section in [adding a contact](#adding-a-contact-add))
 * The search for all other fields is case-insensitive. e.g query `hans` will match `Hans`
 * The order of the words does not matter. e.g. query `Hans Bo` will match `Bo Hans`
 * Queries that are substrings of details will also be matched e.g. query `Han` will match `Hans`
