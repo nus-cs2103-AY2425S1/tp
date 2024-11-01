@@ -20,8 +20,13 @@ import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.predicates.*;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PersonIsRolePredicate;
+import seedu.address.model.person.predicates.PhoneNumberContainsKeywordPredicate;
+import seedu.address.model.person.predicates.TelegramContainsKeywordsPredicate;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
@@ -47,9 +52,8 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         // if a field is present, AND with the predicate for that field
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String name = argMultimap.getValue(PREFIX_NAME).get();
-            Predicate<Person> namePred = new FieldContainsKeywordsPredicate<>(
-                    Collections.singletonList(name),
-                    Person::getName);
+            Predicate<Person> namePred = new NameContainsKeywordsPredicate(
+                    Collections.singletonList(name));
             predicates.add(namePred);
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {

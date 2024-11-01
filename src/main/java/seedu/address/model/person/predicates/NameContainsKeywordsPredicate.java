@@ -2,6 +2,7 @@ package seedu.address.model.person.predicates;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,15 +14,31 @@ import seedu.address.model.person.Person;
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructor for NameContainsKeywordsPredicate. Filters empty and trims input
+     * @param keywords List of keywords to search for in the name field.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+        this.keywords =
+                keywords.stream()
+                        .filter(keyword -> !keyword.isBlank())
+                        .map(keyword -> keyword.trim())
+                        .collect(Collectors.toList());
+
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)
-                                    ||person.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
+        if (keywords.isEmpty()) {
+            return false;
+        }
+        List<String> filteredKeywords = keywords.stream()
+                .filter(keyword -> !keyword.isBlank())
+                .collect(Collectors.toList());
+        return filteredKeywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
+                || filteredKeywords.stream().allMatch(keyword -> person.getName().fullName.toLowerCase()
+                .contains(keyword.toLowerCase()));
     }
 
     @Override

@@ -10,8 +10,8 @@ import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
 
 
-/*
-    * Wrapper around a predicate that checks if a keyword is in a field of a person.
+/**
+ * Wrapper class for predicates that check if a field contains a keyword.
  */
 public class KeywordPredicateWrapper {
     private final List<String> keywords;
@@ -19,6 +19,11 @@ public class KeywordPredicateWrapper {
 
     private final Predicate<Person> predicate;
 
+    /**
+     * Constructor for KeywordPredicateWrapper.
+     * @param keywords list of keywords to check for
+     * @param field field to check for keywords
+     */
     public KeywordPredicateWrapper(List<String> keywords, String field) {
         this.keywords = keywords;
         this.field = field;
@@ -29,34 +34,43 @@ public class KeywordPredicateWrapper {
     }
 
 
+    /**
+     * Creates a predicate based on the field.
+     * @param field field to create predicate for
+     * @return predicate for the field
+     */
     public Predicate<Person> createPredicate(String field) {
         switch(field) {
-            case "address":
-                return new AddressContainsKeywordsPredicate(keywords);
-            case "phone":
-                return new PhoneNumberContainsKeywordPredicate(keywords);
-            case "email":
-                return new EmailContainsKeywordsPredicate(keywords);
-            case "telegram":
-                return new TelegramContainsKeywordsPredicate(keywords);
-            case "name":
-                return new NameContainsKeywordsPredicate(keywords);
-            case "role":
-                List<Role> roles = new ArrayList<>();
-                for (String keyword : keywords) {
-                    try {
-                        roles.add(RoleHandler.getRole(keyword));
+        case "address":
+            return new AddressContainsKeywordsPredicate(keywords);
+        case "phone":
+            return new PhoneNumberContainsKeywordPredicate(keywords);
+        case "email":
+            return new EmailContainsKeywordsPredicate(keywords);
+        case "telegram":
+            return new TelegramContainsKeywordsPredicate(keywords);
+        case "name":
+            return new NameContainsKeywordsPredicate(keywords);
+        case "role":
+            List<Role> roles = new ArrayList<>();
+            for (String keyword : keywords) {
+                try {
+                    roles.add(RoleHandler.getRole(keyword));
 
-                    } catch (InvalidRoleException e) {
-                        // ignore invalid roles
-                    }
+                } catch (InvalidRoleException e) {
+                    // ignore invalid roles
                 }
-
-            default:
-                return null;
+            }
+            return new PersonIsRolePredicate(roles);
+        default:
+            return null;
         }
     }
 
+    /**
+     * Gets the predicate.
+     * @return predicate
+     */
     public Predicate<Person> getPredicate() {
         return predicate;
     }

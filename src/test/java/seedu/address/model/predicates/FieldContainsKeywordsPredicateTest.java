@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,6 +9,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.person.predicates.FieldContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 
