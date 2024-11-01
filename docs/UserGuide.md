@@ -156,16 +156,21 @@ Once successful, you should see the following on your screen:
 ### Adding guests
 
 Let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
-Let us familiarise ourselves with the `add_guest` command, which you will need in order to add a guest to the guest list.
+Let us familiarise ourselves with the `add_guest` command, which you will need in order to add guests to the guest list.
 
+Let's try entering the following command: `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
 
+This means we are adding a new guest, with the name `John Doe`, phone number `98765432`, email `johnd@example.com` and address `311, Clementi Ave 2, #02-25` to the guest list.
+
+For more details on the `add_guest` command, such as the additional fields you can classify a guest with, we encourage you to refer to [**Adding a new guest to the guest list**](#adding-a-guest--add_guest)
 
 [_Back to Top_](#table-of-contents)
 
 
 ### Adding vendors
 
-Let us now add your first vendor to the list of vendors we are intending to collaborate with.
+Let us now add some vendors to the list of vendors we are intending to collaborate with.
+Most of the details required are similar to that of guests, 
 
 
 [_Back to Top_](#table-of-contents)
@@ -182,7 +187,8 @@ To do that,
 
 ### Deleting persons
 
-Suppose the bride tells us that she has a vendor in mind from which she wants to get her
+Suppose the bride tells us that she has a preferred photographer in mind, and so you need to delete the existing photographer you previously added from the vendor list.
+We note that the 
 
 
 [_Back to Top_](#table-of-contents)
@@ -197,12 +203,10 @@ It's been a long day at work. Now let's take a break and exit the application. A
 [_Back to Top_](#table-of-contents)
 
 
-After trying out the tutorial, we recommend you to explore our [Features](#features) where you can discover the full range of tools and functionalities our app offers so that you can enhance your productivity and make the most out of BridalBuddy!
+After trying out the tutorial, we strongly recommend you to explore our [Features](#features) where you can discover the full range of tools and functionalities our app offers so that you can enhance your productivity and make the most out of BridalBuddy!
 
 [_Back to Top_](#table-of-contents)
 
-
-[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
