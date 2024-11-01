@@ -30,8 +30,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo-Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_AMY = "8888\t8888";
+    public static final String VALID_PHONE_BOB = "69281029";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMERGENCY_CONTACT_AMY = VALID_PHONE_AMY;
@@ -71,7 +71,7 @@ public class CommandTestUtil {
 
     // whitespace-only names are invalid
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "     ";
-    // 'a' not allowed in phones, emergency contacts
+    // 'a' not allowed in phones or emergency contacts
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a";
     public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT + "911a";
     // missing '@' symbol

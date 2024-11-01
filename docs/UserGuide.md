@@ -97,9 +97,9 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_O
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/02-01-2024`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/12345678 t/criminal d/03-28-2024`
-* `add p/12345678 n/Jane Smith d/01-01-2024 ec/98765432`
-* `add p/12345678 n/Jane Smith d/01-01-2024`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/62345678 t/criminal d/03-28-2024`
+* `add p/92345678 n/Jane Smith d/01-01-2024 ec/98765432`
+* `add p/92345678 n/Jane Smith d/01-01-2024`
 
 ### Listing all persons : `list`
 
@@ -150,7 +150,7 @@ Finds contacts whose names or/and phone numbers or/and address contain any of th
 Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
 
 **NOTE:** At least one field MUST be provided  
-  e.g. `find n/Hans` or `find p/12345678` or `find a/wall street` will work  
+  e.g. `find n/Hans` or `find p/82345678` or `find a/wall street` will work  
   e.g. `find Hans` or `find wall street` or `find` will fail
 * The search is case-insensitive. e.g `hans` will match `Hans` or `wall Street` will match `Wall Street`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -247,6 +247,15 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Contact field requirements
+
+### Phone
+* Phone numbers can only contain 8 numbers, and must begin with a 6, 8, or 9.
+* Spaces in the middle of a phone number are accepted (eg. 9123 4523), as are phone numbers without spaces (eg. 91234523). 
+* Spaces in unusual locations will render the phone number invalid (eg. 912 34523).
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -265,7 +274,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/07-23-2024`
+**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/07-23-2024`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`

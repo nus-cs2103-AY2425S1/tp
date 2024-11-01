@@ -56,7 +56,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName); // ignore capitalisation in comparing names
     }
 
     @Override
