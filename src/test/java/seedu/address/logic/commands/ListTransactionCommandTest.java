@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -23,11 +24,12 @@ public class ListTransactionCommandTest {
 
     @Test
     public void execute_listAllTransactions_success() {
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListTransactionCommand(INDEX_FIRST_PERSON), model,
+        showPersonAtIndex(expectedModel, INDEX_SECOND_PERSON);
+        expectedModel.updateTransactionList(BENSON.getTransactions());
+        assertCommandSuccess(new ListTransactionCommand(INDEX_SECOND_PERSON), model,
                 String.format(ListTransactionCommand.MESSAGE_SUCCESS,
                         1,
-                        Messages.format(expectedModel.getFilteredPersonList().get(0))),
+                        Messages.format(BENSON)),
                 expectedModel);
     }
 
