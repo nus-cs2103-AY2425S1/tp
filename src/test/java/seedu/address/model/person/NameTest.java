@@ -45,6 +45,9 @@ public class NameTest {
         // same values -> returns true
         assertTrue(name.equals(new Name("Valid Name")));
 
+        // different capitalisation -> returns true
+        assertTrue(name.equals(new Name("valID nAme")));
+
         // same object -> returns true
         assertTrue(name.equals(name));
 
