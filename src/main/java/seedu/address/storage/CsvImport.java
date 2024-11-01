@@ -5,7 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -26,13 +28,14 @@ import seedu.address.model.Model;
  */
 public class CsvImport {
     public static final String INCORRECT_HEADERS = "Your file is missing or has extra headers. "
-            + "Please use the following headers: name,phone,email,address,hours,tags,role ";
+            + "Please use the following headers: name,phone,email,address,hours,tags,role,subjects ";
     public static final String INCORRECT_ROWS = "Some rows have an incorrect number of entries "
             + "or have an incorrect formatting. "
             + "The expected number of entries is %d. The rows that failed are: %s";
-    public static final int HEADER_COUNT = 7;
+    public static final int HEADER_COUNT = 8;
     private final String importFilePath;
     private final ArrayList<Integer> duplicates;
+    private final Map<Integer, String> failedRows;
 
     /**
      * Constructs a CsvImport instance with the specified file path.
@@ -42,6 +45,7 @@ public class CsvImport {
     public CsvImport(String importFilePath) {
         this.importFilePath = importFilePath;
         this.duplicates = new ArrayList<>();
+        this.failedRows = new HashMap<>();
     }
 
     /**
@@ -86,7 +90,7 @@ public class CsvImport {
                     success++;
                 }
             } catch (IllegalValueException e) {
-                duplicates.add(personList.indexOf(p) + 1);
+                failedRows.put(personList.indexOf(p) + 1, e.getMessage());
             }
         }
         return success;
@@ -96,8 +100,16 @@ public class CsvImport {
         return duplicates;
     }
 
-    public boolean hasFailures() {
+    public Map<Integer, String> getFailed() {
+        return failedRows;
+    }
+
+    public boolean hasDuplicates() {
         return !duplicates.isEmpty();
+    }
+
+    public boolean hasFailed() {
+        return !failedRows.isEmpty();
     }
 
     private boolean validateHeaders(FileReader reader) {
@@ -111,6 +123,7 @@ public class CsvImport {
         expectedHeaders.add("hours");
         expectedHeaders.add("tags");
         expectedHeaders.add("role");
+        expectedHeaders.add("subjects");
 
         try {
             ArrayList<String> actualHeaders = new ArrayList<>(List.of(csvReader.peek()));
