@@ -24,7 +24,7 @@ public class SampleDataUtilTest {
                 getRoleSet("President"), new Nickname("")),
         new Contact(new Name("Bernice Yu"), new TelegramHandle("99272758"), new Email("berniceyu@example.com"),
                 new StudentStatus("undergraduate 3"),
-                getRoleSet("President", "Admin"), new Nickname("<nn space>")),
+                getRoleSet("President", "Admin"), new Nickname("<the Think thanker>")),
         new Contact(new Name("Charlotte Oliveiro"), new TelegramHandle("93210283"), new Email("charlotte@example.com"),
                 new StudentStatus("masters"),
                 getRoleSet("Marketing"), new Nickname("")),
