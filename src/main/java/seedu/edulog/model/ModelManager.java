@@ -144,6 +144,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getRevenue() {
+        return eduLog.getRevenue();
+    }
+
+    @Override
     public void addStudent(Student student) {
         eduLog.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

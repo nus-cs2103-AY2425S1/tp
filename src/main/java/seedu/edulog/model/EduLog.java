@@ -149,6 +149,17 @@ public class EduLog implements ReadOnlyEduLog {
         }
     }
 
+    /**
+     * Get total money earned
+     */
+    public int getRevenue() {
+        int sum = 0;
+        for (Student student : students) {
+            sum += (student.getHasPaid()) ? student.getFee().value : 0;
+        }
+        return sum;
+    }
+
     // ------------------ lesson-level operations -----------------------
 
     /**
