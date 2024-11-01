@@ -291,7 +291,7 @@ Then, we set the `currentCommandIndex` to be the size of the arraylist, anticipa
 
 :information_source: **Note:** CommandTextHistory will store commands that were unsuccessful as well.
 
-These operations are exposed in the `Model` interface as `Model#addCommandTextToHistory(String commandText)`, `Model#getPreviousCommandTextFromHistory()` and `Model#getNextCommandTextFromHistory()` respectively.
+These operations are exposed in the `Logic` interface as `Logic#addCommandTextToHistory(String commandText)`, `Logic#getPreviousCommandTextFromHistory()` and `Logic#getNextCommandTextFromHistory()` respectively.
 
 The following sequence diagram shows how the user can get previous command:
 ![CommandTextHistorySequenceDiagram](images/CommandTextHistorySequenceDiagram.png)
