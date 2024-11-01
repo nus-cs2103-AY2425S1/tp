@@ -30,7 +30,7 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
             if (group == null) {
                 return false;
             }
-            // This should not happen as an invalid group would not even be created
+            // This should not happen as an invalid group would not be created
             if (!Group.isValidGroupName(group.toString())) {
                 throw new ParseException(INVALID_GROUP);
             }

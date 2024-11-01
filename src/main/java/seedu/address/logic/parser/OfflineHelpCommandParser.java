@@ -25,7 +25,7 @@ public class OfflineHelpCommandParser implements Parser<OfflineHelpCommand> {
      * @author gabriellegtw
      */
     public OfflineHelpCommand parse(String userInput) throws ParseException {
-        String[] words = userInput.split(" ");
+        String[] words = userInput.trim().split(" ");
         if (words.length != 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, OfflineHelpCommand.MESSAGE_USAGE));

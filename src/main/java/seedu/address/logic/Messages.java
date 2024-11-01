@@ -16,6 +16,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_DELETE_EMPTY_INDEX = "Error: The index cannot be empty";
+    public static final String MESSAGE_INVALID_NUMBER = "Invalid argument! Must be non-zero and "
+            + "positive integer (should not contain characters like '+')";
     public static final String MESSAGE_OVERFLOW_INDEX = "Error: Index is too large!"
                 + " The largest possible value is 2147483647.";
     public static final String MESSAGE_DELETE_UPPERBOUND_ERROR = "Sorry but the index was too large "
@@ -23,6 +25,7 @@ public class Messages {
     public static final String MESSAGE_DELETE_EMPTY_ERROR = "Sorry but you cannot delete from an empty list.";
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_NUMBER_OF_ARGS = "There should be one argument";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NAME_CANNOT_BE_EMPTY = "Name cannot be empty.";

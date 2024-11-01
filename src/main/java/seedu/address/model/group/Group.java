@@ -6,14 +6,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+
 /**
  * Represents a Group in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidGroupName(String)}
  */
 public class Group {
 
-    public static final String MESSAGE_CONSTRAINTS = "Group is written as g/group [number (>= 0)] (in lowercase)";
-    public static final String VALIDATION_REGEX = "^group \\d+$";
+    public static final String MESSAGE_CONSTRAINTS = "Group is written as g/group [number] (in lowercase)";
+    public static final String VALIDATION_REGEX = "^group (?!0$)\\d+$";
     private static final Logger logger = LogsCenter.getLogger(Group.class);
     public final String groupName;
     /**

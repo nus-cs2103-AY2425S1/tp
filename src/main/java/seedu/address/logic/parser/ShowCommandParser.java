@@ -1,9 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NUMBER;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 
 import java.util.Arrays;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
@@ -23,9 +26,11 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         try {
             String trimmedArgs = args.trim();
             String[] inputs = trimmedArgs.split(" ");
-            if (inputs.length != 1 || !trimmedArgs.matches("-?\\d+")) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
+            if (inputs.length != 1 || inputs[0].isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_NUMBER_OF_ARGS);
+            }
+            if (!StringUtil.isNonZeroUnsignedInteger(trimmedArgs)) {
+                throw new ParseException(MESSAGE_INVALID_NUMBER);
             }
             return new ShowCommand(new GroupContainsKeywordsPredicate(Arrays.asList(trimmedArgs)));
         } catch (ParseException pe) {
