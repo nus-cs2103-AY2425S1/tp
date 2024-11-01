@@ -28,15 +28,15 @@ public class MarkPaidCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToMarkPaid = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person markedPerson = new PersonBuilder(personToMarkPaid).withPayment("200").build();
-        MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_SECOND_PERSON, new FeesPaidByStudent("0"));
+        Person personToMarkPaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person markedPerson = new PersonBuilder(personToMarkPaid).withPayment("-200").build();
+        MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new FeesPaidByStudent("0"));
 
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKED_PAID_SUCCESS,
                 markedPerson.getFullName(), markedPerson.getPayment().toString());
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(1), markedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);
         assertCommandSuccess(markPaidCommand, model, expectedMessage, expectedModel);
     }
 
@@ -50,10 +50,10 @@ public class MarkPaidCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToMarkPaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person markedPerson = new PersonBuilder(personToMarkPaid).withPayment("200").build();
+        Person markedPerson = new PersonBuilder(personToMarkPaid).withPayment("-200").build();
         MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new FeesPaidByStudent("0"));
 
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKED_PAID_SUCCESS,
