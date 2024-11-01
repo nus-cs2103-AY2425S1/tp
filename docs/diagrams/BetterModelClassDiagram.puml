@@ -12,8 +12,8 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
-Person -up-> "*" Log
+Person *-up-> "*" Tag
+Person *-up-> "*" Log
 Tag -[hidden]right-> Log
 
 Person *--> Name

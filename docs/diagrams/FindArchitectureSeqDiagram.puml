@@ -2,7 +2,7 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-Actor User as user USER_COLOR
+Actor User as user
 Participant ":UI" as ui UI_COLOR
 Participant ":Logic" as logic LOGIC_COLOR
 Participant ":Model" as model MODEL_COLOR
