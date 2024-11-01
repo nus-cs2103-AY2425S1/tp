@@ -34,7 +34,7 @@ public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags students with a given subject, level or both. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags students with a given subject, level or both.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_LEVEL + "LEVEL "

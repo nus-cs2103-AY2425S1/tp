@@ -39,9 +39,9 @@ public class UpdateTaskCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_TASK_INDEX + "TASK_INDEX "
             + "[" + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION] "
-            + "[" + PREFIX_TASK_DEADLINE + "TASK_DEADLINE (YYYY-MM-DD)] \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Cristiano Ronaldo "
-            + PREFIX_TASK_INDEX + "1 " + PREFIX_TASK_DESCRIPTION + "Handle MC";
+            + "[" + PREFIX_TASK_DEADLINE + "TASK_DEADLINE] \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe "
+            + PREFIX_TASK_INDEX + "1 " + PREFIX_TASK_DESCRIPTION + "Mark Homework";
 
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated task: %1$s for Student %2$s by %3$s";
     public static final String MESSAGE_TASK_NOT_FOUND = "Task at index %1$d not found for %2$s";

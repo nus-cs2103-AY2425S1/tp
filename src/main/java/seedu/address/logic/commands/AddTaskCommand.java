@@ -30,11 +30,12 @@ public class AddTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "addtask";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task with description and deadline (YYYY-MM-DD)"
+            + " to a student. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION "
-            + PREFIX_TASK_DEADLINE + "TASK_DEADLINE (YYYY-MM-DD)\n"
+            + PREFIX_TASK_DEADLINE + "TASK_DEADLINE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TASK_DESCRIPTION + "Mark assignment "
