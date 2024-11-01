@@ -18,8 +18,8 @@ import seedu.address.model.UserPrefs;
 public class ListCommandTest {
     private Model model;
     private Model expectedModel;
-    String guestMessage = "There are 7 guests.\n";
-    String vendorMessage = "There are 0 vendors.";
+    private String guestMessage = "There are 7 guests.\n";
+    private String vendorMessage = "There are 0 vendors.";
 
 
     @BeforeEach
