@@ -887,6 +887,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System displays an error message telling the user that the submission does not exist.
       Use case ends.
 
+**System: StudentManagerPro**
+
+**Use case: UC17 Sort Students**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, student list displayed will be sorted.
+* If an invalid attribute is given, a corresponding error message is displayed.
+
+**MSS**
+1. User gives the command to sort students based on a particular attribute.
+2. System validates the input attribute.
+3. System sorts the displayed list based on the attribute.
+4. System displays the sorted list.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid attribute.
+    * 2a1. System displays an error message asking for valid input.
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
