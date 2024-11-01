@@ -7,6 +7,11 @@ PROperty is a **desktop app for property agents managing contacts and their prop
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, PROperty can get your contact and property management tasks done faster than traditional GUI apps.
 
+PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
+and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It taps on the
+fact that it is a lot less complicated to operate than its competitors such as Microsoft Excel while being faster to
+operate than graphical user interfaces commonly found in smartphones.
+
 * Table of Contents
   {:toc}
 
