@@ -74,14 +74,14 @@ public class LogicManager implements Logic {
         } catch (CommandException ce) {
             String message = "";
             if (model.hasSavedCommand()) {
-                message = "\nCanceled command: " + model.getSavedCommand().toString();
+                message = "\nCancelled command: " + model.getSavedCommand().toString();
                 model.clearSavedCommand();
             }
             throw new CommandException(ce.getMessage() + message , ce);
         } catch (ParseException pe) {
             String message = "";
             if (model.hasSavedCommand()) {
-                message = "\nCanceled command: " + model.getSavedCommand().toString();
+                message = "\nCancelled command: " + model.getSavedCommand().toString();
                 model.clearSavedCommand();
             }
             throw new ParseException(pe.getMessage() + message , pe);
