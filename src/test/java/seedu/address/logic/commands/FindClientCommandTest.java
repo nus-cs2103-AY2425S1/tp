@@ -30,9 +30,9 @@ import seedu.address.model.client.PolicyTypeMatchesPredicate;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindClientCommand}.
  */
-public class FindCommandTest {
+public class FindClientCommandTest {
     private Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalPrudy(), new UserPrefs());
 
@@ -52,24 +52,24 @@ public class FindCommandTest {
         CompositePredicate compositePredicate1 = new CompositePredicate(predicatesList1);
         CompositePredicate compositePredicate2 = new CompositePredicate(predicatesList2);
 
-        FindCommand findCommand1 = new FindCommand(compositePredicate1);
-        FindCommand findCommand2 = new FindCommand(compositePredicate2);
+        FindClientCommand findClientCommand1 = new FindClientCommand(compositePredicate1);
+        FindClientCommand findClientCommand2 = new FindClientCommand(compositePredicate2);
 
         // same object -> returns true
-        assertTrue(findCommand1.equals(findCommand1));
+        assertTrue(findClientCommand1.equals(findClientCommand1));
 
         // same values -> returns true
-        FindCommand findCommand1Copy = new FindCommand(compositePredicate1);
-        assertTrue(findCommand1.equals(findCommand1Copy));
+        FindClientCommand findClientCommand1Copy = new FindClientCommand(compositePredicate1);
+        assertTrue(findClientCommand1.equals(findClientCommand1Copy));
 
         // different types -> returns false
-        assertFalse(findCommand1.equals(1));
+        assertFalse(findClientCommand1.equals(1));
 
         // null -> returns false
-        assertFalse(findCommand1.equals(null));
+        assertFalse(findClientCommand1.equals(null));
 
         // different predicates -> returns false
-        assertFalse(findCommand1.equals(findCommand2));
+        assertFalse(findClientCommand1.equals(findClientCommand2));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class FindCommandTest {
         predicatesList.add(namePredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
-        FindCommand command = new FindCommand(compositePredicate);
+        FindClientCommand command = new FindClientCommand(compositePredicate);
         expectedModel.updateFilteredClientList(compositePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredClientList());
@@ -100,7 +100,7 @@ public class FindCommandTest {
         predicatesList.add(phonePredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
-        FindCommand command = new FindCommand(compositePredicate);
+        FindClientCommand command = new FindClientCommand(compositePredicate);
         expectedModel.updateFilteredClientList(compositePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.singletonList(CARL), model.getFilteredClientList());
@@ -117,7 +117,7 @@ public class FindCommandTest {
         predicatesList.add(namePredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
-        FindCommand command = new FindCommand(compositePredicate);
+        FindClientCommand command = new FindClientCommand(compositePredicate);
         expectedModel.updateFilteredClientList(compositePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredClientList());
@@ -134,7 +134,7 @@ public class FindCommandTest {
         predicatesList.add(policyTypePredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
-        FindCommand command = new FindCommand(compositePredicate);
+        FindClientCommand command = new FindClientCommand(compositePredicate);
         expectedModel.updateFilteredClientList(compositePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredClientList());
@@ -147,9 +147,9 @@ public class FindCommandTest {
         predicatesList.add(predicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
-        FindCommand findCommand = new FindCommand(compositePredicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + compositePredicate + "}";
-        assertEquals(expected, findCommand.toString());
+        FindClientCommand findClientCommand = new FindClientCommand(compositePredicate);
+        String expected = FindClientCommand.class.getCanonicalName() + "{predicate=" + compositePredicate + "}";
+        assertEquals(expected, findClientCommand.toString());
     }
 
     @Test
@@ -159,7 +159,7 @@ public class FindCommandTest {
         predicatesList.add(predicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
-        FindCommand command = new FindCommand(compositePredicate);
+        FindClientCommand command = new FindClientCommand(compositePredicate);
         assertThrows(NullPointerException.class, () -> command.execute(null));
     }
 }
