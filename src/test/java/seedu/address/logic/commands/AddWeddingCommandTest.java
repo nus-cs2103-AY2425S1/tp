@@ -59,6 +59,17 @@ public class AddWeddingCommandTest {
     }
 
     @Test
+    public void execute_duplicateWeddingDifferentOrder_throwsCommandException() {
+        Wedding validWedding = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
+        Wedding duplicateWeddingDifferentOrder = new WeddingBuilder().withWeddingName("Jean Tan & John Loh").build();
+        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(duplicateWeddingDifferentOrder);
+        ModelStub modelStub = new ModelStubWithWedding(validWedding);
+
+        assertThrows(CommandException.class,
+                AddWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () -> addWeddingCommand.execute(modelStub));
+    }
+
+    @Test
     public void execute_weddingWithSamePersonTwice_throwsCommandException() {
         Wedding invalidWedding = new WeddingBuilder().withWeddingName("John Loh & John Loh").build();
         AddWeddingCommand addWeddingCommand = new AddWeddingCommand(invalidWedding);
@@ -66,17 +77,6 @@ public class AddWeddingCommandTest {
 
         assertThrows(CommandException.class,
                 "A wedding cannot involve marrying oneself", () -> addWeddingCommand.execute(modelStub));
-    }
-
-    @Test
-    public void execute_weddingWithSamePeopleDifferentOrder_throwsCommandException() {
-        Wedding weddingOne = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
-        Wedding weddingTwo = new WeddingBuilder().withWeddingName("Jean Tan & John Loh").build();
-        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(weddingTwo);
-        ModelStub modelStub = new ModelStubWithWedding(weddingOne);
-
-        assertThrows(CommandException.class,
-                AddWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () -> addWeddingCommand.execute(modelStub));
     }
 
     @Test
