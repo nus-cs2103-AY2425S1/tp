@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.IdentityNumber;
@@ -21,14 +22,21 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         // Use the identity number prefix to tokenize the arguments
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_IDENTITY_NUMBER);
 
-        if (!argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        if (argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isPresent()) {
+            // Use IdentityNumber class to parse the identity number
+            IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(
+                    argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get());
+
+            return new DeleteCommand(identityNumber);
+        } else {
+            try {
+                // Use Index class to parse the index
+                Index index = ParserUtil.parseIndex(args);
+                return new DeleteCommand(index);
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            }
         }
-
-        // Use IdentityNumber class to parse the identity number
-        IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(
-                argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get());
-
-        return new DeleteCommand(identityNumber);
     }
 }

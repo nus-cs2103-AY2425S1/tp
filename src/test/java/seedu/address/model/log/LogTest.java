@@ -20,23 +20,16 @@ public class LogTest {
 
     @Test
     public void constructor_nullAppointmentDate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Log(null, "Valid entry"));
-    }
-
-    @Test
-    public void constructor_invalidEntry_throwsIllegalArgumentException() {
-        AppointmentDate validDate = new AppointmentDate("31 Dec 2024");
-        String invalidEntry = ""; // Invalid log entry
-        assertThrows(IllegalArgumentException.class, () -> new Log(validDate, invalidEntry));
+        assertThrows(NullPointerException.class, () -> new Log(null, new LogEntry("Valid entry")));
     }
 
     @Test
     public void constructor_validEntry_createsLog() {
         AppointmentDate validDate = new AppointmentDate("31 Dec 2024");
-        String validEntry = "This is a valid log entry.";
+        LogEntry validEntry = new LogEntry("This is a valid log entry.");
         Log log = new Log(validDate, validEntry);
 
-        assert log.getEntry().equals(validEntry);
+        assert log.getEntry().equals(validEntry.getEntry());
         assert log.getAppointmentDate().equals(validDate);
     }
 
@@ -59,50 +52,50 @@ public class LogTest {
     public void equals_differentLog_returnsFalse() {
         AppointmentDate date1 = new AppointmentDate("31 Dec 2024");
         AppointmentDate date2 = new AppointmentDate("01 Jan 2025");
-        Log log1 = new Log(date1, "Entry 1");
-        Log log2 = new Log(date2, "Entry 1");
+        Log log1 = new Log(date1, new LogEntry("Entry 1"));
+        Log log2 = new Log(date2, new LogEntry("Entry 1"));
 
         assert !log1.equals(log2);
     }
 
     @Test
     public void equals_sameInstance_returnsTrue() {
-        Log log = new Log(new AppointmentDate(testDate), testEntry);
+        Log log = new Log(new AppointmentDate(testDate), new LogEntry(testEntry));
         assertTrue(log.equals(log));
     }
 
     @Test
     public void equals_differentClass_returnsFalse() {
-        Log log = new Log(new AppointmentDate(testDate), testEntry);
+        Log log = new Log(new AppointmentDate(testDate), new LogEntry(testEntry));
         String notALog = "Not a Log instance";
         assertFalse(log.equals(notALog));
     }
 
     @Test
     public void equals_sameLog_returnsTrue() {
-        Log log1 = new Log(new AppointmentDate(testDate), testEntry);
-        Log log2 = new Log(new AppointmentDate(testDate), testEntry);
+        Log log1 = new Log(new AppointmentDate(testDate), new LogEntry(testEntry));
+        Log log2 = new Log(new AppointmentDate(testDate), new LogEntry(testEntry));
         assertTrue(log1.equals(log2));
     }
 
     @Test
     public void equals_differentEntry_returnsFalse() {
-        Log log1 = new Log(new AppointmentDate(testDate), testEntry);
-        Log log2 = new Log(new AppointmentDate(testDate), "Different entry");
+        Log log1 = new Log(new AppointmentDate(testDate), new LogEntry(testEntry));
+        Log log2 = new Log(new AppointmentDate(testDate), new LogEntry("Different entry"));
         assertFalse(log1.equals(log2));
     }
 
     @Test
     public void equals_differentDate_returnsFalse() {
-        Log log1 = new Log(new AppointmentDate(testDate), testEntry);
-        Log log2 = new Log(new AppointmentDate(LocalDate.of(2024, 10, 18)), testEntry);
+        Log log1 = new Log(new AppointmentDate(testDate), new LogEntry(testEntry));
+        Log log2 = new Log(new AppointmentDate(LocalDate.of(2024, 10, 18)), new LogEntry(testEntry));
         assertFalse(log1.equals(log2));
     }
 
     @Test
     public void toString_shortEntry_returnsCorrectString() {
         String shortEntry = "Short entry.";
-        Log log = new Log(new AppointmentDate(testDate), shortEntry);
+        Log log = new Log(new AppointmentDate(testDate), new LogEntry(shortEntry));
         String expectedString = "Log{Appointment Date=17 Oct 2024, Entry=Short entry.}";
         assertEquals(expectedString, log.toString());
     }
@@ -112,7 +105,7 @@ public class LogTest {
         String longEntry = "This entry is longer than 100 characters. "
                 + "It should be truncated when the toString method is called, "
                 + "ensuring only the first 100 characters are shown.";
-        Log log = new Log(new AppointmentDate(testDate), longEntry);
+        Log log = new Log(new AppointmentDate(testDate), new LogEntry(longEntry));
         String expectedString = "Log{Appointment Date=17 Oct 2024, Entry=This entry is longer than 100 characters. "
                 + "It should be truncated when the toString method is called,...}";
         assertEquals(expectedString, log.toString());
@@ -120,7 +113,7 @@ public class LogTest {
 
     @Test
     public void toDetailedString_returnsCorrectDetailedString() {
-        Log log = new Log(new AppointmentDate(testDate), testEntry);
+        Log log = new Log(new AppointmentDate(testDate), new LogEntry(testEntry));
         String expectedDetailedString = "Appointment Date: 17 Oct 2024\n"
                 + "Entry: This is a test log entry for the appointment.";
         assertEquals(expectedDetailedString, log.toDetailedString());
