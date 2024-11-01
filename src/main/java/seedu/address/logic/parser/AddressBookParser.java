@@ -12,7 +12,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.markcommands.MarkTaskCommand;
+import seedu.address.logic.commands.addcommands.AddExistingTaskToGroupCommand;
 import seedu.address.logic.commands.addcommands.AddGroupCommand;
 import seedu.address.logic.commands.addcommands.AddStudentCommand;
 import seedu.address.logic.commands.addcommands.AddStudentToGroupCommand;
@@ -32,11 +32,13 @@ import seedu.address.logic.commands.findcommands.FindTaskCommand;
 import seedu.address.logic.commands.listcommands.ListGroupCommand;
 import seedu.address.logic.commands.listcommands.ListStudentCommand;
 import seedu.address.logic.commands.listcommands.ListTaskCommand;
+import seedu.address.logic.commands.markcommands.MarkTaskCommand;
 import seedu.address.logic.commands.sortcommands.SortGroupCommand;
 import seedu.address.logic.commands.sortcommands.SortStudentCommand;
 import seedu.address.logic.commands.sortcommands.SortTaskCommand;
 import seedu.address.logic.commands.versionhistorycommands.RedoCommand;
 import seedu.address.logic.commands.versionhistorycommands.UndoCommand;
+import seedu.address.logic.parser.addcommands.AddExistingTaskToGroupCommandParser;
 import seedu.address.logic.parser.addcommands.AddGroupCommandParser;
 import seedu.address.logic.parser.addcommands.AddStudentCommandParser;
 import seedu.address.logic.parser.addcommands.AddStudentToGroupCommandParser;
@@ -57,6 +59,7 @@ import seedu.address.logic.parser.findcommands.FindTaskCommandParser;
 import seedu.address.logic.parser.listcommands.ListGroupCommandParser;
 import seedu.address.logic.parser.listcommands.ListStudentCommandParser;
 import seedu.address.logic.parser.listcommands.ListTaskCommandParser;
+import seedu.address.logic.parser.markcommands.MarkTaskCommandParser;
 import seedu.address.logic.parser.sortcommands.SortGroupCommandParser;
 import seedu.address.logic.parser.sortcommands.SortStudentCommandParser;
 import seedu.address.logic.parser.sortcommands.SortTaskCommandParser;
@@ -161,6 +164,10 @@ public class AddressBookParser {
         case AddTaskToAllGroupsCommand.COMMAND_WORD_ALIAS:
         case AddTaskToAllGroupsCommand.COMMAND_WORD:
             return new AddTaskToAllGroupsCommandParser().parse(arguments);
+
+        case AddExistingTaskToGroupCommand.COMMAND_WORD_ALIAS:
+        case AddExistingTaskToGroupCommand.COMMAND_WORD:
+            return new AddExistingTaskToGroupCommandParser().parse(arguments);
 
         case DeleteTaskFromGroupCommand.COMMAND_WORD_ALIAS:
         case DeleteTaskFromGroupCommand.COMMAND_WORD:
