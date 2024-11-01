@@ -154,7 +154,7 @@ Format: `addInsurance INDEX iid/INSURANCE_ID`
 * If the `INDEX` or `INSURANCE_ID` is invalid, the user will be informed with an error message.
 
 Examples:
-* `addInsurance 1 id/1` adds the insurance plan with `INSURANCE_ID` 1 to the client at `INDEX` 1
+* `addInsurance 1 iid/1` adds the insurance plan with `INSURANCE_ID` 1 to the client at `INDEX` 1
 
 ### Deleting an insurance plan from a client : `deleteInsurance`
 
