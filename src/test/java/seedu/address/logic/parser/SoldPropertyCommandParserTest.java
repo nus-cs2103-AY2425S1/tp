@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTUAL_PRICE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -79,6 +81,20 @@ public class SoldPropertyCommandParserTest {
                 + INDEX_SECOND_PROPERTY.getOneBased();
 
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SoldPropertyCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, input, expectedMessage);
+    }
+
+    @Test
+    public void parse_duplicateActualPrice_throwsParseException() {
+        String priceString = "2000000";
+        String input = INDEX_FIRST_PERSON.getOneBased()
+                + " "
+                + INDEX_FIRST_PROPERTY.getOneBased()
+                + " ap/" + priceString
+                + " ap/" + priceString;
+
+        String expectedMessage = MESSAGE_DUPLICATE_FIELDS + PREFIX_ACTUAL_PRICE;
 
         assertParseFailure(parser, input, expectedMessage);
     }
