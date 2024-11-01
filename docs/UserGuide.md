@@ -144,7 +144,7 @@ You should see java version 17
    * `exit` : Exits the app.
 
 
-6. If you are a beginner, we recommend that you check out the [Command Structure]() section to find out more about command syntaxes. You may also choose to skip and proceed directly to the [Features](#features) section for details of each command.
+6. If you are a beginner, we recommend that you check out the [Command Structure](#4-command-structure) section to find out more about command syntax. You may also choose to skip and proceed directly to the [Command](#5-commands-overview) section for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -248,6 +248,12 @@ Prudy uses a command-line interface with four primary categories of commands to 
 
 These commands help with general navigation, displaying help information, saving data, and exiting the program.
 
+<panel type="info">
+<span class="font-weight-bold">Note:</span> Extraneous parameters for commands that do not take in parameters (such as <code>help</code>, <code>list</code>, <code>exit</code>, and <code>clear</code>) will be ignored.  
+e.g., if the command specifies <code>help 123</code>, it will be interpreted as <code>help</code>.
+</panel>
+
+
 ### 5.1.1 Viewing help : `help`
 Shows a message explaining how to access the help page.  
 ![help message](images/helpMessage.png)  
@@ -266,10 +272,10 @@ Exits the program.
 Format: `exit`
 
 ### 5.1.4 Saving the Data
-Prudy data are saved on the hard disk automatically after any command that changes the data. There is no need to save manually.
+Prudy automatically saves data to the hard disk after every command that modifies the data. Manual saving is not required.
 
 ### 5.1.5 Editing the Data File
-Prudy data are saved automatically as a JSON file `[JAR file location]/data/prudy.json`. Advanced users are welcome to update data directly by editing this file.
+Prudy data is automatically saved as a JSON file at `[JAR file location]/data/prudy.json`. Advanced users may edit this file directly to update the data.
 
 <box type="warning" seamless>
 **Caution:**  
@@ -328,14 +334,14 @@ Examples:
   </box>
 
 ### 5.2.4 Editing a Client’s Details: `edit`
-Edits an existing client in Prudy. Does not edit his/her policies. See [editing a policy](#editing-a-policy-edit-policy) for more info on the command.
+Edits an existing client in Prudy. Does not edit his/her policies. See [editing a policy](#533-editing-a-policy-edit-policy) for more info on the command.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the client at the specified `INDEX`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
 * You can remove all the client's tags by typing `t/` without
   specifying any tags after it.
 
@@ -381,7 +387,7 @@ Delete policies from the client at the specified `INDEX`, and of the specified `
 Format: `delete-policy INDEX pt/POLICY_TYPE…`
 
 Details:
-* `POLICY_TYPE` is case insensitive, and can be either `life`, `health`, or `education`.
+* `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`.
 * More than one policy type can be deleted at once. However, calling this command with zero policy type indicated will not be successful.
 * If the policy to be deleted does not exist for the specified client, this command will not work.
 
@@ -394,7 +400,7 @@ Edit the policy from the client at the specified `INDEX`, and of the specified `
 Format: `edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]`
 
 Details:
-* `POLICY_TYPE` is case insensitive, and can be either `life`, `health`, or `education`.
+* `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`.
 * At least one of the optional parameters must be indicated.
 * Only the specified parameters will be edited. The other parameters not specified will not be changed.
 * If the policy to be edited does not exist for the specified client, this command will not work.
