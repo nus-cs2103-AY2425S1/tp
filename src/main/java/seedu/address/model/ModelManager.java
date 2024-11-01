@@ -143,6 +143,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setArchivedListMode(boolean isArchived) {
+        isArchivedList = isArchived;
         showingArchived.set(isArchived);  // Update the property to notify UI
     }
 
@@ -223,6 +224,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && archivedAddressBook.equals(otherModelManager.archivedAddressBook)
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredArchivedPersons.equals(otherModelManager.filteredArchivedPersons);
     }
 }
