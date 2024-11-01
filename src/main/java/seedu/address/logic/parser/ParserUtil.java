@@ -14,7 +14,6 @@ import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Phone;
@@ -146,16 +145,6 @@ public class ParserUtil {
             throw new ParseException(JobSalary.MESSAGE_CONSTRAINTS);
         }
         return new JobSalary(trimmedSalary);
-    }
-
-    /**
-     * Parses a {@code String requirements} into a {@code JobRequirements}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static JobRequirements parseRequirements(String requirements) {
-        requireNonNull(requirements);
-        String trimmedRequirements = requirements.trim();
-        return new JobRequirements(trimmedRequirements);
     }
 
     /**

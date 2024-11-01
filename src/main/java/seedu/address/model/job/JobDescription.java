@@ -7,9 +7,9 @@ public class JobDescription {
     public final String value;
 
     /**
-     * Constructs a {@code JobRequirements}.
+     * Constructs a {@code JobDescription}.
      *
-     * @param description A job requirements.
+     * @param description The details of the job.
      */
     public JobDescription(String description) {
         value = description;

@@ -23,6 +23,7 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_COMPANY = "Company list contains duplicate companies";
+    public static final String MESSAGE_DUPLICATE_JOB = "Job list contains duplicate jobs";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedJob> jobs = new ArrayList<>();
@@ -81,7 +82,9 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedJob jsonAdaptedJob : jobs) {
             Job job = jsonAdaptedJob.toModelType();
-            // TODO: Duplicate job invalidation
+            if (addressBook.hasJob(job)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_JOB);
+            }
             addressBook.addJob(job);
         }
 
