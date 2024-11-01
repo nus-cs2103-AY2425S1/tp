@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually 
+EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually
 at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
 
 * Table of Contents
@@ -101,7 +101,7 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
