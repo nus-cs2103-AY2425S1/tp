@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.addcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
 import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_STUDENT_NO_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
@@ -26,7 +27,6 @@ public class AddStudentToGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "add_s_g";
     public static final String COMMAND_WORD_ALIAS = "asg";
-    public static final int LIST_GROUP_MARKER = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Adds a student to a group. \n"
@@ -79,7 +79,7 @@ public class AddStudentToGroupCommand extends Command {
         model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
         model.setStateGroups();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), Messages.format(toAddInto)),
-                LIST_GROUP_MARKER);
+            LIST_GROUP_MARKER);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.sortcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_TASK_MARKER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.Comparator;
@@ -20,11 +21,10 @@ public class SortTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "sort_t";
     public static final String COMMAND_WORD_ALIAS = "st";
-    public static final int LIST_TASK_MARKER = 2;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-            + ": Sorts all tasks.\n"
-            + "Example: " + COMMAND_WORD;
+        + ": Sorts all tasks.\n"
+        + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Sorted all tasks by deadline (earliest to latest)";
 
@@ -52,6 +52,6 @@ public class SortTaskCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .toString();
+            .toString();
     }
 }

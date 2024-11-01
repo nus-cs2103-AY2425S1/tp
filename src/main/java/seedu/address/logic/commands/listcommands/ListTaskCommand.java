@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.listcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_TASK_MARKER;
+import static seedu.address.logic.ListMarkers.LIST_TASK_MARKER;
 import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
@@ -20,8 +22,6 @@ import seedu.address.model.group.GroupName;
 public class ListTaskCommand extends Command {
     public static final String COMMAND_WORD = "list_t";
     public static final String COMMAND_WORD_ALIAS = "lt";
-    public static final int LIST_TASK_MARKER = 2;
-    public static final int LIST_GROUP_TASK_MARKER = 3;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Lists all tasks of a specified group.\n"

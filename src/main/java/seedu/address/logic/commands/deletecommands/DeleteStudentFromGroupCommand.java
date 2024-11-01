@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.deletecommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
@@ -24,7 +25,6 @@ import seedu.address.model.student.StudentNumber;
 public class DeleteStudentFromGroupCommand extends Command {
     public static final String COMMAND_WORD = "del_s_g";
     public static final String COMMAND_WORD_ALIAS = "dsg";
-    public static final int LIST_GROUP_MARKER = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes the student identified from the target group by the student number used.\n"
