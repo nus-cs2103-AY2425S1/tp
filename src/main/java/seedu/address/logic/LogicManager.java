@@ -79,6 +79,7 @@ public class LogicManager implements Logic {
             storage.saveAddressBook(currentAddressBook);
             storage.saveUserPrefs(model.getUserPrefs());
             versionHistoryStorage.saveVersionHistory(versionHistory);
+            model.setStatus();
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
