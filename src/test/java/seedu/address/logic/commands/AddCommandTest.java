@@ -188,6 +188,12 @@ public class AddCommandTest {
         public boolean addTags(List<Tag> tags) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean deleteTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public boolean deleteTags(List<Tag> tag) {
             throw new AssertionError("This method should not be called.");

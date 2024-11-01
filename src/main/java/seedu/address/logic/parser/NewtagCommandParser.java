@@ -14,7 +14,6 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new NewtagCommand object.
  */
 public class NewtagCommandParser implements Parser<NewtagCommand> {
-    public static final int MAX_LENGTH = 50;
     public static final String VALIDATION_REGEX = "[\\p{Alnum}' ]+";
 
     /**
@@ -25,7 +24,7 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
      */
     public boolean isValidArgument(String argument) {
         boolean isEmpty = argument.isEmpty();
-        boolean isTooLong = argument.length() > MAX_LENGTH;
+        boolean isTooLong = argument.length() > Tag.MAX_CHARACTER_LENGTH;
         boolean isValidCharacters = argument.matches(VALIDATION_REGEX);
         if (isEmpty || isTooLong || !isValidCharacters) {
             return false;

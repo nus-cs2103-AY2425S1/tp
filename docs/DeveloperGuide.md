@@ -66,7 +66,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -83,7 +83,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -111,10 +111,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`, `TagCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`, `TagCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -134,7 +134,7 @@ The `Model` component,
 </div>
 
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -258,41 +258,46 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
 **Target user profile**:
 
-* has a need to manage a significant number (50-100) of wedding invitees
+* has a need to manage a significant number (50-100) of wedding guests
 * only needs to plan 1 wedding at a time
 * prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* much prefers typing to mouse interactions
+* is reasonably comfortable using Command Line Interface (CLI) applications
 
-**Value proposition**: reduce the time taken to filter and contact invitees, allowing planners to focus on the wedding program.
+**Value proposition**:
+Reduce the time taken to filter and contact guests, allowing planners to focus more time on other wedding needs.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                         | I want to …​                                 | So that I can…​                                                         |
-|----------|---------------------------------|----------------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | new user                        | see usage instructions                       | refer to instructions when I forget how to use the App                  |
-| `* * *`  | user                            | add a new person to the guest list           |                                                                         |
-| `* * *`  | user                            | delete a person                              | remove someone that has been uninvited or is not attending              |
-| `* * *`  | user                            | view the entire guest list                   | get an overview of my guest status                                      |
-| `* * *`  | user                            | find a guest by name                         | locate details of invitees without having to go through the entire list |
-| `* * *`  | user                            | add customisable tags to guests              | categorise my guests easily                                             |
-| `* * *`  | user                            | delete tags associated with guests           | recategorise my guests if needed                                        |
-| `* * *`  | user                            | track the RSVP status of each guest          | track who is attending the wedding                                      |
-| `* *`    | user                            | filter guests according to their RSVP status | get an overview of who is attending the wedding                         |
-| `* *`    | user with many groups of guests | filter guests according to their tags        | get an overview of each individual group                                |
-| `*`      | user with many guests           | delete multiple guests at once               | quickly remove large groups from my guest list                          |
+| Priority | As a …​                                             | I want to …​                                      | So that I can…​                                                                           |
+|----------|-----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | wedding planner new to the app                      | see usage instructions and examples               | refer to instructions when I forget how to use the App                                    |
+| `* * *`  | wedding planner                                     | add a new person to the guest list                | track the person using the guest list                                                     |
+| `* * *`  | wedding planner                                     | delete a person                                   | remove someone that has been uninvited                                                    |
+| `* * *`  | wedding planner                                     | view the entire guest list                        | get an view all the guests in my guest list                                               |
+| `* * *`  | wedding planner                                     | find a guest by name                              | locate specific guests without having to go through the entire list                       |
+| `* * *`  | wedding planner                                     | add customisable tags to guests                   | categorise my guests easily                                                               |
+| `* * *`  | wedding planner                                     | delete tags associated with guests                | re-categorise my guests if needed                                                         |
+| `* * *`  | wedding planner                                     | view the RSVP status of each guest                | see if each guest is attending, not attending or have not RSVP'ed to the wedding          |
+| `* *`    | wedding planner                                     | filter guests according to their RSVP status      | view guests that are attending, not attending or have not RSVP'ed to the wedding only     |
+| `* *`    | wedding planner managing different groups of guests | filter guests according to their tags             | view specific groups of guests without having to go through the entire list               |
+| `* *`    | wedding planner managing many guests                | tag and untag multiple guests at once             | quickly tag or untag large groups of guests in the guest list                             |
+| `* *`    | wedding planner managing many tags                  | tag and untag multiple tags on each guest at once | quickly tag or untag multiple tags onto each guest when required                          |
+| `* *`    | wedding planner requiring many tags                 | create and delete multiple tags at once           | quickly create or delete multiple tags used in the guest list                             |
+| `*`      | wedding planner flexible to changes                 | edit tags that were already created               | change the description of tags without altering any association to the guests in the list |
+| `*`      | wedding planner                                     | apply multiple filters to the list                | view only a specific group of guests                                                      |
+| `*`      | wedding planner                                     | have colour coded tags and fields                 | distinguish tags and different fields easily                                              |
+| `*`      | wedding planner                                     | see the list of tags already created              | easily tag guests without checking if the tag has been already created                    |
 
-*{More to be added}*
-
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -300,9 +305,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User selects the options to add a guest.
-2.  The system prompts the user for name and contact number.
-3.  User inputs their name and contact number.
+1.  User enters the command to add a guest.
+2.  The system prompts the user for guest's name, contact number and email address.
+3.  User inputs their name, contact number and email address.
 4.  The system validates the input.
 5.  The system saves the guest and display confirmation message.
 
@@ -310,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User inputs invalid contact number (e.g. invalid spaces).
+* 3a. User inputs invalid contact number (e.g. invalid spaces, more than 8 integers).
   * 3a1. System displays error message and prompts for contact number.
   * Use case resumes at step 3.
 
@@ -323,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User selects the options to delete a guest.
+1.  User enters the command to delete a guest.
 2.  The system prompts for guest's index in the list.
 3.  User enters the index.
 4.  The system verifies the index.
@@ -341,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User selects the options to find a guest.
+1.  User enters the command to find a guest.
 2.  The system prompts for the guest's name.
 3.  User enters the name.
 4.  The system searches for the guest.
@@ -352,32 +357,154 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. No guests match the keyword
-    * 3a1. System displays a message indicating no guest found.
-  
+    * 3a1. System displays a message indicating no guest found. 
+    * Use case ends.
 
-
-**Use case 4: Toggle RSVP status**
+**Use case 4: Set RSVP status**
 
 **MSS**
 
-1.  User selects the options to toggle RSVP status.
-2.  The system prompts for the guest's index in the list.
-3.  User enters the index.
-4.  The system verifies the index.
-5.  The system updates the list and show confirmation message.
+1.  User enters the command to set RSVP status.
+2.  The system prompts for the guest's index in the list and the index representing the intended RSVP status.
+3.  User enters the indexes.
+4.  The system verifies the indexes.
+5.  The system updates the list and shows confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters an invalid index (e.g. outside valid range)
-    * 3a1. System displays error message and prompt for index.
+* 3a. User enters an invalid guest or status index (e.g. outside valid range)
+    * 3a1. System displays error message and prompt for indexes.
+    * Use case resumes at step 3.
+
+**Use case 5: Create new tag(s)**
+
+**MSS**
+
+1.  User enters the command to create new tag(s).
+2.  The system prompts for the description of the new tag(s).
+3.  User enters the description of the new tag(s).
+4.  The system verifies the input.
+5.  The system updates the tag list to show the new created tag and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
+    * 3a1. System displays error message and prompt tag description.
+    * Use case resumes at step 3.
+
+* 3b. User enters a duplicate tag description (i.e. tag already exists in the tag list)
+    * 3b1. System displays a message indicating the tag already exists.
+    * Use case ends.
+
+* 3c. Tag list limit has been reached
+    * 3c1. System displays a message indicating the tag list limit has been reached.
+    * Use case ends.
+
+**Use case 6: Delete tag(s)**
+
+**MSS**
+
+1.  User enters the command to delete tag(s).
+2.  The system prompts for the description of the tag(s).
+3.  User enters the description of the tag(s).
+4.  The system verifies the input.
+5.  The system updates the tag list to show that the tag(s) no longer exist and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
+    * 3a1. System displays error message and prompt tag description.
+    * Use case resumes at step 3.
+
+* 3b. User enters a description not matching any existing tags (i.e. tag does not exist in the tag list)
+    * 3b1. System displays a message indicating the tag does not exist.
+    * Use case ends.
+
+**Use case 7: Tag guest(s)**
+
+**MSS**
+
+1.  User enters the command to tag guest(s).
+2.  The system prompts for the relevant index(es) in the list and the description(s) of the tag(s).
+3.  User enters the index(es) and description(s) of the tag(s).
+4.  The system verifies the input.
+5.  The system updates the guest list to show the tag(s) on the target guest(s) and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
+    * 3a1. System displays error message and prompt index(es) and tag description(s).
+    * Use case resumes at step 3.
+
+* 3b. Tag not in tag list
+    * 3b1. System displays a message indicating the tag does not exist in tag list.
+    * Use case ends.
+
+* 3c. User enters invalid index(es) (e.g. outside valid range)
+    * 3c1. System displays error message and prompt for index(es) and tag description(s).
+    * Use case resumes at step 3.
+
+**Use case 8: Untag guest(s)**
+
+**MSS**
+
+1.  User enters the command to untag guest(s).
+2.  The system prompts for the relevant index(es) in the list and the description(s) of the tag(s).
+3.  User enters the index(es) and description(s) of the tag(s).
+4.  The system verifies the input.
+5.  The system updates the guest list to show that the tag(s) on the target guest(s) are removed and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
+    * 3a1. System displays error message and prompt index(es) and tag description(s).
+    * Use case resumes at step 3.
+
+* 3b. Tag not on guest
+    * 3b1. System displays a message indicating the tag does not exist on the guest.
+    * Use case ends.
+
+* 3c. User enters invalid index(es) (e.g. outside valid range)
+    * 3c1. System displays error message and prompt for index(es) and tag description(s).
     * Use case resumes at step 3.
 
 
-* 4a. Guest is already in the desired RSVP status.
-    * 4a1. System displays a message indicating the guest is already in the desired status.
-    * Use case ends.
+**Use case 9: Filter guest list by tag or RSVP status**
+
+**MSS**
+
+1.  User enters the command to filter guest list.
+2.  The system prompts for the desired predicate (e.g. a RSVP status or tag(s)).
+3.  User enters the desired predicate.
+4.  The system verifies the input.
+5.  The system shows the list of guests matching the predicate and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid index representing the RSVP status
+    * 3a1. System displays error message indicating invalid index and prompts for the desired predicate.
+    * Use case resumes at step 3.
+
+* 3b. User enters an invalid tag
+    * 3b1. System displays error message indicating the tag does not exist in tag list and prompts for the desired predicate.
+    * Use case resumes at step 3.
+
+* 3c. User enters more than one index
+    * 3c1. System displays error message indicating multiple fields and prompt for the desired predicate.
+    * Use case resumes at step 3.
+
 
 ### Non-Functional Requirements
 
@@ -397,11 +524,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI**: Graphical User Interface allows users to interact with the address book codebase through visual representation
 * **CLI**: Command Line Interface accepts text input to execute functions of the application
 * **JAR file**: A package file that contains many class files, associated metadata and resources that build the application
-* **RSVP status**: A tag on each contact that indicates if the guest has responded to the wedding invitation
-* **Customisable tags**: Tags on contacts containing text written by user, which can be used for filtering purposes
-* **Delete**: Removes a contact and all details regarding the contact from the address book
-* **Add**: Creates and saves a new contact into the address book
-* **Filter**: Only show contacts that contains the text input by the user
+* **RSVP status**: A field on each guest that indicates if the guest has responded, attending or not attending the wedding, which can be used for filtering purposes
+* **Customisable tags**: Tags on guests containing text written by user, which can be used for filtering purposes
+* **Tag list**: A list of tags that can be used to classify guests
+* **Delete**: Removes a guest and all details regarding the guest from the address book
+* **Add**: Creates and saves a new guest into the address book
+* **Filter**: Only show guests that contains the text input by the user
+* **New Tag**: Creates a new tag and adds it to the tag list
+* **Delete Tag**: Removes a tag from the tag list and all instances of it on all guests in the address book
+* **Remove Tag**: Removes a tag from guest(s) but does not remove it from the tag list or other guests not specified
 
 --------------------------------------------------------------------------------------------------------------------
 
