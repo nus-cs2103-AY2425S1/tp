@@ -137,7 +137,6 @@ public class LogicManagerTest {
 
         assertCommandException(listCommand, ListCommand.MESSAGE_NO_CLIENT_IN_LIST);
     }
-    /*
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
@@ -149,7 +148,6 @@ public class LogicManagerTest {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
-    */
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
@@ -233,15 +231,12 @@ public class LogicManagerTest {
 
         logic = new LogicManager(model, storage);
 
-        // Trigger the saveAddressBook method by executing an add command
+        // Trigger the saveAddressBook method by executing an add buyer command
         String addBuyerCommand = AddBuyerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " "
                 + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
-
-        String addSellerCommand = AddSellerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " "
-                + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
-
-        // Use a loop or separate assertions if needed
-        assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage);
-        assertCommandFailure(addSellerCommand, CommandException.class, expectedMessage);
+        Buyer expectedBuyer = new PersonBuilder(AMY).withTags().buildBuyer();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(expectedBuyer);
+        assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }
