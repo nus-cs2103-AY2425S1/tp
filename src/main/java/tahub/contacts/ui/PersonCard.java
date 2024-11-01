@@ -2,16 +2,20 @@ package tahub.contacts.ui;
 
 import java.util.Comparator;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import tahub.contacts.logic.Logic;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -26,6 +30,8 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+
+    private AttendanceWindow attendanceWindow;
 
     @FXML
     private HBox cardPane;
@@ -49,21 +55,40 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Button attendance;
 
+    @FXML
+    private void onClickHandler(ActionEvent event) {
+        event.consume ();
+        if (!attendanceWindow.isShowing ()) {
+            attendanceWindow.show ();
+        } else {
+            attendanceWindow.focus ();
+        }
+    }
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
-        super(FXML);
+    public PersonCard(Person person , int displayedIndex , Logic logic) {
+        super (FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        matric.setText("(" + person.getMatricNumber().value + ")");
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        attendance.setText("Attendance");
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        attendanceWindow = new AttendanceWindow (logic , person);
+        id.setText (displayedIndex + ". ");
+        name.setText (person.getName ().fullName);
+        phone.setText (person.getPhone ().value);
+        matric.setText ("(" + person.getMatricNumber ().value + ")");
+        address.setText (person.getAddress ().value);
+        email.setText (person.getEmail ().value);
+        attendance.setText ("Attendance");
+
+        // Get all courses the student is enrolled in
+        ObservableList<StudentCourseAssociation> scaList = logic.getStudentScas (person)
+                .getByMatric(person.getMatricNumber().value);
+
+        // Add course codes as tags
+        for (StudentCourseAssociation sca : scaList) {
+            Label courseLabel = new Label(sca.getCourse().courseCode.toString());
+            courseLabel.getStyleClass().add("course-tag"); // Add this style class for course tags
+            tags.getChildren().add(courseLabel);
+        }
     }
 }

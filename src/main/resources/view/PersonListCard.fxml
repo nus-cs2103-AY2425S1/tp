@@ -32,7 +32,7 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Button fx:id="attendance" styleClass="cell_small_label" text="Attendance" />
+      <Button fx:id="attendance" styleClass="cell_small_label" text="Attendance" onAction="#onClickHandler" />
     </VBox>
   </GridPane>
 </HBox>
