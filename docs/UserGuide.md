@@ -214,7 +214,7 @@ the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 ### Student
 
@@ -225,7 +225,7 @@ the data of your previous AddressBook home folder.
 | **Delete Student**            | `del_s/ds sno/STUDENT_NUMBER`<br>e.g., `ds sno/A0123456A`                                                                            |
 | **Edit Student**              | `edit_s/es sno/STUDENT_NUMBER [sn/STUDENT_NAME] [e/EMAIL] [t/TAG]`<br>e.g., `es sno/A0123456A sn/James Ho Ting Kang`                 |
 | **Add Student to Group**      | `add_s_g/asg sno/STUDENT_NUMBER gn/GROUP_NAME`<br>e.g., `asg sno/A0123456A gn/CS2103-F12-2`                                          |
-| **Delete Student From Group** | `del_s-g/dsg sno/STUDENT_NUMBER`<br>e.g., `dsg sno/A0123456A`                                                                        |
+| **Delete Student From Group** | `del_s_g/dsg sno/STUDENT_NUMBER`<br>e.g., `dsg sno/A0123456A`                                                                        |
 | **Find Student**              | `find_s/fs q/QUERY [q/QUERY]...`<br>e.g., `fs q/James`                                                                               |
 | **Sort Students**             | `sort_s/ss`                                                                                                                          |
 
@@ -242,17 +242,18 @@ the data of your previous AddressBook home folder.
 
 ### Task
 
-| Action                         | Format, Examples                                                                                                                                                 |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **List Task**                  | `list_t/lt [gn/GROUP_NAME]`<br>e.g., `lt`, `lt gn/CS2103-F12-2`                                                                                                  |
-| **Add Task to Group**          | `add_t_g/atg tn/TASK_NAME td/TASK_DEADLINE (YYYY-MM-DD HHmm) gn/GROUP_NAME [gn/GROUP_NAME]...`<br>e.g., `atg tn/v1.5 Release td/2024-11-07 2359 gn/CS2103-F12-2` |
-| **Add Task to All Groups**     | `add_t/at tn/TASK_NAME td/TASK_DEADLINE (YYYY-MM-DD HHmm)`<br>e.g., `at tn/Submit Postmortem td/2024-10-20 1800`                                                 |
-| **Add Existing Task to Group** | `add_et_g/aetg i/INDEX gn/GROUP_NAME [gn/GROUP_NAME]...`<br>e.g., `aetg i/1 gn/CS2103-F12-3`                                                                     |
-| **Delete Task from Group**     | `del_t_g/dtg i/INDEX gn/GROUP_NAME`<br>e.g., `dtg i/1 gn/CS2103-F12-2`                                                                                           |
-| **Edit Task**                  | `edit_t_g/etg i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)` <br>e.g., `etg i/1 gn/CS2103-F12-3 tn/v1.4 Release`                      |
-| **Edit Task for All Groups**   | `edit_t/et i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`<br>e.g., `et i/1 td/2024-11-20 1200`                                                      |
-| **Find Task**                  | `find_t/ft q/QUERY [q/QUERY]...`<br>e.g., `ft q/v1.3 Release`                                                                                                    |
-| **Sort Tasks**                 | `sort_t/st`                                                                                                                                                      |
+| Action                          | Format, Examples                                                                                                                                                 |
+|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **List Task**                   | `list_t/lt [gn/GROUP_NAME]`<br>e.g., `lt`, `lt gn/CS2103-F12-2`                                                                                                  |
+| **Add Task to Group**           | `add_t_g/atg tn/TASK_NAME td/TASK_DEADLINE (YYYY-MM-DD HHmm) gn/GROUP_NAME [gn/GROUP_NAME]...`<br>e.g., `atg tn/v1.5 Release td/2024-11-07 2359 gn/CS2103-F12-2` |
+| **Add Task to All Groups**      | `add_t/at tn/TASK_NAME td/TASK_DEADLINE (YYYY-MM-DD HHmm)`<br>e.g., `at tn/Submit Postmortem td/2024-10-20 1800`                                                 |
+| **Add Existing Task to Group**  | `add_et_g/aetg i/INDEX gn/GROUP_NAME [gn/GROUP_NAME]...`<br>e.g., `aetg i/1 gn/CS2103-F12-3`                                                                     |
+| **Delete Task from All Groups** | `del_t/dt i/INDEX`<br>e.g., `dt i/1`                                                                                                                             |
+| **Delete Task from Group**      | `del_t_g/dtg i/INDEX gn/GROUP_NAME`<br>e.g., `dtg i/1 gn/CS2103-F12-2`                                                                                           |
+| **Edit Task**                   | `edit_t_g/etg i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)` <br>e.g., `etg i/1 gn/CS2103-F12-3 tn/v1.4 Release`                      |
+| **Edit Task for All Groups**    | `edit_t/et i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`<br>e.g., `et i/1 td/2024-11-20 1200`                                                      |
+| **Find Task**                   | `find_t/ft q/QUERY [q/QUERY]...`<br>e.g., `ft q/v1.3 Release`                                                                                                    |
+| **Sort Tasks**                  | `sort_t/st`                                                                                                                                                      |
 
 ### Misc.
 
@@ -263,13 +264,3 @@ the data of your previous AddressBook home folder.
 | **Undo**  | `undo`           |
 | **Redo**  | `redo`           |
 | **Exit**  | `exit`           |
-
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
