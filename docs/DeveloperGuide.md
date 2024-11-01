@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # T_Assistant Developer Guide
@@ -13,7 +13,8 @@
 
 ## **Acknowledgements**
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Libraries
+  used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -221,15 +222,16 @@ This feature will also remove `Students` in the `Group` and reset their `Group`,
 `Group`.
 
 #### Sequence Diagram
+
 The following sequence diagram shows how the above steps for delete group works:
 <puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="DeleteGroupCommand"/>
 
 ### Undo/redo feature
 
-The undo/redo mechanism is facilitated by `VersionHistory`. It stores an ArrayList `versions` of ReadOnlyAddressBook. 
-Whenever there are changes made to the AddressBook, a defensive copy of the AddressBook is created and stored in the 
-ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook. If newly initialized, this 
-pointer is set to -1. We have set a maximum number of versions to be able to stored, 100. Once this limit is reached, 
+The undo/redo mechanism is facilitated by `VersionHistory`. It stores an ArrayList `versions` of ReadOnlyAddressBook.
+Whenever there are changes made to the AddressBook, a defensive copy of the AddressBook is created and stored in the
+ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook. If newly initialized, this
+pointer is set to -1. We have set a maximum number of versions to be able to stored, 100. Once this limit is reached,
 the earliest entry in the ArrayList will be deleted by `VersionHistory` so that a new version can be stored.
 Additionally, it implements the following operations:
 
@@ -237,7 +239,7 @@ Additionally, it implements the following operations:
 * `VersionedAddressBook#undoVersion()`— Restores the previous version from its history.
 * `VersionedAddressBook#redoVersion()`— Restores a previously undone version from its history.
 
-These operations are exposed in the `Command` abstract class: `Command#addVersion()`, `Command#undoVersion()` 
+These operations are exposed in the `Command` abstract class: `Command#addVersion()`, `Command#undoVersion()`
 and `Command#redoVersion()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
@@ -245,13 +247,13 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 #### Implementation details
 
 1. User has the application launched and has made at least 1 change to the system.
-2. For our example, user executes 'asg' and adds a student to a specific group. However, this was done incorrectly and 
+2. For our example, user executes 'asg' and adds a student to a specific group. However, this was done incorrectly and
    the student is added into an incorrect group.
 3. The user executes 'undo'. This command is parsed into the `AddressBookParser`.
 4. An `UndoCommandParser` object is constructed and it constructs a `UndoCommand` object.
 5. The `UndoCommand` object then calls `updateVersionHistory(versionHistory, model)`. This in turn calls `undoVersion()`
    of `VersionHistory`.
-6. This updates the pointer in `VersionHistory` to point to the previous version. If the pointer is already set to 0, 
+6. This updates the pointer in `VersionHistory` to point to the previous version. If the pointer is already set to 0,
    there is nothing to undo and an exception will be thrown.
 7. The new addressbook is then saved in the model.
 8. Finally, the `UndoCommand` returns the `CommandResult`.
@@ -259,9 +261,9 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
    calls upon `redoVersion` instead, updating the pointer to the previously undone version.
 
 #### Sequence Diagram
+
 The following sequence diagram shows how the above steps for how undo works:
 <puml src="diagrams/UndoSequenceDiagram.puml"/>
-
 
 ### \[Proposed\] Data archiving
 
