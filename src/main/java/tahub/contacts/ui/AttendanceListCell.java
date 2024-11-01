@@ -3,22 +3,13 @@ package tahub.contacts.ui;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.paint.Color;
-
 import tahub.contacts.model.course.AttendanceSession;
-
 /**
  * A custom JavaFX ListCell implementation that displays attendance session information
  * with visual indicators for present/absent status.
- * <p>
  * This class extends {@link ListCell<AttendanceSession>} to provide a specialized cell
  * representation for attendance sessions in a ListView. Each cell displays the attendance
  * status with a colored label and an appropriate symbol (✓ for present, ✗ for absent).
- * </p>
- *
- * @author [Your Name]
- * @version 1.0
- * @see ListCell
- * @see AttendanceSession
  */
 public class AttendanceListCell extends ListCell<AttendanceSession> {
 
