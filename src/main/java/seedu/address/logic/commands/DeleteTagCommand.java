@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +10,6 @@ import java.util.stream.Collectors;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.UserConfirmation;
 
@@ -66,9 +64,9 @@ public class DeleteTagCommand extends Command {
         // Get a set of tags currently being used to tag any Person.
         Set<Tag> tagsInUse = model.getTagsInUse();
 
-//        if (!tagsInUse.isEmpty()) {
-//            getUserConfirmation(tagsInUse);
-//        }
+        if (!tagsInUse.isEmpty()) {
+            // getUserConfirmation(tagsInUse);
+        }
 
         boolean isSuccessful = model.deleteTags(tags);
         removeTagsFromPersons(model);
