@@ -122,6 +122,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the enrollment data i.e: all `StudentCourseAssociation` objects contained in a `StudentCourseAssociationList` object
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -142,8 +143,8 @@ The `Model` component,
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both address book data, user preference data and enrollment data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `UserPrefStorage` and `StudentCourseAssociationListStorage`, which means it can be treated as any one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -890,6 +891,37 @@ testers are expected to do more _exploratory_ testing.
 
 1. _{ more test cases …​ }_
 
+### Enrolling a student into a course and tutorial
+
+1. Enrolling an existing student into an existing course on TAHub
+    
+   1. Prerequisites: Ensure that both *student* and *course* objects have been created.
+      (In this case, the *student* object with matriculation number A2345678Y and the *course*
+       object with course code MA1521 must already be created.)
+    
+   2. Test case: `enroll m/A2345678Y c/MA1521 tut/T17`
+        
+       Expected: The student with matriculation number A2345678Y is enrolled into tutorial T17 of the course MA1521. A success message will be shown to the user.
+   
+   3. Test case: `enroll m/A2345678Y c/MA1521 tut/T17` (*again*)
+   
+       Expected: An error message will be displayed to the user and no new enrollment will occur.
+
+2. Enrolling an existing student into an invalid course on TAHub
+
+    1. Prerequisites: Ensure that a *student* object has been created but a course with course code *CS3233* has not been created
+    
+    2. Test case: Test case: `enroll m/A2345678Y c/CHUNITHM tut/T17`
+   
+        Expected: An error message will be displayed to the user and no enrollment will occur as the course code entered has an invalid format.
+   
+   3. Test case: Test case: `enroll m/A2345678Y c/CS3233 tut/T17`
+
+       Expected: An error message will be displayed to the user and no enrollment will occur as no such course with course code exists on TAHub.
+
+3. *{ more test cases... }*
+   
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files

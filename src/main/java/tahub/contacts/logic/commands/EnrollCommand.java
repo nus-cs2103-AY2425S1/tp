@@ -43,8 +43,6 @@ public class EnrollCommand extends Command {
             + PREFIX_TUTORIAL_ID + "T14 ";
 
     public static final String MESSAGE_SUCCESS = "New enrollment created: %1$s";
-    public static final String MESSAGE_DUPLICATE_ENROLLMENT = "This student is already enrolled in this course and "
-            + "tutorial group!";
 
 
     private final MatriculationNumber matriculationNumberToAdd;
@@ -103,8 +101,15 @@ public class EnrollCommand extends Command {
 
         Tutorial tutorialInSca = new Tutorial(tutorialIdToAdd, courseInSca);
         StudentCourseAssociation scaToAdd = new StudentCourseAssociation(personInSca, courseInSca, tutorialInSca);
-        // Model will handle the case of duplicate sca additions
-        model.addSca(scaToAdd);
+
+        if (model.hasSca(scaToAdd)) {
+            throw new CommandException(String.format(Messages.MESSAGE_ENROLLMENT_EXISTS,
+                    matriculationNumberToAdd.value,
+                    tutorialIdToAdd,
+                    courseCodeToAdd.courseCode));
+        } else {
+            model.addSca(scaToAdd);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(scaToAdd)));
     }
 
