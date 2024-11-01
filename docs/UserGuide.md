@@ -18,6 +18,8 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
   * [Locating contacts or deliveries by name: `find`](#locating-contacts-or-deliveries-by-name-find)
   * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery--archive)
   * [Unarchiving a contact or delivery: `unarchive`](#unarchiving-a-contact-or-delivery--unarchive)
+  * [Sorting contacts or deliveries in ascending order: `asort`](#sorting-the-contacts-or-delivery-list-in-ascending-order-asort)
+  * [Sorting contacts or deliveries in descending order: `dsort`](#sorting-the-contacts-or-delivery-list-in-descending-order-dsort)
   * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery--delete)
   * [Inspecting a contact: `inspect`](#inspecting-a-contact--inspect)
   * [Clearing all entries: `clear`](#clearing-all-entries--clear)
@@ -237,6 +239,37 @@ Examples:
 * `unarchive 2` unarchives the 2nd delivery in the delivery list of the inspected contact.
 * `unarchive 2 3` unarchives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
 
+### Sorting the contacts or delivery list in ascending order: `asort`
+**<ins>When in the main window**
+
+Sorts all contacts in the contacts list by the specified attribute, in ascending order.
+
+Format `asort by/ [ATTRIBUTE]`
+
+* Current attributes supported are: date, email, name, phone, role.
+
+Examples:
+* `asort by/ name` sorts the contacts list by name, in ascending alphabetical order (e.g. A, B, C, ...).
+* `asort by/ date` sorts the contacts list by the date the contact was added, in ascending date order (e.g. 2024-10-31 before 2024-11-1).
+
+**<ins>When in the inspect window**
+
+Sorts all deliveries in the delivery list of a contact by the specified attribute, in ascending order.
+
+Format `asort by/ [ATTRIBUTE]`
+
+* Current attributes supported are: address, cost, date, eta, id, status.
+
+Examples:
+* `asort by/ cost` sorts the delivery list by ascending cost (e.g. $1, $100, $1000, ...).
+* `asort by/ status` sorts the delivery list by delivery status, where `not delivered` deliveries come before `delivered` deliveries.
+
+### Sorting the contacts or delivery list in descending order: `dsort`
+
+Does the same thing as `asort`, except the sorting is now done in descending order.
+
+Refer to the `asort` feature explanation, and replace `asort` with `dsort` where appropriate.
+
 ### Deleting a contact or delivery : `delete`
 **<ins>When in the main window**
 
@@ -276,7 +309,7 @@ Examples:
 
 **<ins>When in the inspect window**
 
-inspect command does not work in the inspect window.
+`inspect` command does not work in the inspect window.
 
 ### Clearing all entries : `clear`
 **<ins>When in the main or inspect window**
