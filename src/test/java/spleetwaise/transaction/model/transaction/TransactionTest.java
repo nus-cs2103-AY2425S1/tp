@@ -113,8 +113,8 @@ public class TransactionTest {
         );
 
         assertEquals(
-                String.format("[%s] Alice Pauline(94351253): description on 01/01/2024 for $1.23 with categories: "
-                        + "[FOOD]", txn1.getId()),
+                String.format("Alice Pauline(94351253): description on 01/01/2024 for $1.23 with categories: "
+                        + "[FOOD]"),
                 txn1.toString()
         );
     }

@@ -41,18 +41,25 @@ public class EditCommand extends Command {
      * The message usage string that explains how to use this command.
      */
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Edit a transaction.\n" + "Parameters: " + " INDEX (must be a positive integer) "
-                    + PREFIX_PHONE + "CONTACT " + PREFIX_AMOUNT
-                    + "AMOUNT " + PREFIX_DESCRIPTION + "DESCRIPTION " + "[" + PREFIX_DATE + "DATE ]" + PREFIX_CATEGORY
-                    + "FOOD\n" + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "88888888 " + PREFIX_AMOUNT
-                    + "10.00 " + PREFIX_DESCRIPTION + "Paid John for lunch" + PREFIX_DATE + "23012024 "
-                    + PREFIX_CATEGORY + "FOOD";
+            COMMAND_WORD + ": Edit a transaction.\n"
+                    + "Parameters: INDEX (must be a positive integer) "
+                    + "[" + PREFIX_PHONE + "CONTACT] "
+                    + "[" + PREFIX_AMOUNT + "AMOUNT] "
+                    + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+                    + "[" + PREFIX_DATE + "DATE] "
+                    + "[" + PREFIX_CATEGORY + "FOOD]...\n"
+                    + "Example: " + COMMAND_WORD + " 1 "
+                    + PREFIX_PHONE + "88888888 "
+                    + PREFIX_AMOUNT + "10.00 "
+                    + PREFIX_DESCRIPTION + "Paid John for lunch "
+                    + PREFIX_DATE + "23012024 "
+                    + PREFIX_CATEGORY + "FOOD "
+                    + PREFIX_CATEGORY + "DRINK ";
 
 
     public static final String MESSAGE_EDIT_TXN_SUCCESS = "Edited Transaction: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TXN = "This transaction already exists in the transaction book.";
-
 
     private final Index index;
     private final EditTransactionDescriptor editTransactionDescriptor;
