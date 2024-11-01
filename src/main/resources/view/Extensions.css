@@ -27,3 +27,13 @@
 #tags .tag-property {
     -fx-background-color: #3e917e;
 }
+
+#commandTextAutocomplete {
+    -fx-padding: 12px;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: derive(white, -30%);
+}
