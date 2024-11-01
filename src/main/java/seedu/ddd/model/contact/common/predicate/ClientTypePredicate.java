@@ -14,12 +14,9 @@ public class ClientTypePredicate implements Predicate<Contact> {
 
     @Override
     public boolean test(Contact contact) {
-        if (contact instanceof Client) {
-            return true;
-        } else {
-            return false;
-        }
+        return contact instanceof Client;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -8,18 +8,13 @@ import java.util.function.Predicate;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.event.common.Event;
-
 
 /**
  * Lists all contacts in the address book to the user.
  */
 public class ListContactCommand extends ListCommand {
 
-
     public static final String MESSAGE_SUCCESS = "Listed all contacts";
-
-    private static final Predicate<Event> CLEAR_EVENTS = any -> false;
 
     private final Predicate<Contact> predicate;
 
@@ -34,7 +29,6 @@ public class ListContactCommand extends ListCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredEventList(CLEAR_EVENTS);
         model.updateFilteredContactList(predicate);
         return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
                 model.getFilteredContactListSize()));

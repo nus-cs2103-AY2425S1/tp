@@ -12,6 +12,7 @@ import static seedu.ddd.testutil.contact.TypicalContacts.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +20,12 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
+import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.predicate.ClientTypePredicate;
 import seedu.ddd.model.contact.common.predicate.NameContainsKeywordsPredicate;
 import seedu.ddd.model.contact.common.predicate.VendorTypePredicate;
+import seedu.ddd.model.contact.vendor.Vendor;
 
 
 /**
@@ -44,6 +48,24 @@ public class ListClientCommandTest {
         assertCommandSuccess(new ListClientCommand(new ClientTypePredicate()),
                 model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
                         expectedModel.getFilteredContactListSize()), expectedModel);
+    }
+
+    @Test
+    public void execute_clientsAndVendorsInList_containsOnlyClients() {
+        // should contain both clients and vendors initially
+        assertTrue(model.getFilteredContactList().stream().anyMatch((contact) -> contact instanceof Client));
+        assertTrue(model.getFilteredContactList().stream().anyMatch((contact) -> contact instanceof Vendor));
+
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 4);
+        Predicate<Contact> predicate = new ClientTypePredicate();
+        Command command = new ListVendorCommand(predicate);
+
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        // should only contain vendors after the command
+        assertTrue(model.getFilteredContactList().stream().anyMatch((contact) -> contact instanceof Client));
+        assertFalse(model.getFilteredContactList().stream().anyMatch((contact) -> contact instanceof Vendor));
     }
 
     @Test

@@ -7,6 +7,12 @@ import static seedu.ddd.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.ddd.testutil.Assert.assertThrows;
 import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
 import static seedu.ddd.testutil.contact.TypicalContacts.BENSON;
+import static seedu.ddd.testutil.contact.TypicalContacts.CARL;
+import static seedu.ddd.testutil.contact.TypicalContacts.DANIEL;
+import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
+import static seedu.ddd.testutil.contact.TypicalContacts.VALID_VENDOR;
+import static seedu.ddd.testutil.event.TypicalEvents.VALID_EVENT;
+import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_A;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -95,32 +101,86 @@ public class ModelManagerTest {
 
     @Test
     public void addContact_validContact_modifyDisplayedLists() {
-        // TODO: check that modifying filteredContacts modifies displayedList
+        Model testModelManager = new ModelManager();
+        testModelManager.addContact(VALID_CLIENT);
+        assertTrue(testModelManager.getDisplayedList().contains(VALID_CLIENT));
+
+        testModelManager.addContact(VALID_VENDOR);
+        testModelManager.addEvent(VALID_EVENT); // when an event is added, displayedList should display events
+        testModelManager.addContact(ALICE); // when a new contact is added, displayedList should display contacts again
+        assertTrue(testModelManager.getDisplayedList().contains(VALID_CLIENT));
+        assertTrue(testModelManager.getDisplayedList().contains(ALICE));
     }
 
     @Test
     public void deleteContact_validContact_modifyDisplayedLists() {
-        // TODO: check that modifying filteredContacts modifies displayedList
+        Model testModelManager = new ModelManager();
+        testModelManager.addContact(VALID_CLIENT);
+        testModelManager.deleteContact(VALID_CLIENT);
+        assertFalse(testModelManager.getDisplayedList().contains(VALID_CLIENT));
+
+        testModelManager.addContact(VALID_CLIENT);
+        testModelManager.addContact(VALID_VENDOR);
+        // when an event is added, displayedList should display events
+        testModelManager.addEvent(VALID_EVENT);
+        // when a contact is deleted, displayedList should display contacts again
+        testModelManager.deleteContact(VALID_CLIENT);
+        assertFalse(testModelManager.getDisplayedList().contains(VALID_CLIENT));
+        assertTrue(testModelManager.getDisplayedList().contains(VALID_VENDOR));
     }
 
     @Test
     public void setContact_validContact_modifyDisplayedLists() {
-        // TODO: check that modifying filteredContacts modifies displayedList
+        Model testModelManager = new ModelManager();
+        testModelManager.addContact(VALID_CLIENT);
+        testModelManager.setContact(VALID_CLIENT, ALICE);
+        assertTrue(testModelManager.getDisplayedList().contains(ALICE));
+        assertFalse(testModelManager.getDisplayedList().contains(VALID_CLIENT));
     }
 
     @Test
     public void addEvent_validEvent_modifyDisplayedLists() {
-        // TODO: check that modifying filteredEvents modifies displayedList
+        Model testModelManager = new ModelManager();
+        testModelManager.addContact(VALID_CLIENT);
+        testModelManager.addContact(VALID_VENDOR);
+        testModelManager.addEvent(VALID_EVENT);
+        assertTrue(testModelManager.getDisplayedList().contains(VALID_EVENT));
+
+        // when a contact is added, displayedList should display contacts
+        testModelManager.addContact(ALICE);
+        testModelManager.addContact(BENSON);
+        testModelManager.addContact(CARL);
+        testModelManager.addContact(DANIEL);
+        assertTrue(testModelManager.getDisplayedList().contains(ALICE));
+
+        testModelManager.addEvent(WEDDING_A);
+        assertTrue(testModelManager.getDisplayedList().contains(WEDDING_A));
     }
 
     @Test
     public void deleteEvent_validEvent_modifyDisplayedLists() {
-        // TODO: check that modifying filteredEvents modifies displayedList
+        Model testModelManager = new ModelManager();
+        testModelManager.addContact(VALID_CLIENT);
+        testModelManager.addContact(VALID_VENDOR);
+        testModelManager.addEvent(VALID_EVENT);
+        assertTrue(testModelManager.getDisplayedList().contains(VALID_EVENT));
+
+        testModelManager.addContact(ALICE);
+        testModelManager.addContact(BENSON);
+        testModelManager.addContact(CARL);
+        testModelManager.addContact(DANIEL);
+        testModelManager.addEvent(WEDDING_A);
+        assertTrue(testModelManager.getDisplayedList().contains(WEDDING_A));
+
+        testModelManager.deleteContact(VALID_CLIENT); // when a contact is added, displayedList should display contacts
+        testModelManager.deleteEvent(VALID_EVENT);
+        assertTrue(testModelManager.getDisplayedList().contains(WEDDING_A));
     }
 
     @Test
     public void setEvent_validEvent_modifyDisplayedLists() {
         // TODO: check that modifying filteredEvents modifies displayedList
+        // setEvent is not implemented yet
     }
 
     @Test

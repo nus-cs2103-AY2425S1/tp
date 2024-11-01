@@ -45,14 +45,8 @@ public class ModelManager implements Model {
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
 
         // listen for changes in the original lists and update the combined list
-        filteredContacts.addListener((ListChangeListener<Contact>) change -> {
-            displayedList.clear();
-            displayedList.addAll(filteredContacts);
-        });
-        filteredEvents.addListener((ListChangeListener<Event>) change -> {
-            displayedList.clear();
-            displayedList.addAll(filteredEvents);
-        });
+        filteredContacts.addListener((ListChangeListener<Contact>) change -> displayContacts());
+        filteredEvents.addListener((ListChangeListener<Event>) change -> displayEvents());
 
         // populate the initial displayed list with contacts only
         displayedList.addAll(filteredContacts);
@@ -143,11 +137,13 @@ public class ModelManager implements Model {
     @Override
     public void deleteContact(Contact target) {
         addressBook.removeContact(target);
+        displayContacts();
     }
 
     @Override
     public void deleteEvent(Event target) {
         addressBook.removeEvent(target);
+        displayEvents();
     }
 
     @Override
@@ -165,22 +161,39 @@ public class ModelManager implements Model {
     @Override
     public void setContact(Contact target, Contact editedContact) {
         CollectionUtil.requireAllNonNull(target, editedContact);
-
         addressBook.setContact(target, editedContact);
+        displayContacts();
     }
 
     @Override
     public void setEvent(Event target, Event editedEvent) {
         CollectionUtil.requireAllNonNull(target, editedEvent);
         addressBook.setEvent(target, editedEvent);
+        displayEvents();
     }
+
+    /**
+     * Updates {@code displayedList} to show contacts;
+     */
+    private void displayContacts() {
+        displayedList.clear();
+        displayedList.addAll(filteredContacts);
+    }
+
+    /**
+     * Updates {@code displayedList} to show events;
+     */
+    private void displayEvents() {
+        displayedList.clear();
+        displayedList.addAll(filteredEvents);
+    }
+
+    //=========== Filtered Data List Accessors =============================================================
 
     @Override
     public int getFilteredEventListSize() {
         return filteredEvents.size();
     }
-
-    //=========== Filtered Data List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
@@ -195,6 +208,7 @@ public class ModelManager implements Model {
     public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
         filteredContacts.setPredicate(predicate);
+        displayContacts();
     }
 
     @Override
@@ -206,6 +220,7 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+        displayEvents();
     }
 
     @Override

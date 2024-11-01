@@ -7,15 +7,12 @@ import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Model;
-import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Event;
 
 /**
  * Lists events in the address book to the user.
  */
 public class ListEventCommand extends ListCommand {
-
-    public static final Predicate<Contact> CLEAR_CONTACTS = any -> false;
 
     public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
         + COMMAND_USAGE + "\n"
@@ -34,7 +31,6 @@ public class ListEventCommand extends ListCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(CLEAR_CONTACTS);
         model.updateFilteredEventList(predicate);
         return new CommandResult(String.format(MESSAGE_EVENTS_LISTED_OVERVIEW,
                 model.getFilteredEventListSize()));

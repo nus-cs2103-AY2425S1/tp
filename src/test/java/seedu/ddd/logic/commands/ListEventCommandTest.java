@@ -38,7 +38,6 @@ public class ListEventCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        expectedModel.updateFilteredContactList(ListEventCommand.CLEAR_CONTACTS);
         assertCommandSuccess(new ListEventCommand(Model.PREDICATE_SHOW_ALL_EVENTS),
                 model, String.format(MESSAGE_EVENTS_LISTED_OVERVIEW,
                         expectedModel.getFilteredEventListSize()), expectedModel);
@@ -46,7 +45,6 @@ public class ListEventCommandTest {
 
     @Test
     public void executeFilterListById() {
-        expectedModel.updateFilteredContactList(ListEventCommand.CLEAR_CONTACTS);
         expectedModel.updateFilteredEventList(new EventIdPredicate(new Id(1)));
         assertCommandSuccess(new ListEventCommand(new EventIdPredicate(new Id(1))),
                 model, String.format(MESSAGE_EVENTS_LISTED_OVERVIEW,
@@ -85,22 +83,22 @@ public class ListEventCommandTest {
         DescriptionContainsKeywordsPredicate predicate = preparePredicate(" ");
         ListEventCommand command = new ListEventCommand(predicate);
 
-        expectedModel.updateFilteredContactList(ListEventCommand.CLEAR_CONTACTS);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredEventList());
     }
+
     @Test
     public void execute_multipleKeywords_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         DescriptionContainsKeywordsPredicate predicate = preparePredicate("wedding");
         ListEventCommand command = new ListEventCommand(predicate);
 
-        expectedModel.updateFilteredContactList(ListEventCommand.CLEAR_CONTACTS);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(WEDDING_A, WEDDING_B), model.getFilteredEventList());
     }
+
     @Test
     public void toStringMethod() {
         DescriptionContainsKeywordsPredicate predicateOne =
