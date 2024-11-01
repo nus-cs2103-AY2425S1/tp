@@ -200,8 +200,8 @@ Deletes a claim from an insurance plan of a client.
 Format: `deleteClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID`
 
 IDs for insurance plans:
-`Basic Plan` : `0`
-`Travel Insurance`: `1`
+`Basic Insurance Plan` : `0`,
+`Travel Insurance Plan`: `1`
 
 * Deletes a claim from the client at the specified `INDEX`.
 * `INSURANCE_ID` are found in the address book matching the associated insurance plan.
@@ -223,8 +223,8 @@ in the system but marked as closed.
 Format: `closeClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID`
 
 IDs for insurance plans:
-`Basic Plan` : `0`
-`Travel Insurance`: `1`
+`Basic Insurance Plan` : `0`,
+`Travel Insurance Plan`: `1`
 
 * Closes a claim from the client at the specified `INDEX`.
 * `INSURANCE_ID` are found in the address book matching the associated insurance plan.
