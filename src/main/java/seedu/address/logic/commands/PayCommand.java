@@ -111,7 +111,7 @@ public class PayCommand extends Command {
     }
 
     private static double calculatePaid(Student student, double hour) {
-        double paid = student.getRate().value * hour;
+        double paid = student.getRateValue() * hour;
         return BigDecimal.valueOf(paid)
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
@@ -143,4 +143,3 @@ public class PayCommand extends Command {
     }
 
 }
-

@@ -150,6 +150,6 @@ public class OweCommandTest {
      * Calculates addition owedAmount used to generate expected messages and expected students
      */
     private double calculateAdditionOwedAmount(Student student, double hourOwed) {
-        return student.getRate().value * hourOwed;
+        return student.getRateValue() * hourOwed;
     }
 }

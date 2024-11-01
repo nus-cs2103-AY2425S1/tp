@@ -109,7 +109,7 @@ public class OweCommand extends Command {
     }
 
     private static double calculateOwed(Student student, double hour) throws CommandException {
-        double owedAmount = student.getRate().value * hour;
+        double owedAmount = student.getRateValue() * hour;
         return BigDecimal.valueOf(owedAmount)
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
