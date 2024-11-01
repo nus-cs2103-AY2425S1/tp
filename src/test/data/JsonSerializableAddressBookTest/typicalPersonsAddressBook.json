@@ -17,6 +17,13 @@
       "submissionName" : "Tutorial 1",
       "submissionStatus" : "NIL"
     } ],
+    "exams" : [ {
+      "examName" : "Midterm",
+      "examScore" : "NIL"
+    }, {
+      "examName" : "Final",
+      "examScore" : "NIL"
+    } ],
     "tags" : [ "friends" ],
     "attendances" : {}
   }, {
@@ -32,6 +39,10 @@
     "submissions" : [ {
       "submissionName" : "Assignment 1",
       "submissionStatus" : "NIL"
+    } ],
+    "exams" : [ {
+      "examName" : "Midterm",
+      "examScore" : "NIL"
     } ],
     "tags" : [ "owesMoney", "friends" ],
     "attendances" : {"16-10-2024": "Family Emergency"}
@@ -49,6 +60,10 @@
       "submissionName" : "Assignment 1",
       "submissionStatus" : "NIL"
     } ],
+    "exams" : [ {
+      "examName" : "Midterm",
+      "examScore" : "NIL"
+    } ],
     "tags" : [ ],
     "attendances" : {}
   }, {
@@ -64,6 +79,10 @@
     "submissions" : [ {
       "submissionName" : "Assignment 1",
       "submissionStatus" : "NIL"
+    } ],
+    "exams" : [ {
+      "examName" : "Midterm",
+      "examScore" : "NIL"
     } ],
     "tags" : [ "friends" ],
     "attendances" : {}
@@ -81,6 +100,10 @@
       "submissionName" : "Assignment 1",
       "submissionStatus" : "NIL"
     } ],
+    "exams" : [ {
+      "examName" : "Midterm",
+      "examScore" : "NIL"
+    } ],
     "tags" : [ ],
     "attendances" : {}
   }, {
@@ -97,6 +120,10 @@
       "submissionName" : "Assignment 1",
       "submissionStatus" : "NIL"
     } ],
+    "exams" : [ {
+      "examName" : "Midterm",
+      "examScore" : "NIL"
+    } ],
     "tags" : [ ],
     "attendances" : {}
   }, {
@@ -112,6 +139,10 @@
     "submissions" : [ {
       "submissionName" : "Assignment 1",
       "submissionStatus" : "NIL"
+    } ],
+    "exams" : [ {
+      "examName" : "Midterm",
+      "examScore" : "NIL"
     } ],
     "tags" : [ ],
     "attendances" : {}
