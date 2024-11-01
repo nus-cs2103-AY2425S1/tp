@@ -255,6 +255,27 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Update Find Command
+
+#### Proposed Implementation
+
+Enhance the `find` command to enable searching profiles using additional attributes such as 'tags', 
+'roomNumber', and 'contactNumber'. These new features will create predicates similar to the existing 'name' feature, 
+allowing for more comprehensive search capabilities.
+
+Below is a detailed process illustration using a sequential diagram:
+
+Step 1: The user issues a `find` command followed by specific parameters, 
+for example: `t/friends n/Alex r/08-0805 p/9124 6892`.
+ 
+**Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations. 
+
+Step 2, The parser interprets the user command and constructs corresponding predicates for the `FindCommand` object.
+
+Step 3, The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search 
+results based on the specified criteria.
+
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -446,7 +467,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 
 1. User requests to view profiles.
-2. DorManagerPro displays all profiles with all attached information.
+2. User requests to view certain profiles based on the profiles features (tags, roomNumber, number, name)
+3. DorManagerPro displays all profiles with all attached information.
 
    Use case ends.
 
