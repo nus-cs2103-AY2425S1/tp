@@ -323,24 +323,28 @@ The activity diagram shows the general sequence of steps when a user interacts w
 <br>
 
 ## Implementation of general features
+General commands include the `exit` and `help` commands.
+
+The sequence diagram shows how a general command (`ExitCommand` or `HelpCommand`) is executed:
+<puml src="diagrams/GeneralCommandsSequenceDiagram.puml" width="600"></puml>
+
+**Step 1.** The user types an `xyz` command (`help` or `exit`) in the `CommandBox`, which is then passed to the `LogicManager`.
+
+**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `xyz` command.
+
+**Step 3.** The `AddressBookParser` creates an `XYZCommand` object, which is returned to the 
+`LogicManager`. The `XYZCommand` object can be an `ExitCommand` or a `HelpCommand`.
+
+**Step 4.** The `LogicManager` calls the `XYZCommand::execute` method, which creates a new `CommandResult` 
+object.
+
+**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
+
+<br>
 
 ### Exit feature
 #### Implementation
 When a user types an `exit` command, the DocTrack application will exit.
-
-The sequence diagram shows how an `exit` command is executed:
-<puml src="diagrams/ExitSequenceDiagram.puml" width="600"></puml>
-
-**Step 1.** The user types the `exit` command in the `CommandBox`, which is then passed to the `LogicManager`.
-
-**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `exit` command.
-
-**Step 3.** The `AddressBookParser` creates an `ExitCommand` object, which is returned to the `LogicManager`.
-
-**Step 4.** The `LogicManager` calls the `ExitCommand::execute` method, which creates a new `CommandResult` object.
-
-**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
-
 
 #### Design considerations
 
@@ -361,22 +365,6 @@ The sequence diagram shows how an `exit` command is executed:
 #### Implementation
 
 When a user types a `help` command, the DocTrack application will display a `HelpWindow`.
-
-The sequence diagram shows how a `help` command is executed:
-
-<puml src="diagrams/HelpSequenceDiagram.puml" width="600"></puml>
-
-**Step 1.** The user types the `help` command in the `CommandBox`, which is then passed to the `LogicManager`.
-
-**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `help` command.
-
-**Step 3.** The `AddressBookParser` creates a `HelpCommand` object, which is returned to the `LogicManager`.
-
-**Step 4.** The `LogicManager` calls the `HelpCommand::execute` method, which creates a new 
-`CommandResult` object.
-
-**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
-
 
 #### Design considerations
 
