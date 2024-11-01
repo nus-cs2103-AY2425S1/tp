@@ -13,7 +13,7 @@ import seedu.address.model.wedding.Wedding;
  * Deletes a wedding identified by its name from the wedding book.
  */
 public class DeleteWeddingCommand extends Command {
-    public static final String COMMAND_WORD = "delete-wedding";
+    public static final String COMMAND_WORD = "del-wed";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Deletes the wedding identified by the wedding name used in the address book.";
 
@@ -25,7 +25,7 @@ public class DeleteWeddingCommand extends Command {
     public static final String MESSAGE_MISSING_NAME = "Wedding name is required.";
     public static final String MESSAGE_CONFIRMATION_PROMPT = """
             Are you sure you want to delete the following wedding?
-            Enter 'delete-y' to confirm, or 'delete-n' to cancel.
+            Enter 'y' to confirm, or 'n' to cancel.
             Name: %1$s
             Venue: %2$s
             Date: %3$s

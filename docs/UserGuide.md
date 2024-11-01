@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # Knotty Planner 💍🎀
@@ -90,7 +90,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
-involved in.
+involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
 
 </box>
 
@@ -99,6 +99,48 @@ involved in.
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer`
 * `add n/Betsy Crowe p/90341259 e/betsycrowe@example.com a/Newgate Prison j/Caterer t/stacy & sam`
+
+### Deleting A Contact : `del` followed by `y` or `n`
+
+You can delete a person from your list of contacts.
+
+* Deletes the person with the specified `NAME` from the address book.
+* The contact's details are shown for confirmation.
+* The contact is deleted if `y` is entered.
+* The contact is not deleted if `n` is entered, cancelling the delete operation and nothing will occur.
+
+Format: `del n/NAME` followed by `y` or `n`
+
+**IMPORTANT:** `del n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be
+affected.
+
+![delete message](images/deleteMsg.png)
+
+Examples:
+* `del n/John Doe` followed by `y` deletes the person named `John Doe` from the address book.
+* `del n/John Doe` followed by `n` cancels the delete operation.
+
+### Editing A Contact : `edit`
+
+You can edit an existing contact's details(name, phone number, email, address and job).
+
+Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`
+
+<box type="tip" seamless>
+
+**Tip:** You must provide at least one of the optional fields.
+
+**IMPORTANT:** Tags can only be added or deleted, not edited.
+
+</box>
+
+![edit message](images/editMsg.png)
+
+Examples:
+*  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be
+   `91234567` and `johndoe@example.com` respectively.
+*  `edit n/James new/Clark e/clarknewemail@example.com j/Florist` Edits the name, email and job to be
+   `James`, `clarknewemail@example.com` and `Florist` respectively.
 
 ### Listing All Contacts : `list`
 
@@ -135,9 +177,9 @@ You can delete a person from your list of contacts.
 * The wedding is deleted if `delete-y` is entered.
 * The wedding is not deleted if `delete-n` is entered, cancelling the delete operation and nothing will occur.
 
-Format: `delete w/NAME & NAME` followed by `delete-y` or `delete-n`
+Format: `delete-wedding w/NAME & NAME` followed by `delete-y` or `delete-n`
 
-**IMPORTANT:** `delete n/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
+**IMPORTANT:** `delete-wedding w/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
 affected.
 
 </box>
@@ -145,31 +187,8 @@ affected.
 ![add wedding message](images/deleteWeddingMsg.png)
 
 Examples:
-* `delete-wedding w/John Loh & Jean Tan`
-* `delete-wedding w/Jonus Ho & Izzat Syazani`
-
-
-### Editing A Contact : `edit`
-
-You can edit an existing contact's details(name, phone number, email, address and job).
-
-Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`
-
-<box type="tip" seamless>
-
-**Tip:** You must provide at least one of the optional fields.
-
-**Important:** Tags can only be added or deleted, not edited.
-
-</box>
-
-![edit message](images/editMsg.png)
-
-Examples:
-*  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be 
-`91234567` and `johndoe@example.com` respectively.
-  *  `edit n/James new/Clark e/clarknewemail@example.com j/Florist` Edits the name, email and job to be
-`James`, `clarknewemail@example.com` and `Florist` respectively.
+* `delete-wedding w/Alice Koh & John Lee` followed by `y` deletes the wedding named `John Doe` from the address book.
+* `delete-wedding w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
 ### Tagging A Contact : `tag-add` / `tag-delete`
 
@@ -180,7 +199,7 @@ Format: `tag-add n/NAME t/TAG...`
 
 <box type="tip" seamless>
 
-**IMPORTANT:** The wedding must be added into the wedding book to successfully tag a person to a wedding
+**IMPORTANT:** The wedding must already exist in the wedding book to successfully tag a person to a wedding
 
 **Tip #1:** The name of the tag must match the wedding that you want to add the contact to.
 
@@ -195,9 +214,9 @@ Examples:
 *  `tag-add n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Adds the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` to Betsy Crower.
 
 ### Deleting Tag(s) from A Contact
-If you need to remove your contacts from a particular wedding, you can use `tag-delete` to remove them from the wedding.
+If you need to remove your contacts from a particular wedding, you can use `tag-del` to remove them from the wedding.
 
-Format: `tag-delete n/NAME t/TAG...`
+Format: `tag-del n/NAME t/TAG...`
 
 <box type="tip" seamless>
 
@@ -234,26 +253,6 @@ Examples:
 * `filter n/caterer` returns `Adam` whose job is a caterer
 * `filter n/John` returns `John` whose name is John
 
-### Deleting A Contact : `del` followed by `y` or `n`
-
-You can delete a person from your list of contacts.
-
-* Deletes the person with the specified `NAME` from the address book.
-* The contact's details are shown for confirmation.
-* The contact is deleted if `y` is entered.
-* The contact is not deleted if `n` is entered, cancelling the delete operation and nothing will occur.
-
-Format: `del n/NAME` followed by `y` or `n`
-
-**IMPORTANT:** `del n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be 
-affected.
-
-![delete message](images/deleteMsg.png)
-
-Examples:
-* `del n/John Doe` followed by `y` deletes the person named `John Doe` from the address book.
-* `del n/John Doe` followed by `n` cancels the delete operation.
-
 ### View Wedding: `view-wed`
 
 If you are looking for participants tagged to a particular wedding, you can use `view-wed` to view a list of contacts tagged to the specified wedding.
@@ -271,14 +270,19 @@ Format: `view-wed KEYWORD`
 Examples:
 * `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding
 
-
 ### Clearing all entries : `clear-ab` & `clear-wb`
 
 You can delete ALL contacts in the address book from the application.
 
+1. `clear-ab` clears all contacts in address book.
+2. `clear-wb` clears all weddings in wedding book.
+3. Both commands will prompt for confirmation before deleting all entries.
+4. If you confirm, all entries will be deleted.
+5. If you cancel, no entries will be deleted.
+
 Format: 
-* `clear-ab` clears all contacts in address book.
-* `clear-wb` clears all weddings in wedding book.
+* `clear-ab` followed by `y` clears all contacts in address book.
+* `clear-wb` followed by `y` clears all weddings in wedding book.
 
 ![clear message](images/clearMsg.png)
 
@@ -331,13 +335,14 @@ _Details coming soon ..._
 | Action             | Format, Examples                                                                                                                                                                             |
 |--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June` |
-| **Add Wedding**    | `add-wed w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                                 |
-| **Clear**          | `clear-ab` for addressbook or `clear-wb` for weddingbook                                                                                                                                     |
 | **Delete**         | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                            |
+| **List**           | `list`                                                                                                                                                                                       |
 | **Edit**           | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                             |
+| **Add Wedding**    | `add-wed w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                                 |
+| **Delete Wedding** | `delete-wedding w/NAME & NAME` followed by `y` or `n`                                                                                                                                         |
+| **Clear**          | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                            |
 | **Adding Tags**    | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                                     |
 | **Deleting Tags**  | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                                     |
 | **Filter**         | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                                |
-| **List**           | `list`                                                                                                                                                                                       |
 | **List Weddings**  | `list-wed`                                                                                                                                                                                   |
 | **Help**           | `help`                                                                                                                                                                                       |
