@@ -55,7 +55,7 @@ EventfulNUS is a **desktop app for managing contacts and events. While optimised
   e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/friend`, `r/friend r/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER s/SUBEVENT` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -76,7 +76,7 @@ Format: `help`
 
 Adds a person to the database.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/SUBEVENT [r/ROLE]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROLE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have zero or more roles.
@@ -96,9 +96,10 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SUBEVENT] [r/ROLE]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing roles, the existing roles of the person will be removed i.e adding of roles is not cumulative.
@@ -126,6 +127,18 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating persons by roles: 'filter'
+
+Finds persons whose roles contain any of the given keywords.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `athlete` will match `Athlete`
+* The order of the keywords does not matter. e.g. `athlete student` will match `Student Athlete`
+* Only the roles are searched.
+* Only full words will be matched e.g. `ath` will not match `athlete`
+
 
 ### Deleting a person : `delete`
 
