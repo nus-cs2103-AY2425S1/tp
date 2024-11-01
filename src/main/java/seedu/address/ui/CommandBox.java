@@ -89,7 +89,7 @@ public class CommandBox extends UiPart<Region> {
         if (possibleCommandName.isEmpty()) {
             return;
         }
-        
+
         commandTextAutocomplete.setText(possibleCommandName.get());
     }
 
