@@ -292,12 +292,22 @@ public class EditEventCommandTest {
         }
 
         @Override
+        public List<Event> findEventsWithName(EventName eventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Event> getFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unassignEventFromPerson(Person person, Event event) {
             throw new AssertionError("This method should not be called.");
         }
 
