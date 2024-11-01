@@ -120,6 +120,7 @@ public class CommandTestUtil {
     public static final String INVALID_SUBMISSION_STATUS_DESC = " " + PREFIX_SUBMISSION_STATUS
             + "T"; // only "Y", "N" and "NIL" allowed
     public static final String INVALID_EXAM_DESC = " " + PREFIX_EXAM + "Midterm%"; // only alphanumeric characters
+    public static final String INVALID_EXAM_SCORE_DESC = " " + PREFIX_EXAM_SCORE + "101"; // between 1 and 100
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_ATTENDANCE_DESC = " " + PREFIX_ABSENT_DATE + "2024-13-01" + " "
             + PREFIX_ABSENT_REASON + "MC"; // Date should be in the form of DD-MM-YYYY
