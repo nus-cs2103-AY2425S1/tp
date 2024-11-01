@@ -2,6 +2,7 @@ package seedu.address.model.patient;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -148,6 +149,22 @@ public class Patient {
 
     public ApptList getAppointments() {
         return appts;
+    }
+
+    public Appt getMostRecentPastAppt() {
+        LocalDateTime now = LocalDateTime.now();
+        return appts.getAppts().stream()
+                .filter(appt -> appt.getDateTime().isBefore(now))
+                .reduce((first, second) -> second)
+                .orElse(null);
+    }
+
+    public Appt getLatestFutureAppt() {
+        LocalDateTime now = LocalDateTime.now();
+        return appts.getAppts().stream()
+                .filter(appt -> appt.getDateTime().isAfter(now))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
