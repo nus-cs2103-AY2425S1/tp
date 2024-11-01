@@ -23,6 +23,11 @@ public class Role {
     public Role(String role) {
         requireNonNull(role);
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
+        value = createRole(role);
+    }
+
+    private String createRole(String role) {
+        final String value;
         if (GUARDIAN_LOWERCASE.equals(role.toLowerCase())) {
             value = GUARDIAN;
         } else if (STUDENT_LOWERCASE.equals(role.toLowerCase())) {
@@ -30,6 +35,7 @@ public class Role {
         } else {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
+        return value;
     }
 
     @Override
