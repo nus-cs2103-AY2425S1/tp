@@ -24,9 +24,9 @@ public class ListClaimsCommandParser implements Parser<ListClaimsCommand> {
     public ListClaimsCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE);
 
-        Index personIndex;
+        Index clientIndex;
         try {
-            personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+            clientIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListClaimsCommand.MESSAGE_USAGE),
                     pe);
@@ -44,6 +44,6 @@ public class ListClaimsCommandParser implements Parser<ListClaimsCommand> {
                     pe);
         }
 
-        return new ListClaimsCommand(personIndex, policyType);
+        return new ListClaimsCommand(clientIndex, policyType);
     }
 }

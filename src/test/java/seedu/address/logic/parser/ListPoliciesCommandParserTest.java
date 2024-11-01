@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,11 +17,11 @@ public class ListPoliciesCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsListPoliciesCommand() throws Exception {
-        ListPoliciesCommand expectedCommand = new ListPoliciesCommand(INDEX_FIRST_PERSON);
+        ListPoliciesCommand expectedCommand = new ListPoliciesCommand(INDEX_FIRST_CLIENT);
         ListPoliciesCommand command = parser.parse("1");
         assertEquals(expectedCommand, command);
 
-        expectedCommand = new ListPoliciesCommand(INDEX_SECOND_PERSON);
+        expectedCommand = new ListPoliciesCommand(INDEX_SECOND_CLIENT);
         command = parser.parse("2");
         assertEquals(expectedCommand, command);
     }

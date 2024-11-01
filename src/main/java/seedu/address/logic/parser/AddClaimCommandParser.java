@@ -33,10 +33,10 @@ public class AddClaimCommandParser implements Parser<AddClaimCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
 
-        Index personIndex;
+        Index clientIndex;
 
         try {
-            personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+            clientIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClaimCommand.MESSAGE_USAGE), ive);
         }
@@ -46,6 +46,6 @@ public class AddClaimCommandParser implements Parser<AddClaimCommand> {
         String claimDescription = argMultimap.getValue(PREFIX_CLAIM_DESC).get();
         Claim claim = new Claim(claimStatus, claimDescription);
 
-        return new AddClaimCommand(personIndex, claim, policyType);
+        return new AddClaimCommand(clientIndex, claim, policyType);
     }
 }

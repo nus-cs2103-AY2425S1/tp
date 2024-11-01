@@ -11,13 +11,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.claim.Claim;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Lists all claims of a specified policy type for a person in the address book.
- * If there are no claims under the specified policy type, or if the person index is invalid,
+ * Lists all claims of a specified policy type for a client in the address book.
+ * If there are no claims under the specified policy type, or if the client index is invalid,
  * an appropriate message will be shown.
  */
 public class ListClaimsCommand extends Command {
@@ -25,30 +25,30 @@ public class ListClaimsCommand extends Command {
     public static final String COMMAND_WORD = "list-claims";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all claims under the specified policy type "
-            + "for the person identified by the index number used in the displayed person list. \n"
+            + "for the client identified by the index number used in the displayed client list. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_POLICY_TYPE + "POLICY_TYPE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_POLICY_TYPE + "health";
 
-    public static final String MESSAGE_LIST_CLAIMS_SUCCESS = "Claims listed for policy type '%1$s' of person: "
+    public static final String MESSAGE_LIST_CLAIMS_SUCCESS = "Claims listed for policy type '%1$s' of client: "
             + "%2$s\n\n%3$s";
-    public static final String MESSAGE_NO_CLAIMS = "No claims found for policy type '%1$s' of person: %2$s";
-    public static final String MESSAGE_INVALID_PERSON_INDEX = "The person index provided is invalid.";
-    public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for person: %2$s";
+    public static final String MESSAGE_NO_CLAIMS = "No claims found for policy type '%1$s' of client: %2$s";
+    public static final String MESSAGE_INVALID_CLIENT_INDEX = "The client index provided is invalid.";
+    public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for client: %2$s";
 
-    private final Index personIndex;
+    private final Index clientIndex;
     private final PolicyType policyType;
 
     /**
      * Creates a ListClaimsCommand to list claims for a specific policy type
-     * associated with a specified person in the address book.
+     * associated with a specified client in the address book.
      *
-     * @param personIndex The index of the person in the filtered person list.
+     * @param clientIndex The index of the client in the filtered client list.
      * @param policyType The type of the policy whose claims are to be listed.
      */
-    public ListClaimsCommand(Index personIndex, PolicyType policyType) {
-        this.personIndex = personIndex;
+    public ListClaimsCommand(Index clientIndex, PolicyType policyType) {
+        this.clientIndex = clientIndex;
         this.policyType = policyType;
     }
 
@@ -56,52 +56,52 @@ public class ListClaimsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
 
-        Person person = getPersonByIndex(lastShownList, personIndex);
-        Policy policy = getPolicyByType(person, policyType);
+        Client client = getClientByIndex(lastShownList, clientIndex);
+        Policy policy = getPolicyByType(client, policyType);
 
         List<Claim> claims = policy.getList();
 
         if (claims.isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_NO_CLAIMS, policyType, person.getName()));
+            return new CommandResult(String.format(MESSAGE_NO_CLAIMS, policyType, client.getName()));
         }
 
         String claimsString = formatClaims(claims);
 
-        return new CommandResult(String.format(MESSAGE_LIST_CLAIMS_SUCCESS, policyType, person.getName(),
+        return new CommandResult(String.format(MESSAGE_LIST_CLAIMS_SUCCESS, policyType, client.getName(),
                 claimsString));
     }
 
     /**
-     * Retrieves the person from the list based on the provided index.
+     * Retrieves the client from the list based on the provided index.
      *
-     * @param lastShownList The list of persons.
-     * @param index The index of the person.
-     * @return The person at the specified index.
+     * @param lastShownList The list of clients.
+     * @param index The index of the client.
+     * @return The client at the specified index.
      * @throws CommandException If the index is out of bounds.
      */
-    private Person getPersonByIndex(List<Person> lastShownList, Index index) throws CommandException {
+    private Client getClientByIndex(List<Client> lastShownList, Index index) throws CommandException {
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_INDEX);
+            throw new CommandException(MESSAGE_INVALID_CLIENT_INDEX);
         }
         return lastShownList.get(index.getZeroBased());
     }
 
     /**
-     * Finds the policy of the specified type for the given person.
+     * Finds the policy of the specified type for the given client.
      *
-     * @param person The person whose policies are to be searched.
+     * @param client The client whose policies are to be searched.
      * @param policyType The type of policy to find.
      * @return The policy of the specified type.
      * @throws CommandException If no policy of the specified type is found.
      */
-    private Policy getPolicyByType(Person person, PolicyType policyType) throws CommandException {
-        return person.getPolicies().stream()
+    private Policy getPolicyByType(Client client, PolicyType policyType) throws CommandException {
+        return client.getPolicies().stream()
                 .filter(policy -> policy.getType().equals(policyType))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType,
-                        person.getName())));
+                        client.getName())));
     }
 
     /**
@@ -131,7 +131,7 @@ public class ListClaimsCommand extends Command {
             return false;
         }
         ListClaimsCommand otherCommand = (ListClaimsCommand) other;
-        return personIndex.equals(otherCommand.personIndex)
+        return clientIndex.equals(otherCommand.clientIndex)
                 && policyType.equals(otherCommand.policyType);
     }
 }

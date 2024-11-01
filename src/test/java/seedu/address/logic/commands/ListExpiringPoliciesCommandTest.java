@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import java.time.LocalDate;
 
@@ -17,7 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.claim.ClaimList;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.HealthPolicy;
@@ -112,7 +112,7 @@ public class ListExpiringPoliciesCommandTest {
         // reset model to prevent any side effects across tests
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Client client = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         PolicySet policies = new PolicySet(); // Avoid mutating original policies
 
         // add new policy that expires within 30 days
@@ -121,11 +121,11 @@ public class ListExpiringPoliciesCommandTest {
                 new ClaimList());
         policies.add(expiringPolicy);
 
-        // create a new person with the updated policy set to avoid modifying the original state
-        Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
-                person.getAddress(), person.getTags(), policies);
+        // create a new client with the updated policy set to avoid modifying the original state
+        Client updatedClient = new Client(client.getName(), client.getPhone(), client.getEmail(),
+                client.getAddress(), client.getTags(), policies);
 
-        model.setPerson(person, updatedPerson);
+        model.setClient(client, updatedClient);
         return model.getAddressBook();
     }
 }

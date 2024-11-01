@@ -3,13 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.CARL;
+import static seedu.address.testutil.TypicalClients.ELLE;
+import static seedu.address.testutil.TypicalClients.FIONA;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +22,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.CompositePredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneMatchesPredicate;
-import seedu.address.model.person.PolicyTypeMatchesPredicate;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.CompositePredicate;
+import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.client.PhoneMatchesPredicate;
+import seedu.address.model.client.PolicyTypeMatchesPredicate;
 import seedu.address.model.policy.PolicyType;
 
 /**
@@ -43,10 +43,10 @@ public class FindCommandTest {
                 new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
         PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("12345678");
 
-        List<Predicate<Person>> predicatesList1 = new ArrayList<>();
+        List<Predicate<Client>> predicatesList1 = new ArrayList<>();
         predicatesList1.add(namePredicate);
 
-        List<Predicate<Person>> predicatesList2 = new ArrayList<>();
+        List<Predicate<Client>> predicatesList2 = new ArrayList<>();
         predicatesList2.add(phonePredicate);
 
         CompositePredicate compositePredicate1 = new CompositePredicate(predicatesList1);
@@ -73,77 +73,77 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noClientFound() {
+        String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 0);
 
         NameContainsKeywordsPredicate namePredicate =
             new NameContainsKeywordsPredicate(Collections.singletonList("!@#$%^&*()"));
-        List<Predicate<Person>> predicatesList = new ArrayList<>();
+        List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(namePredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
         FindCommand command = new FindCommand(compositePredicate);
-        expectedModel.updateFilteredPersonList(compositePredicate);
+        expectedModel.updateFilteredClientList(compositePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredClientList());
     }
 
     @Test
-    public void execute_multiplePredicates_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+    public void execute_multiplePredicates_multipleClientsFound() {
+        String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 1);
 
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("Kurz"));
         PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("95352563"); // CARL's phone
 
-        List<Predicate<Person>> predicatesList = new ArrayList<>();
+        List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(namePredicate);
         predicatesList.add(phonePredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
         FindCommand command = new FindCommand(compositePredicate);
-        expectedModel.updateFilteredPersonList(compositePredicate);
+        expectedModel.updateFilteredClientList(compositePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(CARL), model.getFilteredPersonList());
+        assertEquals(Collections.singletonList(CARL), model.getFilteredClientList());
     }
 
     @Test
-    public void execute_singlePredicate_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_singlePredicate_multipleClientsFound() {
+        String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 3);
 
         NameContainsKeywordsPredicate namePredicate =
             new NameContainsKeywordsPredicate(Arrays.asList("Kurz", "Elle", "Kunz"));
 
-        List<Predicate<Person>> predicatesList = new ArrayList<>();
+        List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(namePredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
         FindCommand command = new FindCommand(compositePredicate);
-        expectedModel.updateFilteredPersonList(compositePredicate);
+        expectedModel.updateFilteredClientList(compositePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredClientList());
     }
 
     @Test
-    public void execute_invalidPolicyType_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_invalidPolicyType_noClientFound() {
+        String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 0);
 
-        // Assuming no person has the EDUCATION policy type
+        // Assuming no client has the EDUCATION policy type
         PolicyTypeMatchesPredicate policyTypePredicate = new PolicyTypeMatchesPredicate(PolicyType.EDUCATION);
 
-        List<Predicate<Person>> predicatesList = new ArrayList<>();
+        List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(policyTypePredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
         FindCommand command = new FindCommand(compositePredicate);
-        expectedModel.updateFilteredPersonList(compositePredicate);
+        expectedModel.updateFilteredClientList(compositePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredClientList());
     }
 
     @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        List<Predicate<Person>> predicatesList = new ArrayList<>();
+        List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(predicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 
@@ -155,7 +155,7 @@ public class FindCommandTest {
     @Test
     public void execute_nullModel_throwsNullPointerException() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice"));
-        List<Predicate<Person>> predicatesList = new ArrayList<>();
+        List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(predicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
 

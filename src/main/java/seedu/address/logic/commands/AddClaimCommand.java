@@ -15,20 +15,20 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimList;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Adds a claim to a person in the address book.
+ * Adds a claim to a client in the address book.
  */
 public class AddClaimCommand extends Command {
 
     public static final String COMMAND_WORD = "add-claim";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a claim to the person identified "
-            + "by the index number used in the displayed person list. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a claim to the client identified "
+            + "by the index number used in the displayed client list. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_POLICY_TYPE + "POLICY_TYPE " + PREFIX_CLAIM_STATUS + "CLAIM_STATUS "
             + PREFIX_CLAIM_DESC + "CLAIM_DESCRIPTION\n"
@@ -37,7 +37,7 @@ public class AddClaimCommand extends Command {
             + PREFIX_CLAIM_STATUS + "PENDING "
             + PREFIX_CLAIM_DESC + "stomach surgery";
 
-    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Added Claim to Person: %1$s";
+    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Added Claim to Client: %1$s";
     public static final String MESSAGE_POLICY_NOT_FOUND = "The policy for the specified type was not found.";
     public static final String MESSAGE_CLAIM_EXISTS = "A similar claim already exists in the policy.";
 
@@ -46,10 +46,10 @@ public class AddClaimCommand extends Command {
     private final PolicyType policyType;
 
     /**
-     * Constructs an {@code AddClaimCommand} to add the specified {@code Claim} to a person.
+     * Constructs an {@code AddClaimCommand} to add the specified {@code Claim} to a client.
      *
-     * @param index      The index of the person in the filtered person list to whom the claim will be added.
-     * @param claim      The claim to add to the person.
+     * @param index      The index of the client in the filtered client list to whom the claim will be added.
+     * @param claim      The claim to add to the client.
      * @param policyType The type of the policy to which the claim will be added.
      */
     public AddClaimCommand(Index index, Claim claim, PolicyType policyType) {
@@ -64,14 +64,14 @@ public class AddClaimCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Policy> policySet = personToEdit.getPolicies();
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
+        Set<Policy> policySet = clientToEdit.getPolicies();
 
         // find the policy based on the policyType
         Policy policy = policySet.stream()
@@ -90,12 +90,12 @@ public class AddClaimCommand extends Command {
         updatedPolicySet.remove(policy.getType());
         updatedPolicySet.add(policy);
 
-        // create a new person with the updated policy set
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), updatedPolicySet);
+        // create a new client with the updated policy set
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(),
+                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), updatedPolicySet);
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.setClient(clientToEdit, editedClient);
+        model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
 
         return new CommandResult(String.format(MESSAGE_ADD_CLAIM_SUCCESS, claim));
 

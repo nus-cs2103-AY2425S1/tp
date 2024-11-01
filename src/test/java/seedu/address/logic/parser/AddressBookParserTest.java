@@ -7,7 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLAIM;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +26,7 @@ import seedu.address.logic.commands.DeleteClaimsCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -36,16 +36,16 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
 import seedu.address.logic.commands.ListPoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.CompositePredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.CompositePredicate;
+import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.policy.EditPolicyDescriptor;
 import seedu.address.model.policy.LifePolicy;
 import seedu.address.model.policy.PolicyType;
 import seedu.address.model.policy.PremiumAmount;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ClientBuilder;
+import seedu.address.testutil.ClientUtil;
+import seedu.address.testutil.EditClientDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -53,9 +53,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Client client = new ClientBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(ClientUtil.getAddCommand(client));
+        assertEquals(new AddCommand(client), command);
     }
 
     @Test
@@ -67,17 +67,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_CLIENT), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Client client = new ClientBuilder().build();
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder(client).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getEditClientDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_CLIENT, descriptor), command);
     }
 
     @Test
@@ -91,9 +91,9 @@ public class AddressBookParserTest {
         String input = "find-client n/Alice Bob";
 
         // Construct expected FindCommand
-        List<Predicate<Person>> predicatesList = new ArrayList<>();
+        List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        Predicate<Person> combinedPredicate = new CompositePredicate(predicatesList);
+        Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
         FindCommand expectedCommand = new FindCommand(combinedPredicate);
 
         // Parse command using AddressBookParser
@@ -119,28 +119,28 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addPolicy() throws Exception {
         AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(
-                AddPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                AddPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                 + " pt/life");
         LifePolicy life = new LifePolicy();
-        assertEquals(new AddPolicyCommand(INDEX_FIRST_PERSON, life), command);
+        assertEquals(new AddPolicyCommand(INDEX_FIRST_CLIENT, life), command);
     }
     @Test
     public void parseCommand_editPolicy() throws Exception {
         EditPolicyCommand command = (EditPolicyCommand) parser.parseCommand(
-                EditPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                EditPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life" + " pa/200");
         EditPolicyDescriptor policy = new EditPolicyDescriptor(PolicyType.LIFE);
         policy.setPremiumAmount(new PremiumAmount(200));
-        assertEquals(new EditPolicyCommand(INDEX_FIRST_PERSON, policy), command);
+        assertEquals(new EditPolicyCommand(INDEX_FIRST_CLIENT, policy), command);
     }
     @Test
     public void parseCommand_deletePolicy() throws Exception {
         DeletePolicyCommand command = (DeletePolicyCommand) parser.parseCommand(
-                DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life");
         final Set<PolicyType> policyTypes = new HashSet<>();
         policyTypes.add(PolicyType.LIFE);
-        assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes), command);
+        assertEquals(new DeletePolicyCommand(INDEX_FIRST_CLIENT, policyTypes), command);
     }
 
     @Test
@@ -159,14 +159,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listPolicies() throws Exception {
         ListPoliciesCommand command = (ListPoliciesCommand) parser.parseCommand(
-                ListPoliciesCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new ListPoliciesCommand(INDEX_FIRST_PERSON), command);
+                ListPoliciesCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased());
+        assertEquals(new ListPoliciesCommand(INDEX_FIRST_CLIENT), command);
     }
 
     @Test
     public void parseCommand_listClaims() throws Exception {
-        ListClaimsCommand expectedCommand = new ListClaimsCommand(INDEX_FIRST_PERSON, PolicyType.HEALTH);
-        String validInput = ListClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " pt/health";
+        ListClaimsCommand expectedCommand = new ListClaimsCommand(INDEX_FIRST_CLIENT, PolicyType.HEALTH);
+        String validInput = ListClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased() + " pt/health";
 
         Command command = parser.parseCommand(validInput);
         assertEquals(expectedCommand, command);
@@ -174,11 +174,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteClaim() throws Exception {
-        String userInput = DeleteClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        String userInput = DeleteClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                 + " pt/health c/1";
 
         DeleteClaimsCommand expectedCommand = new DeleteClaimsCommand(
-                INDEX_FIRST_PERSON, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
+                INDEX_FIRST_CLIENT, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
 
         DeleteClaimsCommand actualCommand = (DeleteClaimsCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, actualCommand);

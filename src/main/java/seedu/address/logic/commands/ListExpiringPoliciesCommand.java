@@ -8,7 +8,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyExpiryDatePredicate;
 
@@ -55,14 +55,14 @@ public class ListExpiringPoliciesCommand extends Command {
 
             PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate, daysFromExpiry);
 
-            List<Person> persons = model.getFilteredPersonList();
+            List<Client> clients = model.getFilteredClientList();
 
             StringBuilder resultMessage = new StringBuilder(String.format(MESSAGE_SUCCESS, daysFromExpiry));
 
             boolean hasExpiringPolicies = false;
 
-            for (Person person : persons) {
-                Set<Policy> policies = person.getPolicies();
+            for (Client client : clients) {
+                Set<Policy> policies = client.getPolicies();
 
                 // Filter the policies based on expiry date predicate
                 for (Policy policy : policies) {
@@ -71,8 +71,8 @@ public class ListExpiringPoliciesCommand extends Command {
 
                         resultMessage.append(String.format(
                                 MESSAGE_POLICY_LISTED_DETAILS,
-                                person.getName().toString(),
-                                person.getPhone().toString(),
+                                client.getName().toString(),
+                                client.getPhone().toString(),
                                 policy.getType().toString(),
                                 policy.getPremiumAmount().toString(),
                                 policy.getCoverageAmount().toString(),

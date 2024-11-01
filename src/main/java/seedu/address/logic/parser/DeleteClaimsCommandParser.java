@@ -25,24 +25,24 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
     @Override
     public DeleteClaimsCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX);
-        Index personIndex = parsePersonIndex(argMultimap);
+        Index clientIndex = parseClientIndex(argMultimap);
         validatePrefixes(argMultimap);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX);
 
         PolicyType policyType = parsePolicyType(argMultimap);
         Index claimIndex = parseClaimIndex(argMultimap);
 
-        return new DeleteClaimsCommand(personIndex, policyType, claimIndex);
+        return new DeleteClaimsCommand(clientIndex, policyType, claimIndex);
     }
 
     /**
-     * Parses the person index from the given argument multimap.
+     * Parses the client index from the given argument multimap.
      *
      * @param argMultimap The argument multimap containing the parsed arguments.
-     * @return The parsed person index.
+     * @return The parsed client index.
      * @throws ParseException If the index is not a valid positive integer.
      */
-    private Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
+    private Index parseClientIndex(ArgumentMultimap argMultimap) throws ParseException {
         try {
             return ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
