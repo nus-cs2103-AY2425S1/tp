@@ -37,7 +37,7 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
     * [**Vendor Related Commands**](#vendor-related-commands)
         * [`add_vendor` Adding a vendor to the vendor list](#adding-a-vendor--add_vendor)
         * [`edit_vendor` Editing the details of a vendor](#editing-a-vendor--edit_vendor)
-        * [`delete_vendor` Deleting a student](#deleting-a-vendor--delete_vendor)
+        * [`delete_vendor` Deleting a vendor from the vendor list](#deleting-a-vendor--delete_vendor)
     * [**Miscellaneous**](#miscellaneous)
         * [Saving the data](#saving-the-data)
         * [Editing the data file](#editing-the-data-file)
@@ -122,9 +122,8 @@ Perfect if you are new to BridalBuddy, this section will walk you through all th
 1. [**Starting a fresh template**](#starting-a-fresh-template)
 2. [**Adding guests**](#adding-guests)
 3. [**Adding vendors**](#adding-vendors)
-4. [**Editing details**](#editing-details)
-5. [**Deleting persons**](#deleting-persons)
-6. [**Exiting the program**](#exiting-the-program)
+4. [**Deleting persons**](#deleting-persons)
+5. [**Exiting the program**](#exiting-the-program)
 
 
 **Let us explore the most basic features of BridalBuddy's from the perspective of a wedding planner.**
@@ -160,7 +159,7 @@ Let us familiarise ourselves with the `add_guest` command, which you will need i
 
 Let's try entering the following command in the Command Line: `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`.
 
-This means we are adding a new guest, with the name `John Doe`, phone number `98765432`, email `johnd@example.com` and address `311, Clementi Ave 2, #02-25` to the guest list.
+This means you are adding a new guest, with the name `John Doe`, phone number `98765432`, email `johnd@example.com` and address `311, Clementi Ave 2, #02-25` to the guest list.
 
 Once successful, you should see the following on your screen:
 
@@ -177,7 +176,7 @@ Let us now add a vendor to the list of vendors you are intending to collaborate 
 
 Let's try entering the following command in the Command Line: `add_vendor n/Jane Tan p/91234567 e/janet@example.com a/743, Jurong Mall, #05-245 company/Jane's Florist`.
 
-This means we are adding a new vendor, with the name `Jane Tan`, phone number `91234567`, email `janet@example.com`, address `743, Jurong Mall, #05-245` and company name `Jane's Florist` to the vendor list.
+This means you are adding a new vendor, with the name `Jane Tan`, phone number `91234567`, email `janet@example.com`, address `743, Jurong Mall, #05-245` and company name `Jane's Florist` to the vendor list.
 
 Once successful, you should see the following on your screen:
 
@@ -188,20 +187,20 @@ For more details on the `add_vendor` command, such as the additional optional fi
 [_Back to Top_](#table-of-contents)
 
 
-### Editing details
-
-Let's say your customers have decided they want to allocate a larger budget to the flower decorations, and so we want to keep track of that properly, by reflecting that larger budget allocated to the florist.
-To do that,
-
-
-[_Back to Top_](#table-of-contents)
-
-
 ### Deleting persons
 
-Suppose the bride tells us that she has a preferred photographer in mind, and so you need to delete the existing photographer you previously added from the vendor list.
-We note that the 
+Suppose the bride tells us that she has a preferred florist in mind, and so you need to delete the florist you previously added to the vendor list.
 
+Let's try the entering the following command in the Command Line: `delete_vendor 1`.
+
+This means you are deleting the first person that is currently being listed on your vendor list, which is `Jane Tan`.
+
+Once successful, you should see the following on your screen:
+
+![delete vendor_command](images/deleteVendorCommandSample.png)
+
+Deleting a guest works in a similar way but using the `delete_guest` command instead.
+For more details on the `delete_guest` and `delete_vendor` commands, we encourage you to refer to [**Deleting a guest from the guest list**](#deleting-a-guest--delete_guest) and [**Deleting a vendor from the vendor list**](#deleting-a-vendor--delete_vendor) respectively.
 
 [_Back to Top_](#table-of-contents)
 
