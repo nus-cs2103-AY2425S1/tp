@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_WORKEXP;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -66,7 +67,7 @@ public class FindByWorkExperienceCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_WORKEXP, 2, "Intern,Google,2024");
         WorkExperienceContainsKeywordsPredicate predicate = new WorkExperienceContainsKeywordsPredicate("Intern",
                 "Google", "2024");
         FindByWorkExperienceCommand command = new FindByWorkExperienceCommand(predicate);

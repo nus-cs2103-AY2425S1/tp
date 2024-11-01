@@ -26,6 +26,43 @@ public class WorkExperienceContainsKeywordsPredicate implements Predicate<Person
         this.year = (year != null && !year.isEmpty()) ? year.trim() : ""; // Empty means "match any year"
     }
 
+    /**
+     * Returns a string representing the role in the format "Role,Company,Year",
+     * with the first letter of the role and company capitalized.
+     *
+     * @return a formatted string with role, company, and year information
+     */
+    public String getRole() {
+        StringBuilder result = new StringBuilder();
+
+        // Capitalize the first letter of role and company
+        String roleCapitalized = capitalizeFirstLetter(this.role);
+        String companyCapitalized = capitalizeFirstLetter(this.company);
+
+        // Append each part to the StringBuilder
+        result.append(roleCapitalized)
+                .append(",")
+                .append(companyCapitalized)
+                .append(",")
+                .append(this.year);
+
+        return result.toString();
+    }
+
+    /**
+     * Capitalizes the first letter of the input string and makes the rest lowercase.
+     * If the input is null or empty, it returns the input as is.
+     *
+     * @param input the string to be capitalized
+     * @return the input string with the first letter capitalized and the rest in lowercase
+     */
+    private String capitalizeFirstLetter(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+        return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
+    }
+
     @Override
     public boolean test(Person person) {
         String[] workExperienceFields = person.getWorkExp().toString().split(",");
