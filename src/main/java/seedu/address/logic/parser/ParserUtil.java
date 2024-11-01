@@ -108,8 +108,11 @@ public class ParserUtil {
     public static Attendance parseAttendance(String dateString) throws ParseException {
         requireNonNull(dateString);
         String trimmedDateString = dateString.trim();
-        if (!Attendance.isValidDate(trimmedDateString)) {
+        if (!Attendance.isValidDateFormat(trimmedDateString)) {
             throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+        if (!Attendance.isValidDateTime(trimmedDateString)) {
+            throw new ParseException(Attendance.MESSAGE_TIME_CONSTRAINTS);
         }
         return new Attendance(trimmedDateString);
     }
