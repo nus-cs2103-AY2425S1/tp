@@ -23,6 +23,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
     - [Adding a person: `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons-list)
     - [Editing a person : `edit`](#editing-a-person-edit)
+    - [Grading a person : `grade`](#grading-a-person-grade)
     - [Listing students by certain attributes : `filter`](#listing-students-by-certain-attributes-filter)
     - [Deleting a person : `delete`](#deleting-a-person-delete)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
@@ -329,6 +330,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete ID`<br> e.g., `delete 12345678`
 **Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
+**Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`
 **Filter**   | `find [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `find n/James Jake`
 **List**   | `list`
 **Help**   | `help`
