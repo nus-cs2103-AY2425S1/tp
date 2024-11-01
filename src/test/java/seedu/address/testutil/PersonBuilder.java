@@ -7,7 +7,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person; // TODO REMOVE THIS WHOLE CLASS SOON
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutor;
@@ -102,7 +102,7 @@ public class PersonBuilder {
         this.hours = new Hours(hours);
         return this;
     }
-    // TODO DEAD CODE, REMOVE
+
     public Person build() {
         return new Tutor(name, phone, email, address, hours, subjects);
     }
