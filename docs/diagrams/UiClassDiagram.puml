@@ -75,21 +75,20 @@ EventCard --|> UiPart
 
 VendorCard ..> Model
 EventCard ..> Model
-VendorDetailsPanel .down.> Model
-EventDetailsPanel .down.> Model
+VendorDetailsPanel ..> Model
+EventDetailsPanel ..> Model
 
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-VendorList -[hidden]right- Model
-VendorList -[hidden]right-> Model
+EventDetailsPanel -[hidden]down- UiPart
+VendorDetailsPanel -[hidden]down- UiPart
+VendorList -[hidden]right- EventList
 EventList -[hidden]right- Model
-EventList -[hidden]right-> Model
-EventList -[hidden]right-|> Model
 VendorList -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
-MainWindow -[hidden]-|> UiPart
+MainWindow -[hidden]left-|> UiPart
 @enduml
