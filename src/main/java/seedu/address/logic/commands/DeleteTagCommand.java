@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -149,5 +150,12 @@ public class DeleteTagCommand extends Command {
 
         DeleteTagCommand otherCommand = (DeleteTagCommand) other;
         return tags.equals(otherCommand.tags);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("tags", tags)
+                .toString();
     }
 }

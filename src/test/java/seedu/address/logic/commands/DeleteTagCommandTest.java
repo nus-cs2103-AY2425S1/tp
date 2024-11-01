@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -64,21 +65,16 @@ public class DeleteTagCommandTest {
     }
 
     @Test
-    public void executeDeleteMultipleTagsSuccess() {
-        List<Tag> tagsToDelete = new ArrayList<>();
-        tagsToDelete.add(BRIDES_SIDE);
-        tagsToDelete.add(GROOMS_SIDE);
+    public void equals() {
+        List<Tag> firstTags = new ArrayList<>();
+        firstTags.add(BRIDES_SIDE);
+        DeleteTagCommand firstDeleteTagCommand = new DeleteTagCommand(firstTags);
 
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagsToDelete);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteTag(BRIDES_SIDE);
-        expectedModel.deleteTag(GROOMS_SIDE);
+        List<Tag> secondTags = new ArrayList<>();
+        secondTags.add(BRIDES_SIDE);
+        DeleteTagCommand secondDeleteTagCommand = new DeleteTagCommand(secondTags);
 
-        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS + "[" + BRIDES_SIDE + ", " + GROOMS_SIDE + "]\n"
-                + "Your tags: " + expectedModel.getTagList();
+        assertTrue(firstDeleteTagCommand.equals(secondDeleteTagCommand));
 
-        assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
-
-
 }

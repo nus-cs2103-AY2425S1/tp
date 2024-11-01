@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.tag.Tag.isValidTagName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,22 +16,6 @@ import seedu.address.model.tag.Tag;
  */
 public class NewtagCommandParser implements Parser<NewtagCommand> {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}' ]+";
-
-    /**
-     * Checks if a given string (trimmed) is a valid argument
-     * for the NewTagCommand class.
-     * @param argument the argument to be checked.
-     * @return true if it is valid, and false otherwise.
-     */
-    public boolean isValidArgument(String argument) {
-        boolean isEmpty = argument.isEmpty();
-        boolean isTooLong = argument.length() > Tag.MAX_CHARACTER_LENGTH;
-        boolean isValidCharacters = argument.matches(VALIDATION_REGEX);
-        if (isEmpty || isTooLong || !isValidCharacters) {
-            return false;
-        }
-        return true;
-    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the NewtagCommand
@@ -49,7 +34,7 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
 
         // Create and return the NewtagCommand.
         for (String argument : arguments) {
-            if (!isValidArgument(argument)) {
+            if (!isValidTagName(argument)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
             }
 
