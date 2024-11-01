@@ -163,9 +163,9 @@ public class Lesson {
     public void setAttendance(Student student, boolean attendance) throws StudentNotFoundException {
         requireNonNull(student);
         StudentLessonInfo oldEntry = getStudentLessonInfo(student);
-        studentLessonInfoList.remove(oldEntry);
         StudentLessonInfo newEntry = oldEntry.setAttendance(attendance);
-        studentLessonInfoList.add(newEntry);
+        int index = studentLessonInfoList.indexOf(oldEntry);
+        studentLessonInfoList.set(index, newEntry);
     }
 
     /**
