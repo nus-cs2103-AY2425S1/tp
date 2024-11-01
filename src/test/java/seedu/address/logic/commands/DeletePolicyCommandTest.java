@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,36 +16,36 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Prudy;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ClientBuilder;
 
 
 public class DeletePolicyCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
 
     @Test
     public void execute_deletePolicyUnfilteredList_success() {
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson).withPolicies().build();
+        Client secondClient = model.getFilteredClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
+        Client editedClient = new ClientBuilder(secondClient).withPolicies().build();
 
         Set<PolicyType> policiesToDelete = new HashSet<>();
         policiesToDelete.add(PolicyType.HEALTH);
-        DeletePolicyCommand deletePolicyCommand = new DeletePolicyCommand(INDEX_SECOND_PERSON, policiesToDelete);
+        DeletePolicyCommand deletePolicyCommand = new DeletePolicyCommand(INDEX_SECOND_CLIENT, policiesToDelete);
 
         PolicySet expectedPolicies = new PolicySet();
-        expectedPolicies.addAll(editedPerson.getPolicies());
-        String expectedMessage = String.format(DeletePolicyCommand.POLICY_DELETE_PERSON_SUCCESS,
+        expectedPolicies.addAll(editedClient.getPolicies());
+        String expectedMessage = String.format(DeletePolicyCommand.POLICY_DELETE_CLIENT_SUCCESS,
                 Messages.formatPolicies(expectedPolicies));
 
-        // Create a new expected model with the person having the "health" policy (i.e., the "life" policy is removed)
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(secondPerson, editedPerson);
+        // Create a new expected model with the client having the "health" policy (i.e., the "life" policy is removed)
+        Model expectedModel = new ModelManager(new Prudy(model.getPrudy()), new UserPrefs());
+        expectedModel.setClient(secondClient, editedClient);
 
         // Act and Assert: Execute the command and compare results
         assertCommandSuccess(deletePolicyCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ public class DeletePolicyCommandTest {
         final Set<PolicyType> policyTypes = new HashSet<>();
         policyTypes.add(PolicyType.LIFE);
         assertThrows(NullPointerException.class, () -> new DeletePolicyCommand(null, policyTypes));
-        assertThrows(NullPointerException.class, () -> new DeletePolicyCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () -> new DeletePolicyCommand(INDEX_FIRST_CLIENT, null));
     }
 
     @Test
@@ -64,15 +64,15 @@ public class DeletePolicyCommandTest {
         final Set<PolicyType> policyTypes = new HashSet<>();
         policyTypes.add(PolicyType.LIFE);
 
-        assertCommandFailure(new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes), model, "Policy not found.");
+        assertCommandFailure(new DeletePolicyCommand(INDEX_FIRST_CLIENT, policyTypes), model, "Policy not found.");
     }
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidClientIndexUnfilteredList_failure() {
         final Set<PolicyType> policyTypes = new HashSet<>();
         policyTypes.add(PolicyType.LIFE);
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
         DeletePolicyCommand command = new DeletePolicyCommand(outOfBoundIndex, policyTypes);
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
     @Test
     public void equals() {
@@ -82,10 +82,10 @@ public class DeletePolicyCommandTest {
         final Set<PolicyType> policyEdu = new HashSet<>();
         policyEdu.add(PolicyType.EDUCATION);
 
-        final DeletePolicyCommand standardCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes);
-        final DeletePolicyCommand commandWithSameValues = new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes);
-        final DeletePolicyCommand differentIndexCommand = new DeletePolicyCommand(INDEX_SECOND_PERSON, policyTypes);
-        final DeletePolicyCommand differentPoliciesCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON,
+        final DeletePolicyCommand standardCommand = new DeletePolicyCommand(INDEX_FIRST_CLIENT, policyTypes);
+        final DeletePolicyCommand commandWithSameValues = new DeletePolicyCommand(INDEX_FIRST_CLIENT, policyTypes);
+        final DeletePolicyCommand differentIndexCommand = new DeletePolicyCommand(INDEX_SECOND_CLIENT, policyTypes);
+        final DeletePolicyCommand differentPoliciesCommand = new DeletePolicyCommand(INDEX_FIRST_CLIENT,
                 policyEdu);
 
         // same values -> returns true

@@ -4,30 +4,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 public class LifePolicyTest {
     private final LifePolicy life = new LifePolicy();
-    private final double defaultPremiumAmount = life.getPremiumAmount();
-    private final double defaultCoverageAmount = life.getCoverageAmount();
-    private final LocalDate defaultExpiryDate = life.getExpiryDate();
+    private final PremiumAmount defaultPremiumAmount = life.getPremiumAmount();
+    private final CoverageAmount defaultCoverageAmount = life.getCoverageAmount();
+    private final ExpiryDate defaultExpiryDate = life.getExpiryDate();
 
     @Test
     public void constructor_negativeAmounts_useDefaultValues() {
-        // negative premiumAmount
-        LifePolicy negativePremiumAmount = new LifePolicy(-1, defaultCoverageAmount, defaultExpiryDate);
-        assertEquals(defaultPremiumAmount, negativePremiumAmount.getPremiumAmount());
+        // null premiumAmount
+        LifePolicy nullPremiumAmount = new LifePolicy(null, defaultCoverageAmount,
+                defaultExpiryDate, null);
+        assertEquals(defaultPremiumAmount, nullPremiumAmount.getPremiumAmount());
 
-        // negative coverageAmount
-        LifePolicy negativeCoverageAmount = new LifePolicy(defaultPremiumAmount, -1, defaultExpiryDate);
-        assertEquals(defaultCoverageAmount, negativeCoverageAmount.getCoverageAmount());
-    }
+        // null coverageAmount
+        LifePolicy nullCoverageAmount = new LifePolicy(defaultPremiumAmount, null,
+                defaultExpiryDate, null);
+        assertEquals(defaultCoverageAmount, nullCoverageAmount.getCoverageAmount());
 
-    @Test
-    public void constructor_nullExpiryDate_useDefaultValue() {
-        LifePolicy nullExpiryDate = new LifePolicy(defaultPremiumAmount, defaultCoverageAmount, null);
+        // null expiryDate
+        LifePolicy nullExpiryDate = new LifePolicy(defaultPremiumAmount, defaultCoverageAmount,
+                null, null);
         assertEquals(defaultExpiryDate, nullExpiryDate.getExpiryDate());
     }
 

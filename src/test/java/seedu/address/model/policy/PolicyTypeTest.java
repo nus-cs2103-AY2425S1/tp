@@ -1,6 +1,7 @@
 package seedu.address.model.policy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,5 +25,13 @@ public class PolicyTypeTest {
         assertEquals("Health", PolicyType.HEALTH.toString());
         assertEquals("Education", PolicyType.EDUCATION.toString());
         assertNotEquals("life", PolicyType.LIFE.toString());
+    }
+
+    @Test
+    public void isValidPolicyType() {
+        assertTrue(PolicyType.isValidPolicyType("Life"));
+        assertTrue(PolicyType.isValidPolicyType("Health"));
+        assertTrue(PolicyType.isValidPolicyType("Education"));
+        assertFalse(PolicyType.isValidPolicyType("live"));
     }
 }

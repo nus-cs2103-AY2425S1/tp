@@ -4,30 +4,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 public class HealthPolicyTest {
     private final HealthPolicy health = new HealthPolicy();
-    private final double defaultPremiumAmount = health.getPremiumAmount();
-    private final double defaultCoverageAmount = health.getCoverageAmount();
-    private final LocalDate defaultExpiryDate = health.getExpiryDate();
+    private final PremiumAmount defaultPremiumAmount = health.getPremiumAmount();
+    private final CoverageAmount defaultCoverageAmount = health.getCoverageAmount();
+    private final ExpiryDate defaultExpiryDate = health.getExpiryDate();
 
     @Test
-    public void constructor_negativeAmounts_useDefaultValues() {
-        // negative premiumAmount
-        HealthPolicy negativePremiumAmount = new HealthPolicy(-1, defaultCoverageAmount, defaultExpiryDate);
-        assertEquals(defaultPremiumAmount, negativePremiumAmount.getPremiumAmount());
+    public void constructor_nullValues_useDefaultValues() {
+        // null premiumAmount
+        HealthPolicy nullPremiumAmount = new HealthPolicy(null, defaultCoverageAmount,
+                defaultExpiryDate, null);
+        assertEquals(defaultPremiumAmount, nullPremiumAmount.getPremiumAmount());
 
-        // negative coverageAmount
-        HealthPolicy negativeCoverageAmount = new HealthPolicy(defaultPremiumAmount, -1, defaultExpiryDate);
-        assertEquals(defaultCoverageAmount, negativeCoverageAmount.getCoverageAmount());
-    }
+        // null coverageAmount
+        HealthPolicy nullCoverageAmount = new HealthPolicy(defaultPremiumAmount, null,
+                defaultExpiryDate, null);
+        assertEquals(defaultCoverageAmount, nullCoverageAmount.getCoverageAmount());
 
-    @Test
-    public void constructor_nullExpiryDate_useDefaultValue() {
-        HealthPolicy nullExpiryDate = new HealthPolicy(defaultPremiumAmount, defaultCoverageAmount, null);
+        // null expiryDate
+        HealthPolicy nullExpiryDate = new HealthPolicy(defaultPremiumAmount, defaultCoverageAmount,
+                null, null);
         assertEquals(defaultExpiryDate, nullExpiryDate.getExpiryDate());
     }
 
