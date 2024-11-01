@@ -21,18 +21,18 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> AddressBookParser
 
-AddressBookParser .down.> XYZCommandParser: <<create>>
+AddressBookParser -down- XYZCommandParser: > creates
 
-XYZCommandParser ..> XYZCommand : <<create>>
-AddressBookParser ..> Command : <<use>>
+XYZCommandParser -- XYZCommand : > creates
+AddressBookParser -- Command : uses
 XYZCommandParser .up.|> Parser
-XYZCommandParser ..> ArgumentMultimap
-XYZCommandParser ..> ArgumentTokenizer
-ArgumentTokenizer .left.> ArgumentMultimap
-XYZCommandParser ..> CliSyntax
-CliSyntax ..> Prefix
-XYZCommandParser ..> ParserUtil
-ParserUtil .down.> Prefix
-ArgumentTokenizer .down.> Prefix
-XYZCommand -up-|> Command
+XYZCommandParser -- ArgumentMultimap : > uses
+XYZCommandParser -- ArgumentTokenizer : > uses
+ArgumentTokenizer -left- ArgumentMultimap : > returns
+XYZCommandParser -- CliSyntax : > uses
+CliSyntax --> Prefix : > contains
+XYZCommandParser -- ParserUtil : > uses
+
+ArgumentTokenizer -down- Prefix : > maps
+XYZCommand .up.|> Command
 @enduml
