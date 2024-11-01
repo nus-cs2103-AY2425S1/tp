@@ -67,3 +67,27 @@
     -fx-padding : 0 15 0 0;
 }
 
+#dashboardPlaceHolder {
+}
+
+#dashboard {
+    -fx-background-color: white;
+    -fx-padding: 10 0 10 15;
+}
+
+#total {
+    -fx-background-color: #F1F1F1;
+    -fx-background-radius: 5;
+    -fx-padding: 2 20;
+    -fx-font-size: 14;
+    -fx-text-fill: #262626;
+}
+
+#feesOverdue {
+    -fx-background-color: #E5F9F9;
+    -fx-background-radius: 5;
+    -fx-padding: 2 20;
+    -fx-font-size: 14;
+    -fx-text-fill: #262626;
+}
+
