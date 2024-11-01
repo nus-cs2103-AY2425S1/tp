@@ -53,7 +53,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY-GROUP-TAG]...\n"
             + "[" + PREFIX_REMOVE_TAG + "TAG_TO_REMOVE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_REMOVE_TAG + "1A "
+            + PREFIX_REMOVE_TAG + "Control";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited successfully!\n"
             + "%s%s"
