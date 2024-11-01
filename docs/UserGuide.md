@@ -13,12 +13,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   - For Windows 11, see [here](https://www.youtube.com/watch?v=ykAhL1IoQUM)
+   - For MacOs, see [here](https://www.youtube.com/watch?v=lYKHFz8YaD4)
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Use the terminal to run the jar file
+   - How to run a jar file using Terminal? See [here](https://www.youtube.com/watch?v=j7A7DOZePXs)
+   
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
