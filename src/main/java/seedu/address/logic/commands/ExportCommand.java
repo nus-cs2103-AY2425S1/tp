@@ -21,13 +21,13 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the emails of current listed participants into a txt file.\n"
-            + "Parameters: [FILENAME]\n"
+            + "Parameters: FILENAME\n"
             + "Example: " + COMMAND_WORD + "data/MyEmailsList";
     public static final String MESSAGE_SUCCESS = "Exported participants' emails to \n";
-    public static final String MESSAGE_EMPTY = "No participants to export";
-    public static final String FILE_WRITE_ERROR = "Unable to export participants' emails due to unexpected I/O error";
+    public static final String MESSAGE_EMPTY = "No participants to export.";
+    public static final String FILE_WRITE_ERROR = "Unable to export participants' emails due to unexpected I/O error!";
     public static final String FILE_WRITE_PERMISSION_ERROR =
-            "Unable to export participants' emails due to denied export file access";
+            "Unable to export participants' emails due to denied export file access!";
 
     private final File exportFile;
 
