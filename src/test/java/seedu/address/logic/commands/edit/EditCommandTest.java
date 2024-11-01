@@ -237,10 +237,12 @@ public class EditCommandTest {
 
         String expected = "Change(s) made: "
                 + "\nName: " + person.getName() + " -> " + editedPerson.getName()
-                + "\nPhone: " + person.getPhone() + " -> " + editedPerson.getPhone()
-                + "\nEmail: " + person.getEmail() + " -> " + editedPerson.getEmail()
-                + "\nAddress: " + person.getAddress().map(Object::toString).orElse("<no address>")
-                + " -> " + editedPerson.getAddress().map(Object::toString).orElse("<no address>")
+                + "\nPhone: " + person.getPhone().map(Object::toString).orElse("<no phone>") + " -> "
+                + editedPerson.getPhone().map(Object::toString).orElse("<no phone>")
+                + "\nEmail: " + person.getEmail().map(Object::toString).orElse("<no email>") + " -> "
+                + editedPerson.getEmail().map(Object::toString).orElse("<no email>")
+                + "\nAddress: " + person.getAddress().map(Object::toString).orElse("<no address>") + " -> "
+                + editedPerson.getAddress().map(Object::toString).orElse("<no address>")
                 + "\nTags: " + person.getTags() + " -> " + editedPerson.getTags()
                 + "\n" + EditModuleRoleOperation.getModuleCodeChangesDescription(
                         person.getModuleRoleMap(),
