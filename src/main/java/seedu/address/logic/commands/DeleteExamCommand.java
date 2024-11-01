@@ -56,7 +56,7 @@ public class DeleteExamCommand extends Command {
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
-        if (!update) {
+        if (!isUpdated) {
             // No updates, exam not found in any students
             throw new CommandException(MESSAGE_EXAM_NOT_FOUND);
         }
