@@ -94,7 +94,7 @@ _Refer to the [Features](#features) section for details of each command!_
 
 ### Viewing help : `help`
 
-Shows a popup window with a link to the User Guide.
+Shows a popup window with a clickable link to the User Guide.
 
 ![help message](images/helpMessage.png)
 
@@ -128,14 +128,15 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD-TAG] [-t/DELETE-TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * When editing tags:
-  * Prefix:`t/ADD-TAG]` 
+  * Prefix:`[t/ADD-TAG]` 
     - the added tags will be **appended** to the list of existing tags i.e adding of tags does not overwrite existing tags.
     - if the tag name you entered to add **already exists**, the edit will be successful but you will get the warning:
       `You tried adding an already existing study group tag.`
-  * Prefix: `-t/DELETE-TAG]` 
+  * Prefix: `[-t/DELETE-TAG]` 
     - the tags specified will be **deleted** from the list of existing tags.
     - if the tag name you entered to delete **does not exist**, the edit will be successful but you will get the warning:
       `You tried removing a nonexistent study group tag.`
