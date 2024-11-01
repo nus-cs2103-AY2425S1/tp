@@ -183,7 +183,9 @@ public class EditCommand extends Command {
 
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
         if (index.getZeroBased() >= deliveryList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+            throw new CommandException(
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased())
+            );
         }
 
         if (index.getZeroBased() >= inspectedPerson.getFirstArchivedIndex().getZeroBased()) {
