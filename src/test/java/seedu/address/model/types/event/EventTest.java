@@ -38,7 +38,7 @@ public class EventTest {
         assertFalse(ART_EXHIBIT.isSameEvent(null));
 
         // same name, location, and startTime -> returns true
-        Event editedArtExhibit= new EventBuilder(ART_EXHIBIT).withAddress(VALID_ADDRESS_ART_EXHIBIT)
+        Event editedArtExhibit = new EventBuilder(ART_EXHIBIT).withAddress(VALID_ADDRESS_ART_EXHIBIT)
                 .withStartTime(VALID_START_TIME_ART_EXHIBIT).withTags(VALID_TAG_CULTURE).build();
         assertTrue(ART_EXHIBIT.isSameEvent(editedArtExhibit));
 
