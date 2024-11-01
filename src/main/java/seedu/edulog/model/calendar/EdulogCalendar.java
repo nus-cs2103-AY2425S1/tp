@@ -49,7 +49,7 @@ public class EdulogCalendar {
     /**
      * Find a lesson in the calendar based on its description
      */
-    public Lesson findLesson(String description) {
+    public Lesson findLesson(Description description) {
         return lessons.stream()
             .filter(lesson -> lesson.isDescription(description))
             .findFirst()

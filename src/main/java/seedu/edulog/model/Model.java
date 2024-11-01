@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.edulog.commons.core.GuiSettings;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
@@ -112,7 +113,7 @@ public interface Model {
     /**
      * Returns true if a lesson with the same description as description exists in the calendar.
      */
-    Lesson findLesson(String description);
+    Lesson findLesson(Description description);
 
     /**
      * Adds the given lesson.

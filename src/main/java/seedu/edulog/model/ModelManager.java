@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.edulog.commons.core.GuiSettings;
 import seedu.edulog.commons.core.LogsCenter;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
@@ -176,7 +177,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Lesson findLesson(String description) {
+    public Lesson findLesson(Description description) {
         requireNonNull(description);
         return eduLog.getEdulogCalendar().findLesson(description);
     }

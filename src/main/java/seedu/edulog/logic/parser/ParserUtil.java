@@ -1,6 +1,7 @@
 package seedu.edulog.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -11,6 +12,7 @@ import java.util.Set;
 import seedu.edulog.commons.core.index.Index;
 import seedu.edulog.commons.util.StringUtil;
 import seedu.edulog.logic.parser.exceptions.ParseException;
+import seedu.edulog.model.calendar.Day;
 import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.calendar.LessonTime;
@@ -163,32 +165,42 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a provided String into a {@code DayOfWeek}
+     * Parses a provided String into a {@code Day}
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if not spelt exactly as the full day of the week, like "Monday", "Wednesday", etc.
+     * @throws ParseException if not spelt as a day of the week or their 3-letter shorthand,
+     * like "Monday", "Wednesday", "fri" etc.
      */
-    public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
+    public static Day parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
-        if (!Lesson.checkValidDayOfWeek(day)) {
-            throw new ParseException(Lesson.INVALID_DAY_OF_WEEK);
+        if (!Day.checkValidDayOfWeek(day)) {
+            throw new ParseException(Day.INVALID_DAY_OF_WEEK);
         }
-        return Lesson.processDayOfWeek(day);
+        return new Day(day);
     }
 
     /**
-     * Parses a String representing a 24-hour time format to a {@code LocalTime}
+     * Parses 2 Strings representing a 24-hour time format, the first representing the start time
+     * and the second representing the end time of a lesson.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if time provided is not a 24-hour time format like "1200" or "2359" without space
+     * @throws ParseException if time provided is either not a 24-hour time format like "1200" or "2359" without spaces,
+     * or times provided are invalid when together as determined by {@link LessonTime#checkValidLessonTime(String)}
      */
-    public static LocalTime parseLocalTime(String time) throws ParseException {
-        String trimmed = time.trim();
+    public static LessonTime parseLessonTime(String startTime, String endTime) throws ParseException {
+        requireAllNonNull(startTime, endTime);
 
-        if (!LessonTime.checkValidLessonTime(trimmed)) {
+        String startTimeTrimmed = startTime.trim();
+        String endTimeTrimmed = endTime.trim();
+
+        if (!LessonTime.checkValidLessonTime(startTimeTrimmed) || !LessonTime.checkValidLessonTime(endTimeTrimmed)) {
             throw new ParseException(LessonTime.NOT_24H_FORMAT);
         }
 
-        return Lesson.processLocalTime(trimmed);
+        if (!LessonTime.checkValidLessonTimes(startTimeTrimmed, endTimeTrimmed)) {
+            throw new ParseException(LessonTime.NO_SAME_TIME);
+        }
+
+        return new LessonTime(startTimeTrimmed, endTimeTrimmed);
     }
 }

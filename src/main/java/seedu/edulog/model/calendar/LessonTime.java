@@ -81,10 +81,10 @@ public class LessonTime {
     }
 
     /**
-     * Checks that 2 given lesson times are not ambiguous, i.e. not the same start and end time.
+     * Checks that 2 given times are not ambiguous, i.e. not the same start and end time.
      */
-    public static boolean checkValidLessonTimes(LocalTime time1, LocalTime time2) {
-        return !time1.equals(time2);
+    public static boolean checkValidLessonTimes(String time1, String time2) {
+        return convertToLocalTime(time1).equals(convertToLocalTime(time2));
     }
 
     // Printing and identity fns ================================================================================

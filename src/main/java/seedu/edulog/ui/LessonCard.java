@@ -39,7 +39,7 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
-        description.setText(lesson.getDescription());
+        description.setText(lesson.getDescription().toString());
         startDay.setText(lesson.getStartDay().toString());
         startTime.setText(lesson.getFormattedStartTime());
         endTime.setText(lesson.getFormattedEndTime());
