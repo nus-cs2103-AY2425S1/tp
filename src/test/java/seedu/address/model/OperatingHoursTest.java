@@ -21,8 +21,10 @@ public class OperatingHoursTest {
     private OperatingHours diffrerentOperatingHours = new OperatingHours(openingHour, closingHour);
 
     private Appointment earlyAppointment = new Appointment("11 August 2024 07:30");
-    private Appointment lateAppointment = new Appointment("12 September 2024 22:30");
+    private Appointment lateAppointment = new Appointment("12 September 2024 21:16");
     private Appointment regularAppointment = new Appointment("13 October 2024 15:30");
+    private Appointment firstAppointment = new Appointment("12 November 2024 08:30");
+    private Appointment lastAppointment = new Appointment("12 November 2024 21:15");
 
     @Test
     public void constructor() {
@@ -38,11 +40,13 @@ public class OperatingHoursTest {
         assertTrue(differentClosingOperatingHours.isWithinOperatingHours(earlyAppointment));
         assertTrue(defaultOperatingHours.isWithinOperatingHours(lateAppointment));
         assertTrue(differentOpeningOperatingHours.isWithinOperatingHours(lateAppointment));
+        assertTrue(diffrerentOperatingHours.isWithinOperatingHours(firstAppointment));
 
         assertFalse(differentOpeningOperatingHours.isWithinOperatingHours(earlyAppointment));
         assertFalse(differentClosingOperatingHours.isWithinOperatingHours(lateAppointment));
         assertFalse(diffrerentOperatingHours.isWithinOperatingHours(earlyAppointment));
         assertFalse(diffrerentOperatingHours.isWithinOperatingHours(lateAppointment));
+        assertTrue(diffrerentOperatingHours.isWithinOperatingHours(lastAppointment));
     }
 
     @Test

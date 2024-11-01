@@ -74,8 +74,9 @@ public class OperatingHours {
     public boolean isWithinOperatingHours(Appointment appointment) {
         try {
             LocalTime dateTime = parseDateTime(appointment.dateTime).toLocalTime();
-            System.out.println(dateTime.isBefore(this.closingHour) && dateTime.isAfter(this.openingHour));
-            return dateTime.isBefore(this.closingHour) && dateTime.isAfter(this.openingHour);
+
+            return dateTime.isBefore(this.closingHour.minusMinutes(14))
+                    && (dateTime.isAfter(this.openingHour) || dateTime.equals(this.openingHour));
 
         } catch (TimeParseException e) {
             // if patient has no appointments
@@ -143,7 +144,6 @@ public class OperatingHours {
 
     @Override
     public String toString() {
-        // to be changed
         return openingHour.toString() + " to " + closingHour.toString();
     }
 }
