@@ -151,6 +151,15 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Listing Session logs: `logs`
+
+Lists all logs of a specific patient.
+
+- **Format**: `logs i/[IDENTITY_NUMBER]`
+
+- **Examples**:
+  logs i/S8613282F
+
 ### Exiting the program : `exit`
 
 Exits the program.
