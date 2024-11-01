@@ -46,6 +46,9 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
+        if (name.isEmpty()) {
+            return null;
+        }
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
@@ -61,6 +64,9 @@ public class ParserUtil {
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
+        if (phone.isEmpty()) {
+            return null;
+        }
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
@@ -76,6 +82,9 @@ public class ParserUtil {
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
+        if (address.isEmpty()) {
+            return null;
+        }
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
@@ -91,6 +100,9 @@ public class ParserUtil {
      */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
+        if (email.isEmpty()) {
+            return null;
+        }
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
@@ -106,6 +118,9 @@ public class ParserUtil {
      */
     public static Fees parseFees(String fees) throws ParseException {
         requireNonNull(fees);
+        if (fees.isEmpty()) {
+            return null;
+        }
         String trimmedFees = fees.trim();
         if (!Fees.isValidFees(trimmedFees)) {
             throw new ParseException(Fees.MESSAGE_CONSTRAINTS);
@@ -121,6 +136,9 @@ public class ParserUtil {
      */
     public static ClassId parseClassId(String classId) throws ParseException {
         requireNonNull(classId);
+        if (classId.isEmpty()) {
+            return null;
+        }
         String trimmedClassId = classId.trim();
         if (!ClassId.isValidClassId(trimmedClassId)) {
             throw new ParseException(ClassId.MESSAGE_CONSTRAINTS);
