@@ -31,7 +31,12 @@ public class LevelTest {
         assertFalse(Level.isValidLevelName("^")); // only non-alphanumeric characters
         assertFalse(Level.isValidLevelName("s!gm4")); // contains non-alphanumeric characters
         assertFalse(Level.isValidLevelName("S5 EXPRESS"));
+        assertFalse(Level.isValidLevelName("S1 NONE"));
+        assertFalse(Level.isValidLevelName("NONE EXPRESS"));
+
         // valid levels
+        assertTrue(Level.isValidLevelName("NONE NONE"));
+
         assertTrue(Level.isValidLevelName("S1 EXPRESS"));
         assertTrue(Level.isValidLevelName("S2 EXPRESS"));
         assertTrue(Level.isValidLevelName("S3 EXPRESS"));
