@@ -31,7 +31,7 @@ public class DeliveryUtil {
     public static String getDeliveryDetails(Delivery delivery) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_DATETIME + " " + delivery.getDeliveryDate().toString() + " ");
-        sb.append(PREFIX_SUPPLIER_INDEX + " " + delivery.getSupplierIndex() + " ");
+        sb.append(PREFIX_SUPPLIER_INDEX + " " + "1" + " ");
         sb.append(PREFIX_PRODUCT + " " + delivery.getDeliveryProduct().toString() + " ");
         sb.append(PREFIX_QUANTITY + " " + delivery.getDeliveryQuantity() + " ");
         sb.append(PREFIX_COST + " " + delivery.getDeliveryCost());

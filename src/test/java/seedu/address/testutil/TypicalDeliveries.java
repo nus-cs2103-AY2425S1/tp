@@ -20,7 +20,6 @@ public class TypicalDeliveries {
             .withStatus(Status.PENDING)
             .withCost("150")
             .withQuantity("100 units")
-            .withSupplierIndex("2")
             .build();
 
     public static final Delivery CAN = new DeliveryBuilder().withProduct("cannedDrinks")

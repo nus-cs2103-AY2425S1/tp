@@ -5,7 +5,6 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
-import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Supplier;
 
@@ -25,7 +24,6 @@ public class DeliveryBuilder {
     private DateTime deliveryDateTime;
     private Cost cost;
     private Quantity quantity;
-    private SupplierIndex supplierIndex;
 
     /**
      * Creates a {@code DeliveryBuilder} with the default details.
@@ -37,7 +35,6 @@ public class DeliveryBuilder {
         status = Status.PENDING;
         cost = new Cost(DEFAULT_COST);
         quantity = new Quantity(DEFAULT_QUANTITY);
-        supplierIndex = new SupplierIndex("1");
     }
 
     /**
@@ -50,7 +47,6 @@ public class DeliveryBuilder {
         status = deliveryToCopy.getDeliveryStatus();
         cost = deliveryToCopy.getDeliveryCost();
         quantity = deliveryToCopy.getDeliveryQuantity();
-        supplierIndex = deliveryToCopy.getSupplierIndex();
     }
 
     /**
@@ -58,13 +54,6 @@ public class DeliveryBuilder {
      */
     public DeliveryBuilder withProduct(String product) {
         this.product = new Product(product);
-        return this;
-    }
-    /**
-     * Sets the {@code SupplierIndex} of the {@code Delivery} that we are building.
-     */
-    public DeliveryBuilder withSupplierIndex(String supplierIndex) {
-        this.supplierIndex = new SupplierIndex(supplierIndex);
         return this;
     }
 
@@ -109,11 +98,10 @@ public class DeliveryBuilder {
     }
 
     public Delivery build() {
-        return new Delivery(product, sender, status, deliveryDateTime, cost, quantity, supplierIndex);
+        return new Delivery(product, sender, status, deliveryDateTime, cost, quantity);
     }
 
     public Delivery buildWithNullSender() {
-        return new Delivery(product, null, status, deliveryDateTime, cost, quantity, supplierIndex);
+        return new Delivery(product, null, status, deliveryDateTime, cost, quantity);
     }
-
 }

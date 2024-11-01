@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.model.delivery.Status.DELIVERED;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDeliveries.APPLE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DELIVERY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 
@@ -38,8 +39,8 @@ import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DateTime;
-import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryIsUpcomingPredicate;
+import seedu.address.model.delivery.DeliveryWrapper;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.SupplierSortComparator;
@@ -47,11 +48,11 @@ import seedu.address.model.supplier.SupplierSortNameComparator;
 import seedu.address.model.supplier.SupplierStatus;
 import seedu.address.model.supplier.predicates.NameContainsPredicate;
 import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
-import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.DeliveryUtil;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
 import seedu.address.testutil.SupplierBuilder;
 import seedu.address.testutil.SupplierUtil;
+import seedu.address.testutil.TypicalDeliveryWrappers;
 
 public class AddressBookParserTest {
 
@@ -66,10 +67,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add_delivery() throws Exception {
-        Delivery delivery = new DeliveryBuilder().buildWithNullSender();
+        DeliveryWrapper deliveryWrapper = TypicalDeliveryWrappers.getNullWrapper();
         AddDeliveryCommand command = (AddDeliveryCommand) parser.parseCommand(DeliveryUtil
-                .getDeliveryCommand(delivery));
-        assertEquals(new AddDeliveryCommand(delivery), command);
+                .getDeliveryCommand(APPLE));
+        assertEquals(new AddDeliveryCommand(deliveryWrapper), command);
     }
     @Test
     public void parseCommand_upcoming() throws Exception {
