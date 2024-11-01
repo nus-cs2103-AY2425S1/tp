@@ -1,6 +1,10 @@
 package spleetwaise.address;
 
+import static spleetwaise.address.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
+import static spleetwaise.address.logic.LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT;
+
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -215,8 +219,12 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping AddressBook ] =============================");
         try {
             storage.saveUserPrefs(addressBookModel.getUserPrefs());
+            storage.saveAddressBook(addressBookModel.getAddressBook());
+            storage.saveTransactionBook(transactionBookModel.getTransactionBook());
+        } catch (AccessDeniedException e) {
+            logger.severe(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()));
         } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+            logger.severe(String.format(FILE_OPS_ERROR_FORMAT, e.getMessage()));
         }
     }
 }
