@@ -6,7 +6,6 @@ import static seedu.address.model.appointmentdatefilter.AppointmentDateFilter.is
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -347,10 +346,10 @@ public class ParserUtil {
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        if (!Appt.isValidDateTime(LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME))) {
-            throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
+        if (!Appt.isValidDateTime(dateTime)) {
+            throw new ParseException(Appt.DATETIME_MESSAGE_CONSTRAINTS);
         }
-        return LocalDateTime.parse(trimmedDateTime.toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return LocalDateTime.parse(trimmedDateTime, Appt.FORMATTER);
     }
 
     /**
@@ -379,36 +378,4 @@ public class ParserUtil {
         HealthService healthService = parseHealthService(healthServiceName);
         return new Appt(dateTime, healthService);
     }
-
-    /*
-    public static ApptList parseAppts(Collection<String> dates, Collection<HealthService> healthServices)
-        throws ParseException {
-        requireNonNull(dates);
-        final ApptList apptList = new ApptList();
-        int i = 0;
-        for (String date : dates) {
-            String trimmedDate = date.trim();
-            if (!Appt.isValidAppt(trimmedDate)) {
-                throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
-            }
-            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-            apptList.addAppt(parseSingleAppt(trimmedDateTime, healthServices.toArray(new HealthService[0])[i]));
-            i++;
-        }
-        return apptList;
-    }
-    */
 }
-
-/*
-for (String date : dates) {
-            String trimmedDate = date.trim();
-            if (!Appt.isValidAppt(trimmedDate)) {
-                throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
-            }
-            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-            apptList.addAppt(parseSingleAppt(trimmedDateTime));
-        }
-        return apptList;
-    }
- */

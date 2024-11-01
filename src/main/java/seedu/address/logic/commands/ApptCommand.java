@@ -18,11 +18,11 @@ import seedu.address.model.patient.Patient;
  */
 public class ApptCommand extends Command {
 
-    public static final String MESSAGE_ARGUMENTS = "Appt: %2$s, Healthservice: %2$s, Nric: %1$s";
+    public static final String MESSAGE_ARGUMENTS = "Appt: %2$s, Nric: %1$s";
     public static final String COMMAND_WORD = "appt";
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
-    public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date";
+    public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date and time";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records appointment times for registered patients "
             + "into the system\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
