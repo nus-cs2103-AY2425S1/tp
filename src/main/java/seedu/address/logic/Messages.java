@@ -94,7 +94,7 @@ public class Messages {
                 builder.append(indexList.get(i).getOneBased());
                 continue;
             }
-            builder.append(",").append(indexList.get(i).getOneBased());
+            builder.append(", ").append(indexList.get(i).getOneBased());
         }
 
         return builder.toString().trim();
