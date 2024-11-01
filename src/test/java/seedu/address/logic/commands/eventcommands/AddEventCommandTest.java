@@ -133,6 +133,16 @@ public class AddEventCommandTest {
         }
 
         @Override
+        public void setEventList(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPersonList(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -194,7 +204,7 @@ public class AddEventCommandTest {
 
         @Override
         public Event getEventByName(Name name) {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
