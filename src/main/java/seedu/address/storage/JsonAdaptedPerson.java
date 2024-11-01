@@ -51,8 +51,6 @@ public class JsonAdaptedPerson {
     private List<JsonAdaptedSubject> subjects = new ArrayList<>();
     public JsonAdaptedPerson() {}
 
-
-
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
