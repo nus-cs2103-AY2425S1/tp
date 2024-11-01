@@ -16,24 +16,14 @@ import seedu.edulog.commons.util.ToStringBuilder;
  * Lesson class, representing a weekly recurring time slot for a lesson.
  */
 public class Lesson {
-
-    // Denotes the valid days of the week, spelt in full.
-    public static final ArrayList<String> DAYS_OF_THE_WEEK = new ArrayList<String>(
-        List.of("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"));
-
-    public static final String INVALID_DAY_OF_WEEK =
-            "Day of the week must be spelt as "
-            + "'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', or 'Sunday'"
-            + "only (non case-sensitive).";
-
     private Description description;
-    private DayOfWeek startDay;
+    private Day startDay;
     private LessonTime times;
 
     /**
      * Every field must be present and not null.
      */
-    public Lesson(Description description, DayOfWeek startDay, LessonTime times) {
+    public Lesson(Description description, Day startDay, LessonTime times) {
         requireAllNonNull(description, startDay, times);
 
         this.description = description;
@@ -45,7 +35,7 @@ public class Lesson {
         return description;
     }
 
-    public DayOfWeek getStartDay() {
+    public Day getStartDay() {
         return startDay;
     }
 
@@ -85,15 +75,7 @@ public class Lesson {
         return times.getFormattedEndTime();
     }
 
-    // Validator methods. TODO: OOP-ize =========================================
-
-    /**
-     * Checks if the day of week matches any of the 7 days of the week, spelt in full, example "Wednesday".
-     * Non-case sensitive.
-     */
-    public static boolean checkValidDayOfWeek(String dayOfWeek) {
-        return DAYS_OF_THE_WEEK.contains(dayOfWeek.toLowerCase());
-    }
+    // Validator methods. ===========================================================================================
 
     /**
      * Returns true if lesson has the given description
@@ -112,38 +94,7 @@ public class Lesson {
                 && otherLesson.description.equals(description);
     }
 
-    // Processor methods. TODO: OOP-ize =========================================
-
-    /**
-     * Generates a DayOfWeek based on a String representation.
-     * Callers are advised to use {@link #checkValidDayOfWeek(String)} first and handle abnormal use cases themselves.
-     * Otherwise, an error message will be generated that may be visible to the user.
-     */
-    public static DayOfWeek processDayOfWeek(String dayOfWeek) {
-        checkArgument(checkValidDayOfWeek(dayOfWeek), Lesson.INVALID_DAY_OF_WEEK);
-        switch (dayOfWeek.toLowerCase()) {
-        case "monday":
-            return DayOfWeek.MONDAY;
-        case "tuesday":
-            return DayOfWeek.TUESDAY;
-        case "wednesday":
-            return DayOfWeek.WEDNESDAY;
-        case "thursday":
-            return DayOfWeek.THURSDAY;
-        case "friday":
-            return DayOfWeek.FRIDAY;
-        case "saturday":
-            return DayOfWeek.SATURDAY;
-        case "sunday":
-            return DayOfWeek.SUNDAY;
-        default:
-            // because this is prior to a validity check, this use of an unchecked runtime exception is
-            // warranted here as it denotes a gross failure of internal data processing.
-            throw new RuntimeException("Something went horribly wrong when parsing a Lesson.");
-        }
-    }
-
-    // Identity methods ========================================================================================
+    // Identity and printing methods ==================================================================================
 
     /**
      * Returns true if both lessons have the same identity and data fields.
@@ -177,7 +128,7 @@ public class Lesson {
         return new ToStringBuilder(this)
                 .add("description", description)
                 .add("From", startDay + " " + getFormattedStartTime())
-                .add("To", startDay.plus(spansTwoDays() ? 1 : 0) + " " + getFormattedEndTime())
+                .add("To", startDay.plus(times.spansTwoDays() ? 1 : 0) + " " + getFormattedEndTime())
                 .toString();
     }
 }

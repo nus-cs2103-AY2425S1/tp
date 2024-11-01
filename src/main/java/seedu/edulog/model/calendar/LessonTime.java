@@ -24,6 +24,15 @@ public class LessonTime {
     public final LocalTime startTime;
     public final LocalTime endTime;
 
+    /**
+     * Accepts string representations of 24-hour times denoting the start and end time of a Lesson. <br>
+     * If the start time provided is earlier than the end time, the lesson is interpreted to span a single day. <br>
+     * If the start time provided is later than the end time, the lesson is interpreted to continue past midnight
+     * and span 2 days. <br>
+     * Start time must not be the same as the end time to avoid ambiguity. <br>
+     * @param startTime A string representation of a 24-hour time, determined by {@link #checkValidLessonTime(String)}
+     * @param endTime A string representation of a 24-hour time, determined by {@link #checkValidLessonTime(String)}
+     */
     public LessonTime(String startTime, String endTime) {
         requireAllNonNull(startTime, endTime);
 
@@ -35,7 +44,7 @@ public class LessonTime {
         LocalTime endTimeTmp = LessonTime.convertToLocalTime(endTime);
 
         // checks between both times
-        checkArgument(checkValidLessonTimes(startTimeTmp, endTimeTmp));
+        checkArgument(checkValidLessonTimes(startTimeTmp, endTimeTmp), LessonTime.NO_SAME_TIME);
 
         this.startTime = startTimeTmp;
         this.endTime = endTimeTmp;
@@ -44,7 +53,7 @@ public class LessonTime {
     // Validator and parsing fns ================================================================================
 
     /**
-     * Checks if a provided String conforms to a 24-hour time format specifier.
+     * Checks if a provided String conforms to a 24-hour time format specifier, e.g. "2130".
      */
     public static boolean checkValidLessonTime(String time) {
         if (time.length() != 4) {
@@ -84,7 +93,7 @@ public class LessonTime {
      * Returns if the lesson spans 2 days, e.g. Monday 2000 to 0000, or Tuesday 2200 to 0100.
      */
     public boolean spansTwoDays() {
-        return startTime.isBefore(endTime);
+        return endTime.isBefore(startTime);
     }
 
     public LocalTime getStartTime() {
