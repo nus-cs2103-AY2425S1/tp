@@ -16,7 +16,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
@@ -26,6 +25,8 @@ import seedu.address.model.task.Task;
  */
 public class UnassignTaskCommand extends Command {
     public static final String COMMAND_WORD = "unassign-task";
+
+    public static final String COMMAND_KEYWORD = "utask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes one or multiple tasks from the person identified "
@@ -112,7 +113,7 @@ public class UnassignTaskCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof UnassignWeddingCommand)) {
+        if (!(other instanceof UnassignTaskCommand)) {
             return false;
         }
 

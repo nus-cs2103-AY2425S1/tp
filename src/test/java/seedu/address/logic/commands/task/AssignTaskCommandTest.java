@@ -52,8 +52,9 @@ public class AssignTaskCommandTest {
 
         CommandResult result = command.execute(model);
 
-        String expectedMessage = String.format(MESSAGE_ADD_TASK_SUCCESS,
-                taskToAssign.getDescription(), validPerson.getName());
+        String addedTasks = taskToAssign.toString().replaceAll("[\\[\\]]", "");
+        String expectedMessage = String.format(MESSAGE_ADD_TASK_SUCCESS, addedTasks, validPerson.getName());
+
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
@@ -85,29 +86,25 @@ public class AssignTaskCommandTest {
     public void execute_taskAlreadyAssigned_throwsCommandException() {
         model.addPerson(CARL);
         model.assignVendor(CARL);
-
         // Get the task already assigned to Carl
         Task taskAlreadyAssigned = CARL.getTasks().iterator().next();
-
         // Try to assign the same task again
         AssignTaskCommand command = new AssignTaskCommand(Index.fromZeroBased(0), Set.of(INDEX_FIRST));
-
         // Assert: Command should throw a CommandException for duplicate task assignment
         assertThrows(CommandException.class, String.format(AssignTaskCommand.MESSAGE_DUPLICATE_TASK,
-                taskAlreadyAssigned.getDescription(), CARL.getName()), () -> command.execute(model));
+                taskAlreadyAssigned.toString(), CARL.getName()), () -> command.execute(model));
     }
-
 
     @Test
     public void execute_personIsNotVendor_throwsCommandException() {
-        // Arrange: Set up a valid person who is not a vendor
+        // Set up a valid person who is not a vendor
         Person nonVendorPerson = new PersonBuilder().withName("Non Vendor").build();
         model.addPerson(nonVendorPerson);
 
         // Try to assign a task to a non-vendor person
         AssignTaskCommand command = new AssignTaskCommand(Index.fromZeroBased(0), Set.of(INDEX_FIRST));
 
-        // Assert: Command should throw a CommandException for non-vendor person
+        // Command should throw a CommandException for non-vendor person
         assertThrows(CommandException.class, MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK, () -> command.execute(model));
     }
 

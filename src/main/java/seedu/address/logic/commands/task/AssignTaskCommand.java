@@ -29,6 +29,8 @@ public class AssignTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "assign-task";
 
+    public static final String COMMAND_KEYWORD = "atask";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds one or multiple tasks to the person identified "
             + "by the index number used in the last person listing.\n"
@@ -95,7 +97,6 @@ public class AssignTaskCommand extends Command {
             if (taskIndex.getZeroBased() >= lastShownTaskList.size()) {
                 throw new CommandException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
-
             Task newTask = lastShownTaskList.get(taskIndex.getZeroBased());
             if (updatedTasks.contains(newTask)) {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK,

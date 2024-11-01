@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.task;
 
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.task.DeleteTaskCommand;
-import seedu.address.logic.parser.task.DeleteTaskCommandParser;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

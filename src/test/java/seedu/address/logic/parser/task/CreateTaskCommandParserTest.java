@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.task.CreateTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.task.CreateTaskCommandParser;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTasks;
 

@@ -111,6 +111,10 @@ public class AddressBookParser {
                 -> new CreateTaskCommandParser().parse(arguments);
         case ListTasksCommand.COMMAND_WORD, ListTasksCommand.COMMAND_KEYWORD
                 -> new ListTasksCommand();
+        case AssignTaskCommand.COMMAND_WORD, AssignTaskCommand.COMMAND_KEYWORD
+                -> new AssignTaskCommandParser().parse(arguments);
+        case UnassignTaskCommand.COMMAND_WORD, UnassignTaskCommand.COMMAND_KEYWORD
+                -> new UnassignTaskCommandParser().parse(arguments);
         case DeleteTaskCommand.COMMAND_WORD, DeleteTaskCommand.COMMAND_KEYWORD
                 -> new DeleteTaskCommandParser().parse(arguments);
         case AssignVendorCommand.COMMAND_WORD, AssignVendorCommand.COMMAND_KEYWORD
