@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListingAddCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.ShowCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -54,10 +56,18 @@ public class AddressBookParser {
         commands.put(ListCommand.COMMAND_WORD, arguments -> new ListCommand());
         commands.put(ExitCommand.COMMAND_WORD, arguments -> new ExitCommand());
         commands.put(HelpCommand.COMMAND_WORD, arguments -> new HelpCommand());
+        commands.put(SortCommand.COMMAND_WORD, arguments -> new SortCommand());
         commands.put(FindTagCommand.COMMAND_WORD, arguments -> new FindTagCommandParser().parse(arguments));
         commands.put(RemarkCommand.COMMAND_WORD, arguments -> new RemarkCommandParser().parse(arguments));
         commands.put(ShowCommand.COMMAND_WORD, arguments -> new ShowCommandParser().parse(arguments));
         commands.put(ListingAddCommand.COMMAND_WORD_PREFIX, arguments -> new ListingCommandsParser().parse(arguments));
+    }
+
+    /**
+     * Returns an unmodifiable set of command names currently registered.
+     */
+    public Set<String> getCommandNames() {
+        return Set.copyOf(commands.keySet());
     }
 
     /**

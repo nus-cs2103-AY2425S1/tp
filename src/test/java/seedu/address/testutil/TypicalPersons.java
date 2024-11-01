@@ -23,7 +23,7 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+    public static final Person ALICE = new PersonBuilder().withID(1).withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("seller", "hdb").withRemark("remark for this person :D")
@@ -76,8 +76,21 @@ public class TypicalPersons {
         return ab;
     }
 
+    public static AddressBook getUnsortedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getUnsortedTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL,
                 DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getUnsortedTypicalPersons() {
+        return new ArrayList<>(Arrays.asList(CARL, GEORGE, ALICE,
+                BENSON, FIONA, ELLE, DANIEL));
     }
 }
