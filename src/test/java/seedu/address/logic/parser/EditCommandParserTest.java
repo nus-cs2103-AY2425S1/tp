@@ -138,7 +138,8 @@ public class EditCommandParserTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Name.MESSAGE_CONSTRAINTS)
                         + "\n" + Email.MESSAGE_CONSTRAINTS);
 
-        // multiple invalid values but with purely optional fields, only the first in order of logical parsing is
+        // multiple invalid values but with purely optional fields, the error messages are captured in order of the
+        // attributes' parsing
         assertParseFailure(parser, "1" + INVALID_STATUS_DESC + INVALID_TIER_DESC
                 + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Tier.MESSAGE_CONSTRAINTS)
