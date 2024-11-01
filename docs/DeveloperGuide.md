@@ -426,7 +426,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Client searches should provide results even with partial or incomplete input and return results instantly (within 1 second).
@@ -438,7 +438,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Contact**: An entity representing a client. It contains personal details such as name, phone number, email and address. Contact can also include preferences like seller or buyer ranges and associated properties.
 * **Property**: A real estate asset associated to a contact. Each property has details such as name, address, price, number of rooms and optional tags(property type/condition/ownership type, etc.)
 * **Index**: A numerical identifier used to refer to a specific contact or property in the system. These are used for operations like deletion, updating, or viewing details.
