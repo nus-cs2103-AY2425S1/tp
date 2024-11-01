@@ -82,7 +82,7 @@ public class UnmatchCommandTest {
         Person contactInExpectedModel = expectedModel.getFilteredPersonList().get(contactIndex.getZeroBased());
         Person unmatchedContact = new PersonBuilder(contactInExpectedModel).withoutMatch().build();
         expectedModel.setPerson(contactInExpectedModel, unmatchedContact);
-        model.setPerson(model.getFilteredPersonList().get(contactIndex.getZeroBased()),matchedContact);
+        model.setPerson(model.getFilteredPersonList().get(contactIndex.getZeroBased()), matchedContact);
 
         // Verify the output message and model state
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
@@ -158,7 +158,8 @@ public class UnmatchCommandTest {
     @Test
     public void toStringMethod() {
         UnmatchCommand unmatchCommand = new UnmatchCommand(INDEX_FIRST_PERSON, INDEX_FIRST_JOB);
-        String expected = UnmatchCommand.class.getCanonicalName() + "{contactIndex=" + INDEX_FIRST_PERSON + ", jobIndex="
+        String expected = UnmatchCommand.class.getCanonicalName() + "{contactIndex=" + INDEX_FIRST_PERSON
+                + ", jobIndex="
                 + INDEX_FIRST_JOB + "}";
         assertEquals(expected, unmatchCommand.toString());
     }
