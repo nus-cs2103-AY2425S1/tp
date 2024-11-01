@@ -29,19 +29,23 @@ public class SortCommandParser implements Parser<SortCommand> {
         switch (sortBy) {
 
         case "name":
-            Comparator<Person> comparatorForName = Comparator.comparing(person -> person.getName().fullName);
+            Comparator<Person> comparatorForName = Comparator.comparing(person -> person.getName().fullName,
+                    String.CASE_INSENSITIVE_ORDER);
             return new SortCommand(sortBy, comparatorForName);
         case "role":
-            Comparator<Person> comparatorForRole = Comparator.comparing(person -> person.getRole().roleName);
+            Comparator<Person> comparatorForRole = Comparator.comparing(person -> person.getRole().roleName,
+                    String.CASE_INSENSITIVE_ORDER);
             return new SortCommand(sortBy, comparatorForRole);
         case "phone":
             Comparator<Person> comparatorForPhone = Comparator.comparing(person -> person.getPhone().value);
             return new SortCommand(sortBy, comparatorForPhone);
         case "email":
-            Comparator<Person> comparatorForEmail = Comparator.comparing(person -> person.getEmail().value);
+            Comparator<Person> comparatorForEmail = Comparator.comparing(person -> person.getEmail().value,
+                    String.CASE_INSENSITIVE_ORDER);
             return new SortCommand(sortBy, comparatorForEmail);
         case "address":
-            Comparator<Person> comparatorForAddress = Comparator.comparing(person -> person.getAddress().value);
+            Comparator<Person> comparatorForAddress = Comparator.comparing(person -> person.getAddress().value,
+                    String.CASE_INSENSITIVE_ORDER);
             return new SortCommand(sortBy, comparatorForAddress);
         default:
             throw new ParseException(

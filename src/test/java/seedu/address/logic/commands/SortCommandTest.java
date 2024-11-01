@@ -24,19 +24,19 @@ public class SortCommandTest {
 
 
     private final Comparator<Person> comparatorForName = Comparator.comparing(person
-            -> person.getName().fullName);
+            -> person.getName().fullName, String.CASE_INSENSITIVE_ORDER);
 
     private final Comparator<Person> comparatorForRole = Comparator.comparing(person
-            -> person.getRole().roleName);
+            -> person.getRole().roleName, String.CASE_INSENSITIVE_ORDER);
 
     private final Comparator<Person> comparatorForPhone = Comparator.comparing(person
             -> person.getPhone().value);
 
     private final Comparator<Person> comparatorForEmail = Comparator.comparing(person
-            -> person.getEmail().value);
+            -> person.getEmail().value, String.CASE_INSENSITIVE_ORDER);
 
     private final Comparator<Person> comparatorForAddress = Comparator.comparing(person
-            -> person.getAddress().value);
+            -> person.getAddress().value, String.CASE_INSENSITIVE_ORDER);
 
     @Test
     public void execute_sortListWithoutModifyingModel_success() {
