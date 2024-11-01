@@ -9,14 +9,18 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import tuteez.logic.commands.FindCommand;
 import tuteez.logic.parser.exceptions.ParseException;
+import tuteez.model.person.Person;
 import tuteez.model.person.predicates.AddressContainsKeywordsPredicate;
+import tuteez.model.person.predicates.CombinedPredicate;
 import tuteez.model.person.predicates.EmailContainsKeywordsPredicate;
 import tuteez.model.person.predicates.LessonContainsKeywordsPredicate;
 import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
@@ -40,28 +44,33 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_TELEGRAM, PREFIX_TAG, PREFIX_LESSON);
 
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TELEGRAM, PREFIX_TAG, PREFIX_LESSON);
+        List<Predicate<Person>> predicates = createPredicates(argMultimap);
+        CombinedPredicate combinedPredicate = new CombinedPredicate(predicates);
+        return new FindCommand(combinedPredicate);
+    }
 
-        NameContainsKeywordsPredicate namePredicate =
-                parseWithPredicate(argMultimap, PREFIX_NAME, NameContainsKeywordsPredicate::new);
-        PhoneContainsKeywordsPredicate phonePredicate =
-                parseWithPredicate(argMultimap, PREFIX_PHONE, PhoneContainsKeywordsPredicate::new);
-        EmailContainsKeywordsPredicate emailPredicate =
-                parseWithPredicate(argMultimap, PREFIX_EMAIL, EmailContainsKeywordsPredicate::new);
-        AddressContainsKeywordsPredicate addressPredicate =
-                parseWithPredicate(argMultimap, PREFIX_ADDRESS, AddressContainsKeywordsPredicate::new);
-        TelegramUsernameContainsKeywordsPredicate telegramUsernamePredicate =
-                parseWithPredicate(argMultimap, PREFIX_TELEGRAM, TelegramUsernameContainsKeywordsPredicate::new);
-        TagContainsKeywordsPredicate tagPredicate =
-                parseWithPredicate(argMultimap, PREFIX_TAG, TagContainsKeywordsPredicate::new);
-        LessonContainsKeywordsPredicate lessonPredicate =
-                parseWithPredicate(argMultimap, PREFIX_LESSON, LessonContainsKeywordsPredicate::new);
+    private List<Predicate<Person>> createPredicates(ArgumentMultimap argMultimap) {
+        List<Predicate<Person>> predicates = new ArrayList<>();
 
-        return new FindCommand(namePredicate, phonePredicate, emailPredicate, addressPredicate,
-                telegramUsernamePredicate, tagPredicate, lessonPredicate);
+        addPredicateIfPresent(argMultimap, predicates, PREFIX_NAME, NameContainsKeywordsPredicate::new);
+        addPredicateIfPresent(argMultimap, predicates, PREFIX_PHONE, PhoneContainsKeywordsPredicate::new);
+        addPredicateIfPresent(argMultimap, predicates, PREFIX_EMAIL, EmailContainsKeywordsPredicate::new);
+        addPredicateIfPresent(argMultimap, predicates, PREFIX_ADDRESS, AddressContainsKeywordsPredicate::new);
+        addPredicateIfPresent(argMultimap, predicates, PREFIX_TELEGRAM, TelegramUsernameContainsKeywordsPredicate::new);
+        addPredicateIfPresent(argMultimap, predicates, PREFIX_TAG, TagContainsKeywordsPredicate::new);
+        addPredicateIfPresent(argMultimap, predicates, PREFIX_LESSON, LessonContainsKeywordsPredicate::new);
+
+        return predicates;
+    }
+
+    private <T extends Predicate<Person>> void addPredicateIfPresent(ArgumentMultimap argMultimap,
+        List<Predicate<Person>> predicates, Prefix prefix, Function<List<String>, T> predicateConstructor) {
+        if (argMultimap.getValue(prefix).isPresent()) {
+            predicates.add(parseWithPredicate(argMultimap, prefix, predicateConstructor));
+        }
     }
 
     private <T> T parseWithPredicate(

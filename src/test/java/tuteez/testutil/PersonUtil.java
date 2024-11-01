@@ -8,10 +8,12 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.List;
 import java.util.Set;
 
 import tuteez.logic.commands.AddCommand;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
+import tuteez.logic.commands.FindCommand;
 import tuteez.model.person.Person;
 import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
@@ -26,6 +28,16 @@ public class PersonUtil {
      */
     public static String getAddCommand(Person person) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    }
+
+    /**
+     * Returns a find command string.
+     *
+     * @param keywords List of keywords to search for.
+     * @return A string representing the find command with the keywords included.
+     */
+    public static String getFindCommand(List<String> keywords) {
+        return FindCommand.COMMAND_WORD + " " + PREFIX_NAME + String.join(" ", keywords);
     }
 
     /**

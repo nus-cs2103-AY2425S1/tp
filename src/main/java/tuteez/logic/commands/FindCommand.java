@@ -10,17 +10,10 @@ import tuteez.commons.util.ToStringBuilder;
 import tuteez.logic.Messages;
 import tuteez.model.Model;
 import tuteez.model.person.Person;
-import tuteez.model.person.predicates.AddressContainsKeywordsPredicate;
-import tuteez.model.person.predicates.EmailContainsKeywordsPredicate;
-import tuteez.model.person.predicates.LessonContainsKeywordsPredicate;
-import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
-import tuteez.model.person.predicates.PhoneContainsKeywordsPredicate;
-import tuteez.model.person.predicates.TagContainsKeywordsPredicate;
-import tuteez.model.person.predicates.TelegramUsernameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -33,41 +26,18 @@ public class FindCommand extends Command {
 
     private static final Logger logger = LogsCenter.getLogger(FindCommand.class);
 
-    private final NameContainsKeywordsPredicate namePredicate;
-    private final PhoneContainsKeywordsPredicate phonePredicate;
-    private final EmailContainsKeywordsPredicate emailPredicate;
-    private final AddressContainsKeywordsPredicate addressPredicate;
-    private final TelegramUsernameContainsKeywordsPredicate telegramUsernamePredicate;
-    private final TagContainsKeywordsPredicate tagPredicate;
-    private final LessonContainsKeywordsPredicate lessonPredicate;
+    private final Predicate<Person> combinedPredicate;
 
     /**
      * Creates a FindCommand to find persons with the specified {@code NameContainsKeywordsPredicate}.
      */
-    public FindCommand(
-            NameContainsKeywordsPredicate namePredicate,
-            PhoneContainsKeywordsPredicate phonePredicate,
-            EmailContainsKeywordsPredicate emailPredicate,
-            AddressContainsKeywordsPredicate addressPredicate,
-            TelegramUsernameContainsKeywordsPredicate telegramUsernamePredicate,
-            TagContainsKeywordsPredicate tagPredicate,
-            LessonContainsKeywordsPredicate lessonPredicate
-    ) {
-        this.namePredicate = namePredicate;
-        this.phonePredicate = phonePredicate;
-        this.emailPredicate = emailPredicate;
-        this.addressPredicate = addressPredicate;
-        this.telegramUsernamePredicate = telegramUsernamePredicate;
-        this.tagPredicate = tagPredicate;
-        this.lessonPredicate = lessonPredicate;
+    public FindCommand(Predicate<Person> combinedPredicate) {
+        this.combinedPredicate = combinedPredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        Predicate<Person> combinedPredicate = namePredicate.or(phonePredicate).or(emailPredicate).or(addressPredicate)
-                .or(telegramUsernamePredicate).or(tagPredicate).or(lessonPredicate);
         model.updateFilteredPersonList(combinedPredicate);
         int size = model.getFilteredPersonList().size();
 
@@ -95,24 +65,13 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return namePredicate.equals(otherFindCommand.namePredicate)
-                && phonePredicate.equals(otherFindCommand.phonePredicate)
-                && emailPredicate.equals(otherFindCommand.emailPredicate)
-                && addressPredicate.equals(otherFindCommand.addressPredicate)
-                && tagPredicate.equals(otherFindCommand.tagPredicate)
-                && lessonPredicate.equals(otherFindCommand.lessonPredicate);
+        return combinedPredicate.equals(otherFindCommand.combinedPredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Names: ", namePredicate)
-                .add("Phone numbers: ", phonePredicate)
-                .add("Emails: ", emailPredicate)
-                .add("Addresses: ", addressPredicate)
-                .add("Telegram username: ", telegramUsernamePredicate)
-                .add("Tags: ", tagPredicate)
-                .add("Lessons: ", lessonPredicate)
+                .add("predicate", combinedPredicate)
                 .toString();
     }
 }

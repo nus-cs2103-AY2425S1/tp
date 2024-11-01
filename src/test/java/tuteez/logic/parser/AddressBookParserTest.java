@@ -10,7 +10,6 @@ import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_REMARK;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +26,9 @@ import tuteez.logic.commands.HelpCommand;
 import tuteez.logic.commands.ListCommand;
 import tuteez.logic.commands.RemarkCommand;
 import tuteez.logic.parser.exceptions.ParseException;
-import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.model.person.Person;
+import tuteez.model.person.predicates.CombinedPredicate;
+import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.model.remark.Remark;
 import tuteez.testutil.EditPersonDescriptorBuilder;
 import tuteez.testutil.PersonBuilder;
@@ -90,8 +90,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteRemark() throws Exception {
-        DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + DeleteRemarkCommand.DELETE_REMARK_PARAM + " 1");
+        DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + DeleteRemarkCommand.DELETE_REMARK_PARAM + " 1");
         assertEquals(new DeleteRemarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_REMARK), command);
     }
 
@@ -110,10 +110,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        List<String> keywords = Arrays.asList("alice", "bob");
+        FindCommand command = (FindCommand) parser.parseCommand(PersonUtil.getFindCommand(keywords));
+        assertEquals(new FindCommand(new CombinedPredicate(List.of(new NameContainsKeywordsPredicate(keywords)))),
+                command);
     }
 
     @Test
