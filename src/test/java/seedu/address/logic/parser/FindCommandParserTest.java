@@ -102,4 +102,23 @@ public class FindCommandParserTest {
         // no field
         assertParseFailure(parser, String.valueOf(PREFIX_KEYWORD), MESSAGE_INVALID_FORMAT);
     }
+
+//    /**
+//     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+//     */
+//    private NameContainsKeywordsPredicate prepareNamePredicate(String userInput) {
+//        return new NameContainsKeywordsPredicate(Arrays.asList(userInput));
+//    }
+//
+//    private PhoneContainsKeywordsPredicate preparePhonePredicate(String userInput) {
+//        return new PhoneContainsKeywordsPredicate(Arrays.asList(userInput));
+//    }
+//
+//    private EmailContainsKeywordsPredicate prepareEmailPredicate(String userInput) {
+//        return new EmailContainsKeywordsPredicate(Arrays.asList(userInput));
+//    }
+//
+//    private RentalInformationContainsKeywordsPredicate prepareRentalInfoPredicate(String userInput) {
+//        return new RentalInformationContainsKeywordsPredicate(Arrays.asList(userInput));
+//    }
 }
