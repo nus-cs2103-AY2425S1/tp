@@ -88,7 +88,8 @@ public class FilterCommandTest {
         assertCommandSuccess(
                 multipleFilterCommand,
                 model,
-                String.format(FilterCommand.MESSAGE_NOT_FOUND, INEXISTENT_TAG_BESTFRIEND + ", " + INEXISTENT_TAG_COLLEAGUE),
+                String.format(FilterCommand.MESSAGE_NOT_FOUND, INEXISTENT_TAG_BESTFRIEND
+                        + ", " + INEXISTENT_TAG_COLLEAGUE),
                 expectedModel
         );
     }
