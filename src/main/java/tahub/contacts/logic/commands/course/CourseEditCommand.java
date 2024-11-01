@@ -1,4 +1,4 @@
-package tahub.contacts.logic.commands;
+package tahub.contacts.logic.commands.course;
 
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
@@ -11,6 +11,8 @@ import java.util.Optional;
 import tahub.contacts.commons.util.CollectionUtil;
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
+import tahub.contacts.logic.commands.Command;
+import tahub.contacts.logic.commands.CommandResult;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
@@ -21,9 +23,9 @@ import tahub.contacts.model.course.UniqueCourseList;
 /**
  * Edits the details of an existing course in the unique course list of the address book.
  */
-public class EditCourseCommand extends Command {
+public class CourseEditCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit-course";
+    public static final String COMMAND_WORD = "course-edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the course identified "
             + "by its course code. "
@@ -44,7 +46,7 @@ public class EditCourseCommand extends Command {
      * @param courseCode of the course in the filtered course list to edit
      * @param editCourseDescriptor details to edit the course with
      */
-    public EditCourseCommand(CourseCode courseCode, EditCourseDescriptor editCourseDescriptor) {
+    public CourseEditCommand(CourseCode courseCode, EditCourseDescriptor editCourseDescriptor) {
         requireNonNull(courseCode);
         requireNonNull(editCourseDescriptor);
 
@@ -88,13 +90,13 @@ public class EditCourseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCourseCommand)) {
+        if (!(other instanceof CourseEditCommand)) {
             return false;
         }
 
-        EditCourseCommand otherEditCourseCommand = (EditCourseCommand) other;
-        return courseCode.equals(otherEditCourseCommand.courseCode)
-                && editCourseDescriptor.equals(otherEditCourseCommand.editCourseDescriptor);
+        CourseEditCommand otherCourseEditCommand = (CourseEditCommand) other;
+        return courseCode.equals(otherCourseEditCommand.courseCode)
+                && editCourseDescriptor.equals(otherCourseEditCommand.editCourseDescriptor);
     }
 
     @Override

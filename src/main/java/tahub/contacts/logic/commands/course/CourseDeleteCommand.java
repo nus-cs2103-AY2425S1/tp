@@ -1,10 +1,12 @@
-package tahub.contacts.logic.commands;
+package tahub.contacts.logic.commands.course;
 
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
 
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
+import tahub.contacts.logic.commands.Command;
+import tahub.contacts.logic.commands.CommandResult;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
@@ -14,9 +16,9 @@ import tahub.contacts.model.course.UniqueCourseList;
 /**
  * Deletes a course identified using it's course code in the unique course list of address book.
  */
-public class DeleteCourseCommand extends Command {
+public class CourseDeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-course";
+    public static final String COMMAND_WORD = "course-delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by its course code.\n"
@@ -32,7 +34,7 @@ public class DeleteCourseCommand extends Command {
      *
      * @param courseCode of the course to be deleted
      */
-    public DeleteCourseCommand(CourseCode courseCode) {
+    public CourseDeleteCommand(CourseCode courseCode) {
         this.courseCode = courseCode;
     }
 
@@ -57,12 +59,12 @@ public class DeleteCourseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCourseCommand)) {
+        if (!(other instanceof CourseDeleteCommand)) {
             return false;
         }
 
-        DeleteCourseCommand otherDeleteCourseCommand = (DeleteCourseCommand) other;
-        return courseCode.equals(otherDeleteCourseCommand.courseCode);
+        CourseDeleteCommand otherCourseDeleteCommand = (CourseDeleteCommand) other;
+        return courseCode.equals(otherCourseDeleteCommand.courseCode);
     }
 
     @Override

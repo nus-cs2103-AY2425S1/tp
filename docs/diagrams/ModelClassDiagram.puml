@@ -14,11 +14,16 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
+Class MatriculationNumber
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class UniqueCourseList
+Class Course
+Class CourseCode
+Class CourseName
 
 Class I #FFFFFF
 }
@@ -33,19 +38,26 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" UniqueCourseList
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
+UniqueCourseList --> "~* all" Course
+Person *--> MatriculationNumber
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
+Course *--> CourseCode
+Course *--> CourseName
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
+MatriculationNumber -[hidden]right-> Name
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
