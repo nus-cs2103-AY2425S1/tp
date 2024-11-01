@@ -75,7 +75,8 @@ public class LessonManager {
      * @return A map where each entry consists of a {@code Person} whose lessons clash with the specified lesson,
      *         and an {@code ArrayList} of the clashing lessons for that student.
      */
-    public Map<Person, ArrayList<Lesson>> findClashingLessonsAcrossAllStudents(UniquePersonList studentList, Lesson lesson) {
+    public Map<Person, ArrayList<Lesson>> findClashingLessonsAcrossAllStudents(UniquePersonList studentList,
+             Lesson lesson) {
         Map<Person, ArrayList<Lesson>> clashingLessonMap = new HashMap<>();
         for (Person studentToCheck : studentList) {
             ArrayList<Lesson> clashingLessonList = studentToCheck.findStudentClashingLessons(lesson);
