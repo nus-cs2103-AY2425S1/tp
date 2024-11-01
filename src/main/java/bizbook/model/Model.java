@@ -113,4 +113,14 @@ public interface Model {
      * @param person The {@code person} in the contact list to be unpinned.
      */
     void removePinnedPersonList(Person person);
+
+    /**
+     * Saves the current state of the {@code AddressBook} into a version history list.
+     */
+    void saveAddressBookVersion();
+
+    /**
+     * Reverts the {@code AddressBook} to the most recent saved version.
+     */
+    void revertAddressBookVersion();
 }

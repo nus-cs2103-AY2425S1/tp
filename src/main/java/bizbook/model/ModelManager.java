@@ -22,7 +22,7 @@ import javafx.collections.transformation.FilteredList;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final VersionedAddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final UniquePersonList pinnedPersons;
@@ -36,7 +36,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         pinnedPersons = new UniquePersonList();
@@ -121,6 +121,16 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void saveAddressBookVersion() {
+        addressBook.commit();
+    }
+
+    @Override
+    public void revertAddressBookVersion() {
+        addressBook.undo();
     }
 
     //=========== Filtered Person List Accessors =============================================================

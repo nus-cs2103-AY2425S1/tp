@@ -45,6 +45,9 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        // Save current version of the address book
+        model.saveAddressBookVersion();
+
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         model.getFocusedPerson().set(null);
