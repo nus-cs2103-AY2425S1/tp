@@ -54,7 +54,6 @@ public class JsonAdaptedLesson {
      */
     public Lesson toModelType() throws IllegalValueException {
         // Description
-
         if (description == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
