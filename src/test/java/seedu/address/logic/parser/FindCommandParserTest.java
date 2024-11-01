@@ -2,6 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_EMAIL_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_NAME_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_PHONE_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_RENTAL_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_TAGS_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_KEYWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_ADDRESS_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_EMPTY_DESC;
@@ -34,17 +39,6 @@ import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
 import seedu.address.model.tag.TagsContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
-    private static final NameContainsKeywordsPredicate EMPTY_NAME_PREDICATE =
-            new NameContainsKeywordsPredicate(List.of());
-    private static final PhoneContainsKeywordsPredicate EMPTY_PHONE_PREDICATE =
-            new PhoneContainsKeywordsPredicate(List.of());
-    private static final EmailContainsKeywordsPredicate EMPTY_EMAIL_PREDICATE =
-            new EmailContainsKeywordsPredicate(List.of());
-    private static final TagsContainsKeywordsPredicate EMPTY_TAGS_PREDICATE =
-            new TagsContainsKeywordsPredicate(List.of());
-    private static final RentalInformationContainsKeywordsPredicate EMPTY_RENTAL_PREDICATE =
-            new RentalInformationContainsKeywordsPredicate(List.of());
-
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
     private FindCommandParser parser = new FindCommandParser();
@@ -107,7 +101,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_MultipleFields_returnsFindCommand() {
+    public void parse_multipleFields_returnsFindCommand() {
         List<String> names = List.of(VALID_NAME_AMY);
         List<String> phones = List.of(VALID_PHONE_AMY);
         List<String> emails = List.of(VALID_EMAIL_AMY);

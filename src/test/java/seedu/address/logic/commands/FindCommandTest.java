@@ -4,20 +4,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_EMAIL_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_NAME_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_PHONE_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_RENTAL_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_TAGS_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithRental;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
@@ -28,19 +32,6 @@ import seedu.address.model.tag.TagsContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private static final NameContainsKeywordsPredicate EMPTY_NAME_PREDICATE =
-            new NameContainsKeywordsPredicate(List.of());
-    private static final PhoneContainsKeywordsPredicate EMPTY_PHONE_PREDICATE =
-            new PhoneContainsKeywordsPredicate(List.of());
-    private static final EmailContainsKeywordsPredicate EMPTY_EMAIL_PREDICATE =
-            new EmailContainsKeywordsPredicate(List.of());
-    private static final TagsContainsKeywordsPredicate EMPTY_TAGS_PREDICATE =
-            new TagsContainsKeywordsPredicate(List.of());
-    private static final RentalInformationContainsKeywordsPredicate EMPTY_RENTAL_PREDICATE =
-            new RentalInformationContainsKeywordsPredicate(List.of());
-    private static final Predicate<Client> EMPTY_PREDICATE = EMPTY_NAME_PREDICATE.or(EMPTY_PHONE_PREDICATE)
-            .or(EMPTY_EMAIL_PREDICATE).or(EMPTY_TAGS_PREDICATE).or(EMPTY_RENTAL_PREDICATE);
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model modelWithRental = new ModelManager(getTypicalAddressBookWithRental(), new UserPrefs());
