@@ -226,6 +226,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Predicate<Person> getCurrentPredicate() {
+            return null;
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }

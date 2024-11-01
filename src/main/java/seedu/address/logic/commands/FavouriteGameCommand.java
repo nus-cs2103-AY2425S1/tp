@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -34,6 +33,7 @@ public class FavouriteGameCommand extends Command {
 
     private Index index;
     private String gameName;
+    private boolean prevGameIsFavourite;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -63,16 +63,31 @@ public class FavouriteGameCommand extends Command {
         if (targetGame == null) {
             throw new CommandException(MESSAGE_GAME_NOT_FOUND);
         }
-
+        prevGameIsFavourite = targetGame.getFavouriteStatus();
         targetGame.setAsFavourite();
         model.setPerson(targetPerson, targetPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
+        model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_FAVOURITE_GAME_SUCCESS, gameName));
     }
 
+    @Override
     public void undo(Model model) {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
+        assert index.getZeroBased() < lastShownList.size() : "Index should still be within bounds when undoing";
+        assert !gameName.isEmpty() : "Game name should not be empty when undoing";
+
+        Person targetPerson = lastShownList.get(index.getZeroBased());
+        Game targetGame = targetPerson.getGames().get(gameName);
+
+        assert targetGame != null : "Game should be present when undoing";
+
+        if (!prevGameIsFavourite) {
+            targetGame.removeFavourite();
+        }
+
+        model.setPerson(targetPerson, targetPerson);
     }
 
     @Override
