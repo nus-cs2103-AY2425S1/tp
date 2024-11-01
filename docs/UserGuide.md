@@ -115,7 +115,7 @@ Alternatively, if you’d like to explore the application independently, refer t
 
 ## Tutorial for Beginners
 
-Perfect if you are new to BridalBuddy, this section will walk you through all the basic features of BridalBuddy and will make sure you know everything you need to get started.
+Perfect if you are new to BridalBuddy, this section will walk you through all the most basic features of BridalBuddy and will make sure you know everything you need to get started.
 
 
 ### Tutorial Contents
@@ -127,7 +127,7 @@ Perfect if you are new to BridalBuddy, this section will walk you through all th
 6. [**Exiting the program**](#exiting-the-program)
 
 
-**Let us explore the basic features of BridalBuddy's from the perspective of a wedding planner.**
+**Let us explore the most basic features of BridalBuddy's from the perspective of a wedding planner.**
 When you open up the application for the first time, you will see the interface below, with some sample guest and vendors on the guest list and the vendor list respectively.
 
 ![Ui](images/firstUseUi.png)
@@ -158,20 +158,32 @@ Once successful, you should see the following on your screen:
 Let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
 Let us familiarise ourselves with the `add_guest` command, which you will need in order to add guests to the guest list.
 
-Let's try entering the following command: `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+Let's try entering the following command in the Command Line: `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`.
 
 This means we are adding a new guest, with the name `John Doe`, phone number `98765432`, email `johnd@example.com` and address `311, Clementi Ave 2, #02-25` to the guest list.
 
-For more details on the `add_guest` command, such as the additional fields you can classify a guest with, we encourage you to refer to [**Adding a new guest to the guest list**](#adding-a-guest--add_guest)
+Once successful, you should see the following on your screen:
+
+![add guest_command](images/addGuestCommandSample.png)
+
+For more details on the `add_guest` command, such as the additional optional fields you can classify a guest with, we encourage you to refer to [**Adding a new guest to the guest list**](#adding-a-guest--add_guest)
 
 [_Back to Top_](#table-of-contents)
 
 
 ### Adding vendors
 
-Let us now add some vendors to the list of vendors we are intending to collaborate with.
-Most of the details required are similar to that of guests, 
+Let us now add a vendor to the list of vendors you are intending to collaborate with, and familiarise ourselves with the `add_vendor` command, which you will need in order to add vendors to the vendor list.
 
+Let's try entering the following command in the Command Line: `add_vendor n/Jane Tan p/91234567 e/janet@example.com a/743, Jurong Mall, #05-245 company/Jane's Florist`.
+
+This means we are adding a new vendor, with the name `Jane Tan`, phone number `91234567`, email `janet@example.com`, address `743, Jurong Mall, #05-245` and company name `Jane's Florist` to the vendor list.
+
+Once successful, you should see the following on your screen:
+
+![add vendor_command](images/addVendorCommandSample.png)
+
+For more details on the `add_vendor` command, such as the additional optional fields you can classify a vendor with, we encourage you to refer to [**Adding a new vendor to the vendor list**](#adding-a-vendor--add_vendor)
 
 [_Back to Top_](#table-of-contents)
 
