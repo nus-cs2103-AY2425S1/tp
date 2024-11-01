@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
 
 public class RenameTagCommandTest {
     private static final String NEW_NAME = "new name";
-    private static final String TYPICAL_NAME = "bride's friend";
+    private static final String TYPICAL_NAME = "bride's side";
     private Model model = new ModelManager();
 
     @Test

@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
 public class RenameTagCommand extends Command {
     public static final String COMMAND_WORD = "renametag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames an existing tag.\n"
-            + "Example: " + COMMAND_WORD + " t/Bride's Friend t/Friend";
+            + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
     public static final String MESSAGE_SUCCESS = "Tag has been renamed.";
     public static final String MESSAGE_NONEXISTENT_OR_DUPLICATE = "The tag you wish to rename does not exist, "
