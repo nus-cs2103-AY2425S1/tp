@@ -260,6 +260,7 @@ Format: `exit`
 
 Commands listed in this section are applicable to managing your guest list (guest management).
 
+
 [_Back to Top_](#table-of-contents)
 
 
@@ -310,7 +311,9 @@ Deletes a guest from your existing guest list.
 
    * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
-Entering the `delete_guest` command returns the following result on your screen:
+**Example Usage:** `delete_guest 1`
+
+Entering the `delete_guest 1` command returns the following result on your screen:
 
 ![delete_guest command](images/deleteGuestCommand.png)
 
@@ -320,16 +323,20 @@ Entering the `delete_guest` command returns the following result on your screen:
 
 ### **Vendor Related Commands**
 
-Commands listed in this section are applicable to managing your vendor list.
+Commands listed in this section are applicable to managing your vendor list (vendor management).
 
 
 ### Adding a vendor : `add_vendor`
 
 Adds a vendor to the bottom of the existing overall vendor list.
 
-**Format:** `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS company/COMPANY [t/TAG]...`
+**Format:** `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS company/COMPANY [b/BUDGET] [t/TAG]...`
 
-Entering the `add_vendor` command returns the following result on your screen:
+* :warning: You can only enter a non-negative number with up to 2 decimal places for the optional `BUDGET` field.
+
+**Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 company/John's Florist b/1000 t/florist t/responsible`
+
+Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 company/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
 
 ![add_vendor command](images/addVendorCommand.png)
 
