@@ -243,9 +243,16 @@ Adds a lesson to the edulog.
 
 Format: addc `d/DESCRIPTION day/DAY OF THE WEEK from/START TIME (24H FORMAT) to/END TIME (24H FORMAT)​`
 
-Examples:
+Example:
 
 * `addc d/Sec 4 Math Class day/Monday from/2230 to/0030`
+
+Experienced users may provide a 3-letter shorthand for the day of the week for quicker typing.
+This is non-case sensitive.
+
+Example:
+
+* `addc d/Sec 4 Math Class day/mon from/2230 to/0030`
 
 ### Listing all lessons : `dc`
 
