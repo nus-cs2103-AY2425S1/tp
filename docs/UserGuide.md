@@ -12,8 +12,28 @@ and easily filtering them according to tailor-made categories relevant to proper
 fact that it is a lot less complicated to operate than its competitors such as Microsoft Excel while being faster to
 operate than graphical user interfaces commonly found in smartphones.
 
-* Table of Contents
-  {:toc}
+## Table of Contents
+* [Quick start](#quick-start)
+* [Features](#features)
+    * [Adding a person: `add`](#adding-a-person-add)
+    * [Listing all persons : `list`](#listing-all-persons--list)
+    * [Editing a person : `edit`](#editing-a-person--edit)
+    * [Locating persons by name: `find`](#locating-persons-by-name-find)
+    * [Locating persons by tag: `findtag`](#locating-persons-by-tag-findtag)
+    * [Deleting a person : `delete`](#deleting-a-person--delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Quick reference help: `help`](#quick-reference-help-help)
+    * [Managing Remarks : `remark`](#managing-remarks--remark)
+    * [Showing property listings of a person : `show`](#showing-property-listings-of-a-person--show)
+    * [Adding a property listing : `listing add`](#adding-a-property-listing--listing-add)
+    * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
+* [Saving the data](#saving-the-data)
+* [Editing the data file](#editing-the-data-file)
+* [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -263,7 +283,7 @@ Examples:
 
 - `listing add 1 t/condo a/NUS street 123` adds a property listing to the person at index `1` with a listing type of `condo` and address of `NUS street 123`
 
-### Adding a property listing : `listing delete`
+### Deleting a property listing : `listing delete`
 
 Deletes the property listing with index `LISTING_INDEX` from the person specified by `INDEX` 
 
