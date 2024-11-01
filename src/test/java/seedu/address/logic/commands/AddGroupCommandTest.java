@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -48,8 +49,9 @@ public class AddGroupCommandTest {
         Student validStudent = new PersonBuilder().build();
         Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(), new HashSet<>());
         model.addPerson(validStudent);
-
-        CommandResult commandResult = new AddGroupCommand(validGroup).execute(model);
+        List<Group> testGroups = new ArrayList<Group>();
+        testGroups.add(validGroup);
+        CommandResult commandResult = new AddGroupCommand(testGroups).execute(model);
 
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, Messages.format(validGroup)),
             commandResult.getFeedbackToUser());
@@ -59,7 +61,9 @@ public class AddGroupCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(), new HashSet<>());
-        AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
+        List<Group> testGroups = new ArrayList<Group>();
+        testGroups.add(validGroup);
+        AddGroupCommand addGroupCommand = new AddGroupCommand(testGroups);
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
         assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
@@ -70,14 +74,18 @@ public class AddGroupCommandTest {
     public void equals() {
         Group teamOne = new Group(new GroupName("Team 1"), new HashSet<>(), new HashSet<>());
         Group teamTwo = new Group(new GroupName("Team 2"), new HashSet<>(), new HashSet<>());
-        AddGroupCommand addTeamOneCommand = new AddGroupCommand(teamOne);
-        AddGroupCommand addTeamTwoCommand = new AddGroupCommand(teamTwo);
+        List<Group> testGroups = new ArrayList<Group>();
+        testGroups.add(teamOne);
+        List<Group> testGroupsSecond = new ArrayList<Group>();
+        testGroupsSecond.add(teamTwo);
+        AddGroupCommand addTeamOneCommand = new AddGroupCommand(testGroups);
+        AddGroupCommand addTeamTwoCommand = new AddGroupCommand(testGroupsSecond);
 
         // same object -> returns true
         assertTrue(addTeamOneCommand.equals(addTeamOneCommand));
 
         // same values -> returns true
-        AddGroupCommand addTeamOneCommandCopy = new AddGroupCommand(teamOne);
+        AddGroupCommand addTeamOneCommandCopy = new AddGroupCommand(testGroups);
         assertTrue(addTeamOneCommand.equals(addTeamOneCommandCopy));
 
         // different types -> returns false
@@ -93,8 +101,10 @@ public class AddGroupCommandTest {
     @Test
     public void toStringMethod() {
         Group teamOne = new Group(new GroupName("Team 1"), new HashSet<>(), new HashSet<>());
-        AddGroupCommand addTeamOneCommand = new AddGroupCommand(teamOne);
-        String expected = AddGroupCommand.class.getCanonicalName() + "{toAdd=" + teamOne + "}";
+        List<Group> testGroups = new ArrayList<Group>();
+        testGroups.add(teamOne);
+        AddGroupCommand addTeamOneCommand = new AddGroupCommand(testGroups);
+        String expected = AddGroupCommand.class.getCanonicalName() + "{toAdd=" + testGroups + "}";
         assertEquals(expected, addTeamOneCommand.toString());
     }
 

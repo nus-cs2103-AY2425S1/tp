@@ -26,11 +26,12 @@ public class SortTaskCommand extends Command {
             + ": Sorts all tasks.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Sorted all tasks";
+    public static final String MESSAGE_SUCCESS = "Sorted all tasks by deadline (earliest to latest)";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.sortTaskList(new Comparator<Task>() {
             @Override
             public int compare(Task t1, Task t2) {
