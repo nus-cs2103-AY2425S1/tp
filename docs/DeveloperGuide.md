@@ -340,8 +340,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The CCA Leader must know the details of the new member.
 
 **Main Success Scenario (MSS)**:
-1. CCA Leader inputs the `add_member` command with required details (name, room number, and telegram).
-    - Example: `add_member /name John Doe /room 4/3/301 /tele johndoe123`
+1. CCA Leader inputs the `add_member` command with required details (name, room number, telegram and tags (optional)).
+    - Example: `add_member n/John Doe r/4/3/301 t/johndoe123 tag/logistics`
 2. Hall Pointer validates the entered details for the new member.
 3. Hall Pointer adds the member to the system and displays a success message.
 4. The new member is displayed in the GUI.
@@ -350,19 +350,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 - **2a. Hall Pointer detects an error in the entered data**.
-    - 2a1. Hall Pointer requests for correct data with an error message indicating the invalid field.
+    - 2a1. Hall Pointer requests for correct data with an error message indicating the erroneous field.
     - 2a2. CCA Leader re-enters corrected data.
-    - Steps 2a1-2a2 are repeated until all data is correct.
+    - Steps 2a1-2a2 are repeated until the input is valid.
     - Use case resumes from step 3.
 
 - **2b. Duplicate member is detected**.
-    - 2b1. Hall Pointer displays an error message: `Error: Member John Doe already exists.`
+    - 2b1. Hall Pointer displays an error message: `This member already exists in the CCA system.`
         - Use case ends.
 
-- **\*a. At any time, CCA Leader chooses to cancel the add member operation**.
-    - \*a1. Hall Pointer requests confirmation of the cancellation.
-    - \*a2. CCA Leader confirms the cancellation.
-        - Use case ends.
 
 ---
 
@@ -375,13 +371,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Description**: This use case allows a CCA leader to add a new CCA session to the system for tracking attendance and point allocation.
 
 **Preconditions**:
-1. The CCA Leader must know the details of the session such as name, date, and points.
+1. The CCA Leader must know the details of the session such as name, date, points and associated members.
 
 **Main Success Scenario (MSS)**:
-1. CCA Leader inputs the `add_session` command with session details (name, date, and points).
-    - Example: `add_session rehearsal /date 2024-09-19 /points 2`
+1. CCA Leader inputs the `add_session` command with session details (session_name, date, and points, member_index).
+    - Example: `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1`
 2. Hall Pointer validates the entered session details.
-3. Hall Pointer adds the session to the system and displays a success message.
+3. Hall Pointer adds the session to the associated members and displays a success message.
 4. The new session is displayed in the GUI.
     - Use case ends.
 
@@ -394,51 +390,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Use case resumes from step 3.
 
 - **2b. Duplicate session is detected**.
-    - 2b1. Hall Pointer displays an error message: `Error: Session rehearsal already exists.`
-        - Use case ends.
-
-- **\*a. At any time, CCA Leader chooses to cancel the add session operation**.
-    - \*a1. Hall Pointer requests confirmation of the cancellation.
-    - \*a2. CCA Leader confirms the cancellation.
+    - 2b1. Hall Pointer displays an error message: `Error: Session already exists.`
         - Use case ends.
 
 ---
 
-#### Use Case: UC03 - Mark Member Present for a Session
 
-**System**: Hall Pointer App
-
-**Actor**: CCA Leader
-
-**Description**: This use case allows a CCA leader to mark a member as present for a specific CCA session.
-
-**Preconditions**:
-1. The member and session must exist in the system.
-
-**Main Success Scenario (MSS)**:
-1. CCA Leader inputs the `mark_present` command with the member name and session name.
-    - Example: `mark_present John Doe /session volleyball training`
-2. Hall Pointer validates the member and session details.
-3. Hall Pointer records the attendance and displays a success message:
-    - `Attendance recorded for John Doe on volleyball training.`
-4. The updated attendance is reflected in the GUI.
-    - Use case ends.
-
-**Extensions**:
-
-- **2a. Member or session not found**.
-    - 2a1. Hall Pointer displays an error message indicating the missing entity.
-        - `Failed to log attendance: member or session does not exist.`
-        - Use case ends.
-
-- **\*a. At any time, CCA Leader chooses to cancel the mark present operation**.
-    - \*a1. Hall Pointer requests confirmation of the cancellation.
-    - \*a2. CCA Leader confirms the cancellation.
-        - Use case ends.
-
----
-
-#### Use Case: UC04 - Update Member Information
+#### Use Case: UC03 - Update Member Information
 
 **System**: Hall Pointer App
 
@@ -450,29 +408,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The member to be updated must exist in the system.
 
 **Main Success Scenario (MSS)**:
-1. CCA Leader inputs the `update_member` command with the member name and new details.
-    - Example: `update_member John Doe /room 9/10/203 /tag friend`
+1. CCA Leader inputs the `update_member` command with the member index and new details.
+    - Example: `update_member 1 n/John Doe r/9/10/203 t/johnDoe123 tag/friend`
 2. Hall Pointer validates the member and new details.
 3. Hall Pointer updates the member information and displays a success message.
-    - `Member John Doe's room updated to 9/10/203.`
+    - `Member John Doe; Telegram: johnDoe123; Room: 9/10/203; Tags: [friend]'s details updated successfully.`
 4. The updated member information is displayed in the GUI.
     - Use case ends.
 
 **Extensions**:
 
-- **2a. Member not found**.
+- **2a. Member index is invalid**.
     - 2a1. Hall Pointer displays an error message:
-        - `Error: Member with the given name could not be found.`
-        - Use case ends.
-
-- **\*a. At any time, CCA Leader chooses to cancel the update operation**.
-    - \*a1. Hall Pointer requests confirmation of the cancellation.
-    - \*a2. CCA Leader confirms the cancellation.
+        - `Error: Invalid index specified.`
         - Use case ends.
 
 ---
 
-#### Use Case: UC05 - View All Members
+#### Use Case: UC04 - View All Members
 
 **System**: Hall Pointer App
 
@@ -616,7 +569,7 @@ testers are expected to do more _exploratory_ testing.
 
 1. Deleting a member while all members are being shown
 
-    1. Prerequisites: List all members using the `list` command. Multiple members in the list.
+    1. Prerequisites: List all members using the `list_members` command. Multiple members in the list.
 
     2. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
