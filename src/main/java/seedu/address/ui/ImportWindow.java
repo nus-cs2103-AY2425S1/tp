@@ -107,13 +107,11 @@ public class ImportWindow extends UiPart<Stage> {
                     String address = data[3];
                     String allTags = data[4];
                     String tagCommand = tagsArray(allTags);
-                    String favourite = " ";
-                    if (Boolean.valueOf(data[5])) {
-                        favourite = " /f ";
-                    }
+                    String favourite = data[5];
                     String department = data[6];
-                    String command = String.format("add n/%s p/%s e/%s a/%s %s%sd/%s",
-                            name, number, email, address, tagCommand, favourite, department);
+                    String leaves = data[7];
+                    String command = String.format("add n/%s p/%s e/%s a/%s %s f/%s d/%s l/%s",
+                            name, number, email, address, tagCommand, favourite, department, leaves);
                     System.out.println(command);
                     this.logic.execute(command);
                 }
