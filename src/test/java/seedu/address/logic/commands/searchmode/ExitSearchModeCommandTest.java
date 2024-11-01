@@ -1,12 +1,14 @@
 package seedu.address.logic.commands.searchmode;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.ModelManager;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.ModelManager;
+
+
 public class ExitSearchModeCommandTest {
-    ModelManager model = new ModelManager();
+    private ModelManager model = new ModelManager();
 
     @Test
     public void execute() {
