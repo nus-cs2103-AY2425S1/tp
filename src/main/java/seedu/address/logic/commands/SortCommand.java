@@ -22,13 +22,13 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     //To change later
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort based on\n"
-            + "Example 1: " + COMMAND_WORD + " n/alice\n"
-            + "Example 2: " + COMMAND_WORD + " j/swe2024\n"
-            + "Example 3: " + COMMAND_WORD + " t/tp\n"
-            + "Example 4: " + COMMAND_WORD + " n/alice p/12341234\n"
-            + "Example 5: " + COMMAND_WORD + " n/alice e/alice@email.com\n"
-            + "Example 6: " + COMMAND_WORD + " t/tp j/swe2024\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort based on listed criteria\n"
+            + "Example 1: " + COMMAND_WORD + "\n"
+            + "Example 2: " + COMMAND_WORD + " j/\n"
+            + "Example 3: " + COMMAND_WORD + " t/\n"
+            + "Example 4: " + COMMAND_WORD + " j/ t/\n"
+            + "Example 5: " + COMMAND_WORD + " t/ j/\n"
+            + "Example 6: " + COMMAND_WORD + " t/\n";
 
 
     private final List<Prefix> sortCriteria;
