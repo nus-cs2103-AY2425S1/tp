@@ -9,44 +9,66 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 
+import java.util.List;
+
 import seedu.address.logic.commands.EditListingCommand;
 import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new EditListingCommand object
+ * Parses input arguments and creates a new EditListingCommand object.
  */
 public class EditListingCommandParser implements Parser<EditListingCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditListingCommand
      * and returns an EditListingCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public EditListingCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION,
-                        PREFIX_SELLER);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION, PREFIX_SELLER);
 
-        Name listingName;
+        List<String> nameValues = argMultimap.getAllValues(PREFIX_NAME);
 
-        if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
+        if (nameValues.size() > 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+        }
+        if (argMultimap.getAllValues(PREFIX_PRICE).size() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+        }
+        if (argMultimap.getAllValues(PREFIX_AREA).size() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+        }
+        if (argMultimap.getAllValues(PREFIX_ADDRESS).size() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+        }
+        if (argMultimap.getAllValues(PREFIX_REGION).size() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+        }
+        if (argMultimap.getAllValues(PREFIX_SELLER).size() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+        }
+
+        Name currentListingName;
+
+        if (nameValues.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
         }
 
         try {
-            listingName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            currentListingName = ParserUtil.parseName(nameValues.get(0));
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditListingCommand.MESSAGE_USAGE), pe);
         }
 
         EditListingDescriptor editListingDescriptor = new EditListingDescriptor();
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editListingDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        if (nameValues.size() == 2) {
+            Name newListingName = ParserUtil.parseName(nameValues.get(1));
+            editListingDescriptor.setName(newListingName);
         }
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             editListingDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
@@ -69,6 +91,6 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
             throw new ParseException(EditListingCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditListingCommand(listingName, editListingDescriptor);
+        return new EditListingCommand(currentListingName, editListingDescriptor);
     }
 }
