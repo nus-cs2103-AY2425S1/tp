@@ -52,6 +52,11 @@ public class UnassignEventByPersonNameEventIndexCommand extends UnassignEventCom
         Person personToUnassign = personList.get(0);
         Event eventToUnassign = lastShownEventList.get(targetEventIndex.getZeroBased());
 
+        if (!personToUnassign.checkAssignedToEvent(eventToUnassign)) {
+            throw new CommandException(String.format(Messages.MESSAGE_PERSON_NOT_ASSIGNED_TO_EVENT,
+                    personToUnassign.getName(), eventToUnassign.getEventName()));
+        }
+
         model.unassignEventFromPerson(personToUnassign, eventToUnassign);
         return new CommandResult(
             String.format(MESSAGE_SUCCESS, eventToUnassign.getEventName(), personToUnassign.getName()));

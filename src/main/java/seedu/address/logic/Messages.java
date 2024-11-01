@@ -26,6 +26,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_PERSON_NOT_ASSIGNED_TO_EVENT = "'%1$s' is not assigned to the event '%2$s'";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
