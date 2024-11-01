@@ -260,17 +260,20 @@ In case you accidentally make a mistake using the <md>`owe`</md> command, you ca
 
 Updates the amount of tuition fee paid by the student and the amount of tuition fee owed by the student.
 
-Format: `settle INDEX amount/AMOUNT`
+**Format:** `settle INDEX amount/AMOUNT`
 
-Examples:<br>`settle 1 amount/500.00`
+**Examples:**
+* `settle 1 amount/500.00`
 
-![settleResult.png](images%2FsettleResult.png)
+**Output:**
+
+![settleResult.jpg](images%2FsettleResult.jpg)
 
 <box type="important" header="##### Constraints">
 
-1. The index refers to the index number shown in the displayed student list.
-2. The index **must be a positive integer** 1, 2, 3, …​
-3. Amount must be a positive value and must not be more than owed amount.
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX** **must be a positive integer** 1, 2, 3, …​
+* **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
 
 </box>
 
