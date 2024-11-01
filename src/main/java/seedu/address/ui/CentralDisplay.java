@@ -67,6 +67,14 @@ public class CentralDisplay extends UiPart<Region> {
         sessionLogPanelPlaceholder.setVisible(true);
     }
 
+    public boolean isPersonListVisible() {
+        return personListPanelPlaceholder.isVisible();
+    }
+
+    public boolean isSessionLogVisible() {
+        return sessionLogPanelPlaceholder.isVisible();
+    }
+
 
     /**
      * Injects the logs of the current person identified with their index in the address book
