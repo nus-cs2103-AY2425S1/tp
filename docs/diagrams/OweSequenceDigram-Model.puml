@@ -4,38 +4,41 @@
 box Logic LOGIC_COLOR_T1
 participant ":OweCommand" as OweCommand LOGIC_COLOR
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+box ModelManager MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
 participant ":AddressBook" as AddressBook MODEL_COLOR
 participant ":UniqueStudentList" as UniqueStudentList MODEL_COLOR
-participant ":FilteredList" as FilteredList MODEL_COLOR
 
-
+note left of OweCommand
+ For simplicity and
+ readability, steps to
+ obtain studentToEdit and
+ editedStudent are
+ excluded from this
+ diagram
+end note
 activate OweCommand
 
-OweCommand -> Model : getFilteredStudentList()
-activate Model
+OweCommand -> ModelManager : getFilteredStudentList()
+activate ModelManager
 
-Model --> OweCommand : filtered student list
-deactivate Model
+ModelManager --> OweCommand : filtered student list
+deactivate ModelManager
 
 opt index is in the range of filtered list
-    OweCommand -> Model : setStudent(targetStudent, editedStudent)
-    activate Model
-    Model -> AddressBook : setStudent(targetStudent, editedStudent)
+    OweCommand -> ModelManager : setStudent(studentToEdit, editedStudent)
+    activate ModelManager
+    ModelManager -> AddressBook : setStudent(studentToEdit, editedStudent)
     activate AddressBook
-    AddressBook -> UniqueStudentList : setStudent(targetStudent, editedStudent)
+    AddressBook -> UniqueStudentList : setStudent(studentToEdit, editedStudent)
     activate UniqueStudentList
+    UniqueStudentList --> AddressBook
     deactivate UniqueStudentList
+    AddressBook --> ModelManager
     deactivate AddressBook
-    deactivate Model
+    ModelManager --> OweCommand
+    deactivate ModelManager
 
-    OweCommand -> Model : updateFilteredStudentList(predicate)
-    activate Model
-    Model -> FilteredList: setPredicate(predicate)
-    activate FilteredList
-    deactivate FilteredList
-    deactivate Model
 end
 
 deactivate OweCommand
