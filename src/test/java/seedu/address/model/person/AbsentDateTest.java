@@ -24,13 +24,14 @@ public class AbsentDateTest {
         assertFalse(AbsentDate.isValidAbsentDate(null));
         assertFalse(AbsentDate.isValidAbsentDate("")); // empty string
         assertFalse(AbsentDate.isValidAbsentDate(" ")); // spaces only
-        assertFalse(AbsentDate.isValidAbsentDate("2024-02-30")); // non-existent date
-        assertFalse(AbsentDate.isValidAbsentDate("2024-13-01")); // invalid month
+        assertFalse(AbsentDate.isValidAbsentDate("2024-13-01")); // invalid format
         assertFalse(AbsentDate.isValidAbsentDate("invalid-date")); // invalid format
+        assertFalse(AbsentDate.isValidAbsentDate("30-02-2024")); // non-existent date
+        assertFalse(AbsentDate.isValidAbsentDate("12-02-2100")); // date in the future
 
         // valid dates
         assertTrue(AbsentDate.isValidAbsentDate("20-10-2024")); // valid date format
-        assertTrue(AbsentDate.isValidAbsentDate("01-01-2023")); // valid date
+        assertTrue(AbsentDate.isValidAbsentDate("01-01-2024")); // valid date
     }
 
     @Test
