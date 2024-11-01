@@ -1,7 +1,0 @@
-alice@example.com
-benson@example.com
-carl@example.com
-daniel@example.com
-elle@example.com
-fiona@example.com
-george@example.com

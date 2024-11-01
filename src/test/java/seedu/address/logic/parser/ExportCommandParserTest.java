@@ -6,6 +6,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +19,10 @@ public class ExportCommandParserTest {
     private ExportCommandParser parser = new ExportCommandParser();
 
     @Test
-    public void parse_validArgs_returnsExportCommand() {
+    public void parse_validArgs_returnsExportCommand() throws IOException {
+        Files.deleteIfExists(Path.of("validExportFile"));
         File exportFile = new File("validExportFile");
+        Files.deleteIfExists(Path.of("validExportFile.txt"));
         File afterParseExportFile = new File("validExportFile.txt");
         assertParseSuccess(parser, exportFile.toString(), new ExportCommand(afterParseExportFile));
     }
