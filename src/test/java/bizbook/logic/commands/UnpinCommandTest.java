@@ -55,12 +55,18 @@ public class UnpinCommandTest {
     public void equals() {
         UnpinCommand unpinFirstCommand = new UnpinCommand(INDEX_FIRST_PERSON);
         UnpinCommand unpinSecondCommand = new UnpinCommand(INDEX_SECOND_PERSON);
-        UnpinCommand duplicateUnpinFirstCommand = new UnpinCommand(INDEX_FIRST_PERSON);
 
+        // same object -> returns true
         assertTrue(unpinFirstCommand.equals(unpinFirstCommand));
+
+        // same values -> returns true
+        UnpinCommand duplicateUnpinFirstCommand = new UnpinCommand(INDEX_FIRST_PERSON);
         assertTrue(unpinFirstCommand.equals(duplicateUnpinFirstCommand));
 
+        // null -> returns false
         assertFalse(unpinFirstCommand.equals(null));
+
+        // different person -> returns false
         assertFalse(unpinFirstCommand.equals(unpinSecondCommand));
     }
 
