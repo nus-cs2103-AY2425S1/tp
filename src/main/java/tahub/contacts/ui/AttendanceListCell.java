@@ -3,6 +3,7 @@ package tahub.contacts.ui;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.paint.Color;
+
 import tahub.contacts.model.course.AttendanceSession;
 
 /**
@@ -23,15 +24,11 @@ public class AttendanceListCell extends ListCell<AttendanceSession> {
 
     /**
      * Updates the content of the list cell based on the provided AttendanceSession.
-     * <p>
      * When an AttendanceSession is present, this method creates a colored label indicating
      * the attendance status:
-     * <ul>
-     *   <li>Present: Shows "Present ✓" in green</li>
-     *   <li>Absent: Shows "Absent ✗" in red</li>
-     * </ul>
+     * Present: Shows "Present ✓" in green
+     * Absent: Shows "Absent ✗" in red
      * If the cell is empty or the session is null, all content is cleared.
-     * </p>
      *
      * @param session The AttendanceSession object to be displayed in the cell.
      *               Can be null if the cell is empty.

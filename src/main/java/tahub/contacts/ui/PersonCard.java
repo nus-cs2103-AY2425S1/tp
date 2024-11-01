@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
+
 import tahub.contacts.logic.Logic;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
@@ -67,7 +68,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(int displayedIndex, Logic logic, Person person) {
+    public PersonCard(Logic logic, Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         attendanceWindow = new AttendanceWindow(logic, person);

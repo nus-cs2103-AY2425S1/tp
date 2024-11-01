@@ -36,7 +36,7 @@ import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
  * @see StudentCourseAssociation
  */
 public class AttendanceWindow extends UiPart<Stage> {
-    private static final Logger logger = LogsCenter.getLogger (AttendanceWindow.class);
+    private static final Logger logger = LogsCenter.getLogger(AttendanceWindow.class);
     private static final String FXML = "AttendanceWindow.fxml";
 
     /** The logic component that handles backend operations. */
@@ -79,7 +79,7 @@ public class AttendanceWindow extends UiPart<Stage> {
      * @param logic The logic component to handle backend operations
      * @param person The student whose attendance is being displayed
      */
-    public AttendanceWindow(Stage root, Logic logic, Person person) {
+    public AttendanceWindow(Logic logic, Person person, Stage root) {
         super(FXML, root);
         this.logic = logic;
         this.person = person;
@@ -219,7 +219,7 @@ public class AttendanceWindow extends UiPart<Stage> {
      * @param person The student whose attendance is being displayed
      */
     public AttendanceWindow(Logic logic, Person person) {
-        this(new Stage(), logic, person);
+        this(logic, person, new Stage());
     }
 
     /**
