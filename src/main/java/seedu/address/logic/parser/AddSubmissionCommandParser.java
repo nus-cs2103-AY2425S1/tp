@@ -26,6 +26,8 @@ public class AddSubmissionCommandParser implements Parser<AddSubmissionCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSubmissionCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBMISSION);
+
         Submission submission = ParserUtil.parseSubmission(argMultimap.getValue(PREFIX_SUBMISSION).get());
         return new AddSubmissionCommand(submission);
     }
