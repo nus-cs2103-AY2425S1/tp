@@ -11,6 +11,10 @@ Class "<<interface>>\nModel" as Model
 Class StudentDirectory
 Class ModelManager
 Class UserPrefs
+Class PianoPiece
+Class RegularLesson
+Class CancelledLesson
+Class MakeupLesson
 
 Class UniqueStudentList
 Class Student
@@ -40,6 +44,11 @@ Student *--> Name
 Student *--> Phone
 Student *--> Address
 Student *--> Group
+Student *--> "*" PianoPiece
+Student *--> "0..1"RegularLesson
+Student *--> "*" CancelledLesson
+Student *--> "*" MakeupLesson
+
 
 Student -[hidden]up--> I
 UniqueStudentList -[hidden]right-> I
