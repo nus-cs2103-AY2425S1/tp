@@ -47,9 +47,11 @@ public class Messages {
                 .append("; Phone: ")
                 .append(student.getPhone())
                 .append("; Email: ")
-                .append(student.getEmail())
-                .append("; Courses: ");
-        student.getCourses().forEach(course -> builder.append(course).append(" "));
+                .append(student.getEmail());
+        if (!student.getCourses().isEmpty()) {
+            builder.append("; Courses: ");
+            student.getCourses().forEach(course -> builder.append(course).append(" "));
+        }
         return builder.toString().trim();
     }
 
