@@ -150,7 +150,7 @@ Format: `list`
 
 ![list message](images/listMsg.png)
 
-### Adding a wedding: `add-wedding`
+### Adding a wedding: `add-wed`
 
 You can add a wedding to the list of weddings.
 
@@ -168,27 +168,27 @@ Examples:
 * `add-wed w/John Loh & Jean Tan v/Orchard Hotel d/15/10/2022`
 * `add-wed w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/02/11/2022`
 
-### Deleting a wedding: `delete-wedding`
+### Deleting a wedding: `del-wed`
 
 You can delete a person from your list of contacts.
 
 * Deletes the wedding with the specified `NAME & NAME` from the address book.
 * The wedding's details are shown for confirmation.
-* The wedding is deleted if `delete-y` is entered.
-* The wedding is not deleted if `delete-n` is entered, cancelling the delete operation and nothing will occur.
+* The wedding is deleted if `y` is entered.
+* The wedding is not deleted if `n` is entered, cancelling the delete operation and nothing will occur.
 
-Format: `delete-wedding w/NAME & NAME` followed by `delete-y` or `delete-n`
+Format: `del-wed w/NAME & NAME` followed by `y` or `n`
 
-**IMPORTANT:** `delete-wedding w/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
+**IMPORTANT:** `del-wed w/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
 affected.
 
 </box>
 
-![add wedding message](images/deleteWeddingMsg.png)
+![delete wedding message](images/deleteWeddingMsg.png)
 
 Examples:
-* `delete-wedding w/Alice Koh & John Lee` followed by `y` deletes the wedding named `John Doe` from the address book.
-* `delete-wedding w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
+* `del-wed w/Alice Koh & John Lee` followed by `y` deletes the wedding named `John Doe` from the address book.
+* `del-wed w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
 ### Tagging A Contact : `tag-add` / `tag-delete`
 
@@ -332,17 +332,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                             |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action             | Format, Examples                                                                                                                                                                       |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June` |
-| **Delete**         | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                            |
-| **List**           | `list`                                                                                                                                                                                       |
-| **Edit**           | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                             |
-| **Add Wedding**    | `add-wed w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                                 |
-| **Delete Wedding** | `delete-wedding w/NAME & NAME` followed by `y` or `n`                                                                                                                                         |
-| **Clear**          | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                            |
-| **Adding Tags**    | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                                     |
-| **Deleting Tags**  | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                                     |
-| **Filter**         | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                                |
-| **List Weddings**  | `list-wed`                                                                                                                                                                                   |
-| **Help**           | `help`                                                                                                                                                                                       |
+| **Delete**         | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                      |
+| **List**           | `list`                                                                                                                                                                                 |
+| **Edit**           | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                       |
+| **Add Wedding**    | `add-wed w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                           |
+| **Delete Wedding** | `del-wed w/NAME & NAME` followed by `y` or `n`                                                                                                                                         |
+| **Clear**          | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                      |
+| **Adding Tags**    | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                               |
+| **Deleting Tags**  | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                               |
+| **Filter**         | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                          |
+| **List Weddings**  | `list-wed`                                                                                                                                                                             |
+| **Help**           | `help`                                                                                                                                                                                 |
