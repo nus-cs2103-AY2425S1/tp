@@ -1,35 +1,47 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents the result of a command execution.
  */
 public class CommandResult {
+    /**
+     * Represents the lack of an index returned in a {@code CommandResult}.
+     * Declared as public so that {@code HelpCommand} and {@code ExitCommand} are able to use it.
+     */
+    public static final Index NO_INDEX_TO_VIEW = null;
 
     private final String feedbackToUser;
 
-    /** User wants to view all information about a contact. */
-    private final boolean shouldOpenView;
+    /**
+     * User wants to view all information about a particular contact.
+     * May or may not hold an {@code Index}, depending on whether the user has requested to view a contact.
+     */
+    private final Optional<Index> indexToView;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean shouldExit;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean shouldOpenView, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, Index indexToView, boolean showHelp, boolean shouldExit) {
+        requireAllNonNull(feedbackToUser, showHelp, shouldExit);
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.shouldOpenView = shouldOpenView;
+        this.indexToView = Optional.ofNullable(indexToView);
         this.showHelp = showHelp;
-        this.exit = exit;
+        this.shouldExit = shouldExit;
     }
 
     /**
@@ -37,15 +49,19 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, NO_INDEX_TO_VIEW, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public boolean isView() {
-        return shouldOpenView;
+    public Optional<Index> getIndexToView() {
+        return indexToView;
+    }
+
+    public boolean isViewCommand() {
+        return indexToView.isPresent();
     }
 
     public boolean isShowHelp() {
@@ -53,7 +69,7 @@ public class CommandResult {
     }
 
     public boolean isExit() {
-        return exit;
+        return shouldExit;
     }
 
     @Override
@@ -69,23 +85,23 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && shouldOpenView == otherCommandResult.shouldOpenView
+                && indexToView.equals(otherCommandResult.indexToView)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && shouldExit == otherCommandResult.shouldExit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, indexToView, showHelp, shouldExit);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
-                .add("shouldView", shouldOpenView)
+                .add("indexToView", indexToView)
                 .add("showHelp", showHelp)
-                .add("exit", exit)
+                .add("shouldExit", shouldExit)
                 .toString();
     }
 

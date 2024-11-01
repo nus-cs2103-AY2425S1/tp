@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays some information about a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -41,7 +41,7 @@ public class PersonCard extends UiPart<Region> {
     private Label dateOfLastVisit;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -75,7 +75,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void setPhoneLabel(Person personToView) {
-        phone.setText("Phone number: " + personToView.getPhone().value);
+        phone.setText("Phone Number: " + personToView.getPhone().value);
     }
 
     private void setNameLabel(Person personToView) {

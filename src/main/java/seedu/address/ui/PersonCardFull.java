@@ -1,29 +1,38 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Stage;
-import seedu.address.commons.core.LogsCenter;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * Represents a controller for a page to view all information about a contact.
+ * A UI component that displays all the information about a {@code Person}.
  */
-public class ViewWindow extends UiPart<Stage> {
+public class PersonCardFull extends UiPart<Region> {
 
-    private static final String FXML = "ViewWindow.fxml";
+    private static final String FXML = "PersonListCardFull.fxml";
 
-    private static final Logger logger = LogsCenter.getLogger(ViewWindow.class);
+    /**
+     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX. As a
+     * consequence, UI elements' variable names cannot be set to such keywords or an exception will be thrown
+     * by JavaFX during runtime.
+     *
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level
+     *      4</a>
+     */
 
-    private static final int FIRST_PERSON_INDEX = 0;
+    public final Person person;
 
     @FXML
+    private HBox cardPane;
+    @FXML
     private Label name;
+    @FXML
+    private Label id;
     @FXML
     private Label phone;
     @FXML
@@ -40,29 +49,25 @@ public class ViewWindow extends UiPart<Stage> {
     private Label remark;
 
     /**
-     * Creates a new ViewWindow.
-     * Root of the ViewWindow will always be a new Stage.
+     * Creates a {@code PersonCardFull} with the given {@code Person} and index to display.
      */
-    public ViewWindow() {
-        super(FXML, new Stage());
+    public PersonCardFull(Person person, int displayedIndex) {
+        super(FXML);
+        this.person = person;
+
+        setIdLabel(displayedIndex);
+        setNameLabel(person);
+        setPhoneLabel(person);
+        setAddressLabel(person);
+        setEmailLabel(person);
+        setTagsFlowpane(person);
+        setDateOfLastVisitLabel(person);
+        setEmergencyContactLabel(person);
+        setRemarkLabel(person);
     }
 
-    /**
-     * Updates the ViewWindow with all the necessary information about a person.
-     *
-     * @param personList The filtered {@code ObservableList} from {@code Logic}. Will only view 1 {@code Person}.
-     */
-    public void view(ObservableList<Person> personList) {
-        Person personToView = personList.get(FIRST_PERSON_INDEX);
-
-        setNameLabel(personToView);
-        setPhoneLabel(personToView);
-        setAddressLabel(personToView);
-        setEmailLabel(personToView);
-        setTagsFlowpane(personToView);
-        setDateOfLastVisitLabel(personToView);
-        setEmergencyContactLabel(personToView);
-        setRemarkLabel(personToView);
+    private void setIdLabel(int displayedIndex) {
+        id.setText(displayedIndex + ". ");
     }
 
     private void setRemarkLabel(Person personToView) {
@@ -97,10 +102,6 @@ public class ViewWindow extends UiPart<Stage> {
     }
 
     private void setTagsFlowpane(Person personToView) {
-        if (!tags.getChildren().isEmpty()) {
-            tags.getChildren().clear();
-            // prevents duplication of tags with repeated view commands
-        }
         personToView.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -108,7 +109,7 @@ public class ViewWindow extends UiPart<Stage> {
 
     private void setEmailLabel(Person personToView) {
         if (personToView.hasEmail()) {
-            email.setText(personToView.getEmail().get().value);
+            email.setText("Email: " + personToView.getEmail().get().value);
             email.setManaged(true);
         } else {
             email.setText("");
@@ -118,7 +119,7 @@ public class ViewWindow extends UiPart<Stage> {
 
     private void setAddressLabel(Person personToView) {
         if (personToView.hasAddress()) {
-            address.setText(personToView.getAddress().get().value);
+            address.setText("Address: " + personToView.getAddress().get().value);
             address.setManaged(true);
         } else {
             address.setText("");
@@ -127,40 +128,10 @@ public class ViewWindow extends UiPart<Stage> {
     }
 
     private void setPhoneLabel(Person personToView) {
-        phone.setText(personToView.getPhone().value);
+        phone.setText("Phone Number: " + personToView.getPhone().value);
     }
 
     private void setNameLabel(Person personToView) {
         name.setText(personToView.getName().fullName);
-    }
-
-    /**
-     * Shows the ViewWindow to the user.
-     */
-    public void show() {
-        logger.fine("Showing view page on a person.");
-        getRoot().show();
-        getRoot().centerOnScreen();
-    }
-
-    /**
-     * Returns true if the view window is currently being shown.
-     */
-    public boolean isShowing() {
-        return getRoot().isShowing();
-    }
-
-    /**
-     * Hides the view window.
-     */
-    public void hide() {
-        getRoot().hide();
-    }
-
-    /**
-     * Focuses on the view window.
-     */
-    public void focus() {
-        getRoot().requestFocus();
     }
 }
