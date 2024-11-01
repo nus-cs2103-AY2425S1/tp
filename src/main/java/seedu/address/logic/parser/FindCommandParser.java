@@ -13,10 +13,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.ContainsKeywordsPredicate;
+import seedu.address.model.tag.Role;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -36,7 +38,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                         PREFIX_STUDENT_STATUS, PREFIX_ROLE, PREFIX_NICKNAME);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
-                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_ROLE, PREFIX_NICKNAME);
+                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
 
         if (args.trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_NO_PARAMETER_FOUND, FindCommand.MESSAGE_USAGE));
@@ -73,9 +75,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             String arg = argMultimap.getValue(PREFIX_NICKNAME).get();
             nicknameKeywords = getKeywords(arg);
         }
+
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            String arg = argMultimap.getValue(PREFIX_ROLE).get();
-            roleKeywords = getKeywords(arg);
+            Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
+            roleKeywords = roleList.stream().map(role -> role.roleName).toList();
         }
 
         ContainsKeywordsPredicate containsKeywordsPredicate =

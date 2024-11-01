@@ -1,5 +1,6 @@
 package seedu.address.model.contact;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -19,6 +20,7 @@ public class ContainsKeywordsPredicate implements Predicate<Contact> {
 
     /**
      * Constructs a {@code ContainsKeywordsPredicate}.
+     * At least one of the keyword lists must be non-empty.
      *
      * @param nameKeywords keywords to match with name
      * @param telegramHandleKeywords keywords to match with telegram handle
@@ -30,6 +32,8 @@ public class ContainsKeywordsPredicate implements Predicate<Contact> {
     public ContainsKeywordsPredicate(List<String> nameKeywords, List<String> telegramHandleKeywords,
                                      List<String> emailKeywords, List<String> studentStatusKeywords,
                                      List<String> roleKeywords, List<String> nicknameKeywords) {
+        assert !isAllEmpty(nameKeywords, telegramHandleKeywords, emailKeywords, studentStatusKeywords,
+                roleKeywords, nicknameKeywords);
         this.nameKeywords = nameKeywords;
         this.telegramHandleKeywords = telegramHandleKeywords;
         this.emailKeywords = emailKeywords;
@@ -41,20 +45,20 @@ public class ContainsKeywordsPredicate implements Predicate<Contact> {
     @Override
     public boolean test(Contact contact) {
         boolean containsNameKeywords = nameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getName().fullName, keyword));
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getName().fullName, keyword));
         boolean containsTelegramHandleKeywords = telegramHandleKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getTelegramHandle().value, keyword));
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getTelegramHandle().value, keyword));
         boolean containsEmailKeywords = emailKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getEmail().value, keyword));
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getEmail().value, keyword));
         boolean containsStudentStatusKeywords = studentStatusKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getStudentStatus().value, keyword));
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getStudentStatus().value, keyword));
         boolean containsRoleKeywords = roleKeywords.stream()
-                .anyMatch(keyword -> contact.getRoles().stream()
-                        .anyMatch(role -> StringUtil.containsIgnoreCase(role.roleName, keyword)));
+                .allMatch(keyword -> contact.getRoles().stream()
+                        .anyMatch(role -> role.roleName.equals(keyword)));
         boolean containsNicknameKeywords = nicknameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getNickname().value, keyword));
-        return containsNameKeywords || containsTelegramHandleKeywords || containsEmailKeywords
-                || containsStudentStatusKeywords || containsRoleKeywords || containsNicknameKeywords;
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getNickname().value, keyword));
+        return containsNameKeywords && containsTelegramHandleKeywords && containsEmailKeywords
+                && containsStudentStatusKeywords && containsRoleKeywords && containsNicknameKeywords;
     }
 
     @Override
@@ -90,5 +94,9 @@ public class ContainsKeywordsPredicate implements Predicate<Contact> {
                 .add("studentStatusKeywords", studentStatusKeywords)
                 .add("roleKeywords", roleKeywords)
                 .add("nicknameKeywords", nicknameKeywords).toString();
+    }
+
+    private static boolean isAllEmpty(List... lists) {
+        return Arrays.stream(lists).allMatch(List::isEmpty);
     }
 }
