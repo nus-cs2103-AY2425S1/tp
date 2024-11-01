@@ -782,6 +782,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. User tries to add a score to a student that does not exist.
     * 3b1. System displays an error message notifying that the student does not exist in the system. Use case ends.
 
+**System: StudentManagerPro**
+
+**Use case: UC14 Sort Students**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, student list displayed will be sorted.
+* If an invalid attribute is given, a corresponding error message is displayed.
+
+**MSS**
+1. User gives the command to sort students based on a particular attribute.
+2. System validates the input's format.
+3. System sorts the displayed list based on the attribute.
+4. System displays the sorted list.
+5. System confirms the success by displaying a success message. Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid input.
+    * 2a1. System displays an error message asking for valid input. Use case ends.
+
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
