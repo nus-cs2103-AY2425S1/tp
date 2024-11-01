@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.addcommands.AddTaskToGroupCommand;
@@ -40,11 +42,14 @@ public class AddTaskToGroupCommandParser implements Parser<AddTaskToGroupCommand
                 AddTaskToGroupCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE, PREFIX_GROUP_NAME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE);
         TaskName taskName = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK_NAME).get());
         Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_TASK_DEADLINE).get());
-        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
-        return new AddTaskToGroupCommand(taskName, deadline, groupName);
+        Set<GroupName> groupNameSet = new LinkedHashSet<>();
+        for (String s : argMultimap.getAllValues(PREFIX_GROUP_NAME)) {
+            groupNameSet.add(ParserUtil.parseGroupName(s));
+        }
+        return new AddTaskToGroupCommand(taskName, deadline, groupNameSet);
     }
 
     /**

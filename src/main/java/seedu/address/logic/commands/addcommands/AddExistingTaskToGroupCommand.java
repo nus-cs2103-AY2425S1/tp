@@ -33,12 +33,12 @@ public class AddExistingTaskToGroupCommand extends Command {
         + "Parameters: "
         + PREFIX_INDEX + "INDEX (must be a positive integer) "
         + PREFIX_GROUP_NAME + "GROUP_NAME "
-        + "[" + PREFIX_GROUP_NAME + "GROUP_NAME...]\n"
+        + "[" + PREFIX_GROUP_NAME + "GROUP_NAME]...\n"
         + "Example: " + COMMAND_WORD
         + PREFIX_INDEX + "1 "
         + PREFIX_GROUP_NAME + "CS2103T-F12-2"
         + PREFIX_GROUP_NAME + "CS2103-F13-3";
-    public static final String MESSAGE_SUCCESS = "Added task (%1$s) to group:\n%2$s";
+    public static final String MESSAGE_SUCCESS = "Added task (%1$s) to the following groups:\n%2$s";
     public static final String GROUP_HAS_TASK = "%1$s already has the task.";
     public static final String GROUP_NOT_FOUND = "Group with name %1$s does not exist.";
 

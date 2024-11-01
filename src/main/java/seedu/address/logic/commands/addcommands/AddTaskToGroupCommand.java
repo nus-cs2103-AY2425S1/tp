@@ -7,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -32,13 +35,14 @@ public class AddTaskToGroupCommand extends Command {
         + "Parameters: "
         + PREFIX_TASK_NAME + "TASK_NAME "
         + PREFIX_TASK_DEADLINE + "TASK_DATE "
-        + PREFIX_GROUP_NAME + "GROUP_NAME\n"
+        + PREFIX_GROUP_NAME + "GROUP_NAME "
+        + "[" + PREFIX_GROUP_NAME + "GROUP_NAME]...\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_TASK_NAME + "Complete this task "
         + PREFIX_TASK_DEADLINE + "2024-01-01 1300 "
         + PREFIX_GROUP_NAME + "Team 1";
 
-    public static final String MESSAGE_SUCCESS = "Added task: %1$s to %2$s";
+    public static final String MESSAGE_SUCCESS = "Added task (%1$s) to the following groups:\n%2$s";
 
     public static final String MESSAGE_DUPLICATE_TASK_IN_GROUP = "This task is already in the group";
 
@@ -46,44 +50,49 @@ public class AddTaskToGroupCommand extends Command {
 
     private final Deadline deadline;
 
-    private final GroupName toAddInto;
+    private final Set<GroupName> toAddInto;
 
     /**
      * Creates an AddStudentToGroupCommand to add the specified {@code Task} to the specified {@code Group}.
      */
-    public AddTaskToGroupCommand(TaskName taskName, Deadline deadline, GroupName groupName) {
+    public AddTaskToGroupCommand(TaskName taskName, Deadline deadline, Set<GroupName> groupNames) {
         requireNonNull(taskName);
-        requireNonNull(groupName);
+        requireNonNull(groupNames);
         this.taskName = taskName;
         this.deadline = deadline;
-        this.toAddInto = groupName;
+        this.toAddInto = groupNames;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.containsGroupName(toAddInto)) {
-            throw new CommandException(MESSAGE_GROUP_NAME_NOT_FOUND);
-        }
-
         Task task = new Task(taskName, deadline);
-        Group group = model.getGroupByName(toAddInto);
+        List<GroupName> groups = toAddInto.stream().toList();
+        int lastIndex = groups.size() - 1;
+        StringBuilder groupsAdded = new StringBuilder();
 
-        if (model.hasTaskInGroup(task, group)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK_IN_GROUP);
-        }
+        for (GroupName groupName : groups) {
+            if (!model.containsGroupName(groupName)) {
+                throw new CommandException(MESSAGE_GROUP_NAME_NOT_FOUND);
+            }
+            Group group = model.getGroupByName(groupName);
 
-        model.addTaskToGroup(task, group);
-        if (!model.hasTask(task)) {
-            model.addTask(task);
-        } else {
-            model.increaseGroupWithTask(task);
+            if (model.hasTaskInGroup(task, group)) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK_IN_GROUP);
+            }
+            model.addTaskToGroup(task, group);
+            if (!model.hasTask(task)) {
+                model.addTask(task);
+            } else {
+                model.increaseGroupWithTask(task);
+            }
+            groupsAdded.append(groupName).append("\n");
         }
-        model.setMostRecentGroupTaskDisplay(group.getGroupName().fullName);
-        model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
+        model.setMostRecentGroupTaskDisplay(groups.get(lastIndex).getGroupName());
+        model.updateFilteredGroupList(x -> x.getGroupName().equals(groups.get(lastIndex)));
         model.setStateGroupTask();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
-            group.getGroupName().fullName), LIST_GROUP_TASK_MARKER);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(), groupsAdded),
+            LIST_GROUP_TASK_MARKER);
     }
 
     @Override
