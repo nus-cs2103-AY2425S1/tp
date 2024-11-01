@@ -175,8 +175,8 @@ Adds a claim to the insurance plan of a client.
 Format: `addClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID ca/CLAIM_AMOUNT_IN_DOLLARS_AND_CENTS`
 
 IDs for insurance plans:
-`Basic Plan` : `0`
-`Travel Insurance`: `1`
+`Basic Insurance Plan` : `0`, 
+`Travel Insurance Plan`: `1`
 
 * Adds claim to the client at the specified `INDEX`.
 * `INSURANCE_ID` match the associated insurance plan. For a list of mappings between insurance plans and 
