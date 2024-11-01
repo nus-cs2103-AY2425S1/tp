@@ -1,6 +1,6 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Pon Harish's Project Portfolio Page
 ---
 
 ## Project: CareLink
@@ -32,6 +32,8 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#130](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/130)
+
+
 <!--
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
