@@ -40,13 +40,14 @@ public enum Status {
     }
 
     /**
-     * Constructs a {@code Status} with the specified value.
+     * Returns a {@code Status} with the specified value.
      * This method is used to allow for the status field to be case-insensitive.
      *
-     * @param status The string representation of the status.
+     * @param s The string representation of the status.
+     * @return the value of the status
      */
-    public static Status createStatus(String status) {
-        return Status.valueOf(status.toUpperCase());
+    public static Status getValueOf(String s) {
+        return Status.valueOf(s.toUpperCase());
     }
 
     /**

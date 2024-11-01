@@ -26,7 +26,7 @@ public class StatusValidator extends Validator<String> {
 
     private static boolean isValid(String status) {
         try {
-            Status.createStatus(status);
+            Status.getValueOf(status);
         } catch (IllegalArgumentException e) {
             return false;
         }

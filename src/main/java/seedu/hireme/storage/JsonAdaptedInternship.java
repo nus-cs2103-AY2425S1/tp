@@ -111,7 +111,7 @@ class JsonAdaptedInternship {
         Company company = new Company(email, name);
         Role role = new Role(this.role);
         Date date = new Date(this.dateString);
-        Status status = Status.createStatus(statusString);
+        Status status = Status.getValueOf(statusString);
 
         return new InternshipApplication(company, date, role, status);
     }
