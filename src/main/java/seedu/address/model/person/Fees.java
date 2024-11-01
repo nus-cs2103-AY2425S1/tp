@@ -31,7 +31,7 @@ public class Fees {
      * Returns true if a given string is a valid fees.
      */
     public static boolean isValidFees(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.isEmpty() || test.matches(VALIDATION_REGEX);
     }
 
     @Override

@@ -63,8 +63,7 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    // Note: empty string is allowed for addresses in ParserUtil
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS + " "; // whitespace is not a valid Address
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_FEES_DESC = " " + PREFIX_FEES + "91a"; // 'a' not allowed in fees
     public static final String INVALID_CLASSID_DESC = " " + PREFIX_CLASSID + "1@"; // '@' not allowed in classId
