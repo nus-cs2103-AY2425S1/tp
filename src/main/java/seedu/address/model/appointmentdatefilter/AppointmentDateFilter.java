@@ -2,7 +2,6 @@ package seedu.address.model.appointmentdatefilter;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -69,8 +68,7 @@ public class AppointmentDateFilter {
      * returns true if start and end dates are valid and end date is after start date
      */
     public static boolean isValidStartAndEndDate(LocalDate startDate, LocalDate endDate) {
-        requireAllNonNull(startDate, endDate);
-        return endDate.isAfter(startDate);
+        return !endDate.isBefore(startDate);
     }
 
     public LocalDate getStartDate() {
@@ -85,6 +83,11 @@ public class AppointmentDateFilter {
         return healthService;
     }
 
+    @Override
+    public String toString() {
+        String healthService = this.healthService == null ? "" : " with service " + this.healthService;
+        return "within range " + startDate + " to " + endDate + healthService;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
