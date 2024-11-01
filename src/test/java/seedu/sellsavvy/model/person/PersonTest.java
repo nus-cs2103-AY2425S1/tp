@@ -2,6 +2,7 @@ package seedu.sellsavvy.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_EMAIL_BOB;
@@ -11,9 +12,17 @@ import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUti
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
 import static seedu.sellsavvy.testutil.TypicalPersons.BOB;
+import static seedu.sellsavvy.testutil.TypicalPersons.HOON;
+import static seedu.sellsavvy.testutil.TypicalPersons.IDA;
+
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.transformation.FilteredList;
+import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Status;
+import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
 import seedu.sellsavvy.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -88,6 +97,34 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void getFilteredOrderList() {
+        // identical person -> same order list
+        FilteredList<Order> expectedOrders = HOON.getFilteredOrderList();
+        assertEquals(expectedOrders, HOON.getFilteredOrderList());
+
+        // different order list
+        expectedOrders = IDA.getFilteredOrderList();
+        assertNotEquals(expectedOrders, HOON.getFilteredOrderList());
+    }
+
+    @Test
+    public void getOrderPredicate() {
+        // same unfiltered order list predicate
+        Predicate<? super Order> expectedPredicate = HOON.getOrderPredicate();
+        assertEquals(expectedPredicate, IDA.getOrderPredicate());
+
+        // different filtered order list predicate
+        IDA.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
+        assertNotEquals(expectedPredicate, IDA.getOrderPredicate());
+
+        // same filtered order list predicate
+        HOON.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+        expectedPredicate = HOON.getOrderPredicate();
+        IDA.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+        assertEquals(expectedPredicate, IDA.getOrderPredicate());
     }
 
     @Test
