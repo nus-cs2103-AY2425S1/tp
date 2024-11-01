@@ -1,14 +1,13 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Patient;
-
-import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
 /**
  * An UI component that displays information of a {@code Patient}.
