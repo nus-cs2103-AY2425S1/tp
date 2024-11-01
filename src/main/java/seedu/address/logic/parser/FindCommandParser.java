@@ -2,7 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,17 +37,17 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_KEYWORD);
+                ArgumentTokenizer.tokenize(args, PREFIX_KEYWORD, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
 
-        if (!isPrefixPresent(argMultimap, PREFIX_KEYWORD)
+        if (noPrefixesPresent(argMultimap, PREFIX_KEYWORD, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        //Keep as list now for future keywords
+        // Keep as list now for future keywords
         List<String> keywordList = new ArrayList<>();
 
-        if (isKeywordPresent(argMultimap, PREFIX_KEYWORD)) {
+        if (arePrefixesPresent(argMultimap, PREFIX_KEYWORD)) {
             String keyword = argMultimap.getValue(PREFIX_KEYWORD).get();
             requireNonNull(keyword);
             String trimmedKeyword = keyword.trim();
@@ -66,15 +70,19 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Returns true if no prefix contains empty {@code Optional} values in the given
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private boolean isKeywordPresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
-        return argumentMultimap.getValue(prefix).isPresent();
+    /**
+     * Returns true if all the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean noPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 
 }
