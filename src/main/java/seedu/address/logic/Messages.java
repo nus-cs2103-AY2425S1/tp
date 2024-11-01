@@ -34,7 +34,6 @@ public class Messages {
     public static final String MESSAGE_PERSON_NOT_FOUND = "No student with the name %1$s is found.";
     public static final String MESSAGE_LOGGER_FOR_EXCEPTION = "An exception is thrown in: %s";
 
-
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
