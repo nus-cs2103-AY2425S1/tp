@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.util.AbstractCollection;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -70,7 +69,7 @@ class JsonAdaptedRentalInformation {
                 .map(d -> String.format("%.2f", d))
                 .orElse(null);
         this.customerList = Optional.ofNullable(source.getCustomerList().customerList)
-                .map(AbstractCollection::toString)
+                .map(cl -> String.join(";", cl))
                 .orElse(null);
     }
 
