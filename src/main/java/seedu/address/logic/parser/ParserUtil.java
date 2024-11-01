@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.edit.DeleteModuleRoleOperation.Delete
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
