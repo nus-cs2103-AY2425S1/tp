@@ -37,6 +37,7 @@ jobs:
           java-package: jdk+fx
 
       - name: Build and check with Gradle
+        if: runner.os != 'Linux'
         run: ./gradlew check coverage
 
       - name: Upload coverage reports to Codecov
