@@ -36,7 +36,7 @@ public class RoleCommandTest {
         RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole(newRole)
                 .build();
 
-        RoleCommand roleCommand = new RoleCommand(indexFirstPerson, null, descriptor);
+        RoleCommand roleCommand = new RoleCommand(indexFirstPerson, null, descriptor, null);
 
         // Create the expected person with the new tags as strings
         Person expectedPerson = new PersonBuilder(personToAssign).withRole(newRole).build();
@@ -63,7 +63,7 @@ public class RoleCommandTest {
         RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder()
                 .withRole("florist").build();
 
-        RoleCommand tagCommand = new RoleCommand(indexFirstPerson, null, descriptor);
+        RoleCommand tagCommand = new RoleCommand(indexFirstPerson, null, descriptor, null);
 
         assertThrows(CommandException.class, () -> tagCommand.execute(model),
                 String.format(RoleCommand.MESSAGE_DUPLICATE_ROLE, personToAssign.getName()));
@@ -71,22 +71,22 @@ public class RoleCommandTest {
 
     @Test
     public void equals() {
-        RoleCommand tagCommand1 = new RoleCommand(INDEX_FIRST_PERSON, null,
-                new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build());
-        RoleCommand tagCommand2 = new RoleCommand(INDEX_FIRST_PERSON, null,
-                new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build());
+        RoleCommand roleCommand1 = new RoleCommand(INDEX_FIRST_PERSON, null,
+                new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build(), null);
+        RoleCommand roleCommand2 = new RoleCommand(INDEX_FIRST_PERSON, null,
+                new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build(), null);
 
         // same object -> returns true
-        assertEquals(tagCommand1, tagCommand1);
+        assertEquals(roleCommand1, roleCommand1);
 
         // same values -> returns true
-        assertEquals(tagCommand1, tagCommand2);
+        assertEquals(roleCommand1, roleCommand2);
 
         // different types -> returns false
-        assertEquals(false, tagCommand1.equals(new Object()));
+        assertEquals(false, roleCommand1.equals(new Object()));
 
         // null -> returns false
-        assertEquals(false, tagCommand1.equals(null));
+        assertEquals(false, roleCommand1.equals(null));
     }
 
 }
