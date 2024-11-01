@@ -79,13 +79,11 @@ public class AddCommandTest {
         assertFalse(CommonModel.getInstance().getTransactionBook().getTransactionList().isEmpty());
 
         String expectedString = String.format(
-                "[%s] %s [%s] (%s): %s on %s for $%s with categories: %s",
-                CommonModel.getInstance().getTransactionBook().getTransactionList().get(0).getId(),
+                "%s [%s] (%s): %s on %s for $%s with categories: %s",
                 testPerson.getName(),
-                testStatus.toString(),
+                testStatus,
                 testPerson.getPhone(),
-                testDescription, testDate, testAmount, testCategories,
-                testTxn.getId()
+                testDescription, testDate, testAmount, testCategories
         );
         assertEquals(
                 String.format(AddCommand.MESSAGE_SUCCESS, expectedString),
