@@ -106,7 +106,7 @@ Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS
 
 * Edits the elderly at the specified `INDEX` or `NRIC`. 
 * The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
-* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the person list.
+* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the displayed person list.
 * The parameters must adhere to the constraints specified in the [Elderly Fields](#elderly-fields) section.
 * At least one of the optional fields must be provided.
 * The existing values will be replaced with the new input values.
@@ -127,9 +127,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name and NRIC are searched.
-* Only full words will be matched e.g. `Han` will not match `Hans` and `S1803` will not match `S1803269D`
-* All elderly matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched. e.g. `Han` will not match `Hans` and `S1803` will not match `S1803269D`
+* All elderly matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -145,8 +144,8 @@ Deletes the specified elderly from ContactMate.
 Format: `delete INDEX/NRIC`
 
 * Deletes the elderly at the specified `INDEX` or `NRIC`.
-* The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown. .
-* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the current person list.
+* The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
+* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the displayed person list.
 * This command is only allowed in `personList` view. You can first `list` all elderly to use this command.
 
 Examples:
@@ -164,7 +163,7 @@ Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
 * Marks the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
-* The `NRIC` used to select the elderly to mark must be a valid, government issued NRIC and must exist in the current person list.
+* The `NRIC` used to select the elderly to mark must be a valid, government issued NRIC and must exist in the displayed person list.
 * The date must be in the format `YYYY-MM-DD` and must not be a future date.
 * If the parameter `d/DATE` is not provided, the current date will be used.
 * This command is only allowed in `personList` view. You can first `list` all elderly to use this command.
