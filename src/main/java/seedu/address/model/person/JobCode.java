@@ -22,8 +22,8 @@ public class JobCode {
     public static final int MAX_LENGTH = 12;
     public static final int MIN_LENGTH = 2;
 
-    public static final Comparator<JobCode> JOBCODE_COMPARATOR = Comparator.
-            comparing(jobCode -> jobCode.value.toLowerCase());
+    public static final Comparator<JobCode> JOBCODE_COMPARATOR = Comparator
+            .comparing(jobCode -> jobCode.value.toLowerCase());
 
 
     public final String value;

@@ -51,7 +51,7 @@ public class SortCommand extends Command {
 
         return new CommandResult(String.format("List sorted based on your selected criteria(s)\n%s",
                 this.sortCriteria.stream()
-                        .map(Prefix::toString)  // Convert each Prefix to its String representation
+                        .map(Prefix::toString)
                         .collect(Collectors.joining(", "))));
     }
 
