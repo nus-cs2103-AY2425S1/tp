@@ -49,7 +49,7 @@ public class TypicalPersons {
             .withEmail("lydia@example.com").withAddress("little tokyo").withDateOfLastVisit("23-08-2024")
             .withEmergencyContact().build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824421")
-            .withEmail("anna@example.com").withAddress("4th street").withDateOfLastVisit("05-09-2024")
+            .withEmail("anna@example.com").withAddress("4th street").withDateOfLastVisit("05-09-2023")
             .withEmergencyContact().build();
 
     // Manually added
@@ -127,10 +127,10 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersonsAscendingDateOfLastVisit() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(GEORGE, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA));
     }
 
     public static List<Person> getTypicalPersonsDescendingDateOfLastVisit() {
-        return new ArrayList<>(Arrays.asList(GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE));
+        return new ArrayList<>(Arrays.asList(FIONA, ELLE, DANIEL, CARL, BENSON, ALICE, GEORGE));
     }
 }
