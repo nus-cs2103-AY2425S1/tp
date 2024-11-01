@@ -65,11 +65,41 @@ public class SubjectTest {
     @Test
     public void isValidSubjectsByLevel_invalidLevel_failure() {
         assertFalse(Subject.isValidSubjectsByLevel(new Level("NONE NONE"), SUBJECT_ARRAY));
+        assertFalse(Subject.isValidSubjectsByLevel(null, SUBJECT_ARRAY));
     }
 
     @Test
     public void subject_case_insensitive() {
         assertTrue(new Subject("MATH").equals(new Subject("math")));
+    }
+
+    @Test
+    public void getValidSubjectMessage_invalidLevel_failure() {
+        assertEquals(Subject.getValidSubjectMessage(new Level("NONE NONE")), Subject.MESSAGE_LEVEL_NEEDED);
+        assertEquals(Subject.getValidSubjectMessage(null), Subject.MESSAGE_LEVEL_NEEDED);
+    }
+
+    @Test
+    public void equals() {
+        Subject math = new Subject("MATH");
+
+        // same values -> returns true
+        assertTrue(math.equals(new Subject("MATH")));
+
+        // same object -> returns true
+        assertTrue(math.equals(math));
+
+        // null -> returns false
+        assertFalse(math.equals(null));
+
+        // different types -> returns false
+        assertFalse(math.equals(5.0f));
+
+        // different values -> returns false
+        assertFalse(math.equals(new Subject("Chinese")));
+
+        // case-insensitive -> return true
+        assertTrue(math.equals(new Subject("math")));
     }
 
     @Test
