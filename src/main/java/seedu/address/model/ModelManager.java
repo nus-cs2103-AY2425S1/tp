@@ -155,11 +155,9 @@ public class ModelManager implements Model {
         SortedList<Person> sortedAllPersons = new SortedList<>(this.addressBook.getPersonList());
         sortedAllPersons.setComparator(comparator);
 
-        // Assert that sortedPersons size remains same after sorting
+        // Assert that sizes remains same after sorting
+        assert sortedAllPersons.size() == initialSize;
         assert sortedPersons.size() == initialSortedSize;
-
-        // Assert that no contacts get deleted during the sort command
-        assert sortedAllPersons.size() == addressBook.getPersonList().size();
 
         addressBook.setPersons(sortedAllPersons);
     }
