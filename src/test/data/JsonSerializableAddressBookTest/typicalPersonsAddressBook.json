@@ -5,7 +5,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "payment" : "200",
+    "payment" : "-200",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
