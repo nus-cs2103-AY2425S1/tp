@@ -243,6 +243,18 @@ Exits the program.
 
 Format: `exit`
 
+### Unpin Contact `unpin`
+Unpins a contact that is currently pinned
+
+![unpin command](images/unpinCommand.png)
+
+Format `unpin INDEX`
+
+* The parameter INDEX must be a positive integer.
+
+Examples:
+* `unpin 1` moves the contact at index 1 back to its sorted position.
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
