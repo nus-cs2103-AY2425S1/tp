@@ -157,17 +157,17 @@ Examples:
 
 ### Locating Clients: `find`
 
-Finds persons in client list who match parameters specified. Values matched are **case-insensitive**.
+Finds persons in client list who match parameters specified.
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`
 
-* For finding by name, the search is case-insensitive. e.g `hans` will match `Hans`.
+* All values matched for any parameter are **case-insensitive**.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Persons matching at least one name keyword will be returned (i.e. `OR` search).
   e.g. `find n/Han Bo` will return `Hans Gruber`, `Bo Yang`.
 * Names only need to match the start of a word. e.g. `find n/Han` OR `find n/B` matches `Hans Bo`.
 * Phone number, email, address, project status, payment status, client status must match the exact string
-  e.g. `cs/in progress` will not match `cs/in prog`.
+  e.g. `ps/in progress` will not match `ps/in prog`.
 * All tags need to be matched for a person to be found.
 
 Examples:
@@ -226,7 +226,7 @@ Examples:
 * `whitelist 2 cs/active` whitelists the second person in the list and marks them as an `active` client.
 * `whitelist 1 cs/old` whitelists the first person in the list and marks them as an `old` client.
 
-### Sort Clients list : `sort`
+### Sort Client list : `sort`
 
 Sorts the client list in ascending order by the specified field.
 
