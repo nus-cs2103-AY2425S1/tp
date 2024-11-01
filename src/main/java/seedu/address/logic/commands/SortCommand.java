@@ -21,7 +21,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         assert model != null;
-        model.updateSortedPersonList(COMPARATOR_BY_NAME);
+        model.updateFilteredPersonList(COMPARATOR_BY_NAME);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

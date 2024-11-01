@@ -182,12 +182,7 @@ public class AddRentalCommandTest {
         }
 
         @Override
-        public ObservableList<Client> getSortedPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateSortedPersonList(Comparator<Client> comparator) {
+        public void updateFilteredPersonList(Comparator<Client> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

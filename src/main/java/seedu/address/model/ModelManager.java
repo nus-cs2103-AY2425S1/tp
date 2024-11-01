@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
-    private final SortedList<Client> sortedClients;
+    private final SortedList<Client> sortedFilteredClients;
     private final ObservableList<RentalInformation> visibleRentalInformationList;
     private final ObjectProperty<Client> lastViewedClient = new SimpleObjectProperty<>();
     private final CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
@@ -46,7 +46,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getPersonList());
-        sortedClients = new SortedList<>(this.addressBook.getPersonList());
+        sortedFilteredClients = new SortedList<>(filteredClients);
         visibleRentalInformationList = FXCollections.observableArrayList();
     }
 
@@ -132,7 +132,7 @@ public class ModelManager implements Model {
         return addressBook.hasRentalInformation(client, rentalInformation);
     }
 
-    //=========== Filtered Client List Accessors =============================================================
+    //=========== Filtered and Sorted Client List Accessors ==========================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Client> getFilteredPersonList() {
-        return filteredClients;
+        return sortedFilteredClients;
     }
 
     @Override
@@ -148,27 +148,16 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
 
-        if (filteredClients.isEmpty()) {
+        if (sortedFilteredClients.isEmpty()) {
             updateVisibleRentalInformationList(List.of());
             setLastViewedClient(null);
         }
     }
 
-    //=========== Sorted Client List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
-    public ObservableList<Client> getSortedPersonList() {
-        return sortedClients;
-    }
-
-    @Override
-    public void updateSortedPersonList(Comparator<Client> comparator) {
+    public void updateFilteredPersonList(Comparator<Client> comparator) {
         requireNonNull(comparator);
-        sortedClients.setComparator(comparator);
+        sortedFilteredClients.setComparator(comparator);
     }
 
     //=========== Visible Rental Information =================================================================
@@ -221,7 +210,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredClients.equals(otherModelManager.filteredClients);
+                && sortedFilteredClients.equals(otherModelManager.sortedFilteredClients);
     }
 
 }
