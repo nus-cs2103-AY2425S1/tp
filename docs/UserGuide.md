@@ -114,13 +114,13 @@ The default view for all contact cards will display less information to avoid vi
 
 Format: `view INDEX`
 
-* This command permits the user to `view` multiple contacts at once. Using the `view` command on an already-expanded contact will shrink it back down to the less-information state.
+* This command permits the user to `view` multiple contacts at once. Using the `view` command on a contact that's already expanded will collapse it back to its default view.
 * Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
 
 Examples:
 * `view 2` will expand the contact card for the second person in the contact list. <br>
  ![result of `view 2`](images/viewTwoResult.png)
-* Using `view 2` again will shrink the contact card back down to its concise form. <br>
+* Using `view 2` again will collapse the contact card back down to its default view. <br>
  ![result of second `view 2`](images/secondViewTwoResult.png)
 
 
