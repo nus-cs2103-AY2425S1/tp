@@ -257,7 +257,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user       | filter contacts by any attribute                                                 | view my contacts by specific groups                                                  |
 | `* * *`  | researcher | find participants usinf multiple criteria                                        | view specific participants of interest                                               |
 | `* *`    | researcher | export contacts emails (or other details) into easy to copy-paste format         | copy the details (like emails) into other places easily                              |
-| `* *`    | researcher | assign participants randomly into sample groups                                  | easily obtain samples for experiments                                                |
+| `* *`    | researcher | assign participants randomly into study groups                                  | easily obtain randomized study groups for experiments                                                |
 | `* *`    | researcher | get reminders about upcoming sessions                                            | be reminded of the time without manually noting it down                              |
 
 ### Use cases
