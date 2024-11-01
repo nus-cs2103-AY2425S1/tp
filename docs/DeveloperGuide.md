@@ -153,12 +153,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Buyer Feature
-
-The addbuyer command takes in the name, phone number, and email address of the buyer and adds the buyer to the client book.
-The sequence diagram is shown as such:
-<puml src="diagrams/AddBuyerSequenceDiagram.puml" alt="AddBuyer" />
-
 ### \[Proposed\] Note-taking feature
 
 #### Proposed Implementation
