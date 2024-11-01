@@ -51,6 +51,7 @@ public class AddTransactionCommandTest {
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(addTransactionCommand, model, expectedMessage, expectedModel);
     }
