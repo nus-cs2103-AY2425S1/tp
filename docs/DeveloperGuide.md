@@ -796,14 +796,14 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Effort**
 
 * As we were building off of AB3, we were able to reuse the model class and some of the commands.
-* In the beginning of our project (v1.2), this saved us time and effort as it was easy to build an MVP from an already 
-functioning product (AB3). 
-* However, challenges arose when we wanted to refine our MVP features to better suit ResearchRoster (v1.3) 
-and add new features unlike what AB3 had (v1.3, v1.4, v1.5). 
-* This was because we had to carefully look through the AB3 code to fully understand how it worked, 
-in order to figure out how we can modify it, work with it, or work around it to implement changes and new features. 
-* This resulted in us putting in a high amount of effort to maintain good OOP and use/build off the existing classes 
-and methods in AB3, rather than simply creating new classes, methods and solutions that may have overlapped with 
-existing classes and methods. 
-* The high effort was also because some of the existing classes methods posed limitations to what we wanted to implement, 
-and we had to come up with workarounds to achieve our desired modifications. 
+* In the beginning of our project (v1.2), this saved us time and effort as it was easy to build an MVP from an already
+functioning product (AB3).
+* However, challenges arose when we wanted to refine our MVP features to better suit ResearchRoster (v1.3)
+and add new features unlike what AB3 had (v1.3, v1.4, v1.5).
+* This was because we had to carefully look through the AB3 code to fully understand how it worked,
+in order to figure out how we can modify it, work with it, or work around it to implement changes and new features.
+* This resulted in us putting in a high amount of effort to maintain good OOP and use/build off the existing classes
+and methods in AB3, rather than simply creating new classes, methods and solutions that may have overlapped with
+existing classes and methods.
+* The high effort was also because some of the existing classes methods posed limitations to what we wanted to 
+implement, and we had to come up with workarounds to achieve our desired modifications.
