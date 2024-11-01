@@ -162,22 +162,23 @@ Examples:
 *  `redit c/1 r/1 a/65 Anderson Road m/3000 d/0` Edits the first client, first rental information, address, monthly rent, and deposit amount to `Anderson Road` and `3000` respectively.
 *  `redit c/1 r/2 e/2024-10-31` Edits the first client, second rental information, rental end date to `2024-10-31`.
 
-### Locating clients by name: `find`
+### Locating clients: `find`
 
 Finds clients whose names contain any of the given keywords.
 
-Format: `find [k/KEYWORD]`
+Format: `find [k/KEYWORD]... [n/NAME]... [p/PHONE]... [e/EMAIL]... [t/TAG]...`
 
+* Must have at least **one** of the optional fields.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The given `KEYWORD`s will be used to search in all attributes of each client.
+* Only the respective fields is searched for the other types of keywords. (e.g. only client names are searched with the given `NAME`s)
+* Substrings will be matched e.g. `Han` will match <code><b>Han</b>s</code>
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `k/Hans k/Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex yeoh e/lidavid` returns `Alex Yeoh`, `David Li` (with email `lidavid@example.com`)<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a client : `cdelete`
