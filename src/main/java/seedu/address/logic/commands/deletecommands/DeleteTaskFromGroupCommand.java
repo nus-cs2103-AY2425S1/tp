@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.deletecommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_TASK_MARKER;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
@@ -24,9 +25,9 @@ import seedu.address.model.task.Task;
  */
 public class DeleteTaskFromGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_task_grp";
+    public static final String COMMAND_WORD = "del_t_g";
     public static final String COMMAND_WORD_ALIAS = "dtg";
-    public static final int LIST_GROUP_TASK_MARKER = 3;
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes a task from a group.\n"
         + "Parameters: "
@@ -71,7 +72,7 @@ public class DeleteTaskFromGroupCommand extends Command {
         model.setStateGroupTask();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)),
-                LIST_GROUP_TASK_MARKER);
+            LIST_GROUP_TASK_MARKER);
     }
 
     @Override

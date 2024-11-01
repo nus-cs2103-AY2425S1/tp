@@ -18,8 +18,8 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undo most recent instruction.\n"
-            + "Example: " + COMMAND_WORD;
+        + ": Undo most recent instruction.\n"
+        + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Undo successful";
 
@@ -49,6 +49,6 @@ public class UndoCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .toString();
+            .toString();
     }
 }

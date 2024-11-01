@@ -32,7 +32,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
      */
     public AddGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
+            ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
 
         List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_GROUP_NAME));
         List<Prefix> invalidPrefixes = ALL_PREFIX;
@@ -42,7 +42,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
         List<String> groupNames = argMultimap.getAllValues(PREFIX_GROUP_NAME);

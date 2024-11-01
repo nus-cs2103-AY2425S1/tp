@@ -44,9 +44,9 @@ public class DeleteTaskFromGroupCommandParser implements Parser<DeleteTaskFromGr
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_GROUP_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteTaskFromGroupCommand.MESSAGE_USAGE));
+                DeleteTaskFromGroupCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX, PREFIX_GROUP_NAME);

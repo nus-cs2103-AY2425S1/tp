@@ -1,11 +1,11 @@
 package seedu.address.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_TASK_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,13 +32,13 @@ import seedu.address.model.task.TaskName;
  */
 public class EditTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit_task_grp";
+    public static final String COMMAND_WORD = "edit_t_g";
     public static final String COMMAND_WORD_ALIAS = "etg";
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Edits the details of the task of given group.\n"
-        + "Field like task status should not be modified through this function."
+        + "Fields like task status cannot be modified through this function.\n"
         + "Parameters: "
         + PREFIX_GROUP_NAME + " GROUP NAME "
         + PREFIX_INDEX + "INDEX (must be a positive integer) "
@@ -61,8 +61,8 @@ public class EditTaskCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param groupName of the target group
-     * @param index of the task in the task list belonging to the identified group
+     * @param groupName          of the target group
+     * @param index              of the task in the task list belonging to the identified group
      * @param editTaskDescriptor details to edit the task with
      */
     public EditTaskCommand(GroupName groupName, Index index, EditTaskDescriptor editTaskDescriptor) {
@@ -100,9 +100,10 @@ public class EditTaskCommand extends Command {
         } else {
             model.increaseGroupWithTask(editedTask);
         }
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.updateFilteredGroupList(x -> x.getGroupName().equals(groupName));
+        model.setMostRecentGroupTaskDisplay(groupName.getGroupName());
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS,
-            Messages.format(editedTask), Messages.format(group)));
+            Messages.format(editedTask), Messages.format(group)), LIST_GROUP_TASK_MARKER);
     }
 
     @Override
@@ -185,12 +186,15 @@ public class EditTaskCommand extends Command {
         public Optional<TaskName> getTaskName() {
             return Optional.ofNullable(taskName);
         }
+
         public void setDeadline(Deadline deadline) {
             this.deadline = deadline;
         }
+
         public Optional<Deadline> getDeadline() {
             return Optional.ofNullable(deadline);
         }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {

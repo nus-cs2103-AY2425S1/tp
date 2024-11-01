@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.findcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_TASK_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUERY;
 
 import java.util.logging.Logger;
@@ -22,7 +23,6 @@ import seedu.address.model.task.TaskNameContainsKeywordsPredicate;
 public class FindTaskCommand extends Command {
     public static final String COMMAND_WORD = "find_t";
     public static final String COMMAND_WORD_ALIAS = "ft";
-    public static final int LIST_TASK_MARKER = 2;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Finds all tasks whose name contain any of the specified keywords (case-insensitive) "

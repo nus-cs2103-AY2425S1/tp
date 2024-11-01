@@ -1,6 +1,7 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.markcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_TASK_MARKER;
 import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
@@ -11,6 +12,8 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
@@ -26,7 +29,7 @@ public class MarkTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "mark_t";
     public static final String COMMAND_WORD_ALIAS = "mt";
-    public static final int LIST_GROUP_TASK_MARKER = 3;
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Changes the status of a task.\n"
         + "Parameters: "
@@ -35,7 +38,6 @@ public class MarkTaskCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GROUP_NAME + "Team 5 "
         + PREFIX_INDEX + "2";
-
     public static final String MESSAGE_SUCCESS = "Changed the status of task: %1$s to %2$s";
 
     private final Index index;
@@ -78,7 +80,7 @@ public class MarkTaskCommand extends Command {
         model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
         model.setStateGroupTask();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taskToMark), changedStatus),
-                LIST_GROUP_TASK_MARKER);
+            LIST_GROUP_TASK_MARKER);
     }
 
     @Override

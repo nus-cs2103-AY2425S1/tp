@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.addcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.List;
@@ -21,10 +22,9 @@ public class AddGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "add_g";
     public static final String COMMAND_WORD_ALIAS = "ag";
-    public static final int LIST_GROUP_MARKER = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Adds a group to the address book. "
+        + ": Adds a group to the address book.\n"
         + "Parameters: "
         + PREFIX_GROUP_NAME + "GROUPNAME \n"
         + "Example: " + COMMAND_WORD + " "

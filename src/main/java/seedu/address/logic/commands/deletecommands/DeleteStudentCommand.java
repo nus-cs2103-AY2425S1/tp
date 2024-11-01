@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.deletecommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_STUDENT_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import java.util.List;
@@ -21,7 +22,6 @@ import seedu.address.model.student.StudentNumber;
 public class DeleteStudentCommand extends Command {
     public static final String COMMAND_WORD = "del_s";
     public static final String COMMAND_WORD_ALIAS = "ds";
-    public static final int LIST_STUDENT_MARKER = 0;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes the student identified by the student number used.\n"
@@ -67,7 +67,7 @@ public class DeleteStudentCommand extends Command {
         model.deletePerson(studentToBeDeleted);
         model.setStateStudents();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(studentToBeDeleted)),
-                LIST_STUDENT_MARKER);
+            LIST_STUDENT_MARKER);
     }
 
     public StudentNumber getTargetStudentNo() {
