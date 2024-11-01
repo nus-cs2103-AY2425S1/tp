@@ -41,7 +41,7 @@ public class PatientListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PatientCard(patient, getIndex() + 1).getRoot());
+                setGraphic(new PatientCard(patient).getRoot());
             }
         }
     }
