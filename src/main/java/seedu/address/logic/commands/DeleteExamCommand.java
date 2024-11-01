@@ -42,7 +42,7 @@ public class DeleteExamCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        boolean update = false;
+        boolean isUpdated = false;
 
         for (Person personToEdit : lastShownList) {
             Set<Exam> updatedExams = personToEdit.getExams();
