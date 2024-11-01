@@ -1,8 +1,10 @@
 package seedu.address.model.schedule;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -98,5 +100,35 @@ public class MeetingTest {
     @Test
     public void hasPerson_false() {
         assertFalse(meeting.hasPerson(UUID.randomUUID()));
+    }
+
+    @Test
+    public void toString_sameString() {
+        String expectedString = "Meeting: Team Sync on "
+                + LocalDate.now().toString() 
+                + " at 10:00 with contacts: "
+                + meeting.convertContactUidsToString();
+        assertEquals(meeting.toString(), expectedString);
+    }
+
+    @Test
+    public void equals_true() {
+        // same object
+        assertTrue(meeting.equals(meeting));
+        // same everything
+        Meeting otherMeeting = new MeetingBuilder(meeting).build();
+        assertTrue(meeting.equals(otherMeeting));
+    }
+
+    @SuppressWarnings("unlikely-arg-type")
+	@Test void equals_false() {
+        // different object
+        assertFalse(meeting.equals(null));
+        // different type
+        assertFalse(meeting.equals(1));
+        // different date
+        Meeting otherMeeting = new MeetingBuilder(meeting)
+            .withDate(meeting.getMeetingDate().plusDays(1)).build();
+        assertFalse(meeting.equals(otherMeeting));
     }
 }
