@@ -222,7 +222,7 @@ MSS:
 
 Use case ends.
 
-**Use case: UC2 - Add Client (Buyer or Seller)**
+**Use case: UC2 - Add Buyer/ Seller**
 
 MSS:
 1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
@@ -247,7 +247,25 @@ Extensions:
 
       Use case ends.
 
-**Use case: UC3 - Delete Client (Buyer or Seller)**
+**Use case: UC3 - Filter Client**
+
+MSS:
+1. Real estate agent requests to filter the clients by entering a name prefix.
+2. ClientGrid will filter and display the clients whose names start with the provided prefix.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
+
+    * 1a1. ClientGrid detects the error and requests for the correct data
+
+    * 1a2. Real estate agent enters a new name prefix
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+      Use case ends.
+
+**Use case: UC4 - Delete Buyer/ Seller**
 
 Guarantees:
 * If the buyer/ seller was in the client book originally, it would be removed from client book with no side effects.
@@ -264,24 +282,6 @@ Extensions:
     * 1a1. ClientGrid requests for the correct data
 
     * 1a2. Real estate agent enters new data
-
-    * Steps 1a1-1a2 are repeated until the data entered are correct.
-
-      Use case ends.
-
-**Use case: UC4 - Filter Client**
-
-MSS:
-1. Real estate agent requests to filter the clients by entering a name prefix.
-2. ClientGrid will filter and display the clients whose names start with the provided prefix.
-
-Extensions:
-
-* 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
-
-    * 1a1. ClientGrid detects the error and requests for the correct data
-
-    * 1a2. Real estate agent enters a new name prefix
 
     * Steps 1a1-1a2 are repeated until the data entered are correct.
 
