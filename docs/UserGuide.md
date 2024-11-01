@@ -75,11 +75,13 @@ If you can type fast, T_Assistant can get your contact management tasks done fas
   e.g. if the command specifies `sno/STUDENT_NUMBER sn/STUDENT_NAME`, `sn/STUDENT_NAME sno/STUDENT_NUMBER` is also
   acceptable.
 
-* Extraneous parameters for commands that **do not take in parameters** (such as `help`, `list`, `exit` and `clear`) will be
+* Extraneous parameters for commands that **do not take in parameters** (such as `help`, `list`, `exit` and `clear`)
+  will be
   **ignored**.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Extraneous parameters for commands that **do take in parameters** (such as `add_s`, `del_s`) will be recognised as **invalid**
+* Extraneous parameters for commands that **do take in parameters** (such as `add_s`, `del_s`) will be recognised as *
+  *invalid**
   input parameters.<br>
   e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as a invalid command structure.
 
@@ -266,6 +268,7 @@ the data of your previous T_Assistant home folder.
 | **Delete Task from Group**      | `del_t_g/dtg i/INDEX gn/GROUP_NAME`<br>e.g., `dtg i/1 gn/CS2103-F12-2`                                                                                           |
 | **Edit Task**                   | `edit_t_g/etg i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)` <br>e.g., `etg i/1 gn/CS2103-F12-3 tn/v1.4 Release`                      |
 | **Edit Task for All Groups**    | `edit_t/et i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`<br>e.g., `et i/1 td/2024-11-20 1200`                                                      |
+| **Mark Task**                   | `mark_t/mt i/INDEX`<br>e.g., `mt i/2`                                                                                                                            |
 | **Find Task**                   | `find_t/ft q/QUERY [q/QUERY]...`<br>e.g., `ft q/v1.3 Release`                                                                                                    |
 | **Sort Tasks**                  | `sort_t/st`                                                                                                                                                      |
 
