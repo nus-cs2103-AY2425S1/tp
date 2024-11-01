@@ -362,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Tuition teacher requests to add a student by inputting the student's name, phone number, emergency contact, address and one or more optional fields.
+1. Tuition teacher requests to add a student by inputting the student's name, phone number, emergency contact, address and any optional fields.
 2. EduManage adds the student's information and indicates success. 
 
    Use case ends.
