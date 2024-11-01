@@ -41,7 +41,9 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be overwritten by the input values. (except for module roles)\n"
+            + "When adding module roles, 'Student' is the default role type if you do not specify.\n"
+            + "When deleting module roles, any role associated with the module will be deleted if you do not specify.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "(" + PREFIX_PHONE + "PHONE"
