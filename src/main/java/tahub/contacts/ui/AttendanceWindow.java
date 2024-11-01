@@ -217,7 +217,7 @@ public class AttendanceWindow extends UiPart<Stage> {
      * @param logic The logic component to handle backend operations
      * @param person The student whose attendance is being displayed
      */
-    public AttendanceWindow(Logic logic, Person person) {
+    public AttendanceWindow(Person person, Logic logic) {
         this(person, logic, new Stage());
     }
 
