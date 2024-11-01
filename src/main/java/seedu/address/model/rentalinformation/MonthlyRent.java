@@ -45,7 +45,7 @@ public class MonthlyRent {
 
     @Override
     public String toString() {
-        return monthlyRent == null ? "null" : Double.toString(monthlyRent);
+        return monthlyRent == null ? "null" : String.format("$%.2f", monthlyRent);
     }
 
     @Override
