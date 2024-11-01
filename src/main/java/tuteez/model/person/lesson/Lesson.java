@@ -164,14 +164,14 @@ public class Lesson {
      * @return {@code true} if any two lessons in the set have a timing conflict,
      *         {@code false} otherwise.
      */
-    public static boolean containsClashes(List<Lesson> lessons) {
+    public static boolean hasClashingLessonWithinList(List<Lesson> lessons) {
         List<Lesson> lessonList = new ArrayList<>(lessons);
 
         for (int i = 0; i < lessonList.size(); i++) {
-            Lesson lesson1 = lessonList.get(i);
+            Lesson firstLesson = lessonList.get(i);
             for (int j = i + 1; j < lessonList.size(); j++) {
-                Lesson lesson2 = lessonList.get(j);
-                if (isClashingWithOtherLesson(lesson1, lesson2)) {
+                Lesson secondLesson = lessonList.get(j);
+                if (isClashingWithOtherLesson(firstLesson, secondLesson)) {
                     return true;
                 }
             }

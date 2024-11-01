@@ -77,7 +77,7 @@ public class AddCommand extends Command {
         }
 
         List<Lesson> lessonLst = toAdd.getLessons();
-        if (Lesson.containsClashes(lessonLst)) {
+        if (Lesson.hasClashingLessonWithinList(lessonLst)) {
             throw new CommandException(MESSAGE_NEW_LESSONS_CLASH);
         }
 
