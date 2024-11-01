@@ -86,9 +86,15 @@ public class Messages {
      * Formats the list of {@code index} for display to the user.
      */
     public static String formatIndexList(List<Index> indexList) {
+        //indexList should not be empty
         final StringBuilder builder = new StringBuilder();
-        for (Index index : indexList) {
-            builder.append(" ").append(index.getOneBased());
+
+        for (int i = 0; i < indexList.size(); i++) {
+            if (i == 0) {
+                builder.append(indexList.get(i).getOneBased());
+                continue;
+            }
+            builder.append(",").append(indexList.get(i).getOneBased());
         }
 
         return builder.toString().trim();
