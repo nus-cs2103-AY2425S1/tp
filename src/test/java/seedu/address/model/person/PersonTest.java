@@ -81,8 +81,36 @@ public class PersonTest {
     }
 
     @Test
-    public void isSamePerson_throwsInvalidPersonTypeException() {
-        assertThrows(InvalidPersonTypeException.class, () -> personStubAmy.isSamePerson(personStubAmy));
+    public void isSamePerson() {
+        // Same object -> returns true
+        assertTrue(personStubAmy.isSamePerson(personStubAmy));
+
+        // Different object, same identity fields -> returns true
+        PersonStub personStubAmyCopy = new PersonStub(new Name(VALID_NAME_AMY),
+            new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY),
+            new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertTrue(personStubAmy.isSamePerson(personStubAmyCopy));
+
+        // Different object, different email, same phone -> returns true
+        PersonStub personStubAmyEdited = new PersonStub(new Name(VALID_NAME_AMY),
+            new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_CHRIS),
+            new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertTrue(personStubAmy.isSamePerson(personStubAmyEdited));
+
+        // Different object, same email, different phone -> returns true
+        personStubAmyEdited = new PersonStub(new Name(VALID_NAME_AMY),
+            new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_AMY),
+            new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertTrue(personStubAmy.isSamePerson(personStubAmyEdited));
+
+        // Different object, different email, different phone -> returns false
+        personStubAmyEdited = new PersonStub(new Name(VALID_NAME_AMY),
+            new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_CHRIS),
+            new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertFalse(personStubAmy.isSamePerson(personStubAmyEdited));
+
+        // Null object -> returns false
+        assertFalse(personStubAmy.isSamePerson(null));
 
     }
 
