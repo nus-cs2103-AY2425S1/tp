@@ -245,7 +245,7 @@ the data of your previous T_Assistant home folder.
 | **Add Group**    | `add_g/ag gn/GROUP_NAME`<br>e.g., `ag gn/CS2103-F12-2`              |
 | **Delete Group** | `del_g/dg gn/GROUP_NAME`<br>e.g., `dg gn/CS2103-F12-2`              |
 | **Edit Group**   | `edit_g/eg i/INDEX gn/GROUP_NAME`<br>e.g., `eg i/1 gn/CS2103-F12-3` |
-| **Find Student** | `find_g/fg q/QUERY [q/QUERY]...`<br>e.g., `fg q/CS2103-F12-2`       |
+| **Find Group**   | `find_g/fg q/QUERY [q/QUERY]...`<br>e.g., `fg q/CS2103-F12-2`       |
 | **Sort Groups**  | `sort_g/sg`                                                         |
 
 ### Task
