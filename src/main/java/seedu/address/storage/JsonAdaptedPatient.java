@@ -113,10 +113,6 @@ class JsonAdaptedPatient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
     public Patient toModelType() throws IllegalValueException {
-        final List<Allergy> personAllergies = new ArrayList<>();
-        for (JsonAdaptedAllergy allergy : allergies) {
-            personAllergies.add(allergy.toModelType());
-        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));

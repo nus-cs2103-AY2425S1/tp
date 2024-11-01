@@ -77,7 +77,7 @@ public class PatientTest {
     public void toStringMethod() {
         String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", nric=" + ALICE.getNric()
                 + ", sex=" + ALICE.getSex() + ", birthdate=" + ALICE.getBirthdate() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + "}";
+                + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
