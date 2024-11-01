@@ -51,6 +51,7 @@ public class DeleteSessionCommand extends Command {
     public DeleteSessionCommand(SessionName sessionName, Set<Index> memberIndexes) {
         requireNonNull(sessionName);
         requireNonNull(memberIndexes);
+        assert !memberIndexes.isEmpty() : "memberIndexes should not be empty";
         this.memberIndexes = memberIndexes;
         this.sessionName = sessionName;
     }
@@ -66,6 +67,7 @@ public class DeleteSessionCommand extends Command {
                 throw new CommandException(MESSAGE_INVALID_INDEX);
             }
             Member member = lastShownList.get(index.getZeroBased());
+            assert member != null : "Member should not be null";
             if (member.getSessions().stream().noneMatch(
                     // dummy values to avoid duplicating isSameSession or add circular dependencies via SessionBuilder
                     element -> element.isSameSession(
