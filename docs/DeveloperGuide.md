@@ -280,8 +280,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * should be apt with technology and trained to be familiar with the software as their primary job
 
 **Value proposition**:
-Patient / Contact management systems might be outdated in GP clinics, introducing MediContact might improve user-friendliness. 
-MediContact also centralizes the details of patients at the clinic with a command line interface to enable efficient contact between patient and clinic. 
+Patient / Contact management systems might be outdated in GP clinics, introducing MediContact might improve user-friendliness.
+MediContact also centralizes the details of patients at the clinic with a command line interface to enable efficient contact between patient and clinic.
 Furthermore, it can provide easy categorisation and filtering of patients.
 
 
@@ -406,18 +406,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Technical: 
+1. Technical:
    - Should work on any *mainstream OS* as long as it has Java 17 or above installed.
    - Should work on both 32-bit and 64-bit environments.
 2. Performance:
    - Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
    - The response to any use action should become visible within 3 seconds.
    - Should not crash when the input is too long.
-3. Quality: 
-   - Should be easy to use for a novice who has never use CLI before
-   - The product is offered as a free online service.
+3. Quality:
+   - Should be easy to learn for a novice who has never used CLI before.
+   - The product is offered as a free downloadable application.
 
-Note to project: Security measures like encryption will not be implemented in this project 
+Note to project: Security measures like encryption will not be implemented in this project.
 
 ### Glossary
 
@@ -441,40 +441,353 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Ensure data is saved
+
+   1. Launch and close the app without carrying out any commands.
+
+   1. Re-launch the app.<br>
+      Expected: List of contacts are the same as before.
+
+### Adding a person
+1. Adding a person
+
+   1. Prerequisites: List all persons using `list` command. Multiple persons in the list.
+
+   2. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+      Expected: Bryan Lim is added to the list.
+
+   3. Test case: `add n/Bryan_Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+      Expected: No contact is added to the list, error message regarding name should be shown.
+
+   4. Test case: `add n/Bryan Lim p/000 e/bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+      Expected: No contact is added to the list, error message regarding phone number should be shown.
+
+   5. Test case: `add n/Bryan Lim p/98765432 e/bryan a/5 Hilly Road b/23 s/Male`<br>
+      Expected: No contact is added to the list, error message regarding email should be shown.
+
+   6. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/ b/23 s/Male`<br>
+      Expected: No contact is added to the list, error message regarding address should be shown.
+
+   7. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/twelve s/Male`<br>
+      Expected: No contact is added to the list, error message regarding age should be shown.
+
+   8. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/`<br>
+      Expected: No contact is added to the list, error message regarding gender should be shown.
+
+2. Adding a duplicate person
+    1. Prerequisites: List all persons using `list` command. Multiple persons in the list.<br>
+       Person with name `Bryan Lim` should already be in list.
+
+    2. Test case: `add n/Bryan Lim p/00000000 e/different_bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+       Expected: No contact is added to the list, error message regarding person already existing should be shown.
+
+    3. Test case: `add n/Bryan Sim p/00000000 e/different_bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+       Expected: Bryan Lim is added to the list.
+
+### Clearing the address book
+1. Clearing the address book
+
+    1. Test case: `clear`<br>
+       Expected: Alert pop up confirming whether you want to clear the address book.
+
+    2. Test case: Click on `OKAY`<br>
+       Expected: Address book is cleared
+
+    3. Test case: Click on `Cancel`<br>
+       Expected: Address book is unchanged
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person via index while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
+      Expected: Confirmation dialog is triggered. <br><br>If confirmed, first contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a person via name while all persons are being shown
 
-### Saving data
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br>
+       John Doe is an existing contact
 
-1. Dealing with missing/corrupted data files
+    1. Test case: `delete John Doe`<br>
+       Expected: Confirmation dialog is triggered. <br><br>If confirmed, John Doe is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case: `delete Jane Doe`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-1. _{ more test cases …​ }_
+### Editing a person
+
+1. Editing a person's fields
+
+    1. Prerequisites: Person named `John Doe` must exist.
+
+    2. Test case: `edit John Doe n/Jane Doe`<br>
+       Expected: Contact with name `John Doe` is changed to `Jane Doe`
+
+    3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
+       Expected: Similar to previous results with relevant fields changed
+
+2. Editing a non-existent person's field
+
+    1. Prerequisites: Person named `John Doe` must not exist.
+
+    2. Test case: `edit John Doe n/Jane Doe`<br>
+       Expected: Error message reflecting provided name is invalid
+
+    3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
+       Expected: Similar to previous results.
+
+3. Editing a person with no fields
+
+    1. Test case: `edit John Doe`<br>
+       Expected: Error message reflecting at least one field must be provided.
+
+    2. Test case: `edit Non Existent Person`<br>
+       Expected: Similar to previous results.
+
+4. Clearing a persons appointments and tags
+
+    1. Prerequisites: Person named `John Doe` must exist.
+
+    2. Test case: `edit John Doe t/`<br>
+       Expected: Contact with name `John Doe` has all existing tags cleared
+
+    3. Test case: `edit John Doe ap/`<br>
+       Expected: Contact with name `John Doe` has all existing appointments cleared
+
+### Exporting the address book
+
+1. Exporting Data
+    1. Test case: `export`<br>
+       Expected: A .json file under `data` folder should be created in the folder where the MediContact.jar file is stored
+
+### Filter the contacts list
+
+1. Filtering by Age range
+
+    1. Prerequisites: Address book should have a number of contacts in order to make testing meaningful
+
+    2. Test case: `filter b/20 - 30`<br>Expected: All contacts with ages 20 - 30 inclusive should be displayed
+
+    3. Test case: `filter b/30 - 20`<br>
+       Expected: Error reflecting how upper bound should be at least equal or greater than lower bound is displayed
+
+    4. Test case: `filter b/200-200` (Assuming no contact has age 200)<br>
+       Expected: Message will display no contact fits the criteria, list of people remain the same
+
+2. Filtering by Appointment range
+
+    1. Test cases to try: `filter ap/01/01/2024 - 01/01/2025`, `filter ap/01/01/2025 - 01/01/2024`, `filter ap/01/01/2024 - 01/01/2024`<br>
+       Expected: Similar results to filtering by age
+
+3. Filtering by Tags
+
+    1. Prerequisites: Address book should have a number of contacts in order to make testing meaningful.
+
+    2. Test case: `filter t/patients`<br>Expected: All contacts with tag `patients` should be displayed.
+
+    3. Test case: `filter t/`<br>
+       Expected: Error reflecting how input should be alphanumerical.
+
+    4. Test case: `filter b/son` (Assuming no contact has tag `son`)<br>
+       Expected: Message will display no contact fits the criteria, list of people remain the same.
+
+4. Filtering using multiple criteria
+
+    1. Test cases to try: `filter b/20 - 30 t/patient`, `filter ap/01/01/2025 - 01/01/2024 t/diabetes`
+       Expected: Only contacts that satisfy all criteria are shown. If no matches, list is not changed and message will display no contact fits the criteria.
+
+### Finding a contact
+
+1. Finding someone that exists
+
+    1. Prerequisites: List should contain contacts with the names and phone numbers that you want to find.
+
+    2. Test case: `find bryan`
+       <br>Expected: All contacts with `bryan` in their name is displayed.
+
+    3. Test case: `find 987654321`
+       <br>Expected: All contacts with phone number `987654321` is displayed.
+
+    4. Test case: `find bry 9876`
+       <br>Expected: All contacts with `bry` in their name or `9876` in their phone number is displayed.
+
+2. Finding someone that does not exist
+
+    1. Prerequisites: List should not contain contacts with the names and phone numbers that you want to find.
+
+    2. Test case to try: `find somebody`, `find somebody 99999999`
+       <br>Expected: Message displays that no one matches the criteria and list of contacts remain the same.
+
+### Importing an address book
+
+### Listing contacts
+
+1. List all contacts
+
+    1. Test case: `list`<br>
+       Expected: All contacts are listed
+
+2. List all starred contacts (Contacts have been Starred)
+
+    1. Test case: `list *`<br>
+       Expected: All Starred contacts are listed
+
+3. List all starred contacts (No contacts have been Starred)
+
+    1. Test case: `list *`<br>
+       Expected: Message reflects that no contacts have been starred
+
+### Editing a contact's notes
+
+1. Adding new notes to an existing person
+
+    1. Test cases to try: `note Bryan ap/01/01/2025 r/Allergic to Ibuprofen`, `note John m/10mg Panadol`<br>
+       Expected: Notes are added to person (Behaviour is very similar to Edit Command's appointments and tags)
+
+2. Removing note's fields of an existing person
+
+    1. Test cases to try: `note Bryan ap/ r/`, `note John m/`<br>
+       Expected: Respective Note fields are removed (Behaviour is very similar to Edit Command's appointments and tags)
+
+### Sorting the list
+
+1. Sorting list by appointment dates
+
+    1. Test case: `sort`<br>
+       Expected: List is sorted by appointment dates. Contacts with no appointments are at the end, sorted alphabetically.
+
+### Starring a contact
+
+1. Starring an unstarred person
+
+    1. Prerequisite: Address book is populated with contacts.
+
+    2. Test case: `star 1`<br>
+       Expected: Contact at index 1 is starred
+
+    3. Test case: `star John`<br>
+       Expected: Contact with exact name `John` is starred
+
+    4. Test case: `star 0`, `star -1`, `star x` (where x is larger than the list size)<br>
+       Expected: Error message reflecting index provided is invalid
+
+    5. Test case: `star somebody`<br>
+       Expected: Error message reflecting name provided is invalid
+
+2. Starring a starred person
+    1. Prerequisite: First contact is starred
+
+    2. Test case: `star 1`, `star x` (where x is the name of the first contact)<br>
+       Expected: Message reflects that contact has already been starred
+
+### Unstarring a contact
+
+1. Unstarring a starred person
+
+    1. Prerequisite: Address book is populated with contacts.
+
+    2. Test case: `unstar 1`<br>
+       Expected: Contact at index 1 is unstarred
+
+    3. Test case: `unstar John`<br>
+       Expected: Contact with exact name `John` is unstarred
+
+    4. Test case: `unstar 0`, `unstar -1`, `unstar x` (where x is larger than the list size)<br>
+       Expected: Error message reflecting index provided is invalid
+
+    5. Test case: `unstar somebody`<br>
+       Expected: Error message reflecting name provided is invalid
+
+2. Starring a starred person
+
+    1. Prerequisite: First contact is unstarred
+
+    2. Test case: `unstar 1`, `unstar x` (where x is the name of the first contact)<br>
+       Expected: Message reflects that contact is not starred
+
+### Viewing a contacts details
+
+1. Viewing an existent person
+
+    1. Test case: `view 1`, `view John`<br>
+       Expected: Person's details are shown
+
+2. Viewing a non-existent person
+
+    1. Test case: `view 0`, `view -1`, `view x` (where x is larger than the list size)<br>
+       Expected: Error message reflecting index provided is invalid.
+
+    2. Test case: `view somebody`<br>
+       Expected: Error message reflecting name provided is invalid.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+### Difficulty Level
+The project was moderately challenging due to the complexity of managing multiple entity types and integrating various functionalities. Unlike AB3, which deals with a single entity type (Person), our project handles multiple entities such as Appointments, and Notes, increasing the complexity of the data model and interactions.
+
+### Challenges Faced
+1. **Data Management**: Handling multiple entity types required a robust data model and efficient data handling mechanisms.
+2. **User Interface**: Designing a user-friendly interface that integrates seamlessly with the underlying logic and data models.
+3. **Integration with JavaFX**: Ensuring smooth integration with JavaFX for the UI components, especially given the non-modular setup.
+4. **Performance Optimization**: Ensuring the application performs efficiently with a large dataset (up to 1000 contacts) without noticeable sluggishness.
+5. **Testing**: Comprehensive testing to ensure all functionalities work as expected and the application is robust against invalid inputs.
+
+### Effort Required
+The project required significant effort in the following areas:
+1. **Design and Architecture**: Planning the architecture to handle multiple entities and their interactions.
+2. **Implementation**: Coding the functionalities, ensuring they work together seamlessly.
+3. **Testing**: Writing and executing test cases to ensure the application is bug-free and performs well.
+4. **Documentation**: Creating detailed documentation to help future developers understand the system and its components.
+
+### Achievements
+1. **Robust Data Model**: Successfully designed and implemented a data model that handles multiple entity types efficiently.
+2. **User-Friendly Interface**: Developed a user-friendly interface that integrates well with the underlying logic.
+3. **Performance**: Optimized the application to handle large datasets without performance issues.
+4. **Comprehensive Testing**: Ensured the application is robust and handles invalid inputs gracefully.
+
+### Reuse and Effort Savings
+A significant part of the effort was saved through the reuse of components from the AB3 project:
+1. **UI Components**: Reused and adapted UI components from AB3, saving time on designing and implementing new UI elements.
+2. **Command Parsing**: Leveraged the command parsing logic from AB3, adapting it to handle the additional commands required for our project.
+3. **Storage**: Utilized the storage mechanisms from AB3, modifying them to handle the additional data types.<br>
+
+The reuse of these components allowed us to focus more on the unique aspects of our project, such as handling multiple entity types and optimizing performance, thereby saving approximately 20% of the total effort.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+### Team size: 5
+
+1. Ritvi
+2. Ritvi
+3. Lynette
+4. Lynette
+5. Nasya
+6. Nasya
+7. Kelly
+8. Kelly
+9. Otto
+10. Otto
