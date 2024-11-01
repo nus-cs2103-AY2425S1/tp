@@ -26,6 +26,7 @@ public class ScheduleCommandParserTest {
     private static final String VALID_DATE_TWO = "2024-10-05 1400";
     private static final String INVALID_DATE = "invalid_date";
     private static final String VALID_NOTE = "first appointment";
+    private static final String VALID_NOTE_TWO = "second appointment";
     private static final String NON_EXISTENT_DATE = "2024-02-30 1200";
 
     private ScheduleCommandParser parser = new ScheduleCommandParser();
@@ -72,6 +73,12 @@ public class ScheduleCommandParserTest {
     @Test
     public void parse_moreDatesThanNotes_failure() {
         String userInput = VALID_NAME + " d/" + VALID_DATE + " note/" + VALID_NOTE + " d/" + VALID_DATE_TWO;
+        assertParseFailure(parser, userInput, MESSAGE_UNEQUAL_NOTES);
+    }
+
+    @Test
+    public void parse_moreNotesThanDates_failure() {
+        String userInput = VALID_NAME + " d/" + VALID_DATE + " note/" + VALID_NOTE + " note/" + VALID_DATE_TWO;
         assertParseFailure(parser, userInput, MESSAGE_UNEQUAL_NOTES);
     }
 
