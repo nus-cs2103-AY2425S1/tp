@@ -1,7 +1,6 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 
 import java.util.Collections;
@@ -152,12 +151,13 @@ public class EditContactCommand extends EditCommand {
                 ? ((EditVendorDescriptor) editContactDescriptor).getService().orElse(contactToEdit.getService())
                 : contactToEdit.getService();
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
-    
+
         // uneditable fields
         Set<Event> events = new HashSet<>(contactToEdit.getEvents());
         Id id = contactToEdit.getId();
 
-        Vendor vendor = new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedService, updatedTags, id);
+        Vendor vendor = new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedService, updatedTags, id);
         for (Event event : events) {
             event.removeContact(contactToEdit);
             vendor.addEvent(event);

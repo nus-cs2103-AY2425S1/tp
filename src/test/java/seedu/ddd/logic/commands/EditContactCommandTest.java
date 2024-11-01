@@ -314,7 +314,7 @@ public class EditContactCommandTest {
             if (!client.getId().equals(targetContact.getId())) {
                 continue;
             }
-            
+
             // there should only be 1 client with ALICE's ID
             if (editedAlice != null) {
                 fail();
@@ -359,7 +359,7 @@ public class EditContactCommandTest {
             if (!vendor.getId().equals(targetContact.getId())) {
                 continue;
             }
-            
+
             // there should only be 1 vendor with BENSON's ID
             if (editedBenson != null) {
                 fail();
