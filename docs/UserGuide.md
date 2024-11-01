@@ -57,25 +57,31 @@ If you can type fast, T_Assistant can get your contact management tasks done fas
 * Command words are **case-insensitive**!<br>
   `add_s ...` and `ADD_S ...` will both be recognised as commands to add a new student.
 
+* Command words come with **shorthands** <br>
+  e.g. `add_s...` and `as...` will both be recognised as commands to add a new student.
 * Prefixes are **case-sensitive**!<br>
   e.g. `i/INDEX` will be recognised but `I/INDEX` will not be recognised.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `as sn/STUDENT_NAME`, `STUDENT_NAME` is a parameter which can be used as `as sn/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets are **optional**.<br>
   e.g `sn/STUDENT_NAME [t/TAG]` can be used as `sn/John Doe t/TD9` or as `sn/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can **be used multiple times including zero times**.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/TD9`, `t/Good at UI t/Team Lead` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in **any order**.<br>
   e.g. if the command specifies `sno/STUDENT_NUMBER sn/STUDENT_NAME`, `sn/STUDENT_NAME sno/STUDENT_NUMBER` is also
   acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
-  ignored.<br>
+* Extraneous parameters for commands that **do not take in parameters** (such as `help`, `list`, `exit` and `clear`) will be
+  **ignored**.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Extraneous parameters for commands that **do take in parameters** (such as `add_s`, `del_s`) will be recognised as **invalid**
+  input parameters.<br>
+  e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as a invalid command structure.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -245,7 +251,7 @@ the data of your previous T_Assistant home folder.
 | **Add Group**    | `add_g/ag gn/GROUP_NAME`<br>e.g., `ag gn/CS2103-F12-2`              |
 | **Delete Group** | `del_g/dg gn/GROUP_NAME`<br>e.g., `dg gn/CS2103-F12-2`              |
 | **Edit Group**   | `edit_g/eg i/INDEX gn/GROUP_NAME`<br>e.g., `eg i/1 gn/CS2103-F12-3` |
-| **Find Student** | `find_g/fg q/QUERY [q/QUERY]...`<br>e.g., `fg q/CS2103-F12-2`       |
+| **Find Group**   | `find_g/fg q/QUERY [q/QUERY]...`<br>e.g., `fg q/CS2103-F12-2`       |
 | **Sort Groups**  | `sort_g/sg`                                                         |
 
 ### Task
