@@ -169,6 +169,10 @@ public class Person {
         OrderList orderList = getOrderList().createCopy();
         Person personCopy = new Person(name, phone, email, address, tags, orderList);
 
+        if (filteredOrders.getPredicate() == null) {
+            return personCopy;
+        }
+
         @SuppressWarnings("unchecked")
         Predicate<Order> filterPredicate = (Predicate<Order>) filteredOrders.getPredicate();
         personCopy.updateFilteredOrderList(filterPredicate);
