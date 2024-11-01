@@ -23,6 +23,7 @@ public class FilterByNetworkCommand extends Command {
             + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC";
     public static final String MESSAGE_FILTER_SUCCESS = "There are %1$d people with %2$s public addresses.\n"
             + "%3$s";
+    public static final String MESSAGE_FILTER_FAIL = "No person with %1$s public address found.";
 
     private final Network specifiedNetwork;
 
@@ -42,7 +43,7 @@ public class FilterByNetworkCommand extends Command {
                 .toList();
 
         if (personsWithSpecifiedNetwork.isEmpty()) {
-            throw new CommandException("No person with " + this.specifiedNetwork + " public address found.");
+            throw new CommandException(String.format(MESSAGE_FILTER_FAIL, this.specifiedNetwork));
         }
 
         StringBuilder result = new StringBuilder();
