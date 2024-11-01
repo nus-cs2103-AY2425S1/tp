@@ -21,7 +21,7 @@ public class ContactBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_TELEGRAM = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_STUDENT_STATUS = "undergraduate 1";
+    public static final String DEFAULT_STUDENT_STATUS = "Undergraduate 1";
     public static final String[] DEFAULT_ROLES = {"Admin"};
     public static final String DEFAULT_NICKNAME = "";
 
