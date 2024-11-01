@@ -250,6 +250,8 @@ Exits the program.
 
 Format: `exit`
 
+**Example Usage:** `exit`
+
 [_Back to Top_](#table-of-contents)
 
 ---
