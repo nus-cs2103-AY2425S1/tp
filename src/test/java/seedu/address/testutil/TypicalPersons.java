@@ -111,6 +111,7 @@ public class TypicalPersons {
     }
 
     public static List<Client> getTypicalPersonsWithRental() {
+        // The returned List must contain at least 2 persons as some of the test cases assume this fact
         return new ArrayList<>(Arrays.asList(ALICE_WITH_RENTAL, BENSON_WITH_RENTAL));
     }
 }
