@@ -159,9 +159,13 @@ Commands listed in this section are applicable to both guest management and vend
 
 ### Viewing help : `help`
 
-Redirects 
+Opens your web browser and redirects you to the online User Guide, providing detailed instructions and resources for using the app.
+
+* :warning: The online User Guide will require a stable internet connection to successfully open.
 
 **Format:** `help`
+
+**Example Usage:** `help`
 
 Entering the `help` command returns the following result on your screen:
 
