@@ -44,6 +44,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
+        // check index
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -51,8 +52,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        // check for duplicate prefixes for prefixes that should have no duplicates
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_FEES, PREFIX_CLASSID);
 
+        // parse single-value prefixes
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -73,10 +77,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setClassId(ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASSID).get()));
         }
 
+        // parse multi-value prefixes
         parseMonthsPaidForEdit(argMultimap.getAllValues(PREFIX_MONTHPAID))
                 .ifPresent(editPersonDescriptor::setMonthsPaid);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
+        // throw error if no fields are edited
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

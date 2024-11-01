@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -30,11 +28,10 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present.
      */
     public Person(Name name, Phone phone, Email email, Address address, Fees fees, ClassId classId,
                   Set<MonthPaid> monthsPaid, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, fees, classId, monthsPaid, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -115,13 +112,13 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && fees.equals(otherPerson.fees)
-                && classId.equals(otherPerson.classId)
-                && tags.equals(otherPerson.tags);
+        return Objects.equals(name, otherPerson.name)
+                && Objects.equals(phone, otherPerson.phone)
+                && Objects.equals(email, otherPerson.email)
+                && Objects.equals(address, otherPerson.address)
+                && Objects.equals(fees, otherPerson.fees)
+                && Objects.equals(classId, otherPerson.classId)
+                && Objects.equals(tags, otherPerson.tags);
     }
 
     @Override

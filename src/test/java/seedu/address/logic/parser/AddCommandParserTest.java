@@ -27,6 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FEES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -48,8 +49,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fees;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -200,32 +202,35 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + VALID_ADDRESS_BOB + VALID_FEES_BOB,
-                expectedMessage);
+                        + VALID_ADDRESS_BOB + VALID_FEES_BOB, AddCommandParser.getPreambleErrorString());
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + VALID_ADDRESS_BOB + VALID_FEES_BOB,
-                expectedMessage);
+                        + ADDRESS_DESC_BOB + FEES_DESC_BOB + CLASSID_DESC_BOB,
+                AddCommandParser.getMissingPrefixesErrorString("p/"));
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                        + VALID_ADDRESS_BOB + VALID_FEES_BOB,
-                expectedMessage);
+                        + ADDRESS_DESC_BOB + FEES_DESC_BOB + CLASSID_DESC_BOB,
+                AddCommandParser.getMissingPrefixesErrorString("e/"));
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                        + VALID_ADDRESS_BOB + VALID_FEES_BOB,
-                expectedMessage);
+                        + VALID_ADDRESS_BOB + FEES_DESC_BOB + CLASSID_DESC_BOB,
+                AddCommandParser.getMissingPrefixesErrorString("a/"));
+
+        // multiple prefixes missing, except name
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                + VALID_ADDRESS_BOB + FEES_DESC_BOB + VALID_CLASSID_BOB,
+                AddCommandParser.getMissingPrefixesErrorString("a/ p/ c/"));
+
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                        + VALID_ADDRESS_BOB + VALID_FEES_BOB,
-                expectedMessage);
+                        + VALID_ADDRESS_BOB + VALID_FEES_BOB + VALID_CLASSID_BOB,
+                AddCommandParser.getPreambleErrorString());
     }
 
     @Test
@@ -245,20 +250,15 @@ public class AddCommandParserTest {
                 + CLASSID_DESC_BOB + FEES_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + CLASSID_DESC_BOB + FEES_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
-
         // invalid classID
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_CLASSID_DESC + FEES_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, ClassId.MESSAGE_CONSTRAINTS);
 
         // invalid fees
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASSID_DESC_BOB + INVALID_FEES_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Fees.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -266,13 +266,14 @@ public class AddCommandParserTest {
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                         + CLASSID_DESC_BOB + FEES_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + CLASSID_DESC_BOB + FEES_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, String.format(AddCommand.MESSAGE_NONEMPTY_PREAMBLE,
+                        AddCommand.MESSAGE_USAGE)));
     }
 }
