@@ -51,6 +51,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_NEAR_DUPLICATE_PERSON = "A person with a similar name already exists: %1$s";
     public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet." + "\n"
             + "Wedding needs to be created with Tag(s): '%2$s' using command 'add-wedding' first.";
     private final Person toAdd;
@@ -66,6 +67,17 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Normalize the input name
+        String normalizedInputName = toAdd.getName().fullName.toLowerCase().trim();
+
+        // Check for duplicates
+        for (Person person : model.getAddressBook().getPersonList()) {
+            String normalizedExistingName = person.getName().fullName.toLowerCase().trim();
+            if (normalizedInputName.equals(normalizedExistingName)) {
+                throw new CommandException(String.format(MESSAGE_NEAR_DUPLICATE_PERSON, Messages.format(person)));
+            }
+        }
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

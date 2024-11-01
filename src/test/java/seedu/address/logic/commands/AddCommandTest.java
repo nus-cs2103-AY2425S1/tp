@@ -67,7 +67,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().withName("John Doe").build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -246,10 +246,12 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
+        private final AddressBook addressBook = new AddressBook();
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
+            addressBook.addPerson(person);
         }
 
         @Override
@@ -257,6 +259,12 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+
     }
 
     /**
