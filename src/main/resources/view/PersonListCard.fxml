@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Separator?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
@@ -26,13 +27,14 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <FlowPane fx:id="groups" maxWidth="50"/>
       </HBox>
-      <FlowPane fx:id="groups" />
       <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="major" styleClass="cell_small_label" text="\$major" />
       <Label fx:id="year" styleClass="cell_small_label" text="\$year" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="comment" styleClass="cell_small_label" text="\$comment" />
+      <Separator fx:id="separator" styleClass="separator" />
+      <Label fx:id="comment" styleClass="cell_small_label" text="\$comment" wrapText="true"/>
     </VBox>
   </GridPane>
 </HBox>

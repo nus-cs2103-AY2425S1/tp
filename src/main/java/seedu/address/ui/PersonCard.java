@@ -4,8 +4,10 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
@@ -47,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private VBox fields;
     @FXML
     private Label comment;
+    @FXML
+    private Separator separator;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -60,20 +64,29 @@ public class PersonCard extends UiPart<Region> {
         major.setText(person.getMajor().value);
         year.setText(person.getYear().value);
         email.setText(person.getEmail().value);
+        comment.setText(person.getComment().value);
         person.getGroups().stream()
                 .sorted(Comparator.comparing(group -> group.groupName))
                 .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
 
-        fields.getChildren().removeIf(node -> {
+
+        removeOptionalLabels(fields);
+
+        if (!fields.getChildren().contains(comment)) {
+            fields.getChildren().remove(separator);
+        }
+        comment.setText("Comment: " + comment.getText());
+        year.setText("Year " + year.getText());
+    }
+
+    private static void removeOptionalLabels(Pane parentNode) {
+        parentNode.getChildren().removeIf(node -> {
             if (node instanceof Label) {
                 Label label = (Label) node;
                 return label.getText().isEmpty();
             }
             return false;
         });
-
-        year.setText("Year " + year.getText());
-        comment.setText(person.getComment().value);
     }
 
 }
