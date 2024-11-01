@@ -16,7 +16,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.history.HistoryCommandList;
-import seedu.address.model.history.VersionedAddressBook;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,7 +24,6 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final HistoryCommandList historyCommandList;
@@ -39,11 +37,10 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         historyCommandList = new HistoryCommandList();
-        versionedAddressBook = new VersionedAddressBook(this.addressBook);
+        versionedAddressBook = new VersionedAddressBook(addressBook);
+        filteredPersons = new FilteredList<>(this.versionedAddressBook.current.getPersonList());
     }
 
     public ModelManager() {
@@ -89,28 +86,59 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        this.versionedAddressBook.current.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return versionedAddressBook.current;
+    }
+
+    /**
+     * Gets the AddressBook in previous state at specific index for testing purpose.
+     */
+    @Override
+    public AddressBook getVersionedAddressBook(int index) {
+        return new AddressBook(versionedAddressBook.getAddressBookStateList().get(index));
+    }
+
+    /**
+     * Saves the current AddressBook state in the history.
+     */
+    @Override
+    public void commitAddressBook() {
+        versionedAddressBook.commitAddressBook();
+    }
+
+    /**
+     * Reverses the AddressBook to the previous state.
+     */
+    @Override
+    public void undoAddressBook() throws CommandException {
+        versionedAddressBook.undoAddressBook();
+    }
+
+    /**
+     * Returns {@code VersionedAddressBook} for testing purpose.
+     */
+    protected  VersionedAddressBook getVersionedAddressBook() {
+        return this.versionedAddressBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return versionedAddressBook.current.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        versionedAddressBook.current.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        versionedAddressBook.current.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -118,7 +146,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        versionedAddressBook.current.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -150,7 +178,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return versionedAddressBook.current.equals(otherModelManager.versionedAddressBook.current)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
@@ -172,29 +200,5 @@ public class ModelManager implements Model {
     @Override
     public void addHistoryCommand(Command toAdd, String originalCommandText) {
         historyCommandList.add(toAdd, originalCommandText);
-    }
-
-    //=========== Versioned Address Book Accessors =============================================================
-
-    /**
-     * Saves the current AddressBook state in the history.
-     */
-    @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commitAddressBook(addressBook);
-    }
-
-    /**
-     * Reverses the AddressBook to the previous state.
-     */
-    public void undoAddressBook() throws CommandException {
-        versionedAddressBook.undoAddressBook(addressBook);
-    }
-
-    /**
-     * Gets the AddressBook in previous state at specific index for testing purpose.
-     */
-    public AddressBook getVersionedAddressBook(int index) {
-        return new AddressBook(versionedAddressBook.getAddressBookStateList().get(index));
     }
 }

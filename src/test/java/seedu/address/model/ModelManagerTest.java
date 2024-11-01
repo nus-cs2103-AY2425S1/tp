@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -70,7 +71,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void testCommitAndUndoAddressBook() {
+    public void testCommitAndUndoAddressBook() throws CommandException {
         AddressBook addressBook1 = new AddressBook();
         AddressBook addressBook2 = getTypicalAddressBook();
         ModelManager model = new ModelManager(addressBook1, new UserPrefs());

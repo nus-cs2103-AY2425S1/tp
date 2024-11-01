@@ -1,47 +1,49 @@
-package seedu.address.model.history;
+package seedu.address.model;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 
 /**
  * Represents the different states of the Address Book for the user.
  */
-public class VersionedAddressBook {
+public class VersionedAddressBook extends AddressBook {
     private final ArrayList<AddressBook> addressBookStateList;
     private int currentStatePointer;
+    public AddressBook current;
 
     public static final String MESSAGE_CONSTRAINTS = "This is the earliest version that user can retrieve";
 
     /**
      * Constructs a state list for the address book and saves the initial copy.
      */
-    public VersionedAddressBook(AddressBook addressBook) {
+    public VersionedAddressBook(ReadOnlyAddressBook addressBook) {
+        super(addressBook);
         addressBookStateList = new ArrayList<>();
-        currentStatePointer = 0;
         addressBookStateList.add(new AddressBook(addressBook));
+        currentStatePointer = 0;
+        current = new AddressBook(addressBook);
     }
 
     /**
      * Saves the whole address book state in the history.
      */
-    public void commitAddressBook(AddressBook addressBook) {
+    public void commitAddressBook() {
         currentStatePointer++;
-        addressBookStateList.add(currentStatePointer, new AddressBook(addressBook));
+        addressBookStateList.add(currentStatePointer, new AddressBook(current));
+        current = new AddressBook(addressBookStateList.get(currentStatePointer));
     }
 
     /**
      * Reverts the given AddressBook to the previous state.
      */
-    public void undoAddressBook(AddressBook addressBook) throws CommandException {
-        if (!(currentStatePointer >= 0)) {
+    public void undoAddressBook() throws CommandException {
+        if (currentStatePointer == 0) {
             throw new CommandException(MESSAGE_CONSTRAINTS);
         }
         currentStatePointer--;
-        AddressBook previousState = addressBookStateList.get(currentStatePointer);
-        addressBook.resetData(previousState);
+        current = new AddressBook(addressBookStateList.get(currentStatePointer));
     }
 
     /**
@@ -64,7 +66,10 @@ public class VersionedAddressBook {
             return false;
         }
         VersionedAddressBook other = (VersionedAddressBook) o;
-        return this.addressBookStateList.equals(other.getAddressBookStateList());
+
+        // Compare addressBookStateList and currentStatePointer
+        return currentStatePointer == other.currentStatePointer
+                && addressBookStateList.equals(other.addressBookStateList);
     }
 
     @Override
