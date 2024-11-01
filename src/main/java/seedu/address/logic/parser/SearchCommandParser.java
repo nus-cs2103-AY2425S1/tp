@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_POLICY;
 
-
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.SearchAppointmentCommand;
 import seedu.address.logic.commands.SearchBirthdayCommand;
