@@ -13,7 +13,8 @@
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -172,9 +173,13 @@ If the constraints are not met, the `AddCommandParser` will throw a `ParseExcept
 Otherwise, a new instance of `Student` is created with the values obtained from the user input. 
 A new instance of `AddCommand` is then created with the `Student` instance.
 
-On execution, {to be updated by dan / saha}
+On execution, `AddCommand` first queries the supplied model if it contains a student with both an identical name **and** an identical phone number. If no such student exists, `AddCommand` then calls on `model::addStudent` to add the student into the addressBook data.
 
+Finally, `AddCommand` queries the model to see if the student's schedule clashes with others in the address book. If conflicts are found, a warning message is displayed along with the conflicting students.
 
+Below is an activity diagram when [Adding a new student](#add-a-new-student)
+
+<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
 
 
 The following sequence diagram shows how an add operation goes through the `Logic` component:
@@ -189,27 +194,9 @@ The following sequence diagram shows how an add operation goes through the `Logi
 
 Similarly, how an AddCommand operation goes through the `Model` component is shown below:
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+<puml src="diagrams/AddSequenceDiagram-Model.puml" alt="AddSequenceDiagram-Model" height="500"/>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -226,9 +213,23 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Owe feature
 
-_{Explain here how the data archiving feature will be implemented}_
+The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
+<puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>
+
+#### Design considerations:
+
+**Aspect: How owe executes:**
+
+* **Alternative 1 (current choice):** Calculations for amount owed done by UGTeach.
+    * Pros: User friendly.
+    * Cons: May have performance issues due to the need to fetch data and perform calculations.
+
+* **Alternative 2:** Calculations for amount owed done by the user.
+    * Pros: Easy to implement.
+    * Cons: Might not be user-friendly as user would need to find out what is the 
+    tuition rate charged and calculate how much tuition fee did the student owe.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -402,10 +403,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <ins>find a student(UC05)</ins>.
-2. User enters command to record payment received from the specified student after a lesson.
-3. System calculates the tuition fee paid by the student for the lesson.
-4. System updates the total tuition fee paid by the student.
-5. System displays success message.
+1. User enters command to record payment received from the specified student after a lesson.
+1. System updates the total tuition fee paid by the student.
+1. System displays success message.
 
    Use case ends.
 
@@ -421,12 +421,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 2a1-2a2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
 
+
 **Use case: UC07 - Settle outstanding fees for student**
 
 **MSS**
 
 1. User requests to <ins>list students(UC02)</ins>.
-1. User enters command to settle outstanding fees for the specified student. 
+1. User enters command to settle outstanding fees for the specified student.
 1. System updates the total tuition fee paid and total tuition fee owed by the student.
 1. System displays success message.
 
@@ -505,9 +506,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   
+   1. Open a command terminal, `cd` into the folder that you put the jar file in.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Run the jar file with the command in the terminal `java -jar ugteach.jar`
+      Expected: Shows the GUI with a set of sample contacts and a reminder for lessons scheduled today. 
+      The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -516,24 +521,100 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Finding students
+
+1. Finding students by name
+
+    1. Test case: `find n/Alex`<br>
+       Expected: Only students whose name contains keyword `Alex` listed.
+
+    1. Test case: `find n/Alex Bernice`<br>
+       Expected: Only students whose name contains keyword `Alex` **OR** `Bernice` listed.
+   
+    1. Test case: `find n/Alex!`<br>
+       Expected: Search not performed. UGTeach shows an error message.
+    
+    1. Other incorrect find commands to try: `find n/  `, `find n/Bernice!`<br>
+   (where keyword supplied contains non-alphanumeric characters or only whitespace)<br>
+       Expected: Similar to previous.
+
+1. Finding students by day
+    1. Test case: `find d/Thursday`<br>
+       Expected: Only students whose tuition day falls on `Thursday` listed.
+
+    1. Test case: `find d/Wednesday Thursday`<br>
+       Expected: Only students whose tuition day falls on `Wednesday` **OR** `Thursday` listed.
+   
+    1. Test case: `find d/Thur`<br>
+       Expected: Search not performed. UGTeach shows an error message.
+    
+    1. Other incorrect find commands to try: `find d/`, `find d/foo`<br>
+    (where days supplied does not match any day or contains only whitespace)<br>
+       Expected: Similar to previous.
+
+1. Finding students by name or day
+   1. Test case: `find n/Alex d/Thursday`<br>
+      Expected: Only students whose name contains keyword `Alex`<br>
+      **AND** their tuition day falls on `Thursday` listed.
+   
+   1. Test case: `find d/Thursday n/Alex `<br>
+      Expected: Similar to previous.
+
+   1. Test case: `find d/Alex Bernice d/Wednesday Thursday`<br>
+      Expected: Only students whose name contains keyword `Alex` **OR** `Bernice`<br>
+      **AND** their tuition day falls on `Wednesday` **OR** `Thursday` listed.
+   
+   1. Test case: `find n/Alex d/`<br>
+      Expected: Search not performed. UGTeach shows an error message.
+   
+   1. Other incorrect find commands to try: `find n/ d/Thursday`, `find n/Alex! d/Thursday`, `find n/Alex d/Thur`<br>
+   (where keywords supplied contains non-alphanumeric characters or only whitespace) or<br>
+   (where days supplied does not match any day or contains only whitespace)<br>
+      Expected: Similar to previous.
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
+1. Deleting a student while all students are being shown.
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. UGTeach displays success message with details of the deleted student.
 
    1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. UGTeach displays error message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a student from a filtered list.
+
+    1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
+
+    1. Test case: `delete 1`<br>
+        Expected: First contact is deleted from the filtered list. UGTeach displays success message with details of the deleted student.
+
+    1. Test case: `delete 0`<br>
+       Expected: No student is deleted. UGTeach displays error message.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+        Expected: Similar to previous.
+   
+### Getting a reminder
+
+1. Getting a reminder when there are lessons scheduled for today.
+
+    1. Prerequisite: There should be **at least 1 lesson** scheduled for today.
+
+    1. Test case: `remind`<br>
+         Expected: UGTeach displays success message with details such as student's name, time of the lesson and the subject to be taught.
+
+1. Getting a reminder when there are no lessons scheduled for today.
+
+    1. Prerequisite: There should be **no lessons** scheduled for today.
+
+    1. Test case: `remind`<br>
+        Expected: UGTeach displays congratulatory message for having no lessons scheduled today.
 
 ### Saving data
 
