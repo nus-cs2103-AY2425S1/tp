@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.log.Log;
 
 
@@ -65,8 +66,11 @@ public class SessionLogPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new SessionLogCard(log).getRoot());
+                // 1 indexed of the log in ListCell. (ListCell extends IndexedCell)
+                Index logIndex = Index.fromZeroBased(getIndex());
+                setGraphic(new SessionLogCard(log, logIndex).getRoot());
             }
         }
     }
+
 }
