@@ -36,7 +36,8 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ALLERGY = "#friend";
     private static final String INVALID_PRIORITY = "invalidPriority";
-    private static final String INVALID_APPOINTMENTS = "yolo:today:0420";
+    private static final String INVALID_APPOINTMENT_CORRECT_FORMAT = "yolo:today:0420";
+    private static final String INVALID_APPOINTMENT_WRONG_FORMAT = "dentist:2023-12-12";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_NRIC = BENSON.getNric().toString();
@@ -212,14 +213,27 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidAppointments_throwsIllegalValueException() {
+    public void toModelType_invalidAppointmentData_throwsIllegalValueException() {
         List<JsonAdaptedAppointment> invalidAppointments = new ArrayList<>(VALID_APPOINTMENTS);
-        invalidAppointments.add(new JsonAdaptedAppointment(INVALID_APPOINTMENTS));
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ADDRESS,
-                        VALID_DATE_OF_BIRTH, VALID_GENDER, VALID_ALLERGIES,
-                        VALID_PRIORITY, invalidAppointments, VALID_MEDCON);
+        invalidAppointments.add(new JsonAdaptedAppointment(INVALID_APPOINTMENT_CORRECT_FORMAT));
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                                                         VALID_ADDRESS, VALID_ADDRESS, VALID_DATE_OF_BIRTH,
+                                                         VALID_GENDER, VALID_ALLERGIES, VALID_PRIORITY,
+                                                         invalidAppointments, VALID_MEDCON);
+        assertThrows(IllegalValueException.class, person::toModelType);
     }
+
+    @Test
+    public void toModelType_invalidAppointmentFormat_throwsIllegalValueException() {
+        List<JsonAdaptedAppointment> invalidAppointments = new ArrayList<>(VALID_APPOINTMENTS);
+        invalidAppointments.add(new JsonAdaptedAppointment(INVALID_APPOINTMENT_WRONG_FORMAT));
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                                                         VALID_ADDRESS, VALID_ADDRESS, VALID_DATE_OF_BIRTH,
+                                                         VALID_GENDER, VALID_ALLERGIES, VALID_PRIORITY,
+                                                         invalidAppointments, VALID_MEDCON);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
     @Test
     public void toModelType_invalidPriority_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,

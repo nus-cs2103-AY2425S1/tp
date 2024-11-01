@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DATE_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DATE_NONEXISTANT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME_BLANK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME_LENGTH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC;
@@ -60,6 +61,8 @@ public class AddApptCommandParserTest {
     public void parse_allFieldsInvalid_failure() {
         assertParseFailure(parser, APPOINTMENT_DESC_BOB + INVALID_NRIC_DESC, Nric.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, INVALID_APPOINTMENT_NAME_DESC + NRIC_DESC_AMY, Appointment.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_APPOINTMENT_NAME_BLANK_DESC + NRIC_DESC_AMY,
+                           Appointment.MESSAGE_CONSTRAINTS_BLANK);
         assertParseFailure(parser, INVALID_APPOINTMENT_NAME_LENGTH_DESC + NRIC_DESC_AMY,
                            Appointment.MESSAGE_TOO_LONG_CONSTRAINT);
         assertParseFailure(parser, INVALID_APPOINTMENT_DATE_FORMAT_DESC + NRIC_DESC_AMY,

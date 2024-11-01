@@ -44,6 +44,10 @@ public class AddApptCommandParser implements Parser<AddApptCommand> {
         newApptDate = argMultimap.getValue(PREFIX_DATE).orElseThrow(parseException);
         patientNricValue = argMultimap.getValue(PREFIX_NRIC).orElseThrow(parseException);
 
+        if (newApptName.isBlank() || newApptName.isEmpty()) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_BLANK);
+        }
+
         if (!Appointment.isValidAppointmentName(newApptName)) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
