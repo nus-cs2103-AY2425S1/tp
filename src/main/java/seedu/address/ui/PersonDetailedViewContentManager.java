@@ -3,7 +3,8 @@ package seedu.address.ui;
 import seedu.address.model.person.Person;
 
 /**
- * Manages content generation for a {@code Person}'s detailed view, including strings for fields, templates, and button labels.
+ * Manages content generation for a {@code Person}'s detailed view,
+ * including strings for fields, templates, and button labels.
  */
 public class PersonDetailedViewContentManager {
     private final Person person;
