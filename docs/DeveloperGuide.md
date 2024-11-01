@@ -249,7 +249,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user       | see usage instructions                                                           | refer to instructions when I forget how to use the app                               |
 | `* *`    | user       | be given a prompt on what format to enter details                                | easily use commands without having to memorise the accepted format for the CLI entry |
 | `* *`    | user       | edit contacts                                                                    | update details of my contacts                                                        |
-| `* * *`  | researcher | delete participant information in bulk                                           | quickly clear old groups of participants                                             |
+| `* * *`  | researcher | clear participant information in bulk                                           | quickly clear old groups of participants                                             |
 | `* *`    | user       | clear all entries                                                                | efficiently restart my progress                                                      |
 | `* *`    | user       | be prompted for confirmation before clearing my contacts                         | ensure that I do not make a mistake when doing a large irreversible delete           |
 | `* * *`  | researcher | search for participants based on criteria(s) (i.e., study group and/or other details) | quickly locate specific groups of participants                                       |
