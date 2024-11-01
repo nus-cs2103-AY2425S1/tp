@@ -21,8 +21,7 @@ public class SelectCommandParser implements Parser<SelectCommand> {
      */
     public SelectCommand parse(String args) throws ParseException {
         String indexesString = args.trim();
-        // defensive programming may be used here WIP for the split
-        String[] indexStrings = indexesString.split(" ");
+        String[] indexStrings = indexesString.split("\\s+");
         List<Index> indexes = new ArrayList<>();
         for (String indexString : indexStrings) {
             try {
