@@ -135,8 +135,8 @@ public class Patient {
     // ApptList access functions
     /**
      * Returns the most recent past appointment.
-     * @see ApptList#getMostRecentPastAppt()
      * @return Appt
+     * @see ApptList#getMostRecentPastAppt()
      */
     public Appt getMostRecentPastAppt() {
         return appts.getMostRecentPastAppt();
@@ -144,8 +144,8 @@ public class Patient {
 
     /**
      * Returns the most recent future appointment.
-     * @see ApptList#getMostRecentFutureAppt()
      * @return Appt
+     * @see ApptList#getMostRecentFutureAppt()
      */
     public Appt getMostRecentFutureAppt() {
         return appts.getMostRecentFutureAppt();

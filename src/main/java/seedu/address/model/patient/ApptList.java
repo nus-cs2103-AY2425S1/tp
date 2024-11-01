@@ -60,7 +60,7 @@ public class ApptList {
      * Returns the most recent past appointment.
      * @return Appt
      */
-    public  Appt getMostRecentPastAppt() {
+    public Appt getMostRecentPastAppt() {
         LocalDateTime now = LocalDateTime.now();
         return appts.stream()
                 .filter(appt -> appt.getDateTime().isBefore(now))
