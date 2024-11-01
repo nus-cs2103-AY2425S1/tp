@@ -109,7 +109,10 @@ public interface Model {
      */
     boolean containsTag(Tag tag);
 
-    public void setTagsCategory(Tag t, TagCategory cat);
+    /**
+     * Sets {@code TagCategory cat} to be the category of {@code Tag t}.
+     */
+    void setTagsCategory(Tag t, TagCategory cat);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
