@@ -66,7 +66,7 @@ TrueRental is a **desktop app for managing contacts, optimized for use via a Com
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, 'sort' and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -74,7 +74,7 @@ TrueRental is a **desktop app for managing contacts, optimized for use via a Com
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -208,6 +208,12 @@ Format: `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`
 Examples:
 * `list` followed by `rdelete c/2 r/1` deletes the 1st rental information from the 2nd client in the address book.
 * `find Betsy` followed by `rdelete c/1 r/2` deletes the 2nd rental information from the 1st client in the results of the `find` command.
+
+### Sorting all entries : `sort`
+
+Sorts all entries from the address book according to name in alphabetical order.
+
+Format: `sort`
 
 ### Clearing all entries : `clear`
 
