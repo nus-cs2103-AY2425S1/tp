@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import seedu.edulog.commons.exceptions.IllegalValueException;
 import seedu.edulog.model.calendar.Day;
 import seedu.edulog.model.calendar.Description;
-import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.calendar.LessonTime;
 import seedu.edulog.storage.lesson.JsonAdaptedLesson;
 
@@ -56,8 +55,7 @@ public class JsonAdaptedLessonTest {
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, VALID_DAY_OF_WEEK, VALID_START_TIME, VALID_END_TIME);
-        // TODO: Use "Description.class.getSimpleName()" once OOP-ized.
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "description");
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 

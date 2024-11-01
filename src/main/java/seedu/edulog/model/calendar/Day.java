@@ -63,24 +63,24 @@ public class Day {
     private static DayOfWeek processDayOfWeek(String dayOfWeek) {
         checkArgument(checkValidDayOfWeek(dayOfWeek), INVALID_DAY_OF_WEEK);
         switch (dayOfWeek.toLowerCase()) {
-        case "monday":
+        case "monday": case "mon":
             return DayOfWeek.MONDAY;
-        case "tuesday":
+        case "tuesday": case "tue":
             return DayOfWeek.TUESDAY;
-        case "wednesday":
+        case "wednesday": case "wed":
             return DayOfWeek.WEDNESDAY;
-        case "thursday":
+        case "thursday": case "thu":
             return DayOfWeek.THURSDAY;
-        case "friday":
+        case "friday": case "fri":
             return DayOfWeek.FRIDAY;
-        case "saturday":
+        case "saturday": case "sat":
             return DayOfWeek.SATURDAY;
-        case "sunday":
+        case "sunday": case "sun":
             return DayOfWeek.SUNDAY;
         default:
             // because this is prior to a validity check, this use of an unchecked runtime exception is
             // warranted here as it denotes a gross failure of internal data processing.
-            throw new RuntimeException("Something went horribly wrong when parsing a Lesson.");
+            throw new RuntimeException("Something went horribly wrong when parsing a lesson time.");
         }
     }
 

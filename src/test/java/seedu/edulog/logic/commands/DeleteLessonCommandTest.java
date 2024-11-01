@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandFailure;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.edulog.logic.commands.exceptions.CommandException;
@@ -22,7 +19,7 @@ public class DeleteLessonCommandTest {
 
     @Test
     public void deleteValidLesson() throws CommandException {
-        Lesson lesson =new Lesson(new Description("Math"),
+        Lesson lesson = new Lesson(new Description("Math"),
             new Day("Monday"), new LessonTime("1200"), new LessonTime("1300"));;
         Model model = new ModelManager();
         model.addLesson(lesson);

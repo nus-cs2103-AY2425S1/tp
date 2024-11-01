@@ -1,8 +1,5 @@
 package seedu.edulog.testutil;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-
 import seedu.edulog.model.calendar.Day;
 import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
