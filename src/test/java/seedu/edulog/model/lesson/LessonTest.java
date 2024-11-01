@@ -3,10 +3,11 @@ package seedu.edulog.model.lesson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
-import static seedu.edulog.testutil.TypicalLessons.SEC_4_MATH;
-import static seedu.edulog.testutil.TypicalLessons.SEC_3_MATH;
 import static seedu.edulog.testutil.TypicalLessons.SEC_2_MATH;
+import static seedu.edulog.testutil.TypicalLessons.SEC_3_MATH;
+import static seedu.edulog.testutil.TypicalLessons.SEC_4_MATH;
+
+import org.junit.jupiter.api.Test;
 
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.testutil.LessonBuilder;
@@ -27,7 +28,6 @@ public class LessonTest {
             .withStartTime(SEC_3_MATH.getFormattedStartTime())
             .withEndTime(SEC_3_MATH.getFormattedEndTime())
             .build();
-        
         assertTrue(SEC_4_MATH.isSameLesson(editedLesson));
 
         // different description, all other attributes same -> returns false
