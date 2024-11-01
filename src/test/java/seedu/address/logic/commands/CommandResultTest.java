@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Birthdate;
-import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
@@ -54,7 +53,7 @@ public class CommandResultTest {
         healthServices.add(new HealthService("Blood Test"));
         Patient newPatient = new Patient(new Name("Alice"), new Nric("S1111111A"),
                 new Birthdate("2022-11-11"), new Sex("F"),
-                new Phone("1111111"), new Email("123@gmail.com"));
+                new Phone("1111111"));
         assertFalse(commandResult.equals(new CommandResult("feedback", null,
                 false, newPatient, false, false)));
 

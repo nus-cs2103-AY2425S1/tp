@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import java.util.stream.Stream;
@@ -14,6 +15,7 @@ import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
 
 /**
@@ -29,10 +31,10 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
-                        PREFIX_BIRTHDATE);
+                        PREFIX_BIRTHDATE, PREFIX_PHONE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
-                PREFIX_BIRTHDATE) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_BIRTHDATE, PREFIX_PHONE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -41,7 +43,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
         Birthdate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTHDATE).get());
-        Patient patient = new Patient(name, nric, birthDate, sex);
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Patient patient = new Patient(name, nric, birthDate, sex, phone);
 
         return new AddCommand(patient);
     }

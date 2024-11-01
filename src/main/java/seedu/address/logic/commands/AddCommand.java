@@ -40,7 +40,7 @@ public class AddCommand extends Command {
         }
 
         model.addPatient(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), toAdd);
     }
 
     @Override

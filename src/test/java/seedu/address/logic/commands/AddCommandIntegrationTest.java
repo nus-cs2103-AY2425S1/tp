@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -28,15 +27,15 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPatient_success() throws CommandException {
+    public void execute_newPatient_success() {
         Patient validPatient = new PatientBuilder().build();
 
         Model expectedModel = new ModelManager(model.getClinicConnectSystem(), new UserPrefs());
         expectedModel.addPatient(validPatient);
-
-        assertCommandSuccess(new AddCommand(validPatient), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
-                expectedModel);
+        CommandResult expectedCommandResult =
+                new CommandResult(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
+                        null, false, validPatient, false, false);
+        assertCommandSuccess(new AddCommand(validPatient), model, expectedCommandResult, expectedModel);
     }
 
     @Test

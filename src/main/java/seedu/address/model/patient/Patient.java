@@ -2,6 +2,8 @@ package seedu.address.model.patient;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,24 +37,17 @@ public class Patient {
     private ApptList appts = new ApptList();
 
     /**
-     * Name, Nric, Sex, Birthdate and healthservice must be present and not null
-     */
-    public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex) {
-        this(name, nric, birthdate, sex, new Phone("123"), new Email("dummy@gmail.com"));
-    }
-
-    /**
      * Every field must be present and not null.
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex,
-            Phone phone, Email email) {
-        requireAllNonNull(name, nric, birthdate, sex, phone, email);
+                   Phone phone) {
+        requireAllNonNull(name, nric, birthdate, sex, phone);
         this.name = name;
         this.nric = nric;
         this.birthdate = birthdate;
         this.sex = sex;
         this.phone = phone;
-        this.email = email;
+        this.email = null;
         this.address = null;
         this.bloodType = null;
         this.healthRisk = null;
@@ -140,6 +135,22 @@ public class Patient {
     }
 
     // ApptList access functions
+
+    public Appt getMostRecentPastAppt() {
+        LocalDateTime now = LocalDateTime.now();
+        return appts.getAppts().stream()
+                .filter(appt -> appt.getDateTime().isBefore(now))
+                .reduce((first, second) -> second)
+                .orElse(null);
+    }
+
+    public Appt getLatestFutureAppt() {
+        LocalDateTime now = LocalDateTime.now();
+        return appts.getAppts().stream()
+                .filter(appt -> appt.getDateTime().isAfter(now))
+                .findFirst()
+                .orElse(null);
+    }
 
     /**
      * Adds an appointment to the patient's list of appointments.
