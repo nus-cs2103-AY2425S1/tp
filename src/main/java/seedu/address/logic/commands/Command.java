@@ -17,4 +17,14 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model) throws CommandException;
 
+    /**
+     * Checks beforehand if the input is valid.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    public void validateInput(Model model) throws CommandException {
+        // Do nothing
+    }
+
 }

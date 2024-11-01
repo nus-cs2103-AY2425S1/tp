@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ConfirmPrompt extends Command {
     public static final String MESSAGE_CONFIRM_PROMPT = "Please type in command 'confirm' to confirm the operation.\n"
-            + "Otherwise, to cancel the operation.";
+            + "Otherwise, type in command 'cancel', or any other input to cancel the operation.";
 
     private final Command savedCommand;
 
@@ -21,6 +21,7 @@ public class ConfirmPrompt extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        savedCommand.validateInput(model);
         model.setSavedCommand(savedCommand);
 
         return new CommandResult(MESSAGE_CONFIRM_PROMPT, false, false, true, false, -1);

@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -57,6 +56,40 @@ public class DeleteCommand extends Command {
         }
     }
 
+    @Override
+    public void validateInput(Model model) throws CommandException {
+        requireNonNull(model);
+        if (identityNumber == null) {
+            List<Person> lastShownList = model.getFilteredPersonList();
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        } else {
+            List<Person> lastShownList = model.getPersonList();
+            Person personToDelete = null;
+
+            // Find the person by identity number
+            for (Person person : lastShownList) {
+                if (person.getIdentityNumber().equals(identityNumber)) {
+                    personToDelete = person;
+                    break;
+                }
+            }
+
+            // If person was not found, throw an exception
+            if (personToDelete == null) {
+                throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+            }
+        }
+    }
+
+    /**
+     * Deletes the person by identity number.
+     *
+     * @param model The model to execute the command on.
+     * @return The result of the command.
+     * @throws CommandException If the person is not found.
+     */
     private CommandResult deleteByIdentityNumber(Model model) throws CommandException {
         List<Person> lastShownList = model.getPersonList();
         Person personToDelete = null;
@@ -78,6 +111,13 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
+    /**
+     * Deletes the person by index.
+     *
+     * @param model The model to execute the command on.
+     * @return The result of the command.
+     * @throws CommandException If the index is invalid.
+     */
     private CommandResult deleteByIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -106,12 +146,9 @@ public class DeleteCommand extends Command {
     @Override
     public String toString() {
         if (identityNumber != null) {
-            return new ToStringBuilder(this)
-                    .add("identityNumber", identityNumber)
-                    .toString();
+            return "Delete person with NRIC: " + identityNumber;
+        } else {
+            return "Delete person with Index: " + targetIndex.getOneBased();
         }
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
     }
 }
