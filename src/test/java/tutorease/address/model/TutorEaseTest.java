@@ -97,12 +97,6 @@ public class TutorEaseTest {
     }
 
     @Test
-    public void hasSameEmail_samePerson_returnsFalse() {
-        addressBook.addPerson(AMY);
-        assertFalse(addressBook.hasSameEmail(AMY));
-    }
-
-    @Test
     public void hasSameEmail_personWithSameEmailInAddressBook_returnsTrue() {
         addressBook.addPerson(AMY);
         Person personWithSameEmail = new StudentBuilder().withEmail(VALID_EMAIL_AMY).build();

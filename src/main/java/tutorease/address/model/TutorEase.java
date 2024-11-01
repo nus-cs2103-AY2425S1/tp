@@ -74,7 +74,7 @@ public class TutorEase implements ReadOnlyTutorEase {
         requireNonNull(person);
 
         for (Person existingPerson : persons) {
-            if (!existingPerson.equals(person) && existingPerson.hasSamePhone(person)) {
+            if (existingPerson.hasSamePhone(person)) {
                 return true;
             }
         }
@@ -88,7 +88,7 @@ public class TutorEase implements ReadOnlyTutorEase {
         requireNonNull(person);
 
         for (Person existingPerson : persons) {
-            if (!existingPerson.equals(person) && existingPerson.hasSameEmail(person)) {
+            if (existingPerson.hasSameEmail(person)) {
                 return true;
             }
         }
