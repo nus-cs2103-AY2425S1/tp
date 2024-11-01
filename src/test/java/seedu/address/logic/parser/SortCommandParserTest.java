@@ -38,6 +38,15 @@ public class SortCommandParserTest {
                 SortCommand.MESSAGE_AVAILABLE_FIELDS);
     }
 
+
+    @Test
+    public void parse_invalidPreamble_failure() {
+        // invalid preamble
+        assertParseFailure(parser, " pr" + PREFIX_FIELD + INVALID_FIELD + " " + PREFIX_ORDER + VALID_ORDER_LOW,
+                MESSAGE_INVALID_COMMAND_FORMAT + SortCommand.MESSAGE_USAGE);
+    }
+
+
     @Test
     public void parse_invalidOrder_failure() {
         // invalid order
