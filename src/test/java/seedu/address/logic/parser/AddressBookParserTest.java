@@ -55,7 +55,7 @@ import seedu.address.logic.commands.ListPropertiesCommand;
 import seedu.address.logic.commands.ListSellersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Buyer;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.meeting.Meeting;
@@ -177,7 +177,7 @@ public class AddressBookParserTest {
     public void parseCommand_filterClient() throws Exception {
         FilterClientCommand command = (FilterClientCommand) parser.parseCommand(FilterClientCommand.COMMAND_WORD + " "
                 + PREFIX_NAME + VALID_NAME_AMY);
-        assertEquals(new FilterClientCommand(new Name(VALID_NAME_AMY)), command);
+        assertEquals(new FilterClientCommand(new NameWithoutNumber(VALID_NAME_AMY)), command);
     }
 
     @Test
