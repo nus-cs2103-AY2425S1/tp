@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_DEACON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_DEACON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEACON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEACON;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MENTOR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.CLARA;
 import static seedu.address.testutil.TypicalPersons.DEACON;
@@ -22,7 +21,7 @@ public class TuteeTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Tutee tutee = new TuteeBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> tutee.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> tutee.getSubjects().remove(0));
     }
 
     @Test
@@ -35,7 +34,7 @@ public class TuteeTest {
 
         // same name, all other attributes different -> returns true
         Tutee editedClara = new TuteeBuilder(CLARA).withPhone(VALID_PHONE_DEACON).withEmail(VALID_EMAIL_DEACON)
-                .withAddress(VALID_ADDRESS_DEACON).withTags(VALID_TAG_MENTOR).build();
+                .withAddress(VALID_ADDRESS_DEACON).build();
         assertTrue(CLARA.isSamePerson(editedClara));
 
         // different name, all other attributes same -> returns false
@@ -90,10 +89,6 @@ public class TuteeTest {
         // different hours -> returns false
         editedClara = new TuteeBuilder(CLARA).withAddress(VALID_HOURS_DEACON).build();
         assertFalse(CLARA.equals(editedClara));
-
-        // different tags -> returns false
-        editedClara = new TuteeBuilder(CLARA).withTags(VALID_TAG_MENTOR).build();
-        assertFalse(CLARA.equals(editedClara));
     }
 
     @Test
@@ -101,7 +96,7 @@ public class TuteeTest {
         String expected = Tutee.class.getCanonicalName()
                 + "{name=" + CLARA.getName() + ", phone=" + CLARA.getPhone()
                 + ", email=" + CLARA.getEmail() + ", address=" + CLARA.getAddress() + ", hours=" + CLARA.getHours()
-                + ", tags=" + CLARA.getTags() + ", subjects=" + CLARA.getSubjects() + "}";
+                + ", subjects=" + CLARA.getSubjects() + "}";
         assertEquals(expected, CLARA.toString());
     }
 }
