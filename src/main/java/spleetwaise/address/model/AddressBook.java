@@ -12,6 +12,7 @@ import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.UniquePersonList;
+import spleetwaise.commons.model.CommonModel;
 
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by .isSamePerson comparison)
@@ -80,12 +81,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Optional<Person> getPersonByIndex(Index index) {
         requireNonNull(index);
 
-        ObservableList<Person> PersonList = getPersonList();
+        List<Person> lastShownList = CommonModel.getInstance().getFilteredPersonList();
 
-        if (PersonList.isEmpty()) {
+        if (lastShownList.isEmpty()) {
             return Optional.empty();
         }
-        return Optional.of(PersonList.get(index.getZeroBased()));
+        return Optional.of(lastShownList.get(index.getZeroBased()));
     }
 
     /**
