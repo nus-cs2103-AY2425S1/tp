@@ -119,20 +119,6 @@ Examples:
 
   ![result for 'addbuyer n/John p/83456789 e/john@gmail.com'](images/addbuyer.png)
 
-### Filtering clients : `filterclient`
-
-Filters the clients that starts with the prefix provided.
-
-Format: `filterclient n/NAME`
-
-* Filters the client with the specified prefix `NAME`.
-* The `NAME` should only contain alphabetic characters and spaces. It should also ignore extra/leading/trailing spaces.  All names will be converted to lower case and checked against the clientbook.
-
-Examples:
-* `filterclient n/A` filters the clients that starts with the prefix `A`.
-
-  ![result for 'filterclient n/A'](images/filterclient.png)
-
 ### Adding a seller : `addseller`
 
 Add a specified seller into the client book of ClientGrid.
@@ -146,6 +132,20 @@ Examples:
 * `addseller n/Mary p/83456789 e/mary@gmail.com` adds a seller whose name is `Mary`, phone number is `83456789` and email is `mary@gmail.com`.
 
   ![result for 'addseller n/Mary p/83456789 e/mary@gmail.com'](images/addseller.png)
+
+### Filtering clients : `filterclient`
+
+Filters the clients that starts with the prefix provided.
+
+Format: `filterclient n/NAME`
+
+* Filters the client with the specified prefix `NAME`.
+* The `NAME` should only contain alphabetic characters and spaces. It should also ignore extra/leading/trailing spaces.  All names will be converted to lower case and checked against the clientbook.
+
+Examples:
+* `filterclient n/A` filters the clients that starts with the prefix `A`.
+
+  ![result for 'filterclient n/A'](images/filterclient.png)
 
 ### Deleting a buyer : `deletebuyer`
 
