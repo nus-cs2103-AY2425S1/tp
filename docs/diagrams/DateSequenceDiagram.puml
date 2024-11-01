@@ -18,7 +18,7 @@ end box
 [-> LogicManager : execute("date 1 d/31/10/2024")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("date 1 d/31/10/2024")
+LogicManager -> AddressBookParser : parseCommand("date n/Alex Yeoh d/31/10/2024")
 activate AddressBookParser
 
 create DateCommandParser
@@ -28,7 +28,7 @@ activate DateCommandParser
 DateCommandParser --> AddressBookParser
 deactivate DateCommandParser
 
-AddressBookParser -> DateCommandParser : parse("1 d/31/10/2024")
+AddressBookParser -> DateCommandParser : parse("n/Alex Yeoh d/31/10/2024")
 activate DateCommandParser
 
 create DateCommand
