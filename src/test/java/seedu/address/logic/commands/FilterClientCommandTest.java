@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for FilterClientCommand.
@@ -28,7 +28,7 @@ public class FilterClientCommandTest {
     public void execute_matchingName_filterSuccessful() {
         // Test case where a client's name matches the given prefix (valid match)
         String namePrefix = "Bob"; // Matches "Bob"
-        FilterClientCommand command = new FilterClientCommand(new Name(namePrefix));
+        FilterClientCommand command = new FilterClientCommand(new NameWithoutNumber(namePrefix));
 
         Model expectedModel = new ModelManager(new UserPrefs(), model.getPropertyBook(),
                 model.getClientBook(), model.getMeetingBook());
@@ -43,7 +43,7 @@ public class FilterClientCommandTest {
     public void execute_caseInsensitiveMatching_filterSuccessful() {
         // Test case where the filter should work regardless of case (case insensitive)
         String namePrefix = "bob"; // Should match "Bob"
-        FilterClientCommand command = new FilterClientCommand(new Name(namePrefix));
+        FilterClientCommand command = new FilterClientCommand(new NameWithoutNumber(namePrefix));
 
         Model expectedModel = new ModelManager(new UserPrefs(), model.getPropertyBook(),
                 model.getClientBook(), model.getMeetingBook());
@@ -57,9 +57,9 @@ public class FilterClientCommandTest {
 
     @Test
     public void equals() {
-        final FilterClientCommand standardCommand = new FilterClientCommand(new Name(VALID_NAME_AMY));
+        final FilterClientCommand standardCommand = new FilterClientCommand(new NameWithoutNumber(VALID_NAME_AMY));
         // same values -> returns true
-        FilterClientCommand commandWithSameValues = new FilterClientCommand(new Name(VALID_NAME_AMY));
+        FilterClientCommand commandWithSameValues = new FilterClientCommand(new NameWithoutNumber(VALID_NAME_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -68,6 +68,6 @@ public class FilterClientCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ExitCommand()));
         // different name -> returns false
-        assertFalse(standardCommand.equals(new FilterClientCommand(new Name((VALID_NAME_BOB)))));
+        assertFalse(standardCommand.equals(new FilterClientCommand(new NameWithoutNumber((VALID_NAME_BOB)))));
     }
 }
