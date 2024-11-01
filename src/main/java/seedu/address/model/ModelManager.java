@@ -16,8 +16,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
