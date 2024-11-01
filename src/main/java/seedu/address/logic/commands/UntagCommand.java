@@ -23,7 +23,7 @@ public class UntagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tag(s) from a person. "
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TAG + "TAG\n"
+            + PREFIX_TAG + " <TAG that you want to delete>\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 " + PREFIX_TAG + "needs consult";
 

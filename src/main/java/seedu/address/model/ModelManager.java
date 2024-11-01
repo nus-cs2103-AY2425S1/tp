@@ -186,7 +186,12 @@ public class ModelManager implements Model {
      */
     @Override
     public String groupsString() {
-        return groups.toString();
+        if (groups.isEmpty()) {
+            return "no groups found";
+        } else {
+            return groups.toString();
+        }
+
     }
 
     /**
