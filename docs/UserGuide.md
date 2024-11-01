@@ -140,6 +140,7 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* **After using `delete`, type `confirm` to complete the deletion**. You can also use `cancel` if you change your mind.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -147,19 +148,11 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the address book **after confirming the action**.
 
 Format: `clear`
 
-
-### Listing Session logs: `logs`
-
-Lists all logs of a specific patient.
-
-- **Format**: `logs i/[IDENTITY_NUMBER]`
-
-- **Examples**:
-  logs i/S8613282F
+* **After using `clear`, type `confirm` to proceed with the clearing of all entries**. You can also use `cancel` if you change your mind.
 
 ### Confirming a command : `confirm`
 
@@ -179,6 +172,14 @@ Examples:
 * `delete i/S1234567D` followed by `cancel` cancels the deletion of the person with NRIC S1234567D in the address book.
 * `clear` followed by `cancel` cancels the clearing of the address book.
 
+### Listing Session logs: `logs`
+
+Lists all logs of a specific patient.
+
+- **Format**: `logs i/[IDENTITY_NUMBER]`
+
+- **Examples**:
+  logs i/S8613282F
 
 ### Exiting the program : `exit`
 
