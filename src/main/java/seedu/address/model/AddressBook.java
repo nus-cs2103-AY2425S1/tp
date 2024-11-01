@@ -8,7 +8,6 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
