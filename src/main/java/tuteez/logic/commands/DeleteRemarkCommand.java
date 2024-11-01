@@ -1,6 +1,9 @@
 package tuteez.logic.commands;
 
+import static tuteez.logic.parser.CliSyntax.PREFIX_REMARK_INDEX;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
@@ -14,10 +17,17 @@ import tuteez.model.remark.RemarkList;
 /**
  * Deletes a remark from the specified person.
  */
-public class DeleteRemarkCommand extends RemarkCommand {
-    public static final String DELETE_REMARK_PARAM = "-d";
+public class DeleteRemarkCommand extends Command {
+    public static final String COMMAND_WORD = "deleteremark";
+    public static final String COMMAND_WORD_ALT = "delrmk";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " (short form: " + COMMAND_WORD_ALT + ")"
+            + ": Adds a remark for the student identified by the index number in the displayed student list."
+            + "\nParameters: INDEX (must be a positive integer) " + PREFIX_REMARK_INDEX + "REMARK_INDEX\n"
+            + "Example to add remark: " + COMMAND_WORD + " 2 " + PREFIX_REMARK_INDEX + "1\n";
+
     private static final Logger logger = LogsCenter.getLogger(DeleteRemarkCommand.class);
 
+    private final Index personIndex;
     private final Index remarkIndex;
 
     /**
@@ -27,7 +37,7 @@ public class DeleteRemarkCommand extends RemarkCommand {
      * @param remarkIndex Remark to be deleted.
      */
     public DeleteRemarkCommand(Index personIndex, Index remarkIndex) {
-        super(personIndex);
+        this.personIndex = personIndex;
         this.remarkIndex = remarkIndex;
     }
 
@@ -46,6 +56,16 @@ public class DeleteRemarkCommand extends RemarkCommand {
 
         return new CommandResult(String.format("Deleted remark at index %1$s from Person %2$s",
                 remarkIndex.getOneBased(), personIndex.getOneBased()));
+    }
+
+    private Person getPersonFromModel(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (personIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        return lastShownList.get(personIndex.getZeroBased());
     }
 
     private Person deleteRemarkFromPerson(Person person) throws CommandException {

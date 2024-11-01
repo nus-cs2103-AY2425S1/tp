@@ -1,10 +1,14 @@
 package tuteez.logic.commands;
 
+import static tuteez.logic.parser.CliSyntax.PREFIX_REMARK;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
 import tuteez.commons.core.index.Index;
+import tuteez.logic.Messages;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
 import tuteez.model.person.Person;
@@ -14,10 +18,17 @@ import tuteez.model.remark.RemarkList;
 /**
  * Adds a remark to the specified person.
  */
-public class AddRemarkCommand extends RemarkCommand {
-    public static final String ADD_REMARK_PARAM = "-a";
+public class AddRemarkCommand extends Command {
+    public static final String COMMAND_WORD = "addremark";
+    public static final String COMMAND_WORD_ALT = "addrmk";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " (short form: " + COMMAND_WORD_ALT + ")"
+            + ": Adds a remark for the student identified by the index number in the displayed student list."
+            + "\nParameters: INDEX (must be a positive integer)" + PREFIX_REMARK + "REMARK\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_REMARK + "This is a new remark\n";
+
     private static final Logger logger = LogsCenter.getLogger(AddRemarkCommand.class);
 
+    private final Index personIndex;
     private final Remark remarkToAdd;
 
     /**
@@ -27,7 +38,7 @@ public class AddRemarkCommand extends RemarkCommand {
      * @param remarkToAdd Remark to be added.
      */
     public AddRemarkCommand(Index personIndex, Remark remarkToAdd) {
-        super(personIndex);
+        this.personIndex = personIndex;
         this.remarkToAdd = remarkToAdd;
     }
 
@@ -46,6 +57,16 @@ public class AddRemarkCommand extends RemarkCommand {
 
         return new CommandResult(String.format("Added remark to Person %1$s: %2$s",
                 personIndex.getOneBased(), remarkToAdd.toString()));
+    }
+
+    private Person getPersonFromModel(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (personIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        return lastShownList.get(personIndex.getZeroBased());
     }
 
     private Person addRemarkToPerson(Person person) {
