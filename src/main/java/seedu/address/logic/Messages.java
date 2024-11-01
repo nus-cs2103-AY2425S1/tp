@@ -25,13 +25,17 @@ public class Messages {
     public static final String MESSAGE_TRANSACTIONS_LISTED_OVERVIEW = "Listed %1$d transaction(s) of %2$s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format!\nDate format: yyyy-MM-DD";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Incorrect date format or invalid date!\n"
+            + "Date format: YYYY-MM-DD";
     public static final String MESSAGE_INVALID_MONTH_FORMAT = "Incorrect month format or invalid month!\n"
-            + "Month format: yyyy-mm\nValid month is between [1, 12]. Valid year is a positive integer.";
+            + "Month format: YYYY-MM\n"
+            + "Valid month is between [1, 12]. Valid year is a positive integer.";
     public static final String MESSAGE_INVALID_DATE_RANGE = "Invalid date range!\n"
             + "Start date must be before or equal to end date";
-    public static final String MESSAGE_MUST_BE_TRANSACTION_LIST = "%1$s must only be used in transaction list view!";
-    public static final String MESSAGE_MUST_BE_PERSON_LIST = "%1$s must only be used in person list view!";
+    public static final String MESSAGE_MUST_BE_TRANSACTION_LIST = "%1$s must only be used in transaction list view!\n"
+            + "Use listt command to switch to transaction list view of selected client.";
+    public static final String MESSAGE_MUST_BE_PERSON_LIST = "%1$s must only be used in person list view!\n"
+            + "Use list command to switch to person list view.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
