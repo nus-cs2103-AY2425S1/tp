@@ -156,6 +156,7 @@ Format: `addOrder INDEX i/ITEM d/DATE [q/QUANTITY]`
 * The index and quantity **must be a positive integer** 1, 2, 3, …​
 * Date must follow the following format: `DD-MM-YYYY`
 * If the quantity is not provided, the quantity will be set to a default value of **1**.
+* If there is already a pending order with the same `ITEM`, `DATE` and `QUANTITY` under that person, a warning will be given.
 
 Examples:
 * `addOrder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd person in the address book.
