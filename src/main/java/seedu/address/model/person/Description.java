@@ -8,14 +8,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable;
  */
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS = "Description can take on any value,"
-        + " but should not be blank or more than 500 characters";
+    public static final String MESSAGE_CONSTRAINTS = "Description can take on any value or just blank,"
+        + " but should not be more than 500 characters";
 
     /*
      * The input can take on any character, and can be empty,
      * The length of the string should not be more than 500 characters.
      */
-    public static final String VALIDATION_REGEX = "^.{1,500}$";
+    public static final String VALIDATION_REGEX = "^.{0,500}$";
 
     public final String value;
 
@@ -35,6 +35,13 @@ public class Description {
      */
     public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the description is empty or blank
+     */
+    public boolean isBlank() {
+        return value.isBlank();
     }
 
     @Override

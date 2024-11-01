@@ -2,6 +2,7 @@ package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -49,7 +50,8 @@ public class EditCommand extends Command {
             + " | " + PREFIX_EMAIL + "EMAIL) "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]+ "
-            + "[" + PREFIX_MODULE + "(+ | -)(MODULECODE[-ROLETYPE])+]\n"
+            + "[" + PREFIX_MODULE + "(+ | -)(MODULECODE[-ROLETYPE])+]"
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -172,6 +174,20 @@ public class EditCommand extends Command {
             isChanged = true;
             changesDescription.append(EditModuleRoleOperation.getModuleCodeChangesDescription(
                     personBefore.getModuleRoleMap(), personAfter.getModuleRoleMap())).append("\n");
+        }
+        if (!personBefore.getDescription().equals(personAfter.getDescription())) {
+            isChanged = true;
+            changesDescription.append("Description: ")
+                .append(personBefore.getDescription()
+                    .filter(value -> !value.isBlank())
+                    .map(Objects::toString)
+                    .orElse("<no description>"))
+                .append(" -> ")
+                .append(personAfter.getDescription()
+                    .filter(value -> !value.isBlank())
+                    .map(Objects::toString)
+                    .orElse("<no description>"))
+                .append("\n");
         }
 
         return isChanged ? changesDescription.toString() : "No changes made.";

@@ -135,7 +135,8 @@ public class Person {
         address.ifPresent(addr -> builder.add("address", addr));
         builder.add("tags", tags)
                 .add("roles", moduleRoleMap);
-        description.ifPresent(description -> builder.add("description", description));
+        description.filter(value -> !value.isBlank())
+            .ifPresent(description -> builder.add("description", description));
 
         return builder.toString();
     }
@@ -171,7 +172,7 @@ public class Person {
     /**
      * Returns true if this person has a non-null description.
      */
-    public boolean hasDescription() {
-        return this.description.isPresent();
+    public boolean hasNonEmptyDescription() {
+        return description.filter(value -> !value.isBlank()).isPresent();
     }
 }
