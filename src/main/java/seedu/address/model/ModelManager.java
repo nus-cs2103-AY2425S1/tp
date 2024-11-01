@@ -40,7 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         historyCommandList = new HistoryCommandList();
         versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(this.versionedAddressBook.current.getPersonList());
+        filteredPersons = new FilteredList<>(this.versionedAddressBook.getCurrentAddressBook().getPersonList());
     }
 
     public ModelManager() {
@@ -86,12 +86,12 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.versionedAddressBook.current.resetData(addressBook);
+        this.versionedAddressBook.getCurrentAddressBook().resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook.current;
+        return versionedAddressBook.getCurrentAddressBook();
     }
 
     /**
@@ -103,7 +103,14 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Saves the current AddressBook state in the history.
+     * Returns {@code VersionedAddressBook} for testing purpose.
+     */
+    protected VersionedAddressBook getVersionedAddressBook() {
+        return this.versionedAddressBook;
+    }
+
+    /**
+     * Saves the getCurrentAddressBook() AddressBook state in the history.
      */
     @Override
     public void commitAddressBook() {
@@ -118,27 +125,20 @@ public class ModelManager implements Model {
         versionedAddressBook.undoAddressBook();
     }
 
-    /**
-     * Returns {@code VersionedAddressBook} for testing purpose.
-     */
-    protected  VersionedAddressBook getVersionedAddressBook() {
-        return this.versionedAddressBook;
-    }
-
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return versionedAddressBook.current.hasPerson(person);
+        return versionedAddressBook.getCurrentAddressBook().hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        versionedAddressBook.current.removePerson(target);
+        versionedAddressBook.getCurrentAddressBook().removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        versionedAddressBook.current.addPerson(person);
+        versionedAddressBook.getCurrentAddressBook().addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -146,7 +146,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        versionedAddressBook.current.setPerson(target, editedPerson);
+        versionedAddressBook.getCurrentAddressBook().setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -178,7 +178,8 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return versionedAddressBook.current.equals(otherModelManager.versionedAddressBook.current)
+        return versionedAddressBook.getCurrentAddressBook()
+                .equals(otherModelManager.versionedAddressBook.getCurrentAddressBook())
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }

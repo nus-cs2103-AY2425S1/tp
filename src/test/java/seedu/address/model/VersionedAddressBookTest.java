@@ -55,7 +55,7 @@ public class VersionedAddressBookTest {
 
     @Test
     void testUndoAddressBook() throws CommandException {
-        assertEquals(addressBook1, versionedAddressBook.current);
+        assertEquals(addressBook1, versionedAddressBook.getCurrentAddressBook());
         assertEquals(addressBook1, versionedAddressBook.getAddressBookStateList().get(0));
 
         model.setAddressBook(addressBook2);
@@ -66,12 +66,12 @@ public class VersionedAddressBookTest {
         expectedStateList.add(new AddressBook(addressBook2));
         assertEquals(expectedStateList, versionedAddressBook.getAddressBookStateList());
 
-        assertEquals(addressBook2, versionedAddressBook.current);
+        assertEquals(addressBook2, versionedAddressBook.getCurrentAddressBook());
         assertEquals(addressBook2, versionedAddressBook.getAddressBookStateList().get(1));
 
         versionedAddressBook.undoAddressBook();
         // Check if the current state is reverted to addressBook1
-        assertEquals(addressBook1, versionedAddressBook.current);
+        assertEquals(addressBook1, versionedAddressBook.getCurrentAddressBook());
     }
 
 

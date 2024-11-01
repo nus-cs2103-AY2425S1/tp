@@ -9,11 +9,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * Represents the different states of the Address Book for the user.
  */
 public class VersionedAddressBook extends AddressBook {
+    public static final String MESSAGE_CONSTRAINTS = "This is the earliest version that user can retrieve";
     private final ArrayList<AddressBook> addressBookStateList;
     private int currentStatePointer;
-    public AddressBook current;
+    private AddressBook current;
 
-    public static final String MESSAGE_CONSTRAINTS = "This is the earliest version that user can retrieve";
 
     /**
      * Constructs a state list for the address book and saves the initial copy.
@@ -75,5 +75,12 @@ public class VersionedAddressBook extends AddressBook {
     @Override
     public int hashCode() {
         return Objects.hash(addressBookStateList);
+    }
+
+    /**
+     * Returns the current version of {@code AddressBook}.
+     */
+    public AddressBook getCurrentAddressBook() {
+        return this.current;
     }
 }
