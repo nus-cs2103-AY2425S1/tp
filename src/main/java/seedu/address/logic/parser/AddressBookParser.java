@@ -8,9 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-<<<<<<< HEAD
 import seedu.address.logic.commands.*;
-=======
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -27,7 +25,6 @@ import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SetRsvpCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
->>>>>>> master
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
