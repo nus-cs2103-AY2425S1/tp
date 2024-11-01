@@ -94,7 +94,7 @@ _Refer to the [Features](#features) section for details of each command!_
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a popup window with a link to the User Guide.
 
 ![help message](images/helpMessage.png)
 
@@ -126,18 +126,24 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD-TAG] [-t/DELETE-TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags:
+  * Prefix:`t/ADD-TAG]` 
+    - the added tags will be **appended** to the list of existing tags i.e adding of tags does not overwrite existing tags.
+    - if the tag name you entered to add **already exists**, the edit will be successful but you will get the warning:
+      `You tried adding an already existing study group tag.`
+  * Prefix: `-t/DELETE-TAG]` 
+    - the tags specified will be **deleted** from the list of existing tags.
+    - if the tag name you entered to delete **does not exist**, the edit will be successful but you will get the warning:
+      `You tried removing a nonexistent study group tag.`
+* When editing **all other fields** : Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 a/29 e/johndoe@example.com` Edits the age and email address of the 1st person to be `29` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/1B -t/2B` Edits the name of the 2nd person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`
 
 ### Locating persons by criteria: `find`
 
@@ -206,11 +212,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ResearchRoster data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ResearchRoster data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
