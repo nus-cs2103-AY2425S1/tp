@@ -153,7 +153,7 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-1. The deadline field will show an `OVERDUE` label if the deadline has passed and the client status is still `active`, so if the client has paid, and your business with them is finished, remember to set their client status to 'old' so the deadline field doesn't show `OVERDUE`.
+The deadline field will show an `OVERDUE` label if the deadline has passed and the client status is still `active`, so if the client has paid, and your business with them is finished, remember to set their client status to 'old' so the deadline field doesn't show `OVERDUE`.
 </div>
 
 ### Locating Clients By Name: `find`
