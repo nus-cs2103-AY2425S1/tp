@@ -172,9 +172,13 @@ If the constraints are not met, the `AddCommandParser` will throw a `ParseExcept
 Otherwise, a new instance of `Student` is created with the values obtained from the user input. 
 A new instance of `AddCommand` is then created with the `Student` instance.
 
-On execution, {to be updated by dan / saha}
+On execution, `AddCommand` first queries the supplied model if it contains a student with both an identical name **and** an identical phone number. If no such student exists, `AddCommand` then calls on `model::addStudent` to add the student into the addressBook data.
 
+Finally, `AddCommand` queries the model to see if the student's schedule clashes with others in the address book. If conflicts are found, a warning message is displayed along with the conflicting students.
 
+Below is an activity diagram when [Adding a new student](#add-a-new-student)
+
+<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
 
 
 The following sequence diagram shows how an add operation goes through the `Logic` component:
