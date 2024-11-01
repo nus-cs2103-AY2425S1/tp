@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.sortcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import java.util.Comparator;
@@ -20,11 +21,10 @@ public class SortGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "sort_g";
     public static final String COMMAND_WORD_ALIAS = "sg";
-    public static final int LIST_GROUP_MARKER = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-            + ": Sorts all groups.\n"
-            + "Example: " + COMMAND_WORD;
+        + ": Sorts all groups.\n"
+        + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Sorted all groups by group name in alphabetical order";
 
@@ -52,6 +52,6 @@ public class SortGroupCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .toString();
+            .toString();
     }
 }

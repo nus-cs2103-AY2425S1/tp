@@ -83,6 +83,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
     private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPreFixes) {
         for (Prefix prefix : invalidPreFixes) {
             if (arg.contains(prefix.getPrefix())) {

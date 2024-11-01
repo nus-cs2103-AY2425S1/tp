@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
@@ -29,7 +30,7 @@ import seedu.address.model.task.Task;
  */
 public class EditGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit_grp";
+    public static final String COMMAND_WORD = "edit_g";
     public static final String COMMAND_WORD_ALIAS = "eg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
@@ -52,7 +53,7 @@ public class EditGroupCommand extends Command {
     private final EditGroupDescriptor editGroupDescriptor;
 
     /**
-     * @param index              of the group to edit
+     * @param index               of the group to edit
      * @param editGroupDescriptor details to edit the student with
      */
     public EditGroupCommand(Index index, EditGroupDescriptor editGroupDescriptor) {
@@ -82,7 +83,8 @@ public class EditGroupCommand extends Command {
 
         model.setGroup(groupToEdit, editedGroup);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, Messages.format(editedGroup)));
+        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, Messages.format(editedGroup)),
+            LIST_GROUP_MARKER);
     }
 
     /**

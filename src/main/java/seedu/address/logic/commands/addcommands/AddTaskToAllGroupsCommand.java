@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.addcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_TASK_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
@@ -24,25 +25,23 @@ import seedu.address.model.task.TaskName;
  */
 public class AddTaskToAllGroupsCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_task_all";
-    public static final String COMMAND_WORD_ALIAS = "ata";
-    public static final int LIST_TASK_MARKER = 2;
+    public static final String COMMAND_WORD = "add_t";
+    public static final String COMMAND_WORD_ALIAS = "at";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-            + ": Adds a task to all groups.\n"
-            + "Parameters: "
-            + PREFIX_TASK_NAME + "TASK_NAME "
-            + PREFIX_TASK_DEADLINE + "TASK_DATE "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_NAME + "Complete this task "
-            + PREFIX_TASK_DEADLINE + "2024-01-01 1300 ";
+        + ": Adds a task to all groups.\n"
+        + "Parameters: "
+        + PREFIX_TASK_NAME + "TASK_NAME "
+        + PREFIX_TASK_DEADLINE + "TASK_DATE "
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_TASK_NAME + "Complete this task "
+        + PREFIX_TASK_DEADLINE + "2024-01-01 1300 ";
 
     public static final String MESSAGE_SUCCESS = "Added task: %1$s";
     public static final String MESSAGE_OVERDUE_WARNING = "WARNING: Task will be marked as overdue";
     public static final String NO_GROUPS = "There are currently no groups.";
 
     private final TaskName taskName;
-
     private final Deadline deadline;
 
     /**
@@ -66,7 +65,7 @@ public class AddTaskToAllGroupsCommand extends Command {
             task.decreaseGroupWithTask();
             model.addTask(task);
         }
-        for (Group g: groups) {
+        for (Group g : groups) {
             if (!model.hasTaskInGroup(task, g)) {
                 model.addTaskToGroup(task, g);
                 model.increaseGroupWithTask(task);
@@ -82,7 +81,7 @@ public class AddTaskToAllGroupsCommand extends Command {
                     task.getTaskName().toString()), LIST_TASK_MARKER);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
-                task.getTaskName().taskName), LIST_TASK_MARKER);
+            task.getTaskName().taskName), LIST_TASK_MARKER);
     }
 
     @Override
@@ -103,14 +102,14 @@ public class AddTaskToAllGroupsCommand extends Command {
 
         AddTaskToAllGroupsCommand otherAddTaskToAllGroupsCommand = (AddTaskToAllGroupsCommand) other;
         return taskName.equals(otherAddTaskToAllGroupsCommand.taskName)
-                && deadline.equals(otherAddTaskToAllGroupsCommand.deadline);
+            && deadline.equals(otherAddTaskToAllGroupsCommand.deadline);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("taskName", taskName)
-                .add("deadline", deadline)
-                .toString();
+            .add("taskName", taskName)
+            .add("deadline", deadline)
+            .toString();
     }
 }

@@ -27,6 +27,7 @@ public class DeleteStudentFromGroupCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteStudentCommand
      * and returns a DeleteStudentCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteStudentFromGroupCommand parse(String args) throws ParseException {
@@ -40,10 +41,10 @@ public class DeleteStudentFromGroupCommandParser {
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_NUMBER)
-                || !arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteStudentFromGroupCommand.MESSAGE_USAGE));
+                DeleteStudentFromGroupCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER);

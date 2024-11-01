@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.deletecommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.List;
@@ -21,7 +22,6 @@ import seedu.address.model.student.Student;
 public class DeleteGroupCommand extends Command {
     public static final String COMMAND_WORD = "del_g";
     public static final String COMMAND_WORD_ALIAS = "dg";
-    public static final int LIST_GROUP_MARKER = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes the group identified by the group name used.\n"

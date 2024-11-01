@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.findcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.ListMarkers.LIST_STUDENT_MARKER;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -19,7 +20,6 @@ public class FindStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "find_s";
     public static final String COMMAND_WORD_ALIAS = "fs";
-    public static final int LIST_STUDENT_MARKER = 0;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Finds all students whose fields contain any of "
