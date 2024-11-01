@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithRen
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +21,23 @@ import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
 import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
+import seedu.address.model.tag.TagsContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
+    private static final NameContainsKeywordsPredicate EMPTY_NAME_PREDICATE =
+            new NameContainsKeywordsPredicate(List.of());
+    private static final PhoneContainsKeywordsPredicate EMPTY_PHONE_PREDICATE =
+            new PhoneContainsKeywordsPredicate(List.of());
+    private static final EmailContainsKeywordsPredicate EMPTY_EMAIL_PREDICATE =
+            new EmailContainsKeywordsPredicate(List.of());
+    private static final TagsContainsKeywordsPredicate EMPTY_TAGS_PREDICATE =
+            new TagsContainsKeywordsPredicate(List.of());
+    private static final RentalInformationContainsKeywordsPredicate EMPTY_RENTAL_PREDICATE =
+            new RentalInformationContainsKeywordsPredicate(List.of());
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -38,6 +51,8 @@ public class FindCommandTest {
                 new PhoneContainsKeywordsPredicate(Collections.singletonList("98761111"));
         EmailContainsKeywordsPredicate emailPredicate1 =
                 new EmailContainsKeywordsPredicate(Collections.singletonList("alice@example.com"));
+        TagsContainsKeywordsPredicate tagsPredicate1 =
+                new TagsContainsKeywordsPredicate(Collections.singletonList("friends"));
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate1 =
                 new RentalInformationContainsKeywordsPredicate(Collections.singletonList("8100"));
 
@@ -47,20 +62,22 @@ public class FindCommandTest {
                 new PhoneContainsKeywordsPredicate(Collections.singletonList("22222222"));
         EmailContainsKeywordsPredicate emailPredicate2 =
                 new EmailContainsKeywordsPredicate(Collections.singletonList("bob@example.com"));
+        TagsContainsKeywordsPredicate tagsPredicate2 =
+                new TagsContainsKeywordsPredicate(Collections.singletonList("owesMoney"));
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate2 =
                 new RentalInformationContainsKeywordsPredicate(Collections.singletonList("2700"));
 
         FindCommand findFirstCommand =
-                new FindCommand(namePredicate1, phonePredicate1, emailPredicate1, rentalInfoPredicate1);
+                new FindCommand(namePredicate1, phonePredicate1, emailPredicate1, tagsPredicate1, rentalInfoPredicate1);
         FindCommand findSecondCommand =
-                new FindCommand(namePredicate2, phonePredicate2, emailPredicate2, rentalInfoPredicate2);
+                new FindCommand(namePredicate2, phonePredicate2, emailPredicate2, tagsPredicate2, rentalInfoPredicate2);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
         FindCommand findFirstCommandCopy =
-                new FindCommand(namePredicate1, phonePredicate1, emailPredicate1, rentalInfoPredicate1);
+                new FindCommand(namePredicate1, phonePredicate1, emailPredicate1, tagsPredicate1, rentalInfoPredicate1);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -69,7 +86,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different client -> returns false
+        // different predicates -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
@@ -81,9 +98,14 @@ public class FindCommandTest {
         EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(" ");
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(" ");
 
-        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        FindCommand command = new FindCommand(namePredicate,
+                phonePredicate,
+                emailPredicate,
+                EMPTY_TAGS_PREDICATE,
+                rentalInfoPredicate);
         expectedModel.updateFilteredPersonList(
                 namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -98,9 +120,14 @@ public class FindCommandTest {
         EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
 
-        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        FindCommand command = new FindCommand(namePredicate,
+                phonePredicate,
+                emailPredicate,
+                EMPTY_TAGS_PREDICATE,
+                rentalInfoPredicate);
         expectedModelWithRental.updateFilteredPersonList(
                 namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+
         assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
         assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
     }
@@ -115,9 +142,14 @@ public class FindCommandTest {
         EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
 
-        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        FindCommand command = new FindCommand(namePredicate,
+                phonePredicate,
+                emailPredicate,
+                EMPTY_TAGS_PREDICATE,
+                rentalInfoPredicate);
         expectedModelWithRental.updateFilteredPersonList(
                 namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+
         assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
         assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
     }
@@ -132,9 +164,14 @@ public class FindCommandTest {
         EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
 
-        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        FindCommand command = new FindCommand(namePredicate,
+                phonePredicate,
+                emailPredicate,
+                EMPTY_TAGS_PREDICATE,
+                rentalInfoPredicate);
         expectedModelWithRental.updateFilteredPersonList(
                 namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+
         assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
         assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
     }
@@ -149,9 +186,14 @@ public class FindCommandTest {
         EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
 
-        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        FindCommand command = new FindCommand(namePredicate,
+                phonePredicate,
+                emailPredicate,
+                EMPTY_TAGS_PREDICATE,
+                rentalInfoPredicate);
         expectedModelWithRental.updateFilteredPersonList(
                 namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+
         assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
         assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
     }
@@ -166,9 +208,14 @@ public class FindCommandTest {
         EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
 
-        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        FindCommand command = new FindCommand(namePredicate,
+                phonePredicate,
+                emailPredicate,
+                EMPTY_TAGS_PREDICATE,
+                rentalInfoPredicate);
         expectedModelWithRental.updateFilteredPersonList(
                 namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+
         assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
         assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
     }
@@ -183,9 +230,14 @@ public class FindCommandTest {
         EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
 
-        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        FindCommand command = new FindCommand(namePredicate,
+                phonePredicate,
+                emailPredicate,
+                EMPTY_TAGS_PREDICATE,
+                rentalInfoPredicate);
         expectedModelWithRental.updateFilteredPersonList(
                 namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+
         assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
         assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
     }
@@ -198,13 +250,17 @@ public class FindCommandTest {
                 new PhoneContainsKeywordsPredicate(Collections.singletonList("98761111"));
         EmailContainsKeywordsPredicate emailPredicate =
                 new EmailContainsKeywordsPredicate(Collections.singletonList("alice@example.com"));
+        TagsContainsKeywordsPredicate tagsPredicate =
+                new TagsContainsKeywordsPredicate(Collections.singletonList("friends"));
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate =
                 new RentalInformationContainsKeywordsPredicate(Collections.singletonList("8100"));
 
-        FindCommand findCommand = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        FindCommand findCommand =
+                new FindCommand(namePredicate, phonePredicate, emailPredicate, tagsPredicate, rentalInfoPredicate);
         String expected = FindCommand.class.getCanonicalName() + "{namePredicate=" + namePredicate
                 + ", phonePredicate=" + phonePredicate
                 + ", emailPredicate=" + emailPredicate
+                + ", tagsPredicate=" + tagsPredicate
                 + ", rentalInfoPredicate=" + rentalInfoPredicate + "}";
         assertEquals(expected, findCommand.toString());
     }

@@ -22,23 +22,25 @@ import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
 import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
+import seedu.address.model.tag.TagsContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
     private FindCommandParser parser = new FindCommandParser();
+
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
     @Test
     public void parse_validName_returnsFindCommand() {
-        List<String> keywords = new ArrayList<>();
-        keywords.add(("Alice"));
+        List<String> keywords = List.of("Alice");
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(keywords),
                         new PhoneContainsKeywordsPredicate(keywords),
                         new EmailContainsKeywordsPredicate(keywords),
+                        new TagsContainsKeywordsPredicate(keywords),
                         new RentalInformationContainsKeywordsPredicate(keywords));
 
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_NAME_DESC_ALICE, expectedFindCommand);
@@ -52,7 +54,9 @@ public class FindCommandParserTest {
                 new FindCommand(new NameContainsKeywordsPredicate(keywords),
                         new PhoneContainsKeywordsPredicate(keywords),
                         new EmailContainsKeywordsPredicate(keywords),
+                        new TagsContainsKeywordsPredicate(keywords),
                         new RentalInformationContainsKeywordsPredicate(keywords));
+
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_PHONE_DESC_ALICE, expectedFindCommand);
     }
 
@@ -64,7 +68,9 @@ public class FindCommandParserTest {
                 new FindCommand(new NameContainsKeywordsPredicate(keywords),
                         new PhoneContainsKeywordsPredicate(keywords),
                         new EmailContainsKeywordsPredicate(keywords),
+                        new TagsContainsKeywordsPredicate(keywords),
                         new RentalInformationContainsKeywordsPredicate(keywords));
+
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_EMAIL_DESC_ALICE, expectedFindCommand);
     }
 
@@ -76,7 +82,9 @@ public class FindCommandParserTest {
                 new FindCommand(new NameContainsKeywordsPredicate(keywords),
                         new PhoneContainsKeywordsPredicate(keywords),
                         new EmailContainsKeywordsPredicate(keywords),
+                        new TagsContainsKeywordsPredicate(keywords),
                         new RentalInformationContainsKeywordsPredicate(keywords));
+
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_ADDRESS_DESC_ONE, expectedFindCommand);
     }
 

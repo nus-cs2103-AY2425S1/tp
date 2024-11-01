@@ -100,6 +100,7 @@ public class FindCommand extends Command {
                 .add("namePredicate", namePredicate)
                 .add("phonePredicate", phonePredicate)
                 .add("emailPredicate", emailPredicate)
+                .add("tagsPredicate", tagsPredicate)
                 .add("rentalInfoPredicate", rentalInfoPredicate)
                 .toString();
     }
