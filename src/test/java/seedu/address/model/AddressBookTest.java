@@ -64,6 +64,26 @@ public class AddressBookTest {
     }
 
     @Test
+    public void removeStudent_validStudent_alsoRemovedFromConsultsAndLessons() {
+        // setup
+        AddressBook addressBooks = new AddressBook();
+        addressBooks.addStudent(ALICE);
+        Consultation consultWithAlice = new ConsultationBuilder().withStudent(ALICE).build();
+        Lesson lessonWithAlice = new LessonBuilder().withStudent(ALICE).build();
+        addressBooks.addConsult(consultWithAlice);
+        addressBooks.addLesson(lessonWithAlice);
+        // remove ALICE
+        assert addressBooks.hasStudent(ALICE);
+        addressBooks.removeStudent(ALICE);
+        // check for no ALICE
+        Consultation resultConsult = addressBooks.getConsultList().get(0);
+        Lesson resultLesson = addressBooks.getLessonList().get(0);
+        assertFalse(addressBooks.hasStudent(ALICE));
+        assertFalse(resultConsult.hasStudent(ALICE));
+        assertFalse(resultLesson.hasStudent(ALICE));
+    }
+
+    @Test
     public void hasStudent_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasStudent(null));
     }
