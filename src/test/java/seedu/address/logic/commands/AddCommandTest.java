@@ -94,7 +94,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook(ReadOnlyAddressBook previousState) {
+        public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 

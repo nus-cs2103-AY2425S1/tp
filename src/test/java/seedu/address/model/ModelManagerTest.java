@@ -74,7 +74,7 @@ public class ModelManagerTest {
         AddressBook addressBook1 = new AddressBook();
         AddressBook addressBook2 = getTypicalAddressBook();
         ModelManager model = new ModelManager(addressBook1, new UserPrefs());
-        model.commitAddressBook(addressBook2);
+        model.commitAddressBook();
         model.setAddressBook(addressBook2);
 
         assertEquals(addressBook2, model.getAddressBook());

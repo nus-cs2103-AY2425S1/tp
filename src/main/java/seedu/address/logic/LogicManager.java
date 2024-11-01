@@ -53,7 +53,6 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        ReadOnlyAddressBook previousState = model.getAddressBook();
         commandResult = command.execute(model);
 
         if (command instanceof AddCommand
@@ -61,7 +60,7 @@ public class LogicManager implements Logic {
                 || command instanceof DeleteCommand
                 || command instanceof EditCommand) {
             model.addHistoryCommand(command, commandText);
-            model.commitAddressBook(previousState);
+            model.commitAddressBook();
         }
 
         try {

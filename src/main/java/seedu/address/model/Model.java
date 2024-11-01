@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.person.Person;
 
@@ -67,15 +68,15 @@ public interface Model {
     /**
      * Saves the current AddressBook state in the history.
      */
-    public void commitAddressBook(ReadOnlyAddressBook previousState);
+    public void commitAddressBook();
 
     /**
-     * Reverses the AddressBook to the previous state.
+     * Reverts the AddressBook to the previous state.
      */
-    public void undoAddressBook();
+    public void undoAddressBook() throws CommandException;
 
     /**
-     * Get the AddressBook in previous state at specific index for testing purpose.
+     * Gets the AddressBook in previous state at specific index for testing purpose.
      */
     AddressBook getVersionedAddressBook(int index);
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 
 public class VersionedAddressBookTest {
@@ -45,7 +46,7 @@ public class VersionedAddressBookTest {
     }
 
     @Test
-    void testUndoAddressBook() {
+    void testUndoAddressBook() throws CommandException {
         versionedAddressBook.commitAddressBook(addressBook2);
 
         ArrayList<AddressBook> expectedStateList = new ArrayList<>();

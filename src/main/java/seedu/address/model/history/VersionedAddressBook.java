@@ -3,6 +3,7 @@ package seedu.address.model.history;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 
 /**
@@ -11,6 +12,8 @@ import seedu.address.model.AddressBook;
 public class VersionedAddressBook {
     private final ArrayList<AddressBook> addressBookStateList;
     private int currentStatePointer;
+
+    public static final String MESSAGE_CONSTRAINTS = "This is the earliest version that user can retrieve";
 
     /**
      * Constructs a state list for the address book and saves the initial copy.
@@ -30,20 +33,26 @@ public class VersionedAddressBook {
     }
 
     /**
-     * Reverses the given AddressBook to the previous state.
+     * Reverts the given AddressBook to the previous state.
      */
-    public void undoAddressBook(AddressBook addressBook) {
-        assert currentStatePointer >= 0 : "This is the earliest version that user can retrieve";
+    public void undoAddressBook(AddressBook addressBook) throws CommandException {
+        if (!(currentStatePointer >= 0)) {
+            throw new CommandException(MESSAGE_CONSTRAINTS);
+        }
         currentStatePointer--;
         AddressBook previousState = addressBookStateList.get(currentStatePointer);
         addressBook.resetData(previousState);
     }
 
     /**
-     * Returns the address book state list for testing purpose.
+     * Return an unmodifiable list containing copies of the AddressBook instances for testing purpose.
      */
     public ArrayList<AddressBook> getAddressBookStateList() {
-        return addressBookStateList;
+        ArrayList<AddressBook> copy = new ArrayList<>();
+        for (AddressBook addressBook : addressBookStateList) {
+            copy.add(new AddressBook(addressBook)); // Assuming AddressBook is immutable
+        }
+        return copy;
     }
 
     @Override

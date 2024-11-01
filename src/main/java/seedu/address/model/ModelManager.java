@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.history.HistoryCommandList;
 import seedu.address.model.history.VersionedAddressBook;
@@ -162,7 +163,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<HistoryCommand> getHistoryCommandList() {
-        return FXCollections.observableArrayList(historyCommandList.getHistoryCommands());
+        return FXCollections.unmodifiableObservableList(historyCommandList.getHistoryCommands());
     }
 
     /**
@@ -179,14 +180,14 @@ public class ModelManager implements Model {
      * Saves the current AddressBook state in the history.
      */
     @Override
-    public void commitAddressBook(ReadOnlyAddressBook previousState) {
+    public void commitAddressBook() {
         versionedAddressBook.commitAddressBook(addressBook);
     }
 
     /**
      * Reverses the AddressBook to the previous state.
      */
-    public void undoAddressBook() {
+    public void undoAddressBook() throws CommandException {
         versionedAddressBook.undoAddressBook(addressBook);
     }
 
