@@ -6,7 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLAIM;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ public class DeleteClaimsCommandParserTest {
         String userInput = "1 " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "1";
 
         DeleteClaimsCommand expectedCommand = new DeleteClaimsCommand(
-                INDEX_FIRST_PERSON, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
+                INDEX_FIRST_CLIENT, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
 
         DeleteClaimsCommand actualCommand = parser.parse(userInput);
         assertEquals(expectedCommand, actualCommand);
@@ -91,7 +91,7 @@ public class DeleteClaimsCommandParserTest {
         String userInput = " 1 " + PREFIX_POLICY_TYPE + " health " + PREFIX_CLAIM_INDEX + " 1 ";
 
         DeleteClaimsCommand expectedCommand = new DeleteClaimsCommand(
-                INDEX_FIRST_PERSON, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
+                INDEX_FIRST_CLIENT, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
 
         DeleteClaimsCommand actualCommand = parser.parse(userInput);
         assertEquals(expectedCommand, actualCommand);

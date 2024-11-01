@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.POLICY_TYPE_DESC_HEAL
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_TYPE_HEALTH;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,8 +23,8 @@ public class DeletePolicyCommandParserTest {
     public void parse_allFieldsPresent_success() {
         final Set<PolicyType> policyTypes = new HashSet<>();
         policyTypes.add(PolicyType.HEALTH);
-        String userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_HEALTH;
-        DeletePolicyCommand expectedCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes);
+        String userInput = INDEX_FIRST_CLIENT.getOneBased() + POLICY_TYPE_DESC_HEALTH;
+        DeletePolicyCommand expectedCommand = new DeletePolicyCommand(INDEX_FIRST_CLIENT, policyTypes);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -43,7 +43,7 @@ public class DeletePolicyCommandParserTest {
         assertParseFailure(parser, "-1 pt/life", expectedMessage);
 
         // no policies
-        assertParseFailure(parser, String.valueOf(INDEX_FIRST_PERSON.getOneBased()), expectedMessage);
+        assertParseFailure(parser, String.valueOf(INDEX_FIRST_CLIENT.getOneBased()), expectedMessage);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class DeletePolicyCommandParserTest {
         assertParseFailure(parser, "foo" + VALID_POLICY_TYPE_HEALTH, expectedMessage);
 
         // invalid policy type
-        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
+        assertParseFailure(parser, INDEX_FIRST_CLIENT.getOneBased() + INVALID_POLICY_TYPE_DESC,
                 PolicyType.MESSAGE_CONSTRAINTS);
     }
 }

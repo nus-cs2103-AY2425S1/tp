@@ -8,10 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLAIM;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
 import java.util.Set;
 
@@ -27,11 +27,11 @@ import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimList;
 import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.claim.EditClaimDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
@@ -51,7 +51,7 @@ public class EditClaimCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalPrudy(), new UserPrefs());
 
     }
 
@@ -64,22 +64,22 @@ public class EditClaimCommandTest {
     @Test
     public void constructor_nullPolicyType_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new EditClaimCommand(INDEX_FIRST_PERSON, null, validClaimIndex, descriptor));
+                new EditClaimCommand(INDEX_FIRST_CLIENT, null, validClaimIndex, descriptor));
     }
 
     @Test
     public void constructor_nullClaimIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new EditClaimCommand(INDEX_FIRST_PERSON, validPolicyType, null, descriptor));
+                new EditClaimCommand(INDEX_FIRST_CLIENT, validPolicyType, null, descriptor));
     }
 
     @Test
-    public void execute_invalidPersonIndex_throwsCommandException() {
-        // Test with an out-of-bounds index for the person list
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+    public void execute_invalidClientIndex_throwsCommandException() {
+        // Test with an out-of-bounds index for the client list
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
         EditClaimCommand editClaimCommand = new EditClaimCommand(outOfBoundsIndex, validPolicyType,
                 validClaimIndex, descriptor);
-        assertCommandFailure(editClaimCommand, model, EditClaimCommand.MESSAGE_INVALID_PERSON_INDEX);
+        assertCommandFailure(editClaimCommand, model, EditClaimCommand.MESSAGE_INVALID_CLIENT_INDEX);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class EditClaimCommandTest {
         editClaimDescriptor.setDescription("Updated claim details.");
 
         EditClaimCommand expectedCommand = new EditClaimCommand(
-                INDEX_FIRST_PERSON, PolicyType.HEALTH, INDEX_FIRST_CLAIM, editClaimDescriptor);
+                INDEX_FIRST_CLIENT, PolicyType.HEALTH, INDEX_FIRST_CLAIM, editClaimDescriptor);
 
         // Parse the user input and get the actual command
         EditClaimCommand actualCommand = parser.parse(userInput);
@@ -105,17 +105,17 @@ public class EditClaimCommandTest {
 
     @Test
     public void execute_validClaimEdit_updatesModelAndReturnsSuccessMessage() {
-        Person personWithClaim = createPersonWithHealthPolicyAndClaim(
+        Client clientWithClaim = createClientWithHealthPolicyAndClaim(
                 "John Doe", "98765432", "john@example.com", "123 Main St");
 
-        // replace the person in the model with the person that includes a claim
-        model.setPerson(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()), personWithClaim);
+        // replace the client in the model with the client that includes a claim
+        model.setClient(model.getFilteredClientList().get(INDEX_SECOND_CLIENT.getZeroBased()), clientWithClaim);
 
-        EditClaimCommand editClaimsCommand = new EditClaimCommand(INDEX_SECOND_PERSON, PolicyType.HEALTH,
+        EditClaimCommand editClaimsCommand = new EditClaimCommand(INDEX_SECOND_CLIENT, PolicyType.HEALTH,
                 INDEX_FIRST_CLAIM, descriptor);
 
         String expectedMessage = String.format(EditClaimCommand.MESSAGE_EDIT_CLAIM_SUCCESS, PolicyType.HEALTH,
-                personWithClaim.getName(), ClaimStatus.PENDING, "Surgery claim");
+                clientWithClaim.getName(), ClaimStatus.PENDING, "Surgery claim");
 
         assertCommandSuccess(editClaimsCommand, model, expectedMessage, model);
     }
@@ -123,9 +123,9 @@ public class EditClaimCommandTest {
 
     @Test
     public void equals() {
-        EditClaimCommand editClaimCommand1 = new EditClaimCommand(INDEX_FIRST_PERSON, validPolicyType,
+        EditClaimCommand editClaimCommand1 = new EditClaimCommand(INDEX_FIRST_CLIENT, validPolicyType,
                 validClaimIndex, descriptor);
-        EditClaimCommand editClaimCommand2 = new EditClaimCommand(INDEX_FIRST_PERSON, validPolicyType,
+        EditClaimCommand editClaimCommand2 = new EditClaimCommand(INDEX_FIRST_CLIENT, validPolicyType,
                 validClaimIndex, descriptor);
 
         // same object -> returns true
@@ -140,17 +140,17 @@ public class EditClaimCommandTest {
         assert(!editClaimCommand1.equals(editClaimDifferentIndex));
 
         // different policy type -> returns false
-        EditClaimCommand editClaimDifferentPolicy = new EditClaimCommand(INDEX_FIRST_PERSON, PolicyType.LIFE,
+        EditClaimCommand editClaimDifferentPolicy = new EditClaimCommand(INDEX_FIRST_CLIENT, PolicyType.LIFE,
                 validClaimIndex, descriptor);
         assert(!editClaimCommand1.equals(editClaimDifferentPolicy));
 
         // different claim index -> returns false
-        EditClaimCommand editClaimDifferentClaimIndex = new EditClaimCommand(INDEX_FIRST_PERSON, validPolicyType,
+        EditClaimCommand editClaimDifferentClaimIndex = new EditClaimCommand(INDEX_FIRST_CLIENT, validPolicyType,
                 Index.fromOneBased(2), descriptor);
         assert(!editClaimCommand1.equals(editClaimDifferentClaimIndex));
     }
 
-    public static Person createPersonWithHealthPolicyAndClaim(String name, String phone, String email, String address) {
+    public static Client createClientWithHealthPolicyAndClaim(String name, String phone, String email, String address) {
         Claim claim = new Claim(ClaimStatus.PENDING, "Surgery claim needed");
 
         HealthPolicy healthPolicy = new HealthPolicy(null, null, null,
@@ -159,7 +159,7 @@ public class EditClaimCommandTest {
         PolicySet policySet = new PolicySet();
         policySet.add(healthPolicy);
 
-        return new Person(new Name(name), new Phone(phone), new Email(email),
+        return new Client(new Name(name), new Phone(phone), new Email(email),
                 new Address(address), Set.of(), policySet);
     }
 }

@@ -17,20 +17,20 @@ import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimList;
 import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.claim.EditClaimDescriptor;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Represents a command to edit a claim for a specific policy of a person in the address book.
+ * Represents a command to edit a claim for a specific policy of a client in Prudy.
  */
 public class EditClaimCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-claim";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits a claim from the person identified by the index number used in the displayed person list.\n"
+            + ": Edits a claim from the client identified by the index number used in the displayed client list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_POLICY_TYPE + "POLICY_TYPE "
             + PREFIX_CLAIM_INDEX + "CLAIM_INDEX (must be a positive integer) "
@@ -45,31 +45,31 @@ public class EditClaimCommand extends Command {
             + PREFIX_CLAIM_DESC + "Updated claim details.\n";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
-    public static final String MESSAGE_EDIT_CLAIM_SUCCESS = "Claim edited for policy type '%1$s' of person: %2$s.\n\n"
+    public static final String MESSAGE_EDIT_CLAIM_SUCCESS = "Claim edited for policy type '%1$s' of client: %2$s.\n\n"
             + "Updated Claim Details:\nStatus: %3$s | Description: %4$s.";
     public static final String MESSAGE_NO_CLAIM_FOUND = "No claim found at the specified index to edit.";
-    public static final String MESSAGE_INVALID_PERSON_INDEX = "The person index provided is invalid.";
-    public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for person: %2$s";
+    public static final String MESSAGE_INVALID_CLIENT_INDEX = "The client index provided is invalid.";
+    public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for client: %2$s";
     public static final String MESSAGE_DUPLICATE_CLAIM = "This claim already exists in the policy.";
     public static final String MESSAGE_NOT_CHANGED = "This claim has not been changed";
 
-    private final Index personIndex;
+    private final Index clientIndex;
     private final PolicyType policyType;
     private final Index claimIndex;
     private final EditClaimDescriptor editClaimDescriptor;
 
     /**
-     * Creates an EditClaimCommand to edit the specified claim for a person.
+     * Creates an EditClaimCommand to edit the specified claim for a client.
      *
-     * @param personIndex       The index of the person whose claim is to be edited.
+     * @param clientIndex       The index of the client whose claim is to be edited.
      * @param policyType        The type of policy associated with the claim.
      * @param claimIndex        The index of the claim to be edited.
      * @param editClaimDescriptor The descriptor containing the details to edit the claim.
      */
-    public EditClaimCommand(Index personIndex, PolicyType policyType, Index claimIndex,
+    public EditClaimCommand(Index clientIndex, PolicyType policyType, Index claimIndex,
                             EditClaimDescriptor editClaimDescriptor) {
-        requireAllNonNull(personIndex, policyType, claimIndex, editClaimDescriptor);
-        this.personIndex = personIndex;
+        requireAllNonNull(clientIndex, policyType, claimIndex, editClaimDescriptor);
+        this.clientIndex = clientIndex;
         this.policyType = policyType;
         this.claimIndex = claimIndex;
         this.editClaimDescriptor = editClaimDescriptor;
@@ -85,10 +85,10 @@ public class EditClaimCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person personToEdit = getPersonFromList(model, personIndex);
-        Set<Policy> policySet = personToEdit.getPolicies();
+        Client clientToEdit = getClientFromList(model, clientIndex);
+        Set<Policy> policySet = clientToEdit.getPolicies();
 
-        Policy policy = getPolicyFromPerson(personToEdit, policyType);
+        Policy policy = getPolicyFromClient(clientToEdit, policyType);
 
         Claim oldClaim = getOldClaim(policy, claimIndex);
         Claim editedClaim = createEditedClaim(oldClaim, editClaimDescriptor);
@@ -100,45 +100,45 @@ public class EditClaimCommand extends Command {
         Policy editedPolicy = createEditedPolicy(policy, oldClaim, editedClaim);
         updatedPolicySet.add(editedPolicy);
 
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), updatedPolicySet);
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
+                clientToEdit.getAddress(), clientToEdit.getTags(), updatedPolicySet);
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setClient(clientToEdit, editedClient);
 
-        return new CommandResult(String.format(MESSAGE_EDIT_CLAIM_SUCCESS, policyType, personToEdit.getName(),
+        return new CommandResult(String.format(MESSAGE_EDIT_CLAIM_SUCCESS, policyType, clientToEdit.getName(),
                 editedClaim.getStatus(), editedClaim.getClaimDescription()));
     }
 
     /**
-     * Retrieves a person from the model's filtered person list using the specified index.
+     * Retrieves a client from the model's filtered client list using the specified index.
      *
-     * @param model       The model containing the list of persons.
-     * @param personIndex The index of the person to retrieve.
-     * @return The person corresponding to the specified index.
+     * @param model       The model containing the list of clients.
+     * @param clientIndex The index of the client to retrieve.
+     * @return The client corresponding to the specified index.
      * @throws CommandException If the provided index is invalid.
      */
-    private Person getPersonFromList(Model model, Index personIndex) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (personIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_INDEX);
+    private Client getClientFromList(Model model, Index clientIndex) throws CommandException {
+        List<Client> lastShownList = model.getFilteredClientList();
+        if (clientIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_CLIENT_INDEX);
         }
-        return lastShownList.get(personIndex.getZeroBased());
+        return lastShownList.get(clientIndex.getZeroBased());
     }
 
     /**
-     * Retrieves the policy of the specified type from the person.
+     * Retrieves the policy of the specified type from the client.
      *
-     * @param person     The person whose policies are to be checked.
+     * @param client     The client whose policies are to be checked.
      * @param policyType The type of policy to look for.
      * @return The policy of the specified type.
      * @throws CommandException If no policy of the specified type is found.
      */
-    private Policy getPolicyFromPerson(Person person, PolicyType policyType) throws CommandException {
-        return person.getPolicies().stream()
+    private Policy getPolicyFromClient(Client client, PolicyType policyType) throws CommandException {
+        return client.getPolicies().stream()
                 .filter(x -> x.getType().equals(policyType))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(
-                        String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType, person.getName())));
+                        String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType, client.getName())));
     }
 
     /**
@@ -216,7 +216,7 @@ public class EditClaimCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this || (other instanceof EditClaimCommand
-                && personIndex.equals(((EditClaimCommand) other).personIndex)
+                && clientIndex.equals(((EditClaimCommand) other).clientIndex)
                 && policyType.equals(((EditClaimCommand) other).policyType)
                 && claimIndex.equals(((EditClaimCommand) other).claimIndex)
                 && editClaimDescriptor.equals(((EditClaimCommand) other).editClaimDescriptor));

@@ -14,13 +14,13 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.CompositePredicate;
-import seedu.address.model.person.EmailMatchesPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneMatchesPredicate;
-import seedu.address.model.person.PolicyTypeMatchesPredicate;
+import seedu.address.model.client.AddressContainsKeywordsPredicate;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.CompositePredicate;
+import seedu.address.model.client.EmailMatchesPredicate;
+import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.client.PhoneMatchesPredicate;
+import seedu.address.model.client.PolicyTypeMatchesPredicate;
 import seedu.address.model.policy.PolicyType;
 
 /**
@@ -52,7 +52,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         // Initialize the list of predicates
-        List<Predicate<Person>> predicatesList = new ArrayList<>();
+        List<Predicate<Client>> predicatesList = new ArrayList<>();
 
         // Process name parameter
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -121,7 +121,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         // Combine all predicates into a CompositePredicate
-        Predicate<Person> combinedPredicate = new CompositePredicate(predicatesList);
+        Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
 
         return new FindCommand(combinedPredicate);
     }

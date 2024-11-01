@@ -5,15 +5,15 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyPrudy" as ReadOnlyPrudy
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class Prudy
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
+Class UniqueClientList
+Class Client
 Class Address
 Class Email
 Class Name
@@ -33,23 +33,23 @@ Class I #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Prudy .up.|> ReadOnlyPrudy
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyPrudy
+ModelManager -left-> "1" Prudy
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
-Person *--> PolicySet
+Prudy *--> "1" UniqueClientList
+UniqueClientList --> "~* all" Client
+Client *--> Name
+Client *--> Phone
+Client *--> Email
+Client *--> Address
+Client *--> "*" Tag
+Client *--> PolicySet
 PolicySet --> LifePolicy
 PolicySet --> HealthPolicy
 PolicySet --> EducationPolicy
@@ -59,12 +59,12 @@ EducationPolicy --|> Policy
 Policy --> ClaimSet
 ClaimSet --> "*" Claim
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Client -[hidden]up--> I
+UniqueClientList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Client
 @enduml

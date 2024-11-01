@@ -14,11 +14,11 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+package "Prudy Storage" #F4F6F6{
+Class "<<interface>>\nPrudyStorage" as PrudyStorage
+Class JsonPrudyStorage
+Class JsonSerializablePrudy
+Class JsonAdaptedClient
 Class JsonAdaptedTag
 Class JsonAdaptedPolicy
 }
@@ -30,16 +30,16 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" PrudyStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> PrudyStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
-JsonAdaptedPerson --> "*" JsonAdaptedPolicy
+JsonPrudyStorage .up.|> PrudyStorage
+JsonPrudyStorage ..> JsonSerializablePrudy
+JsonSerializablePrudy --> "*" JsonAdaptedClient
+JsonAdaptedClient --> "*" JsonAdaptedTag
+JsonAdaptedClient --> "*" JsonAdaptedPolicy
 
 @enduml

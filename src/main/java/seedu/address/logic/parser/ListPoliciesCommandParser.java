@@ -23,7 +23,7 @@ public class ListPoliciesCommandParser implements Parser<ListPoliciesCommand> {
 
         Index index;
         try {
-            // parse preamble as the person index
+            // parse preamble as the client index
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

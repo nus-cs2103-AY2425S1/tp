@@ -9,7 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.EditPolicyDescriptor;
 import seedu.address.model.policy.ExpiryDate;
@@ -27,8 +27,8 @@ public class EditPolicyCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
     public static final String MESSAGE_POLICY_NOT_FOUND = "Policy of specified type does not exist for client.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the specified policy for the person identified "
-            + "by the index number used in the last person listing. \n"
+            + ": Updates the specified policy for the client identified "
+            + "by the index number used in the last client listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + "pt/[POLICY_TYPE] pa/[PREMIUM_AMOUNT] ca/[COVERAGE_AMOUNT] ed/[EXPIRY_DATE]\n"
             + "Example: "
@@ -55,33 +55,33 @@ public class EditPolicyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
 
-        if (index.getZeroBased() >= model.getFilteredPersonList().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (index.getZeroBased() >= model.getFilteredClientList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        PolicySet personPolicies = new PolicySet();
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        personPolicies.addAll(personToEdit.getPolicies());
+        PolicySet clientPolicies = new PolicySet();
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
+        clientPolicies.addAll(clientToEdit.getPolicies());
 
         PolicyType policyTypeToEdit = editPolicyDescriptor.getPolicyType();
-        Policy policyToRemove = findPolicyByType(personPolicies, policyTypeToEdit);
+        Policy policyToRemove = findPolicyByType(clientPolicies, policyTypeToEdit);
 
         if (policyToRemove == null) {
             throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
         }
 
-        personPolicies.remove(policyToRemove.getType());
+        clientPolicies.remove(policyToRemove.getType());
         Policy editedPolicy = createEditedPolicy(policyToRemove, editPolicyDescriptor);
-        personPolicies.add(editedPolicy);
+        clientPolicies.add(editedPolicy);
 
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), personPolicies);
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
+                clientToEdit.getAddress(), clientToEdit.getTags(), clientPolicies);
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setClient(clientToEdit, editedClient);
         return new CommandResult(String.format("Updated policy\n\n%s policy for %s has been changed to:\n"
-                + "%s ", policyTypeToEdit, personToEdit.getName(), editedPolicy));
+                + "%s ", policyTypeToEdit, clientToEdit.getName(), editedPolicy));
 
     }
 

@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,10 +17,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimStatus;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.PolicyType;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ClientBuilder;
 
 public class AddClaimCommandTest {
 
@@ -42,38 +42,38 @@ public class AddClaimCommandTest {
     @Test
     public void constructor_nullClaim_throwsNullPointerException() {
         Assertions.assertThrows(NullPointerException.class, () ->
-                new AddClaimCommand(INDEX_FIRST_PERSON, null, validPolicyType));
+                new AddClaimCommand(INDEX_FIRST_CLIENT, null, validPolicyType));
     }
 
     @Test
     public void constructor_nullPolicyType_throwsNullPointerException() {
         Assertions.assertThrows(NullPointerException.class, () ->
-                new AddClaimCommand(INDEX_FIRST_PERSON, validClaim, null));
+                new AddClaimCommand(INDEX_FIRST_CLIENT, validClaim, null));
     }
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_PERSON, validClaim, validPolicyType);
+        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_CLIENT, validClaim, validPolicyType);
         assertThrows(NullPointerException.class, () -> command.execute(null));
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
         AddClaimCommand addClaimCommand = new AddClaimCommand(outOfBoundIndex, validClaim, validPolicyType);
-        assertCommandFailure(addClaimCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(addClaimCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_addClaim_success() {
-        // create a person with an existing policy
-        Person person = createPersonWithPolicy();
-        model.addPerson(person);
+        // create a client with an existing policy
+        Client client = createClientWithPolicy();
+        model.addClient(client);
 
         // add the Health Policy claim
         Claim claim = new Claim(ClaimStatus.PENDING, "Surgery");
-        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_PERSON, claim, person.getPolicies()
+        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_CLIENT, claim, client.getPolicies()
                 .iterator().next().getType());
 
         // expected success message
@@ -85,14 +85,14 @@ public class AddClaimCommandTest {
 
     @Test
     public void execute_duplicateClaim_throwsCommandException() {
-        // create a person with an existing policy and a claim
-        Person person = createPersonWithPolicyAndClaim();
-        model.addPerson(person);
+        // create a client with an existing policy and a claim
+        Client client = createClientWithPolicyAndClaim();
+        model.addClient(client);
 
         // attempt to add the same claim again
         Claim duplicateClaim = new Claim(ClaimStatus.PENDING, "Surgery");
-        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_PERSON, duplicateClaim,
-                person.getPolicies().iterator().next().getType());
+        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_CLIENT, duplicateClaim,
+                client.getPolicies().iterator().next().getType());
 
         // expect failure due to the duplicate claim
         assertCommandFailure(command, model, AddClaimCommand.MESSAGE_CLAIM_EXISTS);
@@ -105,14 +105,14 @@ public class AddClaimCommandTest {
         PolicyType healthPolicy = PolicyType.HEALTH;
         PolicyType lifePolicy = PolicyType.LIFE;
 
-        AddClaimCommand addClaimFirstCommand = new AddClaimCommand(INDEX_FIRST_PERSON, claim1, healthPolicy);
-        AddClaimCommand addClaimSecondCommand = new AddClaimCommand(INDEX_FIRST_PERSON, claim2, lifePolicy);
+        AddClaimCommand addClaimFirstCommand = new AddClaimCommand(INDEX_FIRST_CLIENT, claim1, healthPolicy);
+        AddClaimCommand addClaimSecondCommand = new AddClaimCommand(INDEX_FIRST_CLIENT, claim2, lifePolicy);
 
         // same object -> returns true
         Assertions.assertEquals(addClaimFirstCommand, addClaimFirstCommand);
 
         // same values -> returns true
-        AddClaimCommand addClaimFirstCommandCopy = new AddClaimCommand(INDEX_FIRST_PERSON, claim1, healthPolicy);
+        AddClaimCommand addClaimFirstCommandCopy = new AddClaimCommand(INDEX_FIRST_CLIENT, claim1, healthPolicy);
         Assertions.assertEquals(addClaimFirstCommand, addClaimFirstCommandCopy);
 
         // different types -> returns false
@@ -125,21 +125,21 @@ public class AddClaimCommandTest {
         Assertions.assertFalse(addClaimFirstCommand.equals(addClaimSecondCommand));
     }
 
-    private Person createPersonWithPolicy() {
-        // initialize a person with a health policy (without claims)
+    private Client createClientWithPolicy() {
+        // initialize a client with a health policy (without claims)
         HealthPolicy policy = new HealthPolicy();
-        return new PersonBuilder().withPolicy(policy).build();
+        return new ClientBuilder().withPolicy(policy).build();
     }
 
 
-    private Person createPersonWithPolicyAndClaim() {
-        // initialize a person with a health policy and a claim
+    private Client createClientWithPolicyAndClaim() {
+        // initialize a client with a health policy and a claim
         HealthPolicy policy = new HealthPolicy();
         Claim claim = new Claim(ClaimStatus.PENDING, "Surgery");
 
         policy.getClaimList().add(claim);
 
-        return new PersonBuilder().withPolicy(policy).build();
+        return new ClientBuilder().withPolicy(policy).build();
     }
 
 }

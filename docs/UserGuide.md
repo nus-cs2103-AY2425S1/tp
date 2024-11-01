@@ -269,7 +269,7 @@ Format: `exit`
 Prudy data are saved on the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### 5.1.5 Editing the Data File
-Prudy data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing this file.
+Prudy data are saved automatically as a JSON file `[JAR file location]/data/prudy.json`. Advanced users are welcome to update data directly by editing this file.
 
 <box type="warning" seamless>
 **Caution:**  

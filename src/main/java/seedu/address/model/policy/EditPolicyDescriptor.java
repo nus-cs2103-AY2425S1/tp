@@ -3,7 +3,7 @@ package seedu.address.model.policy;
 import java.util.Optional;
 
 /**
- * Represents a descriptor used to edit policy details in the policy book.
+ * Represents a descriptor used to edit policy details in Prudy.
  * Stores optional fields that can be modified (e.g. premium amount, coverage amount, expiry date),
  * while keeping the immutable policy type.
  */
