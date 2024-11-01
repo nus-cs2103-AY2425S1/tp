@@ -90,6 +90,21 @@ public class UpdateTaskCommandParserTest {
                 new UpdateTaskCommand(new Name(VALID_NAME_AMY), Index.fromOneBased(1), descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // multiple spaces in name
+        String multiSpaceName = " " + PREFIX_NAME + "Amy   Bee   ";
+        userInput = multiSpaceName + TASK_INDEX_DESC + TASK_DESCRIPTION_DESC_AMY + TASK_DEADLINE_DESC_AMY;
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // different casing in name
+        String differentCasingName = " " + PREFIX_NAME + "AMY bEe";
+        userInput = differentCasingName + TASK_INDEX_DESC + TASK_DESCRIPTION_DESC_AMY + TASK_DEADLINE_DESC_AMY;
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // multiple spaces and different casing in name
+        String validName = " " + PREFIX_NAME + "   AmY    bEE  ";
+        userInput = validName + TASK_INDEX_DESC + TASK_DESCRIPTION_DESC_AMY + TASK_DEADLINE_DESC_AMY;
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
