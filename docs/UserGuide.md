@@ -168,7 +168,7 @@ Examples:
 
 Adds a person to Teacher's Pet.
 
-Format: `comment INDEX c/ COMMENT`
+Format: `comment INDEX c/COMMENT`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Each person can only have one comment, to delete a comment use the same command `comment INDEX c/` but without
@@ -179,7 +179,7 @@ any COMMENT.
 * The COMMENT refers to any input you want to use as a comment.
 
 Examples:
-* `comment 1 c/ Is always late to class.`
+* `comment 1 c/Is always late to class.`
 * `comment 1 c/`
 
 ---
@@ -281,7 +281,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]` <br> e.g., `add n/James Ho id/A1234567X nid/E1234567 m/Computer Science y/2 g/group 4`
 **Clear** | `clear`
-**Comment** | `comment INDEX c/ COMMENT`<br> e.g., `comment 1 c/ Is always late to class`
+**Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`<br> e.g.,`edit 1 n/James Lee m/4`
 **Find** | `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`<br> e.g., `find n/ James Jake`, `find id/ A1234567E A2345678B`, `find n/ Alice id/ A1234567E`

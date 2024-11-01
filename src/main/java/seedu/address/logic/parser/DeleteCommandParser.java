@@ -23,13 +23,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 throw new ParseException(MESSAGE_DELETE_EMPTY_INDEX);
             }
             Index index = ParserUtil.parseIndex(args);
+
             return new DeleteCommand(index);
         } catch (ParseException pe) {
             String errorMessage = String.format("%s \n%s",
                     pe.getMessage(),
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-            throw new ParseException(
-                    String.format(errorMessage), pe);
+
+            throw new ParseException(String.format(errorMessage), pe);
         }
     }
 }

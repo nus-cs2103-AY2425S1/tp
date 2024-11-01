@@ -39,6 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_MAJOR_BOB = "Law";
     public static final String VALID_YEAR_AMY = "1";
     public static final String VALID_YEAR_BOB = "3";
+    public static final String VALID_COMMENT_BOB = "Late for class";
     public static final String VALID_TAG_HUSBAND = "group 1";
     public static final String VALID_TAG_FRIEND = "group 2";
 

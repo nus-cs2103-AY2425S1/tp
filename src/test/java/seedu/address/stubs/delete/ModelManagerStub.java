@@ -27,7 +27,7 @@ public class ModelManagerStub implements Model {
     private static final Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
+     * Does nothing.
      */
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -35,7 +35,7 @@ public class ModelManagerStub implements Model {
     }
 
     /**
-     * Returns the user prefs.
+     * Returns a null user prefs.
      */
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
@@ -43,7 +43,7 @@ public class ModelManagerStub implements Model {
     }
 
     /**
-     * Returns the user prefs' GUI settings.
+     * Returns a null user prefs' GUI settings.
      */
     @Override
     public GuiSettings getGuiSettings() {
@@ -51,7 +51,7 @@ public class ModelManagerStub implements Model {
     }
 
     /**
-     * Sets the user prefs' GUI settings.
+     * Does nothing.
      */
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
@@ -59,7 +59,7 @@ public class ModelManagerStub implements Model {
     }
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns a null user prefs' address book file path.
      */
     @Override
     public Path getAddressBookFilePath() {
@@ -67,7 +67,7 @@ public class ModelManagerStub implements Model {
     }
 
     /**
-     * Sets the user prefs' address book file path.
+     * Does nothing.
      */
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
@@ -75,14 +75,14 @@ public class ModelManagerStub implements Model {
     }
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Does nothing.
      */
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
 
     }
 
-    /** Returns the AddressBook */
+    /** Returns a null AddressBook */
     public ReadOnlyAddressBook getAddressBook() {
         return null;
     }
@@ -96,8 +96,7 @@ public class ModelManagerStub implements Model {
     }
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Does nothing.
      */
     @Override
     public void deletePerson(Person target) {
@@ -105,8 +104,7 @@ public class ModelManagerStub implements Model {
     }
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Does nothing.
      */
     @Override
     public void addPerson(Person person) {
@@ -114,24 +112,21 @@ public class ModelManagerStub implements Model {
     }
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Does nothing.
      */
     @Override
     public void setPerson(Person target, Person editedPerson) {
 
     }
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns a null unmodifiable view of the filtered person list */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return null;
     }
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Does nothing.
      */
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
