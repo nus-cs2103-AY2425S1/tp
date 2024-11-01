@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,21 +66,17 @@ public class JsonTransactionBookStorageTest {
     }
 
     @Test
-    public void readTxnBook_invalidPerson_throwDataLoadingException() {
-        Assert.assertThrows(DataLoadingException.class,
-                "spleetwaise.address.commons.exceptions.IllegalValueException: Person with id "
-                        + "420yoloswag not found!", () -> readTxnBook("invalidPersonTransactionBook" + ".json")
-        );
+    public void readTxnBook_invalidPerson_throwDataLoadingException() throws Exception {
+        Optional<ReadOnlyTransactionBook> optionalTb = readTxnBook("invalidPersonTransactionBook" + ".json");
+        assert optionalTb.isPresent();
+        assertEquals(0, optionalTb.get().getTransactionList().size());
     }
 
     @Test
-    public void readTxnBook_missingAmount_throwDataLoadingException() {
-        Assert.assertThrows(
-                DataLoadingException.class,
-                "spleetwaise.address.commons.exceptions.IllegalValueException:"
-                        + " Transaction's Amount field is missing!", (
-                ) -> readTxnBook("missingAmountTransactionBook" + ".json")
-        );
+    public void readTxnBook_missingAmount_throwDataLoadingException() throws Exception {
+        Optional<ReadOnlyTransactionBook> optionalTb = readTxnBook("missingAmountTransactionBook" + ".json");
+        assert optionalTb.isPresent();
+        assertEquals(0, optionalTb.get().getTransactionList().size());
     }
 
     @Test
