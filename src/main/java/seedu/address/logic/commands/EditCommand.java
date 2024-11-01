@@ -42,11 +42,9 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_WORD_ALIAS = "e";
 
-    // TODO: usage message includes the 2 fields, but edit command does not support the 3 fields right now
-    // (except for monthspaid)
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "by the index number used in the displayed person list.\n"
+            + "Existing values will be overwritten by the input values. Empty fields are allowed.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
