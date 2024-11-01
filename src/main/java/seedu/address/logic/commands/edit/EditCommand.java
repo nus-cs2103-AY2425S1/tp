@@ -25,6 +25,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.Name;
@@ -114,6 +115,9 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         ModuleRoleMap updatedModuleRoleMap;
+
+        Description updatedDescription = editPersonDescriptor.getDescription()
+            .or(personToEdit::getDescription).orElse(null);
         try {
             // The following code intentionally avoids the use of functional programming.
             // Reason being Optional.map() does not allow throwing checked exceptions.
@@ -129,7 +133,7 @@ public class EditCommand extends Command {
 
         return new Person(updatedName, Optional.ofNullable(updatedPhone), Optional.ofNullable(updatedEmail),
                 Optional.ofNullable(updatedAddress),
-                updatedTags, updatedModuleRoleMap);
+                updatedTags, updatedModuleRoleMap, Optional.ofNullable(updatedDescription));
     }
 
     /**
@@ -208,6 +212,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private EditModuleRoleOperation editModuleRoleOperation;
+        private Description description;
 
         public EditPersonDescriptor() {}
 
@@ -222,13 +227,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setModuleRoleOperation(toCopy.editModuleRoleOperation);
+            setDescription(toCopy.description);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, editModuleRoleOperation);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, editModuleRoleOperation, description);
         }
 
         public void setName(Name name) {
@@ -288,6 +294,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(editModuleRoleOperation);
         }
 
+        public void setDescription(Description description) {
+            this.description = description;
+        }
+
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -305,7 +319,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(editModuleRoleOperation, otherEditPersonDescriptor.editModuleRoleOperation);
+                    && Objects.equals(editModuleRoleOperation, otherEditPersonDescriptor.editModuleRoleOperation)
+                    && Objects.equals(description, otherEditPersonDescriptor.description);
         }
 
         @Override
@@ -317,6 +332,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("tags", tags)
                     .add("editModuleRoleOperation", editModuleRoleOperation)
+                    .add("description", description)
                     .toString();
         }
     }

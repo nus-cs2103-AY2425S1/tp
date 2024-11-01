@@ -3,6 +3,10 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_ANDY;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BETTY;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BETTY;
@@ -28,6 +32,10 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ANDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BETTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_ROLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -67,20 +75,27 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB)
+            .withTags(VALID_TAG_FRIEND)
+            .withDescription(VALID_DESCRIPTION_BOB)
+            .build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + MODULE_ROLE_DESC + DESCRIPTION_DESC_BOB,
+            new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB)
-            .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+            .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+            .withDescription(VALID_DESCRIPTION_BOB)
+            .build();
 
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPersonMultipleTags));
+                + TAG_DESC_FRIEND + MODULE_ROLE_DESC + DESCRIPTION_DESC_BOB,
+            new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -150,42 +165,59 @@ public class AddCommandParserTest {
     @Test
     public void parse_tagFieldMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY)
+            .withTags()
+            .withDescription(VALID_DESCRIPTION_AMY)
+            .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
+                + MODULE_ROLE_DESC + DESCRIPTION_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_addressFieldMissing_success() {
         // no address
-        Person expectedPerson = new PersonBuilder(BETTY).withTags("friend").withEmptyAddress().build();
+        Person expectedPerson = new PersonBuilder(BETTY)
+            .withTags("friend")
+            .withEmptyAddress()
+            .withDescription(VALID_DESCRIPTION_BETTY)
+            .build();
         assertParseSuccess(parser, NAME_DESC_BETTY + PHONE_DESC_BETTY + EMAIL_DESC_BETTY
-                + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + MODULE_ROLE_DESC + DESCRIPTION_DESC_BETTY, new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_phoneFieldMissing_success() {
         // no phone
-        Person expectedPerson = new PersonBuilder(AMY).withTags("friend").withEmptyPhone().build();
+        Person expectedPerson = new PersonBuilder(AMY)
+            .withTags("friend")
+            .withEmptyPhone()
+            .withDescription(VALID_DESCRIPTION_AMY)
+            .build();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + MODULE_ROLE_DESC + DESCRIPTION_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_emailFieldMissing_success() {
         // no email
-        Person expectedPerson = new PersonBuilder(AMY).withTags("friend").withEmptyEmail().build();
+        Person expectedPerson = new PersonBuilder(AMY)
+            .withTags("friend")
+            .withEmptyEmail()
+            .withDescription(VALID_DESCRIPTION_AMY)
+            .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
-                + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + MODULE_ROLE_DESC + DESCRIPTION_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_moduleRoleFieldMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(ANDY).withTags("friend")
-                .withEmptyModuleRoleMap().build();
+                .withEmptyModuleRoleMap()
+                .withDescription(VALID_DESCRIPTION_ANDY)
+                .build();
         assertParseSuccess(parser, NAME_DESC_ANDY + PHONE_DESC_ANDY + EMAIL_DESC_ANDY + ADDRESS_DESC_ANDY
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + DESCRIPTION_DESC_ANDY, new AddCommand(expectedPerson));
     }
 
     @Test

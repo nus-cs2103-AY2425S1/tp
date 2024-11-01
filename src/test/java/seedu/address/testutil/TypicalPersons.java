@@ -3,6 +3,9 @@ package seedu.address.testutil;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ANDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BETTY;
@@ -36,6 +39,7 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
+            .withDescription("This is Alice Pauline.")
             .withModuleRoleMap(
                     new ModuleCode[] {new ModuleCode("CS1101S")},
                     new RoleType[] {RoleType.STUDENT}).build();
@@ -69,14 +73,17 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person ANDY = new PersonBuilder().withName(VALID_NAME_ANDY)
             .withEmail(VALID_EMAIL_ANDY).withPhone(VALID_PHONE_ANDY).withAddress(VALID_ADDRESS_ANDY)
-            .withTags("friend").withEmptyModuleRoleMap().build();
+            .withTags("friend").withEmptyModuleRoleMap()
+            .withDescription(VALID_DESCRIPTION_ANDY).build();
 
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
+            .withDescription(VALID_DESCRIPTION_AMY).build();
 
     public static final Person BETTY = new PersonBuilder().withName(VALID_NAME_BETTY)
             .withEmail(VALID_EMAIL_BETTY).withPhone(VALID_PHONE_BETTY).withEmptyAddress()
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withDescription(VALID_DESCRIPTION_BETTY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)

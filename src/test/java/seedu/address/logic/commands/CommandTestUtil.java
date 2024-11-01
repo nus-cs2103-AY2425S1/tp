@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -50,6 +51,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_MODULE_ROLE = "CS1101S-student";
     public static final String VALID_ADD_MODULE_ROLE = "+CS1101S-student";
+    public static final String VALID_DESCRIPTION_AMY = VALID_NAME_AMY + " " + VALID_MODULE_ROLE;
+    public static final String VALID_DESCRIPTION_ANDY = VALID_NAME_ANDY + " " + VALID_MODULE_ROLE;
+    public static final String VALID_DESCRIPTION_BETTY = VALID_NAME_BETTY + " " + VALID_MODULE_ROLE;
+    public static final String VALID_DESCRIPTION_BOB = VALID_NAME_BOB + " " + VALID_MODULE_ROLE;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_ANDY = " " + PREFIX_NAME + VALID_NAME_ANDY;
@@ -70,6 +75,11 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String MODULE_ROLE_DESC = " " + PREFIX_MODULE + VALID_MODULE_ROLE;
     public static final String ADD_MODULE_ROLE_DESC = " " + PREFIX_MODULE + "+" + VALID_MODULE_ROLE;
+    public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_AMY;
+    public static final String DESCRIPTION_DESC_ANDY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_ANDY;
+    public static final String DESCRIPTION_DESC_BETTY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BETTY;
+    public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -81,6 +91,7 @@ public class CommandTestUtil {
     public static final String INVALID_MODULE_ROLE_DESC_ROLE_TYPE =
         " " + PREFIX_MODULE + "CS1101S-role"; // invalid role type
     public static final String INVALID_ADD_MODULE_ROLE_DESC = " " + PREFIX_MODULE + "=" + VALID_MODULE_ROLE;
+    public static final String INVALID_DESCRIPTION = "a".repeat(501);
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

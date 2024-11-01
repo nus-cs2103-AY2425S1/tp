@@ -26,19 +26,21 @@ public class Person {
     private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
     private final ModuleRoleMap moduleRoleMap;
+    private final Optional<Description> description;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Optional<Phone> phone, Optional<Email> email, Optional<Address> address, Set<Tag> tags,
-                  ModuleRoleMap moduleRoleMap) {
-        requireAllNonNull(name, phone, email, tags, moduleRoleMap);
+                  ModuleRoleMap moduleRoleMap, Optional<Description> description) {
+        requireAllNonNull(name, phone, email, tags, moduleRoleMap, description);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.moduleRoleMap = moduleRoleMap;
+        this.description = description;
     }
 
     public Name getName() {
@@ -59,6 +61,10 @@ public class Person {
 
     public ModuleRoleMap getModuleRoleMap() {
         return moduleRoleMap;
+    }
+
+    public Optional<Description> getDescription() {
+        return description;
     }
 
     /**
@@ -109,13 +115,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && moduleRoleMap.equals((otherPerson.moduleRoleMap));
+                && moduleRoleMap.equals(otherPerson.moduleRoleMap)
+                && description.equals(otherPerson.description);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, moduleRoleMap);
+        return Objects.hash(name, phone, email, address, tags, moduleRoleMap, description);
     }
 
     @Override
@@ -128,6 +135,7 @@ public class Person {
         address.ifPresent(addr -> builder.add("address", addr));
         builder.add("tags", tags)
                 .add("roles", moduleRoleMap);
+        description.ifPresent(description -> builder.add("description", description));
 
         return builder.toString();
     }
@@ -158,5 +166,12 @@ public class Person {
      */
     public boolean hasEmptyModuleRoleMap() {
         return this.moduleRoleMap.getRoles().isEmpty();
+    }
+
+    /**
+     * Returns true if this person has a non-null description.
+     */
+    public boolean hasDescription() {
+        return this.description.isPresent();
     }
 }

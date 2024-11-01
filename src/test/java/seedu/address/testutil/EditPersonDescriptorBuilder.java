@@ -39,6 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail().orElse(null));
         descriptor.setAddress(person.getAddress().orElse(null));
         descriptor.setTags(person.getTags());
+        descriptor.setDescription(person.getDescription().orElse(null));
     }
 
     /**
@@ -89,6 +90,15 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withModuleRoleOperations(String moduleRoleOperations) throws ParseException {
         descriptor.setModuleRoleOperation(ParserUtil.parseEditModuleRoleOperation(moduleRoleOperations));
+        return this;
+    }
+
+    /**
+     * Parses the {@code description} into a {@code Description} and set it to the
+     * {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDescription(String description) throws ParseException {
+        descriptor.setDescription(ParserUtil.parseDescription(description));
         return this;
     }
 

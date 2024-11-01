@@ -81,6 +81,14 @@ public class PersonCard extends UiPart<Region> {
             vBox.getChildren().add(address);
         }
 
+        if (person.hasDescription()) {
+            Label description = new Label(person.getDescription().map(Object::toString)
+                .orElse(null));
+            description.getStyleClass().add("cell_small_label");
+            description.setText(person.getDescription().orElse(null).value);
+            vBox.getChildren().add(description);
+        }
+
         // Add tags
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

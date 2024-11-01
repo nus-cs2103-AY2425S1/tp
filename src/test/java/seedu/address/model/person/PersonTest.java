@@ -32,7 +32,7 @@ public class PersonTest {
         Person andy = new PersonBuilder(ANDY).build();
 
         Person person = new Person(ANDY.getName(), ANDY.getPhone(), ANDY.getEmail(), ANDY.getAddress(),
-                ANDY.getTags(), ANDY.getModuleRoleMap());
+                ANDY.getTags(), ANDY.getModuleRoleMap(), ANDY.getDescription());
         assertNotNull(person, "The person object should not be null");
         assertEquals(andy, person);
     }
@@ -42,7 +42,7 @@ public class PersonTest {
         Person betty = new PersonBuilder(BETTY).build();
 
         Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
-                Optional.empty(), BETTY.getTags(), BETTY.getModuleRoleMap());
+                Optional.empty(), BETTY.getTags(), BETTY.getModuleRoleMap(), BETTY.getDescription());
 
         assertNotNull(person, "The person object should not be null");
         assertEquals(betty, person);
@@ -59,7 +59,7 @@ public class PersonTest {
         Person betty = new PersonBuilder(BETTY).withEmptyAddress().build();
 
         Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
-                Optional.empty(), BETTY.getTags(), BETTY.getModuleRoleMap());
+                Optional.empty(), BETTY.getTags(), BETTY.getModuleRoleMap(), BETTY.getDescription());
 
         assertNotNull(person, "The person object should not be null");
         assertEquals(betty, person);
@@ -191,7 +191,8 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail().map(Objects ::toString).orElse(null)
                 + ", address=" + ALICE.getAddress().map(Objects ::toString).orElse(null)
                 + ", tags=" + ALICE.getTags()
-                + ", roles=" + ALICE.getModuleRoleMap() + "}";
+                + ", roles=" + ALICE.getModuleRoleMap()
+                + ", description=" + ALICE.getDescription().map(Objects::toString).orElse(null) + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
