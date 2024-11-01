@@ -274,11 +274,11 @@ Examples:
   and `Hello world` respectively.
 * `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
 
-### Marking a transaction as done : `markTxn`
+### Marking a transaction as done : `markDone`
 
 Marks a specified transaction from the transaction book as done.
 
-Format: `markTxn INDEX`
+Format: `markDone INDEX`
 
 * Marks a transaction at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed transaction list.
@@ -290,14 +290,14 @@ If a transaction is marked as done, a done icon appears for the transaction in G
 
 Examples:
 
-* `listTxn` followed by `markTxn 2` marks the 2nd transaction in the transaction book as done.
+* `listTxn` followed by `markDone 2` marks the 2nd transaction in the transaction book as done.
 * if a done transaction is marked as done again, the transaction remains done.
 
-### Unmarking a transaction as done : `unmarkTxn`
+### Unmarking a transaction as done : `markUndone`
 
 Unmarks a specified transaction from the transaction book as undone.
 
-Format: `unmarkTxn INDEX`
+Format: `markUndone INDEX`
 
 * Unmarks a transaction at the specified `INDEX` as undone.
 * The index refers to the index number shown in the displayed transaction list.
@@ -310,7 +310,7 @@ Format: `unmarkTxn INDEX`
 
 Examples:
 
-* `listTxn` followed by `unmarkTxn 2` unmarks the 2nd transaction in the transaction book as undone.
+* `listTxn` followed by `markUndone 2` unmarks the 2nd transaction in the transaction book as undone.
 * if an undone transaction is marked as undone again, the transaction remains undone.
 
 ### Exiting the program : `exit`

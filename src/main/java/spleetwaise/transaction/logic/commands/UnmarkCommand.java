@@ -9,14 +9,14 @@ import spleetwaise.transaction.model.transaction.Status;
  */
 public class UnmarkCommand extends UpdateStatusCommand {
 
-    public static final String COMMAND_WORD = "unmarkTxn";
+    public static final String COMMAND_WORD = "markUndone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unmarks the transaction identified by the index number used in the displayed transaction list.\n"
+            + ": Marks the transaction as undone identified by the index number used in the displayed transaction list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNMARK_TRANSACTION_SUCCESS = "Unmarked Transaction: %1$s";
+    public static final String MESSAGE_UNMARK_TRANSACTION_SUCCESS = "Marked Transaction as Undone: %1$s";
 
     public UnmarkCommand(Index targetIndex) {
         super(targetIndex);

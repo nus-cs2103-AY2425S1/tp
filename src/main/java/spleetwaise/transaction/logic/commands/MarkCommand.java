@@ -9,14 +9,14 @@ import spleetwaise.transaction.model.transaction.Status;
  */
 public class MarkCommand extends UpdateStatusCommand {
 
-    public static final String COMMAND_WORD = "markTxn";
+    public static final String COMMAND_WORD = "markDone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the transaction identified by the index number used in the displayed transaction list.\n"
+            + ": Marks the transaction as Done identified by the index number used in the displayed transaction list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_TRANSACTION_SUCCESS = "Marked Transaction: %1$s";
+    public static final String MESSAGE_MARK_TRANSACTION_SUCCESS = "Marked Transaction as Done: %1$s";
 
     public MarkCommand(Index targetIndex) {
         super(targetIndex);
