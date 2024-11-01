@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.edit.AddModuleRoleOperation.AddModuleRoleDescriptor;
+import static seedu.address.logic.commands.edit.DeleteModuleRoleOperation.DeleteModuleRoleDescriptor;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -349,26 +351,31 @@ public class ParserUtilTest {
 
     @Test
     public void parseEditModuleRoleOperation_validAddOperation_returnsAddModuleRoleOperation() throws Exception {
-        String input = "+CS1101S-student MA1521-student";
+        String input = "+CS1101S-student MA1521-TA";
         EditModuleRoleOperation result = ParserUtil.parseEditModuleRoleOperation(input);
 
-        HashMap<ModuleCode, RoleType> expectedMap = new HashMap<>();
-        expectedMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
-        expectedMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
-        AddModuleRoleOperation expected = new AddModuleRoleOperation(new ModuleRoleMap(expectedMap));
+        AddModuleRoleDescriptor expectedDescriptor = new AddModuleRoleDescriptor(List.of(
+            new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+            new ModuleRolePair(new ModuleCode("MA1521"), RoleType.TUTOR)
+        ));
+        AddModuleRoleOperation expected = new AddModuleRoleOperation(expectedDescriptor);
 
         assertEquals(expected, result);
     }
 
     @Test
     public void parseEditModuleRoleOperation_validDeleteOperation_returnsDeleteModuleRoleOperation() throws Exception {
-        String input = "-CS1101S-student MA1521";
+        String input = "-CS1101S-student CS1231S-TA MA1521";
         EditModuleRoleOperation result = ParserUtil.parseEditModuleRoleOperation(input);
 
-        HashMap<ModuleCode, RoleType> expectedMap = new HashMap<>();
-        expectedMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
-        expectedMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
-        EditModuleRoleOperation expected = new DeleteModuleRoleOperation(new ModuleRoleMap(expectedMap));
+        DeleteModuleRoleDescriptor expectedDescriptor = new DeleteModuleRoleDescriptor(
+                List.of(
+                        new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+                        new ModuleRolePair(new ModuleCode("CS1231S"), RoleType.TUTOR)
+                ),
+                List.of(new ModuleCode("MA1521"))
+        );
+        EditModuleRoleOperation expected = new DeleteModuleRoleOperation(expectedDescriptor);
 
         assertEquals(expected, result);
     }

@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.edit.DeleteModuleRoleOperation.DeleteModuleRoleDescriptor;
 import static seedu.address.logic.commands.edit.AddModuleRoleOperation.AddModuleRoleDescriptor;
+import static seedu.address.logic.commands.edit.DeleteModuleRoleOperation.DeleteModuleRoleDescriptor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -246,8 +246,7 @@ public class ParserUtil {
             throw new ParseException(ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS);
         }
 
-        final ModuleRoleMap moduleRoleMap = new ModuleRoleMap(hashMap);
-        return moduleRoleMap;
+        return new ModuleRoleMap(hashMap);
     }
 
 

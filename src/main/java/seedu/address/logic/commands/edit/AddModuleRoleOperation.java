@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
@@ -61,7 +62,7 @@ public class AddModuleRoleOperation extends EditModuleRoleOperation {
 
     @Override
     public String toString() {
-        return descriptor.toString();
+        return "+" + descriptor;
     }
 
     /**
@@ -108,9 +109,7 @@ public class AddModuleRoleOperation extends EditModuleRoleOperation {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("toAdds", toAdds)
-                    .toString();
+            return this.toAdds.stream().sorted().toList().toString();
         }
     }
 }

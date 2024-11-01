@@ -3,30 +3,38 @@ package seedu.address.logic.commands.edit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.commands.edit.AddModuleRoleOperation.AddModuleRoleDescriptor;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
+import seedu.address.model.person.ModuleRolePair;
 import seedu.address.model.person.RoleType;
 
 public class AddModuleRoleOperationTest {
-    private static final ModuleCode[] DEFAULT_MODULE_CODES =
-            new ModuleCode[]{new ModuleCode("CS1101S"), new ModuleCode("CS2103T")};
-    private static final ModuleCode[] DEFAULT_MODULE_CODES_2 =
-            new ModuleCode[]{new ModuleCode("CS1101S"), new ModuleCode("MA1522")};
-    private static final RoleType[] DEFAULT_ROLE_TYPES = new RoleType[]{RoleType.STUDENT, RoleType.TUTOR};
-    private static final ModuleRoleMap DEFAULT_MODULE_ROLE_MAP = new ModuleRoleMap(
-            DEFAULT_MODULE_CODES, DEFAULT_ROLE_TYPES);
-    private static final ModuleRoleMap DEFAULT_MODULE_ROLE_MAP_2 = new ModuleRoleMap(
-            DEFAULT_MODULE_CODES_2, DEFAULT_ROLE_TYPES);
+    private static final AddModuleRoleDescriptor DEFAULT_DESCRIPTOR = new AddModuleRoleDescriptor(
+            List.of(
+                    new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+                    new ModuleRolePair(new ModuleCode("CS2103T"), RoleType.TUTOR)
+            )
+    );
+
+    private static final AddModuleRoleDescriptor DEFAULT_DESCRIPTOR_2 = new AddModuleRoleDescriptor(
+            List.of(
+                    new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+                    new ModuleRolePair(new ModuleCode("MA1522"), RoleType.TUTOR)
+            )
+    );
     @Test
     public void equals() {
-        // same values -> returns true
-        AddModuleRoleOperation addModuleRoleOperation = new AddModuleRoleOperation(DEFAULT_MODULE_ROLE_MAP);
-        AddModuleRoleOperation addModuleRoleOperationCopy = new AddModuleRoleOperation(DEFAULT_MODULE_ROLE_MAP);
+        // same descriptor -> returns true
+        AddModuleRoleOperation addModuleRoleOperation = new AddModuleRoleOperation(DEFAULT_DESCRIPTOR);
+        AddModuleRoleOperation addModuleRoleOperationCopy = new AddModuleRoleOperation(DEFAULT_DESCRIPTOR);
         assertEquals(addModuleRoleOperation, addModuleRoleOperationCopy);
         // same object -> returns true
         assertEquals(addModuleRoleOperation, addModuleRoleOperation);
@@ -35,7 +43,7 @@ public class AddModuleRoleOperationTest {
         // different types -> returns false
         assertNotEquals(addModuleRoleOperation, 0);
         // different values -> returns false
-        AddModuleRoleOperation differentAddModuleRoleOperation = new AddModuleRoleOperation(DEFAULT_MODULE_ROLE_MAP_2);
+        AddModuleRoleOperation differentAddModuleRoleOperation = new AddModuleRoleOperation(DEFAULT_DESCRIPTOR_2);
         assertNotEquals(addModuleRoleOperation, differentAddModuleRoleOperation);
     }
 
@@ -45,24 +53,24 @@ public class AddModuleRoleOperationTest {
         ModuleRoleMap initialMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")},
                 new RoleType[]{RoleType.STUDENT});
-        ModuleRoleMap mapToAdd = new ModuleRoleMap(
-                new ModuleCode[]{new ModuleCode("CS2103T")},
-                new RoleType[]{RoleType.TUTOR});
+        AddModuleRoleDescriptor descriptor = new AddModuleRoleDescriptor(
+                List.of(new ModuleRolePair(new ModuleCode("CS2103T"), RoleType.TUTOR)));
 
-        ModuleRoleMap expectedMap = DEFAULT_MODULE_ROLE_MAP;
+        ModuleRoleMap expectedMap = new ModuleRoleMap(
+                new ModuleCode[]{new ModuleCode("CS1101S"), new ModuleCode("CS2103T")},
+                new RoleType[]{RoleType.STUDENT, RoleType.TUTOR});
 
         try {
-            assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+            assertEquals(expectedMap, new AddModuleRoleOperation(descriptor).execute(initialMap));
         } catch (CommandException e) {
             fail("CommandException should not be thrown.");
         }
 
         // Add multiple module role pairs
         initialMap = new ModuleRoleMap(new ModuleCode[]{}, new RoleType[]{});
-        mapToAdd = new ModuleRoleMap(DEFAULT_MODULE_CODES, DEFAULT_ROLE_TYPES);
 
         try {
-            assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+            assertEquals(expectedMap, new AddModuleRoleOperation(DEFAULT_DESCRIPTOR).execute(initialMap));
         } catch (CommandException e) {
             fail("CommandException should not be thrown.");
         }
@@ -73,15 +81,15 @@ public class AddModuleRoleOperationTest {
         // Add module role pair already exists -> throws CommandException
         ModuleRoleMap initialMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
-        final ModuleRoleMap mapToAdd1 = initialMap;
+        AddModuleRoleDescriptor descriptor = new AddModuleRoleDescriptor(
+                List.of(new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT)));
 
-        assertThrows(CommandException.class, () -> new AddModuleRoleOperation(mapToAdd1).execute(initialMap));
+        assertThrows(CommandException.class, () -> new AddModuleRoleOperation(descriptor).execute(initialMap));
 
-        // Add module role pair having same module code but different role as pre-existing one -> returns same map
-        final ModuleRoleMap mapToAdd2 = new ModuleRoleMap(
-                new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.TUTOR});
-
-        assertThrows(CommandException.class, () -> new AddModuleRoleOperation(mapToAdd2).execute(initialMap));
+        // Add module role pair with same module code but different role as pre-existing one -> throws CommandException
+        AddModuleRoleDescriptor descriptor2 = new AddModuleRoleDescriptor(
+                List.of(new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.TUTOR)));
+        assertThrows(CommandException.class, () -> new AddModuleRoleOperation(descriptor2).execute(initialMap));
     }
 
     @Test
@@ -89,18 +97,20 @@ public class AddModuleRoleOperationTest {
         // Add multiple module role pairs, some already exist -> throws CommandException
         ModuleRoleMap initialMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
-        ModuleRoleMap mapToAdd = new ModuleRoleMap(DEFAULT_MODULE_CODES, DEFAULT_ROLE_TYPES);
 
-        assertThrows(CommandException.class, () -> new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+        assertThrows(CommandException.class, () -> new AddModuleRoleOperation(DEFAULT_DESCRIPTOR).execute(initialMap));
     }
 
     @Test
     public void toString_validModuleRoleMap_returnsCorrectString() {
-        ModuleRoleMap moduleRoleMap = new ModuleRoleMap(
-                new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
-        AddModuleRoleOperation addModuleRoleOperation = new AddModuleRoleOperation(moduleRoleMap);
+        AddModuleRoleDescriptor descriptor = new AddModuleRoleDescriptor(
+                List.of(
+                        new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+                        new ModuleRolePair(new ModuleCode("CS2103T"), RoleType.TUTOR))
+        );
+        AddModuleRoleOperation addModuleRoleOperation = new AddModuleRoleOperation(descriptor);
 
-        String expectedString = "+ Student of: CS1101S\n";
+        String expectedString = "+[CS1101S-Student, CS2103T-Tutor]";
         assertEquals(expectedString, addModuleRoleOperation.toString());
     }
 }

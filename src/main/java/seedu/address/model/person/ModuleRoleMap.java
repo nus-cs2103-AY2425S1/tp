@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.areOfSameSize;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -254,17 +255,17 @@ public class ModuleRoleMap {
      * @param moduleCodesToRemove The module codes to remove.
      * @return A {@code ModuleRoleMap} containing all pairs failed to remove.
      */
-    public ModuleRoleMap removeAllIgnoringRoles(List<ModuleCode> moduleCodesToRemove) {
+    public List<ModuleCode> removeAllIgnoringRoles(List<ModuleCode> moduleCodesToRemove) {
         requireNonNull(moduleCodesToRemove);
 
-        Map<ModuleCode, RoleType> failedModuleRoleMap = new HashMap<>();
+        List<ModuleCode> failedModuleCodes = new ArrayList<>();
 
         for (ModuleCode moduleCode : moduleCodesToRemove) {
             if (!this.removeIgnoringRole(moduleCode)) {
-                failedModuleRoleMap.put(moduleCode, null);
+                failedModuleCodes.add(moduleCode);
             }
         }
-        return new ModuleRoleMap(failedModuleRoleMap);
+        return failedModuleCodes;
     }
 
     /**

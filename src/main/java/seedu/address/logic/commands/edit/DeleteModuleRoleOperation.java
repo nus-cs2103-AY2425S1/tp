@@ -46,17 +46,17 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
         HashMap<ModuleCode, RoleType> roles = new HashMap<>(moduleRoleMapToEdit.getRoles());
         ModuleRoleMap result = new ModuleRoleMap(roles);
         ModuleRoleMap failedModuleRoles = result.removeAll(descriptor.getToDeletes());
-        ModuleRoleMap failedModuleOnly = result.removeAllIgnoringRoles(descriptor.getToDeleteAnyRoles());
+        List<ModuleCode> failedModuleCodes = result.removeAllIgnoringRoles(descriptor.getToDeleteAnyRoles());
         if (!failedModuleRoles.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_MODULE_ROLE_PAIRS + failedModuleRoles.getData());
         }
-        if (!failedModuleOnly.isEmpty()) {
-            throw new CommandException(MESSAGE_NONEXISTENT_MODULE_CODES + failedModuleOnly.getData());
+        if (!failedModuleCodes.isEmpty()) {
+            throw new CommandException(MESSAGE_NONEXISTENT_MODULE_CODES + failedModuleCodes);
         }
         logger.info("Deleted module roles with descriptor: " + descriptor);
         logger.info("Resulting module roles: " + result);
         logger.info("Failed to delete module roles: " + failedModuleRoles);
-        logger.info("Failed to delete module codes (ignoring roles): " + failedModuleOnly);
+        logger.info("Failed to delete module codes (ignoring roles): " + failedModuleCodes);
         return result;
     }
 
@@ -73,7 +73,7 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
 
     @Override
     public String toString() {
-        return descriptor.toString();
+        return "-" + descriptor;
     }
 
     /**
@@ -134,10 +134,8 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("toDeletes", toDeletes)
-                    .add("toDeleteAnyRoles", toDeleteAnyRoles)
-                    .toString();
+            return this.toDeletes.stream().sorted().toList() + " "
+                    + this.toDeleteAnyRoles.stream().sorted().toList();
         }
     }
 }
