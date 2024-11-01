@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -123,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::completeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         PersonPane personPane = new PersonPane();
@@ -211,5 +212,14 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Finds a command that starts with the given command text.
+     */
+    private Optional<String> completeCommand(String commandText) {
+        return logic.getCommandNames().stream()
+                .filter(cmdName -> cmdName.startsWith(commandText) && cmdName.length() > commandText.length())
+                .findFirst();
     }
 }

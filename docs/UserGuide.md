@@ -7,8 +7,33 @@ PROperty is a **desktop app for property agents managing contacts and their prop
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, PROperty can get your contact and property management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-  {:toc}
+PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
+and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It taps on the
+fact that it is a lot less complicated to operate than its competitors such as Microsoft Excel while being faster to
+operate than graphical user interfaces commonly found in smartphones.
+
+## Table of Contents
+* [Quick start](#quick-start)
+* [Features](#features)
+    * [Adding a person: `add`](#adding-a-person-add)
+    * [Listing all persons : `list`](#listing-all-persons--list)
+    * [Editing a person : `edit`](#editing-a-person--edit)
+    * [Locating persons by name: `find`](#locating-persons-by-name-find)
+    * [Locating persons by tag: `findtag`](#locating-persons-by-tag-findtag)
+    * [Deleting a person : `delete`](#deleting-a-person--delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Quick reference help: `help`](#quick-reference-help-help)
+    * [Managing Remarks : `remark`](#managing-remarks--remark)
+    * [Showing property listings of a person : `show`](#showing-property-listings-of-a-person--show)
+    * [Adding a property listing : `listing add`](#adding-a-property-listing--listing-add)
+    * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
+* [Saving the data](#saving-the-data)
+* [Editing the data file](#editing-the-data-file)
+* [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -54,10 +79,10 @@ If you can type fast, PROperty can get your contact and property management task
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/seller` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/seller`, `t/seller t/landlord` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -159,7 +184,7 @@ Format: `findtag TAG [MORE_TAGS]`
 Examples:
 
 - `findtag HDB` returns persons tagged with `HDB`.
-- `findtag HDB colleague` returns persons tagged with either `HDB` or `colleague`.
+- `findtag HDB buyer` returns persons tagged with either `HDB` or `buyer`.
 
 ![Find tag command](images/findtagCommand.png)
 
@@ -258,7 +283,7 @@ Examples:
 
 - `listing add 1 t/condo a/NUS street 123` adds a property listing to the person at index `1` with a listing type of `condo` and address of `NUS street 123`
 
-### Adding a property listing : `listing delete`
+### Deleting a property listing : `listing delete`
 
 Deletes the property listing with index `LISTING_INDEX` from the person specified by `INDEX` 
 
@@ -273,6 +298,12 @@ Examples:
 
 - `listing delete 1 1` deletes the `1`st property listing from the person with index `1`
 
+### Sorting all persons : `sort`
+
+Sorts the list of all persons in the address book by name in alphabetical order.
+
+Format: sort
+
 ### Saving the data
 
 PROperty data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -280,7 +311,7 @@ PROperty data are saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-PROperty data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+PROperty data are saved automatically as a JSON file `[JAR file location]/data/property.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, PROperty will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -317,10 +348,11 @@ _Details coming soon ..._
 | **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
 | **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         |
 | **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                       |
-| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                  |
+| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag hdb buyer`                                                                                                                         |
 | **List**           | `list`                                                                                                                                                                          
 | **Add Listing**    | `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
 | **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                            |
 | **Show**           | `show INDEX`<br> e.g., `show 1`                                                                                                                                                 |
+| **Sort**           | `sort`                                                                                                                                                                          |
 | **Help**           | `help`                                                                                                                                                                          |
 | **Remark**         | `remark INDEX r/[REMARKS]`                                                                                                                                                      |
