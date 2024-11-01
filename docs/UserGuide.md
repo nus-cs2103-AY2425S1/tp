@@ -140,6 +140,7 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* **After using `delete`, type `confirm` to complete the deletion**. You can also use `cancel` if you change your mind.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -147,9 +148,38 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the address book **after confirming the action**.
 
 Format: `clear`
+
+* **After using `clear`, type `confirm` to proceed with the clearing of all entries**. You can also use `cancel` if you change your mind.
+
+### Confirming a command : `confirm`
+
+Confirms the command that is currently being executed. This command is used to confirm the deletion of a person and the
+clearing of the address book.
+
+Examples:
+* `delete i/S1234567D` followed by `confirm` deletes the person with NRIC S1234567D in the address book.
+* `clear` followed by `confirm` clears all entries in the address book.
+
+### Canceling a command : `cancel`
+
+Cancels the command that is currently being executed. This command is used to cancel the deletion of a person and the
+clearing of the address book.
+
+Examples:
+* `delete i/S1234567D` followed by `cancel` cancels the deletion of the person with NRIC S1234567D in the address book.
+* `clear` followed by `cancel` cancels the clearing of the address book.
+
+### Listing Session logs: `logs`
+
+Lists all logs of a specific patient.
+
+- **Format**: `logs i/[IDENTITY_NUMBER]`
+
+- **Examples**:
+  logs i/S8613282F
 
 ### Exiting the program : `exit`
 
@@ -201,5 +231,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Confirm**| `confirm`
+**Cancel** | `cancel`
 **List**   | `list`
 **Help**   | `help`

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -162,6 +164,28 @@ public class ModelManager implements Model {
         return addressBook.getSessionLog(personIndex);
     }
 
+    @Override
+    public void addLog(Person personToUpdate, Log log) {
+        requireAllNonNull(personToUpdate, log);
+        // Create a new Set of logs that includes the new log
+        Set<Log> updatedLogs = new HashSet<>(personToUpdate.getLogs());
+        updatedLogs.add(log);
+
+        // Create a new updated person with the additional log
+        Person updatedPerson = new Person(
+                personToUpdate.getName(),
+                personToUpdate.getIdentityNumber(),
+                personToUpdate.getPhone(),
+                personToUpdate.getEmail(),
+                personToUpdate.getAddress(),
+                personToUpdate.getTags(),
+                updatedLogs // Updated logs set
+        );
+
+        // Update the model with the new person (with the added log)
+        this.setPerson(personToUpdate, updatedPerson);
+    }
+
 
     //========== Util Methods ================================================================================
 
@@ -178,28 +202,22 @@ public class ModelManager implements Model {
         this.savedCommand = command;
     }
 
-    /**
-     * Returns true if there is a saved command in the model.
-     */
     @Override
     public boolean hasSavedCommand() {
         return this.savedCommand != null;
     }
 
-    /**
-     * Clears the saved command in the model.
-     */
+
     @Override
     public void clearSavedCommand() {
         this.savedCommand = null;
     }
 
-    /**
-     * Executes the saved command in the model.
-     *
-     * @return The result of the command execution.
-     * @throws CommandException If saved command does not exist or error occurs during command execution.
-     */
+    @Override
+    public Command getSavedCommand() {
+        return this.savedCommand;
+    }
+
     @Override
     public CommandResult executeSavedCommand() throws CommandException {
         if (!hasSavedCommand()) {

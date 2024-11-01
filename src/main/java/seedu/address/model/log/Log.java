@@ -1,23 +1,25 @@
 package seedu.address.model.log;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
 /**
  * Represents a log in the address book.
  */
-public class Log {
+
+public class Log implements Comparable<Log> {
 
     public static final String MESSAGE_CONSTRAINTS = "A Log requires a date in the format of dd MMM yyyy,"
             + "and a log description that can take any characters, including symbols, numbers, etc.\n"
             + "Both date and description should not be blank.\n"
             + "Format: d/date l/log description\n"
             + "e.g. d/20 May 2024 l/First appointment with John. John shared 3 problems during the session.";
+
     public static final String VALIDATION_REGEX = ".+";
 
-    private final String entry;
+
+    private final LogEntry entry;
     private final AppointmentDate appointmentDate;
 
     /**
@@ -26,25 +28,18 @@ public class Log {
      * @param entry A valid log entry.
      * @param appointmentDate A valid appoinmentDate.
      */
-    public Log(AppointmentDate appointmentDate, String entry) {
-        requireNonNull(appointmentDate, entry);
-        checkArgument(isValidEntry(entry), MESSAGE_CONSTRAINTS);
+    public Log(AppointmentDate appointmentDate, LogEntry entry) {
+        requireNonNull(appointmentDate);
+        requireNonNull(entry);
         this.entry = entry;
         this.appointmentDate = appointmentDate;
-    }
-
-    /**
-     * Returns true if a given string is a valid entry.
-     */
-    public static boolean isValidEntry(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     /**
      * Returns the log entry.
      */
     public String getEntry() {
-        return entry;
+        return entry.getEntry();
     }
     /**
      * Returns the appointmentDate of the session.
@@ -64,7 +59,7 @@ public class Log {
      * Return to string in the format "date|description" for JsonStorage
      */
     public String toStorageString() {
-        return appointmentDate.toString() + "|" + entry;
+        return appointmentDate.toString() + "|" + entry.getEntry();
     }
 
     /**
@@ -85,7 +80,9 @@ public class Log {
         String descriptionPart = parts[1].trim();
 
         AppointmentDate appointmentDate = new AppointmentDate(datePart);
-        return new Log(appointmentDate, descriptionPart);
+        LogEntry entry = new LogEntry(descriptionPart);
+
+        return new Log(appointmentDate, entry);
     }
 
     /**
@@ -94,6 +91,11 @@ public class Log {
     public String toDetailedString() {
         return String.format("Appointment Date: %s\nEntry: %s",
                 getAppointmentDate(), getEntry());
+    }
+
+    @Override
+    public int compareTo(Log other) {
+        return this.appointmentDate.compareTo(other.getAppointmentDate());
     }
 
     /**
@@ -127,9 +129,7 @@ public class Log {
      */
     @Override
     public String toString() {
-        String truncatedEntry = entry.length() > 100
-                ? entry.substring(0, 100) + "..."
-                : entry;
-        return String.format("Log{Appointment Date=%s, Entry=%s}", appointmentDate.toString(), truncatedEntry);
+        return String.format("Log{Appointment Date=%s, Entry=%s}", appointmentDate.toString(),
+                entry.getTruncatedEntry());
     }
 }
