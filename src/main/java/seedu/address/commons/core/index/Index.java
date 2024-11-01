@@ -31,14 +31,14 @@ public class Index {
     };
 
     public int getZeroBased() {
-        if (this == Index.WILDCARD) {
+        if (this.isWildcard()) {
             throw new UnsupportedOperationException("Wildcard index does not have a zero-based index.");
         }
         return zeroBasedIndex;
     }
 
     public int getOneBased() {
-        if (this == Index.WILDCARD) {
+        if (this.isWildcard()) {
             throw new UnsupportedOperationException("Wildcard index does not have a one-based index.");
         }
         return zeroBasedIndex + 1;
@@ -89,7 +89,7 @@ public class Index {
 
     @Override
     public String toString() {
-        if (this.equals(Index.WILDCARD)) {
+        if (this.isWildcard()) {
             return Index.class.getCanonicalName() + "{wildcard}";
         }
         return new ToStringBuilder(this).add("zeroBasedIndex", zeroBasedIndex).toString();
