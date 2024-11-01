@@ -40,7 +40,7 @@ public class CommandHistory {
             currentIndex--;
             return history.get(currentIndex);
         }
-        return null; // Return null if no previous command
+        return ""; // Return empty string if no previous command
     }
 
     /**
