@@ -178,9 +178,9 @@ The file name must ends with ".json" and must not contain any slash "/".
 
 There should be only one file name provided.
 
-#### Warning
-
-All the entries in the current address book will be cleared.
+<div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
+All entries in the current address book will be discarded.
+</div>
 
 ### Load data files `load`
 
@@ -198,10 +198,11 @@ The file name must ends with ".json", must not contain any slash "/" and must po
 
 There should be only one file name provided.
 
-#### Warning
+<div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
 Avoid loading non-address book .json files as it may result in unexpected behaviours
 
 All the entries in the current address book will be discard. So archiving current address book before loading is recommended.
+</div>
 
 ### Clearing all entries : `clear`
 
