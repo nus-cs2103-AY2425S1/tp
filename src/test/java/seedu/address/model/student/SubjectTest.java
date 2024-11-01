@@ -74,9 +74,27 @@ public class SubjectTest {
     }
 
     @Test
-    public void getValidSubjectMessage_invalidLevel_failure() {
+    public void getValidSubjectMessage_invalidLevel() {
         assertEquals(Subject.getValidSubjectMessage(new Level("NONE NONE")), Subject.MESSAGE_LEVEL_NEEDED);
         assertEquals(Subject.getValidSubjectMessage(null), Subject.MESSAGE_LEVEL_NEEDED);
+    }
+
+    @Test
+    public void getValidSubjectMessage_validLevel() {
+        String expectedMessageUpperSec = "Subject is not valid for given level. "
+                + "Valid subjects for %s: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
+                + "BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, "
+                + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
+                + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";
+        String expectedMessageLowerSec = "Subject is not valid for given level. "
+                + "Valid subjects for %s: [MATH, SCIENCE, PHYSICS, CHEMISTRY, BIOLOGY, LITERATURE, HISTORY, "
+                + "GEOGRAPHY, SOCIAL_STUDIES, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, HIGHER_MALAY, TAMIL, "
+                + "HIGHER_TAMIL, HINDI]";
+
+        assertEquals(Subject.getValidSubjectMessage(new Level("S3 IP")),
+                String.format(expectedMessageUpperSec, "S3 IP"));
+        assertEquals(Subject.getValidSubjectMessage(new Level("S1 NT")),
+                String.format(expectedMessageLowerSec, "S1 NT"));
     }
 
     @Test
