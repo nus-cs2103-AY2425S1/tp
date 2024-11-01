@@ -14,14 +14,14 @@ import seedu.address.model.AllergySorter;
  * @see Allergy
  * @see AllergySorter
  */
-public class AllergyMap {
+public class AllergyList {
     //List is used because allergies are usually added, not deleted or edited. So adding should be fast.
     private final Set<Allergy> allergies;
 
     /**
      * Constructs an empty {@code AllergyList}.
      */
-    public AllergyMap() {
+    public AllergyList() {
         this.allergies = new HashSet<>();
     }
 
@@ -29,7 +29,7 @@ public class AllergyMap {
      * Constructs an {@code AllergyList} with the given allergies.
      * @param allergies
      */
-    public AllergyMap(Set<Allergy> allergies) {
+    public AllergyList(Set<Allergy> allergies) {
         this.allergies = allergies;
     }
 

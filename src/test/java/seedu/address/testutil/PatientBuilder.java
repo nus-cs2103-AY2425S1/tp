@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
-import seedu.address.model.patient.AllergyMap;
+import seedu.address.model.patient.AllergyList;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
@@ -45,7 +45,7 @@ public class PatientBuilder {
     private Birthdate birthdate;
     private Sex sex;
     private Address address;
-    private AllergyMap allergies;
+    private AllergyList allergies;
     private BloodType bloodType;
     private HealthRisk healthRisk;
     private ExistingCondition existingCondition;
@@ -67,7 +67,7 @@ public class PatientBuilder {
         nric = new Nric(DEFAULT_NRIC);
         birthdate = new Birthdate(DEFAULT_BIRTHDATE);
         sex = new Sex(DEFAULT_SEX);
-        allergies = new AllergyMap();
+        allergies = new AllergyList();
 
         bloodType = new BloodType(DEFAULT_BLOODTYPE);
         healthRisk = new HealthRisk(DEFAULT_HEALTHRISK);

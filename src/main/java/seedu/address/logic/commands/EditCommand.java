@@ -14,7 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
-import seedu.address.model.patient.AllergyMap;
+import seedu.address.model.patient.AllergyList;
 import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
@@ -108,7 +108,7 @@ public class EditCommand extends Command {
 
         // I changed the updatedAllergy, you will need to change it later @yuanch
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
-                updatedEmail, updatedAddress, new AllergyMap(), updatedBloodType, updatedHealthRisk,
+                updatedEmail, updatedAddress, new AllergyList(), updatedBloodType, updatedHealthRisk,
                 updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, updatedAppt);
     }
 

@@ -25,7 +25,7 @@ public class Patient {
 
     // Data fields
     private Address address;
-    private AllergyMap allergies = new AllergyMap();
+    private AllergyList allergies = new AllergyList();
     private BloodType bloodType;
     private HealthRisk healthRisk;
     private ExistingCondition existingCondition;
@@ -67,7 +67,7 @@ public class Patient {
      * The other fields can be null
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex, Phone phone,
-            Email email, Address address, AllergyMap allergies, BloodType bloodType, HealthRisk healthRisk,
+            Email email, Address address, AllergyList allergies, BloodType bloodType, HealthRisk healthRisk,
             ExistingCondition existingCondition, Note note, Name nokName, Phone nokPhone, ApptList appts) {
         requireAllNonNull(name, nric, birthdate, sex);
         this.name = name;

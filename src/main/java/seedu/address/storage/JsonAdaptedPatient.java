@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
-import seedu.address.model.patient.AllergyMap;
+import seedu.address.model.patient.AllergyList;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
@@ -229,7 +229,7 @@ class JsonAdaptedPatient {
             modelAppts.addAppt(appt.toModelType());
         }
 
-        final AllergyMap modelAllergies = new AllergyMap();
+        final AllergyList modelAllergies = new AllergyList();
 
         for (JsonAdaptedAllergy allergy : allergies) {
             if (allergy == null) {
