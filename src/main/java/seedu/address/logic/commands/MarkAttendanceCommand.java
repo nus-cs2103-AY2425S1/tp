@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -14,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Attendance;
+import seedu.address.model.person.AttendanceList;
 import seedu.address.model.person.Person;
 
 /**
@@ -66,8 +68,9 @@ public class MarkAttendanceCommand extends Command {
 
         model.setPerson(studentToMark, studentMarked);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        String dateString = DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT).format(classDate);
         return new CommandResult(
-                String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, studentMarked.getName(), attendance, classDate));
+                String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, studentMarked.getName(), attendance, dateString));
     }
 
     @Override
@@ -90,7 +93,7 @@ public class MarkAttendanceCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("Index", targetIndex)
-                .add("Date", classDate)
+                .add("Date", DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT).format(classDate))
                 .add("Attendance", attendance)
                 .toString();
     }
