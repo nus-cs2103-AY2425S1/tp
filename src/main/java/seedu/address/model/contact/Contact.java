@@ -100,9 +100,16 @@ public class Contact {
             return false;
         }
 
-        return otherContact.getTelegramHandle().equals(getTelegramHandle())
-                || otherContact.getEmail().equals(getEmail())
-                || (otherContact.getNickname().equals(getNickname()) && otherContact.getName().equals(getName()));
+        Nickname otherContactNickname = otherContact.getNickname();
+        Nickname currentContactNickname = getNickname();
+        boolean hasSameTelegramHandle = otherContact.getTelegramHandle().equals(getTelegramHandle());
+        boolean hasSameEmail = otherContact.getEmail().equals(getEmail());
+        boolean hasSameNickname = otherContactNickname.equals(currentContactNickname);
+        boolean hasSameNameAndNickname = hasSameNickname && otherContact.getName().equals(getName());
+        boolean hasSameNonEmptyNickname =
+                hasSameNickname && !otherContactNickname.isEmpty() && !currentContactNickname.isEmpty();
+
+        return hasSameTelegramHandle || hasSameEmail || hasSameNameAndNickname || hasSameNonEmptyNickname;
     }
 
     /**
