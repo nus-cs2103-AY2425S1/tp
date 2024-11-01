@@ -129,14 +129,18 @@ public class AddListingCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddListingCommand otherCommand)) {
+        if (!(other instanceof AddListingCommand)) {
             return false;
         }
 
-        return this.listingName.equals(otherCommand.listingName) && this.price.equals(otherCommand.price)
-            && this.area.equals(otherCommand.area) && this.address.equals(otherCommand.address)
-            && this.region.equals(otherCommand.region) && this.seller.equals(otherCommand.seller)
-            && this.buyers.equals(otherCommand.buyers);
+        AddListingCommand otherCommand = (AddListingCommand) other;
+        return listingName.equals(otherCommand.listingName)
+                && price.equals(otherCommand.price)
+                && area.equals(otherCommand.area)
+                && address.equals(otherCommand.address)
+                && region.equals(otherCommand.region)
+                && seller.equals(otherCommand.seller)
+                && buyers.equals(otherCommand.buyers);
     }
 
     @Override

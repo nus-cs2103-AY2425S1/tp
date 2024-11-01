@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -72,5 +73,26 @@ public class MoreInfoCommand extends Command {
         MoreInfoWindow moreInfoWindow = new MoreInfoWindow(personMoreInfo);
         moreInfoWindow.show();
         return new CommandResult(SHOWING_MORE_INFO_MESSAGE);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof MoreInfoCommand otherMoreInfoCommand)) {
+            return false;
+        }
+
+        return targetName.equals(otherMoreInfoCommand.targetName);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetName", targetName)
+                .toString();
     }
 }

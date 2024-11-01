@@ -22,6 +22,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.listing.Listing;
+import seedu.address.model.listing.ListingContainsKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -114,6 +116,9 @@ public class CommandTestUtil {
         if (command instanceof ListCommand) {
             expectedCommandResult = new CommandResult(expectedMessage, false,
                     false, false, true);
+        } else if (command instanceof ShowListingsCommand) {
+            expectedCommandResult = new CommandResult(expectedMessage, false,
+                    false, true, false);
         } else {
             expectedCommandResult = new CommandResult(expectedMessage);
         }
@@ -160,6 +165,33 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the listing at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showListingAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredListingList().size());
+
+        Listing listing = model.getFilteredListingList().get(targetIndex.getZeroBased());
+        final String[] splitName = listing.getName().fullName.split("\\s+");
+        model.updateFilteredListingList(new ListingContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredListingList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the listing with the given {@code targetName} in the
+     * {@code model}'s address book.
+     */
+    public static void showListingWithName(Model model, Name targetName) {
+        Listing listing = model.getListingByName(targetName);
+        assertTrue(model.hasListing(listing));
+        final String[] splitName = listing.getName().fullName.split("\\s+");
+        model.updateFilteredListingList(new ListingContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredListingList().size());
     }
 
 }
