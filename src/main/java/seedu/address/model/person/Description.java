@@ -15,7 +15,7 @@ public class Description {
      * The input can take on any character, and can be empty,
      * The length of the string should not be more than 500 characters.
      */
-    public static final String VALIDATION_REGEX = "^.{0, 500}$";
+    public static final String VALIDATION_REGEX = "^.{0,500}$";
 
     public final String value;
 
