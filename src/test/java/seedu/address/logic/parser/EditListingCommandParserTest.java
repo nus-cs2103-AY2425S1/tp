@@ -90,4 +90,72 @@ public class EditListingCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse(""),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
     }
+    
+    @Test
+    public void parse_multipleNames_throwsParseException() {
+        String userInput = EditListingCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + VALID_LISTING_NAME_ONE + " "
+                + PREFIX_NAME + VALID_LISTING_NAME_TWO + " "
+                + PREFIX_NAME + VALID_LISTING_NAME_TWO + " "
+                + PREFIX_PRICE + VALID_PRICE;
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multiplePrices_throwsParseException() {
+        String userInput = EditListingCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + VALID_LISTING_NAME_ONE + " "
+                + PREFIX_PRICE + VALID_PRICE + " "
+                + PREFIX_PRICE + VALID_PRICE;
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleAreas_throwsParseException() {
+        String userInput = EditListingCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + VALID_LISTING_NAME_ONE + " "
+                + PREFIX_AREA + VALID_AREA + " "
+                + PREFIX_AREA + VALID_AREA;
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleAddresses_throwsParseException() {
+        String userInput = EditListingCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + VALID_LISTING_NAME_ONE + " "
+                + PREFIX_ADDRESS + VALID_ADDRESS + " "
+                + PREFIX_ADDRESS + VALID_ADDRESS;
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleRegions_throwsParseException() {
+        String userInput = EditListingCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + VALID_LISTING_NAME_ONE + " "
+                + PREFIX_REGION + VALID_REGION + " "
+                + PREFIX_REGION + VALID_REGION;
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleSellers_throwsParseException() {
+        String userInput = EditListingCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + VALID_LISTING_NAME_ONE + " "
+                + PREFIX_SELLER + VALID_SELLER_NAME + " "
+                + PREFIX_SELLER + VALID_SELLER_NAME;
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+    }
+
 }
