@@ -3,7 +3,11 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+<div markdown="block" class="alert alert-info">
+StoreClass (SC) is a **desktop app for educators from private organizations e.g. tuition centers to manage their students. The educators will interact with the app through type while viewing the app through the window
+</div> 
+
+If you can type fast, StoreClass will become a perfect tools to manage student data.
 
 * Table of Contents
 {:toc}
