@@ -168,6 +168,21 @@ Examples:
 *   `view 1` Shows the person located as index position 1 in the address book.
     ![result for 'viewWindow'](images/viewWindow.png)
 
+
+### Adding a Property: `addProperty`
+
+Add a property listing to an existing person in the address book.
+
+Format: `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUMBER_OF_BEDROOMS bath/NUMBER_OF_BATHROOMS price/PRICE`
+
+* Add a property to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
+* The property details include the address, town, property type, size, number of bedrooms, number of bathrooms, and price. All fields are required.
+* Size is in square meters.
+
+Examples:
+* `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` adds a property with the specified details to the 1st person in the list.
+* `addProperty 2 address/45 Elm St town/Anytown type/HDB size/70 bed/3 bath/1 price/350000` adds a property to the 2nd person in the list.
+
 ### Closing single page person view: `close`
 
 Closes the UI page that shows the information of the person.
