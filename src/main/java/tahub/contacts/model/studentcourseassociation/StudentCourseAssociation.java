@@ -1,5 +1,7 @@
 package tahub.contacts.model.studentcourseassociation;
 
+import java.util.Map;
+
 import tahub.contacts.model.course.Attendance;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.person.Person;
@@ -13,12 +15,9 @@ import tahub.contacts.model.tutorial.Tutorial;
 public class StudentCourseAssociation {
     private final Person student;
     private final Course course;
-    /**
-     * Represents a Tutorial associated with a Course.
-     * May be null, if this TA is not the student's tutorial TA.
-     */
     private final Tutorial tutorial;
     private final Attendance attendance;
+
 
     /**
      * Represents an association between a student, course, grading system, tutorial, and attendance.
@@ -40,7 +39,7 @@ public class StudentCourseAssociation {
     /**
      * Represents an association between a student, course, grading system, tutorial, and attendance.
      * The TA will view this object in TAHub.
-     * This constructor is to be used if the SCA has already been prepopulated with GradingSystem and
+     * This constructor is to be used if the SCA has already been prepopulated with
      * Attendance (such as when de-serialising an JsonAdaptedSCA from storage to this Model).
      *
      * @param student the student associated with this association
@@ -123,8 +122,8 @@ public class StudentCourseAssociation {
     @Override
     public String toString() {
         return String.format("Matriculation Number: %s Course Code: %s "
-                        + "Tutorial Group: %s ", student.getMatricNumber(),
-                course.courseCode, tutorial.getTutorialId());
+                                     + "Tutorial Group: %s ", student.getMatricNumber(),
+                             course.courseCode, tutorial.getTutorialId());
     }
     /**
      * Compares this {@code StudentCourseAssociation} with another {@code StudentCourseAssociation} for equality
