@@ -391,11 +391,21 @@ otherwise)
 
 #### Extensions:
 - **2a.** The list is empty.
-    - **Use case ends.**
+  - **Use case ends.**
 
-- **3a.** The given index is invalid.
-    - **3a1.** AddressBook displays an error message.
-    - **Use case resumes at Step 2.**
+- **3a.** The command format is incorrect (e.g., index not provided).
+  - **3a1.** AddressBook displays an error message:
+    ```
+    Invalid command format! 
+    delete: Deletes the person identified by the index number used in the displayed person list.
+    Parameters: INDEX (must be a positive integer)
+    Example: delete 1
+    ```
+  - **Use case resumes at Step 2.**
+
+- **3b.** The given index is out of bounds.
+  - **3b1.** AddressBook displays an error message: `The person index provided is invalid.`
+  - **Use case resumes at Step 2.**
 
 ---
 
@@ -417,12 +427,12 @@ otherwise)
 
 #### Extensions:
 - **2a.** The entered sorting parameter is invalid (e.g., `ascending` instead of `asc`).
-    - **2a1.** The system displays an error message: "Error: Invalid sorting order. Use 'asc' for ascending or 'desc' for descending."
+    - **2a1.** The system displays an error message: `Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
     - **2a2.** The Salesperson corrects the sorting parameter and reissues the command.
     - **Use case resumes from Step 2.**
 
 - **2b.** The Salesperson forgets to specify the sorting order.
-    - **2b1.** The system displays an error message: "Error: No sorting order provided. Please specify 'asc' or 'desc'."
+    - **2b1.** The system displays an error message: `Error: No sorting order provided. Please specify 'asc' or 'desc'.`
     - **2b2.** The Salesperson adds the correct sorting order and reissues the command.
     - **Use case resumes from Step 2.**
 
@@ -475,12 +485,12 @@ This use case includes the following related use cases:
   - **Use case resumes from Step 2.**
 
 - **2b.** The optional date is provided but is either in an invalid format or outside the valid range:
-  - **2b1.** AddressBook displays an error message: "Error: Invalid date format or out of range. Please use `yyyy-mm-dd` format and ensure the date is valid."
+  - **2b1.** AddressBook displays an error message: `Invalid date format or out of range. Please use "yyyy-mm-dd" format and ensure the date is valid.`
   - **2b2.** The Salesperson corrects or removes the date and reissues the command.
   - **Use case resumes from Step 2.**
 
 - **2c.** The interaction details are missing or empty:
-  - **2c1.** AddressBook displays an error message: "Error: Interaction details are required. Please provide a description of the interaction."
+  - **2c1.** AddressBook displays an error message: `Interaction details are required. Please provide a description of the interaction.`
   - **2c2.** The Salesperson adds the interaction details and reissues the `log` command.
   - **Use case resumes from Step 2.**
 
@@ -524,11 +534,11 @@ This use case includes the following related use cases:
 
 ### **Extensions:**
 - **2a.** The search input does not match any contacts.
-  - **2a1.** The system displays an error message: "Error: No contacts found for `<keywords>`."
+  - **2a1.** The system displays an error message: `No contacts found for <keywords>.`
   - **Use case ends.**
 
 - **2b.** The search input is invalid (e.g., contains non-alphabetic characters).
-  - **2b1.** The system displays an error message: "Error: Invalid name format. Please enter alphabetic characters only."
+  - **2b1.** The system displays an error message: `Invalid name format. Please enter alphabetic characters only.`
   - **Use case resumes from Step 1.**
 
 ---
@@ -566,13 +576,13 @@ This use case includes the following related use cases:
 
 ### Extensions:
 - **2a.** The contact index is invalid or does not exist:
-  - **2a1.** If the index is out of range, the system displays: `Error: The person index provided is invalid.`
-  - **2a2.** If the index format is incorrect (e.g., not an integer), the system displays: `Error: Invalid command format! remark <index> r/<remark message>`.
+  - **2a1.** If the index is out of range, the system displays: `The person index provided is invalid.`
+  - **2a2.** If the index format is incorrect (e.g., not an integer), the system displays: `Invalid command format! remark <index> r/<remark message>`.
   - **2a3.** The Salesperson corrects the index and reissues the command.
   - **Use case resumes from Step 2.**
 
 - **3a.** The remark message is missing or empty:
-  - **3a1.** The system displays an error message: `Error: Remark message is required.`
+  - **3a1.** The system displays an error message: `Remark message is required.`
   - **3a2.** The Salesperson adds the remark message and reissues the command.
   - **Use case resumes from Step 3.**
 
@@ -618,8 +628,8 @@ This use case includes the following related use cases:
 
 ### Extensions:
 - **2a.** The contact index is invalid or does not exist.
-  - **2a1.** If the index is out of range, the system displays an error message: `Error: The person index provided is invalid.`
-  - **2a2.** If the index format is incorrect (e.g., non-numeric or contains decimal values), the system displays: `Error: Invalid command format! view <index>`.
+  - **2a1.** If the index is out of range, the system displays an error message: `The person index provided is invalid.`
+  - **2a2.** If the index format is incorrect (e.g., non-numeric or contains decimal values), the system displays: `Invalid command format! view <index>`.
   - **2a3.** The Salesperson corrects the index and reissues the command.
   - **Use case resumes from Step 2.**
 
@@ -658,7 +668,7 @@ This use case includes the following related use cases:
 1. The Salesperson issues the `favourite` command with a valid `ContactID`.
 2. The system validates the `ContactID`.
 3. The system marks the contact as a favourite.
-4. The system displays a success message: "Contact `<Name>` marked as a favourite."
+4. The system displays a success message: `Contact <Name> marked as a favourite.`
 
    **Use case ends.**
 
@@ -666,12 +676,12 @@ This use case includes the following related use cases:
 
 #### Extensions:
 - **2a.** The `ContactID` is invalid or does not exist.
-    - **2a1.** The system displays an error message: "Error: Invalid `ContactID`. Please provide a valid numeric identifier."
+    - **2a1.** The system displays an error message: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
     - **2a2.** The Salesperson corrects the `ContactID` and reissues the command.
     - **Use case resumes from Step 2.**
 
 - **3a.** The contact is already marked as a favourite.
-    - **3a1.** The system displays a message: "Contact is already marked as a favourite."
+    - **3a1.** The system displays a message: `Contact is already marked as a favourite.`
     - **Use case ends.**
 
 ---
@@ -705,7 +715,7 @@ This use case includes the following related use cases:
 1. The Salesperson issues the `birthday` command with a valid `ContactID` and birthday date.
 2. The system validates the `ContactID` and birthday format.
 3. The system stores the birthday for the contact.
-4. The system displays a success message: "Birthday for `<Name>` logged as `<BirthdayDate>`."
+4. The system displays a success message: `Birthday for <Name> logged as <BirthdayDate>.`
 
    **Use case ends.**
 
@@ -713,12 +723,12 @@ This use case includes the following related use cases:
 
 #### Extensions:
 - **2a.** The `ContactID` is invalid or does not exist.
-    - **2a1.** The system displays an error message: "Error: Invalid `ContactID`. Please provide a valid numeric identifier."
+    - **2a1.** The system displays an error message: `Invalid ContactID. Please provide a valid numeric identifier.`
     - **2a2.** The Salesperson corrects the `ContactID` and reissues the command.
     - **Use case resumes from Step 2.**
 
 - **2b.** The birthday format is incorrect.
-    - **2b1.** The system displays an error message: "Error: Invalid birthday format. Please use YYYY-MM-DD or MM-DD."
+    - **2b1.** The system displays an error message: `Invalid birthday format. Please use YYYY-MM-DD or MM-DD.`
     - **2b2.** The Salesperson corrects the birthday format and reissues the command.
     - **Use case resumes from Step 2.**
 
@@ -741,10 +751,6 @@ This use case includes the following related use cases:
 
 #### Postconditions:
 - The birthday is stored in the contact’s profile, and a reminder will be triggered for the Salesperson close to the date.
-
----
-
-I will now cover use cases related to the **Help Command**, **Delete Contact**, and **Clear All Contacts** features, continuing the detailed format and referencing other use cases where applicable.
 
 ---
 
