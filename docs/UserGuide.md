@@ -182,6 +182,8 @@ Shows a guest list consisting of all invited guests and a vendor list consisting
 
 **Format:** `list`
 
+**Example Usage:** `list`
+
 Entering the `list` command returns the following result on your screen:
 
 ![list command](images/listCommand.png)
@@ -203,7 +205,9 @@ Finds guests and vendors that match any of the given keyword(s).
 - Only full words will be matched e.g. `Jo` will not match `John`
 - Guest/Vendor matching **any** of the keywords will be returned (e.g. `John Tan` will return `John Doe` and `Alan Tan`)
 
-Entering the `find` command returns the following result on your screen:
+**Example Usage:** `find n/John`
+
+Entering the `find n/John` command returns the following result on your screen:
 
 ![find command](images/findCommand.png)
 
