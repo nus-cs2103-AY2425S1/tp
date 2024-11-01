@@ -117,6 +117,8 @@ public class CommandTestUtil {
     public static final String INVALID_ECNAME_DESC = " " + PREFIX_ECNAME + "John%"; // "%" not allowed in ecname
     public static final String INVALID_ECNUMBER_DESC = " " + PREFIX_ECNUMBER + "1234"; // 4 digit number
     public static final String INVALID_SUBMISSION_DESC = " " + PREFIX_SUBMISSION + "Assignment #"; // "#" not allowed
+    public static final String INVALID_SUBMISSION_STATUS_DESC = " " + PREFIX_SUBMISSION_STATUS
+            + "T"; // only "Y", "N" and "NIL" allowed
     public static final String INVALID_EXAM_DESC = " " + PREFIX_EXAM + "Midterm%"; // only alphanumeric characters
     public static final String INVALID_EXAM_SCORE_DESC = " " + PREFIX_EXAM_SCORE + "101"; // between 1 and 100
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
