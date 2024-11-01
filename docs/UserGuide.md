@@ -214,7 +214,7 @@ It's been a long day at work. Now let's take a break and exit the application. A
 [_Back to Top_](#table-of-contents)
 
 
-After trying out the tutorial, we strongly recommend you to explore our [Features](#features) where you can discover the full range of tools and functionalities our app offers so that you can enhance your productivity and make the most out of BridalBuddy!
+After trying out the tutorial, we strongly recommend you to explore our [features](#features) where you can discover the full range of tools and functionalities our app offers so that you can enhance your productivity and make the most out of BridalBuddy!
 
 [_Back to Top_](#table-of-contents)
 
