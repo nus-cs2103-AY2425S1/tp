@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.Prefix;
@@ -42,12 +44,15 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
 
         // Build a dynamic comparator based on the sortCriteria list
-        Comparator<Person> personComparator = buildComparator(sortCriteria);
+        Comparator<Person> personComparator = buildComparator(new ArrayList<>(sortCriteria));
 
         // Sort the list with the dynamic comparator
         model.sortPersonList(personComparator);
 
-        return new CommandResult("List sorted based on your selected criteria.");
+        return new CommandResult(String.format("List sorted based on your selected criteria(s)\n%s",
+                this.sortCriteria.stream()
+                        .map(Prefix::toString)  // Convert each Prefix to its String representation
+                        .collect(Collectors.joining(", "))));
     }
 
     private Comparator<Person> buildComparator(List<Prefix> sortCriteria) {
