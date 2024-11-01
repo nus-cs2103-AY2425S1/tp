@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_OVER_SIZE;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
+    public static final String MESSAGE_INDEX_UNDER_1 = "Use integers >= 1 for index \n%1$s";
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -37,7 +39,7 @@ public class DeleteCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_INDEX_OVER_SIZE);
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
