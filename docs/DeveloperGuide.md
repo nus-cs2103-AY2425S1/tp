@@ -165,7 +165,7 @@ manage student profiles more efficiently.
 
 - **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified 
   tags already exist on the profile, an error message will notify the user, avoiding duplicate tags.
-- **Invalid Input**: If an invalid student name, level, or subject is provided, the system displays the constraints and 
+- **Invalid Input**: If an invalid student name, level, or subject is inputted, the system displays the constraints and 
   guidelines for tag parameters.
 - **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in 
   value (e.g., "Math" and "MATH"), only one instance of each unique tag will be added, preventing unnecessary 
@@ -350,10 +350,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | ~~tuition teacher~~ | ~~receive notifications when a student's performance drops below a certain threshold~~      | ~~proactively address any learning challenges they might be facing~~                                                 |
 | `*`      | ~~tuition teacher~~ | ~~be able to see a picture of them~~                                                        | ~~easily remember and identify them~~                                                                                |
 
+***
 
 ### Use cases
 
-(For all use cases below, the **System** is the `EduManage` and the **Actor** is the `tuition teacher`, unless specified otherwise)
+(For all use cases below, the **System** is `EduManage` and the **Actor** is the `tuition teacher`, unless specified otherwise)
+
+***
+
+**Use case: Add a student**
+
+**MSS**
+
+1. Tuition teacher requests to add a student by inputting the student's name, phone number, emergency contact, address and any optional fields.
+2. EduManage adds the student's information and indicates success. 
+
+   Use case ends.
+
+**Extensions**
+* 1a. The inputted student's name already exists in EduManage.
+    * 1a1. EduManage shows an error message indicating that the student already exists in EduManage.
+
+      Use case resumes at step 1.
+  
+* 1b. The inputted student's information is missing fields that are not optional.
+  * 1b1. EduManage shows an error message and informs the user of the correct command format.
+  
+    Use case resumes at step 1.
+
+***
 
 **Use case: Delete a student**
 
@@ -361,8 +386,97 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Tuition teacher requests to list students.
 2.  EduManage shows a list of students.
-3.  Tuition teacher requests to delete a specific student in the list.
-4.  EduManage deletes the student.
+3.  Tuition teacher requests to delete a specific student in the list by inputting the student's index.
+4.  EduManage deletes the student and indicates success.
+
+    Use case ends.
+
+**Extensions** 
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The inputted student index is invalid.
+
+    * 3a1. EduManage shows an error message indicating that the inputted index is invalid.
+
+      Use case resumes at step 3.
+
+***
+
+**Use case: Update a student's details**
+
+**MSS**
+
+1. Tuition teacher requests to list students.
+2. EduManage shows a list of students.
+3. Tuition teacher requests to update a specific student's information by inputting the student's name and the new information.
+4. EduManage updates the student's information and indicates success.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The inputted student's name is invalid or cannot be found.
+    * 3a1. EduManage shows an error message and informs the user of the correct command format or to first create a student.
+
+      Use case resumes at step 3.
+
+* 3b. New information details are invalid.
+    * 3b1 EduManage shows an error message and informs the user of the constraints of the invalid details.
+
+      Use case resumes at step 3.
+
+***
+
+**Use case: Find students with a common attribute (e.g. `Name`, `Level`, `Subject`)**
+
+**MSS**
+
+1. Tuition teacher requests to list students.
+2. EduManage shows a list of all students.
+3. Tuition teacher requests to view all students with a common attribute by inputting a common attribute (e.g. a partial name, level or subject).
+4. EduManage displays all students that match the inputted attribute (students with names, levels, or subjects that match the search term).
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The inputted common attribute is invalid as it does not correspond to a valid attribute within EduManage.
+
+    * 3a1. EduManage shows an error message and informs the user of the constraints of the invalid attribute.
+
+      Use case resumes at step 3.
+
+***
+
+**Use case: List all students**
+
+**MSS**
+
+1. Tuition teacher requests to list students.
+2. EduManage shows a list of students.
+    
+    Use case ends.
+
+***
+
+**Use case: Tag a student with a Level**
+
+**MSS**
+
+1.  Tuition teacher requests to list students.
+2.  EduManage shows a list of all students.
+3.  Tuition teacher requests to tag a specific student in the list with a Level by inputting the student's name and a Level.
+4.  EduManage updates the corresponding Level of the student.
 
     Use case ends.
 
@@ -372,20 +486,77 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The inputted student's name is invalid or cannot be found.
 
-    * 3a1. EduManage shows an error message.
+    * 3a1. EduManage shows an error message and informs the user of the correct command format or to first create a student.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-**Use case: Add notes to a student**
+* 3b. Multiple Levels were inputted.
+
+    * 3b1. EduManage shows an error message and informs the user that a maximum of one Level per student is allowed.
+
+      Use case resumes at step 3.
+
+* 3c. No Level was inputted.
+
+    * 3c1. EduManage shows an error message and informs the user of the correct command format.
+
+      Use case resumes at step 3.
+
+***
+
+**Use case: Tag a student with Subject(s)**
+
+**MSS**
+
+1.  Tuition teacher requests to list students.
+2.  EduManage shows a list of all students.
+3.  Tuition teacher requests to tag a specific student in the list with Subject(s) by inputting the student's name and Subject(s).
+4.  EduManage updates the corresponding Subject(s) of the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The inputted student's name is invalid or cannot be found.
+
+    * 3a1. EduManage shows an error message and informs the user of the correct command format or to first create a student.
+
+      Use case resumes at step 3.
+
+* 3b. Tuition teacher attempts to tag a student with Subject(s) without first or simultaneously tagging them with a Level.
+
+    * 3b1. EduManage shows an error message and informs the user to first tag a student with a Level or do so in the same command.
+
+      Use case resumes at step 3.
+
+* 3c. Subject(s) inputted does not correspond with the Level of the student.
+
+    * 3c1. EduManage shows an error message and informs the user of the valid subjects associated with the Level of the student.
+
+      Use case resumes at step 3.
+
+* 3d. No Subject was inputted.
+
+    * 3d1. EduManage shows an error message and informs the user of the correct command format.
+
+      Use case resumes at step 3.
+
+***
+
+**Use case: Add a note to a student**
 
 **MSS**
 
 1.  Tuition teacher requests to list students.
 2.  EduManage shows a list of students.
-3.  Tuition teacher requests to update the notes of a specific student in the list.
-4.  EduManage updates the notes details the student.
+3.  Tuition teacher requests to update the note of a specific student by inputting the student's name and the new note.
+4.  EduManage updates the student's note and indicates success.
 
     Use case ends.
 
@@ -395,22 +566,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given name is invalid.
+* 3a. The inputted student's name is invalid or cannot be found.
 
-    * 3a1. EduManage shows an error message.
+    * 3a1. EduManage shows an error message and informs the user of the correct command format or to first create a student.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-**Use case: Add and view tasks for a student**
+***
+
+**Use case: Add a task for a student**
 
 **MSS**
 
 1.  Tuition teacher requests to list students.
 2.  EduManage shows a list of students.
-3.  Tuition teacher requests to add a task to a specific student in the list.
-4.  EduManage updates the student’s outstanding tasks list.
-5.  Tuition teacher requests to view list of tasks of the student.
-6.  EduManage displays the student’s outstanding tasks list.
+3.  Tuition teacher requests to add a task to a specific student's task list by inputting the student's name, task description and task deadline.
+4.  EduManage adds the task to the student’s outstanding task list and indicates success.
 
     Use case ends.
 
@@ -420,38 +591,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given student is invalid/cannot be found.
+* 3a. The inputted student's name is invalid or cannot be found.
 
-    * 3a1. EduManage shows an error message.
+    * 3a1. EduManage shows an error message and informs the user of the correct command format or to first create a student.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-* 3b. Wrong format for deadline was given.
+* 3b. The inputted task deadline is invalid.
 
-    * 3b1. EduManage shows an error message.
+    * 3b1. EduManage shows an error message and informs the user of the correct task deadline format.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-* 3c. No task description was given.
+* 3c. No task description was inputted.
 
-    * 3c1. EduManage shows an error message.
+    * 3c1. EduManage shows an error message and informs the user to input a task description.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-* 5a. The given student is invalid/cannot be found.
+***
 
-    * 5a1. EduManage shows an error message.
-
-      Use case resumes at step 4.
-
-**Use case: Add subjects for a student**
+**Use case: Delete a task for a student**
 
 **MSS**
 
-1.  Tuition teacher requests to list students.
-2.  EduManage shows a list of students.
-3.  Tuition teacher requests to tag a specific student in the list according to his/her school level and/or subject.
-4.  EduManage updates the corresponding subjects of the student.
+1.  Tuition teacher requests to view all tasks for all students.
+2.  EduManage shows a list of students and their tasks.
+3.  Tuition teacher requests to delete a task from a specific student's task list by inputting the student's name and task index.
+4.  EduManage deletes the task from the student’s task list and indicates success.
 
     Use case ends.
 
@@ -461,32 +628,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given student is invalid/cannot be found.
+* 3a. The inputted student's name is invalid or cannot be found.
 
-    * 3a1. EduManage shows an error message.
+    * 3a1. EduManage shows an error message and informs the user of the correct command format or to first create a student.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-* 3b. Multiple school level subjects were given.
+* 3b. The inputted task index is invalid.
 
-    * 3b1. EduManage shows an error message.
+    * 3b1. EduManage shows an error message and informs the user that the task index is invalid.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-* 3c. No subjects were given.
+***
 
-    * 3c1. EduManage shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: View specific student**
+**Use case: Update a task for a student**
 
 **MSS**
 
-1.  Tuition teacher requests to list students.
-2.  EduManage shows a list of students.
-3.  Tuition teacher requests to view a specific student.
-4.  EduManage shows the details from the student.
+1.  Tuition teacher requests to view all tasks for all students.
+2.  EduManage shows a list of students and their tasks.
+3.  Tuition teacher requests to update a task from a specific student's task list by inputting the student's name, a task index and either a new task description or a new task deadline.
+4.  EduManage updates the task from the student’s task list and indicates success.
 
     Use case ends.
 
@@ -496,12 +659,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given student is invalid/cannot be found.
+* 3a. The inputted student's name is invalid or cannot be found.
 
-    * 3a1. EduManage shows an error message.
+    * 3a1. EduManage shows an error message and informs the user of the correct command format or to first create a student.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
+* 3b. The inputted task index is invalid.
+
+    * 3b1. EduManage shows an error message and informs the user that the task index is invalid.
+
+      Use case resumes at step 3.
+
+* 3c. The inputted task deadline is invalid.
+
+    * 3c1. EduManage shows an error message and informs the user of the correct task deadline format.
+
+      Use case resumes at step 3.
+
+* 3d. No task description and no task deadline was inputted.
+
+    * 3d1. EduManage shows an error message and informs the user of the correct command format.
+
+      Use case resumes at step 3.
+
+***
+
+**Use case: View all tasks for all students**
+
+**MSS**
+1.  Tuition teacher requests to view all tasks for all students.
+2.  EduManage shows a list of students and their tasks.
+
+    Use case ends.
+
+***
+
+**Use case: View details for a specific student**
+
+**MSS**
+
+1. Tuition teacher requests to list students.
+2. EduManage shows a list of all students.
+3. Tuition teacher requests to view details for a student by inputting the student's name.
+4. EduManage displays all details about the student.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The inputted student's name is invalid or cannot be found.
+
+    * 3a1. EduManage shows an error message and informs the user of the correct command format or to first create a student.
+
+      Use case resumes at step 3.
+
+***
 
 ### Non-Functional Requirements
 
@@ -524,8 +741,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Emergency contact**: The contact to use if an emergency happens during the tutoring period
-* **Level**: The level and track of study a student is currently at, eg. Secondary 3 Normal (Academic) (`S3 NA`)
-* **Subject**: The subject the student is receiving tuition for, eg. `Math`, `English`, `Literature`
+* **Level**: The year and track of study a student is currently at, e.g. Secondary 3 Normal (Academic) (`S3 NA`)
+* **Subject**: The subject the student is receiving tuition for, e.g. `Math`, `English`, `Literature`. The Subject must correspond with the Level of the student.
 
 --------------------------------------------------------------------------------------------------------------------
 
