@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -175,6 +176,41 @@ public class AddCommandTest {
         public StringProperty getCurrentReminderProperty() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ReadOnlyAddressBook getArchivedAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public BooleanProperty showingArchived() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setArchivedListMode(boolean isArchived) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addArchivedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasArchivedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsArchivedList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setIsArchivedList(boolean value) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -216,6 +252,21 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void setArchivedListMode(boolean isArchived) {
+            isArchived = isArchived;
+        }
+
+        @Override
+        public void setIsArchivedList(boolean value) {
+            value = value;
+        }
+        @Override
+        public boolean hasArchivedPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSamePerson);
         }
     }
 
