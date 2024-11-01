@@ -136,7 +136,7 @@ Finds contacts whose details matches all given fields.
 Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [nn/NICKNAME]`
 
 * The role field(s), if any, have to take a valid role value (Refer to **Tip** section in [adding a contact](#adding-a-contact-add))
-* The search for all other fields is case-insensitive. e.g query `hans` will match `Hans`
+* The search for all other fields is case-insensitive. e.g. query `hans` will match `Hans`
 * The order of the words does not matter. e.g. query `Hans Bo` will match `Bo Hans`
 * Queries that are substrings of details will also be matched e.g. query `Han` will match `Hans`
   * Each word is treated as a separate substring e.g. query `Hans Ansbo` will match `Hansbo`
@@ -187,10 +187,9 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <box type="warning" seamless>
 
-**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-
+    **Caution:**
+    If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+    Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
