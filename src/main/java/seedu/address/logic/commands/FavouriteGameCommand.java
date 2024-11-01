@@ -67,7 +67,7 @@ public class FavouriteGameCommand extends Command {
         targetGame.setAsFavourite();
         model.setPerson(targetPerson, targetPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
+        model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_FAVOURITE_GAME_SUCCESS, gameName));
     }
 

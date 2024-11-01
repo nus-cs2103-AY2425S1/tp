@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERREDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -47,6 +48,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
+    private Predicate<Person> previousPredicate;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -64,6 +66,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        previousPredicate = model.getCurrentPredicate();
         model.addPerson(toAdd);
         model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
@@ -76,6 +79,7 @@ public class AddCommand extends Command {
 
         Person personToDelete = lastShownList.get(lastShownList.size() - 1);
         model.deletePerson(personToDelete);
+        model.updateFilteredPersonList(previousPredicate);
     }
 
     @Override
