@@ -3,13 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Student's payment status in the address book.
+ * Represents a Student's overdue payment status in the address book.
  * Guarantees: immutable;
  */
 public class Payment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Payment (marked by 'pay/') should be an negative, zero, or "
-            + "positive integer \n'$' is not required \n Leading zero are allowed but not recommended";
+    public static final String MESSAGE_CONSTRAINTS = "Payment should be an negative, zero, or positive integer\n"
+            + "'$' is not required";
     public static final String VALIDATION_REGEX = "^-?[0-9]\\d*|0$\n";
     public final String overdueAmount;
 
@@ -20,6 +20,7 @@ public class Payment {
      */
     public Payment(String overdueAmount) {
         requireNonNull(overdueAmount);
+        assert overdueAmount.matches("-?\\d+") : "The string should represent an integer";
         this.overdueAmount = overdueAmount;
     }
 
@@ -32,7 +33,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment overdue: $" + overdueAmount;
+        return "Current payment overdue: $" + overdueAmount;
     }
 
     @Override
@@ -54,6 +55,5 @@ public class Payment {
     public int hashCode() {
         return overdueAmount.hashCode();
     }
-
 }
 

@@ -18,7 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Fees;
+import seedu.address.model.person.FeesPaidByStudent;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
@@ -220,13 +220,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseFees_validInput_success() throws ParseException {
-        Fees expectedFees = new Fees("123");
+        FeesPaidByStudent expectedFees = new FeesPaidByStudent("123");
         assertEquals(expectedFees, ParserUtil.parseFees(" 123 "));
 
-        Fees zeroleadingexpectedFees = new Fees("00123");
+        FeesPaidByStudent zeroleadingexpectedFees = new FeesPaidByStudent("00123");
         assertEquals(zeroleadingexpectedFees, ParserUtil.parseFees(" 00123 "));
 
-        Fees zeroFees = new Fees("0");
+        FeesPaidByStudent zeroFees = new FeesPaidByStudent("0");
         assertEquals(zeroFees, ParserUtil.parseFees(" 0 "));
     }
 

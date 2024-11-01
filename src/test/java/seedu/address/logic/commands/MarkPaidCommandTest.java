@@ -18,7 +18,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Fees;
+import seedu.address.model.person.FeesPaidByStudent;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -30,10 +30,10 @@ public class MarkPaidCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personToMarkPaid = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person markedPerson = new PersonBuilder(personToMarkPaid).withPayment("200").build();
-        MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_SECOND_PERSON, new Fees("0"));
+        MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_SECOND_PERSON, new FeesPaidByStudent("0"));
 
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKED_PAID_SUCCESS,
-                Messages.format(markedPerson));
+                markedPerson.getFullName(), markedPerson.getPayment().toString());
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(1), markedPerson);
@@ -43,7 +43,7 @@ public class MarkPaidCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        MarkPaidCommand markPaidCommand = new MarkPaidCommand(outOfBoundsIndex, new Fees("200"));
+        MarkPaidCommand markPaidCommand = new MarkPaidCommand(outOfBoundsIndex, new FeesPaidByStudent("200"));
 
         assertCommandFailure(markPaidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -54,10 +54,10 @@ public class MarkPaidCommandTest {
 
         Person personToMarkPaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person markedPerson = new PersonBuilder(personToMarkPaid).withPayment("200").build();
-        MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new Fees("0"));
+        MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new FeesPaidByStudent("0"));
 
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKED_PAID_SUCCESS,
-                Messages.format(markedPerson));
+                markedPerson.getFullName(), markedPerson.getPayment().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);
@@ -72,19 +72,20 @@ public class MarkPaidCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        MarkPaidCommand markPaidCommand = new MarkPaidCommand(outOfBoundIndex, new Fees("200"));
+        MarkPaidCommand markPaidCommand = new MarkPaidCommand(outOfBoundIndex, new FeesPaidByStudent("200"));
 
         assertCommandFailure(markPaidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        MarkPaidCommand markPaidFirstCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new Fees("200"));
-        MarkPaidCommand markPaidSecondCommand = new MarkPaidCommand(INDEX_SECOND_PERSON, new Fees("200"));
+        MarkPaidCommand markPaidFirstCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new FeesPaidByStudent("200"));
+        MarkPaidCommand markPaidSecondCommand = new MarkPaidCommand(INDEX_SECOND_PERSON, new FeesPaidByStudent("200"));
 
         assertTrue(markPaidFirstCommand.equals(markPaidFirstCommand));
 
-        MarkPaidCommand markPaidFirstCommandCopy = new MarkPaidCommand(INDEX_FIRST_PERSON, new Fees("200"));
+        MarkPaidCommand markPaidFirstCommandCopy = new MarkPaidCommand(INDEX_FIRST_PERSON,
+                new FeesPaidByStudent("200"));
         assertTrue(markPaidFirstCommand.equals(markPaidFirstCommandCopy));
 
         assertFalse(markPaidFirstCommand.equals(1));
@@ -97,7 +98,7 @@ public class MarkPaidCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        MarkPaidCommand markPaidCommand = new MarkPaidCommand(targetIndex, new Fees("200"));
+        MarkPaidCommand markPaidCommand = new MarkPaidCommand(targetIndex, new FeesPaidByStudent("200"));
         String expected = MarkPaidCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, markPaidCommand.toString());
     }

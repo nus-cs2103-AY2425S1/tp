@@ -28,7 +28,6 @@ public class ResultDisplay extends UiPart<Region> {
         resultDisplay.setText(feedbackToUser);
     }
 
-
     /**
      * Sets the result display to use the default style.
      */

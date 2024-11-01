@@ -87,7 +87,7 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PARTICIPATION);
             }
             addressBook.addParticipation(participation);
-            participation.addSelfToStudentTutorial();
+            //participation.addSelfToStudentTutorial();
         }
         return addressBook;
     }

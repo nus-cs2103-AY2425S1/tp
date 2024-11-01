@@ -79,11 +79,6 @@ class ParticipationTest {
     }
 
     @Test
-    public void equals() {
-        
-    }
-
-    @Test
     public void isSameParticipation() {
         Participation participation1 = new Participation(student1, tutorial1, attendanceList1);
         Participation participation2 = new Participation(student2, tutorial2, attendanceList2);

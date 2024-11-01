@@ -5,15 +5,14 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "payment" : "200",
-    "attendance": "10/10/2024",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
-    "payment" : "200",
-    "attendance": "11/10/2024"
+    "payment" : "200"
   } ],
-  "tutorials" : [ ]
+  "tutorials" : [ ],
+  "participations" : [ ]
 }
