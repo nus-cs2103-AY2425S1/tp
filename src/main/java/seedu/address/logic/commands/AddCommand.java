@@ -45,7 +45,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SCHEDULE + "Sunday-1000-1200 "
             + PREFIX_SUBJECT + "Biology "
-            + PREFIX_RATE + "3000 "
+            + PREFIX_RATE + "900 "
             + PREFIX_PAID_AMOUNT + "6000 "
             + PREFIX_OWED_AMOUNT + "3000 ";
 
