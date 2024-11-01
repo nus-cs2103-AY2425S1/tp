@@ -41,7 +41,7 @@ public class PatientBuilder {
     public static final String DEFAULT_NOTE = "Requires special care";
     public static final String DEFAULT_NOKNAME = "Tay Bee";
     public static final String DEFAULT_NOKPHONE = "90184718";
-    public static final String DEFAULT_APPOINTMENT = "2001-12-10 T 14:30";
+    public static final String DEFAULT_APPOINTMENT = "2001-12-10 14:30";
 
     private Name name;
     private Phone phone;

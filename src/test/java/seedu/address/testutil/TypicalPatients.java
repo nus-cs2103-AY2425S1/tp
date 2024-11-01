@@ -25,19 +25,23 @@ public class TypicalPatients {
             .withNric("S1234567J")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withEmail("alice@example.com")
-            .withPhone("94351253").build();
+            .withPhone("94351253")
+            .withAppts("2024-12-12T14:00", "Blood Test").build();
     public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
             .withNric("T0101280Z")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432").build();
+            .withEmail("johnd@example.com").withPhone("98765432")
+            .withAppts("2025-12-12T14:00", "Vaccination").build();
     public static final Patient CARL = new PatientBuilder().withName("Carl Kurz")
             .withNric("T0481580Z")
             .withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("heinz@example.com").withAddress("wall street")
+            .withAppts("2024-12-12T14:00", "Vaccination").build();
     public static final Patient DANIEL = new PatientBuilder().withName("Daniel Meier")
             .withNric("T0381280Z")
             .withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").build();
+            .withEmail("cornelia@example.com").withAddress("10th street")
+            .withAppts("2030-06-06T22:00", "Cancer Screening").build();
     public static final Patient ELLE = new PatientBuilder().withName("Elle Meyer")
             .withNric("T0081280F")
             .withPhone("9482224")
