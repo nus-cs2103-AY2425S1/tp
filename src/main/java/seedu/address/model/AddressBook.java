@@ -99,7 +99,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// session logging methods
 
     public ObservableList<Log> getSessionLog(int personIndex) {
-        return persons.asUnmodifiableSessionLog(personIndex);
+        ObservableList<Log> unsortedLogs = persons.asUnmodifiableSessionLog(personIndex);
+        ObservableList<Log> sortedLogs = unsortedLogs.sorted((log1, log2) -> log2.compareTo(log1));
+        return sortedLogs;
     }
 
 

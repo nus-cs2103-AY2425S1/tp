@@ -7,7 +7,18 @@ import java.util.Objects;
 /**
  * Represents a log in the address book.
  */
-public class Log {
+
+public class Log implements Comparable<Log> {
+
+    public static final String MESSAGE_CONSTRAINTS = "A Log requires a date in the format of dd MMM yyyy,"
+            + "and a log description that can take any characters, including symbols, numbers, etc.\n"
+            + "Both date and description should not be blank.\n"
+            + "Format: d/date l/log description\n"
+            + "e.g. d/20 May 2024 l/First appointment with John. John shared 3 problems during the session.";
+
+    public static final String VALIDATION_REGEX = ".+";
+
+
     private final LogEntry entry;
     private final AppointmentDate appointmentDate;
 
@@ -80,6 +91,11 @@ public class Log {
     public String toDetailedString() {
         return String.format("Appointment Date: %s\nEntry: %s",
                 getAppointmentDate(), getEntry());
+    }
+
+    @Override
+    public int compareTo(Log other) {
+        return this.appointmentDate.compareTo(other.getAppointmentDate());
     }
 
     /**
