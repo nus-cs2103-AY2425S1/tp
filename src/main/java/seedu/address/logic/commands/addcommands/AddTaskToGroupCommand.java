@@ -46,6 +46,9 @@ public class AddTaskToGroupCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_TASK_IN_GROUP = "This task is already in the group";
 
+    public static final String MESSAGE_TASK_EXISTS_GLOBAL = "This task (%1$s) already exists.\n" +
+        " Please use the add existing task command instead.";
+
     private final TaskName taskName;
 
     private final Deadline deadline;
@@ -67,6 +70,9 @@ public class AddTaskToGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Task task = new Task(taskName, deadline);
+        if (model.hasTask(task)) {
+            throw new CommandException(String.format(MESSAGE_TASK_EXISTS_GLOBAL, task.getTaskName().getTaskName()));
+        }
         List<GroupName> groups = toAddInto.stream().toList();
         int lastIndex = groups.size() - 1;
         StringBuilder groupsAdded = new StringBuilder();
