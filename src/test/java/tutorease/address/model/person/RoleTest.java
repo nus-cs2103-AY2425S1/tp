@@ -76,4 +76,22 @@ public class RoleTest {
         // Testing null input
         assertThrows(NullPointerException.class, () -> Role.createRole(null));
     }
+
+    @Test
+    public void isValidRole() {
+        // Valid roles
+        assertTrue(Role.isValidRole("guardian"), "Expected 'guardian' to be valid.");
+        assertTrue(Role.isValidRole("student"), "Expected 'student' to be valid.");
+        assertTrue(Role.isValidRole("Guardian"), "Expected 'Guardian' to be valid.");
+        assertTrue(Role.isValidRole("Student"), "Expected 'Student' to be valid.");
+        assertTrue(Role.isValidRole("GUARDIAN"), "Expected 'GUARDIAN' to be valid.");
+        assertTrue(Role.isValidRole("STUDENT"), "Expected 'STUDENT' to be valid.");
+
+        // Invalid roles
+        assertTrue(Role.isValidRole("STUDENT"), "Expected 'STUDENT' to be valid.");
+        assertFalse(Role.isValidRole("teacher"), "Expected 'teacher' to be invalid.");
+        assertFalse(Role.isValidRole("  "), "Expected whitespace to be invalid.");
+        assertFalse(Role.isValidRole(""), "Expected empty string to be invalid.");
+        assertThrows(NullPointerException.class, () -> Role.isValidRole(null));
+    }
 }

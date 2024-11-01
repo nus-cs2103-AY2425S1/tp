@@ -7,8 +7,6 @@ import static tutorease.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; its value is either "Guardian" or "Student"
  */
 public class Role {
-    public static final String GUARDIAN_LOWERCASE = "guardian";
-    public static final String STUDENT_LOWERCASE = "student";
     public static final String GUARDIAN = "Guardian";
     public static final String STUDENT = "Student";
     public static final String MESSAGE_CONSTRAINTS = "Roles can take 'Guardian' or 'Student', and it should not be "
@@ -32,10 +30,11 @@ public class Role {
      * @param role A valid name, either GUARDIAN or STUDENT.
      */
     public static String createRole(String role) {
+        requireNonNull(role);
         final String value;
-        if (GUARDIAN_LOWERCASE.equals(role.toLowerCase())) {
+        if (GUARDIAN.equalsIgnoreCase(role)) {
             value = GUARDIAN;
-        } else if (STUDENT_LOWERCASE.equals(role.toLowerCase())) {
+        } else if (STUDENT.equalsIgnoreCase(role)) {
             value = STUDENT;
         } else {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
@@ -54,9 +53,14 @@ public class Role {
                 || (other instanceof Role
                 && value.equals(((Role) other).value));
     }
-    // Validation method
+    /**
+     * Validates whether a string indicates a valid role(Student or Guardian), and is case-insensitive in nature.
+     *
+     * @param role A string.
+     */
     public static boolean isValidRole(String role) {
-        return GUARDIAN_LOWERCASE.equals(role.toLowerCase()) || STUDENT_LOWERCASE.equals(role.toLowerCase());
+        requireNonNull(role);
+        return GUARDIAN.equalsIgnoreCase(role) || STUDENT.equalsIgnoreCase(role);
     }
 
     public String getRoleString() {
