@@ -36,11 +36,17 @@ class AddClaimCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    /**
+     * Tests the execution of {@code AddClaimCommand} with a valid index, valid insurance ID and valid Claim
+     * This test verifies that when a valid client index, valid insurance plan and valid Claim are provided,
+     * the valid Claim is successfully added to the specified client.
+     */
     @Test
     public void execute_validIndexUnfilteredList_success() throws
             InsurancePlanException, ClaimException {
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
+        // Using Benny, who has basic insurance plan and travel insurance plan but no claims
         Client clientToEdit = model.getFilteredClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
         InsurancePlansManager originalInsurancePlansManager = clientToEdit.getInsurancePlansManager();
         InsurancePlan insurancePlan = originalInsurancePlansManager.getInsurancePlan(VALID_INSURANCE_ID_FIRST);
@@ -67,6 +73,11 @@ class AddClaimCommandTest {
                 clientToEdit.getInsurancePlansManager(), updatedInsurancePlansManager);
     }
 
+    /**
+     * Tests the execution of {@code AddClaimCommand} with a valid index, valid insurance ID and valid Claim
+     * that the client already has. This test verifies that when a duplicate claim is provided,
+     * a {@code CommandException} will be thrown.
+     */
     @Test
     public void execute_duplicateClaim_throwsCommandException() {
         // Carl is the client used for testing, and already has plan
@@ -81,6 +92,11 @@ class AddClaimCommandTest {
         assertThrows(CommandException.class, () -> failingAddClaimCommand.execute(model));
     }
 
+    /**
+     * Tests the execution of {@code AddClaimCommand} with a valid index, valid insurance ID and
+     * invalid Claim (invalid Claim amount). This test verifies that when an invalid claim is provided,
+     * a {@code CommandException} will be thrown.
+     */
     @Test
     public void execute_invalidClaimAmount_throwsCommandException() {
         AddClaimCommand failingAddClaimCommand =
@@ -90,6 +106,11 @@ class AddClaimCommandTest {
         assertThrows(CommandException.class, () -> failingAddClaimCommand.execute(model));
     }
 
+    /**
+     * Tests the execution of {@code AddClaimCommand} with a valid index, invalid insurance ID and
+     * valid Claim. This test verifies that when an invalid insurance ID is provided,
+     * a {@code CommandException} will be thrown.
+     */
     @Test
     public void execute_invalidInsurancePlan_throwsCommandException() {
         InsurancePlan fakeInsurancePlan = new InvalidInsurancePlan();
@@ -102,6 +123,9 @@ class AddClaimCommandTest {
         assertThrows(CommandException.class, () -> failingAddClaimCommand.execute(model));
     }
 
+    /**
+     * Tests the {@code equals} method to determine that it produces the right output
+     */
     @Test
     public void equals() {
         AddClaimCommand addClaimFirstCommand =
