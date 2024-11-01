@@ -2,7 +2,11 @@ package seedu.address.logic.parser.addcommands;
 
 import static seedu.address.logic.Messages.MESSAGE_ILLEGAL_PREFIX_USED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.ALL_PREFIX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.addcommands.AddGroupCommand;
 import seedu.address.logic.commands.addcommands.AddStudentCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;

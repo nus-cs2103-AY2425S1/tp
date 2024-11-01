@@ -15,7 +15,6 @@ import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.exceptions.PersonNotFoundException;
