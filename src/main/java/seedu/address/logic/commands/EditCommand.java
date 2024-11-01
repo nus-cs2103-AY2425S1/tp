@@ -114,9 +114,6 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getDateOfLastVisit());
         Optional<EmergencyContact> updatedEmergencyContact = editPersonDescriptor.getEmergencyContact()
                 .orElse(personToEdit.getEmergencyContact());
-        // remark not edited in edit command; Use remark command to edit remarks
-        // Remark remark = personToEdit.getRemark();
-
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
