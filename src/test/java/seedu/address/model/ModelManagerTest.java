@@ -116,6 +116,38 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void sortByComparator_afterFindCommand_doesNotDeleteContacts() {
+        // Add multiple contacts
+        modelManager.addPerson(GEORGE);
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BENSON);
+
+        // Apply a filter to show only contacts with "George" in the name
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("George"));
+        modelManager.updateFilteredPersonList(predicate);
+
+        // Check that the filtered list contains only GEORGE
+        assertEquals(1, modelManager.getFilteredPersonList().size());
+        assertTrue(modelManager.getFilteredPersonList().contains(GEORGE));
+
+        // Sort the list by name
+        Comparator<Person> comparatorByName = Comparator.comparing(person -> person.getName().fullName);
+        modelManager.sortByComparator(comparatorByName);
+
+        // After sorting, ensure all contacts are still in the address book
+        AddressBook expectedAddressBook = new AddressBookBuilder()
+                .withPerson(ALICE)
+                .withPerson(BENSON)
+                .withPerson(GEORGE)
+                .build();
+        assertEquals(expectedAddressBook, modelManager.getAddressBook());
+
+        // Restore the full person list after the sorting
+        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        assertEquals(3, modelManager.getFilteredPersonList().size()); // Ensure no persons were deleted
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
