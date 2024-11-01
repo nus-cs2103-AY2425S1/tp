@@ -3,6 +3,10 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
+    "address": "4th street",
+    "scheduleName" : "schedule",
+    "date" : "2024-10-21",
+    "time" : "16:00",
+    "socialmedia" : " "
   } ]
 }

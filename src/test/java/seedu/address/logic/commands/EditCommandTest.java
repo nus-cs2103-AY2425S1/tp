@@ -37,7 +37,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        Person editedPerson = new PersonBuilder()
+                .withScheduleName(model.getFilteredPersonList().get(0).getSchedule().scheduleName)
+                .withScheduleDate(model.getFilteredPersonList().get(0).getSchedule().dateString)
+                .withScheduleTime(model.getFilteredPersonList().get(0).getSchedule().timeString)
+                .build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -48,6 +52,7 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
+
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {

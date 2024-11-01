@@ -75,6 +75,19 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getBackupAddressBookFilePath() {
+        return userPrefs.getBackupAddressBookFilePath();
+    }
+
+    @Override
+    public void setBackupAddressBookFilePath(Path backupAddressBookFilePath) {
+        requireNonNull(backupAddressBookFilePath);
+        userPrefs.setBackupAddressBookFilePath(backupAddressBookFilePath);
+    }
+
+
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -147,8 +160,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredPersonList(String order) {
-        addressBook.sortPersons(order);
+    public void sortFilteredPersonList(String order, Boolean toSortBySchedule) {
+        addressBook.sortPersons(order, toSortBySchedule);
     }
 
     @Override

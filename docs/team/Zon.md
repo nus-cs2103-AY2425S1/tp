@@ -3,12 +3,12 @@ layout: page
 title: Zon's Project Portfolio Page
 ---
 
-### Project: 
+### Project:
 
 
 Given below are my contributions to the Project
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
@@ -21,7 +21,7 @@ Given below are my contributions to the Project
   * Developer Guide:
 
 * **Community**:
-  
+
 
 * **Tools**:
 

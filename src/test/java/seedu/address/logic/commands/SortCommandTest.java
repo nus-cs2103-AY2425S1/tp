@@ -29,30 +29,43 @@ public class SortCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
     @Test
-    public void execute_sortAscendingSuccess() {
-        SortCommand sortCommand = new SortCommand(ASCENDING);
-        expectedModel.sortFilteredPersonList(ASCENDING);
+    public void execute_sortAscendingNameSuccess() {
+        SortCommand sortCommand = new SortCommand(ASCENDING, false);
+        expectedModel.sortFilteredPersonList(ASCENDING, false);
+        assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+    @Test
+    public void execute_sortAscendingScheduleSuccess() {
+        SortCommand sortCommand = new SortCommand(ASCENDING, true);
+        expectedModel.sortFilteredPersonList(ASCENDING, true);
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_sortDescendingSuccess() {
-        SortCommand sortCommand = new SortCommand(DESCENDING);
-        expectedModel.sortFilteredPersonList(DESCENDING);
+    public void execute_sortDescendingNameSuccess() {
+        SortCommand sortCommand = new SortCommand(DESCENDING, false);
+        expectedModel.sortFilteredPersonList(DESCENDING, false);
+        assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+    @Test
+    public void execute_sortDescendingScheduleSuccess() {
+        SortCommand sortCommand = new SortCommand(DESCENDING, true);
+        expectedModel.sortFilteredPersonList(DESCENDING, true);
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 
     @Test
     public void equals() {
-        SortCommand sortFirstCommand = new SortCommand(ASCENDING);
-        SortCommand sortSecondCommand = new SortCommand(DESCENDING);
+        SortCommand sortFirstCommand = new SortCommand(ASCENDING, true);
+        SortCommand sortSecondCommand = new SortCommand(DESCENDING, true);
+        SortCommand sortThirdCommand = new SortCommand(ASCENDING, false);
 
         // same object -> returns true
         assertTrue(sortFirstCommand.equals(sortFirstCommand));
 
         // same values -> returns true
-        SortCommand sortFirstCommandCopy = new SortCommand(ASCENDING);
+        SortCommand sortFirstCommandCopy = new SortCommand(ASCENDING, true);
         assertTrue(sortFirstCommand.equals(sortFirstCommandCopy));
 
         // different types -> returns false
@@ -63,6 +76,7 @@ public class SortCommandTest {
 
         // different person -> returns false
         assertFalse(sortFirstCommand.equals(sortSecondCommand));
+        assertFalse(sortFirstCommand.equals(sortThirdCommand));
     }
 }
 

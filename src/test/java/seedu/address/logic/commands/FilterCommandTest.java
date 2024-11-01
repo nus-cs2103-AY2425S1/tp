@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,15 +30,28 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
-        FilterCommand filterFirstCommand = new FilterCommand(new Tag("friends"));
-        FilterCommand filterSecondCommand = new FilterCommand(new Tag("colleagues"));
+        Set<Tag> friendTag = new HashSet<>();
+        friendTag.add(new Tag("friends"));
+
+        Set<Tag> colleaguesTag = new HashSet<>();
+        colleaguesTag.add(new Tag("colleagues"));
+
+        Set<Tag> colleaguesFriendTag = new HashSet<>();
+        colleaguesFriendTag.add(new Tag("colleagues"));
+        colleaguesFriendTag.add(new Tag("friends"));
+
+        FilterCommand filterFirstCommand = new FilterCommand(friendTag);
+        FilterCommand filterSecondCommand = new FilterCommand(colleaguesTag);
+        FilterCommand filterThirdCommand = new FilterCommand(colleaguesFriendTag);
 
         // same object -> returns true
         assertTrue(filterFirstCommand.equals(filterFirstCommand));
-
+        assertTrue(filterThirdCommand.equals(filterThirdCommand));
         // same values -> returns true
-        FilterCommand filterFirstCommandCopy = new FilterCommand(new Tag("friends"));
+        FilterCommand filterFirstCommandCopy = new FilterCommand(friendTag);
         assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
+        FilterCommand filterThirdCommandCopy = new FilterCommand(colleaguesFriendTag);
+        assertTrue(filterThirdCommand.equals(filterThirdCommandCopy));
 
         // different types -> returns false
         assertFalse(filterFirstCommand.equals(1));
@@ -45,6 +61,7 @@ public class FilterCommandTest {
 
         // different person -> returns false
         assertFalse(filterFirstCommand.equals(filterSecondCommand));
+        assertFalse(filterFirstCommand.equals(filterThirdCommand));
     }
 
     @Test
@@ -56,7 +73,9 @@ public class FilterCommandTest {
             "4Horsemen"
         };
         for (String absentTag : absentTags) {
-            FilterCommand filterCommand = new FilterCommand(new Tag(absentTag));
+            Set<Tag> tags = new HashSet<>();
+            tags.add(new Tag(absentTag));
+            FilterCommand filterCommand = new FilterCommand(tags);
             assertCommandSuccess(
                     filterCommand,
                     model,
@@ -73,7 +92,9 @@ public class FilterCommandTest {
             "friends"
         };
         for (String presentTag : presentTags) {
-            FilterCommand filterCommand = new FilterCommand(new Tag(presentTag));
+            Set<Tag> tags = new HashSet<>();
+            tags.add(new Tag(presentTag));
+            FilterCommand filterCommand = new FilterCommand(tags);
             expectedModel.updateFilteredPersonList(
                     person -> person.getTags().contains(new Tag(presentTag))
             );

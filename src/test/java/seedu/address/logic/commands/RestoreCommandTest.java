@@ -84,6 +84,16 @@ public class RestoreCommandTest {
         }
 
         @Override
+        public Path getBackupAddressBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setBackupAddressBookFilePath(Path backupAddressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -144,7 +154,7 @@ public class RestoreCommandTest {
         }
 
         @Override
-        public void sortFilteredPersonList(String order) {
+        public void sortFilteredPersonList(String order, Boolean isSortBySchedule) {
             throw new AssertionError("This method should not be called.");
         }
 
