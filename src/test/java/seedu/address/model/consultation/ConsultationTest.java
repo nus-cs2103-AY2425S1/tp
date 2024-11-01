@@ -72,6 +72,17 @@ public class ConsultationTest {
     }
 
     @Test
+    public void setStudent_studentSetSuccessfully() {
+        List<Student> students = new ArrayList<>();
+        students.add(student1);
+        Consultation consultation = new Consultation(validDate, validTime, students);
+
+        consultation.setStudent(student1, student2);
+        assertFalse(consultation.getStudents().contains(student1));
+        assertTrue(consultation.getStudents().contains(student2));
+    }
+
+    @Test
     public void equals_sameConsultation_returnsTrue() {
         List<Student> students = new ArrayList<>();
         students.add(student1);
