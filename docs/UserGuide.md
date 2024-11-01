@@ -94,9 +94,9 @@ This section tells you what information you will find in each of the sections of
 
     * `list` : Lists down all guests invited to the wedding on the guest list and all vendors involved in the wedding on the vendor list.
 
-    * `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/accepted t/friends t/owesMoney` : Adds a guest named `John Doe` to the guest list.
+    * `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/H t/friends t/owesMoney` : Adds a guest named `John Doe` to the guest list.
 
-    * `add_vendor n/Jack Tan p/98273782 e/jackt@example.com a/391, Clementi Mall, #03-32 company/Jack's Florist t/florist t/responsible` : Adds a guest named `Jack Tan` to the vendor list.
+    * `add_vendor n/Jack Tan p/98273782 e/jackt@example.com a/391, Clementi Mall, #03-32 company/Jack's Florist b/1000 t/florist t/responsible` : Adds a guest named `Jack Tan` to the vendor list.
 
     * `delete_guest 3` : Deletes the 3rd guest shown in the current guest list.
 
