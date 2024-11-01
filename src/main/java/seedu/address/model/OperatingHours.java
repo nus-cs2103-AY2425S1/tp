@@ -75,6 +75,11 @@ public class OperatingHours {
         try {
             LocalTime dateTime = parseDateTime(appointment.dateTime).toLocalTime();
 
+            // to account for underflow - 00:12 becomes 23:58
+            if (this.closingHour.minusMinutes(14).isAfter(this.closingHour)) {
+                return false;
+            }
+
             return dateTime.isBefore(this.closingHour.minusMinutes(14))
                     && (dateTime.isAfter(this.openingHour) || dateTime.equals(this.openingHour));
 
