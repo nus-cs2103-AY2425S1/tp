@@ -83,7 +83,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidKeyword_throwsParseException() {
         assertParseFailure(parser, PREAMBLE_WHITESPACE + KEYWORD_INVALID_EMPTY,
-                String.format(FindCommandParser.MESSAGE_CONSTRAINTS));
+                String.format(FindCommandParser.MESSAGE_INVALID_KEYWORD));
     }
 
     @Test
