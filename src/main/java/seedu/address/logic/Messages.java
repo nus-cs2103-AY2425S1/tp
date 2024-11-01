@@ -48,6 +48,10 @@ public class Messages {
         if (person.isFavorite()) {
             builder.append("(Favorite)");
         }
+        builder.append("; Department: ")
+                .append(person.getDepartment());
+        builder.append("; Leave: ")
+                .append(person.getLeave());
         return builder.toString().trim();
     }
 
