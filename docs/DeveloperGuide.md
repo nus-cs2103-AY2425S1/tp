@@ -544,7 +544,7 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 
 **Value proposition**: 
 - Time spent looking through paper medical documents should be spent in other life-saving activities. 
-- Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment details, allowing GPs to contact and monitor their patients easily.
+- Our product, DocTrack, resolves this issue by creating fast access to patient contact details as well as their relevant appointment details, allowing GPs to contact and monitor their patients easily.
 
 <br>
 
@@ -603,34 +603,52 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: Update a patient
+#### Use case: Add a patient
 
 **MSS**
 
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to update a specific patient in the list with new details
-4.  DocTrack updates the patient.
+1. User requests to add a patient.
+2. DocTrack adds the patient.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User enters invalid parameters.
 
-  Use case ends.
+    * 1a1. DocTrack shows an error message.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
+* 1b. User enters a patient that already exists.
 
-    * 3a1. DocTrack shows an error message.
+    * 1b1. DocTrack shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The new patient details are invalid.
+<br>
 
-    * 3b1. DocTrack shows an error message.
+#### Use case: Edit a patient
 
-      Use case resumes at step 2.
+**MSS**
+
+1. User requests to edit a specific patient in the list with new details. 
+2. DocTrack updates the patient with the new details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The new patient details are invalid.
+
+    * 1b1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
 
 <br>
 
@@ -638,35 +656,27 @@ For all use cases below, unless specified otherwise,
 
 **MSS**
 
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to delete a specific patient in the list.
-4.  DocTrack deletes the patient.
+1. User requests to delete a specific patient in the list.
+2. DocTrack deletes the patient.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+    * 1a1. DocTrack shows an error message.
 
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 <br>
 
-#### Use case: Find appointments for a specific patient
+#### Use case: View all patients
 
 **MSS**
 
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to list appointments for a specific patient in the list.
-4.  DocTrack shows a list of appointments for that patient.
+1. User requests to list all patients.
+2. DocTrack shows a list of patients.
 
     Use case ends.
 
@@ -676,11 +686,39 @@ For all use cases below, unless specified otherwise,
 
   Use case ends.
 
-* 3a. The given index is invalid.
+<br>
 
-    * 3a1. DocTrack shows an error message.
+#### Use case: Find a patient
 
-      Use case resumes at step 2.
+**MSS**
+
+1. User requests to find a patient by name.
+2. DocTrack shows the patient details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters invalid parameters.
+
+    * 1a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The patient is not found.
+
+  Use case ends.
+
+<br>
+
+#### Use case: Clear all patients 
+
+**MSS**
+
+1. User requests to clear all patients.
+2. DocTrack clears all patients.
+
+    Use case ends.
 
 <br>
 
@@ -688,92 +726,49 @@ For all use cases below, unless specified otherwise,
 
 **MSS**
 
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to add an appointment for a specific patient in the list.
-4.  DocTrack adds appointment.
+1. User requests to add an appointment.
+2. DocTrack adds the appointment.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User enters invalid parameters.
 
-  Use case ends.
+    * 1a1. DocTrack shows an error message.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. DocTrack shows an error message.
+* 1b. User enters an appointment that already exists.
 
-      Use case resumes at step 2.
+    * 1b1. DocTrack shows an error message.
 
-* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
+      Use case resumes at step 1.
 
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
+    
 <br>
 
-#### Use case: Duplicate an appointment
+#### Use case: Edit an appointment
 
 **MSS**
 
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to duplicate a specific appointment in the list on a new date.
-4.  DocTrack duplicates appointment.
+1. User requests to edit a specific appointment in the list with new details.
+2. DocTrack updates the appointment with the new details.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+    * 1a1. DocTrack shows an error message.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
+* 1b. The new appointment details are invalid.
 
-    * 3a1. DocTrack shows an error message.
+    * 1b1. DocTrack shows an error message.
 
-      Use case resumes at step 2.
-
-* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
-
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-<br>
-
-#### Use case: Update an appointment
-
-**MSS**
-
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to update a specific appointment in the list with new details
-4.  DocTrack updates the appointment.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The new details are invalid (i.e. wrongly formatted).
-
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
+      Use case resumes at s
 
 <br>
 
@@ -781,35 +776,27 @@ For all use cases below, unless specified otherwise,
 
 **MSS**
 
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to delete a specific appointment in the list.
-4.  DocTrack deletes the appointment.
+1. User requests to delete a specific appointment in the list.
+2. DocTrack deletes the appointment.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+    * 1a1. DocTrack shows an error message.
 
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 <br>
 
-#### Use case: Find patient for a specific appointment
+#### Use case: View all appointments
 
 **MSS**
 
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to find patient for a specific appointment in the list.
-4.  DocTrack shows patient details.
+1. User requests to list all appointments.
+2. DocTrack shows a list of appointments.
 
     Use case ends.
 
@@ -819,13 +806,41 @@ For all use cases below, unless specified otherwise,
 
   Use case ends.
 
-* 3a. The given index is invalid.
+<br>
 
-    * 3a1. DocTrack shows an error message.
+#### Use case: Find an appointment by patient name or date
 
-      Use case resumes at step 2.
+**MSS**
+
+1. User requests to find an appointment by patient name or date.
+2. DocTrack shows the appointment details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters invalid parameters.
+
+    * 1a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+* 2a. The appointment is not found.
+
+  Use case ends.
 
 <br>
+
+#### Use case: Clear all appointments
+
+**MSS**
+
+1. User requests to clear all appointments.
+2. DocTrack clears all appointments.
+
+    Use case ends.
+
+<br>
+
 
 ### Non-Functional Requirements
 
