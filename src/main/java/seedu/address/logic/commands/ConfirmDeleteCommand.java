@@ -11,7 +11,7 @@ import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
- * Requests confirmation before clear operation.
+ * Requests confirmation before delete person operation.
  */
 public class ConfirmDeleteCommand extends Command {
     public static final String DELETE_CONFIRMATION_MESSAGE = "Are you sure you want to delete this person? "
