@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedClientType> clientTypes = new ArrayList<>();
     private final String description;
+    private final List<JsonAdaptedReminder> reminders = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,7 +41,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("clientTypes") List<JsonAdaptedClientType> clientTypes,
-                             @JsonProperty("description") String description) {
+                             @JsonProperty("description") String description,
+                             @JsonProperty("reminders") List<JsonAdaptedReminder> reminders) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +51,9 @@ class JsonAdaptedPerson {
             this.clientTypes.addAll(clientTypes);
         }
         this.description = description;
+        if (reminders != null) {
+            this.reminders.addAll(reminders);
+        }
     }
 
     /**
@@ -62,6 +68,9 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedClientType::new)
                 .collect(Collectors.toList()));
         description = source.getDescription().description;
+        reminders.addAll(source.getReminders().stream()
+                .map(JsonAdaptedReminder::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -73,6 +82,10 @@ class JsonAdaptedPerson {
         final List<ClientType> personClientTypes = new ArrayList<>();
         for (JsonAdaptedClientType clientType : clientTypes) {
             personClientTypes.add(clientType.toModelType());
+        }
+        final List<Reminder> reminders = new ArrayList<>();
+        for (JsonAdaptedReminder reminder : this.reminders) {
+            reminders.add(reminder.toModelType());
         }
 
         if (name == null) {
@@ -120,8 +133,10 @@ class JsonAdaptedPerson {
         }
 
         final Description modelDescription = new Description(description);
+        final Set<Reminder> modelReminder = new HashSet<>(reminders);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelClientTypes, modelDescription);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelClientTypes, modelDescription,
+                modelReminder);
     }
 
 }

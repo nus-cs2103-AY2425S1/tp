@@ -29,6 +29,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -107,9 +108,10 @@ public class EditCommand extends Command {
                 editPersonDescriptor.getClientTypes().orElse(personToEdit.getClientTypes());
         Description updatedDescription = editPersonDescriptor.getDescription()
                 .orElse(personToEdit.getDescription());
+        Set<Reminder> updatedReminders = editPersonDescriptor.getReminders().orElse(personToEdit.getReminders());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedClientTypes, updatedDescription);
+                updatedClientTypes, updatedDescription, updatedReminders);
     }
 
     @Override
@@ -147,6 +149,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<ClientType> clientTypes;
         private Description description;
+        private Set<Reminder> reminders;
 
         public EditPersonDescriptor() {}
 
@@ -161,6 +164,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setClientTypes(toCopy.clientTypes);
             setDescription(toCopy.description);
+            setReminders(toCopy.reminders);
         }
 
         /**
@@ -198,6 +202,7 @@ public class EditCommand extends Command {
             this.address = address;
         }
 
+
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
@@ -227,6 +232,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(description);
         }
 
+        public void setReminders(Set<Reminder> reminders) {
+            this.reminders = (reminders != null) ? new HashSet<>(reminders) : null;
+        }
+
+        public Optional<Set<Reminder>> getReminders() {
+            return (reminders != null) ? Optional.of(Collections.unmodifiableSet(reminders)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -244,7 +257,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(clientTypes, otherEditPersonDescriptor.clientTypes)
-                    && Objects.equals(description, otherEditPersonDescriptor.description);
+                    && Objects.equals(description, otherEditPersonDescriptor.description)
+                    && Objects.equals(reminders, otherEditPersonDescriptor.reminders);
         }
 
         @Override
@@ -256,6 +270,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("clientTypes", clientTypes)
                     .add("description", description)
+                    .add("reminders", reminders)
                     .toString();
         }
     }
