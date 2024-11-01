@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.ui.MainWindow.DARK_THEME;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private String theme = DARK_THEME; //
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +38,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setTheme(newUserPrefs.getTheme());
     }
 
     public GuiSettings getGuiSettings() {
@@ -56,6 +59,27 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    /**
+     * Sets the theme preference for the user.
+     *
+     * @param theme The theme to be set (e.g., "light" or "dark").
+     * @return The updated UserPrefs object with the new theme preference.
+     */
+    public UserPrefs setTheme(String theme) {
+        this.theme = theme;
+        return this;
+    }
+
+    /**
+     * Retrieves the current theme preference of the user.
+     *
+     * @return The current theme preference as a String ("light" or "dark").
+     */
+    @Override
+    public String getTheme() {
+        return theme;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -69,7 +93,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && theme.equals(otherUserPrefs.theme);
     }
 
     @Override
@@ -82,6 +107,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nTheme : " + theme);
         return sb.toString();
     }
 
