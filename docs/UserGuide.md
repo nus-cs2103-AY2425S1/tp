@@ -262,6 +262,10 @@ Exits the program.
 
 Format: `exit`
 
+### Changing the theme of the app
+
+Click Theme to toggle between Dark Theme and Light Theme.
+
 ### Saving the data
 
 App data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -276,10 +280,6 @@ App data are saved automatically as a JSON file `[JAR file location]/data/inSURE
 If your changes to the data file makes its format invalid, app will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
