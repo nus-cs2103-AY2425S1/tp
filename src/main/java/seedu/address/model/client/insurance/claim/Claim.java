@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class Claim {
     public static final String INVALID_CLAIM_ID = "Invalid Claim ID, must follow: "
-            + "Letter + 4 digits only.";
+            + "Letter + 4 digits only eg. B1234";
 
     public static final String NEGATIVE_CLAIM_AMOUNT = "Claim Amount cannot be negative.";
     public static final String INVALID_CLAIM_AMOUNT = "Claim Amount must be in dollars and cents eg. 151.00";
