@@ -12,7 +12,7 @@ public class Role {
     public static final String GUARDIAN = "Guardian";
     public static final String STUDENT = "Student";
     public static final String MESSAGE_CONSTRAINTS = "Roles can take 'Guardian' or 'Student', and it should not be "
-            + "blank";
+            + "blank." + "Also, roles are case-insensitive.";
     public final String value;
 
     /**
@@ -25,8 +25,10 @@ public class Role {
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
         if (GUARDIAN_LOWERCASE.equals(role.toLowerCase())) {
             value = GUARDIAN;
-        } else {
+        } else if (STUDENT_LOWERCASE.equals(role.toLowerCase())) {
             value = STUDENT;
+        } else {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
 
