@@ -160,6 +160,21 @@ public class Lesson {
     }
 
     /**
+     * Checks if this lesson's time range falls within a specified time range.
+     *
+     * @param otherTimeRange A time range in the format "HHmm-HHmm".
+     * @return true if this lesson's time range is within the specified keyword time range.
+     */
+    public boolean checkWithinTimeRange(String otherTimeRange) {
+        String[] times = otherTimeRange.split("-");
+        LocalTime otherStartTime = LocalTime.parse(times[0], TIME_FORMATTER);
+        LocalTime otherEndTime = LocalTime.parse(times[1], TIME_FORMATTER);
+
+        return (startTime.equals(otherStartTime) || startTime.isAfter(otherStartTime))
+                && (endTime.equals(otherEndTime) || endTime.isBefore(otherEndTime));
+    }
+
+    /**
      * Compares this lesson to another object for equality.
      * Returns {@code true} if the other object is a {@code Lesson} with the
      * same start and end times as this lesson.

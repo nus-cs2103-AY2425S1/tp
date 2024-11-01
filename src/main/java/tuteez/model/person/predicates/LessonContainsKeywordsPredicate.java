@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import tuteez.commons.core.LogsCenter;
 import tuteez.commons.util.ToStringBuilder;
 import tuteez.model.person.Person;
+import tuteez.model.person.lesson.Day;
 import tuteez.model.person.lesson.Lesson;
 
 /**
@@ -24,29 +25,23 @@ public class LessonContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
 
         boolean hasMatch = person.getLessons().stream()
-                .map(Lesson::getDayAndTime)
-                .anyMatch(dayAndTime -> {
-                    String[] parts = dayAndTime.split(" ");
-                    String day = parts[0];
-                    String time = parts[1];
-
-                    boolean dayMatches = keywords.stream().anyMatch(keyword -> keyword.equalsIgnoreCase(day));
-                    boolean timeMatches = keywords.stream().anyMatch(keyword -> keyword.equals(time));
-
-                    if (dayMatches) {
-                        logger.info("Match found for day: " + day);
-                    }
-                    if (timeMatches) {
-                        logger.info("Match found for time: " + time);
-                    }
-                    return dayMatches || timeMatches;
-                });
+                .anyMatch(lesson -> matchesAnyKeyword(lesson));
 
         if (!hasMatch) {
-            logger.info("No matches found for person:" + person.getName());
+            logger.info("No matches found for person: " + person.getName());
         }
 
         return hasMatch;
+    }
+
+    private boolean matchesAnyKeyword(Lesson lesson) {
+        return keywords.stream().anyMatch(keyword -> (
+                Day.isValidDay(keyword) && lesson.getLessonDay().toString().equalsIgnoreCase(keyword))
+                || isTimeRangeMatch(lesson, keyword));
+    }
+
+    private boolean isTimeRangeMatch(Lesson lesson, String keyword) {
+        return lesson.checkWithinTimeRange(keyword);
     }
 
     @Override

@@ -30,6 +30,24 @@ public enum Day {
         };
     }
 
+    /**
+     * Checks if the provided string is a valid day of the week.
+     *
+     * @param dayStr The string representing the day to check.
+     * @return true if the string matches a valid day, false otherwise.
+     */
+    public static boolean isValidDay(String dayStr) {
+        if (dayStr == null) {
+            return false;
+        }
+        for (Day day : Day.values()) {
+            if (day.name().equalsIgnoreCase(dayStr)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return name();
