@@ -68,6 +68,18 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Clears all events with the given person.
+     * The person must exist in the address book.
+     */
+    void clearEventsWithPerson(Person target);
+
+    /**
+     * Removes the given person from contacts of all events.
+     * The person must exist in the address book.
+     */
+    void clearPersonFromContacts(Person target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -87,6 +99,10 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     boolean hasEvent(Event event);
+
+    boolean hasEventOverlap(Event event);
+
+    boolean hasEventOverlap(Event event, Event eventToIgnore);
 
     void addEvent(Event toAdd);
 

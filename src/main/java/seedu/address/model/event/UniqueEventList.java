@@ -3,13 +3,17 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.model.person.Person;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
@@ -32,6 +36,22 @@ public class UniqueEventList implements Iterable<Event> {
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameEvent);
+    }
+
+    /**
+     * Returns true if the list contains an event that clashes with the given argument.
+     */
+    public boolean containsOverlap(Event toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isOverlap);
+    }
+
+    /**
+     * Returns true if the list contains an event that clashes with the given argument, excluding the given argument.
+     */
+    public boolean containsOverlap(Event toCheck, Event toIgnore) {
+        requireAllNonNull(toCheck, toIgnore);
+        return internalList.stream().anyMatch(e -> e.isOverlap(toCheck) && !e.isSameEvent(toIgnore));
     }
 
     /**
@@ -77,6 +97,40 @@ public class UniqueEventList implements Iterable<Event> {
         }
     }
 
+    /**
+     * Removes all events with the given person from the list.
+     * The person must exist in the list.
+     */
+    public void clearEventsWithPerson(Person target) {
+        requireNonNull(target);
+        internalList.removeIf(e -> e.getCelebrity().equals(target));
+    }
+
+    /**
+     * Removes the given person from contacts of all events.
+     * The person must exist in the list.
+     */
+    public void clearPersonFromContacts(Person target) {
+        requireNonNull(target);
+        internalList.forEach(e -> removePersonFromContacts(e, target));
+    }
+
+    /**
+     * Removes the given person from the contacts of the given event.
+     * The person must exist in the list.
+     */
+    public void removePersonFromContacts(Event event, Person target) {
+        requireAllNonNull(event, target);
+        if (!event.getContacts().contains(target)) {
+            return;
+        }
+        Set<Person> newContacts = new HashSet<>(event.getContacts());
+        newContacts.remove(target);
+        Event replacement = new Event(event.getName(), event.getTime(), event.getVenue(),
+                event.getCelebrity(), newContacts);
+        setEvent(event, replacement);
+    }
+
     public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -93,6 +147,13 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.setAll(events);
+    }
+
+    /**
+     * Sorts the contents of this list by start time chronologically.
+     */
+    public void sortByStartTime() {
+        internalList.sort(Comparator.comparing(e -> e.getStartTime()));
     }
 
     /**

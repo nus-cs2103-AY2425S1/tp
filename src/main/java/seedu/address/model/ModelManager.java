@@ -36,7 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+        filteredEvents = new FilteredList<>(this.addressBook.getSortedEventList());
     }
 
     public ModelManager() {
@@ -102,6 +102,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void clearEventsWithPerson(Person target) {
+        addressBook.clearEventsWithPerson(target);
+    }
+
+    @Override
+    public void clearPersonFromContacts(Person target) {
+        addressBook.clearPersonFromContacts(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -123,6 +133,18 @@ public class ModelManager implements Model {
     public boolean hasEvent(Event event) {
         requireNonNull(event);
         return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public boolean hasEventOverlap(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEventOverlap(event);
+    }
+
+    @Override
+    public boolean hasEventOverlap(Event event, Event eventToIgnore) {
+        requireAllNonNull(event, eventToIgnore);
+        return addressBook.hasEventOverlap(event, eventToIgnore);
     }
 
     @Override

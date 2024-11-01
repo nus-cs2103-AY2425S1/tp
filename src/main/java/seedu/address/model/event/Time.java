@@ -10,9 +10,7 @@ import java.util.Objects;
  */
 public class Time {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Please express the time field of your event in the following format "
-                    + "\"t/from: YYYY-MM-DD HH:mm, to: YYYY-MM-DD HH:mm\"";
+    public static final String MESSAGE_CONSTRAINTS = "Start time should be before end time";
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -28,8 +26,16 @@ public class Time {
         this.endTime = endTime;
     }
 
+    public static boolean isValidTime(LocalDateTime startTime, LocalDateTime endTime) {
+        return startTime.isBefore(endTime);
+    }
+
     public String getStartTime() {
         return this.startTime.format(formatter);
+    }
+
+    public LocalDateTime getLocalDateStartTime() {
+        return this.startTime;
     }
 
     public String getEndTime() {
@@ -39,6 +45,16 @@ public class Time {
     public String getTime() {
         return "From: " + startTime.format(formatter) + " "
                 + "To: " + endTime.format(formatter);
+    }
+
+    /**
+     * Returns true if a given {@code Time} overlaps with this {@code Time}.
+     */
+    public boolean isOverlap(Time other) {
+        if (this.endTime.isBefore(other.startTime) || this.startTime.isAfter(other.endTime)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

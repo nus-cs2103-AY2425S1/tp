@@ -24,9 +24,11 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_CONFIRM_COMMAND = "Please input Y/N to confirm your operation!";
-    public static final String MESSAGE_INVALID_TIME = "Incomplete time field! "
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Incorrect time field! "
             + "Please the follow format: "
             + "\"t/from: YYYY-MM-DD HH:mm, to: YYYY-MM-DD HH:mm\"";
+    public static final String MESSAGE_INVALID_CELEBRITY_FORMAT = "Celebrity name cannot be blank";
+    public static final String MESSAGE_INVALID_EVENT_CONTACT_FORMAT = "Contact name cannot be blank";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -68,7 +70,7 @@ public class Messages {
                 .append("; Venue: ")
                 .append(event.getVenue().map(Venue::toString).orElse(""))
                 .append("; Celebrity: ")
-                .append(event.getCelebrity())
+                .append(event.getCelebrityName())
                 .append("; Contacts: ")
                 .append(event.getContactsString());
         return builder.toString();

@@ -1,10 +1,12 @@
 package seedu.address.model.event;
 
 import java.util.HashSet;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -61,6 +63,10 @@ public class Event {
         return time;
     }
 
+    public LocalDateTime getStartTime() {
+        return time.getLocalDateStartTime();
+    }
+
     public Optional<Venue> getVenue() {
         return Optional.ofNullable(venue);
     }
@@ -69,12 +75,17 @@ public class Event {
         return celebrity;
     }
 
+    public Name getCelebrityName() {
+        return celebrity.getName();
+    }
+
     public Set<Person> getContacts() {
         return contacts;
     }
 
     public String getContactsString() {
-        return contacts.stream().collect(StringBuilder::new, (sb, p) -> sb.append(p.getName().fullName)
+        return contacts.stream().collect(StringBuilder::new, (sb, p) -> sb.append(p.getTagsString())
+                        .append(p.getName().fullName)
                         .append(" ").append(p.getPhone().value).append("\n"),
                 StringBuilder::append).toString();
     }
@@ -118,5 +129,18 @@ public class Event {
      */
     public boolean isSameEvent(Event otherEvent) {
         return this.equals(otherEvent);
+    }
+
+    /**
+     * Returns true if the event overlaps with the other event.
+     */
+    public boolean isOverlap(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && this.time.isOverlap(otherEvent.time)
+                && this.celebrity.equals(otherEvent.celebrity);
     }
 }

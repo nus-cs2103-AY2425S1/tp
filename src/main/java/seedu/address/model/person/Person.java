@@ -119,6 +119,13 @@ public class Person {
     }
 
     /**
+     * Returns a string representation of the tags.
+     */
+    public String getTagsString() {
+        return tags.stream().findFirst().map(t -> t.tagName).orElse("-");
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

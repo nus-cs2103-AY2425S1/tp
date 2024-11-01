@@ -49,10 +49,11 @@ public class EditEventCommand extends EditCommand {
             + PREFIX_EVENT_TIME + "from: 2024-03-01 13:10, to: 2024-03-01 19:30  "
             + PREFIX_EVENT_VENUE + "Broadway "
             + PREFIX_EVENT_CELEBRITY + "John Doe "
-            + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";
+            + PREFIX_EVENT_CONTACTS + "Alex Yeoh";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
+    public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event";
 
     private final Index index;
     private final EditEventDescriptor editEventDescriptor;
@@ -83,11 +84,9 @@ public class EditEventCommand extends EditCommand {
         }
 
         if (editEventDescriptor.contactsNames != null) {
-            String[] newContacts = editEventDescriptor.contactsNames.trim().split(", ", 0);
-            Set<Person> newSet = new HashSet<>();
-            for (int i = 0; i < newContacts.length; i++) {
-                newSet.add(model.findPerson(newContacts[i]));
-            }
+            Set<Person> newSet = new HashSet<>(editEventDescriptor.contactsNames.stream()
+                    .map(model::findPerson)
+                    .toList());
             editEventDescriptor.setContacts(newSet);
         }
 
@@ -96,6 +95,11 @@ public class EditEventCommand extends EditCommand {
 
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+
+        if (model.hasEventOverlap(editedEvent, eventToEdit)) {
+            throw new CommandException(
+                    String.format(MESSAGE_EVENT_OVERLAP, editedEvent.getCelebrity().getName().fullName));
         }
 
         model.setEvent(eventToEdit, editedEvent);
@@ -154,7 +158,7 @@ public class EditEventCommand extends EditCommand {
         private Venue venue;
         private String celebrityName;
         private Person celebrity;
-        private String contactsNames;
+        private Set<String> contactsNames;
         private Set<Person> contacts;
 
         public EditEventDescriptor() {}
@@ -217,7 +221,7 @@ public class EditEventCommand extends EditCommand {
             this.celebrityName = celebrityName;
         }
 
-        public void setContactsNames(String contactsNames) {
+        public void setContactsNames(Set<String> contactsNames) {
             this.contactsNames = contactsNames;
         }
 

@@ -7,9 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddEventCommand;
@@ -49,13 +47,10 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         Venue venue = argMultimap.getValue(PREFIX_EVENT_VENUE).isPresent()
                 ? ParserUtil.parseVenue((argMultimap.getValue(PREFIX_EVENT_VENUE)).get())
                 : null;
-        String celebrity = argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get();
-        List<String> contacts = Arrays.stream(argMultimap.getValue(PREFIX_EVENT_CONTACTS).get().split(","))
-                .map(String::trim)
-                .collect(Collectors.toList());;
+        String celebrity = ParserUtil.parseEventCelebrity(argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get());
+        Set<String> contacts = ParserUtil.parseEventContacts(argMultimap.getAllValues(PREFIX_EVENT_CONTACTS));
 
         return new AddEventCommand(name, time, venue, celebrity, contacts);
-
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
