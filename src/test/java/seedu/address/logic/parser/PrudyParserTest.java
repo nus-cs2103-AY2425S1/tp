@@ -27,7 +27,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClaimsCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeletePolicyCommand;
+import seedu.address.logic.commands.DeletePoliciesCommand;
 import seedu.address.logic.commands.EditClaimCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
@@ -159,12 +159,12 @@ public class PrudyParserTest {
     }
     @Test
     public void parseCommand_deletePolicy() throws Exception {
-        DeletePolicyCommand command = (DeletePolicyCommand) parser.parseCommand(
-                DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
+        DeletePoliciesCommand command = (DeletePoliciesCommand) parser.parseCommand(
+                DeletePoliciesCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life");
         final Set<PolicyType> policyTypes = new HashSet<>();
         policyTypes.add(PolicyType.LIFE);
-        assertEquals(new DeletePolicyCommand(INDEX_FIRST_CLIENT, policyTypes), command);
+        assertEquals(new DeletePoliciesCommand(INDEX_FIRST_CLIENT, policyTypes), command);
     }
 
     @Test

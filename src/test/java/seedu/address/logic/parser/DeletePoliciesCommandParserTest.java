@@ -13,25 +13,25 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeletePolicyCommand;
+import seedu.address.logic.commands.DeletePoliciesCommand;
 import seedu.address.model.policy.PolicyType;
 
-public class DeletePolicyCommandParserTest {
-    private final DeletePolicyCommandParser parser = new DeletePolicyCommandParser();
+public class DeletePoliciesCommandParserTest {
+    private final DeletePoliciesCommandParser parser = new DeletePoliciesCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
         final Set<PolicyType> policyTypes = new HashSet<>();
         policyTypes.add(PolicyType.HEALTH);
         String userInput = INDEX_FIRST_CLIENT.getOneBased() + POLICY_TYPE_DESC_HEALTH;
-        DeletePolicyCommand expectedCommand = new DeletePolicyCommand(INDEX_FIRST_CLIENT, policyTypes);
+        DeletePoliciesCommand expectedCommand = new DeletePoliciesCommand(INDEX_FIRST_CLIENT, policyTypes);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_missingCompulsoryField_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePolicyCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePoliciesCommand.MESSAGE_USAGE);
 
         // no parameters
         assertParseFailure(parser, "", expectedMessage);
@@ -48,7 +48,7 @@ public class DeletePolicyCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePolicyCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePoliciesCommand.MESSAGE_USAGE);
 
         // invalid index
         assertParseFailure(parser, "foo" + VALID_POLICY_TYPE_HEALTH, expectedMessage);
