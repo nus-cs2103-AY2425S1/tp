@@ -68,10 +68,10 @@ public class EduLogTest {
     public void resetData_withIdenticalFields_throwsDuplicateLessonException() {
         // Two lessons with the same identity fields
         Lesson editedLesson = new LessonBuilder(SEC_2_MATH)
-            .withDescription(SEC_2_MATH.getDescription())
-            .withDayOfWeek(SEC_2_MATH.getStartDay())
-            .withStartTime(SEC_2_MATH.getStartTime())
-            .withEndTime(SEC_2_MATH.getEndTime())
+            .withDescription(SEC_2_MATH.getDescription().toString())
+            .withDayOfWeek(SEC_2_MATH.getStartDay().toString())
+            .withStartTime(SEC_2_MATH.getFormattedStartTime())
+            .withEndTime(SEC_2_MATH.getFormattedEndTime())
             .build();
 
         List<Lesson> newLessons = Arrays.asList(SEC_2_MATH, editedLesson);
@@ -87,10 +87,10 @@ public class EduLogTest {
     public void resetData_withIdenticalDescription_throwsDuplicateLessonException() {
         // Two lessons with the same identity fields
         Lesson editedLesson = new LessonBuilder(SEC_2_MATH)
-            .withDescription(SEC_2_MATH.getDescription())
-            .withDayOfWeek(SEC_4_MATH.getStartDay())
-            .withStartTime(SEC_3_MATH.getStartTime())
-            .withEndTime(SEC_4_MATH.getEndTime())
+            .withDescription(SEC_2_MATH.getDescription().toString())
+            .withDayOfWeek(SEC_4_MATH.getStartDay().toString())
+            .withStartTime(SEC_3_MATH.getFormattedStartTime())
+            .withEndTime(SEC_4_MATH.getFormattedEndTime())
             .build();
 
         List<Lesson> newLessons = Arrays.asList(SEC_2_MATH, editedLesson);
@@ -144,10 +144,10 @@ public class EduLogTest {
     public void hasLesson_lessonWithSameIdentityFieldsInEduLog_returnsTrue() {
         eduLog.addLesson(SEC_2_MATH);
         Lesson editedLesson = new LessonBuilder(SEC_2_MATH)
-            .withDescription(SEC_2_MATH.getDescription())
-            .withDayOfWeek(SEC_2_MATH.getStartDay())
-            .withStartTime(SEC_2_MATH.getStartTime())
-            .withEndTime(SEC_2_MATH.getEndTime())
+            .withDescription(SEC_2_MATH.getDescription().toString())
+            .withDayOfWeek(SEC_2_MATH.getStartDay().toString())
+            .withStartTime(SEC_2_MATH.getFormattedStartTime())
+            .withEndTime(SEC_2_MATH.getFormattedEndTime())
             .build();
         assertTrue(eduLog.hasLesson(editedLesson));
     }
@@ -163,7 +163,6 @@ public class EduLogTest {
         assertThrows(UnsupportedOperationException.class, () -> eduLog.getStudentList().remove(0));
     }
 
-    // TODO: update this test
     @Test
     public void toStringMethod() {
         String expected = EduLog.class.getCanonicalName() + "{students=" + eduLog.getStudentList() + ", "

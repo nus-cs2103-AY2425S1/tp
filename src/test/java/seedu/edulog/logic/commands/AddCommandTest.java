@@ -22,6 +22,7 @@ import seedu.edulog.model.EduLog;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ReadOnlyEduLog;
 import seedu.edulog.model.ReadOnlyUserPrefs;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
@@ -186,7 +187,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Lesson findLesson(String description) {
+        public Lesson findLesson(Description description) {
             throw new AssertionError("This method should not be called.");
         }
 

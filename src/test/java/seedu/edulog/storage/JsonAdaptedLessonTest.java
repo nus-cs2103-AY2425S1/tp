@@ -8,12 +8,15 @@ import static seedu.edulog.testutil.TypicalLessons.SEC_2_MATH;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulog.commons.exceptions.IllegalValueException;
+import seedu.edulog.model.calendar.Day;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
+import seedu.edulog.model.calendar.LessonTime;
 import seedu.edulog.storage.lesson.JsonAdaptedLesson;
 
 public class JsonAdaptedLessonTest {
     private static final String EMPTY_DESCRIPTION = "";
-    private static final String INVALID_DESCRIPTION = "d".repeat(Lesson.MAX_CHARACTER_LIMIT + 1);
+    private static final String INVALID_DESCRIPTION = "d".repeat(Description.MAX_CHARACTER_LIMIT + 1);
     private static final String INVALID_DAY_OF_WEEK = "qwrqwrjqwrpwqjorqwjpor";
     private static final String INVALID_TIME_BOUNDS_MINUTE = "2061";
 
@@ -21,7 +24,7 @@ public class JsonAdaptedLessonTest {
 
     private static final String INVALID_TIME_LENGTH = "20:61";
 
-    private static final String VALID_DESCRIPTION = SEC_2_MATH.getDescription();
+    private static final String VALID_DESCRIPTION = SEC_2_MATH.getDescription().toString();
 
     private static final String VALID_DAY_OF_WEEK = SEC_2_MATH.getStartDay().toString();
 
@@ -38,7 +41,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidDescriptionEmpty_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(EMPTY_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, VALID_END_TIME);
-        String expectedMessage = Lesson.DESCRIPTION_EMPTY;
+        String expectedMessage = Description.DESCRIPTION_EMPTY;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -46,7 +49,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidDescriptionTooLong_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(INVALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, VALID_END_TIME);
-        String expectedMessage = Lesson.DESCRIPTION_TOO_LONG;
+        String expectedMessage = Description.DESCRIPTION_TOO_LONG;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -62,7 +65,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidDayOfWeek_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
                 new JsonAdaptedLesson(VALID_DESCRIPTION, INVALID_DAY_OF_WEEK, VALID_START_TIME, VALID_END_TIME);
-        String expectedMessage = Lesson.INVALID_DAY_OF_WEEK;
+        String expectedMessage = Day.INVALID_DAY_OF_WEEK;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -70,7 +73,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidStartTimeHour_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
                 new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, INVALID_TIME_BOUNDS_HOUR, VALID_END_TIME);
-        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        String expectedMessage = LessonTime.NOT_24H_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -78,7 +81,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidStartTimeMinute_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, INVALID_TIME_BOUNDS_MINUTE, VALID_END_TIME);
-        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        String expectedMessage = LessonTime.NOT_24H_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -86,7 +89,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidStartTimeLength_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, INVALID_TIME_LENGTH, VALID_END_TIME);
-        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        String expectedMessage = LessonTime.NOT_24H_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -102,7 +105,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidEndTimeHour_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, INVALID_TIME_BOUNDS_HOUR);
-        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        String expectedMessage = LessonTime.NOT_24H_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -110,7 +113,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidEndTimeMinute_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, INVALID_TIME_BOUNDS_MINUTE);
-        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        String expectedMessage = LessonTime.NOT_24H_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -118,7 +121,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidEndTimeLength_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, INVALID_TIME_LENGTH);
-        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        String expectedMessage = LessonTime.NOT_24H_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -134,7 +137,7 @@ public class JsonAdaptedLessonTest {
     public void toModelType_sameStartAndEndTime_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, VALID_START_TIME);
-        String expectedMessage = Lesson.NO_SAME_TIME;
+        String expectedMessage = LessonTime.NO_SAME_TIME;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 }
