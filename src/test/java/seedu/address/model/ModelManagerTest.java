@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -83,6 +84,26 @@ public class ModelManagerTest {
         model.commitAddressBook();
         model.undoAddressBook();
         assertEquals(addressBook1, model.getAddressBook());
+    }
+
+    @Test
+    public void commit_withUnsavedChanges_throwsCommandException() {
+        AddressBook addressBook1 = new AddressBook();
+        AddressBook addressBook2 = getTypicalAddressBook();
+
+        ModelManager model = new ModelManager(addressBook1, new UserPrefs());
+        model.setAddressBook(addressBook2);
+        model.commitAddressBook();
+        model.deletePerson(GEORGE);
+        assertThrows(CommandException.class, VersionedAddressBook.MESSAGE_UNSAVED_CHANGES, model::undoAddressBook);
+    }
+
+    @Test
+    public void undo_withNoMoreHistory_throwsCommandException() {
+        ModelManager model = new ModelManager();
+        model.addPerson(GEORGE);
+        assertThrows(CommandException.class, VersionedAddressBook.MESSAGE_NO_MORE_HISTORY,
+                model::undoAddressBook);
     }
 
     @Test

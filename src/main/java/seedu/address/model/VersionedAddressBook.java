@@ -12,7 +12,9 @@ import seedu.address.model.person.Person;
  * Represents the different states of the Address Book for the user.
  */
 public class VersionedAddressBook extends AddressBook {
-    public static final String MESSAGE_CONSTRAINTS = "This is the earliest version that user can retrieve";
+    public static final String MESSAGE_NO_MORE_HISTORY = "This is the earliest version that user can retrieve";
+    public static final String MESSAGE_UNSAVED_CHANGES = "There are unsaved changes in the current state. "
+            + "Please commit the changes before undoing.";
     private final ArrayList<AddressBook> addressBookStateList;
     private int currentStatePointer;
     private AddressBook current;
@@ -25,6 +27,7 @@ public class VersionedAddressBook extends AddressBook {
         addressBookStateList = new ArrayList<>();
         currentStatePointer = -1;
         current = new AddressBook();
+        this.commitAddressBook();
     }
 
     /**
@@ -32,9 +35,9 @@ public class VersionedAddressBook extends AddressBook {
      */
     public VersionedAddressBook(ReadOnlyAddressBook addressBook) {
         addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new AddressBook(addressBook));
-        currentStatePointer = 0;
+        currentStatePointer = -1;
         current = new AddressBook(addressBook);
+        this.commitAddressBook();
     }
 
     /**
@@ -50,12 +53,11 @@ public class VersionedAddressBook extends AddressBook {
      */
     public void undoAddressBook() throws CommandException {
         if (currentStatePointer <= 0) {
-            throw new CommandException(MESSAGE_CONSTRAINTS);
+            throw new CommandException(MESSAGE_NO_MORE_HISTORY);
         }
 
         if (!current.equals(addressBookStateList.get(currentStatePointer))) {
-            throw new CommandException("There are unsaved changes in the current state. "
-                    + "Please save the changes before undoing.");
+            throw new CommandException(MESSAGE_UNSAVED_CHANGES);
         }
 
         currentStatePointer--;

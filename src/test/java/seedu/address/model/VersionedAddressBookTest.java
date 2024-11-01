@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.model.VersionedAddressBook.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.VersionedAddressBook.MESSAGE_NO_MORE_HISTORY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -99,6 +99,6 @@ public class VersionedAddressBookTest {
         AddressBook addressBook = new AddressBook();
         VersionedAddressBook versionedAddressBook = new VersionedAddressBook(addressBook);
 
-        assertThrows(CommandException.class, MESSAGE_CONSTRAINTS, versionedAddressBook :: undoAddressBook);
+        assertThrows(CommandException.class, MESSAGE_NO_MORE_HISTORY, versionedAddressBook :: undoAddressBook);
     }
 }
