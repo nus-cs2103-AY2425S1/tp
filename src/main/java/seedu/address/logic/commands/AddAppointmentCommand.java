@@ -78,11 +78,11 @@ public class AddAppointmentCommand extends Command {
                 .filter(person -> person instanceof Doctor && person.getName().equals(doctorName))
                 .findAny();
 
-        Person doctorToEdit = doctor.orElseThrow(
-                () -> new CommandException(MESSAGE_INVALID_DOCTOR_DISPLAYED_NAME + doctorName));
+        Person doctorToEdit = doctor.orElseThrow(() ->
+                new CommandException(MESSAGE_INVALID_DOCTOR_DISPLAYED_NAME + doctorName));
 
-        Person patientToEdit = patient.orElseThrow(
-                () -> new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_NAME + patientName));
+        Person patientToEdit = patient.orElseThrow(() ->
+                new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_NAME + patientName));
 
 
         Person editedPatient;
