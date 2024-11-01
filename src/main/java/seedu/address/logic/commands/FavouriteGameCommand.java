@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -71,6 +70,7 @@ public class FavouriteGameCommand extends Command {
         return new CommandResult(String.format(MESSAGE_FAVOURITE_GAME_SUCCESS, gameName));
     }
 
+    @Override
     public void undo(Model model) {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
