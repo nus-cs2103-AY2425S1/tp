@@ -40,8 +40,9 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
+Person *--> Address
+Person *--> RsvpStatus
 Person *--> "*" Tag
-Person *--> Rsvp
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
