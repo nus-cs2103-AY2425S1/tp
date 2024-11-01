@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Comparator;
 
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -63,7 +64,8 @@ public class AttendanceContainer extends UiPart<Region> {
             setEmptyParticipationPlaceholder();
         } else {
             attendanceList.getChildren().clear();
-            participationList.forEach(participation -> attendanceList.getChildren()
+            participationList.stream().sorted(Comparator.comparing(Participation::getTutorialSubject))
+                    .forEach(participation -> attendanceList.getChildren()
                     .add(new AttendanceCard(participation.getTutorialSubject(),
                             participation.getAttendanceList()).getRoot()));
         }
