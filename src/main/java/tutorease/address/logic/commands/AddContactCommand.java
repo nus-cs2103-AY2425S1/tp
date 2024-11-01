@@ -61,6 +61,13 @@ public class AddContactCommand extends ContactCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        checkDuplicateContacts(model, toAdd);
+
+        model.addPerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    private static void checkDuplicateContacts(Model model, Person toAdd) throws CommandException {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -72,9 +79,6 @@ public class AddContactCommand extends ContactCommand {
         if (model.hasSameEmail(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
-
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
