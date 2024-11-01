@@ -62,8 +62,8 @@ public class AddGroupCommand extends Command {
             }
             model.addGroup(g);
         }
-
-        model.addGroup(toAdd);
+        model.updateFilteredGroupList(x ->
+                toAdd.stream().anyMatch(y -> y.getGroupName().equals(x.getGroupName())));
         model.setStateGroups();
         return new CommandResult(String.format(MESSAGE_SUCCESS, resultMessage), LIST_GROUP_MARKER);
     }
