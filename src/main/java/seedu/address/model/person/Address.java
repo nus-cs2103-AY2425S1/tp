@@ -37,6 +37,10 @@ public class Address {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String normaliseAddress() {
+        return value.replaceAll("[,\\s-]+", "").toLowerCase();
+    }
+
     @Override
     public String toString() {
         return value;
@@ -54,7 +58,7 @@ public class Address {
         }
 
         Address otherAddress = (Address) other;
-        return value.equals(otherAddress.value);
+        return this.normaliseAddress().equals(otherAddress.normaliseAddress());
     }
 
     @Override

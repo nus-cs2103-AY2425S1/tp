@@ -8,6 +8,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 public class PolicyTest {
 
     @Test
@@ -59,7 +61,7 @@ public class PolicyTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws CommandException {
         Policy policy = new Policy("Health Insurance",
                 "2023-01-01", "2024-01-01", VALID_INSURANCE_PAYMENT);
 

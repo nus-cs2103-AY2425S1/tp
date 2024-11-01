@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
@@ -28,7 +29,6 @@ import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Policy;
 import seedu.address.model.tag.Tag;
-
 
 
 /**
@@ -216,7 +216,12 @@ public class ParserUtil {
         if (!Policy.isValidPolicy(nameString, startDateString, endDateString, insurancePayment)) {
             throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
         }
-        return new Policy(nameString, startDateString, endDateString, insurancePayment);
+        try {
+            return new Policy(nameString, startDateString, endDateString, insurancePayment);
+        } catch (CommandException e) {
+            throw new ParseException(e.getMessage());
+        }
+
     }
 
     /**
