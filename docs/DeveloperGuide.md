@@ -328,7 +328,7 @@ General commands include the `exit` and `help` commands.
 The sequence diagram shows how a general command (`ExitCommand` or `HelpCommand`) is executed:
 <puml src="diagrams/GeneralCommandsSequenceDiagram.puml" width="600"></puml>
 
-**Step 1.** The user types an `xyz` command (`help` or `exit`) in the `CommandBox`, which is then passed to the `LogicManager`.
+**Step 1.** The user types an `xyz` command (`exit` or `help`) in the `CommandBox`, which is then passed to the `LogicManager`.
 
 **Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `xyz` command.
 
@@ -345,19 +345,6 @@ object.
 ### Exit feature
 #### Implementation
 When a user types an `exit` command, the DocTrack application will exit.
-
-#### Design considerations
-
-**Aspect: How to handle unsaved data on exit:**
-
-* **Alternative 1 (current choice):** Automatically save all changes on exit.
-  * Pros: Simplifies the exit process for the user. Ensures no data is lost.
-  * Cons: May be slow if there are many changes to save.
-
-
-* **Alternative 2:** Prompt the user to save changes before exiting.
-    * Pros: Gives the user more control over the saving process.
-    * Cons: May be annoying for users who do not want an additional step to save changes.
   
 <br>
 
@@ -469,7 +456,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="550" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -513,6 +500,18 @@ The following activity diagram summarizes what happens when a user executes a ne
 For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if `Sickness` or `Medicine` 
 is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
 </box>
+
+#### Design Considerations
+**Aspect: When the data is updated in the `.json` file:**
+
+* **Alternative 1 (current choice):** Automatically save all changes after any command that changes the data. 
+    * Pros: Simplifies the process for the user, without needing to save manually.
+    * Cons: May be slow if there are many changes to save.
+
+
+* **Alternative 2:** Prompt the user to save changes before exiting.
+    * Pros: Gives the user more control over the saving process.
+    * Cons: May be annoying for users who do not want an additional step to save changes.
 
 <br>
 
