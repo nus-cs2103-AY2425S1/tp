@@ -15,15 +15,15 @@ import seedu.ddd.model.event.common.Event;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n\n%1$s";
     public static final String MESSAGE_INVALID_FLAGS = "No flag or invalid flag specified! Use -c OR -v OR -e %1$s";
     public static final String MESSAGE_MULTIPLE_FLAGS = "Multiple flags specified. Use one of -c OR -v OR -e %1$s";
     public static final String MESSAGE_INVALID_CONTACT_ID = "Invalid contact ID! \n%1$s";
-    public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
-    public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
-    public static final String MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX = "The client index provided is invalid";
-    public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX = "The vendor index provided is invalid";
+    public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid.";
+    public static final String MESSAGE_DISPLAYED_INDEX_TOO_LARGE = "The index provided goes out of bounds.";
+    public static final String MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX = "The client index provided is invalid.";
+    public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX = "The vendor index provided is invalid.";
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contact(s) listed!";
     public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d event(s) listed!";
     public static final String MESSAGE_CLIENTS_LISTED_OVERVIEW = "%1$d client(s) listed!";
