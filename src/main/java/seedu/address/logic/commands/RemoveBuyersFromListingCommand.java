@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,7 +26,11 @@ public class RemoveBuyersFromListingCommand extends Command {
 
     public static final String MESSAGE_REMOVE_BUYERS_SUCCESS = "Buyers removed from listing: %1$s";
     public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
-    public static final String MESSAGE_BUYER_NOT_FOUND = "Some buyers are not associated with this listing.";
+    public static final String MESSAGE_EMPTY_SET = "Please provide valid buyers";
+    public static final String MESSAGE_PERSON_NOT_BUYER = "The client %1$s is not registered as a buyer.";
+    public static final String MESSAGE_NOT_BUYER_FOR_LISTING =
+            "The specified buyer %1$s is not a buyer of the listing %2$s.";
+    public static final String MESSAGE_BUYER_NOT_FOUND = "The specified buyer %1$s does not exist in the client list.";
 
     private final Name listingName;
     private final Set<Name> buyersToRemove;
@@ -50,32 +53,38 @@ public class RemoveBuyersFromListingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Listing listingToEdit = model.getListingByName(listingName);
-        if (listingToEdit == null) {
+
+        if (!model.hasListingOfName(listingName)) {
             throw new CommandException(MESSAGE_LISTING_NOT_FOUND);
         }
+        Listing listingToEdit = model.getListingByName(listingName);
 
         Set<Person> existingBuyers = new HashSet<>(listingToEdit.getBuyers());
         Set<Person> buyersToRemoveSet = new HashSet<>();
 
         for (Name buyerName : buyersToRemove) {
-            Optional<Person> buyer = Optional.ofNullable(model.getPersonByName(buyerName));
 
-            if (buyer.isEmpty()) {
-                throw new CommandException("The specified buyer " + buyerName + " does not exist in the client list.");
+
+            if (!model.hasPersonOfName(buyerName)) {
+                throw new CommandException(String.format(MESSAGE_BUYER_NOT_FOUND, buyerName));
             }
 
-            // Check if the person is actually an instance of Buyer and is in the existing buyers
-            if (!(buyer.get() instanceof Buyer) || !existingBuyers.contains(buyer.get())) {
-                throw new CommandException("The specified person " + buyerName + " is not a buyer or is not associated "
-                        + "with this listing.");
+            Person buyer = model.getPersonByName(buyerName);
+
+            // Check if the person is actually an instance of Buyer
+            if (!(buyer instanceof Buyer)) {
+                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER, buyer.getName()));
             }
 
-            buyersToRemoveSet.add(buyer.get());
+            if (!existingBuyers.contains(buyer)) {
+                throw new CommandException(String.format(MESSAGE_NOT_BUYER_FOR_LISTING, buyer.getName(), listingName));
+            }
+
+            buyersToRemoveSet.add(buyer);
         }
 
         if (buyersToRemoveSet.isEmpty()) {
-            throw new CommandException(MESSAGE_BUYER_NOT_FOUND);
+            throw new CommandException(MESSAGE_EMPTY_SET);
         }
 
         existingBuyers.removeAll(buyersToRemoveSet);
@@ -92,7 +101,7 @@ public class RemoveBuyersFromListingCommand extends Command {
         );
 
         model.setListing(listingToEdit, updatedListing);
-        return new CommandResult(String.format(MESSAGE_REMOVE_BUYERS_SUCCESS, updatedListing));
+        return new CommandResult(String.format(MESSAGE_REMOVE_BUYERS_SUCCESS, listingName));
     }
 
     @Override

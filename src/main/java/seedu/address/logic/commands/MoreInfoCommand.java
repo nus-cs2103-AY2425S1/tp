@@ -15,27 +15,19 @@ import seedu.address.ui.MoreInfoWindow;
 /**
  * Represents a command that opens a window to display more information
  * about a specific client in the application.
- * <p>
+ *
  * This command is triggered using the command word {@code moreinfo}
  * followed by the client's name. For example, {@code moreinfo n/Amy}.
- * </p>
  *
- * <h2>Command Format</h2>
- * <pre>
- * moreinfo n/&lt;client_name&gt;
- * </pre>
+ * Command Format:
+ * moreinfo n/client_name
  *
- * <h2>Attributes</h2>
- * <ul>
- *     <li>{@code COMMAND_WORD} - The command word to trigger this command.</li>
- *     <li>{@code MESSAGE_USAGE} - The usage message that describes how to use the command.</li>
- *     <li>{@code SHOWING_MORE_INFO_MESSAGE} - The message shown to the user when the command is executed.</li>
- * </ul>
- *
- * <h2>Example</h2>
- * <pre>
+ * Attributes
+ *     {@code COMMAND_WORD} - The command word to trigger this command.
+ *     {@code MESSAGE_USAGE}  - The usage message that describes how to use the command.
+ *     {@code SHOWING_MORE_INFO_MESSAGE} - The message shown to the user when the command is executed.
+ * Example
  * moreinfo n/Amy
- * </pre>
  *
  * @see Command
  */
