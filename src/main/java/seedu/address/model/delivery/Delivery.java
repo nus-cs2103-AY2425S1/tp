@@ -97,10 +97,20 @@ public class Delivery {
      * Checks if current instance of delivery has an earlier due date than input date.
      *
      * @param deliveryDateTime DateTime object to compare against.
-     * @return True if current delivery is to be completed before input delivery.
+     * @return True if current delivery is to be completed before input delivery time.
      */
     public boolean hasEarlierDateThan(DateTime deliveryDateTime) {
         return this.deliveryDateTime.isEarlierThan(deliveryDateTime);
+    }
+
+    /**
+     * Checks if current instance of delivery has a later due date than input date.
+     *
+     * @param deliveryDateTime DateTime object to compare against.
+     * @return True if current delivery is to be completed after input delivery time.
+     */
+    public boolean hasLaterDateThan(DateTime deliveryDateTime) {
+        return this.deliveryDateTime.isLaterThan(deliveryDateTime);
     }
 
     /**
