@@ -121,7 +121,7 @@ public class ModelManagerTest {
         modelManager.addPerson(GEORGE);
         modelManager.addPerson(ALICE);
         modelManager.addPerson(BENSON);
-
+        modelManager.setArchivedListMode(false);
         // Apply a filter to show only contacts with "George" in the name
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("George"));
         modelManager.updateFilteredPersonList(predicate);
