@@ -400,28 +400,49 @@ Example:
 #### 4.2.1 Adding a tutorial: `addTut`
 <a id="adding-a-tutorial-addTut"></a>
 
-> TO BE DONE
+> Adds a tutorial with a specified tutorial name and tutorial id to the TrackMate application.
+ 
+Format: `addTut tn/[TUTORIAL NAME] id/[TUTORIAL ID]`
+
+Command Details & Constraints:
+* Adds the tutorial based on its `TUTORIAL_NAME` and `TUTORIAL_ID`
+* The `TUTORIAL_ID` should be alphanumeric with the following format `TXXXX` where `T` signifies that it is a tutorial code
+and `X` must be an integer between 0 and 9.
+* There cannot be tutorial classes of the same `TUTORIAL_ID` in the list even when their `TUTORIAL_NAME` is different.
+* All parameters are required to adhere to their [respective constraints](#332-parameters).
+
+Example:
+1. `addTut tn/CS2103T id/T1001` adds a tutorial with Tutorial Name `CS2103T` and Tutorial ID `T1001`, provided that there is
+no other tutorial with the Tutorial ID `T1001`.
 
 #### 4.2.2 Delete a tutorial: `deleteTut`
 <a id="deleting-a-tutorial-deleteTut"></a>
-> Delete a specified tutorial from the TrackMate application.
+> Delete a specified tutorial from the TrackMate application. 
 
-Format: `deleteTut TUTORIAL_ID`
+Format: `deleteTut id/TUTORIAL_ID`
 
 Command Details & Constraints:
 * Deletes the tutorial based on the `TUTORIAL_ID`
   * The `TUTORIAL_ID` must exist in the tutorial list.
-* No prefix is required for `deleteTut` command.
-* The command should only consist of exactly two words: `deleteTut` and a valid `TUTORIAL_ID`
+* The `TUTORIAL_ID` should be alphanumeric with the following format `TXXXX` where `T` signifies that it is a tutorial code
+* and `X` must be an integer between 0 and 9.
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
 
 Example:
-1. `deleteTut 1001` deletes the tutorial with Tutorial ID `1001`, provided the tutorial exists.
+1. `deleteTut id/T1001` deletes the tutorial with Tutorial ID `T1001`, provided the tutorial exists.
 
 #### 4.2.3 List tutorials: `listTut`
 <a id="listing-tutorials-listTut"></a>
 
-> TO BE DONE
+> List all of the tutorials that are currently stored in the application
+
+
+Format: `listTut`
+
+Command Details & Constraints:
+* This command will display all Tutorials with details such as:
+  * tutorial name
+  * tutorial id
 
 ### 4.3 Assignment Data Related Commands:
 <a id="assignment-data-commands"></a>
@@ -669,9 +690,9 @@ TO BE DONE
 | **Edit Student**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                        |
 | **Find Student**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                          |
 | **List Students**   | `listStu`                                                                                                                                                           |
-| **Add Tutorial**    | `addTut tn/[TUTORIAL NAME] id/[TUTORIAL ID]`<br> e.g., `addTut tn/CS1010 id/1011`                                                                                   |
+| **Add Tutorial**    | `addTut tn/[TUTORIAL NAME] id/[TUTORIAL ID]`<br> e.g., `addTut tn/CS1010 id/T1011`                                                                                  |
 | **List Tutorials**  | `listTut`                                                                                                                                                           |
-| **Delete Tutorial** | `deleteTut [TUTORIAL ID]`<br> e.g., `deleteTut 1011`                                                                                                                |
+| **Delete Tutorial** | `deleteTut [TUTORIAL ID]`<br> e.g., `deleteTut id/T1011`                                                                                                            |
 | **Add Assignment**  | `addAsg n/[ASSIGNMENT TITLE] d/[DUE DATE]`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`                                                                      |
 | **Delete Assignment**| `deleteAsg [ASSIGNMENT TITLE]`<br> e.g., `deleteAsg Assignment 1`                                                                                                   |
 | **List Assignments**| `listAsg`                                                                                                                                                           |
