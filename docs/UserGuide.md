@@ -179,6 +179,8 @@ You can delete a person from your list of contacts.
 
 Format: `del-wed w/NAME & NAME` followed by `y` or `n`
 
+<box type="important" seamless>
+
 **IMPORTANT:** `del-wed w/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
 affected.
 

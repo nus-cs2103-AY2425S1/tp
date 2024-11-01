@@ -15,13 +15,17 @@ import seedu.address.model.wedding.Wedding;
 public class DeleteWeddingCommand extends Command {
     public static final String COMMAND_WORD = "del-wed";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
-            + ": Deletes the wedding identified by the wedding name used in the address book.";
+            + ": Deletes the wedding identified by the wedding name used in the address book.\n";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: w/NAME & NAME\n"
             + "Example: " + COMMAND_WORD + " w/Jonus Ho & Izzat Syazani";
 
-    public static final String MESSAGE_NO_MATCH_FOUND = "No wedding with the name '%1$s' found.";
+    public static final String MESSAGE_NO_MATCH_FOUND = """
+            No wedding with the name '%1$s' found.
+            Please check the wedding name and try again.
+            The wedding must be input in the exact way it was added to the wedding book.
+            """;
     public static final String MESSAGE_MISSING_NAME = "Wedding name is required.";
     public static final String MESSAGE_CONFIRMATION_PROMPT = """
             Are you sure you want to delete the following wedding?
