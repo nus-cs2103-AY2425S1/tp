@@ -30,6 +30,7 @@ public class AddAttendanceCommand extends Command {
 
     public static final String MESSAGE_ADD_ATTENDANCE_SUCCESS = "Added attendance for Person: %1$s";
     public static final String MESSAGE_DELETE_ATTENDANCE_SUCCESS = "Removed attendance from Person: %1$s";
+    public static final String MESSAGE_ABSENT_DATE_NOT_FOUND = "This date has not been recorded before.";
 
     private final Index index;
     private final AbsentDate absentDate;
@@ -61,6 +62,9 @@ public class AddAttendanceCommand extends Command {
 
         HashMap<AbsentDate, AbsentReason> newAttendances = new HashMap<>(personToEdit.getAttendances());
         if (absentReason.absentReason.isEmpty()) {
+            if (!newAttendances.containsKey(this.absentDate)) {
+                throw new CommandException(MESSAGE_ABSENT_DATE_NOT_FOUND);
+            }
             newAttendances.remove(this.absentDate);
         } else {
             newAttendances.put(this.absentDate, this.absentReason);

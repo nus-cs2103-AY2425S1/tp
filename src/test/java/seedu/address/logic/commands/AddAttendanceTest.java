@@ -94,6 +94,13 @@ public class AddAttendanceTest {
     }
 
     @Test
+    public void execute_deleteAttendanceWhenAttendanceIsEmptyUnfilteredList_failure() {
+        AddAttendanceCommand deleteAttendanceCommand = new AddAttendanceCommand(INDEX_FIRST_PERSON,
+                new AbsentDate("10-10-2024"), new AbsentReason(""));
+        assertCommandFailure(deleteAttendanceCommand, model, AddAttendanceCommand.MESSAGE_ABSENT_DATE_NOT_FOUND);
+    }
+
+    @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
