@@ -20,7 +20,7 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters existing patient records based on their"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters existing patient records based on their "
             + "appointment dates and health services\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 

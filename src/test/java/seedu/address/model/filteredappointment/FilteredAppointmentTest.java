@@ -10,12 +10,13 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Patient;
 
 
 public class FilteredAppointmentTest {
-    private static Appt appt = new Appt(LocalDateTime.parse("2000-10-10T14:00"));
+    private static Appt appt = new Appt(LocalDateTime.parse("2000-10-10T14:00"), new HealthService("Blood Test"));
     private static Patient patient = AMY;
     private static Patient patient2 = BOB;
 

@@ -23,7 +23,7 @@ public class FilteredApptListPanel extends UiPart<Region> {
     private ListView<FilteredAppointment> apptListView;
 
     /**
-     * Creates a {@Code FilteredApptListPanel} with the given {@code TreeSet<filteredappointment>}
+     * Creates a {@Code FilteredApptListPanel} with the given {@code TreeSet<FilteredAppointment>}
      * @param filteredAppointments
      */
     public FilteredApptListPanel(TreeSet<FilteredAppointment> filteredAppointments) {

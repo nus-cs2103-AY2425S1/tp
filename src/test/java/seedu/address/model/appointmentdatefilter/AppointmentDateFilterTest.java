@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.healthservice.HealthService;
-import seedu.address.model.patient.Address;
 
 /**
  * Represents a AppointmentDate object used for filtering patients based on their appointment dates and healthservice;

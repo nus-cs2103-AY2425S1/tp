@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.healthservice.HealthService;
 
 /**
