@@ -24,7 +24,7 @@ public class UserPrefsTest {
     }
 
     @SuppressWarnings("unlikely-arg-type")
-	@Test
+    @Test
     public void equals_false() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));

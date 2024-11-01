@@ -105,7 +105,7 @@ public class MeetingTest {
     @Test
     public void toString_sameString() {
         String expectedString = "Meeting: Team Sync on "
-                + LocalDate.now().toString() 
+                + LocalDate.now().toString()
                 + " at 10:00 with contacts: "
                 + meeting.convertContactUidsToString();
         assertEquals(meeting.toString(), expectedString);
@@ -121,7 +121,8 @@ public class MeetingTest {
     }
 
     @SuppressWarnings("unlikely-arg-type")
-	@Test void equals_false() {
+    @Test
+    public void equals_false() {
         // different object
         assertFalse(meeting.equals(null));
         // different type

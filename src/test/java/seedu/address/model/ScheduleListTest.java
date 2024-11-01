@@ -32,7 +32,7 @@ public class ScheduleListTest {
     }
 
     @SuppressWarnings("unlikely-arg-type")
-	@Test
+    @Test
     public void equals_false() {
         // different types -> returns false
         assertFalse(scheduleList.equals(1));
