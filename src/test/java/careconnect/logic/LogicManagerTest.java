@@ -18,7 +18,6 @@ import careconnect.logic.commands.AddCommand;
 import careconnect.logic.commands.ClearCommand;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.CommandTestUtil;
-import careconnect.logic.commands.ConfirmationNoCommand;
 import careconnect.logic.commands.ListCommand;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.exceptions.ParseException;
