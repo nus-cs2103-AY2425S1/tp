@@ -347,13 +347,15 @@ Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clemen
 
 Edits the details of the vendor identified by the index number used in the displayed vendor list. Existing values will be overwritten by the input values.
 
-**Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [company/COMPANY] [t/TAG]...`
+**Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [company/COMPANY] [b/BUDGET] [t/TAG]...`
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
     * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
-Entering the `edit_vendor` command returns the following result on your screen:
+**Example Usage:** `edit_vendor 1 p/91234567 e/johndoe@example.com`
+
+Entering the `edit_vendor 1 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
 ![edit_vendor command](images/editVendorCommand.png)
 
