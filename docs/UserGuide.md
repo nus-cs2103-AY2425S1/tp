@@ -248,10 +248,10 @@ Prudy uses a command-line interface with four primary categories of commands to 
 
 These commands help with general navigation, displaying help information, saving data, and exiting the program.
 
-<panel type="info">
+<box type="info" seamless>
 <span class="font-weight-bold">Note:</span> Extraneous parameters for commands that do not take in parameters (such as <code>help</code>, <code>list</code>, <code>exit</code>, and <code>clear</code>) will be ignored.  
 e.g., if the command specifies <code>help 123</code>, it will be interpreted as <code>help</code>.
-</panel>
+</box>
 
 
 ### 5.1.1 Viewing help : `help`
