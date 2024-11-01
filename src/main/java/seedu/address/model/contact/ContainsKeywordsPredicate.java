@@ -41,20 +41,20 @@ public class ContainsKeywordsPredicate implements Predicate<Contact> {
     @Override
     public boolean test(Contact contact) {
         boolean containsNameKeywords = nameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getName().fullName, keyword));
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getName().fullName, keyword));
         boolean containsTelegramHandleKeywords = telegramHandleKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getTelegramHandle().value, keyword));
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getTelegramHandle().value, keyword));
         boolean containsEmailKeywords = emailKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getEmail().value, keyword));
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getEmail().value, keyword));
         boolean containsStudentStatusKeywords = studentStatusKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getStudentStatus().value, keyword));
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getStudentStatus().value, keyword));
         boolean containsRoleKeywords = roleKeywords.stream()
-                .anyMatch(keyword -> contact.getRoles().stream()
+                .allMatch(keyword -> contact.getRoles().stream()
                         .anyMatch(role -> StringUtil.containsIgnoreCase(role.roleName, keyword)));
         boolean containsNicknameKeywords = nicknameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsIgnoreCase(contact.getNickname().value, keyword));
-        return containsNameKeywords || containsTelegramHandleKeywords || containsEmailKeywords
-                || containsStudentStatusKeywords || containsRoleKeywords || containsNicknameKeywords;
+                .allMatch(keyword -> StringUtil.containsIgnoreCase(contact.getNickname().value, keyword));
+        return containsNameKeywords && containsTelegramHandleKeywords && containsEmailKeywords
+                && containsStudentStatusKeywords && containsRoleKeywords && containsNicknameKeywords;
     }
 
     @Override
