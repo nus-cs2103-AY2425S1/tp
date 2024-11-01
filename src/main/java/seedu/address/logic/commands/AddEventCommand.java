@@ -38,7 +38,7 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_TIME + "TIME "
             + "[" + PREFIX_EVENT_VENUE + "VENUE] "
             + PREFIX_EVENT_CELEBRITY + "CELEBRITY "
-            + PREFIX_EVENT_CONTACTS + "CONTACTS...\n"
+            + "[" + PREFIX_EVENT_CONTACTS + "CONTACTS]...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
             + PREFIX_EVENT_NAME + "Oscars "
             + PREFIX_EVENT_TIME + "from: 2024-03-01 12:10, to: 2024-03-01 18:30 "
