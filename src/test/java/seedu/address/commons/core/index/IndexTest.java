@@ -56,6 +56,30 @@ public class IndexTest {
 
         // different index -> returns false
         assertFalse(fifthPersonIndex.equals(Index.fromOneBased(1)));
+
+        // wildcard comparison
+        Index wildcardIndex = Index.getWildcardIndex();
+        assertTrue(wildcardIndex.equals(Index.getWildcardIndex()));
+        assertFalse(wildcardIndex.equals(Index.fromZeroBased(0)));
+    }
+
+    @Test
+    public void getZeroBased_throwsUnsupportedOperationException() {
+        Index wildcardIndex = Index.getWildcardIndex();
+        assertThrows(UnsupportedOperationException.class, wildcardIndex::getZeroBased);
+    }
+
+    @Test
+    public void getOneBased_throwsUnsupportedOperationException() {
+        Index wildcardIndex = Index.getWildcardIndex();
+        assertThrows(UnsupportedOperationException.class, wildcardIndex::getOneBased);
+    }
+
+    @Test
+    public void isWildcard() {
+        Index wildcardIndex = Index.getWildcardIndex();
+        assertTrue(wildcardIndex.isWildcard());
+        assertFalse(Index.fromZeroBased(0).isWildcard());
     }
 
     @Test
@@ -63,5 +87,8 @@ public class IndexTest {
         Index index = Index.fromZeroBased(0);
         String expected = Index.class.getCanonicalName() + "{zeroBasedIndex=" + index.getZeroBased() + "}";
         assertEquals(expected, index.toString());
+
+        Index wildcardIndex = Index.getWildcardIndex();
+        assertEquals(Index.class.getCanonicalName() + "{wildcard}", wildcardIndex.toString());
     }
 }

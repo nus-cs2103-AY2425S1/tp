@@ -26,7 +26,7 @@ public class ResetCommandParserTest {
 
     @Test
     public void parse_wildcard_success() {
-        assertParseSuccess(parser, ParserUtil.WILDCARD + TUTORIAL_DESC_ONE,
+        assertParseSuccess(parser, ParserUtil.INDEX_WILDCARD + TUTORIAL_DESC_ONE,
                 new ResetCommand(INDEX_ALL, new Tutorial(VALID_TUTORIAL_ONE)));
     }
 

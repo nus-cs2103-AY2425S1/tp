@@ -26,8 +26,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_SORT_ORDER = "Sort order is not 1 or -1, or invalid field provided.";
-    public static final String WILDCARD = "*"; // == 0 (one-based)
-    public static final int WILDCARD_VALUE = 0;
+    public static final String INDEX_WILDCARD = "*";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -36,12 +35,23 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (trimmedIndex.equals(ParserUtil.WILDCARD)) {
-            return Index.fromOneBased(ParserUtil.WILDCARD_VALUE);
-        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed. Allows wildcard (*) as input.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer or wildcard).
+     */
+    public static Index parseIndexAllowWildcard(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (trimmedIndex.equals(ParserUtil.INDEX_WILDCARD)) {
+            return Index.getWildcardIndex();
+        }
+        return ParserUtil.parseIndex(trimmedIndex);
     }
 
     /**
