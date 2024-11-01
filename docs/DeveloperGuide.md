@@ -735,6 +735,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. Should not depend on the developer's own remote server.
 12. GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%.
 
+***
 
 ### Glossary
 
@@ -772,6 +773,8 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+***
+
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
@@ -787,13 +790,15 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+***
+
 ### Finding specific students
 
 1. Finding specific students while all students are being shown
 
     1. Prerequisites: List all students using the `list` command. Multiple students in the list with varying names, levels and subjects.
 
-    2. Valid Test Cases
+    2. **Valid Test Cases**
 
         1. Find by name:`find n/Alex`<br>
            Expected: Only students with the name `Alex` are displayed. Number of students found is reflected in the status message.
@@ -804,9 +809,9 @@ testers are expected to do more *exploratory* testing.
         3. Find by subject: `find s/MATH`<br>
            Expected: Only students tagged with the subject `MATH` are displayed. Number of students found is reflected in the status message.
 
-    3. Invalid Test Cases
+    3. **Invalid Test Cases**
 
-       1. Find by name:`find n/!@!`, `find n/1234`, `...`<br>
+       1. Find by name:`find n/!@!`, `find n/1e12#>`, `...`<br>
           Expected: All students still listed. Error details shown in the status message. Status bar remains the same.
 
        2. Find by level and track: `find l/S1` (no track entered), `find l/IP` (no level entered), `...`<br>
