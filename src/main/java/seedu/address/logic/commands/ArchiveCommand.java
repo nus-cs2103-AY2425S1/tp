@@ -132,12 +132,22 @@ public class ArchiveCommand extends Command {
     private void validateIndexes(int listSize, List<Index> indexList, boolean isDelivery) throws CommandException {
         boolean hasDuplicate = hasDuplicates(indexList);
         for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= listSize || hasDuplicate) {
+            if (targetIndex.getZeroBased() >= listSize) {
                 if (isDelivery) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+                    throw new CommandException(
+                            String.format(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX,
+                                    targetIndex.getOneBased()));
                 } else {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                    throw new CommandException(
+                            String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                                    targetIndex.getOneBased()));
                 }
+            }
+
+            if (hasDuplicate) {
+                throw new CommandException(
+                        String.format(Messages.MESSAGE_INVALID_DUPLICATED_INDEX,
+                                targetIndex.getOneBased()));
             }
         }
     }
