@@ -44,6 +44,8 @@ public class AddGameCommand extends Command {
             + PREFIX_USERNAME + "johndoe420";
 
     public static final String MESSAGE_ADD_GAME_SUCCESS = "Added Game to Person: %1$s";
+    public static final String MESSAGE_GAME_EXISTS = "The game provided already exists for that person.";
+
     private final Index index;
     private final AddGameDescriptor addGameDescriptor;
     private final String gameName;
@@ -76,6 +78,10 @@ public class AddGameCommand extends Command {
 
         personToEdit = lastShownList.get(index.getZeroBased());
         Map<String, Game> gameMap = personToEdit.getGames();
+
+        if (gameMap.containsKey(gameName)) {
+            throw new CommandException(MESSAGE_GAME_EXISTS);
+        }
 
         Game editedGame = createNewGame(gameName, addGameDescriptor);
         gameMap.put(gameName, editedGame);
