@@ -76,7 +76,7 @@ public class EditTaskAllGroupCommand extends Command {
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
+        if (taskToEdit.isSameTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         for (Group group : groups) {
@@ -119,7 +119,7 @@ public class EditTaskAllGroupCommand extends Command {
         TaskName updatedName = editTaskDescriptor.getTaskName().orElse(taskToEdit.getTaskName());
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElse(taskToEdit.getDeadline());
         Status status = taskToEdit.getStatus();
-        int numGroupHasTask = taskToEdit.getGroupsWithTask();
+        int numGroupHasTask = 1;
         return new Task(updatedName, updatedDeadline, status, numGroupHasTask);
     }
 

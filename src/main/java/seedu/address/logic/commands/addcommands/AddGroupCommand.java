@@ -3,6 +3,8 @@ package seedu.address.logic.commands.addcommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -28,30 +30,42 @@ public class AddGroupCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GROUP_NAME + "Group 1 ";
 
-    public static final String MESSAGE_SUCCESS = "New group added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New group(s) added: %1$s";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group detected";
 
-    private final Group toAdd;
+    private final List<Group> toAdd;
 
     /**
      * Creates an AddGroupCommand to add the specified {@code Group}.
      */
-    public AddGroupCommand(Group group) {
-        requireNonNull(group);
-        toAdd = group;
+    public AddGroupCommand(List<Group> groups) {
+        requireNonNull(groups);
+        toAdd = groups;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (model.hasGroup(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        String resultMessage = "";
+        if (toAdd.size() > 1) {
+            resultMessage += "\n";
         }
-
-        model.addGroup(toAdd);
+        int count = 0;
+        for (Group g: toAdd) {
+            if (model.hasGroup(g)) {
+                throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+            }
+            count++;
+            resultMessage += Messages.format(g);
+            if (count < toAdd.size()) {
+                resultMessage += "\n";
+            }
+            model.addGroup(g);
+        }
+        model.updateFilteredGroupList(x ->
+                toAdd.stream().anyMatch(y -> y.getGroupName().equals(x.getGroupName())));
         model.setStateGroups();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), LIST_GROUP_MARKER);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, resultMessage), LIST_GROUP_MARKER);
     }
 
     @Override

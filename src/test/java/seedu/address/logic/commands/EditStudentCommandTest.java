@@ -31,7 +31,8 @@ public class EditStudentCommandTest {
     private Model model;
     private Student studentToEdit;
     private Student editedStudent;
-    private EditPersonDescriptor editPersonDescriptor;
+    private EditPersonDescriptor editPersonDescriptorDuplicate;
+    private EditPersonDescriptor validDescriptor;
 
     private final StudentNumber validStudentNumber = new StudentNumber("A0123456P");
     @BeforeEach
@@ -44,27 +45,34 @@ public class EditStudentCommandTest {
         model.addPerson(studentToEdit);
         Set<Tag> tags = new HashSet<Tag>();
         tags.add(new Tag("GoodAtUI"));
-        editedStudent = new Student(new Name("Bob"),
-            new Email("bob@u.nus.edu"),
-            tags,
+
+        editPersonDescriptorDuplicate = new EditPersonDescriptor();
+        editPersonDescriptorDuplicate.setName(new Name("Amy"));
+        editPersonDescriptorDuplicate.setEmail(new Email("amy@u.nus.edu"));
+        validDescriptor = new EditPersonDescriptor();
+        validDescriptor.setName(new Name("NONE"));
+        editedStudent = new Student(new Name("NONE"),
+            new Email("amy@u.nus.edu"),
+            new HashSet<Tag>(),
             validStudentNumber);
-        editPersonDescriptor = new EditPersonDescriptor();
-        editPersonDescriptor.setName(new Name("Bob"));
-        editPersonDescriptor.setTags(tags);
-        editPersonDescriptor.setEmail(new Email("bob@u.nus.edu"));
     }
     @Test
-    public void execute_studentEdited_success() throws CommandException {
-        EditStudentCommand command = new EditStudentCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
-        CommandResult result = command.execute(model);
-        assertEquals(String.format(EditStudentCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent)),
-            result.getFeedbackToUser());
-        assertEquals(editedStudent, model.getPersonByNumber(validStudentNumber));
+    public void execute_editStudent_success() throws CommandException {
+        EditStudentCommand command = new EditStudentCommand(INDEX_FIRST_PERSON, validDescriptor);
+        CommandResult expectedResult = command.execute(model);
+        assertEquals(expectedResult.getFeedbackToUser(), String.format(EditStudentCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(editedStudent)));
+    }
+
+    @Test
+    public void execute_duplicatedStudentEdited_throwsCommandException() {
+        EditStudentCommand command = new EditStudentCommand(INDEX_FIRST_PERSON, editPersonDescriptorDuplicate);
+        assertThrows(CommandException.class, ()->command.execute(model), EditStudentCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
     public void execute_studentNotFound_throwsCommandException() {
-        EditStudentCommand command = new EditStudentCommand(INVALID_INDEX_STUDENT, editPersonDescriptor);
+        EditStudentCommand command = new EditStudentCommand(INVALID_INDEX_STUDENT, editPersonDescriptorDuplicate);
         assertThrows(CommandException.class, ()->command.execute(model), EditStudentCommand.MESSAGE_STUDENT_NOT_FOUND);
     }
     @Test

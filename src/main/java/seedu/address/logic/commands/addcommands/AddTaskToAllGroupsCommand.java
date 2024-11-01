@@ -35,6 +35,7 @@ public class AddTaskToAllGroupsCommand extends Command {
             + PREFIX_TASK_DEADLINE + "2024-01-01 1300 ";
 
     public static final String MESSAGE_SUCCESS = "Added task: %1$s";
+    public static final String NO_GROUPS = "There are currently no groups.";
 
     private final TaskName taskName;
 
@@ -54,6 +55,9 @@ public class AddTaskToAllGroupsCommand extends Command {
         requireNonNull(model);
         Task task = new Task(taskName, deadline);
         ObservableList<Group> groups = model.getFilteredGroupList();
+        if (groups.size() == 0) {
+            throw new CommandException(NO_GROUPS);
+        }
         if (!model.hasTask(task)) {
             task.decreaseGroupWithTask();
             model.addTask(task);

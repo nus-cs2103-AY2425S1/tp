@@ -108,6 +108,21 @@ public class Student {
             && otherStudent.getStudentNumber().equals(getStudentNumber());
 
     }
+    /**
+     * Returns true if both persons have the all same features.
+     */
+    public boolean hasSameFeatures(Student otherStudent) {
+        if (otherStudent == this) {
+            return true;
+        }
+
+        return otherStudent != null
+            && otherStudent.getStudentNumber().equals(getStudentNumber())
+            && otherStudent.getName().equals(getName())
+            && otherStudent.getEmail().equals(getEmail())
+            && otherStudent.getTags().equals(getTags());
+
+    }
 
     /**
      * Returns a copy of student which has no group.

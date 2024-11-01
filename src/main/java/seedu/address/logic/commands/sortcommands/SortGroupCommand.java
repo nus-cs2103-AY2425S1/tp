@@ -26,11 +26,12 @@ public class SortGroupCommand extends Command {
             + ": Sorts all groups.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Sorted all groups";
+    public static final String MESSAGE_SUCCESS = "Sorted all groups by group name in alphabetical order";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.sortGroupList(new Comparator<Group>() {
             @Override
             public int compare(Group g1, Group g2) {

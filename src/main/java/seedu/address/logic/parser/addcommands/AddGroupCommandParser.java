@@ -1,8 +1,13 @@
 package seedu.address.logic.parser.addcommands;
 
+import static seedu.address.logic.Messages.MESSAGE_ILLEGAL_PREFIX_USED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.ALL_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.addcommands.AddGroupCommand;
@@ -13,7 +18,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -30,16 +34,23 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
 
+        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_GROUP_NAME));
+        List<Prefix> invalidPrefixes = ALL_PREFIX;
+        invalidPrefixes.removeAll(allowedPrefix);
+        if (containsInvalidPrefix(args, invalidPrefixes)) {
+            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + AddGroupCommand.MESSAGE_USAGE);
+        }
+
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME);
-        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
-        Group group = new Group(groupName);
-
-        return new AddGroupCommand(group);
+        List<String> groupNames = argMultimap.getAllValues(PREFIX_GROUP_NAME);
+        List<Group> groups = new ArrayList<Group>();
+        for (String s: groupNames) {
+            groups.add(new Group(ParserUtil.parseGroupName(s)));
+        }
+        return new AddGroupCommand(groups);
     }
 
     /**
@@ -48,6 +59,10 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPrefixes) {
+        return invalidPrefixes.stream().anyMatch(prefix -> arg.contains(prefix.getPrefix()));
     }
 
 }
