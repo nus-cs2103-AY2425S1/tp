@@ -4,6 +4,8 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -16,7 +18,8 @@ import seedu.address.model.person.ReminderManager;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
+    BooleanProperty showingArchived();
+    void setArchivedListMode(boolean isArchived);
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -55,6 +58,9 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getArchivedAddressBook();
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -71,6 +77,12 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given person.
+     * {@code person} must not already exist in the archived address book.
+     */
+    void addArchivedPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

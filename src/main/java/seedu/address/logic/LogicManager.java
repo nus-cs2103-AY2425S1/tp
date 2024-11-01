@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -54,6 +55,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveArchivedAddressBook(model.getArchivedAddressBook());
             logger.info("Address book saved successfully");
         } catch (AccessDeniedException e) {
             logger.log(Level.SEVERE, "Permission denied while saving Address Book", e);
@@ -64,6 +66,11 @@ public class LogicManager implements Logic {
         }
 
         return commandResult;
+    }
+
+    @Override
+    public BooleanProperty showingArchived() {
+        return model.showingArchived();
     }
 
     @Override

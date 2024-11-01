@@ -8,10 +8,13 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import seedu.address.MainApp;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -21,10 +24,14 @@ import seedu.address.model.person.ReminderManager;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+    public static boolean isArchivedList = false;
+    private final BooleanProperty showingArchived = new SimpleBooleanProperty(false);
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final ArchivedAddressBook archivedAddressBook;
+    private final FilteredList<Person> filteredArchivedPersons;
     private final FilteredList<Person> filteredPersons;
     private SortedList<Person> sortedPersons;
     private Comparator<Person> currentComparator = null;
@@ -33,20 +40,22 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyAddressBook archivedAddressBook) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.archivedAddressBook = new ArchivedAddressBook(archivedAddressBook);
+        filteredArchivedPersons = new FilteredList<>(this.archivedAddressBook.getPersonList());
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
         reminderManager = new ReminderManager(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new AddressBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -120,6 +129,28 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== ArchivedAddressBook ========================================================================
+
+    @Override
+    public void addArchivedPerson(Person person) {
+        archivedAddressBook.addArchivedPerson(person); // add but no update to filtered list
+    }
+
+    @Override
+    public ReadOnlyAddressBook getArchivedAddressBook() {
+        return archivedAddressBook;
+    }
+
+    @Override
+    public void setArchivedListMode(boolean isArchived) {
+        showingArchived.set(isArchived);  // Update the property to notify UI
+    }
+
+    @Override
+    public BooleanProperty showingArchived() {
+        return showingArchived;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -128,13 +159,25 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return sortedPersons;
+        if (isArchivedList) {
+            LogsCenter.getLogger(MainApp.class).info("entered");
+            return filteredArchivedPersons;
+        } else {
+            LogsCenter.getLogger(MainApp.class).info("falied");
+            return sortedPersons;
+        }
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate); // Filter the list based on the predicate
+        if (isArchivedList) {
+            LogsCenter.getLogger(MainApp.class).info("update archived");
+            filteredArchivedPersons.setPredicate(predicate);
+        } else {
+            LogsCenter.getLogger(MainApp.class).info("normal update");
+            filteredPersons.setPredicate(predicate); // Filter the list based on the predicate
+        }
     }
 
     /**
