@@ -32,6 +32,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE_PATH);
+
         String trimmedFilePath = argMultimap.getValue(PREFIX_FILE_PATH).orElse("");
         Path filePath;
 
