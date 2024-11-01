@@ -14,7 +14,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import seedu.address.MainApp;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -40,7 +39,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyAddressBook archivedAddressBook) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyAddressBook archivedAddressBook) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
@@ -55,7 +55,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new AddressBook());
+        this(new AddressBook(), new UserPrefs(), new ArchivedAddressBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -144,7 +144,7 @@ public class ModelManager implements Model {
     @Override
     public void setArchivedListMode(boolean isArchived) {
         isArchivedList = isArchived;
-        showingArchived.set(isArchived);  // Update the property to notify UI
+        showingArchived.set(isArchived); // Update the property to notify UI
     }
 
     @Override

@@ -16,7 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -61,7 +60,7 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         logic.showingArchived().addListener((observable, oldValue, newValue) -> {
-            refreshPersonListPanel();  // Refresh whenever archived view is toggled
+            refreshPersonListPanel(); // Refresh whenever archived view is toggled
         });
 
         // Configure the UI

@@ -16,13 +16,19 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ArchivedAddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.ArchivedAddressBookStorage;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.ArchivedAddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.JsonArchivedAddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -56,8 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        ArchivedAddressBookStorage archivedAddressBookStorage
-                = new JsonArchivedAddressBookStorage(Paths.get("data" , "archivedAddressBook.json"));
+        ArchivedAddressBookStorage archivedAddressBookStorage =
+                new JsonArchivedAddressBookStorage(Paths.get("data" , "archivedAddressBook.json"));
         storage = new StorageManager(addressBookStorage, userPrefsStorage, archivedAddressBookStorage);
 
         model = initModelManager(storage, userPrefs);
