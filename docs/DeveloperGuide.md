@@ -301,7 +301,7 @@ When a user types a `find appt` command, the DocTrack application will
 find the appointment based on the parameters provided.
 
 **Step 1**. The user types the `find appt` command in the `CommandBox` followed by the name or a date
-The date is specified using a `\d` prefix and the name is specified using `\n` prefix.
+The date is specified using a `d/` prefix and the name is specified using `n/` prefix.
 
 **Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand`
 method to parse the `find appt` command
@@ -314,7 +314,7 @@ and is then returned to the `LogicManager`.
 **Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
 #### Design considerations
-**Aspect**: How to show find appointment.
+**Aspect: How to show find appointment.**
 
 - **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
 
