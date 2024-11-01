@@ -77,8 +77,7 @@ public class AddCommandTest {
         assertFalse(CommonModel.getInstance().getTransactionBook().getTransactionList().isEmpty());
 
         String expectedString = String.format(
-                "[%s] %s(%s): %s on %s for $%s with categories: %s",
-                CommonModel.getInstance().getTransactionBook().getTransactionList().get(0).getId(),
+                "%s(%s): %s on %s for $%s with categories: %s",
                 testPerson.getName(),
                 testPerson.getPhone(),
                 testDescription, testDate, testAmount, testCategories
