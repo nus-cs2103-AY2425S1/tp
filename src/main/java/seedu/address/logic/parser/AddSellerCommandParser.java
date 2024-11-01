@@ -33,6 +33,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         // Tokenize the input arguments based on the expected prefixes (name, phone, email)
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
 
+        // Verify there are no duplicate prefixes in the input
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
         if (ParserUtil.hasExcessToken(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
             logger.warning("Excess prefixes.");

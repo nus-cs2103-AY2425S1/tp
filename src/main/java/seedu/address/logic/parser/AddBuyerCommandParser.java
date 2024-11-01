@@ -34,8 +34,8 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         // Tokenize the input arguments based on the expected prefixes (name, phone, email)
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
 
+        // Verify there are no duplicate prefixes in the input
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
-
         if (ParserUtil.hasExcessToken(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
             logger.warning("Excess prefixes.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerCommand.MESSAGE_USAGE));
@@ -46,9 +46,6 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerCommand.MESSAGE_USAGE));
         }
-
-        // Verify there are no duplicate prefixes in the input
-
 
         // Parse the name, phone, and email from the argument map
         NameWithoutNumber name = ParserUtil.parseClientNameWithoutNumber(argMultimap.getValue(PREFIX_NAME).get());
