@@ -82,7 +82,7 @@ public class Person {
      * Constructor for Person in general
      * Returns a Person object using the different constructors given the respective fields.
      */
-    public static Person personConstructor(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public static Person createPerson(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         if (email == null && address == null) {
             return new Person(name, phone, tags);
         } else if (email == null) {

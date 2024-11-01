@@ -14,6 +14,7 @@ import seedu.address.ui.UiPart;
 public class EventCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
+    private static final String NULL_VALUE_STYLE_CLASS = "null_value";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -49,9 +50,13 @@ public class EventCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         eventName.setText(event.getName().getEventName());
         time.setText(event.getTime().getTime());
-        venue.setText(event.getVenue().isPresent()
-                ? event.getVenue().get().getVenue()
-                : "(Edit to add venue)");
+        if (event.getVenue().isPresent()) {
+            venue.setText(event.getVenue().get().getVenue());
+            venue.getStyleClass().remove(NULL_VALUE_STYLE_CLASS);
+        } else {
+            venue.setText("(Edit to add venue)");
+            venue.getStyleClass().add(NULL_VALUE_STYLE_CLASS);
+        }
         celebrity.getChildren().add(new Label(event.getCelebrity().getName().fullName));
         contacts.setText(event.getContactsString());
     }

@@ -60,7 +60,7 @@ public class EventBuilder {
      * Sets the {@code Celebrity} of the {@code Event} that we are building.
      */
     public EventBuilder withCelebrity(Person celebrity) {
-        this.celebrity = Person.personConstructor(celebrity.getName(), celebrity.getPhone(),
+        this.celebrity = Person.createPerson(celebrity.getName(), celebrity.getPhone(),
                 celebrity.getEmail().orElse(null), celebrity.getAddress().orElse(null),
                 celebrity.getTags());
         return this;

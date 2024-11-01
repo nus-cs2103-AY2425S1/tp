@@ -90,7 +90,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return Person.personConstructor(name, phone, email, address, tags);
+        return Person.createPerson(name, phone, email, address, tags);
     }
 
 }

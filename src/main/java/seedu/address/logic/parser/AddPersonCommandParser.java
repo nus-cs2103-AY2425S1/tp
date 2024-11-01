@@ -52,7 +52,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
                 : null;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = Person.personConstructor(name, phone, email, address, tagList);
+        Person person = Person.createPerson(name, phone, email, address, tagList);
 
         return new AddPersonCommand(person);
     }

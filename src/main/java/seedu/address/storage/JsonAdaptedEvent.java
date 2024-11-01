@@ -24,7 +24,7 @@ class JsonAdaptedEvent {
 
     private final String name;
     private final JsonAdaptedTime time;
-    private final String venue;
+    private final String venue; // Optional, can be null
     private final JsonAdaptedPerson celebrity;
     private final Set<JsonAdaptedPerson> contacts = new HashSet<>();
 
@@ -32,16 +32,23 @@ class JsonAdaptedEvent {
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("name") String name,
-                            @JsonProperty("time") JsonAdaptedTime time,
-                            @JsonProperty("venue") String venue,
-                            @JsonProperty("celebrity") JsonAdaptedPerson celebrity,
-                            @JsonProperty("contacts") List<JsonAdaptedPerson> contacts) {
+    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") JsonAdaptedTime time,
+            @JsonProperty("venue") String venue, @JsonProperty("celebrity") JsonAdaptedPerson celebrity,
+            @JsonProperty("contacts") List<JsonAdaptedPerson> contacts) {
         this.name = name;
         this.time = time;
         this.venue = venue;
         this.celebrity = celebrity;
         this.contacts.addAll(contacts);
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedEvent} without a venue, with the given event details.
+     */
+    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") JsonAdaptedTime time,
+            @JsonProperty("celebrity") JsonAdaptedPerson celebrity,
+            @JsonProperty("contacts") List<JsonAdaptedPerson> contacts) {
+        this(name, time, null, celebrity, contacts);
     }
 
     /**
@@ -55,6 +62,19 @@ class JsonAdaptedEvent {
         contacts.addAll(source.getContacts().stream()
                 .map(JsonAdaptedPerson::new)
                 .collect(Collectors.toList()));
+    }
+
+    /**
+     * Constructor for {@code JsonAdaptedEvent} in general
+     * Returns a {@code JsonAdaptedEvent} object using the different constructors given the respective fields.
+     */
+    public static JsonAdaptedEvent createJsonAdaptedEvent(String name, JsonAdaptedTime time, String venue,
+            JsonAdaptedPerson celebrity, List<JsonAdaptedPerson> contacts) {
+        if (venue == null) {
+            return new JsonAdaptedEvent(name, time, celebrity, contacts);
+        } else {
+            return new JsonAdaptedEvent(name, time, venue, celebrity, contacts);
+        }
     }
 
     /**

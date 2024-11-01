@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
 
 /**
@@ -65,7 +66,7 @@ public class Messages {
                 .append("; Time: ")
                 .append(event.getTime())
                 .append("; Venue: ")
-                .append(event.getVenue())
+                .append(event.getVenue().map(Venue::toString).orElse(""))
                 .append("; Celebrity: ")
                 .append(event.getCelebrity())
                 .append("; Contacts: ")
