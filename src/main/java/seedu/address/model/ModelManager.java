@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -194,6 +196,43 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Set<Tag> getTagsInUse() {
+        Set<Tag> tagsInUse = new HashSet<>();
+        List<Person> persons = getFullPersonList();
+        for (Person person : persons) {
+            Set<Tag> personTags = person.getTags();
+            tagsInUse.addAll(personTags);
+        }
+        return tagsInUse;
+    }
+
+    @Override
+    public void removeTagFromPersons(Tag tag) {
+        List<Person> persons = getFullPersonList();
+        for (Person person : persons) {
+            Set<Tag> newTags = new HashSet<>(person.getTags());
+            newTags.remove(tag);
+
+            Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getRsvpStatus(), newTags);
+            setPerson(person, updatedPerson);
+        }
+    }
+
+    @Override
+    public void editTagInPersons(Tag existingTag, String newTagName) {
+        List<Person> persons = getFullPersonList();
+        for (Person person : persons) {
+            Set<Tag> tags = new HashSet<>(person.getTags());
+            for (Tag tag : tags) {
+                if (tag.equals(existingTag)) {
+                    tag.setTagName(newTagName);
+                }
+            }
+        }
+    }
+
+    @Override
     public boolean checkAcceptableTagListSize(int additionalTags) {
         return addressBook.checkAcceptableTagListSize(additionalTags);
     }
@@ -207,7 +246,6 @@ public class ModelManager implements Model {
     public void updateTagList() {
         ObservableList<Tag> tl = this.addressBook.getTagList();
         tagList.setAll(FXCollections.observableArrayList(tl));
-        System.out.println(tagList);
     }
 
     @Override
@@ -226,5 +264,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

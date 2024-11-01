@@ -2,14 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,7 +13,7 @@ import seedu.address.model.tag.Tag;
 public class RenameTagCommand extends Command {
     public static final String COMMAND_WORD = "renametag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames an existing tag.\n"
-            + "Example: " + COMMAND_WORD + " t/Bride's Friend t/Friend";
+            + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
     public static final String MESSAGE_SUCCESS = "Tag has been renamed.";
     public static final String MESSAGE_NONEXISTENT_OR_DUPLICATE = "The tag you wish to rename does not exist, "
@@ -45,38 +40,9 @@ public class RenameTagCommand extends Command {
             throw new CommandException(MESSAGE_NONEXISTENT_OR_DUPLICATE);
         }
 
-        editTagInPersons(model);
+        model.editTagInPersons(existingTag, newTagName);
         model.updateTagList();
         return new CommandResult(MESSAGE_SUCCESS);
-    }
-
-    /**
-     * Edits the renamed {@code Tag} for all persons in the address book
-     * who have the tag.
-     */
-    private void editTagInPersons(Model model) {
-        List<Person> persons = model.getFullPersonList();
-        for (Person person : persons) {
-            if (person.hasTag(existingTag)) {
-                replacePerson(model, person);
-            }
-        }
-    }
-
-    /**
-     * Edits the renamed {@code Tag} for the specified person.
-     */
-    private void replacePerson(Model model, Person person) {
-        Set<Tag> newTags = new HashSet<>(person.getTags());
-        for (Tag tag : newTags) {
-            if (tag.equals(existingTag)) {
-                tag.setTagName(newTagName);
-            }
-        }
-
-        Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                person.getEmail(), person.getRsvpStatus(), newTags);
-        model.setPerson(person, updatedPerson);
     }
 
     @Override
