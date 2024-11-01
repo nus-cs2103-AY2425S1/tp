@@ -17,7 +17,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "/a";
+    public static final String COMMAND_WORD = "/add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship application to the address book. "
             + "Parameters: "
