@@ -17,6 +17,7 @@ import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.AllergyList;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
@@ -146,11 +147,14 @@ public class ParserUtil {
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
-     *
+     * returns null if the given {@code email} is an empty string
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
+        if (email.isEmpty()) {
+            return null;
+        }
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
@@ -176,12 +180,23 @@ public class ParserUtil {
     /**
      * Parses a {@code String date} into a {@code LocalDate} and checks if startDate is before endDate
      */
-    public static LocalDate parseDateAndCheck(String startDateString, LocalDate endDate) throws ParseException {
+    public static LocalDate parseStartDateAndCheck(String startDateString, LocalDate endDate) throws ParseException {
         LocalDate startDate = parseDate(startDateString);
         if (!isValidStartAndEndDate(startDate, endDate)) {
             throw new ParseException(AppointmentDateFilter.TWO_DATE_MESSAGE_CONSTRAINTS);
         }
         return startDate;
+    }
+
+    /**
+     * Checks whether the endDate is after today's date or same as today's date
+     */
+    public static LocalDate parseEndDateAndCheck(String endDateString) throws ParseException {
+        LocalDate endDate = parseDate(endDateString);
+        if (endDate.isBefore(LocalDate.now())) {
+            throw new ParseException(AppointmentDateFilter.END_DATE_MESSAGE_CONSTRAINTS);
+        }
+        return endDate;
     }
 
     /**
@@ -227,13 +242,13 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> allergy} into a {@code Set<Allergy>}.
      */
-    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
+    public static AllergyList parseAllergies(Collection<String> allergies) throws ParseException {
         requireNonNull(allergies);
-        final Set<Allergy> allergySet = new HashSet<>();
+        final AllergyList allergyList = new AllergyList();
         for (String allergy : allergies) {
-            allergySet.add(parseAllergies(allergy));
+            allergyList.addAllergy(parseAllergies(allergy));
         }
-        return allergySet;
+        return allergyList;
     }
 
     /**

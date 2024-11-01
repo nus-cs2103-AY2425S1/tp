@@ -3,10 +3,8 @@ package seedu.address.model.patient;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -28,7 +26,7 @@ public class Patient {
 
     // Data fields
     private Address address;
-    private Set<Allergy> allergies = new HashSet<>();
+    private AllergyList allergies = new AllergyList();
     private BloodType bloodType;
     private HealthRisk healthRisk;
     private ExistingCondition existingCondition;
@@ -38,26 +36,18 @@ public class Patient {
     private ApptList appts = new ApptList();
 
     /**
-     * Name, Nric, Sex, Birthdate and healthservice must be present and not null
-     */
-    public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex) {
-        this(name, nric, birthdate, sex, new Phone("123"), new Email("dummy@gmail.com"));
-    }
-
-    /**
      * Every field must be present and not null.
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex,
-                   Phone phone, Email email) {
-        requireAllNonNull(name, nric, birthdate, sex, phone, email);
+                   Phone phone) {
+        requireAllNonNull(name, nric, birthdate, sex, phone);
         this.name = name;
         this.nric = nric;
         this.birthdate = birthdate;
         this.sex = sex;
         this.phone = phone;
-        this.email = email;
+        this.email = null;
         this.address = null;
-        this.allergies.clear();
         this.bloodType = null;
         this.healthRisk = null;
         this.existingCondition = null;
@@ -71,8 +61,8 @@ public class Patient {
      * The other fields can be null
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex, Phone phone,
-                   Email email, Address address, Set<Allergy> allergies, BloodType bloodType, HealthRisk healthRisk,
-                   ExistingCondition existingCondition, Note note, Name nokName, Phone nokPhone, ApptList appts) {
+            Email email, Address address, AllergyList allergies, BloodType bloodType, HealthRisk healthRisk,
+            ExistingCondition existingCondition, Note note, Name nokName, Phone nokPhone, ApptList appts) {
         requireAllNonNull(name, nric, birthdate, sex);
         this.name = name;
         this.nric = nric;
@@ -123,10 +113,6 @@ public class Patient {
         return nokPhone;
     }
 
-    public Set<Allergy> getAllergies() {
-        return allergies;
-    }
-
     public BloodType getBloodType() {
         return bloodType;
     }
@@ -147,9 +133,7 @@ public class Patient {
         return address;
     }
 
-    public ApptList getAppointments() {
-        return appts;
-    }
+    // ApptList access functions
 
     public Appt getMostRecentPastAppt() {
         LocalDateTime now = LocalDateTime.now();
@@ -170,8 +154,6 @@ public class Patient {
     /**
      * Adds an appointment to the patient's list of appointments.
      * The appointments will be sorted by date and time.
-     *
-     * @param appt
      */
     public void addAppt(Appt appt) {
         appts.addAppt(appt);
@@ -199,11 +181,44 @@ public class Patient {
 
     /**
      * Deletes an appointment from the patient's list of appointments.
-     *
-     * @param appt
      */
     public void deleteAppt(Appt appt) {
         appts.deleteAppt(appt);
+    }
+
+    // AllergyList access functions
+
+    /**
+     * Adds an allergy to the patient's set of allergies.
+     */
+    public void addAllergy(Allergy allergy) {
+        allergies.addAllergy(allergy);
+    }
+
+    /**
+     * Returns an immutable list of allergies.
+     * This list will not contain any duplicate allergies.
+     *
+     * @return List of allergies.
+     */
+    public List<Allergy> getAllergies() {
+        return allergies.getAllergies();
+    }
+
+    /**
+     * Returns a string representation of all allergies of the patient, sorted in alphabetical order.
+     *
+     * @return String representation of the allergies.
+     */
+    public String getAllergiesString() {
+        return allergies.toString();
+    }
+
+    /**
+     * Deletes an allergy from the patient's set of allergies.
+     */
+    public void deleteAllergy(Allergy allergy) {
+        allergies.deleteAllergy(allergy);
     }
 
     /**
@@ -260,7 +275,6 @@ public class Patient {
                 .add("sex", sex)
                 .add("birthdate", birthdate)
                 .add("phone", phone)
-                .add("email", email)
                 .toString();
     }
 

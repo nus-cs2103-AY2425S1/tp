@@ -33,14 +33,21 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ENDDATE);
 
-        LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get());
+        String endDateString = argMultimap.getValue(PREFIX_ENDDATE).get();
+
+        LocalDate endDate;
         LocalDate startDate = null;
         HealthService service = null;
 
         if (arePrefixesPresent(argMultimap, PREFIX_STARTDATE)) {
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STARTDATE);
-            startDate = ParserUtil.parseDateAndCheck(argMultimap.getValue(PREFIX_STARTDATE).get(), endDate);
+            endDate = ParserUtil.parseDate(endDateString);
+            startDate = ParserUtil.parseStartDateAndCheck(argMultimap.getValue(PREFIX_STARTDATE).get(), endDate);
+        } else {
+            // if start date not present, end date should not be before today's date
+            endDate = ParserUtil.parseEndDateAndCheck(endDateString);
         }
+
         if (arePrefixesPresent(argMultimap, PREFIX_HEALTHSERVICE)) {
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HEALTHSERVICE);
             service = ParserUtil.parseHealthService(argMultimap.getValue(PREFIX_HEALTHSERVICE).get());

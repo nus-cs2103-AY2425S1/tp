@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -9,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.AllergyList;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
@@ -213,7 +216,16 @@ class JsonAdaptedPatient {
             modelAppts.addAppt(appt.toModelType());
         }
 
-        final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
+        final AllergyList modelAllergies = new AllergyList();
+
+        for (JsonAdaptedAllergy allergy : allergies) {
+            if (allergy == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Allergy.class.getSimpleName()));
+            }
+
+            modelAllergies.addAllergy(allergy.toModelType());
+        }
 
         return new Patient(modelName, modelNric, modelBirthDate, modelSex, modelPhone, modelEmail,
                 modelAddress, modelAllergies, modelBloodType, modelHealthRisk, modelExistingCondition, modelNote,

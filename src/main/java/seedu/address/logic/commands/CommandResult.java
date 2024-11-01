@@ -53,6 +53,11 @@ public class CommandResult {
         this(feedbackToUser, keyword, false, null, false, false);
     }
 
+    public CommandResult(String feedbackToUser, Patient patient) {
+        this(feedbackToUser, null, false, patient, false, false);
+    }
+
+
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -92,7 +97,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && showPatientInfo == otherCommandResult.showPatientInfo
-                && patient.equals(otherCommandResult.patient)
+                && Objects.equals(patient, otherCommandResult.patient)
                 && exit == otherCommandResult.exit
                 && Objects.equals(keyword, otherCommandResult.keyword);
     }
@@ -108,6 +113,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("showPatientInfo", showPatientInfo)
+                .add("keyword", keyword)
+                .add("patient", patient)
                 .add("exit", exit)
                 .toString();
     }
