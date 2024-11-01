@@ -30,4 +30,18 @@ public class HelpLogicManagerTest {
         assertEquals("Monospaced", ((Text) helpContentFlow.getChildren().get(1)).getFont().getFamily(),
                 "Text inside backticks should use Monospaced font");
     }
+
+    @Test
+    public void formatTextFlow_validContent_addsTitleAndText() {
+        TextFlow helpContentFlow = new TextFlow();
+        String content = "Introduction\nThis is the introductory text.";
+
+        helpLogicManager.formatTextFlow(content, helpContentFlow);
+
+        // Verify that the title is correctly added and styled
+        assertEquals("Introduction\n", ((Text) helpContentFlow.getChildren().get(0)).getText(),
+                "The title should match 'Introduction'");
+        assertEquals("helpTitle", ((Text) helpContentFlow.getChildren().get(0)).getId(),
+                "Title should have ID 'helpTitle'");
+    }
 }

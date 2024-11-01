@@ -66,7 +66,7 @@ public class HelpLogicManager {
     /**
      * Adds hyperlinks for the "Quick Start" section.
      */
-    private void addQuickStartHyperlinks(TextFlow helpContentFlow) {
+    public void addQuickStartHyperlinks(TextFlow helpContentFlow) {
 
         assert helpContentFlow != null : "TextFlow should not be null";
 
