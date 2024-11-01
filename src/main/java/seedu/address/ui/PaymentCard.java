@@ -50,7 +50,7 @@ public class PaymentCard extends UiPart<Region> {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM ''yy");
 
-        String displayString = "up till " + currentDate.format(formatter);
+        String displayString = "payment up till " + currentDate.format(formatter);
         month.setText(displayString);
     }
 

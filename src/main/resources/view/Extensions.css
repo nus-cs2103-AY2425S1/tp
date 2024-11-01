@@ -37,7 +37,7 @@
 
 .attendance-pane .scroll-bar .thumb {
     -fx-background-color: derive(#9b9b9b, 70%);
-    -fx-background-insets: 2.5;
+    -fx-background-insets: 2;
 }
 
 .attendance-pane .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
