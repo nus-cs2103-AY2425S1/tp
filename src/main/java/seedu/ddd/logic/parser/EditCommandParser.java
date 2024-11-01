@@ -91,9 +91,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             editContactDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editContactDescriptor::setTags);
-        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            editContactDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
-        }
 
         if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
             EditVendorDescriptor editVendorDescriptor = new EditVendorDescriptor(editContactDescriptor);

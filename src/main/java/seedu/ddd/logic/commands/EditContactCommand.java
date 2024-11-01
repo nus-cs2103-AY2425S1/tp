@@ -1,6 +1,7 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 
 import java.util.Collections;
@@ -27,6 +28,7 @@ import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.exceptions.DuplicateContactException;
 import seedu.ddd.model.contact.vendor.Service;
 import seedu.ddd.model.contact.vendor.Vendor;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * Edits the details of a contact in the address book.
@@ -122,7 +124,16 @@ public class EditContactCommand extends EditCommand {
         Address updatedAddress = editContactDescriptor.getAddress().orElse(contactToEdit.getAddress());
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, contactToEdit.getId());
+        // uneditable fields
+        Set<Event> events = new HashSet<>(contactToEdit.getEvents());
+        Id id = contactToEdit.getId();
+
+        Client client = new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, id);
+        for (Event event : events) {
+            event.removeContact(contactToEdit);
+            client.addEvent(event);
+        }
+        return client;
     }
 
     /**
@@ -141,9 +152,17 @@ public class EditContactCommand extends EditCommand {
                 ? ((EditVendorDescriptor) editContactDescriptor).getService().orElse(contactToEdit.getService())
                 : contactToEdit.getService();
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
+    
+        // uneditable fields
+        Set<Event> events = new HashSet<>(contactToEdit.getEvents());
+        Id id = contactToEdit.getId();
 
-        return new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedService,
-                updatedTags, contactToEdit.getId());
+        Vendor vendor = new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedService, updatedTags, id);
+        for (Event event : events) {
+            event.removeContact(contactToEdit);
+            vendor.addEvent(event);
+        }
+        return vendor;
     }
 
     @Override
