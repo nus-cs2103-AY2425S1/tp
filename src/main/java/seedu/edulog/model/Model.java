@@ -90,7 +90,13 @@ public interface Model {
     /**
      * Get total revenue
      */
-    int getRevenue();
+    int getPaid();
+
+    /**
+     * Get total amount of money that is unpaid
+     */
+    int getUnpaid();
+
     /**
      * Adds the given student.
      * {@code student} must not already exist in the address book.

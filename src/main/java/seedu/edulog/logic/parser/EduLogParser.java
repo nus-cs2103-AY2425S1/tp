@@ -111,7 +111,7 @@ public class EduLogParser {
             return new ExitCommand();
 
         case RevenueCommand.COMMAND_WORD:
-            return new RevenueCommand();
+            return new RevenueCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

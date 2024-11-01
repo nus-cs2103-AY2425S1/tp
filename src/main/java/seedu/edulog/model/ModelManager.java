@@ -144,8 +144,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int getRevenue() {
-        return eduLog.getRevenue();
+    public int getPaid() {
+        return eduLog.getPaid();
+    }
+
+    @Override
+    public int getUnpaid() {
+        return eduLog.getUnpaid();
     }
 
     @Override

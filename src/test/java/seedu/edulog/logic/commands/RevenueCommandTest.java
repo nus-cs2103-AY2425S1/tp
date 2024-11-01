@@ -15,24 +15,44 @@ public class RevenueCommandTest {
 
 
     @Test
-    public void execute_noHasPaid_successful() {
-        RevenueCommand command = new RevenueCommand();
+    public void execute_noHasPaidOptionPaid_successful() {
+        RevenueCommand command = new RevenueCommand("paid");
         Model model = new ModelManager(getTypicalEduLogWithCopiedStudents(), new UserPrefs());
         model.unmarkAllStudents();
 
         // none of the student has paid
-        String expectedMessage = String.format(RevenueCommand.COMMAND_SUCCESS, 0);
+        String expectedMessage = String.format(RevenueCommand.COMMAND_SUCCESS, "paid", 0);
         assertCommandSuccess(command, model, expectedMessage, model);
     }
 
     @Test
-    public void execute_allHasPaid_successful() {
-        RevenueCommand command = new RevenueCommand();
+    public void execute_allHasPaidOptionPaid_successful() {
+        RevenueCommand command = new RevenueCommand("paid");
         Model model = new ModelManager(getTypicalEduLogWithCopiedStudents(), new UserPrefs());
         model.markAllStudents();
 
-        // all of the student has paid
-        String expectedMessage = String.format(RevenueCommand.COMMAND_SUCCESS, 700);
+        String expectedMessage = String.format(RevenueCommand.COMMAND_SUCCESS, "paid", 700);
+        assertCommandSuccess(command, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_noHasPaidOptionUnpaid_successful() {
+        RevenueCommand command = new RevenueCommand("unpaid");
+        Model model = new ModelManager(getTypicalEduLogWithCopiedStudents(), new UserPrefs());
+        model.unmarkAllStudents();
+
+        // none of the student has paid
+        String expectedMessage = String.format(RevenueCommand.COMMAND_SUCCESS, "unpaid", 700);
+        assertCommandSuccess(command, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_allHasPaidOptionUnpaid_successful() {
+        RevenueCommand command = new RevenueCommand("unpaid");
+        Model model = new ModelManager(getTypicalEduLogWithCopiedStudents(), new UserPrefs());
+        model.markAllStudents();
+
+        String expectedMessage = String.format(RevenueCommand.COMMAND_SUCCESS, "unpaid", 0);
         assertCommandSuccess(command, model, expectedMessage, model);
     }
 }

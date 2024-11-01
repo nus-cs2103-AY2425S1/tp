@@ -9,22 +9,38 @@ import seedu.edulog.model.Model;
  */
 public class RevenueCommand extends Command {
     public static final String COMMAND_WORD = "revenue";
-    public static final String COMMAND_USAGE = COMMAND_WORD + ": calculate total amount of money earned"
-            + "from students who have paid. Example: revenue";
-    public static final String COMMAND_SUCCESS = "Total revenue is $%d";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " [paid/unpaid]"
+            + ": calculate total amount of money earned/not earned"
+            + "from students who have paid/not paid. Example: revenue paid";
+    public static final String COMMAND_SUCCESS = "Total revenue %s is $%d";
+    public static final String PAID = "paid";
+    public static final String UNPAID = "unpaid";
+
+    private String option;
+
+    public RevenueCommand(String option) {
+        this.option = option;
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return new CommandResult(String.format(COMMAND_SUCCESS, model.getRevenue()));
+        int result = (option.equals(PAID)) ? model.getPaid() : model.getUnpaid();
+        String output = String.format(COMMAND_SUCCESS, option, result);
+        return new CommandResult(output);
     }
 
     @Override
     public boolean equals(Object other) {
-        return other instanceof RevenueCommand;
+        if (!(other instanceof RevenueCommand)) {
+            return false;
+        }
+
+        RevenueCommand otherCommand = (RevenueCommand) other;
+        return otherCommand.option.equals(this.option);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).toString();
+        return new ToStringBuilder(this).add("option", option).toString();
     }
 }
