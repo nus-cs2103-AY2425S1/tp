@@ -23,12 +23,16 @@ import seedu.address.model.tag.TagsContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+    private static final String SPECIAL_CHARACTERS = "+_.@-";
+    private static final String VALIDATION_REGEX = "^[\\p{Alnum}" + SPECIAL_CHARACTERS + "]"
+            + "[\\p{Alnum} " + SPECIAL_CHARACTERS + "]*$";
+
     /**
      * Message to be displayed when invalid keyword is given.
      */
-    public static final String MESSAGE_INVALID_KEYWORD =
-            "Keywords should only contain alphanumeric characters and spaces, and it should not be blank";
-    private static final String VALIDATION_REGEX = "^.+$";
+    public static final String MESSAGE_INVALID_KEYWORD = "Keywords should only contain alphanumeric characters, "
+            + "spaces and these special characters, excluding the parenthesis, (" + SPECIAL_CHARACTERS + ")."
+            + "and it should not be blank";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
