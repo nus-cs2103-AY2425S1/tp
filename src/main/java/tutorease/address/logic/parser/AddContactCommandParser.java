@@ -1,13 +1,11 @@
 package tutorease.address.logic.parser;
 
-import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static tutorease.address.logic.parser.ParserUtil.arePrefixesPresent;
 import static tutorease.address.logic.parser.ParserUtil.validatePrefixesPresent;
 
 import java.util.Set;
