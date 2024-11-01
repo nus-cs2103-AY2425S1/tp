@@ -78,7 +78,7 @@ public class DeleteCommand extends Command {
 
             // If person was not found, throw an exception
             if (personToDelete == null) {
-                throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+                throw new CommandException(String.format(Messages.MESSAGE_PERSON_NOT_FOUND, identityNumber));
             }
         }
     }
