@@ -32,8 +32,8 @@ public class FindTagCommandTest {
 
     @Test
     public void equals() {
-        Set<Tag> firstTag = new HashSet<>(Collections.singletonList(new Tag("friend")));
-        Set<Tag> secondTag = new HashSet<>(Collections.singletonList(new Tag("colleague")));
+        Set<Tag> firstTag = new HashSet<>(Collections.singletonList(new Tag("Buyer")));
+        Set<Tag> secondTag = new HashSet<>(Collections.singletonList(new Tag("Seller")));
 
         TagContainsKeywordsPredicate firstPredicate = new TagContainsKeywordsPredicate(firstTag);
         TagContainsKeywordsPredicate secondPredicate = new TagContainsKeywordsPredicate(secondTag);
@@ -81,7 +81,7 @@ public class FindTagCommandTest {
     @Test
     public void execute_multipleTags_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        TagContainsKeywordsPredicate predicate = preparePredicate("seller hdb");
+        TagContainsKeywordsPredicate predicate = preparePredicate("seller landlord");
         FindTagCommand command = new FindTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -89,8 +89,18 @@ public class FindTagCommandTest {
     }
 
     @Test
+    public void execute_nonExistentTag_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        TagContainsKeywordsPredicate predicate = preparePredicate("abcd");
+        FindTagCommand command = new FindTagCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
-        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("friend")));
+        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("buyer")));
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(tags);
         FindTagCommand findTagCommand = new FindTagCommand(predicate);
         String expected = FindTagCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
