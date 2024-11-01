@@ -139,7 +139,7 @@ Examples:
 
 Renames an existing tag in the address book.
 
-Format: `renameTag INDEX ot/OLDTAG nt/NEWTAG`
+Format: `renameTag ot/OLDTAG nt/NEWTAG`
 
 * Renames the tags called `OLDTAG` to `NEWTAG`.
 * Contacts with the tag `OLDTAG` will now have `NEWTAG`, with `OLDTAG` removed

@@ -56,6 +56,9 @@ public class RenameTagCommand extends Command {
             while (iterator.hasNext()) {
                 Tag tag = iterator.next();
                 if (tag.getTagName().equals(oldTag)) {
+                    if (currPerson.hasTag(newTag)) {
+                        continue;
+                    }
                     tag.updateTagName(newTag);
                     found = true;
                 }
