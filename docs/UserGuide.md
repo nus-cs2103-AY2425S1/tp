@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # AB-3 User Guide
@@ -133,7 +133,7 @@ Examples:
 
 Finds contacts whose details matches all given fields.
 
-Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`
+Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [nn/NICKNAME]`
 
 * The role field(s), if any, have to take a valid role value (Refer to **Tip** section in [adding a contact](#adding-a-contact-add))
 * The search for all other fields is case-insensitive. e.g query `hans` will match `Hans`
@@ -190,6 +190,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ### Archiving data files `[coming in v2.0]`
