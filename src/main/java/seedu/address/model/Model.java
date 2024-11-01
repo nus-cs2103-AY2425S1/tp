@@ -100,7 +100,13 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(Person personToUpdate, Person editedPerson);
+
+    /**
+     * Adds the given log to the person.
+     * {@code target} must exist in the address book.
+     */
+    void addLog(Person target, Log log);
 
     /** Returns an unmodifiable view of the full person list */
     ObservableList<Person> getPersonList();

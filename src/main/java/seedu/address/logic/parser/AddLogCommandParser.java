@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.log.AppointmentDate;
 import seedu.address.model.log.Log;
+import seedu.address.model.log.LogEntry;
 import seedu.address.model.person.IdentityNumber;
 
 /**
@@ -52,9 +53,10 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
 
         // Parse log
         String entry = argMultimap.getValue(PREFIX_LOG).get();
+        LogEntry logEntry = new LogEntry(entry);
 
         // Create log object
-        Log log = new Log(appointmentDate, entry);
+        Log log = new Log(appointmentDate, logEntry);
 
         // Create and return AddLogCommand with parsed values
         return new AddLogCommand(identityNumber, log);

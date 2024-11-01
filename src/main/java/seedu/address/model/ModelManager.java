@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -160,6 +162,28 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Log> getSessionLog(int personIndex) {
         return addressBook.getSessionLog(personIndex);
+    }
+
+    @Override
+    public void addLog(Person personToUpdate, Log log) {
+        requireAllNonNull(personToUpdate, log);
+        // Create a new Set of logs that includes the new log
+        Set<Log> updatedLogs = new HashSet<>(personToUpdate.getLogs());
+        updatedLogs.add(log);
+
+        // Create a new updated person with the additional log
+        Person updatedPerson = new Person(
+                personToUpdate.getName(),
+                personToUpdate.getIdentityNumber(),
+                personToUpdate.getPhone(),
+                personToUpdate.getEmail(),
+                personToUpdate.getAddress(),
+                personToUpdate.getTags(),
+                updatedLogs // Updated logs set
+        );
+
+        // Update the model with the new person (with the added log)
+        this.setPerson(personToUpdate, updatedPerson);
     }
 
 

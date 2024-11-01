@@ -8,6 +8,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.log.AppointmentDate;
 import seedu.address.model.log.Log;
+import seedu.address.model.log.LogEntry;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.IdentityNumber;
@@ -77,15 +78,16 @@ public class SampleDataUtil {
                     String details = logParts[1].trim();
                     if (dateStr.isEmpty()) {
                         throw new IllegalArgumentException("Log format has missing date."
-                                + Log.MESSAGE_CONSTRAINTS);
+                                + LogEntry.MESSAGE_CONSTRAINTS);
                     }
                     AppointmentDate appointmentDate = new AppointmentDate(dateStr);
                     if (details.isEmpty()) {
                         throw new IllegalArgumentException("Log format has missing entry."
-                                + Log.MESSAGE_CONSTRAINTS);
+                                + LogEntry.MESSAGE_CONSTRAINTS);
                     }
+                    LogEntry entry = new LogEntry(details);
 
-                    return new Log(appointmentDate, details);
+                    return new Log(appointmentDate, entry);
                 })
                 .collect(Collectors.toSet());
     }
