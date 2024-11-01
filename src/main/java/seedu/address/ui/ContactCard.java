@@ -76,13 +76,13 @@ public class ContactCard extends UiPart<Region> {
 
         Label label = new Label(role.roleName);
         String id = switch (role.roleName) {
-        case "President" -> "president";
-        case "Vice President" -> "vice-president";
-        case "Admin" -> "admin";
-        case "Marketing" -> "marketing";
-        case "Events (internal)" -> "events-internal";
-        case "Events (external)" -> "events-external";
-        case "External Relations" -> "external-relations";
+        case Role.PRESIDENT -> "president";
+        case Role.VICE_PRESIDENT -> "vice-president";
+        case Role.ADMIN -> "admin";
+        case Role.MARKETING -> "marketing";
+        case Role.EVENTS_INTERNAL -> "events-internal";
+        case Role.EVENTS_EXTERNAL -> "events-external";
+        case Role.EXTERNAL_RELATIONS -> "external-relations";
         default -> null;
         };
 
