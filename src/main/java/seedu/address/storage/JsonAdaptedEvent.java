@@ -31,11 +31,9 @@ class JsonAdaptedEvent {
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("name") String name,
-                            @JsonProperty("time") JsonAdaptedTime time,
-                            @JsonProperty("venue") String venue,
-                            @JsonProperty("celebrityName") String celebrityName,
-                            @JsonProperty("contactNames") List<String> contactNames) {
+    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") JsonAdaptedTime time,
+            @JsonProperty("venue") String venue, @JsonProperty("celebrityName") String celebrityName,
+            @JsonProperty("contactNames") List<String> contactNames) {
         this.name = name;
         this.time = time;
         this.venue = venue;
@@ -46,9 +44,7 @@ class JsonAdaptedEvent {
     /**
      * Constructs a {@code JsonAdaptedEvent} without a venue, with the given event details.
      */
-    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") JsonAdaptedTime time,
-            @JsonProperty("celebrity") String celebrityName,
-            @JsonProperty("contacts") List<String> contactNames) {
+    public JsonAdaptedEvent(String name, JsonAdaptedTime time, String celebrityName, List<String> contactNames) {
         this(name, time, null, celebrityName, contactNames);
     }
 
