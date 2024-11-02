@@ -62,23 +62,21 @@ public class EditCommandParserTest {
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_INDEX_FOR_EDIT =
-            String.format(MESSAGE_INVALID_INDEX, EditCommand.MESSAGE_USAGE);
+            Messages.getErrorMessageWithUsage(MESSAGE_INVALID_INDEX, EditCommand.MESSAGE_USAGE);
     private static final String MESSAGE_MISSING_INDEX_FOR_EDIT =
-            String.format(MESSAGE_MISSING_INDEX, EditCommand.MESSAGE_USAGE);
+            Messages.getErrorMessageWithUsage(MESSAGE_MISSING_INDEX, EditCommand.MESSAGE_USAGE);
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, NAME_DESC_AMY,
-                Messages.getErrorMessageWithUsage(MESSAGE_MISSING_INDEX_FOR_EDIT, EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, NAME_DESC_AMY, MESSAGE_MISSING_INDEX_FOR_EDIT);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        assertParseFailure(parser, "",
-                Messages.getErrorMessageWithUsage(MESSAGE_MISSING_INDEX_FOR_EDIT, EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", MESSAGE_MISSING_INDEX_FOR_EDIT);
     }
 
     @Test

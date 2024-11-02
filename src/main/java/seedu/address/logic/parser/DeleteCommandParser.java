@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -24,7 +25,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             }
             return new DeleteCommand(indicesToDelete);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(pe.getMessage(), DeleteCommand.MESSAGE_USAGE));
+            throw new ParseException(Messages.getErrorMessageWithUsage(pe.getMessage(), DeleteCommand.MESSAGE_USAGE));
         }
     }
 

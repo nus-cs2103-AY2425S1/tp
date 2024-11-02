@@ -64,7 +64,8 @@ public class FindCommandParserTest {
     public void parse_invalidArg_throwsParseException() {
         // 1
         assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageWithUsage(FindCommandParser.MESSAGE_MISSING_SEARCH_KEYWORD,
+                        FindCommand.MESSAGE_USAGE));
         // 2
         assertParseFailure(parser, "Alice " + PREFIX_MODULE + "CS2103T",
                 Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE, FindCommand.MESSAGE_USAGE));

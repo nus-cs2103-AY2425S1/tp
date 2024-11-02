@@ -24,6 +24,8 @@ import seedu.address.model.person.Person;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+    public static final String MESSAGE_MISSING_SEARCH_KEYWORD = "At least one search parameter is required.";
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -33,13 +35,14 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MODULE);
 
-        // for this command, NAME_PREFIX or MODULE_PREFIX is mandatory; preamble is not allowed
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
         if (!argMultimap.getPreamble().isEmpty() && !argMultimap.getPreamble().equals(FindCommand.CHAINED)) {
             throw new ParseException(Messages.getErrorMessageWithUsage(MESSAGE_UNEXPECTED_PREAMBLE,
+                    FindCommand.MESSAGE_USAGE));
+        }
+
+        // for this command, NAME_PREFIX or MODULE_PREFIX is mandatory; preamble is not allowed (except for "chained")
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE)) {
+            throw new ParseException(Messages.getErrorMessageWithUsage(MESSAGE_MISSING_SEARCH_KEYWORD,
                     FindCommand.MESSAGE_USAGE));
         }
 
