@@ -23,6 +23,10 @@
     -fx-opacity: 0.9;
 }
 
+.label:hover {
+    -fx-cursor: hand;
+}
+
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
