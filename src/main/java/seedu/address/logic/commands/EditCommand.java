@@ -94,11 +94,11 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Contact> lastShownList = model.getFilteredContactList();
 
-        System.out.println("attempting to execute EditCommand, targetIndex = " + targetIndex);
+       // System.out.println("attempting to execute EditCommand, targetIndex = " + targetIndex);
 
         if (targetIndex == null) {
             setTargetIndex(lastShownList);
-            System.out.println("Have set Target Index: " + targetIndex);
+            // System.out.println("Have set Target Index: " + targetIndex);
         }
         assert(targetIndex != null);
 
@@ -128,7 +128,7 @@ public class EditCommand extends Command {
                 .filter(contact -> contact.getName().equalsIgnoreCase(targetName))
                 .map(lastShownList::indexOf)
                 .reduce(invalidTargetIndex, (x, y) -> y);
-        System.out.println("temp = " + temp);
+        // System.out.println("temp = " + temp);
         if (temp == invalidTargetIndex) {
             throw new CommandException(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK);
         }
@@ -179,6 +179,7 @@ public class EditCommand extends Command {
                 && editContactDescriptor.equals(otherEditCommand.editContactDescriptor);
     }
 
+    /*
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -186,6 +187,7 @@ public class EditCommand extends Command {
                 .add("editContactDescriptor", editContactDescriptor)
                 .toString();
     }
+    */
 
     /**
      * Stores the details to edit the contact with. Each non-empty field value will replace the

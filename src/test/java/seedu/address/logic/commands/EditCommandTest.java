@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
@@ -35,7 +36,8 @@ import seedu.address.testutil.EditContactDescriptorBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private static final String NAME_NOT_IN_ADDRESS_BOOK = "R@chel Quek Tan Boba Qxtrnm";
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -146,6 +148,38 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT,
                 new EditContactDescriptorBuilder().withNickname(VALID_NICKNAME_AMY)
                         .build());
+
+        String expectedMessage = String.format(
+                EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_nameToEditDoesNotExistInAddressBook_failure() {
+        String userInput = NAME_NOT_IN_ADDRESS_BOOK;
+        Name name = new Name(userInput);
+        Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
+        EditCommand editCommand = new EditCommand(name, descriptor);
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK);
+    }
+
+    @Test
+    public void execute_nameToEditExistInAddressBook_success() {
+        Name name = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased()).getName();
+        Contact contactInFilteredList = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(contactInFilteredList)
+                .withNickname(VALID_NICKNAME_AMY)
+                .build();
+        EditCommand editCommand = new EditCommand(name, descriptor);
+
+        Contact editedContact =
+                new ContactBuilder(contactInFilteredList).withNickname(VALID_NICKNAME_AMY).build();
 
         String expectedMessage = String.format(
                 EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact));
