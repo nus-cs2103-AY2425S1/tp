@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -57,7 +56,7 @@ public class DetailedPersonCardWindow extends UiPart<Stage> {
      * Shows the Detailed Person Card window.
      */
     public void show() {
-        getRoot().setTitle("Detailed Person: " + personToShow.getName().fullName);
+        getRoot().setTitle(personToShow.getName().fullName);
         getRoot().show();
         getRoot().centerOnScreen();
 
