@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
-import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindVendorCommand}.
@@ -31,10 +31,10 @@ public class FindVendorCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        VendorContainsKeywordsPredicate firstPredicate =
+                new VendorContainsKeywordsPredicate(Collections.singletonList("first"));
+        VendorContainsKeywordsPredicate secondPredicate =
+                new VendorContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindVendorCommand findFirstCommand = new FindVendorCommand(firstPredicate);
         FindVendorCommand findSecondCommand = new FindVendorCommand(secondPredicate);
@@ -58,7 +58,7 @@ public class FindVendorCommandTest {
 
     @Test
     public void execute_zeroKeywords_noVendorFoundError() {
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        VendorContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindVendorCommand command = new FindVendorCommand(predicate);
         expectedModel.updateFilteredVendorList(predicate);
         assertCommandFailure(command, model, MESSAGE_NO_VENDORS_FOUND);
@@ -67,7 +67,7 @@ public class FindVendorCommandTest {
     @Test
     public void execute_multipleKeywords_multipleVendorsFound() {
         String expectedMessage = String.format(MESSAGE_VENDORS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        VendorContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindVendorCommand command = new FindVendorCommand(predicate);
         expectedModel.updateFilteredVendorList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,16 +76,16 @@ public class FindVendorCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        VendorContainsKeywordsPredicate predicate = new VendorContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindVendorCommand findCommand = new FindVendorCommand(predicate);
         String expected = FindVendorCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code VendorContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private VendorContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new VendorContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

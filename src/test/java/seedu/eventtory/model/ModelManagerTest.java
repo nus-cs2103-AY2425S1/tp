@@ -25,7 +25,7 @@ import seedu.eventtory.commons.core.GuiSettings;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.event.UniqueEventList;
-import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.UniqueVendorList;
 import seedu.eventtory.model.vendor.Vendor;
 import seedu.eventtory.testutil.EventBuilder;
@@ -291,7 +291,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredVendorList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredVendorList(new VendorContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(eventTory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

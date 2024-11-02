@@ -12,23 +12,23 @@ import org.junit.jupiter.api.Test;
 
 import seedu.eventtory.testutil.EventBuilder;
 
-public class EventNameContainsKeywordsPredicateTest {
+public class EventContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        EventNameContainsKeywordsPredicate firstPredicate = new EventNameContainsKeywordsPredicate(
+        EventContainsKeywordsPredicate firstPredicate = new EventContainsKeywordsPredicate(
                 firstPredicateKeywordList);
-        EventNameContainsKeywordsPredicate secondPredicate = new EventNameContainsKeywordsPredicate(
+        EventContainsKeywordsPredicate secondPredicate = new EventContainsKeywordsPredicate(
                 secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        EventNameContainsKeywordsPredicate firstPredicateCopy = new EventNameContainsKeywordsPredicate(
+        EventContainsKeywordsPredicate firstPredicateCopy = new EventContainsKeywordsPredicate(
                 firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
@@ -45,48 +45,48 @@ public class EventNameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        EventNameContainsKeywordsPredicate predicate = new EventNameContainsKeywordsPredicate(
+        EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(
                 Collections.singletonList("Alice"));
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new EventBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
 
         // partial keywords
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Ali", "Bo"));
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("Ali", "Bo"));
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
 
         // partial keywords with mixed-case
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("aLi", "bO"));
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("aLi", "bO"));
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        EventNameContainsKeywordsPredicate predicate = new EventNameContainsKeywordsPredicate(Collections.emptyList());
+        EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new EventBuilder().withName("Alice").build()));
 
         // Non-matching keyword
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Carol"));
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new EventBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        EventNameContainsKeywordsPredicate predicate = new EventNameContainsKeywordsPredicate(keywords);
+        EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(keywords);
 
-        String expected = EventNameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected = EventContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
 }

@@ -3,8 +3,8 @@ package seedu.eventtory.logic.commands.util;
 import javafx.collections.transformation.FilteredList;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
-import seedu.eventtory.model.event.EventNameContainsKeywordsPredicate;
-import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
+import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.Vendor;
 
 /**
@@ -20,7 +20,7 @@ public class PredicatePreviewUtil {
      * @return a filtered list of vendors
      */
     public static FilteredList<Vendor> getPreviewofFilteredVendors(Model model,
-        NameContainsKeywordsPredicate predicate) {
+        VendorContainsKeywordsPredicate predicate) {
 
         FilteredList<Vendor> vendors = new FilteredList<>(model.getFilteredVendorList());
         vendors.setPredicate(predicate);
@@ -35,7 +35,7 @@ public class PredicatePreviewUtil {
      * @return a filtered list of events
      */
     public static FilteredList<Event> getPreviewofFilteredEvents(Model model,
-        EventNameContainsKeywordsPredicate predicate) {
+        EventContainsKeywordsPredicate predicate) {
 
         FilteredList<Event> events = new FilteredList<>(model.getFilteredEventList());
         events.setPredicate(predicate);
