@@ -41,25 +41,25 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Income;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Income;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
 import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditClientDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -131,11 +131,11 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_CLIENT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TIER_DESC_REJECT
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTier(VALID_TIER_REJECT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -145,10 +145,10 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_CLIENT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -158,63 +158,63 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_CLIENT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        descriptor = new EditClientDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        descriptor = new EditClientDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        descriptor = new EditClientDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // income
         userInput = targetIndex.getOneBased() + INCOME_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withIncome(Integer.parseInt(VALID_INCOME_AMY)).build();
+        descriptor = new EditClientDescriptorBuilder().withIncome(Integer.parseInt(VALID_INCOME_AMY)).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // income but 0 dollars
         userInput = targetIndex.getOneBased() + INCOME_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withIncome(Integer.parseInt(VALID_INCOME_BOB)).build();
+        descriptor = new EditClientDescriptorBuilder().withIncome(Integer.parseInt(VALID_INCOME_BOB)).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tier
         userInput = targetIndex.getOneBased() + TIER_DESC_GOLD;
-        descriptor = new EditPersonDescriptorBuilder().withTier(VALID_TIER_GOLD).build();
+        descriptor = new EditClientDescriptorBuilder().withTier(VALID_TIER_GOLD).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // new remark
         userInput = targetIndex.getOneBased() + NEW_REMARK_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withNewRemark(VALID_REMARK_BOB).build();
+        descriptor = new EditClientDescriptorBuilder().withNewRemark(VALID_REMARK_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // remark append
         userInput = targetIndex.getOneBased() + APPEND_REMARK_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withAppendedRemark(VALID_REMARK_BOB).build();
+        descriptor = new EditClientDescriptorBuilder().withAppendedRemark(VALID_REMARK_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // status
         userInput = targetIndex.getOneBased() + STATUS_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withStatus(VALID_STATUS_NON_URGENT).build();
+        descriptor = new EditClientDescriptorBuilder().withStatus(VALID_STATUS_NON_URGENT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -226,7 +226,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTierValue_failure()
 
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_CLIENT;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
@@ -254,10 +254,10 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTier_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_CLIENT;
         String userInput = targetIndex.getOneBased() + TIER_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTier("").build();
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withTier("").build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -265,7 +265,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_remarkNewRemarkAppend_failure() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_CLIENT;
         String userInput = targetIndex.getOneBased() + APPEND_REMARK_DESC_BOB + NEW_REMARK_DESC_BOB;
         assertParseFailure(parser, userInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,

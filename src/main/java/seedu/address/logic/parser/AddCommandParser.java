@@ -16,14 +16,14 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandCommons;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Income;
-import seedu.address.model.person.Job;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Income;
+import seedu.address.model.client.Job;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
 import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 
@@ -62,8 +62,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .orElse(CommandCommons.DEFAULT_REMARK));
         Status status =
                 ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElse(CommandCommons.DEFAULT_STATUS));
-        Person person = new Person(name, phone, email, address, job, income, tier, remark, status);
-        return new AddCommand(person);
+        Client client = new Client(name, phone, email, address, job, income, tier, remark, status);
+        return new AddCommand(client);
     }
 
     /**

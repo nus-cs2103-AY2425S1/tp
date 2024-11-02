@@ -5,23 +5,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.CommandCommons;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Income;
-import seedu.address.model.person.Job;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Income;
+import seedu.address.model.client.Job;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
 import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Client}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedClient {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Client's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -34,10 +34,10 @@ class JsonAdaptedPerson {
     private final JsonAdaptedStatus assignedStatus;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedClient} with the given client details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("job") String job, @JsonProperty("income") String incomeString,
                              @JsonProperty("assignedTier") JsonAdaptedTier assignedTier,
@@ -56,9 +56,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Client} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedClient(Client source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -75,11 +75,11 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted client object into the model's {@code Client} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted client.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Client toModelType() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -139,7 +139,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
         final Status modelStatus = assignedStatus.toModelType();
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJob,
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelJob,
                 modelIncome, modelTier, modelRemark, modelStatus);
     }
 

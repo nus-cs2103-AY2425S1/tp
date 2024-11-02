@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandCommons.EMPTY_PERSON;
+import static seedu.address.logic.commands.CommandCommons.EMPTY_CLIENT;
 
 import seedu.address.model.Model;
 
@@ -20,7 +20,7 @@ public class CloseCommand extends Command {
                 false,
                 false,
                 false,
-                EMPTY_PERSON,
+                EMPTY_CLIENT,
                 false
         );
     }

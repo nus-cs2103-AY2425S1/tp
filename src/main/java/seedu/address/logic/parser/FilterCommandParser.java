@@ -19,16 +19,16 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
-import seedu.address.model.person.predicates.CombinedPredicate;
-import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
-import seedu.address.model.person.predicates.IncomeComparisonPredicate;
-import seedu.address.model.person.predicates.JobContainsSubstringPredicate;
-import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
-import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
-import seedu.address.model.person.predicates.RemarkContainsSubstringPredicate;
-import seedu.address.model.person.predicates.TierStartsWithSubstringPredicate;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.predicates.AddressContainsSubstringPredicate;
+import seedu.address.model.client.predicates.CombinedPredicate;
+import seedu.address.model.client.predicates.EmailContainsSubstringPredicate;
+import seedu.address.model.client.predicates.IncomeComparisonPredicate;
+import seedu.address.model.client.predicates.JobContainsSubstringPredicate;
+import seedu.address.model.client.predicates.NameContainsSubstringPredicate;
+import seedu.address.model.client.predicates.PhoneContainsSubstringPredicate;
+import seedu.address.model.client.predicates.RemarkContainsSubstringPredicate;
+import seedu.address.model.client.predicates.TierStartsWithSubstringPredicate;
 import seedu.address.model.util.IncomeComparisonOperator;
 
 /**
@@ -59,8 +59,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         // Handle flags and search terms
-        List<Predicate<Person>> predicates = collectPredicates(argMultimap);
-        Predicate<Person> combinedPredicate = combinePredicates(predicates);
+        List<Predicate<Client>> predicates = collectPredicates(argMultimap);
+        Predicate<Client> combinedPredicate = combinePredicates(predicates);
 
         return new FilterCommand(combinedPredicate);
     }
@@ -85,12 +85,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @return A list of predicates corresponding to the filters provided.
      * @throws ParseException if there are any parsing issues.
      */
-    private List<Predicate<Person>> collectPredicates(ArgumentMultimap argMultimap) throws ParseException {
+    private List<Predicate<Client>> collectPredicates(ArgumentMultimap argMultimap) throws ParseException {
         // Collect individual predicates to be combined with AND operator later.
         // This "collection then combine" approach enhances testability by avoiding the use of anonymous
         // lambda predicates which ensures that the combined predicate can be easily tested and debugged.
 
-        List<Predicate<Person>> predicates = new ArrayList<>();
+        List<Predicate<Client>> predicates = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String substring = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
@@ -140,7 +140,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @return A combined predicate that represents the logical AND of all provided predicates.
      * @throws IllegalArgumentException if the list of predicates is empty.
      */
-    private Predicate<Person> combinePredicates(List<Predicate<Person>> predicates) {
+    private Predicate<Client> combinePredicates(List<Predicate<Client>> predicates) {
         Objects.requireNonNull(predicates, "Predicates list must not be null");
         if (predicates.isEmpty()) {
             throw new IllegalArgumentException("Predicates list must not be empty");

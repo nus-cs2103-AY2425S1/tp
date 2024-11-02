@@ -47,130 +47,130 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalClients.AMY;
+import static seedu.address.testutil.TypicalClients.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Income;
-import seedu.address.model.person.Job;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Income;
+import seedu.address.model.client.Job;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ClientBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTier(VALID_TIER_GOLD).build();
+        Client expectedClient = new ClientBuilder(BOB).withTier(VALID_TIER_GOLD).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + JOB_DESC_BOB + INCOME_DESC_BOB + TIER_DESC_GOLD + NEW_REMARK_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedClient));
     }
 
     @Test
     public void parse_repeatedNonTierValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        String validExpectedClientString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + JOB_DESC_BOB + INCOME_DESC_BOB + TIER_DESC_GOLD
                 + NEW_REMARK_DESC_BOB + STATUS_DESC_BOB;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, NAME_DESC_AMY + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // multiple addresses
-        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // multiple addresses
-        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // multiple jobs
-        assertParseFailure(parser, JOB_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, JOB_DESC_AMY + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOB));
 
         // multiple incomes
-        assertParseFailure(parser, INCOME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, INCOME_DESC_AMY + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INCOME));
 
         // multiple tiers
-        assertParseFailure(parser, TIER_DESC_REJECT + validExpectedPersonString,
+        assertParseFailure(parser, TIER_DESC_REJECT + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TIER));
 
         // multiple remarks
-        assertParseFailure(parser, NEW_REMARK_DESC_BOB + validExpectedPersonString,
+        assertParseFailure(parser, NEW_REMARK_DESC_BOB + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NEW_REMARK));
 
         // multiple status
-        assertParseFailure(parser, STATUS_DESC_BOB + validExpectedPersonString,
+        assertParseFailure(parser, STATUS_DESC_BOB + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + validExpectedPersonString + VALID_STATUS_NONE,
+                validExpectedClientString + validExpectedClientString + VALID_STATUS_NONE,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_JOB, PREFIX_INCOME, PREFIX_TIER, PREFIX_NEW_REMARK, PREFIX_STATUS));
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedClientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedClientString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, validExpectedClientString + INVALID_EMAIL_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedClientString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, validExpectedClientString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
     @Test
     public void parse_optionalFieldsMissing_success() {
         // no tier
-        Person expectedPerson = new PersonBuilder(AMY).build();
+        Client expectedClient = new ClientBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + JOB_DESC_AMY + INCOME_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedClient));
     }
 
     @Test

@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAgentAssist;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalClients.getTypicalAgentAssist;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.client.Client;
+import seedu.address.testutil.EditClientDescriptorBuilder;
+import seedu.address.testutil.ClientBuilder;
 
 public class UndoCommandTest {
 
@@ -21,9 +21,9 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undo_success() {
-        Person editedPerson = new PersonBuilder().build();
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        Client editedClient = new ClientBuilder().build();
+        EditCommand.EditClientDescriptor descriptor = new EditClientDescriptorBuilder(editedClient).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_CLIENT, descriptor);
         try {
             CommandResult result = editCommand.execute(model);
         } catch (CommandException ce) {

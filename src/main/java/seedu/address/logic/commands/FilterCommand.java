@@ -7,10 +7,10 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
- * Finds and lists all persons in address book whose name contains the substring.
+ * Finds and lists all clients in address book whose name contains the substring.
  * Substring matching is case-insensitive.
  */
 public class FilterCommand extends Command {
@@ -24,18 +24,18 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/ Alice" + " p/ 91112222\n"
             + "This will find all customers whose names contain 'Alice' and whose phone number is '91112222'.";
 
-    private final Predicate<Person> predicate;
+    private final Predicate<Client> predicate;
 
-    public FilterCommand(Predicate<Person> predicate) {
+    public FilterCommand(Predicate<Client> predicate) {
         this.predicate = predicate;
     }
 
     @Override
     protected CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredClientList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredClientList().size()));
     }
 
     @Override

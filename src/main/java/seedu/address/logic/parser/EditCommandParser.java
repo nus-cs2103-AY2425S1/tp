@@ -16,7 +16,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -52,46 +52,46 @@ public class EditCommandParser implements Parser<EditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_INCOME, PREFIX_JOB, PREFIX_TIER, PREFIX_NEW_REMARK, PREFIX_APPEND_REMARK, PREFIX_STATUS);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editClientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editClientDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editClientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            editClientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
-            editPersonDescriptor.setJob(ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()));
+            editClientDescriptor.setJob(ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()));
         }
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
-            editPersonDescriptor.setIncome(ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get()));
+            editClientDescriptor.setIncome(ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get()));
         }
         if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
-            editPersonDescriptor.setTier(ParserUtil.parseTier(argMultimap.getValue(PREFIX_TIER).get()));
+            editClientDescriptor.setTier(ParserUtil.parseTier(argMultimap.getValue(PREFIX_TIER).get()));
         }
         if (argMultimap.getValue(PREFIX_NEW_REMARK).isPresent()) {
-            editPersonDescriptor.setNewRemark(ParserUtil.parseNewRemark(argMultimap.getValue(PREFIX_NEW_REMARK).get()));
+            editClientDescriptor.setNewRemark(ParserUtil.parseNewRemark(argMultimap.getValue(PREFIX_NEW_REMARK).get()));
         }
         if (argMultimap.getValue(PREFIX_APPEND_REMARK).isPresent()) {
-            editPersonDescriptor.setAppendedRemark(ParserUtil.parseNewRemark(
+            editClientDescriptor.setAppendedRemark(ParserUtil.parseNewRemark(
                     argMultimap.getValue(PREFIX_APPEND_REMARK).get()));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            editPersonDescriptor.setStatus((ParserUtil.parseStatus(
+            editClientDescriptor.setStatus((ParserUtil.parseStatus(
                     argMultimap.getValue(PREFIX_STATUS).get())));
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editClientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editClientDescriptor);
     }
 
 }
