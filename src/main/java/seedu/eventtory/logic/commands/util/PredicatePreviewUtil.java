@@ -4,8 +4,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
-import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 
 /**
  * Contains utility methods for filtering vendors and events using predicates.

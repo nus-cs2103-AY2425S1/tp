@@ -19,9 +19,9 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
     @Override
     public boolean test(Event event) {
         return keywords.stream().anyMatch(keyword ->
-                StringUtil.containsPartialWordIgnoreCase(event.getName().fullName, keyword) ||
-                StringUtil.containsPartialWordIgnoreCase(event.getDate().toString(), keyword) ||
-                StringUtil.containsPartialWordIgnoreCase(event.getTags().toString(), keyword));
+                StringUtil.containsPartialWordIgnoreCase(event.getName().fullName, keyword)
+                || StringUtil.containsPartialWordIgnoreCase(event.getDate().toString(), keyword)
+                || StringUtil.containsPartialWordIgnoreCase(event.getTags().toString(), keyword));
     }
 
     @Override

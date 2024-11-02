@@ -20,10 +20,10 @@ public class VendorContainsKeywordsPredicate implements Predicate<Vendor> {
     @Override
     public boolean test(Vendor vendor) {
         return keywords.stream().anyMatch(keyword ->
-                StringUtil.containsPartialWordIgnoreCase(vendor.getName().fullName, keyword) ||
-                StringUtil.containsPartialWordIgnoreCase(vendor.getDescription().toString(), keyword) ||
-                StringUtil.containsPartialWordIgnoreCase(vendor.getPhone().toString(), keyword) ||
-                StringUtil.containsPartialWordIgnoreCase(vendor.getTags().toString(), keyword));
+                StringUtil.containsPartialWordIgnoreCase(vendor.getName().fullName, keyword)
+                || StringUtil.containsPartialWordIgnoreCase(vendor.getDescription().toString(), keyword)
+                || StringUtil.containsPartialWordIgnoreCase(vendor.getPhone().toString(), keyword)
+                || StringUtil.containsPartialWordIgnoreCase(vendor.getTags().toString(), keyword));
     }
 
     @Override

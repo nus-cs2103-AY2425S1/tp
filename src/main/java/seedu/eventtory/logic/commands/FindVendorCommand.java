@@ -9,8 +9,8 @@ import seedu.eventtory.commons.util.ToStringBuilder;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.model.Model;
-import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 
 /**
  * Finds and lists all vendors in EventTory whose fields contain any of the argument keywords.
