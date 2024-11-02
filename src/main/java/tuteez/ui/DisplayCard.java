@@ -56,14 +56,8 @@ public class DisplayCard extends UiPart<Region> {
             setTelegramUsernameText(person);
             address.setText(person.getAddress().value);
             email.setText(person.getEmail().value);
-            person.getTags().stream()
-                    .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> displayTags.getChildren().add(new Label(tag.tagName)));
-            IntStream.range(0, person.getRemarkList().getRemarks().size())
-                    .forEach(i -> {
-                        String remark = person.getRemarkList().getRemarks().get(i).toString();
-                        displayRemarks.getChildren().add(new Label((i + 1) + ". " + remark));
-                    });
+            setTags(person);
+            setRemarks(person);
             setDisplayLessons(person);
         }
     }
@@ -78,6 +72,7 @@ public class DisplayCard extends UiPart<Region> {
      * @param person the Person object whose Telegram username is to be displayed
      */
     private void setTelegramUsernameText(Person person) {
+        assert(person != null);
         TelegramUsername username = person.getTelegramUsername();
         if (username != null && username.telegramUsername != null && !username.telegramUsername.isEmpty()) {
             telegram.setText("@" + username.telegramUsername);
@@ -99,6 +94,7 @@ public class DisplayCard extends UiPart<Region> {
      */
 
     private void setDisplayLessons(Person person) {
+        assert(person != null);
         // This code might need to change once the method for getting sorted lessons
         // is implemented in the person class.
         List<Lesson> sortedLessons = person.getLessons().stream()
@@ -108,5 +104,33 @@ public class DisplayCard extends UiPart<Region> {
         IntStream.range(0, sortedLessons.size())
                 .mapToObj(i -> new Label((i + 1) + ". " + sortedLessons.get(i).getDayAndTime()))
                 .forEach(label -> displayLessons.getChildren().add(label));
+    }
+
+    /**
+     * Sets the tags associated with the {@code Person} in the tags flow pane.
+     * Sorts the tags alphabetically for consistent ordering.
+     *
+     * @param person The {@code Person} whose tags are to be displayed.
+     */
+    private void setTags(Person person) {
+        assert(person != null);
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> displayTags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Sets the remarks associated with the {@code Person} in the remarks display pane.
+     * Each remark is displayed in a numbered format (e.g., "1. Remark text").
+     *
+     * @param person The {@code Person} whose remarks are to be displayed.
+     */
+    private void setRemarks(Person person) {
+        assert(person != null);
+        IntStream.range(0, person.getRemarkList().getRemarks().size())
+                .forEach(i -> {
+                    String remark = person.getRemarkList().getRemarks().get(i).toString();
+                    displayRemarks.getChildren().add(new Label((i + 1) + ". " + remark));
+                });
     }
 }

@@ -55,9 +55,7 @@ public class PersonCard extends UiPart<Region> {
         setTelegramUsernameText(person);
         setAddressText(person);
         setEmailText(person);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        setTags(person);
         setNextLesson(person);
     }
 
@@ -68,6 +66,7 @@ public class PersonCard extends UiPart<Region> {
      * @param person The {@code Person} whose address is to be displayed.
      */
     private void setAddressText(Person person) {
+        assert(person != null);
         if (person.getAddress().value != null) {
             address.setText(person.getAddress().value);
             address.setVisible(true);
@@ -83,6 +82,7 @@ public class PersonCard extends UiPart<Region> {
      * @param person The {@code Person} whose email is to be displayed.
      */
     private void setEmailText(Person person) {
+        assert(person != null);
         if (person.getEmail().value != null) {
             email.setText(person.getEmail().value);
             email.setVisible(true);
@@ -98,6 +98,7 @@ public class PersonCard extends UiPart<Region> {
      * @param person The {@code Person} whose Telegram username is to be displayed.
      */
     private void setTelegramUsernameText(Person person) {
+        assert(person != null);
         TelegramUsername username = person.getTelegramUsername();
         if (username != null && username.telegramUsername != null && !username.telegramUsername.isEmpty()) {
             telegram.setText("@" + username.telegramUsername);
@@ -114,12 +115,25 @@ public class PersonCard extends UiPart<Region> {
      * @param person The {@code Person} whose next lesson is to be displayed.
      */
     private void setNextLesson(Person person) {
+        assert(person != null);
         Lesson nextLesson = person.nextLessonBasedOnCurrentTime();
         if (nextLesson != null) {
-            lessons.getChildren().add(new Label(person.nextLessonBasedOnCurrentTime().getDayAndTime()));
+            lessons.getChildren().add(new Label(nextLesson.getDayAndTime()));
         } else {
             lessons.setVisible(false);
         }
+    }
 
+    /**
+     * Sets the tags associated with the {@code Person} in the tags flow pane.
+     * Sorts the tags alphabetically for consistent ordering.
+     *
+     * @param person The {@code Person} whose tags are to be displayed.
+     */
+    private void setTags(Person person) {
+        assert(person != null);
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
