@@ -244,7 +244,7 @@ public class ModelManager implements Model {
             }
             Person newPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                     person.getRsvpStatus(), tags);
-            setPerson(person,newPerson);
+            setPerson(person, newPerson);
         }
     }
 

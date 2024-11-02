@@ -47,6 +47,9 @@ public class RenameTagCommand extends Command implements UndoableCommand {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Undoes the previous RenameTag command
+     */
     public void undo(Model model) {
         requireAllNonNull(model);
         model.renameTag(new Tag(newTagName), existingTagName);
