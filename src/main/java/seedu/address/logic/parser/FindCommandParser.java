@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
@@ -38,7 +39,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (!argMultimap.getPreamble().isEmpty() && !argMultimap.getPreamble().equals(FindCommand.CHAINED)) {
-            throw new ParseException("Error: " + MESSAGE_UNEXPECTED_PREAMBLE + "\nUsage:\n" + FindCommand.MESSAGE_USAGE);
+            throw new ParseException(Messages.getErrorMessageWithUsage(MESSAGE_UNEXPECTED_PREAMBLE,
+                    FindCommand.MESSAGE_USAGE));
         }
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);

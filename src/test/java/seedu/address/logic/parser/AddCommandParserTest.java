@@ -248,16 +248,16 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         // missing name
         assertParseFailure(parser, PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + MODULE_ROLE_DESC,
-                "Error:" + MESSAGE_MISSING_NAME + "\nUsage:\n" + AddCommand.MESSAGE_USAGE);
+                Messages.getErrorMessageWithUsage(MESSAGE_MISSING_NAME, AddCommand.MESSAGE_USAGE));
 
         // missing phone and email
-        assertParseFailure(parser, NAME_DESC_BOB + ADDRESS_DESC_BOB + MODULE_ROLE_DESC, "Error: "
-                + MESSAGE_MISSING_PHONE_OR_EMAIL + "\nUsage:\n" + AddCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, NAME_DESC_BOB + ADDRESS_DESC_BOB + MODULE_ROLE_DESC,
+                Messages.getErrorMessageWithUsage(MESSAGE_MISSING_PHONE_OR_EMAIL, AddCommand.MESSAGE_USAGE));
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                + VALID_MODULE_ROLE, "Error: " + MESSAGE_UNEXPECTED_PREAMBLE + "\nUsage:\n"
-                + AddCommand.MESSAGE_USAGE);
+                + VALID_MODULE_ROLE, Messages.getErrorMessageWithUsage(MESSAGE_UNEXPECTED_PREAMBLE,
+                AddCommand.MESSAGE_USAGE));
     }
 
     @Test

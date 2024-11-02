@@ -18,7 +18,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_FIND_KEYWORD = "Find keyword(s) cannot be empty!";
     public static final String MESSAGE_FIND_KEYWORD_CONTAINS_WHITESPACE =
             "Find keyword(s) cannot contain whitespace(s)!";
-    public static final String MESSAGE_MISSING_INDEX = "Error: Missing index for command! \nUsage:\n%1$s";
+    public static final String MESSAGE_MISSING_INDEX = "Missing index for command!";
     public static final String MESSAGE_PERSON_INDEX_OUT_OF_BOUND =
             "Error: The person index %1$d provided is out of bounds!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d person(s) found with condition: %2$s";
@@ -42,6 +42,12 @@ public class Messages {
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
+    /**
+     * Returns a formatted error message with the given error message and the proper usage.
+     */
+    public static String getErrorMessageWithUsage(String errorMessage, String usage) {
+        return "Error: " + errorMessage + "\nUsage:\n" + usage;
+    }
     /**
      * Returns an ordered list string representation of items in the given array.
      */
