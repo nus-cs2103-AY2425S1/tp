@@ -113,10 +113,10 @@ How the parsing works:
 
 
 The `Model` component,
-* stores the meeting book data i.e., all `Property` objects (which are contained in a `UniquePropertyList` object).
+* stores the client book data i.e., all `Buyer` and `Seller` objects (which are contained in a `UniqueClientList` object).
+* stores the property book data i.e., all `Property` objects (which are contained in a `UniquePropertyList` object).
 * stores the meeting book data i.e., all `Meeting` objects (which are contained in a `UniqueMeetingList` object).
-* stores the currently 'selected' `Property` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Property>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores the currently 'selected' `Meeting` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Meeting>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Client`, `Property`, and `Meeting` objects (e.g., results of a list command) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Client>`, `ObservableList<Property>`, and `ObservableList<Meeting>` respectively. These lists can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -124,7 +124,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="850" />
 
 </box>
 

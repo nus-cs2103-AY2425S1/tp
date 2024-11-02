@@ -72,9 +72,9 @@ Property *--> Ask
 Property *--> Bid
 Meeting *--> MeetingTitle
 Meeting *--> MeetingDate
-Meeting o---> "2" Phone
-Meeting o--> Type
-Meeting o--> PostalCode
+Meeting ---> "2" Phone
+Meeting --> Type
+Meeting --> PostalCode
 
 Client <|-- Buyer
 Client <|-- Seller
