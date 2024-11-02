@@ -185,14 +185,17 @@ public class Student {
         newAssignmentlist.add(assignmentToAdd);
         return new Student(this.name, this.phone, this.email, this.tags, newAssignmentlist, this.remark);
     }
+
     /**
-     * Deletes the Assignment at {@code index} in the student's assignmentList
+     * Updates the Assignment at {@code index} to a new Assignment in the student's assignmentList
      */
-    public void deleteAssignment(int index) {
-        if (assignmentList.size() < (index - 1) || index <= 0) {
+    public void updateAssignment(int index, Assignment assignmentToUpdate) throws AssignmentIndexOutOfRangeException {
+        if (index < 0 || index >= assignmentList.size()) {
             throw new AssignmentIndexOutOfRangeException();
         }
-        assignmentList.remove(index - 1);
+        List<Assignment> newAssignmentList = new ArrayList<Assignment>(assignmentList);
+        newAssignmentList.set(index, assignmentToUpdate);
+        assignmentList = newAssignmentList;
     }
 
 }
