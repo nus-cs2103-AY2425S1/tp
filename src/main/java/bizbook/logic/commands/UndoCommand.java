@@ -2,7 +2,6 @@ package bizbook.logic.commands;
 
 import java.util.NoSuchElementException;
 
-import bizbook.commons.util.ToStringBuilder;
 import bizbook.logic.commands.exceptions.CommandException;
 import bizbook.model.Model;
 
@@ -40,11 +39,4 @@ public class UndoCommand extends Command {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .toString();
-    }
-
 }
