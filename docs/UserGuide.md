@@ -254,6 +254,9 @@ _Details coming soon ..._
 * Spaces in the middle of a phone number are accepted (eg. 9123 4523), as are phone numbers without spaces (eg. 91234523). 
 * Spaces in unusual locations will render the phone number invalid (eg. 912 34523).
 
+### Tags
+* Tags can contain any characters, but they should not begin with whitespace.
+* You can include hyphens and spaces as necessary between words for tags that are multiple words long!
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
