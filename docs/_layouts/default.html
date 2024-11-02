@@ -22,6 +22,7 @@
             {% assign headings = site.pages | where: "path", item.path | first %}
             {% if headings %}
             <li><a href="{{item.url}}">{{ item.path}}</a>
+            {% endif %}
           </ul>
         </div>
         {% endif %}
