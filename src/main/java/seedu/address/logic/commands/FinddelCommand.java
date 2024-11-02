@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.delivery.ItemNameContainsKeywordPredicate;
 import seedu.address.model.Model;
@@ -17,6 +18,8 @@ public class FinddelCommand extends Command{
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " monitor keyboard";
 
+    public static final String MESSAGE_NOT_IN_INSPECT = "This command can only be used in the inspect window!";
+
     private final ItemNameContainsKeywordPredicate predicate;
 
     public FinddelCommand(ItemNameContainsKeywordPredicate predicate) {
@@ -24,7 +27,7 @@ public class FinddelCommand extends Command{
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         if (AddressBookParser.getInspect()) {
             requireNonNull(model);
             model.updateFilteredDeliveryList(predicate);
@@ -32,9 +35,7 @@ public class FinddelCommand extends Command{
                     String.format(Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW, model.getFilteredDeliveryList().size())
             );
         } else {
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW, model.getFilteredDeliveryList().size())
-            );
+            throw new CommandException(MESSAGE_NOT_IN_INSPECT);
         }
     }
 

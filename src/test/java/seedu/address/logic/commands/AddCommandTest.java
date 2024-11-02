@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -230,6 +231,21 @@ public class AddCommandTest {
         @Override
         public void addDelivery(Person person, Delivery delivery) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Delivery> getFilteredDeliveryList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+
+        }
+
+        @Override
+        public void setFilteredDeliveryList(DeliveryList deliveryList) {
+
         }
 
         @Override

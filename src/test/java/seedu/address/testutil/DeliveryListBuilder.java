@@ -1,6 +1,12 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
+import static seedu.address.testutil.TypicalDeliveries.APPLES;
+import static seedu.address.testutil.TypicalDeliveries.BANANAS;
+import static seedu.address.testutil.TypicalDeliveries.ORANGES;
+import static seedu.address.testutil.TypicalDeliveries.PEARS;
+
+import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryList;
@@ -9,7 +15,7 @@ import seedu.address.model.delivery.DeliveryList;
  * A utility class to help with building DeliveryList objects.
  */
 public class DeliveryListBuilder {
-    private ArrayList<Delivery> deliveryArrayList;
+    private List<Delivery> deliveryList = Arrays.asList(APPLES, ORANGES, BANANAS, PEARS);
 
     /**
      * Constructor to do nothing
@@ -21,7 +27,7 @@ public class DeliveryListBuilder {
      * @param delivery Delivery object to be added
      */
     public DeliveryListBuilder withNewDelivery(Delivery delivery) {
-        deliveryArrayList.add(delivery);
+        deliveryList.add(delivery);
         return this;
     }
 
@@ -32,7 +38,7 @@ public class DeliveryListBuilder {
      */
     public DeliveryList build() {
         DeliveryList deliveryList = new DeliveryList();
-        for (Delivery delivery: deliveryArrayList) {
+        for (Delivery delivery: this.deliveryList) {
             deliveryList.add(delivery);
         }
         return deliveryList;

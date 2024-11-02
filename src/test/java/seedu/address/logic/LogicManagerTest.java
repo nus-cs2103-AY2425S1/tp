@@ -22,6 +22,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -66,9 +67,17 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validCommand_success() throws Exception {
+    public void execute_validCommandInMainWindow_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        AddressBookParser.setInspect(false);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_PERSON, model);
+    }
+
+    @Test
+    public void execute_validCommandInInspectWindow_success() throws Exception {
+        String listCommand = ListCommand.COMMAND_WORD;
+        AddressBookParser.setInspect(true);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_DELIVERY, model);
     }
 
     @Test

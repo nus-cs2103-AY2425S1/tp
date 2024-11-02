@@ -16,17 +16,20 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.BackCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FinddelCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.ItemNameContainsKeywordPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -117,6 +120,20 @@ public class AddressBookParserTest {
     public void parseCommand_descendingSort() throws Exception {
         String userInput = SortCommand.COMMAND_WORD_DESCENDING + " " + CliSyntax.PREFIX_SORT + " " + VALID_ATTRIBUTE;
         assertTrue(parser.parseCommand(userInput) instanceof SortCommand);
+    }
+
+    @Test
+    public void parseCommand_back() throws Exception {
+        assertTrue(parser.parseCommand(BackCommand.COMMAND_WORD) instanceof BackCommand);
+        assertTrue(parser.parseCommand(BackCommand.COMMAND_WORD + " 3") instanceof BackCommand);
+    }
+
+    @Test
+    public void parseCommand_findDel() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FinddelCommand command = (FinddelCommand) parser.parseCommand(FinddelCommand.COMMAND_WORD
+                + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FinddelCommand(new ItemNameContainsKeywordPredicate(keywords)), command);
     }
 
     @Test

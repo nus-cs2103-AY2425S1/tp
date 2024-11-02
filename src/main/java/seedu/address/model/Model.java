@@ -14,8 +14,10 @@ import seedu.address.model.person.Person;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /** {@code Predicate} that always evaluates to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    /** {@code Predicate} that always evaluates to true */
+    Predicate<Delivery> PREDICATE_SHOW_ALL_DELIVERIES = unused -> true;
     Predicate<Person> PREDICATE_SHOW_ONLY_CLIENTS = person -> person.getRole().getValue().equals("client");
 
     /**
