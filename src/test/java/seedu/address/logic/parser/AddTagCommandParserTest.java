@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.AddTagCommand.MESSAGE_NOT_ADD;
 import static seedu.address.logic.commands.AddTagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC_NO_SPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -33,10 +34,10 @@ public class AddTagCommandParserTest {
         String expectedMessage = String.format(Tag.MESSAGE_CONSTRAINTS);
 
         // one invalid tag
-        assertParseFailure(parser, "1 t/" + INVALID_TAG_DESC, expectedMessage);
+        assertParseFailure(parser, "1 " + INVALID_TAG_DESC_NO_SPACE, expectedMessage);
 
         // two invalid tags
-        assertParseFailure(parser, "2 t/" + INVALID_TAG_DESC + " t/c#lassmate", expectedMessage);
+        assertParseFailure(parser, "2 " + INVALID_TAG_DESC_NO_SPACE + " t/c#lassmate", expectedMessage);
     }
 
     @Test
