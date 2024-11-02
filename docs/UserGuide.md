@@ -30,7 +30,7 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Li
 
    * `list` : Lists all contacts.
 
-   * `view 2` : Displays all the information on the 2nd contact shown in the current list.
+   * `view 2` : Toggles the view on the 2nd contact shown in the current list with more/less information.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/06-01-2024` : Adds a contact named `John Doe` to the SocialBook.
 
@@ -97,9 +97,9 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_O
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/02-01-2024`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/12345678 t/criminal d/03-28-2024`
-* `add p/12345678 n/Jane Smith d/01-01-2024 ec/98765432`
-* `add p/12345678 n/Jane Smith d/01-01-2024`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/62345678 t/criminal d/03-28-2024`
+* `add p/92345678 n/Jane Smith d/01-01-2024 ec/98765432`
+* `add p/92345678 n/Jane Smith d/01-01-2024`
 
 ### Listing all persons : `list`
 
@@ -109,23 +109,26 @@ Format: `list`
 
 ### Viewing a person : `view`
 
-Pops up a window containing all the information that has been saved on this person. Also filters the current listed persons to just this specific person.
+Toggles the contact card on the specified person, switching between more and less information. <br>
+The default view for all contact cards will display less information to avoid visually overwhelming users, but users may decide to toggle the `view` for all information on one or more persons.
 
 Format: `view INDEX`
 
-* This command only allows the user to `view` one person at a time. Trying to key in more than 1 index will result in an error message.
+* This command permits the user to `view` multiple contacts at once. Using the `view` command on a contact that's already expanded will collapse it back to its default view.
 * Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
 
 Examples:
-* `view 1` will bring up the view window for the first person in the displayed list. <br>
- ![result of `view 1`](images/viewOneResult.png)
+* `view 2` will expand the contact card for the second person in the contact list. <br>
+ ![result of `view 2`](images/viewTwoResult.png)
+* Using `view 2` again will collapse the contact card back down to its default view. <br>
+ ![result of second `view 2`](images/secondViewTwoResult.png)
 
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT] [r/REMARK]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -133,10 +136,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DA
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* For optional fields (email, emergency contact, address, date of last visit, remark) you can delete them by entering the prefix without specifying any value after.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower t/ e/` Edits the name of the 2nd person to be `Betsy Crower`, clears all existing tags and deletes the stored email.
+
 
 ### Locating persons by name: `find`
 
@@ -145,7 +150,7 @@ Finds contacts whose names or/and phone numbers or/and address contain any of th
 Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
 
 **NOTE:** At least one field MUST be provided  
-  e.g. `find n/Hans` or `find p/12345678` or `find a/wall street` will work  
+  e.g. `find n/Hans` or `find p/82345678` or `find a/wall street` will work  
   e.g. `find Hans` or `find wall street` or `find` will fail
 * The search is case-insensitive. e.g `hans` will match `Hans` or `wall Street` will match `Wall Street`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -242,6 +247,15 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Contact field requirements
+
+### Phone
+* Phone numbers can only contain 8 numbers, and must begin with a 6, 8, or 9.
+* Spaces in the middle of a phone number are accepted (eg. 9123 4523), as are phone numbers without spaces (eg. 91234523). 
+* Spaces in unusual locations will render the phone number invalid (eg. 912 34523).
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -260,10 +274,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/07-23-2024`
+**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/07-23-2024`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT] [r/REMARK]` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find [n/NAMEKEYWORD] [p/PHONEKEYWORD] [a/ADDRESSKEYWORD]`<br> e.g., `find n/James Jake a/clementi street_woodlands`
 **List**   | `list`
 **View**   | `view INDEX`<br> e.g.,`view 1`

@@ -80,7 +80,9 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", dateOfLastVisit="
                 + editPersonDescriptor.getDateOfLastVisit().orElse(null) + ", emergencyContact="
-                + editPersonDescriptor.getEmergencyContact().orElse(null) + "}";
+                + editPersonDescriptor.getEmergencyContact().orElse(null) + ", remark="
+                + editPersonDescriptor.getRemark().orElse(null)
+                + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

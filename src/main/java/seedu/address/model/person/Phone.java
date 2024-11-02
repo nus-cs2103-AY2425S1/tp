@@ -9,10 +9,21 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be exactly 8 digits long.";
-    public static final String VALIDATION_REGEX = "\\d{8}";
+            "Phone numbers must have exactly 8 numbers, and no letters or symbols. \n"
+            + "They can only begin with 6, 8, or 9.";
+
+    /**
+     * This validation regex checks that the first character in the phone number is either a 6, 8, or 9.
+     * Since {@code SocialBook} is meant only for use in Singapore, restricting it to the
+     * possible phone numbers helps users catch possible typos.
+     * After the first character, there must be 3 more numbers,
+     * followed by any number of whitespaces before 4 more numbers.
+     * This comes out to 8 numbers in total, with any number of whitespaces separating the phone
+     * number into 2 halves of 4 numbers each. Some software displays phone numbers
+     * this way, so we want to support parsing of this phone number format too.
+     */
+    public static final String VALIDATION_REGEX = "[689]\\d{3}\\s*\\d{4}";
     public final String value;
 
     /**

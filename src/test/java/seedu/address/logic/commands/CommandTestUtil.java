@@ -30,8 +30,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo-Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_AMY = "8888\t8888";
+    public static final String VALID_PHONE_BOB = "69281029";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMERGENCY_CONTACT_AMY = VALID_PHONE_AMY;
@@ -64,9 +64,14 @@ public class CommandTestUtil {
     public static final String DATEOFLASTVISIT_DESC_BOB = " " + PREFIX_DATEOFLASTVISIT
             + VALID_DATEOFLASTVISIT_BOB;
 
+    public static final String ADDRESS_DELETION = " " + PREFIX_ADDRESS;
+    public static final String EMAIL_DELETION = " " + PREFIX_EMAIL;
+    public static final String EMERGENCY_CONTACT_DELETION = " " + PREFIX_EMERGENCY_CONTACT;
+    public static final String DATEOFLASTVISIT_DELETION = " " + PREFIX_DATEOFLASTVISIT;
+
     // whitespace-only names are invalid
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "     ";
-    // 'a' not allowed in phones, emergency contacts
+    // 'a' not allowed in phones or emergency contacts
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a";
     public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT + "911a";
     // missing '@' symbol
@@ -88,11 +93,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
                 .withDateOfLastVisit(VALID_DATEOFLASTVISIT_AMY)
-                .withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY).build();
+                .withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY).withRemark(VALID_REMARK_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withDateOfLastVisit(VALID_DATEOFLASTVISIT_BOB)
-                .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).build();
+                .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).withRemark(VALID_REMARK_BOB).build();
     }
 
     /**

@@ -9,11 +9,11 @@ Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class ViewWindow
 Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
+Class PersonCardFull
 Class StatusBarFooter
 Class CommandBox
 }
@@ -36,9 +36,9 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
-MainWindow --> "0..1" ViewWindow
 
-PersonListPanel -down-> "*" PersonCard
+PersonListPanel -right-> "*" PersonCard
+PersonListPanel -right-> "*" PersonCardFull
 
 MainWindow -left-|> UiPart
 
@@ -46,19 +46,20 @@ ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
+PersonCardFull --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
-ViewWindow --|> UiPart
 
 PersonCard ..> Model
+PersonCardFull ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
 PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- ViewWindow
-ViewWindow -[hidden]left- CommandBox
+HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+PersonCardFull -[hidden]down- PersonCard
 
 MainWindow -[hidden]-|> UiPart
 @enduml
