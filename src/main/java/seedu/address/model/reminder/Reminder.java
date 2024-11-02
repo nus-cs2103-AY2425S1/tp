@@ -90,4 +90,8 @@ public class Reminder {
                 .add("description", description)
                 .toString();
     }
+
+    public Reminder getReminderWithFullName(String fullName) {
+        return new Reminder(fullName, this.dateTime, this.description);
+    }
 }
