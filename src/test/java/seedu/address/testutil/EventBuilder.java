@@ -91,7 +91,7 @@ public class EventBuilder {
     }
 
     public Event build() {
-        return new Event(name, time, venue, celebrity, contacts);
+        return Event.createEvent(name, time, venue, celebrity, contacts);
     }
 
 }
