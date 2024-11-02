@@ -10,7 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.DeletePolicyCommand;
+import seedu.address.logic.commands.DeletePoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimStatus;
@@ -166,7 +166,7 @@ public class ParserUtil {
         final Set<PolicyType> policyTypes = new HashSet<>();
         for (String policy : policies) {
             if (!policyTypes.add(parsePolicyType(policy))) {
-                throw new ParseException(DeletePolicyCommand.MESSAGE_DUPLICATES);
+                throw new ParseException(DeletePoliciesCommand.MESSAGE_DUPLICATES);
             }
         }
         return Collections.unmodifiableSet(policyTypes);
