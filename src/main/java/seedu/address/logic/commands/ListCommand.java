@@ -31,7 +31,7 @@ public class ListCommand extends Command {
     /**
      * Constructs a new ListCommand with specified sorting parameters.
      *
-     * @param sortField The field to sort by. Valid values are "firstname", "lastname", or "email".
+     * @param sortField The field to sort by. Valid values are "name","email", "income", or "age".
      *                  If null, no sorting will be applied.
      * @param isReverse If true, the sort order will be reversed (descending).
      *                  If false, the sort order will be ascending.
