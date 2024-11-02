@@ -35,8 +35,8 @@ public class CreateTaskCommandParserTest {
     @Test
     public void parse_incompleteDescription_failure() {
         // Invalid task with incomplete description
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTaskCommand.MESSAGE_USAGE), ()
-                -> parser.parse(INVALID_TASK_DESC));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                CreateTaskCommand.MESSAGE_USAGE), () -> parser.parse(INVALID_TASK_DESC));
     }
 
     @Test
