@@ -41,7 +41,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane lessons;
+    private Label nextLesson;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -116,11 +116,11 @@ public class PersonCard extends UiPart<Region> {
      */
     private void setNextLesson(Person person) {
         assert(person != null);
-        Lesson nextLesson = person.nextLessonBasedOnCurrentTime();
+        Lesson studentNextLesson = person.nextLessonBasedOnCurrentTime();
         if (nextLesson != null) {
-            lessons.getChildren().add(new Label(nextLesson.getDayAndTime()));
+            nextLesson.setText(studentNextLesson.getDayAndTime());
         } else {
-            lessons.setVisible(false);
+            nextLesson.setVisible(false);
         }
     }
 
