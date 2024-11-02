@@ -166,6 +166,9 @@ code {
   border-radius: 3px;
   background-color: $code-background-color;
   margin-top: 0.25em
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 code {
