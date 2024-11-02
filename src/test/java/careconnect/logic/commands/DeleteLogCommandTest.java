@@ -24,9 +24,11 @@ public class DeleteLogCommandTest {
     @Test
     public void constructor_nullParams_throwsNullPointerException() {
         assertThrows(NullPointerException.class,
-                () -> new DeleteLogCommand(null, Index.fromZeroBased(0)));
+                () -> new DeleteLogCommand(null, Index.fromZeroBased(0))
+                        .execute(model));
         assertThrows(NullPointerException.class,
-                () -> new DeleteLogCommand(Index.fromZeroBased(0), null));
+                () -> new DeleteLogCommand(Index.fromZeroBased(0), null)
+                        .execute(model));
     }
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

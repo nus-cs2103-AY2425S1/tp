@@ -1,7 +1,6 @@
 package careconnect.testutil;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -110,14 +109,22 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Logs} of the {@code Person} that we are building.
+     * Adds the {@code Log} of the {@code Person} that we are building.
      */
-    public PersonBuilder withLogs(String date, String time) {
+    public PersonBuilder withLog(String date, String time) {
         try {
             this.logs.add(new Log(ParserUtil.parseLogDate(date), time));
         } catch (ParseException e) {
             assert(false);
         }
+        return this;
+    }
+
+    /**
+     * Adds the {@code Logs} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLogs(ArrayList<Log> logs) {
+        this.logs.addAll(logs);
         return this;
     }
 

@@ -1,5 +1,6 @@
 package careconnect.logic.commands;
 
+import static careconnect.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class DeleteLogCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToDeleteLog}
      */
     private Person createPersonWithoutLog(Person personToDeleteLog, Index deletedLogIndex) {
-        requireNonNull(personToDeleteLog);
+        requireAllNonNull(personToDeleteLog, deletedLogIndex);
 
         Name name = personToDeleteLog.getName();
         Phone phone = personToDeleteLog.getPhone();

@@ -16,20 +16,20 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").withLogs("2021-10-10 11:00", "Meeting 1").build();
+            .withTags("friends").withLog("2021-10-10 11:00", "Meeting 1").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withLogs("2021-10-10 11:00", "Meeting 1")
-            .withLogs("2022-10-10 11:00", "Follow up").build();
+            .withTags("owesMoney", "friends").withLog("2021-10-10 11:00", "Meeting 1")
+            .withLog("2022-10-10 11:00", "Follow up").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withLogs("2021-10-10 11:00", "Meeting 1")
-            .withLogs("2022-10-10 11:00", "Follow up").build();
+            .withLog("2021-10-10 11:00", "Meeting 1")
+            .withLog("2022-10-10 11:00", "Follow up").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
-            .withLogs("2021-10-10 11:00", "Meeting 1")
-            .withLogs("2022-10-10 11:00", "Follow up").build();
+            .withLog("2021-10-10 11:00", "Meeting 1")
+            .withLog("2022-10-10 11:00", "Follow up").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
