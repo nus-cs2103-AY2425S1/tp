@@ -1,0 +1,24 @@
+{
+  "_comment": "ReminderAddressBook save file which contains the same Reminder values as in TypicalReminders#getTypicalReminderAddressBook()",
+  "reminders" : [ {
+    "person" : "Jason",
+    "date" : "10-10-2022",
+    "description" : "project meeting"
+  }, {
+    "person" : "Kate",
+    "date" : "11-11-2022",
+    "description" : "dinner"
+  }, {
+    "person" : "Carl",
+    "date" : "05-07-2023",
+    "description" : "basketball practice"
+  }, {
+    "person" : "Tom",
+    "date" : "12-12-2024",
+    "description" : "Japan trip"
+  }, {
+    "person" : "Fiona",
+    "date" : "12-10-2024",
+    "description" : "lunch"
+  } ]
+}

@@ -56,7 +56,7 @@ public class TypicalReminders {
     private TypicalReminders() {} // prevents instantiation
 
     /**
-     * Returns an {@code ReminderAddressBook} with all the typical persons.
+     * Returns an {@code ReminderAddressBook} with all the typical reminders.
      */
     public static ReminderAddressBook getTypicalReminderAddressBook() {
         ReminderAddressBook rab = new ReminderAddressBook();
@@ -65,11 +65,12 @@ public class TypicalReminders {
         }
         return rab;
     }
+
     /**
      * Returns a list of typical reminders.
      */
     public static List<Reminder> getTypicalReminders() {
         return new ArrayList<>(Arrays.asList(REMINDER_ALICE, REMINDER_BENSON, REMINDER_CARL,
-                REMINDER_DANIEL, REMINDER_ELLE, REMINDER_FIONA, REMINDER_GEORGE));
+                REMINDER_DANIEL, REMINDER_ELLE, REMINDER_FIONA));
     }
 }
