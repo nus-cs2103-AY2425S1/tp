@@ -115,7 +115,7 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
      * Find person with target telegram handle in current contact list
      * @param telegrams Target telegram handle to search in peopleList
      * @param peopleList All people in current contact list view
-     *      Add member to {@code membersToMarkAttendance} if their telegram handles is in input list;
+     *      Add members to {@code membersToMarkAttendance} if their telegram handles are in input list;
      *      add telegram handles that don't map to a member to {@code unmatchedTelegrams}
      *      Set {@code membersToMarkAttendance} and {@code unmatchedTelegrams} to object private variables accordingly.
      */
