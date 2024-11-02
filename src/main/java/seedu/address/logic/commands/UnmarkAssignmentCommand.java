@@ -24,9 +24,9 @@ public class UnmarkAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks an existing assignment belonging to an existing "
             + "student based on the student's index number used in the displayed student list, and the assignment's "
-            + "index belonging to the student. (i.e: the assignment's status is now 'has not submitted'."
+            + "index belonging to the student. The assignment status will be changed to 'Not Submitted'."
             + "This also resets the score of the assignment to 0"
-            + "Parameters: "
+            + "\nParameters: "
             + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
             + "[" + PREFIX_ASSIGNMENT_INDEX + "INDEX] "
             + "\nExample: " + COMMAND_WORD + " "

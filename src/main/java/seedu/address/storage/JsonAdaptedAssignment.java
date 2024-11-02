@@ -62,7 +62,7 @@ class JsonAdaptedAssignment {
         }
 
         final AssignmentName modelAssignmentName = new AssignmentName(assignmentName);
-        Assignment assignment = new Assignment(student, modelAssignmentName, maxScore);
+        Assignment assignment = new Assignment(modelAssignmentName, maxScore);
         assignment.setScore(score);
         assignment.setHasSubmitted(hasSubmitted);
         return assignment;
