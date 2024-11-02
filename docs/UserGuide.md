@@ -40,7 +40,7 @@ administrators.
 
 ## 1. Installation
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. It can be downloaded [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-2/tp/releases/tag/v1.3).
 
@@ -76,10 +76,10 @@ administrators.
 * ` `: Commands format is indicated in the shaded boxes.
 * `[ ]`: Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* `…​`: Items with `…​` after them can be used multiple times including zero times.
+* `…`: Items with `…` after them can be used multiple times including zero times.
 * `UPPER_CASE`: Words in `UPPER_CASE` are the parameters to be supplied by the user.
 * `INDEX`: Refers to the index number shown in the displayed person list.
-* `YEAR-MONTH`: Refers to the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+* `MONTH_PAID`: Refers to the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * `KEYWORD`: Refers to the search term used to find persons.
 * `MORE_KEYWORDS`: Refers to additional search terms used to find persons.
 * Parameters can be in any order.<br>
@@ -108,7 +108,7 @@ Shows a message explaining how to access the help page.
 
 Adds a person to [EduTuTu](#edututu).
 
-**[Command Format](#command-format):** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…​`
+**[Command Format](#command-format):** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASS_ID [t/TAG]…`
 
 > **Remark:** A person can have any number of tags (including 0).
 
@@ -145,6 +145,7 @@ Adds a person to [EduTuTu](#edututu).
 - Use the `add` command to add a new person with their name, phone number, email, address, fees, and [class id](#class-id).
 - [Tag](#tag) can be added to classify or group persons for easier management.
 - The `add` command is helpful when setting up new contacts in [EduTuTu](#edututu).
+- `MONTH_PAID` cannot be specified for `add`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -158,7 +159,7 @@ Deletes the specified person from the address book.
 
 * Deletes the person at the specified `INDEX`.
 * The [index](#index) refers to the index number shown in the displayed person list.
-* The [index](#index) **must be a positive integer** 1, 2, 3, …​
+* The [index](#index) **must be a positive integer** 1, 2, 3, …
 
 **Example Usage:** `delete 3`
 
@@ -194,13 +195,13 @@ Deletes the specified person from the address book.
 
 Updates the [payment status](#payment-status) of a student to completed.
 
-**[Command Format](#command-format):** `markpaid INDEX m/YEAR-MONTH`
+**[Command Format](#command-format):** `markpaid INDEX m/MONTH_PAID`
 
 * Marks the payment of the person at the specified `INDEX` for the given month and year.
 * The `INDEX` refers to the index number shown in the displayed person list.
-* The `YEAR-MONTH` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+* The `MONTH_PAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * The [index](#index) **must be within the range** of the number of people in the list.
-* The year must be within the range of 1900 to 2100, and the month must be within the valid 1-12 range.
+* The year must be within 1900 to 2100 inclusive, and the month must be within 01 to 12 inclusive.
 
 **Example Usage:**
 
@@ -236,9 +237,9 @@ Updates the [payment status](#payment-status) of a student to completed.
 
 Edits an existing person in the address book.
 
-**[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [t/TAG]…​`
+**[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASS_ID] [m/MONTH_PAID]… [t/TAG]…`
 
-* Edits the person at the specified `INDEX`. The [index](#index) refers to the [index](#index) number shown in the displayed person list. The [index](#index) **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The [index](#index) refers to the [index](#index) number shown in the displayed person list. The [index](#index) **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing [tags](#tags), the existing [tags](#tags) of the person will be removed, i.e., adding of [tags](#tags) is not cumulative.
@@ -313,17 +314,17 @@ The `find` command allows you to list persons by their names, [Class IDs](#class
 
 **[Command Format](#command-format):**
 - **By Name:** `find n/NAME [MORE_NAMES]`
-- **By [Class ID](#class-id):** `find c/CLASSID [MORE_CLASSIDS]`
-- **By Name and [Class ID](#class-id):** `find n/NAME [MORE_NAMES] c/CLASSID [MORE_CLASSIDS]`
-- **By Payment Date:** `find m/YEAR-MONTH` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
-- **By Unpaid Status:** `find !m/YEAR-MONTH` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
+- **By [Class ID](#class-id):** `find c/CLASS_ID [MORE_CLASS_IDS]`
+- **By Name and [Class ID](#class-id):** `find n/NAME [MORE_NAMES] c/CLASS_ID [MORE_CLASS_IDS]`
+- **By Payment Date:** `find m/MONTH_PAID` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
+- **By Unpaid Status:** `find !m/MONTH_PAID` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
 
 * The search is case-insensitive. e.g., `kim` will match `Kim`.
 * The order of the keywords does not matter. e.g., `Esther Kim` will match `Kim Esther`.
 * Only the name is searched when using `n/` format.
 * Partially matched words will be matched, e.g., `Han` will match `Hans`.
 * find `n/KEYWORD c/KEYWORD2` will match persons with names containing `KEYWORD` and [class IDs](#class-id) containing `KEYWORD2`.
-* For payment search, use the format YEAR-MONTH (e.g., m/2024-10).
+* For payment search, use the format MONTH_PAID (e.g., m/2024-10).
 
 **Example Usage:** `find n/Kim`
 
@@ -394,7 +395,6 @@ The `undo` and `redo` commands allow you to reverse or reapply the most recent c
 
 * The `undo` command can be used to revert the last command that modified the address book.
 * The `redo` command can be used only if an `undo` was performed previously.
-* Both commands are also accessible through the [GUI](#gui-graphical-user-interface) toolbar, where clicking `Undo` or `Redo` will perform the respective action.
 
 **Example Usage:**
 *Input: User enters the `undo` command to reverse the last change.*
@@ -408,7 +408,6 @@ The UI updates to reflect the reapplication of the previously undone change*
 **Tips:**
 - The `redo` command is only available after an `undo`, allowing you to reapply the change if needed.
 - Remember that `undo` and `redo` are limited to the most recent changes. For more comprehensive [backups](#backup), consider exporting your data regularly.
-- Both `undo` and `redo` can be accessed through the toolbar in the [GUI](#gui-graphical-user-interface) for quick navigation.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -482,7 +481,7 @@ Displays a [bar chart](#bar-chart) showing the number of students who made payme
 
 ***
 
-### 2.12 Viewing Command History: `Arrow Keys`
+### 2.12 Viewing Command History: *Arrow Keys*
 
 Allows users to quickly access previously entered commands using the up and down arrow keys.
 
@@ -503,7 +502,7 @@ Displays the detailed information of a student in the list.
 **[Command Format](#command-format):** `info`
 
 * Shows the detailed information of the person at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` refers to the index number shown in the displayed person list.
 * The [index](#index) **must be within the range** of the number of people in the list.
 * Additionally, clicking on a student’s entry in the [GUI](#gui-graphical-user-interface) triggers a pop-up window displaying the same detailed information.
 
@@ -551,11 +550,11 @@ Displaying the detailed command window can be done in two ways:
 
 ### 2.14 Editing the Data File
 
-[EduTuTu](#edututu) data is saved automatically as a [JSON](#json-file) file at `[JAR file location]/data/addressbook.json`. Advanced users can update data directly by editing this data file.
+[EduTuTu](#edututu) data is saved automatically as a [JSON](#json-file) file at `[JAR file location]/data/addressbook.json`. Advanced users can modify data directly by editing that file.
 
 > **Caution:**
 > - If your changes to the data file make its format invalid, EduTuTu will discard all data and start with an empty data file at the next run. It is highly recommended to take a backup of the file before making any edits.
-> - Certain edits can cause EduTuTu to behave unexpectedly (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident in your ability to update it correctly.
+> - Certain edits can cause EduTuTu to behave in expected ways (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident in your ability to update it correctly.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -563,7 +562,7 @@ Displaying the detailed command window can be done in two ways:
 
 ### 2.15 Saving the Data
 
-[EduTuTu](#edututu) data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+[EduTuTu](#edututu) data is saved in the hard disk automatically after the execution of any command that modifies the data. There is no need for manual saving.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -573,7 +572,7 @@ Displaying the detailed command window can be done in two ways:
 
 **[Command Format](#command-format):** `exit`
 
-[Exits](#exit)the program.
+[Exits](#exit) the program.
 
 Exiting the program can be done in two ways:
 
@@ -645,6 +644,9 @@ Method 2:
 <a id="tag"></a>
 - **Tag**: A label or keyword associated with a person, which helps categorise or organise entries (e.g., `student`, `alumni`, `parent`).
 
+<a id="MONTH_PAID"></a>
+- **Month Paid**: A month and year combination, used for representing a month when a person has paid. (e.g., `2024-01`, `2024-12`).
+
 <a id="class-id"></a>
 - **Class ID**: A unique identifier assigned to each class within EduTuTu, helping to organise and locate students in specific classes (e.g., `CS2100`, `ES2660`).
 
@@ -694,24 +696,24 @@ Method 2:
 
 ## Command summary
 
-| Action                      | Format, Examples                                                                                                                                                      |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Bar Chart**               | `bar`                                                                                                                                                                 |
-| **Clear**                   | `clear`                                                                                                                                                               |
-| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Exit**                    | `exit`                                                                                                                                                                |
-| **Help**                    | `help`                                                                                                                                                                |
-| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                          |
-| **List**                    | `list`                                                                                                                                                                |
-| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br> e.g., `markpaid 1 2024-10` (Marks the payment for October 2024 as completed for the student at index 1)                               |
-| **Pie Chart**               | `pie`                                                                                                                                                                 |
-| **Undo**                    | `undo`<br> Reverts the last action taken                                                                                                                              |
-| **Redo**                    | `redo`<br> Reapplies the last action that was undone                                                                                                                  |
-| **Viewing Command History** | *No command needed*<br> Use the arrow keys to navigate through previous commands                                                                                      |
-| **View Student Details**    | `info INDEX` <br> isplays detailed information of a specific student at the given `INDEX` in a new window                                                             |
-| **Editing the Data File**   | *No command*<br> Direct editing of the data JSON file (backup recommended)                                                                                            |
-| **Saving the Data**         | *Automatic*<br> Data is saved automatically to the storage file after each command                                                                                    |
+| Action                      | Format, Examples                                                                                                                                                                       |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASS_ID [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Bar Chart**               | `bar`                                                                                                                                                                                  |
+| **Clear**                   | `clear`                                                                                                                                                                                |
+| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                    |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASS_ID] [m/MONTH_PAID]… [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
+| **Exit**                    | `exit`                                                                                                                                                                                 |
+| **Help**                    | `help`                                                                                                                                                                                 |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                                           |
+| **List**                    | `list`                                                                                                                                                                                 |
+| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br> e.g., `markpaid 1 2024-10` (Marks the payment for October 2024 as completed for the student at index 1)                                                |
+| **Pie Chart**               | `pie`                                                                                                                                                                                  |
+| **Undo**                    | `undo`<br> Reverts the last command executed                                                                                                                                           |
+| **Redo**                    | `redo`<br> Reverts the last `undo` command                                                                                                                                             |
+| **View Student Details**    | `info INDEX` <br> isplays detailed information of a specific student at the given `INDEX` in a new window                                                                              |
+| **Editing the Data File**   | *No command*<br> Direct editing of the data JSON file (backup recommended)                                                                                                             |
+| **Saving Data**             | *No command*<br> Data is saved automatically to the storage file after the execution of a command                                                                                      |
+| **Viewing Command History** | *Arrow Keys*<br> Use the up/down arrow keys to navigate through previous commands                                                                                                      |
 
 [Back to Table of Contents](#table-of-contents)
