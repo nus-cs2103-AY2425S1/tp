@@ -60,7 +60,8 @@ public class PieChartWindow extends UiPart<Stage> {
      * Shows the PiChart window.
      */
     public void show() {
-        logger.fine("Showing Pi Chart window.");
+        logger.fine("Showing Pie Chart window.");
+        getRoot().setTitle("Pie Chart");
         getRoot().show();
         getRoot().centerOnScreen();
     }

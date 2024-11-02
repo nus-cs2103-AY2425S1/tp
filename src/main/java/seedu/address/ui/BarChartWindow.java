@@ -55,6 +55,7 @@ public class BarChartWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing Pi Chart window.");
+        getRoot().setTitle("Bar Chart");
         getRoot().show();
         getRoot().centerOnScreen();
     }

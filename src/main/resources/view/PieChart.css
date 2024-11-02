@@ -11,6 +11,10 @@
 HBox {
     -fx-background-color: -background-color;
 }
+.chart-pie{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
 .default-color0.chart-pie { -fx-pie-color: -Magneta; }
 .default-color1.chart-pie { -fx-pie-color: -LightPink; }
 .default-color2.chart-pie { -fx-pie-color: -LightCoral; }

@@ -32,6 +32,29 @@
     -fx-alignment: center;
 }
 
+.text-area {
+    -fx-background-color: -ab3-background;
+    -fx-font-family: "Arial";
+    -fx-font-size: 20px;
+    -fx-control-inner-background: -ab3-background;
+    -fx-text-fill: -ab3-label;
+    -fx-padding: 30px 0;
+    -fx-display: block;
+    -fx-margin-left: auto;
+    -fx-margin-right: auto;
+    -fx-text-align: center;
+    -fx-box-sizing: border-box
+}
+
+.text-area:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.text-area *.text {
+    -fx-text-alignment: center;
+}
+
 .vbox {
     -fx-padding: 10;
     -fx-spacing: 10;

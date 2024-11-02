@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -17,22 +17,9 @@ public class DetailedPersonCardWindow extends UiPart<Stage> {
 
     @FXML
     private VBox cardPane;
+
     @FXML
-    private TextField name;
-    @FXML
-    private TextField id;
-    @FXML
-    private TextField phone;
-    @FXML
-    private TextField address;
-    @FXML
-    private TextField email;
-    @FXML
-    private TextField fees;
-    @FXML
-    private TextField classId;
-    @FXML
-    private TextField monthsPaid;
+    private TextArea detailedPerson;
 
     @FXML
     private FlowPane tags;
@@ -48,16 +35,22 @@ public class DetailedPersonCardWindow extends UiPart<Stage> {
     @FXML
     private void initialize() {
         assert personToShow != null;
-        name.setText("Name:  " + personToShow.getName().fullName);
-        phone.setText("Phone:  " + personToShow.getPhone().value);
-        address.setText("Address:  " + personToShow.getAddress().value);
-        email.setText("Email:  " + personToShow.getEmail().value);
-        fees.setText("Fees:  " + personToShow.getFees().value);
-        classId.setText("Class ID:  " + personToShow.getClassId().value);
-        monthsPaid.setText("Months Paid:  " + personToShow.getMonthsPaid().stream()
+        StringBuilder detailedPersonText = new StringBuilder();
+        detailedPersonText.append("Name: ").append(personToShow.getName().fullName).append("\n\n");
+        detailedPersonText.append("Phone: ").append(personToShow.getPhone().value).append("\n\n");
+        detailedPersonText.append("Email: ").append(personToShow.getEmail().value).append("\n\n");
+        detailedPersonText.append("Address: ").append(personToShow.getAddress().value).append("\n\n");
+        detailedPersonText.append("ClassId: ").append(personToShow.getClassId().value).append("\n\n");
+        detailedPersonText.append("Fees: ").append(personToShow.getFees().value).append("\n\n");
+        String monthsPaid = personToShow.getMonthsPaid().stream()
                 .map(monthPaid -> monthPaid.monthPaidValue)
                 .reduce((curr, next) -> curr + " " + next)
-                .orElse("(empty)"));
+                .orElse("(empty)");
+        detailedPersonText.append("Months Paid: ").append(monthsPaid).append("\n\n");
+        detailedPersonText.append("Tags: ").append(personToShow.getTags().toString()).append("\n");
+        detailedPerson.setText(detailedPersonText.toString());
+
+
     }
 
     public static void setPerson(Person person) {
@@ -68,6 +61,7 @@ public class DetailedPersonCardWindow extends UiPart<Stage> {
      * Shows the Detailed Person Card window.
      */
     public void show() {
+        getRoot().setTitle(personToShow.getName().fullName);
         getRoot().show();
         getRoot().centerOnScreen();
 
