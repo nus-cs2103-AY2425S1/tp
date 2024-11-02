@@ -22,7 +22,9 @@
             {% assign headings = site.pages | where: "path", item.path | first %}
             {% if headings %}
             {% assign content_with_toc = headings.content | markdownify %}
-            {% content_with_toc %}
+            <div>
+              {{ content_with_toc }}
+            </div>
             {% for heading in content_with_toc | split: '<h' %}
             {% if forloop.index0 > 0 %}
             {% assign heading_parts = heading | split: '>' %}
