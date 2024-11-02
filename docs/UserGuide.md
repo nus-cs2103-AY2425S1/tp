@@ -181,7 +181,7 @@ Example: `setHours 2 h/20`
 
 Search persons whose fields match the keywords given.
 
-Format: `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`
+Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD ...]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Search is restricted to the fields indicated by the provided prefixes.
@@ -190,6 +190,12 @@ Format: `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`
 * Tag inputs must be alphanumeric
 * Only full words will be matched e.g. `friend` will not match `friends`
 * For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned
+
+Tip: Support search prefixes include:
+* `NAME`: n/
+* `TAG`: t/
+* `PHONE_NUMBER`: p/
+* `GROUP`: g/
 
 Examples: <br>
 1. **Person A:** `name`: John Doe `tag`: colleague `group`: blood drive <br>
