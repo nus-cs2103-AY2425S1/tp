@@ -70,6 +70,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the person's {@code name} for display to the user.
+     */
     public static String formatPersonName(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName());
