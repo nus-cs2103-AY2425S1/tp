@@ -220,6 +220,12 @@ Adds dummy data to the address book.
 
 Format: `seed`
 
+**NOTE:** There are 6 contacts in the dummy data. `seed` works in a way that would be similar to if the user were to iteratively issue `add` command on the 6 person. This means that,
+
+- `seed` will add them to the contact list if they are not presently inside. 
+- `seed` does not clear or reset the list.
+- If your exisitng contact list has a person with the same name and phone number, it will **not** be overwritten.  
+
 ### Exiting the program : `exit`
 
 Exits the program.
