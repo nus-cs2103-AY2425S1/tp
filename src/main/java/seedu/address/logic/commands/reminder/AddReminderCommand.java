@@ -70,7 +70,10 @@ public class AddReminderCommand extends Command {
         // Check if there is exactly one match
         if (matchingPersons.size() == 1) {
             Person person = matchingPersons.get(0);
-            person.addReminder(toAdd);
+
+            // Creates a new reminder with the full name of the person
+            Reminder reminderWithFullName = toAdd.getReminderWithFullName(person.getName().fullName);
+            person.addReminder(reminderWithFullName);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else if (matchingPersons.isEmpty()) {
