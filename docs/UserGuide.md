@@ -195,7 +195,7 @@ Examples:
 
 Adds a meet-up to the meet-up list.
 
-Format: `add n/MEETUP_NAME i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_TO`
+Format: `add n/MEETUP_SUBJECT i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_TO`
 
 <div markdown="span" class="alert alert-primary">
 MEETUP_FROM and MEETUP_TO fields should follow the format YYYY-MM-DD HH:MM

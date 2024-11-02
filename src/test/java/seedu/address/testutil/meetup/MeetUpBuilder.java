@@ -7,7 +7,7 @@ import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 import seedu.address.model.util.SampleMeetUpDataUtil;
 
@@ -16,13 +16,13 @@ import seedu.address.model.util.SampleMeetUpDataUtil;
  */
 public class MeetUpBuilder {
 
-    public static final String DEFAULT_NAME = "Client Meeting";
+    public static final String DEFAULT_SUBJECT = "Client Meeting";
     public static final String DEFAULT_INFO = "Get clients requirements";
     public static final String DEFAULT_FROM = "2024-09-01 12:00";
     public static final String DEFAULT_TO = "2024-09-01 14:00";
     public static final String DEFAULT_ADDED_BUYER = "David Li";
 
-    private Name name;
+    private Subject subject;
     private Info info;
     private From from;
     private To to;
@@ -32,11 +32,11 @@ public class MeetUpBuilder {
      * Creates a {@code MeetUpBuilder} with the default details.
      */
     public MeetUpBuilder() {
-        name = new Name(DEFAULT_NAME);
+        subject = new Subject(DEFAULT_SUBJECT);
         info = new Info(DEFAULT_INFO);
         from = new From(DEFAULT_FROM);
         to = new To(DEFAULT_TO);
-        addedBuyers = new HashSet<>();;
+        addedBuyers = new HashSet<>();
         addedBuyers.add(new AddedBuyer(DEFAULT_ADDED_BUYER));
     }
 
@@ -44,7 +44,7 @@ public class MeetUpBuilder {
      * Initializes the MeetUpBuilder with the data of {@code meetUpToCopy}.
      */
     public MeetUpBuilder(MeetUp meetUpToCopy) {
-        name = meetUpToCopy.getName();
+        subject = meetUpToCopy.getSubject();
         info = meetUpToCopy.getInfo();
         from = meetUpToCopy.getFrom();
         to = meetUpToCopy.getTo();
@@ -52,10 +52,10 @@ public class MeetUpBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code MeetUp} that we are building.
+     * Sets the {@code Subject} of the {@code MeetUp} that we are building.
      */
-    public MeetUpBuilder withName(String name) {
-        this.name = new Name(name);
+    public MeetUpBuilder withSubject(String subject) {
+        this.subject = new Subject(subject);
         return this;
     }
 
@@ -94,7 +94,7 @@ public class MeetUpBuilder {
     }
 
     public MeetUp build() {
-        return new MeetUp(name, info, from, to, addedBuyers);
+        return new MeetUp(subject, info, from, to, addedBuyers);
     }
 
 }

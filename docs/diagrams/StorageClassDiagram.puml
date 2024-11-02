@@ -22,6 +22,17 @@ Class JsonAdaptedBuyer
 Class JsonAdaptedTag
 }
 
+package "PropertyList Storage" #F4F6F6{
+Class "<<interface>>\nPropertyListStorage" as PropertyListStorage
+Class JsonPropertyListStorage
+Class JsonSerializablePropertyList
+Class JsonAdaptedProperty
+}
+
+package "PropertyList Storage 2" #F4F6F6{
+Class "<<interface>>\nPropertyListStorage2" as PropertyListStorage2
+}
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -29,15 +40,25 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" BuyerListStorage
+StorageManager -down--> "1" BuyerListStorage
+StorageManager -down--> "1" PropertyListStorage
+StorageManager -down--> "1" PropertyListStorage2
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> BuyerListStorage
+Storage -left--|> UserPrefsStorage
+Storage -down--|> BuyerListStorage
+Storage -down--|> PropertyListStorage
+Storage -down--|> PropertyListStorage2
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonBuyerListStorage .up.|> BuyerListStorage
+JsonPropertyListStorage .up.|> PropertyListStorage
 JsonBuyerListStorage ..> JsonSerializableBuyerList
+JsonPropertyListStorage ..> JsonSerializablePropertyList
 JsonSerializableBuyerList --> "*" JsonAdaptedBuyer
+JsonSerializablePropertyList --> "*" JsonAdaptedProperty
 JsonAdaptedBuyer --> "*" JsonAdaptedTag
 
+'Force relative postions
+BuyerListStorage -right[hidden]- PropertyListStorage2
+PropertyListStorage2 -right[hidden]- PropertyListStorage
 @enduml

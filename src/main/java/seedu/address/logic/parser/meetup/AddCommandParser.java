@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.Set;
@@ -21,7 +21,7 @@ import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 
 /**
@@ -36,15 +36,16 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO, PREFIX_ADDED_BUYER);
+                ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_INFO, PREFIX_FROM, PREFIX_TO,
+                        PREFIX_ADDED_BUYER);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO, PREFIX_ADDED_BUYER)
+        if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_INFO, PREFIX_FROM, PREFIX_TO, PREFIX_ADDED_BUYER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
-        Name name = ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBJECT, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
+        Subject name = ParserUtil.parseMeetUpSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Info info = ParserUtil.parseMeetUpInfo(argMultimap.getValue(PREFIX_INFO).get());
         From from = ParserUtil.parseMeetUpFrom(argMultimap.getValue(PREFIX_FROM).get());
         To to = ParserUtil.parseMeetUpTo(argMultimap.getValue(PREFIX_TO).get());

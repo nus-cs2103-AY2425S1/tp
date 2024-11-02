@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.meetup;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -22,7 +22,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "KEYWORD ";
+            + PREFIX_SUBJECT + "KEYWORD ";
 
     private final MeetUpContainsKeywordsPredicate predicate;
 
