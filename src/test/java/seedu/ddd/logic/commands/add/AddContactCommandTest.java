@@ -189,7 +189,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public boolean hasEventOfName(Name eventName) {
+        public boolean hasEventName(Name eventName) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -79,7 +79,7 @@ public interface Model {
     /**
      * Returns true if an event with the same name as {@code event} exists in the address book.
      */
-    boolean hasEventOfName(Name eventName);
+    boolean hasEventName(Name eventName);
 
     /**
      * Deletes the given person.

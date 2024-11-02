@@ -136,9 +136,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasEventOfName(Name eventName) {
+    public boolean hasEventName(Name eventName) {
         requireNonNull(eventName);
-        return addressBook.hasEventOfName(eventName);
+        return addressBook.hasEventName(eventName);
     }
 
     @Override

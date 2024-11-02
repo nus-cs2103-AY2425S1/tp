@@ -113,7 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if an event with the same name as {@code event} exists in the address book.
      */
-    public boolean hasEventOfName(Name eventName) {
+    public boolean hasEventName(Name eventName) {
         requireNonNull(eventName);
         return events.containsName(eventName);
     }
