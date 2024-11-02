@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalTime;
@@ -32,6 +33,11 @@ public class OperatingHoursTest {
         assertEquals(diffrerentOperatingHours, new OperatingHours(openingHour, closingHour));
         assertEquals(differentOpeningOperatingHours, new OperatingHours(openingHour, null));
         assertEquals(differentClosingOperatingHours, new OperatingHours(null, closingHour));
+
+        assertEquals(defaultOperatingHours, new OperatingHours("00:00 to 23:59"));
+        assertEquals(diffrerentOperatingHours, new OperatingHours("08:30 to 21:30"));
+        assertThrows(IllegalArgumentException.class, () -> new OperatingHours("10:00"));
+        assertThrows(IllegalArgumentException.class, () -> new OperatingHours("60:00 to 12:00"));
     }
 
     @Test
@@ -60,6 +66,14 @@ public class OperatingHoursTest {
         assertFalse(differentClosingOperatingHours.isCalenderValid(appointments));
         assertFalse(differentOpeningOperatingHours.isCalenderValid(appointments));
         assertFalse(diffrerentOperatingHours.isCalenderValid(appointments));
+    }
+
+    @Test
+    public void isWithinOperatingHours() {
+        OperatingHours badOperatingHours = new OperatingHours(LocalTime.of(0, 0),
+                                                                LocalTime.of(0, 14));
+        assertTrue(defaultOperatingHours.isWithinOperatingHours(regularAppointment));
+        assertFalse(badOperatingHours.isWithinOperatingHours(new Appointment("10/10/2024 00:00")));
     }
 
     @Test
