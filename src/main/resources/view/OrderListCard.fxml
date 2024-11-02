@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
@@ -17,7 +18,15 @@
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <Label fx:id="heading" styleClass="cell_big_label" wrapText="true" />
+            <HBox>
+                <Label fx:id="heading" styleClass="cell_big_label" />
+                <Label fx:id="quantity" styleClass="cell_big_label">
+                    <minWidth>
+                        <!-- Ensures that the quantity text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+            </HBox>
             <Label fx:id="status" styleClass="order-status" text="\$status" />
             <Label fx:id="date" styleClass="label-deadline" text="\$date" />
         </VBox>
