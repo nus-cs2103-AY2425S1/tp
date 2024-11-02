@@ -6,7 +6,9 @@ import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tuteez.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static tuteez.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static tuteez.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static tuteez.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -30,7 +32,7 @@ public class AddLessonCommandTest {
     @Test
     public void execute_addLesson_success() {
         Person personToAddLesson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String[] lessonsToAdd = {"Monday 1000-1200", "Wednesday 1400-1600"};
+        String[] lessonsToAdd = {"monday 1000-1200", "wednesday 1400-1600"};
         List<Lesson> lessonList = Arrays.asList(new Lesson(lessonsToAdd[0]), new Lesson(lessonsToAdd[1]));
 
         Person updatedPerson = new PersonBuilder(personToAddLesson).withLessons(lessonsToAdd).build();
