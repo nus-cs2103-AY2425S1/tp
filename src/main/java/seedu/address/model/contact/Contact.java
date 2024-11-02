@@ -116,10 +116,8 @@ public class Contact {
     }
 
     private boolean checkForPresident(Set<Role> roles) {
-        final int foundStatus = 1;
         return roles.stream().map(role -> role.roleName)
-                .filter(roleName -> roleName.equalsIgnoreCase(Role.PRESIDENT))
-                .count() == foundStatus;
+                .anyMatch(roleName -> roleName.equalsIgnoreCase(Role.PRESIDENT));
     }
 
     /**
