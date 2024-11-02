@@ -266,10 +266,12 @@ public class Event implements Displayable {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("name", this.getName())
+                .add("description", this.getDescription())
+                .add("date", this.getDate())
                 .add("clients", this.getClients())
                 .add("vendors", this.getVendors())
-                .add("description", this.getDescription())
-                .add("event id", eventId)
+                .add("id", eventId)
                 .toString();
     }
 }
