@@ -37,16 +37,17 @@ public class Person {
             Email email,
             Address address,
             Schedule schedule,
+            SocialMedia socialMedia,
             Set<Tag> tags
     ) {
-        requireAllNonNull(name, phone, email, address, schedule, tags);
+        requireAllNonNull(name, phone, email, address, schedule, socialMedia, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.schedule = schedule;
         this.tags.addAll(tags);
-        this.socialMedia = new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
+        this.socialMedia = socialMedia;
     }
 
     public Name getName() {
@@ -137,7 +138,6 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
                 && socialMedia.equals(otherPerson.socialMedia)
                 && schedule.equals(otherPerson.schedule)
                 && tags.equals(otherPerson.tags);
