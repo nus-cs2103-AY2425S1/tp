@@ -26,6 +26,7 @@ public class Student {
     private final TutorialId tutorialId;
     private final Set<Tag> tags = new HashSet<>();
     private final ObjectProperty<PresentDates> presentDates;
+    private boolean hasCompletedAssignment = false;
 
     /**
      * Every field must be present and not null.
@@ -87,6 +88,14 @@ public class Student {
 
         return otherStudentId != null
                 && otherStudentId.equals(getStudentId());
+    }
+
+    public boolean hasCompletedAssignment() {
+        return hasCompletedAssignment;
+    }
+
+    public void setHasCompletedAssignment(boolean hasCompletedAssignment) {
+        this.hasCompletedAssignment = hasCompletedAssignment;
     }
 
     /**
