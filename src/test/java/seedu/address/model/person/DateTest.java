@@ -59,4 +59,27 @@ public class DateTest {
         assertEquals(initialHashCode, date.hashCode());
     }
 
+    //Valid date parsing test
+    @Test
+    public void isValidDate() {
+        //null date
+        assertFalse(Date.isValidDate(" "));
+        //february 29 not leap year
+        assertFalse(Date.isValidDate("29/2/2023 1800"));
+        //invalid day for given month
+        assertFalse(Date.isValidDate("31/4/2024 1200"));
+        assertFalse(Date.isValidDate("31/6/2024 1200"));
+        assertFalse(Date.isValidDate("31/2/2024 1200"));
+        //invalid format
+        assertFalse(Date.isValidDate("12-31-2024 12am"));
+        //invalid time
+        assertFalse(Date.isValidDate("31/2/2024 2700"));
+
+        //Valid dates
+        assertTrue(Date.isValidDate("18/2/2024 1800"));
+        //february 29 leap year
+        assertTrue(Date.isValidDate("29/2/2024 1800"));
+
+    }
+
 }

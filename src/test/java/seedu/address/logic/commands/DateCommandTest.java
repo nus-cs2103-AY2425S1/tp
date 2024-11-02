@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -44,7 +45,7 @@ public class DateCommandTest {
         DateCommand dateCommand = new DateCommand(Optional.of(editedPerson.getName().toString()),
                 Optional.of(editedPerson.getPhone().toString()), Optional.of(editedPerson.getEmail().toString()),
                 new Date(editedPerson.getDate().value));
-        String expectedMessage = String.format(DateCommand.MESSAGE_ADD_DATE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DateCommand.MESSAGE_ADD_DATE_SUCCESS, Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
         assertCommandSuccess(dateCommand, model, expectedMessage, expectedModel);
@@ -56,7 +57,7 @@ public class DateCommandTest {
         DateCommand dateCommand = new DateCommand(Optional.of(editedPerson.getName().toString()),
                 Optional.of(editedPerson.getPhone().toString()), Optional.of(editedPerson.getEmail().toString()),
                 new Date(editedPerson.getDate().value));
-        String expectedMessage = String.format(DateCommand.MESSAGE_DELETE_DATE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DateCommand.MESSAGE_DELETE_DATE_SUCCESS, Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
         assertCommandSuccess(dateCommand, model, expectedMessage, expectedModel);

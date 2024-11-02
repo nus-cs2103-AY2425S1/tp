@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -12,11 +15,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.Month;
-import java.time.Year;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -127,14 +125,20 @@ public class ParserUtil {
         return new Allergy(trimmedAllergy);
     }
 
+    /**
+     * Parses a {@code String date} into an {@code date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
     public static LocalDateTime parseDateString(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.getMessageConstraints());
         }
-        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        return LocalDateTime.parse(date,FORMATTER);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        return LocalDateTime.parse(date, formatter);
 
     }
 }

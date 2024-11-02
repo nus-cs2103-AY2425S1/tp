@@ -1,15 +1,12 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.Year;
 import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.DateCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
 import seedu.address.model.tag.Tag;
@@ -55,7 +52,7 @@ class JsonAdaptedDate {
             return new Date(LocalDateTime.MIN); // Treat as no appointment
         }
         if (!Date.isValidDate(dateString)) {
-            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Date.getMessageConstraints());
         }
         return new Date(LocalDateTime.parse(dateString, DATE_FORMATTER));
     }

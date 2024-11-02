@@ -10,8 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -43,6 +41,13 @@ public class DateCommandParser implements Parser<DateCommand> {
                     PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE);
             if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
                     && !areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
+            }
+
+            // At least one identifying must be present for a valid date command
+            if (!argMultimap.getValue(PREFIX_NAME).isPresent()
+                  && !argMultimap.getValue(PREFIX_PHONE).isPresent()
+                  && !argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 
