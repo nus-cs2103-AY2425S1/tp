@@ -47,7 +47,7 @@ public class EmployeeCommand extends Command {
             + "\nExample: " + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This employee already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
 
