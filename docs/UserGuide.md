@@ -729,7 +729,6 @@ Each credit card tier is visually distinguished in the UI: Gold is marked with a
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
 
 ## 8. Command Summary
 
