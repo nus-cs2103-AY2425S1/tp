@@ -33,6 +33,8 @@ public class Messages {
     public static final String MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX = "Lesson index field prefix 'li/' is missing";
     public static final String MESSAGE_MISSING_LESSON_INDEX = "Lesson index is required but missing";
     public static final String MESSAGE_DUPLICATE_LESSON_INDEX = "Duplicate lesson indices are not allowed";
+    public static final String MESSAGE_INVALID_LESSON_INDEX_FORMAT =
+            "Lesson index must be a single, positive number (eg, '1', '2', '3').";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
