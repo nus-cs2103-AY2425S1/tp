@@ -290,14 +290,20 @@ Finally, `StatusCommand` generates a `CommandResult` with a confirmation message
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                       | I want to …​                                 | So that …​                                                           |
-|----------|-------------------------------|----------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | CS Undergraduate              | List all the internship applications         | I can view all my past applications                                  |
-| `* * *`  | An efficient CS Undergraduate | Type the commands                            | I do not have to lift my fingers off the keyboard                    |
-| `* * *`  | CS Undergraduate              | Add an internship application                | I can add on to the records of all the internships I have applied to |
-| `* * *`  | CS Undergraduate              | Delete an internship application             | I can remove irrelevant applications                                 |
-| `* *`    | CS Undergraduate              | Save the internship application data locally | I will not lose my data when I exit the application                  |
-| `* *`    | CS Undergraduate              | Load the internship from a saved file        | I can get back my data when I open the application                   |
+| Priority | As a …​                       | I want to …​                                                     | So that …​                                                               |
+|----------|-------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | CS Undergraduate              | list all the internship applications                             | I can view all my past applications                                      |
+| `* * *`  | Forgetful CS Undergraduate    | have a link to HireMe's help page                                | I can see all the different commands that I can use                      |
+| `* * *`  | An efficient CS Undergraduate | type the commands                                                | I do not have to lift my fingers off the keyboard                        |
+| `* * *`  | CS Undergraduate              | add an internship application                                    | I can add on to the records of all the internships I have applied to     |
+| `* * *`  | CS Undergraduate              | delete an internship application                                 | I can remove invalid or irrelevant applications                          |
+| `* * *`  | CS Undergraduate              | save the internship application data locally                     | I will not lose my data when I exit the application                      |
+| `* * *`  | CS Undergraduate              | load the internship from a saved file                            | I can get back my data when I open the application                       |
+| `* * *`  | CS Undergraduate              | clear the list of internship application I have saved            | I can restart a new list in the next internship application cycle        |
+| `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications                         | I can prioritize follow-ups with older applications                      |
+| `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications  | I can update my schedule accordingly                                     |
+| `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them | I can prioritize my time on checking up on these internship applications |
+| `*`      | Forgetful CS Undergraduate    | remind myself of acceptance deadline                             | I will not miss the deadline to accept                                   |
 
 *{More to be added}*
 
