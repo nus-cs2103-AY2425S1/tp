@@ -166,13 +166,16 @@ public class MainWindow extends UiPart<Stage> {
 
     public void showPersonListPanel() {
         personListPanelPlaceholder.setVisible(true);
+        personListPanelPlaceholder.setManaged(true);
         groupListPanelPlaceholder.setVisible(false);
+        groupListPanelPlaceholder.setManaged(false);
     }
 
     public void showGroupListPanel() {
-        System.out.println("shpwing group list panel");
         personListPanelPlaceholder.setVisible(false);
+        personListPanelPlaceholder.setManaged(false);
         groupListPanelPlaceholder.setVisible(true);
+        groupListPanelPlaceholder.setManaged(true);
     }
 
 

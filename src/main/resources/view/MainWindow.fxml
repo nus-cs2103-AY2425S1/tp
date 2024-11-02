@@ -45,15 +45,11 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-
-          <StackPane fx:id="groupListPanelPlaceholder" VBox.vgrow="ALWAYS" visible="false" />
-        </VBox>
+        <!-- Main content area wrapped in a StackPane to allow full view switching -->
+        <StackPane fx:id="contentStackPane" VBox.vgrow="ALWAYS">
+          <StackPane fx:id="personListPanelPlaceholder" />
+          <StackPane fx:id="groupListPanelPlaceholder" visible="false" />
+        </StackPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
