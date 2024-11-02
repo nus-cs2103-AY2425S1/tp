@@ -66,6 +66,10 @@ public class ListCommand extends Command {
             return Comparator.comparing(person -> person.getName().fullName);
         case "email":
             return Comparator.comparing(person -> person.getEmail().value);
+        case "income":
+            return Comparator.comparing(person -> person.getIncome().value);
+        case "age":
+            return Comparator.comparing(person -> person.getAge().value);
         default:
             throw new CommandException(MESSAGE_INVALID_SORT_FIELD);
         }
