@@ -60,15 +60,15 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
+        phone.setText("Phone: " + person.getPhone().value);
+        email.setText("Email: " + person.getEmail().value);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .sorted(Comparator.comparing(tag -> tag.getTagName()))
                 .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
+                    Label tagLabel = new Label(tag.getTagName());
                     tagLabel.getStyleClass().add("tag-label");
 
-                    Color color = TagColourManager.getColourForTag(tag.tagName);
+                    Color color = TagColourManager.getColourForTag(tag.getTagName());
                     tagLabel.setStyle(String.format("-fx-background-color: #%02x%02x%02x;",
                             (int) (color.getRed() * 255),
                             (int) (color.getGreen() * 255),

@@ -129,6 +129,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return true;
     }
 
+    /**
+     * Renames a tag in this {@code AddressBook}.
+     * @param existingTag The tag to be renamed.
+     * @param newTagName The new name of the tag, after renaming.
+     */
+    public boolean renameTag(Tag existingTag, String newTagName) {
+        return tags.renameTag(existingTag, newTagName);
+    }
+
     public boolean hasTag(Tag t) {
         return tags.contains(t);
     }
