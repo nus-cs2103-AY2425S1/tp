@@ -2,6 +2,7 @@ package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_CLIENTS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
@@ -35,16 +36,13 @@ import seedu.ddd.model.event.common.Event;
  * Adds an event to DDD.
  */
 public class AddEventCommand extends AddCommand {
-
-    public static final String COMMAND_WORD = "event";
-
-    public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": adds an event";
+    public static final String COMMAND_DESCRIPTION = COMMAND_WORD + " " + FLAG_EVENT + " : adds an event";
     public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_DESC + "DESCRIPTION "
             + PREFIX_DATE + "DATE "
-            + PREFIX_CLIENTS + "CLIENT ... "
-            + PREFIX_VENDORS + "VENDOR ...";
+            + "[" + PREFIX_CLIENTS + "CLIENT_ID ...] "
+            + "[" + PREFIX_VENDORS + "VENDOR_ID ...]";
     public static final String USAGE_EXAMPLE = "example: " + COMMAND_WORD + " "
             + PREFIX_NAME + SAMPLE_EVENT_NAME + " "
             + PREFIX_DESC + SAMPLE_EVENT_DESCRIPTION + " "
