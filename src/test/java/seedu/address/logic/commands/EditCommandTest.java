@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGIES_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGIES_TO_REMOVE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -54,11 +57,11 @@ public class EditCommandTest {
         Patient editedPatient = new PatientBuilder().withName("Keanu Reeves Tan").withNric("S9712385J").withSex("M")
                 .withBirthdate("1997-11-30").withPhone("86526969")
                 .withEmail("keanureeves@example.com").withAddress("Blk 512 Ang Mo Kio Ave 2").withBloodType("O+")
-                .withNokName("Mila Kunis").withNokPhone("84126990").withAllergy("peanuts, cake").withHealthRisk("LOW")
+                .withNokName("Mila Kunis").withNokPhone("84126990").withAllergies("peanuts, cake").withHealthRisk("LOW")
                 .withExistingCondition("diabetes").withNote("Patient has previous gunshot wound to chest").build();
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName("Keanu Reeves Tan")
-                .withNric("S9712385J").withAllergy("peanuts, cake")
+                .withNric("S9712385J").withAllergiesToAdd("peanuts, cake")
                 .build();
         EditCommand editCommand = new EditCommand(targetPatient.getNric(), descriptor);
 
@@ -74,12 +77,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePatient_failure() {
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(targetPatient).build();
-        EditCommand editCommand = new EditCommand(TypicalPatients.ALICE.getNric(), descriptor);
+        EditCommand editCommand = new EditCommand(TypicalPatients.ALICE.getNric(), DESC_KEANU);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
     }
-
 
     @Test
     public void execute_invalidPatient_failure() {
@@ -89,6 +90,27 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, invalidNric));
     }
+
+    @Test
+    public void execute_invalidAllergiesToAdd_failure() {
+        // Allergies to add already exists in patient's list of allergies
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
+                .withAllergiesToAdd(VALID_ALLERGIES_KEANU).build();
+        EditCommand editCommand = new EditCommand(TypicalPatients.KEANU.getNric(), descriptor);
+        assertCommandFailure(editCommand, model,
+                String.format(Messages.MESSAGE_INVALID_ALLERGY_TO_ADD, VALID_ALLERGIES_KEANU));
+    }
+
+    @Test
+    public void execute_invalidAllergiesToRemove_failure() {
+        // Allergies to remove does not exist in patient's list of allergies
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
+                .withAllergiesToRemove(VALID_ALLERGIES_TO_REMOVE_AMY).build();
+        EditCommand editCommand = new EditCommand(TypicalPatients.KEANU.getNric(), descriptor);
+        assertCommandFailure(editCommand, model,
+                String.format(Messages.MESSAGE_INVALID_ALLERGY_TO_DELETE, VALID_ALLERGIES_TO_REMOVE_AMY));
+    }
+
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(DESC_AMY.getNric().get(), DESC_AMY);

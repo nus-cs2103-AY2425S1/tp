@@ -222,6 +222,20 @@ public class Patient {
     }
 
     /**
+     * Checks if an allergy is present for removal in the patient's set of allergies.
+     */
+    public void checkAllergyPresentForRemoval(Allergy allergy) {
+        allergies.checkAllergyPresentForRemoval(allergy);
+    }
+
+    /**
+     * Checks if an allergy is present in the patient's set of allergies.
+     */
+    public void checkAllergyAlreadyExists(Allergy allergy) {
+        allergies.checkAllergyAlreadyExists(allergy);
+    }
+
+    /**
      * Returns true if both patients have the same NRIC.
      * This defines a weaker notion of equality between two patients.
      */

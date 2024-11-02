@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.LinkedHashSet;
+
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.AllergyList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
@@ -45,7 +48,8 @@ public class EditPatientDescriptorBuilder {
         descriptor.setBloodType(patient.getBloodType());
         descriptor.setNokName(patient.getNokName());
         descriptor.setNokPhone(patient.getNokPhone());
-        //descriptor.setAllergy(patient.getAllergies());
+        descriptor.setAllergiesToAdd(new AllergyList(new LinkedHashSet<>(patient.getAllergies())));
+        descriptor.setAllergiesToRemove(new AllergyList(new LinkedHashSet<>(patient.getAllergies())));
         descriptor.setHealthRisk(patient.getHealthRisk());
         descriptor.setExistingCondition(patient.getExistingCondition());
         descriptor.setNote(patient.getNote());
@@ -136,10 +140,28 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Allergy} of the {@code EditPatientDescriptor} that we are building.
+     * Sets the {@code allergiesToAdd} of the {@code EditPatientDescriptor} that we are building.
      */
-    public EditPatientDescriptorBuilder withAllergy(String allergy) {
-        descriptor.setAllergy(new Allergy(allergy));
+    public EditPatientDescriptorBuilder withAllergiesToAdd(String... allergies) {
+        AllergyList allergyListToAdd = new AllergyList();
+        for (String allergy : allergies) {
+            String trimmedAllergy = allergy.trim();
+            allergyListToAdd.addAllergy(new Allergy(trimmedAllergy));
+        }
+        descriptor.setAllergiesToAdd(allergyListToAdd);
+        return this;
+    }
+
+    /**
+     * Sets the {@code allergiesToRemove} of the {@code EditPatientDescriptor} that we are building.
+     */
+    public EditPatientDescriptorBuilder withAllergiesToRemove(String... allergies) {
+        AllergyList allergyListToRemove = new AllergyList();
+        for (String allergy : allergies) {
+            String trimmedAllergy = allergy.trim();
+            allergyListToRemove.addAllergy(new Allergy(trimmedAllergy));
+        }
+        descriptor.setAllergiesToRemove(allergyListToRemove);
         return this;
     }
 

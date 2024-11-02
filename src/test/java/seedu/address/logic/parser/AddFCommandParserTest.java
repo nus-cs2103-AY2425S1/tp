@@ -3,8 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_JAKE;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGIES_DESC_JAKE;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_JAKE;
@@ -44,7 +43,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_JAKE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGIES_JAKE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
@@ -93,16 +92,17 @@ public class AddFCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_JAKE + NRIC_DESC_JAKE + SEX_DESC_JAKE
                 + BIRTHDATE_DESC_JAKE + PHONE_DESC_JAKE + EMAIL_DESC_JAKE + ADDRESS_DESC_JAKE + BLOODTYPE_DESC_JAKE
                 + HEALTHRISK_DESC_JAKE + EXISTINGCONDITION_DESC_JAKE + NOTE_DESC_JAKE + NOKNAME_DESC_JAKE
-                + NOKPHONE_DESC_JAKE + ALLERGY_DESC_JAKE, new AddFCommand(expectedPatient));
+                + NOKPHONE_DESC_JAKE + ALLERGIES_DESC_JAKE, new AddFCommand(expectedPatient));
 
 
         // multiple allergies - all accepted
-        Patient expectedPatientMultipleHealthServices = new PatientBuilder(JAKE).withAllergy(VALID_ALLERGY_AMY).build();
+        Patient expectedPatientMultipleHealthServices = new PatientBuilder(JAKE)
+                .withAllergies(VALID_ALLERGIES_JAKE).build();
         assertParseSuccess(parser,
                 NAME_DESC_JAKE + NRIC_DESC_JAKE + SEX_DESC_JAKE
                         + BIRTHDATE_DESC_JAKE + PHONE_DESC_JAKE + EMAIL_DESC_JAKE + ADDRESS_DESC_JAKE
                         + BLOODTYPE_DESC_JAKE + HEALTHRISK_DESC_JAKE + EXISTINGCONDITION_DESC_JAKE + NOTE_DESC_JAKE
-                        + NOKNAME_DESC_JAKE + NOKPHONE_DESC_JAKE + ALLERGY_DESC_JAKE + ALLERGY_DESC_AMY,
+                        + NOKNAME_DESC_JAKE + NOKPHONE_DESC_JAKE + ALLERGIES_DESC_JAKE,
                 new AddFCommand(expectedPatientMultipleHealthServices));
     }
 
@@ -111,7 +111,7 @@ public class AddFCommandParserTest {
         String validExpectedPatientString = NAME_DESC_JAKE + NRIC_DESC_JAKE + SEX_DESC_JAKE
                 + BIRTHDATE_DESC_JAKE + PHONE_DESC_JAKE + EMAIL_DESC_JAKE + ADDRESS_DESC_JAKE
                 + BLOODTYPE_DESC_JAKE + HEALTHRISK_DESC_JAKE + EXISTINGCONDITION_DESC_JAKE + NOTE_DESC_JAKE
-                + NOKNAME_DESC_JAKE + NOKPHONE_DESC_JAKE + ALLERGY_DESC_JAKE;
+                + NOKNAME_DESC_JAKE + NOKPHONE_DESC_JAKE + ALLERGIES_DESC_JAKE;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPatientString,

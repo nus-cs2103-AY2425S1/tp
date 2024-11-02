@@ -163,8 +163,13 @@ public class PatientBuilder {
     /**
      * Sets the {@code Allergy} of the {@code Patient} that we are building.
      */
-    public PatientBuilder withAllergy(String allergy) {
-        this.allergies.addAllergy(new Allergy(allergy));
+    public PatientBuilder withAllergies(String... allergies) {
+        AllergyList allergyList = new AllergyList();
+        for (String allergy : allergies) {
+            String trimmedAllergy = allergy.trim();
+            allergyList.addAllergy(new Allergy(trimmedAllergy));
+        }
+        this.allergies = allergyList;
         return this;
     }
 

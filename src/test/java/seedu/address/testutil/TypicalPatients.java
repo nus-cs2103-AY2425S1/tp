@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_JAKE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_KEANU;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_JAKE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_KEANU;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGIES_JAKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGIES_KEANU;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_JAKE;
@@ -96,14 +96,14 @@ public class TypicalPatients {
     public static final Patient JAKE = new PatientBuilder().withName(VALID_NAME_JAKE).withNric(VALID_NRIC_JAKE)
             .withSex(VALID_SEX_JAKE).withBirthdate(VALID_BIRTHDATE_JAKE).withPhone(VALID_PHONE_JAKE)
             .withEmail(VALID_EMAIL_JAKE).withAddress(VALID_ADDRESS_JAKE).withBloodType(VALID_BLOODTYPE_JAKE)
-            .withNokName(VALID_NOKNAME_JAKE).withNokPhone(VALID_NOKPHONE_JAKE).withAllergy(VALID_ALLERGY_JAKE)
+            .withNokName(VALID_NOKNAME_JAKE).withNokPhone(VALID_NOKPHONE_JAKE).withAllergies(VALID_ALLERGIES_JAKE)
             .withHealthRisk(VALID_HEALTHRISK_JAKE).withExistingCondition(VALID_EXISTINGCONDITION_JAKE)
             .withNote(VALID_NOTE_JAKE).build();
 
     public static final Patient KEANU = new PatientBuilder().withName(VALID_NAME_KEANU).withNric(VALID_NRIC_KEANU)
             .withSex(VALID_SEX_KEANU).withBirthdate(VALID_BIRTHDATE_KEANU).withPhone(VALID_PHONE_KEANU)
             .withEmail(VALID_EMAIL_KEANU).withAddress(VALID_ADDRESS_KEANU).withBloodType(VALID_BLOODTYPE_KEANU)
-            .withNokName(VALID_NOKNAME_KEANU).withNokPhone(VALID_NOKPHONE_KEANU).withAllergy(VALID_ALLERGY_KEANU)
+            .withNokName(VALID_NOKNAME_KEANU).withNokPhone(VALID_NOKPHONE_KEANU).withAllergies(VALID_ALLERGIES_KEANU)
             .withHealthRisk(VALID_HEALTHRISK_KEANU).withExistingCondition(VALID_EXISTINGCONDITION_KEANU)
             .withNote(VALID_NOTE_KEANU).build();
 

@@ -17,6 +17,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVEALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -81,10 +82,11 @@ public class CommandTestUtil {
     public static final String VALID_NOKPHONE_BOB = "87654321";
     public static final String VALID_NOKPHONE_JAKE = "81231234";
     public static final String VALID_NOKPHONE_KEANU = "84126990";
-    public static final String VALID_ALLERGY_AMY = "peanuts";
-    public static final String VALID_ALLERGY_BOB = "ceterizine dihydrochloride";
-    public static final String VALID_ALLERGY_JAKE = "eggs";
-    public static final String VALID_ALLERGY_KEANU = "wheat";
+    public static final String VALID_ALLERGIES_AMY = "peanuts, cakes";
+    public static final String VALID_ALLERGIES_BOB = "ceterizine dihydrochloride";
+    public static final String VALID_ALLERGIES_JAKE = "eggs, fish";
+    public static final String VALID_ALLERGIES_KEANU = "wheat, seafood";
+    public static final String VALID_ALLERGIES_TO_REMOVE_AMY = "peanuts";
     public static final String VALID_HEALTHRISK_AMY = "HIGH";
     public static final String VALID_HEALTHRISK_BOB = "LOW";
     public static final String VALID_HEALTHRISK_JAKE = "MEDIUM";
@@ -145,10 +147,12 @@ public class CommandTestUtil {
     public static final String NOKPHONE_DESC_BOB = " " + PREFIX_NOKPHONE + VALID_NOKPHONE_BOB;
     public static final String NOKPHONE_DESC_JAKE = " " + PREFIX_NOKPHONE + VALID_NOKPHONE_JAKE;
     public static final String NOKPHONE_DESC_KEANU = " " + PREFIX_NOKPHONE + VALID_NOKPHONE_KEANU;
-    public static final String ALLERGY_DESC_AMY = " " + PREFIX_ALLERGY + VALID_ALLERGY_AMY;
-    public static final String ALLERGY_DESC_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGY_BOB;
-    public static final String ALLERGY_DESC_JAKE = " " + PREFIX_ALLERGY + VALID_ALLERGY_JAKE;
-    public static final String ALLERGY_DESC_KEANU = " " + PREFIX_ALLERGY + VALID_ALLERGY_KEANU;
+    public static final String ALLERGIES_DESC_AMY = " " + PREFIX_ALLERGY + "peanuts " + PREFIX_ALLERGY + "cakes";
+    public static final String ALLERGIES_DESC_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGIES_BOB;
+    public static final String ALLERGIES_DESC_JAKE = " " + PREFIX_ALLERGY + "eggs " + PREFIX_ALLERGY + "fish";
+    public static final String ALLERGIES_DESC_KEANU = " " + PREFIX_ALLERGY + "wheat " + PREFIX_ALLERGY + "seafood";
+    public static final String ALLERGIES_TO_REMOVE_DESC_AMY = " " + PREFIX_REMOVEALLERGY
+            + VALID_ALLERGIES_TO_REMOVE_AMY;
     public static final String HEALTHRISK_DESC_AMY = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_AMY;
     public static final String HEALTHRISK_DESC_BOB = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_BOB;
     public static final String HEALTHRISK_DESC_JAKE = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_JAKE;
@@ -186,21 +190,29 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPatientDescriptor DESC_AMY;
     public static final EditCommand.EditPatientDescriptor DESC_BOB;
+    public static final EditCommand.EditPatientDescriptor DESC_KEANU;
 
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withNric(VALID_NRIC_AMY).withSex(VALID_SEX_AMY).withBirthDate(VALID_BIRTHDATE_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withBloodType(VALID_BLOODTYPE_AMY).withNokName(VALID_NOKNAME_AMY).withNokPhone(VALID_NOKPHONE_AMY)
-                .withAllergy(VALID_ALLERGY_AMY).withHealthRisk(VALID_HEALTHRISK_AMY)
+                .withAllergiesToAdd(VALID_ALLERGIES_AMY).withHealthRisk(VALID_HEALTHRISK_AMY)
                 .withExistingCondition(VALID_EXISTINGCONDITION_AMY).withNote(VALID_NOTE_AMY).build();
 
         DESC_BOB = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withNric(VALID_NRIC_BOB).withSex(VALID_SEX_BOB).withBirthDate(VALID_BIRTHDATE_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withBloodType(VALID_BLOODTYPE_BOB).withNokName(VALID_NOKNAME_BOB).withNokPhone(VALID_NOKPHONE_BOB)
-                .withAllergy(VALID_ALLERGY_BOB).withHealthRisk(VALID_HEALTHRISK_BOB)
+                .withAllergiesToAdd(VALID_ALLERGIES_BOB).withHealthRisk(VALID_HEALTHRISK_BOB)
                 .withExistingCondition(VALID_EXISTINGCONDITION_BOB).withNote(VALID_NOTE_BOB).build();
+
+        DESC_KEANU = new EditPatientDescriptorBuilder().withName(VALID_NAME_KEANU).withNric(VALID_NRIC_KEANU)
+                .withSex(VALID_SEX_KEANU).withBirthDate(VALID_BIRTHDATE_KEANU).withPhone(VALID_PHONE_KEANU)
+                .withEmail(VALID_EMAIL_KEANU).withAddress(VALID_ADDRESS_KEANU).withBloodType(VALID_BLOODTYPE_KEANU)
+                .withNokName(VALID_NOKNAME_KEANU).withNokPhone(VALID_NOKPHONE_KEANU)
+                .withAllergiesToAdd(VALID_ALLERGIES_KEANU).withHealthRisk(VALID_HEALTHRISK_KEANU)
+                .withExistingCondition(VALID_EXISTINGCONDITION_KEANU).withNote(VALID_NOTE_KEANU).build();
     }
 
     /**

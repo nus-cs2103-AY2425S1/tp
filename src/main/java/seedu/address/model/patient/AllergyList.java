@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.AllergySorter;
+import seedu.address.model.patient.exceptions.AllergyAlreadyExistsException;
+import seedu.address.model.patient.exceptions.AllergyNotFoundException;
 
 /**
  * Represents a list of allergies.
@@ -15,7 +17,7 @@ import seedu.address.model.AllergySorter;
  * @see AllergySorter
  */
 public class AllergyList {
-    //List is used because allergies are usually added, not deleted or edited. So adding should be fast.
+    // List is used because allergies are usually added, not deleted or edited. So adding should be fast.
     private final Set<Allergy> allergies;
 
     /**
@@ -45,6 +47,24 @@ public class AllergyList {
      */
     public void deleteAllergy(Allergy allergy) {
         allergies.remove(allergy);
+    }
+
+    /**
+     * Checks if an allergy is present for removal in the list.
+     */
+    public void checkAllergyPresentForRemoval(Allergy allergy) {
+        if (!allergies.contains(allergy)) {
+            throw new AllergyNotFoundException();
+        }
+    }
+
+    /**
+     * Checks if an allergy is present in the list.
+     */
+    public void checkAllergyAlreadyExists(Allergy allergy) {
+        if (allergies.contains(allergy)) {
+            throw new AllergyAlreadyExistsException();
+        }
     }
 
     /**
