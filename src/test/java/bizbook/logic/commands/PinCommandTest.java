@@ -36,7 +36,7 @@ public class PinCommandTest {
                 Messages.formatShort(personToPin));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPinnedPersonList(personToPin);
+        expectedModel.pinPerson(personToPin);
 
         assertCommandSuccess(pinCommand, model, expectedMessage, expectedModel);
     }
@@ -54,7 +54,7 @@ public class PinCommandTest {
         Person validPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         PinCommand pinCommand = new PinCommand(INDEX_FIRST_PERSON);
         ModelManager filledModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        filledModel.addPinnedPersonList(validPerson);
+        filledModel.pinPerson(validPerson);
 
         assertThrows(CommandException.class,
                 PinCommand.MESSAGE_ALREADY_PINNED, () -> pinCommand.execute(filledModel));

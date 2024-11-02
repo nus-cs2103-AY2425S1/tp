@@ -45,13 +45,15 @@ public class PinCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        model.saveAddressBookVersion();
+
         Person personToPin = lastShownList.get(targetIndex.getZeroBased());
 
         if (model.isPinned(personToPin)) {
             throw new CommandException(MESSAGE_ALREADY_PINNED);
         }
 
-        model.addPinnedPersonList(personToPin);
+        model.pinPerson(personToPin);
         CommandResult commandResult = new CommandResult(String.format(MESSAGE_PIN_PERSON_SUCCESS,
                 Messages.formatShort(personToPin)), false, false);
         return commandResult;

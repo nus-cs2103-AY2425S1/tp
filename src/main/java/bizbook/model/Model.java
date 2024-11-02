@@ -92,27 +92,24 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of the pinned person list */
-    ObservableList<Person> getPinnedPersonList();
-
     /**
      * Returns true if a person with the same identity as {@code person} exists in the pinned list.
      */
-    boolean isPinned(Person person);
+    public boolean isPinned(Person person);
 
     /**
      * Adds the {@code person} in the pinned contact list.
      *
      * @param person The {@code person} in the contact list to be pinned.
      */
-    void addPinnedPersonList(Person person);
+    public void pinPerson(Person person);
 
     /**
      * Remove the {@code person} in the pinned contact list.
      *
      * @param person The {@code person} in the contact list to be unpinned.
      */
-    void removePinnedPersonList(Person person);
+    public void unpinPerson(Person person);
 
     /**
      * Saves the current state of the {@code AddressBook} into a version history list.

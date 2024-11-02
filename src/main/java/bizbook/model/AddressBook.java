@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniquePersonList pinnedPersons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -28,7 +29,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+        pinnedPersons = new UniquePersonList();
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -92,6 +95,49 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    //=========== Pinned Person List Accessors ===============================================================
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the pinned list.
+     */
+    public boolean isPinned(Person person) {
+        requireNonNull(person);
+        return pinnedPersons.contains(person);
+    }
+
+    /**
+     * Returns an unmodifiable view of the pinned person list.
+     */
+    public ObservableList<Person> getPinnedPersonList() {
+        return pinnedPersons.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Replaces the contents of the pinned list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setPinnedPersons(List<Person> persons) {
+        this.pinnedPersons.setPersons(persons);
+    }
+
+    /**
+     * Adds the {@code person} in the pinned contact list.
+     *
+     * @param person The {@code person} in the contact list to be pinned.
+     */
+    public void addPinnedPerson(Person person) {
+        this.pinnedPersons.add(person);
+    }
+
+    /**
+     * Remove the {@code person} in the pinned contact list.
+     *
+     * @param person The {@code person} in the contact list to be unpinned.
+     */
+    public void removePinnedPerson(Person person) {
+        this.pinnedPersons.remove(person);
     }
 
     //// util methods
