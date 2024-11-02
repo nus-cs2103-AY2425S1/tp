@@ -32,12 +32,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MODULE);
 
         // for this command, NAME_PREFIX or MODULE_PREFIX is mandatory; preamble is not allowed
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE) || !argMultimap.getPreamble().isEmpty()) {
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (!argMultimap.getPreamble().isEmpty() && !argMultimap.getPreamble().equals(FindCommand.CHAINED)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
         List<String> moduleRoleKeywords = argMultimap.getAllValues(PREFIX_MODULE);
+        boolean isChained = argMultimap.getPreamble().equals(FindCommand.CHAINED);
 
         // all keywords must be non-empty and contain no whitespace
         if (nameKeywords.stream().anyMatch(String::isBlank) || moduleRoleKeywords.stream().anyMatch(String::isBlank)) {
@@ -55,6 +60,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         }
 
-        return new FindCommand(predicates);
+        return new FindCommand(predicates, isChained);
     }
 }
