@@ -516,8 +516,8 @@ Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searchi
 * 1a. The list is empty.
   Use case ends.
 
-* 2a. The given index is invalid.
-    * 2a1. System shows an error message prompting the user to enter a valid index.
+* 2a. The to-be-deleted contact is invalid.
+    * 2a1. System shows an error message prompting the user to delete a valid contact.
       Use case resumes at step 1.
 
 ### **Use case: UC19 — Delete Wedding**
@@ -574,8 +574,7 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
       Use case resumes at step 1.
 
 ### **Use case: UCSH02 — Edit details for a Wedding**
-Similar to [<ins>(USCH01)](#use-case-ucsh01edit-details-for-a-contact) except editing for wedding.
-
+Similar to [<ins>USCH01](#use-case-ucsh01edit-details-for-a-contact) except editing for wedding.
 
 ### **Use case: UCSH03 — Clear all contacts**
 
@@ -589,60 +588,7 @@ Similar to [<ins>(USCH01)](#use-case-ucsh01edit-details-for-a-contact) except ed
 
    Use case ends.
 
-### **Use case: UCSH04 — Receive a prompt when deleting a contact**
-
-**MSS**
-
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User requests to delete a contact.
-3. System gives a prompt to confirm whether the user wants to delete the contact.
-4. User confirms they want to delete the contact.
-5. System deletes the contact and shows the updated list of persons.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-* 2a. The given index is invalid.
-
-    * 2a1. System shows an error message prompting the user to put in a valid index.
-
-      Use case resumes at step 1.
-
-
-* 3a. User says they do not want to delete the contact.
-
-    * 3a1. System shows a message indicating the contact was not deleted.
-
-      Use case ends.
-
-
-
-### **Use case: UCSH05 — Receive a prompt when clearing the system**
-
-**MSS**
-
-1. User requests to clear the system of all persons.
-2. System gives a prompt to confirm whether the user wants to clear all contacts.
-3. User confirms they want to clear all contacts.
-4. System deletes all contacts and shows a blank list of persons.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. User says they do not want to clear all their contacts.
-
-    * 2a1. System shows a message indicating the system was not cleared.
-
-      Use case ends.
-
-### **Use case: UCSH06 — See sample contacts in the system before starting to modify it**
+### **Use case: UCSH04 — See sample contacts in the system before starting to modify it**
 
 Preconditions: User has not added or edited contacts previously.
 
@@ -653,100 +599,25 @@ Preconditions: User has not added or edited contacts previously.
 
     Use case ends.
 
-### **Use case: UCSH07 — Reload sample contacts in the system**
+### **Use case: UCSH05 — Reload sample contacts in the system**
 
 **MSS**
 
-1.  User requests to reload sample contacts into the system.
-2.  System deletes all current persons in the system and shows a list of sample contacts.
+1.  User deletes save file of WedLinker.
+2.  System shows a list of sample contacts upon restarting application.
 
     Use case ends.
 
 
 
-### **Use case: UCSH08 — See a list of all possible commands**
+### **Use case: UCSH06 — See a list of all possible commands**
 
 **MSS**
 
 1.  User requests to see a list of all possible commands they can use in the system.
-2.  System shows a list of commands with their corresponding input format.
+2.  System shows a link to the list of commands with their corresponding input format.
 
     Use case ends.
-
-### **Use case: UCSH09 — Assign dietary requirement to contact**
-
-
-**MSS**
-
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User requests to add a dietary status to the person.
-3. System adds the dietary status to the contact and shows list of persons with new details.
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-  Use case ends.
-
-
-* 2a. The given index is invalid.
-
-    * 2a1. System shows an error message prompting the user to put in a valid index.
-
-      Use case resumes at step 1.
-
-
-
-
-### **Use case: UCSH10 — Sort contacts in alphabetical order**
-
-
-**MSS**
-
-1.  User requests to show a list of persons sorted alphabetically.
-2.  System shows the list of persons sorted in alphabetical order.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-
-
-### **Use case: UCSH11 — Add additional information for a person**
-
-
-**MSS**
-
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User requests to add additional information for a person.
-3. System adds the additional information to the contact and shows list of persons with new details.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-* 2a. The given index is invalid.
-
-    * 2a1. System shows an error message prompting the user to put in a valid index.
-
-      Use case resumes at step 1.
-
-
-* 2a. The additional information is blank.
-
-    * 2a1. System shows an error message prompting the user to type in the additional information.
-
-      Use case resumes at step 1.
 
 ---
 
