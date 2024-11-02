@@ -44,7 +44,7 @@ public class PotentialCommand extends Command {
             + "\nExample: " + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New potential hire added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This potential hire already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
 
