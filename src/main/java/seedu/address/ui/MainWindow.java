@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.File;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -10,6 +11,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -26,6 +28,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     private static final Set<String> CONFIRM_WORDS = Set.of("y", "yes");
+    private static final String IMPORT_DATA_TITLE = "Import Data";
+    private static final String EXPORT_DATA_TITLE = "Export Data";
+    private static final Set<FileChooser.ExtensionFilter> ACCEPTED_FILE_EXTENSIONS = Set.of(
+            new FileChooser.ExtensionFilter("Data Files", "*.json", "*.csv")
+    );
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -40,6 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private RentalInformationListPanel rentalInformationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FileChooser fileChooser;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -75,6 +83,9 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(ACCEPTED_FILE_EXTENSIONS);
     }
 
     public Stage getPrimaryStage() {
@@ -174,6 +185,26 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    private File importFile() {
+        fileChooser.setTitle(IMPORT_DATA_TITLE);
+        return fileChooser.showOpenDialog(getPrimaryStage());
+    }
+
+    private File exportFile() {
+        fileChooser.setTitle(EXPORT_DATA_TITLE);
+        return fileChooser.showSaveDialog(getPrimaryStage());
+    }
+
+    // TODO: the methods below are temporary to test the FileChooser
+    @FXML
+    private void handleImport() {
+        importFile();
+    }
+    @FXML
+    private void handleExport() {
+        exportFile();
     }
 
     public PersonListPanel getPersonListPanel() {
