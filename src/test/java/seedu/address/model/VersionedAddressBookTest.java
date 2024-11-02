@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 public class VersionedAddressBookTest {
-    private ModelManager model;
     private AddressBook addressBook1;
     private AddressBook addressBook2;
     private VersionedAddressBook versionedAddressBook;
@@ -24,8 +23,7 @@ public class VersionedAddressBookTest {
     @BeforeEach
     void setUp() {
         addressBook1 = new AddressBook();
-        model = new ModelManager(addressBook1, new UserPrefs());
-        versionedAddressBook = model.getVersionedAddressBook();
+        versionedAddressBook = new VersionedAddressBook(addressBook1);
         addressBook2 = getTypicalAddressBook();
     }
 
@@ -40,7 +38,7 @@ public class VersionedAddressBookTest {
 
     @Test
     void testCommitAddressBook() {
-        model.setAddressBook(addressBook2);
+        versionedAddressBook.resetData(addressBook2);
         versionedAddressBook.commitAddressBook();
 
         ArrayList<AddressBook> expectedStateList = new ArrayList<>();
@@ -56,7 +54,7 @@ public class VersionedAddressBookTest {
         assertEquals(addressBook1, versionedAddressBook.getCurrentAddressBook());
         assertEquals(addressBook1, versionedAddressBook.getAddressBookStateList().get(0));
 
-        model.setAddressBook(addressBook2);
+        versionedAddressBook.resetData(addressBook2);
         versionedAddressBook.commitAddressBook();
 
         ArrayList<AddressBook> expectedStateList = new ArrayList<>();
@@ -75,21 +73,21 @@ public class VersionedAddressBookTest {
     @Test
     public void testDiscardUnsavedChanges() {
         // discard one change
-        model.addPerson(GEORGE);
-        model.discardUnsavedChanges();
-        assertEquals(addressBook1, model.getAddressBook());
+        versionedAddressBook.addPerson(GEORGE);
+        versionedAddressBook.discardUnsavedChanges();
+        assertEquals(addressBook1, versionedAddressBook);
 
         // discard all changes
-        model.addPerson(ALICE);
-        model.setAddressBook(addressBook2);
-        model.discardUnsavedChanges();
-        assertEquals(addressBook1, model.getAddressBook());
+        versionedAddressBook.addPerson(ALICE);
+        versionedAddressBook.resetData(addressBook2);
+        versionedAddressBook.discardUnsavedChanges();
+        assertEquals(addressBook1, versionedAddressBook);
 
         // discard no changes
-        model.setAddressBook(addressBook2);
-        model.commitAddressBook();
-        model.discardUnsavedChanges();
-        assertEquals(addressBook2, model.getAddressBook());
+        versionedAddressBook.resetData(addressBook2);
+        versionedAddressBook.commitAddressBook();
+        versionedAddressBook.discardUnsavedChanges();
+        assertEquals(addressBook2, versionedAddressBook);
     }
 
 
@@ -97,18 +95,24 @@ public class VersionedAddressBookTest {
     void testEquals() throws CommandException {
         VersionedAddressBook sameVersionedAddressBook = new VersionedAddressBook(addressBook1);
 
-        // different instances with same state pointer and state list
+        // different instances with same state pointer, state list and current instance
         assertEquals(versionedAddressBook, sameVersionedAddressBook);
 
-        //different instances with different state pointer and different state list
-        model.setAddressBook(addressBook2);
+        //different instances with different state pointer, current and different state list
+        versionedAddressBook.resetData(addressBook2);
+        versionedAddressBook.resetData(addressBook2);
         versionedAddressBook.commitAddressBook();
         assertNotEquals(versionedAddressBook, sameVersionedAddressBook);
 
-        //different state pointer but same state list
-        model.setAddressBook(addressBook2);
+        //different state pointer and different current instance but same state list
+        sameVersionedAddressBook.resetData(addressBook2);
         sameVersionedAddressBook.commitAddressBook();
         sameVersionedAddressBook.undoAddressBook();
+        assertNotEquals(versionedAddressBook, sameVersionedAddressBook);
+
+        //same state pointer, different current instance, same state list
+        versionedAddressBook.undoAddressBook();
+        versionedAddressBook.resetData(addressBook2);
         assertNotEquals(versionedAddressBook, sameVersionedAddressBook);
 
         assertNotEquals(sameVersionedAddressBook, null);

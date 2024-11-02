@@ -144,7 +144,7 @@ public class VersionedAddressBook extends AddressBook {
 
     @Override
     public int hashCode() {
-        return Objects.hash(addressBookStateList, currentStatePointer);
+        return Objects.hash(addressBookStateList, currentStatePointer, current);
     }
 
     /**
