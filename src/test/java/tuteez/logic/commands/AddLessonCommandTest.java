@@ -6,9 +6,7 @@ import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tuteez.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static tuteez.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static tuteez.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static tuteez.testutil.TypicalPersons.getTypicalAddressBook;
 
