@@ -55,8 +55,8 @@ public class RightPanel extends UiPart<Region> {
      */
     public void updateBalances() {
         ObservableList<Transaction> txns = CommonModel.getInstance().getFilteredTransactionList();
-        youOwnLabel.setText("You owe $" + calculateBalance(txns, Amount::isNegative).toString());
-        ownYouLabel.setText("You are owned $" + calculateBalance(txns, amt -> !amt.isNegative()).toString());
+        youOwnLabel.setText("You Owe $" + calculateBalance(txns, Amount::isNegative).toString());
+        ownYouLabel.setText("You are Owed $" + calculateBalance(txns, amt -> !amt.isNegative()).toString());
     }
 
     /**
