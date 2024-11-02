@@ -120,6 +120,7 @@ public class PersonCard extends UiPart<Region> {
         if (studentNextLesson != null) {
             nextLesson.setText(studentNextLesson.getDayAndTime());
         } else {
+            nextLesson.managedProperty().bind(nextLesson.visibleProperty());
             nextLesson.setVisible(false);
         }
     }
