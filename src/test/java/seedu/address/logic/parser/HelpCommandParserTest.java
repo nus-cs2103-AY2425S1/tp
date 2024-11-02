@@ -1,11 +1,18 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.*;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
 
 public class HelpCommandParserTest {
     private HelpCommandParser parser = new HelpCommandParser();
@@ -40,7 +47,7 @@ public class HelpCommandParserTest {
         userInput = ListCommand.COMMAND_WORD;
         assertParseSuccess(parser, userInput, expected);
     }
-    
+
     @Test
     public void parse_failure() {
         String userInput = "random";
