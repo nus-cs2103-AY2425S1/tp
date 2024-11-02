@@ -185,12 +185,10 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
         DESC_APPOINTMENT_AMY = new EditAppointmentDescriptorBuilder()
-                .withName(VALID_NAME_AMY)
                 .withDate(VALID_DATE_APPOINTMENT_AMY)
                 .withStartTime(VALID_START_TIME_APPOINTMENT_AMY)
                 .withEndTime(VALID_END_TIME_APPOINTMENT_AMY).build();
         DESC_APPOINTMENT_BOB = new EditAppointmentDescriptorBuilder()
-                .withName(VALID_NAME_BOB)
                 .withDate(VALID_DATE_APPOINTMENT_BOB)
                 .withStartTime(VALID_START_TIME_APPOINTMENT_BOB)
                 .withEndTime(VALID_END_TIME_APPOINTMENT_BOB).build();

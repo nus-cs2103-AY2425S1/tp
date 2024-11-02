@@ -32,17 +32,8 @@ public class EditAppointmentDescriptorBuilder {
      */
     public EditAppointmentDescriptorBuilder(Appointment appointment) {
         descriptor = new EditAppointmentDescriptor();
-        descriptor.setName(appointment.getName());
         descriptor.setStartTime(appointment.getStartTime());
         descriptor.setEndTime(appointment.getEndTime());
-    }
-
-    /**
-     * Sets the {@code Name} of the {@code EditAppointmentDescriptor} that we are building.
-     */
-    public EditAppointmentDescriptorBuilder withName(String name) {
-        descriptor.setName(name);
-        return this;
     }
 
     /**

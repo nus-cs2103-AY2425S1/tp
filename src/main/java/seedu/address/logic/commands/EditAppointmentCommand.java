@@ -50,6 +50,7 @@ public class EditAppointmentCommand extends Command {
     public static final String MESSAGE_NO_APPOINTMENT = "This appointment does not exist in CareLink";
     public static final String MESSAGE_INVALID_START_END_TIME = "Start time must be before end time";
     public static final String MESSAGE_START_TIME_IN_PAST = "Start time must be in the future";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     private final Nric findPatientNric;
     private final LocalDateTime findStartDateTime;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
@@ -98,8 +99,6 @@ public class EditAppointmentCommand extends Command {
         model.editAppointment(appointmentToEdit, patient, editedAppointment);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        // model.deleteAppointment(patient, appointment);
-        // model.addAppointment(patient, appointment);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedAppointment));
     }
 
@@ -152,7 +151,6 @@ public class EditAppointmentCommand extends Command {
      * corresponding field value of the appointment.
      */
     public static class EditAppointmentDescriptor {
-        private String name;
         private LocalDateTime startTime;
         private LocalDateTime endTime;
 
@@ -164,21 +162,12 @@ public class EditAppointmentCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditAppointmentDescriptor(EditAppointmentDescriptor toCopy) {
-            setName(toCopy.name);
             setStartTime(toCopy.startTime);
             setEndTime(toCopy.endTime);
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, startTime, endTime);
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Optional<String> getName() {
-            return Optional.ofNullable(name);
+            return CollectionUtil.isAnyNonNull(startTime, endTime);
         }
 
         public void setStartTime(LocalDateTime startDateTime) {
@@ -209,15 +198,13 @@ public class EditAppointmentCommand extends Command {
             }
 
             EditAppointmentDescriptor otherEditPersonDescriptor = (EditAppointmentDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(startTime, otherEditPersonDescriptor.startTime)
+            return Objects.equals(startTime, otherEditPersonDescriptor.startTime)
                     && Objects.equals(endTime, otherEditPersonDescriptor.endTime);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
                     .add("startTime", startTime)
                     .add("endTime", endTime)
                     .toString();
