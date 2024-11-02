@@ -42,6 +42,11 @@ public class DetailedPersonCardWindow extends UiPart<Stage> {
         detailedPersonText.append("Address: ").append(personToShow.getAddress().value).append("\n\n");
         detailedPersonText.append("ClassId: ").append(personToShow.getClassId().value).append("\n\n");
         detailedPersonText.append("Fees: ").append(personToShow.getFees().value).append("\n\n");
+        String monthsPaid = personToShow.getMonthsPaid().stream()
+                .map(monthPaid -> monthPaid.monthPaidValue)
+                .reduce((curr, next) -> curr + " " + next)
+                .orElse("(empty)");
+        detailedPersonText.append("Months Paid: ").append(monthsPaid).append("\n\n");
         detailedPersonText.append("Tags: ").append(personToShow.getTags().toString()).append("\n");
         detailedPerson.setText(detailedPersonText.toString());
 
