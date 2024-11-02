@@ -130,6 +130,6 @@ public class Person {
     }
 
     public boolean hasPhoneNumber(String phoneNumber) {
-        return this.phone.value.equals(phoneNumber);
+        return this.phone.isSameValue(phoneNumber);
     }
 }
