@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.buyer.NameContainsKeywordsPredicate;
 import seedu.address.model.meetup.MeetUpContainsKeywordsPredicate;
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -53,31 +52,31 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
-//    @Test
-//    public void execute_zeroKeywords_noMeetUpsFound() {
-//        String expectedMessage = String.format(MESSAGE_MEETUPS_LISTED_OVERVIEW, 0);
-//        MeetUpContainsKeywordsPredicate predicate = preparePredicate(" ");
-//        FindCommand command = new FindCommand(predicate);
-//        expectedModel.updateFilteredMeetUpList(predicate);
-//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-//        assertEquals(Collections.emptyList(), model.getFilteredMeetUpList());
-//    }
-//
-//    @Test
-//    public void execute_multipleKeywords_multipleMeetUpsFound() {
-//        String expectedMessage = String.format(MESSAGE_MEETUPS_LISTED_OVERVIEW, 3);
-//        MeetUpContainsKeywordsPredicate predicate = preparePredicate("Client Contract Closure");
-//        FindCommand command = new FindCommand(predicate);
-//        expectedModel.updateFilteredMeetUpList(predicate);
-//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-//        assertEquals(Arrays.asList(FIRST_MEETUP, SECOND_MEETUP, THIRD_MEETUP), model.getFilteredMeetUpList());
-//    }
+    //    @Test
+    //    public void execute_zeroKeywords_noMeetUpsFound() {
+    //        String expectedMessage = String.format(MESSAGE_MEETUPS_LISTED_OVERVIEW, 0);
+    //        MeetUpContainsKeywordsPredicate predicate = preparePredicate(" ");
+    //        FindCommand command = new FindCommand(predicate);
+    //        expectedModel.updateFilteredMeetUpList(predicate);
+    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    //        assertEquals(Collections.emptyList(), model.getFilteredMeetUpList());
+    //    }
+    //
+    //    @Test
+    //    public void execute_multipleKeywords_multipleMeetUpsFound() {
+    //        String expectedMessage = String.format(MESSAGE_MEETUPS_LISTED_OVERVIEW, 3);
+    //        MeetUpContainsKeywordsPredicate predicate = preparePredicate("Client Contract Closure");
+    //        FindCommand command = new FindCommand(predicate);
+    //        expectedModel.updateFilteredMeetUpList(predicate);
+    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    //        assertEquals(Arrays.asList(FIRST_MEETUP, SECOND_MEETUP, THIRD_MEETUP), model.getFilteredMeetUpList());
+    //    }
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        seedu.address.logic.commands.buyer.FindCommand findCommand = new seedu.address.logic.commands.buyer.FindCommand(predicate);
-        String expected = seedu.address.logic.commands.buyer.FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        MeetUpContainsKeywordsPredicate predicate = new MeetUpContainsKeywordsPredicate(Arrays.asList("keyword"));
+        FindCommand findCommand = new FindCommand(predicate);
+        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
