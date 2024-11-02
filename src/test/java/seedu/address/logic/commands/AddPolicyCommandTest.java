@@ -16,6 +16,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
 
@@ -36,8 +37,8 @@ public class AddPolicyCommandTest {
         // Client at index has no health policies
         AddPolicyCommand command = new AddPolicyCommand(INDEX_FIRST_CLIENT, health);
 
-        String expectedMessage = String.format(AddPolicyCommand.MESSAGE_SUCCESS,
-                health.toString());
+        Client client = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        String expectedMessage = String.format(AddPolicyCommand.MESSAGE_SUCCESS, client.getName(), health);
 
         assertCommandSuccess(command, model, expectedMessage, model);
     }
@@ -54,8 +55,9 @@ public class AddPolicyCommandTest {
 
         // Client at second index already has health policy
         AddPolicyCommand command = new AddPolicyCommand(INDEX_SECOND_CLIENT, health);
+        String expectedMessage = String.format(AddPolicyCommand.MESSAGE_DUPLICATES, health.getType());
 
-        assertCommandFailure(command, model, AddPolicyCommand.MESSAGE_DUPLICATES);
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test

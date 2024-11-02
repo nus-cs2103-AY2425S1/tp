@@ -12,7 +12,7 @@ import seedu.address.model.client.Client;
 /**
  * Finds and lists all clients Prudy that match the specified criteria.
  */
-public class FindCommand extends Command {
+public class FindClientCommand extends Command {
 
     public static final String COMMAND_WORD = "find-client";
 
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
 
     private final Predicate<Client> predicate;
 
-    public FindCommand(Predicate<Client> predicate) {
+    public FindClientCommand(Predicate<Client> predicate) {
         this.predicate = predicate;
     }
 
@@ -38,8 +38,8 @@ public class FindCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                || (other instanceof FindClientCommand // instanceof handles nulls
+                && predicate.equals(((FindClientCommand) other).predicate)); // state check
     }
 
     @Override

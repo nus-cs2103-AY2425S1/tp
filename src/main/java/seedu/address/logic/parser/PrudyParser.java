@@ -9,21 +9,21 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddClaimCommand;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClaimsCommand;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteClientCommand;
 import seedu.address.logic.commands.DeletePoliciesCommand;
 import seedu.address.logic.commands.EditClaimCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindClientCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListClaimsCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListClientCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
 import seedu.address.logic.commands.ListPoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -62,23 +62,23 @@ public class PrudyParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddClientCommand.COMMAND_WORD:
+            return new AddClientCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteClientCommand.COMMAND_WORD:
+            return new DeleteClientCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindClientCommand.COMMAND_WORD:
+            return new FindClientCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListClientCommand.COMMAND_WORD:
+            return new ListClientCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

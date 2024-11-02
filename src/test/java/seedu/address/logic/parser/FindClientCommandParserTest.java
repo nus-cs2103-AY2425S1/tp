@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindClientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.AddressContainsKeywordsPredicate;
 import seedu.address.model.client.Client;
@@ -23,20 +23,20 @@ import seedu.address.model.client.PhoneMatchesPredicate;
 import seedu.address.model.client.PolicyTypeMatchesPredicate;
 import seedu.address.model.policy.PolicyType;
 
-public class FindCommandParserTest {
+public class FindClientCommandParserTest {
 
-    private final FindCommandParser parser = new FindCommandParser();
+    private final FindClientCommandParser parser = new FindClientCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindClientCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_noPrefixes_throwsParseException() {
         assertParseFailure(parser, " Alice Bob",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindClientCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -52,14 +52,14 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validName_returnsFindCommand() throws ParseException {
+    public void parse_validName_returnsFindClientCommand() throws ParseException {
         String input = " n/Alice Bob";
         List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
 
-        FindCommand expectedCommand = new FindCommand(combinedPredicate);
-        FindCommand actualCommand = parser.parse(input);
+        FindClientCommand expectedCommand = new FindClientCommand(combinedPredicate);
+        FindClientCommand actualCommand = parser.parse(input);
 
         assertEquals(expectedCommand, actualCommand);
     }
@@ -80,14 +80,14 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validPhone_returnsFindCommand() throws ParseException {
+    public void parse_validPhone_returnsFindClientCommand() throws ParseException {
         String input = " p/12345678";
         List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(new PhoneMatchesPredicate("12345678"));
         Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
 
-        FindCommand expectedCommand = new FindCommand(combinedPredicate);
-        FindCommand actualCommand = parser.parse(input);
+        FindClientCommand expectedCommand = new FindClientCommand(combinedPredicate);
+        FindClientCommand actualCommand = parser.parse(input);
 
         assertEquals(expectedCommand, actualCommand);
     }
@@ -99,14 +99,14 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validEmail_returnsFindCommand() throws ParseException {
+    public void parse_validEmail_returnsFindClientCommand() throws ParseException {
         String input = " e/john.doe@example.com";
         List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(new EmailMatchesPredicate("john.doe@example.com"));
         Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
 
-        FindCommand expectedCommand = new FindCommand(combinedPredicate);
-        FindCommand actualCommand = parser.parse(input);
+        FindClientCommand expectedCommand = new FindClientCommand(combinedPredicate);
+        FindClientCommand actualCommand = parser.parse(input);
 
         assertEquals(expectedCommand, actualCommand);
     }
@@ -124,14 +124,14 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validAddress_returnsFindCommand() throws ParseException {
+    public void parse_validAddress_returnsFindClientCommand() throws ParseException {
         String input = " a/123 Main Street";
         List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(new AddressContainsKeywordsPredicate(Arrays.asList("123", "Main", "Street")));
         Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
 
-        FindCommand expectedCommand = new FindCommand(combinedPredicate);
-        FindCommand actualCommand = parser.parse(input);
+        FindClientCommand expectedCommand = new FindClientCommand(combinedPredicate);
+        FindClientCommand actualCommand = parser.parse(input);
 
         assertEquals(expectedCommand, actualCommand);
     }
@@ -143,20 +143,20 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validPolicyType_returnsFindCommand() throws ParseException {
+    public void parse_validPolicyType_returnsFindClientCommand() throws ParseException {
         String input = " pt/Life";
         List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(new PolicyTypeMatchesPredicate(PolicyType.LIFE));
         Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
 
-        FindCommand expectedCommand = new FindCommand(combinedPredicate);
-        FindCommand actualCommand = parser.parse(input);
+        FindClientCommand expectedCommand = new FindClientCommand(combinedPredicate);
+        FindClientCommand actualCommand = parser.parse(input);
 
         assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
-    public void parse_multipleValidParameters_returnsFindCommand() throws ParseException {
+    public void parse_multipleValidParameters_returnsFindClientCommand() throws ParseException {
         String input = " n/Alice p/12345678 e/alice@example.com a/123 Main St pt/Health";
         List<Predicate<Client>> predicatesList = new ArrayList<>();
         predicatesList.add(new NameContainsKeywordsPredicate(Collections.singletonList("Alice")));
@@ -166,8 +166,8 @@ public class FindCommandParserTest {
         predicatesList.add(new PolicyTypeMatchesPredicate(PolicyType.HEALTH));
         Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
 
-        FindCommand expectedCommand = new FindCommand(combinedPredicate);
-        FindCommand actualCommand = parser.parse(input);
+        FindClientCommand expectedCommand = new FindClientCommand(combinedPredicate);
+        FindClientCommand actualCommand = parser.parse(input);
 
         assertEquals(expectedCommand, actualCommand);
     }
@@ -182,12 +182,12 @@ public class FindCommandParserTest {
     @Test
     public void parse_unknownPrefix_throwsParseException() {
         assertParseFailure(parser, " x/unknown",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindClientCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_preamblePresent_throwsParseException() {
         assertParseFailure(parser, " unexpected n/Alice",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindClientCommand.MESSAGE_USAGE));
     }
 }
