@@ -62,8 +62,16 @@ public class HistoryCommand {
                 && Integer.valueOf(this.index).equals(otherCommand.getIndex());
     }
 
+    @Override
+    public int hashCode() {
+        int result = command.hashCode();
+        result = 31 * result + commandText.hashCode();
+        result = 31 * result + index;
+        return result;
+    }
+
     /**
-     * Reset the value for pointer for testing purpose.
+     * Reset the value for pointer when every history command list is created.
      */
     public static void resetIndex() {
         value = 0;
