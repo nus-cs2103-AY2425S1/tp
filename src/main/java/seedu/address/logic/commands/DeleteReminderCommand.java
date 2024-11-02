@@ -50,6 +50,11 @@ public class DeleteReminderCommand extends Command {
         }
 
         String reminder = lastShownList.get(index).getReminder().reminder;
+
+        if (reminder == "") {
+            throw new CommandException(Messages.MESSAGE_NO_REMINDER);
+        }
+
         Person reminderToDelete = lastShownList.get(index);
         model.deleteReminder(reminderToDelete);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

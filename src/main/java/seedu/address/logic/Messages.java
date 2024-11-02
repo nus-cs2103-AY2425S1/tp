@@ -17,7 +17,6 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
     public static final String MESSAGE_INVALID_NAME_DISPLAYED = "The name provided is not in the address book.";
     public static final String MESSAGE_INVALID_APPOINTMENT_DISPLAYED = "The appointment provided is invalid.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
@@ -28,6 +27,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_REMINDER_FORMAT = "Invalid reminder time! "
             + "Please enter either: n day/hour(s)";
     public static final String MESSAGE_INVALID_DATE = "Given date does not exist!";
+    public static final String MESSAGE_NO_REMINDER = "No reminder set for this person!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
