@@ -9,9 +9,11 @@ import java.util.regex.Pattern;
 
 import tuteez.commons.core.LogsCenter;
 import tuteez.logic.commands.AddCommand;
+import tuteez.logic.commands.AddRemarkCommand;
 import tuteez.logic.commands.ClearCommand;
 import tuteez.logic.commands.Command;
 import tuteez.logic.commands.DeleteCommand;
+import tuteez.logic.commands.DeleteRemarkCommand;
 import tuteez.logic.commands.DisplayCommand;
 import tuteez.logic.commands.EditCommand;
 import tuteez.logic.commands.ExitCommand;
@@ -19,7 +21,6 @@ import tuteez.logic.commands.FindCommand;
 import tuteez.logic.commands.HelpCommand;
 import tuteez.logic.commands.LessonCommand;
 import tuteez.logic.commands.ListCommand;
-import tuteez.logic.commands.RemarkCommand;
 import tuteez.logic.parser.exceptions.ParseException;
 
 /**
@@ -66,6 +67,14 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD_ALT:
             return new DeleteCommandParser().parse(arguments);
 
+        case AddRemarkCommand.COMMAND_WORD:
+        case AddRemarkCommand.COMMAND_WORD_ALT:
+            return new AddRemarkCommandParser().parse(arguments);
+
+        case DeleteRemarkCommand.COMMAND_WORD:
+        case DeleteRemarkCommand.COMMAND_WORD_ALT:
+            return new DeleteRemarkCommandParser().parse(arguments);
+
         case DisplayCommand.COMMAND_WORD:
             return new DisplayCommandParser().parse(arguments);
 
@@ -83,10 +92,6 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case RemarkCommand.COMMAND_WORD:
-        case RemarkCommand.COMMAND_WORD_ALT:
-            return new RemarkCommandParser().parse(arguments);
 
         case LessonCommand.COMMAND_WORD_ADD:
         case LessonCommand.COMMAND_WORD_ADD_ALT:

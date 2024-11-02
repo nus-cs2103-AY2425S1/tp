@@ -24,15 +24,14 @@ public class Messages {
             "Person name is required but missing. Please provide the name of the person using n/.";
     public static final String MESSAGE_MISSING_PHONE =
             "Person phone number is required but missing. Please provide the phone of the person using p/.";
-    public static final String MESSAGE_REMARK_MULTIPLE_OPERATIONS =
-            "Cannot add and delete remarks simultaneously. Please use only one operation at a time.";
-    public static final String MESSAGE_REMARK_MISSING_COMMAND_TYPE =
-            "Please specify whether to add or delete a remark using '-a' or '-d'.";
+
+    public static final String MESSAGE_MISSING_REMARK_PREFIX = "The remark prefix 'r/' is missing";
+    public static final String MESSAGE_MISSING_REMARK_INDEX_PREFIX = "The remark index prefix 'ri/' is missing";
     public static final String MESSAGE_MISSING_REMARK_INDEX = "Remark index is required for deletion but missing. "
-            + "Please specify which remark to delete (e.g., 'remark 1 -d 1').";
+            + "Please specify which remark to delete (e.g., 'deleteremark 1 ri/1').";
     public static final String MESSAGE_INVALID_REMARK_INDEX_FORMAT =
-            "Remark index must be a single, positive number (e.g., '1', '2', '3').";
-    public static final String MESSAGE_INVALID_REMARK_INDEX = "The remark index provided is invalid";
+            "Remark index must be a single, positive number (eg, '1', '2', '3').";
+    public static final String MESSAGE_INVALID_REMARK_INDEX = "The remark index provided is out of bounds.";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_NAME =
                 "No student named %1$s was found, please try again!";
 

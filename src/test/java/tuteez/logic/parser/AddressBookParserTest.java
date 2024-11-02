@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tuteez.logic.parser.CliSyntax.PREFIX_REMARK;
+import static tuteez.logic.parser.CliSyntax.PREFIX_REMARK_INDEX;
 import static tuteez.testutil.Assert.assertThrows;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_REMARK;
@@ -25,7 +27,6 @@ import tuteez.logic.commands.ExitCommand;
 import tuteez.logic.commands.FindCommand;
 import tuteez.logic.commands.HelpCommand;
 import tuteez.logic.commands.ListCommand;
-import tuteez.logic.commands.RemarkCommand;
 import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.person.NameContainsKeywordsPredicate;
 import tuteez.model.person.Person;
@@ -76,29 +77,31 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addRemark() throws Exception {
-        AddRemarkCommand command = (AddRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + AddRemarkCommand.ADD_REMARK_PARAM + " " + "remark");
+        AddRemarkCommand command = (AddRemarkCommand) parser.parseCommand(AddRemarkCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_REMARK + " " + "remark");
         assertEquals(new AddRemarkCommand(INDEX_FIRST_PERSON, new Remark("remark")), command);
     }
 
     @Test
     public void parseCommand_addRemarkAltCommand() throws Exception {
-        AddRemarkCommand command = (AddRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD_ALT + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + AddRemarkCommand.ADD_REMARK_PARAM + " " + "remark");
+        AddRemarkCommand command = (AddRemarkCommand) parser.parseCommand(AddRemarkCommand.COMMAND_WORD_ALT
+                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_REMARK + " " + "remark");
         assertEquals(new AddRemarkCommand(INDEX_FIRST_PERSON, new Remark("remark")), command);
     }
 
     @Test
     public void parseCommand_deleteRemark() throws Exception {
-        DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + DeleteRemarkCommand.DELETE_REMARK_PARAM + " 1");
+        DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(
+                DeleteRemarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_REMARK_INDEX + " 1");
         assertEquals(new DeleteRemarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_REMARK), command);
     }
 
     @Test
     public void parseCommand_deleteRemarkAltCommand() throws Exception {
-        DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD_ALT
-                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + DeleteRemarkCommand.DELETE_REMARK_PARAM + " 1");
+        DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(
+                DeleteRemarkCommand.COMMAND_WORD_ALT + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_REMARK_INDEX + " 1");
         assertEquals(new DeleteRemarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_REMARK), command);
     }
 
@@ -136,7 +139,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class,
+                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 
     @Test
