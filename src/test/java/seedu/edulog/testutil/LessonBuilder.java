@@ -1,9 +1,9 @@
 package seedu.edulog.testutil;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-
+import seedu.edulog.model.calendar.Day;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
+import seedu.edulog.model.calendar.LessonTime;
 
 /**
  * A utility class to help with building Student objects.
@@ -11,13 +11,13 @@ import seedu.edulog.model.calendar.Lesson;
 public class LessonBuilder {
 
     public static final String DEFAULT_DESCRIPTION = "Sec 4 Math";
-    public static final DayOfWeek DEFAULT_START_DAY = DayOfWeek.MONDAY;
-    public static final LocalTime DEFAULT_START_TIME = LocalTime.of(9, 30);
-    public static final LocalTime DEFAULT_END_TIME = LocalTime.of(11, 30);
-    private String description; //TODO: change to type Description
-    private DayOfWeek startDay; //TODO: change to type StartDay
-    private LocalTime startTime; //TODO: change to type StartTime
-    private LocalTime endTime; //TODO: change to type endTime
+    public static final String DEFAULT_START_DAY = "Monday";
+    public static final String DEFAULT_START_TIME = "0930";
+    public static final String DEFAULT_END_TIME = "1130";
+    private Description description;
+    private Day startDay;
+    private LessonTime startTime;
+    private LessonTime endTime;
 
     /**
      * Creates a {@code LessonBuilder} with the default details.
@@ -28,10 +28,10 @@ public class LessonBuilder {
      *         endTime = new EndTime(DEFAULT_END_TIME);
      */
     public LessonBuilder() {
-        description = DEFAULT_DESCRIPTION;
-        startDay = DEFAULT_START_DAY;
-        startTime = DEFAULT_START_TIME;
-        endTime = DEFAULT_END_TIME;
+        description = new Description(DEFAULT_DESCRIPTION);
+        startDay = new Day(DEFAULT_START_DAY);
+        startTime = new LessonTime(DEFAULT_START_TIME);
+        endTime = new LessonTime(DEFAULT_END_TIME);
     }
 
     /**
@@ -48,31 +48,31 @@ public class LessonBuilder {
      * Sets the {@code Name} of the {@code Student} that we are building.
      */
     public LessonBuilder withDescription(String description) {
-        this.description = description;
+        this.description = new Description(description);
         return this;
     }
 
     /**
-     * Sets the {@code DayOfWeek} of the {@code Student} that we are building.
+     * Sets the day of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withDayOfWeek(DayOfWeek startDay) {
-        this.startDay = startDay;
+    public LessonBuilder withDayOfWeek(String startDay) {
+        this.startDay = new Day(startDay);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Student} that we are building.
+     * Sets the start time of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+    public LessonBuilder withStartTime(String startTime) {
+        this.startTime = new LessonTime(startTime);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Student} that we are building.
+     * Sets the end time of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+    public LessonBuilder withEndTime(String endTime) {
+        this.endTime = new LessonTime(endTime);
         return this;
     }
 

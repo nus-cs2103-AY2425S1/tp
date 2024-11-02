@@ -13,6 +13,12 @@ import seedu.edulog.model.calendar.exceptions.DuplicateLessonException;
  */
 public class EdulogCalendar {
     public static final int MAX_SIMULTANEOUS_TIMING = 2;
+
+    public static final String OVERLOAD_SIMULTANEOUS_TIMING =
+        "There are already "
+            + MAX_SIMULTANEOUS_TIMING
+            + " or more lessons overlapping this lesson's time.";
+
     private ObservableList<Lesson> lessons;
 
     public EdulogCalendar() {
@@ -49,7 +55,7 @@ public class EdulogCalendar {
     /**
      * Find a lesson in the calendar based on its description
      */
-    public Lesson findLesson(String description) {
+    public Lesson findLesson(Description description) {
         return lessons.stream()
             .filter(lesson -> lesson.isDescription(description))
             .findFirst()
@@ -61,9 +67,7 @@ public class EdulogCalendar {
      */
     public boolean checkTimeslot(Lesson lesson) {
         return lessons.stream()
-            .filter(l -> l.getStartDay().equals(lesson.getStartDay()))
-            .filter(l -> l.getStartTime().isBefore(lesson.getEndTime())
-                && lesson.getStartTime().isBefore(l.getEndTime()))
+            .filter(lesson::hasOverlap)
             .count() < MAX_SIMULTANEOUS_TIMING;
     }
 

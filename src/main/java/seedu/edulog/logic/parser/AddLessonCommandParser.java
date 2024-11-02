@@ -6,13 +6,15 @@ import static seedu.edulog.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_START_DAY;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_START_TIME;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.edulog.logic.commands.AddLessonCommand;
 import seedu.edulog.logic.parser.exceptions.ParseException;
+import seedu.edulog.model.calendar.Day;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
+import seedu.edulog.model.calendar.LessonTime;
 
 /**
  * Parses input arguments and creates a new AddLessonCommand object
@@ -36,14 +38,16 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(
                 PREFIX_DESCRIPTION, PREFIX_START_DAY, PREFIX_START_TIME, PREFIX_END_TIME);
-        String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        DayOfWeek day = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_START_DAY).get());
-        LocalTime startTime = ParserUtil.parseLocalTime(argMultimap.getValue(PREFIX_START_TIME).get());
-        LocalTime endTime = ParserUtil.parseLocalTime(argMultimap.getValue(PREFIX_END_TIME).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        Day day = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_START_DAY).get());
 
-        if (startTime.equals(endTime)) {
-            throw new ParseException(Lesson.NO_SAME_TIME);
-        }
+        List<LessonTime> times = ParserUtil.parseLessonTimes(
+            argMultimap.getValue(PREFIX_START_TIME).get(),
+            argMultimap.getValue(PREFIX_END_TIME).get()
+        );
+
+        LessonTime startTime = times.get(0);
+        LessonTime endTime = times.get(1);
 
         Lesson lesson = new Lesson(description, day, startTime, endTime);
 

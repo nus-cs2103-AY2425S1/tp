@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.edulog.commons.util.ToStringBuilder;
 import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.Model;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
 
 /**
@@ -23,9 +24,9 @@ public class DeleteLessonCommand extends Command {
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Class: %1$s";
     public static final String MESSAGE_NONEXISTENT_LESSON = "This lesson does not exist in the calendar";
 
-    private final String description;
+    private final Description description;
 
-    public DeleteLessonCommand(String description) {
+    public DeleteLessonCommand(Description description) {
         this.description = description;
     }
 

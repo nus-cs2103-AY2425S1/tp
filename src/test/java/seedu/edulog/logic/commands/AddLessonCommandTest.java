@@ -4,17 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandFailure;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
+import seedu.edulog.model.calendar.Day;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.calendar.Lesson;
+import seedu.edulog.model.calendar.LessonTime;
 
 public class AddLessonCommandTest {
 
@@ -24,7 +24,8 @@ public class AddLessonCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager();
-        validLesson = new Lesson("Math", DayOfWeek.MONDAY, LocalTime.of(12, 0), LocalTime.of(13, 0));
+        validLesson = new Lesson(new Description("Math"),
+            new Day("Monday"), new LessonTime("1200"), new LessonTime("1300"));
     }
 
     @Test
@@ -41,7 +42,8 @@ public class AddLessonCommandTest {
         model.addLesson(validLesson);
 
         // note that the lesson only has identical descriptions as the validLesson
-        Lesson duplicateLesson = new Lesson("Math", DayOfWeek.TUESDAY, LocalTime.of(13, 0), LocalTime.of(14, 0));
+        Lesson duplicateLesson = new Lesson(new Description("Math"),
+            validLesson.getStartDay(), validLesson.getStartTime(), validLesson.getEndTime());
         AddLessonCommand command = new AddLessonCommand(duplicateLesson);
 
         assertCommandFailure(command, model, AddLessonCommand.MESSAGE_DUPLICATE_LESSON);
@@ -49,23 +51,22 @@ public class AddLessonCommandTest {
 
     @Test
     public void execute_overloadIdenticalTimingLesson_throwsCommandException() throws CommandException {
-        DayOfWeek day = DayOfWeek.MONDAY;
+        String startDay = "Monday";
+        String startTime = "1200";
+        String endTime = "1300";
 
         for (int i = 0; i < EdulogCalendar.MAX_SIMULTANEOUS_TIMING; i++) {
-            LocalTime startTime = LocalTime.of(12 - i, 0);
-            LocalTime endTime = LocalTime.of(13 + i, 0);
-
-            Lesson lesson = new Lesson("Math" + i, day, startTime, endTime);
+            Lesson lesson = new Lesson(new Description("Math" + i),
+                new Day(startDay), new LessonTime(startTime), new LessonTime(endTime));
             AddLessonCommand command = new AddLessonCommand(lesson);
             CommandResult result = command.execute(model);
             assertEquals(result.getFeedbackToUser(),
                     String.format(AddLessonCommand.MESSAGE_SUCCESS, lesson));
         }
 
-        LocalTime endTime = LocalTime.of(13 + EdulogCalendar.MAX_SIMULTANEOUS_TIMING, 0);
-        LocalTime startTime = LocalTime.of(12 - EdulogCalendar.MAX_SIMULTANEOUS_TIMING, 0);
-        Lesson lesson = new Lesson("Math" + EdulogCalendar.MAX_SIMULTANEOUS_TIMING, day, startTime, endTime);
+        Lesson lesson = new Lesson(new Description("Math" + EdulogCalendar.MAX_SIMULTANEOUS_TIMING),
+            new Day("Monday"), new LessonTime(startTime), new LessonTime(endTime));
         AddLessonCommand command = new AddLessonCommand(lesson);
-        assertCommandFailure(command, model, AddLessonCommand.OVERLOAD_SIMULTANEOUS_TIMING);
+        assertCommandFailure(command, model, EdulogCalendar.OVERLOAD_SIMULTANEOUS_TIMING);
     }
 }
