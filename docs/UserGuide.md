@@ -270,7 +270,7 @@ Action     | Format, Examples
 **Find by phone number**   | `find p/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p/91234657 85432789`
 **Find by tag**   | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friend roommate`
 **Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**Add tag** | `addtag INDEX t/KEY_WORD [t/MORE_TAGS]` <br> e.g. `addtag 1 t/friend t/classmate`
+**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]` <br> e.g. `addtag 1 t/friend t/classmate`
 **Categorize tag** | `cattag INDEX t/KEYWORD`
 **Undo action** | `undo`
 **Redo action** | `redo`
