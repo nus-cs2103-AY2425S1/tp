@@ -38,7 +38,7 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
         * [`add_vendor` Adding a vendor to the vendor list](#adding-a-vendor--add_vendor)
         * [`edit_vendor` Editing the details of a vendor](#editing-a-vendor--edit_vendor)
         * [`delete_vendor` Deleting a vendor from the vendor list](#deleting-a-vendor--delete_vendor)
-    * [**Miscellaneous**](#miscellaneous)
+    * [**Other Useful Features**](#other-useful-features)
         * [Saving the data](#saving-the-data)
         * [Editing the data file](#editing-the-data-file)
 5. [**FAQ**](#faq)
