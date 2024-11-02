@@ -1,10 +1,8 @@
 package seedu.ddd.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.commands.AddEventCommand.MESSAGE_DUPLICATE_EVENT;
 import static seedu.ddd.testutil.Assert.assertThrows;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ID;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ID;
@@ -16,22 +14,17 @@ import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_NAME;
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_2;
-import static seedu.ddd.testutil.event.TypicalEvents.VALID_EVENT;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
-import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.AddEventCommand;
-import seedu.ddd.logic.commands.CommandResult;
-import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Displayable;
 import seedu.ddd.model.Model;
