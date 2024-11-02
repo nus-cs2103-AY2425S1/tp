@@ -89,7 +89,7 @@ public class MeetUpTest {
 
     @Test
     public void toStringMethod() {
-        String expected = MeetUp.class.getCanonicalName() + "{name=" + PITCH_MEETUP.getSubject() + ", info="
+        String expected = MeetUp.class.getCanonicalName() + "{subject=" + PITCH_MEETUP.getSubject() + ", info="
                 + PITCH_MEETUP.getInfo() + ", from=" + PITCH_MEETUP.getFrom() + ", to=" + PITCH_MEETUP.getTo()
                 + ", addedBuyers=" + PITCH_MEETUP.getAddedBuyers() + "}";
         assertEquals(expected, PITCH_MEETUP.toString());
