@@ -3,12 +3,14 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_SCORE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_SCORE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditAssignmentCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -24,25 +26,43 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
         requireNonNull(args);
         ArgumentMultimap argumentMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX,
-                        PREFIX_ASSIGNMENT_SCORE);
-        if (!arePrefixesPresent(argumentMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX,
-                PREFIX_ASSIGNMENT_SCORE)) {
+                        PREFIX_ASSIGNMENT_NAME, PREFIX_ASSIGNMENT_MAX_SCORE);
+        if (!arePrefixesPresent(argumentMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditAssignmentCommand.MESSAGE_USAGE));
         }
+
         Index studentIndex;
         Index assignmentIndex;
-        int assignmentScore;
-        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX,
-                PREFIX_ASSIGNMENT_SCORE);
+
         try {
             studentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_STUDENT_INDEX).get());
             assignmentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_ASSIGNMENT_INDEX).get());
-            assignmentScore = ParserUtil.parseScore(argumentMultimap.getValue(PREFIX_ASSIGNMENT_SCORE).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditAssignmentCommand.MESSAGE_USAGE), pe);
         }
-        return new EditAssignmentCommand(studentIndex, assignmentIndex, assignmentScore);
+
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX,
+                PREFIX_ASSIGNMENT_NAME, PREFIX_ASSIGNMENT_MAX_SCORE);
+
+        EditAssignmentCommand.EditAssignmentDescriptor editAssignmentDescriptor =
+                new EditAssignmentCommand.EditAssignmentDescriptor();
+
+        if (argumentMultimap.getValue(PREFIX_ASSIGNMENT_NAME).isPresent()) {
+            editAssignmentDescriptor.setName(ParserUtil.parseAssignmentName(
+                    argumentMultimap.getValue(PREFIX_ASSIGNMENT_NAME).get()));
+        }
+
+        if (argumentMultimap.getValue(PREFIX_ASSIGNMENT_MAX_SCORE).isPresent()) {
+            editAssignmentDescriptor.setMaxScore(ParserUtil.parseMaxScore(
+                    argumentMultimap.getValue(PREFIX_ASSIGNMENT_MAX_SCORE).get()));
+        }
+
+        if (!editAssignmentDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditAssignmentCommand(studentIndex, assignmentIndex, editAssignmentDescriptor);
     }
 }
