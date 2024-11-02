@@ -94,6 +94,7 @@ class JsonAdaptedPerson {
         }
         for (JsonAdaptedLog log : logs) {
             personLogs.add(log.toModelType());
+            personLogs.sort(Log::compareTo);
         }
 
         if (name == null) {

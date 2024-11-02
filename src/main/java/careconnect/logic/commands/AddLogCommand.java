@@ -67,7 +67,9 @@ public class AddLogCommand extends Command {
         Set<Tag> tags = personToAddLog.getTags();
         ArrayList<Log> updatedLogs = new ArrayList<>(personToAddLog.getLogs());
         AppointmentDate appointmentDate = personToAddLog.getAppointmentDate();
+
         updatedLogs.add(newLog);
+        updatedLogs.sort(Log::compareTo);
 
         return new Person(name, phone, email, address, tags, updatedLogs, appointmentDate);
     }

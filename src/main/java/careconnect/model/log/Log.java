@@ -11,7 +11,7 @@ import careconnect.commons.util.ToStringBuilder;
  * Represents a Log of a Person in the address book.
  * Guarantees: immutable; remark is valid as declared in {@link #isValidLogRemark(String)}
  */
-public class Log {
+public class Log implements Comparable<Log> {
     public static final String MESSAGE_CONSTRAINTS = "Log remark can take any values, and it "
             + "should not be blank. "
             + "Log date should be in the format yyyy-MM-dd HH:mm, if provided.";
@@ -97,4 +97,8 @@ public class Log {
                 .toString();
     }
 
+    @Override
+    public int compareTo(Log other) {
+        return this.date.compareTo(other.date);
+    }
 }
