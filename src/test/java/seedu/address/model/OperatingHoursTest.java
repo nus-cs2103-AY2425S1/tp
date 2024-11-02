@@ -71,14 +71,16 @@ public class OperatingHoursTest {
     @Test
     public void isWithinOperatingHours() {
         OperatingHours badOperatingHours = new OperatingHours(LocalTime.of(0, 0),
-                                                                LocalTime.of(0, 14));
+                                                                LocalTime.of(0, 10));
         assertTrue(defaultOperatingHours.isWithinOperatingHours(regularAppointment));
         assertFalse(badOperatingHours.isWithinOperatingHours(new Appointment("10/10/2024 00:00")));
+        assertTrue(diffrerentOperatingHours.isWithinOperatingHours(new Appointment("-")));
     }
 
     @Test
     public void equals() {
         assertTrue(defaultOperatingHours.equals(defaultOperatingHours));
+        assertTrue(defaultOperatingHours.equals(new OperatingHours()));
         assertFalse(defaultOperatingHours.equals(2));
 
     }
