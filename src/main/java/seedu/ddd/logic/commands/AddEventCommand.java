@@ -54,7 +54,8 @@ public class AddEventCommand extends AddCommand {
             + USAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New event created: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in DDD";
+    public static final String MESSAGE_DUPLICATE_EVENT = "An event of this name exists in DDD already. "
+                                                         + "Choose another name!";
     public static final String MESSAGE_INVALID_CONTACT_IDS = "Client ID(s) %s and vendor ID(s) %s not found in DDD";
     public static final String MESSAGE_INVALID_CLIENT_IDS = "Client ID(s) %s not found in DDD";
     public static final String MESSAGE_INVALID_VENDOR_IDS = "Vendor ID(s) %s not found in DDD";
@@ -108,7 +109,7 @@ public class AddEventCommand extends AddCommand {
         assert !clientsToAdd.isEmpty();
 
         Event eventToAdd = new Event(name, description, date, clientsToAdd, vendorsToAdd, eventId);
-        if (model.hasEvent(eventToAdd)) {
+        if (model.hasEventOfName(eventToAdd.getName())) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
         model.addEvent(eventToAdd);

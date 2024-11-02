@@ -10,13 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.model.common.Id;
+import seedu.ddd.model.common.Name;
 import seedu.ddd.model.event.exceptions.DuplicateEventException;
 import seedu.ddd.model.event.exceptions.EventNotFoundException;
 
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
- * A event is considered unique by comparing using {@code Event#isSameEvent(Event)}.
+ * An event is considered unique by comparing using {@code Event#isSameEvent(Event)}.
  * As such, adding and updating of events uses Event#isSameEvent(Event) for equality
  * so as to ensure that the event being added or updated is unique in terms of identity in
  * the UniqueEventList. However, the removal of a event uses Event#equals(Object) so
@@ -39,6 +40,14 @@ public class UniqueEventList implements Iterable<Event> {
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameEvent);
+    }
+
+    /**
+     * Returns true if the list contains an event with the equivalent name as the given argument.
+     */
+    public boolean containsName(Name toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(event -> event.getName().equals(toCheck));
     }
 
     /**
