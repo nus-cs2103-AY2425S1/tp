@@ -190,7 +190,7 @@ Examples:
 * `del-wed w/Alice Koh & John Lee` followed by `y` deletes the wedding named `John Doe` from the address book.
 * `del-wed w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
-### Tagging A Contact : `tag-add` / `tag-delete`
+### Tagging A Contact : `tag-add` / `tag-del`
 
 ### Adding Tag(s) to A Contact
 If you need to associate your contacts with a particular wedding, you can use `tag-add` to add them to the wedding.
@@ -199,7 +199,7 @@ Format: `tag-add n/NAME t/TAG...`
 
 <box type="tip" seamless>
 
-**IMPORTANT:** The wedding must already exist in the wedding book to successfully tag a person to a wedding
+**IMPORTANT:** The wedding must already exist in the wedding book to successfully tag a person to a wedding.
 
 **Tip #1:** The name of the tag must match the wedding that you want to add the contact to.
 
@@ -207,7 +207,7 @@ Format: `tag-add n/NAME t/TAG...`
 
 </box>
 
-![tag-add message](images/tagadd1.png)
+![tag-add message](images/tagadd2.png)
 
 Examples:
 *  `tag-add n/John Doe t/Adam and Steve` Adds the tag `Adam and Steve` to John Doe.
@@ -226,7 +226,7 @@ Format: `tag-del n/NAME t/TAG...`
 
 </box>
 
-![tag-delete message](images/tagdeleteMsg.png)
+![tag-delete message](images/tagDelMsg.png)
 
 Examples:
 *  `tag-del n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
