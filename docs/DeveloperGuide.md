@@ -330,796 +330,632 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+This app helps real estate agents efficiently manage client relationships by centralizing contact details and logging
+interactions. Also, automated reminders and notes ensure that you never miss an opportunity to engage clients. It
+simplifies client management but focuses only on handling moderate-sized contact lists, without support for financial
+transactions, property details, or large-scale CRM functions.
+
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                        | So that I can…​                                                                                |
-|----------|--------------------------------------------|-------------------------------------|------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions              | refer to instructions when I forget how to use the App                                         |
-| `* * *`  | user                                       | add a new person                    |                                                                                                |
-| `* * *`  | user                                       | delete a person                     | remove entries that I no longer need                                                           |
-| `* * *`  | user with many persons in the address book | find a person by name               | locate details of persons without having to go through the entire list                         |
-| `* * *`  | user with many persons in the address book | find people by category             | view a collection of persons in the same category without having to go through the entire list |
-| `* *`    | user                                       | add history log to a person         | keep a record of past activities for future references                                         |
-| `* *`    | user                                       | hide private contact details        | minimize chance of someone else seeing them by accident                                        |
-| `* *`    | user                                       | be reminded of important events     | minimize chance of missing these important events                                              |
-| `* *`    | real estate agent                          | add notes and remarks for a contact | remeber snippets of information about my clients                                               |
-| `* *`    | real estate agent                          | attach properties to a contact      | easily identify what properties a client is looking at                                         |
-| `*`      | user with many persons in the address book | sort persons by name                | locate a person easily                                                                         |
-| `*`      | user with many persons in the address book | keep track of important contacts    | locate an important person easily                                                              |
+| Priority | As a …​                                    | I want to …​                                                 | So that I can…​                                                                                |
+|----------|--------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                                       | refer to instructions when I forget how to use the App                                         |
+| `* * *`  | user                                       | add a new person                                             |                                                                                                |
+| `* * *`  | user                                       | delete a person                                              | remove entries that I no longer need                                                           |
+| `* * *`  | user with many persons in the address book | find a person by name                                        | locate details of persons without having to go through the entire list                         |
+| `* * *`  | user with many persons in the address book | find people by category                                      | view a collection of persons in the same category without having to go through the entire list |
+| `* * *`  | salesperson                                | add a new contact with details (name, phone, email)          | store client information in the address book                                                   |
+| `* * *`  | salesperson                                | search for a contact by name                                 | quickly find the client without manually scrolling through the list                            |
+| `* * *`  | user                                       | add history log to a person                                  | keep a record of past activities for future references                                         |
+| `* *`    | real estate agent                          | add notes and remarks for a contact                          | remember snippets of information about my clients                                              |
+| `* *`    | real estate agent                          | attach properties to a contact                               | easily identify what properties a client is looking at                                         |
+| `* *`    | user                                       | be reminded of important events                              | minimize chance of missing these important events                                              |
+| `* *`    | salesperson                                | system to check the validity of a phone number               | avoid entering incorrect or incomplete data                                                    |
+| `* *`    | salesperson                                | view the history of interactions with a contact              | keep track of past communication (e.g., notes, calls, meetings)                                |
+| `* *`    | salesperson                                | mark certain contacts as favourites                          | easily access the most important clients at the top of the list                                |
+| `* *`    | salesperson                                | store incomplete information                                 | later update it with more details or correct outdated information                              |
+| `* *`    | user with many persons in the address book | sort persons by name                                         | locate a person easily                                                                         |
+| `* *`    | user with many persons in the address book | keep track of important contacts                             | locate an important person easily                                                              |
+| `* *`    | salesperson                                | sort contacts alphabetically by their name                   | easily browse through the address book                                                         |
+| `* *`    | salesperson                                | view all information about a contact on one page             | see all relevant details without clicking multiple times                                       |
+| `*`      | salesperson                                | receive a confirmation prompt before clearing all contacts   | avoid accidental deletion of the entire address book                                           |
+| `*`      | salesperson                                | receive a success notification after adding/editing/deleting | know the operation was completed correctly                                                     |
+| `*`      | user                                       | hide private contact details                                 | minimize chance of someone else seeing them by accident                                        |
 
-*{More to be added}*
+
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case: Delete a person**
+### Use Case: **UC01 - Delete a Contact**
 
-**MSS**
+**Actor**: Salesperson  
+**Precondition**: The contact exists in the contact list.  
+**Guarantees**: The specified contact is removed from the AddressBook, and the Salesperson receives confirmation of the deletion.
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+#### Main Success Scenario (MSS):
+1. The Salesperson requests to list persons.
+2. AddressBook displays a list of persons.
+3. The Salesperson issues the `delete` command with a valid contact index.
+4. AddressBook validates the contact index.
+5. AddressBook removes the specified contact from the contact list.
+6. AddressBook displays a success message: "Contact `<Name>` deleted."
 
-   Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-### 1. **Feature: Add Contact**
-
-**Purpose:**
-
-The purpose of this feature is to allow users to add a new contact by specifying essential details such as name, phone
-number, physical address, birthday, email address, and optional social media handles.
-
-### **Command Format:**
-
-`add n/<Full Name> p/<Phone Number> a/<Physical Address> [b/<Birthday>] e/<Email Address> [r/<Remark>] [t/<Tag>]`
-
-*Note: Fields in `[]` are optional.*
-
-**Example Commands:**
-
-- `add n/John Smith p/+123456789 a/123 Main Street, City, Country b/1990-05-12 e/john.smith@email.com r/@johnsmith t/instagram`
-- `add n/Emily Davis p/(555) 123-4567 a/987 Elm St, Apt 5B, City b/1985-07-22 e/emily.davis@email.com`
-- `add n/Emily Davis p/(555) 123-4567 b/1985-07-22 a/Singapore e/emmm@gmail.com`
-
-### **Main Success Scenario (MSS)**
-
-1. The user issues the `add` command, specifying a full name and phone number as mandatory fields, with optional fields
-   such as physical address, birthday, email, and Instagram handle.
-2. The system validates the input parameters (e.g., name, phone number, etc.) for correctness.
-3. The system adds the new contact to the contact list.
-4. A success message is shown to the user: `Contact successfully added: <Name>`.
-5. The newly added contact is displayed in the contact list.
-
-   Use case ends.
+   **Use case ends.**
 
 ---
 
-### **Command Parameters:**
+#### Extensions:
+- **2a.** The list is empty.
+  - **Use case ends.**
 
-#### **Command “add”:**
+- **3a.** The command format is incorrect (e.g., index not provided).
+  - **3a1.** AddressBook displays an error message:
+    ```
+    Invalid command format! 
+    delete: Deletes the person identified by the index number used in the displayed person list.
+    Parameters: INDEX (must be a positive integer)
+    Example: delete 1
+    ```
+  - **Use case resumes at Step 2.**
 
-**Acceptable Values:**
-
-- The command must match the case exactly (i.e., no "Add", "ADD", etc.).
-
-**Error Message:**
-
-- Invalid Command: `Error: Invalid Command entered. Please provide a valid command.`
-
----
-
-#### **Name:**
-
-**Acceptable Values:**
-
-- Must be a string containing alphabetic characters, with allowed spaces, hyphens, and apostrophes.
-- Examples: `John Smith`, `Mary-Jane O'Neil`.
-- Case-insensitive (e.g., `JOHN SMITH` is the same as `John Smith`).
-- Leading/trailing spaces are ignored.
-
-**Error Message:**
-
-- If invalid: `Error: Name must only contain alphabetic characters, spaces, hyphens, or apostrophes.`
-
-**Rationale:**
-
-- This format accommodates common name variations while preventing the use of numeric or special characters.
+- **4a.** The contact index is invalid or out of bounds.
+  - **4a1.** AddressBook displays an error message: `The person index provided is invalid.`
+  - **4a2.** The Salesperson corrects the contact index and reissues the command.
+  - **Use case resumes from Step 3.**
 
 ---
 
-#### **Phone Number:**
-
-**Acceptable Values:**
-
-- Must be in a valid phone number format, which includes numbers and may have spaces, parentheses, dashes, and a
-  leading `+` for international codes.
-- Examples: `+123456789`, `(555) 123-4567`, `555-123-4567`.
-- Leading/trailing spaces are ignored.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid phone number format.`
-
-**Rationale:**
-
-- This allows flexibility in formatting phone numbers while accounting for international and regional variations.
+#### Including Related Use Cases:
+- **UC06 - View Full Contact Details**: The Salesperson may use this use case to view the contact’s full details before confirming the deletion.
+- **UC09 - Display Help Information**: The `help` command will include instructions on how to use the `delete` command.
 
 ---
 
-#### **Physical Address:**
+#### Variations:
+- **1a.** The Salesperson deletes a contact by issuing the `delete` command with a valid index.
+  - **Use case proceeds normally from Step 4.**
 
-**Acceptable Values:**
-
-- A string containing alphanumeric characters, spaces, and common punctuation (e.g., commas, periods, hyphens).
-- Examples: `123 Main Street, City, Country`, `987 Elm St., Apt 5B`.
-- Case-insensitive and leading/trailing spaces are ignored.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid address format. Only alphanumeric characters and basic punctuation are allowed.`
-
-**Rationale:**
-
-- This format supports common address structures while maintaining simplicity.
+- **1b.** The Salesperson deletes a contact after viewing the contact details.
+  - **Use case proceeds normally from Step 4.**
 
 ---
 
-#### **Birthday (Optional):**
+### Use Case: **UC02 - Sort Contact List Alphabetically**
+**Actor**: Salesperson  
+**Precondition**: The system has a non-empty list of contacts.  
+**Guarantees**: The contact list is sorted in the specified order (ascending or descending), and the Salesperson can view the sorted list.
 
-**Acceptable Values:**
+#### Main Success Scenario (MSS):
+1. The Salesperson issues the `sort` command with a specified order (ascending or descending).
+2. The system validates the sorting parameter (`asc` or `desc`).
+3. The system sorts the contact list based on the specified order.
+4. The sorted contact list is displayed.
+5. The system shows a success message: `Contacts sorted <A-Z/Z-A>`
 
-- A valid date in the format `YYYY-MM-DD`.
-- Examples: `1990-05-12`, `1985-07-22`.
-- Leading/trailing spaces are ignored.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid birthday format. Please use YYYY-MM-DD.`
-
-**Rationale:**
-
-- The standardized date format avoids ambiguity and ensures consistency.
+   **Use case ends.**
 
 ---
 
-#### **Email Address:**
+#### Extensions:
+- **2a.** The entered sorting parameter is invalid (e.g., `ascending` instead of `asc`).
+    - **2a1.** The system displays an error message: `Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
+    - **2a2.** The Salesperson corrects the sorting parameter and reissues the command.
+    - **Use case resumes from Step 2.**
 
-**Acceptable Values:**
-
-- Must be in a valid email address format following `name@domain.tld`.
-- Examples: `john.smith@email.com`, `emily.davis@gmail.com`.
-- Case-insensitive for the domain part, though the local part (before `@`) may be case-sensitive depending on the mail
-  server.
-- Leading/trailing spaces are ignored.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid email address format.`
-
-**Rationale:**
-
-- Ensures that the email address is correctly formatted for communication.
+- **2b.** The Salesperson forgets to specify the sorting order.
+    - **2b1.** The system displays an error message: `Error: No sorting order provided. Please specify 'asc' or 'desc'.`
+    - **2b2.** The Salesperson adds the correct sorting order and reissues the command.
+    - **Use case resumes from Step 2.**
 
 ---
 
-#### **Social Media Handle (Optional):**
+#### Variations:
+- **1a.** The Salesperson issues the `sort asc` command to sort the contacts in ascending order.
+    - **Use case proceeds normally from Step 2.**
 
-**Acceptable Values:**
-
-- A string starting with `@`, followed by alphanumeric characters, with optional underscores or periods.
-- Examples: `@johnsmith`, `@emily.davis`.
-- Case-insensitive, and leading/trailing spaces are ignored.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid social media handle. Use @ followed by alphanumeric characters.`
-
-**Rationale:**
-
-- Standardizing the input ensures consistency and recognizes the format of common social media handles.
+- **1b.** The Salesperson issues the `sort desc` command to sort the contacts in descending order.
+    - **Use case proceeds normally from Step 2.**
 
 ---
 
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `Contact successfully added: <Name>`
-- GUI Change: The contact's details are displayed in the contact list.
-
-#### **Failure:**
-
-**Error Message Examples:**
-
-- Missing required parameters: `Error: Missing required parameters. Please provide name and phone number.`
-- Invalid phone number format: `Error: Invalid phone number format.`
-- Invalid birthday format: `Error: Invalid birthday format. Please use YYYY-MM-DD.`
-- Multiple errors: `Error: Invalid name and phone number. Please check the format and try again.`
-
-**Duplicate Handling:**
-
-- Duplicate entries are allowed except for the phone number.
-- If a duplicate name and address are detected, a warning message is shown: `Warning: Possible duplicate contact.`
+#### Postconditions:
+- The contact list is displayed in the specified alphabetical order. The system does not change the underlying data, only the view of the contact list.
 
 ---
 
-### 2. **Feature: Search Contacts by Name**
+### Use Case: **UC03 - Log Interaction with Contact**
 
-**Purpose:**
-To allow users to search through their contact list by entering part or all of a contact's name, helping filter and
-display relevant contacts based on the input.
+**Actor**: Salesperson  
+**Precondition**: The contact exists in the AddressBook contact list.  
+**Guarantees**: The interaction details are saved under the specified contact’s history, optionally including the date of the interaction, for future reference.
 
-#### **Command Format:**
+#### Main Success Scenario (MSS):
+1. The Salesperson issues the `log` command with a valid `ContactID`, an optional date (`d/`) in the `yyyy-mm-dd` format, and descriptive interaction details (`l/`).
+2. AddressBook validates each component:
+  - **ContactID**: Ensures the provided ID is a numeric identifier that corresponds to an existing contact in the AddressBook.
+  - **Date** (if included): Confirms that the date follows the required `yyyy-mm-dd` format and checks that it falls within the acceptable date range (not before the contact’s creation date or beyond the current date).
+  - **Interaction Details**: Verifies that the interaction details are provided and are non-empty, allowing the Salesperson to record free-form notes about the interaction, such as the nature, location, or purpose.
+3. Upon successful validation, AddressBook logs the interaction details in the contact’s profile. If a date is provided, it is also stored with the log entry.
+4. AddressBook displays a success message confirming the operation:
+   ```
+   Added history to Person: William Go; Phone: 96341234; Email: william.go@example.com; Address: Blk 34 Bishan St 23, #07-45; Remark: Looking to purchase condo; Birthday: 1975-12-30; Remark: Looking to purchase condo; Tags: [buyer]; DateOfCreation: 2024-01-22; History: Date of Creation: 2024-01-22
+   [2024-02-05]:
+     [2024-02-05] Negotiated condo deal
+   [2024-03-03]:
+     [2024-03-03] Follow-up on condo purchase
+   ; PropertyList: Property List:
+   Property at 246 Sentosa Cove, Sentosa (Condo): 180.00 sqm, 3 bed, 3 bath - $3000000.00
+   ```
+5. The contact’s interaction history is updated to include the new log entry, making it accessible for future reference and review.
 
-`search <Name>`
-
-**Example Commands:**
-
-- `search John`
-- `search Jane Doe`
-- `search Emily`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `search` command with a name or partial name as the input.
-2. The system filters the contact list to display all contacts matching the full or partial name.
-3. The system displays a list of matching contacts.
-4. The filtered contact list is shown in the GUI.
-
-   Use case ends.
-
----
-
-### **Parameters:**
-
-#### **Name:**
-
-**Acceptable Values:**
-
-- Must be a string containing alphabetic characters, with optional spaces, hyphens, and apostrophes.
-- Allows partial or full matches.
-- Case-insensitive (e.g., `JOHN` is treated the same as `John`).
-- Leading/trailing spaces are ignored.
-
-**Error Message:**
-
-- If invalid: `Error: Name must contain only alphabetic characters, spaces, hyphens, or apostrophes.`
-
-**Rationale:**
-
-- This format allows flexible searching, supporting both partial and full name searches while preventing invalid inputs.
+   **Use case ends.**
 
 ---
 
-### **Outputs:**
+#### Extensions:
+- **2a.** The `ContactID` is invalid or does not match any contact in the AddressBook:
+  - **2a1.** AddressBook displays an error message: `Error: Contact not found. Please check the ContactID and try again.`
+  - **2a2.** The Salesperson verifies or corrects the `ContactID` and reissues the `log` command.
+  - **Use case resumes from Step 2.**
 
-#### **Success:**
+- **2b.** The optional date is provided but is either in an invalid format or outside the valid range:
+  - **2b1.** AddressBook displays an error message: `Invalid date format or out of range. Please use "yyyy-mm-dd" format and ensure the date is valid.`
+  - **2b2.** The Salesperson corrects or removes the date and reissues the command.
+  - **Use case resumes from Step 2.**
 
-- Message: A list of matching contacts is displayed.
-  Example:
-  ```
-  Search results for "John":
-  1. John Smith - +123456789, john.smith@email.com
-  2. Mary Johnson - +987654321, mary.johnson@email.com
-  ```
-- GUI Change: The filtered contact list is displayed based on the search input.
-
-#### **Failure:**
-
-- No matching contacts: `Error: No contacts found for "John".`
-- Invalid input: `Error: Invalid name format. Please enter alphabetic characters only.`
-- Empty input: `Error: No name provided. Please enter a name to search.`
+- **2c.** The interaction details are missing or empty:
+  - **2c1.** AddressBook displays an error message: `Interaction details are required. Please provide a description of the interaction.`
+  - **2c2.** The Salesperson adds the interaction details and reissues the `log` command.
+  - **Use case resumes from Step 2.**
 
 ---
 
-### **Error Scenarios:**
-
-- **Invalid Characters in Name:**
-  Example: `search John123`
-  `Error: Name must contain only alphabetic characters, spaces, hyphens, or apostrophes.`
-
-- **No Matching Contacts:**
-  Example: `search Zyx`
-  `Error: No contacts found for "Zyx".`
-
-- **Empty Search Input:**
-  Example: `search` (with no name provided)
-  `Error: No name provided. Please enter a name to search.`
+#### Including Related Use Cases:
+- **UC06 - View Full Contact Details**: The Salesperson can use this case to view the entire history of interactions logged for a specific contact, including details added through this `log` command.
 
 ---
 
-### 3. **Feature: Alphabetical Sorting of Contact List by Name**
+#### Variations:
+- **1a.** The Salesperson includes an optional date in the interaction log (e.g., `d/<Event date>`).
+  - **Use case proceeds normally from Step 2.**
 
-**Purpose:**
-To allow users to sort their contact list in alphabetical order (A-Z or Z-A) based on the contact's name.
-
-#### **Command Format:**
-
-`sort <order>`
-*Default: Ascending order*
-
-**Example Commands:**
-
-- `sort asc` (to sort contacts in ascending order, A-Z)
-- `sort desc` (to sort contacts in descending order, Z-A)
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `sort` command, specifying either ascending or descending order.
-2. The system reorders the contact list based on the specified order.
-3. The sorted contact list is displayed.
-
-   Use case ends.
+- **1b.** The Salesperson omits the date, logging only the interaction details.
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
-### **Parameters:**
-
-#### **Order:**
-
-**Acceptable Values:**
-
-- Must be either `asc` (ascending) or `desc` (descending).
-- Case-insensitive (e.g., `ASC`, `Asc`, and `asc` are treated the same).
-- Leading/trailing spaces are ignored.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
-
-**Rationale:**
-
-- These sorting options are standard and user-friendly, making it easy for users to organize contacts.
+#### Postconditions:
+- The interaction is recorded under the specified contact’s history. If a date is provided, it is included with the log entry. This log is now accessible in future interactions for tracking communication history.
 
 ---
 
-### **Outputs:**
+### Use Case: **UC04 - Find Contacts by Name**
 
-#### **Success:**
+**Actor**: Salesperson  
+**Precondition**: The system contains a list of contacts.  
+**Guarantees**: The contacts matching the search criteria are displayed.
 
-- Message: Contacts are sorted in the specified order.
-  Example for ascending order:
-  ```
-  Contacts sorted A-Z:
-  1. Emily Davis - +123456789, emily.davis@email.com
-  2. John Smith - +987654321, john.smith@email.com
-  ```
-- GUI Change: The contact list is reordered alphabetically based on the specified order (A-Z or Z-A).
+#### **Main Success Scenario (MSS):**
+1. The Salesperson issues the `find` command with one or more keywords as input.
+2. The system performs a case-insensitive search of the contact list, matching contacts whose names contain any of the keywords provided (an OR search).
+   * The search matches only full words in the name field and ignores the order of keywords.
+3. The system displays a list of contacts that match at least one of the keywords.
+4. The system shows a success message: `<Number of persons matching the search> persons listed!`
 
-#### **Failure:**
-
-- Invalid order parameter: `Error: Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
-- Missing order parameter: `Error: No sorting order provided. Please specify 'asc' or 'desc'.`
+   **Use case ends.**
 
 ---
 
-### **Error Scenarios:**
-
-- **Invalid Sorting Order:**
-  Example: `sort ascending`
-  `Error: Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
-
-- **Missing Sorting Order:**
-  Example: `sort`
-  `Error: No sorting order provided. Please specify 'asc' or 'desc'.`
+### **Extensions:**
+- **2a.** The search input does not match any contacts.
+  - **2a1.** The system displays a message: `0 persons listed!`
+  - **Use case ends.**
 
 ---
 
-### 4. **Feature: Undo Contact Deletion**
-
-**Purpose:**
-To allow users to recover a contact that was recently deleted, providing a grace period during which deletions can be
-reversed.
-
-#### **Command Format:**
-
-`undo <ContactID>`
-
-**Example Commands:**
-
-- `undo 123`
-- `undo 4567`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `undo` command with a valid ContactID for a recently deleted contact.
-2. The system restores the contact to the contact list.
-3. A success message is displayed confirming the contact has been restored.
-
-   Use case ends.
+### Variations:
+- **1a.** The Salesperson enters multiple keywords (e.g., `find Alex David`).
+  - The system finds contacts that match at least one keyword, displaying persons such as `Alex Yeoh` and `David Li`.
+  - **Use case proceeds normally from Step 3.**
 
 ---
 
-### **Parameters:**
-
-#### **ContactID:**
-
-**Acceptable Values:**
-
-- Must be a numeric identifier (integer) assigned to the contact.
-- Must reference a contact that was recently deleted.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- If no recently deleted contact found: `Error: No recently deleted contact found with ID <ContactID>.`
-
-**Rationale:**
-
-- Ensures that only valid, recently deleted contacts are restored, preventing accidental recovery of the wrong contact.
+### Postconditions:
+- The list of matching contacts is displayed based on the keywords entered, allowing for case-insensitive and partial order matching.
 
 ---
 
-### **Outputs:**
+### Use Case: **UC05 - Add or Edit Remarks for a Contact**
 
-#### **Success:**
+**Actor**: Salesperson  
+**Precondition**: The contact already exists in the contact list.  
+**Guarantees**: The remark is added or updated for the specified contact and displayed in the contact's profile.
 
-- Message: `Contact <ContactID> has been successfully restored.`
-- GUI Change: The contact reappears in the contact list.
+#### Main Success Scenario (MSS):
+1. The Salesperson issues the `remark` command with a valid contact index and a remark message in the format: `remark <index> r/<remark message>`.
+2. The system validates the contact index to ensure it:
+   - References an existing contact in the current list.
+   - Is a positive integer within the list's range.
+3. The system adds or updates the remark for the specified contact. If a remark already exists, it is replaced with the new message; otherwise, a new remark is added.
+4. The system displays a success message: `Remark updated for contact at index <index>: "<remark message>"`.
+5. The contact’s profile is updated, and the new remark appears in the contact list view.
 
-#### **Failure:**
-
-- Invalid ContactID: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- No Recently Deleted Contact: `Error: No recently deleted contact found with ID <ContactID>.`
-- Undo Not Possible: `Error: Cannot undo deletion. The grace period has expired or the contact does not exist.`
-
----
-
-### **Error Scenarios:**
-
-- **Invalid ContactID:**
-  Example: `undo abc`
-  `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-
-- **No Recently Deleted Contact:**
-  Example: `undo 9999` (assuming 9999 is not in the recent deletion history)
-  `Error: No recently deleted contact found with ID 9999.`
-
-- **Undo Operation Not Possible:**
-  Example: `undo 123` (if the grace period has expired or the contact is no longer recoverable)
-  `Error: Cannot undo deletion. The grace period has expired or the contact does not exist.`
+   **Use case ends.**
 
 ---
 
-### 5. **Feature: Interaction History Log for Each Contact**
-
-**Purpose:**
-To maintain a log of interactions (such as calls, messages, meetings) with each contact, allowing users to track and
-review their communication history.
-
-#### **Command Format:**
-
-`log <ContactID> [d/<Event date>] l/<InteractionDetails>`
-
-**Example Commands:**
-
-- `log 123 l/Called today, discussed project updates`
-- `log 4567 l/Meeting today, reviewed quarterly report`
-- `log 4567 d/2024-09-16 l/Meeting on 2024-09-16, reviewed quarterly report`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `log` command with a valid ContactID and interaction details.
-2. The system saves the interaction details to the contact’s history.
-3. A success message is displayed confirming that the interaction has been logged.
-4. The interaction details are added to the contact's profile.
-
-   Use case ends.
+### Extensions:
+- **2a.** The contact index is invalid or does not exist:
+  - **2a1.** If the index is out of range, the system displays: `The person index provided is invalid.`
+  - **2a2.** If the index format is incorrect (e.g., not an integer), the system displays: 
+    ```
+    Invalid command format! 
+    remark: Edits the remark of the person identified by the index number used in the last person listing. Existing remark will be overwritten by the input.
+    Parameters: INDEX (must be a positive integer) r/[REMARK]
+    Example: remark 1 r/Likes to swim.
+    ```
+  - **2a3.** The Salesperson corrects the index and reissues the command.
+  - **Use case resumes from Step 2.**
 
 ---
 
-### **Parameters:**
-
-#### **ContactID:**
-
-**Acceptable Values:**
-
-- Must be a numeric identifier (integer) assigned to the contact.
-- Case-insensitive.
-- Leading/trailing spaces are ignored.
-- Format: Must be a positive integer.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- If contact not found: `Error: Contact not found. Please check the ContactID and try again.`
-
-**Rationale:**
-
-- Ensures the correct contact is updated with interaction details, preventing errors.
-
-#### **Date: (Optional)**
-**Acceptable Values:**
-
-- The date must be in the format yyyy-mm-dd, and must be no earlier than the date of creation of the contact,
-- and no later than today (System time)
-- Examples: `2024-02-01`, `2021-12-31`, `1999-09-23`.
-
-**Rationale:**
-
-- Ensure no event happening before the contact is added, or in the future is logged.
-
-#### **Logging message:**
-
-**Acceptable Values:**
-
-- A free-form text field describing the interaction, including date, time, and nature of the interaction.
-- Leading/trailing spaces are ignored.
-
-**Error Message:**
-
-- If missing: `Error: Interaction details are required. Please provide a description of the interaction.`
-
-**Rationale:**
-
-- Provides flexibility in recording different types of interactions.
+### Including Related Use Cases:
+- **UC06 - View Full Contact Details**: This use case allows the Salesperson to verify that the remark was correctly added or updated by viewing the contact's details.
 
 ---
 
-### **Outputs:**
+### Variations:
+- **1a.** The Salesperson issues the `remark` command with a new remark for the contact.
+  - **Use case proceeds normally from Step 2.**
 
-#### **Success:**
-
-- Message: `Interaction logged for contact <ContactID>: "<InteractionDetails>"`
-- GUI Change: The interaction details are added to the contact's interaction history log, which can be viewed or edited.
-
-#### **Failure:**
-
-- Invalid ContactID: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- Contact Not Found: `Error: Contact not found. Please check the ContactID and try again.`
-- Missing Interaction
-  Details: `Error: Interaction details are required. Please provide a description of the interaction.`
+- **1b.** The Salesperson edits an existing remark by issuing the `remark` command with a new remark message.
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
-### **Error Scenarios:**
-
-- **Invalid ContactID:**
-  Example: `log abc l/Called on 2024-09-15`
-  `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-
-- **Contact Not Found:**
-  Example: `log 9999 l/Meeting on 2024-09-16`
-  `Error: Contact not found. Please check the ContactID and try again.`
-
-- **Missing Interaction Details:**
-  Example: `log 123`
-  `Error: Interaction details are required. Please provide a description of the interaction.`
+### Postconditions:
+- The remark is saved or updated for the contact, with any leading or trailing spaces in the message ignored. The updated remark is displayed in the contact's profile within the contact list.
 
 ---
 
-### 6. **Feature: Create Tags for Contact Categorization**
+### Use Case: **UC06 - View Full Contact Details**
 
-**Purpose:**
-To allow users to create custom tags for contacts, categorizing them based on certain characteristics, such as "high net
-worth," "first-time buyer," etc., for better organization and personalization of client interactions.
+**Actor**: Salesperson  
+**Precondition**: The contact exists in the contact list.  
+**Guarantees**: The full details of the contact are displayed in a single page pop-out view for the Salesperson.
 
-#### **Command Format:**
+#### Main Success Scenario (MSS):
+1. The Salesperson issues the `view` command with a valid contact index in the format `view <index>`.
+2. The system validates the index, ensuring:
+   - It references an existing contact in the current list.
+   - It is a positive integer within the list's range.
+3. Upon successful validation, the system retrieves and displays all available details of the contact in a pop-out GUI window, ensuring a single, focused view for all information related to the contact.
+4. The system displays a success message: `Person details displayed`.
 
-`ct <TagName> [create tag]`
-
-**Example Commands:**
-
-- `ct hnw`
-- `ct ftb`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `ct` command with a tag name.
-2. The system verifies if the tag already exists.
-3. If the tag does not exist, it creates the new tag and displays a success message.
-4. The new tag is added to the list of available tags for future use.
-
-   Use case ends.
+   **Use case ends.**
 
 ---
 
-### **Parameters:**
+### Extensions:
+- **2a.** The contact index is invalid or does not exist.
+  - **2a1.** If the index is out of range, the system displays an error message: `The person index provided is invalid.`
+  - **2a2.** If the index format is incorrect (e.g., non-numeric or contains decimal values), the system displays:
+    ```
+    Invalid command format! 
+    view: Displays the full information of the person identified by the index number used in the last person listing. View window can be closed by the "close" command.
+    Parameters: INDEX (must be a positive integer)
+    Example: view 1
+    ```
+  - **2a3.** The Salesperson corrects the index and reissues the command.
+  - **Use case resumes from Step 2.**
 
-#### **Tag Name:**
-
-**Acceptable Values:**
-
-- The tag must not already exist in the system.
-- Must be a valid string with alphabetic characters, optionally including hyphens.
-
-**Error Message:**
-
-- If missing: `Error: Tag name is required. Please provide one from the pre-existing list.`
-- If the tag already exists: `Error: The tag already exists.`
-
-**Rationale:**
-
-- Allows flexible creation of tags for categorizing contacts. Ensures tags are unique and useful.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `The tag was successfully created.`
-- GUI Change: The new tag appears in the tag list for future use.
-
-#### **Failure:**
-
-- Duplicate Tag Creation: `Error: The tag already exists.`
+- **3a.** The contact is missing some optional information (e.g., birthday, social media handle).
+  - **3a1.** The system displays a message: `Some details are missing for this contact.`
+  - **Use case resumes from Step 4.**
 
 ---
 
-### **Error Scenarios:**
-
-- **Duplicate Tag Creation:**
-  Example: User tries to create a tag that already exists:
-  `ct hnw`
-  `Error: The tag already exists.`
+### Including Related Use Cases:
+- **UC15 - Add a New Contact**: If the Salesperson finds incomplete information, they may choose to create a new contact with complete details.
+- **UC05 - Add or Edit Remarks for a Contact**: After viewing the contact’s full details, the Salesperson may choose to add or update remarks for additional context.
 
 ---
 
-### 7. **Feature: Find Function**
+### Variations:
+- **1a.** The Salesperson views a contact with all fields filled in (name, phone, email, address, birthday, and social media handle).
+  - **Use case proceeds normally from Step 2.**
 
-**Purpose:**
-To enable users to search for clients by matching on specific fields (e.g., name, address, tag), allowing for efficient
-retrieval of client information based on various criteria.
-
-#### **Command Format:**
-
-`find [n/NAME] [a/ADDRESS] [t/TAG]...`
-
-**Example Commands:**
-
-- `find n/John p/65353535 a/Changi t/hnw`
-- `find a/New York`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `find` command with specific search parameters (e.g., name, address, or tag).
-2. The system retrieves contacts that match the search criteria.
-3. A list of matching contacts is displayed.
-
-   Use case ends.
+- **1b.** The Salesperson views a contact with only mandatory fields filled (name and phone).
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
-### **Parameters:**
-
-#### **Find Command:**
-
-**Acceptable Values:**
-
-- Command syntax must follow the exact format (e.g., `n/`, `a/`, `t/`).
-
-**Error Message:**
-
-- If incorrect format: `Error: Command format is incorrect. Please look at the User Guide for the appropriate format.`
-
-**Rationale:**
-
-- Allows flexible searches based on multiple fields for better filtering and retrieval of contact information.
+### Postconditions:
+- The contact details are fully displayed in a single-page pop-out window, allowing the Salesperson to review or edit information as needed.
 
 ---
 
-### **Outputs:**
+### Use Case: **UC07 - Mark Contact as Favourite**
+**Actor**: Salesperson  
+**Precondition**: The contact exists in the contact list.  
+**Guarantees**: The contact is marked as a favourite, and the Salesperson can easily access it from the favourite list.
 
-#### **Success:**
+#### Main Success Scenario (MSS):
+1. The Salesperson issues the `favourite` command with a valid `ContactID`.
+2. The system validates the `ContactID`.
+3. The system marks the contact as a favourite.
+4. The system displays a success message: `Contact <Name> marked as a favourite.`
 
-- Message: `3 contacts were found that match the inputted parameters:`
-    - `ContactID: 23 Name: John Greene`
-    - `ContactID: 42 Name: John Paul Sartre`
-    - `ContactID: 88 Name: John Constantine`
-- If no matches found: `No contacts were found matching those exact parameters.`
-
-#### **Failure:**
-
-- Invalid Command: `Error: Invalid command entered. Please provide a valid command.`
-- Invalid Search
-  Parameter: `Error: Invalid search parameter entered. Please ensure that the search parameters match the syntax requirements.`
+   **Use case ends.**
 
 ---
 
-### **Error Scenarios:**
+#### Extensions:
+- **2a.** The `ContactID` is invalid or does not exist.
+    - **2a1.** The system displays an error message: `The person index provided is invalid`
+    - **2a2.** The Salesperson corrects the `ContactID` and reissues the command.
+    - **Use case resumes from Step 2.**
 
-- **Invalid Command:**
-  Example: `Find`
-  `Error: Invalid command entered. Please provide a valid command.`
-
-- **Invalid Search Parameter:**
-  Example: `N/`
-  `Error: Invalid search parameter entered. Please ensure that the search parameters match the syntax requirements.`
-
----
-
-### 8. **Feature: Add or Edit Remarks for a Contact**
-
-**Purpose:**
-To allow users to add or update a remark for a contact, providing additional notes or information that may not be captured in other fields (e.g., preferences, additional details).
-
-#### **Command Format:**
-
-`remark <index> r/<remark message>`
-
-**Example Commands:**
-
-- `remark 1 r/Interested in buying a condo`
-- `remark 3 r/Prefers communication via email`
-- `remark 5 r/Follow up in June regarding new listings`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `remark` command with a valid index and a remark message.
-2. The system updates the contact at the given index with the provided remark.
-3. A success message is displayed confirming that the remark has been added or updated.
-4. The contact’s remark field is updated and displayed in the contact list.
-
-   Use case ends.
+- **3a.** The contact is already marked as a favourite.
+    - **3a1.** The system displays a message: `Contact is already marked as a favourite.`
+    - **Use case ends.**
 
 ---
 
-### **Parameters:**
-
-#### **Index:**
-
-**Acceptable Values:**
-
-- Must be a valid index number referencing a contact in the current contact list.
-- Must be a positive integer.
-
-**Error Message:**
-
-- Invalid Index (range): `Error: The person index provided is invalid`
-- Invalid Index (format): `Error: Invalid command format! <command format>`
-
-**Rationale:**
-
-- Ensures the correct contact is being updated with the new remark, preventing errors.
-
-#### **Remark Message:**
-
-**Acceptable Values:**
-
-- Any string can be entered as a remark (e.g., client notes, preferences, etc.).
-- Leading/trailing spaces are ignored.
-- Empty strings are treated as an empty remark.
-
-**Error Message:**
-
-
-**Rationale:**
-
-- Allows flexibility in adding any kind of additional notes or information for the contact.
+#### Including Related Use Cases:
+- **UC06 - View Full Contact Details**: This use case may be referenced if the Salesperson wants to mark a contact as favourite after reviewing their full details.
 
 ---
 
-### **Outputs:**
+#### Variations:
+- **1a.** The Salesperson marks a new contact as favourite.
+    - **Use case proceeds normally from Step 2.**
 
-#### **Success:**
+- **1b.** The Salesperson marks an existing contact that was not previously marked as favourite.
+    - **Use case proceeds normally from Step 2.**
 
-- Message: `Remark updated for contact at index <index>: "<remark message>"`
-- GUI Change: The remark is updated and shown in the contact list.
+---
 
-#### **Failure:**
+#### Postconditions:
+- The contact is marked as a favourite, and if 'favourite' is entered, it will appear at the top of the contact list for easier access.
 
-- Invalid Index (range): `Error: The person index provided is invalid`
-- Invalid Index (format): `Error: Invalid command format! <command format>`
+---
+
+### Use Case: **UC08 - Add Birthday Reminder for a Contact**
+**Actor**: Salesperson  
+**Precondition**: The contact exists in the contact list and has a valid birthday.  
+**Guarantees**: The birthday is saved for the contact, and the Salesperson will receive a reminder notification before the birthday.
+
+#### Main Success Scenario (MSS):
+1. The Salesperson issues the `birthday` command with a valid `ContactID` and birthday date.
+2. The system validates the `ContactID` and birthday format.
+3. The system stores the birthday for the contact.
+4. The system displays a success message: `Birthday for <Name> logged as <BirthdayDate>.`
+
+   **Use case ends.**
+
+---
+
+#### Extensions:
+- **2a.** The `ContactID` is invalid or does not exist.
+    - **2a1.** The system displays an error message: `Invalid ContactID. Please provide a valid numeric identifier.`
+    - **2a2.** The Salesperson corrects the `ContactID` and reissues the command.
+    - **Use case resumes from Step 2.**
+
+- **2b.** The birthday format is incorrect.
+    - **2b1.** The system displays an error message: `Invalid birthday format. Please use YYYY-MM-DD or MM-DD.`
+    - **2b2.** The Salesperson corrects the birthday format and reissues the command.
+    - **Use case resumes from Step 2.**
+
+---
+
+#### Including Related Use Cases:
+- **UC03 - Log Interaction with Contact**: This use case may be referenced when logging a reminder notification as an interaction.
+- **UC06 - View Full Contact Details**: The Salesperson can view the saved birthday in the full contact profile.
+
+---
+
+#### Variations:
+- **1a.** The Salesperson logs a birthday in the format `YYYY-MM-DD` (e.g., `2024-10-15`).
+    - **Use case proceeds normally from Step 2.**
+
+- **1b.** The Salesperson logs a birthday in the format `MM-DD` (e.g., `10-15`).
+    - **Use case proceeds normally from Step 2.**
+
+---
+
+#### Postconditions:
+- The birthday is stored in the contact’s profile, and a reminder will be triggered for the Salesperson close to the date.
+
+---
+
+### Use Case: **UC09 - Display Help Information**
+
+**Actor**: Salesperson  
+**Precondition**: The system is running, and the Salesperson needs assistance with commands.  
+**Guarantees**: The system displays basic help information.
+
+#### Main Success Scenario (MSS):
+1. The Salesperson issues the `help` command.
+2. The system displays help information with a list of commands.
+
+   **Use case ends.**
+
+---
+
+#### Extensions:
+- There are no extensions for this use case as the `help` command always succeeds.
+
+---
+
+#### Postconditions:
+- Help information is displayed to assist the Salesperson with command usage.
+
+---
+
+### Use Case: **UC10 - Clear All Contacts**
+**Actor**: Salesperson  
+**Precondition**: The system contains a list of contacts.  
+**Guarantees**: All contacts are deleted from the system, and the Salesperson receives confirmation.
+
+#### Main Success Scenario (MSS):
+1. The Salesperson issues the `clear` command.
+2. The system deletes all contacts from the contact list.
+3. The system shows a success message: `All contacts have been deleted.`
+
+   **Use case ends.**
+
+---
+
+#### Extensions:
+- There are no extensions for this use case as the `clear` command always succeeds.
+
+---
+
+#### Including Related Use Cases:
+- **UC09 - Display Help Information**: The `help` command will include information on how to use the `clear` command.
+- **UC10 - Delete a Contact**: This use case is related to clearing all contacts, as it handles individual deletion.
+
+---
+
+#### Variations:
+- **1a.** The Salesperson clears all contacts after reviewing them using the `list` command.
+    - **Use case proceeds normally from Step 2.**
+
+---
+
+#### Postconditions:
+- All contacts are removed from the system, and the contact list is now empty.
+
+---
+
+### Use Case: **UC11 - Exit Application**
+**Actor**: Salesperson  
+**Precondition**: The Salesperson is interacting with the system and wants to close the application.  
+**Guarantees**: The application closes safely, and any unsaved data is automatically saved.
+
+#### Main Success Scenario (MSS):
+1. The Salesperson issues the `exit` command.
+2. The system checks for any unsaved changes and automatically saves them if needed.
+3. The system closes the application.
+
+   **Use case ends.**
+
+---
+
+#### Extensions:
+- There are no extensions for this use case as the `exit` command always succeeds.
+
+---
+
+#### Including Related Use Cases:
+- **UC13 - Saving Data Automatically**: This use case is directly referenced during Step 2 when the system attempts to automatically save data before closing the application.
+- **UC09 - Display Help Information**: The `help` command will include information on how to use the `exit` command.
+
+---
+
+#### Variations:
+- **1a.** The Salesperson exits the application without unsaved changes.
+    - **Use case proceeds normally from Step 3.**
+
+- **1b.** The Salesperson exits the application with unsaved changes, and the system successfully saves the data.
+    - **Use case proceeds normally from Step 2.**
+
+---
+
+#### Postconditions:
+- The application is closed, and all data is saved automatically if needed.
+
+---
+
+### Use Case: **UC12 - Saving Data Automatically**
+**Actor**: System (implicitly triggered by the Salesperson’s actions)  
+**Precondition**: The Salesperson performs any action that modifies the contact list.  
+**Guarantees**: The system automatically saves the modified contact list to the storage file after each operation.
+
+#### Main Success Scenario (MSS):
+1. The Salesperson performs an operation that modifies the contact list (e.g., `add`, `delete`, `edit`).
+2. The system automatically saves the modified contact list to the storage file.
+3. The system ensures that the changes are successfully saved without explicit user intervention.
+
+   **Use case ends.**
+
+---
+
+#### Extensions:
+- **2a.** The system encounters an error while saving the data.
+    - **2a1.** The system displays an error message: `Unable to save data automatically. Please save manually.`
+    - **2a2.** The system retries saving automatically after the next operation or prompts the Salesperson to manually save the data.
+    - **Use case ends.**
+
+---
+
+#### Including Related Use Cases:
+- **UC12 - Exit Application**: This use case references the automatic saving mechanism during Step 2 to ensure data is saved before exiting the application.
+- **UC14 - Edit Data File Manually**: This use case is referenced if the automatic save fails, and the Salesperson may choose to manually edit the data file.
+
+---
+
+#### Variations:
+- **1a.** The Salesperson performs a valid operation that modifies the contact list.
+    - **Use case proceeds normally from Step 2.**
+
+- **1b.** The system automatically saves data after each operation without explicit user interaction.
+    - **Use case proceeds normally from Step 2.**
+
+---
+
+#### Postconditions:
+- The contact list is saved automatically after each operation, ensuring data consistency.
+
+---
+
+### Use Case: **UC13 - Edit Data File Manually**
+**Actor**: Salesperson  
+**Precondition**: The Salesperson has access to the data file and is familiar with the required format for making changes.  
+**Guarantees**: The Salesperson can manually edit the data file, and the system loads the updated data during the next session.
+
+#### Main Success Scenario (MSS):
+1. The Salesperson manually opens the data file and edits the contents (e.g., adds, edits, or removes contacts) while adhering to the correct format.
+2. The system loads the updated data file when the application is restarted.
+3. The system verifies that the format is valid and updates the contact list accordingly.
+
+   **Use case ends.**
+
+---
+
+#### Extensions:
+- **3a.** The format of the data file is incorrect.
+    - **3a1.** The system displays an error message: `Error: Data file format is incorrect. Please adhere to the correct format.`
+    - **3a2.** The Salesperson corrects the format and restarts the application.
+    - **Use case resumes from Step 2.**
+
+---
+
+#### Including Related Use Cases:
+- **UC12 - Saving Data Automatically**: This use case is referenced if the Salesperson manually edits the data file after automatic saving fails.
+- **UC09 - Display Help Information**: The `help` command will provide guidance on how to ensure the data file is correctly formatted for manual edits.
+
+---
+
+#### Variations:
+- **1a.** The Salesperson successfully edits the data file and restarts the application to load the changes.
+    - **Use case proceeds normally from Step 3.**
+
+- **1b.** The Salesperson makes an error in the format, and the system rejects the data file.
+    - **Use case proceeds with Extension 3a.**
+
+---
+
+#### Postconditions:
+- The updated data from the file is successfully loaded, provided the format is valid.
 
 ---
 
@@ -1127,98 +963,176 @@ To allow users to add or update a remark for a contact, providing additional not
 
 - **Invalid Index:**
   Example: `remark abc r/Important client`
-  `Error: Invalid command format! <command format>`
-
-
----
-
-### 9. **Feature: Single Page View for a Contact**
-
-**Purpose:**
-To allow users to view the full information of a selected contact in the application
-in another pop-out window
-
-#### **Command Format:**
-
-`view <index>`
-
-**Example Commands:**
-
-- `view 1`
-- `view 3`
-
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `view` command with a valid index.
-2. The system displays the pop-out GUI window.
-
-
-Use case ends.
-
----
-
-### **Parameters:**
-
-#### **Index:**
-
-**Acceptable Values:**
-
-- Must be a valid index number referencing a contact in the current contact list.
-- Must be a positive integer.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid index. Please provide a valid contact index.`
-
-**Rationale:**
-
-- Ensures the correct contact is being displayed, preventing UI errors.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `Person details displayed`
-- GUI Change: The updated pop-up window is displayed.
-
-#### **Failure:**
-
-- Invalid Index (range): `Error: The person index provided is invalid`
-- Invalid Index (format): `Error: Invalid command format! <command format>`
-
----
-
-### **Error Scenarios:**
-
-- **Invalid Index:**
-  Example: `view 0`
-  `Error: The person index provided is invalid`
+  `Error: Invalid index. Please provide a valid contact index.`
 
 - **Missing Remark:**
-  Example: `view 1.1`
-  `Error: Invalid command format! <command format>`
+  Example: `remark 1`
+  `Error: Remark message is required.`
+
+
+### Use Case: **UC14 - Add a New Contact**
+
+**Actor**: User  
+**Precondition**: The AddressBook application is running, and the User wants to add a new contact.  
+**Guarantees**: A new contact with valid information is added to the AddressBook.
+
+#### Main Success Scenario (MSS):
+1. The User issues the `add` command, specifying a full name and phone number as mandatory fields, with optional fields such as address, birthday, email, social media handle, remark, and tag.
+2. AddressBook validates the input parameters for correctness.
+3. AddressBook adds the new contact to the contact list.
+4. AddressBook displays a success message: `Contact successfully added: <Name>.`
+5. The newly added contact appears in the contact list.
+
+   **Use case ends.**
 
 ---
 
+#### Extensions:
+- **2a.** One or more required fields are missing.
+    - **2a1.** AddressBook displays an error message:
+      ```
+      Invalid command format!
+      add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
+      Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney
+      ```
+    - **Use case ends.**
 
-*{More to be added}*
+- **2b.** Input parameters are invalid (e.g., incorrect phone number format).
+    - **2b1.** Invalid `Name` parameter.
+      - **2b1.1** AddressBook displays an error message: `Names should only contain alphanumeric characters and spaces, and it should not be blank`
+      - **Use case ends.**
+    
+      - **2b2.** Invalid `Phone Number` parameter.
+        - **2b2.1** AddressBook displays an error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
+        - **Use case ends.**
+    
+      - **2b4.** Invalid `Birthday` parameter.
+        - **2b4.1** AddressBook displays an error message: `Birthday should be a valid date of the format yyyy-mm-dd and be within reasonable limits.`
+        - **Use case ends.**
+    
+      - **2b5.** Invalid `Email` parameter.
+        - **2b5.1** AddressBook displays an error message: 
+          ```
+          Emails should be of the format local-part@domain and adhere to the following constraints:
+          1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+          2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+          The domain name must:
+              - end with a domain label at least 2 characters long
+              - have each domain label start and end with alphanumeric characters
+              - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+          ```
+        - **Use case ends.**
+    
+      - **2b6.** Invalid command syntax.
+        - **2b7.1** AddressBook displays an error message: `Invalid command format! 
+                                                            add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
+                                                            Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
+        - **Use case ends.**
+    
+- **2c.** The contact already exists in the AddressBook.
+    - **2c1.** AddressBook displays a warning message: `This person already exists in the address book`
+    - **Use case resumes at Step 3.**
+
+---
+
+#### Postconditions:
+- The new contact with valid details is saved and displayed in the AddressBook. If any errors occur, the contact is not added.
+
+---
+
+### Use Case: **UC15 - Add Property for a Contact**
+
+**Actor**: User  
+**Precondition**: The AddressBook application is running, and the User has a contact they wish to associate with a property listing.  
+**Guarantees**: The specified property listing is added to the chosen contact in the AddressBook.
+
+#### Main Success Scenario (MSS):
+1. The User issues the `addProperty` command, specifying a valid index and complete property details, including address, town, type, size, number of bedrooms, number of bathrooms, and price.
+2. AddressBook validates each parameter for correctness:
+  - **Address** is checked to confirm it is non-empty and follows an acceptable alphanumeric and punctuation format.
+  - **Town** is validated as a non-empty, alphabetic string.
+  - **Property Type** is validated to ensure it is a valid type (e.g., "Condo", "HDB", "Landed").
+  - **Size** is validated as a positive number representing square meters.
+  - **Number of Bedrooms** is validated as a non-negative integer.
+  - **Number of Bathrooms** is validated as a non-negative integer.
+  - **Price** is validated as a positive number representing the asking price in the relevant currency.
+3. AddressBook adds the validated property details to the contact at the specified index.
+4. AddressBook displays a success message and updates the contact's details with the new property listing.
+
+   **Use case ends.**
+
+---
+
+#### Extensions:
+- **1a.** The command format is invalid.
+  - **1a1.** AddressBook displays an error message: `Invalid command format! <command format>.`
+  - **Use case ends.**
+
+- **2a.** The provided index is out of range or does not correspond to any contact.
+  - **2a1.** AddressBook displays an error message: `The person index provided is invalid.`
+  - **Use case ends.**
+
+- **2b.** One or more property details are missing or invalid:
+  - **2b1.** AddressBook displays specific error messages based on the missing or invalid parameter:
+    - **Missing Address**: `Address must be provided.`
+    - **Invalid Town**: `Town must be a valid non-empty string.`
+    - **Invalid Property Type**: `Property type must be one of the accepted types (e.g., Condo, HDB, Landed).`
+    - **Invalid Size**: `Size must be a positive number representing square meters.`
+    - **Invalid Bedrooms**: `Bedrooms must be a non-negative integer.`
+    - **Invalid Bathrooms**: `Bathrooms must be a non-negative integer.`
+    - **Invalid Price**: `Price must be a positive number.`
+  - **Use case ends.**
+
+---
+
+#### Postconditions:
+- The contact’s property list is updated to include the new property listing if all inputs are valid. If any errors occur, the property is not added.
+
+---
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
-   able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Portability:**
+- The app should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+
+2. **Performance:**
+  - The app should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+  - The search and sort functions should return results within 2 seconds for the average number of contacts.
+
+3. **Efficiency**
+  - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+    able to accomplish most of the tasks faster using commands than using the mouse.
+
+4. **Usability:**
+  - The interface should be intuitive, requiring less than 15 minutes of training for a real estate agent to become proficient.
+  - The app should provide clear error messages for incorrect inputs (e.g., invalid phone numbers, dates) and guide the user in correcting them.
+
+5. **Reliability:**
+  - The app must have an uptime of at least 99.5% during business hours.
+  - Data, such as contacts and interaction logs, should be autosaved after each modification, ensuring no loss of data during usage.
+
+6. **Scalability:**
+  - While optimized for a moderate number of contacts (up to 1000), the app should still function with reduced performance for up to 2,000 contacts.
+
+7. **Maintainability:**
+  - The codebase should follow standard code style and be modular, ensuring ease of updates and bug fixes.
+  - The app should allow easy export and import of contact data for backup or migration purposes.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+
+* **Real Estate Agent**: A professional who manages the buying, selling, and renting of properties, and maintains relationships with clients.
+
+* **Contact List**: A digital repository where client details such as name, phone number, address, and email are stored.
+
+* **Interaction Log**: A chronological record of communication or meetings with a client, typically used to track past engagements.
+
+* **CLI (Command Line Interface)**: A user interface where commands are typed, offering a faster alternative to graphical interface interactions.
+
+* **Favourite**: A contact marked as important for easy access.
 
 --------------------------------------------------------------------------------------------------------------------
 
