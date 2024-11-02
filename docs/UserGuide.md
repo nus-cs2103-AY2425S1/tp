@@ -154,6 +154,8 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+<box type="warning" seamless>
+
 **Caution:**
 This action is irreversible and cannot be undone. Please ensure you have backed up any important information before proceeding.
 </box>
