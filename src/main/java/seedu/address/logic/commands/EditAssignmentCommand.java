@@ -89,7 +89,7 @@ public class EditAssignmentCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
-        studentToEdit.updateAssignment(assignmentIndex.getZeroBased(), editedAssignment);
+        studentToEdit.updateAssignment(assignmentIndex, editedAssignment);
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS, assignmentIndex.getOneBased(),
