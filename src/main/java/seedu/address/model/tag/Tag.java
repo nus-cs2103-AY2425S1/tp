@@ -15,6 +15,7 @@ public class Tag {
 
     public final String tagName;
     private TagCategory tagCategory;
+    private int occurrences = 0;
 
     /**
      * Constructs a {@code Tag}.
@@ -36,7 +37,7 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
-        this.tagCategory = TagCategory.GENERAL;
+        this.tagCategory = category;
     }
 
     /**
@@ -70,7 +71,23 @@ public class Tag {
         return this.tagCategory.getColorCode();
     }
 
+    public int getOccurrences() {
+        return occurrences;
+    }
 
+    /**
+     * Tncrease the recorded occurrences by 1.
+     */
+    public void incrementOccurrences() {
+        occurrences = occurrences + 1;
+    }
+
+    /**
+     * Decrease the recorded occurrences by 1.
+     */
+    public void decrementOccurrences() {
+        occurrences = occurrences - 1;
+    }
 
     @Override
     public boolean equals(Object other) {

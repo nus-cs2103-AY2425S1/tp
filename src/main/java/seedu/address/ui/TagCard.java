@@ -26,6 +26,8 @@ public class TagCard extends UiPart<Region> {
     public TagCard(Tag tag, int displayedIndex) {
         super(FXML);
         this.tag = tag;
-        tagName.setText((displayedIndex + 1) + ". " + tag.tagName);
+        // Tag category displayed for visual testing
+        // TODO: remove tag category text display after implementing colour code
+        tagName.setText((displayedIndex + 1) + ". " + tag.tagName + "(" + tag.getTagCategory() + ")");
     }
 }

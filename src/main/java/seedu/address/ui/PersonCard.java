@@ -51,7 +51,9 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                // Tag category displayed for visual testing
+                // TODO: remove tag category text display after implementing colour code
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName + " " + tag.getTagCategory())));
 
         // add horizontal and vertical gaps for the tags FlowPane
         tags.setHgap(5);
