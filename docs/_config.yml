@@ -15,7 +15,7 @@ sidebar:
     toc: true
   - title: "About Us"
     url: AboutUs.html
-    toc: true
+    toc: false
 
 markdown: kramdown
 
@@ -24,3 +24,5 @@ github_icon: "images/github-icon.png"
 
 plugins:
   - jemoji
+  - jekyll-toc
+

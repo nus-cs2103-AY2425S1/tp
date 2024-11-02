@@ -16,11 +16,9 @@
       <li>
         <a href="{{ item.url }}">{{ item.title }}</a>
         {% if item.toc %}
-        <button onclick="toggleTOC('{{ item.title | replace: ' ', '-' }}')">Toggle TOC</button>
+        <button onclick="toggleTOC('{{ item.title | replace: ' ', '-' }}')">Details</button>
         <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
-          <ul>
-            <!-- Adjust heading logic based on TOC plugin or manual TOC -->
-          </ul>
+          {% include toc.html %}
         </div>
         {% endif %}
       </li>
