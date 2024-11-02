@@ -65,19 +65,19 @@ public class DateTest {
     @Test
     public void parseDateTime_validDate_returnsLocalDateTime() throws ParseException {
         assertEquals(LocalDateTime.of(2024, 2, 29, 18, 0),
-                Date.parseDateString("29/2/2024 1800"));
+                Date.parseDateTime("29/2/2024 1800"));
     }
 
     // Leap year checks
     @Test
     public void parseDateTime_february29LeapYear_returnsLocalDateTime() throws ParseException {
         assertEquals(LocalDateTime.of(2024, 2, 29, 0, 0),
-                Date.parseDateString("29/2/2024 0000"));
+                Date.parseDateTime("29/2/2024 0000"));
     }
 
     @Test
     public void parseDateTime_february29NonLeapYear_throwsParseException() {
-        assertThrows(ParseException.class, () -> Date.parseDateString("29/2/2023 0000"),
+        assertThrows(ParseException.class, () -> Date.parseDateTime("29/2/2023 0000"),
                 "Invalid date: February 29 is only valid in leap years.");
     }
 
@@ -85,21 +85,21 @@ public class DateTest {
     @Test
     public void parseDateTime_invalid31stApril_throwsParseException() {
         ParseException thrown =
-                assertThrows(ParseException.class, () -> Date.parseDateString("31/4/2024 1200"));
+                assertThrows(ParseException.class, () -> Date.parseDateTime("31/4/2024 1200"));
         assertEquals("Invalid date: APRIL cannot have more than 30 days.", thrown.getMessage());
     }
 
     @Test
     public void parseDateTime_invalid31stJune_throwsParseException() {
         ParseException thrown =
-                assertThrows(ParseException.class, () -> Date.parseDateString("31/6/2024 1200"));
+                assertThrows(ParseException.class, () -> Date.parseDateTime("31/6/2024 1200"));
         assertEquals("Invalid date: JUNE cannot have more than 30 days.", thrown.getMessage());
     }
 
     @Test
     public void parseDateTime_invalid31stFeb_throwsParseException() {
         ParseException thrown =
-                assertThrows(ParseException.class, () -> Date.parseDateString("31/2/2024 1200"));
+                assertThrows(ParseException.class, () -> Date.parseDateTime("31/2/2024 1200"));
         assertEquals("Invalid date: FEBRUARY cannot have more than 29 days.", thrown.getMessage());
     }
 
@@ -107,7 +107,7 @@ public class DateTest {
     @Test
     public void parseDateTime_invalidFormat_throwsParseException() {
         ParseException thrown =
-                assertThrows(ParseException.class, () -> Date.parseDateString("12-31-2024 1200"));
+                assertThrows(ParseException.class, () -> Date.parseDateTime("12-31-2024 1200"));
         assertEquals("Invalid date format! Please use 'd/M/yyyy HHmm'. "
                 + "For example, '2/12/2024 1800'.", thrown.getMessage());
     }
@@ -116,7 +116,7 @@ public class DateTest {
     @Test
     public void parseDateTime_outOfRangeDayMonth_throwsParseException() {
         ParseException thrown =
-                assertThrows(ParseException.class, () -> Date.parseDateString("32/1/2024 1200"));
+                assertThrows(ParseException.class, () -> Date.parseDateTime("32/1/2024 1200"));
         assertEquals("Invalid date or time values! Ensure day, month, hour, "
                 + "and minute ranges are correct.", thrown.getMessage());
     }

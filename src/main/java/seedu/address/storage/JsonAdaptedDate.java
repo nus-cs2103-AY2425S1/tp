@@ -45,7 +45,7 @@ class JsonAdaptedDate {
         if (dateString == null || dateString.isEmpty()) {
             return new Date(LocalDateTime.MIN); // Treat as no appointment
         }
-        return new Date(Date.parseDateString(dateString));
+        return new Date(Date.parseDateTime(dateString));
     }
 
 

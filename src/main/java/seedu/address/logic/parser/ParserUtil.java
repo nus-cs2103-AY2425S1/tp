@@ -131,6 +131,7 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        return new Date(Date.parseDateString(trimmedDate));
+
+        return new Date(Date.parseDateTime(trimmedDate));
     }
 }

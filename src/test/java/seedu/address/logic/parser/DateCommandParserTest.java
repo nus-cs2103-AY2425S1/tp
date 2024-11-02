@@ -9,6 +9,7 @@ import seedu.address.logic.commands.DateCommand;
 
 
 
+
 public class DateCommandParserTest {
     private DateCommandParser parser = new DateCommandParser();
     private final String nonEmptyDate = "Some date.";
@@ -21,6 +22,5 @@ public class DateCommandParserTest {
         // no index
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " " + nonEmptyDate, expectedMessage);
     }
-
 
 }

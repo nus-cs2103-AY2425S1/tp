@@ -33,7 +33,7 @@ public class DateCommandParser implements Parser<DateCommand> {
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                     PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE);
             if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
-                    && !areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
+                    || !areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 
@@ -41,6 +41,7 @@ public class DateCommandParser implements Parser<DateCommand> {
             Optional<String> phone = argMultimap.getValue(PREFIX_PHONE);
             Optional<String> email = argMultimap.getValue(PREFIX_EMAIL);
             String dateString = argMultimap.getValue(PREFIX_DATE).orElse("");
+
             Date date = ParserUtil.parseDate(dateString);
 
             // Validate the phone number format if present
@@ -54,8 +55,8 @@ public class DateCommandParser implements Parser<DateCommand> {
             }
 
             return new DateCommand(name, phone, email, date);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(ive.getMessage(), ive);
+        } catch (IllegalValueException e) {
+            throw new ParseException(e.getMessage(), e);
         }
     }
 

@@ -48,30 +48,24 @@ public class Date {
         return value.hashCode();
     }
 
-
     /**
-     * Parses a date string into a {@code LocalDateTime} object.
+     * Validates the format and logical values of the provided date string.
      *
-     * <p>This method checks if the provided date string matches the expected format and
-     * validates the values of the date and time. The expected format is 'd/M/yyyy HHmm'.
-     * For example, '2/12/2024 1800' represents 2nd December 2024 at 18:00 hours.</p>
+     * <p>This method checks if the given date string matches the expected format pattern of 'd/M/yyyy HHmm'
+     * (e.g., '2/12/2024 1800'),
+     * where 'd' is the day, 'M' is the month, 'yyyy' is the four-digit year, and 'HHmm' is the 24-hour time.
+     * It first ensures the date adheres to the general format and, if so,
+     * proceeds to validate the values for day, month, and year combinations, including special
+     * cases like leap years and months with fewer days.</p>
      *
-     * @param date The date string to be parsed.
-     * @return A {@code LocalDateTime} object representing the parsed date and time.
-     * @throws ParseException If the date format is invalid or if the date and time values are incorrect.
+     * <p>If the date format or any of the values are invalid,
+     * a {@code ParseException} is thrown with a detailed message indicating the issue.</p>
+     *
+     * @param date The date string to validate, in the format 'd/M/yyyy HHmm'.
+     * @throws ParseException if the date format does not match 'd/M/yyyy HHmm', or if the values are logically invalid,
+     *                        such as an incorrect day or an invalid leap year date.
      */
-    public static LocalDateTime parseDateString(String date) throws ParseException {
-        validateDateFormat(date);
-        return parseDateTime(date);
-    }
-
-    /**
-     * Validates the date format and checks if the values are correct.
-     *
-     * @param date The date string to validate.
-     * @throws ParseException If the date format is invalid or if the date and time values are incorrect.
-     */
-    private static void validateDateFormat(String date) throws ParseException {
+    public static void checkDate(String date) throws ParseException {
         if (!date.matches(DATE_PATTERN)) {
             if (!date.matches(FORMAT_PATTERN)) {
                 throw new ParseException("Invalid date format! Please use 'd/M/yyyy HHmm'. "
@@ -81,17 +75,6 @@ public class Date {
                         + "Ensure day, month, hour, and minute ranges are correct.");
             }
         }
-    }
-
-
-    /**
-     * Parses the date string into a {@code LocalDateTime} object.
-     *
-     * @param date The date string to parse.
-     * @return A {@code LocalDateTime} object representing the parsed date and time.
-     * @throws ParseException If the date and time values are incorrect.
-     */
-    private static LocalDateTime parseDateTime(String date) throws ParseException {
         String[] dateAndTime = date.split(" ");
         String[] dateParts = dateAndTime[0].split("/");
 
@@ -113,8 +96,22 @@ public class Date {
             }
         }
 
+    }
 
+
+    /**
+     * Parses a date string into a {@code LocalDateTime} object.
+     *
+     * <p>This method first validates the date string format and values by calling {@code checkDate}.
+     * Once validated, it converts the date string into a {@code LocalDateTime} object based on the specified
+     * format 'd/M/yyyy HHmm'. For instance, '2/12/2024 1800' would be parsed as 2nd December 2024 at 18:00 hours.</p>
+     *
+     * @param date The date string to be parsed, expected in the format 'd/M/yyyy HHmm'.
+     * @return A {@code LocalDateTime} object representing the parsed date and time.
+     * @throws ParseException if the date format is invalid or if the date and time values are incorrect.
+     */
+    public static LocalDateTime parseDateTime(String date) throws ParseException {
+        checkDate(date);
         return LocalDateTime.parse(date, FORMATTER);
-
     }
 }
