@@ -20,7 +20,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_INDEX_FORMAT =
             "Person index must be a single, positive number (eg, '1', '2', '3').";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-
+    public static final String MESSAGE_MISSING_PERSON_NAME =
+            "Person name is required but missing. Please provide the name of the person using n/.";
+    public static final String MESSAGE_MISSING_PHONE =
+            "Person phone number is required but missing. Please provide the phone of the person using p/.";
     public static final String MESSAGE_REMARK_MULTIPLE_OPERATIONS =
             "Cannot add and delete remarks simultaneously. Please use only one operation at a time.";
     public static final String MESSAGE_REMARK_MISSING_COMMAND_TYPE =
