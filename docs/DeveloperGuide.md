@@ -430,8 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to filter persons by tag
 2.  AddressBook shows a input search bar
 3.  User enters input related to key of a tag
-4.  AddressBook shows a list of persons with matching tag key 
-
+4.  AddressBook shows a list of persons with matching tag key
     Use case ends.
 
 **Extensions**
