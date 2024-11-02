@@ -6,9 +6,11 @@ import static tuteez.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static tuteez.testutil.Assert.assertThrows;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
+import tuteez.model.remark.Remark;
 import tuteez.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -29,8 +32,8 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TELEGRAM = "J@ckson";
     private static final String INVALID_TAG = "#friend";
-
     private static final String INVALID_LESSON = "someday 0900-1100";
+    private static final String INVALID_REMARK = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -39,10 +42,9 @@ public class ParserUtilTest {
     private static final String VALID_TELEGRAM = "rachel_walker";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-
     private static final String VALID_LESSON = "monday 0800-1100";
-
     private static final String VALID_LESSON_2 = "sunday 0900-1135";
+    private static final String VALID_REMARK = "Good progress!";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -261,10 +263,33 @@ public class ParserUtilTest {
 
     @Test
     public void parseLessons_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Lesson> actualLessonSet = ParserUtil.parseLessons(Arrays.asList(VALID_LESSON, VALID_LESSON_2));
-        Set<Lesson> expectedLessonSet =
-                new HashSet<>(Arrays.asList(new Lesson(VALID_LESSON), new Lesson(VALID_LESSON_2)));
+        List<Lesson> actualLessonSet = ParserUtil.parseLessons(Arrays.asList(VALID_LESSON, VALID_LESSON_2));
+        List<Lesson> expectedLessonList =
+                new ArrayList<>(Arrays.asList(new Lesson(VALID_LESSON), new Lesson(VALID_LESSON_2)));
 
-        assertEquals(actualLessonSet, expectedLessonSet);
+        assertEquals(actualLessonSet, expectedLessonList);
+    }
+
+    @Test
+    public void parseRemark_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRemark((String) null));
+    }
+
+    @Test
+    public void parseRemark_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRemark(INVALID_REMARK));
+    }
+
+    @Test
+    public void parseRemark_validValueWithoutWhitespace_returnsPhone() throws Exception {
+        Remark expectedRemark = new Remark(VALID_REMARK);
+        assertEquals(expectedRemark, ParserUtil.parseRemark(VALID_REMARK));
+    }
+
+    @Test
+    public void parseRemark_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
+        String remarkWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
+        Remark expectedRemark = new Remark(VALID_REMARK);
+        assertEquals(expectedRemark, ParserUtil.parseRemark(remarkWithWhitespace));
     }
 }

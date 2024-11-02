@@ -3,11 +3,13 @@ import static java.util.Objects.requireNonNull;
 import static tuteez.commons.util.AppUtil.checkArgument;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -27,27 +29,6 @@ public class Lesson {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-    /**
-     * Maps various string representations of days (e.g., "monday", "mon") to their corresponding Day enum values.
-     * All keys are stored in lowercase.
-     */
-    private static final Map<String, Day> DAY_NAME_MAP = new HashMap<>();
-    static {
-        DAY_NAME_MAP.put("monday", Day.MONDAY);
-        DAY_NAME_MAP.put("mon", Day.MONDAY);
-        DAY_NAME_MAP.put("tuesday", Day.TUESDAY);
-        DAY_NAME_MAP.put("tue", Day.TUESDAY);
-        DAY_NAME_MAP.put("wednesday", Day.WEDNESDAY);
-        DAY_NAME_MAP.put("wed", Day.WEDNESDAY);
-        DAY_NAME_MAP.put("thursday", Day.THURSDAY);
-        DAY_NAME_MAP.put("thu", Day.THURSDAY);
-        DAY_NAME_MAP.put("friday", Day.FRIDAY);
-        DAY_NAME_MAP.put("fri", Day.FRIDAY);
-        DAY_NAME_MAP.put("saturday", Day.SATURDAY);
-        DAY_NAME_MAP.put("sat", Day.SATURDAY);
-        DAY_NAME_MAP.put("sunday", Day.SUNDAY);
-        DAY_NAME_MAP.put("sun", Day.SUNDAY);
-    }
     private final Day lessonDay;
     private final LocalTime startTime;
     private final LocalTime endTime;
@@ -68,16 +49,6 @@ public class Lesson {
     }
 
     /**
-     * Validates if the day provided is valid (i.e., part of the defined Days enum).
-     *
-     * @param day The day to check.
-     * @return true if the day is valid.
-     */
-    public static boolean isValidDay(String day) {
-        return DAY_NAME_MAP.containsKey(day.toLowerCase());
-    }
-
-    /**
      * Validates the time range format (should be HHMM-HHMM 24-hour format).
      *
      * @param timeRange The time range to validate.
@@ -93,7 +64,7 @@ public class Lesson {
      * @param timeRange The time range to check.
      * @return true if the start time is before the end time.
      */
-    private static boolean isValidTimeOrder(String timeRange) {
+    public static boolean isValidTimeOrder(String timeRange) {
         if (isValidTimeRange(timeRange)) {
             String[] times = timeRange.split("-");
             LocalTime startTime = LocalTime.parse(times[0], TIME_FORMATTER);
@@ -122,7 +93,7 @@ public class Lesson {
         }
         String day = parts[0];
         String timeRange = parts[1];
-        return isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
+        return Day.isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
     }
 
     /**
@@ -151,12 +122,98 @@ public class Lesson {
     }
 
     /**
+     * Checks if any two lessons in the provided set clash with each other.
+     *
+     * <p>This method iterates through lessons in and determines
+     * if there is a timing conflict between any two lessons.</p>
+     *
+     * @param lessons A set of {@code Lesson} objects to check for clashes.
+     * @return {@code true} if any two lessons in the set have a timing conflict,
+     *         {@code false} otherwise.
+     */
+    public static boolean containsClashes(List<Lesson> lessons) {
+        List<Lesson> lessonList = new ArrayList<>(lessons); // Convert to list for easy indexing
+
+        for (int i = 0; i < lessonList.size(); i++) {
+            Lesson lesson1 = lessonList.get(i);
+            for (int j = i + 1; j < lessonList.size(); j++) {
+                Lesson lesson2 = lessonList.get(j);
+                if (isClashingWithOtherLesson(lesson1, lesson2)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Calculates the duration until the next occurrence of the lesson.
+     * If the lesson is currently ongoing, this method returns a zero duration.
+     *
+     * <p>The duration calculation considers both the day of the week and the time of day.
+     * If the current day matches the lesson day but the current time is after the lesson's end time,
+     * the method assumes the next lesson will occur in one week from the current day.</p>
+     *
+     * @return A {@code Duration} representing the time left until the next lesson,
+     *         or zero if the lesson is currently ongoing.
+     */
+    public Duration durationTillLesson() {
+        if (this.isCurrentlyOngoing()) {
+            return Duration.ofDays(0).plusHours(0).plusMinutes(0);
+        }
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Day currentDay = Day.convertDayToEnum(currentDateTime.getDayOfWeek().toString().toLowerCase());
+        LocalTime currentTime = currentDateTime.toLocalTime();
+
+        int daysUntilLesson = (lessonDay.getValue() - currentDay.getValue() + 7) % 7;
+        if (currentDay == lessonDay && currentTime.isAfter(endTime)) {
+            daysUntilLesson = 7;
+        }
+
+        LocalDateTime nextLessonDateTime = currentDateTime
+                .plusDays(daysUntilLesson)
+                .withHour(startTime.getHour())
+                .withMinute(startTime.getMinute());
+        return Duration.between(currentDateTime, nextLessonDateTime);
+    }
+
+
+    /**
+     * Determines if the lesson is currently ongoing.
+     *
+     * <p>A lesson is considered ongoing if the current day matches the lesson's scheduled day,
+     * and the current time is between the lesson's start time and end time. If the current time
+     * coincides exactly with either the lesson's start time or end time, it is still considered
+     * to be ongoing, providing flexibility for timing precision.</p>
+     *
+     * @return {@code true} if the lesson is ongoing; {@code false} otherwise.
+     */
+    public boolean isCurrentlyOngoing() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Day currentDay = Day.convertDayToEnum(currentDateTime.getDayOfWeek().toString().toLowerCase());
+        LocalTime currentTime = currentDateTime.toLocalTime();
+        return currentDay.equals(lessonDay)
+                && currentTime.isAfter(startTime)
+                && currentTime.isBefore(endTime.plusMinutes(1));
+    }
+
+    /**
      * Returns the day on which this lesson occurs.
      *
      * @return The {@code Day} enum representing the day of the week for this lesson.
      */
     public Day getLessonDay() {
         return lessonDay;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
     }
 
     /**

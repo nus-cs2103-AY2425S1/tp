@@ -12,6 +12,7 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -127,14 +128,14 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code lessons} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Lesson>} containing zero lessons.
      */
-    private Optional<Set<Lesson>> parseLessonsForEdit(Collection<String> lessons) throws ParseException {
+    private Optional<List<Lesson>> parseLessonsForEdit(Collection<String> lessons) throws ParseException {
         assert lessons != null;
 
         if (lessons.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> lessonSet = lessons.size() == 1 && lessons.contains("") ? Collections.emptySet() : lessons;
-        return Optional.of(ParserUtil.parseLessons(lessonSet));
+        Collection<String> lessonLst = lessons.size() == 1 && lessons.contains("") ? Collections.emptySet() : lessons;
+        return Optional.of(ParserUtil.parseLessons(lessonLst));
     }
 
 }

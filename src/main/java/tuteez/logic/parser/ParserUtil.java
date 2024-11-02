@@ -2,8 +2,10 @@ package tuteez.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import tuteez.commons.core.index.Index;
@@ -15,6 +17,7 @@ import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
+import tuteez.model.remark.Remark;
 import tuteez.model.tag.Tag;
 
 /**
@@ -166,12 +169,27 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> lessons} into a {@code Set<Lesson>}.
      */
-    public static Set<Lesson> parseLessons(Collection<String> lessons) throws ParseException {
+    public static List<Lesson> parseLessons(Collection<String> lessons) throws ParseException {
         requireNonNull(lessons);
-        final Set<Lesson> lessonSet = new HashSet<>();
+        final List<Lesson> lessonSet = new ArrayList<>();
         for (String lesson : lessons) {
             lessonSet.add(parseLesson(lesson));
         }
         return lessonSet;
+    }
+
+    /**
+     * Parses a {@code String remark} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 }

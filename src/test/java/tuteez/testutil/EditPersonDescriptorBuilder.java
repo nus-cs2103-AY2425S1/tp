@@ -1,5 +1,6 @@
 package tuteez.testutil;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -102,8 +103,8 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withLessons(String... lessons) {
-        Set<Lesson> lessonSet = Stream.of(lessons).map(Lesson::new).collect(Collectors.toSet());
-        descriptor.setLessons(lessonSet);
+        List<Lesson> lessonLst = Stream.of(lessons).map(Lesson::new).collect(Collectors.toList());
+        descriptor.setLessons(lessonLst);
         return this;
     }
 

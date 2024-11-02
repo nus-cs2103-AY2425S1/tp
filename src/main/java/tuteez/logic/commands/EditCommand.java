@@ -99,7 +99,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Optional<Set<Lesson>> lessons = editPersonDescriptor.getLessons();
+        Optional<List<Lesson>> lessons = editPersonDescriptor.getLessons();
         if (lessons.isPresent()) {
             Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
             for (Lesson newlesson: lessons.get()) {
@@ -164,7 +164,7 @@ public class EditCommand extends Command {
         TelegramUsername updatedTelegramUser = editPersonDescriptor.getTelegramUsername()
                 .orElse(personToEdit.getTelegramUsername());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
+        List<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
 
         RemarkList originalRemarkList = personToEdit.getRemarkList();
 
@@ -207,7 +207,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private TelegramUsername telegramUsername;
-        private Set<Lesson> lessons;
+        private List<Lesson> lessons;
 
 
         public EditPersonDescriptor() {}
@@ -295,8 +295,8 @@ public class EditCommand extends Command {
          * Sets {@code lessons} to this object's {@code lessons}.
          * A defensive copy of {@code lessons} is used internally.
          */
-        public void setLessons(Set<Lesson> lessons) {
-            this.lessons = (lessons != null) ? new HashSet<>(lessons) : null;
+        public void setLessons(List<Lesson> lessons) {
+            this.lessons = (lessons != null) ? new ArrayList<>(lessons) : null;
         }
 
         /**
@@ -304,8 +304,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code lessons} is null.
          */
-        public Optional<Set<Lesson>> getLessons() {
-            return (lessons != null) ? Optional.of(Collections.unmodifiableSet(lessons)) : Optional.empty();
+        public Optional<List<Lesson>> getLessons() {
+            return (lessons != null) ? Optional.of(Collections.unmodifiableList(lessons)) : Optional.empty();
         }
 
         @Override
