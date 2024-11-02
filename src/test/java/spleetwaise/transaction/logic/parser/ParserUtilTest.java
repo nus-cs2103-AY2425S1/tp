@@ -3,20 +3,27 @@ package spleetwaise.transaction.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
+import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.testutil.TypicalTransactions;
 
 public class ParserUtilTest {
     private static final String INVALID_AMOUNT = "+123.456";
@@ -124,5 +131,32 @@ public class ParserUtilTest {
 
         Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
         assertEquals(TypicalPersons.ALICE, testPerson);
+    }
+
+    @Test
+    public void getPersonFromIndexAfterFilter_personNotFound_exceptionThrown() {
+        AddressBookModel abModel = new AddressBookModelManager();
+        abModel.setAddressBook(TypicalPersons.getTypicalAddressBook());
+        CommonModel.initialise(abModel, null);
+
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("none"));
+
+        CommonModel.getInstance().updateFilteredPersonList(predicate);
+
+        assertThrows(ParseException.class, () -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+    }
+
+    @Test
+    public void getPersonFromIndexAfterFilter_personFound_success() {
+        AddressBookModel abModel = new AddressBookModelManager();
+        abModel.setAddressBook(TypicalPersons.getTypicalAddressBook());
+        CommonModel.initialise(abModel, null);
+
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Elle"));
+
+        CommonModel.getInstance().updateFilteredPersonList(predicate);
+
+        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+        assertEquals(TypicalPersons.ELLE, testPerson);
     }
 }
