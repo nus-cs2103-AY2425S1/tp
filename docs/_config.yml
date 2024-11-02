@@ -8,13 +8,13 @@ header_pages:
 
 sidebar:
   - title: "User Guide"
-    url: "/docs/UserGuide"
+    url: UserGuide.md
     toc: true
   - title: "Developer Guide"
-    url: "/docs/DeveloperGuide"
+    url: DeveloperGuide.md
     toc: true
   - title: "About Us"
-    url: "/docs/AboutUs"
+    url: AboutUs.md
     toc: true
 
 markdown: kramdown
