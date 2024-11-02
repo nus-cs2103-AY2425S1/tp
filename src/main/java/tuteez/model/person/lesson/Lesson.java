@@ -122,13 +122,13 @@ public class Lesson {
     }
 
     /**
-     * Checks if any two lessons in the provided set clash with each other.
+     * Checks if any two lessons in the provided list clash with each other.
      *
      * <p>This method iterates through lessons in and determines
      * if there is a timing conflict between any two lessons.</p>
      *
-     * @param lessons A set of {@code Lesson} objects to check for clashes.
-     * @return {@code true} if any two lessons in the set have a timing conflict,
+     * @param lessons A list of {@code Lesson} objects to check for lesson clashes within the given list.
+     * @return {@code true} if any two lessons in the list have a timing conflict,
      *         {@code false} otherwise.
      */
     public static boolean containsClashes(List<Lesson> lessons) {
