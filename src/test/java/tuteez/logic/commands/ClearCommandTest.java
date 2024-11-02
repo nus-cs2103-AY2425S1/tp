@@ -1,14 +1,12 @@
 package tuteez.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static tuteez.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static tuteez.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import tuteez.logic.Messages;
 import tuteez.model.AddressBook;
 import tuteez.model.Model;
 import tuteez.model.ModelManager;
