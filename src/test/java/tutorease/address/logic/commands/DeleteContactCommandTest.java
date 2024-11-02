@@ -1,5 +1,6 @@
 package tutorease.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -20,6 +21,7 @@ import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.lesson.Lesson;
@@ -105,6 +107,9 @@ class DeleteContactCommandTest {
 
 
     private class ModelStub implements Model {
+        final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
+        final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -142,6 +147,10 @@ class DeleteContactCommandTest {
 
         @Override
         public void setTutorEase(ReadOnlyTutorEase newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -182,7 +191,7 @@ class DeleteContactCommandTest {
 
         @Override
         public ObservableList<Lesson> getFilteredLessonList() {
-            throw new AssertionError("This method should not be called.");
+            return lessons;
         }
 
         @Override
@@ -192,7 +201,9 @@ class DeleteContactCommandTest {
 
         @Override
         public void addLesson(Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
+            requireNonNull(lesson);
+            lessonsAdded.add(lesson);
+            lessons.add(lesson);
         }
 
         @Override
@@ -201,23 +212,32 @@ class DeleteContactCommandTest {
         }
 
         @Override
-        public void deleteLesson(int index) {
-            throw new AssertionError("This method should not be called.");
+        public void deleteLesson(Lesson lesson) {
+            requireNonNull(lesson);
+            lessonsAdded.remove(lesson);
         }
 
         @Override
         public Lesson getLesson(int index) {
-            throw new AssertionError("This method should not be called.");
+            return lessonsAdded.get(index);
         }
 
         @Override
         public int getLessonScheduleSize() {
-            throw new AssertionError("This method should not be called.");
+            return lessonsAdded.size();
         }
 
         @Override
         public void deleteStudentLesson(Person student) {
-            throw new AssertionError("This method should not be called.");
+            int currentIndex = 0;
+            while (currentIndex < this.getLessonScheduleSize()) {
+                Lesson lesson = this.getLesson(currentIndex);
+                if (student.equals(lesson.getStudent())) {
+                    this.deleteLesson(lesson);
+                } else {
+                    currentIndex++;
+                }
+            }
         }
     }
 

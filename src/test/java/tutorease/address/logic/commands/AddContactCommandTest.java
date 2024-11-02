@@ -20,6 +20,7 @@ import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
@@ -167,6 +168,11 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Lesson> getFilteredLessonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -187,7 +193,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void deleteLesson(int index) {
+        public void deleteLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

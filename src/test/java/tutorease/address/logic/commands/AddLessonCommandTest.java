@@ -19,6 +19,7 @@ import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
@@ -212,6 +213,11 @@ public class AddLessonCommandTest {
         }
 
         @Override
+        public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyTutorEase getTutorEase() {
             throw new AssertionError("This method should not be called.");
         }
@@ -267,7 +273,7 @@ public class AddLessonCommandTest {
         }
 
         @Override
-        public void deleteLesson(int index) {
+        public void deleteLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

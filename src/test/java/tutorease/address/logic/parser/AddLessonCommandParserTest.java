@@ -23,10 +23,20 @@ import static tutorease.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPA
 import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_LEAP_YEAR_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_DURATION_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_FEE_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_START_DATE_TIME_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_STUDENT_ID_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_END_DATE;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_END_DATE_LEAP_YEAR;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_FEE;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE_LEAP_YEAR;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_FEE;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -54,22 +64,32 @@ public class AddLessonCommandParserTest {
                         + START_DATE_TIME_DESC + DURATION_DESC,
                 expectedCommand);
     }
+
     @Test
     public void parse_missingFields_failure() {
-        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                AddLessonCommand.MESSAGE_USAGE);
+        // missing all fields
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "", expectedMessage);
         // missing studentId
+        String expectedStudentIdMessage = String.format(Messages.MISSING_PREFIX, PREFIX_STUDENT_ID,
+                AddLessonCommand.MESSAGE_USAGE);
         assertParseFailure(parser, FEE_DESC + START_DATE_TIME_DESC + DURATION_DESC,
-                expectedMessage);
+                expectedStudentIdMessage);
         // missing fee
+        String expectedFeeMessage = String.format(Messages.MISSING_PREFIX, PREFIX_FEE,
+                AddLessonCommand.MESSAGE_USAGE);
         assertParseFailure(parser, STUDENT_ID_DESC + START_DATE_TIME_DESC + DURATION_DESC,
-                expectedMessage);
+                expectedFeeMessage);
         // missing startDateTime
+        String expectedDateMessage = String.format(Messages.MISSING_PREFIX, PREFIX_START_DATE,
+                AddLessonCommand.MESSAGE_USAGE);
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + DURATION_DESC,
-                expectedMessage);
+                expectedDateMessage);
         // missing duration
+        String expectedDurationMessage = String.format(Messages.MISSING_PREFIX, PREFIX_DURATION,
+                AddLessonCommand.MESSAGE_USAGE);
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC,
-                expectedMessage);
+                expectedDurationMessage);
     }
 
     @Test
@@ -158,6 +178,28 @@ public class AddLessonCommandParserTest {
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC
                         + " " + PREFIX_DURATION + INVALID_DURATION_TWENTY_FIVE,
                 EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
+    }
+    @Test
+    public void parse_upperCasePrefixes_success() throws ParseException {
+        Lesson expectedLesson = new LessonBuilder()
+                .withFee(VALID_FEE)
+                .withStartDateTime(VALID_START_DATE)
+                .withEndDateTime(VALID_END_DATE)
+                .build();
+        AddLessonCommand expectedCommand = new AddLessonCommand(new StudentId(VALID_STUDENT_ID),
+                expectedLesson.getFee(), expectedLesson.getStartDateTime(), expectedLesson.getEndDateTime());
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + UPPERCASE_STUDENT_ID_DESC + FEE_DESC
+                        + START_DATE_TIME_DESC + DURATION_DESC,
+                expectedCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + UPPERCASE_FEE_DESC
+                        + START_DATE_TIME_DESC + DURATION_DESC,
+                expectedCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + FEE_DESC
+                        + UPPERCASE_START_DATE_TIME_DESC + DURATION_DESC,
+                expectedCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + FEE_DESC
+                + START_DATE_TIME_DESC + UPPERCASE_DURATION_DESC,
+                expectedCommand);
     }
 
     @Test
