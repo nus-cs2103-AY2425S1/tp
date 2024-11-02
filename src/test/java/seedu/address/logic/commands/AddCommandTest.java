@@ -23,6 +23,7 @@ import seedu.address.model.ClinicConnectSystem;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyClinicConnectSystem;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.filteredappointment.FilteredAppointment;
 import seedu.address.model.patient.Patient;
 import seedu.address.testutil.PatientBuilder;
@@ -160,6 +161,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void filterAppts(AppointmentDateFilter dateFilter) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void setFilteredAppts(TreeSet<FilteredAppointment> filteredAppointments) {
             throw new AssertionError("This method should not be called");

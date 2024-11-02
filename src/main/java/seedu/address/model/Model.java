@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.filteredappointment.FilteredAppointment;
 import seedu.address.model.patient.Patient;
 
@@ -87,6 +88,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPatientList(Predicate<Patient> predicate);
+
+    /**
+     * Updates the filtered appointments based on a {@code AppointmentDateFilter}
+     */
+    void filterAppts(AppointmentDateFilter dateFilter);
 
     void setFilteredAppts(TreeSet<FilteredAppointment> filteredAppointments);
 

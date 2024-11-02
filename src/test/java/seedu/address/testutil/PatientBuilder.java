@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
 import seedu.address.model.patient.AllergyList;
@@ -219,6 +221,19 @@ public class PatientBuilder {
     public PatientBuilder withNokPhone(String nokPhone) {
         this.nokPhone = new Phone(nokPhone);
         return this;
+    }
+
+    /**
+     * Adds a {@code Appt} to the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAppts(String dateTime, String healthService) {
+        try {
+            Appt appt = ParserUtil.parseSingleAppt(dateTime, healthService);
+            appts.addAppt(appt);
+            return this;
+        } catch (ParseException e) {
+            return this;
+        }
     }
 
     /**

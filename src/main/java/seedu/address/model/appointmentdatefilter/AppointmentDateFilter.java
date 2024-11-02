@@ -86,8 +86,31 @@ public class AppointmentDateFilter {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AppointmentDateFilter)) {
+            return false;
+        }
+
+        AppointmentDateFilter otherFilter = (AppointmentDateFilter) other;
+        if (healthService == null && otherFilter.healthService == null) {
+            return endDate.isEqual(otherFilter.endDate) && startDate.isEqual(otherFilter.startDate);
+        } else if ((healthService != null && otherFilter.healthService == null)
+                || (healthService == null && otherFilter.healthService != null)) {
+            return false;
+        }
+        return startDate.isEqual(otherFilter.startDate) && endDate.isEqual(otherFilter.endDate)
+                && healthService.equals(otherFilter.healthService);
+    }
+
+    @Override
     public String toString() {
         String healthService = this.healthService == null ? "" : " with service " + this.healthService;
         return "within range " + startDate + " to " + endDate + healthService;
     }
+
 }

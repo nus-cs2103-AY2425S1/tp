@@ -38,8 +38,7 @@ public class Patient {
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex,
-                   Phone phone) {
+    public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex, Phone phone) {
         requireAllNonNull(name, nric, birthdate, sex, phone);
         this.name = name;
         this.nric = nric;
