@@ -30,6 +30,7 @@
                         <VBox fx:id="subjectStatsBox" alignment="TOP_CENTER" spacing="5" styleClass="stats-container">
                             <!-- Subject statistics will be added here dynamically -->
                         </VBox>
+                        <Label fx:id="closeWindowMessage" styleClass="closeWindow-label" wrapText="true" />
                     </ScrollPane>
                 </children>
             </VBox>
