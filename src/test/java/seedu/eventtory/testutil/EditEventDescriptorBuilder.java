@@ -1,7 +1,12 @@
 package seedu.eventtory.testutil;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.eventtory.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.eventtory.model.commons.name.Name;
+import seedu.eventtory.model.commons.tag.Tag;
 import seedu.eventtory.model.event.Date;
 import seedu.eventtory.model.event.Event;
 
@@ -28,6 +33,7 @@ public class EditEventDescriptorBuilder {
         descriptor = new EditEventDescriptor();
         descriptor.setName(event.getName());
         descriptor.setDate(event.getDate());
+        descriptor.setTags(event.getTags());
     }
 
     /**
@@ -45,6 +51,16 @@ public class EditEventDescriptorBuilder {
      */
     public EditEventDescriptorBuilder withDate(String date) {
         descriptor.setDate(new Date(date));
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
+     * {@code EditEventDescriptor} that we are building.
+     */
+    public EditEventDescriptorBuilder withTags(String... tags) {
+        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setTags(tagSet);
         return this;
     }
 
