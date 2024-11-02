@@ -7,11 +7,11 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_ID = new Prefix("id/");
+    public static final Prefix PREFIX_ID = new Prefix("c/");
 
     /* Prefix definitions for Tutorial-related commands */
     public static final Prefix PREFIX_TUT_NAME = new Prefix("tn/"); // Prefix for Tutorial Name
-    public static final Prefix PREFIX_TUT_ID = new Prefix("id/"); // Prefix for Tutorial ID
+    public static final Prefix PREFIX_TUT_ID = new Prefix("c/"); // Prefix for Tutorial ID
 
 
     public static final Prefix PREFIX_DUEDATE = new Prefix("d/");
