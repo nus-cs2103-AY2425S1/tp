@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
 import seedu.eventtory.testutil.EventBuilder;
 
 public class EventContainsKeywordsPredicateTest {
@@ -75,8 +74,8 @@ public class EventContainsKeywordsPredicateTest {
     public void test_dateContainsKeywords_returnsTrue() {
         // One keyword
         EventContainsKeywordsPredicate predicate =
-                new EventContainsKeywordsPredicate(Collections.singletonList("2024-10-10"));
-        assertTrue(predicate.test(new EventBuilder().withDate("2024-10-10").build()));
+                new EventContainsKeywordsPredicate(Collections.singletonList("12-10-2024"));
+        assertTrue(predicate.test(new EventBuilder().withDate("2024-10-12").build()));
 
         // Partial matching keyword
         predicate = new EventContainsKeywordsPredicate(Arrays.asList("2024"));
