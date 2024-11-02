@@ -265,6 +265,10 @@ Format: `exit`
 ### Changing the theme of the app
 
 Click Theme to toggle between Dark Theme and Light Theme.
+#### Dark Theme (default) 
+![Dark Theme (default)](images/darkTheme.png) 
+#### Light Theme
+![Light Theme](images/lightTheme.png)
 
 ### Saving the data
 
