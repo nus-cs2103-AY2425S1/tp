@@ -1,17 +1,10 @@
 package seedu.ddd.testutil.event;
 
-import static seedu.ddd.logic.commands.CommandTestUtil.CLIENT_FLAG;
 import static seedu.ddd.logic.commands.CommandTestUtil.EVENT_FLAG;
-import static seedu.ddd.logic.commands.CommandTestUtil.VENDOR_FLAG;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_CLIENTS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_VENDORS;
 
 import seedu.ddd.logic.commands.AddEventCommand;

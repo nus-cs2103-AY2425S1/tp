@@ -4,7 +4,6 @@ import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_EVENT_DATE;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_EVENT_DESCRIPTION;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_EVENT_ID;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_EVENT_NAME;
-import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ID;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ID_FOUR;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ID_ONE;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ID_THREE;

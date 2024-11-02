@@ -1,12 +1,7 @@
 package seedu.ddd.logic.parser.add;
 
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ddd.logic.commands.CommandTestUtil.CLIENT_FLAG;
 import static seedu.ddd.logic.commands.CommandTestUtil.EVENT_FLAG;
-import static seedu.ddd.logic.commands.CommandTestUtil.VENDOR_FLAG;
-import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
-import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
-import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;

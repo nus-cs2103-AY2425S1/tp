@@ -2,7 +2,6 @@ package seedu.ddd.logic.parser.add;
 
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.commands.CommandTestUtil.CLIENT_FLAG;
-import static seedu.ddd.logic.commands.CommandTestUtil.VENDOR_FLAG;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
@@ -19,11 +18,6 @@ import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_NAME_ARG
 import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_PHONE_ARGUMENT;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_TAG_ARGUMENT_1;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_TAG_ARGUMENT_2;
-import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_ADDRESS_ARGUMENT;
-import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_EMAIL_ARGUMENT;
-import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_NAME_ARGUMENT;
-import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_PHONE_ARGUMENT;
-import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_SERVICE_ARGUMENT;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ADDRESS;
@@ -32,10 +26,6 @@ import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_NAME;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_PHONE;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_2;
-import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ADDRESS;
-import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_EMAIL;
-import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_NAME;
-import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_PHONE;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
 
 import org.junit.jupiter.api.Test;

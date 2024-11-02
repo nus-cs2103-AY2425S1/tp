@@ -142,7 +142,6 @@ public class AddressBookParserTest {
         Vendor vendor = new VendorBuilder().build();
         String command = VendorUtil.getAddContactCommand(vendor) + " " + CLIENT_FLAG;
         assertThrows(ParseException.class,
-                getErrorMessageForExclusiveFlags(FLAG_CLIENT, FLAG_VENDOR),
-                () -> parser.parseCommand(command));
+                getErrorMessageForExclusiveFlags(FLAG_CLIENT, FLAG_VENDOR), () -> parser.parseCommand(command));
     }
 }
