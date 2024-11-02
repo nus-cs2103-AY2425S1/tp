@@ -95,7 +95,7 @@ public class MainApp extends Application {
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            initialReminders = reminderAddressBookOptional.orElseGet(() -> new ReminderAddressBook());
+            initialReminders = reminderAddressBookOptional.orElseGet(SampleDataUtil::getSampleReminderAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");

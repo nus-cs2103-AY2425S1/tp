@@ -192,6 +192,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getReminderAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
