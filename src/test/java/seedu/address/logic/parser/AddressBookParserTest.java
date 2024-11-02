@@ -38,7 +38,6 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Grade;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ParentBuilder;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.StudentBuilder;
 

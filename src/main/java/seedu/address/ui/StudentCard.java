@@ -53,7 +53,7 @@ public class StudentCard extends PersonCard {
                 parentPhone.setText(parent.getPhone().value);
                 parentEmail.setText(parent.getEmail().value);
             } catch (IllegalValueException e) {
-               logger.warning(e.getMessage());
+                logger.warning(e.getMessage());
             }
         }
     }

@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHILD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT;
 
-
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -21,6 +20,9 @@ import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Links a Parent and a Student specified by their full names in a parent-child relationship.
+ */
 public class LinkCommand extends Command {
 
     public static final String COMMAND_WORD = "link";
@@ -42,6 +44,9 @@ public class LinkCommand extends Command {
     private final Name childName;
     private final Name parentName;
 
+    /**
+     * Creates a {@code LinkCommand} from the specified {@code Name}s.
+     */
     public LinkCommand(Name childName, Name parentName) {
         requireAllNonNull(childName, parentName);
 
@@ -64,7 +69,7 @@ public class LinkCommand extends Command {
         }
 
         try {
-            child  = model.personFromName(childName);
+            child = model.personFromName(childName);
             if (!(child instanceof Student)) {
                 throw new CommandException(generateChildNotFoundMessage());
             }
@@ -73,7 +78,7 @@ public class LinkCommand extends Command {
         }
 
         Parent castedParent = (Parent) parent;
-        Student castedChild= (Student) child;
+        Student castedChild = (Student) child;
 
         if (castedParent.getChildName() != null) {
             throw new CommandException(generateParentLinkedMessage(castedParent.getChildName()));

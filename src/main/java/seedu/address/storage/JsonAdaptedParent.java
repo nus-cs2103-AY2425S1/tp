@@ -13,8 +13,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Parent;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,7 +30,7 @@ public class JsonAdaptedParent extends JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedParent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("childName") String childName,  @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("childName") String childName, @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("isPinned") boolean isPinned, @JsonProperty("isArchived") boolean isArchived) {
         super("Parent", name, phone, email, address, tags, isPinned, isArchived);
         this.childName = childName;
@@ -103,6 +103,7 @@ public class JsonAdaptedParent extends JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Parent(modelName, modelPhone, modelEmail, modelAddress, modelChildName, modelTags, isPinned, isArchived);
+        return new Parent(modelName, modelPhone, modelEmail, modelAddress, modelChildName, modelTags,
+                isPinned, isArchived);
     }
 }

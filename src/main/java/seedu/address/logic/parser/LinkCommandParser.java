@@ -9,6 +9,9 @@ import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
+/**
+ * Parses input arguments and creates a new {@code LinkCommand} object.
+ */
 public class LinkCommandParser implements Parser<LinkCommand> {
 
     @Override
@@ -20,10 +23,12 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
 
-        Name child = argMultiMap.getValue(PREFIX_CHILD).map(Name::new).orElseThrow(
-                () -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE)));
-        Name parent = argMultiMap.getValue(PREFIX_PARENT).map(Name::new).orElseThrow(
-                () -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE)));
+        Name child = argMultiMap.getValue(PREFIX_CHILD).map(Name::new)
+                .orElseThrow(() -> new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE)));
+        Name parent = argMultiMap.getValue(PREFIX_PARENT).map(Name::new)
+                .orElseThrow(() -> new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE)));
 
         return new LinkCommand(child, parent);
     }

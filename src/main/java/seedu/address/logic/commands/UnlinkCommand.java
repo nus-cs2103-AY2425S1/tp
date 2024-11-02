@@ -23,7 +23,10 @@ import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
-public class UnlinkCommand extends Command{
+/**
+ * Removes any links to and from a person identified with an index.
+ */
+public class UnlinkCommand extends Command {
 
     public static final String COMMAND_WORD = "unlink";
 
@@ -38,6 +41,9 @@ public class UnlinkCommand extends Command{
 
     private final Index index;
 
+    /**
+     * Creates an UnlinkCommand to unlink the person at the specified {@code Index}.
+     */
     public UnlinkCommand(Index index) {
         requireNonNull(index);
         this.index = index;
@@ -73,14 +79,14 @@ public class UnlinkCommand extends Command{
             throw new PersonNotFoundException();
         }
 
-       Person unlinkedPerson = unlink(personToEdit);
-       Person unlinkedCounterPart = unlink(counterPart);
+        Person unlinkedPerson = unlink(personToEdit);
+        Person unlinkedCounterPart = unlink(counterPart);
 
-       model.setPerson(personToEdit, unlinkedPerson);
-       model.setPerson(counterPart, unlinkedCounterPart);
+        model.setPerson(personToEdit, unlinkedPerson);
+        model.setPerson(counterPart, unlinkedCounterPart);
 
-       return new CommandResult(String.format(MESSAGE_UNLINK_CONTACT_SUCCESS,
-               Messages.format(personToEdit), Messages.format(counterPart)));
+        return new CommandResult(String.format(MESSAGE_UNLINK_CONTACT_SUCCESS,
+                Messages.format(personToEdit), Messages.format(counterPart)));
     }
 
     private Person unlink(Person person) {

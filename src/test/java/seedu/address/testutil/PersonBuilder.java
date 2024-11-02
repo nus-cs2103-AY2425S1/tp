@@ -57,6 +57,9 @@ public abstract class PersonBuilder {
         isPinned = personToCopy.getPinned();
     }
 
+    /**
+     * Creates an instance of the appropriate subtype of PersonBuilder from the given Person.
+     */
     public static PersonBuilder of(Person person) {
         if (person instanceof Student student) {
             return new StudentBuilder(student);

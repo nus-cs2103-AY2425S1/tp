@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -13,10 +12,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Parent;
-import seedu.address.model.person.Student;
 
 /**
- * Adds a person to the address book.
+ * Adds a Parent to the address book.
  */
 public class AddParentCommand extends Command {
 
@@ -43,7 +41,7 @@ public class AddParentCommand extends Command {
     private final Parent toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddParentCommand to add the specified {@code Parent}
      */
     public AddParentCommand(Parent parent) {
         requireNonNull(parent);

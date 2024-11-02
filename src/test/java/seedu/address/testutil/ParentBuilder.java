@@ -64,8 +64,12 @@ public class ParentBuilder extends PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the parent.
+     */
     public Parent build() {
-        return new Parent(getName(), getPhone(), getEmail(), getAddress(), childName, getTags(), isPinned(), isArchived());
+        return new Parent(getName(), getPhone(), getEmail(), getAddress(), childName, getTags(),
+                isPinned(), isArchived());
     }
 
 }

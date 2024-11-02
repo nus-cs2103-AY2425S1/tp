@@ -1,8 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
@@ -93,6 +91,9 @@ public class StudentBuilder extends PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the student.
+     */
     public Student build() {
         return new Student(getName(), getPhone(), getEmail(), getAddress(), education, grade, parentName, getTags(),
                 isPinned(), isArchived());

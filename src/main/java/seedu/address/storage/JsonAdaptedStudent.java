@@ -36,7 +36,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("education") String education, @JsonProperty("grade") String grade,
-            @JsonProperty("parentName") String parentName,  @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("parentName") String parentName, @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("isPinned") boolean isPinned, @JsonProperty("isArchived") boolean isArchived) {
         super("Student", name, phone, email, address, tags, isPinned, isArchived);
         this.education = education;

@@ -7,6 +7,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input and creates ann UnlinkCommand object.
+ */
 public class UnlinkCommandParser implements Parser<UnlinkCommand> {
 
     @Override

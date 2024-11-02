@@ -16,12 +16,14 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.ParentBuilder;
@@ -51,7 +53,8 @@ public class AddParentCommandTest {
         AddParentCommand addCommand = new AddParentCommand(validParent);
         ModelStub modelStub = new ModelStubWithPerson(validParent);
 
-        assertThrows(CommandException.class, AddParentCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddParentCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -181,6 +184,11 @@ public class AddParentCommandTest {
 
         @Override
         public void sortByPin() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person personFromName(Name name) throws IllegalValueException {
             throw new AssertionError("This method should not be called.");
         }
 
