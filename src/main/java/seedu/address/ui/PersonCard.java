@@ -37,8 +37,7 @@ public class PersonCard extends UiPart<Region> {
     private PersonCardField job = new PersonCardField();
     private PersonCardField email = new PersonCardField();
     private PersonCardField income = new PersonCardField();
-    @FXML
-    private Label remark;
+    private PersonCardField remark = new PersonCardField();
     @FXML
     private FlowPane assignedTier;
     @FXML
@@ -63,8 +62,8 @@ public class PersonCard extends UiPart<Region> {
         email.setFields(PersonCardField.ICON_LITERAL_EMAIL, person.getEmail().value);
         job.setFields(PersonCardField.ICON_LITERAL_JOB, person.getJob().value);
         income.setFields(PersonCardField.ICON_LITERAL_INCOME, person.getIncome().toString());
-        remark.setText(person.getRemark().value);
-        cardFields.getChildren().addAll(phone, address, email, job, income);
+        remark.setFields(PersonCardField.ICON_LITERAL_REMARK,person.getRemark().value);
+        cardFields.getChildren().addAll(phone, address, email, job, income, remark);
     }
 
     private void createTier() {

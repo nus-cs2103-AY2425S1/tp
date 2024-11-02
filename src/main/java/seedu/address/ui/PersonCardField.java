@@ -8,6 +8,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Paint;
 
+import static seedu.address.commons.util.StringUtil.truncateText;
+
 /**
  * Represents a labelled field in the PersonCard
  */
@@ -17,6 +19,7 @@ public class PersonCardField extends HBox {
     public static final String ICON_LITERAL_EMAIL = "fas-envelope";
     public static final String ICON_LITERAL_JOB = "fas-briefcase";
     public static final String ICON_LITERAL_INCOME = "fas-dollar-sign";
+    public static final String ICON_LITERAL_REMARK = "fas-hashtag";
 
     private FontIcon icon;
     private Label value;
@@ -48,6 +51,7 @@ public class PersonCardField extends HBox {
      */
     public void setFields(String iconLiteral, String valueText) {
         this.icon.setIconLiteral(iconLiteral);
-        this.value.setText(valueText);
+        this.value.setText(truncateText(valueText));
     }
+
 }
