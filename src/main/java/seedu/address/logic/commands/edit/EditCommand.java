@@ -2,6 +2,7 @@ package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.Name;
@@ -50,7 +52,8 @@ public class EditCommand extends Command {
             + " | " + PREFIX_EMAIL + "EMAIL) "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]+ "
-            + "[" + PREFIX_MODULE + "(+ | -)(MODULECODE[-ROLETYPE])+]\n"
+            + "[" + PREFIX_MODULE + "(+ | -)(MODULECODE[-ROLETYPE])+] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -116,6 +119,9 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         ModuleRoleMap updatedModuleRoleMap;
+
+        Description updatedDescription = editPersonDescriptor.getDescription()
+            .or(personToEdit::getDescription).orElse(null);
         try {
             // The following code intentionally avoids the use of functional programming.
             // Reason being Optional.map() does not allow throwing checked exceptions.
@@ -131,7 +137,7 @@ public class EditCommand extends Command {
 
         return new Person(updatedName, Optional.ofNullable(updatedPhone), Optional.ofNullable(updatedEmail),
                 Optional.ofNullable(updatedAddress),
-                updatedTags, updatedModuleRoleMap);
+                updatedTags, updatedModuleRoleMap, Optional.ofNullable(updatedDescription));
     }
 
     /**
@@ -147,13 +153,15 @@ public class EditCommand extends Command {
         }
         if (!personBefore.getPhone().equals(personAfter.getPhone())) {
             isChanged = true;
-            changesDescription.append("Phone: ").append(personBefore.getPhone()).append(" -> ")
-                    .append(personAfter.getPhone()).append("\n");
+            changesDescription.append("Phone: ")
+                    .append(personBefore.getPhone().map(Object::toString).orElse("<no phone>")).append(" -> ")
+                    .append(personAfter.getPhone().map(Object::toString).orElse("<no phone>")).append("\n");
         }
         if (!personBefore.getEmail().equals(personAfter.getEmail())) {
             isChanged = true;
-            changesDescription.append("Email: ").append(personBefore.getEmail()).append(" -> ")
-                    .append(personAfter.getEmail()).append("\n");
+            changesDescription.append("Email: ")
+                    .append(personBefore.getEmail().map(Object::toString).orElse("<no email>")).append(" -> ")
+                    .append(personAfter.getEmail().map(Object::toString).orElse("<no email>")).append("\n");
         }
         if (!personBefore.getAddress().equals(personAfter.getAddress())) {
             isChanged = true;
@@ -170,6 +178,20 @@ public class EditCommand extends Command {
             isChanged = true;
             changesDescription.append(EditModuleRoleOperation.getModuleCodeChangesDescription(
                     personBefore.getModuleRoleMap(), personAfter.getModuleRoleMap())).append("\n");
+        }
+        if (!personBefore.getDescription().equals(personAfter.getDescription())) {
+            isChanged = true;
+            changesDescription.append("Description: ")
+                .append(personBefore.getDescription()
+                    .filter(value -> !value.isBlank())
+                    .map(Objects::toString)
+                    .orElse("<no description>"))
+                .append(" -> ")
+                .append(personAfter.getDescription()
+                    .filter(value -> !value.isBlank())
+                    .map(Objects::toString)
+                    .orElse("<no description>"))
+                .append("\n");
         }
 
         return isChanged ? changesDescription.toString() : "No changes made.";
@@ -210,6 +232,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private EditModuleRoleOperation editModuleRoleOperation;
+        private Description description;
 
         public EditPersonDescriptor() {}
 
@@ -224,13 +247,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setModuleRoleOperation(toCopy.editModuleRoleOperation);
+            setDescription(toCopy.description);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, editModuleRoleOperation);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, editModuleRoleOperation, description);
         }
 
         public void setName(Name name) {
@@ -290,6 +314,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(editModuleRoleOperation);
         }
 
+        public void setDescription(Description description) {
+            this.description = description;
+        }
+
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -307,7 +339,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(editModuleRoleOperation, otherEditPersonDescriptor.editModuleRoleOperation);
+                    && Objects.equals(editModuleRoleOperation, otherEditPersonDescriptor.editModuleRoleOperation)
+                    && Objects.equals(description, otherEditPersonDescriptor.description);
         }
 
         @Override
@@ -319,6 +352,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("tags", tags)
                     .add("editModuleRoleOperation", editModuleRoleOperation)
+                    .add("description", description)
                     .toString();
         }
     }

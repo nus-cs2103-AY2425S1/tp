@@ -20,6 +20,7 @@ import seedu.address.logic.commands.edit.DeleteModuleRoleOperation;
 import seedu.address.logic.commands.edit.EditModuleRoleOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
@@ -247,6 +248,21 @@ public class ParserUtil {
         }
 
         return new ModuleRoleMap(hashMap);
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
     }
 
 

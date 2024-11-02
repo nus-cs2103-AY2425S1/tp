@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -41,6 +42,9 @@ public class PersonUtil {
         person.getModuleRoleMap().getData().stream().forEach(
             s -> sb.append(PREFIX_MODULE + s.toString() + " ")
         );
+        person.getDescription()
+            .ifPresent((description -> sb.append(PREFIX_DESCRIPTION)
+            .append(description).append(" ")));
         return sb.toString();
     }
 
@@ -61,6 +65,8 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        descriptor.getDescription().ifPresent(description ->
+            sb.append(PREFIX_DESCRIPTION).append(description.value).append(" "));
         return sb.toString();
     }
 }
