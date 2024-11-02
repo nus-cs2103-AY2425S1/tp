@@ -30,9 +30,9 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/James Ho p/22224444 e/jamesho@example.com telegram/@James t/friend t/colleague github/james-cool` : Adds a contact named `James Ho` to the Address Book.
 
-   * `delete n/John Doe` : Deletes the contact with name `John Doe` if it is shown in the current list.
+   * `delete n/James Ho` : Deletes the contact with name `James Ho` if it is shown in the current list.
 
    * `clear` : Deletes all contacts.
 
