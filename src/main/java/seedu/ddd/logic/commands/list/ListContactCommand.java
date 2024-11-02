@@ -1,4 +1,4 @@
-package seedu.ddd.logic.commands;
+package seedu.ddd.logic.commands.list;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
@@ -6,22 +6,31 @@ import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
 
 /**
- * Lists vendors in the address book to the user.
+ * Lists all contacts in the address book to the user.
  */
-public class ListVendorCommand extends ListContactCommand {
+public class ListContactCommand extends ListCommand {
 
-    public ListVendorCommand(Predicate<Contact> predicate) {
-        super(predicate);
+    public static final String MESSAGE_SUCCESS = "Listed all contacts";
+
+    private final Predicate<Contact> predicate;
+
+    public ListContactCommand(Predicate<Contact> predicate) {
+        this.predicate = predicate;
+    }
+
+    public Predicate<Contact> getPredicate() {
+        return this.predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(this.getPredicate());
+        model.updateFilteredContactList(predicate);
         return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
                 model.getFilteredContactListSize()));
     }
@@ -32,17 +41,17 @@ public class ListVendorCommand extends ListContactCommand {
             return true;
         }
         // instanceof handles nulls
-        if (!(other instanceof ListVendorCommand)) {
+        if (!(other instanceof ListContactCommand)) {
             return false;
         }
-        ListVendorCommand otherListVendorCommand = (ListVendorCommand) other;
-        return this.getPredicate().equals(otherListVendorCommand.getPredicate());
+        ListContactCommand otherListContactCommand = (ListContactCommand) other;
+        return predicate.equals(otherListContactCommand.predicate);
     }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", this.getPredicate())
+                .add("predicate", predicate)
                 .toString();
     }
 }
+

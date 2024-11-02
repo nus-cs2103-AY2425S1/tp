@@ -1,4 +1,4 @@
-package seedu.ddd.logic.commands;
+package seedu.ddd.logic.commands.list;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
@@ -6,6 +6,7 @@ import static seedu.ddd.logic.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.event.common.Event;
 

@@ -1,4 +1,4 @@
-package seedu.ddd.logic.parser;
+package seedu.ddd.logic.parser.list;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
@@ -10,7 +10,10 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.ddd.logic.commands.ListClientCommand;
+import seedu.ddd.logic.commands.list.ListClientCommand;
+import seedu.ddd.logic.parser.ArgumentMultimap;
+import seedu.ddd.logic.parser.ArgumentTokenizer;
+import seedu.ddd.logic.parser.Parser;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.contact.common.predicate.ClientPredicateBuilder;
 import seedu.ddd.model.contact.common.predicate.ContactPredicateBuilder;

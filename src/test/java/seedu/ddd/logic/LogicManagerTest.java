@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.ddd.logic.commands.CommandResult;
-import seedu.ddd.logic.commands.ListContactCommand;
 import seedu.ddd.logic.commands.exceptions.CommandException;
+import seedu.ddd.logic.commands.list.ListContactCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;

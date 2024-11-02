@@ -6,8 +6,9 @@ import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.logic.commands.ListEventCommand;
+import seedu.ddd.logic.commands.list.ListEventCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.logic.parser.list.ListEventCommandParser;
 import seedu.ddd.model.event.common.predicate.EventPredicateBuilder;
 
 

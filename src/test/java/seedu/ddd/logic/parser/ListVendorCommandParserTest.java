@@ -5,8 +5,9 @@ import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.logic.commands.ListContactCommand;
+import seedu.ddd.logic.commands.list.ListContactCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.logic.parser.list.ListVendorCommandParser;
 
 public class ListVendorCommandParserTest {
     private ListVendorCommandParser parser = new ListVendorCommandParser();
