@@ -44,7 +44,7 @@ public class OrderListPanel extends UiPart<Region> {
      */
     public OrderListPanel(ReadOnlyObjectProperty<Person> selectedPersonProperty) {
         super(FXML);
-        orderGuide.setText("Use one of the following commands below to view order:\n" + "1. "
+        orderGuide.setText("Use the following command to view order(s):\n"
                 + ListOrderCommand.MESSAGE_USAGE);
         orderListEmpty.setText(EMPTY_ORDER_LIST_MESSAGE);
         updateOrderList(selectedPersonProperty.get());
