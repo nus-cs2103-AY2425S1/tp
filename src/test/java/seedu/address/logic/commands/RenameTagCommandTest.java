@@ -40,23 +40,19 @@ public class RenameTagCommandTest {
         assertCommandSuccess(renameTagCommand2, model, expectedMessage2, expectedModel);
     }
 
-    /*
     @Test
     public void execute_duplicateTags_success() {
-        Model model1 = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Person person1 = model1.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson1 = new PersonBuilder(person1).withTags("owesMoney").build();
-        Person person2 = model1.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedPerson2 = new PersonBuilder(person2).withTags("owesMoney", "friends").build();
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        String newTag = "owesMoney";
-        RenameTagCommand renameTagCommand = new RenameTagCommand("friends", newTag);
-        String expectedMessage = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, newTag);
-        Model expectedModel1 = new ModelManager(new AddressBook(model1.getAddressBook()), new UserPrefs());
-        expectedModel1.setPerson(person1, editedPerson1);
-        expectedModel1.setPerson(person2, editedPerson2);
-        assertCommandSuccess(renameTagCommand, model1, expectedMessage, expectedModel1);
-    }*/
+        RenameTagCommand renameTagCommand = new RenameTagCommand("friends", "owesMoney");
+        String expectedMessage = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "owesMoney");
+
+        assertCommandSuccess(renameTagCommand, model, expectedMessage, expectedModel);
+
+        RenameTagCommand renameTagCommand2 = new RenameTagCommand("owesMoney", "friends");
+        String expectedMessage2 = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "friends");
+        assertCommandSuccess(renameTagCommand2, model, expectedMessage2, expectedModel);
+    }
 
     @Test
     public void execute_renameInvalidTag_failure() {
