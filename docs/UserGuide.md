@@ -144,6 +144,7 @@ Move the .jar file you downloaded into this folder.
 
 ## 3.2 Graphical User Interface (GUI) Layout
 
+<img src="images/UiSplitView.png" alt="UISplitView">
 
 To learn more about how to use commands in AgentAssist, proceed to the next section.
 
