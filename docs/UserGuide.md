@@ -289,6 +289,7 @@ the data of your previous AcademyAssist folder.
 | **Delete** | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
 | **Edit** | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
 | **View** | `view`                                                                                                                                                                                  |
+| **Detail** | `detail STUDENT_ID`<br> e.g., `detail S00001`                                                                                                                                           |
 | **Find** | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
 | **Add Class** | `addc STUDENT_ID s/SUBJECT`<br> e.g., `addc S00003 Science`                                                                                                                             |
 | **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
