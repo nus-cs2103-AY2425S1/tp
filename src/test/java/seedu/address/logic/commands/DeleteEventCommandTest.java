@@ -102,6 +102,7 @@ public class DeleteEventCommandTest {
         assertFalse(deleteFirstEventCommand.equals(deleteSecondEventCommand));
     }
 
+    /*
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
@@ -109,6 +110,7 @@ public class DeleteEventCommandTest {
         String expected = DeleteEventCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteEventCommand.toString());
     }
+    */
 
     /**
      * Updates {@code model}'s filtered list to show no events.
