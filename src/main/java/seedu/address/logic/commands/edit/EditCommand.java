@@ -50,7 +50,7 @@ public class EditCommand extends Command {
             + " | " + PREFIX_EMAIL + "EMAIL) "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]+ "
-            + "[" + PREFIX_MODULE + "(+ | -)(MODULECODE[-ROLETYPE])+]"
+            + "[" + PREFIX_MODULE + "(+ | -)(MODULECODE[-ROLETYPE])+] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
