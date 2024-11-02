@@ -15,12 +15,14 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unrecognised command. "
             + "Only the following will be accepted as the first word of the command:\n"
             + "add, edit, delete, find, list, help, clear, exit";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_NAME_FIELD_MISSING = "Invalid command format! MISSING 'n/' \n%1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! %1$s"; // missing \n
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+                "Multiple values specified for the following single-valued field(s): "; // very strange for UI
+
+    public static final String MESSAGE_NAME_FIELD_MISSING = "Invalid command format! MISSING 'n/' \n%1$s";
+    public static final String MESSAGE_BLANK_FIELD = "field should not be blank!";
     public static final String MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK =
             "This contact is not in address book, please use Full Name";
     public static final String MESSAGE_NO_PARAMETER_FOUND = "Please enter something for me to search";

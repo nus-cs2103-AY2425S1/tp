@@ -95,7 +95,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 name = ParserUtil.parseName(str);
             } catch (Exception ex) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), ex);
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), ex);
             }
             return new EditCommand(name, editContactDescriptor);
         }

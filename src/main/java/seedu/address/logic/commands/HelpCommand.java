@@ -7,18 +7,21 @@ import seedu.address.model.Model;
  */
 public class HelpCommand extends Command {
 
+    // make use of magic numbers needed
     public static final String COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE = "Command List: add, delete, edit, find, list\n"
+    public static final String SHOWING_HELP_MESSAGE = "Command List: add, delete, edit, find, list, clear\n"
             + "For more details, type `help [COMMAND_WORD]` with the words found in the command list above\n"
             + "Alternatively, visit our user guide on the popup screen\n";
 
-    public static final String HELP_ADD = "`add n/[NAME] th/[TELEGRAM HANDLE] e/[EMAIL] s/[STUDENT_STATUS] r/[ROLE]`\n"
+    // what about nickname?
+    public static final String HELP_ADD = "`add n/[NAME] th/[TELEGRAM HANDLE] e/[EMAIL] ss/[STUDENT_STATUS]"
+            + " r/[ROLE]`\n"
             + "Example: add n/ John Doe th/ John_Doe "
-            + "e/ johndoe123@gmail.com s/ Undergraduate 2 r/ President\n"
+            + "e/ johndoe123@gmail.com ss/ Undergraduate 2 r/ President\n"
             + "For Student Status, the accepted ones are: Undergraduate 1 to 6, Masters or PhD\n"
             + "For Role, the accepted ones are: President, Vice President, Admin, Marketing, Events (Internal),"
             + " Events (External), or External Relations";

@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
@@ -45,6 +46,9 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (name.isEmpty()) {
+            throw new ParseException("Name " + MESSAGE_BLANK_FIELD);
+        }
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -60,6 +64,9 @@ public class ParserUtil {
     public static TelegramHandle parseTelegramHandle(String telegramHandle) throws ParseException {
         requireNonNull(telegramHandle);
         String trimmedTelegramHandle = telegramHandle.trim();
+        if (telegramHandle.isEmpty()) {
+            throw new ParseException("Telegram Handle " + MESSAGE_BLANK_FIELD);
+        }
         if (!TelegramHandle.isValidTelegramHandle(trimmedTelegramHandle)) {
             throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
@@ -75,6 +82,9 @@ public class ParserUtil {
     public static StudentStatus parseStudentStatus(String studentStatus) throws ParseException {
         requireNonNull(studentStatus);
         String trimmedStudentStatus = studentStatus.trim();
+        if (studentStatus.isEmpty()) {
+            throw new ParseException("Student Status " + MESSAGE_BLANK_FIELD);
+        }
         if (!StudentStatus.isValidStudentStatus(trimmedStudentStatus)) {
             throw new ParseException(StudentStatus.MESSAGE_CONSTRAINTS);
         }
@@ -90,6 +100,9 @@ public class ParserUtil {
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
+        if (email.isEmpty()) {
+            throw new ParseException("Email " + MESSAGE_BLANK_FIELD);
+        }
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
@@ -105,6 +118,9 @@ public class ParserUtil {
     public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
         String trimmedRole = role.trim();
+        if (role.isEmpty()) {
+            throw new ParseException(MESSAGE_BLANK_FIELD);
+        }
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }

@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -37,10 +37,19 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_EMAIL, PREFIX_STUDENT_STATUS,
                         PREFIX_ROLE, PREFIX_NICKNAME);
 
-        if (!arePrefixesPresent(
-                argMultimap, PREFIX_NAME, PREFIX_STUDENT_STATUS, PREFIX_TELEGRAM_HANDLE, PREFIX_EMAIL, PREFIX_ROLE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        List<Prefix> compulsoryPrefixes = List.of(PREFIX_NAME, PREFIX_STUDENT_STATUS,
+                PREFIX_TELEGRAM_HANDLE, PREFIX_EMAIL, PREFIX_ROLE);
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, "Missing fields and/or prefixes. Ensure there are no "
+                            + "non-whitespace characters before the prefix as well. Command usage:\n" + AddCommand.MESSAGE_USAGE));
+        }
+
+        if (!arePrefixesPresent(argMultimap, compulsoryPrefixes)) {
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, stringifyAllAbsentPrefix(argMultimap,
+                            compulsoryPrefixes) + " prefix(es) is/are missing. Command usage:\n" + AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
@@ -62,8 +71,16 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, List<Prefix> prefixes) {
+        return prefixes.stream().allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private static String stringifyAllAbsentPrefix(ArgumentMultimap argumentMultimap,
+                                                   List<Prefix> prefixes) {
+        return prefixes.stream().filter(prefix -> !argumentMultimap.getValue(prefix).isPresent())
+                .map(prefix -> prefix.getPrefix())
+                .reduce("", (allPrefixes, prefixString) -> allPrefixes + prefixString + "  ")
+                .trim();
     }
 
 }

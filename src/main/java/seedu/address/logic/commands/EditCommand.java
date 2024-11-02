@@ -51,11 +51,15 @@ public class EditCommand extends Command {
             + PREFIX_TELEGRAM_HANDLE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Edited Contact: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book.";
+    public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Contact edited successfully! The index "
+            + "of the contact has been reassigned if the name or nickname is edited. Edited Contact:\n%1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Ensure " +
+            "that the prefix is spelt correctly as well (e.g. n/ and not /n)";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This will result in a contact that already " +
+            "exists in the address book. Check if the edits to make or the existing contact details are " +
+            "incorrect";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-            "One of the fields you want to add conflict with another contact.";
+            "One of the fields you want to add/change conflict with another contact.";
 
     private static final int invalidTargetIndex = -1;
 
@@ -113,7 +117,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
-        if (!contactToEdit.isSameContact(editedContact)
+        if (contactToEdit.isSameContact(editedContact)
                 && model.hasDuplicateFieldsWithException(contactToEdit, editedContact)) {
             throw new CommandException(MESSAGE_DUPLICATE_FIELDS);
         }
@@ -154,6 +158,10 @@ public class EditCommand extends Command {
                 updatedNickname);
     }
 
+    private String editInfo(List<String> fieldsEdited) {
+        return fieldsEdited.stream().map(fieldClass -> fieldClass.getValue() )
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -189,6 +197,7 @@ public class EditCommand extends Command {
         private StudentStatus studentStatus;
         private Set<Role> roles;
         private Nickname nickname;
+        private List<String> fieldsToEdit;
 
         public EditContactDescriptor() {}
 
@@ -214,6 +223,7 @@ public class EditCommand extends Command {
 
         public void setName(Name name) {
             this.name = name;
+            fieldsToEdit.add("name");
         }
 
         public Optional<Name> getName() {
@@ -221,7 +231,9 @@ public class EditCommand extends Command {
         }
 
         public void setTelegramHandle(TelegramHandle telegramHandle) {
+
             this.telegramHandle = telegramHandle;
+            fieldsToEdit.add("telegramhandle");
         }
 
         public Optional<TelegramHandle> getTelegramHandle() {
@@ -229,7 +241,9 @@ public class EditCommand extends Command {
         }
 
         public void setEmail(Email email) {
+
             this.email = email;
+            fieldsToEdit.add("email");
         }
 
         public Optional<Email> getEmail() {
@@ -237,7 +251,9 @@ public class EditCommand extends Command {
         }
 
         public void setStudentStatus(StudentStatus studentStatus) {
+
             this.studentStatus = studentStatus;
+            fieldsToEdit.add("studentStatus");
         }
 
         public Optional<StudentStatus> getStudentStatus() {
@@ -250,6 +266,7 @@ public class EditCommand extends Command {
          */
         public void setRoles(Set<Role> roles) {
             this.roles = (roles != null) ? new HashSet<>(roles) : null;
+            fieldsToEdit.add("roles");
         }
 
         /**
@@ -263,10 +280,16 @@ public class EditCommand extends Command {
 
         public void setNickname(Nickname nickname) {
             this.nickname = nickname;
+            fieldsToEdit.add("nickname");
         }
 
         public Optional<Nickname> getNickname() {
             return Optional.ofNullable(nickname);
+        }
+
+        // can abstract the class of personal particulars with a generic one
+        public List<String> getfieldsToEdit() {
+            return fieldsToEdit;
         }
 
         @Override
