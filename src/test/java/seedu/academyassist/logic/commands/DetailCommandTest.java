@@ -32,7 +32,7 @@ public class DetailCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAcademyAssist(), new UserPrefs());
         CommandResult expectedCommandResult = new CommandResult(
-                expectedMessage, false, false, true,  personToView);
+                expectedMessage, false, false, false, true, personToView);
         assertCommandSuccess(detailCommand, model, expectedCommandResult, expectedModel);
     }
 

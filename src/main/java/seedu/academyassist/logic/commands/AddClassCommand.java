@@ -41,6 +41,7 @@ public class AddClassCommand extends Command {
      */
     public AddClassCommand(StudentId studentId, Set<Subject> toAddSubjects) {
         requireNonNull(studentId);
+        requireNonNull(toAddSubjects);
         this.studentId = studentId;
         this.toAddSubjects = toAddSubjects;
     }

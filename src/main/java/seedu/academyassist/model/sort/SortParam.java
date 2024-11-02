@@ -9,45 +9,49 @@ import seedu.academyassist.commons.util.AppUtil;
  */
 public class SortParam {
 
-    public static final String MESSAGE_CONSTRAINTS = "Sort parameters can only be 'name' or 'class'";
+    public static final String MESSAGE_CONSTRAINTS = "Sort parameters can only be 'name' or 'class' or 'studentId' ";
 
     private SortField field;
 
     private enum SortField {
         NAME,
-        CLASS
+        CLASS,
+        ID
     };
 
     /**
      * Constructs a SortParam
      *
-     * @param sortParamString either "name" or "class"
+     * @param sortParamString either "name", "class" OR "studentId"
      */
     public SortParam(String sortParamString) {
         requireNonNull(sortParamString);
         AppUtil.checkArgument(isValidSortParam(sortParamString), MESSAGE_CONSTRAINTS);
         if (sortParamString.equals("name")) {
-            System.out.println("name");
             this.field = SortField.NAME;
         } else if (sortParamString.equals("class")) {
-            System.out.println("class");
             this.field = SortField.CLASS;
+        } else if (sortParamString.equals("studentId")) {
+            this.field = SortField.ID;
         }
     }
 
     /**
      * Returns true if a given string is a valid sort parameter.
      */
-    public static boolean isValidSortParam(String test) {
-        return (test.equals("name") || test.equals("class"));
+    public static boolean isValidSortParam(String testString) {
+        return (testString.equals("name") || testString.equals("class") || testString.equals("studentId"));
     }
 
     @Override
     public String toString() {
         if (this.field == SortField.CLASS) {
             return "class";
-        } else {
+        } else if (this.field == SortField.NAME) {
             return "name";
+        } else if (this.field == SortField.ID) {
+            return "studentId";
         }
+        return null;
     }
 }

@@ -28,7 +28,6 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         SortParam sortCommandParam = ParserUtil.parseSortCommandParam(argMultimap.getValue(PREFIX_SORT_PARAM).get());
 
-
         return new SortCommand(sortCommandParam);
     }
 

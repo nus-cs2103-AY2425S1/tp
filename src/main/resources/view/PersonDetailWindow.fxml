@@ -32,6 +32,7 @@
         <Label fx:id="email" styleClass="detail-label" wrapText="true" />
         <Label fx:id="address" styleClass="detail-label" wrapText="true" />
         <Label fx:id="subject" styleClass="detail-label" wrapText="true" />
+        <Label fx:id="closeWindowMessage" styleClass="closeWindow-label" wrapText="true" />
     </children>
 </VBox>
         </Scene>
