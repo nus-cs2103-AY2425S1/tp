@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
 import seedu.address.model.tag.Tag;
 
@@ -55,41 +54,6 @@ class JsonAdaptedDate {
             throw new IllegalValueException(Date.getMessageConstraints());
         }
         return new Date(LocalDateTime.parse(dateString, DATE_FORMATTER));
-    }
-
-    /**
-     * Parses the date string into individual date components (day, month, year) if the format and values are valid.
-     *
-     * <p>If the provided {@code dateString} does not match the expected format or contains out-of-range values,
-     * a {@code ParseException} is thrown to indicate the specific issue.</p>
-     *
-     * <ul>
-     *     <li>Expected format: {@code "d/M/yyyy HHmm"} (e.g., "2/12/2024 1800").</li>
-     *     <li>The method first checks for a valid format using {@code FORMAT_PATTERN}.</li>
-     *     <li>Then, it validates date and time values using {@code DATE_PATTERN}.</li>
-     * </ul>
-     *
-     * @return An array of strings representing the day, month, and year, extracted from the {@code dateString}.
-     * @throws ParseException if the date format is incorrect or if date/time values are invalid.
-     *      <ul>
-     *          <li>If the format is incorrect, an exception message indicates the expected format.</li>
-     *          <li>If the date or time values are out of range, an exception message highlights this.</li>
-     *      </ul>
-     */
-    private String[] getDateParts() throws ParseException {
-        if (!dateString.matches(DATE_PATTERN)) {
-            if (!dateString.matches(FORMAT_PATTERN)) {
-                throw new ParseException("Invalid date format! Please use 'd/M/yyyy HHmm'. "
-                        + "For example, '2/12/2024 1800'.");
-            } else {
-                throw new ParseException("Invalid date or time values! "
-                        + "Ensure day, month, hour, and minute ranges are correct.");
-            }
-        }
-
-        String[] dateAndTime = dateString.split(" ");
-        String[] dateParts = dateAndTime[0].split("/");
-        return dateParts;
     }
 
 }

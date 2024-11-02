@@ -69,6 +69,8 @@ public class DateTest {
         //invalid day for given month
         assertFalse(Date.isValidDate("31/4/2024 1200"));
         assertFalse(Date.isValidDate("31/6/2024 1200"));
+        assertFalse(Date.isValidDate("31/9/2024 1200"));
+        assertFalse(Date.isValidDate("31/11/2024 1200"));
         assertFalse(Date.isValidDate("31/2/2024 1200"));
         //invalid format
         assertFalse(Date.isValidDate("12-31-2024 12am"));

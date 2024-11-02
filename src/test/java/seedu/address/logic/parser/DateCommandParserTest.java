@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DateCommand;
 import seedu.address.model.person.Date;
 
@@ -22,10 +23,18 @@ public class DateCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE);
         // no parameters
         assertParseFailure(parser, DateCommand.COMMAND_WORD, expectedMessage);
-        // no Name
+        // no Name, no Phone, no Email
         expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE);
-
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " " + nonEmptyDate, expectedMessage);
+
+        //invalid Phone
+        expectedMessage = Messages.MESSSAGE_INVALID_PHONE_DETAILS;
+        assertParseFailure(parser, DateCommand.COMMAND_WORD + " p/111102457 " + nonEmptyDate, expectedMessage);
+
+        //invalid Email
+        expectedMessage = Messages.MESSAGE_INVALID_EMAIL_DETAILS;
+        assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/invalid email " + nonEmptyDate, expectedMessage);
+
 
     }
     @Test
