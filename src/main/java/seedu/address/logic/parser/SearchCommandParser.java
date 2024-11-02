@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.SearchCommand;
@@ -47,12 +49,15 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         String phoneArgs = argMultimap.getValue(PREFIX_PHONE).orElse("");
         String roleArgs = argMultimap.getValue(PREFIX_ROLE).orElse("");
 
-        // Check for empty inputs after the prefixes
-        checkForEmptyInput(argMultimap, PREFIX_NAME, nameArgs);
-        checkForEmptyInput(argMultimap, PREFIX_TAG, tagArgs);
-        checkForEmptyInput(argMultimap, PREFIX_GROUP_NAME, groupArgs);
-        checkForEmptyInput(argMultimap, PREFIX_PHONE, phoneArgs);
-        checkForEmptyInput(argMultimap, PREFIX_ROLE, roleArgs);
+        // Create a map of prefixes and associated values to check for empty inputs
+        Map<Prefix, String> prefixValueMap = new HashMap<>();
+        prefixValueMap.put(PREFIX_NAME, nameArgs);
+        prefixValueMap.put(PREFIX_TAG, tagArgs);
+        prefixValueMap.put(PREFIX_GROUP_NAME, groupArgs);
+        prefixValueMap.put(PREFIX_PHONE, phoneArgs);
+        prefixValueMap.put(PREFIX_ROLE, roleArgs);
+
+        checkForEmptyInputs(argMultimap, prefixValueMap);
 
         Predicate<Person> combinedPredicate = null;
 
@@ -93,6 +98,19 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         return new SearchCommand(combinedPredicate, groupArgs);
     }
 
+    /**
+     * Checks for any empty input values for the specified prefixes.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the user's input and associated prefixes.
+     * @param prefixValueMap A map of {@code Prefix} and associated values to check for empty input.
+     * @throws ParseException If any prefix is present but its associated value is empty.
+     */
+    private void checkForEmptyInputs(ArgumentMultimap argMultimap, Map<Prefix, String> prefixValueMap)
+            throws ParseException {
+        for (Map.Entry<Prefix, String> entry : prefixValueMap.entrySet()) {
+            validatePrefixNotEmpty(argMultimap, entry.getKey(), entry.getValue());
+        }
+    }
 
     /**
      * Checks if the value for a given prefix is empty in the {@code ArgumentMultimap}.
@@ -103,7 +121,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
      * @param value The value associated with the {@code prefix} to check.
      * @throws ParseException If the prefix is present but its value is empty.
      */
-    private void checkForEmptyInput(ArgumentMultimap argMultimap, Prefix prefix, String value)
+    private void validatePrefixNotEmpty(ArgumentMultimap argMultimap, Prefix prefix, String value)
             throws ParseException {
         if (argMultimap.getValue(prefix).isPresent() && value.trim().isEmpty()) {
             throw new ParseException(MESSAGE_EMPTY_SEARCH_PREFIX);
