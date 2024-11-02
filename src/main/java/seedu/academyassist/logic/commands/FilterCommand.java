@@ -20,7 +20,8 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter contacts based on year group or subject. " + "\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Filter contacts based on year group or subject. " + "\n"
             + "Parameters: "
             + PREFIX_YEARGROUP + "YEARGROUP " + "or "
             + PREFIX_SUBJECT + "SUBJECT " + "\n"
