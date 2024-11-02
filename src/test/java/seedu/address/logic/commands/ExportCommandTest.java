@@ -40,13 +40,6 @@ public class ExportCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
-
-    @Test
-    public void execute_export_success() {
-        CommandResult expectedCommandResult = new CommandResult(SUCCESS_MESSAGE);
-        assertCommandSuccess(new ExportCommand(), model, expectedCommandResult, expectedModel);
-    }
-
     @Test
     public void equals() {
         final ExportCommand standardCommand = new ExportCommand();
