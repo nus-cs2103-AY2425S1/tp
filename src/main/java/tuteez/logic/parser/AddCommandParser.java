@@ -107,6 +107,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if any of the required fields are missing
      */
     private void verifyRequiredFields(Name name, Phone phone) throws ParseException {
+        if (name == null && phone == null) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
         if (name == null) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PERSON_NAME));
         }

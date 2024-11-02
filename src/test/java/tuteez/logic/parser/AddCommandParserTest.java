@@ -178,18 +178,21 @@ public class AddCommandParserTest {
         String expectedMissingNameMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PERSON_NAME);
         String expectedMissingPhoneMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PHONE);
 
+        // Boundary Value Test: Empty input
+        assertParseFailure(parser, "   ", expectedMessage);
+
         // contains preamble
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMessage);
 
-        // missing phone prefix
+        // Missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMissingPhoneMessage);
 
-        // missing name prefix
+        // Missing name prefix
         assertParseFailure(parser, PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMissingNameMessage);
 
-        // all prefixes missing
+        // Boundary Value Test: All prefixes are missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
                 expectedMessage);
     }
