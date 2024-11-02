@@ -65,5 +65,4 @@ public class FilterByNetworkCommandTest {
         // Different network -> returns false
         assertFalse(filterBtcCommand.equals(filterEthCommand));
     }
-
 }
