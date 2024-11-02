@@ -180,6 +180,7 @@ public class PublicAddressesCompositionTest {
         assertThrows(AssertionError.class, () ->
             composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, VALID_PUBLIC_ADDRESS_ETH_MAIN));
     }
+
     //------------------ Empty Network Tests ------------------
 
     @Test
@@ -187,6 +188,25 @@ public class PublicAddressesCompositionTest {
         // EP: get addresses from empty network
         PublicAddressesComposition composition = new PublicAddressesComposition();
         Set<PublicAddress> addresses = composition.getByNetwork(Network.BTC);
+
+        assertTrue(addresses.isEmpty());
+    }
+
+    @Test
+    public void getByNetwork_nullNetwork_throwsAssertionError() {
+        // EP: null network
+        PublicAddressesComposition composition = new PublicAddressesComposition();
+        assertThrows(AssertionError.class, () ->
+            composition.getByNetwork(null));
+    }
+
+    @Test
+    public void getByNetwork_nonExistentNetwork() {
+        // EP: get addresses from non-existent network
+        PublicAddressesComposition composition = new PublicAddressesComposition();
+        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+
+        Set<PublicAddress> addresses = composition.getByNetwork(Network.ETH);
 
         assertTrue(addresses.isEmpty());
     }
@@ -241,16 +261,6 @@ public class PublicAddressesCompositionTest {
         assertTrue(addresses.contains(VALID_PUBLIC_ADDRESS_BTC_MAIN));
     }
 
-    @Test
-    public void getByNetwork_nonExistentNetwork() {
-        // EP: get addresses from non-existent network
-        PublicAddressesComposition composition = new PublicAddressesComposition();
-        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
-
-        Set<PublicAddress> addresses = composition.getByNetwork(Network.ETH);
-
-        assertTrue(addresses.isEmpty());
-    }
 
     //------------------ Label Tests ------------------
 
@@ -350,6 +360,14 @@ public class PublicAddressesCompositionTest {
         PublicAddressesComposition composition = new PublicAddressesComposition();
 
         assertFalse(composition.containsPublicAddressStringAmongAllNetworks(VALID_PUBLIC_ADDRESS_BTC_MAIN));
+    }
+
+    @Test
+    public void containsPublicAddressStringAmongAllNetworks_nullAddress_throwsAssertionError() {
+        // EP: null address
+        PublicAddressesComposition composition = new PublicAddressesComposition();
+        assertThrows(AssertionError.class, () ->
+            composition.containsPublicAddressStringAmongAllNetworks(null));
     }
 
     //------------------ Get Any Public Address Tests ------------------
