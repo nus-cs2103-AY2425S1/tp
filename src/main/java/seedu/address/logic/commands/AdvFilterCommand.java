@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Sort the contact list based on tag names and values.
+ * Filters the contact list based on tag name, value and operator.
  */
 public class AdvFilterCommand extends Command {
 
@@ -73,7 +73,7 @@ public class AdvFilterCommand extends Command {
 
         Predicate<Person> predicate = person -> {
             boolean tagMatches = person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName)
-                    && tag.tagValue != null ? compare(operator, tag, tagValue) : false);
+                    && (tag.tagValue != null ? compare(operator, tag, tagValue) : true));
             return tagMatches;
         };
 
