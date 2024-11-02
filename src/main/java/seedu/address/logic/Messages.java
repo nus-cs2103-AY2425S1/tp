@@ -87,6 +87,11 @@ public class Messages {
             builder.append(moduleRoleMapData);
         }
 
+        // Only display Description: if present
+        person.getDescription().filter(value -> !value.isBlank())
+            .ifPresent(description -> builder.append("; Description: ")
+            .append(person.getDescription().map(Object::toString).orElse("")));
+
         return builder.toString();
     }
 

@@ -20,6 +20,7 @@ import seedu.address.logic.commands.edit.DeleteModuleRoleOperation;
 import seedu.address.logic.commands.edit.EditModuleRoleOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
@@ -36,6 +37,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_ROLETYPE_KEYWORD = "#prof";
+    private static final String INVALID_DESCRIPTION = "a".repeat(501);
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -49,6 +51,8 @@ public class ParserUtilTest {
     private static final String VALID_ROLETYPE_KEYWORD_4 = "Tutor";
     private static final String VALID_ROLETYPE_KEYWORD_5 = "Professor";
     private static final String VALID_ROLETYPE_KEYWORD_6 = "Prof";
+    private static final String VALID_DESCRIPTION_TEXT = "This is a description";
+    private static final String VALID_DESCRIPTION_EMPTY = "";
 
     private static final String INVALID_MODULE_ROLE_PAIR_INVALID_MODULE_CODE = "1234-student";
     private static final String INVALID_MODULE_ROLE_PAIR_INVALID_ROLE_TYPE = "CS1101S-role";
@@ -406,5 +410,27 @@ public class ParserUtilTest {
         // Mixed add and delete
         String mixedAddAndDelete = "+CS1101S-student -MA1521-student";
         assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(mixedAddAndDelete));
+    }
+
+    @Test
+    public void parseDescription_validDescription_returnsDescription() throws Exception {
+        Description expectedDescription1 = new Description(VALID_DESCRIPTION_TEXT);
+        assertEquals(expectedDescription1, ParserUtil.parseDescription(VALID_DESCRIPTION_TEXT));
+    }
+
+    @Test
+    public void parseDescription_emptyDescription_returnsDescription() throws Exception {
+        Description expectedDescription1 = new Description(VALID_DESCRIPTION_TEXT);
+        assertEquals(expectedDescription1, ParserUtil.parseDescription(VALID_DESCRIPTION_TEXT));
+    }
+
+    @Test
+    public void parseDescription_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseDescription_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
     }
 }
