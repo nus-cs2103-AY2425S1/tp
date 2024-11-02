@@ -247,10 +247,10 @@ generated for these fields. This usually occurs after a `clear` command.
 <div markdown="block" class="alert alert-primary">
 :bulb: **Tips:** for Efficient Usage <br>
 
-1. `Start with the command`: Autocomplete only activates for commands when typing the first word. <br>
-2. `Remember to use prefixes`: For fields, make sure to use the correct prefix (`m/`, `t/`, `g/`, `pa/`) to activate Autocomplete for those fields. <br>
-3. `Select from suggestions using arrow keys`: Save time by selecting from the suggestion list using arrow keys rather than typing full names or values.<br>
-4. `Typos`: When you accidentally type in the wrong name for an existing field, instead of holding backspace and retyping the entire field, simply move the caret position over to the 
+1. **Start with the command**: Autocomplete only activates for commands when typing the first word. <br>
+2. **Remember to use prefixes**: For fields, make sure to use the correct prefix (`m/`, `t/`, `g/`, `pa/`) to activate Autocomplete for those fields. <br>
+3. **Select from suggestions using arrow keys**: Save time by selecting from the suggestion list using arrow keys rather than typing full names or values.<br>
+4. **Typos**: When you accidentally type in the wrong name for an existing field, instead of holding backspace and retyping the entire field, simply move the caret position over to the 
 prefix, and select from the list of suggestions. Autocomplete will replace the entire field with your selection for you.
 </div>
 
