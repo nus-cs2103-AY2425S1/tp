@@ -23,7 +23,7 @@ public class Event {
     /**
      * Every field must be present and not null.
      */
-    public Event(EventName name, Time time, Venue venue, Person person, Set<Person> contacts) {
+    private Event(EventName name, Time time, Venue venue, Person person, Set<Person> contacts) {
         this.name = name;
         this.time = time;
         this.venue = venue;
@@ -32,10 +32,10 @@ public class Event {
     }
 
     /**
-     * Constructor for Event without Venue
+     * Constructor for {@code Event} without Venue
      * Every field must be present and not null.
      */
-    public Event(EventName name, Time time, Person person, Set<Person> contacts) {
+    private Event(EventName name, Time time, Person person, Set<Person> contacts) {
         this.name = name;
         this.time = time;
         this.venue = null;
@@ -44,8 +44,8 @@ public class Event {
     }
 
     /**
-     * Constructor for Person in general
-     * Returns a Person object using the different constructors given the respective fields.
+     * Constructor for {@code Event} in general
+     * Returns a {@code Event} object using the different constructors given the respective fields.
      */
     public static Event createEvent(EventName name, Time time, Venue venue, Person person, Set<Person> contacts) {
         if (venue == null) {

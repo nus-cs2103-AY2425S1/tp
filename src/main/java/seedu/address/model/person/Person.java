@@ -27,10 +27,10 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Constructor for Person with Email and Address
+     * Constructor for {@code Person} with Email and Address
      * All fields must not be null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    private Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -40,10 +40,10 @@ public class Person {
     }
 
     /**
-     * Constructor for Person without Address
+     * Constructor for {@code Person} without Address
      * All fields must not be null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+    private Person(Name name, Phone phone, Email email, Set<Tag> tags) {
         requireAllNonNull(name, phone, email);
         this.name = name;
         this.phone = phone;
@@ -53,10 +53,10 @@ public class Person {
     }
 
     /**
-     * Constructor for Person without Email
+     * Constructor for {@code Person} without Email
      * All fields must not be null.
      */
-    public Person(Name name, Phone phone, Address address, Set<Tag> tags) {
+    private Person(Name name, Phone phone, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, address);
         this.name = name;
         this.phone = phone;
@@ -66,10 +66,10 @@ public class Person {
     }
 
     /**
-     * Constructor for Person without Email and Address
+     * Constructor for {@code Person} without Email and Address
      * All fields must not be null.
      */
-    public Person(Name name, Phone phone, Set<Tag> tags) {
+    private Person(Name name, Phone phone, Set<Tag> tags) {
         requireAllNonNull(name, phone);
         this.name = name;
         this.phone = phone;
@@ -79,8 +79,8 @@ public class Person {
     }
 
     /**
-     * Constructor for Person in general
-     * Returns a Person object using the different constructors given the respective fields.
+     * Constructor for {@code Person} in general
+     * Returns a {@code Person} object using the different constructors given the respective fields.
      */
     public static Person createPerson(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         if (email == null && address == null) {
