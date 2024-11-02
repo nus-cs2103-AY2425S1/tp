@@ -16,6 +16,8 @@ Let’s begin and get you up to speed with AgentAssist!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Table of Contents
 
 1. [Introduction](#1-introduction)
@@ -40,6 +42,7 @@ Let’s begin and get you up to speed with AgentAssist!
 7. [Known Issues](#7-known-issues)
 8. [Command Summary](#8-command-summary)
 
+<div style="page-break-after: always;"></div>
 
 # 1. Introduction
 ## 1.1 What is AgentAssist?
@@ -62,6 +65,8 @@ Maximize your productivity, minimize your response time, and amplify your sales 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # 2. Important Prerequisites
 
 Before you start using AgentAssist, there are a few prerequisites to ensure you get the most out of the application:
@@ -76,6 +81,8 @@ AgentAssist is designed to enhance speed and efficiency, with a strong focus on 
 AgentAssist allows you to manage client data like names, phone numbers, emails, and job information. A basic understanding of these data fields will make it easier to add, edit, and filter client information.
 
 🎉 **By meeting these prerequisites, you'll be ready to make the most of AgentAssist’s fast, keyboard-driven interface and powerful data management features.** 🎉
+
+<div style="page-break-after: always;"></div>
 
 # 3. Getting Started
 Welcome to AgentAssist. Here’s how to get up and running quickly and easily.
@@ -142,6 +149,8 @@ Move the .jar file you downloaded into this folder.
 4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
    You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity!
 
+<div style="page-break-after: always;"></div>
+
 ## 3.2 Graphical User Interface (GUI) Layout
 
 <img src="images/UiSplitView.png" alt="UISplitView">
@@ -149,6 +158,8 @@ Move the .jar file you downloaded into this folder.
 To learn more about how to use commands in AgentAssist, proceed to the next section.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 # 4. Understanding Commands in AgentAssist {#using-agentassist}
 
@@ -195,6 +206,8 @@ Here is a reference table that briefly summarizes available commands:
 
 Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
 
+<div style="page-break-after: always;"></div>
+
 ## 4.3 Flags
 
 AgentAssist uses flags as a shorthand for different options in commands. Flags help you specify what kind of information you are providing, allowing you to write shorter and more efficient commands, improving your workflow.
@@ -218,6 +231,8 @@ Here’s a reference table of available flags and the type of data they correspo
 > 💡 **Pro Tip:**
 >
 > Flags are typically derived from the first letter of their corresponding data type (e.g., `n/` for `name`), making them easy to remember!
+
+<div style="page-break-after: always;"></div>
 
 ## 4.4 Arguments
 
@@ -243,6 +258,8 @@ Refer to the table below for more details.
 > Ensure every flag is followed by a valid argument!
 >
 > Providing a flag without an accompanying argument will result in an error and prevent the command from executing properly.
+
+<div style="page-break-after: always;"></div>
 
 ## 4.5 Using Commands
 To get started, simply type a command into the command box and hit **Enter**.
@@ -280,6 +297,8 @@ Refer to the [Commands Section](#5-commands) for more comprehensive details of e
 > For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 # 5. Commands
 
@@ -697,6 +716,8 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 6. FAQ
 
 ### How do I transfer my data to another Computer?
@@ -719,6 +740,8 @@ Each credit card tier is visually distinguished in the UI: Gold is marked with a
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 8. Command Summary
 
