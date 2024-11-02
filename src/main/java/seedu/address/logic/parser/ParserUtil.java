@@ -138,15 +138,15 @@ public class ParserUtil {
 
     /**
      * Parses {@code String claimId} into a valid claimId.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be trimmed. Claim ID will be in uppercase.
      *
      * @throws ParseException if the given claimId is invalid based on preset conventions.
      */
     public static String parseClaimId(String claimId) throws ParseException {
         requireNonNull(claimId);
-        String trimmedClaimId = claimId.trim();
-        Claim.checkValidClaimId(trimmedClaimId);
-        return trimmedClaimId;
+        String processedClaimId = claimId.trim().toUpperCase();
+        Claim.checkValidClaimId(processedClaimId);
+        return processedClaimId;
     }
 
     /**

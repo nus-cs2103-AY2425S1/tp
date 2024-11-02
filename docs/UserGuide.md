@@ -130,7 +130,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find john betsy'](images/findJohnBetsyResult.png)
 
 ### Deleting a client : `delete`
 
@@ -155,7 +155,7 @@ Format: `addInsurance INDEX iid/INSURANCE_ID`
 * If the `INDEX` or `INSURANCE_ID` is invalid, the user will be informed with an error message.
 
 Examples:
-* `addInsurance 1 id/1` adds the insurance plan with `INSURANCE_ID` 1 to the client at `INDEX` 1
+* `addInsurance 1 iid/1` adds the insurance plan with `INSURANCE_ID` 1 to the client at `INDEX` 1
 
 ### Deleting an insurance plan from a client : `deleteInsurance`
 
@@ -263,6 +263,14 @@ Exits the program.
 
 Format: `exit`
 
+### Changing the theme of the app
+
+Click Theme to toggle between Dark Theme and Light Theme.
+#### Dark Theme (default) 
+![Dark Theme (default)](images/darkTheme.png) 
+#### Light Theme
+![Light Theme](images/lightTheme.png)
+
 ### Saving the data
 
 App data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -277,10 +285,6 @@ App data are saved automatically as a JSON file `[JAR file location]/data/inSURE
 If your changes to the data file makes its format invalid, app will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 

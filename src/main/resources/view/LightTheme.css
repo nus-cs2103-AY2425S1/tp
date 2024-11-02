@@ -103,6 +103,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: #ffffff;
 }
 
 .list-cell:filled:even {
@@ -139,7 +140,7 @@
 }
 
 .stack-pane {
-    -fx-background-color: derive(#f4f0f0, -20%);
+    -fx-background-color: #ffffff;
 }
 
 .pane-with-border {
