@@ -143,6 +143,45 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int[] getFilteredGuestListCount() {
+        ObservableList<Person> guestList = getFilteredGuestList();
+        int guestCount = guestList.size();
+        int guestsPending = (int) guestList.stream()
+                .filter(person -> rsvpPredicate(person, "P"))
+                .count();
+
+        int guestsComing = (int) guestList.stream()
+                .filter(person -> rsvpPredicate(person, "A"))
+                .count();
+
+        int guestsNotComing = (int) guestList.stream()
+                .filter(person -> rsvpPredicate(person, "D"))
+                .count();
+        return new int[] { guestCount, guestsPending, guestsComing, guestsNotComing };
+    }
+
+    /**
+     * Predicate function used to filter the guestList.
+     * If each person matches the rsvp status, returns true.
+     * Else, returns false.
+     */
+    private boolean rsvpPredicate(Person p, String rsvpStatus) {
+        assert(p instanceof Guest);
+        Guest g = (Guest) p;
+        if (g.getRsvp().rsvp.equals(rsvpStatus)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getFilteredVendorListCount() {
+        ObservableList<Person> vendorList = getFilteredVendorList();
+        int vendorCount = vendorList.size();
+        return vendorCount;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

@@ -20,6 +20,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_TOTAL_GUEST = "There %s %d guest%s. (%d pending, %d coming, %d not coming)\n";
+    public static final String MESSAGE_TOTAL_VENDOR = "There %s %d vendor%s.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -90,5 +92,24 @@ public class Messages {
                 .append("; Tags: ");
         vendor.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    public static String getSuccessMessageWithStats(String commandSuccess, int[] guestCounts, int vendorCount) {
+        int guestCount = guestCounts[0];
+        int guestsPending = guestCounts[1];
+        int guestsComing = guestCounts[2];
+        int guestsNotComing = guestCounts[3];
+
+        String guestMessage = String.format(MESSAGE_TOTAL_GUEST,
+                guestCount == 1 ? "is" : "are",
+                guestCount,
+                guestCount == 1 ? "" : "s",
+                guestsPending, guestsComing, guestsNotComing);
+
+        String vendorMessage = String.format(MESSAGE_TOTAL_VENDOR,
+                vendorCount == 1 ? "is" : "are",
+                vendorCount,
+                vendorCount == 1 ? "" : "s");
+        return commandSuccess + guestMessage + vendorMessage;
     }
 }
