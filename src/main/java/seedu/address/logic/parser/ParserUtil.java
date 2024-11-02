@@ -200,7 +200,6 @@ public class ParserUtil {
         requireNonNull(operator);
         String trimmedOperator = operator.trim();
         if (!IncomeComparisonOperator.isValidComparisonOperator(trimmedOperator)) {
-            System.out.println(("HERE"));
             throw new ParseException(IncomeComparisonOperator.MESSAGE_CONSTRAINTS);
         }
         return new IncomeComparisonOperator(trimmedOperator);

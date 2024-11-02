@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandCommons.getErrorMessage;
+import static seedu.address.logic.commands.CommandCommons.parseField;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPEND_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -12,6 +14,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -53,38 +58,52 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_INCOME, PREFIX_JOB, PREFIX_TIER, PREFIX_NEW_REMARK, PREFIX_APPEND_REMARK, PREFIX_STATUS);
 
         EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
-
+        Set<String> errors = new LinkedHashSet<>();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editClientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editClientDescriptor.setName(
+                    parseField(() -> ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editClientDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editClientDescriptor.setPhone(
+                    parseField(() -> ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editClientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editClientDescriptor.setEmail(
+                    parseField(() -> ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editClientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            editClientDescriptor.setAddress(
+                    parseField(() -> ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()),
+                            errors));
         }
         if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
-            editClientDescriptor.setJob(ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()));
+            editClientDescriptor.setJob(parseField(() -> ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()),
+                    errors));
         }
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
-            editClientDescriptor.setIncome(ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get()));
+            editClientDescriptor.setIncome(parseField(() -> ParserUtil.parseIncome(
+                    argMultimap.getValue(PREFIX_INCOME).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
-            editClientDescriptor.setTier(ParserUtil.parseTier(argMultimap.getValue(PREFIX_TIER).get()));
+            editClientDescriptor.setTier(parseField(() -> ParserUtil.parseTier(
+                    argMultimap.getValue(PREFIX_TIER).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_NEW_REMARK).isPresent()) {
-            editClientDescriptor.setNewRemark(ParserUtil.parseNewRemark(argMultimap.getValue(PREFIX_NEW_REMARK).get()));
+            editClientDescriptor.setNewRemark(parseField(() -> ParserUtil.parseNewRemark(
+                    argMultimap.getValue(PREFIX_NEW_REMARK).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_APPEND_REMARK).isPresent()) {
-            editClientDescriptor.setAppendedRemark(ParserUtil.parseNewRemark(
-                    argMultimap.getValue(PREFIX_APPEND_REMARK).get()));
+            editClientDescriptor.setAppendedRemark(parseField(() -> ParserUtil.parseNewRemark(
+                    argMultimap.getValue(PREFIX_APPEND_REMARK).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            editClientDescriptor.setStatus((ParserUtil.parseStatus(
-                    argMultimap.getValue(PREFIX_STATUS).get())));
+            editClientDescriptor.setStatus(parseField(() -> ParserUtil.parseStatus(
+                    argMultimap.getValue(PREFIX_STATUS).get()), errors));
+        }
+
+        if (!errors.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    getErrorMessage(errors)));
         }
 
         if (!editClientDescriptor.isAnyFieldEdited()) {

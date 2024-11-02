@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB; // Import job pre
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
 import seedu.address.logic.commands.AddCommand;
@@ -37,7 +38,7 @@ public class ClientUtil {
         sb.append(PREFIX_JOB + client.getJob().value + " ");
         sb.append(PREFIX_INCOME + (String.valueOf(client.getIncome().value)) + " ");
         sb.append(PREFIX_TIER + client.getTier().toParsableString() + " ");
-        sb.append(PREFIX_NEW_REMARK + client.getRemark().value + " ");
+        sb.append(PREFIX_REMARK + client.getRemark().value + " ");
         return sb.toString();
     }
 

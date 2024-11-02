@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import seedu.address.model.client.predicates.JobContainsSubstringPredicate;
 import seedu.address.model.client.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.client.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.client.predicates.RemarkContainsSubstringPredicate;
+import seedu.address.model.client.predicates.StatusStartsWithSubstringPredicate;
 import seedu.address.model.client.predicates.TierStartsWithSubstringPredicate;
 import seedu.address.model.util.IncomeComparisonOperator;
 
@@ -45,14 +47,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_INCOME, PREFIX_JOB, PREFIX_REMARK, PREFIX_TIER);
+                        PREFIX_INCOME, PREFIX_JOB, PREFIX_REMARK, PREFIX_TIER, PREFIX_STATUS);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_INCOME, PREFIX_JOB, PREFIX_REMARK, PREFIX_TIER);
+                PREFIX_INCOME, PREFIX_JOB, PREFIX_REMARK, PREFIX_TIER, PREFIX_STATUS);
 
         // Throw an error if no filters are used
         long numberOfFiltersUsed = countPrefixesUsed(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_JOB, PREFIX_INCOME, PREFIX_REMARK, PREFIX_TIER);
+                PREFIX_ADDRESS, PREFIX_JOB, PREFIX_INCOME, PREFIX_REMARK, PREFIX_TIER, PREFIX_STATUS);
 
         if (numberOfFiltersUsed == 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
@@ -128,6 +130,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
             String substring = argMultimap.getValue(PREFIX_TIER).get();
             predicates.add(new TierStartsWithSubstringPredicate(substring));
+        }
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            String substring = argMultimap.getValue(PREFIX_STATUS).get();
+            predicates.add(new StatusStartsWithSubstringPredicate(substring));
         }
         return predicates;
     }
