@@ -18,8 +18,8 @@ public class ShowCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all students in the same group "
             + "and displays them as a list with index numbers.\n"
-            + "Parameters: NUMBER\n"
-            + "only one number must be provided.\n"
+            + "Parameters: GROUP_NUMBER\n"
+            + "Only one number must be provided.\n"
             + "Example: " + COMMAND_WORD + " 1";
 
 
