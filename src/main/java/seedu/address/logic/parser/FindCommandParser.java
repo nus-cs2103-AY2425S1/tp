@@ -2,13 +2,20 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIND_KEYWORD;
 import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_PREAMBLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.areAnyPrefixesPresent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
@@ -32,10 +39,22 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MODULE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MODULE, PREFIX_DESCRIPTION);
 
         if (!argMultimap.getPreamble().isEmpty() && !argMultimap.getPreamble().equals(FindCommand.CHAINED)) {
             throw new ParseException(Messages.getErrorMessageWithUsage(MESSAGE_UNEXPECTED_PREAMBLE,
+                    FindCommand.MESSAGE_USAGE));
+        }
+
+        Prefix[] unexpectedPrefixes =
+                Stream.of(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_DESCRIPTION)
+                        .filter(prefix -> argMultimap.getValue(prefix).isPresent())
+                        .toArray(Prefix[]::new);
+
+        if (unexpectedPrefixes.length > 0) {
+            throw new ParseException(Messages.getErrorMessageWithUsage(
+                    Messages.getErrorMessageForUnexpectedPrefixes(unexpectedPrefixes),
                     FindCommand.MESSAGE_USAGE));
         }
 
@@ -51,7 +70,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         // all keywords must be non-empty and contain no whitespace
         if (nameKeywords.stream().anyMatch(String::isBlank) || moduleRoleKeywords.stream().anyMatch(String::isBlank)) {
-            throw new ParseException(MESSAGE_EMPTY_FIND_KEYWORD);
+            throw new ParseException(Messages.getErrorMessageWithUsage(MESSAGE_EMPTY_FIND_KEYWORD,
+                    FindCommand.MESSAGE_USAGE));
         }
 
         ModuleRoleMap moduleRoleMapKeywords = ParserUtil.parseModuleRolePairs(moduleRoleKeywords);

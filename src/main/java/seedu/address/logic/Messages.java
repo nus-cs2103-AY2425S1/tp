@@ -31,6 +31,8 @@ public class Messages {
 
     public static final String MESSAGE_CHAINED_FIND_PREFIX = "In the current filtered list: ";
     public static final String MESSAGE_UNEXPECTED_PREAMBLE = "Unexpected text found without prefix.";
+    public static final String MESSAGE_UNEXPECTED_PREFIX = "Unexpected prefix found: %1$s";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -42,6 +44,15 @@ public class Messages {
                 Stream.of(duplicatePrefixes).map(Prefix :: toString).collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+    }
+
+    public static String getErrorMessageForUnexpectedPrefixes(Prefix... unexpectedPrefixes) {
+        assert unexpectedPrefixes.length > 0;
+
+        Set<String> unexpectedFields =
+                Stream.of(unexpectedPrefixes).map(Prefix :: toString).collect(Collectors.toSet());
+
+        return String.format(MESSAGE_UNEXPECTED_PREFIX, String.join(" ", unexpectedFields));
     }
 
     /**
