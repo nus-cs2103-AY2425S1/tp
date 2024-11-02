@@ -107,7 +107,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a internship application).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-**Use Case: Add a new internship entry**
+**Use Case: UC01 - Add a new internship entry**
 
 **MSS**
 
@@ -340,7 +340,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Delete an internship entry**
+
+**Use Case: UC02 - List all internship entries**
+
+**MSS**
+
+1. The user requests to list all internship entries.
+2. HireMe shows all internship entries.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. There are no internship entries.
+    * 1a1. HireMe shows a message indicating "no entries."
+
+      Use case ends.
+
+
+**Use Case: UC03 - Delete an internship entry**
 
 **MSS**
 
@@ -355,6 +373,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. HireMe shows an error message.
 
       Use case ends.
+
+
+**System**: HireMe application
+**Use Case: UC04 - Sort all internship applications list**
+**Actor**: User
+**MSS**
+
+1. The user requests to sort the internship applications list.
+2. HireMe shows all the sorted list of internship applications.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. HireMe detects an error in the entered data.
+    * 1a1. HireMe shows an error message that explains how to use the sort command and what parameters are valid.
+    * 1a2. User enters new data.
+    Steps 3a1-3a2 are repeated until the data entered are correct.
+    Use case resumes from step 2.
+
+    Use case ends.
+
 
 **Use Case: Load saved internship applications**
 
@@ -393,22 +433,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. The system shows the error message: "Error! Unable to save file."
     * 1a2. The system retries the auto-save after a short delay.
     * 1a3. If the save operation still fails, the system logs the error and informs the user that changes might not have been saved.
-
-      Use case ends.
-
-**Use Case: List all internship entries**
-
-**MSS**
-
-1. The user requests to list all internship entries.
-2. HireMe shows all internship entries.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. There are no internship entries.
-    * 1a1. HireMe shows a message indicating "no entries."
 
       Use case ends.
 
@@ -477,19 +501,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting an internship application
 
-1. Deleting a person while all persons are being shown
+1. Deleting an internship application while all internship applications are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all internship applications using the `/list` command. Multiple internship applications in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `/delete 1`<br>
+      Expected: First application is deleted from the list. Details of the deleted application shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `/delete 0`<br>
+      Expected: No internship application is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `/delete`, `/delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
