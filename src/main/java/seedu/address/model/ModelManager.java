@@ -168,6 +168,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+
     /**
      * Returns an unmodifiable view of the list of {@code Wedding} backed by the internal list of
      * {@code versionedAddressBook}
