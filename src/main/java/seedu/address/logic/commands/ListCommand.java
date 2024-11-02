@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.ui.InspectWindow;
 
 /**
  * Lists all persons in the address book to the user.
@@ -29,7 +30,7 @@ public class ListCommand extends Command {
         Person inspectedPerson;
         String message;
         if (isInspect) {
-            inspectedPerson = model.getFilteredPersonList().get(Index.fromZeroBased(0).getZeroBased());
+            inspectedPerson = InspectWindow.getInspectedPerson();
             message = MESSAGE_SUCCESS_DELIVERY;
         } else {
             inspectedPerson = null;

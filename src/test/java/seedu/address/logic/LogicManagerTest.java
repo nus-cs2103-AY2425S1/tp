@@ -61,6 +61,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
+        AddressBookParser.setInspect(false);
         String deleteCommand = "delete 9";
         String expectedErrorMessage = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 9);
         assertCommandException(deleteCommand, expectedErrorMessage);
@@ -173,7 +174,7 @@ public class LogicManagerTest {
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
-
+        AddressBookParser.setInspect(false);
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
