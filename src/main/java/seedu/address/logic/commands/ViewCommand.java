@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -48,9 +47,9 @@ public class ViewCommand extends Command {
      * @return boolean value
      */
     public boolean containsIllegalCharacters(char[] arr) {
-        char[] legalCharacters = new char[]{'a','b','c','d','e','f','g','h','i','j','k',
-                'l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3',
-                '4','5','6','7','8','9','0','_'};
+        char[] legalCharacters = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+            'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+            'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '_'};
         int illegalCount = 0;
         for (Character c : arr) {
             boolean isLegal = false;
@@ -70,7 +69,7 @@ public class ViewCommand extends Command {
      * throws relevant exception
      * @throws CommandException
      */
-    public void isValidHandle() throws CommandException{
+    public void isValidHandle() throws CommandException {
         char[] arr = this.tele.toCharArray();
         if (arr.length < 5) {
             throw new CommandException(MESSAGE_TOO_SHORT_TELEGRAM);

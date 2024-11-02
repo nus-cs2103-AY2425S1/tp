@@ -3,8 +3,6 @@ package seedu.address.ui;
 import java.util.Comparator;
 import java.util.logging.Logger;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -51,7 +49,7 @@ public class ViewPersonCard extends UiPart<Region> {
     public ViewPersonCard(Person person) {
         super(FXML);
         if (person.getFavouriteStatus().equals(FavouriteStatus.FAVOURITE)) {
-            viewName.setText(person.getName().fullName +  " \u2665");
+            viewName.setText(person.getName().fullName + " \u2606");
         } else {
             viewName.setText(person.getName().fullName);
         }
@@ -70,8 +68,6 @@ public class ViewPersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(role -> role.roleName))
                 .forEach(role -> viewRoles.getChildren().add(new Label(role.roleName)));
         viewRoles.getChildren().stream().forEach(label -> label.setId("viewRole"));
-//        info = new SimpleStringProperty(person.generateContactInformation());
-//        personInfo.textProperty().bind(info);
     }
 }
 

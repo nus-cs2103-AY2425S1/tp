@@ -6,7 +6,7 @@
 }
 
 #viewLabel {
-    -fx-text-fill: #DDDDDD;
+    -fx-text-fill: #CCCCCC;
     -fx-font-size: 20px;
     -fx-font-weight: bolder;
 }
@@ -58,8 +58,5 @@
     -fx-text-fill: #DDDDDD;
 }
 
-.fav {
-    -fx-background-color: linear-gradient(to bottom, #225876, #397885);
-    -fx-width: 100%;
-    -fx-height: 100%;
-}
+
+
