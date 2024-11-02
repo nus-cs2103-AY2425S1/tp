@@ -33,6 +33,10 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean isSameValue(String phoneNumber) {
+        return this.value.equals(phoneNumber);
+    }
+
     @Override
     public String toString() {
         return value;

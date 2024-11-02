@@ -132,4 +132,8 @@ public class Person {
     public int compareNamesIgnorecase(Person otherPerson) {
         return name.compareToIgnoreCase(otherPerson.name);
     }
+
+    public boolean hasPhoneNumber(String phoneNumber) {
+        return this.phone.isSameValue(phoneNumber);
+    }
 }
