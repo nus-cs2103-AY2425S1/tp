@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.ParserUtil.areAnyPrefixesPresent;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -29,7 +30,6 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    public static final String MESSAGE_UNEXPECTED_PREAMBLE = "Unexpected text found without prefix.";
     public static final String MESSAGE_MISSING_NAME = " Missing required field for name.";
     public static final String MESSAGE_MISSING_PHONE_OR_EMAIL =
             "At least one contact method (phone or email) is required.";
@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MODULE, PREFIX_DESCRIPTION);
 
         if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException("Error: " + MESSAGE_UNEXPECTED_PREAMBLE + "\nUsage:\n"
+            throw new ParseException("Error: " + Messages.MESSAGE_UNEXPECTED_PREAMBLE + "\nUsage:\n"
                     + AddCommand.MESSAGE_USAGE);
         }
 
