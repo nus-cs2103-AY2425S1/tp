@@ -84,7 +84,8 @@ public class AddScheduleCommandTest {
 
     @Test
     public void execute_multipleContactsIncludingFirstAndLast_success() throws Exception {
-        List<Index> contactIndexes = Arrays.asList(Index.fromZeroBased(0), Index.fromZeroBased(model.getFilteredPersonList().size() - 1));
+        List<Index> contactIndexes = Arrays.asList(Index.fromZeroBased(0),
+                Index.fromZeroBased(model.getFilteredPersonList().size() - 1));
         String eventName = "Team Meeting";
         LocalDate eventDate = LocalDate.of(2024, 11, 20);
         LocalTime eventTime = LocalTime.of(14, 0);
