@@ -6,10 +6,15 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.model.delivery.ItemNameContainsKeywordPredicate;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.ItemNameContainsKeywordPredicate;
 
-public class FinddelCommand extends Command{
+/**
+ * Finds and lists all deliveries for the inspected person.
+ * Matches item names that contain any of the argument keywords.
+ * Keyword matching is case insensitive and matches substrings.
+ */
+public class FinddelCommand extends Command {
 
     public static final String COMMAND_WORD = "finddel";
 

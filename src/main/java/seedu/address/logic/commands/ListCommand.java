@@ -27,14 +27,14 @@ public class ListCommand extends Command {
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
         boolean isInspect = AddressBookParser.getInspect();
         Person inspectedPerson;
-        String MESSAGE;
+        String message;
         if (isInspect) {
             inspectedPerson = model.getFilteredPersonList().get(Index.fromZeroBased(0).getZeroBased());
-            MESSAGE = MESSAGE_SUCCESS_DELIVERY;
-        }   else {
+            message = MESSAGE_SUCCESS_DELIVERY;
+        } else {
             inspectedPerson = null;
-            MESSAGE = MESSAGE_SUCCESS_PERSON;
+            message = MESSAGE_SUCCESS_PERSON;
         }
-        return new CommandResult(MESSAGE, inspectedPerson, false, false, isInspect, !isInspect);
+        return new CommandResult(message, inspectedPerson, false, false, isInspect, !isInspect);
     }
 }

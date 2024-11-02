@@ -1,11 +1,14 @@
 package seedu.address.model.delivery;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * Tests that a {@code Delivery}'s {@code ItemName} matches any of hte keywords given.
+ */
 public class ItemNameContainsKeywordPredicate implements Predicate<Delivery> {
     private final List<String> keywords;
 
