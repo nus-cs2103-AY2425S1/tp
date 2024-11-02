@@ -1,8 +1,8 @@
 package seedu.address.logic.commands.property;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASKING_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
@@ -13,14 +13,15 @@ import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.property.Address;
 import seedu.address.model.property.AskingPrice;
 import seedu.address.model.property.LandlordName;
-import seedu.address.model.property.Location;
 import seedu.address.model.property.Phone;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.PropertyType;
@@ -37,12 +38,12 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "LANDLORD NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_ASKING_PRICE + "ASKING PRICE] "
             + "[" + PREFIX_TYPE + "TYPE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_LOCATION + "San Francisco "
+            + PREFIX_ADDRESS + "Clementi Rd Blk 23 #10-02 "
             + PREFIX_ASKING_PRICE + "5000000 "
             + PREFIX_TYPE + "Condominium";
 
@@ -69,7 +70,7 @@ public class EditCommand extends Command {
         List<Property> lastShownList = model.getFilteredPropertyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
         }
 
         Property propertyToEdit = lastShownList.get(index.getZeroBased());
@@ -88,16 +89,42 @@ public class EditCommand extends Command {
                                                  EditPropertyDescriptor editPropertyDescriptor) {
         assert propertyToEdit != null;
 
-        LandlordName updatedLandlordName = editPropertyDescriptor.getLandlordName().orElse(propertyToEdit.getName());
+        LandlordName updatedLandlordName = editPropertyDescriptor.getLandlordName()
+                .orElse(propertyToEdit.getLandlordName());
         Phone updatedPhone = editPropertyDescriptor.getPhone().orElse(propertyToEdit.getPhone());
-        Location updatedLocation = editPropertyDescriptor.getLocation().orElse(propertyToEdit.getLocation());
+        Address updatedAddress = editPropertyDescriptor.getAddress().orElse(propertyToEdit.getAddress());
         AskingPrice updatedAskingPrice = editPropertyDescriptor.getAskingPrice()
                 .orElse(propertyToEdit.getAskingPrice());
         PropertyType updatedPropertyType = editPropertyDescriptor.getType().orElse(propertyToEdit.getPropertyType());
 
-        return new Property(updatedLandlordName, updatedPhone, updatedLocation,
+        return new Property(updatedLandlordName, updatedPhone, updatedAddress,
                 updatedAskingPrice, updatedPropertyType);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditCommand)) {
+            return false;
+        }
+
+        EditCommand otherEditCommand = (EditCommand) other;
+        return index.equals(otherEditCommand.index)
+                && editPropertyDescriptor.equals(otherEditCommand.editPropertyDescriptor);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .add("editPropertyDescriptor", editPropertyDescriptor)
+                .toString();
+    }
+
     /**
      * Stores the details to edit the property with. Each non-empty field value will replace the
      * corresponding field value of the property.
@@ -105,9 +132,9 @@ public class EditCommand extends Command {
     public static class EditPropertyDescriptor {
         private LandlordName name;
         private Phone phone;
-        private Location location;
+        private Address address;
         private AskingPrice askingPrice;
-        private PropertyType type;
+        private PropertyType propertyType;
 
         public EditPropertyDescriptor() {}
 
@@ -118,16 +145,16 @@ public class EditCommand extends Command {
         public EditPropertyDescriptor(EditPropertyDescriptor toCopy) {
             setLandlordName(toCopy.name);
             setPhone(toCopy.phone);
-            setLocation(toCopy.location);
+            setAddress(toCopy.address);
             setAskingPrice(toCopy.askingPrice);
-            setType(toCopy.type);
+            setPropertyType(toCopy.propertyType);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, location, askingPrice, type);
+            return CollectionUtil.isAnyNonNull(name, phone, address, askingPrice, propertyType);
         }
 
         // This method should not be used yet.
@@ -147,12 +174,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setLocation(Location location) {
-            this.location = location;
+        public void setAddress(Address address) {
+            this.address = address;
         }
 
-        public Optional<Location> getLocation() {
-            return Optional.ofNullable(location);
+        public Optional<Address> getAddress() {
+            return Optional.ofNullable(address);
         }
 
         public void setAskingPrice(AskingPrice askingPrice) {
@@ -163,12 +190,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(askingPrice);
         }
 
-        public void setType(PropertyType type) {
-            this.type = type;
+        public void setPropertyType(PropertyType propertyType) {
+            this.propertyType = propertyType;
         }
 
         public Optional<PropertyType> getType() {
-            return Optional.ofNullable(type);
+            return Optional.ofNullable(propertyType);
         }
 
         @Override
@@ -187,10 +214,21 @@ public class EditCommand extends Command {
 
             return Objects.equals(name, otherEditPropertyDescriptor.name)
                     && Objects.equals(phone, otherEditPropertyDescriptor.phone)
-                    && Objects.equals(location, otherEditPropertyDescriptor.location)
+                    && Objects.equals(address, otherEditPropertyDescriptor.address)
                     && Objects.equals(askingPrice, otherEditPropertyDescriptor.askingPrice)
-                    && Objects.equals(type, otherEditPropertyDescriptor.type);
+                    && Objects.equals(propertyType, otherEditPropertyDescriptor.propertyType);
 
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("address", address)
+                    .add("askingPrice", askingPrice)
+                    .add("propertyType", propertyType)
+                    .toString();
         }
     }
 }

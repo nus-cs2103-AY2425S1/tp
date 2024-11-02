@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetUpAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETUP;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETUP;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
 import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
@@ -33,8 +33,8 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        MeetUp meetUpToDelete = model.getFilteredMeetUpList().get(INDEX_FIRST_MEETUP.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MEETUP);
+        MeetUp meetUpToDelete = model.getFilteredMeetUpList().get(INDEX_FIRST.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MEETUP_SUCCESS,
                 Messages.format(meetUpToDelete));
@@ -49,10 +49,10 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showMeetUpAtIndex(model, INDEX_FIRST_MEETUP);
+        showMeetUpAtIndex(model, INDEX_FIRST);
 
-        MeetUp meetUpToDelete = model.getFilteredMeetUpList().get(INDEX_FIRST_MEETUP.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MEETUP);
+        MeetUp meetUpToDelete = model.getFilteredMeetUpList().get(INDEX_FIRST.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MEETUP_SUCCESS,
                 Messages.format(meetUpToDelete));
@@ -68,9 +68,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showMeetUpAtIndex(model, INDEX_FIRST_MEETUP);
+        showMeetUpAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_MEETUP;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of meetup list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getMeetUpList().getMeetUpList().size());
 
@@ -81,14 +81,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_MEETUP);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_MEETUP);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_MEETUP);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

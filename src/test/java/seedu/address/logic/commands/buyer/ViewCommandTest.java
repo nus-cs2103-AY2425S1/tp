@@ -2,7 +2,7 @@ package seedu.address.logic.commands.buyer;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showBuyerAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUYER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
 import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
@@ -37,7 +37,7 @@ public class ViewCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
+        showBuyerAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new ViewCommand(), model, ViewCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

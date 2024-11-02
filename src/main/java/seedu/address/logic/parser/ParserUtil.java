@@ -17,9 +17,9 @@ import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
+import seedu.address.model.property.Address;
 import seedu.address.model.property.AskingPrice;
 import seedu.address.model.property.LandlordName;
-import seedu.address.model.property.Location;
 import seedu.address.model.property.PropertyType;
 import seedu.address.model.tag.Tag;
 
@@ -248,18 +248,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String location} into a {@code Location}.
+     * Parses a {@code String address} into a {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code LandlordName} is invalid.
      */
-    public static Location parseLocation(String location) throws ParseException {
-        requireNonNull(location);
-        String trimmedLocation = location.trim();
-        if (!Location.isValidLocation(trimmedLocation)) {
-            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+    public static Address parseAddress(String address) throws ParseException {
+        requireNonNull(address);
+        String trimmedAddress = address.trim();
+        if (!Address.isValidAddress(trimmedAddress)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
-        return new Location(trimmedLocation);
+        return new Address(trimmedAddress);
     }
 
     /**

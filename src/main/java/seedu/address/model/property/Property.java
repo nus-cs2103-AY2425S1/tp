@@ -15,7 +15,7 @@ public class Property {
     // Identity fields
     private final LandlordName name;
     private final Phone phone;
-    private final Location location;
+    private final Address address;
 
     // Data fields
     private final AskingPrice askingPrice;
@@ -24,17 +24,17 @@ public class Property {
     /**
      * Every field must be present and not null.
      */
-    public Property(LandlordName name, Phone phone, Location location,
+    public Property(LandlordName name, Phone phone, Address address,
                     AskingPrice askingPrice, PropertyType propertyType) {
-        requireAllNonNull(name, phone, location, askingPrice, propertyType);
+        requireAllNonNull(name, phone, address, askingPrice, propertyType);
         this.name = name;
         this.phone = phone;
-        this.location = location;
+        this.address = address;
         this.askingPrice = askingPrice;
         this.propertyType = propertyType;
     }
 
-    public LandlordName getName() {
+    public LandlordName getLandlordName() {
         return name;
     }
 
@@ -42,8 +42,8 @@ public class Property {
         return phone;
     }
 
-    public Location getLocation() {
-        return location;
+    public Address getAddress() {
+        return address;
     }
 
     public AskingPrice getAskingPrice() {
@@ -55,7 +55,7 @@ public class Property {
     }
 
     /**
-     * Returns true if both properties have the same landlord name and location and property type.
+     * Returns true if both properties have the same address.
      * This defines a weaker notion of equality between two properties.
      */
     public boolean isSameProperty(Property otherProperty) {
@@ -64,9 +64,7 @@ public class Property {
         }
 
         return otherProperty != null
-                && otherProperty.getName().equals(getName())
-                && otherProperty.getLocation().equals(getLocation())
-                && otherProperty.getPropertyType().equals(getPropertyType());
+                && otherProperty.getAddress().equals(getAddress());
     }
 
     /**
@@ -87,7 +85,7 @@ public class Property {
         Property otherProperty = (Property) other;
         return name.equals(otherProperty.name)
                 && phone.equals(otherProperty.phone)
-                && location.equals(otherProperty.location)
+                && address.equals(otherProperty.address)
                 && askingPrice.equals(otherProperty.askingPrice)
                 && propertyType.equals(otherProperty.propertyType);
     }
@@ -95,7 +93,7 @@ public class Property {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, location, askingPrice, propertyType);
+        return Objects.hash(name, phone, address, askingPrice, propertyType);
     }
 
     @Override
@@ -103,7 +101,7 @@ public class Property {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("location", location)
+                .add("address", address)
                 .add("askingPrice", askingPrice)
                 .add("propertyType", propertyType)
                 .toString();

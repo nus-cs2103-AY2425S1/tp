@@ -32,7 +32,7 @@ public class PropertyCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label locationA;
+    private Label address;
     @FXML
     private Label askingPrice;
     @FXML
@@ -45,10 +45,10 @@ public class PropertyCard extends UiPart<Region> {
         super(FXML);
         this.property = property;
         id.setText(displayedIndex + ". ");
-        name.setText(property.getName().toString());
+        name.setText(property.getLandlordName().toString());
         phone.setText(property.getPhone().toString());
-        locationA.setText(property.getLocation().toString());
-        askingPrice.setText(property.getAskingPrice().toString());
+        address.setText(property.getAddress().toString());
+        askingPrice.setText(property.getAskingPrice().toPrettyString());
         propertyType.setText(property.getPropertyType().toString());
     }
 }

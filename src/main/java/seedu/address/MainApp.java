@@ -131,7 +131,6 @@ public class MainApp extends Application {
             }
 
             initialPropertyList = propertyListOptional.orElseGet(SamplePropertyDataUtil::getSamplePropertyList);
-            logger.info("initial list is " + initialPropertyList);
 
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getPropertyListFilePath() + " could not be loaded."

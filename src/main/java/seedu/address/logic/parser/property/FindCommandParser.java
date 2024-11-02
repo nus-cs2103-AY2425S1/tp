@@ -7,7 +7,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.property.FindCommand;
 import seedu.address.logic.parser.CommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.property.LocationContainsKeywordsPredicate;
+import seedu.address.model.property.AddressContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -25,7 +25,7 @@ public class FindCommandParser extends CommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] locationKeywords = trimmedArgs.split("\\s+");
-        return new FindCommand(new LocationContainsKeywordsPredicate(Arrays.asList(locationKeywords)));
+        String[] addressKeywords = trimmedArgs.split("\\s+");
+        return new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords)));
     }
 }

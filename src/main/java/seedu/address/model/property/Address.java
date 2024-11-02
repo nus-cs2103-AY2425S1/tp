@@ -5,11 +5,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Property's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Location {
+public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Locations can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Address can take any values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -20,20 +20,20 @@ public class Location {
     public final String value;
 
     /**
-     * Constructs an {@code Location}.
+     * Constructs an {@code Address}.
      *
-     * @param location A valid location.
+     * @param address A valid address.
      */
-    public Location(String location) {
-        requireNonNull(location);
-        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
-        value = location;
+    public Address(String address) {
+        requireNonNull(address);
+        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        value = address;
     }
 
     /**
-     * Returns true if a given string is a valid location.
+     * Returns true if a given string is a valid address.
      */
-    public static boolean isValidLocation(String test) {
+    public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -49,12 +49,12 @@ public class Location {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Location)) {
+        if (!(other instanceof Address)) {
             return false;
         }
 
-        Location otherLocation = (Location) other;
-        return value.equals(otherLocation.value);
+        Address otherAddress = (Address) other;
+        return value.equals(otherAddress.value);
     }
 
     @Override

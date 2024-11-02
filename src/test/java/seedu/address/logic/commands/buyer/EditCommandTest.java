@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showBuyerAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUYER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BUYER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
 import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
@@ -45,7 +45,7 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Buyer editedBuyer = new BuyerBuilder().build();
         EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder(editedBuyer).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_BUYER, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BUYER_SUCCESS,
                 Messages.format(editedBuyer));
@@ -82,8 +82,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_BUYER, new EditBuyerDescriptor());
-        Buyer editedBuyer = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST, new EditBuyerDescriptor());
+        Buyer editedBuyer = model.getFilteredBuyerList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BUYER_SUCCESS,
                 Messages.format(editedBuyer));
@@ -96,11 +96,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
+        showBuyerAtIndex(model, INDEX_FIRST);
 
-        Buyer buyerInFilteredList = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());
+        Buyer buyerInFilteredList = model.getFilteredBuyerList().get(INDEX_FIRST.getZeroBased());
         Buyer editedBuyer = new BuyerBuilder(buyerInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_BUYER,
+        EditCommand editCommand = new EditCommand(INDEX_FIRST,
                 new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BUYER_SUCCESS,
@@ -115,20 +115,20 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateBuyerUnfilteredList_failure() {
-        Buyer firstBuyer = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());
+        Buyer firstBuyer = model.getFilteredBuyerList().get(INDEX_FIRST.getZeroBased());
         EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder(firstBuyer).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_BUYER, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_BUYER);
     }
 
     @Test
     public void execute_duplicateBuyerFilteredList_failure() {
-        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
+        showBuyerAtIndex(model, INDEX_FIRST);
 
         // edit buyer in filtered list into a duplicate in buyer list
-        Buyer buyerInList = model.getBuyerList().getBuyerList().get(INDEX_SECOND_BUYER.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_BUYER,
+        Buyer buyerInList = model.getBuyerList().getBuyerList().get(INDEX_SECOND.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST,
                 new EditBuyerDescriptorBuilder(buyerInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_BUYER);
@@ -149,8 +149,8 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidBuyerIndexFilteredList_failure() {
-        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
-        Index outOfBoundIndex = INDEX_SECOND_BUYER;
+        showBuyerAtIndex(model, INDEX_FIRST);
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of buyer list list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getBuyerList().getBuyerList().size());
 
@@ -162,11 +162,11 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_BUYER, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST, DESC_AMY);
 
         // same values -> returns true
         EditBuyerDescriptor copyDescriptor = new EditBuyerDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_BUYER, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -179,10 +179,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_BUYER, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_BUYER, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST, DESC_BOB)));
     }
 
     @Test

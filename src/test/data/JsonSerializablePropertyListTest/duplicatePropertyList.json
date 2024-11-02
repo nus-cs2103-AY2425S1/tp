@@ -2,13 +2,13 @@
   "properties": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "location": "Clementi",
+    "address": "Clementi Avenue Blk 102 #02-02",
     "askingPrice": "1000000",
     "propertyType": "HDB"
   }, {
     "name": "Alice Pauline",
     "phone": "9482424",
-    "location": "Clementi",
+    "address": "Clementi Avenue Blk 102 #02-02",
     "askingPrice": "750000",
     "propertyType": "HDB"
   } ]

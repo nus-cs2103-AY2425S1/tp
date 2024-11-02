@@ -20,7 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDED_BUYER = new Prefix("a/");
 
     /* Prefix definitions for property class */
-    public static final Prefix PREFIX_ASKING_PRICE = new Prefix("a/");
-    public static final Prefix PREFIX_LOCATION = new Prefix("l/");
+    public static final Prefix PREFIX_ASKING_PRICE = new Prefix("s/");
+    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TYPE = new Prefix("t/");
 }

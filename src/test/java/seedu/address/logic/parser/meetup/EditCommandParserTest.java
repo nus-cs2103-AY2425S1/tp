@@ -28,8 +28,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETUP;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETUP;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.jupiter.api.Test;
 
@@ -93,7 +93,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_MEETUP;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + MEETUP_NAME_DESC_NETWORKING + MEETUP_INFO_DESC_NETWORKING
                 + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING + MEETUP_ADDED_BUYER_DESC_NETWORKING;
 
@@ -112,7 +112,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsButNameAndInfoSpecified_success() {
-        Index targetIndex = INDEX_FIRST_MEETUP;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased()
                 + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING + MEETUP_ADDED_BUYER_DESC_NETWORKING;
 
@@ -133,7 +133,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // invalid followed by valid
-        Index targetIndex = INDEX_FIRST_MEETUP;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_MEETUP_NAME_DESC + MEETUP_NAME_DESC_PITCH;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));

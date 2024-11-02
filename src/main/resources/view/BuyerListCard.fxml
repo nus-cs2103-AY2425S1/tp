@@ -28,8 +28,12 @@
       </HBox>
       <FlowPane fx:id="tags" alignment="CENTER_LEFT"/>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="budget" styleClass="cell_small_label" text="\$budget" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <GridPane hgap="4" vgap="10" alignment="CENTER_LEFT" xmlns:fx="http://javafx.com/fxml">
+        <Label text="Budget:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="budget" styleClass="cell_small_label" text="\$budget"
+               GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      </GridPane>
     </VBox>
   </GridPane>
 </HBox>
