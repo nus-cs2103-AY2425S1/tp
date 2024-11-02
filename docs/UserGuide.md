@@ -228,12 +228,12 @@ Imports contact info from the given json file into MediContact.
 
 Format: `import FILENAME.json`
 
-- **IMPORTANT**: Upon importing data, the original data will be entirely overridden with the new json file. If you wish to save the current data you may `export` the data first (see <u>Exporting contacts</u> for more details). If you wish to append current and new data, you may do so manually as long as you ensure that it adheres to the expected format (see <u>Expected format</u> for more details).
+- **IMPORTANT**: Upon importing data, the original data will be entirely overridden with the new json file. If you wish to save the current data you may refer to [Exporting the data](#exporting the data). If you wish to append current and new data, you may do so manually as long as you ensure that it adheres to the expected format (see [Expected format](#expected format) for more details).
 - File **must** be a `json` file. Ensure that the extension `.json` follows the `FILENAME` 
 - File **must** be in the same folder as the application JAR file. 
-- File **must** be in the expected format of MediContact data (see <u>Expected format</u> for more details). 
-- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see <u>Summary of input constraints</u> for more details).
-- **Warning**: Upon execution of `import` folder `data` containing `addressbook.json` will be created in the same directory as the application JAR if not already existing. Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting  which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal. 
+- File **must** be in the expected format of MediContact data (see [Expected format](#expected format) for more details). 
+- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary of parameter constraints) for more details).
+- **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting  which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal. 
 
 Example:
 
@@ -297,7 +297,7 @@ The following is an example of a valid JSON file content.
 
 - Each patient data must be enclosed with `{}` and seperated by a comma `,`
 
-- The following is a blank template for each patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see <u>Summary of input constraints</u> for more details).
+- The following is a blank template for each patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see [Summary of parameter constraints](#summary of parameter constraints) for more details).
 
   ````
   {
@@ -419,6 +419,11 @@ Examples:
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+### Exporting the data
+
+- Locate file `addressbook.json` under the folder `data` in the same directory as `MediContact.jar`. `addressbook.json` will reflect the latest data. Simply download it.
+- **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
+
 ### Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -468,4 +473,25 @@ _Details coming soon ..._
 | **Sort**   | `sort` (to sort contacts based on appointment dates)         |
 | **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` |
 | **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` |
-| **View**   | `view INDEX` or `uview NAME` <br/> e.g., `view 3`, `view Alex Yeoh` |
+| **View**   | `view INDEX` or `view NAME` <br/> e.g., `view 3`, `view Alex Yeoh` |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Summary of parameter constraints
+
+| Parameter              | Constraints                                                  |
+| ---------------------- | ------------------------------------------------------------ |
+| **Address**            | Should not be blank. Should not begin with a whitespace.<br>Valid example: `2042 Balotony street #05-03` |
+| **Age**                | Should only contain numbers. Should be 1-3 digits long.<br>Valid example: `103` |
+| **Appointment**        | Should be in the form dd/mm/yyyy hhmm. Should be dates in the future.<br>Valid example: `12/02/2040 1600` |
+| **Email**              | Should be in the form local-part@domain. Local-part should only contain alphanumeric characters or these special characters `+_.-`. Domain should be made up of doman labels separated by periods. Domain name should end with a domain label at least 2 characters long. Domain label should start and end with alphanumeric characters. Domain label should consist of alphanumeric characters or hyphens.<br>Valid example: `alexyeoh24@gmail.com` |
+| **Filename**           | Should match the filename of desired import file exactly. Should end in `.json`.<br>Valid example: `PatientRecords.json` |
+| **Index**              | Should be a positive integer. Should match to an index displayed in the contacts list.<br>Valid example: `1` (if there is at least one contact in the contacts list) |
+| **Keyword**            | Should be alphanumeric (since only name and phone number is searched).<br>Valid example: `alex yeoh` |
+| **Name**               | Should be alphanumeric. Should not be blank.<br>Valid example: `Alex Yeoh` |
+| **Note (Appointment)** | Should be in the form dd/mm/yyyy hhmm. Should be dates in the past.<br/>Valid example: `12/02/2023 1600` |
+| **Note (Medication)**  | Should be alphanumeric.<br>Valid example: `Ibuprofen`        |
+| **Note (Remark)**      | Should be alphanumeric.<br>Valid example: `Recurring appointment on Tuesdays` |
+| **Phone number**       | Should only contain numbers. Should be exactly 8 digits long.<br>Valid example: `12345678` |
+| **Sex**                | Should be alphanumeric. Should not be blank.<br>Valid example: `Female` |
+| **Tags**               | Should be alphanumeric.<br>Valid example: `Patient`          |
