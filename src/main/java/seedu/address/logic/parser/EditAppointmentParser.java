@@ -40,10 +40,7 @@ public class EditAppointmentParser implements Parser<EditAppointmentCommand> {
 
         if (!arePrefixesPresent(argumentMultimap, PREFIX_NRIC,
                 PREFIX_DATE,
-                PREFIX_START_TIME,
-                PREFIX_NEW_DATE,
-                PREFIX_NEW_START_TIME,
-                PREFIX_NEW_END_TIME)) {
+                PREFIX_START_TIME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditAppointmentCommand.MESSAGE_USAGE));
         }
@@ -58,16 +55,25 @@ public class EditAppointmentParser implements Parser<EditAppointmentCommand> {
         Nric originalNric = ParserUtil.parseNric(argumentMultimap.getValue(PREFIX_NRIC).get());
         LocalDate originalDate = ParserUtil.parseDate(argumentMultimap.getValue(PREFIX_DATE).get());
         LocalTime originalStartTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_START_TIME).get());
-        LocalDate newDate = ParserUtil.parseDate(argumentMultimap.getValue(PREFIX_NEW_DATE).get());
-        LocalTime newStartTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_NEW_START_TIME).get());
-        LocalTime newEndTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_NEW_END_TIME).get());
 
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
-
-        editAppointmentDescriptor.setStartTime(LocalDateTime.of(newDate, newStartTime));
-        editAppointmentDescriptor.setEndTime(LocalDateTime.of(newDate, newEndTime));
+        if (argumentMultimap.getValue(PREFIX_NEW_DATE).isPresent()) {
+            editAppointmentDescriptor.setDate(ParserUtil.parseDate(argumentMultimap.getValue(PREFIX_NEW_DATE).get()));
+        }
+        if (argumentMultimap.getValue(PREFIX_NEW_START_TIME).isPresent()) {
+            editAppointmentDescriptor
+                    .setStartTime(ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_NEW_START_TIME).get()));
+        }
+        if (argumentMultimap.getValue(PREFIX_NEW_END_TIME).isPresent()) {
+            editAppointmentDescriptor
+                    .setEndTime(ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_NEW_END_TIME).get()));
+        }
 
         LocalDateTime originalStartDateTime = LocalDateTime.of(originalDate, originalStartTime);
+
+        if (!editAppointmentDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditAppointmentCommand.MESSAGE_NOT_EDITED);
+        }
 
         return new EditAppointmentCommand(originalNric, originalStartDateTime, editAppointmentDescriptor);
     }
