@@ -94,7 +94,7 @@ public class ClientDetailPanel extends UiPart<Region> {
      * @param client The client whose details should be displayed, can be null
      */
     public void setClientDetails(Client client) {
-        if (client!= null) {
+        if (client != null) {
             showAllFields();
             setLabelText(nameLabel, client.getName().fullName);
             setLabelText(phoneLabel, client.getPhone().value);

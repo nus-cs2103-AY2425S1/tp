@@ -41,7 +41,7 @@ public class ClientListPanel extends UiPart<Region> {
         protected void updateItem(Client client, boolean empty) {
             super.updateItem(client, empty);
 
-            if (empty || client== null) {
+            if (empty || client == null) {
                 setGraphic(null);
                 setText(null);
             } else {

@@ -85,11 +85,11 @@ public class Client {
      * This defines a weaker notion of equality between two clients.
      */
     public boolean isSameClient(Client otherClient) {
-        if (otherClient== this) {
+        if (otherClient == this) {
             return true;
         }
 
-        return otherClient!= null
+        return otherClient != null
                 && otherClient.getName().equals(getName())
                 && otherClient.getPhone().equals(getPhone())
                 && otherClient.getEmail().equals(getEmail());
