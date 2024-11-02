@@ -29,7 +29,8 @@ import seedu.address.model.Model;
  * 3. The data and headers are then written to the CSV file (writeCsvFile).
  */
 public class ExportCommand extends Command {
-    public static final int DISTANCE_TO_TAG = 6;
+    public static final int DISTANCE_TO_TAG_FRONT = 6;
+    public static final int DISTANCE_TO_TAG_BACK = 3;
 
     public static final String COMMAND_WORD = "export";
 
@@ -39,6 +40,9 @@ public class ExportCommand extends Command {
             + "format/csv";
     public static final String SUCCESS_MESSAGE = "The address book has been exported to "
             + "/data/addressbook.csv in the specified format.";
+    public static final String BACKWARD_SLASH_REGEX = "\\\\";
+    public static final String INVERTED_COMMA_REGEX = "\"";
+    public static final String EMPTY_STRING = "";
     private final String format;
 
     /**
@@ -78,16 +82,19 @@ public class ExportCommand extends Command {
         // Check if the string starts with { and ends with }
         if (tagString.startsWith("\"{") && tagString.endsWith("}\"")) {
             // Remove the outer braces
-            tagString = tagString.substring(DISTANCE_TO_TAG, tagString.length() - 1);
+            tagString = tagString.substring(DISTANCE_TO_TAG_FRONT, tagString.length() - DISTANCE_TO_TAG_BACK);
 
             // Split by : and take the first part
             String[] parts = tagString.split(":");
             if (parts.length > 0) {
                 // Trim and remove quotes from the tag name
-                String trimmed = parts[0].trim()
-                        .replaceAll("\"", "")
-                        .replaceAll("\\\\", "");
-                return trimmed;
+                String trimmedKey = parts[0].trim()
+                        .replaceAll(INVERTED_COMMA_REGEX, EMPTY_STRING)
+                        .replaceAll(BACKWARD_SLASH_REGEX, EMPTY_STRING);
+                String trimmedValue = parts[1].trim()
+                        .replaceAll(INVERTED_COMMA_REGEX, EMPTY_STRING)
+                        .replaceAll(BACKWARD_SLASH_REGEX, EMPTY_STRING);
+                return trimmedKey + " : " + trimmedValue;
             }
         }
         // If the format doesn't match, return the original string
@@ -111,8 +118,9 @@ public class ExportCommand extends Command {
                 // isTextual checks if a JsonNode represents a basic JSON String value.
                 if (value.isTextual()) {
                     personInfo.put(header, value.asText());
-                // Note that the tags in AddressBook.json are stored in an array literal.
-                // Therefore, we can't process tags in the same way as we do other variables (e.g. name, phone, etc.)
+                    // Note that the tags in AddressBook.json are stored in an array literal.
+                    // Therefore, we can't process tags in the same way as we do other variables
+                    // (e.g. name, phone, etc.)
                 } else if (value.isArray() && header.equals("tags")) {
                     List<String> tags = new ArrayList<>();
                     for (JsonNode tag : value) {
