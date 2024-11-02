@@ -37,19 +37,19 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").withDateOfLastVisit("01-02-2024")
             .withEmergencyContact("92173902").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").withDateOfLastVisit("01-01-2025")
+            .withEmail("heinz@example.com").withAddress("wall street").withDateOfLastVisit("01-04-2024")
             .withEmergencyContact().build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
-            .withDateOfLastVisit("02-01-2024").withEmergencyContact().build();
+            .withDateOfLastVisit("02-04-2024").withEmergencyContact().build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822249")
-            .withEmail("werner@example.com").withAddress("michegan ave").withDateOfLastVisit("10-10-2024")
+            .withEmail("werner@example.com").withAddress("michegan ave").withDateOfLastVisit("10-07-2024")
             .withEmergencyContact().build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824270")
             .withEmail("lydia@example.com").withAddress("little tokyo").withDateOfLastVisit("23-08-2024")
             .withEmergencyContact().build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824421")
-            .withEmail("anna@example.com").withAddress("4th street").withDateOfLastVisit("05-06-2024")
+            .withEmail("anna@example.com").withAddress("4th street").withDateOfLastVisit("05-09-2023")
             .withEmergencyContact().build();
 
     // Manually added
@@ -127,10 +127,10 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersonsAscendingDateOfLastVisit() {
-        return new ArrayList<>(Arrays.asList(ALICE, DANIEL, BENSON, GEORGE, FIONA, ELLE, CARL));
+        return new ArrayList<>(Arrays.asList(GEORGE, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA));
     }
 
     public static List<Person> getTypicalPersonsDescendingDateOfLastVisit() {
-        return new ArrayList<>(Arrays.asList(CARL, ELLE, FIONA, GEORGE, BENSON, DANIEL, ALICE));
+        return new ArrayList<>(Arrays.asList(FIONA, ELLE, DANIEL, CARL, BENSON, ALICE, GEORGE));
     }
 }
