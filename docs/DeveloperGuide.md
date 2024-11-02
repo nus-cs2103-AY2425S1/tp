@@ -433,6 +433,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Filter persons**
+
+**MSS**
+
+1. User requests to filter persons by multiple criteria.
+2. AddressBook shows a list of persons that match the criteria.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given criteria is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The filter result or list is empty.
+
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
