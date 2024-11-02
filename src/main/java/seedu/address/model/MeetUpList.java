@@ -49,7 +49,6 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      */
     public void setMeetUps(List<MeetUp> meetUps) {
         this.meetUps.setMeetUps(meetUps);
-        logger.info("set meetups to " + this.meetUps);
     }
 
     /**

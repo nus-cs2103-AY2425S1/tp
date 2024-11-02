@@ -50,7 +50,6 @@ public class PropertyList implements ReadOnlyPropertyList {
      */
     public void setProperties(List<Property> properties) {
         this.properties.setProperties(properties);
-        logger.info("set properties to " + this.properties);
     }
 
     /**
