@@ -70,7 +70,7 @@ public class EventPredicateBuilder {
     }
 
     private Predicate<Event> addNamePredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
-        throws ParseException {
+            throws ParseException {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String trimmedArgs = argMultimap.getValue(PREFIX_NAME).get();
             if (trimmedArgs.isEmpty()) {
