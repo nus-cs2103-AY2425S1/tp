@@ -2,11 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_ATTENDEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -30,7 +31,8 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
     private static final Prefix[] VALID_ARG_LIST = {
         PREFIX_INDEX,
         PREFIX_NAME,
-        PREFIX_DATE,
+        PREFIX_START_DATE,
+        PREFIX_END_DATE,
         PREFIX_ATTENDEES,
         PREFIX_REMOVE_ATTENDEE,
         PREFIX_LOCATION
@@ -65,12 +67,13 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         // Parse input and create an UpdateCommand
         Index indexToUpdate = parseIndex(argMultimap);
         String name = parseName(argMultimap);
-        LocalDate date = parseDate(argMultimap);
+        LocalDate startDate = parseStartDate(argMultimap);
+        LocalDate endDate = parseEndDate(argMultimap);
         Address location = parseLocation(argMultimap);
         Set<Index> addIndices = parseAttendeeIndices(argMultimap, PREFIX_ATTENDEES);
         Set<Index> removeIndices = parseAttendeeIndices(argMultimap, PREFIX_REMOVE_ATTENDEE);
 
-        return new UpdateCommand(name, date, location, addIndices, removeIndices, indexToUpdate);
+        return new UpdateCommand(name, startDate, endDate, location, addIndices, removeIndices, indexToUpdate);
     }
 
     /**
@@ -85,7 +88,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
      * Returns true if no prefixes other than the event index has been supplied.
      */
     private boolean hasNoPrefixesSupplied(ArgumentMultimap argumentMultimap) {
-        return Stream.of(PREFIX_NAME, PREFIX_DATE, PREFIX_ATTENDEES, PREFIX_REMOVE_ATTENDEE)
+        return Stream.of(PREFIX_NAME, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_ATTENDEES, PREFIX_REMOVE_ATTENDEE)
                 .allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 
@@ -120,23 +123,43 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
     }
 
     /**
-     * Parses and returns the new date of the event.
+     * Parses and returns the new start date of the event.
      *
      * @param argMultimap The map of arguments to their values.
-     * @return The new date of the event.
+     * @return The new start date of the event.
      * @throws ParseException If the supplied date format is invalid.
      */
-    private LocalDate parseDate(ArgumentMultimap argMultimap) throws ParseException {
-        LocalDate date = null;
-        if (arePrefixesPresent(argMultimap, PREFIX_DATE)) {
+    private LocalDate parseStartDate(ArgumentMultimap argMultimap) throws ParseException {
+        LocalDate startDate = null;
+        if (arePrefixesPresent(argMultimap, PREFIX_START_DATE)) {
             try {
-                date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get().trim());
+                startDate = LocalDate.parse(argMultimap.getValue(PREFIX_START_DATE).get().trim());
             } catch (DateTimeParseException e) {
                 throw new ParseException(String.format("Invalid date format. \n%1$s",
                         UpdateCommand.MESSAGE_USAGE));
             }
         }
-        return date;
+        return startDate;
+    }
+
+    /**
+     * Parses and returns the new end date of the event.
+     *
+     * @param argMultimap The map of arguments to their values.
+     * @return The new start date of the event.
+     * @throws ParseException If the supplied date format is invalid.
+     */
+    private LocalDate parseEndDate(ArgumentMultimap argMultimap) throws ParseException {
+        LocalDate endDate = null;
+        if (arePrefixesPresent(argMultimap, PREFIX_END_DATE)) {
+            try {
+                endDate = LocalDate.parse(argMultimap.getValue(PREFIX_END_DATE).get().trim());
+            } catch (DateTimeParseException e) {
+                throw new ParseException(String.format("Invalid date format. \n%1$s",
+                        UpdateCommand.MESSAGE_USAGE));
+            }
+        }
+        return endDate;
     }
 
     /**

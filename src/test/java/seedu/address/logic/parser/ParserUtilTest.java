@@ -37,6 +37,14 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
+    // maintain dates in ascending order
+    private static final String VALID_DATE_1 = "2020-01-01";
+    private static final String VALID_DATE_2 = "2021-04-05";
+    private static final String VALID_DATE_3 = "2023-01-01";
+
+    private static final String INVALID_DATE_1 = "2022-02-30";
+    private static final String INVALID_DATE_2 = "2222-22-22";
+
     private static final String WHITESPACE = " \t\r\n";
 
     @Test

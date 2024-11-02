@@ -1,14 +1,17 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_INDEXES;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -158,5 +161,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Checks if two dates, start date and end date, are valid.
+     * @param startDate the starting date
+     * @param endDate the ending date
+     * @throws ParseException if the end date occurs before the start date
+     */
+    public static void checkValidDates(LocalDate startDate, LocalDate endDate) throws ParseException {
+        requireAllNonNull(startDate, endDate);
+        if (endDate.isBefore(startDate)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATES);
+        }
     }
 }

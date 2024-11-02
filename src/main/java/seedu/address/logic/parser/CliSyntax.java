@@ -6,7 +6,8 @@ package seedu.address.logic.parser;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_DATE = new Prefix("-d ");
+    public static final Prefix PREFIX_START_DATE = new Prefix("-sd ");
+    public static final Prefix PREFIX_END_DATE = new Prefix("-ed ");
 
     public static final Prefix PREFIX_INDEX = new Prefix("-i ");
 

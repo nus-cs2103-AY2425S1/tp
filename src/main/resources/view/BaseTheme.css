@@ -496,7 +496,7 @@
     -fx-text-fill: #000;
 }
 
-#personDetailView .grid-content-date {
+#personDetailView .grid-content-startDate {
     -fx-font-size: 10pt;
     -fx-font-family: "Poppins Regular";
     -fx-text-fill: #848484;

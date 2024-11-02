@@ -18,17 +18,26 @@ import seedu.address.model.person.Address;
  */
 public class TypicalEvents {
 
+    public static final Event EVENT_A = new EventBuilder()
+            .withName("Event A").withDate(LocalDate.of(2023, 10, 01),
+                    LocalDate.of(2023, 10, 01)).build();
+    public static final Event EVENT_B = new EventBuilder()
+            .withName("Event B").withDate(LocalDate.of(2023, 10, 02),
+                    LocalDate.of(2023, 10, 10)).build();
+    public static final Event EVENT_C = new EventBuilder()
+            .withName("Event C").withDate(LocalDate.of(2023, 10, 03),
+                    LocalDate.of(2023, 10, 11)).build();
     // Event with no attendees
     public static final Event EVENT_NO_ATTENDEE = new EventBuilder()
             .withName("Workshop")
-            .withDate(LocalDate.of(2023, 10, 01))
+            .withDate(LocalDate.of(2023, 10, 01), LocalDate.of(2023, 10, 01))
             .withLocation(new Address("123 Main Street"))
             .build();
 
     // Event with multiple attendees
     public static final Event EVENT_MULTIPLE_ATTENDEE = new EventBuilder()
             .withName("Family Gathering")
-            .withDate(LocalDate.of(2023, 10, 03))
+            .withDate(LocalDate.of(2023, 10, 03), LocalDate.of(2023, 10, 03))
             .withLocation(new Address("89 City Hall"))
             .withAttendees(DEFAULT_ATTENDEES)
             .build();

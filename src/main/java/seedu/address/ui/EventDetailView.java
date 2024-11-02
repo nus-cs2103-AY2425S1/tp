@@ -23,7 +23,10 @@ public class EventDetailView extends UiPart<Region> implements DetailView<Event>
     private Label title;
 
     @FXML
-    private Label date;
+    private Label startDate;
+
+    @FXML
+    private Label endDate;
 
     @FXML
     private Label locationLabel;
@@ -64,7 +67,8 @@ public class EventDetailView extends UiPart<Region> implements DetailView<Event>
     public void update(Event event) {
         this.getRoot().setVisible(true);
         title.setText(event.getEventName());
-        date.setText(event.getDate().format(DATE_FORMATTER));
+        startDate.setText(event.getStartDate().format(DATE_FORMATTER));
+        endDate.setText(event.getEndDate().format(DATE_FORMATTER));
         locationLabel.setText(event.getLocation().value);
         attendees.getChildren().clear();
         event.getAttendees().forEach(person -> {
