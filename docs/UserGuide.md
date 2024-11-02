@@ -77,19 +77,6 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 </box>
 
 
-### Viewing help : `help`
-
-Shows you a help window with useful resources which includes:
-- A URL to the User Guide displayed at the top. You can copy the URL directly to your clipboard by clicking the “Copy URL” button.
-- A command summary table below the URL, displaying available commands, their formats, and examples.
-- You can copy the command format or example from the table and paste it into the command box.
-- You can click on the table headers to sort commands in ascending or descending order.
-
-Format: `help`
-
-![helpWindow.png](images%2FhelpWindow.png)
-
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -112,22 +99,48 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
 * `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2024 1100`
 
-### Listing all persons : `list`
+### Clearing all entries : `clear`
 
-Shows a list of all persons in the address book.
+Clears all entries from the address book.
 
-Format: `list`
+Format: `clear`
 
-* You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
 
-### Listing starred persons : `list *`
+**Confirmation Requirement:**
 
-Shows a list of all starred persons in the address book.
+A confirmation window will appear before clearing all contacts in MediContact, 
+asking you to confirm if you are sure you want to proceed. 
+You must select “OK” to clear the address book. If you select “Cancel,” 
+the action will be aborted, and the address book will remain unchanged.
 
-Format: `list *`
+![clearConfirmation.png](images%2FclearConfirmation.png)
 
-* No other parameters should be supplied aside from `*`.
-* You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
+### Deleting a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete INDEX` / `delete NAME`
+
+* Deletes the person at the specified `INDEX` or with the specified `NAME`.
+* The name refers to the full name as shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The name provided must be the person's full name.
+
+Examples:
+
+* `list` followed by `delete Alex Yeoh` deletes the person with name `Alex Yeoh` in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+
+**Confirmation Requirement:**
+
+A confirmation window will appear before deleting a person, asking you to confirm the deletion. 
+You must select “OK” to proceed with the deletion. If you select “Cancel,” the action will be aborted, 
+and the person will not be deleted.
+
+![deleteConfirmation.png](images%2FdeleteConfirmation.png)
 
 ### Editing a person : `edit`
 
@@ -147,6 +160,11 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/
 Examples:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
 *  `edit John Doe n/Betsy Crower t/ ap/` Edits the name of John Doe to be `Betsy Crower` and clears all existing tags and appointments.
+
+### Exiting the program : `exit`
+
+Exits the program.
+Format: `exit`
 
 ### Locating persons by name or phone number: `find`
 
@@ -190,6 +208,19 @@ Examples:
 * `filter ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 t/medication t/Dr Tan`
+
+### Viewing help : `help`
+
+Shows you a help window with useful resources which includes:
+
+- A URL to the User Guide displayed at the top. You can copy the URL directly to your clipboard by clicking the “Copy URL” button.
+- A command summary table below the URL, displaying available commands, their formats, and examples.
+- You can copy the command format or example from the table and paste it into the command box.
+- You can click on the table headers to sort commands in ascending or descending order.
+
+Format: `help`
+
+![helpWindow.png](images%2FhelpWindow.png)
 
 ### Importing contacts: `import`
 
@@ -285,8 +316,23 @@ The following is an example of a valid JSON file content.
       },
   ````
 
-  
 
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
+
+* You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
+
+### Listing starred persons : `list *`
+
+Shows a list of all starred persons in the address book.
+
+Format: `list *`
+
+* No other parameters should be supplied aside from `*`.
+* You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
 
 ### Editing a person's notes : `note`
 
@@ -307,48 +353,6 @@ Format: `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…​`
 Examples:
 *  `note John Doe ap/01/01/2025 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
 *  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
-
-### Viewing a person's notes : `view`
-
-Views an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
-
-Format: `view INDEX` / `view NAME`
-
-Views the person's note at the specified `INDEX` or with the specified `NAME`.
-* The name refers to the full name as shown in the displayed person list.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The name provided must be the person's full name.
-
-Examples:
-*  `view John Doe`
-*  `view 1` shows all details of the 1st person's details including notes.
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX` / `delete NAME`
-
-* Deletes the person at the specified `INDEX` or with the specified `NAME`.
-* The name refers to the full name as shown in the displayed person list.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The name provided must be the person's full name.
-
-Examples:
-* `list` followed by `delete Alex Yeoh` deletes the person with name `Alex Yeoh` in the address book.
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-
-**Confirmation Requirement:**
-
-A confirmation window will appear before deleting a person, asking you to confirm the deletion. 
-You must select “OK” to proceed with the deletion. If you select “Cancel,” the action will be aborted, 
-and the person will not be deleted.
-
-![deleteConfirmation.png](images%2FdeleteConfirmation.png)
 
 ### Sorting list based on Appointment Dates : `sort`
 
@@ -393,36 +397,23 @@ Examples:
 * `list` followed by `unstar 2` unstars the 2nd person in the address book.
 * `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
 
+### Viewing a person's notes : `view`
 
-### Clearing all entries : `clear`
+Views an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
 
-Clears all entries from the address book.
+Format: `view INDEX` / `view NAME`
 
-Format: `clear`
+Views the person's note at the specified `INDEX` or with the specified `NAME`.
 
+* The name refers to the full name as shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The name provided must be the person's full name.
 
-**Confirmation Requirement:**
+Examples:
 
-A confirmation window will appear before clearing all contacts in MediContact, 
-asking you to confirm if you are sure you want to proceed. 
-You must select “OK” to clear the address book. If you select “Cancel,” 
-the action will be aborted, and the address book will remain unchanged.
-
-![clearConfirmation.png](images%2FclearConfirmation.png)
-
-### Exporting contacts : `export`
-
-Exports contact info in file path `data/addressbook.json`.
-
-Format: `export`
-
-- Locate file `addressbook.json` under the folder `data` that will be added to the current folder of `addressbook.jar` upon executing `export`.
-- **Warning**: Upon execution of `export` folder `data` containing `addressbook.json` will be created in the same directory as the application JAR if not already existing. Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting  which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
-
-
-### Exiting the program : `exit`
-Exits the program.
-Format: `exit`
+*  `view John Doe`
+*  `view 1` shows all details of the 1st person's details including notes.
 
 ### Saving the data
 
