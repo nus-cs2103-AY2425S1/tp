@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindClientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.AddressContainsKeywordsPredicate;
 import seedu.address.model.client.Client;
@@ -24,21 +24,21 @@ import seedu.address.model.client.PolicyTypeMatchesPredicate;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Parses input arguments and creates a new FindCommand object.
+ * Parses input arguments and creates a new FindClientCommand object.
  */
-public class FindCommandParser implements Parser<FindCommand> {
+public class FindClientCommandParser implements Parser<FindClientCommand> {
 
     // Define email validation regex at the class level
     private static final String EMAIL_VALIDATION_REGEX =
             "[^\\W_]+([+_.-][^\\W_]+)*@([^\\W_]+(-[^\\W_]+)*\\.)+([^\\W_]+(-[^\\W_]+)*){2,}$";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindClientCommand
+     * and returns a FindClientCommand object for execution.
      *
      * @throws ParseException if the user input does not conform to the expected format
      */
-    public FindCommand parse(String args) throws ParseException {
+    public FindClientCommand parse(String args) throws ParseException {
         // Tokenize the input arguments using prefixes
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
@@ -48,7 +48,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_POLICY_TYPE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindClientCommand.MESSAGE_USAGE));
         }
 
         // Initialize the list of predicates
@@ -123,7 +123,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Combine all predicates into a CompositePredicate
         Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
 
-        return new FindCommand(combinedPredicate);
+        return new FindClientCommand(combinedPredicate);
     }
 
     /**
