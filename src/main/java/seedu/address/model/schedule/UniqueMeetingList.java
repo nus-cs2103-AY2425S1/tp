@@ -179,21 +179,4 @@ public class UniqueMeetingList implements Iterable<Meeting> {
         }
         return true;
     }
-
-    /**
-     * Returns true if {@code meetings} do not have any conflicting meetings.
-     *
-     * @param meetings The list of meetings to check for conflicts.
-     * @return True if no conflicts are found, false otherwise.
-     */
-    private boolean meetingsAreNotConflict(List<Meeting> meetings) {
-        for (int i = 0; i < meetings.size() - 1; i++) {
-            for (int j = i + 1; j < meetings.size(); j++) {
-                if (meetings.get(i).hasConflictMeeting(meetings.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 }
