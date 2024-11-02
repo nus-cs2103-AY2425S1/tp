@@ -31,8 +31,7 @@ public class AddJobCommand extends AddCommand<Job> {
             + PREFIX_COMPANY + "Starbucks "
             + PREFIX_SALARY + "2500 "
             + PREFIX_DESCRIPTION + "Looking for someone who brings a lot to the table "
-            + PREFIX_REQUIREMENTS + "Strong "
-            + PREFIX_REQUIREMENTS + "Pleasant";
+            + PREFIX_REQUIREMENTS + "Sociable";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the address book";

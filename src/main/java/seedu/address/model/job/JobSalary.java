@@ -53,6 +53,6 @@ public class JobSalary {
 
     @Override
     public String toString() {
-        return "$" + value;
+        return "Monthly Salary: $" + value;
     }
 }
