@@ -1,36 +1,71 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-  {%- include head.html -%}
+{%- include head.html -%}
 
-  <body>
+<body>
 
-    {%- include header.html -%}
-    <aside class="sidebar">
-      <h2>Quick Navigation</h2>
-      <ul>
-        {% for item in site.sidebar %}
-        <li>
-          <a href="{{ item.url }}">{{ item.title }}</a>
-          {% if item.toc %}
+{%- include header.html -%}
+
+<!-- Flex container to hold sidebar and main content -->
+<div class="content-container">
+  <aside class="sidebar">
+    <h2>Quick Navigation</h2>
+    <ul>
+      {% for item in site.sidebar %}
+      <li>
+        <a href="{{ item.url }}">{{ item.title }}</a>
+        {% if item.toc %}
+        <button onclick="toggleTOC('{{ item.title | replace: ' ', '-' }}')">Toggle TOC</button>
+        <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
           <ul>
-            {% for heading in site.pages | where:"path", item.url | map:"headings" %}
-            <li><a href="{{ heading.url }}">{{ heading.text }}</a></li>
-            {% endfor %}
+            <!-- Adjust heading logic based on TOC plugin or manual TOC -->
           </ul>
-          {% endif %}
-        </li>
-        {% endfor %}
-      </ul>
-    </aside>
+        </div>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
 
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
-    </main>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+      {{ content }}
+    </div>
+  </main>
+</div>
 
-  </body>
+<script>
+  function toggleTOC(id) {
+    const toc = document.getElementById('toc-' + id);
+    toc.classList.toggle('hidden');
+  }
+</script>
 
+<style>
+  /* Flex container for sidebar and main content */
+  .content-container {
+    display: flex;
+  }
 
+  /* Sidebar styling */
+  .sidebar {
+    width: 250px; /* Adjust width as desired */
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for contrast */
+  }
+
+  /* Main content styling */
+  .page-content {
+    flex: 1; /* Take up remaining space */
+    padding: 20px;
+  }
+
+  /* Style for hidden class */
+  .hidden {
+    display: none;
+  }
+</style>
+
+</body>
 </html>
