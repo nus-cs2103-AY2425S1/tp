@@ -307,6 +307,7 @@ Format: `export`
 
 - Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
 - If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
+- By default, the exported CSV file will be located in the "data" folder with the name "property.csv"
 
 ### Sorting all persons : `sort`
 
