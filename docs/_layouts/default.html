@@ -19,7 +19,7 @@
         <button onclick="toggleTOC('{{ item.title | replace: ' ', '-' }}')">Details</button>
         <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
           <ul>  <!-- Add this UL here -->
-            {% assign headings = site.pages | where: "path", item.url | first %}
+            {% assign headings = site.pages | where: "url", item.url | first %}
             {% if headings %}
             {% assign content = headings.content %}
             {% assign lines = content | split: '\n' %}
