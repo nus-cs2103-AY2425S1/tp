@@ -1,10 +1,10 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TrackMate Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -69,6 +69,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
+**THE PICTURE IS TO BE CHANGED BY UI TEAM**
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
@@ -130,7 +131,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. This model introduces a more streamlined structure where `AddressBook` holds a `TutorialList` and an `AssignmentList`, linking directly to `Tutorial` and `Assignment` entities. Each `Student` is associated with a `TutorialId`, and `Tutorial` entities maintain a list of `Student` objects, making it easier to manage relationships and reducing redundancy. This design allows `AddressBook` to manage tutorials and assignments without requiring each student to hold separate `Tutorial` or `Assignment` objects, simplifying interactions and data management.
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -145,7 +146,7 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from `AddressBookStorage`, `UserPrefStorage`, `TutorialStorage` and `AssignmentStorage`, which means it can be treated as one of these (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -158,103 +159,59 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add feature
 
-#### Proposed Implementation
+The "Add Student" mechanism is facilitated by `Model` and `AddCommand`.
+This feature enables users to seamlessly integrate new student profiles into TrackMate application. To ensure data integrity and completeness, the system necessitates the inclusion of essential parameters such as Name, Student ID, and optionally Tutorial ID.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### Example Usage Scenario and Behavior at Each Step
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+Step 1: The user launches the application. The initial state contains no student data.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Step 2: The user executes an `add` command to add a new student. If the command format is correct, the system parses the command and creates a `Student` object.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Step 3: The system checks if the student already exists based on a unique identifier like student ID or email. If not, it commits the current state of the address book before adding the new student.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+Step 4: The user receives feedback about the successful addition of the student.
 
 
-<box type="info" seamless>
+#### Activity Diagram Explanation
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+Below is the activity diagram that outlines the user interactions and system processes involved in adding a new student profile. This diagram illustrates the step-by-step sequence required to successfully integrate a student into the TrackMate system.
 
-</box>
+<puml src="diagrams/AddFeatureActivityDiagram.puml" alt="Activity Diagram - Add"/>
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+#### Implementation - Class Diagram:
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+The class diagram below details the classes involved in the Add feature's implementation. It highlights the relationships and interactions between these classes, providing a clear view of the system's structure for adding a student.
 
-<box type="info" seamless>
+<puml src="diagrams/AddFeatureClassDiagram.puml" alt="Class Diagram - Add"/>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Key Components:**
 
-</box>
+- **AddCommandParser**: Interprets user input to create an appropriate `AddCommand`.
+- **AddCommand**: Executes the operation to add a new student, producing a `CommandResult`.
+- **ParserUtil**: Provides utility functions for parsing and validating various data types.
+- **ArgumentMultimap**: Organizes command arguments for easy retrieval and processing.
+- **Student**: The primary entity representing a student in the system.
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+#### Detailed Implementation Notes
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+- **ParserUtil Class**: Utilized for parsing string inputs into their respective data types and ensuring that inputs like names, student IDs, and tutorial IDs conform to expected formats. It automatically trims excessive whitespace.
+- **ArgumentMultimap**: Facilitates the mapping of parsed arguments to their respective prefixes, ensuring organized and efficient data retrieval during command processing.
+- **AddCommand**: Manages the creation of new student entries. It verifies the non-existence of duplicate student IDs and ensures the specified tutorial exists before adding the student to the model.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+#### Design Considerations:
 
-<box type="info" seamless>
+**Centralized Data Validation:**
+- **Alternative 1 (Current Choice)**: Using a dedicated ParserUtil class for data validation centralizes validation logic, promoting modularity and maintainability.
+    - **Pros**: Isolates validation logic, simplifying modifications and updates.
+    - **Cons**: Adds a layer of abstraction, potentially increasing complexity.
+- **Alternative 2**: Integrating validation functions directly within each class.
+    - **Pros**: Enables context-specific validations tailored to specific needs.
+    - **Cons**: Could lead to code duplication and maintenance challenges.
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+The chosen approach (Alternative 1) enhances code consistency and facilitates easier updates and maintenance by centralizing validation logic in the ParserUtil class. This method is especially effective given the similarity in validation requirements across different student attributes such as name, ID, and tutorial IDs.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -285,38 +242,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority  | As a …​                         | I want to …​                                                                                       | So that I can…​                                                                          |
 |-----------|---------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| `* * *`   | tutor                           | add student data                                                                                   | I can add student information efficiently                                                |
-| `* * *`   | tutor                           | delete student data                                                                                | I can delete student information efficiently                                             |
-| `* * *`   | tutor                           | categorise students based on tutorial classes                                                      | I can find out which students are in my class                                            |
-| `* * *`   | course coordinator              | record student attendance daily through a CLI command                                              | I can track student participation                                                        |
-| `* * *`   | assignment-focused instructor   | create assignments for students                                                                    | I can assign tasks to students                                                           |
-| `* *`     | tutor                           | edit student data                                                                                  | I can manage student information efficiently                                             |
-| `* *`     | tutor                           | undo previous commands                                                                             | I can undo mistakes made in previous commands                                            |
-| `* *`     | independent tutor               | manage my own data files independently                                                             | I don’t have to worry about multi-user access conflicts                                  |
-| `* *`     | power user                      | use command shortcuts for frequent operations                                                      | I can save time                                                                          |
-| `* *`     | data-cautious professional      | back up my data to a local file                                                                    | I can restore it if something goes wrong                                                 |
-| `* *`     | solo practitioner               | optimise my application for single-user functionality                                              | I can focus on my tasks without distractions                                             |
-| `* *`     | assignment-focused instructor   | mark assignments as completed or pending                                                           | I can track the progress of each student                                                 |
-| `* *`     | deadline-aware tutor            | have a reminder command to alert me about overdue assignments                                      | I can follow up with students                                                            |
-| `* *`     | grading instructor              | enter grades and calculate final scores using a CLI command                                        | I can manage grading efficiently                                                         |
-| `* *`     | class performance analyst       | see a summary of grades for a class in a single command                                            | I can evaluate overall performance                                                       |
-| `* *`     | student mentor                  | generate predictive insights based on historical data to identify students who may need extra help | I can provide timely interventions                                                       |
-| `* *`     | parent communication officer    | use a command to generate a progress report for each student                                       | I can share it during parent-teacher meetings                                            |
-| `* *`     | long-term performance evaluator | compare student performance across different terms                                                 | I can assess improvement or decline                                                      |
-| `* *`     | student progress tracker        | tag students with custom labels                                                                    | I can quickly identify those needing special attention                                   |
-| `* *`     | cross-platform user             | run the application on any platform (Windows, Linux, OS X) without any OS-specific dependencies    | I can use it anywhere                                                                    |
-| `* *`     | convenience-seeking educator    | use the application without an installer                                                           | I can use it directly from the downloaded JAR file                                       |
-| `* *`     | data visualization enthusiast   | use ASCII-based bar charts and progress bars for a quick visual representation of data             | I can easily grasp trends                                                                |
-| `* *`     | self-learning user              | use interactive help commands                                                                      | I can understand how to use the application without referring to external documentation. |
-| `*`       | seasoned CLI user               | have a command history feature                                                                     | I can reuse previous commands without retyping them                                      |
-| `*`       | advanced user                   | store all data in a local, human-editable text file                                                | I can manually edit it when needed                                                       |
-| `*`       | meticulous user                 | check data integrity when loading files                                                            | I am alerted of any corrupt or inconsistent data                                         |
-| `*`       | privacy-focused educator        | ensure that all data are user-specific and not shared                                              | My data remains private                                                                  |
-| `*`       | custom-evaluation designer      | define my own grading scale via a text file                                                        | I can adapt it to different evaluation criteria                                          |
-| `*`       | security-conscious tutor        | secure sensitive student data with encryption in local files                                       | Unauthorized access is prevented                                                         |
-| `*`       | safety-focused user             | automate daily backups with encryption                                                             | My data is safe from accidental loss                                                     |
-| `*`       | personalization enthusiast      | customize the CLI interface with different themes and fonts                                        | I can have a more comfortable user experience                                            |
-| `*`       | course manager                  | configure the grading system and attendance rules via a configuration text file                    | I can tailor the application to my needs                                                 |
+| `* * *`   | tutor                           | add student data                                                                                   | add student information efficiently                                                      |
+| `* * *`   | tutor                           | delete student data                                                                                | delete student information efficiently                                                   |
+| `* * *`   | tutor                           | categorise students based on tutorial classes                                                      | find out which students are in my class                                                  |
+| `* * *`   | tutor                           | record student attendance daily through a CLI command                                              | track student participation                                                              |
+| `* * *`   | tutor                           | create assignments for students                                                                    | assign tasks to students                                                                 |
+| `* *`     | tutor                           | edit student data                                                                                  | manage student information efficiently                                                   |
+| `* *`     | tutor                           | list all students                                                                                  | see all students enrolled in the course                                                  |
+| `* *`     | tutor                           | add tutorials                                                                                      | organize students into specific sessions or groups                                       |
+| `* *`     | tutor                           | list all tutorials                                                                                 | review all tutorial sessions currently available                                         |
+| `* *`     | tutor                           | delete a tutorial                                                                                  | manage tutorials efficiently by removing sessions that are no longer needed              |
+| `* *`     | tutor                           | add assignments to a tutorial                                                                      | assign tasks to students and manage their workload                                       |
+| `* *`     | tutor                           | delete assignments                                                                                 | manage assignments efficiently by removing tasks that are no longer relevant             |
+| `* *`     | tutor                           | list all assignments                                                                               | see all assignments I have created for the students                                      |
+| `* *`     | tutor                           | mark assignments as completed or pending                                                           | track the progress of each student                                                       |
+| `* *`     | tutor                           | unmark assignments as completed                                                                    | correct any mistakes in assignment status updates                                        |
+| `* *`     | tutor                           | check assignment status for a student                                                              | monitor individual student progress on given assignments                                 |
+| `* *`     | tutor                           | mark student attendance                                                                            | keep track of each student's participation in the tutorials                              |
+| `* *`     | tutor                           | unmark student attendance                                                                          | correct mistakes in attendance marking                                                   |
+| `* *`     | cross-platform user             | run the application on any platform (Windows, Linux, OS X) without any OS-specific dependencies    | use it anywhere                                                                          |
+| `* *`     | convenience-seeking educator    | use the application without an installer                                                           | use it directly from the downloaded JAR file                                             |
+| `*`       | self-learning user              | use interactive help commands                                                                      | understand how to use the application without referring to external documentation        |
 
 
 ### Use cases
@@ -360,8 +306,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is full.
-  * AddressBook shows an error message
-    Use case ends.
+    * AddressBook shows an error message
+      Use case ends.
 
 * 3a. The given index is invalid.
 
@@ -376,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list students
 2.  AddressBook shows a list of students
 3.  User requests to categorise the tutorial class of a specific student to the list
-4.  AddressBook checks if the tutorial class is valid. 
+4.  AddressBook checks if the tutorial class is valid.
 5.  AddressBook edits the student's tutorial class
 
     Use case ends.
@@ -385,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The list is empty.
 
-    Use case ends.
+  Use case ends.
 
 * 3a. The given student index is invalid.
 
@@ -395,9 +341,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. The given tutorial index is invalid.
 
-  * 4a1. AddressBook shows an error message.
+    * 4a1. AddressBook shows an error message.
 
-    Use case resumes at step 4.
+      Use case resumes at step 4.
 
 **Use case: Record Student Attendance**
 
@@ -432,12 +378,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add an assignment 
+1.  User requests to add an assignment
 2.  AddressBook creates the assignment
-3.  AddressBook gets a list of students 
+3.  AddressBook gets a list of students
 4.  AddressBook adds the copy of the assignment to the assignment list of every student in the list.
 
-       Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -451,8 +397,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The application should start up in under 3 seconds on a standard machine with Java 17 installed.
-5. Automated backups should be encrypted to secure data during storage and transfer. 
-6. Customizable themes should include options for high contrast and font size adjustments for visual accessibility. 
+5. Automated backups should be encrypted to secure data during storage and transfer.
+6. Customizable themes should include options for high contrast and font size adjustments for visual accessibility.
 7. The system is optimized for single-user operation and does not need to handle multi-user access.
 8. The application should be optimized for low CPU and memory usage to run smoothly on standard hardware.
 9. The application should be reliable enough for continuous use during working hours without the need for frequent restarts.
@@ -489,15 +435,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -506,16 +452,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -523,6 +469,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
