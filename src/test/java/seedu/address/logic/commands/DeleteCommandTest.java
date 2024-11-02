@@ -3,7 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
@@ -66,7 +70,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_setTargetIndexSuccess_validIndexFilteredList_success() {
+    public void execute_setTargetIndexSuccess_validIndexFilteredList() {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
         Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
@@ -83,7 +87,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_setTargetIndexFailure_nameNotInAddressBook_throwsCommandException() {
+    public void execute_setTargetIndexFailureNameNotInAddressBook_throwsCommandException() {
         DeleteCommand deleteCommand = new DeleteCommand(new Name("abzczdzezfghzizjzkzlmnopqrstuvwxyz"));
         String expectedMessage = String.format(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK);
 
