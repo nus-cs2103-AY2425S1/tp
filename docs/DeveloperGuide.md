@@ -542,11 +542,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 _Similar to UC10 except without extension 2b._
 
-**Use case: UC11 - Undo a command**
+**Use case: UC12 - Undo a command**
 
 **MSS**
 
-1.  Actor performs a command to update the addressbook.
+1.  Actor performs a command that updates the addressbook.
 2.  System executes the command.
 3.  Actor requests to undo the recently executed command.
 4.  System reverts changes made by the user.

@@ -238,7 +238,6 @@ Examples:
 
 - `pin 1` pins the contact of the first person shown on the displayed person list into the pinned person list.
 
-<<<<<<< HEAD
 ### Undo a previously executed command: `undo`
 
 Undo the previous command that was executed.
@@ -254,7 +253,7 @@ Examples of commands tracked by undo:
 - `clear`
 - `edit`
 - `pin`
-=======
+
 ### Unpinning a contact: `unpin`
 
 Unpins the contact of a person from the pinned list.
@@ -269,7 +268,6 @@ Format: `unpin INDEX`
 Examples:
 
 - `unpin 1` unpins the contact of the first person shown on the pinned person list.
->>>>>>> master
 
 ### Exporting the contact list : `export`
 
