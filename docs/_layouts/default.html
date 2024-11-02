@@ -20,7 +20,12 @@
         <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
           <ul>  <!-- Add this UL here -->
             {% if item.title == "User Guide" %}
+            <li><a href="UserGuide.html#quick-start">Quick Start</a></li>
+            <li><a href="UserGuide.html#features">Features</a></li>
+            <li><a href="UserGuide.html#faq">FAQ</a></li>
+            <li><a href="UserGuide.html#known-issues">Know Issues</a></li>
             <li><a href="UserGuide.html#quick-start">QuickStart</a></li>
+            <li><a href="UserGuide.html#command-summary">Command Summary</a></li>
             {% endif %}
           </ul>
         </div>
