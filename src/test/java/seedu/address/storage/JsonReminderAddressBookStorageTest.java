@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalReminders.getTypicalReminderAddressBook;
 import static seedu.address.testutil.TypicalReminders.REMINDER_ALICE;
 import static seedu.address.testutil.TypicalReminders.REMINDER_FIONA;
 import static seedu.address.testutil.TypicalReminders.REMINDER_GEORGE;
+import static seedu.address.testutil.TypicalReminders.getTypicalReminderAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
