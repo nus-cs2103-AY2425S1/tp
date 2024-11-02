@@ -14,14 +14,17 @@ public class EventParticipatedByVolunteerPredicateTest {
         String firstVolunteerName = "John Doe";
         String secondVolunteerName = "Jane Doe";
 
-        EventParticipatedByVolunteerPredicate firstPredicate = new EventParticipatedByVolunteerPredicate(firstVolunteerName);
-        EventParticipatedByVolunteerPredicate secondPredicate = new EventParticipatedByVolunteerPredicate(secondVolunteerName);
+        EventParticipatedByVolunteerPredicate firstPredicate =
+                new EventParticipatedByVolunteerPredicate(firstVolunteerName);
+        EventParticipatedByVolunteerPredicate secondPredicate =
+                new EventParticipatedByVolunteerPredicate(secondVolunteerName);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        EventParticipatedByVolunteerPredicate firstPredicateCopy = new EventParticipatedByVolunteerPredicate(firstVolunteerName);
+        EventParticipatedByVolunteerPredicate firstPredicateCopy =
+                new EventParticipatedByVolunteerPredicate(firstVolunteerName);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

@@ -19,13 +19,15 @@ public class EventNameContainsKeywordsPredicateTest {
         List<String> secondKeywordList = Arrays.asList("Meeting", "Review");
 
         EventNameContainsKeywordsPredicate firstPredicate = new EventNameContainsKeywordsPredicate(firstKeywordList);
-        EventNameContainsKeywordsPredicate secondPredicate = new EventNameContainsKeywordsPredicate(secondKeywordList);
+        EventNameContainsKeywordsPredicate secondPredicate =
+                new EventNameContainsKeywordsPredicate(secondKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        EventNameContainsKeywordsPredicate firstPredicateCopy = new EventNameContainsKeywordsPredicate(firstKeywordList);
+        EventNameContainsKeywordsPredicate firstPredicateCopy =
+                new EventNameContainsKeywordsPredicate(firstKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

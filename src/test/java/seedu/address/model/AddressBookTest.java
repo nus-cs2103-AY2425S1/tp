@@ -104,7 +104,8 @@ public class AddressBookTest {
     }
 
     @Test
-    public void assignVolunteerToEvent_successfulAssignment() throws DuplicateAssignException, OverlappingAssignException {
+    public void assignVolunteerToEvent_successfulAssignment()
+            throws DuplicateAssignException, OverlappingAssignException {
         addressBook.addVolunteer(volunteerAlice);
         addressBook.addEvent(eventMeeting);
         addressBook.assignVolunteerToEvent(volunteerAlice, eventMeeting);
@@ -114,16 +115,20 @@ public class AddressBookTest {
     }
 
     @Test
-    public void assignVolunteerToEvent_duplicateAssignment_throwsDuplicateAssignException() throws DuplicateAssignException, OverlappingAssignException {
+    public void assignVolunteerToEvent_duplicateAssignment_throwsDuplicateAssignException()
+            throws DuplicateAssignException, OverlappingAssignException {
         addressBook.addVolunteer(volunteerAlice);
         addressBook.addEvent(eventMeeting);
         addressBook.assignVolunteerToEvent(volunteerAlice, eventMeeting);
 
-        assertThrows(DuplicateAssignException.class, () -> addressBook.assignVolunteerToEvent(volunteerAlice, eventMeeting));
+        assertThrows(
+                DuplicateAssignException.class, () -> addressBook.assignVolunteerToEvent(volunteerAlice, eventMeeting)
+        );
     }
 
     @Test
-    public void unassignVolunteerFromEvent_successfulUnassignment() throws DuplicateAssignException, NotAssignedException, OverlappingAssignException {
+    public void unassignVolunteerFromEvent_successfulUnassignment()
+            throws DuplicateAssignException, NotAssignedException, OverlappingAssignException {
         addressBook.addVolunteer(volunteerAlice);
         addressBook.addEvent(eventMeeting);
         addressBook.assignVolunteerToEvent(volunteerAlice, eventMeeting);
@@ -138,7 +143,9 @@ public class AddressBookTest {
         addressBook.addVolunteer(volunteerAlice);
         addressBook.addEvent(eventMeeting);
 
-        assertThrows(NotAssignedException.class, () -> addressBook.unassignVolunteerFromEvent(volunteerAlice, eventMeeting));
+        assertThrows(
+                NotAssignedException.class, () -> addressBook.unassignVolunteerFromEvent(volunteerAlice, eventMeeting)
+        );
     }
 
     @Test
@@ -217,6 +224,8 @@ public class AddressBookTest {
         assertEquals(original.getEventList(), copiedAddressBook.getEventList());
 
         // Ensure associations are preserved
-        assertTrue(copiedAddressBook.getEventList().get(0).getVolunteers().contains(volunteerAlice.getName().toString()));
+        assertTrue(
+                copiedAddressBook.getEventList().get(0).getVolunteers().contains(volunteerAlice.getName().toString())
+        );
     }
 }

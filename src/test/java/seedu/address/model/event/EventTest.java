@@ -1,9 +1,9 @@
 package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,8 @@ public class EventTest {
     }
 
     @Test
-    public void assignVolunteerToEvent_successfulAssignment() throws DuplicateAssignException, OverlappingAssignException {
+    public void assignVolunteerToEvent_successfulAssignment()
+            throws DuplicateAssignException, OverlappingAssignException {
         eventManager.addEvent(eventOne);
         eventManager.assignVolunteerToEvent(volunteerJohn, eventOne);
         assertTrue(eventOne.getVolunteers().contains(volunteerJohn.getName().fullName));
@@ -66,7 +67,8 @@ public class EventTest {
     }
 
     @Test
-    public void unassignVolunteerFromEvent_successfulUnassignment() throws DuplicateAssignException, OverlappingAssignException {
+    public void unassignVolunteerFromEvent_successfulUnassignment()
+            throws DuplicateAssignException, OverlappingAssignException {
         eventManager.addEvent(eventOne);
         eventManager.assignVolunteerToEvent(volunteerJohn, eventOne);
         eventManager.unassignVolunteerFromEvent(volunteerJohn, eventOne);
@@ -99,7 +101,8 @@ public class EventTest {
     }
 
     @Test
-    public void unassignVolunteerFromAllEvents_successfulUnassignmentFromAll() throws DuplicateAssignException, OverlappingAssignException {
+    public void unassignVolunteerFromAllEvents_successfulUnassignmentFromAll()
+            throws DuplicateAssignException, OverlappingAssignException {
         eventManager.addEvent(eventOne);
         eventManager.addEvent(eventTwo);
 

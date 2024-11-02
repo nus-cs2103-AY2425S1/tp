@@ -115,7 +115,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void assignVolunteerToEvent_successfulAssignment() throws DuplicateAssignException, OverlappingAssignException {
+    public void assignVolunteerToEvent_successfulAssignment()
+            throws DuplicateAssignException, OverlappingAssignException {
         modelManager.addVolunteer(volunteerAlice);
         modelManager.addEvent(eventMeeting);
         modelManager.assignVolunteerToEvent(volunteerAlice, eventMeeting);
@@ -124,7 +125,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void unassignVolunteerFromEvent_successfulUnassignment() throws CommandException, DuplicateAssignException, OverlappingAssignException {
+    public void unassignVolunteerFromEvent_successfulUnassignment()
+            throws CommandException, DuplicateAssignException, OverlappingAssignException {
         modelManager.addVolunteer(volunteerAlice);
         modelManager.addEvent(eventMeeting);
         modelManager.assignVolunteerToEvent(volunteerAlice, eventMeeting);

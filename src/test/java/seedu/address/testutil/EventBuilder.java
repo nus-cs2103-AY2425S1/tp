@@ -119,4 +119,5 @@ public class EventBuilder {
         Event event = new Event(eventName, location, date, startTime, endTime, description);
         event.getVolunteers().addAll(volunteers);
         return event;
-    }}
+    }
+}
