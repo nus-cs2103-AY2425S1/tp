@@ -56,7 +56,6 @@ public class MarkPaidCommand extends Command {
     public MarkPaidCommand(MarkPaidTarget target, Set<MonthPaid> monthsPaid, boolean isRemoving) {
         requireNonNull(target);
         requireNonNull(monthsPaid);
-        requireNonNull(isRemoving);
         this.target = target;
         this.monthsPaid = monthsPaid;
         this.isRemoving = isRemoving;
