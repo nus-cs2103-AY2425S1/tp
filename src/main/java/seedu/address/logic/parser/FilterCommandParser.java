@@ -66,9 +66,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 .flatMap(tag -> List.of(tag.trim().split("\\s+")).stream()).toList();
 
         // if either predicate is empty
-        if (names.contains("") || phones.contains("") || emails.contains("") || addresses.contains("") ||
-            registerNumbers.contains("") || sexes.contains("") || classes.contains("") || ecNames.contains("") ||
-            ecNumbers.contains("") || tags.contains("")) {
+        if (names.contains("") || phones.contains("") || emails.contains("") || addresses.contains("")
+                || registerNumbers.contains("") || sexes.contains("") || classes.contains("") || ecNames.contains("")
+                || ecNumbers.contains("") || tags.contains("")) {
             throw new ParseException(MESSAGE_INCOMPLETE_COMMAND);
         }
 
