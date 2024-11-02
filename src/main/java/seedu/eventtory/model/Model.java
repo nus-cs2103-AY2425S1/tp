@@ -3,6 +3,7 @@ package seedu.eventtory.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
@@ -91,6 +92,11 @@ public interface Model {
     void updateFilteredVendorList(Predicate<Vendor> predicate);
 
     /**
+     * Returns observable one-based display start index of the assigned vendor list.
+     */
+    ObservableIntegerValue getAssignedVendorsDisplayStartIdx();
+
+    /**
      * Returns true if the given {@code vendor} is already assigned to the given {@code event}. {@code vendor} and
      * {@code event} must exist in EventTory.
      */
@@ -160,6 +166,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Returns observable one-based display start index of the assigned event list.
+     */
+    ObservableIntegerValue getAssignedEventsDisplayStartIdx();
 
     /**
      * Returns the current selected event.
