@@ -22,7 +22,7 @@ public class FilterCommand extends Command {
             + "Parameters: <FLAG>/ <SEARCH TERM>\n"
             + "Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, r/ REMARK\n"
             + "Example: '" + COMMAND_WORD + " n/ Alice" + " p/ 91112222'\n"
-            + "This will find all customers whose names contain 'Alice' and whose phone number is '91112222'.";
+            + "This will find all clients whose names contain 'Alice' and whose phone number is '91112222'.";
 
     private final Predicate<Client> predicate;
 
