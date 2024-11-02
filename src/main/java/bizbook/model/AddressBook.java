@@ -98,7 +98,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
-        if (isPinned(key)){
+        if (isPinned(key)) {
             removePinnedPerson(key);
         }
     }
