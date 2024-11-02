@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.MEETING;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -31,6 +33,11 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventsCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.UnassignEventByPersonIndexEventIndexCommand;
+import seedu.address.logic.commands.UnassignEventByPersonIndexEventNameCommand;
+import seedu.address.logic.commands.UnassignEventByPersonNameEventIndexCommand;
+import seedu.address.logic.commands.UnassignEventByPersonNameEventNameCommand;
+import seedu.address.logic.commands.UnassignEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
@@ -141,8 +148,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListEventsCommand.COMMAND_WORD) instanceof ListEventsCommand);
-        assertTrue(parser.parseCommand(ListEventsCommand.COMMAND_WORD + " 3") instanceof ListEventsCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
@@ -154,8 +161,28 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list_events() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListEventsCommand.COMMAND_WORD) instanceof ListEventsCommand);
+        assertTrue(parser.parseCommand(ListEventsCommand.COMMAND_WORD + " 3") instanceof ListEventsCommand);
+    }
+
+    @Test
+    public void parseCommand_unassign_events() throws Exception {
+        UnassignEventCommand unassignEventByPersonIndexEventIndexCommand = (UnassignEventCommand) parser.parseCommand(
+                EventUtil.getUnassignEventDetails("1", "1"));
+        assertEquals(new UnassignEventByPersonIndexEventIndexCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT),
+                unassignEventByPersonIndexEventIndexCommand);
+        UnassignEventCommand unassignEventByPersonIndexEventNameCommand = (UnassignEventCommand) parser.parseCommand(
+                EventUtil.getUnassignEventDetails("1", MEETING.getEventName().toString()));
+        assertEquals(new UnassignEventByPersonIndexEventNameCommand(INDEX_FIRST_PERSON, MEETING.getEventName()),
+                unassignEventByPersonIndexEventNameCommand);
+        UnassignEventCommand unassignEventByPersonNameEventIndexCommand = (UnassignEventCommand) parser.parseCommand(
+                EventUtil.getUnassignEventDetails(ALICE.getName().toString(), "1"));
+        assertEquals(new UnassignEventByPersonNameEventIndexCommand(ALICE.getName(), INDEX_FIRST_EVENT),
+                unassignEventByPersonNameEventIndexCommand);
+        UnassignEventCommand unassignEventByPersonNameEventNameCommand = (UnassignEventCommand) parser.parseCommand(
+                EventUtil.getUnassignEventDetails(ALICE.getName().toString(), MEETING.getEventName().toString()));
+        assertEquals(new UnassignEventByPersonNameEventNameCommand(ALICE.getName(), MEETING.getEventName()),
+                unassignEventByPersonNameEventNameCommand);
     }
 
     @Test

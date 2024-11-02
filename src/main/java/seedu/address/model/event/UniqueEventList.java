@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -38,6 +39,14 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Returns true if the list contains an event with the same name as the given argument.
+     */
+    public boolean containsName(EventName nameToCheck) {
+        requireNonNull(nameToCheck);
+        return internalList.stream().anyMatch(event -> event.getEventName().equalsLowerCase(nameToCheck));
+    }
+
+    /**
      * Returns true if the list contains an event with the same ID as the given argument.
      */
     public boolean containsId(int idToCheck) {
@@ -66,6 +75,19 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Gets all the events whose names are the same (case-insensitive) as the given argument.
+     */
+    public List<Event> getEventsWithName(EventName eventName) {
+        requireNonNull(eventName);
+        if (this.containsName(eventName)) {
+            return internalList.stream()
+                    .filter(event -> event.getEventName().equalsLowerCase(eventName))
+                    .toList();
+        }
+        return new ArrayList<>();
     }
 
     /**
