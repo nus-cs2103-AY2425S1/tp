@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FilterByNetworkCommand;
 import seedu.address.model.addresses.Network;
 
+
 public class FilterByNetworkCommandParserTest {
 
     private FilterByNetworkCommandParser parser = new FilterByNetworkCommandParser();
