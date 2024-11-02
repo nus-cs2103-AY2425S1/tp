@@ -81,7 +81,8 @@ public class UnassignEventByPersonNameEventNameCommandTest {
     @Test
     public void execute_multiplePersonsWithSameName_throwsCommandException() {
         // Create two persons with the same name
-        Person aliceClone = new Person(new Name("ALICE PAULINE"), ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(),
+        Person aliceClone = new Person(new Name("ALICE PAULINE"),
+                ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(),
                 ALICE.getTags(), ALICE.getEventIds(), ALICE.getId() + 1);
         model.addPerson(aliceClone);
 
