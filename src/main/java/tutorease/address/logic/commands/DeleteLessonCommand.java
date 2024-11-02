@@ -19,8 +19,9 @@ public class DeleteLessonCommand extends LessonCommand {
             + "index.Index{zeroBasedIndex=%d}}";
 
     public static final String MESSAGE_USAGE = LessonCommand.COMMAND_WORD
-            + " " + COMMAND_WORD + ": Deletes a lesson from the lesson list. "
-            + "Parameters: INDEX (must be a positive integer)";
+            + " " + COMMAND_WORD + ": Deletes a lesson from the lesson list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + LessonCommand.COMMAND_WORD + " " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Lesson removed successfully: %1$s";
     public static final String MESSAGE_INVALID_INDEX = "The lesson index provided is invalid";

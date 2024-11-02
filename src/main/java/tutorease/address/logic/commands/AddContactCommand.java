@@ -22,7 +22,7 @@ public class AddContactCommand extends ContactCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
-            + ": Adds a person to TutorEase. "
+            + ": Adds a person to TutorEase.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
