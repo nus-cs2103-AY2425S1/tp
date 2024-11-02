@@ -70,4 +70,10 @@ public class Messages {
         return builder.toString();
     }
 
+    public static String formatPersonName(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(person.getName());
+        return builder.toString();
+    }
+
 }

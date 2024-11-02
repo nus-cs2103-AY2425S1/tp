@@ -59,7 +59,8 @@ public class DisplayCommand extends Command {
         }
 
         model.displayPerson(personToDisplay);
-        return new CommandResult(String.format(MESSAGE_DISPLAY_PERSON_SUCCESS, Messages.format(personToDisplay)));
+        return new CommandResult(String.format(MESSAGE_DISPLAY_PERSON_SUCCESS,
+                Messages.formatPersonName(personToDisplay)));
     }
 
     private Person getPersonToDisplayByIndex(Model model, Index index) throws CommandException {
