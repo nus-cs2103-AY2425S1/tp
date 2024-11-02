@@ -48,7 +48,7 @@ public class PatientCard extends UiPart<Region> {
         name.setText(patient.getName().fullName);
         nric.setText(patient.getNric().value);
         sex.setText(patient.getSex().value);
-        appointmentDateTime.setText(Optional.ofNullable(patient.getLatestFutureAppt())
+        appointmentDateTime.setText(Optional.ofNullable(patient.getMostRecentFutureAppt())
                 .map(appt -> appt.getDateTime().format(DateTimeFormatter.ofPattern("d MMM uuuu, h:mma")))
                 .orElse("No upcoming appointment"));
     }
