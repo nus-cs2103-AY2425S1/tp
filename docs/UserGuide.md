@@ -133,7 +133,7 @@ Examples:
 
 Finds contacts whose details matches all given fields.
 
-Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [nn/NICKNAME]`
+Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 
 * The role field(s), if any, have to take a valid role value (Refer to **Tip** section in [adding a contact](#adding-a-contact-add))
 * The search for all other fields is case-insensitive. e.g. query `hans` will match `Hans`
