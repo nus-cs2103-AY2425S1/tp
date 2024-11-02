@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.testutil.testdata;
 
 import seedu.address.commons.core.index.Index;
 
