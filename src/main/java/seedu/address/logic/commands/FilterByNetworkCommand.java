@@ -11,6 +11,9 @@ import java.util.List;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 
+/**
+ * A command to filter the address book based on the specified network.
+ */
 public class FilterByNetworkCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
@@ -27,11 +30,24 @@ public class FilterByNetworkCommand extends Command {
 
     private final Network specifiedNetwork;
 
+    /**
+     * Creates a new `FilterByNetworkCommand` object.
+     *
+     * @param specifiedNetwork The network to filter by.
+     * @throws NullPointerException If `specifiedNetwork` is null.
+     */
     public FilterByNetworkCommand(Network specifiedNetwork) {
         requireAllNonNull(specifiedNetwork);
         this.specifiedNetwork = specifiedNetwork;
     }
 
+    /**
+     * Executes the filter command on the given address book model.
+     *
+     * @param model The address book model.
+     * @return A `CommandResult` object containing the result of the filtering operation.
+     * @throws CommandException If no person with the specified network is found.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
 

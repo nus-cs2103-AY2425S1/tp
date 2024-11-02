@@ -16,6 +16,13 @@ public class FilterByNetworkCommandParser implements Parser<FilterByNetworkComma
             + "BTC, ETH and SOL networks.";
     public final static String MESSAGE_EMPTY_OR_WRONG_PREFIX = "Please type %1$s before the specified network.\n%2$s";
 
+    /**
+     * Parses the user input and creates a `FilterByNetworkCommand` object.
+     *
+     * @param args The user input string.
+     * @return A `FilterByNetworkCommand` object representing the parsed command.
+     * @throws ParseException If the input is invalid.
+     */
     public FilterByNetworkCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
