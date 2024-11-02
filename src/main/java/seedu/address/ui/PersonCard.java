@@ -62,7 +62,7 @@ public class PersonCard extends UiPart<Region> {
         email.setFields(PersonCardField.ICON_LITERAL_EMAIL, person.getEmail().value);
         job.setFields(PersonCardField.ICON_LITERAL_JOB, person.getJob().value);
         income.setFields(PersonCardField.ICON_LITERAL_INCOME, person.getIncome().toString());
-        remark.setFields(PersonCardField.ICON_LITERAL_REMARK,person.getRemark().value);
+        remark.setFields(PersonCardField.ICON_LITERAL_REMARK, person.getRemark().value);
         cardFields.getChildren().addAll(phone, address, email, job, income, remark);
     }
 

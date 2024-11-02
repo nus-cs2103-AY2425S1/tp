@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.StringUtil.truncateText;
+
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.geometry.Pos;
@@ -7,8 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Paint;
-
-import static seedu.address.commons.util.StringUtil.truncateText;
 
 /**
  * Represents a labelled field in the PersonCard
