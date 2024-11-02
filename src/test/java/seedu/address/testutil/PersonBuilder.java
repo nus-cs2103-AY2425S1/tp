@@ -24,6 +24,8 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_NRIC = "S6482983A";
+    public static final String DEFAULT_CAREGIVER_NRIC = "S8765432Z";
+    public static final String DEFAULT_PATIENT_NRIC = "S2345678H";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
@@ -37,6 +39,8 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Set<Role> roles;
+    private Set<Nric> caregivers;
+    private Set<Nric> patients;
     private Set<Appointment> appointments;
     private List<Note> notes;
 
@@ -51,6 +55,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         roles = SampleDataUtil.getRoleSet(DEFAULT_ROLE);
+        caregivers = new HashSet<>();
+        patients = new HashSet<>();
         appointments = new HashSet<>();
         notes = SampleDataUtil.getSampleNotes(DEFAULT_NOTE);
     }
@@ -66,10 +72,10 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         roles = new HashSet<>(personToCopy.getRoles());
+        patients = new HashSet<>(personToCopy.getPatients());
+        caregivers = new HashSet<>(personToCopy.getCaregivers());
         appointments = new HashSet<>(personToCopy.getAppointments());
         notes = new ArrayList<Note>(personToCopy.getNotes());
-
-        System.out.println(notes);
     }
 
     /**
@@ -128,11 +134,28 @@ public class PersonBuilder {
         return this;
     }
 
+
+    /**
+     * Sets the {@code Caregivers} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCaregivers(String... caregivers) {
+        this.caregivers = SampleDataUtil.getCaregiverSet(caregivers);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Patients} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPatients(String... patients) {
+        this.patients = SampleDataUtil.getPatientSet(patients);
+        return this;
+    }
+
     /**
      * Sets the {@code Note} of the {@code Person} that we are building.
      */
-    public PersonBuilder withNote(String ... note) {
-        this.notes = SampleDataUtil.getSampleNotes(note);
+    public PersonBuilder withNotes(String ... notes) {
+        this.notes = SampleDataUtil.getSampleNotes(notes);
         return this;
     }
     /**
@@ -152,7 +175,7 @@ public class PersonBuilder {
      * @return a {@code Person} object created from the various fields previously set.
      */
     public Person build() {
-        Person temp = new Person(name, nric, phone, email, address, tags, roles);
+        Person temp = new Person(name, nric, phone, email, address, tags, roles, caregivers, patients);
         for (Note note: notes) {
             temp.addNote(note);
         }
