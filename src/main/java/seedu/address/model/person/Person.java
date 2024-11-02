@@ -76,6 +76,12 @@ public class Person {
         return Collections.unmodifiableSet(tasks);
     }
 
+    /**
+     * Checks if this person has the specified task assigned.
+     *
+     * @param task The task to check.
+     * @return true if the specified task is assigned to this person, false otherwise.
+     */
     public boolean hasTask(Task task) {
         for (Task eachTask : tasks) {
             if (eachTask.isSameTask(task)) {
@@ -85,6 +91,11 @@ public class Person {
         return false;
     }
 
+    /**
+     * Removes the specified task from this person's assigned tasks.
+     *
+     * @param task The task to remove.
+     */
     public void removeTask(Task task) {
         tasks.remove(task);
     }
