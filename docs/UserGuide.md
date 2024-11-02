@@ -351,6 +351,7 @@ Format: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAI
 > :information_source: **Note:**
 > 
 > * Edits the patient with the specified `NRIC` in MediBase3.
+> * The NRIC provided must be the full NRIC of the patient to be edited. e.g. `S1234567A` and not `S123`.
 > * **At least one** of the optional fields must be provided. e.g. `edit S1234567A` is invalid.
 > * Existing values will be updated to the given input values.
 > * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel.
@@ -506,10 +507,13 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > :information_source: **Note:**
 >
 > * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
+> * You can add an allergy to a patient even if they are not being currently displayed in the Patient List Panel.
 > * **At least one** `ALLERGY` must be provided. e.g. `addAllergy i/S1234567A` is invalid.
 > * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S123457A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
 > * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
+Example:
+* `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -517,8 +521,7 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > * You can add multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
 > * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
-Example:
-* `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -613,6 +616,10 @@ Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`
+
 {: .alert .alert-info} 
 > :information_source: **Note:**
 > 
@@ -622,11 +629,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 > * Only **full words** will be matched e.g. `Han` will not match `Hans`
 > * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+> * You can find a patient even if they are not being currently displayed in the Patient List Panel.
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`
 
 ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -660,17 +665,19 @@ Finds patients based on their NRIC.
 
 Format: `find NRIC`
 
+Example:
+* `findNric S1234567A` returns `Alex Yeoh`
+
 {: .alert .alert-info}
 > :information_source: **Note:**
 > 
 > * The search is case-insensitive. e.g `S1234567a` will match `S1234567A`
 > * Only the `NRIC` is searched.
-> * Only **full NRIC** will be matched e.g. `S1234567a` will not match `S12345`
+> * The NRIC provided must be the full NRIC of the patient. e.g. `S1234567A` and not `S123`.
 > * Returns an empty Patient List Panel if no matching patients with the given `NRIC` are found.
+> * You can find a patient even if they are not being currently displayed in the Patient List Panel.
 > * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
-Example:
-* `findNric S1234567A` returns `Alex Yeoh`
 
 [Back to Table of Contents](#table-of-contents)
 
