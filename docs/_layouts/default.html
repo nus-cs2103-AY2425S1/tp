@@ -21,7 +21,7 @@
           <ul>  <!-- Add this UL here -->
             {% assign headings = site.pages | where: "path", item.path | first %}
             {% if headings %}
-            <li><a href="{{item.url}}">{{ item.path}}</a>
+            {{ headings.content | toc }}
             {% endif %}
           </ul>
         </div>
