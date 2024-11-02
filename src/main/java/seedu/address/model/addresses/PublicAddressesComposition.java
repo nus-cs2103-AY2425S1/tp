@@ -220,6 +220,11 @@ public class PublicAddressesComposition {
     public void updatePublicAddress(PublicAddress existingPublicAddress, PublicAddress updatedPublicAddress) {
         assert existingPublicAddress != null : "Existing public address cannot be null.";
         assert updatedPublicAddress != null : "Updated public address cannot be null.";
+        assert existingPublicAddress.getNetwork().equals(updatedPublicAddress.getNetwork())
+            : "Existing and updated public addresses must belong to the same network.";
+        assert publicAddresses.containsKey(existingPublicAddress.getNetwork()) : "Public addresses must contain the specified network.";
+        assert publicAddresses.get(existingPublicAddress.getNetwork()).contains(existingPublicAddress)
+            : "Existing public address must be present in the public addresses.";
         if (existingPublicAddress == null || updatedPublicAddress == null) {
             throw new IllegalArgumentException("Existing and updated public addresses cannot be null.");
         }
