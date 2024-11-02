@@ -87,6 +87,11 @@ public class Partner extends Person implements Comparable<Partner> {
     }
 
     @Override
+    public boolean isRole(Role role) {
+        return getRole().equals(role);
+    }
+
+    @Override
     public int compareTo(Partner other) {
         return this.partnershipEndDate.compareTo(other.partnershipEndDate);
     }
