@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -17,6 +18,15 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /**
+     * Returns a true BooleanProperty if UI is the archived list.
+     */
+    BooleanProperty isUiArchived();
+
+    /**
+     * Sets the isUiArchived property
+     */
+    void setArchivedListMode(boolean isArchived);
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -55,6 +65,14 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns the ArchivedAddressBook */
+    ReadOnlyAddressBook getArchivedAddressBook();
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the archived address book.
+     */
+    boolean hasArchivedPerson(Person person);
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -71,6 +89,12 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given person.
+     * {@code person} must not already exist in the archived address book.
+     */
+    void addArchivedPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -103,4 +127,14 @@ public interface Model {
      * Returns the current reminder property for binding to UI components.
      */
     StringProperty getCurrentReminderProperty();
+
+    /**
+     * Returns the isArchived boolean
+     */
+    boolean getIsArchivedList();
+
+    /**
+     * Sets the isArchived boolean
+     */
+    void setIsArchivedList(boolean value);
 }

@@ -49,7 +49,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -59,6 +58,10 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        logic.isUiArchived().addListener((observable, oldValue, newValue) -> {
+            refreshPersonListPanel(); // Refresh whenever archived view is toggled
+        });
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -122,6 +125,15 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Refresh person list panel for toggling between archived address book UI and main address book UI
+     */
+    public void refreshPersonListPanel() {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
