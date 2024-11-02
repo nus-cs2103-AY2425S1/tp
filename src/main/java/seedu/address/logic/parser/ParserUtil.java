@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.SocialMedia;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -123,6 +124,34 @@ public class ParserUtil {
             throw new ParseException(Schedule.TIME_CONSTRAINTS);
         }
         return new Schedule(trimmedScheduleName, trimmedScheduleDate, trimmedScheduleTime);
+    }
+
+    /**
+     * Parses a {@code String scheduleName},{@code String scheduleDate}, and {@code String scheduleTime}
+     * into an {@code Schedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code scheduleName}, {@code scheduleDate}, or {@code scheduleTime}
+     *      is invalid.
+     */
+    public static SocialMedia parseSocialMedia(String... socialMediaHandles)
+            throws ParseException {
+        SocialMedia.Platform[] platforms = {
+            SocialMedia.Platform.CAROUSELL,
+            SocialMedia.Platform.FACEBOOK,
+            SocialMedia.Platform.INSTAGRAM
+        };
+        for (int i = 0; i < 3; i++) {
+            if (socialMediaHandles[i].isEmpty()) {
+                continue;
+            }
+            String trimmedHandle = socialMediaHandles[i].trim();
+            if (!SocialMedia.isValidHandleName(trimmedHandle)) {
+                throw new ParseException(SocialMedia.MESSAGE_CONSTRAINTS);
+            }
+            return new SocialMedia(trimmedHandle, platforms[i]);
+        }
+        return new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
     }
 
     /**
