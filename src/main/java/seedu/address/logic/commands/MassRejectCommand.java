@@ -23,7 +23,7 @@ import seedu.address.model.person.Tag;
  */
 public class MassRejectCommand extends Command {
 
-    public static final String COMMAND_WORD = "massReject";
+    public static final String COMMAND_WORD = "massreject";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Rejects persons with specified job code and/or tag.\n"
             + "Parameters:\n"
