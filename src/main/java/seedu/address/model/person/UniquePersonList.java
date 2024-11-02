@@ -3,9 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -98,11 +99,23 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Sorts the internal list using the given comparator.
+     * Returns a filtered list of persons based on the given predicate.
      */
-    public void sort(Comparator<Person> comparator) {
-        requireNonNull(comparator);
-        FXCollections.sort(internalList, comparator);
+    public List<Person> filtered(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        return internalList.stream().filter(predicate).collect(Collectors.toList());
+    }
+
+    /**
+     * Adds all persons from the given list to the internal list.
+     */
+    public void addAll(List<Person> personsToAdd) {
+        requireAllNonNull(personsToAdd);
+        for (Person person : personsToAdd) {
+            if (!contains(person)) {
+                internalList.add(person);
+            }
+        }
     }
 
     /**

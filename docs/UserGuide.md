@@ -438,6 +438,18 @@ Format `pin INDEX`
 Examples:
 * `pin 5` moves the contact at index 5 to index 1.
 
+### Unpin Contact `unpin`
+Unpins a contact that is currently pinned
+
+![unpin command](images/unpinCommand.png)
+
+Format `unpin INDEX`
+
+* The parameter INDEX must be a positive integer.
+
+Examples:
+* `unpin 1` moves the contact at index 1 back to its sorted position.
+
 ## Additional Features
 
 ### Command history: Up and Down arrow keys
