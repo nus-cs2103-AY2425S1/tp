@@ -32,8 +32,8 @@ public class TagDeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "\nParameters: "
             + "n/NAME t/[TAG]\n"
-            + "Example: " + COMMAND_WORD + " n/ Li Sirui "
-            + "t/ Jane Lim & Tom Koh";
+            + "Example: " + COMMAND_WORD + " n/Li Sirui "
+            + "t/Jane Lim & Tom Koh";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed existing Tag(s): '%1$s' from Contact: %2$s." + "\n"
             + "Contact: '%3$s' has been removed from Wedding(s): '%4$s'.";
@@ -83,9 +83,9 @@ public class TagDeleteCommand extends Command {
     /**
      * Edits the original set of tags to remove the tags that need to be deleted.
      *
-     * @param ogTags     the original Set of tags of the person
-     * @param deleteTags the Set of tags to be deleted from the person
-     * @return the edited Set of tags that no longer include the deleted tags
+     * @param ogTags     the original Set of tags of the person.
+     * @param deleteTags the Set of tags to be deleted from the person.
+     * @return the edited Set of tags that no longer include the deleted tags.
      */
     public Set<Tag> getTagsAfterDelete(Set<Tag> ogTags, Set<Tag> deleteTags) {
         Set<Tag> copyOgTags = new HashSet<>(ogTags);
