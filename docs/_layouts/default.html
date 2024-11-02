@@ -19,9 +19,9 @@
         <button onclick="toggleTOC('{{ item.title | replace: ' ', '-' }}')">Details</button>
         <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
           <ul>  <!-- Add this UL here -->
-            <li><a href="{{item.url}}">Test</a>
             {% assign headings = site.pages | where: "url", item.url | first %}
             {% if headings %}
+            <li><a href="{{item.url}}">Test</a>
             {% assign content = headings.content %}
             {% assign lines = content | split: '\n' %}
             {% for line in lines %}
