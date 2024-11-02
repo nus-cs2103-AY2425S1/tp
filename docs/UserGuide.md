@@ -32,12 +32,12 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
 
 5. [Commands Overview](#5-commands-overview)
     - 5.1 [General Commands](#51-general-commands)
-        - 5.1.1 [Viewing Help](#511-viewing-help--help)
+        - 5.1.1 [Viewing Help](#511-viewing-help)
         - 5.1.2 [Clearing All Entries](#512-clearing-all-entries-clear)
         - 5.1.3 [Exiting the Program](#513-exiting-the-program-exit)
         - 5.1.4 [Saving the Data](#514-saving-the-data)
         - 5.1.5 [Editing the Data File](#515-editing-the-data-file)
-    - 5.2 [Client Management Commands](#52-client-management-commands)
+    - 5.2 [Client Management Commands](#5-2-client-management-commands)
         - 5.2.1 [Adding a Client](#521-adding-a-client-add)
         - 5.2.2 [Listing All Clients](#522-listing-all-clients-list)
         - 5.2.3 [Filtering Clients](#523-filtering-clients-find-client)
@@ -214,7 +214,7 @@ Arguments are the values provided for each flag in a command. They must meet cer
 | Flag  | Expected Argument         | Description                      | Requirements                                            |
 |-------|----------------------------|----------------------------------|---------------------------------------------------------|
 | `n/`  | Client’s Full Name         | Full name of the client          | Letters and spaces only                                 |
-| `p/`  | Phone Number               | Contact number                   | 8-digit number starting with 8 or 9                     |
+| `p/`  | Phone Number               | Contact number                   | 3-15 digit number                   |
 | `e/`  | Email                      | Email address                    | Standard format (e.g., user@example.com)                |
 | `a/`  | Address                    | Client’s address                 | Any alphanumeric and symbol                             |
 | `t/`  | Tags                       | Custom descriptor of client      | Letters and spaces only                                 |
@@ -255,6 +255,7 @@ e.g., if the command specifies <code>help 123</code>, it will be interpreted as 
 
 
 ### 5.1.1 Viewing help : `help`
+
 Shows a message explaining how to access the help page.  
 ![help message](images/helpMessage.png)  
 Format: `help`
@@ -264,7 +265,7 @@ Clears all entries from Prudy, resetting the data.
 Format: `clear`
 
 <box type=warning seamless>
-**Warning:** This action is destructive and irreversible.
+Warning: This action is destructive and irreversible.
 </box>
 
 ### 5.1.3 Exiting the Program: `exit`
@@ -278,7 +279,7 @@ Prudy automatically saves data to the hard disk after every command that modifie
 Prudy data is automatically saved as a JSON file at `[JAR file location]/data/prudy.json`. Advanced users may edit this file directly to update the data.
 
 <box type="warning" seamless>
-**Caution:**  
+Caution:  
 If your changes to the data file makes its format invalid, Prudy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause Prudy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
@@ -293,9 +294,9 @@ Client management commands allow you to add, edit, delete, and filter client dat
 Adds a new client to Prudy.  
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-  <box type="tip" seamless>
-  **Tip:** A client can have any number of tags (including 0).
-  </box>
+
+💡 **Tip**: A client can have any number of tags (including 0).
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -320,7 +321,7 @@ Details:
   e.g., `n/han pt/life` will return only clients that has `han` in his name and has a Life policy.
 
   <box type="info" seamless>
-  **Info:** Each parameter must have a valid input (e.g., PHONE must be a valid 8-digit number).
+  Info: Each parameter must have a valid input (e.g., PHONE must be a valid 8-digit number).
   </box>
 
 Examples:
@@ -329,7 +330,7 @@ Examples:
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
   <box type=warning seamless>
-  **Important:** For the next few commands, an INDEX parameter is required. This INDEX is based on the current list of clients shown in Prudy.
+  Important: For the next few commands, an INDEX parameter is required. This INDEX is based on the current list of clients shown in Prudy.
                This means that if Prudy has 2 clients: `Alex` and `Bernice` given in that order, and you did `find-client n/bernice` to filter out `Alex`. An INDEX of `1` will refer to `Bernice` instead of `Alex`.
   </box>
 
@@ -375,7 +376,7 @@ Details:
 e.g., `pt/life ca/100 ed/12/09/2024` will create a Life policy with default premiums.
 
   <box type=info seamless>
-  **Info:** This command will not allow you to add a policy to the client if he/she already has a policy of similar type. 
+  Info: This command will not allow you to add a policy to the client if he/she already has a policy of similar type. 
   </box>
 
 Examples:
