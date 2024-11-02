@@ -5,7 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.areOfSameSize;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,12 +39,16 @@ public class ModuleRoleMap {
      */
     public static final String VALIDATION_REGEX = "^$|student|tutor|ta|professor|prof";
 
-    private final HashMap<ModuleCode, RoleType> roles;
+    /**
+     * The roles will follow the order of the input.
+     */
+    private final LinkedHashMap<ModuleCode, RoleType> roles;
 
     /**
      * Default constructor for a {@code ModuleRoleMap}.
      * This is for creating roles for a Person based on the module code and role types
      * extracted from an add command.
+     * The order follows the order of the input lists.
      *
      * @param moduleCodes Array of modules codes
      * @param roleTypes Array of role type String
@@ -53,7 +59,7 @@ public class ModuleRoleMap {
 
         checkArgument(areOfSameSize(moduleCodes, roleTypes), MESSAGE_INPUT_SIZE_CONSTRAINTS);
 
-        HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> newRoles = new LinkedHashMap<>();
         for (int i = 0; i < moduleCodes.length; i++) {
             newRoles.put(moduleCodes[i], roleTypes[i]);
         }
@@ -63,12 +69,13 @@ public class ModuleRoleMap {
     /**
      * Constructor for a {@code ModuleRoleMap}.
      * Copy of the hashmap is performed to make the class immutable.
+     * The order follows the order of the input map.
      *
      * @param roles new roles which are assigned to the Person
      */
     public ModuleRoleMap(Map<ModuleCode, RoleType> roles) {
         requireAllNonNull(roles);
-        this.roles = new HashMap<>(roles);
+        this.roles = new LinkedHashMap<>(roles);
     }
 
     /**
@@ -165,20 +172,22 @@ public class ModuleRoleMap {
      * Gets the roles in HashMap.
      *
      */
-    public HashMap<ModuleCode, RoleType> getRoles() {
+    public LinkedHashMap<ModuleCode, RoleType> getRoles() {
         return this.roles;
     }
 
     /**
-     * Returns a list of strings representing module role pairs for the GUI.
+     * Returns a list of strings representing module role pairs.
+     * Retains the original input order.
      */
     public List<ModuleRolePair> getData() {
         return getData(false);
     }
 
     /**
-     * Returns a list of strings representing module role pairs for the GUI.
-     * @param sorted whether to sort the list based on the {@code ModuleRolePair}'s natural ordering.
+     * Returns a list of strings representing module role pairs.
+     * @param sorted true to sort the list based on the {@code ModuleRolePair}'s natural ordering;
+     *               false to retain the original input order.
      */
     public List<ModuleRolePair> getData(boolean sorted) {
         if (sorted) {
@@ -201,41 +210,61 @@ public class ModuleRoleMap {
     }
 
     /**
-     * Adds all module role pairs from {@code moduleRoleMapToAdd} to {@code this}.
+     * Adds all module role pairs from {@code moduleRolePairsToAdd} to {@code this}.
      * This is equivalent to a set union operation.
-     * @param moduleRoleMapToAdd The module role map to add.
+     * @param moduleRolePairsToAdd The module role pairs to add.
      * @return A {@code ModuleRoleMap} containing all pairs failed to add.
-     *         (i.e. the moduleRoleMapToAdd U this)
+     *         (i.e. the moduleRolePairsToAdd U this)
      */
-    public ModuleRoleMap putAll(ModuleRoleMap moduleRoleMapToAdd) {
-        assert !moduleRoleMapToAdd.isEmpty() : "Module role map to add cannot be empty!";
+    public ModuleRoleMap putAll(List<ModuleRolePair> moduleRolePairsToAdd) {
+        requireNonNull(moduleRolePairsToAdd);
+        assert !moduleRolePairsToAdd.isEmpty() : "Module roles to add cannot be empty!";
         Map<ModuleCode, RoleType> failedModuleRoleMap = new HashMap<>();
 
-        for (Map.Entry<ModuleCode, RoleType> moduleRole : moduleRoleMapToAdd.roles.entrySet()) {
-            if (!this.put(moduleRole.getKey(), moduleRole.getValue())) {
-                failedModuleRoleMap.put(moduleRole.getKey(), moduleRole.getValue());
+        for (ModuleRolePair moduleRolePair : moduleRolePairsToAdd) {
+            if (!this.put(moduleRolePair.moduleCode, moduleRolePair.roleType)) {
+                failedModuleRoleMap.put(moduleRolePair.moduleCode, moduleRolePair.roleType);
             }
         }
         return new ModuleRoleMap(failedModuleRoleMap);
     }
 
     /**
-     * Removes all module role pairs from {@code moduleRoleMapToRemove} from {@code this}.
+     * Removes all module role pairs from {@code moduleRolePairsToRemove} from {@code this}.
      * This is equivalent to a set difference operation.
-     * @param moduleRoleMapToRemove The module role map to remove.
+     * @param moduleRolePairsToRemove The module role pairs to remove.
      * @return A {@code ModuleRoleMap} containing all pairs failed to remove.
-     *         (i.e. moduleRoleMapToRemove \ this)
+     *         (i.e. moduleRolePairsToRemove \ this)
      */
-    public ModuleRoleMap removeAll(ModuleRoleMap moduleRoleMapToRemove) {
-        assert !moduleRoleMapToRemove.isEmpty() : "Module role map to remove cannot be empty!";
-        Map<ModuleCode, RoleType> failedModuleRoleMap = new HashMap<>();
+    public List<ModuleRolePair> removeAll(List<ModuleRolePair> moduleRolePairsToRemove) {
+        requireNonNull(moduleRolePairsToRemove);
+        List<ModuleRolePair> failedModuleRolePairs = new ArrayList<>();
 
-        for (Map.Entry<ModuleCode, RoleType> moduleRole : moduleRoleMapToRemove.roles.entrySet()) {
-            if (!this.remove(moduleRole.getKey(), moduleRole.getValue())) {
-                failedModuleRoleMap.put(moduleRole.getKey(), moduleRole.getValue());
+        for (ModuleRolePair moduleRolePair : moduleRolePairsToRemove) {
+            if (!this.remove(moduleRolePair.moduleCode, moduleRolePair.roleType)) {
+                failedModuleRolePairs.add(moduleRolePair);
             }
         }
-        return new ModuleRoleMap(failedModuleRoleMap);
+        return failedModuleRolePairs;
+    }
+
+    /**
+     * Removes all module role pairs from {@code this}. This method checks module codes only and ignores role types.
+     * This is equivalent to a set difference operation.
+     * @param moduleCodesToRemove The module codes to remove.
+     * @return A {@code ModuleRoleMap} containing all pairs failed to remove.
+     */
+    public List<ModuleCode> removeAllIgnoringRoles(List<ModuleCode> moduleCodesToRemove) {
+        requireNonNull(moduleCodesToRemove);
+
+        List<ModuleCode> failedModuleCodes = new ArrayList<>();
+
+        for (ModuleCode moduleCode : moduleCodesToRemove) {
+            if (!this.removeIgnoringRole(moduleCode)) {
+                failedModuleCodes.add(moduleCode);
+            }
+        }
+        return failedModuleCodes;
     }
 
     /**
@@ -254,6 +283,15 @@ public class ModuleRoleMap {
     }
 
     /**
+     * Adds a module role pair to the module role map.
+     * @param moduleRolePair The module role pair to add.
+     * @return True if the module role pair is added successfully.
+     */
+    public boolean put(ModuleRolePair moduleRolePair) {
+        return put(moduleRolePair.moduleCode, moduleRolePair.roleType);
+    }
+
+    /**
      * Removes a module role pair from the module role map.
      * @param moduleCode The module code to remove.
      * @param role The role to remove.
@@ -261,6 +299,28 @@ public class ModuleRoleMap {
      */
     public boolean remove(ModuleCode moduleCode, RoleType role) {
         return roles.remove(moduleCode, role);
+    }
+
+    /**
+     * Removes a module role pair from the module role map.
+     * @param moduleRolePair The module role pair to remove.
+     * @return True if the module role pair is removed successfully.
+     */
+    public boolean remove(ModuleRolePair moduleRolePair) {
+        return remove(moduleRolePair.moduleCode, moduleRolePair.roleType);
+    }
+
+    /**
+     * Removes a module role pair from the module role map. This method checks module codes only and ignores role types.
+     * @param moduleCode The module code to remove.
+     * @return True if the module role pair is removed successfully.
+     */
+    public boolean removeIgnoringRole(ModuleCode moduleCode) {
+        if (this.containsModule(moduleCode)) {
+            this.roles.remove(moduleCode);
+            return true;
+        }
+        return false;
     }
 
     /**

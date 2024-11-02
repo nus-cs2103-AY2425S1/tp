@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.edit.AddModuleRoleOperation.AddModuleRoleDescriptor;
+import static seedu.address.logic.commands.edit.DeleteModuleRoleOperation.DeleteModuleRoleDescriptor;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -353,26 +355,31 @@ public class ParserUtilTest {
 
     @Test
     public void parseEditModuleRoleOperation_validAddOperation_returnsAddModuleRoleOperation() throws Exception {
-        String input = "+CS1101S-student MA1521-student";
+        String input = "+CS1101S-student MA1521-TA";
         EditModuleRoleOperation result = ParserUtil.parseEditModuleRoleOperation(input);
 
-        HashMap<ModuleCode, RoleType> expectedMap = new HashMap<>();
-        expectedMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
-        expectedMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
-        AddModuleRoleOperation expected = new AddModuleRoleOperation(new ModuleRoleMap(expectedMap));
+        AddModuleRoleDescriptor expectedDescriptor = new AddModuleRoleDescriptor(List.of(
+            new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+            new ModuleRolePair(new ModuleCode("MA1521"), RoleType.TUTOR)
+        ));
+        AddModuleRoleOperation expected = new AddModuleRoleOperation(expectedDescriptor);
 
         assertEquals(expected, result);
     }
 
     @Test
     public void parseEditModuleRoleOperation_validDeleteOperation_returnsDeleteModuleRoleOperation() throws Exception {
-        String input = "-CS1101S-student MA1521";
+        String input = "-CS1101S-student CS1231S-TA MA1521";
         EditModuleRoleOperation result = ParserUtil.parseEditModuleRoleOperation(input);
 
-        HashMap<ModuleCode, RoleType> expectedMap = new HashMap<>();
-        expectedMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
-        expectedMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
-        EditModuleRoleOperation expected = new DeleteModuleRoleOperation(new ModuleRoleMap(expectedMap));
+        DeleteModuleRoleDescriptor expectedDescriptor = new DeleteModuleRoleDescriptor(
+                List.of(
+                        new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+                        new ModuleRolePair(new ModuleCode("CS1231S"), RoleType.TUTOR)
+                ),
+                List.of(new ModuleCode("MA1521"))
+        );
+        EditModuleRoleOperation expected = new DeleteModuleRoleOperation(expectedDescriptor);
 
         assertEquals(expected, result);
     }
@@ -432,5 +439,45 @@ public class ParserUtilTest {
     @Test
     public void parseDescription_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
+    }
+
+    @Test
+    public void parseEditModuleRoleOperation_duplicateModuleCode_throwsParseException() {
+        // same module code and role type
+        String input = "+CS1101S-student CS1101S-student";
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            ParserUtil.parseEditModuleRoleOperation(input);
+        });
+        String input2 = "-CS1101S-student CS1101S-student";
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            ParserUtil.parseEditModuleRoleOperation(input2);
+        });
+        // same module code different role type
+        String input3 = "+CS1101S-student CS1101S-tutor";
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            ParserUtil.parseEditModuleRoleOperation(input3);
+        });
+        String input4 = "-CS1101S-student CS1101S-tutor";
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            ParserUtil.parseEditModuleRoleOperation(input4);
+        });
+        // same module code, role type unspecified
+        String input5 = "+CS1101S CS1101S";
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            ParserUtil.parseEditModuleRoleOperation(input5);
+        });
+        String input6 = "-CS1101S CS1101S";
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            ParserUtil.parseEditModuleRoleOperation(input6);
+        });
+        // same module role, some role type unspecified and some specified
+        String input7 = "+CS1101S-student CS1101S";
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            ParserUtil.parseEditModuleRoleOperation(input7);
+        });
+        String input8 = "-CS1101S-student CS1101S";
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            ParserUtil.parseEditModuleRoleOperation(input8);
+        });
     }
 }
