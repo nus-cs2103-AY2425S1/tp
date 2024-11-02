@@ -10,6 +10,7 @@ public class DayTest {
 
     @Test
     public void isValidDay_validInputs_returnsTrue() {
+        // EP: fully spelt out weekdays
         assertTrue(Day.isValidDay("monday"));
         assertTrue(Day.isValidDay("tuesday"));
         assertTrue(Day.isValidDay("wednesday"));
@@ -18,6 +19,7 @@ public class DayTest {
         assertTrue(Day.isValidDay("saturday"));
         assertTrue(Day.isValidDay("sunday"));
 
+        // EP: short form for weekdays
         assertTrue(Day.isValidDay("mon"));
         assertTrue(Day.isValidDay("tue"));
         assertTrue(Day.isValidDay("wed"));
@@ -26,6 +28,7 @@ public class DayTest {
         assertTrue(Day.isValidDay("sat"));
         assertTrue(Day.isValidDay("sun"));
 
+        // EP: random capitalisation of weekdays
         assertTrue(Day.isValidDay("Monday"));
         assertTrue(Day.isValidDay("TUESDAY"));
         assertTrue(Day.isValidDay("wEdNeSdAy"));
@@ -35,12 +38,14 @@ public class DayTest {
 
     @Test
     public void isValidDay_invalidInputs_returnsFalse() {
+        // EP: invalid string inputs
         assertFalse(Day.isValidDay("not a day"));
         assertFalse(Day.isValidDay("mon day"));
         assertFalse(Day.isValidDay("mondays"));
         assertFalse(Day.isValidDay("tues"));
         assertFalse(Day.isValidDay("thur"));
 
+        // EP: empty input
         assertFalse(Day.isValidDay(""));
         assertFalse(Day.isValidDay(" "));
         assertFalse(Day.isValidDay("\t"));
