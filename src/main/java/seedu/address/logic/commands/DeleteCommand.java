@@ -48,7 +48,12 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
                     + ": " + index.getOneBased());
             }
-            personsToDelete.add(lastShownList.get(index.getZeroBased()));
+            Person personToDelete = lastShownList.get(index.getZeroBased());
+            if (personsToDelete.contains(personToDelete)) {
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON_DISPLAYED_INDEX
+                    + ": " + index.getOneBased());
+            }
+            personsToDelete.add(personToDelete);
         }
 
         StringBuilder deletedPersons = new StringBuilder();
