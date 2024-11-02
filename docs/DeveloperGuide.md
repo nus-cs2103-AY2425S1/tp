@@ -100,8 +100,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to the `Abcli Parser` class.
-2. The `Abcli Parser` class then creates either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser` according to its current mode
+1. When `Logic` is called upon to execute a command, it is passed to the `AbcliParser` class.
+2. The `AbcliParser` class then creates either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser` according to its `currentMode`,
 3. The created CommandParser then creates another parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command. The type of parser created here is dependent on the CommandParser created in step 2, e.g. a `MeetUpCommandParser` will create a `DeleteCommandParser` for the `MeetUp` class, while a `BuyerCommandParser` will create a `DeleteCommandParser` for the `Buyer` class.
 4. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 5. The command can communicate with the `Model` when it is executed (e.g. to delete a buyer).<br>
@@ -113,7 +113,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `Abcli Parser` class creates a `BMPCommandParser` (`BMP` is a placeholder for the different mode of parsers, either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser`). The created BMPCommandParser then creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AbcliParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AbcliParser` class creates a `BMPCommandParser` (`BMP` is a placeholder for the different mode of parsers, either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser`). The created BMPCommandParser then creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AbcliParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g. during testing.
 * All `BMPCommandParser` classes (`BuyerCommandParser`, `MeetUpCommandParser`, and `PropertyCommandParser`) extends the `CommandParser` class so that all of them have access to general commands e.g. `HelpCommand`, ...
 
@@ -158,94 +158,23 @@ Classes used by multiple components are in the `seedu.budget.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Parser Mode Switching
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedBuyerList`. It extends `BuyerList` with an undo/redo history, stored internally as an `buyerListStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+User inputs are parsed through `AbcliParser` to create executable `Command` objects. The parsing done by `AbcliParser` is determined by its mode of parsing, which is either the Buyer mode, MeetUp mode, or Property mode. For example, in the Buyer mode, AbcliParser will create a `BuyerCommandParser` object to parse the input, and create a command that is of type `Buyer`. 
 
-* `VersionedBuyerList#commit()` — Saves the current buyer list state in its history.
-* `VersionedBuyerList#undo()` — Restores the previous buyer list state from its history.
-* `VersionedBuyerList#redo()` — Restores a previously undone buyer list state from its history.
+The mode of `AbcliParser` can be switched by executing a `SwitchParserModeCommand`. An example of switching to the MeetUp mode:
+1. User inputs `switch m`, which is then passed to the `AbcliParser` class.
+2. The `AbcliParser` class then creates either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser` according to its `currentMode`. (The default current mode is set to Buyer mode, and the type of `CommandParser` created here doesn't matter since all of them handle `SwitchParserModeCommand` the same way).
+3. The created CommandParser then creates a `SwitchParserModeCommandParser` and uses it to parse the command.
+4. This results in a `SwitchParserModeCommand` with the mode `ParserMode.MEETUP` which is executed by the `LogicManager`.
+5. The `SwitchParserModeCommand` then switches the `currentMode` of `AbcliParser` to `ParserMode.MEETUP` when executed. The `currentMode` will affect the type of `CommandParser` that will be created for future parses (in step 2).
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-These operations are exposed in the `Model` interface as `Model#commitBuyerList()`, `Model#undoBuyerList()` and `Model#redoBuyerList()` respectively.
+The diagram below shows the activity diagram for a user wanting to delete the first `MeetUp` in his `MeetUpList`:
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedBuyerList` will be initialized with the initial buyer list state, and the `currentStatePointer` pointing to that single buyer list state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th buyer in the buyer list. The `delete` command calls `Model#commitBuyerList()`, causing the modified state of the buyer list after the `delete 5` command executes to be saved in the `buyerListStateList`, and the `currentStatePointer` is shifted to the newly inserted buyer list state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new buyer. The `add` command also calls `Model#commitBuyerList()`, causing another modified buyer list state to be saved into the `buyerListStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitBuyerList()`, so the buyer list state will not be saved into the `buyerListStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the buyer was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoBuyerList()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous buyer list state, and restores the buyer list to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial BuyerList state, then there are no previous BuyerList states to restore. The `undo` command uses `Model#canUndoBuyerList()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoBuyerList()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the buyer list to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `buyerListStateList.size() - 1`, pointing to the latest buyer list state, then there are no undone BuyerList states to restore. The `redo` command uses `Model#canRedoBuyerList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the buyer list, such as `list`, will usually not call `Model#commitBuyerList()`, `Model#undoBuyerList()` or `Model#redoBuyerList()`. Thus, the `buyerListStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitBuyerList()`. Since the `currentStatePointer` is not pointing at the end of the `buyerListStateList`, all buyer list states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire buyer list.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the buyer being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+<img src="images/DeleteMeetUpActivityDiagram.png" width="250" />
 
 --------------------------------------------------------------------------------------------------------------------
 
