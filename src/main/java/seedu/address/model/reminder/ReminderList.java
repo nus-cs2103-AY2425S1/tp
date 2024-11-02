@@ -16,8 +16,8 @@ import javafx.collections.ObservableList;
 public class ReminderList implements Iterable<Reminder> {
 
     private final ObservableList<Reminder> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Reminder> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Reminder> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent reminder as the given argument.

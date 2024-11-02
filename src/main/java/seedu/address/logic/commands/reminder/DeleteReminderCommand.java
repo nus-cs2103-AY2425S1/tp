@@ -11,6 +11,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.reminder.Reminder;
 
 /**
@@ -60,7 +62,20 @@ public class DeleteReminderCommand extends Command {
 
         Reminder reminderToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteReminder(reminderToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS, Messages.format(reminderToDelete)));
+
+        // Parse input using the NameContainsKeywordsPredicate
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(
+                List.of(reminderToDelete.getPersonName()));
+        List<Person> matchingPersons = model.getClientHub().getPersonList().filtered(predicate);
+
+        // Check if there is exactly one match
+        if (matchingPersons.size() == 1) {
+            Person person = matchingPersons.get(0);
+            person.deleteReminder(reminderToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS, Messages.format(reminderToDelete)));
+        } else {
+            throw new CommandException("More than one person with the specified name found. Please be more specific.");
+        }
     }
 
     @Override

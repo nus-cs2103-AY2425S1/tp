@@ -90,6 +90,9 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+    public void deleteReminder(Reminder reminder) {
+        reminders.remove(reminder);
+    }
 
     /**
      * Returns true if both persons have the same identity and data fields.
