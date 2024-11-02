@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
+import seedu.address.model.scheme.SchemeRetrieval;
 
 /**
  * Displays the statistics of the filtered people in SocialBook.
@@ -23,12 +24,13 @@ public class StatisticsCommand extends Command {
             + ": Displays the general statistics regarding the current people list in SocialBook.\n"
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_DISPLAY_STATISTICS_SUCCESS = "Here are all the statistics:\n%s";
-    public static final String MESSAGE_DISPLAY_TOTAL_PEOPLE = "Total # Of People: %s";
-    public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "# Of HIGH Priority People: %s";
-    public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "# Of MEDIUM Priority People: %s";
-    public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "# Of LOW Priority People: %s";
-    public static final String MESSAGE_DISPLAY_LOW_INCOME = "# Of People Income <= 800: %s";
-    public static final String MESSAGE_DISPLAY_APPOINTMENTS_SOON = "# Of Appointments In Next 7 Days: %s";
+    public static final String MESSAGE_DISPLAY_TOTAL_PEOPLE = "Total Number Of People: %s";
+    public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "Number Of HIGH Priority People: %s";
+    public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "Number Of MEDIUM Priority People: %s";
+    public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "Number Of LOW Priority People: %s";
+    public static final String MESSAGE_DISPLAY_LOW_INCOME = "Number Of People Household Income <= 4000: %s";
+    public static final String MESSAGE_DISPLAY_APPOINTMENTS_SOON = "Number Of Appointments In Next 7 Days: %s";
+    public static final String MESSAGE_DISPLAY_ELIGIBLE_PERSONS = "Number Of People Eligible For Schemes: %s";
     private String resultMessage = "";
 
     /**
@@ -45,8 +47,9 @@ public class StatisticsCommand extends Command {
         allStats.add(highPriorityPeople(lastShownPersonList));
         allStats.add(mediumPriorityPeople(lastShownPersonList));
         allStats.add(lowPriorityPeople(lastShownPersonList));
-        allStats.add(incomeEightHundredOrLess(lastShownPersonList));
+        allStats.add(incomeFourThousandOrLess(lastShownPersonList));
         allStats.add(appointmentsSoon(lastShownAppointmentList));
+        allStats.add(eligibleForScheme(lastShownPersonList));
 
         resultMessage = String.join("\n", allStats);
 
@@ -103,15 +106,15 @@ public class StatisticsCommand extends Command {
     }
 
     /**
-     * Returns a message with number of people with monthly household income < 800 in current list.
+     * Returns a message with number of people with monthly household income <= 4000 in current list.
      *
      * @param currList current list.
-     * @return string message of number of people with monthly household income < 2500.
+     * @return string message of number of people with monthly household income <= 4000.
      */
-    public static String incomeEightHundredOrLess(List<Person> currList) {
+    public static String incomeFourThousandOrLess(List<Person> currList) {
         long lowIncome = currList.stream()
                 .map(person -> person.getIncome().getValue())
-                .filter(income -> income <= 800)
+                .filter(income -> income <= 4000)
                 .count();
         return String.format(MESSAGE_DISPLAY_LOW_INCOME, lowIncome);
     }
@@ -138,6 +141,19 @@ public class StatisticsCommand extends Command {
     public static boolean isWithinAWeek(LocalDate date) {
         LocalDate now = LocalDate.now();
         return !date.isBefore(now) && ChronoUnit.DAYS.between(now, date) <= 7;
+    }
+
+    /**
+     * Returns a message with number of people with eligible for 1 or more schemes.
+     *
+     * @param currList current list of people.
+     * @return string message of number of people with eligible for 1 or more schemes.
+     */
+    public static String eligibleForScheme(List<Person> currList) {
+        long eligiblePersons = currList.stream()
+                .filter(person -> new SchemeRetrieval(person).getSchemes().size() > 0)
+                .count();
+        return String.format(MESSAGE_DISPLAY_ELIGIBLE_PERSONS, eligiblePersons);
     }
 
     @Override
