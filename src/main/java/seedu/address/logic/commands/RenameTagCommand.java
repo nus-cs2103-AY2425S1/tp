@@ -10,7 +10,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Renames a predefined tag.
  */
-public class RenameTagCommand extends Command {
+public class RenameTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "renametag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames an existing tag.\n"
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
@@ -43,6 +43,14 @@ public class RenameTagCommand extends Command {
         model.editTagInPersons(existingTag, newTagName);
         model.updateTagList();
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public void undo(Model model) {
+        requireAllNonNull(model);
+        model.renameTag(new Tag(newTagName), existingTag.getTagName());
+        model.editTagInPersons(new Tag(newTagName), existingTag.getTagName());
+        model.updateTagList();
     }
 
     @Override

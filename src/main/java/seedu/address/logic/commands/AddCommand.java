@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -63,6 +63,11 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    @Override
+    public void undo(Model model) {
+        model.deletePerson(toAdd);
     }
 
     @Override

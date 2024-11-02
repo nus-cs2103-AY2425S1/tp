@@ -47,4 +47,23 @@ public class RenameTagCommandTest {
         String expectedMessage = MESSAGE_NONEXISTENT_OR_DUPLICATE;
         assertCommandFailure(renameTagCommand, model, expectedMessage);
     }
+
+    @Test
+    public void execute_undoRenameTagCommand_success() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Tag existingTag = new Tag(TYPICAL_NAME);
+        model.addTag(existingTag);
+        RenameTagCommand renameTagCommand = new RenameTagCommand(existingTag, NEW_NAME);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addTag(new Tag(NEW_NAME));
+
+        String expectedMessage = RenameTagCommand.MESSAGE_SUCCESS;
+
+        assertCommandSuccess(renameTagCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(renameTagCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
 }

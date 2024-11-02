@@ -1,15 +1,20 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.UserConfirmation;
 
@@ -17,7 +22,7 @@ import seedu.address.ui.UserConfirmation;
  * Deletes specified tags from the tag list and removes them from any persons tagged with these tags.
  * Prompts the user for confirmation if the tags are used to tag existing persons.
  */
-public class DeleteTagCommand extends Command {
+public class DeleteTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -34,6 +39,7 @@ public class DeleteTagCommand extends Command {
             + "Are you sure you want to delete? Click 'OK' to confirm.";
 
     public static final String MESSAGE_CANCELLED = "Deletion has been cancelled.";
+    private final Map<Tag, Set<Person>> deletedSet = new HashMap<>();
 
     private final List<Tag> tags;
 
@@ -54,7 +60,7 @@ public class DeleteTagCommand extends Command {
      */
     private void removeTagsFromPersons(Model model) {
         for (Tag tag : tags) {
-            model.removeTagFromPersons(tag);
+            deletedSet.put(tag, model.removeTagFromPersons(tag));
         }
     }
 
@@ -94,6 +100,22 @@ public class DeleteTagCommand extends Command {
         removeTagsFromPersons(model);
 
         return createCommandResult(isSuccessful);
+    }
+
+    @Override
+    public void undo(Model model) {
+        requireNonNull(model);
+        for (Map.Entry<Tag, Set<Person>> entry: deletedSet.entrySet()) {
+            Tag deletedTag = entry.getKey();
+            model.addTag(deletedTag);
+            for (Person person: entry.getValue()) {
+                Set<Tag> newTags = new HashSet<>(person.getTags());
+                newTags.add(deletedTag);
+                Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
+                        person.getRsvpStatus(), newTags);
+                model.setPerson(person, updatedPerson);
+            }
+        }
     }
 
     /**
