@@ -54,7 +54,7 @@ public class TypicalPersons {
         .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
         .withSubject("Physics").withClasses("8A, 8C").build();
     public static final Teacher TEACHER_GEORGE = new TeacherBuilder().withName("George Best")
-        .withGender("male").withPhone("9482442").withEmail("anna@example.com")
+        .withGender("male").withPhone("94824422").withEmail("anna@example.com")
         .withAddress("4th street").withSubject("Mathematics", "Physics").withClasses("7A").build();
 
     public static final Student STUDENT_BENSON = new StudentBuilder().withName("Benson Meier").withGender("male")
@@ -66,10 +66,10 @@ public class TypicalPersons {
         .withEmail("heinz@example.com").withAddress("wall street")
         .withSubjects("Mathematics").withClasses("7B").build();
     public static final Student STUDENT_ELLE = new StudentBuilder().withName("Elle Meyer").withGender("female")
-        .withPhone("9482224").withEmail("werner@example.com")
+        .withPhone("94822224").withEmail("werner@example.com")
         .withAddress("michegan ave").withSubjects("Mathematics").withClasses("7A").build();
     public static final Student STUDENT_FIONA = new StudentBuilder().withName("Fiona Kunz").withGender("female")
-        .withPhone("9482427").withEmail("lydia@example.com")
+        .withPhone("94824277").withEmail("lydia@example.com")
         .withAddress("little tokyo").withSubjects("Physics").withClasses("7B").build();
 
     public static final Student STUDENT_ALICE = new StudentBuilder().withName("Alice Pauline").withGender("female")
