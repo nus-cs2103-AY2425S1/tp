@@ -12,18 +12,19 @@ import java.util.Arrays;
 public class Role {
 
     public static final String PRESIDENT = "President";
-    private static final int PRESIDENT_INDEX = 1;
     public static final String VICE_PRESIDENT = "Vice President";
-    private static final int VICE_PRESIDENT_INDEX = 2;
     public static final String ADMIN = "Admin";
-    private static final int ADMIN_INDEX = 3;
     public static final String MARKETING = "Marketing";
-    private static final int MARKETING_INDEX = 4;
     public static final String EVENTS_INTERNAL = "Events (Internal)";
-    private static final int EVENTS_INTERNAL_INDEX = 5;
     public static final String EVENTS_EXTERNAL = "Events (External)";
-    private static final int EVENTS_EXTERNAL_INDEX = 6;
     public static final String EXTERNAL_RELATIONS = "External Relations";
+
+    private static final int PRESIDENT_INDEX = 1;
+    private static final int VICE_PRESIDENT_INDEX = 2;
+    private static final int ADMIN_INDEX = 3;
+    private static final int MARKETING_INDEX = 4;
+    private static final int EVENTS_INTERNAL_INDEX = 5;
+    private static final int EVENTS_EXTERNAL_INDEX = 6;
     private static final int EXTERNAL_RELATIONS_INDEX = 7;
 
     public static final String MESSAGE_CONSTRAINTS = "Role must be one of the following: \n"
@@ -90,7 +91,7 @@ public class Role {
                 || roleName.equalsIgnoreCase(EVENTS_EXTERNAL)
                 || roleName.equalsIgnoreCase(EXTERNAL_RELATIONS);
 
-        int ERROR_STATUS = -1;
+        int errorStatus = -1;
 
         switch (roleName) {
         case PRESIDENT:
@@ -108,7 +109,7 @@ public class Role {
         case EXTERNAL_RELATIONS:
             return EXTERNAL_RELATIONS_INDEX;
         default:
-            return ERROR_STATUS; // should not happen
+            return errorStatus; // should not happen
         }
     }
 

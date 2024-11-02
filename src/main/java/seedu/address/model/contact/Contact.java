@@ -111,14 +111,15 @@ public class Contact {
         boolean hasPresidentRoleCurrentContact = checkForPresident(getRoles());
         boolean hasPresidentRoleOtherContact = checkForPresident(otherContact.getRoles());
         boolean isBothPresident = hasPresidentRoleCurrentContact && hasPresidentRoleOtherContact;
-        return hasSameTelegramHandle || hasSameEmail || hasSameNameAndNickname || hasSameNonEmptyNickname || isBothPresident;
+        return hasSameTelegramHandle || hasSameEmail || hasSameNameAndNickname
+                || hasSameNonEmptyNickname || isBothPresident;
     }
 
     private boolean checkForPresident(Set<Role> roles) {
-        final int FOUND_STATUS = 1;
+        final int foundStatus = 1;
         return roles.stream().map(role -> role.roleName)
                 .filter(roleName -> roleName.equalsIgnoreCase(Role.PRESIDENT))
-                .count() == FOUND_STATUS;
+                .count() == foundStatus;
     }
 
     /**
