@@ -564,7 +564,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a buyer while all buyers are being shown
 
-    1. Prerequisites: List all buyers using the `view` command. Multiple buyers in the list.
+    1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. Multiple buyers in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
@@ -578,7 +578,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a buyer while some buyers are filtered in the list
 
-   1. Prerequisites: Filter the buyer list using the `find` command to show only one buyer using relevant filters.
+   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only one buyer using relevant filters.
 
    1. Test case: `delete 1`    
    Expected: First (and only) contact in the filtered list is deleted. Details of the deleted contact are shown in the status message. The filtered list becomes empty. Timestamp in the status bar is updated.
@@ -588,7 +588,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a buyer with an out-of-bound index
 
-   1. Prerequisites: Filter the buyer list using the `find` command to show fewer buyers than the total list size.
+   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show fewer buyers than the total list size.
 
    1. Test case: `delete x` (where x is within the bounds of the full list but not within the filtered list)  
    Expected: No buyer is deleted. Error message indicating an invalid buyer index for the filtered list is shown. Status bar remains unchanged.
@@ -597,7 +597,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a buyer while all buyers are being shown
 
-    1. Prerequisites: List all buyers using the `view` command. Multiple buyers are present in the list.
+    1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. Multiple buyers are present in the list.
 
     1. Test case: `edit 1 b/700000 p/91234567`  
     Expected: First contact’s budget and phone number are updated. All other fields remain the same. Details of the edited buyer are shown in the status message. Timestamp in the status bar is updated.
@@ -613,31 +613,52 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a buyer in a filtered list
 
-   1. Prerequisites: Filter the buyer list using the `find` command to show only one buyer using relevant filters.
+   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only one buyer using relevant filters.
 
    1. Test case: `edit 1 p/87151234 ` 
    Expected: First (and only) contact in the filtered list has its phone number updated to “87151234”. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.
 
 1. Attempting to edit to create a duplicate buyer
 
-    1. Prerequisites: List all buyers using the `view` command. At least two buyers present.
+    1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. At least two buyers present.
     
-    1. Test case: `edit 2 n/[Existing Name]`  
+    1. Test case: `edit 2 n/x` (where x is an existing name)
     Expected: No changes are made. Error message shown indicating that the updated details would create a duplicate buyer. Status bar remains unchanged.
 
 1. Attempting to edit a buyer with an invalid index
 
-   1. Prerequisites: List all buyers using the `view` command. Multiple buyers are present.
+   1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. Multiple buyers are present.
 
-   1. Test case: `edit x p/87151234` (where invalid_index is larger than the list size)  
+   1. Test case: `edit x p/87151234` (where x is larger than the list size)  
    Expected: No changes are made. Error message displayed indicating an invalid index. Status bar remains unchanged.
 
 1. Editing a buyer in a filtered list with an out-of-bounds index
 
-    1. Prerequisites: Filter the buyer list using the `find` command, so it has fewer buyers than the total list size.
+    1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command, so it has fewer buyers than the total list size.
 
     1. Test case: `edit x p/87151234` (where x is within the bounds of the full list but not within the filtered list)  
     Expected: No changes are made. Error message shown indicating an invalid index for the filtered list. Status bar remains unchanged.
+
+### Finding a property
+1. Finding properties by address keywords
+
+    1. Prerequisites: Switch to property mode using the `switch p` command.
+   
+    1. Test case: find a/Aljunied Marsiling Shibuya  
+Expected: Properties with addresses containing the keywords "Aljunied," "Marsiling," or "Shibuya" are shown in the list. The number of properties found is displayed in the status message.
+
+   1. Test case: find a/ (empty keyword)  
+   Expected: Error message informing you that address should not be blank will be displayed.
+
+1. Finding properties by landlord name keywords
+
+    1. Prerequisites: Switch to property mode using the `switch p` command.
+   
+    1. Test case: `find n/Kurz Elle Kunz`  
+    Expected: Properties with landlord names containing "Kurz," "Elle," or "Kunz" are shown in the list. The number of properties found is displayed in the status message.
+    
+    1. Test case: `find n/`
+    Expected: Error message informing you that the landlord name should not be blank will be displayed.
 
 ### Saving data
 
