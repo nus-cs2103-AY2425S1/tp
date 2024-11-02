@@ -137,9 +137,9 @@ public class ParserUtil {
     public static SocialMedia parseSocialMedia(String... socialMediaHandles)
             throws ParseException {
         SocialMedia.Platform[] platforms = {
-                SocialMedia.Platform.CAROUSELL,
-                SocialMedia.Platform.FACEBOOK,
-                SocialMedia.Platform.INSTAGRAM,
+            SocialMedia.Platform.CAROUSELL,
+            SocialMedia.Platform.FACEBOOK,
+            SocialMedia.Platform.INSTAGRAM
         };
         for (int i = 0; i < 3; i++) {
             if (socialMediaHandles[i].isEmpty()) {
