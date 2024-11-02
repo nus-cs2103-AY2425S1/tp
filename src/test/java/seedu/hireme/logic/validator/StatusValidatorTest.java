@@ -2,7 +2,6 @@ package seedu.hireme.logic.validator;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.hireme.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ public class StatusValidatorTest {
         StatusValidator validator = StatusValidator.of();
 
         // null status
-        assertThrows(NullPointerException.class, () -> validator.validate(null));
+        assertFalse(validator.validate(null));
 
         // invalid status
         assertFalse(validator.validate("")); // empty string

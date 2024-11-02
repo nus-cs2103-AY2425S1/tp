@@ -1,5 +1,10 @@
 package seedu.hireme.logic.validator;
 
+import java.util.logging.Logger;
+
+import seedu.hireme.commons.core.LogsCenter;
+import seedu.hireme.logic.parser.AddressBookParser;
+
 /**
  * Validates email strings
  */
@@ -12,6 +17,7 @@ public class EmailValidator extends Validator<String> {
             + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)+" + DOMAIN_LAST_PART_REGEX;
+    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
     private static EmailValidator instance;
 
@@ -31,6 +37,10 @@ public class EmailValidator extends Validator<String> {
     }
     @Override
     public boolean validate(String input) {
+        if (input == null) {
+            logger.warning("Email input is null");
+            return false;
+        }
         return !input.trim().isEmpty() && input.matches(VALIDATION_REGEX);
     }
 }
