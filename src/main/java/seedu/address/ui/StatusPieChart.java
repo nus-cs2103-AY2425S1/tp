@@ -62,9 +62,9 @@ public class StatusPieChart extends UiPart<Region> {
     /**
      * Updates the pie chart with new status counts.
      *
-     * @param noneCount Number of persons with NONE status
-     * @param nonUrgentCount Number of persons with NON_URGENT status
-     * @param urgentCount Number of persons with URGENT status
+     * @param noneCount Number of clients with NONE status
+     * @param nonUrgentCount Number of clients with NON_URGENT status
+     * @param urgentCount Number of clients with URGENT status
      */
     public void updateChartData(int noneCount, int nonUrgentCount, int urgentCount) {
         Platform.runLater(() -> {

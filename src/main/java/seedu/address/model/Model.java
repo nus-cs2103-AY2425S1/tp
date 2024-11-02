@@ -6,14 +6,14 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -54,28 +54,28 @@ public interface Model {
     ReadOnlyAgentAssist getAgentAssist();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasClient(Client client);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given client.
+     * The client must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteClient(Client target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given client.
+     * {@code client} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addClient(Client client);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given client {@code target} with {@code editedClient}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setClient(Client target, Client editedClient);
 
     /**
      * Undos previous command by setting currentAddressBook to historyAddressBook.
@@ -87,29 +87,29 @@ public interface Model {
      */
     boolean hasPreviousCommand();
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered client list */
+    ObservableList<Client> getFilteredClientList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicates}.
+     * Updates the filter of the filtered client list to filter by the given {@code predicates}.
      * @throws NullPointerException if {@code predicates} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredClientList(Predicate<Client> predicate);
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Selected client in the filtered client list.
+     * null if no client is selected.
      */
-    ReadOnlyProperty<Person> selectedPersonProperty();
+    ReadOnlyProperty<Client> selectedClientProperty();
 
     /**
-     * Returns the selected person in the filtered person list.
-     * null if no person is selected.
+     * Returns the selected client in the filtered client list.
+     * null if no client is selected.
      */
-    Person getSelectedPerson();
+    Client getSelectedClient();
 
     /**
-     * Sets the selected person in the filtered person list.
+     * Sets the selected client in the filtered client list.
      */
-    void setSelectedPerson(Person person);
+    void setSelectedClient(Client client);
 }

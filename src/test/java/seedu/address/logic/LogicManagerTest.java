@@ -1,7 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_CONFIRMATION;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalClients.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -30,11 +30,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAgentAssist;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.storage.JsonAgentAssistStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ClientBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -78,7 +78,7 @@ public class LogicManagerTest {
     public void execute_commandExecutionError_throwsCommandException() throws CommandException, ParseException {
         String[] deleteCommand = {"delete 9", "y"};
         logic.execute(deleteCommand[0]);
-        assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+        assertThrows(CommandException.class, MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX, () ->
                 logic.execute(deleteCommand[1]));
     }
 
@@ -101,8 +101,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredClientList().remove(0));
     }
 
     /**
@@ -136,8 +136,8 @@ public class LogicManagerTest {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel.getAgentAssist(), model.getAgentAssist());
-        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
-        assertEquals(expectedModel.getSelectedPerson(), model.getSelectedPerson());
+        assertEquals(expectedModel.getFilteredClientList(), model.getFilteredClientList());
+        assertEquals(expectedModel.getSelectedClient(), model.getSelectedClient());
     }
     /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
@@ -205,9 +205,9 @@ public class LogicManagerTest {
         // Triggers the saveAgentAssist method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + JOB_DESC_AMY + INCOME_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).build();
+        Client expectedClient = new ClientBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addClient(expectedClient);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
