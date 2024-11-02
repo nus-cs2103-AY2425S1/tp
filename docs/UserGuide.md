@@ -483,20 +483,48 @@
   <br>
   <br>
 
-  Format: `find (all or e or ph) KEYWORD [MORE_KEYWORDS]`
+  Format: `find PARAMETER KEYWORD [MORE_KEYWORDS]`
 
-  * The search is case-insensitive. e.g `hans` will match `Hans`
-  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-  * Only the name is searched.
-  * Only full words will be matched e.g. `Han` will not match `Hans`
-  * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+>Parameter: `e` for employees, `ph` for potential hires, `all` for both employees and potential hires
+>
+>Keywords: `n/[NAMES]` `p/[PHONE NUMBERS]` `e/[EMAILS]` `d/[DEPARTMENTS]` `r/[ROLES]`
+
+<div class="box" type="tip" seamless>
+
+**Tip:** At least one keyword is required.
+  </div class="box">
+
+* Only name, phone number, email, department and role can be searched.
+* Only full words will be matched. e.g. `find e n/Han` will not match `find e n/Hans`.
+* The search is case-insensitive. e.g. `find all n/hans` will match `find all n/Hans`.
+* Allows for searching of multiple fields. e.g. `find all n/alice p/12345678 e/alice@example.com` returns persons
+with name `alice`, with phone number `123445678` and with email `alice@example.com`.
+* The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
+`find all e/bob@example.com alice@example.com`.
+* The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match 
+`find all e/john@example.com n/john`.
+* Persons matching at least one keyword in every field specified will be returned.
+e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
+and with phone number either `12345678` or `87654321`.
+
 
   Examples:
-  * `find all John` returns people `john` and `John Doe`
-  * `find e John` returns employees `john` and `John Doe`
-  * `find ph alex david` returns potential hires `Alex Yeoh`, `David Li`<br>
-    ![result for 'find alex david'](images/findAlexDavidResult.png)
+  * `find all n/John p/12345678` returns persons with `John` in their name, and with phone number `12345678`
+  * `find e p/12345678 e/john@example.com alice@example.com` returns employees with phone number `12345678` and with
+  email either `john@example.com` or `alice@example.com`
+  * `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`
+
+Example: "find ph n/John".
+![result for 'find ph n/John'](images/findjohnResult.png)
+
+   <div class="box box-warn" type="warning" seamless>
+
+**Common Mistakes:**
+* `find a n/John`: Invalid parameter
+* `find all a/John`: Invalid keyword prefix
+* `find all n/John n/John`: Duplicate keyword prefix
+  </div class="box">
+
   </div>
 </details>
 
