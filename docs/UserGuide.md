@@ -81,7 +81,7 @@ their contacts into 'work' contacts and 'personal' contacts to better manage the
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/help.png)
 
 Format: `help`
 
@@ -90,16 +90,16 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME h/TELEGRAM_HANDLE p/PHONE_NUMBER e/EMAIL ct/CONTACT_TYPE [t/TAG]…​`
+Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** You can add multiple tags (or none at all).
 </box>
 
 Examples:
-* `add n/John Doe h/@johndoe p/9988 7766 e/johndoh@gmail.com ct/work t/friend`
-* `add n/Betsy Crowe t/friend h/@betsy_c p/87452451 e/betsyc@gmail.com ct/personal t/criminal`
+* `add n/John Doe ct/work h/@johndoe p/99887766 e/johndoh@gmail.com m/CS2030S t/friend`
+* `add n/Betsy Crowe ct/personal t/friend h/@betsy_c r/likes cats t/criminal`
 
 ### Listing all persons : `list`
 
@@ -109,13 +109,13 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Updates details for an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [h/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [ct/CONTACT_TYPE] [h/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* `INDEX` refers to the person's position in the displayed list (i.e. must be a positive integer 1, 2, 3...)
+* At least one optional field must be provided.
+* Existing values are replaced by the new input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
@@ -126,7 +126,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose **names** or **telegram handle** contain any of the given keywords.
+Finds persons whose **names** or **telegram handle** contain any of the specified keywords.
 
 Format: <br>
 `find NAME [MORE_NAME_KEYWORDS]`<br>
@@ -141,8 +141,23 @@ Format: <br>
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex david` returns `Alex Yeoh`, `David Li`
+  ![result for 'find alex david'](images/findAlexDavid.png)
+
+### Filtering persons by contact type: `filter`
+
+Filters persons by their contact type (i.e. work or personal).
+
+Format: `filter CONTACT_TYPE`
+
+* Displays a list of persons tagged with that `CONTACT_TYPE`
+* `CONTACT_TYPE` can be either 'WORK' or 'PERSONAL'
+* The search is case-insensitive. e.g. 'work' is the same as 'WORK'
+
+Examples:
+
+* `filter WORK` returns all the 'work' contacts
+* `filter PERSONAL` returns all the 'personal' contacts
 
 ### Deleting a person : `delete`
 
@@ -163,6 +178,21 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Switching display theme: `switch`
+
+Changes the display to 'light' mode or 'dark' mode.
+
+Format: `switch THEME`
+
+* Displays the `THEME` specified
+* `THEME` can be `light` or `dark`
+* `THEME` is case-insensitive. e.g. 'light' is the same as 'LIGHT'
+
+Examples:
+
+* `switch LIGHT` switches to the 'light' display theme
+* `switch DARK` switches to the 'dark' display theme
 
 ### Exiting the program : `exit`
 
@@ -205,10 +235,10 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME ct/CONTACT_TYPE [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE_NAME] [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`
+**Add**    | `add n/NAME ct/CONTACT_TYPE [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE_NAME] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
 **Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br> `find h/ TELEGRAM_HANDLE` e.g., `find h/ @james_lake`
 **Filter** | `filter [CONTACT_TYPE]`<br> e.g., `filter WORK`, `filter PERSONAL`
 **List**   | `list`
