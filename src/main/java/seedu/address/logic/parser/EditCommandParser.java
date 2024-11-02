@@ -43,13 +43,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         String str = null;
         Name name = null;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            str = argMultimap.getPreamble();
-            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
                 PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
@@ -90,15 +83,23 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
+        // parse the index to edit, else parse the name
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            str = argMultimap.getPreamble();
+            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
         if (index == null) {
             try {
                 name = ParserUtil.parseName(str);
             } catch (Exception ex) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), ex);
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), ex);
             }
             return new EditCommand(name, editContactDescriptor);
         }
+
         return new EditCommand(index, editContactDescriptor);
     }
 
@@ -121,9 +122,11 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
+    /*
     private Optional<Nickname> parseNicknameForEdit(String nickname) throws ParseException {
         assert nickname != null;
         return Optional.of(ParserUtil.parseNickname(nickname));
     }
+     */
 
 }

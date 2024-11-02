@@ -161,11 +161,20 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditCommand otherEditCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
+        if (targetIndex == null) {
+            if (otherEditCommand.targetIndex == null) {
+                if (targetName == null) {
+                    return otherEditCommand.targetName == null;
+                }
+                return targetName.equals(otherEditCommand.targetName);
+            }
+            return false;
+        }
+
         return targetIndex.equals(otherEditCommand.targetIndex)
                 && editContactDescriptor.equals(otherEditCommand.editContactDescriptor);
     }
