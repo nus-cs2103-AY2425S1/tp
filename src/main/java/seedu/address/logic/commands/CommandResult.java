@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,17 +14,18 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class CommandResult {
 
+    public enum TYPE {
+        ORDINARY,
+        SHOW_HELP,
+        EXIT,
+        PROMPT,
+        IMPORT_DATA,
+        EXPORT_DATA;
+    }
+
     private final String feedbackToUser;
 
-    /**
-     * Help information should be shown to the user.
-     */
-    private final boolean showHelp;
-
-    /**
-     * The application should exit.
-     */
-    private final boolean exit;
+    private final TYPE type;
 
     /**
      * Command history should be shown to user.
@@ -34,20 +37,29 @@ public class CommandResult {
      */
     private final Supplier<CommandResult> continuationFunction;
 
-    private CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String history,
-                          Supplier<CommandResult> continuationFunction) {
+    /**
+     * Function that should be run after prompting the user for a file.
+     */
+    private final Function<File, CommandResult> fileProcessor;
+
+    private CommandResult(String feedbackToUser, TYPE type, String history,
+                          Supplier<CommandResult> continuationFunction,
+                          Function<File, CommandResult> fileProcessor) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this.type = type;
         this.history = history;
         this.continuationFunction = continuationFunction;
+        this.fileProcessor = fileProcessor;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String history) {
-        this(feedbackToUser, showHelp, exit, history, null);
+        this(feedbackToUser,
+                showHelp ? TYPE.SHOW_HELP : exit ? TYPE.EXIT : TYPE.ORDINARY,
+                history, null, null);
+        assert (!showHelp || !exit); // No commands result in showing help window AND exiting the app
     }
 
     /**
@@ -55,7 +67,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, "", null);
+        this(feedbackToUser, TYPE.ORDINARY, "", null, null);
     }
 
     /**
@@ -64,7 +76,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, String history) {
-        this(feedbackToUser, false, false, history, null);
+        this(feedbackToUser, TYPE.ORDINARY, history, null, null);
     }
 
     /**
@@ -74,26 +86,15 @@ public class CommandResult {
      * @param continuationFunction function that will be applied if user confirms the prompt
      */
     public CommandResult(String feedbackToUser, Supplier<CommandResult> continuationFunction) {
-        this(feedbackToUser, false, false, "", continuationFunction);
-    };
+        this(feedbackToUser, TYPE.PROMPT, "", continuationFunction, null);
+    }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
-    }
-
-    public boolean isExit() {
-        return exit;
-    }
-
-    /**
-     * Checks if the user should be prompted for confirmation.
-     */
-    public boolean isPromptConfirmation() {
-        return continuationFunction != null;
+    public TYPE getType() {
+        return type;
     }
 
     /**
@@ -121,24 +122,20 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && isPromptConfirmation() == otherCommandResult.isPromptConfirmation();
+                && type == otherCommandResult.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, type);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("exit", exit)
+                .add("type", type)
                 .add("history", history)
-                .add("promptConfirmation", isPromptConfirmation())
                 .toString();
     }
 

@@ -226,22 +226,26 @@ public class MainWindow extends UiPart<Stage> {
             }
             lastCommandResult = commandResult;
 
-            if (commandResult.isPromptConfirmation()) {
+            switch (commandResult.getType()) {
+            case PROMPT:
                 logger.info("Prompt: " + commandResult.getFeedbackToUser());
                 isPrompt = true;
-            } else {
+                break;
+            default:
                 logger.info("Result: " + commandResult.getFeedbackToUser());
+                break;
             }
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             commandBox.setFeedbackToUser(commandResult.getHistory());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getType()) {
+            case SHOW_HELP:
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+                break;
+            case EXIT:
                 handleExit();
+                break;
             }
 
             return commandResult;
