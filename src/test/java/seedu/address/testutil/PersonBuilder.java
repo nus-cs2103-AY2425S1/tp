@@ -126,4 +126,5 @@ public class PersonBuilder {
     public Person buildDoctor() {
         return new Person(name, DEFAULT_DOCTOR_ROLE, phone, email, address, remark, tags);
     }
+
 }
