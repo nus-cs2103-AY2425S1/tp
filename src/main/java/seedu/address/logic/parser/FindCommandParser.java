@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIND_KEYWORD;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_PREAMBLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.ParserUtil.areAnyPrefixesPresent;
@@ -37,7 +38,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (!argMultimap.getPreamble().isEmpty() && !argMultimap.getPreamble().equals(FindCommand.CHAINED)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException("Error: " + MESSAGE_UNEXPECTED_PREAMBLE + "\nUsage:\n" + FindCommand.MESSAGE_USAGE);
         }
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
