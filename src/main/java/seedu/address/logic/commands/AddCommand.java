@@ -77,10 +77,6 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
-    public Person getToAdd() {
-        return toAdd;
-    }
-
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
@@ -88,7 +84,7 @@ public class AddCommand extends Command {
 
     @Override
     public String undo(Model model, CommandHistory pastCommands) {
-        Person personToRemove = this.getToAdd();
+        Person personToRemove = this.toAdd;
         model.deletePerson(personToRemove);
         pastCommands.remove();
         return String.format(MESSAGE_UNDO_ADD, personToRemove.getName());

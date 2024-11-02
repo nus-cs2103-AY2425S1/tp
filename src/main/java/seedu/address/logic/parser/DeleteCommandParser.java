@@ -25,10 +25,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             int[] intArr = new int[inputSize];
 
             for (int i = 0; i < inputSize; i++) {
-                if (!DeleteCommandParser.isNumber(inputArr[i].trim())) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-                }
+                ParserUtil.parseIndex(inputArr[i].trim());
             }
             //convert string indexes to int indexes and sort int indexes in ascending order
             for (int i = 0; i < inputSize; i++) {
