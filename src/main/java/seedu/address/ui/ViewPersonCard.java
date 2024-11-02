@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Person;
+import seedu.address.model.role.Member;
 
 /**
  * Panel containing the list of persons.
@@ -68,6 +69,9 @@ public class ViewPersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(role -> role.roleName))
                 .forEach(role -> viewRoles.getChildren().add(new Label(role.roleName)));
         viewRoles.getChildren().stream().forEach(label -> label.setId("viewRole"));
+        viewRoles.getChildren().stream().map(node -> (Label) node)
+                .filter(label -> label.getText().equals(Member.MEMBER_ROLE))
+                .forEach(label -> label.setId("memberRole"));
     }
 }
 
