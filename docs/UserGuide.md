@@ -205,6 +205,10 @@ Examples:
 * `add n/Product Pitch i/Product pitch for James at MBS from/2024-10-31 13:00 to/2024-10-31 15:30`
 * `add n/Show buyer 3 houses i/Meet with James Jimes to show him 3 houses that fit his expectations from/2024-10-30 09:30 to/2024-10-30 10:30`
 
+Meet Ups with clashing timings will be displayed in red. Otherwise, the default display colour for timing is green.
+
+![alt text](images/MeetUpClash.png)
+
 ### Viewing all meet-ups : `view`
 
 Shows a list of all meet-ups in the meet-up list.
@@ -275,6 +279,8 @@ Examples:
 
 Shows a list of all properties in the property list.
 
+![alt text](images/PropertyView.png)
+
 Format: `view`
 
 ### Editing a property : `edit`
@@ -306,9 +312,6 @@ Format: `find [n/LANDLORD_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [s/ASKING_PRICE] [t
 Examples:
 * `find n/John t/HDB 5 Room` returns `john` and `John Doe`
 
-
-
-<br>_More features coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
