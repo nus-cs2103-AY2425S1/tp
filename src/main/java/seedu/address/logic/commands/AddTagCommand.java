@@ -61,6 +61,9 @@ public class AddTagCommand extends Command {
         }
 
         model.addPersonTags(personToEdit, this.tagSet);
+
+        // retrieve the person again for the new tags
+        personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
         return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, Messages.format(personToEdit)));
     }
 
