@@ -67,7 +67,7 @@ public class Messages {
         Set<String> exclusiveFields =
                 Stream.of(exclusiveFlags).map(Prefix::toString).collect(Collectors.toSet());
 
-        return MESSAGE_EXCLUSIVE_FLAGS + String.join(" ", exclusiveFields);
+        return MESSAGE_EXCLUSIVE_FLAGS + String.join(", ", exclusiveFields);
     }
 
     /**
