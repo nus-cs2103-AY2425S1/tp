@@ -134,11 +134,18 @@ public class PersonBuilder {
         return this;
     }
 
+
+    /**
+     * Sets the {@code Caregivers} of the {@code Person} that we are building.
+     */
     public PersonBuilder withCaregivers(String... caregivers) {
         this.caregivers = SampleDataUtil.getCaregiverSet(caregivers);
         return this;
     }
 
+    /**
+     * Sets the {@code Patients} of the {@code Person} that we are building.
+     */
     public PersonBuilder withPatients(String... patients) {
         this.patients = SampleDataUtil.getPatientSet(patients);
         return this;
