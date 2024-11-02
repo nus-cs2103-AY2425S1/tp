@@ -40,7 +40,7 @@ public class ContractEndDateTest {
         assertFalse(ContractEndDate.isValidDate("01-01-2030")); // incorrect format
         assertFalse(ContractEndDate.isValidDate("2040-13-01")); // invalid month
         assertFalse(ContractEndDate.isValidDate("2021-02-29")); // invalid day
-        assertFalse(ContractEndDate.isValidDate("-0001-02-29")); // should reject negative year
+        assertFalse(ContractEndDate.isValidDate("-0001-02-21")); // should reject negative year
         assertFalse(ContractEndDate.isValidDate("1-02-29")); // should reject year in incorrect format
         assertFalse(ContractEndDate.isValidDate("0001/02/29")); // should reject incorrect format
         assertFalse(ContractEndDate.isValidDate("2027-02-29")); // should reject feb 29th on non leap year
