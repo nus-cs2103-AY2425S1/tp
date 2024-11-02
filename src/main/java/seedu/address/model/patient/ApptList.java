@@ -1,5 +1,6 @@
 package seedu.address.model.patient;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,6 +54,30 @@ public class ApptList {
      */
     public List<Appt> getAppts() {
         return Collections.unmodifiableList(appts);
+    }
+
+    /**
+     * Returns the most recent past appointment.
+     * @return Appt
+     */
+    public Appt getMostRecentPastAppt() {
+        LocalDateTime now = LocalDateTime.now();
+        return appts.stream()
+                .filter(appt -> appt.getDateTime().isBefore(now))
+                .reduce((first, second) -> second)
+                .orElse(null);
+    }
+
+    /**
+     * Returns most recent future appointment.
+     * @return Appt
+     */
+    public Appt getMostRecentFutureAppt() {
+        LocalDateTime now = LocalDateTime.now();
+        return appts.stream()
+                .filter(appt -> appt.getDateTime().isAfter(now))
+                .findFirst()
+                .orElse(null);
     }
 
     /**

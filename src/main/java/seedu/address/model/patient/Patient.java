@@ -2,7 +2,6 @@ package seedu.address.model.patient;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -133,21 +132,22 @@ public class Patient {
     }
 
     // ApptList access functions
-
+    /**
+     * Returns the most recent past appointment.
+     * @return Appt
+     * @see ApptList#getMostRecentPastAppt()
+     */
     public Appt getMostRecentPastAppt() {
-        LocalDateTime now = LocalDateTime.now();
-        return appts.getAppts().stream()
-                .filter(appt -> appt.getDateTime().isBefore(now))
-                .reduce((first, second) -> second)
-                .orElse(null);
+        return appts.getMostRecentPastAppt();
     }
 
-    public Appt getLatestFutureAppt() {
-        LocalDateTime now = LocalDateTime.now();
-        return appts.getAppts().stream()
-                .filter(appt -> appt.getDateTime().isAfter(now))
-                .findFirst()
-                .orElse(null);
+    /**
+     * Returns the most recent future appointment.
+     * @return Appt
+     * @see ApptList#getMostRecentFutureAppt()
+     */
+    public Appt getMostRecentFutureAppt() {
+        return appts.getMostRecentFutureAppt();
     }
 
     /**
