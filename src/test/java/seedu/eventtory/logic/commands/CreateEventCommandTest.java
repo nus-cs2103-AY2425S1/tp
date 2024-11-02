@@ -17,8 +17,8 @@ import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.ReadOnlyEventTory;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.testutil.EventBuilder;
-import seedu.eventtory.testutil.TypicalEvents;
 import seedu.eventtory.testutil.ModelStub;
+import seedu.eventtory.testutil.TypicalEvents;
 
 public class CreateEventCommandTest {
     @Test
