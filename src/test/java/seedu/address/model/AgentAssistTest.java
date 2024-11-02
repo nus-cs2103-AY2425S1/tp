@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIER_REJECT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAgentAssist;
+import static seedu.address.testutil.TypicalClients.ALICE;
+import static seedu.address.testutil.TypicalClients.getTypicalAgentAssist;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.exceptions.DuplicateClientException;
+import seedu.address.testutil.ClientBuilder;
 
 public class AgentAssistTest {
 
@@ -28,7 +28,7 @@ public class AgentAssistTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), agentAssist.getPersonList());
+        assertEquals(Collections.emptyList(), agentAssist.getClientList());
     }
 
     @Test
@@ -44,64 +44,64 @@ public class AgentAssistTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTier(VALID_TIER_REJECT)
+    public void resetData_withDuplicateClients_throwsDuplicateClientException() {
+        // Two clients with the same identity fields
+        Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTier(VALID_TIER_REJECT)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AgentAssistStub newData = new AgentAssistStub(newPersons);
+        List<Client> newClients = Arrays.asList(ALICE, editedAlice);
+        AgentAssistStub newData = new AgentAssistStub(newClients);
 
-        assertThrows(DuplicatePersonException.class, () -> agentAssist.resetData(newData));
+        assertThrows(DuplicateClientException.class, () -> agentAssist.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> agentAssist.hasPerson(null));
+    public void hasClient_nullClient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> agentAssist.hasClient(null));
     }
 
     @Test
-    public void hasPerson_personNotInAgentAssist_returnsFalse() {
-        assertFalse(agentAssist.hasPerson(ALICE));
+    public void hasClient_clientNotInAgentAssist_returnsFalse() {
+        assertFalse(agentAssist.hasClient(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAgentAssist_returnsTrue() {
-        agentAssist.addPerson(ALICE);
-        assertTrue(agentAssist.hasPerson(ALICE));
+    public void hasClient_clientInAgentAssist_returnsTrue() {
+        agentAssist.addClient(ALICE);
+        assertTrue(agentAssist.hasClient(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAgentAssist_returnsTrue() {
-        agentAssist.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTier(VALID_TIER_REJECT)
+    public void hasClient_clientWithSameIdentityFieldsInAgentAssist_returnsTrue() {
+        agentAssist.addClient(ALICE);
+        Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTier(VALID_TIER_REJECT)
                 .build();
-        assertTrue(agentAssist.hasPerson(editedAlice));
+        assertTrue(agentAssist.hasClient(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> agentAssist.getPersonList().remove(0));
+    public void getClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> agentAssist.getClientList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AgentAssist.class.getCanonicalName() + "{persons=" + agentAssist.getPersonList() + "}";
+        String expected = AgentAssist.class.getCanonicalName() + "{clients=" + agentAssist.getClientList() + "}";
         assertEquals(expected, agentAssist.toString());
     }
 
     /**
-     * A stub ReadOnlyAgentAssist whose persons list can violate interface constraints.
+     * A stub ReadOnlyAgentAssist whose clients list can violate interface constraints.
      */
     private static class AgentAssistStub implements ReadOnlyAgentAssist {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Client> clients = FXCollections.observableArrayList();
 
-        AgentAssistStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AgentAssistStub(Collection<Client> clients) {
+            this.clients.setAll(clients);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Client> getClientList() {
+            return clients;
         }
     }
 

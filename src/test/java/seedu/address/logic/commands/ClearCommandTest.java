@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAgentAssist;
+import static seedu.address.testutil.TypicalClients.getTypicalAgentAssist;
 
 import org.junit.jupiter.api.Test;
 

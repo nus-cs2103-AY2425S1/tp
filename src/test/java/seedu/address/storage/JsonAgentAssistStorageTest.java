@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAgentAssist;
+import static seedu.address.testutil.TypicalClients.ALICE;
+import static seedu.address.testutil.TypicalClients.HOON;
+import static seedu.address.testutil.TypicalClients.IDA;
+import static seedu.address.testutil.TypicalClients.getTypicalAgentAssist;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -51,13 +51,13 @@ public class JsonAgentAssistStorageTest {
     }
 
     @Test
-    public void readAgentAssist_invalidPersonAgentAssist_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAgentAssist("invalidPersonAgentAssist.json"));
+    public void readAgentAssist_invalidClientAgentAssist_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAgentAssist("invalidClientAgentAssist.json"));
     }
 
     @Test
-    public void readAgentAssist_invalidAndValidPersonAgentAssist_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAgentAssist("invalidAndValidPersonAgentAssist.json"));
+    public void readAgentAssist_invalidAndValidClientAgentAssist_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAgentAssist("invalidAndValidClientAgentAssist.json"));
     }
 
     @Test
@@ -72,14 +72,14 @@ public class JsonAgentAssistStorageTest {
         assertEquals(original, new AgentAssist(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addClient(HOON);
+        original.removeClient(ALICE);
         jsonAgentAssistStorage.saveAgentAssist(original, filePath);
         readBack = jsonAgentAssistStorage.readAgentAssist(filePath).get();
         assertEquals(original, new AgentAssist(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addClient(IDA);
         jsonAgentAssistStorage.saveAgentAssist(original); // file path not specified
         readBack = jsonAgentAssistStorage.readAgentAssist().get(); // file path not specified
         assertEquals(original, new AgentAssist(readBack));
