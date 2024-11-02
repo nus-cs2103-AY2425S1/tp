@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.Name;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final JsonAdaptedModuleRoleMap moduleRoleMap;
+    private final String description;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,7 +42,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("moduleRoleMap") JsonAdaptedModuleRoleMap moduleRoleMap) {
+                             @JsonProperty("moduleRoleMap") JsonAdaptedModuleRoleMap moduleRoleMap,
+                             @JsonProperty("description") String description) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,6 +52,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.moduleRoleMap = moduleRoleMap;
+        this.description = description;
     }
 
     /**
@@ -63,6 +67,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag :: new)
                 .collect(Collectors.toList()));
         moduleRoleMap = new JsonAdaptedModuleRoleMap(source.getModuleRoleMap());
+        description = source.getDescription().map(Object::toString).orElse(null);
     }
 
     /**
@@ -107,12 +112,20 @@ class JsonAdaptedPerson {
 
         final ModuleRoleMap modelModuleRoleMap = moduleRoleMap.toModelType();
 
+        if (description != null && !Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        final Description modelDescription = description != null
+            ? new Description(description)
+            : null;
+
         return new Person(modelName,
                 Optional.ofNullable(modelPhone),
                 Optional.ofNullable(modelEmail),
                 Optional.ofNullable(modelAddress),
                 modelTags,
-                modelModuleRoleMap);
+                modelModuleRoleMap,
+                Optional.ofNullable(modelDescription));
     }
 
 }

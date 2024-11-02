@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
@@ -29,12 +30,16 @@ public class PersonBuilder {
     public static final ModuleCode DEFAULT_MODULE_CODE = new ModuleCode("CS1101S");
     public static final RoleType DEFAULT_ROLE_TYPE = RoleType.STUDENT;
 
+    // Default description for any new Person is empty
+    public static final String DEFAULT_DESCRIPTION = "";
+
     private Name name;
     private Optional<Phone> phone;
     private Optional<Email> email;
     private Optional<Address> address;
     private Set<Tag> tags;
     private ModuleRoleMap moduleRoleMap;
+    private Optional<Description> description;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -49,6 +54,7 @@ public class PersonBuilder {
         HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
         hashMap.put(DEFAULT_MODULE_CODE, DEFAULT_ROLE_TYPE);
         moduleRoleMap = new ModuleRoleMap(hashMap);
+        description = Optional.of(new Description(DEFAULT_DESCRIPTION));
     }
 
     /**
@@ -61,6 +67,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         moduleRoleMap = personToCopy.getModuleRoleMap();
+        description = personToCopy.getDescription();
     }
 
     /**
@@ -157,12 +164,28 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Description} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDescription(String description) {
+        this.description = Optional.of(new Description(description));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Description} of the {@code Person} that we are building to be null.
+     */
+    public PersonBuilder withEmptyDescription() {
+        this.description = Optional.empty();
+        return this;
+    }
+
     //remember to check here
 
     /**
      * Builds the {@code Person} that we are testing.
      */
     public Person build() {
-        return new Person(name, phone, email, address, tags, moduleRoleMap);
+        return new Person(name, phone, email, address, tags, moduleRoleMap, description);
     }
 }
