@@ -4,7 +4,7 @@ package seedu.address.model.tag;
  * Provides categories to sort Tags into, as well as colour codes for display in the UI.
  */
 public enum TagCategory {
-    GENERAL("#3E7B91"),
+    GENERAL("#ECECEC"), // Light Grey for default color
     ACADEMICS("#FFD700"), // Gold
     ACTIVITIES("#1E90FF"), // Dodger Blue
     NETWORKING("#32CD32"), // Lime Green
