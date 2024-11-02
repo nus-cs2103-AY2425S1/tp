@@ -93,6 +93,18 @@ public class SampleDataUtil {
         return roleSet; // Return the set containing Role enums
     }
 
+    public static Set<Nric> getCaregiverSet(String... caregivers) {
+        return Arrays.stream(caregivers)
+                .map(Nric::new)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<Nric> getPatientSet(String... patients) {
+        return Arrays.stream(patients)
+                .map(Nric::new)
+                .collect(Collectors.toSet());
+    }
+
     public static List<Note> getSampleNotes(String... notes) {
 
         List<Note> notesList = new ArrayList<>();
