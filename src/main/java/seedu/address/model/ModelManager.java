@@ -49,6 +49,7 @@ public class ModelManager implements Model {
 
 
         filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        filteredReminders.setPredicate(PREDICATE_SHOW_ALL_REMINDERS);
     }
 
     public ModelManager() {
@@ -133,6 +134,7 @@ public class ModelManager implements Model {
     @Override
     public void addReminder(Reminder reminder) {
         clientHub.addReminder(reminder);
+        updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
     }
 
     @Override

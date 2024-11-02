@@ -26,7 +26,7 @@ public class ReminderDescription {
      */
     public ReminderDescription(String description) {
         requireNonNull(description);
-        checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidReminderDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;
     }
 
@@ -59,7 +59,7 @@ public class ReminderDescription {
     /**
      * Returns true if a given string is a valid description.
      */
-    public static boolean isValidDescription(String test) {
+    public static boolean isValidReminderDescription(String test) {
         return test.matches(VALIDATION_REGEX)
                 && test.trim().length() <= MAX_LENGTH && test.trim().length() >= MIN_LENGTH;
     }

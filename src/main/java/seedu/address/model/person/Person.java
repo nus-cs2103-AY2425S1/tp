@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.clienttype.ClientType;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Represents a Person in the address book.
@@ -25,12 +26,13 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<ClientType> clientTypes = new HashSet<>();
+    private final Set<Reminder> reminders = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<ClientType> clientTypes, Description description) {
+                  Set<ClientType> clientTypes, Description description, Set<Reminder> reminders) {
         requireAllNonNull(name, phone, email, address, clientTypes, description);
         this.name = name;
         this.phone = phone;
@@ -38,6 +40,7 @@ public class Person {
         this.address = address;
         this.clientTypes.addAll(clientTypes);
         this.description = description;
+        this.reminders.addAll(reminders);
     }
 
     public Name getName() {
@@ -60,12 +63,19 @@ public class Person {
         return description;
     }
 
+    public Set<Reminder> getReminders() {
+        return Collections.unmodifiableSet(reminders);
+    }
+
     /**
      * Returns an immutable client type set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<ClientType> getClientTypes() {
         return Collections.unmodifiableSet(clientTypes);
+    }
+    public void addReminder(Reminder reminder) {
+        reminders.add(reminder);
     }
 
     /**
@@ -79,6 +89,9 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+    public void deleteReminder(Reminder reminder) {
+        reminders.remove(reminder);
     }
 
     /**
@@ -102,13 +115,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && clientTypes.equals(otherPerson.clientTypes)
-                && description.equals(otherPerson.description);
+                && description.equals(otherPerson.description)
+                && reminders.equals(otherPerson.reminders);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, clientTypes, description);
+        return Objects.hash(name, phone, email, address, clientTypes, description, reminders);
     }
 
     @Override
@@ -120,6 +134,7 @@ public class Person {
                 .add("address", address)
                 .add("clientTypes", clientTypes)
                 .add("description", description)
+                .add("reminders", reminders)
                 .toString();
     }
 }

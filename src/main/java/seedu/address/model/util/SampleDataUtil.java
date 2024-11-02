@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,27 +23,30 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Ahmad Syuaib"), new Phone("87438807"), new Email("ahmadsyuaib@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getClientTypeSet("Investment"), new Description("Only free on weekends")),
+                getClientTypeSet("Investment"), new Description("Only free on weekends"), Collections.EMPTY_SET),
             new Person(new Name("Jeremy Sim"), new Phone("99272758"), new Email("jeremysim@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getClientTypeSet("Investment", "Healthcare"), new Description("Likes to play basketball")),
+                getClientTypeSet("Investment", "Healthcare"), new Description("Likes to play basketball"),
+                    Collections.EMPTY_SET),
             new Person(new Name("Liu Rui"), new Phone("93210283"), new Email("liurui@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getClientTypeSet("Insurance Plan", "Savings"), new Description("Plans to retire early")),
+                getClientTypeSet("Insurance Plan", "Savings"), new Description("Plans to retire early"),
+                    Collections.EMPTY_SET),
             new Person(new Name("Rubin Lin"), new Phone("91031282"), new Email("rubinlin@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getClientTypeSet("Healthcare", "Savings"), new Description("Started a podcast")),
+                getClientTypeSet("Healthcare", "Savings"), new Description("Started a podcast"),
+                    Collections.EMPTY_SET),
             new Person(new Name("Harith Nurhisham"), new Phone("92492021"), new Email("harithnurhisham@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getClientTypeSet("Insurance Plan", "Investment"), new Description("Does not like to travel "
-                    + "out of the east")),
+                    + "out of the east"), Collections.EMPTY_SET),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getClientTypeSet("Investment Plan"), new Description("Recently married")),
+                getClientTypeSet("Investment Plan"), new Description("Recently married"), Collections.EMPTY_SET),
             new Person(new Name("Sarah Lee"), new Phone("89732145"), new Email("sarahlee@example.com"),
                     new Address("Blk 38 Boon Lay Street 43, #32-03"),
                     getClientTypeSet("Healthcare", "Insurance Plan"),
-                    new Description("Takes care of old parents"))
+                    new Description("Takes care of old parents"), Collections.EMPTY_SET),
         };
     }
 

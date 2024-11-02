@@ -3,7 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
@@ -25,7 +27,7 @@ public class ClientHub implements ReadOnlyClientHub {
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     * Note that non-static init blocks are not recommended to use. There are aother ways to avoid duplication
      *   among constructors.
      */
     {
@@ -203,7 +205,22 @@ public class ClientHub implements ReadOnlyClientHub {
      *
      * @return The reminder list.
      */
+    public ObservableList<Reminder> getReminders() {
+        return reminders.asUnmodifiableObservableList();
+    }
+
     public ObservableList<Reminder> getReminderList() {
+        //        List<Reminder> allReminders = persons.stream()
+        //                .filter(person -> !person.getReminders().isEmpty())
+        //                .flatMap(person -> person.getReminders().stream())
+        //                .collect(Collectors.toList());
+        //        reminders.setReminders(allReminders);
+        //        return reminders.asUnmodifiableObservableList();
+        ObservableList<Reminder> temp = FXCollections.observableArrayList(
+                persons.stream()
+                        .flatMap(person -> person.getReminders().stream())
+                        .collect(Collectors.toList()));
+        reminders.setReminders(temp);
         return reminders.asUnmodifiableObservableList();
     }
 
