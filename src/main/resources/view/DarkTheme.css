@@ -171,11 +171,6 @@
     -fx-border-top-width: 1px;
 }
 
-.pane-without-border {
-    -fx-background-color: -fx-bg;
-    -fx-border-top-width: 0px;
-}
-
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
