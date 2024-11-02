@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExport() {
-        String exportToCsvCommand = "export format/csv";
+        String exportToCsvCommand = "export";
         try {
             CommandResult commandResult = executeCommand(exportToCsvCommand);
         } catch (CommandException | ParseException e) {
@@ -229,6 +229,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleAdvancedFilterByTags() {
         fillCommandBox("advfilter t\\[TAG] [OPERATOR] [VALUE]");
+    }
+
+    @FXML
+    private void handleSortByTags() {
+        fillCommandBox("sort t\\[TAG] asc/desc");
     }
 
     /**

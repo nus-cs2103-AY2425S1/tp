@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class SortCommandParser implements Parser<SortCommand> {
     //regex to filter the input to extract TAG name, comparison operator and TAG value
     private static final Pattern SORT_COMMAND_FORMAT =
-            Pattern.compile("(?i)(t/(?<tag>\\S+)){1}\\s+(?<sortOrder>\\S+){1}");
+            Pattern.compile("(?i)(t\\\\(?<tag>\\S+)){1}\\s+(?<sortOrder>\\S+){1}");
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand

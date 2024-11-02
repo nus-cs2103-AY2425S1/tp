@@ -44,16 +44,16 @@ public class ExportCommandTest {
     @Test
     public void execute_export_success() {
         CommandResult expectedCommandResult = new CommandResult(SUCCESS_MESSAGE);
-        assertCommandSuccess(new ExportCommand("csv"), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ExportCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void equals() {
-        final ExportCommand standardCommand = new ExportCommand("csv");
+        final ExportCommand standardCommand = new ExportCommand();
         final String differentFormat = "pdf";
 
         // same values -> returns true
-        ExportCommand commandWithSameValues = new ExportCommand("csv");
+        ExportCommand commandWithSameValues = new ExportCommand();
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -64,9 +64,6 @@ public class ExportCommandTest {
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
-
-        // different export format -> returns false
-        assertFalse(standardCommand.equals(new ExportCommand(differentFormat)));
     }
 
     @Test
