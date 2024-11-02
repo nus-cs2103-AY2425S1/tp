@@ -5,6 +5,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.Year;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -48,13 +49,16 @@ public class CleanCommand extends ConcreteCommand {
         requireNotExecuted();
         requireNonNull(model);
         initialAddressBook = new AddressBook(model.getAddressBook());
-        Predicate<? super Person> p = model.getFilteredPersonListPredicate();
+        Predicate<Person> afterViewPredicate = PREDICATE_SHOW_ALL_PERSONS;
+        Optional<Predicate<? super Person>> originalPredicate =
+                Optional.ofNullable(model.getFilteredPersonListPredicate());
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = model.getFilteredPersonList();
         for (int i = lastShownList.size() - 1; i >= 0; i--) {
             model.deletePerson(lastShownList.get(i));
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS.and(p));
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS
+                .and(originalPredicate.orElse(PREDICATE_SHOW_ALL_PERSONS)));
 
         isExecuted = true;
         return new CommandResult(MESSAGE_CLEAN_SUCCESS);
