@@ -25,7 +25,7 @@ public abstract class LessonCommand extends Command {
             + "Delete lessons by index in displayed student list: " + COMMAND_WORD_DELETE
             + " (short form: " + COMMAND_WORD_DELETE_ALT + ")"
             + " INDEX li/LESSON_INDEX [li/LESSON_INDEX]...\n"
-            + "Example: " + COMMAND_WORD_DELETE + " 1 li/2 li/4";
+            + "Example: " + COMMAND_WORD_DELETE + " 1 li/1 li/2";
 
     protected final Index personIndex;
 
@@ -42,7 +42,7 @@ public abstract class LessonCommand extends Command {
 
     protected Person getPersonFromModel(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        if (personIndex.getZeroBased() >= lastShownList.size()) {
+        if (personIndex.getZeroBased() < 0 || personIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         return lastShownList.get(personIndex.getZeroBased());

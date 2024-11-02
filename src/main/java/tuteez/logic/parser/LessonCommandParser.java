@@ -1,8 +1,19 @@
 package tuteez.logic.parser;
 
+import static tuteez.logic.Messages.MESSAGE_DUPLICATE_LESSON_INDEX;
+import static tuteez.logic.Messages.MESSAGE_INVALID_ADDLESSON_PREFIX;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tuteez.logic.parser.CliSyntax.PREFIX_ADD_LESSON;
-import static tuteez.logic.parser.CliSyntax.PREFIX_DELETE_LESSON;
+import static tuteez.logic.Messages.MESSAGE_INVALID_DELETELESSON_PREFIX;
+import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_FIELD_PREFIX;
+import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX;
+import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX;
+import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.AddLessonCommand;
@@ -15,39 +26,94 @@ import tuteez.model.person.lesson.Lesson;
  * Parses input arguments and creates a new LessonCommand object
  */
 public class LessonCommandParser implements Parser<LessonCommand> {
+    private final String commandWord;
 
+    public LessonCommandParser(String commandWord) {
+        this.commandWord = commandWord;
+    }
+
+    private String getCommandWord() {
+        return commandWord;
+    }
     /**
      * Parses the given {@code String} of arguments in the context of the LessonCommand and returns a LessonCommand
      * object for execution.
      * @throws ParseException if the user input does not conform to the expected format
      */
     public LessonCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ADD_LESSON, PREFIX_DELETE_LESSON);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_LESSON, PREFIX_LESSON_INDEX);
 
         Index personIndex;
         try {
             personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonCommand.MESSAGE_USAGE), pe);
-        }
-
-        if (argMultimap.getValue(PREFIX_ADD_LESSON).isPresent()) {
-            String lessonString = argMultimap.getValue(PREFIX_ADD_LESSON).get();
-            try {
-                Lesson lesson = ParserUtil.parseLesson(lessonString);
-                return new AddLessonCommand(personIndex, lesson);
-            } catch (ParseException pe) {
-                throw new ParseException(Lesson.MESSAGE_CONSTRAINTS, pe);
+            if (argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_MISSING_PERSON_INDEX + "\n" + LessonCommand.MESSAGE_USAGE));
             }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_INVALID_PERSON_INDEX_FORMAT + "\n" + LessonCommand.MESSAGE_USAGE), pe);
         }
 
-        if (argMultimap.getValue(PREFIX_DELETE_LESSON).isPresent()) {
-            Index lessonIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DELETE_LESSON).get());
-            return new DeleteLessonCommand(personIndex, lessonIndex);
-        }
+        String commandWord = getCommandWord();
 
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonCommand.MESSAGE_USAGE)
-        );
+        if (commandWord.equals(LessonCommand.COMMAND_WORD_ADD)
+                || commandWord.equals(LessonCommand.COMMAND_WORD_ADD_ALT)) {
+            return parseAddLesson(personIndex, argMultimap);
+        } else {
+            return parseDeleteLesson(personIndex, argMultimap);
+        }
+    }
+
+    private List<Index> parseIndices(ArgumentMultimap argMultimap) throws ParseException {
+        List<String> indexStrings = argMultimap.getAllValues(PREFIX_LESSON_INDEX);
+        List<Index> indices = new ArrayList<>();
+        for (String indexString : indexStrings) {
+            Index index = ParserUtil.parseIndex(indexString);
+            if (indices.contains(index)) {
+                throw new ParseException(MESSAGE_DUPLICATE_LESSON_INDEX);
+            }
+            indices.add(index);
+        }
+        return indices;
+    }
+
+    private List<Lesson> parseLessons(ArgumentMultimap argMultimap) throws ParseException {
+        List<String> lessonStrings = argMultimap.getAllValues(PREFIX_LESSON);
+        return ParserUtil.parseLessons(lessonStrings);
+    }
+
+    private LessonCommand parseAddLesson(Index personIndex, ArgumentMultimap argMultimap) throws ParseException {
+        validateAddLessonPrefix(argMultimap);
+        List<String> lessonStrings = argMultimap.getAllValues(PREFIX_LESSON);
+        if (lessonStrings.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_MISSING_LESSON_FIELD_PREFIX));
+        }
+        return new AddLessonCommand(personIndex, parseLessons(argMultimap));
+    }
+
+    private LessonCommand parseDeleteLesson(Index personIndex, ArgumentMultimap argMultimap) throws ParseException {
+        validateDeleteLessonPrefix(argMultimap);
+        List<String> indexStrings = argMultimap.getAllValues(PREFIX_LESSON_INDEX);
+        if (indexStrings.stream().anyMatch(String::isBlank)) {
+            throw new ParseException(MESSAGE_MISSING_LESSON_INDEX);
+        }
+        if (indexStrings.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX));
+        }
+        return new DeleteLessonCommand(personIndex, parseIndices(argMultimap));
+    }
+
+    private void validateAddLessonPrefix(ArgumentMultimap argMultimap) throws ParseException {
+        if (!argMultimap.getAllValues(PREFIX_LESSON_INDEX).isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_ADDLESSON_PREFIX);
+        }
+    }
+
+    private void validateDeleteLessonPrefix(ArgumentMultimap argMultimap) throws ParseException {
+        if (!argMultimap.getAllValues(PREFIX_LESSON).isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_DELETELESSON_PREFIX);
+        }
     }
 }

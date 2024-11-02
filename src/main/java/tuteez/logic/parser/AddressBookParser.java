@@ -90,7 +90,11 @@ public class AddressBookParser {
 
         case LessonCommand.COMMAND_WORD_ADD:
         case LessonCommand.COMMAND_WORD_ADD_ALT:
-            return new LessonCommandParser().parse(arguments);
+            return new LessonCommandParser(commandWord).parse(arguments);
+
+        case LessonCommand.COMMAND_WORD_DELETE:
+        case LessonCommand.COMMAND_WORD_DELETE_ALT:
+            return new LessonCommandParser(commandWord).parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

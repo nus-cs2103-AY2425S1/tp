@@ -3,11 +3,9 @@ package tuteez.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import tuteez.commons.core.index.Index;
-import tuteez.logic.Messages;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
 import tuteez.model.person.Person;
@@ -17,18 +15,20 @@ import tuteez.model.person.lesson.Lesson;
  * Deletes a lesson from a specified student.
  */
 public class DeleteLessonCommand extends LessonCommand {
+    public static final String MESSAGE_SUCCESS = "Deleted lessons from %1$s:\n%2$s";
+    public static final String MESSAGE_INVALID_LESSON_INDEX = "The following lesson indices are invalid:\n%s";
 
-    private final Index lessonIndex;
+    private final List<Index> lessonIndices;
 
     /**
      * Deletes a Lesson with the specified {@code lessonIndex} from the student with the {@code personIndex}
      * of the displayed list.
      * @param personIndex The Index of the student in the displayed list to delete the lesson from
-     * @param lessonIndex Index of the lesson to be deleted
+     * @param lessonIndices A List of Index's of the lesson to be deleted
      */
-    public DeleteLessonCommand(Index personIndex, Index lessonIndex) {
+    public DeleteLessonCommand(Index personIndex, List<Index> lessonIndices) {
         super(personIndex);
-        this.lessonIndex = lessonIndex;
+        this.lessonIndices = lessonIndices;
     }
 
     @Override
@@ -37,27 +37,62 @@ public class DeleteLessonCommand extends LessonCommand {
 
         Person personToUpdate = getPersonFromModel(model);
 
-        Set<Lesson> lessons = new HashSet<>(personToUpdate.getLessons());
-        if (lessonIndex.getZeroBased() < 0 || lessonIndex.getZeroBased() >= lessons.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_INDEX);
-        }
-        Lesson lessonToDelete = new ArrayList<>(lessons).get(lessonIndex.getZeroBased());
+        List<Lesson> currentLessons = new ArrayList<>(personToUpdate.getLessons());
+        List<Lesson> lessonsToDelete = new ArrayList<>();
+        List<Index> invalidIndices = new ArrayList<>();
 
-        Person updatedPerson = deleteLessonFromPerson(personToUpdate, lessonToDelete);
+        for (Index index : lessonIndices) {
+            if (index.getZeroBased() < 0 || index.getZeroBased() >= currentLessons.size()) {
+                invalidIndices.add(index);
+                continue;
+            }
+            lessonsToDelete.add(currentLessons.get(index.getZeroBased()));
+        }
+
+        if (!invalidIndices.isEmpty()) {
+            throw new CommandException(generateInvalidIndexMessage(invalidIndices));
+        }
+
+        currentLessons.removeAll(lessonsToDelete);
+
+        Person updatedPerson = updatePersonLessons(personToUpdate, currentLessons);
         model.setPerson(personToUpdate, updatedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format("Deleted lesson at index %1$s from %2$s: %3$s",
-                lessonIndex.getOneBased(), personToUpdate.getName(), lessonToDelete.toString()));
+        return new CommandResult(generateResultMessage(personToUpdate, lessonsToDelete));
     }
 
-    private Person deleteLessonFromPerson(Person person, Lesson lessonToDelete) {
+    private Person updatePersonLessons(Person person, List<Lesson> updatedLessons) {
         assert person != null;
-        assert lessonToDelete != null;
-        Set<Lesson> updatedLessons = new HashSet<>(person.getLessons());
-        updatedLessons.remove(lessonToDelete);
+        assert updatedLessons != null;
         return new Person(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(),
                 person.getTelegramUsername(), person.getTags(), updatedLessons, person.getRemarkList());
+    }
+
+    private String generateResultMessage(Person personToUpdate, List<Lesson> deletedLessons) {
+        return String.format(MESSAGE_SUCCESS, personToUpdate.getName(), formatLessonList(deletedLessons));
+    }
+
+    private String formatLessonList(List<Lesson> lessons) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < lessons.size(); i++) {
+            sb.append(i + 1).append(". ").append(lessons.get(i).toString());
+            if (i < lessons.size() - 1) {
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    private String generateInvalidIndexMessage(List<Index> invalidIndices) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < invalidIndices.size(); i++) {
+            sb.append(invalidIndices.get(i).getOneBased());
+            if (i < invalidIndices.size() - 1) {
+                sb.append(", ");
+            }
+        }
+        return String.format(MESSAGE_INVALID_LESSON_INDEX, sb.toString());
     }
 
     @Override
@@ -73,7 +108,7 @@ public class DeleteLessonCommand extends LessonCommand {
 
         DeleteLessonCommand otherDeleteLessonCommand = (DeleteLessonCommand) other;
         return personIndex.equals(otherDeleteLessonCommand.personIndex)
-                && lessonIndex.equals(otherDeleteLessonCommand.lessonIndex);
+                && lessonIndices.equals(otherDeleteLessonCommand.lessonIndices);
     }
 
 }
