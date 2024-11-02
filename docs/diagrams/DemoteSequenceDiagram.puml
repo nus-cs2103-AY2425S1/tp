@@ -8,9 +8,6 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DemoteCommandParser" as DemoteCommandParser LOGIC_COLOR
 participant "d:DemoteCommand" as DemoteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
-participant "p:Person" as Person LOGIC_COLOR
-participant "d:Person" as Person1 LOGIC_COLOR
-participant ":List" as List LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -55,33 +52,16 @@ activate DemoteCommand
 DemoteCommand -> Model : getFilteredPersonList()
 activate Model
 
-Create List
-Model --> List
-activate List
+Model --> DemoteCommand
 deactivate Model
 
-Create Person
-List -> Person : get(0)
-deactivate List
-activate Person
-
-Person --> DemoteCommand
-deactivate Person
-
-DemoteCommand -> DemoteCommand : createDemotedPerson(p)
+DemoteCommand -> DemoteCommand : createDemotedPerson(person)
 activate DemoteCommand
-
-Create Person1
-DemoteCommand -> Person1
-activate Person1
-
-Person1 --> DemoteCommand
-deactivate Person1
 
 DemoteCommand --> DemoteCommand
 deactivate DemoteCommand
 
-DemoteCommand -> Model : setPerson(p, d)
+DemoteCommand -> Model : setPerson(person, demotedPerson)
 activate Model
 
 Model --> DemoteCommand
