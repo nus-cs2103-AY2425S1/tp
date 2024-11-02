@@ -32,8 +32,6 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    private static final Image nameIcon =
-        new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/name.png"));
     private static final Image phoneIcon =
         new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/phone.png"));
     private static final Image emailIcon =
