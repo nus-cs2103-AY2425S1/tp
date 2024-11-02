@@ -24,7 +24,7 @@ public class UndoCommand extends Command {
             model.revertAddressBookVersion();
             return new CommandResult(MESSAGE_UNDO_SUCCESS);
         } catch (NoSuchElementException undoErr) {
-            return new CommandResult(MESSAGE_UNDO_FAILURE);
+            throw new CommandException(MESSAGE_UNDO_FAILURE);
         }
     }
 
