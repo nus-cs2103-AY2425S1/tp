@@ -41,6 +41,9 @@ public class UnpinCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
+        model.saveAddressBookVersion();
+
         Person personToUnpin = lastShownList.get(targetIndex.getZeroBased());
 
         model.unpinPerson(personToUnpin);
