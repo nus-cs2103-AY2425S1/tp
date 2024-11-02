@@ -142,38 +142,33 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_tagStudentWithNoSubjectsWithLevel() {
+    public void execute_tagStudentWithNoSubjectsWithLevel_success() {
+
+        //Remove subjects of student in address book
         Student studentInList = model.getAddressBook()
                 .getStudentList()
                 .get(INDEX_SECOND_STUDENT
                         .getZeroBased());
+        Student replaceStudent = new StudentBuilder(studentInList).withSubjects().build();
+        model.setStudent(studentInList, replaceStudent);
 
-        Student taggedStudent = new StudentBuilder(studentInList).withSubjects().build();
-
-        System.out.println(studentInList);
-        System.out.println(taggedStudent);
-
-        model.setStudent(studentInList, taggedStudent);
-
-        Student test = model.getAddressBook()
+        //Get new student for expected message
+        Student newStudent = model.getAddressBook()
                 .getStudentList()
                 .get(INDEX_SECOND_STUDENT
                         .getZeroBased());
 
-        Name testName = test.getName();
+        Name studentName = newStudent.getName();
 
-        System.out.println(test);
-
-        Student finalRest = new StudentBuilder(test).withLevel("S3 NA").build();
+        //Student after being updated with new Level
+        Student finalStudent = new StudentBuilder(newStudent).withLevel("S3 NA").build();
 
         UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withLevel("S3 NA").build();
-        TagCommand testTagCommand = new TagCommand(testName, descriptor);
+        TagCommand tagCommand = new TagCommand(studentName, descriptor);
         String expectedMessage = String.format(TagCommand.MESSAGE_TAG_STUDENT_SUCCESS,
-                Messages.format(finalRest));
+                Messages.format(finalStudent));
 
-
-        assertCommandSuccess(testTagCommand, model, expectedMessage, UiState.DETAILS, model);
-
+        assertCommandSuccess(tagCommand, model, expectedMessage, UiState.DETAILS, model);
     }
 
     @Test

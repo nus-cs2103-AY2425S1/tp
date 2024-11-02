@@ -169,6 +169,36 @@ public class UpdateCommandTest {
     }
 
     @Test
+    public void execute_updateStudentWithNoSubjectsWithLevel_success() {
+
+        //Remove subjects of student in address book
+        Student studentInList = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased());
+        Student replaceStudent = new StudentBuilder(studentInList).withSubjects().build();
+        model.setStudent(studentInList, replaceStudent);
+
+        //Get new student for expected message
+        Student newStudent = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased());
+
+        Name studentName = newStudent.getName();
+
+        //Student after being updated with new Level
+        Student finalStudent = new StudentBuilder(newStudent).withLevel("S3 NA").build();
+
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withLevel("S3 NA").build();
+        UpdateCommand updateCommand = new UpdateCommand(studentName, descriptor);
+        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS,
+                Messages.format(finalStudent));
+
+        assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, model);
+    }
+
+    @Test
     public void execute_invalidLevelForStudentSubjects_failure() throws CommandException {
 
         Name studentInList = model.getAddressBook()
