@@ -9,7 +9,7 @@ participant "argmap:ArgumentMultimap" as ArgumentMultimap LOGIC_COLOR
 participant "ParserUtil" as ParserUtil <<class>> LOGIC_COLOR
 end box
 
-group sd tokenise and create person attributes
+group sd parse and create Person parameters
 
 AddCommandParser -> ArgumentTokeniser : tokenize("-n John -p 98765432 -e john@gmail.com -l Brown Street \n -r Busy -t Friend", PREFIX_NAME, PREFIX_PHONE, \n PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_TAG, PREFIX_REMARK)
 activate ArgumentTokeniser

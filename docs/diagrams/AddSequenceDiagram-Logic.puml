@@ -33,7 +33,7 @@ AddressBookParser -> AddCommandParser : parse("-n John")
 activate AddCommandParser
 
 
-ref over AddCommandParser: tokenise and create person attributes
+ref over AddCommandParser: parse and create Person parameters
 
 create Person
 AddCommandParser -> Person
