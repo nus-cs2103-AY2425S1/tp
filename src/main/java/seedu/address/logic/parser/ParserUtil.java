@@ -128,7 +128,13 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        final Set<String> tagKeys = new HashSet<>();
         for (String tagName : tags) {
+            Tag tag = parseTag(tagName);
+            String key = tag.tagName;
+            if (!tagKeys.add(key)) {
+                throw new ParseException("Duplicate tag key found: " + key);
+            }
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
