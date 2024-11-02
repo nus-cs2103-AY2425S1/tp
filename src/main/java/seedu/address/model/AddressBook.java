@@ -104,7 +104,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setContact(Contact target, Contact editedContact) {
         requireNonNull(editedContact);
-
         contacts.setContact(target, editedContact);
     }
 
@@ -115,6 +114,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeContact(Contact key) {
         contacts.remove(key);
     }
+
+    /*
+    public int calculateContactCount() {
+        return contacts.size();
+    }*/
 
     //// util methods
 

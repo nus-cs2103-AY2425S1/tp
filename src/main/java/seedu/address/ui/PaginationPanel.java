@@ -24,7 +24,7 @@ public class PaginationPanel extends Pagination {
     public PaginationPanel(ObservableList<Contact> contactList) {
         super();
         this.contactList = contactList;
-        this.contactList.addListener(this::onListItemsChanged);
+        this.contactList.addListener(this::onListItemsChanged); // enables UI update to ContactPagination
         this.initPagination();
     }
 
@@ -41,7 +41,7 @@ public class PaginationPanel extends Pagination {
         final int minPageCount = 1;
         int pageCount = Math.max((int) Math.ceil((double) contactList.size() / ROWS_PER_PAGE), minPageCount);
         this.setPageCount(pageCount);
-        this.setStyle("-fx-page-information-alignment: right;");
+        this.setStyle("-fx-page-information-alignment: bottom;");
         this.setPageFactory(this::createPage);
     }
 

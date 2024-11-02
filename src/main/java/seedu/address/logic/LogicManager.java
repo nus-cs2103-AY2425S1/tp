@@ -72,6 +72,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Contact> getAllContactList() {
+        return model.getAllContactList();
+    }
+
+    /*
+    public int getContactSize() {
+        return model.getAddressBookSize();
+    }*/
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }

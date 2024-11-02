@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Contact> filteredContacts;
+    private final ObservableList<Contact> allContacts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +35,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
+        allContacts = this.addressBook.getContactList();
     }
 
     public ModelManager() {
@@ -108,20 +110,29 @@ public class ModelManager implements Model {
     @Override
     public void deleteContact(Contact target) {
         addressBook.removeContact(target);
+        //updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        //updateAllContactList();
+        //addressBookSize--;
     }
 
     @Override
     public void addContact(Contact contact) {
         addressBook.addContact(contact);
-        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        //updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS); //not the one influencing number
+        //updateAllContactList(); // does influence the number
+        //addressBookSize++;
     }
 
     @Override
     public void setContact(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);
-
         addressBook.setContact(target, editedContact);
     }
+
+    /*
+    public int getAddressBookSize() {
+        return this.addressBookSize;
+    }*/
 
     //=========== Filtered Contact List Accessors =============================================================
 
@@ -135,10 +146,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Contact> getAllContactList() {
+        return allContacts;
+    }
+
+    @Override
     public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
         filteredContacts.setPredicate(predicate);
     }
+
 
     @Override
     public boolean equals(Object other) {

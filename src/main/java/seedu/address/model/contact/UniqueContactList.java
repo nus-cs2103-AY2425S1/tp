@@ -30,6 +30,8 @@ public class UniqueContactList implements Iterable<Contact> {
     private final ObservableList<Contact> internalList = FXCollections.observableArrayList();
     private final ObservableList<Contact> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList.sorted(new ComparatorName()));
+    /*private final ObservableList<Contact> internalUnmodifiableListAll =
+            FXCollections.unmodifiableObservableList(internalList);*/
 
     /**
      * Returns true if the list contains an equivalent contact as the given argument.
@@ -133,6 +135,12 @@ public class UniqueContactList implements Iterable<Contact> {
         return internalUnmodifiableList;
     }
 
+    /*
+    public ObservableList<Contact> asUnmodifiableObservableListAll() {
+        return internalUnmodifiableListAll;
+    }*/
+
+
     @Override
     public Iterator<Contact> iterator() {
         return internalList.iterator();
@@ -176,4 +184,9 @@ public class UniqueContactList implements Iterable<Contact> {
         }
         return true;
     }
+
+    /*
+    public int size() {
+        return internalList.size();
+    }*/
 }
