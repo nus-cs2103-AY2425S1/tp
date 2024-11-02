@@ -7,7 +7,8 @@
         "amount": "10.00"
       },
       "description": "Paid John for lunchdate/23012024",
-      "date": "13102024"
+      "date": "13102024",
+      "isDone": false
     },
     {
       "id": "e2c93a3d-44f9-4b4b-8b5f-c5cd6f98e45a",
@@ -16,7 +17,8 @@
         "amount": "invalid amount"
       },
       "description": "Purchased office supplies/01022025",
-      "date": "05012025"
+      "date": "05012025",
+      "isDone": true
     }
   ]
 }

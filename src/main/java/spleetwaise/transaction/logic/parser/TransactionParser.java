@@ -13,6 +13,8 @@ import spleetwaise.transaction.logic.commands.DeleteCommand;
 import spleetwaise.transaction.logic.commands.EditCommand;
 import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.logic.commands.ListCommand;
+import spleetwaise.transaction.logic.commands.MarkCommand;
+import spleetwaise.transaction.logic.commands.UnmarkCommand;
 
 /**
  * Parses user input.
@@ -60,6 +62,10 @@ public class TransactionParser {
             return new DeleteCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+        case UnmarkCommand.COMMAND_WORD:
+            return new UnmarkCommandParser().parse(arguments);
         default:
             return null;
         }

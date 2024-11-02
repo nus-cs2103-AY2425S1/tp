@@ -23,11 +23,11 @@ import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.Messages;
-import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -91,9 +91,10 @@ public class EditCommand extends Command {
         Amount amount = editTransactionDescriptor.getAmount().orElse(txnToEdit.getAmount());
         Description description = editTransactionDescriptor.getDescription().orElse(txnToEdit.getDescription());
         Date date = editTransactionDescriptor.getDate().orElse(txnToEdit.getDate());
+        Status status = editTransactionDescriptor.getStatus().orElse(txnToEdit.getStatus());
         Set<Category> categories = editTransactionDescriptor.getCategories().orElse(txnToEdit.getCategories());
 
-        return new Transaction(id, person, amount, description, date, categories);
+        return new Transaction(id, person, amount, description, date, categories).setStatus(status);
     }
 
     public EditTransactionDescriptor getDescriptor() {
@@ -117,7 +118,7 @@ public class EditCommand extends Command {
         }
 
         model.setTransaction(txnToEdit, editedTxn);
-        model.updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
+        model.updateFilteredTransactionList();
         return new CommandResult(String.format(MESSAGE_EDIT_TXN_SUCCESS, editedTxn));
     }
 
@@ -153,6 +154,7 @@ public class EditCommand extends Command {
         private Description description;
         private Date date;
         private Set<Category> categories;
+        private Status status;
 
         public EditTransactionDescriptor() {
         }
@@ -166,6 +168,7 @@ public class EditCommand extends Command {
             setAmount(toCopy.amount);
             setDescription(toCopy.description);
             setDate(toCopy.date);
+            setStatus(toCopy.status);
             if (toCopy.categories != null) {
                 setCategories(new HashSet<>(toCopy.categories));
             }
@@ -218,6 +221,14 @@ public class EditCommand extends Command {
             this.date = date;
         }
 
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
         /**
          * Returns an unmodifiable category set, which throws {@code UnsupportedOperationException} if modification is
          * attempted. Returns {@code Optional#empty()} if {@code categories} is null.
@@ -246,6 +257,7 @@ public class EditCommand extends Command {
                     && Objects.equals(amount, otherEditTransactionDescriptor.amount)
                     && Objects.equals(description, otherEditTransactionDescriptor.description)
                     && Objects.equals(date, otherEditTransactionDescriptor.date)
+                    && Objects.equals(status, otherEditTransactionDescriptor.status)
                     && Objects.equals(categories, otherEditTransactionDescriptor.categories);
         }
 
@@ -257,6 +269,7 @@ public class EditCommand extends Command {
                     .add("amount", amount)
                     .add("description", description)
                     .add("date", date)
+                    .add("status", status)
                     .add("categories", categories)
                     .toString();
         }

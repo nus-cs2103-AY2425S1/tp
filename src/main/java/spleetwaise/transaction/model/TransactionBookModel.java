@@ -38,6 +38,12 @@ public interface TransactionBookModel {
     ObservableList<Transaction> getFilteredTransactionList();
 
     /**
+     * Updates the filter of the filtered transaction list to reuse existing filter. By default, existing filter is show
+     * all transactions.
+     */
+    void updateFilteredTransactionList();
+
+    /**
      * Updates the filter of the filtered transaction list to filter by the given {@code predicate}. Set to null to
      * clear existing filters.
      */

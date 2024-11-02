@@ -75,7 +75,8 @@ public class EditTransactionDescriptorTest {
                         .orElse(null) + ", person=" + editTransactionDescriptor.getPerson().orElse(null) + ", amount"
                         + "=" + editTransactionDescriptor.getAmount().orElse(null) + ", description="
                         + editTransactionDescriptor.getDescription().orElse(null) + ", date="
-                        + editTransactionDescriptor.getDate().orElse(null) + ", categories="
+                        + editTransactionDescriptor.getDate().orElse(null) + ", status="
+                        + editTransactionDescriptor.getStatus().orElse(null) + ", categories="
                         + editTransactionDescriptor.getCategories().orElse(null) + "}";
         assertEquals(expected, editTransactionDescriptor.toString());
     }

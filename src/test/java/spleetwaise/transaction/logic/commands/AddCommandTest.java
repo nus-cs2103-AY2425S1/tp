@@ -29,6 +29,7 @@ import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 public class AddCommandTest {
@@ -38,6 +39,7 @@ public class AddCommandTest {
     private static final Amount testAmount = new Amount("1.23");
     private static final Description testDescription = new Description("description");
     private static final Date testDate = new Date("01012024");
+    private static final Status testStatus = new Status(false);
     private static final Set<Category> testCategories = new HashSet<>(List.of(new Category("FOOD")));
     private static final Transaction testTxn = new Transaction(
             testPerson, testAmount, testDescription, testDate, testCategories);
@@ -77,8 +79,9 @@ public class AddCommandTest {
         assertFalse(CommonModel.getInstance().getTransactionBook().getTransactionList().isEmpty());
 
         String expectedString = String.format(
-                "%s(%s): %s on %s for $%s with categories: %s",
+                "%s [%s] (%s): %s on %s for $%s with categories: %s",
                 testPerson.getName(),
+                testStatus,
                 testPerson.getPhone(),
                 testDescription, testDate, testAmount, testCategories
         );

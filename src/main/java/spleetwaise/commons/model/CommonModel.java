@@ -185,6 +185,12 @@ public class CommonModel implements Model {
     }
 
     @Override
+    public void updateFilteredTransactionList() {
+        requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
+        transactionBookModel.updateFilteredTransactionList();
+    }
+
+    @Override
     public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
         requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
         transactionBookModel.updateFilteredTransactionList(predicate);

@@ -20,6 +20,7 @@ import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -31,7 +32,7 @@ public class EditCommandTest {
 
     @BeforeEach
     void setUp() {
-        CommonModel.initialise(model, null);
+        CommonModel.initialise(model, new TransactionBookModelManager());
     }
 
     @Test

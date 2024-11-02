@@ -18,6 +18,7 @@ import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -49,6 +50,10 @@ public class JsonAdaptedTransaction {
      */
     private final String date;
     /**
+     * The done status of the transaction.
+     */
+    private final boolean isDone;
+    /**
      * The List of the categories.
      */
     private final List<JsonAdaptedCategory> categories = new ArrayList<>();
@@ -65,6 +70,7 @@ public class JsonAdaptedTransaction {
             @JsonProperty("amount") JsonAdaptedAmount amount,
             @JsonProperty("description") String description,
             @JsonProperty("date") String date,
+            @JsonProperty("isDone") boolean isDone,
             @JsonProperty("categories") List<JsonAdaptedCategory> categories
     ) {
         this.id = id;
@@ -72,6 +78,7 @@ public class JsonAdaptedTransaction {
         this.amount = amount;
         this.description = description;
         this.date = date;
+        this.isDone = isDone;
         if (categories != null) {
             this.categories.addAll(categories);
         }
@@ -88,6 +95,7 @@ public class JsonAdaptedTransaction {
         this.amount = new JsonAdaptedAmount(transaction.getAmount());
         this.description = transaction.getDescription().toString();
         this.date = transaction.getDate().getDate().format(Date.VALIDATION_FORMATTER);
+        this.isDone = transaction.getStatus().isDone();
         this.categories.addAll(transaction.getCategories().stream().map(JsonAdaptedCategory::new)
                 .toList());
     }
@@ -129,6 +137,15 @@ public class JsonAdaptedTransaction {
     }
 
     /**
+     * Retrieves the done status of the transaction.
+     *
+     * @return The done status of the transaction
+     */
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    /**
      * Converts the JSON adapter back into a Transaction object.
      *
      * @return the deserialized Transaction object
@@ -141,6 +158,7 @@ public class JsonAdaptedTransaction {
         final Amount a;
         final Description d;
         final Date dt;
+        final Status s;
         final List<Category> txnCategories = new ArrayList<>();
 
         for (JsonAdaptedCategory cat : categories) {
@@ -183,8 +201,10 @@ public class JsonAdaptedTransaction {
         a = amount.toModelType();
         d = new Description(description);
         dt = new Date(date);
+        s = new Status(isDone);
         Set<Category> mc = new HashSet<>(txnCategories);
 
-        return new Transaction(id, p, a, d, dt, mc);
+        Transaction txn = new Transaction(id, p, a, d, dt, mc);
+        return txn.setStatus(s);
     }
 }

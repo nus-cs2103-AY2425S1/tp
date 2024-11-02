@@ -5,6 +5,7 @@ import java.util.List;
 
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.transaction.model.TransactionBook;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -22,7 +23,7 @@ public class TypicalTransactions {
             new TransactionBuilder().withPerson(TypicalPersons.BOB).withAmount("1000000.00")
                     .withDescription("Jenkins owed me for a loan of $1,000,000").withDate("11102025")
                     .withId("e2c93a3d-44f9-4b4b-8b5f-c5cd6f98e45a")
-                    .build();
+                    .build().setStatus(new Status(true));
 
     public static final Transaction CARLBUYING =
             new TransactionBuilder().withPerson(TypicalPersons.CARL).withAmount("-5000.00")
