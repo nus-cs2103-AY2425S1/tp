@@ -51,6 +51,8 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+        model.setIsArchivedList(false);
+        model.setArchivedListMode(false);
         commandResult = command.execute(model);
 
         try {

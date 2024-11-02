@@ -63,8 +63,6 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.setIsArchivedList(false);
-        model.setArchivedListMode(false);
         List<Person> lastShownList = model.getFilteredPersonList();
         if (targetName == null) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {

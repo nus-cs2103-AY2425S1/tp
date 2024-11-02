@@ -48,7 +48,8 @@ public class AddCommand extends Command {
             + PREFIX_CLIENT_STATUS + "active";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in either the address book "
+            + "or the archived address book.";;
 
     private final Person toAdd;
 
@@ -67,8 +68,6 @@ public class AddCommand extends Command {
         if (model.hasPerson(toAdd) || model.hasArchivedPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        model.setIsArchivedList(false);
-        model.setArchivedListMode(false);
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

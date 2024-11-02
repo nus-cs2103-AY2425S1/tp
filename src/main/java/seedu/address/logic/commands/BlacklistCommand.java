@@ -56,8 +56,6 @@ public class BlacklistCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.setIsArchivedList(false);
-        model.setArchivedListMode(false);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
