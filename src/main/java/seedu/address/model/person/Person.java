@@ -128,6 +128,13 @@ public class Person {
     }
 
     /**
+     * Overwrites the person's tag set.
+     */
+    public Person setAllTags(Set<Tag> tagSet) {
+        return new Person(this.name, this.phone, this.email, tagSet);
+    }
+
+    /**
      * Returns true if person contain any tag in the new tag set.
      */
     public boolean containsDuplicateTag(Set<? extends Tag> tagSet) {
