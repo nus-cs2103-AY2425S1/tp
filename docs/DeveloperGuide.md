@@ -297,14 +297,14 @@ A wedding planner who:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                    | I want to …​                                                                                           | So that I can…​                                                                  |
-|----------|----------------------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | forgetful wedding planner  | add a new guest/vendor into the contact list                                                           | easily track and manage guests/vendors for the wedding                           |
-| `* * *`  | organized wedding planner  | view a list of guests/vendors                                                                          | easily access and reference their details                                        |
-| `* * *`  | organized wedding planner  | delete a guest/vendor contact that I no longer need                                                    | keep my contact list organised and clutter-free                                  |
-| `* * *`  | meticulous wedding planner | edit the details of an existing guest/vendor in the contact list                                       | correct mistakes and ensure that all information remains accurate and up-to-date |
-| `* *`    | organized wedding planner  | find guests based on specific attributes (e.g. name, phone, email, address, rsvp status, relationship) | efficiently retrieve guest details when required                                 |
-| `* *`    | organized wedding planner  | find vendors based on specific attributes (e.g. name, phone, email, address, company, budget)          | efficiently retrieve vendor details when required                                |
+| Priority | As a …​                     | I want to …​                                                     | So that I can…​                                                                  |
+|----------|-----------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | forgetful wedding planner   | add a new guest/vendor into the contact list                     | easily track and manage guests/vendors for the wedding                           |
+| `* * *`  | organized wedding planner   | view a list of guests/vendors                                    | easily access and reference their details                                        |
+| `* * *`  | organized wedding planner   | delete a guest/vendor contact that I no longer need              | keep my contact list organised and clutter-free                                  |
+| `* * *`  | meticulous wedding planner  | edit the details of an existing guest/vendor in the contact list | correct mistakes and ensure that all information remains accurate and up-to-date |
+| `* *`    | organized wedding planner   | find guests/vendors based on specific attributes                 | efficiently retrieve guest/vendor details when required                          |
+| `* *`    | data-driven wedding planner | view wedding statistics (number of guests/vendors/total people)  | quickly assess the current status of wedding planning                            |
 
 ### Use cases
 
@@ -370,27 +370,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
-**Use Case: Categorise Persons**
-
-**MSS**
-1. User requests to categorise a person (e.g., family, friends, coworkers).
-2. System assigns attendees to the category.
-
-   Use case ends.
-
-**Extensions**
-* 1a. User tries to create a duplicate category.
-    * 1a1. System shows an error message.
-
-      Use case ends.
-
-* 1b. The input command was invalid (i.e. spelling error, etc.).
-    * 1b1. System tells the user the command is unrecognised.
-
-      Use case ends.
-
-
 **Use Case: Search and Filter Persons**
 
 **MSS**
@@ -412,33 +391,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use Case: Get statistics**
+
+**MSS**
+1. User requests to get statistics of entries.
+2. System displays the statistics.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The input command was invalid (i.e. spelling error, etc.).
+    * 1a1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
-Data Requirements
+**Data Requirements**
 1. Size: The system should support storage for up to 500 guests and 50 vendors per wedding. Data size should not exceed 10 MB for each wedding event.
-2. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
-3. Persistency: All guest, vendor, and event information must be saved persistently in a text file and remain accessible even after system shutdown or failure.
-4. Backup Frequency: Automatic backups of data should be created whenever the application is closed.
+1. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
+1. Persistency: All guest, vendor, and event information must be saved persistently in a text file and remain accessible even after system shutdown or failure.
+1. Backup Frequency: Automatic backups of data should be created whenever the application is closed.
 
-Environment Requirements
+**Environment Requirements**
+1. Operating System: The system must be compatible with Windows, macOS, and Linux operating systems.
+1. Dependencies: Java 17 should be the core language.
 
-5. Operating System: The system must be compatible with Windows, macOS, and Linux operating systems.
-6. Dependencies: Java 17 should be the core language.
+**Accessibility**
+1. Provide command-line help documentation that can be accessed at any time with a simple command (help).
 
-Accessibility
-7. Provide command-line help documentation that can be accessed at any time with a simple command (help).
+**Capacity**
+1. The system should be able to handle data storage for up to 100 simultaneous weddings, each containing up to 500 guests and 50 vendors.
 
-Capacity
-8. The system should be able to handle data storage for up to 100 simultaneous weddings, each containing up to 500 guests and 50 vendors.
+**Fault Tolerance**
 
-Fault Tolerance
-9. The system should handle errors such as missing commands or invalid input gracefully, providing clear error messages without causing system crashes.
-10. Ensure that invalid input (e.g., incorrect phone format) does not result in data corruption.
+1. The system should handle errors such as missing commands or invalid input gracefully, providing clear error messages without causing system crashes.
+1. Ensure that invalid input (e.g., incorrect phone format) does not result in data corruption.
 
-Performance Requirements
-11. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors.
-12. Backup operations must complete within five seconds for a wedding list of up to 500 entries.
-13. System startup time should not exceed five seconds on standard hardware.
+**Performance Requirements**
+
+1. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors.
+1. Backup operations must complete within five seconds for a wedding list of up to 500 entries.
+1. System startup time should not exceed five seconds on standard hardware.
 
 
 ### Glossary
