@@ -24,6 +24,7 @@
             {% assign content_with_toc = headings.content | markdownify %}
             {% for heading in content_with_toc | split: '<h' %}
             {% if forloop.index0 > 0 %}
+            <li> <a href="{{ item.url }}">{{ item.path }}</a> </li>
             {% assign heading_parts = heading | split: '>' %}
             {% if heading_parts.size > 1 %}
             <li>
