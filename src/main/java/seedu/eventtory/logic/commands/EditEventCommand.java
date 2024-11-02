@@ -138,7 +138,7 @@ public class EditEventCommand extends EditCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date);
+            return CollectionUtil.isAnyNonNull(name, date, tags);
         }
 
         public void setName(Name name) {
