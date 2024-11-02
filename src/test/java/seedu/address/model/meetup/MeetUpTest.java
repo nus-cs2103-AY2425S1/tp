@@ -31,7 +31,7 @@ public class MeetUpTest {
 
         // name, from, to same but info different -> returns true
         MeetUp editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP)
-                .withName(VALID_MEETUP_NAME_PITCH)
+                .withSubject(VALID_MEETUP_NAME_PITCH)
                 .withFrom(VALID_MEETUP_FROM_PITCH)
                 .withTo(VALID_MEETUP_TO_PITCH)
                 .withAddedBuyers(VALID_MEETUP_ADDED_PERSON_ALEX).build();
@@ -39,12 +39,12 @@ public class MeetUpTest {
 
         // name differs in case, all other attributes same -> returns false
         editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP)
-                .withName(VALID_MEETUP_NAME_NETWORKING.toLowerCase()).build();
+                .withSubject(VALID_MEETUP_NAME_NETWORKING.toLowerCase()).build();
         assertFalse(NETWORKING_MEETUP.isSameMeetUp(editedNetWorkingMeetUp));
 
         // name have trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_MEETUP_NAME_NETWORKING + " ";
-        editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP).withName(nameWithTrailingSpaces).build();
+        editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP).withSubject(nameWithTrailingSpaces).build();
         assertFalse(NETWORKING_MEETUP.isSameMeetUp(editedNetWorkingMeetUp));
     }
 
@@ -67,7 +67,7 @@ public class MeetUpTest {
         assertFalse(PITCH_MEETUP.equals(NETWORKING_MEETUP));
 
         // different name -> returns false
-        MeetUp editedPitchMeetUp = new MeetUpBuilder(PITCH_MEETUP).withName(VALID_MEETUP_NAME_NETWORKING).build();
+        MeetUp editedPitchMeetUp = new MeetUpBuilder(PITCH_MEETUP).withSubject(VALID_MEETUP_NAME_NETWORKING).build();
         assertFalse(PITCH_MEETUP.equals(editedPitchMeetUp));
 
         // different info -> returns false
@@ -89,7 +89,7 @@ public class MeetUpTest {
 
     @Test
     public void toStringMethod() {
-        String expected = MeetUp.class.getCanonicalName() + "{name=" + PITCH_MEETUP.getName() + ", info="
+        String expected = MeetUp.class.getCanonicalName() + "{subject=" + PITCH_MEETUP.getSubject() + ", info="
                 + PITCH_MEETUP.getInfo() + ", from=" + PITCH_MEETUP.getFrom() + ", to=" + PITCH_MEETUP.getTo()
                 + ", addedBuyers=" + PITCH_MEETUP.getAddedBuyers() + "}";
         assertEquals(expected, PITCH_MEETUP.toString());

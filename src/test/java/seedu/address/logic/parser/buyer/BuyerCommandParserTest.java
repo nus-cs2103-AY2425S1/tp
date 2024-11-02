@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -78,7 +79,7 @@ public class BuyerCommandParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(FindCommand.COMMAND_WORD + " "
+        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(FindCommand.COMMAND_WORD + " " + PREFIX_NAME
                 + keywords.stream().collect(Collectors.joining(" ")));
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

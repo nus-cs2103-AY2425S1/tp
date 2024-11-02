@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 
 public class JsonAdaptedMeetUpTest {
@@ -24,7 +24,7 @@ public class JsonAdaptedMeetUpTest {
     private static final String INVALID_TO = "2023-02-31 37:78";
     private static final String INVALID_ADDED_BUYER = "A!l*x";
 
-    private static final String VALID_NAME = FIRST_MEETUP.getName().toString();
+    private static final String VALID_NAME = FIRST_MEETUP.getSubject().toString();
     private static final String VALID_INFO = FIRST_MEETUP.getInfo().toString();
     private static final String VALID_FROM = FIRST_MEETUP.getFrom().toString();
     private static final String VALID_TO = FIRST_MEETUP.getTo().toString();
@@ -42,14 +42,14 @@ public class JsonAdaptedMeetUpTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(INVALID_NAME, VALID_INFO, VALID_FROM, VALID_TO,
                 VALID_ADDED_BUYER);
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Subject.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, meetUp::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(null, VALID_INFO, VALID_FROM, VALID_TO, VALID_ADDED_BUYER);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, meetUp::toModelType);
     }
 

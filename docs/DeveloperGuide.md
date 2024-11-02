@@ -124,16 +124,13 @@ call as an example.
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to the `Abcli Parser` class.
-2. The `Abcli Parser` class then creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to
-   parse the command. The type of parser that is created is dependent on the mode of the static `currentParser` field
-   in `Abcli Parser` (e.g., when in MeetUp mode, `Abcli Parser` will create a `DeleteCommandParser` for the `MeetUp`
-   class, while in Buyer mode, `Abcli Parser` will create a `DeleteCommandParser` for the `Person` class)
-3. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
-   is executed by the `LogicManager`.
-4. The command can communicate with the `Model` when it is executed (e.g. to delete a buyer).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
-   several interactions (between the command object and the `Model`) to achieve.
-5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+2. The `Abcli Parser` class then creates either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser` according to its current mode
+3. The created CommandParser then creates another parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command. The type of parser created here is dependent on the CommandParser created in step 2, e.g. a `MeetUpCommandParser` will create a `DeleteCommandParser` for the `MeetUp` class, while a `BuyerCommandParser` will create a `DeleteCommandParser` for the `Buyer` class.
+4. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+5. The command can communicate with the `Model` when it is executed (e.g. to delete a buyer).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -141,12 +138,9 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `Abcli Parser` class calls on the `Command Parser` class to create
-  an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the
-  other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which
-  the `BuyerListParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `Abcli Parser` class creates a `BMPCommandParser` (`BMP` is a placeholder for the different mode of parsers, either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser`). The created BMPCommandParser then creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AbcliParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g. during testing.
+* All `BMPCommandParser` classes (`BuyerCommandParser`, `MeetUpCommandParser`, and `PropertyCommandParser`) extends the `CommandParser` class so that all of them have access to general commands e.g. `HelpCommand`, ...
 
 ### Model component
 
@@ -314,7 +308,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix: Product Details**
 
 ### Product scope
 
@@ -478,18 +472,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 </details>
 
 ### Non-Functional Requirements
+1. ABCLI should be a result of evolving/enhancing/morphing the given codebase.
 
-1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 buyers without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+1. ABCLI should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+
+1. ABCLI should be able to hold up to 1000 buyers without a noticeable sluggishness in performance for typical usage.
+
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
+1. ABCLI should be targeting users who can type fast and prefer typing to other means of input.
 
-### Glossary
+1. ABCLI should be for a single user.
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+1. ABCLI needs to be developed in a breadth-first incremental manner over the project duration.
+
+1. ABCLI's data should be stored locally and should be in a human editable text file.
+
+1. ABCLI cannot use a DBMS to store data.
+
+1. ABCLI should follow the Object-oriented paradigm primarily.
+
+1. ABCLI should work on the Windows, Linux, and OS-X platforms.
+
+1. ABCLI should work on a computer that has version 17 of Java.
+
+1. ABCLI should work without requiring an installer.
+
+1. ABCLI should not depend on your own remote server.
+
+1. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source, and have permissive license terms and do not require any installation by users and do not violate other constraints.
+
+1. The GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%. In addition, the GUI should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
+
+1. ABCLI has to be packaged into a single JAR file.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -625,68 +641,58 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing / corrupted data files
+   1. Under the `data` section, delete 1 or more of the data files before starting the application. 
+      Expected: The program will automatically populate the `data` folder with a sample file.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Under the `data` section, add a new parameter into one of the entries in any file.  
+      Expected: The program will ignore any saved data from that file and open an empty file.
 
-1. _{ more test cases …​ }_
-
-### Non-Functional Requirements
-
-1. ABCLI should be a result of evolving/enhancing/morphing the given codebase.
-
-1. ABCLI should be targeting users who can type fast and prefer typing over other means of input.
-
-1. ABCLI should be for a single user.
-
-1. ABCLI needs to be developed in a breadth-first incremental manner over the project duration.
-
-1. ABCLI's data should be stored locally and should be in a human editable text file.
-
-1. ABCLI cannot use a DBMS to store data.
-
-1. ABCLI should follow the Object-oriented paradigm primarily.
-
-1. ABCLI should work on the Windows, Linux, and OS-X platforms.
-
-1. ABCLI should work on a computer that has version 17 of Java.
-
-1. ABCLI should work without requiring an installer.
-
-1. ABCLI should not depend on your own remote server.
-
-1. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source, and have
-   permissive license terms and do not require any installation by users and do not violate other constraints.
-
-1. The GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%. In
-   addition, the GUI should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
-
-1. ABCLI has to be packaged into a single JAR file.
+## **Appendix: Glossary**
 
 ### Glossary
+1. **ABCLI**  
+Our product name.
 
-1. **ABCLI**
-   Our product name.
+1. **CLI**  
+The command line interface is a way to interact with a computer by typing text commands instead of using a mouse to click on icons.
 
-1. **CLI**
-   The command line interface is a way to interact with a computer by typing text commands instead of using a mouse to
-   click on icons.
+1. **Command Line**  
+A text box where you enter commands.
 
-1. **Command Line**
-   A text box where you enter commands.
+1. **Database Management System (DBMS)**  
+A Database Management System (DBMS) is software that allows users to create, manage, and manipulate databases efficiently. It provides tools for data storage, retrieval, and security, enabling multiple users to access and interact with data in an organized way.
 
-1. **Flag**
-   In our context, a flag is something preceded by a /, but is not the initial command. e.g in `add n/NAME`,  `n/` is a
-   flag but `add` is not.
+1. **Flag**  
+In our context, a flag is something preceded by a /, but is not the initial command. e.g in `add n/NAME`,  `n/` is a flag but `add` is not.
 
-1. **GUI**
-   Graphical user interface. The screen you see when opening the application.
+1. **GUI**  
+Graphical user interface. The screen you see when opening the application.
 
-1. [**Java**](https://www.java.com/en/)
-   A programming language.
+1. **JAR file**  
+A JAR (Java ARchive) file is a compressed package that bundles multiple Java classes and resources for easier distribution and deployment. It can also be executable if it contains a Main-Class entry, allowing it to be run directly on any system with a Java Runtime Environment (JRE).
 
-1. **Parameter**
-   A value that you need to provide for the command to work. e.g in `add n/NAME`, `NAME` is a parameter.
+1. [**Java**](https://www.java.com/en/)  
+A programming language.
 
-1. [**Windows**](https://en.wikipedia.org/wiki/Microsoft_Windows)
-   An operating system.
+1. **JavaFX**  
+JavaFX is a Java library used to build rich, interactive graphical user interfaces (GUIs) for desktop applications. It provides tools for designing and styling UI components and supports modern features like 2D/3D graphics, animation, and media playback.
+
+1. **Non-Functional Requirement**  
+A non-functional requirement specifies criteria that judge the operation of a system, such as performance, reliability, and usability. Unlike functional requirements, it focuses on how a system performs rather than what it does.
+
+1. **Object-Oriented Programming (OOP)**  
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which contain data and methods to manipulate that data. It emphasizes principles like encapsulation, inheritance, and polymorphism to build modular, reusable, and organized code.
+
+1. **Parameter**  
+A value that you need to provide for the command to work. e.g in `add n/NAME`, `NAME` is a parameter.
+
+1. **Plant UML**  
+PlantUML is a tool that allows users to create diagrams, such as UML diagrams, by writing simple, text-based descriptions that are then converted into visual representations. It supports a range of diagrams—like class, sequence, and activity diagrams—and is often used to quickly illustrate system designs or workflows.
+
+1. **Use Case**  
+A use case describes a specific way that a user interacts with a system to achieve a goal, often outlining steps from start to finish. It helps clarify system requirements by detailing the actions, conditions, and outcomes for each interaction scenario.
+
+1. [**Windows**](https://en.wikipedia.org/wiki/Microsoft_Windows)  
+An operating system.
+>>>>>>> 57ac2c9484b8bcc98c0eac87b857f0d23b708205

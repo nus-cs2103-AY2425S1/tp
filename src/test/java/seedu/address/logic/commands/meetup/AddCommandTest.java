@@ -62,8 +62,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        MeetUp meetUpA = new MeetUpBuilder().withName("meetUpA").build();
-        MeetUp meetUpB = new MeetUpBuilder().withName("meetUpB").build();
+        MeetUp meetUpA = new MeetUpBuilder().withSubject("meetUpA").build();
+        MeetUp meetUpB = new MeetUpBuilder().withSubject("meetUpB").build();
         AddCommand addMeetUpACommand = new AddCommand(meetUpA);
         AddCommand addMeetUpBCommand = new AddCommand(meetUpB);
 
