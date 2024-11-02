@@ -13,9 +13,14 @@ import seedu.address.model.ReadOnlyAddressBook;
 public interface AddressBookStorage {
 
     /**
-     * Returns the file path of the data file.
+     * Returns the file path of the data file to save data to.
      */
-    Path getAddressBookFilePath();
+    Path getAddressBookSaveFilePath();
+
+    /**
+     * Returns the file path of the data file to export data to.
+     */
+    Path getAddressBookExportFilePath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
@@ -26,7 +31,7 @@ public interface AddressBookStorage {
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getAddressBookSaveFilePath()
      */
     Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
 
@@ -41,5 +46,17 @@ public interface AddressBookStorage {
      * @see #saveAddressBook(ReadOnlyAddressBook)
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+
+    /**
+     * Exports the given {@link ReadOnlyAddressBook} into a .csv file.
+     * @param addressBook cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+
+    /**
+     * @see #exportAddressBook(ReadOnlyAddressBook)
+     */
+    void exportAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
 }

@@ -298,6 +298,17 @@ Examples:
 
 - `listing delete 1 1` deletes the `1`st property listing from the person with index `1`
 
+
+### Exporting your contacts : `export`
+
+Exports your contacts and their relevant data to a Comma-Separated Value (CSV) file format.
+
+Format: `export`
+
+- Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
+- If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
+- By default, the exported CSV file will be located in the "data" folder with the name "property.csv"
+
 ### Sorting all persons : `sort`
 
 Sorts the list of all persons in the address book by name in alphabetical order.
@@ -348,6 +359,8 @@ _Details coming soon ..._
 | **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
 | **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         |
 | **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                       |
+| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                  |
+| **List**           | `list`                                                                                                                                                                          |
 | **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag hdb buyer`                                                                                                                         |
 | **List**           | `list`                                                                                                                                                                          
 | **Add Listing**    | `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
@@ -356,6 +369,7 @@ _Details coming soon ..._
 | **Sort**           | `sort`                                                                                                                                                                          |
 | **Help**           | `help`                                                                                                                                                                          |
 | **Remark**         | `remark INDEX r/[REMARKS]`                                                                                                                                                      |
+| **Export**         | `export`                                                                                                                                                                        |
 
 --------------------------------------------------------------------------------------------------------------------
 

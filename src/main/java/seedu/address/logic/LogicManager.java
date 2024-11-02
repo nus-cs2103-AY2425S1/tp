@@ -59,6 +59,16 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
+        if (commandResult.isExport()) {
+            try {
+                storage.exportAddressBook(model.getAddressBook());
+            } catch (AccessDeniedException e) {
+                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+            }
+        }
+
         return commandResult;
     }
 
@@ -78,8 +88,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getAddressBookSaveFilePath() {
+        return model.getAddressBookSaveFilePath();
+    }
+
+    @Override
+    public Path getAddressBookExportFilePath() {
+        return model.getAddressBookExportFilePath();
     }
 
     @Override

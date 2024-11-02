@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.AddCommand.HELP_ADD_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.HELP_DELETE_COMMAND;
 import static seedu.address.logic.commands.EditCommand.HELP_EDIT_COMMAND;
 import static seedu.address.logic.commands.ExitCommand.HELP_EXIT_COMMAND;
+import static seedu.address.logic.commands.ExportCommand.HELP_EXPORT_COMMAND;
 import static seedu.address.logic.commands.FindCommand.HELP_FIND_COMMAND;
 import static seedu.address.logic.commands.FindTagCommand.HELP_FINDTAG_COMMAND;
 import static seedu.address.logic.commands.ListCommand.HELP_LIST_COMMAND;
@@ -57,6 +58,8 @@ public class HelpWindow extends UiPart<Stage> {
             + HELP_SHOW_COMMAND
             + "\n\n"
             + HELP_SORT_COMMAND
+            + "\n\n"
+            + HELP_EXPORT_COMMAND
             + "\n\n"
             + HELP_MORE_INFORMATION;
 
