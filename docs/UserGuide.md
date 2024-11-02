@@ -144,6 +144,7 @@ Format: `renameTag ot/OLDTAG nt/NEWTAG`
 * Renames the tags called `OLDTAG` to `NEWTAG`.
 * Contacts with the tag `OLDTAG` will now have `NEWTAG`, with `OLDTAG` removed
 * If `OLDTAG` is not an existing tag, `[OLDTAG] tag is not found` will be returned.
+* If there are any contacts with both `[OLDTAG]` and `[NEWTAG]`, the `[OLDTAG]` will not be renamed as this will lead to duplicated tags.
 
 ### Adding Social Media : `socialMedia`
 
