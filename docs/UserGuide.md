@@ -213,18 +213,18 @@ HireMe data are saved in the hard disk automatically after any command that chan
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
-#### Q1: Where are the data for the application stored?
+#### Q1: Where is the data for the application stored?
 Ans: HireMe data are saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
 
 #### Q2: Can I edit the data file directly?
 Ans: You should not be editing the JSON data file directly. You should be using the commands as mentioned above to augment any data. 
 Should the data file be corrupted, HireMe will discard all data and start with an empty data file.
 
-#### Q3: Can I `/find` followed by `/filter` to filter out the applications with a specific keyword?
+#### Q3: Can I find followed by filter to filter out the applications with a specific keyword?
 Ans: Currently, `/find` and `/filter` do not stack. These commands will find or filter based on all of your internship application entries.
 
-#### Q4: After I sort my internship applications, will a new entry be added in the right order?
-Ans: New entries will not be inserted in the right order.
+#### Q4: After I sort my internship applications, will a new entry be added in the right order automatically?
+Ans: New entries will not be inserted in the right order. They are inserted to the bottom of the list.
 
 #### Q5: Will adding / deleting new entries or changing the statuses of existing entries be reflected in the pie chart?
 Ans: Yes! You are not required to close the window. Any changes made will be reflected immediately in the pie chart.
