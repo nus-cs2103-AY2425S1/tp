@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import tuteez.commons.util.StringUtil;
-import tuteez.commons.util.ToStringBuilder;
 import tuteez.model.person.Person;
 
 /**
@@ -37,10 +36,5 @@ public class AddressContainsKeywordsPredicate implements Predicate<Person> {
         AddressContainsKeywordsPredicate otherAddressContainsKeywordsPredicate =
                 (AddressContainsKeywordsPredicate) other;
         return keywords.equals(otherAddressContainsKeywordsPredicate.keywords);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }

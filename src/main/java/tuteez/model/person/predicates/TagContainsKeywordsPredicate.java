@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import tuteez.commons.util.StringUtil;
-import tuteez.commons.util.ToStringBuilder;
 import tuteez.model.person.Person;
 import tuteez.model.tag.Tag;
 
@@ -39,10 +38,5 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
         TagContainsKeywordsPredicate otherTagContainsKeywordsPredicate = (TagContainsKeywordsPredicate) other;
         return keywords.equals(otherTagContainsKeywordsPredicate.keywords);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }

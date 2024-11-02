@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
-import tuteez.commons.util.ToStringBuilder;
 import tuteez.model.person.Person;
 import tuteez.model.person.lesson.Lesson;
 
@@ -56,10 +55,5 @@ public class LessonContainsKeywordsPredicate implements Predicate<Person> {
 
         LessonContainsKeywordsPredicate otherLessonContainsKeywordsPredicate = (LessonContainsKeywordsPredicate) other;
         return keywords.equals(otherLessonContainsKeywordsPredicate.keywords);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }

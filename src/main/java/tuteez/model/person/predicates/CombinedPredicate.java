@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-import tuteez.commons.util.ToStringBuilder;
 import tuteez.model.person.Person;
 
 /**
@@ -43,12 +42,6 @@ public class CombinedPredicate implements Predicate<Person> {
         CombinedPredicate otherCombinedPredicate = (CombinedPredicate) other;
         return predicates.equals(otherCombinedPredicate.predicates);
     }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).add("keywords", predicates).toString();
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(predicates);
