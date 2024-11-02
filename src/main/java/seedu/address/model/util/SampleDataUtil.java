@@ -14,6 +14,7 @@ import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relation;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
@@ -25,38 +26,24 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[]{
-            new Vendor(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new Address("Blk 30 Geylang Street 29, #06-40"),
-                    getTagSet("friends"), new Company("Company 1"), new Budget("5000")),
-            new Vendor(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    getTagSet("colleagues", "friends"), new Company("Company 2"), new Budget("7500.50")),
-            new Vendor(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    getTagSet("neighbours"), new Company("Company 3"), new Budget("10000.0"))
-        };
-    }
-
-    public static Person[] getSampleGuests() {
-        return new Person[]{
-            new Guest(new Name("Alex Yeoh"), new Phone("83238717"), new Email("alexyeoh@example.com"),
-                new Address("Blk 50 Geylang Street 31, #03-40"),
-                getTagSet("friends"), new Rsvp("P")),
-            new Guest(new Name("Brian Smith"), new Phone("99311258"), new Email("brainsmith@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #10-20"),
-                getTagSet("colleagues", "friends"), new Rsvp("A")),
-            new Guest(new Name("Catherine Lee"), new Phone("93212323"), new Email("catherine@example.com"),
-                new Address("Blk 131 Ang Mo Kio Street 77, #01-04"),
-                getTagSet("neighbours"), new Rsvp("D")),
-            new Guest(new Name("David Nguyen"), new Phone("87134653"), new Email("nguyen@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), new Rsvp("P")),
-            new Guest(new Name("Mohammad Ismal"), new Phone("90783445"), new Email("ismal@example.com"),
-                new Address("Blk 47 Tampines Street 20, #20-35"),
-                getTagSet("classmates"), new Rsvp("A")),
-            new Guest(new Name("Tony Stark"), new Phone("83129340"), new Email("stark@example.com"),
-                new Address("Blk 50 Aljunied Street 91, #05-31"),
-                getTagSet("colleagues"), new Rsvp("P"))
+            new Guest(new Name("Tony Stark"), new Phone("83238717"), new Email("tony.stark@starkindustries.com"),
+                    new Address("10880 Malibu Point, Malibu"),
+                    getTagSet("leader", "genius"), new Rsvp("P"), new Relation("H")),
+            new Guest(new Name("Steve Rogers"), new Phone("99311258"), new Email("steverogers@avengers.com"),
+                    new Address("Brooklyn, New York"),
+                    getTagSet("captain", "hero"), new Rsvp("A"), new Relation("W")),
+            new Guest(new Name("Natasha Romanoff"), new Phone("93212323"), new Email("natasha.romanoff@shield.com"),
+                    new Address("Red Room, Moscow"),
+                    getTagSet("spy", "agent"), new Rsvp("D"), new Relation("U")),
+            new Vendor(new Name("Bruce Banner"), new Phone("87134653"), new Email("bruce.banner@avengers.com"),
+                    new Address("Culver University, Virginia"),
+                    getTagSet("scientist", "hulk"), new Company("Banner Labs"), new Budget("100000")),
+            new Vendor(new Name("Thor Odinson"), new Phone("90783445"), new Email("thor@asgard.com"),
+                    new Address("Asgard, Realm Eternal"),
+                    getTagSet("god", "warrior"), new Company("Asgardian Enterprises"), new Budget("500000")),
+            new Vendor(new Name("Clint Barton"), new Phone("83129340"), new Email("clint.barton@shield.com"),
+                    new Address("Waverly, Iowa"),
+                    getTagSet("archer", "agent"), new Company("Barton Security"), new Budget("50000"))
         };
     }
 
