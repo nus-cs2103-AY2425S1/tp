@@ -101,6 +101,10 @@ public class EditAppointmentCommandParserTest {
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        // no field changed
+        assertParseFailure(parser, NRIC_DESC_AMY + DATE_DESC_AMY + START_TIME_DESC_AMY,
+                EditAppointmentCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
