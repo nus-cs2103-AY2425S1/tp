@@ -101,7 +101,7 @@ public class EditAssignmentCommand extends Command {
         assert assignmentToEdit != null;
 
         AssignmentName updatedName =
-                editAssignmentDescriptor.getName().orElse(new AssignmentName(assignmentToEdit.getName()));
+                editAssignmentDescriptor.getName().orElse(assignmentToEdit.getAssignmentName());
         int updatedMaxScore = editAssignmentDescriptor.getMaxScore().orElse(assignmentToEdit.getMaxScore());
 
         return new Assignment(updatedName, updatedMaxScore);

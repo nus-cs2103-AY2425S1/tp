@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditAssignmentCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -60,7 +59,7 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
         }
 
         if (!editAssignmentDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditAssignmentCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditAssignmentCommand(studentIndex, assignmentIndex, editAssignmentDescriptor);

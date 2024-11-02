@@ -59,6 +59,10 @@ public class Assignment {
                 && otherAssignment.assignmentName.equals(assignmentName);
     }
 
+    public AssignmentName getAssignmentName() {
+        return this.assignmentName;
+    }
+
     public String getName() {
         return this.assignmentName.assignmentName;
     }
