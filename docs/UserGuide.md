@@ -283,15 +283,16 @@ Format: gift
 
 ## Revenue
 
-Calculates the total amount of money earned from student who has paid
+Calculates the total amount of money earned from student who has paid/not paid
 
-Format: `revenue`
+Format: `revenue [paid/unpaid]`
 
 Example
-* `revenue`
+* `revenue paid`
+* `revenue unpaid`
 
-If the command is successful, the total amount of money will be displayed in this format: `Total revenue is $X`, where 
-X is the money earned
+If the command is successful, the total amount of money will be displayed in this format: `Total revenue S is $X`, 
+where S is `paid` or `unpaid` and X is the money earned
 
 ## Data Files
 
@@ -341,5 +342,5 @@ Action     | Format, Examples
 **List**   | `list`
 **Help**   | `help`
 **Gift**   | `gift`
-**Revenue**| `revenue`
+**Revenue**| `revenue` <br> e.g. `revenue paid`, `revenue unpaid`
 

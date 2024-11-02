@@ -167,7 +167,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public int getRevenue() {
+        public int getPaid() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public int getUnpaid() {
             throw new AssertionError("This method should not be called");
         }
 
