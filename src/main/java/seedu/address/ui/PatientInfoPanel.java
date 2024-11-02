@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.patient.Patient;
@@ -30,9 +29,6 @@ public class PatientInfoPanel extends UiPart<Region> {
     private Label phone;
 
     @FXML
-    private Label email;
-
-    @FXML
     private Label nric;
 
     @FXML
@@ -42,25 +38,31 @@ public class PatientInfoPanel extends UiPart<Region> {
     private Label sex;
 
     @FXML
-    private Label address;
-
-    @FXML
-    private Label healthServiceHeader;
-
-    @FXML
-    private FlowPane healthServices;
-
-    @FXML
     private Label appointmentHeader;
 
     @FXML
     private Label appointments;
 
     @FXML
+    private Label allergiesHeader;
+
+    @FXML
+    private Label allergies;
+
+    @FXML
     private Label furtherDetailsHeader;
 
     @FXML
-    private Label allergy;
+    private Label email;
+
+    @FXML
+    private Label address;
+
+    @FXML
+    private Label nokName;
+
+    @FXML
+    private Label nokPhone;
 
     @FXML
     private Label bloodType;
@@ -70,12 +72,6 @@ public class PatientInfoPanel extends UiPart<Region> {
 
     @FXML
     private Label existingCondition;
-
-    @FXML
-    private Label nokName;
-
-    @FXML
-    private Label nokPhone;
 
     @FXML
     private Label note;
@@ -89,8 +85,8 @@ public class PatientInfoPanel extends UiPart<Region> {
         super(FXML);
         header.setText("Patient Information");
         basicInfoHeader.setText("Basic Information");
-        healthServiceHeader.setText("Health Services");
         appointmentHeader.setText("Appointments");
+        allergiesHeader.setText("Allergies");
         furtherDetailsHeader.setText("Further Details");
         setPatientInfoContent(patient);
     }
@@ -100,19 +96,12 @@ public class PatientInfoPanel extends UiPart<Region> {
         nric.setText("NRIC: " + patient.getNric().toString());
         birthdate.setText("Birth Date: " + patient.getBirthdate().toString());
         sex.setText("Sex: " + patient.getSex().toString());
-        /*
-         * patient.getHealthServices().stream()
-         * .sorted(Comparator.comparing(healthservice ->
-         * healthservice.healthServiceName))
-         * .forEach(healthservice -> healthServices.getChildren().add(new
-         * Label(healthservice.healthServiceName)));
-         */
         phone.setText("Phone Number: " + (patient.getPhone() == null ? "" : patient.getPhone().toString()));
         email.setText("Email: " + (patient.getEmail() == null ? "" : patient.getEmail().toString()));
         address.setText("Address: " + (patient.getAddress() == null ? "" : patient.getAddress().toString()));
         appointments.setText(
-                "Appointments: " + (patient.getAppts() == null ? "" : patient.getApptsString()));
-        allergy.setText("Allergies: " + (patient.getAllergies() == null ? "" : patient.getAllergiesString()));
+                patient.getAppts() == null ? "" : patient.getApptsString());
+        allergies.setText(patient.getAllergies() == null ? "" : patient.getAllergiesString());
         bloodType.setText("Blood Type: "
                 + (patient.getBloodType() == null ? "" : patient.getBloodType().toString()));
         healthRisk.setText("Health Risk: " + (patient.getHealthRisk() == null
