@@ -3,7 +3,6 @@ package spleetwaise.transaction.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 
@@ -15,15 +14,12 @@ import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
-import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
-import spleetwaise.transaction.testutil.TypicalTransactions;
 
 public class ParserUtilTest {
     private static final String INVALID_AMOUNT = "+123.456";
