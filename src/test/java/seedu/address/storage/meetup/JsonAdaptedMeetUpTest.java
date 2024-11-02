@@ -24,7 +24,7 @@ public class JsonAdaptedMeetUpTest {
     private static final String INVALID_TO = "2023-02-31 37:78";
     private static final String INVALID_ADDED_BUYER = "A!l*x";
 
-    private static final String VALID_NAME = FIRST_MEETUP.getName().toString();
+    private static final String VALID_NAME = FIRST_MEETUP.getSubject().toString();
     private static final String VALID_INFO = FIRST_MEETUP.getInfo().toString();
     private static final String VALID_FROM = FIRST_MEETUP.getFrom().toString();
     private static final String VALID_TO = FIRST_MEETUP.getTo().toString();
