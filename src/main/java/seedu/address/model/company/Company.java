@@ -57,7 +57,7 @@ public class Company {
         }
 
         return otherCompany != null
-                && otherCompany.name.equals(this.name);
+                && otherCompany.name.fullName.equalsIgnoreCase(this.name.fullName); // done so as not to change Name's equals method
     }
 
     /**
