@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
 /**
@@ -43,9 +45,22 @@ public class DeleteTaskCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        boolean anyChanges = false;
+        List<Person> personList = model.getFilteredPersonList();
+        for (Person person: personList) {
+            if (person.hasTask(taskToDelete)) {
+                person.removeTask(taskToDelete);
+                anyChanges = true;
+            }
+        }
+
         model.deleteTask(taskToDelete);
+        if (anyChanges) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete.toString()));
     }
 

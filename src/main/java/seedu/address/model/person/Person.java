@@ -76,6 +76,19 @@ public class Person {
         return Collections.unmodifiableSet(tasks);
     }
 
+    public boolean hasTask(Task task) {
+        for (Task eachTask : tasks) {
+            if (eachTask.isSameTask(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeTask(Task task) {
+        tasks.remove(task);
+    }
+
     /**
      * Returns an immutable wedding set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
