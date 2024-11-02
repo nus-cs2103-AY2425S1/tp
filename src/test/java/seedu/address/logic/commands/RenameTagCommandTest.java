@@ -23,34 +23,35 @@ public class RenameTagCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        //expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
     @Test
     public void execute_renameTag_success() {
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        //expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         String newTag = "friends1";
-        RenameTagCommand renameTagCommand = new RenameTagCommand("friends", newTag);
+        RenameTagCommand renameTagCommand = new RenameTagCommand("friend", newTag);
         String expectedMessage = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, newTag);
         assertCommandSuccess(renameTagCommand, model, expectedMessage, expectedModel);
 
-        String newTag2 = "friends";
+        String newTag2 = "friend";
         RenameTagCommand renameTagCommand2 = new RenameTagCommand("friends1", newTag2);
         String expectedMessage2 = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, newTag2);
         assertCommandSuccess(renameTagCommand2, model, expectedMessage2, expectedModel);
     }
 
+
     @Test
     public void execute_duplicateTags_success() {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        RenameTagCommand renameTagCommand = new RenameTagCommand("friends", "owesMoney");
+        RenameTagCommand renameTagCommand = new RenameTagCommand("friend", "owesMoney");
         String expectedMessage = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "owesMoney");
 
         assertCommandSuccess(renameTagCommand, model, expectedMessage, expectedModel);
 
-        RenameTagCommand renameTagCommand2 = new RenameTagCommand("owesMoney", "friends");
-        String expectedMessage2 = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "friends");
+        RenameTagCommand renameTagCommand2 = new RenameTagCommand("owesMoney", "friend");
+        String expectedMessage2 = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "friend");
         assertCommandSuccess(renameTagCommand2, model, expectedMessage2, expectedModel);
     }
 
