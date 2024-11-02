@@ -21,8 +21,8 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_DEPARTMENT = "-";
-    private static final String INVALID_ROLE = "a@2";
+    private static final String INVALID_DEPARTMENT = "";
+    private static final String INVALID_ROLE = "  ";
     private static final String INVALID_CONTRACT_END_DATE = "01-01-2024";
 
     private static final String VALID_NAME = "Rachel Walker";

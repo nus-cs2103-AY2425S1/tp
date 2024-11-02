@@ -25,13 +25,13 @@ public class DepartmentTest {
         assertThrows(NullPointerException.class, () -> Department.isValidDepartment(null));
 
         // invalid department
-        assertFalse(Department.isValidDepartment("")); // empty string
-        assertFalse(Department.isValidDepartment(" ")); // spaces only
-        assertFalse(Department.isValidDepartment("^")); // only non-alphanumeric characters
-        assertFalse(Department.isValidDepartment("peter*")); // contains non-alphanumeric characters
+        assertFalse(Role.isValidRole("")); // empty string
+        assertFalse(Role.isValidRole(" ")); // spaces only
+        assertFalse(Role.isValidRole("   ")); // even more spaces
 
         // valid department
         assertTrue(Department.isValidDepartment("it")); // alphabets only
+        assertTrue(Department.isValidDepartment("c++ developer")); // other chars
         assertTrue(Department.isValidDepartment("12345")); // numbers only
         assertTrue(Department.isValidDepartment("2nd it")); // alphanumeric characters
         assertTrue(Department.isValidDepartment("IT")); // with capital letters
