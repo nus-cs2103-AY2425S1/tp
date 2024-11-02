@@ -50,7 +50,6 @@ public class ExportCommandTest {
     @Test
     public void equals() {
         final ExportCommand standardCommand = new ExportCommand();
-        final String differentFormat = "pdf";
 
         // same values -> returns true
         ExportCommand commandWithSameValues = new ExportCommand();
@@ -65,7 +64,6 @@ public class ExportCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
     }
-
     @Test
     public void parseValidTag() {
         String input = "\"{\n  \"neighbours\" : \"null\"\n}\"";
