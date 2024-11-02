@@ -164,12 +164,13 @@ Examples:
 
 Adds the specified person's tag.
 
-Format: `addtag INDEX t/KEYWORD`
+Format: `addtag INDEX t/KEYWORD [MORE_KEYWORDS]`
 
 * Deletes the tag with the specified name `KEYWORD` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Multiple tags can be added at a time.
+* Attempt to add duplicate tags to a person will cause an error message to be thrown.
 
 Examples:
 * `addtag 1 t/friend` adds a 'friend' tag to the first person in the list.
@@ -200,6 +201,7 @@ Undoes the previous command and reverts CampusConnect.
 Format: `undo`
 
 * Reverts the state of CampusConnect to the one before the most recent command, if any.
+* When the oldest version of CampusConnect is reached, `undo` command will cause an exception to be thrown
 
 ### Redo a command: `redo`
 
@@ -237,8 +239,6 @@ If your changes to the data file makes its format invalid, CampusConnect will di
 Furthermore, certain edits can cause CampusConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
@@ -270,6 +270,8 @@ Action     | Format, Examples
 **Find by phone number**   | `find p/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p/91234657 85432789`
 **Find by tag**   | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friend roommate`
 **Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
+**Add tag** | `addtag INDEX t/KEY_WORD [MORE_KEYWORDS]` <br> e.g. `addtag 1 t/friend t/classmate`
+**Categorize tag** | `cattag INDEX t/KEYWORD`
 **Undo action** | `undo`
 **Redo action** | `redo`
 **List**   | `list`
