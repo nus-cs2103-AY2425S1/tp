@@ -59,6 +59,32 @@ public class Assignment {
                 && otherAssignment.assignmentName.equals(assignmentName);
     }
 
+    public String getName() {
+        return this.assignmentName.assignmentName;
+    }
+
+    public int getMaxScore() {
+        return this.maxScore;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public boolean getHasSubmitted() {
+        return this.hasSubmitted;
+    }
+
+    public void setScore(int score) {
+        if (score > this.getMaxScore()) {
+            throw new ScoreExceedsMaxScoreException();
+        }
+        this.score = score;
+    }
+    public void setHasSubmitted(boolean hasSubmitted) {
+        this.hasSubmitted = hasSubmitted;
+    }
+
     /**
      * Returns true if both assignments have the same identity and data fields.
      * This defines a stronger notion of equality between two assignments.
@@ -97,27 +123,5 @@ public class Assignment {
                 .add("score", score)
                 .add("hasSubmitted", hasSubmitted)
                 .toString();
-    }
-    public String getName() {
-        return this.assignmentName.assignmentName;
-    }
-    public int getScore() {
-        return this.score;
-    }
-    public int getMaxScore() {
-        return this.maxScore;
-    }
-    public boolean getHasSubmitted() {
-        return this.hasSubmitted;
-    }
-
-    public void setScore(int score) {
-        if (score > this.getMaxScore()) {
-            throw new ScoreExceedsMaxScoreException();
-        }
-        this.score = score;
-    }
-    public void setHasSubmitted(boolean hasSubmitted) {
-        this.hasSubmitted = hasSubmitted;
     }
 }
