@@ -39,7 +39,8 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append("Name: ")
+                .append(person.getName())
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
@@ -50,17 +51,4 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
-
-    /**
-     * Formats the {@code lesson} for display to the user.
-     *
-     * @param lesson The lesson to be formatted.
-     * @return The formatted lesson.
-     */
-    public static String formatLesson(Lesson lesson) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(lesson);
-        return builder.toString();
-    }
-
 }

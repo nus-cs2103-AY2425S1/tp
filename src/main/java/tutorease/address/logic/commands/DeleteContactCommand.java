@@ -27,8 +27,8 @@ public class DeleteContactCommand extends ContactCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: contact delete 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Contact [%1$s] deleted successfully";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Contact [%1$s] deleted successfully.";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
 
     private final Index targetIndex;
     /**
