@@ -9,11 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Medication {
     public static final String MESSAGE_CONSTRAINTS =
-            "Medication can only contain alphabets and the following special characters -> .()/- "
-                    + "(e.g., - A.  (Panadol).\n"
-                    + "It can be an empty string at the point of initialisation, "
-                    + "as medication may not be decided yet.\n";
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9\\s.()/-]*|^$";
+            "Medication must can include alphanumeric characters, spaces, periods, commas, parentheses, hyphens, "
+                    + "and slashes.\n"
+                    + "It must contain at least 1 alphanumeric character and has a character limit of 100";
+    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z0-9])[A-Za-z0-9\\s.,()/-]{1,100}$";
     public final String value;
 
     /**

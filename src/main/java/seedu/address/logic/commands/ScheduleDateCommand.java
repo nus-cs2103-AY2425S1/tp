@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateUtil.getDisplayableDate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -37,7 +38,7 @@ public class ScheduleDateCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW,
                         model.getSortedAppointmentList().size(),
-                        predicate.getPredicateDate()));
+                        getDisplayableDate(predicate.getDate())));
     }
 
     @Override

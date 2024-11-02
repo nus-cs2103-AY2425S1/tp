@@ -1,11 +1,9 @@
 package seedu.address.model.appointment;
 
-import static seedu.address.commons.util.DateUtil.DATE_TIME_FORMATTER;
+import static seedu.address.commons.util.DateUtil.DATE_TIME_DISPLAY_FORMATTER;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-
-import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents an Appointment in the address book.
@@ -66,11 +64,11 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("description", description)
-                .add("start", start.format(DATE_TIME_FORMATTER))
-                .add("end", end.format(DATE_TIME_FORMATTER))
-                .toString();
+        return description
+                + " FROM "
+                + start.format(DATE_TIME_DISPLAY_FORMATTER)
+                + " TO "
+                + end.format(DATE_TIME_DISPLAY_FORMATTER);
     }
 
 }

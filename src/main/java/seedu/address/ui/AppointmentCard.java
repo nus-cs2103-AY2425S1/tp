@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.DateUtil.getDisplayableDateTime;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -52,7 +54,10 @@ public class AppointmentCard extends UiPart<Region> {
     private void setAppointmentFields(Person person) {
         if (person.getAppointment() != null) {
             appointmentDescription.setText(person.getAppointmentDescription());
-            String duration = person.getAppointmentStart().toString() + " ~ " + person.getAppointmentEnd().toString();
+            String duration = getDisplayableDateTime(person.getAppointmentStart())
+                    + " ~ "
+                    + "\n"
+                    + getDisplayableDateTime(person.getAppointmentEnd());
             appointmentDuration.setText(duration);
         } else {
             // Use of ChatGPT to see how to hide unwanted label

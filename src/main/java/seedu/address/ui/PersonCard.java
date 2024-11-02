@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.DateUtil.getDisplayableDateTime;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -58,29 +60,13 @@ public class PersonCard extends UiPart<Region> {
         patientId.setText("ID: " + person.getId().value);
         ward.setText("Ward: " + person.getWard().value);
         setAppointmentFields(person);
-        /*
-        diagnosis.setText("Diagnosis: " + person.getDiagnosis().value);
-        medication.setText("Medication: " + person.getMedication().value);
-        notes.setText("Notes: " + (person.getNotes().toString().isEmpty() ? "-" : person.getNotes().value));
-        */
-
-        /*
-        id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
-         */
     }
 
     private void setAppointmentFields(Person person) {
         if (person.getAppointment() != null) {
             appointmentDescription.setText(person.getAppointmentDescription());
-            appointmentStart.setText(person.getAppointmentStart().toString());
-            appointmentEnd.setText(person.getAppointmentEnd().toString());
+            appointmentStart.setText(getDisplayableDateTime(person.getAppointmentStart()));
+            appointmentEnd.setText(getDisplayableDateTime(person.getAppointmentEnd()));
         } else {
             // Use of ChatGPT to see how to hide unwanted label
             // Prompt: How to remove label if appointment is null

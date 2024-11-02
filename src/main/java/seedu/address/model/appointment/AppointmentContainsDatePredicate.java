@@ -1,7 +1,6 @@
 package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.DateUtil.DATE_DISPLAY_FORMATTER;
 import static seedu.address.commons.util.DateUtil.DATE_FORMATTER;
 
 import java.time.LocalDate;
@@ -40,12 +39,12 @@ public class AppointmentContainsDatePredicate implements Predicate<Person> {
     }
 
     /**
-     * Get predicate date in a more displayable format
+     * Get predicate date
      *
-     * @return String containing date used for predicate
+     * @return LocalDate containing date used for predicate
      */
-    public String getPredicateDate() {
-        return date.format(DATE_DISPLAY_FORMATTER);
+    public LocalDate getDate() {
+        return date;
     }
 
     @Override
