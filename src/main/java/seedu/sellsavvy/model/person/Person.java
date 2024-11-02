@@ -99,6 +99,14 @@ public class Person {
     }
 
     /**
+     * Returns true if the filtered order list is filtered under certain conditions.
+     */
+    public boolean areOrdersFiltered() {
+        return filteredOrders.getPredicate() != PREDICATE_SHOW_ALL_ORDERS
+                && filteredOrders.getPredicate() != null;
+    }
+
+    /**
      * Updates the filter of the order list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
