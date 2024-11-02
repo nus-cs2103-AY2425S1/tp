@@ -31,5 +31,4 @@ public class UndoCommandTest {
         UndoCommand command = new UndoCommand();
         assertCommandFailure(command, model, UndoCommand.MESSAGE_COMMAND_CANNOT_BE_UNDONE);
     }
-
 }

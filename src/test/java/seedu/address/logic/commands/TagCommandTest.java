@@ -183,6 +183,37 @@ public class TagCommandTest {
     }
 
     @Test
+    public void execute_undoTagCommand_success() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Tag validTag = new Tag("uniqueTag");
+        model.addTag(validTag);
+        Person personToTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assertFalse(personToTag.getTags().contains(validTag));
+
+        Set<Tag> tags = new HashSet<>();
+        List<Index> indexes = new ArrayList<>();
+        tags.add(validTag);
+        indexes.add(INDEX_FIRST_PERSON);
+        TagCommand tagCommand = new TagCommand(indexes, tags);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
+        updatedTags.add(validTag);
+
+        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
+                RsvpStatus.PENDING, updatedTags);
+        expectedModel.setPerson(personToTag, updatedPerson);
+        expectedModel.addTag(validTag);
+        String expectedMessage = TagCommand.MESSAGE_TAG_PERSON_SUCCESS + Messages.format(updatedPerson);
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(tagCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
+
+    @Test
     public void equals() {
         Tag anotherTag = new Tag("anotherTag");
 

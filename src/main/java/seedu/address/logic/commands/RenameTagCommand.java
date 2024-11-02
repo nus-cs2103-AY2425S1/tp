@@ -21,7 +21,6 @@ public class RenameTagCommand extends UndoableCommand {
 
     private final Tag existingTag;
     private final String newTagName;
-    private String existingTagName;
 
     /**
      * @param existingTag The tag to be renamed.
@@ -36,7 +35,6 @@ public class RenameTagCommand extends UndoableCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
-        existingTagName = existingTag.getTagName();
 
         if (!model.renameTag(existingTag, newTagName)) {
             throw new CommandException(MESSAGE_NONEXISTENT_OR_DUPLICATE);
@@ -50,8 +48,8 @@ public class RenameTagCommand extends UndoableCommand {
     @Override
     public void undo(Model model) {
         requireAllNonNull(model);
-        model.renameTag(new Tag(newTagName), existingTagName);
-        model.editTagInPersons(new Tag(newTagName), existingTagName);
+        model.renameTag(new Tag(newTagName), existingTag.getTagName());
+        model.editTagInPersons(new Tag(newTagName), existingTag.getTagName());
         model.updateTagList();
     }
 

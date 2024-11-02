@@ -44,7 +44,9 @@ public class FindCommand extends UndoableCommand {
     @Override
     public void undo(Model model) {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredPersonList(previousPredicate);
+        if (previousPredicate != null) {
+            model.updateFilteredPersonList(previousPredicate);
+        }
     }
 
     @Override
