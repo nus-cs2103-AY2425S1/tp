@@ -30,58 +30,107 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withNric("S6283947C")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withTags("backPain")
-            .withRole("PATIENT")
-            .withNote("came for backpain")
-            .build();
+    public static final Appointment ALICE_APPOINTMENT = new Appointment(
+            "Alice Pauline", new Nric("S6283947C"),
+            LocalDateTime.of(2025, 1, 1, 10, 0), LocalDateTime.of(2025, 1, 1, 11, 0));
 
     public static final Appointment BENSON_APPOINTMENT = new Appointment(
             "Benson Meier", new Nric("S7012345B"),
-            LocalDateTime.of(2024, 10, 22, 12, 0), LocalDateTime.of(2024, 10, 22, 12, 0).plusHours(1));
+            LocalDateTime.of(2025, 2, 10, 14, 0), LocalDateTime.of(2025, 2, 10, 15, 0));
+
+    public static final Appointment CHARLOTTE_APPOINTMENT = new Appointment(
+            "Charlotte Oliveiro", new Nric("S7193475F"),
+            LocalDateTime.of(2025, 3, 15, 9, 0), LocalDateTime.of(2025, 3, 15, 10, 0));
+
+    public static final Appointment DANIEL_APPOINTMENT = new Appointment(
+            "Daniel Meier", new Nric("S6483749D"),
+            LocalDateTime.of(2025, 4, 5, 13, 0), LocalDateTime.of(2025, 4, 5, 14, 0));
+
+    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+            .withNric("S6283947C")
+            .withAddress("123, Jurong West Ave 6, #08-111")
+            .withEmail("alice@example.com")
+            .withPhone("94351253")
+            .withTags("backPain")
+            .withRole("PATIENT")
+            .withCaregivers()
+            .withPatients()
+            .withAppointments(ALICE_APPOINTMENT)
+            .withNotes("Follow up on blood pressure medication.")
+            .build();
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withNric("S7012345B")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com")
+            .withPhone("98765432")
             .withTags("shortOfTime", "nurseBefore")
             .withRole("PATIENT", "CAREGIVER")
-            .withNote("came for arthritis")
+            .withCaregivers()
+            .withPatients()
             .withAppointments(BENSON_APPOINTMENT)
+            .withNotes("Review arthritis medication plan.")
             .build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
-            .withNric("S7193475F").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street")
+            .withNric("S7193475F")
+            .withPhone("95352563")
+            .withEmail("heinz@example.com")
+            .withAddress("wall street")
             .withRole("PATIENT")
+            .withCaregivers()
+            .withPatients()
+            .withAppointments(CHARLOTTE_APPOINTMENT)
+            .withNotes("Schedule fall risk assessment.")
             .build();
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withNric("S6483749D").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street")
+            .withNric("S6483749D")
+            .withPhone("87652533")
+            .withEmail("cornelia@example.com")
+            .withAddress("10th street")
             .withTags("friends")
             .withRole("PATIENT")
+            .withCaregivers()
+            .withPatients()
+            .withAppointments(DANIEL_APPOINTMENT)
+            .withNotes("Consider referral for physical therapy.")
             .build();
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withNric("S6382947A").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave")
+            .withNric("S6382947A")
+            .withPhone("9482224")
+            .withEmail("werner@example.com")
+            .withAddress("michegan ave")
             .withRole("CAREGIVER")
+            .withCaregivers()
+            .withPatients()
+            .withAppointments()
+            .withNotes("Provide support for medication management.")
             .build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withNric("S6482983A").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo")
+            .withNric("S6482983A")
+            .withPhone("9482427")
+            .withEmail("lydia@example.com")
+            .withAddress("little tokyo")
             .withRole("PATIENT")
+            .withCaregivers()
+            .withPatients()
+            .withAppointments()
+            .withNotes("Regular check-up scheduled.")
             .build();
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withNric("G3536933W").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street")
+            .withNric("G3536933W")
+            .withPhone("9482442")
+            .withEmail("anna@example.com")
+            .withAddress("4th street")
             .withRole("CAREGIVER")
+            .withCaregivers()
+            .withPatients()
+            .withAppointments()
+            .withNotes("Assist Alex with daily tasks.")
             .build();
 
     // Manually added
