@@ -3,6 +3,8 @@ package seedu.address.model.meeting;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Logger;
+
 /**
  * Represents a Meeting's title in the meeting book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMeetingTitle(String)}
@@ -17,6 +19,7 @@ public class MeetingTitle {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    private static final Logger logger = Logger.getLogger(MeetingTitle.class.getName());
 
     public final String value;
 
@@ -29,6 +32,7 @@ public class MeetingTitle {
         requireNonNull(meetingTitle);
         checkArgument(isValidMeetingTitle(meetingTitle), MESSAGE_CONSTRAINTS);
         this.value = meetingTitle;
+        logger.info("MeetingTitle created: " + this);
     }
 
     /**
