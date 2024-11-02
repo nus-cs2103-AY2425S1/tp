@@ -82,7 +82,7 @@ public class EditOrderCommand extends Command {
         Order editedOrder = createEditedOrder(orderToEdit, editOrderDescriptor);
 
         OrderList orderList = model.getSelectedOrderList();
-        String feedbackToUser = !orderToEdit.isSameOrder(editedOrder)
+        String feedbackToUser = !orderToEdit.equals(editedOrder) // ensure that some field(s) is changed
                 && orderList.contains(editedOrder)
                 ? String.format(MESSAGE_DUPLICATE_ORDER_WARNING,
                 editedOrder.getStatus().getValue())
