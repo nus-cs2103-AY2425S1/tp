@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -108,7 +107,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -127,22 +126,14 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && workExp.equals(otherPerson.workExp)
-                && tags.equals(otherPerson.tags)
-                && university.equals(otherPerson.university)
-                && major.equals(otherPerson.major)
-                && interests.equals(otherPerson.interests)
-                && birthday.equals(otherPerson.birthday);
+        return this.phone.equals(otherPerson.phone);
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, workExp, tags, university, major, interests);
+        return phone.hashCode();
     }
 
     @Override
