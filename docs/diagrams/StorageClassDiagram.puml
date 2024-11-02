@@ -18,7 +18,7 @@ package "AgentAssist Storage" #F4F6F6{
 Class "<<interface>>\nAgentAssistStorage" as AgentAssistStorage
 Class JsonAgentAssistStorage
 Class JsonSerializableAgentAssist
-Class JsonAdaptedPerson
+Class JsonAdaptedClient
 Class JsonAdaptedTier
 Class JsonAdaptedStatus
 }
@@ -38,8 +38,8 @@ Storage -right-|> AgentAssistStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAgentAssistStorage .up.|> AgentAssistStorage
 JsonAgentAssistStorage ..> JsonSerializableAgentAssist
-JsonSerializableAgentAssist --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "1" JsonAdaptedTier
-JsonAdaptedPerson --> "1" JsonAdaptedStatus
+JsonSerializableAgentAssist --> "*" JsonAdaptedClient
+JsonAdaptedClient --> "1" JsonAdaptedTier
+JsonAdaptedClient --> "1" JsonAdaptedStatus
 
 @enduml
