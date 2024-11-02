@@ -142,6 +142,41 @@ public class TagCommandTest {
     }
 
     @Test
+    public void execute_tagStudentWithNoSubjectsWithLevel() {
+        Student studentInList = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased());
+
+        Student taggedStudent = new StudentBuilder(studentInList).withSubjects().build();
+
+        System.out.println(studentInList);
+        System.out.println(taggedStudent);
+
+        model.setStudent(studentInList, taggedStudent);
+
+        Student test = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased());
+
+        Name testName = test.getName();
+
+        System.out.println(test);
+
+        Student finalRest = new StudentBuilder(test).withLevel("S3 NA").build();
+
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withLevel("S3 NA").build();
+        TagCommand testTagCommand = new TagCommand(testName, descriptor);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_STUDENT_SUCCESS,
+                Messages.format(finalRest));
+
+
+        assertCommandSuccess(testTagCommand, model, expectedMessage, UiState.DETAILS, model);
+
+    }
+
+    @Test
     public void execute_invalidLevelForStudentSubjects_failure() throws CommandException {
 
 
