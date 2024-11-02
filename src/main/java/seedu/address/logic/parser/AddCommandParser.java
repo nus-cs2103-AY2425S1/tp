@@ -53,7 +53,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
             } catch (ParseException e) {
                 // Handle the exception (log it or rethrow with a message)
-                throw new ParseException("Invalid remark format!", e);
+                throw new ParseException(Remark.MESSAGE_CONSTRAINTS, e);
             }
         } else {
             remark = new Remark(""); // Default value if remark is not provided
