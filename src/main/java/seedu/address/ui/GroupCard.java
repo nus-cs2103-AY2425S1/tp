@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Group;
@@ -27,7 +26,9 @@ public class GroupCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private FlowPane membersPane; // A FlowPane to display members
+    private Label groupSize;
+    @FXML
+    private Label membersPane;
 
     /**
      * Creates a {@code GroupCard} with the given {@code Group} and index to display.
@@ -41,20 +42,21 @@ public class GroupCard extends UiPart<Region> {
         // Retrieve the list of members in the group
         List<Person> members = group.asUnmodifiableObservableList();
 
-        // Display the first 3 members in the FlowPane
-        List<Person> firstThreeMembers = members.stream()
+        groupSize.setText("Group Size: " + String.valueOf(members.size()));
+
+        // Display the first 3 members as a single comma-separated string
+        String membersDisplayText = "Members: "
+                + members.stream()
                 .limit(3)
-                .collect(Collectors.toList());
+                .map(member -> member.getName().fullName)
+                .collect(Collectors.joining(", "));
 
-        firstThreeMembers.forEach(member -> {
-            Label memberLabel = new Label(member.getName().fullName);
-            membersPane.getChildren().add(memberLabel);
-        });
-
-        // If there are more than 3 members, add a "..." at the back
+        // If there are more than 3 members, add a "..." at the end
         if (members.size() > 3) {
-            Label moreLabel = new Label("...");
-            membersPane.getChildren().add(moreLabel);
+            membersDisplayText += ", ...";
         }
+
+        // Set the combined text to the membersPane label
+        membersPane.setText(membersDisplayText);
     }
 }

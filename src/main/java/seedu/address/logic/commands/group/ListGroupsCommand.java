@@ -9,10 +9,10 @@ import seedu.address.model.Model;
  */
 public class ListGroupsCommand extends Command {
     public static final String COMMAND_WORD = "listGroups";
+    public static final String MESSAGE_SUCCESS = "Listed all groups";
 
     @Override
     public CommandResult execute(Model model) {
-        String groupNames = model.getGroupNames();
-        return new CommandResult(groupNames);
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }
