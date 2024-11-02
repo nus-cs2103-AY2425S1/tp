@@ -1,9 +1,12 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -29,12 +32,22 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
+    private static final Image nameIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/name.png"));
+    private static final Image phoneIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/phone.png"));
+    private static final Image emailIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/email.png"));
+    private static final Image addressIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/address.png"));
+    private static final Image descriptionIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/description.png"));
     private static final Image studentIcon =
-        new Image(MainApp.class.getResourceAsStream("/images/role-icons/student.png"));
+        new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/role-icons/student.png"));
     private static final Image tutorIcon =
-        new Image(MainApp.class.getResourceAsStream("/images/role-icons/tutor.png"));
+        new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/role-icons/tutor.png"));
     private static final Image professorIcon =
-        new Image(MainApp.class.getResourceAsStream("/images/role-icons/professor.png"));
+        new Image(MainApp.class.getResourceAsStream("/images/person-card-icons/role-icons/professor.png"));
 
     public final Person person;
 
@@ -61,33 +74,23 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
 
         if (person.hasPhone()) {
-            Label phone = new Label(person.getPhone().map(Object::toString).orElse(null));
-            phone.getStyleClass().add("cell_small_label");
-            phone.setText(person.getPhone().orElse(null).value);
-            vBox.getChildren().add(phone);
+            setRow(person.getPhone().map(Objects::toString).orElse(null),
+                phoneIcon);
         }
 
         if (person.hasEmail()) {
-            Label email = new Label(person.getEmail().map(Object::toString).orElse(null));
-            email.getStyleClass().add("cell_small_label");
-            email.setText(person.getEmail().orElse(null).value);
-            vBox.getChildren().add(email);
+            setRow(person.getEmail().map(Objects::toString).orElse(null),
+                emailIcon);
         }
 
         if (person.hasAddress()) {
-            Label address = new Label(person.getAddress().map(Object::toString).orElse(null));
-            address.getStyleClass().add("cell_small_label");
-            address.setText(person.getAddress().orElse(null).value);
-            vBox.getChildren().add(address);
+            setRow(person.getAddress().map(Objects::toString).orElse(null),
+                addressIcon);
         }
 
         if (person.hasNonEmptyDescription()) {
-            Label description = new Label(person.getDescription()
-                .map(Object::toString)
-                .orElse(null));
-            description.getStyleClass().add("cell_small_label");
-            description.setText(person.getDescription().orElse(null).value);
-            vBox.getChildren().add(description);
+            setRow(person.getDescription().map(Objects::toString).orElse(null),
+                descriptionIcon);
         }
 
         // Add tags
@@ -126,5 +129,38 @@ public class PersonCard extends UiPart<Region> {
 
                     roles.getChildren().add(curLabel);
                 });
+    }
+
+    /**
+     * Inserts a new row in the Person Card with the specified text, label and
+     * icon.
+     */
+    public void setRow(String text, Image iconImage) {
+        // Configuration of row styles
+        int personCardIconSize = 14;
+        int personCardRowElementSpacing = 5;
+        ColorAdjust personCardIconColor = new ColorAdjust();
+        personCardIconColor.setBrightness(1.0);
+        personCardIconColor.setSaturation(-1);
+
+        HBox row = new HBox();
+        row.setSpacing(personCardRowElementSpacing);
+
+        Label content = new Label(text);
+        content.getStyleClass().add("cell_small_label");
+
+        ImageView imageView = new ImageView(iconImage);
+        imageView.setFitHeight(personCardIconSize);
+        imageView.setPreserveRatio(true);
+
+        // Make sure that the icon is always white regardless of original color
+        imageView.setEffect(personCardIconColor);
+
+        VBox icon = new VBox(imageView);
+        icon.setAlignment(Pos.CENTER);
+
+        row.getChildren().add(icon);
+        row.getChildren().add(content);
+        vBox.getChildren().add(row);
     }
 }
