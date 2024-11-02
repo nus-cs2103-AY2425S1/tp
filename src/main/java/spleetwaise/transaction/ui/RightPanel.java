@@ -1,7 +1,6 @@
 package spleetwaise.transaction.ui;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -81,38 +80,24 @@ public class RightPanel extends UiPart<Region> {
     private void showFilterMenu(MouseEvent event) {
         ContextMenu filterMenu = new ContextMenu();
 
-        MenuItem filterByAmount = new MenuItem("Filter by Positive or Negative Amount");
-        filterByAmount.setOnAction(e -> filterTransactionsByAmount());
-
-        MenuItem filterByDateRange = new MenuItem("Filter by last month");
-        filterByDateRange.setOnAction(e -> filterTransactionsByLastMonth());
-
         MenuItem resetFilter = new MenuItem("Reset filter");
         resetFilter.setOnAction(e -> resetFilter());
 
-        filterMenu.getItems().addAll(resetFilter, filterByAmount, filterByDateRange);
+        MenuItem filterByAmount = new MenuItem("Filter by Positive or Negative Amount");
+        filterByAmount.setOnAction(e -> filterTransactionsByAmount());
+
+        filterMenu.getItems().addAll(resetFilter, filterByAmount);
         filterMenu.show(filterIcon, event.getScreenX(), event.getScreenY());
     }
 
     private void filterTransactionsByAmount() {
-        // show only negative or positive amounts
-        CommonModel.getInstance().updateFilteredTransactionList(txn -> amountFilter != txn.getAmount().isNegative());
-        ObservableList<Transaction> filtered = CommonModel.getInstance().getFilteredTransactionList();
-        transactionListPanel.updateTransactionList(filtered);
+        // toggle between positive or negative amounts only
         amountFilter = !amountFilter;
-    }
-
-    private void filterTransactionsByLastMonth() {
-        // filter transactions by last month
-        CommonModel.getInstance()
-                .updateFilteredTransactionList(txn -> txn.getDate().getDate().isAfter(LocalDate.now().minusMonths(1)));
-        ObservableList<Transaction> filtered = CommonModel.getInstance().getFilteredTransactionList();
-        transactionListPanel.updateTransactionList(filtered);
+        resetFilter();
+        CommonModel.getInstance().updateFilteredTransactionList(txn -> amountFilter != txn.getAmount().isNegative());
     }
 
     private void resetFilter() {
         CommonModel.getInstance().updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
-        ObservableList<Transaction> filtered = CommonModel.getInstance().getFilteredTransactionList();
-        transactionListPanel.updateTransactionList(filtered);
     }
 }
