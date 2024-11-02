@@ -76,7 +76,7 @@ public interface Model {
     /**
      * Adds a set of tag to person
      */
-    void addPersonTags(Person p, Set<? extends Tag>t);
+    void addPersonTags(Person p, Set<Tag>t);
 
     /**
      * Adds the given person.
