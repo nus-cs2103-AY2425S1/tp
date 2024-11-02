@@ -187,21 +187,6 @@ Format:
 **Examples**:
 - `remark 2 r/Available for part-time work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
 
-#### Remove a remark for a person : `remark`
-`remark INDEX`  
-`remark INDEX r/`
-
-Format:
-- Using `remark INDEX` will remove the existing remark for the person at the specified `INDEX`.
-- Using `remark INDEX r/` will also clear the remark for the person at the specified `INDEX`.
-
-**Examples**:
-- `remark 3` removes the remark for the 3rd person in the address book.
-- `remark 1 r/` clears the remark for the 1st person in the address book.
-
-- Ensure that the specified `INDEX` is a positive integer (1, 2, 3, ...).
-- If the index refers to a person who does not have a remark, the command will still execute but no changes will be made.
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -266,6 +251,13 @@ _Details coming soon ..._
 - The entire email address must not exceed 50 characters in length and cannot contain any spaces.
 - All characters after the "@" symbol will be converted to lowercase (e.g., "hhh@GMAil.com" will become "hhh@gmail.com").
 - Checking for valid email domain is not in scope.
+
+### JOBCODE
+
+### TAG
+
+### REMARK
+- Must be at most 50 characters, excluding leading and trailing whitespaces.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -287,7 +279,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R`
+**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG r/REMARK` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE_NUMBET` e.g. `delete n/Alex Yeoh p/88306733`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
