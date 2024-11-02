@@ -27,11 +27,11 @@ public class RoleTest {
         // invalid role
         assertFalse(Role.isValidRole("")); // empty string
         assertFalse(Role.isValidRole(" ")); // spaces only
-        assertFalse(Role.isValidRole("^")); // only non-alphanumeric characters
-        assertFalse(Role.isValidRole("peter*")); // contains non-alphanumeric characters
+        assertFalse(Role.isValidRole("   ")); // even more spaces
 
         // valid role
         assertTrue(Role.isValidRole("swe")); // alphabets only
+        assertTrue(Department.isValidDepartment("R&D department")); // other chars
         assertTrue(Role.isValidRole("12345")); // numbers only
         assertTrue(Role.isValidRole("2nd swe")); // alphanumeric characters
         assertTrue(Role.isValidRole("SWE")); // with capital letters
