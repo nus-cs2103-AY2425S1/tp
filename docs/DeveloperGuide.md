@@ -270,7 +270,7 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**: A Business owner managing a small sized company who frequently
-procures goods from suppliers
+procures goods from suppliers.
 
 **Persona**: Ms. Balakrishnan is a business owner of a small convenience store (mama shop) located in tampines
 
@@ -280,8 +280,9 @@ procures goods from suppliers
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 * needs to associate goods with contacts
+* not good at keeping track of numbers
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app, able to associate goods to 
+**Value proposition**: To be able to manage contacts faster than a typical mouse/GUI driven app, able to associate goods to 
 contacts and suppliers for easier management.
 
 
@@ -504,12 +505,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 14. The application must not require any internet connection to function.
 15. The codebase should be well documented with comments or JavaDoc to explain key modules and functions.
 16. The project is not required to handle any messaging functions between users and contacts.
-17. The project is expected to adhere to a schedule that delivers a feature set or feature modification every week.
-18. Key functions in the project should be tested with JUnit, with a minimal coverage of 75%.
-19. Price of goods should not be negative.
-20. Quantity of goods should not be negative.
-21. Arrival date of goods should not be earlier than the current date.
-22. The project should be maintained with proper version control on a GitHub remote repository.
+17. Key functions in the project should be tested with JUnit, with a minimal coverage of 75%.
+18. Price of goods should not be negative.
+19. Quantity of goods should not be negative.
+20. Arrival date of goods should not be earlier than the current date.
 
 ### Glossary
 
