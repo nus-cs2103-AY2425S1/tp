@@ -513,6 +513,8 @@ and with phone number either `12345678` or `87654321`.
   * `find e p/12345678 e/john@example.com alice@example.com` returns employees with phone number `12345678` and with
   email either `john@example.com` or `alice@example.com`
   * `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`
+
+Example: "find ph n/John".
 ![result for 'find alex david'](images/findjohnResult.png)
 
    <div class="box box-warn" type="warning" seamless>
