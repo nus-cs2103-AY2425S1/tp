@@ -151,13 +151,15 @@ public class EditCommand extends Command {
         }
         if (!personBefore.getPhone().equals(personAfter.getPhone())) {
             isChanged = true;
-            changesDescription.append("Phone: ").append(personBefore.getPhone()).append(" -> ")
-                    .append(personAfter.getPhone()).append("\n");
+            changesDescription.append("Phone: ")
+                    .append(personBefore.getPhone().map(Object::toString).orElse("<no phone>")).append(" -> ")
+                    .append(personAfter.getPhone().map(Object::toString).orElse("<no phone>")).append("\n");
         }
         if (!personBefore.getEmail().equals(personAfter.getEmail())) {
             isChanged = true;
-            changesDescription.append("Email: ").append(personBefore.getEmail()).append(" -> ")
-                    .append(personAfter.getEmail()).append("\n");
+            changesDescription.append("Email: ")
+                    .append(personBefore.getEmail().map(Object::toString).orElse("<no email>")).append(" -> ")
+                    .append(personAfter.getEmail().map(Object::toString).orElse("<no email>")).append("\n");
         }
         if (!personBefore.getAddress().equals(personAfter.getAddress())) {
             isChanged = true;

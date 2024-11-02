@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a module code of a NUS module in the address book.
  * Guarantees: immutable
  */
-public class ModuleCode {
+public class ModuleCode implements Comparable<ModuleCode> {
     public static final String MESSAGE_CONSTRAINTS =
             "Module code should only contain alphanumeric characters, and it should not be blank.\n"
             + "The accepted pattern is [Alphabets][Numbers][Alphabets], where the ending [Alphabets] are optional.\n"
@@ -66,4 +66,8 @@ public class ModuleCode {
         return moduleCode.hashCode();
     }
 
+    @Override
+    public int compareTo(ModuleCode o) {
+        return this.moduleCode.compareTo(o.moduleCode);
+    }
 }
