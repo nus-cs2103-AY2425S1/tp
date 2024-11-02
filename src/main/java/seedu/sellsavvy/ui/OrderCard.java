@@ -13,7 +13,7 @@ import seedu.sellsavvy.model.order.Status;
 public class OrderCard extends UiPart<Region> {
 
     public static final String ORDER_HEADING_FORMAT = "%1$s. %2$s";
-    public static final String QUANTITY_FORMAT = "(x%s)";
+    public static final String QUANTITY_FORMAT = " (x%s)";
     public static final String DELIVER_BY_FORMAT = "Delivery by: %1$s";
     private static final String FXML = "OrderListCard.fxml";
 
