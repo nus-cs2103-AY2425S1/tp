@@ -40,16 +40,16 @@ public class OrderListPanel extends UiPart<Region> {
     private Label orderListTitle;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code OrderListPanel} with the given {@code ReadOnlyObjectProperty} of {@code Person}.
      */
-    public OrderListPanel(ReadOnlyObjectProperty<Person> selectedPerson) {
+    public OrderListPanel(ReadOnlyObjectProperty<Person> selectedPersonProperty) {
         super(FXML);
         orderGuide.setText("Use one of the following commands below to view order:\n" + "1. "
                 + ListOrderCommand.MESSAGE_USAGE);
         orderListEmpty.setText(EMPTY_ORDER_LIST_MESSAGE);
-        updateOrderList(selectedPerson.get());
+        updateOrderList(selectedPersonProperty.get());
 
-        selectedPerson.addListener(((observable, oldPerson, newPerson) -> {
+        selectedPersonProperty.addListener(((observable, oldPerson, newPerson) -> {
             updateOrderList(newPerson);
         }));
     }
