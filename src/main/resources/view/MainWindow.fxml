@@ -46,11 +46,11 @@
 
           <VBox styleClass="padding-8" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <StackPane fx:id="contactListPanelPlaceholder"
-                       VBox.vgrow="ALWAYS" maxHeight="Infinity" minHeight="200" />
-            <StackPane styleClass="padding-8" maxHeight="160" minHeight="120" prefHeight="160">
+                       VBox.vgrow="ALWAYS" maxHeight="Infinity" minHeight="180" />
+            <StackPane styleClass="padding-8" maxHeight="220" minHeight="140" prefHeight="220">
               <VBox>
                 <StackPane fx:id="resultDisplayPlaceholder" styleClass=""
-                           maxHeight="100" minHeight="60" prefHeight="100"/>
+                           maxHeight="160" minHeight="80" prefHeight="160"/>
                 <StackPane fx:id="commandBoxPlaceholder" styleClass=""
                            maxHeight="60" minHeight="60" prefHeight="60" />
               </VBox>
