@@ -41,6 +41,21 @@ public class LessonCommandParser implements Parser<LessonCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public LessonCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_MISSING_PERSON_INDEX + "\n" + LessonCommand.MESSAGE_USAGE));
+        }
+
+        String[] argParts = trimmedArgs.split("\\s+", 2);
+        if (argParts.length < 2) {
+            // Only person index provided, no lesson information
+            if (isAddCommand()) {
+                throw new ParseException(MESSAGE_MISSING_LESSON_FIELD_PREFIX);
+            } else {
+                throw new ParseException(MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX);
+            }
+        }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_LESSON, PREFIX_LESSON_INDEX);
 
@@ -52,6 +67,7 @@ public class LessonCommandParser implements Parser<LessonCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MESSAGE_MISSING_PERSON_INDEX + "\n" + LessonCommand.MESSAGE_USAGE));
             }
+            
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_INVALID_PERSON_INDEX_FORMAT + "\n" + LessonCommand.MESSAGE_USAGE), pe);
         }
