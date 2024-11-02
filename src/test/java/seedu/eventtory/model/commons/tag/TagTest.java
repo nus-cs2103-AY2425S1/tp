@@ -2,7 +2,6 @@ package seedu.eventtory.model.commons.tag;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.eventtory.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
