@@ -441,6 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Search Query                  | A user-provided input (e.g., name or role) to filter contacts in the list                                               |
 | Role                          | A Volunteer, Donor or Partner                                                                                           |
 | Group                         | A named collection of contacts, allowing users to filter or perform actions on specific subsets of people easily.       |
+| Partner                       | A contact who represents their company or organization as the main point of communication and collaboration.            |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
