@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 <div markdown="block" class="alert alert-info">
-StoreClass (SC) is a **desktop app for educators from private organizations e.g. tuition centers to manage their students. The educators will interact with the app through type while viewing the app through the window
+StoreClass (SC) is a desktop app for educators from private organizations e.g. tuition centers to manage their students. The educators will interact with the app through type while viewing the app through the window
 </div> 
 
 If you can type fast, StoreClass will become a perfect tools to manage student data.
@@ -184,6 +184,8 @@ There should be only one file name provided.
 
 <div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
 All entries in the current address book will be discarded.
+
+Archiving into a existing address book will overwrite the old address book.
 </div>
 
 ### Load data files `load`
