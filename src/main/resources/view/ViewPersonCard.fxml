@@ -8,11 +8,15 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.layout.GridPane?>
+
 <VBox fx:id="view" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <Label id="viewTitle" text="Contact Information" />
-    <HBox alignment="BASELINE_LEFT">
+    <GridPane>
+    <HBox alignment="BASELINE_LEFT" prefWidth="1250">
         <Label id="viewName" fx:id="viewName"/>
     </HBox>
+    </GridPane>
     <HBox alignment="BASELINE_LEFT">
         <Label id="viewLabel" text="Phone Number: "/>
         <Label id="viewPhone" fx:id="viewPhone"/>
