@@ -18,6 +18,15 @@
         {% if item.toc %}
         <button onclick="toggleTOC('{{ item.title | replace: ' ', '-' }}')">Details</button>
         <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
+          {% assign headings = site.pages | where: "path", item.url | first %}
+          {% if headings %}
+          {% for heading in headings.content | split: '## ' %}
+          {% if heading != '' %}
+          {% assign parts = heading | split: '\n' %}
+          <li><a href="#{{ parts[0] | slugify }}">{{ parts[0] }}</a></li>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
         </div>
         {% endif %}
       </li>
