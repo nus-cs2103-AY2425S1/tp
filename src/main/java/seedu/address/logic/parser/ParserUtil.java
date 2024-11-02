@@ -151,9 +151,12 @@ public class ParserUtil {
      * Parses a {@code String description} into a {@code JobDescription}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static JobDescription parseDescription(String description) {
+    public static JobDescription parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
+        if (!JobDescription.isValidDescription(trimmedDescription)) {
+            throw new ParseException(JobDescription.MESSAGE_CONSTRAINTS);
+        }
         return new JobDescription(trimmedDescription);
     }
 

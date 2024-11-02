@@ -9,13 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class JobDescription {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Job description should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Job description should not be blank";
 
     /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum},. -]*";
+    public static final String VALIDATION_REGEX = "^\\S.*";
 
     public final String value;
 
