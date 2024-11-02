@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -7,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
+import seedu.address.model.tut.TutDate;
 
 /**
  * A UI component that displays information of a {@code Student}.
@@ -38,6 +41,7 @@ public class StudentCard extends UiPart<Region> {
         name.setText(displayedIndex + ". " + student.getName().fullName);
         studentId.setText(student.getStudentId().value);
         tutorialId.setText(student.getTutorialId().toString());
+        // Initialize attendance labels
         updateAttendanceLabels();
 
         // Add click listener to the card
@@ -46,11 +50,13 @@ public class StudentCard extends UiPart<Region> {
 
     private void updateAttendanceLabels() {
         attendanceFlowPane.getChildren().clear();
-        student.getPresentDates().getDates().forEach(date -> {
-            Label dateLabel = new Label(date.toString());
-            dateLabel.getStyleClass().add("attendance-date-label");
-            attendanceFlowPane.getChildren().add(dateLabel);
-        });
+        student.getPresentDates().getDates().stream()
+                .sorted(Comparator.comparing(TutDate::getDate))
+                .forEach(date -> {
+                    Label dateLabel = new Label(date.toString());
+                    dateLabel.getStyleClass().add("attendance-date-label");
+                    attendanceFlowPane.getChildren().add(dateLabel);
+                });
     }
 
     /**
