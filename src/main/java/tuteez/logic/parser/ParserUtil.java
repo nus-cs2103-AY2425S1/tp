@@ -2,13 +2,17 @@ package tuteez.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import tuteez.commons.core.index.Index;
+import static tuteez.commons.util.AppUtil.checkArgument;
 import tuteez.commons.util.StringUtil;
 import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.person.Address;
@@ -16,6 +20,7 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
+import tuteez.model.person.lesson.Day;
 import tuteez.model.person.lesson.Lesson;
 import tuteez.model.remark.Remark;
 import tuteez.model.tag.Tag;
@@ -160,8 +165,35 @@ public class ParserUtil {
     public static Lesson parseLesson(String lesson) throws ParseException {
         requireNonNull(lesson);
         String trimmedLesson = lesson.trim();
-        if (!Lesson.isValidLesson(trimmedLesson)) {
+        DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
+        String[] lessonDayTimeArr = lesson.split("\\s+", 2);
+        System.out.println(Arrays.toString(lessonDayTimeArr));
+
+        if (lessonDayTimeArr.length != 2) {
+            System.out.println("error is here ");
             throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
+        }
+
+        String dayString = lessonDayTimeArr[0];
+        String timeRange = lessonDayTimeArr[1];
+        String[] timeArr = timeRange.split("-");
+        LocalTime startTime = LocalTime.parse(timeArr[0], TIME_FORMATTER);
+        LocalTime endTime = LocalTime.parse(timeArr[1], TIME_FORMATTER);
+
+        if (!Day.isValidDay(dayString.toLowerCase()) || !Lesson.isValidTimeRange(timeRange)) {
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Lesson.isLessonStartAtValidTime(startTime)) {
+            throw new ParseException(Lesson.MESSAGE_INVALID_LESSON_START_TIME);
+        }
+
+        if (!Lesson.isLessonEndAtValidTime(endTime)) {
+            throw new ParseException(Lesson.MESSAGE_INVALID_LESSON_END_TIME);
+        }
+
+        if (!Lesson.isValidTimeOrder(startTime, endTime)) {
+            throw new ParseException(Lesson.MESSAGE_INVALID_TIME_ORDER);
         }
         return new Lesson(trimmedLesson);
     }
