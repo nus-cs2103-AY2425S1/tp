@@ -13,7 +13,7 @@ public abstract class PublicAddress {
     public static final String DEFAULT_LABEL = "default"; // TODO: Remove once placeholder is no longer needed
 
     public static final String MESSAGE_LABEL_CONSTRAINTS =
-            "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
+        "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
 
     public static final String VALIDATION_LABEL_REGEX = "[^\\s].*"; // TODO: Update regex
 
@@ -49,7 +49,10 @@ public abstract class PublicAddress {
     /**
      * Returns true if a given string is a valid public address.
      */
-    protected abstract boolean isValidPublicAddress(String publicAddress);
+    protected boolean isValidPublicAddress(String publicAddress) {
+        return publicAddress.length() != 0 && publicAddress.length() <= 50 && publicAddress.matches(
+            "^[a-zA-Z0-9]+$");
+    }
 
     /**
      * Returns message for constraints of public address fields.

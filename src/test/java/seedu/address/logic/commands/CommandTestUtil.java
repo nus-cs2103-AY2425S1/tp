@@ -57,8 +57,10 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final String VALID_PUBLIC_ADDRESS_ETH =
+    public static final String VALID_PUBLIC_ADDRESS_ETH_MAIN =
         "0x0B1C9E1Fb5E13c797c7f0134641810E9A7ca14d2"; //this is a real ETH public address
+    public static final String VALID_PUBLIC_ADDRESS_ETH_SUB =
+        "0xE859Ed4267af9f247aAB2703CebcA466C71887b2"; //this is a real ETH public address
     public static final String VALID_PUBLIC_ADDRESS_BTC_MAIN =
         "bc1qak5yzzvn7va9qmkp7g5uykg2msc5kt0z0uhv2k"; //this is a real BTC public address
     public static final String VALID_PUBLIC_ADDRESS_BTC_SUB =
