@@ -247,16 +247,24 @@ _Details coming soon ..._
 - Can include letters, digits, spaces, hyphens (-), slashes (/), apostrophes ('), and periods (.).
 - Cannot start or end with spaces.
 - Symbols such as hyphens, slashes, apostrophes, and periods cannot have spaces directly before or after them (e.g., "John -Doe" will be formatted to "John-Doe").
-- Consecutive spaces within the name are trimmed to one space. (e.g. "John      Doe" will be trimmed to "John Doe)
+- Consecutive spaces within the name are trimmed to one space. (e.g. "John      Doe" will be trimmed to "John Doe")
 
 ### PHONE
-- Hyphens (-) are allowed in the input but will be trimmed away (e.g., 119-224-337 will be trimmed to 119224337).
+- Hyphens (-) are allowed in the input but will be trimmed away (e.g., "119-224-337" will be trimmed to "119224337").
 - Only one leading plus sign (+) is allowed at the beginning of the phone number.
-- Any whitespace between digits will be removed (e.g., 119 224 337 will be trimmed to 119224337).
+- Any whitespace between digits will be removed (e.g., "119 224 337" will be trimmed to "119224337").
 - The phone number must consist of only numeric characters, with optional leading + and allowed hyphens.
 - The length of the phone number (excluding leading + and hyphens) must be between 3 and 15 digits inclusive.
 - Checking for valid country code is not in scope.
 
+### EMAIL
+- The email address must be in the format local-part@domain.
+- The local part must contain only alphanumeric characters and the following special characters: +, _, ., and -. It cannot start or end with a special character.
+- The domain part must consist of alphanumeric characters, with each domain label separated by periods.
+- Each domain label must start and end with alphanumeric characters and may contain hyphens (-) but cannot start or end with them.
+- The entire email address must not exceed 50 characters in length and cannot contain any spaces.
+- All characters after the "@" symbol will be converted to lowercase (e.g., "hhh@GMAil.com" will become "hhh@gmail.com").
+- Checking for valid email domain is not in scope.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ

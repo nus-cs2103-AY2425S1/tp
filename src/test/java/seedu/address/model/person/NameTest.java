@@ -32,12 +32,17 @@ public class NameTest {
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
         assertFalse(Name.isValidLengthName("This name exceeds the maximum allowed length of fifty characters and "
                 + "should fail validation")); // exceeds character limit
+        assertFalse(Name.isValidName("12345")); // contains numbers only
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // contains numbers
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
+        assertTrue(Name.isValidName("peter-jack")); // alphabets and hyphen only
+        assertTrue(Name.isValidName("peter a/p lim")); // alphabets and slash only
+        assertTrue(Name.isValidName("peter Sr. lim")); // alphabets and . only
+        assertTrue(Name.isValidName("Lim Li' Ern")); // alphabets and ' only
+        assertTrue(Name.isValidName("peter Sr. lim a'p Non a/p Sam-jun")); // alphabets and . ' - / only
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
         assertTrue(Name.isValidLengthName("Christopher Alexander Johnson-Smith the Third")); // have 49 characters
     }

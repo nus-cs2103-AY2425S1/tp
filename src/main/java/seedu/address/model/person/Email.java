@@ -44,7 +44,14 @@ public class Email {
         email = email.trim();
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
         checkArgument(isValidLengthEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+
+        // Split the email into local-part and domain-part
+        String[] emailParts = email.split("@", 2); // Split into at most 2 parts
+        String localPart = emailParts[0];
+        String domainPart = emailParts[1].toLowerCase(); // Convert domain part to lower case
+
+        // Reconstruct the email with lowercase domain
+        value = localPart + "@" + domainPart;
     }
 
     /**
