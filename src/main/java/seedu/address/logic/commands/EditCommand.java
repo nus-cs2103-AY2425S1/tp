@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -27,6 +28,8 @@ import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
+import seedu.address.model.patient.exceptions.AllergyAlreadyExistsException;
+import seedu.address.model.patient.exceptions.AllergyNotFoundException;
 
 /**
  * Edits the details of an existing patient in the address book.
@@ -86,7 +89,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
      * edited with {@code editPatientDescriptor}.
      */
-    private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor) {
+    private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor)
+            throws CommandException {
         assert patientToEdit != null;
 
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
@@ -96,7 +100,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-        // Allergy updatedAllergy = editPatientDescriptor.getAllergy().orElse(patientToEdit.getAllergy());
+        AllergyList updatedAllergyList = getUpdatedAllergyList(patientToEdit, editPatientDescriptor);
         BloodType updatedBloodType = editPatientDescriptor.getBloodType().orElse(patientToEdit.getBloodType());
         HealthRisk updatedHealthRisk = editPatientDescriptor.getHealthRisk().orElse(patientToEdit.getHealthRisk());
         ExistingCondition updatedExistingCondition = editPatientDescriptor.getExistingCondition()
@@ -104,12 +108,66 @@ public class EditCommand extends Command {
         Note updatedNote = editPatientDescriptor.getNote().orElse(patientToEdit.getNote());
         Name updatedNokName = editPatientDescriptor.getNokName().orElse(patientToEdit.getNokName());
         Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
-        ApptList updatedAppt = new ApptList(patientToEdit.getAppts()); // Improve abstraction
+        ApptList updatedAppt = new ApptList(patientToEdit.getAppts());
 
-        // I changed the updatedAllergy, you will need to change it later @yuanch
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
-                updatedEmail, updatedAddress, new AllergyList(), updatedBloodType, updatedHealthRisk,
+                updatedEmail, updatedAddress, updatedAllergyList, updatedBloodType, updatedHealthRisk,
                 updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, updatedAppt);
+    }
+
+    /**
+     * Updates the allergies of a patient based on the given {@code EditPersonDescriptor}.
+     */
+    public static AllergyList getUpdatedAllergyList(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor)
+            throws CommandException {
+        Optional<AllergyList> allergiesToAdd = editPatientDescriptor.getAllergiesToAdd();
+        Optional<AllergyList> allergiesToRemove = editPatientDescriptor.getAllergiesToRemove();
+        if (allergiesToAdd.isEmpty() && allergiesToRemove.isEmpty()) {
+            return new AllergyList(new LinkedHashSet<>(patientToEdit.getAllergies()));
+        }
+        if (allergiesToRemove.isPresent()) {
+            List<Allergy> allergiesToRemoveList = allergiesToRemove.get().getAllergies();
+            checkAnyAllergiesNotPresent(patientToEdit, allergiesToRemoveList);
+            for (Allergy allergy : allergiesToRemoveList) {
+                patientToEdit.deleteAllergy(allergy);
+            }
+        }
+        if (allergiesToAdd.isPresent()) {
+            List<Allergy> allegiesToAddList = allergiesToAdd.get().getAllergies();
+            checkAnyAllergiesAlreadyPresent(patientToEdit, allegiesToAddList);
+            for (Allergy allergy : allegiesToAddList) {
+                patientToEdit.addAllergy(allergy);
+            }
+        }
+        return new AllergyList(new LinkedHashSet<>(patientToEdit.getAllergies()));
+    }
+
+    /**
+     * Checks if all the specified allergies to be removed are present in the patient's list of allergies.
+     */
+    public static void checkAnyAllergiesNotPresent(Patient patientToEdit, List<Allergy> allergies)
+            throws CommandException {
+        for (Allergy allergy : allergies) {
+            try {
+                patientToEdit.checkAllergyPresentForRemoval(allergy);
+            } catch (AllergyNotFoundException e) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_ALLERGY_TO_DELETE, allergy));
+            }
+        }
+    }
+
+    /**
+     * Checks if any of the specified allergies to be added already exists in the patient's list of allergies.
+     */
+    public static void checkAnyAllergiesAlreadyPresent(Patient patientToEdit, List<Allergy> allergies)
+            throws CommandException {
+        for (Allergy allergy : allergies) {
+            try {
+                patientToEdit.checkAllergyAlreadyExists(allergy);
+            } catch (AllergyAlreadyExistsException e) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_ALLERGY_TO_ADD, allergy));
+            }
+        }
     }
 
     @Override
@@ -148,7 +206,8 @@ public class EditCommand extends Command {
         private Birthdate birthdate;
         private Sex sex;
         private Address address;
-        private Allergy allergy;
+        private AllergyList allergiesToAdd;
+        private AllergyList allergiesToRemove;
         private BloodType bloodType;
         private HealthRisk healthRisk;
         private ExistingCondition existingCondition;
@@ -170,7 +229,8 @@ public class EditCommand extends Command {
             setBirthDate(toCopy.birthdate);
             setSex(toCopy.sex);
             setAddress(toCopy.address);
-            setAllergy(toCopy.allergy);
+            setAllergiesToAdd(toCopy.allergiesToAdd);
+            setAllergiesToRemove(toCopy.allergiesToRemove);
             setBloodType(toCopy.bloodType);
             setHealthRisk(toCopy.healthRisk);
             setExistingCondition(toCopy.existingCondition);
@@ -183,8 +243,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, nric, birthdate, sex, address, allergy, bloodType,
-                    healthRisk, existingCondition, note, nokName, nokPhone);
+            return CollectionUtil.isAnyNonNull(name, phone, email, nric, birthdate, sex, address, allergiesToAdd,
+                    allergiesToRemove, bloodType, healthRisk, existingCondition, note, nokName, nokPhone);
         }
 
         public void setName(Name name) {
@@ -236,11 +296,17 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setAllergy(Allergy allergy) {
-            this.allergy = allergy;
+        public void setAllergiesToAdd(AllergyList allergiesToAdd) {
+            this.allergiesToAdd = allergiesToAdd;
         }
-        public Optional<Allergy> getAllergy() {
-            return Optional.ofNullable(allergy);
+        public Optional<AllergyList> getAllergiesToAdd() {
+            return Optional.ofNullable(allergiesToAdd);
+        }
+        public void setAllergiesToRemove(AllergyList allergiesToRemove) {
+            this.allergiesToRemove = allergiesToRemove;
+        }
+        public Optional<AllergyList> getAllergiesToRemove() {
+            return Optional.ofNullable(allergiesToRemove);
         }
 
         public void setBloodType(BloodType bloodtype) {

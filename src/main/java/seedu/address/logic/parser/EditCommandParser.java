@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVEALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import seedu.address.logic.commands.EditCommand;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
-                        PREFIX_ALLERGY, PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION, PREFIX_NOTE);
+                        PREFIX_ALLERGY, PREFIX_REMOVEALLERGY, PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION, PREFIX_NOTE);
 
         Nric nric;
 
@@ -48,8 +49,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE, PREFIX_ALLERGY,
-                PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION, PREFIX_NOTE);
+                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE, PREFIX_HEALTHRISK,
+                PREFIX_EXISTINGCONDITION, PREFIX_NOTE);
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
@@ -84,8 +85,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPatientDescriptor.setNokPhone(ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_ALLERGY).isPresent()) {
-            // TODO remove the comment yuancheng
-            // editPatientDescriptor.setAllergy(ParserUtil.parseAllergy(argMultimap.getValue(PREFIX_ALLERGY).get()));
+            editPatientDescriptor.setAllergiesToAdd(ParserUtil.parseAllergies(
+                    argMultimap.getAllValues(PREFIX_ALLERGY)));
+        }
+        if (argMultimap.getValue(PREFIX_REMOVEALLERGY).isPresent()) {
+            editPatientDescriptor.setAllergiesToRemove(ParserUtil.parseAllergies(
+                    argMultimap.getAllValues(PREFIX_REMOVEALLERGY)));
         }
         if (argMultimap.getValue(PREFIX_HEALTHRISK).isPresent()) {
             editPatientDescriptor.setHealthRisk(ParserUtil.parseHealthRisk(
