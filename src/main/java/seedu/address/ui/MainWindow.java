@@ -38,7 +38,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-    private boolean isPrompt = false; // Tracks if this MainWindow is currently waiting for confirmation from user
     private CommandResult lastCommandResult = null; // Tracks the most recent CommandResult
 
     // Independent Ui parts residing in this Ui container
@@ -143,7 +142,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand, this::checkPromptConfirmation);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -218,37 +217,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult;
-            if (!isPrompt) {
-                commandResult = logic.execute(commandText);
-            } else {
-                commandResult = checkConfirmation(commandText);
-            }
-            lastCommandResult = commandResult;
-
-            switch (commandResult.getType()) {
-            case PROMPT:
-                logger.info("Prompt: " + commandResult.getFeedbackToUser());
-                isPrompt = true;
-                break;
-            default:
-                logger.info("Result: " + commandResult.getFeedbackToUser());
-                break;
-            }
-
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            commandBox.setFeedbackToUser(commandResult.getHistory());
-
-            switch (commandResult.getType()) {
-            case SHOW_HELP:
-                handleHelp();
-                break;
-            case EXIT:
-                handleExit();
-                break;
-            }
-
-            return commandResult;
+            lastCommandResult = logic.execute(commandText);
+            executeTillTerminalResult();
+            return lastCommandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
@@ -256,13 +227,49 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private CommandResult checkConfirmation(String userInput) throws CommandException {
-        isPrompt = false;
-
+    /**
+     * Checks if the user accepted a confirmation prompt. If the prompt was confirmed, executes the continuation
+     * function of the most recent {@link CommandResult} and returns the result.
+     */
+    private CommandResult checkPromptConfirmation(String userInput) {
         if (!isConfirmation(userInput)) {
-            return new CommandResult("Command cancelled");
+            lastCommandResult = new CommandResult("Command cancelled");
+        } else {
+            lastCommandResult = lastCommandResult.confirmPrompt();
         }
-        return lastCommandResult.confirmPrompt();
+        executeTillTerminalResult();
+        return lastCommandResult;
+    }
+
+    /**
+     * Executes the continuation function of the most recent {@link CommandResult} until a terminal result is reached.
+     */
+    private void executeTillTerminalResult() {
+        while (true) {
+            switch (lastCommandResult.getType()) {
+            case ORDINARY: // terminal
+                logger.info("Result: " + lastCommandResult.getFeedbackToUser());
+                break;
+            case SHOW_HELP: // terminal
+                logger.info("Result: " + lastCommandResult.getFeedbackToUser());
+                handleHelp();
+                break;
+            case EXIT: // terminal
+                logger.info("Result: " + lastCommandResult.getFeedbackToUser());
+                handleExit();
+                break;
+            case PROMPT: // terminal
+                logger.info("Prompt: " + lastCommandResult.getFeedbackToUser());
+                commandBox.waitForPrompt();
+                break;
+            case IMPORT_DATA: // intermediate
+            case EXPORT_DATA: // intermediate
+                continue;
+            }
+            break;
+        }
+        resultDisplay.setFeedbackToUser(lastCommandResult.getFeedbackToUser());
+        commandBox.setFeedbackToUser(lastCommandResult.getHistory());
     }
 
     /**
