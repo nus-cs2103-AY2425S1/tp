@@ -34,6 +34,6 @@ public class ListGoodsCommandParserTest {
     public void parse_noArgs_returnListGoodsCommand() {
         // Valid input with no args
         ListGoodsCommand expectedListGoodsCommand = new ListGoodsCommand(dummyPredicate);
-        assertParseSuccess(parser, "viewgoods", expectedListGoodsCommand); 
+        assertParseSuccess(parser, "viewgoods", expectedListGoodsCommand);
     }
 }
