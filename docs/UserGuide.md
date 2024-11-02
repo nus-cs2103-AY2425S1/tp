@@ -57,7 +57,7 @@ The codebase of Talency originates from AddressBook Level 3 (AB3) developed by C
 * Items with `…`​ after them can be used multiple times including zero times.<br>
     e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -78,7 +78,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG`
+Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG`
 
 <box type="tip" seamless>
 
@@ -136,7 +136,7 @@ Format:
 `find n/FULL_NAME`
 `find j/JOB_CODE_APPLIED_FOR`
 `find t/TAG`
-`find n/FULL_NAME p/PHONE_NUMBER`
+`find n/FULL_NAME p/PHONE`
 `find n/FULL_NAME e/EMAIL`
 
 * The search for name is case-insensitive. e.g `hans` will match `Hans`
@@ -158,10 +158,10 @@ Deletes the specified person from the address book.
 Format:
 `delete INDEX`
 `delete n/NAME`
-`delete n/NAME p/PHONE_NUMBER`
+`delete n/NAME p/PHONE`
 `delete n/NAME e/EMAIL`
 
-* Deletes the person at the specified `INDEX`, with a specified full name `NAME`, `NAME` and `PHONE_NUMBER`, or `NAME` and `EMAIL`
+* Deletes the person at the specified `INDEX`, with a specified full name `NAME`, `NAME` and `PHONE`, or `NAME` and `EMAIL`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If there are contacts with duplicate names, user must specifically find `NAME` and `PHONE` or `NAME` and `EMAIL`.
@@ -235,6 +235,30 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Fields
+
+<box type="info" seamless>
+
+**Notes about each valid input field:**<br>
+
+### NAME
+- Must be between 1 and 50 characters, excluding leading and trailing whitespaces.
+- Must contain at least one letter.
+- Can include letters, digits, spaces, hyphens (-), slashes (/), apostrophes ('), and periods (.).
+- Cannot start or end with spaces.
+- Symbols such as hyphens, slashes, apostrophes, and periods cannot have spaces directly before or after them (e.g., "John -Doe" will be formatted to "John-Doe").
+- Consecutive spaces within the name are trimmed to one space. (e.g. "John      Doe" will be trimmed to "John Doe)
+
+### PHONE
+- Hyphens (-) are allowed in the input but will be trimmed away (e.g., 119-224-337 will be trimmed to 119224337).
+- Only one leading plus sign (+) is allowed at the beginning of the phone number.
+- Any whitespace between digits will be removed (e.g., 119 224 337 will be trimmed to 119224337).
+- The phone number must consist of only numeric characters, with optional leading + and allowed hyphens.
+- The length of the phone number (excluding leading + and hyphens) must be between 3 and 15 digits inclusive.
+- Checking for valid country code is not in scope.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -254,10 +278,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R`
+**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R`
 **Clear**  | `clear`
-**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE` e.g. `delete n/Alex Yeoh p/88306733`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find n/FULL_NAME` `find j/JOB_CODE_APPLIED_FOR` `find t/TAG` `find n/FULL_NAME p/PHONE_NUMBER` `find n/FULL_NAME e/EMAIL`
+**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE_NUMBET` e.g. `delete n/Alex Yeoh p/88306733`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find n/FULL_NAME` `find j/JOB_CODE_APPLIED_FOR` `find t/TAG` `find n/FULL_NAME p/PHONE` `find n/FULL_NAME e/EMAIL`
 **List**   | `list`
 **Help**   | `help`
