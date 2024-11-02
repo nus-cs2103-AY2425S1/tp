@@ -21,14 +21,7 @@
           <ul>  <!-- Add this UL here -->
             {% assign headings = site.pages | where: "path", item.path | first %}
             {% if headings %}
-            {% assign content = headings.content %}
-            {% assign lines = content | split: '\n' %}
-            {% for line in lines %}
-            {% if line contains '## ' %}
-            <li><a href="#{{ line | split: '## ' | last | slugify }}">{{ line | split: '## ' | last }}</a></li>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
+            <li><a href="{{item.url}}">{{ item.path}}</a>
           </ul>
         </div>
         {% endif %}
