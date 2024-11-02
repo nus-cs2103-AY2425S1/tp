@@ -36,13 +36,13 @@ public class SampleDataUtil {
                 getTagSet("neighbours"), getEventIdSet(1, 2), 3),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), getEventIdSet(3), 4),
+                getTagSet("family"), getEventIdSet(2), 4),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), getEventIdSet(4), 5),
+                getTagSet("classmates"), getEventIdSet(1), 5),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), getEventIdSet(5), 6)
+                getTagSet("colleagues"), getEventIdSet(1), 6)
         };
     }
 
@@ -57,19 +57,22 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        IdCounterList idCounterList = new IdCounterList();
         int largestPersonId = 0;
+        int largestEventId = 0;
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
             if (samplePerson.getId() > largestPersonId) {
                 largestPersonId = samplePerson.getId();
             }
         }
-        idCounterList.setPersonIdCounter(largestPersonId);
-        sampleAb.setIdCounterList(idCounterList);
         for (Event sampleEvent : getSampleEvents()) {
             sampleAb.addEvent(sampleEvent);
+            if (sampleEvent.getEventId() > largestEventId) {
+                largestEventId = sampleEvent.getEventId();
+            }
         }
+        IdCounterList idCounterList = new IdCounterList(largestPersonId, largestEventId);
+        sampleAb.setIdCounterList(idCounterList);
         return sampleAb;
     }
 
