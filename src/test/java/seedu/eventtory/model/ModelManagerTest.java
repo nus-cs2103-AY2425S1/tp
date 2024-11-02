@@ -267,6 +267,24 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void testAssignedEventsDisplayStartIdx_updatesWithEventListSize() {
+        assertEquals(1, modelManager.getAssignedEventsDisplayStartIdx().get());
+
+        modelManager.addEvent(TypicalEvents.HOON);
+
+        assertEquals(2, modelManager.getAssignedEventsDisplayStartIdx().get());
+    }
+
+    @Test
+    public void testAssignedVendorsDisplayStartIdx_updatesWithVendorListSize() {
+        assertEquals(1, modelManager.getAssignedVendorsDisplayStartIdx().get());
+
+        modelManager.addVendor(TypicalVendors.HOON);
+
+        assertEquals(2, modelManager.getAssignedVendorsDisplayStartIdx().get());
+    }
+
+    @Test
     public void equals() {
         EventTory eventTory = new EventToryBuilder().withVendor(ALICE).withVendor(BENSON).build();
         EventTory differentEventTory = new EventTory();
@@ -303,4 +321,3 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(eventTory, differentUserPrefs)));
     }
 }
-

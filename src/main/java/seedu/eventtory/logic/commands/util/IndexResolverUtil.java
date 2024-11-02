@@ -71,9 +71,11 @@ public class IndexResolverUtil {
 
     /**
      * Retrieve an item from two lists, where the second list is accessed if the index overflows from the first list.
+     * Index are assumed to be zero-based and non-negative.
      */
     private static <T> T getFromTwoLists(int index, List<T> list1, List<T> list2,
         String errorMessage) throws CommandException {
+        assert index >= 0 : "Index should be non-negative";
 
         if (index < list1.size()) {
             return list1.get(index);
