@@ -18,7 +18,7 @@ import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
 
 public class JsonAdaptedContactTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "R#chel";
     private static final String INVALID_TELEGRAM_HANDLE = "+651234";
     private static final String INVALID_STUDENT_STATUS = " ";
     private static final String INVALID_EMAIL = "example.com";
