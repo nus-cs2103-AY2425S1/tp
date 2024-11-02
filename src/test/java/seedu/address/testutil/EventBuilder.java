@@ -116,6 +116,7 @@ public class EventBuilder {
      * Builds and returns the {@code Event} object.
      */
     public Event build() {
-        return new Event(eventName, location, date, startTime, endTime, description);
-    }
-}
+        Event event = new Event(eventName, location, date, startTime, endTime, description);
+        event.getVolunteers().addAll(volunteers);
+        return event;
+    }}
