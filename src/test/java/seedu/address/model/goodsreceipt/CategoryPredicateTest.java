@@ -11,32 +11,32 @@ import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.person.Name;
 
-public class SupplierNamePredicateTest {
+public class CategoryPredicateTest {
     private static final String DATETIME_PROCUREMENT_VALID = "2024-10-10 12:00";
     private static final String DATETIME_ARRIVAL_VALID = "2024-12-12 12:00";
     private final Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new SupplierNamePredicate(null));
+        assertThrows(NullPointerException.class, () -> new CategoryPredicate(null));
     }
 
     @Test
-    public void gooodsNamePredicateTest_valid_predicateSuccess() {
+    public void categoryPredicateTest_valid_predicateSuccess() {
         GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
                 new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID), false, 1, 1.0);
 
-        SupplierNamePredicate testPredicate = new SupplierNamePredicate(new Name("Alex Yeoh"));
+        CategoryPredicate testPredicate = new CategoryPredicate(GoodsCategories.CONSUMABLES);
         boolean posResult = testPredicate.test(testReceipt);
         assertTrue(posResult);
     }
 
     @Test
-    public void goodsNamePredicateTest_invalid_predicateFailure() {
+    public void categoryPredicateTest_invalid_predicateFailure() {
         GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
                 new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID), false, 1, 1.0);
 
-        SupplierNamePredicate testPredicate = new SupplierNamePredicate(new Name("Test User"));
+        CategoryPredicate testPredicate = new CategoryPredicate(GoodsCategories.SPECIALTY);
         boolean negResult = testPredicate.test(testReceipt);
         assertFalse(negResult);
     }

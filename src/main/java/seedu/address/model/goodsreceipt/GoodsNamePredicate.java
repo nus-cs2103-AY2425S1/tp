@@ -1,5 +1,7 @@
 package seedu.address.model.goodsreceipt;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.function.Predicate;
 
 /**
@@ -9,6 +11,7 @@ public class GoodsNamePredicate implements Predicate<GoodsReceipt> {
     private final String name;
 
     public GoodsNamePredicate(String name) {
+        requireNonNull(name);
         this.name = name;
     }
 

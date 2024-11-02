@@ -1,5 +1,7 @@
 package seedu.address.model.goodsreceipt;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.function.Predicate;
 
 import seedu.address.model.goods.GoodsCategories;
@@ -11,6 +13,7 @@ public class CategoryPredicate implements Predicate<GoodsReceipt> {
     private final GoodsCategories category;
 
     public CategoryPredicate(GoodsCategories category) {
+        requireNonNull(category);
         this.category = category;
     }
 

@@ -1,6 +1,7 @@
 package seedu.address.model.goodsreceipt;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,11 @@ public class GoodsNamePredicateTest {
     private static final String DATETIME_PROCUREMENT_VALID = "2024-10-10 12:00";
     private static final String DATETIME_ARRIVAL_VALID = "2024-12-12 12:00";
     private final Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new GoodsNamePredicate(null));
+    }
 
     @Test
     public void gooodsNamePredicateTest_valid_predicateSuccess() {
