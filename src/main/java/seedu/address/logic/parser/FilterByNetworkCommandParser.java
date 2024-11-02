@@ -8,13 +8,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK
 import static java.util.Objects.requireNonNull;
 
 
+/**
+ * Parses user input for the FilterByNetworkCommand.
+ */
 public class FilterByNetworkCommandParser implements Parser<FilterByNetworkCommand> {
 
-    public final static String MESSAGE_TOO_MANY_NETWORKS= "Please fill in only one network.\n%1$s";
-    public final static String MESSAGE_EMPTY_NETWORK = "Please fill in at least one network.\n%1$s";
-    public final static String MESSAGE_INVALID_NETWORKS = "Invalid network specified. DLTbook only supports "
+    public static final String MESSAGE_TOO_MANY_NETWORKS = "Please fill in only one network.\n%1$s";
+    public static final String MESSAGE_EMPTY_NETWORK = "Please fill in at least one network.\n%1$s";
+    public static final String MESSAGE_INVALID_NETWORKS = "Invalid network specified. DLTbook only supports "
             + "BTC, ETH and SOL networks.";
-    public final static String MESSAGE_EMPTY_OR_WRONG_PREFIX = "Please type %1$s before the specified network.\n%2$s";
+    public static final String MESSAGE_EMPTY_OR_WRONG_PREFIX = "Please type %1$s before the specified network.\n%2$s";
 
     /**
      * Parses the user input and creates a `FilterByNetworkCommand` object.
