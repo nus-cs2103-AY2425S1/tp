@@ -17,7 +17,7 @@ import seedu.address.model.student.TutorialId;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addStu";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the tutorial book. "
             + "Parameters: "
@@ -51,9 +51,9 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasStudent(toAdd)) {
+        /*if (model.hasStudent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-        }
+        }*/
 
         if (model.hasStudentWithId(toAdd.getStudentId())) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENTID + toAdd.getStudentId());
