@@ -65,7 +65,6 @@ public class AddCommand extends Command implements UndoableCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
-    @Override
     public void undo(Model model) {
         model.deletePerson(toAdd);
     }

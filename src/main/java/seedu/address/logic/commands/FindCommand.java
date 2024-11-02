@@ -41,7 +41,6 @@ public class FindCommand extends Command implements UndoableCommand {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
-    @Override
     public void undo(Model model) {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(previousPredicate);

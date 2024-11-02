@@ -81,7 +81,6 @@ public class NewtagCommand extends Command implements UndoableCommand {
         return createCommandResult(isSuccessful);
     }
 
-    @Override
     public void undo(Model model) {
         model.deleteTags(tags);
     }

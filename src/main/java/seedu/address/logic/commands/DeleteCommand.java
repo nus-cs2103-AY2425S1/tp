@@ -47,9 +47,8 @@ public class DeleteCommand extends Command implements UndoableCommand {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
-    @Override
     public void undo(Model model) {
-        model.addPerson(personToDelete);
+        model.addPerson(targetIndex.getZeroBased(), personToDelete);
     }
 
     @Override

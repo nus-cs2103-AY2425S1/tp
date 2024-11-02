@@ -96,7 +96,6 @@ public class UntagCommand extends Command implements UndoableCommand {
         return new CommandResult(finalMessage.toString());
     }
 
-    @Override
     public void undo(Model model) {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();

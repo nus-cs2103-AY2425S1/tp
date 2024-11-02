@@ -113,6 +113,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPerson(int index, Person person) {
+        addressBook.addPerson(index, person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -209,16 +215,21 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeTagFromPersons(Tag tag) {
+    public Set<Person> removeTagFromPersons(Tag tag) {
         List<Person> persons = getFullPersonList();
+        Set<Person> removedPersons= new HashSet<>();
         for (Person person : persons) {
-            Set<Tag> newTags = new HashSet<>(person.getTags());
-            newTags.remove(tag);
+            if (person.hasTag(tag)) {
+                Set<Tag> newTags = new HashSet<>(person.getTags());
+                newTags.remove(tag);
 
-            Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                    person.getEmail(), person.getRsvpStatus(), newTags);
-            setPerson(person, updatedPerson);
+                Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                        person.getEmail(), person.getRsvpStatus(), newTags);
+                setPerson(person, updatedPerson);
+                removedPersons.add(updatedPerson);
+            }
         }
+        return removedPersons;
     }
 
     @Override

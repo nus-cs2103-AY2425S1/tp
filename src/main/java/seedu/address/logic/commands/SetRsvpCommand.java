@@ -84,7 +84,6 @@ public class SetRsvpCommand extends Command implements UndoableCommand {
         return new CommandResult(message);
     }
 
-    @Override
     public void undo(Model model) {
         model.setPerson(updatedPerson, personToUpdate);
     }

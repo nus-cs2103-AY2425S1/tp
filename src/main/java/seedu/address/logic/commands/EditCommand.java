@@ -89,7 +89,6 @@ public class EditCommand extends Command implements UndoableCommand {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-    @Override
     public void undo(Model model) {
         model.setPerson(editedPerson, personToEdit);
     }
