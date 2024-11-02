@@ -27,7 +27,7 @@ import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 
 
@@ -102,13 +102,13 @@ public class EditCommand extends Command {
                                              EditMeetUpDescriptor editMeetUpDescriptor) {
         assert meetUpToEdit != null;
 
-        Name updatedName = editMeetUpDescriptor.getName().orElse(meetUpToEdit.getName());
+        Subject updatedSubject = editMeetUpDescriptor.getSubject().orElse(meetUpToEdit.getSubject());
         Info updatedInfo = editMeetUpDescriptor.getInfo().orElse(meetUpToEdit.getInfo());
         From updatedFrom = editMeetUpDescriptor.getFrom().orElse(meetUpToEdit.getFrom());
         To updatedTo = editMeetUpDescriptor.getTo().orElse(meetUpToEdit.getTo());
         Set<AddedBuyer> updatedAddedBuyers = editMeetUpDescriptor.getAddedBuyers()
                 .orElse(meetUpToEdit.getAddedBuyers());
-        return new MeetUp(updatedName, updatedInfo, updatedFrom, updatedTo, updatedAddedBuyers);
+        return new MeetUp(updatedSubject, updatedInfo, updatedFrom, updatedTo, updatedAddedBuyers);
     }
 
     @Override
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
      * corresponding field value of the meet-up.
      */
     public static class EditMeetUpDescriptor {
-        private Name name;
+        private Subject subject;
         private Info info;
         private From from;
         private To to;
@@ -155,7 +155,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code addedBuyers} is used internally.
          */
         public EditMeetUpDescriptor(EditMeetUpDescriptor toCopy) {
-            setName(toCopy.name);
+            setSubject(toCopy.subject);
             setInfo(toCopy.info);
             setFrom(toCopy.from);
             setTo(toCopy.to);
@@ -166,15 +166,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyMeetUpFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, info, from, to);
+            return CollectionUtil.isAnyNonNull(subject, info, from, to);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setSubject(Subject subject) {
+            this.subject = subject;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<Subject> getSubject() {
+            return Optional.ofNullable(subject);
         }
 
         public void setInfo(Info info) {
@@ -232,7 +232,7 @@ public class EditCommand extends Command {
             EditMeetUpDescriptor otherEditMeetUpDescriptor =
                     (EditMeetUpDescriptor) other;
 
-            return Objects.equals(name, otherEditMeetUpDescriptor.name)
+            return Objects.equals(subject, otherEditMeetUpDescriptor.subject)
                     && Objects.equals(info, otherEditMeetUpDescriptor.info)
                     && Objects.equals(from, otherEditMeetUpDescriptor.from)
                     && Objects.equals(to, otherEditMeetUpDescriptor.to)
@@ -242,7 +242,7 @@ public class EditCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
+                    .add("subject", subject)
                     .add("info", info)
                     .add("from", from)
                     .add("to", to)

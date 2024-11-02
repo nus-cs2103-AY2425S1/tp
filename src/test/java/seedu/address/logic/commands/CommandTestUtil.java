@@ -73,9 +73,13 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_ALAN = "Woodlands Avenue Blk 102 #02-02";
     public static final String VALID_ADDRESS_BRENDA = "Bukit Timah Rd #01-01";
     public static final String VALID_FIND_MEETUP_NAME = "Alice Bob";
+    public static final String VALID_FIND_BUYER_NAME = "Alice Bob";
+    public static final String VALID_FIND_ADDRESS_NAME = "Jurong Clementi";
+    public static final String VALID_FIND_LANDLORD_NAME = "Jerald James";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_FIND_ALICE_BOB = " " + PREFIX_NAME + VALID_FIND_BUYER_NAME;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -84,6 +88,8 @@ public class CommandTestUtil {
     public static final String BUDGET_DESC_BOB = " " + PREFIX_BUDGET + VALID_BUDGET_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String ADDRESS_FIND_DESC = " " + PREFIX_ADDRESS + VALID_FIND_ADDRESS_NAME;
+    public static final String LANDLORD_FIND_DESC = " " + PREFIX_NAME + VALID_FIND_LANDLORD_NAME;
     public static final String MEETUP_NAME_DESC_PITCH = " " + PREFIX_NAME + VALID_MEETUP_NAME_PITCH;
     public static final String MEETUP_NAME_DESC_NETWORKING = " " + PREFIX_NAME + VALID_MEETUP_NAME_NETWORKING;
     public static final String MEETUP_INFO_DESC_PITCH = " " + PREFIX_INFO + VALID_MEETUP_INFO_PITCH;
@@ -108,6 +114,7 @@ public class CommandTestUtil {
     public static final String PROPERTY_TYPE_DESC_ALAN = " " + PREFIX_TYPE + VALID_PROPERTY_TYPE_ALAN;
     public static final String PROPERTY_TYPE_DESC_BRENDA = " " + PREFIX_TYPE + VALID_PROPERTY_TYPE_BRENDA;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_BUYER_FIND_DESC = " " + PREFIX_NAME + "Jankos*(("; // '*' and '(' not allowed
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_BUDGET_DESC = " " + PREFIX_BUDGET
@@ -115,6 +122,9 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_MEETUP_NAME_DESC = " " + PREFIX_NAME // '!', '%' not allowed in names
             + "Sales Pitch!%";
+    public static final String INVALID_FIND_LANDLORD_DESC = " " + PREFIX_NAME + "James^"; // '^' not allowed in names
+    public static final String INVALID_FIND_PROPERTY_DESC = " " + PREFIX_ADDRESS + "Jurong Clementi "
+            + PREFIX_NAME + "Ron"; // multiple tags not allowed
     public static final String INVALID_MEETUP_FROM_DESC = " " + PREFIX_FROM + "01/02/2025 1800"; // Not proper format
     public static final String INVALID_MEETUP_TO_DESC = " " + PREFIX_TO + "01/05/2025 1940"; // Not proper format
     public static final String INVALID_MEETUP_FROM_DESC_TWO = " " + PREFIX_FROM + "47/02/2025 1800"; // Not valid date
@@ -145,10 +155,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withBudget(VALID_BUDGET_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        DESC_PITCH_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_NAME_PITCH)
+        DESC_PITCH_MEETUP = new EditMeetUpDescriptorBuilder().withSubject(VALID_MEETUP_NAME_PITCH)
                 .withInfo(VALID_MEETUP_INFO_PITCH).withFrom(VALID_MEETUP_FROM_PITCH)
                 .withTo(VALID_MEETUP_TO_PITCH).build();
-        DESC_NETWORKING_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_NAME_NETWORKING)
+        DESC_NETWORKING_MEETUP = new EditMeetUpDescriptorBuilder().withSubject(VALID_MEETUP_NAME_NETWORKING)
                 .withInfo(VALID_MEETUP_INFO_NETWORKING).withFrom(VALID_MEETUP_FROM_NETWORKING)
                 .withTo(VALID_MEETUP_TO_NETWORKING).build();
         DESC_ALAN = new EditPropertyDescriptorBuilder().withLandlordName(VALID_LANDLORD_NAME_ALAN)
@@ -224,7 +234,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredMeetUpList().size());
 
         MeetUp meetUp = model.getFilteredMeetUpList().get(targetIndex.getZeroBased());
-        final String[] splitName = meetUp.getName().meetUpFullName.split("\\s+");
+        final String[] splitName = meetUp.getSubject().meetUpFullSubject.split("\\s+");
         model.updateFilteredMeetUpList(new MeetUpContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredMeetUpList().size());

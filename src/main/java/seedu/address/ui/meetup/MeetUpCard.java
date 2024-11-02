@@ -47,7 +47,7 @@ public class MeetUpCard extends UiPart<Region> {
         super(FXML);
         this.meetUp = meetUp;
         id.setText(displayedIndex + ". ");
-        name.setText(meetUp.getName().toString());
+        name.setText(meetUp.getSubject().toString());
         info.setText(meetUp.getInfo().toString());
         from.setText(meetUp.getFrom().toPrettyString());
         to.setText(meetUp.getTo().toPrettyString());

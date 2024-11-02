@@ -51,7 +51,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         EditCommand.EditMeetUpDescriptor editMeetUpDescriptor = new EditCommand.EditMeetUpDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editMeetUpDescriptor.setName(ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get()));
+            editMeetUpDescriptor.setSubject(ParserUtil.parseMeetUpSubject(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_INFO).isPresent()) {
             editMeetUpDescriptor.setInfo(ParserUtil.parseMeetUpInfo(argMultimap.getValue(PREFIX_INFO).get()));
