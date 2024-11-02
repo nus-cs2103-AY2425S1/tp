@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-
+![Ui](images/storeclass.png){: width="50" height="50"} <br>
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -213,16 +213,48 @@ Format: `exit`
 
 ### Autocomplete
 
-When using the program, you might have noticed that suggestions pop up when you are entering in commands. This is the autocomplete feature. 
+The Autocomplete feature provides real-time command suggestions as you type, helping you quickly and accurately enter commands. Autocomplete identifies keywords and suggests matches, allowing you to streamline input by selecting from relevant options instead of typing full commands or field values.
 
-Autocomplete searches for keywords matching the word under the caret position. For example, when you type in `ad`, autocomplete will show a list of commands matching this initial string.
+#### How It Works
+Autocomplete operates based on the word at the caret position:
 
-Autocomplete also supports autocompletion for fields. These include: 
-* Modules `m/`
-* Tags `t/`
-* Gender `g/`
+* As you begin typing a command or field, suggestions will appear that match your input. For example, typing `ad` will display a list of commands beginning with `ad`, like `add`.
+* Autocomplete for command keywords applies only to the first word you type in the command box. This initial word is treated as the command.
+* Autocomplete for student fields applies to all subsequent words after the first word. All subsequent words after the first are treated as student fields with specific prefixes. 
 
-When these prefixes are detected, autocomplete automatically displays a list of suggestions related to these fields.
+<div markdown="span" class="alert alert-info"> :notebook: **Note:** Autocomplete will **not** match subsequent words after the first word with command keywords! </div>
+
+#### Supported Fields
+Autocomplete currently supports the following fields with these prefixes:
+
+* Modules `m/` — Matches **all existing** module names.
+* Tags `t/` — Matches **all existing** tags.
+* Gender `g/` — Matches gender values: `male` or `female`.
+* File Paths `pa/` — Matches **all existing** archived file paths.
+
+When these prefixes are detected, autocomplete automatically displays a list of suggestions related to these fields. The list of suggestions are generated through the existing list of students inside StoreClass.
+
+#### Example Usage
+If you begin typing `edit 1 m/M`, Autocomplete will provide suggestions for available modules starting with the letter `M`, helping you to quickly select the correct module name. Similarly, typing `t/` after the command will bring up a list of tags, allowing you to specify tags accurately without needing to remember or retype exact names.
+
+<div markdown="span" class="alert alert-secondary">
+:question: **Common Question:**
+Why are there no suggestions when I type in `m/`, `t/` or `pa/`? <br>
+Autocomplete searches for suggestions relevant to these fields based on the existing data in StoreClass. If there are no data or students inside StoreClass, then no suggestions will be 
+generated for these fields. This usually occurs after a `clear` command.
+</div>
+
+<div markdown="block" class="alert alert-primary">
+:bulb: **Tips:** for Efficient Usage <br>
+
+1. `Start with the command`: Autocomplete only activates for commands when typing the first word. <br>
+2. `Remember to use prefixes`: For fields, make sure to use the correct prefix (`m/`, `t/`, `g/`, `pa/`) to activate Autocomplete for those fields. <br>
+3. `Select from suggestions using arrow keys`: Save time by selecting from the suggestion list using arrow keys rather than typing full names or values.<br>
+4. `Typos`: When you accidentally type in the wrong name for an existing field, instead of holding backspace and retyping the entire field, simply move the caret position over to the 
+prefix, and select from the list of suggestions. Autocomplete will replace the entire field with your selection for you.
+</div>
+
+By utilizing Autocomplete, you can input commands more quickly, reduce typos, and improve your overall efficiency in navigating the software!
 
 ![Autocomplete example when keying in gender](images/AutocompleteExample.png)
 
