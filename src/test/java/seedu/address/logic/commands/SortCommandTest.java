@@ -3,8 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.SortCommand.MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND;
 import static seedu.address.logic.commands.SortCommand.MESSAGE_SORT_SUCCESS;
 import static seedu.address.testutil.testdata.TypicalDonors.DONOR_ALEX_20;
+import static seedu.address.testutil.testdata.TypicalDonors.DONOR_BEN_50;
+import static seedu.address.testutil.testdata.TypicalDonors.DONOR_CHARLIE_100;
+import static seedu.address.testutil.testdata.TypicalPartners.PARTNER_BILL_UNTIL_20240315;
+import static seedu.address.testutil.testdata.TypicalPartners.PARTNER_JANE_UNTIL_20220630;
+import static seedu.address.testutil.testdata.TypicalPartners.PARTNER_JOHN_UNTIL_20231231;
 import static seedu.address.testutil.testdata.TypicalPersons.ALICE;
 import static seedu.address.testutil.testdata.TypicalPersons.BENSON;
 import static seedu.address.testutil.testdata.TypicalPersons.CARL;
@@ -74,7 +80,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void executeSortByName_success() {
+    public void assertSortByName_success() {
         SortOption sortOption = SortOption.NAME;
         AddressBook unsortedAddressBook = new AddressBookBuilder()
                 .withPerson(ALICE)
@@ -85,55 +91,82 @@ public class SortCommandTest {
     }
 
     @Test
-    public void executeSortByHours_noVolunteers_displaysNoVolunteersMessage() {
-        // EP: No Volunteers
-        SortOption sortOption = SortOption.HOURS;
-        AddressBook addressBookWithoutVolunteers = new AddressBookBuilder()
-                .withPerson(ALICE)
-                .build();
-        String expectedMessage = String.format(SortCommand.MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND,
+    public void assertSortByRole_noPersonsOfRole_displaysNoRoleMessage() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        // EP: no Volunteers
+        assertSortByRole_noPersonsOfRole_displaysNoRoleMessage(SortOption.HOURS, addressBook);
+
+        // EP: no Donors
+        assertSortByRole_noPersonsOfRole_displaysNoRoleMessage(SortOption.DONATION, addressBook);
+
+        // EP: no Partners
+        assertSortByRole_noPersonsOfRole_displaysNoRoleMessage(SortOption.DONATION, addressBook);
+    }
+
+    /**
+     * Executes the {@code SortCommand} for the given {@code sortOption} on the model initialized with
+     * {@code addressBook}, and asserts that the appropriate 'no persons of role' message is displayed.
+     *
+     * @param sortOption The {@code SortOption} representing the role to sort by.
+     * @param addressBook The {@code AddressBook} to initialize the models with.
+     */
+    private void assertSortByRole_noPersonsOfRole_displaysNoRoleMessage(SortOption sortOption,
+                                                                        AddressBook addressBook) {
+        String expectedMessage = String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND,
                 sortOption.getRoleAsString());
-        assertSortCommandSuccess(sortOption, expectedMessage, addressBookWithoutVolunteers);
+        assertSortCommandSuccess(sortOption, expectedMessage, addressBook);
     }
 
     @Test
-    public void executeSortByDonatedAmount_noDonors_displaysNoDonorsMessage() {
-        // EP: No Donors
-        SortOption sortOption = SortOption.DONATION;
-        AddressBook addressBookWithoutDonors = new AddressBookBuilder()
-                .withPerson(ALICE)
-                .build();
-        String expectedMessage = String.format(SortCommand.MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND,
-                sortOption.getRoleAsString());
-        assertSortCommandSuccess(sortOption, expectedMessage, addressBookWithoutDonors);
-    }
-
-    @Test
-    public void executeSortByHours_onlyVolunteers_success() {
+    public void assertSortByRole_onlyPersonsOfRole_success() {
         // EP: Only Volunteers
-        SortOption sortOption = SortOption.HOURS;
         AddressBook addressBookOnlyVolunteersUnsorted = new AddressBookBuilder()
                 .withPerson(VOLUNTEER_BEN_10HOURS)
                 .withPerson(VOLUNTEER_ALICE_5HOURS)
                 .withPerson(VOLUNTEER_CHARLIE_15HOURS)
                 .build();
-        String expectedMessage = String.format(MESSAGE_SORT_SUCCESS, sortOption);
         assertSortCommandSuccess(SortOption.HOURS, addressBookOnlyVolunteersUnsorted);
+
+        // EP: Only Donors
+        AddressBook addressBookOnlyDonorsUnsorted = new AddressBookBuilder()
+                .withPerson(DONOR_ALEX_20)
+                .withPerson(DONOR_BEN_50)
+                .withPerson(DONOR_CHARLIE_100)
+                .build();
+        assertSortCommandSuccess(SortOption.DONATION, addressBookOnlyDonorsUnsorted);
+
+        // EP: Only Partners
+        AddressBook addressBookOnlyPartnersUnsorted = new AddressBookBuilder()
+                .withPerson(PARTNER_JOHN_UNTIL_20231231)
+                .withPerson(PARTNER_BILL_UNTIL_20240315)
+                .withPerson(PARTNER_JANE_UNTIL_20220630)
+                .build();
+        assertSortCommandSuccess(SortOption.PARTNERSHIP_END_DATE, addressBookOnlyPartnersUnsorted);
     }
 
     @Test
-    public void executeSortByHours_mixedRoles_success() {
-        // EP: Mix of Roles and Persons
-        SortOption sortOption = SortOption.HOURS;
-        AddressBook addressBookOnlyVolunteersUnsorted = new AddressBookBuilder()
+    public void assertSortByRole_mixedRoles_success() {
+        // AddressBook with a mix of Roles
+        AddressBook addressBook = new AddressBookBuilder()
+                .withPerson(PARTNER_JANE_UNTIL_20220630)
                 .withPerson(VOLUNTEER_BEN_10HOURS)
                 .withPerson(BENSON)
+                .withPerson(DONOR_CHARLIE_100)
+                .withPerson(PARTNER_BILL_UNTIL_20240315)
                 .withPerson(VOLUNTEER_ALICE_5HOURS)
                 .withPerson(DONOR_ALEX_20)
                 .withPerson(ALICE)
                 .withPerson(VOLUNTEER_CHARLIE_15HOURS)
                 .build();
-        assertSortCommandSuccess(SortOption.HOURS, addressBookOnlyVolunteersUnsorted);
+
+        // EP: Volunteers sorted correctly
+        assertSortCommandSuccess(SortOption.HOURS, addressBook);
+
+        // EP: Donors sorted correctly
+        assertSortCommandSuccess(SortOption.DONATION, addressBook);
+
+        // EP Partners sorted correctly
+        assertSortCommandSuccess(SortOption.PARTNERSHIP_END_DATE, addressBook);
     }
 
     @Test

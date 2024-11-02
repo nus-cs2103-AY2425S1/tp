@@ -7,8 +7,6 @@ import seedu.address.testutil.VolunteerBuilder;
  * A utility class containing a list of {@code Volunteer} objects to be used in tests.
  */
 public class TypicalVolunteers {
-
-    // Volunteers
     public static final Volunteer VOLUNTEER_BEN_10HOURS = new VolunteerBuilder().withName("Ben Ten")
             .withHours("10").build();
     public static final Volunteer VOLUNTEER_ALICE_5HOURS = new VolunteerBuilder().withName("Alice Volunteer")

@@ -7,8 +7,6 @@ import seedu.address.testutil.DonorBuilder;
  * A utility class containing a list of {@code Donor} objects to be used in tests.
  */
 public class TypicalDonors {
-
-    // Donors
     public static final Donor DONOR_ALEX_20 = new DonorBuilder().withName("Alex Johnson")
             .withDonatedAmount("20").build();
     public static final Donor DONOR_BEN_50 = new DonorBuilder().withName("Ben Cooper")
