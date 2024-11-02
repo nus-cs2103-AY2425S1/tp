@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
 import seedu.eventtory.testutil.EventBuilder;
 
 public class EventContainsKeywordsPredicateTest {
@@ -71,7 +72,35 @@ public class EventContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_dateContainsKeywords_returnsTrue() {
+        // One keyword
+        EventContainsKeywordsPredicate predicate =
+                new EventContainsKeywordsPredicate(Collections.singletonList("2024-10-10"));
+        assertTrue(predicate.test(new EventBuilder().withDate("2024-10-10").build()));
+
+        // Partial matching keyword
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("2024"));
+        assertTrue(predicate.test(new EventBuilder().withDate("2024-10-10").build()));
+    }
+
+    @Test
+    public void test_tagContainsKeywords_returnsTrue() {
+        // One keyword
+        EventContainsKeywordsPredicate predicate =
+                new EventContainsKeywordsPredicate(Collections.singletonList("Cake"));
+        assertTrue(predicate.test(new EventBuilder().withTags("Cake").build()));
+
+        // Multiple keywords
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("Cake", "Venue"));
+        assertTrue(predicate.test(new EventBuilder().withTags("Cake", "Venue").build()));
+
+        // Only one matching keyword
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("Cake", "Decorations"));
+        assertTrue(predicate.test(new EventBuilder().withTags("Cake", "Venue").build()));
+    }
+
+    @Test
+    public void test_doesNotContainKeywords_returnsFalse() {
         // Zero keywords
         EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new EventBuilder().withName("Alice").build()));
