@@ -103,4 +103,20 @@ public class PersonTest {
         assertThrows(UnsupportedOperationException.class, ()
                 -> ALICE.getFilteredOrderList().remove(0));
     }
+
+    @Test
+    public void areOrdersFiltered() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+
+        // order list not filtered -> returns false
+        assertFalse(aliceCopy.areOrdersFiltered());
+
+        // order list filtered -> returns true
+        aliceCopy.updateFilteredOrderList(order -> false);
+        assertTrue(aliceCopy.areOrdersFiltered());
+
+        // order list reset -> returns false
+        aliceCopy.resetFilteredOrderList();
+        assertFalse(aliceCopy.areOrdersFiltered());
+    }
 }
