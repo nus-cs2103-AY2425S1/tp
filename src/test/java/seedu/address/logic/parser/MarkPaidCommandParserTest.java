@@ -2,11 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOT_MONTHPAID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
-import java.util.Collections;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -41,10 +41,10 @@ public class MarkPaidCommandParserTest {
     public void parse_missingField_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = String.valueOf(targetIndex.getOneBased());
-        // empty field
-        MarkPaidCommand expectedCommand = new MarkPaidCommand(MarkPaidCommand.MarkPaidTarget.fromIndex(targetIndex),
-                Collections.emptySet());
-        assertParseSuccess(parser, userInput, expectedCommand);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE);
+
+        // Since no prefixes are provided, we expect a parse failure
+        assertParseFailure(parser, userInput, expectedMessage);
     }
     @Test
     public void parse_invalidPreamble_failure() {
@@ -66,7 +66,7 @@ public class MarkPaidCommandParserTest {
         String userInput = String.valueOf(targetIndex.getOneBased()) + " " + withPrefix(VALID_MONTHPAID1);
         // empty field
         MarkPaidCommand expectedCommand = new MarkPaidCommand(MarkPaidCommand.MarkPaidTarget.fromIndex(targetIndex),
-                Set.of(new MonthPaid(VALID_MONTHPAID1)));
+                Set.of(new MonthPaid(VALID_MONTHPAID1)), false);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -79,7 +79,7 @@ public class MarkPaidCommandParserTest {
         // empty field
         MarkPaidCommand expectedCommand = new MarkPaidCommand(
                 MarkPaidCommand.MarkPaidTarget.fromIndex(targetIndex), Set.of(new MonthPaid(VALID_MONTHPAID1),
-                    new MonthPaid(VALID_MONTHPAID2)));
+                    new MonthPaid(VALID_MONTHPAID2)), false);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -105,6 +105,21 @@ public class MarkPaidCommandParserTest {
                 + withPrefix(INVALID_MONTHPAID_MM_RANGE_LOWER)
                 + " " + withPrefix(VALID_MONTHPAID2), MonthPaid.MESSAGE_CONSTRAINTS);
     }
+
+    @Test
+    public void parse_allWithRemovePrefix_failure() {
+        String userInput = "all " + PREFIX_NOT_MONTHPAID + VALID_MONTHPAID1;
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_bothMonthsPaidAndMonthsToRemove_failure() {
+        String userInput = "1 " + PREFIX_MONTHPAID + VALID_MONTHPAID1 + " " + PREFIX_NOT_MONTHPAID + VALID_MONTHPAID2;
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
+
+
+
 
     private String withPrefix(String monthPaidString) {
         return PREFIX_MONTHPAID + monthPaidString;

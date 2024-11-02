@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOT_MONTHPAID;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -23,10 +24,20 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkPaidCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MONTHPAID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MONTHPAID, PREFIX_NOT_MONTHPAID);
         String preamble = argMultimap.getPreamble().trim();
         Set<MonthPaid> monthsPaid = parseMonthsPaidForMarkPaid(argMultimap.getAllValues(PREFIX_MONTHPAID));
-
+        Set<MonthPaid> monthsToRemove = parseMonthsPaidForMarkPaid(argMultimap.getAllValues(PREFIX_NOT_MONTHPAID));
+        if (!monthsPaid.isEmpty() && !monthsToRemove.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
+        }
+        if (monthsPaid.isEmpty() && monthsToRemove.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
+        }
+        boolean isRemoving = monthsToRemove.isEmpty() ? false : true;
+        Set<MonthPaid> months = isRemoving ? monthsToRemove : monthsPaid;
         if (preamble.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
@@ -35,6 +46,10 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
         MarkPaidCommand.MarkPaidTarget target;
         switch (preamble.toLowerCase()) {
         case "all":
+            if (isRemoving) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
+            }
             target = MarkPaidCommand.MarkPaidTarget.all();
             break;
         default:
@@ -50,9 +65,7 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
             }
             break;
         }
-
-
-        return new MarkPaidCommand(target, monthsPaid);
+        return new MarkPaidCommand(target, months, isRemoving);
     }
 
     private Set<MonthPaid> parseMonthsPaidForMarkPaid(Collection<String> monthsPaid) throws ParseException {
