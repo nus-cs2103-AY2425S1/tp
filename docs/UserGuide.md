@@ -37,7 +37,7 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
         - 5.1.3 [Exiting the Program](#513-exiting-the-program-exit)
         - 5.1.4 [Saving the Data](#514-saving-the-data)
         - 5.1.5 [Editing the Data File](#515-editing-the-data-file)
-    - 5.2 [Client Management Commands](#52-client-management-commands)
+    - 5.2 [Client Management Commands](#5-2-client-management-commands)
         - 5.2.1 [Adding a Client](#521-adding-a-client-add)
         - 5.2.2 [Listing All Clients](#522-listing-all-clients-list)
         - 5.2.3 [Filtering Clients](#523-filtering-clients-find-client)
