@@ -61,6 +61,15 @@ public class IndexResolverUtilTest {
     }
 
     @Test
+    public void testResolveVendor_eventDetailsMainListIndex_valid() throws CommandException {
+        // Set UiState to EVENT_DETAILS with no associated vendors
+        model.viewEvent(event7);
+        model.setUiState(UiState.EVENT_DETAILS);
+
+        assertEquals(vendor1, IndexResolverUtil.resolveVendor(model, INDEX_FIRST_VENDOR));
+    }
+
+    @Test
     public void testResolveVendor_eventDetailsIndexOverflowToAssociatedList_valid() throws CommandException {
 
         // Set UiState to EVENT_DETAILS with associated vendors
@@ -106,6 +115,15 @@ public class IndexResolverUtilTest {
         model.setUiState(UiState.DEFAULT);
 
         assertEquals(event7, IndexResolverUtil.resolveEvent(model, INDEX_LAST_EVENT));
+    }
+
+    @Test
+    public void testResolveEvent_vendorDetailsMainListIndex_valid() throws CommandException {
+        // Set UiState to VENDOR_DETAILS with no associated events
+        model.setUiState(UiState.VENDOR_DETAILS);
+        model.viewVendor(vendor7);
+
+        assertEquals(event1, IndexResolverUtil.resolveEvent(model, INDEX_FIRST_EVENT));
     }
 
     @Test
