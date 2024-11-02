@@ -327,12 +327,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AddressBook shows an error message.
 
       Use case ends.
-    
+
 * 1b. Given contact has duplicate 'name' field.
     * 1a1. AddressBook shows an error message and prompts user to re-enter with nickname.
 
       Use case ends.
-    
+
 **Use case: Delete a contact**
 
 **MSS**
@@ -346,13 +346,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given contact is not in the AddressBook
     * 1a1. AddressBook shows an error message.
-  
+
       Use case ends.
 
 * 1b. Multiple matching contacts in the AddressBook
     * 1b1. AddressBook shows list of all matching contacts.
     * 1b2. User enters index of contact to delete
-  
+
       Use case resumes at step 2.
 
 
