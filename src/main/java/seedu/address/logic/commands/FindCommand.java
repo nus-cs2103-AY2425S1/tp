@@ -41,6 +41,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Note: Only 1 type of prefix can be specified per command use!\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Amy";
+    public static final String MESSAGE_FIND_SUCCESS = "Here are the people found: \n";
 
     private final Predicate<Person> predicate;
 
@@ -52,8 +53,10 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        int[] guestCount = model.getFilteredGuestListCount();
+        int vendorCount = model.getFilteredVendorListCount();
+
+        return new CommandResult(Messages.getSuccessMessageWithStats(MESSAGE_FIND_SUCCESS, guestCount, vendorCount));
     }
 
     @Override
