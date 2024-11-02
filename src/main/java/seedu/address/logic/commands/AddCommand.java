@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
@@ -47,7 +48,7 @@ public class AddCommand extends Command {
             + PREFIX_JOB + "doctor "
             + PREFIX_INCOME + "300 "
             + PREFIX_TIER + "GOLD "
-            + PREFIX_NEW_REMARK + "He is very smart "
+            + PREFIX_REMARK + "He is very smart "
             + PREFIX_STATUS + "NON_URGENT"
             + "'";
 
