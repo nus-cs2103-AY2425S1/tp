@@ -530,6 +530,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC11 - Undo a command**
+
+**MSS**
+
+1.  Actor performs a command to update the addressbook.
+2.  System executes the command.
+3.  Actor requests to undo the recently executed command.
+4.  System reverts changes made by the user.
+
+    Use case ends.
+
+**Extensions**
+
+- 4a. There is no version to revert to.
+
+    - 4a1. System shows an error message.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.

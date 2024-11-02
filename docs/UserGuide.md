@@ -238,6 +238,22 @@ Examples:
 
 - `pin 1` pins the contact of the first person shown on the displayed person list into the pinned person list.
 
+### Undo a previously executed command: `undo`
+
+Undo the previous command that was executed.
+
+Format: `undo`
+
+- The undo feature saves the **5 most recent executed commands**.
+- The undo feature only tracks commands that **modified the address book**.
+
+Examples of commands tracked by undo:
+- `add`
+- `delete`
+- `clear`
+- `edit`
+- `pin`
+
 ### Exporting the contact list : `export`
 
 Exports the contacts in the contact list into the specified file type. The file will be named bizbook.&lt;file extension&gt; and will be located in a folder named exports.
@@ -300,10 +316,11 @@ _Details coming soon ..._
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Addnotes** | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
-| **Editnotes** | `editnotes INDEX i/NOTE_INDEX n/[NOTE]` <br> e.g. `editnotes 1 i/1 n/Customer 1`                                                                                      |
-| **Deletenotes** | `deletenotes INDEX i/[NOTE_INDEX]` <br> e.g. `deletenotes 1 i/1`                                                                                                      |
+| **Editnotes** | `editnotes INDEX i/NOTE_INDEX n/[NOTE]` <br> e.g. `editnotes 1 i/1 n/Customer 1`                                                                                     |
+| **Deletenotes** | `deletenotes INDEX i/[NOTE_INDEX]` <br> e.g. `deletenotes 1 i/1`                                                                                                   |
 | **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
 | **Pin**      | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
-| **Export**   | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                                         |
+| **Undo**     | `undo`                                                                                                                                                                |
+| **Export**   | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                          |
 | **Clear**    | `clear`                                                                                                                                                               |
 | **Help**     | `help`                                                                                                                                                                |
