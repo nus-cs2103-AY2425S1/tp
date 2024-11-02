@@ -2,6 +2,8 @@ package seedu.academyassist.logic.commands;
 
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SORT_PARAM;
 
+import java.util.Objects;
+
 import seedu.academyassist.commons.util.CollectionUtil;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.model.Model;
@@ -46,5 +48,25 @@ public class SortCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortParam.toString()));
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        SortCommand otherSortCommand = (SortCommand) other;
+        return sortParam.toString().equals(otherSortCommand.sortParam.toString());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sortParam.toString());
     }
 }
