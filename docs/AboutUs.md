@@ -25,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/diegotheexplorar.png" width="200px">
 
 [[github](https://github.com/DiegoTheExplorar)]
-[[portfolio](www.linkedin.com/in/arvind-natarajan-65aa77290)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Documentation
 * Responsibilities: I make sure codebase is well documented
