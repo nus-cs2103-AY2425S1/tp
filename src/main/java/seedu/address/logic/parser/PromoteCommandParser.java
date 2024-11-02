@@ -34,10 +34,10 @@ public class PromoteCommandParser implements Parser<PromoteCommand> {
         ContractEndDate contractEndDate;
         String indexArg = argsArray[0];
         String contractEndDateArg = argsArray[1];
+        contractEndDate = ParserUtil.parseContractEndDate(contractEndDateArg);
 
         try {
             index = ParserUtil.parseIndex(indexArg);
-            contractEndDate = ParserUtil.parseContractEndDate(contractEndDateArg);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PromoteCommand.MESSAGE_USAGE), pe);
         }
