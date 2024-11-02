@@ -5,10 +5,8 @@ import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
 
@@ -47,8 +45,8 @@ public class GroupCard extends UiPart<Region> {
         groupSize.setText("Group Size: " + String.valueOf(members.size()));
 
         // Display the first 3 members as a single comma-separated string
-        String membersDisplayText = "Members: " +
-                members.stream()
+        String membersDisplayText = "Members: "
+                + members.stream()
                 .limit(3)
                 .map(member -> member.getName().fullName)
                 .collect(Collectors.joining(", "));

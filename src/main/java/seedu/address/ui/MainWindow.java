@@ -164,6 +164,10 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.show();
     }
 
+    /**
+     * Displays the person list panel by setting its visibility and managed state to true,
+     * while hiding and disabling management for the group list panel.
+     */
     public void showPersonListPanel() {
         personListPanelPlaceholder.setVisible(true);
         personListPanelPlaceholder.setManaged(true);
@@ -171,6 +175,10 @@ public class MainWindow extends UiPart<Stage> {
         groupListPanelPlaceholder.setManaged(false);
     }
 
+    /**
+     * Displays the group list panel by setting its visibility and managed state to true,
+     * while hiding and disabling management for the person list panel.
+     */
     public void showGroupListPanel() {
         personListPanelPlaceholder.setVisible(false);
         personListPanelPlaceholder.setManaged(false);

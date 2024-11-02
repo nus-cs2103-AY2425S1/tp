@@ -23,7 +23,11 @@ public class CommandResult {
     private final boolean isGroupCommand;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with the specified feedback, help, and exit fields.
+     *
+     * @param feedbackToUser The feedback message to be shown to the user.
+     * @param showHelp       Whether the help information should be shown to the user.
+     * @param exit           Whether the application should exit after this command.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -32,6 +36,14 @@ public class CommandResult {
         this.isGroupCommand = false;
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified feedback, help, exit, and group command fields.
+     *
+     * @param feedbackToUser The feedback message to be shown to the user.
+     * @param showHelp       Whether the help information should be shown to the user.
+     * @param exit           Whether the application should exit after this command.
+     * @param isGroupCommand Whether this command pertains to group-related operations.
+     */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isGroupCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
