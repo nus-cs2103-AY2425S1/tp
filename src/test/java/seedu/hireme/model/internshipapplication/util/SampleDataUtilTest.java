@@ -19,7 +19,7 @@ import seedu.hireme.model.util.SampleDataUtil;
 import seedu.hireme.testutil.InternshipApplicationBuilder;
 
 public class SampleDataUtilTest {
-    private InternshipApplication sampleInternshipApplication;
+    private final InternshipApplication sampleInternshipApplication;
 
     public SampleDataUtilTest() {
         Email email = new Email("company1@mail.com");
