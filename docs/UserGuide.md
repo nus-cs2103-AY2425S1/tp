@@ -6,7 +6,7 @@
 
 # UniLink User Guide
 
-UniLink is a desktop app that allows university students to manage their contacts. With Unilink, students can categorise
+UniLink is a desktop app that allows university students to manage their contacts. With UniLink, students can categorise
 their contacts into 'work' contacts and 'personal' contacts to better manage their lives!
 
 <!-- * Table of Contents -->
@@ -16,22 +16,31 @@ their contacts into 'work' contacts and 'personal' contacts to better manage the
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+**1. Set up Java**
+- Ensure you have Java `17` or above installed in your Computer.
+- Not sure? Open up Command Prompt (for Windows) or Terminal (for Mac) and type `java -version` to check.
+- Download Java [[here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)] if needed.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+**2. Download UniLink**
+- Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+**3. Choose a Home Folder**
+- Move the `.jar` file to where you want to store your UniLink data. This will be your 'home folder'.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+**4. Launch the app!**
+- Open up Command Prompt (for Windows) or Terminal (for Mac) and navigate to the home folder with `cd path/to/your/home/folder`
+    - E.g. If my jar file is in a folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni`
+- Run UniLink by typing `java -jar UniLink.jar`
+- The app should open within a few seconds, showing some sample data that you can explore! 
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+![Ui](images/Ui.png)
+
+**5. Try out some commands**
+- Type commands in the command box and press Enter to execute it. Here are some commands to get you started:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe h/@johndoe p/99887766 e/johndoe@gmail.com ct/work` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe h/@johndoe ct/work` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -39,7 +48,7 @@ their contacts into 'work' contacts and 'personal' contacts to better manage the
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. For the full list of commands, refer to [Command Summary](#command-summary) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -195,7 +204,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
