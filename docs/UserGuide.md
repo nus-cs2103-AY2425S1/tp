@@ -3,9 +3,11 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# CareLink User Guide
 
-- Table of Contents
+CareLink is a desktop address book application targeted towards independent Geriatricians managing elderly patients with chronic conditions, someone who can type fast, prefers CLI over GUI, and often needs to manage several patients.
+
+### Table of Contents
 * [Quick start](#quick-start)
 * [Features](#features)
     * [Viewing help : help](#viewing-help--help)
