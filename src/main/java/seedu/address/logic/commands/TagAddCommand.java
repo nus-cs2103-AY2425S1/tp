@@ -41,8 +41,11 @@ public class TagAddCommand extends Command {
             + "Contact: '%3$s' has been added to Wedding(s): '%4$s'.";
     public static final String MESSAGE_DUPLICATE_TAGS = "Contact '%1$s' already has the Tag(s) '%2$s'.";
     public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: '%1$s' does not exist in the address book.";
-    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet." + "\n"
-            + "Wedding needs to be created with Tag(s): '%2$s' using command 'add-wedding' first.";
+    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet."
+            + "\n"
+            + "Wedding needs to be created with Tag(s): '%2$s' using command '"
+            + AddWeddingCommand.COMMAND_WORD
+            + "' first.";
 
     private final Name name;
     private final Set<Tag> tagsToAdd;
