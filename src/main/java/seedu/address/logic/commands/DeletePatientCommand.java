@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class DeletePatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletePatient";
+    public static final String COMMAND_WORD = "deleteP";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a patient. "
             + COMMAND_WORD + " "

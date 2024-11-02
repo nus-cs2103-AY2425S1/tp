@@ -19,9 +19,9 @@ import seedu.address.model.person.Person;
 
 public class AddAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "addAppointment";
+    public static final String COMMAND_WORD = "addA";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment with "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment for "
             + "the relevant doctor and patient. "
             + COMMAND_WORD + " "
             + PREFIX_DATE + "[APPOINTMENT_TIME] "
@@ -35,9 +35,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_REMARK + "third physiotherapy session";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Successfully added appointment to a patient";
-    public static final String MESSAGE_PATIENT_BUSY = "The patient already has another appointment!";
-    public static final String MESSAGE_DOCTOR_BUSY = "The doctor already has another appointment!";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "The appointment already exists!";
+    public static final String MESSAGE_UNAVAILABLE_SLOT = "The patient or doctor already has another appointment!";
     public static final String MESSAGE_INVALID_ID = "The doctor or the patient id that you have"
             + " entered doesn't exist. Please enter again!";
     private static final Logger logger = Logger.getLogger(AddAppointmentCommand.class.getName());
@@ -51,8 +49,6 @@ public class AddAppointmentCommand extends Command {
      */
     public AddAppointmentCommand(LocalDateTime appointmentTime, int patientId, int doctorId, String remarks) {
         requireNonNull(appointmentTime);
-        requireNonNull(patientId);
-        requireNonNull(doctorId);
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.appointmentTime = appointmentTime;
@@ -78,9 +74,7 @@ public class AddAppointmentCommand extends Command {
                 doctorToAddAppointment.getId(), remarks);
 
         if (!isPatientFree || !isDoctorFree) {
-            logger.warning("The patient or the doctor you have selected is not available! "
-                + "Please check their availability again!");
-            throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+            throw new CommandException(MESSAGE_UNAVAILABLE_SLOT);
         }
 
         logger.info(String.format("Added appointment for patient ID %d and doctor ID %d at time %s with remarks: %s",
