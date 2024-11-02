@@ -131,22 +131,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String meetUpSubject} into a {@code Subject}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code meetUpName} is invalid.
+     * @throws ParseException if the given {@code meetUpSubject} is invalid.
      */
-    public static Subject parseMeetUpName(String meetUpName) throws ParseException {
-        requireNonNull(meetUpName);
-        String trimmedName = meetUpName.trim();
-        if (!Subject.isValidMeetUpName(trimmedName)) {
+    public static Subject parseMeetUpSubject(String meetUpSubject) throws ParseException {
+        requireNonNull(meetUpSubject);
+        String trimmedSubject = meetUpSubject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Subject(trimmedName);
+        return new Subject(trimmedSubject);
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String meetUpInfo} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code meetUpInfo} is invalid.
@@ -161,7 +161,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code From}.
+     * Parses a {@code String meetUpFrom} into a {@code From}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code meetUpFrom} is invalid.
@@ -176,7 +176,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code From}.
+     * Parses a {@code String meetUpTo} into a {@code From}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code meetUpFrom} is invalid.

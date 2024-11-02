@@ -34,7 +34,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        Subject extractedSubject = ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get());
+        Subject extractedSubject = ParserUtil.parseMeetUpSubject(argMultimap.getValue(PREFIX_NAME).get());
         String trimmedExtractedSubject = extractedSubject.toString().trim();
 
         if (trimmedExtractedSubject.isEmpty()) {

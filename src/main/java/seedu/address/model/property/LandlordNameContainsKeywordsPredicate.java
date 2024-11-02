@@ -25,7 +25,7 @@ public class LandlordNameContainsKeywordsPredicate implements Predicate<Property
     @Override
     public boolean test(Property property) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(property.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(property.getLandlordName().fullName, keyword));
     }
 
     @Override

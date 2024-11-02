@@ -44,7 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
-        Subject name = ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get());
+        Subject name = ParserUtil.parseMeetUpSubject(argMultimap.getValue(PREFIX_NAME).get());
         Info info = ParserUtil.parseMeetUpInfo(argMultimap.getValue(PREFIX_INFO).get());
         From from = ParserUtil.parseMeetUpFrom(argMultimap.getValue(PREFIX_FROM).get());
         To to = ParserUtil.parseMeetUpTo(argMultimap.getValue(PREFIX_TO).get());
