@@ -26,10 +26,11 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
+        phone = phone.trim(); // Trim whitespace from the start and end
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         checkArgument(isValidLengthPhone(phone), MESSAGE_LENGTH_CONSTRAINTS);
         // Trim hyphens from the phone number
-        value = phone.replaceAll("[\\s-]", "");
+        value = phone.replaceAll("[\\s-]", "").replaceFirst("^\\+", ""); // Remove spaces, hyphens, and leading '+'
     }
 
     /**

@@ -251,7 +251,7 @@ _Details coming soon ..._
 
 ### PHONE
 - Hyphens (-) are allowed in the input but will be trimmed away (e.g., "119-224-337" will be trimmed to "119224337").
-- Only one leading plus sign (+) is allowed at the beginning of the phone number.
+- Only one leading plus sign (+) is allowed at the beginning of the phone number, but will be trimmed away. (e.g., "+999" will be trimmed to "999")
 - Any whitespace between digits will be removed (e.g., "119 224 337" will be trimmed to "119224337").
 - The phone number must consist of only numeric characters, with optional leading + and allowed hyphens.
 - The length of the phone number (excluding leading + and hyphens) must be between 3 and 15 digits inclusive.
