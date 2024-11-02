@@ -9,13 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class JobDescription {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Job description should not be blank";
-
-    /**
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "^\\S.*";
+            "Job description should not be blank, and should not contain the '/' character";
 
     public final String value;
 
@@ -34,7 +28,7 @@ public class JobDescription {
      * Returns true if a given string is a valid description.
      */
     public static boolean isValidDescription(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !(test.isEmpty() || test.contains("/"));
     }
 
     @Override

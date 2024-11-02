@@ -19,13 +19,13 @@ public class AddJobCommand extends AddCommand<Job> {
 
     public static final String ENTITY_WORD = "job";
     public static final String FULL_COMMAND = COMMAND_WORD + " " + ENTITY_WORD;
-    public static final String MESSAGE_USAGE = FULL_COMMAND + ": Adds a job listing to the address book. "
+    public static final String MESSAGE_USAGE = FULL_COMMAND + ": Adds a job listing to the address book.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_COMPANY + "COMPANY "
-            + PREFIX_SALARY + "SALARY "
+            + PREFIX_SALARY + "MONTHLY_SALARY "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "[" + PREFIX_REQUIREMENTS + "REQUIREMENTS]...\n"
+            + "[" + PREFIX_REQUIREMENTS + "REQUIREMENTS]... (Optional)\n"
             + "Example: " + FULL_COMMAND + " "
             + PREFIX_NAME + "Waiter "
             + PREFIX_COMPANY + "Starbucks "

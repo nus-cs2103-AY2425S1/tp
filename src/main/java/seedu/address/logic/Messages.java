@@ -8,6 +8,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Container for user visible messages.
@@ -66,10 +67,15 @@ public class Messages {
         builder.append(job.getName())
                 .append(" at ")
                 .append(job.getCompany())
-                .append("\n")
+                .append(" with a monthly salary of ")
                 .append(job.getSalary())
                 .append("\nDescription: ")
-                .append(job.getDescription());
+                .append(job.getDescription())
+                .append("\nRequirements: ")
+                .append(job.getRequirements()
+                        .stream()
+                        .map(Tag::toString)
+                        .collect(Collectors.joining(", ")));
         return builder.toString();
     }
 
