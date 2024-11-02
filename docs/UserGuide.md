@@ -184,6 +184,19 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Command History : `↑` `↓` 
+Allows users to quickly access previously entered commands without retyping them using arrow keys.
+
+Format: `↑` or `↓`
+
+- Up Arrow `↑`: Displays the last command you entered. Press multiple times to view older commands in reverse order.
+- Down Arrow `↓`: Moves forward through the command history, displaying newer commands. Once you reach the most recent 
+command, pressing `↓` again will clear the command box.
+
+Examples:
+- `↑` : Retrieve previous command in the command box.
+- `↓` : Retrieve next command in the command box.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -229,7 +242,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3` `delete James Ho`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`

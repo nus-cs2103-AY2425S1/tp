@@ -32,6 +32,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final CommandHistory commandHistory = new CommandHistory();
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -84,5 +85,20 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void addCommandToHistory(String command) {
+        commandHistory.addCommand(command);
+    }
+
+    @Override
+    public String getPreviousCommand() {
+        return commandHistory.getPreviousCommand();
+    }
+
+    @Override
+    public String getNextCommand() {
+        return commandHistory.getNextCommand();
     }
 }
