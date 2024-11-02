@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneNumberMatchesPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
@@ -26,22 +28,25 @@ public class SearchCommandParser implements Parser<SearchCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SearchCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_GROUP_NAME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG,
+                PREFIX_GROUP_NAME, PREFIX_PHONE);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TAG, PREFIX_GROUP_NAME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TAG, PREFIX_GROUP_NAME, PREFIX_PHONE);
 
         String nameArgs = argMultimap.getValue(PREFIX_NAME).orElse("");
         String tagArgs = argMultimap.getValue(PREFIX_TAG).orElse("");
         String groupArgs = argMultimap.getValue(PREFIX_GROUP_NAME).orElse("");
+        String phoneArgs = argMultimap.getValue(PREFIX_PHONE).orElse("");
 
         // Check for empty inputs after the prefixes
         checkForEmptyInput(argMultimap, PREFIX_NAME, nameArgs);
         checkForEmptyInput(argMultimap, PREFIX_TAG, tagArgs);
         checkForEmptyInput(argMultimap, PREFIX_GROUP_NAME, groupArgs);
+        checkForEmptyInput(argMultimap, PREFIX_PHONE, phoneArgs);
 
         Predicate<Person> combinedPredicate = null;
 
@@ -55,6 +60,12 @@ public class SearchCommandParser implements Parser<SearchCommand> {
             TagContainsKeywordsPredicate tagPredicate =
                     new TagContainsKeywordsPredicate(Arrays.asList(tagArgs.split("\\s+")));
             combinedPredicate = combinePredicate(combinedPredicate, tagPredicate);
+        }
+
+        if (!phoneArgs.isEmpty()) {
+            PhoneNumberMatchesPredicate phonePredicate =
+                    new PhoneNumberMatchesPredicate(phoneArgs);
+            combinedPredicate = combinePredicate(combinedPredicate, phonePredicate);
         }
 
         if (combinedPredicate == null && groupArgs.isEmpty()) {
