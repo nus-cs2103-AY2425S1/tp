@@ -24,7 +24,7 @@
                   <children>
                      <VBox>
                         <children>
-            
+
                                 <Label fx:id="basicInfoHeader" styleClass="label-subheader" stylesheets="@DarkTheme.css" textOverrun="CLIP" wrapText="true">
                               <VBox.margin>
                                  <Insets />
@@ -38,7 +38,7 @@
                            <Insets bottom="4.0" />
                         </VBox.margin>
                      </VBox>
-      
+
                           <VBox spacing="2.0">
                               <Label fx:id="name" styleClass="label-text" stylesheets="@DarkTheme.css" wrapText="true">
                            <VBox.margin>
@@ -72,10 +72,10 @@
                            <Insets left="4.0" />
                         </padding>
                           </VBox>
-                        
+
                           <VBox>
                              <children>
-                                
+
                                 <Label fx:id="appointmentHeader" styleClass="label-subheader">
                                    <padding>
                                       <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
@@ -86,7 +86,7 @@
                                  <Insets bottom="4.0" top="4.0" />
                               </VBox.margin>
                            </VBox>
-                           
+
                            <VBox spacing="2.0">
                               <Label fx:id="appointments" styleClass="label-text" stylesheets="@DarkTheme.css" wrapText="true" />
                               <VBox.margin>
@@ -99,7 +99,7 @@
 
                            <VBox>
                               <children>
-                  
+
                                       <Label fx:id="allergiesHeader" styleClass="label-subheader">
                                     <padding>
                                        <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
@@ -123,7 +123,7 @@
 
                            <VBox>
                               <children>
-                                 
+
                                 <Label fx:id="furtherDetailsHeader" styleClass="label-subheader">
                                     <padding>
                                         <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
@@ -134,7 +134,7 @@
                            <Insets bottom="4.0" top="4.0" />
                         </VBox.margin>
                      </VBox>
-      
+
                           <VBox spacing="2.0">
                               <Label fx:id="email" styleClass="label-text" stylesheets="@DarkTheme.css" wrapText="true" />
                               <Label fx:id="address" styleClass="label-text" stylesheets="@DarkTheme.css" wrapText="true" />
