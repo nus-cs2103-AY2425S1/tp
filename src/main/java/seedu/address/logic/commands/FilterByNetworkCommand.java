@@ -17,8 +17,8 @@ public class FilterByNetworkCommand extends Command {
     public static final String MESSAGE_SUCCESS = "People with () public addresses shown.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Filters the address book and returns people who has public addresses of the specified network.\n"
-            + "Parameters: NETWORK (Must be all CAPS) " + PREFIX_PUBLIC_ADDRESS_NETWORK
-            + "NETWORK\n"
+            + "Parameters: NETWORK (" + PREFIX_PUBLIC_ADDRESS_NETWORK
+            + "NETWORK)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC";
     public static final String MESSAGE_FILTER_SUCCESS = "There are %1$d people with %2$s public addresses.\n"
