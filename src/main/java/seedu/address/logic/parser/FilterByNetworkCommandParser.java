@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.FilterByNetworkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.Network;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
-import static java.util.Objects.requireNonNull;
 
 
 /**
