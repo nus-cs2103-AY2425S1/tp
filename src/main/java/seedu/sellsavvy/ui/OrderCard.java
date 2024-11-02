@@ -12,8 +12,7 @@ import seedu.sellsavvy.model.order.Status;
  */
 public class OrderCard extends UiPart<Region> {
 
-    public static final String ORDER_HEADING_FORMAT = "%1$s. %2$s";
-    public static final String QUANTITY_FORMAT = " (x%s)";
+    public static final String ORDER_HEADING_FORMAT = "%1$s. %2$s (x%3$s)";
     public static final String DELIVER_BY_FORMAT = "Delivery by: %1$s";
     private static final String FXML = "OrderListCard.fxml";
 
@@ -46,8 +45,7 @@ public class OrderCard extends UiPart<Region> {
         super(FXML);
         this.order = order;
         heading.setText(String.format(ORDER_HEADING_FORMAT, displayedIndex,
-                order.getItem().fullDescription));
-        quantity.setText(String.format(QUANTITY_FORMAT, order.getQuantity().value));
+                order.getItem().fullDescription, order.getQuantity().value));
         date.setText(String.format(DELIVER_BY_FORMAT, order.getDate().value));
         setStatus(order.getStatus());
     }
