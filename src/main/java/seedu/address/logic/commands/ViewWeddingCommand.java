@@ -19,6 +19,11 @@ public class ViewWeddingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: KEYWORD"
             + "Example: " + COMMAND_WORD + " Jonus & Izzat";
+    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "'%1$s' cannot be found."
+            + "\n"
+            + "A wedding has to be created using the command '"
+            + AddWeddingCommand.COMMAND_WORD
+            + "' first.";
 
     private final TagContainsKeywordsPredicate predicate;
 
