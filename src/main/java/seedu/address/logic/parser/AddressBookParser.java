@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LIST_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
@@ -23,7 +24,10 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindDeliveryCommand;
 import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListDeliveryCommand;
+import seedu.address.logic.commands.ListSupplierCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.commands.SortCommand;
@@ -103,7 +107,15 @@ public class AddressBookParser {
             }
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            if (arguments.trim().startsWith("-s")) {
+                return new ListSupplierCommand();
+            } else if (arguments.trim().startsWith("-d")) {
+                return new ListDeliveryCommand();
+            } else if (arguments.trim().isEmpty()) {
+                return new ListAllCommand();
+            } else {
+                throw new ParseException(MESSAGE_INVALID_LIST_COMMAND_FORMAT);
+            }
 
         case MarkDeliveryCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-s")) {
