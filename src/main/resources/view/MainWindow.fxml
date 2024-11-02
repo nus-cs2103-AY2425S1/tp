@@ -47,7 +47,7 @@
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>
             </StackPane>
-              
+
             <VBox fx:id="clientList" styleClass="pane-with-border" prefHeight="500" minWidth="340" prefWidth="340"
                   VBox.vgrow="ALWAYS">
               <padding>
@@ -56,7 +56,7 @@
               <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
           </items>
-        </SplitPane> 
+        </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
