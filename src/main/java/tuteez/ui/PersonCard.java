@@ -117,7 +117,7 @@ public class PersonCard extends UiPart<Region> {
     private void setNextLesson(Person person) {
         assert(person != null);
         Lesson studentNextLesson = person.nextLessonBasedOnCurrentTime();
-        if (nextLesson != null) {
+        if (studentNextLesson != null) {
             nextLesson.setText(studentNextLesson.getDayAndTime());
         } else {
             nextLesson.setVisible(false);

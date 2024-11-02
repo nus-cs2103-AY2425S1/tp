@@ -34,15 +34,6 @@
         </VBox>
         <!-- Divider -->
         <HBox styleClass="divider"/>
-
-        <!-- Lessons Section -->
-        <VBox styleClass="section-container" spacing="8">
-            <Label text="Lessons:" styleClass="label-heading"/>
-            <VBox fx:id="displayLessons" styleClass="content-flow-pane" spacing="10"/>
-        </VBox>
-        <!-- Divider -->
-        <HBox styleClass="divider"/>
-
         <!-- Tags Section -->
         <VBox styleClass="section-container" spacing="8">
             <Label text="Tags:" styleClass="label-heading"/>
@@ -51,7 +42,13 @@
         </VBox>
         <!-- Divider -->
         <HBox styleClass="divider"/>
-
+        <!-- Lessons Section -->
+        <VBox styleClass="section-container" spacing="8">
+            <Label text="Lessons:" styleClass="label-heading"/>
+            <VBox fx:id="displayLessons" styleClass="content-flow-pane" spacing="10"/>
+        </VBox>
+        <!-- Divider -->
+        <HBox styleClass="divider"/>
         <!-- Remarks Section -->
         <VBox styleClass="bottom-container" spacing="8">
             <Label text="Remarks:" styleClass="label-heading"/>
