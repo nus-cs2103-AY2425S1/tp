@@ -21,7 +21,7 @@ import seedu.sellsavvy.model.person.Person;
  */
 public class OrderListPanel extends UiPart<Region> {
     private static final String FXML = "OrderListPanel.fxml";
-    private static final String DEFAULT_TITLE = "Order";
+    private static final String DEFAULT_TITLE = "Orders";
     private static final String TITLE_WITH_SELECTED_PERSON = "Order (%1$s)";
     private static final String EMPTY_ORDER_LIST_MESSAGE = "This customer does not have any orders currently.";
     private static final String NO_RELATED_ORDERS_FOUND = "No related orders found.";
