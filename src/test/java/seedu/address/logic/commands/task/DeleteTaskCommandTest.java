@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTasks;
 
@@ -32,6 +34,7 @@ public class DeleteTaskCommandTest {
         for (Task task : taskList) {
             model.addTask(task);
         }
+        model.addPerson(GEORGE);
     }
 
     @Test
@@ -43,6 +46,19 @@ public class DeleteTaskCommandTest {
 
         String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_taskAssignedToPerson_taskRemovedFromPerson() throws Exception {
+        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
+
+        deleteTaskCommand.execute(model);
+
+        // Verify the task is removed from each person's task list
+        for (Person person : model.getFilteredPersonList()) {
+            assertFalse(person.hasTask(taskToDelete), "Person should no longer have the deleted task.");
+        }
     }
 
     @Test
