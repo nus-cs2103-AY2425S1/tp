@@ -18,7 +18,6 @@ public class Role {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String role;
     public final String value;
 
     /**
@@ -29,7 +28,6 @@ public class Role {
     public Role(String role) {
         requireNonNull(role);
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
-        this.role = role;
         this.value = role;
     }
 
@@ -43,7 +41,7 @@ public class Role {
 
     @Override
     public String toString() {
-        return role;
+        return value;
     }
 
     @Override
@@ -58,12 +56,12 @@ public class Role {
         }
 
         Role otherRole = (Role) other;
-        return role.equals(otherRole.role);
+        return value.equals(otherRole.value);
     }
 
     @Override
     public int hashCode() {
-        return role.hashCode();
+        return value.hashCode();
     }
 
 }
