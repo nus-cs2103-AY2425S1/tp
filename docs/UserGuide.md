@@ -30,7 +30,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete n/John Doe` : Deletes the contact with name `John Doe` if it is shown in the current list.
 
@@ -44,23 +44,23 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
 ## Summary of commands
 
-| Action                                                      | Format, Examples                                                                                                                                                                                                                        |
-|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-person-add)                             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool` |
-| [**Clear**](#clearing-all-entries-clear)                    | `clear`                                                                                                                                                                                                                                 |
-| [**Delete**](#deleting-a-person-delete)                     | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                              |
-| [**Edit**](#editing-a-person-edit)                          | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
-| [**Find**](#finding-persons-by-name-find)                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                              |
-| [**Filter**](#filtering-persons-by-tag-filter)              | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                   |
-| [**List**](#listing-all-persons-list)                       | `list`                                                                                                                                                                                                                                  |
-| [**Help**](#viewing-help-help)                              | `help`                                                                                                                                                                                                                                  |
-| [**View**](#viewing-a-contact-s-full-details-view)          | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
-| [**Github**](#launching-github-repository-github)           | `github n/NAME`  <br> e.g., `github n/Harry`                                                                                                                                                                                            |
-| [**Mark**](#marking-a-student-as-present-mark)              | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                                                             |
-| [**Unmark**](#unmarking-a-student-as-present-unmark)        | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                                                         |
-| [**Sort**](#sorting-the-displayed-list-sort)                | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                                                                |
-| [**Import**](#importing-data-from-csv-file-import)          | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                                                                    |
-| [**Export**](#exporting-data-into-csv-file-export)          | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                                                                         |
+| Action                                                      | Format, Examples                                                                                                                                                                                                                      |
+|-------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-person-add)                             | `add n/NAME p/PHONE_NUMBER e/EMAIL telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com telegram/@James t/friend t/colleague github/james-cool` |
+| [**Clear**](#clearing-all-entries-clear)                    | `clear`                                                                                                                                                                                                                               |
+| [**Delete**](#deleting-a-person-delete)                     | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                            |
+| [**Edit**](#editing-a-person-edit)                          | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                               |
+| [**Find**](#finding-persons-by-name-find)                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                            |
+| [**Filter**](#filtering-persons-by-tag-filter)              | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                 |
+| [**List**](#listing-all-persons-list)                       | `list`                                                                                                                                                                                                                                |
+| [**Help**](#viewing-help-help)                              | `help`                                                                                                                                                                                                                                |
+| [**View**](#viewing-a-contact-s-full-details-view)          | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                           |
+| [**Github**](#launching-github-repository-github)           | `github n/NAME`  <br> e.g., `github n/Harry`                                                                                                                                                                                          |
+| [**Mark**](#marking-a-student-as-present-mark)              | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                                                           |
+| [**Unmark**](#unmarking-a-student-as-present-unmark)        | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                                                       |
+| [**Sort**](#sorting-the-displayed-list-sort)                | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                                                              |
+| [**Import**](#importing-data-from-csv-file-import)          | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                                                                  |
+| [**Export**](#exporting-data-into-csv-file-export)          | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                                                                       |
 | [**Command History**](#accessing-command-history-and) | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                                   |## Features
 
 <br><br>
@@ -145,7 +145,7 @@ Edits an existing person detail in KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`**</md>
+<md>**Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
