@@ -296,25 +296,27 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I can …​                                       | So that I can…​                                                         |
-|----------|----------------------------|---------------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | user                       | save a _client_'s personal information            | contact them easily                                                        |
-| `* * *`  | user                       | save a _client_'s _rental information_            | view their respective properties                                           |
-| `* * *`  | user                       | edit a _client_'s personal information            | modify their personal details                                              |
-| `* * *`  | user                       | edit a _client_'s _rental information_            | modify their property's _rental information_                               |
-| `* * * ` | user                       | delete a _client_'s personal information          | clear my application when he/she is no longer my _client_                  |
+| Priority | As a …​                 | I can …​                                          | So that I can…​                                                           |
+|----------|----------------------------|---------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | user                       | save a _client_'s personal information            | contact them easily                                                       |
+| `* * *`  | user                       | save a _client_'s _rental information_            | view their respective properties                                          |
+| `* * *`  | user                       | edit a _client_'s personal information            | modify their personal details                                             |
+| `* * *`  | user                       | edit a _client_'s _rental information_            | modify their property's _rental information_                              |
+| `* * * ` | user                       | delete a _client_'s personal information          | clear my application when he/she is no longer my _client_                 |
 | `* * *`  | user                       | delete a _client_'s _rental information_          | clear my application when the property is not owned by my _client_ anymore |
-| `* * *`  | user                       | find a _client_'s personal information            | find the _client_ easily                                                   |
-| `* * *`  | user                       | find a _client_'s _rental information_            | find the _client_'s property easily                                        |
-| `* *`    | user                       | colour code a _client_                            | differentiate more important _clients_                                     |
-| `* *`    | user                       | attach files to a _client_                        | attach important contracts to the respective _clients_                     |
-| `* *`    | user                       | assign tags to _clients_                          | differentiate _clients_ by any interesting factors                         |
-| `* *`    | user                       | autofill CLI commands                             | easily assess the command line without typing the command again            |
-| `* *`    | user                       | export all _client_'s personal information        | save it somewhere else                                                     |
-| `* *`    | user                       | export a specific _client_'s _rental information_ | save it somewhere else                                                     |
-| `*`      | user                       | send emails to a _client_                         | schedule meetings with them                                                |
-| `*`      | user                       | set reminders for a _client_                      | remember my schedule with individual _client_                              |
-| `*`      | user                       | lock my application                               | protect my data                                                            |
+| `* * *`  | user                       | find a _client_'s personal information            | find the _client_ easily                                                  |
+| `* * *`  | user                       | view a _client_'s _rental information_            | find the _client_'s property easily                                       |
+| `* * *`  | user                       | re-visit my previous input                        | type faster                                                               |
+| `* * *`  | user                       | autofill my input                                 | type faster                                                               |
+| `* *`    | user                       | colour code a _client_                            | differentiate more important _clients_                                    |
+| `* *`    | user                       | attach files to a _client_                        | attach important contracts to the respective _clients_                    |
+| `* *`    | user                       | assign tags to _clients_                          | differentiate _clients_ by any interesting factors                        |
+| `* *`    | user                       | autofill CLI commands                             | easily assess the command line without typing the command again           |
+| `* *`    | user                       | export all _client_'s personal information        | save it somewhere else                                                    |
+| `* *`    | user                       | export a specific _client_'s _rental information_ | save it somewhere else                                                    |
+| `*`      | user                       | send emails to a _client_                         | schedule meetings with them                                               |
+| `*`      | user                       | set reminders for a _client_                      | remember my schedule with individual _client_                             |
+| `*`      | user                       | lock my application                               | protect my data                                                           |
 
 *{More to be added}*
 
@@ -322,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TrueRental` system and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a [_client_](#glossary-client)**
+**Use case 01: Add a [_client_](#glossary-client)**
 
 **MSS**
 
@@ -364,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Add a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
+**Use case 02: Add a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
 
 **MSS**
 
@@ -415,7 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Find a [_client_](#glossary-client)**
+**Use case 03: Find a [_client_](#glossary-client)**
 
 **MSS**
 
@@ -452,7 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Edit a [_client_](#glossary-client)'s information**
+**Use case 04: Edit a [_client_](#glossary-client)'s information**
 
 **MSS**
 
@@ -492,7 +494,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Edit a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
+**Use case 05: Edit a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
 
 **MSS**
 
@@ -533,7 +535,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: Delete a [_client_](#glossary-client)**
+**Use case 06: Delete a [_client_](#glossary-client)**
 
 **MSS**
 
@@ -560,7 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-**Use case: Delete a [_rental information_](#glossary-rental-information) from a [_client_](#glossary-client)**
+**Use case 07: Delete a [_rental information_](#glossary-rental-information) from a [_client_](#glossary-client)**
 
 **MSS**
 
@@ -586,6 +588,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case 08: Re-visit previously entered commands**
+
+**MSS**
+
+1.  User previously entered multiple commands
+2.  User presses up-arrow key to re-visit previous command
+3.  System fills command box with respective command
+4.  User presses down-arrow key to re-visit next command
+5.  System fills command box with respective command
+6.  User presses enter to submit the command
+7.  System performs the action relating to the command
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no more previous command within the command history
+
+    * 2a1. System stays at current command
+
+  Use case resumes from step 3.
+
+* 3a. There are no more next command within the command history
+
+    * 3a1. System fills command box with empty command
+
+  Use case ends.
 
 *{More to be added}*
 
@@ -632,40 +661,265 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the latest `truerental.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-1/tp/releases) and copy into an empty folder
+   2. Open a command terminal, `cd` into the folder that you previously saved the .jar file in.
+   3. Use `java --version`to ensure your java version is `Java 17`.
+   4. Use `java -jar truerental.jar` command to run the application.
+   5. Expected: A GUI similar to the image shown below should appear within a few seconds. The application will contain some sample data.
+      ![image](images/uiWithDescription.png)
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+1. Shut down 
+
+   1. Click on the cross at the top of the application window.
+      1. MacOS: Red cross button at the top-left of the application window.
+      2. Windows / Linux: Red cross button at the top-right of the application window.<br>
+        Expected: The application will exit and close safely.
+      
+   2. Enter `exit` into the command box of the application.<br>
+      Expected: The application will exit and close safely. 
+
+1. Subsequent Launches
+
+   1. Relaunch the application by `cd` into the respective folder with the `truerental.jar` file.
+   2. Use `java --version` to ensure your java version is `Java 17`.
+   3. Use `java -jar truerental.jar` command to run the application.
+   4. Expected: The application should retain all changes made to the data within the application previously.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by typing `java -jar truerental.jar`.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Basic Usage
 
-### Deleting a [_client_](#glossary-client)
+#### Adding a [_client_](#glossary-client)
+
+1. Adding a _client_ while all _clients_ are being shown
+
+    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+
+    2. Test case: `cadd n/John Doe p/99887766 e/johndoe@example.com`<br>
+       Expected: A new client is added, with the name "John Doe", phone number "99887766", email address "johndoe@example.com". The details of the added client is shown in the result display box.
+
+    3. Test case: `cadd n/Amy Tan p/99887766`<br>
+       Expected: A new client is added, with the name "Amy Tan", phone number "99887766", without an email address. The details of the added client is shown in the result display box.
+
+    4. Test case: `cadd n/Beckham Lee e/beckhamlee@example.com`<br>
+       Expected: A new client is added, with the name "Beckham Lee", email address "beckhamlee@example.com", without a phone number. The details of the added client is shown in the result display box.
+
+    5. Test case: `cadd n/John Doe p/81234567 e/johndoe@test.com`<br>
+       Expected: A new client is added, with the name "John Doe", phone number "81234567", email address "johndoe@test.com". The details of the added client is shown in the result display box.
+
+    6. Test case: `cadd n/John Doe p/99887766 e/johndoe@example.com`<br>
+       Expected: No new client is added, as there already exist the same client within the application. Error details will be displayed in the result display box.
+
+    7. Test case: `cadd n/John Doe p/99887766`<br>
+       Expected: No new client is added, as there already exist the same client within the application. Error details will be displayed in the result display box.
+
+    8. Test case: `cadd n/John Doe e/johndoe@example.com`<br>
+       Expected: No new client is added, as there already exist the same client within the application. Error details will be displayed in the result display box.
+
+    9. Test case: `cadd n/Charlie Peng`<br>
+       Expected: No new client is added, as a client is required to have at least one phone number or one email address. Error details will be displayed in the result display box.
+   
+    10. Test case: `cadd n/J@ckie Chan p/91112222 e/jackiechan@example.com`<br>
+        Expected: No new client is added, as the name contains invalid format. Error details will be displayed in the result display box.
+
+    11. Test case: `cadd n/Jackie Chan p/#999$999 e/jackiechan@example.com`<br>
+        Expected: No new client is added, as the phone contains invalid format. Error details will be displayed in the result display box.
+
+    12. Test case: `cadd n/Jackie Chan p/91112222 e/jackiechan@.com`<br>
+        Expected: No new client is added, as the email contains invalid format. Error details will be displayed in the result display box.
+
+    13. Test case: `cadd`<br>
+        Expected: No new client is added, as there are no parameters provided.
+
+#### Adding a client's [_rental information_](#glossary-rental-information)
+
+1. TODO!! @Song Lin
+
+#### Viewing a client's [_rental information_](#glossary-rental-information)
+
+1. Viewing a _client's rental information_ while all _clients_ are being shown
+
+    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+
+    2. Test case: `rview 1`<br>
+       Expected: If the first client has rental information, displays the respective client's rental information in the rental information list panel. A command success message is displayed in the result display box.
+
+    3. Test case: `rview 1`<br>
+        Expected: If the first client does not have rental information, no rental information will be displayed in the rental information list panel. A command success message is displayed in the result display box.
+
+    4. Test case: `rview 0`<br>
+      Expected: No rental information is shown in the rental information list panel. Error details will be displayed in the result display box.
+
+    5. Test case: `rview x`, where x is larger than the total number of clients.<br>
+       Expected: No rental information is shown in the rental information list panel. Error details will be displayed in the result display box.
+
+    6. Test case: `rview`<br>
+      Expected: No rental information is shown in the rental information list panel. An invalid command will be shown in the result display box.
+
+
+#### Editing a [_client_](#glossary-client)
+
+1. Editing a _client_ information.
+
+   1. Prerequisite: List all _clients_ using the `list` command. Multiple _clients_ in the list, with the first client being named "John Doe", with email address "johndoe@example.com" and phone number "99887766".
+   
+   2. Test case: `cedit 1 n/Peter Pan`<br>
+      Expected: The first client's name will be edited from "John Doe" to "Peter Pan". A command success message is displayed in the result display box.
+   
+   3. Test case: `cedit 1 p/91231231`<br>
+      Expected: The first client's phone number will be edited from "99887766" to "91231231". A command success message is displayed in the result display box.
+   
+   4. Test case: `cedit 1 e/peterpan@example.com`<br>
+      Expected: The first client's email address will be edited from "johndoe@example.com" to "peterpan@example.com". A command success message is displayed in the result display box.
+   
+   5. Test case: `cedit 1 n/Peter Wang p/ e/`
+      Expected: No client's information will be edited as a client must at least have a phone number or an email address. Error details will be displayed in the result display box.
+   
+   6. Test case: `cedit 0`
+      Expected: No client's information will be edited. Error details will be displayed in the result display box.
+   
+   7. Test case: `cedit x`, where x is larger than the total number of clients.<br>
+      Expected: No client's information will be edited. Error details will be displayed in the result display box.
+   
+   8. Test case: `cedit`
+      Expected: No client's information will be edited. An invalid command will be shown in the result display box.
+  
+   
+   
+
+#### Editing a client's [_rental information_](#glossary-rental-information)
+
+1. TODO!! @Song Lin
+
+#### Listing all [_clients_](#glossary-client)
+
+1. Listing all _clients_ within the application.
+
+   1. Prerequisites: There are already multiple _clients_ within the application.
+   
+   2. Test case: `list` 
+      Expected: All _clients_ will be displayed in the client list panel.
+
+
+#### Find a keyword within all [_clients_](#glossary-client) and [_rental information_](#glossary-rental-information)
+
+1. Finding a keyword from all _clients_ and _rental information_.
+
+    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list, with client called Amy Tan in this list.
+
+    2. Test case: `find k/Amy Tan`<br>
+       Expected: Client with the keyword "Amy Tan" will be displayed on the client list panel. Command success message will be displayed in the result display box.
+
+    3. Test case: `find k/Yong Li`<br>, given that no client within the list is called "Yong Li"
+       Expected: No client or rental information matches the particular keyword "Yong Li". Error details will be displayed in the result display box.
+
+    4. Test case: `find Amy`<br>
+       Expected: No prefix k/ given. An invalid command will be shown in the result display box.
+
+    5. Test case: `find k/`<br>
+       Expected: No parameters given. An invalid command will be shown in the result display box.
+
+    6. Test case: `find`<br>
+       Expected: No prefix and/or parameters given. An invalid command will be shown in the result display box.
+
+#### Find a [_clients_](#glossary-client)
+
+1. TODO!! @Nathan
+
+#### Find a client's [_rental information_](#glossary-rental-information)
+
+1. TODO!! @Nathan
+
+#### Deleting a [_client_](#glossary-client)
 
 1. Deleting a _client_ while all _clients_ are being shown
 
    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
 
-   1. Test case: `cdelete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `cdelete 1`<br>
+      Expected: The first _client_ is deleted from the list. Details of the deleted contact will be displayed in the result display box.
 
-   1. Test case: `cdelete 0`<br>
-      Expected: No _client_ is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `cdelete 0`<br>
+      Expected: No _client_ is deleted. Error details will be displayed in the result display box.
 
-   1. Other incorrect delete commands to try: `cdelete`, `cdelete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Test case: `cdelete x`, where x is larger than the total number of clients.<br>
+      Expected: No _client_ is deleted. An invalid command will be shown in the result display box.
 
-1. _{ more test cases …​ }_
+#### Deleting a client's [_rental information_](#glossary-rental-information)
+
+1. TODO!! @Nathan
+
+#### Command History Feature
+
+1. Retrieving previously entered commands.
+
+    1. Prerequisites: Below commands were previously entered.
+       1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
+       2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
+       3. `cadd n/Amy Tan p/99887766`
+       4. `rview 1`
+       5. `list`
+       6. `cdelete 2`
+
+    2. Test case: (Steps 1 to 13 are performed sequentially)
+       1. Step 1: Press up-arrow key on the keyboard.<br> 
+          Expected: `cdelete 2` is shown in the command box.
+       2. Step 2: Press up-arrow key on the keyboard.<br>
+          Expected: `list` is shown in the command box.
+       3. Step 3: Press up-arrow key on the keyboard.<br>
+          Expected: `rview 1` is shown in the command box.
+       4. Step 4: Press up-arrow key on the keyboard.<br>
+          Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
+       5. Step 5: Press up-arrow key on the keyboard.<br>
+          Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
+       6. Step 6: Press up-arrow key on the keyboard.<br>
+          Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
+       7. Step 7: Press up-arrow key on the keyboard.<br>
+          Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there are no more previous commands.
+       8. Step 8: Press down-arrow key on the keyboard.<br>
+          Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
+       9. Step 9: Press down-arrow key on the keyboard.<br>
+          Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
+       10. Step 10: Press down-arrow key on the keyboard.<br>
+           Expected: `rview 1` is shown in the command box.
+       11. Step 11: Press down-arrow key on the keyboard.<br>
+           Expected: `list` is shown in the command box.
+       12. Step 12: Press down-arrow key on the keyboard.<br>
+           Expected: `cdelete 3` is shown in the command box.
+       13. Step 13: Press down-arrow key on the keyboard.<br>
+          Expected: : Nothing is shown in the command box.
+
+#### Autofill Commands Feature
+
+1. TODO!! @Song Lin
+
+#### Clear
+
+1. Clearing the entire True Rental's database, wiping all clients and their respective rental information.
+
+   1. Prerequisites: There are more than 1 client and 1 rental information in the application.
+   
+   2. Test case: `clear`
+      Expected: Both client list panel and rental information list panel will be empty with all data being cleared. A command success message will be displayed in the result display box.
+
+#### Exit
+
+1. Safely exiting `True Rental` application.
+
+    1. Prerequisites: Run the application
+
+    2. Test case: `exit`
+       Expected: The application will exit and be closed safely.
 
 ### Saving data
+
+1. TODO!! @ANYBODY
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
