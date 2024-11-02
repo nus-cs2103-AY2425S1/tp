@@ -14,5 +14,22 @@
     </main>
 
   </body>
+<aside class="sidebar">
+  <h2>Quick Navigation</h2>
+  <ul>
+    {% for item in site.sidebar %}
+    <li>
+      <a href="{{ item.url }}">{{ item.title }}</a>
+      {% if item.toc %}
+      <ul>
+        {% for heading in site.pages | where:"path", item.url | map:"headings" %}
+        <li><a href="{{ heading.url }}">{{ heading.text }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</aside>
 
 </html>
