@@ -107,7 +107,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
-* Note that you cannot edit `schedule` information using the `edit` command. Please use the `schedule` command instead.
+* Note that you cannot edit `schedule` and `socialMedia` information using the `edit` command. Please use the `schedule` and `socialMedia` command instead.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
