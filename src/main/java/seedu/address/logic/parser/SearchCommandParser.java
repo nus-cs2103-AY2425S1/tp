@@ -59,36 +59,12 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 
         checkForEmptyInputs(argMultimap, prefixValueMap);
 
-        Predicate<Person> combinedPredicate = null;
-
-        if (!nameArgs.isEmpty()) {
-            NameContainsKeywordsPredicate namePredicate =
-                    new NameContainsKeywordsPredicate(Arrays.asList(nameArgs.split("\\s+")));
-            combinedPredicate = combinePredicate(combinedPredicate, namePredicate);
-        }
-
-        if (!tagArgs.isEmpty()) {
-            TagContainsKeywordsPredicate tagPredicate =
-                    new TagContainsKeywordsPredicate(Arrays.asList(tagArgs.split("\\s+")));
-            combinedPredicate = combinePredicate(combinedPredicate, tagPredicate);
-        }
-
-        if (!phoneArgs.isEmpty()) {
-            PhoneNumberMatchesPredicate phonePredicate =
-                    new PhoneNumberMatchesPredicate(phoneArgs);
-            combinedPredicate = combinePredicate(combinedPredicate, phonePredicate);
-        }
-
-        if (!roleArgs.isEmpty()) {
-            try {
-                Role role = Role.fromString(roleArgs);
-                RoleMatchesPredicate rolePredicate =
-                        new RoleMatchesPredicate(role);
-                combinedPredicate = combinePredicate(combinedPredicate, rolePredicate);
-            } catch (IllegalArgumentException e) {
-                throw new ParseException(MESSAGE_INVALID_SEARCH_ROLE_INPUT);
-            }
-        }
+        Predicate<Person> combinedPredicate = combinePredicates(
+                createNamePredicate(nameArgs),
+                createTagPredicate(tagArgs),
+                createPhonePredicate(phoneArgs),
+                createRolePredicate(roleArgs)
+        );
 
         if (combinedPredicate == null && groupArgs.isEmpty()) {
             throw new ParseException(
@@ -128,16 +104,47 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         }
     }
 
-    /**
-     * Combines a new predicate with the existing combined predicate using a logical AND.
-     * If the combined predicate is null, it initializes it with the new predicate.
-     *
-     * @param combinedPredicate The existing combined predicate.
-     * @param newPredicate The new predicate to add.
-     * @return The updated combined predicate.
-     */
-    private Predicate<Person> combinePredicate(Predicate<Person> combinedPredicate, Predicate<Person> newPredicate) {
-        return combinedPredicate == null ? newPredicate : combinedPredicate.and(newPredicate);
+    private Predicate<Person> createNamePredicate(String nameArgs) {
+        if (nameArgs.isEmpty()) {
+            return null;
+        }
+        return new NameContainsKeywordsPredicate(Arrays.asList(nameArgs.split("\\s+")));
     }
 
+    private Predicate<Person> createTagPredicate(String tagArgs) {
+        if (tagArgs.isEmpty()) {
+            return null;
+        }
+        return new TagContainsKeywordsPredicate(Arrays.asList(tagArgs.split("\\s+")));
+    }
+
+    private Predicate<Person> createPhonePredicate(String phoneArgs) {
+        if (phoneArgs.isEmpty()) {
+            return null;
+        }
+        return new PhoneNumberMatchesPredicate(phoneArgs);
+    }
+
+    private Predicate<Person> createRolePredicate(String roleArgs) throws ParseException {
+        if (roleArgs.isEmpty()) {
+            return null;
+        }
+        try {
+            Role role = Role.fromString(roleArgs);
+            return new RoleMatchesPredicate(role);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(MESSAGE_INVALID_SEARCH_ROLE_INPUT);
+        }
+    }
+
+    @SafeVarargs
+    private Predicate<Person> combinePredicates(Predicate<Person>... predicates) {
+        Predicate<Person> result = null;
+        for (Predicate<Person> predicate : predicates) {
+            if (predicate != null) {
+                result = (result == null) ? predicate : result.and(predicate);
+            }
+        }
+        return result;
+    }
 }
