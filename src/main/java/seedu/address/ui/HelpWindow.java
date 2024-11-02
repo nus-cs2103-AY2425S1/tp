@@ -143,15 +143,10 @@ public class HelpWindow extends UiPart<Stage> {
         commandTable.setItems(commandList);
         commandTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
 
-        commandTable.setFixedCellSize(25); // Set the height of each row
+        commandTable.setFixedCellSize(25);
         commandTable.prefHeightProperty().bind(
-                Bindings.size(commandTable.getItems()).multiply(commandTable.getFixedCellSize()).add(30)); // Add
-                                                                                                           // some
-                                                                                                           // extra
-                                                                                                           // space
-                                                                                                           // for
-                                                                                                           // the
-                                                                                                           // header
+                Bindings.size(commandTable.getItems()).multiply(commandTable.getFixedCellSize()).add(30));
+
     }
 
 }

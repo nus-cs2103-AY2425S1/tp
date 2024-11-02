@@ -22,9 +22,9 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <VBox spacing="10">
+      <VBox spacing="10" fx:id="helpMessageContainer">
         <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+          <Insets bottom="5.0" left="5.0" right="5.0" />
         </padding>
 
         <TableView fx:id="commandTable">
@@ -37,7 +37,7 @@
           </VBox.margin>
         </TableView>
 
-        <HBox alignment="CENTER" fx:id="helpMessageContainer">
+        <HBox alignment="CENTER">
           <children>
             <Label fx:id="helpMessage" text="Label">
               <HBox.margin>
@@ -51,7 +51,7 @@
             </Button>
           </children>
           <padding>
-            <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+            <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
           </padding>
         </HBox>
       </VBox>
