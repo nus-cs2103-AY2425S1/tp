@@ -23,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Reminder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -148,6 +149,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the reminder at the given {@code targetIndex} in the
+     * {@code model}'s reminder address book.
+     */
+    public static void showReminderAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredReminderList().size());
+
+        String reminderDescription = model.getFilteredReminderList().get(targetIndex.getZeroBased())
+                .getReminderDescription();
+        model.updateFilteredReminderList(r -> r.getReminderDescription().equals(reminderDescription));
+        assertEquals(1, model.getFilteredReminderList().size());
     }
 
 }

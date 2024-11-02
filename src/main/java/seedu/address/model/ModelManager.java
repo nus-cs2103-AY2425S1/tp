@@ -192,6 +192,12 @@ public class ModelManager implements Model {
         reminderAddressBook.addReminder(reminder);
     }
 
+    @Override
+    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+        requireNonNull(predicate);
+        filteredReminders.setPredicate(predicate);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
