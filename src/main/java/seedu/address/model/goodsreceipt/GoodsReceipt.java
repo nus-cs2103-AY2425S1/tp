@@ -17,7 +17,6 @@ import com.opencsv.bean.CsvNumber;
 import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
 
-
 /**
  * The {@code GoodsReceipt} class represents the receipt of goods from a supplier
  * Guarantees: Immutable;

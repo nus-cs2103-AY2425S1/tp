@@ -14,7 +14,6 @@ import seedu.address.model.goodsreceipt.exceptions.DuplicateReceiptException;
 import seedu.address.model.goodsreceipt.exceptions.ReceiptNotFoundException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
-
 /**
  * Unique goodsReceipt list
  */
