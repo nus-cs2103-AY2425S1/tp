@@ -163,6 +163,18 @@
     -fx-text-fill: white;
 }
 
+.status-none.chart-pie {
+    -fx-pie-color: #009E60 !important;
+}
+
+.status-nonurgent.chart-pie {
+    -fx-pie-color: #c46210 !important;
+}
+
+.status-urgent.chart-pie {
+    -fx-pie-color: #FF2400 !important;
+}
+
 .grid-pane {
     -fx-background-color: derive(#1d1d1d, 30%);
     -fx-border-color: derive(#1d1d1d, 30%);
@@ -335,6 +347,109 @@
 
 .detail-tier-label.reject-tier {
     -fx-background-color: #8B0000;
+}
+
+.top-split-pane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: transparent;
+}
+
+.top-split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: derive(#1d1d1d, 40%);
+    -fx-padding: 0 1 0 1;
+}
+
+.chart-container {
+    -fx-background-color: #1C1C1C;
+    -fx-padding: 10;
+}
+
+.chart-pie.data0 {
+    -fx-pie-color: #009E60;
+}
+.chart-pie.data1 {
+    -fx-pie-color: #c46210;
+}
+.chart-pie.data2 {
+    -fx-pie-color: #FF2400;
+}
+
+.status-none.chart-pie {
+    -fx-pie-color: #009E60; /* Green for NONE */
+}
+
+.status-nonurgent.chart-pie {
+    -fx-pie-color: #c46210; /* Orange for NON-URGENT */
+}
+
+.status-urgent.chart-pie {
+    -fx-pie-color: #FF2400; /* Red for URGENT */
+}
+
+.default-color0.chart-pie {
+    -fx-pie-color: #009E60;
+}
+
+.default-color1.chart-pie {
+    -fx-pie-color: #c46210;
+}
+
+.default-color2.chart-pie {
+    -fx-pie-color: #FF2400;
+}
+
+.chart-title {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 0 0 -2 0;
+    -fx-label-padding: 0 0 0 0;
+}
+
+.chart-pie {
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 2;
+}
+
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 10 5 5 5;
+}
+
+.chart-content {
+    -fx-padding: 0;
+}
+
+.chart-legend-item {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.chart-container {
+    -fx-padding: 2;
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.status-chart-placeholder {
+    -fx-min-height: 220px;
+    -fx-max-height: 220px;
+}
+
+.chart-pie-legend-symbol.data0 {
+    -fx-background-color: #009E60;
+}
+
+.chart-pie-legend-symbol.data1 {
+    -fx-background-color: #c46210;
+}
+
+.chart-pie-legend-symbol.data2 {
+    -fx-background-color: #FF2400;
+}
+
+.chart-legend-item-symbol {
+    -fx-padding: 3px;
+    -fx-min-width: 8px;
+    -fx-min-height: 8px;
 }
 
 #cardPane {
