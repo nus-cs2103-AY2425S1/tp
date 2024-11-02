@@ -107,8 +107,14 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        if ((venue == null) || (otherEvent.venue == null)) {
+        if (((venue == null) && (otherEvent.venue != null)) || ((venue != null) && (otherEvent.venue == null))) {
             return false;
+        }
+        if (venue == null && otherEvent.venue == null) {
+            return name.equals(otherEvent.name)
+                    && time.equals(otherEvent.time)
+                    && celebrity.equals(otherEvent.celebrity)
+                    && contacts.equals(otherEvent.contacts);
         }
         return name.equals(otherEvent.name)
                 && time.equals(otherEvent.time)

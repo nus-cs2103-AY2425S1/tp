@@ -61,7 +61,7 @@ public class AddEventCommand extends AddCommand {
      */
     public AddEventCommand(EventName eventName, Time time, Venue venue, String celebrityName,
                            Set<String> contactNames) {
-        requireAllNonNull(eventName, time, celebrityName);
+        requireAllNonNull(eventName, time, celebrityName, contactNames);
         this.eventName = eventName;
         this.time = time;
         this.venue = venue;
