@@ -71,7 +71,7 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Li
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a table of commands with its respective description and a link to user guide.
 
 ![help message](images/helpMessage.png)
 
