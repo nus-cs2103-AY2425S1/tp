@@ -26,15 +26,18 @@ public class ListingAddCommand extends Command {
             + "by the index number passed into INDEX parameter. "
             + "Multiple types of each property can exist, but the address must be unique.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "t/PROPERTY_TYPE a/ADDRESS\n"
+            + "t/PROPERTY_TAG a/ADDRESS\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "t/hdb a/NUS avenue 123";
 
     public static final String MESSAGE_ADDED_LISTING_SUCCESS = "Added property listing to Person: %1$s";
     public static final String HELP_LISTING_ADD_COMMAND = "Property Listing Add Command\n"
-            + "- Format: listing add INDEX t/PROPERTY_TYPE a/address\n"
+            + "- Format: listing add INDEX t/PROPERTY_TAG a/address\n"
             + "- Example: listing add 1 t/hdb a/123 NUS Street\n"
-            + "- The list of valid PROPERTY_TYPE are: HDB, CONDO, LANDED";
+            + "- The list of valid PROPERTY_TAG are: HDB, CONDO, RESIDENTIAL, LANDED, EC, COMMERCIAL,\n"
+            + "  RETAIL, INDUSTRIAL, OFFICE, WAREHOUSE, SHOPHOUSE, TERRACE,\n"
+            + "  SEMIDET, BUNGALOW, DETACHED, GCB, PENTHOUSE, MIXED,\n"
+            + "  SERVAPT, DORM";
 
     private final Listing listing;
     private final Index index;
