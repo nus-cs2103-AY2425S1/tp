@@ -69,8 +69,9 @@ public class StatusCommand extends Command {
         requireNonNull(model);
         FilteredList<InternshipApplication> lastShownList =
                 (FilteredList<InternshipApplication>) model.getFilteredList();
-        Predicate prevPredicate = lastShownList.getPredicate() == null
-                ? Model.PREDICATE_SHOW_ALL : lastShownList.getPredicate();
+        @SuppressWarnings("unchecked")
+        Predicate<InternshipApplication> prevPredicate = lastShownList.getPredicate() == null
+                ? Model.PREDICATE_SHOW_ALL : (Predicate<InternshipApplication>) lastShownList.getPredicate();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
