@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -64,9 +65,12 @@ public class DeleteReminderCommand extends Command {
         model.deleteReminder(reminderToDelete);
 
         // Parse input using the NameContainsKeywordsPredicate
+        String fullName = reminderToDelete.getPersonName();
+        String[] nameKeywords = fullName.split("\\s+");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(
-                List.of(reminderToDelete.getPersonName()));
-        List<Person> matchingPersons = model.getClientHub().getPersonList().filtered(predicate);
+                List.of(nameKeywords));
+        ObservableList<Person> persons = model.getClientHub().getPersonList();
+        List<Person> matchingPersons = persons.filtered(predicate);
 
         // Check if there is exactly one match
         if (matchingPersons.size() == 1) {

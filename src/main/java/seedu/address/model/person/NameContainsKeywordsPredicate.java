@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
+    static boolean isExactField = false;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
@@ -20,12 +21,44 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         if (keywords.isEmpty()) {
             return false;
+        }
+        //     if (!isExactField) {
+        //         if (isExact(person)) {
+        //             isExactField = true;
+        //             return true;
+        //         } else {
+        //             return keywords.stream()
+        //                     .allMatch(keyword ->
+        //                             Arrays.stream(person.getName().fullName.split("\\s+"))
+        //                                     .anyMatch(part -> part.toLowerCase().startsWith(keyword.toLowerCase())));
+        //         }
+        //     } else {
+        //         return false;
+        //     }
+        // if (List.of(person.getName().fullName.trim().split(" ")).equals(keywords)) {
+        //     return true;
+        // }
+        else if (keywords.get(keywords.size() - 1).contains("/")) {
+            return isExact(person);
         } else {
             return keywords.stream()
                     .allMatch(keyword ->
                             Arrays.stream(person.getName().fullName.split("\\s+"))
                                     .anyMatch(part -> part.toLowerCase().startsWith(keyword.toLowerCase())));
         }
+    }
+
+
+        /**
+         * Checks if the person's name is an exact match with the concatenated keywords.
+         *
+         * @param person The person to compare against the concatenated keywords.
+         * @return {@code true} if the concatenated keywords, match the person's full name.
+         */
+    public boolean isExact(Person person) {
+        String fullname = String.join("", keywords).toLowerCase().split("/")[0].trim();
+        String personName = person.getName().fullName.trim().toLowerCase().replace(" ", "");
+        return fullname.equals(personName);
     }
 
     @Override

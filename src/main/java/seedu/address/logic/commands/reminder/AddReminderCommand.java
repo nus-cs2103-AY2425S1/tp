@@ -75,7 +75,7 @@ public class AddReminderCommand extends Command {
             Reminder reminderWithFullName = toAdd.getReminderWithFullName(person.getName().fullName);
             person.addReminder(reminderWithFullName);
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(reminderWithFullName)));
         } else if (matchingPersons.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_PERSON);
         } else {
