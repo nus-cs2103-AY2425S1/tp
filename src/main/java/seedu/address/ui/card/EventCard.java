@@ -57,8 +57,12 @@ public class EventCard extends UiPart<Region> {
         time.setText(event.getTime().getTime());
         venue.setText(event.getVenue().getVenue());
         celebrity.getChildren().add(new Label(event.getCelebrity().getName().fullName));
-        event.getContacts().stream()
-                .forEach(contact -> contactsBox.getChildren().add(contactCard(contact)));
+        if (!event.getContacts().isEmpty()) {
+            event.getContacts().stream()
+                    .forEach(contact -> contactsBox.getChildren().add(contactCard(contact)));
+        } else {
+            contactsBox.getChildren().add(new Label("No contacts added yet!"));
+        }
     }
 
     /**
