@@ -230,7 +230,9 @@ public class Lesson {
         return ((startTime.equals(otherStartTime) || startTime.isBefore(otherStartTime))
                 && endTime.isAfter(otherStartTime))
                 || (startTime.isBefore(otherEndTime)
-                && (endTime.equals(otherEndTime) || endTime.isAfter(otherEndTime)));
+                && (endTime.equals(otherEndTime) || endTime.isAfter(otherEndTime)))
+                || ((startTime.equals(otherStartTime) || (startTime.isAfter(otherStartTime))
+                && (endTime.equals(otherEndTime) || endTime.isBefore(otherEndTime))));
     }
 
     /**
