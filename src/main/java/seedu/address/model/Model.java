@@ -17,7 +17,15 @@ import seedu.address.model.person.ReminderManager;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    BooleanProperty showingArchived();
+
+    /**
+     * Returns a true BooleanProperty if UI is the archived list.
+     */
+    BooleanProperty isUiArchived();
+
+    /**
+     * Sets the isUiArchived property
+     */
     void setArchivedListMode(boolean isArchived);
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

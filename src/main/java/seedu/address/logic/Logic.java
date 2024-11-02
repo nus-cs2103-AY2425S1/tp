@@ -57,5 +57,8 @@ public interface Logic {
      */
     ReminderManager getReminderManager();
 
-    BooleanProperty showingArchived();
+    /**
+     * Returns a true BooleanProperty if UI is the archived list.
+     */
+    BooleanProperty isUiArchived();
 }

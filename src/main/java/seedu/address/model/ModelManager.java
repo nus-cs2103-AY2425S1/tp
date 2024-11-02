@@ -25,7 +25,7 @@ import seedu.address.model.person.ReminderManager;
 public class ModelManager implements Model {
     private static boolean isArchivedList = false;
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private final BooleanProperty showingArchived = new SimpleBooleanProperty(false);
+    private final BooleanProperty isUiArchived = new SimpleBooleanProperty(false);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -144,7 +144,7 @@ public class ModelManager implements Model {
     @Override
     public void setArchivedListMode(boolean isArchived) {
         isArchivedList = isArchived;
-        showingArchived.set(isArchived); // Update the property to notify UI
+        isUiArchived.set(isArchived); // Update the property to notify UI
     }
 
     @Override
@@ -154,8 +154,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public BooleanProperty showingArchived() {
-        return showingArchived;
+    public BooleanProperty isUiArchived() {
+        return isUiArchived;
     }
 
     public boolean getIsArchivedList() {

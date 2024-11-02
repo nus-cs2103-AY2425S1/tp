@@ -59,7 +59,7 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
-        logic.showingArchived().addListener((observable, oldValue, newValue) -> {
+        logic.isUiArchived().addListener((observable, oldValue, newValue) -> {
             refreshPersonListPanel(); // Refresh whenever archived view is toggled
         });
 
@@ -128,7 +128,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Refresh person list panel for
+     * Refresh person list panel for toggling between archived address book UI and main address book UI
      */
     public void refreshPersonListPanel() {
         personListPanelPlaceholder.getChildren().clear();

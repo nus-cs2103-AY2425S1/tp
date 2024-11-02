@@ -183,7 +183,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public BooleanProperty showingArchived() {
+        public BooleanProperty isUiArchived() {
             throw new AssertionError("This method should not be called.");
         }
 

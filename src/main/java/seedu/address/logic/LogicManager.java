@@ -71,8 +71,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public BooleanProperty showingArchived() {
-        return model.showingArchived();
+    public BooleanProperty isUiArchived() {
+        return model.isUiArchived();
     }
 
     @Override
