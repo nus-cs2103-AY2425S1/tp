@@ -155,7 +155,7 @@ public class TagDeleteCommand extends Command {
      * @param tags  Set of tags input by the user.
      * @return List of weddings that match the tag.
      */
-    private List<Wedding> getWeddingfromTags(Model model, Set<Tag> tags) {
+    private List<Wedding> getWeddingFromTags(Model model, Set<Tag> tags) {
         List<String> predicate = tags
                 .stream().map(Tag::getTagName).collect(Collectors.toList());
         List<Wedding> list = new ArrayList<>();
@@ -200,7 +200,7 @@ public class TagDeleteCommand extends Command {
      * @param editedTags   Set of tags that exist as a wedding as well.
      */
     private void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> editedTags) {
-        List<Wedding> weddingList = getWeddingfromTags(model, editedTags);
+        List<Wedding> weddingList = getWeddingFromTags(model, editedTags);
 
         List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
                 .toList();
