@@ -167,15 +167,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> lessons} into a {@code Set<Lesson>}.
+     * Parses {@code Collection<String> lessons} into a {@code List<Lesson>}.
      */
     public static List<Lesson> parseLessons(Collection<String> lessons) throws ParseException {
         requireNonNull(lessons);
-        final List<Lesson> lessonSet = new ArrayList<>();
+        final List<Lesson> lessonList = new ArrayList<>();
         for (String lesson : lessons) {
-            lessonSet.add(parseLesson(lesson));
+            lessonList.add(parseLesson(lesson));
         }
-        return lessonSet;
+        return lessonList;
     }
 
     /**

@@ -54,7 +54,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
-    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons: \n";
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
     public static final String MESSAGE_NEW_LESSONS_CLASH = "Added lessons clash with one another";
 
     private final Person toAdd;
