@@ -403,7 +403,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success:**
     - Message:
       ```
-      client <INDEX> has been updated successfully.
+      Client <INDEX> has been updated successfully.
       ```
 - **On Error:**
     - Message:
