@@ -38,7 +38,8 @@ TrueRental is a **desktop application for managing your client details, optimize
 
    * `exit` : Exits the application.
 
-1. Refer to the [Command Summary](#command-summary) below for a quick overview or [Features](#features) for details of each command.
+1. Refer to the [Command Summary](#command-summary) for a quick overview of available commands.
+2. Refer to the [Features](#features) for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
