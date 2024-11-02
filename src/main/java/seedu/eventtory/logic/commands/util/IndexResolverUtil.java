@@ -35,7 +35,7 @@ public class IndexResolverUtil {
 
             return getFromTwoLists(index, mainVendorList, associatedVendorList,
                 Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
-        } else if (index >= 0 && index < mainVendorList.size()) {
+        } else if (index < mainVendorList.size()) {
             return mainVendorList.get(index);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
@@ -62,7 +62,7 @@ public class IndexResolverUtil {
 
             return getFromTwoLists(index, mainEventList, associatedEventList,
                 Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        } else if (index >= 0 && index < mainEventList.size()) {
+        } else if (index < mainEventList.size()) {
             return mainEventList.get(index);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
