@@ -17,6 +17,7 @@ import seedu.address.logic.commands.DeletePublicAddressCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPublicAddressCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterByNetworkCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -70,6 +71,7 @@ public class AddressBookParser {
         case SearchPublicAddressCommand.COMMAND_WORD -> new SearchPublicAddressCommandParser().parse(arguments);
         case RetrievePublicAddressCommand.COMMAND_WORD -> new RetrievePublicAddressCommandParser().parse(arguments);
         case EditPublicAddressCommand.COMMAND_WORD -> new EditPublicAddressCommandParser().parse(arguments);
+        case FilterByNetworkCommand.COMMAND_WORD -> new FilterByNetworkCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
