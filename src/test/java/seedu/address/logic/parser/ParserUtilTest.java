@@ -5,11 +5,14 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -30,6 +33,11 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "High Risk";
     private static final String VALID_TAG_2 = "Low Risk";
     private static final String VALID_ALLERGY = "Fish, Soy";
+    private static final String VALID_DATE_1 = "26/5/2024 1900";
+    private static final String VALID_DATE_2 = "None"; //remove date from a person
+    private static final String INVALID_DATE_1 = "26/14/2024 1900";
+    private static final String INVALID_DATE_2 = "invalid date";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -190,4 +198,29 @@ public class ParserUtilTest {
         Allergy expectedAllergy = new Allergy(VALID_ALLERGY);
         assertEquals(expectedAllergy, ParserUtil.parseAllergy(allergyWithWhitespace));
     }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateString(INVALID_DATE_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateString(INVALID_DATE_2));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        Date expectedDate = new Date(LocalDateTime.of(2024, 5, 26, 19, 0));
+        assertEquals(expectedDate, new Date(ParserUtil.parseDateString(VALID_DATE_1)));
+
+        expectedDate = new Date(LocalDateTime.MIN);
+        assertEquals(expectedDate, new Date(ParserUtil.parseDateString(VALID_DATE_2)));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsDate() throws Exception {
+        Date expectedDate = new Date(LocalDateTime.of(2024, 5, 26, 19, 0));
+        assertEquals(expectedDate, new Date(ParserUtil.parseDateString(WHITESPACE + VALID_DATE_1 + WHITESPACE)));
+
+        expectedDate = new Date(LocalDateTime.MIN);
+        assertEquals(expectedDate, new Date(ParserUtil.parseDateString(WHITESPACE + VALID_DATE_2 + WHITESPACE)));
+    }
+
 }

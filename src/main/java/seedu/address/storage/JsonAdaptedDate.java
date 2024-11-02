@@ -48,7 +48,7 @@ class JsonAdaptedDate {
      * @throws IllegalValueException if the date format is invalid.
      */
     public Date toModelType() throws IllegalValueException {
-        if (dateString == null || dateString.isEmpty()) { //can add the logic for cancel date here
+        if (dateString == null || dateString.isEmpty() || dateString.toLowerCase().equals("none")) {
             return new Date(LocalDateTime.MIN); // Treat as no appointment
         }
         if (!Date.isValidDate(dateString)) {

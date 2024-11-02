@@ -134,11 +134,16 @@ public class ParserUtil {
     public static LocalDateTime parseDateString(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        if (trimmedDate.toLowerCase().equals("none")) {
+            return LocalDateTime.MIN;
+        }
         if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(Date.getMessageConstraints());
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        return LocalDateTime.parse(date, formatter);
+
+        return LocalDateTime.parse(trimmedDate, formatter);
 
     }
 }
