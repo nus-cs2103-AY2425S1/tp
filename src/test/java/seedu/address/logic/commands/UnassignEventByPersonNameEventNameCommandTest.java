@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.MEETING;
+import static seedu.address.testutil.TypicalEvents.WORKSHOP;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -15,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -77,13 +79,28 @@ public class UnassignEventByPersonNameEventNameCommandTest {
     }
 
     @Test
+    public void execute_multiplePersonsWithSameName_throwsCommandException() {
+        // Create two persons with the same name
+        Person aliceClone = new Person(new Name("ALICE PAULINE"), ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(),
+                ALICE.getTags(), ALICE.getEventIds(), ALICE.getId() + 1);
+        model.addPerson(aliceClone);
+
+        UnassignEventByPersonNameEventNameCommand command = new UnassignEventByPersonNameEventNameCommand(
+                ALICE.getName(), MEETING.getEventName());
+
+        assertCommandFailure(command, model, Messages.MESSAGE_MORE_THAN_ONE_PERSON_DISPLAYED_NAME);
+    }
+
+    @Test
     public void equals() {
         UnassignEventByPersonNameEventNameCommand command1 = new UnassignEventByPersonNameEventNameCommand(
                 ALICE.getName(), MEETING.getEventName());
         UnassignEventByPersonNameEventNameCommand command2 = new UnassignEventByPersonNameEventNameCommand(
                 ALICE.getName(), MEETING.getEventName());
         UnassignEventByPersonNameEventNameCommand command3 = new UnassignEventByPersonNameEventNameCommand(
-                new Name("Bob"), MEETING.getEventName());
+                BOB.getName(), MEETING.getEventName());
+        UnassignEventByPersonNameEventNameCommand command4 = new UnassignEventByPersonNameEventNameCommand(
+                ALICE.getName(), WORKSHOP.getEventName());
 
         // same object -> returns true
         assertEquals(command1, command1);
@@ -93,6 +110,9 @@ public class UnassignEventByPersonNameEventNameCommandTest {
 
         // different person -> returns false
         assertEquals(false, command1.equals(command3));
+
+        // different event -> returns false
+        assertEquals(false, command1.equals(command4));
 
         // different type -> returns false
         assertEquals(false, command1.equals(1));

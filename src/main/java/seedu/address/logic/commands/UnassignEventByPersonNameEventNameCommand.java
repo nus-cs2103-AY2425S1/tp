@@ -37,6 +37,7 @@ public class UnassignEventByPersonNameEventNameCommand extends UnassignEventComm
         requireNonNull(model);
 
         List<Person> personList = model.findPersonsWithName(targetPersonName);
+        System.out.println(personList);
         List<Event> eventList = model.findEventsWithName(targetEventName);
 
         if (personList.isEmpty()) {

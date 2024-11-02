@@ -83,6 +83,8 @@ public class UnassignEventByPersonIndexEventIndexCommandTest {
                 Index.fromOneBased(1), Index.fromOneBased(1));
         UnassignEventByPersonIndexEventIndexCommand command3 = new UnassignEventByPersonIndexEventIndexCommand(
                 Index.fromOneBased(2), Index.fromOneBased(1));
+        UnassignEventByPersonIndexEventIndexCommand command4 = new UnassignEventByPersonIndexEventIndexCommand(
+                Index.fromOneBased(1), Index.fromOneBased(2));
 
         // same object -> returns true
         assertEquals(command1, command1);
@@ -92,6 +94,9 @@ public class UnassignEventByPersonIndexEventIndexCommandTest {
 
         // different person -> returns false
         assertEquals(false, command1.equals(command3));
+
+        // different event -> returns false
+        assertEquals(false, command1.equals(command4));
 
         // different type -> returns false
         assertEquals(false, command1.equals(1));

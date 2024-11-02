@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.MEETING;
+import static seedu.address.testutil.TypicalEvents.WORKSHOP;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -84,6 +85,8 @@ public class UnassignEventByPersonIndexEventNameCommandTest {
                 Index.fromOneBased(1), MEETING.getEventName());
         UnassignEventByPersonIndexEventNameCommand command3 = new UnassignEventByPersonIndexEventNameCommand(
                 Index.fromOneBased(2), MEETING.getEventName());
+        UnassignEventByPersonIndexEventNameCommand command4 = new UnassignEventByPersonIndexEventNameCommand(
+                Index.fromOneBased(1), WORKSHOP.getEventName());
 
         // same object -> returns true
         assertEquals(command1, command1);
@@ -93,6 +96,9 @@ public class UnassignEventByPersonIndexEventNameCommandTest {
 
         // different person -> returns false
         assertEquals(false, command1.equals(command3));
+
+        // different event -> returns false
+        assertEquals(false, command1.equals(command4));
 
         // different type -> returns false
         assertEquals(false, command1.equals(1));
