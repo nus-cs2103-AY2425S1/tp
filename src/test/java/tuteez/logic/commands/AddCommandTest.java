@@ -301,7 +301,7 @@ public class AddCommandTest {
             Iterator<Person> students = personsAdded.iterator();
             while (students.hasNext()) {
                 Person studentToCheck = students.next();
-                ArrayList<Lesson> clashedLessons = studentToCheck.getLessonsThatClash(lesson);
+                ArrayList<Lesson> clashedLessons = studentToCheck.findStudentClashingLessons(lesson);
                 if (!clashedLessons.isEmpty()) {
                     clashingLessonMap.put(studentToCheck, clashedLessons);
                 }
