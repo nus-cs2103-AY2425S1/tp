@@ -64,13 +64,11 @@ public class Messages {
     public static String format(Job job) {
         final StringBuilder builder = new StringBuilder();
         builder.append(job.getName())
-                .append("; Company: ")
+                .append(" at ")
                 .append(job.getCompany())
-                .append("; Salary: ")
+                .append("\n")
                 .append(job.getSalary())
-                .append("; Requirements: ")
-                .append(job.getRequirements())
-                .append("; Description: ")
+                .append("\nDescription: ")
                 .append(job.getDescription());
         return builder.toString();
     }
