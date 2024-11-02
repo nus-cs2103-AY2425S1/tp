@@ -3,6 +3,7 @@ package tuteez.model.person.predicates;
 import java.util.List;
 import java.util.function.Predicate;
 
+import tuteez.commons.util.StringUtil;
 import tuteez.commons.util.ToStringBuilder;
 import tuteez.model.person.Person;
 import tuteez.model.tag.Tag;
@@ -21,7 +22,8 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return person.getTags().stream()
                 .map(Tag::getTagName)
-                .anyMatch(keywords::contains);
+                .anyMatch(tagName ->
+                        keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tagName, keyword)));
     }
 
     @Override

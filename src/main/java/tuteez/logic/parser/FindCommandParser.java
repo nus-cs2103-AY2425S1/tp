@@ -2,12 +2,9 @@ package tuteez.logic.parser;
 
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
-import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
-import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,12 +18,9 @@ import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.person.Person;
 import tuteez.model.person.predicates.AddressContainsKeywordsPredicate;
 import tuteez.model.person.predicates.CombinedPredicate;
-import tuteez.model.person.predicates.EmailContainsKeywordsPredicate;
 import tuteez.model.person.predicates.LessonContainsKeywordsPredicate;
 import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
-import tuteez.model.person.predicates.PhoneContainsKeywordsPredicate;
 import tuteez.model.person.predicates.TagContainsKeywordsPredicate;
-import tuteez.model.person.predicates.TelegramUsernameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -44,8 +38,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_TELEGRAM, PREFIX_TAG, PREFIX_LESSON);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS,
+                PREFIX_TAG, PREFIX_LESSON);
 
         List<Predicate<Person>> predicates = createPredicates(argMultimap);
         CombinedPredicate combinedPredicate = new CombinedPredicate(predicates);
@@ -56,10 +50,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<Predicate<Person>> predicates = new ArrayList<>();
 
         addPredicateIfPresent(argMultimap, predicates, PREFIX_NAME, NameContainsKeywordsPredicate::new);
-        addPredicateIfPresent(argMultimap, predicates, PREFIX_PHONE, PhoneContainsKeywordsPredicate::new);
-        addPredicateIfPresent(argMultimap, predicates, PREFIX_EMAIL, EmailContainsKeywordsPredicate::new);
         addPredicateIfPresent(argMultimap, predicates, PREFIX_ADDRESS, AddressContainsKeywordsPredicate::new);
-        addPredicateIfPresent(argMultimap, predicates, PREFIX_TELEGRAM, TelegramUsernameContainsKeywordsPredicate::new);
         addPredicateIfPresent(argMultimap, predicates, PREFIX_TAG, TagContainsKeywordsPredicate::new);
         addPredicateIfPresent(argMultimap, predicates, PREFIX_LESSON, LessonContainsKeywordsPredicate::new);
 

@@ -73,7 +73,7 @@ public class Lesson {
      * @param day The day to check.
      * @return true if the day is valid.
      */
-    private static boolean isValidDay(String day) {
+    public static boolean isValidDay(String day) {
         return DAY_NAME_MAP.containsKey(day.toLowerCase());
     }
 
@@ -83,7 +83,7 @@ public class Lesson {
      * @param timeRange The time range to validate.
      * @return true if the time range is valid.
      */
-    private static boolean isValidTimeRange(String timeRange) {
+    public static boolean isValidTimeRange(String timeRange) {
         return timeRange.matches(VALID_TIME_RANGE_REGEX);
     }
 
@@ -163,15 +163,17 @@ public class Lesson {
      * Checks if this lesson's time range falls within a specified time range.
      *
      * @param otherTimeRange A time range in the format "HHmm-HHmm".
-     * @return true if this lesson's time range is within the specified keyword time range.
+     * @return true if this lesson's time range is overlapping the specified time range.
      */
-    public boolean checkWithinTimeRange(String otherTimeRange) {
+    public boolean checkOverlappingTimeRange(String otherTimeRange) {
         String[] times = otherTimeRange.split("-");
         LocalTime otherStartTime = LocalTime.parse(times[0], TIME_FORMATTER);
         LocalTime otherEndTime = LocalTime.parse(times[1], TIME_FORMATTER);
 
-        return (startTime.equals(otherStartTime) || startTime.isAfter(otherStartTime))
-                && (endTime.equals(otherEndTime) || endTime.isBefore(otherEndTime));
+        return ((startTime.equals(otherStartTime) || startTime.isBefore(otherStartTime))
+                && endTime.isAfter(otherStartTime))
+                || (startTime.isBefore(otherEndTime)
+                && (endTime.equals(otherEndTime) || endTime.isAfter(otherEndTime)));
     }
 
     /**

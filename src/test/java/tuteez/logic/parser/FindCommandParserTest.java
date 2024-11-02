@@ -19,25 +19,14 @@ import org.junit.jupiter.api.Test;
 import tuteez.logic.commands.FindCommand;
 import tuteez.model.person.predicates.AddressContainsKeywordsPredicate;
 import tuteez.model.person.predicates.CombinedPredicate;
-import tuteez.model.person.predicates.EmailContainsKeywordsPredicate;
 import tuteez.model.person.predicates.LessonContainsKeywordsPredicate;
 import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
-import tuteez.model.person.predicates.PhoneContainsKeywordsPredicate;
 import tuteez.model.person.predicates.TagContainsKeywordsPredicate;
-import tuteez.model.person.predicates.TelegramUsernameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
     private static final NameContainsKeywordsPredicate NAME_PREDICATE =
             new NameContainsKeywordsPredicate(Arrays.asList("alice", "bob"));
-    private static final PhoneContainsKeywordsPredicate PHONE_PREDICATE =
-            new PhoneContainsKeywordsPredicate(Arrays.asList("91234567", "81234567"));
-    private static final EmailContainsKeywordsPredicate EMAIL_PREDICATE =
-            new EmailContainsKeywordsPredicate(Arrays.asList("alice@example.com", "bob@example.com"));
-    private static final AddressContainsKeywordsPredicate ADDRESS_PREDICATE =
-            new AddressContainsKeywordsPredicate(Arrays.asList("choa", "jurong"));
-    private static final TelegramUsernameContainsKeywordsPredicate TELEGRAM_PREDICATE =
-            new TelegramUsernameContainsKeywordsPredicate(Arrays.asList("alice123", "bob321"));
     private static final TagContainsKeywordsPredicate TAG_PREDICATE =
             new TagContainsKeywordsPredicate(Arrays.asList("math", "secondary4"));
     private static final LessonContainsKeywordsPredicate LESSON_PREDICATE =
@@ -79,47 +68,6 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validPhonePrefixArg_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(PHONE_PREDICATE)));
-        assertParseSuccess(parser, VALID_PHONE_DESC, expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " " + PREFIX_PHONE + VALID_PHONE_DESC_WITH_SPACE, expectedFindCommand);
-    }
-
-    // Tests for Email Predicate
-    @Test
-    public void parse_emailPrefix_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(EMAIL_PREDICATE)));
-        assertParseSuccess(parser, VALID_EMAIL_DESC, expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, VALID_EMAIL_DESC_WITH_SPACE, expectedFindCommand);
-    }
-
-    @Test
-    public void parse_validAddressPrefixArg_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(ADDRESS_PREDICATE)));
-        assertParseSuccess(parser, VALID_ADDRESS_DESC, expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, VALID_ADDRESS_DESC_WITH_SPACE, expectedFindCommand);
-    }
-
-    @Test
-    public void parse_validTelegramPrefixArg_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(TELEGRAM_PREDICATE)));
-        assertParseSuccess(parser, VALID_TELEGRAM_DESC, expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, VALID_TELEGRAM_DESC_WITH_SPACE, expectedFindCommand);
-    }
-
-    @Test
     public void parse_validTagPrefixArg_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(TAG_PREDICATE)));
@@ -143,13 +91,11 @@ public class FindCommandParserTest {
     public void parse_validAllPrefixArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(NAME_PREDICATE,
-                PHONE_PREDICATE, ADDRESS_PREDICATE, TELEGRAM_PREDICATE, TAG_PREDICATE, LESSON_PREDICATE)));
-        assertParseSuccess(parser, VALID_NAME_DESC + VALID_PHONE_DESC + VALID_ADDRESS_DESC
-                + VALID_TELEGRAM_DESC + VALID_TAG_DESC + VALID_LESSON_DESC, expectedFindCommand);
+                TAG_PREDICATE, LESSON_PREDICATE)));
+        assertParseSuccess(parser, VALID_NAME_DESC + VALID_TAG_DESC + VALID_LESSON_DESC, expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, VALID_NAME_DESC_WITH_SPACE + VALID_PHONE_DESC_WITH_SPACE
-                + VALID_ADDRESS_DESC_WITH_SPACE + VALID_TELEGRAM_DESC_WITH_SPACE + VALID_TAG_DESC_WITH_SPACE
+        assertParseSuccess(parser, VALID_NAME_DESC_WITH_SPACE + VALID_TAG_DESC_WITH_SPACE
                 + VALID_LESSON_DESC_WITH_SPACE, expectedFindCommand);
     }
 
