@@ -32,7 +32,7 @@ public class EditMeetUpDescriptorBuilder {
      */
     public EditMeetUpDescriptorBuilder(MeetUp meetUp) {
         descriptor = new EditCommand.EditMeetUpDescriptor();
-        descriptor.setName(meetUp.getName());
+        descriptor.setSubject(meetUp.getSubject());
         descriptor.setInfo(meetUp.getInfo());
         descriptor.setFrom(meetUp.getFrom());
         descriptor.setTo(meetUp.getTo());
@@ -40,10 +40,10 @@ public class EditMeetUpDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditMeetUpDescriptor} that we are building.
+     * Sets the {@code Subject} of the {@code EditMeetUpDescriptor} that we are building.
      */
-    public EditMeetUpDescriptorBuilder withName(String name) {
-        descriptor.setName(new Subject(name));
+    public EditMeetUpDescriptorBuilder withSubject(String subject) {
+        descriptor.setSubject(new Subject(subject));
         return this;
     }
 

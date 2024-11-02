@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Buyer's name in the meetup list.
- * Guarantees: immutable; is valid as declared in {@link #isValidMeetUpName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
  */
 public class Subject {
 
@@ -18,36 +18,29 @@ public class Subject {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String meetUpFullName;
+    public final String meetUpFullSubject;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Subject}.
      *
-     * @param meetUpName A valid meetup name.
+     * @param meetUpSubject A valid meetup name.
      */
-    public Subject(String meetUpName) {
-        requireNonNull(meetUpName);
-        checkArgument(isValidMeetUpName(meetUpName), MESSAGE_CONSTRAINTS);
-        meetUpFullName = meetUpName;
+    public Subject(String meetUpSubject) {
+        requireNonNull(meetUpSubject);
+        checkArgument(isValidSubject(meetUpSubject), MESSAGE_CONSTRAINTS);
+        meetUpFullSubject = meetUpSubject;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
-
-    /**
-     * Returns true if a given string is a valid name.
-     */
-    public static boolean isValidMeetUpName(String test) {
+    public static boolean isValidSubject(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return meetUpFullName;
+        return meetUpFullSubject;
     }
 
     @Override
@@ -62,11 +55,11 @@ public class Subject {
         }
 
         Subject otherName = (Subject) other;
-        return meetUpFullName.equals(otherName.meetUpFullName);
+        return meetUpFullSubject.equals(otherName.meetUpFullSubject);
     }
 
     @Override
     public int hashCode() {
-        return meetUpFullName.hashCode();
+        return meetUpFullSubject.hashCode();
     }
 }

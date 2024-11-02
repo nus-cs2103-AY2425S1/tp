@@ -50,7 +50,7 @@ public class JsonAdaptedMeetUp {
      * Converts a given {@code MeetUp} into this class for Jackson use.
      */
     public JsonAdaptedMeetUp(MeetUp source) {
-        name = source.getName().toString();
+        name = source.getSubject().toString();
         info = source.getInfo().toString();
         from = source.getFrom().toString();
         to = source.getTo().toString();
@@ -74,7 +74,7 @@ public class JsonAdaptedMeetUp {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Subject.class.getSimpleName()));
         }
-        if (!Subject.isValidName(name)) {
+        if (!Subject.isValidSubject(name)) {
             throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
         }
         final Subject modelName = new Subject(name);

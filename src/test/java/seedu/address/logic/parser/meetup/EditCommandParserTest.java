@@ -98,7 +98,7 @@ public class EditCommandParserTest {
                 + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING + MEETUP_ADDED_BUYER_DESC_NETWORKING;
 
         EditCommand.EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder()
-                .withName(VALID_MEETUP_NAME_NETWORKING)
+                .withSubject(VALID_MEETUP_NAME_NETWORKING)
                 .withInfo(VALID_MEETUP_INFO_NETWORKING)
                 .withFrom(VALID_MEETUP_FROM_NETWORKING)
                 .withTo(VALID_MEETUP_TO_NETWORKING)

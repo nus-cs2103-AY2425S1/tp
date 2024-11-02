@@ -155,10 +155,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withBudget(VALID_BUDGET_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        DESC_PITCH_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_NAME_PITCH)
+        DESC_PITCH_MEETUP = new EditMeetUpDescriptorBuilder().withSubject(VALID_MEETUP_NAME_PITCH)
                 .withInfo(VALID_MEETUP_INFO_PITCH).withFrom(VALID_MEETUP_FROM_PITCH)
                 .withTo(VALID_MEETUP_TO_PITCH).build();
-        DESC_NETWORKING_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_NAME_NETWORKING)
+        DESC_NETWORKING_MEETUP = new EditMeetUpDescriptorBuilder().withSubject(VALID_MEETUP_NAME_NETWORKING)
                 .withInfo(VALID_MEETUP_INFO_NETWORKING).withFrom(VALID_MEETUP_FROM_NETWORKING)
                 .withTo(VALID_MEETUP_TO_NETWORKING).build();
         DESC_ALAN = new EditPropertyDescriptorBuilder().withLandlordName(VALID_LANDLORD_NAME_ALAN)
@@ -234,7 +234,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredMeetUpList().size());
 
         MeetUp meetUp = model.getFilteredMeetUpList().get(targetIndex.getZeroBased());
-        final String[] splitName = meetUp.getName().meetUpFullName.split("\\s+");
+        final String[] splitName = meetUp.getSubject().meetUpFullSubject.split("\\s+");
         model.updateFilteredMeetUpList(new MeetUpContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredMeetUpList().size());

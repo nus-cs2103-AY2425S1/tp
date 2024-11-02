@@ -25,8 +25,6 @@ public class FindCommand extends Command {
             + "You should only find by name or address but not both.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Gerald Jimes"
-            + "Example: " + COMMAND_WORD + " "
             + PREFIX_ADDRESS + "Sembawang";
 
     private final AddressContainsKeywordsPredicate addressPredicate;

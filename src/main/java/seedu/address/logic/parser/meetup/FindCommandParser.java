@@ -34,14 +34,14 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        Subject extractedName = ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get());
-        String trimmedExtractedName = extractedName.toString().trim();
+        Subject extractedSubject = ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get());
+        String trimmedExtractedSubject = extractedSubject.toString().trim();
 
-        if (trimmedExtractedName.isEmpty()) {
+        if (trimmedExtractedSubject.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] keywords = trimmedExtractedName.split("\\s+");
+        String[] keywords = trimmedExtractedSubject.split("\\s+");
         return new FindCommand(new MeetUpContainsKeywordsPredicate(Arrays.asList(keywords)));
     }
 

@@ -30,7 +30,7 @@ public class MeetUpUtil {
      */
     public static String getMeetUpDetails(MeetUp meetUp) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + meetUp.getName().toString() + " ");
+        sb.append(PREFIX_NAME + meetUp.getSubject().toString() + " ");
         sb.append(PREFIX_INFO + meetUp.getInfo().toString() + " ");
         sb.append(PREFIX_FROM + meetUp.getFrom().toString() + " ");
         sb.append(PREFIX_TO + meetUp.getTo().toString() + " ");
@@ -45,7 +45,7 @@ public class MeetUpUtil {
      */
     public static String getEditMeetUpDescriptorDetails(EditMeetUpDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name).append(" "));
+        descriptor.getSubject().ifPresent(subject -> sb.append(PREFIX_NAME).append(subject).append(" "));
         descriptor.getInfo().ifPresent(info -> sb.append(PREFIX_INFO).append(info).append(" "));
         descriptor.getFrom().ifPresent(from -> sb.append(PREFIX_FROM).append(from).append(" "));
         descriptor.getTo().ifPresent(to -> sb.append(PREFIX_TO).append(to).append(" "));

@@ -22,20 +22,20 @@ public class SubjectTest {
     @Test
     public void isValidName() {
         // null name
-        assertThrows(NullPointerException.class, () -> Subject.isValidName(null));
+        assertThrows(NullPointerException.class, () -> Subject.isValidSubject(null));
 
         // invalid name
-        assertFalse(Subject.isValidName("")); // empty string
-        assertFalse(Subject.isValidName(" ")); // spaces only
-        assertFalse(Subject.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Subject.isValidName("meeting*")); // contains non-alphanumeric characters
+        assertFalse(Subject.isValidSubject("")); // empty string
+        assertFalse(Subject.isValidSubject(" ")); // spaces only
+        assertFalse(Subject.isValidSubject("^")); // only non-alphanumeric characters
+        assertFalse(Subject.isValidSubject("meeting*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Subject.isValidName("meeting with jamie")); // alphabets only
-        assertTrue(Subject.isValidName("12345")); // numbers only
-        assertTrue(Subject.isValidName("3rd meeting with jamie")); // alphanumeric characters
-        assertTrue(Subject.isValidName("Sales Meeting")); // with capital letters
-        assertTrue(Subject.isValidName("Sales meeting with 10 developers from Malaysia")); // long names
+        assertTrue(Subject.isValidSubject("meeting with jamie")); // alphabets only
+        assertTrue(Subject.isValidSubject("12345")); // numbers only
+        assertTrue(Subject.isValidSubject("3rd meeting with jamie")); // alphanumeric characters
+        assertTrue(Subject.isValidSubject("Sales Meeting")); // with capital letters
+        assertTrue(Subject.isValidSubject("Sales meeting with 10 developers from Malaysia")); // long names
     }
 
     @Test
