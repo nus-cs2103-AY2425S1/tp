@@ -114,7 +114,7 @@ Move the .jar file you downloaded into this folder.
     - On Linux, open your **Terminal** application from the system menu.
 
 2. **Navigate your terminal to the folder where you saved the AgentAssist application:**
-    - To do this, use the `cd` command followed by the path to your folder.\
+    - To do this, use the `cd` command followed by the path to your folder.
    >  ℹ️ **Tip:** Follow the guide below to navigate to your folder in the terminal:
    >
    > <details><summary><strong>Click here to learn how to navigate to your folder in terminal</strong></summary>
@@ -193,7 +193,7 @@ Here is a reference table that briefly summarizes available commands:
 | `help`      | Displays a list of available commands and their usage. |
 | `exit`      | Exits the AgentAssist application.                     |
 
-Refer to the [Commands Section](#commands-section) for more comprehensive details of each command.
+Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
 
 ## 4.3 Flags
 
@@ -273,7 +273,7 @@ Some initial commands to try:
 
 The GUI will dynamically update to show the results of your commands, making it easy to see the impact of your actions in real time.
 
-Refer to the [Commands Section](#commands-section) for more comprehensive details of each command.
+Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
 
 > 💡 **Pro Tip:**  
 > Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.  
