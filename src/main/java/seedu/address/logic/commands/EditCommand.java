@@ -168,6 +168,8 @@ public class EditCommand extends Command {
         if (targetIndex == null) {
             if (otherEditCommand.targetIndex == null) {
                 if (targetName == null) {
+                    // redundancy protection, should never reach here
+                    // either targetName or targetIndex are null and not both
                     return otherEditCommand.targetName == null;
                 }
                 return targetName.equals(otherEditCommand.targetName);
