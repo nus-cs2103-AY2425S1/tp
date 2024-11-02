@@ -40,6 +40,7 @@ public class CommandTestUtil {
     // Command flags
     public static final String CLIENT_FLAG = CliFlags.FLAG_CLIENT.getPrefix();
     public static final String VENDOR_FLAG = CliFlags.FLAG_VENDOR.getPrefix();
+    public static final String EVENT_FLAG = CliFlags.FLAG_EVENT.getPrefix();
 
     public static final EditContactDescriptor VALID_EDIT_CONTACT_DESCRIPTOR;
     public static final EditVendorDescriptor VALID_EDIT_VENDOR_DESCRIPTOR;

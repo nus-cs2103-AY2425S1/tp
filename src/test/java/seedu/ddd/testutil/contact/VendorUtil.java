@@ -1,5 +1,6 @@
 package seedu.ddd.testutil.contact;
 
+import static seedu.ddd.logic.commands.CommandTestUtil.VENDOR_FLAG;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
@@ -18,8 +19,8 @@ public class VendorUtil {
     /**
      * Returns an add command string for adding the {@code contact}.
      */
-    public static String getAddCommand(Vendor vendor) {
-        return AddContactCommand.COMMAND_WORD + " vendor " + getVendorDetails(vendor);
+    public static String getAddContactCommand(Vendor vendor) {
+        return AddContactCommand.COMMAND_WORD + " " + VENDOR_FLAG + " " + getVendorDetails(vendor);
     }
 
     /**

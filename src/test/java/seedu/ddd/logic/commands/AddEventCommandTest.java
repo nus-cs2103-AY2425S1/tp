@@ -8,12 +8,12 @@ import static seedu.ddd.logic.commands.AddEventCommand.MESSAGE_DUPLICATE_EVENT;
 import static seedu.ddd.testutil.Assert.assertThrows;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ID;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ID;
-import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_CLIENT_CONTACT_ID_SET;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE;
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_DATE;
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_DESCRIPTION;
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_ID;
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_NAME;
-import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_CONTACT_ID_SET;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_2;
 import static seedu.ddd.testutil.event.TypicalEvents.VALID_EVENT;
@@ -36,6 +36,7 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.common.Id;
+import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
@@ -51,8 +52,8 @@ public class AddEventCommandTest {
             null,
             DEFAULT_EVENT_DESCRIPTION,
             DEFAULT_EVENT_DATE,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             DEFAULT_EVENT_ID
         ));
     }
@@ -63,8 +64,8 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_NAME,
             null,
             DEFAULT_EVENT_DATE,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             DEFAULT_EVENT_ID
         ));
     }
@@ -75,8 +76,8 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_NAME,
             DEFAULT_EVENT_DESCRIPTION,
             null,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             DEFAULT_EVENT_ID
         ));
     }
@@ -89,7 +90,7 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_DESCRIPTION,
             DEFAULT_EVENT_DATE,
             null,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             DEFAULT_EVENT_ID
         ));
     }
@@ -100,7 +101,7 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_NAME,
             DEFAULT_EVENT_DESCRIPTION,
             DEFAULT_EVENT_DATE,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
             null,
             DEFAULT_EVENT_ID
         ));
@@ -112,8 +113,8 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_NAME,
             DEFAULT_EVENT_DESCRIPTION,
             DEFAULT_EVENT_DATE,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             null
         ));
     }
@@ -125,8 +126,8 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_NAME,
             DEFAULT_EVENT_DESCRIPTION,
             DEFAULT_EVENT_DATE,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             DEFAULT_EVENT_ID
         ).execute(modelStub);
 
@@ -143,8 +144,8 @@ public class AddEventCommandTest {
             VALID_EVENT.getName(),
             DEFAULT_EVENT_DESCRIPTION,
             DEFAULT_EVENT_DATE,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             DEFAULT_EVENT_ID
         );
         assertThrows(CommandException.class,
@@ -158,8 +159,8 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_NAME,
             description1,
             DEFAULT_EVENT_DATE,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             DEFAULT_EVENT_ID
         );
         Description description2 = new Description(VALID_EVENT_DESCRIPTION_2);
@@ -167,8 +168,8 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_NAME,
             description2,
             DEFAULT_EVENT_DATE,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             DEFAULT_EVENT_ID
         );
 
@@ -180,8 +181,8 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_NAME,
             description1,
             DEFAULT_EVENT_DATE,
-            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
-            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+                DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE,
             DEFAULT_EVENT_ID
         );
         assertTrue(addEventCommand1.equals(addEventCommand3));
@@ -269,6 +270,11 @@ public class AddEventCommandTest {
 
         @Override
         public boolean hasEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEventOfName(Name eventName) {
             throw new AssertionError("This method should not be called.");
         }
 

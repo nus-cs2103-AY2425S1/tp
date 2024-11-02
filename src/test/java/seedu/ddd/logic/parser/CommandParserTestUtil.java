@@ -2,12 +2,16 @@ package seedu.ddd.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_CLIENTS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_VENDORS;
 import static seedu.ddd.testutil.contact.TypicalContactFields.INVALID_CLIENT_ADDRESS;
 import static seedu.ddd.testutil.contact.TypicalContactFields.INVALID_CLIENT_EMAIL;
 import static seedu.ddd.testutil.contact.TypicalContactFields.INVALID_CLIENT_NAME;
@@ -32,6 +36,22 @@ import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_EMAIL
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_NAME;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_PHONE;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_SERVICE_1;
+import static seedu.ddd.testutil.event.TypicalEventFields.INVALID_EVENT_CLIENT;
+import static seedu.ddd.testutil.event.TypicalEventFields.INVALID_EVENT_DATE;
+import static seedu.ddd.testutil.event.TypicalEventFields.INVALID_EVENT_DESC;
+import static seedu.ddd.testutil.event.TypicalEventFields.INVALID_EVENT_NAME;
+import static seedu.ddd.testutil.event.TypicalEventFields.INVALID_EVENT_VENDOR;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_CLIENT_ID_FOUR;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_CLIENT_ID_ONE;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_CLIENT_ID_THREE;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_CLIENT_ID_TWO;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DATE;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_VENDOR_ID_FOUR;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_VENDOR_ID_ONE;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_VENDOR_ID_THREE;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_VENDOR_ID_TWO;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -77,6 +97,25 @@ public class CommandParserTestUtil {
     public static final String VALID_EDITED_CONTACT_NAME_ARGUMENT = PREFIX_NAME + VALID_EDITED_CONTACT_NAME;
     public static final String VALID_EDITED_CONTACT_PHONE_ARGUMENT = PREFIX_PHONE + VALID_EDITED_CONTACT_PHONE;
     public static final String VALID_EDITED_CONTACT_ID_ARGUMENT = PREFIX_ID + VALID_EDITED_CONTACT_ID;
+
+    // Vendor arguments
+    public static final String VALID_EVENT_NAME_ARGUMENT = PREFIX_NAME + VALID_EVENT_NAME;
+    public static final String VALID_EVENT_DESC_ARGUMENT = PREFIX_DESC + VALID_EVENT_DESCRIPTION_1;
+    public static final String VALID_EVENT_DATE_ARGUMENT = PREFIX_DATE + VALID_EVENT_DATE;
+    public static final String VALID_EVENT_CLIENT_ID_ARGUMENT_ONE = PREFIX_CLIENTS + VALID_EVENT_CLIENT_ID_ONE;
+    public static final String VALID_EVENT_CLIENT_ID_ARGUMENT_TWO = PREFIX_CLIENTS + VALID_EVENT_CLIENT_ID_TWO;
+    public static final String VALID_EVENT_CLIENT_ID_ARGUMENT_THREE = PREFIX_CLIENTS + VALID_EVENT_CLIENT_ID_THREE;
+    public static final String VALID_EVENT_CLIENT_ID_ARGUMENT_FOUR = PREFIX_CLIENTS + VALID_EVENT_CLIENT_ID_FOUR;
+    public static final String VALID_EVENT_VENDOR_ID_ARGUMENT_ONE = PREFIX_VENDORS + VALID_EVENT_VENDOR_ID_ONE;
+    public static final String VALID_EVENT_VENDOR_ID_ARGUMENT_TWO = PREFIX_VENDORS + VALID_EVENT_VENDOR_ID_TWO;
+    public static final String VALID_EVENT_VENDOR_ID_ARGUMENT_THREE = PREFIX_VENDORS + VALID_EVENT_VENDOR_ID_THREE;
+    public static final String VALID_EVENT_VENDOR_ID_ARGUMENT_FOUR = PREFIX_VENDORS + VALID_EVENT_VENDOR_ID_FOUR;
+
+    public static final String INVALID_EVENT_NAME_ARGUMENT = PREFIX_NAME + INVALID_EVENT_NAME;
+    public static final String INVALID_EVENT_DESC_ARGUMENT = PREFIX_DESC + INVALID_EVENT_DESC;
+    public static final String INVALID_EVENT_DATE_ARGUMENT = PREFIX_DATE + INVALID_EVENT_DATE;
+    public static final String INVALID_EVENT_CLIENT_ARGUMENT = PREFIX_CLIENTS + INVALID_EVENT_CLIENT;
+    public static final String INVALID_EVENT_VENDOR_ARGUMENT = PREFIX_VENDORS + INVALID_EVENT_VENDOR;
 
     /**
      * Join arguments into a single space-delimited input string.
