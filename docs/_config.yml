@@ -9,12 +9,15 @@ header_pages:
 sidebar:
   - title: "User Guide"
     url: UserGuide.html
+    path: UserGuide.md
     toc: true
   - title: "Developer Guide"
     url: DeveloperGuide.html
+    path: DeveloperGuide.md
     toc: true
   - title: "About Us"
     url: AboutUs.html
+    path: AboutUs.dm
     toc: false
 
 markdown: kramdown
