@@ -135,8 +135,9 @@ Move the .jar file you downloaded into this folder.
 
 3. Run the application:
     - Type the following command: **`java -jar agentassist.jar`** and press **Enter**.
-    - A window similar to the below image should appear in a few seconds. You will see a graphical user interface with sample contact information already added.<br><br>
-      ![Ui](images/Ui.png)
+    - A window similar to the below image should appear in a few seconds. You will see a graphical user interface with sample contact information already added.<br>
+      <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
+
 
 4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
    You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity!
