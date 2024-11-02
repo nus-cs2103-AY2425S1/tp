@@ -25,8 +25,9 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="groupName" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="groupName" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="groupSize"/>
             <Label fx:id="membersPane"/>
         </VBox>
     </GridPane>

@@ -28,6 +28,8 @@ public class GroupCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label groupSize;
+    @FXML
     private Label membersPane;
 
     /**
@@ -41,6 +43,8 @@ public class GroupCard extends UiPart<Region> {
 
         // Retrieve the list of members in the group
         List<Person> members = group.asUnmodifiableObservableList();
+
+        groupSize.setText("Group Size: " + String.valueOf(members.size()));
 
         // Display the first 3 members as a single comma-separated string
         String membersDisplayText = "Members: " +
