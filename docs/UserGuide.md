@@ -576,7 +576,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success:**
     - Message:
       ```
-      x person(s) listed!
+      x client(s) listed!
       ```
       where `x` is the number of matching results.
 - **On Error:**
@@ -622,7 +622,7 @@ view index
 - **On Error:**
     - Invalid index error message:
       ```
-      The person index provided is invalid
+      The client index provided is invalid
       ```
 
 > 💡 **Pro Tip:**  
