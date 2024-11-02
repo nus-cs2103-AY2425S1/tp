@@ -41,6 +41,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOBCODE, PREFIX_TAG);
 
         // Step 1: Collect predicates based on provided inputs.
         List<Predicate<Person>> predicates = new ArrayList<>();
