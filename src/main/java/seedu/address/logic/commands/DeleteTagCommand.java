@@ -66,7 +66,7 @@ public class DeleteTagCommand extends Command {
             Set<Tag> matchingTags = tagsInUse.stream().filter(tag -> tags.contains(tag)).collect(Collectors.toSet());
 
             if (!matchingTags.isEmpty()) {
-                return new CommandResult(String.format(MESSAGE_TAGS_IN_USE, tagsInUse));
+                return new CommandResult(String.format(MESSAGE_TAGS_IN_USE, matchingTags));
             }
 
 
