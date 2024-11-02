@@ -19,23 +19,8 @@
         <button onclick="toggleTOC('{{ item.title | replace: ' ', '-' }}')">Details</button>
         <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
           <ul>  <!-- Add this UL here -->
-            {% assign headings = site.pages | where: "path", item.path | first %}
-            {% if headings %}
-            {% assign content_with_toc = headings.content | markdownify %}
-            <div>
-              {{ content_with_toc }}
-            </div>
-            {% for heading in content_with_toc | split: '<h' %}
-            {% if forloop.index0 > 0 %}
-            {% assign heading_parts = heading | split: '>' %}
-            {% if heading_parts.size > 1 %}
-            <li>
-              <a href="#{{ heading_parts[0] | strip | slugify }}">{{ heading_parts[1] | strip }}</a>
-            </li>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
-            {% endif %}
+            {% if item.title == "User Guide" %}
+            <li><a href="UserGuide.html#quickstart">QuickStart</a></li>
           </ul>
         </div>
         {% endif %}
