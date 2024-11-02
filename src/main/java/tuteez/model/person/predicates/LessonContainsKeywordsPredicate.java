@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
 import tuteez.model.person.Person;
+import tuteez.model.person.lesson.Day;
 import tuteez.model.person.lesson.Lesson;
 
 /**
@@ -34,7 +35,7 @@ public class LessonContainsKeywordsPredicate implements Predicate<Person> {
 
     private boolean matchesAnyKeyword(Lesson lesson) {
         return keywords.stream().anyMatch(keyword -> (
-                Lesson.isValidDay(keyword) && lesson.getLessonDay().toString().equalsIgnoreCase(keyword))
+                Day.isValidDay(keyword) && lesson.getLessonDay().toString().equalsIgnoreCase(keyword))
                 || (Lesson.isValidTimeRange(keyword) && checkOverlappingTimeRange(lesson, keyword)));
     }
 
