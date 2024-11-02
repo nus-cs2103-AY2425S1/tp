@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
+import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.testutil.ClientBuilder;
 
 public class UniqueClientListTest {

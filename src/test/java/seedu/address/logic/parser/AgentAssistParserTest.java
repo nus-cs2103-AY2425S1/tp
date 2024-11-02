@@ -26,9 +26,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.predicates.CombinedPredicate;
 import seedu.address.model.client.predicates.NameContainsSubstringPredicate;
-import seedu.address.testutil.EditClientDescriptorBuilder;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
+import seedu.address.testutil.EditClientDescriptorBuilder;
 
 
 public class AgentAssistParserTest {

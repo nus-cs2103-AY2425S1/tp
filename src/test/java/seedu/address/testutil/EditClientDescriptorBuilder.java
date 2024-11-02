@@ -2,11 +2,11 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Income;
 import seedu.address.model.client.Job;
 import seedu.address.model.client.Name;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.status.Status;
