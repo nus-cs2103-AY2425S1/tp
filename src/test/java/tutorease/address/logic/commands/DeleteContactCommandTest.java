@@ -79,8 +79,8 @@ class DeleteContactCommandTest {
 
         CommandResult commandResult = new DeleteContactCommand(Index.fromZeroBased(0)).execute(modelStub);
 
-        String expectedMessage = String.format("Contact [%s; Phone: %s; Email: %s; Address: %s; Tags: ] "
-                        + "deleted successfully",
+        String expectedMessage = String.format("Contact [Name: %s; Phone: %s; Email: %s; Address: %s; Tags: ] "
+                        + "deleted successfully.",
                 validPerson.getName(), validPerson.getPhone(), validPerson.getEmail(), validPerson.getAddress());
 
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());

@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import tutorease.address.logic.parser.Prefix;
-import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 
 /**
@@ -20,7 +19,7 @@ public class Messages {
     public static final String MESSAGE_LESSONS_LISTED_OVERVIEW = "%1$d lessons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_NO_LESSONS_FOUND = "No lessons found!";
+    public static final String MESSAGE_NO_LESSONS_FOUND = "No lessons found with the given keyword(s).";
     public static final String MISSING_PREFIX = "%s prefix is missing!\n" + "%s";
     /**
      * Returns an error message indicating the duplicate prefixes.

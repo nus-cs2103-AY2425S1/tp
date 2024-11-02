@@ -2,7 +2,6 @@ package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.DateTimeUtil.dateTimeNowString;
-import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_START_DATE;
