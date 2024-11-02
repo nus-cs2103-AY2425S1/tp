@@ -135,14 +135,20 @@ Finds contacts whose details matches all given fields.
 
 Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 
-* The role field(s), if any, have to take a valid role value (Refer to **Tip** section in [adding a contact](#adding-a-contact-add))
-* The search for all other fields is case-insensitive. e.g. query `hans` will match `Hans`
-* The order of the words does not matter. e.g. query `Hans Bo` will match `Bo Hans`
-* Queries that are substrings of details will also be matched e.g. query `Han` will match `Hans`
-  * Each word is treated as a separate substring e.g. query `Hans Ansbo` will match `Hansbo`
-  * However, by definition of substring, query `Hansbo` will match `Peter Hansbo` but not `Hans Bo`
-* Contacts matching only one keyword will not be returned (i.e. `AND` search).
-  e.g. query `Hans Bo` will match `Hans Boey` and `Hans Jobo` but not `Hans Gruber`
+* Role field `[r/ROLE]`:
+    * Can be repeated any number of times e.g. `find r/Vice President r/Admin` &rarr; valid
+    * Have to take a valid role value (Refer to **Tip** section in [adding a contact](#adding-a-contact-add))<br>
+      e.g. `find r/pres` &rarr; invalid<br>
+      e.g. `find r/President` &rarr; valid
+    * Only perfect matches returned
+* All other fields `[n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [nn/NICKNAME]`:
+    * Can be used at most once e.g. `find n/Hans n/Bo` &rarr; invalid
+    * Case-insensitive. e.g. query `hans` will match `Hans`
+    * The order of the keywords does not matter. e.g. query `Hans Bo` will match `Bo Hans`
+    * Substring matching e.g. query `Han` will match `Hans`, but query `Hans` will not match `Han`
+    * Each keyword is treated as a separate substring e.g. query `Hans Ansbo` will match `Hansbo`
+    * Contacts matching only one keyword will not be returned (i.e. `AND` search).
+      e.g. query `Hans Bo` will match `Hans Boey` and `Hans Jobo` but not `Hans Gruber`
 
 Examples:
 * `find n/john` returns `Johnny Tan` and `John Doe`<br>
