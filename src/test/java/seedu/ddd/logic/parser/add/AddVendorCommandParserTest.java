@@ -1,4 +1,4 @@
-package seedu.ddd.logic.parser;
+package seedu.ddd.logic.parser.add;
 
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.commands.CommandTestUtil.VENDOR_FLAG;
@@ -35,6 +35,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.AddContactCommand;
+import seedu.ddd.logic.parser.AddVendorCommandParser;
+import seedu.ddd.logic.parser.CommandParserTestUtil;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;

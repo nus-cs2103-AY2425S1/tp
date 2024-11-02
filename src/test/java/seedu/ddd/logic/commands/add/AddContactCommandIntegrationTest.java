@@ -1,4 +1,4 @@
-package seedu.ddd.logic.commands;
+package seedu.ddd.logic.commands.add;
 
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.AddContactCommand;
+import seedu.ddd.logic.commands.CommandTestUtil;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
@@ -33,7 +35,7 @@ public class AddContactCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addContact(validContact);
 
-        assertCommandSuccess(new AddContactCommand(validContact), model,
+        CommandTestUtil.assertCommandSuccess(new AddContactCommand(validContact), model,
                 String.format(AddContactCommand.MESSAGE_SUCCESS, Messages.format(validContact)),
                 expectedModel);
     }
