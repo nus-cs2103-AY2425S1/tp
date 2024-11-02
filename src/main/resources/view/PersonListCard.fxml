@@ -27,8 +27,8 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-        <FlowPane fx:id="groups" maxWidth="50"/>
       </HBox>
+      <FlowPane fx:id="groups" />
       <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="major" styleClass="cell_small_label" text="\$major" />

@@ -47,7 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NETID + "EMAIL] "
             + "[" + PREFIX_MAJOR + "MAJOR] "
             + "[" + PREFIX_YEAR + "YEAR] "
-            + "[" + PREFIX_GROUP + "TAG]...\n"
+            + "[" + PREFIX_GROUP + "GROUP]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STUDENTID + "A1234567B "
             + PREFIX_NETID + "e1234567";
@@ -160,7 +160,7 @@ public class EditCommand extends Command {
             setStudentId(toCopy.studentId);
             setEmail(toCopy.email);
             setMajor(toCopy.major);
-            setTags(toCopy.groups);
+            setGroups(toCopy.groups);
             setYear(toCopy.year);
             setComment(toCopy.comment);
         }
@@ -218,10 +218,10 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code groups} to this object's {@code groups}.
+         * A defensive copy of {@code groups} is used internally.
          */
-        public void setTags(Set<Group> groups) {
+        public void setGroups(Set<Group> groups) {
             this.groups = (groups != null) ? new HashSet<>(groups) : null;
         }
 

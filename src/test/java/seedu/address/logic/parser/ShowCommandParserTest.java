@@ -18,25 +18,25 @@ public class ShowCommandParserTest {
 
     @Test
     public void parse_noPrefixesProvided_throwsParseException() {
-        assertParseFailure(parser, "", "There should be one argument \n"
+        assertParseFailure(parser, "", "There should be at least one argument \n"
                 + String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", "There should be one argument \n"
+        assertParseFailure(parser, "     ", "There should be at least one argument \n"
                 + String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
     }
     @Test
     public void parse_negativeNumber_throwsParseException() {
-        assertParseFailure(parser, "-3", "Invalid argument! Must be non-zero and positive "
-                + "integer (should not contain characters like '+') \n"
+        assertParseFailure(parser, "-3", "Invalid arguments! Must be alphanumeric"
+                + " lowercase characters \n"
                 + String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
     }
     @Test
     public void parse_specialSymbol_throwsParseException() {
-        assertParseFailure(parser, "%", "Invalid argument! Must be non-zero and positive "
-                + "integer (should not contain characters like '+') \n"
+        assertParseFailure(parser, "%", "Invalid arguments! Must be alphanumeric"
+                + " lowercase characters \n"
                 + String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
     }
 

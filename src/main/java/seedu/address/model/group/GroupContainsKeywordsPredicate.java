@@ -34,6 +34,11 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
             if (!Group.isValidGroupName(group.toString())) {
                 throw new ParseException(INVALID_GROUP);
             }
+            boolean prefixMatch = keywords.stream()
+                    .anyMatch(keyword -> group.toString().startsWith(keyword));
+            if (prefixMatch) {
+                return true;
+            }
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getGroup().toString(), keyword));
         } catch (ParseException pe) {

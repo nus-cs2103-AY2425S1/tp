@@ -13,8 +13,9 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class Group {
 
-    public static final String MESSAGE_CONSTRAINTS = "Group is written as g/group [number] (in lowercase)";
-    public static final String VALIDATION_REGEX = "^group (?!0$)\\d+$";
+    public static final String MESSAGE_CONSTRAINTS = "Group is written as g/GROUP_NAME "
+            + "(less than 16 alphanumerical characters and in lowercase)";
+    public static final String VALIDATION_REGEX = "^[a-z0-9 ]{1,15}$";
     private static final Logger logger = LogsCenter.getLogger(Group.class);
     public final String groupName;
     /**
