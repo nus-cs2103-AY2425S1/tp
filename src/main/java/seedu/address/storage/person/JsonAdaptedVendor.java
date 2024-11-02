@@ -34,7 +34,7 @@ public class JsonAdaptedVendor extends JsonAdaptedPerson {
              @JsonProperty("email") String email,
              @JsonProperty("address") String address,
              @JsonProperty("company") String company,
-             @JsonProperty("Budget") String budget,
+             @JsonProperty("budget") String budget,
              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, tags);
         setType(type);

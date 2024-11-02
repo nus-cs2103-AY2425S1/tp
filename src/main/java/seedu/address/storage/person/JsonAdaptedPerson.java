@@ -30,7 +30,7 @@ import seedu.address.storage.JsonAdaptedTag;
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
     property = "type")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = JsonAdaptedGuest.class, name = "Guest"),
