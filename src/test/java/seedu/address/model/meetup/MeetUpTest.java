@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_ADDED_PE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_NETWORKING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_NETWORKING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_PITCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_SUBJECT_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_SUBJECT_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_PITCH;
 import static seedu.address.testutil.meetup.TypicalMeetUps.NETWORKING_MEETUP;
@@ -31,7 +31,7 @@ public class MeetUpTest {
 
         // name, from, to same but info different -> returns true
         MeetUp editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP)
-                .withSubject(VALID_MEETUP_NAME_PITCH)
+                .withSubject(VALID_MEETUP_SUBJECT_PITCH)
                 .withFrom(VALID_MEETUP_FROM_PITCH)
                 .withTo(VALID_MEETUP_TO_PITCH)
                 .withAddedBuyers(VALID_MEETUP_ADDED_PERSON_ALEX).build();
@@ -39,11 +39,11 @@ public class MeetUpTest {
 
         // name differs in case, all other attributes same -> returns false
         editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP)
-                .withSubject(VALID_MEETUP_NAME_NETWORKING.toLowerCase()).build();
+                .withSubject(VALID_MEETUP_SUBJECT_NETWORKING.toLowerCase()).build();
         assertFalse(NETWORKING_MEETUP.isSameMeetUp(editedNetWorkingMeetUp));
 
         // name have trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_MEETUP_NAME_NETWORKING + " ";
+        String nameWithTrailingSpaces = VALID_MEETUP_SUBJECT_NETWORKING + " ";
         editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP).withSubject(nameWithTrailingSpaces).build();
         assertFalse(NETWORKING_MEETUP.isSameMeetUp(editedNetWorkingMeetUp));
     }
@@ -67,7 +67,7 @@ public class MeetUpTest {
         assertFalse(PITCH_MEETUP.equals(NETWORKING_MEETUP));
 
         // different name -> returns false
-        MeetUp editedPitchMeetUp = new MeetUpBuilder(PITCH_MEETUP).withSubject(VALID_MEETUP_NAME_NETWORKING).build();
+        MeetUp editedPitchMeetUp = new MeetUpBuilder(PITCH_MEETUP).withSubject(VALID_MEETUP_SUBJECT_NETWORKING).build();
         assertFalse(PITCH_MEETUP.equals(editedPitchMeetUp));
 
         // different info -> returns false

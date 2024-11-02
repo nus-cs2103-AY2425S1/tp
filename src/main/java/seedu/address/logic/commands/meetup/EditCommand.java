@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEETUPS;
 
@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed meet-up list. "
             + "Existing meet-up will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_INFO + "INFO] "
             + "[" + PREFIX_FROM + "YYYY-MM-DD HH:mm] "
             + "[" + PREFIX_TO + "YYYY-MM-DD HH:mm] "

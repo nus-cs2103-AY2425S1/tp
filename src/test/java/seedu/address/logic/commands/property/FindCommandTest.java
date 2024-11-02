@@ -3,8 +3,13 @@ package seedu.address.logic.commands.property;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_PROPERTIES_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.property.TypicalProperties.CARL;
+import static seedu.address.testutil.property.TypicalProperties.ELLE;
+import static seedu.address.testutil.property.TypicalProperties.FIONA;
 import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
 import java.util.Arrays;
@@ -82,25 +87,25 @@ public class FindCommandTest {
         assertFalse(findNameFirstCommand.equals(findAddressFirstCommand));
     }
 
-    //    @Test
-    //    public void execute_zeroKeywordsAddress_noPropertiesFound() {
-    //        String expectedMessage = String.format(MESSAGE_PROPERTIES_LISTED_OVERVIEW, 0);
-    //        AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(" ");
-    //        FindCommand command = new FindCommand(predicate);
-    //        expectedModel.updateFilteredPropertyList(predicate);
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //        assertEquals(Collections.emptyList(), model.getFilteredPropertyList());
-    //    }
-    //
-    //    @Test
-    //    public void execute_multipleKeywordsAddress_multiplePropertiesFound() {
-    //        String expectedMessage = String.format(MESSAGE_PROPERTIES_LISTED_OVERVIEW, 3);
-    //        AddressContainsKeywordsPredicate predicate = prepareAddressPredicate("Aljunied Marsiling Shibuya");
-    //        FindCommand command = new FindCommand(predicate);
-    //        expectedModel.updateFilteredPropertyList(predicate);
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPropertyList());
-    //    }
+    @Test
+    public void execute_zeroKeywordsAddress_noPropertiesFound() {
+        String expectedMessage = String.format(MESSAGE_PROPERTIES_LISTED_OVERVIEW, 0);
+        AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(" ");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPropertyList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPropertyList());
+    }
+
+    @Test
+    public void execute_multipleKeywordsAddress_multiplePropertiesFound() {
+        String expectedMessage = String.format(MESSAGE_PROPERTIES_LISTED_OVERVIEW, 3);
+        AddressContainsKeywordsPredicate predicate = prepareAddressPredicate("Aljunied Marsiling Shibuya");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPropertyList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPropertyList());
+    }
 
     @Test
     public void toStringMethodForAddress() {
@@ -110,25 +115,25 @@ public class FindCommandTest {
         assertEquals(expected, findCommand.toString());
     }
 
-    //    @Test
-    //    public void execute_zeroKeywordsLandlordName_noPropertiesFound() {
-    //        String expectedMessage = String.format(MESSAGE_PROPERTIES_LISTED_OVERVIEW, 0);
-    //        LandlordNameContainsKeywordsPredicate predicate = prepareLandlordNamePredicate(" ");
-    //        FindCommand command = new FindCommand(predicate);
-    //        expectedModel.updateFilteredPropertyList(predicate);
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //        assertEquals(Collections.emptyList(), model.getFilteredPropertyList());
-    //    }
-    //
-    //    @Test
-    //    public void execute_multipleKeywordsLandlordName_multiplePropertiesFound() {
-    //        String expectedMessage = String.format(MESSAGE_PROPERTIES_LISTED_OVERVIEW, 3);
-    //        LandlordNameContainsKeywordsPredicate predicate = prepareLandlordNamePredicate("Kurz Elle Kunz");
-    //        FindCommand command = new FindCommand(predicate);
-    //        expectedModel.updateFilteredPropertyList(predicate);
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPropertyList());
-    //    }
+    @Test
+    public void execute_zeroKeywordsLandlordName_noPropertiesFound() {
+        String expectedMessage = String.format(MESSAGE_PROPERTIES_LISTED_OVERVIEW, 0);
+        LandlordNameContainsKeywordsPredicate predicate = prepareLandlordNamePredicate(" ");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPropertyList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPropertyList());
+    }
+
+    @Test
+    public void execute_multipleKeywordsLandlordName_multiplePropertiesFound() {
+        String expectedMessage = String.format(MESSAGE_PROPERTIES_LISTED_OVERVIEW, 3);
+        LandlordNameContainsKeywordsPredicate predicate = prepareLandlordNamePredicate("Kurz Elle Kunz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPropertyList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPropertyList());
+    }
 
     @Test
     public void toStringMethodForLandlordName() {

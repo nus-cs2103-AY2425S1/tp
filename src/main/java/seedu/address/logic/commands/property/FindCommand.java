@@ -59,8 +59,7 @@ public class FindCommand extends Command {
             model.updateFilteredPropertyList(landlordPredicate);
         }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PROPERTIES_LISTED_OVERVIEW, model.getFilteredPropertyList().size()),
-                false, false, false, false, true);
+                String.format(Messages.MESSAGE_PROPERTIES_LISTED_OVERVIEW, model.getFilteredPropertyList().size()));
     }
 
     @Override

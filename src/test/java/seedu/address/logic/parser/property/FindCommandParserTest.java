@@ -3,9 +3,9 @@ package seedu.address.logic.parser.property;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_FIND_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_FIND_PROPERTY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_LANDLORD_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PROPERTY_FIND_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LANDLORD_FIND_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MULTIPLE_PROPERTY_FIND_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.property.FindCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -61,14 +61,14 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_invalidNameFormat_failParse() {
-        assertParseFailure(parser, INVALID_LANDLORD_NAME_DESC,
+    public void parse_invalidLandlordNameFormat_failParse() {
+        assertParseFailure(parser, INVALID_PROPERTY_FIND_DESC,
                 String.format(LandlordName.MESSAGE_CONSTRAINTS, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_multipleTags_failParse() {
-        assertParseFailure(parser, INVALID_FIND_PROPERTY_DESC,
+        assertParseFailure(parser, MULTIPLE_PROPERTY_FIND_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 }
