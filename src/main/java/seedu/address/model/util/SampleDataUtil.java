@@ -55,6 +55,12 @@ public class SampleDataUtil {
         };
     }
 
+    public static IdCounterList getSampleIdCounterList() {
+        Event[] events = getSampleEvents();
+        Person[] persons = getSamplePersons();
+        return new IdCounterList(persons[persons.length - 1].getId(), events[events.length - 1].getEventId());
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         int largestPersonId = 0;
