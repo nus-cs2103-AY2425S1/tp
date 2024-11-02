@@ -10,7 +10,6 @@ import static seedu.eventtory.model.Model.PREDICATE_SHOW_ALL_VENDORS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -20,6 +19,7 @@ import seedu.eventtory.commons.util.CollectionUtil;
 import seedu.eventtory.commons.util.ToStringBuilder;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
+import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.commons.name.Name;
 import seedu.eventtory.model.commons.tag.Tag;
@@ -62,13 +62,8 @@ public class EditVendorCommand extends EditCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Vendor> lastShownList = model.getFilteredVendorList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
-        }
-
-        Vendor vendorToEdit = lastShownList.get(index.getZeroBased());
+        Vendor vendorToEdit = IndexResolverUtil.resolveVendor(model, index);
         Vendor editedVendor = createEditedVendor(vendorToEdit, editVendorDescriptor);
 
         if (!vendorToEdit.isSameVendor(editedVendor) && model.hasVendor(editedVendor)) {

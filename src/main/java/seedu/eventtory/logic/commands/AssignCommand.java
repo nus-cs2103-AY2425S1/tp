@@ -2,11 +2,10 @@ package seedu.eventtory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
+import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
@@ -57,19 +56,8 @@ public class AssignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Vendor> vendorList = model.getFilteredVendorList();
-        List<Event> eventList = model.getFilteredEventList();
-
-        if (vendorIndex.getZeroBased() >= vendorList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
-        }
-
-        if (eventIndex.getZeroBased() >= eventList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        }
-
-        Vendor vendor = vendorList.get(vendorIndex.getZeroBased());
-        Event event = eventList.get(eventIndex.getZeroBased());
+        Event event = IndexResolverUtil.resolveEvent(model, eventIndex);
+        Vendor vendor = IndexResolverUtil.resolveVendor(model, vendorIndex);
 
         if (model.isVendorAssignedToEvent(vendor, event)) {
             throw new CommandException(Messages.MESSAGE_VENDOR_ALREADY_ASSIGNED);
@@ -83,4 +71,3 @@ public class AssignCommand extends Command {
                         eventIndex.getOneBased()));
     }
 }
-
