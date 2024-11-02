@@ -74,6 +74,9 @@ public class FilterCommand extends Command implements UndoableCommand {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Undoes the previous Filter command
+     */
     public void undo(Model model) {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(previousPredicate);

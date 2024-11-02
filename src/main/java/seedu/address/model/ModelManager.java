@@ -217,7 +217,7 @@ public class ModelManager implements Model {
     @Override
     public Set<Person> removeTagFromPersons(Tag tag) {
         List<Person> persons = getFullPersonList();
-        Set<Person> removedPersons= new HashSet<>();
+        Set<Person> removedPersons = new HashSet<>();
         for (Person person : persons) {
             if (person.hasTag(tag)) {
                 Set<Tag> newTags = new HashSet<>(person.getTags());

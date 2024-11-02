@@ -4,7 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -98,6 +102,9 @@ public class DeleteTagCommand extends Command implements UndoableCommand {
         return createCommandResult(isSuccessful);
     }
 
+    /**
+     * Undoes the previous DeleteTag command
+     */
     public void undo(Model model) {
         requireNonNull(model);
         for (Map.Entry<Tag, Set<Person>> entry: deletedSet.entrySet()) {
