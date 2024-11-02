@@ -55,14 +55,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-      
                           <VBox fx:id="personList" styleClass="pane-with-border">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
                 <StackPane fx:id="personListPanelPlaceholder" alignment="CENTER_LEFT" VBox.vgrow="NEVER" />
               </VBox>
-      
                  <StackPane fx:id="taskListPanelPlaceholder" alignment="CENTER_RIGHT" styleClass="pane-with-border" GridPane.columnIndex="1">
                 <padding>
                   <Insets bottom="5" left="10" right="10" top="5" />

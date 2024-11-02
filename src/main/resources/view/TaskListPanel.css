@@ -8,7 +8,7 @@
 }
 
 .task-incomplete {
-    -fx-background-color: #ffcdd2; /* Light red background */
+    -fx-background-color: #ffcdd2; /* Light red backgiround */
     -fx-padding: 10;
     -fx-border-radius: 5; /* Radius for rounded corners */
     -fx-background-radius: 5; /* Radius for background corners */
@@ -16,12 +16,10 @@
     -fx-border-width: 1; /* Set border width */
 }
 
-/* To prevent overlapping borders between adjacent list cells */
 .list-cell {
-    -fx-background-color: transparent; /* Ensure the list cell has a transparent background */
+    -fx-background-color: transparent;
 }
 
-/* Optional: To make the separation more noticeable */
 .list-view {
-    -fx-background-color: transparent; /* Prevents list view background from interfering */
+    -fx-background-color: transparent;
 }
