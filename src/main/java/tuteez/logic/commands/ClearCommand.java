@@ -23,6 +23,9 @@ public class ClearCommand extends Command {
         logger.info("Executing clear command");
         int numberOfEntries = model.getAddressBook().getPersonList().size();
         model.setAddressBook(new AddressBook());
+
+        model.removeLastViewedPerson();
+
         String logMessage = String.format("Tuteez address book cleared. %d %s have been cleared",
                 numberOfEntries, numberOfEntries == 1 ? "entry" : "entries");
         logger.info(logMessage);

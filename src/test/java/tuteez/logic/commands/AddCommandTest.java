@@ -62,13 +62,40 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_clashingWithAnotherStudentLesson_throwsCommandException() throws CommandException {
+    public void execute_clashingWithAnotherStudentLesson_throwsCommandException() {
         Person alice = new PersonBuilder().withName("Alice").withLessons("friday 1800-2000").build();
-        Person bob = new PersonBuilder().withName("bob").withLessons("friday 1730-1830").build();
+        Person bob = new PersonBuilder().withName("Bob").withLessons("friday 1730-1830").build();
+        Person charlie = new PersonBuilder().withName("Charlie").withLessons("friday 1730-1830").build();
         ModelStub modelStub = new ModelStubPersonAcceptedButClashingLesson();
         modelStub.addPerson(bob);
         AddCommand addAliceCommand = new AddCommand(alice);
+        AddCommand addCharlieCommand = new AddCommand(charlie);
+
+        // EP: Same day, overlapping lesson time
         assertThrows(CommandException.class, () -> addAliceCommand.execute(modelStub));
+
+        //EP: Exact same lesson time
+        assertThrows(CommandException.class, () -> addCharlieCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_studentNoClashingLesson_addSuccessful() throws CommandException {
+        Person alice = new PersonBuilder().withName("Alice").withLessons("friday 1800-2000").build();
+        Person bob = new PersonBuilder().withName("Bob").withLessons("friday 1700-1800").build();
+        Person charlie = new PersonBuilder().withName("Charlie").withLessons("monday 1800-1900").build();
+        ModelStub modelStub = new ModelStubPersonAcceptedButClashingLesson();
+        modelStub.addPerson(bob);
+        CommandResult addAliceResult = new AddCommand(alice).execute(modelStub);
+
+
+        // EP: Lesson on same day, start and end time coincide
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(alice)),
+                addAliceResult.getFeedbackToUser());
+
+        CommandResult charlieResult = new AddCommand(charlie).execute(modelStub);
+        // EP: Lesson on different day
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(charlie)),
+                charlieResult.getFeedbackToUser());
     }
 
     @Test
