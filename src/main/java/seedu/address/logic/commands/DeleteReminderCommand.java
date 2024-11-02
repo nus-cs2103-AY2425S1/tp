@@ -55,11 +55,13 @@ public class DeleteReminderCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NO_REMINDER);
         }
 
-        Person reminderToDelete = lastShownList.get(index);
-        model.deleteReminder(reminderToDelete);
+        Person personToDeleteReminder = lastShownList.get(index);
+        Person personWithReminderDeleted = personToDeleteReminder;
+        personWithReminderDeleted.removeReminder();
+        model.setPerson(personToDeleteReminder, personWithReminderDeleted);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS,
-                Messages.formatReminder(reminderToDelete, reminder)));
+                Messages.formatReminder(personToDeleteReminder, reminder)));
     }
 
     @Override
