@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.collections.ObservableList;
+import seedu.hireme.commons.util.CollectionUtil;
 import seedu.hireme.commons.util.ToStringBuilder;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.Status;
@@ -49,6 +50,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code internship applications} must not contain duplicate items.
      */
     public void setItems(List<InternshipApplication> items) {
+        CollectionUtil.requireAllNonNull(items);
         this.items.setItems(items);
     }
 
@@ -57,7 +59,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setItems(newData.getList());
     }
 
@@ -73,8 +74,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds an item to the address book.
      * The item must not already exist in the address book.
      */
-    public void addItem(InternshipApplication p) {
-        items.add(p);
+    public void addItem(InternshipApplication item) {
+        requireNonNull(item);
+        items.add(item);
     }
 
     /**
@@ -84,16 +86,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setItem(InternshipApplication target, InternshipApplication edited) {
         requireNonNull(edited);
-
         items.setItem(target, edited);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code target} from this {@code AddressBook}.
+     * {@code target} must exist in the address book.
      */
-    public void removeItem(InternshipApplication key) {
-        items.remove(key);
+    public void removeItem(InternshipApplication target) {
+        requireNonNull(target);
+        items.remove(target);
     }
 
     /**
@@ -103,6 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(comparator);
         items.sortItems(comparator);
     }
+
     /**
      * Provides status insights of items in the list
      */
@@ -112,6 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             int count = items.countItems(i -> i.getStatus().equals(status));
             map.put(status, count);
         }
+
         return map;
     }
 

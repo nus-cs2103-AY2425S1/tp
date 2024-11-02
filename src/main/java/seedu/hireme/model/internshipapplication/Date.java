@@ -43,7 +43,9 @@ public class Date implements Comparable<Date> {
      */
     public Date(String dateString) {
         requireNonNull(dateString);
-        AppUtil.checkArgument(DateValidator.of().validate(dateString), MESSAGE_CONSTRAINTS);
+        boolean isValidDate = DateValidator.of().validate(dateString);
+        AppUtil.checkArgument(isValidDate, MESSAGE_CONSTRAINTS);
+
         this.date = LocalDate.parse(dateString, FORMATTER);
     }
 

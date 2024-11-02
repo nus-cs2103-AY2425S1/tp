@@ -26,8 +26,12 @@ public class Company {
     public Company(Email email, Name name) {
         requireNonNull(email);
         requireNonNull(name);
-        AppUtil.checkArgument(EmailValidator.of().validate(email.toString()), Email.MESSAGE_CONSTRAINTS);
-        AppUtil.checkArgument(NameValidator.of().validate(name.toString()), Name.MESSAGE_CONSTRAINTS);
+
+        boolean isValidEmail = EmailValidator.of().validate(email.toString());
+        boolean isValidName = NameValidator.of().validate(name.toString());
+        AppUtil.checkArgument(isValidEmail, Email.MESSAGE_CONSTRAINTS);
+        AppUtil.checkArgument(isValidName, Name.MESSAGE_CONSTRAINTS);
+
         this.email = email;
         this.name = name;
     }
