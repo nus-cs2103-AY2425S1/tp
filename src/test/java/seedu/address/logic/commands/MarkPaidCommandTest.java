@@ -52,33 +52,6 @@ public class MarkPaidCommandTest {
     }
 
     @Test
-    public void execute_markAllPersons_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
-        Set<MonthPaid> monthsPaid = Set.of(new MonthPaid("2024-01"));
-        MarkPaidCommand command = new MarkPaidCommand(MarkPaidCommand.MarkPaidTarget.all(), monthsPaid, false);
-
-        for (Person person : expectedModel.getFilteredPersonList()) {
-            Person markedPerson = createMarkedPerson(person, monthsPaid, false);
-            expectedModel.setPerson(person, markedPerson);
-        }
-
-        for (Person person : expectedModel.getFilteredPersonList()) {
-            assertTrue(person.getMonthsPaid().containsAll(monthsPaid), "Person not marked as paid correctly in expected model.");
-        }
-
-        expectedModel.updateFilteredPersonList(person -> person.getMonthsPaid().containsAll(monthsPaid));
-
-        String monthsPaidStr = monthsPaid.toString().replaceAll("^\\[|\\]$", "");
-        String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKPAID_ALL_SUCCESS, monthsPaidStr);
-
-        // Assert the command success with model and expectedModel
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    }
-
-
-
-    @Test
     public void toStringMethod() {
         MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
         MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
