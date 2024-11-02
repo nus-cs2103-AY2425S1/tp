@@ -13,7 +13,7 @@ public class ComparatorName implements Comparator<Contact> {
     static final int EQUAL_STATUS = 0;
 
     /**
-     * Compares the contact contacts by name and then nickname in alphabetical order.
+     * Compares the contact by name and then nickname in alphabetical order.
      * @param contact1 the first object to be compared.
      * @param contact2 the second object to be compared.
      * @return

@@ -57,7 +57,7 @@ public class ContactCard extends UiPart<Region> {
         studentStatus.setText(contact.getStudentStatus().value);
         email.setText(contact.getEmail().value);
         contact.getRoles().stream()
-                .sorted(Comparator.comparing(tag -> tag.roleName))
+                .sorted(Comparator.comparing(role -> role.getRoleIndex()))
                 .forEach(role -> roles.getChildren().add(getRoleLabel(role)));
         String nicknameObtained = contact.getNickname().value;
         if (!nicknameObtained.isEmpty()) {
