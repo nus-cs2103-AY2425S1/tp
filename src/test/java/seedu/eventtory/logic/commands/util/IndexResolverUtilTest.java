@@ -9,7 +9,6 @@ import static seedu.eventtory.testutil.TypicalIndexes.INDEX_LAST_VENDOR;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.List;
 
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
