@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_NET
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_PITCH;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_NETWORKING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_PITCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_SUBJECT_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_SUBJECT_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_PITCH;
 
@@ -57,13 +57,13 @@ public class TypicalMeetUps {
 
     // Manually added - MeetUp's details found in {@code CommandTestUtil}
     public static final MeetUp NETWORKING_MEETUP = new MeetUpBuilder()
-            .withSubject(VALID_MEETUP_NAME_NETWORKING)
+            .withSubject(VALID_MEETUP_SUBJECT_NETWORKING)
             .withInfo(VALID_MEETUP_INFO_NETWORKING)
             .withFrom(VALID_MEETUP_FROM_NETWORKING)
             .withTo(VALID_MEETUP_TO_NETWORKING)
             .withAddedBuyers(VALID_MEETUP_ADDED_PERSON_BETTY).build();
     public static final MeetUp PITCH_MEETUP = new MeetUpBuilder()
-            .withSubject(VALID_MEETUP_NAME_PITCH)
+            .withSubject(VALID_MEETUP_SUBJECT_PITCH)
             .withInfo(VALID_MEETUP_INFO_PITCH)
             .withFrom(VALID_MEETUP_FROM_PITCH)
             .withTo(VALID_MEETUP_TO_PITCH)
