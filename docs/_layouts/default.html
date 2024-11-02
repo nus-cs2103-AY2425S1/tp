@@ -20,9 +20,7 @@
         <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
           <ul>  <!-- Add this UL here -->
             {% assign headings = site.pages | where: "path", item.path | first %}
-
             {% if headings %}
-            <li><a href="{{item.url}}">Test</a>
             {% assign content = headings.content %}
             {% assign lines = content | split: '\n' %}
             {% for line in lines %}
