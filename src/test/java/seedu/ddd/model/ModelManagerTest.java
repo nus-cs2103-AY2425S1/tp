@@ -9,6 +9,7 @@ import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
 import static seedu.ddd.testutil.contact.TypicalContacts.BENSON;
 import static seedu.ddd.testutil.contact.TypicalContacts.CARL;
 import static seedu.ddd.testutil.contact.TypicalContacts.DANIEL;
+import static seedu.ddd.testutil.contact.TypicalContacts.ELLE;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_VENDOR;
 import static seedu.ddd.testutil.event.TypicalEvents.VALID_EVENT;
@@ -172,7 +173,7 @@ public class ModelManagerTest {
         testModelManager.addEvent(WEDDING_A);
         assertTrue(testModelManager.getDisplayedList().contains(WEDDING_A));
 
-        testModelManager.deleteContact(VALID_CLIENT); // when a contact is added, displayedList should display contacts
+        testModelManager.addContact(ELLE); // when a contact is added, displayedList should display contacts
         testModelManager.deleteEvent(VALID_EVENT);
         assertTrue(testModelManager.getDisplayedList().contains(WEDDING_A));
     }

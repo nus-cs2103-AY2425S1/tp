@@ -32,7 +32,7 @@ public class TypicalContacts {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            .withId(1)
+            .withId(11)
             .build();
     public static final Vendor BENSON = new VendorBuilder()
             .withName("Benson Meier")
@@ -41,7 +41,7 @@ public class TypicalContacts {
             .withPhone("98765432")
             .withService("flower provider")
             .withTags("owesMoney", "friends")
-            .withId(2)
+            .withId(12)
             .build();
     public static final Client CARL = new ClientBuilder()
             .withName("Carl Kurz")
@@ -49,7 +49,7 @@ public class TypicalContacts {
             .withEmail("heinz@example.com")
             .withAddress("wall street")
             .withTags()
-            .withId(3)
+            .withId(13)
             .build();
     public static final Vendor DANIEL = new VendorBuilder()
             .withName("Daniel Meier")
@@ -58,7 +58,7 @@ public class TypicalContacts {
             .withAddress("10th street")
             .withService("Photography")
             .withTags("friends")
-            .withId(4)
+            .withId(14)
             .build();
     public static final Client ELLE = new ClientBuilder()
             .withName("Elle Meyer")
@@ -66,7 +66,7 @@ public class TypicalContacts {
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
             .withTags()
-            .withId(5)
+            .withId(15)
             .build();
     public static final Client FIONA = new ClientBuilder()
             .withName("Fiona Kunz")
@@ -74,7 +74,7 @@ public class TypicalContacts {
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
             .withTags()
-            .withId(6)
+            .withId(16)
             .build();
     public static final Vendor GEORGE = new VendorBuilder()
             .withName("George Best")
@@ -83,7 +83,7 @@ public class TypicalContacts {
             .withAddress("4th street")
             .withService("catering")
             .withTags()
-            .withId(7)
+            .withId(17)
             .build();
 
     // Manually added
@@ -93,14 +93,14 @@ public class TypicalContacts {
             .withEmail("stefan@example.com")
             .withAddress("little india")
             .withTags()
-            .withId(8)
+            .withId(18)
             .build();
     public static final Client IDA = new ClientBuilder()
             .withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com")
             .withAddress("chicago ave")
             .withTags()
-            .withId(9)
+            .withId(19)
             .build();
 
     // Manually added - Contacts' details found in {@code CommandTestUtil}
