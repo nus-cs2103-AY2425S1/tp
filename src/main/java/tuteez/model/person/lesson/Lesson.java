@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 
 /**
@@ -165,18 +166,9 @@ public class Lesson {
      *         {@code false} otherwise.
      */
     public static boolean hasClashingLessonWithinList(List<Lesson> lessons) {
-        List<Lesson> lessonList = new ArrayList<>(lessons);
-
-        for (int i = 0; i < lessonList.size(); i++) {
-            Lesson firstLesson = lessonList.get(i);
-            for (int j = i + 1; j < lessonList.size(); j++) {
-                Lesson secondLesson = lessonList.get(j);
-                if (isClashingWithOtherLesson(firstLesson, secondLesson)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return IntStream.range(0, lessons.size())
+                .anyMatch(i -> IntStream.range(i + 1, lessons.size())
+                        .anyMatch(j -> isClashingWithOtherLesson(lessons.get(i), lessons.get(j))));
     }
 
 
