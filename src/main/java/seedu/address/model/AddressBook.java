@@ -184,6 +184,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Assigns an event to a person.
+     */
+    public void assignEventToPerson(Person person, Event event) {
+        requireNonNull(person);
+        requireNonNull(event);
+        persons.assignEventToPerson(person, event);
+    }
+
+    /**
      * Unassigns an event from a person.
      */
     public void unassignEventFromPerson(Person person, Event event) {

@@ -100,6 +100,10 @@ public class Person {
         return eventIds.contains(event.getEventId());
     }
 
+    public void addEventId(int eventId) {
+        eventIds.add(eventId);
+    }
+
     public void removeEventId(int eventId) {
         eventIds.remove(eventId);
     }

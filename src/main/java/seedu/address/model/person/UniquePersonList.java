@@ -127,6 +127,20 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Assigns an event to a person.
+     */
+    public void assignEventToPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        if (internalList.contains(person)) {
+            Person editedPerson = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getAddress(),
+                    person.getTags(), person.getEventIds(), person.getId());
+            editedPerson.addEventId(event.getEventId());
+            setPerson(person, editedPerson);
+        }
+    }
+
+    /**
      * Removes an assigned event from a person.
      */
     public void unassignEventFromPerson(Person person, Event event) {

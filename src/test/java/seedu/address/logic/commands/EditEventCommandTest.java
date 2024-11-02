@@ -307,6 +307,11 @@ public class EditEventCommandTest {
         }
 
         @Override
+        public void assignEventToPerson(Person person, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void unassignEventFromPerson(Person person, Event event) {
             throw new AssertionError("This method should not be called.");
         }

@@ -157,6 +157,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void assignEventToPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        addressBook.assignEventToPerson(person, event);
+    }
+
+    @Override
     public void unassignEventFromPerson(Person person, Event event) {
         requireAllNonNull(person, event);
         addressBook.unassignEventFromPerson(person, event);

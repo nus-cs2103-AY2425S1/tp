@@ -163,6 +163,11 @@ public interface Model {
     void updateFilteredEventList(Predicate<Event> predicate);
 
     /**
+     * Assigns an event to a person.
+     */
+    void assignEventToPerson(Person person, Event event);
+
+    /**
      * Removes an assigned event from a person.
      */
     void unassignEventFromPerson(Person person, Event event);

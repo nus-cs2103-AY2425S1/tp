@@ -30,7 +30,7 @@ public class UnassignEventCommandParser implements Parser<UnassignEventCommand> 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PERSON, PREFIX_EVENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON, PREFIX_PERSON)
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON, PREFIX_EVENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnassignEventCommand.MESSAGE_USAGE));
         }
