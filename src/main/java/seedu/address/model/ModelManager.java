@@ -77,6 +77,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Boolean getExportFilterGoodsStatus() {
+        return userPrefs.getExportFilterGoods();
+    }
+
+    @Override
+    public void setExportFilterGoodsToTrue() {
+        userPrefs.setExportFilterGoodsToTrue();
+    }
+
+    @Override
+    public void setExportFilterGoodsToFalse() {
+        userPrefs.setExportFilterGoodsToFalse();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }

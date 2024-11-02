@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -15,6 +16,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReceiptLog;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
@@ -51,9 +53,18 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        Boolean export = model.getExportFilterGoodsStatus();
+
         try {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveGoods(model.getGoods());
+            if (export) {
+                ReceiptLog receipts = new ReceiptLog();
+                receipts.setReceipts(model.getFilteredReceiptsList().stream().toList());
+                storage.saveFilteredGoods(receipts);
+                model.setExportFilterGoodsToFalse();
+            }
+
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {

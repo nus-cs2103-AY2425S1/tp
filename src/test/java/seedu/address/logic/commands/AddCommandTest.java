@@ -115,6 +115,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public Boolean getExportFilterGoodsStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExportFilterGoodsToTrue() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExportFilterGoodsToFalse() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }

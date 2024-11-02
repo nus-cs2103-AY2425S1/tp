@@ -50,7 +50,8 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         CsvGoodsStorage goodsStorage =
-                new CsvGoodsStorage(temporaryFolder.resolve("goods.csv"));
+                new CsvGoodsStorage(temporaryFolder.resolve("goods.csv"),
+                        temporaryFolder.resolve("otherGoods.csv"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, goodsStorage);
         logic = new LogicManager(model, storage);
     }
@@ -163,7 +164,9 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        CsvGoodsStorage goodsStorage = new CsvGoodsStorage(temporaryFolder.resolve("ExceptionGoods.csv"));
+        CsvGoodsStorage goodsStorage =
+                new CsvGoodsStorage(temporaryFolder.resolve("ExceptionGoods.csv"),
+                        temporaryFolder.resolve("otherGoods.csv"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, goodsStorage);
 
         logic = new LogicManager(model, storage);

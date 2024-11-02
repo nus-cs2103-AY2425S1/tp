@@ -87,6 +87,11 @@ public class StorageManager implements Storage {
     }
 
     @Override
+    public Path getExportGoodsFilePath() {
+        return goodsStorage.getExportGoodsFilePath();
+    }
+
+    @Override
     public Optional<ReadOnlyReceiptLog> readGoods() throws DataLoadingException {
         return readGoods(goodsStorage.getGoodsFilePath());
     }
@@ -100,9 +105,14 @@ public class StorageManager implements Storage {
     public void saveGoods(ReadOnlyReceiptLog goods) throws IOException {
         saveGoods(goods, goodsStorage.getGoodsFilePath());
     }
-
     @Override
     public void saveGoods(ReadOnlyReceiptLog goods, Path filePath) throws IOException {
         goodsStorage.saveGoods(goods, filePath);
     }
+    @Override
+    public void saveFilteredGoods(ReadOnlyReceiptLog goods) throws IOException {
+        saveGoods(goods, goodsStorage.getExportGoodsFilePath());
+    }
+
+
 }

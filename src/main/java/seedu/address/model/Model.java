@@ -39,6 +39,22 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
+     * gets status of export
+     */
+    Boolean getExportFilterGoodsStatus();
+
+
+    /**
+     * Sets export to true
+     */
+    void setExportFilterGoodsToTrue();
+
+    /**
+     * Sets export to false
+     */
+    void setExportFilterGoodsToFalse();
+
+    /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
