@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
-    private final SortedList<Client> sortedFilteredClients;
+    private final SortedList<Client> clients;
     private final ObservableList<RentalInformation> visibleRentalInformationList;
     private final ObjectProperty<Client> lastViewedClient = new SimpleObjectProperty<>();
     private final CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
@@ -46,7 +46,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getPersonList());
-        sortedFilteredClients = new SortedList<>(filteredClients);
+        clients = new SortedList<>(filteredClients);
         visibleRentalInformationList = FXCollections.observableArrayList();
     }
 
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Client> getFilteredPersonList() {
-        return sortedFilteredClients;
+        return clients;
     }
 
     @Override
@@ -148,16 +148,16 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
 
-        if (sortedFilteredClients.isEmpty()) {
+        if (filteredClients.isEmpty()) {
             updateVisibleRentalInformationList(List.of());
             setLastViewedClient(null);
         }
     }
 
     @Override
-    public void updateFilteredPersonList(Comparator<Client> comparator) {
+    public void updateSortedPersonList(Comparator<Client> comparator) {
         requireNonNull(comparator);
-        sortedFilteredClients.setComparator(comparator);
+        clients.setComparator(comparator);
     }
 
     //=========== Visible Rental Information =================================================================
@@ -210,7 +210,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && sortedFilteredClients.equals(otherModelManager.sortedFilteredClients);
+                && clients.equals(otherModelManager.clients);
     }
 
 }

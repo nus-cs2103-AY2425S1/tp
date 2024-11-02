@@ -96,10 +96,10 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Client> predicate);
 
     /**
-     * Updates the comparator of the filtered client list to sort by the given {@code comparator}.
+     * Updates the comparator of the sorted client list to sort by the given {@code comparator}.
      * @throws NullPointerException if {@code comparator} is null.
      */
-    void updateFilteredPersonList(Comparator<Client> comparator);
+    void updateSortedPersonList(Comparator<Client> comparator);
 
     /** Returns an unmodifiable view of the visible rental information list. */
     ObservableList<RentalInformation> getVisibleRentalInformationList();

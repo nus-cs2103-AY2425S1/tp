@@ -169,7 +169,7 @@ public class AddClientCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Comparator<Client> comparator) {
+        public void updateSortedPersonList(Comparator<Client> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
