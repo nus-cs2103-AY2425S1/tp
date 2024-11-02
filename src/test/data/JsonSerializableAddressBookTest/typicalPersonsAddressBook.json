@@ -57,7 +57,7 @@
       "phone": "87652533",
       "email": "cornelia@example.com",
       "address": "10th street",
-      "tags": ["seller"],
+      "tags": ["seller", "Landlord"],
       "remark": "",
       "listings": { "listings": [] }
     },
