@@ -94,6 +94,27 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+
+    @Override
+    public boolean hasPersonAfterEdit(Person editedPerson) {
+        requireNonNull(editedPerson);
+
+        // Clone the current AddressBook to avoid altering the original one.
+        AddressBook tempAddressBook = new AddressBook(this.addressBook);
+        ModelManager tempModelManager = new ModelManager(tempAddressBook, this.userPrefs);
+
+        // Check if the edited person exists in the cloned address book before attempting to delete.
+        if (tempModelManager.hasPerson(editedPerson)) {
+            tempModelManager.deletePerson(editedPerson);
+        }
+
+        // Check if adding the edited person will result in a duplicate.
+        return tempModelManager.hasPerson(editedPerson);
+    }
+
+
+
+
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);

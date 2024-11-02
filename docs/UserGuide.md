@@ -246,8 +246,9 @@ _Details coming soon ..._
 - Must contain at least one letter.
 - Can include letters, digits, spaces, hyphens (-), slashes (/), apostrophes ('), and periods (.).
 - Cannot start or end with spaces.
-- Symbols such as hyphens, slashes, apostrophes, and periods cannot have spaces directly before or after them (e.g., "John -Doe" will be formatted to "John-Doe").
-- Consecutive spaces within the name are trimmed to one space. (e.g. "John      Doe" will be trimmed to "John Doe")
+- Input name will be converted to upper case. (e.g., "John Doe" will become "JOHN DOE")
+- Symbols such as hyphens, slashes, apostrophes, and periods cannot have spaces directly before or after them (e.g., "JOHN -DOE" will be formatted to "JOHN-DOE").
+- Consecutive spaces within the name are trimmed to one space. (e.g. "JOHN      DOE" will be trimmed to "JOHN DOE")
 
 ### PHONE
 - Hyphens (-) are allowed in the input but will be trimmed away (e.g., "119-224-337" will be trimmed to "119224337").

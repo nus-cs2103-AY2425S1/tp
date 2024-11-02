@@ -38,7 +38,11 @@ class JsonAdaptedPerson {
         this.email = email;
         this.jobCode = jobCode;
         this.tag = tag;
-        this.remark = remark;
+        if (remark == null) {
+            this.remark = "None";
+        } else {
+            this.remark = remark;
+        }
 
     }
 
@@ -52,6 +56,7 @@ class JsonAdaptedPerson {
         jobCode = source.getJobCode().value;
         tag = source.getTag().tagCode;
         remark = source.getRemark().value;
+
     }
 
     /**
@@ -101,9 +106,6 @@ class JsonAdaptedPerson {
         }
         final Tag modelTag = new Tag(tag);
 
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
-        }
         final Remark modelRemark = new Remark(remark);
 
 

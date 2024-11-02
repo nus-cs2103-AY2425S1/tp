@@ -72,12 +72,11 @@ public class Person {
             return false;
         }
 
-        return name.equals(otherPerson.name)
-                && (phone.equals(otherPerson.phone) || email.equals(otherPerson.email));
+        return phone.equals(otherPerson.phone) || email.equals(otherPerson.email);
     }
 
     /**
-     * Returns true if both persons have the same name and email, or the same name and phone number.
+     * Returns true if both persons have the same name, email or phone number.
      */
     @Override
     public boolean equals(Object other) {
@@ -91,8 +90,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && (phone.equals(otherPerson.phone) || email.equals(otherPerson.email));
+        return phone.equals(otherPerson.phone) || email.equals(otherPerson.email);
     }
 
     @Override
@@ -109,6 +107,7 @@ public class Person {
                 .add("email", email)
                 .add("jobCode", jobCode)
                 .add("tag", tag)
+                .add("remark", remark)
                 .toString();
     }
 

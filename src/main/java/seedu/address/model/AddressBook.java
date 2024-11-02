@@ -69,6 +69,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book after edit command.
+     */
+    public boolean hasPersonAfterEdit(Person person) {
+        requireNonNull(person);
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        uniquePersonList.setPersons(persons);
+        uniquePersonList.remove(person);
+        return uniquePersonList.contains(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

@@ -47,7 +47,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         JobCode jobCode = ParserUtil.parseJobCode(argMultimap.getValue(PREFIX_JOBCODE).get());
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
-        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
+        Remark remark;
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            try {
+                remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+            } catch (ParseException e) {
+                // Handle the exception (log it or rethrow with a message)
+                throw new ParseException("Invalid remark format!", e);
+            }
+        } else {
+            remark = new Remark(""); // Default value if remark is not provided
+        }
 
         Person person = new Person(name, phone, email, jobCode, tag, remark);
 
