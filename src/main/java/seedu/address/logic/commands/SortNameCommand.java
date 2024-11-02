@@ -14,11 +14,20 @@ public class SortNameCommand extends SortCommand {
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by name";
 
+    public SortNameCommand(boolean isReversed) {
+        super(isReversed);
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateSortedPersonList(new PersonNameComparator());
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (isReversed) {
+            model.updateSortedPersonList(new PersonNameComparator().reversed());
+            return new CommandResult(MESSAGE_SUCCESS + DESCENDING_SUCCESS);
+        } else {
+            model.updateSortedPersonList(new PersonNameComparator());
+            return new CommandResult(MESSAGE_SUCCESS + ASCENDING_SUCCESS);
+        }
     }
 
 }

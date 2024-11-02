@@ -4,7 +4,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortDateCommand;
+import seedu.address.logic.commands.SortDepartmentCommand;
 import seedu.address.logic.commands.SortNameCommand;
+import seedu.address.logic.commands.SortRoleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -22,11 +24,35 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
-        args = args.trim();
+
+        String[] params = args.trim().split(" ");
+        boolean isReversed = false;
+
+        if (params.length == 1) {
+            args = params[0].trim();
+        } else if (params.length == 2) {
+            args = params[0].trim();
+            if (params[1].trim().equals(SortCommand.ARGUMENT_WORD_DESC)) {
+                isReversed = true;
+            } else if (params[1].trim().equals(SortCommand.ARGUMENT_WORD_ASC)) {
+                isReversed = false;
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+            }
+        } else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
         if (args.equals(SortNameCommand.ARGUMENT_WORD)) {
-            return new SortNameCommand();
+            return new SortNameCommand(isReversed);
         } else if (args.equals(SortDateCommand.ARGUMENT_WORD)) {
-            return new SortDateCommand();
+            return new SortDateCommand(isReversed);
+        } else if (args.equals(SortDepartmentCommand.ARGUMENT_WORD)) {
+            return new SortDepartmentCommand(isReversed);
+        } else if (args.equals(SortRoleCommand.ARGUMENT_WORD)) {
+            return new SortRoleCommand(isReversed);
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
