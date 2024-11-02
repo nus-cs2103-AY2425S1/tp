@@ -2,7 +2,6 @@ package seedu.academyassist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.academyassist.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_FILTER_PARAM;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 

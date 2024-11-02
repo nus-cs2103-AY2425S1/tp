@@ -1,13 +1,11 @@
 package seedu.academyassist.logic.parser;
 
 import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_FILTER_PARAM;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 
 import java.util.stream.Stream;
 
-import seedu.academyassist.logic.commands.AddCommand;
 import seedu.academyassist.logic.commands.FilterCommand;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
 import seedu.academyassist.model.filter.FilterParam;
