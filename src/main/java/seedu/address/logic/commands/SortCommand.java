@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.Prefix;
@@ -22,13 +24,13 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     //To change later
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort based on\n"
-            + "Example 1: " + COMMAND_WORD + " n/alice\n"
-            + "Example 2: " + COMMAND_WORD + " j/swe2024\n"
-            + "Example 3: " + COMMAND_WORD + " t/tp\n"
-            + "Example 4: " + COMMAND_WORD + " n/alice p/12341234\n"
-            + "Example 5: " + COMMAND_WORD + " n/alice e/alice@email.com\n"
-            + "Example 6: " + COMMAND_WORD + " t/tp j/swe2024\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort based on listed criteria\n"
+            + "Example 1: " + COMMAND_WORD + "\n"
+            + "Example 2: " + COMMAND_WORD + " j/\n"
+            + "Example 3: " + COMMAND_WORD + " t/\n"
+            + "Example 4: " + COMMAND_WORD + " j/ t/\n"
+            + "Example 5: " + COMMAND_WORD + " t/ j/\n"
+            + "Example 6: " + COMMAND_WORD + " t/\n";
 
 
     private final List<Prefix> sortCriteria;
@@ -42,12 +44,15 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
 
         // Build a dynamic comparator based on the sortCriteria list
-        Comparator<Person> personComparator = buildComparator(sortCriteria);
+        Comparator<Person> personComparator = buildComparator(new ArrayList<>(sortCriteria));
 
         // Sort the list with the dynamic comparator
         model.sortPersonList(personComparator);
 
-        return new CommandResult("List sorted based on your selected criteria.");
+        return new CommandResult(String.format("List sorted based on your selected criteria(s)\n%s",
+                this.sortCriteria.stream()
+                        .map(Prefix::toString)
+                        .collect(Collectors.joining(", "))));
     }
 
     private Comparator<Person> buildComparator(List<Prefix> sortCriteria) {
