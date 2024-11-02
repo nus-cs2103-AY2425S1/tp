@@ -6,7 +6,9 @@ import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.address.commons.core.LogsCenter;
+
 
 /**
  * Confirmation Window Ui to obtain users' confirmation.
@@ -46,6 +48,10 @@ public class ConfirmationWindow extends UiPart<Stage> {
                 .setStyle("-fx-background-color: #005b96; -fx-text-fill: #ffffff;");
         alert.getDialogPane().lookupButton(ButtonType.CANCEL)
                 .setStyle("-fx-background-color: #99DDF8; -fx-text-fill: #000000;");
+
+        // Center the dialog on the main application window and make it modal.
+        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertStage.initStyle(StageStyle.UTILITY);
 
         userResponse = alert.showAndWait();
     }
