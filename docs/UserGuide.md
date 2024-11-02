@@ -162,7 +162,7 @@ Let's take a look at the structure in more detail:
 | **Components**  | **Description**                                                                                                                                           | **Example**                    |
 |:----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------|
 | **Command**     | The action you want AgentAssist to perform.                                                                                                               | `add`                          |
-| **Flag(s)**     | Modifiers that specify what kind of data is being handled. <br/><br/>Flag(s) are typically 1-2 letters followed by a backslash.                           | `n/`, `p/`, `r/`, `rn/`        |
+| **Flag(s)**     | Modifiers that specify what kind of data is being handled. <br/><br/>Flag(s) are typically 1-2 letters followed by a backslash.                           | `n/`, `e/`, `r/`, `rn/`        |
 | **Argument(s)** | The values or inputs the command uses, such as client data or specific details. <br><br> This guide may represent it as a placeholder using `<ARGUMENT>`. | `John Doe`, `john@example.com` |
 
 Here's an example that uses multiple flags and arguments:
