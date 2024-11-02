@@ -71,7 +71,6 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_SCHEDULE_NAME = " " + PREFIX_SCHEDULE_NAME + "appointment!";
     public static final String INVALID_SCHEDULE_DATE = " " + PREFIX_SCHEDULE_DATE + "22-10-2024";
     public static final String INVALID_SCHEDULE_TIME = " " + PREFIX_SCHEDULE_TIME + "4pm";
