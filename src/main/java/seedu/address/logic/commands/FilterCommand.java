@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
  * Filters the address book by a given prefix and displays the filtered list to the user
  * Users can only filter by one field at a time
  */
-public class FilterCommand extends Command implements UndoableCommand {
+public class FilterCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the displayed list with the given criteria\n"
             + "Parameters: [s/RSVPSTATUS] [t/TAG]...\n" + "At least one parameter must be provided.\n"
@@ -74,9 +74,7 @@ public class FilterCommand extends Command implements UndoableCommand {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
-    /**
-     * Undoes the previous Filter command
-     */
+    @Override
     public void undo(Model model) {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(previousPredicate);

@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Tags a guest identified using it's displayed index from the address book with a tag already created.
  */
-public class TagCommand extends Command implements UndoableCommand {
+public class TagCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "tag";
 
@@ -100,9 +100,7 @@ public class TagCommand extends Command implements UndoableCommand {
         return new CommandResult(finalMessage.toString());
     }
 
-    /**
-     * Undoes the previous Tag command
-     */
+    @Override
     public void undo(Model model) {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();

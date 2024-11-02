@@ -3,11 +3,12 @@ package seedu.address.logic.commands;
 import seedu.address.model.Model;
 
 /**
- * Command that can be undone
+ * Represents a Command that can be undone
  */
-public interface UndoableCommand {
+public abstract class UndoableCommand extends Command {
+
     /**
-     * Reverts to the previous state of the address book
+     * Undoes the execute method of the command
      */
-    void undo(Model model);
+    public abstract void undo(Model model);
 }

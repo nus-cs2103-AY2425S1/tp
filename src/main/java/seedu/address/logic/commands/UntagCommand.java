@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Untags a guest identified using it's displayed index from the address book with a tag already associated with guest.
  */
-public class UntagCommand extends Command implements UndoableCommand {
+public class UntagCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "untag";
 
@@ -96,9 +96,7 @@ public class UntagCommand extends Command implements UndoableCommand {
         return new CommandResult(finalMessage.toString());
     }
 
-    /**
-     * Undoes the previous Untag command
-     */
+    @Override
     public void undo(Model model) {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();

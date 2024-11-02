@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command implements UndoableCommand {
+public class FindCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "find";
 
@@ -41,9 +41,7 @@ public class FindCommand extends Command implements UndoableCommand {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
-    /**
-     * Undoes the previous Find command
-     */
+    @Override
     public void undo(Model model) {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(previousPredicate);

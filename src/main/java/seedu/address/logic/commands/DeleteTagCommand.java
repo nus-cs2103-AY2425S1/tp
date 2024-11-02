@@ -22,7 +22,7 @@ import seedu.address.ui.UserConfirmation;
  * Deletes specified tags from the tag list and removes them from any persons tagged with these tags.
  * Prompts the user for confirmation if the tags are used to tag existing persons.
  */
-public class DeleteTagCommand extends Command implements UndoableCommand {
+public class DeleteTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -102,9 +102,7 @@ public class DeleteTagCommand extends Command implements UndoableCommand {
         return createCommandResult(isSuccessful);
     }
 
-    /**
-     * Undoes the previous DeleteTag command
-     */
+    @Override
     public void undo(Model model) {
         requireNonNull(model);
         for (Map.Entry<Tag, Set<Person>> entry: deletedSet.entrySet()) {

@@ -11,7 +11,7 @@ import seedu.address.model.person.RsvpStatus;
 /**
  * Set RSVP status for guests
  */
-public class SetRsvpCommand extends Command implements UndoableCommand {
+public class SetRsvpCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "setrsvp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -84,6 +84,7 @@ public class SetRsvpCommand extends Command implements UndoableCommand {
         return new CommandResult(message);
     }
 
+    @Override
     public void undo(Model model) {
         model.setPerson(updatedPerson, personToUpdate);
     }

@@ -30,7 +30,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command implements UndoableCommand {
+public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -89,6 +89,7 @@ public class EditCommand extends Command implements UndoableCommand {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
+    @Override
     public void undo(Model model) {
         model.setPerson(editedPerson, personToEdit);
     }
