@@ -17,7 +17,6 @@ import seedu.address.model.patient.exceptions.AllergyNotFoundException;
  * @see AllergySorter
  */
 public class AllergyList {
-    // List is used because allergies are usually added, not deleted or edited. So adding should be fast.
     private final Set<Allergy> allergies;
 
     /**
