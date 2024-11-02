@@ -65,7 +65,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons: \n";
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -134,13 +134,11 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
 
-        if (model.getLastViewedPerson().get().isPresent()) {
-            if (personToEdit.equals(model.getLastViewedPerson().get().get())) {
-                model.updateLastViewedPerson(editedPerson);
-                String logMessageForPerson =
-                        String.format("Student on display is edited, After Edit - Student: %s", editedPerson);
-                logger.info(logMessageForPerson);
-            }
+        if (model.isSamePersonAsPersonOnDisplay(personToEdit)) {
+            model.updateLastViewedPerson(editedPerson);
+            String logMessageForPerson =
+                    String.format("Student on display is edited, After Edit - Student: %s", editedPerson);
+            logger.info(logMessageForPerson);
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

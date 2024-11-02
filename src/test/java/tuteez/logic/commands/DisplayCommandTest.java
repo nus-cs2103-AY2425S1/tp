@@ -37,7 +37,7 @@ public class DisplayCommandTest {
         DisplayCommand displayCommand = new DisplayCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DisplayCommand.MESSAGE_DISPLAY_PERSON_SUCCESS,
-                Messages.format(personToDisplay));
+                Messages.formatPersonName(personToDisplay));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.displayPerson(personToDisplay);
@@ -61,7 +61,7 @@ public class DisplayCommandTest {
         DisplayCommand displayCommand = new DisplayCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DisplayCommand.MESSAGE_DISPLAY_PERSON_SUCCESS,
-                Messages.format(personToDisplay));
+                Messages.formatPersonName(personToDisplay));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
@@ -96,7 +96,7 @@ public class DisplayCommandTest {
         DisplayCommand displayCommand = new DisplayCommand(targetName);
 
         String expectedMessage = String.format(DisplayCommand.MESSAGE_DISPLAY_PERSON_SUCCESS,
-                Messages.format(personToDisplay));
+                Messages.formatPersonName(personToDisplay));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.displayPerson(personToDisplay);

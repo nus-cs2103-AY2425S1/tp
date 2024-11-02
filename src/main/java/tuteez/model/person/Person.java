@@ -109,10 +109,20 @@ public class Person {
         return Collections.unmodifiableList(lessons);
     }
 
-    public ArrayList<Lesson> getLessonsThatClash(Lesson otherLesson) {
+    /**
+     * Checks for any time conflicts between the specified lesson and this student's existing lessons.
+     *
+     * <p>This method iterates over all lessons associated with the student and returns a list of
+     * lessons that clash with te given lesson. A clash occurs if there is an overlap in timing
+     * between an existing lesson and the specified lesson.</p>
+     *
+     * @param newLesson The lesson to check against the student's existing lessons for potential time clashes.
+     * @return An ArrayList of the student's lessons that have a time conflict with the specified lesson.
+     */
+    public ArrayList<Lesson> findStudentClashingLessons(Lesson newLesson) {
         ArrayList<Lesson> clashedLessons = new ArrayList<>();
         for (Lesson lesson: lessons) {
-            if (Lesson.isClashingWithOtherLesson(lesson, otherLesson)) {
+            if (Lesson.isClashingWithOtherLesson(lesson, newLesson)) {
                 clashedLessons.add(lesson);
             }
         }

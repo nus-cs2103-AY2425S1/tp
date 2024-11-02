@@ -7,10 +7,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 
 /**
@@ -131,19 +131,10 @@ public class Lesson {
      * @return {@code true} if any two lessons in the list have a timing conflict,
      *         {@code false} otherwise.
      */
-    public static boolean containsClashes(List<Lesson> lessons) {
-        List<Lesson> lessonList = new ArrayList<>(lessons); // Convert to list for easy indexing
-
-        for (int i = 0; i < lessonList.size(); i++) {
-            Lesson lesson1 = lessonList.get(i);
-            for (int j = i + 1; j < lessonList.size(); j++) {
-                Lesson lesson2 = lessonList.get(j);
-                if (isClashingWithOtherLesson(lesson1, lesson2)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public static boolean hasClashingLessonWithinList(List<Lesson> lessons) {
+        return IntStream.range(0, lessons.size())
+                .anyMatch(i -> IntStream.range(i + 1, lessons.size())
+                        .anyMatch(j -> isClashingWithOtherLesson(lessons.get(i), lessons.get(j))));
     }
 
 
@@ -250,15 +241,15 @@ public class Lesson {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + lessonDay.toString() + " " + startTime.toString().replace(":", "") + "-"
-                + endTime.toString().replace(":", "") + ']';
+        return '[' + getDayAndTime() + ']';
     }
 
     /**
      * @return A string with only day and time
      */
     public String getDayAndTime() {
-        return this.toString().replace("[", "").replace("]", "");
+        return lessonDay.toString() + " " + startTime.toString().replace(":", "") + "-"
+                + endTime.toString().replace(":", "");
     }
 
     /**

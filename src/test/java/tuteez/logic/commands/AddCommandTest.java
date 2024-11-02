@@ -226,7 +226,17 @@ public class AddCommandTest {
 
         @Override
         public void removeLastViewedPerson() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean isLastViewPersonAvailable() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean isSamePersonAsPersonOnDisplay(Person person) {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override
@@ -291,7 +301,7 @@ public class AddCommandTest {
             Iterator<Person> students = personsAdded.iterator();
             while (students.hasNext()) {
                 Person studentToCheck = students.next();
-                ArrayList<Lesson> clashedLessons = studentToCheck.getLessonsThatClash(lesson);
+                ArrayList<Lesson> clashedLessons = studentToCheck.findStudentClashingLessons(lesson);
                 if (!clashedLessons.isEmpty()) {
                     clashingLessonMap.put(studentToCheck, clashedLessons);
                 }

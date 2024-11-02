@@ -19,6 +19,7 @@ import tuteez.logic.commands.EditCommand;
 import tuteez.logic.commands.ExitCommand;
 import tuteez.logic.commands.FindCommand;
 import tuteez.logic.commands.HelpCommand;
+import tuteez.logic.commands.LessonCommand;
 import tuteez.logic.commands.ListCommand;
 import tuteez.logic.parser.exceptions.ParseException;
 
@@ -91,6 +92,14 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case LessonCommand.COMMAND_WORD_ADD:
+        case LessonCommand.COMMAND_WORD_ADD_ALT:
+            return new AddLessonCommandParser().parse(arguments);
+
+        case LessonCommand.COMMAND_WORD_DELETE:
+        case LessonCommand.COMMAND_WORD_DELETE_ALT:
+            return new DeleteLessonCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

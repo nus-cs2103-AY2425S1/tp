@@ -38,6 +38,16 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_ADDLESSON_PREFIX =
+            "Add lesson command should use 'l/' prefix, not 'li/'";
+    public static final String MESSAGE_INVALID_DELETELESSON_PREFIX =
+            "Delete lesson command should use 'li/' prefix, not 'l/'";
+    public static final String MESSAGE_MISSING_LESSON_FIELD_PREFIX = "Lesson field prefix 'l/' is missing";
+    public static final String MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX = "Lesson index field prefix 'li/' is missing";
+    public static final String MESSAGE_MISSING_LESSON_INDEX = "Lesson index is required but missing";
+    public static final String MESSAGE_DUPLICATE_LESSON_INDEX = "Duplicate lesson indices are not allowed";
+    public static final String MESSAGE_INVALID_LESSON_INDEX_FORMAT =
+            "Lesson index must be a single, positive number (eg, '1', '2', '3').";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -70,6 +80,13 @@ public class Messages {
         builder.append("; Lessons: ");
         person.getLessons().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Formats the person's {@code name} for display to the user.
+     */
+    public static String formatPersonName(Person person) {
+        return person.getName().fullName;
     }
 
 }
