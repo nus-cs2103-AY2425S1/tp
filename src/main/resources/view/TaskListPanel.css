@@ -1,0 +1,27 @@
+.task-complete {
+    -fx-background-color: #c8e6c9; /* Light green background */
+    -fx-padding: 10;
+    -fx-border-radius: 5; /* Radius for rounded corners */
+    -fx-background-radius: 5; /* Radius for background corners */
+    -fx-border-color: #81c784; /* Darker green for the border */
+    -fx-border-width: 1; /* Set border width */
+}
+
+.task-incomplete {
+    -fx-background-color: #ffcdd2; /* Light red background */
+    -fx-padding: 10;
+    -fx-border-radius: 5; /* Radius for rounded corners */
+    -fx-background-radius: 5; /* Radius for background corners */
+    -fx-border-color: #ef5350; /* Darker red for the border */
+    -fx-border-width: 1; /* Set border width */
+}
+
+/* To prevent overlapping borders between adjacent list cells */
+.list-cell {
+    -fx-background-color: transparent; /* Ensure the list cell has a transparent background */
+}
+
+/* Optional: To make the separation more noticeable */
+.list-view {
+    -fx-background-color: transparent; /* Prevents list view background from interfering */
+}

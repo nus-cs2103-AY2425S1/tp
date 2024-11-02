@@ -37,7 +37,26 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskListCard(task, getIndex() + 1).getRoot());
+                TaskListCard card = new TaskListCard(task, getIndex() + 1);
+                setGraphic(card.getRoot());
+                // Apply initial style based on task status
+                updateStyle(task);
+
+                // Add a listener to update the style when the task status changes
+                task.isCompleteProperty().addListener((observable, oldValue, newValue) -> {
+                    updateStyle(task); // Call the updateStyle method
+                });
+
+                setGraphic(card.getRoot());
+            }
+        }
+
+        private void updateStyle(Task task) {
+            getStyleClass().clear();
+            if (task.getStatus()) {
+                getStyleClass().add("task-complete"); // Style for completed tasks
+            } else {
+                getStyleClass().add("task-incomplete"); // Style for incomplete tasks
             }
         }
     }
