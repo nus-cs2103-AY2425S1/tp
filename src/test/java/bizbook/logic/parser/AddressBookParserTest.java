@@ -25,6 +25,7 @@ import bizbook.logic.commands.FindCommand;
 import bizbook.logic.commands.HelpCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
+import bizbook.logic.commands.UnpinCommand;
 import bizbook.logic.commands.ViewCommand;
 import bizbook.logic.parser.exceptions.ParseException;
 import bizbook.model.person.NameContainsKeywordsPredicate;
@@ -139,6 +140,16 @@ public class AddressBookParserTest {
                 PinCommand.COMMAND_WORD.toUpperCase() + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new PinCommand(INDEX_FIRST_PERSON), command);
         assertEquals(new PinCommand(INDEX_FIRST_PERSON), commandUpperCase);
+    }
+
+    @Test
+    public void parseCommand_unpin() throws Exception {
+        UnpinCommand command = (UnpinCommand) parser.parseCommand(
+                UnpinCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        UnpinCommand commandUpperCase = (UnpinCommand) parser.parseCommand(
+                UnpinCommand.COMMAND_WORD.toUpperCase() + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnpinCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new UnpinCommand(INDEX_FIRST_PERSON), commandUpperCase);
     }
 
     @Test
