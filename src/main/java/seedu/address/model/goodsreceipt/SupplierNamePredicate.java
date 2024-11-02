@@ -12,6 +12,9 @@ import seedu.address.model.person.Name;
 public class SupplierNamePredicate implements Predicate<GoodsReceipt> {
     private final Name name;
 
+    /**
+     * Constructor for SupplierNamePredicate.
+     */
     public SupplierNamePredicate(Name name) {
         requireNonNull(name);
         this.name = name;
@@ -20,5 +23,19 @@ public class SupplierNamePredicate implements Predicate<GoodsReceipt> {
     @Override
     public boolean test(GoodsReceipt goodsData) {
         return goodsData.isFromSupplier(this.name);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SupplierNamePredicate otherSupplierNamePredicate)) {
+            return false;
+        }
+
+        return name == otherSupplierNamePredicate.name;
     }
 }

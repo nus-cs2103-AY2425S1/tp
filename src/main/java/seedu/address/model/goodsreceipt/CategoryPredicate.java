@@ -12,6 +12,9 @@ import seedu.address.model.goods.GoodsCategories;
 public class CategoryPredicate implements Predicate<GoodsReceipt> {
     private final GoodsCategories category;
 
+    /**
+     * Constructor for CategoryPredicate.
+     */
     public CategoryPredicate(GoodsCategories category) {
         requireNonNull(category);
         this.category = category;
