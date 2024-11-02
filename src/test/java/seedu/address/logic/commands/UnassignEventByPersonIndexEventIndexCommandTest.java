@@ -104,4 +104,15 @@ public class UnassignEventByPersonIndexEventIndexCommandTest {
         // null -> returns false
         assertEquals(false, command1.equals(null));
     }
+
+    @Test
+    public void toStringMethod() {
+        Index personIndex = Index.fromOneBased(1);
+        Index eventIndex = Index.fromOneBased(1);
+        UnassignEventByPersonIndexEventIndexCommand unassignEventCommand =
+                new UnassignEventByPersonIndexEventIndexCommand(personIndex, eventIndex);
+        String expected = UnassignEventByPersonIndexEventIndexCommand.class.getCanonicalName() + "{targetPersonIndex="
+                + personIndex + ", targetEventIndex=" + eventIndex + "}";
+        assertEquals(expected, unassignEventCommand.toString());
+    }
 }

@@ -122,4 +122,15 @@ public class UnassignEventByPersonNameEventNameCommandTest {
         assertEquals(false, command1.equals(null));
     }
 
+    @Test
+    public void toStringMethod() {
+        Name personName = new Name("Alice");
+        EventName eventName = new EventName("Meeting");
+        UnassignEventByPersonNameEventNameCommand unassignEventCommand =
+                new UnassignEventByPersonNameEventNameCommand(personName, eventName);
+        String expected = UnassignEventByPersonNameEventNameCommand.class.getCanonicalName() + "{targetPersonName="
+                + personName + ", targetEventName=" + eventName + "}";
+        assertEquals(expected, unassignEventCommand.toString());
+    }
+
 }
