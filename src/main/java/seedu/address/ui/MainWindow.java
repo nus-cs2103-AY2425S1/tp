@@ -131,6 +131,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates the university list panel with the latest filtered list of persons.
+     * <p>
+     * This method retrieves a filtered list of persons from the logic component
+     * and uses it to create a new {@code UniversityListPanel}. The panel is then
+     * added to the placeholder container {@code universityListPlaceholder}.
+     * </p>
+     */
+    void updateUniversityList() {
+        universityListPanel = new UniversityListPanel(logic.getFilteredPersonList());
+        universityListPlaceholder.getChildren().add(universityListPanel.getRoot());
+    }
+
+    /**
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
@@ -186,14 +199,12 @@ public class MainWindow extends UiPart<Stage> {
                 String universityName = commandText.substring(8).trim();
                 universityListPanel.highlightUniversity(universityName);
                 resultDisplay.setFeedbackToUser("Highlighted university: " + universityName);
-                return new CommandResult("Highlighted university: " + universityName);
             }
 
             // Check for `list` command to clear highlights
             if (commandText.equals("list")) {
                 universityListPanel.clearHighlight();
                 resultDisplay.setFeedbackToUser("Cleared university highlights.");
-                return new CommandResult("Cleared university highlights.");
             }
 
             CommandResult commandResult = logic.execute(commandText);
@@ -207,7 +218,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
+            updateUniversityList();
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
