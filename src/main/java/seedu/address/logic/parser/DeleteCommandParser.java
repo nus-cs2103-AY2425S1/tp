@@ -13,6 +13,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
+    /**
+     * Checks if the command type is correct and if there is at least one space after command type.
+     * @param args the user input
+     * @param commandType the command type such as "e" or "ph"
+     * @return true if the command type is correct and there is at least a space after the command type
+     * @throws ParseException if the user input does not conform the expected format
+     */
     private boolean deleteParserCheck(String args, String commandType) throws ParseException {
         if (args.startsWith(commandType)) {
             if (args.startsWith(commandType + " ")) {
@@ -42,7 +49,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             }
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | ParseException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
