@@ -87,51 +87,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void commit_withUnsavedChanges_throwsCommandException() {
-        AddressBook addressBook1 = new AddressBook();
-        AddressBook addressBook2 = getTypicalAddressBook();
-
-        ModelManager model = new ModelManager(addressBook1, new UserPrefs());
-        model.setAddressBook(addressBook2);
-        model.commitAddressBook();
-        model.deletePerson(GEORGE);
-        assertThrows(CommandException.class, VersionedAddressBook.MESSAGE_UNSAVED_CHANGES, model::undoAddressBook);
-    }
-
-    @Test
-    public void undo_withNoMoreHistory_throwsCommandException() {
-        ModelManager model = new ModelManager();
-        model.addPerson(GEORGE);
-        assertThrows(CommandException.class, VersionedAddressBook.MESSAGE_NO_MORE_HISTORY,
-                model::undoAddressBook);
-    }
-
-    @Test
-    public void discardUnsavedChanges() {
-        AddressBook addressBook1 = getTypicalAddressBook();
-        AddressBook addressBook2 = getTypicalAddressBook();
-        addressBook2.removePerson(GEORGE);
-
-        // discard one change
-        ModelManager model = new ModelManager(addressBook1, new UserPrefs());
-        model.deletePerson(GEORGE);
-        model.discardUnsavedChanges();
-        assertEquals(addressBook1, model.getAddressBook());
-
-        // discard all changes
-        model.deletePerson(ALICE);
-        model.setAddressBook(new AddressBook());
-        model.discardUnsavedChanges();
-        assertEquals(addressBook1, model.getAddressBook());
-
-        // discard no changes
-        model.setAddressBook(addressBook2);
-        model.commitAddressBook();
-        model.discardUnsavedChanges();
-        assertEquals(addressBook2, model.getAddressBook());
-    }
-
-    @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
     }

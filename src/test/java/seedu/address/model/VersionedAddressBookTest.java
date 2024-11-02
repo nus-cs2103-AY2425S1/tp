@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.model.VersionedAddressBook.MESSAGE_NO_MORE_HISTORY;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -70,6 +72,25 @@ public class VersionedAddressBookTest {
         assertEquals(addressBook1, versionedAddressBook.getCurrentAddressBook());
     }
 
+    @Test
+    public void testDiscardUnsavedChanges() {
+        // discard one change
+        model.addPerson(GEORGE);
+        model.discardUnsavedChanges();
+        assertEquals(addressBook1, model.getAddressBook());
+
+        // discard all changes
+        model.addPerson(ALICE);
+        model.setAddressBook(addressBook2);
+        model.discardUnsavedChanges();
+        assertEquals(addressBook1, model.getAddressBook());
+
+        // discard no changes
+        model.setAddressBook(addressBook2);
+        model.commitAddressBook();
+        model.discardUnsavedChanges();
+        assertEquals(addressBook2, model.getAddressBook());
+    }
 
 
     @Test
@@ -95,10 +116,19 @@ public class VersionedAddressBookTest {
     }
 
     @Test
+    public void commit_withUnsavedChanges_throwsCommandException() {
+        versionedAddressBook.resetData(addressBook2);
+        versionedAddressBook.commitAddressBook();
+        versionedAddressBook.removePerson(GEORGE);
+        assertThrows(CommandException.class, VersionedAddressBook.MESSAGE_UNSAVED_CHANGES,
+                versionedAddressBook::undoAddressBook);
+    }
+
+    @Test
     public void undoAddressBook_pointerLessThanZero_throwsCommandException() throws CommandException {
         AddressBook addressBook = new AddressBook();
         VersionedAddressBook versionedAddressBook = new VersionedAddressBook(addressBook);
-
+        versionedAddressBook.addPerson(GEORGE);
         assertThrows(CommandException.class, MESSAGE_NO_MORE_HISTORY, versionedAddressBook :: undoAddressBook);
     }
 }
