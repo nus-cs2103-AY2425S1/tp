@@ -9,11 +9,14 @@ import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ADDRE
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_EMAIL;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_NAME;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContacts.ELLE;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_VENDOR;
+import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_A;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ddd.model.event.exceptions.EventNotFoundException;
 import seedu.ddd.testutil.contact.ClientBuilder;
 import seedu.ddd.testutil.contact.VendorBuilder;
 
@@ -23,6 +26,14 @@ public class ContactTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Contact person = new ClientBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    public void removeEvent_missingEvent_throwsEventNotFoundException() {
+        Contact contact = new ClientBuilder(ELLE).build();
+        assert !contact.getEvents().contains(WEDDING_A);
+
+        assertThrows(EventNotFoundException.class, () -> contact.removeEvent(WEDDING_A));
     }
 
     @Test

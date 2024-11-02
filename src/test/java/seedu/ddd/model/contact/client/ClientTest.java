@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_2;
 import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
+import static seedu.ddd.testutil.contact.TypicalContacts.BENSON;
 import static seedu.ddd.testutil.contact.TypicalContacts.CARL;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
 
@@ -32,6 +33,10 @@ public class ClientTest {
     public void equals() {
         // different vendor
         assertNotEquals(ALICE, CARL);
+
+        // different types
+        assertNotEquals(ALICE, 1);
+        assertNotEquals(ALICE, BENSON);
 
         // copied should be same
         Client copied = new ClientBuilder(ALICE).build();

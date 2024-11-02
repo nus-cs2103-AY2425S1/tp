@@ -3,14 +3,12 @@ package seedu.ddd.model.event.common;
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.ddd.commons.util.AppUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
 import seedu.ddd.model.common.Id;
@@ -54,7 +52,6 @@ public class Event implements Displayable {
         Id eventId
     ) {
         requireAllNonNull(name, description, date, clients, vendors, eventId);
-        AppUtil.checkArgument(isValidEvent(clients), MESSAGE_CONSTRAINTS);
         assert !clients.isEmpty();
 
         this.name = name;
@@ -79,15 +76,6 @@ public class Event implements Displayable {
         this.clients = new ArrayList<>();
         this.vendors = new ArrayList<>();
         this.eventId = eventId;
-    }
-
-    /**
-     * Returns true if it is a valid event, which means there must
-     * be at least one {@code Client} in clients list.
-     * @param testList The {@code ArrayList} of {@code Client} at the constructor.
-     */
-    public static boolean isValidEvent(Collection<Client> testList) {
-        return !testList.isEmpty();
     }
 
     /**
