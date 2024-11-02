@@ -55,7 +55,8 @@ public class EventUtil {
      * Returns the part of command string for the given {@code UnassignEventByPersonIndexEventIndexCommand}'s details.
      */
     public static String getUnassignEventDetails(String personArgsString, String eventArgsString) {
-        return UnassignEventCommand.COMMAND_WORD + " " + PREFIX_PERSON + personArgsString + " " + PREFIX_EVENT + eventArgsString;
+        return UnassignEventCommand.COMMAND_WORD + " " + PREFIX_PERSON + personArgsString + " "
+                + PREFIX_EVENT + eventArgsString;
     }
 
 }

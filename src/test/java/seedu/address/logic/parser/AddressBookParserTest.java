@@ -33,11 +33,11 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventsCommand;
 import seedu.address.logic.commands.SearchCommand;
-import seedu.address.logic.commands.UnassignEventCommand;
 import seedu.address.logic.commands.UnassignEventByPersonIndexEventIndexCommand;
 import seedu.address.logic.commands.UnassignEventByPersonIndexEventNameCommand;
 import seedu.address.logic.commands.UnassignEventByPersonNameEventIndexCommand;
 import seedu.address.logic.commands.UnassignEventByPersonNameEventNameCommand;
+import seedu.address.logic.commands.UnassignEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
@@ -177,7 +177,7 @@ public class AddressBookParserTest {
                 unassignEventByPersonIndexEventNameCommand);
         UnassignEventCommand unassignEventByPersonNameEventIndexCommand = (UnassignEventCommand) parser.parseCommand(
                 EventUtil.getUnassignEventDetails(ALICE.getName().toString(), "1"));
-        assertEquals(new UnassignEventByPersonNameEventIndexCommand(ALICE.getName(), INDEX_FIRST_EVENT), 
+        assertEquals(new UnassignEventByPersonNameEventIndexCommand(ALICE.getName(), INDEX_FIRST_EVENT),
                 unassignEventByPersonNameEventIndexCommand);
         UnassignEventCommand unassignEventByPersonNameEventNameCommand = (UnassignEventCommand) parser.parseCommand(
                 EventUtil.getUnassignEventDetails(ALICE.getName().toString(), MEETING.getEventName().toString()));
