@@ -603,7 +603,7 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: Add a patient
+#### Use case (UC01): Add a patient
 
 **MSS**
 
@@ -627,32 +627,32 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: Edit a patient
+#### Use case (UC02): Edit a patient
 
 **MSS**
-
-1. User requests to edit a specific patient in the list with new details. 
-2. DocTrack updates the patient with the new details.
+1. DocTrack shows a list of patients [(UC04)](#use-case-uc04-view-all-patients).
+2. User requests to edit a specific patient in the list with new details. 
+3. DocTrack updates the patient with the new details.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 1a1. DocTrack shows an error message.
+    * 2a1. DocTrack shows an error message.
 
-      Use case resumes at step 1.
+      Use case resumes at step 2.
 
-* 1b. The new patient details are invalid.
+* 2b. The new patient details are invalid.
 
-    * 1b1. DocTrack shows an error message.
+    * 2b1. DocTrack shows an error message.
 
-      Use case resumes at step 1.
+      Use case resumes at step 2.
 
 <br>
 
-#### Use case: Delete a patient
+#### Use case (UC03): Delete a patient
 
 **MSS**
 
@@ -671,7 +671,7 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: View all patients
+#### Use case (UC04): View all patients
 
 **MSS**
 
@@ -688,7 +688,7 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: Find a patient
+#### Use case (UC05): Find a patient
 
 **MSS**
 
@@ -711,7 +711,7 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: Clear all patients 
+#### Use case (UC06): Clear all patients 
 
 **MSS**
 
@@ -722,7 +722,7 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: Add an appointment
+#### Use case (UC07): Add an appointment
 
 **MSS**
 
@@ -748,31 +748,32 @@ For all use cases below, unless specified otherwise,
     
 <br>
 
-#### Use case: Edit an appointment
+#### Use case (UC08): Edit an appointment
 
 **MSS**
 
-1. User requests to edit a specific appointment in the list with new details.
-2. DocTrack updates the appointment with the new details.
+1. DocTrack shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments).
+2. User requests to edit a specific appointment in the list with new details.
+3. DocTrack updates the appointment with the new details.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 1a1. DocTrack shows an error message.
+    * 2a1. DocTrack shows an error message.
 
-      Use case resumes at step 1.
-* 1b. The new appointment details are invalid.
+      Use case resumes at step 2.
+* 2b. The new appointment details are invalid.
 
-    * 1b1. DocTrack shows an error message.
+    * 2b1. DocTrack shows an error message.
 
-      Use case resumes at s
+      Use case resumes at step 2.
 
 <br>
 
-#### Use case: Delete an appointment
+#### Use case (UC09): Delete an appointment
 
 **MSS**
 
@@ -791,7 +792,7 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: View all appointments
+#### Use case (UC10): View all appointments
 
 **MSS**
 
@@ -808,7 +809,7 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: Find an appointment by patient name or date
+#### Use case (UC11): Find an appointment by patient name or date
 
 **MSS**
 
@@ -830,7 +831,7 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case: Clear all appointments
+#### Use case (UC12): Clear all appointments
 
 **MSS**
 
