@@ -17,7 +17,7 @@ import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 
 /**
- * Panel containing the list of orders of a person.
+ * Panel containing the list of orders of a selected person.
  */
 public class OrderListPanel extends UiPart<Region> {
     private static final String FXML = "OrderListPanel.fxml";
