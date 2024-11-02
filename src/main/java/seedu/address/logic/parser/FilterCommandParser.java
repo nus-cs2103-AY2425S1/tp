@@ -4,8 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -33,14 +33,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_INCOME, PREFIX_AGE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_EMAIL,
+                    PREFIX_ADDRESS, PREFIX_INCOME, PREFIX_AGE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_INCOME, PREFIX_AGE, PREFIX_TAG)
+        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL,
+            PREFIX_ADDRESS, PREFIX_INCOME, PREFIX_AGE, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_INCOME, PREFIX_AGE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL,
+            PREFIX_ADDRESS, PREFIX_INCOME, PREFIX_AGE);
 
         List<String> phoneCriteria = new ArrayList<>();
         if (arePrefixesPresent(argMultimap, PREFIX_PHONE)) {
@@ -69,7 +72,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         return new FilterCommand(
-            new PersonMeetsCriteriaPredicate(phoneCriteria, emailCriteria, addressCriteria, incomeCriteria, ageCriteria, tagList));
+            new PersonMeetsCriteriaPredicate(phoneCriteria, emailCriteria,
+                addressCriteria, incomeCriteria, ageCriteria, tagList));
     }
 
     /**

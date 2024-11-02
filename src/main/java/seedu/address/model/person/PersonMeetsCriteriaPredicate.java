@@ -69,7 +69,8 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
 
         if (!incomeCriteria.isEmpty() && !person.getIncome().isEmpty()) {
             incomeMatch = incomeCriteria.stream()
-                .anyMatch(searchTerm -> StringUtil.containsSubstringIgnoreCase(person.getIncome().toString(), searchTerm));
+                .anyMatch(searchTerm ->
+                    StringUtil.containsSubstringIgnoreCase(person.getIncome().toString(), searchTerm));
         }
 
         if (!ageCriteria.isEmpty() && !person.getAge().isEmpty()) {

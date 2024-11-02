@@ -220,7 +220,8 @@ public class ParserUtilTest {
 
         assertEquals(expectedCriteriaList, actualCriteriaList);
     }
-        @Test
+
+    @Test
     public void parseAgeCriteria_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAgeCriteria(null));
     }

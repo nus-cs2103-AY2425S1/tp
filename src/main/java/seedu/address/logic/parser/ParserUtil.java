@@ -1,14 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CRITERIA_FORMAT;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_CRITERIA_FORMAT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -168,8 +167,8 @@ public class ParserUtil {
     /**
      * Parses the given {@code String} of age criteria and returns a list of valid age criteria.
      * A valid age criteria can only contain "<", ">", or numbers.
-     * If it contains "<" or ">", there must only be a single instance of either of them, and only as the first character.
-     * It cannot contain both.
+     * If it contains "<" or ">", there must only be a single instance of either of them,
+     * and only as the first character. It cannot contain both.
      *
      * @param ageCriteria The string of age criteria to parse.
      * @return A list of valid age criteria.
@@ -179,13 +178,15 @@ public class ParserUtil {
         requireNonNull(ageCriteria);
         final List<String> ageCriteriaSet = new ArrayList<>();
         for (String ageCriteriaString : ageCriteria.split(" ")) {
-            if (ageCriteriaString.isEmpty()) continue;
+            if (ageCriteriaString.isEmpty()) {
+                continue;
+            }
             if (ageCriteriaString.matches("^[<>]?\\d+$")) {
                 ageCriteriaSet.add(ageCriteriaString);
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_CRITERIA_FORMAT,
-                    "Age criteria can only contain \"<\", \">\", or numbers. "  
-                    + "If String contains \"<\" or \">\", there must only be a single instance of either of them, " 
+                    "Age criteria can only contain \"<\", \">\", or numbers. "
+                    + "If String contains \"<\" or \">\", there must only be a single instance of either of them, "
                     + "and only as the first character. It cannot contain both."
                 ));
             }
