@@ -182,5 +182,11 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IOException e) {
+            logger.severe("Failed to save contacts " + StringUtil.getDetails(e));
+        }
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.model.profile;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.nio.file.Path;
 import java.util.regex.Pattern;
 
 /**
@@ -13,7 +14,12 @@ public class Profile {
             "The profile name can only contain letters (a-z, A-Z), numbers (0-9), and hyphens (-). "
                     + "It must also be 30 characters or less.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9-]+$";
+    private static final String DEFAULT_PROFILE = "addressbook";
     public final String profileName;
+
+    public Profile() {
+        this.profileName = DEFAULT_PROFILE;
+    }
 
     /**
      * Constructs a {@code Profile}.
@@ -39,6 +45,30 @@ public class Profile {
     public static boolean isValidProfile(String profileName) {
         Pattern pattern = Pattern.compile(VALIDATION_REGEX);
         return profileName.length() <= 30 && pattern.matcher(profileName).matches();
+    }
+
+
+    /**
+     * Extracts the profile name from a specified file path.
+     * <p>
+     * This method assumes that the provided {@code filePath} adheres to a specific structure:
+     * it must start with the directory "data", contain exactly two path segments (e.g., "data/profile.json"),
+     * and end with a ".json" file extension. If any of these conditions are not met, an assertion error is thrown.
+     * </p>
+     * <p>
+     * The profile name is derived from the file name by removing the ".json" extension.
+     * </p>
+     *
+     * @param filePath the path of the profile file, expected to match "data/{profileName}.json" format
+     * @return the extracted profile name without the ".json" extension.
+     */
+    public static String getProfileName(Path filePath) {
+        boolean startsWithData = filePath.startsWith("data");
+        boolean singleNameFile = filePath.getNameCount() == 2;
+        boolean endsWithJson = filePath.toString().endsWith(".json");
+        assert startsWithData && singleNameFile && endsWithJson : "This file path is not supported";
+        String fileName = filePath.getFileName().toString();
+        return fileName.substring(0, fileName.length() - 5);
     }
 
     /**
