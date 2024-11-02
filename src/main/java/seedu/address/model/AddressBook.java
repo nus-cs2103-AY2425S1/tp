@@ -89,7 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasSellProperty(Index index, Property property) {
         requireNonNull(property);
         // There's no get method for ObservableList, so we can't get the property at the index
-        //Person specificPerson = persons.get(index.getZeroBased());
+        // Person specificPerson = persons.get(index.getZeroBased());
         return false;
     }
 
@@ -126,12 +126,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts the list of contacts by specified field and order.
+     * Sorts the list of contacts by specified field and order with pinned contacts first.
      */
     public void sortPersonList() {
+        List<Person> pinnedPersons = persons.filtered(Person::isPinned);
+        List<Person> unpinnedPersons = persons.filtered(person -> !person.isPinned());
+
         if (sortComparator != null) {
-            persons.sort(sortComparator);
+            pinnedPersons.sort(sortComparator);
+            unpinnedPersons.sort(sortComparator);
         }
+
+        persons.setPersons(pinnedPersons);
+        persons.addAll(unpinnedPersons);
     }
 
     /**

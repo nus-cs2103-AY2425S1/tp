@@ -33,6 +33,10 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
         if (!argMultimap.getValue(PREFIX_FIELD).get().equals("Name")
                 && !argMultimap.getValue(PREFIX_FIELD).get().equals("NumProp")) {
             throw new ParseException(SortCommand.MESSAGE_AVAILABLE_FIELDS);

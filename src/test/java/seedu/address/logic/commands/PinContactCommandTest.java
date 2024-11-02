@@ -37,6 +37,7 @@ public class PinContactCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.pinPerson(personToPin);
+        model.unpinPerson(personToPin); // Ensure the person is unpinned
 
         assertCommandSuccess(pinContactCommand, model, expectedMessage, expectedModel);
     }

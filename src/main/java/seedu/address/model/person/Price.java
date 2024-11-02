@@ -5,8 +5,8 @@ package seedu.address.model.person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Price {
-    public static final String MESSAGE_CONSTRAINTS = "Prices should be numeric";
-    public static final String VALIDATION_REGEX = "\\d+"; // Checks if the price is numeric
+    public static final String MESSAGE_CONSTRAINTS = "Prices should be positive integer";
+    public static final String VALIDATION_REGEX = "\\d+"; // Checks if the price is positive integer
     public final String value;
 
     /**
@@ -15,7 +15,7 @@ public class Price {
      * @param price A valid price.
      */
     public Price(String price) {
-        this.value = price;
+        this.value = String.valueOf(Integer.parseInt(price));
     }
 
     /**

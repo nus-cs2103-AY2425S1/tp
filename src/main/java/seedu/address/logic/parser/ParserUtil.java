@@ -166,6 +166,18 @@ public class ParserUtil {
         }
         return tagSet;
     }
+    /**
+     * Checks if the number of property tags is valid.
+     */
+    public static boolean isValidNumberOfPropertyTags(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        for (String tagName : tags) {
+            if (tagName.length() > 10) {
+                return false;
+            }
+        }
+        return tags.size() <= 3;
+    }
 
     /**
      * Parses a {@code String housingType} into a {@code HousingType}.
@@ -177,7 +189,7 @@ public class ParserUtil {
         requireNonNull(housingType);
         String trimmedHousingType = housingType.trim();
         if (!HousingType.isValidHousingType(trimmedHousingType)) {
-            throw new ParseException("Housing type is not a non-zero unsigned integer.");
+            throw new ParseException(HousingType.MESSAGE_CONSTRAINTS);
         }
         return HousingType.getHousingType(trimmedHousingType);
     }
@@ -192,7 +204,7 @@ public class ParserUtil {
         requireNonNull(sellingPrice);
         String trimmedSellingPrice = sellingPrice.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedSellingPrice)) {
-            throw new ParseException("Selling price is not a non-zero unsigned integer.");
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
         return new Price(trimmedSellingPrice);
     }
