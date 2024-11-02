@@ -46,12 +46,14 @@ public class RenameTagCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         RenameTagCommand renameTagCommand = new RenameTagCommand("friend", "owesMoney");
-        String expectedMessage = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "owesMoney");
+        String expectedMessage = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "owesMoney")
+                + String.format(RenameTagCommand.MESSAGE_DUPLICATES, "owesMoney");
 
         assertCommandSuccess(renameTagCommand, model, expectedMessage, expectedModel);
 
         RenameTagCommand renameTagCommand2 = new RenameTagCommand("owesMoney", "friend");
-        String expectedMessage2 = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "friend");
+        String expectedMessage2 = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "friend")
+                + String.format(RenameTagCommand.MESSAGE_DUPLICATES, "friend");
         assertCommandSuccess(renameTagCommand2, model, expectedMessage2, expectedModel);
     }
 
