@@ -21,6 +21,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 public class AddTagCommandTest {
@@ -81,14 +82,16 @@ public class AddTagCommandTest {
 
         // add one valid tag to person with pre-existing tag
         addTagCommand = new AddTagCommand(indexOne, oneTag);
-        expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(ALICE));
-        expectedModel.addPersonTags(ALICE, oneTag);
+        expectedModel.addPersonTags(ALICE, oneTag); // add the tag to ALICE through the expected model
+        Person newAlice = ALICE.addTag(oneTag); // add the tag to ALICE manually to get the success message
+        expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(newAlice));
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
 
         // add multiple valid tags to person without pre-existing tag
         addTagCommand = new AddTagCommand(indexLast, twoTags);
-        expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(GEORGE));
-        expectedModel.addPersonTags(GEORGE, twoTags);
+        expectedModel.addPersonTags(GEORGE, twoTags); // add tags to GEORGE for the expected model
+        Person newGeorge = GEORGE.addTag(twoTags); // add the tags to GEORGE manually for success message
+        expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(newGeorge));
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
     }
 
