@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIND_KEYWORD;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -77,10 +76,10 @@ public class FindCommandParserTest {
                 Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE, FindCommand.MESSAGE_USAGE));
         // 5
         assertParseFailure(parser, " " + PREFIX_NAME + " ",
-                MESSAGE_EMPTY_FIND_KEYWORD);
+                Messages.getErrorMessageWithUsage(MESSAGE_EMPTY_FIND_KEYWORD, FindCommand.MESSAGE_USAGE));
         // 6
         assertParseFailure(parser, " " + PREFIX_MODULE + " ",
-                MESSAGE_EMPTY_FIND_KEYWORD);
+                Messages.getErrorMessageWithUsage(MESSAGE_EMPTY_FIND_KEYWORD, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
