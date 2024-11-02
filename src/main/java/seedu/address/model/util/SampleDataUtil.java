@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventDuration;
@@ -56,9 +57,16 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
+        IdCounterList idCounterList = new IdCounterList();
+        int largestPersonId = 0;
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+            if (samplePerson.getId() > largestPersonId) {
+                largestPersonId = samplePerson.getId();
+            }
         }
+        idCounterList.setPersonIdCounter(largestPersonId);
+        sampleAb.setIdCounterList(idCounterList);
         for (Event sampleEvent : getSampleEvents()) {
             sampleAb.addEvent(sampleEvent);
         }
