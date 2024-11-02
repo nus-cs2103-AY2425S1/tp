@@ -7,12 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_APPOINTMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_TIME_APPOINTMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_UNIQUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_TIME_APPOINTMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_TIME_APPOINTMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_APPOINTMENT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,10 +30,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditAppointmentDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class EditAppointmentCommandTest {
-    private static final Nric VALID_NRIC = new PersonBuilder().build().getNric();
     private static final LocalDate VALID_DATE = LocalDate.of(2025, 10, 22);
     private static final LocalTime VALID_START_TIME = LocalTime.of(10, 0);
     private static final LocalTime VALID_END_TIME = LocalTime.of(11, 0);
@@ -42,12 +45,12 @@ public class EditAppointmentCommandTest {
     }
 
     @Test
-    public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_appointmentAcceptedByModel_editSuccessful() throws Exception {
         Model modelStub = new ModelManager();
         Person testPerson = new PersonBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB).build();
         modelStub.addPerson(testPerson);
 
-        CommandResult commandResult = new AddAppointmentCommand(new Nric(VALID_NRIC_BOB), VALID_DATE,
+        new AddAppointmentCommand(new Nric(VALID_NRIC_BOB), VALID_DATE,
                 VALID_START_TIME, VALID_END_TIME)
                 .execute(modelStub);
 
@@ -61,6 +64,45 @@ public class EditAppointmentCommandTest {
         assertEquals(String.format(EditAppointmentCommand.MESSAGE_SUCCESS, editedAppointment),
                 editCommandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(editedAppointment), modelStub.getAllAppointments());
+    }
+
+    @Test
+    public void execute_noAppointmentFoundByModel_editFailure() throws Exception {
+        Model modelStub = new ModelManager();
+        Person testPerson = new PersonBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB).build();
+        modelStub.addPerson(testPerson);
+
+        new AddAppointmentCommand(new Nric(VALID_NRIC_BOB), VALID_DATE,
+                VALID_START_TIME, VALID_END_TIME)
+                .execute(modelStub);
+
+        EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptorBuilder()
+                .build();
+
+        EditAppointmentCommand editCommand = new EditAppointmentCommand(new Nric(VALID_NRIC_BOB),
+                VALID_START_DATE_TIME_APPOINTMENT_AMY,
+                editAppointmentDescriptor);
+        assertCommandFailure(editCommand, modelStub, EditAppointmentCommand.MESSAGE_NO_APPOINTMENT);
+    }
+
+    @Test
+    public void execute_appointmentStartTimeAfterEndTimeByModel_editFailure() throws Exception {
+        Model modelStub = new ModelManager();
+        Person testPerson = new PersonBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB).build();
+        modelStub.addPerson(testPerson);
+
+        new AddAppointmentCommand(new Nric(VALID_NRIC_BOB), VALID_DATE,
+                VALID_START_TIME, VALID_END_TIME)
+                .execute(modelStub);
+
+        EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptorBuilder()
+                .withStartTime(VALID_START_TIME_APPOINTMENT_AMY).withEndTime(VALID_END_TIME_APPOINTMENT_BOB)
+                .build();
+
+        EditAppointmentCommand editCommand = new EditAppointmentCommand(new Nric(VALID_NRIC_BOB),
+                startDateTime,
+                editAppointmentDescriptor);
+        assertCommandFailure(editCommand, modelStub, EditAppointmentCommand.MESSAGE_INVALID_START_END_TIME);
     }
 
     @Test
