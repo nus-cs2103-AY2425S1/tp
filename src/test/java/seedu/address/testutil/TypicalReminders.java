@@ -20,7 +20,7 @@ public class TypicalReminders {
     public static final Reminder REMINDER_BENSON = new ReminderBuilder()
             .withDate("15-12-2024")
             .withDescription("Networking session with Benson for internship insights")
-            .withName("Alice Pauline")
+            .withName("Benson Lin")
             .build();
 
     public static final Reminder REMINDER_CARL = new ReminderBuilder()
@@ -71,6 +71,6 @@ public class TypicalReminders {
      */
     public static List<Reminder> getTypicalReminders() {
         return new ArrayList<>(Arrays.asList(REMINDER_ALICE, REMINDER_BENSON, REMINDER_CARL,
-                REMINDER_DANIEL, REMINDER_ELLE, REMINDER_FIONA));
+                REMINDER_DANIEL, REMINDER_ELLE));
     }
 }

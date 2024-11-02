@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalReminders.BREAKFASTLEON;
-import static seedu.address.testutil.TypicalReminders.GYMTRISTAN;
-import static seedu.address.testutil.TypicalReminders.MEETINGJASON;
 import static seedu.address.testutil.TypicalReminders.getTypicalReminderAddressBook;
+import static seedu.address.testutil.TypicalReminders.REMINDER_ALICE;
+import static seedu.address.testutil.TypicalReminders.REMINDER_FIONA;
+import static seedu.address.testutil.TypicalReminders.REMINDER_GEORGE;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -76,14 +76,14 @@ public class JsonReminderAddressBookStorageTest {
         assertEquals(original, new ReminderAddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addReminder(BREAKFASTLEON);
-        original.removeReminder(MEETINGJASON);
+        original.addReminder(REMINDER_FIONA);
+        original.removeReminder(REMINDER_ALICE);
         jsonReminderAddressBookStorage.saveReminderAddressBook(original, filePath);
         readBack = jsonReminderAddressBookStorage.readReminderAddressBook(filePath).get();
         assertEquals(original, new ReminderAddressBook(readBack));
 
-        // Save and read without specifying file path
-        original.addReminder(GYMTRISTAN);
+        //  Save and read without specifying file path
+        original.addReminder(REMINDER_GEORGE);
         jsonReminderAddressBookStorage.saveReminderAddressBook(original); // file path not specified
         readBack = jsonReminderAddressBookStorage.readReminderAddressBook().get(); // file path not specified
         assertEquals(original, new ReminderAddressBook(readBack));

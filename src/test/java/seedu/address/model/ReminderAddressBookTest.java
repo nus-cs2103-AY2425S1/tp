@@ -4,8 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalReminders.MEETINGJASON;
 import static seedu.address.testutil.TypicalReminders.getTypicalReminderAddressBook;
+import static seedu.address.testutil.TypicalReminders.REMINDER_ALICE;
+import static seedu.address.testutil.TypicalReminders.REMINDER_GEORGE;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -45,8 +46,9 @@ public class ReminderAddressBookTest {
     @Test
     public void resetData_withDuplicateReminders_throwsDuplicatePersonException() {
         // Two reminders with the same fields
-        Reminder editedMeetingJason = new Reminder("10-10-2022", "project meeting", new Name("Jason"));
-        List<Reminder> newReminders = Arrays.asList(MEETINGJASON, editedMeetingJason);
+        Reminder editedMeetingJason = new Reminder("12-12-2024", "Mock interview with Alice",
+                new Name("Alice Pauline"));
+        List<Reminder> newReminders = Arrays.asList(REMINDER_ALICE, editedMeetingJason);
         ReminderAddressBookStub newData = new ReminderAddressBookStub(newReminders);
 
         assertThrows(DuplicateReminderException.class, () -> reminderAddressBook.resetData(newData));
@@ -59,13 +61,13 @@ public class ReminderAddressBookTest {
 
     @Test
     public void hasReminder_reminderNotInReminderAddressBook_returnsFalse() {
-        assertFalse(reminderAddressBook.hasReminder(MEETINGJASON));
+        assertFalse(reminderAddressBook.hasReminder(REMINDER_GEORGE));
     }
 
     @Test
     public void hasReminder_reminderInReminderAddressBook_returnsTrue() {
-        reminderAddressBook.addReminder(MEETINGJASON);
-        assertTrue(reminderAddressBook.hasReminder(MEETINGJASON));
+        reminderAddressBook.addReminder(REMINDER_GEORGE);
+        assertTrue(reminderAddressBook.hasReminder(REMINDER_GEORGE));
     }
 
     @Test
@@ -76,9 +78,10 @@ public class ReminderAddressBookTest {
 
     @Test
     public void hasReminder_reminderWithSameIdentityFieldsInReminderAddressBook_returnsTrue() {
-        reminderAddressBook.addReminder(MEETINGJASON);
-        Reminder editedMeetingJason = new Reminder("10-10-2022", "project meeting", new Name("Jason"));
-        assertTrue(reminderAddressBook.hasReminder(editedMeetingJason));
+        reminderAddressBook.addReminder(REMINDER_ALICE);
+        Reminder edited = new Reminder("12-12-2024", "Mock interview with Alice",
+                new Name("Alice Pauline"));
+        assertTrue(reminderAddressBook.hasReminder(edited));
     }
 
     @Test

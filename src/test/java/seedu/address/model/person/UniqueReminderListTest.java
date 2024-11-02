@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalReminders.GYMTRISTAN;
-import static seedu.address.testutil.TypicalReminders.MEETINGJASON;
+import static seedu.address.testutil.TypicalReminders.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,13 +26,13 @@ public class UniqueReminderListTest {
 
     @Test
     public void contains_reminderNotInList_returnsFalse() {
-        assertFalse(uniqueReminderList.contains(MEETINGJASON));
+        assertFalse(uniqueReminderList.contains(REMINDER_GEORGE));
     }
 
     @Test
     public void contains_reminderInList_returnsTrue() {
-        uniqueReminderList.add(MEETINGJASON);
-        assertTrue(uniqueReminderList.contains(MEETINGJASON));
+        uniqueReminderList.add(REMINDER_ALICE);
+        assertTrue(uniqueReminderList.contains(REMINDER_ALICE));
     }
 
     @Test
@@ -43,8 +42,8 @@ public class UniqueReminderListTest {
 
     @Test
     public void add_duplicateReminder_throwsDuplicateReminderException() {
-        uniqueReminderList.add(MEETINGJASON);
-        assertThrows(DuplicateReminderException.class, () -> uniqueReminderList.add(MEETINGJASON));
+        uniqueReminderList.add(REMINDER_ALICE);
+        assertThrows(DuplicateReminderException.class, () -> uniqueReminderList.add(REMINDER_ALICE));
     }
 
     @Test
@@ -54,13 +53,13 @@ public class UniqueReminderListTest {
 
     @Test
     public void remove_reminderDoesNotExist_throwsReminderNotFoundException() {
-        assertThrows(ReminderNotFoundException.class, () -> uniqueReminderList.remove(MEETINGJASON));
+        assertThrows(ReminderNotFoundException.class, () -> uniqueReminderList.remove(REMINDER_GEORGE));
     }
 
     @Test
     public void remove_existingReminder_removesReminder() {
-        uniqueReminderList.add(MEETINGJASON);
-        uniqueReminderList.remove(MEETINGJASON);
+        uniqueReminderList.add(REMINDER_ALICE);
+        uniqueReminderList.remove(REMINDER_ALICE);
         UniqueReminderList expectedUniqueReminderList = new UniqueReminderList();
         assertEquals(expectedUniqueReminderList, uniqueReminderList);
     }
@@ -72,9 +71,9 @@ public class UniqueReminderListTest {
 
     @Test
     public void setReminders_uniqueReminderList_replacesOwnListWithProvidedUniqueReminderList() {
-        uniqueReminderList.add(MEETINGJASON);
+        uniqueReminderList.add(REMINDER_ALICE);
         UniqueReminderList expectedUniqueReminderList = new UniqueReminderList();
-        expectedUniqueReminderList.add(GYMTRISTAN);
+        expectedUniqueReminderList.add(REMINDER_BENSON);
         uniqueReminderList.setReminders(expectedUniqueReminderList);
         assertEquals(expectedUniqueReminderList, uniqueReminderList);
     }
@@ -86,17 +85,17 @@ public class UniqueReminderListTest {
 
     @Test
     public void setReminders_list_replacesOwnListWithProvidedList() {
-        uniqueReminderList.add(MEETINGJASON);
-        List<Reminder> reminderList = Collections.singletonList(GYMTRISTAN);
+        uniqueReminderList.add(REMINDER_ALICE);
+        List<Reminder> reminderList = Collections.singletonList(REMINDER_BENSON);
         uniqueReminderList.setReminders(reminderList);
         UniqueReminderList expectedUniqueReminderList = new UniqueReminderList();
-        expectedUniqueReminderList.add(GYMTRISTAN);
+        expectedUniqueReminderList.add(REMINDER_BENSON);
         assertEquals(expectedUniqueReminderList, uniqueReminderList);
     }
 
     @Test
     public void setReminders_listWithDuplicateReminders_throwsDuplicateReminderException() {
-        List<Reminder> listWithDuplicateReminders = Arrays.asList(MEETINGJASON, MEETINGJASON);
+        List<Reminder> listWithDuplicateReminders = Arrays.asList(REMINDER_ALICE, REMINDER_ALICE);
         assertThrows(DuplicateReminderException.class, () -> uniqueReminderList
                                                              .setReminders(listWithDuplicateReminders));
     }
