@@ -212,14 +212,14 @@ public class AddressBookParserTest {
                 -> parser.parseCommand("hire j/Software Engineer"));
     }
 
-    // Invalid Input (Job not specified in reject command)
+    // Invalid Input (Name not specified in reject command)
     @Test
     public void parseCommand_invalidRejectCommandFormatMissingName_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RejectCommand.MESSAGE_USAGE), () -> parser.parseCommand("reject n/Amy Bee"));
     }
 
-    // Invalid Input (Name not specified in reject command)
+    // Invalid Input (Job not specified in reject command)
     @Test
     public void parseCommand_invalidRejectCommandFormatMissingJob_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
