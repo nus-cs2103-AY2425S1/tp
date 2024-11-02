@@ -22,6 +22,7 @@ Class Remark
 Class Birthday
 Class History
 Class Tag
+Class PropertyList
 
 Class I #FFFFFF
 }
@@ -48,6 +49,7 @@ Person *--> Remark
 Person *--> Birthday
 Person *--> History
 Person *--> "*" Tag
+Person *--> PropertyList
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -58,6 +60,7 @@ Address -[hidden]right-> Email
 Email -[hidden]right-> Remark
 Remark -[hidden]right-> Birthday
 Birthday -[hidden]right-> History
+History -[hidden]right-> PropertyList
 
 ModelManager --> "~* filtered" Person
 @enduml
