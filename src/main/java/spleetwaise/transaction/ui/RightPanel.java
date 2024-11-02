@@ -1,5 +1,10 @@
 package spleetwaise.transaction.ui;
 
+import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+
 import java.math.BigDecimal;
 import java.util.function.Predicate;
 
@@ -8,11 +13,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import spleetwaise.address.ui.CommandBox;
 import spleetwaise.address.ui.UiPart;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -27,6 +35,7 @@ public class RightPanel extends UiPart<Region> {
     private static boolean doneFilter = false;
 
     private TransactionListPanel transactionListPanel;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane transactionListPanelPlaceholder;
@@ -40,8 +49,11 @@ public class RightPanel extends UiPart<Region> {
     /**
      * Creates a {@code RightPanel} with the given {@code ObservableList<Transaction>} to display.
      */
-    public RightPanel() {
+    public RightPanel(CommandBox cb) {
         super(FXML);
+
+        commandBox = cb;
+
         ObservableList<Transaction> txns = CommonModel.getInstance().getFilteredTransactionList();
         updateBalances();
 
@@ -87,10 +99,30 @@ public class RightPanel extends UiPart<Region> {
         MenuItem filterByDone = new MenuItem("Filter by Done or Not Done Status");
         filterByDone.setOnAction(e -> filterTransactionsByDoneStatus());
 
-        MenuItem filterByAmount = new MenuItem("Filter by Positive or Negative Amount");
-        filterByAmount.setOnAction(e -> filterTransactionsByAmount());
+        MenuItem filterByPositiveOrNegativeAmount = new MenuItem("Filter by Positive or Negative Amount");
+        filterByPositiveOrNegativeAmount.setOnAction(e -> filterTransactionsByAmount());
 
-        filterMenu.getItems().addAll(resetFilter, filterByDone,filterByAmount);
+        SeparatorMenuItem divider = new SeparatorMenuItem();
+
+        MenuItem filterByContact = new MenuItem("Filter by Contact");
+        filterByContact.setOnAction(
+                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_PHONE));
+
+        MenuItem filterByAmount = new MenuItem("Filter by Amount");
+        filterByAmount.setOnAction(
+                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_AMOUNT));
+
+        MenuItem filterByDescription = new MenuItem("Filter by Description");
+        filterByDescription.setOnAction(
+                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_DESCRIPTION));
+
+        MenuItem filterByDate = new MenuItem("Filter by Date");
+        filterByDate.setOnAction(
+                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_DATE));
+
+        filterMenu.getItems().addAll(resetFilter, filterByDone, filterByPositiveOrNegativeAmount, divider,
+                filterByContact, filterByAmount, filterByDescription, filterByDate
+        );
         filterMenu.show(filterIcon, event.getScreenX(), event.getScreenY());
     }
 

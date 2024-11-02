@@ -50,6 +50,10 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    public void handleFilterCommandEntered(String commandText) {
+        commandTextField.setText(commandText);
+    }
+
     /**
      * Sets the command box style to use the default style.
      */
