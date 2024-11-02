@@ -27,7 +27,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "   \t ";
     private static final String INVALID_DATEOFLASTVISIT = "01/01/2024"; // must be separated by dashes
     private static final String INVALID_EMERGENCY_CONTACT = INVALID_PHONE;
 
