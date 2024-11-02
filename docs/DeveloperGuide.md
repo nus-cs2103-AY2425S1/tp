@@ -2,8 +2,34 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
+# **Table of Contents**
 {:toc}
+1. [Introduction to TalentSG] (#talentsg)
+2. [Purpose of this guide] (#purpose-of-this-guide)
+
+---
+
+## **TalentSG**
+
+TalentSG is an easy-to-use recruitment management desktop application designed for HR professionals and recruiters working
+in mid-sized companies to streamline and speed up the hiring process. With a combination of a Command Line Interface
+(CLI) and Graphical User Interface (GUI), our app provides a user-friendly and efficient way manage candidate and
+employee information in fast-paced environments.
+
+---
+
+## **Purpose of this guide**
+
+The purpose of this guide is to give you an overarching insight into developing and maintaining TalentSG.
+
+If you are a developer, this guide will give you an overview of the high-level architecture and design of TalentSG.
+It also delves into the implementation details and design considerations of TalentSG's features, allowing you to
+become well-versed in the functionality and structure the of the application.
+
+To learn more about TalentSG's user experience considerations, take a look at the [requirements](#appendix-requirements)
+section where we cover the product scope, user stories, as well as use cases.
+
+If you are lost, please refer to the [set-up](#setting-up-getting-started) section of the guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
