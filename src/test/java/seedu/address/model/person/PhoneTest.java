@@ -32,10 +32,11 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
+        assertFalse(Phone.isValidPhone("9p11")); // should not have alphabets in the phone number
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhone("9p11")); // non-consecutive 3 numbers
+        assertTrue(Phone.isValidPhone("9-11")); // non-consecutive 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
     }
@@ -52,15 +53,16 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhoneField("93 12 15 34")); // spaces within digits
 
         // invalid phone numbers
-        assertFalse(Phone.isValidPhoneField("")); // empty string
-        assertFalse(Phone.isValidPhoneField("91")); // less than 3 numbers
-        assertFalse(Phone.isValidPhoneField("phone")); // non-numeric
+        assertFalse(Phone.isValidPhone("")); // empty string
+        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("phone")); // non-numeric
+        assertFalse(Phone.isValidPhone("9p11")); // should not have alphabets in the phone number
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhoneField("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhoneField("9p11")); // non-consecutive 3 numbers
-        assertTrue(Phone.isValidPhoneField("93121534"));
-        assertTrue(Phone.isValidPhoneField("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
+        assertTrue(Phone.isValidPhone("9-11")); // non-consecutive 3 numbers
+        assertTrue(Phone.isValidPhone("93121534"));
+        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
 
         // ---- Unique test cases for isValidPhoneField()
         
