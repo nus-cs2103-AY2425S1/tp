@@ -136,7 +136,7 @@ public class EditAssignmentCommand extends Command {
      */
     public static class EditAssignmentDescriptor {
         private AssignmentName assignmentName;
-        private int maxScore;
+        private Integer maxScore;
 
         public EditAssignmentDescriptor() {}
 
