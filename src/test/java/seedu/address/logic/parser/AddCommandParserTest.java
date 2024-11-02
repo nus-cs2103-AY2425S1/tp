@@ -304,6 +304,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MODULE_ROLE_DESC,
-                "Error: " + MESSAGE_UNEXPECTED_PREAMBLE + "\nUsage:\n" + AddCommand.MESSAGE_USAGE);
+                Messages.getErrorMessageWithUsage(MESSAGE_UNEXPECTED_PREAMBLE, AddCommand.MESSAGE_USAGE));
     }
 }
