@@ -209,8 +209,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-TODO!!!
-
+<!-- TODO!! @Everybody --> 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -708,7 +707,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Adding a client's [_rental information_](#glossary-rental-information)
 
-1. TODO!! @Song Lin
+<!-- TODO!! @Song Lin --> 
 
 #### Viewing a client's [_rental information_](#glossary-rental-information)
 
@@ -770,7 +769,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Editing a client's [_rental information_](#glossary-rental-information)
 
-1. TODO!! @Song Lin
+<!-- TODO!! @Song Lin --> 
 
 #### Listing all [_clients_](#glossary-client)
 
@@ -807,11 +806,11 @@ testers are expected to do more *exploratory* testing.
 
 #### Find a [_clients_](#glossary-client)
 
-1. TODO!! @Nathan
+<!-- TODO!! @Nathan --> 
 
 #### Find a client's [_rental information_](#glossary-rental-information)
 
-1. TODO!! @Nathan
+<!-- TODO!! @Nathan --> 
 
 #### Deleting a [_client_](#glossary-client)
 
@@ -878,7 +877,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Autofill Commands Feature
 
-1. TODO!! @Song Lin
+<!-- TODO!! @Song Lin --> 
 
 #### Clear
 
@@ -892,7 +891,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Exit
 
-1. Safely exiting `True Rental` application.
+1. Safely exiting `TrueRental` application.
 
     1. Prerequisites: Run the application
 
@@ -901,7 +900,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Saving data
 
-1. TODO!! @ANYBODY
+<!-- TODO!! @Anybody --> 
 
 1. Dealing with missing/corrupted data files
 
