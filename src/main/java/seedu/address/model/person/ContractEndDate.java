@@ -14,7 +14,7 @@ public abstract class ContractEndDate implements Comparable<ContractEndDate> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Contract End Date should only contain numeric characters and dashes in the format 'YYYY-MM-DD', and it"
-                    + " should not be blank";
+                    + " should be a valid date";
     private static final ContractEndDate EMPTY_CONTRACT_END_DATE = new EmptyContractEndDate();
 
     public static ContractEndDate empty() {
@@ -30,7 +30,10 @@ public abstract class ContractEndDate implements Comparable<ContractEndDate> {
      */
     public static boolean isValidDate(String test) {
         try {
-            LocalDate.parse(test);
+            LocalDate temp = LocalDate.parse(test);
+            if (temp.getYear() < 0) {
+                return false;
+            }
         } catch (DateTimeParseException e) {
             return false;
         }
