@@ -94,7 +94,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Contact> lastShownList = model.getFilteredContactList();
 
-       // System.out.println("attempting to execute EditCommand, targetIndex = " + targetIndex);
+        // System.out.println("attempting to execute EditCommand, targetIndex = " + targetIndex);
 
         if (targetIndex == null) {
             setTargetIndex(lastShownList);
