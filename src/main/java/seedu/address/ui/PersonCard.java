@@ -75,6 +75,7 @@ public class PersonCard extends UiPart<Region> {
         person.getRoles().stream()
                 .sorted(Comparator.comparing(role -> role.roleName))
                 .forEach(role -> roles.getChildren().add(new Label(role.roleName)));
+        roles.getChildren().stream().forEach(label -> label.setId("role"));
     }
 
     /**
