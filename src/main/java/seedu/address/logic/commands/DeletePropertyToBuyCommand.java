@@ -37,7 +37,8 @@ public class DeletePropertyToBuyCommand extends Command {
             + "using the index number used in the displayed person list and "
             + "the index number used int he displayed property-to-buy list.\n"
             + "Existing properties, other than the one being deleted, will remain.\n"
-            + "Parameters: PERSON_INDEX (must be a positive integer) PROPERTY_TO_BUY_INDEX (must be a positive integer)"
+            + "Parameters: [PERSON_INDEX] (must be a positive integer) "
+            + "[PROPERTY_TO_BUY_INDEX] (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "2\n"
             + "This means that we want to delete the 2nd property the 1st person wants to buy.";
 

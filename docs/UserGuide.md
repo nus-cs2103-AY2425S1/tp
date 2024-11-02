@@ -44,6 +44,9 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
     - [To mark property already bought: `bought`](#to-mark-property-as-bought-bought)
     - [To mark property already sold: `sold`](#to-mark-property-already-sold-sold)
     - [Pin Contact: `pin`](#pin-contact-pin)
+  - [Additional Features](#additional-features)
+    - [Command history: Up and Down arrow keys](#command-history-up-and-down-arrow-keys)
+    - [Highlighting of command errors](#highlighting-of-command-errors)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -446,6 +449,56 @@ Format `unpin INDEX`
 
 Examples:
 * `unpin 1` moves the contact at index 1 back to its sorted position.
+
+## Additional Features
+
+### Command history: Up and Down arrow keys
+NUStates keeps a history of the commands you have entered. You can navigate through this history using the up and down arrow keys.
+
+- **Up Arrow Key**: Pressing the up arrow key will cycle through the previous commands you have entered, starting from the most recent one.
+- **Down Arrow Key**: Pressing the down arrow key will cycle forward through the command history, allowing you to revisit commands you have skipped over.
+
+This feature is particularly useful for quickly re-executing previous commands without having to retype them.
+
+Examples:
+1. After entering several commands, press the **up arrow key** to view the last command you entered.
+2. Continue pressing the **up arrow key** to cycle through older commands.
+3. If you go too far back, press the **down arrow key** to move forward in the command history.
+
+### Highlighting of command errors
+
+NUStates will highlight any specific errors in the command entered by the user. This feature helps users quickly identify and correct any mistakes in their commands.
+
+![highlight_error_feature](images/highlightErrorFeature.png)
+
+- **Unknown Command**: If the command entered is not recognized by NUStates, it will highlight the invalid command keyword and provide a message indicating that the command is unknown.
+- **Missing Preamble Value**: If required preamble value is invalid (e.g., non-positive values where positive numbers are expected), NUStates will highlight the invalid preamble value and provide a message indicating the expected format.
+- **Invalid Parameter Values**: If any parameter values are invalid (e.g., non-numeric values where numbers are expected), NUStates will highlight the invalid values and provide a message indicating the expected format.
+- **Invalid Command Format and Other Errors**: For incorrect command format and other errors, NUStates will not highlight any specific part of the command but will provide a message indicating the correct format.
+
+Examples:
+1. **Unknown Command**:
+  - Command entered: `ad n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+  - Error message: `Unknown command.`
+  - Highlight: The `ad` part is highlighted.
+
+2. **Invalid Preamble Value**:
+  - Command entered: `addBuy -22 ht/c pc/999111 un/10-01 bp/1000000`
+  - Error message: `Valid person index must be provided.`
+  - Highlight: The invalid `-22` part is highlighted.
+
+3. **Invalid Parameter Values**:
+  - Command entered: `add n/John Doe p/abc e/johnd@example.com a/John street, block 123, #01-01`
+  - Error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
+  - Highlight: The `p/abc` part is highlighted.
+
+4. **Invalid Command Format and Other Errors**:
+  - Command entered: `addBuy 1 pc/999111 un/10-01 bp/1000000` (missing `ht/c` parameter)
+  - Error message: `Invalid command format!
+    addBuy: Adds a property to the list of properties to buy for this specific person.
+    Parameters: INDEX (Must be a positive integer) ht/[HOUSING_TYPE] bp/[SELLING_PRICE] pc/[POSTAL_CODE] un/[UNIT_NUMBER] t/[TAG]...
+    Example: addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Extremely spacioust/Near MRT`
+  - Highlight: No specific part is highlighted.
 
 ### Saving the data
 

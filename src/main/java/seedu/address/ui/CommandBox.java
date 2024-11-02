@@ -1,5 +1,10 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,8 +14,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortIndividualCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.HousingType;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.PostalCode;
+import seedu.address.model.person.Price;
+import seedu.address.model.person.UnitNumber;
+import seedu.address.model.tag.Tag;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -55,7 +71,81 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+            highlightErrorLocation(e, commandText);
         }
+    }
+
+    /**
+     * Highlights the error location in the command box.
+     */
+    public void highlightErrorLocation(Exception e, String input) {
+        String commandText = input + " ";
+        String errorMessage = e.getMessage();
+        int errorIndexStart = 0;
+        int errorLength = 0;
+        switch (errorMessage) {
+        case HousingType.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("ht/");
+            break;
+        case Price.MESSAGE_CONSTRAINTS:
+            if (commandText.contains("sp/")) {
+                errorIndexStart = commandText.indexOf("sp/");
+            } else if (commandText.contains("bp/")) {
+                errorIndexStart = commandText.indexOf("bp/");
+            } else if (commandText.contains("ap/")) {
+                errorIndexStart = commandText.indexOf("ap/");
+            }
+            break;
+        case PostalCode.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("pc/");
+            break;
+        case UnitNumber.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("un/");
+            break;
+        case Email.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("e/");
+            break;
+        case Name.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("n/");
+            break;
+        case Address.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("a/");
+            break;
+        case Phone.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("p/");
+            break;
+        case Tag.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("t/");
+            break;
+        case MESSAGE_INVALID_PERSON_DISPLAYED_INDEX:
+            errorIndexStart = commandText.indexOf(" ") + 1;
+            break;
+        case MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX:
+            if ((commandText.contains("sold") && commandText.contains("ap/"))
+                    || (commandText.contains("bought") && commandText.contains("ap/"))) {
+                errorIndexStart = commandText.substring(0, commandText.trim().lastIndexOf(" "))
+                        .trim().lastIndexOf(" ") + 1;
+            } else {
+                errorIndexStart = commandText.trim().lastIndexOf(" ") + 1;
+            }
+            break;
+        case SortCommand.MESSAGE_AVAILABLE_FIELDS, SortIndividualCommand.MESSAGE_AVAILABLE_FIELDS:
+            errorIndexStart = commandText.indexOf("f/");
+            break;
+        case SortCommand.MESSAGE_INVALID_ORDER:
+            errorIndexStart = commandText.indexOf("o/");
+            break;
+        case MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS:
+            errorIndexStart = commandText.indexOf("findp") + 6;
+            break;
+        case MESSAGE_UNKNOWN_COMMAND:
+            errorIndexStart = 0;
+            break;
+        default:
+            errorIndexStart = commandText.length();
+        }
+        errorLength = commandText.substring(errorIndexStart).indexOf(" ");
+        commandTextField.selectRange(errorIndexStart, errorIndexStart + errorLength);
     }
 
     /**
