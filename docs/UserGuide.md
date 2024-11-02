@@ -41,7 +41,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
    * `help` : Opens the help menu detailing each command with an example format.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n\John Doe p\98765432 e\johnd@example.com a\John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `list` : Lists all contacts.
 
@@ -62,16 +62,16 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n\NAME`, `NAME` is a parameter which can be used as `add n\\John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n\NAME [t\TAG]` can be used as `n\John Doe t\friend` or as `n\John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t\TAG]…​` can be used as ` ` (i.e. 0 times), `t\friend`, `t\friend t\family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n\NAME p\PHONE_NUMBER`, `p\PHONE_NUMBER n\NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -92,7 +92,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [t\TAG]…​`
 
 <box type="tip" seamless>
 
@@ -100,8 +100,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n\John Doe p\98765432 e\johnd@example.com a\John street, block 123, #01-01`
+* `add n\Betsy Crowe t\friend e\betsycrowe@example.com a\Newgate Prison p\1234567 t\criminal`
 
 ### Listing all persons : `list`
 
@@ -113,7 +113,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [t\TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -123,8 +123,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p\91234567 e\johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n\Betsy Crower t\ ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -162,19 +162,19 @@ Examples:
 
 Filters the contact list by name and/or tags.
 
-Format: `filter [n/NAME] [t/TAG]…​`
+Format: `filter [n\NAME] [t\TAG]…​`
 
 * Filters the contact list by name and/or tags.
-* n/NAME specifies a name (or partial name) to filter by.
-* t/TAG specifies a tag to filter by. You can provide multiple tags.
-* If both n/NAME and t/TAG are provided, the command will display contacts matching both the name and tags.
+* n\NAME specifies a name (or partial name) to filter by.
+* t\TAG specifies a tag to filter by. You can provide multiple tags.
+* If both n\NAME and t\TAG are provided, the command will display contacts matching both the name and tags.
 * If no parameters are provided, the full list is displayed.
 
 Examples:
-* filter n/John filters and displays all contacts whose names contain "John".
-* filter t/client filters and displays all contacts tagged as "client".
-* filter n/John t/friend t/coworker filters and displays contacts whose name contains "John" and who are tagged as both "friend" and "coworker".
-* filter n/Jo n/Al filters and displays contacts whose name contains "Jo" or "Al" and tagged as "worth"
+* filter `n\John` filters and displays all contacts whose names contain "John".
+* filter `t\client` filters and displays all contacts tagged as "client".
+* filter `n\John t\friend t\coworker` filters and displays contacts whose name contains "John" and who are tagged as both "friend" and "coworker".
+* filter `n\Jo n\Al t\worth` filters and displays contacts whose name contains "Jo" or "Al" and tagged as "worth"
   ![result for 'filter n/Jo n/Al t/worth](images/filterJoAliWorth.png)
 
 <box type="tip" seamless>
@@ -189,15 +189,15 @@ Examples:
 ### Advanced filtering of your contacts: `advfilter`
 
 Filters contacts by tag values, with an operator.
-Format: `advfilter [t/TAG] [operator] [value]`
+Format: `advfilter [t\TAG] [operator] [value]`
 * Filters the contact list by tags values, comparing with the operator.
 * Available operators include: `=, !=, <, <=, >, >=`
 
 Examples:
-* `advfilter t/premium > 1000` would show all contacts that have the tag of premium, and a value of more than 1000 for that tag
-* `advfilter t/client != VIP` would show all contacts that have the tag of client, other than those with the value of VIP
-* `advfilter t/highPriority = Yes` would show all contacts that have the tag of highPriority and the value of Yes.
-* `advfilter t/neighbours >= 5` would show all contacts that have the tag of neighbours and a value of 5 or greater.
+* `advfilter t\premium > 1000` would show all contacts that have the tag of premium, and a value of more than 1000 for that tag
+* `advfilter t\client != VIP` would show all contacts that have the tag of client, other than those with the value of VIP
+* `advfilter t\highPriority = Yes` would show all contacts that have the tag of highPriority and the value of Yes.
+* `advfilter t\neighbours >= 5` would show all contacts that have the tag of neighbours and a value of 5 or greater.
   ![result for 'advfilter t/neighbours >= 5](images/advfilterEg.png)
 
 <box type="tip" seamless>
@@ -260,11 +260,12 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [t\TAG]…​` <br> e.g., `add n\James Ho p\22224444 e\jamesho@example.com a\123, Clementi Rd, 1234665 t\friend t\colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n\NAME] [p\PHONE_NUMBER] [e\EMAIL] [a\ADDRESS] [t\TAG]…​`<br> e.g.,`edit 2 n\James Lee e\jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Filter** | `filter [n/NAME] [t/TAG]…​`<br> e.g., `filter n/John t/client t/friend`
+**Filter** | `filter [n\NAME] [t\TAG]…​`<br> e.g., `filter n\John t\client t\friend`
+**Advanced Filter** | `advfilter [t\TAG] [operator] [value]…​`<br> e.g., `advfilter t\premium > 1000`

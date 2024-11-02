@@ -157,7 +157,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
+<!---
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -250,12 +250,74 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
+-->
 
-### \[Proposed\] Data archiving
+### Filter feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
 
+The filter mechanism is facilitated by `FilterCommand`. It allows users to filter the contact list based on names and/or tags. The feature is implemented using predicates that check for matches in both the contact names and tags.
 
+The filter feature implements the following operations:
+
+* `FilterCommand#execute()` — Applies the filter criteria to the address book's contact list
+* `FilterCommandParser#parse()` — Parses the user input into name and tag criteria
+* `Model#updateFilteredPersonList()` — Updates the displayed list based on the filter predicate
+
+Given below is an example usage scenario and how the filter mechanism behaves at each step.
+
+Step 1. The user launches the application. The contact list shows all contacts without any filters applied.
+
+Step 2. The user executes `filter n/John t/friend t/client` command to show only contacts named "John" who are tagged as both "friend" and "client". The filter mechanism works as follows:
+
+1. `FilterCommandParser` tokenizes the input and extracts:
+    * Names: ["John"]
+    * Tags: ["friend", "client"]
+
+2. A new `FilterCommand` is created with these criteria.
+
+3. The `execute()` method creates a predicate that:
+    * Checks if the contact's name contains "John" (case-insensitive)
+    * Verifies the contact has both the "friend" and "client" tags
+    * Only displays contacts meeting all criteria
+
+4. The filtered list is updated through `Model#updateFilteredPersonList()`
+
+Step 3. The user executes `filter t/work` to show only work contacts. This creates a new filter that:
+* Clears the previous name filter
+* Shows only contacts tagged as "work"
+
+Step 4. The user executes `list` to show all contacts again, removing any active filters.
+
+The following sequence diagram shows how the filter operation works through the `Logic` component:
+
+<puml src="diagrams/FilterSequenceDiagram.puml" alt="Filter Sequence Diagram" />
+
+The following activity diagram summarizes what happens when a user executes a filter command:
+
+<puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommand Activity Diagram" />
+
+#### Design Considerations
+
+##### Aspect: How filter matching is performed
+
+* **Alternative 1 (current choice)**: Matches name by containment and tags by exact match
+    * Pros: More flexible name matching allows partial matches
+    * Cons: May return unintended matches for short name queries
+
+* **Alternative 2**: Exact matching for both names and tags
+    * Pros: More precise results
+    * Cons: Users need to type exact names, which is less convenient
+
+##### Aspect: Handling multiple filter criteria
+
+* **Alternative 1 (current choice)**: AND operation between name and tags, AND between multiple tags
+    * Pros: Returns more focused results
+    * Cons: May return empty results if criteria are too strict
+
+* **Alternative 2**: OR operation between all criteria
+    * Pros: More likely to return results
+    * Cons: May return too many unrelated results
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
