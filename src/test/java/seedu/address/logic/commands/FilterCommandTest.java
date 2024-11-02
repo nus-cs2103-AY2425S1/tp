@@ -34,6 +34,8 @@ public class FilterCommandTest {
                     Arrays.asList(),
                     Arrays.asList(),
                     Arrays.asList("first"),
+                    Arrays.asList(),
+                    Arrays.asList(),
                     new HashSet<>()
                 );
         PersonMeetsCriteriaPredicate secondPredicate =
@@ -41,6 +43,8 @@ public class FilterCommandTest {
                     Arrays.asList(),
                     Arrays.asList(),
                     Arrays.asList("second"),
+                    Arrays.asList(),
+                    Arrays.asList(),
                     new HashSet<>()
                 );
 
@@ -88,6 +92,8 @@ public class FilterCommandTest {
                 Arrays.asList(),
                 Arrays.asList(),
                 Arrays.asList("address"),
+                Arrays.asList(),
+                Arrays.asList(),
                 new HashSet<>()
             );
         FilterCommand filterCommand = new FilterCommand(predicate);
@@ -105,11 +111,15 @@ public class FilterCommandTest {
                 Arrays.asList(),
                 Arrays.asList(),
                 Arrays.asList(),
+                Arrays.asList(),
+                Arrays.asList(),
                 new HashSet<>()
             ) : new PersonMeetsCriteriaPredicate(
                 Arrays.asList(),
                 Arrays.asList(),
                 Arrays.asList(address),
+                Arrays.asList(),
+                Arrays.asList(),
                 new HashSet<>()
             );
     }

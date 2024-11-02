@@ -220,4 +220,44 @@ public class ParserUtilTest {
 
         assertEquals(expectedCriteriaList, actualCriteriaList);
     }
+        @Test
+    public void parseAgeCriteria_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAgeCriteria(null));
+    }
+
+    @Test
+    public void parseAgeCriteria_emptyString_returnsEmptyList() throws Exception {
+        assertTrue(ParserUtil.parseAgeCriteria("").isEmpty());
+    }
+
+    @Test
+    public void parseAgeCriteria_validCriteria_returnsList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseAgeCriteria("30 >20 <40");
+        List<String> expectedCriteriaList = Arrays.asList("30", ">20", "<40");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parseAgeCriteria_criteriaWithSpaces_returnsTrimmedList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseAgeCriteria("  30  >20  <40  ");
+        List<String> expectedCriteriaList = Arrays.asList("30", ">20", "<40");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parseAgeCriteria_invalidCharacter_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAgeCriteria("30 >20 <40 abc"));
+    }
+
+    @Test
+    public void parseAgeCriteria_multipleInstancesOfSymbols_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAgeCriteria("30 >>20 <<40"));
+    }
+
+    @Test
+    public void parseAgeCriteria_symbolsNotAtStart_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAgeCriteria("30 2>0 4<0"));
+    }
 }
