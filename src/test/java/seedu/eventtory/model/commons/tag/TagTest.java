@@ -1,5 +1,8 @@
 package seedu.eventtory.model.commons.tag;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.eventtory.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +24,25 @@ public class TagTest {
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+    }
+
+    @Test
+    public void equals() {
+        Tag tag = new Tag("tag");
+        // same values -> returns true
+        assertTrue(tag.equals(new Tag("tag")));
+
+        // same object -> returns true
+        assertTrue(tag.equals(tag));
+
+        // null -> returns false
+        assertFalse(tag.equals(null));
+
+        // different type -> returns false
+        assertFalse(tag.equals(5));
+
+        // different tag -> returns false
+        assertFalse(tag.equals(new Tag("different")));
     }
 
 }
