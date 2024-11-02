@@ -146,7 +146,7 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 
 Examples:
 * `find n/john` returns `Johnny Tan` and `John Doe`<br>
-* `find n/harlot olive s/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`<br>
+* `find n/harlot olive ss/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`<br>
 * `find r/Admin r/President` returns `Bernice Yu` who holds both roles, but not `Alex Yeoh` who only holds the role `President`<br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
