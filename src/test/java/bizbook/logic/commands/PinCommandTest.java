@@ -20,10 +20,6 @@ import bizbook.model.ModelManager;
 import bizbook.model.UserPrefs;
 import bizbook.model.person.Person;
 
-
-/**
- * Contains integration tests (interaction with the Model) for {@code PinCommand}.
- */
 public class PinCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -65,12 +61,18 @@ public class PinCommandTest {
     public void equals() {
         PinCommand pinFirstCommand = new PinCommand(INDEX_FIRST_PERSON);
         PinCommand pinSecondCommand = new PinCommand(INDEX_SECOND_PERSON);
-        PinCommand duplicatepinFirstCommand = new PinCommand(INDEX_FIRST_PERSON);
 
+        // same object -> returns true
         assertTrue(pinFirstCommand.equals(pinFirstCommand));
+
+        // same values -> returns true
+        PinCommand duplicatepinFirstCommand = new PinCommand(INDEX_FIRST_PERSON);
         assertTrue(pinFirstCommand.equals(duplicatepinFirstCommand));
 
+        // null -> returns false
         assertFalse(pinFirstCommand.equals(null));
+
+        // different person -> returns false
         assertFalse(pinFirstCommand.equals(pinSecondCommand));
     }
 

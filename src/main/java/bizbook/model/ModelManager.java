@@ -131,6 +131,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getPinnedPersonList() {
+        return addressBook.getPinnedPersonList();
+    }
+
+    @Override
     public boolean isPinned(Person person) {
         requireNonNull(person);
         return addressBook.isPinned(person);

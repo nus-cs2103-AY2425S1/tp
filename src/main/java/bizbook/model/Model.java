@@ -92,6 +92,9 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /** Returns an unmodifiable view of the pinned person list */
+    ObservableList<Person> getPinnedPersonList();
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the pinned list.
      */

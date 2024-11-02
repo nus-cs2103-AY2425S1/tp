@@ -2,6 +2,7 @@ package bizbook.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bizbook.commons.util.ToStringBuilder;
@@ -57,6 +58,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
+        // Empty the pinned person list since we are reseting the addressbook
+        setPinnedPersons(new ArrayList<Person>());
         setPersons(newData.getPersonList());
     }
 
@@ -95,6 +98,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        if (isPinned(key)){
+            removePerson(key);
+        }
     }
 
     //=========== Pinned Person List Accessors ===============================================================
