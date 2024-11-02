@@ -231,7 +231,7 @@ The following activity diagram summarizes what happens when a user wants to trac
     * Cons: Might not be user-friendly as user would need to find out what is the 
     tuition rate charged and calculate how much tuition fee did the student owe.
 
-
+<puml src="diagrams/OweSequenceDiagram-Model.puml" width="500" />
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
