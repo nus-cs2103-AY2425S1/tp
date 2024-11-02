@@ -120,7 +120,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        // changed from .persons to .getPersonList() for correct overridden behavior implemented in VersionedAddressBook
+        return getPersonList().equals(otherAddressBook.getPersonList());
     }
 
     @Override

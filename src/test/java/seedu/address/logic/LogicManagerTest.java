@@ -27,6 +27,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -196,5 +197,25 @@ public class LogicManagerTest {
         ObservableList<HistoryCommand> list = model.getHistoryCommandList();
         assertEquals(new AddCommand(expectedPerson), list.get(0).getCommand());
         assertEquals(addCommand, list.get(0).getOriginalCommandText());
+    }
+
+    @Test
+    void execute_commitsAddressBook_success() {
+        // To keep the previousState AddressBook unmodified
+        ReadOnlyAddressBook previousState = new AddressBook(model.getAddressBook());
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + MODULE_ROLE_DESC;
+        try {
+            logic.execute(addCommand);
+        } catch (CommandException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        ReadOnlyAddressBook currentStatus = new AddressBook(model.getAddressBook());
+        AddressBook addressBookBeforeCommit = new AddressBook(model.getVersionedAddressBook(0));
+        AddressBook addressBookAfterCommit = new AddressBook(model.getVersionedAddressBook(1));
+        assertEquals(previousState, addressBookBeforeCommit);
+        assertEquals(currentStatus, addressBookAfterCommit);
     }
 }
