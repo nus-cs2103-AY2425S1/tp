@@ -336,7 +336,6 @@ Action     | Format, Examples
 **Help**   | `help`
 **Set a Volunteer's Hours** | `setHours INDEX [h/HOURS]`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
-**View Group**   | `viewGroup g/GROUP_NAME`
 **Delete Group** | `deleteGroup g/GROUP_NAME`
 **List Groups**  | `listGroups`
 **Get Emails**   | `email`
