@@ -171,7 +171,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedCampusConnect`. It extends `CampusConnect` with an undo/redo history, stored internally as an `histort` and `future`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedCampusConnect`. It extends `CampusConnect` with an undo/redo history, stored internally as an `history` and `future`. Additionally, it implements the following operations:
 
 * `VersionedCampusConnect#saveCurrentData()` — Saves the current address book state in its future.
 *  `VersionedCampusConnect#saveOldData()` — Saves the current address book state in its history.
@@ -207,7 +207,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 <box type="info" seamless>
 
-**Note:** If the `hisotyr` is empty, then there are no previous CampusConnect states to restore. If so, it will return an error to the user rather
+**Note:** If the `history` is empty, then there are no previous CampusConnect states to restore. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -226,7 +226,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoCampusConnect()`, which save current state into `history` and restores the CampusConnect to that state poped from the top of `future`.
+The `redo` command does the opposite — it calls `Model#redoCampusConnect()`, which save current state into `history` and restores the CampusConnect to that state popped from the top of `future`.
 
 <box type="info" seamless>
 
