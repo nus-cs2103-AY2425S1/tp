@@ -18,7 +18,8 @@ import seedu.address.model.person.Tag;
 import seedu.address.model.wedding.Wedding;
 
 /**
- * Deletes tags from an existing person in the address book.
+ * Represents a command to delete specified tags from an existing person in the address book.
+ * This command also removes the person as a participant from weddings corresponding to the deleted tags.
  */
 public class TagDeleteCommand extends Command {
 
@@ -26,11 +27,11 @@ public class TagDeleteCommand extends Command {
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Deletes the specified tag from the person identified "
             + "by their name.\n"
-            + "Also deletes them as participant from the wedding given by specified tag.";
+            + "Also deletes them as a participant from the wedding given by the specified tag.";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "\nParameters: "
-            + "n/NAME & NAME t/[TAG]\n"
+            + "n/NAME t/[TAG]\n"
             + "Example: " + COMMAND_WORD + " n/ Li Sirui "
             + "t/ Jane Lim & Tom Koh";
 
@@ -43,8 +44,10 @@ public class TagDeleteCommand extends Command {
     private final Set<Tag> tagsToDelete;
 
     /**
-     * @param name of the person in the person list to edit the tags
-     * @param tagsToDelete the set of tags to be deleted from the person
+     * Creates a TagDeleteCommand to delete the specified tags from the person with the input name.
+     *
+     * @param name         of the person in the person list to edit the tags.
+     * @param tagsToDelete the set of tags to be deleted from the person.
      */
     public TagDeleteCommand(Name name, Set<Tag> tagsToDelete) {
         requireAllNonNull(name, tagsToDelete);
@@ -65,7 +68,6 @@ public class TagDeleteCommand extends Command {
 
         Person personToEdit = matchingPersons.get(0);
 
-
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getJob(),
@@ -79,8 +81,9 @@ public class TagDeleteCommand extends Command {
     }
 
     /**
-     * Edits the original set of tags to remove the tags that need to be deleted
-     * @param ogTags the original Set of tags of the person
+     * Edits the original set of tags to remove the tags that need to be deleted.
+     *
+     * @param ogTags     the original Set of tags of the person
      * @param deleteTags the Set of tags to be deleted from the person
      * @return the edited Set of tags that no longer include the deleted tags
      */
@@ -106,29 +109,39 @@ public class TagDeleteCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message when
-     * the tags are removed
-     * {@code personToEdit}.
+     * Generates a message after deleting tags from a person.
+     * The message varies depending on whether the tags existed and were successfully deleted.
+     *
+     * @param personToEdit the original person before deletion.
+     * @param editedPerson the person after tags have been deleted.
+     * @param model        the model in which the command operates.
+     * @return the result message to display to the user.
      */
     private String generateDeleteMessage(Person personToEdit, Person editedPerson, Model model) {
         Set<Tag> tagsInBoth = new HashSet<>(personToEdit.getTags());
         Set<Tag> tagsInNeither = new HashSet<>(tagsToDelete);
+
         if (!personToEdit.getTags().containsAll(tagsToDelete)) {
             tagsInBoth.retainAll(tagsToDelete);
             tagsInNeither.removeAll(tagsInBoth);
+
             if (tagsInBoth.isEmpty()) {
                 return String.format(MESSAGE_TAG_DOESNT_EXIST, Messages.tagSetToString(tagsToDelete),
                         Messages.format(editedPerson));
             } else {
                 deletePersonInWedding(editedPerson, model, tagsInBoth);
+
                 String tagsNotExist = String.format(MESSAGE_TAG_DOESNT_EXIST + "\n",
                         Messages.tagSetToString(tagsInNeither), Messages.format(personToEdit));
+
                 String tagsExist = String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsInBoth),
                         Messages.format(editedPerson), Messages.format(editedPerson),
                         Messages.tagSetToString(tagsInBoth));
+
                 return tagsNotExist + tagsExist;
             }
         }
+
         deletePersonInWedding(editedPerson, model, tagsToDelete);
         return String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsToDelete),
                 Messages.format(editedPerson), Messages.format(editedPerson),
@@ -137,14 +150,16 @@ public class TagDeleteCommand extends Command {
 
     /**
      * Gets a list of weddings whose name matches that of the tags in the set.
-     * @param model current Model containing necessary wedding address book.
-     * @param tags Set of tags input by the user.
+     *
+     * @param model current Model containing the necessary wedding address book.
+     * @param tags  Set of tags input by the user.
      * @return List of weddings that match the tag.
      */
     private List<Wedding> getWeddingfromTags(Model model, Set<Tag> tags) {
         List<String> predicate = tags
                 .stream().map(Tag::getTagName).collect(Collectors.toList());
         List<Wedding> list = new ArrayList<>();
+
         for (Wedding wedding : model.getFilteredWeddingList()) {
             for (String tagName : predicate) {
                 if (wedding.getWeddingName().toString().equals(tagName)) {
@@ -152,14 +167,16 @@ public class TagDeleteCommand extends Command {
                 }
             }
         }
+
         return list;
     }
 
     /**
-     * Updates the rest the list of weddings with the editedPerson.
+     * Updates the remaining list of weddings with the editedPerson.
+     *
      * @param editedPerson Person whose new tags have been added to them.
      * @param personToEdit Person who has tags currently being added to them.
-     * @param model current Model containing necessary wedding address book.
+     * @param model        current Model containing necessary wedding address book.
      */
     private void updatePersonInWedding(Person editedPerson, Person personToEdit, Model model) {
         List<Wedding> weddingList = model.getFilteredWeddingList();
@@ -176,10 +193,11 @@ public class TagDeleteCommand extends Command {
     }
 
     /**
-     * Deletes the person whose tag(s) are being deleted from the set of participants in the wedding that matches tag.
+     * Removes the person from the participant list of weddings that correspond to the specified tag(s).
+     *
      * @param editedPerson Person whose specified tags have been deleted from.
-     * @param model current Model containing necessary wedding address book.
-     * @param editedTags Set of tags that exist as a wedding as well.
+     * @param model        current Model containing necessary wedding address book.
+     * @param editedTags   Set of tags that exist as a wedding as well.
      */
     private void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> editedTags) {
         List<Wedding> weddingList = getWeddingfromTags(model, editedTags);
