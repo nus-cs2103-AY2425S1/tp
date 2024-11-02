@@ -72,8 +72,10 @@ public class SearchPublicAddressCommand extends Command {
 
         if (publicAddressString.length() > 100) { //length of public address too long
             throw new CommandException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG);
-        } else if (!publicAddressString.matches("^[a-zA-Z0-9]*$")) { //public address contains invalid characters
+        } else if (!(publicAddressString.matches("^[a-zA-Z0-9]*$"))) {
             throw new CommandException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
+        } else if (publicAddressString.isEmpty()) {
+            throw new CommandException(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND);
         }
 
 
