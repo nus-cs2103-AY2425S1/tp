@@ -9,9 +9,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 
@@ -31,27 +29,6 @@ public class Lesson {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-    /**
-     * Maps various string representations of days (e.g., "monday", "mon") to their corresponding Day enum values.
-     * All keys are stored in lowercase.
-     */
-    private static final Map<String, Day> DAY_NAME_MAP = new HashMap<>();
-    static {
-        DAY_NAME_MAP.put("monday", Day.MONDAY);
-        DAY_NAME_MAP.put("mon", Day.MONDAY);
-        DAY_NAME_MAP.put("tuesday", Day.TUESDAY);
-        DAY_NAME_MAP.put("tue", Day.TUESDAY);
-        DAY_NAME_MAP.put("wednesday", Day.WEDNESDAY);
-        DAY_NAME_MAP.put("wed", Day.WEDNESDAY);
-        DAY_NAME_MAP.put("thursday", Day.THURSDAY);
-        DAY_NAME_MAP.put("thu", Day.THURSDAY);
-        DAY_NAME_MAP.put("friday", Day.FRIDAY);
-        DAY_NAME_MAP.put("fri", Day.FRIDAY);
-        DAY_NAME_MAP.put("saturday", Day.SATURDAY);
-        DAY_NAME_MAP.put("sat", Day.SATURDAY);
-        DAY_NAME_MAP.put("sunday", Day.SUNDAY);
-        DAY_NAME_MAP.put("sun", Day.SUNDAY);
-    }
     private final Day lessonDay;
     private final LocalTime startTime;
     private final LocalTime endTime;
@@ -69,16 +46,6 @@ public class Lesson {
         this.lessonDay = Day.convertDayToEnum(lessonDayTimeArr[0].toLowerCase());
         this.startTime = LocalTime.parse(timeArr[0], timeFormatter);
         this.endTime = LocalTime.parse(timeArr[1], timeFormatter);
-    }
-
-    /**
-     * Validates if the day provided is valid (i.e., part of the defined Days enum).
-     *
-     * @param day The day to check.
-     * @return true if the day is valid.
-     */
-    private static boolean isValidDay(String day) {
-        return DAY_NAME_MAP.containsKey(day.toLowerCase());
     }
 
     /**
@@ -126,7 +93,7 @@ public class Lesson {
         }
         String day = parts[0];
         String timeRange = parts[1];
-        return isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
+        return Day.isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
     }
 
     /**
