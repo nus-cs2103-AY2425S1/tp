@@ -115,10 +115,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         contacts.remove(key);
     }
 
-    /*
-    public int calculateContactCount() {
-        return contacts.size();
-    }*/
 
     //// util methods
 

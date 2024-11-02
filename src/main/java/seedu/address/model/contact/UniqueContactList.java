@@ -135,12 +135,6 @@ public class UniqueContactList implements Iterable<Contact> {
         return internalUnmodifiableList;
     }
 
-    /*
-    public ObservableList<Contact> asUnmodifiableObservableListAll() {
-        return internalUnmodifiableListAll;
-    }*/
-
-
     @Override
     public Iterator<Contact> iterator() {
         return internalList.iterator();
@@ -185,8 +179,4 @@ public class UniqueContactList implements Iterable<Contact> {
         return true;
     }
 
-    /*
-    public int size() {
-        return internalList.size();
-    }*/
 }

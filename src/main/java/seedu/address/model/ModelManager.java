@@ -110,17 +110,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteContact(Contact target) {
         addressBook.removeContact(target);
-        //updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        //updateAllContactList();
-        //addressBookSize--;
+        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
     }
 
     @Override
     public void addContact(Contact contact) {
         addressBook.addContact(contact);
-        //updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS); //not the one influencing number
-        //updateAllContactList(); // does influence the number
-        //addressBookSize++;
     }
 
     @Override
@@ -128,11 +123,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedContact);
         addressBook.setContact(target, editedContact);
     }
-
-    /*
-    public int getAddressBookSize() {
-        return this.addressBookSize;
-    }*/
 
     //=========== Filtered Contact List Accessors =============================================================
 
