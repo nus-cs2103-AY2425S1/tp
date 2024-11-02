@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -24,13 +24,13 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meet-up to the application. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_SUBJECT + "SUBJECT "
             + PREFIX_INFO + "INFO "
             + PREFIX_FROM + "YYYY-MM-DD HH:mm "
             + PREFIX_TO + "YYYY-MM-DD HH:mm "
             + "[" + PREFIX_ADDED_BUYER + "BUYER NAME]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Discuss work plans "
+            + PREFIX_SUBJECT + "Discuss work plans "
             + PREFIX_INFO + "Meet with Eswen to discuss the March Project "
             + PREFIX_FROM + "2024-02-03 14:00 "
             + PREFIX_TO + "2024-02-03 15:30 "

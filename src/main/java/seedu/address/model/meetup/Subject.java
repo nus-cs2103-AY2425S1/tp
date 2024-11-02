@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Buyer's name in the meetup list.
+ * Represents a Buyer's subject in the meetup list.
  * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
  */
 public class Subject {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Subjects should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -23,7 +23,7 @@ public class Subject {
     /**
      * Constructs a {@code Subject}.
      *
-     * @param meetUpSubject A valid meetup name.
+     * @param meetUpSubject A valid meetup subject.
      */
     public Subject(String meetUpSubject) {
         requireNonNull(meetUpSubject);
@@ -32,7 +32,7 @@ public class Subject {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid subject.
      */
     public static boolean isValidSubject(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -54,8 +54,8 @@ public class Subject {
             return false;
         }
 
-        Subject otherName = (Subject) other;
-        return meetUpFullSubject.equals(otherName.meetUpFullSubject);
+        Subject otherSubject = (Subject) other;
+        return meetUpFullSubject.equals(otherSubject.meetUpFullSubject);
     }
 
     @Override
