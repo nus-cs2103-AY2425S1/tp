@@ -3,7 +3,6 @@ package tuteez.logic.parser;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_FIELD_PREFIX;
-import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
 import static tuteez.logic.commands.CommandTestUtil.VALID_LESSON_MONDAY;
 import static tuteez.logic.commands.CommandTestUtil.VALID_LESSON_WEDNESDAY;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
@@ -47,13 +46,6 @@ public class AddLessonCommandParserTest {
         assertParseFailure(parser, " ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
     }
-
-//    @Test
-//    public void parse_missingPersonIndex_throwsParseException() {
-//        String userInput = PREFIX_LESSON + VALID_LESSON_MONDAY;
-//        assertParseFailure(parser, userInput,
-//                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PERSON_INDEX));
-//    }
 
     @Test
     public void parse_invalidPersonIndex_throwsParseException() {

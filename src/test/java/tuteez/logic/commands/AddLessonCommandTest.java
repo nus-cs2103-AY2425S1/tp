@@ -16,7 +16,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import tuteez.commons.core.index.Index;
-import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.AddressBook;
 import tuteez.model.Model;
 import tuteez.model.ModelManager;
