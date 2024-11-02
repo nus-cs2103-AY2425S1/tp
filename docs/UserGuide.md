@@ -116,38 +116,26 @@ Move the .jar file you downloaded into this folder.
 ### Step 4: Run the Application
 
 1. **Open a command terminal**
-    - On Windows, press `Windows Key + R`, type `cmd`, and press `Enter`.
-    - On macOS, press `Command + Space`, type `Terminal`, and press `Enter`.
-    - On Linux, open your **Terminal** application from the system menu.
+    - **Windows**: press `Windows Key + R`, type `cmd`, and press `Enter`.
+    - **macOS**: press `Command + Space`, type `Terminal`, and press `Enter`.
+    - **Linux**: open your **Terminal** application from the system menu.
+
 
 2. **Navigate your terminal to the folder where you saved the AgentAssist application:**
-    - To do this, use the `cd` command followed by the path to your folder.
-   >  ℹ️ **Tip:** Follow the guide below to navigate to your folder in the terminal:
-   >
-   > <details><summary><strong>Click here to learn how to navigate to your folder in terminal</strong></summary>
-   >
-   > - **Windows**: Use the command `cd <folder path>`.   
-       For example, if **AgentAssist** is stored in the `Downloads` folder:
-       >   ```bash
-    >   cd C:\Users\<YourUsername>\Downloads
-    >   ```
-   >
-   > - **macOS/Linux**: Use the command `cd <folder path>`.  
-       For example, if **AgentAssist** is stored in the `Downloads` folder:
-       >   ```bash
-    >   cd /Users/<YourUsername>/Downloads
-    >   ```
-   >
-   > </details>
+    - In the terminal, type: `cd <folder path>` and press **Enter**. (Replace <folder path> with the actual location of AgentAssist.)
+    - For example, if **AgentAssist** is stored in your **Downloads** folder:
+       - **Windows**: `cd C:\Users\<YourUsername>\Downloads`
+       - **macOS/Linux**: `cd /Users/<YourUsername>/Downloads`
 
-3. Run the application:
-    - Type the following command: **`java -jar agentassist.jar`** and press **Enter**.
-    - A window similar to the below image should appear in a few seconds. You will see a graphical user interface with sample contact information already added.<br>
+
+3. **Run the application:**
+    - In the terminal, type: `java -jar agentassist.jar` and press **Enter**.
+    - After a few seconds, a window similar to the below image should appear. This is the AgentAssist interface, with sample contact information already loaded for you to explore.<br>
       <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
 
 
 4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
-   You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity!
+   You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity.
 
 <div style="page-break-after: always;"></div>
 
@@ -334,9 +322,9 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 Each client's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
 
 **Command Format:**
-  ```
-  add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]
-  ```
+```
+add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]
+```
 * Mandatory Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`
 * Optional Fields: `t/`, `rn/`
 
@@ -401,25 +389,25 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 **Examples:**
 - Edit only 1 specific field:
-    ```
-    edit 12 a/ Ridge View Residential College
-    ```
-    ```
-    edit 12 t/ gold
-    ```
+  ```
+  edit 12 a/ Ridge View Residential College
+  ```
+  ```
+  edit 12 t/ gold
+  ```
 
 - Edit multiple fields at the same time:
-    ```
-    edit 12 p/ 99887766 e/ mrtan_newemail@ntu.sg j/ unemployed i/ 0 t/ reject
-    ```
+  ```
+  edit 12 p/ 99887766 e/ mrtan_newemail@ntu.sg j/ unemployed i/ 0 t/ reject
+  ```
 - Append new remark onto existing one:
-    ```
-    edit 12 ra/ Recently received Gordon E. Moore Award
-    ```
+  ```
+  edit 12 ra/ Recently received Gordon E. Moore Award
+  ```
 - Replace all remark(s) with a new remark:
-    ```
-    edit 69 rn/ Do not call, angry about calls 
-    ```
+  ```
+  edit 69 rn/ Do not call, angry about calls 
+  ```
 
 **What to Expect:**
 - **On Success:**
@@ -455,13 +443,13 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 **Examples:**
 - Remove a client with a specific index (e.g. at index 12):
-    ```
-    delete 12
-    ```
+  ```
+  delete 12
+  ```
   Confirmation prompt:
-    ```
-    This will permanently delete this contact.  Are you sure you want to execute this command? (y/n)
-    ```
+  ```
+  This will permanently delete this contact.  Are you sure you want to execute this command? (y/n)
+  ```
   
 **What to Expect:**
 - **On Success (after confirming with y/yes):**
@@ -631,9 +619,9 @@ view index
 
 **Examples:**
 - **View client no.1**
-    ```
-    view 1
-    ```
+  ```
+  view 1
+  ```
   This will open a split view showing detailed information for the client at index 1.
 
 **What to Expect:**
