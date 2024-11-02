@@ -37,13 +37,13 @@ import seedu.ddd.model.event.common.Event;
  */
 public class AddEventCommand extends AddCommand {
     public static final String COMMAND_DESCRIPTION = COMMAND_WORD + " " + FLAG_EVENT + " : adds an event";
-    public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " "
+    public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " " + FLAG_EVENT + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_DESC + "DESCRIPTION "
             + PREFIX_DATE + "DATE "
             + "[" + PREFIX_CLIENTS + "CLIENT_ID ...] "
             + "[" + PREFIX_VENDORS + "VENDOR_ID ...]";
-    public static final String USAGE_EXAMPLE = "example: " + COMMAND_WORD + " "
+    public static final String USAGE_EXAMPLE = "example: " + COMMAND_WORD + " " + FLAG_EVENT + " "
             + PREFIX_NAME + SAMPLE_EVENT_NAME + " "
             + PREFIX_DESC + SAMPLE_EVENT_DESCRIPTION + " "
             + PREFIX_DATE + SAMPLE_EVENT_DATE + " "
