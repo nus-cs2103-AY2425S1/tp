@@ -12,6 +12,9 @@ public enum AttendanceStatus {
 
     public static Comparator<AttendanceStatus> getComparator(boolean isAscendingOrder) {
         return (s1, s2) -> {
+            if (s1 == s2) {
+                return 0;
+            }
             if (s2 == NOT_TAKEN_PLACE) {
                 return -1;
             }
