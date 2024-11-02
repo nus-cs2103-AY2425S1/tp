@@ -11,6 +11,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.job.Job;
+import seedu.address.model.tag.Tag;
+
+import java.util.stream.Collectors;
 
 /**
  * Adds a job to the address book.
@@ -33,7 +36,9 @@ public class AddJobCommand extends AddCommand<Job> {
             + PREFIX_DESCRIPTION + "Looking for someone who brings a lot to the table "
             + PREFIX_REQUIREMENTS + "Sociable";
 
-    public static final String MESSAGE_SUCCESS = "Job added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Job added: %1$s at %2$s, with a monthly salary of %3$s\n"
+            + "Description: %4$s\n"
+            + "Requirements: %5$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the address book";
 
     /**
@@ -52,7 +57,20 @@ public class AddJobCommand extends AddCommand<Job> {
         }
 
         model.addJob(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+
+        String successMessage = String.format(MESSAGE_SUCCESS,
+                toAdd.getName().toString(),
+                toAdd.getCompany().toString(),
+                toAdd.getSalary().toString(),
+                toAdd.getDescription().toString(),
+                toAdd.getRequirements().isEmpty()
+                        ? "NIL"
+                        : toAdd.getRequirements()
+                        .stream()
+                        .map(tag -> tag.toString().substring(1, tag.toString().length() - 1))
+                        .collect(Collectors.joining(", "))
+        );
+        return new CommandResult(successMessage);
     }
 
     @Override
