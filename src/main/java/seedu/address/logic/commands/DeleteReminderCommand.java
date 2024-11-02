@@ -21,7 +21,7 @@ public class DeleteReminderCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified reminder.\n"
-            + "Parameters: NAME (must be the name of an existing client)\n"
+            + "Parameters: NAME (must be the name of an existing client and should not be blank)\n"
             + "Example: " + COMMAND_WORD + " John Doe";
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted reminder for %1$s";
