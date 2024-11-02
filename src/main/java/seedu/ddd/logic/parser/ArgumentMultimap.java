@@ -77,16 +77,17 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Throws a {@code ParseException} if more than 1 of the prefixes given in {@code prefixes} appears
+     * Throws a {@code ParseException} if more than 1 of the flags given in {@flags flags} appears
      * among the arguments.
      */
-    public void verifyNoExclusivePrefixesFor(Prefix... prefixes) throws ParseException {
-        int exclusivePrefixesCount = Stream.of(prefixes).distinct()
-                .reduce(0, (currentCount, prefix) -> currentCount + (argMultimap.containsKey(prefix) ? 1 : 0),
-                        Integer::sum);
+    public void verifyNoExclusiveFlagsFor(Prefix... flags) throws ParseException {
+        Prefix[] duplicatedFlags = Stream.of(flags)
+                .distinct()
+                .filter(argMultimap::containsKey)
+                .toArray(Prefix[]::new);
 
-        if (exclusivePrefixesCount > 1) {
-            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes());
+        if (duplicatedFlags.length > 1) {
+            throw new ParseException(Messages.getErrorMessageForExclusiveFlags(duplicatedFlags));
         }
     }
 }

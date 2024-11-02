@@ -211,7 +211,7 @@ public class ParserUtil {
     public static CommandFlag parseFlags(ArgumentMultimap argMultimap) throws ParseException {
 
         // Check if exactly one flag is present
-        argMultimap.verifyNoExclusivePrefixesFor(FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
+        argMultimap.verifyNoExclusiveFlagsFor(FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
 
         if (argMultimap.getValue(FLAG_CLIENT).isPresent()) {
             return CLIENT;
