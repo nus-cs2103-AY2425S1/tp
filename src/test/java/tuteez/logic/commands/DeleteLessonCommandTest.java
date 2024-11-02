@@ -99,6 +99,50 @@ public class DeleteLessonCommandTest {
     }
 
     @Test
+    public void execute_invalidLessonIndexUnfilteredList_throwsCommandException() {
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String[] lessons = {"monday 1000-1200"}; // Only one lesson
+        Person personWithLesson = new PersonBuilder(originalPerson).withLessons(lessons).build();
+        model.setPerson(originalPerson, personWithLesson);
+
+        // Try to delete lesson index 2 when only one lesson exists
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_PERSON,
+                Arrays.asList(Index.fromOneBased(2)));
+
+        assertCommandFailure(deleteLessonCommand, model,
+                String.format(DeleteLessonCommand.MESSAGE_INVALID_LESSON_INDEX, "2"));
+    }
+
+    @Test
+    public void execute_multipleInvalidLessonIndices_throwsCommandException() {
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String[] lessons = {"monday 1000-1200"}; // Only one lesson
+        Person personWithLesson = new PersonBuilder(originalPerson).withLessons(lessons).build();
+        model.setPerson(originalPerson, personWithLesson);
+
+        // Try to delete lesson indices 2 and 3 when only one lesson exists
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_PERSON,
+                Arrays.asList(Index.fromOneBased(2), Index.fromOneBased(3)));
+
+        assertCommandFailure(deleteLessonCommand, model,
+                String.format(DeleteLessonCommand.MESSAGE_INVALID_LESSON_INDEX, "2, 3"));
+    }
+
+    @Test
+    public void execute_noLessonsToDelete_throwsCommandException() {
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        // Person with no lessons
+        Person personWithoutLessons = new PersonBuilder(originalPerson).withLessons().build();
+        model.setPerson(originalPerson, personWithoutLessons);
+
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_PERSON,
+                Arrays.asList(INDEX_FIRST_LESSON));
+
+        assertCommandFailure(deleteLessonCommand, model,
+                String.format(DeleteLessonCommand.MESSAGE_INVALID_LESSON_INDEX, "1"));
+    }
+
+    @Test
     public void equals() {
         DeleteLessonCommand deleteLessonCommand1 = new DeleteLessonCommand(INDEX_FIRST_PERSON,
                 Arrays.asList(INDEX_FIRST_LESSON));

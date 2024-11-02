@@ -70,6 +70,35 @@ public class AddLessonCommandTest {
     }
 
     @Test
+    public void execute_internalLessonClash_throwsCommandException() {
+        List<Lesson> clashingLessons = Arrays.asList(
+                new Lesson("monday 1000-1200"),
+                new Lesson("monday 1100-1300") // Overlaps with first lesson
+        );
+
+        AddLessonCommand addLessonCommand = new AddLessonCommand(INDEX_FIRST_PERSON, clashingLessons);
+
+        assertCommandFailure(addLessonCommand, model,
+                AddLessonCommand.MESSAGE_NEW_LESSONS_CLASH + "\n" + formatLessonList(clashingLessons));
+    }
+
+    @Test
+    public void execute_multipleInternalLessonClashes_throwsCommandException() {
+        List<Lesson> clashingLessons = Arrays.asList(
+                new Lesson("monday 1000-1200"),
+                new Lesson("monday 1100-1300"), // Clashes with first
+                new Lesson("wednesday 1400-1600"),
+                new Lesson("wednesday 1500-1700") // Clashes with third
+        );
+
+        AddLessonCommand addLessonCommand = new AddLessonCommand(INDEX_FIRST_PERSON, clashingLessons);
+
+        assertCommandFailure(addLessonCommand, model,
+                AddLessonCommand.MESSAGE_NEW_LESSONS_CLASH + "\n" + formatLessonList(clashingLessons));
+    }
+
+
+    @Test
     public void equals() {
         List<Lesson> lessonsToAdd1 = Arrays.asList(new Lesson("Monday 1000-1200"), new Lesson("Wednesday 1400-1600"));
         List<Lesson> lessonsToAdd2 = Arrays.asList(new Lesson("Tuesday 1000-1200"), new Lesson("Thursday 1400-1600"));
