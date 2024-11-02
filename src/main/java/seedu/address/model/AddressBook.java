@@ -57,8 +57,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Returns the {@code statistics} tracking the current AddressBook.
+     */
+    public AddressBookStatistics getStatistics() {
+        return this.statistics;
+    }
+
+    /**
+     * Resets the {@code addressBookStatistics}.
      */
     public void resetStatistics() {
         this.statistics.reset();
@@ -69,8 +75,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        resetStatistics();
-        setPersons(newData.getPersonList());
+        List<Person> latestPersonList = newData.getPersonList();
+        setPersons(latestPersonList);
+        this.statistics.processPersonListData(latestPersonList);
     }
 
     //// person-level operations
