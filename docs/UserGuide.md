@@ -15,6 +15,7 @@ CareLink is a desktop address book application targeted towards independent Geri
     * [Listing all persons : list](#listing-all-persons--list)
     * [Editing a person : edit](#editing-a-person--edit)
     * [Locating persons by name, NRIC, role, or tags: find](#locating-persons-by-name-nric-role-or-tags-find)
+    * [Locating appointments by date-time range: findapp](#locating-appointments-by-date-time-range-findapp)
     * [Deleting a person : delete](#deleting-a-person--delete)
     * [Clearing all entries : clear](#clearing-all-entries--clear)
     * [Exiting the program : exit](#exiting-the-program--exit)
@@ -151,7 +152,7 @@ Examples:
 
 Finds persons based on the specified criteria using the provided prefixes.
 
-**Format**: `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`
+**Format**: `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]…​`
 
 - The search is case-insensitive. e.g., `n/alex` will match `Alex`.
 - The order of the prefixes and keywords does not matter. e.g., `n/Alex nric/S1234567D` is equivalent to `nric/S1234567D n/Alex`.
@@ -163,11 +164,38 @@ Finds persons based on the specified criteria using the provided prefixes.
 - `nric/NRIC`: Searches by Singapore National ID.
 - `role/ROLE`: Searches by role (e.g., `role/patient` or `role/caregiver`).
 - `t/TAG`: Searches by tag (e.g., `t/friend`, `t/family`).
+- `p/PHONE`: Searches by phone number.
+- `e/EMAIL`: Searches by email address.
+- `role/ROLE`: Searches by role (e.g., `role/patient` or `role/caregiver`).
 
 ### Examples:
 - `find n/John` returns `John`, `John Doe`.
 - `find n/Alex nric/S1234567D` returns persons whose name contains `Alex` or with NRIC `S1234567D`.
 - `find role/patient t/friend` returns all patients or persons with the tag `friend`.
+- `find role/caregiver` returns all caregivers.
+- `find p/1234567 e/johndoe@example.com` returns persons with phone number `1234567` or email address `johndoe@example.com`.
+
+![Find command example](images/findcommandexample.png)
+![Find command success](images/findcommandsucceed.png)
+
+### Locating appointments by date-time range: `findapp`
+
+Finds and lists appointment that falls within the specified date-time range. The command displays detailed information about the appointments such as the patient's name, phone, email, NRIC, caregivers, tags, and the appointment's start and end dates and times.
+
+**Format**: `findapp sdate/START_DATE start/START_TIME edate/END_DATE end/END_TIME​`
+
+- `sdate/01/01/2024` sets the search start date to January 1, 2024.
+- `start/10:00` sets the search start time to 10:00 AM.
+- `edate/30/10/2024` sets the search end date to October 30, 2024.
+- `end/12:00` sets the search end time to 12:00 PM.
+- `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` does not list an appointment that starts before 12:00 PM and ends after 12:00 PM on 30/10/2024.
+- `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` does not list an appointment that starts before 10:00 AM and ends after 10:00 PM on 01/01/2024.
+
+### Examples:
+- `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` finds and lists appointments that starts and ends within the specified date-time range.
+
+![Find Appointment command example](images/findappointment.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -237,5 +265,6 @@ _Details coming soon ..._
 | **Delete**      | `delete NRIC`<br> e.g., `delete S6483749D`                                                                                                                                   |
 | **Edit**        | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g.,`edit S1234567D n/James Lee e/jameslee@example.com`                                           |
 | **Find**        | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567D`
+| **Find Appointment**        | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g., `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`
 | **List**        | `list`
 | **Help**        | `help`
