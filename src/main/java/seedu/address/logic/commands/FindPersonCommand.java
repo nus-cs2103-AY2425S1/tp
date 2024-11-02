@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
 import java.util.function.Predicate;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -20,7 +20,7 @@ public class FindPersonCommand extends FindCommand<Person> {
             + "separated by spaces.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME\n"
-            + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " n/alice bob";
+            + "Example: " + COMMAND_WORD + " " + PERSON_ENTITY_STRING + " n/alice bob";
 
     public FindPersonCommand(Predicate<Person> predicate) {
         super(predicate);
