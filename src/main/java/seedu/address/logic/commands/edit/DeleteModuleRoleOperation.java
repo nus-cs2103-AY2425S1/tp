@@ -14,6 +14,8 @@ import seedu.address.model.person.RoleType;
  */
 public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
 
+    private static final String MESSAGE_MODULE_ROLE_PAIRS_DO_NOT_EXIST = "You wish to delete these module role pair(s) "
+            + "but they do not exist: %1$s";
     private final Logger logger = LogsCenter.getLogger(getClass());
     private final ModuleRoleMap moduleRoleMapToDelete;
 
@@ -33,15 +35,15 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
     @Override
     protected ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) throws CommandException {
         HashMap<ModuleCode, RoleType> roles = new HashMap<>(moduleRoleMapToEdit.getRoles());
-        ModuleRoleMap ret = new ModuleRoleMap(roles);
-        ModuleRoleMap failed = ret.removeAll(moduleRoleMapToDelete);
+        ModuleRoleMap result = new ModuleRoleMap(roles);
+        ModuleRoleMap failed = result.removeAll(moduleRoleMapToDelete);
         if (!failed.isEmpty()) {
-            throw new CommandException("You wish to delete these module role pair(s) but they do not exist: "
-                    + failed.getData());
+            throw new CommandException(String.format(MESSAGE_MODULE_ROLE_PAIRS_DO_NOT_EXIST,
+                    failed.getData(true)));
         }
         logger.info("Deleted module roles: " + moduleRoleMapToDelete.getData()
-                + "from: " + moduleRoleMapToEdit.getData());
-        return ret;
+                + "from: " + moduleRoleMapToEdit.getData(true));
+        return result;
     }
 
     @Override

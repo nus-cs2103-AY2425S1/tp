@@ -18,7 +18,9 @@ public class Messages {
     public static final String MESSAGE_EMPTY_FIND_KEYWORD = "Find keyword(s) cannot be empty!";
     public static final String MESSAGE_FIND_KEYWORD_CONTAINS_WHITESPACE =
             "Find keyword(s) cannot contain whitespace(s)!";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_MISSING_INDEX = "Error: Missing index for command! \nUsage:\n%1$s";
+    public static final String MESSAGE_PERSON_INDEX_OUT_OF_BOUND =
+            "Error: The person index %1$d provided is out of bounds!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d person(s) found with condition: %2$s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
@@ -85,6 +87,11 @@ public class Messages {
                     .map(Object::toString).collect(Collectors.joining(", "));
             builder.append(moduleRoleMapData);
         }
+
+        // Only display Description: if present
+        person.getDescription().filter(value -> !value.isBlank())
+            .ifPresent(description -> builder.append("; Description: ")
+            .append(person.getDescription().map(Object::toString).orElse("")));
 
         return builder.toString();
     }

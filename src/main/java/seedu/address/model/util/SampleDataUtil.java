@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
@@ -26,22 +27,28 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), getPhone("87438807"), getEmail("alexyeoh@example.com"),
                 getAddress("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), getMap("CS2040S", RoleType.PROFESSOR)),
+                getTagSet("friends"), getMap("CS2040S", RoleType.PROFESSOR),
+                getDescription("This is Alex Yeoh, he is CS2040S Professor.")),
             new Person(new Name("Bernice Yu"), getPhone("99272758"), getEmail("berniceyu@example.com"),
                 getAddress("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), getEmptyMap()),
+                getTagSet("colleagues", "friends"), getEmptyMap(),
+                getEmptyDescription()),
             new Person(new Name("Charlotte Oliveiro"), getPhone("93210283"), getEmail("charlotte@example.com"),
                 getAddress("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), getMultipleRolesMap()),
+                getTagSet("neighbours"), getMultipleRolesMap(),
+                getEmptyDescription()),
             new Person(new Name("David Li"), getPhone("91031282"), getEmail("lidavid@example.com"),
                 getAddress("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), getEmptyMap()),
+                getTagSet("family"), getEmptyMap(),
+                getEmptyDescription()),
             new Person(new Name("Irfan Ibrahim"), getPhone("92492021"), getEmail("irfan@example.com"),
                 getAddress("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), getMap("MA1522", RoleType.TUTOR)),
+                getTagSet("classmates"), getMap("MA1522", RoleType.TUTOR),
+                getEmptyDescription()),
             new Person(new Name("Roy Balakrishnan"), getPhone("92624417"), getEmail("royb@example.com"),
                 getAddress("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), getMultipleRolesMap())
+                getTagSet("colleagues"), getMultipleRolesMap(),
+                getEmptyDescription())
         };
     }
 
@@ -63,21 +70,21 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns an {@Code Optional<Address>} containing the address given.
+     * Returns an {@code Optional<Address>} containing the address given.
      */
     public static Optional<Address> getAddress(String string) {
         return Optional.of(new Address(string));
     }
 
     /**
-     * Returns an {@Code Optional<Phone>} containing the phone given.
+     * Returns an {@code Optional<Phone>} containing the phone given.
      */
     public static Optional<Phone> getPhone(String string) {
         return Optional.of(new Phone(string));
     }
 
     /**
-     * Returns an {@Code Optional<Email>} containing the address given.
+     * Returns an {@code Optional<Email>} containing the address given.
      */
     public static Optional<Email> getEmail(String string) {
         return Optional.of(new Email(string));
@@ -113,4 +120,17 @@ public class SampleDataUtil {
         return new ModuleRoleMap(hashMap);
     }
 
+    /**
+     * Returns an {@code Optional<Description>} containing the description given.
+     */
+    public static Optional<Description> getDescription(String description) {
+        return Optional.of(new Description(description));
+    }
+
+    /**
+     * Returns an empty description.
+     */
+    public static Optional<Description> getEmptyDescription() {
+        return Optional.empty();
+    }
 }

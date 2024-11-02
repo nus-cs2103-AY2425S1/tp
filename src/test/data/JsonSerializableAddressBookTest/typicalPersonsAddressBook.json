@@ -9,7 +9,8 @@
       "tags": [
         "friends"
       ],
-      "moduleRoleMap": {"CS1101S" : "STUDENT"}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"},
+      "description": "This is Alice Pauline."
     },
     {
       "name": "Benson Meier",
@@ -20,7 +21,8 @@
         "owesMoney",
         "friends"
       ],
-      "moduleRoleMap": {"CS1101S" :  "TUTOR", "CS2040S" :  "STUDENT"}
+      "moduleRoleMap": {"CS1101S" :  "TUTOR", "CS2040S" :  "STUDENT"},
+      "description": ""
     },
     {
       "name": "Carl Kurz",
@@ -28,7 +30,8 @@
       "email": "heinz@example.com",
       "address": "wall street",
       "tags": [],
-      "moduleRoleMap": {"CS1101S" : "STUDENT"}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"},
+      "description": ""
     },
     {
       "name": "Daniel Meier",
@@ -38,7 +41,8 @@
       "tags": [
         "friends"
       ],
-      "moduleRoleMap": {"CS1101S" : "STUDENT"}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"},
+      "description": "Hi! This is Daniel!"
     },
     {
       "name": "Elle Meyer",
@@ -46,7 +50,8 @@
       "email": "werner@example.com",
       "address": "michegan ave",
       "tags": [],
-      "moduleRoleMap": {"CS1101S" : "STUDENT"}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"},
+      "description": ""
     },
     {
       "name": "Fiona Kunz",
@@ -54,7 +59,8 @@
       "email": "lydia@example.com",
       "address": "little tokyo",
       "tags": [],
-      "moduleRoleMap": {"CS1101S" : "STUDENT"}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"},
+      "description": ""
     },
     {
       "name": "George Best",
@@ -62,7 +68,8 @@
       "email": "anna@example.com",
       "address": null,
       "tags": [],
-      "moduleRoleMap": {"CS1101S" : "STUDENT"}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"},
+      "description": ""
     }
   ]
 }

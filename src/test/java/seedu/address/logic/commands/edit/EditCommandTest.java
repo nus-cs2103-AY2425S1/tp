@@ -21,6 +21,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Objects;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -167,7 +169,8 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model,
+                String.format(Messages.MESSAGE_PERSON_INDEX_OUT_OF_BOUND, outOfBoundIndex.getOneBased()));
     }
 
     /**
@@ -184,7 +187,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model,
+                String.format(Messages.MESSAGE_PERSON_INDEX_OUT_OF_BOUND, outOfBoundIndex.getOneBased()));
     }
 
     @Test
@@ -231,18 +235,29 @@ public class EditCommandTest {
 
         Person editedPerson = new PersonBuilder().withName(VALID_NAME_BETTY).withPhone(VALID_PHONE_BETTY)
                 .withEmail(VALID_EMAIL_BETTY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withModuleRoleMap(new ModuleCode("MA2001"), RoleType.PROFESSOR).build();
+                .withTags(VALID_TAG_FRIEND).withModuleRoleMap(new ModuleCode("MA2001"), RoleType.PROFESSOR)
+                .withDescription("Bob has been edited to Betty").build();
 
         String expected = "Change(s) made: "
                 + "\nName: " + person.getName() + " -> " + editedPerson.getName()
-                + "\nPhone: " + person.getPhone() + " -> " + editedPerson.getPhone()
-                + "\nEmail: " + person.getEmail() + " -> " + editedPerson.getEmail()
-                + "\nAddress: " + person.getAddress().map(Object::toString).orElse("<no address>")
-                + " -> " + editedPerson.getAddress().map(Object::toString).orElse("<no address>")
+                + "\nPhone: " + person.getPhone().map(Object::toString).orElse("<no phone>") + " -> "
+                + editedPerson.getPhone().map(Object::toString).orElse("<no phone>")
+                + "\nEmail: " + person.getEmail().map(Object::toString).orElse("<no email>") + " -> "
+                + editedPerson.getEmail().map(Object::toString).orElse("<no email>")
+                + "\nAddress: " + person.getAddress().map(Object::toString).orElse("<no address>") + " -> "
+                + editedPerson.getAddress().map(Object::toString).orElse("<no address>")
                 + "\nTags: " + person.getTags() + " -> " + editedPerson.getTags()
                 + "\n" + EditModuleRoleOperation.getModuleCodeChangesDescription(
                         person.getModuleRoleMap(),
-                        editedPerson.getModuleRoleMap()) + "\n";
+                        editedPerson.getModuleRoleMap())
+                + "\nDescription: " + person.getDescription()
+                    .filter(value -> !value.isBlank())
+                    .map(Objects::toString)
+                    .orElse("<no description>")
+            + " -> " + editedPerson.getDescription()
+                    .filter(value -> !value.isBlank())
+                    .map(Objects::toString)
+                    .orElse("<no description>") + "\n";
 
         assertEquals(expected, EditCommand.getChangesDescription(person, editedPerson));
     }
