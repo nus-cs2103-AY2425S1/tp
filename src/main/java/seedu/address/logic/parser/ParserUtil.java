@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.DateUtil.DATE_FORMATTER;
 import static seedu.address.commons.util.DateUtil.DATE_TIME_FORMATTER;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +13,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ScheduleDateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Diagnosis;
@@ -32,6 +30,10 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String DATETIME_INVALID_INDEX = "Could not recognise the date and time provided, please use "
+            + "the format dd-MM-yyyy-HH-mm.";
+    public static final String DATE_INVALID_INDEX = "Could not recognise the date provided, please use the format "
+            + "dd-MM-yyyy.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -220,7 +222,7 @@ public class ParserUtil {
         try {
             return LocalDateTime.parse(trimmedDateTime, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date-time format: " + trimmedDateTime, e);
+            throw new ParseException(DATETIME_INVALID_INDEX + "\nInput causing the error: " + trimmedDateTime, e);
         }
     }
 
@@ -236,8 +238,7 @@ public class ParserUtil {
         try {
             return LocalDate.parse(trimmedDate, DATE_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ScheduleDateCommand.MESSAGE_USAGE), e);
+            throw new ParseException(DATE_INVALID_INDEX + "\nInput causing the error: " + trimmedDate, e);
         }
     }
 
