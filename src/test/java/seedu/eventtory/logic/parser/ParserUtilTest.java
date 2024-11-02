@@ -26,7 +26,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_DESCRIPTION = " ";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_DATE = "10 October 2024";
+    private static final String INVALID_DATE = "10 Octo 2024";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_EVENT_NAME = "Zoo Excursion";
