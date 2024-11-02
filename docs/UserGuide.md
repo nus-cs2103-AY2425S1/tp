@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # Client Grid User guide
@@ -154,8 +154,7 @@ Deletes the specified buyer from the client book of ClientGrid.
 Format: `deletebuyer p/PHONE_NUMBER`
 
 * Deletes the buyer with the specified `PHONE_NUMBER`.
-* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’.
-
+* The `PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
 
 Examples:
 * `deletebuyer p/83456789` deletes the buyer with phone number `83456789` from the client book.
@@ -276,8 +275,8 @@ Deletes a specified meeting from the meeting book of ClientGrid.
 Format: `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`
 
 * Deletes a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
-* The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
-* The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
+* The restrictions for the `MEETING_TITLE` and `MEETING_DATE` are identical to the restrictions for the `MEETING_TITLE` and `MEETING_DATE` specified in the `addmeeting` feature.
+
 
 Examples:
 * `deletemeeting mt/Meeting 1 d/01-01-2024` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
@@ -338,20 +337,20 @@ Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.
 
 ## Command Summary
 
-| Action                | Format, Examples                                                                               |
-|-----------------------|------------------------------------------------------------------------------------------------|
-| **Help**              | `help`                                                                                         |
-| **List**              | `list k/KEY`                                                                                   |
-| **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                                     |
-| **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                                 |
-| **Filter Clients**    | `filterclient n/NAME`                                                                          |
-| **Delete Buyer**      | `deletebuyer p/PHONE_NUMBER`                                                                   |
-| **Delete Seller**     | `deleteseller p/PHONE_NUMBER`                                                                  |
-| **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                                   |
-| **Filter Properties** | `filterproperty t/TYPE gte/MATCHING_PRICE lte/MATCHING_PRICE`                                  |
-| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                                   |
+| Action                | Format, Examples                                                                                |
+|-----------------------|-------------------------------------------------------------------------------------------------|
+| **Help**              | `help`                                                                                          |
+| **List**              | `list k/KEY`                                                                                    |
+| **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                                      |
+| **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                                  |
+| **Filter Clients**    | `filterclient n/NAME`                                                                           |
+| **Delete Buyer**      | `deletebuyer p/PHONE_NUMBER`                                                                    |
+| **Delete Seller**     | `deleteseller p/PHONE_NUMBER`                                                                   |
+| **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                                    |
+| **Filter Properties** | `filterproperty t/TYPE gte/MATCHING_PRICE lte/MATCHING_PRICE`                                   |
+| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                                    |
 | **Add Meeting**       | `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTALCODE` |
-| **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                                |
-| **Exit**              | `exit`                                                                                         |
+| **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                                 |
+| **Exit**              | `exit`                                                                                          |
 
 
