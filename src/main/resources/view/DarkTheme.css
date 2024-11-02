@@ -129,14 +129,24 @@
 }
 
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: #F3EDF7;
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-radius: 10 10 0 0;
+    -fx-border-color: derive(#757575, 90%);
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: #5B4A82;
 }
+#resultDisplay {
+    -fx-background-color: #F3EDF7;
+    -fx-padding: 3;
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-radius: 10 10 0 0;
+    -fx-border-width: 0;
+}
 
-.result-display .label {
-    -fx-text-fill: black !important;
+#resultDisplay .content {
+    -fx-background-color: #F3EDF7;
 }
 
 .status-bar .label {
@@ -308,13 +318,6 @@
 
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
-}
-
-#resultDisplay .content {
-    -fx-background-color: #F2EDF6;
-    -fx-background-radius: 10 10 0 0;
-    -fx-border-radius: 10 10 0 0;
-    -fx-border-color: derive(#757575, 90%);
 }
 
 #tags {
