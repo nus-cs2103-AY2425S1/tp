@@ -181,6 +181,9 @@ The app comes with a pagination at the bottom of the list. It supports navigatio
 the next or previous page. Each page contains a maximum of **10** items. The pagination supports a maximum of **10** pages
 being displayed at one time, to access more pages, one can go to the last page and clicks on `NEXT` page button to access other pages.
 
+Alternatively, users can make use of left and right arrow keys on the keyboard to navigate to the previous and next page. To do this, users need to make sure 
+that they have at least one click on the pagination before using keyboard to make sure that the app is focusing on the pagination component.
+
 Pagination UI:
 ![ui of pagination](images/pagination_ui.png)
 
