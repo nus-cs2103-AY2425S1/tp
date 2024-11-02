@@ -73,8 +73,7 @@ public class DeleteLogCommand extends Command {
         ArrayList<Log> updatedLogs = new ArrayList<>(personToDeleteLog.getLogs());
         AppointmentDate appointmentDate = personToDeleteLog.getAppointmentDate();
 
-        this.deletedLog = updatedLogs.get(deletedLogIndex.getZeroBased());
-        updatedLogs.remove(deletedLogIndex.getZeroBased());
+        this.deletedLog = updatedLogs.remove(deletedLogIndex.getZeroBased());
 
         return new Person(name, phone, email, address, tags, updatedLogs, appointmentDate);
     }
@@ -120,13 +119,15 @@ public class DeleteLogCommand extends Command {
         DeleteLogCommand otherDeleteLogCommand = (DeleteLogCommand) other;
 
         return personIndex.equals(otherDeleteLogCommand.personIndex)
-                && deletedLog.equals(otherDeleteLogCommand.deletedLog);
+                && logIndex.equals(otherDeleteLogCommand.logIndex)
+                && (requireConfirmation // if confirmation not completed, deletedLog is null
+                || deletedLog.equals(otherDeleteLogCommand.deletedLog));
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("log", deletedLog)
+                .add("toDeleteLog", deletedLog)
                 .toString();
     }
 }

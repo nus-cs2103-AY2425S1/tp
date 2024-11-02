@@ -6,7 +6,11 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
-    "logs"  :[ ],
+    "logs"  :[
+      {
+        "date":"2021-10-10T03:00:00.000+0000",
+        "remark":"Meeting 1"
+      } ],
     "appointmentDate": ""
   }, {
     "name" : "Benson Meier",
@@ -14,7 +18,16 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "logs"  :[ ],
+    "logs"  :[
+      {
+            "date":"2021-10-10T03:00:00.000+0000",
+            "remark":"Meeting 1"
+      },
+        {
+            "date":"2022-10-10T03:00:00.000+0000",
+            "remark":"Follow up"
+        }
+    ],
     "appointmentDate": ""
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +35,16 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "logs"  :[ ],
+    "logs"  :[
+      {
+        "date":"2021-10-10T03:00:00.000+0000",
+        "remark":"Meeting 1"
+      },
+      {
+        "date":"2022-10-10T03:00:00.000+0000",
+        "remark":"Follow up"
+      }
+    ],
     "appointmentDate": ""
   }, {
     "name" : "Daniel Meier",
@@ -30,7 +52,16 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ],
-    "logs"  :[ ],
+    "logs"  :[
+      {
+        "date":"2021-10-10T03:00:00.000+0000",
+        "remark":"Meeting 1"
+      },
+      {
+        "date":"2022-10-10T03:00:00.000+0000",
+        "remark":"Follow up"
+      }
+    ],
     "appointmentDate": ""
   }, {
     "name" : "Elle Meyer",

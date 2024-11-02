@@ -23,6 +23,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_LOG = " ";
 
     private static final String VALID_NAME = TypicalPersons.BENSON.getName().toString();
     private static final String VALID_PHONE = TypicalPersons.BENSON.getPhone().toString();
@@ -118,6 +119,16 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         invalidTags, VALID_LOGS, VALID_APPOINTMENT_DATE);
+        Assert.assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidLogs_throwsIllegalValueException() {
+        ArrayList<JsonAdaptedLog> invalidLogs = new ArrayList<>(VALID_LOGS);
+        invalidLogs.add(new JsonAdaptedLog(INVALID_LOG));
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_TAGS, invalidLogs, VALID_APPOINTMENT_DATE);
         Assert.assertThrows(IllegalValueException.class, person::toModelType);
     }
 

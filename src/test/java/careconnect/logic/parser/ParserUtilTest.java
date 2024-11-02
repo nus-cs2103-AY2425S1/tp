@@ -6,8 +6,11 @@ import static careconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -192,5 +195,54 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseLogDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        Date expectedDate = Date.from(
+                LocalDateTime.of(2020, 12, 31, 12, 0)
+                        .atZone(ZoneId.systemDefault()).toInstant());
+        assertEquals(expectedDate, ParserUtil.parseLogDate("2020-12-31 12:00"));
+    }
+
+    @Test
+    public void parseLogDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        Date expectedDate = Date.from(
+                LocalDateTime.of(2020, 12, 31, 12, 0)
+                        .atZone(ZoneId.systemDefault()).toInstant());
+        assertEquals(expectedDate, ParserUtil.parseLogDate("  2020-12-31 12:00  "));
+    }
+
+    @Test
+    public void parseLogDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLogDate(null));
+    }
+
+    @Test
+    public void parseLogDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLogDate("2020-13-32"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLogDate("2020-12-32 2:00pm"));
+    }
+
+    @Test
+    public void parseLogRemark_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLogRemark(null));
+    }
+
+    @Test
+    public void parseLogRemark_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLogRemark(""));
+    }
+
+    @Test
+    public void parseLogRemark_validValueWithoutWhitespace_returnsTrimmedRemark() throws Exception {
+        String expectedRemark = "This is a valid remark";
+        assertEquals(expectedRemark, ParserUtil.parseLogRemark("This is a valid remark"));
+    }
+
+    @Test
+    public void parseLogRemark_validValueWithWhitespace_returnsTrimmedRemark() throws Exception {
+        String expectedRemark = "This is a valid remark";
+        assertEquals(expectedRemark, ParserUtil.parseLogRemark("  This is a valid remark  "));
     }
 }

@@ -30,6 +30,15 @@ class JsonAdaptedLog {
 
     /**
      * Converts a given {@code Log} into this class for Jackson use.
+     * Uses today's date as the date.
+     */
+    public JsonAdaptedLog(String remark) {
+        date = new Date();
+        this.remark = remark;
+    }
+
+    /**
+     * Converts a given {@code Log} into this class for Jackson use.
      */
     public JsonAdaptedLog(Log source) {
         date = source.getDate();
