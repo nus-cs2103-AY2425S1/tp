@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -214,6 +215,11 @@ public class AddCommandTest {
         @Override
         public ObservableList<Person> getOnlyClientList() {
             return null;
+        }
+
+        @Override
+        public Index getFirstArchivedIndex() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

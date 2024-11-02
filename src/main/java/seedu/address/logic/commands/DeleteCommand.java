@@ -28,14 +28,14 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the contacts identified by the indexes found in the displayed person list.\n"
+            + "Parameters: INDEXES (must be positive integers)\n"
+            + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_USAGE_DELIVERY = COMMAND_WORD
-            + ": Deletes the delivery identified by the index number used in the displayed delivery list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the deliveries identified by the indexes found in the displayed delivery list.\n"
+            + "Parameters: INDEXES (must be positive integers)\n"
+            + "Example: " + COMMAND_WORD + " 1 2";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     public static final String MESSAGE_DELETE_DELIVERY_SUCCESS = "Deleted Delivery for %1$s: %2$s";
@@ -108,12 +108,22 @@ public class DeleteCommand extends Command {
     private void validateIndexes(int listSize, List<Index> indexList, boolean isPersonIndex) throws CommandException {
         boolean duplicate = hasDuplicates(indexList);
         for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= listSize || duplicate) {
+            if (targetIndex.getZeroBased() >= listSize) {
                 if (isPersonIndex) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                    throw new CommandException(
+                            String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                                    targetIndex.getOneBased()));
                 } else {
-                    throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+                    throw new CommandException(
+                            String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                                    targetIndex.getOneBased()));
                 }
+            }
+
+            if (duplicate) {
+                throw new CommandException(
+                        String.format(Messages.MESSAGE_INVALID_DUPLICATED_INDEX,
+                                targetIndex.getOneBased()));
             }
         }
     }

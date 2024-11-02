@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -23,6 +24,7 @@ public class InspectCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_INSPECT_SUCCESS = "Inspected person: %1$s";
+    public static final String MESSAGE_INSPECT_INVALID = "Inspected person: %1$s";
     private final Index index;
 
     /**
@@ -39,7 +41,16 @@ public class InspectCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased()));
+        }
+
+        if (index.getZeroBased() >= model.getFirstArchivedIndex().getZeroBased()) {
+            throw new CommandException(Messages.MESSAGE_ARCHIVED_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (AddressBookParser.getInspect()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_WINDOW);
         }
 
         Person personToInspect = lastShownList.get(index.getZeroBased());

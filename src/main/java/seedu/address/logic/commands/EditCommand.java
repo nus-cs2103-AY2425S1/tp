@@ -27,7 +27,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
-import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
@@ -97,6 +96,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery %d: %2$s";
+    public static final String MESSAGE_EMPTY_ITEMS = "At least one item has to be entered";
 
 
     private final Index index;
@@ -125,7 +125,7 @@ public class EditCommand extends Command {
         requireNonNull(editDeliveryDescriptor);
 
         this.index = index;
-        this.editDeliveryDescriptor = editDeliveryDescriptor;
+        this.editDeliveryDescriptor = new EditDeliveryDescriptor(editDeliveryDescriptor);
         this.editPersonDescriptor = null;
     }
 
@@ -150,7 +150,12 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased()));
+        }
+
+        if (index.getZeroBased() >= model.getFirstArchivedIndex().getZeroBased()) {
+            throw new CommandException(Messages.MESSAGE_ARCHIVED_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -177,13 +182,19 @@ public class EditCommand extends Command {
         //Currently no filtered list for delivery
 
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
-        if (index.getZeroBased() >= deliveryList.size()
-                || index.getZeroBased() >= inspectedPerson.getFirstArchivedIndex().getZeroBased()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+        if (index.getZeroBased() >= deliveryList.size()) {
+            throw new CommandException(
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased())
+            );
+        }
+
+        if (index.getZeroBased() >= inspectedPerson.getFirstArchivedIndex().getZeroBased()) {
+            throw new CommandException(Messages.MESSAGE_ARCHIVED_DELIVERY_DISPLAYED_INDEX);
         }
 
         Delivery deliveryToEdit = deliveryList.get(index.getZeroBased());
         assert editDeliveryDescriptor != null;
+
         Delivery editedDelivery = createEditedDelivery(deliveryToEdit, editDeliveryDescriptor);
         inspectedPerson.setDelivery(deliveryToEdit, editedDelivery);
         return new CommandResult(
@@ -197,6 +208,8 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
+        seedu.address.model.person.Archive archive = personToEdit.getArchive();
+
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -204,7 +217,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedRole, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedRole, updatedAddress, updatedTags, archive);
     }
 
     /**
@@ -214,7 +227,7 @@ public class EditCommand extends Command {
     private static Delivery createEditedDelivery(Delivery toEdit, EditDeliveryDescriptor descriptor) {
         assert toEdit != null;
 
-        Archive archive = toEdit.getArchive();
+        seedu.address.model.delivery.Archive archive = toEdit.getArchive();
 
         Set<ItemName> updatedItems = descriptor.getItems().orElse(toEdit.getItems());
         Address updatedAddress = descriptor.getAddress().orElse(toEdit.getAddress());
@@ -415,7 +428,8 @@ public class EditCommand extends Command {
         }
 
         public Optional<Set<ItemName>> getItems() {
-            return (items != null) ? Optional.of(Collections.unmodifiableSet(items)) : Optional.empty();
+            return (items != null && !items.isEmpty())
+                    ? Optional.of(Collections.unmodifiableSet(items)) : Optional.empty();
         }
 
         public void setAddress(Address address) {

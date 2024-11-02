@@ -19,6 +19,10 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
+        if (AddressBookParser.getInspect()) {
+            throw new ParseException(FindCommand.MESSAGE_IN_INSPECT);
+        }
+
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
