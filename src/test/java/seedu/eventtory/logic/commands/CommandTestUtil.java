@@ -20,8 +20,8 @@ import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
 import seedu.eventtory.model.id.UniqueId;
-import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 import seedu.eventtory.testutil.EditEventDescriptorBuilder;
 import seedu.eventtory.testutil.EditVendorDescriptorBuilder;
 
