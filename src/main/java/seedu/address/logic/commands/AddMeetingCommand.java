@@ -71,6 +71,8 @@ public class AddMeetingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model, "Model cannot be null");
         model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
+        model.updateFilteredPropertyList(Model.PREDICATE_SHOW_ALL_PROPERTY);
+        model.updateFilteredMeetingList(Model.PREDICATE_SHOW_ALL_MEETINGS);
 
         logger.log(Level.INFO, "Executing AddMeetingCommand for meeting: {0}", toAdd);
 
