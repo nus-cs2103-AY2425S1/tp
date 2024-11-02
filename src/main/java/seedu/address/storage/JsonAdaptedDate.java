@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.DateCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
 import seedu.address.model.tag.Tag;
@@ -50,31 +51,12 @@ class JsonAdaptedDate {
      * @throws IllegalValueException if the date format is invalid.
      */
     public Date toModelType() throws IllegalValueException {
-        if (dateString == null || dateString.isEmpty()) {
+        if (dateString == null || dateString.isEmpty()) { //can add the logic for cancel date here
             return new Date(LocalDateTime.MIN); // Treat as no appointment
         }
-
-        String[] dateParts = getDateParts();
-
-        int day = Integer.parseInt(dateParts[0]);
-        int month = Integer.parseInt(dateParts[1]);
-        int year = Integer.parseInt(dateParts[2]);
-
-        // Check month-day combinations, including leap year validation
-        if (month == 2) {
-            if (day == 29 && !Year.of(year).isLeap()) {
-                throw new ParseException("Invalid date: " + Month.of(month) + " "
-                        + day + " is only valid in leap years.");
-            } else if (day > 29) {
-                throw new ParseException("Invalid date: " + Month.of(month) + " cannot have more than 29 days.");
-            }
-        } else if (month == 4 || month == 6 || month == 9 || month == 11) {
-            if (day > 30) {
-                throw new ParseException("Invalid date: " + Month.of(month) + " cannot have more than 30 days.");
-            }
+        if (!Date.isValidDate(dateString)) {
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-
-
         return new Date(LocalDateTime.parse(dateString, DATE_FORMATTER));
     }
 

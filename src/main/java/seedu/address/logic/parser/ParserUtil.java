@@ -7,10 +7,16 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.Month;
+import java.time.Year;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -119,5 +125,16 @@ public class ParserUtil {
             throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
         }
         return new Allergy(trimmedAllergy);
+    }
+
+    public static LocalDateTime parseDateString(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        return LocalDateTime.parse(date,FORMATTER);
+
     }
 }
