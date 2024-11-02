@@ -76,7 +76,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getFilterGoodsFilePath() {
-        return goodsFilePath;
+        return filterGoodsFilePath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {

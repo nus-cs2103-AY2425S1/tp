@@ -49,7 +49,7 @@ public class CsvGoodsStorage implements GoodsStorage {
 
     @Override
     public Path getExportGoodsFilePath() {
-        return null;
+        return exportFilePath;
     }
 
     @Override
