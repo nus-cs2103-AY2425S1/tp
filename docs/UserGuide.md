@@ -175,11 +175,11 @@ Format: `edit Id [n/Name] [p/Phone] [e/Email] [a/Address] [t/tag]…​`
 * A **notifying message** will be output if there is failure in editing person in MedDict database in address book.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com`
+*  `edit 1 p/91234567 e/johndoe@example.com` <br>
    Edited Person: John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
 *  `edit 2 n/Betsy Crower`
    At least one field to edit must be provided.
-* `edit 1 p/91234567 e/johndoe@example.com`
+* `edit 1 p/91234567 e/johndoe@example.com` <br>
   This person already exists in the address book.
 
 ### Getting id of doctor or patient by name: `getId`
@@ -197,9 +197,9 @@ Format: `getId [Keyword]`
 * A **notifying message** will be output if there is failure in retrieving id from MedDict database in address book.
 * 
 Examples:
-* `getId john`
+* `getId john` <br>
   The id of the person that you are finding is: 00
-* `getId john`
+* `getId john` <br>
   Invalid name entered! Check the name that you want to search id for! Key in 'list' to view all patients
 
 
