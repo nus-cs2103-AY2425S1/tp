@@ -19,8 +19,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_TOTAL_GUEST = "There %s %d guest%s. (%d pending, %d coming, %d not coming)\n";
-    public static final String MESSAGE_TOTAL_VENDOR = "There %s %d vendor%s.";
+    public static final String MESSAGE_TOTAL_GUEST = "Number of guests: %d (%d pending, %d coming, %d not coming)\n";
+    public static final String MESSAGE_TOTAL_VENDOR = "Number of vendors: %d";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -94,21 +94,17 @@ public class Messages {
     }
 
     public static String getSuccessMessageWithStats(String commandSuccess, int[] guestCounts, int vendorCount) {
+        assert guestCounts.length == 4;
+
         int guestCount = guestCounts[0];
         int guestsPending = guestCounts[1];
         int guestsComing = guestCounts[2];
         int guestsNotComing = guestCounts[3];
 
         String guestMessage = String.format(MESSAGE_TOTAL_GUEST,
-                guestCount == 1 ? "is" : "are",
-                guestCount,
-                guestCount == 1 ? "" : "s",
-                guestsPending, guestsComing, guestsNotComing);
+                guestCount, guestsPending, guestsComing, guestsNotComing);
 
-        String vendorMessage = String.format(MESSAGE_TOTAL_VENDOR,
-                vendorCount == 1 ? "is" : "are",
-                vendorCount,
-                vendorCount == 1 ? "" : "s");
+        String vendorMessage = String.format(MESSAGE_TOTAL_VENDOR, vendorCount);
         return commandSuccess + guestMessage + vendorMessage;
     }
 }

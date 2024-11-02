@@ -18,9 +18,8 @@ import seedu.address.model.UserPrefs;
 public class ListCommandTest {
     private Model model;
     private Model expectedModel;
-    private String guestMessage = "There are 7 guests.\n";
-    private String vendorMessage = "There are 0 vendors.";
-
+    private String guestMessage = "Number of guests: 7 (7 pending, 0 coming, 0 not coming)\n";
+    private String vendorMessage = "Number of vendors: 0";
 
     @BeforeEach
     public void setUp() {
@@ -30,14 +29,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS + guestMessage
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_LIST_SUCCESS + guestMessage
                 + vendorMessage, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS + guestMessage
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_LIST_SUCCESS + guestMessage
                 + vendorMessage, expectedModel);
     }
 }

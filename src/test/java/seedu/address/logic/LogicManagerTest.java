@@ -69,10 +69,10 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        String guestMessage = "There are 0 guests.\n";
-        String vendorMessage = "There are 0 vendors.";
+        String guestMessage = "Number of guests: 0 (0 pending, 0 coming, 0 not coming)\n";
+        String vendorMessage = "Number of vendors: 0";
 
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS + guestMessage
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_LIST_SUCCESS + guestMessage
                 + vendorMessage, model);
     }
 
