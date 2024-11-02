@@ -4,7 +4,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.AddTagCommand.MESSAGE_NOT_ADD;
 import static seedu.address.logic.commands.AddTagCommand.MESSAGE_USAGE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC_NO_SPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
