@@ -119,17 +119,30 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public static String getAllCommands() {
         return "Here are the list of commands available:\n"
+                + "\n"
+                + "Patient-related commands:\n"
                 + "1. add\n"
                 + "2. delete\n"
-                + "3. addtask\n"
-                + "4. deletetask\n"
-                + "5. emergency\n"
+                + "3. edit\n"
+                + "4. emergency\n"
+                + "5. delemergency\n"
                 + "6. priority\n"
-                + "7. list\n"
-                + "8. help\n"
-                + "9. exit\n"
-                + "10. find\n"
-                + "11. clear\n";
+                + "7. deletelevel\n"
+                + "8. list\n"
+                + "9. find\n"
+                + "10. clear\n"
+                + "\n"
+                + "Task-related commands\n"
+                + "1. addtask\n"
+                + "2. deletetask\n"
+                + "3. findtask\n"
+                + "4. listtask\n"
+                + "5. marktask\n"
+                + "6. listincomplete\n"
+                + "\n"
+                + "General commands\n"
+                + "1. help\n"
+                + "2. exit\n";
     }
 
     /**
