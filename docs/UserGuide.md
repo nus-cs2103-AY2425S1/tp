@@ -12,7 +12,7 @@ title: AcademyAssist User Guide
 
 3. [Features](#features)
    * [Adding a student](#adding-a-student--add)
-   * [Deleting a student](#deleting-a-student--del)
+   * [Deleting a student](#deleting-a-student--delete)
    * [Editing a student](#editing-a-student--edit)
    * [Viewing all student](#viewing-all-students--view)
    * [Finding a student](#finding-a-student--find)
@@ -72,6 +72,11 @@ again, type `help` and press Enter.
 * Words in `UPPER_CASE` are the inputs to be supplied by the user.
   e.g `delete STUDENT_ID` means the user has to enter the ID number of the student to be deleted.
 
+* Every student added will be assigned a `STUDENT_ID` that begins with S followed by a 5 digit number (e.g. S00003).
+> **Note:** The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
+` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 (instead
+of replacing S00001).
+
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -126,7 +131,7 @@ Edits an existing student's details in the system.
 
 Format: `edit STUDENT_ID FIELD/NEW_VALUE`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is 
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
 automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `FIELD` can be one of: Name, Phone Number, Email, Address, IC Number or Subject taken.
 * `NEW_VALUE` should follow the format for the respective field.

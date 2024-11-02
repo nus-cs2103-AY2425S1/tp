@@ -1,5 +1,7 @@
 package seedu.academyassist.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -35,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private TrackSubjectWindow trackSubjectWindow;
     private PersonDetailWindow personDetailWindow;
 
     @FXML
@@ -68,6 +71,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        trackSubjectWindow = new TrackSubjectWindow(logic.getModel());
         personDetailWindow = new PersonDetailWindow();
     }
 
@@ -162,19 +166,33 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
+        closeAllSecondaryWindows();
         primaryStage.hide();
     }
 
+    /**
+     * Opens the subject tracker window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleTrackSubject() {
+        if (!trackSubjectWindow.isShowing()) {
+            trackSubjectWindow.show();
+        } else {
+            trackSubjectWindow.focus();
+        }
+    }
     /**
      * Open the detail window of the person or focuses on it if it's already opened.
      * @param person
      */
     @FXML
     private void handleDetailWindow(Person person) {
+        requireNonNull(person);
         if (!personDetailWindow.isShowing()) {
             personDetailWindow.show(person);
         } else {
+            personDetailWindow.hide(); // Hide current window
+            personDetailWindow.show(person); // Show new person's details
             personDetailWindow.focus();
         }
     }
@@ -202,6 +220,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isShowSubjectTracker()) {
+                handleTrackSubject();
+            }
             if (commandResult.isShowDetailWindow()) {
                 handleDetailWindow(commandResult.getPersonToShow());
             }
@@ -211,6 +232,18 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    private void closeAllSecondaryWindows() {
+        if (helpWindow != null && helpWindow.isShowing()) {
+            helpWindow.hide();
+        }
+        if (trackSubjectWindow != null && trackSubjectWindow.isShowing()) {
+            trackSubjectWindow.hide();
+        }
+        if (personDetailWindow != null && personDetailWindow.isShowing()) {
+            personDetailWindow.hide();
         }
     }
 }

@@ -1,0 +1,37 @@
+.root {
+    -fx-background-color: derive(#dafaff, 20%);
+}
+
+.header-label {
+    -fx-font-family: "Verdana Bold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #124264;
+    -fx-padding: 10;
+}
+
+.stats-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.stats-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.stats-container {
+    -fx-background-color: derive(#dafaff, 20%);
+    -fx-padding: 10;
+    -fx-min-width: 300;
+}
+
+.subject-stat-label {
+    -fx-background-color: derive(#dafaff, 20%);
+    -fx-text-fill: #124264;
+    -fx-font-family: "Verdana";
+    -fx-font-size: 14px;
+    -fx-padding: 5;
+    -fx-min-width: 280;
+    -fx-alignment: center;
+}
+

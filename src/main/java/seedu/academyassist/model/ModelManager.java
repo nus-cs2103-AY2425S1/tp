@@ -158,6 +158,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortAcademyAssistById() {
+        academyAssist.sortPersonsById();
+    }
+
+    @Override
     public void incrementStudentCount() {
         academyAssist.incrementStudentCount();
     }
