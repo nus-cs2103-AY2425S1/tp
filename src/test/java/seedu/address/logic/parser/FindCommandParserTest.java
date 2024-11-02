@@ -18,8 +18,15 @@ public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    public void parse_emptyArgName_throwsParseException() {
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyArgTelegramHandle_throwsParseException() {
+        assertParseFailure(parser, "/h     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
     }
 
     @Test
