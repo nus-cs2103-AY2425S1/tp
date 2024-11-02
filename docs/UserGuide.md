@@ -198,13 +198,18 @@ Add meetings to user's schedule.
 
 Format: `add-schedule c/CONTACT n/NAME d/DATE t/TIME`
 - all fields must be present
-- `c/CONTACT` the contact's index with respect to the currently displayed list of contacts.
+- `c/CONTACT` the contact indices with respect to the currently displayed list of contacts.
 - `n/NAME` description of the meeting.
 - `d/DATE` date must be in the format of dd-MM-YYYY.
 - `t/TIME` time must be in the format of hhmm (24 hours notation) .
 
 Example:
-- `add-schedule c/1 n/Dinner d/10-10-2024 t/1800`
+
+![add schedule example](images/add-schedule_example.png)
+
+- `add-schedule c/1 2 n/Dinner d/10-10-2024 t/1800`
+- **Before**: no Dinner event at 10-10-2024 1800.
+- **After**: Dinner event at 10-10-2024 1800 is added.
 
 ### Delete meeting from schedule
 
