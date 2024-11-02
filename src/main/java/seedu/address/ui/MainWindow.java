@@ -32,6 +32,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+    private final ListChangeListener<Person> personListListener = change -> {
+        while (change.next()) {
+            if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
+                updateStatusChart();
+            }
+        }
+    };
+
     private Stage primaryStage;
     private Logic logic;
 
@@ -163,6 +171,9 @@ public class MainWindow extends UiPart<Stage> {
             case NONE -> counts[0]++;
             case NON_URGENT -> counts[1]++;
             case URGENT -> counts[2]++;
+            default -> {
+                logger.warning("Unexpected status value: " + person.getStatus().status);
+            }
             }
         }
 
@@ -240,7 +251,6 @@ public class MainWindow extends UiPart<Stage> {
                 Person personToView = logic.getFilteredPersonList().get(index);
                 personDetailPanel.setPersonDetails(personToView);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                // Handle invalid index
                 resultDisplay.setFeedbackToUser("Invalid person index.");
             }
         } else {
@@ -285,19 +295,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private final ListChangeListener<Person> personListListener = change -> {
-        while (change.next()) {
-            if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
-                updateStatusChart();
-            }
-        }
-    };
-
     /**
      * Sets up the split panes and their divider positions
      */
     private void setupSplitPanes() {
-        topSplitPane.setDividerPositions(0.8);  // 80:20 ratio
+        topSplitPane.setDividerPositions(0.8);
 
         topSplitPane.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> {
             if (Math.abs(newValue.doubleValue() - 0.8) > 0.05) {
@@ -305,7 +307,4 @@ public class MainWindow extends UiPart<Stage> {
             }
         });
     }
-
-
-
 }

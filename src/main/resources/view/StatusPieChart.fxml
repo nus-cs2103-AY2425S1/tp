@@ -10,6 +10,7 @@
       xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@css/DarkTheme.css" />
+        <URL value="@css/StatusPieChart.css" />
     </stylesheets>
 
     <Label fx:id="chartTitle" styleClass="chart-title"/>

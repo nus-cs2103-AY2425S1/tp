@@ -7,11 +7,9 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.scene.Node;
-import javafx.scene.paint.Color;
 
 /**
  * Panel containing the status distribution pie chart.
@@ -19,11 +17,6 @@ import javafx.scene.paint.Color;
 public class StatusPieChart extends UiPart<Region> {
 
     private static final String FXML = "StatusPieChart.fxml";
-
-    private static final String NONE_COLOR = "#009E60";
-    private static final String NON_URGENT_COLOR = "#c46210";
-    private static final String URGENT_COLOR = "#FF2400";
-
     @FXML
     private VBox chartContainer;
 
@@ -33,11 +26,23 @@ public class StatusPieChart extends UiPart<Region> {
     @FXML
     private PieChart statusChart;
 
+    /**
+     * Creates a new StatusPieChart.
+     * Initializes the chart with default settings by calling setupChart().
+     */
     public StatusPieChart() {
         super(FXML);
         setupChart();
     }
 
+    /**
+     * Sets up the initial configuration of the pie chart.
+     * This includes:
+     * - Setting the chart title
+     * - Configuring chart display properties (labels, legend, size)
+     * - Setting up the chart container
+     * - Applying custom styling
+     */
     private void setupChart() {
         chartTitle.setText("CLIENT STATUS");
         statusChart.setTitle("");
@@ -51,7 +56,6 @@ public class StatusPieChart extends UiPart<Region> {
 
         chartContainer.setPadding(new Insets(2));
 
-        // Add default style classes to ensure proper initialization
         statusChart.getStyleClass().add("status-chart");
     }
 
@@ -66,7 +70,6 @@ public class StatusPieChart extends UiPart<Region> {
         Platform.runLater(() -> {
             statusChart.getData().clear();
 
-            // Create data pieces
             PieChart.Data noneData = new PieChart.Data("None (" + noneCount + ")", noneCount);
             PieChart.Data nonUrgentData = new PieChart.Data("Non-Urgent (" + nonUrgentCount + ")", nonUrgentCount);
             PieChart.Data urgentData = new PieChart.Data("Urgent (" + urgentCount + ")", urgentCount);
@@ -77,17 +80,10 @@ public class StatusPieChart extends UiPart<Region> {
 
             statusChart.setData(pieChartData);
 
-            // Apply styles to pie slices first
-            noneData.getNode().setStyle("-fx-pie-color: " + NONE_COLOR + ";");
-            nonUrgentData.getNode().setStyle("-fx-pie-color: " + NON_URGENT_COLOR + ";");
-            urgentData.getNode().setStyle("-fx-pie-color: " + URGENT_COLOR + ";");
-
-            // Add style classes for CSS styling
             noneData.getNode().getStyleClass().add("data0");
             nonUrgentData.getNode().getStyleClass().add("data1");
             urgentData.getNode().getStyleClass().add("data2");
 
-            // Force a style refresh
             statusChart.applyCss();
         });
     }
