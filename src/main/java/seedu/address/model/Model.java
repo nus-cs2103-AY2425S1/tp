@@ -99,6 +99,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    Predicate<? super Person> getFilteredPersonListPredicate();
+
     /**
      * Pushes a concrete command to the undo stack.
      */
