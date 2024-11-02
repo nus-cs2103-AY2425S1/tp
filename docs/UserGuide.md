@@ -10,7 +10,7 @@ StoreClass (SC) is a desktop app for educators from private organizations e.g. t
 If you can type fast, StoreClass will become a perfect tools to manage student data.
 
 * Table of Contents
-{:toc}
+{% toc %}
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -18,7 +18,6 @@
         {% if item.toc %}
         <button onclick="toggleTOC('{{ item.title | replace: ' ', '-' }}')">Details</button>
         <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
-          {% toc %}
         </div>
         {% endif %}
       </li>
