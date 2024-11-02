@@ -5,15 +5,15 @@ import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.START_TIME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPOINTMENT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_APPOINTMENT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPOINTMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NEW_DATE_APPOINTMENT_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NEW_END_TIME_APPOINTMENT_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NEW_START_TIME_APPOINTMENT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEW_DATE_APPOINTMENT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEW_END_TIME_APPOINTMENT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEW_START_TIME_APPOINTMENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_TIME_APPOINTMENT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_APPOINTMENT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_APPOINTMENT_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -35,13 +35,58 @@ public class EditAppointmentCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Nric targetNric = new Nric(VALID_NRIC_AMY);
         String userInput = NRIC_DESC_AMY + DATE_DESC_AMY + START_TIME_DESC_AMY
-                + VALID_NEW_DATE_APPOINTMENT_DESC_AMY + VALID_NEW_START_TIME_APPOINTMENT_DESC_AMY
-                + VALID_NEW_END_TIME_APPOINTMENT_DESC_AMY;
+                + VALID_NEW_DATE_APPOINTMENT_DESC_BOB + VALID_NEW_START_TIME_APPOINTMENT_DESC_BOB
+                + VALID_NEW_END_TIME_APPOINTMENT_DESC_BOB;
         System.out.println(userInput);
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
-                .withDate(VALID_DATE_APPOINTMENT_AMY)
-                .withStartTime(VALID_START_TIME_APPOINTMENT_AMY)
-                .withEndTime(VALID_END_TIME_APPOINTMENT_AMY)
+                .withDate(VALID_DATE_APPOINTMENT_BOB)
+                .withStartTime(VALID_START_TIME_APPOINTMENT_BOB)
+                .withEndTime(VALID_END_TIME_APPOINTMENT_BOB)
+                .build();
+        EditAppointmentCommand expectedCommand = new EditAppointmentCommand(targetNric,
+                VALID_START_DATE_TIME_APPOINTMENT, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_dateFieldSpecified_success() {
+        Nric targetNric = new Nric(VALID_NRIC_AMY);
+        String userInput = NRIC_DESC_AMY + DATE_DESC_AMY + START_TIME_DESC_AMY
+                + VALID_NEW_DATE_APPOINTMENT_DESC_BOB;
+        System.out.println(userInput);
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withDate(VALID_DATE_APPOINTMENT_BOB)
+                .build();
+        EditAppointmentCommand expectedCommand = new EditAppointmentCommand(targetNric,
+                VALID_START_DATE_TIME_APPOINTMENT, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_startTimeFieldSpecified_success() {
+        Nric targetNric = new Nric(VALID_NRIC_AMY);
+        String userInput = NRIC_DESC_AMY + DATE_DESC_AMY + START_TIME_DESC_AMY
+                + VALID_NEW_START_TIME_APPOINTMENT_DESC_BOB;
+        System.out.println(userInput);
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withStartTime(VALID_START_TIME_APPOINTMENT_BOB)
+                .build();
+        EditAppointmentCommand expectedCommand = new EditAppointmentCommand(targetNric,
+                VALID_START_DATE_TIME_APPOINTMENT, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_endTimeFieldSpecified_success() {
+        Nric targetNric = new Nric(VALID_NRIC_AMY);
+        String userInput = NRIC_DESC_AMY + DATE_DESC_AMY + START_TIME_DESC_AMY
+                + VALID_NEW_END_TIME_APPOINTMENT_DESC_BOB;
+        System.out.println(userInput);
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withEndTime(VALID_END_TIME_APPOINTMENT_BOB)
                 .build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(targetNric,
                 VALID_START_DATE_TIME_APPOINTMENT, descriptor);

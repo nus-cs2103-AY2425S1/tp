@@ -97,6 +97,11 @@ public class CommandTestUtil {
             + VALID_START_TIME_APPOINTMENT_BOB;
     public static final String VALID_END_TIME_APPOINTMENT_DESC_BOB = " " + PREFIX_END_TIME
             + VALID_END_TIME_APPOINTMENT_BOB;
+    public static final String VALID_NEW_DATE_APPOINTMENT_DESC_BOB = " " + PREFIX_NEW_DATE + VALID_DATE_APPOINTMENT_BOB;
+    public static final String VALID_NEW_START_TIME_APPOINTMENT_DESC_BOB = " " + PREFIX_NEW_START_TIME
+            + VALID_START_TIME_APPOINTMENT_BOB;
+    public static final String VALID_NEW_END_TIME_APPOINTMENT_DESC_BOB = " " + PREFIX_NEW_END_TIME
+            + VALID_END_TIME_APPOINTMENT_BOB;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

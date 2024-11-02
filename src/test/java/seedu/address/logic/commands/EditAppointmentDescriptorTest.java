@@ -49,7 +49,8 @@ public class EditAppointmentDescriptorTest {
     @Test
     public void toStringMethod() {
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
-        String expected = EditAppointmentDescriptor.class.getCanonicalName() + "{startTime="
+        String expected = EditAppointmentDescriptor.class.getCanonicalName() + "{date="
+                + editAppointmentDescriptor.getDate().orElse(null) + ", startTime="
                 + editAppointmentDescriptor.getStartTime().orElse(null) + ", endTime="
                 + editAppointmentDescriptor.getEndTime().orElse(null) + "}";
         assertEquals(expected, editAppointmentDescriptor.toString());

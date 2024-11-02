@@ -10,7 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -88,14 +90,6 @@ public class EditAppointmentCommand extends Command {
             throw new CommandException(MESSAGE_NO_APPOINTMENT);
         }
 
-        if (!editAppointmentDescriptor.getStartTime().get().isBefore(editAppointmentDescriptor.getEndTime().get())) {
-            throw new CommandException(MESSAGE_INVALID_START_END_TIME);
-        }
-
-        if (editAppointmentDescriptor.getStartTime().get().isBefore(LocalDateTime.now())) {
-            throw new CommandException(MESSAGE_START_TIME_IN_PAST);
-        }
-
         model.editAppointment(appointmentToEdit, patient, editedAppointment);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -108,15 +102,25 @@ public class EditAppointmentCommand extends Command {
      */
 
     private static Appointment createEditedAppointment(Appointment appointmentToEdit,
-            EditAppointmentDescriptor editAppointmentDescriptor) {
+            EditAppointmentDescriptor editAppointmentDescriptor) throws CommandException {
         assert appointmentToEdit != null;
 
         String name = appointmentToEdit.getName();
         Nric nric = appointmentToEdit.getNric();
-        LocalDateTime updatedStartTime = editAppointmentDescriptor.getStartTime()
-                .orElse(appointmentToEdit.getStartTime());
-        LocalDateTime updatedEndTime = editAppointmentDescriptor.getEndTime()
-                .orElse(appointmentToEdit.getEndTime());
+        LocalDate date = editAppointmentDescriptor.getDate().orElse(appointmentToEdit.getStartTime().toLocalDate());
+        LocalTime startTime = editAppointmentDescriptor.getStartTime()
+                .orElse(appointmentToEdit.getStartTime().toLocalTime());
+        LocalTime endTime = editAppointmentDescriptor.getEndTime().orElse(appointmentToEdit.getEndTime().toLocalTime());
+        LocalDateTime updatedStartTime = LocalDateTime.of(date, startTime);
+        LocalDateTime updatedEndTime = LocalDateTime.of(date, endTime);
+
+        if (!updatedStartTime.isBefore(updatedEndTime)) {
+            throw new CommandException(MESSAGE_INVALID_START_END_TIME);
+        }
+
+        if (updatedStartTime.isBefore(LocalDateTime.now())) {
+            throw new CommandException(MESSAGE_START_TIME_IN_PAST);
+        }
 
         return new Appointment(name, nric, updatedStartTime, updatedEndTime);
     }
@@ -151,8 +155,9 @@ public class EditAppointmentCommand extends Command {
      * corresponding field value of the appointment.
      */
     public static class EditAppointmentDescriptor {
-        private LocalDateTime startTime;
-        private LocalDateTime endTime;
+        private LocalDate date;
+        private LocalTime startTime;
+        private LocalTime endTime;
 
         public EditAppointmentDescriptor() {
         }
@@ -162,27 +167,36 @@ public class EditAppointmentCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditAppointmentDescriptor(EditAppointmentDescriptor toCopy) {
+            setDate(toCopy.date);
             setStartTime(toCopy.startTime);
             setEndTime(toCopy.endTime);
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(startTime, endTime);
+            return CollectionUtil.isAnyNonNull(date, startTime, endTime);
         }
 
-        public void setStartTime(LocalDateTime startDateTime) {
-            this.startTime = startDateTime;
+        public void setDate(LocalDate date) {
+            this.date = date;
         }
 
-        public Optional<LocalDateTime> getStartTime() {
+        public Optional<LocalDate> getDate() {
+            return Optional.ofNullable(date);
+        }
+
+        public void setStartTime(LocalTime startTime) {
+            this.startTime = startTime;
+        }
+
+        public Optional<LocalTime> getStartTime() {
             return Optional.ofNullable(startTime);
         }
 
-        public void setEndTime(LocalDateTime endDateTime) {
-            this.endTime = endDateTime;
+        public void setEndTime(LocalTime endTime) {
+            this.endTime = endTime;
         }
 
-        public Optional<LocalDateTime> getEndTime() {
+        public Optional<LocalTime> getEndTime() {
             return Optional.ofNullable(endTime);
         }
 
@@ -197,14 +211,16 @@ public class EditAppointmentCommand extends Command {
                 return false;
             }
 
-            EditAppointmentDescriptor otherEditPersonDescriptor = (EditAppointmentDescriptor) other;
-            return Objects.equals(startTime, otherEditPersonDescriptor.startTime)
-                    && Objects.equals(endTime, otherEditPersonDescriptor.endTime);
+            EditAppointmentDescriptor otherEditAppointmentDescriptor = (EditAppointmentDescriptor) other;
+            return Objects.equals(date, otherEditAppointmentDescriptor.date)
+                    && Objects.equals(startTime, otherEditAppointmentDescriptor.startTime)
+                    && Objects.equals(endTime, otherEditAppointmentDescriptor.endTime);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("date", date)
                     .add("startTime", startTime)
                     .add("endTime", endTime)
                     .toString();
