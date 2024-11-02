@@ -41,6 +41,6 @@ public class PromoteCommandParserTest {
         assertParseFailure(parser, "1somerandomstring " + VALID_CONTRACT_END_DATE_BOB, MESSAGE_INVALID_FORMAT);
 
         // valid index and invalid contract end date
-        assertParseFailure(parser, "1 2024", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 2024", ContractEndDate.MESSAGE_CONSTRAINTS);
     }
 }
