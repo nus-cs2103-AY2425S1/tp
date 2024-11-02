@@ -8,8 +8,11 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import java.math.BigDecimal;
 import java.util.function.Predicate;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -44,7 +47,7 @@ public class RightPanel extends UiPart<Region> {
     @FXML
     private Label ownYouLabel;
     @FXML
-    private Label filterIcon;
+    private Button filterBtn;
 
     /**
      * Creates a {@code RightPanel} with the given {@code ObservableList<Transaction>} to display.
@@ -53,14 +56,22 @@ public class RightPanel extends UiPart<Region> {
         super(FXML);
 
         commandBox = cb;
+        CommonModel commonModel = CommonModel.getInstance();
 
-        ObservableList<Transaction> txns = CommonModel.getInstance().getFilteredTransactionList();
+        ObservableList<Transaction> txns = commonModel.getFilteredTransactionList();
         updateBalances();
 
         transactionListPanel = new TransactionListPanel(txns);
         transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
 
-        filterIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, this::showFilterMenu);
+        StringBinding iconColorBinding = Bindings.createStringBinding(() -> {
+            return commonModel.getCurrentPredicate().get() == TransactionBookModel.PREDICATE_SHOW_ALL_TXNS ? "gray"
+                    : "blue";
+        }, commonModel.getCurrentPredicate());
+
+        filterBtn.styleProperty().bind(Bindings.concat("-icon-paint: ", iconColorBinding, ";"));
+        filterBtn.setPickOnBounds(true);
+        filterBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, this::showFilterMenu);
     }
 
     /**
@@ -123,7 +134,7 @@ public class RightPanel extends UiPart<Region> {
         filterMenu.getItems().addAll(resetFilter, filterByDone, filterByPositiveOrNegativeAmount, divider,
                 filterByContact, filterByAmount, filterByDescription, filterByDate
         );
-        filterMenu.show(filterIcon, event.getScreenX(), event.getScreenY());
+        filterMenu.show(filterBtn, event.getScreenX(), event.getScreenY());
     }
 
     private void filterTransactionsByAmount() {

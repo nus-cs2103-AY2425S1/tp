@@ -50,6 +50,11 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    /**
+     * Sets the command box with filter command text.
+     *
+     * @param commandText the filter command text.
+     */
     public void handleFilterCommandEntered(String commandText) {
         commandTextField.setText(commandText);
     }

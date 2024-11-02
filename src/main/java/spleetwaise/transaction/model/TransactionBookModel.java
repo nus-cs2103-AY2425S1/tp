@@ -2,6 +2,7 @@ package spleetwaise.transaction.model;
 
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import spleetwaise.transaction.model.transaction.Transaction;
 
@@ -36,6 +37,11 @@ public interface TransactionBookModel {
      * Returns an unmodifiable view of the filtered transaction list.
      */
     ObservableList<Transaction> getFilteredTransactionList();
+
+    /**
+     * Returns the current predicate used to filter transactions.
+     */
+    ObjectProperty<Predicate<Transaction>> getCurrentPredicate();
 
     /**
      * Updates the filter of the filtered transaction list to reuse existing filter. By default, existing filter is show
