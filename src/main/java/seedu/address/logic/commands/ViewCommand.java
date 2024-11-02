@@ -23,8 +23,8 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds one contact whose telegram handle "
-            + "matches the specified telegram handle (case-insensitive) and displays a new page which "
-            + "contains all the contact's information.\n"
+            + "matches the specified telegram handle (case-insensitive)\n"
+            + "and displays contains all the contact's information.\n"
             + "Parameters: t/TELEGRAM_HANDLE \n"
             + "Example: " + COMMAND_WORD + " t/TELEGRAM_HANDLE";
 
