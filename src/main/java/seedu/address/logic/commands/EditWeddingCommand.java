@@ -29,8 +29,8 @@ public class EditWeddingCommand extends Command {
             + ": Edits wedding \n"
             + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "PB and J Wedding " + PREFIX_DATE
-            + "21/03/2024";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Paul and Jean Wedding " + PREFIX_DATE
+            + "21/03/2025";
 
     public static final String MESSAGE_SUCCESS = "Edited Wedding: %1$s \n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
