@@ -144,7 +144,8 @@ public class PublicAddressesCompositionTest {
         PublicAddressesComposition composition = new PublicAddressesComposition();
         composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
         PublicAddress updatedAddress = new BtcAddress("updatedAddress", "Updated Label");
-        composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, updatedAddress);
+        composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN,
+            updatedAddress);
 
         assertTrue(composition.hasPublicAddress("updatedAddress"));
         assertFalse(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN.getPublicAddressString()));
