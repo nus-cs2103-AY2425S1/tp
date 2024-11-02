@@ -1,10 +1,10 @@
 package seedu.address.model.person.predicates;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-
-import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s assigned {@code Status} starts with a specified String.
@@ -32,7 +32,8 @@ public class StatusStartsWithSubstringPredicate implements Predicate<Person> {
             return false;
         }
 
-        StatusStartsWithSubstringPredicate otherStatusContainsSubstringPredicate = (StatusStartsWithSubstringPredicate) other;
+        StatusStartsWithSubstringPredicate otherStatusContainsSubstringPredicate =
+                (StatusStartsWithSubstringPredicate) other;
         return substring.equals(otherStatusContainsSubstringPredicate.substring);
     }
 
