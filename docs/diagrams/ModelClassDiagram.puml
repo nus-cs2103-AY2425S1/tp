@@ -8,14 +8,17 @@ Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyClientBook" as ReadOnlyClientBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nReadOnlyPropertyBook" as ReadOnlyPropertyBook
+Class "<<interface>>\nReadOnlyMeetingBook" as ReadOnlyMeetingBook
 Class "<<interface>>\nModel" as Model
 Class ClientBook
 Class PropertyBook
+Class MeetingBook
 Class ModelManager
 Class UserPrefs
 
 Class UniqueClientList
 Class UniquePropertyList
+Class UniqueMeetingList
 Class "<<abstract>>\nClient" as Client
 Class Buyer
 Class Seller
@@ -28,6 +31,9 @@ Class PostalCode
 Class Unit
 Class Ask
 Class Bid
+Class Meeting
+Class MeetingTitle
+Class MeetingDate
 
 Class I #FFFFFF
 }
@@ -37,40 +43,53 @@ HiddenOutside ..> Model
 
 ClientBook .up.|> ReadOnlyClientBook
 PropertyBook .up.|> ReadOnlyPropertyBook
+MeetingBook .up.|> ReadOnlyMeetingBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyClientBook
 Model .left.> ReadOnlyPropertyBook
+Model .right.> ReadOnlyMeetingBook
 ModelManager -left-> "1" ClientBook
 ModelManager -left-> "1" PropertyBook
+ModelManager -right-> "1" MeetingBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 ClientBook *--> "1" UniqueClientList
 PropertyBook *--> "1" UniquePropertyList
+MeetingBook *--> "1" UniqueMeetingList
 UniqueClientList --> "~* all" Client
 UniquePropertyList --> "~* all" Property
+UniqueMeetingList --> "~* all" Meeting
 Client *--> NameWithoutNumber
-Client *--> Phone
+Client *---> Phone
 Client *--> Email
 Property *--> PostalCode
 Property *--> Unit
 Property *--> Type
 Property *--> Ask
 Property *--> Bid
+Meeting *--> MeetingTitle
+Meeting *--> MeetingDate
+Meeting o---> "2" Phone
+Meeting o--> Type
+Meeting o--> PostalCode
 
 Client <|-- Buyer
 Client <|-- Seller
 
 Client -[hidden]up--> I
 Property -[hidden]up--> I
+Meeting -[hidden]up--> I
 UniqueClientList -[hidden]right-> I
 UniquePropertyList -[hidden]right-> I
+UniqueMeetingList -[hidden]right-> I
 
 NameWithoutNumber -[hidden]right-> Phone
 Phone -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Client
 ModelManager --> "~* filtered" Property
+ModelManager --> "~* filtered" Meeting
 @enduml

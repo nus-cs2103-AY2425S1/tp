@@ -30,15 +30,15 @@ public class AddMeetingCommand extends Command {
     public static final String MESSAGE_USAGE = String
             .format("%s: Adds a meeting to the meeting book.\n"
                             + "Parameters: %sMEETING_TITLE %sMEETING_DATE %sBUYER_PHONE %sSELLER_PHONE %sTYPE "
-                            + "%sPOSTALCODE\n"
+                            + "%sPOSTAL_CODE\n"
                             + "Restrictions:\n"
                             + "\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
                     COMMAND_WORD, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE, PREFIX_SELLER_PHONE,
                     PREFIX_TYPE, PREFIX_POSTALCODE, MeetingTitle.MESSAGE_CONSTRAINTS, MeetingDate.MESSAGE_CONSTRAINTS,
                     Phone.MESSAGE_CONSTRAINTS, Type.MESSAGE_CONSTRAINTS, PostalCode.MESSAGE_CONSTRAINTS,
                     "There must be an existing buyer in the client book with a phone number equal to BUYER_PHONE. "
-                            + "Likewise for SELLER_PHONE.", "Postal Code must belong to some existing property "
-                            + "in the property book of the specified Type.");
+                            + "Likewise for SELLER_PHONE.", "POSTAL_CODE must belong to some existing property "
+                            + "in the property book of the specified TYPE.");
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "There is already a meeting of the same title "
