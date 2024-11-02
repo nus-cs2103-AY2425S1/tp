@@ -5,7 +5,10 @@ package seedu.address.model.tag;
  * Property tags are used to classify properties based on their type (e.g., HDB, Condo, Landed).
  */
 public enum PropertyTagType {
-    HDB, CONDO, LANDED;
+    HDB, CONDO, RESIDENTIAL, LANDED, EC, COMMERCIAL,
+    RETAIL, INDUSTRIAL, OFFICE, WAREHOUSE, SHOPHOUSE, TERRACE,
+    SEMIDET, BUNGALOW, DETACHED, GCB, PENTHOUSE, MIXED,
+    SERVAPT, DORM;
 
     /**
      * Checks if the given tag name corresponds to a valid {@code PropertyTagType}.

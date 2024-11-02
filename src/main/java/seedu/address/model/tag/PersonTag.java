@@ -19,7 +19,8 @@ public class PersonTag extends Tag {
     public PersonTag(String tagName) {
         super(StringUtil.capitaliseFirstLetter(tagName));
         checkArgument(PersonTagType.isValidPersonTag(tagName),
-                "Invalid PersonTag. Allowed: Buyer, Seller, Landlord, Tenant");
+                "Invalid PersonTag. Allowed (case-insensitive): BUYER, SELLER, LANDLORD, TENANT"
+                        + "DEVELOPER, INVESTOR, MANAGER, CONTRACTOR");
         this.personTagType = PersonTagType.fromString(tagName);
     }
 
