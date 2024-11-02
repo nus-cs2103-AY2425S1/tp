@@ -24,6 +24,7 @@ public class RightPanel extends UiPart<Region> {
     private static final String FXML = "RightPanel.fxml";
 
     private static boolean amountFilter = false;
+    private static boolean doneFilter = false;
 
     private TransactionListPanel transactionListPanel;
 
@@ -83,10 +84,13 @@ public class RightPanel extends UiPart<Region> {
         MenuItem resetFilter = new MenuItem("Reset filter");
         resetFilter.setOnAction(e -> resetFilter());
 
+        MenuItem filterByDone = new MenuItem("Filter by Done or Not Done Status");
+        filterByDone.setOnAction(e -> filterTransactionsByDoneStatus());
+
         MenuItem filterByAmount = new MenuItem("Filter by Positive or Negative Amount");
         filterByAmount.setOnAction(e -> filterTransactionsByAmount());
 
-        filterMenu.getItems().addAll(resetFilter, filterByAmount);
+        filterMenu.getItems().addAll(resetFilter, filterByDone,filterByAmount);
         filterMenu.show(filterIcon, event.getScreenX(), event.getScreenY());
     }
 
@@ -95,6 +99,13 @@ public class RightPanel extends UiPart<Region> {
         amountFilter = !amountFilter;
         resetFilter();
         CommonModel.getInstance().updateFilteredTransactionList(txn -> amountFilter != txn.getAmount().isNegative());
+    }
+
+    private void filterTransactionsByDoneStatus() {
+        // toggle between undone or done transactions only
+        doneFilter = !doneFilter;
+        resetFilter();
+        CommonModel.getInstance().updateFilteredTransactionList(txn -> doneFilter != txn.getStatus().isDone());
     }
 
     private void resetFilter() {
