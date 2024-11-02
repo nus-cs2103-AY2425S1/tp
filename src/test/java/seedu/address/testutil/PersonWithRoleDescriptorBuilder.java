@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import java.util.Optional;
 
-import seedu.address.logic.commands.RoleCommand.PersonWithRoleDescriptor;
+import seedu.address.logic.commands.AssignCommand.PersonWithRoleDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.role.Role;
 

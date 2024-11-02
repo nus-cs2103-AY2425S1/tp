@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
@@ -10,24 +9,24 @@ import java.util.Arrays;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.RoleCommand;
+import seedu.address.logic.commands.AssignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
 
 /**
- * Parses input arguments and creates a new RoleCommand object
+ * Parses input arguments and creates a new AssignCommand object
  */
-public class RoleCommandParser implements Parser<RoleCommand> {
+public class AssignCommandParser implements Parser<AssignCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the RoleCommand
-     * and returns a RoleCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AssignCommand
+     * and returns a AssignCommand object for execution.
      *
      * @throws ParseException if the user input does not conform to the expected format
      */
-    public RoleCommand parse(String args) throws ParseException {
+    public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_WEDDING);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_WEDDING);
 
         Index personIndex = null;
         NameMatchesKeywordPredicate predicate = null;
@@ -36,7 +35,7 @@ public class RoleCommandParser implements Parser<RoleCommand> {
             String target = argMultimap.getPreamble();
 
             if (target.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RoleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
             }
 
             // Determine if the target is an personIndex or a name
@@ -48,32 +47,32 @@ public class RoleCommandParser implements Parser<RoleCommand> {
             }
 
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RoleCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ROLE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE);
 
         boolean isAssignRole = argMultimap.getValue(PREFIX_ROLE).isPresent();
         boolean isAssignWedding = !argMultimap.getAllValues(PREFIX_WEDDING).isEmpty();
 
-        RoleCommand.PersonWithRoleDescriptor personWithRoleDescriptor = new RoleCommand.PersonWithRoleDescriptor();
+        AssignCommand.PersonWithRoleDescriptor personWithRoleDescriptor = new AssignCommand.PersonWithRoleDescriptor();
 
         if (isAssignRole & !isAssignWedding) {
             // assign role only
             String roleValue = argMultimap.getValue(PREFIX_ROLE).get();
             personWithRoleDescriptor.setRole(ParserUtil.parseRole(roleValue));
 
-            return new RoleCommand(personIndex, predicate, personWithRoleDescriptor, null);
+            return new AssignCommand(personIndex, predicate, personWithRoleDescriptor, null);
         } else if (isAssignWedding & !isAssignRole) {
             // assign to wedding only
             Set<Index> weddingIndices = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING));
-            return new RoleCommand(personIndex, predicate, personWithRoleDescriptor, weddingIndices);
+            return new AssignCommand(personIndex, predicate, personWithRoleDescriptor, weddingIndices);
         } else {
             // assign role and wedding
             String roleValue = argMultimap.getValue(PREFIX_ROLE).get();
             personWithRoleDescriptor.setRole(ParserUtil.parseRole(roleValue));
             Set<Index> weddingIndices = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING));
-            return new RoleCommand(personIndex, predicate, personWithRoleDescriptor, weddingIndices);
+            return new AssignCommand(personIndex, predicate, personWithRoleDescriptor, weddingIndices);
         }
     }
 
