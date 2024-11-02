@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
@@ -250,6 +251,16 @@ public class CreateVendorCommandTest {
 
         @Override
         public ObservableList<Association> getAssociationList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableIntegerValue getAssignedVendorsDisplayStartIdx() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableIntegerValue getAssignedEventsDisplayStartIdx() {
             throw new AssertionError("This method should not be called.");
         }
     }
