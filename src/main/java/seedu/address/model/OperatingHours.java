@@ -39,14 +39,11 @@ public class OperatingHours {
 
         String[] tmp = source.split(" to ", 2);
 
-        if (tmp.length != 2) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
-
         try {
             this.openingHour = parseTime(tmp[0]);
             this.closingHour = parseTime(tmp[1]);
-        } catch (ParseException e) {
+        } catch (ParseException ignored) {
+            // should not occur since isValidOperatingHours ensures that source can be parsed.
             throw new TimeParseException();
         }
     }
@@ -74,8 +71,14 @@ public class OperatingHours {
     public boolean isWithinOperatingHours(Appointment appointment) {
         try {
             LocalTime dateTime = parseDateTime(appointment.dateTime).toLocalTime();
-            System.out.println(dateTime.isBefore(this.closingHour) && dateTime.isAfter(this.openingHour));
-            return dateTime.isBefore(this.closingHour) && dateTime.isAfter(this.openingHour);
+
+            // to account for underflow - 00:12 becomes 23:58
+            if (this.closingHour.minusMinutes(14).isAfter(this.closingHour)) {
+                return false;
+            }
+
+            return dateTime.isBefore(this.closingHour.minusMinutes(14))
+                    && (dateTime.isAfter(this.openingHour) || dateTime.equals(this.openingHour));
 
         } catch (TimeParseException e) {
             // if patient has no appointments
@@ -101,12 +104,17 @@ public class OperatingHours {
      */
     public static boolean isValidOperatingHours(String test) {
         String[] tmp = test.split(" to ", 2);
+
+        if (tmp.length != 2) {
+            return false;
+        }
+
         try {
             parseTime(tmp[0]);
             parseTime(tmp[1]);
             return true;
 
-        } catch (Exception e) {
+        } catch (ParseException e) {
             return false;
         }
     }
@@ -143,7 +151,6 @@ public class OperatingHours {
 
     @Override
     public String toString() {
-        // to be changed
         return openingHour.toString() + " to " + closingHour.toString();
     }
 }
