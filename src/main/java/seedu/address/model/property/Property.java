@@ -34,7 +34,7 @@ public class Property {
         this.propertyType = propertyType;
     }
 
-    public LandlordName getName() {
+    public LandlordName getLandlordName() {
         return name;
     }
 
@@ -55,7 +55,7 @@ public class Property {
     }
 
     /**
-     * Returns true if both properties have the same landlord name and address and property type.
+     * Returns true if both properties have the same address.
      * This defines a weaker notion of equality between two properties.
      */
     public boolean isSameProperty(Property otherProperty) {
@@ -64,9 +64,7 @@ public class Property {
         }
 
         return otherProperty != null
-                && otherProperty.getName().equals(getName())
-                && otherProperty.getAddress().equals(getAddress())
-                && otherProperty.getPropertyType().equals(getPropertyType());
+                && otherProperty.getAddress().equals(getAddress());
     }
 
     /**

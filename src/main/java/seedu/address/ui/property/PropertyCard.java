@@ -45,7 +45,7 @@ public class PropertyCard extends UiPart<Region> {
         super(FXML);
         this.property = property;
         id.setText(displayedIndex + ". ");
-        name.setText(property.getName().toString());
+        name.setText(property.getLandlordName().toString());
         phone.setText(property.getPhone().toString());
         address.setText(property.getAddress().toString());
         askingPrice.setText(property.getAskingPrice().toPrettyString());

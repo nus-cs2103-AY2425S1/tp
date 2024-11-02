@@ -39,7 +39,7 @@ public class PropertyBuilder {
      * Initialises the PersonBuilder with the data of {@code propertyToCopy}.
      */
     public PropertyBuilder(Property propertyToCopy) {
-        landlordName = propertyToCopy.getName();
+        landlordName = propertyToCopy.getLandlordName();
         phone = propertyToCopy.getPhone();
         address = propertyToCopy.getAddress();
         askingPrice = propertyToCopy.getAskingPrice();

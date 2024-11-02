@@ -17,13 +17,15 @@ Class ParserUtil
 Class ArgumentMultimap
 Class ArgumentTokenizer
 Class Prefix
+Class BMPCommandParser
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> AbcliParser
-AbcliParser ..> CommandParser
+AbcliParser ..> BMPCommandParser : <<create>>
+BMPCommandParser -up-|> CommandParser
 
-CommandParser .down.> XYZCommandParser: <<create>>
+BMPCommandParser .down.> XYZCommandParser: <<create>>
 
 XYZCommandParser ..> XYZCommand : <<create>>
 CommandParser ..> Command : <<use>>
