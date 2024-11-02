@@ -236,6 +236,15 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
       `edit 1`<br>
       Expected: Similar to previous.
 
+### Person Synchronization in transaction list
+
+1. Ensuring person details changed are accurately reflected in all views and models.
+
+   1. Prerequisites: List all persons and transactions using the `list` and `listTxn` command. At least one person and one transaction with that person in the list.
+   
+   2. Test case: `edit 1 n/New Name` (where `New Name` is the updated name for the person)<br>
+      Expected: The person's name updates in the lists and UI, ensuring consistency in both `CommonModel` and the visible transaction list.
+
 ### Adding a remark for a person
 
 1. Adding a remark for a person using the `remark` command while all persons are being shown
@@ -268,10 +277,80 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 
 2. _{ more test cases …​ }_
 
+### Marking a transaction as done
+
+1. Marking a transaction as done while all transactions are being shown. 
+
+   1. Prerequisites: List all transactions using the `listTxn` command. One transaction is in the list.
+
+   2. Test cases: `markDone 1`<br>
+      Expected: The first transaction is marked as done. A "done" icon appears next to the person's name for that transaction. Details of the updated transaction shown in the status message.
+
+   3. Test cases: `markDone 1` (Assumes transaction 1 is already marked)<br>
+      Expected: No change in transaction status. The "done" icon remains. A status message confirms that the transaction is already marked.
+   
+   4. Test cases: `markDone 0`<br>
+      Expected: No transaction is marked. Error details shown in the status message.
+   
+   5. Other incorrect `markDone` commands to try: `markDone`, `markDone x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Reverting a done transaction back to undone
+
+1. Reverting a done transaction back to undone while all transactions are being shown.
+
+    1. Prerequisites: List all transactions using the `listTxn` command. One transaction is in the list.
+
+    2. Test cases: `markUndone 1`<br>
+       Expected: The first transaction is reverted to undone. The existing "done" icon disappears for that transaction. Details of the updated transaction shown in the status message.
+
+    3. Test cases: `markUndone 1` (Assumes transaction 1 is already undone)<br>
+       Expected: No change in transaction status. The transaction remains to have no "done" icon. A status message confirms that the transaction is already undone.
+
+    4. Test cases: `markUndone 0`<br>
+       Expected: No transaction is marked. Error details shown in the status message.
+
+    5. Other incorrect `markUndone` commands to try: `markUndone`, `markUndone x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Filter Reuse in Transaction List
+
+1. Maintaining the current filter state when transactions are modified.
+
+    1. Prerequisites: List all transactions using the `listTxn` command. Apply a filter via `filterTxn` command to the list (e.g., filtering by description containing "mac").  
+
+    2. Test cases: `addTxn p/01234567 d/macdonald`<br>
+       Expected: The new transaction appears in the filtered list while preserving the existing filter. Details of the new transaction shown in the status message.
+   
+    3. Test cases: `editTxn 1 d/happy meal at mac` (Assumes transaction 1 description is "KFC")<br>
+       Expected: The updated transaction appears in the filtered list while preserving the existing filter. Details of the updated transaction shown in the status message.
+
+    4. Test cases: `editTxn 1 d/KFC` (Assumes transaction 1 description is "fries at mac")<br>
+       Expected: The updated transaction disappears in the filtered list while preserving the existing filter. Details of the updated transaction shown in the status message.
+
+    5. Test cases: `markDone 1`, `markUndone 1` (Assumes transaction 1 description is "fries at mac")<br>
+       Expected: The transaction done icon updated in the filtered list while preserving the existing filter. Details of the updated transaction shown in the status message.
+
+### Default Behavior on App Startup
+
+1. Verifying filter state upon app initialization.
+
+    1. Prerequisites: At least one done transaction and one undone transaction in the list.
+
+    2. Test cases: Initial Filter on App Startup<br> 
+       Expected: The list displays all transactions (both done and undone) by default when the app starts.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Multiple persons in `addressbook.json` and multiple transactions in `transactionbook.json` data files.<br>
+       _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   
+   2. Test cases: Missing `isDone` field in `transactionbook.json` data file<br>
+      Simulation: Remove the `isDone` field from a transaction entry in the JSON file, then start the app.
+      Expected: The transaction loads as undone by default. Upon closing the app, the transaction is saved as undone in the JSON file.
+   
+   3. 
 
 2. _{ more test cases …​ }_
