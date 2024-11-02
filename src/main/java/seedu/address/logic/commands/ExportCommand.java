@@ -18,7 +18,9 @@ import seedu.address.security.EncryptionManager;
  * The data is saved in JSON format.
  */
 public class ExportCommand extends Command {
-    public static final String COMMAND_WORD = ":export";
+
+    public static final String SHORT_COMMAND_WORD = ":exp";
+    public static final String LONG_COMMAND_WORD = ":export";
     public static final String MESSAGE_SUCCESS = "Address book has been exported!";
     public static final String COMMAND_SUMMARY_ACTION = "Export";
     public static final String COMMAND_SUMMARY_FORMAT = ":export";
