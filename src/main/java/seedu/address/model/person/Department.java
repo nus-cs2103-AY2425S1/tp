@@ -18,7 +18,6 @@ public class Department {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String department;
     public final String value;
 
     /**
@@ -29,7 +28,6 @@ public class Department {
     public Department(String department) {
         requireNonNull(department);
         checkArgument(isValidDepartment(department), MESSAGE_CONSTRAINTS);
-        this.department = department;
         this.value = department;
     }
 
@@ -43,7 +41,7 @@ public class Department {
 
     @Override
     public String toString() {
-        return department;
+        return value;
     }
 
     @Override
@@ -58,12 +56,12 @@ public class Department {
         }
 
         Department otherDepartment = (Department) other;
-        return department.equals(otherDepartment.department);
+        return value.equals(otherDepartment.value);
     }
 
     @Override
     public int hashCode() {
-        return department.hashCode();
+        return value.hashCode();
     }
 
 }
