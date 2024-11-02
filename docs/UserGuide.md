@@ -82,6 +82,7 @@ AgentAssist allows you to manage client data like names, phone numbers, emails, 
 
 🎉 **By meeting these prerequisites, you'll be ready to make the most of AgentAssist’s fast, keyboard-driven interface and powerful data management features.** 🎉
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 # 3. Getting Started
