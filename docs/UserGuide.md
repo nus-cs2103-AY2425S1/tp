@@ -108,6 +108,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
+* Insurance plans and claims cannot be modified directly using this command. You may use other features such as `addInsurance`, `deleteInsurance`, `closeClaim` to make any necessary updates.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
@@ -175,8 +176,8 @@ Adds a claim to the insurance plan of a client.
 Format: `addClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID ca/CLAIM_AMOUNT_IN_DOLLARS_AND_CENTS`
 
 IDs for insurance plans:
-`Basic Plan` : `0`
-`Travel Insurance`: `1`
+`Basic Insurance Plan` : `0`, 
+`Travel Insurance Plan`: `1`
 
 * Adds claim to the client at the specified `INDEX`.
 * `INSURANCE_ID` match the associated insurance plan. For a list of mappings between insurance plans and 
@@ -199,8 +200,8 @@ Deletes a claim from an insurance plan of a client.
 Format: `deleteClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID`
 
 IDs for insurance plans:
-`Basic Plan` : `0`
-`Travel Insurance`: `1`
+`Basic Insurance Plan` : `0`,
+`Travel Insurance Plan`: `1`
 
 * Deletes a claim from the client at the specified `INDEX`.
 * `INSURANCE_ID` are found in the address book matching the associated insurance plan.
@@ -222,8 +223,8 @@ in the system but marked as closed.
 Format: `closeClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID`
 
 IDs for insurance plans:
-`Basic Plan` : `0`
-`Travel Insurance`: `1`
+`Basic Insurance Plan` : `0`,
+`Travel Insurance Plan`: `1`
 
 * Closes a claim from the client at the specified `INDEX`.
 * `INSURANCE_ID` are found in the address book matching the associated insurance plan.
