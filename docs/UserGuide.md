@@ -77,6 +77,8 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 </box>
 
 
+
+
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -99,6 +101,8 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
 * `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2024 1100`
 
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -114,6 +118,8 @@ You must select “OK” to clear the address book. If you select “Cancel,”
 the action will be aborted, and the address book will remain unchanged.
 
 ![clearConfirmation.png](images%2FclearConfirmation.png)
+
+
 
 ### Deleting a person : `delete`
 
@@ -142,6 +148,8 @@ and the person will not be deleted.
 
 ![deleteConfirmation.png](images%2FdeleteConfirmation.png)
 
+
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -161,10 +169,14 @@ Examples:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
 *  `edit John Doe n/Betsy Crower t/ ap/` Edits the name of John Doe to be `Betsy Crower` and clears all existing tags and appointments.
 
+
+
 ### Exiting the program : `exit`
 
 Exits the program.
 Format: `exit`
+
+
 
 ### Locating persons by name or phone number: `find`
 
@@ -183,8 +195,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `Johnny Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-* `find olive 87438` returns `87438807`, `Charlotte Oliveiro`<br>
+* `find olive 87438` returns 
+* `87438807`, `Charlotte Oliveiro`<br>
   ![result for 'find olive 87438'](images/findOlive.png)
+
+
 
 ### Filtering persons by age group or appointment dates: `filter`
 
@@ -209,6 +224,8 @@ Examples:
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 t/medication t/Dr Tan`
 
+
+
 ### Viewing help : `help`
 
 Shows you a help window with useful resources which includes:
@@ -221,6 +238,8 @@ Shows you a help window with useful resources which includes:
 Format: `help`
 
 ![helpWindow.png](images%2FhelpWindow.png)
+
+
 
 ### Importing contacts: `import`
 
@@ -250,10 +269,6 @@ Example:
 3. Type `import FILENAME.json` (e.g. `import data1.json`) in the command box in the application. The following message will be displayed in the results box if the import is successful and the contacts will automatically be updated. 
 
    <img src="images/importStep3.png"/>
-
-   Note that along a `data` folder containing the file `addressbook.json` will be generated in the folder as well if it was not already previously there (as seen below). Similarly to when `export` is executed, this `addressbook.json` file will reflect the latest patient records from the application. 
-
-   <img src="images/importStep3a.png"/>
 
 **Expected format:**
 
@@ -317,6 +332,8 @@ The following is an example of a valid JSON file content.
   ````
 
 
+
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -324,6 +341,8 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
+
+
 
 ### Listing starred persons : `list *`
 
@@ -333,6 +352,8 @@ Format: `list *`
 
 * No other parameters should be supplied aside from `*`.
 * You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
+
+
 
 ### Editing a person's notes : `note`
 
@@ -354,6 +375,8 @@ Examples:
 *  `note John Doe ap/01/01/2025 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
 *  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
 
+
+
 ### Sorting list based on Appointment Dates : `sort`
 
 Sorts the persons in the address book on the basis of their appointment dates.
@@ -361,6 +384,8 @@ Sorts the persons in the address book on the basis of their appointment dates.
 Format: `sort`
 
 * No other parameters should be supplied.
+
+
 
 
 ### Starring a person : `star`
@@ -380,6 +405,8 @@ Examples:
 * `list` followed by `star 2` stars the 2nd person in the address book.
 * `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
 
+
+
 ### Unstarring a person : `unstar`
 
 Unstars the specified person from the address book removing them from favourites.
@@ -396,6 +423,8 @@ Examples:
 * `unstar Alex Yeoh` unstars the person with name `Alex Yeoh` in the address book.
 * `list` followed by `unstar 2` unstars the 2nd person in the address book.
 * `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
+
+
 
 ### Viewing a person's notes : `view`
 
@@ -415,14 +444,20 @@ Examples:
 *  `view John Doe`
 *  `view 1` shows all details of the 1st person's details including notes.
 
+## 
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+
 
 ### Exporting the data
 
 - Locate file `addressbook.json` under the folder `data` in the same directory as `MediContact.jar`. `addressbook.json` will reflect the latest data. Simply download it.
 - **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
+
+
 
 ### Editing the data file
 
@@ -434,6 +469,8 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+
 
 ### Archiving data files `[coming in v2.0]`
 
