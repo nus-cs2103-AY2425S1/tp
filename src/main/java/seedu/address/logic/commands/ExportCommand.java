@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,23 +34,14 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the address book in CSV format.\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "format/csv";
+            + "Example: " + COMMAND_WORD;
     public static final String SUCCESS_MESSAGE = "The address book has been exported to "
             + "/data/addressbook.csv in the specified format.";
+
+    public static final String FAILURE_MESSAGE = "Error exporting address book to CSV";
     public static final String BACKWARD_SLASH_REGEX = "\\\\";
     public static final String INVERTED_COMMA_REGEX = "\"";
     public static final String EMPTY_STRING = "";
-    private final String format;
-
-    /**
-     * Constructs a ExportCommand instance (TODO: supplement JavaDoc stub)
-     * @param format the file format of the file to be exported (this should be "csv")
-     */
-    public ExportCommand(String format) {
-        requireAllNonNull(format);
-        this.format = format;
-    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -64,7 +53,7 @@ public class ExportCommand extends Command {
             Set<String> headers = extractHeaders(jsonData);
             writeCsvFile(jsonData, headers, csvFilePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            return new CommandResult(FAILURE_MESSAGE);
         }
         return new CommandResult(SUCCESS_MESSAGE);
     }
@@ -171,8 +160,6 @@ public class ExportCommand extends Command {
         if (!(other instanceof ExportCommand)) {
             return false;
         }
-
-        ExportCommand e = (ExportCommand) other;
-        return format.equals(e.format);
+        return true;
     }
 }

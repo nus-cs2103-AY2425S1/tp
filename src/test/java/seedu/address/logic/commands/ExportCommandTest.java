@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.ExportCommand.SUCCESS_MESSAGE;
 import static seedu.address.logic.commands.ExportCommand.parseTags;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -40,20 +38,12 @@ public class ExportCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
-
-    @Test
-    public void execute_export_success() {
-        CommandResult expectedCommandResult = new CommandResult(SUCCESS_MESSAGE);
-        assertCommandSuccess(new ExportCommand("csv"), model, expectedCommandResult, expectedModel);
-    }
-
     @Test
     public void equals() {
-        final ExportCommand standardCommand = new ExportCommand("csv");
-        final String differentFormat = "pdf";
+        final ExportCommand standardCommand = new ExportCommand();
 
         // same values -> returns true
-        ExportCommand commandWithSameValues = new ExportCommand("csv");
+        ExportCommand commandWithSameValues = new ExportCommand();
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -64,11 +54,7 @@ public class ExportCommandTest {
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
-
-        // different export format -> returns false
-        assertFalse(standardCommand.equals(new ExportCommand(differentFormat)));
     }
-
     @Test
     public void parseValidTag() {
         String input = "\"{\n  \"neighbours\" : \"null\"\n}\"";

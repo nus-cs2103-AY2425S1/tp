@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Comparator;
 import java.util.List;
@@ -21,8 +22,12 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the contact list by tag values in ascending or descending order.\n"
-            + "Parameters: [t/TAG asc/desc]\n"
-            + "Example : " + COMMAND_WORD + " t/friends asc\n";
+            + "Parameters: "
+            + PREFIX_TAG + "TAG "
+            + "asc/desc\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TAG + "friends asc";
+
 
     public static final String MESSAGE_NO_CONTACT_FOUND = "No contacts match the sort criteria.";
 
