@@ -83,6 +83,31 @@ public abstract class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+    /**
+     * Returns true if both persons have the same email address.
+     */
+    public boolean hasSameEmail(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getEmail() != null
+                && otherPerson.getEmail().equals(getEmail());
+    }
+
+    /**
+     * Returns true if both persons have the same phone number.
+     */
+    public boolean hasSamePhone(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getPhone() != null
+                && otherPerson.getPhone().equals(getPhone());
+    }
 
     /**
      * Returns true if both persons have the same identity and data fields.
