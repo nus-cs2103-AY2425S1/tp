@@ -16,7 +16,7 @@ public class ResultDisplay extends UiPart<Region> {
 
     private static final String FXML = "ResultDisplay.fxml";
     private static final double FONT_SCALE = 1.5;
-    private static final int ADDITIONAL_HEIGHT = 5; // in px
+    private static final int ADDITIONAL_HEIGHT = 12; // in px
     private final Logger resultLogger = Logger.getLogger(ResultDisplay.class.getName());
 
     @FXML
