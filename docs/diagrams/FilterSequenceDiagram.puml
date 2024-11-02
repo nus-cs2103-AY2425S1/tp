@@ -1,11 +1,24 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+actor User
 
-autonumber
+participant FilterCommand
+participant Model
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+User -> FilterCommand: execute(model)
+activate FilterCommand
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+
+loop combine predicates
+
+    FilterCommand -> FilterCommand: predicate = predicate.and(predicateToAdd) (for each predicateToAdd in predicateSet)
+end
+
+FilterCommand -> Model: updateFilteredPersonList(predicate)
+activate Model
+Model --> FilterCommand:
+deactivate Model
+
+FilterCommand -> User: CommandResult
+
+deactivate FilterCommand
 @enduml
