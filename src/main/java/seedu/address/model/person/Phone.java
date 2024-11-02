@@ -46,7 +46,7 @@ public class Phone {
         long alphaCount = test.chars()
             .filter(Character::isAlphabetic)
             .count();
-        
+
         return digitCount >= 3 && alphaCount == 0;
     }
 

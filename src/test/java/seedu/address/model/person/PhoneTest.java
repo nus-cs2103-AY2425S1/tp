@@ -65,7 +65,7 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
 
         // ---- Unique test cases for isValidPhoneField()
-        
+
         // invalid
         assertFalse(Phone.isValidPhoneField("91h 23a 1")); // each token has less than 3 numbers
         assertFalse(Phone.isValidPhoneField("91h     23a 1")); // extra spaces
