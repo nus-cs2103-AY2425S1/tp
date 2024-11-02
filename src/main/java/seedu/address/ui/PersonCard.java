@@ -67,7 +67,6 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         birthday.setText("Birthday: " + person.getBirthday().toString());
         appointment.setText("Next Appointment: " + person.getAppointment().value);
-        //policies.setText("Policies:\n" + person.getPoliciesString());
         person.getPolicies().forEach(policy -> {
             int index = policies.getChildren().size();
             String policyLabel = (index + 1) + ". " + policy;
