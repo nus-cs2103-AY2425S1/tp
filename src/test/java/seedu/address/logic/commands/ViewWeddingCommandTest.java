@@ -2,15 +2,15 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
@@ -75,15 +75,13 @@ public class ViewWeddingCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 0);
-
+    public void execute_noWeddingExists_throwsCommandException() {
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(null);
         ViewWeddingCommand command = new ViewWeddingCommand(predicate);
         model.updateFilteredPersonList(predicate);
 
-        assertEquals(expectedMessage, command.execute(model).getFeedbackToUser());
-        assertEquals(List.of(), model.getFilteredPersonList());
+        assertThrows(CommandException.class,
+                ViewWeddingCommand.MESSAGE_WEDDING_DOESNT_EXIST, () -> command.execute(model));
     }
 
     // @Test
