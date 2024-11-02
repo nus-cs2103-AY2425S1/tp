@@ -12,7 +12,8 @@ import java.util.logging.Logger;
 public class MeetingTitle {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Titles should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Titles should only contain alphanumeric characters and spaces. It should not be blank and "
+                    + "it should not exceed 100 characters (excluding starting and ending whitespaces)";
 
     /*
      * The first character of the title must not be a whitespace,
@@ -39,9 +40,8 @@ public class MeetingTitle {
      * Returns true if a given string is a valid meeting title.
      */
     public static boolean isValidMeetingTitle(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 100;
     }
-
 
     @Override
     public String toString() {

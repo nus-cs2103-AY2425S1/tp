@@ -254,7 +254,7 @@ Adds a specified meeting to the meeting book of ClientGrid.
 Format: `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTAL_CODE`
 
 * Adds a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
-* The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
+* The `MEETING_TITLE` should only contain alphanumeric characters and spaces. It should not be blank and it should not exceed 100 characters (excluding starting and ending whitespaces).
 * The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
 * The restrictions for the `BUYER_PHONE` and `SELLER_PHONE` are identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the `addbuyer` feature.
 * The restrictions for the `POSTAL_CODE` and `TYPE` are identical to the restrictions for the `POSTAL_CODE` and `TYPE` specified in the `addproperty` feature.
