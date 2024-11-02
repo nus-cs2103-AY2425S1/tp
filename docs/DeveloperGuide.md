@@ -290,8 +290,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user          | edit the contact information of any entry                                   | update any outdated information, and keep the list current           |
 | `* * *`  | user          | delete an entry if needed                                                   | remove any individuals who are no longer relevant to my organisation |
 | `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                   |
-| `* *`    | user          | role contacts to a group/role name                                            | group individuals into relevant sections for better clarity          |
-| `* *`    | user          | search for multiple contacts by querying its role                            | get the information of all the contacts related to the relevant role  |
+| `* *`    | user          | role contacts to a group/role name                                          | group individuals into relevant sections for better clarity          |
+| `* *`    | user          | search for multiple contacts by querying its role                           | get the information of all the contacts related to the relevant role |
 | `* *`    | user          | save my current profile                                                     | persist my profile locally through different sessions                |
 | `* *`    | user          | export my profile                                                           | use my profile on other machines/by other people                     |
 | `* *`    | user          | import another profile onto my local program                                | access the contact details from another user/another machine         |
@@ -299,6 +299,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user          | add notes to any contact                                                    | remember important details about them                                |
 | `* *`    | user          | import my contacts from an external file                                    | quickly add contacts obtained from Google Forms or others            |
 | `* *`    | user          | export my contacts to an external file                                      | send the contacts to another user or filter externally               |
+| `* *`    | user          | see all members in a separate view                                          | check members and mark their attendance more easily                  |
+| `* *`    | user          | mark attendance of several members on specific date                         | accurately record their participation status in CCA activities       |
+| `* *`    | user          | remove mark of attendance of several members on specific date               | accurately record their participation status in CCA activities       |
 | `*`      | user          | start a temporary session that does not persist between sessions            | experiment with and play around with the environment                 |
 | `*`      | user          | sort the contacts by popularity (how often I query the contact)             | quickly access frequently queried contacts                           |
 | `*`      | user          | switch profiles to another profile, containing a separate list of contacts  | separate contacts of individuals in different organisations          |
@@ -423,8 +426,70 @@ Use Case ends.
 2. CCAConnect displays all valid commands.
 
 Use case ends.
+<br>
 
 <br>
+**Use case: UC07 - View all members**
+**Actor: User**
+**MSS**
+
+1. User requests to see all members in the contacts.
+2. CCAConnect displays all members.
+
+Use case ends.
+<br>
+
+<br>
+**Use case: UC08 - Mark attendance of members**
+**Actor: User**
+**MSS**
+
+1. User requests to mark the attendance of members.
+2. User provides the details of the session (date) to mark attendance, and list of telegrams of members to be marked.
+3. System marks the attendance of the list of members on the specified date.
+
+Use case ends.
+
+**Extensions**
+* 8a. System detects that user did not enter all the required fields.
+    * 8a1. System shows user an error message.
+    * Use case ends.
+
+* 8b. System detects that user entered an invalid field.
+    * 8b1. System shows user an appropriate error message.
+    * Use case ends.
+  
+* 8c. System detects that user tried to mark the attendance of non-member contact.
+    * 8b1. System shows user an appropriate error message.
+    * Use case ends.
+<br>
+
+<br>
+**Use case: UC09 - Unmark attendance of members**
+**Actor: User**
+**MSS**
+
+1. User requests to unmark the attendance of members.
+2. User provides the details of the session (date) to unmark attendance, and list of telegrams of members to be unmarked.
+3. System unmarks the attendance of the list of members on the specified date.
+
+Use case ends.
+
+**Extensions**
+* 9a. System detects that user did not enter all the required fields.
+    * 9a1. System shows user an error message.
+    * Use case ends.
+
+* 9b. System detects that user entered an invalid field.
+    * 9b1. System shows user an appropriate error message.
+    * Use case ends.
+
+* 9c. System detects that user tried to unmark the attendance of non-member contact.
+    * 9b1. System shows user an appropriate error message.
+    * Use case ends.
+<br>
+
+
 *{More to be added}*
 <br>
 
