@@ -40,12 +40,10 @@ public class MarkPaidCommand extends Command {
             + "Example 1: " + COMMAND_WORD + " 1 " + PREFIX_MONTHPAID + "2024-01\n"
             + "Example 2: " + COMMAND_WORD + " all "
             + PREFIX_MONTHPAID + "2024-01"
-            + PREFIX_MONTHPAID + "2024-12";
+            + PREFIX_MONTHPAID + " 2024-12";
 
     public static final String MESSAGE_MARKPAID_PERSON_SUCCESS = "Marked person as paid: %1$s";
-    public static final String MESSAGE_UNMARKPAID_PERSON_SUCCESS = "Unmarked person as paid: %1$s";
     public static final String MESSAGE_MARKPAID_ALL_SUCCESS = "Marked all displayed persons as paid for: %1$s";
-    public static final String MESSAGE_UNMARKPAID_ALL_SUCCESS = "Unmarked all displayed persons as paid for: %1$s";
 
     private final MarkPaidTarget target;
     private final Set<MonthPaid> monthsPaid;
@@ -143,6 +141,7 @@ public class MarkPaidCommand extends Command {
         return new ToStringBuilder(this)
                 .add("target", target)
                 .add("monthsPaid", monthsPaid)
+                .add("isRemoving", isRemoving)
                 .toString();
     }
 

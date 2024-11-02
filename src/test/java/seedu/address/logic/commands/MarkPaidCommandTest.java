@@ -46,7 +46,7 @@ public class MarkPaidCommandTest {
         MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
         assertEquals("seedu.address.logic.commands.MarkPaidCommand{target="
                         + target.toString()
-                        + ", monthsPaid=[[" + VALID_MONTHPAID_STRING + "]]}",
+                        + ", monthsPaid=[[" + VALID_MONTHPAID_STRING + "]], isRemoving=false}",
                 command.toString());
     }
     @Test
