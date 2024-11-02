@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -43,7 +44,9 @@ public class StudentCard extends UiPart<Region> {
         tutorialId.setText(student.getTutorialId().toString());
         // Initialize attendance labels
         updateAttendanceLabels();
-
+        // Add a listener to automatically update attendance labels when attendance changes
+        student.getPresentDates().getDates()
+                .addListener((SetChangeListener<TutDate>) change -> updateAttendanceLabels());
         // Add click listener to the card
         cardPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handleCardClick());
     }
