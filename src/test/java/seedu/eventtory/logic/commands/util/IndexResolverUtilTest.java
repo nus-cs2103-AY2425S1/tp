@@ -9,6 +9,7 @@ import static seedu.eventtory.testutil.TypicalIndexes.INDEX_LAST_VENDOR;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.List;
 
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
@@ -36,7 +37,9 @@ public class IndexResolverUtilTest {
     private Model model;
     private Vendor vendor1 = TypicalVendors.ALICE;
     private Vendor vendor2 = TypicalVendors.BENSON;
+    private Vendor vendor7 = TypicalVendors.GEORGE;
     private Event event1 = TypicalEvents.ALICE;
+    private Event event7 = TypicalEvents.GEORGE;
 
     @BeforeEach
     public void setUp() {
@@ -45,10 +48,17 @@ public class IndexResolverUtilTest {
     }
 
     @Test
-    public void testResolveVendor_mainListIndex_valid() throws CommandException {
+    public void testResolveVendor_mainListIndexFirst_valid() throws CommandException {
         model.setUiState(UiState.DEFAULT);
 
         assertEquals(vendor1, IndexResolverUtil.resolveVendor(model, INDEX_FIRST_VENDOR));
+    }
+
+    @Test
+    public void testResolveVendor_mainListIndexLast_valid() throws CommandException {
+        model.setUiState(UiState.DEFAULT);
+
+        assertEquals(vendor7, IndexResolverUtil.resolveVendor(model, INDEX_LAST_VENDOR));
     }
 
     @Test
@@ -59,7 +69,7 @@ public class IndexResolverUtilTest {
         model.setUiState(UiState.EVENT_DETAILS);
 
         // Overflow to associated list
-        assertEquals(vendor2, IndexResolverUtil.resolveVendor(model, Index.fromOneBased(8)));
+        assertEquals(vendor2, IndexResolverUtil.resolveVendor(model, INDEX_OVERFLOW_VENDOR));
     }
 
     @Test
@@ -86,10 +96,17 @@ public class IndexResolverUtilTest {
     }
 
     @Test
-    public void testResolveEvent_mainListIndex_valid() throws CommandException {
+    public void testResolveEvent_mainListIndexFirst_valid() throws CommandException {
         model.setUiState(UiState.DEFAULT);
 
         assertEquals(event1, IndexResolverUtil.resolveEvent(model, INDEX_FIRST_EVENT));
+    }
+
+    @Test
+    public void testResolveEvent_mainListIndexLast_valid() throws CommandException {
+        model.setUiState(UiState.DEFAULT);
+
+        assertEquals(event7, IndexResolverUtil.resolveEvent(model, INDEX_LAST_EVENT));
     }
 
     @Test
