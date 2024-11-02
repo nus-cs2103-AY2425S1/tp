@@ -30,6 +30,4 @@ public class SortCommandTest {
         assertCommandSuccess(new SortCommand(), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
         assertEquals(model, expectedModel);
     }
-
-    //TODO: add more tests for SortCommand()
 }
