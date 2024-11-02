@@ -169,8 +169,7 @@ Format: `edit Id [n/Name] [p/Phone] [e/Email] [a/Address] [t/tag]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Editing the person with the detail same as the existing detail is not allowed.
 * A **notifying message** will be output if there is failure in editing person in MedDict database in address book.
 
@@ -195,7 +194,7 @@ Format: `getId [Keyword]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * A **notifying message** will be output if there is failure in retrieving id from MedDict database in address book.
-* 
+
 Examples:
 * `getId john` <br>
   The id of the person that you are finding is: 00
@@ -213,7 +212,8 @@ Format: `addAppointment [x/DateTime] [z/PatientId] [z/DoctorId] …​`
 * The patient id and doctor id **must be valid and present in MedDict database in address book**. 
 * The patient id **must be a positive integer and even number** 0, 2, 4, …​
 * The doctor id **must be a positive integer and odd number** 1, 3, 5, …​
-* `Remark` is an optional field. User can add remark detail by adding `[r/Remark]` when calling the command. Empty remark will be added to the appointment if remark is not specified.
+* `Remark` is an optional field. User can add remark detail by adding `[r/Remark]` when calling the command.
+  Empty remark will be added to the appointment if remark is not specified.
 * When adding appointment, the appointment detail will be added to the appointments list in both patient and doctor class.
 * Each appointment must be scheduled at a unique time to prevent overlap for both the patient and the doctor.
 * A **notifying message** will be output if there is failure in adding the appointments.
