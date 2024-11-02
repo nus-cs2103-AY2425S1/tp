@@ -13,7 +13,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.task.CreateTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Task;
@@ -36,7 +35,7 @@ public class CreateTaskCommandParserTest {
     @Test
     public void parse_incompleteDescription_failure() {
         // Invalid task with incomplete description
-        assertThrows(ParseException.class, Messages.MESSAGE_INCOMPLETE_TASK_DESCRIPTION, ()
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTaskCommand.MESSAGE_USAGE), ()
                 -> parser.parse(INVALID_TASK_DESC));
     }
 

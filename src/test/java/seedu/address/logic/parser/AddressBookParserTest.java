@@ -364,8 +364,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_createTask() throws Exception {
         String userInput = CreateTaskCommand.COMMAND_WORD
-                + " tk/todo Buy groceries tk/deadline Submit report /by 2024-12-31"
-                + " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
+                + " tk/Buy groceries tk/Submit report d/2024-12-31"
+                + " tk/Project meeting d/2024-10-10 d/2024-10-11";
         HashSet<Task> tasksToAdd = new HashSet<>(TypicalTasks.getTypicalTasks());
 
         CreateTaskCommand expectedCommand = new CreateTaskCommand(tasksToAdd);
@@ -375,8 +375,8 @@ public class AddressBookParserTest {
 
         // Test using create task keyword
         String userKeywordInput = CreateTaskCommand.COMMAND_KEYWORD
-                + " tk/todo Buy groceries tk/deadline Submit report /by 2024-12-31"
-                + " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
+                + " tk/Buy groceries tk/Submit report d/2024-12-31"
+                + " tk/Project meeting d/2024-10-10 d/2024-10-11";
         CreateTaskCommand keywordCommand = (CreateTaskCommand) parser.parseCommand(userKeywordInput);
         assertEquals(expectedCommand, keywordCommand);
     }

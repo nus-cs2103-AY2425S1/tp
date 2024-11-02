@@ -2,6 +2,7 @@ package seedu.address.logic.parser.task;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+import static seedu.address.logic.parser.ParserUtil.parseTask;
 
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +13,6 @@ import seedu.address.logic.commands.task.CreateTaskCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Task;
@@ -35,12 +35,15 @@ public class CreateTaskCommandParser implements Parser<CreateTaskCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTaskCommand.MESSAGE_USAGE));
         }
 
-        List<String> taskDescriptions = argMultimap.getAllValues(PREFIX_TASK);
-        if (taskDescriptions.isEmpty() || taskDescriptions.stream().anyMatch(String::isBlank)) {
+        List<String> taskInputStrings = argMultimap.getAllValues(PREFIX_TASK);
+        if (taskInputStrings.isEmpty() || taskInputStrings.stream().anyMatch(String::isBlank)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTaskCommand.MESSAGE_USAGE));
         }
 
-        Set<Task> tasks = ParserUtil.parseTasks(taskDescriptions);
+        Set<Task> tasks = new HashSet<>();
+        for (String taskInputString : taskInputStrings) {
+            tasks.add(parseTask(taskInputString));
+        }
 
         return new CreateTaskCommand(new HashSet<>(tasks));
     }

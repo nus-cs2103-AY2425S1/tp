@@ -20,15 +20,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Expected format: yyyy-MM-dd";
-
-    public static final String MESSAGE_INVALID_TASK_TYPE = "Unknown task type: %1$s. "
-            + "Expected one of: todo, deadline, event.";
-
-    public static final String MESSAGE_INVALID_DEADLINE_FORMAT = "Invalid deadline format. "
-            + "Usage: create-task tk/deadline [description] /by [date]";
-    public static final String MESSAGE_INVALID_EVENT_FORMAT = "Invalid event format."
-            + " Usage: create-task tk/event [description] /from [start] /to [end]";
-
     public static final String MESSAGE_INCOMPLETE_TASK_DESCRIPTION = "Task description is incomplete. "
             + "Expected format: tk/[task type] [task details].";
     public static final String MESSAGE_TO_BEFORE_FROM_INVALID = "\"From\" date must be before \"To\" date.";
