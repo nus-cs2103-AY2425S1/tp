@@ -2,8 +2,10 @@
 
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
 
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <Label fx:id="commandTextAutocomplete" maxWidth="Infinity" />
   <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here..."/>
 </StackPane>
 

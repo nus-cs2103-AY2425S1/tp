@@ -103,7 +103,7 @@ Adds a person to PROperty.
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [r/REMARKS]…​`
 
 - `NAME` and `PHONE_NUMBER` fields must be provided.
-- `PERSON_TAG` can be `Buyer`, `Seller`, `Landlord`, `Tenant`
+-  Refer to the [Tag Table](#tag-table) for a complete list of person tags.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including no tags)
@@ -179,7 +179,7 @@ Format: `findtag TAG [MORE_TAGS]`
 - The search is case-insensitive. e.g., `HDB` will match `hdb`.
 - The order of the tags does not matter.
 - Persons with at least one matching tag will be returned (i.e., an `OR` search).
-- List of possible tags you can search are: `condo`, `hdb`, `landed`, `buyer`, `seller`, `tenant` or `landlord`
+- List of possible tags you can search for are found in the [Tag Table](#tag-table)
 
 Examples:
 
@@ -277,7 +277,7 @@ Format: `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`
 - Adds a property listing to the person specified by `INDEX`
 - The `INDEX` refers to the index number shown in the displayed person list.
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
-- `PROPERTY_TAG` can be either: `condo`, `landed` or `hdb`
+- Refer to the [Tag Table](#tag-table) for a complete list of property tags.
 
 Examples:
 
@@ -370,3 +370,48 @@ _Details coming soon ..._
 | **Help**           | `help`                                                                                                                                                                          |
 | **Remark**         | `remark INDEX r/[REMARKS]`                                                                                                                                                      |
 | **Export**         | `export`                                                                                                                                                                        |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Tag Table
+
+| Tag Type | Tags                                                                                                                                                                      |
+|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Property | HDB, CONDO, RESIDENTIAL, LANDED, EC, COMMERCIAL, RETAIL, INDUSTRIAL, OFFICE, WAREHOUSE, SHOPHOUSE, TERRACE, SEMIDET, BUNGALOW, DETACHED, GCB, PENTHOUSE, MIXED, SERVAPT, DORM |
+| Person   | BUYER, SELLER, LANDLORD, TENANT, DEVELOPER, INVESTOR, MANAGER, CONTRACTOR                                                                                                 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+### Property Tags
+- **HDB**: Public housing flats governed by the Housing & Development Board.
+- **CONDO**: Private residential units with shared amenities.
+- **RESIDENTIAL**: Properties intended for residential use.
+- **LANDED**: Homes built on their own land, without shared walls (e.g., bungalows, terraces).
+- **EC**: Executive Condominium – a subsidised option bridging public and private property.
+- **COMMERCIAL**: Properties zoned for business operations.
+- **RETAIL**: Space designated for shops and consumer-facing businesses.
+- **INDUSTRIAL**: Sites for manufacturing, logistics, and heavy industry activities.
+- **OFFICE**: Office spaces designed for corporate or business use.
+- **WAREHOUSE**: Dedicated to storage and logistical operations.
+- **SHOPHOUSE**: Multi-use buildings with commercial space on the ground floor, residential above.
+- **TERRACE**: Row houses sharing side walls, commonly in clusters.
+- **SEMIDET**: Semi-detached houses sharing one side wall.
+- **BUNGALOW**: Single-story, standalone homes, often with private land.
+- **DETACHED**: Fully standalone houses, no shared walls.
+- **GCB**: Good Class Bungalows – high-end, exclusive bungalows with strict land requirements.
+- **PENTHOUSE**: Premium top-floor units, typically in condos, with added privacy and amenities.
+- **MIXED**: Properties combining multiple zoning uses, like residential and commercial.
+- **SERVAPT**: Furnished serviced apartments, typically with extended-stay services.
+- **DORM**: Dormitories, often used as shared housing for students or workers.
+
+### Person Tags
+- **BUYER**: Prospective property purchasers.
+- **SELLER**: Property owners seeking to sell.
+- **LANDLORD**: Property owners leasing to tenants.
+- **TENANT**: Individuals or entities renting properties.
+- **DEVELOPER**: Companies or individuals creating or renovating properties.
+- **INVESTOR**: Individuals or groups acquiring property for financial gain.
+- **MANAGER**: Those managing property operations, tenant relations, or maintenance.
+- **CONTRACTOR**: Professionals providing construction, renovation, or repair services.

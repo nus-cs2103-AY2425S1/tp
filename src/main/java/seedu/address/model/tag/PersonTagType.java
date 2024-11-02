@@ -2,10 +2,10 @@ package seedu.address.model.tag;
 
 /**
  * Represents the valid types of person-related tags.
- * Person tags are used to classify individuals based on their role (e.g., Buyer, Seller, Landlord, Tenant).
+ * Person tags are used to classify individuals based on their role (e.g., Buyer, Seller, Landlord, Tenant, etc).
  */
 public enum PersonTagType {
-    BUYER, SELLER, LANDLORD, TENANT;
+    BUYER, SELLER, LANDLORD, TENANT, DEVELOPER, INVESTOR, MANAGER, CONTRACTOR;
 
     /**
      * Checks if the given tag name corresponds to a valid {@code PersonTagType}.
