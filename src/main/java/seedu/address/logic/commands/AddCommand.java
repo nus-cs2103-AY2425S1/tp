@@ -26,7 +26,7 @@ public class AddCommand extends Command {
 
     public static final String MISSING_PREFIX_MESSAGE_START = "The following mandatory prefixes are missing: ";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
