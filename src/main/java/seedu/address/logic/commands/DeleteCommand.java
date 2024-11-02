@@ -86,18 +86,16 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteCommand otherDeleteCommand)) {
             return false;
         }
-
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
 
         if (targetIndex == null) {
             if (otherDeleteCommand.targetIndex == null) {
                 if (targetName == null) {
                     return otherDeleteCommand.targetName == null;
                 }
-                return targetName.equals(otherDeleteCommand.targetName);
+                return targetName.equalsIgnoreCase(otherDeleteCommand.targetName);
             }
             return false;
         }
