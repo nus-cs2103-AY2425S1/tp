@@ -38,8 +38,8 @@ public class AddEmergencyContactCommand extends Command {
             + PREFIX_EMERGENCY_CONTACT_PHONE + "EMERGENCY CONTACT PHONE "
             + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EMERGENCY_CONTACT_NAME + "91234567 "
-            + PREFIX_EMERGENCY_CONTACT_PHONE + "johndoe@example.com"
+            + PREFIX_EMERGENCY_CONTACT_NAME + "Sarah Lim "
+            + PREFIX_EMERGENCY_CONTACT_PHONE + "91234567 "
             + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "Granddaughter";
 
     public static final String MESSAGE_SUCCESS = "Added emergency contact: %1$s";

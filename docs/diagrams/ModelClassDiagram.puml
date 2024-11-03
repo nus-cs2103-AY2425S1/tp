@@ -19,6 +19,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class EmergencyContact
 
 Class I #FFFFFF
 }
@@ -41,6 +42,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> "*" EmergencyContact
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
