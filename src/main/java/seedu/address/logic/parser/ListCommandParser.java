@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
@@ -33,6 +35,8 @@ public class ListCommandParser implements Parser<ListCommand> {
         String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 1, ListCommand.MESSAGE_USAGE);
         String entityType = splitArgs[0];
 
+        ParserUtil.requireValidEntity(entityType);
+
         switch (entityType) {
         case ListContactCommand.ENTITY_WORD:
             return new ListContactCommand();
@@ -43,7 +47,9 @@ public class ListCommandParser implements Parser<ListCommand> {
         case ListAllCommand.ENTITY_WORD:
             return new ListAllCommand();
         default:
-            throw new ParseException(ListCommand.MESSAGE_USAGE);
+            String exceptionMessage = String.format(Messages.MESSAGE_OPERATION_NOT_ALLOWED,
+                    AddCommand.COMMAND_WORD, entityType);
+            throw new ParseException(exceptionMessage);
         }
     }
 
