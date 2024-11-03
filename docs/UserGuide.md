@@ -29,7 +29,7 @@ CareLink is a desktop address book application targeted towards independent Geri
     - [Locating appointments by date-time range: `findapp`](#locating-appointments-by-date-time-range-findapp)
     - [Examples:](#examples-1)
     - [Deleting a person : `delete`](#deleting-a-person--delete)
-    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    - [Clearing all entries : `clear confirm`](#clearing-all-entries-clear-confirm)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
@@ -61,7 +61,7 @@ CareLink is a desktop address book application targeted towards independent Geri
 
    - `delete S6483749D` : Deletes the person with NRIC `S6483749D`.
 
-   - `clear` : Deletes all contacts.
+   - `clear confirm` : Deletes all contacts.
 
    - `exit` : Exits the app.
 

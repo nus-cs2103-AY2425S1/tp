@@ -101,6 +101,16 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+#### Clear Confirm Command Sequence Diagram
+
+The sequence diagram below shows how the `clear confirm` command is processed by the `Logic` component:
+
+![Interactions Inside the Logic Component for the `clear confirm` Command](images/ClearConfirmSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** This diagram illustrates the additional step where the command checks for explicit confirmation before clearing all data.
+</div>
+
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -704,6 +714,80 @@ Use case ends.
    - **Category:** User Constraints
    - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
    - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
+
+6. **Portability**
+    - **Category:** System Constraints
+    - **Requirement:** The product must support downloading CSV files that can be easily loaded and used on another system.
+    - **User Benefit:** Users can seamlessly transfer and access their data across different systems, providing flexibility and ease of use.
+
+7. **Readable Font Size**
+    - **Category:** Usability
+    - **Requirement:** The font size should be reasonably large to ensure readability, particularly for users who may have difficulty reading smaller text.
+    - **User Benefit:** Ensures users can comfortably read information on the interface, improving accessibility and user experience.
+
+8. **Simplicity**
+    - **Category:** Usability
+    - **Requirement:** The interface should be intuitive, with straightforward workflows that make it easy to navigate and use.
+    - **User Benefit:** Reduces the learning curve for new users, allowing for efficient and hassle-free operation, improving overall user satisfaction.
+
+**Use Case 15: Clear All Entries with Confirmation**
+
+**System**: CareLink  
+**Use Case**: UC15 - Clear All Entries with Confirmation  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+- The address book contains patient data.
+
+### Guarantees
+- All patient data is removed only after explicit confirmation.
+- CareLink prompts Fred to use the correct command to avoid accidental data loss.
+
+### Main Success Scenario (MSS)
+1. Fred enters the `clear confirm` command.
+2. CareLink validates the command.
+3. CareLink clears all entries from the address book.
+4. CareLink displays a success message confirming that all data has been cleared.
+5. Use case ends.
+
+### Extensions
+- **1a. Fred enters `clear` without `confirm`**:
+    - 1a.1: CareLink displays a message prompting Fred to use `clear confirm`.
+    - Use case ends.
+
+- **1b. No confirmation provided**:
+    - 1b.1: If Fred does not use the `confirm` keyword, no data is deleted.
+    - Use case ends.
+
+---
+
+### Non-Functional Requirements
+
+1. **Typing-Preferred**
+    - **Category:** User Efficiency
+    - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
+    - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
+
+2. **Platform-Independent**
+    - **Category:** Environment Requirements
+    - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
+    - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
+
+3. **No-DBMS**
+    - **Category:** Technical Requirements
+    - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
+    - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
+
+4. **Human-Editable File**
+    - **Category:** Data Requirements
+    - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
+    - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
+
+5. **Single-User**
+    - **Category:** User Constraints
+    - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
+    - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
 
 6. **Portability**
     - **Category:** System Constraints
