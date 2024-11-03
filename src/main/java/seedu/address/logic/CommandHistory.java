@@ -15,7 +15,7 @@ public class CommandHistory {
             FXCollections.unmodifiableObservableList(userInputHistory);
     private int currentIndex = 0;
     private final ObservableList<Command> commandInputHistory = FXCollections.observableArrayList();
-    private ObservableList<Command> unmodifiableCommandInputHistory =
+    private final ObservableList<Command> unmodifiableCommandInputHistory =
             FXCollections.unmodifiableObservableList(commandInputHistory);
     private int currentCommandIndex = 0;
     /**
@@ -81,7 +81,7 @@ public class CommandHistory {
     /**
      * Returns an unmodifiable view of {@code commandInputHistory}.
      */
-    public ObservableList<Command> getCommandHistory() {
+    public ObservableList<Command> getCommandInputHistory() {
         return unmodifiableCommandInputHistory;
     }
 

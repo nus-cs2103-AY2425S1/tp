@@ -149,11 +149,11 @@ public class EditCommand extends Command {
 
     @Override
     public String undo(Model model, CommandHistory pastCommands) {
-        Person bfrEdit = this.getUneditedPerson();
+        Person beforeEdit = this.getUneditedPerson();
         Person afterEdit = this.getEditedPerson();
-        model.setPerson(afterEdit, bfrEdit);
+        model.setPerson(afterEdit, beforeEdit);
         pastCommands.remove();
-        return String.format(MESSAGE_UNDO_EDIT, bfrEdit.getName());
+        return String.format(MESSAGE_UNDO_EDIT, beforeEdit.getName());
     }
 
     @Override

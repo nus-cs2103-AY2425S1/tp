@@ -167,9 +167,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Appointment> getPersonsAppointments(Person person) {
-        FilteredList<Appointment> filteredList = appointments
-                .filtered(appointment -> appointment.name().equals(person.getName()));
-        return filteredList;
+        return appointments.filtered(appointment -> appointment.name().equals(person.getName()));
     }
 
     @Override

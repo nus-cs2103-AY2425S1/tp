@@ -9,6 +9,12 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+    public static final String[] ACTION_COMMANDS = {
+        AddCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
+        EditCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD,
+        AddAppointmentCommand.COMMAND_WORD, DeleteAppointmentCommand.COMMAND_WORD
+    };
+
     /**
      * Executes the command and returns the result message.
      *
@@ -20,8 +26,6 @@ public abstract class Command {
 
     public abstract String getCommandWord();
 
-    public String undo(Model model, CommandHistory pastCommands) {
-        return null;
-    };
+    public abstract String undo(Model model, CommandHistory pastCommands);
 
 }

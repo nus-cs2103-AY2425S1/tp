@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -49,62 +50,21 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (pastCommands.getCommandHistory().isEmpty()) {
+        if (pastCommands.getCommandInputHistory().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_LATEST_COMMAND);
         }
-        Command latestCommand = pastCommands.getCommandHistory().get(pastCommands.getSize() - 1);
+        Command latestCommand = pastCommands.getCommandInputHistory().get(pastCommands.getSize() - 1);
         String latestCommandWord = latestCommand.getCommandWord();
         logger.info("----------------[COMMAND UNDONE][" + latestCommandWord + "]");
         String resultMessage = String.format(
                 "No change as command undone (%s) was not an action command", latestCommandWord);
-        boolean isAction = false;
 
-        switch (latestCommandWord) {
-        case "add":
-            AddCommand addCommand = (AddCommand) latestCommand;
-            isAction = true;
-            resultMessage = addCommand.undo(model, pastCommands);
-            break;
-        case "edit":
-            EditCommand editCommand = (EditCommand) latestCommand;
-            isAction = true;
-            resultMessage = editCommand.undo(model, pastCommands);
-            break;
-
-        case "delete":
-            DeleteCommand dltCommand = (DeleteCommand) latestCommand;
-            isAction = true;
-            resultMessage = dltCommand.undo(model, pastCommands);
-            break;
-
-        case "clear":
-            ClearCommand clearCommand = (ClearCommand) latestCommand;
-            isAction = true;
-            resultMessage = clearCommand.undo(model, pastCommands);
-            break;
-
-        case "adda":
-            AddAppointmentCommand addAppointmentCommand = (AddAppointmentCommand) latestCommand;
-            isAction = true;
-            resultMessage = addAppointmentCommand.undo(model, pastCommands);
-            break;
-
-        case "deletea":
-            DeleteAppointmentCommand deleteAppointmentCommand = (DeleteAppointmentCommand) latestCommand;
-            isAction = true;
-            resultMessage = deleteAppointmentCommand.undo(model, pastCommands);
-            break;
-
-        default:
-            pastCommands.remove();
-            break;
-
-        }
-        if (isAction) {
+        if (Arrays.asList(ACTION_COMMANDS).contains(latestCommandWord)) {
+            resultMessage = latestCommand.undo(model, pastCommands);
             return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_SUCCESS, resultMessage));
         } else {
+            pastCommands.remove();
             return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_NEUTRAL, resultMessage));
-
         }
     }
 
@@ -115,6 +75,11 @@ public class UndoCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        return null;
     }
 
     @Override
@@ -129,7 +94,7 @@ public class UndoCommand extends Command {
         }
 
         UndoCommand otherUndoCommand = (UndoCommand) other;
-        return pastCommands.getCommandHistory()
-                .equals(otherUndoCommand.getPastCommands().getCommandHistory());
+        return pastCommands.getCommandInputHistory()
+                .equals(otherUndoCommand.getPastCommands().getCommandInputHistory());
     }
 }

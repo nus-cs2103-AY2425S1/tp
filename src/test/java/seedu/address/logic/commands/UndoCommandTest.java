@@ -49,7 +49,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoClearCommand() throws CommandException {
-        CLEAR_COMMAND_LAST.getCommandHistory().get(CLEAR_COMMAND_LAST.getSize() - 1).execute(model);
+        CLEAR_COMMAND_LAST.getCommandInputHistory().get(CLEAR_COMMAND_LAST.getSize() - 1).execute(model);
 
         UndoCommand undoCommand = new UndoCommand(CLEAR_COMMAND_LAST);
         String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS, MESSAGE_UNDO_CLEAR);
@@ -60,7 +60,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoAddCommand() throws CommandException {
-        ADD_COMMAND_LAST.getCommandHistory().get(ADD_COMMAND_LAST.getSize() - 1).execute(model);
+        ADD_COMMAND_LAST.getCommandInputHistory().get(ADD_COMMAND_LAST.getSize() - 1).execute(model);
 
         UndoCommand undoCommand = new UndoCommand(ADD_COMMAND_LAST);
 
@@ -73,9 +73,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoDeleteCommand() throws CommandException {
-        DELETE_COMMAND_LAST.getCommandHistory().get(DELETE_COMMAND_LAST.getSize() - 1).execute(model);
-        for (int i = 0; i < DELETE_COMMAND_LAST.getSize(); i++) {
-        }
+        DELETE_COMMAND_LAST.getCommandInputHistory().get(DELETE_COMMAND_LAST.getSize() - 1).execute(model);
         UndoCommand undoCommand = new UndoCommand(DELETE_COMMAND_LAST);
 
         String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS,
@@ -86,7 +84,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoEditCommand() throws CommandException {
-        EDIT_COMMAND_LAST.getCommandHistory().get(EDIT_COMMAND_LAST.getSize() - 1).execute(model);
+        EDIT_COMMAND_LAST.getCommandInputHistory().get(EDIT_COMMAND_LAST.getSize() - 1).execute(model);
 
         UndoCommand undoCommand = new UndoCommand(EDIT_COMMAND_LAST);
 
@@ -97,7 +95,7 @@ public class UndoCommandTest {
     }
     @Test
     public void execute_undoAddAppointmentCommand() throws CommandException {
-        ADDA_COMMAND_LAST.getCommandHistory().get(ADDA_COMMAND_LAST.getSize() - 1).execute(model);
+        ADDA_COMMAND_LAST.getCommandInputHistory().get(ADDA_COMMAND_LAST.getSize() - 1).execute(model);
 
         UndoCommand undoCommand = new UndoCommand(ADDA_COMMAND_LAST);
 
@@ -116,7 +114,7 @@ public class UndoCommandTest {
         temp.add(testAppointment);
         model = new ModelManager(getTypicalAddressBook2(), temp, new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), temp, new UserPrefs());
-        DELETEA_COMMAND_LAST.getCommandHistory().get(DELETEA_COMMAND_LAST.getSize() - 1).execute(model);
+        DELETEA_COMMAND_LAST.getCommandInputHistory().get(DELETEA_COMMAND_LAST.getSize() - 1).execute(model);
         UndoCommand undoCommand = new UndoCommand(DELETEA_COMMAND_LAST);
 
         String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS,
