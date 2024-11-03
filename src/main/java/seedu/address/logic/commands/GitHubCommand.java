@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.address.AppParameters;
 import seedu.address.commons.core.Browser;
 import seedu.address.commons.core.LogsCenter;
@@ -12,15 +15,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Launches a person's GitHub repository from the address book.
  */
 public class GitHubCommand extends Command {
     public static final String COMMAND_WORD = "github";
-    private static final Logger logger = LogsCenter.getLogger(AppParameters.class);
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Launches the github repository of the user. "
             + "Parameters: "
@@ -34,6 +33,7 @@ public class GitHubCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Browser launched successfully";
 
+    private static final Logger logger = LogsCenter.getLogger(AppParameters.class);
     private static final String GITHUB_URL = "https://github.com/%1s/?tab=repositories";
 
     private Name toLaunch;
