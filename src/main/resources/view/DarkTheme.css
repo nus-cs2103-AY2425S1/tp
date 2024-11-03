@@ -348,6 +348,5 @@
 }
 
 .view-person-panel-placeholder {
-    -fx-background-color: #f0f0f0;
+    -fx-background-color: #f0f0f0; /* Replace with the actual color */
 }
-

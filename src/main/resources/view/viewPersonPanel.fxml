@@ -20,13 +20,13 @@
                textAlignment="CENTER"
                maxWidth="400" />
 
-        <!-- Status label with lighter blue background -->
-        <Label fx:id="status" styleClass="cell_small_label" text="Status: \$status"
-               style="-fx-background-color: #add8e6; -fx-padding: 5; -fx-background-radius: 5;" />
-
         <!-- Job label with lighter green background -->
         <Label fx:id="job" styleClass="cell_small_label" text="Job: \$job"
                style="-fx-background-color: #90ee90; -fx-padding: 5; -fx-background-radius: 5;" />
+
+        <!-- Status label with lighter blue background -->
+        <Label fx:id="status" styleClass="cell_small_label" text="Status: \$status"
+               style="-fx-background-color: #add8e6; -fx-padding: 5; -fx-background-radius: 5;" />
 
         <!-- Add a Region for spacing between Introduction and Background -->
         <Region prefHeight="20" /> <!-- Adjust the height as needed for spacing -->
