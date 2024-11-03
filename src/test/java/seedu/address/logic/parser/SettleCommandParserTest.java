@@ -22,6 +22,7 @@ public class SettleCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
+        // EP: missing parts
         // no index specified
         assertParseFailure(parser, VALID_AMOUNT_DESC, MESSAGE_INVALID_FORMAT);
 
@@ -35,6 +36,7 @@ public class SettleCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
+        // EP: invalid input
         // negative index
         assertParseFailure(parser, "-5" + VALID_AMOUNT_DESC, MESSAGE_INVALID_FORMAT);
 

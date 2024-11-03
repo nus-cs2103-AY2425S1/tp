@@ -27,7 +27,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_WORD_RANDOM_CASE = "AdD";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             + PREFIX_SUBJECT + "SUBJECT "
             + PREFIX_RATE + "RATE "
             + "[" + PREFIX_PAID_AMOUNT + "PAID] "
-            + "[" + PREFIX_OWED_AMOUNT + "OWED] \n"
+            + "[" + PREFIX_OWED_AMOUNT + "OWED]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

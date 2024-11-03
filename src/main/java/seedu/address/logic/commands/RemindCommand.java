@@ -12,7 +12,7 @@ import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
 
 /**
- * Lists all student with lesson scheduled for today in the Result Displau box.
+ * Lists all student with lesson scheduled for today in the Result Display box.
  */
 public class RemindCommand extends Command {
 

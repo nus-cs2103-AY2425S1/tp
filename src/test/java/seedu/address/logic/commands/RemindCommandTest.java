@@ -27,6 +27,7 @@ public class RemindCommandTest {
 
     @Test
     public void execute_noStudentsScheduledForToday_showsNoClassMessage() {
+        // EP: no students scheduled for today
         model = new ModelManager();
         List<Student> reminder = model.getScheduledStudents(Days.SATURDAY);
         assertTrue(reminder.isEmpty());
@@ -39,6 +40,7 @@ public class RemindCommandTest {
 
     @Test
     public void execute_studentsScheduledForToday_showsReminderMessage() {
+        // EP: students scheduled for today
         List<Student> reminder = model.getScheduledStudents(RemindCommand.TODAY);
         assertTrue(!reminder.isEmpty());
 

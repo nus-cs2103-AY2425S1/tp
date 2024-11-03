@@ -15,12 +15,14 @@ public class IncomeCommandTest {
     private final Model model = new ModelManager();
     @Test
     public void execute_emptyAddressBook_noPaidAmountNoOwedAmount() {
+        // EP: empty address book
         CommandResult commandResult = new IncomeCommand().execute(model);
         assertEquals(commandResult.getFeedbackToUser(), Messages.getIncomeMessage(0, 0));
     }
 
     @Test
     public void execute_addStudent_showUpdatedPaidAmountAndOwedAmount() {
+        // EP: non-empty address book
         Student validStudent = new StudentBuilder().build();
         model.addStudent(validStudent);
         CommandResult commandResult = new IncomeCommand().execute(model);

@@ -21,6 +21,7 @@ public class PayCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
+        // EP: missing parts
         // No index specified
         assertParseFailure(parser, VALID_HOUR_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
@@ -34,6 +35,7 @@ public class PayCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
+        // EP: invalid input
         // Negative index
         assertParseFailure(parser, "-5" + VALID_HOUR_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
@@ -53,6 +55,7 @@ public class PayCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // EP: invalid value
         // Invalid hour (not a number)
         assertParseFailure(parser, "1" + INVALID_HOUR_DESC, MESSAGE_INVALID_HOUR);
 
