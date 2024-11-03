@@ -294,6 +294,15 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 <br>
 
+## Implementation of Entity Commands
+Entity commands include `add`, `delete`, `find`, `clear` commands
+
+**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity `person` or `appt`, followed by appropriate arguments and prefixes.
+**Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command
+**Step 3**. The `AddressBookParser` then creates a `xyzEntityCommand` by passing string to `xyzCommandParser` and is returned to the `LogicManager`.
+**Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
+**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
+
 ### Find appointment feature
 
 #### Implementation
@@ -317,8 +326,12 @@ and is then returned to the `LogicManager`.
 **Aspect: How to show find appointment.**
 
 - **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
+  - Pros: Fast and easy to find by date and name
+  - Cons: Confusing syntax from user's perspective
 
-- **Alternative 2**: Create different find commands, find by date, find by name etc. 
+- **Alternative 2**: Create different find commands, find by date, find by name etc.
+  - Pros: Much easy in terms of user experience
+  - Cons: Harder to implement as more code needs to be written.
 
 <br>
 
@@ -343,6 +356,8 @@ and is then returned to the `LogicManager`.
 **Aspect**: How to show list 
 
 - **Alternative 1 (Current choice)**: Print them out individually on the listpanel
+  - Pros: Easy to scroll through
+  - Cons: Might look cluttered to some users
 
 
 #### Design considerations
