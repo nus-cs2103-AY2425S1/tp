@@ -27,6 +27,15 @@ public class Phone {
     }
 
     /**
+     * Constructs an {@code Phone}.
+     *
+     * @param blank A blank phone.
+     */
+    public Phone(Blank blank) {
+        value = "";
+    }
+
+    /**
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {

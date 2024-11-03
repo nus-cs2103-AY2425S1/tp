@@ -31,6 +31,15 @@ public class Address {
     }
 
     /**
+     * Constructs an {@code Address}.
+     *
+     * @param blank A blank address.
+     */
+    public Address(Blank blank) {
+        value = "";
+    }
+
+    /**
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
