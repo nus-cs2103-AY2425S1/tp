@@ -71,10 +71,10 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhoneField("91h     23a 1")); // extra spaces
 
         // valid
-        String VALID_PHONE_NUMBER = "8123-4567";
-        assertTrue(Phone.isValidPhoneField(VALID_PHONE_NUMBER + " misc text")); // valid phone number at start
-        assertTrue(Phone.isValidPhoneField("misc text " + VALID_PHONE_NUMBER)); // valid phone number at end
-        assertTrue(Phone.isValidPhoneField("misc text           " + VALID_PHONE_NUMBER)); // extra spaces
+        final String validPhoneNumber = "8123-4567";
+        assertTrue(Phone.isValidPhoneField(validPhoneNumber + " misc text")); // valid phone number at start
+        assertTrue(Phone.isValidPhoneField("misc text " + validPhoneNumber)); // valid phone number at end
+        assertTrue(Phone.isValidPhoneField("misc text           " + validPhoneNumber)); // extra spaces
     }
 
     @Test
