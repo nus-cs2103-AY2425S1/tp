@@ -30,14 +30,17 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Index index = ParserUtil.parseIndex(trimmedArgs);
             return new DeleteCommand(index);
         } catch (ParseException pe) {
-
-            try {
-                Name name = ParserUtil.parseName(trimmedArgs);
-                return new DeleteCommand(name);
-            } catch (ParseException pe2) {
-
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe2);
+            if (trimmedArgs.matches("[^\\d]*")) { // Checks if the input does not contain digits
+                try {
+                    Name name = ParserUtil.parseName(trimmedArgs);
+                    return new DeleteCommand(name);
+                } catch (ParseException pe2) {
+                    // If name parsing fails, throw the specific name-related error message
+                    throw new ParseException(pe2.getMessage(), pe2);
+                }
+            } else {
+                // If it's not a name and not a valid index, throw an invalid index message
+                throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX);
             }
         }
     }

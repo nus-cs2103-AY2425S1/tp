@@ -37,7 +37,7 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidName_throwsParseException() {
         // Assuming names cannot contain special characters, like '@'
-        assertParseFailure(parser, "John @ Doe",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertParseFailure(parser, "John @ Doe", expectedMessage);
     }
 }
