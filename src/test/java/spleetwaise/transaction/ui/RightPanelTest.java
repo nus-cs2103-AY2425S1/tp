@@ -13,12 +13,10 @@ import java.lang.reflect.Method;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
-import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
@@ -31,7 +29,7 @@ import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
-public class RightPanelTest {
+public class RightPanelTest extends GuiUnitTest {
 
     private RightPanel rightPanel;
     private CommonModel mockCommonModel;
@@ -39,13 +37,6 @@ public class RightPanelTest {
     private ObservableList<Transaction> mockTransactionList;
     private ReadOnlyTransactionBook mockReadOnlyTransactionBook;
     private MockedStatic<CommonModel> mockedCommonModelStatic;
-
-    @BeforeAll
-    public static void initJfxRuntime() {
-        System.setProperty("java.awt.headless", "true");
-        Platform.startup(() -> {
-        });
-    }
 
     @BeforeEach
     public void setUp() {
@@ -66,6 +57,7 @@ public class RightPanelTest {
         when(mockCommonModel.getCurrentPredicate()).thenReturn(mockPredicateProperty);
 
         rightPanel = spy(new RightPanel(mockCommandBox));
+        uiPartExtension.setUiPart(rightPanel);
     }
 
     @AfterEach
@@ -74,8 +66,7 @@ public class RightPanelTest {
     }
 
     @Test
-    public void testResetFilter_updatesCommonModelPredicate()
-            throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void testResetFilter_updatesCommonModelPredicate() {
         rightPanel.resetFilter();
 
         // Verify that updateFilteredTransactionList was called with the correct predicate
