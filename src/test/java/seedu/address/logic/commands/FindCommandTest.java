@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.FindCommand.MESSAGE_NO_CONTACTS_FOUND;
 import static seedu.address.testutil.TypicalContacts.BENSON;
 import static seedu.address.testutil.TypicalContacts.CARL;
 import static seedu.address.testutil.TypicalContacts.DANIEL;
@@ -57,6 +58,17 @@ public class FindCommandTest {
 
         // different contact -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+    }
+
+    @Test
+    public void execute_validKeywords_noContactFound() {
+        String expectedMessage = MESSAGE_NO_CONTACTS_FOUND;
+        ContainsKeywordsPredicate predicate =
+                new ContainsKeywordsPredicateBuilder().withNameKeywords("dfqidjasbkcascief").build();
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertTrue(model.getFilteredContactList().isEmpty());
     }
 
     @Test
