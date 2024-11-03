@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_TAG_NOT_FOUND;
+import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.index.Index;
@@ -21,14 +22,15 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
      */
     public DeleteTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        assert !args.isEmpty();
+        // assert !args.isEmpty(); // This causes error to not be displayed properly
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultiMap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
         argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
