@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -91,6 +92,10 @@ public class FindCommand extends Command {
         return COMMAND_WORD;
     }
 
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        return null;
+    }
 
     @Override
     public boolean equals(Object other) {
