@@ -398,6 +398,8 @@ _Details coming soon ..._
 | **Find**             | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567D`                                                                            |
 | **Find Appointment** | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g., `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`          |
 
+| **Add Appointment** | `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`<br> e.g., `addapp nric/S1234567A d/01/01/2025 start/10:00 end/11:00`
+
 | **Edit Appointment** | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e.g., `editapp nric/S1234567A d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00`
 
 | **Delete Appointment** | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> e.g., `deleteapp nric/S9876543B d/15/03/2025 start/14:30`
