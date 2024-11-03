@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -93,6 +94,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEducation(String education) {
         descriptor.setEducation(new Education(education));
+        return this;
+    }
+
+    /**
+     * Sets the student {@code LessonTime} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withLessonTime(String lessonTime) {
+        descriptor.setLessonTime(new LessonTime(lessonTime));
         return this;
     }
 

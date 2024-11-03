@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_TIME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_EMAIL_DESC_BOB;
@@ -59,16 +60,16 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + EDUCATION_DESC_BOB + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB
-                + PARENT_EMAIL_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + LESSON_TIME_DESC_BOB + ADDRESS_DESC_BOB + EDUCATION_DESC_BOB + PARENT_NAME_DESC_BOB
+                + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + EDUCATION_DESC_BOB
-                        + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + LESSON_TIME_DESC_BOB
+                        + EDUCATION_DESC_BOB + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
