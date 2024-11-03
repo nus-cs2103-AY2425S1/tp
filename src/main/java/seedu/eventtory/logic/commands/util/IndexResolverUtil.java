@@ -33,8 +33,11 @@ public class IndexResolverUtil {
 
             List<Vendor> associatedVendorList = model.getAssociatedVendors(viewedEvent);
 
-            return getFromTwoLists(index, mainVendorList, associatedVendorList,
-                Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
+            try {
+                return getFromTwoLists(index, mainVendorList, associatedVendorList);
+            } catch (IndexOutOfBoundsException e) {
+                throw new CommandException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
+            }
         } else if (index < mainVendorList.size()) {
             return mainVendorList.get(index);
         } else {
@@ -60,8 +63,11 @@ public class IndexResolverUtil {
 
             List<Event> associatedEventList = model.getAssociatedEvents(viewedVendor);
 
-            return getFromTwoLists(index, mainEventList, associatedEventList,
-                Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+            try {
+                return getFromTwoLists(index, mainEventList, associatedEventList);
+            } catch (IndexOutOfBoundsException e) {
+                throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+            }
         } else if (index < mainEventList.size()) {
             return mainEventList.get(index);
         } else {
@@ -73,8 +79,7 @@ public class IndexResolverUtil {
      * Retrieve an item from two lists, where the second list is accessed if the index overflows from the first list.
      * Index are assumed to be zero-based and non-negative.
      */
-    private static <T> T getFromTwoLists(int index, List<T> list1, List<T> list2,
-        String errorMessage) throws CommandException {
+    private static <T> T getFromTwoLists(int index, List<T> list1, List<T> list2) throws IndexOutOfBoundsException {
         assert index >= 0 : "Index should be non-negative";
 
         if (index < list1.size()) {
@@ -85,7 +90,7 @@ public class IndexResolverUtil {
             if (overflowIndex < list2.size()) {
                 return list2.get(overflowIndex);
             } else {
-                throw new CommandException(errorMessage);
+                throw new IndexOutOfBoundsException();
             }
         }
     }
