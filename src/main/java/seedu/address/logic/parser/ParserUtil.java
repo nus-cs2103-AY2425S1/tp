@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_RANGE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_WITH_SPACES;
+import static seedu.address.logic.Messages.MESSAGE_LOGGER_FOR_EXCEPTION;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -34,11 +35,8 @@ import seedu.address.model.tutorial.Tutorial;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     private static final Logger logger = LogsCenter.getLogger(ParserUtil.class);
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -160,6 +158,7 @@ public class ParserUtil {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
         if (!Tutorial.isValidTutorial(trimmedSubject)) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
         }
         return new Tutorial(trimmedSubject);
@@ -203,6 +202,7 @@ public class ParserUtil {
         requireNonNull(searchString);
         String trimmedArgs = searchString.trim();
         if (trimmedArgs.isEmpty()) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(
                     String.format(MESSAGE_EMPTY_INPUT, FindCommand.MESSAGE_USAGE));
         }
@@ -219,6 +219,7 @@ public class ParserUtil {
     public static String parseSingleWordFromFindCommand(String searchString) throws ParseException {
         String trimmedArgs = parseMultipleWordsFromFindCommand(searchString);
         if (trimmedArgs.contains(" ")) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(
                     String.format(MESSAGE_INVALID_WITH_SPACES, FindCommand.MESSAGE_USAGE));
         }
@@ -241,6 +242,7 @@ public class ParserUtil {
         LocalDate endDate = parseDate(attendanceDates[1]);
 
         if (startDate.isAfter(endDate)) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(String.format(MESSAGE_INVALID_DATE_RANGE, FindCommand.MESSAGE_USAGE));
         }
 
@@ -257,6 +259,7 @@ public class ParserUtil {
     private static String[] validateAndSplitDateString(String dateInput) throws ParseException {
         String[] dateParts = dateInput.split(":");
         if (dateParts.length != 2) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         return dateParts;
@@ -273,6 +276,7 @@ public class ParserUtil {
         try {
             return LocalDate.parse(parseSingleWordFromFindCommand(dateString), Attendance.VALID_DATE_FORMAT);
         } catch (DateTimeParseException e) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(String.format(MESSAGE_INVALID_DATE, FindCommand.MESSAGE_USAGE));
         }
     }
@@ -287,6 +291,7 @@ public class ParserUtil {
     public static boolean parseBoolean(String booleanString) throws ParseException {
         String trimmedArgs = parseSingleWordFromFindCommand(booleanString);
         if (!StringUtil.isBooleanValue(trimmedArgs)) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }

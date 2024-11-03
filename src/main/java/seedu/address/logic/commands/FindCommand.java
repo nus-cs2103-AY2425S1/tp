@@ -2,14 +2,21 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -26,23 +33,34 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds persons in the address book matching the given "
-            + "keywords across specified fields. "
-            + "You can search by name, address, attendance, tags, and more.\n"
-            + "Name, address, and tag searches support multiple words and duplicate prefix; "
-            + "other fields accept only a single word and single prefix. "
-            + "Partial matching is allowed, E.g. Doing find n/dav will match a person with the name David."
-            + "Search is case-insensitive, and multiple conditions are combined with logical AND.\n"
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Find students matching the given "
+            + "keywords across specified fields.\n"
+            + "1. Name, address, and tutorial searches support multiple word inputs; "
+            + "tag and tutorial searches support duplicate prefixes; "
+            + "other fields accept only a single word and single prefix.\n"
+            + "2. Exact matching is required for tutorial field. "
+            + "with a tutorial named mathematics.\n3. Payment field will require a true/false input. "
+            + "matches all students who have paid fees.\n4. Attendance field require a date range input with the format"
+            + "of dd/MM/yyyy:dd/MM/yyyy.\n5. Otherwise for other fields, "
+            + "partial matching is allowed.\n"
+            + "6. Search is case-insensitive, and multiple conditions are combined with logical AND.\n"
+            + "7. Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_ATTENDANCE + "DATE_RANGE (in the format of dd/MM/yy:dd/MM/yy)]"
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_PAYMENT + "PAYMENT (true/false)] "
+            + "[" + PREFIX_ATTENDANCE + "DATE_RANGE (in the format of dd/MM/yyyy:dd/MM/yyyy)] "
+            + "[" + PREFIX_TUTORIAL + "TUTORIAL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TAG + "friend "
+            + PREFIX_TAG + "colleague "
             + PREFIX_ATTENDANCE + "24/10/2024:27/10/2024";
     private final List<Predicate<Person>> personPredicates;
     private final List<Predicate<Participation>> participationPredicates;
+    private final Logger logger = LogsCenter.getLogger(FindCommand.class);
 
     /**
      * Constructs a {@code FindCommand} with specified predicates for filtering {@code Person}
@@ -66,6 +84,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        logger.info(" - Running execute(Model model) in " + FindCommand.class);
         requireNonNull(model);
 
         // PredicateAdapter converts Predicate<Participation> to Predicate<Person>
@@ -76,6 +95,7 @@ public class FindCommand extends Command {
         Predicate<Person> combinedPredicate = this.personPredicates.stream().reduce(x -> true, Predicate::and);
 
         model.updateFilteredPersonList(combinedPredicate);
+        logger.info(" - Successfully updated filtered person list");
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
