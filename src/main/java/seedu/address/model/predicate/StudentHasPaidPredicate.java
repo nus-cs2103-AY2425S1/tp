@@ -11,6 +11,11 @@ import seedu.address.model.person.Person;
 public class StudentHasPaidPredicate implements Predicate<Person> {
     private final boolean paymentUpToDate;
 
+    /**
+     * Constructs a {@code StudentHasPaidPredicate} with the specified payment status.
+     *
+     * @param paymentUpToDate A boolean flag indicating if the person is expected to have paid.
+     */
     public StudentHasPaidPredicate(boolean paymentUpToDate) {
         this.paymentUpToDate = paymentUpToDate;
     }
