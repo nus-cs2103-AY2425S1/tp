@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
@@ -19,6 +20,11 @@ public class ViewWeddingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: KEYWORD"
             + "Example: " + COMMAND_WORD + " Jonus & Izzat";
+    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "This wedding cannot be found."
+            + "\n"
+            + "A wedding has to be created using the command '"
+            + AddWeddingCommand.COMMAND_WORD
+            + "' first.";
 
     private final TagContainsKeywordsPredicate predicate;
 
@@ -27,11 +33,17 @@ public class ViewWeddingCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        int numOfParticipants = model.getFilteredPersonList().size();
+
+        if (numOfParticipants == 0) {
+            throw new CommandException(String.format(MESSAGE_WEDDING_DOESNT_EXIST));
+        }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, numOfParticipants));
     }
 
     @Override
