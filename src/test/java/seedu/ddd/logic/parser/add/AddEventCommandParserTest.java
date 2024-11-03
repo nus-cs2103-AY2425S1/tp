@@ -39,8 +39,7 @@ import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME_1;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.AddEventCommand;
-import seedu.ddd.logic.parser.AddEventCommandParser;
+import seedu.ddd.logic.commands.add.AddEventCommand;
 import seedu.ddd.logic.parser.CommandParserTestUtil;
 import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;

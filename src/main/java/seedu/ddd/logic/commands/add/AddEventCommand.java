@@ -1,4 +1,4 @@
-package seedu.ddd.logic.commands;
+package seedu.ddd.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;

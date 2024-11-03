@@ -1,4 +1,6 @@
-package seedu.ddd.logic.commands;
+package seedu.ddd.logic.commands.add;
+
+import seedu.ddd.logic.commands.Command;
 
 /**
  * This interface provides constants for add command-related keywords and flags.

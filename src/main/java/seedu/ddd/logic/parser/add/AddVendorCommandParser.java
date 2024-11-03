@@ -1,4 +1,4 @@
-package seedu.ddd.logic.parser;
+package seedu.ddd.logic.parser.add;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -13,7 +13,12 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.ddd.logic.commands.AddContactCommand;
+import seedu.ddd.logic.commands.add.AddContactCommand;
+import seedu.ddd.logic.parser.ArgumentMultimap;
+import seedu.ddd.logic.parser.ArgumentTokenizer;
+import seedu.ddd.logic.parser.Parser;
+import seedu.ddd.logic.parser.ParserUtil;
+import seedu.ddd.logic.parser.Prefix;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.common.Id;

@@ -28,7 +28,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.AddEventCommand;
 import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;

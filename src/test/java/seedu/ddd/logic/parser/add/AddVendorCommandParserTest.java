@@ -34,8 +34,7 @@ import static seedu.ddd.testutil.contact.TypicalContacts.VALID_VENDOR;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.AddContactCommand;
-import seedu.ddd.logic.parser.AddVendorCommandParser;
+import seedu.ddd.logic.commands.add.AddContactCommand;
 import seedu.ddd.logic.parser.CommandParserTestUtil;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;

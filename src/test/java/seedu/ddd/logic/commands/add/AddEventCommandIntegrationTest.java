@@ -25,7 +25,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.AddEventCommand;
 import seedu.ddd.logic.commands.Command;
 import seedu.ddd.logic.commands.CommandTestUtil;
 import seedu.ddd.model.Model;
