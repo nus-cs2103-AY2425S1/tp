@@ -52,7 +52,6 @@ public class SortCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_sortsByDate() {
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         expectedModel.updateSortedPersonList(new PersonDateComparator());
         assertCommandSuccess(new SortDateCommand(false), model,
                 SortDateCommand.MESSAGE_SUCCESS + SortCommand.ASCENDING_SUCCESS, expectedModel);
@@ -84,7 +83,6 @@ public class SortCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_sortsByDateDesc() {
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         expectedModel.updateSortedPersonList(new PersonDateComparator().reversed());
         assertCommandSuccess(new SortDateCommand(true), model,
                 SortDateCommand.MESSAGE_SUCCESS + SortCommand.DESCENDING_SUCCESS, expectedModel);

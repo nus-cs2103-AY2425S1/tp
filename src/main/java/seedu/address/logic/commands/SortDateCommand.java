@@ -21,7 +21,6 @@ public class SortDateCommand extends SortCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         if (isReversed) {
             model.updateSortedPersonList(new PersonDateComparator().reversed());
             return new CommandResult(MESSAGE_SUCCESS + DESCENDING_SUCCESS);
