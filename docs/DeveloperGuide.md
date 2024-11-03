@@ -632,4 +632,4 @@ testers are expected to do more *exploratory* testing.
 
    1. Delete the `data/contactmate.json` file.
    2. Launch the app.<br>
-       Expected: The app should show a list of sample persons._
+       Expected: The app should show a list of sample persons.
