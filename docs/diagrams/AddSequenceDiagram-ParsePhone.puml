@@ -11,6 +11,7 @@ end box
 
 [-> ParserUtil : parseOptionalValue(\nargMultimap.getValue(PREFIX_PHONE), \n ParserUtil::parsePhone, new Phone(""))
 
+activate ParserUtil
 
 alt value present
 
@@ -40,9 +41,10 @@ alt value present
         deactivate ParserUtil
 
     end
-    [<--ParserUtil : p or ParseException
+    [<--ParserUtil 
 
 else value not present
 [<--ParserUtil : new Phone("")
+deactivate ParserUtil
 end
 @enduml
