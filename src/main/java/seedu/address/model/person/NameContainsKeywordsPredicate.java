@@ -20,8 +20,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         if (keywords.isEmpty()) {
             return false;
-        }
-        else if (keywords.get(keywords.size() - 1).contains("/")) {
+        } else if (keywords.get(keywords.size() - 1).contains("/")) {
             return isExact(person);
         } else {
             return keywords.stream()

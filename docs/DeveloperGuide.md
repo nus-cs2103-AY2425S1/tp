@@ -355,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. ClientHub informs the user that there are multiple contacts with the same name and requests the user to input the full name of the contact
 
         Step 1 is repeated until user inputs full name of the contact.
- 
+
 **Use case: List contacts**
 
 **MSS**
