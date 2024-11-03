@@ -19,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/ghos7ie.md)]
 
 * Role: Developer
-* Responsibilities: Documentation
+* Responsibilities: Documentation + Code Testing + Project Management
 
 ### Wang Hongyanyan
 
