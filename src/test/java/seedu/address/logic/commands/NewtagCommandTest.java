@@ -69,7 +69,7 @@ public class NewtagCommandTest {
         model.addTags(duplicateTags);
 
         NewtagCommand newTagCommand = new NewtagCommand(duplicateTags);
-        String expectedMessage = NewtagCommand.MESSAGE_DUPLICATE;
+        String expectedMessage = NewtagCommand.MESSAGE_ALL_DUPLICATE + duplicateTags;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTags(duplicateTags);
@@ -87,7 +87,7 @@ public class NewtagCommandTest {
         model.addTag(duplicateTag);
 
         NewtagCommand newTagCommand = new NewtagCommand(mixedTags);
-        String expectedMessage = NewtagCommand.MESSAGE_DUPLICATE;
+        String expectedMessage = NewtagCommand.MESSAGE_SOME_DUPLICATE + List.of(duplicateTag);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTags(mixedTags);

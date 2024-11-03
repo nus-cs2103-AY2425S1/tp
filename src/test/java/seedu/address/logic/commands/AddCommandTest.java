@@ -196,7 +196,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public boolean addTags(List<Tag> tags) {
+        public Set<Tag> addTags(List<Tag> tags) {
             throw new AssertionError("This method should not be called.");
         }
 
