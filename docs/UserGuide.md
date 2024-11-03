@@ -16,7 +16,6 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 <!-- * Table of Contents -->
 <page-nav-print />
 
-## Table of Contents
 1. [Quick start](#quick-start)
 2. [Features](#features)
     - [Viewing help : `help`](#viewing-help-help)
@@ -24,6 +23,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
     - [Listing all persons : `list`](#listing-all-persons-list)
     - [Editing a person : `edit`](#editing-a-person-edit)
     - [Listing students by certain attributes : `filter`](#listing-students-by-certain-attributes-filter)
+    - [Adding a module to a student: `module`](#adding-a-module-to-a-student-module)
     - [Deleting a person : `delete`](#deleting-a-person-delete)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
     - [Exiting the program : `exit`](#exiting-the-program-exit)
@@ -223,6 +223,19 @@ Examples:
 
   ![result for 'find alex david'](images/filterAlexDavidResult.png)
 
+### Adding a module to a student: `module`
+
+Adds a module to a specific student using their ID.
+
+Format:
+```bash
+module ID m/MODULE
+```
+
+Examples:
+* `module 12345678 m/CS2103T`
+  ![result for 'add module result'](images/addModule.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from EduContacts.
@@ -237,6 +250,17 @@ delete ID
 Examples:
 * `delete 71271222` will delete student contact with `ID: 71271222`.
   ![result for 'delete_71271222'](images/filterAlexDavidResult.png)
+
+### Finding a person : `find`
+
+Finds the specified person from EduContacts and displays their details.
+
+Format: `find ID`
+
+* Finds student with the specified `ID`.
+
+Examples:
+* `find 12345678` will find student contact with `ID: 12345678` and display their details.
 
 ### Clearing all entries : `clear`
 
@@ -321,6 +345,8 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete ID`<br> e.g., `delete 12345678`
 **Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
-**Filter**   | `find [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `find n/James Jake`
+**Add Module** | `module ID [m/MODULE]` <br> e.g., `add 12345678 m/CS2103T`
+**Filter**   | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`
+**Find**   | `find ID`<br> e.g., `find 12345678`
 **List**   | `list`
 **Help**   | `help`
