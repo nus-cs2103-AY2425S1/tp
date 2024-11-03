@@ -32,7 +32,7 @@ public class AddRemarksCommand extends Command {
     public static final String MESSAGE_ADD_REMARKS_SUCCESS = "Successfully "
             + "added remarks: %s to patient of ID: %d.";
     public static final String MESSAGE_ADD_NOTES_FAILURE = "Unable to "
-            + "add notes! Check the id entered!";
+            + "add remarks! Check the id entered!";
     private final int patientId;
     private final String additionalNotes;
 
