@@ -106,6 +106,17 @@ public class Person {
         this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
     }
 
+    /**
+     * Creates a Person object
+     *
+     * @param name the name of the person.
+     * @param phone the phone number of the person.
+     * @param email the email of the person.
+     * @param telegram the telegram of the person.
+     * @param github the github of the person.
+     * @param weeksPresent the number of weeks attended by the person.
+     * @param tags the tags for that person.
+     */
     public Person(Name name,
                   Phone phone,
                   Email email,

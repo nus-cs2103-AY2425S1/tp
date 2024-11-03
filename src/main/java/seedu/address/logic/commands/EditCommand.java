@@ -88,7 +88,7 @@ public class EditCommand extends Command {
                 .getWeeksPresent().orElse(personToEdit.getWeeksPresent());
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedTelegram,updatedGithub, updatedWeeksPresent, updatedTags);
+                updatedTelegram, updatedGithub, updatedWeeksPresent, updatedTags);
 
     }
 

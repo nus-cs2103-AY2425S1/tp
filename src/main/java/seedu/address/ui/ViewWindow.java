@@ -19,8 +19,7 @@ public class ViewWindow extends UiPart<Region> {
     private static final String FXML = "ViewWindow.fxml";
 
     public final Person person;
-    int MAX_WEEKS = 12; // Set the total weeks for the display
-
+    private final int maxWeeks = 13;
 
     @FXML
     private VBox cardPane;
@@ -65,8 +64,7 @@ public class ViewWindow extends UiPart<Region> {
 
         if (!person.getWeeksPresent().isEmpty()) {
             weekLabel.getChildren().add(new Label("Weeks attended: "));
-            
-            for (int week = 1; week <= MAX_WEEKS; week++) {
+            for (int week = 1; week <= maxWeeks; week++) {
                 Label weekLabelNode = new Label(String.valueOf(week));
 
                 if (person.getWeeksPresent().contains(week)) {
