@@ -9,10 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.StudentStatus;
-import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.StudentStatus;
+import seedu.address.model.contact.TelegramHandle;
 import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
 

@@ -328,13 +328,18 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #contactListPanel, #contactWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
+}
+
+
+#nickname .label {
+    -fx-font-size: 15;
 }
 
 #roles {

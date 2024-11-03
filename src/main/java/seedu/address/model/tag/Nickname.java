@@ -56,9 +56,9 @@ public class Nickname {
     }
 
     /**
-     * Compares the nickname of another person contact in alphabetical order.
+     * Compares the nickname of another contact in alphabetical order.
      *
-     * @param otherNickname Nickname of another person contact
+     * @param otherNickname Nickname of another contact
      * @return Integer status of the comparison
      */
     public int compareTo(Nickname otherNickname) {
