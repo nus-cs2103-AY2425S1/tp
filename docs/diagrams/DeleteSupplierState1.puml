@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After "Delete Supplier Command" State
+
+package State {
+    class State1 as "<u>ab:AddressBook</u>"
+}
+@enduml
