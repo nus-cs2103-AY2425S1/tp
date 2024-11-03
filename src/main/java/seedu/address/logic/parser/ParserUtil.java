@@ -43,6 +43,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      */
     public static void requireValidEntity(String entity) throws ParseException {
+        requireNonNull(entity);
         String trimmedEntity = entity.trim();
 
         // TODO: Not sure if this is magic string?
