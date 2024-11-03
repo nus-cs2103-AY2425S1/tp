@@ -301,7 +301,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Helps to track the following:
     * Students
     * Their groups
-    * Group projects’ progress
+    * Groups’ progress
     * TA will create Groups and assign tasks
         * Mark the tasks as the groups complete them
 

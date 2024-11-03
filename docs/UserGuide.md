@@ -97,161 +97,159 @@ If you can type fast, T_Assistant can get your contact management tasks done fas
 
 #### Listing Students: `list_s`, `ls`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Shows a list of all students in the T_Assistant.
 
-##### Usage Scenario
+**Format**: `list_s`
 
-Add more scenarios if necessary
+This screenshot shows the result of executing `list_s`.
 
-###### Scenario #1
-
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
-
+![list_students](images/screenshots/list_students.png)
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Student: `add_s`, `as`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Adds a student to T_Assistant.
 
-##### Usage Scenario
+**Format**: `add_s/as sno/STUDENT_NUMBER sn/STUDENT_NAME e/EMAIL [t/TAG]...`
 
-Add more scenarios if necessary
+##### Notes
 
-###### Scenario #1
+1. Student Number is the unique identifier for each student, so no 2 students can have the same student number.
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
-Include before and after screenshots
+##### Usage Scenario 
 
-##### Errors
+###### Scenario #1: Adding John Doe to T_Assistant
 
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `as sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9`.
+
+![add_student](images/screenshots/add_student.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Deleting a Student: `del_s`, `ds`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `del_s sno/A0123456A`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `del_s sno/A0123456A`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Student: `edit_s`, `es`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `edit_s sno/A0123456A sn/James Ho Ting Kang`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `edit_s sno/A0123456A sn/James Ho Ting Kang`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Student to a Group: `add_s_g`, `asg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `add_s_g sno/A0123456A gn/CS2103-F12-2`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `add_s_g sno/A0123456A gn/CS2103-F12-2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Deleting a Student from a Group: `del_s_g`, `dsg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `del_s_g sno/A0123456A`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `del_s_g sno/A0123456A`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Finding Students: `find_s`, `fs`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `find_s q/James Ho`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `find_s q/James Ho`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Sorting Students: `sort_s`, `ss`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `sort_s`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `sort_s`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -263,121 +261,127 @@ Include before and after screenshots
 
 #### Listing Groups: `list_g`, `lg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `list_g`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `list_g`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Group: `add_g`, `ag`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `add_g gn/CS2103-F12-2`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `add_g gn/CS2103-F12-2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Deleting a Group: `del_g`, `dg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `del_g gn/CS2103-F12-2`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `del_g gn/CS2103-F12-2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Group: `edit_g`, `eg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `edit_g i/1 gn/CS2103-F12-3`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `edit_g i/1 gn/CS2103-F12-3`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Finding Groups: `find_g`, `fg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `find_g q/CS2103-F12-2`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `find_g q/CS2103-F12-2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Sorting Groups: `sort_g`, `sg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `sort_g`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `sort_g`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -389,221 +393,232 @@ Include before and after screenshots
 
 #### Listing Tasks: `list_t`, `lt`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `list_t`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `list_t`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Task to a Group: `add_t_g`, `atg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `add_t_g tn/v1.5 Release td/2024-11-07 2359 gn/CS2103-F12-2`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `add_t_g tn/v1.5 Release td/2024-11-07 2359 gn/CS2103-F12-2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Task to ALL Groups: `add_t`, `at`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `add_t tn/Submit Postmortem td/2024-10-20 1800`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `add_t tn/Submit Postmortem td/2024-10-20 1800`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Adding an Existing Task to a Group: `del_t_g`, `dtg`
+#### Adding an Existing Task to a Group: `add_et_g`, `aetg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `add_et_g i/1 gn/CS2103-F12-3`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-F12-3`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Deleting a Task from ALL Groups: `del_t`, `dt`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `del_t i/1`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `del_t i/1`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Deleting a Task from a Group: `del_t_g`, `dtg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `del_t_g i/1 gn/CS2103-F12-2`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F12-2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Task for a Group: `edit_t_g`, `etg`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `edit_t_g i/1 gn/CS2103-F12-3 tn/v1.4 Release`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-3 tn/v1.4 Release`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Task for ALL Groups: `edit_t`, `et`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `edit_t i/1 td/2024-11-20 1200`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `edit_t i/1 td/2024-11-20 1200`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Mark a Task for a Group: `mark_t`, `mt`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `mark_t gn/CS2103-F12-2 i/2`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `mark_t gn/CS2103-F12-2 i/2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Finding Tasks: `find_t`, `ft`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `find_t q/v1.3 Release`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `find_t q/v1.3 Release`.
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Sorting Tasks: `sort_t`, `st`
 
-Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+Explanation of what command does.
 
-##### Usage Scenario
+**Format**: `sort_t`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
 ###### Scenario #1
 
-Include before and after screenshots
-
-##### Errors
-
-| Error Message   | Reason   |
-|:----------------|:---------|
-| Error Message 1 | Reason 1 |
+This screenshot shows the result of executing `sort_t`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -625,9 +640,9 @@ Format: `redo`
 
 #### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/screenshots/helpMessage.png)
 
 Format: `help`
 
