@@ -14,6 +14,18 @@ MedConnect is a **desktop app for managing contacts, optimized for use via a Com
 
 --------------------------------------------------------------------------------------------------------------------
 
+## How to use this User Guide
+This User Guide is designed to help you understand and use MedConnect effectively. Here are some tips on how to navigate and use this guide:
+1. **Table of Contents**: At the beginning of the guide, you will find a Table of Contents. Use this to quickly jump to the section you are interested in.
+1. **Quick Start**: If you are new to MedConnect, start with the Quick Start section. It provides step-by-step instructions on how to set up and start using the application.
+1. **Features**: This section details all the commands available in MedConnect. Each command is explained with its format, parameters, and examples. Use this section to learn how to perform specific tasks.
+1. **Command Summary**: At the end of the guide, there is a Command Summary table that provides a quick reference for all commands. Use this table to quickly look up the format of a command.
+1. **FAQ**: The FAQ section addresses common questions and issues. Check this section if you encounter any problems or have questions about using MedConnect.
+1. **Known Issues**: This section lists any known issues with the application and their workarounds. Refer to this section if you experience any unexpected behavior.
+1. **Notes and Tips**: Throughout the guide, you will find notes and tips highlighted in different styles. These provide additional information and helpful hints for using MedConnect effectively.  
+   
+By following these sections, you can quickly find the information you need and make the most out of MedConnect.
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
