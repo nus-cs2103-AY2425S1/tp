@@ -46,10 +46,22 @@ public class AddGradeCommand extends Command {
                     + PREFIX_SCORE
                     + "9 ";
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
+    public static final String HELP_MESSAGE =
+            "Input addGrade without any fields to see list of assignments specified in database.";
+    private static final AddGradeCommand showAssignmentDefault = new AddGradeCommand(true);
 
     private final Name personName;
     private final Float score;
     private final String assignmentName;
+    private boolean showAssignments;
+
+
+    private AddGradeCommand(boolean showAssignments) {
+        this.personName = null;
+        this.score = null;
+        this.assignmentName = null;
+        this.showAssignments = showAssignments;
+    }
 
     /**
      * @param personName     Name of the person.
@@ -61,6 +73,10 @@ public class AddGradeCommand extends Command {
         this.personName = new Name(personName);
         this.score = score;
         this.assignmentName = assignmentName;
+    }
+
+    public static AddGradeCommand showAssignmentDefault() {
+        return showAssignmentDefault;
     }
 
     private static Person createGradeToAddToPerson(Person person, String assignmentName, float score) {
@@ -81,9 +97,14 @@ public class AddGradeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (showAssignments) {
+            return new CommandResult(model.getPredefinedAssignments().toString());
+        }
+
         // check if assignment is in predefined list
         if (!model.hasAssignment(assignmentName)) {
-            throw new CommandException("Invalid assignment name: " + assignmentName);
+            throw new CommandException("Invalid assignment name: " + assignmentName + "\n" + HELP_MESSAGE);
         }
 
         if (score > model.maxScore(assignmentName) || score < 0) {
@@ -100,15 +121,20 @@ public class AddGradeCommand extends Command {
 
     @Override
     public String toString() {
+        if (showAssignments) {
+            return "Show assignments command";
+        }
+
         return personName + " " + assignmentName + " " + score;
     }
 
     @Override
     public boolean equals(Object other) {
         if (other instanceof AddGradeCommand otherCommand) {
-            return otherCommand.personName.equals(personName)
+            return Objects.equals(otherCommand.personName, personName)
                     && Objects.equals(otherCommand.assignmentName, assignmentName)
-                    && Objects.equals(otherCommand.score, score);
+                    && Objects.equals(otherCommand.score, score)
+                    && otherCommand.showAssignments == showAssignments;
         }
         return false;
     }

@@ -80,5 +80,13 @@ public class AddGradeCommandTest {
 
     }
 
+    @Test
+    public void execute_helpString() throws Exception {
+        AddGradeCommand c = AddGradeCommand.showAssignmentDefault();
+        assertEquals(
+                c.execute(model).getFeedbackToUser(),
+                model.getPredefinedAssignments().toString());
+    }
+
 
 }

@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assignment.ReadOnlyPredefinedAssignmentsData;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -118,8 +119,12 @@ public interface Model {
     boolean hasAssignment(String name);
 
     float maxScore(String assignment);
+
     String getAssignmentName(String name);
+
     boolean hasName(Name name);
+
+    ReadOnlyPredefinedAssignmentsData getPredefinedAssignments();
 
     /**
      * Returns {@code Github} detials of the specified {@name}
