@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
@@ -24,7 +26,7 @@ import spleetwaise.transaction.storage.adapters.JsonAdaptedTransaction;
 class JsonSerializableTransactionBook {
 
     public static final String MESSAGE_DUPLICATE_TRANSACTIONS = "Transaction list contains duplicate transaction(s).";
-
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableTransactionBook.class);
     private final List<JsonAdaptedTransaction> transactions = new ArrayList<>();
 
     /**
@@ -54,11 +56,18 @@ class JsonSerializableTransactionBook {
         requireNonNull(addressBookModel);
         TransactionBook transactionBook = new TransactionBook();
         for (JsonAdaptedTransaction jsonAdaptedTxn : transactions) {
-            Transaction txn = jsonAdaptedTxn.toModelType(addressBookModel);
-            if (transactionBook.containsTransaction(txn) || transactionBook.containsTransactionById(txn)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TRANSACTIONS);
+            try {
+                Transaction txn = jsonAdaptedTxn.toModelType(addressBookModel);
+                if (transactionBook.containsTransaction(txn) || transactionBook.containsTransactionById(txn)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_TRANSACTIONS);
+                }
+                transactionBook.addTransaction(txn);
+            } catch (IllegalValueException e) {
+                logger.warning(String.format(
+                        "Transaction book is possibly corrupted: %s Ignoring corrupted transactions.",
+                        e.getMessage()
+                ));
             }
-            transactionBook.addTransaction(txn);
         }
         return transactionBook;
     }
