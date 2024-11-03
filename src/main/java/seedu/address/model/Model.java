@@ -103,6 +103,9 @@ public interface Model {
      */
     void updateSortingOrder(Comparator<Person> comparator);
 
+    /** Returns an unmodifiable view of the appointment list */
+    List<Appointment> getAppointments();
+
     /**
      * Adds the given appointment.
      * {@code appointment} must not conflict with any existing appointments.
@@ -123,6 +126,11 @@ public interface Model {
      * Deletes all appointments with the given name.
      */
     void deleteAppointments(Name name);
+
+    /**
+     * Gets the appointments belonging to this person.
+     */
+    ObservableList<Appointment> getPersonsAppointments(Person person);
 
     /** Returns an unmodifiable view of the filtered appointment list */
     ObservableList<Appointment> getFilteredAppointmentList();

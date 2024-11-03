@@ -144,7 +144,7 @@ Format: `delete INDEXES`
 
 * Deletes the people at the specified `INDEXES`.
 * The indexes refer to the index numbers shown in the displayed person list.
-* The indexes **must be a positive integer** 1, 2, 3, …​
+* The indexes **must be positive integers** not exceeding 2^31 - 1 e.g. 1, 2, 3, …
 * The indexes can be in **any order** so long as all the indexes fall within the size of the current list.
 * Duplicated valid index inputs would be treated as unique index inputs.
 

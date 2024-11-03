@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
@@ -28,5 +29,10 @@ public class ListAppointmentCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        return null;
     }
 }
