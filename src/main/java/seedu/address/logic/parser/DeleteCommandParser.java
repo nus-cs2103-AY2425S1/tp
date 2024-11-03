@@ -20,7 +20,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         if (args == "") {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteReminderCommand.MESSAGE_USAGE));
+                    DeleteCommand.MESSAGE_USAGE));
         }
         Name name = ParserUtil.parseName(args);
         return new DeleteCommand(name);
