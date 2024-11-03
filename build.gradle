@@ -81,11 +81,9 @@ dependencies {
 shadowJar {
     archiveFileName = 'AgentAssist.jar'
     zip64 = true
-    minimize()
     exclude('**/META-INF/*.SF', '**/META-INF/*.DSA', '**/META-INF/*.RSA')
     exclude('**/*.md') // Markdown files
     exclude('**/*.txt') // Text files
-//    exclude('**/*.png', '**/*.jpg') // Images, if not required
     exclude('**/docs/**')
     exclude('**/src/test/**')
 }

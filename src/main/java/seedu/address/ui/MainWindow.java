@@ -18,7 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,8 +33,8 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
-    private PersonListPanel personListPanel;
-    private PersonDetailPanel personDetailPanel;
+    private ClientListPanel clientListPanel;
+    private ClientDetailPanel clientDetailPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -48,10 +48,10 @@ public class MainWindow extends UiPart<Stage> {
     private SplitPane splitPane;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane clientListPanelPlaceholder;
 
     @FXML
-    private StackPane personDetailsPanelPlaceholder;
+    private StackPane clientDetailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,11 +113,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        clientListPanel = new ClientListPanel(logic.getFilteredClientList());
+        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
-        personDetailPanel = new PersonDetailPanel();
-        personDetailsPanelPlaceholder.getChildren().add(personDetailPanel.getRoot());
+        clientDetailPanel = new ClientDetailPanel();
+        clientDetailsPanelPlaceholder.getChildren().add(clientDetailPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -134,7 +134,7 @@ public class MainWindow extends UiPart<Stage> {
             splitPane.setDividerPositions(0.6);
         });
 
-        splitPane.getItems().remove(personDetailsPanelPlaceholder);
+        splitPane.getItems().remove(clientDetailsPanelPlaceholder);
     }
 
     /**
@@ -181,15 +181,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handles the view command by updating the UI to show person details.
+     * Handles the view command by updating the UI to show client details.
      * If the details panel is not visible, adds it to the split pane.
-     * Updates the person details based on the provided index in the command.
+     * Updates the client details based on the provided index in the command.
      *
      * @param commandText The full command text containing the view command and index
      */
     private void handleViewCommand(String commandText) {
-        if (!splitPane.getItems().contains(personDetailsPanelPlaceholder)) {
-            splitPane.getItems().add(personDetailsPanelPlaceholder);
+        if (!splitPane.getItems().contains(clientDetailsPanelPlaceholder)) {
+            splitPane.getItems().add(clientDetailsPanelPlaceholder);
             placeholderImage.setVisible(false);
             splitPane.setDividerPositions(0.6);
         }
@@ -198,19 +198,19 @@ public class MainWindow extends UiPart<Stage> {
         if (commandParts.length > 1) {
             try {
                 int index = Integer.parseInt(commandParts[1]) - 1; // Assuming 1-based indexing in UI
-                Person personToView = logic.getFilteredPersonList().get(index);
-                personDetailPanel.setPersonDetails(personToView);
+                Client clientToView = logic.getFilteredClientList().get(index);
+                clientDetailPanel.setClientDetails(clientToView);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 // Handle invalid index
-                resultDisplay.setFeedbackToUser("Invalid person index.");
+                resultDisplay.setFeedbackToUser("Invalid client index.");
             }
         } else {
-            resultDisplay.setFeedbackToUser("Please provide a person index to view.");
+            resultDisplay.setFeedbackToUser("Please provide a client index to view.");
         }
     }
 
     private void handleCloseCommand() {
-        splitPane.getItems().remove(personDetailsPanelPlaceholder);
+        splitPane.getItems().remove(clientDetailsPanelPlaceholder);
     }
 
     /**
@@ -224,7 +224,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowPerson()) {
+            if (commandResult.isShowClient()) {
                 handleViewCommand(commandText);
             } else {
                 handleCloseCommand();

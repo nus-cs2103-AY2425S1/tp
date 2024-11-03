@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
  * Represents the result of a command execution.
@@ -23,19 +23,19 @@ public class CommandResult {
     /** The application should show a confirmation button */
     private final boolean showConfirmation;
 
-    private final boolean showPerson;
-    private final Person viewedPerson;
+    private final boolean showClient;
+    private final Client viewedClient;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         boolean showPerson, Person viewedPerson, boolean showConfirmation) {
+                         boolean showClient, Client viewedClient, boolean showConfirmation) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.showPerson = showPerson;
-        this.viewedPerson = viewedPerson;
+        this.showClient = showClient;
+        this.viewedClient = viewedClient;
         this.showConfirmation = showConfirmation;
     }
 
@@ -59,12 +59,12 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isShowPerson() {
-        return showPerson;
+    public boolean isShowClient() {
+        return showClient;
     }
 
-    public Person getViewedPerson() {
-        return viewedPerson;
+    public Client getViewedClient() {
+        return viewedClient;
     }
 
     public boolean isShowConfirmation() {
@@ -86,13 +86,13 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && showConfirmation == otherCommandResult.showConfirmation
-                && showPerson == otherCommandResult.showPerson
-                && Objects.equals(viewedPerson, otherCommandResult.viewedPerson);
+                && showClient == otherCommandResult.showClient
+                && Objects.equals(viewedClient, otherCommandResult.viewedClient);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showConfirmation, showPerson, viewedPerson);
+        return Objects.hash(feedbackToUser, showHelp, exit, showConfirmation, showClient, viewedClient);
     }
 
     @Override

@@ -21,7 +21,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -57,47 +57,47 @@ public class EditCommandParser implements Parser<EditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_INCOME, PREFIX_JOB, PREFIX_TIER, PREFIX_NEW_REMARK, PREFIX_APPEND_REMARK, PREFIX_STATUS);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
         Set<String> errors = new LinkedHashSet<>();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(
+            editClientDescriptor.setName(
                     parseField(() -> ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(
+            editClientDescriptor.setPhone(
                     parseField(() -> ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(
+            editClientDescriptor.setEmail(
                     parseField(() -> ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(
+            editClientDescriptor.setAddress(
                     parseField(() -> ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()),
                             errors));
         }
         if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
-            editPersonDescriptor.setJob(parseField(() -> ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()),
+            editClientDescriptor.setJob(parseField(() -> ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()),
                     errors));
         }
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
-            editPersonDescriptor.setIncome(parseField(() -> ParserUtil.parseIncome(
+            editClientDescriptor.setIncome(parseField(() -> ParserUtil.parseIncome(
                     argMultimap.getValue(PREFIX_INCOME).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
-            editPersonDescriptor.setTier(parseField(() -> ParserUtil.parseTier(
+            editClientDescriptor.setTier(parseField(() -> ParserUtil.parseTier(
                     argMultimap.getValue(PREFIX_TIER).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_NEW_REMARK).isPresent()) {
-            editPersonDescriptor.setNewRemark(parseField(() -> ParserUtil.parseNewRemark(
+            editClientDescriptor.setNewRemark(parseField(() -> ParserUtil.parseNewRemark(
                     argMultimap.getValue(PREFIX_NEW_REMARK).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_APPEND_REMARK).isPresent()) {
-            editPersonDescriptor.setAppendedRemark(parseField(() -> ParserUtil.parseNewRemark(
+            editClientDescriptor.setAppendedRemark(parseField(() -> ParserUtil.parseNewRemark(
                     argMultimap.getValue(PREFIX_APPEND_REMARK).get()), errors));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            editPersonDescriptor.setStatus(parseField(() -> ParserUtil.parseStatus(
+            editClientDescriptor.setStatus(parseField(() -> ParserUtil.parseStatus(
                     argMultimap.getValue(PREFIX_STATUS).get()), errors));
         }
 
@@ -106,12 +106,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                     getErrorMessage(errors)));
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editClientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED + "\n"
                     + EditCommand.MESSAGE_USAGE_OPTIONAL_PARAMETERS);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editClientDescriptor);
     }
 
 }

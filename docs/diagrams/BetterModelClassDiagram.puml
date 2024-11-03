@@ -4,18 +4,18 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AgentAssist *-right-> "1" UniquePersonList
+AgentAssist *-right-> "1" UniqueClientList
 
-UniquePersonList -right-> Person
+UniqueClientList -right-> Client
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> Tier
-Person *--> Job
-Person *--> Income
-Person *--> Status
-Person *--> Remark
+Client *--> Name
+Client *--> Phone
+Client *--> Email
+Client *--> Address
+Client *--> Tier
+Client *--> Job
+Client *--> Income
+Client *--> Status
+Client *--> Remark
 
 @enduml

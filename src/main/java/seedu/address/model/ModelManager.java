@@ -14,8 +14,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.exceptions.ClientNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,8 +26,8 @@ public class ModelManager implements Model {
     private AgentAssist historyAgentAssist = null;
     private AgentAssist currentAgentAssist;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
-    private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
+    private final FilteredList<Client> filteredClients;
+    private final SimpleObjectProperty<Client> selectedClient = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given agentAssist and userPrefs.
@@ -40,7 +40,7 @@ public class ModelManager implements Model {
 
         this.currentAgentAssist = new AgentAssist(agentAssist);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.currentAgentAssist.getPersonList());
+        filteredClients = new FilteredList<>(this.currentAgentAssist.getClientList());
     }
 
     public ModelManager() {
@@ -104,29 +104,29 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return currentAgentAssist.hasPerson(person);
+    public boolean hasClient(Client client) {
+        requireNonNull(client);
+        return currentAgentAssist.hasClient(client);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deleteClient(Client target) {
         saveHistory();
-        currentAgentAssist.removePerson(target);
+        currentAgentAssist.removeClient(target);
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void addClient(Client client) {
         saveHistory();
-        currentAgentAssist.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        currentAgentAssist.addClient(client);
+        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setClient(Client target, Client editedClient) {
+        requireAllNonNull(target, editedClient);
         saveHistory();
-        currentAgentAssist.setPerson(target, editedPerson);
+        currentAgentAssist.setClient(target, editedClient);
     }
 
     @Override
@@ -140,59 +140,59 @@ public class ModelManager implements Model {
         return this.historyAgentAssist != null;
     }
 
-    //=========== Selected Person ===========================================================================
+    //=========== Selected Client ===========================================================================
 
     @Override
-    public ReadOnlyProperty<Person> selectedPersonProperty() {
-        return selectedPerson;
+    public ReadOnlyProperty<Client> selectedClientProperty() {
+        return selectedClient;
     }
 
     @Override
-    public Person getSelectedPerson() {
-        return selectedPerson.getValue();
+    public Client getSelectedClient() {
+        return selectedClient.getValue();
     }
 
     @Override
-    public void setSelectedPerson(Person person) {
-        requireNonNull(person);
-        if (!filteredPersons.contains(person)) {
-            throw new PersonNotFoundException();
+    public void setSelectedClient(Client client) {
+        requireNonNull(client);
+        if (!filteredClients.contains(client)) {
+            throw new ClientNotFoundException();
         }
-        selectedPerson.setValue(person);
+        selectedClient.setValue(client);
     }
 
     /**
-     * Ensures {@code selectedPerson} is a valid person in {@code filteredPersons}.
+     * Ensures {@code selectedClient} is a valid client in {@code filteredClients}.
      */
-    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends Person> change) {
+    private void ensureSelectedClientIsValid(ListChangeListener.Change<? extends Client> change) {
         while (change.next()) {
-            if (this.getSelectedPerson() == null) {
+            if (this.getSelectedClient() == null) {
                 return;
             }
 
-            boolean wasSelectedPersonRemoved = change.getRemoved().stream()
-                    .anyMatch(removedPerson -> selectedPerson.getValue().isSamePerson(removedPerson));
-            if (wasSelectedPersonRemoved) {
-                this.setSelectedPerson(change.getFrom() > 0 ? filteredPersons.get(change.getFrom() - 1) : null);
+            boolean wasSelectedClientRemoved = change.getRemoved().stream()
+                    .anyMatch(removedClient -> selectedClient.getValue().isSameClient(removedClient));
+            if (wasSelectedClientRemoved) {
+                this.setSelectedClient(change.getFrom() > 0 ? filteredClients.get(change.getFrom() - 1) : null);
             }
         }
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Client List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
      * {@code versionedAgentAssist}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Client> getFilteredClientList() {
+        return filteredClients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredClients.setPredicate(predicate);
     }
 
     @Override
@@ -209,7 +209,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return currentAgentAssist.equals(otherModelManager.currentAgentAssist)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredClients.equals(otherModelManager.filteredClients);
     }
 
 }
