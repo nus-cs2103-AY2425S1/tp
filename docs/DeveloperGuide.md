@@ -208,8 +208,20 @@ The sort mechanism allows for sorting by one of three fields, the contact's name
 After parsing a sort command from the UI, the SortCommandParser will then decide on which `Comparator<Person>` to use based on the given prefixes of the command.
 
 The activity diagram below shows how the correct Comparator is selected:
-
 <img src="images/SortCommandActivityDiagram.png" width="800" />
+
+### Wildcard Indexing feature
+
+#### Current Implementation
+
+Having a Wildcard Index (represented by `*`) allows users to execute commands on all contacts. This is especially useful when users want to perform the same action on multiple contacts without having to type out each index individually.
+
+Commands where the `*` character is supported:
+- `mark *`
+- `unmark *`
+- `reset *`
+
+The respective parsers will look out for the `*` character and retrieve a list of contacts to execute the command on. The Wildcard Index is implemented as a singleton accessible through `Index`.
 
 --------------------------------------------------------------------------------------------------------------------
 
