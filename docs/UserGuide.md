@@ -24,6 +24,7 @@ CareLink is a desktop address book application targeted towards independent Geri
     - [Prefixes:](#prefixes)
     - [Examples:](#examples)
     - [Adding an appointment: `addapp`](#adding-an-appointment-addapp)
+    - [Editing an appointment: `editapp`](#editing-an-appointment-editapp)
     - [Deleting an appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
     - [Locating appointments by date-time range: `findapp`](#locating-appointments-by-date-time-range-findapp)
     - [Examples:](#examples-1)
@@ -248,11 +249,40 @@ Common errors and their meanings:
 - `Start time must be in the future` - Can't schedule appointments in the past
 - `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot
 
+### Editing an appointment: `editapp`
+
+Edits an existing appointment for a person in CareLink
+
+Format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`
+
+- The `NRIC` must belong to a person already in CareLink
+- `DATE` must be in the format DD/MM/YYYY (e.g., 01/01/2025)
+- `START_TIME` and `END_TIME` must be in 24-hour format HH:MM (e.g., 14:30)
+The edited appointment follows the same rules as add appointment:
+  - Start time must be before end time
+  - Appointment must be in the future
+  - Must not overlap with existing appointments
+
+Examples:
+
+- `editapp nric/S1234567A d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025` changes the appointment date, timings remain the same
+- `editapp nric/S1234567A d/02/01/2025 start/10:00 end/11:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, appointment remains on the same day.
+
+Common errors and their meanings:
+
+- `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
+- `Invalid date` - Make sure to use DD/MM/YYYY format (e.g., 01/01/2025)
+- `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g., 14:30)
+- `Start time must be before end time` - Check your edited appointment times
+- `Start time must be in the future` - Can't schedule appointments in the past
+- `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot
+
+
 ### Deleting an appointment: `deleteapp`
 
 Deletes an existing appointment for a person in CareLink.
 
-Format: `deleteapp nric/NRIC date/DATE start/START_TIME`
+Format: `deleteapp nric/NRIC d/DATE start/START_TIME`
 
 - The `NRIC` must belong to a person with an existing appointment
 - `DATE` must be in the format DD/MM/YYYY (e.g., 01/01/2025)
@@ -261,8 +291,8 @@ Format: `deleteapp nric/NRIC date/DATE start/START_TIME`
 
 Examples:
 
-- `deleteapp nric/S1234567A date/01/01/2025 start/10:00` deletes the appointment on January 1st, 2025 at 10:00
-- `deleteapp nric/S9876543B date/15/03/2025 start/14:30` deletes the appointment on March 15th, 2025 at 14:30
+- `deleteapp nric/S1234567A d/01/01/2025 start/10:00` deletes the appointment on January 1st, 2025 at 10:00
+- `deleteapp nric/S9876543B d/15/03/2025 start/14:30` deletes the appointment on March 15th, 2025 at 14:30
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To delete an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
@@ -367,5 +397,7 @@ _Details coming soon ..._
 | **Edit**             | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g.,`edit S1234567D n/James Lee e/jameslee@example.com`                                   |
 | **Find**             | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567D`                                                                            |
 | **Find Appointment** | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g., `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`          |
+| **Edit Appointment** | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e., `editapp nric/S1234567A d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00`
+| **Delete Appointment** | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> eg., `deleteapp nric/S9876543B d/15/03/2025 start/14:30`
 | **List**             | `list`                                                                                                                                                               |
 | **Help**             | `help`                                                                                                                                                               |
