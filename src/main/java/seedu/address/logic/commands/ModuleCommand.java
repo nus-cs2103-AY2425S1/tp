@@ -67,6 +67,7 @@ public class ModuleCommand extends Command {
         }
 
         ArrayList<Module> modules = person.getModules();
+
         if (modules.contains(module)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, module.value));
         }
