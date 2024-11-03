@@ -105,7 +105,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
         // invalid email
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS);
-        // invalid datgieOfLastVisit
+        // invalid dateOfLastVisit
         assertParseFailure(parser, "1" + INVALID_DATEOFLASTVISIT_DESC, DateOfLastVisit.MESSAGE_CONSTRAINTS);
         // invalid emergencyContact
         assertParseFailure(parser, "1" + INVALID_EMERGENCY_CONTACT_DESC,
