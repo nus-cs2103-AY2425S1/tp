@@ -5,6 +5,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -21,17 +22,10 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_NO_SUCH_TELEGRAM =
             "There is no one in your address book with the telegram handle: @";
 
-    public static final String MESSAGE_TOO_SHORT_TELEGRAM =
-            "The telegram handle entered is too short (min 5 characters).";
-
-    public static final String MESSAGE_ILLEGAL_CHARACTERS_IN_TELEGRAM =
-            "The telegram handle entered contains illegal characters.\n"
-            + "Telegram handles should only contain letters, numbers and underscores.";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds one contact whose telegram handle "
             + "matches the specified telegram handle (case-insensitive)\n"
-            + "and displays contains all the contact's information.\n"
+            + "and displays all the contact's information.\n"
             + "Parameters: t/TELEGRAM_HANDLE \n"
             + "Example: " + COMMAND_WORD + " t/TELEGRAM_HANDLE";
 
@@ -72,9 +66,9 @@ public class ViewCommand extends Command {
     public void isValidHandle() throws CommandException {
         char[] arr = this.tele.toCharArray();
         if (arr.length < 5) {
-            throw new CommandException(MESSAGE_TOO_SHORT_TELEGRAM);
+            throw new CommandException(Messages.MESSAGE_TOO_SHORT_TELEGRAM);
         } else if (containsIllegalCharacters(arr)) {
-            throw new CommandException(MESSAGE_ILLEGAL_CHARACTERS_IN_TELEGRAM);
+            throw new CommandException(Messages.MESSAGE_ILLEGAL_CHARACTERS_IN_TELEGRAM);
         }
     }
 
@@ -87,7 +81,7 @@ public class ViewCommand extends Command {
         List<Person> p = lastShownList.stream().filter(person ->
                 person.getTelegram().value.toLowerCase().equals(this.tele)).toList();
         if (p.isEmpty()) {
-            throw new CommandException(MESSAGE_NO_SUCH_TELEGRAM + this.tele);
+            throw new CommandException(Messages.MESSAGE_INVALID_TELEGRAM + this.tele);
         }
         Person person = p.get(0);
         return new CommandResult(MESSAGE_SUCCESS, true, person);
