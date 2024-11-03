@@ -164,6 +164,41 @@ public class PublicAddressesComposition {
     }
 
     /**
+     * Removes all public address from the network.
+     *
+     * @param network The network to be removed.
+     * @return A new PublicAddressesComposition with the updated public addresses.
+     */
+    public PublicAddressesComposition remove(Network network) {
+        assert network != null;
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
+                .filter(entry -> !entry.getKey().equals(network))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return new PublicAddressesComposition(updatedPublicAddresses);
+    }
+
+    /**
+     * Removes the public address with the specified label from the network.
+     *
+     * @param label The label of the public address to be removed.
+     * @param network The network to remove the public address from.
+     * @return A new PublicAddressesComposition with the updated public addresses
+     */
+    public PublicAddressesComposition remove(String label, Network network) {
+        assert label != null;
+        assert network != null;
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
+            .map(entry -> {
+                Set<PublicAddress> updatedAddresses = entry.getValue().stream()
+                    .filter(addr -> !(addr.label.equals(label) && entry.getKey().equals(network)))
+                    .collect(Collectors.toSet());
+                return new AbstractMap.SimpleEntry<>(entry.getKey(), updatedAddresses);
+            })
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return new PublicAddressesComposition(updatedPublicAddresses);
+    }
+
+    /**
      * Checks if the composition is empty.
      *
      * @return True if the composition is empty, false otherwise.
