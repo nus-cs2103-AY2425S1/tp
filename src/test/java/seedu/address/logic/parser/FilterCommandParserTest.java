@@ -89,6 +89,9 @@ public class FilterCommandParserTest {
         assertParseFailure(parser, "filter en/", MESSAGE_INCOMPLETE_COMMAND);
         assertParseFailure(parser, "filter ep/", MESSAGE_INCOMPLETE_COMMAND);
         assertParseFailure(parser, "filter t/", MESSAGE_INCOMPLETE_COMMAND);
+
+        String emptyPreds = "filter n/ p/ e/ a/ r/ s/ c/ en/ ep/ t/";
+        assertParseFailure(parser, emptyPreds, MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
