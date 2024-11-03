@@ -131,6 +131,23 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filter persons : `filter`
+
+Filters persons who meet all specified conditions.
+
+Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
+* The filter is case-insensitive. eg `hans` will match `Hans`.
+* At least one of the optional fields must be provided.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Persons matching all the given conditions will be returned (i.e. `AND` search) except for multiple tags and modules.
+* If multiple tags or modules are provided, it will do `OR` search to tags and modules and do `AND` search with rest of the parameters.
+
+Examples:
+* `filter n/John` returns `john` and `John Doe` (filter by name)
+* `filter g/male t/project` returns `Bernice Yu`, `Roy Balakrishnan` and `Gabreil Lim`. (filter by gender and tag)
+* `filter g/female t/family t/friend` returns `Alex Yeoh` and `David Li` (filter by gender and multiple tags)
+* `filter g/male t/project m/cs1101` return `Bernice Yu` (filter by multiple conditions)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
