@@ -81,6 +81,10 @@ public class DuplicatePhoneTagger {
         return phoneFrequencies;
     }
 
+    /**
+     * Sets the targeted person and defaults the updated version of said person to have the same details
+     * @param targetPerson the target person that the tagger keeps track of to update their details
+     */
     public void setTargetPerson(Person targetPerson) {
         this.targetPerson = targetPerson;
         this.updatedTargetPerson = targetPerson;
