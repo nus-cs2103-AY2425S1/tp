@@ -33,6 +33,9 @@ public class Wedding {
     public Wedding(Name name, Client client, Date date, Venue venue) {
         requireAllNonNull(name);
         this.name = name;
+        if (client.getPerson().getOwnWedding() == null || client.getPerson().getOwnWedding()!= this) {
+            client.getPerson().setOwnWedding(this);
+        }
         this.client = client;
         this.date = date;
         this.venue = venue;
@@ -40,6 +43,9 @@ public class Wedding {
 
     public void setClient(Person person) {
         this.client = new Client(person);
+        if (person.getOwnWedding() == null || person.getOwnWedding() != this) {
+            throw new IllegalArgumentException("client in Wedding does not match ownWedding in Client");
+        }
     }
 
     public Name getName() {
