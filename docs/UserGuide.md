@@ -651,24 +651,33 @@ Example: "find ph n/John".
   </summary>
 
   <div class="command-content">
-  Sorts the list in ascending order by the given parameter.
+  Sorts the list in ascending or descending order by the given parameter.
 
   <br>
   <br>
 
-  Format: `sort name` or `sort date`
+  Format: `sort FIELD [ORDER]`
 
-  Sorts the list by either the name of the contact or the contract end date.
-  * `name` will sort the list based on the names of the contacts in alphabetical order.
-  * Note that `name` will only sort the ***visible*** contents of the list.
-  * Contacts that have been filtered will not show up when `sort name` is called.
-  * `date` will sort the list based on the contract end dates of the employees in ascending order.
-  * Note that `date` will filter out potential hires from the list as they do not have a contract end date.
-  * `date` will show all employees and not just potential hires.
+  Sorts the list by the given parameter in the given order.
+  * FIELD `name` will sort the list based on the names of the contacts in alphabetical order.
+  * FIELD `date` will sort the list based on the contract end dates of the employees.
+  * FIELD `dept` will sort the list based on the department of the contacts in alphabetical order.
+  * FIELD `role` will sort the list based on the roles of the contacts in alphabetical order.
+  * ORDER `asc` will sort the list in ascending order.
+  * ORDER `desc` will sort the list in descending order.
+
+  <div class="box" type="tip" seamless>
+
+  **Tips:** 
+  * Sort only sorts the contacts show at the current point in time.
+  * When sort date is used, potential hires show up at the bottom as they do not have a contract end date.
+  * If the order is left out StaffSync will sort in ascending order by default.
+  </div class="box">
 
   Examples:
-  * `sort name` sorts all contacts by name.
-  * `sort date` shows all employees and sorts by contract end date
+  * `sort name` sorts all contacts by name in alphabetical order.
+  * `sort date desc` sorts by contract end date with potential hires at the bottom.
+  * `sort role asc` sorts contacts by role in alphabetical order.
 </details>
 
 </div>
@@ -697,7 +706,7 @@ Action     | Format                                                             
 **List**   | `list all` <br> `list e` <br> `list ph`                                                       |
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 **Promote** | `promote INDEX CONTRACT_END_DATE`                                                            | `promote 2 2025-12-20`
-**Sort**   | `sort name` <br> `sort date`                                                                  |
+**Sort**   | `sort name [ORDER]` <br> `sort date [ORDER]` <br> `sort dept [ORDER]` <br> `sort role [ORDER]`| `sort name` <br> `sort date asc` <br> `sort dept desc`
 
 
 </div>
