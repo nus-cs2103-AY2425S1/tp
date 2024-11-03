@@ -293,9 +293,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | As a user       | add contact information of the family member                 | I can retrieve their contact information                              |
 | `* * *`  | As a user       | add the relationship of the family members                   | I can know the relationship between people                            |
 | `* * *`  | As a user       | update the information of family members in the contact list | I can keep the latest information of my family                        |
-| `* * *`  | As a user       | add events tied to family members(e.g birthdays)             | I can set reminders on that date so that I don't ever forget about it |
-| `* * *`  | As an attendee  | see who is attending the event                               | I can make a more informed decision of whether I want to attend       |
-| `* * *`  | As an attendee  | see the venue and time of the event                          | I can make a more informed decision of whether I want to attend       |
+| `* * *`  | As a user       | add events tied to family members (e.g birthdays)            | I can set reminders on that date so that I don't ever forget about it |
 | `* * *`  | As an organizer | track RSVPs and attendance for each event                    | I know who is attending the event and can plan accordingly            |
 | `* * *`  | As an organizer | schedule family events                                       | I can plan and coordinate events                                      |
 | `* * *`  | As an organizer | see the contact list of family members                       | I know whose contacts that I have not added yet and add them          |
@@ -569,14 +567,29 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person
+
+1. Adding a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list -p` command. Multiple persons in the list.
+
+    1. Test case: `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother`<br>
+       Expected: Person with name `John Doe` with phone number `98765432`, email `johnd@example.com` and relationship of `Brother` is added. Details of the added person shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `add`<br>
+       Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect add commands to try: `add 0`, `add -n -p -e -rs` (where the input after the flags are blank), `add -n John -n John Doe -p 98765432 -e johnd@example.com -rs Brother` (where the flags are duplicated) `add -n John Doe -e johnd@example.com -rs Brother` (where the flags are missing)<br>
+       Expected: Similar to previous.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list -p` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First person is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -584,7 +597,23 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing a person
+
+1. Editing a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list -p` command. Multiple persons in the list.
+
+    1. Test case: `edit 1 -n Bernice Tan`<br>
+       Expected: The name of the first person is edited to `Bernice Tan`. Details of the added person shown in the status message. Timestamp in the status bar is updated.
+
+   1. Other correct edit commands to try: `edit 1 -p 12345678 -rs Sister` <br>
+       Expected: The phone number and relationship of the first person is edited to `12345678` and `Sister`. Details of the added person shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `edit 1` (where none of the fields are provided) <br>
+       Expected: No person is edited in the contact. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect add commands to try: `edit`, `edit x` (where x is larger than the list size), `edit -n John -n Doe` (where the flags are duplicated) <br>
+       Expected: Similar to previous.
 
 ### Saving data
 
