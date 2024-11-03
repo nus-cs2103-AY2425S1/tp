@@ -198,44 +198,44 @@ public class AddressBookParserTest {
         assertEquals(expectedCommand.job, command.job);
     }
 
-    // Invalid Input (Name not specified in hire command)
-    @Test
-    public void parseCommand_invalidHireCommandFormatMissingName_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HireCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand("hire n/Amy Bee"));
-    }
-
     // Invalid Input (Job not specified in hire command)
     @Test
     public void parseCommand_invalidHireCommandFormatMissingJob_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HireCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand("hire j/Software Engineer"));
+                -> parser.parseCommand("hire n/Amy Bee"));
     }
 
-    // Invalid Input (Name not specified in reject command)
+    // Invalid Input (Name not specified in hire command)
     @Test
-    public void parseCommand_invalidRejectCommandFormatMissingName_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RejectCommand.MESSAGE_USAGE), () -> parser.parseCommand("reject n/Amy Bee"));
+    public void parseCommand_invalidHireCommandFormatMissingName_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HireCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand("hire j/Software Engineer"));
     }
 
     // Invalid Input (Job not specified in reject command)
     @Test
     public void parseCommand_invalidRejectCommandFormatMissingJob_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RejectCommand.MESSAGE_USAGE), () -> parser.parseCommand("reject j/Software Engineer"));
+                RejectCommand.MESSAGE_USAGE), () -> parser.parseCommand("reject n/Amy Bee"));
     }
 
-    // Invalid Input (Name not specified in view command)
+    // Invalid Input (Name not specified in reject command)
     @Test
-    public void parseCommand_invalidViewStatusFormatMissingName_throwsParseException() {
+    public void parseCommand_invalidRejectCommandFormatMissingName_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ViewStatusCommand.MESSAGE_USAGE), () -> parser.parseCommand("view n/Amy Bee"));
+                RejectCommand.MESSAGE_USAGE), () -> parser.parseCommand("reject j/Software Engineer"));
     }
 
     // Invalid Input (Job not specified in view command)
     @Test
     public void parseCommand_invalidViewStatusFormatMissingJob_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ViewStatusCommand.MESSAGE_USAGE), () -> parser.parseCommand("view n/Amy Bee"));
+    }
+
+    // Invalid Input (Name not specified in view command)
+    @Test
+    public void parseCommand_invalidViewStatusFormatMissingName_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ViewStatusCommand.MESSAGE_USAGE), () -> parser.parseCommand("view j/Software Engineer"));
     }
