@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
 
 import java.util.List;
 
@@ -9,7 +12,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Deletes the emergency contact of an existing patient in the address book.
@@ -58,14 +63,9 @@ public class DeleteEmergencyContactCommand extends Command {
         Person editedPerson = createPersonWithoutEmergencyContact(personToEdit);
 
         model.updatePersonAndTasks(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(
-                generateSuccessMessage(
-                        editedPerson,
-                        oldEmergencyContact.contactName,
-                        oldEmergencyContact.contactNumber
-                )
-        );
+        return new CommandResult(generateSuccessMessage(editedPerson, oldEmergencyContact));
     }
 
     /**
@@ -88,7 +88,8 @@ public class DeleteEmergencyContactCommand extends Command {
      */
     private boolean isNoEmergencyContact(Person person) {
         EmergencyContact contact = person.getEmergencyContact();
-        return contact == null || (contact.contactName.isEmpty() && contact.contactNumber.isEmpty());
+        return contact == null || (contact.getName().equals(new Name(NO_NAME))
+                && contact.getNumber().equals(new Phone(NO_NUMBER)));
     }
 
     /**
@@ -103,7 +104,7 @@ public class DeleteEmergencyContactCommand extends Command {
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
-                new EmergencyContact("", ""),
+                new EmergencyContact(new Name(NO_NAME), new Phone(NO_NUMBER)),
                 personToEdit.getTags(),
                 personToEdit.getPriorityLevel()
         );
@@ -113,8 +114,9 @@ public class DeleteEmergencyContactCommand extends Command {
      * Generates a command execution success message based on whether the emergency contact is deleted
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit, String name, String number) {
-        return String.format(MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS, name, number, personToEdit.getName());
+    private String generateSuccessMessage(Person personToEdit, EmergencyContact toBeDeleted) {
+        return String.format(MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS, toBeDeleted.getName(), toBeDeleted.getNumber(),
+                personToEdit.getName());
     }
 
     private String generateNoEmergencyContactMessage(Person personToEdit) {

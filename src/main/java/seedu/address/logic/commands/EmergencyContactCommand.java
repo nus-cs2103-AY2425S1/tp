@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
 
 import java.util.List;
 
@@ -11,7 +14,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Changes the emergency contact of an existing person in the address book.
@@ -71,6 +76,7 @@ public class EmergencyContactCommand extends Command {
 
         Person editedPerson = createEditedPerson(personToEdit);
         model.updatePersonAndTasks(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
@@ -93,7 +99,8 @@ public class EmergencyContactCommand extends Command {
      * @throws CommandException if the emergency contact parameters are invalid (empty contact name or number).
      */
     private void validateEmergencyContactParameters() throws CommandException {
-        if (emergencyContact.contactNumber.isEmpty() || emergencyContact.contactName.isEmpty()) {
+        if (emergencyContact.getNumber().equals(new Phone(NO_NUMBER))
+                || emergencyContact.getName().equals(new Name(NO_NAME))) {
             throw new CommandException(MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS);
         }
     }
@@ -106,7 +113,8 @@ public class EmergencyContactCommand extends Command {
      */
     private boolean isExistingEmergencyContact(Person personToEdit) {
         EmergencyContact contact = personToEdit.getEmergencyContact();
-        return contact != null && !contact.contactName.isEmpty() && !contact.contactNumber.isEmpty();
+        return contact != null && !contact.getName().equals(new Name(NO_NAME))
+                && !contact.getNumber().equals(new Phone(NO_NUMBER));
     }
 
     /**
@@ -133,7 +141,7 @@ public class EmergencyContactCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         return String.format(MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS, personToEdit.getName(),
-                emergencyContact.contactName, emergencyContact.contactNumber);
+                emergencyContact.getName(), emergencyContact.getNumber());
     }
 
     private String generateEmergencyContactExistsMessage(Person personToEdit) {

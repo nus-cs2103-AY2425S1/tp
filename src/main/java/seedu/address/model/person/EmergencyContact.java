@@ -7,8 +7,10 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class EmergencyContact {
-    public final String contactName;
-    public final String contactNumber;
+    public static final String NO_NAME = "No Name Entered";
+    public static final String NO_NUMBER = "000";
+    public final Name contactName;
+    public final Phone contactNumber;
 
     /**
      * Constructs a {@code EmergencyContact}.
@@ -16,23 +18,24 @@ public class EmergencyContact {
      * @param contactName A valid name.
      * @param contactNumber A valid number.
      */
-    public EmergencyContact(String contactName, String contactNumber) {
+    public EmergencyContact(Name contactName, Phone contactNumber) {
         requireNonNull(contactName);
         requireNonNull(contactNumber);
         this.contactName = contactName;
         this.contactNumber = contactNumber;
     }
 
-    public String getName() {
+    public Name getName() {
         return this.contactName;
     }
 
-    public String getNumber() {
+    public Phone getNumber() {
         return this.contactNumber;
     }
+
     @Override
     public String toString() {
-        if (contactName.isEmpty() || contactNumber.isEmpty()) {
+        if (contactName.equals(new Name(NO_NAME)) || contactNumber.equals(new Phone(NO_NUMBER))) {
             return "No Emergency Contact";
         }
         return "Emergency Contact: " + contactName + ", " + contactNumber;
