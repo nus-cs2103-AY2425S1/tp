@@ -65,21 +65,17 @@ public class HelpWindow extends UiPart<Stage> {
         helpListPanel = new HelpListPanel(FXCollections.observableArrayList(
                 new CommandInfo(AddCommand.MESSAGE_USAGE),
                 new CommandInfo(DeleteCommand.MESSAGE_USAGE),
-                new CommandInfo(DeleteAppointmentCommand.MESSAGE_USAGE),
                 new CommandInfo(ClearCommand.MESSAGE_USAGE),
-                new CommandInfo(DeleteCommand.MESSAGE_USAGE),
                 new CommandInfo(FindCommand.MESSAGE_USAGE),
                 new CommandInfo(ListCommand.MESSAGE_USAGE),
-                new CommandInfo(ExitCommand.MESSAGE_USAGE),
-                new CommandInfo(HelpCommand.MESSAGE_USAGE),
-                new CommandInfo(DeleteCommand.MESSAGE_USAGE),
+                new CommandInfo(DeleteAppointmentCommand.MESSAGE_USAGE),
+                new CommandInfo(UpdateOperatingHoursCommand.MESSAGE_USAGE),
                 new CommandInfo(BookingsCommand.MESSAGE_USAGE),
                 new CommandInfo(RestoreCommand.MESSAGE_USAGE),
                 new CommandInfo(BackupCommand.MESSAGE_USAGE),
                 new CommandInfo(ListBackupsCommand.MESSAGE_USAGE),
-                new CommandInfo(UpdateOperatingHoursCommand.MESSAGE_USAGE))
-
-
+                new CommandInfo(HelpCommand.MESSAGE_USAGE),
+                new CommandInfo(ExitCommand.MESSAGE_USAGE))
         );
         helpListPanelPlaceholder.getChildren().add(helpListPanel.getRoot());
 
