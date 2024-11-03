@@ -10,6 +10,6 @@ import seedu.address.commons.core.LogsCenter;
 public class PropertyNotFoundException extends RuntimeException {
     private static final Logger logger = LogsCenter.getLogger(PropertyNotFoundException.class);
     public PropertyNotFoundException() {
-        logger.info("Property not found!");
+        logger.info("Property not found");
     }
 }

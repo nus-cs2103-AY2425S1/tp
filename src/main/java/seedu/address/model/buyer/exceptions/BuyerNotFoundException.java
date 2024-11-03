@@ -10,6 +10,6 @@ import seedu.address.commons.core.LogsCenter;
 public class BuyerNotFoundException extends RuntimeException {
     private static final Logger logger = LogsCenter.getLogger(BuyerNotFoundException.class);
     public BuyerNotFoundException() {
-        logger.info("Buyer not found!");
+        logger.info("Buyer not found");
     }
 }
