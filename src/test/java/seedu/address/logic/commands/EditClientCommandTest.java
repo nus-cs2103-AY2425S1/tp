@@ -63,7 +63,8 @@ public class EditClientCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditClientCommand editClientCommand = new EditClientCommand(indexLastClient, descriptor);
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, Messages.format(editedClient));
+        String expectedMessage = String.format(
+                EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(new Prudy(model.getPrudy()), new UserPrefs());
         expectedModel.setClient(lastClient, editedClient);
@@ -76,7 +77,8 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_CLIENT, new EditClientDescriptor());
         Client editedClient = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, Messages.format(editedClient));
+        String expectedMessage = String.format(
+                EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(new Prudy(model.getPrudy()), new UserPrefs());
 
@@ -92,7 +94,8 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_CLIENT,
                 new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, Messages.format(editedClient));
+        String expectedMessage = String.format(
+                EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(new Prudy(model.getPrudy()), new UserPrefs());
         expectedModel.setClient(model.getFilteredClientList().get(0), editedClient);
