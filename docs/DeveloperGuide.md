@@ -372,9 +372,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC6 - Resolve a claim**
+**Use case: UC6 - List claims for a policy**
 
-1. User <u>list clients (UC1)</u> to look for index of client and index of claim
+**MSS**
+
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User requests to list claims for a specific policy under the client
+1. Prudy lists the claims under the specified policy
+
+   Use case ends.
+
+**Use case: UC7 - Resolve a claim**
+
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User <u>list claims for a policy (UC6)</u>
 1. User requests to edit a claim to mark its status as resolved
 1. Prudy edits the claim under the specified policy for the client
 
