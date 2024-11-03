@@ -55,11 +55,10 @@ public class AssignmentName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AssignmentName)) {
+        if (!(other instanceof AssignmentName otherName)) {
             return false;
         }
 
-        AssignmentName otherName = (AssignmentName) other;
         return assignmentName.equals(otherName.assignmentName);
     }
 

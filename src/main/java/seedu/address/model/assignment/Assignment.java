@@ -56,7 +56,38 @@ public class Assignment {
         }
 
         return otherAssignment != null
-                && otherAssignment.assignmentName.equals(assignmentName);
+                && otherAssignment.assignmentName.equals(assignmentName)
+                && otherAssignment.maxScore == maxScore;
+    }
+
+    public AssignmentName getAssignmentName() {
+        return this.assignmentName;
+    }
+
+    public String getName() {
+        return this.assignmentName.assignmentName;
+    }
+
+    public int getMaxScore() {
+        return this.maxScore;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public boolean getHasSubmitted() {
+        return this.hasSubmitted;
+    }
+
+    public void setScore(int score) {
+        if (score > this.getMaxScore()) {
+            throw new ScoreExceedsMaxScoreException();
+        }
+        this.score = score;
+    }
+    public void setHasSubmitted(boolean hasSubmitted) {
+        this.hasSubmitted = hasSubmitted;
     }
 
     /**
@@ -97,27 +128,5 @@ public class Assignment {
                 .add("score", score)
                 .add("hasSubmitted", hasSubmitted)
                 .toString();
-    }
-    public String getName() {
-        return this.assignmentName.assignmentName;
-    }
-    public int getScore() {
-        return this.score;
-    }
-    public int getMaxScore() {
-        return this.maxScore;
-    }
-    public boolean getHasSubmitted() {
-        return this.hasSubmitted;
-    }
-
-    public void setScore(int score) {
-        if (score > this.getMaxScore()) {
-            throw new ScoreExceedsMaxScoreException();
-        }
-        this.score = score;
-    }
-    public void setHasSubmitted(boolean hasSubmitted) {
-        this.hasSubmitted = hasSubmitted;
     }
 }
