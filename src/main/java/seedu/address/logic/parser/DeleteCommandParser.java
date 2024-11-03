@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.DELETE_COMMAND_USAGE;
-import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
