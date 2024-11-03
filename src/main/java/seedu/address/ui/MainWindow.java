@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.Messages.MESSAGE_CANCEL_COMMAND;
+
 import java.io.File;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -30,8 +32,9 @@ public class MainWindow extends UiPart<Stage> {
     private static final Set<String> CONFIRM_WORDS = Set.of("y", "yes");
     private static final String IMPORT_DATA_TITLE = "Import Data";
     private static final String EXPORT_DATA_TITLE = "Export Data";
+    // TODO: handle *.csv files
     private static final Set<FileChooser.ExtensionFilter> ACCEPTED_FILE_EXTENSIONS = Set.of(
-            new FileChooser.ExtensionFilter("Data Files", "*.json", "*.csv")
+            new FileChooser.ExtensionFilter("Data Files", "*.json")
     );
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -186,24 +189,14 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private File importFile() {
+    private File selectImportFile() {
         fileChooser.setTitle(IMPORT_DATA_TITLE);
         return fileChooser.showOpenDialog(getPrimaryStage());
     }
 
-    private File exportFile() {
+    private File selectExportFile() {
         fileChooser.setTitle(EXPORT_DATA_TITLE);
         return fileChooser.showSaveDialog(getPrimaryStage());
-    }
-
-    // TODO: the methods below are temporary to test the FileChooser
-    @FXML
-    private void handleImport() {
-        importFile();
-    }
-    @FXML
-    private void handleExport() {
-        exportFile();
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -233,7 +226,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult checkPromptConfirmation(String userInput) {
         if (!isConfirmation(userInput)) {
-            lastCommandResult = new CommandResult("Command cancelled");
+            lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
         } else {
             lastCommandResult = lastCommandResult.confirmPrompt();
         }
@@ -263,6 +256,10 @@ public class MainWindow extends UiPart<Stage> {
                 commandBox.waitForPrompt();
                 break;
             case IMPORT_DATA: // intermediate
+                File importFile = selectImportFile();
+                logger.info(String.format("Importing data from &1%s", importFile.getPath()));
+                lastCommandResult = lastCommandResult.processFile(logic.importFile(importFile));
+                continue;
             case EXPORT_DATA: // intermediate
                 continue;
             }

@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.storage.Storage;
 
 /**
  * Represents the result of a command execution.
@@ -40,11 +42,11 @@ public class CommandResult {
     /**
      * Function that should be run after prompting the user for a file.
      */
-    private final Function<File, CommandResult> fileProcessor;
+    private final Function<Boolean, CommandResult> fileProcessor;
 
     private CommandResult(String feedbackToUser, TYPE type, String history,
                           Supplier<CommandResult> continuationFunction,
-                          Function<File, CommandResult> fileProcessor) {
+                          Function<Boolean, CommandResult> fileProcessor) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.type = type;
         this.history = history;
@@ -89,6 +91,11 @@ public class CommandResult {
         this(feedbackToUser, TYPE.PROMPT, "", continuationFunction, null);
     }
 
+    public CommandResult(String feedbackToUser, boolean writeToFile,
+                         Function<Boolean, CommandResult> fileProcessor) {
+        this(feedbackToUser, writeToFile ? TYPE.EXPORT_DATA : TYPE.IMPORT_DATA, "", null, fileProcessor);
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -103,6 +110,13 @@ public class CommandResult {
      */
     public CommandResult confirmPrompt() {
         return continuationFunction.get();
+    }
+
+    /**
+     * Processes the {@code file} and returns the result.
+     */
+    public CommandResult processFile(boolean success) {
+        return fileProcessor.apply(success);
     }
 
     public String getHistory() {

@@ -1,14 +1,19 @@
 package seedu.address.logic;
 
+import static java.util.Objects.requireNonNull;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -96,5 +101,25 @@ public class LogicManager implements Logic {
     @Override
     public ObjectProperty<Client> getVisibleClient() {
         return model.getLastViewedClientAsObjectProperty();
+    }
+
+    @Override
+    public boolean importFile(File file) {
+        requireNonNull(file);
+
+        ReadOnlyAddressBook addressBook;
+        try {
+            addressBook = storage.readAddressBook(file.toPath()).get();
+        } catch (DataLoadingException | NoSuchElementException e) {
+            return false;
+        }
+
+        model.setAddressBook(addressBook);
+        return true;
+    }
+
+    @Override
+    public boolean exportFile(File file) {
+        return false;
     }
 }
