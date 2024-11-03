@@ -67,12 +67,11 @@ public class ModuleCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
-        ArrayList<String> modules = person.getModules()
+        ArrayList<Module> modules = person.getModules()
                 .stream()
-                .map(x -> x.toString().toUpperCase())
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        if (modules.contains(module.toString().toUpperCase())) {
+        if (modules.contains(module)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, module.value));
         }
 
