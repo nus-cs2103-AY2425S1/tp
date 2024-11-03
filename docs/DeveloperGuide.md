@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
 # T_Assistant Developer Guide
@@ -309,19 +309,30 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a ….                | I want to…                                    | So that I can…                                    |
-|----------|------------------------|-----------------------------------------------|---------------------------------------------------|
-| `* * *`  | beginner TA            | add students into the system                  |                                                   |
-| `* * *`  | busy TA                | remove projects/tasks                         | not feel overwhelmed                              |
-| `* * *`  | TA that prefers typing | carry out all the functions through CLI       | just use my keyboard                              |
-| `* * *`  | disorganized TA        | mark a team’s tasks as complete               | keep track of my students’ progress               |
-| `* * *`  | disorganized TA        | sort students by their groupings              | keep track of all the groups under my instruction |
-| `* * *`  | disorganized TA        | remove students no longer taking this module  | keep the contact list relevant                    |
-| `* * *`  | disorganized TA        | search for a student by name or project group | quickly find their contact details                |
-| `* * *`  | disorganized TA        | see what I added (groups/projects) before     | quickly reference  what I added.                  |
-| `* * *`  | highly motivated TA    | add students into their projects              |                                                   |
-| `*`      | TA that makes mistakes | edit student particulars                      | correct my mistakes                               |
-| `*`      | clumsy TA              | edit tasks/projects                           | fix my mistakes                                   |
+| Priority | As a ...        | I want to...                                  | So that I can...                                    |
+|----------|-----------------|-----------------------------------------------|-----------------------------------------------------|
+| `* * *`  | disorganised TA | mark tasks                                    | keep track of what a group has completed            |
+| `* * *`  | disorganised TA | remove tasks after I wrongly added them       | correct my mistake                                  |
+| `* * *`  | new TA          | add tasks to groups                           | keep track of what task each group has              |
+| `* * *`  | TA              | see all the tasks my groups have              |                                                     |
+| `* * *`  | disorganised TA | remove groups that have completed the course  | keep the assistant relevant                         |
+| `* * *`  | new TA          | add groups into the assistant                 |                                                     |
+| `* * *`  | TA              | see all my groups                             | keep track of how many groups are under my tutelage |
+| `* * *`  | clumsy TA       | remove students from their mis-assigned group | correct my mistake                                  |
+| `* * *`  | TA              | add students to their respective groups       |                                                     |
+| `* * *`  | disorganised TA | remove students no longer taking course       | keep the assistant relevant                         |
+| `* * *`  | new TA          | add students into the assistant               |                                                     |
+| `* * *`  | TA              | see all my students                           | keep track of who is in my tutorial classes         |
+| `* *`    | messy TA        | sort my tasks                                 | keep the assistant organised                        |
+| `* *`    | clumsy TA       | edit tasks with wrong information             | correct my mistake                                  |
+| `* *`    | messy TA        | sort my groups                                | keep the assistant organised                        |
+| `* *`    | disorganised TA | find groups in my tutorials                   |                                                     |
+| `* *`    | clumsy TA       | edit group particulars                        | correct my mistake                                  |
+| `* *`    | messy TA        | sort my students                              | keep the assistant organised                        |
+| `* *`    | disorganised TA | find students in my tutorials                 |                                                     |
+| `* *`    | clumsy TA       | edit student particulars                      | correct my mistakes                                 |
+| `*`      | clumsy TA       | undo my actions                               | correct my mistake                                  |
+| `*`      | clumsy TA       | redo my actions                               |                                                     |
 
 ### Use cases
 
