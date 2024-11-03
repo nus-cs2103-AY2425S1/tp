@@ -11,7 +11,7 @@ import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.logic.commands.Command;
 import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.exceptions.CommandException;
-import seedu.ddd.logic.parser.AddressBookParser;
+import seedu.ddd.logic.parser.add.AddressBookParser;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.Displayable;
 import seedu.ddd.model.Model;

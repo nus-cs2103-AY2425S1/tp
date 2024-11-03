@@ -1,9 +1,9 @@
-package seedu.ddd.logic.parser;
+package seedu.ddd.logic.parser.add;
 
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_FLAGS;
 import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.ddd.logic.commands.AddCommand.FLAG_PARSE_ERROR;
+import static seedu.ddd.logic.commands.add.AddCommand.FLAG_PARSE_ERROR;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
@@ -14,14 +14,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.ddd.commons.core.LogsCenter;
-import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.logic.commands.ClearCommand;
 import seedu.ddd.logic.commands.Command;
 import seedu.ddd.logic.commands.DeleteCommand;
 import seedu.ddd.logic.commands.EditCommand;
 import seedu.ddd.logic.commands.ExitCommand;
 import seedu.ddd.logic.commands.HelpCommand;
+import seedu.ddd.logic.commands.add.AddCommand;
 import seedu.ddd.logic.commands.list.ListCommand;
+import seedu.ddd.logic.parser.ArgumentMultimap;
+import seedu.ddd.logic.parser.ArgumentTokenizer;
+import seedu.ddd.logic.parser.CommandFlag;
+import seedu.ddd.logic.parser.DeleteCommandParser;
+import seedu.ddd.logic.parser.EditCommandParser;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.logic.parser.list.ListCommandParser;
 

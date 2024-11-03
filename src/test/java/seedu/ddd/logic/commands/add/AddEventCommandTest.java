@@ -1,6 +1,7 @@
 package seedu.ddd.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
@@ -14,24 +15,27 @@ import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_NAME;
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_2;
+import static seedu.ddd.testutil.event.TypicalEvents.VALID_EVENT;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
-import seedu.ddd.logic.commands.AddEventCommand;
+import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.CommandResult;
+import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Displayable;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.common.Id;
-import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
@@ -114,7 +118,6 @@ public class AddEventCommandTest {
         ));
     }
 
-    /*
     @Test
     public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
@@ -145,9 +148,8 @@ public class AddEventCommandTest {
             DEFAULT_EVENT_ID
         );
         assertThrows(CommandException.class,
-                MESSAGE_DUPLICATE_EVENT, () -> addEventCommand.execute(modelStub));
+                AddEventCommand.MESSAGE_DUPLICATE_EVENT, () -> addEventCommand.execute(modelStub));
     }
-    */
 
     @Test
     public void equals() {
@@ -271,11 +273,6 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean hasEventName(Name eventName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deleteContact(Contact target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -292,11 +289,6 @@ public class AddEventCommandTest {
 
         @Override
         public void setContact(Contact target, Contact editedContact) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setEvent(Event target, Event editedEvent) {
             throw new AssertionError("This method should not be called.");
         }
 

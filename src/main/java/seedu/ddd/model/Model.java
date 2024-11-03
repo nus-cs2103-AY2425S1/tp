@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.model.common.Id;
-import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Event;
 
@@ -77,11 +76,6 @@ public interface Model {
     boolean hasEvent(Event event);
 
     /**
-     * Returns true if an event with the same name as {@code event} exists in the address book.
-     */
-    boolean hasEventName(Name eventName);
-
-    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -117,13 +111,6 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setContact(Contact target, Contact editedContact);
-
-    /**
-     * Replaces the given event {@code target} with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
-     */
-    void setEvent(Event target, Event editedEvent);
 
     /** Returns an unmodifiable view of the filtered contact list */
     ObservableList<Contact> getFilteredContactList();

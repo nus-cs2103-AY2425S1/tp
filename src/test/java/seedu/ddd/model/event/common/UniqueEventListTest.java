@@ -11,14 +11,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.model.event.exceptions.DuplicateEventException;
 import seedu.ddd.model.event.exceptions.EventNotFoundException;
+import seedu.ddd.testutil.event.EventBuilder;
 //import seedu.ddd.testutil.EventBuilder;
 
 public class UniqueEventListTest {
-    private final UniqueEventList uniqueEventList = new UniqueEventList();
+
+    private UniqueEventList uniqueEventList;
+
+    @BeforeEach
+    public void setUp() {
+        uniqueEventList = new UniqueEventList();
+    }
+
 
     @Test
     public void contains_nullEvent_throwsNullPointerException() {
@@ -37,16 +46,14 @@ public class UniqueEventListTest {
         assertTrue(uniqueEventList.contains(WEDDING_A));
     }
 
-    /*
     @Test
     public void contains_contactWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEventList.add(WEDDING_A);
-        Event editedWeddingA = new EventBuilder(WEDDING_A).withEventId(1024)
-                .withVendors(List.of(BOB))
-                .build();
+        Event editedWeddingA = new EventBuilder(WEDDING_B)
+            .withName(WEDDING_A.getName().fullName)
+            .build();
         assertTrue(uniqueEventList.contains(editedWeddingA));
     }
-    */
 
     @Test
     public void add_nullPerson_throwsNullPointerException() {

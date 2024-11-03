@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.commands.CommandTestUtil;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;

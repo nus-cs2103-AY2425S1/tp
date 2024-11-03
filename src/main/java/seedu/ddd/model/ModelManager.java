@@ -14,7 +14,6 @@ import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.model.common.Id;
-import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Event;
 
@@ -142,12 +141,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasEventName(Name eventName) {
-        requireNonNull(eventName);
-        return addressBook.hasEventName(eventName);
-    }
-
-    @Override
     public void deleteEvent(Event target) {
         addressBook.deleteEvent(target);
         displayEvents();
@@ -170,13 +163,6 @@ public class ModelManager implements Model {
         CollectionUtil.requireAllNonNull(target, editedContact);
         addressBook.setContact(target, editedContact);
         displayContacts();
-    }
-
-    @Override
-    public void setEvent(Event target, Event editedEvent) {
-        CollectionUtil.requireAllNonNull(target, editedEvent);
-        addressBook.setEvent(target, editedEvent);
-        displayEvents();
     }
 
     /**

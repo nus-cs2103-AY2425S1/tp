@@ -1,4 +1,4 @@
-package seedu.ddd.logic.commands;
+package seedu.ddd.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
@@ -109,7 +110,7 @@ public class AddEventCommand extends AddCommand {
         assert !clientsToAdd.isEmpty();
 
         Event eventToAdd = new Event(name, description, date, clientsToAdd, vendorsToAdd, eventId);
-        if (model.hasEventName(eventToAdd.getName())) {
+        if (model.hasEvent(eventToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
         model.addEvent(eventToAdd);
@@ -146,9 +147,12 @@ public class AddEventCommand extends AddCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("name", name)
+                .add("description", description)
+                .add("date", date)
                 .add("clientIds", clientContactIds)
                 .add("vendorIds", vendorContactIds)
-                .add("description", description)
+                .add("id", eventId)
                 .toString();
     }
 }

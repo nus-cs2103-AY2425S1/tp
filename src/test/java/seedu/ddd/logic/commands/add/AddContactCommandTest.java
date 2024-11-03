@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
@@ -26,7 +25,6 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.common.Id;
-import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.testutil.contact.ClientBuilder;
@@ -189,11 +187,6 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public boolean hasEventName(Name eventName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deleteContact(Contact target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -210,11 +203,6 @@ public class AddContactCommandTest {
 
         @Override
         public void setContact(Contact target, Contact editedContact) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setEvent(Event target, Event editedEvent) {
             throw new AssertionError("This method should not be called.");
         }
 

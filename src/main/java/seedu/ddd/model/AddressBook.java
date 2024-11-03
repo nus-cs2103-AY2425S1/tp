@@ -8,7 +8,6 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.common.Id;
-import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.UniqueContactList;
@@ -113,14 +112,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if an event with the same name as {@code event} exists in the address book.
-     */
-    public boolean hasEventName(Name eventName) {
-        requireNonNull(eventName);
-        return events.containsName(eventName);
-    }
-
-    /**
      * Fetches a contact from the address book.
      * If contact has not been created or does not exist, a null object will be returned.
      */
@@ -157,18 +148,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setContact(Contact target, Contact editedContact) {
         requireNonNull(editedContact);
         contacts.setContact(target, editedContact);
-    }
-
-    /**
-     * Replaces the given event {@code target} in the list with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event
-     * in the address book.
-     */
-    public void setEvent(Event target, Event editedContact) {
-        requireNonNull(editedContact);
-        //method not implemented yet
-        //events.setEvents(target, editedContact);
     }
 
     /**

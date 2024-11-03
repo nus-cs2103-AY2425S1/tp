@@ -19,8 +19,6 @@ import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_C
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.logic.commands.AddContactCommand;
-import seedu.ddd.logic.commands.AddEventCommand;
 import seedu.ddd.logic.commands.ClearCommand;
 import seedu.ddd.logic.commands.DeleteCommand;
 import seedu.ddd.logic.commands.EditCommand;
@@ -28,9 +26,12 @@ import seedu.ddd.logic.commands.EditContactCommand;
 import seedu.ddd.logic.commands.EditContactCommand.EditContactDescriptor;
 import seedu.ddd.logic.commands.ExitCommand;
 import seedu.ddd.logic.commands.HelpCommand;
+import seedu.ddd.logic.commands.add.AddContactCommand;
+import seedu.ddd.logic.commands.add.AddEventCommand;
 import seedu.ddd.logic.commands.list.ListCommand;
 import seedu.ddd.logic.commands.list.ListContactCommand;
 import seedu.ddd.logic.commands.list.ListEventCommand;
+import seedu.ddd.logic.parser.add.AddressBookParser;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;

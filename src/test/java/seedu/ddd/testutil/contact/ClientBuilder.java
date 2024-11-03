@@ -31,7 +31,6 @@ public class ClientBuilder {
     private Address address;
     private Set<Tag> tags;
     private Id contactId;
-    private Set<Id> eventIds;
 
     /**
      * Initializes the ClientBuilder with the data of {@code clientToCopy}.
@@ -55,7 +54,6 @@ public class ClientBuilder {
         address = DEFAULT_CLIENT_ADDRESS;
         tags = new HashSet<>(DEFAULT_CLIENT_TAGS);
         contactId = DEFAULT_CLIENT_ID;
-        eventIds = new HashSet<>();
     }
 
     /**
@@ -111,14 +109,6 @@ public class ClientBuilder {
      */
     public ClientBuilder withId(String id) {
         this.contactId = new Id(id);
-        return this;
-    }
-
-    /**
-     * Sets the {@code EventIds} associated to the {@code Client} that we are building.
-     */
-    public ClientBuilder withEventIds(int ... eventIds) {
-        this.eventIds = SampleDataUtil.getEventIdSet(eventIds);
         return this;
     }
 

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.ddd.testutil.Assert.assertThrows;
+import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
 import static seedu.ddd.testutil.contact.TypicalContacts.BENSON;
 import static seedu.ddd.testutil.contact.TypicalContacts.CARL;
@@ -19,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.core.GuiSettings;
@@ -30,7 +32,12 @@ import seedu.ddd.testutil.contact.ClientBuilder;
 
 public class ModelManagerTest {
 
-    private ModelManager modelManager = new ModelManager();
+    private ModelManager modelManager;
+
+    @BeforeEach
+    public void setUp() {
+        modelManager = new ModelManager();
+    }
 
     @Test
     public void constructor() {
@@ -96,6 +103,62 @@ public class ModelManagerTest {
     public void hasContact_contactInAddressBook_returnsTrue() {
         modelManager.addContact(ALICE);
         assertTrue(modelManager.hasContact(ALICE));
+    }
+
+    @Test
+    public void hasClientId_validClientId_returnsTrue() {
+        modelManager.addContact(ALICE);
+        assertTrue(modelManager.hasClientId(ALICE.getId()));
+    }
+
+    @Test
+    public void hasClientId_invalidClientId_returnsFalse() {
+        // empty addressbook
+        assertFalse(modelManager.hasClientId(ALICE.getId()));
+
+        // wrong client
+        modelManager.addContact(CARL);
+        assertFalse(modelManager.hasClientId(ALICE.getId()));
+
+        // wrong contact type
+        modelManager.addContact(BENSON);
+        assertFalse(modelManager.hasClientId(BENSON.getId()));
+    }
+
+    @Test
+    public void hasVendorId_validVendorId_returnsTrue() {
+        modelManager.addContact(BENSON);
+        assertTrue(modelManager.hasVendorId(BENSON.getId()));
+    }
+
+    @Test
+    public void hasVendorId_invalidVendorId_returnsFalse() {
+        // empty addressbook
+        assertFalse(modelManager.hasVendorId(BENSON.getId()));
+
+        // wrong vendor
+        modelManager.addContact(DANIEL);
+        assertFalse(modelManager.hasVendorId(BENSON.getId()));
+
+        // wrong contact type
+        modelManager.addContact(ALICE);
+        assertFalse(modelManager.hasVendorId(ALICE.getId()));
+    }
+
+    @Test
+    public void hasEvent_validEvent_returnsTrue() {
+        modelManager = new ModelManager(getTypicalAddressBook(), modelManager.getUserPrefs());
+        assertTrue(modelManager.hasEvent(WEDDING_A));
+    }
+
+    @Test
+    public void hasEvent_invalidEvent_returnsFalse() {
+        // empty addressbook
+        assertFalse(modelManager.hasEvent(WEDDING_A));
+
+        modelManager = new ModelManager(getTypicalAddressBook(), modelManager.getUserPrefs());
+        assertTrue(modelManager.hasEvent(WEDDING_A));
+        assertFalse(modelManager.hasEvent(VALID_EVENT));
     }
 
     @Test
