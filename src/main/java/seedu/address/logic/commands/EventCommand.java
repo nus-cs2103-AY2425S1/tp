@@ -43,7 +43,7 @@ public class EventCommand extends Command {
             + PREFIX_NAME + "New Year's Party "
             + PREFIX_START_DATE + "2025-01-01 "
             + PREFIX_END_DATE + "2025-01-02 "
-            + PREFIX_LOCATION + "Times Square"
+            + PREFIX_LOCATION + "Times Square "
             + PREFIX_ATTENDEES + "1 2 4 5";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
