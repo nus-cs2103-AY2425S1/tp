@@ -222,6 +222,7 @@ Example:
 The following is an example of a valid JSON file content. 
 
 ````
+{
 "persons" : [ {
     "name" : "Alicia Pauline",
     "phone" : "94351253",
@@ -253,16 +254,18 @@ The following is an example of a valid JSON file content.
     },
     "starredStatus" : "true"
   }] 
+  }
 ````
 
-- All patient data must be enclosed with `"persons" : []`
+- All patient data must be enclosed with `{"persons" : []}`
 
 - Each patient data must be enclosed with `{}` and seperated by a comma `,`
 
-- The following is a blank template for each patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see <u>Summary of input constraints</u> for more details).
+- The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see <u>Summary of input constraints</u> for more details).
 
   ````
   {
+  "persons" : [ {
       "name" : " ",
       "phone" : " ",
       "email" : " ",
@@ -276,8 +279,32 @@ The following is an example of a valid JSON file content.
         "remark" : [ ],
         "medication" : [ ]
       },
+      "starredStatus" : " "
+    }] 
+    }
   ````
+  
+- To add more patient data to the `"persons"` array include the following after `"starredStatus" : " " }`. You may add as many patient data as needed. Remember each patient data must be enclosed with `{}` and seperated by a comma `,`
 
+  ````
+  , {
+      "name" : " ",
+      "phone" : " ",
+      "email" : " ",
+      "address" : " ",
+      "age" : " ",
+      "sex" : " ",
+      "appointments" : [ ],
+      "tags" : [ ],
+      "note" : {
+        "appointments" : [ ],
+        "remark" : [ ],
+        "medication" : [ ]
+      },
+      "starredStatus" : " "
+    }
+  ````
+  
   
 
 
