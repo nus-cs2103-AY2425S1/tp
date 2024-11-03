@@ -19,7 +19,7 @@ public abstract class SortCommand extends Command {
 
     public static final String MESSAGE_FORMAT = COMMAND_WORD + " FIELD (name/date/dept/role) ORDER (asc/desc)";
 
-    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " name ASC";
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " name asc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + MESSAGE_PURPOSE
             + "\nFormat: " + MESSAGE_FORMAT
