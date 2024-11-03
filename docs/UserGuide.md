@@ -16,27 +16,32 @@ KeyContacts is a **desktop app for piano teachers to manager their students' inf
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+    * To check your java version, refer [here](https://www.java.com/en/download/help/version_manual.html#)
+    * If you don’t have Java `17` installed, you can download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-2/tp/releases).
+1. Download the latest `keycontacts.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-2/tp/releases).
+    * Scroll down until you reach *Assets*, then click on `keycontacts.jar`
 
 1. Copy the file to the folder you want to use as the _home folder_ for KeyContacts.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar keycontacts.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
-
+   <br>
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/ABRSM 3` : Adds a student named `John Doe` to the student directory.
+    * `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/ABRSM 3` : Adds a student named `John Doe` to the student directory.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
+
+    * `undo` : Undos the last update to the student directory.
 
 1. Refer to the [Features](#features) below for details of each command.
 
