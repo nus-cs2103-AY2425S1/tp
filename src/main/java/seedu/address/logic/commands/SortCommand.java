@@ -15,7 +15,7 @@ public class SortCommand extends Command {
     public static final Comparator<Client> COMPARATOR_BY_NAME = (o1, o2) ->
             o1.getName().toString().compareTo(o2.getName().toString());
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons in sorted order";
+    public static final String MESSAGE_SUCCESS = "Listed all persons by name in alphabetical order";
 
 
     @Override
