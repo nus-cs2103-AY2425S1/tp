@@ -2,6 +2,8 @@ package seedu.address.model.statistics;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
@@ -80,6 +82,22 @@ public class AddressBookStatistics {
     }
 
     /**
+     * Processes the data of each {@code person} added to the addressBook and appends it to the corresponding statistic.
+     *
+     * @param personList List of {@code person} who is being added to the addressBook
+     */
+    public void processPersonListData(List<Person> personList) {
+        requireNonNull(personList);
+        this.totalPersons = this.getTotalPersonsFromPersonList(personList);
+        this.uniqueSellingPropertyList = this.getUniqueSellingPropertyListFromPersonList(personList);
+        this.uniqueBuyingPropertyList = this.getUniqueBuyingPropertyListFromPersonList(personList);
+        this.totalPropertiesSold = this.getTotalPropertiesSoldFromPersonList(personList); //TODO Testing
+        this.totalPropertiesBought = this.getTotalPropertiesBoughtFromPersonList(personList); //TODO Testing
+        this.totalSalesRevenue = this.getTotalSalesRevenueFromPersonList(personList); //TODO Testing
+        this.totalPurchaseExpense = this.getTotalPurchaseExpenseFromPersonList(personList); //TODO Testing
+    }
+
+    /**
      * Resets all statistics.
      */
     public void reset() {
@@ -120,4 +138,76 @@ public class AddressBookStatistics {
         return uniqueBuyingPropertyList;
     }
 
+    /**
+     * Returns the number of {@code persons} in the list of persons.
+     */
+    public int getTotalPersonsFromPersonList(List<Person> personList) {
+        return personList.size();
+    }
+
+    /**
+     * Returns the total number of {@code propertiesBought} from the list of persons.
+     */
+    public int getTotalPropertiesBoughtFromPersonList(List<Person> personList) {
+        int count = 0;
+        for (Person person : personList) {
+            count += person.getNumberOfPropertiesBought();
+        }
+        return count;
+    }
+
+    /**
+     * Returns the total number of {@code propertiesSold} from the list of persons.
+     */
+    public int getTotalPropertiesSoldFromPersonList(List<Person> personList) {
+        int count = 0;
+        for (Person person : personList) {
+            count += person.getNumberOfPropertiesSold();
+        }
+        return count;
+    }
+
+    /**
+     * Returns the total sales made by all the persons in the current address book.
+     */
+    public int getTotalSalesRevenueFromPersonList(List<Person> personList) {
+        int totalRevenue = 0;
+        for (Person person : personList) {
+            totalRevenue += person.getSalesRevenue();
+        }
+        return totalRevenue;
+    }
+
+    /**
+     * Returns the total expenses incurred by all the persons in the current address book.
+     */
+    public int getTotalPurchaseExpenseFromPersonList(List<Person> personList) {
+        int totalExpense = 0;
+        for (Person person : personList) {
+            totalExpense += person.getSalesRevenue();
+        }
+        return totalExpense;
+    }
+
+    /**
+     * Returns a {@code uniqueSellingPropertyList} of {@code uniqueSellingProperties} from the list of persons.
+     */
+    public UniqueSellingPropertyList getUniqueSellingPropertyListFromPersonList(List<Person> personList) {
+        UniqueSellingPropertyList uniqueSellingPropertyList = new UniqueSellingPropertyList();
+        for (Person person : personList) {
+            uniqueSellingPropertyList.addUniqueSellingProperties(person.getListOfSellingProperties());
+        }
+        return uniqueSellingPropertyList;
+    }
+
+    /**
+     * Returns a {@code uniqueSellingPropertyList} of {@code uniqueSellingProperties} from the list of persons.
+     */
+    public UniqueBuyingPropertyList getUniqueBuyingPropertyListFromPersonList(List<Person> personList) {
+        UniqueBuyingPropertyList uniqueBuyingPropertyList = new UniqueBuyingPropertyList();
+        for (Person person : personList) {
+            uniqueBuyingPropertyList.addUniqueBuyingProperties(person.getListOfBuyingProperties());
+        }
+        return uniqueBuyingPropertyList;
+    }
 }

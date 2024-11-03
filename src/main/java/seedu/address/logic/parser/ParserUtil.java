@@ -18,6 +18,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.person.Price;
 import seedu.address.model.person.UnitNumber;
+import seedu.address.model.statistics.AddressBookStatistics;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -252,5 +253,24 @@ public class ParserUtil {
             throw new ParseException(UnitNumber.MESSAGE_CONSTRAINTS);
         }
         return new UnitNumber(trimmedUnitNumber);
+    }
+
+    /**
+     * Parses the AddressBookStatistics and returns a String representation of the {@code AddressBookStatistics}.
+     *
+     * @param statistics The current {@code AddressBookStatistics} from the current {@code AddressBook}
+     * @return A String representation of the {@code AddressBookStatistics}
+     */
+    public static String parseAddressBookStatistics(AddressBookStatistics statistics) {
+        String message = "Total Persons: " + statistics.getTotalPersons()
+                + "\nTotal Properties Bought: " + statistics.getTotalPropertiesBought()
+                + "\nTotal Properties Sold: " + statistics.getTotalPropertiesSold()
+                + "\nTotal Sales Revenue: " + statistics.getTotalSalesRevenue()
+                + "\nTotal Purchase Expense: " + statistics.getTotalPurchaseExpense()
+                + "\nUnique Number of Properties-to-Sell: "
+                + statistics.getUniqueSellingPropertyList().getUniqueSellingPropertiesCount()
+                + "\nUnique Number of Properties-to-Buy: "
+                + statistics.getUniqueBuyingPropertyList().getUniqueBuyingPropertiesCount();
+        return message;
     }
 }
