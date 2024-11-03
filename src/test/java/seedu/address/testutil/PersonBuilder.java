@@ -124,6 +124,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the Person object.
+     */
     public Person build() {
         if (isEmployee) {
             return new Person(name, phone, email, address, department, role, contractEndDate, isEmployee);

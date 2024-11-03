@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.JEVAN;
 import static seedu.address.testutil.TypicalPersons.KEVIN;
 import static seedu.address.testutil.TypicalPersons.LILY;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
 
