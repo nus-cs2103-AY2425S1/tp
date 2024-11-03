@@ -61,14 +61,20 @@ deactivate AddressBookParser
 LogicManager -> AddCommand : execute(m)
 activate AddCommand
 
-AddCommand -> Model : haPerson(p)
+AddCommand -> Model : hasPerson(p)
 activate Model
 
 Model --> AddCommand
 deactivate Model
 
+alt person exists already
+AddCommand --> LogicManager: CommandException
+end
+
 AddCommand -> Model : addPerson(p)
 activate Model
+
+
 
 Model --> AddCommand
 deactivate Model
@@ -89,6 +95,6 @@ deactivate CommandResult
 AddCommand --> LogicManager : r
 deactivate AddCommand
 
-[<--LogicManager : r
+[<--LogicManager : r or CommandException
 deactivate LogicManager
 @enduml

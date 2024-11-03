@@ -10,7 +10,7 @@ participant "t:Tag" as t LOGIC_COLOR
 end box
 
 [-> ParserUtil : parseTags(tags)
-
+activate ParserUtil
 
 
 
@@ -41,6 +41,7 @@ loop for each tag
 
     end
     [<--ParserUtil : t or ParseException
+    deactivate ParserUtil
 
 
 end

@@ -41,7 +41,7 @@ alt value present
         deactivate ParserUtil
 
     end
-    [<--ParserUtil 
+    [<--ParserUtil : p or ParseException
 
 else value not present
 [<--ParserUtil : new Phone("")
