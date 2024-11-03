@@ -129,10 +129,13 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 * Multiple predicates can be provided, for example, in terms of multiple names or multiple attributes. 
   e.g. `filter n/Alex Bernice` will return both Alex's and Bernice's details
   e.g. `filter s/F p/99999999` will return a female student with the phone number 99999999
+When multiple predicates are filtered e.g. `filter s/F p/99999999`, an `AND` search is run to return the student with all of the attributes mentioned
+When only one predicate is used but multiple values are provided `filter n/Alex Bernice`, an 'OR' search is run to return the students who are either Alex or Bernice.
 
 Examples:
 * `filter n/John` returns `john` and `John Doe`
-* `filter p/99999999` returns `Alex Yeoh` 
+* `filter p/99999999` returns `Alex Yeoh`
+* `filter n/John Alex` returns `John Doe` and `Alex Yeoh` 
 * This image shows how students can be filtered using their phone number (99999999 - Alex Yeoh)
 ![filter_by_phone.png](images%2Ffilter_by_phone.png)
 
