@@ -102,10 +102,12 @@ public class PersonCard extends UiPart<Region> {
         examNameColumn.setCellValueFactory(new PropertyValueFactory<>("examName"));
         examScoreColumn.setCellValueFactory(new PropertyValueFactory<>("examScore"));
         tableView2.setItems(FXCollections.observableArrayList(person.getExams()));
+        tableView2.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         submissionNameColumn.setCellValueFactory(new PropertyValueFactory<>("submissionName"));
         submissionStatusColumn.setCellValueFactory(new PropertyValueFactory<>("submissionStatus"));
         tableView3.setItems(FXCollections.observableArrayList(person.getSubmissions()));
+        tableView3.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -118,6 +120,7 @@ public class PersonCard extends UiPart<Region> {
 
         ObservableList<AttendanceEntry> observableAttendanceList = FXCollections.observableArrayList(attendanceEntries);
         tableView1.setItems(observableAttendanceList);
+        tableView1.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         absentDateColumn.setCellValueFactory(new PropertyValueFactory<>("absentDate"));
         absentReasonColumn.setCellValueFactory(new PropertyValueFactory<>("absentReason"));
