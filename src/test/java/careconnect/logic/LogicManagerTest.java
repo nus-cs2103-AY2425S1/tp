@@ -15,6 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.AddCommand;
+import careconnect.logic.commands.ClearCommand;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.CommandTestUtil;
 import careconnect.logic.commands.ListCommand;
@@ -75,6 +76,20 @@ public class LogicManagerTest {
     public void autocompleteCommand_availableOptions_success() throws Exception {
         assertAutocompleteSuccess("fi", "find");
         assertAutocompleteSuccess("ad", "add");
+    }
+
+    @Test
+    public void commandConfirmation_noCommandToConfirm_throwsCommandException() {
+        LogicManager.setCommandToConfirm(null);
+        assertCommandException("y", Messages.MESSAGE_NO_EXECUTABLE_COMMAND);
+        assertCommandException("n", Messages.MESSAGE_NO_EXECUTABLE_COMMAND);
+    }
+
+    @Test
+    public void commandConfirmation_commandYetToConfirm_throwsCommandException() {
+        LogicManager.setCommandToConfirm(new ClearCommand());
+        assertCommandException("clear", Messages.MESSAGE_UNCOMFIRMED_COMMAND);
+        LogicManager.setCommandToConfirm(null);
     }
 
     @Test

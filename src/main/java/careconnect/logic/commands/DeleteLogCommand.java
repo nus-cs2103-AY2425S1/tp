@@ -8,6 +8,7 @@ import java.util.Set;
 
 import careconnect.commons.core.index.Index;
 import careconnect.commons.util.ToStringBuilder;
+import careconnect.logic.LogicManager;
 import careconnect.logic.Messages;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.CliSyntax;
@@ -82,6 +83,7 @@ public class DeleteLogCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (personIndex.getZeroBased() >= lastShownList.size()) {
@@ -92,9 +94,9 @@ public class DeleteLogCommand extends Command {
         }
 
         if (this.requireConfirmation) {
-            // Add a DeleteLogCommand to the stack
-            Command.STACK.add(new DeleteLogCommand(personIndex, logIndex, false));
-            return new CommandResult(Command.CONFIRMATION_MESSAGE,
+            // Queues a DeleteLogCommand
+            LogicManager.setCommandToConfirm(new DeleteLogCommand(personIndex, logIndex, false));
+            return new CommandResult(String.format(Command.CONFIRMATION_MESSAGE, DeleteLogCommand.COMMAND_WORD),
                     false, false, personIndex.getZeroBased());
         }
         Person personToDeleteLog = lastShownList.get(personIndex.getZeroBased());

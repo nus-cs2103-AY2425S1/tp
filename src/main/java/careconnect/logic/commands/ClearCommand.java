@@ -2,6 +2,8 @@ package careconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import careconnect.logic.LogicManager;
+import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.AddressBook;
 import careconnect.model.Model;
 
@@ -22,13 +24,13 @@ public class ClearCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (this.requireConfirmation) {
-            // Add a ClearCommand to the stack
-            Command.STACK.add(new ClearCommand(false));
-            return new CommandResult(Command.CONFIRMATION_MESSAGE);
+            // Queues a ClearCommand
+            LogicManager.setCommandToConfirm(new ClearCommand(false));
+            return new CommandResult(String.format(Command.CONFIRMATION_MESSAGE, ClearCommand.COMMAND_WORD));
         }
         model.setAddressBook(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);

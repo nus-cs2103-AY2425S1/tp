@@ -6,6 +6,7 @@ import java.util.List;
 
 import careconnect.commons.core.index.Index;
 import careconnect.commons.util.ToStringBuilder;
+import careconnect.logic.LogicManager;
 import careconnect.logic.Messages;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.Model;
@@ -43,6 +44,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -50,9 +52,9 @@ public class DeleteCommand extends Command {
         }
 
         if (this.requireConfirmation) {
-            // Add a DeleteCommand to the stack
-            Command.STACK.add(new DeleteCommand(this.targetIndex, false));
-            return new CommandResult(Command.CONFIRMATION_MESSAGE);
+            // Queues a DeleteCommand
+            LogicManager.setCommandToConfirm(new DeleteCommand(this.targetIndex, false));
+            return new CommandResult(String.format(Command.CONFIRMATION_MESSAGE, DeleteCommand.COMMAND_WORD));
         }
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
