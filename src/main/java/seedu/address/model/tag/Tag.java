@@ -56,12 +56,16 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+
+        // check is case-insensitive
+        String lowerTag = tagName.toLowerCase();
+        String lowerOther = otherTag.tagName.toLowerCase();
+        return lowerTag.equals(lowerOther);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tagName.toLowerCase().hashCode();
     }
 
     /**
