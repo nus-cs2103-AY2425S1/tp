@@ -151,7 +151,10 @@ public class RightPanel extends UiPart<Region> {
         CommonModel.getInstance().updateFilteredTransactionList(txn -> doneFilter != txn.getStatus().isDone());
     }
 
-    private void resetFilter() {
+    /**
+     * Resets the filter to show all transactions. Package-private for testability.
+     */
+    void resetFilter() {
         CommonModel.getInstance().updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
     }
 }
