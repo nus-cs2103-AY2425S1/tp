@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.crypto.Cipher;
@@ -21,7 +20,7 @@ import org.junit.jupiter.api.Test;
 public class EncryptionManagerTest {
 
     private static final String TEST_DATA = "This is a secret message";
-    private static final String KEY_FILE_PATH = "test/key.txt";
+    private static final String KEY_FILE_PATH = "test/key.jks";
     private File keyFile;
 
     @BeforeEach
@@ -51,14 +50,10 @@ public class EncryptionManagerTest {
     @Test
     public void testGenerateKey() throws Exception {
         assertFalse(keyFile.exists(), "Key file should not exist before generating a key");
-
         EncryptionManager.generateKey(KEY_FILE_PATH);
+        System.out.println(keyFile.getAbsolutePath());
+        System.out.println(keyFile.exists());
         assertTrue(keyFile.exists(), "Key file should be created after generating a key");
-
-        // Check that the key file contains a Base64 encoded string
-        String encodedKey = Files.readString(keyFile.toPath(), StandardCharsets.UTF_8);
-        assertNotNull(encodedKey, "Key file should contain a Base64 encoded key");
-        assertTrue(encodedKey.length() > 0, "Encoded key should not be empty");
     }
 
     @Test
@@ -91,6 +86,7 @@ public class EncryptionManagerTest {
         byte[] encryptedData = EncryptionManager.encrypt(TEST_DATA, KEY_FILE_PATH);
 
         // Manually generate a new key to simulate using the wrong key for decryption
+        Files.delete(Path.of(KEY_FILE_PATH));
         EncryptionManager.generateKey(KEY_FILE_PATH);
         SecretKey wrongKey = EncryptionManager.getKey(KEY_FILE_PATH);
 
