@@ -140,6 +140,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Appointment> getAppointments() {
+        return FXCollections.unmodifiableObservableList(appointments);
+    }
+
+    @Override
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
         updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);

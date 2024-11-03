@@ -170,6 +170,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public List<Appointment> getAppointments() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAppointment(Appointment appointment) {
             throw new AssertionError("This method should not be called.");
         }
