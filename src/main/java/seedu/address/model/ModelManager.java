@@ -178,7 +178,7 @@ public class ModelManager implements Model {
                 personToUpdate.getPhone(),
                 personToUpdate.getEmail(),
                 personToUpdate.getAddress(),
-                personToUpdate.getTags(),
+                personToUpdate.getStatus(),
                 updatedLogs // Updated logs set
         );
 

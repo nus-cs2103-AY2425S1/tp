@@ -1,6 +1,7 @@
 {
   "persons": [ {
     "name": "Hans Muster",
+    "status": "*low",
     "identity number": "S123Z",
     "phone": "9482424",
     "email": "invalid@email!3e",
