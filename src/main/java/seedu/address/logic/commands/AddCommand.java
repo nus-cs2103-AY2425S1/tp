@@ -74,12 +74,12 @@ public class AddCommand extends Command {
         }
 
         // Normalize the input name
-        String addedPersonName = toAdd.getName().fullName;
+        String toAddName = toAdd.getName().fullName;
 
         // check for near duplication
         for (Person person : model.getAddressBook().getPersonList()) {
-            String normalizedExistingName = person.getName().fullName;
-            if (addedPersonName.equals(normalizedExistingName)) {
+            String existingName = person.getName().fullName;
+            if (toAddName.equals(existingName)) {
                 throw new CommandException(String.format(MESSAGE_NEAR_DUPLICATE_PERSON, Messages.format(person)));
             }
         }

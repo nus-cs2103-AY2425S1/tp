@@ -39,7 +39,8 @@ public class DeleteYCommandTest {
         DeleteYCommand deleteYCommand = new DeleteYCommand(personToDelete);
         CommandResult commandResult = deleteYCommand.execute(model);
 
-        String expectedMessage = String.format(DeleteYCommand.MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));
+        String expectedMessage = String.format(DeleteYCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
 
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
