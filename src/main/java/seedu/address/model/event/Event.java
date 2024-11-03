@@ -66,6 +66,21 @@ public class Event {
         attendees.remove(person);
     }
 
+    /**
+     * Replaces an existing attendee in the attendee list with an edited version.
+     * @param personToEdit The original {@code Person} to be replaced in the attendee list.
+     * @param editedPerson The modified {@code Person} object to be added to the attendee list.
+     */
+    public void editAttendee(Person personToEdit, Person editedPerson) {
+        assert personToEdit != null;
+        assert editedPerson != null;
+
+        if (attendees.contains(personToEdit)) {
+            removeAttendee(personToEdit);
+            attendees.add(editedPerson);
+        }
+    }
+
     public Address getLocation() {
         return location;
     }
