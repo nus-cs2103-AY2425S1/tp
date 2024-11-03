@@ -5,42 +5,38 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Stream;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.CsvPersonParser;
 import seedu.address.model.Model;
-import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Github;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Tag;
 
 /**
- * Import command to load data from specified CSV file location.
+ * Command to import person data from a CSV file into the address book.
+ * Expects a CSV file with a specific header format that is case-insensitive but order-sensitive.
  */
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports person data from a CSV file.\n"
-            + "Parameters: FILE_PATH"
-            + "[" + PREFIX_PATH + "FILE_PATH]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
+        + "Parameters: FILE_PATH"
+        + "[" + PREFIX_PATH + "FILE_PATH]\n"
+        + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
+    public static final String CORRECT_HEADER_USAGE =
+        "Your header should be Name, Phone, Email, Telegram, Tags, Github, Assignments, WeeksPresent"
+            + " (Case insensitive, Order sensitive)";
 
     private final String csvFilePath;
 
+    /**
+     * Instantiates an ImportCommand to import data from the specified file path.
+     *
+     * @param csvFilePath the path to the CSV file
+     */
     public ImportCommand(String csvFilePath) {
         this.csvFilePath = csvFilePath;
     }
@@ -51,107 +47,73 @@ public class ImportCommand extends Command {
         try (CSVReader csvReader = new CSVReader(new FileReader(csvFilePath))) {
             String[] fields;
 
-            // Skip header line
-            csvReader.readNext();
+            // Define the expected headers in this specific order.
+            String[] expectedHeaders = {"Name", "Phone", "Email", "Telegram", "Tags", "Github",
+                "Assignments", "WeeksPresent"};
 
+            // Read header and ensure it is as expected.
+            String[] headers = csvReader.readNext();
+            checkHeaders(headers, expectedHeaders);
+
+            // Read each line, parse the person data, then add to newPersons list.
             while ((fields = csvReader.readNext()) != null) {
-                if (fields.length < 7) {
+                if (fields.length != expectedHeaders.length) {
                     throw new CommandException("Invalid CSV format.");
                 }
-                Person person = parsePerson(fields, model);
+                Person person = CsvPersonParser.parsePerson(fields, model);
                 newPersons.add(person);
             }
         } catch (IOException | CsvValidationException e) {
             throw new CommandException("Error reading from the CSV file: " + e.getMessage());
         }
+        // Replace all existing person with those present in the CSV file.
         model.replaceAllPersons(newPersons);
 
         return new CommandResult(String.format("Successfully imported %d persons.", newPersons.size()));
     }
 
-
     /**
-     * Parses a person from CSV fields.
+     * Checks if the CSV headers match the expected headers.
+     *
+     * @param headers the headers from the CSV file
+     * @param expectedHeaders the expected headers in the correct order
+     * @throws CommandException if the headers are incorrect
      */
-    private Person parsePerson(String[] fields, Model model) throws CommandException {
-        try {
-            Name name = ParserUtil.parseName(fields[0].trim());
-            Phone phone = ParserUtil.parsePhone(fields[1].trim());
-            Email email = ParserUtil.parseEmail(fields[2].trim());
-            Telegram telegram = ParserUtil.parseTelegram(fields[3].trim());
-            Github github = ParserUtil.parseGithub(fields[5].trim());
-
-            // Process tags
-            Set<Tag> tags = parseTags(fields[4].trim());
-
-            Map<String, Assignment> assignment = parseAssignment(fields[6].trim(), model);
-
-            Set<Integer> weeksPresent = new HashSet<>();
-            if (!fields[7].trim().isEmpty()) {
-                String[] weeksArray = fields[7].split(",");
-                for (String week : weeksArray) {
-                    int weekPresent = ParserUtil.parseWeek(week.trim());
-                    weeksPresent.add(weekPresent);
-                }
-            }
-
-            return new Person(name, phone, email, telegram, github, assignment, weeksPresent, tags);
-
-        } catch (IllegalArgumentException | ParseException e) {
-            throw new CommandException(e.getMessage());
+    private void checkHeaders(String[] headers, String[] expectedHeaders) throws CommandException {
+        System.out.println(headers.length);
+        System.out.println(headers.toString());
+        if (headers.length == 0) {
+            throw new CommandException("CSV header is empty/contains empty values, please ensure"
+                + " all headers are valid.\n"
+                + CORRECT_HEADER_USAGE);
         }
-    }
 
-    /**
-     * Parses a set of tags from a string with tags in the format "[tag1],[tag2]".
-     */
-    private Set<Tag> parseTags(String tagField) {
-        Set<Tag> tags = new HashSet<>();
+        for (int i = 0; i < headers.length; i++) {
+            headers[i] = headers[i].trim(); // Trim whitespace from headers
+        }
 
-        // Remove surrounding brackets for each tag
-        tagField = tagField.trim();
-        if (!tagField.isEmpty()) {
-            // Split on commas first, then remove the square brackets from each tag
-            String[] tagArray = tagField.split(",");
-            for (String tag : tagArray) {
-                tag = tag.trim(); // Remove any extra spaces
-                if (tag.startsWith("[") && tag.endsWith("]")) {
-                    tag = tag.substring(1, tag.length() - 1); // Remove the brackets
-                }
-                if (!tag.isEmpty()) {
-                    tags.add(new Tag(tag));
-                }
+        for (String header : headers) {
+            if (header.isEmpty() && headers.length <= 8) {
+                throw new CommandException("CSV header is empty/contains empty values, please ensure"
+                    + " all headers are valid.\n"
+                    + CORRECT_HEADER_USAGE);
             }
         }
-        return tags;
-    }
 
-    /**
-     * Parses a set of tags from a string with tags in the format "assignmentName | score".
-     */
-    private Map<String, Assignment> parseAssignment(String assignmentField, Model model) throws NumberFormatException,
-            CommandException {
-        Map<String, Assignment> assignments = new HashMap<>();
-        assignmentField = assignmentField.trim();
-        if (!assignmentField.isEmpty()) {
-            String[] assignmentArray = assignmentField.split(",");
-            for (String assignment : assignmentArray) {
-                assignment = assignment.trim();
-                List<String> individual = Stream.of(assignment.split("\\|"))
-                        .map(String::trim).toList(); // | used as delimiter between name and score
-                String asgnName = individual.get(0);
-                float asgnScore = Float.parseFloat(individual.get(1));
-                if (!model.hasAssignment(asgnName)) {
-                    throw new CommandException("Invalid assignment name: " + asgnName);
-                }
+        if (headers.length > expectedHeaders.length) {
+            throw new CommandException("There is an extra column!\n"
+                + "Please ensure there is only be 8 corresponding header/data columns\n" + CORRECT_HEADER_USAGE);
+        }
 
-                if (asgnScore > model.maxScore(asgnName) || asgnScore < 0) {
-                    throw new CommandException("Score must be between 0.0 and " + model.maxScore(asgnName));
-                }
-                assignments.put(asgnName, new Assignment(asgnName, asgnScore));
+        if (headers.length < expectedHeaders.length) {
+            throw new CommandException("There are lesser columns in header than expected!\n" + CORRECT_HEADER_USAGE);
+        }
+
+        for (int i = 0; i < headers.length; i++) {
+            if (!headers[i].trim().equalsIgnoreCase(expectedHeaders[i])) {
+                throw new CommandException("Header is defined incorrectly!\n" + CORRECT_HEADER_USAGE);
             }
         }
-        return assignments;
     }
 
     @Override
