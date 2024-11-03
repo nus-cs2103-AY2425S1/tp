@@ -53,7 +53,7 @@ public class UnfavCommand extends Command {
         model.setCompany(companyToUnfav, editedCompany);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
 
-        return new CommandResult(String.format(MESSAGE_UNFAV_COMPANY_SUCCESS, Messages.format(companyToUnfav)));
+        return new CommandResult(String.format(MESSAGE_UNFAV_COMPANY_SUCCESS, companyToUnfav.getName()));
     }
 
     @Override

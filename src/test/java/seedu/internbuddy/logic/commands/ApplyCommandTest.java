@@ -18,6 +18,7 @@ import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
 import seedu.internbuddy.model.UserPrefs;
 import seedu.internbuddy.model.application.Application;
+import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.testutil.ApplicationBuilder;
 
 public class ApplyCommandTest {
@@ -29,7 +30,10 @@ public class ApplyCommandTest {
         Application validApplication = new ApplicationBuilder().build();
         ApplyCommand applyCommand = new ApplyCommand(INDEX_FIRST_COMPANY, validApplication);
         CommandResult result = applyCommand.execute(model);
-        assertEquals(String.format(ApplyCommand.MESSAGE_SUCCESS, validApplication), result.getFeedbackToUser());
+
+        Name firstCompanyName = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased()).getName();
+        assertEquals(String.format(ApplyCommand.MESSAGE_SUCCESS, firstCompanyName, validApplication),
+                result.getFeedbackToUser());
     }
     @Test
     public void execute_invalidIndex_throwsCommandException() {

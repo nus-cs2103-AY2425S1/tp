@@ -24,7 +24,7 @@ public class UnfavCommandTest {
         UnfavCommand unfavCommand = new UnfavCommand(INDEX_FIRST_COMPANY);
 
         String expectedMessage = String.format(UnfavCommand.MESSAGE_UNFAV_COMPANY_SUCCESS,
-                Messages.format(companyToUnfav));
+                companyToUnfav.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setCompany(companyToUnfav, new Company(companyToUnfav.getName(),
