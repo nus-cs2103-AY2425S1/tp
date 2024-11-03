@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class WeddingName {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Wedding Name should be 2 person names separated with &. "
-                    + "It should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Wedding Name should be 2 person names separated with &.\n"
+            + "It should only contain alphanumeric characters and spaces, and it should not be blank.\n"
+            + "Example: Charlie & Hannah";
     public static final String VALIDATION_REGEX =
             "^\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)?)\\s*&\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)?)\\s*$";
     public final String value;

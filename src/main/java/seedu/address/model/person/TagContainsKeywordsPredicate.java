@@ -17,6 +17,10 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         this.weddingKeywords = weddingKeywords;
     }
 
+    public String getWeddingKeywords() {
+        return this.weddingKeywords;
+    }
+
     @Override
     public boolean test(Person person) {
         List<String> tagNames = person.getTags().stream()
