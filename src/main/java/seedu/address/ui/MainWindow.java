@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.Messages.MESSAGE_CANCEL_COMMAND;
+
+import java.io.File;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -10,6 +13,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -26,12 +30,17 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     private static final Set<String> CONFIRM_WORDS = Set.of("y", "yes");
+    private static final String IMPORT_DATA_TITLE = "Import Data";
+    private static final String EXPORT_DATA_TITLE = "Export Data";
+    // TODO: handle *.csv files
+    private static final Set<FileChooser.ExtensionFilter> ACCEPTED_FILE_EXTENSIONS = Set.of(
+            new FileChooser.ExtensionFilter("Data Files", "*.json")
+    );
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
-    private boolean isPrompt = false; // Tracks if this MainWindow is currently waiting for confirmation from user
     private CommandResult lastCommandResult = null; // Tracks the most recent CommandResult
 
     // Independent Ui parts residing in this Ui container
@@ -40,6 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private RentalInformationListPanel rentalInformationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FileChooser fileChooser;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -75,6 +85,9 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(ACCEPTED_FILE_EXTENSIONS);
     }
 
     public Stage getPrimaryStage() {
@@ -132,7 +145,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand, this::checkPromptConfirmation);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -176,6 +189,16 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private File selectImportFile() {
+        fileChooser.setTitle(IMPORT_DATA_TITLE);
+        return fileChooser.showOpenDialog(getPrimaryStage());
+    }
+
+    private File selectExportFile() {
+        fileChooser.setTitle(EXPORT_DATA_TITLE);
+        return fileChooser.showSaveDialog(getPrimaryStage());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -187,33 +210,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult;
-            if (!isPrompt) {
-                commandResult = logic.execute(commandText);
-            } else {
-                commandResult = checkConfirmation(commandText);
-            }
-            lastCommandResult = commandResult;
-
-            if (commandResult.isPromptConfirmation()) {
-                logger.info("Prompt: " + commandResult.getFeedbackToUser());
-                isPrompt = true;
-            } else {
-                logger.info("Result: " + commandResult.getFeedbackToUser());
-            }
-
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            commandBox.setFeedbackToUser(commandResult.getHistory());
-
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
-            return commandResult;
+            lastCommandResult = logic.execute(commandText);
+            executeTillTerminalResult();
+            return lastCommandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
@@ -221,13 +220,76 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private CommandResult checkConfirmation(String userInput) throws CommandException {
-        isPrompt = false;
-
+    /**
+     * Checks if the user accepted a confirmation prompt. If the prompt was confirmed, executes the continuation
+     * function of the most recent {@link CommandResult} and returns the result.
+     */
+    private CommandResult checkPromptConfirmation(String userInput) throws CommandException {
         if (!isConfirmation(userInput)) {
-            return new CommandResult("Command cancelled");
+            lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
+        } else {
+            lastCommandResult = lastCommandResult.confirmPrompt();
         }
-        return lastCommandResult.confirmPrompt();
+        executeTillTerminalResult();
+        return lastCommandResult;
+    }
+
+    /**
+     * Executes the continuation function of the most recent {@link CommandResult} until a terminal result is reached.
+     */
+    private void executeTillTerminalResult() throws CommandException {
+        while (true) {
+            switch (lastCommandResult.getType()) {
+            case ORDINARY: // terminal
+                logger.info("Result: " + lastCommandResult.getFeedbackToUser());
+                break;
+
+            case SHOW_HELP: // terminal
+                logger.info("Result: " + lastCommandResult.getFeedbackToUser());
+                handleHelp();
+                break;
+
+            case EXIT: // terminal
+                logger.info("Result: " + lastCommandResult.getFeedbackToUser());
+                handleExit();
+                break;
+
+            case PROMPT: // terminal
+                logger.info("Prompt: " + lastCommandResult.getFeedbackToUser());
+                commandBox.waitForPrompt();
+                break;
+
+            case IMPORT_DATA: // intermediate
+                File importFile = selectImportFile();
+                if (importFile == null) {
+                    lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
+                    break;
+                }
+
+                logger.info(String.format("Importing data from &1%s", importFile.getPath()));
+                lastCommandResult = lastCommandResult.processFile(logic.importFile(importFile));
+                continue;
+
+            case EXPORT_DATA: // intermediate
+                File exportFile = selectExportFile();
+                if (exportFile == null) {
+                    lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
+                    break;
+                }
+
+                logger.info(String.format("Exporting data to &1%s", exportFile.getPath()));
+                lastCommandResult = lastCommandResult.processFile(logic.exportFile(exportFile));
+                continue;
+
+            default:
+                throw new CommandException("An error occurred during the execution of this command");
+                // This line should not be reached
+            }
+
+            break;
+        }
+        resultDisplay.setFeedbackToUser(lastCommandResult.getFeedbackToUser());
+        commandBox.setFeedbackToUser(lastCommandResult.getHistory());
     }
 
     /**
