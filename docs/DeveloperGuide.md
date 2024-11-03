@@ -297,7 +297,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Wedding Planner | Delete contacts                                                        | I can keep information organized.                                            |
 | `* * *`  | Wedding Planner | List my contacts easily                                                | I can be view my clients and wedding vendors                                 |
 | `* * *`  | Wedding Planner | Tag my contacts to a wedding                                           | I can be categories relevant stakeholders of a wedding together              |
-| `* *`    | Wedding Planner | Filter based on location                                               | Depending on the wedding venue, which is more suitable                       |
 | `* *`    | Wedding Planner | List the weddings I am planning                                        | I can access relevant information about particular wedding easily            |
 | `* *`    | Wedding Planner | Edit contact details                                                   | I can keep information as up-to-date and accurate as possible.               |
 | `* *`    | Wedding Planner | Search for contacts by name, tags, or number                           | I can quickly find the contact I need                                        |
@@ -327,8 +326,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list contacts
 2.  KnottyPlanner shows a list of contacts
-3.  User requests to delete a specific contact in the list and receives a confirmation prompt
-4.  KnottyPlanner deletes the contact
+3.  User requests to delete a specific contact in the list
+4.  KnottyPlanner shows a confirmation prompt
+5.  User confirms the deletion
+6.  KnottyPlanner deletes the contact
 
     Use case ends.
 
@@ -390,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC04 - View all event tags for a contact**
+**Use case: UC04 - View all wedding tags for a contact**
 
 **MSS**
 
@@ -413,14 +414,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC05 - Search for a specific contact**
+**Use case: UC05 - Search for a specific contact by name**
 
 **MSS**
 
 1. User requests to list contacts
 2. KnottyPlanner shows a list of contacts
-3. User requests to search for contacts using a specific criteria
-4. KnottyPlanner shows a list of contacts that match the criteria
+3. User requests to search for contacts by name criteria
+4. KnottyPlanner shows a list of contacts that match the name criteria
 
     Use case ends.
 
@@ -440,7 +441,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC06 - Edit a contact's details**
+**Use case: UC06 - Search for a specific contact by job**
+
+**MSS**
+
+1. User requests to list contacts
+2. KnottyPlanner shows a list of contacts
+3. User requests to search for contacts by job criteria
+4. KnottyPlanner shows a list of contacts that match the job criteria
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given criterion is invalid.
+
+    * 3a1. KnottyPlanner shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC07 - Edit a contact's details**
 
 **MSS**
 
@@ -469,6 +497,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
+**Use case: UC08 - Adding a new wedding**
+
+**MSS**
+
+1. User requests to list weddings
+2. KnottyPlanner shows a list of weddings
+3. User requests to add a new wedding
+4. KnottyPlanner adds the new wedding
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given wedding name is invalid or fields are missing/invalid.
+
+    * 3a1. KnottyPlanner shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC09 - Deleting a wedding**
+
+**MSS**
+
+1. User requests to list weddings
+2. KnottyPlanner shows a list of weddings
+3. User requests to delete a specific wedding in the list
+4. KnottyPlanner shows a confirmation prompt
+5. User confirms the deletion
+6. KnottyPlanner deletes the wedding
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given wedding name is invalid.
+
+    * 3a1. KnottyPlanner shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -482,8 +557,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Contact**: An individual or organization associated with wedding planning, such as a client or vendor.
-* **Vendor:**: A service provider for weddings, e.g., caterers, florists, or photographers.
-* **Event Tag:** A label assigned to a contact to associate them with a specific wedding event, can be assigned to
+* **Job:**: A service provider for weddings, e.g., caterers, florists, or photographers.
+* **Wedding Tag:** A label assigned to a contact to associate them with a specific wedding event, can be assigned to
 multiple contacts involved in the same wedding event.
 * **Priority:** The relative importance of a user story or task, often categorized as must-have, should-have,
 or could-have.

@@ -89,10 +89,21 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
+**IMPORTANT:**
+
+* If you are worried about adding duplicated people, fret not! Knotty Planner will alert you when an identical person is added
+* We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊
+
+**Tip:**
+* A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
 involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
+* To make add person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
+
+    Examples:`john doe`, `JOHN doe` will all be formatted to `John Doe`
 
 </box>
+
+
 
 ![add message](images/addMsg.png)
 
@@ -247,28 +258,32 @@ Examples:
 
 If you are looking for contacts with a specific name or job, you can use `filter` to filter out a list of contacts whose name or job matches your input.
 
-Format: `filter n/KEYWORD` or `filter j/KEYWORD`
+Format: `filter n/KEYWORD... j/KEYWORD...`
 
-* `filter` filters by `name` or `job` field.
-* `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`
-* Only full words will be matched e.g. `jak` will not match `Jake`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Photographer` will return `Photographer`, `Wedding Photographer`
-* Persons matching all keywords will be returned (i.e. `AND` search).
-  e.g. `Photographer Wedding` will return `Wedding Photographer`
+* At least one of the `NAME` or `JOB` fields must be present.
+* `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
+* Only full words will be matched e.g. `jak` will not match `Jake`.
+* `filter` returns the largest range of matches based on your input
+
+<box type="tip" seamless>
+
+**Tip #1:** You can filter by multiple name and/or job fields at once!
+
+</box>
 
 ![filter message](images/filterNameMsg.png) ![filter message](images/filterJobMsg.png)
 
 Examples:
-* `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers
-* `filter n/caterer` returns `Adam` whose job is a caterer
-* `filter n/John` returns `John` whose name is John
+* `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers.
+* `filter n/John` returns `John` whose name is John.
+* `filter n/jonus n/harry j/photographer` returns Jonus, Harry and all photographers that are in your contacts.
+* `filter j/host j/caterer` returns all hosts and caterers that are in your contacts.
 
 ### View Wedding: `view-wed`
 
 If you are looking for participants tagged to a particular wedding, you can use `view-wed` to view a list of contacts tagged to the specified wedding.
 
-Format: `view-wed KEYWORD`
+Format: `view-wed NAME & NAME`
 
 * `view-wed` shows based on wedding names that match the keyword
 * `KEYWORD` is the name of the wedding and is not case-sensitive e.g `alice & bob` will match `Alice & Bob`
@@ -291,7 +306,7 @@ You can delete ALL contacts in the address book from the application.
 4. If you confirm, all entries will be deleted.
 5. If you cancel, no entries will be deleted.
 
-Format: 
+Format:
 * `clear-ab` followed by `y` clears all contacts in address book.
 * `clear-wb` followed by `y` clears all weddings in wedding book.
 
@@ -318,8 +333,7 @@ There is no need to save manually.
 **<span style="color: red;">Caution:</span>**
 * If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 * Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-
-* </box>
+</box>
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -352,17 +366,19 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                       |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action             | Format, Examples                                                                                                                                                                             |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June` |
 | **Delete**         | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                      |
 | **List**           | `list`                                                                                                                                                                                 |
 | **Edit**           | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                       |
-| **Add Wedding**    | `add-wed w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                           |
+| **Add Wedding**    | `add-wed w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                    |
 | **Delete Wedding** | `del-wed w/NAME & NAME` followed by `y` or `n`                                                                                                                                         |
 | **Clear**          | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                      |
 | **Adding Tags**    | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                               |
 | **Deleting Tags**  | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                               |
 | **Filter**         | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                          |
+| **View Wedding**   | `view-wed NAME & NAME <br> e.g., `view-wed John & Sarah`                                                                                                                               |
 | **List Weddings**  | `list-wed`                                                                                                                                                                             |
 | **Help**           | `help`                                                                                                                                                                                 |
+| **Exit**           | `exit`                                                                                                                                                                                 |

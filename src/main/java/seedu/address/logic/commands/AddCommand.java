@@ -45,13 +45,15 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_JOB + "caterer "
+            + PREFIX_JOB + "Caterer "
             + PREFIX_TAG + "Jonus Ho & Izzat Syazani "
             + PREFIX_TAG + "Jackson & Jennie";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_NEAR_DUPLICATE_PERSON = "A person with a similar name already exists: %1$s";
+
+    public static final String MESSAGE_NEAR_DUPLICATE_PERSON = "A person with a similar name already exists: %1$s"
+            + "\nIf you want to add this person, consider changing the input name";
     public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet."
             + "\n"
             + "Wedding needs to be created with Tag(s): '%2$s' using command '"
@@ -72,26 +74,22 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Normalize the input name
-        String normalizedInputName = toAdd.getName().fullName.toLowerCase().trim();
+        if (model.hasExactPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
 
-        // Check for duplicates
+        // Normalize the input name
+        String toAddName = toAdd.getName().fullName;
+
+        // check for near duplication
         for (Person person : model.getAddressBook().getPersonList()) {
-            String normalizedExistingName = person.getName().fullName.toLowerCase().trim();
-            if (normalizedInputName.equals(normalizedExistingName)) {
+            String existingName = person.getName().fullName;
+            if (toAddName.equals(existingName)) {
                 throw new CommandException(String.format(MESSAGE_NEAR_DUPLICATE_PERSON, Messages.format(person)));
             }
         }
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
         String tagMsg = handleWeddingDoesntExist(model, toAdd.getTags());
-
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
 
         model.addPerson(toAdd);
         setPersonInWedding(toAdd, model);
