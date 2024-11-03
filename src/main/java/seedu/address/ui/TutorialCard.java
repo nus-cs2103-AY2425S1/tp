@@ -5,7 +5,10 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.participation.Participation;
+
+
 
 /**
  * An UI component that displays information of a {@code Tutorial}.
@@ -18,6 +21,8 @@ public class TutorialCard extends UiPart<Region> {
     private Label tutorial;
     @FXML
     private Label studentsEnrolled;
+    private List<Participation> participationList;
+
 
     /**
      * Creates a {@code TutorialCard} of the given tutorial
@@ -26,7 +31,20 @@ public class TutorialCard extends UiPart<Region> {
         super(FXML);
 
         this.tutorial.setText(tutorial);
+        this.participationList = participationList;
+        updateStudentCount();
+    }
 
+    public void updateParticipationList(List<Participation> newParticipationList) {
+        this.participationList = newParticipationList;
+        updateStudentCount();
+    }
+    private void updateStudentCount() {
+        this.studentsEnrolled.setText(String.valueOf(participationList.size()));
+    }
+
+    public VBox getRoot() {
+        return (VBox) super.getRoot();
     }
 }
 

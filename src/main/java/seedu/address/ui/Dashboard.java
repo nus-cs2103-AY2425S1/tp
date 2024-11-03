@@ -1,12 +1,17 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
@@ -22,13 +27,19 @@ public class Dashboard extends UiPart<Region> {
     private final ObservableList<Person> personList;
     private final ObservableList<Participation> participationList;
     private final ObservableList<Tutorial> tutorialList;
+    private final Map<Tutorial, TutorialCard> tutorialCards = new HashMap<>();
 
+    @FXML
+    private HBox dashboard;
     @FXML
     private Label total;
     @FXML
     private Label feesOverdue;
     @FXML
-    private FlowPane tutorials;
+    private ScrollPane scrollPane;
+    @FXML
+    private HBox tutorials;
+
 
     /**
      * Creates a {@code Dashboard} with the given {@code Payment} t0 display.
@@ -40,26 +51,67 @@ public class Dashboard extends UiPart<Region> {
         this.participationList = participationList;
         this.tutorialList = tutorialList;
 
-        setStudentSummary();
-        setTutorials();
+        initializeTutorialCards();
+        updateStudentSummary();
+        addParticipationListListener();
     }
 
-    private void setStudentSummary() {
-        total.setText(personList.size() + "");
 
-        int studentsWithFeesOverdue = personList.filtered(person ->
-                Integer.parseInt(person.getPayment().overdueAmount) > 0).size();
-        feesOverdue.setText(studentsWithFeesOverdue + "");
+    private void initializeTutorialCards() {
+        for (Tutorial tutorial : tutorialList) {
+            List<Participation> initialParticipationList = getParticipationListForTutorial(tutorial);
+            TutorialCard card = new TutorialCard(tutorial.getSubject(), initialParticipationList);
+            tutorials.getChildren().add(card.getRoot());
+            tutorialCards.put(tutorial, card);  // Store each card in the map
+        }
     }
 
-    private void setTutorials() {
-        tutorialList.sorted(Comparator.comparing(Tutorial::getSubject))
-                .forEach(tutorial -> tutorials.getChildren().add(new TutorialCard(tutorial.getSubject(),
-                        getParticipationListOfTutorial(tutorial)).getRoot()));
+    private List<Participation> getParticipationListForTutorial(Tutorial tutorial) {
+        return participationList.stream()
+                .filter(p -> p.getTutorial().equals(tutorial))
+                .collect(Collectors.toList());
     }
 
-    private List<Participation> getParticipationListOfTutorial(Tutorial tutorial) {
-        return participationList.filtered(participation -> participation.getTutorial().equals(tutorial));
+    private void addParticipationListListener() {
+        // for tutorial cards
+        participationList.addListener((ListChangeListener<Participation>) change -> {
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved()) {
+                    updateTutorialCards();
+                }
+            }
+        });
+
+        // for total and fees overdue
+        personList.addListener((ListChangeListener<Person>) change -> {
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved()) {
+                    updateStudentSummary();
+                }
+            }
+        });
+    }
+
+
+    private void updateTutorialCards() {
+        for (Tutorial tutorial : tutorialList) {
+            List<Participation> updatedParticipationList = getParticipationListForTutorial(tutorial);
+            TutorialCard card = tutorialCards.get(tutorial);
+            if (card != null) {
+                card.updateParticipationList(updatedParticipationList);
+            }
+        }
+    }
+
+    private void updateStudentSummary() {
+        // Update total number of students
+        total.setText(String.valueOf(personList.size()));
+
+        // Calculate and update number of students with overdue fees
+        long studentsWithFeesOverdue = personList.stream()
+                .filter(person -> Integer.parseInt(person.getPayment().overdueAmount) > 0)
+                .count();
+        feesOverdue.setText(String.valueOf(studentsWithFeesOverdue));
     }
 
 }
