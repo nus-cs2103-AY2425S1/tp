@@ -59,6 +59,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         clientTypes = new HashSet<>(personToCopy.getClientTypes());
         description = personToCopy.getDescription();
+        reminders = new HashSet<>(personToCopy.getReminders());
     }
 
     /**
@@ -75,6 +76,15 @@ public class PersonBuilder {
      */
     public PersonBuilder withClientTypes(String ... clientTypes) {
         this.clientTypes = SampleDataUtil.getClientTypeSet(clientTypes);
+        return this;
+    }
+
+    /**
+     * Parses the {@code reminders} into a {@code Set<Reminder>}
+     * and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withReminders(Reminder ... reminders) {
+        this.reminders = SampleDataUtil.getReminderSet(reminders);
         return this;
     }
 
