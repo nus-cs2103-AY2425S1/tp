@@ -26,6 +26,6 @@ public class ListAttendanceCommand extends Command {
         model.updateFilteredPersonList(memberFilter);
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 }
