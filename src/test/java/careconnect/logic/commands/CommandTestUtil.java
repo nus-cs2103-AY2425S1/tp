@@ -3,6 +3,7 @@ package careconnect.logic.commands;
 import static careconnect.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static careconnect.logic.parser.CliSyntax.PREFIX_DATE;
 import static careconnect.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static careconnect.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
 import static careconnect.logic.parser.CliSyntax.PREFIX_NAME;
 import static careconnect.logic.parser.CliSyntax.PREFIX_PHONE;
 import static careconnect.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -53,8 +54,9 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String LOG_DATE = " " + PREFIX_DATE + "2020-12-31 12:00";
-    public static final String LOG_REMARK = " " + PREFIX_REMARK + "Meeting 1";
+    public static final String LOG_DESC_DATE = " " + PREFIX_DATE + "2020-12-31 12:00";
+    public static final String LOG_DESC_REMARK = " " + PREFIX_REMARK + "Meeting 1";
+    public static final String LOG_DELETE_INDEX = " " + PREFIX_LOG_INDEX + "1";
 
     public static final String INVALID_INDEX_DESC = " " + "0"; // '0' not allowed for indexes
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -72,6 +74,10 @@ public class CommandTestUtil {
     public static final Date DATE = Date.from(
             LocalDateTime.of(2020, 12, 31, 12, 0)
                     .atZone(ZoneId.systemDefault()).toInstant());
+    public static final Date DATE2 = Date.from(
+            LocalDateTime.of(2021, 11, 10, 11, 0)
+                    .atZone(ZoneId.systemDefault()).toInstant());
+
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;

@@ -1,14 +1,11 @@
 package careconnect.logic.commands;
 import static careconnect.testutil.Assert.assertThrows;
+import static careconnect.testutil.TypicalIndexes.INDEX_FIRST_LOG;
 import static careconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static careconnect.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +36,7 @@ public class DeleteLogCommandTest {
         assertThrows(CommandException.class, () -> new DeleteLogCommand(INDEX_FIRST_PERSON,
                         Index.fromZeroBased(1000)).execute(model));
         assertThrows(CommandException.class, () -> new DeleteLogCommand(Index.fromZeroBased(1000),
-                Index.fromZeroBased(0)).execute(model));
+                INDEX_FIRST_LOG).execute(model));
     }
 
     @Test
@@ -47,8 +44,7 @@ public class DeleteLogCommandTest {
         Person validPerson = model.getFilteredPersonList().get(0);
         Log logToDelete = validPerson.getLogs().get(0);
         CommandResult commandResult =
-                new DeleteLogCommand(Index.fromZeroBased(0),
-                        Index.fromZeroBased(0)).execute(model);
+                new DeleteLogCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LOG).execute(model);
 
         assertEquals(Command.CONFIRMATION_MESSAGE, commandResult.getFeedbackToUser());
     }
@@ -59,7 +55,7 @@ public class DeleteLogCommandTest {
         Log logToDelete = validPerson.getLogs().get(0);
 
         DeleteLogCommand deleteLogCommand = new DeleteLogCommand(INDEX_FIRST_PERSON,
-                Index.fromZeroBased(0));
+                INDEX_FIRST_LOG);
         deleteLogCommand.execute(model);
         CommandResult commandResult = new ConfirmationYesCommand().execute(model);
         assertEquals(String.format(DeleteLogCommand.MESSAGE_DELETE_LOG_SUCCESS,
