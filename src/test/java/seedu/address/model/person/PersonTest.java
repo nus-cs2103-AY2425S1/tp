@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GITHUB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -37,16 +36,16 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
@@ -84,10 +83,6 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertNotEquals(ALICE, editedAlice);
 
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertNotEquals(ALICE, editedAlice);
-
         // different telegram -> returns false
         editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
         assertNotEquals(ALICE, editedAlice);
@@ -104,11 +99,60 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
+                + ", email=" + ALICE.getEmail()
                 + ", telegram=" + ALICE.getTelegram() + ", tags=" + ALICE.getTags()
                 + ", github=" + ALICE.getGithub()
-                + ", assignment=" + ALICE.getAssignment() + "}";
+                + ", assignment=" + ALICE.getAssignment()
+                + ", weeks present=" + ALICE.getWeeksPresent() + "}";
 
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void compareName() {
+        Person firstPerson = new PersonBuilder(ALICE).build();
+        Person secondPerson = new PersonBuilder(BOB).build();
+
+        // null input
+        assertThrows(NullPointerException.class, () -> firstPerson.compareName(null));
+
+        // valid input
+        assertTrue(firstPerson.compareName(secondPerson) < 0);
+        assertTrue(secondPerson.compareName(firstPerson) > 0);
+
+        // same value
+        assertEquals(0, firstPerson.compareName(firstPerson));
+    }
+
+    @Test
+    public void compareGithub() {
+        Person firstPerson = new PersonBuilder(ALICE).build();
+        Person secondPerson = new PersonBuilder(BOB).build();
+
+        // null input
+        assertThrows(NullPointerException.class, () -> firstPerson.compareGithub(null));
+
+        // valid input
+        assertTrue(firstPerson.compareGithub(secondPerson) < 0);
+        assertTrue(secondPerson.compareGithub(firstPerson) > 0);
+
+        // same value
+        assertEquals(0, firstPerson.compareGithub(firstPerson));
+    }
+
+    @Test
+    public void compareTelegram() {
+        Person firstPerson = new PersonBuilder(ALICE).build();
+        Person secondPerson = new PersonBuilder(BOB).build();
+
+        // null input
+        assertThrows(NullPointerException.class, () -> firstPerson.compareTelegram(null));
+
+        // valid input
+        assertTrue(firstPerson.compareTelegram(secondPerson) < 0);
+        assertTrue(secondPerson.compareTelegram(firstPerson) > 0);
+
+        // same value
+        assertEquals(0, firstPerson.compareTelegram(firstPerson));
     }
 }

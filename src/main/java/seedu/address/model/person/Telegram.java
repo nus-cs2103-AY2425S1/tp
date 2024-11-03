@@ -63,4 +63,12 @@ public class Telegram {
         return value.hashCode();
     }
 
+    /**
+     * Compares the {@code value} of this Telegram object against another Telegram object.
+     * Comparison is done using String::CompareTo method.
+     */
+    public int compareTo(Telegram otherTelegram) {
+        requireNonNull(otherTelegram);
+        return this.value.toLowerCase().compareTo(otherTelegram.value.toLowerCase());
+    }
 }

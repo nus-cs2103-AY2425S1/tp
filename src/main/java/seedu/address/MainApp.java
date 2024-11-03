@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.PredefinedAssignmentsData;
 import seedu.address.model.assignment.ReadOnlyPredefinedAssignmentsData;
+import seedu.address.model.util.SampleAssignmentsUtil;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -49,6 +50,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+
 
     @Override
     public void init() throws Exception {
@@ -85,21 +87,34 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData;
         ReadOnlyPredefinedAssignmentsData predefinedAssignments;
         try {
-            readAssignmentOptional = storage.readAssignment();
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            predefinedAssignments = readAssignmentOptional.orElseGet(PredefinedAssignmentsData::new);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            e.printStackTrace();
         }
 
-        return new ModelManager(initialData, userPrefs, readAssignmentOptional.get());
+        try {
+            readAssignmentOptional = storage.readAssignment();
+            if (!readAssignmentOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getAssignmentFilePath()
+                        + " populated with a sample assignment file.");
+            }
+            predefinedAssignments = readAssignmentOptional
+                    .orElseGet(SampleAssignmentsUtil::getSamplePredefinedAssignments);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty predefined assignments data.");
+            predefinedAssignments = new PredefinedAssignmentsData();
+        }
+
+        return new ModelManager(initialData, userPrefs, predefinedAssignments);
     }
 
     private void initLogging(Config config) {

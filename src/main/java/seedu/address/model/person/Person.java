@@ -1,9 +1,12 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,11 +27,10 @@ public class Person {
     private final Github github;
 
     // Data fields
-    private final Address address;
-
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
-    private Assignment assignment;
+    private final Map<String, Assignment> assignment = new HashMap<>();
+    private Set<Integer> weeksPresent;
 
     /**
      * Every field must be present and not null.
@@ -37,7 +39,6 @@ public class Person {
             Name name,
             Phone phone,
             Email email,
-            Address address,
             Telegram telegram,
             Set<Tag> tags,
             Github github) {
@@ -45,10 +46,11 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.telegram = telegram;
         this.tags.addAll(tags);
         this.github = github;
+        this.weeksPresent = new HashSet<>();
+
     }
 
     /**
@@ -59,21 +61,52 @@ public class Person {
             Name name,
             Phone phone,
             Email email,
-            Address address,
             Telegram telegram,
             Set<Tag> tags,
             Github github,
-            Assignment assignment) {
-        requireAllNonNull(name, phone, email, address, telegram, tags, github);
+            Map<String, Assignment> assignment) {
+        requireAllNonNull(name, phone, email, telegram, tags, github, assignment);
         this.github = github;
         this.telegram = telegram;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
-        this.assignment = assignment;
+        this.assignment.putAll(assignment);
+        this.weeksPresent = new HashSet<>();
     }
+
+    /**
+     * Constructs a new Person object
+     *
+     * @param name the name of the person.
+     * @param phone the phone number of the person.
+     * @param email the email of the person.
+     * @param telegram the telegram ID of the person.
+     * @param github the github username of the person.
+     * @param weeksPresent the weeks present.
+     * @param tags the tags for that person.
+     */
+    public Person(Name name,
+                  Phone phone,
+                  Email email,
+                  Telegram telegram,
+                  Github github,
+                  Map<String, Assignment> assignment,
+                  Set<Integer> weeksPresent,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, telegram, tags, github);
+        this.github = github;
+        this.telegram = telegram;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.tags.addAll(tags);
+        this.assignment.putAll(assignment);
+        this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
+    }
+
+
 
     public Name getName() {
         return name;
@@ -87,20 +120,12 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
     public Telegram getTelegram() {
         return telegram;
     }
 
-    public Assignment getAssignment() {
+    public Map<String, Assignment> getAssignment() {
         return assignment;
-    }
-
-    public void setAssignment(Assignment assignment) {
-        this.assignment = assignment;
     }
 
     /**
@@ -113,6 +138,37 @@ public class Person {
 
     public Github getGithub() {
         return github;
+    }
+
+    public Set<Integer> getWeeksPresent() {
+        return this.weeksPresent;
+    }
+
+    /**
+     * Compares the {@code name} of this object against another Person object.
+     * Comparison is done based on String::compareTo method.
+     */
+    public int compareName(Person anotherPerson) {
+        requireNonNull(anotherPerson);
+        return this.name.compareTo(anotherPerson.name);
+    }
+
+    /**
+     * Compares the {@code github} of this object against another Person object.
+     * Comparison is done based on String::compareTo method.
+     */
+    public int compareGithub(Person anotherPerson) {
+        requireNonNull(anotherPerson);
+        return this.github.compareTo(anotherPerson.github);
+    }
+
+    /**
+     * Compares the {@code telegram} of this object against another Person object.
+     * Comparison is done based on String::compareTo method.
+     */
+    public int compareTelegram(Person anotherPerson) {
+        requireNonNull(anotherPerson);
+        return this.telegram.compareTo(anotherPerson.telegram);
     }
 
     /**
@@ -146,7 +202,6 @@ public class Person {
                 name.equals(otherPerson.name)
                         && phone.equals(otherPerson.phone)
                         && email.equals(otherPerson.email)
-                        && address.equals(otherPerson.address)
                         && telegram.equals(otherPerson.telegram)
                         && tags.equals(otherPerson.tags)
                         && github.equals(otherPerson.github);
@@ -155,7 +210,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
@@ -164,12 +219,13 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("telegram", telegram)
                 .add("tags", tags)
                 .add("github", github)
                 .add("assignment", assignment)
+                .add("weeks present", weeksPresent)
                 .toString();
     }
+
 
 }

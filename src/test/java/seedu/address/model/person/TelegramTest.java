@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -21,7 +22,7 @@ public class TelegramTest {
 
     @Test
     public void isValidTelegram() {
-        // null address
+        // null telegram
         assertThrows(NullPointerException.class, () -> Telegram.isValidTelegram(null));
 
         // invalid telegram IDs
@@ -57,5 +58,21 @@ public class TelegramTest {
 
         // different values -> returns false
         assertFalse(telegram.equals(new Telegram("@OtherValidTelegram")));
+    }
+
+    @Test
+    public void compareTo() {
+        Telegram telegram = new Telegram("@Alice");
+        Telegram otherTelegram = new Telegram("@Bob");
+
+        // null input
+        assertThrows(NullPointerException.class, () -> telegram.compareTo(null));
+
+        // valid input
+        assertTrue(telegram.compareTo(otherTelegram) < 0);
+        assertTrue(otherTelegram.compareTo(telegram) > 0);
+
+        // same input
+        assertEquals(0, telegram.compareTo(telegram));
     }
 }
