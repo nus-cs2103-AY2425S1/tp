@@ -107,7 +107,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a internship application).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -290,20 +290,26 @@ Finally, `StatusCommand` generates a `CommandResult` with a confirmation message
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                       | I want to …​                                 | So that …​                                                           |
-|----------|-------------------------------|----------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | CS Undergraduate              | List all the internship applications         | I can view all my past applications                                  |
-| `* * *`  | An efficient CS Undergraduate | Type the commands                            | I do not have to lift my fingers off the keyboard                    |
-| `* * *`  | CS Undergraduate              | Add an internship application                | I can add on to the records of all the internships I have applied to |
-| `* * *`  | CS Undergraduate              | Delete an internship application             | I can remove irrelevant applications                                 |
-| `* *`    | CS Undergraduate              | Save the internship application data locally | I will not lose my data when I exit the application                  |
-| `* *`    | CS Undergraduate              | Load the internship from a saved file        | I can get back my data when I open the application                   |
+| Priority | As a …​                       | I want to …​                                                     | So that …​                                                               |
+|----------|-------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | CS Undergraduate              | list all the internship applications                             | I can view all my past applications                                      |
+| `* * *`  | Forgetful CS Undergraduate    | have a link to HireMe's help page                                | I can see all the different commands that I can use                      |
+| `* * *`  | An efficient CS Undergraduate | type the commands                                                | I do not have to lift my fingers off the keyboard                        |
+| `* * *`  | CS Undergraduate              | add an internship application                                    | I can add on to the records of all the internships I have applied to     |
+| `* * *`  | CS Undergraduate              | delete an internship application                                 | I can remove invalid or irrelevant applications                          |
+| `* * *`  | CS Undergraduate              | save the internship application data locally                     | I will not lose my data when I exit the application                      |
+| `* * *`  | CS Undergraduate              | load the internship from a saved file                            | I can get back my data when I open the application                       |
+| `* * *`  | CS Undergraduate              | clear the list of internship application I have saved            | I can restart a new list in the next internship application cycle        |
+| `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications                         | I can prioritize follow-ups with older applications                      |
+| `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications  | I can update my schedule accordingly                                     |
+| `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them | I can prioritize my time on checking up on these internship applications |
+| `*`      | Forgetful CS Undergraduate    | remind myself of acceptance deadline                             | I will not miss the deadline to accept                                   |
 
 *{More to be added}*
 
 ### Use cases
 
-**Use Case: Add a new internship entry**
+**Use Case: UC01 - Add a new internship entry**
 
 **MSS**
 
@@ -333,7 +339,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. HireMe shows an error message.
 
       Use case ends.
-
+      
 * 1e. The user provided an invalid company name.
     * 1e1. HireMe shows an error message.
 
@@ -354,7 +360,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Delete an internship entry**
+
+**Use Case: UC02 - List all internship entries**
+
+**MSS**
+
+1. The user requests to list all internship entries.
+2. HireMe shows all internship entries.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. There are no internship entries.
+    * 1a1. HireMe shows a message indicating "no entries."
+
+      Use case ends.
+
+
+**Use Case: UC03 - Delete an internship entry**
 
 **MSS**
 
@@ -369,6 +393,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. HireMe shows an error message.
 
       Use case ends.
+
+
+**System**: HireMe application
+**Use Case: UC04 - Sort all internship applications list**
+**Actor**: User
+**MSS**
+
+1. The user requests to sort the internship applications list.
+2. HireMe shows all the sorted list of internship applications.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. HireMe detects an error in the entered data.
+    * 1a1. HireMe shows an error message that explains how to use the sort command and what parameters are valid.
+    * 1a2. User enters new data.
+    Steps 3a1-3a2 are repeated until the data entered are correct.
+    Use case resumes from step 2.
+
+    Use case ends.
+
 
 **Use Case: Load saved internship applications**
 
@@ -410,6 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+
 **Use Case: List all internship entries**
 
 **MSS**
@@ -434,6 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. HireMe shows a summary chart of all internship entries.
 
    Use case ends.
+
 
 *{More to be added}*
 
@@ -499,19 +547,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting an internship application
 
-1. Deleting a person while all persons are being shown
+1. Deleting an internship application while all internship applications are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all internship applications using the `/list` command. Multiple internship applications in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `/delete 1`<br>
+      Expected: First application is deleted from the list. Details of the deleted application shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `/delete 0`<br>
+      Expected: No internship application is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `/delete`, `/delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
