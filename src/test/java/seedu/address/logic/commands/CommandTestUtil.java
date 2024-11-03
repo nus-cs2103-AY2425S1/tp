@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BILLING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -105,9 +107,23 @@ public class CommandTestUtil {
     public static final String INVALID_JOB_REQUIREMENTS_DESC = " " + PREFIX_REQUIREMENTS + "!val!d"; // '!' not allowed
     public static final String INVALID_JOB_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "!val!d"; //'!' not allowed
 
-    // Test data for Companies
+    // test data for companies
     public static final String VALID_COMPANY_NAME_GOOGLE = "Google LLC";
     public static final String VALID_COMPANY_NAME_NUS = "NUS";
+    public static final String VALID_COMPANY_ADDRESS_NUS = "21 Lower Kent Ridge Rd, Singapore 119077";
+    public static final String VALID_COMPANY_BILLING_DATE_NUS = "5";
+    public static final String VALID_COMPANY_PHONE_NUS = "65166666";
+
+    public static final String COMPANY_NAME_DESC_NUS = " " + PREFIX_NAME + VALID_COMPANY_NAME_NUS;
+    public static final String COMPANY_ADDRESS_DESC_NUS = " " + PREFIX_ADDRESS + VALID_COMPANY_ADDRESS_NUS;
+    public static final String COMPANY_BILLING_DATE_DESC_NUS = " " + PREFIX_BILLING_DATE
+        + VALID_COMPANY_BILLING_DATE_NUS;
+    public static final String COMPANY_PHONE_DESC_NUS = " " + PREFIX_PHONE + VALID_COMPANY_PHONE_NUS;
+
+    public static final String INVALID_COMPANY_NAME_DESC = " " + PREFIX_NAME + "ඞ"; // unicode chars not allowed
+    public static final String INVALID_COMPANY_ADDRESS_DESC = " " + PREFIX_ADDRESS + " "; // blank space not allowed
+    public static final String INVALID_COMPANY_BILLING_DATE_DESC = " " + PREFIX_BILLING_DATE + "0"; // 0 not allowed
+    public static final String INVALID_COMPANY_PHONE_DESC = " " + PREFIX_PHONE + "phone"; // alphabets not allowed
 
     /**
      * Executes the given {@code command}, confirms that <br>
