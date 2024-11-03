@@ -24,7 +24,7 @@ public class DeleteCommandParserTest {
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "John", new DeleteCommand(new Name("John")));
     }
-    
+
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
