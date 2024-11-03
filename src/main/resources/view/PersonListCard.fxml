@@ -33,22 +33,21 @@
         <ImageView fitHeight="14" fitWidth="14">
           <Image url="@/images/phone_icon.png"/>
         </ImageView>
-        <Label minWidth="65" prefWidth="65" text="Phone"
-               style="-fx-padding: 0 0 0 5; -fx-text-fill: #6C6C6C; -fx-font-size: 12"/>
+        <Label minWidth="65" prefWidth="65" text="Phone" styleClass="contact-label"/>
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <ImageView fitHeight="14" fitWidth="14">
           <Image url="@/images/email_icon.png"/>
         </ImageView>
-        <Label minWidth="65" prefWidth="65" text="Email" style="-fx-padding: 0 0 0 5; -fx-text-fill: #6C6C6C; -fx-font-size: 12"/>
+        <Label minWidth="65" prefWidth="65" text="Email" styleClass="contact-label"/>
         <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <ImageView fitHeight="14" fitWidth="14">
           <Image url="@/images/home_icon.png"/>
         </ImageView>
-        <Label minWidth="65" prefWidth="65" text="Address" style="-fx-padding: 0 0 0 5; -fx-text-fill: #6C6C6C; -fx-font-size: 12"/>
+        <Label minWidth="65" prefWidth="65" text="Address" styleClass="contact-label"/>
         <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       </HBox>
     </VBox>
