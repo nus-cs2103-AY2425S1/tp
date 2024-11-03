@@ -111,6 +111,21 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    /**
+     * Checks if the address book contains the exact instance of the specified person.
+     * This method verifies whether the provided {@code person} object is equal to another
+     * person in the address book
+     *
+     * @param person The person instance to check for in the address book.
+     * @return {@code true} if the address book contains the exact instance of {@code person};
+     *         {@code false} otherwise.
+     * @throws NullPointerException if {@code person} is null.
+     */
+    public boolean hasExactPerson(Person person) {
+        requireNonNull(person);
+        return addressBook.hasExactPerson(person);
+    }
+
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);

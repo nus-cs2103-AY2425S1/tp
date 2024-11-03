@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Set;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -83,7 +84,7 @@ public class DeleteYCommand extends Command {
             model.deletePerson(personToDelete);
             // Clear history of personToDelete from StaticContext once delete operation is done
             StaticContext.setPersonToDelete(null);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         }
 
         return new CommandResult(MESSAGE_NO_PENDING_OPERATION);

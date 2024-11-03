@@ -185,7 +185,7 @@ public class TagAddCommand extends Command {
     }
 
     /**
-     * Generates message based on whether tag can added, which depends on whether wedding exists or not.
+     * Generates message based on whether tag can be added, which depends on whether wedding exists or not.
      * @param model current Model containing necessary wedding address book.
      * @param editedTags Set of tags that exist as a wedding as well.
      * @return String message stating whether tag exists as a wedding or not.
