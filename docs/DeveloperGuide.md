@@ -603,7 +603,68 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Clearing all entries
+
+1. **Clear all contacts**
+   1. Prerequisites: Add at least one person to the address book. 
+   2. Test case: `clear`
+   3. Expeccted: All contacts are removed from the list
+
+### Adding a person (including a duplicate phone case)
+
+1. **Add a person normally**
+   1. **Test case:** `add n\Jane Doe p\98765432 e\janedoe@example.com a\123 Maple Street fi\middleClass s\@janeDoe t\friends:4 t\priority:3 t\client`
+   2. **Expected:** Jane Doe is added to the address book with specified details and tags. The UI shows the updated contact list.
+
+2. **Add a person with the same phone number (duplicatePhoneTagger)**
+   1. **Prerequisites:** Jane Doe already exists in the address book.
+   2. **Test case:** `add n\John Smith p\98765432 e\johnsmith@example.com a\45 Elm Road fi\highIncome s\@johnSmith t\friends: 5 t\priority:2`
+   3. **Expected:** John Smith is added, but a label (duplicatePhoneTagger) appears in the UI indicating that a duplicate phone number is present.
+
+3. **Add an additional person normally, for the later parts of testing**
+   1. **Test case:**: `add n\Tim Jobs p\98222432 e\timjo@example.com a\1 Infinity Loop fi\billionaire s\@tJobs t\friends:7 t\priority:1 t\client`
+   2. **Expected:** Tim Jobs is added to the address book with specified details and tags. The UI shows the updated contact list.
+
+### Filtering contacts
+
+1. **Filter by a single tag**
+   1. **Prerequisites:** Add at least two contacts with different tags.
+   2. **Test case:** `filter t\client`
+   3. **Expected:** The list shows only contacts tagged as `client`.
+
+2. **Filter by name and tag**
+   1. **Test case:** `filter n\Jane t\client`
+   2. **Expected:** The list shows contacts whose name contains "Jane" and who have the `client` tag.
+
+### Advanced Filtering of contacts (advfilter)
+
+1. **Filter with a comparison operator on tags with values**
+    - **Prerequisites:** At least one contact with a tag that has a numeric value (e.g., `t\friends:4`).
+    - **Test case:** `advfilter t\friends > 4`
+    - **Expected:** The list displays only contacts with a `friends` tag greater than 4.
+
+2. **Filter with equality on tags with specific values**
+    - **Test case:** `advfilter t\priority = 3`
+    - **Expected:** Only contacts with a `priority` tag set to `3` are displayed.
+
+### Sorting contacts
+
+1. **Sort contacts by tag values in ascending order**
+   1. **Prerequisites:** At least two contacts with a tag that has a value (e.g., `t\friends:5`).
+   2. **Test case:** `sort t\friends asc`
+   3. **Expected:** Contacts are sorted in ascending order by the value of the `friends` tag.
+
+2. **Sort contacts by tag values in descending order**
+   1. **Test case:** `sort t\priority desc`
+   2. **Expected:** Contacts are sorted in descending order by the value of the `priority` tag.
+
+
+### Exporting contacts
+
+1. **Export contact list to a file**
+   1. **Prerequisites:** Have a list of contacts available to export.
+   2. **Test case:** Run the `export` command
+   3. **Expected:** Contacts are exported to a file in CSV format. Verify that all contact details are present in the file.
 
 ### Saving data
 

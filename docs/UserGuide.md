@@ -261,7 +261,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [t\TAG]…​` <br> e.g., `add n\James Ho p\22224444 e\jamesho@example.com a\123, Clementi Rd, 1234665 t\friend t\colleague`
+**Add**    | `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS fi\FINANCIALINFO s\SOCIALMEDIAHANDLE [t\TAG]…​` <br> e.g., `add n\James Ho p\22224444 e\jamesho@example.com a\123, Clementi Rd, 1234665 t\friend t\colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n\NAME] [p\PHONE_NUMBER] [e\EMAIL] [a\ADDRESS] [t\TAG]…​`<br> e.g.,`edit 2 n\James Lee e\jameslee@example.com`
