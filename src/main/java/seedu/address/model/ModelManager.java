@@ -103,13 +103,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns {@code VersionedAddressBook} for testing purpose.
-     */
-    protected VersionedAddressBook getVersionedAddressBook() {
-        return this.versionedAddressBook;
-    }
-
-    /**
      * Saves the getCurrentAddressBook() AddressBook state in the history.
      */
     @Override
