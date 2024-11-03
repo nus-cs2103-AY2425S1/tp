@@ -47,6 +47,4 @@ class JsonAdaptedDate {
         }
         return new Date(Date.parseDateTime(dateString));
     }
-
-
 }

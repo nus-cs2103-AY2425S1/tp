@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -131,7 +133,9 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-
+        if (trimmedDate.toLowerCase().equals("none")) {
+            return new Date(LocalDateTime.MIN);
+        }
         return new Date(Date.parseDateTime(trimmedDate));
     }
 }
