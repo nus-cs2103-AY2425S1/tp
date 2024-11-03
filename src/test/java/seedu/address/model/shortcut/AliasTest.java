@@ -46,7 +46,6 @@ public class AliasTest {
 
     @Test
     public void equals_sameAlias_returnsTrue() {
-        // Check that two aliases with the same name are considered equal
         Alias alias1 = new Alias("v");
         Alias alias2 = new Alias("v");
         Alias alias3 = new Alias("V");
@@ -56,10 +55,11 @@ public class AliasTest {
 
     @Test
     public void equals_differentAlias_returnsFalse() {
-        // Check that two aliases with different names are not considered equal
         Alias alias1 = new Alias("v");
         Alias alias2 = new Alias("vg");
+        FullTagName tagName = new FullTagName("Vegan");
         assertNotEquals(alias1, alias2);
+        assertNotEquals(alias1, tagName);
     }
 
     @Test
