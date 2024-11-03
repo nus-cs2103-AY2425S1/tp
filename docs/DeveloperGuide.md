@@ -555,9 +555,9 @@ _Similar to UC10 except without extension 2b._
 
 **Extensions**
 
-- 4a. There is no version to revert to.
+- 3a. There is no version to revert to.
 
-    - 4a1. System shows an error message.
+    - 3a1. System shows an error message.
 
       Use case ends.
 

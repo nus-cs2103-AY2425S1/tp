@@ -202,12 +202,6 @@ Examples:
 - `deletenotes 1 i/1`
 - `deletenotes 2 i/2`
 
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
 ### Viewing an existing contact's details : `view`
 
 Views the details of a person in the address book.
@@ -238,22 +232,6 @@ Examples:
 
 - `pin 1` pins the contact of the first person shown on the displayed person list into the pinned person list.
 
-### Undo a previously executed command: `undo`
-
-Undo the previous command that was executed.
-
-Format: `undo`
-
-- The undo feature saves the **5 most recent executed commands**.
-- The undo feature only tracks commands that **modifies the address book**.
-
-Examples of commands tracked by undo:
-- `add`
-- `delete`
-- `clear`
-- `edit`
-- `pin`
-
 ### Unpinning a contact: `unpin`
 
 Unpins the contact of a person from the pinned list.
@@ -269,6 +247,22 @@ Examples:
 
 - `unpin 1` unpins the contact of the first person shown on the pinned person list.
 
+### Undoing a previously executed command: `undo`
+
+Undoes the previous command that was executed.
+
+Format: `undo`
+
+- The undo feature saves the **5 most recent executed commands**.
+- The undo feature only tracks commands that **modifies the address book**.
+
+Examples of commands tracked by undo:
+- `add`
+- `delete`
+- `clear`
+- `edit`
+- `pin`
+
 ### Exporting the contact list : `export`
 
 Exports the contacts in the contact list into the specified file type. The file will be named bizbook.&lt;file extension&gt; and will be located in a folder named exports.
@@ -282,6 +276,12 @@ Examples:
 
 - `export f/csv` exports the contact list into a csv file.
 - `export f/vcf` exports the contact list into a vcf file.
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
 
 ### Exiting the program : `exit`
 
