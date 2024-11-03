@@ -1,0 +1,25 @@
+.task-complete {
+    -fx-background-color: #c8e6c9; /* Light green background */
+    -fx-padding: 10;
+    -fx-border-radius: 5; /* Radius for rounded corners */
+    -fx-background-radius: 5; /* Radius for background corners */
+    -fx-border-color: #81c784; /* Darker green for the border */
+    -fx-border-width: 1; /* Set border width */
+}
+
+.task-incomplete {
+    -fx-background-color: #ffcdd2; /* Light red backgiround */
+    -fx-padding: 10;
+    -fx-border-radius: 5; /* Radius for rounded corners */
+    -fx-background-radius: 5; /* Radius for background corners */
+    -fx-border-color: #ef5350; /* Darker red for the border */
+    -fx-border-width: 1; /* Set border width */
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+}
