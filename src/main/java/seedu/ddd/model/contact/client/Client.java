@@ -1,7 +1,5 @@
 package seedu.ddd.model.contact.client;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.ddd.commons.util.ToStringBuilder;
@@ -12,7 +10,6 @@ import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
-import seedu.ddd.model.event.common.Event;
 
 /**
  * Represents a Client in the address book.
@@ -67,13 +64,6 @@ public class Client extends Contact {
     }
 
     @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.getName(), this.getPhone(), this.getEmail(),
-                this.getAddress(), this.getTags(), this.getId());
-    }
-
-    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", this.getName())
@@ -83,13 +73,5 @@ public class Client extends Contact {
                 .add("tags", this.getTags())
                 .add("id", this.getId())
                 .toString();
-    }
-    @Override
-    public void addEvent(Event event) {
-        super.addEvent(event);
-        List<Client> clients = event.getClients();
-        if (!clients.contains(this)) {
-            event.addClient(this);
-        }
     }
 }

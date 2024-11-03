@@ -131,6 +131,7 @@ public class EditContactCommand extends EditCommand {
         for (Event event : events) {
             event.removeContact(contactToEdit);
             client.addEvent(event);
+            event.addClient(client);
         }
         return client;
     }
@@ -161,6 +162,7 @@ public class EditContactCommand extends EditCommand {
         for (Event event : events) {
             event.removeContact(contactToEdit);
             vendor.addEvent(event);
+            event.addVendor(vendor);
         }
         return vendor;
     }

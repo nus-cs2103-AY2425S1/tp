@@ -88,15 +88,8 @@ public class AddressBookParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            // TODO Update to a similar structure as above
-            if (commandFlag == null) {
-                return new DeleteCommandParser().parse(arguments);
-            } else if (commandFlag.equals(CommandFlag.EVENT)) {
-                return new DeleteEventCommandParser().parse(arguments);
-            } else {
-                logger.finer("This user input caused a ParseException: " + userInput);
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-            }
+            logger.info("Index provided " + arguments);
+            return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

@@ -299,6 +299,8 @@ public class EditContactCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setContact(targetContact, editedContact);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        System.out.println(model.getAddressBook());
+        System.out.println(expectedModel.getAddressBook());
 
         // first contact should still be ALICE
         targetContact = model.getFilteredContactList().get(targetIndex.getZeroBased());

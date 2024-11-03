@@ -9,8 +9,10 @@ import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
+import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.UniqueContactList;
+import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.model.event.common.UniqueEventList;
 
@@ -170,26 +172,37 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Fetches an {@code Event} from the address book by ID.
+     * If event has not been created or does not exist, a null object will be returned.
+     */
+    public Event getEvent(Id eventId) {
+        return events.get(eventId);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeContact(Contact key) {
-        contacts.remove(key);
-        List<Event> contactEvents = key.getEvents().stream().toList();
-        for (Event event: contactEvents) {
+    public void deleteContact(Contact key) {
+        key.getEvents().forEach(event -> {
             events.get(event.getEventId()).removeContact(key);
-        }
+        });
+        contacts.remove(key);
     }
 
     /**
      * Removes {@code targetEvent} from this {@code AddressBook}.
      * {@code targetEvent} must exist in the address book.
      */
-    public void removeEvent(Event targetEvent) {
+    public void deleteEvent(Event targetEvent) {
         events.remove(targetEvent);
-        List<Contact> eventContacts = targetEvent.getContacts();
-        for (Contact contact: eventContacts) {
-            contacts.get(contact.getId()).removeEvent(targetEvent);
+        List<Client> eventClients = targetEvent.getClients();
+        for (Client client: eventClients) {
+            contacts.get(client.getId()).removeEvent(targetEvent);
+        }
+        List<Vendor> eventVendors = targetEvent.getVendors();
+        for (Vendor vendor: eventVendors) {
+            contacts.get(vendor.getId()).removeEvent(targetEvent);
         }
     }
 

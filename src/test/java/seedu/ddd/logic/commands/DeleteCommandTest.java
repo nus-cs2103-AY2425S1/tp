@@ -8,16 +8,20 @@ import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ddd.logic.commands.CommandTestUtil.showContactAtIndex;
 import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
+import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_A;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.Messages;
+import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -28,17 +32,55 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_deleteDependentClientAfterEvent_success() {
+        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
         Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CONTACT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_DELETE_CONTACT_SUCCESS,
                 Messages.format(contactToDelete));
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteContact(contactToDelete);
-
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+        expectedModel.deleteContact(expectedModel.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased()));
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+
+        model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        DeleteCommand deleteEvent = new DeleteCommand(INDEX_FIRST_EVENT);
+
+        expectedModel.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        expectedModel.deleteEvent(expectedModel.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased()));
+        String expectedEventMessage = String.format(Messages.MESSAGE_DELETE_EVENT_SUCCESS,
+                Messages.format(eventToDelete));
+        assertCommandSuccess(deleteEvent, model, expectedEventMessage, expectedModel);
+
+        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+        DeleteCommand deleteSecondClient = new DeleteCommand(INDEX_SECOND_CONTACT);
+
+        expectedModel.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+        Contact dependentClientToDelete = model.getFilteredContactList().get(INDEX_SECOND_CONTACT.getZeroBased());
+        expectedModel.deleteContact(expectedModel.getFilteredContactList().get(INDEX_SECOND_CONTACT.getZeroBased()));
+        String expectedDeleteSecondClientMessage = String.format(Messages.MESSAGE_DELETE_CONTACT_SUCCESS,
+                Messages.format(dependentClientToDelete));
+        assertCommandSuccess(deleteSecondClient, model, expectedDeleteSecondClientMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteDependentClientBeforeEvent_throwsCommandException() {
+        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+        Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        DeleteCommand deleteFirstClient = new DeleteCommand(INDEX_FIRST_CONTACT);
+
+        String expectedMessage = String.format(Messages.MESSAGE_DELETE_CONTACT_SUCCESS,
+                Messages.format(contactToDelete));
+        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+        expectedModel.deleteContact(expectedModel.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased()));
+        assertCommandSuccess(deleteFirstClient, model, expectedMessage, expectedModel);
+
+        DeleteCommand deleteSecondClient = new DeleteCommand(INDEX_SECOND_CONTACT);
+        String expectedExceptionMessage = String.format(Messages.MESSAGE_DEPENDENT_EVENT, WEDDING_A.getEventId());
+        assertCommandFailure(deleteSecondClient, model, expectedExceptionMessage);
     }
 
     @Test
@@ -46,7 +88,7 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredContactList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_DISPLAYED_INDEX_TOO_LARGE);
     }
 
     @Test
@@ -56,7 +98,7 @@ public class DeleteCommandTest {
         Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CONTACT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_DELETE_CONTACT_SUCCESS,
                 Messages.format(contactToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -76,7 +118,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_DISPLAYED_INDEX_TOO_LARGE);
     }
 
     @Test
