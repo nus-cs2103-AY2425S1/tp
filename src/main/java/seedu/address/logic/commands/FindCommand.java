@@ -1,6 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.function.Predicate;
 
@@ -10,20 +16,24 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in address book with certain criteria.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons with certain criteria.\n"
-            + "Example 1: " + COMMAND_WORD + " n/alice\n"
-            + "Example 2: " + COMMAND_WORD + " j/swe2024\n"
-            + "Example 3: " + COMMAND_WORD + " t/tp\n"
-            + "Example 4: " + COMMAND_WORD + " n/alice p/12341234\n"
-            + "Example 5: " + COMMAND_WORD + " n/alice e/alice@email.com\n"
-            + "Example 6: " + COMMAND_WORD + " t/tp j/swe2024\n";
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_JOBCODE + "JOB CODE] "
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_REMARK + "REMARK]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John "
+            + PREFIX_PHONE + "9876 \n"
+            + "To find persons with empty remark: " + COMMAND_WORD + " " + PREFIX_REMARK;
 
     private final Predicate<Person> predicate;
 

@@ -5,8 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEW;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
@@ -117,7 +115,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_validTag_returnsFindCommand() {
         // Test parsing by tag
-        FindCommand expectedCommand = new FindCommand(new TagPredicate(Arrays.asList(VALID_TAG_NEW)));
+        FindCommand expectedCommand = new FindCommand(new TagPredicate(VALID_TAG_NEW));
         assertParseSuccess(parser, " t/N", expectedCommand);
     }
 

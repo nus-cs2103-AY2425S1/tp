@@ -14,7 +14,7 @@ public class JobCodePredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return person.getJobCode().value.toUpperCase().contains(jobCode);
+        return person.getJobCode().value.toUpperCase().contains(jobCode.toUpperCase());
     }
 
     @Override

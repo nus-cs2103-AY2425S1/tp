@@ -4,8 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
-
 import seedu.address.logic.commands.MassRejectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.JobCodePredicate;
@@ -43,7 +41,7 @@ public class MassRejectCommandParser implements Parser<MassRejectCommand> {
         } else if (argMultimap.getValue(PREFIX_TAG).isPresent() && argMultimap.getValue(PREFIX_JOBCODE).isEmpty()) {
             // Tag mass reject
             String tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()).tagCode;
-            return new MassRejectCommand(new TagPredicate(Arrays.asList(tag)));
+            return new MassRejectCommand(new TagPredicate(tag));
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MassRejectCommand.MESSAGE_USAGE));

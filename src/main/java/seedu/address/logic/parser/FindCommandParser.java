@@ -5,11 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
@@ -19,6 +20,7 @@ import seedu.address.model.person.FullNameContainsPredicate;
 import seedu.address.model.person.JobCodePredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhonePredicate;
+import seedu.address.model.person.RemarkPredicate;
 import seedu.address.model.person.TagPredicate;
 
 
@@ -32,44 +34,56 @@ public class FindCommandParser implements Parser<FindCommand> {
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindCommand parse(String args) throws ParseException {
+    public FindCommand parse(String args) throws ParseException, RuntimeException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_TAG, PREFIX_JOBCODE);
+                        PREFIX_EMAIL, PREFIX_TAG, PREFIX_JOBCODE, PREFIX_REMARK);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOBCODE, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_JOBCODE, PREFIX_TAG, PREFIX_REMARK);
 
         // Step 1: Collect predicates based on provided inputs.
         List<Predicate<Person>> predicates = new ArrayList<>();
 
-        argMultimap.getValue(PREFIX_NAME).ifPresent(name -> {
-            String parsedName = ParserUtil.parseFind(name);
+        Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
+        if (optionalName.isPresent()) {
+            String parsedName = ParserUtil.parseName(optionalName.get()).fullName;
             predicates.add(new FullNameContainsPredicate(parsedName));
-        });
+        }
 
-        argMultimap.getValue(PREFIX_PHONE).ifPresent(phone -> {
-            String parsedPhone = ParserUtil.parseFind(phone);
+        Optional<String> optionalPhone = argMultimap.getValue(PREFIX_PHONE);
+        if (optionalPhone.isPresent()) {
+            String parsedPhone = ParserUtil.parsePhoneFind(optionalPhone.get());
             predicates.add(new PhonePredicate(parsedPhone));
-        });
+        }
 
-        argMultimap.getValue(PREFIX_EMAIL).ifPresent(email -> {
-            String parsedEmail = ParserUtil.parseFind(email);
+        Optional<String> optionalEmail = argMultimap.getValue(PREFIX_EMAIL);
+        if (optionalEmail.isPresent()) {
+            String parsedEmail = ParserUtil.parseEmailFind(optionalEmail.get());
             predicates.add(new EmailPredicate(parsedEmail));
-        });
+        }
 
-        argMultimap.getValue(PREFIX_TAG).ifPresent(tag -> {
-            String parsedTag = ParserUtil.parseFind(tag);
-            predicates.add(new TagPredicate(Collections.singletonList(parsedTag)));
-        });
+        Optional<String> optionalTag = argMultimap.getValue(PREFIX_TAG);
+        if (optionalTag.isPresent()) {
+            String parsedTag = ParserUtil.parseTagFind(optionalTag.get());
+            predicates.add(new TagPredicate(parsedTag));
+        }
 
-        argMultimap.getValue(PREFIX_JOBCODE).ifPresent(jobCode -> {
-            String parsedJobCode = ParserUtil.parseFind(jobCode);
+        Optional<String> optionalJobCode = argMultimap.getValue(PREFIX_JOBCODE);
+        if (optionalJobCode.isPresent()) {
+            String parsedJobCode = ParserUtil.parseJobCode(optionalJobCode.get()).value;
             predicates.add(new JobCodePredicate(parsedJobCode));
-        });
+        }
+
+        Optional<String> optionalRemark = argMultimap.getValue(PREFIX_REMARK);
+        if (optionalRemark.isPresent()) {
+            String parsedRemark = ParserUtil.parseRemark(optionalRemark.get()).value;
+            predicates.add(new RemarkPredicate(parsedRemark));
+        }
 
         // Step 2: Check if it's empty
         if (predicates.isEmpty()) {

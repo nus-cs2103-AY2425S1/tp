@@ -69,6 +69,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String phone} to be used in find feature into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code phone} is invalid to be parsed in find.
+     */
+    public static String parsePhoneFind(String phone) throws ParseException {
+        requireNonNull(phone);
+        String trimmedPhone = phone.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        if (!Phone.isValidLengthPhoneFind(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_LENGTH_CONSTRAINTS_FIND);
+        }
+        return trimmedPhone.replaceAll("[\\s-]", "").replaceFirst("^\\+", "");
+    }
+
+    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -102,6 +120,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String email} to be used in find feature into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid to be parsed in find.
+     */
+    public static String parseEmailFind(String email) throws ParseException {
+        requireNonNull(email);
+        String trimmedEmail = email.trim();
+        if (!Email.isValidLengthEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS_FIND);
+        }
+        return trimmedEmail;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -114,6 +147,21 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String tag} to be used in find feature into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid to be parsed in find.
+     */
+    public static String parseTagFind(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim();
+        if (!Tag.isValidTagCodeFind(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS_FIND);
+        }
+        return trimmedTag;
     }
 
     /**
@@ -130,28 +178,4 @@ public class ParserUtil {
         }
         return new Remark(trimmedRemark);
     }
-
-
-    /**
-     * Parses a {@code String string} to be used in find feature.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static String parseFind(String string) {
-        requireNonNull(string);
-        return string.trim();
-    }
-
-
-
-    ///**
-    // * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-    // */
-    //public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-    //    requireNonNull(tags);
-    //    final Set<Tag> tagSet = new HashSet<>();
-    //    for (String tagName : tags) {
-    //        tagSet.add(parseTag(tagName));
-    //    }
-    //    return tagSet;
-    //}
 }
