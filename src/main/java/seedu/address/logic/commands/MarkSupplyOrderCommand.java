@@ -58,7 +58,7 @@ public class MarkSupplyOrderCommand extends Command {
         // Mark the order as completed
         supplyOrder.setStatus(OrderStatus.COMPLETED);
 
-        supplyOrderList.removeOrder(supplyOrder.getPhoneNumber());
+        supplyOrderList.removeOrder(targetIndex - 1);
         supplyOrderList.addOrder(supplyOrder);
 
         return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, targetIndex));

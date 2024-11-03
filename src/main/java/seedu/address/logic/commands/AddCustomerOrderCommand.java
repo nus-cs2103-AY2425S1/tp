@@ -9,6 +9,7 @@ import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.OrderList;
 import seedu.address.model.order.OrderStatus;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
@@ -31,12 +32,14 @@ public class AddCustomerOrderCommand extends Command {
 
     public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "New customer order added: \n%1$s";
 
-    private final String phoneNumber;
+    private final Name name;
+    private final Phone phone;
     private final ArrayList<Integer> idList;
 
-    public AddCustomerOrderCommand(String phoneNumber, ArrayList<Integer> idList) {
-        requireAllNonNull(phoneNumber);
-        this.phoneNumber = phoneNumber;
+    public AddCustomerOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
+        requireAllNonNull(phone);
+        this.name = name;
+        this.phone = phone;
         this.idList = idList;
     }
 
@@ -51,16 +54,23 @@ public class AddCustomerOrderCommand extends Command {
                 .                       filter(Objects::nonNull)
                                         .toList();
 
-        CustomerOrder customerOrder = new CustomerOrder(phoneNumber, productList, OrderStatus.PENDING);
         List<Person> personList = model.getFilteredPersonList();
-        Person person = Person.getGuest();
+        Person person = null;
 
         for (Person p : personList) {
-            if (p.getPhone().equals(new Phone(phoneNumber))) {
+            if (p.getPhone().equals(phone)) {
                  person = p;
+
             }
         }
-        customerOrder.setPerson(person);
+        if (person == null) {
+            person = Person.getGuest(name, phone);
+            model.addPerson(person);
+        }
+
+        CustomerOrder customerOrder = new CustomerOrder(person, productList, OrderStatus.PENDING);
+
+        person.addOrder(customerOrder);
 
         model.addCustomerOrder(customerOrder);
 
@@ -79,6 +89,6 @@ public class AddCustomerOrderCommand extends Command {
         }
 
         AddCustomerOrderCommand otherCommand = (AddCustomerOrderCommand) other;
-        return phoneNumber.equals(otherCommand.phoneNumber) && idList.equals(otherCommand.idList);
+        return phone.equals(otherCommand.phone) && idList.equals(otherCommand.idList);
     }
 }

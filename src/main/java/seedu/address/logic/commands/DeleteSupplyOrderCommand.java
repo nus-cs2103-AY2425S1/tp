@@ -34,10 +34,8 @@ public class DeleteSupplyOrderCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
-        String phoneNumber = supplyOrderList.getOrderByIndex(targetIndex - 1).getPhoneNumber();
-
-        supplyOrderList.removeOrder(phoneNumber);
-
+        supplyOrderList.removeOrder(targetIndex - 1);
+        
         return new CommandResult(String.format(MESSAGE_DELETE_SUPPLY_ORDER_SUCCESS, targetIndex));
     }
 

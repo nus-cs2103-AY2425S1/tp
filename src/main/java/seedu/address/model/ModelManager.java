@@ -151,6 +151,7 @@ public class ModelManager implements Model {
         supplyOrderList.addOrder(supplyOrder);
     }
 
+
     @Override
     public CustomerOrderList getCustomerOrderList() {
         return customerOrderList;

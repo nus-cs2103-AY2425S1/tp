@@ -6,7 +6,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.SupplyOrder;
 
 import java.util.logging.Logger;
@@ -14,9 +13,9 @@ import java.util.logging.Logger;
 /**
  * Panel containing the list of persons.
  */
-public class SupplyOrderListPanel extends UiPart<Region> {
-    private static final String FXML = "SupplyOrderListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(SupplyOrderListPanel.class);
+public class SupplierOrderListPanel extends UiPart<Region> {
+    private static final String FXML = "SupplierOrderListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(SupplierOrderListPanel.class);
 
     @FXML
     private ListView<SupplyOrder> orderListView;
@@ -24,7 +23,7 @@ public class SupplyOrderListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public SupplyOrderListPanel(ObservableList<SupplyOrder> orderList) {
+    public SupplierOrderListPanel(ObservableList<SupplyOrder> orderList) {
         super(FXML);
         orderListView.setItems(orderList);
         orderListView.setCellFactory(listView -> new OrderListViewCell());
@@ -42,7 +41,7 @@ public class SupplyOrderListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new SupplyOrderCard(order, getIndex() + 1).getRoot());
+                setGraphic(new SupplierOrderCard(order, getIndex() + 1).getRoot());
             }
         }
     }

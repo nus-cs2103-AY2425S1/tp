@@ -43,14 +43,12 @@ public class MarkCustomerOrderCommand extends Command {
 
         CustomerOrder customerOrder = customerOrderList.getOrders().get(targetIndex - 1);
 
-        // Check if the order is already completed
         if (customerOrder.getStatus() == OrderStatus.COMPLETED) {
             return new CommandResult(String.format(MESSAGE_ORDER_ALREADY_COMPLETED, targetIndex));
         }
 
         List<? extends Product> items = customerOrder.getItems();
 
-        // Step 1: Accumulate required ingredient quantities
         Map<Integer, Integer> requiredIngredients = new HashMap<>();
 
         for (Product product : items) {
@@ -61,28 +59,9 @@ public class MarkCustomerOrderCommand extends Command {
                 }
             }
         }
-
-//        // Step 2: Check if inventory has enough of each ingredient
-//        for (Map.Entry<Integer, Integer> entry : requiredIngredients.entrySet()) {
-//            int ingredientId = entry.getKey();
-//            int requiredQuantity = entry.getValue();
-//
-//            if (inventory.getStockLevel(ingredientId) < requiredQuantity) {
-//                throw new CommandException(MESSAGE_INSUFFICIENT_STOCK);
-//            }
-//        }
-
-//        // Step 3: If enough stock, update inventory by removing required quantities
-//        for (Map.Entry<Integer, Integer> entry : requiredIngredients.entrySet()) {
-//            int ingredientId = entry.getKey();
-//            int quantityToRemove = entry.getValue();
-//            inventory.removeStock(ingredientId, quantityToRemove);
-//        }
-
-        // Mark the order as completed
         customerOrder.setStatus(OrderStatus.COMPLETED);
 
-        customerOrderList.removeOrder(customerOrder.getPhoneNumber());
+        customerOrderList.removeOrder(targetIndex - 1);
         customerOrderList.addOrder(customerOrder);
         return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, targetIndex));
     }
