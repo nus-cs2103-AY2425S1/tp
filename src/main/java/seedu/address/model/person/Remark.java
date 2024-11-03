@@ -22,7 +22,7 @@ public class Remark {
         value = remark;
     }
     /**
-     * Returns true if a given priority is a valid priority level.
+     * Returns true if a given remark is a valid remark.
      */
     public static boolean isValidRemark(String test) {
         return test.matches(VALIDATION_REGEX);
