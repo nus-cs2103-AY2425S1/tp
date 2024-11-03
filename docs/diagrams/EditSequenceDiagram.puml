@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("edit 1 p\98765432")
+[-> LogicManager : execute("edit 2 p\87654321")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("edit 1 p\98765432")
+LogicManager -> AddressBookParser : parseCommand("edit 2 p\87654321")
 activate AddressBookParser
 
 create EditCommandParser
@@ -27,7 +27,7 @@ activate EditCommandParser
 EditCommandParser --> AddressBookParser
 deactivate EditCommandParser
 
-AddressBookParser -> EditCommandParser : parse("1 p\98765432")
+AddressBookParser -> EditCommandParser : parse("2 p\87654321")
 activate EditCommandParser
 
 create EditCommand
