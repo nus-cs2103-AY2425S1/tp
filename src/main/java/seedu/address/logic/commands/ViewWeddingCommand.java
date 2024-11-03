@@ -20,10 +20,16 @@ public class ViewWeddingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: KEYWORD"
             + "Example: " + COMMAND_WORD + " Jonus & Izzat";
-    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "This wedding cannot be found."
-            + "\n"
-            + "A wedding has to be created using the command '"
+    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "This wedding cannot be found.\n"
+            + "Please make sure that the wedding is created and is in the format 'NAME & NAME'.\n"
+            + "If you have not created a wedding yet, you can do so using the '"
             + AddWeddingCommand.COMMAND_WORD
+            + "' command.";
+    public static final String MESSAGE_NO_PARTICIPANTS_ADDED =
+            String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 0)
+            + "\n"
+            + "You can add a participant to this wedding using the '"
+            + TagAddCommand.COMMAND_WORD
             + "' first.";
 
     private final TagContainsKeywordsPredicate predicate;
@@ -35,11 +41,12 @@ public class ViewWeddingCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         model.updateFilteredPersonList(predicate);
         int numOfParticipants = model.getFilteredPersonList().size();
 
         if (numOfParticipants == 0) {
-            throw new CommandException(String.format(MESSAGE_WEDDING_DOESNT_EXIST));
+            throw new CommandException(MESSAGE_NO_PARTICIPANTS_ADDED);
         }
 
         return new CommandResult(
