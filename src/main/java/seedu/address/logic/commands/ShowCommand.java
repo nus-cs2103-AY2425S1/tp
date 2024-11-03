@@ -19,7 +19,7 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all students in the same group "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORDS\n"
-            + "Example: " + "group 1";
+            + "Example: " + "show group 1";
 
 
     private final Predicate<Person> predicate;
