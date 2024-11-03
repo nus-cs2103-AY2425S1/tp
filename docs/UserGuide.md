@@ -3,6 +3,10 @@ layout: page
 title: User Guide
 ---
 
+<div markdown="block" class="alert alert-warning">
+**Disclaimer: MedConnect is only designed to support the English language. Other languages may cause unexpected behaviour.**
+</div>
+
 MedConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MedConnect can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -265,8 +269,6 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-
-                                                                                                                                                                                                                                                                                                                                          |
 | Action     | Format, Examples                                                                                                                                                                                                       |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665` <br> `ecname/Lim Jun Wei ecphone/98765678 ecrs/Brother` <br> `dname/Sam Lim dphone/9987766 demail/samlim@hotmail.com` <br> `t/friend t/colleague` |
