@@ -131,7 +131,8 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.updateSortedPersonList(sortingComparator);
+        Comparator<Person> currentOrder = CommandUtil.getComparatorByCurrentIndex(model.getFilteredPersonList());
+        model.updateSortedPersonList(sortingComparator.thenComparing(currentOrder));
         return new CommandResult(getMessageSuccess());
     }
 

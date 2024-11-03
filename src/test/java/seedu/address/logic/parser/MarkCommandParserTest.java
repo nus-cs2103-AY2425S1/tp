@@ -34,7 +34,7 @@ public class MarkCommandParserTest {
 
     @Test
     public void parse_wildcard_success() {
-        assertParseSuccess(parser, "*" + TUTORIAL_DESC_ONE,
+        assertParseSuccess(parser, ParserUtil.INDEX_WILDCARD + TUTORIAL_DESC_ONE,
                 new MarkCommand(INDEX_ALL, new Tutorial(VALID_TUTORIAL_ONE)));
     }
 
