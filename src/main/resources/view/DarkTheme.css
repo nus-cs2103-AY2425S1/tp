@@ -368,6 +368,7 @@
 #weddingListView {
     -fx-hbar-policy: never;
     -fx-vbar-policy: as-needed;
+    -fx-background-color: #383838;
 }
 
 .list-cell:empty {
