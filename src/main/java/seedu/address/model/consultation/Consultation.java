@@ -169,4 +169,24 @@ public class Consultation {
             }
         }
     }
+
+    /**
+     * Returns true if both consultations have the same date and time.
+     * This defines a weaker notion of equality between two consultations compared to {@code equals}.
+     *
+     * @param otherConsultation The other consultation to compare to.
+     * @return True if the consultations have the same date and time, false otherwise.
+     */
+    public boolean isSameConsultation(Consultation otherConsultation) {
+        if (otherConsultation == this) {
+            return true;
+        }
+
+        if (otherConsultation == null) {
+            return false;
+        }
+
+        return date.equals(otherConsultation.date)
+                && time.equals(otherConsultation.time);
+    }
 }

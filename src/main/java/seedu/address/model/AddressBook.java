@@ -6,12 +6,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Objects;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.consultation.Consultation;
-import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
+import seedu.address.model.consultation.UniqueConsultList;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
@@ -23,8 +22,8 @@ import seedu.address.model.student.UniqueStudentList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
-    private final ObservableList<Consultation> consults;
-    private final ObservableList<Lesson> lessons;
+    private final UniqueConsultList consults; // Use UniqueConsultList instead of ObservableList
+    private final UniqueLessonList lessons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block,
@@ -38,9 +37,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
-        consults = FXCollections.observableArrayList();
-        lessons = FXCollections.observableArrayList();
+        consults = new UniqueConsultList(); // Initialize UniqueConsultList
+        lessons = new UniqueLessonList();
     }
+
 
     public AddressBook() {
     }
@@ -63,18 +63,64 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.students.setStudents(students);
     }
 
+    // Consultation-level operations
+    /**
+     * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
+     */
+    public boolean hasConsult(Consultation consult) {
+        requireNonNull(consult);
+        return consults.contains(consult); // Use UniqueConsultList's contains method
+    }
+
+    /**
+     * Adds a consultation to the address book.
+     * The consultation must not already exist in the address book.
+     */
+    public void addConsult(Consultation consult) {
+        requireNonNull(consult);
+        consults.add(consult);
+        consults.sort();
+    }
+
     /**
      * Replaces the contents of the consultation list with {@code consults}.
      */
     public void setConsults(List<Consultation> consults) {
-        this.consults.setAll(consults);
+        this.consults.setConsults(consults); // Use setConsults method from UniqueConsultList
+        this.consults.sort();
+    }
+
+    /**
+     * Replaces the given consultation {@code target} in the list with {@code editedConsult}.
+     * {@code target} must exist in TAHub.
+     */
+    public void setConsult(Consultation target, Consultation editedConsult) {
+        requireAllNonNull(target, editedConsult);
+        consults.setConsult(target, editedConsult); // Use setConsult method from UniqueConsultList
+    }
+
+    /**
+     * Removes {@code consult} from this {@code AddressBook}.
+     * {@code consult} must exist in TAHub.
+     */
+    public void removeConsult(Consultation consult) {
+        requireNonNull(consult);
+        consults.remove(consult); // Use remove method from UniqueConsultList
+    }
+
+    /**
+     * Returns an unmodifiable view of the consultation list.
+     */
+    public ObservableList<Consultation> getConsultList() {
+        return consults.asUnmodifiableObservableList(); // Use UniqueConsultList's unmodifiable list view
     }
 
     /**
      * Replaces the contents of the lesson list with {@code lesson}.
      */
     public void setLessons(List<Lesson> lessons) {
-        this.lessons.setAll(lessons);
+        this.lessons.setLessons(lessons);
+        this.lessons.sort();
     }
 
     /**
@@ -99,39 +145,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a consult with the same details as the given consult exists
-     * in TAHub.
-     *
-     * @param consult The consultation to search for.
-     * @return True if a consultation is found.
-     */
-    public boolean hasConsult(Consultation consult) {
-        requireNonNull(consult);
-        return consults.contains(consult);
-    }
-
-    /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */
     public void addStudent(Student p) {
         students.add(p);
-    }
-
-    /**
-     * Adds a consultation to the address book and sorts the list by date.
-     */
-    public void addConsult(Consultation consult) {
-        consults.add(consult);
-
-        // Sort by date first, and by time if the dates are the same
-        consults.sort((c1, c2) -> {
-            int dateComparison = c1.getDate().compareTo(c2.getDate());
-            if (dateComparison == 0) {
-                return c1.getTime().compareTo(c2.getTime()); // Compare by time if dates are the same
-            }
-            return dateComparison; // Otherwise, compare by date
-        });
     }
 
     /**
@@ -148,8 +166,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.setStudent(target, editedStudent);
 
         // Set Student in Consultation List
-        List<Consultation> consultsWithEditedStudent = consults.filtered(c ->
-                c.hasStudent(target)).stream().toList();
+        List<Consultation> consultsWithEditedStudent = consults.filtered(c -> c.hasStudent(target));
         consultsWithEditedStudent.forEach(c -> {
             Consultation newConsult = new Consultation(c);
             newConsult.setStudent(target, editedStudent);
@@ -157,29 +174,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         });
 
         // Set Student in Lesson List
-        List<Lesson> lessonsWithEditedStudent = lessons.filtered(l ->
-                l.hasStudent(target)).stream().toList();
+        List<Lesson> lessonsWithEditedStudent = lessons.filtered(l -> l.hasStudent(target)).stream().toList();
         lessonsWithEditedStudent.forEach(l -> {
             Lesson newLesson = new Lesson(l);
             newLesson.setStudent(target, editedStudent);
             setLesson(l, newLesson);
         });
-    }
-
-    /**
-     * Replaces the given consultation {@code target} in the list with
-     * {@code editedConsult}.
-     * {@code target} must exist in TAHub.
-     */
-    public void setConsult(Consultation target, Consultation editedConsult) {
-        requireAllNonNull(target, editedConsult);
-
-        int index = consults.indexOf(target);
-        if (index == -1) {
-            throw new ConsultationNotFoundException();
-        }
-
-        consults.set(index, editedConsult);
     }
 
     /**
@@ -189,16 +189,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student key) {
         students.remove(key);
-        // Note that we need to create a copy of the filtered list so that modifying consults within the forEach
-        // call does not cause an IndexOutOfBoundsException.
-        // remove from consultations
-        List<Consultation> consultsWithDeletedStudent = consults.filtered(c -> c.hasStudent(key)).stream().toList();
+
+        // Remove from consultations
+        List<Consultation> consultsWithDeletedStudent = consults.filtered(c -> c.hasStudent(key));
         consultsWithDeletedStudent.forEach(c -> {
             Consultation newConsult = new Consultation(c);
             newConsult.removeStudent(key);
             setConsult(c, newConsult);
         });
-        // remove from lessons
+
+        // Remove from lessons
         List<Lesson> lessonsWithDeletedStudent = lessons.filtered(l -> l.hasStudent(key)).stream().toList();
         lessonsWithDeletedStudent.forEach(l -> {
             Lesson newLesson = new Lesson(l);
@@ -207,33 +207,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         });
     }
 
-    /**
-     * Removes {@code consult} from this {@code AddressBook}.
-     * {@code consult} must exist in TAHub.
-     *
-     * @param consult The consult to be removed.
-     */
-    public void removeConsult(Consultation consult) {
-        consults.remove(consult);
-    }
-
     //// util methods
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("students", students)
-                .add("consults", consults)
-                .toString();
+        return AddressBook.class.getCanonicalName() + "{students=" + students.asUnmodifiableObservableList()
+            + ", consults=" + consults.asUnmodifiableObservableList()
+            + ", lessons=" + lessons.asUnmodifiableObservableList() + "}";
     }
 
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
-    }
-
-    public ObservableList<Consultation> getConsultList() {
-        return FXCollections.unmodifiableObservableList(consults);
     }
 
     /**
@@ -290,16 +275,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws NullPointerException if {@code lesson} is null.
      */
     public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
         lessons.add(lesson);
-
-        // Sort by date first, and then by time if the dates are the same
-        lessons.sort((l1, l2) -> {
-            int dateComparison = l1.getDate().compareTo(l2.getDate());
-            if (dateComparison == 0) {
-                return l1.getTime().compareTo(l2.getTime()); // Compare by time if dates are the same
-            }
-            return dateComparison; // Otherwise, compare by date
-        });
+        lessons.sort();
     }
 
     /**
@@ -319,7 +297,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *         address book.
      */
     public ObservableList<Lesson> getLessonList() {
-        return FXCollections.unmodifiableObservableList(lessons);
+        return lessons.asUnmodifiableObservableList();
     }
 
     /**
@@ -336,12 +314,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setLesson(Lesson target, Lesson editedLesson) {
         requireAllNonNull(target, editedLesson);
-
-        int index = lessons.indexOf(target);
-        if (index == -1) {
-            throw new LessonNotFoundException(); // Custom exception to be created if it doesn't exist
-        }
-
-        lessons.set(index, editedLesson);
+        lessons.setLesson(target, editedLesson);
     }
 }

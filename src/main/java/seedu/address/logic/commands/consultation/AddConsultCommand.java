@@ -54,6 +54,14 @@ public class AddConsultCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Check if the model already has a consultation with the same date and time
+        if (model.hasConsult(newConsult)) {
+            throw new CommandException("Duplicate consultation."
+                + " A consultation with this date and time already exists.");
+        }
+
+        // Add the consultation if it's unique
         model.addConsult(newConsult);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newConsult)),
                 COMMAND_TYPE);
