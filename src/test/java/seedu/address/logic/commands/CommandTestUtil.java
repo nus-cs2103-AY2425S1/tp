@@ -19,6 +19,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddRentalCommand.AddRentalDescriptor;
@@ -27,7 +28,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.client.PhoneContainsKeywordsPredicate;
+import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
+import seedu.address.model.tag.TagsContainsKeywordsPredicate;
 import seedu.address.testutil.AddRentalDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditRentalDescriptorBuilder;
@@ -57,6 +62,7 @@ public class CommandTestUtil {
     public static final String VALID_EMPTY_EMAIL = "";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String VALID_KEYWORD = "valid keyword@+_.-123";
 
     public static final String NAME_DESC_CHARLIE = " " + PREFIX_NAME + VALID_NAME_CHARLIE;
     public static final String NAME_DESC_DENVER = " " + PREFIX_NAME + VALID_NAME_DENVER;
@@ -70,11 +76,13 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_EMPTY = " " + PREFIX_EMAIL + VALID_EMPTY_EMAIL;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String VALID_KEYWORD_DESC = " " + PREFIX_KEYWORD + VALID_KEYWORD;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_KEYWORD_DESC = " " + PREFIX_KEYWORD + "keyword*"; // '*' not allowed in keywords
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -132,11 +140,21 @@ public class CommandTestUtil {
     public static final String MONTHLY_RENT_DESC_TWO = " " + PREFIX_MONTHLY_RENT + VALID_MONTHLY_RENT_TWO;
     public static final String DEPOSIT_DESC_TWO = " " + PREFIX_DEPOSIT + VALID_DEPOSIT_TWO;
     public static final String CUSTOMER_LIST_DESC_TWO = " " + PREFIX_CUSTOMER_LIST + VALID_CUSTOMER_LIST_TWO;
-    public static final String KEYWORD_NAME_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_NAME_ALICE;
-    public static final String KEYWORD_PHONE_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_PHONE_ALICE;
-    public static final String KEYWORD_EMAIL_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_EMAIL_ALICE;
     public static final String KEYWORD_ADDRESS_DESC_ONE = " " + PREFIX_KEYWORD + VALID_ADDRESS_ONE;
-    public static final String KEYWORD_INVALID_EMPTY = " " + PREFIX_KEYWORD;
+    public static final String KEYWORD_EMPTY_DESC = " " + PREFIX_KEYWORD;
+
+    public static final NameContainsKeywordsPredicate EMPTY_NAME_PREDICATE =
+            new NameContainsKeywordsPredicate(List.of());
+    public static final PhoneContainsKeywordsPredicate EMPTY_PHONE_PREDICATE =
+            new PhoneContainsKeywordsPredicate(List.of());
+    public static final EmailContainsKeywordsPredicate EMPTY_EMAIL_PREDICATE =
+            new EmailContainsKeywordsPredicate(List.of());
+    public static final TagsContainsKeywordsPredicate EMPTY_TAGS_PREDICATE =
+            new TagsContainsKeywordsPredicate(List.of());
+    public static final RentalInformationContainsKeywordsPredicate EMPTY_RENTAL_PREDICATE =
+            new RentalInformationContainsKeywordsPredicate(List.of());
+    public static final Predicate<Client> EMPTY_PREDICATE = EMPTY_NAME_PREDICATE.or(EMPTY_PHONE_PREDICATE)
+            .or(EMPTY_EMAIL_PREDICATE).or(EMPTY_TAGS_PREDICATE).or(EMPTY_RENTAL_PREDICATE);
 
     public static final EditRentalDescriptor EDIT_RENTAL_DESCRIPTOR_ONE;
     public static final EditRentalDescriptor EDIT_RENTAL_DESCRIPTOR_TWO;

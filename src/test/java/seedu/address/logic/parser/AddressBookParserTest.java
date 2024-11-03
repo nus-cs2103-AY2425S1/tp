@@ -4,6 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_EMAIL_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_PHONE_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_RENTAL_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_TAGS_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_LIST;
@@ -17,16 +23,20 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RENTAL;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.AddRentalCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClientCommand;
 import seedu.address.logic.commands.DeleteRentalCommand;
 import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NextCommandHistoryCommand;
@@ -34,6 +44,7 @@ import seedu.address.logic.commands.PreviousCommandHistoryCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -95,7 +106,15 @@ public class AddressBookParserTest {
         assertEquals(new EditClientCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
-    //TODO: parseCommand_find()
+    @Test
+    public void parseCommand_find() throws ParseException {
+        String userInput = FindCommand.COMMAND_WORD + NAME_DESC_AMY;
+        Command actualCommand = parser.parseCommand(userInput);
+        FindCommand expectedCommand = new FindCommand(new NameContainsKeywordsPredicate(List.of(VALID_NAME_AMY)),
+                EMPTY_PHONE_PREDICATE, EMPTY_EMAIL_PREDICATE, EMPTY_TAGS_PREDICATE, EMPTY_RENTAL_PREDICATE);
+
+        assertEquals(expectedCommand, actualCommand);
+    }
 
     @Test
     public void parsePrevCommandHistory() throws ParseException {
