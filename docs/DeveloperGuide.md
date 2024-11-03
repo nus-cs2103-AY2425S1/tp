@@ -544,11 +544,31 @@ testers are expected to do more *exploratory* testing.
 
    1. Use the `exit` command or close the window directly.<br> Expected: The application should close without any errors or delays.
 
+
+### Adding a person
+
+1. Adding a valid person
+
+    1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
+       Expected: "John Doe" is added to the list of contacts. Details of the added contact shown in the status message.
+
+2. Adding a person with missing fields
+
+    1. Test case: `add n/John`<br>
+       Expected: No person is added. Invalid command format shown in the status message.
+
+3. Adding a duplicate person
+
+    1. Prerequisites: Ensure "John Doe" with the contact details in "Adding a valid person" is already in the contact list.
+
+    2. Test Case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
+       Expected: Error message displayed indicating that the person already exists.
+
+    3. Other duplicate person add command to try: `add n/John Doe p/98765432 e/differentemail@example.com a/123 Main St t/Low Risk m/None`,
+
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Deleting a person
 
    1. Test case: `delete n/Alex Yeoh`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -558,8 +578,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
