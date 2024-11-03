@@ -8,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.time.LocalDateTime;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -16,9 +17,9 @@ import seedu.address.model.person.Person;
  * marks an appointment as complete.
  */
 public class MarkAppointmentCommand extends Command {
-    public static final String COMMAND_WORD = "markAppointment";
+    public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": marks an appointment as complete"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": marks an appointment as complete "
             + "between the relevant doctor and patient. "
             + COMMAND_WORD + " "
             + PREFIX_DATE + "[APPOINTMENT_TIME] "
@@ -53,6 +54,9 @@ public class MarkAppointmentCommand extends Command {
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Person patientToMarkAppointment = model.getFilteredPatientById(allPersons, patientId);
         Person doctorToMarkAppointment = model.getFilteredDoctorById(allPersons, doctorId);
+        if (doctorToMarkAppointment == null || patientToMarkAppointment == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
 
         boolean isMarkSuccessful = patientToMarkAppointment.markAppointment(appointmentTime,
                 patientToMarkAppointment.getId(),
