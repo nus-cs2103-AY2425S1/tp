@@ -25,6 +25,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.SocialMedia;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -136,9 +137,10 @@ public class ScheduleCommand extends Command {
         Phone phone = personToEdit.getPhone();
         Email email = personToEdit.getEmail();
         Address address = personToEdit.getAddress();
+        SocialMedia socialMedia = personToEdit.getSocialMedia();
         Set<Tag> tags = personToEdit.getTags();
 
-        return new Person(name, phone, email, address, editedSchedule, tags);
+        return new Person(name, phone, email, address, editedSchedule, socialMedia, tags);
     }
 
     @Override

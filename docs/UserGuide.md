@@ -155,6 +155,8 @@ Format: `socialMedia [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
 * `ig`,`fb`, and `cs` is used to represent Instagram, Facebook, and Carousell handles respectively.
 * If the contact already has an existing social media handle, their handle will be updated.
 * Hence, we can only add one social media handle to each contact.
+* Handles must be non empty, have a limit of 30 characters,and consist only of alphanumeric characters, or `-`, `_` and `.`.
+* If multiple handles are entered, only the last handle will be accepted. Eg. `socialMedia 1 ig/first cs/second` will only add the handle `[cs-second]` to the user.
 
 Examples:
 *  `socialMedia 3 ig/charlotteo` Adds the handle `[ig-charlotteo]` to the third contact Charlotte.
@@ -255,6 +257,27 @@ Examples:
   ![result for 'sort and sort ascending'](images/sortByScheduleAsc.png)
 * `sort sch/descending` will sort by schedule in descending order
   ![result for 'sort descending'](images/sortByScheduleDesc.png)
+
+### Search persons by schedule range: `search`
+
+Searches for a list of persons within a given range of schedule 
+
+Format: `search [b/START_TIME] [en/END_TIME]`
+
+* `START_TIME` and `END_TIME` must adhere to the datetime format yyyy-MM-dd HH:mm
+* Either `[b/START_TIME]` or `[en/END_TIME]` has to be provided
+* It will search for schedules between the given `[b/START_TIME]` and `[en/END_TIME]`
+* If `[b/START_TIME]` is not provided, it will search for all schedules that is before `[en/END_TIME]`
+* If `[en/END_TIME]` is not provided, it will search for all schedules that is after `[b/START_TIME]`
+* Persons with no schedule given will not appear in the search results
+* Persons with only a date as a schedule but not time will be searched under the assumption that time is 00:00
+* Search result will be inclusive of the begin and end time
+
+Examples:
+* `search b/2024-11-11 12:00` will search for the list of persons with schedules after 2024-11-11 12:00
+* `search en/2024-11-12 12:00` will search for the list of persons with schedules before 2024-11-12 12:00
+* `search b/2024-11-11 12:00 en/2024-11-12 12:00` will search for the list of persons with schedules between 2024-11-11 12:00 and 2024-11-12 12:00
+  ![result for 'search b/2024-11-11 12:00 en/2024-11-12 12:00'](images/searchCommandSuccess.png)
 
 ### Backing up save file : `backup`
 
