@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertEventCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,8 +29,8 @@ public class DeleteEventByIndexCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST.getZeroBased());
-        DeleteEventCommand deleteEventCommand = new DeleteEventByIndexCommand(INDEX_FIRST);
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        DeleteEventCommand deleteEventCommand = new DeleteEventByIndexCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.format(eventToDelete));
@@ -51,10 +51,10 @@ public class DeleteEventByIndexCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showEventAtIndex(model, INDEX_FIRST);
+        showEventAtIndex(model, INDEX_FIRST_EVENT);
 
-        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST.getZeroBased());
-        DeleteEventCommand deleteEventCommand = new DeleteEventByIndexCommand(INDEX_FIRST);
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        DeleteEventCommand deleteEventCommand = new DeleteEventByIndexCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.format(eventToDelete));
@@ -68,9 +68,9 @@ public class DeleteEventByIndexCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showEventAtIndex(model, INDEX_FIRST);
+        showEventAtIndex(model, INDEX_FIRST_EVENT);
 
-        Index outOfBoundIndex = INDEX_SECOND;
+        Index outOfBoundIndex = INDEX_SECOND_EVENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEventList().size());
 
@@ -81,14 +81,14 @@ public class DeleteEventByIndexCommandTest {
 
     @Test
     public void equals() {
-        DeleteEventCommand deleteEventFirstCommand = new DeleteEventByIndexCommand(INDEX_FIRST);
-        DeleteEventCommand deleteEventSecondCommand = new DeleteEventByIndexCommand(INDEX_SECOND);
+        DeleteEventCommand deleteEventFirstCommand = new DeleteEventByIndexCommand(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteEventSecondCommand = new DeleteEventByIndexCommand(INDEX_SECOND_EVENT);
 
         // same object -> returns true
         assertTrue(deleteEventFirstCommand.equals(deleteEventFirstCommand));
 
         // same values -> returns true
-        DeleteEventCommand deleteEventFirstCommandCopy = new DeleteEventByIndexCommand(INDEX_FIRST);
+        DeleteEventCommand deleteEventFirstCommandCopy = new DeleteEventByIndexCommand(INDEX_FIRST_EVENT);
         assertTrue(deleteEventFirstCommand.equals(deleteEventFirstCommandCopy));
 
         // different types -> returns false

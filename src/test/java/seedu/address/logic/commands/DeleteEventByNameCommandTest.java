@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertEventCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +27,7 @@ public class DeleteEventByNameCommandTest {
 
     @Test
     public void execute_validName_success() {
-        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST.getZeroBased());
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         EventName nameToDelete = eventToDelete.getName();
         DeleteEventCommand deleteEventCommand = new DeleteEventByNameCommand(nameToDelete);
 
@@ -42,7 +42,7 @@ public class DeleteEventByNameCommandTest {
 
     @Test
     public void execute_validLowerCasedName_success() {
-        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST.getZeroBased());
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         EventName nameToDelete = eventToDelete.getName();
         String lowerCasedName = nameToDelete.toString().toLowerCase();
         EventName lowerCasedNameToDelete = new EventName(lowerCasedName);
@@ -59,7 +59,7 @@ public class DeleteEventByNameCommandTest {
 
     @Test
     public void execute_validUpperCasedName_success() {
-        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST.getZeroBased());
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         EventName nameToDelete = eventToDelete.getName();
         String upperCasedName = nameToDelete.toString().toUpperCase();
         EventName upperCasedNameToDelete = new EventName(upperCasedName);
@@ -76,7 +76,7 @@ public class DeleteEventByNameCommandTest {
 
     @Test
     public void execute_partOfName_throwsCommandException() {
-        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST.getZeroBased());
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         EventName nameToDelete = eventToDelete.getName();
         String nameStringToDelete = nameToDelete.toString();
         String partOfNameString = nameStringToDelete.substring(0, nameStringToDelete.length() - 1);
@@ -89,7 +89,7 @@ public class DeleteEventByNameCommandTest {
 
     @Test
     public void execute_noSpacingName_throwsCommandException() {
-        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST.getZeroBased());
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         EventName nameToDelete = eventToDelete.getName();
         String nameStringToDelete = nameToDelete.toString();
         String noSpacingNameString = nameStringToDelete.replaceAll(" ", "");
@@ -102,7 +102,7 @@ public class DeleteEventByNameCommandTest {
 
     @Test
     public void execute_duplicateNamesButDifferentCasing_throwsCommandException() {
-        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST.getZeroBased());
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         EventName nameToDelete = eventToDelete.getName();
         String nameStringToDelete = nameToDelete.toString();
         String allLowerCasedNameString = nameStringToDelete.toLowerCase();

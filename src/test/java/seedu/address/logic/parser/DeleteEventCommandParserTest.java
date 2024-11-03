@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalEvents.MEETING;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class DeleteEventCommandParserTest {
 
     @Test
     public void parse_validIndex_returnsDeleteEventCommand() {
-        assertParseSuccess(parser, "1", new DeleteEventByIndexCommand(INDEX_FIRST));
+        assertParseSuccess(parser, "1", new DeleteEventByIndexCommand(INDEX_FIRST_EVENT));
     }
 
     @Test

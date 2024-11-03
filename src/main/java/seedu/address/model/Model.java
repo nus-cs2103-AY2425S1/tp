@@ -141,11 +141,6 @@ public interface Model {
     Event getEventById(int eventId);
 
     /**
-     * Find all the events whose names are the same as the given argument.
-     */
-    List<Event> findEventsWithName(EventName eventName);
-
-    /**
      * Replaces the given event {@code target} with {@code editedEvent}.
      * {@code target} must exist in the address book.
      */
