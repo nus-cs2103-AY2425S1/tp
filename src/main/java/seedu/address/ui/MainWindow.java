@@ -224,7 +224,7 @@ public class MainWindow extends UiPart<Stage> {
      * Checks if the user accepted a confirmation prompt. If the prompt was confirmed, executes the continuation
      * function of the most recent {@link CommandResult} and returns the result.
      */
-    private CommandResult checkPromptConfirmation(String userInput) {
+    private CommandResult checkPromptConfirmation(String userInput) throws CommandException {
         if (!isConfirmation(userInput)) {
             lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
         } else {
@@ -237,7 +237,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the continuation function of the most recent {@link CommandResult} until a terminal result is reached.
      */
-    private void executeTillTerminalResult() {
+    private void executeTillTerminalResult() throws CommandException {
         while (true) {
             switch (lastCommandResult.getType()) {
             case ORDINARY: // terminal
@@ -280,6 +280,10 @@ public class MainWindow extends UiPart<Stage> {
                 logger.info(String.format("Exporting data to &1%s", exportFile.getPath()));
                 lastCommandResult = lastCommandResult.processFile(logic.exportFile(exportFile));
                 continue;
+
+            default:
+                throw new CommandException("An error occurred during the execution of this command");
+                // This line should not be reached
             }
 
             break;

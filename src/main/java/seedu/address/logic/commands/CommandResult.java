@@ -2,21 +2,21 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.File;
 import java.util.Objects;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.storage.Storage;
 
 /**
  * Represents the result of a command execution.
  */
 public class CommandResult {
 
-    public enum TYPE {
+    /**
+     * The types of results, used by {@code MainWindow} to determine how the result should be interpreted.
+     */
+    public enum Type {
         ORDINARY,
         SHOW_HELP,
         EXIT,
@@ -27,7 +27,7 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    private final TYPE type;
+    private final Type type;
 
     /**
      * Command history should be shown to user.
@@ -44,7 +44,7 @@ public class CommandResult {
      */
     private final Function<Boolean, CommandResult> fileProcessor;
 
-    private CommandResult(String feedbackToUser, TYPE type, String history,
+    private CommandResult(String feedbackToUser, Type type, String history,
                           Supplier<CommandResult> continuationFunction,
                           Function<Boolean, CommandResult> fileProcessor) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -59,7 +59,7 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String history) {
         this(feedbackToUser,
-                showHelp ? TYPE.SHOW_HELP : exit ? TYPE.EXIT : TYPE.ORDINARY,
+                showHelp ? Type.SHOW_HELP : exit ? Type.EXIT : Type.ORDINARY,
                 history, null, null);
         assert (!showHelp || !exit); // No commands result in showing help window AND exiting the app
     }
@@ -69,7 +69,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, TYPE.ORDINARY, "", null, null);
+        this(feedbackToUser, Type.ORDINARY, "", null, null);
     }
 
     /**
@@ -78,7 +78,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, String history) {
-        this(feedbackToUser, TYPE.ORDINARY, history, null, null);
+        this(feedbackToUser, Type.ORDINARY, history, null, null);
     }
 
     /**
@@ -88,19 +88,19 @@ public class CommandResult {
      * @param continuationFunction function that will be applied if user confirms the prompt
      */
     public CommandResult(String feedbackToUser, Supplier<CommandResult> continuationFunction) {
-        this(feedbackToUser, TYPE.PROMPT, "", continuationFunction, null);
+        this(feedbackToUser, Type.PROMPT, "", continuationFunction, null);
     }
 
     public CommandResult(String feedbackToUser, boolean writeToFile,
                          Function<Boolean, CommandResult> fileProcessor) {
-        this(feedbackToUser, writeToFile ? TYPE.EXPORT_DATA : TYPE.IMPORT_DATA, "", null, fileProcessor);
+        this(feedbackToUser, writeToFile ? Type.EXPORT_DATA : Type.IMPORT_DATA, "", null, fileProcessor);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public TYPE getType() {
+    public Type getType() {
         return type;
     }
 
