@@ -38,10 +38,16 @@ public class TagManager {
     public Tag getOrCreateTag(String tagName) {
 
         Tag tagToIncrement = tagMap.computeIfAbsent(tagName, Tag::new);
-        System.out.println("tracking " + tagToIncrement.tagName + "(" + tagToIncrement.getTagCategory() + ")");
         tagToIncrement.incrementOccurrences();
-        // System.out.println(tagToIncrement.usages);
-        System.out.println(tagMap.values());
+        return tagToIncrement;
+    }
+
+    public Tag getOrCreateTag(Tag tag) {
+        if (!tagMap.containsKey(tag.tagName)) {
+            tagMap.put(tag.tagName, new Tag(tag.tagName, tag.getTagCategory()));
+        }
+        Tag tagToIncrement = tagMap.get(tag.tagName);
+        tagToIncrement.incrementOccurrences();
         return tagToIncrement;
     }
 
@@ -51,8 +57,7 @@ public class TagManager {
     public Set<Tag> getOrCreateTag(Set<Tag> tags) {
         Set<Tag> trackedSet = new HashSet<>();
         for (Tag t : tags) {
-            String tagName = t.tagName;
-            trackedSet.add(getOrCreateTag(tagName));
+            trackedSet.add(getOrCreateTag(t));
         }
         return trackedSet;
     }
@@ -64,9 +69,7 @@ public class TagManager {
         String tagName = t.tagName;
         Tag tagToDecrement = tagMap.get(tagName);
         assert tagToDecrement != null;
-        System.out.println("huh" + tagToDecrement);
         if (tagToDecrement.getOccurrences() <= 1) {
-            System.out.println("removed");
             tagMap.remove(tagToDecrement.tagName);
             return;
         }
@@ -83,7 +86,7 @@ public class TagManager {
     }
 
     /**
-     * Returns the stored category of the tag with same label as the passed {@code Tag t}.
+     * Returns the stored category of the tag with same name as the passed {@code Tag t}.
      */
     public TagCategory getTagCategory(Tag t) {
         String tagName = t.tagName;
@@ -95,10 +98,8 @@ public class TagManager {
      * Assumes that the tag already exists in the TagManager.
      */
     public void setTagCategory(String tagName, TagCategory cat) {
-        System.out.println(cat);
         Tag tag = tagMap.get(tagName);
         tag.setTagCategory(cat);
-        System.out.println(tagMap.get(tagName).getTagCategory());
     }
 
     /**

@@ -58,7 +58,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Add a person to the specific position of the list.
+     * Adds a person to the specific position of the list.
      * The index must be valid
      */
     public void add(int ind, Person toAdd) {
@@ -78,7 +78,7 @@ public class UniquePersonList implements Iterable<Person> {
     private Set<Tag> addTagsToManager(Set<Tag> tagSet) {
         Set<Tag> deduplicatedTags = new HashSet<>();
         for (Tag tag : tagSet) {
-            Tag trackedTag = tagManager.getOrCreateTag(tag.tagName);
+            Tag trackedTag = tagManager.getOrCreateTag(tag);
             deduplicatedTags.add(trackedTag);
         }
         return deduplicatedTags;
@@ -139,7 +139,7 @@ public class UniquePersonList implements Iterable<Person> {
             Set<Tag> trackedTags = tagManager.getOrCreateTag(p.getTags());
             newPersons.add(p.setAllTags(trackedTags));
         }
-        internalList.setAll(persons);
+        internalList.setAll(newPersons);
     }
 
     /**
@@ -147,7 +147,6 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void deletePersonTag(Person p, Tag t) {
         requireNonNull(p);
-        System.out.println("here" + t);
         Person replace = p.removeTag(t);
         // NOTE: no need to remove tag from tagManager here, setPerson takes care of it.
         setPerson(p, replace);
@@ -160,8 +159,8 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(p);
         // remove tags already added to p
         Set<Tag> uniqueTags = filterUniqueTags(p.getTags(), t);
-        Set<Tag> trackedTags = tagManager.getOrCreateTag(uniqueTags);
-        Person replace = p.addTag(trackedTags);
+        Person replace = p.addTag(uniqueTags);
+        // Note: no need to add tag to tagManager here, setPerson takes care of it.
         setPerson(p, replace);
     }
 
@@ -183,19 +182,26 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns the tag list of the Persons recorded
+     * Returns the tag list of the Persons recorded.
      */
     public ObservableList<Tag> asTagList() {
         return FXCollections.observableArrayList(tagManager.asTagList());
     }
 
     /**
-     * Update the category of all occurrences of a {@code Tag}
+     * Updates the category of all occurrences of a {@code Tag}.
      * @param t {@code Tag} to be updated
      * @param cat updated {@code TagCategory}
      */
     public void updateTagCategory(Tag t, TagCategory cat) {
         tagManager.setTagCategory(t.tagName, cat);
+    }
+
+    /**
+     * Returns the {@TagCategory} of a tracked {@Tag}.
+     */
+    public TagCategory getTagCategory(Tag t) {
+        return tagManager.getTagCategory(t);
     }
 
     @Override
