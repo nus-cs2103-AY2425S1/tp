@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class AddNotesCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_notes";
+    public static final String COMMAND_WORD = "addnotes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the patient notes of the patient identified "
             + "by the index number used in the last patient listing. "
@@ -28,7 +28,7 @@ public class AddNotesCommand extends Command {
             + PREFIX_NOTES + "[NOTES]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NOTES + "Patient is prone to falling.";
-    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Patient: %1$s";
+    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Patient: \n\n%1$s";
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Removed notes from Patient: %1$s";
 
     private final Index index;

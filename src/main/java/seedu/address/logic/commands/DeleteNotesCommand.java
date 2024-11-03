@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteNotesCommand extends Command {
 
-    public static final String COMMAND_WORD = "delNotes";
+    public static final String COMMAND_WORD = "delnotes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient notes from the person identified by the index number used in the "
