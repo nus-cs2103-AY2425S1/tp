@@ -2,12 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
-
 import seedu.address.commons.core.SortOrder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 /**
  * Sorts the currently filtered list of Persons in a user-determined order
@@ -37,11 +34,11 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (order == SortOrder.ASC) {
-            model.updateSortedPersonListComparator(Comparator.comparing((Person p) ->
-                    p.getName().toString()));
+            model.updateSortedPersonListComparator((p1, p2) ->
+                    String.CASE_INSENSITIVE_ORDER.compare(p1.getName().toString(), p2.getName().toString()));
         } else if (order == SortOrder.DESC) {
-            model.updateSortedPersonListComparator(Comparator.comparing((Person p) ->
-                    p.getName().toString()).reversed());
+            model.updateSortedPersonListComparator((p1, p2) ->
+                    String.CASE_INSENSITIVE_ORDER.compare(p2.getName().toString(), p1.getName().toString()));
         } else if (order == SortOrder.OG) {
             model.setSortedListToDefault();
         } else {
