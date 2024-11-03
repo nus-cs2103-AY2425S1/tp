@@ -125,7 +125,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index;
         try {
             List<Index> indexList = ParserUtil.parseIndex(argMultimap.getPreamble());
-            if (indexList.isEmpty()) {
+            if (indexList.isEmpty() || indexList.size() > 1) {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
             }
             index = indexList.get(0);
