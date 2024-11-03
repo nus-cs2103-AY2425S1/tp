@@ -70,4 +70,25 @@ public class HelpCommand extends Command {
             return new CommandResult(this.message, false, false);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof HelpCommand otherHelpCommand)) {
+            return false;
+        }
+
+        if (isHelp != otherHelpCommand.isHelp) {
+            return false;
+        }
+
+        if (isHelp) {
+            return true;
+        } else {
+            return this.message.equals(otherHelpCommand.message);
+        }
+    }
 }
