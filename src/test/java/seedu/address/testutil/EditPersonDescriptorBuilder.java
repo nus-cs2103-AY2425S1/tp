@@ -37,7 +37,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setStudentId(person.getStudentId());
         descriptor.setEmail(person.getEmail());
         descriptor.setMajor(person.getMajor());
-        descriptor.setTags(person.getGroups());
+        descriptor.setGroups(person.getGroups());
         descriptor.setYear(person.getYear());
     }
 
@@ -74,12 +74,12 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code groups} into a {@code Set<Group>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Group> groupSet = Stream.of(tags).map(Group::new).collect(Collectors.toSet());
-        descriptor.setTags(groupSet);
+    public EditPersonDescriptorBuilder withGroups(String... groups) {
+        Set<Group> groupSet = Stream.of(groups).map(Group::new).collect(Collectors.toSet());
+        descriptor.setGroups(groupSet);
         return this;
     }
 

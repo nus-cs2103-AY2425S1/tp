@@ -71,10 +71,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withStudentId(VALID_STUDENTID_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_MAJOR_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withGroups(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withStudentId(VALID_STUDENTID_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_MAJOR_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withGroups(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
