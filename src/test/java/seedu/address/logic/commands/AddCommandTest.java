@@ -74,8 +74,8 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // same person due to same phone and email-> returns true
+        assertTrue(addAliceCommand.equals(addBobCommand));
     }
 
     @Test
@@ -136,6 +136,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonAfterEdit(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 

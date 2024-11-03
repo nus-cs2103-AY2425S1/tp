@@ -21,7 +21,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[a-zA-Z0-9][a-zA-Z0-9 \\-]*";
+    public static final String VALIDATION_REGEX = "(?=.*[a-zA-Z])[a-zA-Z0-9][a-zA-Z0-9 .\\-'/]*";
 
     public static final int MAX_LENGTH = 50;
 
@@ -38,7 +38,12 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
 
+        // Step 1: Trim leading and trailing spaces, and replace multiple spaces with a single space
         String trimmedName = name.trim().replaceAll("\\s+", " ");
+
+        // Step 2: Remove spaces around hyphens, slashes, apostrophes, and periods
+        trimmedName = trimmedName.replaceAll("\\s*([\\-/'\\.])\\s*", "$1");
+
         checkArgument(isValidName(trimmedName), MESSAGE_CONSTRAINTS);
         checkArgument(isValidLengthName(trimmedName), MESSAGE_LENGTH_CONSTRAINTS);
 

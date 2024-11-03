@@ -11,12 +11,12 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Invalid phone number: only numeric characters and optional leading '+' are allowed.";
+            "Invalid phone number: only numeric characters, hyphens '-' and optional leading '+' are allowed.";
 
     public static final String MESSAGE_LENGTH_CONSTRAINTS =
             "Phone number must be between 3 and 15 digits inclusive.";
 
-    public static final String VALIDATION_REGEX = "(\\+)?\\d+";
+    public static final String VALIDATION_REGEX = "(\\+)?[0-9\\-\\s]+";
     public final String value;
 
     /**
@@ -26,16 +26,19 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
+        phone = phone.trim(); // Trim whitespace from the start and end
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         checkArgument(isValidLengthPhone(phone), MESSAGE_LENGTH_CONSTRAINTS);
-        value = phone;
+        // Trim hyphens from the phone number
+        value = phone.replaceAll("[\\s-]", "").replaceFirst("^\\+", ""); // Remove spaces, hyphens, and leading '+'
     }
 
     /**
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+
+        return test.matches(VALIDATION_REGEX) && !test.replaceAll("[^0-9]", "").isEmpty();
     }
 
     /**
@@ -43,7 +46,8 @@ public class Phone {
      */
     public static boolean isValidLengthPhone(String test) {
         // Ensure length is between 7 and 15 digits (excluding leading '+')
-        String digitsOnly = test.replaceAll("\\+", ""); // Remove '+' for length check
+        // Remove '+' and hyphens for length check
+        String digitsOnly = test.replaceAll("[\\s-]", "").replaceAll("\\+", "");
         return digitsOnly.length() >= 3 && digitsOnly.length() <= 15;
     }
 
