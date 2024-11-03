@@ -22,8 +22,8 @@ public class DeleteAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified appointment.\n"
-            + "Parameters: NAME d/DATE\n"
-            + "Example: " + COMMAND_WORD + " John Doe d/2024-10-01";
+            + "Parameters: NAME d/yyyy-MM-dd HHmm (name must of an existing client and should not be blank)\n"
+            + "Example: " + COMMAND_WORD + " John Doe d/2024-10-01 1200";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment for %1$s";
 
