@@ -127,7 +127,7 @@ public class ParserUtil {
 
     public static Person getPersonFromAddressBookIndex(Index index) throws ParseException {
         requireNonNull(index);
-        Optional<Person> p = CommonModel.getInstance().getPersonByIndex(index);
+        Optional<Person> p = CommonModel.getInstance().getPersonByFilteredPersonListIndex(index);
         if (p.isEmpty()) {
             throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }

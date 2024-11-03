@@ -179,7 +179,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Optional<Person> getPersonByIndex(Index index) {
+        public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
             return Optional.empty();
         }
     }

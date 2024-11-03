@@ -99,7 +99,7 @@ public interface AddressBookModel {
     Optional<Person> getPersonByPhone(Phone phone);
 
     /**
-     * Searches for a person with the given index
+     * Searches for a person in the current filtered person list displayed with the given index
      */
-    Optional<Person> getPersonByIndex(Index index);
+    Optional<Person> getPersonByFilteredPersonListIndex(Index index);
 }

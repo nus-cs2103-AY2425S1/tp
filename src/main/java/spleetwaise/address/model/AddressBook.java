@@ -78,7 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return Optional.of(filteredPersonList.get(0));
     }
 
-    public Optional<Person> getPersonByIndex(Index index) {
+    public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
         requireNonNull(index);
 
         List<Person> lastShownList = CommonModel.getInstance().getFilteredPersonList();

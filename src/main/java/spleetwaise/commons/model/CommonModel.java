@@ -154,10 +154,10 @@ public class CommonModel implements Model {
         return addressBookModel.getPersonByPhone(phone);
     }
 
-    public Optional<Person> getPersonByIndex(Index index) {
+    public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
         requireNonNull(addressBookModel, "AddressBook model cannot be null");
         requireNonNull(index);
-        return addressBookModel.getPersonByIndex(index);
+        return addressBookModel.getPersonByFilteredPersonListIndex(index);
     }
 
     // TransactionBook
