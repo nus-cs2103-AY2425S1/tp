@@ -143,6 +143,7 @@ public class HelpWindow extends UiPart<Stage> {
         commandTable.setItems(commandList);
         commandTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
 
+        // Set height of table dynamically
         commandTable.setFixedCellSize(25);
         commandTable.prefHeightProperty().bind(
                 Bindings.size(commandTable.getItems()).multiply(commandTable.getFixedCellSize()).add(30));

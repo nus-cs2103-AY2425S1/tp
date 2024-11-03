@@ -52,14 +52,6 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-#commandTable .table-row-cell:odd {
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
-
-#commandTable .table-row-cell:even {
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
-
 #commandTable .table-row-cell:hover {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
