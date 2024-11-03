@@ -249,14 +249,14 @@ public class ModelManager implements Model {
 
     // =========== Association Filters =============================================================
     private void applyFiltersBasedOnUiState() {
-        Predicate<Vendor> vendorPredicate = getVendorPredicateForUiState();
-        Predicate<Event> eventPredicate = getEventPredicateForUiState();
+        Predicate<Vendor> vendorPredicate = evaluateVendorPredicate();
+        Predicate<Event> eventPredicate = evaluateEventPredicate();
 
         filteredVendors.setPredicate(vendorPredicate);
         filteredEvents.setPredicate(eventPredicate);
     }
 
-    private Predicate<Vendor> getVendorPredicateForUiState() {
+    private Predicate<Vendor> evaluateVendorPredicate() {
         if (currentUiState.getValue() == UiState.EVENT_DETAILS) {
             Predicate<Vendor> notAssociatedPredicate = vendor ->
                 !isVendorAssignedToEvent(vendor, selectedEvent.getValue());
@@ -265,7 +265,7 @@ public class ModelManager implements Model {
         return suppliedVendorFilterPredicate.getValue();
     }
 
-    private Predicate<Event> getEventPredicateForUiState() {
+    private Predicate<Event> evaluateEventPredicate() {
         if (currentUiState.getValue() == UiState.VENDOR_DETAILS) {
             Predicate<Event> notAssociatedPredicate = event ->
                 !isVendorAssignedToEvent(selectedVendor.getValue(), event);

@@ -29,15 +29,15 @@ class UnassignCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(TypicalVendors.getTypicalEventTory(), new UserPrefs());
-        vendor = TypicalVendors.ALICE; // Customize with utility
-        event = TypicalEvents.ALICE; // Use the predefined event
+        vendor = TypicalVendors.ALICE;
+        event = TypicalEvents.ALICE;
         model.addEvent(event);
         model.assignVendorToEvent(vendor, event);
     }
 
     @Test
     public void execute_vendorDetailsView_validAssignment() throws Exception {
-        model.viewVendor(vendor); // Sets UiState to VENDOR_DETAILS
+        model.viewVendor(vendor); // Simulate viewing a vendor
         model.setUiState(UiState.VENDOR_DETAILS);
 
         UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
@@ -62,7 +62,7 @@ class UnassignCommandTest {
 
     @Test
     public void execute_eventDetailsView_validAssignment() throws CommandException {
-        model.viewEvent(event); // Sets UiState to EVENT_DETAILS
+        model.viewEvent(event); // Simulate viewing an event
         model.setUiState(UiState.EVENT_DETAILS);
 
         UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
