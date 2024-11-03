@@ -42,6 +42,7 @@ public class RightPanelTest {
 
     @BeforeAll
     public static void initJfxRuntime() {
+        System.setProperty("java.awt.headless", "true");
         Platform.startup(() -> {
         });
     }
