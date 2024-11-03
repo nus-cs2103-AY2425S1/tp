@@ -61,6 +61,7 @@ Action     | Format, Examples
 **Remind**   | `remind`
 **Help**   | `help`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
+**Exit**   | `exit`
 
 ## Features
 
