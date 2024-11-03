@@ -5,7 +5,6 @@ import static seedu.academyassist.logic.parser.CommandParserTestUtil.assertParse
 import static seedu.academyassist.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.academyassist.model.person.Subject.MESSAGE_CONSTRAINTS;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.academyassist.logic.commands.FilterCommand;
@@ -17,7 +16,8 @@ import seedu.academyassist.model.filter.FilterParam;
  */
 public class FilterCommandParserTest {
 
-    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            FilterCommand.MESSAGE_USAGE);
     private FilterCommandParser parser = new FilterCommandParser();
 
     @Test

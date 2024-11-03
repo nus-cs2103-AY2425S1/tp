@@ -30,7 +30,7 @@ public class FilterCommandTest {
     private Model expectedModel = new ModelManager(getTypicalAcademyAssist(), new UserPrefs());
 
     @Test
-    public void sort_by_yearGroup_success() {
+    public void sortByYearGroup_success() {
         YearGroup yg = new YearGroup("2");
         FilterCommand command = new FilterCommand(new FilterParam("yearGroup"), yg);
         expectedModel.updateFilteredPersonList(new PersonInYearPredicate((YearGroup) yg));
@@ -40,7 +40,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void sort_by_subject_success() {
+    public void sortBySubject_success() {
         Subject subj = new Subject("English");
         FilterCommand command = new FilterCommand(new FilterParam("subject"), subj);
         expectedModel.updateFilteredPersonList(new PersonTakeSubjectPredicate((Subject) subj));
