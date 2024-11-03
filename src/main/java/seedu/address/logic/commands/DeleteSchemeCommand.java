@@ -41,6 +41,11 @@ public class DeleteSchemeCommand extends Command {
 
     private final ArrayList<Scheme> schemesToBeDeleted = new ArrayList<>();
 
+    private final ArrayList<Scheme> newSchemes = new ArrayList<>();
+
+    private Person personToEdit;
+    private Person editedPerson;
+
     public DeleteSchemeCommand(Index personIndex, ArrayList<Index> schemeIndex) {
         requireAllNonNull(personIndex, schemeIndex);
         this.personIndex = personIndex;
@@ -54,18 +59,18 @@ public class DeleteSchemeCommand extends Command {
         if (personIndex.getZeroBased() >= lastShownList.size() || personIndex.getZeroBased() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Person targetFamily = lastShownList.get(personIndex.getZeroBased());
-        Person editedPerson = deleteSchemeFromPerson(targetFamily, schemeIndex);
+        personToEdit = lastShownList.get(personIndex.getZeroBased());
+        editedPerson = deleteSchemeFromPerson(personToEdit, schemeIndex);
 
-        if (!targetFamily.isSamePerson(editedPerson)) {
+        if (!personToEdit.isSamePerson(editedPerson)) {
             if (model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
 
-            model.updateAppointments(targetFamily.getName(), editedPerson.getName());
+            model.updateAppointments(personToEdit.getName(), editedPerson.getName());
         }
 
-        model.setPerson(targetFamily, editedPerson);
+        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_DELETE_SCHEME_PERSON_SUCCESS);
 
@@ -79,7 +84,8 @@ public class DeleteSchemeCommand extends Command {
             }
             schemesToBeDeleted.add(currentSchemes.get(index.getZeroBased()));
         }
-        currentSchemes.removeAll(schemesToBeDeleted);
+        newSchemes.addAll(currentSchemes);
+        newSchemes.removeAll(schemesToBeDeleted);
 
         Name updatedName = targetFamily.getName();
         Phone updatedPhone = targetFamily.getPhone();
@@ -93,10 +99,18 @@ public class DeleteSchemeCommand extends Command {
         Set<Tag> updatedTags = targetFamily.getTags();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
-                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now(), currentSchemes);
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now(), newSchemes);
     }
 
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    public Person getUneditedPerson() {
+        return personToEdit;
+    }
+
+    public Person getEditedPerson() {
+        return editedPerson;
     }
 }

@@ -93,6 +93,25 @@ public class UndoCommand extends Command {
             pastCommands.remove(pastCommands.size() - 1);
             resultMessage = MESSAGE_UNDO_CLEAR;
             break;
+
+        case "addscheme":
+            AddSchemeCommand addSchemeCommand = (AddSchemeCommand) latestCommand;
+            Person personToEdit = addSchemeCommand.getUneditedPerson();
+            Person editedPerson = addSchemeCommand.getEditedPerson();
+            model.setPerson(editedPerson, personToEdit);
+            pastCommands.remove(pastCommands.size() - 1);
+            resultMessage = String.format(MESSAGE_UNDO_EDIT, personToEdit.getName());
+            break;
+
+        case "deletescheme":
+            DeleteSchemeCommand deleteSchemeCommand = (DeleteSchemeCommand) latestCommand;
+            Person personToEditScheme = deleteSchemeCommand.getUneditedPerson();
+            Person editedPersonScheme = deleteSchemeCommand.getEditedPerson();
+            model.setPerson(editedPersonScheme, personToEditScheme);
+            pastCommands.remove(pastCommands.size() - 1);
+            resultMessage = String.format(MESSAGE_UNDO_EDIT, personToEditScheme.getName());
+            break;
+
         default:
             pastCommands.remove(pastCommands.size() - 1);
             break;

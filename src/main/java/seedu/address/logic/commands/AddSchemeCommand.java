@@ -42,6 +42,11 @@ public class AddSchemeCommand extends Command {
     private final Index personIndex;
     private final Index schemeIndex;
 
+    private final ArrayList<Scheme> newSchemes = new ArrayList<>();
+
+    private Person personToEdit;
+    private Person editedPerson;
+
     public AddSchemeCommand(Index personIndex, Index schemeIndex) {
         requireAllNonNull(personIndex, schemeIndex);
         this.personIndex = personIndex;
@@ -60,8 +65,8 @@ public class AddSchemeCommand extends Command {
         }
         Scheme targetScheme = schemes.get(schemeIndex.getZeroBased());
         List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToEdit = lastShownList.get(personIndex.getZeroBased());
-        Person editedPerson = addSchemeToPerson(personToEdit, targetScheme);
+        personToEdit = lastShownList.get(personIndex.getZeroBased());
+        editedPerson = addSchemeToPerson(personToEdit, targetScheme);
 
         if (!personToEdit.isSamePerson(editedPerson)) {
             if (model.hasPerson(editedPerson)) {
@@ -107,7 +112,8 @@ public class AddSchemeCommand extends Command {
         if (currentSchemes.contains(scheme)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_SCHEME);
         }
-        currentSchemes.add(scheme);
+        newSchemes.addAll(currentSchemes);
+        newSchemes.add(scheme);
         Name updatedName = person.getName();
         Phone updatedPhone = person.getPhone();
         Email updatedEmail = person.getEmail();
@@ -120,7 +126,7 @@ public class AddSchemeCommand extends Command {
         Set<Tag> updatedTags = person.getTags();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
-                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now(), currentSchemes);
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now(), newSchemes);
     }
 
     @Override
@@ -141,5 +147,13 @@ public class AddSchemeCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    public Person getUneditedPerson() {
+        return personToEdit;
+    }
+
+    public Person getEditedPerson() {
+        return editedPerson;
     }
 }
