@@ -148,6 +148,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a course: `course-add`
+
+Adds a course to TAHub Contacts.
+
+Format: `course-add c/COURSE_CODE n/COURSE_NAME`
+
+Examples:
+* course-add c/CS1101S n/Programming Methodology 1
+* course-add c/MA1522 n/Linear Algebra
+
+Notes:
+* COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
+* COURSE_NAME must only contain alphanumeric characters or spaces
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -204,5 +218,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add Course** | `course-add c/COURSE_CODE n/COURSE_NAME`<br> e.g., `course-add c/CS1101S n/Programming Methodology 1`
 **List**   | `list`
 **Help**   | `help`
