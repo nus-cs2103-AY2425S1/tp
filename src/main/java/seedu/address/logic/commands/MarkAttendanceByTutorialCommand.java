@@ -2,13 +2,16 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_LOGGER_FOR_EXCEPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -42,8 +45,9 @@ public class MarkAttendanceByTutorialCommand extends Command {
             Marked attendance for the following students: %3$s
             Students with duplicate weekly attendance: %4$s
             """;
-    public static final String MESSAGE_EMPTY_TUTORIAL =
-            "No students are enrolled in tutorial %1$s.";
+    public static final String MESSAGE_EMPTY_TUTORIAL = "No students are enrolled in tutorial %1$s.";
+
+    private final Logger logger = LogsCenter.getLogger(MarkAttendanceByTutorialCommand.class);
 
     private final Tutorial tutorial;
     private final Attendance attendance;
@@ -61,7 +65,11 @@ public class MarkAttendanceByTutorialCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Running execute(Model model)");
+
         if (model.getTutorialList().stream().noneMatch(tutorial -> tutorial.equals(this.tutorial))) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByTutorialCommand.class
+                    + "\n - Tutorial not found: " + tutorial.getSubject()));
             throw new CommandException(String.format(Messages.MESSAGE_TUTORIAL_NOT_FOUND, tutorial.getSubject()));
         }
 
@@ -69,16 +77,19 @@ public class MarkAttendanceByTutorialCommand extends Command {
                 .filtered(participation -> participation.getTutorial().equals(tutorial));
 
         if (participationList.isEmpty()) {
-            throw new CommandException(
-                    String.format(MESSAGE_EMPTY_TUTORIAL, tutorial.getSubject()));
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByTutorialCommand.class
+                    + "\n - No students enrolled in tutorial: " + tutorial.getSubject()));
+            throw new CommandException(String.format(MESSAGE_EMPTY_TUTORIAL, tutorial.getSubject()));
         }
 
         StringBuilder markedStudents = new StringBuilder();
         StringBuilder duplicateAttendanceStudents = new StringBuilder();
         int duplicateStudents = 0;
 
+        logger.info("Starting to mark the attendance of students in tutorial: " + tutorial.getSubject());
         for (Participation currentParticipation : participationList) {
             if (containsMarkedAttendance(currentParticipation.getAttendanceList())) {
+                logger.info("Duplicate weekly attendance found for " + currentParticipation.getStudentName());
                 duplicateAttendanceStudents.append(currentParticipation.getStudentName()).append(" ");
                 duplicateStudents++;
                 continue;
@@ -91,20 +102,24 @@ public class MarkAttendanceByTutorialCommand extends Command {
                     currentParticipation.getTutorial(), updatedAttendance);
 
             model.setParticipation(currentParticipation, updatedParticipation);
+            logger.info("Successfully replaced current participation with updated participation for "
+                    + currentParticipation.getStudentName());
 
             markedStudents.append(currentParticipation.getStudentName()).append(" ");
         }
 
         if (duplicateStudents == participationList.size()) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByTutorialCommand.class
+                    + "\n - Duplicate weekly attendance found for all students"));
             throw new CommandException(String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE_ALL_STUDENTS,
                     tutorial.getSubject(), attendance));
         }
 
+        logger.info("Successfully marked the attendance for students in tutorial:" + tutorial.getSubject());
         if (duplicateStudents != 0) {
             return new CommandResult(String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE_SOME_STUDENTS,
                     tutorial.getSubject(), attendance, markedStudents, duplicateAttendanceStudents));
         }
-
         return new CommandResult(String.format(MESSAGE_MARK_TUTORIAL_ATTENDANCE_SUCCESS,
                 tutorial.getSubject(), attendance));
     }

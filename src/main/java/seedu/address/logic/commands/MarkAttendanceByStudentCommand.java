@@ -2,12 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_LOGGER_FOR_EXCEPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -42,6 +45,8 @@ public class MarkAttendanceByStudentCommand extends Command {
     public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE =
             "Student %1$s has attendance marked for the corresponding week of date %2$s";
 
+    private final Logger logger = LogsCenter.getLogger(MarkAttendanceByStudentCommand.class);
+
     private final Index targetIndex;
     private final Attendance attendance;
     private final Tutorial tutorial;
@@ -61,9 +66,13 @@ public class MarkAttendanceByStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Running execute(Model model)");
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
+                    + "\n - Invalid index"));
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -73,11 +82,18 @@ public class MarkAttendanceByStudentCommand extends Command {
                 .filter(participation -> participation.getStudent().equals(studentToMarkAttendance)
                         && participation.getTutorial().equals(this.tutorial))
                 .findFirst()
-                .orElseThrow(() -> new CommandException(
-                        String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject())));
+                .orElseThrow(() -> {
+                    logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
+                            + "\n - No participation found for " + studentToMarkAttendance.getFullName()
+                            + " for tutorial: " + tutorial.getSubject()));
+                    return new CommandException(
+                            String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject()));
+                });
 
         for (Attendance currentAttendance : currentParticipation.getAttendanceList()) {
             if (currentAttendance.isSameWeek(attendance)) {
+                logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
+                        + "\n - Duplicate weekly attendance found for " + studentToMarkAttendance.getFullName()));
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
                         studentToMarkAttendance.getName(), attendance));
             }
@@ -90,6 +106,8 @@ public class MarkAttendanceByStudentCommand extends Command {
                 currentParticipation.getTutorial(), updatedAttendance);
 
         model.setParticipation(currentParticipation, updatedParticipation);
+        logger.info("Successfully replaced current participation with updated participation for "
+                + studentToMarkAttendance.getFullName());
 
         return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
                 studentToMarkAttendance.getName(), tutorial.getSubject(), attendance));
