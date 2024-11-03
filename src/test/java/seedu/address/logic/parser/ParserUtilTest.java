@@ -269,4 +269,9 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, ()
                 ->ParserUtil.requireValidEntity("someInvalidEntity"));
     }
+
+    @Test
+    public void requireValidEntity_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.requireValidEntity(null));
+    }
 }
