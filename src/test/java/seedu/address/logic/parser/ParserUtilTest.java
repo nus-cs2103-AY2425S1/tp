@@ -231,4 +231,29 @@ public class ParserUtilTest {
         String expectedSocialMediaHandle = VALID_SOCIAL_MEDIA_HANDLE;
         assertEquals(expectedSocialMediaHandle, ParserUtil.parseSocialMediaHandle(socialMediaHandleWithWhitespace));
     }
+
+    @Test
+    public void parseTags_duplicateTagKeys_throwsParseException() {
+        String duplicateTag1 = "priority:high";
+        String duplicateTag2 = "priority:low";
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(duplicateTag1, duplicateTag2)));
+    }
+
+    @Test
+    public void parseTags_uniqueTagKeys_returnsTagSet() throws Exception {
+        String tag1 = "priority:high";
+        String tag2 = "status:open";
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(tag1, tag2));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag("priority", "high"), new Tag("status", "open")));
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTags_noDuplicateKeys_returnsTagSet() throws Exception {
+        String tag1 = "friend";
+        String tag2 = "colleague";
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(tag1, tag2));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag("friend"), new Tag("colleague")));
+        assertEquals(expectedTagSet, actualTagSet);
+    }
 }
