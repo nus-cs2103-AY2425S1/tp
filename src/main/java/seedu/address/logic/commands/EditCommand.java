@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_GITHUB + "GitHub] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_GITHUB + "john123";
 
 
