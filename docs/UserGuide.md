@@ -149,15 +149,24 @@ Examples:
 
 Assigns a grade to a module that a student is taking.
 
-**Format:** `grade INDEX m/MODULE s/GRADE`
+**Format:** `grade INDEX [m/MODULE s/GRADE]`
 
 - Assigns a numerical grade (between 0 and 100) to the module identified by the `INDEX` number shown in the displayed person list.
-- `INDEX` must be a positive integer.
+- `INDEX`: The index number of the student in the displayed person list (must be a positive integer).
+- `m/MODULE`: The module code to which the grade is assigned.
+- `s/GRADE`: The numerical grade (between 0 and 100) to assign to the module.
+- You can provide multiple `m/MODULE s/GRADE` pairs to assign grades to multiple modules in a single `grade` command.
 - The grade can be any whole number between 0 and 100, inclusive.
+
+**Important Notes:**
+- Each module specified in the `grade` command must be a module that the student is taking.
+- The number of `m/MODULE` prefixes must match the number of `s/GRADE` prefixes.
+- Grades are assigned to modules based on the order of the `m/MODULE s/GRADE` pairs provided in the command.
 
 **Examples:**
 - `grade 1 m/CS2103T s/85` assigns a grade of 85 to CS2103T for the first student.
 - `grade 2 m/MA1522 s/90` assigns a grade of 90 to MA1522 for the second student.
+- `grade 3 m/CS2103T s/80 m/MA1522 s/85` assigns a grade of 80 to CS2103T and 85 to MA1522 for the third student.
 
 
 ### Archiving data files `archive`
