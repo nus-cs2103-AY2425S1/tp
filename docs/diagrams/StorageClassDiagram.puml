@@ -21,6 +21,7 @@ Class JsonSerializablePrudy
 Class JsonAdaptedClient
 Class JsonAdaptedTag
 Class JsonAdaptedPolicy
+Class JsonAdaptedClaim
 }
 
 }
@@ -41,5 +42,5 @@ JsonPrudyStorage ..> JsonSerializablePrudy
 JsonSerializablePrudy --> "*" JsonAdaptedClient
 JsonAdaptedClient --> "*" JsonAdaptedTag
 JsonAdaptedClient --> "*" JsonAdaptedPolicy
-
+JsonAdaptedPolicy --> "*" JsonAdaptedClaim
 @enduml
