@@ -327,8 +327,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 **MSS**
 
-1. User enters appropriate ‘view’ command to search for ‘John Doe’s contact information.
-2. System opens up new page with John Doe’s contact information.
+1. User enters appropriate ‘view’ command to search for John Doe’s contact information.
+2. System displays page with John Doe’s contact information.
 
 Use Case ends.
 
@@ -340,6 +340,7 @@ Use Case ends.
   * Use case resumes from step 2.
 
 <br>
+
 **Use case: UC02 - Delete a contact**
 **Actor: User**
 **MSS**
@@ -361,6 +362,7 @@ Use case ends.
   * Use case resumes at step 2.
 
 <br>
+
 **Use case: UC03 - Add a contact**
 **Actor: User**
 **MSS**
@@ -381,6 +383,7 @@ Use case ends.
     * Use case ends.
 
 <br>
+
 **Use case: UC04 - Search for a contact**
 **Actor: User**
 **MSS**
@@ -400,6 +403,7 @@ Use case ends.
     * Use case ends.
    
 <br>
+
 **Use case: UC05 - List all contacts**
 **Actor: User**
 **MSS**
@@ -417,6 +421,7 @@ Use Case ends.
   * Use case resumes from step 2.
 
 <br>
+
 **Use case: UC06 - View all commands**
 **Actor: User**
 **MSS**
@@ -427,7 +432,29 @@ Use Case ends.
 Use case ends.
 
 <br>
-*{More to be added}*
+
+**Use case: UC07 - Edit a Contact**
+**Actor: User**
+**MSS**
+
+<br>
+
+**Use case: UC08 - Mark attendance for a Member**
+**Actor: User**
+**MSS**
+
+<br>
+
+**Use case: UC09 - Unmark attendance for a Member**
+**Actor: User**
+**MSS**
+
+<br>
+
+**Use case: UC10 - Switch profiles**
+**Actor: User**
+**MSS**
+
 <br>
 
 ### Non-Functional Requirements

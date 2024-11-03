@@ -2,11 +2,23 @@
 layout: page
 title: User Guide
 ---
+<!-- Project Title -->
+<div align="center">
+  <h1 style="font-weight:800;font-size:70px;">CCAConnect</h1>
+</div>
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+CCAConnect is a desktop app for **CCA leaders in NUS** to **manage** and **collate** relevant CCA personnel contact details. This is done via a clean user interface with fast access to the contact information of relevant CCA personnel, providing users a one-stop solution to help manage CCA manpower related considerations.
 
-* Table of Contents
-{:toc}
+<!-- Table of Content -->
+<details>
+  <summary style="font-weight:600;font-size:30px;">Table of Contents</summary>
+
++ <a href="#quick-start" style="font-size:20px;">Quick Start</a>
++ <a href="#features" style="font-size:20px;">Features</a>
++ <a href="#faq" style="font-size:20px;">FAQ</a>
++ <a href="#known-issues" style="font-size:20px;">Known Issues</a>
++ <a href="#command-summary" style="font-size:20px;">Command Summary</a>
+</details>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -16,9 +28,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your CCAConnect Application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ccaconnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -27,9 +39,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com t/johnd123` : Adds a contact named `John Doe` to the application.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 1` : Deletes the 1st contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -41,27 +53,25 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<details>
+  <summary style="font-weight:600;font-size:20px;">Notes about the command format:</summary>
 
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  + Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  + Items in square brackets are optional.<br>
+    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  + Items with `…`​ after them can be used multiple times including zero times.<br>
+      e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  + Parameters can be in any order.<br>
+      e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  + Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+      e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+  + If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</details>
 
 ### Viewing help : `help`
 
@@ -78,9 +88,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of roles (including 0)
-</div>
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -147,6 +156,19 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Viewing a specific contact : `view`
+
+Views all the contact information of the specified contact.
+
+Format: `view t/TELEGRAM_HANDLE`
+
+* Displays all contact information of the person with specified `TELEGRAM_HANDLE`
+* `TELEGRAM_HANDLE` must be more than 4 characters, and can only contain letters, numbers and underscores.
+
+Examples:
+* `view` followed by `t/bob12` displays page containing all the information of the person with telegram handle `@bob12`<br>
+![result for `view t/bob12`](images/viewBob12.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -161,10 +183,10 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -175,7 +197,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CCAConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -197,3 +219,6 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**View** | `view t/TELEGRAM_HANDLE`<br> e.g., `view t/bob123`
+**Mark** | `mark t/TELEGRAM_HANDLE d/YYYY-MM-DD`<br> e.g., `mark t/bob123 d/2024-11-04`
+**Unmark** | `unmark t/TELEGRAM_HANDLE d/YYYY-MM-DD`<br> e.g., `unmark t/bob123 d/2024-11-04`
