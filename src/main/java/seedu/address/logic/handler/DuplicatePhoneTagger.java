@@ -18,8 +18,18 @@ import seedu.address.model.tag.Tag;
  */
 public class DuplicatePhoneTagger {
     public static final String DUPLICATE_PHONE_TAG_NAME = "DuplicatePhone";
+
     private static final Tag DUPLICATE_TAG = new Tag(DUPLICATE_PHONE_TAG_NAME);
     private final HashMap<Phone, Integer> phoneFrequencies = new HashMap<>();
+
+    private Person targetPerson;
+    private Person updatedTargetPerson;
+
+    public DuplicatePhoneTagger() {}
+
+    public DuplicatePhoneTagger(Person targetPerson) {
+        setTargetPerson(targetPerson);
+    }
 
     /**
      * Updates the model's person list based on duplicate phone numbers
@@ -71,11 +81,23 @@ public class DuplicatePhoneTagger {
         return phoneFrequencies;
     }
 
+    public void setTargetPerson(Person targetPerson) {
+        this.targetPerson = targetPerson;
+        this.updatedTargetPerson = targetPerson;
+    }
+
+    public Person getUpdatedPerson() {
+        return this.updatedTargetPerson;
+    }
+
     private void updatePersonsList(Model model, List<Person> persons) {
         for (Person personToUpdate : persons) {
             Phone phone = personToUpdate.getPhone();
             boolean isPhoneDuplicate = isPhoneDuplicate(phone);
             Person updatedPerson = updatePerson(personToUpdate, isPhoneDuplicate);
+            if (personToUpdate.equals(this.targetPerson)) {
+                this.updatedTargetPerson = updatedPerson;
+            }
             model.setPerson(personToUpdate, updatedPerson);
         }
     }

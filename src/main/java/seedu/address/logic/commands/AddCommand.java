@@ -45,7 +45,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private static final DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
+    private final DuplicatePhoneTagger duplicatePhoneTagger;
     private final Person toAdd;
 
     /**
@@ -54,6 +54,7 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
+        duplicatePhoneTagger = new DuplicatePhoneTagger(toAdd);
     }
 
     @Override
@@ -66,8 +67,9 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         duplicatePhoneTagger.tagPhoneDuplicates(model);
+        Person updatedToAdd = duplicatePhoneTagger.getUpdatedPerson();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedToAdd)));
     }
 
     @Override
