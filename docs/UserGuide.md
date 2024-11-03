@@ -68,12 +68,15 @@ Adds your internship application to HireMe.
 
 Format: `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 
+* `NAME` must be alphanumeric with the exceptions of `_`,`&`,`/`,`.`,`:`,`(`, and `)`.
+* `ROLE` must be alphanumeric except `/`.
+* `EMAIL` must be a valid email address.
 * The `DATE` must be within the year 2000 and 2099. It also cannot be a future date which means that the date used must be before today or today's date.
-* It must be in the format `dd/mm/yy`.
+* It must be in the format `dd/mm/yy`, and each field must be double digits (e.g. 01 is valid while 1 is not)
 
 Examples:
 * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
-* `/add n/Facebook r/Data Scientist Intern e/fb@example.com d/21/10/24`
+* `/add r/Data Scientist Intern n/Facebook e/fb@example.com d/21/10/24`
 
 <br>
 
@@ -191,6 +194,8 @@ Format: `/clear`
 <br>
 
 ### Viewing status chart: `/chart`
+
+<img src="images/piechart.png" alt="drawing" width="500"/>
 
 Opens a new window that displays a pie chart with summary data of the statuses of all of your internship applications.
 

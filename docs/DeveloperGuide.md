@@ -339,6 +339,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. HireMe shows an error message.
 
       Use case ends.
+      
+* 1e. The user provided an invalid company name.
+    * 1e1. HireMe shows an error message.
+
+      Use case ends.
+
+* 1f. The user provided an invalid internship role.
+    * 1f1. HireMe shows an error message.
+
+      Use case ends.
+
+* 1g. The user provided an invalid company email.
+    * 1g1. HireMe shows an error message.
+  
+      Use case ends.
+  
+* 1h. The user provided an invalid date of application.
+    * 1h1. HireMe shows an error message.
+
+      Use case ends.
 
 
 **Use Case: UC02 - List all internship entries**
@@ -435,6 +455,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a3. If the save operation still fails, the system logs the error and informs the user that changes might not have been saved.
 
       Use case ends.
+
+
+**Use Case: List all internship entries**
+
+**MSS**
+
+1. The user requests to list all internship entries.
+2. HireMe shows all internship entries.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. There are no internship entries.
+    * 1a1. HireMe shows a message indicating "no entries."
+
+      Use case ends.
+
+**Use Case: Summarise all internship entries**
+
+**MSS**
+
+1. The user requests to view a summary of all internship entries.
+2. HireMe shows a summary chart of all internship entries.
+
+   Use case ends.
 
 
 *{More to be added}*

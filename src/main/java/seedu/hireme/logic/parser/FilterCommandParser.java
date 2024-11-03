@@ -1,5 +1,6 @@
 package seedu.hireme.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.hireme.logic.commands.FilterCommand;
@@ -18,6 +19,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         String trimmedArgs = args.toUpperCase().trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
