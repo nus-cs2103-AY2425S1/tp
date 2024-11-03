@@ -77,6 +77,10 @@ public class DeleteCommandTest {
         expectedModel.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
         expectedModel.deleteContact(expectedModel.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased()));
         assertCommandSuccess(deleteFirstClient, model, expectedMessage, expectedModel);
+
+        DeleteCommand deleteSecondClient = new DeleteCommand(INDEX_SECOND_CONTACT);
+        String expectedExceptionMessage = String.format(Messages.MESSAGE_DEPENDENT_EVENT, 1);
+        assertCommandFailure(deleteSecondClient, model, expectedExceptionMessage);
     }
 
     @Test
