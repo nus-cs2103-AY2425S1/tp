@@ -1,6 +1,5 @@
 package seedu.academyassist.logic.commands;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.academyassist.logic.Messages.MESSAGE_NO_STUDENT_FOUND;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
