@@ -84,9 +84,11 @@ public class EditCommand extends Command {
         Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Github updatedGithub = editPersonDescriptor.getGithub().orElse(personToEdit.getGithub());
+        Set<Integer> updatedWeeksPresent = editPersonDescriptor
+                .getWeeksPresent().orElse(personToEdit.getWeeksPresent());
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedTelegram, updatedTags, updatedGithub);
+                updatedTelegram,updatedGithub, updatedWeeksPresent, updatedTags);
 
     }
 
@@ -146,6 +148,8 @@ public class EditCommand extends Command {
         private Assignment assignment;
         private Set<Tag> tags;
         private Github github;
+        private Set<Integer> weeksPresent;
+
 
         public EditPersonDescriptor() {
         }
@@ -228,6 +232,18 @@ public class EditCommand extends Command {
             this.github = username;
         }
 
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code weeks} is null.
+         */
+        public Optional<Set<Integer>> getWeeksPresent() {
+            return (weeksPresent != null) ? Optional.of(Collections.unmodifiableSet(weeksPresent)) : Optional.empty();
+        }
+
+        public void setWeeksPresent(Set<Integer> weeksPresent) {
+            this.weeksPresent = (weeksPresent != null) ? new HashSet<>(weeksPresent) : null;
+        }
         @Override
         public boolean equals(Object other) {
             if (other == this) {

@@ -106,6 +106,22 @@ public class Person {
         this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
     }
 
+    public Person(Name name,
+                  Phone phone,
+                  Email email,
+                  Telegram telegram,
+                  Github github,
+                  Set<Integer> weeksPresent,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, telegram, tags, github);
+        this.github = github;
+        this.telegram = telegram;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.tags.addAll(tags);
+        this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
+    }
 
 
     public Name getName() {
