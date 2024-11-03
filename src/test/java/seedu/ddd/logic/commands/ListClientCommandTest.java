@@ -17,6 +17,8 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.ddd.logic.commands.list.ListClientCommand;
+import seedu.ddd.logic.commands.list.ListVendorCommand;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;

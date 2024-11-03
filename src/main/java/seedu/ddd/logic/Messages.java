@@ -18,7 +18,6 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n\n%1$s";
     public static final String MESSAGE_INVALID_FLAGS = "No flag or invalid flag specified! Use -c OR -v OR -e %1$s";
-    public static final String MESSAGE_MULTIPLE_FLAGS = "Multiple flags specified. Use one of -c OR -v OR -e %1$s";
     public static final String MESSAGE_INVALID_CONTACT_ID = "Invalid contact ID! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid.";
     public static final String MESSAGE_DISPLAYED_INDEX_TOO_LARGE = "The index provided goes out of bounds.";
@@ -36,6 +35,9 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_ITEM = "Unknown item displayed in list.";
     public static final String MESSAGE_DEPENDENT_EVENT =
             "Unable to delete client! %1$d event(s) depend on the client you are trying to delete.";
+    public static final String MESSAGE_EXCLUSIVE_FIELDS = "Only 1 of the following arguments can be specified: ";
+
+    public static final String MESSAGE_EXCLUSIVE_FLAGS = "Only 1 of the following flags can be specified: ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -59,6 +61,18 @@ public class Messages {
                 Stream.of(exclusivePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_EXCLUSIVE_FIELDS + String.join(" ", exclusiveFields);
+    }
+
+    /**
+     * Returns an error message indicating the exclusive prefixes.
+     */
+    public static String getErrorMessageForExclusiveFlags(Prefix... exclusiveFlags) {
+        assert exclusiveFlags.length > 0;
+
+        Set<String> exclusiveFields =
+                Stream.of(exclusiveFlags).map(Prefix::toString).collect(Collectors.toSet());
+
+        return MESSAGE_EXCLUSIVE_FLAGS + String.join(", ", exclusiveFields);
     }
 
     /**

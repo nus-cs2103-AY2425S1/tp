@@ -1,4 +1,4 @@
-package seedu.ddd.logic.commands;
+package seedu.ddd.logic.commands.list;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
@@ -6,30 +6,23 @@ import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
 
 /**
- * Lists all contacts in the address book to the user.
+ * Lists clients in the address book to the user.
  */
-public class ListContactCommand extends ListCommand {
+public class ListClientCommand extends ListContactCommand {
 
-    public static final String MESSAGE_SUCCESS = "Listed all contacts";
-
-    private final Predicate<Contact> predicate;
-
-    public ListContactCommand(Predicate<Contact> predicate) {
-        this.predicate = predicate;
-    }
-
-    public Predicate<Contact> getPredicate() {
-        return this.predicate;
+    public ListClientCommand(Predicate<Contact> predicate) {
+        super(predicate);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(predicate);
+        model.updateFilteredContactList(this.getPredicate());
         return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
                 model.getFilteredContactListSize()));
     }
@@ -40,17 +33,17 @@ public class ListContactCommand extends ListCommand {
             return true;
         }
         // instanceof handles nulls
-        if (!(other instanceof ListContactCommand)) {
+        if (!(other instanceof ListClientCommand)) {
             return false;
         }
-        ListContactCommand otherListContactCommand = (ListContactCommand) other;
-        return predicate.equals(otherListContactCommand.predicate);
+        ListClientCommand otherListClientCommand = (ListClientCommand) other;
+        return this.getPredicate().equals(otherListClientCommand.getPredicate());
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicate", this.getPredicate())
                 .toString();
     }
 }
-

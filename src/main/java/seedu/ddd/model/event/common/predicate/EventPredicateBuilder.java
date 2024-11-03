@@ -3,12 +3,13 @@ package seedu.ddd.model.event.common.predicate;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
-import seedu.ddd.logic.commands.ListEventCommand;
+import seedu.ddd.logic.commands.list.ListEventCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.common.Id;
@@ -36,6 +37,7 @@ public class EventPredicateBuilder {
         // Check for each prefix and chain predicates accordingly.
         combinedPredicate = addDescriptionPredicate(argMultimap, combinedPredicate);
         combinedPredicate = addIdPredicate(argMultimap, combinedPredicate);
+        combinedPredicate = addNamePredicate(argMultimap, combinedPredicate);
 
         return combinedPredicate;
     }
@@ -63,6 +65,21 @@ public class EventPredicateBuilder {
             }
             Id eventId = new Id(trimmedArgs);
             combinedPredicate = combinedPredicate.and(new EventIdPredicate(eventId));
+        }
+        return combinedPredicate;
+    }
+
+    private Predicate<Event> addNamePredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            String trimmedArgs = argMultimap.getValue(PREFIX_NAME).get();
+            if (trimmedArgs.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_USAGE));
+            }
+            String[] descriptionKeywords = trimmedArgs.split("\\s+");
+            combinedPredicate = combinedPredicate.and(
+                    new NameContainsKeywordsPredicate(Arrays.asList(descriptionKeywords)));
         }
         return combinedPredicate;
     }

@@ -1,4 +1,4 @@
-package seedu.ddd.logic.commands;
+package seedu.ddd.logic.commands.list;
 
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
@@ -12,6 +12,8 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.ddd.logic.commands.Command;
 
 /**
  * Lists either Contacts or Events in the address book to the user.

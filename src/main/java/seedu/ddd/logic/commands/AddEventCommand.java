@@ -2,6 +2,7 @@ package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_CLIENTS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
@@ -34,18 +35,15 @@ import seedu.ddd.model.event.common.Event;
 /**
  * Adds an event to DDD.
  */
-public class AddEventCommand extends Command implements AddCommand {
-
-    public static final String COMMAND_WORD = "event";
-
-    public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": adds an event";
-    public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " "
+public class AddEventCommand extends AddCommand {
+    public static final String COMMAND_DESCRIPTION = COMMAND_WORD + " " + FLAG_EVENT + " : adds an event";
+    public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " " + FLAG_EVENT + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_DESC + "DESCRIPTION "
             + PREFIX_DATE + "DATE "
-            + PREFIX_CLIENTS + "CLIENT ... "
-            + PREFIX_VENDORS + "VENDOR ...";
-    public static final String USAGE_EXAMPLE = "example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_CLIENTS + "CLIENT_ID ...] "
+            + "[" + PREFIX_VENDORS + "VENDOR_ID ...]";
+    public static final String USAGE_EXAMPLE = "example: " + COMMAND_WORD + " " + FLAG_EVENT + " "
             + PREFIX_NAME + SAMPLE_EVENT_NAME + " "
             + PREFIX_DESC + SAMPLE_EVENT_DESCRIPTION + " "
             + PREFIX_DATE + SAMPLE_EVENT_DATE + " "
@@ -56,7 +54,8 @@ public class AddEventCommand extends Command implements AddCommand {
             + USAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New event created: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in DDD";
+    public static final String MESSAGE_DUPLICATE_EVENT = "An event of this name exists in DDD already. "
+                                                         + "Choose another name!";
     public static final String MESSAGE_INVALID_CONTACT_IDS = "Client ID(s) %s and vendor ID(s) %s not found in DDD";
     public static final String MESSAGE_INVALID_CLIENT_IDS = "Client ID(s) %s not found in DDD";
     public static final String MESSAGE_INVALID_VENDOR_IDS = "Vendor ID(s) %s not found in DDD";
@@ -110,7 +109,7 @@ public class AddEventCommand extends Command implements AddCommand {
         assert !clientsToAdd.isEmpty();
 
         Event eventToAdd = new Event(name, description, date, clientsToAdd, vendorsToAdd, eventId);
-        if (model.hasEvent(eventToAdd)) {
+        if (model.hasEventName(eventToAdd.getName())) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
         model.addEvent(eventToAdd);

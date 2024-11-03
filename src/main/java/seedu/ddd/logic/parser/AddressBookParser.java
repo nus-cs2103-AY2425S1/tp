@@ -21,8 +21,9 @@ import seedu.ddd.logic.commands.DeleteCommand;
 import seedu.ddd.logic.commands.EditCommand;
 import seedu.ddd.logic.commands.ExitCommand;
 import seedu.ddd.logic.commands.HelpCommand;
-import seedu.ddd.logic.commands.ListCommand;
+import seedu.ddd.logic.commands.list.ListCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.logic.parser.list.ListCommandParser;
 
 /**
  * Parses user input.
