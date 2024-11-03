@@ -120,6 +120,14 @@ public class LogicManager implements Logic {
 
     @Override
     public boolean exportFile(File file) {
-        return false;
+        requireNonNull(file);
+
+        try {
+            storage.saveAddressBook(model.getAddressBook(), file.toPath());
+        } catch (IOException e) {
+            return false;
+        }
+
+        return true;
     }
 }

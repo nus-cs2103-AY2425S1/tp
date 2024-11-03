@@ -1,16 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_CANCEL_COMMAND;
 
-import java.io.File;
-import java.util.NoSuchElementException;
-
-import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.storage.Storage;
 
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";

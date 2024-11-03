@@ -243,26 +243,35 @@ public class MainWindow extends UiPart<Stage> {
             case ORDINARY: // terminal
                 logger.info("Result: " + lastCommandResult.getFeedbackToUser());
                 break;
+
             case SHOW_HELP: // terminal
                 logger.info("Result: " + lastCommandResult.getFeedbackToUser());
                 handleHelp();
                 break;
+
             case EXIT: // terminal
                 logger.info("Result: " + lastCommandResult.getFeedbackToUser());
                 handleExit();
                 break;
+
             case PROMPT: // terminal
                 logger.info("Prompt: " + lastCommandResult.getFeedbackToUser());
                 commandBox.waitForPrompt();
                 break;
+
             case IMPORT_DATA: // intermediate
                 File importFile = selectImportFile();
                 logger.info(String.format("Importing data from &1%s", importFile.getPath()));
                 lastCommandResult = lastCommandResult.processFile(logic.importFile(importFile));
                 continue;
+
             case EXPORT_DATA: // intermediate
+                File exportFile = selectExportFile();
+                logger.info(String.format("Exporting data to &1%s", exportFile.getPath()));
+                lastCommandResult = lastCommandResult.processFile(logic.exportFile(exportFile));
                 continue;
             }
+
             break;
         }
         resultDisplay.setFeedbackToUser(lastCommandResult.getFeedbackToUser());
