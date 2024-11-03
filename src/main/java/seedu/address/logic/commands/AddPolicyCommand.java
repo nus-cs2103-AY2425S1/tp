@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_COVERAGE_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_PREMIUM_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
 
@@ -9,7 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 
@@ -18,19 +23,24 @@ import seedu.address.model.policy.PolicySet;
  */
 public class AddPolicyCommand extends Command {
     public static final String COMMAND_WORD = "add-policy";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy added:\n%2$s";
-    public static final String MESSAGE_DUPLICATES = "Duplicate policies found.";
+    public static final String MESSAGE_DUPLICATES = "Client already has a %1$s policy.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Add the specified policy to the person identified "
-            + "by the index number used in the last person listing. \n"
+            + ": Add the specified policy to the client identified "
+            + "by the index number used in the last client listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "pt/[POLICY_TYPE]\n"
+            + PREFIX_POLICY_TYPE + "POLICY_TYPE "
+            + "[" + PREFIX_POLICY_PREMIUM_AMOUNT + "PREMIUM_AMOUNT] "
+            + "[" + PREFIX_POLICY_COVERAGE_AMOUNT + "COVERAGE_AMOUNT] "
+            + "[" + PREFIX_POLICY_EXPIRY_DATE + "EXPIRY_DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "pt/life";
-    public static final String POLICY_ADD_PERSON_SUCCESS = "Added Policy: %1$s";
+            + PREFIX_POLICY_TYPE + "life "
+            + PREFIX_POLICY_PREMIUM_AMOUNT + "400.00 "
+            + PREFIX_POLICY_COVERAGE_AMOUNT + "4000.00 "
+            + PREFIX_POLICY_EXPIRY_DATE + "12/23/2024";
+    public static final String MESSAGE_SUCCESS = "Added the following policy to %1$s:\n\n%2$s";
 
     private final Index index;
-    private final PolicySet policies;
+    private final Policy policy;
 
     /**
      * Creates an AddPolicyCommand to add the specified {@code PolicySet} to the client.
@@ -38,60 +48,37 @@ public class AddPolicyCommand extends Command {
      * @param index of the client in the filtered client list to add policy.
      * @param policies the set of policies to be added.
      */
-    public AddPolicyCommand(Index index, PolicySet policies) {
-        requireNonNull(index, "Index cannot be null.");
-        requireNonNull(policies, "Policies cannot be null.");
+    public AddPolicyCommand(Index index, Policy policy) {
+        requireAllNonNull(index, policy);
         this.index = index;
-        this.policies = policies;
+        this.policy = policy;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
 
-
-        if (index.getZeroBased() >= model.getFilteredPersonList().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (index.getZeroBased() >= model.getFilteredClientList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
+        PolicySet clientPolicies = new PolicySet();
+        clientPolicies.addAll(clientToEdit.getPolicies());
 
-
-        PolicySet editedPolicySet = updatePolicies(policies, personToEdit.getPolicySet());
-
-
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), editedPolicySet);
-
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-
-        return new CommandResult(String.format(POLICY_ADD_PERSON_SUCCESS, Messages.format(editedPerson)));
-    }
-
-    /**
-     * Adds policies to the person's policy set. Throws a CommandException if any of the policies already exist.
-     *
-     * @param policiesToAdd The set of policies to add.
-     * @param existingPolicies The person's current policy set.
-     * @return A new PolicySet with the added policies.
-     * @throws CommandException if there are duplicate policies.
-     */
-    private PolicySet updatePolicies(PolicySet policiesToAdd, PolicySet existingPolicies) throws CommandException {
-        PolicySet updatedPolicies = new PolicySet(); // Create a new instance
-        updatedPolicies.addAll(existingPolicies);
-        for (Policy policy : policiesToAdd) {
-            if (updatedPolicies.contains(policy.getType())) {
-                throw new CommandException(MESSAGE_DUPLICATES);
-            }
-            updatedPolicies.add(policy);
+        if (!clientPolicies.add(policy)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATES, policy.getType()));
         }
-        return updatedPolicies;
-    }
 
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
+                clientToEdit.getAddress(), clientToEdit.getTags(), clientPolicies);
+
+        model.setClient(clientToEdit, editedClient);
+        model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedClient.getName(), policy));
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -106,6 +93,6 @@ public class AddPolicyCommand extends Command {
 
         AddPolicyCommand apc = (AddPolicyCommand) other;
         return index.equals(apc.index)
-                && policies.equals(apc.policies);
+                && policy.equals(apc.policy);
     }
 }

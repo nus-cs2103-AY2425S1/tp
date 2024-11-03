@@ -2,17 +2,32 @@ package seedu.address.model.policy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 public class EducationPolicyTest {
     private final EducationPolicy education = new EducationPolicy();
+    private final PremiumAmount defaultPremiumAmount = education.getPremiumAmount();
+    private final CoverageAmount defaultCoverageAmount = education.getCoverageAmount();
+    private final ExpiryDate defaultExpiryDate = education.getExpiryDate();
 
     @Test
-    public void constructor_nullInputs_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LifePolicy(0, 0, null));
+    public void constructor_nullValues_useDefaultValues() {
+        // null premiumAmount
+        EducationPolicy nullPremiumAmount = new EducationPolicy(null, defaultCoverageAmount,
+                defaultExpiryDate, null);
+        assertEquals(defaultPremiumAmount, nullPremiumAmount.getPremiumAmount());
+
+        // null coverageAmount
+        EducationPolicy nullCoverageAmount = new EducationPolicy(defaultPremiumAmount, null,
+                defaultExpiryDate, null);
+        assertEquals(defaultCoverageAmount, nullCoverageAmount.getCoverageAmount());
+
+        // null expiryDate
+        EducationPolicy nullExpiryDate = new EducationPolicy(defaultPremiumAmount, defaultCoverageAmount, null,
+                null);
+        assertEquals(defaultExpiryDate, nullExpiryDate.getExpiryDate());
     }
 
     @Test

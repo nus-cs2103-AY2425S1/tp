@@ -10,18 +10,18 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.logic.commands.DeletePoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.policy.EducationPolicy;
-import seedu.address.model.policy.HealthPolicy;
-import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicySet;
+import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.ClaimStatus;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.policy.CoverageAmount;
+import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PremiumAmount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -132,28 +132,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String policy} into a {@code Policy}.
+     * Parse a {@code String policy} into a {@code PolicyType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code Policy} is not a valid policy type.
+     * @throws ParseException if the given {@code policy} is invalid.
      */
-    public static Policy parsePolicy(String policy) throws ParseException {
+    public static PolicyType parsePolicyType(String policy) throws ParseException {
         requireNonNull(policy);
-
-        final String lowerCaseTrimmedPolicy = policy.trim().toLowerCase();
-        String life = PolicyType.LIFE.toString().toLowerCase();
-        String health = PolicyType.HEALTH.toString().toLowerCase();
-        String education = PolicyType.EDUCATION.toString().toLowerCase();
-
-        // Cannot use switch cases here because life, health and education are dynamic variables.
-        if (lowerCaseTrimmedPolicy.equals(life)) {
-            return new LifePolicy();
-        } else if (lowerCaseTrimmedPolicy.equals(health)) {
-            return new HealthPolicy();
-        } else if (lowerCaseTrimmedPolicy.equals(education)) {
-            return new EducationPolicy();
-        } else {
-            throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+        String trimmedPolicy = policy.trim();
+        try {
+            return PolicyType.fromString(trimmedPolicy);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(PolicyType.MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -170,40 +160,93 @@ public class ParserUtil {
     public static Set<PolicyType> parsePolicyTypes(List<String> policies) throws ParseException {
         requireNonNull(policies);
         if (policies.isEmpty()) {
-            throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+            throw new ParseException(PolicyType.MESSAGE_CONSTRAINTS);
         }
-
-        String life = PolicyType.LIFE.toString().toLowerCase();
-        String health = PolicyType.HEALTH.toString().toLowerCase();
-        String education = PolicyType.EDUCATION.toString().toLowerCase();
 
         final Set<PolicyType> policyTypes = new HashSet<>();
         for (String policy : policies) {
-            final String lowerCaseTrimmedPolicy = policy.trim().toLowerCase();
-            if (lowerCaseTrimmedPolicy.equals(life)) {
-                policyTypes.add(PolicyType.LIFE);
-            } else if (lowerCaseTrimmedPolicy.equals(health)) {
-                policyTypes.add(PolicyType.HEALTH);
-            } else if (lowerCaseTrimmedPolicy.equals(education)) {
-                policyTypes.add(PolicyType.EDUCATION);
-            } else {
-                throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+            if (!policyTypes.add(parsePolicyType(policy))) {
+                throw new ParseException(DeletePoliciesCommand.MESSAGE_DUPLICATES);
             }
         }
         return Collections.unmodifiableSet(policyTypes);
     }
 
     /**
-     * Parses {@code Collection<String> policies} into a {@code PolicyMap}.
+     * Parse a {@code String premiumAmount} into a {@code PremiumAmount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code premiumAmount} is invalid.
      */
-    public static PolicySet parsePolicies(Collection<String> policies) throws ParseException {
-        requireNonNull(policies);
-        final PolicySet policySet = new PolicySet();
-        for (String policy : policies) {
-            if (!policySet.add(parsePolicy(policy))) {
-                throw new ParseException(AddPolicyCommand.MESSAGE_DUPLICATES);
-            }
+    public static PremiumAmount parsePremiumAmount(String premiumAmount) throws ParseException {
+        requireNonNull(premiumAmount);
+        if (premiumAmount == "") {
+            return null;
         }
-        return policySet;
+
+        String trimmed = premiumAmount.trim();
+        try {
+            return new PremiumAmount(trimmed);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(PremiumAmount.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parse a {@code String coverageAmount} into a {@code CoverageAmount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code coverageAmount} is invalid.
+     */
+    public static CoverageAmount parseCoverageAmount(String coverageAmount) throws ParseException {
+        requireNonNull(coverageAmount);
+        if (coverageAmount == "") {
+            return null;
+        }
+
+        String trimmed = coverageAmount.trim();
+        try {
+            return new CoverageAmount(trimmed);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(CoverageAmount.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parse a {@code String expiryDate} into an {@code ExpiryDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code expiryDate} is invalid.
+     */
+    public static ExpiryDate parseExpiryDate(String expiryDate) throws ParseException {
+        requireNonNull(expiryDate);
+        if (expiryDate == "") {
+            return null;
+        }
+
+        String trimmed = expiryDate.trim();
+        try {
+            return new ExpiryDate(trimmed);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
+        }
+    }
+    /**
+     * Parses a {@code String} into a {@code ClaimStatus}.
+     * This method trims the input string and attempts to convert it into a valid {@code ClaimStatus}
+     * using the {@code ClaimStatus.fromString()} method. If the string is not a valid claim status,
+     * a {@code ParseException} is thrown with an appropriate error message.
+     * @param claimStatus The string to parse into a {@code ClaimStatus}.
+     * @return The corresponding {@code ClaimStatus} after parsing.
+     * @throws ParseException if the string does not represent a valid {@code ClaimStatus}.
+     */
+    public static ClaimStatus parseClaimStatus(String claimStatus) throws ParseException {
+        requireNonNull(claimStatus);
+        String trimmedClaimStatus = claimStatus.trim();
+        try {
+            return ClaimStatus.fromString(trimmedClaimStatus);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Claim.CLAIM_STATUS_MESSAGE_CONSTRAINTS);
+        }
     }
 }
