@@ -110,8 +110,8 @@ Format #1: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+*  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower` edits the name of the 2nd person to be `Betsy Crower`.
 
 If you do not know the index but know the name of the contact you want to delete:
 
@@ -119,14 +119,16 @@ Format #2: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
 
 * Filters a list of contacts with names that contains the entire NAME keyword
 * If there is only one contact that matches, the contact will be edited directly
-* If there is more than one contact that matches, user needs to specify the contact from the filtered list using `edit INDEX …​`
+* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `edit INDEX …​` to specify the contact they want to edit
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
 
 Examples:
-*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of `John Doe` to be `91234567` and `johndoe@example.com` respectively.
-*  `edit Betsy n/Betsy Crower` Edits the name of `Betsy` to be `Betsy Crower`.
+*  `edit John Doe p/91234567 e/johndoe@example.com` edits the phone number and email address of `John Doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Betsy n/Betsy Crower` edits the name of `Betsy` to be `Betsy Crower`.
+* `edit Chris p/99998888` returns a filtered list of contacts whose names contain `Chris` and user need to edit their existing command to become
+  `edit [INDEX of specific person] p/99998888` to specify the `Chris` they want to edit.
 
 
 ### Locating persons by name: `find`
@@ -154,7 +156,7 @@ View the contact of a specified person from the address book.
 Format: `view NAME`
 
 * This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
-* Returns a filtered list made out of the contacts with names that contains the entire NAME keyword
+* Returns a filtered list made out of the contacts with names that contains the ENTIRE name keyword
 * Only the name can be used for viewing
 
 Examples:
@@ -180,15 +182,15 @@ If you do not know the index but know the name of the contact you want to delete
 
 Format #2: `delete KEYWORD`
 
-* Filters a list of contacts with names that contains the entire NAME keyword
+* Filters a list of contacts with names that contains the ENTIRE name keyword
 * If there is only one contact that matches, the contact will be edited directly
-* If there is more than one contact that matches, user needs to specify the contact from the filtered list using `edit INDEX …​`
+* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `delete INDEX …​` to specify the contact they want to delete
 * This command is case-insensitive. e.g. `alex tan` will match `Alex Tan`
 
 Examples:
 
 * `delete Betsy` will delete the contact of Betsy Tan directly if there are no duplicates.
-* `delete Alex` will give a list of contacts named `Alex`, and user can choose which contact from filtered list to deleted from.
+* `delete Alex Tan` will give a list of contacts whose names contains `Alex Tan`. User will then edit their command into `delete INDEX …​` to specify the `Alex Tan` they want to delete.
 
 ### Clearing all entries : `clear`
 
