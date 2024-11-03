@@ -234,4 +234,5 @@ Action     | Format, Examples
 **Confirm**| `confirm`
 **Cancel** | `cancel`
 **List**   | `list`
+**List Logs**| `logs [i/NRIC]` <br> e.g., `logs i/ S8613282F`
 **Help**   | `help`
