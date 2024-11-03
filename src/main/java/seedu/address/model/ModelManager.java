@@ -156,9 +156,21 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Event> findEventsWithName(EventName name) {
-        requireNonNull(name);
-        return addressBook.findEventsWithName(name);
+    public List<Event> findEventsWithName(EventName eventName) {
+        requireNonNull(eventName);
+        return addressBook.findEventsWithName(eventName);
+    }
+
+    @Override
+    public void assignEventToPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        addressBook.assignEventToPerson(person, event);
+    }
+
+    @Override
+    public void unassignEventFromPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        addressBook.unassignEventFromPerson(person, event);
     }
 
     @Override

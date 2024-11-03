@@ -167,14 +167,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Gets all the events whose names are the same (case-insensitive) as the given argument.
-     */
-    public List<Event> findEventsWithName(EventName name) {
-        requireNonNull(name);
-        return events.getEventsWithName(name);
-    }
-
-    /**
      * Adds an event to the address book.
      * The event must not already exist in the address book and must have a unique ID.
      */
@@ -189,6 +181,32 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeEvent(Event key) {
         events.remove(key);
+    }
+
+    /**
+     * Gets all the events whose names are the same (case-insensitive) as the given argument.
+     */
+    public List<Event> findEventsWithName(EventName eventName) {
+        requireNonNull(eventName);
+        return events.getEventsWithName(eventName);
+    }
+
+    /**
+     * Assigns an event to a person.
+     */
+    public void assignEventToPerson(Person person, Event event) {
+        requireNonNull(person);
+        requireNonNull(event);
+        persons.assignEventToPerson(person, event);
+    }
+
+    /**
+     * Unassigns an event from a person.
+     */
+    public void unassignEventFromPerson(Person person, Event event) {
+        requireNonNull(person);
+        requireNonNull(event);
+        persons.unassignEventFromPerson(person, event);
     }
 
     //// ID counter-level operations

@@ -43,7 +43,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public boolean containsName(EventName nameToCheck) {
         requireNonNull(nameToCheck);
-        return internalList.stream().anyMatch(e -> e.getName().equalsLowerCase(nameToCheck));
+        return internalList.stream().anyMatch(event -> event.getName().equalsLowerCase(nameToCheck));
     }
 
     /**
@@ -114,7 +114,7 @@ public class UniqueEventList implements Iterable<Event> {
     public List<Event> getEventsWithName(EventName name) {
         requireNonNull(name);
         if (this.containsName(name)) {
-            return internalList.stream().filter(e -> e.getName().equalsLowerCase(name)).toList();
+            return internalList.stream().filter(event -> event.getName().equalsLowerCase(name)).toList();
         }
         return new ArrayList<>();
     }

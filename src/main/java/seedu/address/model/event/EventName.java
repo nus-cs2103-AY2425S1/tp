@@ -60,7 +60,7 @@ public class EventName {
     }
 
     /**
-     * Returns true if 2 names are equal (case-insensitive).
+     * Returns true if 2 event names are equal (case-insensitive).
      */
     public boolean equalsLowerCase(Object other) {
         if (other == this) {
@@ -72,8 +72,8 @@ public class EventName {
             return false;
         }
 
-        EventName otherName = (EventName) other;
-        return eventName.equalsIgnoreCase(otherName.eventName);
+        EventName otherEventName = (EventName) other;
+        return eventName.equalsIgnoreCase(otherEventName.eventName);
     }
 
     @Override

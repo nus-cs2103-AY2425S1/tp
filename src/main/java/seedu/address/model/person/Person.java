@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,6 +94,18 @@ public class Person {
      */
     public Person changeId(int newId) {
         return new Person(name, phone, email, address, tags, eventIds, newId);
+    }
+
+    public boolean checkAssignedToEvent(Event event) {
+        return eventIds.contains(event.getEventId());
+    }
+
+    public void addEventId(int eventId) {
+        eventIds.add(eventId);
+    }
+
+    public void removeEventId(int eventId) {
+        eventIds.remove(eventId);
     }
 
     /**

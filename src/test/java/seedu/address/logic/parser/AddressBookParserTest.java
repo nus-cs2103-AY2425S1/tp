@@ -6,7 +6,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.MEETING;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
@@ -18,6 +19,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteByIndexCommand;
+import seedu.address.logic.commands.DeleteByNameCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteEventByIndexCommand;
 import seedu.address.logic.commands.DeleteEventByNameCommand;
@@ -33,6 +36,11 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventsCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.UnassignEventByPersonIndexEventIndexCommand;
+import seedu.address.logic.commands.UnassignEventByPersonIndexEventNameCommand;
+import seedu.address.logic.commands.UnassignEventByPersonNameEventIndexCommand;
+import seedu.address.logic.commands.UnassignEventByPersonNameEventNameCommand;
+import seedu.address.logic.commands.UnassignEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
@@ -67,15 +75,15 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deleteByIndex() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteByIndexCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_deleteByName() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + ALICE.getName().toString());
-        assertEquals(new DeleteCommand(ALICE.getName()), command);
+        assertEquals(new DeleteByNameCommand(ALICE.getName()), command);
     }
 
     @Test
@@ -83,8 +91,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -143,8 +151,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListEventsCommand.COMMAND_WORD) instanceof ListEventsCommand);
-        assertTrue(parser.parseCommand(ListEventsCommand.COMMAND_WORD + " 3") instanceof ListEventsCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
@@ -156,15 +164,35 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list_events() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListEventsCommand.COMMAND_WORD) instanceof ListEventsCommand);
+        assertTrue(parser.parseCommand(ListEventsCommand.COMMAND_WORD + " 3") instanceof ListEventsCommand);
+    }
+
+    @Test
+    public void parseCommand_unassign_events() throws Exception {
+        UnassignEventCommand unassignEventByPersonIndexEventIndexCommand = (UnassignEventCommand) parser.parseCommand(
+                EventUtil.getUnassignEventDetails("1", "1"));
+        assertEquals(new UnassignEventByPersonIndexEventIndexCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT),
+                unassignEventByPersonIndexEventIndexCommand);
+        UnassignEventCommand unassignEventByPersonIndexEventNameCommand = (UnassignEventCommand) parser.parseCommand(
+                EventUtil.getUnassignEventDetails("1", MEETING.getEventName().toString()));
+        assertEquals(new UnassignEventByPersonIndexEventNameCommand(INDEX_FIRST_PERSON, MEETING.getEventName()),
+                unassignEventByPersonIndexEventNameCommand);
+        UnassignEventCommand unassignEventByPersonNameEventIndexCommand = (UnassignEventCommand) parser.parseCommand(
+                EventUtil.getUnassignEventDetails(ALICE.getName().toString(), "1"));
+        assertEquals(new UnassignEventByPersonNameEventIndexCommand(ALICE.getName(), INDEX_FIRST_EVENT),
+                unassignEventByPersonNameEventIndexCommand);
+        UnassignEventCommand unassignEventByPersonNameEventNameCommand = (UnassignEventCommand) parser.parseCommand(
+                EventUtil.getUnassignEventDetails(ALICE.getName().toString(), MEETING.getEventName().toString()));
+        assertEquals(new UnassignEventByPersonNameEventNameCommand(ALICE.getName(), MEETING.getEventName()),
+                unassignEventByPersonNameEventNameCommand);
     }
 
     @Test
     public void parseCommand_deleteEventByIndex() throws Exception {
         DeleteEventCommand command = (DeleteEventCommand) parser.parseCommand(
-                DeleteEventCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteEventByIndexCommand(INDEX_FIRST), command);
+                DeleteEventCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
+        assertEquals(new DeleteEventByIndexCommand(INDEX_FIRST_EVENT), command);
     }
 
     @Test

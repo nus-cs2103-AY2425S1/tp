@@ -189,7 +189,7 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public List<Event> findEventsWithName(EventName name) {
+        public List<Event> findEventsWithName(EventName eventName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -200,6 +200,16 @@ public class AddEventCommandTest {
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void assignEventToPerson(Person person, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unassignEventFromPerson(Person person, Event event) {
             throw new AssertionError("This method should not be called.");
         }
 

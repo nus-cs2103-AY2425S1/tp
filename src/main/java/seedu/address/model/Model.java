@@ -141,6 +141,11 @@ public interface Model {
     Event getEventById(int eventId);
 
     /**
+     * Find all the events whose names are the same as the given argument.
+     */
+    List<Event> findEventsWithName(EventName eventName);
+
+    /**
      * Replaces the given event {@code target} with {@code editedEvent}.
      * {@code target} must exist in the address book.
      */
@@ -156,6 +161,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Assigns an event to a person.
+     */
+    void assignEventToPerson(Person person, Event event);
+
+    /**
+     * Removes an assigned event from a person.
+     */
+    void unassignEventFromPerson(Person person, Event event);
 
     /**
      * Generates a new unique person ID.
