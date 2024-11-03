@@ -1,5 +1,6 @@
 package seedu.hireme.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.hireme.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.hireme.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -28,6 +29,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_EMAIL, PREFIX_DATE);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE, PREFIX_EMAIL, PREFIX_DATE)

@@ -1,5 +1,6 @@
 package seedu.hireme.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.hireme.commons.core.index.Index;
@@ -24,6 +25,7 @@ public class StatusCommandParser implements Parser<StatusCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public StatusCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         try {
             // Parse index from the arguments
             Index index = ParserUtil.parseIndex(args.trim());

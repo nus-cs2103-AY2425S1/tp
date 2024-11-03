@@ -23,6 +23,9 @@ public class RoleValidator extends Validator<String> {
     }
     @Override
     public boolean validate(String input) {
+        if (input == null) {
+            return false;
+        }
         return !input.trim().isEmpty() && input.matches(VALIDATION_REGEX);
     }
 }
