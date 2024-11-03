@@ -8,8 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.academyassist.commons.core.LogsCenter;
-import seedu.academyassist.logic.commands.AddSubjectCommand;
 import seedu.academyassist.logic.commands.AddCommand;
+import seedu.academyassist.logic.commands.AddSubjectCommand;
 import seedu.academyassist.logic.commands.ClearCommand;
 import seedu.academyassist.logic.commands.Command;
 import seedu.academyassist.logic.commands.DeleteCommand;
