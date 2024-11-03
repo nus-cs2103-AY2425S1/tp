@@ -5,7 +5,6 @@ import java.util.TreeSet;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,23 +42,6 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
-    /**
-     * initialize() method from javaFx, used to check for arrow inputs inside the commandTextField
-     */
-    @FXML
-    public void initialize() {
-//        commandTextField.setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.UP && !event.isShiftDown()) {
-//               handleUpEntered();
-//            }
-//            if (event.getCode() == KeyCode.DOWN && !event.isShiftDown()) {
-//                handleDownEntered();
-//            }
-//            if (event.getCode() == KeyCode.ENTER) {
-//                handleCommandEntered();
-//            }
-//        });
-    }
 
     /**
      * Handles the Up button pressed event.
