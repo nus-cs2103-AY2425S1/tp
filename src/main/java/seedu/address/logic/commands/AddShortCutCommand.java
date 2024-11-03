@@ -15,7 +15,8 @@ public class AddShortCutCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a shortcut when tagging.\n"
             + "Usage: addShortCut al/v tn/Vegan";
     public static final String MESSAGE_SUCCESS = "New Shortcut added: %1$s";
-    public static final String MESSAGE_DUPLICATE_ORDER = "ShortCut with the same alias already exists";
+    public static final String MESSAGE_ALIAS_DUPLICATE_ORDER = "ShortCut with the same alias already exists";
+    public static final String MESSAGE_FULLTAGNAME_DUPLICATE_ORDER = "ShortCut with the same tag name already exists";
     private ShortCut toAdd;
 
     /**
@@ -49,7 +50,10 @@ public class AddShortCutCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.hasAlias(toAdd.getAlias())) {
-            throw new CommandException(MESSAGE_DUPLICATE_ORDER);
+            throw new CommandException(MESSAGE_ALIAS_DUPLICATE_ORDER);
+        }
+        if (model.hasFullTagName(toAdd.getFullTagName())) {
+            throw new CommandException(MESSAGE_FULLTAGNAME_DUPLICATE_ORDER);
         }
         model.addShortCut(toAdd);
         Tag.updateShortCutMappings(model);

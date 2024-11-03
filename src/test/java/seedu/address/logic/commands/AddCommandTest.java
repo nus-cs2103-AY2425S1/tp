@@ -29,6 +29,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.FullTagName;
 import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
@@ -204,7 +205,11 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public boolean hasAlias(Alias shortcut) {
+        public boolean hasAlias(Alias alias) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasFullTagName(FullTagName fullTagName) {
             throw new AssertionError("This method should not be called.");
         }
         @Override

@@ -32,11 +32,19 @@ public class UniqueShortCutList implements Iterable<ShortCut> {
     }
 
     /**
-     * Returns true if the list contains a shortcut with the same alias as the given argument.
+     * Returns true if the list contains a shortcut with the same {@code Alias} as the given argument.
      */
     public boolean containsAlias(Alias aliasToCheck) {
         requireNonNull(aliasToCheck);
         return internalList.stream().anyMatch(shortcut -> shortcut.getAlias().equals(aliasToCheck));
+    }
+
+    /**
+     * Returns true if the list contains a shortcut with the same {@code fullTagName} as the given argument
+     */
+    public boolean containsFullTagName(FullTagName fullTagNameToCheck) {
+        requireNonNull(fullTagNameToCheck);
+        return internalList.stream().anyMatch(shortcut -> shortcut.getFullTagName().equals(fullTagNameToCheck));
     }
 
     /**

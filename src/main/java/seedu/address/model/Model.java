@@ -12,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.FullTagName;
 import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.tag.Tag;
 
@@ -111,5 +112,6 @@ public interface Model {
     boolean hasShortCut(ShortCut shortCut);
     ObservableList<ShortCut> getShortCutList();
     boolean hasAlias(Alias alias);
+    boolean hasFullTagName(FullTagName alias);
     List<Person> getPeopleByPostalCode(PostalCode postalCode);
 }

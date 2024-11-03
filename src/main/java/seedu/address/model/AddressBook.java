@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.FullTagName;
 import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.shortcut.UniqueShortCutList;
 import seedu.address.model.tag.Tag;
@@ -146,6 +147,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
     public boolean hasAlias(Alias alias) {
         return shortcuts.containsAlias(alias);
+    }
+    public boolean hasFullTagName(FullTagName fullTagName) {
+        return shortcuts.containsFullTagName(fullTagName);
     }
     // util methods
 
