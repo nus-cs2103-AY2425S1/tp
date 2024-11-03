@@ -157,9 +157,17 @@ Format: `clear`
 
 ### Cleaning graduated students : `clean`
 
-Removes all graduated students from the address book based on the current year and their graduation date.
+Removes all graduated students from the address book based on the current year and their graduation year.
 
 Format: `clean`
+
+Examples of usage:
+
+`clean`, executed in 2024.
+
+This deletes all students who graduate in 2023 or earlier.  
+![img.png](images/CleanCommandExampleUsage.png)
+
 
 ### Undoing the previous command : `undo`
 
