@@ -582,7 +582,7 @@ testers are expected to do more *exploratory* testing.
 2. Adding a duplicate person
 
     1. Prerequisites: List all persons using the `list -p` command. Person with name `John Doe` with phone number `98765432`, email `johnd@example.com` and relationship of `Brother` already exists.
-    
+
     1. Test case: `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother`
         Expected: `This person already exists in the address book` is displayed.
 
@@ -635,7 +635,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: `add -n Johnny Doe -p 98765432 -e johnd@example.com -rs Brother` followed by `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother`
 
-    1. Test case: `edit 1 -n John Doe`<br> 
+    1. Test case: `edit 1 -n John Doe`<br>
        Expected: `This person already exists in the address book.` is shown in the status message.
 
     1. Other test cases to try: editing 1 or more fields to cause a person to have the same `name`, `phone number`, `email` and `relationship` as another person in the list.

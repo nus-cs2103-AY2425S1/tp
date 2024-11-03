@@ -20,9 +20,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * 
+      
     * Developer Guide:
-        * 
 
 * **Code contributed**: [RepoSense link]()
-
