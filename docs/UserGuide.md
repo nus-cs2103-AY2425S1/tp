@@ -3,6 +3,10 @@ layout: page
 title: User Guide
 ---
 
+<div markdown="block" class="alert alert-warning">
+**Disclaimer: MedConnect is only designed to support the English language. Other languages may cause unexpected behaviour.**
+</div>
+
 MedConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MedConnect can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -10,15 +14,29 @@ MedConnect is a **desktop app for managing contacts, optimized for use via a Com
 
 --------------------------------------------------------------------------------------------------------------------
 
+## How to use this User Guide
+This User Guide is designed to help you understand and use MedConnect effectively. Here are some tips on how to navigate and use this guide:
+1. **Table of Contents**: At the beginning of the guide, you will find a Table of Contents. Use this to quickly jump to the section you are interested in.
+1. **Quick Start**: If you are new to MedConnect, start with the Quick Start section. It provides step-by-step instructions on how to set up and start using the application.
+1. **Features**: This section details all the commands available in MedConnect. Each command is explained with its format, parameters, and examples. Use this section to learn how to perform specific tasks.
+1. **Command Summary**: At the end of the guide, there is a Command Summary table that provides a quick reference for all commands. Use this table to quickly look up the format of a command.
+1. **FAQ**: The FAQ section addresses common questions and issues. Check this section if you encounter any problems or have questions about using MedConnect.
+1. **Known Issues**: This section lists any known issues with the application and their workarounds. Refer to this section if you experience any unexpected behavior.
+1. **Notes and Tips**: Throughout the guide, you will find notes and tips highlighted in different styles. These provide additional information and helpful hints for using MedConnect effectively.  
+   
+By following these sections, you can quickly find the information you need and make the most out of MedConnect.
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   * You can check your Java version by following the instructions [here](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line). 
+   * If you do not have Java `17` or above installed in your Computer, you can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest release of the `medconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_. The _home folder_ will be where all the data files will be saved.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar medconnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/sampleUiImage.png)
 
@@ -27,8 +45,8 @@ MedConnect is a **desktop app for managing contacts, optimized for use via a Com
 
    * `list` : Lists all contacts.
 
-     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim
-     ecphone/81243564 ecrs/Sibling dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com` : Adds a contact named `John Doe` to the Address Book with emergency contact `Charlotte Lim` and doctor `Ronald Lee`.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim
+   ecphone/81243564 ecrs/Sibling dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com` : Adds a contact named `John Doe` to the Address Book with emergency contact `Charlotte Lim` and doctor `Ronald Lee`.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -172,7 +190,6 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-
 ### Adding an emergency contact : `addec`
 
 Adds an emergency contact to a specified person in the address book.
@@ -181,6 +198,38 @@ Format: `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHO
 
 Examples:
 * `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter` Adds a new emergency contact to the first person in the address book. 
+
+### Archiving data files: `archive`
+
+Archives the current address book data to a timestamped data file with an optional description.
+
+Format: `archive [DESCRIPTION]`
+
+* The description is optional and must be a valid file name (i.e., it cannot contain any of the following special characters: `\/:*?"<>|`).
+* The archive data file will be saved as a JSON file in the `[JAR file location]/data/archive/` folder.
+
+Examples:
+* `archive` Archives the current address book data to a timestamped data file.
+* `archive "before major update"` Archives the current address book data to a timestamped data file with the description "before major update".
+
+### Listing all archived data files: `listArchives`
+
+Lists the names of all the archived data files in the archive folder.
+
+Format: `listArchives`
+
+### Loading data from an archived data file: `loadArchive`
+
+Loads the data from an archived data file into the address book.
+
+Format: `loadArchive FILE_NAME`
+
+* The `FILE_NAME` must be the name of an archived data file in the archive folder.
+* The data from the archived file will replace the current data in the address book.
+* The data in the archived file will not be deleted.
+
+Examples:
+* `loadArchive addressbook-20241023_114324-example.json` Loads the data from the archived file named `addressbook-20241023_114324-example.json` into the address book.
 
 ### Clearing all entries : `clear`
 
@@ -222,7 +271,6 @@ How it works:
 * If there is a redoable operation, it calls the model.redoAddressBook() method to restore the address book's previous state (before the undo).
 * If there are no operations to redo (e.g., if the user tries to redo without any undo), the command will return the failure message.
 
-
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -242,16 +290,15 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: How do I change the AddressBook home folder?<br>
+**A**: The AddressBook home folder is set to the folder where the `medconnect.jar` file is located. If you want to change it, move the `medconnect.jar` file and all the files in the original home folder to the new folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -264,7 +311,6 @@ _Details coming soon ..._
 
 ## Command summary
 
-                                                                                                                                                                                                                                                                                                                                          |
 | Action     | Format, Examples                                                                                                                                                                                                       |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665` <br> `ecname/Lim Jun Wei ecphone/98765678 ecrs/Brother` <br> `dname/Sam Lim dphone/9987766 demail/samlim@hotmail.com` <br> `t/friend t/colleague` |
