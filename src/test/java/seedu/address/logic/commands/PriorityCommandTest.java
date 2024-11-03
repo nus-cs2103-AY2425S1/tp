@@ -65,7 +65,7 @@ public class PriorityCommandTest {
         PriorityCommand priorityCommand = new PriorityCommand(INDEX_FIRST_PERSON.getOneBased(), 4,
                 false);
 
-        assertThrows(CommandException.class, () -> priorityCommand.execute(model));
+        assertThrows(IllegalArgumentException.class, () -> priorityCommand.execute(model));
     }
 
     @Test
