@@ -44,19 +44,15 @@ public class GroupNameContainsKeywordsPredicateTest {
     public void test_groupNameContainsKeywords_returnsTrue() {
         // one keyword
         GroupNameContainsKeywordsPredicate predicate =
-            new GroupNameContainsKeywordsPredicate(Collections.singletonList("oup"));
-        assertTrue(predicate.test(new Group(new GroupName("Group 213"))));
-
-        // multiple keywords
-        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("oup", "23"));
+            new GroupNameContainsKeywordsPredicate(Collections.singletonList("group 213"));
         assertTrue(predicate.test(new Group(new GroupName("Group 213"))));
 
         // only one matching keyword
-        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("oup", "19312903"));
+        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("group 213", "19312903"));
         assertTrue(predicate.test(new Group(new GroupName("Group 213"))));
 
         // mixed-case keywords
-        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("Oup", "19312903"));
+        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("Group 213", "19312903"));
         assertTrue(predicate.test(new Group(new GroupName("Group 213"))));
     }
 
@@ -67,7 +63,7 @@ public class GroupNameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new Group(new GroupName("Group 213"))));
 
         // non-matching
-        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("Oup"));
+        predicate = new GroupNameContainsKeywordsPredicate(List.of("Oup"));
         assertFalse(predicate.test(new Group(new GroupName("TD-12"))));
     }
 

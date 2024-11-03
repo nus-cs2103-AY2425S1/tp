@@ -1,8 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUERY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +26,7 @@ public class FindStudentCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindStudentCommand() {
         FindStudentCommand expectedFindStudentCommand = new FindStudentCommand(new StudentMatchesQueryPredicate(
-            "meier"));
-        assertParseSuccess(parser, "Meier", expectedFindStudentCommand);
+            List.of("Meier")));
+        assertParseSuccess(parser, " " + PREFIX_QUERY + "Meier", expectedFindStudentCommand);
     }
 }

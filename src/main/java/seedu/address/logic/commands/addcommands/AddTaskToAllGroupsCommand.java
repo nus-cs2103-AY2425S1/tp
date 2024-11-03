@@ -76,12 +76,12 @@ public class AddTaskToAllGroupsCommand extends Command {
         model.setStateTasks();
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
-        if (deadline.time.compareTo(currentTime) < 0) {
+        if (deadline.getTime().isBefore(currentTime)) {
             return new CommandResult(String.format(MESSAGE_SUCCESS + "\n" + MESSAGE_OVERDUE_WARNING,
-                    task.getTaskName().toString()), LIST_TASK_MARKER);
+                task.getTaskName().toString()), LIST_TASK_MARKER);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
-            task.getTaskName().taskName), LIST_TASK_MARKER);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().getTaskName(),
+            task.getTaskName().getTaskName()), LIST_TASK_MARKER);
     }
 
     @Override

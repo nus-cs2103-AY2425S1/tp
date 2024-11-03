@@ -13,7 +13,7 @@ public class TaskName {
 
     public static final String VALIDATION_REGEX = "(.|\\s)*\\S(.|\\s)*";
 
-    public final String taskName;
+    private final String taskName;
 
     /**
      * Constructs a {@code TaskName}.

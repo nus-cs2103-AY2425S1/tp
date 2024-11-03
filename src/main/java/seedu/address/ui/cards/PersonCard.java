@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
+import seedu.address.model.tag.Tag;
 import seedu.address.ui.UiPart;
 
 /**
@@ -53,16 +54,16 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
-        name.setText(student.getName().fullName);
-        email.setText(student.getEmail().value);
-        studentNumber.setText(student.getStudentNumber().value);
+        name.setText(student.getName().getFullName());
+        email.setText(student.getEmail().getEmail());
+        studentNumber.setText(student.getStudentNumber().getStudentNumber());
         if (student.getGroupName().isEmpty()) {
             group.setText("Not in group yet.");
         } else {
             group.setText(student.getGroupName().get().toString());
         }
         student.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(Tag::getTagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
     }
 }

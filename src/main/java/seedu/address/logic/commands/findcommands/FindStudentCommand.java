@@ -2,6 +2,7 @@ package seedu.address.logic.commands.findcommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.ListMarkers.LIST_STUDENT_MARKER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUERY;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -25,8 +26,8 @@ public class FindStudentCommand extends Command {
         + ": Finds all students whose fields contain any of "
         + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
         + "Fields searched: Student Number, Name, Email, Group and Tags\n"
-        + "Parameters: KEYWORD \n"
-        + "Example: " + COMMAND_WORD + "/" + COMMAND_WORD_ALIAS + " alice";
+        + "Parameters: " + PREFIX_QUERY + "KEYWORD [" + PREFIX_QUERY + "MORE_KEYWORDS]...\n"
+        + "Example: " + COMMAND_WORD + "/" + COMMAND_WORD_ALIAS + " " + PREFIX_QUERY + "alice";
     public static final String NO_STUDENTS_FOUND = "No students found";
 
     private final StudentMatchesQueryPredicate predicate;

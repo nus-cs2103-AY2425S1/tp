@@ -76,7 +76,7 @@ public class MarkTaskCommand extends Command {
             taskToMark.getGroupsWithTask());
 
         model.setTask(taskToMark, editedTask, group);
-        model.setMostRecentGroupTaskDisplay(group.getGroupName().fullName);
+        model.setMostRecentGroupTaskDisplay(group.getGroupName().getGroupName());
         model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
         model.setStateGroupTask();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taskToMark), changedStatus),

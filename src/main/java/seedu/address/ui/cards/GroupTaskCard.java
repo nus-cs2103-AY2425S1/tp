@@ -41,7 +41,7 @@ public class GroupTaskCard extends UiPart<Region> {
     public GroupTaskCard(Group group, int displayedIndex) {
         super(FXML);
         this.group = group;
-        name.setText(group.getGroupName().fullName + " Tasks");
+        name.setText(group.getGroupName().getGroupName() + " Tasks");
         String taskList = "";
         int count = 1;
         for (Task task : group.getTasks()) {

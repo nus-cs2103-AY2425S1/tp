@@ -52,7 +52,7 @@ public class TaskCard extends UiPart<Region> {
         Image image = new Image(getClass().getResourceAsStream("/images/overdue_icon.png"));
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
-        if (task.getDeadline().time.compareTo(currentTime) < 0) {
+        if (task.getDeadline().getTime().isBefore(currentTime)) {
             imageView.setImage(image);
         }
     }

@@ -1,11 +1,8 @@
 package seedu.address.model.group;
 
-import static seedu.address.model.UserPrefs.MATCH_RATIO;
-
 import java.util.List;
 import java.util.function.Predicate;
 
-import me.xdrop.fuzzywuzzy.FuzzySearch;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -24,7 +21,7 @@ public class GroupNameContainsKeywordsPredicate implements Predicate<Group> {
             .anyMatch(keyword -> {
                 GroupName groupName = group.getGroupName();
                 String groupNameString = groupName.getGroupName().toLowerCase();
-                return FuzzySearch.tokenSortPartialRatio(groupNameString, keyword.toLowerCase()) > MATCH_RATIO;
+                return groupNameString.equalsIgnoreCase(keyword);
             });
     }
 
