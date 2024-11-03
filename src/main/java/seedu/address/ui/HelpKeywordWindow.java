@@ -223,25 +223,30 @@ public class HelpKeywordWindow extends UiPart<Stage> {
      */
     private void setTextEditCommand() {
         header.setText("Edit Command: Edits patient's detail(s) for an existing patient record in the system.");
-        description.setText("""
-                Identifies the specific patient using NRIC and edits the detail(s) specified in the input.
-                Details specified in the input will replace existing details in the system.
-                NRIC provided must be a valid NRIC currently in the system.
-                Input must contain at least one parameter to be edited.
-                Not all parameters are compulsory.""");
+        description.setText(
+                "Identifies the specific patient using NRIC and edits the detail(s) specified in the input.\n"
+                + "NRIC provided must be a valid NRIC currently in the system.\n"
+                + "Input must contain at least one parameter to be edited.\n"
+                + "Not all parameters are compulsory.\n"
+                + "Multiple allergies can be added using multiple \"al/\" prefixes. "
+                + "Ensure allergies to be added are not current allergies of the patient.\n"
+                + "Multiple allergies can be removed using multiple \"rmal/\" prefixes. "
+                + "Ensure allergies to be removed are current allergies of the patient.");
         parametersHeader.setText("Parameters:");
         parameters.setText("NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO. | EMAIL | ADDRESS | BLOOD TYPE | "
-                + "NEXT-OF-KIN NAME | NEXT-OF-KIN PHONE NO. | ALLERGIES | HEALTH RISK LEVEL | EXISTING CONDITIONS | "
-                + "ADDITIONAL NOTE\n\n"
+                + "NEXT-OF-KIN NAME | NEXT-OF-KIN PHONE NO. | ALLERGIES TO BE ADDED | ALLERGIES TO BE REMOVED | "
+                + "HEALTH RISK LEVEL | EXISTING CONDITIONS | ADDITIONAL NOTE\n\n"
                 + "SEX - M / F\nDATE OF BIRTH - YYYY-MM-DD\nHEALTH RISK LEVEL - HIGH / MEDIUM / LOW");
         usageHeader.setText("Command Usage (all details are edited):");
         usage.setText("edit [NRIC] n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.] e/[EMAIL] "
                 + "a/[ADDRESS] b/[BLOOD TYPE] nokn/[NEXT-OF-KIN NAME] nokp/[NEXT-OF-KIN PHONE NO.] "
-                + "al/[ALLERGIES] rl/[HEALTH RISK LEVEL] ec/[EXISTING CONDITIONS] no/[ADDITIONAL NOTES]");
+                + "al/[ALLERGIES TO BE ADDED ] rmal/[ALLERGIES TO BE REMOVED] rl/[HEALTH RISK LEVEL] "
+                + "ec/[EXISTING CONDITIONS] no/[ADDITIONAL NOTES]");
         exampleHeader.setText("Example (all details are edited):");
         example.setText("edit S9758366N n/Keanu Reeves i/S9975483H s/M d/1997-11-30 p/86526969 "
                 + "e/keanureeves@gmail.com a/Blk 512 Ang Mo Kio Ave 2 b/O+ nokn/Mila Kunis nokp/84126990 "
-                + "al/nuts al/shellfish rl/LOW ec/diabetes no/Patient has previous gunshot wound to chest");
+                + "al/nuts al/shellfish rmal/cake rmal/wheat rl/LOW ec/diabetes "
+                + "no/Patient has previous gunshot wound to chest");
     }
 
     /**
