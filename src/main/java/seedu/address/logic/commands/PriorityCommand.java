@@ -1,8 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -70,10 +67,7 @@ public class PriorityCommand extends Command {
                     personToEdit.getTags(),
                     new PriorityLevel(updatedPriorityLevel));
 
-            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            model.setPerson(personToEdit, editedPerson);
-            model.updateTasksForPerson(personToEdit, editedPerson);
+            model.updatePersonAndTasks(personToEdit, editedPerson);
 
             // Dynamic success message based on reset or custom priority level
             String successMessage = isReset
