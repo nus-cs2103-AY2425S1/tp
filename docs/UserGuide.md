@@ -651,20 +651,34 @@ Example: "find ph n/John".
   </summary>
 
   <div class="command-content">
-  Sorts the list in ascending order by the given parameter.
+  Sorts the list in ascending or descending order by the given parameter.
 
   <br>
   <br>
 
-  Format: `sort name` or `sort date`
+  Format: `sort FIELD [ORDER]`
 
-  Sorts the list by either the name of the contact or the contract end date.
+  Sorts the list by the given parameter in the given order.
   * `name` will sort the list based on the names of the contacts in alphabetical order.
   * Note that `name` will only sort the ***visible*** contents of the list.
   * Contacts that have been filtered will not show up when `sort name` is called.
-  * `date` will sort the list based on the contract end dates of the employees in ascending order.
-  * Note that `date` will filter out potential hires from the list as they do not have a contract end date.
-  * `date` will show all employees and not just potential hires.
+  * `date` will sort the list based on the contract end dates of the employees.
+  * Note that potential hires will all appear at the bottom of the list in the original order.
+  * `dept`will sort the list based on the department of the contacts in alphabetical order.
+  * `role` will sort the list based on the roles of the contacts in alphabetical order.
+
+  <div class="box" type="tip" seamless>
+
+  **Tip:** Sort only sorts by the shown contacts in the list, and can be used in conjunction with find.
+  </div class="box">
+
+  * `asc` will sort the list in ascending order.
+  * `desc` will sort the list in descending order.
+
+  <div class="box" type="tip" seamless>
+
+  **Tip:** If the order is left out StaffSync will sort in ascending order by default.
+  </div class="box">
 
   Examples:
   * `sort name` sorts all contacts by name.
