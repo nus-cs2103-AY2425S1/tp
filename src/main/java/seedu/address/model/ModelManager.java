@@ -11,13 +11,16 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.order.*;
+import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
-import seedu.address.model.product.*;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -122,63 +125,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPastry(Pastry pastry) {
-        pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
-    }
-
-    @Override
-    public PastryCatalogue getPastryCatalogue() {
-        return pastryCatalogue;
-    }
-
-    @Override
-    public void addIngredient(Ingredient ingredient) {
-        ingredientCatalogue.addIngredient(ingredient);
-    }
-
-    @Override
-    public IngredientCatalogue getIngredientCatalogue() {
-        return ingredientCatalogue;
-    }
-
-    @Override
-    public void addCustomerOrder(CustomerOrder customerOrder) {
-        customerOrderList.addOrder(customerOrder);
-    }
-
-    @Override
-    public void addSupplyOrder(SupplyOrder supplyOrder) {
-        supplyOrderList.addOrder(supplyOrder);
-    }
-
-    @Override
-    public CustomerOrderList getCustomerOrderList() {
-        return customerOrderList;
-    }
-
-    @Override
-    public SupplyOrderList getSupplyOrderList() {
-        return supplyOrderList;
-    }
-
-    public ObservableList<SupplyOrder> getSupplyOrderObservableList() {
-        return supplyOrderObservableList;
-    }
-
-    public ObservableList<CustomerOrder> getCustomerOrderObservableList() {
-        return customerOrderObservableList;
-    }
-
-    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
-    }
-
-    @Override
-    public Inventory getInventory() {
-        return inventory;
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -215,4 +164,52 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== Pastry and Ingredient Methods =============================================================
+
+    @Override
+    public void addPastry(Pastry pastry) {
+        pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
+    }
+
+    @Override
+    public PastryCatalogue getPastryCatalogue() {
+        return pastryCatalogue;
+    }
+
+    @Override
+    public void addIngredient(Ingredient ingredient) {
+        ingredientCatalogue.addIngredient(ingredient);
+    }
+
+    @Override
+    public IngredientCatalogue getIngredientCatalogue() {
+        return ingredientCatalogue;
+    }
+
+    //=========== Order Management Methods ==================================================================
+
+    @Override
+    public void addCustomerOrder(CustomerOrder customerOrder) {
+        customerOrderList.addOrder(customerOrder);
+    }
+
+    @Override
+    public void addSupplyOrder(SupplyOrder supplyOrder) {
+        supplyOrderList.addOrder(supplyOrder);
+    }
+
+    @Override
+    public CustomerOrderList getCustomerOrderList() {
+        return customerOrderList;
+    }
+
+    @Override
+    public SupplyOrderList getSupplyOrderList() {
+        return supplyOrderList;
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

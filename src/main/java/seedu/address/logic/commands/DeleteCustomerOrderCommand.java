@@ -1,25 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.CustomerOrderList;
-import seedu.address.model.order.OrderList;
-import seedu.address.model.product.PastryCatalogue;
-import seedu.address.model.product.Product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-
+/**
+ * Deletes a customer order at the specified index.
+ */
 public class DeleteCustomerOrderCommand extends Command {
     public static final String COMMAND_WORD = "deleteCustomerOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the customer order at the given index of the displayed customer orders. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the customer order at the given index of the displayed customer orders. "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -44,9 +38,7 @@ public class DeleteCustomerOrderCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
-        String phoneNumber = customerOrderList.getOrderByIndex(targetIndex - 1).getPhoneNumber();
-
-        customerOrderList.removeOrder(phoneNumber);
+        customerOrderList.removeOrder(targetIndex - 1);
 
         return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS, targetIndex));
     }

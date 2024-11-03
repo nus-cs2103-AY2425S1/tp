@@ -3,25 +3,23 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderList;
-import seedu.address.model.order.OrderStatus;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.product.Pastry;
-import seedu.address.model.product.PastryCatalogue;
-import seedu.address.model.product.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.OrderStatus;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.product.Product;
 
+/**
+ * Command to add a new customer order to the bakery's order list.
+ */
 public class AddCustomerOrderCommand extends Command {
     public static final String COMMAND_WORD = "addCustomerOrder";
 
@@ -31,12 +29,21 @@ public class AddCustomerOrderCommand extends Command {
 
     public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "New customer order added: \n%1$s";
 
-    private final String phoneNumber;
+    private final Name name;
+    private final Phone phone;
     private final ArrayList<Integer> idList;
 
-    public AddCustomerOrderCommand(String phoneNumber, ArrayList<Integer> idList) {
-        requireAllNonNull(phoneNumber);
-        this.phoneNumber = phoneNumber;
+    /**
+     * Constructs an {@code AddCustomerOrderCommand} with the specified customer's name, phone number, and product IDs.
+     *
+     * @param name   the name of the customer.
+     * @param phone  the phone number of the customer (must not be null).
+     * @param idList a list of product IDs for the order (must not be null).
+     */
+    public AddCustomerOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
+        requireAllNonNull(phone);
+        this.name = name;
+        this.phone = phone;
         this.idList = idList;
     }
 
@@ -48,19 +55,25 @@ public class AddCustomerOrderCommand extends Command {
 
         List<Product> productList = idList.stream()
                                         .map(pastryCatalogue::getProductById)
-                .                       filter(Objects::nonNull)
+                                        .filter(Objects::nonNull)
                                         .toList();
 
-        CustomerOrder customerOrder = new CustomerOrder(phoneNumber, productList, OrderStatus.PENDING);
         List<Person> personList = model.getFilteredPersonList();
-        Person person = Person.getGuest();
+        Person person = null;
 
         for (Person p : personList) {
-            if (p.getPhone().equals(new Phone(phoneNumber))) {
-                 person = p;
+            if (p.getPhone().equals(phone)) {
+                person = p;
             }
         }
-        customerOrder.setPerson(person);
+        if (person == null) {
+            person = Person.getGuest(name, phone);
+            model.addPerson(person);
+        }
+
+        CustomerOrder customerOrder = new CustomerOrder(person, productList, OrderStatus.PENDING);
+
+        person.addOrder(customerOrder);
 
         model.addCustomerOrder(customerOrder);
 
@@ -79,6 +92,6 @@ public class AddCustomerOrderCommand extends Command {
         }
 
         AddCustomerOrderCommand otherCommand = (AddCustomerOrderCommand) other;
-        return phoneNumber.equals(otherCommand.phoneNumber) && idList.equals(otherCommand.idList);
+        return phone.equals(otherCommand.phone) && idList.equals(otherCommand.idList);
     }
 }

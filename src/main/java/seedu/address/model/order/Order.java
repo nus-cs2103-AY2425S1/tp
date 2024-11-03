@@ -1,102 +1,114 @@
 package seedu.address.model.order;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 /**
- * Abstract class representing a general order.
+ * Abstract class representing a general order in the system.
+ * Each order has an associated customer, list of items, order date, and status.
  */
 public abstract class Order {
-    private static int nextId = 1; // Static field to track the next available order ID
-    private int orderId;           // Unique ID for each order
-    private String phoneNumber; //may be better to store "person" object or "Phone" in the future
-    private LocalDateTime orderDate;
-    private List<? extends Product> items; //stores list of pastries/ingredients
+    private final LocalDateTime orderDate;
+    private final List<? extends Product> items;
     private OrderStatus status;
-    private Person person;
+    private final Person person;
 
-    // Constructor
-    public Order(String phoneNumber, List<? extends Product> items, OrderStatus status) {
-        this.orderId = nextId++;  // Assign the current value of nextId and increment
-        this.phoneNumber = phoneNumber;
+    /**
+     * Constructs an {@code Order} with the specified customer, list of items, and initial status.
+     * The order date is set to the current date and time.
+     *
+     * @param person The customer associated with this order.
+     * @param items The list of products in this order.
+     * @param status The initial status of the order.
+     */
+    public Order(Person person, List<? extends Product> items, OrderStatus status) {
         this.orderDate = LocalDateTime.now();
         this.items = items;
         this.status = status;
-    }
-
-    public void setPerson(Person person) {
         this.person = person;
     }
 
+    /**
+     * Returns the customer associated with this order.
+     *
+     * @return The {@code Person} object representing the customer.
+     */
     public Person getPerson() {
         return person;
     }
 
-    // Getters and Setters
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
+    /**
+     * Returns the order date in a formatted string.
+     *
+     * @return A string representation of the order date in the format "dd-MM-yyyy".
+     */
     public String getOrderDate() {
         return orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
-
+    /**
+     * Returns the list of items in this order.
+     *
+     * @return A list of {@code Product} objects representing the items in the order.
+     */
     public List<? extends Product> getItems() {
         return items;
     }
 
-    public void setItems(List<? extends Product> items) {
-        this.items = items;
-    }
-
+    /**
+     * Returns the current status of this order.
+     *
+     * @return The {@code OrderStatus} of the order.
+     */
     public OrderStatus getStatus() {
         return status;
     }
 
+    /**
+     * Sets the status of this order.
+     *
+     * @param status The new status to be set for the order.
+     */
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
-    public int getOrderId() { return orderId; }
-
-    // Abstract method to be implemented by subclasses
+    /**
+     * Returns a string indicating the type of order. Must be implemented by subclasses.
+     *
+     * @return A string representing the specific order type.
+     */
     public abstract String getOrderType();
 
+    /**
+     * Returns a string representation of the order, including the type, date, status, and list of items.
+     *
+     * @return A formatted string with order details.
+     */
     @Override
     public String toString() {
-        return "Order{" +
-                "PhoneNumber='" + phoneNumber + '\'' +
-                ", orderDate=" + orderDate +
-                ", items=" + items +
-                ", status='" + status + '\'' +
-                '}';
+        return "Order Type: " + getOrderType() + "\n"
+                + "Order Date: " + getOrderDate() + "\n"
+                + "Status: " + status + "\n"
+                + "Items: " + "\n"
+                + viewOrder();
     }
 
+    /**
+     * Returns a string listing all items in the order. Each item is displayed on a new line.
+     *
+     * @return A string representation of the items in the order.
+     */
     public String viewOrder() {
         StringBuilder sb = new StringBuilder();
-
         for (Product entry: items) {
             sb.append(entry.viewProduct());
             sb.append("\n");
         }
-
         return sb.toString();
-//        return "Phone Number: " + phoneNumber + "\n" +
-//                "Order Date: " + orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
-//                "Items: \n" + sb.toString();
     }
 }

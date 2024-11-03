@@ -10,7 +10,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new {@code CheckIngredientStockCommand} object.
  */
 public class CheckIngredientStockCommandParser implements Parser<CheckIngredientStockCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the {@code CheckIngredientStockCommand}
      * and returns a {@code CheckIngredientStockCommand} object for execution.
@@ -25,6 +24,12 @@ public class CheckIngredientStockCommandParser implements Parser<CheckIngredient
 
         // Check if the input is empty
         if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckIngredientStockCommand.MESSAGE_USAGE));
+        }
+
+        // Check if the input contains special characters
+        if (trimmedArgs.contains("@!$%^")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckIngredientStockCommand.MESSAGE_USAGE));
         }
