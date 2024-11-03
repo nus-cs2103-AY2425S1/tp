@@ -124,6 +124,7 @@ public class AddFeesCommand extends Command {
 
     /**
      * Calculates the new overdue amount after feesPaidByStudent paid by student
+     *
      * @param currentPayment current overdue amount
      * @param feesToCharge Fees paid by student
      * @return new overdue amount
