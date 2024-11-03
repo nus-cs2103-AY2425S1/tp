@@ -196,7 +196,6 @@ Finds persons based on the specified criteria using the provided prefixes.
 
 - The search is case-insensitive. e.g., `n/alex` will match `Alex`.
 - The order of the prefixes and keywords does not matter. e.g., `n/Alex nric/S1234567D` is equivalent to `nric/S1234567D n/Alex`.
-- Partial matches are not supported. e.g., `n/Al` will not match `Alex`.
 - Persons matching any of the provided criteria will be returned (i.e., `OR` search). For example, `n/Alex t/friend` will return persons whose name contains "Alex" or have the tag "friend".
 
 ### Prefixes:
@@ -309,11 +308,22 @@ Examples:
 - `delete S6483749D` deletes the person with the NRIC `S6483749D` in the address book.
   ![result for 'delete S6483749D'](images/deleteDavidResult.png)
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear confirm`
 
-Clears all entries from the address book.
+Clears all entries from the address book after receiving confirmation.
 
-Format: `clear`
+**Warning**: This command will permanently delete all entries from the address book. Ensure that you want to proceed before executing this command.
+
+**Format**: `clear confirm`
+
+* You must type `confirm` explicitly to execute this command. Any other input will not clear the address book.
+
+**Example**:
+- `clear confirm` clears all entries from the address book.
+![result for 'clear confirm'](images/clearconfirm.png)
+- `clear` without `confirm` will prompt the user to include the confirmation keyword.
+![result for 'clear'](images/clear.png)
+
 
 ### Exiting the program : `exit`
 
