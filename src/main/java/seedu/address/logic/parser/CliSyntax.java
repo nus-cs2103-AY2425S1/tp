@@ -20,4 +20,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("date/");
     public static final Prefix PREFIX_FROM = new Prefix("from/");
     public static final Prefix PREFIX_TO = new Prefix("to/");
+    public static final Prefix PREFIX_INDEX = new Prefix("i/");
 }

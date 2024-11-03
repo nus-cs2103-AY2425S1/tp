@@ -1,0 +1,145 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_ADD_SCHEME_PERSON_SUCCESS;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfBirth;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.FamilySize;
+import seedu.address.model.person.Income;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.UpdatedAt;
+import seedu.address.model.scheme.Scheme;
+import seedu.address.model.scheme.SchemeRetrieval;
+import seedu.address.model.tag.Tag;
+
+public class AddSchemeCommand extends Command {
+
+    public static final String COMMAND_WORD = "addscheme";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a scheme to the family identified by the "
+            + "index number used in the displayed family list.\n"
+            + "This command can only be used after Scheme command.\n"
+            + "Parameters: PERSON_INDEX SCHEME_INDEX (both must be positive integers)\n"
+            + "Example: " + COMMAND_WORD + " 1 i/1";
+
+    private final Index personIndex;
+    private final Index schemeIndex;
+
+    public AddSchemeCommand(Index personIndex, Index schemeIndex) {
+        requireAllNonNull(personIndex, schemeIndex);
+        this.personIndex = personIndex;
+        this.schemeIndex = schemeIndex;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        ArrayList<Scheme> schemes = getSchemes(model);
+        if (schemes.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_NO_SCHEMES_AVAILABLE);
+        }
+        if (schemeIndex.getZeroBased() >= schemes.size() || schemeIndex.getZeroBased() < 0) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SCHEMES_DISPLAYED_INDEX);
+        }
+        Scheme targetScheme = schemes.get(schemeIndex.getZeroBased());
+        List<Person> lastShownList = model.getFilteredPersonList();
+        Person personToEdit = lastShownList.get(personIndex.getZeroBased());
+        Person editedPerson = addSchemeToPerson(personToEdit, targetScheme);
+
+        if (!personToEdit.isSamePerson(editedPerson)) {
+            if (model.hasPerson(editedPerson)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.updateAppointments(personToEdit.getName(), editedPerson.getName());
+        }
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(MESSAGE_ADD_SCHEME_PERSON_SUCCESS);
+
+    }
+
+    /**
+     * Retrieves the schemes from the last command.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return List of schemes.
+     * @throws CommandException If any of the index given falls out of range.
+     */
+    private ArrayList<Scheme> getSchemes(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (personIndex.getZeroBased() >= lastShownList.size() || personIndex.getZeroBased() < 0) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person targetFamily = lastShownList.get(personIndex.getZeroBased());
+        SchemeRetrieval schemeRetrieval = new SchemeRetrieval(targetFamily);
+        return schemeRetrieval.getSchemes();
+    }
+
+    /**
+     * Adds a scheme to a person.
+     *
+     * @param person Person to be edited.
+     * @param scheme Scheme to be added.
+     * @return Edited person.
+     * @throws CommandException If the scheme already exists in the family.
+     */
+    private Person addSchemeToPerson(Person person, Scheme scheme) throws CommandException {
+        ArrayList<Scheme> currentSchemes = person.getSchemes();
+        if (currentSchemes.contains(scheme)) {
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_SCHEME);
+        }
+        currentSchemes.add(scheme);
+        Name updatedName = person.getName();
+        Phone updatedPhone = person.getPhone();
+        Email updatedEmail = person.getEmail();
+        Address updatedAddress = person.getAddress();
+        Priority updatedPriority = person.getPriority();
+        Remark updatedRemark = person.getRemark();
+        DateOfBirth updatedDateOfBirth = person.getDateOfBirth();
+        Income updatedIncome = person.getIncome();
+        FamilySize updatedFamilySize = person.getFamilySize();
+        Set<Tag> updatedTags = person.getTags();
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now(), currentSchemes);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddSchemeCommand)) {
+            return false;
+        }
+
+        AddSchemeCommand otherAddSchemeCommand = (AddSchemeCommand) other;
+        return personIndex.equals(otherAddSchemeCommand.personIndex)
+                && schemeIndex.equals(otherAddSchemeCommand.schemeIndex);
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
+}

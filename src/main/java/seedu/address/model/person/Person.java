@@ -2,13 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.scheme.Scheme;
 
 /**
  * Represents a Person in the address book.
@@ -32,8 +30,34 @@ public class Person {
 
     private final UpdatedAt updatedAt;
 
+    private final ArrayList<Scheme> schemes = new ArrayList<>();
+
     /**
+     * Constructor for a new person with schemes, only used to AddSchemeCommand.
      * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
+                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt,
+                  ArrayList<Scheme> schemes) {
+        requireAllNonNull(name, phone, email, address, priority, remark,
+                dateOfBirth, income, familySize, tags, updatedAt, schemes);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.priority = priority;
+        this.remark = remark;
+        this.dateOfBirth = dateOfBirth;
+        this.income = income;
+        this.familySize = familySize;
+        this.tags.addAll(tags);
+        this.updatedAt = updatedAt;
+        this.schemes.addAll(schemes);
+    }
+
+    /**
+     * Constructor for a new person with no schemes. Every field must be present and not null.
+     * Allows for the creation of a person without schemes.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
                   DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt) {
@@ -100,6 +124,10 @@ public class Person {
         return updatedAt;
     }
 
+    public ArrayList<Scheme> getSchemes() {
+        return schemes;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -136,14 +164,16 @@ public class Person {
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && income.equals(otherPerson.income)
                 && familySize.equals(otherPerson.familySize)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && updatedAt.equals(otherPerson.updatedAt)
+                && schemes.equals(otherPerson.schemes);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, priority, remark,
-                dateOfBirth, income, familySize, tags, updatedAt);
+                dateOfBirth, income, familySize, tags, updatedAt, schemes);
     }
 
     @Override

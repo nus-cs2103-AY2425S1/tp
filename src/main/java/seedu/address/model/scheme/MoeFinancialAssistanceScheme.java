@@ -21,4 +21,10 @@ public class MoeFinancialAssistanceScheme extends Scheme {
     public String getSchemeName() {
         return SCHEME_NAME;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        return other instanceof MoeFinancialAssistanceScheme; // instanceof handles nulls
+    }
 }

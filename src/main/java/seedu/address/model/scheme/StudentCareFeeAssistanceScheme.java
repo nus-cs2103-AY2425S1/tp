@@ -25,4 +25,10 @@ public class StudentCareFeeAssistanceScheme extends Scheme {
         return SCHEME_NAME;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        return other instanceof StudentCareFeeAssistanceScheme; // instanceof handles nulls
+    }
+
 }
