@@ -231,7 +231,7 @@ Refer to the table below for more details.
 
 | **Flag** | **Expected Argument** | **Description**                                | **Requirements**                                                                                | **Case Sensitivity** |
 |----------|-----------------------|------------------------------------------------|-------------------------------------------------------------------------------------------------|----------------------|
-| `n/`     | `<NAME>`              | The client's full name                         | Any combination of letters, numbers, and spaces (no symbols).                                   | ❌                    |
+| `n/`     | `<NAME>`              | The client's full name                         | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                 | ❌                    |
 | `p/`     | `<PHONE>`             | The client's phone number                      | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                   | ❌                    |
 | `e/`     | `<EMAIL>`             | The client's email address                     | Valid email format (`username@domain.com`)                                                      | ❌                    |
 | `a/`     | `<ADDRESS>`           | The client's physical address                  | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
