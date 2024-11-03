@@ -14,13 +14,16 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsTagsPredicate;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 class BatchEditCommandTest {
     private Tag friendsTag = new Tag("friends");
@@ -45,18 +48,17 @@ class BatchEditCommandTest {
     }
 
     @Test
-    public void execute_validTags_success() {
+    public void execute_validTags_success() throws CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
         PersonContainsTagsPredicate predicate = new PersonContainsTagsPredicate(Set.of(friendsTag));
         BatchEditCommand batchEditCommand = new BatchEditCommand(friendsTag, frenTag, predicate);
 
-        Person changedAlice = new PersonBuilder().withName("Alice Pauline")
+        Student changedAlice = new StudentBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("student")
-                .withTags("fren").build();
-        Person changedBenson = new PersonBuilder().withName("Benson Meier")
-                .withRole("Student")
+                .withTags("fren").withAttendanceCount("3").build();
+        Student changedBenson = new StudentBuilder().withName("Benson Meier")
+                .withRole("Student").withAttendanceCount("3")
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withEmail("johnd@example.com").withPhone("98765432")
                 .withTags("owesMoney", "fren").build();
@@ -69,13 +71,14 @@ class BatchEditCommandTest {
                 String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED, friendsTag, frenTag);
 
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(ALICE, changedAlice);
         expectedModel.setPerson(BENSON, changedBenson);
         expectedModel.setPerson(DANIEL, changedDaniel);
-        expectedModel.updateFilteredPersonList(new PersonContainsTagsPredicate(Set.of(frenTag)));
 
+        expectedModel.updateFilteredPersonList(new PersonContainsTagsPredicate(Set.of(frenTag)));
         assertCommandSuccess(batchEditCommand, model, expectedMessage, expectedModel);
+
     }
 
     @Test
