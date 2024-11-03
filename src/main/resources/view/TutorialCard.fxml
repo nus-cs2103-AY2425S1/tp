@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefWidth="200" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="tutorial" text="\$tutorial"/>
+    <HBox>
+        <HBox HBox.hgrow="ALWAYS">
+            <Label text="Students enrolled"/>
+        </HBox>
+        <Label fx:id="studentsEnrolled" text="\$students enrolled"/>
+    </HBox>
+</VBox>

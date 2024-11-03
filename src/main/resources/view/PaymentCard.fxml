@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefWidth="160" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="payment-pane">
+<VBox prefWidth="185" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="payment-pane">
     <HBox alignment="CENTER" style="-fx-padding: 0 0 10 0">
         <HBox alignment="CENTER_LEFT">
             <Label text="Fees" style="-fx-font-weight: bold; -fx-padding: 0 5 0 0; -fx-font-size: 15"/>
