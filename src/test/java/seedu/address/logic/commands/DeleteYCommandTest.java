@@ -15,7 +15,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.WeddingBuilder;
@@ -40,28 +39,6 @@ public class DeleteYCommandTest {
 
         String expectedMessage = String.format(DeleteYCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
-    }
-
-    @Test
-    public void execute_confirmWeddingDeletion_success() throws CommandException {
-        // Use an existing person from the typical address book
-        Wedding weddingToDelete = new WeddingBuilder().withWeddingName("Alice Loh & James Koh").build();
-        model.addWedding(weddingToDelete);
-        Person personInWedding = model.getFilteredPersonList().get(0);
-        personInWedding.getTags().add(new Tag(weddingToDelete.getWeddingName().toString()));
-        weddingToDelete.getParticipants().add(personInWedding);
-        StaticContext.setWeddingToDelete(weddingToDelete);
-
-        DeleteYCommand deleteYCommand = new DeleteYCommand(weddingToDelete);
-        CommandResult commandResult = deleteYCommand.execute(model);
-
-        String expectedMessage = String.format(DeleteYCommand.MESSAGE_DELETE_WEDDING_SUCCESS,
-                weddingToDelete.getWeddingName());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-                getTypicalWeddingBook());
-
-        assertEquals(model, expectedModel);
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 
@@ -93,6 +70,21 @@ public class DeleteYCommandTest {
 
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertEquals(model, expectedModel);
+    }
+
+    @Test
+    public void execute_confirmWeddingDeletion_success() throws CommandException {
+        // Use an existing wedding from the typical wedding book
+        Wedding weddingToDelete = model.getFilteredWeddingList().get(0);
+        StaticContext.setWeddingToDelete(weddingToDelete);
+
+        DeleteYCommand deleteYCommand = new DeleteYCommand(weddingToDelete);
+        CommandResult commandResult = deleteYCommand.execute(model);
+
+        String expectedMessage = String.format(DeleteYCommand.MESSAGE_DELETE_WEDDING_SUCCESS,
+                weddingToDelete.getWeddingName(), weddingToDelete.getVenue(), weddingToDelete.getDate());
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 
     @Test

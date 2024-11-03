@@ -21,7 +21,8 @@ public class DeleteYCommand extends Command {
     public static final String COMMAND_WORD = "y";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person:\n%1$s";
-    public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding:\n%1$s";
+    public static final String MESSAGE_DELETE_WEDDING_SUCCESS =
+            "Deleted Wedding:\nWedding name: %1$s\nVenue: %2$s\nDate: %3$s";
     public static final String MESSAGE_DELETE_ADDRESS_BOOK_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_DELETE_WEDDING_BOOK_SUCCESS = "Wedding book has been cleared!";
     public static final String MESSAGE_NO_PENDING_OPERATION = "No pending delete operation.";
@@ -82,7 +83,8 @@ public class DeleteYCommand extends Command {
             model.deleteWedding(weddingToDelete);
             // Clear history of weddingToDelete from StaticContext once delete operation is done
             StaticContext.setWeddingToDelete(null);
-            return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS, weddingToDelete.getWeddingName()));
+            return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS,
+                    weddingToDelete.getWeddingName(), weddingToDelete.getVenue(), weddingToDelete.getDate()));
         }
 
         if (!(personToDelete == null)) {
