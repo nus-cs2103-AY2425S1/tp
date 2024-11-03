@@ -49,8 +49,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOB,
                         PREFIX_INCOME, PREFIX_TIER, PREFIX_REMARK, PREFIX_STATUS);
-        PrefixCheckResult prefixCheckResult = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS,
-                PREFIX_JOB, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_INCOME);
+        PrefixCheckResult prefixCheckResult = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_JOB, PREFIX_INCOME);
         if (!prefixCheckResult.isAllPrefixPresent()) {
             String missingPrefixMessage = AddCommand.MISSING_PREFIX_MESSAGE_START
                     + prefixCheckResult.getMissingPrefixes();
