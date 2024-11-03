@@ -153,13 +153,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortAcademyAssistByClass() {
-        academyAssist.sortPersonsByClass();
+    public void sortAcademyAssistBySubject() {
+        academyAssist.sortPersonsBySubject();
     }
 
     @Override
     public void sortAcademyAssistById() {
         academyAssist.sortPersonsById();
+    }
+
+    @Override
+    public void sortAcademyAssistByYearGroup() {
+        academyAssist.sortPersonsByYearGroup();
     }
 
     @Override

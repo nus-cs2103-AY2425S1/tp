@@ -37,10 +37,10 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_sortByClass_success() {
-        SortCommand sortCommand = new SortCommand(new SortParam("class"));
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "class");
-        expectedModel.sortAcademyAssistByClass();
+    public void execute_sortBySubject_success() {
+        SortCommand sortCommand = new SortCommand(new SortParam("subject"));
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "subject");
+        expectedModel.sortAcademyAssistBySubject();
 
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
@@ -62,7 +62,7 @@ public class SortCommandTest {
     @Test
     public void equals_differentCommands_returnsFalse() {
         SortCommand nameCommand = new SortCommand(new SortParam("name"));
-        SortCommand classCommand = new SortCommand(new SortParam("class"));
+        SortCommand classCommand = new SortCommand(new SortParam("subject"));
         assertFalse(nameCommand.equals(classCommand));
     }
 
