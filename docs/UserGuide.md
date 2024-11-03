@@ -225,7 +225,7 @@ Finds persons based on the specified criteria using the provided prefixes.
 
 Adds an appointment for a person in CareLink.
 
-Format: `addapp nric/NRIC date/DATE start/START_TIME end/END_TIME`
+Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 
 - The `NRIC` must belong to a person already in CareLink
 - `DATE` must be in the format DD/MM/YYYY (e.g., 01/01/2025)
@@ -237,8 +237,8 @@ Format: `addapp nric/NRIC date/DATE start/START_TIME end/END_TIME`
 
 Examples:
 
-- `addapp nric/S1234567A date/01/01/2025 start/10:00 end/11:00` adds a one-hour appointment on January 1st, 2025
-- `addapp nric/S9876543B date/15/03/2025 start/14:30 end/16:00` adds a 90-minute appointment on March 15th, 2025
+- `addapp nric/S1234567A d/01/01/2025 start/10:00 end/11:00` adds a one-hour appointment on January 1st, 2025
+- `addapp nric/S9876543B d/15/03/2025 start/14:30 end/16:00` adds a 90-minute appointment on March 15th, 2025
 
 Common errors and their meanings:
 
