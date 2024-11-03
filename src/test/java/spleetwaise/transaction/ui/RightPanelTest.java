@@ -10,8 +10,6 @@ import static org.mockito.Mockito.when;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.AfterEach;
@@ -42,25 +40,11 @@ public class RightPanelTest {
     private ReadOnlyTransactionBook mockReadOnlyTransactionBook;
     private MockedStatic<CommonModel> mockedCommonModelStatic;
 
-    // counts down to zero when initialized
-    static CountDownLatch initialized = new CountDownLatch(1);
-    static AtomicBoolean startedInitializing = new AtomicBoolean(false);
-
     @BeforeAll
-    static void initJfxRuntime() throws InterruptedException {
-        if (startedInitializing.getAndSet(true)) {
-            System.out.println("[FXTest] Waiting for JavaFX toolkit initialization latch...");
-            initialized.await(); // wait until initialized
-            return;
-        }
-
-        System.out.println("[FXTest] Initializing JavaFX toolkit...");
+    public static void initJfxRuntime() {
+        System.setProperty("java.awt.headless", "true");
         Platform.startup(() -> {
-            System.out.println("[FXTest] JavaFX toolkit initialized.");
-            initialized.countDown();
         });
-
-        initialized.await();
     }
 
     @BeforeEach
