@@ -14,15 +14,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.WeddingBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.WeddingBuilder;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class DeleteYCommandTest {
 
