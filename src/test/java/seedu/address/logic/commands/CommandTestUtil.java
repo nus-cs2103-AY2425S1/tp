@@ -45,6 +45,8 @@ public class CommandTestUtil {
     public static final String VALID_ASSIGNMENT_NAME_PHYSICS = "Physics Homework";
     public static final int VALID_MAX_SCORE_PHYSICS = 60;
     public static final int VALID_SCORE_PHYSICS = 45;
+    public static final String VALID_ASSIGNMENT_NAME_CS = "CS2103 ip";
+    public static final int VALID_MAX_SCORE_CS = 25;
     public static final int VALID_SCORE = 0;
     public static final String INVALID_INDEX = "q";
     public static final String INVALID_SCORE = "abc";

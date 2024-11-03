@@ -85,7 +85,7 @@ public class EditAssignmentCommand extends Command {
         Assignment assignmentToEdit = assignmentList.get(assignmentIndex.getZeroBased());
         Assignment editedAssignment = createEditedAssignment(assignmentToEdit, editAssignmentDescriptor);
 
-        if (!assignmentToEdit.isSameAssignment(editedAssignment)) {
+        if (!assignmentToEdit.isSameAssignment(editedAssignment) && studentToEdit.hasAssignment(editedAssignment)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 

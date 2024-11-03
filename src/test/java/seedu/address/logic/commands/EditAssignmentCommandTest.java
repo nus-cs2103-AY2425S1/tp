@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_MATH;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_NAME_CS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_NAME_MATH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MAX_SCORE_CS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MAX_SCORE_MATH;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -30,6 +32,7 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.AssignmentBuilder;
 import seedu.address.testutil.EditAssignmentDescriptorBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditAssignmentCommand.
@@ -39,26 +42,27 @@ public class EditAssignmentCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Assignment editedAssignment = new AssignmentBuilder().withAssignmentName(VALID_ASSIGNMENT_NAME_MATH)
-                        .withMaxScore(VALID_MAX_SCORE_MATH).build();
+        Assignment editedAssignment = new AssignmentBuilder().withAssignmentName(VALID_ASSIGNMENT_NAME_CS)
+                        .withMaxScore(VALID_MAX_SCORE_CS).build();
         Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         EditAssignmentCommand editAssignmentCommand = new EditAssignmentCommand(INDEX_FIRST_STUDENT,
                 INDEX_FIRST_ASSIGNMENT,
                 new EditAssignmentDescriptorBuilder(editedAssignment).build());
-        Student editedStudent = studentToEdit.updateAssignment(INDEX_FIRST_ASSIGNMENT, editedAssignment);
-
+        Student editedStudent = new StudentBuilder(studentToEdit).buildWithAssignment()
+                .updateAssignment(INDEX_FIRST_ASSIGNMENT,
+                editedAssignment);
         String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, INDEX_FIRST_ASSIGNMENT.getOneBased(),
                 editedStudent.getName().fullName, editedAssignment.getName(), editedAssignment.getMaxScore());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        expectedModel.setStudent(model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()), editedStudent);
         expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         assertCommandSuccess(editAssignmentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Assignment editedAssignment = new AssignmentBuilder().withAssignmentName(VALID_ASSIGNMENT_NAME_MATH).build();
+        Assignment editedAssignment = new AssignmentBuilder().withAssignmentName(VALID_ASSIGNMENT_NAME_CS).build();
         Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
         Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
         EditAssignmentCommand.EditAssignmentDescriptor descriptor =
@@ -67,7 +71,8 @@ public class EditAssignmentCommandTest {
                 Index.fromOneBased(model.getFilteredStudentList().size()),
                 INDEX_SECOND_ASSIGNMENT,
                 descriptor);
-        Student editedStudent = lastStudent.updateAssignment(INDEX_SECOND_ASSIGNMENT, editedAssignment);
+        Student editedStudent = new StudentBuilder(lastStudent).buildWithAssignment()
+                .updateAssignment(INDEX_SECOND_ASSIGNMENT, editedAssignment);
 
         String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, INDEX_SECOND_ASSIGNMENT.getOneBased(),
                 lastStudent.getName().fullName, editedAssignment.getName(), editedAssignment.getMaxScore());
@@ -84,7 +89,6 @@ public class EditAssignmentCommandTest {
                 INDEX_FIRST_ASSIGNMENT,
                 new EditAssignmentCommand.EditAssignmentDescriptor());
         Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-
         String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, INDEX_FIRST_ASSIGNMENT.getOneBased(),
                 editedStudent.getName().fullName,
                 editedStudent.getAssignmentList().get(INDEX_FIRST_ASSIGNMENT.getZeroBased()).getName(),
@@ -109,14 +113,15 @@ public class EditAssignmentCommandTest {
                 new EditAssignmentDescriptorBuilder().withAssignmentName(new AssignmentName(VALID_ASSIGNMENT_NAME_MATH))
                         .withMaxScore(VALID_MAX_SCORE_MATH).build());
 
+        Student editedStudent = new StudentBuilder(studentInFilteredList).buildWithAssignment()
+                .updateAssignment(INDEX_FIRST_ASSIGNMENT, editedAssignment);
         String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, INDEX_FIRST_ASSIGNMENT.getOneBased(),
                 studentInFilteredList.getName().fullName,
                 editedAssignment.getName(),
                 editedAssignment.getMaxScore());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), studentInFilteredList.updateAssignment(
-                INDEX_FIRST_ASSIGNMENT, editedAssignment));
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editAssignmentCommand, model, expectedMessage, expectedModel);
     }
@@ -136,10 +141,10 @@ public class EditAssignmentCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudentFilteredList_failure() {
+    public void execute_duplicateAssignmentFilteredList_failure() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Student studentInList = model.getAddressBook().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
+        Student studentInList = model.getAddressBook().getStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Assignment firstAssignment = studentInList.getAssignmentList().get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
         Assignment secondAssignment = studentInList.getAssignmentList().get(INDEX_SECOND_ASSIGNMENT.getZeroBased());
         EditAssignmentCommand.EditAssignmentDescriptor descriptor = new EditAssignmentDescriptorBuilder(firstAssignment)
