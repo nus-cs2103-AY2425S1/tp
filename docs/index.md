@@ -9,17 +9,17 @@ title: "Knotty Planner - Your Ultimate Wedding Planning Companion"
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
 
-![Ui](images/Ui.png)
+![Ui](images/Ui2.png)
 
 **Welcome to Knotty Planner!** Your ultimate desktop application for managing wedding planning details. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 ## Features
 
-- **Contact Management**: Easily add, edit, and delete contacts.
-- **Wedding Planning**: Keep track of wedding details including venues and dates.
+- **Effortless Contact Management**: Easily add, edit, and delete contacts.
+- **Comprehensive Wedding Planning**: Keep track of wedding details including venues and dates.
 - **Tagging**: Organize contacts and weddings with customizable tags.
 - **Search and Filter**: Quickly find contacts and weddings with powerful search and filter options.
-- **Data Persistence**: Automatically saves your data to ensure nothing is lost.
+- **Reliable Data Persistence**: Automatically saves your data to ensure nothing is lost.
 
 ## Why Choose Knotty Planner?
 
@@ -27,7 +27,7 @@ title: "Knotty Planner - Your Ultimate Wedding Planning Companion"
 - **Reliable**: Built with robust technologies like JavaFX, Jackson, and JUnit5.
 - **Community-Driven**: Join our community of users and developers to share tips and get support.
 
-## Why Wait?
+## Why Wait? Get Started Today!
 * If you are interested in using Knotty Planner, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing Knotty Planner, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 * We value your feedback! Reach out to us with any suggestions or issues.
