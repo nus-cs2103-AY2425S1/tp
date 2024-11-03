@@ -28,7 +28,7 @@ public class ExportCommandTest {
         // 1. Create temporary source and destination files to not tamper with current data.
         tempSrcPath = null;
         tempDstPath = null;
-        tempKeyPath = "test/key.txt";
+        tempKeyPath = "test/key.jks";
 
         // 2. Populate sample source file with sample json data.
         try {
