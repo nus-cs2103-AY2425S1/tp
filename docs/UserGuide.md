@@ -62,7 +62,7 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
 
 Before you begin using Prudy, here are a few essential prerequisites to ensure a smooth experience, especially for beginner users:
 
-1. **Opening a Command Terminal**:  
+1. **Opening a Command Terminal**:
    To use Prudy effectively, you’ll need to know how to open a terminal on your operating system:
 
     - **Windows**:
@@ -80,27 +80,27 @@ Before you begin using Prudy, here are a few essential prerequisites to ensure a
         2. Alternatively, look for the Terminal application in your system’s application menu.
 
 
-2. **Basic Command Line Interface (CLI) Knowledge**:  
+2. **Basic Command Line Interface (CLI) Knowledge**:
    Prudy is optimized for CLI, allowing you to perform actions quickly through typed commands. If you're new to CLI, start by familiarizing yourself with basic commands such as:
     - `cd` to change directories
     - `ls` (or `dir` on Windows) to list files
-    - `exit` to close the terminal  
+    - `exit` to close the terminal
       This knowledge will help you navigate the system and use Prudy more efficiently.
 
 
-3. **Keyboard Navigation Skills**:  
+3. **Keyboard Navigation Skills**:
    Prudy is designed to enhance speed and productivity, especially when using keyboard shortcuts. Familiarize yourself with basic keyboard shortcuts, such as:
     - `Enter` to execute a command
     - `Tab` to auto-complete directory paths
-    - `Arrow keys` to navigate through previous commands  
+    - `Arrow keys` to navigate through previous commands
       These shortcuts will make it easier to work with Prudy’s CLI-based interface.
 
 
-4. **Basic Understanding of Data Fields**:  
+4. **Basic Understanding of Data Fields**:
    Prudy keeps track of essential client information such as names, phone numbers, emails, addresses, tags, policies, and claims. Familiarizing yourself with these data fields will make it easier to add, edit, and filter client information efficiently.
 
 
-5. **Java 17 or Above Installed**:  
+5. **Java 17 or Above Installed**:
    Prudy requires Java 17 or later. If you don’t have Java installed, you’ll need to install it before proceeding. Refer to the [Getting Started](#3-getting-started) section for installation instructions.
 
 💡 **Tip for Beginners**: Taking the time to review these prerequisites will help you become comfortable with Prudy’s interface and enable you to manage client data efficiently.
@@ -113,7 +113,7 @@ Before you begin using Prudy, here are a few essential prerequisites to ensure a
 1. Ensure you have Java `17` or above installed in your Computer.
 >To install Java 17:
 > Go to the Java download page [here](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
-> 
+>
 Verify Java version by copying the code below into the terminal:
 ```
 java -version
@@ -249,19 +249,19 @@ Prudy uses a command-line interface with four primary categories of commands to 
 These commands help with general navigation, displaying help information, saving data, and exiting the program.
 
 <box type="info" seamless>
-<span class="font-weight-bold">Note:</span> Extraneous parameters for commands that do not take in parameters (such as <code>help</code>, <code>list</code>, <code>exit</code>, and <code>clear</code>) will be ignored.  
+<span class="font-weight-bold">Note:</span> Extraneous parameters for commands that do not take in parameters (such as <code>help</code>, <code>list</code>, <code>exit</code>, and <code>clear</code>) will be ignored.
 e.g., if the command specifies <code>help 123</code>, it will be interpreted as <code>help</code>.
 </box>
 
 
 ### 5.1.1 Viewing help : `help`
 
-Shows a message explaining how to access the help page.  
-![help message](images/helpMessage.png)  
+Shows a message explaining how to access the help page.
+![help message](images/helpMessage.png)
 Format: `help`
 
 ### 5.1.2 Clearing All Entries: `clear`
-Clears all entries from Prudy, resetting the data.  
+Clears all entries from Prudy, resetting the data.
 Format: `clear`
 
 <box type=warning seamless>
@@ -269,7 +269,7 @@ Warning: This action is destructive and irreversible.
 </box>
 
 ### 5.1.3 Exiting the Program: `exit`
-Exits the program.  
+Exits the program.
 Format: `exit`
 
 ### 5.1.4 Saving the Data
@@ -279,7 +279,7 @@ Prudy automatically saves data to the hard disk after every command that modifie
 Prudy data is automatically saved as a JSON file at `[JAR file location]/data/prudy.json`. Advanced users may edit this file directly to update the data.
 
 <box type="warning" seamless>
-Caution:  
+Caution:
 If your changes to the data file makes its format invalid, Prudy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause Prudy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
@@ -291,8 +291,10 @@ Furthermore, certain edits can cause Prudy to behave in unexpected ways (e.g., i
 Client management commands allow you to add, edit, delete, and filter client data.
 
 ### 5.2.1 Adding a Client: `add`
+
 Adds a new client to Prudy.  
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`
+
 
 
 💡 **Tip**: A client can have any number of tags (including 0).
@@ -303,11 +305,11 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### 5.2.2 Listing All Clients: `list`
-Shows a list of all clients in Prudy.  
+Shows a list of all clients in Prudy.
 Format: `list`
 
 ### 5.2.3 Filtering Clients: `find-client`
-Filters clients based on the specified parameters.  
+Filters clients based on the specified parameters.
 Format: `find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…`
 
 Details:
@@ -351,7 +353,7 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
 ### 5.2.5 Deleting a Client: `delete`
-Deletes a specified client at the specified `INDEX`.  
+Deletes a specified client at the specified `INDEX`.
 Format: `delete INDEX`
 
 Examples:
@@ -365,7 +367,7 @@ Examples:
 Policy management commands allow you to add, edit, and delete policies associated with each client.
 
 ### 5.3.1 Adding a Policy: `add-policy`
-Adds a policy to the client at the specified `INDEX`.  
+Adds a policy to the client at the specified `INDEX`.
 Format: `add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]`
 
 Details:
@@ -376,7 +378,7 @@ Details:
 e.g., `pt/life ca/100 ed/12/09/2024` will create a Life policy with default premiums.
 
   <box type=info seamless>
-  Info: This command will not allow you to add a policy to the client if he/she already has a policy of similar type. 
+  Info: This command will not allow you to add a policy to the client if he/she already has a policy of similar type.
   </box>
 
 Examples:
@@ -397,7 +399,7 @@ Examples:
 * `delete-policy 2 pt/health pt/education`Deletes the Health and Education policy from the 2nd client.
 
 ### 5.3.3 Editing a Policy: `edit-policy`
-Edit the policy from the client at the specified `INDEX`, and of the specified `POLICY_TYPE`.  
+Edit the policy from the client at the specified `INDEX`, and of the specified `POLICY_TYPE`.
 Format: `edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]`
 
 Details:
@@ -411,11 +413,11 @@ Examples:
 * `edit-policy 2 pt/health pa/300 ca/5000 ed/01/01/2030` Edit the Health policy of the 2nd client to have a premium of $300, coverage of $5000, and an expiry date of 01/01/2030.
 
 ### 5.3.4 Listing All Policies: `list-policy`
-Lists all policies stored in Prudy.  
+Lists all policies stored in Prudy.
 Format: `list-policy`
 
 ### 5.3.5 Listing Expiring Policies: `listExpiringPolicies`
-List all policies that are expiring after a specified number of days. If no arguments are provided, default to list all policies expiring after 30 days.  
+List all policies that are expiring after a specified number of days. If no arguments are provided, default to list all policies expiring after 30 days.
 Format: `listExpiringPolicies [DAYS]`
 
 ---
