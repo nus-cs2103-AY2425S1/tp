@@ -127,7 +127,7 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 * Similar for emergency contact names and addresses
 * As for phone numbers, register numbers and class, the entire number must be provided in the command to filter
 * Multiple predicates can be provided, for example, in terms of multiple names or multiple attributes.
-  e.g. `filter n/Alex Bernice` will return both Alex's and Bernice's details
+  e.g. both `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will return both Alex's and Bernice's details
   e.g. `filter s/F p/99999999` will return a female student with the phone number 99999999
 * When multiple predicates are filtered e.g. `filter s/F p/99999999`, an `AND` search is run to return the student with all of the attributes mentioned
 * When only one predicate is used but multiple values are provided e.g. `filter n/Alex Bernice`, an 'OR' search is run to return the students who are either Alex or Bernice.
