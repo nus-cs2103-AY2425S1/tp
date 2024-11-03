@@ -42,7 +42,7 @@ class JsonAdaptedDate {
      * @throws IllegalValueException if the date format is invalid.
      */
     public Date toModelType() throws IllegalValueException {
-        if (dateString == null || dateString.isEmpty() || dateString.toLowerCase().equals("none")) {
+        if (dateString == null || dateString.isEmpty()) {
             return new Date(LocalDateTime.MIN); // Treat as no appointment
         }
         if (!Date.isValidDate(dateString)) {

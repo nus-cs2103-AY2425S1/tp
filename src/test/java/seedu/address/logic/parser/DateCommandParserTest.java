@@ -20,22 +20,34 @@ public class DateCommandParserTest {
     @Test
     public void parse_missingCompulsoryField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE);
-        // no parameters
+
+        // No parameters (no identifying prefixes and no date prefix)
         assertParseFailure(parser, DateCommand.COMMAND_WORD, expectedMessage);
-        // no Name, no Phone, no Email
-        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE);
+
+        // Only date provided, but no Name, Phone, or Email
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " " + nonEmptyDate, expectedMessage);
 
-        //invalid Phone
-        expectedMessage = Messages.MESSSAGE_INVALID_PHONE_DETAILS;
+        // Only Name provided, but no date prefix
+        assertParseFailure(parser, DateCommand.COMMAND_WORD + " n/Nayana", expectedMessage);
+
+        // Only Phone provided, but no date prefix
+        assertParseFailure(parser, DateCommand.COMMAND_WORD + " p/12345678", expectedMessage);
+
+        // Only Email provided, but no date prefix
+        assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/email@example.com", expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidFieldValues_failure() {
+        // Invalid Phone number format
+        String expectedMessage = Messages.MESSSAGE_INVALID_PHONE_DETAILS;
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " p/111102457 " + nonEmptyDate, expectedMessage);
 
-        //invalid Email
+        // Invalid Email format
         expectedMessage = Messages.MESSAGE_INVALID_EMAIL_DETAILS;
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/invalid email " + nonEmptyDate, expectedMessage);
-
-
     }
+
     @Test
     public void parse_validArgs_returnsDateCommand() {
         //no trailing or leading spaces
