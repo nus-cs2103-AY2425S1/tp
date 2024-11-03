@@ -6,12 +6,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears HiredFiredPro.
+ * Clears the list of candidates.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "HiredFiredPro has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Candidate list has been cleared!";
 
 
     @Override
