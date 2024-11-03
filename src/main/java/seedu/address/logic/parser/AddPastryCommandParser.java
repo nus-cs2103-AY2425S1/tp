@@ -21,7 +21,6 @@ public class AddPastryCommandParser implements Parser<AddPastryCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code AddPastryCommand}
      * and returns an {@code AddPastryCommand} object for execution.
-     *
      * @throws ParseException if the user input does not conform to the expected format
      */
     public AddPastryCommand parse(String args) throws ParseException {
@@ -54,10 +53,9 @@ public class AddPastryCommandParser implements Parser<AddPastryCommand> {
 
     /**
      * Parses a list of ingredient names into a list of {@code Ingredient} objects.
-     *
      * @throws ParseException if an ingredient name is invalid.
      */
-    public ArrayList<Ingredient> parseIngredients(List<String> ingredientNames) throws ParseException {
+    private ArrayList<Ingredient> parseIngredients(List<String> ingredientNames) throws ParseException {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         IngredientCatalogue catalogue = new IngredientCatalogue();
 
@@ -69,6 +67,7 @@ public class AddPastryCommandParser implements Parser<AddPastryCommand> {
                 throw new ParseException("Invalid ingredient: " + ingredientName);
             }
         }
+
         return ingredients;
     }
 }

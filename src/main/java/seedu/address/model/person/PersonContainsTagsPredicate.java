@@ -1,12 +1,11 @@
 package seedu.address.model.person;
 
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.Set;
-
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,7 +25,6 @@ public class PersonContainsTagsPredicate implements Predicate<Person> {
                 .anyMatch(keyword -> tags.stream()
                         .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
     }
-
 
     @Override
     public boolean equals(Object other) {

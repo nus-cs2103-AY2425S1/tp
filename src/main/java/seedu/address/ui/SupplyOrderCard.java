@@ -10,9 +10,9 @@ import seedu.address.model.order.SupplyOrder;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class SupplierOrderCard extends UiPart<Region> {
+public class SupplyOrderCard extends UiPart<Region> {
 
-    private static final String FXML = "SupplierOrderListCard.fxml";
+    private static final String FXML = "SupplyOrderListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -36,10 +36,11 @@ public class SupplierOrderCard extends UiPart<Region> {
     private Label items;
     @FXML
     private FlowPane status;
+
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code SupplyOrderCard} with the given {@code Supply} and index to display.
      */
-    public SupplierOrderCard(SupplyOrder order, int displayedIndex) {
+    public SupplyOrderCard(SupplyOrder order, int displayedIndex) {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");

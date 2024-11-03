@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
@@ -159,12 +158,12 @@ public class MainApp extends Application {
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
-        try {
-            storage.saveUserPrefs(initializedPrefs);
-        } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
-        }
+        // Update prefs file in case it was missing to begin with or there are new/unused fields
+        // try {
+        //     storage.saveUserPrefs(initializedPrefs);
+        // } catch (IOException e) {
+        //     logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        // }
 
         return initializedPrefs;
     }

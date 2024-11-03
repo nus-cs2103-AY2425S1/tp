@@ -1,24 +1,27 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Customer in the address book.
- * Inherits from Person and adds additional fields for Customer-specific information.
+ * Represents a Customer with additional information beyond a standard Person.
  */
 public class Customer extends Person {
 
-    private final Information information; // Stores additional information about the customer.
+    private final Information information;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Customer} with all required fields.
+     *
+     * @param name        The customer's name.
+     * @param phone       The customer's phone.
+     * @param email       The customer's email.
+     * @param address     The customer's address.
+     * @param information Additional information about the customer.
+     * @param remark      Any remark associated with the customer.
+     * @param tags        A set of tags related to the customer.
      */
     public Customer(Name name, Phone phone, Email email, Address address,
                     Information information, Remark remark, Set<Tag> tags) {
@@ -26,7 +29,11 @@ public class Customer extends Person {
         this.information = information;
     }
 
-
+    /**
+     * Retrieves the additional information about the customer.
+     *
+     * @return The {@code Information} object with additional details.
+     */
     public Information getInformation() {
         return information;
     }
@@ -36,14 +43,11 @@ public class Customer extends Person {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof Customer)) {
             return false;
         }
-
         Customer otherCustomer = (Customer) other;
-        return super.equals(otherCustomer)
-                && otherCustomer.getInformation().equals(getInformation());
+        return super.equals(otherCustomer) && otherCustomer.getInformation().equals(getInformation());
     }
 
     @Override
@@ -58,6 +62,3 @@ public class Customer extends Person {
         return builder.toString();
     }
 }
-
-
-

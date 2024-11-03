@@ -6,7 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.order.*;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -101,8 +103,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    //// util methods
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -115,10 +115,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns the list of customer orders.
+     *
+     * @return The current customer order list.
+     */
     public CustomerOrderList getCustomerOrderList() {
         return customerOrders;
     }
 
+    /**
+     * Returns the list of supply orders.
+     *
+     * @return The current supply order list.
+     */
     public SupplyOrderList getSupplierOrderList() {
         return supplyOrders;
     }

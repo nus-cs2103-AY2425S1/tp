@@ -1,14 +1,26 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.DeleteSupplyOrderCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.logic.commands.DeleteSupplyOrderCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new {@code DeleteSupplyOrderCommand} object.
+ * This parser is responsible for extracting and validating the index of the supply order
+ * that needs to be deleted.
+ */
 public class DeleteSupplyOrderCommandParser implements Parser<DeleteSupplyOrderCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the {@code DeleteSupplyOrderCommand}
+     * and returns a {@code DeleteSupplyOrderCommand} object for execution.
+     *
+     * @param args the user input containing the index of the supply order to be deleted.
+     * @return a {@code DeleteSupplyOrderCommand} object with the parsed index.
+     * @throws ParseException if the user input is invalid.
+     */
     @Override
     public DeleteSupplyOrderCommand parse(String args) throws ParseException {
         requireNonNull(args);
