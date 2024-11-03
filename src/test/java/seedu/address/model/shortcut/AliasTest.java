@@ -49,7 +49,9 @@ public class AliasTest {
         // Check that two aliases with the same name are considered equal
         Alias alias1 = new Alias("v");
         Alias alias2 = new Alias("v");
+        Alias alias3 = new Alias("V");
         assertEquals(alias1, alias2);
+        assertEquals(alias1, alias3);
     }
 
     @Test

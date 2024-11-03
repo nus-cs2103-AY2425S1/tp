@@ -40,7 +40,7 @@ public class FullTagName {
         }
 
         FullTagName otherFullTagName = (FullTagName) other;
-        return fullTagName.equals(otherFullTagName.fullTagName);
+        return fullTagName.toLowerCase().equals(otherFullTagName.fullTagName.toLowerCase());
     }
 
     @Override

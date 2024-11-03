@@ -48,7 +48,9 @@ public class FullTagNameTest {
         // Check that two FullTagName objects with the same name are considered equal
         FullTagName fullTagName1 = new FullTagName("Vegan");
         FullTagName fullTagName2 = new FullTagName("Vegan");
+        FullTagName fullTagName3 = new FullTagName("VeGan");
         assertEquals(fullTagName1, fullTagName2);
+        assertEquals(fullTagName1, fullTagName3);
     }
 
     @Test

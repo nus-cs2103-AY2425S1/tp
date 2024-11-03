@@ -40,7 +40,7 @@ public class Alias {
         }
 
         Alias otherAlias = (Alias) other;
-        return alias.equals(otherAlias.alias);
+        return alias.toLowerCase().equals(otherAlias.alias.toLowerCase());
     }
 
     @Override
