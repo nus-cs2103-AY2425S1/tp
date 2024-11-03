@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Date;
@@ -26,13 +27,13 @@ public class DateCommand extends Command {
     public static final String COMMAND_WORD = "date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the appointment date and time of the person identified "
-            + "by their name, phone and/or email. "
+            + "by their name and/or phone and/or email. At least one identifier must be used."
             + "Existing date and time will be overwritten by the input.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_DATE + "[DATE]\n"
+            + "[" + PREFIX_NAME + "NAME ]"
+            + "[" + PREFIX_PHONE + " PHONE] "
+            + "[" + PREFIX_EMAIL + " EMAIL] "
+            + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " n/John Doe "
             + PREFIX_DATE + "12/10/2024 1800";
 
@@ -117,9 +118,9 @@ public class DateCommand extends Command {
      * Generates a command execution success message based on whether the date is added to or removed from
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
+    private String generateSuccessMessage(Person personToAdd) {
         String message = !(date.value == LocalDateTime.MIN) ? MESSAGE_ADD_DATE_SUCCESS : MESSAGE_DELETE_DATE_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, Messages.format(personToAdd));
     }
 
 

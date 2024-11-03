@@ -15,6 +15,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.DateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Phone;
 
 
 /**
@@ -37,6 +39,13 @@ public class DateCommandParser implements Parser<DateCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 
+            // At least one identifying must be present for a valid date command
+            if (!argMultimap.getValue(PREFIX_NAME).isPresent()
+                  && !argMultimap.getValue(PREFIX_PHONE).isPresent()
+                  && !argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
+            }
+
             Optional<String> name = argMultimap.getValue(PREFIX_NAME);
             Optional<String> phone = argMultimap.getValue(PREFIX_PHONE);
             Optional<String> email = argMultimap.getValue(PREFIX_EMAIL);
@@ -45,12 +54,12 @@ public class DateCommandParser implements Parser<DateCommand> {
             Date date = ParserUtil.parseDate(dateString);
 
             // Validate the phone number format if present
-            if (phone.isPresent() && !isValidPhone(phone.get())) {
+            if (phone.isPresent() && !Phone.isValidPhone(phone.get())) {
                 throw new ParseException(MESSSAGE_INVALID_PHONE_DETAILS);
             }
 
             // Validate the email format if present
-            if (email.isPresent() && !isValidEmail(email.get())) {
+            if (email.isPresent() && !Email.isValidEmail(email.get())) {
                 throw new ParseException(MESSAGE_INVALID_EMAIL_DETAILS);
             }
 
@@ -73,17 +82,4 @@ public class DateCommandParser implements Parser<DateCommand> {
         return false;
     }
 
-    /**
-     * Validates phone number format.
-     */
-    private boolean isValidPhone(String phone) {
-        return phone.matches("[3689]\\d{7}");
-    }
-
-    /**
-     * Validates email format.
-     */
-    private boolean isValidEmail(String email) {
-        return email.matches("^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,3}$"); // Basic email validation
-    }
 }
