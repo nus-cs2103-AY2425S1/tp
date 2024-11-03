@@ -46,6 +46,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.profiles.add(profile);
     }
 
+    public void removeFromProfiles(Profile profile) {
+        this.profiles.remove(profile);
+    }
+
     /**
      * Resets the existing data of this {@code UserPrefs} with {@code newUserPrefs}.
      */

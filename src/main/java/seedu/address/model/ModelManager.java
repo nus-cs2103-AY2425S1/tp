@@ -91,6 +91,11 @@ public class ModelManager implements Model {
         userPrefs.addToProfiles(profileName);
     }
 
+    @Override
+    public void removeFromProfiles(Profile profileName) {
+        userPrefs.removeFromProfiles(profileName);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
