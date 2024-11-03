@@ -37,19 +37,19 @@ public class ReminderDescriptionTest {
     }
 
     @Test
-    public void isValidDescription() {
+    public void isValidReminderDescription() {
         // Null description
-        assertThrows(NullPointerException.class, () -> ReminderDescription.isValidDescription(null));
+        assertThrows(NullPointerException.class, () -> ReminderDescription.isValidReminderDescription(null));
 
         // Invalid descriptions
-        assertFalse(ReminderDescription.isValidDescription(EMPTY_DESCRIPTION)); // Below minimum length
-        assertFalse(ReminderDescription.isValidDescription(OVER_LENGTH_DESCRIPTION)); // Over maximum length
-        assertFalse(ReminderDescription.isValidDescription("This\nis invalid")); // Contains newline
+        assertFalse(ReminderDescription.isValidReminderDescription(EMPTY_DESCRIPTION)); // Below minimum length
+        assertFalse(ReminderDescription.isValidReminderDescription(OVER_LENGTH_DESCRIPTION)); // Over maximum length
+        assertFalse(ReminderDescription.isValidReminderDescription("This\nis invalid")); // Contains newline
 
         // Valid descriptions
-        assertTrue(ReminderDescription.isValidDescription(VALID_DESCRIPTION)); // Normal valid case
-        assertTrue(ReminderDescription.isValidDescription(VALID_MIN_LENGTH_DESCRIPTION)); // Minimum length valid case
-        assertTrue(ReminderDescription.isValidDescription(VALID_MAX_LENGTH_DESCRIPTION)); // Maximum length valid case
+        assertTrue(ReminderDescription.isValidReminderDescription(VALID_DESCRIPTION)); // Normal valid case
+        assertTrue(ReminderDescription.isValidReminderDescription(VALID_MIN_LENGTH_DESCRIPTION)); // Minimum length valid case
+        assertTrue(ReminderDescription.isValidReminderDescription(VALID_MAX_LENGTH_DESCRIPTION)); // Maximum length valid case
     }
 
     @Test
