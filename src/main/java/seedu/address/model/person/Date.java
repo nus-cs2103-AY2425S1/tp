@@ -109,7 +109,9 @@ public class Date {
      * @throws ParseException if the date format is invalid or if the date and time values are incorrect.
      */
     public static LocalDateTime parseDateTime(String date) throws ParseException {
-        isValidDate(date);
+        if (!isValidDate(date)) {
+            throw new ParseException(Date.getMessageConstraints());
+        }
         return LocalDateTime.parse(date, FORMATTER);
     }
 }

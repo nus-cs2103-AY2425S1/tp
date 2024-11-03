@@ -201,26 +201,26 @@ public class ParserUtilTest {
 
     @Test
     public void parseDate_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDateString(INVALID_DATE_1));
-        assertThrows(ParseException.class, () -> ParserUtil.parseDateString(INVALID_DATE_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_2));
     }
 
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
         Date expectedDate = new Date(LocalDateTime.of(2024, 5, 26, 19, 0));
-        assertEquals(expectedDate, new Date(ParserUtil.parseDateString(VALID_DATE_1)));
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE_1));
 
         expectedDate = new Date(LocalDateTime.MIN);
-        assertEquals(expectedDate, new Date(ParserUtil.parseDateString(VALID_DATE_2)));
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE_2));
     }
 
     @Test
     public void parseDate_validValueWithWhitespace_returnsDate() throws Exception {
         Date expectedDate = new Date(LocalDateTime.of(2024, 5, 26, 19, 0));
-        assertEquals(expectedDate, new Date(ParserUtil.parseDateString(WHITESPACE + VALID_DATE_1 + WHITESPACE)));
+        assertEquals(expectedDate, ParserUtil.parseDate(WHITESPACE + VALID_DATE_1 + WHITESPACE));
 
         expectedDate = new Date(LocalDateTime.MIN);
-        assertEquals(expectedDate, new Date(ParserUtil.parseDateString(WHITESPACE + VALID_DATE_2 + WHITESPACE)));
+        assertEquals(expectedDate, ParserUtil.parseDate(WHITESPACE + VALID_DATE_2 + WHITESPACE));
     }
 
 }
