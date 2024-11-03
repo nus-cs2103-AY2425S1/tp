@@ -229,18 +229,18 @@ Arguments are the values that follow each flag in a command. **Arguments cannot 
 
 Refer to the table below for more details.
 
-| **Flag** | **Expected Argument** | **Description**                                | **Requirements**                                                                                | **Case Sensitivity**  |
-|----------|-----------------------|------------------------------------------------|-------------------------------------------------------------------------------------------------|-----------------------|
-| `n/`     | `<NAME>`              | The client's full name                         | Any combination of letters, numbers, and spaces (no symbols).                                   | ❌                     |
-| `p/`     | `<PHONE>`             | The client's phone number                      | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                   | ❌                     |
-| `e/`     | `<EMAIL>`             | The client's email address                     | Valid email format (`username@domain.com`)                                                      | ❌                     |
-| `a/`     | `<ADDRESS>`           | The client's physical address                  | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
-| `j/`     | `<JOBNAME>`           | The client's job title or profession           | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
-| `i/`     | `<INCOME>`            | The client's annual income                     | Positive number or zero <br/> • Cannot include commas and decimal points<br/> • Must be numeric | ❌                     |
-| `t/`     | `<TIER>`              | The client's assigned tier level               | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                        | ✔️                    |
-| `r/`     | `<REMARK>`            | General remarks about the client               | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
-| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark      | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
-| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |    
+| **Flag** | **Expected Argument** | **Description**                                | **Requirements**                                                                                | **Case Sensitivity** |
+|----------|-----------------------|------------------------------------------------|-------------------------------------------------------------------------------------------------|----------------------|
+| `n/`     | `<NAME>`              | The client's full name                         | Any combination of letters, numbers, and spaces (no symbols).                                   | ❌                    |
+| `p/`     | `<PHONE>`             | The client's phone number                      | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                   | ❌                    |
+| `e/`     | `<EMAIL>`             | The client's email address                     | Valid email format (`username@domain.com`)                                                      | ❌                    |
+| `a/`     | `<ADDRESS>`           | The client's physical address                  | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
+| `j/`     | `<JOBNAME>`           | The client's job title or profession           | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
+| `i/`     | `<INCOME>`            | The client's annual income                     | Positive number or zero <br/> • Cannot include commas and decimal points<br/> • Must be numeric | ❌                    |
+| `t/`     | `<TIER>`              | The client's assigned tier level               | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                        | ✔️                   |
+| `r/`     | `<REMARK>`            | General remark(s) about the client             | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
+| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)   | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
+| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |    
 
 > 💡 **Pro Tip:**
 >
@@ -262,7 +262,7 @@ Some initial commands to try:
 
 **Editing a Client's Information**
 * `edit 1 p/12345678`: Updates the phone number of the first client in your list to `12345678`.
-* `edit 4 rn/Updated remarks here`: Replaces the remarks of the fourth client with "Updated remarks here".
+* `edit 4 rn/Updated remark(s) here`: Replaces the remark(s) of the fourth client with "Updated remark(s) here".
 
 **Removing a Client**
 * `delete 3`: Removes the third client from your list. Ensure you have the correct index to avoid deleting the wrong client.
@@ -320,14 +320,14 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 
 **Purpose:** Save detailed records of a new client.
 
-Each client's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
+Each client's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark(s) here. Otherwise, new users are assigned a default value of "NA".
 
 **Command Format:**
 ```
-add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]
+add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [r/ <REMARK>]
 ```
 * Mandatory Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`
-* Optional Fields: `t/`, `rn/`
+* Optional Fields: `t/`, `r/`
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -336,9 +336,9 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
   add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999
   ```
-- Add new client with tier and remark:
+- Add new client with tier and remark(s):
   ```
-  add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue
+  add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue
   ```
 
 #### What to Expect
@@ -347,12 +347,12 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       ```
       New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>.
       ```
-    - If "Tier" and "Remark" are not provided, they will be set to "N.A." and displayed as such in the success message.
+    - If "Tier" and "Remark" are not provided, they will be set to "NA" and displayed as such in the success message.
 
 - **On Error**
     - Message:
       ```
-      Please verify that your input is in the correct format. Include the following details: n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>].
+      Please verify that your input is in the correct format. Include the following details: n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [r/ <REMARK>].
       ```
 
 > **Note on Duplicates:**
@@ -376,7 +376,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 **Purpose:** Update the details of an existing client in the database.
 
-All client information, including contact details, address, job information, and other relevant data, can be modified. You can also append to or replace existing remarks and adjust the client's tier status.
+All client information, including contact details, address, job information, and other relevant data, can be modified. You can also append to or replace existing remark(s) and adjust the client's tier status.
 
 **Command Format:**
 ```
@@ -384,7 +384,7 @@ edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [
 ```
 - Mandatory Field: `<INDEX>`
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`
-- **Note:** `rn/` (new remark) and `ra/` (append remark) cannot be used simultaneously in a single command.
+- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -401,11 +401,11 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
   edit 12 p/ 99887766 e/ mrtan_newemail@ntu.sg j/ unemployed i/ 0 t/ reject
   ```
-- Append new remark onto existing one:
+- Append new remark(s) onto existing one:
   ```
   edit 12 ra/ Recently received Gordon E. Moore Award
   ```
-- Replace all remark(s) with a new remark:
+- Replace all remark(s) with new remark(s):
   ```
   edit 69 rn/ Do not call, angry about calls 
   ```
@@ -532,7 +532,7 @@ list
 
 **Command Format:**
 ```
-filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARKS> t/ <TIER> i/ <INCOME>
+filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARK> t/ <TIER> i/ <INCOME>
 ```
 - **Mandatory Field**: One or more flags with corresponding search terms.
 - **Special Syntax for Income (i/)**:
@@ -551,7 +551,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
   filter j/ doctor
   ```
-- Filter clients by name, job and remark:
+- Filter clients by name, job and remark(s):
   ```
   filter n/ Gordon Moore j/ doctor r/ award winner
   ```
@@ -596,7 +596,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   
       Parameters: <FLAG>/ <SEARCH TERM>
     
-      Flags: n/ (name), p/ (phone), e/ (email), a/ (address), j/ (job), r/ (remarks)
+      Flags: n/ (name), p/ (phone), e/ (email), a/ (address), j/ (job), r/ (remark)
     
       Example: filter n/ Alice p/ 91112222
       ```
@@ -609,7 +609,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 ### 5.4.1 Viewing a Client's Details {#view-command}
 
-**Purpose:** View the full details of a selected client in a split view that displays comprehensive information including remarks and additional details.
+**Purpose:** View the full details of a selected client in a split view that displays comprehensive information including remark(s) and additional details.
 
 **Command Format:**
 ```
@@ -713,10 +713,10 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
 ### How do I change the remarks or credit card tier of an existing client?
-Use the [`edit` command](#feature-4-edit-the-existing-client), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remarks. If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
+Use the [`edit` command](#feature-4-edit-the-existing-client), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
 
 ### Why am I getting an error when trying to edit the remark of an existing client?
-Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark, while `ra/` appends to the current remark.
+Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
 
 ### What do the different tier colors represent in the UI?
 Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a red banner. This makes it easy to see at a glance the tier of each client.
