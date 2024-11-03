@@ -44,7 +44,7 @@ public class Lesson {
      */
     public Lesson(String lesson) {
         requireNonNull(lesson);
-        isValidLesson(lesson);
+        checkArgument(isValidLesson(lesson));
         String[] lessonDayTimeArr = lesson.split("\\s+", 2);
         String[] timeArr = lessonDayTimeArr[1].split("-");
         this.lessonDay = Day.convertDayToEnum(lessonDayTimeArr[0].toLowerCase());
@@ -54,10 +54,29 @@ public class Lesson {
     }
 
 
+    /**
+     * Checks if the lesson end time is at a valid time.
+     *
+     * <p>A valid lesson end time should not be exactly at midnight (00:00).
+     * This method ensures that lessons do not overflow to the next day.</p>
+     *
+     * @param endTime The {@code LocalTime} representing the lesson's end time.
+     * @return {@code true} if the end time is valid (not 00:00), {@code false} otherwise.
+     */
     public static boolean isLessonEndAtValidTime(LocalTime endTime) {
         return !endTime.equals(LocalTime.of(0, 0));
     }
 
+    /**
+     * Checks if the lesson start time is at a valid time.
+     *
+     * <p>A valid lesson start time must be before the last minute of the day (23:59).
+     * This method ensures that lessons begin within the current day,
+     * and do not start precisely at midnight or the very end of the day.</p>
+     *
+     * @param startTime The {@code LocalTime} representing the lesson's start time.
+     * @return {@code true} if the start time is before 23:59, {@code false} otherwise.
+     */
     public static boolean isLessonStartAtValidTime(LocalTime startTime) {
         return startTime.isBefore(LocalTime.of(23, 59));
     }
@@ -100,7 +119,8 @@ public class Lesson {
      * @return true if the lesson is valid in terms of day, time range format, and time order;
      *          false otherwise.
      */
-    public static boolean isValidLesson(String lesson) throws IllegalArgumentException{
+    public static boolean isValidLesson(String lesson) throws IllegalArgumentException {
+        assert lesson != null;
         String[] lessonDayTimeArr = lesson.split("\\s+", 2);
         if (lessonDayTimeArr.length != 2) {
             return false;
@@ -113,8 +133,9 @@ public class Lesson {
         LocalTime startTime = LocalTime.parse(timeArr[0], TIME_FORMATTER);
         LocalTime endTime = LocalTime.parse(timeArr[1], TIME_FORMATTER);
 
-        return Day.isValidDay(dayString) && isValidTimeRange(timeRange) && isLessonStartAtValidTime(startTime) &&
-                isLessonEndAtValidTime(endTime) && isValidTimeOrder(startTime, endTime);
+        return Day.isValidDay(dayString) && isValidTimeRange(timeRange)
+                && isLessonStartAtValidTime(startTime) && isLessonEndAtValidTime(endTime)
+                && isValidTimeOrder(startTime, endTime);
     }
 
     /**
