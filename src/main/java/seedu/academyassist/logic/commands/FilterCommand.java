@@ -67,4 +67,19 @@ public class FilterCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, filterParam.toString(), filterValue.toString()));
 
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterCommand)) {
+            return false;
+        }
+
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return filterParam.equals(otherFilterCommand.filterParam);
+    }
 }

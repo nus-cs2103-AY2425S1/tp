@@ -16,6 +16,9 @@ import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.testutil.PersonBuilder;
 
+/**
+ * Contains tests for {@code AddSubjectCommandParser}
+ */
 public class AddSubjectCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSubjectCommand.MESSAGE_USAGE);
