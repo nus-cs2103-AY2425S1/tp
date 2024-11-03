@@ -44,7 +44,7 @@ public class ListPoliciesCommandTest {
         String expectedMessage = clientWithPolicies.getPolicies().stream()
                 .map(Policy::toString)
                 .collect(Collectors.joining("\n"));
-        expectedMessage = String.format(ListPoliciesCommand.MESSAGE_LIST_POLICIES_SUCCESS,
+        expectedMessage = String.format(ListPoliciesCommand.MESSAGE_SUCCESS,
                 clientWithPolicies.getName(), expectedMessage);
 
         CommandResult result = command.execute(model);

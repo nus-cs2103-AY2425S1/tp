@@ -122,7 +122,7 @@ public class EditPolicyCommandTest {
                 newCoverageAmount, newExpiryDate, null);
 
         // Check the command result message
-        String expectedMessage = String.format("Updated policy\n\n%s policy for %s has been changed to:\n%s ",
+        String expectedMessage = String.format(EditPolicyCommand.MESSAGE_SUCCESS,
                 newPolicyType, clientWithPolicy.getName(), updatedPolicy);
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
