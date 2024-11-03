@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.model.person.Email;
-import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
@@ -14,13 +13,11 @@ import seedu.address.model.tag.Grade;
 public class StudentBuilder extends PersonBuilder {
 
     public static final String DEFAULT_EDUCATION = "Primary";
-    public static final String DEFAULT_LESSON_TIME = "mon:00:00";
     public static final String DEFAULT_GRADE = "0";
     public static final String DEFAULT_PARENT_NAME = "Test parent";
     public static final String DEFAULT_PARENT_PHONE = "91234567";
     public static final String DEFAULT_PARENT_EMAIL = "testparent@example.com";
 
-    private LessonTime lessonTime;
     private Education education;
     private Grade grade;
     private Name parentName;
@@ -32,7 +29,6 @@ public class StudentBuilder extends PersonBuilder {
      */
     public StudentBuilder() {
         super();
-        lessonTime = new LessonTime(DEFAULT_LESSON_TIME);
         education = new Education(DEFAULT_EDUCATION);
         grade = new Grade(DEFAULT_GRADE);
         parentName = new Name(DEFAULT_PARENT_NAME);
@@ -45,20 +41,11 @@ public class StudentBuilder extends PersonBuilder {
      */
     public StudentBuilder(Student studentToCopy) {
         super(studentToCopy);
-        lessonTime = studentToCopy.getLessonTime();
         education = studentToCopy.getEducation();
         grade = studentToCopy.getGrade();
         parentName = studentToCopy.getParentName();
         parentEmail = studentToCopy.getParentEmail();
         parentPhone = studentToCopy.getParentPhone();
-    }
-
-    /**
-     * Sets the {@code LessonTime} of the {@code Student} that we are building.
-     */
-    public StudentBuilder withLessonTime(String lessonTime) {
-        this.lessonTime = new LessonTime(lessonTime);
-        return this;
     }
 
     /**
@@ -132,7 +119,7 @@ public class StudentBuilder extends PersonBuilder {
     }
 
     public Student build() {
-        return new Student(super.build(), lessonTime, education, grade, parentName, parentPhone, parentEmail);
+        return new Student(super.build(), education, grade, parentName, parentPhone, parentEmail);
     }
 
 }
