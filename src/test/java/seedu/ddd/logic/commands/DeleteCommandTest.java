@@ -10,12 +10,12 @@ import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
+import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_A;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
@@ -32,7 +32,7 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_deleteDependentClientAfterEvent_success() throws CommandException {
+    public void execute_deleteDependentClientAfterEvent_success() {
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
         Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CONTACT);
@@ -66,7 +66,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_deleteDependentClientBeforeEvent_throwsCommandException() throws CommandException {
+    public void execute_deleteDependentClientBeforeEvent_throwsCommandException() {
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
         Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         DeleteCommand deleteFirstClient = new DeleteCommand(INDEX_FIRST_CONTACT);
@@ -79,7 +79,7 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteFirstClient, model, expectedMessage, expectedModel);
 
         DeleteCommand deleteSecondClient = new DeleteCommand(INDEX_SECOND_CONTACT);
-        String expectedExceptionMessage = String.format(Messages.MESSAGE_DEPENDENT_EVENT, 1);
+        String expectedExceptionMessage = String.format(Messages.MESSAGE_DEPENDENT_EVENT, WEDDING_A.getEventId());
         assertCommandFailure(deleteSecondClient, model, expectedExceptionMessage);
     }
 
@@ -92,7 +92,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() throws CommandException {
+    public void execute_validIndexFilteredList_success() {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
         Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());

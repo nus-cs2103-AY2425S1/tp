@@ -1,14 +1,12 @@
 package seedu.ddd.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ddd.logic.Messages.MESSAGE_DEPENDENT_EVENT;
 
 import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.ToStringBuilder;
-import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.client.Client;
@@ -184,18 +182,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
-     * @throws CommandException when there are event(s) that are dependent on the contact
      */
-    public void deleteContact(Contact key) throws CommandException {
-        if (key instanceof Client) {
-            long numEvents = key.getEvents().stream()
-                    .map(Event::getClients)
-                    .filter(clientList -> clientList.size() == 1)
-                    .count();
-            if (numEvents > 0) {
-                throw new CommandException(String.format(MESSAGE_DEPENDENT_EVENT, key.getEvents().size()));
-            }
-        }
+    public void deleteContact(Contact key) {
         key.getEvents().forEach(event -> {
             events.get(event.getEventId()).removeContact(key);
         });

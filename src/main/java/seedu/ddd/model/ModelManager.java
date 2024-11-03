@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.commons.util.CollectionUtil;
-import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Contact;
@@ -137,7 +136,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteContact(Contact target) throws CommandException {
+    public void deleteContact(Contact target) {
         addressBook.deleteContact(target);
         displayContacts();
     }

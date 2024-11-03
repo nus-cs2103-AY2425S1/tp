@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
-import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Contact;
@@ -86,7 +85,7 @@ public interface Model {
      * Deletes the given person.
      * The person must exist in the address book.
      */
-    void deleteContact(Contact target) throws CommandException;
+    void deleteContact(Contact target);
 
     /**
      * Deletes the given event.
