@@ -65,6 +65,12 @@ deactivate CommandResult
 DeleteCommand --> LogicManager : r
 deactivate DeleteCommand
 
+LogicManager -> Model : pushToUndoStack(d)
+activate Model
+
+Model --> LogicManager
+deactivate Model
+
 [<--LogicManager
 deactivate LogicManager
 @enduml
