@@ -22,8 +22,11 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.core.GuiSettings;
+import seedu.ddd.logic.commands.exceptions.CommandException;
+import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.predicate.NameContainsKeywordsPredicate;
 import seedu.ddd.testutil.AddressBookBuilder;
+import seedu.ddd.testutil.contact.ClientBuilder;
 
 public class ModelManagerTest {
 
@@ -114,7 +117,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deleteContact_validContact_modifyDisplayedLists() {
+    public void deleteContact_validContact_modifyDisplayedLists() throws CommandException {
         Model testModelManager = new ModelManager();
         testModelManager.addContact(VALID_CLIENT);
         testModelManager.deleteContact(VALID_CLIENT);
@@ -122,11 +125,13 @@ public class ModelManagerTest {
 
         testModelManager.addContact(VALID_CLIENT);
         testModelManager.addContact(VALID_VENDOR);
+        Client clientCopy = new ClientBuilder(ALICE).build();
+        testModelManager.addContact(clientCopy);
         // when an event is added, displayedList should display events
         testModelManager.addEvent(VALID_EVENT);
         // when a contact is deleted, displayedList should display contacts again
-        testModelManager.deleteContact(VALID_CLIENT);
-        assertFalse(testModelManager.getDisplayedList().contains(VALID_CLIENT));
+        testModelManager.deleteContact(clientCopy);
+        assertFalse(testModelManager.getDisplayedList().contains(ALICE));
         assertTrue(testModelManager.getDisplayedList().contains(VALID_VENDOR));
     }
 

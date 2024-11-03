@@ -70,7 +70,7 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        HashMap<Integer, Set<Id>> eventIdsTable = new HashMap<>();
+        Map<Integer, Set<Id>> eventIdsTable = new HashMap<>();
         int maxContactId = 0;
         int maxEventId = 0;
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
@@ -89,20 +89,26 @@ class JsonSerializableAddressBook {
                 maxContactId = contactId;
             }
         }
-
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
-            List<Id> clientIds = jsonAdaptedEvent.getClientIds();
-            if (clientIds == null || clientIds.isEmpty()) {
+
+            jsonAdaptedEvent.getClientIds().stream()
+                    .map(addressBook::getContact)
+                    .map(contact -> (Client) contact)
+                    .forEach(event::addClient);
+
+            boolean hasClients = jsonAdaptedEvent.getClientIds().stream().findAny().isPresent();
+            if (!hasClients) {
                 throw new IllegalValueException(MESSAGE_NO_CLIENT);
             }
-            for (Id clientId: clientIds) {
-                addContactToEvent(event, clientId, addressBook, eventIdsTable, true);
-            }
-            List<Id> vendorIds = jsonAdaptedEvent.getVendorIds();
-            for (Id vendorId: vendorIds) {
-                addContactToEvent(event, vendorId, addressBook, eventIdsTable, false);
-            }
+
+            jsonAdaptedEvent.getVendorIds().stream()
+                    .map(addressBook::getContact)
+                    .map(contact -> (Vendor) contact)
+                    .forEach(event::addVendor);
+
+            checkAssociation(eventIdsTable, event);
+
             addressBook.addEvent(event);
             int eventId = event.getEventId().id;
             if (eventId > maxEventId) {
@@ -123,23 +129,20 @@ class JsonSerializableAddressBook {
         return addressBook;
     }
 
-    private void addContactToEvent(Event event, Id contactId, AddressBook addressBook,
-            Map<Integer, Set<Id>> eventIdsTable, boolean isClient) throws IllegalValueException {
-        Contact contact = addressBook.getContact(contactId);
-        if (contact == null) {
-            throw new IllegalValueException(MESSAGE_CONTACT_NOT_CREATED);
+    private void checkAssociation(Map<Integer, Set<Id>> eventIdsTable, Event event) throws IllegalValueException {
+        List<Id> clientIds = event.getClientIds();
+        for (Id id: clientIds) {
+            Set<Id> eventIds = eventIdsTable.get(id.id);
+            if (!eventIds.contains(event.getEventId())) {
+                throw new IllegalValueException(MESSAGE_ASSOCIATION_MISMATCH);
+            }
         }
-
-        Set<Id> eventIds = eventIdsTable.get(contact.getId().id);
-        if (!eventIds.contains(event.getEventId())) {
-            throw new IllegalValueException(MESSAGE_ASSOCIATION_MISMATCH);
-        }
-        if (isClient) {
-            assert contact instanceof Client;
-            event.addClient((Client) contact);
-        } else {
-            assert contact instanceof Vendor;
-            event.addVendor((Vendor) contact);
+        List<Id> vendorIds = event.getVendorIds();
+        for (Id id: vendorIds) {
+            Set<Id> eventIds = eventIdsTable.get(id.id);
+            if (!eventIds.contains(event.getEventId())) {
+                throw new IllegalValueException(MESSAGE_ASSOCIATION_MISMATCH);
+            }
         }
     }
 }

@@ -136,20 +136,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteContact(Contact target) {
+        addressBook.deleteContact(target);
+        displayContacts();
+    }
+
+    @Override
     public boolean hasEventName(Name eventName) {
         requireNonNull(eventName);
         return addressBook.hasEventName(eventName);
     }
 
     @Override
-    public void deleteContact(Contact target) {
-        addressBook.removeContact(target);
-        displayContacts();
-    }
-
-    @Override
     public void deleteEvent(Event target) {
-        addressBook.removeEvent(target);
+        addressBook.deleteEvent(target);
         displayEvents();
     }
 

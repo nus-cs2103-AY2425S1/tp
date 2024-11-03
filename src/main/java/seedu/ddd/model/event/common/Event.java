@@ -91,27 +91,21 @@ public class Event implements Displayable {
 
     /**
      * Adds a {@code Client} to an {@code Event}
-     * If the current event is not stored in the client's set of events,
-     * it will add the association
+     * It will add the current event to the vendor's list of events
      */
     public void addClient(Client client) {
-        clients.add(client);
-        Set<Event> events = client.getEvents();
-        if (!events.contains(this)) {
-            client.addEvent(this);
+        if (!clients.contains(client)) {
+            clients.add(client);
         }
     }
 
     /**
      * Adds a {@code Vendor} to an {@code Event}
-     * If the current event is not stored in the vendor's set of events,
-     * it will add the association
+     * It will add the current event to the vendor's list of events
      */
     public void addVendor(Vendor vendor) {
-        vendors.add(vendor);
-        Set<Event> events = vendor.getEvents();
-        if (!events.contains(this)) {
-            vendor.addEvent(this);
+        if (!vendors.contains(vendor)) {
+            vendors.add(vendor);
         }
     }
 
@@ -124,19 +118,13 @@ public class Event implements Displayable {
             if (!clients.contains(client)) {
                 throw new ContactNotFoundException();
             }
-            Set<Event> clientEvents = client.getEvents();
-            if (clientEvents.contains(this)) {
-                client.removeEvent(this);
-            }
+            client.removeEvent(this);
             clients.remove(client);
         } else if (contact instanceof Vendor vendor) {
             if (!vendors.contains(vendor)) {
                 throw new ContactNotFoundException();
             }
-            Set<Event> vendorEvents = vendor.getEvents();
-            if (vendorEvents.contains(this)) {
-                vendor.removeEvent(this);
-            }
+            vendor.removeEvent(this);
             vendors.remove(vendor);
         }
     }
@@ -235,20 +223,19 @@ public class Event implements Displayable {
 
         Set<Client> thisClients = new HashSet<>(this.getClients());
         Set<Vendor> thisVendors = new HashSet<>(this.getVendors());
-        Description thisDescription = this.getDescription();
         Set<Client> otherClients = new HashSet<>(otherEvent.getClients());
         Set<Vendor> otherVendors = new HashSet<>(otherEvent.getVendors());
-        Description otherDescription = otherEvent.getDescription();
 
         return thisClients.equals(otherClients)
                 && thisVendors.equals(otherVendors)
-                && thisDescription.equals(otherDescription);
+                && this.description.equals(otherEvent.description)
+                && this.name.equals(otherEvent.name)
+                && this.date.equals(otherEvent.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getClients(), this.getVendors(),
-                this.getDescription(), this.getEventId());
+        return Objects.hash(name, description, date, eventId);
     }
 
     @Override

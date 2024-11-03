@@ -96,7 +96,7 @@ public class SampleDataUtil {
 
         AddressBook sampleAb = new AddressBook();
 
-        // contacts added only after event has been created
+        // add contacts before adding event
         List<Contact> contacts = List.of(sampleClient, sampleVendor);
         for (Contact contact : contacts) {
             sampleAb.addContact(contact);

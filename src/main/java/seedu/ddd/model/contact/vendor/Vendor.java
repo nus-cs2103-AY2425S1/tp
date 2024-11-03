@@ -1,6 +1,5 @@
 package seedu.ddd.model.contact.vendor;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,7 +12,6 @@ import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
-import seedu.ddd.model.event.common.Event;
 
 /**
  * Represents a Vendor in the address book.
@@ -93,13 +91,5 @@ public class Vendor extends Contact {
                 .add("tags", this.getTags())
                 .add("id", this.getId())
                 .toString();
-    }
-    @Override
-    public void addEvent(Event event) {
-        super.addEvent(event);
-        List<Vendor> vendors = event.getVendors();
-        if (!vendors.contains(this)) {
-            event.addVendor(this);
-        }
     }
 }

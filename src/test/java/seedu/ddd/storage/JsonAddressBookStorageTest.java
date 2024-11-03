@@ -7,6 +7,7 @@ import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
 import static seedu.ddd.testutil.contact.TypicalContacts.HOON;
 import static seedu.ddd.testutil.contact.TypicalContacts.IDA;
+import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_A;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -91,7 +92,8 @@ public class JsonAddressBookStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addContact(HOON);
-        original.removeContact(original.getContact(ALICE.getId()));
+        original.deleteEvent(original.getEvent(WEDDING_A.getEventId()));
+        original.deleteContact(original.getContact(ALICE.getId()));
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
