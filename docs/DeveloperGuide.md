@@ -493,6 +493,8 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
+#### Deleting using INDEX
+
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
@@ -503,10 +505,35 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, or negative integer)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a person while a filtered list of contacts is shown
+
+   1. Prerequisites and test cases are similar to the scenario above but the size of list will depend on the size of filtered list.
+
+#### Deleting using NAME
+
+1. Deleting a person while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   
+   2. Test case: `delete betsy`, assuming there is only one contact with this name `betsy` <br>
+      Expected: The contact of Betsy Crow will be deleted.
+   
+   3. Test case: `delete alex`, assuming there is more than one contact with the name `alex` <br>
+      For example: `Alex Tan`, `Alex Crow`, `Alex Rodrigo` <br>
+      Expected: The contacts of all persons matching `alex` will be filtered and listed. No person is deleted. 
+      Multiple person found message will be shown, prompting user to specify the contact to delete using index of filtered list.
+
+   4. Test case: `delete alice`, assuming there is no contact with the name `alice` <br>
+      Expected: No person is deleted. Error details is shown in the status message.
+
+1. Deleting a person while a filtered list of contacts is shown
+
+   1. Prerequisite: A partial list of contacts is shown.
+   
+   2. Test cases used can be the same since `delete NAME` searches from the entire list of contacts, rather than only the partial list.
 
 ### Saving data
 
