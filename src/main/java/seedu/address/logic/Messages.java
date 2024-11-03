@@ -21,6 +21,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_TELEGRAM = "Cannot find person with telegram handle: %1$s";
     public static final String MESSAGE_INVALID_FAVOURITE_LABEL = "Invalid format: "
             + "'f/' should not be followed by any other characters.";
+    public static final String MESSAGE_INVALID_NOT_FAVOURITE_LABEL = "Invalid format: "
+            + "'nf/' should not be followed by any other characters.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
