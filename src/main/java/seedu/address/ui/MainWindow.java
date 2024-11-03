@@ -151,11 +151,21 @@ public class MainWindow extends UiPart<Stage> {
 
         personListPanel.getPersonList().addListener((ListChangeListener<Person>) change -> {
             while (change.next()) {
+                Person selectedPerson = personListPanel.getPersonListView()
+                        .getSelectionModel().getSelectedItem();
                 if (change.wasRemoved()) {
-                    Person selectedPerson = personListPanel.getPersonListView()
-                            .getSelectionModel().getSelectedItem();
                     if (!personListPanel.getPersonList().contains(selectedPerson)) {
                         contactDisplay.clear();
+                    }
+                }
+                if (change.wasUpdated() || change.wasReplaced()) {
+                    for (int i = change.getFrom(); i < change.getTo(); i++) {
+                        if (i < personListPanel.getPersonList().size()) {
+                            Person updatedPerson = personListPanel.getPersonList().get(i);
+                            System.out.println("Checking updated person: " + updatedPerson);
+                            contactDisplay.updateContactDetails(updatedPerson);
+                            System.out.println("Updated contact display with: " + updatedPerson);
+                        }
                     }
                 }
             }
