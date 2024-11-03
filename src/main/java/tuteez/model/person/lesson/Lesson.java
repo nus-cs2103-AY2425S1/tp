@@ -27,8 +27,8 @@ public class Lesson {
             + "Example: " + PREFIX_LESSON + " monday 0900-1000";
     public static final String MESSAGE_INVALID_LESSON_END_TIME = "Unfortunately we do not allow lessons to overflow "
             + "to the next day, the latest a lesson can end is 2359";
-    public static final String MESSAGE_INVALID_LESSON_START_TIME = "Lessons have to start earlier than 2359 because "
-            + "we do not allow lessons to overflow to the next day.";
+    public static final String MESSAGE_INVALID_LESSON_START_TIME = "Lessons have to start earlier than 2359,"
+            + " we do not allow lessons to overflow to the next day.";
     public static final String MESSAGE_INVALID_TIME_ORDER = "Invalid time order, start time must be before end time";
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
