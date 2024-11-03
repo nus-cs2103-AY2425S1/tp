@@ -172,13 +172,6 @@ public class ModelManager implements Model {
         displayContacts();
     }
 
-    @Override
-    public void setEvent(Event target, Event editedEvent) {
-        CollectionUtil.requireAllNonNull(target, editedEvent);
-        addressBook.setEvent(target, editedEvent);
-        displayEvents();
-    }
-
     /**
      * Updates {@code displayedList} to show contacts;
      */

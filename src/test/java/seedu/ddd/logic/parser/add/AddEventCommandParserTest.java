@@ -34,7 +34,7 @@ import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_C
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DATE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
-import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME_1;
 
 import org.junit.jupiter.api.Test;
 
@@ -212,7 +212,7 @@ public class AddEventCommandParserTest {
 
         // all prefixes missing
         arguments = CommandParserTestUtil.joinArguments(
-            EVENT_FLAG, VALID_EVENT_NAME, VALID_EVENT_DESCRIPTION_1, VALID_EVENT_DATE);
+            EVENT_FLAG, VALID_EVENT_NAME_1, VALID_EVENT_DESCRIPTION_1, VALID_EVENT_DATE);
         assertParseFailure(parser, arguments, expectedMessage);
     }
 

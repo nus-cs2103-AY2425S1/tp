@@ -47,7 +47,7 @@ import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_CLIENT_ID_
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_CLIENT_ID_TWO;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DATE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
-import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME_1;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_VENDOR_ID_FOUR;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_VENDOR_ID_ONE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_VENDOR_ID_THREE;
@@ -99,7 +99,7 @@ public class CommandParserTestUtil {
     public static final String VALID_EDITED_CONTACT_ID_ARGUMENT = PREFIX_ID + VALID_EDITED_CONTACT_ID;
 
     // Vendor arguments
-    public static final String VALID_EVENT_NAME_ARGUMENT = PREFIX_NAME + VALID_EVENT_NAME;
+    public static final String VALID_EVENT_NAME_ARGUMENT = PREFIX_NAME + VALID_EVENT_NAME_1;
     public static final String VALID_EVENT_DESC_ARGUMENT = PREFIX_DESC + VALID_EVENT_DESCRIPTION_1;
     public static final String VALID_EVENT_DATE_ARGUMENT = PREFIX_DATE + VALID_EVENT_DATE;
     public static final String VALID_EVENT_CLIENT_ID_ARGUMENT_ONE = PREFIX_CLIENTS + VALID_EVENT_CLIENT_ID_ONE;

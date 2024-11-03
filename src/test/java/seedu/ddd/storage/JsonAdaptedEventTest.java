@@ -9,7 +9,7 @@ import static seedu.ddd.testutil.event.TypicalEventFields.INVALID_EVENT_ID;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DATE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_ID;
-import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME_1;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class JsonAdaptedEventTest {
     @Test
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(
-            VALID_EVENT_NAME,
+            VALID_EVENT_NAME_1,
             INVALID_EVENT_DESC,
             VALID_EVENT_DATE,
             VALID_JSON_CLIENT_CONTACT_IDS,
@@ -44,7 +44,7 @@ public class JsonAdaptedEventTest {
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(
-            VALID_EVENT_NAME,
+            VALID_EVENT_NAME_1,
             null,
             VALID_EVENT_DATE,
             VALID_JSON_CLIENT_CONTACT_IDS,
@@ -58,7 +58,7 @@ public class JsonAdaptedEventTest {
     @Test
     public void toModelType_invalidEventId_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(
-            VALID_EVENT_NAME,
+            VALID_EVENT_NAME_1,
             VALID_EVENT_DESCRIPTION_1,
             VALID_EVENT_DATE,
             VALID_JSON_CLIENT_CONTACT_IDS,

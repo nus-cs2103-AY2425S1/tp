@@ -11,7 +11,9 @@ import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_CLIENT_L
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_LIST;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DATE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
-import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME_1;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME_2;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME_3;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +26,7 @@ import seedu.ddd.model.event.common.Event;
  */
 public class TypicalEvents {
     public static final Event WEDDING_A = new EventBuilder()
-            .withName(VALID_EVENT_NAME)
+            .withName(VALID_EVENT_NAME_2)
             .withDescription("This is wedding A")
             .withDate(VALID_EVENT_DATE)
             .withClients(ALICE, CARL)
@@ -32,7 +34,7 @@ public class TypicalEvents {
             .withEventId(0)
             .build();
     public static final Event WEDDING_B = new EventBuilder()
-            .withName(VALID_EVENT_NAME)
+            .withName(VALID_EVENT_NAME_3)
             .withDescription("This is wedding B")
             .withDate(VALID_EVENT_DATE)
             .withClients(ELLE, FIONA)
@@ -40,7 +42,7 @@ public class TypicalEvents {
             .withEventId(1)
             .build();
     public static final Event VALID_EVENT = new EventBuilder()
-            .withName(VALID_EVENT_NAME)
+            .withName(VALID_EVENT_NAME_1)
             .withDescription(VALID_EVENT_DESCRIPTION_1)
             .withDate(VALID_EVENT_DATE)
             .withClients(DEFAULT_EVENT_CLIENT_LIST)

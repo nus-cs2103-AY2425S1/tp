@@ -146,9 +146,12 @@ public class AddEventCommand extends AddCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("name", name)
+                .add("description", description)
+                .add("date", date)
                 .add("clientIds", clientContactIds)
                 .add("vendorIds", vendorContactIds)
-                .add("description", description)
+                .add("id", eventId)
                 .toString();
     }
 }

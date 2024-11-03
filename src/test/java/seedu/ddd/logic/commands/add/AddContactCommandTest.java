@@ -214,11 +214,6 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void setEvent(Event target, Event editedEvent) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Contact> getFilteredContactList() {
             throw new AssertionError("This method should not be called.");
         }

@@ -160,18 +160,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given event {@code target} in the list with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event
-     * in the address book.
-     */
-    public void setEvent(Event target, Event editedContact) {
-        requireNonNull(editedContact);
-        //method not implemented yet
-        //events.setEvents(target, editedContact);
-    }
-
-    /**
      * Fetches an {@code Event} from the address book by ID.
      * If event has not been created or does not exist, a null object will be returned.
      */
