@@ -8,10 +8,14 @@ MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution 
 
 Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
 
+{: style="page-break-after: always"}
+
 ## Table of Contents
 
 * Table of Contents
 {:toc}
+
+{: style="page-break-after: always"}
 
 ## How to use this User Guide
 Our user guide is tailored to ensure you can fully unlock the potential of MediBase3, whether you're new to MediBase3 or have been using the application for quite some time.
@@ -74,6 +78,8 @@ The following annotated text-boxes are used throught this guide to provide usefu
 > Warns you about potential issues or errors that you might encounter while using MediBase3.
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ## Quick Start
 
@@ -228,8 +234,10 @@ You’re now ready to start using MediBase3.
 For a detailed list of features and instructions, see the [Features](#features) section.  
 For additional assistance or common questions, please refer to our [FAQ](#faq) section.
 
-
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
+
 ## Features
 
 ### Parameter Details
@@ -260,6 +268,8 @@ the constraints of each parameter when used in a command.
 
 [Back to Table of Contents](#table-of-contents)
 
+{: style="page-break-after: always"}
+
 {: .alert .alert-info}
 > **:information_source: Notes about the command format:**
 > 
@@ -285,6 +295,8 @@ the constraints of each parameter when used in a command.
 > e.g. `add` is not the same as `Add`, `c/` is not the same as `C/`.
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+{: style="page-break-after: always"}
 
 ### Managing Patient
 
@@ -368,6 +380,8 @@ to `91234567` and `johndoe@example.com` respectively.
 
 [Back to Table of Contents](#table-of-contents)
 
+{: style="page-break-after: always"}
+
 ### Managing Appointments
 
 #### Adding Appointments : `addAppt`
@@ -443,11 +457,13 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
+{: style="page-break-after: always"}
+
 ### Managing Medical Conditions
 
 #### Adding Medical Conditions : `addMedCon`
 
-Adds a medical condition or multiple medical conditions to an existing patient in MediBase3.
+Adds medical condition(s) to an existing patient in MediBase3.
 
 Format: `addMedCon i/NRIC c/CONDITION...`
 
@@ -474,7 +490,7 @@ Example:
 
 #### Deleting Medical Conditions : `delMedCon`
 
-Deletes a medical condition or multiple medical conditions from an existing patient in MediBase3.
+Deletes medical condition(s) from an existing patient in MediBase3.
 
 Format: `delMedCon i/NRIC c/CONDITION...`
 
@@ -494,10 +510,12 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> * You can delete multiple medical conditions to a patient by using multiple `c/CONDITION`parameters
+> * You can delete multiple medical conditions from a patient by using multiple `c/CONDITION`parameters
 > * e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ### Managing Allergies
 
@@ -531,7 +549,7 @@ Example:
 
 #### Deleting an allergy: `delAllergy`
 
-Deletes an allergy or multiple allergies to an existing patient in MediBase3.
+Deletes an allergy or multiple allergies from an existing patient in MediBase3.
 
 Format: `delAllergy i/NRIC al/ALLERGY…`
 
@@ -550,10 +568,12 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> * You can delete multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
+> * You can delete multiple allergies from a patient by using multiple `al/ALLERGY` parameters.
 > * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ### Managing Priority
 
@@ -575,6 +595,8 @@ Example:
 * `setPriority i/S1234567A !/HIGH` will set the Priority of patient with NRIC `S1234567A` to `HIGH`.
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ### Finding Patients
 
@@ -682,6 +704,8 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
+{: style="page-break-after: always"}
+
 ### General Features
 
 #### Command History
@@ -743,6 +767,8 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 > Furthermore, certain edits can cause the MediBase3 to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ## FAQ
 
@@ -841,11 +867,14 @@ This means that your machine is running Java version 17.0.11, which means that J
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
 
+{: style="page-break-after: always"}
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+{: style="page-break-after: always"}
 
 ## Command summary
 
