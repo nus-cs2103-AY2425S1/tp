@@ -74,7 +74,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JFreeChart UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -675,5 +675,43 @@ Despite the complexity, we achieved several milestones:
 In summary, EduTuTu required significant effort due to its multi-entity structure, visualizations, and user interface improvements. By reusing existing libraries and frameworks strategically, we maintained high functionality and usability while optimizing development time.
 
 ## Appendix: Planned Enhancement
+
+**Team size:** 5  
+**Total planned enhancements:** 10
+
+This section lists planned enhancements to address known feature flaws. These enhancements will be implemented after PE-D testing is completed and feedback is received.
+
+
+1. **Add Confirmation for ‘Clear’ Command**  
+   **Current Issue:** The `clear` command deletes all entries immediately without a confirmation prompt, which can lead to accidental data loss.  
+   **Planned Enhancement:** Add a confirmation dialog that appears when the `clear` command is entered. Users must confirm the action by typing “yes” to proceed with clearing all data. Example prompt: "Are you sure you want to clear all entries? Type 'yes' to confirm."
+
+   
+2. **Make 'Undo' and 'Redo' Command Limit Clear**  
+   **Current Issue:** Users are unaware of the limit to the `undo` and `redo` command history, leading to potential confusion.  
+   **Planned Enhancement:** Display a warning when the maximum undo/redo history has been reached. For example, "No further undo actions are available."
+
+
+3. **Emoji Handling in Input Fields**  
+   **Current Issue:** Input fields currently do not handle emojis correctly due to a regex limitation, which may cause unexpected behavior.  
+   **Planned Enhancement:** Update the regex used for validation to allow emojis in names, addresses, and other text fields, or provide an informative error message if emojis are not supported.
+
+
+4. **Display List Sorting Options**  
+   **Current Issue:** The `list` command displays entries in a default order, with no options for sorting.  
+   **Planned Enhancement:** Add sorting options to the `list` command, allowing users to sort by name, class, or payment status. For example, `list sortby/name` or `list sortby/class`.
+
+
+5. **Improved Multi-Monitor Support**  
+   **Current Issue:** When switching between multiple monitors, the application may open off-screen if moved to a secondary screen and later switched back to a single-monitor setup.  
+   **Planned Enhancement:** Implement better positioning handling to ensure the application opens within the primary screen’s bounds if multiple monitors are disconnected.
+
+
+6. **Allow Multiple Class Allocations for a Single Student**  
+   **Current Issue:** Currently, there are restrictions preventing a student from being assigned to more than one class, which can cause issues in managing class rosters.  
+   **Planned Enhancement:** Remove restrictions each student to a single class.
+
+   
+These planned enhancements aim to improve usability, data validation, and user feedback within EduTuTu, addressing known issues while maintaining a smooth user experience.
 
 
