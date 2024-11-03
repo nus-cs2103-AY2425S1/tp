@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 
@@ -20,7 +21,7 @@ import org.junit.jupiter.api.Test;
 public class EncryptionManagerTest {
 
     private static final String TEST_DATA = "This is a secret message";
-    private static final String KEY_FILE_PATH = "test/key.jks";
+    private static final String KEY_FILE_PATH = Paths.get("test", "key.jks").toString();
     private File keyFile;
 
     @BeforeEach
