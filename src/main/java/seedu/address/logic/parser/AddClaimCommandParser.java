@@ -44,6 +44,9 @@ public class AddClaimCommandParser implements Parser<AddClaimCommand> {
         PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
         ClaimStatus claimStatus = ParserUtil.parseClaimStatus(argMultimap.getValue(PREFIX_CLAIM_STATUS).get());
         String claimDescription = argMultimap.getValue(PREFIX_CLAIM_DESC).get();
+        if (!Claim.isValidClaim(claimDescription)) {
+            throw new ParseException(Claim.MESSAGE_CONSTRAINTS);
+        }
         Claim claim = new Claim(claimStatus, claimDescription);
 
         return new AddClaimCommand(clientIndex, claim, policyType);
