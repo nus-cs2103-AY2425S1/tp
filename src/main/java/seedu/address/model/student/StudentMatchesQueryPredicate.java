@@ -1,10 +1,8 @@
 package seedu.address.model.student;
 
-import static seedu.address.model.UserPrefs.MATCH_RATIO;
-
+import java.util.List;
 import java.util.function.Predicate;
 
-import me.xdrop.fuzzywuzzy.FuzzySearch;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -12,26 +10,20 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class StudentMatchesQueryPredicate implements Predicate<Student> {
 
-    private final String keyword;
+    private final List<String> keywords;
 
-    public StudentMatchesQueryPredicate(String keyword) {
-        this.keyword = keyword;
+    public StudentMatchesQueryPredicate(List<String> keywords) {
+        this.keywords = keywords;
     }
 
     @Override
     public boolean test(Student student) {
         return
-            FuzzySearch.tokenSortPartialRatio(student.getStudentNumber().toString().toLowerCase(), keyword)
-                > MATCH_RATIO
-                || FuzzySearch.tokenSortPartialRatio(student.getName().toString().toLowerCase(), keyword)
-                > MATCH_RATIO
-                || FuzzySearch.tokenSortPartialRatio(student.getEmail().toString().toLowerCase(), keyword)
-                > MATCH_RATIO
-                || FuzzySearch.tokenSortPartialRatio(student.getGroupName().toString().toLowerCase(), keyword)
-                > MATCH_RATIO
-                || student.getTags().stream().anyMatch(tag ->
-                FuzzySearch.tokenSortPartialRatio(tag.toString().toLowerCase(), keyword)
-                    > MATCH_RATIO);
+            keywords.stream().anyMatch(keyword ->
+                student.getStudentNumber().getStudentNumber().equalsIgnoreCase(keyword)
+                    || student.getName().getFullName().equalsIgnoreCase(keyword)
+                    || student.getTags().stream().anyMatch(tag -> tag.getTagName().equalsIgnoreCase(keyword))
+                    || student.getEmail().getEmail().equalsIgnoreCase(keyword));
     }
 
     @Override
@@ -46,13 +38,13 @@ public class StudentMatchesQueryPredicate implements Predicate<Student> {
         }
 
         StudentMatchesQueryPredicate otherPredicate = (StudentMatchesQueryPredicate) other;
-        return keyword.equals(otherPredicate.keyword);
+        return keywords.equals(otherPredicate.keywords);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("keyword", keyword)
+            .add("keyword", keywords)
             .toString();
     }
 }

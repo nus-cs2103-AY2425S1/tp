@@ -2,7 +2,10 @@ package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,54 +15,54 @@ public class StudentMatchesKeywordPredicateTest {
 
     @Test
     public void equals() {
-        String firstPredicateKeyword = "friends";
-        String secondPredicateKeyword = "group 4";
+        List<String> firstPredicateKeyword = List.of("friends");
+        List<String> secondPredicateKeyword = List.of("group 4");
 
         StudentMatchesQueryPredicate firstPredicate = new StudentMatchesQueryPredicate(firstPredicateKeyword);
         StudentMatchesQueryPredicate secondPredicate = new StudentMatchesQueryPredicate(secondPredicateKeyword);
 
         // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
+        assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
         StudentMatchesQueryPredicate firstPredicateCopy = new StudentMatchesQueryPredicate(firstPredicateKeyword);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
+        assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertNotEquals(1, firstPredicate);
 
         // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+        assertNotEquals(null, firstPredicate);
 
         // different student -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
+        assertNotEquals(firstPredicate, secondPredicate);
     }
 
     @Test
     public void test_studentMatchesKeyword_returnsTrue() {
         // keyword longer than student field
-        StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate("friends");
+        StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate(List.of("friend"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("friend").build()));
 
         // keyword shorter than student field
-        predicate = new StudentMatchesQueryPredicate("ice");
+        predicate = new StudentMatchesQueryPredicate(List.of("friend"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("friend").build()));
     }
 
     @Test
     public void test_studentDoesNotMatchKeyword_returnsFalse() {
         // no keyword
-        StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate("      ");
+        StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate(List.of("      "));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // non-matching keyword
-        predicate = new StudentMatchesQueryPredicate("alICe");
+        predicate = new StudentMatchesQueryPredicate(List.of("alICe"));
         assertFalse(predicate.test(new PersonBuilder().withName("John").build()));
     }
 
     @Test
     public void toStringMethod() {
-        String keyword = "friends";
+        List<String> keyword = List.of("friends");
         StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate(keyword);
         String expected = StudentMatchesQueryPredicate.class.getCanonicalName() + "{keyword=" + keyword + "}";
         assertEquals(expected, predicate.toString());

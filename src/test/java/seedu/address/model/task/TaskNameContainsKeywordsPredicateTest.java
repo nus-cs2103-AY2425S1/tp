@@ -45,19 +45,15 @@ public class TaskNameContainsKeywordsPredicateTest {
         Task testTask = new Task(new TaskName("CA2 Test"), new Deadline(LocalDateTime.now()));
         // one keyword
         TaskNameContainsKeywordsPredicate predicate =
-            new TaskNameContainsKeywordsPredicate(Collections.singletonList("Test"));
-        assertTrue(predicate.test(testTask));
-
-        // multiple keywords
-        predicate = new TaskNameContainsKeywordsPredicate(Arrays.asList("Test", "CA"));
+            new TaskNameContainsKeywordsPredicate(Collections.singletonList("ca2 test"));
         assertTrue(predicate.test(testTask));
 
         // only one matching keyword
-        predicate = new TaskNameContainsKeywordsPredicate(Arrays.asList("CA", "Submission"));
+        predicate = new TaskNameContainsKeywordsPredicate(Arrays.asList("ca2 test", "Submission"));
         assertTrue(predicate.test(testTask));
 
-        // only lower-case keywords
-        predicate = new TaskNameContainsKeywordsPredicate(Arrays.asList("ca", "test"));
+        // mixed-case keywords
+        predicate = new TaskNameContainsKeywordsPredicate(List.of("Ca2 TEst"));
         assertTrue(predicate.test(testTask));
     }
 

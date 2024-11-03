@@ -111,7 +111,7 @@ public class ModelManager implements Model {
     public void setMostRecentGroupTaskDisplay() {
         String stringToUpdate = userPrefs.getMostRecentGroupTaskDisplay();
         if (!stringToUpdate.equals("")) {
-            updateFilteredGroupList(x -> x.getGroupName().fullName.equals(stringToUpdate));
+            updateFilteredGroupList(x -> x.getGroupName().getGroupName().equals(stringToUpdate));
         } else {
             updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         }
@@ -121,7 +121,7 @@ public class ModelManager implements Model {
     public void setMostRecentGroupTaskDisplay(String string) {
         userPrefs.setMostRecentGroupTaskDisplay(string);
         if (!string.equals("")) {
-            updateFilteredGroupList(x -> x.getGroupName().fullName.equals(string));
+            updateFilteredGroupList(x -> x.getGroupName().getGroupName().equals(string));
         } else {
             updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         }

@@ -35,7 +35,7 @@ public class SortGroupCommand extends Command {
         model.sortGroupList(new Comparator<Group>() {
             @Override
             public int compare(Group g1, Group g2) {
-                return g1.getGroupName().fullName.compareTo(g2.getGroupName().fullName);
+                return g1.getGroupName().getGroupName().compareTo(g2.getGroupName().getGroupName());
             }
         });
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);

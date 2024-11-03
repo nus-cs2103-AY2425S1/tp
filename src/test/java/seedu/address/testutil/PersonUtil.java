@@ -29,12 +29,12 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Student student) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_STUDENT_NAME + student.getName().fullName + " ");
-        sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
+        sb.append(PREFIX_STUDENT_NAME + student.getName().getFullName() + " ");
+        sb.append(PREFIX_EMAIL + student.getEmail().getEmail() + " ");
         student.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
-        sb.append(PREFIX_STUDENT_NUMBER + student.getStudentNumber().value + " ");
+        sb.append(PREFIX_STUDENT_NUMBER + student.getStudentNumber().getStudentNumber() + " ");
         return sb.toString();
     }
 
@@ -43,8 +43,8 @@ public class PersonUtil {
      */
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_STUDENT_NAME).append(name.fullName).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_STUDENT_NAME).append(name.getFullName()).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.getEmail()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
@@ -54,7 +54,7 @@ public class PersonUtil {
             }
         }
         descriptor.getStudentNumber().ifPresent(studentNumber -> sb.append(PREFIX_STUDENT_NUMBER)
-                .append(studentNumber.value));
+            .append(studentNumber.getStudentNumber()));
         return sb.toString();
     }
 }

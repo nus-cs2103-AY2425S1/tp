@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Student numbers should be of the format A01234567X"
+        "Student numbers should be of the format A01234567X"
             + "and adhere to the following constraints:\n"
             + "1. The student number should start with A0.\n"
             + "2. This is followed by exactly 7 numerical digits.\n"
@@ -21,10 +21,10 @@ public class StudentNumber {
     private static final String END_PART_REGEX = "(?i)[A-Z]$";
     public static final String VALIDATION_REGEX = START_PART_REGEX + DIGIT_PART_REGEX + END_PART_REGEX;
 
-    public final String value;
+    private final String value;
 
     /**
-     * Constructs an {@code Email}.
+     * Constructs an {@code Student Number}.
      *
      * @param studentNumber A valid student number.
      */
@@ -39,6 +39,13 @@ public class StudentNumber {
      */
     public static boolean isValidStudentNumber(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns Student Number
+     */
+    public String getStudentNumber() {
+        return value;
     }
 
     @Override

@@ -53,9 +53,9 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
-        name.setText(student.getName().fullName);
-        email.setText(student.getEmail().value);
-        studentNumber.setText(student.getStudentNumber().value);
+        name.setText(student.getName().getFullName());
+        email.setText(student.getEmail().getEmail());
+        studentNumber.setText(student.getStudentNumber().getStudentNumber());
         if (student.getGroupName().isEmpty()) {
             group.setText("Not in group yet.");
         } else {

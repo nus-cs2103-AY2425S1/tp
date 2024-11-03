@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,7 +30,7 @@ class JsonAdaptedGroup {
      */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("groupname") String groupName,
-                             @JsonProperty("students") List<JsonAdaptedPerson> students,
+                            @JsonProperty("students") List<JsonAdaptedPerson> students,
                             @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.groupName = groupName;
         if (students != null) {
@@ -46,13 +45,13 @@ class JsonAdaptedGroup {
      * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
-        groupName = source.getGroupName().fullName;
+        groupName = source.getGroupName().getGroupName();
         students.addAll(source.getStudents().stream()
-                .map(JsonAdaptedPerson::new)
-                .collect(Collectors.toList()));
+            .map(JsonAdaptedPerson::new)
+            .toList());
         tasks.addAll(source.getTasks().stream()
-                .map(JsonAdaptedTask::new)
-                .collect(Collectors.toList()));
+            .map(JsonAdaptedTask::new)
+            .toList());
     }
 
     /**
@@ -72,7 +71,7 @@ class JsonAdaptedGroup {
         }
         if (groupName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    GroupName.class.getSimpleName()));
+                GroupName.class.getSimpleName()));
         }
         if (!GroupName.isValidName(groupName)) {
             throw new IllegalValueException(GroupName.MESSAGE_CONSTRAINTS);

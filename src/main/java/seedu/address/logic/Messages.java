@@ -69,7 +69,7 @@ public class Messages {
      */
     public static String format(StudentNumber studentNumber) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(studentNumber.value);
+        builder.append(studentNumber.getStudentNumber());
         return builder.toString();
     }
 
@@ -78,7 +78,7 @@ public class Messages {
      */
     public static String format(GroupName groupName) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(groupName.fullName);
+        builder.append(groupName.getGroupName());
         return builder.toString();
     }
 
