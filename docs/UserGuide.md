@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
 # T_Assistant User Guide
@@ -76,20 +76,554 @@ If you can type fast, T_Assistant can get your contact management tasks done fas
   acceptable.
 
 * Extraneous parameters for commands that **do not take in parameters** (such as `help`, `list`, `exit` and `clear`)
-  will be
-  **ignored**.<br>
+  will be **ignored**.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Extraneous parameters for commands that **do take in parameters** (such as `add_s`, `del_s`) will be recognised as *
-  *invalid**
-  input parameters.<br>
+* Extraneous parameters for commands that **do take in parameters** (such as `add_s`, `del_s`) will be recognised as
+  *invalid* input parameters.<br>
   e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as a invalid command structure.
+
+**Important**
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
-### Viewing help : `help`
+--------------------------------------------------------------------------------------------------------------------
+
+### Student Commands
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Listing Students: `list_s`, `ls`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Adding a Student: `add_s`, `as`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Deleting a Student: `del_s`, `ds`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editing a Student: `edit_s`, `es`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Adding a Student to a Group: `add_s_g`, `asg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Deleting a Student from a Group: `del_s_g`, `dsg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Finding Students: `find_s`, `fs`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Sorting Students: `sort_s`, `ss`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Group Commands
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Listing Groups: `list_g`, `lg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Adding a Group: `add_g`, `ag`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Deleting a Group: `del_g`, `dg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editing a Group: `edit_g`, `eg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Finding Groups: `find_g`, `fg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Sorting Groups: `sort_g`, `sg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Task Commands
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Listing Tasks: `list_t`, `lt`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Adding a Task to a Group: `add_t_g`, `atg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Adding a Task to ALL Groups: `add_t`, `at`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Adding an Existing Task to a Group: `del_t_g`, `dtg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Deleting a Task from ALL Groups: `del_t`, `dt`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Deleting a Task from a Group: `del_t_g`, `dtg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editing a Task for a Group: `edit_t_g`, `etg`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editing a Task for ALL Groups: `edit_t`, `et`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Mark a Task for a Group: `mark_t`, `mt`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Finding Tasks: `find_t`, `ft`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Sorting Tasks: `sort_t`, `st`
+
+Explanation of what command does, are there anything that the command cannot do (e.g. cannot change Student Number)
+
+##### Usage Scenario
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+Include before and after screenshots
+
+##### Errors
+
+| Error Message   | Reason   |
+|:----------------|:---------|
+| Error Message 1 | Reason 1 |
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Miscellaneous Commands
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Undoing change: `undo`
+
+Undoes the previous command ran.
+
+Format: `undo`
+
+#### Redoing change: `redo`
+
+Redoes the previous command ran.
+
+Format: `redo`
+
+#### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
@@ -97,94 +631,23 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding a student: `add`
+#### Clearing all entries : `clear`
 
-Adds a student to the assistant.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<box type="tip" seamless>
-
-**Tip:** A student can have any number of tags (including 0)
-</box>
-
-Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all students : `list`
-
-Shows a list of all students in the assistant.
-
-Format: `list`
-
-### Editing a student : `edit`
-
-Edits an existing student in the assistant.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list.
-  The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-  specifying any tags after it.
-
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567`
-  and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-
-### Locating students by name: `find`
-
-Finds students whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a student : `delete`
-
-Deletes the specified student from the assistant.
-
-Format: `delete INDEX`
-
-* Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-
-* `list` followed by `delete 2` deletes the 2nd student in the assistant.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-f
 Clears all entries from the assistant.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+#### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Data Handling
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
 
@@ -200,7 +663,7 @@ welcome to update data directly by editing that data file.
 
 **Caution:**
 If your changes to the data file makes its format invalid, T_Assistant will discard all data and start with an empty
-data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br><br>
 Furthermore, certain edits can cause the T_Assistant to behave in unexpected ways (e.g., if a value entered is outside
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
@@ -227,6 +690,32 @@ the data of your previous T_Assistant home folder.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
    `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
    manually restore the minimized Help Window.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+| Key Terms      | Definition                                             |
+|----------------|--------------------------------------------------------|
+| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS          |
+| Prefix         | Keyword used in commands to specify the parameter type |
+| Student Number | Unique identifier for a student                        |
+
+### Command Parameters
+
+This section will inform you about what parameters are used in T_Assistant and their restrictions :)
+
+| Parameter                | Constraints                                                                                    | Correct Input | Incorrect Input         |
+|--------------------------|------------------------------------------------------------------------------------------------|---------------|-------------------------|
+| Student Number<br>`sno/` | Student Number must start with `A0` <br>Followed by 6 numerical digits <br>End with any letter | `A0123456B`   | `A1234567`, `A1234567A` |
+|                          |                                                                                                |               |                         |
+|                          |                                                                                                |               |                         |
+|                          |                                                                                                |               |                         |
+|                          |                                                                                                |               |                         |
+|                          |                                                                                                |               |                         |
+|                          |                                                                                                |               |                         |
+|                          |                                                                                                |               |                         |
+|                          |                                                                                                |               |                         |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -266,7 +755,7 @@ the data of your previous T_Assistant home folder.
 | **Add Existing Task to Group**  | `add_et_g/aetg i/INDEX gn/GROUP_NAME [gn/GROUP_NAME]...`<br>e.g., `aetg i/1 gn/CS2103-F12-3`                                                                     |
 | **Delete Task from All Groups** | `del_t/dt i/INDEX`<br>e.g., `dt i/1`                                                                                                                             |
 | **Delete Task from Group**      | `del_t_g/dtg i/INDEX gn/GROUP_NAME`<br>e.g., `dtg i/1 gn/CS2103-F12-2`                                                                                           |
-| **Edit Task**                   | `edit_t_g/etg i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)` <br>e.g., `etg i/1 gn/CS2103-F12-3 tn/v1.4 Release`                      |
+| **Edit Task for Group**         | `edit_t_g/etg i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)` <br>e.g., `etg i/1 gn/CS2103-F12-3 tn/v1.4 Release`                      |
 | **Edit Task for All Groups**    | `edit_t/et i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`<br>e.g., `et i/1 td/2024-11-20 1200`                                                      |
 | **Mark Task**                   | `mark_t/mt gn/GROUP_NAME i/INDEX`<br>e.g., `mt gn/CS2103-F12-2 i/2`                                                                                              |
 | **Find Task**                   | `find_t/ft q/QUERY [q/QUERY]...`<br>e.g., `ft q/v1.3 Release`                                                                                                    |
