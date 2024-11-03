@@ -332,6 +332,15 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KnottyPlanner home folder.
 
+**Q**: What should I do if the application does not start?<br>
+**A**: If you are using a Mac, you may need to right-click the jar file and select `Open` to run the application. If you are using Windows, you may need to run the jar file as an administrator.
+
+**Q**: Can I edit the the data file directly?<br>
+**A**: Yes, you can. However, please be cautious when editing the data file directly as it may cause the application to behave unexpectedly.
+
+**Q**: How do I update the application?<br>
+**A**: Download the latest jar file from the [[releases page]](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
