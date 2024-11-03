@@ -18,7 +18,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Name;
-import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
 
 /**
@@ -40,13 +39,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index = null;
         String str = null;
         Name name = null;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            str = argMultimap.getPreamble();
-            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
 
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
@@ -88,6 +80,13 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
+        // parse the index to edit, else parse the name
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            str = argMultimap.getPreamble();
+            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
         if (index == null) {
             try {
                 name = ParserUtil.parseName(str);
@@ -97,6 +96,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             return new EditCommand(name, editContactDescriptor);
         }
+
         return new EditCommand(index, editContactDescriptor);
     }
 
@@ -113,5 +113,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         return Optional.of(ParserUtil.parseRoles(roles));
     }
-
 }
