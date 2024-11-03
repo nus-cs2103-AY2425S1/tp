@@ -64,9 +64,13 @@ public class Company extends Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getIndustry().equals(getIndustry());
+        if (otherPerson instanceof Company) {
+            return otherPerson != null
+                    && otherPerson.getName().equals(getName())
+                    && otherPerson.getIndustry().equals(getIndustry());
+        }
+
+        return false;
     }
 
     @Override

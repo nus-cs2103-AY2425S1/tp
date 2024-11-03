@@ -61,8 +61,11 @@ public class Student extends Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getStudentId().equals(getStudentId());
+        if (otherPerson instanceof Student) {
+            return otherPerson != null
+                    && otherPerson.getStudentId().equals(getStudentId());
+        }
+        return false;
     }
 
     public void incrementAttendance() {
