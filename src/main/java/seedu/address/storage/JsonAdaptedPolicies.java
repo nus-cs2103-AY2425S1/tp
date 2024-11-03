@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Policy;
 import seedu.address.model.tag.Tag;
 
@@ -42,7 +43,11 @@ class JsonAdaptedPolicies {
         if (!Policy.isValidPolicy(policyDescription)) {
             throw new IllegalValueException(Policy.MESSAGE_CONSTRAINTS);
         }
-        return new Policy(policyDescription);
+        try {
+            return new Policy(policyDescription);
+        } catch (CommandException e) {
+            throw new IllegalValueException(policyDescription + " " + e.getMessage());
+        }
     }
 
 }

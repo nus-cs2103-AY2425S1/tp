@@ -116,8 +116,8 @@ Format: `add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<ADDRESS> b/<BIRTH
   - Appointment should be in `yyyy-mm-dd HH:mm`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
+* `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
+* `add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
 
 ---
 
