@@ -236,15 +236,16 @@ Updates the [payment status](#payment-status) of a student to completed.
 
 Edits an existing person in the address book.
 
-**[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [t/TAG]…​`
+**[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [m/YEAR-MONTH] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The [index](#index) refers to the [index](#index) number shown in the displayed person list. The [index](#index) **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The [index](#index) refers to the [index](#index) number shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing [tags](#tags), the existing [tags](#tags) of the person will be removed, i.e., adding of [tags](#tags) is not cumulative.
 * You can remove all the person’s [tags](#tags) by typing `t/` without specifying any [tags](#tags) after it.
 
-**Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com`
+**Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com m/2024-10,2024-11`
+
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
 
@@ -313,17 +314,17 @@ The `find` command allows you to list persons by their names, [Class IDs](#class
 
 **[Command Format](#command-format):**
 - **By Name:** `find n/NAME [MORE_NAMES]`
-- **By [Class ID](#class-id):** `find c/CLASSID [MORE_CLASSIDS]`
+- **By [Class ID](#class-id):** `find c/CLASSID [MORE_CLASSIDS]` – Matches any word within the Class ID, allowing partial matches.
 - **By Name and [Class ID](#class-id):** `find n/NAME [MORE_NAMES] c/CLASSID [MORE_CLASSIDS]`
 - **By Payment Date:** `find m/YEAR-MONTH` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
 - **By Unpaid Status:** `find !m/YEAR-MONTH` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
 
 * The search is case-insensitive. e.g., `kim` will match `Kim`.
 * The order of the keywords does not matter. e.g., `Esther Kim` will match `Kim Esther`.
-* Only the name is searched when using `n/` format.
 * Partially matched words will be matched, e.g., `Han` will match `Hans`.
-* find `n/KEYWORD c/KEYWORD2` will match persons with names containing `KEYWORD` and [class IDs](#class-id) containing `KEYWORD2`.
+* find `n/NAME c/CLASSID` will match persons with names containing `NAME` and [class IDs](#class-id) containing `CLASSID`.
 * For payment search, use the format YEAR-MONTH (e.g., m/2024-10).
+* For unpaid status search, use the format `!m/YEAR-MONTH` (e.g., `!m/2024-10`).
 
 **Example Usage:** `find n/Kim`
 
