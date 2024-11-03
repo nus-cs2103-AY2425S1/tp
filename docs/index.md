@@ -6,11 +6,11 @@ title: AddressBook Level-3
 [![CI Status](https://github.com/AY2425S1-CS2103T-T13-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T13-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T13-1/tp/graph/badge.svg)](https://codecov.io/github/AY2425S1-CS2103T-T13-1/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/sampleUiImage.png)
 
 **MedConnect is a desktop application for healthcare administrators in old folks homes for dementia patients to consolidate contacts of patients and related information into a single database.**
 
-It enables speedy lookups and updates, ensuring that administrators can quickly connect with the right people, from on-call doctors to patients’ families, when every second counts.
+It enables speedy lookups and updates, ensuring that administrators can quickly connect with the right people, from patients' doctors to their families, when every second counts.
 
 While it has a GUI (Graphical User Interface), most of the user interactions happen using a CLI (Command Line Interface).
 
