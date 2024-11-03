@@ -36,7 +36,7 @@ public class EventBuilder {
     public EventBuilder(Event eventToCopy) {
         name = eventToCopy.getName();
         date = eventToCopy.getDate();
-        tags = new HashSet<>(eventToCopy.getTags());
+        tags = eventToCopy.getTags();
     }
 
     /**
