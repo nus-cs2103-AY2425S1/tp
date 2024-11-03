@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_DISPLAYED;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteReminderCommand;
@@ -26,5 +25,4 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Name name = ParserUtil.parseName(args);
         return new DeleteCommand(name);
     }
-
 }
