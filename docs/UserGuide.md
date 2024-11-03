@@ -61,6 +61,7 @@ Action     | Format, Examples
 **Remind**   | `remind`
 **Help**   | `help`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
+**Exit**   | `exit`
 
 ## Features
 
@@ -178,9 +179,18 @@ for convenient ways to update the paid amount and owed amount.
 
 ### Showing income data: `income`
 
-Shows the total amount of tuition fee you have received from the students and the amount that hasn't been paid.
+Shows the total amount of tuition fee that you have been paid, as well as total amount that is owed.
 
-Format: `income`
+**Format:** `income`
+
+**Examples**
+* `income` when all entries are listed gives the total tuition fee paid, as well as total amount that is owed
+* `find n/Alex` followed by `income` shows total tuition fee paid, as well as owed total amount that is owed, from
+students whose name contains Alex
+
+**Output**
+![result for `income` when all entries listed](images/incomeResult.png)
+
 
 ### Finding students' information: `find`
 
