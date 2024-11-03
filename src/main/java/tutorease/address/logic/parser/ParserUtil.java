@@ -5,13 +5,18 @@ import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.Messages.MISSING_PREFIX;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.commons.util.StringUtil;
+import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.EndDateTime;
 import tutorease.address.model.lesson.Fee;
@@ -30,6 +35,7 @@ import tutorease.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static Logger logger = LogsCenter.getLogger(ParserUtil.class);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -158,10 +164,13 @@ public class ParserUtil {
      * @throws ParseException If the student ID is invalid.
      */
     public static StudentId parseStudentId(String studentId) throws ParseException {
+        logger.log(Level.INFO, "Parsing student ID: " + studentId);
         requireNonNull(studentId);
         if (!StudentId.isValidStudentId(studentId)) {
+            logger.log(Level.WARNING, "Student ID is invalid: " + studentId);
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
+        logger.log(Level.INFO, "Student ID is valid: " + studentId);
         return new StudentId(studentId);
     }
 
@@ -173,11 +182,14 @@ public class ParserUtil {
      * @throws ParseException If the fee is invalid.
      */
     public static Fee parseFee(String fee) throws ParseException {
+        logger.log(Level.INFO, "Parsing fee: " + fee);
         requireNonNull(fee);
         String trimmedFee = fee.trim();
         if (!Fee.isValidFee(trimmedFee)) {
+            logger.log(Level.WARNING, "Fee is invalid: " + fee);
             throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
         }
+        logger.log(Level.INFO, "Fee is valid: " + fee);
         return new Fee(trimmedFee);
     }
 
@@ -189,9 +201,11 @@ public class ParserUtil {
      * @throws ParseException If the start date time is invalid.
      */
     public static StartDateTime parseStartDateTime(String startDateTime) throws ParseException {
+        logger.log(Level.INFO, "Parsing start date time: " + startDateTime);
         requireNonNull(startDateTime);
         String trimmedStartDateTime = startDateTime.trim();
         checkValidDateTime(startDateTime);
+        logger.log(Level.INFO, "Start date time is valid: " + startDateTime);
         return StartDateTime.createStartDateTime(trimmedStartDateTime);
     }
 
@@ -204,11 +218,14 @@ public class ParserUtil {
      * @throws ParseException If the hours to add is invalid.
      */
     public static EndDateTime parseEndDateTime(StartDateTime startDateTime, String hoursToAdd) throws ParseException {
+        logger.log(Level.INFO, "Parsing end date time: " + startDateTime + " + " + hoursToAdd + " hours");
         requireNonNull(startDateTime);
         requireNonNull(hoursToAdd);
         if (!EndDateTime.isValidHoursToAdd(hoursToAdd)) {
+            logger.log(Level.WARNING, "Hours to add is invalid: " + hoursToAdd);
             throw new ParseException(EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
         }
+        logger.log(Level.INFO, "Hours to add is valid: " + hoursToAdd);
         return EndDateTime.createEndDateTime(startDateTime, hoursToAdd);
     }
 
@@ -222,8 +239,10 @@ public class ParserUtil {
      */
     public static void validatePrefixesPresent(ArgumentMultimap argumentMultimap, String usage, Prefix... prefixes)
             throws ParseException {
+        logger.log(Level.INFO, "Validating prefixes present: " + Arrays.toString(prefixes));
         checkMissingAllPrefixes(argumentMultimap, usage);
         findMissingPrefix(argumentMultimap, usage, prefixes);
+        logger.log(Level.INFO, "All prefixes are present: " + Arrays.toString(prefixes));
     }
 
     /**
@@ -236,8 +255,10 @@ public class ParserUtil {
      */
     private static void findMissingPrefix(ArgumentMultimap argumentMultimap, String usage, Prefix[] prefixes)
             throws ParseException {
+        logger.log(Level.INFO, "Finding missing prefixes: " + Arrays.toString(prefixes));
         for (Prefix prefix : prefixes) {
             if (!argumentMultimap.getValue(prefix).isPresent()) {
+                logger.log(Level.WARNING, "Missing prefix: " + prefix);
                 throw new ParseException(String.format(MISSING_PREFIX, prefix, usage));
             }
         }
@@ -252,6 +273,7 @@ public class ParserUtil {
      */
     private static void checkMissingAllPrefixes(ArgumentMultimap argumentMultimap, String usage) throws ParseException {
         if (argumentMultimap.isMissingAllPrefix()) {
+            logger.log(Level.WARNING, "All prefixes are missing");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage));
         }
     }

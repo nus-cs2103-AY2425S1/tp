@@ -99,6 +99,10 @@ public interface Model {
 
     void updateFilteredLessonList(Predicate<Lesson> predicate);
 
+    boolean filteredLessonListIsEmpty();
+
+    int getFilteredPersonListSize();
+
     /**
      * Adds the given lesson.
      *

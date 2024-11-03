@@ -182,6 +182,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean filteredLessonListIsEmpty() {
+        return filteredLesson.isEmpty();
+    }
+
+    @Override
+    public int getFilteredPersonListSize() {
+        return filteredLesson.size();
+    }
+
+    @Override
     public void addLesson(Lesson lesson) {
         lessonSchedule.addLesson(lesson);
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
