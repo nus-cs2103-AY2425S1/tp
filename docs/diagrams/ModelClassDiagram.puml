@@ -18,6 +18,7 @@ Class Name
 Class Phone
 Class Module
 Class Tag
+Class Gender
 
 Class I #FFFFFF
 }
@@ -39,6 +40,7 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Module
+Person *--> Gender
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
