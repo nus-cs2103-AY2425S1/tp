@@ -9,7 +9,7 @@ public class PriorityLowToHighComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person o1, Person o2) {
-        int comparisonResult =  o2.getPriority().compareTo(o1.getPriority());
+        int comparisonResult = o2.getPriority().compareTo(o1.getPriority());
 
         if (comparisonResult != 0) {
             return comparisonResult;
