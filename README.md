@@ -1,9 +1,9 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F10-1/tp/actions)![Ui](docs/images/Ui.png)
 
 # This is **ClientHub**<br>
-  Our product provides independent financial advisors with a streamlined tool to manage client details 
-  (eg. Track insurance policies). Optimized for simplicity and efficiency, 
-  this product makes the lives of financial advisors easier by offering easier access to 
+  Our product provides independent financial advisors with a streamlined tool to manage client details
+  (eg. Track insurance policies). Optimized for simplicity and efficiency,
+  this product makes the lives of financial advisors easier by offering easier access to
   relevant information for their clients. <br>
 
 

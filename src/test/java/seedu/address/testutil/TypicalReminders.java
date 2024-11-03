@@ -45,7 +45,7 @@ public class TypicalReminders {
 
     public static ClientHub getTypicalClientHub() {
         ClientHub ch = new ClientHub();
-        for (Person person: getTypicalPersons()) {;
+        for (Person person: getTypicalPersons()) {
             ch.addPerson(person);
         }
 

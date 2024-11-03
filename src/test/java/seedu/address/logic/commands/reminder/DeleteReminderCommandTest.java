@@ -22,7 +22,6 @@ import seedu.address.model.reminder.Reminder;
 
 
 public class DeleteReminderCommandTest {
-    
     private ClientHub clientHub = getTypicalClientHub();
     private Model model = new ModelManager(clientHub, new UserPrefs());
 

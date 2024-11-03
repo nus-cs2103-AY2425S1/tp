@@ -308,24 +308,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. ClientHub detects invalid input format
-
   * 1a1. ClientHub shows an error message and shows the correct format for the wrong input
-    
       Step 1 is repeated until user inputs the correct format.
-  
+
+
 * 1b. ClientHub detects missing fields
 
   * 1b1. ClientHub shows an error message informing user that required field(s) are missing
 
     Step 1 is repeated until user inputs all required fields.
-       
+ 
 
 * 1c. ClientHub detects a duplicate contact
 
   * 1c1. ClientHub informs user that there is more than one contact with the same name and prompts for confirmation
-  
-  * 1c2. User confirms the addition of contact 
-  
+  * 1c2. User confirms the addition of contact
+
     Use case resumes at step 2.
 
 **Use case: Delete a contact**
@@ -333,31 +331,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to delete a contact
-2. ClientHub deletes the person 
+2. ClientHub deletes the person
 3. ClientHub shows successful output message
 
     Use case ends.
 
 **Extensions**
 
-* 1a. ClientHub detects invalid input format 
+* 1a. ClientHub detects invalid input format
 
     * 1a1. ClientHub shows an error message that the input is in the wrong format
 
       Step 1 is repeated until user inputs the correct format.
-  
+
 * 1b. ClientHub detects that the given name is not in the list
-    
+ 
     * 1b1. ClientHub shows an error message that the name is not in the list
 
         Use case ends.
 
-* 1c. ClientHub detects multiple contacts of the same name 
+* 1c. ClientHub detects multiple contacts of the same name
 
     * 1c1. ClientHub informs the user that there are multiple contacts with the same name and requests the user to input the full name of the contact
 
         Step 1 is repeated until user inputs full name of the contact.
-  
+
 **Use case: List contacts**
 
 **MSS**
@@ -367,9 +365,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. ClientHub detects invalid input format
-  
-  * 1a1. ClientHub shows an error message 
-  
+
+  * 1a1. ClientHub shows an error message
+
     Step 1 is repeated until user inputs the correct format.
 
 *{More to be added}*

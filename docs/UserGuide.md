@@ -115,7 +115,7 @@ Finds persons by name, phone number, address or client type.
 
 Format: `find n/KEYWORD` or `find p/KEYWORD` or `find a/KEYWORD` or `find c/KEYWORD`
 
-#### Locating by name: `find n/NAME` 
+#### Locating by name: `find n/NAME`
   * Only the name is searched.
   * The search is case-insensitive. e.g `hans` will match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -132,7 +132,7 @@ Examples:
 * `find n/alex yeo` returns `Alex Yeoh`
 
 Result for `find n/roy`:
-![result for 'find n/roy'](images/FindRoyResult.png) 
+![result for 'find n/roy'](images/FindRoyResult.png)
 
 
 #### Locating by phone number: `find p/PHONE_NUMBER`
@@ -172,7 +172,6 @@ Result for `find a/tampines`:
 * Only the `CLIENT_TYPE` of the person is searched.
 * Persons whose `client_type` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
 * Person with `client_type` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
-  
 A **valid** `CLIENT_TYPE` should:
 * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
     * `client_type` will always be in alphanumeric format.
@@ -207,7 +206,7 @@ Examples:
 
 Format: `fp KEYWORD`
 
-Examples: 
+Examples:
 * `fp 8433` returns `8433 4567`
 
 
@@ -256,7 +255,7 @@ Format: `delete NAME` or `d NAME` or `delete NAME/`
     * Order matters when using / to delete a contact.
 
 A **valid** `NAME` for delete should:
-    * Not be empty. 
+    * Not be empty.
         * For eg. Just typing `delete` without providing any `NAME` will throw an error.
     * Be a valid name that exists in the list of contacts.
         * For eg. Typing `delete John Doe` when there is no contact with the name `John Doe` will throw an error.
@@ -276,12 +275,11 @@ Format: `view CLIENT_NAME`
   * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `view David` will throw an error.
 
 A **valid** `CLIENT_NAME` for view should:
-* Not be empty. 
+* Not be empty.
   * For eg. Just typing `view` without providing any `CLIENT_NAME` will throw an error.
 * Be a valid name that exists in the list of contacts.
     * For eg. Typing `view John Doe` when there is no contact with the name `John Doe` will throw an error.
 * Be *specific* and the exact name of the contact to be viewed.
-    
 * Be a prefix match of the contact name.
   * Typing `view John Doe` will **create a popup view* of `John Doe` if there is `John Doe` and `John Doey`in the contact list.
   * Typing `view John` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
@@ -344,10 +342,10 @@ _Details coming soon ..._
 
 | Action                | Format, Examples                                                                                                                                                                         |
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​ ` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` | 
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​ ` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` |
 | **Clear**             | `clear`                                                                                                                                                                                  |
 | **Delete**            | `delete NAME`<br> e.g., `delete JAMES`                                                                                                                                                   |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​ [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      | 
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​ [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
 | **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                               |
 | **Find Name**         | `fn NAME`                                                                                                                                                                                |
 | **Find Phone Number** | `fp PHONE_NUMBER`                                                                                                                                                                        |
