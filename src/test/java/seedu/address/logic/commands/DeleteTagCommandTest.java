@@ -178,6 +178,27 @@ public class DeleteTagCommandTest {
 
 
     @Test
+    public void execute_undoDeleteTagCommand_sucess() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Tag existingFriendsTag = FRIENDS;
+        Tag existingColleaguesTag = COLLEAGUES;
+        List<Tag> existingTags = List.of(existingFriendsTag, existingColleaguesTag);
+        model.addTags(existingTags);
+
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(existingTags);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS;
+
+        assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(deleteTagCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
+
+    @Test
     public void equals() {
         List<Tag> firstTags = new ArrayList<>();
         firstTags.add(BRIDES_SIDE);

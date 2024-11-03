@@ -1,20 +1,25 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
  * Deletes specified tags from the tag list, but only if they are not in use by any persons.
  */
-public class DeleteTagCommand extends Command {
+public class DeleteTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -42,6 +47,7 @@ public class DeleteTagCommand extends Command {
         this.tags = tags;
         this.isForceDelete = isForceDelete;
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -75,6 +81,24 @@ public class DeleteTagCommand extends Command {
                 model.deleteTags(List.of(tag)); // Just delete from the tag list
             }
             return new CommandResult(MESSAGE_SUCCESS);
+
+
+    @Override
+    public void undo(Model model) {
+        requireNonNull(model);
+        for (Map.Entry<Tag, Set<Person>> entry: deletedSet.entrySet()) {
+            Tag deletedTag = entry.getKey();
+            model.addTag(deletedTag);
+            for (Person person: entry.getValue()) {
+                Set<Tag> newTags = new HashSet<>(person.getTags());
+                newTags.add(deletedTag);
+                Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
+                        person.getRsvpStatus(), newTags);
+                model.setPerson(person, updatedPerson);
+            }
+        }
+    }
+
         }
     }
 

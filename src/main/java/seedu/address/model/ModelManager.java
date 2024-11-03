@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -27,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons;
     private ObservableList<Tag> tagList;
+    private Command previousCommand;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -107,6 +109,12 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addPerson(int index, Person person) {
+        addressBook.addPerson(index, person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -207,16 +215,21 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeTagFromPersons(Tag tag) {
+    public Set<Person> removeTagFromPersons(Tag tag) {
         List<Person> persons = getFullPersonList();
+        Set<Person> removedPersons = new HashSet<>();
         for (Person person : persons) {
-            Set<Tag> newTags = new HashSet<>(person.getTags());
-            newTags.remove(tag);
+            if (person.hasTag(tag)) {
+                Set<Tag> newTags = new HashSet<>(person.getTags());
+                newTags.remove(tag);
 
-            Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                    person.getEmail(), person.getRsvpStatus(), newTags);
-            setPerson(person, updatedPerson);
+                Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                        person.getEmail(), person.getRsvpStatus(), newTags);
+                setPerson(person, updatedPerson);
+                removedPersons.add(updatedPerson);
+            }
         }
+        return removedPersons;
     }
 
     @Override
@@ -229,6 +242,9 @@ public class ModelManager implements Model {
                     tag.setTagName(newTagName);
                 }
             }
+            Person newPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
+                    person.getRsvpStatus(), tags);
+            setPerson(person, newPerson);
         }
     }
 
@@ -246,6 +262,23 @@ public class ModelManager implements Model {
     public void updateTagList() {
         ObservableList<Tag> tl = this.addressBook.getTagList();
         tagList.setAll(FXCollections.observableArrayList(tl));
+    }
+
+    @Override
+    public void updatePreviousCommand(Command nextCommand) {
+        this.previousCommand = nextCommand;
+    }
+
+    @Override
+    public Command getPreviousCommand() {
+        return this.previousCommand;
+    }
+
+    @Override
+    public Predicate<Person> getCurrentPredicate() {
+        @SuppressWarnings("unchecked")
+        Predicate<Person> result = (Predicate<Person>) filteredPersons.getPredicate();
+        return result;
     }
 
     @Override

@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
  * Filters the address book by a given prefix and displays the filtered list to the user
  * Users can only filter by one field at a time
  */
-public class FilterCommand extends Command {
+public class FilterCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the displayed list with the given criteria\n"
             + "Parameters: [s/RSVPSTATUS] [t/TAG]...\n" + "At least one parameter must be provided.\n"
@@ -30,6 +30,7 @@ public class FilterCommand extends Command {
     private final Set<Tag> tagSet;
     private final Set<RsvpStatus> statusSet;
     private final Set<Predicate<Person>> predicateSet = new HashSet<>();
+    private Predicate<Person> previousPredicate;
 
     private Predicate<Person> predicate = new Predicate<Person>() {
         @Override
@@ -51,6 +52,7 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        previousPredicate = model.getCurrentPredicate();
 
         for (Tag tag: tagSet) {
             if (!model.hasTag(tag)) {
@@ -61,7 +63,6 @@ public class FilterCommand extends Command {
 
         for (RsvpStatus status: statusSet) {
             predicateSet.add(new RsvpedPredicate(status));
-
         }
 
         for (Predicate<Person> predicateToAdd: predicateSet) {
@@ -71,6 +72,14 @@ public class FilterCommand extends Command {
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+
+    @Override
+    public void undo(Model model) {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        if (previousPredicate != null) {
+            model.updateFilteredPersonList(previousPredicate);
+        }
     }
 
     @Override
