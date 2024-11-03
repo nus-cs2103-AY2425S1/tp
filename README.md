@@ -3,7 +3,7 @@
 # This is **ClientHub**<br>
   Our product provides independent financial advisors with a streamlined tool to manage client details 
   (eg. Track insurance policies). Optimized for simplicity and efficiency, 
-  this product makes the lives of financial advisors easier by offering easier access to 
+  this product makes the lives of financial advisors easier by offering easier access to
   relevant information for their clients. <br>
 
 

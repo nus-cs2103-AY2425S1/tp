@@ -48,8 +48,10 @@ public class ReminderDescriptionTest {
 
         // Valid descriptions
         assertTrue(ReminderDescription.isValidReminderDescription(VALID_DESCRIPTION)); // Normal valid case
-        assertTrue(ReminderDescription.isValidReminderDescription(VALID_MIN_LENGTH_DESCRIPTION)); // Minimum length valid case
-        assertTrue(ReminderDescription.isValidReminderDescription(VALID_MAX_LENGTH_DESCRIPTION)); // Maximum length valid case
+        assertTrue(ReminderDescription
+                .isValidReminderDescription(VALID_MIN_LENGTH_DESCRIPTION)); // Minimum length valid case
+        assertTrue(ReminderDescription
+                .isValidReminderDescription(VALID_MAX_LENGTH_DESCRIPTION)); // Maximum length valid case
     }
 
     @Test
