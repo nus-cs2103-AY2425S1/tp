@@ -24,7 +24,7 @@ public class Deadline implements Comparable<Deadline> {
         .withResolverStyle(ResolverStyle.STRICT);
 
 
-    public final LocalDateTime time;
+    private final LocalDateTime time;
 
     /**
      * Constructs a {@code Deadline}.
@@ -34,6 +34,10 @@ public class Deadline implements Comparable<Deadline> {
     public Deadline(LocalDateTime time) {
         requireNonNull(time);
         this.time = time;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
     }
 
     /**

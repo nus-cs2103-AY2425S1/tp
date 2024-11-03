@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
+import seedu.address.model.tag.Tag;
 import seedu.address.ui.UiPart;
 
 /**
@@ -62,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
             group.setText(student.getGroupName().get().toString());
         }
         student.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(Tag::getTagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
     }
 }
