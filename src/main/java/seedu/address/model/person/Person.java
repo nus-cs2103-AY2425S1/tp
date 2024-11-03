@@ -178,17 +178,18 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append("Name: ")
+                .append(getName())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Remark: ")
-                .append(getRemark())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Remark: ").append(getRemark());
+
         return builder.toString();
     }
 }
