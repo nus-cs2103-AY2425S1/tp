@@ -74,7 +74,7 @@ Format: `help`
 
 Shows a list of all persons in the address book.
 
-Format: `list -p`
+Format: `list -p` (must be an exact match)
 
 ### Adding a person: `add`
 
@@ -153,7 +153,7 @@ Format: `clear -e`
 
 Shows a list of all events in the event book.
 
-Format: `list -e`
+Format: `list -e` (must be an exact match)
 
 ### Adding an event: `event`
 
