@@ -7,18 +7,18 @@ import static java.util.Objects.requireNonNull;
  * Different from payment class as this represents the action of student making the payment
  * Guarantees: immutable;
  */
-public class FeesPaidByStudent {
+public class Fees {
 
-    public static final String MESSAGE_CONSTRAINTS = "Fees paid must be an positive integer amount";
+    public static final String MESSAGE_CONSTRAINTS = "Fees must be an positive integer amount";
     public static final String VALIDATION_REGEX = "^[0-9]\\d*|0$\n";
     public final String value;
 
     /**
-     * Constructs an {@code FeesPaidByStudent}.
+     * Constructs an {@code Fees}.
      *
      * @param fees String for payment status
      */
-    public FeesPaidByStudent(String fees) {
+    public Fees(String fees) {
         requireNonNull(fees);
         assert fees.matches("\\d+") : "The string should represent an positive integer";
         this.value = fees;
@@ -43,11 +43,11 @@ public class FeesPaidByStudent {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FeesPaidByStudent)) {
+        if (!(other instanceof Fees)) {
             return false;
         }
 
-        FeesPaidByStudent otherFees = (FeesPaidByStudent) other;
+        Fees otherFees = (Fees) other;
         return value.equals(otherFees.value);
     }
 

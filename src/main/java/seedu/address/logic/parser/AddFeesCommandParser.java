@@ -10,42 +10,42 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.MarkPaidCommand;
+import seedu.address.logic.commands.AddFeesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Fees;
 
 /**
- * Parses input arguments and creates a new MarkPaidCommand object
+ * Parses input arguments and creates a new AddFeesCommand object
  */
-public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
-    private static final Logger logger = LogsCenter.getLogger(MarkPaidCommandParser.class);
+public class AddFeesCommandParser implements Parser<AddFeesCommand> {
+    private static final Logger logger = LogsCenter.getLogger(AddFeesCommandParser.class);
 
 
     /**
-     * Parses the given {@code String} of arguments in the context of the MarkPaidCommand
-     * and returns a MarkPaidCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddFeesCommand
+     * and returns a AddFeesCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public MarkPaidCommand parse(String args) throws ParseException {
+    public AddFeesCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT);
         if (!arePrefixesPresent(argMultimap, PREFIX_PAYMENT)) {
-            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, MarkPaidCommandParser.class));
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, AddFeesCommandParser.class));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFeesCommand.MESSAGE_USAGE));
         }
 
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFeesCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PAYMENT);
         Fees fees = ParserUtil.parseFees(argMultimap.getValue(PREFIX_PAYMENT).get());
 
-        return new MarkPaidCommand(index, fees);
+        return new AddFeesCommand(index, fees);
     }
 
     /**

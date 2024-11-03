@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MarkPaidCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FeesPaidByStudent;
+import seedu.address.model.person.Fees;
 
 public class MarkPaidCommandParserTest {
     private final MarkPaidCommandParser parser = new MarkPaidCommandParser();
@@ -22,7 +22,7 @@ public class MarkPaidCommandParserTest {
         // Test input with valid index and payment
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_PAYMENT + VALID_FEES_PAID;
         MarkPaidCommand expectedCommand = new MarkPaidCommand(INDEX_FIRST_PERSON,
-                new FeesPaidByStudent(VALID_FEES_PAID));
+                new Fees(VALID_FEES_PAID));
         MarkPaidCommand result = parser.parse(userInput);
         assertEquals(expectedCommand, result);
     }

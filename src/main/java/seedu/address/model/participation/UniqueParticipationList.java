@@ -26,7 +26,6 @@ import seedu.address.model.participation.exceptions.ParticipationNotFoundExcepti
  *
  * Supports a minimal set of list operations.
  *
- * @see seedu.address.model.participation.Participation#isSameParticipation(Participation)
  */
 public class UniqueParticipationList implements Iterable<Participation> {
 
@@ -44,7 +43,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
     public boolean contains(Participation toCheck) {
         requireNonNull(toCheck);
         assert !internalList.contains(null) : "Internal list should not contain null elements";
-        return internalList.stream().anyMatch(toCheck::isSameParticipation);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -80,7 +79,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
         }
 
         // New participation that replaces the target cannot be a duplicate of another participation in the list
-        if (!target.isSameParticipation(editedParticipation) && contains(editedParticipation)) {
+        if (!target.equals(editedParticipation) && contains(editedParticipation)) {
             logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UniqueParticipationList.class));
             throw new DuplicateParticipationException();
         }
@@ -169,7 +168,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
         // double loop required here to check every element against each other
         for (int i = 0; i < participation.size() - 1; i++) {
             for (int j = i + 1; j < participation.size(); j++) {
-                if (participation.get(i).isSameParticipation(participation.get(j))) {
+                if (participation.get(i).equals(participation.get(j))) {
                     return false;
                 }
             }
