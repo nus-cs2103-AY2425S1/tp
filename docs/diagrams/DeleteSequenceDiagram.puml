@@ -49,13 +49,7 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : get ia at index - 1
-activate Model
-
-Model --> DeleteCommand : ia
-deactivate Model
-
-DeleteCommand -> Model : deleteItem(ia)
+DeleteCommand -> Model : delete internship application from list
 activate Model
 
 Model --> DeleteCommand
@@ -71,6 +65,9 @@ deactivate CommandResult
 DeleteCommand --> LogicManager : r
 deactivate DeleteCommand
 
-[<--LogicManager
+[<--LogicManager : r
 deactivate LogicManager
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommand -[hidden]-> LogicManager
+destroy DeleteCommand
 @enduml
