@@ -16,10 +16,10 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 class SortCommandTest {
-    private static final Person A = new PersonBuilder().withName("Alice").withTelegram("a").build();
-    private static final Person B = new PersonBuilder().withName("Bob").withTelegram("b").build();
-    private static final Person C = new PersonBuilder().withName("Charlie").withTelegram("c").build();
-    private static final Person D = new PersonBuilder().withName("David").withTelegram("d").build();
+    private static final Person A = new PersonBuilder().withName("Alice").withTelegram("abcde").build();
+    private static final Person B = new PersonBuilder().withName("Bob").withTelegram("bcdef").build();
+    private static final Person C = new PersonBuilder().withName("Charlie").withTelegram("cdefg").build();
+    private static final Person D = new PersonBuilder().withName("David").withTelegram("defgh").build();
 
     private Model model;
 

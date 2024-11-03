@@ -81,6 +81,9 @@ public class ParserUtil {
         if (!Telegram.isValidTelegram(trimmedTelegram)) {
             throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
+        if (!Telegram.isValidTelegramLength(trimmedTelegram)) {
+            throw new ParseException(Telegram.LENGTH_CONSTRAINTS);
+        }
         return new Telegram(trimmedTelegram);
     }
 

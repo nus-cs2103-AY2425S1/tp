@@ -71,7 +71,7 @@ public class RoleContainsKeywordsPredicateTest {
 
         // Keywords match name, phone and telegram, but does not match name
         predicate = new RoleContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alicePauline"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("92345678")
                 .withTelegram("alicePauline").withRoles("member").build()));
     }
 
