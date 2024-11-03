@@ -2,18 +2,14 @@ package tuteez.model.person.lesson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeSet;
-import java.util.logging.Logger;
 
-import tuteez.commons.core.LogsCenter;
-import tuteez.logic.commands.AddCommand;
 import tuteez.model.person.Person;
 import tuteez.model.person.UniquePersonList;
 
 /**
- * A container for all Lesson instances
+ * A container for all existing Lesson instances
  * Provides:
  *  1. Methods to add and delete
  *  2. Check for clashing lessons
@@ -21,7 +17,6 @@ import tuteez.model.person.UniquePersonList;
 public class LessonManager {
     private static final int NUMBER_OF_DAYS_IN_WEEK = 7;
     private final HashMap<Day, TreeSet<Lesson>> dayLessonsMap = new HashMap<>(NUMBER_OF_DAYS_IN_WEEK);
-    private final Logger logger = LogsCenter.getLogger(AddCommand.class);
 
     /**
      * Constructs a new {@code lessonManager} and initializes an empty schedule
@@ -75,19 +70,19 @@ public class LessonManager {
      * <p>Note: Consecutive lessons (e.g., timings 1900-2000 & 2000-2100) do not clash
      * as they do not overlap in time.</p>
      *
-     * @param studentList The list of students whose lessons are to be checked for potential clashes.
+     * @param studentList The {@code UniquePersonList} of students whose lessons are to be checked for potential
+     *                    clashes.
      * @param lesson The lesson to check for time conflicts.
      * @return A map where each entry consists of a {@code Person} whose lessons clash with the specified lesson,
      *         and an {@code ArrayList} of the clashing lessons for that student.
      */
-    public Map<Person, ArrayList<Lesson>> getClashingLessons(UniquePersonList studentList, Lesson lesson) {
+    public Map<Person, ArrayList<Lesson>> findClashingLessonsAcrossAllStudents(UniquePersonList studentList,
+             Lesson lesson) {
         Map<Person, ArrayList<Lesson>> clashingLessonMap = new HashMap<>();
-        Iterator<Person> students = studentList.iterator();
-        while (students.hasNext()) {
-            Person studentToCheck = students.next();
-            ArrayList<Lesson> clashedLessons = studentToCheck.getLessonsThatClash(lesson);
-            if (!clashedLessons.isEmpty()) {
-                clashingLessonMap.put(studentToCheck, clashedLessons);
+        for (Person studentToCheck : studentList) {
+            ArrayList<Lesson> clashingLessonList = studentToCheck.findStudentClashingLessons(lesson);
+            if (!clashingLessonList.isEmpty()) {
+                clashingLessonMap.put(studentToCheck, clashingLessonList);
             }
         }
         return clashingLessonMap;

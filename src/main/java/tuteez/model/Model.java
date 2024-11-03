@@ -113,6 +113,16 @@ public interface Model {
     void removeLastViewedPerson();
 
     /**
+     * Returns true if the lastViewedPerson is present.
+     */
+    boolean isLastViewPersonAvailable();
+
+    /**
+     * Returns true if the provided person matches the person currently shown on display.
+     */
+    boolean isSamePersonAsPersonOnDisplay(Person person);
+
+    /**
      * Returns the {@code person} in the address book with the given name.
      */
     Person findPersonByName(Name name);

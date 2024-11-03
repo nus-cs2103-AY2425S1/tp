@@ -3,7 +3,6 @@ package tuteez.model.person.lesson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tuteez.model.person.lesson.Lesson.isClashingWithOtherLesson;
 import static tuteez.model.person.lesson.Lesson.isLessonEndAtValidTime;
 import static tuteez.model.person.lesson.Lesson.isLessonStartAtValidTime;
 import static tuteez.model.person.lesson.Lesson.isValidLesson;
@@ -28,6 +27,15 @@ public class LessonTest {
     public void constructor_startTimeAfterEndTime_throwsIllegalArgumentException() {
         String invalidTimeStr = "friday 1800-1700";
         assertThrows(IllegalArgumentException.class, () -> new Lesson(invalidTimeStr));
+
+        String endTimeMidnight = "friday 2300-0000";
+        assertThrows(IllegalArgumentException.class, () -> new Lesson(endTimeMidnight)); // boundary value
+    }
+
+    @Test
+    public void constructor_emptyString_throwsIllegalArgumentException() {
+        String empty = "";
+        assertThrows(IllegalArgumentException.class, () -> new Lesson(empty));
     }
 
     @Test
@@ -84,10 +92,16 @@ public class LessonTest {
         Lesson l3 = new Lesson("Thursday 1300-1400");
         Lesson l4 = new Lesson("Thursday 1600-1700");
 
-        assertFalse(isClashingWithOtherLesson(l1, l2));
-        assertFalse(isClashingWithOtherLesson(l2, l1));
-        assertFalse(isClashingWithOtherLesson(l1, l3));
-        assertFalse(isClashingWithOtherLesson(l3, l4));
+        // EP: Start time and end time of both lessons coincide
+        assertFalse(Lesson.isClashingWithOtherLesson(l1, l2));
+        assertFalse(Lesson.isClashingWithOtherLesson(l2, l1));
+
+        // EP: Both lessons not on same day
+        assertFalse(Lesson.isClashingWithOtherLesson(l1, l3));
+        assertFalse(Lesson.isClashingWithOtherLesson(l4, l2));
+
+        // EP: Lessons fall on same day, no overlap between lesson times
+        assertFalse(Lesson.isClashingWithOtherLesson(l3, l4));
     }
 
     @Test
@@ -101,10 +115,15 @@ public class LessonTest {
         Lesson l5 = new Lesson("Wednesday 1100-1200");
         Lesson l6 = new Lesson("Wednesday 1100-1200");
 
-        assertTrue(isClashingWithOtherLesson(l1, l2));
-        assertTrue(isClashingWithOtherLesson(l2, l1));
-        assertTrue(isClashingWithOtherLesson(l3, l4));
-        assertTrue(isClashingWithOtherLesson(l5, l6));
+        // EP: Partial overlap between lesson timings
+        assertTrue(Lesson.isClashingWithOtherLesson(l1, l2));
+        assertTrue(Lesson.isClashingWithOtherLesson(l2, l1));
+
+        // EP: Complete overlap between lessons
+        assertTrue(Lesson.isClashingWithOtherLesson(l3, l4));
+
+        // EP: Lessons have identical timings
+        assertTrue(Lesson.isClashingWithOtherLesson(l5, l6));
     }
 
     @Test
@@ -171,8 +190,16 @@ public class LessonTest {
         Lesson l1 = new Lesson("Monday 1300-1400");
         Lesson l2 = new Lesson("Tuesday 1300-1400");
         Lesson l3 = new Lesson("Tuesday 1400-1500");
+        Lesson l4 = new Lesson("Tuesday 1600-1800");
+
+        // EP: Lessons fall on different days
         assertEquals(-1, lessonComparator.compare(l1, l2));
+
+        // EP: Same day, start and end time coincide
         assertEquals(-1, lessonComparator.compare(l2, l3));
+
+        // EP: Same day, timings do not overlap
+        assertEquals(-1, lessonComparator.compare(l3, l4));
     }
 
     @Test
