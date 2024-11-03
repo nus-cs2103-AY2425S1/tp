@@ -65,7 +65,7 @@ public class AddContactCommandTest {
         Person newPerson = new StudentBuilder().withName("Alice").withPhone("12345678").build(); // Same phone number
         CommandResult commandResult = new AddContactCommand(newPerson).execute(modelStub);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PHONE, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_PHONE, () ->
                 new AddContactCommand(personWithDuplicatePhone).execute(modelStub));
     }
 
@@ -78,7 +78,7 @@ public class AddContactCommandTest {
                 .withEmail("test@example.com").build(); // Same email address, but different phones and names.
         CommandResult commandResult = new AddContactCommand(newPerson).execute(modelStub);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_EMAIL, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_EMAIL, () ->
                 new AddContactCommand(personWithDuplicateEmail).execute(modelStub));
     }
 
