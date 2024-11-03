@@ -4,8 +4,11 @@ package seedu.address.model.assignment;
  * Represents an Assignment in the address book.
  */
 public class Assignment {
-    public final String assignmentName;
-    public final float score;
+    private String assignmentName;
+    private float score;
+
+    public Assignment() {
+    }
 
     /**
      * Constructs a {@code Assignment}.
@@ -21,7 +24,7 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "Assignment:" + assignmentName + " " + score;
+        return "Assignment: " + assignmentName + " " + score;
     }
 
     public float getScore() {
@@ -30,7 +33,19 @@ public class Assignment {
 
     public String getAssignmentName() {
         return assignmentName;
+
     }
 
+    public String toCsvAdapted() {
+        return assignmentName + " | " + score;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Assignment other) {
+            return this.assignmentName.equals(other.assignmentName);
+        }
+        return false;
+    }
 
 }

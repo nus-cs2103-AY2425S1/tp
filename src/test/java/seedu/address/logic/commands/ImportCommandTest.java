@@ -23,11 +23,11 @@ public class ImportCommandTest {
     @Test
     public void validImportCommandExecution_success() throws CommandException {
         String projectDir = System.getProperty("user.dir");
-        String filePath = projectDir + "/src/test/data/testImport.csv";
+        String filePath = projectDir + "/src/test/data/test.csv";
         filePath = filePath.replace("/", File.separator);
         ImportCommand command = new ImportCommand(filePath);
         CommandResult commandResult = command.execute(model);
-        assertEquals("Successfully imported 1 persons.", commandResult.getFeedbackToUser());
+        assertEquals("Successfully imported 3 persons.", commandResult.getFeedbackToUser());
     }
 
 

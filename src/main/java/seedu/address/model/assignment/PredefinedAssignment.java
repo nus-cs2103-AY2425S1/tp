@@ -16,4 +16,9 @@ public record PredefinedAssignment(String name, Float maxScore) {
     public float getMaxScore() {
         return maxScore;
     }
+
+    @Override
+    public String toString() {
+        return "Assignment: " + name + ", " + "MaxScore: " + maxScore;
+    }
 }

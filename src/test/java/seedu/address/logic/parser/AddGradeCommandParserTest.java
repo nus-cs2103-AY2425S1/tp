@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ASSIGNMENT_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -67,6 +68,11 @@ public class AddGradeCommandParserTest {
         String userInput = NAME_DESC_AMY + ASSIGNMENT_DESC_ONE + " " + PREFIX_SCORE + "s";
         String expectedMessage = "Score must be a valid number.";
         assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parse_emptyArg() throws Exception {
+        assertEquals(parser.parse(""), AddGradeCommand.showAssignmentDefault());
     }
 
 }
