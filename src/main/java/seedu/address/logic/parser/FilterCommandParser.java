@@ -1,13 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Job;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameOrJobContainsKeywordsPredicate;
 
 /**
@@ -21,27 +27,45 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_JOB);
+        ArrayList<Name> nameList = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_NAME));
+        ArrayList<Job> jobList = ParserUtil.parseJobs(argMultimap.getAllValues(PREFIX_JOB));
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) && !arePrefixesPresent(argMultimap, PREFIX_JOB)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = {};
-        String[] jobKeywords = {};
+        String[] nameKeywords = new String[nameList.size()];
+        String[] jobKeywords = new String[jobList.size()];
 
-        if (trimmedArgs.startsWith("n/")) {
-            nameKeywords = trimmedArgs.substring(2).split("\\s+");
-        } else if (trimmedArgs.startsWith("j/")) {
-            jobKeywords = trimmedArgs.substring(2).split("\\s+");
-        } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        for (int i = 0; i < nameList.size(); i++) {
+            Name item = nameList.get(i);
+            if (item != null) {
+                nameKeywords[i] = item.toString();
+            }
+        }
+
+        for (int i = 0; i < jobList.size(); i++) {
+            Job item = jobList.get(i);
+            if (item != null) {
+                jobKeywords[i] = item.toString();
+            }
         }
 
         List<String> nameKeywordList = Arrays.stream(nameKeywords).collect(Collectors.toList());
         List<String> jobKeywordList = Arrays.stream(jobKeywords).collect(Collectors.toList());
 
         return new FilterCommand(new NameOrJobContainsKeywordsPredicate(nameKeywordList, jobKeywordList));
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values
+     * in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

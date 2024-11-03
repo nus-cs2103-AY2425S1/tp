@@ -247,22 +247,26 @@ Examples:
 
 If you are looking for contacts with a specific name or job, you can use `filter` to filter out a list of contacts whose name or job matches your input.
 
-Format: `filter n/KEYWORD` or `filter j/KEYWORD`
+Format: `filter n/KEYWORD... j/KEYWORD...`
 
-* `filter` filters by `name` or `job` field.
-* `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`
-* Only full words will be matched e.g. `jak` will not match `Jake`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Photographer` will return `Photographer`, `Wedding Photographer`
-* Persons matching all keywords will be returned (i.e. `AND` search).
-  e.g. `Photographer Wedding` will return `Wedding Photographer`
+* At least one of the `NAME` or `JOB` fields must be present.
+* `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
+* Only full words will be matched e.g. `jak` will not match `Jake`.
+* `filter` returns the largest range of matches based on your input
+
+<box type="tip" seamless>
+
+**Tip #1:** You can filter by multiple name and/or job fields at once!
+
+</box>
 
 ![filter message](images/filterNameMsg.png) ![filter message](images/filterJobMsg.png)
 
 Examples:
-* `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers
-* `filter n/caterer` returns `Adam` whose job is a caterer
-* `filter n/John` returns `John` whose name is John
+* `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers.
+* `filter n/John` returns `John` whose name is John.
+* `filter n/jonus n/harry j/photographer` returns Jonus, Harry and all photographers that are in your contacts.
+* `filter j/host j/caterer` returns all hosts and caterers that are in your contacts.
 
 ### View Wedding: `view-wed`
 
