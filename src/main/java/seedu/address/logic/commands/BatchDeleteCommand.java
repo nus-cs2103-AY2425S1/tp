@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +30,7 @@ public class BatchDeleteCommand extends Command {
             + PREFIX_TAG + "TAG...";
 
     public static final String MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS = "Deleted: %1$s\n";
+    public static final String MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG = "No person with Tag= %s is found";
 
     private final Set<Tag> tags;
 
@@ -37,7 +39,7 @@ public class BatchDeleteCommand extends Command {
     /**
      * Initializes command to batch delete all person with tags from the address book.
      *
-     * @param tags Tags belonging to a person.
+     * @param tags      Tags belonging to a person.
      * @param predicate Predicate to find all people with specified tags.
      */
     public BatchDeleteCommand(Set<Tag> tags, PersonContainsTagsPredicate predicate) {
@@ -52,19 +54,20 @@ public class BatchDeleteCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(predicate);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = new ArrayList<>(model.getFilteredPersonList());
+
+        if (lastShownList.isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG, tags));
+        }
 
         StringBuilder feedbackToUser = new StringBuilder();
 
-        Person personToDelete;
-        int size = lastShownList.size();
-        for (int i = 0; i < size; i++) {
-            personToDelete = lastShownList.get(0);
+        for (Person person : lastShownList) {
             feedbackToUser.append(String
                     .format(MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
-                            Messages.format(personToDelete))
+                            Messages.format(person))
             );
-            model.deletePerson(personToDelete);
+            model.deletePerson(person);
         }
 
         return new CommandResult(feedbackToUser.toString());
