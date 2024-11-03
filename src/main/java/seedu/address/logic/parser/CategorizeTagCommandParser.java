@@ -23,7 +23,6 @@ public class CategorizeTagCommandParser implements Parser<CategorizeTagCommand> 
      */
     public CategorizeTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        System.out.println(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
         Optional<String> parsedArgs = argMultimap.getValue(PREFIX_TAG);
         if (parsedArgs.isEmpty()) {
