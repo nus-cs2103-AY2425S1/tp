@@ -133,6 +133,7 @@ MedDict is a **desktop application designed for physiotherapists** who manage a 
           ```
 
 After a few seconds, a GUI similar to the one below should appear:
+![StartUpPage](images/StartUpPage.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
