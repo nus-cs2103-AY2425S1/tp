@@ -18,6 +18,8 @@ public class CreateTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "create-task";
 
+    public static final String COMMAND_KEYWORD = "ctask";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a task in the address book. \n"
             + "Parameters: "
             + PREFIX_TASK + "TASK_TYPE TASK_DESCRIPTION [ADDITIONAL_FIELDS]\n"

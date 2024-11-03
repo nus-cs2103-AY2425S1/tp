@@ -21,6 +21,8 @@ public class UnassignVendorCommand extends Command {
 
     public static final String COMMAND_WORD = "unassign-vendor";
 
+    public static final String COMMAND_KEYWORD = "uv";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unassigns the vendor identified by the index number used in the displayed person list.\n"
             + " The person becomes a normal contact in the addressbook and cannot have tasks assigned to it.\n"

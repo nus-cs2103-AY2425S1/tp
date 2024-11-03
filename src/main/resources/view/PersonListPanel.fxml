@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+  <stylesheets>
+    <URL value="@DarkTheme.css" />
+  </stylesheets>
+  <TextArea fx:id="personLabel" editable="false" maxHeight="24.0" prefHeight="24.0" prefWidth="512.0" styleClass="panel-title" text="People" wrapText="true" VBox.vgrow="NEVER">
+      <font>
+         <Font name="System Bold" size="20.0" />
+      </font></TextArea>
   <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
 </VBox>

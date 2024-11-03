@@ -19,6 +19,8 @@ import seedu.address.model.tag.Tag;
 public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "delete-tag";
 
+    public static final String COMMAND_KEYWORD = "dtag";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tag identified by the tag name.\n"
             + "Parameters: " + PREFIX_TAG + "TAG (must exist in the AddressBook)\n"

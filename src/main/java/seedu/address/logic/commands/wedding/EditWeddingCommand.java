@@ -31,6 +31,8 @@ public class EditWeddingCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-wedding";
 
+    public static final String COMMAND_KEYWORD = "ew";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the wedding identified "
             + "by the index number used in the displayed wedding list. "
             + "Existing values will be overwritten by the input values.\n"
