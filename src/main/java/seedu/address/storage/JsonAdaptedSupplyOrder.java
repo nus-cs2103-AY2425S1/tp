@@ -33,7 +33,7 @@ class JsonAdaptedSupplyOrder {
                 .map(item -> (Ingredient) item)
                 .map(JsonAdaptedIngredient::new)
                 .collect(Collectors.toList());
-        status = source.getStatus().toString();
+        status = source.getStatus().toString().toUpperCase();
     }
 
     public SupplyOrder toModelType() throws IllegalValueException {

@@ -32,7 +32,7 @@ class JsonAdaptedCustomerOrder {
                 .map(item -> (Pastry) item)
                 .map(JsonAdaptedPastry::new)
                 .collect(Collectors.toList());
-        status = source.getStatus().toString();
+        status = source.getStatus().toString().toUpperCase();
     }
 
     public CustomerOrder toModelType() throws IllegalValueException {
