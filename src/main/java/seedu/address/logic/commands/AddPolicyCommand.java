@@ -23,8 +23,7 @@ import seedu.address.model.policy.PolicySet;
  */
 public class AddPolicyCommand extends Command {
     public static final String COMMAND_WORD = "add-policy";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy added:\n%2$s";
-    public static final String MESSAGE_DUPLICATES = "Duplicate policies found.";
+    public static final String MESSAGE_DUPLICATES = "Client already has a %1$s policy.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add the specified policy to the client identified "
             + "by the index number used in the last client listing. \n"
@@ -38,7 +37,7 @@ public class AddPolicyCommand extends Command {
             + PREFIX_POLICY_PREMIUM_AMOUNT + "400.00 "
             + PREFIX_POLICY_COVERAGE_AMOUNT + "4000.00 "
             + PREFIX_POLICY_EXPIRY_DATE + "12/23/2024";
-    public static final String MESSAGE_SUCCESS = "Added Policy:\n\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Added the following policy to %1$s:\n\n%2$s";
 
     private final Index index;
     private final Policy policy;
@@ -69,7 +68,7 @@ public class AddPolicyCommand extends Command {
         clientPolicies.addAll(clientToEdit.getPolicies());
 
         if (!clientPolicies.add(policy)) {
-            throw new CommandException(MESSAGE_DUPLICATES);
+            throw new CommandException(String.format(MESSAGE_DUPLICATES, policy.getType()));
         }
 
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
@@ -78,7 +77,7 @@ public class AddPolicyCommand extends Command {
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, policy.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedClient.getName(), policy));
     }
 
     @Override

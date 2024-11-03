@@ -27,6 +27,5 @@ Policy *--> CoverageAmount
 Policy *--> ExpiryDate
 Policy *--> ClaimList
 
-ClaimList --> "*" Claim
-
+ClaimList o-- "*" Claim
 @enduml

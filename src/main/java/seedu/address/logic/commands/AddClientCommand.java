@@ -16,9 +16,9 @@ import seedu.address.model.client.Client;
 /**
  * Adds a client to Prudy.
  */
-public class AddCommand extends Command {
+public class AddClientCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "add-client";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to Prudy. "
             + "Parameters: "
@@ -41,9 +41,9 @@ public class AddCommand extends Command {
     private final Client toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Client}
+     * Creates an AddClientCommand to add the specified {@code Client}
      */
-    public AddCommand(Client client) {
+    public AddClientCommand(Client client) {
         requireNonNull(client);
         toAdd = client;
     }
@@ -67,12 +67,12 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddClientCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddClientCommand otherAddClientCommand = (AddClientCommand) other;
+        return toAdd.equals(otherAddClientCommand.toAdd);
     }
 
     @Override
