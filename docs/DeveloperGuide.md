@@ -754,17 +754,17 @@ testers are expected to do more *exploratory* testing.
        Expected: The first client's email address will be edited from "johndoe@example.com" to "peterpan@example.com". A
        command success message is displayed in the result display box.
 
-    5. Test case: `cedit 1 n/Peter Wang p/ e/`
+    5. Test case: `cedit 1 n/Peter Wang p/ e/`<br>
        Expected: No client's information will be edited as a client must at least have a phone number or an email
        address. Error details will be displayed in the result display box.
 
-    6. Test case: `cedit 0`
+    6. Test case: `cedit 0`<br>
        Expected: No client's information will be edited. Error details will be displayed in the result display box.
 
     7. Test case: `cedit x`, where x is larger than the total number of clients.<br>
        Expected: No client's information will be edited. Error details will be displayed in the result display box.
 
-    8. Test case: `cedit`
+    8. Test case: `cedit`<br>
        Expected: No client's information will be edited. An invalid command will be shown in the result display box.
 
 #### Editing a client's [_rental information_](#glossary-rental-information)
@@ -830,7 +830,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Deleting a client's [_rental information_](#glossary-rental-information)
 
-1. TODO!! @Nathan
+1. <!-- TODO!! @Nathan -->
 
 #### Command History Feature
 
@@ -885,7 +885,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: There are more than 1 client and 1 rental information in the application.
 
-    2. Test case: `clear`
+    2. Test case: `clear`<br>
        Expected: Both client list panel and rental information list panel will be empty with all data being cleared. A
        command success message will be displayed in the result display box.
 

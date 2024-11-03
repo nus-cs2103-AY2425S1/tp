@@ -48,9 +48,9 @@ public class PersonListCard extends UiPart<Region> {
         super(FXML);
         this.client = client;
         id.setText(displayedIndex + ". ");
-        name.setText(client.getName().fullName);
-        phone.setText(client.getPhone().value);
-        email.setText(client.getEmail().value);
+        name.setText(client.getName().toString());
+        phone.setText(client.getPhone().toString());
+        email.setText(client.getEmail().toString());
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
