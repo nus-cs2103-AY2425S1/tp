@@ -12,7 +12,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.reminder.Reminder;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -40,7 +39,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setClientTypes(person.getClientTypes());
         descriptor.setDescription(person.getDescription());
-        descriptor.setReminders(person.getReminders());
     }
 
     /**
@@ -97,11 +95,13 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code reminders} into a {@code Set<Reminder>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withReminders(Reminder... reminders) {
-        Set<Reminder> reminderSet = Stream.of(reminders).collect(Collectors.toSet());
-        descriptor.setReminders(reminderSet);
-        return this;
-    }
+
+    // Edit Command doesn't require reminders
+    //    public EditPersonDescriptorBuilder withReminders(Reminder... reminders) {
+    //        Set<Reminder> reminderSet = Stream.of(reminders).collect(Collectors.toSet());
+    //        descriptor.setReminders(reminderSet);
+    //        return this;
+    //    }
 
     public EditPersonDescriptor build() {
         return descriptor;

@@ -108,10 +108,12 @@ public class EditCommand extends Command {
                 editPersonDescriptor.getClientTypes().orElse(personToEdit.getClientTypes());
         Description updatedDescription = editPersonDescriptor.getDescription()
                 .orElse(personToEdit.getDescription());
-        Set<Reminder> updatedReminders = editPersonDescriptor.getReminders().orElse(personToEdit.getReminders());
+
+        // Edit Command doesn't allow editing of reminders
+        // Set<Reminder> updatedReminders = editPersonDescriptor.getReminders().orElse(personToEdit.getReminders());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedClientTypes, updatedDescription, updatedReminders);
+                updatedClientTypes, updatedDescription, personToEdit.getReminders());
     }
 
     @Override
@@ -164,7 +166,6 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setClientTypes(toCopy.clientTypes);
             setDescription(toCopy.description);
-            setReminders(toCopy.reminders);
         }
 
         /**
@@ -232,9 +233,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        public void setReminders(Set<Reminder> reminders) {
-            this.reminders = (reminders != null) ? new HashSet<>(reminders) : null;
-        }
+        // Edit Command doesn't allow editing of reminders
+        //        public void setReminders(Set<Reminder> reminders) {
+        //            this.reminders = (reminders != null) ? new HashSet<>(reminders) : null;
+        //        }
 
         public Optional<Set<Reminder>> getReminders() {
             return (reminders != null) ? Optional.of(Collections.unmodifiableSet(reminders)) : Optional.empty();
