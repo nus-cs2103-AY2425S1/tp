@@ -96,8 +96,6 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 6. Refer to the [Features](#features) below for details of each command.
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
 
 <h2 style="color: #AF7AC5;" id="glossary"> <i class="fas fa-list-alt icon"></i> Glossary</h2>
