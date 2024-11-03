@@ -24,8 +24,8 @@ public class FindVolunteerCommand extends Command {
             + "Parameters: PREFIX (must be a non-empty string)\n"
             + "Example: " + COMMAND_WORD + " volunteerSearchString";
 
-    public static final String MESSAGE_VOLUNTEER_FOUND = "Found %d volunteer(s) starting with '%s':";
-    public static final String MESSAGE_VOLUNTEER_NOT_FOUND = "No volunteers found starting with '%s'.";
+    public static final String MESSAGE_VOLUNTEER_FOUND = "Found %d volunteer(s) containing '%s':";
+    public static final String MESSAGE_VOLUNTEER_NOT_FOUND = "No volunteers found containing '%s'.";
 
     private final String searchString;
 
