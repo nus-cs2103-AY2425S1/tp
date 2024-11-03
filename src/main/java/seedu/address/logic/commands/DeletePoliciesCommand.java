@@ -19,7 +19,7 @@ import seedu.address.model.policy.PolicyType;
 /**
  * Deletes Policy from an existing client in Prudy.
  */
-public class DeletePolicyCommand extends Command {
+public class DeletePoliciesCommand extends Command {
     public static final String COMMAND_WORD = "delete-policy";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy deleted:\n%2$s";
     public static final String MESSAGE_DUPLICATES = "Duplicate policies found.";
@@ -36,12 +36,12 @@ public class DeletePolicyCommand extends Command {
     private final Set<PolicyType> policyTypes;
 
     /**
-     * Creates a DeletePolicyCommand to delete the specified {@code PolicyMap} from the client.
+     * Creates a DeletePoliciesCommand to delete the specified {@code PolicyMap} from the client.
      *
      * @param index of the client in the filtered client list to delete policy.
      * @param policyTypes the set of policies to be deleted.
      */
-    public DeletePolicyCommand(Index index, Set<PolicyType> policyTypes) {
+    public DeletePoliciesCommand(Index index, Set<PolicyType> policyTypes) {
         requireAllNonNull(index, policyTypes);
 
         this.index = index;
@@ -87,11 +87,11 @@ public class DeletePolicyCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeletePolicyCommand)) {
+        if (!(other instanceof DeletePoliciesCommand)) {
             return false;
         }
 
-        DeletePolicyCommand dpc = (DeletePolicyCommand) other;
+        DeletePoliciesCommand dpc = (DeletePoliciesCommand) other;
         return index.equals(dpc.index)
                 && policyTypes.equals(dpc.policyTypes);
     }
