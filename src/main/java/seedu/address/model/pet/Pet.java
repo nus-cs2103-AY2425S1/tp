@@ -5,11 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.link.Linkable;
+import seedu.address.model.owner.LinkedPetList;
+import seedu.address.model.owner.Owner;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,6 +30,8 @@ public class Pet implements Linkable {
     private final Age age;
     private final Sex sex;
 
+    private final LinkedOwnerList linkedOwner;
+
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
@@ -42,6 +47,7 @@ public class Pet implements Linkable {
         this.age = age;
         this.sex = sex;
         this.tags.addAll(tags);
+        this.linkedOwner = new LinkedOwnerList();
     }
 
     /**
@@ -56,6 +62,7 @@ public class Pet implements Linkable {
         this.age = age;
         this.sex = sex;
         this.tags.addAll(tags);
+        this.linkedOwner = new LinkedOwnerList();
     }
 
     public Name getName() {
@@ -84,6 +91,18 @@ public class Pet implements Linkable {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public LinkedOwnerList getLinkedOwner() {
+        return linkedOwner;
+    }
+
+    public void addLinkedOwner(Owner owner) {
+        linkedOwner.add(owner);
+    }
+
+    public void removeLinkedPet(Owner owner) {
+        linkedOwner.remove(owner);
     }
 
     /**

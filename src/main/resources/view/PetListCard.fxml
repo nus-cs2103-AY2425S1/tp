@@ -30,6 +30,8 @@
       <Label fx:id="breed" styleClass="cell_small_label" text="\$breed" />
       <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
       <Label fx:id="sex" styleClass="cell_small_label" text="\$sex" />
+      <!-- New label for linked pets with vertical bars as separators -->
+      <Label fx:id="linkedOwner" styleClass="cell_small_label" text="Owner: None" wrapText="true" />
     </VBox>
   </GridPane>
 </HBox>

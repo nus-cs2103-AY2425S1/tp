@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.link.exceptions.DuplicateLinkException;
 import seedu.address.model.link.exceptions.LinkNotFoundException;
+import seedu.address.model.owner.Owner;
+import seedu.address.model.pet.Pet;
 
 /**
  * A list of list that enforces uniqueness between its elements and does not
@@ -48,6 +50,12 @@ public class UniqueLinkList implements Iterable<Link> {
             throw new DuplicateLinkException();
         }
         internalList.add(toAdd);
+
+        Owner owner = (Owner) toAdd.getFrom();
+        Pet pet = (Pet) toAdd.getTo();
+        owner.addLinkedPet(pet);
+        pet.addLinkedOwner(owner);
+
     }
 
     /**
@@ -59,6 +67,10 @@ public class UniqueLinkList implements Iterable<Link> {
         if (!internalList.remove(toRemove)) {
             throw new LinkNotFoundException();
         }
+        Owner owner = (Owner) toRemove.getFrom();
+        Pet pet = (Pet) toRemove.getTo();
+        owner.removeLinkedPet(pet);
+        pet.removeLinkedPet(owner);
     }
 
     public void setLinks(UniqueLinkList replacement) {

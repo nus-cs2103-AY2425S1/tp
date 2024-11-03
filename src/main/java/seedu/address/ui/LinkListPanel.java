@@ -28,16 +28,6 @@ public class LinkListPanel extends UiPart<Region> {
      * Creates an {@code LinkListPanel} with the given {@code ObservableList}.
      */
     public LinkListPanel(ObservableList<Link> linkList) {
-        /*
-        super(FXML);
-        // Create a reversed copy of the original list to display the most recent links first
-        ObservableList<Link> reversedList = FXCollections.observableArrayList(linkList);
-        FXCollections.reverse(reversedList); // Reverse the copy
-
-        linkListView.setItems(reversedList); // Set the reversed list into the ListView
-        linkListView.setCellFactory(listView -> new LinkListViewCell());
-
-         */
 
         super(FXML);
         this.originalLinkList = linkList;

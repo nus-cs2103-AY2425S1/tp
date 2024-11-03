@@ -106,6 +106,8 @@ public class PawPatrolTest {
     public void hasLink_linkInPawPatrol_returnsTrue() {
         Owner owner = TypicalOwners.ALICE;
         Pet pet = BELLA;
+        System.out.println(owner.getLinkedPets());
+        //owner.getLinkedPets().remove(pet);
         Link link = new Link(owner, pet);
 
         pawPatrol.addLink(link);

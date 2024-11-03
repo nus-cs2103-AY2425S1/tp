@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.link.Linkable;
+import seedu.address.model.pet.Pet;
 
 /**
  * Represents an Owner in PawPatrol.
@@ -22,6 +23,7 @@ public class Owner implements Linkable {
     private final Phone phone;
     private final Email email;
     private final Address address;
+    private final LinkedPetList linkedPets;
 
     /**
      * Every field must be present and not null.
@@ -33,6 +35,7 @@ public class Owner implements Linkable {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.linkedPets = new LinkedPetList();
     }
 
     public IdentificationCardNumber getIdentificationNumber() {
@@ -53,6 +56,18 @@ public class Owner implements Linkable {
 
     public Address getAddress() {
         return address;
+    }
+
+    public LinkedPetList getLinkedPets() {
+        return linkedPets;
+    }
+
+    public void addLinkedPet(Pet pet) {
+        linkedPets.add(pet);
+    }
+
+    public void removeLinkedPet(Pet pet) {
+        linkedPets.remove(pet);
     }
 
     /**
