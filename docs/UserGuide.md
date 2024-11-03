@@ -41,7 +41,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
    * `help` : Opens the help menu detailing each command with an example format.
 
-   * `add n\John Doe p\98765432 e\johnd@example.com a\John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n\John Doe p\98765432 e\johnd@example.com a\3, 6th Ave fi\millionaire s\@jdoe` : Adds a contact named `John Doe` to the Address Book.
 
    * `list` : Lists all contacts.
 
@@ -92,16 +92,17 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [t\TAG]…​`
+Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS fi\FINANCIALINFO s\SOCIALMEDIAHANDLE [t\TAG] [t\TAG:value]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags (including 0). 
+A tag can be added with or without a value. For example, `t\client` and `t\insurance:No` are both valid tags.
 </box>
 
-Examples:
-* `add n\John Doe p\98765432 e\johnd@example.com a\John street, block 123, #01-01`
-* `add n\Betsy Crowe t\friend e\betsycrowe@example.com a\Newgate Prison p\1234567 t\criminal`
+Command examples:
+* `add n\John Doe p\98765432 e\johnd@example.com a\123 John street fi\millionaire s\@jon3 t\client t\priority:high`
+* `add n\Betsy Crowe t\friend e\betsycrowe@example.com a\Newgate Prison p\1234567 t\criminal fi\noIncome s\@bestyC`
 
 ### Listing all persons : `list`
 

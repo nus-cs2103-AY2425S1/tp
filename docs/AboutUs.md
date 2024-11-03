@@ -51,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ryan Han
 
-<img src="images/github_ryanwarwick.png" width="200px">
+<img src="images/ryanwarwick.png" width="200px">
 
 [[github](http://github.com/RyanWarwick)]
 [[portfolio](team/johndoe.md)]
