@@ -44,4 +44,13 @@ public class AddClaimCommandParserTest {
         // only index
         assertParseFailure(parser, String.valueOf(INDEX_FIRST_CLIENT.getOneBased()), expectedMessage);
     }
+    @Test
+    public void parse_invalidClaimDescription_failure() {
+        String expectedMessage = Claim.MESSAGE_CONSTRAINTS;
+
+        // Invalid claim description
+        String userInput = INDEX_FIRST_CLIENT.getOneBased() + CommandTestUtil.POLICY_TYPE_DESC_HEALTH
+                + CommandTestUtil.CLAIM_STATUS_PENDING + CommandTestUtil.INVALID_CLAIM_DESC;
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
 }

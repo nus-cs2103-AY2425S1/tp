@@ -43,6 +43,7 @@ public class CommandTestUtil {
     public static final String VALID_POLICY_TYPE_LIFE = "life";
     public static final String VALID_CLAIM_STATUS_PENDING = "pending";
     public static final String VALID_CLAIM_DESC = "stomach surgery";
+    public static final String INVALID_CLAIM_DESCRIPTION = "stomach surgery!";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -66,7 +67,7 @@ public class CommandTestUtil {
     public static final String INVALID_POLICY_TYPE_DESC = " " + PREFIX_POLICY_TYPE + "live"; // mispelled of "life"
     public static final String CLAIM_STATUS_PENDING = " " + PREFIX_CLAIM_STATUS + VALID_CLAIM_STATUS_PENDING;
     public static final String CLAIM_DESC = " " + PREFIX_CLAIM_DESC + VALID_CLAIM_DESC;
-
+    public static final String INVALID_CLAIM_DESC = " " + PREFIX_CLAIM_DESC + INVALID_CLAIM_DESCRIPTION;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

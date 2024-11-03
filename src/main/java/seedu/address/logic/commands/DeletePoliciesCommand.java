@@ -22,7 +22,7 @@ import seedu.address.model.policy.PolicyType;
 public class DeletePoliciesCommand extends Command {
     public static final String COMMAND_WORD = "delete-policy";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy deleted:\n%2$s";
-    public static final String MESSAGE_DUPLICATES = "Duplicate policies found.";
+    public static final String MESSAGE_DUPLICATES = "Cannot delete same policies.";
     public static final String MESSAGE_POLICY_NOT_FOUND = "Policy not found.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified policy from the client identified "

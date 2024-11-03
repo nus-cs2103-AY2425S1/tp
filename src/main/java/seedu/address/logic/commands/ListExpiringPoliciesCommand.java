@@ -21,7 +21,7 @@ public class ListExpiringPoliciesCommand extends Command {
     /**
      * Command word to trigger this command in the application's UI.
      */
-    public static final String COMMAND_WORD = "listExpiringPolicies";
+    public static final String COMMAND_WORD = "list-expiring-policies";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all policies nearing expiry within the specified number of days.\n"
