@@ -68,14 +68,6 @@ public class Student extends Person {
         return false;
     }
 
-    public void incrementAttendance() {
-        attendance++;
-    }
-
-    public int getAttendance() {
-        return attendance;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -92,5 +84,5 @@ public class Student extends Person {
     public String getCategoryDisplayName() {
         return "Student";
     }
-    // Things to add: A list to keep track of event attended
+
 }
