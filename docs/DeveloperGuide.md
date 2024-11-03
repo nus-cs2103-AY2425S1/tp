@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list contacts
 2.  KnottyPlanner shows a list of contacts
-3.  User requests to delete a specific contact in the list 
+3.  User requests to delete a specific contact in the list
 4.  KnottyPlanner shows a confirmation prompt
 5.  User confirms the deletion
 6.  KnottyPlanner deletes the contact
