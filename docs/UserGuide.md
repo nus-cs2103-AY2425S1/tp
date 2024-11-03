@@ -310,6 +310,30 @@ Examples:
 
 ![findCommand](images/findCommand.png)
 
+### Undoing previous command : `undo`
+
+Undoes the changes from the previous command.
+
+Format: `undo`
+
+Commands that can be undone:
+* `add`
+* `delete`
+* `newtag`
+* `deletetag`
+* `renametag`
+* `tag`
+* `untag`
+* `edit`
+* `filter`
+* `find`
+* `setrsvp`
+
+Only the latest command can be undone. 
+
+Undo will only reverse the changes from the previous command.
+
+
 
 ### Clearing all entries : `clear`
 
@@ -386,5 +410,6 @@ Command | Format, Examples
 **Filter** | `filter [s/STATUS_INDEX] [t/TAG]…​` <br> e.g. `filter s/3 t/neighbours`
 **Find** | `find KEYWORD…​`<br> e.g. `find James Jake`
 **Clear** | `clear`
+**Undo** | `undo`
 **Exit** | `exit`
 
