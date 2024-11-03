@@ -1,4 +1,4 @@
-_---
+---
 layout: page
 title: Developer Guide
 ---
