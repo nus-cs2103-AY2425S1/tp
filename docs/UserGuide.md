@@ -96,10 +96,11 @@ Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS fi\FINANCIALINFO s\SOCIALME
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags (including 0). 
+A tag can be added with or without a value. For example, `t\client` and `t\insurance:No` are both valid tags.
 </box>
 
-Examples:
+Command examples:
 * `add n\John Doe p\98765432 e\johnd@example.com a\123 John street fi\millionaire s\@jon3 t\client t\priority:high`
 * `add n\Betsy Crowe t\friend e\betsycrowe@example.com a\Newgate Prison p\1234567 t\criminal fi\noIncome s\@bestyC`
 
