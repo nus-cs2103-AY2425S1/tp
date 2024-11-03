@@ -77,6 +77,18 @@ public class Student {
         return owedAmount;
     }
 
+    public double getRateValue() {
+        return rate.value;
+    }
+
+    public double getPaidAmountValue() {
+        return paidAmount.getValue();
+    }
+
+    public double getOwedAmountValue() {
+        return owedAmount.getValue();
+    }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
