@@ -104,11 +104,11 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #FFDC73; /* Yellow for the list cells */
+    -fx-background-color: #FFDC73; /* Yellow for the even list cells */
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: white; /* Same yellow for odd cells */
+    -fx-background-color: white; /* white for odd cells */
 }
 
 .list-cell:filled:selected {
