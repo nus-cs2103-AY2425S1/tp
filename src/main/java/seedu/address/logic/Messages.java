@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Reminder;
 
 /**
  * Container for user visible messages.
@@ -18,7 +19,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-
+    public static final String MESSAGE_INVALID_REMINDER_DISPLAYED_INDEX =
+            "The reminder index provided is invalid";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -54,4 +56,16 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code reminder} for display to the user.
+     */
+    public static String format(Reminder reminder) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(reminder.getPersonToMeet())
+                .append("; Date: ")
+                .append(reminder.getReminderDateAsString())
+                .append("; Description: ")
+                .append(reminder.getReminderDescription());
+        return builder.toString();
+    }
 }

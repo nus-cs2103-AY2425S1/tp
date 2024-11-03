@@ -193,6 +193,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+        requireNonNull(predicate);
+        filteredReminders.setPredicate(predicate);
+    }
+
+    @Override
     public boolean hasReminder(Reminder reminder) {
         requireNonNull(reminder);
         return reminderAddressBook.hasReminder(reminder);

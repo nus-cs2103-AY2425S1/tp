@@ -24,13 +24,17 @@ public class ReminderCard extends UiPart<Region> {
     @FXML
     private Label description;
 
+    @FXML
+    private Label id;
+
 
 
     /**
      * Creates a {@code ReminderCard} with the given {@code Reminder} to display.
      */
-    public ReminderCard(Reminder reminder) {
+    public ReminderCard(Reminder reminder, int reminderIndex) {
         super(FXML);
+        id.setText(reminderIndex + ". ");
         name.setText(reminder.personToMeet.toString());
         date.setText(reminder.reminderDate.toString());
         description.setText(reminder.reminderDescription);

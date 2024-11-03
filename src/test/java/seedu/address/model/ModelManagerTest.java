@@ -7,8 +7,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalReminders.GYMTRISTAN;
-import static seedu.address.testutil.TypicalReminders.MEETINGJASON;
+import static seedu.address.testutil.TypicalReminders.REMINDER_ALICE;
+import static seedu.address.testutil.TypicalReminders.REMINDER_BENSON;
+import static seedu.address.testutil.TypicalReminders.REMINDER_GEORGE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -116,13 +117,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasReminder_reminderNotInReminderAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasReminder(MEETINGJASON));
+        assertFalse(modelManager.hasReminder(REMINDER_GEORGE));
     }
 
     @Test
     public void hasReminder_reminderInReminderAddressBook_returnsTrue() {
-        modelManager.addReminderToBook(MEETINGJASON);
-        assertTrue(modelManager.hasReminder(MEETINGJASON));
+        modelManager.addReminderToBook(REMINDER_ALICE);
+        assertTrue(modelManager.hasReminder(REMINDER_ALICE));
     }
 
     @Test
@@ -137,8 +138,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
         ReminderAddressBook reminderAddressBook = new ReminderAddressBook();
         ReminderAddressBook differentReminderAddressBook = new ReminderAddressBookBuilder()
-                .withReminder(MEETINGJASON)
-                .withReminder(GYMTRISTAN)
+                .withReminder(REMINDER_ALICE)
+                .withReminder(REMINDER_BENSON)
                 .build();
 
         // same values -> returns true

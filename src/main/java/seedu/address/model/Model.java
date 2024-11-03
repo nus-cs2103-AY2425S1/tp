@@ -101,6 +101,12 @@ public interface Model {
     void addReminderToBook(Reminder reminder);
 
     /**
+     * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredReminderList(Predicate<Reminder> predicate);
+
+    /**
      * Returns true if a reminder with the same attributes as {@code reminder} exists in the address book.
      */
     boolean hasReminder(Reminder reminder);

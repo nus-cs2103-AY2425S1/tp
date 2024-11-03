@@ -5,38 +5,53 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.ReminderAddressBook;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Reminder;
 
 /**
  * A utility class containing a list of {@code Reminder} objects to be used in tests.
  */
 public class TypicalReminders {
+    public static final Reminder REMINDER_ALICE = new ReminderBuilder()
+            .withDate("12-12-2024")
+            .withDescription("Mock interview with Alice")
+            .withName("Alice Pauline")
+            .build();
 
-    public static final Reminder MEETINGJASON = new Reminder("10-10-2022",
-                                                             "project meeting",
-                                                             new Name("Jason"));
-    public static final Reminder DINNERKATE = new Reminder("11-11-2022",
-                                                           "dinner",
-                                                           new Name("Kate"));
-    public static final Reminder BASKETBALLCARL = new Reminder("05-07-2023",
-                                                               "basketball practice",
-                                                               new Name("Carl"));
-    public static final Reminder JAPANTOM = new Reminder("12-12-2024",
-                                                         "Japan trip",
-                                                         new Name("Tom"));
-    public static final Reminder LUNCHFIONA = new Reminder("12-10-2024",
-                                                           "lunch",
-                                                           new Name("Fiona"));
+    public static final Reminder REMINDER_BENSON = new ReminderBuilder()
+            .withDate("15-12-2024")
+            .withDescription("Networking session with Benson for internship insights")
+            .withName("Benson Lin")
+            .build();
 
-    // Manually added
-    public static final Reminder BREAKFASTLEON = new Reminder("13-10-2024",
-                                                              "breakfast",
-                                                              new Name("Leon"));
+    public static final Reminder REMINDER_CARL = new ReminderBuilder()
+            .withDate("20-12-2024")
+            .withDescription("Resume review and feedback session with Carl")
+            .withName("Carl Kurz")
+            .build();
 
-    public static final Reminder GYMTRISTAN = new Reminder("28-11-2023",
-                                                           "gym session",
-                                                           new Name("Tristan"));
+    public static final Reminder REMINDER_DANIEL = new ReminderBuilder()
+            .withDate("22-12-2024")
+            .withDescription("Technical interview prep with Daniel")
+            .withName("Daniel Meier")
+            .build();
+
+    public static final Reminder REMINDER_ELLE = new ReminderBuilder()
+            .withDate("30-12-2024")
+            .withDescription("Behavioral interview coaching with Elle")
+            .withName("Elle Meyer")
+            .build();
+
+    public static final Reminder REMINDER_FIONA = new ReminderBuilder()
+            .withDate("05-01-2025")
+            .withDescription("Practice group case study with Fiona")
+            .withName("Fiona Kunz")
+            .build();
+
+    public static final Reminder REMINDER_GEORGE = new ReminderBuilder()
+            .withDate("10-01-2025")
+            .withDescription("Coding assessment practice with George")
+            .withName("George Best")
+            .build();
 
     private TypicalReminders() {} // prevents instantiation
 
@@ -51,7 +66,11 @@ public class TypicalReminders {
         return rab;
     }
 
+    /**
+     * Returns a list of typical reminders.
+     */
     public static List<Reminder> getTypicalReminders() {
-        return new ArrayList<>(Arrays.asList(MEETINGJASON, DINNERKATE, BASKETBALLCARL, JAPANTOM, LUNCHFIONA));
+        return new ArrayList<>(Arrays.asList(REMINDER_ALICE, REMINDER_BENSON, REMINDER_CARL,
+                REMINDER_DANIEL, REMINDER_ELLE));
     }
 }

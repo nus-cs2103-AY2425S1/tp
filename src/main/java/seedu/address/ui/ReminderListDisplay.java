@@ -15,7 +15,7 @@ import seedu.address.model.person.Reminder;
  */
 public class ReminderListDisplay extends UiPart<Region> {
     private static final String FXML = "ReminderListDisplay.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(ReminderListDisplay.class);
 
     @FXML
     private ListView<Reminder> reminderListView;
@@ -42,7 +42,7 @@ public class ReminderListDisplay extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ReminderCard(reminder).getRoot());
+                setGraphic(new ReminderCard(reminder, getIndex() + 1).getRoot());
             }
         }
     }
