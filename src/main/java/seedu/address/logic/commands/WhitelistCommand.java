@@ -25,7 +25,8 @@ public class WhitelistCommand extends Command {
             + ": removes person from the blacklist and sets their client status to NEW_CLIENT_STATUS."
             + " NEW_CLIENT_STATUS must be 'old', 'active', 'potential' or 'unresponsive'."
             + "\nExample: '" + COMMAND_WORD + " 2 cs/old' sets the client status of the 2nd "
-            + "client in the list as 'old' after removing them from the blacklist.";
+            + "client in the list as 'old' after removing them from the blacklist."
+            + "\nAlternate use: entering '" + COMMAND_WORD + "' will list out all clients NOT on the blacklist";
 
     public static final String MESSAGE_WHITELIST_PERSON_SUCCESS = "Whitelisted Person: %1$s";
     public static final String MESSAGE_CANNOT_WHITELIST = "This person is not on the blacklist: %1$s";
