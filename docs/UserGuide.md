@@ -159,7 +159,8 @@ Parameter | Requirements | Explanation
 --- | --- | ---
 *(None)* | *(None)* | The `help` command takes no parameters.
 
-![help message](images/helpMessage.png)
+
+<img src="images/helpMessage.png" alt="help message" width="500" height="300">
 
 ---
 
