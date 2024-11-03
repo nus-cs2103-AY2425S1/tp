@@ -531,14 +531,18 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `pie`<br>
       Expected: A pie chart is displayed showing the number of students in each class. The pie chart is displayed in a new window.
+   
+   2. Test case: `bar` with multiple months but varying numbers of students  
+      Expected: A bar chart is displayed with multiple bars, each representing a different month. The bars vary in height according to the number of students who paid in each month.
 
+      
+2. Displaying a pie chart with data
 
-2. Displaying a pie chart error
+    1. Prerequisites: List all students in the address book, ensuring there are students in multiple classes.
 
-    1. Prerequisites: Empty list
-    
-    1. Test case: `pie`<br>
-        Expected: Error message shown in the status bar. No pie chart displayed.
+    1. Test case: `pie`  
+       Expected: A pie chart is displayed, showing the distribution of students across different classes. Each class is represented as a segment, with the segment size proportional to the number of students in that class. The chart is displayed in a new window.
+
    
 ### Displaying a bar chart of the distribution of students against the number of months paid
 
@@ -572,6 +576,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
 
 ### Marking a Payment Date
 
@@ -610,6 +615,66 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
    1. Other incorrect view commands to try: `info`, `info x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+=======
+### Clearing all entries
+
+1. Clearing all entries while all entries are being shown
+
+    1. Prerequisites: List all entries using the `list` command. Ensure there is at least one entry on the list.
+
+    1. Test case: `clear`  
+       Expected: All entries are removed from the address book. A message "Address book has been cleared!" is displayed in the command box. UI updates to show an empty address book.
+
+    1. Test case: `clear` on an already empty address book  
+       Expected: No change, as there are no entries to delete. Message "Address book has been cleared!" is displayed again. Status bar remains the same.
+
+    1. Other incorrect clear commands to try: `clear x`, `clear 123`, `clear all`  
+       Expected: Error message indicating an unrecognized command format. Address book remains unaffected.
+
+### Undoing and Redoing changes
+
+1. Undoing the most recent change
+
+    1. Prerequisites: Perform a command that modifies the address book (e.g., `add`, `delete`, `edit`).
+
+    1. Test case: `undo`  
+       Expected: The most recent change is reversed. The address book reverts to the state before the last modification. A message indicating the undo action is displayed in the command box. Status bar timestamp is updated.
+
+    1. Test case: `undo` with no prior changes  
+       Expected: No change, as there are no actions to undo. A message "No Command to undo" is shown in the command box. 
+
+1. Redoing the most recent undone change
+
+    1. Prerequisites: Perform an `undo` action to revert a change.
+
+    1. Test case: `redo`  
+       Expected: The most recently undone change is reapplied. The address book reflects the state as if the original command was executed again. A message indicating the redo action is displayed in the command box. Status bar timestamp is updated.
+
+    1. Test case: `redo` with no prior `undo`  
+       Expected: No change, as there are no actions to redo. An error message is shown in the command box "No command to redo".
+
+    1. Other incorrect undo/redo commands to try: `undo x`, `redo x` (where `x` is any additional parameter)  
+       Expected: Error message indicating an unrecognized command format. Address book remains unaffected.
+
+### Exiting the Program
+
+1. Exiting the program using the `exit` command
+
+    1. Prerequisites: Ensure the program is running with the address book open.
+
+    1. Test case: `exit`  
+       Expected: The program closes immediately. Data written to EduTuTu should be saved. No further interaction is possible as the program window closes.
+
+1. Exiting the program using the GUI
+
+    1. Prerequisites: Ensure the program is running with the address book open.
+
+    1. Test case: Click `File` > `Exit` in the GUI toolbar  
+       Expected: The program closes immediately. Similar to the `exit` command, data written to EduTuTu should be saved.
+
+    1. Other exit commands to try: `exit now`, `quit`, `close`  
+       Expected: Program will ignore arguments after the exit command and close immediately.
+
 
 ### Saving data
 
