@@ -26,21 +26,14 @@ public class AddClaimCommandParser implements Parser<AddClaimCommand> {
     public AddClaimCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS,
                 PREFIX_CLAIM_DESC);
-
-        if (!(argMultimap.getValue(PREFIX_CLAIM_STATUS).isPresent()) || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClaimCommand.MESSAGE_USAGE));
-        }
-
+        validatePrefixes(argMultimap);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
-
         Index clientIndex;
-
         try {
             clientIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClaimCommand.MESSAGE_USAGE), ive);
         }
-
         PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
         ClaimStatus claimStatus = ParserUtil.parseClaimStatus(argMultimap.getValue(PREFIX_CLAIM_STATUS).get());
         String claimDescription = argMultimap.getValue(PREFIX_CLAIM_DESC).get();
@@ -50,5 +43,11 @@ public class AddClaimCommandParser implements Parser<AddClaimCommand> {
         Claim claim = new Claim(claimStatus, claimDescription);
 
         return new AddClaimCommand(clientIndex, claim, policyType);
+    }
+    private void validatePrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!(argMultimap.getValue(PREFIX_CLAIM_STATUS).isPresent()) || argMultimap.getPreamble().isEmpty()
+                || !argMultimap.getValue(PREFIX_CLAIM_DESC).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClaimCommand.MESSAGE_USAGE));
+        }
     }
 }
