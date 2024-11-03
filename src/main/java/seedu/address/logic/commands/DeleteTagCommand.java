@@ -28,13 +28,14 @@ public class DeleteTagCommand extends UndoableCommand {
             + "Parameters: " + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
-    public static final String MESSAGE_SUCCESS = "Tag(s) deleted successfully.";
-    public static final String MESSAGE_SUCCESS_FORCE = "Tag(s) force deleted successfully.";
+    public static final String MESSAGE_SUCCESS = "Deleted successfully.";
+    public static final String MESSAGE_SUCCESS_FORCE = "Force deleted successfully.";
     public static final String MESSAGE_TAGS_IN_USE = "The following tags are in use and cannot be deleted:\n%s\n"
             + "Use 'deletetag -force' to delete tags that are in use.";
-    public static final String MESSAGE_NONEXISTENT = "Some tag(s) provided have not been added before.\n";
+    public static final String MESSAGE_NONEXISTENT = "tag(s) have not been added before.\n";
 
     private final List<Tag> tags;
+    private final Map<Tag, Set<Person>> deletedSet = new HashMap<>();
     private final boolean isForceDelete;
 
     /**
@@ -48,24 +49,44 @@ public class DeleteTagCommand extends UndoableCommand {
         this.isForceDelete = isForceDelete;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
-
-        for (Tag tag : tags) {
-            if (!model.hasTag(tag)) {
-                return new CommandResult(MESSAGE_NONEXISTENT);
-            }
-        }
+        StringBuilder errorMsg = new StringBuilder();
+        StringBuilder successMsg = new StringBuilder();
+        boolean showErrorMsg = false;
+        boolean showSuccessMsg = false;
 
         // Proceed with force deletion logic
         if (isForceDelete) {
             for (Tag tag : tags) {
-                model.deleteTags(List.of(tag)); // Remove from model tags
-                model.removeTagFromPersons(tag); // Remove from all persons
+                if (!model.hasTag(tag)) {
+                    errorMsg.append(tag.toString() + " ");
+                    showErrorMsg = true;
+                }
             }
-            return new CommandResult(MESSAGE_SUCCESS_FORCE);
+
+            for (Tag tag : tags) {
+                if (model.hasTag(tag)) {
+                    model.deleteTags(List.of(tag)); // Remove from model tags
+                    model.removeTagFromPersons(tag); // Remove from all persons
+                    showSuccessMsg = true;
+                }
+            }
+
+            successMsg.append(MESSAGE_SUCCESS_FORCE);
+            String successMessage = successMsg.toString();
+
+            if (showErrorMsg) {
+                errorMsg.append(MESSAGE_NONEXISTENT);
+                String errorMessage = errorMsg.toString();
+                if (showSuccessMsg) {
+                    return new CommandResult(successMessage + " " + errorMessage);
+                }
+                return new CommandResult(errorMessage);
+            }
+            return new CommandResult(successMessage);
+
         } else {
             // Check if any tags are in use
             Set<Tag> tagsInUse = model.getTagsInUse();
@@ -75,15 +96,39 @@ public class DeleteTagCommand extends UndoableCommand {
                 return new CommandResult(String.format(MESSAGE_TAGS_IN_USE, matchingTags));
             }
 
+            for (Tag tag : tags) {
+                if (!model.hasTag(tag)) {
+                    errorMsg.append(tag.toString() + " ");
+                    showErrorMsg = true;
+                }
+            }
 
             // Standard delete logic
             for (Tag tag : tags) {
-                model.deleteTags(List.of(tag)); // Just delete from the tag list
+                if (model.hasTag(tag)) {
+                    model.deleteTags(List.of(tag)); // Just delete from the tag list
+                    showSuccessMsg = true;
+                }
+
             }
-            return new CommandResult(MESSAGE_SUCCESS);
+
+            successMsg.append(MESSAGE_SUCCESS);
+            String successMessage = successMsg.toString();
+
+            if (showErrorMsg) {
+                errorMsg.append(MESSAGE_NONEXISTENT);
+                String errorMessage = errorMsg.toString();
+                if (showSuccessMsg) {
+                    return new CommandResult(successMessage + " " + errorMessage);
+                }
+                return new CommandResult(errorMessage);
+            } else {
+                return new CommandResult(successMessage);
+            }
+
+
         }
-
-
+    }
     @Override
     public void undo(Model model) {
         requireNonNull(model);
@@ -97,9 +142,6 @@ public class DeleteTagCommand extends UndoableCommand {
                         person.getRsvpStatus(), newTags);
                 model.setPerson(person, updatedPerson);
             }
-        }
-    }
-
         }
     }
 

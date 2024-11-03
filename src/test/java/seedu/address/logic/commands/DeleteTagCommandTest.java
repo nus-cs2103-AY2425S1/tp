@@ -79,7 +79,7 @@ public class DeleteTagCommandTest {
         List<Tag> nonExistentTags = List.of(nonExistentTag);
 
         DeleteTagCommand newTagCommand = new DeleteTagCommand(nonExistentTags, false);
-        String expectedMessage = DeleteTagCommand.MESSAGE_NONEXISTENT;
+        String expectedMessage = BRIDES_SIDE + " " + DeleteTagCommand.MESSAGE_NONEXISTENT;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -98,7 +98,8 @@ public class DeleteTagCommandTest {
         model.addTag(existingTag);
 
         DeleteTagCommand newTagCommand = new DeleteTagCommand(mixedTags, false);
-        String expectedMessage = DeleteTagCommand.MESSAGE_NONEXISTENT;
+        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS + " " + FRIENDS + " " + COLLEAGUES
+                + " " + DeleteTagCommand.MESSAGE_NONEXISTENT;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTags(mixedTags);
@@ -185,7 +186,7 @@ public class DeleteTagCommandTest {
         List<Tag> existingTags = List.of(existingFriendsTag, existingColleaguesTag);
         model.addTags(existingTags);
 
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(existingTags);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(existingTags, false);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
