@@ -110,7 +110,7 @@ public class AddEventCommand extends AddCommand {
         assert !clientsToAdd.isEmpty();
 
         Event eventToAdd = new Event(name, description, date, clientsToAdd, vendorsToAdd, eventId);
-        if (model.hasEventName(eventToAdd.getName())) {
+        if (model.hasEvent(eventToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
         model.addEvent(eventToAdd);

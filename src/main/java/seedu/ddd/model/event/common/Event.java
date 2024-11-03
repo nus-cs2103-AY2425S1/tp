@@ -4,10 +4,8 @@ import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
@@ -200,12 +198,7 @@ public class Event implements Displayable {
      * @return A boolean value which represents the result.
      */
     public boolean isSameEvent(Event otherEvent) {
-        Set<Client> thisClients = new HashSet<>(this.getClients());
-        Set<Client> otherClients = new HashSet<>(otherEvent.getClients());
-        Description thisDescription = this.getDescription();
-        Description otherDescription = otherEvent.getDescription();
-        return thisClients.equals(otherClients)
-                && thisDescription.equals(otherDescription);
+        return this.getName().equals(otherEvent.getName());
     }
 
     @Override
@@ -220,17 +213,7 @@ public class Event implements Displayable {
         }
 
         Event otherEvent = (Event) other;
-
-        Set<Client> thisClients = new HashSet<>(this.getClients());
-        Set<Vendor> thisVendors = new HashSet<>(this.getVendors());
-        Set<Client> otherClients = new HashSet<>(otherEvent.getClients());
-        Set<Vendor> otherVendors = new HashSet<>(otherEvent.getVendors());
-
-        return thisClients.equals(otherClients)
-                && thisVendors.equals(otherVendors)
-                && this.description.equals(otherEvent.description)
-                && this.name.equals(otherEvent.name)
-                && this.date.equals(otherEvent.date);
+        return this.getName().equals(otherEvent.getName());
     }
 
     @Override
