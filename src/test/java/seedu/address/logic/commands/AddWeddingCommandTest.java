@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalWeddings.WEDDING_ONE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ import seedu.address.model.ReadOnlyWeddingBook;
 import seedu.address.model.WeddingBook;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 import seedu.address.testutil.WeddingBuilder;
@@ -245,6 +247,19 @@ public class AddWeddingCommandTest {
 
         @Override
         public void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePersonInWedding(Person editedPerson, Person personToEdit, Model model) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Person personWithAllTagsRemoved( Person personToDelete, Model model) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> tagsInBoth) {
             throw new AssertionError("This method should not be called.");
         }
 

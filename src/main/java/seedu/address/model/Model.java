@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 
@@ -148,4 +150,10 @@ public interface Model {
 
     /** Updates the filter of the filtered wedding list to filter by the given {@code JobContainsKeywordsPredicate}. */
     void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate);
+
+    void updatePersonInWedding(Person editedPerson, Person personToEdit, Model model);
+
+    Person personWithAllTagsRemoved(Person personToDelete, Model model);
+
+    void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> tagsInBoth);
 }

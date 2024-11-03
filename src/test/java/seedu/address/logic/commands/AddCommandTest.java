@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_NEAR_DUPLICATE_PERSON;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -73,6 +75,28 @@ public class AddCommandTest {
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
+
+    @Test
+    public void execute_nearDuplicatePerson_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withName("John Doe").build();
+        Person nearDuplicatePerson = new PersonBuilder().withName("John Doe").withJob("Dj").build();
+        AddCommand addCommand = new AddCommand(nearDuplicatePerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_NEAR_DUPLICATE_PERSON,
+                        Messages.format(validPerson)), () -> addCommand.execute(modelStub));
+    }
+    @Test
+    public void execute_nearDuplicatePersonWithSpaceInBetween_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withName("John Doe").build();
+        Person nearDuplicatePerson = new PersonBuilder().withName("John     doe")
+                .withEmail("jdoe@gmail.com").withJob("Dj").build();
+        AddCommand addCommand = new AddCommand(nearDuplicatePerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        assertThrows(CommandException.class, String.format(MESSAGE_NEAR_DUPLICATE_PERSON,
+                        Messages.format(validPerson)), () -> addCommand.execute(modelStub));
+    }
+
 
     @Test
     public void equals() {
@@ -238,7 +262,18 @@ public class AddCommandTest {
         public void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
+        @Override
+        public void updatePersonInWedding(Person editedPerson, Person personToEdit, Model model) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Person personWithAllTagsRemoved(Person personToDelete, Model model) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> tagsInBoth) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -262,7 +297,7 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return addressBook;
         }
 
     }

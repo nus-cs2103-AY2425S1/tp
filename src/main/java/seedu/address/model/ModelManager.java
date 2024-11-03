@@ -4,8 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,6 +19,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 
@@ -228,6 +235,86 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredWeddings.equals(otherModelManager.filteredWeddings);
+    }
+
+    //=========== Person, Wedding and Tag accessors ============================================================
+
+    /**
+     * Gets a list of weddings whose name matches that of the tags in the set.
+     *
+     * @param model current Model containing the necessary wedding address book.
+     * @param tags  Set of tags input by the user.
+     * @return List of weddings that match the tag.
+     */
+    public List<Wedding> getWeddingFromTags(Model model, Set<Tag> tags) {
+        List<String> predicate = tags
+                .stream().map(Tag::getTagName).collect(Collectors.toList());
+        List<Wedding> list = new ArrayList<>();
+
+        for (Wedding wedding : model.getFilteredWeddingList()) {
+            for (String tagName : predicate) {
+                if (wedding.getWeddingName().toString().equals(tagName)) {
+                    list.add(wedding);
+                }
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * Updates the remaining list of weddings with the editedPerson.
+     *
+     * @param editedPerson Person whose new tags have been added to them.
+     * @param personToEdit Person who has tags currently being added to them.
+     * @param model        current Model containing necessary wedding address book.
+     */
+    public void updatePersonInWedding(Person editedPerson, Person personToEdit, Model model) {
+        List<Wedding> weddingList = model.getFilteredWeddingList();
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            if (set.contains(personToEdit)) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
+        }
+    }
+
+    /**
+     * Removes the person from the participant list of weddings that correspond to the specified tag(s).
+     *
+     * @param editedPerson Person whose specified tags have been deleted from.
+     * @param model        current Model containing necessary wedding address book.
+     * @param editedTags   Set of tags that exist as a wedding as well.
+     */
+    public void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> editedTags) {
+        List<Wedding> weddingList = getWeddingFromTags(model, editedTags);
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            set.remove(editedPerson);
+        }
+    }
+    /**
+     * Removes all tags from a person and removes the person from any weddings related to those tags.
+     *
+     * @param personToEdit the person whose tags will be removed.
+     * @param model        the current model containing the necessary wedding address book.
+     */
+    public Person personWithAllTagsRemoved(Person personToEdit, Model model) {
+        Set<Tag> currentTags = new HashSet<>(personToEdit.getTags());
+
+        deletePersonInWedding(personToEdit, model, currentTags);
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getJob(), Collections.emptySet());
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return editedPerson;
     }
 
 }
