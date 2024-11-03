@@ -69,10 +69,6 @@ public class GradeCommand extends Command {
             String moduleName = entry.getKey();
             int grade = entry.getValue();
 
-            if (grade < 0 || grade > 100) {
-                throw new CommandException(MESSAGE_INVALID_GRADE);
-            }
-
             Optional<Module> moduleToGrade = personModules.stream()
                     .filter(m -> m.module.equals(moduleName))
                     .findFirst();
