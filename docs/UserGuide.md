@@ -313,7 +313,7 @@ Format: `export`
 
 Sorts the list of all persons in the address book by name in alphabetical order.
 
-Format: sort
+Format: `sort`
 
 ### Saving the data
 
