@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_DISPLAYED;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.DeleteReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -16,11 +16,11 @@ public class DeleteReminderCommandParser implements Parser<DeleteReminderCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteReminderCommand parse(String args) throws ParseException {
-        try {
-            Name name = ParserUtil.parseName(args);
-            return new DeleteReminderCommand(name);
-        } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_INVALID_NAME_DISPLAYED, pe);
+        if (args == "") {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteReminderCommand.MESSAGE_USAGE));
         }
+        Name name = ParserUtil.parseName(args);
+        return new DeleteReminderCommand(name);
     }
 }

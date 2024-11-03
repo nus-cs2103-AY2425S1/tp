@@ -21,7 +21,7 @@ public class DeleteReminderCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified reminder.\n"
-            + "Parameters: NAME (must be the name of an existing client)\n"
+            + "Parameters: NAME (must be the name of an existing client and should not be blank)\n"
             + "Example: " + COMMAND_WORD + " John Doe";
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted reminder for %1$s";
@@ -50,11 +50,18 @@ public class DeleteReminderCommand extends Command {
         }
 
         String reminder = lastShownList.get(index).getReminder().reminder;
-        Person reminderToDelete = lastShownList.get(index);
-        model.deleteReminder(reminderToDelete);
+
+        if (reminder == "") {
+            throw new CommandException(Messages.MESSAGE_NO_REMINDER);
+        }
+
+        Person personToDeleteReminder = lastShownList.get(index);
+        Person personWithReminderDeleted = personToDeleteReminder;
+        personWithReminderDeleted.removeReminder();
+        model.setPerson(personToDeleteReminder, personWithReminderDeleted);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS,
-                Messages.formatReminder(reminderToDelete, reminder)));
+                Messages.formatReminder(personToDeleteReminder, reminder)));
     }
 
     @Override

@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -15,19 +17,21 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Reminder;
+import seedu.address.testutil.PersonBuilder;
 
 public class DeleteReminderCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validNameUnfilteredList_success() {
-        Person personWithReminderToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personWithReminder = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         DeleteReminderCommand deleteReminderCommand = new DeleteReminderCommand(
-                personWithReminderToDelete.getName());
+                personWithReminder.getName());
 
         String expectedMessage = String.format(DeleteReminderCommand.MESSAGE_DELETE_REMINDER_SUCCESS,
-                Messages.formatReminder(personWithReminderToDelete,
-                        personWithReminderToDelete.getReminder().getReminderTime()));
+                Messages.formatReminder(personWithReminder,
+                        personWithReminder.getReminder().getReminderTime()));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -46,15 +50,21 @@ public class DeleteReminderCommandTest {
     public void execute_validNameFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personWithReminderToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Reminder validReminder = new Reminder("1 day");
+        Person personWithReminderToDelete = new PersonBuilder(person)
+                .withReminder(validReminder.getReminderTime()).build();
+        model.setPerson(person, personWithReminderToDelete);
+
         DeleteReminderCommand deleteReminderCommand = new DeleteReminderCommand(
                 personWithReminderToDelete.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(person, personWithReminderToDelete);
 
         String expectedMessage = String.format(DeleteReminderCommand.MESSAGE_DELETE_REMINDER_SUCCESS,
                 Messages.formatReminder(personWithReminderToDelete,
                         personWithReminderToDelete.getReminder().toString()));
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         assertCommandSuccess(deleteReminderCommand, model, expectedMessage, expectedModel);
     }
@@ -65,6 +75,12 @@ public class DeleteReminderCommandTest {
         DeleteReminderCommand deleteReminderCommand = new DeleteReminderCommand(name);
 
         assertCommandFailure(deleteReminderCommand, model, Messages.MESSAGE_INVALID_NAME_DISPLAYED);
+    }
+
+    @Test
+    public void execute_noReminder_throwsCommandException() {
+        DeleteReminderCommand deleteReminderCommand = new DeleteReminderCommand(GEORGE.getName());
+        assertCommandFailure(deleteReminderCommand, model, Messages.MESSAGE_NO_REMINDER);
     }
 
     @Test
