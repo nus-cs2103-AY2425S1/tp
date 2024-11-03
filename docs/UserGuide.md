@@ -257,7 +257,7 @@ Toggles the RSVP status for a guest between `Coming`, `Not Coming` and `Pending`
 
 Format: `setrsvp INDEX STATUS_INDEX`
 * Toggles the RSVP status of the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list.
-* * The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
+* The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
 * `STATUS_INDEX` accepts 3 possible values:
   * `1` represents `Coming`
   * `2` represents `Not Coming`
