@@ -32,6 +32,7 @@ public class DeleteCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        deleteCommand.setConfirmed(true);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -56,6 +57,7 @@ public class DeleteCommandTest {
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        deleteCommand.setConfirmed(true);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -84,6 +86,7 @@ public class DeleteCommandTest {
     public void undo_commandExecuted_success() throws Exception {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        deleteCommand.setConfirmed(true);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_UNDO_SUCCESS,
                 Messages.format(personToDelete));
