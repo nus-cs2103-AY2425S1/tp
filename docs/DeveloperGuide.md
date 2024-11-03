@@ -643,3 +643,37 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+## Appendix: Effort
+
+This project, EduTuTu, required a considerable amount of effort to design and implement due to its functionality and the combination of both Command Line Interface (CLI) and Graphical User Interface (GUI) components. Unlike simpler applications like AB3, which deals with only one entity type, EduTuTu manages multiple entities such as students, payments, and classes. Each entity has unique properties and relationships, adding complexity to the data model, command handling, and user interface design.
+
+### Difficulty Level and Challenges
+The development of EduTuTu presented several key challenges:
+- **Multi-Entity Management:** Managing multiple types of entities (students, payments, classes) required a flexible data structure and sophisticated command parsing to handle diverse commands like `add`, `markpaid`, and `pie`.
+- **Data Visualization:** Creating dynamic visualizations (pie and bar charts) to track class distributions and monthly payments required integration with a charting library and customization to suit EduTuTu’s specific data needs.
+- **Error Handling and User Experience:** Ensuring robust error handling and clear user feedback was essential, particularly for commands related to data visualization and file manipulation (e.g., handling missing or corrupted files).
+
+### Effort Required
+Significant effort went into:
+- **Designing a Scalable Data Model:** We created a model that supports various entity types, allowing for easy future expansion.
+- **Extensive Testing:** Due to the multi-entity structure and data visualization, thorough testing was necessary to handle a wide range of user inputs and edge cases, particularly for commands such as `clear`, `undo`, and `redo`.
+- **User Interface Improvements:** Balancing the CLI with GUI elements required additional effort to ensure that commands were intuitive and visualizations were accessible, providing a seamless user experience.
+
+### Reuse of Libraries and Components
+To streamline development, we leveraged certain libraries and reused components where feasible:
+- **Charting Library for Visualizations:** The `JFreeChart` library was used to implement the `pie` and `bar` chart commands. This allowed us to focus on integrating visualization rather than building charting functionality from scratch. Our work on adapting `JFreeChart` to fit EduTuTu’s data structure is encapsulated in the `ChartAdapter.java` class.
+- **Command Framework from AB3:** We adapted AB3’s command framework to accommodate EduTuTu’s expanded command set, allowing us to save development time while maintaining a consistent structure. Additional commands such as `markpaid` and `info` were added to extend functionality for the specific needs of a tuition center.
+
+### Achievements
+Despite the complexity, we achieved several milestones:
+- Designed a flexible and scalable multi-entity data model that can be expanded easily for future needs.
+- Successfully implemented user-friendly data visualization commands (`pie`, `bar`), providing tuition center administrators with valuable insights at a glance.
+- Developed a robust system for error handling and user feedback, enhancing usability and reliability.
+
+In summary, EduTuTu required significant effort due to its multi-entity structure, visualizations, and user interface improvements. By reusing existing libraries and frameworks strategically, we maintained high functionality and usability while optimizing development time.
+
+## Appendix: Planned Enhancement
+
+
