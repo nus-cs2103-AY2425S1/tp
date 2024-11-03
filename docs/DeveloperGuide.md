@@ -700,6 +700,9 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `settle 0 amount/10`<br>
        Expected: No changes. UGTeach displays error message of invalid command format.
 
+    1. Test case: `settle 1 amount/10000`<br>
+       Expected: No changes. UGTeach displays error message that entered amount is more than amount owed.
+
 1. Using settle command from a filtered list.
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
