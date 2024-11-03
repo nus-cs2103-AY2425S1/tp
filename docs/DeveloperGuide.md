@@ -17,9 +17,9 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting Up and Getting Started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -127,12 +127,10 @@ The `Model` component,
 * stores the currently 'selected' `Client` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-* Each client may contain 1 Education, Health and Life Policy contained in PolicySet.
-* Each policy contains a ClaimList which can contain any number of claims.
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Prudy`, which `Client` references. This allows `Prudy` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Prudy`, which `Client` references. This allows `Prudy` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects. (Note that the details of PolicySet has been omitted from this diagram as they are not relevant)<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -182,7 +180,7 @@ Step 2. The user executes `delete-client 5` command to delete the 5th client in 
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitPrudy()`, causing another modified Prudy state to be saved into the `prudyStateList`.
+Step 3. The user executes `add-client n/David …​` to add a new client. The `add-client` command also calls `Model#commitPrudy()`, causing another modified Prudy state to be saved into the `prudyStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -226,11 +224,11 @@ The `redo` command does the opposite — it calls `Model#redoPrudy()`, which
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify Prudy, such as `list`, will usually not call `Model#commitPrudy()`, `Model#undoPrudy()` or `Model#redoPrudy()`. Thus, the `prudyStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list-client`. Commands that do not modify Prudy, such as `list-client`, will usually not call `Model#commitPrudy()`, `Model#undoPrudy()` or `Model#redoPrudy()`. Thus, the `prudyStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitPrudy()`. Since the `currentStatePointer` is not pointing at the end of the `prudyStateList`, all Prudy states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitPrudy()`. Since the `currentStatePointer` is not pointing at the end of the `prudyStateList`, all Prudy states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add-client n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -260,7 +258,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -278,13 +276,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * is a Prudential insurance agent
 * has a need to manage a significant number of clients
-* has a need to manage clients policies and claims
+* has a need to manage clients' policies and claims
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: We firstly improve efficiency through easy client management. Agents can quickly retrieve key information such as a client's insurance policies. Next, also improve client relationships. Ensures agents never miss a client policy renewal. Manage clients pending claims effectively.
+**Value proposition**: We firstly improve efficiency through easy client management. Agents can quickly retrieve key information such as a client's insurance policy. Next, also improve client's relationships. Ensures agents never miss a client policy renewal. Manage clients' pending claims effectively.
 
 
 ### User stories
@@ -449,7 +447,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be intuitive, agents can perform core functions with 30 minutes training
 5.  The system should provide feedback for user inputs for basic commands (eg. add client, update client) within 1 second.
 6.  The app should not exceed 500MB of memory.
@@ -467,13 +465,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Commands**: A text instruction that triggers a defined function in the app (e.g., add-client, list-policies).
 * **Command Prefix**: A marker used in commands to specify the type of input (e.g., n/ for name, p/ for phone number).
 * **Premium**: Amount of money paid for an insurance policy
-* **Coverage amount**: Maximum amount an insurance company will pay under a policy.
-* **Claim Status**: The current state of a claim, such as Pending, In Progress, Resolved, or Closed.
+* **Coverage**: Maximum amount an insurance company will pay under a policy.
+* **Claim Status**: The current state of a claim, such as Pending, Approved, or Rejected.
 * **Error Message**: Message displayed to the user providing guidance on how to correct the issue.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -505,7 +503,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   1. Prerequisites: List all clients using the `list-client` command. Multiple clients in the list.
 
    1. Test case: `delete-client 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
