@@ -172,7 +172,7 @@ The `Model` component stores a history of executed concrete commands in a stack.
 When a command is executed successfully, the command is pushed onto the stack.
 When the user executes the `undo` command, the `Model` component pops the last command from the stack and calls the `undo()` method of the command.
 
-These operations are exposed in the `Model` interface as `Model#pushToUndoStack()`, `Model#undoAddressBook()`.
+These operations are exposed in the `Model` interface as `Model#pushToUndoStack()` and `Model#undoAddressBook()`.
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
