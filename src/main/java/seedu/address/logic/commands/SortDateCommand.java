@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
 import seedu.address.model.person.PersonDateComparator;
+import seedu.address.model.person.PersonDateReverseComparator;
 
 /**
  * Sorts the contents of StaffSync by name.
@@ -21,9 +22,8 @@ public class SortDateCommand extends SortCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         if (isReversed) {
-            model.updateSortedPersonList(new PersonDateComparator().reversed());
+            model.updateSortedPersonList(new PersonDateReverseComparator());
             return new CommandResult(MESSAGE_SUCCESS + DESCENDING_SUCCESS);
         } else {
             model.updateSortedPersonList(new PersonDateComparator());

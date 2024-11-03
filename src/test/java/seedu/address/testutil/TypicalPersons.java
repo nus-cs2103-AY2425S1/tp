@@ -60,16 +60,16 @@ public class TypicalPersons {
     //Added for testing Roles and Departments
     public static final Person BJUNKANG = new PersonBuilder().withName("Jun Kang").withPhone("12345678")
             .withEmail("junkang@email.com").withAddress("admiralty").withDepartment("Board of Directors")
-            .withRole("Board chairman").withContractEndDate("2020-01-01").withIsEmployee(true).build();
+            .withRole("Board chairman").withContractEndDate("2020-01-02").withIsEmployee(true).build();
     public static final Person AJUNWEI = new PersonBuilder().withName("Jun Wei").withPhone("12345678")
             .withEmail("junwei@email.com").withAddress("admiralty").withDepartment("Accounting")
             .withRole("Accountant").withContractEndDate("2020-01-01").withIsEmployee(true).build();
     public static final Person CJUNYU = new PersonBuilder().withName("Jun Yu").withPhone("12345678")
             .withEmail("junyu@email.com").withAddress("admiralty").withDepartment("Customer Service")
-            .withRole("Customer Service Manager").withContractEndDate("2020-01-01").withIsEmployee(true).build();
+            .withRole("Customer Service Manager").withContractEndDate("2020-01-03").withIsEmployee(true).build();
     public static final Person DJUNHONG = new PersonBuilder().withName("Jun Hong").withPhone("12345678")
             .withEmail("junhong@email.com").withAddress("admiralty").withDepartment("Development")
-            .withRole("Developer").withContractEndDate("2020-01-01").withIsEmployee(true).build();
+            .withRole("Developer").withContractEndDate("2020-01-04").withIsEmployee(true).build();
 
     // Potentials
     public static final Person JEVAN = new PersonBuilder().withName("Jevan Lim").withPhone("12345678")

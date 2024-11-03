@@ -125,6 +125,10 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, department, role, contractEndDate, isEmployee);
+        if (isEmployee) {
+            return new Person(name, phone, email, address, department, role, contractEndDate, isEmployee);
+        } else {
+            return new Person(name, phone, email, address, department, role, ContractEndDate.empty(), isEmployee);
+        }
     }
 }
