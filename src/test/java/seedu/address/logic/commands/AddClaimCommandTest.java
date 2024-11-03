@@ -77,7 +77,8 @@ public class AddClaimCommandTest {
                 .iterator().next().getType());
 
         // expected success message
-        String expectedMessage = String.format(AddClaimCommand.MESSAGE_ADD_CLAIM_SUCCESS, claim);
+        String expectedMessage = String.format(AddClaimCommand.MESSAGE_ADD_CLAIM_SUCCESS, PolicyType.HEALTH,
+                client.getName(), ClaimStatus.PENDING, "Surgery");
 
         // ensure the command is successful
         assertCommandSuccess(command, model, expectedMessage, model);

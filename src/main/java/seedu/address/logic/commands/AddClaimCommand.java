@@ -37,7 +37,9 @@ public class AddClaimCommand extends Command {
             + PREFIX_CLAIM_STATUS + "PENDING "
             + PREFIX_CLAIM_DESC + "stomach surgery";
 
-    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Added Claim to Client: %1$s";
+    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Claim added for policy type"
+            + "'%1$s' of client: %2$s.\n\n"
+            + "Added Claim Details:\nStatus: %3$s | Description: %4$s.\n";
     public static final String MESSAGE_POLICY_NOT_FOUND = "The policy for the specified type was not found.";
     public static final String MESSAGE_CLAIM_EXISTS = "A similar claim already exists in the policy.";
 
@@ -96,8 +98,8 @@ public class AddClaimCommand extends Command {
 
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
-
-        return new CommandResult(String.format(MESSAGE_ADD_CLAIM_SUCCESS, claim));
+        String successMessage = formatSuccessMessage(clientToEdit, claim);
+        return new CommandResult(successMessage);
 
     }
 
@@ -115,5 +117,9 @@ public class AddClaimCommand extends Command {
         return index.equals(otherCommand.index)
                 && policyType.equals(otherCommand.policyType)
                 && claim.equals(otherCommand.claim);
+    }
+    private String formatSuccessMessage(Client client, Claim claim) {
+        return String.format(MESSAGE_ADD_CLAIM_SUCCESS, policyType, client.getName(), claim.getStatus(),
+                claim.getClaimDescription());
     }
 }
