@@ -9,6 +9,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.ddd.logic.parser.ParserUtil.MESSAGE_INVALID_ID;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,6 +22,7 @@ import seedu.ddd.logic.commands.EditContactCommand;
 import seedu.ddd.logic.commands.EditContactCommand.EditContactDescriptor;
 import seedu.ddd.logic.commands.EditContactCommand.EditVendorDescriptor;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Tag;
 
 /**
@@ -50,6 +52,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         // cannot specify both index and id/
         if (index != null && !argMultimap.getValue(PREFIX_ID).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+        if (index == null && !Id.isValidId(argMultimap.getValue(PREFIX_ID).get())) {
+            throw new ParseException(MESSAGE_INVALID_ID);
         }
 
         // Should not contain duplicates prefixes (except for PREFIX_TAG).
