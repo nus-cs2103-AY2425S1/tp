@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -21,7 +20,6 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FilterPaidCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -79,10 +77,12 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
 
-        assertNotEquals(new FindCommand(
+        assertEquals(new FindCommand(
                 Arrays.asList(
-                        new FieldContainsKeywordsPredicate<>(Arrays.asList("david", "li"), Person::getFullName, true),
-                        new FieldContainsKeywordsPredicate<>(Arrays.asList("123"), Person::getPhoneValue, false),
+                        new FieldContainsKeywordsPredicate<>(Arrays.asList("david", "li"), Person::getFullName,
+                                true, FieldContainsKeywordsPredicate.NAME_IDENTIFIER),
+                        new FieldContainsKeywordsPredicate<>(Arrays.asList("123"), Person::getPhoneValue,
+                                false, FieldContainsKeywordsPredicate.PHONE_IDENTIFIER),
                         new StudentHasPaidPredicate(true)
                         ), new ArrayList<>()
         ), command);
@@ -98,12 +98,6 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
-    }
-
-    @Test
-    public void parseCommand_filterp() throws Exception {
-        FilterPaidCommand command = (FilterPaidCommand) parser.parseCommand(FilterPaidCommand.COMMAND_WORD + " true");
-        assertEquals(new FilterPaidCommand(new StudentHasPaidPredicate(true)), command);
     }
 
     @Test
