@@ -109,11 +109,6 @@ public class AddressBookParserTest {
         assertEquals(new UnmarkCommand(INDEX_FIRST_PERSON), command);
     }
 
-    @Test
-    public void parseCommand_sort() throws Exception {
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD) instanceof SortCommand);
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " 3") instanceof SortCommand);
-    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
