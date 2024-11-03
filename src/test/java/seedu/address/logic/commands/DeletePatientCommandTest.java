@@ -29,7 +29,7 @@ public class DeletePatientCommandTest {
 
     @Test
     public void execute_validIdUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
         System.out.println(personToDelete.getId());
         DeletePatientCommand deletePatientCommand = new DeletePatientCommand(ID_FIRST_PERSON);
 

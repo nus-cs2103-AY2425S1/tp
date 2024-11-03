@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  * Code is adapted from @@author sandyk0105
  */
 public class CreateDoctorCommand extends Command {
-    public static final String COMMAND_WORD = "createDoctor";
+    public static final String COMMAND_WORD = "createD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new doctor. "
             + "Parameters: "
@@ -37,7 +37,7 @@ public class CreateDoctorCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an CreatevCommand to add the specified {@code doctor}
+     * Creates an CreateDoctorCommand to add the specified {@code doctor}
      */
     public CreateDoctorCommand(Person doctor) {
         requireNonNull(doctor);

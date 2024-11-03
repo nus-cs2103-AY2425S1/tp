@@ -50,7 +50,24 @@ public class Person implements Appointmentable {
     }
 
     /**
-     * Creates a Person with the given  fields. Each field must be present and not null.
+     * Creates a patient with a fixed id
+     */
+    public Person(Name name, int id, String role, Phone phone, Email email,
+                  Address address, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, role, phone, email, address, tags);
+        this.name = name;
+        this.role = role;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.tags.addAll(tags);
+        this.id = id;
+        this.appointments = new ArrayList<>();
+    }
+
+    /**
+     * Creates a Person with the given fields. Each field must be present and not null.
      */
     public Person(Name name, int id, String role, Phone phone, Email email,
                   Address address, Remark remark, List<Appointment> appointments, Set<Tag> tags) {

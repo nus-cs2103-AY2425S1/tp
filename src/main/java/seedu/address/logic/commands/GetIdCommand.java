@@ -13,7 +13,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Keyword matching is case-insensitive.
  */
 public class GetIdCommand extends Command {
-    public static final String COMMAND_WORD = "getId";
+    public static final String COMMAND_WORD = "get";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": gets the id "
             + "of a patient based on the name provided. "
             + COMMAND_WORD + "[KEYWORDS...]\n"

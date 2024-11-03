@@ -16,11 +16,11 @@ import seedu.address.model.person.Person;
 /**
  * Adds notes to a Patient's remarks
  */
-public class AddNotesCommand extends Command {
+public class AddRemarksCommand extends Command {
 
-    public static final String COMMAND_WORD = "addNotes";
+    public static final String COMMAND_WORD = "addR";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds notes to the remarks of a Patient."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds remarks to the patient."
             + "Existing remarks will be concatenated by the input.\n"
             + COMMAND_WORD + " "
             + PREFIX_ID + "[PATIENT_ID] "
@@ -29,8 +29,8 @@ public class AddNotesCommand extends Command {
             + PREFIX_ID + "1234 "
             + PREFIX_REMARK + "Much better than previous appointment.";
 
-    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Successfully "
-            + "added notes: %s to patient of ID: %d.";
+    public static final String MESSAGE_ADD_REMARKS_SUCCESS = "Successfully "
+            + "added remarks: %s to patient of ID: %d.";
     public static final String MESSAGE_ADD_NOTES_FAILURE = "Unable to "
             + "add notes! Check the id entered!";
     private final int patientId;
@@ -41,7 +41,7 @@ public class AddNotesCommand extends Command {
      * @param patientId patient id
      * @param additionalNotes notes to be added
      */
-    public AddNotesCommand(int patientId, String additionalNotes) {
+    public AddRemarksCommand(int patientId, String additionalNotes) {
         requireAllNonNull(patientId, additionalNotes);
 
         this.patientId = patientId;
@@ -61,7 +61,7 @@ public class AddNotesCommand extends Command {
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_ADD_NOTES_SUCCESS, additionalNotes, patientId
+        return new CommandResult(String.format(MESSAGE_ADD_REMARKS_SUCCESS, additionalNotes, patientId
         ));
     }
     @Override
@@ -72,11 +72,11 @@ public class AddNotesCommand extends Command {
         }
 
         // instanceof check and cast
-        if (!(other instanceof AddNotesCommand)) {
+        if (!(other instanceof AddRemarksCommand)) {
             return false;
         }
 
-        AddNotesCommand otherCommand = (AddNotesCommand) other;
+        AddRemarksCommand otherCommand = (AddRemarksCommand) other;
 
         // Compare patientId and additionalNotes
         return patientId == otherCommand.patientId
