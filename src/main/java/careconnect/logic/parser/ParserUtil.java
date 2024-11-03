@@ -138,14 +138,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseLogDate(String date, boolean isUTC) throws ParseException {
+    public static Date parseLogDate(String date, boolean isUtc) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
         Date parsedDate;
 
         Pattern strictDatePattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        if (isUTC) {
+        if (isUtc) {
             // Set to UTC timezone for testing compatibility
             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         }
@@ -171,12 +171,12 @@ public class ParserUtil {
         return parseLogDate(date, true);
     }
 
-        /**
-         * Parses a {@code String dateString} into a {@code AppointmentDate}.
-         * Leading and trailing whitespaces will be trimmed.
-         *
-         * @throws ParseException if the given {@code dateString} is invalid.
-         */
+    /**
+     * Parses a {@code String dateString} into a {@code AppointmentDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateString} is invalid.
+     */
     public static AppointmentDate parseAppointmentDate(String dateString) throws ParseException {
         if (dateString == null || dateString.isEmpty()) {
             return new AppointmentDate();
