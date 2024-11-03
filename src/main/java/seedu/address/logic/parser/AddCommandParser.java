@@ -42,8 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                                            PREFIX_PRIORITY, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ORGANISATION, PREFIX_LAST_SEEN, PREFIX_PRIORITY,
-                PREFIX_REMARK) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_ORGANISATION, PREFIX_LAST_SEEN) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -56,8 +55,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Organisation organisation = ParserUtil.parseOrganisation(argMultimap.getValue(PREFIX_ORGANISATION).get());
         LastSeen lastSeen = ParserUtil.parseLastSeen(argMultimap.getValue(PREFIX_LAST_SEEN).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).orElse("low"));
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse("No remarks added yet"));
 
         Person person = new Person(name, phone, email, organisation, lastSeen, tagList, priority, remark);
         return new AddCommand(person);
