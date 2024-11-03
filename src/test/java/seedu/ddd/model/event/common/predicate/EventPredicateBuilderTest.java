@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,6 +65,26 @@ public class EventPredicateBuilderTest {
         assertFalse(predicateBuilder.build().test(new EventBuilder().withDescription("Harry Potter").build()));
         assertFalse(predicateBuilder.build().test(new EventBuilder().withDescription("benSOn Nguyen").build()));
     }
+    @Test
+    public void testArgumentMultimap_containsName_returnsTrue() throws ParseException {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        argMultimap.put(PREFIX_NAME, "Alice Millow");
+        EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
+
+        assertTrue(predicateBuilder.build().test(new EventBuilder().withName("Alice Millow").build()));
+        assertTrue(predicateBuilder.build().test(new EventBuilder().withName("Alice").build()));
+        assertTrue(predicateBuilder.build().test(new EventBuilder().withName("milLow").build()));
+    }
+    @Test
+    public void testArgumentMultimap_doesNotContainName_returnsFalse() throws ParseException {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        argMultimap.put(PREFIX_NAME, "Alice Millow");
+        EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
+
+        assertFalse(predicateBuilder.build().test(new EventBuilder().withName("Benson Nguyen").build()));
+        assertFalse(predicateBuilder.build().test(new EventBuilder().withName("Harry Potter").build()));
+        assertFalse(predicateBuilder.build().test(new EventBuilder().withName("benSOn Nguyen").build()));
+    }
 
     @Test
     public void testArgumentMultimap_containsId_returnsTrue() throws ParseException {
@@ -93,6 +114,13 @@ public class EventPredicateBuilderTest {
     public void testArgumentMultimap_doesNotContainDescription_throwsParseExceptionError() {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_DESC, "");
+        EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
+        assertThrows(ParseException.class, predicateBuilder::build);
+    }
+    @Test
+    public void testArgumentMultimap_doesNotContainName_throwsParseExceptionError() {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        argMultimap.put(PREFIX_NAME, "");
         EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
         assertThrows(ParseException.class, predicateBuilder::build);
     }

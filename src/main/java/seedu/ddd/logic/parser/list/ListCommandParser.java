@@ -1,4 +1,4 @@
-package seedu.ddd.logic.parser;
+package seedu.ddd.logic.parser.list;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -7,7 +7,11 @@ import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.ParserUtil.parseFlags;
 
-import seedu.ddd.logic.commands.ListCommand;
+import seedu.ddd.logic.commands.list.ListCommand;
+import seedu.ddd.logic.parser.ArgumentMultimap;
+import seedu.ddd.logic.parser.ArgumentTokenizer;
+import seedu.ddd.logic.parser.CommandFlag;
+import seedu.ddd.logic.parser.Parser;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 
 /**
