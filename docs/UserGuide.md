@@ -37,7 +37,7 @@ ClientGrid is an **address book** targeted for English-speaking real estate agen
    
    * `addproperty c/124894 u/15-20 t/HDB a/50000 b/10000` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $50000 and bid price of $10000.
    
-   * `filterproperty t/HDB gte/500 lte/15000` : Filters and lists properties which is type HDB and matching price (average of ask and bid price) is greater than $500 and less than $15000.
+   * `filterproperty t/HDB gte/500 lte/15000` : Filters and lists properties which is type HDB and matching price (average of ask and bid price) is greater than or equal to $500 and less than or equal to $15000.
    
    * `deleteproperty c/124894 u/15-20` : Deletes the property with postal code 124894 and unit number #15-20.
 
@@ -225,7 +225,7 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 
 **Important**
 1. At least one optional prefix needs to be present for any filtering to be possible.
-2. Prices denoted in `gte/` and `lte/` parameters are checked based on the 'AND' condition. For example, `filterproperty gte/500 lte/60000` filters for properties greater than $500 and less than $60000.
+2. Prices denoted in `gte/` and `lte/` parameters are checked based on the 'AND' condition. For example, `filterproperty gte/500 lte/60000` filters for properties greater than or equal to $500 and less than or equal to $60000.
 </box>
 
 Examples:
