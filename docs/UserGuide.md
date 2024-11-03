@@ -178,7 +178,6 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-
 ### Adding an emergency contact : `addec`
 
 Adds an emergency contact to a specified person in the address book.
@@ -187,6 +186,38 @@ Format: `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHO
 
 Examples:
 * `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter` Adds a new emergency contact to the first person in the address book. 
+
+### Archiving data files: `archive`
+
+Archives the current address book data to a timestamped data file with an optional description.
+
+Format: `archive [DESCRIPTION]`
+
+* The description is optional and must be a valid file name (i.e., it cannot contain any of the following special characters: `\/:*?"<>|`).
+* The archive data file will be saved as a JSON file in the `[JAR file location]/data/archive/` folder.
+
+Examples:
+* `archive` Archives the current address book data to a timestamped data file.
+* `archive "before major update"` Archives the current address book data to a timestamped data file with the description "before major update".
+
+### Listing all archived data files: `listArchives`
+
+Lists the names of all the archived data files in the archive folder.
+
+Format: `listArchives`
+
+### Loading data from an archived data file: `loadArchive`
+
+Loads the data from an archived data file into the address book.
+
+Format: `loadArchive FILE_NAME`
+
+* The `FILE_NAME` must be the name of an archived data file in the archive folder.
+* The data from the archived file will replace the current data in the address book.
+* The data in the archived file will not be deleted.
+
+Examples:
+* `loadArchive addressbook-20241023_114324-example.json` Loads the data from the archived file named `addressbook-20241023_114324-example.json` into the address book.
 
 ### Clearing all entries : `clear`
 
@@ -228,7 +259,6 @@ How it works:
 * If there is a redoable operation, it calls the model.redoAddressBook() method to restore the address book's previous state (before the undo).
 * If there are no operations to redo (e.g., if the user tries to redo without any undo), the command will return the failure message.
 
-
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -247,10 +277,6 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
