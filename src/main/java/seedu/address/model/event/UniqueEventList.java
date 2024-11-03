@@ -126,7 +126,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
         Set<Person> newContacts = new HashSet<>(event.getContacts());
         newContacts.remove(target);
-        Event replacement = new Event(event.getName(), event.getTime(), event.getVenue(),
+        Event replacement = Event.createEvent(event.getName(), event.getTime(), event.getVenue().orElse(null),
                 event.getCelebrity(), newContacts);
         setEvent(event, replacement);
     }

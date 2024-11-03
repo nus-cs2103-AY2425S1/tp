@@ -23,7 +23,7 @@ class JsonAdaptedEvent {
 
     private final String name;
     private final JsonAdaptedTime time;
-    private final String venue;
+    private final String venue; // Optional, can be null
     private final String celebrityName;
     private final Set<String> contactNames = new HashSet<>();
 
@@ -31,11 +31,9 @@ class JsonAdaptedEvent {
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("name") String name,
-                            @JsonProperty("time") JsonAdaptedTime time,
-                            @JsonProperty("venue") String venue,
-                            @JsonProperty("celebrityName") String celebrityName,
-                            @JsonProperty("contactNames") List<String> contactNames) {
+    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") JsonAdaptedTime time,
+            @JsonProperty("venue") String venue, @JsonProperty("celebrityName") String celebrityName,
+            @JsonProperty("contactNames") List<String> contactNames) {
         this.name = name;
         this.time = time;
         this.venue = venue;
@@ -44,12 +42,19 @@ class JsonAdaptedEvent {
     }
 
     /**
+     * Constructs a {@code JsonAdaptedEvent} without a venue, with the given event details.
+     */
+    public JsonAdaptedEvent(String name, JsonAdaptedTime time, String celebrityName, List<String> contactNames) {
+        this(name, time, null, celebrityName, contactNames);
+    }
+
+    /**
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
         name = source.getName().getEventName();
         time = new JsonAdaptedTime(source.getTime());
-        venue = source.getVenue().getVenue();
+        venue = source.getVenue().map(Venue::toString).orElse(null);
         celebrityName = source.getCelebrity().getName().fullName;
         contactNames.addAll(source.getContacts().stream()
                 .map(contact -> contact.getName().fullName)
@@ -62,6 +67,19 @@ class JsonAdaptedEvent {
 
     public Set<String> getContactNames() {
         return contactNames;
+    }
+
+    /**
+     * Constructor for {@code JsonAdaptedEvent} in general
+     * Returns a {@code JsonAdaptedEvent} object using the different constructors given the respective fields.
+     */
+    public static JsonAdaptedEvent createJsonAdaptedEvent(String name, JsonAdaptedTime time, String venue,
+            String celebrityName, List<String> contactNames) {
+        if (venue == null) {
+            return new JsonAdaptedEvent(name, time, celebrityName, contactNames);
+        } else {
+            return new JsonAdaptedEvent(name, time, venue, celebrityName, contactNames);
+        }
     }
 
     /**
@@ -82,16 +100,16 @@ class JsonAdaptedEvent {
         }
         final Time eventTime = time.toModelType();
 
-        if (venue == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));
+        Venue eventVenue = null;
+        if (venue != null) {
+            eventVenue = new Venue(venue);
         }
-        final Venue eventVenue = new Venue(venue);
 
         if (celebrity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
 
-        return new Event(eventName, eventTime, eventVenue, celebrity, eventContacts);
+        return Event.createEvent(eventName, eventTime, eventVenue, celebrity, eventContacts);
     }
 
 }

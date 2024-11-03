@@ -26,12 +26,12 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
-    private final String email;
-    private final String address;
+    private final String email; // Optional, can be null
+    private final String address; // Optional, can be null
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPerson} with all fields, with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -39,11 +39,32 @@ class JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
-        this.email = email;
+        if (email != null) {
+            this.email = email;
+        } else {
+            this.email = null;
+        }
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedPerson} without email and address, with the given person details.
+     */
+    public JsonAdaptedPerson(String name, String phone, List<JsonAdaptedTag> tags) {
+        this(name, phone, null, null, tags);
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedPerson} with either email or address.
+     */
+    public JsonAdaptedPerson(String name, String phone, String emailOrAddress, List<JsonAdaptedTag> tags) {
+        this(name, phone,
+                Email.isValidEmail(emailOrAddress) ? emailOrAddress : null,
+                Address.isValidAddress(emailOrAddress) ? emailOrAddress : null,
+                tags);
     }
 
     /**
@@ -52,11 +73,28 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        email = source.getEmail().map(Email::toString).orElse(null);
+        address = source.getAddress().map(Address::toString).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+    }
+
+    /**
+     * Constructor for {@code JsonAdaptedPerson} in general
+     * Returns a {@code JsonAdaptedPerson} object using the different constructors given the respective fields.
+     */
+    public static JsonAdaptedPerson createJsonAdaptedPerson(String name, String phone, String email, String address,
+                                                            List<JsonAdaptedTag> tags) {
+        if (email == null && address == null) {
+            return new JsonAdaptedPerson(name, phone, tags);
+        } else if (email != null && address != null) {
+            return new JsonAdaptedPerson(name, phone, email, address, tags);
+        } else if (email != null) {
+            return new JsonAdaptedPerson(name, phone, email, tags);
+        } else {
+            return new JsonAdaptedPerson(name, phone, address, tags);
+        }
     }
 
     /**
@@ -86,24 +124,24 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        Email modelEmail = null;
+        if (email != null) {
+            if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
+            modelEmail = new Email(email);
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        Address modelAddress = null;
+        if (address != null) {
+            if (!Address.isValidAddress(address)) {
+                throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            }
+            modelAddress = new Address(address);
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return Person.createPerson(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }

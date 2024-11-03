@@ -117,11 +117,11 @@ public class EditEventCommand extends EditCommand {
 
         EventName updatedEventName = editEventDescriptor.getName().orElse(eventToEdit.getName());
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
-        Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
+        Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue().orElse(null));
         Person updatedCelebrity = editEventDescriptor.getCelebrity().orElse(eventToEdit.getCelebrity());
         Set<Person> updatedContacts = editEventDescriptor.getContacts().orElse(eventToEdit.getContacts());
 
-        return new Event(updatedEventName, updatedTime, updatedVenue, updatedCelebrity, updatedContacts);
+        return Event.createEvent(updatedEventName, updatedTime, updatedVenue, updatedCelebrity, updatedContacts);
     }
 
     @Override

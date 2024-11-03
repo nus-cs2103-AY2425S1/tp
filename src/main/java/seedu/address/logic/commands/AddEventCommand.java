@@ -36,9 +36,9 @@ public class AddEventCommand extends AddCommand {
             + "Parameters: "
             + PREFIX_EVENT_NAME + "NAME "
             + PREFIX_EVENT_TIME + "TIME "
-            + PREFIX_EVENT_VENUE + "VENUE "
+            + "[" + PREFIX_EVENT_VENUE + "VENUE] "
             + PREFIX_EVENT_CELEBRITY + "CELEBRITY "
-            + PREFIX_EVENT_CONTACTS + "CONTACTS...\n"
+            + "[" + PREFIX_EVENT_CONTACTS + "CONTACTS]...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
             + PREFIX_EVENT_NAME + "Oscars "
             + PREFIX_EVENT_TIME + "from: 2024-03-01 12:10, to: 2024-03-01 18:30 "
@@ -61,7 +61,7 @@ public class AddEventCommand extends AddCommand {
      */
     public AddEventCommand(EventName eventName, Time time, Venue venue, String celebrityName,
                            Set<String> contactNames) {
-        requireAllNonNull(eventName, time, venue, celebrityName);
+        requireAllNonNull(eventName, time, celebrityName, contactNames);
         this.eventName = eventName;
         this.time = time;
         this.venue = venue;
@@ -82,7 +82,7 @@ public class AddEventCommand extends AddCommand {
             throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
         }
 
-        Event toAdd = new Event(this.eventName, this.time, this.venue, celebrity, contacts);
+        Event toAdd = Event.createEvent(this.eventName, this.time, this.venue, celebrity, contacts);
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
@@ -118,12 +118,17 @@ public class AddEventCommand extends AddCommand {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder result = new ToStringBuilder(this)
                 .add("eventName", eventName)
-                .add("time", time)
-                .add("venue", venue)
-                .add("Celebrity", celebrityName)
+                .add("time", time);
+        if (venue != null) {
+            result.add("venue", venue);
+        } else {
+            result.add("venue", "");
+        }
+        result.add("Celebrity", celebrityName)
                 .add("Contacts", contactNames)
                 .toString();
+        return result.toString();
     }
 }

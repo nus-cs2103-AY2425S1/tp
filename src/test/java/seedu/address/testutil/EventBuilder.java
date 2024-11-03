@@ -43,7 +43,7 @@ public class EventBuilder {
     public EventBuilder(Event eventToCopy) {
         name = eventToCopy.getName();
         time = eventToCopy.getTime();
-        venue = eventToCopy.getVenue();
+        venue = eventToCopy.getVenue().orElse(null);
         celebrity = eventToCopy.getCelebrity();
         contacts = eventToCopy.getContacts();
     }
@@ -60,8 +60,9 @@ public class EventBuilder {
      * Sets the {@code Celebrity} of the {@code Event} that we are building.
      */
     public EventBuilder withCelebrity(Person celebrity) {
-        this.celebrity = new Person(celebrity.getName(), celebrity.getPhone(),
-                celebrity.getEmail(), celebrity.getAddress(), celebrity.getTags());
+        this.celebrity = Person.createPerson(celebrity.getName(), celebrity.getPhone(),
+                celebrity.getEmail().orElse(null), celebrity.getAddress().orElse(null),
+                celebrity.getTags());
         return this;
     }
 
@@ -90,7 +91,7 @@ public class EventBuilder {
     }
 
     public Event build() {
-        return new Event(name, time, venue, celebrity, contacts);
+        return Event.createEvent(name, time, venue, celebrity, contacts);
     }
 
 }

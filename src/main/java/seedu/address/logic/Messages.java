@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
 
 /**
@@ -50,9 +51,9 @@ public class Messages {
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(person.getEmail().isPresent() ? person.getEmail().get() : "")
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(person.getAddress().isPresent() ? person.getAddress().get() : "")
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
@@ -67,7 +68,7 @@ public class Messages {
                 .append("; Time: ")
                 .append(event.getTime())
                 .append("; Venue: ")
-                .append(event.getVenue())
+                .append(event.getVenue().map(Venue::toString).orElse(""))
                 .append("; Celebrity: ")
                 .append(event.getCelebrityName())
                 .append("; Contacts: ")
