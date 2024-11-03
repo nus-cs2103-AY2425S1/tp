@@ -190,10 +190,10 @@ These are just some of the basic commands, please refer to [Commands Overview](#
 Flags are used within commands to define specific types of data that Prudy will handle. They allow you to quickly indicate what information you’re providing. Below is a list of flags you can use:
 
 | Flag  | Data Type               |
-|-------|--------------------------|
+|-------|-------------------------|
 | `n/`  | Name                    |
-| `p/`  | Phone Number            |
-| `e/`  | Email Address           |
+| `p/`  | Phone                   |
+| `e/`  | Email                   |
 | `a/`  | Address                 |
 | `t/`  | Tags                    |
 | `pt/` | Policy Type             |
@@ -214,7 +214,7 @@ Arguments are the values provided for each flag in a command. They must meet cer
 | Flag  | Expected Argument         | Description                      | Requirements                                            |
 |-------|----------------------------|----------------------------------|---------------------------------------------------------|
 | `n/`  | Client’s Full Name         | Full name of the client          | Letters and spaces only                                 |
-| `p/`  | Phone Number               | Contact number                   | 3-15 digit number                   |
+| `p/`  | Phone                      | Contact number                   | 3-15 digit number                   |
 | `e/`  | Email                      | Email address                    | Standard format (e.g., user@example.com)                |
 | `a/`  | Address                    | Client’s address                 | Any alphanumeric and symbol                             |
 | `t/`  | Tags                       | Custom descriptor of client      | Letters and spaces only                                 |
@@ -292,7 +292,7 @@ Client management commands allow you to add, edit, delete, and filter client dat
 
 ### 5.2.1 Adding a Client: `add`
 Adds a new client to Prudy.  
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`
 
 
 💡 **Tip**: A client can have any number of tags (including 0).
@@ -321,7 +321,7 @@ Details:
   e.g., `n/han pt/life` will return only clients that has `han` in his name and has a Life policy.
 
   <box type="info" seamless>
-  Info: Each parameter must have a valid input (e.g., PHONE must be a valid 8-digit number).
+  Info: Each parameter must have a valid input (e.g., PHONE must be a valid 3-15 long number).
   </box>
 
 Examples:
@@ -448,10 +448,10 @@ Details coming soon ...
 | **Keyword**           | **Format**                                                                  | **Examples**                                                                                       |
 |-----------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | `help`                | `help`                                                                      | `help`                                                                                             |
-| `add`                 | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                     | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| `add`                 | `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`                     | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | `list`                | `list`                                                                      | `list`                                                                                             |
 | `find-client`         | `find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…`    | `find-client n/alex pt/life`                                                                       |
-| `edit`                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`      | `edit 2 n/James Lee e/jameslee@example.com`                                                        |
+| `edit`                | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`      | `edit 2 n/James Lee e/jameslee@example.com`                                                        |
 | `delete`              | `delete INDEX`                                                              | `delete 3`                                                                                         |
 | `add-policy`          | `add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]` | `add-policy 1 pt/life pa/100`                                                                      |
 | `delete-policy`       | `delete-policy INDEX pt/POLICY_TYPE…`                                       | `delete-policy 1 pt/life`                                                                          |
