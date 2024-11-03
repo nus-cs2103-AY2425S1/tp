@@ -120,13 +120,15 @@ Finds persons whose attributes contain any of the given keywords.
 Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` e.g. both `filter n/Alex Yeoh` and `filter n/Yeoh Alex` will return the student, Alex Yeoh
+* Only full words will be matched e.g. `Han` will not match `Hans`, `example.com` will not match `alexyeoh@example.com`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang` 
 * Similar for emergency contact names and addresses
 * As for phone numbers, register numbers and class, the entire number must be provided in the command to filter
+* Multiple predicates can be provided, for example, in terms of multiple names or multiple attributes. 
+  e.g. `filter n/Alex Bernice` will return both Alex's and Bernice's details
+  e.g. `filter s/F p/99999999` will return a female student with the phone number 99999999
 
 Examples:
 * `filter n/John` returns `john` and `John Doe`
