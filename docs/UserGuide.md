@@ -78,7 +78,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar mater.jar` command to run the application.<br>
    A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br><br>
-   ![Ui](images/Ui.png)
+  <img src="images/Ui.png" alt="Ui" width="400" height="330">
 
 5. In the application window, locate the command box at the bottom.<br>
    Type the command in the command box and press Enter to execute it. For example, typing **help** and pressing Enter will open the help window.<br>
@@ -95,6 +95,8 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
    - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -265,7 +267,8 @@ Parameter | Requirements | Explanation
 - `check 1`
 
 The following image is the result of executing `check 1`.
-![Result for 'check 1'](images/checkResult.png)
+
+<img src="images/checkResult.png" alt="Result for 'check 1'" width="500" height="330">
 
 ---
 
@@ -394,7 +397,8 @@ Parameter | Requirements | Explanation
   Returns client with car [VRN](#glossary) `SJH9514P`.
 
 The following image is the result of executing `find Jason SJH9514P`.
-![Result for 'find Jason SJH9514P'](images/findResult.png)
+
+<img src="images/findResult.png" alt="Result for 'find Jason SJH9514P'" width="500" height="330">
 
 ---
 
@@ -420,7 +424,8 @@ Parameter | Requirements | Explanation
   Returns client details of the 1st client in MATER.
 
 The following image is the result of executing `view 1`.
-![Result for 'view 1'](images/viewResult.png)
+
+<img src="images/viewResult.png" alt="Result for 'view 1'" width="500" height="340">
 
 ---
 
