@@ -3,6 +3,10 @@ package seedu.ddd.testutil.contact;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_ADDRESS;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_EMAIL;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_ID;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_ID_FOUR;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_ID_ONE;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_ID_THREE;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_ID_TWO;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_NAME;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_PHONE;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_TAG_1;
@@ -10,6 +14,10 @@ import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_TAG_2;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_ADDRESS;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_EMAIL;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_ID;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_ID_FOUR;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_ID_ONE;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_ID_THREE;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_ID_TWO;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_NAME;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_PHONE;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_SERVICE;
@@ -39,6 +47,13 @@ public class TypicalContactFields {
     public static final String VALID_CLIENT_EMAIL = SAMPLE_CLIENT_EMAIL;
     public static final String VALID_CLIENT_ADDRESS = SAMPLE_CLIENT_ADDRESS;
     public static final String VALID_CLIENT_ID = SAMPLE_CLIENT_ID;
+
+    // Used for event testing
+    public static final String VALID_CLIENT_ID_ONE = SAMPLE_CLIENT_ID_ONE;
+    public static final String VALID_CLIENT_ID_TWO = SAMPLE_CLIENT_ID_TWO;
+    public static final String VALID_CLIENT_ID_THREE = SAMPLE_CLIENT_ID_THREE;
+    public static final String VALID_CLIENT_ID_FOUR = SAMPLE_CLIENT_ID_FOUR;
+
     public static final String INVALID_CLIENT_NAME = "!@#$%^";
     public static final String INVALID_CLIENT_PHONE = "abc";
     public static final String INVALID_CLIENT_EMAIL = "abc";
@@ -53,6 +68,13 @@ public class TypicalContactFields {
     public static final String VALID_VENDOR_SERVICE_1 = SAMPLE_VENDOR_SERVICE;
     public static final String VALID_VENDOR_SERVICE_2 = "music";
     public static final String VALID_VENDOR_ID = SAMPLE_VENDOR_ID;
+
+    // Used for event testing
+    public static final String VALID_VENDOR_ID_ONE = SAMPLE_VENDOR_ID_ONE;
+    public static final String VALID_VENDOR_ID_TWO = SAMPLE_VENDOR_ID_TWO;
+    public static final String VALID_VENDOR_ID_THREE = SAMPLE_VENDOR_ID_THREE;
+    public static final String VALID_VENDOR_ID_FOUR = SAMPLE_VENDOR_ID_FOUR;
+
     public static final String INVALID_VENDOR_NAME = "!@#$%^";
     public static final String INVALID_VENDOR_PHONE = "abc";
     public static final String INVALID_VENDOR_EMAIL = "abc";

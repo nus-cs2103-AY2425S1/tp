@@ -40,7 +40,6 @@ public class Date {
     /**
      * Returns true if a given string is a valid service.
      */
-    // TODO: fix date occurrences in storage data before return false for errors.
     public static boolean isValidDate(String test) {
         for (DateTimeFormatter formatter : FORMATTERS) {
             try {

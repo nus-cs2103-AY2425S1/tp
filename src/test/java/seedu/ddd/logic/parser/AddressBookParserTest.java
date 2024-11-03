@@ -4,11 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.ddd.logic.Messages.getErrorMessageForExclusiveFlags;
+import static seedu.ddd.logic.commands.CommandTestUtil.CLIENT_FLAG;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.testutil.Assert.assertThrows;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_DATE;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_DESCRIPTION;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_ID;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_NAME;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ddd.logic.commands.AddContactCommand;
+import seedu.ddd.logic.commands.AddEventCommand;
 import seedu.ddd.logic.commands.ClearCommand;
 import seedu.ddd.logic.commands.DeleteCommand;
 import seedu.ddd.logic.commands.EditCommand;
@@ -20,21 +32,47 @@ import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.commands.ListContactCommand;
 import seedu.ddd.logic.commands.ListEventCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.vendor.Vendor;
+import seedu.ddd.model.event.common.Event;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
 import seedu.ddd.testutil.contact.ClientBuilder;
+import seedu.ddd.testutil.contact.ClientUtil;
 import seedu.ddd.testutil.contact.ContactUtil;
+import seedu.ddd.testutil.contact.VendorBuilder;
+import seedu.ddd.testutil.contact.VendorUtil;
+import seedu.ddd.testutil.event.EventBuilder;
+import seedu.ddd.testutil.event.EventUtil;
 
 public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
-    /*
+
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addClient() throws Exception {
         Client client = new ClientBuilder().build();
+        System.out.println(ClientUtil.getAddContactCommand(client));
         AddContactCommand command = (AddContactCommand) parser.parseCommand(ClientUtil.getAddContactCommand(client));
         assertEquals(new AddContactCommand(client), command);
     }
-    */
+
+    @Test
+    public void parseCommand_addVendor() throws Exception {
+        Vendor vendor = new VendorBuilder().build();
+        System.out.println(VendorUtil.getAddContactCommand(vendor));
+        AddContactCommand command = (AddContactCommand) parser.parseCommand(VendorUtil.getAddContactCommand(vendor));
+        assertEquals(new AddContactCommand(vendor), command);
+    }
+
+    @Test
+    public void parseCommand_addEvent() throws Exception {
+        Event event = new EventBuilder().build();
+        AddEventCommand command = (AddEventCommand) parser.parseCommand(EventUtil.getAddEventCommand(event));
+        assertEquals(new AddEventCommand(DEFAULT_EVENT_NAME, DEFAULT_EVENT_DESCRIPTION,
+                DEFAULT_EVENT_DATE, DEFAULT_EVENT_CLIENT_CONTACT_ID_SET_SINGLE,
+                DEFAULT_EVENT_VENDOR_CONTACT_ID_SET_SINGLE, DEFAULT_EVENT_ID), command);
+    }
+
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
@@ -97,5 +135,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_multipleFlagsAddCommand_throwsParseException() {
+        Vendor vendor = new VendorBuilder().build();
+        String command = VendorUtil.getAddContactCommand(vendor) + " " + CLIENT_FLAG;
+        assertThrows(ParseException.class,
+                getErrorMessageForExclusiveFlags(FLAG_CLIENT, FLAG_VENDOR), () -> parser.parseCommand(command));
     }
 }

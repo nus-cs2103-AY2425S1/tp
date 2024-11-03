@@ -1,5 +1,6 @@
 package seedu.ddd.testutil.contact;
 
+import static seedu.ddd.logic.commands.CommandTestUtil.CLIENT_FLAG;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
@@ -18,7 +19,7 @@ public class ClientUtil {
      * Returns an add command string for adding the {@code client}.
      */
     public static String getAddContactCommand(Client client) {
-        return AddContactCommand.COMMAND_WORD + " client " + getClientDetails(client);
+        return AddContactCommand.COMMAND_WORD + " " + CLIENT_FLAG + " " + getClientDetails(client);
     }
 
     /**

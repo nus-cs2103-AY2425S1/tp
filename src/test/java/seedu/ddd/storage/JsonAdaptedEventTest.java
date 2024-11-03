@@ -4,7 +4,7 @@ import static seedu.ddd.storage.JsonAdaptedEvent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.ddd.testutil.Assert.assertThrows;
 import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_CLIENT_ID;
 import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_ID;
-import static seedu.ddd.testutil.event.TypicalEventFields.INVALID_EVENT_DESCRIPTION;
+import static seedu.ddd.testutil.event.TypicalEventFields.INVALID_EVENT_DESC;
 import static seedu.ddd.testutil.event.TypicalEventFields.INVALID_EVENT_ID;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DATE;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
@@ -31,7 +31,7 @@ public class JsonAdaptedEventTest {
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(
             VALID_EVENT_NAME,
-            INVALID_EVENT_DESCRIPTION,
+            INVALID_EVENT_DESC,
             VALID_EVENT_DATE,
             VALID_JSON_CLIENT_CONTACT_IDS,
             VALID_JSON_VENDOR_CONTACT_IDS,

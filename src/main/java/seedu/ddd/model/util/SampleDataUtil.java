@@ -33,6 +33,12 @@ public class SampleDataUtil {
     public static final String SAMPLE_CLIENT_ADDRESS = "Block 312, Amy Street 1";
     public static final String SAMPLE_CLIENT_ID = "0";
 
+    // Additional client ids for event
+    public static final String SAMPLE_CLIENT_ID_ONE = SAMPLE_CLIENT_ID;
+    public static final String SAMPLE_CLIENT_ID_TWO = "2";
+    public static final String SAMPLE_CLIENT_ID_THREE = "4";
+    public static final String SAMPLE_CLIENT_ID_FOUR = "6";
+
     // Vendor fields
     public static final String SAMPLE_VENDOR_NAME = "Bob Choo";
     public static final String SAMPLE_VENDOR_PHONE = "87654321";
@@ -40,6 +46,12 @@ public class SampleDataUtil {
     public static final String SAMPLE_VENDOR_ADDRESS = "Block 123, Bobby Street 3";
     public static final String SAMPLE_VENDOR_SERVICE = "Catering";
     public static final String SAMPLE_VENDOR_ID = "1";
+
+    // Additional vendor ids for event
+    public static final String SAMPLE_VENDOR_ID_ONE = SAMPLE_VENDOR_ID;
+    public static final String SAMPLE_VENDOR_ID_TWO = "3";
+    public static final String SAMPLE_VENDOR_ID_THREE = "5";
+    public static final String SAMPLE_VENDOR_ID_FOUR = "7";
 
     // Common contact fields
     public static final String SAMPLE_TAG_1 = "budget";
