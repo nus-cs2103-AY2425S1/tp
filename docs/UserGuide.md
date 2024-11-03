@@ -3,8 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
+NomNomNotifier is a user-friendly desktop app tailored for restaurant staff to quickly access and manage customer details. With both Command Line and easy-to-navigate Graphical Interfaces, it’s perfect for anyone who can type fast and wants a seamless way to handle customer information!
 * Table of Contents
 {:toc}
 
@@ -14,11 +13,20 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+- To check:
+Open a command terminal (Terminal for MacOS, Command Prompt for Windows)
+Type: java -version to check if java is install and which version is installed
+- To install:
+Visit Oracle’s Java 17 download page.
+Download the version for your operating system (Windows, macOS, or Linux).
+Follow the instructions provided by Oracle to install Java 17 on your computer.
+****
+
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-2/tp/releases/tag/v1.4).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar NomNomNotifier.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -52,7 +60,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Vegan`, `t/Vegetarian t/VIP` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -208,11 +216,89 @@ Examples:
 * `history Alex Yeoh`
 ![history command](images/historyCommandExample.png)
 
+### Creating Shortcuts for Tags
+Tag shortcuts allow you to create aliases for commonly used tags, saving you time when tagging contacts. Shortcuts ensure efficiency and consistency.
+
+- **Unique Aliases and Tag Names**: Aliases and Tag Names must be unique. You cannot create two shortcuts with the same alias or tag name for different tags.
+- **Case-Insensitive**: Aliases and Tag Names are not case-sensitive when adding shortcuts.
+- **Existing Shortcuts**: Attempting to add an alias or tag name that already exists will display an error.
+
+#### Usage:
+- `addShortCut al/<alias> tn/<Tag Name>` — Adds a shortcut to the specified tag name.
+
+#### Examples:
+- `addShortCut al/v tn/Vegan` — Adds a shortcut with the alias “v” for the tag name "Vegan".
+- Following the previous example:
+    - `addShortCut al/vn tn/VeGan` — Shows an error, as "Vegan" is already used.
+    - `addShortCut al/v tn/Vegetarian` — Shows an error, as "v" is already an alias.
+
+---
+
+### Deleting Shortcuts for Tags
+You can delete an existing shortcut by specifying its alias and tag name.
+
+- **Case-Insensitive**: Aliases and Tag Names are not case-sensitive when deleting.
+
+#### Usage:
+- `delShortCut al/<alias> tn/<Tag Name>` — Deletes the shortcut with the specified alias and tag name.
+
+#### Example:
+- `delShortCut al/v tn/Vegan` — Deletes the shortcut for alias “v” and tag name "Vegan".
+
+---
+
+### Listing Existing Shortcuts
+View all current shortcuts to see the mappings of aliases to tag names.
+
+#### Usage:
+- `listShortCut` — Displays all currently mapped shortcuts.
+
+---
+
+### Using Shortcuts for Tagging
+After setting shortcuts, you can tag contacts using these aliases.
+
+#### Usage:
+- **In Edit Command**: `edit <index> t/<alias>` — Edits the tag for the contact at the specified index.
+- **In Add Command**: `add ... t/<alias>` — Adds a new contact with the specified tag.
+
+#### Examples:
+- Assuming "v" (Vegan) and "vg" (Vegetarian) shortcuts have been set:
+    - `edit 1 t/vg` — Tags the contact at index 1 with "Vegetarian".
+    - `edit 1 t/vg t/v` — Tags the contact at index 1 with "Vegetarian" and "Vegan".
+    - `add n/John Doe p/98765432 e/johnd@example.com a/311 Clementi Ave 2, #02-25 pc/123456 t/v` — Creates a contact tagged as "Vegan".
+
+> **Note**: While adding shortcuts, aliases and tag names are case-insensitive. However, when using tags (`/t`) in commands, they are case-sensitive.
+
+#### Example:
+- Assuming the shortcut "v" maps to "Vegan":
+    - `add ... t/v` — Tags with "Vegan".
+    - `add ... t/V` — Tags with "V".
+
+---
+
+### Filtering by Tags: `filter`
+You can filter the customer list by tags or shortcuts to view only the relevant contacts. The filter command supports prefix searches, is case-insensitive, and allows multiple keywords.
+
+#### Usage:
+- `filter <tag1> <tag2> ...` — Filters the list by the specified tags.
+- Shortcuts can also be used to filter, allowing quick access to commonly used tags.
+
+#### Examples:
+- Assuming "v" (Vegan) and "vg" (Vegetarian) shortcuts are set:
+    - `filter Vegan Vegetarian` — Shows all customers with tags starting with "Vegan" or "Vegetarian" (e.g., "VeganPlus").
+    - `filter v vg` — Uses shortcuts to show customers tagged as "Vegan" or "Vegetarian" or tags that start with those aliases (e.g., "VeganFriendly").
+
+This guide should help you streamline your tagging process and make filtering contacts more efficient!
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+
+
 
 ### Saving the data
 
