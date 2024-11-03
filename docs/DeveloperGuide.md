@@ -274,6 +274,7 @@ tag of friends, a name called Alex, a roomNumber of 08-0805, and a phone call of
 Step 2. The parser interprets the user command and constructs corresponding predicates for the `FindCommand` object.
 
 Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search 
+
 results based on the specified criteria.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
