@@ -54,6 +54,21 @@ public class Company extends Person {
         return null;
     }
 
+    /**
+     * Returns true if both persons have the same company.
+     * This defines a weaker notion of equality between two companies.
+     */
+    @Override
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getIndustry().equals(getIndustry());
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

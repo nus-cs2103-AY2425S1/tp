@@ -57,6 +57,7 @@ public abstract class Person {
     public abstract String getCategoryDisplayName();
     public abstract StudentId getStudentId();
     public abstract Industry getIndustry();
+    public abstract boolean isSamePerson(Person otherPerson);
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -64,19 +65,6 @@ public abstract class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
-     */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
     }
 
     /**

@@ -51,6 +51,20 @@ public class Student extends Person {
         return null;
     }
 
+    /**
+     * Returns true if both students have the same student id.
+     * This defines a weaker notion of equality between two students.
+     */
+    @Override
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getStudentId().equals(getStudentId());
+    }
+
     public void incrementAttendance() {
         attendance++;
     }
