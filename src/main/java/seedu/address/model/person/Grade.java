@@ -19,7 +19,7 @@ public class Grade {
 
     public static final String MESSAGE_SCORE_CONSTRAINTS =
             "Score should be in the form of a number and is between 0 "
-                    + "and 100 inclusive, with at most 2 decimal places.";
+                    + "and 100 inclusive";
     public static final String MESSAGE_WEIGHTAGE_CONSTRAINTS =
             "Weightage must be a number between 0 and 100, with at most 2 decimal places.";
 
