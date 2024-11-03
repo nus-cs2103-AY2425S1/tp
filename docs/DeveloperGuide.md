@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
 # T_Assistant Developer Guide
@@ -198,6 +198,44 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<box type="info">
+
+**Note:** For simplicity, certain details such as conditional checks, parsing 
+and more detailed implementation on model changes have been omitted.
+
+</box>
+
+## Template
+
+Separate each feature with dividers
+
+### Feature
+
+#### Implementation details
+
+
+#### Note
+
+For any important information that has been omitted, refer to [Delete Group feature](#delete-group-feature)
+
+#### Activity diagram
+
+#### Sequence diagram
+
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `WHATEVER COMMAND` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+#### Design considerations
+
+1. Include if we had any alternative design decisions and why we decided to go with the current one
+
+--------------------------------------------------------------------------------------------------------------------
+
+
 ### Delete Group feature
 
 The `Delete Group` feature allows users to delete an existing group in the address book given a group's name.
@@ -221,18 +259,23 @@ Below, we provide an example usage scenario and description of how the delete gr
 This feature will also remove `Students` in the `Group` and reset their `Group`, and delete all `Tasks` related to the
 `Group`.
 
-#### Sequence Diagram
+#### Sequence diagram
 
 The following sequence diagram shows how the above steps for delete group works:
 <puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="DeleteGroupCommand"/>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Undo/redo feature
 
 The undo/redo mechanism is facilitated by `VersionHistory`. It stores an ArrayList `versions` of ReadOnlyAddressBook.
+
+
 Whenever there are changes made to the AddressBook, a defensive copy of the AddressBook is created and stored in the
-ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook. If newly initialized, this
-pointer is set to -1. We have set a maximum number of versions to be able to stored, 100. Once this limit is reached,
-the earliest entry in the ArrayList will be deleted by `VersionHistory` so that a new version can be stored.
+ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook. 
+
+If newly initialized, this pointer is set to -1. We have set a maximum number of versions to be able to stored at 100.
+Once this limit is reached, the earliest entry in the ArrayList will be deleted by `VersionHistory` so that a new version can be stored.
 Additionally, it implements the following operations:
 
 * `VersionHistory#addVersion(Model model)`— Saves the current state to its history.
@@ -249,7 +292,7 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 1. User has the application launched and has made at least 1 change to the system.
 2. For our example, user executes 'asg' and adds a student to a specific group. However, this was done incorrectly and
    the student is added into an incorrect group.
-3. The user executes 'undo'. This command is parsed into the `AddressBookParser`.
+3. The user executes `undo`. This command is parsed into the `AddressBookParser`.
 4. An `UndoCommandParser` object is constructed and it constructs a `UndoCommand` object.
 5. The `UndoCommand` object then calls `updateVersionHistory(versionHistory, model)`. This in turn calls `undoVersion()`
    of `VersionHistory`.
@@ -260,10 +303,12 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 9. The `RedoCommand` follows the exact same workflow as above, but its `updateVersionHistory(versionHistory, model)`
    calls upon `redoVersion` instead, updating the pointer to the previously undone version.
 
-#### Sequence Diagram
+#### Sequence diagram
 
 The following sequence diagram shows how the above steps for how undo works:
 <puml src="diagrams/UndoSequenceDiagram.puml"/>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### \[Proposed\] Data archiving
 
@@ -301,7 +346,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Helps to track the following:
     * Students
     * Their groups
-    * Group projects’ progress
+    * Groups’ progress
     * TA will create Groups and assign tasks
         * Mark the tasks as the groups complete them
 
@@ -309,19 +354,30 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a ….                | I want to…                                    | So that I can…                                    |
-|----------|------------------------|-----------------------------------------------|---------------------------------------------------|
-| `* * *`  | beginner TA            | add students into the system                  |                                                   |
-| `* * *`  | busy TA                | remove projects/tasks                         | not feel overwhelmed                              |
-| `* * *`  | TA that prefers typing | carry out all the functions through CLI       | just use my keyboard                              |
-| `* * *`  | disorganized TA        | mark a team’s tasks as complete               | keep track of my students’ progress               |
-| `* * *`  | disorganized TA        | sort students by their groupings              | keep track of all the groups under my instruction |
-| `* * *`  | disorganized TA        | remove students no longer taking this module  | keep the contact list relevant                    |
-| `* * *`  | disorganized TA        | search for a student by name or project group | quickly find their contact details                |
-| `* * *`  | disorganized TA        | see what I added (groups/projects) before     | quickly reference  what I added.                  |
-| `* * *`  | highly motivated TA    | add students into their projects              |                                                   |
-| `*`      | TA that makes mistakes | edit student particulars                      | correct my mistakes                               |
-| `*`      | clumsy TA              | edit tasks/projects                           | fix my mistakes                                   |
+| Priority | As a ...        | I want to...                                  | So that I can...                                    |
+|----------|-----------------|-----------------------------------------------|-----------------------------------------------------|
+| `* * *`  | disorganised TA | mark tasks                                    | keep track of what a group has completed            |
+| `* * *`  | disorganised TA | remove tasks after I wrongly added them       | correct my mistake                                  |
+| `* * *`  | new TA          | add tasks to groups                           | keep track of what task each group has              |
+| `* * *`  | TA              | see all the tasks my groups have              |                                                     |
+| `* * *`  | disorganised TA | remove groups that have completed the course  | keep the assistant relevant                         |
+| `* * *`  | new TA          | add groups into the assistant                 |                                                     |
+| `* * *`  | TA              | see all my groups                             | keep track of how many groups are under my tutelage |
+| `* * *`  | clumsy TA       | remove students from their mis-assigned group | correct my mistake                                  |
+| `* * *`  | TA              | add students to their respective groups       |                                                     |
+| `* * *`  | disorganised TA | remove students no longer taking course       | keep the assistant relevant                         |
+| `* * *`  | new TA          | add students into the assistant               |                                                     |
+| `* * *`  | TA              | see all my students                           | keep track of who is in my tutorial classes         |
+| `* *`    | messy TA        | sort my tasks                                 | keep the assistant organised                        |
+| `* *`    | clumsy TA       | edit tasks with wrong information             | correct my mistake                                  |
+| `* *`    | messy TA        | sort my groups                                | keep the assistant organised                        |
+| `* *`    | disorganised TA | find groups in my tutorials                   |                                                     |
+| `* *`    | clumsy TA       | edit group particulars                        | correct my mistake                                  |
+| `* *`    | messy TA        | sort my students                              | keep the assistant organised                        |
+| `* *`    | disorganised TA | find students in my tutorials                 |                                                     |
+| `* *`    | clumsy TA       | edit student particulars                      | correct my mistakes                                 |
+| `*`      | clumsy TA       | undo my actions                               | correct my mistake                                  |
+| `*`      | clumsy TA       | redo my actions                               |                                                     |
 
 ### Use cases
 

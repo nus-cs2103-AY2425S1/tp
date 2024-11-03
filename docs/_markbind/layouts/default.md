@@ -30,8 +30,13 @@
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
+    * [Student Commands]({{ baseUrl }}/UserGuide.html#student-commands)
+    * [Group Commands]({{ baseUrl }}/UserGuide.html#group-commands)
+    * [Task Commands]({{ baseUrl }}/UserGuide.html#task-commands)
+    * [Miscellaneous Commands]({{ baseUrl }}/UserGuide.html#miscellaneous-commands)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
+  * [Glossary]({{baseUrl}}/UserGuide.html#glossary)
+  * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
