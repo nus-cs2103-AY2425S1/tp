@@ -2,15 +2,17 @@ package seedu.ddd.logic.parser.list;
 
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ddd.logic.parser.CommandParserTestUtil.*;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_TAG_ARGUMENT_1;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_ADDRESS_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_EMAIL_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_PHONE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_SERVICE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -41,39 +43,38 @@ public class ListEventCommandParserTest {
     public void parse_invalidArgs_throwsParseException() throws ParseException {
 
         // Prefix service with empty input
-        assertThrows(ParseException.class,
-                () -> parser.parse(templateInput + PREFIX_SERVICE));
+        assertThrows(ParseException.class, () -> parser.parse(templateInput + PREFIX_SERVICE));
 
         // Prefix service with an input
-        assertThrows(ParseException.class,
-                () -> parser.parse(templateInput + PREFIX_SERVICE + VALID_VENDOR_SERVICE_ARGUMENT));
+        assertThrows(ParseException.class, () ->
+                parser.parse(templateInput + PREFIX_SERVICE + VALID_VENDOR_SERVICE_ARGUMENT));
 
         // Prefix address with empty input
         assertThrows(ParseException.class, () -> parser.parse(templateInput + PREFIX_ADDRESS));
 
         // Prefix address with an input
-        assertThrows(ParseException.class,
-                () -> parser.parse(templateInput + PREFIX_ADDRESS + VALID_VENDOR_ADDRESS_ARGUMENT));
+        assertThrows(ParseException.class, () ->
+                parser.parse(templateInput + PREFIX_ADDRESS + VALID_VENDOR_ADDRESS_ARGUMENT));
 
         //Prefix phone with empty input
         assertThrows(ParseException.class, () -> parser.parse(templateInput + PREFIX_PHONE));
 
         // Prefix phone with an input
-        assertThrows(ParseException.class,
-                () -> parser.parse(templateInput + PREFIX_PHONE + VALID_VENDOR_PHONE_ARGUMENT));
+        assertThrows(ParseException.class, () ->
+                parser.parse(templateInput + PREFIX_PHONE + VALID_VENDOR_PHONE_ARGUMENT));
 
         //Prefix email with empty input
         assertThrows(ParseException.class, () -> parser.parse(templateInput + PREFIX_EMAIL));
 
         // Prefix email with an input
-        assertThrows(ParseException.class,
-                () -> parser.parse(templateInput + PREFIX_EMAIL + VALID_VENDOR_EMAIL_ARGUMENT));
+        assertThrows(ParseException.class, () ->
+                        parser.parse(templateInput + PREFIX_EMAIL + VALID_VENDOR_EMAIL_ARGUMENT));
 
         //Prefix email with empty input
         assertThrows(ParseException.class, () -> parser.parse(templateInput + PREFIX_TAG));
 
         // Prefix email with an input
-        assertThrows(ParseException.class,
-                () -> parser.parse(templateInput + PREFIX_TAG + VALID_TAG_ARGUMENT_1));
+        assertThrows(ParseException.class, () ->
+                        parser.parse(templateInput + PREFIX_TAG + VALID_TAG_ARGUMENT_1));
     }
 }

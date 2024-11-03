@@ -1,6 +1,8 @@
 package seedu.ddd.model.contact.common.predicate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_VENDOR;

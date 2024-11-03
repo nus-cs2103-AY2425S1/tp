@@ -4,9 +4,9 @@ import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
-import static seedu.ddd.logic.parser.CommandParserTestUtil.*;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_EVENT_DATE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_EVENT_DESC_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -39,14 +39,14 @@ public class ListVendorCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse(templateInput + PREFIX_DESC));
 
         // Prefix description with an input
-        assertThrows(ParseException.class,
-                () -> parser.parse(templateInput + PREFIX_DESC + VALID_EVENT_DESC_ARGUMENT));
+        assertThrows(ParseException.class, () ->
+                parser.parse(templateInput + PREFIX_DESC + VALID_EVENT_DESC_ARGUMENT));
 
         //Prefix date with empty input
         assertThrows(ParseException.class, () -> parser.parse(templateInput + PREFIX_DATE));
 
         // Prefix date with an input
-        assertThrows(ParseException.class,
-                () -> parser.parse(templateInput + PREFIX_DATE + VALID_EVENT_DATE_ARGUMENT));
+        assertThrows(ParseException.class, () ->
+                parser.parse(templateInput + PREFIX_DATE + VALID_EVENT_DATE_ARGUMENT));
     }
 }
