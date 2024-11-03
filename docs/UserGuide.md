@@ -297,6 +297,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: How do I change the AddressBook home folder?<br>
+**A**: The AddressBook home folder is set to the folder where the `medconnect.jar` file is located. If you want to change it, move the `medconnect.jar` file and all the files in the original home folder to the new folder.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -307,6 +310,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+
 | Action     | Format, Examples                                                                                                                                                                                                       |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665` <br> `ecname/Lim Jun Wei ecphone/98765678 ecrs/Brother` <br> `dname/Sam Lim dphone/9987766 demail/samlim@hotmail.com` <br> `t/friend t/colleague` |
