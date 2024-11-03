@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -59,7 +58,7 @@ public class ParserUtil {
         String[] splitArguments = trimmedArgs.trim().split("\\s+");
 
         if (trimmedArgs.isEmpty() || splitArguments.length != requiredNumberOfArguments) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, usageMessage));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, usageMessage));
         }
 
         return splitArguments;
