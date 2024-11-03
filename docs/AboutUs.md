@@ -26,8 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/ponharish)]
 [[portfolio](team/ponharish.md)]
 
-* Role: Develop
-* Responsibilities: Backend Logic
+* Role: Developer
+* Responsibilities: User Interface
 
 
 ### Lavanya Garg
