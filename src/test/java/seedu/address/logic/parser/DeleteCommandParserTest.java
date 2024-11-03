@@ -1,7 +1,11 @@
 package seedu.address.logic.parser;
 
 // import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_NAME_FIELD_MISSING;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
@@ -9,6 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.model.contact.Name;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -22,8 +27,22 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validInteger_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_CONTACT));
+    }
+
+    @Test
+    public void parse_validNameArgs_returnsDeleteCommand() {
+        Name name = new Name(VALID_NAME_AMY);
+        DeleteCommand expectedCommand = new DeleteCommand(name);
+        String userInput = " " + PREFIX_NAME + VALID_NAME_AMY;
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidNameArgs_throwsParseException() {
+        assertParseFailure(parser, INVALID_NAME_DESC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test

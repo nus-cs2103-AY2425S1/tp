@@ -28,6 +28,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.ContactBuilder.DEFAULT_NAME;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
@@ -45,7 +46,7 @@ import seedu.address.model.tag.Role;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
 public class EditCommandParserTest {
-
+    private static final String VALID_NAME_ALEX = "Alex Yeoh";
     private static final String ROLE_EMPTY = " " + PREFIX_ROLE;
 
     private static final String MESSAGE_INVALID_FORMAT =
@@ -82,11 +83,12 @@ public class EditCommandParserTest {
     }
     */
 
+    // Format {edit 1 <desc>} example of <desc>: " n/James&"
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidParameter_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1"
-                + INVALID_TELEGRAM_HANDLE_DESC, TelegramHandle.MESSAGE_CONSTRAINTS); // invalid phone
+                + INVALID_TELEGRAM_HANDLE_DESC, TelegramHandle.MESSAGE_CONSTRAINTS); // invalid handle
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
 
         // invalid student status
@@ -107,6 +109,36 @@ public class EditCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_STUDENT_STATUS_AMY
                 + VALID_TELEGRAM_HANDLE_AMY, Name.MESSAGE_CONSTRAINTS);
+    }
+
+    // {edit Alex Yeoh n/Amy Bee ...}
+    // Parsing with name
+    @Test
+    public void parse_withNameToEdit_success() {
+        String personToEdit = DEFAULT_NAME;
+        Name name = new Name(personToEdit);
+        String userInput = personToEdit + NAME_DESC_AMY + TELEGRAM_HANDLE_DESC_BOB + ROLE_DESC_PRESIDENT
+                + EMAIL_DESC_AMY + STUDENT_STATUS_DESC_AMY + ROLE_DESC_ADMIN;
+        EditCommand.EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
+                .withEmail(VALID_EMAIL_AMY).withStudentStatus(VALID_STUDENT_STATUS_AMY)
+                .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN).build();
+
+        EditCommand expectedCommand = new EditCommand(name, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    // {edit Alex Yeoh n/Amy Bee ...}
+    @Test
+    public void parse_invalidNameToEdit_failure() {
+        String userInput = DEFAULT_NAME + "&" + NAME_DESC_AMY;
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_noFieldsEdited_failure() {
+        String userInput = DEFAULT_NAME;
+        assertParseFailure(parser, userInput, EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test

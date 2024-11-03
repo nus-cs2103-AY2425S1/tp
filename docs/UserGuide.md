@@ -9,7 +9,7 @@
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
-<page-nav-print />
+<page-nav-print/>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
   Refer to [listing all contacts](#listing-all-contacts-list) section for more details about `list` command.
 
-* The first word of the command is case-insensitive. 
+* The first word of the command is case-insensitive.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -82,7 +82,7 @@ Format: `help`
 
 Adds a contact to the address book. (labels do not need to be in order, NICKNAME is optional)
 
-Format: 
+Format:
 * `add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE nn/NICKNAME`
 * `add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE`
 

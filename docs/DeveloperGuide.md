@@ -276,11 +276,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-Administrative Directors of CCAs in NUS who wish to manage a database of the CCA members more effectively. 
+Administrative Directors of CCAs in NUS who wish to manage a database of the CCA members more effectively.
 The database size is around 50 students. These directors are tech savvy who can type fast.
 
 
-**Value proposition**: Enables users to efficiently and easily manage large CCA membership database 
+**Value proposition**: Enables users to efficiently and easily manage large CCA membership database
 (including creation, edition, and deletion of data entries).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -327,12 +327,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AddressBook shows an error message.
 
       Use case ends.
-      
+
 * 1b. Given contact has duplicate 'name' field.
     * 1a1. AddressBook shows an error message and prompts user to re-enter with nickname.
 
       Use case ends.
-      
+
 **Use case: Delete a contact**
 
 **MSS**
@@ -346,13 +346,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given contact is not in the AddressBook
     * 1a1. AddressBook shows an error message.
-  
+
       Use case ends.
 
 * 1b. Multiple matching contacts in the AddressBook
     * 1b1. AddressBook shows list of all matching contacts.
     * 1b2. User enters index of contact to delete
-  
+
       Use case resumes at step 2.
 
 
