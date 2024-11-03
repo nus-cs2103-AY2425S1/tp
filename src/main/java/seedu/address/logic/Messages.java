@@ -37,19 +37,19 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Name: ")
+        builder.append(" Name: ")
                 .append(person.getName())
                 .append("\n ID: ")
                 .append(person.getId())
                 .append("\n Ward: ")
                 .append(person.getWard())
                 .append("\n Diagnosis: ")
-                .append(person.getDiagnosis())
+                .append(person.getDiagnosis().toString().isEmpty() ? "-" : person.getDiagnosis())
                 .append("\n Medication: ")
-                .append(person.getMedication())
-                .append("\n\n Notes: ")
+                .append(person.getMedication().toString().isEmpty() ? "-" : person.getMedication())
+                .append("\n Notes: ")
                 .append(person.getNotes().toString().isEmpty() ? "-" : person.getNotes())
-                .append("\n\n Appointment: ")
+                .append("\n Appointment: ")
                 .append(person.getAppointment() == null ? "-" : person.getAppointment().toString());
         // .append("; Tags: ");
 
