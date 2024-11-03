@@ -28,7 +28,7 @@ public class ViewWeddingCommandTest {
     private Model modelMultiple;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws CommandException {
         model = new ModelManager();
         modelMultiple = new ModelManager();
 

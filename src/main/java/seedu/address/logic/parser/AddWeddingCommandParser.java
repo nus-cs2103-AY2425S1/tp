@@ -19,9 +19,9 @@ import seedu.address.model.wedding.WeddingName;
  */
 public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddWeddingCommand
+     * Parses the given {@code String} of arguments in the context of the AddWeddingCommand.
      * and returns an AddWeddingCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddWeddingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -33,10 +33,9 @@ public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATE);
-        WeddingName name = ParserUtil.parseWeddingName(argMultimap.getValue(PREFIX_WEDDING_NAME).get());
-        Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-
+        WeddingName name = ParserUtil.parseWeddingName(argMultimap.getValue(PREFIX_WEDDING_NAME).get().trim());
+        Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get().trim());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get().trim());
 
         Wedding wedding = new Wedding(name, venue, date);
 
@@ -44,8 +43,11 @@ public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Returns true if the prefixes contain all the required fields.
+     * @param argumentMultimap
+     * @param prefixes
+     * @return boolean
+     * @see ArgumentMultimap
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
