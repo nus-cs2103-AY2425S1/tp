@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+![Logo](images/StoreClass-Logo.png)
+
 <div markdown="block" class="alert alert-info">
 StoreClass (SC) is a desktop app for educators from private organizations e.g. tuition centers to manage their students. The educators will interact with the app through type while viewing the app through the window
 </div> 
