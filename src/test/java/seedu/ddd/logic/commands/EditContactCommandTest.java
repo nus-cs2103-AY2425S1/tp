@@ -281,6 +281,17 @@ public class EditContactCommandTest {
     }
 
     @Test
+    public void execute_invalidContactId_failure() {
+        String invalidIdString = "10000";
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withId(invalidIdString)
+                .build();
+        EditCommand editCommand = new EditContactCommand(null, descriptor);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX, invalidIdString);
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
     public void execute_validClient_shouldUpdateEvents() {
         // first contact should be ALICE
         Index targetIndex = INDEX_FIRST_CONTACT;
