@@ -23,6 +23,6 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Nil
+    * Updated command summary (Pull requests [#217](https://github.com/AY2425S1-CS2103-F13-4/tp/pull/217))
   * Developer Guide:
-    * Nil
+    * Added use case for `view company` (Pull requests [#217](https://github.com/AY2425S1-CS2103-F13-4/tp/pull/217))
