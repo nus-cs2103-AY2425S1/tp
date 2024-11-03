@@ -250,7 +250,7 @@ the constraints of each parameter when used in a command.
 | `GENDER`           | Gender of the patient.                                                                                     | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). <br> - Should not be blank                                                                                                                                                                              | :white_check_mark: `m`<br> :white_check_mark: `F`<br> :x: `Male`                                                                   |
 | `EMAIL`            | Email address of the patient.                                                                              | - Should be in the format `local-part@domain`. <br> - Should not be blank.                                                                                                                                                                                                           | :white_check_mark: `raj@gmail.com`<br>:x: `raj@gmail`                                                                              |
 | `ADDRESS`          | Address of the patient.                                                                                    | - Any value is allowed. <br> - Should not be blank.                                                                                                                                                                                                                                  | :white_check_mark: `Orchard Road, Block 124, #02-01`                                                                               |
-| `PHONE_NUMBER`     | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed.                                                                                                                                         | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
+| `PHONE_NUMBER`     | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - There is no limit on the length of phone number accepted, in order to accommodate international phone numbers.                                                              | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
 | `ALLERGY`          | Allergy of the patient.                                                                                    | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank.                                                                                                                                                                   | :white_check_mark: `Peanuts`<br>:x: `Pe@nuts`                                                                                      |
 | `PRIORITY`         | Priority of the patient.                                                                                   | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. <br> - Should not be blank.                                                                                                                                                                        | :white_check_mark: `NONE` <br> :white_check_mark: `high` <br> :x: `Highpriority`                                                   |
 | `CONDITION`        | Medical Condition of the patient.                                                                          | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. <br> - Should not be blank.                                                                                                                                                          | :white_check_mark: `High Blood Pressure` <br> :x: `@high-bp` <br>:x: `abcde fghijklmnopqrstuvwxyzabcde`                            |
@@ -354,7 +354,7 @@ Format: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAI
 > * The NRIC provided must be the full NRIC of the patient to be edited. e.g. `S1234567A` and not `S123`.
 > * **At least one** of the optional fields must be provided. e.g. `edit S1234567A` is invalid.
 > * Existing values will be updated to the given input values.
-> * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel.
+> * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after the patient's details have been edited.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example:
@@ -401,8 +401,7 @@ Example:
 > * Adding a new appointment will update the Appointment List Panel on the right with the new appointment details.
 > * Appointment List Panel is displayed in chronological order.
 > * Appointment names need not be unique.
-> * Different patients may have overlapping appointment timings, as long as overlapping appointments are not from  
-> the same patient 
+> * Different patients may have overlapping appointment timings, as long as overlapping appointments are not from the same patient 
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -442,21 +441,24 @@ Example:
 * `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200` will delete an appointment on `2024-10-27` from `1100` to `1200` for the patient with NRIC `S1234567A`.
 
 
-  [Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 ### Managing Medical Conditions
 
 #### Adding Medical Conditions : `addMedCon`
 
-Adds medical condition to an existing patient in MediBase3.
+Adds a medical condition or multiple medical conditions to an existing patient in MediBase3.
 
 Format: `addMedCon i/NRIC c/CONDITION...`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 >
-> * Adds Medical Condition to the patient with the specified `NRIC` in MediBase3.
+> * Adds the specified `CONDITION` to the patient with the specified `NRIC` in MediBase3.
 > * You can add a medical condition to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been added.
+> * **At least one** `CONDITION` must be provided. e.g. `addMedCon i/S1234567A` is invalid.
+> * `CONDITION` is case-insensitive. e.g. `addMedCon i/S1234567A c/Flu` will add the medical condition `FLU` to the patient with the NRIC `S1234567A`.
+> * You cannot add the same `CONDITION` to a patient more than once.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example: 
@@ -465,14 +467,14 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> * User can add more than 1 Medical Condition through using `c/CONDITION` multiple times:
-> * `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+> * You can add multiple medical conditions to a patient by using multiple `c/CONDITION`parameters
+> * e.g. `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Deleting Medical Conditions : `delMedCon`
 
-Deletes Medical Condition from an existing patient in MediBase3.
+Deletes a medical condition or multiple medical conditions from an existing patient in MediBase3.
 
 Format: `delMedCon i/NRIC c/CONDITION...`
 
@@ -481,7 +483,9 @@ Format: `delMedCon i/NRIC c/CONDITION...`
 >
 > * Deletes Medical Condition from the patient with the specified `NRIC` in MediBase3.
 > * You can delete a Medical Condition from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been removed.
-> * Patient must have the Medical Condition in order to be able to be deleted, else an error message will show.
+> * **At least one** `CONDITION` must be provided. e.g. `delMedCon i/S1234567A` is invalid.
+> * `CONDITION` is case-insensitive. e.g. `delMedCon i/S1234567A c/Flu` will delete the medical condition `FLU` from the patient with the NRIC `S1234567A`.
+> * Patient must have the given `CONDITION` in order for it to be deleted, else an error message will be displayed.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example:
@@ -490,8 +494,8 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> * User can delete more than 1 Medical Condition through using `c/CONDITION` multiple times:
-> * `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+> * You can delete multiple medical conditions to a patient by using multiple `c/CONDITION`parameters
+> * e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -509,7 +513,8 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
 > * You can add an allergy to a patient even if they are not being currently displayed in the Patient List Panel.
 > * **At least one** `ALLERGY` must be provided. e.g. `addAllergy i/S1234567A` is invalid.
-> * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S123457A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+> * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+> * You cannot add the same `ALLERGY` to a patient more than once.
 > * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
 Example:
@@ -520,7 +525,6 @@ Example:
 > 
 > * You can add multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
 > * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
-
 
 
 [Back to Table of Contents](#table-of-contents)
@@ -537,16 +541,17 @@ Format: `delAllergy i/NRIC al/ALLERGY…`
 > * Deletes the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
 > * **At least one** `ALLERGY` must be provided. e.g. `delAllergy i/S1234567A` is invalid.
 > * `ALLERGY` is case-insensitive. e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
+> * Patient must have the given `ALLERGY` in order for it to be deleted, else an error message will be displayed.
 > * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
+
+Example:
+* `delAllergy i/S1234567A al/Peanuts` will delete the existing allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
 > * You can delete multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
 > * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
-
-Example:
-* `delAllergy i/S1234567A al/Peanuts` will delete the existing allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -589,7 +594,7 @@ Format: `list`
 > :bulb: **Tip:**
 >
 > If you have used any other commands under the [Finding Patients](#finding-patients) section to alter the view of the Patient List Panel, 
-> you can use this command to reset to the default view to view all patients!
+> you can use this command to reset to the default view to view all patients.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -616,10 +621,6 @@ Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`
-
 {: .alert .alert-info} 
 > :information_source: **Note:**
 > 
@@ -629,9 +630,11 @@ Examples:
 > * Only **full words** will be matched e.g. `Han` will not match `Hans`
 > * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-> * You can find a patient even if they are not being currently displayed in the Patient List Panel.
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
 
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`
 
 ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -663,10 +666,7 @@ Example:
 
 Finds patients based on their NRIC.
 
-Format: `find NRIC`
-
-Example:
-* `findNric S1234567A` returns `Alex Yeoh`
+Format: `findNric NRIC`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
@@ -675,9 +675,10 @@ Example:
 > * Only the `NRIC` is searched.
 > * The NRIC provided must be the full NRIC of the patient. e.g. `S1234567A` and not `S123`.
 > * Returns an empty Patient List Panel if no matching patients with the given `NRIC` are found.
-> * You can find a patient even if they are not being currently displayed in the Patient List Panel.
 > * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
+Example:
+* `findNric S1234567A` returns `Alex Yeoh`
 
 [Back to Table of Contents](#table-of-contents)
 
