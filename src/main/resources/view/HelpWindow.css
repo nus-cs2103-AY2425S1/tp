@@ -1,4 +1,5 @@
 #copyButton, #helpMessage {
+    -fx-font-size: 15px;
     -fx-text-fill: white;
 }
 

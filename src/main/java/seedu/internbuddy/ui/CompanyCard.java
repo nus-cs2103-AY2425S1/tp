@@ -60,10 +60,13 @@ public class CompanyCard extends UiPart<Region> {
      */
     public CompanyCard(Company company, int displayedIndex) {
         super(FXML);
+
         assert displayedIndex > -1 : "Displayed index is less than zero";
         assert company != null : "Company is null";
 
         this.company = company;
+
+        // Initialize contents of CompanyCard
         id.setText(displayedIndex + ". ");
         name.setText(company.getName().fullName);
 

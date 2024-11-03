@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: green /*derive(#1d1d1d, 20%)*/;
+    -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
 }
 
@@ -79,20 +79,20 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: transparent /*derive(#1d1d1d, 20%)*/;
+    -fx-background-color: derive(#1d1d1d, 20%);
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: transparent /*derive(#1d1d1d, 20%)*/;
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: transparent /*derive(#1d1d1d, 20%)*/;
+    -fx-background-color: #0A1929;
 }
 
 .list-cell {
@@ -103,17 +103,17 @@
 
 /* company card colors */
 .list-cell:filled:even {
-    -fx-background-color: #423995;
+    -fx-background-color: #102a43;
     -fx-border-color: black;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #423995;
+    -fx-background-color: #102a43;
     -fx-border-color: black;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #64738b;
+    -fx-background-color: #4f5a6c;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -141,19 +141,19 @@
 
 /* command box */
 .stack-pane {
-    -fx-background-color: derive(#817DB0, 10%);
+    -fx-background-color: derive(#102a43, 10%);
 }
 
 /* all 3 panes */
 .pane-with-border {
-    -fx-background-color: #20225D; /* derive(#1d1d1d, 20%); */
+    -fx-background-color: #0A1929;
     -fx-border-color: black;
     -fx-border-top-width: 1px;
 }
 
 /* at the very bottom */
 .status-bar {
-    -fx-background-color: derive(#817DB0, 10%);
+    -fx-background-color: #18434f;
 }
 
 /* command response */
@@ -161,16 +161,17 @@
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: derive(#E3F2FD, 20%);
+    -fx-wrap-text: true;
 }
 
 .result-display .label {
-    -fx-text-fill: green !important;
+    -fx-text-fill: white !important;
 }
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: black;
+    -fx-text-fill: #b0b0b0;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -186,18 +187,18 @@
 }
 
 .grid-pane {
-    -fx-background-color: transparent /*derive(#1d1d1d, 30%)*/;
+    -fx-background-color: derive(#1d1d1d, 30%);
     -fx-border-color: derive(#1d1d1d, 30%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: transparent /*derive(#1d1d1d, 30%)*/;
+    -fx-background-color: derive(#1d1d1d, 30%);
 }
 
 /* after you click the button in menu */
 .context-menu {
-    -fx-background-color: derive(#20225D, 50%);
+    -fx-background-color: derive(#18434f, 50%);
     -fx-background-radius: 10;
 }
 
@@ -207,13 +208,13 @@
 
 /* has file, help */
 .menu-bar {
-    -fx-background-color: #20225D;
+    -fx-background-color: #0A1929;
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: derive(white, 20%);
+    -fx-text-fill: derive(#E3F2FD, 20%);
     -fx-opacity: 0.9;
 }
 
@@ -281,7 +282,7 @@
 }
 
 .dialog-pane {
-    -fx-background-color: green /*#1d1d1d*/;
+    -fx-background-color: #1d1d1d;
 }
 
 .dialog-pane > *.button-bar > *.container {
@@ -311,7 +312,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#ADA7E6, 20%);
+    -fx-background-color: derive(#18434f, 20%);
     -fx-background-insets: 3;
 }
 
@@ -349,9 +350,9 @@
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
-    -fx-text-fill: black;
-    -fx-prompt-text-fill: #4A4764;
+    -fx-font-size: 14pt;
+    -fx-text-fill: #BEBEBE;
+    -fx-prompt-text-fill: derive(#BEBEBE, 10%);
 }
 
 #filterField, #companyListPanel, #companyWebpage {
@@ -359,7 +360,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #20225D, transparent, #20225D;
+    -fx-background-color: transparent, #0A1929, transparent, #0A1929;
     -fx-background-radius: 0;
 }
 
@@ -370,7 +371,7 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #44a5b5;
+    -fx-background-color: #398c9a;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
