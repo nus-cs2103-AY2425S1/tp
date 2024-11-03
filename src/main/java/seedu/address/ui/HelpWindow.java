@@ -74,6 +74,8 @@ public class HelpWindow extends UiPart<Stage> {
         new CommandHelpCard(UnarchiveCommand.COMMAND_WORD, UnarchiveCommand.MESSAGE_USAGE, "unarchive 1")
     ));
 
+    private static HelpWindow theOne;
+
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
     @FXML
@@ -90,7 +92,7 @@ public class HelpWindow extends UiPart<Stage> {
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public HelpWindow(Stage root) {
+    private HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         scrollPane.setOnKeyPressed(this::handleKey);
@@ -99,8 +101,15 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
+    private HelpWindow() {
         this(new Stage());
+    }
+
+    public static HelpWindow getInstance() {
+        if (theOne == null) {
+            theOne = new HelpWindow();
+        }
+        return theOne;
     }
 
     /**
@@ -155,7 +164,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Closes the help window
      */
     public void close() {
-        getRoot().close();
+        getRoot().hide();
     }
 
     /**
@@ -171,7 +180,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     private void handleKey(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ESCAPE) {
-            this.close();
+            close();
         }
     }
 
