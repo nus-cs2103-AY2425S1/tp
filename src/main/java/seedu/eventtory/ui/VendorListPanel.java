@@ -31,6 +31,13 @@ public class VendorListPanel extends UiPart<Region> {
         vendorListView.setItems(vendorList);
         vendorListView.setCellFactory(listView -> new VendorListViewCell());
         header.setText(headerText);
+
+        // Required to fix the issue of last item not being shown when scrolled to the end
+        vendorListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                vendorListView.scrollTo(vendorListView.getSelectionModel().getSelectedIndex());
+            }
+        });
     }
 
     /**

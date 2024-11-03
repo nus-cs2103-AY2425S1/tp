@@ -31,6 +31,13 @@ public class EventListPanel extends UiPart<Region> {
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
         header.setText(headerText);
+
+        // Required to fix the issue of last item not being shown when scrolled to the end
+        eventListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                eventListView.scrollTo(eventListView.getSelectionModel().getSelectedIndex());
+            }
+        });
     }
 
     /**

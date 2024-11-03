@@ -223,6 +223,7 @@ public class MainWindow extends UiPart<Stage> {
         vendorListPanel.setHeader(VENDOR_LIST_HEADER);
         leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
+        rightPanelPlaceholder.getChildren().clear();
     }
 
     /**
@@ -233,6 +234,7 @@ public class MainWindow extends UiPart<Stage> {
         eventListPanel.setHeader(EVENT_LIST_HEADER);
         leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        rightPanelPlaceholder.getChildren().clear();
     }
 
     /**
