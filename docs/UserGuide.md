@@ -372,7 +372,8 @@ and the person will not be deleted.
 
 ### Sorting list based on Appointment Dates : `sort`
 
-Sorts the persons in the address book on the basis of their appointment dates.
+Sorts the persons in the address book on the basis of their appointment dates. Any contacts without appointments will 
+remain sorted alphabetically at the end of the list.
 
 Format: `sort`
 

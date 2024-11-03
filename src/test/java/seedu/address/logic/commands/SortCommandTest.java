@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -52,9 +54,8 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_noAppointment_success() {
+    public void execute_noAppointment_throwsCommandException() {
         SortCommand sortCommand = new SortCommand();
-        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
 
         // Remove appointments from all persons for testing the no-appointment scenario
         model.getFilteredPersonList().forEach(person -> {
@@ -62,13 +63,15 @@ public class SortCommandTest {
             model.setPerson(person, editedPerson);
         });
 
-        // Execute the sort command
-        assertCommandSuccess(sortCommand, model, expectedMessage, model);
+        // Verify that executing sort throws CommandException with NO_APPOINTMENT_FOUND message
+        CommandException exception = assertThrows(CommandException.class, () -> sortCommand.execute(model));
+        assertEquals(SortCommand.NO_APPOINTMENT_FOUND, exception.getMessage());
 
         // Verify that the list remains unchanged since there are no appointment dates to sort
         List<Person> personsAfterSort = model.getFilteredPersonList();
         assertUnchangedList(personsAfterSort);
     }
+
 
     /**
      * Asserts that the persons list is sorted by appointment date in ascending order.
