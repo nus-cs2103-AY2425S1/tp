@@ -36,7 +36,6 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.common.Id;
-import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
