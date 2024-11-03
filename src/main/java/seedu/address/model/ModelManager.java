@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -148,7 +149,7 @@ public class ModelManager implements Model {
 
     @Override
     public Predicate<? super Person> getFilteredPersonListPredicate() {
-        return filteredPersons.getPredicate();
+        return Optional.ofNullable(filteredPersons.getPredicate()).orElse(p -> true);
     }
 
     @Override
