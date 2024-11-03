@@ -183,17 +183,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<CustomerOrder> getCustomerOrderObservableList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public SupplyOrderList getSupplyOrderList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<SupplyOrder> getSupplyOrderObservableList() {
             throw new AssertionError("This method should not be called.");
         }
 

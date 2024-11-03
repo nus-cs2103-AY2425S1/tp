@@ -13,6 +13,12 @@ import java.util.NoSuchElementException;
 public class IngredientCatalogue extends Catalogue {
 
     private final Map<String, Ingredient> ingredientByName = new HashMap<>();
+    public static Ingredient FLOUR = SampleDataUtil.getDefaultIngredients().get(1);
+    public static Ingredient SUGAR = SampleDataUtil.getDefaultIngredients().get(2);
+    public static Ingredient STRAWBERRY = SampleDataUtil.getDefaultIngredients().get(3);
+    public static Ingredient CHOCOLATE = SampleDataUtil.getDefaultIngredients().get(4);
+    public static Ingredient CHEESE = SampleDataUtil.getDefaultIngredients().get(5);
+    public static Ingredient CREAM = SampleDataUtil.getDefaultIngredients().get(6);
 
     /**
      * Initializes the ingredient catalogue with default ingredients.
