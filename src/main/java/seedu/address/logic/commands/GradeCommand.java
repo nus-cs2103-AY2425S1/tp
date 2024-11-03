@@ -36,7 +36,6 @@ public class GradeCommand extends Command {
     public static final String MESSAGE_GRADE_SUCCESS = "Graded Module: %1$s for %2$s";
     public static final String MESSAGE_INVALID_GRADE = "The grade provided is invalid.";
     public static final String MESSAGE_INVALID_MODULE = "The module specified is not found.";
-    public static final String MESSAGE_INVALID_PERSON = "The person index provided is invalid.";
     public static final String MESSAGE_MISMATCH_MODULE_GRADE = "The number of modules and grades"
             + "provided do not match.";
 
@@ -68,6 +67,10 @@ public class GradeCommand extends Command {
         for (Map.Entry<String, Integer> entry : moduleGrades.entrySet()) {
             String moduleName = entry.getKey();
             int grade = entry.getValue();
+
+            if (grade < 0 || grade > 100) {
+                throw new CommandException(MESSAGE_INVALID_GRADE);
+            }
 
             Optional<Module> moduleToGrade = personModules.stream()
                     .filter(m -> m.module.equals(moduleName))
