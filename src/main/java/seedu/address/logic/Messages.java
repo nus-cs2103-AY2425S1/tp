@@ -44,7 +44,10 @@ public class Messages {
                 .append("; Job Code: ")
                 .append(person.getJobCode())
                 .append("; Tag: ")
-                .append(person.getTag());
+                .append(person.getTag())
+                .append("; Remark: ")
+                .append(person.getRemark().toString().isEmpty() ? "None" : person.getRemark());
+
         return builder.toString();
     }
 
