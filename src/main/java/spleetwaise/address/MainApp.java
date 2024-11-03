@@ -86,6 +86,15 @@ public class MainApp extends Application {
         logic = new LogicManager(storage);
 
         ui = new UiManager(logic);
+
+        // Add shutdown hook
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                stop();
+            } catch (Exception e) {
+                logger.severe("Error during shutdown: " + e.getMessage());
+            }
+        }));
     }
 
     /**
