@@ -1,5 +1,7 @@
 package seedu.address.ui.meetup;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +52,8 @@ public class MeetUpListPanel extends UiPart<Region> {
      * Checks for overlaps beteen two meetups
      */
     public boolean doDateRangesOverlap(MeetUp meetUp1, MeetUp meetUp2) {
+        requireNonNull(meetUp1);
+        requireNonNull(meetUp2);
         LocalDateTime start1 = meetUp1.getFrom().getDateTime();
         LocalDateTime end1 = meetUp1.getTo().getDateTime();
         LocalDateTime start2 = meetUp2.getFrom().getDateTime();
@@ -67,6 +71,7 @@ public class MeetUpListPanel extends UiPart<Region> {
         private Map<MeetUp, Boolean> hasOverlapMap;
 
         public MeetUpListViewCell(Map<MeetUp, Boolean> hasOverlapMap) {
+            requireNonNull(hasOverlapMap);
             this.hasOverlapMap = hasOverlapMap;
         }
 
