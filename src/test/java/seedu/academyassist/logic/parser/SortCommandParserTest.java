@@ -26,7 +26,7 @@ public class SortCommandParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"name", "class", "studentId"})
+    @ValueSource(strings = {"name", "subject", "studentId", "yearGroup"})
     public void parse_validArgs_returnsSortCommand(String param) {
         SortCommand expectedCommand = new SortCommand(new SortParam(param));
         assertParseSuccess(parser, " " + PREFIX_SORT_PARAM + param, expectedCommand);

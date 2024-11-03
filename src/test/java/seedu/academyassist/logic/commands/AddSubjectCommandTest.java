@@ -25,6 +25,9 @@ import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.testutil.PersonBuilder;
 
+/**
+ * Contains tests for {@code AddSubjectCommand}
+ */
 public class AddSubjectCommandTest {
 
     @Test
@@ -192,12 +195,17 @@ public class AddSubjectCommandTest {
         }
 
         @Override
-        public void sortAcademyAssistByClass() {
+        public void sortAcademyAssistBySubject() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void sortAcademyAssistById() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortAcademyAssistByYearGroup() {
             throw new AssertionError("This method should not be called.");
         }
 

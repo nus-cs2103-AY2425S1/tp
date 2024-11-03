@@ -10,15 +10,16 @@ import seedu.academyassist.model.Model;
 import seedu.academyassist.model.sort.SortParam;
 
 /**
- * Sorts students based on name or class.
+ * Sorts students based on name or subject.
  */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts students based on name/class/studentId. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Sorts students based on name/subject/studentId/yearGroup. \n"
             + "Parameters: "
-            + PREFIX_SORT_PARAM + "'name' or 'class' or 'studentId'\n"
+            + PREFIX_SORT_PARAM + "'name' or 'subject' or 'studentId' or 'yearGroup'\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SORT_PARAM + "name";
 
@@ -28,7 +29,7 @@ public class SortCommand extends Command {
 
     /**
      * Creates a SortCommand
-     * @param sortParam SortParam.NAME or SortParam.CLASS or SortParam.ID
+     * @param sortParam SortParam.NAME or SortParam.CLASS or SortParam.ID or SortParam.YEARGROUP
      */
     public SortCommand(SortParam sortParam) {
         CollectionUtil.requireAllNonNull(sortParam);
@@ -40,10 +41,12 @@ public class SortCommand extends Command {
         //sort the contact book
         if (sortParam.toString().equals("name")) {
             model.sortAcademyAssistByName();
-        } else if (sortParam.toString().equals("class")) {
-            model.sortAcademyAssistByClass();
+        } else if (sortParam.toString().equals("subject")) {
+            model.sortAcademyAssistBySubject();
         } else if (sortParam.toString().equals("studentId")) {
             model.sortAcademyAssistById();
+        } else if (sortParam.toString().equals("yearGroup")) {
+            model.sortAcademyAssistByYearGroup();
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortParam.toString()));
