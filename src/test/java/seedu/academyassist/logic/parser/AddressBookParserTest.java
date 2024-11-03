@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.academyassist.logic.commands.ClearCommand;
 import seedu.academyassist.logic.commands.DeleteCommand;
+import seedu.academyassist.logic.commands.DetailCommand;
 import seedu.academyassist.logic.commands.ExitCommand;
 import seedu.academyassist.logic.commands.FindCommand;
 import seedu.academyassist.logic.commands.HelpCommand;
@@ -86,6 +87,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_detail() throws Exception {
+        DetailCommand command = (DetailCommand) parser.parseCommand(
+                DetailCommand.COMMAND_WORD + " " + STUDENT_ID_FIRST_PERSON);
+        assertEquals(new DetailCommand(STUDENT_ID_FIRST_PERSON), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -96,4 +104,5 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
                 parser.parseCommand("unknownCommand"));
     }
+
 }
