@@ -2,6 +2,10 @@ package tutorease.address.model.lesson;
 
 import static tutorease.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.model.person.Person;
 
 /**
@@ -9,6 +13,7 @@ import tutorease.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Lesson implements Comparable<Lesson> {
+    private static Logger logger = LogsCenter.getLogger(Lesson.class);
     private Person student;
     private final Fee fee;
     private final StartDateTime startDateTime;
@@ -23,11 +28,14 @@ public class Lesson implements Comparable<Lesson> {
      * @param endDateTime   The end date time of the lesson.
      */
     public Lesson(Person student, Fee fee, StartDateTime startDateTime, EndDateTime endDateTime) {
+        logger.log(Level.INFO, "Creating Lesson object with student: " + student
+                + " fee: " + fee + " start date time: " + startDateTime + " end date time: " + endDateTime);
         requireAllNonNull(student, fee, startDateTime, endDateTime);
         this.student = student;
         this.fee = fee;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        logger.log(Level.INFO, "Created Lesson object: " + this);
     }
 
     /**

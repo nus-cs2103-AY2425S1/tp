@@ -16,7 +16,6 @@ import java.util.stream.Stream;
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.commons.util.StringUtil;
-import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.EndDateTime;
 import tutorease.address.model.lesson.Fee;

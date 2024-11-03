@@ -74,20 +74,14 @@ public class AddLessonCommand extends LessonCommand {
     public CommandResult execute(Model model) throws CommandException {
         logger.log(Level.INFO, "Executing AddLessonCommand");
         requireNonNull(model);
-        assert model != null : "Model cannot be null";
         ObservableList<Person> personList = model.getFilteredPersonList();
         validateStudentId(personList);
         Person student = personList.get(studentId.getValue());
         assert student != null : "Student cannot be null";
         validateStudentRole(student);
-        assert student.isStudent() : "Person must be a student";
         Lesson lesson = new Lesson(student, fee, this.startDateTime, this.endDateTime);
-        logger.log(Level.INFO, "Lesson created: " + lesson);
         validateModelHasLesson(model, lesson);
-        assert !model.hasLessons(lesson) : "Model should not have lesson";
         model.addLesson(lesson);
-        assert model.hasLessons(lesson) : "Model should have lesson";
-        logger.log(Level.INFO, "Lesson added to model: " + lesson);
         String formattedString = String.format(MESSAGE_SUCCESS, lesson);
         logger.log(Level.INFO, formattedString);
         return new CommandResult(formattedString);
@@ -111,6 +105,7 @@ public class AddLessonCommand extends LessonCommand {
             logger.log(Level.WARNING, MESSAGE_INVALID_ROLE);
             throw new CommandException(MESSAGE_INVALID_ROLE);
         }
+        assert student.isStudent() : "Person must be a student";
     }
 
     private void validateStudentId(ObservableList<Person> personList) throws CommandException {

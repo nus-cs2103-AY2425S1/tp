@@ -3,7 +3,6 @@ package tutorease.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

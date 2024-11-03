@@ -1,8 +1,11 @@
 package tutorease.address.model;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.UniqueLessonList;
 import tutorease.address.model.person.Person;
@@ -12,6 +15,8 @@ import tutorease.address.model.person.Person;
  * Duplicates are not allowed (by .isOverlapping comparison)
  */
 public class LessonSchedule implements ReadOnlyLessonSchedule {
+    private static final Logger logger = LogsCenter.getLogger(LessonSchedule.class);
+
     private final UniqueLessonList lessons;
 
     {
@@ -55,6 +60,7 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
      */
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
+        logger.log(Level.INFO, "Lesson added to model: " + lesson);
     }
 
     /**
