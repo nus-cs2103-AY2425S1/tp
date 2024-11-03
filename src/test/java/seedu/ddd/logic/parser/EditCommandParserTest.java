@@ -25,6 +25,7 @@ import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_PHONE_AR
 import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_SERVICE_ARGUMENT;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.ddd.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
@@ -67,7 +68,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_CLIENT_NAME, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_CLIENT_NAME, MESSAGE_INVALID_INDEX);
 
         // no field specified
         assertParseFailure(parser, "1", EditContactCommand.MESSAGE_NOT_EDITED);
@@ -79,16 +80,32 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
+    public void parse_invalidId_failure() {
+        // negative ID
+        assertParseFailure(parser, "id/-1" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_INDEX);
+
+        // zero ID
+        assertParseFailure(parser, "id/0" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
+    public void parse_invalidIdOrIndex_failure() {
+        // either index or id/ parameter must be specified
+        assertParseFailure(parser, " " + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 id/1" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_FORMAT);
     }
 
     @Test

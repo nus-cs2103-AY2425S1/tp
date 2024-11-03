@@ -40,15 +40,14 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_ADDRESS, PREFIX_SERVICE, PREFIX_TAG, PREFIX_ID);
 
         Index index = null;
-        // Either index or id/ parameter must be specified
-        try {
+        if (!argMultimap.getPreamble().isEmpty()) {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            if (argMultimap.getValue(PREFIX_ID).isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-            }
         }
-        // Cannot specify both index and id/
+        // either index or id/ parameter must be specified
+        if (index == null && argMultimap.getValue(PREFIX_ID).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+        // cannot specify both index and id/
         if (index != null && !argMultimap.getValue(PREFIX_ID).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
