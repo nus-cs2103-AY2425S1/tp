@@ -1,7 +1,10 @@
 package seedu.address.ui;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -39,6 +42,17 @@ public class AttendanceCard extends UiPart<Region> {
      */
     public AttendanceCard(String tutorial, List<Attendance> attendanceList) {
         super(FXML);
+
+        // sorts the attendance in descending order with latest dates first
+        attendanceList.sort((a1, a2) -> {
+            if (a2.attendanceDate.isAfter(a1.attendanceDate)) {
+                return 1;
+            } else if (a2.attendanceDate.isBefore(a1.attendanceDate)) {
+                return -1;
+            }
+            return 0;
+        });
+        
         this.attendanceList = attendanceList;
         this.tutorial = tutorial;
 
@@ -95,7 +109,7 @@ public class AttendanceCard extends UiPart<Region> {
     }
 
     /**
-     * Returns a string representation of the list to be displayed in the UI.
+     * Returns a string representation of the attendance list to be displayed in the UI.
      *
      * @param attendanceList The list of attendance that does not belong to the current week.
      */
@@ -106,7 +120,9 @@ public class AttendanceCard extends UiPart<Region> {
 
         StringBuilder attendance = new StringBuilder();
         for (int i = 0; i < attendanceList.size(); i++) {
-            attendance.append(attendanceList.get(i).toString());
+            String attendanceDate = attendanceList.get(i).attendanceDate.format(
+                    DateTimeFormatter.ofPattern("dd/MM/yy"));
+            attendance.append(attendanceDate);
             if (i != attendanceList.size() - 1) {
                 attendance.append(", ");
             }
