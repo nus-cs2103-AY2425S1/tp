@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_OR_NAME;
+import static seedu.address.logic.Messages.MESSAGE_MULTIPLE_WAYS_FORBIDDEN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -16,14 +19,20 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Name;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Role;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
+
+    public final static String MESSAGE_END_PART = "Command format:\n"
+            + EditCommand.MESSAGE_COMMAND_FORMAT + "\n"
+            + String.format(MESSAGE_HELP_PROMPT,
+            HelpCommand.COMMAND_WORD + " " + EditCommand.COMMAND_WORD);
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -36,15 +45,20 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM_HANDLE, PREFIX_EMAIL,
                         PREFIX_STUDENT_STATUS, PREFIX_ROLE, PREFIX_NICKNAME);
 
-        Index index = null;
-        String str = null;
-        Name name = null;
-
-
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
                 PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
 
-        EditCommand.EditContactDescriptor editContactDescriptor = new EditContactDescriptor();
+        EditContactDescriptor editContactDescriptor = new EditContactDescriptor();
+
+        Index index = null;
+        Name name = null;
+
+        String str = argMultimap.getPreamble();
+        if (str.isEmpty()) {
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Missing index or Full name. " + MESSAGE_END_PART));
+        }
 
         // for the future where we can apply polymorphism and not worry about .setName() .setHandle() etc
         /*
@@ -77,27 +91,30 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editContactDescriptor::setRoles);
 
         if (!editContactDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditCommand.MESSAGE_MISSING_PREFIX); // Fields missing or at least 1....in
+            // edit or in general?
         }
 
         // parse the index to edit, else parse the name
+        //boolean isIntegerIndex = true;
+        //str.matches("^[0-9]$");
+
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(str);
+            return new EditCommand(index, editContactDescriptor);
         } catch (ParseException pe) {
-            str = argMultimap.getPreamble();
-            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-        if (index == null) {
-            try {
-                name = ParserUtil.parseName(str);
-            } catch (Exception ex) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), ex);
-            }
-            return new EditCommand(name, editContactDescriptor);
+            //isIntegerIndex = false;
+            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_FUNCTION), pe);
         }
 
-        return new EditCommand(index, editContactDescriptor);
+        try { // removed if (index == null) because it will always be true
+            name = ParserUtil.parseName(str);
+            return new EditCommand(name, editContactDescriptor);
+        } catch (Exception ex) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_INVALID_INDEX_OR_NAME
+                            + String.format(MESSAGE_MULTIPLE_WAYS_FORBIDDEN, EditCommand.COMMAND_WORD)));
+        }
     }
 
     /**

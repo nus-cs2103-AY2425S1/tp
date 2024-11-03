@@ -14,8 +14,8 @@ import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.tag.Nickname;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Nickname;
+import seedu.address.model.contact.Role;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -46,11 +46,11 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (name.isEmpty()) {
+        if (trimmedName.isEmpty()) {
             throw new ParseException("Name " + MESSAGE_BLANK_FIELD);
         }
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException("Invalid Name!\n" + Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
@@ -64,11 +64,11 @@ public class ParserUtil {
     public static TelegramHandle parseTelegramHandle(String telegramHandle) throws ParseException {
         requireNonNull(telegramHandle);
         String trimmedTelegramHandle = telegramHandle.trim();
-        if (telegramHandle.isEmpty()) {
+        if (trimmedTelegramHandle.isEmpty()) {
             throw new ParseException("Telegram Handle " + MESSAGE_BLANK_FIELD);
         }
         if (!TelegramHandle.isValidTelegramHandle(trimmedTelegramHandle)) {
-            throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
+            throw new ParseException("Invalid Telegram Handle!\n" + TelegramHandle.MESSAGE_CONSTRAINTS);
         }
         return new TelegramHandle(trimmedTelegramHandle);
     }
@@ -82,11 +82,11 @@ public class ParserUtil {
     public static StudentStatus parseStudentStatus(String studentStatus) throws ParseException {
         requireNonNull(studentStatus);
         String trimmedStudentStatus = studentStatus.trim();
-        if (studentStatus.isEmpty()) {
+        if (trimmedStudentStatus.isEmpty()) {
             throw new ParseException("Student Status " + MESSAGE_BLANK_FIELD);
         }
         if (!StudentStatus.isValidStudentStatus(trimmedStudentStatus)) {
-            throw new ParseException(StudentStatus.MESSAGE_CONSTRAINTS);
+            throw new ParseException("Invalid Student Status!\n" + StudentStatus.MESSAGE_CONSTRAINTS);
         }
         return new StudentStatus(trimmedStudentStatus);
     }
@@ -100,11 +100,11 @@ public class ParserUtil {
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (email.isEmpty()) {
+        if (trimmedEmail.isEmpty()) {
             throw new ParseException("Email " + MESSAGE_BLANK_FIELD);
         }
         if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException("Invalid Email!\n" + Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
     }
@@ -118,11 +118,11 @@ public class ParserUtil {
     public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
         String trimmedRole = role.trim();
-        if (role.isEmpty()) {
+        if (trimmedRole.isEmpty()) {
             throw new ParseException(MESSAGE_BLANK_FIELD);
         }
         if (!Role.isValidRoleName(trimmedRole)) {
-            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+            throw new ParseException("Invalid Role!\n" + Role.MESSAGE_CONSTRAINTS);
         }
         return new Role(trimmedRole);
     }
@@ -141,9 +141,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String nickname} into a {@code Nickname}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code Nickname} is invalid.
+     * Leading and trailing whitespaces will be trimmed.*
      */
     public static Nickname parseNickname(String nickname) throws ParseException {
         requireNonNull(nickname);

@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -12,20 +13,24 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.tag.Nickname;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Nickname;
+import seedu.address.model.contact.Role;
 
 /**
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    public final static String MESSAGE_END_PART = "Command format: " + AddCommand.MESSAGE_COMMAND_FORMAT + "\n"
+            + String.format(MESSAGE_HELP_PROMPT,
+    HelpCommand.COMMAND_WORD + " " + AddCommand.COMMAND_WORD);
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -42,14 +47,14 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, "Missing fields and/or prefixes. Ensure there are no "
-                            + "non-whitespace characters before the prefix as well. Command usage:\n" + AddCommand.MESSAGE_USAGE));
+                    MESSAGE_INVALID_COMMAND_FORMAT,
+                    "There must be a valid prefix right after `" + AddCommand.COMMAND_WORD +"`\n"
+                            + MESSAGE_END_PART));
         }
-
         if (!arePrefixesPresent(argMultimap, compulsoryPrefixes)) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, stringifyAllAbsentPrefix(argMultimap,
-                            compulsoryPrefixes) + " prefix(es) is/are missing. Command usage:\n" + AddCommand.MESSAGE_USAGE));
+                            compulsoryPrefixes) + " mandatory prefix(es) is/are missing. " + MESSAGE_END_PART));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
@@ -60,7 +65,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         StudentStatus studentStatus = ParserUtil.parseStudentStatus(argMultimap.getValue(PREFIX_STUDENT_STATUS).get());
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
-        Nickname nickname = ParserUtil.parseNickname(argMultimap.getValue(PREFIX_NICKNAME).orElse(" "));
+        Nickname nickname = ParserUtil.parseNickname(argMultimap.getValue(PREFIX_NICKNAME).orElse(""));
 
         Contact contact = new Contact(name, telegramHandle, email, studentStatus, roleList, nickname);
 
@@ -75,8 +80,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         return prefixes.stream().allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private static String stringifyAllAbsentPrefix(ArgumentMultimap argumentMultimap,
-                                                   List<Prefix> prefixes) {
+    private static String stringifyAllAbsentPrefix(ArgumentMultimap argumentMultimap, List<Prefix> prefixes) {
         return prefixes.stream().filter(prefix -> !argumentMultimap.getValue(prefix).isPresent())
                 .map(prefix -> prefix.getPrefix())
                 .reduce("", (allPrefixes, prefixString) -> allPrefixes + prefixString + "  ")

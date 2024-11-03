@@ -42,7 +42,7 @@ import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Role;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -138,7 +138,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_noFieldsEdited_failure() {
         String userInput = DEFAULT_NAME;
-        assertParseFailure(parser, userInput, EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, userInput, EditCommand.MESSAGE_MISSING_PREFIX);
     }
 
     @Test

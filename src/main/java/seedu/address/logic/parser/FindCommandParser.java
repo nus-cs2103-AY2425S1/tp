@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_EMPTY_PREFIX_FIELD;
+import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
+import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_NO_PARAMETER_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -15,15 +15,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.ContainsKeywordsPredicate;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Role;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+    public final static String MESSAGE_END_PART = "Command format:\n"
+            + FindCommand.MESSAGE_COMMAND_FORMAT + String.format(MESSAGE_HELP_PROMPT,
+            HelpCommand.COMMAND_WORD + " " + FindCommand.COMMAND_WORD);
+
+    public static final String MESSAGE_NO_PARAMETER_FOUND = "Please enter something for me to search";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -41,11 +48,21 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
 
         if (args.trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_NO_PARAMETER_FOUND, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_NO_PARAMETER_FOUND + ". " + MESSAGE_END_PART));
         }
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
+                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME)) {
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, "Prefixes are missing! " + MESSAGE_END_PART));
+        }
+
+        // repeat in add command
         if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "There must be a valid" +
+                    " prefix right after `" + FindCommand.COMMAND_WORD +"`\n" + MESSAGE_END_PART));
         }
 
         List<String> nameKeywords = List.of();
@@ -97,10 +114,19 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (trimmedArg.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_EMPTY_PREFIX_FIELD, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_BLANK_FIELD));
         }
         String[] keywords = trimmedArg.split("\\s+");
         return Arrays.asList(keywords);
+    }
+
+    // from add command but change from allMatch to anyMatch
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Arrays.stream(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
 

@@ -44,7 +44,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        String testInNameCase = convertToNameCase(test);
+    String testInNameCase = convertToNameCase(test);
         String validSpecialCharForRegex = identifyValidSpecialChar(testInNameCase);
         boolean hasNoSpecialChar = validSpecialCharForRegex.isEmpty();
         boolean hasOpenBracket = validSpecialCharForRegex.equals("(");
@@ -91,7 +91,6 @@ public class Name {
         if (word.equalsIgnoreCase("s/o") || word.equalsIgnoreCase("d/o")) {
             return word.toUpperCase();
         }
-        // inspired from Baeldung <link>
         return Character.toUpperCase(word.charAt(0)) + word.substring(1, word.length());
     }
 
@@ -141,5 +140,4 @@ public class Name {
     public int compareTo(Name otherName) {
         return fullName.toLowerCase().compareTo(otherName.fullName.toLowerCase());
     }
-
 }

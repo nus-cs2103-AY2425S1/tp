@@ -8,7 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Role;
 
 /**
  * An UI component that displays information of a {@code Contact}.

@@ -20,16 +20,16 @@ import seedu.address.model.contact.Contact;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_FUNCTION = COMMAND_WORD + ": Adds a contact to the address book. ";
+    public static final String MESSAGE_COMMAND_FORMAT = COMMAND_WORD + " "// "Fields: "
             + PREFIX_NAME + "NAME "
             + PREFIX_TELEGRAM_HANDLE + "TELEGRAM "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_STUDENT_STATUS + "STUDENT_STATUS "
             + PREFIX_ROLE + "ROLE [...] "
-            + "[" + PREFIX_NICKNAME + "NICKNAME]\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_NICKNAME + "NICKNAME]";
+    public static final String MESSAGE_COMMAND_EXAMPLE = "Example: "
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TELEGRAM_HANDLE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -37,6 +37,9 @@ public class AddCommand extends Command {
             + PREFIX_ROLE + "Admin "
             + PREFIX_ROLE + "President "
             + PREFIX_NICKNAME + "altName";
+    public static final String MESSAGE_COMMAND_FULL_USAGE = MESSAGE_FUNCTION
+            + "\nFormat: " + MESSAGE_FUNCTION
+            + "\nExample: " + MESSAGE_COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";

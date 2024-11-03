@@ -14,8 +14,9 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all contacts";
 
-    public static final String MESSAGE_USAGE = "Type in " + COMMAND_WORD
-            + " only. No other parameters needed. List is to show all contacts, as opposed to find command.";
+    public static final String MESSAGE_FUNCTION = "List is to show all contacts, as opposed to find command.";
+
+    public static final String MESSAGE_COMMAND_FORMAT = COMMAND_WORD;
 
     @Override
     public CommandResult execute(Model model) {

@@ -27,8 +27,8 @@ import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.tag.Nickname;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Nickname;
+import seedu.address.model.contact.Role;
 
 /**
  * Edits the details of an existing contact in the address book.
@@ -37,29 +37,36 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the contact identified "
-            + "by the index number used in the displayed contact list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_FUNCTION = COMMAND_WORD + ": Edits the details of the contact "
+            + "identified by the full name or the numerical index used in the displayed contact list. "
+            + "Existing values will be overwritten by the input values.";
+    public static final String MESSAGE_COMMAND_FORMAT = COMMAND_WORD + " "
+            + "INDEX (positive integer) OR FULL_NAME "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_TELEGRAM_HANDLE + "telegramHandle] "
+            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM_HANDLE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_STUDENT_STATUS + "STUDENT_STATUS] "
-            + "[" + PREFIX_ROLE + "ROLE]"
-            + "[" + PREFIX_NICKNAME + "NICKNAME]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_ROLE + "ROLE[...]] "
+            + "[" + PREFIX_NICKNAME + "NICKNAME]"
+            + "\nformat in short: `" + COMMAND_WORD + " [INDEX OR FULL_NAME] [PREFIX] [new description]`";
+    public static final String MESSAGE_COMMAND_EXAMPLE = "Example One: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEGRAM_HANDLE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
-
-    public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Contact edited successfully! The index "
-            + "of the contact has been reassigned if the name or nickname is edited. Edited Contact:\n%1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Ensure " +
-            "that the prefix is spelt correctly as well (e.g. n/ and not /n)";
+            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + "Example Two: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Jane Doe\n"
+            + "Example Three: " + COMMAND_WORD + " 2 " + PREFIX_NAME + " John Doe" + PREFIX_NICKNAME + " " +
+            "johnny";
+    public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Contact edited successfully! Edited "
+            + "Contact: %1$s\nThe display index of the contact may be reassigned if the name or nickname "
+            + "is edited. ";
+    public static final String MESSAGE_MISSING_PREFIX = "Prefix(es) for editing is missing, at least one must "
+            + "be provided. Ensure correct spelling of prefix too (e.g. n/ and not /n)";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This will result in a contact that already " +
             "exists in the address book. Check if the edits to make or the existing contact details are " +
             "incorrect";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-            "One of the fields you want to add/change conflict with another contact.";
+            "One of the fields you want to add/change conflict with another contact. \nNo same email, " +
+                    "telegram, and president role is allowed. Contacts with the same full names must have " +
+                    "one of the contact's unique nickname indicated in the addressbook";
 
     private static final int invalidTargetIndex = -1;
 
@@ -96,21 +103,22 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Contact> lastShownList = model.getFilteredContactList();
-
+        List<Contact> lastShownFilteredList = model.getFilteredContactList();
+        List<Contact> allContactList = model.getAllContactList();
         // System.out.println("attempting to execute EditCommand, targetIndex = " + targetIndex);
 
         if (targetIndex == null) {
-            setTargetIndex(lastShownList);
+            screenDuplicate(allContactList);
+            setTargetIndex(lastShownFilteredList);
             // System.out.println("Have set Target Index: " + targetIndex);
         }
         assert(targetIndex != null);
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownFilteredList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
-        Contact contactToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Contact contactToEdit = lastShownFilteredList.get(targetIndex.getZeroBased());
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
         if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
@@ -134,7 +142,8 @@ public class EditCommand extends Command {
                 .reduce(invalidTargetIndex, (x, y) -> y);
         // System.out.println("temp = " + temp);
         if (temp == invalidTargetIndex) {
-            throw new CommandException(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK);
+            throw new CommandException(String.format(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK,
+                    targetName));
         }
         this.targetIndex = Index.fromZeroBased(temp);
     }
@@ -156,10 +165,6 @@ public class EditCommand extends Command {
         Nickname updatedNickname = editContactDescriptor.getNickname().orElse(contactToEdit.getNickname());
         return new Contact(updatedName, updatedTelegramHandle, updatedEmail, updatedStudentStatus, updatedRoles,
                 updatedNickname);
-    }
-
-    private String editInfo(List<String> fieldsEdited) {
-        return fieldsEdited.stream().map(fieldClass -> fieldClass.getValue() )
     }
 
     @Override
@@ -199,6 +204,20 @@ public class EditCommand extends Command {
     }
     */
 
+    // DRY not adhered (compare to delete)
+    private void screenDuplicate(List<Contact> lastShownList) throws CommandException {
+        long nameCount = lastShownList.stream()
+                .filter(contact -> contact.getName().equalsIgnoreCase(targetName))
+                .count();
+        boolean hasDuplicate = nameCount > 1;
+        if (hasDuplicate) {
+            throw new CommandException(
+                    String.format(
+                            Messages.MESSAGE_DUPLICATE_NAME,
+                            COMMAND_WORD, targetName.fullName));
+        }
+    }
+
     /**
      * Stores the details to edit the contact with. Each non-empty field value will replace the
      * corresponding field value of the contact.
@@ -210,7 +229,6 @@ public class EditCommand extends Command {
         private StudentStatus studentStatus;
         private Set<Role> roles;
         private Nickname nickname;
-        private List<String> fieldsToEdit;
 
         public EditContactDescriptor() {}
 
@@ -236,7 +254,6 @@ public class EditCommand extends Command {
 
         public void setName(Name name) {
             this.name = name;
-            fieldsToEdit.add("name");
         }
 
         public Optional<Name> getName() {
@@ -244,9 +261,7 @@ public class EditCommand extends Command {
         }
 
         public void setTelegramHandle(TelegramHandle telegramHandle) {
-
             this.telegramHandle = telegramHandle;
-            fieldsToEdit.add("telegramhandle");
         }
 
         public Optional<TelegramHandle> getTelegramHandle() {
@@ -254,9 +269,7 @@ public class EditCommand extends Command {
         }
 
         public void setEmail(Email email) {
-
             this.email = email;
-            fieldsToEdit.add("email");
         }
 
         public Optional<Email> getEmail() {
@@ -264,9 +277,7 @@ public class EditCommand extends Command {
         }
 
         public void setStudentStatus(StudentStatus studentStatus) {
-
             this.studentStatus = studentStatus;
-            fieldsToEdit.add("studentStatus");
         }
 
         public Optional<StudentStatus> getStudentStatus() {
@@ -279,7 +290,6 @@ public class EditCommand extends Command {
          */
         public void setRoles(Set<Role> roles) {
             this.roles = (roles != null) ? new HashSet<>(roles) : null;
-            fieldsToEdit.add("roles");
         }
 
         /**
@@ -293,16 +303,10 @@ public class EditCommand extends Command {
 
         public void setNickname(Nickname nickname) {
             this.nickname = nickname;
-            fieldsToEdit.add("nickname");
         }
 
         public Optional<Nickname> getNickname() {
             return Optional.ofNullable(nickname);
-        }
-
-        // can abstract the class of personal particulars with a generic one
-        public List<String> getfieldsToEdit() {
-            return fieldsToEdit;
         }
 
         @Override

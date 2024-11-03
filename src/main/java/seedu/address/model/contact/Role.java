@@ -1,4 +1,4 @@
-package seedu.address.model.tag;
+package seedu.address.model.contact;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -26,7 +26,7 @@ public class Role {
             + "4. " + MARKETING + "\n"
             + "5. " + EVENTS_INTERNAL + "\n"
             + "6. " + EVENTS_EXTERNAL + "\n"
-            + "7. " + EXTERNAL_RELATIONS + "\n";
+            + "7. " + EXTERNAL_RELATIONS;
     public static final String[] AVAILABLE_ROLES = {
         PRESIDENT,
         VICE_PRESIDENT,
@@ -92,5 +92,4 @@ public class Role {
     public String toString() {
         return '[' + roleName + ']';
     }
-
 }

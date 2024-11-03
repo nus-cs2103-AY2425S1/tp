@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Role;
 
 /**
  * A utility class for Contact.

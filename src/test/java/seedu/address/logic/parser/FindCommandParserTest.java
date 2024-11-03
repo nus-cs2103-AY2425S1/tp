@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_EMPTY_PREFIX_FIELD;
+import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_NO_PARAMETER_FOUND;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_ADMIN;
@@ -22,13 +22,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.contact.ContainsKeywordsPredicate;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Role;
 import seedu.address.testutil.ContainsKeywordsPredicateBuilder;
 
 public class FindCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_FUNCTION);
 
     private static final List<String> NAME_KEYWORD_LIST = Arrays.asList("amy", "Bob");
     private static final List<String> TELEGRAM_HANDLE_KEYWORD_LIST = Arrays.asList("amy", "123");
@@ -50,16 +50,16 @@ public class FindCommandParserTest {
     @Test
     public void parse_missingParts_throwsParseException() {
         // no arguments
-        assertParseFailure(parser, "     ", String.format(MESSAGE_NO_PARAMETER_FOUND, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_NO_PARAMETER_FOUND, FindCommand.MESSAGE_FUNCTION));
 
         // no prefix
         assertParseFailure(parser, " Alice Bob", MESSAGE_INVALID_FORMAT);
 
         // all empty prefix field
-        assertParseFailure(parser, " " + PREFIX_NAME, String.format(MESSAGE_EMPTY_PREFIX_FIELD));
+        assertParseFailure(parser, " " + PREFIX_NAME, String.format(MESSAGE_BLANK_FIELD));
 
         // only one empty prefix field
-        assertParseFailure(parser, " " + PREFIX_NAME + ROLE_DESC_PRESIDENT, String.format(MESSAGE_EMPTY_PREFIX_FIELD));
+        assertParseFailure(parser, " " + PREFIX_NAME + ROLE_DESC_PRESIDENT, String.format(MESSAGE_BLANK_FIELD));
     }
 
     @Test

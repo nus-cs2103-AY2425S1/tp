@@ -4,6 +4,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.contact.Contact;
 
@@ -12,21 +14,38 @@ import seedu.address.model.contact.Contact;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unrecognised command. "
+    public static final String MESSAGE_COMMAND_LIST = "add, edit, delete, find, list, help, clear, exit";
+    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command. "
             + "Only the following will be accepted as the first word of the command:\n"
-            + "add, edit, delete, find, list, help, clear, exit";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! %1$s"; // missing \n
-    public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
-    public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
-    public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): "; // very strange for UI
+            + MESSAGE_COMMAND_LIST;
 
-    public static final String MESSAGE_NAME_FIELD_MISSING = "Invalid command format! MISSING 'n/' \n%1$s";
-    public static final String MESSAGE_BLANK_FIELD = "field should not be blank!";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! %1$s";
+    public static final String MESSAGE_BLANK_FIELD = "field cannot be blank!";
+
+    public static final String MESSAGE_DUPLICATE_FIELDS =
+            "Multiple values specified for the following single-valued field(s): ";
+
+    public static final String MESSAGE_HELP_PROMPT = "Type `%1$s` for more info";
+
+
+    // find and list
+    public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
+
+    // edit and delete
+    public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX_OR_NAME = "Invalid Index or full name given. Index must be a positive Integer only. Full name "
+            + "must follow the constraints given for names. ";
     public static final String MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK =
-            "This contact is not in address book, please use Full Name";
-    public static final String MESSAGE_NO_PARAMETER_FOUND = "Please enter something for me to search";
-    public static final String MESSAGE_EMPTY_PREFIX_FIELD = "Fields cannot be empty";
+            "This contact is not in address book. Check if Full Name is used. Check contact's full name or "
+                    + "if it exists by finding. Example Command to " + FindCommand.COMMAND_WORD + ": `"
+                    + FindCommand.COMMAND_WORD + " " + PREFIX_NAME + " %1$s`";
+    public static final String MESSAGE_MULTIPLE_WAYS_FORBIDDEN = "%1$s by both index and full name is not " +
+            "allowed";
+    public static final String MESSAGE_DUPLICATE_NAME = "There is more than 1 contact with the same " +
+            "full name. Please %1$s by index.\nTip: find the contact's name to obtain their "
+            + "corresponding displayed index, and %1$s by the displayed index directly on the page. "
+            + "Command to find :\n"
+            + FindCommand.COMMAND_WORD + " " + PREFIX_NAME + " %2$s`";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -37,7 +56,7 @@ public class Messages {
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
-        return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+        return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields) + "\nwhich is not allowed.";
     }
 
     /**
@@ -52,12 +71,12 @@ public class Messages {
                 .append(contact.getEmail())
                 .append("; Student Status: ")
                 .append(contact.getStudentStatus());
+        builder.append("; Roles: ");
+        contact.getRoles().forEach(builder::append);
         if (!contact.getNickname().isEmpty()) {
             builder.append("; Nickname: ");
             builder.append(contact.getNickname());
         }
-        builder.append("; Roles: ");
-        contact.getRoles().forEach(builder::append);
         return builder.toString();
     }
 

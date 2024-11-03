@@ -23,16 +23,19 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all contacts whose details contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: "
+    public static final String MESSAGE_FUNCTION = COMMAND_WORD + ": Finds all contacts whose details contain any of "
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.";
+    public static final String MESSAGE_COMMAND_FORMAT = COMMAND_WORD + " "
             + "[" + PREFIX_NAME + "NAME KEYWORDS] "
             + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE KEYWORDS] "
             + "[" + PREFIX_EMAIL + "EMAIL KEYWORDS] "
             + "[" + PREFIX_STUDENT_STATUS + "STUDENT STATUS KEYWORDS] "
             + "[" + PREFIX_ROLE + "ROLE KEYWORDS]... "
-            + "[" + PREFIX_NICKNAME + "NICKNAME KEYWORDS]\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_NICKNAME + "NICKNAME KEYWORDS]"
+            + "\nformat in short: `" + COMMAND_WORD + " [PREFIX] [new description]`";
+    public static final String MESSAGE_COMMAND_EXAMPLE = "Example 1: " + COMMAND_WORD + " "
+            + PREFIX_NAME + " Jane Doe" + "\n"
+            + "Example 2: " + COMMAND_WORD + " "
             + PREFIX_NAME + "alice bob charlie "
             + PREFIX_ROLE + "President " + PREFIX_ROLE + "Admin";
 
