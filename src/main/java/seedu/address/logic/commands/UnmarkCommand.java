@@ -5,7 +5,6 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.person.AttendanceStatus;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
 
 /**
