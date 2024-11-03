@@ -69,9 +69,6 @@ public class DeleteNotesCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_NOTE_INDEX);
         }
 
-        // Save current version of the address book
-        model.saveAddressBookVersion();
-
         // remove the specified note
         Note noteToRemove = notesList.get(noteIndex.getZeroBased());
         notesList.remove(noteToRemove);

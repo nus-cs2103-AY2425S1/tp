@@ -13,7 +13,7 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_UNDO_SUCCESS = "Changes has been reverted!";
-    public static final String MESSAGE_UNDO_FAILURE = "Unable revert changes because"
+    public static final String MESSAGE_UNDO_FAILURE = "Unable revert changes because "
             + "there is no older version to revert to!";
 
     @Override

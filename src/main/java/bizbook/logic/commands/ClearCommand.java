@@ -17,8 +17,6 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        // Save current version of the address book
-        model.saveAddressBookVersion();
         model.setAddressBook(new AddressBook());
         CommandResult commandResult = new CommandResult(MESSAGE_SUCCESS, false, false);
         return commandResult;

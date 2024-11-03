@@ -2,7 +2,6 @@ package bizbook.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import bizbook.commons.util.ToStringBuilder;
@@ -28,11 +27,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-    }
-
-    public AddressBook() {
         pinnedPersons = new UniquePersonList();
     }
+
+    public AddressBook() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -59,7 +57,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         // Empty the pinned person list since we are reseting the addressbook
-        setPinnedPersons(new ArrayList<Person>());
+        setPinnedPersons(newData.getPinnedPersonList());
         setPersons(newData.getPersonList());
     }
 

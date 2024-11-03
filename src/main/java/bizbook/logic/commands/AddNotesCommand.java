@@ -64,9 +64,6 @@ public class AddNotesCommand extends Command {
             throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
         }
 
-        // Save current version of the address book
-        model.saveAddressBookVersion();
-
         notesList.add(note);
 
         Person editedPerson = new Person(

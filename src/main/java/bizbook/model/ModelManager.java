@@ -83,6 +83,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        this.saveAddressBookVersion();
         this.addressBook.resetData(addressBook);
     }
 
@@ -104,11 +105,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        this.saveAddressBookVersion();
         addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
+        this.saveAddressBookVersion();
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -116,18 +119,8 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
+        this.saveAddressBookVersion();
         addressBook.setPerson(target, editedPerson);
-    }
-
-    @Override
-    public void saveAddressBookVersion() {
-        addressBook.commit();
-    }
-
-    @Override
-    public void revertAddressBookVersion() {
-        addressBook.undo();
     }
 
     @Override
@@ -144,13 +137,25 @@ public class ModelManager implements Model {
     @Override
     public void pinPerson(Person person) {
         requireNonNull(person);
+        this.saveAddressBookVersion();
         this.addressBook.addPinnedPerson(person);
     }
 
     @Override
     public void unpinPerson(Person person) {
         requireNonNull(person);
+        this.saveAddressBookVersion();
         this.addressBook.removePinnedPerson(person);
+    }
+
+    @Override
+    public void saveAddressBookVersion() {
+        addressBook.commit();
+    }
+
+    @Override
+    public void revertAddressBookVersion() {
+        addressBook.undo();
     }
 
     //=========== Filtered Person List Accessors =============================================================
