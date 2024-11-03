@@ -84,16 +84,15 @@ public class Policy {
     }
 
     private void validatePolicy() throws CommandException {
-        if (this.endDate.isEqual(this.startDate)) {
+        if (this.getPolicyPaymentDueDate().isEqual(LocalDate.MAX)) {
+            ;
+        } else if (this.endDate.isEqual(this.startDate)) {
             throw new CommandException(START_EQ_END);
-        }
-        if (this.endDate.isBefore(this.startDate)) {
+        } else if (this.endDate.isBefore(this.startDate)) {
             throw new CommandException(END_DATE_BEFORE_START_DATE);
-        }
-        if (this.payment.getPaymentDueDate().isBefore(this.startDate)) {
+        } else if (this.payment.getPaymentDueDate().isBefore(this.startDate)) {
             throw new CommandException(PREMIUM_DUE_DATE_BEFORE_START_DATE);
-        }
-        if (this.payment.getPaymentDueDate().isAfter(this.endDate)) {
+        } else if (this.payment.getPaymentDueDate().isAfter(this.endDate)) {
             throw new CommandException(PREMIUM_DUE_DATE_AFTER_END_DATE);
         }
     }
@@ -122,12 +121,10 @@ public class Policy {
         if (policyName.trim().isEmpty()) {
             return false;
         }
-
         try {
             LocalDate.parse(startDateStr, DATE_FORMATTER);
             LocalDate.parse(endDateStr, DATE_FORMATTER);
             return true;
-
         } catch (DateTimeParseException e) {
             return false;
         }

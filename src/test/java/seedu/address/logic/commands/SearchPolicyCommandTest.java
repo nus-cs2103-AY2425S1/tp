@@ -59,10 +59,10 @@ public class SearchPolicyCommandTest {
     }
 
     @Test
-    public void execute_noPersonWithPolicy_noPersonFound() {
+    public void execute_noPersonWithPolicy_noPersonFound() throws CommandException {
         Model model = new ModelManager();
-
         // Create policy object
+
         Policy lifeInsurance = new Policy("life insurance", "2024-10-10",
                 "2030-10-10", "2024-11-10 100.00");
 
@@ -90,7 +90,7 @@ public class SearchPolicyCommandTest {
     }
 
     @Test
-    public void execute_oneMatch_personFound() {
+    public void execute_oneMatch_personFound() throws CommandException {
         Model model = new ModelManager();
 
         // Create policy object
@@ -124,7 +124,7 @@ public class SearchPolicyCommandTest {
     }
 
     @Test
-    public void execute_multipleMatches_multiplePersonsFound() {
+    public void execute_multipleMatches_multiplePersonsFound() throws CommandException {
 
         Model model = new ModelManager();
 
