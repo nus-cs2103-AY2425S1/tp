@@ -75,5 +75,11 @@ class AddShortCutCommandParserTest {
         String userInput = " " + PREFIX_ALIAS + "v " + PREFIX_ALIAS + "v2 " + PREFIX_FULLTAGNAME + "Vegan";
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
+    @Test
+    void parse_invalidValuesBeforePrefix() {
+        String userInput = " nonsenseValue" + PREFIX_ALIAS + "v" + PREFIX_FULLTAGNAME + "Vegan";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddShortCutCommand.MESSAGE_USAGE));
+    }
 
 }

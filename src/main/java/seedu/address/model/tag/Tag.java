@@ -44,7 +44,6 @@ public class Tag {
     }
     /**
      * Updates the hashmap containing the alias and fullTagName
-     * @param model
      */
     public static void updateShortCutMappings(Model model) {
         ObservableList<ShortCut> shortCutList = model.getShortCutList();
