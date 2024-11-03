@@ -12,7 +12,8 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.wedding.Wedding;
 
 /**
- * TO be updated
+ * Represents a command to view the participants of a specified wedding.
+ * This command is case-insensitive and expects the wedding names to be in the format of "NAME & NAME".
  */
 public class ViewWeddingCommand extends Command {
     public static final String COMMAND_WORD = "view-wed";
