@@ -73,6 +73,7 @@ public class ExportCommandTest {
         ExportCommand exportCommand = new ExportCommand(conflictingPath);
         assertCommandFailure(exportCommand, model, "Failed to create directory structure for: "
             + conflictingPath);
+        tempFile.delete();
     }
 
 }
