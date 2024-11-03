@@ -56,7 +56,8 @@ public class Assignment {
         }
 
         return otherAssignment != null
-                && otherAssignment.assignmentName.equals(assignmentName);
+                && otherAssignment.assignmentName.equals(assignmentName)
+                && otherAssignment.maxScore == maxScore;
     }
 
     public AssignmentName getAssignmentName() {
