@@ -50,8 +50,12 @@ public class Messages {
             if (tag.tagValue != null) {
                 builder.append("=").append(tag.tagValue);
             }
-            builder.append("] ");
+            builder.append("]");
         });
+        builder.append("; Financial Info: ")
+                .append(person.getFinancialInfo())
+                .append("; Social Media Handle: ")
+                .append(person.getSocialMediaHandle());
         return builder.toString();
     }
 
