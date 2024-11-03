@@ -261,12 +261,22 @@ public class MainWindow extends UiPart<Stage> {
 
             case IMPORT_DATA: // intermediate
                 File importFile = selectImportFile();
+                if (importFile == null) {
+                    lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
+                    break;
+                }
+
                 logger.info(String.format("Importing data from &1%s", importFile.getPath()));
                 lastCommandResult = lastCommandResult.processFile(logic.importFile(importFile));
                 continue;
 
             case EXPORT_DATA: // intermediate
                 File exportFile = selectExportFile();
+                if (exportFile == null) {
+                    lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
+                    break;
+                }
+
                 logger.info(String.format("Exporting data to &1%s", exportFile.getPath()));
                 lastCommandResult = lastCommandResult.processFile(logic.exportFile(exportFile));
                 continue;
