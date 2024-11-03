@@ -6,7 +6,13 @@
 
 # GOATS User Guide
 
-Greatest Offline Addressbook for Teaching Students (GOATS) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, GOATS can get your contact management tasks done faster than traditional GUI apps.
+## Introduction
+Are you a private tutor who has trouble keeping track of your students details? Ever wanted to have an easier way to keep track of whose parents is which students? <br><br>
+Greatest Offline Addressbook for Teaching Students (GOATS) is an **offline desktop app** designed with you in mind. It not only helps you keep track of students grades and education level, it can also help you keep track of their parent as well.
+<br><br>
+It is optimised for fast typist using Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI) allowing to scan through information quickly. 
+<br><br>
+If you can type fast, GOATS can get your student management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
