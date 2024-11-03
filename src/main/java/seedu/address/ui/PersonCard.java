@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
 
@@ -18,6 +20,8 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+
+    private final Logger logger = LogsCenter.getLogger(PersonCard.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -56,6 +60,8 @@ public class PersonCard extends UiPart<Region> {
      */
     public PersonCard(Person person, ObservableList<Participation> participationList, int displayedIndex) {
         super(FXML);
+        logger.info("Creating PersonCard for " + person + "\n - Participation: " + participationList);
+
         this.person = person;
         id.setText(displayedIndex + "");
         name.setText(person.getName().fullName);

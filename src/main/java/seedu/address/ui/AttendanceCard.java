@@ -3,9 +3,8 @@ package seedu.address.ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Attendance;
 
 /**
@@ -22,6 +22,8 @@ import seedu.address.model.person.Attendance;
 public class AttendanceCard extends UiPart<Region> {
 
     private static final String FXML = "AttendanceCard.fxml";
+
+    private final Logger logger = LogsCenter.getLogger(AttendanceCard.class);
 
     public final List<Attendance> attendanceList;
     public final String tutorial;
@@ -52,7 +54,7 @@ public class AttendanceCard extends UiPart<Region> {
             }
             return 0;
         });
-        
+
         this.attendanceList = attendanceList;
         this.tutorial = tutorial;
 
@@ -63,32 +65,42 @@ public class AttendanceCard extends UiPart<Region> {
         subject.setText(tutorial);
 
         setAttendance();
+        logger.info("Successfully created attendance card for tutorial: " + tutorial);
     }
 
     /**
      * Sets the UI component to display current week's attendance and other attendance.
      */
     private void setAttendance() {
+        logger.info("Setting attendance display for tutorial: " + tutorial);
+
         Attendance currentWeekAttendance = getCurrentWeekAttendance();
         if (attendanceList.isEmpty()) {
+            logger.info("No attendance to display");
+
             attendance.setText("not attended");
             setAttendanceLabelNotAttendedStyle();
 
             otherAttendance.setText("No more attendance to show");
         } else if (currentWeekAttendance == null) {
+            logger.info("No attendance for current week to display");
+
             attendance.setText("not attended");
             setAttendanceLabelNotAttendedStyle();
 
             otherAttendance.setText(formatOtherAttendance(attendanceList));
+            logger.info("Successfully set display for other weeks' attendance");
         } else {
             attendance.setText(currentWeekAttendance.toDisplayString());
             setAttendanceLabelAttendedStyle();
+            logger.info("Successfully set display for current week attendance");
 
             List<Attendance> otherAttendanceList = attendanceList
                     .stream()
                     .filter(attendance -> !attendance.equals(currentWeekAttendance))
                     .toList();
             otherAttendance.setText(formatOtherAttendance(otherAttendanceList));
+            logger.info("Successfully set display for other weeks' attendance");
         }
     }
 

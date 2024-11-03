@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Comparator;
+import java.util.logging.Logger;
 
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participation.Participation;
 
 /**
@@ -22,6 +24,8 @@ import seedu.address.model.participation.Participation;
 public class AttendanceContainer extends UiPart<Region> {
 
     private static final String FXML = "AttendanceContainer.fxml";
+
+    private final Logger logger = LogsCenter.getLogger(AttendanceContainer.class);
 
     public final ObservableList<Participation> participationList;
 
@@ -44,15 +48,16 @@ public class AttendanceContainer extends UiPart<Region> {
 
         //listener to trigger UI update when participationList changes
         participationList.addListener((ListChangeListener<Participation>) change -> {
+            logger.info("Change observed in participation list");
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
                     setAttendanceList();
                 }
             }
         });
-
         setAttendanceList();
         setDisplayDate();
+        logger.info("Successfully created attendance container");
     }
 
     /**
@@ -60,7 +65,9 @@ public class AttendanceContainer extends UiPart<Region> {
      * attendanceList to be displayed in the UI.
      */
     private void setAttendanceList() {
+        logger.info("Setting display for the list of participation");
         if (participationList.isEmpty()) {
+            logger.info("No participation to display");
             setEmptyParticipationPlaceholder();
         } else {
             attendanceList.getChildren().clear();
@@ -68,6 +75,7 @@ public class AttendanceContainer extends UiPart<Region> {
                     .forEach(participation -> attendanceList.getChildren()
                     .add(new AttendanceCard(participation.getTutorialSubject(),
                             participation.getAttendanceList()).getRoot()));
+            logger.info("Successfully set the display for all participation");
         }
     }
 
