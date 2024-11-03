@@ -7,9 +7,9 @@ public abstract class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String ARGUMENT_WORD_ASC = "ASC";
+    public static final String ARGUMENT_WORD_ASC = "asc";
 
-    public static final String ARGUMENT_WORD_DESC = "DESC";
+    public static final String ARGUMENT_WORD_DESC = "desc";
 
     public static final String ASCENDING_SUCCESS = " in ascending order";
 
@@ -17,7 +17,7 @@ public abstract class SortCommand extends Command {
 
     public static final String MESSAGE_PURPOSE = "Sorts the contents of StaffSync.";
 
-    public static final String MESSAGE_FORMAT = COMMAND_WORD + " FIELD (name/date/dept/role) ORDER (ASC/DESC)";
+    public static final String MESSAGE_FORMAT = COMMAND_WORD + " FIELD (name/date/dept/role) ORDER (asc/desc)";
 
     public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " name ASC";
 
