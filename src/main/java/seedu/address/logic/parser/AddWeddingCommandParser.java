@@ -19,9 +19,9 @@ import seedu.address.model.wedding.WeddingName;
  */
 public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddWeddingCommand
+     * Parses the given {@code String} of arguments in the context of the AddWeddingCommand.
      * and returns an AddWeddingCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddWeddingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -44,8 +44,11 @@ public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Returns true if the prefixes contain all the required fields.
+     * @param argumentMultimap
+     * @param prefixes
+     * @return boolean
+     * @see ArgumentMultimap
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

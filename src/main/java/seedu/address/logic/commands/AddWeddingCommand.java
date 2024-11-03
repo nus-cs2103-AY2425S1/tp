@@ -39,7 +39,7 @@ public class AddWeddingCommand extends Command {
     private final Wedding toAdd;
 
     /**
-     * Creates an AddWeddingCommand to add the specified {@code Wedding}
+     * Creates an AddWeddingCommand to add the specified {@code Wedding}.
      * @param wedding
      */
     public AddWeddingCommand(Wedding wedding) {
@@ -47,6 +47,12 @@ public class AddWeddingCommand extends Command {
         this.toAdd = wedding;
     }
 
+    /**
+     * Executes the command and returns the result message.
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display
+     * @throws CommandException If the wedding already exists in the address book.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -57,17 +63,8 @@ public class AddWeddingCommand extends Command {
             throw new CommandException("A wedding cannot involve marrying oneself");
         }
 
-        // Check if a wedding with the same two people already exists, regardless of the order
-        Set<Set<String>> existingWeddingsNamesSet = new HashSet<>();
-
-        for (Wedding existingWedding : model.getWeddingBook().getWeddingList()) {
-            String[] existingNames = existingWedding.getName().split("&");
-            if (existingNames.length == 2) {
-                Set<String> existingNamesSet = new HashSet<>(Arrays.asList(existingNames[0].trim().toLowerCase(),
-                        existingNames[1].trim().toLowerCase()));
-                existingWeddingsNamesSet.add(existingNamesSet);
-            }
-        }
+        // Check if the wedding already exists in the address book
+        Set<Set<String>> existingWeddingsNamesSet = getSets(model);
 
         Set<String> toAddNamesSet = new HashSet<>(Arrays.asList(names[0].trim().toLowerCase(),
                 names[1].trim().toLowerCase()));
@@ -79,6 +76,26 @@ public class AddWeddingCommand extends Command {
         model.addWedding(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
+
+    /**
+     * Returns a set of sets of names of existing weddings in the address book.
+     * @param model {@code Model} which the command should operate on.
+     * @return a set of sets of names of existing weddings in the address book.
+     */
+    private static Set<Set<String>> getSets(Model model) {
+        Set<Set<String>> existingWeddingsNamesSet = new HashSet<>();
+
+        for (Wedding existingWedding : model.getWeddingBook().getWeddingList()) {
+            String[] existingNames = existingWedding.getName().split("&");
+            if (existingNames.length == 2) {
+                Set<String> existingNamesSet = new HashSet<>(Arrays.asList(existingNames[0].trim().toLowerCase(),
+                        existingNames[1].trim().toLowerCase()));
+                existingWeddingsNamesSet.add(existingNamesSet);
+            }
+        }
+        return existingWeddingsNamesSet;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
