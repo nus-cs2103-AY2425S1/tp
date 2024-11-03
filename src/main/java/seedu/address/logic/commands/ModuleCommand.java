@@ -67,9 +67,7 @@ public class ModuleCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
-        ArrayList<Module> modules = person.getModules()
-                .stream()
-                .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Module> modules = person.getModules();
 
         if (modules.contains(module)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, module.value));
