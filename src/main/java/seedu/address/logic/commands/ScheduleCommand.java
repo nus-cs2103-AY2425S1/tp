@@ -13,6 +13,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
 
@@ -43,7 +44,7 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_SLOT_TAKEN = "The selected time slot is already taken.";
     public static final String MESSAGE_INVALID_NAME = "Person not found.";
     public static final String MESSAGE_INVALID_DATE = "Format of the date must be in YYYY-MM-DD";
-    private String name;
+    private Name name;
     private Set<Schedule> scheduleSet;
 
     /**
@@ -52,7 +53,7 @@ public class ScheduleCommand extends Command {
      * @param name The name of the person.
      * @param scheduleSet The set of schedule date and time and optional notes.
      */
-    public ScheduleCommand(String name, Set<Schedule> scheduleSet) {
+    public ScheduleCommand(Name name, Set<Schedule> scheduleSet) {
         this.name = name;
         this.scheduleSet = scheduleSet;
     }
@@ -74,7 +75,7 @@ public class ScheduleCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         int index = -1;
         for (int i = 0; i < lastShownList.size(); i++) {
-            if (lastShownList.get(i).getName().toString().equals(name)) {
+            if (lastShownList.get(i).getName().toString().equals(name.toString())) {
                 index = i;
                 break;
             }

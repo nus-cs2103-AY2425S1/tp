@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
 import seedu.address.testutil.PersonBuilder;
@@ -39,7 +40,7 @@ public class ScheduleCommandTest {
         Set<Schedule> validSchedule = new HashSet<>();
         validSchedule.add(new Schedule("2024-10-04 1000", ""));
 
-        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), validSchedule);
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName(), validSchedule);
 
         Person scheduledPerson = new PersonBuilder(personToSchedule)
                 .withSchedule(new String[]{"2024-10-04 1000"}, new String[]{""}).build();
@@ -59,7 +60,7 @@ public class ScheduleCommandTest {
         Set<Schedule> invalidSchedule = new HashSet<>();
         invalidSchedule.add(new Schedule("2024-10-05 1730", "")); // Outside working hours
 
-        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), invalidSchedule);
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName(), invalidSchedule);
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
     }
@@ -77,7 +78,7 @@ public class ScheduleCommandTest {
 
         // Try to schedule another person with the same time slot
         Person secondPerson = model.getFilteredPersonList().get(1);
-        ScheduleCommand command = new ScheduleCommand(secondPerson.getName().toString(), takenSchedule);
+        ScheduleCommand command = new ScheduleCommand(secondPerson.getName(), takenSchedule);
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_SLOT_TAKEN);
     }
 
@@ -85,7 +86,8 @@ public class ScheduleCommandTest {
     public void execute_personNotFound_throwsCommandException() {
         Set<Schedule> schedules = new HashSet<>();
         schedules.add(new Schedule("2024-10-04 1000", ""));
-        ScheduleCommand command = new ScheduleCommand("Unknown Person", schedules);
+        Name name = new Name("unknown");
+        ScheduleCommand command = new ScheduleCommand(name, schedules);
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_NAME);
     }
@@ -95,7 +97,7 @@ public class ScheduleCommandTest {
         Set<Schedule> weekendSchedule = new HashSet<>();
         weekendSchedule.add(new Schedule("2024-10-06 1000", "")); // Saturday
 
-        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), weekendSchedule);
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName(), weekendSchedule);
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
     }
@@ -106,7 +108,7 @@ public class ScheduleCommandTest {
         Set<Schedule> earlySchedule = new HashSet<>();
         earlySchedule.add(new Schedule("2024-10-04 0800", "")); // Before 9 AM
 
-        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), earlySchedule);
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName(), earlySchedule);
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
     }
@@ -117,7 +119,7 @@ public class ScheduleCommandTest {
         Set<Schedule> lateSchedule = new HashSet<>();
         lateSchedule.add(new Schedule("2024-10-04 1800", "")); // After 5 PM
 
-        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), lateSchedule);
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName(), lateSchedule);
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
     }
@@ -128,7 +130,7 @@ public class ScheduleCommandTest {
         Set<Schedule> notOnTheHourSchedule = new HashSet<>();
         notOnTheHourSchedule.add(new Schedule("2024-10-04 1015", "")); // Not on the hour
 
-        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), notOnTheHourSchedule);
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName(), notOnTheHourSchedule);
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
     }

@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Schedule;
 
 /**
@@ -30,7 +31,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_NOTE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
-        String name = argMultimap.getPreamble();
+        Name name = ParserUtil.parseName(argMultimap.getPreamble());
         Set<Schedule> scheduleList = ParserUtil.parseSchedules(argMultimap.getAllValues(PREFIX_DATE),
             argMultimap.getAllValues(PREFIX_NOTE));
         return new ScheduleCommand(name, scheduleList);
