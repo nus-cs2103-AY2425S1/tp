@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Utilized JavaFX for creating interactive and visual components such as charts (e.g., bar charts, pie charts).
+* Any adapted code, concepts, or third-party libraries should be properly cited here.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -577,6 +578,45 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+
+### Marking a Payment Date
+
+1. Marking a payment date
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `markpaid 1 m/2024-12`<br>
+      Expected: The first person is marked as paid for 2024-12. Details of the updated contact shown in the status message. The person card in the UI is updated.
+   1. Test case: `markpaid 0 m/2023-10`<br>
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect mark as paid commands to try: `markpaid`, `markpaid x`, `markpaid x m/1` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+   2. Other incorrect date format to try: `markpaid 1 m/2024-13`, `markpaid 1 m/13`, `markpaid 1 m/abc`<br>
+      Expected: Similar to previous.
+
+### Viewing Command History
+
+1. Viewing command history
+
+   1. Prerequisites: Multiple commands have been executed.
+
+   1. Test case: up arrow key<br>
+      Expected: A previous command is shown in the status message.
+
+### Viewing Student Details
+
+1. Viewing student details
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `info 1` <br>
+      Expected: The first person's details are shown in the status message. The person card in the UI is highlighted.
+   1. Test case: `info 0` <br>
+      Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
+   1. Other incorrect view commands to try: `info`, `info x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+=======
 ### Clearing all entries
 
 1. Clearing all entries while all entries are being shown
@@ -635,6 +675,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Other exit commands to try: `exit now`, `quit`, `close`  
        Expected: Program will ignore arguments after the exit command and close immediately.
+
 
 ### Saving data
 
