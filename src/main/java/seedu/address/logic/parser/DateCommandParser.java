@@ -51,7 +51,7 @@ public class DateCommandParser implements Parser<DateCommand> {
             Optional<String> email = argMultimap.getValue(PREFIX_EMAIL);
             String dateString = argMultimap.getValue(PREFIX_DATE).orElse("");
 
-            Date date = ParserUtil.parseDate(dateString);
+            Date date = ParserUtil.parseDateAndTime(dateString);
 
             // Validate the phone number format if present
             if (phone.isPresent() && !Phone.isValidPhone(phone.get())) {

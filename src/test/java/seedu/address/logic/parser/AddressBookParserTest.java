@@ -131,10 +131,10 @@ public class AddressBookParserTest {
     public void parseCommand_schedule() throws Exception {
         //tag only
         ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
-              ScheduleCommand.COMMAND_WORD + " " + "d/16/2/2024 1745"
+              ScheduleCommand.COMMAND_WORD + " " + "d/16/2/2024"
         );
         assertEquals(new ScheduleCommand(new SchedulePredicate(
-                new Date(LocalDateTime.of(2024, 2, 16, 17, 45)))),
+                new Date(LocalDateTime.of(2024, 2, 16, 0, 0)))),
               command);
 
     }

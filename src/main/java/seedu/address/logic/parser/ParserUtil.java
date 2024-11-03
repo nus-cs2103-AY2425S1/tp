@@ -130,12 +130,25 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static Date parseDateAndTime(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (trimmedDate.toLowerCase().equals("none")) {
             return new Date(LocalDateTime.MIN);
         }
         return new Date(Date.parseDateTime(trimmedDate));
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     * This is specifically for the Schedule commmand as schedule command searches by date ONLY
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        return new Date(Date.parseDate(trimmedDate));
     }
 }

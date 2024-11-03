@@ -66,30 +66,30 @@ public class DateTest {
     @Test
     public void isValidDate() {
         //null date
-        assertFalse(Date.isValidDate(" "));
+        assertFalse(Date.isValidDateAndTime(" "));
         //february 29 not leap year
-        assertFalse(Date.isValidDate("29/2/2023 1800"));
+        assertFalse(Date.isValidDateAndTime("29/2/2023 1800"));
         //invalid day for given month
-        assertFalse(Date.isValidDate("31/4/2024 1200"));
-        assertFalse(Date.isValidDate("31/6/2024 1200"));
-        assertFalse(Date.isValidDate("31/9/2024 1200"));
-        assertFalse(Date.isValidDate("31/11/2024 1200"));
-        assertFalse(Date.isValidDate("31/2/2024 1200"));
+        assertFalse(Date.isValidDateAndTime("31/4/2024 1200"));
+        assertFalse(Date.isValidDateAndTime("31/6/2024 1200"));
+        assertFalse(Date.isValidDateAndTime("31/9/2024 1200"));
+        assertFalse(Date.isValidDateAndTime("31/11/2024 1200"));
+        assertFalse(Date.isValidDateAndTime("31/2/2024 1200"));
         //invalid format
-        assertFalse(Date.isValidDate("12-31-2024 12am"));
+        assertFalse(Date.isValidDateAndTime("12-31-2024 12am"));
         //invalid time
-        assertFalse(Date.isValidDate("31/2/2024 2700"));
+        assertFalse(Date.isValidDateAndTime("31/2/2024 2700"));
         //invalid leading zeros
-        assertFalse(Date.isValidDate("0/2/2024 1400"));
-        assertFalse(Date.isValidDate("10/0/2024 1400"));
-        assertFalse(Date.isValidDate("0/00/2024 1400"));
+        assertFalse(Date.isValidDateAndTime("0/2/2024 1400"));
+        assertFalse(Date.isValidDateAndTime("10/0/2024 1400"));
+        assertFalse(Date.isValidDateAndTime("0/00/2024 1400"));
 
         //Valid dates
-        assertTrue(Date.isValidDate("18/2/2024 1800"));
-        assertTrue(Date.isValidDate("18/02/2024 1800"));
-        assertTrue(Date.isValidDate("01/2/2024 1800"));
+        assertTrue(Date.isValidDateAndTime("18/2/2024 1800"));
+        assertTrue(Date.isValidDateAndTime("18/02/2024 1800"));
+        assertTrue(Date.isValidDateAndTime("01/2/2024 1800"));
         //february 29 leap year
-        assertTrue(Date.isValidDate("29/2/2024 1800"));
+        assertTrue(Date.isValidDateAndTime("29/2/2024 1800"));
 
 
     }
