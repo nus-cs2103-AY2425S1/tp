@@ -143,7 +143,8 @@ public class PersonPredicateTest {
 
         // different person emails -> returns false
         PersonPredicate diffEmailsPredicate = new PersonPredicate(names, phones,
-                Collections.singletonList("different@example.com"), addresses, registerNumbers, sexes, classes, ecNames, ecNumbers, tags);
+                Collections.singletonList("different@example.com"), addresses, registerNumbers, sexes, classes,
+                ecNames, ecNumbers, tags);
         assertFalse(predicate1.equals(diffEmailsPredicate));
 
         // different person addresses -> returns false
