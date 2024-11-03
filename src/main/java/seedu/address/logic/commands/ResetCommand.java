@@ -54,10 +54,10 @@ public class ResetCommand extends TutorialCommand {
     }
 
     /**
-     * Generates a command execution success message for the tutorials that were marked as not taken place.
-     * {@code personToEdit}.
+     * returns a success message for the tutorials that were marked as not taken place.
      */
-    protected String generateSuccessMessage(Person personToEdit, String resetTutorials) {
-        return String.format(Messages.MESSAGE_RESET_SUCCESS, Messages.format(personToEdit), resetTutorials);
+    @Override
+    protected String getSuccessMessage() {
+        return Messages.MESSAGE_RESET_SUCCESS;
     }
 }

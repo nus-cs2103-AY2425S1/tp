@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.AttendanceStatus;
@@ -43,7 +44,10 @@ public abstract class TutorialCommand extends Command {
 
     protected abstract AttendanceStatus getStatus();
     protected abstract String getUnnecessaryMessage();
-    protected abstract String generateSuccessMessage(Person person, String tutorials);
+    protected abstract String getSuccessMessage();
+    private String generateSuccessMessage(Person personToEdit, String resetTutorials) {
+        return String.format(this.getSuccessMessage(), Messages.format(personToEdit), resetTutorials);
+    }
 
     /**
      * Takes a person and resets the specified tutorial(s) and returns that person with the new tutorials.

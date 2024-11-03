@@ -54,10 +54,10 @@ public class UnmarkCommand extends TutorialCommand {
     }
 
     /**
-     * Generates a command execution success message for removing attendance
-     * {@code personToEdit}.
+     * returns a success message for the tutorials that which were unmarked.
      */
-    protected String generateSuccessMessage(Person personToEdit, String unmarkedTutorials) {
-        return String.format(Messages.MESSAGE_UNMARK_SUCCESS, Messages.format(personToEdit), unmarkedTutorials);
+    @Override
+    protected String getSuccessMessage() {
+        return Messages.MESSAGE_UNMARK_SUCCESS;
     }
 }

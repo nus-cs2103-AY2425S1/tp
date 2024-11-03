@@ -54,12 +54,10 @@ public class MarkCommand extends TutorialCommand {
     }
 
     /**
-     * Generates a command execution success message based on whether
-     * the remark is added to or removed from
-     * {@code personToEdit}.
+     * returns a success message for the tutorials that which were marked.
      */
     @Override
-    protected String generateSuccessMessage(Person personToEdit, String markedTutorials) {
-        return String.format(Messages.MESSAGE_MARK_SUCCESS, Messages.format(personToEdit), markedTutorials);
+    protected String getSuccessMessage() {
+        return Messages.MESSAGE_MARK_SUCCESS;
     }
 }
