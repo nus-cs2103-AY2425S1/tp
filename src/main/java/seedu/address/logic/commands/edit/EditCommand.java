@@ -90,7 +90,7 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-        
+
         boolean phoneExists = model.hasPhone(editedPerson);
         boolean emailExists = model.hasEmail(editedPerson);
 
