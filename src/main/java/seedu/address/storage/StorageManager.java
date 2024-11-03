@@ -10,22 +10,31 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.PastryCatalogue;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of AddressBook, IngredientCatalogue, and PastryCatalogue data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private IngredientCatalogueStorage ingredientCatalogueStorage;
+    private PastryCatalogueStorage pastryCatalogueStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given storages.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          IngredientCatalogueStorage ingredientCatalogueStorage,
+                          PastryCatalogueStorage pastryCatalogueStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.ingredientCatalogueStorage = ingredientCatalogueStorage;
+        this.pastryCatalogueStorage = pastryCatalogueStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -44,7 +53,6 @@ public class StorageManager implements Storage {
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
-
 
     // ================ AddressBook methods ==============================
 
@@ -75,4 +83,61 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ IngredientCatalogue methods ==============================
+
+    @Override
+    public Path getIngredientCatalogueFilePath() {
+        return ingredientCatalogueStorage.getIngredientCatalogueFilePath();
+    }
+
+    @Override
+    public Optional<IngredientCatalogue> readIngredientCatalogue() throws DataLoadingException {
+        return ingredientCatalogueStorage.readIngredientCatalogue();
+    }
+
+    @Override
+    public Optional<IngredientCatalogue> readIngredientCatalogue(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read ingredient catalogue data from file: " + filePath);
+        return ingredientCatalogueStorage.readIngredientCatalogue(filePath);
+    }
+
+    @Override
+    public void saveIngredientCatalogue(IngredientCatalogue ingredientCatalogue) throws IOException {
+        saveIngredientCatalogue(ingredientCatalogue, ingredientCatalogueStorage.getIngredientCatalogueFilePath());
+    }
+
+    @Override
+    public void saveIngredientCatalogue(IngredientCatalogue ingredientCatalogue, Path filePath) throws IOException {
+        logger.fine("Attempting to write ingredient catalogue data to file: " + filePath);
+        ingredientCatalogueStorage.saveIngredientCatalogue(ingredientCatalogue, filePath);
+    }
+
+    // ================ PastryCatalogue methods ==============================
+
+    @Override
+    public Path getPastryCatalogueFilePath() {
+        return pastryCatalogueStorage.getPastryCatalogueFilePath();
+    }
+
+    @Override
+    public Optional<PastryCatalogue> readPastryCatalogue() throws DataLoadingException {
+        return pastryCatalogueStorage.readPastryCatalogue();
+    }
+
+    @Override
+    public Optional<PastryCatalogue> readPastryCatalogue(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read pastry catalogue data from file: " + filePath);
+        return pastryCatalogueStorage.readPastryCatalogue(filePath);
+    }
+
+    @Override
+    public void savePastryCatalogue(PastryCatalogue pastryCatalogue) throws IOException {
+        savePastryCatalogue(pastryCatalogue, pastryCatalogueStorage.getPastryCatalogueFilePath());
+    }
+
+    @Override
+    public void savePastryCatalogue(PastryCatalogue pastryCatalogue, Path filePath) throws IOException {
+        logger.fine("Attempting to write pastry catalogue data to file: " + filePath);
+        pastryCatalogueStorage.savePastryCatalogue(pastryCatalogue, filePath);
+    }
 }

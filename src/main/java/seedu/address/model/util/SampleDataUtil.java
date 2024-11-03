@@ -110,4 +110,22 @@ public class SampleDataUtil {
         return new ArrayList<>(defaultPastries);  // Defensive copy to prevent modification
     }
 
+    // Method to retrieve a sample IngredientCatalogue with default ingredients
+    public static IngredientCatalogue getSampleIngredientCatalogue() {
+        IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
+        for (Ingredient ingredient : defaultIngredients.values()) {
+            ingredientCatalogue.addIngredient(ingredient);
+        }
+        return ingredientCatalogue;
+    }
+
+    // Method to retrieve a sample PastryCatalogue with default pastries
+    public static PastryCatalogue getSamplePastryCatalogue() {
+        PastryCatalogue pastryCatalogue = new PastryCatalogue();
+        for (Pastry pastry : defaultPastries) {
+            pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
+        }
+        return pastryCatalogue;
+    }
+
 }
