@@ -12,7 +12,7 @@
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.layout.AnchorPane?>
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
+<fx:root resizable="false" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
          xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -25,10 +25,11 @@
       <VBox>
           <VBox alignment="CENTER" spacing="5" VBox.vgrow="ALWAYS">
             <children>
-              <TableView fx:id="table" />
+              <TableView fx:id="table"/>
             </children>
           </VBox>
           <VBox VBox.vgrow="ALWAYS">
+            <Label fx:id="navigateInstructions" />
             <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL to our User Guide!" />
             <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeHelpWindow" text="Close" />
           </VBox>

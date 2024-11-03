@@ -33,7 +33,3 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-#table {
-    -fx-font-family: "Consolas";
-    -fx-font-size: 12pt;
-}
