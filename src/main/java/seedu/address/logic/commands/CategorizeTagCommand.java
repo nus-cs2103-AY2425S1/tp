@@ -25,6 +25,7 @@ public class CategorizeTagCommand extends Command {
     public static final String MESSAGE_CAT_TAG_SUCCESS = "Category of tag %1$s has been changed successfully.";
     public static final String MESSAGE_TAG_NOT_EXIST = "Tag not found: %1$s";
     public static final String MESSAGE_INVALID_CATEGORY = "Invalid category: %1$s";
+    public static final String MESSAGE_DUPLICATE_CATEGORY = "Current category of %s is already %s";
 
     private final Tag targetTag;
     private final TagCategory updatedCategory;
@@ -45,7 +46,31 @@ public class CategorizeTagCommand extends Command {
         if (!model.containsTag(targetTag)) {
             throw new CommandException(String.format(MESSAGE_TAG_NOT_EXIST, targetTag));
         }
+        TagCategory existingCat = model.getTagCategory(targetTag);
+        if (isDuplicateCategory(existingCat)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_CATEGORY, targetTag, updatedCategory));
+        }
         model.setTagsCategory(targetTag, updatedCategory);
         return new CommandResult(String.format(MESSAGE_CAT_TAG_SUCCESS, targetTag));
+    }
+
+    private boolean isDuplicateCategory(TagCategory cat) {
+        return updatedCategory.equals(cat);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CategorizeTagCommand)) {
+            return false;
+        }
+
+        CategorizeTagCommand otherCategorizeTagCommand = (CategorizeTagCommand) other;
+        return targetTag.equals(otherCategorizeTagCommand.targetTag)
+                && updatedCategory.equals(otherCategorizeTagCommand.updatedCategory);
     }
 }
