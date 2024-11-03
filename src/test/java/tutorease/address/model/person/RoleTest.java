@@ -53,4 +53,45 @@ public class RoleTest {
         assertNotEquals(role1.hashCode(), role2.hashCode(),
                 "Expected Role objects with different values to have different hashCodes");
     }
+
+
+    @Test
+    public void testCreateRole_validGuardianRole() {
+        assertEquals(Role.GUARDIAN, Role.createRole("guardian"));
+        assertEquals(Role.GUARDIAN, Role.createRole("Guardian"));
+        assertEquals(Role.GUARDIAN, Role.createRole("GUARDIAN"));
+    }
+
+    @Test
+    public void testCreateRole_validStudentRole() {
+        assertEquals(Role.STUDENT, Role.createRole("student"));
+        assertEquals(Role.STUDENT, Role.createRole("Student"));
+        assertEquals(Role.STUDENT, Role.createRole("STUDENT"));
+    }
+
+    @Test
+    public void testCreateRole_invalidRole() {
+        // Testing an invalid role name
+        assertThrows(IllegalArgumentException.class, Role.MESSAGE_CONSTRAINTS, () -> Role.createRole("teacher"));
+        // Testing null input
+        assertThrows(NullPointerException.class, () -> Role.createRole(null));
+    }
+
+    @Test
+    public void isValidRole() {
+        // Valid roles
+        assertTrue(Role.isValidRole("guardian"), "Expected 'guardian' to be valid.");
+        assertTrue(Role.isValidRole("student"), "Expected 'student' to be valid.");
+        assertTrue(Role.isValidRole("Guardian"), "Expected 'Guardian' to be valid.");
+        assertTrue(Role.isValidRole("Student"), "Expected 'Student' to be valid.");
+        assertTrue(Role.isValidRole("GUARDIAN"), "Expected 'GUARDIAN' to be valid.");
+        assertTrue(Role.isValidRole("STUDENT"), "Expected 'STUDENT' to be valid.");
+
+        // Invalid roles
+        assertTrue(Role.isValidRole("STUDENT"), "Expected 'STUDENT' to be valid.");
+        assertFalse(Role.isValidRole("teacher"), "Expected 'teacher' to be invalid.");
+        assertFalse(Role.isValidRole("  "), "Expected whitespace to be invalid.");
+        assertFalse(Role.isValidRole(""), "Expected empty string to be invalid.");
+        assertThrows(NullPointerException.class, () -> Role.isValidRole(null));
+    }
 }

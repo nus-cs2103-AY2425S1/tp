@@ -13,7 +13,7 @@ import tutorease.address.commons.exceptions.DataLoadingException;
 import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.commons.util.FileUtil;
 import tutorease.address.commons.util.JsonUtil;
-import tutorease.address.model.LessonSchedule;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 
 /**
@@ -32,12 +32,13 @@ public class JsonLessonScheduleStorage implements LessonScheduleStorage {
     }
 
     @Override
-    public Optional<LessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase) throws DataLoadingException {
+    public Optional<ReadOnlyLessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase)
+            throws DataLoadingException {
         return readLessonSchedule(filePath, tutorEase);
     }
 
     @Override
-    public Optional<LessonSchedule> readLessonSchedule(Path filePath, ReadOnlyTutorEase tutorEase) throws
+    public Optional<ReadOnlyLessonSchedule> readLessonSchedule(Path filePath, ReadOnlyTutorEase tutorEase) throws
             DataLoadingException {
         requireAllNonNull(filePath);
 
@@ -56,12 +57,12 @@ public class JsonLessonScheduleStorage implements LessonScheduleStorage {
     }
 
     @Override
-    public void saveLessonSchedule(LessonSchedule lessonSchedule) throws IOException {
+    public void saveLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) throws IOException {
         saveLessonSchedule(lessonSchedule, filePath);
     }
 
     @Override
-    public void saveLessonSchedule(LessonSchedule lessonSchedule, Path filePath) throws IOException {
+    public void saveLessonSchedule(ReadOnlyLessonSchedule lessonSchedule, Path filePath) throws IOException {
         requireNonNull(lessonSchedule);
         requireNonNull(filePath);
 

@@ -103,9 +103,11 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `TutorEaseParser` object which in turn creates a parser that matches the command (e.g., `DeleteContactCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteContactCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, in this case `execute("contact delete 1)`, it is passed to an `TutorEaseParser` object which in turn creates a parser that matches the type of command. In this case, it is the `ContactCommandParser` as we are executing a command related to contacts. Commands related to lessons will use `LessonCommandParser`.
+1. The `ContactCommandParser` will create the specific `ContactCommandParser` corresponding to the execution. In this case, a `DeleteContactCommandParser` will be created to parse the command.
+1. This results in a `Command` object, specifically a `DeleteContactCommand` in this case, which is executed by the`LogicManager`.<br>
+   (Note that DeleteContactCommand` is a subclass of `ContactCommand` which is a subclass of `Command`)
+1. The command can communicate with the `Model` when it is executed, in this case, to delete a person.<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -115,8 +117,16 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `TutorEaseParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddContactCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddContactCommand`) which the `TutorEaseParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `TutorEaseParser` class creates a `ContactCommandParser` or `LessonCommandParser` based on the first word that the tutor keys in, which creates `XYZContactCommandParser`(e.g. `AddContactCommandParser`, `DeleteContactCommandParser`) and `XYZLessonCommandParser` (e.g. `AddLessonCommandParser`) respectively. `XYZContactCommandParser` and `XYZLessonCommandParser` use the other classes shown above to parse the user command and create a `XYZContactCommand` or `XYZLessonCommand` object (e.g., `AddContactCommand`) which the `TutorEaseParser` returns back as a `Command` object.
+* All `XYZContactCommandParser` and `XYZLessonCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the`Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+Extra Pointers about parsing:
+
+* For basic one-word commands like `help`, `exit`, and `clear`, they are handled directly within the `parseCommand` function in `TutorEaseParser` without the need for a dedicated parser.
+These simple commands are omitted in the Parser classes diagram to enhance clarity and reduce clutter.
+* Various contact and lesson command parsers are represented as `XYZContactCommandParser` and `XYZLessonCommandParser`, respectively. 
+However, their behaviour varies slightly depending on the function. For example, `ArgumentMultimap` is used exclusively in parsers for add, delete, and edit commands, 
+while `ArgumentTokenizer` is only used in parsers for add and edit commands. Not specifying every parser reduces clutter and conveys the high-level message concisely.
 
 ### Model component
 
