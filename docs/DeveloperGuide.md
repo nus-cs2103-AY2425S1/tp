@@ -412,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. Prudy shows an error message.
 
       Use case ends.
-    * 
+    *
 **Use case: UC6 - Add a claim to a policy**
 
 **MSS**
