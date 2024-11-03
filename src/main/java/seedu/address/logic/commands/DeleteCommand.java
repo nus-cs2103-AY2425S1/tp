@@ -81,11 +81,6 @@ public class DeleteCommand extends ConcreteCommand {
         this.isConfirmed = isConfirmed;
     }
 
-
-    public void setIsConfirmed(boolean isConfirmed) {
-        this.isConfirmed = isConfirmed;
-    }
-
     @Override
     public CommandResult undo(Model model) {
         requireExecuted();
