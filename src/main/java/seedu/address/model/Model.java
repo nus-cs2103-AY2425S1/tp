@@ -91,8 +91,10 @@ public interface Model {
 
     /**
      * Replaces person list with the specified person list
+     *
+     * @return
      */
-    void sortFilteredPersons();
+    int sortFilteredPersons();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
