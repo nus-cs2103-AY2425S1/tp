@@ -75,11 +75,17 @@ AdmiNUS is a **desktop app for managing contacts, optimized for use via a Comman
 
 ### Viewing help: `help`
 
-Shows a message explaining the various commands available. In addition, there is also a link to the user guide if the user deems necessary.
-
-![help message](images/help_window.png)
+Shows a message explaining the various commands available.
 
 Format: `help`
+
+![](images/helpCommandUI.png)
+
+### Link to the user guide: `helpwindow`
+
+Pops up a window, where there is a link to the user guide for the user to easily access.
+
+Format: `helpwindow`
 
 ![](images/helpCommandUI.png)
 
@@ -194,8 +200,8 @@ Examples:
 ### Adding tag(s) to contact: `tag`
 Adds additional tags to the specified contact.
 
-Format: `tag INDEX t/TAG [t/MORE_TAG]
- * Add specoified `TAG` or more `TAG` to the contact at specified `INDEX`
+Format: `tag INDEX t/TAG [t/MORE_TAG]`
+ * Add specified `TAG` or more `TAG` to the contact at specified `INDEX`
  * The index refers to the index number shown in the displayed person list.
  * The index **must be a positive integer** 1, 2, 3, …​
 
