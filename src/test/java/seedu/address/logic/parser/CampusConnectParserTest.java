@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -82,7 +84,7 @@ public class CampusConnectParserTest {
         );
         String input = SuperFindCommand.COMMAND_WORD + " "
                 + keywords.stream()
-                        .map(keyword -> SuperFindCommand.NAME_COMMAND_WORD + keyword)
+                        .map(keyword -> PREFIX_NAME + keyword)
                         .collect(Collectors.joining(" "));
         Command command = parser.parseCommand(input);
         assertEquals(expectedCommand, command);
@@ -99,7 +101,7 @@ public class CampusConnectParserTest {
         );
         String input = SuperFindCommand.COMMAND_WORD + " "
                 + keywords.stream()
-                        .map(keyword -> SuperFindCommand.PHONE_COMMAND_WORD + keyword)
+                        .map(keyword -> PREFIX_PHONE + keyword)
                         .collect(Collectors.joining(" "));
         Command command = parser.parseCommand(input);
         assertEquals(expectedCommand, command);
