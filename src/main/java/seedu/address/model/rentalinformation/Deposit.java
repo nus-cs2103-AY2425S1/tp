@@ -45,7 +45,7 @@ public class Deposit {
 
     @Override
     public String toString() {
-        return deposit == null ? "null" : Double.toString(deposit);
+        return deposit == null ? "null" : String.format("$%.2f", deposit);
     }
 
     @Override

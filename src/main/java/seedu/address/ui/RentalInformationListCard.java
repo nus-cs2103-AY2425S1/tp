@@ -9,9 +9,9 @@ import seedu.address.model.rentalinformation.RentalInformation;
 /**
  * A UI component that displays information of a {@code RentalInformation}.
  */
-public class RentalInformationCard extends UiPart<Region> {
+public class RentalInformationListCard extends UiPart<Region> {
 
-    private static final String FXML = "RentalInformationCard.fxml";
+    private static final String FXML = "RentalInformationListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -45,9 +45,9 @@ public class RentalInformationCard extends UiPart<Region> {
     private Label ownerName;
 
     /**
-     * Creates a {@code RentalInformationCard} with the given {@code RentalInformation} and index to display.
+     * Creates a {@code RentalInformationListCard} with the given {@code RentalInformation} and index to display.
      */
-    public RentalInformationCard(RentalInformation rentalInformation, int displayedIndex) {
+    public RentalInformationListCard(RentalInformation rentalInformation, int displayedIndex) {
         super(FXML);
         this.rentalInformation = rentalInformation;
         id.setText(displayedIndex + ". ");
