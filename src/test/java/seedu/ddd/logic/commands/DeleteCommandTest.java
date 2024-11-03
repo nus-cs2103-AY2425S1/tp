@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
+import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
@@ -73,7 +74,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_DELETE_CONTACT_SUCCESS,
                 Messages.format(contactToDelete));
-        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
         expectedModel.deleteContact(expectedModel.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased()));
         assertCommandSuccess(deleteFirstClient, model, expectedMessage, expectedModel);

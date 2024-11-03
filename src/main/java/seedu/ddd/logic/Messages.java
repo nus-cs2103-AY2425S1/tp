@@ -35,8 +35,6 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_ITEM = "Unknown item displayed in list.";
     public static final String MESSAGE_DEPENDENT_EVENT =
             "Unable to delete client! %1$d event(s) depend on the client you are trying to delete.";
-    public static final String MESSAGE_EXCLUSIVE_FIELDS = "Only 1 of the following arguments can be specified: ";
-
     public static final String MESSAGE_EXCLUSIVE_FLAGS = "Only 1 of the following flags can be specified: ";
 
     /**

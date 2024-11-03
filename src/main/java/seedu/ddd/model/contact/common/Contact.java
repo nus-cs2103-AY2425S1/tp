@@ -104,6 +104,9 @@ public abstract class Contact implements Displayable {
      * Removes an {@code Event} related to the {@code Contact}
      */
     public void removeEvent(Event event) {
+        if (!events.contains(event)) {
+            throw new EventNotFoundException();
+        }
         events.remove(event);
     }
 

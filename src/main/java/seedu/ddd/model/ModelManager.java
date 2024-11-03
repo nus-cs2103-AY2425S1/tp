@@ -140,7 +140,9 @@ public class ModelManager implements Model {
     public void deleteContact(Contact target) throws CommandException {
         addressBook.deleteContact(target);
         displayContacts();
+    }
 
+    @Override
     public boolean hasEventName(Name eventName) {
         requireNonNull(eventName);
         return addressBook.hasEventName(eventName);
