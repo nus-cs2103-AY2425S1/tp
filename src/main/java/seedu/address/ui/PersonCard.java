@@ -69,16 +69,20 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         if (phone.getText().isEmpty()) {
             phone.setMaxHeight(0);
+            phone.setMinHeight(0);
+            phone.setPrefHeight(0);
         }
         address.setText(person.getAddress().value);
         if (address.getText().isEmpty()) {
-            System.out.println("this is working");
             address.setMaxHeight(0);
-            address.setVisible(false);
+            address.setMinHeight(0);
+            address.setPrefHeight(0);
         }
         email.setText(person.getEmail().value);
         if (email.getText().isEmpty()) {
             email.setMaxHeight(0);
+            email.setMinHeight(0);
+            email.setPrefHeight(0);
         }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
