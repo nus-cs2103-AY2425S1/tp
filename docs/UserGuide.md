@@ -223,8 +223,8 @@ The name must match the full name exactly.
 - Schedule
 
 **Examples:**
-* `view John Doe`
-* ![result for 'view John Doe'](images/viewJohnDoe.png)
+* `view John Doe`<br>
+* ![result for 'view John Doe'](images/viewJohnDoe.png)<br>
 * `view Betsy Crowe`
 
 ### Editing a person : `edit`
@@ -261,7 +261,7 @@ Format: `find [KEYWORD] [MORE_KEYWORDS] || [p/PHONE]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/findAlexDavidResult.png)<br>
 * `find p/88` returns `John Doo` (with phone number `88765432`) <br>
   ![result for 'find alex david'](images/find88.png)
 
