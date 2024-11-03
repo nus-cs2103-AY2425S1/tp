@@ -81,11 +81,11 @@ public class FilterCommandTest {
         descriptor.setGender(new Gender("female"));
         FilterPredicate predicate = preparePredicate(descriptor);
 
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         FilterCommand command = new FilterCommand(descriptor);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, ELLE, FIONA), model.getFilteredPersonList());
 
         descriptor = new FilterPersonDescriptor();
         descriptor.setModules(Set.of(new Module("MA1522")));
