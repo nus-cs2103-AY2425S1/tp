@@ -12,11 +12,6 @@ public abstract class Catalogue {
     protected final Map<Integer, Product> productCatalogue = new HashMap<>();
     protected int nextProductId = 1;
 
-    /**
-     * Adds default products to the catalogue.
-     * This method must be implemented by subclasses to add specific types of products.
-     */
-    public abstract void addDefaultProducts();
 
     /**
      * Retrieves a product by its unique ID.
@@ -58,6 +53,19 @@ public abstract class Catalogue {
         }
         productCatalogue.remove(id);
         System.out.println("Deleted product with ID: " + id);
+    }
+
+    public void setProductId(int oldId, int newId) {
+        if (!productCatalogue.containsKey(oldId)) {
+            throw new NoSuchElementException("Product ID " + oldId + " not found.");
+        }
+        if (productCatalogue.containsKey(newId)) {
+            throw new NoSuchElementException("ID: " + newId + " is taken.");
+        }
+
+        Product product = productCatalogue.remove(oldId);
+        productCatalogue.put(newId, product);
+        System.out.println("ID of " + product.getName() + " changed from " + oldId + " to ID: " + newId);
     }
 
     @Override
