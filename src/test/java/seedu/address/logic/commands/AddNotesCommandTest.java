@@ -38,7 +38,7 @@ public class AddNotesCommandTest {
     public void execute_invalidPatientId_throwsCommandException() {
         int invalidPatientId = 9999;
         AddRemarksCommand addNotesCommand = new AddRemarksCommand(invalidPatientId, "Some notes");
-        String expectedMessage = "Unable to add notes! Check the id entered!";
+        String expectedMessage = "Unable to add remarks! Check the id entered!";
 
         assertCommandFailure(addNotesCommand, model, expectedMessage);
     }
