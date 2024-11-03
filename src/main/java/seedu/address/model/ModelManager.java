@@ -97,15 +97,31 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public long checkClashes(Student student) {
-        requireNonNull(student);
-        return addressBook.countClashes(student);
-    }
-
-    @Override
     public List<Student> getClashingStudents(Student student) {
         requireNonNull(student);
         return addressBook.getClashingStudents(student);
+    }
+
+    @Override
+    public double getTotalPaidAmount() {
+        double totalPaidAmount = 0;
+        ObservableList<Student> studentList = getFilteredStudentList();
+
+        for (Student student: studentList) {
+            totalPaidAmount += student.getPaidAmountValue();
+        }
+        return totalPaidAmount;
+    }
+
+    @Override
+    public double getTotalOwedAmount() {
+        double totalOwedAmount = 0;
+        ObservableList<Student> studentList = getFilteredStudentList();
+
+        for (Student student: studentList) {
+            totalOwedAmount += student.getOwedAmountValue();
+        }
+        return totalOwedAmount;
     }
 
     @Override
@@ -155,7 +171,7 @@ public class ModelManager implements Model {
 
         Predicate<Student> combinedPredicate = predicates.stream()
                 .map(predicate -> (Predicate<Student>) predicate) // Cast each to Predicate<Student>
-                .reduce(Predicate::or) // combine all predicates using OR
+                .reduce(Predicate::and) // combine all predicates using and
                 .orElse(PREDICATE_SHOW_ALL_STUDENTS); // Default to show all if no predicates are given
 
         filteredStudents.setPredicate(combinedPredicate);

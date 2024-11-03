@@ -50,7 +50,7 @@ public class CommandTestUtil {
     public static final String VALID_RATE_AMY = "250.00";
     public static final String VALID_RATE_BOB = "300.25";
     public static final String VALID_PAID_AMOUNT_AMY = "750.00";
-    public static final String VALID_PAID_AMOUNT_BOB = "0.0";
+    public static final String VALID_PAID_AMOUNT_BOB = "5.0";
     public static final String VALID_OWED_AMOUNT_AMY = "500.00";
     public static final String VALID_OWED_AMOUNT_BOB = "300.25";
     public static final String VALID_HOUR_DESC = " " + PREFIX_HOUR + VALID_HOUR_AMY;
