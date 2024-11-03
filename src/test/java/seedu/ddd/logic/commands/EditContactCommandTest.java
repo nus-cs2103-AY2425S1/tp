@@ -287,8 +287,7 @@ public class EditContactCommandTest {
                 .withId(invalidIdString)
                 .build();
         EditCommand editCommand = new EditContactCommand(null, descriptor);
-        String expectedMessage = String.format(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX, invalidIdString);
-        assertCommandFailure(editCommand, model, expectedMessage);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test

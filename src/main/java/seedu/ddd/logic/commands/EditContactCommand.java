@@ -76,8 +76,7 @@ public class EditContactCommand extends EditCommand {
                 }
             }
             if (contactToEdit == null) {
-                throw new CommandException(String.format(
-                    Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX, targetContactId));
+                throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
 
             }
         }
