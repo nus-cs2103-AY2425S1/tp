@@ -142,13 +142,13 @@ public class ParserUtil {
         String trimmedDate = date.trim();
         Date parsedDate;
 
-        Pattern strict_date_pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
+        Pattern strictDatePattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         sdf.setLenient(false); // Disable lenient parsing, strict checking
 
         try {
             // Check if the date matches the exact pattern
-            Matcher matcher = strict_date_pattern.matcher(trimmedDate);
+            Matcher matcher = strictDatePattern.matcher(trimmedDate);
             if (!matcher.matches()) {
                 throw new ParseException(Log.MESSAGE_CONSTRAINTS);
             }

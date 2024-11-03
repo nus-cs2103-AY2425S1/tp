@@ -28,9 +28,9 @@ public class LogTest {
     @Test
     public void equals() {
         Log log1 = new Log(CommandTestUtil.DATE, "test1");
-        Log log2 = new Log(CommandTestUtil.DATE2,"test2");
-        Log log3 = new Log(CommandTestUtil.DATE2,"test2");
-        Log log4 = new Log(CommandTestUtil.DATE2,"test1");
+        Log log2 = new Log(CommandTestUtil.DATE2, "test2");
+        Log log3 = new Log(CommandTestUtil.DATE2, "test2");
+        Log log4 = new Log(CommandTestUtil.DATE2, "test1");
 
         // same object -> returns true
         assertTrue(log1.equals(log1));

@@ -22,10 +22,10 @@ public class AddLogCommandTest {
 
     @Test
     public void constructor_nullParams_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new AddLogCommand(null, new Log("empty index")));
-        assertThrows(NullPointerException.class,
-                () -> new AddLogCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () ->
+                new AddLogCommand(null, new Log("empty index")));
+        assertThrows(NullPointerException.class, () ->
+                new AddLogCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test

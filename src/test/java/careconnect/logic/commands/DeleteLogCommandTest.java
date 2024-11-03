@@ -18,18 +18,17 @@ import careconnect.model.log.Log;
 import careconnect.model.person.Person;
 
 public class DeleteLogCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullParams_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new DeleteLogCommand(null, Index.fromZeroBased(0))
+        assertThrows(NullPointerException.class, () ->
+                new DeleteLogCommand(null, Index.fromZeroBased(0))
                         .execute(model));
-        assertThrows(NullPointerException.class,
-                () -> new DeleteLogCommand(Index.fromZeroBased(0), null)
+        assertThrows(NullPointerException.class, () ->
+                new DeleteLogCommand(Index.fromZeroBased(0), null)
                         .execute(model));
     }
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_invalidIndex_logDeleteFailed() {

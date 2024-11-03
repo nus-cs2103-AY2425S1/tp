@@ -66,8 +66,9 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2020-12-31 12:00pm"; //
     // invalid date format - 24 hours used
-    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + " "; // empty string not allowed for remarks
-    
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + " "; // empty string
+    // not allowed for remarks
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

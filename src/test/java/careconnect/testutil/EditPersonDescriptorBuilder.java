@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import careconnect.logic.commands.EditCommand.EditPersonDescriptor;
-import careconnect.model.log.Log;
 import careconnect.model.person.Address;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
