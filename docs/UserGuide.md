@@ -6,7 +6,7 @@ title: User Guide
 ![Logo](images/StoreClass-Logo.png)
 
 <div markdown="block" class="alert alert-info">
-StoreClass (SC) is a desktop app for educators from private organizations e.g. tuition centers to manage their students. The educators will interact with the app through type while viewing the app through the window
+StoreClass (SC) is a desktop app for educators from private organizations e.g. tuition centers to manage their students. The educators will interact with the app through type while viewing the app through the window.
 </div> 
 
 If you can type fast, StoreClass will become a perfect tools to manage student data.
@@ -20,7 +20,7 @@ If you can type fast, StoreClass will become a perfect tools to manage student d
 
 1. Ensure you have Java `17` or above installed in your Computer.
    - For Windows 11, see [here](https://www.youtube.com/watch?v=ykAhL1IoQUM)
-   - For MacOs, see [here](https://www.youtube.com/watch?v=lYKHFz8YaD4)
+   - For MacOS, see [here](https://www.youtube.com/watch?v=lYKHFz8YaD4)
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
@@ -187,7 +187,7 @@ There should be only one file name provided.
 <div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
 All entries in the current address book will be discarded.
 
-Archiving into a existing address book will overwrite the old address book.
+Archiving into an existing address book will overwrite the old address book.
 </div>
 
 ### Load data files `load`
