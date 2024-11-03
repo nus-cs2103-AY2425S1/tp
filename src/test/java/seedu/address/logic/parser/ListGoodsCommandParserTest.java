@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-// import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.function.Predicate;
@@ -27,7 +28,16 @@ public class ListGoodsCommandParserTest {
 
         // Valid input with only goodsName keyword args
         ListGoodsCommand expectedListGoodsCommand2 = new ListGoodsCommand(goodsNamePredicate);
-        // assertParseSuccess(parser, "viewgoods gn/bread", expectedListGoodsCommand2);
+        assertParseSuccess(parser, "viewgoods gn/bread", expectedListGoodsCommand2);
+
+        // Valid input with composed filters
+        assertDoesNotThrow(() -> parser.parse("viewgoods gn/bread c/CONSUMABLES"));
+    }
+
+    @Test
+    public void parse_invalidArgs_failure() {
+        // Invalid input for category keyword
+        assertParseFailure(parser, "viewgoods c/NOTHING", GoodsCategories.MESSAGE_UNKNOWN_CATEGORY);
     }
 
     @Test

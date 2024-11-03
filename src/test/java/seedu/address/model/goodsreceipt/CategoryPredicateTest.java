@@ -40,4 +40,21 @@ public class CategoryPredicateTest {
         boolean negResult = testPredicate.test(testReceipt);
         assertFalse(negResult);
     }
+
+    @Test
+    public void equals() {
+        CategoryPredicate predicate = new CategoryPredicate(GoodsCategories.CONSUMABLES);
+
+        // check that it is equal to itself
+        assertTrue(predicate.equals(predicate));
+
+        // check that it is equal when category is equal
+        assertTrue(predicate.equals(new CategoryPredicate(GoodsCategories.CONSUMABLES)));
+
+        // check that it is not equal with different category
+        assertFalse(predicate.equals(new CategoryPredicate(GoodsCategories.SPECIALTY)));
+
+        // check that is not equal to different types
+        assertFalse(predicate.equals(1.00));
+    }
 }

@@ -52,4 +52,21 @@ public class GoodsNamePredicateTest {
         boolean upperResult = testUpperPredicate.test(testReceipt);
         assertTrue(lowerResult && upperResult);
     }
+
+    @Test
+    public void equals() {
+        GoodsNamePredicate predicate = new GoodsNamePredicate("Bread");
+
+        // check that it is equal to itself
+        assertTrue(predicate.equals(predicate));
+
+        // check that it is equal regardless of capitalization
+        assertTrue(predicate.equals(new GoodsNamePredicate("BREAD")));
+
+        // check that it is not equal if keyword is different
+        assertFalse(predicate.equals(new GoodsNamePredicate("Ice Cream")));
+
+        // check that it is not equal to other types
+        assertFalse(predicate.equals(1.00));
+    }
 }

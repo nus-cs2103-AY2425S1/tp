@@ -40,4 +40,21 @@ public class SupplierNamePredicateTest {
         boolean negResult = testPredicate.test(testReceipt);
         assertFalse(negResult);
     }
+
+    @Test
+    public void equals() {
+        SupplierNamePredicate predicate = new SupplierNamePredicate(new Name("Alex Yeoh"));
+
+        // check that it is equal to itself
+        assertTrue(predicate.equals(predicate));
+
+        // check that it is equal if keyword is the same
+        assertTrue(predicate.equals(new SupplierNamePredicate(new Name("Alex Yeoh"))));
+
+        // check that it is not equal if keyword is different
+        assertFalse(predicate.equals(new SupplierNamePredicate(new Name("Bernice Yu"))));
+
+        // check that it is not equal to other types
+        assertFalse(predicate.equals(1.00));
+    }
 }

@@ -36,6 +36,6 @@ public class GoodsNamePredicate implements Predicate<GoodsReceipt> {
             return false;
         }
 
-        return name == otherGoodsNamePredicate.name;
+        return name.equals(otherGoodsNamePredicate.name);
     }
 }
