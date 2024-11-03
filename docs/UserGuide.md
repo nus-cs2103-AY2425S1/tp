@@ -361,21 +361,20 @@ _Details coming soon ..._
 | Action             | Format, Examples                                                                                                                                                                |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/buyer` |
-| **Clear**          | `clear`                                                                                                                                                                         |
-| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         |
+| **List**           | `list`                                                                                                                                                                          |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [dt/PERSON_TAG] [r/REMARK]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                        |
 | **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                       |
 | **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                  |
-| **List**           | `list`                                                                                                                                                                          |
-| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag hdb buyer`                                                                                                                         |
-| **List**           | `list`                                                                                                                                                                          
+| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
+| **Clear**          | `clear`                                                                                                                                                                         |
+| **Exit**           | `exit`                                                                                                                                                                          |
+| **Help**           | `help`                                                                                                                                                                          |
+| **Remark**         | `remark INDEX r/[REMARKS]`<br> e.g., `remark 1 r/Prefers a higher floor apartment`, `remark 1 r/` (to delete the remark)                                                       |
+| **Show**           | `show INDEX`<br> e.g., `show 2`                                                                                                                                                 |
 | **Add Listing**    | `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
 | **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                            |
-| **Show**           | `show INDEX`<br> e.g., `show 1`                                                                                                                                                 |
-| **Sort**           | `sort`                                                                                                                                                                          |
-| **Help**           | `help`                                                                                                                                                                          |
-| **Remark**         | `remark INDEX r/[REMARKS]`                                                                                                                                                      |
 | **Export**         | `export`                                                                                                                                                                        |
+| **Sort**           | `sort`                                                                                                                                                                          |
 
 --------------------------------------------------------------------------------------------------------------------
 
