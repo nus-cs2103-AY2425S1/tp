@@ -24,7 +24,7 @@ public class ViewWeddingCommandParser implements Parser<ViewWeddingCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewWeddingCommand.MESSAGE_USAGE));
         }
 
-        ParserUtil.parseWeddingName(trimmedArgs); 
+        ParserUtil.parseWeddingName(trimmedArgs);
 
         String weddingNameKeyword = trimmedArgs.toLowerCase();
 
