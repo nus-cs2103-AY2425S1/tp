@@ -17,7 +17,7 @@ public class Reminder {
     public static final String MESSAGE_CONSTRAINTS_DATE = "Date should be in the format DD-MM-YYYY";
     public static final String MESSAGE_CONSTRAINTS_DESCRIPTION = "Description should not be empty";
     public static final String VALIDATION_REGEX = "[^\\s].*";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final LocalDate reminderDate;
     public final String reminderDescription;
     public final Name personToMeet;
