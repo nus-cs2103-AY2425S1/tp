@@ -226,4 +226,35 @@ public class EditContactCommandTest {
         assertEquals(tempModel.getLessonScheduleSize(), 1);
     }
 
+    @Test
+    public void execute_duplicateEmail_failure() {
+        // Arrange: Show only the first person in the filtered list
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        // Act: Edit the first person in the filtered list to have the same email as the second person
+        Person personInList = model.getTutorEase().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setEmail(personInList.getEmail());
+        EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST_PERSON, descriptor);
+
+        // Assert: Expect a failure due to duplicate email
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_EMAIL);
+    }
+
+    @Test
+    public void execute_duplicatePhone_failure() {
+        // Arrange: Show only the first person in the filtered list
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        // Act: Edit the first person in the filtered list to have the same phone number as the second person
+        Person personInList = model.getTutorEase().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setPhone(personInList.getPhone());
+        EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST_PERSON, descriptor);
+
+        // Assert: Expect a failure due to duplicate phone number
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_PHONE);
+    }
+
+
 }
