@@ -25,19 +25,19 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withPhone("94351253").withTags("friends").withModules("MA1522").withGender("female").build();
+            .withPhone("94351253").withGender("female").withTags("friends").withModules("MA1522").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withPhone("98765432").withTags("owesMoney", "friends").withModules("MA1522").withGender("male").build();
+            .withPhone("98765432").withGender("male").withTags("owesMoney", "friends").withModules("MA1522").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
-            .withPhone("95352563").withModules("EL1101").withGender("female").withTags("runner").build();
+            .withPhone("95352563").withGender("male").withModules("EL1101").withTags("runner").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withPhone("87652533").withTags("friends").withModules("CS1101").withGender("male").build();
+            .withPhone("87652533").withGender("male").withTags("friends").withModules("CS1101").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withPhone("94820224").withGender("female").withModules("MA1522").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withPhone("94824027").withGender("female").withModules("MA1522").build();
+            .withPhone("94824207").withGender("female").withModules("MA1522").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withPhone("94824042").withModules("EL1101").withGender("male").build();
+            .withPhone("94824402").withGender("male").withModules("EL1101").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
