@@ -170,6 +170,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasExactPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -261,6 +266,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasExactPerson(Person person) {
+            requireNonNull(person);
+            return this.person.equals(person);
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
@@ -280,6 +291,12 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasExactPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::equals);
         }
 
         @Override
