@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 import java.util.List;
 
@@ -21,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalTasks;
 
 public class DeleteTaskCommandTest {
@@ -34,7 +34,8 @@ public class DeleteTaskCommandTest {
         for (Task task : taskList) {
             model.addTask(task);
         }
-        model.addPerson(GEORGE);
+        Person newPerson = new PersonBuilder().withTasks("todo: buy groceries").build();
+        model.addPerson(newPerson);
     }
 
     @Test
