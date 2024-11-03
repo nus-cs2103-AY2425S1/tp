@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -59,26 +60,28 @@ public class FilterCommand extends Command {
         List<Predicate<Person>> predicates = new ArrayList<>();
 
         if (!name.isEmpty()) {
-            predicates.add(new NameContainsKeywordsPredicate(List.of(name.split("\\s+"))));
+            predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(name.toLowerCase())));
         }
         if (!role.isEmpty()) {
-            predicates.add(new RoleContainsKeywordsPredicate(List.of(role.split("\\s+"))));
+            predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList(role.toLowerCase())));
         }
         if (!email.isEmpty()) {
-            predicates.add(new EmailContainsKeywordsPredicate(List.of(email.split("\\s+"))));
+            predicates.add(new EmailContainsKeywordsPredicate(Arrays.asList(email.toLowerCase())));
         }
         if (!phone.isEmpty()) {
-            predicates.add(new PhoneContainsKeywordsPredicate(List.of(phone.split("\\s+"))));
+            predicates.add(new PhoneContainsKeywordsPredicate(Arrays.asList(phone)));
         }
         if (!address.isEmpty()) {
-            predicates.add(new AddressContainsKeywordsPredicate(List.of(address)));
+            predicates.add(new AddressContainsKeywordsPredicate(Arrays.asList(address.toLowerCase())));
         }
 
         if (predicates.isEmpty()) {
             throw new CommandException(MESSAGE_NO_CRITERIA);
         }
 
-        Predicate<Person> combinedPredicate = predicates.stream().reduce(x -> true, Predicate::and);
+        Predicate<Person> combinedPredicate = predicates.stream()
+                .reduce(person -> false, Predicate::or);
+
         model.updateFilteredPersonList(combinedPredicate);
 
         return new CommandResult(
