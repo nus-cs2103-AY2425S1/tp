@@ -198,6 +198,44 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<box type="info">
+
+**Note:** For simplicity, certain details such as conditional checks, parsing 
+and more detailed implementation on model changes have been omitted.
+
+</box>
+
+## Template
+
+Separate each feature with dividers
+
+### Feature
+
+#### Implementation details
+
+
+#### Note
+
+For any important information that has been omitted, refer to [Delete Group feature](#delete-group-feature)
+
+#### Activity diagram
+
+#### Sequence diagram
+
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `WHATEVER COMMAND` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+#### Design considerations
+
+1. Include if we had any alternative design decisions and why we decided to go with the current one
+
+--------------------------------------------------------------------------------------------------------------------
+
+
 ### Delete Group feature
 
 The `Delete Group` feature allows users to delete an existing group in the address book given a group's name.
@@ -221,18 +259,23 @@ Below, we provide an example usage scenario and description of how the delete gr
 This feature will also remove `Students` in the `Group` and reset their `Group`, and delete all `Tasks` related to the
 `Group`.
 
-#### Sequence Diagram
+#### Sequence diagram
 
 The following sequence diagram shows how the above steps for delete group works:
 <puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="DeleteGroupCommand"/>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Undo/redo feature
 
 The undo/redo mechanism is facilitated by `VersionHistory`. It stores an ArrayList `versions` of ReadOnlyAddressBook.
+
+
 Whenever there are changes made to the AddressBook, a defensive copy of the AddressBook is created and stored in the
-ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook. If newly initialized, this
-pointer is set to -1. We have set a maximum number of versions to be able to stored, 100. Once this limit is reached,
-the earliest entry in the ArrayList will be deleted by `VersionHistory` so that a new version can be stored.
+ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook. 
+
+If newly initialized, this pointer is set to -1. We have set a maximum number of versions to be able to stored at 100.
+Once this limit is reached, the earliest entry in the ArrayList will be deleted by `VersionHistory` so that a new version can be stored.
 Additionally, it implements the following operations:
 
 * `VersionHistory#addVersion(Model model)`— Saves the current state to its history.
@@ -249,7 +292,7 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 1. User has the application launched and has made at least 1 change to the system.
 2. For our example, user executes 'asg' and adds a student to a specific group. However, this was done incorrectly and
    the student is added into an incorrect group.
-3. The user executes 'undo'. This command is parsed into the `AddressBookParser`.
+3. The user executes `undo`. This command is parsed into the `AddressBookParser`.
 4. An `UndoCommandParser` object is constructed and it constructs a `UndoCommand` object.
 5. The `UndoCommand` object then calls `updateVersionHistory(versionHistory, model)`. This in turn calls `undoVersion()`
    of `VersionHistory`.
@@ -260,10 +303,12 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 9. The `RedoCommand` follows the exact same workflow as above, but its `updateVersionHistory(versionHistory, model)`
    calls upon `redoVersion` instead, updating the pointer to the previously undone version.
 
-#### Sequence Diagram
+#### Sequence diagram
 
 The following sequence diagram shows how the above steps for how undo works:
 <puml src="diagrams/UndoSequenceDiagram.puml"/>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### \[Proposed\] Data archiving
 
