@@ -74,7 +74,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JFreeChart UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the javaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -663,7 +663,7 @@ Significant effort went into:
 
 ### Reuse of Libraries and Components
 To streamline development, we leveraged certain libraries and reused components where feasible:
-- **Charting Library for Visualizations:** The `JFreeChart` library was used to implement the `pie` and `bar` chart commands. This allowed us to focus on integrating visualization rather than building charting functionality from scratch. Our work on adapting `JFreeChart` to fit EduTuTu’s data structure is encapsulated in the `ChartAdapter.java` class.
+- **Charting Library for Visualizations:** The `javaFX` library was used to implement the `pie` and `bar` chart commands. This allowed us to focus on integrating visualization rather than building charting functionality from scratch. Our work on adapting `javaFX` to fit EduTuTu’s data structure is encapsulated in the `ChartAdapter.java` class.
 - **Command Framework from AB3:** We adapted AB3’s command framework to accommodate EduTuTu’s expanded command set, allowing us to save development time while maintaining a consistent structure. Additional commands such as `markpaid` and `info` were added to extend functionality for the specific needs of a tuition center.
 
 ### Achievements
