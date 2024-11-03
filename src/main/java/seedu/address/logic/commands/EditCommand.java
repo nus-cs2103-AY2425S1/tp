@@ -139,7 +139,7 @@ public class EditCommand extends Command {
         private Email email;
         private Set<Tag> tags;
         private List<Assignment> assignmentList = new ArrayList<>();
-        private Remark remark;
+        private Remark remark = new Remark("");
 
         public EditStudentDescriptor() {}
 
