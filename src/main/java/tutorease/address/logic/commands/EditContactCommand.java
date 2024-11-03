@@ -2,6 +2,8 @@ package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorease.address.logic.Messages.MESSAGE_DUPLICATE_EMAIL;
+import static tutorease.address.logic.Messages.MESSAGE_DUPLICATE_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -90,6 +92,14 @@ public class EditContactCommand extends ContactCommand {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (editPersonDescriptor.email != null && model.hasSameEmail(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+        }
+
+        if (editPersonDescriptor.phone != null && model.hasSamePhone(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
         model.setPerson(personToEdit, editedPerson);
