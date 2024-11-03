@@ -154,6 +154,19 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Switching Interface Theme : `switch`
+
+Switches graphic user interface's theme
+
+Format: `switch THEME`
+
+* Two themes available: `light` and `dark`
+* Theme is case-insensitive
+
+Examples:
+* `switch light`
+* `switch DARK`
+
 ### Exiting the program : `exit`
 
 Exits the program.
