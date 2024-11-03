@@ -335,7 +335,7 @@ _Details coming soon ..._
 **Q**: What should I do if the application does not start?<br>
 **A**: If you are using a Mac, you may need to right-click the jar file and select `Open` to run the application. If you are using Windows, you may need to run the jar file as an administrator.
 
-**Q**: Can I edit the the data file directly?<br>
+**Q**: Can I edit the data file directly?<br>
 **A**: Yes, you can. However, please be cautious when editing the data file directly as it may cause the application to behave unexpectedly.
 
 **Q**: How do I update the application?<br>
