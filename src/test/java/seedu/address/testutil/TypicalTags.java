@@ -17,7 +17,6 @@ public class TypicalTags {
     public static final Tag COLLEAGUES = new Tag("colleagues");
     public static final Tag FAMILY = new Tag("family");
     public static final Tag VIP = new Tag("VIP");
-    public static final Tag VALID_TAG_BRIDES_FRIEND = new Tag("bride's friend");
 
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();

@@ -4,14 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -22,8 +26,9 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons;
     private ObservableList<Tag> tagList;
+    private Command previousCommand;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -108,6 +113,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPerson(int index, Person person) {
+        addressBook.addPerson(index, person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -136,7 +147,15 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+
+        @SuppressWarnings("unchecked")
+        Predicate<Person> currentPredicate = (Predicate<Person>) filteredPersons.getPredicate();
+
+        if (currentPredicate == null || predicate.equals(PREDICATE_SHOW_ALL_PERSONS)) {
+            filteredPersons.setPredicate(predicate);
+        } else {
+            filteredPersons.setPredicate(currentPredicate.and(predicate));
+        }
     }
 
     //=========== Tags ================================================================================
@@ -155,12 +174,22 @@ public class ModelManager implements Model {
         return isSuccessful;
     }
 
+    @Override public boolean deleteTag(Tag tag) {
+        return addressBook.deleteTag(tag);
+    }
+
     @Override
     public boolean deleteTags(List<Tag> tags) {
         boolean isSuccessful = true;
         for (Tag tag : tags) {
             isSuccessful &= addressBook.deleteTag(tag);
         }
+        return isSuccessful;
+    }
+
+    @Override
+    public boolean renameTag(Tag existingTag, String newTagName) {
+        boolean isSuccessful = addressBook.renameTag(existingTag, newTagName);
         return isSuccessful;
     }
 
@@ -175,6 +204,51 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Set<Tag> getTagsInUse() {
+        Set<Tag> tagsInUse = new HashSet<>();
+        List<Person> persons = getFullPersonList();
+        for (Person person : persons) {
+            Set<Tag> personTags = person.getTags();
+            tagsInUse.addAll(personTags);
+        }
+        return tagsInUse;
+    }
+
+    @Override
+    public Set<Person> removeTagFromPersons(Tag tag) {
+        List<Person> persons = getFullPersonList();
+        Set<Person> removedPersons = new HashSet<>();
+        for (Person person : persons) {
+            if (person.hasTag(tag)) {
+                Set<Tag> newTags = new HashSet<>(person.getTags());
+                newTags.remove(tag);
+
+                Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                        person.getEmail(), person.getRsvpStatus(), newTags);
+                setPerson(person, updatedPerson);
+                removedPersons.add(updatedPerson);
+            }
+        }
+        return removedPersons;
+    }
+
+    @Override
+    public void editTagInPersons(Tag existingTag, String newTagName) {
+        List<Person> persons = getFullPersonList();
+        for (Person person : persons) {
+            Set<Tag> tags = new HashSet<>(person.getTags());
+            for (Tag tag : tags) {
+                if (tag.equals(existingTag)) {
+                    tag.setTagName(newTagName);
+                }
+            }
+            Person newPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
+                    person.getRsvpStatus(), tags);
+            setPerson(person, newPerson);
+        }
+    }
+
+    @Override
     public boolean checkAcceptableTagListSize(int additionalTags) {
         return addressBook.checkAcceptableTagListSize(additionalTags);
     }
@@ -186,7 +260,25 @@ public class ModelManager implements Model {
 
     @Override
     public void updateTagList() {
-        tagList = this.addressBook.getTagList();
+        ObservableList<Tag> tl = this.addressBook.getTagList();
+        tagList.setAll(FXCollections.observableArrayList(tl));
+    }
+
+    @Override
+    public void updatePreviousCommand(Command nextCommand) {
+        this.previousCommand = nextCommand;
+    }
+
+    @Override
+    public Command getPreviousCommand() {
+        return this.previousCommand;
+    }
+
+    @Override
+    public Predicate<Person> getCurrentPredicate() {
+        @SuppressWarnings("unchecked")
+        Predicate<Person> result = (Predicate<Person>) filteredPersons.getPredicate();
+        return result;
     }
 
     @Override
@@ -205,5 +297,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

@@ -2,10 +2,12 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -72,6 +74,12 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Adds the given person at the specified index.
+     * {@code person} must not already exist in the address book.
+     */
+    void addPerson(int index, Person person);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -108,11 +116,27 @@ public interface Model {
 
     /**
      * Deletes a tag from the tag list.
+     * @param tag The tag to be deleted
+     * @return true if the tag was successfully deleted, false if the tag does not exist.
+     */
+    boolean deleteTag(Tag tag);
+
+    /**
+     * Deletes a tag from the tag list.
      *
-     * @param tags The tag to be deleted.
+     * @param tags The tags to be deleted.
      * @return true if the tag was successfully deleted, false if the tag does not exist.
      */
     boolean deleteTags(List<Tag> tags);
+
+    /**
+     * Renames a tag from the tag list.
+     *
+     * @param existingTag The tag to be renamed.
+     * @param newTagName The new name of the tag after renaming.
+     * @return true if the tag was successfully renamed.
+     */
+    boolean renameTag(Tag existingTag, String newTagName);
 
     /**
      * Checks if a tag exists in the tag list.
@@ -123,8 +147,25 @@ public interface Model {
     boolean hasTag(Tag tag);
 
     /**
+     * Returns a set of tags that are in use by the persons in the address book.
+     */
+    Set<Tag> getTagsInUse();
+
+    /**
+     * Removes the deleted {@code Tag} from all persons in the address book.
+     */
+    Set<Person> removeTagFromPersons(Tag tag);
+
+    /**
+     * Edits the specified all persons in the address book with the tag.
+     * @param existingTag The existing tag to be renamed.
+     * @param newTagName The new tag name after renaming.
+     */
+    public void editTagInPersons(Tag existingTag, String newTagName);
+
+    /**
      * Checks if the size of the tag list is below or equal
-     * to the maximum size allowed.
+     * to the maximum size acceptable.
      *
      * @return true if the size is acceptable, false otherwise.
      */
@@ -150,4 +191,10 @@ public interface Model {
      * Updates the tag list in the model.
      */
     void updateTagList();
+
+    void updatePreviousCommand(Command nextCommand);
+
+    Predicate<Person> getCurrentPredicate();
+
+    Command getPreviousCommand();
 }

@@ -9,7 +9,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [AddressBook Level 3](https://se-education.org/addressbook-level3/) (Original Source)
+* JavaFX
+* JSON
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -66,13 +68,13 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `TagList` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -83,7 +85,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -95,13 +97,16 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+Below is another sequence diagram, taking `execute("tag 1 t/friends")` API call as example.
+![[Interactions Inside the Logic Component for the `tag 1 t/friends` Command]](images/TagSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `TagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`, `TagCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`, `TagCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -111,10 +116,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`, `TagCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`, `TagCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -134,7 +139,7 @@ The `Model` component,
 </div>
 
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -155,11 +160,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Augment undo, add redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Currently, the undo feature facilitated by the class `UndoCommand` and is implemented by having an undo method under each command, which implements an `UndoableCommand` interface. It does not utilise saved states of the address book.
+
+The proposed augmented undo and new redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -228,20 +235,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1:** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 2 (current implementation):** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -258,41 +259,48 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
-**Target user profile**:
+**Target user profile**: 
 
-* has a need to manage a significant number (50-100) of wedding invitees
+Wedding planners who
+* needs to manage a significant number (50-100) of wedding guests
 * only needs to plan 1 wedding at a time
-* prefer desktop apps over other types
+* prefer desktop applications over other types (e.g. Web-based)
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* much prefers typing to cursor interactions
+* is reasonably comfortable using Command Line Interface (CLI) applications
 
-**Value proposition**: reduce the time taken to filter and contact invitees, allowing planners to focus on the wedding program.
+**Value proposition**:
+Reduce the time taken to add, tag and filter guests, allowing planners to focus more time on other wedding needs.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                         | I want to …​                                 | So that I can…​                                                         |
-|----------|---------------------------------|----------------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | new user                        | see usage instructions                       | refer to instructions when I forget how to use the App                  |
-| `* * *`  | user                            | add a new person to the guest list           |                                                                         |
-| `* * *`  | user                            | delete a person                              | remove someone that has been uninvited or is not attending              |
-| `* * *`  | user                            | view the entire guest list                   | get an overview of my guest status                                      |
-| `* * *`  | user                            | find a guest by name                         | locate details of invitees without having to go through the entire list |
-| `* * *`  | user                            | add customisable tags to guests              | categorise my guests easily                                             |
-| `* * *`  | user                            | delete tags associated with guests           | recategorise my guests if needed                                        |
-| `* * *`  | user                            | track the RSVP status of each guest          | track who is attending the wedding                                      |
-| `* *`    | user                            | filter guests according to their RSVP status | get an overview of who is attending the wedding                         |
-| `* *`    | user with many groups of guests | filter guests according to their tags        | get an overview of each individual group                                |
-| `*`      | user with many guests           | delete multiple guests at once               | quickly remove large groups from my guest list                          |
+| Priority | As a …​                                                   | I want to …​                                      | So that I can…​                                                                           |
+|----------|-----------------------------------------------------------|---------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | wedding planner new to the app                            | see usage instructions and examples               | refer to instructions when I forget how to use the App                                    |
+| `* * *`  | wedding planner                                           | add a new person to the guest list                | track the person using the guest list                                                     |
+| `* * *`  | wedding planner                                           | delete a person                                   | remove someone that has been uninvited                                                    |
+| `* * *`  | wedding planner                                           | view the entire guest list                        | get an view all the guests in my guest list                                               |
+| `* * *`  | wedding planner                                           | find a guest by name                              | locate specific guests without having to go through the entire list                       |
+| `* * *`  | wedding planner                                           | add customisable tags to guests                   | categorise my guests easily                                                               |
+| `* * *`  | wedding planner                                           | delete tags associated with guests                | re-categorise my guests if needed                                                         |
+| `* * *`  | wedding planner                                           | view the RSVP status of each guest                | see if each guest is attending, not attending or have not RSVP'ed to the wedding          |
+| `* *`    | wedding planner                                           | filter guests according to their RSVP status      | view guests that are attending, not attending or have not RSVP'ed to the wedding only     |
+| `* *`    | wedding planner managing different groups of guests       | filter guests according to their tags             | view specific groups of guests without having to go through the entire list               |
+| `* *`    | wedding planner managing many guests                      | tag and untag multiple guests at once             | quickly tag or untag large groups of guests in the guest list                             |
+| `* *`    | wedding planner managing many tags                        | tag and untag multiple tags on each guest at once | quickly tag or untag multiple tags onto each guest when required                          |
+| `* *`    | wedding planner requiring many tags                       | create and delete multiple tags at once           | quickly create or delete multiple tags used in the guest list                             |
+| `*`      | wedding planner flexible to changes                       | edit tags that were already created               | change the description of tags without altering any association to the guests in the list |
+| `*`      | wedding planner                                           | apply multiple filters to the list                | view only a specific group of guests                                                      |
+| `*`      | wedding planner                                           | have colour coded tags and fields                 | distinguish tags and different fields easily                                              |
+| `*`      | wedding planner                                           | see the list of tags already created              | easily tag guests without checking if the tag has been already created                    |
+| `*`      | wedding planner handling multiple guests and tags at once | undo my last command                              | do not need to retype multiple indexes and tags                                           |
 
-*{More to be added}*
-
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -300,9 +308,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User selects the options to add a guest.
-2.  The system prompts the user for name and contact number.
-3.  User inputs their name and contact number.
+1.  User enters the command to add a guest.
+2.  The system prompts the user for guest's name, contact number and email address.
+3.  User inputs their name, contact number and email address.
 4.  The system validates the input.
 5.  The system saves the guest and display confirmation message.
 
@@ -310,20 +318,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User inputs invalid contact number (e.g. invalid spaces).
-  * 3a1. System displays error message and prompts for contact number.
+* 3a. User inputs invalid contact number (e.g. invalid spaces, more than 8 integers).
+  * 3a1. System displays error message and prompts for corrected input.
   * Use case resumes at step 3.
 
 
 * 3b. User enters duplicate guest name.
-    * 3b1. System displays an error message, showing user already exists and prompts for a new name.
+    * 3b1. System displays an error message, showing user already exists and prompts for corrected input.
     * Use case resumes at step 3.
 
 **Use case 2: Delete Guest**
 
 **MSS**
 
-1.  User selects the options to delete a guest.
+1.  User enters the command to delete a guest.
 2.  The system prompts for guest's index in the list.
 3.  User enters the index.
 4.  The system verifies the index.
@@ -333,15 +341,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User inputs invalid index (e.g. index lesser than 1 or greater than list length).
-    * 3a1. System displays error message and prompts for valid index.
+* 3a. User inputs invalid index (e.g. index lesser than 1 or greater than current list length).
+    * 3a1. System displays error message and prompts for corrected input.
     * Use case resumes at step 3.
 
 **Use case 3: Find Guest By Name**
 
 **MSS**
 
-1.  User selects the options to find a guest.
+1.  User enters the command to find a guest.
 2.  The system prompts for the guest's name.
 3.  User enters the name.
 4.  The system searches for the guest.
@@ -351,33 +359,172 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 **Extensions**
 
-* 3a. No guests match the keyword
-    * 3a1. System displays a message indicating no guest found.
-  
+* 5a. No guests match the keyword
+    * 5a1. System displays a message indicating no guest found. 
+    * Use case ends.
 
-
-**Use case 4: Toggle RSVP status**
+**Use case 4: Set RSVP status**
 
 **MSS**
 
-1.  User selects the options to toggle RSVP status.
-2.  The system prompts for the guest's index in the list.
-3.  User enters the index.
-4.  The system verifies the index.
-5.  The system updates the list and show confirmation message.
+1.  User enters the command to set RSVP status.
+2.  The system prompts for the guest's index in the list and the intended RSVP status.
+3.  User enters the index and intended RSVP status.
+4.  The system verifies the input.
+5.  The system updates the RSVP status of the guest in the list and shows confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters an invalid index (e.g. outside valid range)
-    * 3a1. System displays error message and prompt for index.
+* 3a. User enters an invalid guest or status (e.g. index lesser than 1 or greater than current list length, invalid status)
+    * 3a1. System displays error message and prompt for indexes.
     * Use case resumes at step 3.
 
+**Use case 5: Create new tag**
 
-* 4a. Guest is already in the desired RSVP status.
-    * 4a1. System displays a message indicating the guest is already in the desired status.
+**MSS**
+
+1.  User enters the command to create new tag.
+2.  The system prompts for the description of the new tag.
+3.  User enters the description of the new tag.
+4.  The system verifies the input.
+5.  The system updates the tag list to show the new created tag and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
+    * 3a1. System displays error message and prompt tag description.
+    * Use case resumes at step 3.
+
+* 3b. User enters a duplicate tag description (i.e. tag already exists in the tag list)
+    * 3b1. System displays a message indicating the tag already exists.
     * Use case ends.
+
+* 5a. Tag list limit has been reached
+    * 5a1. System displays a message indicating the tag list limit has been reached.
+    * Use case ends.
+
+**Use case 6: Delete tag**
+
+**MSS**
+
+1.  User enters the command to delete tag.
+2.  The system prompts for the description of the tag.
+3.  User enters the description of the tag.
+4.  The system verifies the input.
+5.  The system updates the tag list to show that the tag no longer exist and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
+    * 3a1. System displays error message and prompt tag description.
+    * Use case resumes at step 3.
+
+* 3b. User enters a description not matching any existing tags (i.e. tag does not exist in the tag list)
+    * 3b1. System displays a message indicating the tag does not exist.
+    * Use case ends.
+
+**Use case 7: Tag guest**
+
+**MSS**
+
+1.  User enters the command to tag guest.
+2.  The system prompts for the index of the guest in the list and the tag.
+3.  User enters the index and the tag.
+4.  The system verifies the input.
+5.  The system updates the guest list to show the tag on the guest and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid tag (e.g. containing non-ASCII characters)
+    * 3a1. System displays error message and prompt index and tag.
+    * Use case resumes at step 3.
+
+* 3b. User enters invalid index (e.g. index lesser than 1 or greater than current list length)
+    * 3c1. System displays error message and prompt for index and tag.
+    * Use case resumes at step 3.
+
+* 5a. Tag not in tag list
+    * 5a1. System displays a message indicating the tag does not exist in tag list.
+    * Use case ends.
+
+
+**Use case 8: Untag guest**
+
+**MSS**
+
+1.  User enters the command to untag guest.
+2.  The system prompts for the index of the guest in the list and the tag.
+3.  User enters the index and tag.
+4.  The system verifies the input.
+5.  The system updates the guest list to show that the tag on the guest are removed and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid tag (e.g. containing non-ASCII characters)
+    * 3a1. System displays error message and prompt index and tag.
+    * Use case resumes at step 3.
+
+* 3b. User enters invalid index (e.g. index lesser than 1 or greater than current list length)
+    * 3c1. System displays error message and prompt for index and tag.
+    * Use case resumes at step 3.
+
+* 5a. Tag not on guest
+    * 5a1. System displays a message indicating the tag does not exist on the guest.
+    * Use case ends.
+
+
+**Use case 9: Filter guest list by tag or RSVP status**
+
+**MSS**
+
+1.  User enters the command to filter guest list.
+2.  The system prompts for the desired predicate (e.g. a RSVP status and/or tag).
+3.  User enters the desired predicate.
+4.  The system verifies the input.
+5.  The system shows the list of guests matching the predicate and shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid RSVP status
+    * 3a1. System displays error message indicating invalid RSVP status and prompts for the corrected predicate.
+    * Use case resumes at step 3.
+
+* 3b. User enters an invalid tag
+    * 3b1. System displays error message indicating the tag does not exist in tag list and prompts for the corrected predicate.
+    * Use case resumes at step 3.
+
+**Use case 10: Undo last action**
+
+**MSS**
+
+1.  User enters the command to undo the last action.
+2.  The system verifies the input.
+3.  The system shows the previous list before last action was taken shows confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No last action present
+    * 2a1. System displays error message indicating there is no action to undo.
+    * Use case ends.
+
+* 2b. Last action was an undo.
+    * 2b1. System displays error message indicating last action was an undo.
+    * Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -389,20 +536,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  GUI should be intuitive and easy to learn for wedding planners to manage the guest list.
 7.  Guest list should be saved and updated throughout uses.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **GUI**: Graphical User Interface allows users to interact with the address book codebase through visual representation
 * **CLI**: Command Line Interface accepts text input to execute functions of the application
 * **JAR file**: A package file that contains many class files, associated metadata and resources that build the application
-* **RSVP status**: A tag on each contact that indicates if the guest has responded to the wedding invitation
-* **Customisable tags**: Tags on contacts containing text written by user, which can be used for filtering purposes
-* **Delete**: Removes a contact and all details regarding the contact from the address book
-* **Add**: Creates and saves a new contact into the address book
-* **Filter**: Only show contacts that contains the text input by the user
-
+* **RSVP status**: A field on each guest that indicates if the guest has responded, attending or not attending the wedding, which can be used for filtering purposes
+* **Customisable tags**: Tags on guests containing text written by user, which can be used for filtering purposes
+* **Tag list**: A list of tags that can be used to classify guests
+* **Delete**: Removes a guest and all details regarding the guest from the address book
+* **Add**: Creates and saves a new guest into the address book
+* **Filter**: Only show guests that contains the text input by the user
+* **New Tag**: Creates a new tag and adds it to the tag list
+* **Delete Tag**: Removes a tag from the tag list and all instances of it on all guests in the address book
+* **Remove Tag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
+* **Undo**: Returns the list to the previous state before the last command was run
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -429,8 +578,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -438,20 +585,44 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Creating a tag
+
+1. Creating a tag
+    
+   1. Prerequisites: Tag list contains less than 30 tags. Tag `family` does not exist while `friends` does.
+
+   1. Test case: `newtag t/family`<br>
+      Expected: Tag `family` is created and shown in the tag list. Details of the created tag shown in the status message.
+
+   1. Test case: `newtag t/friends`<br>
+      Expected: No tag is created. Error details shown in the status message.
+
+   1. Other incorrect newtag commands to try: `newtag`, `newtag t/`, `newtag t/x` (where x is a non-ASCII character)<br>
+      Expected: Similar to previous.
 
 ### Saving data
+<div markdown="span" class="alert alert-info">:information_source: **Tip:** When utilising the application, it is recommended to occasionally duplicate the data file to an empty folder independent of the application as a backup, in case of missing or corrupted data files.
+</div>
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
+   1. Run the JAR file and note the error message for the corrupted data file
+   2. Open the project using an IDE (recommended to use IntelliJ IDEA)
+   2. Navigate to `/data` folder
+   3. Open the JSON file inside, it should be named `addressbook.json`
+   4. Edit the file to fix the corrupted data
+<div markdown="span" class="alert alert-info">:information_source: **Important:** Editing the data file directly is dangerous and could cause more issues. Do it with discretion and only as a last resort.
+</div>
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. Dealing with missing data files
+   1. Open the project using an IDE (recommended to use IntelliJ IDEA)
+   2. Navigate to `/data` folder
+   3. Open the JSON file inside, it should be named `addressbook.json`.
+   4. If there is none, you can copy the default data file from our [code space](https://github.com/AY2425S1-CS2103T-W11-2/tp)

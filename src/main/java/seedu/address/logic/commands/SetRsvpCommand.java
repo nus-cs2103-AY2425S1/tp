@@ -11,7 +11,7 @@ import seedu.address.model.person.RsvpStatus;
 /**
  * Set RSVP status for guests
  */
-public class SetRsvpCommand extends Command {
+public class SetRsvpCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "setrsvp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -25,6 +25,9 @@ public class SetRsvpCommand extends Command {
 
     private final Index index;
     private final int action;
+
+    private Person personToUpdate;
+    private Person updatedPerson;
 
     /**
      * Creates a SetCommand to update the RSVP status of the specified guest.
@@ -48,7 +51,7 @@ public class SetRsvpCommand extends Command {
         }
 
         // Get the person to update
-        Person personToUpdate = model.getFilteredPersonList().get(index.getZeroBased());
+        personToUpdate = model.getFilteredPersonList().get(index.getZeroBased());
 
         // Map action to the corresponding RSVP status
         RsvpStatus newRsvpStatus;
@@ -67,7 +70,7 @@ public class SetRsvpCommand extends Command {
         }
 
         // Create a new person object with the updated RSVP status
-        Person updatedPerson = new Person(
+        updatedPerson = new Person(
                 personToUpdate.getName(),
                 personToUpdate.getPhone(),
                 personToUpdate.getEmail(),
@@ -79,5 +82,10 @@ public class SetRsvpCommand extends Command {
         model.setPerson(personToUpdate, updatedPerson);
         String message = MESSAGE_SET_SUCCESS + updatedPerson.getName().fullName + " (" + newRsvpStatus + ")";
         return new CommandResult(message);
+    }
+
+    @Override
+    public void undo(Model model) {
+        model.setPerson(updatedPerson, personToUpdate);
     }
 }

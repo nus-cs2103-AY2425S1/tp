@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
@@ -12,21 +14,25 @@ import seedu.address.model.tag.TagList;
 /**
  * Adds a new predefined tag.
  */
-public class NewtagCommand extends Command {
+public class NewtagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "newtag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new tag (case insensitive).\n"
-            + "Parameters: TAG_NAME (MAX 50 alphanumeric characters, spaces, parenthesis and apostrophes)\n"
-            + "Example: " + COMMAND_WORD + " t/Bride's Friend";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Creates new tag(s) (case insensitive). Maximum of 50 alphanumeric characters, spaces, parenthesis "
+            + "and apostrophes per tag.\n"
+            + "Parameters: " + PREFIX_TAG + "TAG...\n"
+            + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
-    public static final String MESSAGE_SUCCESS = "New tag added: ";
-    public static final String MESSAGE_DUPLICATE = "This tag already exists.\n";
+    public static final String MESSAGE_SUCCESS = "New tag(s) created.\n";
+    public static final String MESSAGE_DUPLICATE = "Some tag(s) already exist(s).\n"
+            + "Non-duplicate tags (if any) have been added successfully.\n";
     public static final String MESSAGE_TOO_MANY_TAGS = "You have more than " + TagList.MAXIMUM_TAGLIST_SIZE
-            + " tags.\nPlease remove some using deletetag.\n";
+            + " tags.\nPlease remove some using 'deletetag'.\n";
 
     private final List<Tag> tags;
 
 
     /**
+     * Constructs a NewtagCommand to add the specified {@code tags}.
      * @param tags The {@code List} of tags to be added.
      */
     public NewtagCommand(List<Tag> tags) {
@@ -34,24 +40,50 @@ public class NewtagCommand extends Command {
         this.tags = tags;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireAllNonNull(model);
+    /**
+     * @throws CommandException if the number of defined tags in the system will exceed the maximum
+     *      allowable number if the new tags were to be added.
+     */
+    private void validateTagListSize(Model model) throws CommandException {
         if (!model.checkAcceptableTagListSize(tags.size())) {
             throw new CommandException(MESSAGE_TOO_MANY_TAGS);
         }
+    }
 
+    /**
+     * Adds the tags to the model and checks for duplicates.
+     * @param model The model to which tags will be added.
+     */
+    private boolean addTagsToModel(Model model) {
         boolean isSuccessful = model.addTags(tags);
-
-        if (!isSuccessful) {
-            throw new CommandException(MESSAGE_DUPLICATE);
-        }
-        String successMessage = MESSAGE_SUCCESS + tags + "\n";
-
         model.updateTagList();
+        return isSuccessful;
+    }
 
-        String currentTags = "Your tags: " + model.getTagList();
-        return new CommandResult(successMessage + currentTags);
+    /**
+     * Creates a CommandResult based on the success of adding tags to the model.
+     *
+     * @param isSuccessful Indicates if the tags were successfully added.
+     * @return The corresponding CommandResult.
+     */
+    private CommandResult createCommandResult(boolean isSuccessful) {
+        if (!isSuccessful) {
+            return new CommandResult(MESSAGE_DUPLICATE);
+        }
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireAllNonNull(model);
+        validateTagListSize(model);
+        boolean isSuccessful = addTagsToModel(model);
+        return createCommandResult(isSuccessful);
+    }
+
+    @Override
+    public void undo(Model model) {
+        model.deleteTags(tags);
     }
 
     @Override
@@ -66,5 +98,12 @@ public class NewtagCommand extends Command {
 
         NewtagCommand otherCommand = (NewtagCommand) other;
         return tags.equals(otherCommand.tags);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("tags", tags)
+                .toString();
     }
 }

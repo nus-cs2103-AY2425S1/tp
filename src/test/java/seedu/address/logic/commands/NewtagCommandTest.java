@@ -22,9 +22,12 @@ public class NewtagCommandTest {
 
     private Model model = new ModelManager();
 
+    /**
+     * EP: Valid tag name(s) that do(es) not already exist(s).
+     */
     @Test
     public void execute_newTag_success() {
-        Tag newTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag newTag = TypicalTags.BRIDES_SIDE;
         List<Tag> newTags = new ArrayList<>();
         newTags.add(newTag);
         NewtagCommand newTagCommand = new NewtagCommand(newTags);
@@ -32,15 +35,14 @@ public class NewtagCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTag(newTag);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + newTags + "\n"
-                + "Your tags: " + expectedModel.getTagList();
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_multipleNewTags_success() {
-        Tag tagBridesFriend = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag tagBridesFriend = TypicalTags.BRIDES_SIDE;
         Tag tagColleagues = TypicalTags.COLLEAGUES;
         List<Tag> newTags = new ArrayList<>();
         newTags.add(tagBridesFriend);
@@ -51,16 +53,17 @@ public class NewtagCommandTest {
         expectedModel.addTag(tagBridesFriend);
         expectedModel.addTag(tagColleagues);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + newTags + "\n"
-
-                + "Your tags: " + expectedModel.getTagList();
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * EP: Valid tag name(s) that already exist (ie. duplicate).
+     */
     @Test
-    public void execute_duplicateTag_failure() {
-        Tag duplicateTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+    public void execute_duplicateTag_successWithWarning() {
+        Tag duplicateTag = TypicalTags.BRIDES_SIDE;
         List<Tag> duplicateTags = new ArrayList<>();
         duplicateTags.add(duplicateTag);
         model.addTags(duplicateTags);
@@ -68,15 +71,65 @@ public class NewtagCommandTest {
         NewtagCommand newTagCommand = new NewtagCommand(duplicateTags);
         String expectedMessage = NewtagCommand.MESSAGE_DUPLICATE;
 
-        assertCommandFailure(newTagCommand, model, expectedMessage);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addTags(duplicateTags);
+
+        // No exception thrown, but user will be informed of duplicate(s).
+        assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_tooManyTags_failure() {
-        Tag newTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+    public void execute_mixedNewAndDuplicateTags_successWithWarning() {
+        Tag duplicateTag = TypicalTags.BRIDES_SIDE;
+        Tag newColleaguesTag = TypicalTags.COLLEAGUES;
+        Tag newFriendsTag = TypicalTags.FRIENDS;
+        List<Tag> mixedTags = List.of(newFriendsTag, duplicateTag, newColleaguesTag);
+        model.addTag(duplicateTag);
+
+        NewtagCommand newTagCommand = new NewtagCommand(mixedTags);
+        String expectedMessage = NewtagCommand.MESSAGE_DUPLICATE;
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addTags(mixedTags);
+
+        // The list should still be updated, but the user will be notified of duplicate(s).
+        assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * EP: Tags that almost exceed the tag list size limit.
+     */
+    @Test
+    public void execute_maximumNumberOfTags_success() {
+        Tag newTag = TypicalTags.BRIDES_SIDE;
         List<Tag> newTags = new ArrayList<>();
         newTags.add(newTag);
 
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        // Just below boundary value
+        for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE - 1; i++) {
+            model.addTag(new Tag(String.valueOf(i)));
+            expectedModel.addTag(new Tag(String.valueOf(i)));
+        }
+
+        NewtagCommand newTagCommand = new NewtagCommand(newTags);
+        expectedModel.addTag(newTag);
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
+
+        assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * EP: Tags that exceed the tag list size limit.
+     */
+    @Test
+    public void execute_tooManyTags_failure() {
+        Tag newTag = TypicalTags.BRIDES_SIDE;
+        List<Tag> newTags = new ArrayList<>();
+        newTags.add(newTag);
+
+        // Boundary value
         for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE; i++) {
             model.addTag(new Tag(String.valueOf(i)));
         }
@@ -85,5 +138,25 @@ public class NewtagCommandTest {
         String expectedMessage = NewtagCommand.MESSAGE_TOO_MANY_TAGS;
 
         assertCommandFailure(newTagCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_undoNewTag_success() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Tag newTag = TypicalTags.BRIDES_SIDE;
+        List<Tag> newTags = new ArrayList<>();
+        newTags.add(newTag);
+        NewtagCommand newTagCommand = new NewtagCommand(newTags);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addTag(newTag);
+
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
+
+        assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(newTagCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
     }
 }

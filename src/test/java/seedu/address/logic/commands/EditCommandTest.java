@@ -147,6 +147,25 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_undoEditCommand_success() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person editedPerson = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(editCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 

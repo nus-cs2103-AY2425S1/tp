@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -126,6 +127,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addPerson(int index, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -177,7 +183,12 @@ public class AddCommandTest {
 
         @Override
         public void updateTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public Set<Tag> getTagsInUse() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -188,8 +199,18 @@ public class AddCommandTest {
         public boolean addTags(List<Tag> tags) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean deleteTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public boolean deleteTags(List<Tag> tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean renameTag(Tag existingTag, String newName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -199,7 +220,32 @@ public class AddCommandTest {
         }
 
         @Override
+        public Set<Person> removeTagFromPersons(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editTagInPersons(Tag existingTag, String newTagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean checkAcceptableTagListSize(int additionalTags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePreviousCommand(Command nextCommand) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Command getPreviousCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<Person> getCurrentPredicate() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -85,6 +85,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds a person to the list at the specified index.
+     * The person must not already exist in the list.
+     */
+    public void addPerson(int index, Person toAdd) {
+        persons.add(index, toAdd);
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -127,6 +135,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         tags.deleteTag(t);
         return true;
+    }
+
+    /**
+     * Renames a tag in this {@code AddressBook}.
+     * @param existingTag The tag to be renamed.
+     * @param newTagName The new name of the tag, after renaming.
+     */
+    public boolean renameTag(Tag existingTag, String newTagName) {
+        return tags.renameTag(existingTag, newTagName);
     }
 
     public boolean hasTag(Tag t) {
