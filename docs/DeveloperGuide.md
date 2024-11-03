@@ -304,7 +304,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 Home-based healthcare providers who
-* Has a need to manage a significant number of patients information 
+* Has a need to manage a significant number of patients information
 * Needs to see their daily schedule of patient appointments
 * Needs to be reminded up upcoming appointments
 * Tag patients based on allergies and other medical information
@@ -319,7 +319,7 @@ Home-based healthcare providers who
 
 ### User stories
 
-Priorities: 
+Priorities:
 - High (must have): `***`
 - Medium (nice to have) - `**`
 - Low (unlikely to have) - `*`
@@ -355,8 +355,8 @@ Priorities:
 | `*`      | home-based healthcare provider | get notifications in the event an emergency occurs                     | respond as quickly as possible and know whether there is a need to go to the patient's house |
 | `**`     | home-based healthcare provider | see the services provided for each patient                             | know how much I should be charging my patients                                               |
 | `*`      | home-based healthcare provider | see which of my patients have paid                                     | keep track of how much my patients owe me                                                    |
-| `*`      | home-based healthcare provider | record when my patients pay for their appointment                      | keep track of which patients have paid for my services                                                                     
-| `*`      | home-based healthcare provider | show insurance details for patients                                    | generate patient's bill accordingly
+| `*`      | home-based healthcare provider | record when my patients pay for their appointment                      | keep track of which patients have paid for my services                                       |
+| `*`      | home-based healthcare provider | show insurance details for patients                                    | generate patient's bill accordingly                                                          |
 
 ### Use cases
 
@@ -367,7 +367,7 @@ Priorities:
 **MSS**
 
 1.  User requests to add a client and provides the required client details.
-2.  AddressBook validates the input 
+2.  AddressBook validates the input
 3.  AddressBook adds the client data.
 4.  AddressBook confirms the successful addition of the client.
 
@@ -383,7 +383,7 @@ Priorities:
 * 2b. Duplicate Client
 
     * 2b1. AddressBook shows an error message.
-      
+
   Use case ends.
 
 
@@ -410,7 +410,7 @@ Priorities:
 
     * 4b1. AddressBook detects multiple entries matching the provided attribute (name, phone number, or email).
     * 4b2. AddressBook shows an error message indicating that multiple clients match the input
-    * 4b3. User requests to delete the client's data with at least 2 of the 3 client's attributes 
+    * 4b3. User requests to delete the client's data with at least 2 of the 3 client's attributes
     * 4b4. AddressBook validates the input
     * 4b5. Addressbook deletes the person
 
@@ -492,8 +492,8 @@ Priorities:
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should respond within 5 seconds for any commands given.
 5. Command syntax should be consistent throughout the application to minimize the learning curve.
 6. Users should be able to run the application from the downloaded JAR file without an additional installer.
