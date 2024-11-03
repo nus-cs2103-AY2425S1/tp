@@ -73,7 +73,7 @@ Documentation style conventions are based on [Google's guide](https://developers
   e.g. `t/TAG…​` can be used as ` ` (i.e. 0 times), `t/vegetarian`, `t/budget conscious t/small scale` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER -c`, `p/PHONE_NUMBER -c n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -143,34 +143,42 @@ List contacts (can specify filters).
 
 Format:
 ```
-list [{-c | -v | -e}] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] {[d/DATE] | [s/SERVICE]} [t/TAG ...] [id/ID]
+list [{-c | -v}] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] { | [s/SERVICE] }
+```
+```
+list [-e] [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]
 ```
 
 Parameters:
 * `-c`: list clients (only 1 of -c, -v or -e should be specified)
 * `-v`: list vendors (only 1 of -c, -v or -e should be specified)
 * `-e`: list events (only 1 of -c, -v or -e should be specified)
-* `n/NAME`: name of contact
+* `n/NAME`: name of contact or event
 * `p/PHONE`: phone number of contact
 * `e/EMAIL`: email address of contact
 * `a/ADDRESS`: address of contact
-* `d/DATE`: date of client's event (can only be specified if `-c` is specified)
-* `s/SERVICE`: service provided by vendor (can only be specified if `-c` is specified)
+* `d/DATE`: date of event (can only be specified if `-e` is specified)
+* `s/SERVICE`: service provided by vendor (can only be specified if `-v` is specified)
 * `t/TAG`: tag(s) associated with the contact
 * `id/ID`: ID of the contact
+* `des/DESCRIPTION`: description of the event (can only be specified if `-e` is specified)
 
 Example:
-* `list -c n/Jane`
+* `list -c n/Jane p/81234567`
 * `list -v s/catering`
 * `list -e des/wedding`
 
 Notes:
 * If no arguments are specified, `list` will list all contacts.
-* The `-c`, `-v` and `-e` flags can be used to decide what type of data to list.
-* Both the `n/[NAME]` and `id/[CONTACT_ID]` are optional. Leaving both out will list all.
-* The name keyword search is case-sensitive. e.g `hans` will not match `Hans`.
+* The `-c`, `-v` and `-e` flags can be used to decide what type of data to list. 
+* If no flags are present, the default behaviour is to list all contacts. e.g. `list asiodhainsd` will be treated as `list` as there are no `-c`, `-v`, or `-e` flags.
+* All user input in between flags are ignore. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
+* All parameters are optional. Leaving them out will list all contacts by default.
+* The name keyword search is case-insensitive. e.g `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Contacts matching all fields keyword will be returned (i.e. `AND` search).
+* Contacts matching all fields keyword will be returned (i.e. `AND` search). e.g. `list -c n/Jane p/91234567` will list all clients with name `Jane` and phone number `91234567`.
+* Searching by address will list all contacts with addresses that include the keywords. e.g. `list a/Blk 123` will list contacts with address `Blk 123` and `Blk 456` because`Blk 456` contains the word `Blk`.
+* Likewise, searching by name will list all contacts and events with names that include the input keywords.
 
 ### Editing a contact
 
