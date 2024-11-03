@@ -35,7 +35,9 @@ import seedu.ddd.model.event.common.Description;
 public class TypicalEventFields {
 
     // Strings
-    public static final String VALID_EVENT_NAME = SAMPLE_EVENT_NAME;
+    public static final String VALID_EVENT_NAME_1 = SAMPLE_EVENT_NAME;
+    public static final String VALID_EVENT_NAME_2 = "Wedding A";
+    public static final String VALID_EVENT_NAME_3 = "Wedding B";
     public static final String VALID_EVENT_DESCRIPTION_1 = SAMPLE_EVENT_DESCRIPTION;
     public static final String VALID_EVENT_DESCRIPTION_2 = "Afterparty";
     public static final String VALID_EVENT_DATE = SAMPLE_EVENT_DATE;
@@ -57,7 +59,7 @@ public class TypicalEventFields {
     public static final String INVALID_EVENT_VENDOR = "-1";
     public static final String INVALID_EVENT_ID = "-1";
     // Objects
-    public static final Name DEFAULT_EVENT_NAME = new Name(VALID_EVENT_NAME);
+    public static final Name DEFAULT_EVENT_NAME = new Name(VALID_EVENT_NAME_1);
     public static final Description DEFAULT_EVENT_DESCRIPTION = new Description(VALID_EVENT_DESCRIPTION_1);
     public static final Date DEFAULT_EVENT_DATE = new Date(VALID_EVENT_DATE);
     public static final Id DEFAULT_EVENT_ID = new Id(VALID_EVENT_ID);

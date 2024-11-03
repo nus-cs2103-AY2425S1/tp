@@ -7,7 +7,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.ddd.logic.commands.AddContactCommand;
+import seedu.ddd.logic.commands.add.AddContactCommand;
 import seedu.ddd.model.contact.client.Client;
 
 /**

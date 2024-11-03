@@ -7,7 +7,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_VENDORS;
 
-import seedu.ddd.logic.commands.AddEventCommand;
+import seedu.ddd.logic.commands.add.AddEventCommand;
 import seedu.ddd.model.event.common.Event;
 
 /**

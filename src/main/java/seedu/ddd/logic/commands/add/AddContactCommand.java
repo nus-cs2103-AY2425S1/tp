@@ -1,4 +1,4 @@
-package seedu.ddd.logic.commands;
+package seedu.ddd.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
@@ -12,6 +12,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;

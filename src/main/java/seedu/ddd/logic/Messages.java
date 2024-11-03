@@ -29,7 +29,6 @@ public class Messages {
     public static final String MESSAGE_VENDORS_LISTED_OVERVIEW = "%1$d vendor(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_EXCLUSIVE_FIELDS = "Only 1 of the following arguments can be specified";
     public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
     public static final String MESSAGE_UNKNOWN_ITEM = "Unknown item displayed in list.";
@@ -46,19 +45,7 @@ public class Messages {
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
-        return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
-    }
-
-    /**
-     * Returns an error message indicating the exclusive prefixes.
-     */
-    public static String getErrorMessageForExclusivePrefixes(Prefix... exclusivePrefixes) {
-        assert exclusivePrefixes.length > 0;
-
-        Set<String> exclusiveFields =
-                Stream.of(exclusivePrefixes).map(Prefix::toString).collect(Collectors.toSet());
-
-        return MESSAGE_EXCLUSIVE_FIELDS + String.join(" ", exclusiveFields);
+        return MESSAGE_DUPLICATE_FIELDS + String.join(", ", duplicateFields);
     }
 
     /**

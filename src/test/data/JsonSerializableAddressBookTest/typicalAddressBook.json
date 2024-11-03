@@ -68,14 +68,14 @@
     "eventIds": [1]
   } ],
   "events" : [ {
-    "name" : "Sample Wedding",
+    "name" : "Wedding A",
     "description": "This is wedding A",
     "date" : "2000-01-01",
     "eventId": 0,
     "clientIds": [11, 13],
     "vendorIds": [12, 14]
   }, {
-    "name" : "Sample Wedding",
+    "name" : "Wedding B",
     "description": "This is wedding B",
     "date" : "2000-01-01",
     "eventId": 1,
