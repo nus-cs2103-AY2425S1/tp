@@ -15,10 +15,6 @@ import seedu.address.model.tag.Tag;
  * Jackson-friendly version of {@link Tag}.
  */
 class JsonAdaptedDate {
-    private static final String DATE_PATTERN =
-            "^([1-9]|[12][0-9]|3[01])/([1-9]|1[0-2])/\\d{4} ([01][0-9]|2[0-3])[0-5][0-9]$";
-    private static final String FORMAT_PATTERN = "^\\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     private final String dateString;
 
     /**
@@ -53,7 +49,6 @@ class JsonAdaptedDate {
         if (!Date.isValidDate(dateString)) {
             throw new IllegalValueException(Date.getMessageConstraints());
         }
-        return new Date(LocalDateTime.parse(dateString, DATE_FORMATTER));
+        return new Date(Date.parseDateTime(dateString));
     }
-
 }

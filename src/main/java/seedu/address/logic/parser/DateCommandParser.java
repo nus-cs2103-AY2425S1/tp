@@ -25,10 +25,7 @@ import seedu.address.model.person.Phone;
  * Parses input arguments and creates a new {@code DateCommand} object
  */
 public class DateCommandParser implements Parser<DateCommand> {
-    private static final String DATE_PATTERN =
-            "^([1-9]|[12][0-9]|3[01])/([1-9]|1[0-2])/\\d{4} ([01][0-9]|2[0-3])[0-5][0-9]$";
-    private static final String FORMAT_PATTERN = "^\\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
     /**
      * Parses the given {@code String} of arguments in the context of the {@code DateCommand}
      * and returns a {@code DateCommand} object for execution.
@@ -40,7 +37,7 @@ public class DateCommandParser implements Parser<DateCommand> {
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                     PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE);
             if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
-                    && !areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
+                    || !areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 
@@ -55,7 +52,8 @@ public class DateCommandParser implements Parser<DateCommand> {
             Optional<String> phone = argMultimap.getValue(PREFIX_PHONE);
             Optional<String> email = argMultimap.getValue(PREFIX_EMAIL);
             String dateString = argMultimap.getValue(PREFIX_DATE).orElse("");
-            LocalDateTime date = ParserUtil.parseDateString(dateString);
+
+            Date date = ParserUtil.parseDate(dateString);
 
             // Validate the phone number format if present
             if (phone.isPresent() && !Phone.isValidPhone(phone.get())) {
@@ -67,9 +65,9 @@ public class DateCommandParser implements Parser<DateCommand> {
                 throw new ParseException(MESSAGE_INVALID_EMAIL_DETAILS);
             }
 
-            return new DateCommand(name, phone, email, new Date(date));
-        } catch (IllegalValueException ive) {
-            throw new ParseException(ive.getMessage(), ive);
+            return new DateCommand(name, phone, email, date);
+        } catch (IllegalValueException e) {
+            throw new ParseException(e.getMessage(), e);
         }
     }
 

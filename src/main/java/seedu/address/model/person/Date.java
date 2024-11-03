@@ -7,11 +7,15 @@ import java.time.Month;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
+
 /**
  * Represents a Person's next appointment date in the address book.
  * Guarantees: immutable; is always valid
  */
 public class Date {
+
     public static final String MESSAGE_CONSTRAINTS = "Invalid date format! ";
     private static String messageConstraints = "Invalid date format! ";
     private static final String DATE_PATTERN =
@@ -91,5 +95,21 @@ public class Date {
 
     public static String getMessageConstraints() {
         return messageConstraints;
+    }
+
+    /**
+     * Parses a date string into a {@code LocalDateTime} object.
+     *
+     * <p>This method first validates the date string format and values by calling {@code checkDate}.
+     * Once validated, it converts the date string into a {@code LocalDateTime} object based on the specified
+     * format 'd/M/yyyy HHmm'. For instance, '2/12/2024 1800' would be parsed as 2nd December 2024 at 18:00 hours.</p>
+     *
+     * @param date The date string to be parsed, expected in the format 'd/M/yyyy HHmm'.
+     * @return A {@code LocalDateTime} object representing the parsed date and time.
+     * @throws ParseException if the date format is invalid or if the date and time values are incorrect.
+     */
+    public static LocalDateTime parseDateTime(String date) throws ParseException {
+        isValidDate(date);
+        return LocalDateTime.parse(date, FORMATTER);
     }
 }

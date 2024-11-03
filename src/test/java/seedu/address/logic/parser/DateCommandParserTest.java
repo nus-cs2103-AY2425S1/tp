@@ -13,7 +13,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DateCommand;
 import seedu.address.model.person.Date;
 
-
 public class DateCommandParserTest {
     private DateCommandParser parser = new DateCommandParser();
     private final String nonEmptyDate = "d/ 18/2/2024 1800";
@@ -48,4 +47,5 @@ public class DateCommandParserTest {
         //trailing and leading spaces
         assertParseSuccess(parser, " \n n/ Nayana p/88502457 \n d/ 18/2/2024 1800 \t", dateCommand);
     }
+
 }

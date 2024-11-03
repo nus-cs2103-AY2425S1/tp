@@ -126,24 +126,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into an {@code date}.
+     * Parses a {@code String date} into an {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static LocalDateTime parseDateString(String date) throws ParseException {
+    public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        if (trimmedDate.toLowerCase().equals("none")) {
-            return LocalDateTime.MIN;
-        }
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.getMessageConstraints());
-        }
-
-        return LocalDateTime.parse(trimmedDate, formatter);
-
+        return new Date(Date.parseDateTime(trimmedDate));
     }
 }
