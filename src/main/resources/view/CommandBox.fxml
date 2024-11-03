@@ -5,6 +5,6 @@
 <?import seedu.address.ui.commandpopup.AutoSuggestionTextField?>
 
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <AutoSuggestionTextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here... enter 'help' if you're stuck!"/>
+  <AutoSuggestionTextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here... enter 'help' or press 'F1' if you're stuck!"/>
 </StackPane>
 

@@ -356,13 +356,13 @@
     -fx-vgap: 3;
 }
 
-#games .label {
+#games .label   {
     -fx-font-family: Comfortaa;
     -fx-text-fill: white;
     -fx-background-color: #57a83f;
     -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
+    -fx-border-radius: 3;
+    -fx-background-radius: 7;
     -fx-font-size: 11;
 }
 

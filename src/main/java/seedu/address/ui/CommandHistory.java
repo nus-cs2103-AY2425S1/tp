@@ -35,6 +35,6 @@ public class CommandHistory {
             currentHistoryIndex++;
             return commandHistory.get(currentHistoryIndex);
         }
-        return null; // No next command
+        return ""; // No next command
     }
 }

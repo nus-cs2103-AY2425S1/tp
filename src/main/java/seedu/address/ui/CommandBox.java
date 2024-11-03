@@ -49,18 +49,22 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     public void initialize() {
         commandTextField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.UP) {
+            if (event.getCode() == KeyCode.UP && !event.isShiftDown()) {
                 String previousCommand = commandHistory.getPreviousCommand();
                 if (previousCommand != null) {
                     commandTextField.setText(previousCommand);
                     commandTextField.positionCaret(previousCommand.length()); // Move cursor to end
                 }
-            } else if (event.getCode() == KeyCode.DOWN) {
+            }
+            if (event.getCode() == KeyCode.DOWN && !event.isShiftDown()) {
                 String nextCommand = commandHistory.getNextCommand();
                 if (nextCommand != null) {
                     commandTextField.setText(nextCommand);
                     commandTextField.positionCaret(nextCommand.length()); // Move cursor to end
                 }
+            }
+            if (event.getCode() == KeyCode.ENTER) {
+                handleCommandEntered();
             }
         });
     }
