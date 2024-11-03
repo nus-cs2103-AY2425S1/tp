@@ -30,6 +30,7 @@ public class DeleteWeddingCommandTest {
 
     @Test
     public void execute_validWeddingName_success() throws CommandException {
+        // Select the first wedding in the list to delete
         Wedding weddingToDelete = model.getFilteredWeddingList().get(0);
         DeleteWeddingCommand deleteWeddingCommand = new DeleteWeddingCommand(
                 weddingToDelete.getWeddingName().toString());
@@ -47,6 +48,7 @@ public class DeleteWeddingCommandTest {
 
     @Test
     public void execute_invalidName_throwsCommandException() {
+        // Select a wedding name that does not exist in the list
         String invalidWeddingName = "NonExistentName";
         DeleteWeddingCommand deleteWeddingCommand = new DeleteWeddingCommand(invalidWeddingName);
 
@@ -55,6 +57,7 @@ public class DeleteWeddingCommandTest {
 
     @Test
     public void execute_missingName_throwsCommandException() {
+        // Select a wedding name that does not exist in the list (empty string)
         DeleteWeddingCommand deleteWeddingCommand = new DeleteWeddingCommand("");
 
         assertThrows(CommandException.class, () -> deleteWeddingCommand.execute(model));

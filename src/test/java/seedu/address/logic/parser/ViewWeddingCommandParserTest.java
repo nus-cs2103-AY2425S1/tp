@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewWeddingCommand;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.wedding.WeddingName;
 
 public class ViewWeddingCommandParserTest {
 
@@ -26,5 +27,11 @@ public class ViewWeddingCommandParserTest {
         // Testing for empty arguments where the command should fail
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ViewWeddingCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        // Testing for arguments with invalid format where the command should fail
+        assertParseFailure(parser, "me", WeddingName.MESSAGE_CONSTRAINTS);
     }
 }

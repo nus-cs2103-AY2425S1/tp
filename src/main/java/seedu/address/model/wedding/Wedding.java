@@ -108,4 +108,8 @@ public class Wedding {
                 .add("date", date)
                 .toString();
     }
+
+    public String getName() {
+        return weddingName.toString();
+    }
 }

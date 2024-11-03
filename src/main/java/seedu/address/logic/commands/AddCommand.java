@@ -51,10 +51,15 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+
     public static final String MESSAGE_NEAR_DUPLICATE_PERSON = "A person with a similar name already exists: %1$s"
             + "\nIf you want to add this person, consider changing the input name";
-    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet." + "\n"
-            + "Wedding needs to be created with Tag(s): '%2$s' using command 'add-wed first.";
+    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet."
+            + "\n"
+            + "Wedding needs to be created with Tag(s): '%2$s' using command '"
+            + AddWeddingCommand.COMMAND_WORD
+            + "' first.";
+
     private final Person toAdd;
 
     /**

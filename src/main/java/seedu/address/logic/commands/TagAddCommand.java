@@ -21,7 +21,9 @@ import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
 /**
- * Adds a tag to an existing person in the address book.
+ * Represents a command to add tags to an existing person in the address book.
+ * This command also adds the person as a participant to weddings that correspond to the added tags.
+ * If the wedding does not exist, the user will be prompted to create the wedding first.
  */
 public class TagAddCommand extends Command {
 
@@ -41,15 +43,19 @@ public class TagAddCommand extends Command {
             + "Contact: '%3$s' has been added to Wedding(s): '%4$s'.";
     public static final String MESSAGE_DUPLICATE_TAGS = "Contact '%1$s' already has the Tag(s) '%2$s'.";
     public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: '%1$s' does not exist in the address book.";
-    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet." + "\n"
-            + "Wedding needs to be created with Tag(s): '%2$s' using command 'add-wedding' first.";
-
+    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet."
+            + "\n"
+            + "Wedding needs to be created with Tag(s): '%2$s' using command '"
+            + AddWeddingCommand.COMMAND_WORD
+            + "' first.";
     private final Name name;
     private final Set<Tag> tagsToAdd;
 
     /**
-     * @param name      of the person in the person list to edit the tags
-     * @param tagsToAdd of the person to be updated to
+     * Creates a TagAddCommand to add the specified tags to the person with the given name.
+     *
+     * @param name      of the person in the person list to edit the tags.
+     * @param tagsToAdd of the person to be updated to.
      */
     public TagAddCommand(Name name, Set<Tag> tagsToAdd) {
         requireAllNonNull(name, tagsToAdd);
@@ -102,13 +108,17 @@ public class TagAddCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether
-     * the tag is successfully added.
-     * {@code personToEdit}.
+     * Generates a success message for the execution of the TagAddCommand.
+     * The message varies depending on whether new tags are successfully added.
+     *
+     * @param personToEdit the original person before adding the tags.
+     * @param editedPerson the person after adding the tags.
+     * @return the success message to display to the user.
      */
     public String generateSuccessMessage(Person personToEdit, Person editedPerson) {
         Set<Tag> tagsInBoth = new HashSet<>(personToEdit.getTags());
         Set<Tag> tagsInNeither = new HashSet<>(tagsToAdd);
+
         // if all tags in og person matches the tags to add, means all tags to be added
         // are duplicates, so don't go inside the loop
         if (!personToEdit.getTags().containsAll(tagsToAdd)) {
@@ -130,6 +140,7 @@ public class TagAddCommand extends Command {
                 return nonDuplicateTagsExist + duplicateTagsExist;
             }
         }
+
         return String.format(MESSAGE_DUPLICATE_TAGS, Messages.getName(editedPerson),
                 Messages.tagSetToString(tagsToAdd));
     }
@@ -166,14 +177,16 @@ public class TagAddCommand extends Command {
 
     /**
      * Gets a list of weddings whose name matches that of the tags in the set.
+     *
      * @param model current Model containing necessary wedding address book.
-     * @param tags Set of tags input by the user.
+     * @param tags set of tags input by the user.
      * @return a List of weddings that match the tag.
      */
     private List<Wedding> getWeddingfromTags(Model model, Set<Tag> tags) {
         List<String> predicate = tags
                 .stream().map(Tag::getTagName).collect(Collectors.toList());
         List<Wedding> list = new ArrayList<>();
+
         for (Wedding wedding : model.getFilteredWeddingList()) {
             for (String tagName : predicate) {
                 if (wedding.getWeddingName().toString().equals(tagName)) {
@@ -181,24 +194,28 @@ public class TagAddCommand extends Command {
                 }
             }
         }
+
         return list;
     }
 
     /**
      * Generates message based on whether tag can be added, which depends on whether wedding exists or not.
+     *
      * @param model current Model containing necessary wedding address book.
      * @param editedTags Set of tags that exist as a wedding as well.
      * @return String message stating whether tag exists as a wedding or not.
-     * @throws CommandException
+     * @throws CommandException if none of the weddings corresponding to the tags exist.
      */
     private String handleWeddingDoesntExist(Model model, Set<Tag> editedTags) throws CommandException {
         List<Wedding> weddingList = getWeddingfromTags(model, editedTags);
+
         if (weddingList.isEmpty()) {
             Set<Tag> tagsDontExist = new HashSet<>(editedTags);
             editedTags.removeAll(editedTags);
             throw new CommandException(String.format(MESSAGE_WEDDING_DOESNT_EXIST,
                     Messages.tagSetToString(tagsDontExist), Messages.tagSetToString(tagsDontExist)));
         }
+
         if (weddingList.size() < editedTags.size()) {
             Set<Tag> weddingSet = weddingList.stream().map(Wedding::getWeddingName)
                             .map(WeddingName::toString).map(Tag::new).collect(Collectors.toSet());
@@ -208,11 +225,13 @@ public class TagAddCommand extends Command {
             return String.format(MESSAGE_WEDDING_DOESNT_EXIST, Messages.tagSetToString(tagsDontExist),
                     Messages.tagSetToString(tagsDontExist));
         }
+
         return "";
     }
 
     /**
-     * Updates the rest the list of weddings with the editedPerson.
+     * Updates the rest of the list of weddings with the editedPerson.
+     *
      * @param editedPerson Person whose new tags have been added to them.
      * @param personToEdit Person who has tags currently being added to them.
      * @param model current Model containing necessary wedding address book.
@@ -233,6 +252,7 @@ public class TagAddCommand extends Command {
 
     /**
      * Sets the person being tagged as a participant in the wedding that matches the tag.
+     *
      * @param editedPerson Person whose tags have been added to them.
      * @param personToEdit Person who has tags currently being added to them.
      * @param model current Model containing necessary wedding address book.

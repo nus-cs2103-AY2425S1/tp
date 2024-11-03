@@ -56,6 +56,12 @@ public class DeleteYCommand extends Command {
         this.weddingToDelete = null;
     }
 
+    /**
+     * Executes the DeleteYCommand.
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the result of executing the command.
+     * @throws CommandException if there is no pending delete operation.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -92,6 +98,7 @@ public class DeleteYCommand extends Command {
 
     /**
      * Deletes the tag of the wedding from the participants associated in the wedding to be deleted.
+     * @param model {@code Model} which the command should operate on.
      */
     private void deleteTagsWithWedding(Model model) {
         Set<Person> weddingParticipants = weddingToDelete.getParticipants();

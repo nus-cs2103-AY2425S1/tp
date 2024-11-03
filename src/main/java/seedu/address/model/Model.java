@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
@@ -132,7 +133,7 @@ public interface Model {
      * Adds the given wedding.
      * {@code wedding} must not already exist in the wedding book.
      */
-    void addWedding(Wedding wedding);
+    void addWedding(Wedding wedding) throws CommandException;
 
     /**
      * Replaces the given wedding {@code target} with {@code editedWedding}.

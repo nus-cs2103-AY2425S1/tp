@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -19,8 +21,10 @@ public class FilterCommand extends Command {
             + "the specified keywords (case-insensitive)";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "\nParameters: n/KEYWORD or j/KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " n/John OR " + COMMAND_WORD + " j/Photographer";
+            + "\nParameters: "
+            + PREFIX_NAME + "KEYWORD or " + PREFIX_JOB + "KEYWORD\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John OR "
+            + COMMAND_WORD + " " + PREFIX_JOB + "Photographer";
 
     private final NameOrJobContainsKeywordsPredicate predicate;
 
