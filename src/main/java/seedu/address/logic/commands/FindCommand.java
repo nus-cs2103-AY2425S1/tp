@@ -53,7 +53,8 @@ public class FindCommand extends Command {
         int numberOfPeopleListed = model.getFilteredPersonList().size();
 
         if (numberOfPeopleListed == 0 || numberOfPeopleListed > 1) {
-            return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+            return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                    model.getFilteredPersonList().size()));
         } else {
             return new CommandResult(Messages.MESSAGE_PERSON_LISTED_OVERVIEW);
         }
