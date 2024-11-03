@@ -158,10 +158,10 @@ Parameters:
 * `e/EMAIL`: email address of contact
 * `a/ADDRESS`: address of contact
 * `d/DATE`: date of event (can only be specified if `-e` is specified)
-* `s/SERVICE`: service provided by vendor (can only be specified if `-v` is specified)
+* `s/SERVICE`: service provided by vendor (should only be specified if `-v` is specified otherwise it will just list all contacts)
 * `t/TAG`: tag(s) associated with the contact
 * `id/ID`: ID of the contact
-* `des/DESCRIPTION`: description of the event (can only be specified if `-e` is specified)
+* `des/DESCRIPTION`: description of the event (should only be specified if `-e` is specified)
 
 Example:
 * `list -c n/Jane p/81234567`

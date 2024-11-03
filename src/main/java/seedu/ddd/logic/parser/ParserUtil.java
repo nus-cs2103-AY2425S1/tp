@@ -4,6 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ddd.logic.parser.CommandFlag.CLIENT;
 import static seedu.ddd.logic.parser.CommandFlag.EVENT;
 import static seedu.ddd.logic.parser.CommandFlag.VENDOR;
@@ -221,6 +228,71 @@ public class ParserUtil {
             return EVENT;
         } else {
             return null;
+        }
+    }
+
+    /**
+     * Verifies that the specified ArgumentMultimap does not contain any illegal filters for a client.
+     * Throws a ParseException if a forbidden filter (service, description, or date) is found when
+     * the client flag (-c) is specified.
+     *
+     * @param argMultimap The ArgumentMultimap containing the parsed arguments.
+     * @throws ParseException if the ArgumentMultimap contains filters for service, description, or date
+     *         when the client flag (-c) is specified.
+     */
+    public static void verifyClientParser(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
+            throw new ParseException("Not allowed to filter by service when you specify -c");
+        } else if (argMultimap.getValue(PREFIX_DESC).isPresent()) {
+            throw new ParseException("Not allowed to filter by description when you specify -c");
+        } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            throw new ParseException("Not allowed to filter by date when you specify -c");
+        } else {
+
+        }
+    }
+
+    /**
+     * Verifies that the specified ArgumentMultimap does not contain any illegal filters for a vendor.
+     * Throws a ParseException if a forbidden filter (description or date) is found when
+     * the vendor flag (-v) is specified.
+     *
+     * @param argMultimap The ArgumentMultimap containing the parsed arguments.
+     * @throws ParseException if the ArgumentMultimap contains filters for description or date
+     *         when the vendor flag (-v) is specified.
+     */
+    public static void verifyVendorParser(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_DESC).isPresent()) {
+            throw new ParseException("Not allowed to filter by description when you specify -v");
+        } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            throw new ParseException("Not allowed to filter by date when you specify -v");
+        } else {
+
+        }
+    }
+
+    /**
+     * Verifies that the specified ArgumentMultimap does not contain any illegal filters for an event.
+     * Throws a ParseException if a forbidden filter (address, phone, service, email, or tags) is found
+     * when the event flag (-e) is specified.
+     *
+     * @param argMultimap The ArgumentMultimap containing the parsed arguments.
+     * @throws ParseException if the ArgumentMultimap contains filters for address, phone, service, email,
+     *         or tags when the event flag (-e) is specified.
+     */
+    public static void verifyEventParser(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            throw new ParseException("Not allowed to filter by address when you specify -e");
+        } else if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            throw new ParseException("Not allowed to filter by phone when you specify -e");
+        } else if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
+            throw new ParseException("Not allowed to filter by service when you specify -e");
+        } else if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            throw new ParseException("Not allowed to filter by email when you specify -e");
+        } else if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            throw new ParseException("Not allowed to filter by tags when you specify -e");
+        } else {
+
         }
     }
 }
