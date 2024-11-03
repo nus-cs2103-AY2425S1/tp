@@ -74,10 +74,10 @@ public class CommandTestUtil {
 
     public static final Date DATE = Date.from(
             LocalDateTime.of(2020, 12, 31, 12, 0)
-                    .atZone(ZoneId.systemDefault()).toInstant());
+                    .atZone(ZoneId.of("UTC")).toInstant());
     public static final Date DATE2 = Date.from(
             LocalDateTime.of(2021, 11, 10, 11, 0)
-                    .atZone(ZoneId.systemDefault()).toInstant());
+                    .atZone(ZoneId.of("UTC")).toInstant());
 
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;

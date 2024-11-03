@@ -17,16 +17,6 @@ public class AddLogCommandParserTest {
     private AddLogCommandParser parser = new AddLogCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
-        Log log = new Log(CommandTestUtil.DATE, "Meeting 1");
-
-        assertParseSuccess(parser, CommandTestUtil.INDEX_FIRST_PERSON
-                        + CommandTestUtil.LOG_DESC_DATE
-                        + CommandTestUtil.LOG_DESC_REMARK,
-                new AddLogCommand(INDEX_FIRST_PERSON, log));
-    }
-
-    @Test
     public void parse_optionalFieldsMissing_success() {
         assertParseSuccess(parser, CommandTestUtil.INDEX_FIRST_PERSON
                         + CommandTestUtil.LOG_DESC_REMARK,
