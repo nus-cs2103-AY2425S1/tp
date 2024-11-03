@@ -95,9 +95,5 @@ public class CsvToJsonConverter {
          }
     }
 
-    private static void containsValidHeaders(File csvFile) {
-
-    }
-
 
 }
