@@ -13,6 +13,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * List out all the wedding tags
@@ -57,24 +58,51 @@ public class AddWeddingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Check if the wedding involves the same person twice aka marrying oneself
+        // Normalize, trim, and capitalize the names
         String[] names = toAdd.getName().split("&");
-        if (names.length == 2 && names[0].trim().equalsIgnoreCase(names[1].trim())) {
+        if (names.length == 2) {
+            names[0] = capitalize(names[0].trim().toLowerCase());
+            names[1] = capitalize(names[1].trim().toLowerCase());
+        }
+
+        // Check if the wedding involves the same person twice aka marrying oneself
+        if (names.length == 2 && names[0].equals(names[1])) {
             throw new CommandException("A wedding cannot involve marrying oneself");
         }
 
         // Check if the wedding already exists in the address book
         Set<Set<String>> existingWeddingsNamesSet = getSets(model);
 
-        Set<String> toAddNamesSet = new HashSet<>(Arrays.asList(names[0].trim().toLowerCase(),
-                names[1].trim().toLowerCase()));
+        Set<String> toAddNamesSet = new HashSet<>(Arrays.asList(names[0], names[1]));
 
         if (existingWeddingsNamesSet.contains(toAddNamesSet)) {
             throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
         }
 
-        model.addWedding(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        // Create a new Wedding object with normalized and capitalized names
+        Wedding normalizedWedding = new Wedding(new WeddingName(names[0] + " & " + names[1]),
+                toAdd.getVenue(), toAdd.getDate());
+
+        model.addWedding(normalizedWedding);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(normalizedWedding)));
+    }
+
+    /**
+     * Capitalizes the first letter of each word in the name.
+     * @param name
+     * @return the capitalized name
+     */
+    private String capitalize(String name) {
+        String[] parts = name.split(" ");
+        StringBuilder capitalized = new StringBuilder();
+        for (String part : parts) {
+            if (!part.isEmpty()) {
+                capitalized.append(Character.toUpperCase(part.charAt(0)))
+                        .append(part.substring(1))
+                        .append(" ");
+            }
+        }
+        return capitalized.toString().trim();
     }
 
     /**

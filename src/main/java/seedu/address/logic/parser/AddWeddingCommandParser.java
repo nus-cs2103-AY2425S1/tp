@@ -33,10 +33,9 @@ public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATE);
-        WeddingName name = ParserUtil.parseWeddingName(argMultimap.getValue(PREFIX_WEDDING_NAME).get());
-        Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-
+        WeddingName name = ParserUtil.parseWeddingName(argMultimap.getValue(PREFIX_WEDDING_NAME).get().trim());
+        Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get().trim());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get().trim());
 
         Wedding wedding = new Wedding(name, venue, date);
 

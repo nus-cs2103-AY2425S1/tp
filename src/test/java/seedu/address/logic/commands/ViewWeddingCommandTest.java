@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
@@ -27,7 +28,7 @@ public class ViewWeddingCommandTest {
     private Model modelMultiple;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws CommandException {
         model = new ModelManager();
         modelMultiple = new ModelManager();
 
