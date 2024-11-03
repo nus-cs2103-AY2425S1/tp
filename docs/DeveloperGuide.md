@@ -120,10 +120,13 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which include both `Patient` and `Caregiver` objects). These are contained in a `UniquePersonList` object.
+* stores the address book data i.e., all Person objects in a UniquePersonList object. Each Person can have multiple roles (patient and/or caregiver) and contains their personal details, appointments, and relationships.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list, which is exposed to outsiders as an unmodifiable `ObservableList<Person>`. The UI can be bound to this list so that it automatically updates when the data changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
-* manages relationships between `Patient` and `Caregiver`. Each `Patient` can have one or more `Caregivers` linked to them through a `List<Caregiver>` in the `Patient` object. Caregivers are linked by a `patientID`.
+* manages relationships between patients and caregivers through a system of NRIC references. A Person can be both a patient and a caregiver, with each role stored in a Set<Role>. Patient-caregiver relationships are tracked using Set<Nric> fields for both caregivers and patients.
+* manages all appointments through an `AppointmentManager` object that prevents conflicting appointments and maintains appointment-person relationships
+* stores appointments for each `Person` in a `Set<Appointment>` that can be filtered and retrieved by time
+
 
 The `Model` does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
@@ -154,93 +157,62 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Appointment Management Feature
 
-#### Proposed Implementation
+The appointment management feature allows users to add, delete, edit and track appointments for each person. This section describes the key details of the implementation.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The feature is primarily facilitated by the `AppointmentManager` class, with appointment-related operations exposed through the `Model` interface. The appointment management system prevents scheduling conflicts and maintains the relationships between persons and their appointments.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+Given below is a detailed explanation of how the appointment system works.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Step 1. When the app starts up, `ModelManager` creates an `AppointmentManager` that maintains a central list of all appointments across all persons.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Step 2. When a user adds an appointment through the `addapp` command, the following sequence of operations happen:
+1. The `ModelManager` retrieves the person using their NRIC.
+2. The appointment is validated for:
+  * Start time being before end time
+  * Start time being in the future
+  * The person existing in the system
+3. The `AppointmentManager` checks for conflicts with existing appointments.
+4. If all validations pass:
+  * The appointment is added to both the person's appointment list
+  * The central appointment list is updated
+5. The success/failure result is returned to the user.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 3. When an appointment is removed through the `deleteapp` command:
+1. The person is retrieved using their NRIC
+2. The appointment is found based on the provided date and time
+3. The appointment is removed from the person's list
+4. The central appointment list is updated
 
-![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+<img src="images/AddAppointmentSequenceDiagram.png" width="280" />
 
-![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+The following classes play important roles in the appointment system:
 
-![UndoRedoState2](images/UndoRedoState2.png)
+* `ModelManager`: Implements the `Model` interface and serves as the facade for appointment operations
+* `AppointmentManager`: Manages the central list of appointments and handles conflict checking
+* `Person`: Stores a list of appointments specific to that person
+* `Appointment`: Represents a single appointment with start time, end time, and description
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Here is how some key operations are implemented:
 
-</div>
+* **Conflict checking**: A conflict occurs when a new appointment overlaps in time with any existing appointment. An overlap happens when:
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+The new appointment starts before another appointment ends, AND The new appointment ends after another appointment starts
 
-![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+* **Adding an appointment**: The `addAppointment` method in `AppointmentManager` first checks for conflicts, then adds the appointment to both the person's list and updates the central list. A boolean is returned to indicate success or failure.
+* **Updating central list**: The `update` method in `AppointmentManager` retrieves all appointments from all persons, sorts them by start time, and checks for any conflicts that might have been introduced.
 
-</div>
+The centralized appointment management through `AppointmentManager` ensures that:
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+* No conflicting appointments can be created
+* A single source of truth exists for all appointments
+* Appointments can be efficiently retrieved for any person
+* All appointment operations maintain data consistency
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -305,7 +277,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case 1: Add a New Patient**
+**Use Case 1: Add a New Person**
 
 **System**: CareLink
 **Use Case**: UC01 - Add New Patient
@@ -320,11 +292,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Duplicates are not created (NRIC uniqueness is enforced).
 
 **MSS**
-1. Fred enters command to `add` a new patient.
-2. CareLink requests patient details.
-3. Fred enters the patient details.
+1. Fred enters command to `add` a new person.
+2. CareLink requests person details.
+3. Fred enters the person details along with their role as patient, caregiver, or both.
 4. CareLink validates the input data.
-5. CareLink saves the patient details to the system.
+5. CareLink saves the person details to the system.
 6. CareLink displays a success message and shows the newly added patient in the system.
 7. Use case ends.
 
@@ -335,7 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Use case ends.
 
 
-**Use Case 2: View Patient Details**
+**Use Case 2: View Person Details**
 
 **System**: CareLink
 **Use Case**: UC02 - View Patient Details
@@ -345,17 +317,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Fred is logged into CareLink.
 
 **Guarantees**
-- The patient's details are successfully retrieved and displayed.
-- The correct patient's information is displayed without errors.
+- The person's details are successfully retrieved and displayed.
+- The correct person's information is displayed without errors.
 
 **Main Success Scenario (MSS)**
-1. Fred enters command to `view` a patient's details.
-2. CareLink retrieves the patient’s details.
-3. CareLink displays the patient's details to Fred.
+1. Fred enters command to `view` a person's details.
+2. CareLink retrieves the person's details.
+3. CareLink displays the person's details to Fred.
 4. Use case ends.
 
 **Extensions**
-- **3a. Invalid or nonexistent patient NRIC entered**:
+- **3a. Invalid or nonexistent person NRIC entered**:
     - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
     - Fred corrects the NRIC, and the use case resumes from step 3.
     - Use case ends.
@@ -375,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The caregiver is correctly linked to the specified patient.
 
 ### MSS
-1. Fred enters command to `add caregiver` and enters the necessary details, including the patient ID.
+1. Fred enters command to `add person` and enters the necessary details, including the patient ID.
 2. CareLink validates all input details against criteria.
 3. CareLink saves the caregiver's details and links them to the specified patient ID.
 4. CareLink confirms the addition and linking with a success message.
@@ -390,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2b.1: If the specified patient ID does not exist, CareLink displays an error message.
     - Use case ends.
 
-**Use Case 4: Update Patient Details**
+**Use Case 4: Update Person Details**
 
 **System**: CareLink
 **Use Case**: UC04 - Update Patient Details
@@ -403,7 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The patient’s details are successfully updated in the system.
 
 ### Main Success Scenario (MSS)
-1. Fred enters command to `update` and provides the NRIC of patient and new details.
+1. Fred enters command to `edit` and provides the NRIC of patient and new details.
 2. CareLink validates the new input.
 3. CareLink updates the records and confirms the update with a success message.
 4. Use case ends.
@@ -419,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use Case 5: Delete Patient Details**
+**Use Case 5: Delete Person Details**
 
 **System**: CareLink
 **Use Case**: UC05 - Delete Patient Details
@@ -433,98 +405,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The patient's details are successfully removed from the system.
 
 ### Main Success Scenario (MSS)
-1. Fred enters command to `delete` a patient’s details.
-2. CareLink retrieves the patient's information.
-3. CareLink deletes the patient's record.
+1. Fred enters command to `delete` a persons's details by using the NRIC.
+2. CareLink retrieves the person's information.
+3. CareLink deletes the person's record.
 4. Use case ends.
 
 ### Extensions
-- **2a. Patient Does Not Exist**:
-    - 2a.1: If no patient record matches the given details, CareLink displays an error message.
+- **2a. Person Does Not Exist**:
+    - 2a.1: If no person record matches the given details, CareLink displays an error message.
     - Use case ends.
 
 
-**Use Case 6: Export All Patient Data to CSV**
-
-**System**: CareLink
-**Use Case**: UC06 - Export All Patient Data to CSV
-**Actor**: Geriatrician (Fred)
-
-### Preconditions
-- Fred is logged into CareLink.
-
-### Guarantees
-- The CSV file is successfully exported and available for download.
-
-### Main Success Scenario (MSS)
-1. Fred enters command to export all patient data to CSV.
-2. CareLink asks the destination for copying the file to.
-3. Fred provides the destination address
-4. CareLink makes a copy of the file at the specified location.
-5. Use case ends.
-
-### Extensions
-
-- **3a. File Copy Error**:
-    - 3a.1: If CareLink encounters an error during the copy process, an error message is displayed.
-    - Use case ends.
-
-
-**Use Case 7: Import Patient Data using CSV**
-
-**System**: CareLink
-**Use Case**: UC07 - Import Patient Data using CSV
-**Actor**: Geriatrician (Fred)
-
-### Preconditions
-- Fred is logged into CareLink.
-- A CSV file containing patient data is available for import, and the format is correct.
-
-### Guarantees
-- The patient data from the CSV file is successfully imported into CareLink.
-
-### Main Success Scenario (MSS)
-1. Fred selects the option to import patient data using a CSV file.
-2. Fred provides the CSV file.
-3. CareLink validates the contents of the CSV file.
-4. CareLink imports the patient data from the CSV file into the system.
-5. CareLink confirms the successful import of the data with a success message.
-6. Use case ends.
-
-### Extensions
-- **3a. CSV Format Invalid**:
-    - 3a.1: If the CSV file is incorrectly formatted, CareLink displays an error message and the data is not imported.
-    - Use case ends.
-
-
-**Use Case 8: Filter Data by Date**
-
-**System**: CareLink
-**Use Case**: UC08 - Filter Data by Date
-**Actor**: Geriatrician (Fred)
-
-### Preconditions
-- Fred is logged into CareLink.
-
-### Guarantees
-- Data is successfully filtered by the specified date range and displayed.
-
-### Main Success Scenario (MSS)
-1. Fred enters command to filter patient data by date.
-2. CareLink prompts Fred to input a date range.
-3. Fred enters the desired start and end dates.
-4. CareLink filters the patient data based on the specified date range.
-5. CareLink displays the filtered data to Fred.
-6. Use case ends.
-
-### Extensions
-- **3a. Invalid Date Format**:
-    - 3a.1: If Fred enters an invalid date format, CareLink displays an error message and prompts Fred to re-enter the date range.
-    - Use case resumes from step 3.
-
-- **4a. No Data Found for Date Range**:
-    - 4a.1: If no patient data exists for the specified date range, CareLink informs Fred that no records were found.
-    - Use case ends.
 
 
 **Use Case 9: Filter Data by Medical Condition**
@@ -585,56 +476,93 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 4a.1: If no patient data exists for the specified patients, CareLink informs Fred that no records were found.
     - Use case ends.
 
-**Use Case 11: Schedule Follow-up Appointments**
+**Use Case 11: Schedule Appointments**
 
 **System**: CareLink
-**Use Case**: UC11 - Schedule Follow-up Appointments
+**Use Case**: UC11 - Schedule Appointments
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
-- Fred is logged into CareLink.
-- The patient exists in the system.
+- Fred is logged into CareLink
+- The person exists in the system
 
 ### Guarantees
-- A follow-up appointment is successfully scheduled and confirmed.
+- A follow-up appointment is successfully scheduled and confirmed
+- The appointment time is valid (start time before end time)
+- The appointment is in the future
+- No duplicate appointments are created for the person
 
 ### Main Success Scenario (MSS)
-1. Fred enters the command to schedule a follow-up appointment for a patient.
-2. CareLink prompts Fred to input the patient’s details and select a date and time.
-3. Fred enters the patient details and an available date and time for the appointment.
-4. CareLink confirms the follow-up appointment and saves it in the system.
-5. CareLink displays a confirmation message with the appointment details.
-6. Use case ends.
+1. Fred enters the `addapp` command to schedule a follow-up appointment with the required details (person's NRIC, start date/time, end date/time, description)
+2. CareLink validates that:
+   - The start date/time is before the end date/time
+   - The appointment is in the future
+   - The person exists in the system
+   - The appointment does not conflict with existing appointments
+3. CareLink confirms the follow-up appointment and saves it in the system
+4. CareLink displays a confirmation message with the appointment details
+5. Use case ends
 
 ### Extensions
-- **2a. Patient Does Not Exist**:
-    - 2a.1: If the entered patient identifier does not exist, CareLink displays an error message.
-    - Use case ends.
+- **2a. Person Does Not Exist**:
+    - 2a.1: CareLink displays an error message that the person cannot be found
+    - Use case ends
 
-**Use Case 12: Set Up Doctor Profile**
+- **2b. Invalid Appointment Time**:
+    - 2b.1: Start time is after or equal to end time
+    - CareLink displays an error message that the appointment times are invalid
+    - Use case ends
+
+- **2c. Past Appointment Time**:
+    - 2c.1: Appointment start time is in the past
+    - CareLink displays an error message that appointments must be in the future
+    - Use case ends
+
+- **2d. Duplicate Appointment**:
+    - 2d.1: The person already has an appointment at the specified time
+    - CareLink displays an error message about the conflicting appointment
+    - Use case ends
+
+**Use Case 12: Delete Appointments**
 
 **System**: CareLink
-**Use Case**: UC12 - Set Up Doctor Profile
+**Use Case**: UC12 - Delete Appointments
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
-- Fred is logged into CareLink for the first time or his profile setup is incomplete.
+- Fred is logged into CareLink
+- The person exists in the system
+- The appointment exists in the system
 
 ### Guarantees
-- Fred’s doctor profile is successfully created or updated.
+- The specified appointment is successfully deleted from the system
 
 ### Main Success Scenario (MSS)
-1. Fred enters command to set up his doctor profile.
-2. CareLink prompts Fred to enter profile details.
-3. Fred enters all required details.
-4. CareLink saves Fred’s profile and confirms the setup with a success message.
-5. Use case ends.
+1. Fred enters the `deleteapp` command with the required details (person's NRIC, date, start time)
+2. CareLink validates that:
+  - The person exists in the system
+  - The specified appointment exists for that person at the given date and time
+3. CareLink deletes the appointment from the system
+4. CareLink displays a confirmation message with the deleted appointment's details
+5. Use case ends
 
 ### Extensions
+- **2a. Person Does Not Exist**:
+   - 2a.1: CareLink displays an error message that the person cannot be found
+   - Use case ends
 
-- **4a. Profile Save Error**:
-    - 4a.1: If CareLink encounters an error while saving the profile, an error message is displayed, and the setup process is halted.
-    - Use case ends.
+- **2b. Invalid Date Format**:
+   - 2b.1: CareLink displays an error message that the date format should be DD/MM/YYYY
+   - Use case ends
+
+- **2c. Invalid Time Format**:
+   - 2c.1: CareLink displays an error message that the time format should be HH:MM
+   - Use case ends
+
+- **2d. Appointment Does Not Exist**:
+   - 2d.1: CareLink displays an error message that the appointment does not exist in CareLink
+   - Use case ends
+
 
 ### Use Case 13: Filter Patients by Risk Level
 
@@ -664,7 +592,37 @@ Use case resumes from step 3.
 **4a.1**: If no patients exist with the specified risk level, CareLink informs Fred that no records were found.
 Use case ends.
 
-*{More to be added}*
+**Use Case 14: Add Note to Person**
+
+**System**: CareLink
+**Use Case**: UC14 - Add Note to Person
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink
+- The person exists in the system
+
+### Guarantees
+- The note is successfully added to the person's records
+- The note text is not empty
+
+### Main Success Scenario (MSS)
+1. Fred enters the `addnote` command with the required details (person's NRIC, note text)
+2. CareLink validates that:
+  - The person exists in the system
+  - The note text is not empty
+3. CareLink adds the note to the person's records
+4. CareLink displays a confirmation message showing the NRIC and the added note text
+5. Use case ends
+
+### Extensions
+- **2a. Person Does Not Exist**:
+   - 2a.1: CareLink displays an error message that the person cannot be found
+   - Use case ends
+
+- **2b. Empty Note Text**:
+   - 2b.1: CareLink displays an error message that the note text cannot be empty
+   - Use case ends
 
 ### Non-Functional Requirements
 

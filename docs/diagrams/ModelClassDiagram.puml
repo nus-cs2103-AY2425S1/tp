@@ -11,17 +11,18 @@ Package Model as ModelPackage <<Rectangle>> {
     Class AddressBook
     Class ModelManager
     Class UserPrefs
-
     Class UniquePersonList
     Class Person
     Class Address
     Class Email
     Class Name
     Class Phone
+    Class Nric
     Class Tag
     Class Appointment
     Class Note
     Class Role
+    Class AppointmentManager
 }
 
 Class HiddenOutside #FFFFFF
@@ -33,8 +34,8 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager --> "1" AppointmentManager
 UserPrefs .up.|> ReadOnlyUserPrefs
-
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 
@@ -42,18 +43,21 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Nric
 Person *--> "*" Tag
 Person *--> "*" Role
 Person *--> "*" Appointment
 Person *--> "*" Note
+Person --> "*" Nric : patients
+Person --> "*" Nric : caregivers
 
 Person -[hidden]up--> HiddenOutside
 UniquePersonList -[hidden]right-> HiddenOutside
-
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+AppointmentManager --> "*" Appointment
 
 @enduml

@@ -8,23 +8,31 @@ title: User Guide
 CareLink is a desktop address book application targeted towards independent Geriatricians managing elderly patients with chronic conditions, someone who can type fast, prefers CLI over GUI, and often needs to manage several patients.
 
 ### Table of Contents
-* [Quick start](#quick-start)
-* [Features](#features)
-    * [Viewing help : help](#viewing-help--help)
-    * [Adding a person: add](#adding-a-person-add)
-    * [Listing all persons : list](#listing-all-persons--list)
-    * [Editing a person : edit](#editing-a-person--edit)
-    * [Locating persons by name, NRIC, role, or tags: find](#locating-persons-by-name-nric-role-or-tags-find)
-    * [Locating appointments by date-time range: findapp](#locating-appointments-by-date-time-range-findapp)
-    * [Deleting a person : delete](#deleting-a-person--delete)
-    * [Clearing all entries : clear](#clearing-all-entries--clear)
-    * [Exiting the program : exit](#exiting-the-program--exit)
-    * [Saving the data](#saving-the-data)
-    * [Editing the data file](#editing-the-data-file)
-    * [Archiving data files [coming in v2.0]](#archiving-data-files-coming-in-v20)
-* [FAQ](#faq)
-* [Known issues](#known-issues)
-* [Command summary](#command-summary)
+- [CareLink User Guide](#carelink-user-guide)
+    - [Table of Contents](#table-of-contents)
+  - [Quick start](#quick-start)
+  - [Features](#features)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Adding a person: `add`](#adding-a-person-add)
+    - [Linking a patient and a caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
+    - [Listing all persons : `list`](#listing-all-persons--list)
+    - [Editing a person : `edit`](#editing-a-person--edit)
+    - [Locating persons by name, NRIC, role, or tags: `find`](#locating-persons-by-name-nric-role-or-tags-find)
+    - [Prefixes:](#prefixes)
+    - [Examples:](#examples)
+    - [Adding an appointment: `addapp`](#adding-an-appointment-addapp)
+    - [Deleting an appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
+    - [Locating appointments by date-time range: `findapp`](#locating-appointments-by-date-time-range-findapp)
+    - [Examples:](#examples-1)
+    - [Deleting a person : `delete`](#deleting-a-person--delete)
+    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+  - [FAQ](#faq)
+  - [Known issues](#known-issues)
+  - [Command summary](#command-summary)
 
 ---
 
@@ -178,6 +186,58 @@ Finds persons based on the specified criteria using the provided prefixes.
 ![Find command example](images/findcommandexample.png)
 ![Find command success](images/findcommandsucceed.png)
 
+### Adding an appointment: `addapp`
+
+Adds an appointment for a person in CareLink.
+
+Format: `addapp nric/NRIC date/DATE start/START_TIME end/END_TIME`
+
+* The `NRIC` must belong to a person already in CareLink
+* `DATE` must be in the format DD/MM/YYYY (e.g., 01/01/2025)
+* `START_TIME` and `END_TIME` must be in 24-hour format HH:MM (e.g., 14:30)
+* The appointment must follow these rules:
+  * Start time must be before end time
+  * Appointment must be in the future
+  * Must not overlap with existing appointments
+
+Examples:
+* `addapp nric/S1234567A date/01/01/2025 start/10:00 end/11:00` adds a one-hour appointment on January 1st, 2025
+* `addapp nric/S9876543B date/15/03/2025 start/14:30 end/16:00` adds a 90-minute appointment on March 15th, 2025
+
+Common errors and their meanings:
+* `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
+* `Invalid date` - Make sure to use DD/MM/YYYY format (e.g., 01/01/2025)
+* `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g., 14:30)
+* `Start time must be before end time` - Check your appointment times
+* `Start time must be in the future` - Can't schedule appointments in the past
+* `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot
+
+### Deleting an appointment: `deleteapp`
+
+Deletes an existing appointment for a person in CareLink.
+
+Format: `deleteapp nric/NRIC date/DATE start/START_TIME`
+
+* The `NRIC` must belong to a person with an existing appointment
+* `DATE` must be in the format DD/MM/YYYY (e.g., 01/01/2025)
+* `START_TIME` must be in 24-hour format HH:MM (e.g., 14:30)
+* The appointment must exist at the specified date and time for the person
+
+Examples:
+* `deleteapp nric/S1234567A date/01/01/2025 start/10:00` deletes the appointment on January 1st, 2025 at 10:00
+* `deleteapp nric/S9876543B date/15/03/2025 start/14:30` deletes the appointment on March 15th, 2025 at 14:30
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To delete an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
+</div>
+
+Common errors and their meanings:
+* `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
+* `Invalid date` - Make sure to use DD/MM/YYYY format (e.g., 01/01/2025)
+* `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g., 14:30)
+* `This appointment does not exist in CareLink` - There is no appointment at the specified date and time for this person
+
+
 ### Locating appointments by date-time range: `findapp`
 
 Finds and lists appointment that falls within the specified date-time range. The command displays detailed information about the appointments such as the patient's name, phone, email, NRIC, caregivers, tags, and the appointment's start and end dates and times.
@@ -257,14 +317,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                                      |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Link**        | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S6283947C caregiver/S7012345B`                                                           |
-| **Clear**       | `clear`                                                                                                                                                               |
-| **Delete**      | `delete NRIC`<br> e.g., `delete S6483749D`                                                                                                                                   |
-| **Edit**        | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g.,`edit S1234567D n/James Lee e/jameslee@example.com`                                           |
-| **Find**        | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567D`
-| **Find Appointment**        | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g., `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`
-| **List**        | `list`
-| **Help**        | `help`
+| Action               | Format, Examples                                                                                                                                                     |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Link**             | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S6283947C caregiver/S7012345B`                                                          |
+| **Clear**            | `clear`                                                                                                                                                              |
+| **Delete**           | `delete NRIC`<br> e.g., `delete S6483749D`                                                                                                                           |
+| **Edit**             | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g.,`edit S1234567D n/James Lee e/jameslee@example.com`                                   |
+| **Find**             | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567D`                                                                            |
+| **Find Appointment** | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g., `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`          |
+| **List**             | `list`                                                                                                                                                               |
+| **Help**             | `help`                                                                                                                                                               |
