@@ -295,20 +295,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Responsible insurance agent    | receive timely reminders for clients' policies which are expiring soon | remind individual clients to renew their policies           |
 | `* * *`  | Forgetful insurance agent      | track the status of my clients' claims           | keep track of pending claims that require my attention                          |
 | `* * *`  | Insurance agent                | store all my client contact information in one place | easily access their details and communicate with them without searching across multiple platforms |
+| `* * *`  | Insurance agent                | track clients' claims and their status    | ensure all client issues are addressed promptly and effectively                 |
+| `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter Prudy. |
+| `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
+| `* * *`  | Insurance agent                        | add new claims or resolve old ones                | I can organize my actionables. |
 | `* *`    | Busy insurance agent           | have a powerful search function that allows me to quickly find clients by name, policy type, or claims | respond promptly to inquiries                                                   |
 | `* *`    | Busy insurance agent           | receive notifications when a client’s claim has not been resolved after a long time | be reminded to prioritize actioning these claims                                 |
 | `* *`    | Organized insurance agent      | have a visual dashboard that shows me a summary of my client portfolio at a glance, including policy types, claims, and follow-up tasks | plan my activities without having to navigate too much                           |
+| `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
 | `*`      | Eager insurance agent          | receive reminders for key client milestones (e.g., birthdays, policy anniversaries) | send personalized messages or offers, strengthening client relationships         |
 | `*`      | Responsible insurance agent    | Track the status of any claims my clients have made | I can provide updates and assistance throughout the claim process. |
 | `*`      | Insurance agent                | import and export client data                    | work with the data outside of the platform when necessary                       |
 | `*`      | Forgetful insurance agent      | set reminders for client meetings                | never miss important meetings or calls                                          |
-| `* * *`  | Insurance agent                | track clients' claims and their remark status    | ensure all client issues are addressed promptly and effectively                 |
 | `*`      | Insurance agent                | view detailed information about client referrals and their referees | know which of my clients are related and show my appreciation to clients with large referrals |
 | `*`      | Time-efficient insurance agent | assign different priority levels to my clients based on factors like policy value or renewal date | prioritize my work and focus on the most important or time-sensitive client needs |
-| `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
-| `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter Prudy. |
-| `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
-| `* * *`  | Insurance agent                        | add new claims or resolve old ones                | I can organize my actionables. |
 
 
 
