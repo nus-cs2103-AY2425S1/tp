@@ -89,12 +89,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 <box type="tip" seamless>
 
-**IMPORTANT:** 
+**IMPORTANT:**
 
 * If you are worried about adding duplicated people, fret not! Knotty Planner will alert you when an identical person is added
 * We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊
 
-**Tip:** 
+**Tip:**
 * A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
 involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
 * To make add person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
@@ -306,7 +306,7 @@ You can delete ALL contacts in the address book from the application.
 4. If you confirm, all entries will be deleted.
 5. If you cancel, no entries will be deleted.
 
-Format: 
+Format:
 * `clear-ab` followed by `y` clears all contacts in address book.
 * `clear-wb` followed by `y` clears all weddings in wedding book.
 
@@ -381,3 +381,4 @@ _Details coming soon ..._
 | **View Wedding**   | `view-wed NAME & NAME <br> e.g., `view-wed John & Sarah`                                                                                                                               |
 | **List Weddings**  | `list-wed`                                                                                                                                                                             |
 | **Help**           | `help`                                                                                                                                                                                 |
+| **Exit**           | `exit`                                                                                                                                                                                 |
