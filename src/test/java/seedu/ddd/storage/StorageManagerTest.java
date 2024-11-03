@@ -14,6 +14,7 @@ import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.UserPrefs;
+import seedu.ddd.model.contact.common.Contact;
 
 public class StorageManagerTest {
 
