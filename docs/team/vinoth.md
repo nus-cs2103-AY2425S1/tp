@@ -16,6 +16,7 @@ Given below are my contributions to the project.
 1. Add Shortcut Functionality: Enabled users to create shortcuts for frequent tags, saving time during customer data entry.
 2. Delete Shortcut Functionality: Provided users with the option to remove existing shortcuts for flexible tag management.
 3. List ShortCut Functionality: Introduced a feature to list all available shortcuts, ensuring visibility and ease of use.
+4. Filter Command: Introduced a feature to list all customers with specified tags (shortcut functionality was incorporated here as well)
 
 
 * **Project management**:
@@ -29,7 +30,7 @@ Given below are my contributions to the project.
 2. Enhanced Tagging Feature (`/t` prefix): Modified the tagging command to accept newly created shortcuts, making the tagging process quicker and more intuitive.
    
 * **Documentation**:
-1. Authored the introduction section of the User Guide, ensuring it was accessible and informative for new users.
+1. Authored the introduction section and Quick Start section of the User Guide, ensuring it was accessible and informative for new users.
 2. Added UML diagram for addShortCut command
     
 
