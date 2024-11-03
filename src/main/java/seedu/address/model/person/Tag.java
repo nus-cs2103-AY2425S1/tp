@@ -16,6 +16,8 @@ import java.util.Map;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tag must be one of the following codes: N, BP, BC, TP, TC, A, R";
+    public static final String MESSAGE_CONSTRAINTS_FIND = "Tag must be one of the following codes: "
+            + "N, BP, BC, TP, TC, A, R, B, C, P, T";
     public static final Map<String, String> TAG_OPTIONS = new HashMap<>() {
         {
             put("N", "New");
@@ -25,6 +27,14 @@ public class Tag {
             put("TC", "Technical Interview Confirmed");
             put("A", "Accepted");
             put("R", "Rejected");
+        }
+    };
+    public static final Map<String, String> TAG_OPTIONS_FIND = new HashMap<>() {
+        {
+            put("P", "in Progress");
+            put("C", "Confirmed");
+            put("T", "Technical Interview");
+            put("B", "Behavioral Interview");
         }
     };
 
@@ -52,6 +62,13 @@ public class Tag {
      */
     public static boolean isValidTagCode(String test) {
         return TAG_OPTIONS.containsKey(test.toUpperCase());
+    }
+
+    /**
+     * Returns true if a given string is a valid tag code.
+     */
+    public static boolean isValidTagCodeFind(String test) {
+        return TAG_OPTIONS.containsKey(test.toUpperCase()) || TAG_OPTIONS_FIND.containsKey(test.toUpperCase());
     }
 
     @Override

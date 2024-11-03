@@ -16,6 +16,9 @@ public class Phone {
     public static final String MESSAGE_LENGTH_CONSTRAINTS =
             "Phone number must be between 3 and 15 digits inclusive.";
 
+    public static final String MESSAGE_LENGTH_CONSTRAINTS_FIND =
+            "Phone number must be between 1 and 15 digits inclusive.";
+
     public static final String VALIDATION_REGEX = "(\\+)?[0-9\\-\\s]+";
     public final String value;
 
@@ -45,10 +48,20 @@ public class Phone {
      * Returns true if a given string has a valid length for phone numbers.
      */
     public static boolean isValidLengthPhone(String test) {
-        // Ensure length is between 7 and 15 digits (excluding leading '+')
+        // Ensure length is between 3 and 15 digits (excluding leading '+')
         // Remove '+' and hyphens for length check
         String digitsOnly = test.replaceAll("[\\s-]", "").replaceAll("\\+", "");
         return digitsOnly.length() >= 3 && digitsOnly.length() <= 15;
+    }
+
+    /**
+     * Returns true if a given string has a valid length for phone numbers in find feature.
+     */
+    public static boolean isValidLengthPhoneFind(String test) {
+        // Ensure length is between 1 and 15 digits (excluding leading '+')
+        // Remove '+' and hyphens for length check
+        String digitsOnly = test.replaceAll("[\\s-]", "").replaceAll("\\+", "");
+        return digitsOnly.length() >= 1 && digitsOnly.length() <= 15;
     }
 
     @Override

@@ -9,6 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
+    public static final String MESSAGE_CONSTRAINTS_FIND = "Email must be between 1 and 50 characters inclusive.";
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -65,7 +66,7 @@ public class Email {
      * Returns if a given string is a valid length for an email.
      */
     public static boolean isValidLengthEmail(String test) {
-        return test.length() <= 50 && !test.contains(" ");
+        return test.length() <= 50 && !test.isEmpty() && !test.contains(" ");
     }
 
     @Override

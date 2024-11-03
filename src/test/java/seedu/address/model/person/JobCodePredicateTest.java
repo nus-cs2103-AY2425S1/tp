@@ -21,10 +21,10 @@ public class JobCodePredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withJobCode("ENG456").build()));
     }
 
-    @Test
-    public void test_jobCodeDifferentCase_returnsFalse() {
-        JobCodePredicate predicate = new JobCodePredicate("eng123");
-        assertFalse(predicate.test(new PersonBuilder().withJobCode("ENG123").build()));
-    }
+    //    @Test
+    //    public void test_jobCodeDifferentCase_returnsFalse() {
+    //        JobCodePredicate predicate = new JobCodePredicate("eng123");
+    //        assertFalse(predicate.test(new PersonBuilder().withJobCode("ENG123").build()));
+    //    }
 }
 

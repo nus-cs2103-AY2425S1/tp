@@ -1,24 +1,20 @@
 package seedu.address.model.person;
 
-import java.util.List;
 import java.util.function.Predicate;
-
-import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Person}'s {@code Tag} matches the given keyword.
  */
 public class TagPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    private final String keyword;
 
-    public TagPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public TagPredicate(String keyword) {
+        this.keyword = keyword;
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getTag().tagCode, keyword));
+        return person.getTag().tagCode.contains(keyword.toUpperCase());
     }
 
     @Override
@@ -30,7 +26,7 @@ public class TagPredicate implements Predicate<Person> {
             return false;
         }
         TagPredicate otherPredicate = (TagPredicate) other;
-        return keywords.equals(otherPredicate.keywords);
+        return keyword.equals(otherPredicate.keyword);
     }
 }
 
