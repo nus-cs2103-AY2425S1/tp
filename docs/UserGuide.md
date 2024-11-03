@@ -229,6 +229,7 @@ Format: `exit`
 Shows commands in a help menu for quick reference during use of PROperty.
 
 ![help message](images/helpMessage.png)
+![help message](images/helpMessage2.png)
 
 Format: `help`
 
