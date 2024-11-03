@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
@@ -18,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -67,6 +70,31 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_setTargetIndexSuccess_validIndexFilteredList() {
+        showContactAtIndex(model, INDEX_FIRST_CONTACT);
+
+        Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(contactToDelete.getName());
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
+                Messages.format(contactToDelete));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deleteContact(contactToDelete);
+        showNoContact(expectedModel);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_setTargetIndexFailureNameNotInAddressBook_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(new Name("abzczdzezfghzizjzkzlmnopqrstuvwxyz"));
+        String expectedMessage = String.format(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK);
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
@@ -83,6 +111,9 @@ public class DeleteCommandTest {
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_CONTACT);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_CONTACT);
+        DeleteCommand deleteNameCommand = new DeleteCommand(new Name(VALID_NAME_AMY));
+        DeleteCommand deleteSameNameCommand = new DeleteCommand(new Name(VALID_NAME_AMY));
+        DeleteCommand deleteOtherNameCommand = new DeleteCommand(new Name(VALID_NAME_BOB));
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
@@ -99,6 +130,15 @@ public class DeleteCommandTest {
 
         // different contact -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+
+        // name, index -> false
+        assertFalse(deleteNameCommand.equals(deleteFirstCommand));
+
+        // same name -> true
+        assertTrue(deleteNameCommand.equals(deleteSameNameCommand));
+
+        // different name -> false
+        assertFalse(deleteNameCommand.equals(deleteOtherNameCommand));
     }
 
     @Test
