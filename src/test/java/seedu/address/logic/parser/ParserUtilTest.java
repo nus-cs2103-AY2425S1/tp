@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
@@ -254,5 +255,18 @@ public class ParserUtilTest {
 
         assertThrows(ParseException.class, ()
                 -> ParserUtil.parseRequiredNumberOfArguments(WHITESPACE, numberOfArguments, usageMessage));
+    }
+
+    public void requireValidEntity_validEntity_noExceptionsThrown() throws Exception {
+        assertDoesNotThrow(() ->ParserUtil.requireValidEntity("contact"));
+        assertDoesNotThrow(() ->ParserUtil.requireValidEntity("job"));
+        assertDoesNotThrow(() ->ParserUtil.requireValidEntity("company"));
+        assertDoesNotThrow(() ->ParserUtil.requireValidEntity("all"));
+    }
+
+    @Test
+    public void requireValidEntity_invalidEntity_throwParseException() throws Exception {
+        assertThrows(ParseException.class, ()
+                ->ParserUtil.requireValidEntity("someInvalidEntity"));
     }
 }
