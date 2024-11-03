@@ -27,7 +27,7 @@ public class DemoteCommand extends Command {
 
     public static final String MESSAGE_PURPOSE = "Converts an employee to a potential hire.";
 
-    public static final String MESSAGE_FORMAT = COMMAND_WORD + " INDEX (must be a positive integer)";
+    public static final String MESSAGE_FORMAT = COMMAND_WORD + " INDEX {must be a positive integer}";
 
     public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " 1";
 
