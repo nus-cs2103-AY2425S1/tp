@@ -116,7 +116,7 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     }
 
     /**
-     * Sorts persons in this address book by subject, in alphabetical order.
+     * Sorts persons in this address book by year group, in ascending order.
      */
     public void sortPersonsByYearGroup() {
         persons.sortPersonsByYearGroup();
