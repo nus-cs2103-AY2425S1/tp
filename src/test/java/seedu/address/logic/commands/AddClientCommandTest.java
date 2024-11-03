@@ -14,9 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,7 +23,6 @@ import seedu.address.model.Prudy;
 import seedu.address.model.ReadOnlyPrudy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
-import seedu.address.model.policy.Policy;
 import seedu.address.testutil.ClientBuilder;
 
 public class AddClientCommandTest {
@@ -92,20 +89,6 @@ public class AddClientCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-
-        private final ObservableList<Policy> policyList = FXCollections.observableArrayList();
-        private final FilteredList<Policy> filteredPolicies = new FilteredList<>(policyList);
-
-        @Override
-        public ObservableList<Policy> getFilteredPolicyList() {
-            return filteredPolicies;
-        }
-
-        @Override
-        public void updateFilteredPolicyList(Predicate<Policy> predicate) {
-            requireNonNull(predicate);
-            filteredPolicies.setPredicate(predicate); // Now this works with FilteredList
-        }
 
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
