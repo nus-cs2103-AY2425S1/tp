@@ -162,6 +162,7 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-wrap-text: true;
 }
 
 .result-display .label {
