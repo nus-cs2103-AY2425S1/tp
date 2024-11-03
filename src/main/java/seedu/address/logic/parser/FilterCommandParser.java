@@ -85,5 +85,4 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         return new FilterCommand(predicate);
     }
-
 }
