@@ -3,7 +3,6 @@ package seedu.academyassist.model.filter;
 import static java.util.Objects.requireNonNull;
 
 import seedu.academyassist.commons.util.AppUtil;
-import seedu.academyassist.logic.commands.FilterCommand;
 
 /**
  * Represents a parameter for Filter command
