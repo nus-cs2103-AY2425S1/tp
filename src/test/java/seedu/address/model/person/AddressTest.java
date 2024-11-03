@@ -10,7 +10,7 @@ public class AddressTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Address(null));
+        assertThrows(NullPointerException.class, () -> new Address((String) null));
     }
 
     @Test

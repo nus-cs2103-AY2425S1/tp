@@ -66,7 +66,7 @@ public class AutoSuggestionTextField extends TextField {
 
         // Listen for text changes
         textProperty().addListener((obs, oldText, newText) -> {
-            if (!newText.isEmpty()) {
+            if (!newText.trim().isEmpty()) {
                 String[] text = newText.split("\\s+");
                 String command = text[0];
                 boolean hasParams = false;
@@ -106,7 +106,6 @@ public class AutoSuggestionTextField extends TextField {
                 CommandTextFlow commandFlow = (CommandTextFlow) selectedTextFlow;
                 setText(commandFlow.getCommandText());
                 this.positionCaret(commandFlow.getCommandText().length());
-                suggestionPopup.hide();
             }
         });
 
