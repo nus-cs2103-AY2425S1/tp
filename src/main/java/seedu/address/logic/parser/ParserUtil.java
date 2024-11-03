@@ -164,12 +164,11 @@ public class ParserUtil {
         final Set<Schedule> scheduleSet = new HashSet<>();
         Iterator<String> dateTimeIterator = dateTimes.iterator();
         Iterator<String> noteIterator = notes.iterator();
-        while (dateTimeIterator.hasNext()) {
-            if (noteIterator.hasNext()) {
-                scheduleSet.add(parseSchedule(dateTimeIterator.next(), noteIterator.next()));
-            } else {
-                throw new ParseException(ScheduleCommand.MESSAGE_UNEQUAL_NOTES);
-            }
+        while (dateTimeIterator.hasNext() && noteIterator.hasNext()) {
+            scheduleSet.add(parseSchedule(dateTimeIterator.next(), noteIterator.next()));
+        }
+        if (dateTimeIterator.hasNext() || noteIterator.hasNext()) {
+            throw new ParseException(ScheduleCommand.MESSAGE_UNEQUAL_NOTES);
         }
         return scheduleSet;
     }

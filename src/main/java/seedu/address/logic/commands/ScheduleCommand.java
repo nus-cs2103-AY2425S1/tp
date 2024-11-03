@@ -28,7 +28,7 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule appointments for client. "
             + "Parameters: "
             + "NAME "
-            + PREFIX_DATE + "DATE_AND_TIME "
+            + PREFIX_DATE + "DATE_AND_TIME... "
             + PREFIX_NOTE + "NOTE...\n"
             + "Example: " + COMMAND_WORD + " "
             + "John Doe "
