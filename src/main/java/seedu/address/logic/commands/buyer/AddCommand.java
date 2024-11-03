@@ -53,12 +53,14 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(toAdd);
 
         if (model.hasBuyer(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }
 
         model.addBuyer(toAdd);
+        assert(model.hasBuyer(toAdd)); // verify buyer has indeed been added
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

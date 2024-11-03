@@ -44,6 +44,7 @@ public class DeleteCommand extends Command {
 
         Buyer buyerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteBuyer(buyerToDelete);
+        assert(!model.hasBuyer(buyerToDelete)); // verify buyer has been deleted
         return new CommandResult(String.format(MESSAGE_DELETE_BUYER_SUCCESS, Messages.format(buyerToDelete)));
     }
 
