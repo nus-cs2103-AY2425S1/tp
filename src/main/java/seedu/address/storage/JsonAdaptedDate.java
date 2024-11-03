@@ -45,9 +45,6 @@ class JsonAdaptedDate {
         if (dateString == null || dateString.isEmpty()) {
             return new Date(LocalDateTime.MIN); // Treat as no appointment
         }
-        if (!Date.isValidDate(dateString)) {
-            throw new IllegalValueException(Date.getMessageConstraints());
-        }
         return new Date(Date.parseDateTime(dateString));
     }
 }
