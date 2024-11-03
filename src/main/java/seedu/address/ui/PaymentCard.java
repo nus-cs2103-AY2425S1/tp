@@ -20,10 +20,9 @@ public class PaymentCard extends UiPart<Region> {
 
     private static final String FXML = "PaymentCard.fxml";
 
-    private final Logger logger = LogsCenter.getLogger(PaymentCard.class);
-
     public final int payment;
 
+    private final Logger logger = LogsCenter.getLogger(PaymentCard.class);
     @FXML
     private Label month;
     @FXML
@@ -46,7 +45,7 @@ public class PaymentCard extends UiPart<Region> {
         setDisplayMonth();
         setPaymentDetails();
 
-        logger.info("Successfully created payment card");
+        logger.info("Successfully created payment card for payment: " + this.payment);
     }
 
     /**

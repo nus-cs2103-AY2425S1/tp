@@ -23,11 +23,10 @@ public class AttendanceCard extends UiPart<Region> {
 
     private static final String FXML = "AttendanceCard.fxml";
 
-    private final Logger logger = LogsCenter.getLogger(AttendanceCard.class);
-
     public final List<Attendance> attendanceList;
     public final String tutorial;
 
+    private final Logger logger = LogsCenter.getLogger(AttendanceCard.class);
     @FXML
     private VBox attendanceCard;
     @FXML
@@ -44,6 +43,8 @@ public class AttendanceCard extends UiPart<Region> {
      */
     public AttendanceCard(String tutorial, List<Attendance> attendanceList) {
         super(FXML);
+        this.attendanceList = attendanceList;
+        this.tutorial = tutorial;
 
         // sorts the attendance in descending order with latest dates first
         attendanceList.sort((a1, a2) -> {
@@ -55,16 +56,14 @@ public class AttendanceCard extends UiPart<Region> {
             return 0;
         });
 
-        this.attendanceList = attendanceList;
-        this.tutorial = tutorial;
-
         attendanceCard.setOnMouseClicked((MouseEvent event) -> {
             otherAttendance.setManaged(!otherAttendance.isManaged());
             otherAttendance.setVisible(!otherAttendance.isVisible());
         });
-        subject.setText(tutorial);
 
+        subject.setText(tutorial);
         setAttendance();
+
         logger.info("Successfully created attendance card for tutorial: " + tutorial);
     }
 

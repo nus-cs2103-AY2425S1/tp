@@ -21,8 +21,6 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    private final Logger logger = LogsCenter.getLogger(PersonCard.class);
-
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -33,6 +31,7 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
+    private final Logger logger = LogsCenter.getLogger(PersonCard.class);
     @FXML
     private HBox cardPane;
     @FXML
@@ -60,8 +59,6 @@ public class PersonCard extends UiPart<Region> {
      */
     public PersonCard(Person person, ObservableList<Participation> participationList, int displayedIndex) {
         super(FXML);
-        logger.info("Creating PersonCard for " + person + "\n - Participation: " + participationList);
-
         this.person = person;
         id.setText(displayedIndex + "");
         name.setText(person.getName().fullName);
@@ -78,5 +75,7 @@ public class PersonCard extends UiPart<Region> {
 
         paymentCardPlaceholder.getChildren().add(new PaymentCard(person.getPayment()).getRoot());
         attendanceContainerPlaceholder.getChildren().add(new AttendanceContainer(participationList).getRoot());
+
+        logger.info("Successfully created PersonCard for " + person + "\n - Participation: " + participationList);
     }
 }
