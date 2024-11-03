@@ -227,10 +227,12 @@ Autocomplete operates based on the word at the caret position:
 #### Supported Fields
 Autocomplete currently supports the following fields with these prefixes:
 
-* Modules `m/` — Matches **all existing** module names.
-* Tags `t/` — Matches **all existing** tags.
-* Gender `g/` — Matches gender values: `male` or `female`.
-* File Paths `pa/` — Matches **all existing** archived file paths.
+| Prefix   | Field            | Description                                     |
+|----------|------------------|-------------------------------------------------|
+| `m/`     | Modules          | Matches **all existing** module names           |
+| `t/`     | Tags             | Matches **all existing** tags                   |
+| `g/`     | Gender           | Matches gender values: `male` or `female`       |
+| `pa/`    | File Paths       | Matches **all existing** archived file paths    |
 
 When these prefixes are detected, autocomplete automatically displays a list of suggestions related to these fields. The list of suggestions are generated through the existing list of students inside StoreClass.
 
