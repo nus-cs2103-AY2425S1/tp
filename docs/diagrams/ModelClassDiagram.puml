@@ -24,6 +24,10 @@ CLass Payment
 Class Tutorial
 Class UniqueTutorialList
 
+Class Participation
+Class UniqueParticipationList
+
+
 Class I #FFFFFF
 }
 
@@ -49,9 +53,12 @@ Person *--> Payment
 Person *--> "*" Tag
 
 AddressBook *--> "1" UniqueTutorialList
-UniqueTutorialList --> Tutorial
+UniqueTutorialList *-->"0..*" Tutorial
 
-Person -[hidden]up--> I
+AddressBook *--> "1" UniqueParticipationList
+UniqueParticipationList *-->"0..*" Participation
+
+Person -[hidden]up--> AddressBook
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
