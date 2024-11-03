@@ -193,6 +193,14 @@ Examples:
 * `list pets` followed by `delete p2` deletes the 2nd pet in PawPatrol.
 * `find pets Fluffy` followed by `delete p1` deletes the 1st pet in the results of the `find` command.
 
+### Sort : `sort`
+
+Sorts owners or pets in PawPatrol by their names in alphabetical order.
+
+Format:
+* `sort owners`: Sorts owners by name in alphabetical order.
+* `sort pets`: Sorts pets by name in alphabetical order.
+
 ### Clearing all entries : `clear`
 
 Clears all owners and pets in PawPatrol.
@@ -256,4 +264,6 @@ Action | Format, Examples
 **List Owners** | `list owners`
 **List Pets** | `list pets`
 **List Owners and Pets** | `list both`
+**Sort Owners** | `sort owners`
+**Sort Pets** | `sort pets`
 **Help** | `help`
