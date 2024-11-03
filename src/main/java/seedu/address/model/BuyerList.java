@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.UniqueBuyerList;
+import seedu.address.model.meetup.MeetUp;
 
 /**
  * Wraps all data at the address-book level
@@ -45,6 +46,7 @@ public class BuyerList implements ReadOnlyBuyerList {
      * {@code buyers} must not contain duplicate buyers.
      */
     public void setBuyers(List<Buyer> buyers) {
+        requireNonNull(buyers);
         this.buyers.setBuyers(buyers);
     }
 
@@ -53,7 +55,6 @@ public class BuyerList implements ReadOnlyBuyerList {
      */
     public void resetData(ReadOnlyBuyerList newData) {
         requireNonNull(newData);
-
         setBuyers(newData.getBuyerList());
     }
 
@@ -71,8 +72,8 @@ public class BuyerList implements ReadOnlyBuyerList {
      * Adds a buyer to the buyer list.
      * The buyer must not already exist in the buyer list.
      */
-    public void addBuyer(Buyer p) {
-        buyers.add(p);
+    public void addBuyer(Buyer b) {
+        buyers.add(b);
     }
 
     /**
@@ -82,7 +83,6 @@ public class BuyerList implements ReadOnlyBuyerList {
      */
     public void setBuyer(Buyer target, Buyer editedBuyer) {
         requireNonNull(editedBuyer);
-
         buyers.setBuyer(target, editedBuyer);
     }
 

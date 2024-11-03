@@ -17,7 +17,6 @@ import seedu.address.model.meetup.UniqueMeetUpList;
  * Duplicates are not allowed (by .isSameMeetUp comparison)
  */
 public class MeetUpList implements ReadOnlyMeetUpList {
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final UniqueMeetUpList meetUps;
 
     /*
@@ -48,6 +47,7 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      * {@code meetUps} must not contain duplicate meetUps.
      */
     public void setMeetUps(List<MeetUp> meetUps) {
+        requireNonNull(meetUps);
         this.meetUps.setMeetUps(meetUps);
     }
 
@@ -84,7 +84,6 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      */
     public void setMeetUp(MeetUp target, MeetUp editedMeetUp) {
         requireNonNull(editedMeetUp);
-
         meetUps.setMeetUp(target, editedMeetUp);
     }
 
