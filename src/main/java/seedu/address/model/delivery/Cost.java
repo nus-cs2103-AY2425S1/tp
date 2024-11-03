@@ -3,14 +3,23 @@ package seedu.address.model.delivery;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
+import seedu.address.model.delivery.exceptions.InvalidCostException;
+
 /**
  * Represents a delivery's cost.
+ * <p>
  * Guarantees: is valid as declared in {@link #isValidCost(String)}
  */
 public class Cost {
     public static final String MESSAGE_CONSTRAINTS =
-            "Cost should only contain numbers, and it should start with $";
-    public static final String VALIDATION_REGEX = "^\\$\\d+$"; // This does not check for decimals (cents).
+            "Cost should start with $, followed by positive integer dollar input, and optional 2 decimal cents input.\n"
+            + "For example, accepted inputs are: $100, $100.00, $100.10. ";
+    public static final String MESSAGE_INVALID_COST_STRING =
+            "The cost string within Cost has incorrect format. Something is wrong with the validation of cost input.";
+    public static final String VALIDATION_REGEX = "^\\$\\d+(\\.\\d{2})?$"; // This allows optional 2 d.p. cents input.
     public final String value;
 
     /**
@@ -21,11 +30,23 @@ public class Cost {
     public Cost(String cost) {
         requireNonNull(cost);
         checkArgument(isValidCost(cost), MESSAGE_CONSTRAINTS);
-        value = cost;
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        decimalFormat.setMinimumFractionDigits(2);
+        value = "$" + decimalFormat.format(Float.parseFloat(cost.substring(1)));
     }
 
+    /**
+     * Returns the current cost {@code String} as a float value.
+     */
     public float asFloat() {
-        return Float.parseFloat(this.value.substring(1));
+        try {
+            DecimalFormat decimalFormat = new DecimalFormat();
+            Number parsedCost = decimalFormat.parse(this.value.substring(1));
+            return parsedCost.floatValue();
+        } catch (ParseException e) {
+            // This should never happen since we have already verified that the cost is valid.
+            throw new InvalidCostException(MESSAGE_INVALID_COST_STRING);
+        }
     }
 
     /**

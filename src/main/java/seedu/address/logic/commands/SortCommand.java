@@ -32,21 +32,21 @@ public class SortCommand extends Command {
             + "Parameters: "
             + PREFIX_SORT + " CONTACT_ATTRIBUTE (e.g. date (default), email, name, phone, role, id)\n"
             + "Example: " + COMMAND_WORD_DESCENDING + " "
-            + PREFIX_SORT + "name";;
+            + PREFIX_SORT + "name";
 
     public static final String MESSAGE_USAGE_ASCENDING_INSPECT = COMMAND_WORD_ASCENDING
             + ": Sorts deliveries by the specified attribute in ascending order. "
             + "Parameters: "
             + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date (default), eta, id, status)\n"
             + "Example: " + COMMAND_WORD_ASCENDING + " "
-            + PREFIX_SORT + "cost";;
+            + PREFIX_SORT + "cost";
 
     public static final String MESSAGE_USAGE_DESCENDING_INSPECT = COMMAND_WORD_DESCENDING
             + ": Sorts deliveries by the specified attribute in descending order. "
             + "Parameters: "
             + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date (default), eta, id, status)\n"
             + "Example: " + COMMAND_WORD_DESCENDING + " "
-            + PREFIX_SORT + "cost";;
+            + PREFIX_SORT + "cost";
 
     public static final String MESSAGE_UNKNOWN_ATTRIBUTE_MAIN = "The contact attribute specified is unknown! "
             + "Current attributes supported are: date (default), email, name, phone, role";

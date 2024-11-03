@@ -90,7 +90,7 @@ public class InspectWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = HelpWindow.getInstance();
     }
 
     public Stage getPrimaryStage() {
@@ -225,11 +225,7 @@ public class InspectWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show(true, commandBox);
-        } else {
-            helpWindow.focus();
-        }
+        helpWindow.show(true, commandBox);
     }
 
     void show() {

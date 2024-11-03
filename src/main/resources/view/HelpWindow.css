@@ -23,8 +23,9 @@
 
 
 #helpMessage {
+    -fx-wrap-text: true;
     -fx-text-fill: black;
-    -fx-font-size: 13;
+    -fx-font-size: 15;
 }
 
 #helpMessageContainer {
