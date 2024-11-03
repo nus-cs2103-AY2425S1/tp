@@ -1,10 +1,12 @@
 package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
 
 /**
  * Wraps all {@code Event} and abstracts away
@@ -94,6 +96,26 @@ public class EventManager implements ReadOnlyEventManager {
 
         setEvents(newData.getEventList());
     }
+
+    /**
+     * Edits all the people that match personToEdit in all events
+     * @param personToEdit person that will be edited
+     * @param editedPerson new person that will replace personToEdit
+     */
+    public void editAllPersonsInEvents(Person personToEdit, Person editedPerson) {
+        requireAllNonNull(personToEdit, editedPerson);
+        eventList.forEach(event -> event.editPerson(personToEdit, editedPerson));
+    }
+
+    /**
+     * Edits all the people that match personToEdit in all events
+     * @param personToRemove person that will be edited
+     */
+    public void removeAllPersonsInEvents(Person personToRemove) {
+        requireNonNull(personToRemove);
+        eventList.forEach(event -> event.removePerson(personToRemove));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -1,6 +1,7 @@
 package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -203,7 +204,7 @@ public class Event {
     }
 
     /**
-     * Removes a person from the event with the specified role.
+     * Removes a person from the event with the specified role that is known.
      * @param person Person to be removed.
      * @param role Role of the person.
      * @throws IllegalArgumentException If the person does not have the specified role.
@@ -234,6 +235,59 @@ public class Event {
 
         roleSet.remove(person);
 
+    }
+
+    /**
+     * Removes person from all roles if they are present in that role
+     * @param personToRemove Person that will be removed
+     */
+    public void removePerson(Person personToRemove) {
+        requireNonNull(personToRemove);
+        // check each set and see it contains the person to remove
+        if (attendees.contains(personToRemove)) {
+            attendees.remove(personToRemove);
+        }
+
+        if (vendors.contains(personToRemove)) {
+            vendors.remove(personToRemove);
+        }
+
+        if (sponsors.contains(personToRemove)) {
+            sponsors.remove(personToRemove);
+        }
+
+        if (volunteers.contains(personToRemove)) {
+            volunteers.remove(personToRemove);
+        }
+    }
+
+    /**
+     * Edits person in all roles if they are present in that role
+     * @param personToEdit Person that will be removed
+     * @param editedPerson Person that will replace personToEdit
+     */
+    public void editPerson(Person personToEdit, Person editedPerson) {
+        requireAllNonNull(personToEdit, editedPerson);
+        // check each set and see it contains the person to edit
+        if (attendees.contains(personToEdit)) {
+            attendees.remove(personToEdit);
+            attendees.add(editedPerson);
+        }
+
+        if (vendors.contains(personToEdit)) {
+            vendors.remove(personToEdit);
+            vendors.add(editedPerson);
+        }
+
+        if (sponsors.contains(personToEdit)) {
+            sponsors.remove(personToEdit);
+            sponsors.add(editedPerson);
+        }
+
+        if (volunteers.contains(personToEdit)) {
+            volunteers.remove(personToEdit);
+            volunteers.add(editedPerson);
+        }
     }
     @Override
     public boolean equals(Object other) { // equality of 2 events defined only by the event name
