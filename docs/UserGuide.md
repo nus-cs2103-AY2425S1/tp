@@ -11,18 +11,16 @@ InvenTrack is a simple desktop app designed to help you manage the products and 
 
 With InvenTrack, you can:
 
-- Add products and suppliers to your inventory system.
-- Easily keep track of which suppliers provide which products.
-- Monitor stock levels and get alerts when a product is running low.
-
-InvenTrack simulates an ongoing software project for a desktop application dedicated to managing suppliers, product, and stock details within a convenience store setting. It is developed using object-oriented programming (OOP) principles, providing a robust and maintainable code base. The application also includes comprehensive user and developer documentation for ease of use and understanding.
+- Add and manage suppliers and products in your inventory.
+- Keep track of which suppliers provide which products.
+- Monitor and update stock levels.
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Getting Started
+## QuickStart
 ### Step 1: Install Java
 Before you can use InvenTrack, ensure you have Java `17` or above installed in your Computer.
 - To check if Java is installed:
@@ -78,6 +76,19 @@ Refer to the [Features](#features) below for details of each command.
 
 ## Features
 
+> **Notes about the command format:**<br>
+> * **Words in UPPER_CASE**: Words like `PRODUCT_NAME` and `SUPPLIER_NAME` are placeholders for information you need to provide. <br>
+ e.g For `add_product n/PRODUCT_NAME`, you would replace these placeholders with actual values, such as `add_product n/Apples`
+> * **Items in square brackets are optional.**<br>
+ e.g `add_product n/PRODUCT_NAME [st/STOCK_LEVEL]` can be used as `add_product n/Apples st/50` or as `add_product n/Apples`.
+> * Items with **`…`** ​ after them can be **used multiple times including zero times.**<br>
+ e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/beverage`, `t/beverage t/important` etc. 
+> * Parameters can be in any order.<br>
+  e.g. if the command specifies `n/SUPPLIER_NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/SUPPLIER_NAME` is also acceptable.
+> * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+> * **Copying Commands from PDFs:** If you’re copying commands from a PDF, be careful that spaces at line breaks may be omitted when pasted, so double-check the spacing.
+</box>
 <box type="info" seamless><box>
 
 **Notes about the command format:**<br>
@@ -108,7 +119,7 @@ Format: `help`
 
 ### Adding a supplier: `add_supplier`
 
-Adds a supplier to the address book.
+Registers a new supplier in the inventory management system.
 
 Format: `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -116,8 +127,8 @@ Format: `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 > **Tip:** A supplier can have any number of tags (including 0)
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add_supplier n/Fresh Farms Ltd p/98765432 e/contact@freshfarms.com a/23 Orchard Street, Suite 5`
+* `add_supplier n/Global Produce Inc e/globalproduce@example.com p/1234567 a/789 Harvest Ave, Level 2 t/International t/Organic`
 
 ### Editing a supplier : `edit`
 
@@ -134,20 +145,19 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st supplier to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
+*  `edit_supplier 1 p/91234567 e/contact@freshfarms.com` Edits the phone number and email address of the 1st supplier to be `91234567` and `contact@freshfarms.com` respectively.
+*  `contact@freshfarms.com` Edits the name of the 2nd supplier to be `Global Produce` and clears all existing tags.
 
 ### Deleting a supplier : `delete`
 Deletes the specified supplier from the address book.
 
-Format: `delete INDEX`
+Format: `delete n/SUPPLIER_NAME`
 
-* Deletes the supplier at the specified `INDEX`.
-* The index refers to the index number shown in the displayed supplier list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the supplier of the specified `SUPPLIER_NAME`.
+* Supplier must exist in tracker for command to work. 
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd supplier in the address book.
+*  `delete n/Global Produce` deletes the supplier named Global Produce from the tracker.
 * `find Betsy` followed by `delete 1` deletes the 1st supplier in the results of the `find` command.
 
 ### Adding a product : `add_product`
@@ -303,12 +313,19 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action               | Format, Examples                                                                                                                                               |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Supplier**     | `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add_supplier n/Fresh Farms Ltd p/98765432 e/contact@freshfarms.com a/Orchard St, Suite 5` |
+| **Edit Supplier**    | `edit_supplier INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g., `edit_supplier 1 n/Global Produce p/91234567 e/globalproduce@example.com` |
+| **Delete Supplier**  | `delete_supplier n/SUPPLIER_NAME`<br> e.g., `delete_supplier n/Global Produce`                                                                                 |
+| **Add Product**      | `add_product n/NAME [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`<br> e.g., `add_product n/Tissue Paper st/500 su/Global Produce`                            |
+| **Assign Product**   | `assign pr/PRODUCT_NAME su/SUPPLIER_NAME`<br> e.g., `assign pr/Tissue Paper su/Fresh Farms Ltd`                                                               |
+| **Unassign Product** | `unassign pr/PRODUCT_NAME su/SUPPLIER_NAME`<br> e.g., `unassign pr/Tissue Paper su/Fresh Farms Ltd`                                                           |
+| **Set Threshold**    | `set_threshold pr/PRODUCT_NAME min/MIN_STOCK_LEVEL max/MAX_STOCK_LEVEL`<br> e.g., `set_threshold pr/Tissue Paper min/100 max/1000`                           |
+| **Update Stock**     | `update_stock pr/PRODUCT_NAME stk/STOCK_LEVEL`<br> e.g., `update_stock pr/Tissue Paper stk/300`                                                               |
+| **View Suppliers**   | `view_supplier [KEYWORD]`<br> e.g., `view_supplier Fresh` or `view_supplier`                                                                                  |
+| **View Products**    | `view_product [KEYWORD]`<br> e.g., `view_product Tissue` or `view_product`                                                                                    |
+| **Delete Product**   | `delete_product pr/PRODUCT_NAME`<br> e.g., `delete_product pr/Tissue Paper`                                                                                   |
+| **Clear All**        | `clear`                                                                                                                                                       |
+| **Help**             | `help`                                                                                                                                                        |
+| **Exit**             | `exit`   
