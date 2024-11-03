@@ -24,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
+import static seedu.address.logic.parser.AddCommandParser.MESSAGE_END_PART;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
@@ -40,9 +41,9 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Role;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.contact.Role;
 import seedu.address.testutil.ContactBuilder;
 
 public class AddCommandParserTest {
@@ -144,7 +145,9 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_FUNCTION);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                "There must be a valid prefix right after `" + AddCommand.COMMAND_WORD + "`\n"
+                        + MESSAGE_END_PART);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB
@@ -183,7 +186,8 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + TELEGRAM_HANDLE_DESC_BOB
                 + EMAIL_DESC_BOB + STUDENT_STATUS_DESC_BOB
-                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, Name.MESSAGE_CONSTRAINTS);
+                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, "Invalid Name!\n" + Name.MESSAGE_CONSTRAINTS);
+        // not so good code but it reflects actual code for now
 
         // invalid telegramHandle
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_TELEGRAM_HANDLE_DESC

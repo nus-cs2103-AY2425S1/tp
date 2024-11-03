@@ -40,9 +40,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Role;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.contact.Role;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -50,7 +50,7 @@ public class EditCommandParserTest {
     private static final String ROLE_EMPTY = " " + PREFIX_ROLE;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_COMMAND_FORMAT);
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -86,15 +86,21 @@ public class EditCommandParserTest {
     // Format {edit 1 <desc>} example of <desc>: " n/James&"
     @Test
     public void parse_invalidParameter_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC, "Invalid Name!\n" + Name.MESSAGE_CONSTRAINTS);
+        // invalid name
         assertParseFailure(parser, "1"
-                + INVALID_TELEGRAM_HANDLE_DESC, TelegramHandle.MESSAGE_CONSTRAINTS); // invalid handle
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
+                + INVALID_TELEGRAM_HANDLE_DESC,
+                "Invalid Telegram Handle!\n" + TelegramHandle.MESSAGE_CONSTRAINTS); //
+        // invalid handle
+        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, "Invalid Email!\n" + Email.MESSAGE_CONSTRAINTS);
+        // invalid email
 
         // invalid student status
-        assertParseFailure(parser, "1" + INVALID_STUDENT_STATUS_DESC, StudentStatus.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_STUDENT_STATUS_DESC,
+                "Invalid Student Status!\n" + StudentStatus.MESSAGE_CONSTRAINTS);
 
-        assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); // invalid role
+        assertParseFailure(parser, "1" + INVALID_ROLE_DESC,
+                "Invalid Role!\n" + Role.MESSAGE_CONSTRAINTS); // invalid role
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_TELEGRAM_HANDLE_DESC

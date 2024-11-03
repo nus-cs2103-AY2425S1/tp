@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,7 +25,7 @@ import seedu.address.model.contact.Role;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-    public final static String MESSAGE_END_PART = "Command format:\n"
+    public static final String MESSAGE_END_PART = "Command format:\n"
             + FindCommand.MESSAGE_COMMAND_FORMAT + String.format(MESSAGE_HELP_PROMPT,
             HelpCommand.COMMAND_WORD + " " + FindCommand.COMMAND_WORD);
 
@@ -54,15 +53,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
-                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME)) {
+                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_ROLE, PREFIX_NICKNAME)) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, "Prefixes are missing! " + MESSAGE_END_PART));
         }
 
         // repeat in add command
         if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "There must be a valid" +
-                    " prefix right after `" + FindCommand.COMMAND_WORD +"`\n" + MESSAGE_END_PART));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "There must be a valid"
+                    + " prefix right after `" + FindCommand.COMMAND_WORD + "`\n" + MESSAGE_END_PART));
         }
 
         List<String> nameKeywords = List.of();

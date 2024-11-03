@@ -25,8 +25,8 @@ public class StudentStatus {
             + UNDERGRADUATE_START_YEAR + " and " + UNDERGRADUATE_END_YEAR + " inclusive\n"
             + "2. " + MASTERS_OFFICIAL_CASE + "\n"
             + "3. " + PHD_OFFICIAL_CASE + "\n"
-            + "For " + UNDERGRADUATE_OFFICAL_CASE + " There must only be one whitespace between the word "
-            + "and the integer value.";
+            + "For " + UNDERGRADUATE_OFFICAL_CASE + ", There must only be one whitespace between the word "
+            + "and the integer value. E.g. Undergraduate 4";
 
     public static final String VALIDATION_REGEX =
             String.format("^((%s \\b[%s-%s]\\b)|%s|%s)$",

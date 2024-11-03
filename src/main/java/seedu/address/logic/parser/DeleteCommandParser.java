@@ -17,7 +17,7 @@ import seedu.address.model.contact.Name;
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
-    public final static String MESSAGE_END_PART = "Command format:\n"
+    public static final String MESSAGE_END_PART = "Command format:\n"
             + DeleteCommand.MESSAGE_COMMAND_FORMAT
             + String.format(MESSAGE_HELP_PROMPT,
             HelpCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD);
@@ -43,7 +43,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 return new DeleteCommand(name);
             } catch (Exception ex) {
                 throw ex; // why it became successfull
-                //throw new ParseException(MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK,  ex);
                 // did not use the 2 parameter exception
             }
         }
@@ -55,12 +54,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (trimmedArgs.isEmpty()) { // String.format()
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Missing index or Full name. " + MESSAGE_END_PART)); // to check if
-            // message correct
-            // format
+                    "Missing index or full name. " + MESSAGE_END_PART));
         }
 
-        if (trimmedArgs.matches("^[0-9]+$")) {
+        if (trimmedArgs.matches("^[0-9]+$")) { // should not throw exception
             Index index = ParserUtil.parseIndex(args);
             return new DeleteCommand(index);
         }
@@ -72,7 +69,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_INVALID_INDEX_OR_NAME
                             + String.format(MESSAGE_MULTIPLE_WAYS_FORBIDDEN, DeleteCommand.COMMAND_WORD)));
-                // did not use the 2 parameter exception
+            // did not use the 2 parameter exception
         }
     }
 }

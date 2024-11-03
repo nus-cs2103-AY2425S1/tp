@@ -25,10 +25,10 @@ import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
-import seedu.address.model.contact.StudentStatus;
-import seedu.address.model.contact.TelegramHandle;
 import seedu.address.model.contact.Nickname;
 import seedu.address.model.contact.Role;
+import seedu.address.model.contact.StudentStatus;
+import seedu.address.model.contact.TelegramHandle;
 
 /**
  * Edits the details of an existing contact in the address book.
@@ -53,20 +53,20 @@ public class EditCommand extends Command {
             + PREFIX_TELEGRAM_HANDLE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
             + "Example Two: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Jane Doe\n"
-            + "Example Three: " + COMMAND_WORD + " 2 " + PREFIX_NAME + " John Doe" + PREFIX_NICKNAME + " " +
-            "johnny";
+            + "Example Three: " + COMMAND_WORD + " 2 " + PREFIX_NAME + " John Doe" + PREFIX_NICKNAME + " "
+            + "johnny";
     public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Contact edited successfully! Edited "
             + "Contact: %1$s\nThe display index of the contact may be reassigned if the name or nickname "
             + "is edited. ";
     public static final String MESSAGE_MISSING_PREFIX = "Prefix(es) for editing is missing, at least one must "
             + "be provided. Ensure correct spelling of prefix too (e.g. n/ and not /n)";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This will result in a contact that already " +
-            "exists in the address book. Check if the edits to make or the existing contact details are " +
-            "incorrect";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This will result in a contact that already "
+            + "exists in the address book. Check if the edits to make or the existing contact details are "
+            + "incorrect";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-            "One of the fields you want to add/change conflict with another contact. \nNo same email, " +
-                    "telegram, and president role is allowed. Contacts with the same full names must have " +
-                    "one of the contact's unique nickname indicated in the addressbook";
+            "One of the fields you want to add/change conflict with another contact. \nNo same email, "
+                    + "telegram, and president role is allowed. Contacts with the same full names must have "
+                    + "one of the contact's unique nickname indicated in the addressbook";
 
     private static final int invalidTargetIndex = -1;
 

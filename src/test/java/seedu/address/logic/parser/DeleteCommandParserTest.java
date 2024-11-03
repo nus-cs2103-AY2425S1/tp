@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
-// import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_NAME_FIELD_MISSING;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -39,14 +38,15 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    // need to double confirm this
     @Test
     public void parse_invalidNameArgs_throwsParseException() {
         assertParseFailure(parser, INVALID_NAME_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_FUNCTION));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_NAME_FIELD_MISSING, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_BLANK_FIELD, DeleteCommand.MESSAGE_FUNCTION));
     }
 }

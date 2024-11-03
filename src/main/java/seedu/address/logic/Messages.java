@@ -1,10 +1,11 @@
 package seedu.address.logic;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.contact.Contact;
@@ -27,24 +28,24 @@ public class Messages {
 
     public static final String MESSAGE_HELP_PROMPT = "Type `%1$s` for more info";
 
-
     // find and list
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
 
     // edit and delete
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
-    public static final String MESSAGE_INVALID_INDEX_OR_NAME = "Invalid Index or full name given. Index must be a positive Integer only. Full name "
-            + "must follow the constraints given for names. ";
+    public static final String MESSAGE_INVALID_INDEX_OR_NAME = "Invalid Index or full name given. "
+            + "Index must be a positive Integer only. "
+            + "Full name must follow the constraints given for names. ";
     public static final String MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK =
             "This contact is not in address book. Check if Full Name is used. Check contact's full name or "
                     + "if it exists by finding. Example Command to " + FindCommand.COMMAND_WORD + ": `"
                     + FindCommand.COMMAND_WORD + " " + PREFIX_NAME + " %1$s`";
-    public static final String MESSAGE_MULTIPLE_WAYS_FORBIDDEN = "%1$s by both index and full name is not " +
-            "allowed";
-    public static final String MESSAGE_DUPLICATE_NAME = "There is more than 1 contact with the same " +
-            "full name. Please %1$s by index.\nTip: find the contact's name to obtain their "
+    public static final String MESSAGE_MULTIPLE_WAYS_FORBIDDEN =
+            "%1$s by both index and full name is not allowed";
+    public static final String MESSAGE_DUPLICATE_NAME = "There is more than 1 contact with the same "
+            + "full name. Please %1$s by index.\nTip: find the contact's name to obtain their "
             + "corresponding displayed index, and %1$s by the displayed index directly on the page. "
-            + "Command to find :\n"
+            + "Command to find :\n`"
             + FindCommand.COMMAND_WORD + " " + PREFIX_NAME + " %2$s`";
 
     /**

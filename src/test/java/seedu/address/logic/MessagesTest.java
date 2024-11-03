@@ -57,10 +57,10 @@ public class MessagesTest {
                 + ContactBuilder.DEFAULT_EMAIL
                 + "; Student Status: "
                 + ContactBuilder.DEFAULT_STUDENT_STATUS
-                + "; Nickname: "
-                + validNickname
                 + "; Roles: ["
-                + ContactBuilder.DEFAULT_ROLES[0] + "]";
+                + ContactBuilder.DEFAULT_ROLES[0] + "]"
+                + "; Nickname: "
+                + validNickname;
 
         assertEquals(Messages.format(contact), expectedMessage);
     }
@@ -80,9 +80,9 @@ public class MessagesTest {
                 + ContactBuilder.DEFAULT_EMAIL
                 + "; Student Status: "
                 + ContactBuilder.DEFAULT_STUDENT_STATUS
+                + "; Roles: [President][Admin][Marketing]"
                 + "; Nickname: "
-                + validNickname
-                + "; Roles: [President][Admin][Marketing]";
+                + validNickname;
 
         assertEquals(Messages.format(contact), expectedMessage);
     }

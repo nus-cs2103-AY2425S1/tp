@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -11,8 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Name;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
  * Deletes a contact identified using it's displayed index from the address book.
@@ -30,8 +29,8 @@ public class DeleteCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_NAME + " FULL_NAME`";
     public static final String MESSAGE_COMMAND_EXAMPLE = "Example One: "
             + COMMAND_WORD + " 1\n"
-            + "Example Two: "+ COMMAND_WORD + " n/ John Doe\n"
-            + "Example Three: "+ COMMAND_WORD + " John Doe";
+            + "Example Two: " + COMMAND_WORD + " n/ John Doe\n"
+            + "Example Three: " + COMMAND_WORD + " John Doe";
 
     private static final int invalidTargetIndex = -1;
 

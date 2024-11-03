@@ -22,7 +22,9 @@ import seedu.address.model.contact.Contact;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-
+    public static final String MESSAGE_NO_CONTACTS_FOUND = "No contacts with the specified field found.\n"
+            + "If you are finding by name and can't find what you are looking for, perhaps you can find by "
+            + "nickname.";
     public static final String MESSAGE_FUNCTION = COMMAND_WORD + ": Finds all contacts whose details contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.";
     public static final String MESSAGE_COMMAND_FORMAT = COMMAND_WORD + " "
@@ -49,6 +51,9 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredContactList(predicate);
+        if (model.getFilteredContactList().size() == 0) {
+            return new CommandResult(MESSAGE_NO_CONTACTS_FOUND);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
     }

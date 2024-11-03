@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_NO_PARAMETER_FOUND;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_PRESIDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -50,7 +49,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_missingParts_throwsParseException() {
         // no arguments
-        assertParseFailure(parser, "     ", String.format(MESSAGE_NO_PARAMETER_FOUND, FindCommand.MESSAGE_FUNCTION));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_BLANK_FIELD, FindCommand.MESSAGE_FUNCTION));
 
         // no prefix
         assertParseFailure(parser, " Alice Bob", MESSAGE_INVALID_FORMAT);

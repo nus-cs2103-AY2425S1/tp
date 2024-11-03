@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
 import seedu.address.logic.Messages;
+import seedu.address.model.Model;
 
 /**
  * Format full help instructions for every command for display.
@@ -13,11 +13,9 @@ public class HelpCommand extends Command {
 
     public static final String MESSAGE_USAGE = "See `" + COMMAND_WORD + "`: Shows program usage instructions.\n"
             + "Format: " + COMMAND_WORD;
-
-    public static final String SHOWING_HELP_MESSAGE =
-            "Command List: "+ Messages.MESSAGE_COMMAND_LIST + "\n"
+    public static final String SHOWING_HELP_MESSAGE = "Command List: " + Messages.MESSAGE_COMMAND_LIST + "\n"
             + "For more details, type `help [COMMAND_WORD]` with the words found in the command list above "
-                    + "except for " + COMMAND_WORD + "\n"
+            + "except for " + COMMAND_WORD + "\n"
             + "Alternatively, visit our user guide on the popup screen";
 
     // studentStatus and Role can magic number
@@ -45,9 +43,9 @@ public class HelpCommand extends Command {
             + "Alternative Two: `list contacts`\n"
             + "Alternative Three: `list all contacts`";
     public static final String HELP_CLEAR = ClearCommand.MESSAGE_FUNCTION + "\n"
-            + "Command format: " +ClearCommand.MESSAGE_COMMAND_FORMAT;
+            + "Command format: " + ClearCommand.MESSAGE_COMMAND_FORMAT;
     public static final String HELP_EXIT = ExitCommand.MESSAGE_FUNCTION + "\n"
-            + "Command format: " +ExitCommand.MESSAGE_COMMAND_FORMAT;
+            + "Command format: " + ExitCommand.MESSAGE_COMMAND_FORMAT;
 
     private final String message;
     private final boolean isHelp;

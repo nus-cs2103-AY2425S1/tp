@@ -9,10 +9,10 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
-import seedu.address.model.contact.StudentStatus;
-import seedu.address.model.contact.TelegramHandle;
 import seedu.address.model.contact.Nickname;
 import seedu.address.model.contact.Role;
+import seedu.address.model.contact.StudentStatus;
+import seedu.address.model.contact.TelegramHandle;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.

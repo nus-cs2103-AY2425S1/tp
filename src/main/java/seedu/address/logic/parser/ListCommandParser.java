@@ -5,7 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.List;
 
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -29,8 +28,9 @@ public class ListCommandParser implements Parser<ListCommand> {
         if (!isValidArgument) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, " There shouldn't' be any words after "
-                            + "the list command word except for a few special cases. " + String.format(MESSAGE_HELP_PROMPT,
-                            HelpCommand.COMMAND_WORD + " " + ListCommand.COMMAND_WORD)));
+                            + "the list command word except for a few special cases. "
+                            + String.format(
+                                    MESSAGE_HELP_PROMPT, HelpCommand.COMMAND_WORD + " " + ListCommand.COMMAND_WORD)));
         }
         return new ListCommand();
     }

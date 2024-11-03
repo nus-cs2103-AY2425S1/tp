@@ -18,19 +18,18 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
-import seedu.address.model.contact.StudentStatus;
-import seedu.address.model.contact.TelegramHandle;
 import seedu.address.model.contact.Nickname;
 import seedu.address.model.contact.Role;
+import seedu.address.model.contact.StudentStatus;
+import seedu.address.model.contact.TelegramHandle;
 
 /**
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    public final static String MESSAGE_END_PART = "Command format: " + AddCommand.MESSAGE_COMMAND_FORMAT + "\n"
-            + String.format(MESSAGE_HELP_PROMPT,
-    HelpCommand.COMMAND_WORD + " " + AddCommand.COMMAND_WORD);
+    public static final String MESSAGE_END_PART = "Command format: " + AddCommand.MESSAGE_COMMAND_FORMAT + "\n"
+            + String.format(MESSAGE_HELP_PROMPT, HelpCommand.COMMAND_WORD + " " + AddCommand.COMMAND_WORD);
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -48,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
-                    "There must be a valid prefix right after `" + AddCommand.COMMAND_WORD +"`\n"
+                    "There must be a valid prefix right after `" + AddCommand.COMMAND_WORD + "`\n"
                             + MESSAGE_END_PART));
         }
         if (!arePrefixesPresent(argMultimap, compulsoryPrefixes)) {

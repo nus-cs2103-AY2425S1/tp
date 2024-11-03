@@ -29,7 +29,7 @@ import seedu.address.model.contact.Role;
  */
 public class EditCommandParser implements Parser<EditCommand> {
 
-    public final static String MESSAGE_END_PART = "Command format:\n"
+    public static final String MESSAGE_END_PART = "Command format:\n"
             + EditCommand.MESSAGE_COMMAND_FORMAT + "\n"
             + String.format(MESSAGE_HELP_PROMPT,
             HelpCommand.COMMAND_WORD + " " + EditCommand.COMMAND_WORD);
@@ -103,8 +103,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             index = ParserUtil.parseIndex(str);
             return new EditCommand(index, editContactDescriptor);
         } catch (ParseException pe) {
-            //isIntegerIndex = false;
-            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_FUNCTION), pe);
+            assert index == null;
+            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand
+            // .MESSAGE_FUNCTION), pe);
         }
 
         try { // removed if (index == null) because it will always be true
