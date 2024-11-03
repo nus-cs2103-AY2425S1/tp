@@ -87,6 +87,7 @@ public class ScheduleCommand extends Command {
                             .filter(lesson -> lesson != regularLesson)
                             .findFirst().get().toDisplay()));
         }
+        model.commit();
 
         return new CommandResult(String.format(MESSAGE_SCHEDULE_LESSON_SUCCESS, regularLesson.toDisplay(),
                 Messages.format(studentToUpdate)));

@@ -81,6 +81,7 @@ public class MakeupLessonCommand extends Command {
                             .filter(lesson -> lesson != makeupLesson)
                             .findFirst().get().toDisplay()));
         }
+        model.commit();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, makeupLesson.toDisplay(),
                 Messages.format(studentToUpdate)));

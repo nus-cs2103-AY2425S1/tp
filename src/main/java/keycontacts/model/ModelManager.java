@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
+import keycontacts.model.exceptions.StateNotFoundException;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
@@ -25,7 +26,7 @@ import keycontacts.model.student.Student;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final StudentDirectory studentDirectory;
+    private final VersionedStudentDirectory studentDirectory;
     private final UserPrefs userPrefs;
     private final ObservableList<Student> studentList;
     private final ObservableList<Student> unfilteredStudentList;
@@ -40,7 +41,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with student directory: " + studentDirectory + " and user prefs " + userPrefs);
 
-        this.studentDirectory = new StudentDirectory(studentDirectory);
+        this.studentDirectory = new VersionedStudentDirectory(studentDirectory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentDirectory.getStudentList());
         sortedFilteredStudents = new SortedList<>(filteredStudents);
@@ -91,8 +92,8 @@ public class ModelManager implements Model {
     //=========== StudentDirectory ================================================================================
 
     @Override
-    public void setStudentDirectory(ReadOnlyStudentDirectory studentDirectory) {
-        this.studentDirectory.resetData(studentDirectory);
+    public void setStudentDirectory(ReadOnlyStudentDirectory newStudentDirectory) {
+        this.studentDirectory.resetData(newStudentDirectory);
     }
 
     @Override
@@ -120,8 +121,32 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         studentDirectory.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public boolean undo() {
+        try {
+            studentDirectory.undo();
+            return true;
+        } catch (StateNotFoundException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean redo() {
+        try {
+            studentDirectory.redo();
+            return true;
+        } catch (StateNotFoundException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public void commit() {
+        studentDirectory.commit();
     }
 
     @Override
