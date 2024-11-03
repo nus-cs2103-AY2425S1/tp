@@ -23,7 +23,7 @@ Class PolicySet
 Class LifePolicy
 Class HealthPolicy
 Class EducationPolicy
-Class Policy
+Class "{abstract}\nPolicy" as Policy
 Class ClaimList
 Class Claim
 
