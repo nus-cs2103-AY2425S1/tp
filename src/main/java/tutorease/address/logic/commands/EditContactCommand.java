@@ -90,17 +90,7 @@ public class EditContactCommand extends ContactCommand {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        if (editPersonDescriptor.email != null && model.hasSameEmail(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
-        }
-
-        if (editPersonDescriptor.phone != null && model.hasSamePhone(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
-        }
+        hasDuplicates(personToEdit, editedPerson, model);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -156,6 +146,24 @@ public class EditContactCommand extends ContactCommand {
                 .add("index", index)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
+    }
+
+    /**
+    * Checks if the edited person would create a duplicate entry in the model based on unique attributes.
+    * This method verifies that the edited person's details do not conflict with existing persons in the model.
+    */
+    public void hasDuplicates(Person personToEdit, Person editedPerson, Model model) throws CommandException {
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (editPersonDescriptor.email != null && model.hasSameEmail(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+        }
+
+        if (editPersonDescriptor.phone != null && model.hasSamePhone(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+        }
     }
 
     /**
