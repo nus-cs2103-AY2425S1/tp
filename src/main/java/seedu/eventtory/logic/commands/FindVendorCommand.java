@@ -1,7 +1,7 @@
 package seedu.eventtory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.eventtory.logic.commands.util.PredicatePreviewUtil.getPreviewofFilteredVendors;
+import static seedu.eventtory.logic.commands.util.PredicatePreviewUtil.getPreviewOfFilteredVendors;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_VENDOR;
 
 import javafx.collections.transformation.FilteredList;
@@ -36,7 +36,7 @@ public class FindVendorCommand extends FindCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        FilteredList<Vendor> vendors = getPreviewofFilteredVendors(model, predicate);
+        FilteredList<Vendor> vendors = getPreviewOfFilteredVendors(model, predicate);
 
         if (vendors.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_VENDORS_FOUND);

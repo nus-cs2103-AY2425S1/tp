@@ -1,7 +1,7 @@
 package seedu.eventtory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.eventtory.logic.commands.util.PredicatePreviewUtil.getPreviewofFilteredEvents;
+import static seedu.eventtory.logic.commands.util.PredicatePreviewUtil.getPreviewOfFilteredEvents;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_EVENT;
 
 import javafx.collections.transformation.FilteredList;
@@ -35,7 +35,7 @@ public class FindEventCommand extends FindCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        FilteredList<Event> events = getPreviewofFilteredEvents(model, predicate);
+        FilteredList<Event> events = getPreviewOfFilteredEvents(model, predicate);
         if (events.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_EVENTS_FOUND);
         }

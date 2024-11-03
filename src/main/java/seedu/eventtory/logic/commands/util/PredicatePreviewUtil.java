@@ -19,7 +19,7 @@ public class PredicatePreviewUtil {
      * @param predicate the predicate to filter the vendors
      * @return a filtered list of vendors
      */
-    public static FilteredList<Vendor> getPreviewofFilteredVendors(Model model,
+    public static FilteredList<Vendor> getPreviewOfFilteredVendors(Model model,
         VendorContainsKeywordsPredicate predicate) {
 
         FilteredList<Vendor> vendors = new FilteredList<>(model.getFilteredVendorList());
@@ -34,7 +34,7 @@ public class PredicatePreviewUtil {
      * @param predicate the predicate to filter the events
      * @return a filtered list of events
      */
-    public static FilteredList<Event> getPreviewofFilteredEvents(Model model,
+    public static FilteredList<Event> getPreviewOfFilteredEvents(Model model,
         EventContainsKeywordsPredicate predicate) {
 
         FilteredList<Event> events = new FilteredList<>(model.getFilteredEventList());
