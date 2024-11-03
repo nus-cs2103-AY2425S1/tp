@@ -81,6 +81,7 @@ public class DeleteTagCommand extends UndoableCommand {
                 model.deleteTags(List.of(tag)); // Just delete from the tag list
             }
             return new CommandResult(MESSAGE_SUCCESS);
+        }
 
 
     @Override
