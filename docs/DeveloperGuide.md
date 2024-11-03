@@ -206,7 +206,7 @@ The mode of `AbcliParser` can be switched by executing a `SwitchParserModeComman
 
 The diagram below shows the activity diagram for a user wanting to delete the first `MeetUp` in his `MeetUpList`:
 
-<img src="images/DeleteMeetUpActivityDiagram.png" width="250" />
+<img src="images/DeleteMeetUpActivityDiagram.png" width="386" />
 
 --------------------------------------------------------------------------------------------------------------------
 
