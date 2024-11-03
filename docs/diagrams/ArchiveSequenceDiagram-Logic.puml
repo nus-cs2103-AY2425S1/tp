@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "u:ArchiveCommand" as ArchiveCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant "StorageManager" as Storage STORAGE_COLOR
+end box
+
+[-> LogicManager : execute(archive pa/...)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(archive pa/...)
+activate AddressBookParser
+
+create ArchiveCommand
+AddressBookParser -> ArchiveCommand
+activate ArchiveCommand
+
+ArchiveCommand --> AddressBookParser
+deactivate ArchiveCommand
+
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
+
+LogicManager -> "Storage" : saveArchivedAddressBook()
+activate "Storage"
+
+"Storage" --> LogicManager :
+deactivate "Storage"
+
+LogicManager -> ArchiveCommand : execute()
+activate ArchiveCommand
+
+
+ArchiveCommand -> Model : setAddressBook(new\n AddressBook())
+activate Model
+
+Model --> ArchiveCommand
+deactivate Model
+
+ArchiveCommand --> LogicManager : result
+deactivate ArchiveCommand
+ArchiveCommand -[hidden]-> LogicManager : result
+destroy ArchiveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

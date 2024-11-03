@@ -23,9 +23,10 @@ public class LoadCommandParser implements Parser<LoadCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PATH);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PATH)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PATH) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PATH);
         Path path = ParserUtil.parsePathWithCheck(argMultimap.getValue(PREFIX_PATH).get());
         return new LoadCommand(path);
     }
