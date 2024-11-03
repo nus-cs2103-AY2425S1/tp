@@ -34,7 +34,7 @@ public class AddClaimCommand extends Command {
             + PREFIX_CLAIM_DESC + "CLAIM_DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_POLICY_TYPE + "health "
-            + PREFIX_CLAIM_STATUS + "PENDING "
+            + PREFIX_CLAIM_STATUS + "pending "
             + PREFIX_CLAIM_DESC + "stomach surgery";
 
     public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Claim added for policy type"
