@@ -114,12 +114,14 @@ Adds a student to T_Assistant.
 
 ##### Notes
 
-1. Student Number is the unique identifier for each student, so no 2 students can have the same student number.
+1. `Student Number` is the unique identifier for each student, so no 2 students can have the same student number.
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario 
 
 ###### Scenario #1: Adding John Doe to T_Assistant
+
+To add a new Student - John Doe into T_Assistant.
 
 This screenshot shows the result of executing `as sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9`.
 
@@ -135,7 +137,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -156,7 +158,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -177,7 +179,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -198,7 +200,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -219,7 +221,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -240,7 +242,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -267,7 +269,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -288,7 +290,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -309,7 +311,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -330,7 +332,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -351,7 +353,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -372,7 +374,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -399,7 +401,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -420,7 +422,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -441,7 +443,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -462,7 +464,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -483,7 +485,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -504,7 +506,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -525,7 +527,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -546,7 +548,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -567,7 +569,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -588,7 +590,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
@@ -609,7 +611,7 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number)
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
