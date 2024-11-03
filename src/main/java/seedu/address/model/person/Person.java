@@ -90,8 +90,8 @@ public class Person {
      * @return A {@code Customer} instance with default values for other fields.
      */
     public static Person getGuest(Name n, Phone p) {
-        return new Customer(n, p, new Email(), new Address(), new Information(),
-                new Remark(), Collections.emptySet());
+        return new Customer(n, p, new Email("unfilled@unfilled.com"), new Address("unfilled"), new Information(),
+                new Remark("nil"), Collections.emptySet());
     }
 
     /**
