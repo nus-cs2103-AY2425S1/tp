@@ -1,6 +1,9 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.Messages.MESSAGE_DELETE_CONTACT_SUCCESS;
+import static seedu.ddd.logic.Messages.MESSAGE_DELETE_EVENT_SUCCESS;
+import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_ITEM;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.index.Index;
@@ -25,10 +28,6 @@ public class DeleteCommand extends Command {
             + COMMAND_USAGE + "\n"
             + EXAMPLE_USAGE;
 
-    public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
-    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
-    public static final String MESSAGE_UNKNOWN_ITEM = "Unknown item displayed in list.";
-
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -40,7 +39,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         ObservableList<Displayable> lastShownList = model.getDisplayedList();
 
-        if (targetIndex.getOneBased() >= lastShownList.size()) {
+        if (targetIndex.getOneBased() > lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_DISPLAYED_INDEX_TOO_LARGE);
         }
 

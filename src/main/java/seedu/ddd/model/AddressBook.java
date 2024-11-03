@@ -1,15 +1,19 @@
 package seedu.ddd.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.Messages.MESSAGE_DEPENDENT_EVENT;
 
 import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.common.Id;
+import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.UniqueContactList;
+import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.model.event.common.UniqueEventList;
 
@@ -126,7 +130,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a event to the address book.
+     * Adds an event to the address book.
      * The event must not already exist in the address book.
      */
     public void addEvent(Event event) {
@@ -161,26 +165,47 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Fetches an {@code Event} from the address book by ID.
+     * If event has not been created or does not exist, a null object will be returned.
+     */
+    public Event getEvent(Id eventId) {
+        return events.get(eventId);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
+     * @throws CommandException when there are event(s) that are dependent on the contact
      */
-    public void removeContact(Contact key) {
-        contacts.remove(key);
-        List<Event> contactEvents = key.getEvents().stream().toList();
-        for (Event event: contactEvents) {
-            events.get(event.getEventId()).removeContact(key);
+    public void deleteContact(Contact key) throws CommandException {
+        if (key instanceof Client) {
+            long numEvents = key.getEvents().stream()
+                    .map(Event::getClients)
+                    .filter(clientList -> clientList.size() == 1)
+                    .count();
+            if (numEvents > 0) {
+                throw new CommandException(String.format(MESSAGE_DEPENDENT_EVENT, key.getEvents().size()));
+            }
         }
+        key.getEvents().forEach(event -> {
+            events.get(event.getEventId()).removeContact(key);
+        });
+        contacts.remove(key);
     }
 
     /**
      * Removes {@code targetEvent} from this {@code AddressBook}.
      * {@code targetEvent} must exist in the address book.
      */
-    public void removeEvent(Event targetEvent) {
+    public void deleteEvent(Event targetEvent) {
         events.remove(targetEvent);
-        List<Contact> eventContacts = targetEvent.getContacts();
-        for (Contact contact: eventContacts) {
-            contacts.get(contact.getId()).removeEvent(targetEvent);
+        List<Client> eventClients = targetEvent.getClients();
+        for (Client client: eventClients) {
+            contacts.get(client.getId()).removeEvent(targetEvent);
+        }
+        List<Vendor> eventVendors = targetEvent.getVendors();
+        for (Vendor vendor: eventVendors) {
+            contacts.get(vendor.getId()).removeEvent(targetEvent);
         }
     }
 

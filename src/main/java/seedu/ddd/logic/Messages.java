@@ -31,6 +31,11 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EXCLUSIVE_FIELDS = "Only 1 of the following arguments can be specified";
+    public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
+    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
+    public static final String MESSAGE_UNKNOWN_ITEM = "Unknown item displayed in list.";
+    public static final String MESSAGE_DEPENDENT_EVENT =
+            "Unable to delete client! %1$d event(s) depend on the client you are trying to delete.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

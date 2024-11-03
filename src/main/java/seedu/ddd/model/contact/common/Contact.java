@@ -102,14 +102,11 @@ public abstract class Contact implements Displayable {
     };
 
     /**
-     * Adds an {@code Event} related to the {@code Contact}
+     * Removes an {@code Event} related to the {@code Contact}
      */
-    public void removeEvent(Event event) throws EventNotFoundException {
-        if (!events.contains(event)) {
-            throw new EventNotFoundException();
-        }
+    public void removeEvent(Event event) {
         events.remove(event);
-    };
+    }
 
     /**
      * Returns true if both persons have the same name.
