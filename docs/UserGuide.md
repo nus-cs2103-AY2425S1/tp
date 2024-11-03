@@ -257,7 +257,7 @@ Format: `filter n/KEYWORD` or `filter j/KEYWORD`
 * Persons matching all keywords will be returned (i.e. `AND` search).
   e.g. `Photographer Wedding` will return `Wedding Photographer`
 
-![filter message](images/filterMsg.png)
+![filter message](images/filterNameMsg.png) ![filter message](images/filterJobMsg.png)
 
 Examples:
 * `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers
@@ -331,6 +331,15 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KnottyPlanner home folder.
+
+**Q**: What should I do if the application does not start?<br>
+**A**: If you are using a Mac, you may need to right-click the jar file and select `Open` to run the application. If you are using Windows, you may need to run the jar file as an administrator.
+
+**Q**: How do I update the application?<br>
+**A**: Download the latest jar file from the [[releases page]](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases)
+
+**Q**: How do all the commands work?<br>
+**A**: Refer to the [Command summary](#Command-summary) section for details of each command. Additionally, some tips and important details are provided in the [Features](#features) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
