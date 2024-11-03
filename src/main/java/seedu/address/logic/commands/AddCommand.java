@@ -35,7 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_JOB + "JOB "
             + PREFIX_INCOME + "INCOME "
             + "[" + PREFIX_TIER + "TIER]...\n"
-            + "[" + PREFIX_REMARK + "NEW REMARK]..."
+            + "[" + PREFIX_REMARK + "REMARK]..."
             + "[" + PREFIX_STATUS + "STATUS]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
