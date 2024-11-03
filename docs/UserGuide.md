@@ -62,7 +62,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 | [**Import**](#importing-data-from-csv-file-import)          | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                                                                  |
 | [**Export**](#exporting-data-into-csv-file-export)          | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                                                                       |
 | [**Command History**](#accessing-command-history-and) | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                                   |## Features
-
+| **Add grade** | `addGrade n/NAME asgn/ASSIGNMENT_NAME s/SCORE` <br> e.g. `addGrade n/JohnDoe asgn/Ex01 s/5`                                                                                                                                     
 <br><br>
 
 ## <i class="fa-solid fa-address-book"></i> Features
@@ -469,6 +469,44 @@ KonTActs automatically saves every (valid or invalid) command entered which can 
   </box>
 
 --------------------------------------------------------------------------------------------------------------------
+### Adding grades to a contact `addGrade`
+
+Add an assignment and its grades to a contact.
+
+Format: `addGrade n/NAME asgn/ASSIGNMENT_NAME s/SCORE`
+
+Assignments that can be added to a contact are specified in path `data/assignment.json`.
+
+Example with the following assignment.json file:
+```
+{
+  "assignments" : [
+    {
+      "name": "Assignment01",
+      "maxScore": 5
+    }, {
+      "name": "Assignment02",
+      "maxScore": 6
+    }, {
+      "name": "Assignment03",
+      "maxScore": 7
+    }
+  ]
+}
+```
+`addGrade n/JohnDoe asgn/Assignment01 s/5` will add an assignment name
+Assignment01 with score 5 to contact JohnDoe.
+
+`addGrade n/JohnDoe asgn/Assignment01 s/6` will not add the assignment to contact JohnDoe
+as the input score is greater than the max, as specified in the `assignment.json` file.
+
+`addGrade n/JohnDoe asgn/Assignment01 s/6` will not add the assignment to contact JohnDoe
+as the input score is greater than the max, as specified in `assignment.json`.
+
+`addGrade  n/JohnDoe asgn/Assignment05 s/5` will not add the assignment to contact JohnDoe
+as the assignment is not specified `assignment.json`
+
+Tip: Calling `addGrade` without any fields will show the list of assignments in `assignment.json`.
 
 ### <i class="fa-solid fa-right-from-bracket"></i> Exiting the program : `exit`
 
