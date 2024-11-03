@@ -181,18 +181,32 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Filtering persons by tags : `filter`
+### Filtering persons : `filter`
 
-Filters all persons whose tags contain any of the specified keywords. The filtering is case-insensitive.
+Filters and lists all persons in address book whose fields (name, role, email, phone, address) match any of the
+specified keywords (case-insensitive).
 
-Format: `filter t/KEYWORD t/[MORE_KEYWORDS]...`
+Format: `filter [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]`
 
-* Filters all persons whose tags contain any of the specified keywords.
-* The search is case-insensitive. e.g `t/friend` will match `t/Friend`
-* The order of the keywords does not matter. e.g. `t/friend t/colleague` will match `t/colleague t/friend`
-* Only full words will be matched e.g. `t/col` will not match `t/colleague`
+* At least one field must be provided.
+* Parameters can be in any order.
+* Each field can only contain single word keywords.
+* The search is case-insensitive. e.g. `n/john` will match `John`
+* Different fields are matched with different precision:
+    * Name: Exact match only (must be single word)
+    * Role: Exact match only
+    * Email: Partial match allowed
+    * Phone: Exact match only
+    * Address: Partial match allowed
+* When multiple fields are provided, persons matching ANY of the fields will be returned (i.e. `OR` search).
 
-Example: `filter t/friends t/family` Lists all persons in the address book whose tags match any of the specified keywords.
+Examples:
+* `filter n/John` returns `john` and `John`
+* `filter r/vendor` returns persons with role `vendor` (case-insensitive)
+* `filter e/gmail` returns all persons whose email contains "gmail"
+* `filter p/91234567` returns person with exact phone number
+* `filter n/John r/vendor` returns persons who either have name `John` OR role `vendor`
+* `filter e/gmail a/jurong` returns persons whose email contains "gmail" OR address contains "jurong"
 
 ### Exiting the program : `exit`
 
@@ -242,9 +256,9 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter t/KEYWORD t/[MORE_KEYWORDS]...`<br> e.g., `filter t/friends
+**Filter** | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]`<br> e.g., `filter r/friends`
 **View**   | `view KEYWORD`<br> e.g., `view Alex`, `view Alex Tan`
 **List**   | `list`
 **Help**   | `help`
