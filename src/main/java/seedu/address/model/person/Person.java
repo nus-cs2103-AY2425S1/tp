@@ -2,14 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.Group;
+import seedu.address.model.grouplist.GroupList;
 
 /**
  * Represents a Person in the address book.
@@ -25,13 +23,13 @@ public class Person {
     // Data fields
     private final Major major;
     private final Year year;
-    private final Set<Group> groups = new HashSet<>();
+    private final GroupList groups = new GroupList();
     private final Comment comment;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId studentId, Email email, Major major, Set<Group> groups,
+    public Person(Name name, StudentId studentId, Email email, Major major, GroupList groups,
                   Year year, Comment comment) {
         requireAllNonNull(name, studentId, email, major, groups, year, comment);
         this.name = name;
@@ -71,8 +69,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Group> getGroups() {
-        return Collections.unmodifiableSet(groups);
+    public GroupList getGroupList() {
+        return groups.makeUnmodifiable();
     }
 
     /**
@@ -86,7 +84,7 @@ public class Person {
      *
      */
     public Group getGroup() {
-        Iterator<Group> iterator = getGroups().iterator();
+        Iterator<Group> iterator = getGroupList().iterator();
         if (iterator.hasNext()) {
             return iterator.next(); // Returns the first element
         } else {

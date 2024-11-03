@@ -7,11 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
-import java.util.Set;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.group.Group;
+import seedu.address.model.grouplist.GroupList;
 import seedu.address.model.person.Person;
 
 /**
@@ -36,7 +34,7 @@ public class PersonUtil {
         sb.append(PREFIX_NETID + person.getEmail().value.substring(0, 8) + " ");
         sb.append(PREFIX_MAJOR + person.getMajor().value + " ");
         sb.append(PREFIX_YEAR + person.getYear().value + " ");
-        person.getGroups().stream().forEach(
+        person.getGroupList().getGroups().stream().forEach(
             s -> sb.append(PREFIX_GROUP + s.groupName + " ")
         );
         return sb.toString();
@@ -54,7 +52,7 @@ public class PersonUtil {
         descriptor.getMajor().ifPresent(address -> sb.append(PREFIX_MAJOR).append(address.value).append(" "));
         descriptor.getYear().ifPresent(year -> sb.append(PREFIX_YEAR).append(year.value).append(" "));
         if (descriptor.getGroups().isPresent()) {
-            Set<Group> groups = descriptor.getGroups().get();
+            GroupList groups = descriptor.getGroups().get();
             if (groups.isEmpty()) {
                 sb.append(PREFIX_GROUP);
             } else {

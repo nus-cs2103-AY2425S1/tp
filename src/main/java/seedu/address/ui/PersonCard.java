@@ -65,7 +65,7 @@ public class PersonCard extends UiPart<Region> {
         year.setText(person.getYear().value);
         email.setText(person.getEmail().value);
         comment.setText(person.getComment().value);
-        person.getGroups().stream()
+        person.getGroupList().getGroups().stream()
                 .sorted(Comparator.comparing(group -> group.groupName))
                 .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
 

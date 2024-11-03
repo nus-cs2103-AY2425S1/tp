@@ -25,24 +25,26 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withMajor("Computer Science").withEmail("e1234567@u.nus.edu")
-            .withStudentId("A1234567P").withYear("2").withTags("group 1").withComment("Shes a very vocal person")
+            .withStudentId("A1234567P").withYear("2").withGroups("group 1").withComment("Shes a very vocal person")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withMajor("Mechanical Engineering")
             .withEmail("e1224567@u.nus.edu").withStudentId("A0000000P")
-            .withYear("1").withTags("group 1").withComment("He sleeps in class")
+            .withYear("1").withGroups("group 1").withComment("He sleeps in class")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withStudentId("A0100000P")
-            .withEmail("e1234467@u.nus.edu").withMajor("Business").withYear("3").withTags("group 2").build();
+            .withEmail("e1234467@u.nus.edu").withMajor("Business").withYear("3").withGroups("group 2").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withStudentId("A0005000P")
-            .withEmail("e1234667@u.nus.edu").withMajor("English Literature").withTags("group 5").withYear("5").build();
+            .withEmail("e1234667@u.nus.edu").withMajor("English Literature")
+            .withGroups("group 5").withYear("5").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withStudentId("A0004000P")
-            .withEmail("e1234557@u.nus.edu").withMajor("China Studies").withYear("2").withTags("group 3").build();
+            .withEmail("e1234557@u.nus.edu").withMajor("China Studies").withYear("2").withGroups("group 3").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withStudentId("A0200000P")
             .withEmail("e1234577@u.nus.edu").withMajor("Electrical Engineering").withYear("1")
-            .withTags("group 14").build();
+            .withGroups("group 14").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withStudentId("A1000000P")
-            .withEmail("e1134567@u.nus.edu").withMajor("Religious Studies").withYear("1").withTags("group 14").build();
+            .withEmail("e1134567@u.nus.edu").withMajor("Religious Studies")
+            .withYear("1").withGroups("group 14").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withStudentId("A1030000P")

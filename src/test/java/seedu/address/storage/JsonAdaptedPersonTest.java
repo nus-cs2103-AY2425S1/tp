@@ -22,7 +22,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_STUDENTID = "12346";
     private static final String INVALID_MAJOR = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "";
     private static final String INVALID_YEAR = "0";
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -30,7 +30,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_MAJOR = BENSON.getMajor().toString();
     private static final String VALID_YEAR = BENSON.getYear().toString();
-    private static final List<JsonAdaptedGroup> VALID_TAGS = BENSON.getGroups().stream()
+    private static final List<JsonAdaptedGroup> VALID_TAGS = BENSON.getGroupList().getGroups().stream()
             .map(JsonAdaptedGroup::new)
             .collect(Collectors.toList());
     private static final String VALID_COMMENT = BENSON.getComment().toString();
