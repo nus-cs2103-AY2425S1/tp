@@ -316,9 +316,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`, unless specified otherwise)
+<box type="info" seamless>
+**Note:** For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`.
+</box>
 
-**Use case: UC1 - List clients**
+<box type="info" seamless>
+**Note:** For all use cases below, if the user enters an invalid input, or there is an error when executing the command, the use case simply ends.
+</box>
+
+**Use case: UC1 - List clients (Find client has a similar use case)**
 
 **MSS**
 
@@ -327,122 +333,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC2 - Delete a client**
-
-**Preconditions: User has done <u>UC1 - List clients</u>**
+**Use case: UC2 - Add a client**
 
 **MSS**
 
+1. User requests to add client
+1. Prudy adds the client
+
+   Use case ends.
+
+**Use case: UC3 - Delete a client**
+
+**MSS**
+
+1. User <u>list clients (UC1)</u> to look for index of client
 1. User requests to delete a specific client in the list
 1. Prudy deletes the client
 
    Use case ends.
 
-**Extensions**
-
-* 1a. The given index is invalid.
-
-    * 1a1. Prudy shows an error message.
-
-      Use case ends.
-
-**Use case: UC3 - Add a client**
+**Use case: UC4 - Add a policy to client**
 
 **MSS**
 
-1. User requests to add client
-1. Prudy deletes the client
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The client already exists.
-
-    * 1a1. Prudy shows that the client already exists.
-
-      Use case ends.
-
-**Use case: UC4 - Edit a client details (does not include editing of client policies or claims)**
-
-**Preconditions: User has done <u>UC1 - List clients</u>**
-
-**MSS**
-
-1. User requests to edit a specific client in the list with the specified changes
-1. Prudy edits the client details
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The given index is invalid.
-
-    * 1a1. Prudy shows an error message.
-
-      Use case ends.
-
-**Use case: UC5 - Add policy to client**
-
-**Preconditions: User has done <u>UC1 - List clients</u>**
-
-**MSS**
-
-1. User requests to add a policy (or multiple policies) to a specific client in the list
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User requests to add a policy to a specific client in the list
 1. Prudy adds the policy under the client
 
    Use case ends.
 
-**Extensions**
-
-* 1a. The given index is invalid.
-
-    * 1a1. Prudy shows an error message.
-
-      Use case ends.
-
-* 1b. The client already has the stated policy.
-
-    * 1b1. Prudy shows an error message.
-
-      Use case ends.
-
-* 1c. The user indicated an invalid policy.
-
-    * 1c1. Prudy shows an error message.
-
-      Use case ends.
-    *
-**Use case: UC6 - Add a claim to a policy**
+**Use case: UC5 - Add a claim to a policy**
 
 **MSS**
 
-1. User requests to add a claim to a specific policy for a client in the list.
-2. Prudy adds the claim under the specified policy for the client.
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User requests to add a claim to a specific policy for a client in the list
+1. Prudy adds the claim under the specified policy for the client
 
    Use case ends.
 
-**Extensions**
+**Use case: UC6 - Resolve a claim**
 
-* 1a. The given client index is invalid.
-    * 1a1. Prudy shows an error message indicating the invalid client index.
+1. User <u>list clients (UC1)</u> to look for index of client and index of claim
+1. User requests to edit a claim to mark its status as resolved
+1. Prudy edits the claim under the specified policy for the client
 
-      Use case ends.
+   Use case ends.
 
-* 1b. The specified policy type is invalid.
-    * 1b1. Prudy shows an error message indicating that the policy type not valid.
-
-      Use case ends.
-
-* 1c. The claim details are invalid (e.g., missing required fields or incorrect format).
-    * 1c1. Prudy shows an error message indicating the invalid claim details.
-
-      Use case ends.
-
-* 1d. The same claim already exists under the specified policy.
-    * 1d1. Prudy shows an error message indicating the duplicate claim.
-
-      Use case ends.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
