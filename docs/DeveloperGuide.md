@@ -124,6 +124,9 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list, which is exposed to outsiders as an unmodifiable `ObservableList<Person>`. The UI can be bound to this list so that it automatically updates when the data changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * manages relationships between `Patient` and `Caregiver`. Each `Patient` can have one or more `Caregivers` linked to them through a `List<Caregiver>` in the `Patient` object. Caregivers are linked by a `patientID`.
+* manages all appointments through an `AppointmentManager` object that prevents conflicting appointments and maintains appointment-person relationships
+* stores appointments for each `Person` in a `Set<Appointment>` that can be filtered and retrieved by time
+
 
 The `Model` does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
