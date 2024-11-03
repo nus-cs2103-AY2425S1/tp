@@ -36,7 +36,6 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.common.Id;
-import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
@@ -274,11 +273,6 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean hasEventName(Name eventName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deleteContact(Contact target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -347,12 +341,6 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean hasEventName(Name eventName) {
-            requireNonNull(eventName);
-            return eventsAdded.stream().anyMatch(event -> event.getName().equals(eventName));
-        }
-
-        @Override
         public void addEvent(Event event) {
             requireNonNull(event);
             eventsAdded.add(event);
@@ -395,12 +383,6 @@ public class AddEventCommandTest {
         public boolean hasEvent(Event event) {
             requireNonNull(event);
             return eventsAdded.stream().anyMatch(event::isSameEvent);
-        }
-
-        @Override
-        public boolean hasEventName(Name eventName) {
-            requireNonNull(eventName);
-            return eventsAdded.stream().anyMatch(event -> event.getName().equals(eventName));
         }
 
         @Override

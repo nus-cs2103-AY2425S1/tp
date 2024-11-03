@@ -155,22 +155,6 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasEventName_validEvent_returnsTrue() {
-        addressBook = getTypicalAddressBook();
-        assertTrue(addressBook.hasEventName(WEDDING_A.getName()));
-    }
-
-    @Test
-    public void hasEventName_invalidEvent_returnsFalse() {
-        // empty addressbook
-        assertFalse(addressBook.hasEventName(WEDDING_A.getName()));
-
-        addressBook = getTypicalAddressBook();
-        assertTrue(addressBook.hasEventName(WEDDING_A.getName()));
-        assertFalse(addressBook.hasEventName(VALID_EVENT.getName()));
-    }
-
-    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName()
                 + "{contacts=" + addressBook.getContactList() + ","
