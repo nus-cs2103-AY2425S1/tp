@@ -115,6 +115,11 @@ public interface Model {
     void setTagsCategory(Tag t, TagCategory cat);
 
     /**
+     * Gets the recorded {@code TagCategory} of {@Tag t}.
+     */
+    TagCategory getTagCategory(Tag t);
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

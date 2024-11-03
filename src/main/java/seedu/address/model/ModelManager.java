@@ -183,6 +183,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public TagCategory getTagCategory(Tag t) {
+        requireNonNull(t);
+        return campusConnect.getTagCategory(t);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
