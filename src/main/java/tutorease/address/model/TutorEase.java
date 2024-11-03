@@ -68,6 +68,35 @@ public class TutorEase implements ReadOnlyTutorEase {
     }
 
     /**
+     * Returns true if there is another person in the address book with the same phone number as {@code person}.
+     */
+    public boolean hasSamePhone(Person person) {
+        requireNonNull(person);
+
+        for (Person existingPerson : persons) {
+            if (existingPerson.hasSamePhone(person)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if there is another person in the address book with the same email as {@code person}.
+     */
+    public boolean hasSameEmail(Person person) {
+        requireNonNull(person);
+
+        for (Person existingPerson : persons) {
+            if (existingPerson.hasSameEmail(person)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
