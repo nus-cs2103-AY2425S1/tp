@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ScreenCommand;
 import seedu.address.logic.commands.ScreenJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,13 +22,17 @@ public class ScreenCommandParser implements Parser<ScreenCommand> {
 
         String entityType = splitArgs[0];
         String indexString = splitArgs[1];
+
+        ParserUtil.requireValidEntity(entityType);
         Index index = ParserUtil.parseIndex(indexString);
 
         switch (entityType) {
         case ScreenJobCommand.ENTITY_WORD:
             return new ScreenJobCommand(index);
         default:
-            throw new ParseException(ScreenCommand.MESSAGE_USAGE);
+            String exceptionMessage = String.format(Messages.MESSAGE_OPERATION_NOT_ALLOWED,
+                    AddCommand.COMMAND_WORD, entityType);
+            throw new ParseException(exceptionMessage);
         }
     }
 }
