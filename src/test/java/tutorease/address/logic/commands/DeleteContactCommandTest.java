@@ -165,6 +165,16 @@ class DeleteContactCommandTest {
         }
 
         @Override
+        public boolean hasSamePhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }

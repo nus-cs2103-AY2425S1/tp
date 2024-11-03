@@ -1,13 +1,12 @@
 package tutorease.address.logic.parser;
 
-import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static tutorease.address.logic.parser.ParserUtil.arePrefixesPresent;
+import static tutorease.address.logic.parser.ParserUtil.validatePrefixesPresent;
 
 import java.util.Set;
 
@@ -62,10 +61,8 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_ROLE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_ROLE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContactCommand.MESSAGE_USAGE));
-        }
+        validatePrefixesPresent(argMultimap, AddContactCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_ROLE);
 
         return argMultimap;
     }
