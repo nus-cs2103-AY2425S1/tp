@@ -276,7 +276,7 @@ Format: `view-wed KEYWORD`
 * Persons matching at least one keyword will be returned (i.e. `AND` search).
   e.g. `Alice` will not return `Alice & Bob`
 
-![filter message](images/viewWeddingMsg.png)
+![view-wed message](images/viewWeddingMsg.png)
 
 Examples:
 * `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding
