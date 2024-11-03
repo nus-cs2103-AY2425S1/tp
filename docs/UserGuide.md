@@ -109,23 +109,34 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name and organization: `find` or `f`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons by names and organisation.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME...] [o/ORGANIZATION...]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* At least 1 of the `n/` and `o/` fields must be provided
+* If only 1 field is provided, Persons matching at least one keyword in the field will be returned e.g. `n/ Hans Yu` will return `Hans Gruber` and `Yu Beong`
+* If both fields are provided, Persons matching at least one keyword in both fields will be returned e.g. `n/ Hans Yu o/NUS` will return `Hans Gruber from NUS` but will not return `Yu Beong from NTU`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david o/meta` returns `David Li from Meta`
+
+### Sorting persons : `sort` or `s`
+
+Sorts the list of persons according to the given criteria
+
+Format: `sort PREFERENCE` or `s PREFERENCE`
+
+Preference types: `high`, `low`, `recent`, `distant`
+
+* `high`: Persons with high priority rise to the top, followed by medium then low
+* `low`: Persons with low priority rise to the top, followed by medium then high
+* `recent`: Persons with more recent "last seen" dates rise to the top
+* `distant`: Persons with more distant "last seen" dates rise to the top
 
 ### Deleting a person : `delete`
 
@@ -178,10 +189,6 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
