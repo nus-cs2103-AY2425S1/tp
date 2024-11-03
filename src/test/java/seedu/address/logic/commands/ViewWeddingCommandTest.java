@@ -26,11 +26,13 @@ public class ViewWeddingCommandTest {
 
     private Model model;
     private Model modelMultiple;
+    private Model modelEmpty;
 
     @BeforeEach
     public void setUp() throws CommandException {
         model = new ModelManager();
         modelMultiple = new ModelManager();
+        modelEmpty = new ModelManager();
 
         Person planner = new PersonBuilder().withName("Alice").withTags("Alice & Bob").build();
         Person florist = new PersonBuilder().withName("Bob").withTags("Bob & Charlie").build();
@@ -53,6 +55,9 @@ public class ViewWeddingCommandTest {
         stubParticipantSet2.add(planner2);
         modelMultiple.addWedding(new Wedding(new WeddingName("Alice & Bob"), new Venue("woodlands"),
                 new Date("12/12/2024"), stubParticipantSet2));
+
+        modelEmpty.addWedding(new Wedding(new WeddingName("James & Charles"), new Venue("admiralty"),
+                new Date("25/01/2034")));
     }
 
     @Test
@@ -90,7 +95,17 @@ public class ViewWeddingCommandTest {
 
         assertThrows(CommandException.class,
                 ViewWeddingCommand.MESSAGE_WEDDING_DOESNT_EXIST, () -> command.execute(model));
-        assertEquals(0, model.getFilteredPersonList().size());
+    }
+
+    @Test
+    public void execute_existingWeddingWithNoParticipants_throwsCommandException() {
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("james & charles");
+        ViewWeddingCommand command = new ViewWeddingCommand(predicate);
+        modelEmpty.updateFilteredPersonList(predicate);
+
+        assertThrows(CommandException.class,
+                ViewWeddingCommand.MESSAGE_NO_PARTICIPANTS_ADDED, () -> command.execute(modelEmpty));
+        assertEquals(0, modelEmpty.getFilteredPersonList().size());
     }
 
     @Test
@@ -105,7 +120,7 @@ public class ViewWeddingCommandTest {
     }
 
     @Test
-    public void execute_singleMatchingKeywords_multiplePersonsFound() throws Exception {
+    public void execute_singleMatchingKeyword_multiplePersonsFound() throws Exception {
         String expectedMessage = String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 2);
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("alice & bob");
         modelMultiple.updateFilteredPersonList(predicate);
