@@ -86,4 +86,44 @@ public class UniqueLessonListTest {
         assertEquals(1, filteredList.size());
         assertTrue(filteredList.contains(lesson1));
     }
+
+    @Test
+    public void setLessons_uniqueLessonList_success() {
+        uniqueLessonList.add(lesson1);
+        UniqueLessonList newLessonList = new UniqueLessonList();
+        newLessonList.add(lesson2);
+
+        uniqueLessonList.setLessons(newLessonList);
+        assertTrue(uniqueLessonList.contains(lesson2));
+        assertFalse(uniqueLessonList.contains(lesson1));
+    }
+
+    @Test
+    public void setLessons_withDuplicateLessons_throwsDuplicateLessonException() {
+        List<Lesson> duplicateLessons = new ArrayList<>();
+        duplicateLessons.add(lesson1);
+        duplicateLessons.add(lesson1);
+
+        assertThrows(DuplicateLessonException.class, () -> uniqueLessonList.setLessons(duplicateLessons));
+    }
+
+    @Test
+    public void equals_sameLessonList_returnsTrue() {
+        UniqueLessonList anotherList = new UniqueLessonList();
+        assertTrue(uniqueLessonList.equals(anotherList));
+    }
+
+    @Test
+    public void equals_differentLessonList_returnsFalse() {
+        uniqueLessonList.add(lesson1);
+        UniqueLessonList anotherList = new UniqueLessonList();
+        anotherList.add(lesson2);
+        assertFalse(uniqueLessonList.equals(anotherList));
+    }
+
+    @Test
+    public void hashCode_sameLessonList_returnsSameHashCode() {
+        UniqueLessonList anotherList = new UniqueLessonList();
+        assertEquals(uniqueLessonList.hashCode(), anotherList.hashCode());
+    }
 }
