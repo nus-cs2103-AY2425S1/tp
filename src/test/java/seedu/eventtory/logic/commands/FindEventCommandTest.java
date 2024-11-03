@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
-import seedu.eventtory.model.event.EventNameContainsKeywordsPredicate;
+import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindEventCommand}.
@@ -31,10 +31,10 @@ public class FindEventCommandTest {
 
     @Test
     public void equals() {
-        EventNameContainsKeywordsPredicate firstPredicate =
-                new EventNameContainsKeywordsPredicate(Collections.singletonList("first"));
-        EventNameContainsKeywordsPredicate secondPredicate =
-                new EventNameContainsKeywordsPredicate(Collections.singletonList("second"));
+        EventContainsKeywordsPredicate firstPredicate =
+                new EventContainsKeywordsPredicate(Collections.singletonList("first"));
+        EventContainsKeywordsPredicate secondPredicate =
+                new EventContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindEventCommand findFirstCommand = new FindEventCommand(firstPredicate);
         FindEventCommand findSecondCommand = new FindEventCommand(secondPredicate);
@@ -58,7 +58,7 @@ public class FindEventCommandTest {
 
     @Test
     public void execute_zeroKeywords_noEventFoundError() {
-        EventNameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        EventContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandFailure(command, model, MESSAGE_NO_EVENTS_FOUND);
@@ -67,7 +67,7 @@ public class FindEventCommandTest {
     @Test
     public void execute_multipleKeywords_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-        EventNameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        EventContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,16 +76,16 @@ public class FindEventCommandTest {
 
     @Test
     public void toStringMethod() {
-        EventNameContainsKeywordsPredicate predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindEventCommand findCommand = new FindEventCommand(predicate);
         String expected = FindEventCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code EventNameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code EventContainsKeywordsPredicate}.
      */
-    private EventNameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new EventNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private EventContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new EventContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

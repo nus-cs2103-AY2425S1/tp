@@ -11,7 +11,7 @@ public abstract class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all vendors or events whose names contain any of "
+            + ": Finds all vendors or events whose fields contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: " + PREFIX_VENDOR + " KEYWORD [MORE_KEYWORDS]... or "
             + PREFIX_EVENT + " KEYWORD [MORE_KEYWORDS]...\n"

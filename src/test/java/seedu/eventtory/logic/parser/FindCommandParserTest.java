@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import seedu.eventtory.logic.commands.FindCommand;
 import seedu.eventtory.logic.commands.FindEventCommand;
 import seedu.eventtory.logic.commands.FindVendorCommand;
-import seedu.eventtory.model.event.EventNameContainsKeywordsPredicate;
-import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
+import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -32,7 +32,7 @@ public class FindCommandParserTest {
     public void parse_eventValidArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindEventCommand(new EventNameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FindEventCommand(new EventContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, " e/ Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -43,7 +43,7 @@ public class FindCommandParserTest {
     public void parse_vendorValidArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindVendorCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FindVendorCommand(new VendorContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, " v/ Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords

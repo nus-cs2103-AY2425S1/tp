@@ -1,7 +1,7 @@
 package seedu.eventtory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.eventtory.logic.commands.util.PredicatePreviewUtil.getPreviewofFilteredVendors;
+import static seedu.eventtory.logic.commands.util.PredicatePreviewUtil.getPreviewOfFilteredVendors;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_VENDOR;
 
 import javafx.collections.transformation.FilteredList;
@@ -9,26 +9,26 @@ import seedu.eventtory.commons.util.ToStringBuilder;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.model.Model;
-import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 
 /**
- * Finds and lists all vendors in EventTory whose name contains any of the argument keywords.
+ * Finds and lists all vendors in EventTory whose fields contain any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindVendorCommand extends FindCommand {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all vendors whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all vendors whose fields contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: " + PREFIX_VENDOR + " KEYWORD [MORE_KEYWORDS]... \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_VENDOR + " alice bob charlie\n";
 
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final VendorContainsKeywordsPredicate predicate;
 
-    public FindVendorCommand(NameContainsKeywordsPredicate predicate) {
+    public FindVendorCommand(VendorContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -36,7 +36,7 @@ public class FindVendorCommand extends FindCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        FilteredList<Vendor> vendors = getPreviewofFilteredVendors(model, predicate);
+        FilteredList<Vendor> vendors = getPreviewOfFilteredVendors(model, predicate);
 
         if (vendors.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_VENDORS_FOUND);

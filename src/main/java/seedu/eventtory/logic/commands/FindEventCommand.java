@@ -1,7 +1,7 @@
 package seedu.eventtory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.eventtory.logic.commands.util.PredicatePreviewUtil.getPreviewofFilteredEvents;
+import static seedu.eventtory.logic.commands.util.PredicatePreviewUtil.getPreviewOfFilteredEvents;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_EVENT;
 
 import javafx.collections.transformation.FilteredList;
@@ -10,24 +10,24 @@ import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
-import seedu.eventtory.model.event.EventNameContainsKeywordsPredicate;
+import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
 
 /**
- * Finds and lists all events in EventTory whose name contains any of the argument keywords.
+ * Finds and lists all events in EventTory whose fields contain any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindEventCommand extends FindCommand {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose fields contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: " + PREFIX_EVENT + " KEYWORD [MORE_KEYWORDS]... \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT + " alice bob charlie\n";
 
-    private final EventNameContainsKeywordsPredicate predicate;
+    private final EventContainsKeywordsPredicate predicate;
 
-    public FindEventCommand(EventNameContainsKeywordsPredicate predicate) {
+    public FindEventCommand(EventContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -35,7 +35,7 @@ public class FindEventCommand extends FindCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        FilteredList<Event> events = getPreviewofFilteredEvents(model, predicate);
+        FilteredList<Event> events = getPreviewOfFilteredEvents(model, predicate);
         if (events.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_EVENTS_FOUND);
         }

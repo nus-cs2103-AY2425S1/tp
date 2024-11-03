@@ -10,8 +10,8 @@ import seedu.eventtory.logic.commands.FindCommand;
 import seedu.eventtory.logic.commands.FindEventCommand;
 import seedu.eventtory.logic.commands.FindVendorCommand;
 import seedu.eventtory.logic.parser.exceptions.ParseException;
-import seedu.eventtory.model.event.EventNameContainsKeywordsPredicate;
-import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
+import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -38,12 +38,12 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (isEventFind) {
             String argsWithoutPrefix = argMultimap.getValue(PREFIX_EVENT).get();
-            String[] nameKeywords = processKeywords(argsWithoutPrefix);
-            return new FindEventCommand(new EventNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            String[] keywords = processKeywords(argsWithoutPrefix);
+            return new FindEventCommand(new EventContainsKeywordsPredicate(Arrays.asList(keywords)));
         } else {
             String argsWithoutPrefix = argMultimap.getValue(PREFIX_VENDOR).get();
-            String[] nameKeywords = processKeywords(argsWithoutPrefix);
-            return new FindVendorCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            String[] keywords = processKeywords(argsWithoutPrefix);
+            return new FindVendorCommand(new VendorContainsKeywordsPredicate(Arrays.asList(keywords)));
         }
     }
 
@@ -59,7 +59,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-        return nameKeywords;
+        String[] keywords = trimmedArgs.split("\\s+");
+        return keywords;
     }
 }
