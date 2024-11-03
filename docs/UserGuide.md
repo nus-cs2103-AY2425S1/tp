@@ -727,6 +727,7 @@ Each credit card tier is visually distinguished in the UI: Gold is marked with a
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran' 
 
 --------------------------------------------------------------------------------------------------------------------
 
