@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalWeddings.getTypicalWeddingBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -38,7 +39,7 @@ public class DeleteYCommandTest {
         DeleteYCommand deleteYCommand = new DeleteYCommand(personToDelete);
         CommandResult commandResult = deleteYCommand.execute(model);
 
-        String expectedMessage = String.format(DeleteYCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteYCommand.MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));
 
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
