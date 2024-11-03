@@ -79,32 +79,40 @@ class ParticipationTest {
     }
 
     @Test
-    public void isSameParticipation() {
-        Participation participation1 = new Participation(student1, tutorial1, attendanceList1);
-        Participation participation2 = new Participation(student2, tutorial2, attendanceList2);
-        Participation participation3 = new Participation(student1, tutorial2, attendanceList1);
-        Participation participation4 = new Participation(student2, tutorial2, attendanceList1);
+    public void equals() {
+        Participation participation = new Participation(student1, tutorial1, attendanceList1);
+
+        // same values -> returns true
+        Participation participationCopy1 = new Participation(student1, tutorial1, attendanceList1);
+        assertTrue(participation.equals(participationCopy1));
+
+        // different attendance list -> returns true
+        Participation participationCopy2 = new Participation(student1, tutorial1, attendanceList2);
+        assertTrue(participation.equals(participationCopy2));
 
         // same object -> returns true
-        assertTrue(participation1.isSameParticipation(participation1));
+        assertTrue(participation.equals(participation));
 
         // null -> returns false
-        assertFalse(participation1.isSameParticipation(null));
+        assertFalse(participation.equals(null));
 
-        // different students -> returns false
-        assertFalse(participation2.isSameParticipation(participation3));
+        // different type -> returns false
+        assertFalse(participation.equals(5));
 
-        //different tutorials -> returns false
-        assertFalse(participation1.isSameParticipation(participation3));
+        // different person -> returns false
+        Participation participation2 = new Participation(student2, tutorial1, attendanceList1);
+        assertFalse(participation.equals(participation2));
 
-        //different attendance lists -> returns false
-        assertFalse(participation2.isSameParticipation(participation4));
+        //different tutorial -> returns false
+        Participation participation3 = new Participation(student1, tutorial2, attendanceList1);
+        assertFalse(participation.equals(participation3));
+
     }
 
     @Test
     public void toString_success() {
         Participation participation = new Participation(student1, tutorial1, attendanceList1);
-        String expectedString = String.format("Attends: %s", tutorial1.toString());
+        String expectedString = String.format("%s attends: %s", student1.getName(), tutorial1.getSubject());
         assertEquals(expectedString, participation.toString());
     }
 }
