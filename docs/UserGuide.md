@@ -152,10 +152,10 @@ Reverts the last action performed in the application, allowing you to recover da
 Format: `undo`
 
 * **Note:** This command does not work with the `list`, `filter`, or `find` commands.
- 
-![Initial State](images/UndoRedoExample3.png){: width="60%" }
-![Deleting Someone](images/UndoRedoExample3.png){: width="60%" }
-![Undo Example](images/UndoRedoExample3.png){: width="60%" }
+
+<img src="images/UndoRedoExample1.png" alt="Initial State" width="60%" />
+<img src="images/UndoRedoExample2.png" alt="After Delete Command" width="60%" />
+<img src="images/UndoRedoExample3.png" alt="After Undo Command" width="60%" />
 
 Examples:
 * `undo` will revert the last command executed, restoring the previous state of the address book.
@@ -168,7 +168,7 @@ Format: `redo`
 
 * **Note:** This command does not work with the `list`, `filter`, or `find` commands.
 
-![Redo Example](images/UndoRedoExample4.png){: width="60%" }
+<img src="images/UndoRedoExample4.png" alt="After Redo Command" width="60%" />
 
 Examples:
 * `redo` will reapply the last command that was undone, restoring the previous state of the address book.
