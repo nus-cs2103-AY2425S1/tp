@@ -318,6 +318,63 @@ The following activity diagram summarizes what happens when a user executes a fi
 * **Alternative 2**: OR operation between all criteria
     * Pros: More likely to return results
     * Cons: May return too many unrelated results
+
+### Tagging Duplicate Phone Numbers
+
+#### Implementation
+
+The detection and tagging of duplicate phone numbers mechanism is facilitated by `DuplicatePhoneTagger`. It tracks duplicate phone numbers across all persons in the address book and automatically tags persons who share the same phone number with a "DuplicatePhone" tag. This mechanism is integrated into commands that can modify a person's phone number or the entire list, such as `add`, `edit` and `delete`.
+
+The `DuplicatePhoneTagger` implements the following key operations:
+* `DuplicatePhoneTagger#updateFrequenciesOfPhones()` — Counts and stores the frequency of each phone number
+* `DuplicatePhoneTagger#updatePersonsList()` — Updates the tags of all persons based on whether their phone numbers are duplicates
+* `DuplicatePhoneTagger#tagPhoneDuplicates()` — Main method that coordinates the duplicate phone tagging process
+
+Given below is an example usage scenario and how the duplicate phone tagging mechanism behaves when executing an edit command.
+
+Step 1. Assume the address book has two persons: Alex (phone: 87654321) and Bob (phone: 91234567). With Alex being the 1st entry in the address book and Bob being he 2nd.
+
+Step 2. The user executes `edit 2 p/87654321` to change Bob's phone number to match Alex's.
+
+Step 3. The `edit` command first creates the modified person with the new phone number.
+
+Step 4. After the person is edited, `DuplicatePhoneTagger#tagPhoneDuplicates()` is called. This updates the frequency count of all phone numbers and identifies that "87654321" appears twice.
+
+Step 5. Finally, both Alex and Bob are tagged with the "DuplicatePhone" tag since they share the same phone number.
+
+The following sequence diagrams show how the detection of duplicate phone numbers is carried out in the case of the `edit` operation being executed.
+
+<puml src="diagrams/EditSequenceDiagram.puml" alt="Edit Sequence Diagram" />
+
+<puml src="diagrams/DuplicatePhoneTaggerSequenceDiagram.puml" alt="Duplicate Phone Tagger Sequence Diagram" />
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, the duplicate phone tagging process will not be triggered, so the tags will remain unchanged.
+
+</box>
+
+#### Design considerations:
+
+**Aspect: When to perform duplicate phone tagging**
+
+* **Alternative 1 (current choice):** Perform tagging after any command that could modify phone numbers
+    * Pros: Ensures tags are always up-to-date
+    * Cons: May have slight performance impact for commands that modify multiple persons
+
+* **Alternative 2:** Only check for duplicates when explicitly requested
+    * Pros: Better performance as checking is done on-demand
+    * Cons: Tags could become outdated if users forget to run the check
+
+**Aspect: Storage of phone number frequencies**
+
+* **Alternative 1 (current choice):** Use a HashMap to store phone frequencies
+    * Pros: O(1) lookup time for checking duplicates
+    * Cons: Additional memory usage to maintain the HashMap
+
+* **Alternative 2:** Check for duplicates by scanning the person list
+    * Pros: No additional data structures needed
+    * Cons: O(n²) time complexity for checking duplicates
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

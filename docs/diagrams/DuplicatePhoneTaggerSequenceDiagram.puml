@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+mainframe **sd** Detect duplicate phone numbers
+
+box Logic LOGIC_COLOR_T1
+participant "duplicatePhoneTagger:DuplicatePhoneTagger" as DuplicatePhoneTagger LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> DuplicatePhoneTagger : tagPhoneDuplicates(m)
+activate DuplicatePhoneTagger
+
+DuplicatePhoneTagger --> Model : getFilteredPersonList()
+activate Model
+
+Model --> DuplicatePhoneTagger : persons
+deactivate Model
+
+DuplicatePhoneTagger --> DuplicatePhoneTagger : updateFrequenciesOfPhones(persons)
+activate DuplicatePhoneTagger
+
+DuplicatePhoneTagger --> DuplicatePhoneTagger
+deactivate DuplicatePhoneTagger
+
+DuplicatePhoneTagger --> DuplicatePhoneTagger : updatePersonsList(model, persons)
+activate DuplicatePhoneTagger
+
+DuplicatePhoneTagger --> DuplicatePhoneTagger
+deactivate DuplicatePhoneTagger
+
+[<-- DuplicatePhoneTagger
+deactivate DuplicatePhoneTagger
+@enduml
