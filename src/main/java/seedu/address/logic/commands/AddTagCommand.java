@@ -20,10 +20,11 @@ import seedu.address.model.tag.Tag;
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addtag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Add tag(s) for the person identified "
-            + "by the index number used in the displayed person list "
-            + "Parameters: INDEX (must be a positive interger) "
-            + "[" + PREFIX_TAG + "TAG]...\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add tag(s) for the person identified "
+            + "by the index number used in the displayed person list\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_TAG + "TAG [" + PREFIX_TAG + "MORE_TAGS]...\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "friend " + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Tag added: %1$s";
     public static final String MESSAGE_NOT_ADD = "At least one tag to be provided.";

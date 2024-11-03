@@ -20,8 +20,8 @@ public class DeleteTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes tag from the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) [TAG NAME]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + " hello_world";
+            + "Parameters: INDEX (must be a positive integer) t/TAG\n"
+            + "Example: " + COMMAND_WORD + " 1 " + "t/hello_world";
 
     private final Index targetIndex;
     private final Tag targetTag;
