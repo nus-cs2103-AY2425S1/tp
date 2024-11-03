@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.ddd.commons.util.CollectionUtil;
-import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
 import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
@@ -151,18 +150,6 @@ public abstract class Contact implements Displayable {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags, contactId);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .add("id", contactId)
-                .toString();
     }
 
 }
