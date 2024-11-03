@@ -144,6 +144,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+    @Override
     public void addEvent(Event event) {
         assert event.getEventId() != -1 : "Event ID should not be -1 when adding the event to the address book.";
         addressBook.addEvent(event);

@@ -176,6 +176,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeEvent(Event key) {
+        events.remove(key);
+    }
+
+    /**
      * Gets all the events whose names are the same (case-insensitive) as the given argument.
      */
     public List<Event> findEventsWithName(EventName eventName) {

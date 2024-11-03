@@ -22,6 +22,9 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteByIndexCommand;
 import seedu.address.logic.commands.DeleteByNameCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteEventByIndexCommand;
+import seedu.address.logic.commands.DeleteEventByNameCommand;
+import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditEventCommand;
@@ -183,6 +186,20 @@ public class AddressBookParserTest {
                 EventUtil.getUnassignEventDetails(ALICE.getName().toString(), MEETING.getEventName().toString()));
         assertEquals(new UnassignEventByPersonNameEventNameCommand(ALICE.getName(), MEETING.getEventName()),
                 unassignEventByPersonNameEventNameCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteEventByIndex() throws Exception {
+        DeleteEventCommand command = (DeleteEventCommand) parser.parseCommand(
+                DeleteEventCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
+        assertEquals(new DeleteEventByIndexCommand(INDEX_FIRST_EVENT), command);
+    }
+
+    @Test
+    public void parseCommand_deleteEventByName() throws Exception {
+        DeleteEventCommand command = (DeleteEventCommand) parser.parseCommand(
+                DeleteEventCommand.COMMAND_WORD + " " + MEETING.getName().toString());
+        assertEquals(new DeleteEventByNameCommand(MEETING.getName()), command);
     }
 
     @Test

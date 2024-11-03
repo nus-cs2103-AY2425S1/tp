@@ -39,11 +39,11 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Returns true if the list contains an event with the same name as the given argument.
+     * Returns true if the list contains an event with the same name (case-insensitive) as the given argument.
      */
     public boolean containsName(EventName nameToCheck) {
         requireNonNull(nameToCheck);
-        return internalList.stream().anyMatch(event -> event.getEventName().equalsLowerCase(nameToCheck));
+        return internalList.stream().anyMatch(event -> event.getName().equalsLowerCase(nameToCheck));
     }
 
     /**
@@ -78,19 +78,6 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Gets all the events whose names are the same (case-insensitive) as the given argument.
-     */
-    public List<Event> getEventsWithName(EventName eventName) {
-        requireNonNull(eventName);
-        if (this.containsName(eventName)) {
-            return internalList.stream()
-                    .filter(event -> event.getEventName().equalsLowerCase(eventName))
-                    .toList();
-        }
-        return new ArrayList<>();
-    }
-
-    /**
      * Replaces the event {@code target} in the list with {@code editedEvent}.
      * {@code target} must exist in the list.
      * The event identity of {@code editedEvent} must not be the same as another existing event in the list.
@@ -119,6 +106,17 @@ public class UniqueEventList implements Iterable<Event> {
         if (!internalList.remove(toRemove)) {
             throw new EventNotFoundException();
         }
+    }
+
+    /**
+     * Gets all the events whose names are the same (case-insensitive) as the given argument.
+     */
+    public List<Event> getEventsWithName(EventName name) {
+        requireNonNull(name);
+        if (this.containsName(name)) {
+            return internalList.stream().filter(event -> event.getName().equalsLowerCase(name)).toList();
+        }
+        return new ArrayList<>();
     }
 
     public void setEvents(UniqueEventList replacement) {

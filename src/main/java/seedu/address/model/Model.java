@@ -104,11 +104,11 @@ public interface Model {
      */
     boolean hasEvent(Event event);
 
-    //    /**
-    //     * Deletes the given event.
-    //     * The event must exist in the address book.
-    //     */
-    //    void deleteEvent(Event target);
+    /**
+     * Deletes the given event.
+     * The event must exist in the address book.
+     */
+    void deleteEvent(Event target);
 
     /**
      * Adds the given event
@@ -124,10 +124,10 @@ public interface Model {
     //     */
     //    void setEvent(Event target, Event editedEvent);
 
-    //    /**
-    //     * Find all the events whose names are the same as the given argument.
-    //     */
-    //    List<Event> findEventsWithName(EventName eventName);
+    /**
+     * Find all the events whose names are the same as the given argument.
+     */
+    List<Event> findEventsWithName(EventName eventName);
 
     /**
      * Returns true if an event with the given ID exists in the address book.
@@ -139,11 +139,6 @@ public interface Model {
      * @throws IllegalArgumentException if the event does not exist.
      */
     Event getEventById(int eventId);
-
-    /**
-     * Find all the events whose names are the same as the given argument.
-     */
-    List<Event> findEventsWithName(EventName eventName);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.
