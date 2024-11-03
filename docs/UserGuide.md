@@ -337,7 +337,7 @@ Examples:
   </box>
 
 ### 5.2.4 Editing a Client’s Details: `edit`
-Edits an existing client in Prudy. Does not edit his/her policies. See [editing a policy](#533-editing-a-policy-edit-policy) for more info on the command.
+Edits an existing client in Prudy. Does not edit his/her policies. See [editing a policy](#5-3-3-editing-a-policy-edit-policy) for more info on the command.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
