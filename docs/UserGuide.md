@@ -268,7 +268,7 @@ Examples:
 
 If you are looking for participants tagged to a particular wedding, you can use `view-wed` to view a list of contacts tagged to the specified wedding.
 
-Format: `view-wed KEYWORD`
+Format: `view-wed NAME & NAME`
 
 * `view-wed` shows based on wedding names that match the keyword
 * `KEYWORD` is the name of the wedding and is not case-sensitive e.g `alice & bob` will match `Alice & Bob`
@@ -364,5 +364,6 @@ _Details coming soon ..._
 | **Adding Tags**    | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                               |
 | **Deleting Tags**  | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                               |
 | **Filter**         | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                          |
+| **View Wedding**         | `view-wed NAME & NAME <br> e.g., `view-wed John & Sarah`                                                                                          |
 | **List Weddings**  | `list-wed`                                                                                                                                                                             |
 | **Help**           | `help`                                                                                                                                                                                 |
