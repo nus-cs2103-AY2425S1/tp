@@ -6,8 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -34,20 +37,20 @@ public class GradeCommand extends Command {
     public static final String MESSAGE_INVALID_GRADE = "The grade provided is invalid.";
     public static final String MESSAGE_INVALID_MODULE = "The module specified is not found.";
     public static final String MESSAGE_INVALID_PERSON = "The person index provided is invalid.";
+    public static final String MESSAGE_MISMATCH_MODULE_GRADE = "The number of modules and grades"
+            + "provided do not match.";
 
     private final Index targetIndex;
-    private final String module;
-    private final int grade;
+    private final Map<String, Integer> moduleGrades;
 
     /**
      * Creates a GradeCommand to grade the specified {@code Person}
      */
-    public GradeCommand(Index targetIndex, String module, int grade) {
+    public GradeCommand(Index targetIndex, Map<String, Integer> moduleGrades) {
         requireNonNull(targetIndex, "Target index cannot be null");
-        requireNonNull(module, "Module cannot be null");
+        requireNonNull(moduleGrades, "Module cannot be null");
         this.targetIndex = targetIndex;
-        this.module = module;
-        this.grade = grade;
+        this.moduleGrades = new LinkedHashMap<>(moduleGrades);
     }
 
     @Override
@@ -58,38 +61,43 @@ public class GradeCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if (grade < 0 || grade > 100) {
-            throw new CommandException(MESSAGE_INVALID_GRADE);
-        }
         Person personToGrade = lastShownList.get(targetIndex.getZeroBased());
-        Optional<Module> moduleToGrade = personToGrade.getModules().stream()
-                .filter(m -> m.module.equals(this.module))
-                .findFirst();
+        Set<Module> personModules = new HashSet<>(personToGrade.getModules());
+        List<String> gradeResults = new ArrayList<>();
 
-        if (moduleToGrade.isEmpty()) {
-            throw new CommandException(MESSAGE_INVALID_MODULE);
+        for (Map.Entry<String, Integer> entry : moduleGrades.entrySet()) {
+            String moduleName = entry.getKey();
+            int grade = entry.getValue();
+
+            if (grade < 0 || grade > 100) {
+                throw new CommandException(MESSAGE_INVALID_GRADE);
+            }
+
+            Optional<Module> moduleToGrade = personModules.stream()
+                    .filter(m -> m.module.equals(moduleName))
+                    .findFirst();
+
+            if (moduleToGrade.isEmpty()) {
+                throw new CommandException(MESSAGE_INVALID_MODULE + " (" + moduleName + ")");
+            }
+
+            Module module = moduleToGrade.get();
+            module.assignGrade(grade);
+            gradeResults.add(String.format("%s: %d", moduleName, grade));
         }
-        Module module = moduleToGrade.get();
-        module.assignGrade(grade);
-        List<Module> updatedModules = new ArrayList<>(personToGrade.getModules());
+
         Person updatedPerson = new Person(personToGrade.getName(), personToGrade.getPhone(),
-                personToGrade.getGender(), new HashSet<>(updatedModules),
-                new HashSet<>(personToGrade.getTags()));
+                personToGrade.getGender(), personModules, personToGrade.getTags());
         model.setPerson(personToGrade, updatedPerson);
-        return new CommandResult(String.format(MESSAGE_GRADE_SUCCESS, module.module, personToGrade.getName()));
+
+        String gradeResultsString = String.join("\n", gradeResults);
+        return new CommandResult(String.format(MESSAGE_GRADE_SUCCESS, personToGrade.getName(), gradeResultsString));
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof GradeCommand)) {
-            return false;
-        }
-        GradeCommand otherCommand = (GradeCommand) other;
-        return targetIndex.equals(otherCommand.targetIndex)
-                && module.equals(otherCommand.module)
-                && grade == otherCommand.grade;
+        return other == this || (other instanceof GradeCommand
+                && targetIndex.equals(((GradeCommand) other).targetIndex)
+                && moduleGrades.equals(((GradeCommand) other).moduleGrades));
     }
 }
