@@ -562,7 +562,7 @@ otherwise)
 
     * 3a1. System fills command box with empty command
 
-  Use case ends.
+   Use case ends.
 
 *{More to be added}*
 
