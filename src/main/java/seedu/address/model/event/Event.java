@@ -63,7 +63,8 @@ public class Event {
 
     /**
      * Constructs a {@code Event} with the same attributes as the given {@code Event}.
-     * @param event Event to copy.
+     *
+     * @param event {@code Event} that we want to copy.
      */
     public Event(Event event) {
         this.name = event.getName();
@@ -294,5 +295,16 @@ public class Event {
         return other == this // short circuit if same object
                 || (other instanceof Event // instanceof handles nulls
                 && name.equals(((Event) other).name));
+    }
+
+    /**
+     * Checks if a person is in this event.
+     *
+     * @param person Person to check.
+     * @return {@code True} if person in event, else {@code false}
+     */
+    public boolean isPersonInEvent(Person person) {
+        return attendees.contains(person) || volunteers.contains(person)
+                || sponsors.contains(person) || vendors.contains(person);
     }
 }
