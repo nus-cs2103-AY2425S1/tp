@@ -153,15 +153,15 @@ Exits the program.
 
 Format: `exit`
 
-### Adding of Goods : `goods`
+### Adding of Goods : `addgoods`
 
 To be added.
 
-### Deletion of Goods : `delgoods`
+### Deletion of Goods : `deletegoods`
 
 To be added.
 
-### View statistics for Goods : `view`
+### View statistics for Goods : `viewgoods`
 
 To be added.
 
@@ -210,7 +210,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]`<br> e.g., `find James Jake c/CONSUMABLES`
 **List** | `list`
 **Help** | `help`
-**Add Goods** | `goods`
-**Delete Goods** | `delgoods`
-**View Statistics** | `view`
+**Add Goods** | `addgoods`
+**Delete Goods** | `deletegoods`
+**View Statistics** | `viewgoods`
 **Export Data** | `export`

@@ -13,7 +13,6 @@ import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.Date;
 import seedu.address.model.person.Name;
 
-
 public class CsvConvertersTest {
 
     @Test

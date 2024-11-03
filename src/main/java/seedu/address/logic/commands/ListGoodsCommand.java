@@ -15,7 +15,7 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
  */
 public class ListGoodsCommand extends Command {
 
-    public static final String COMMAND_WORD = "view";
+    public static final String COMMAND_WORD = "viewgoods";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all goods that match the specified conditions."
             + "All parameters are optional. \n"

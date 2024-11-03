@@ -1,6 +1,7 @@
 package seedu.address.model.goodsreceipt;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -16,16 +17,44 @@ public class SupplierNamePredicateTest {
     private final Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
 
     @Test
-    public void gooodsNamePredicateTest_success() {
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new SupplierNamePredicate(null));
+    }
+
+    @Test
+    public void gooodsNamePredicateTest_valid_predicateSuccess() {
         GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
                 new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID), false, 1, 1.0);
 
         SupplierNamePredicate testPredicate = new SupplierNamePredicate(new Name("Alex Yeoh"));
         boolean posResult = testPredicate.test(testReceipt);
         assertTrue(posResult);
+    }
 
-        SupplierNamePredicate testPredicate2 = new SupplierNamePredicate(new Name("Test User"));
-        boolean negResult = testPredicate2.test(testReceipt);
+    @Test
+    public void goodsNamePredicateTest_invalid_predicateFailure() {
+        GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
+                new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID), false, 1, 1.0);
+
+        SupplierNamePredicate testPredicate = new SupplierNamePredicate(new Name("Test User"));
+        boolean negResult = testPredicate.test(testReceipt);
         assertFalse(negResult);
+    }
+
+    @Test
+    public void equals() {
+        SupplierNamePredicate predicate = new SupplierNamePredicate(new Name("Alex Yeoh"));
+
+        // check that it is equal to itself
+        assertTrue(predicate.equals(predicate));
+
+        // check that it is equal if keyword is the same
+        assertTrue(predicate.equals(new SupplierNamePredicate(new Name("Alex Yeoh"))));
+
+        // check that it is not equal if keyword is different
+        assertFalse(predicate.equals(new SupplierNamePredicate(new Name("Bernice Yu"))));
+
+        // check that it is not equal to other types
+        assertFalse(predicate.equals(1.00));
     }
 }

@@ -48,10 +48,16 @@ public class GoodsTest {
     }
 
     @Test
-    public void equals_differentTypes_failure() {
+    public void equals_differentGoodsCategory_failure() {
         Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
-        GoodsName otherGoods = new GoodsName("Other Bread");
+        Goods otherGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.SPECIALTY);
         assertNotEquals(testGoods, otherGoods);
+    }
+
+    @Test
+    public void equals_differentObjectType_failure() {
+        Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
+        assertNotEquals(testGoods, 100);
     }
 
     @Test
@@ -60,5 +66,4 @@ public class GoodsTest {
         String expected = "Gardenia Bread,CONSUMABLES";
         assertEquals(expected, testGoods.convertToCsvWrite());
     }
-
 }
