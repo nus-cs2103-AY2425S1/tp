@@ -912,6 +912,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. System displays an error message asking for valid input.
       Use case ends.
 
+**System: StudentManagerPro**
+
+**Use case: UC18 Filter Students**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, student list displayed will be filtered according to the predicate provided.
+* If an invalid predicate or format is given, a corresponding error message is displayed.
+
+**MSS**
+1. User gives the command to filter students with specific predicates by one or multiple attributes.
+2. System validates the input predicates.
+3. System filters the student list based on the provided predicates.
+4. System displays the filtered list.
+5. System confirms the success by displaying a success message stating the number of filtered students.
+   Use case ends.
+
+**Extensions**
+* 1a. User inputs a filter command that is incomplete with no prefixes mentioned. 
+    * 1a1. System displays an error message showing the correct format of the filter command.
+      Use case ends.
+* 1b. User tries to filter by a predicate that is not supported by the filter functionality. 
+    * 1b1. System displays an error message that shows the attributes supported by the filter command and corresponding prefixes.
+      Use case ends.
+* 2a. System detects an empty predicate value after the attribute prefix.
+    * 2a1. System displays an error message stating that predicates cannot be empty.
+      Use case ends.
 
 ### Non-Functional Requirements
 
