@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.PriorityCommandParser.MESSAGE_INVALID_PRIORITY_LEVEL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -157,9 +158,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_priorityMissingLevel_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                PriorityCommand.MESSAGE_USAGE), () -> parser.parseCommand(
-                                PriorityCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()));
+        assertThrows(ParseException.class, MESSAGE_INVALID_PRIORITY_LEVEL, ()
+                        -> parser.parseCommand(PriorityCommand.COMMAND_WORD
+                        + " " + INDEX_FIRST_PERSON.getOneBased() + " l/"));
     }
 
     @Test

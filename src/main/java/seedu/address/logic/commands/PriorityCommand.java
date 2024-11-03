@@ -14,12 +14,22 @@ import seedu.address.model.person.PriorityLevel;
 public class PriorityCommand extends Command {
 
     public static final String COMMAND_WORD = "priority";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the priority level for a patient identified by "
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Sets the priority level for a patient identified by "
             + "the index number used in the displayed person list.\n"
-            + "Parameters: id INDEX (must be a positive integer) /level LEVEL (must be 1, 2, or 3)\n"
-            + "Parameters: deletelevel INDEX or INDEX /level LEVEL\n"
-            + "Example: priority deletelevel 1\n"
-            + "Example: " + COMMAND_WORD + " /id 1 /level 2";
+            + "Parameters: INDEX l/LEVEL (LEVEL must be 1, 2, or 3 or 'reset' for default level)\n"
+            + "Example: priority 1 l/2\n"
+            + "Example: priority 2 l/reset";
+
+    public static final String MESSAGE_SUCCESS_RESET = "Priority level reset to default for %s";
+    public static final String MESSAGE_SUCCESS_SET = "Priority level %d successfully set for %s";
+    public static final String MESSAGE_INVALID_PATIENT_ID =
+            "Invalid patient ID. Please enter a valid patient identifier.";
+    public static final String MESSAGE_INVALID_PRIORITY_LEVEL =
+            "Invalid priority level. Please enter 1, 2, or 3 as the priority level.";
+
+    private static final int DEFAULT_PRIORITY_LEVEL = 3;
+
     private final int index;
     private final int priorityLevel;
     private final boolean isReset;
@@ -30,6 +40,7 @@ public class PriorityCommand extends Command {
      * @param index the index of the person in the list to which the priority level will be assigned.
      * @param priorityLevel the priority level to be assigned to the person.
      *                      This should be a valid priority level as per the application's standards.
+     * @param isReset whether the priority level is to be reset to the default level.
      */
     public PriorityCommand(int index, int priorityLevel, boolean isReset) {
         this.index = index;
@@ -48,6 +59,8 @@ public class PriorityCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         try {
             Person personToEdit = model.getFilteredPersonList().get(index - 1);
+            int updatedPriorityLevel = isReset ? DEFAULT_PRIORITY_LEVEL : priorityLevel;
+
             Person editedPerson = new Person(
                     personToEdit.getName(),
                     personToEdit.getPhone(),
@@ -55,18 +68,23 @@ public class PriorityCommand extends Command {
                     personToEdit.getAddress(),
                     personToEdit.getEmergencyContact(),
                     personToEdit.getTags(),
-                    new PriorityLevel(isReset ? 3 : priorityLevel));
+                    new PriorityLevel(updatedPriorityLevel));
 
             model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.setPerson(personToEdit, editedPerson);
             model.updateTasksForPerson(personToEdit, editedPerson);
-            return new CommandResult(String.format("Priority level %d successfully set for %s",
-                    priorityLevel, editedPerson.getName()));
+
+            // Dynamic success message based on reset or custom priority level
+            String successMessage = isReset
+                    ? String.format(MESSAGE_SUCCESS_RESET, editedPerson.getName())
+                    : String.format(MESSAGE_SUCCESS_SET, priorityLevel, editedPerson.getName());
+            return new CommandResult(successMessage);
+
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandException("Invalid patient ID. Please enter a valid patient identifier.");
+            throw new CommandException(MESSAGE_INVALID_PATIENT_ID);
         } catch (IllegalArgumentException e) {
-            throw new CommandException("Invalid priority level. Please enter 1/2/3 as the priority level.");
+            throw new CommandException(MESSAGE_INVALID_PRIORITY_LEVEL);
         }
     }
 
