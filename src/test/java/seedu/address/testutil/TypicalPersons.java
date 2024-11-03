@@ -39,7 +39,7 @@ public class TypicalPersons {
             .withSocialMedia("[fb-carl]")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("family")
             .withScheduleName("schedule").withScheduleDate("2024-10-21").withScheduleTime("10:00")
             .withSocialMedia("[cs-danielm]")
             .build();

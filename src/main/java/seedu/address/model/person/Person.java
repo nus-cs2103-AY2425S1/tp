@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -100,6 +101,21 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if person already has a tag with the same name.
+     */
+    public boolean hasTag(String other) {
+        Iterator<Tag> iterator = tags.iterator();
+        boolean hasTag = false;
+        while (iterator.hasNext()) {
+            Tag tag = iterator.next();
+            if (tag.getTagName().equals(other)) {
+                hasTag = true;
+            }
+        }
+        return hasTag;
     }
 
     /**

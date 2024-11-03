@@ -48,6 +48,7 @@ public class CommandTestUtil {
     public static final String INEXISTENT_TAG_BESTFRIEND = "bestFriend";
     public static final String INEXISTENT_TAG_COLLEAGUE = "colleague";
     public static final String VALID_HANDLE = "username";
+    public static final String VALID_HANDLE_SC = "-u.se_HH0rname_";
     public static final String VALID_SCHEDULE_NAME_AMY = "schedule";
     public static final String VALID_SCHEDULE_DATE_AMY = "2024-10-21";
     public static final String VALID_SCHEDULE_TIME_AMY = "16:00";
@@ -70,6 +71,9 @@ public class CommandTestUtil {
     public static final String SOCIALMEDIA_IG = " " + PREFIX_IG + VALID_HANDLE;
     public static final String SOCIALMEDIA_FB = " " + PREFIX_FB + VALID_HANDLE;
     public static final String SOCIALMEDIA_CS = " " + PREFIX_CS + VALID_HANDLE;
+    public static final String SOCIALMEDIA_IG_SC = " " + PREFIX_IG + VALID_HANDLE_SC;
+    public static final String SOCIALMEDIA_FB_SC = " " + PREFIX_FB + VALID_HANDLE_SC;
+    public static final String SOCIALMEDIA_CS_SC = " " + PREFIX_CS + VALID_HANDLE_SC;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -80,6 +84,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TAG_NEW_TAG = " " + PREFIX_NEWTAG + "hubby*";
     public static final String INVALID_SOCIALMEDIA = " " + PREFIX_IG + "USER$$";
+    public static final String INVALID_HANDLE_EXCEED = " " + PREFIX_IG + "12345678901234567890123456789012345";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

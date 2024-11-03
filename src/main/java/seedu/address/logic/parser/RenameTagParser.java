@@ -23,10 +23,17 @@ public class RenameTagParser implements Parser<RenameTagCommand> {
     public RenameTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_OLDTAG, PREFIX_NEWTAG);
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_OLDTAG, PREFIX_NEWTAG);
+
         String oldTag = argMultimap.getValue(PREFIX_OLDTAG).orElseThrow(() -> new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE)));
         String newTag = argMultimap.getValue(PREFIX_NEWTAG).orElseThrow(() -> new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE)));
+
         if (!isValidTagName(newTag)) {
             throw new ParseException(MESSAGE_CONSTRAINTS);
         }
