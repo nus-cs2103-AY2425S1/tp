@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -138,6 +139,30 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> names} into a {@code ArrayList<Name>}.
+     */
+    public static ArrayList<Name> parseNames(Collection<String> names) throws ParseException {
+        requireNonNull(names);
+        final ArrayList<Name> nameList = new ArrayList<>();
+        for (String name : names) {
+            nameList.add(parseName(name));
+        }
+        return nameList;
+    }
+
+    /**
+     * Parses {@code Collection<String> jobs} into a {@code ArrayList<Job>}.
+     */
+    public static ArrayList<Job> parseJobs(Collection<String> jobs) throws ParseException {
+        requireNonNull(jobs);
+        final ArrayList<Job> jobList = new ArrayList<>();
+        for (String job : jobs) {
+            jobList.add(parseJob(job));
+        }
+        return jobList;
     }
 
     /**
