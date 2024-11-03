@@ -527,10 +527,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - CareLink displays an error message about the conflicting appointment
     - Use case ends
 
-**Use Case 12: Delete Appointments**
+**Use Case 12: Edit Existing Appointments**
 
 **System**: CareLink
-**Use Case**: UC12 - Delete Appointments
+**Use Case**: UC12 - Edit Existing Appointments
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink
+- The person exists in the system
+- The appointment for that person exists in the system
+
+### Guarantees
+- The edited appointment is successfully scheduled and confirmed
+- The edited appointment time is valid (start time before end time)
+- The edited appointment is in the future
+- No duplicate appointments are created for the person after editing
+
+### Main Success Scenario (MSS)
+1. Fred enters the `editapp` command to schedule a edited appointment with the required details (person's NRIC, date, start time, new date, new start time, new end time)
+2. CareLink validates that:
+   - The new start date/time is before the new end date/time
+   - The appointment is in the future
+   - The person exists in the system
+   - The appointment to be edited exists in the system
+   - The appointment does not conflict with existing appointments
+3. CareLink confirms the edited appointment and saves it in the system
+4. CareLink displays a confirmation message with the appointment details
+5. Use case ends
+
+### Extensions
+- **2a. Person Does Not Exist**:
+    - 2a.1: CareLink displays an error message that the person cannot be found
+    - Use case ends
+
+- **2b. Invalid Appointment Time**:
+    - 2b.1: Start time is after or equal to end time
+    - CareLink displays an error message that the appointment times are invalid
+    - Use case ends
+
+- **2c. Past Appointment Time**:
+    - 2c.1: Appointment start time is in the past
+    - CareLink displays an error message that appointments must be in the future
+    - Use case ends
+
+- **2d. Duplicate Appointment**:
+    - 2d.1: The person already has an appointment at the specified time
+    - CareLink displays an error message about the conflicting appointment
+    - Use case ends
+
+
+**Use Case 13: Delete Appointments**
+
+**System**: CareLink
+**Use Case**: UC13 - Delete Appointments
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -568,10 +618,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    - Use case ends
 
 
-### Use Case 13: Filter Patients by Risk Level
+### Use Case 14: Filter Patients by Risk Level
 
 **System**: CareLink
-**Use Case**: UC13 - Filter Patients by Risk Level
+**Use Case**: UC14 - Filter Patients by Risk Level
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -596,10 +646,10 @@ Use case resumes from step 3.
 **4a.1**: If no patients exist with the specified risk level, CareLink informs Fred that no records were found.
 Use case ends.
 
-**Use Case 14: Add Note to Person**
+**Use Case 15: Add Note to Person**
 
 **System**: CareLink
-**Use Case**: UC14 - Add Note to Person
+**Use Case**: UC15 - Add Note to Person
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
