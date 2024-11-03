@@ -27,7 +27,9 @@ public class AddSubmissionStatusCommand extends Command {
             + "Parameters: [INDEX] sm/SUBMISSION_NAME ss/SUBMISSION_STATUS\n"
             + "Example: " + COMMAND_WORD + " 1 sm/Assignment 1 ss/Y";
 
-    public static final String MESSAGE_ADDSUBMISSIONSTATUS_SUCCESS = "Added submission status for person: %1$s";
+    public static final String MESSAGE_ADDSUBMISSIONSTATUS_SUCCESS = "Added submission status for person: %1$s\n"
+            + "Submission: %2$s\n"
+            + "Status: %3$s";
     public static final String MESSAGE_SUBMISSION_NOT_FOUND = "This submission does not exist.";
 
     private final Index index;
@@ -67,7 +69,8 @@ public class AddSubmissionStatusCommand extends Command {
                 personToEdit.getExams(), personToEdit.getTags(), personToEdit.getAttendances(), updatedSubmissions);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADDSUBMISSIONSTATUS_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_ADDSUBMISSIONSTATUS_SUCCESS, editedPerson.getDisplayedName(),
+                submission, submissionStatus));
     }
 
     @Override
