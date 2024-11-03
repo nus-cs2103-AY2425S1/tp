@@ -55,7 +55,8 @@ public class TagCommand extends Command {
         String addedTagsString = Tag.tagSetToString(addedTags);
         for (Tag t:addedTags) {
             if (personToTag.hasTag(t)) {
-                throw new CommandException("Person already has that Tag!");            }
+                throw new CommandException("Person already has that Tag!");
+            }
         }
 
         // Union of existing tags and new tags
