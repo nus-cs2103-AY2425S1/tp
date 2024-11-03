@@ -34,7 +34,9 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        checkArgument(EmailValidator.of().validate(email), MESSAGE_CONSTRAINTS);
+        boolean isValidEmail = EmailValidator.of().validate(email);
+        checkArgument(isValidEmail, MESSAGE_CONSTRAINTS);
+
         this.value = email.trim();
     }
 

@@ -16,8 +16,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.hireme.model.internshipapplication.exceptions.DuplicateInternshipException;
-import seedu.hireme.model.internshipapplication.exceptions.InternshipNotFoundException;
+import seedu.hireme.model.internshipapplication.exceptions.DuplicateInternshipApplicationException;
+import seedu.hireme.model.internshipapplication.exceptions.InternshipApplicationNotFoundException;
 import seedu.hireme.testutil.InternshipApplicationBuilder;
 
 public class UniqueListTest {
@@ -57,9 +57,9 @@ public class UniqueListTest {
     }
 
     @Test
-    public void add_duplicateInternship_throwsDuplicateInternshipException() {
+    public void add_duplicateInternship_throwsDuplicateInternshipApplicationException() {
         uniqueList.add(GOOGLE);
-        assertThrows(DuplicateInternshipException.class, () -> uniqueList.add(GOOGLE));
+        assertThrows(DuplicateInternshipApplicationException.class, () -> uniqueList.add(GOOGLE));
     }
 
     @Test
@@ -78,8 +78,8 @@ public class UniqueListTest {
     }
 
     @Test
-    public void setItem_targetInternshipNotInList_throwsInternshipNotFoundException() {
-        assertThrows(InternshipNotFoundException.class, () -> uniqueList.setItem(GOOGLE, GOOGLE));
+    public void setItem_targetInternshipNotInList_throwsInternshipApplicationNotFoundException() {
+        assertThrows(InternshipApplicationNotFoundException.class, () -> uniqueList.setItem(GOOGLE, GOOGLE));
     }
 
     @Test
@@ -114,10 +114,10 @@ public class UniqueListTest {
     }
 
     @Test
-    public void setItem_editedInternshipIsDuplicate_throwsDuplicateInternshipException() {
+    public void setItem_editedInternshipIsDuplicate_throwsDuplicateInternshipApplicationException() {
         uniqueList.add(GOOGLE);
         uniqueList.add(YAHOO);
-        assertThrows(DuplicateInternshipException.class, () -> uniqueList.setItem(GOOGLE, YAHOO));
+        assertThrows(DuplicateInternshipApplicationException.class, () -> uniqueList.setItem(GOOGLE, YAHOO));
     }
 
     @Test
@@ -126,8 +126,8 @@ public class UniqueListTest {
     }
 
     @Test
-    public void remove_internshipDoesNotExist_throwsInternshipNotFoundException() {
-        assertThrows(InternshipNotFoundException.class, () -> uniqueList.remove(GOOGLE));
+    public void remove_internshipDoesNotExist_throwsInternshipApplicationNotFoundException() {
+        assertThrows(InternshipApplicationNotFoundException.class, () -> uniqueList.remove(GOOGLE));
     }
 
     @Test
@@ -168,9 +168,10 @@ public class UniqueListTest {
     }
 
     @Test
-    public void setItems_listWithDuplicateInternships_throwsDuplicateInternshipException() {
+    public void setItems_listWithDuplicateInternships_throwsDuplicateInternshipApplicationException() {
         List<InternshipApplication> listWithDuplicateInternships = Arrays.asList(GOOGLE, GOOGLE);
-        assertThrows(DuplicateInternshipException.class, () -> uniqueList.setItems(listWithDuplicateInternships));
+        assertThrows(DuplicateInternshipApplicationException.class, () ->
+                uniqueList.setItems(listWithDuplicateInternships));
     }
 
     @Test

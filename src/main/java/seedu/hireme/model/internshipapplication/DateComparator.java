@@ -37,6 +37,7 @@ public class DateComparator implements Comparator<InternshipApplication> {
     public int compare(InternshipApplication internshipApplication1, InternshipApplication internshipApplication2) {
         Date date1 = internshipApplication1.getDateOfApplication();
         Date date2 = internshipApplication2.getDateOfApplication();
+
         int multiplier = isEarliestOrder ? 1 : -1;
         return multiplier * date1.compareTo(date2);
     }

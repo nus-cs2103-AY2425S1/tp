@@ -9,6 +9,11 @@ import seedu.hireme.logic.parser.AddressBookParser;
  * Validates name of company strings
  */
 public class NameValidator extends Validator<String> {
+
+    /*
+     * The name should contain alphanumeric characters and may contain spaces between words.
+     * No special characters are allowed, except underscores, ampersand, dot, colon and brackets.
+     */
     public static final String VALIDATION_REGEX = "[ A-Za-z0-9_&/.:()]*";
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 

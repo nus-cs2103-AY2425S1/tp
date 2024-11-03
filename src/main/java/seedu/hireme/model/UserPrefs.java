@@ -5,14 +5,17 @@ import static java.util.Objects.requireNonNull;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import seedu.hireme.commons.core.GuiSettings;
+import seedu.hireme.commons.core.LogsCenter;
 
 /**
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private static final Logger logger = LogsCenter.getLogger(UserPrefs.class);
     private GuiSettings guiSettings = new GuiSettings();
     private Path hireMeFilePath = Paths.get("data" , "hireme.json");
 
@@ -34,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      */
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
+        logger.info("Setting new user preferences");
         setGuiSettings(newUserPrefs.getGuiSettings());
         setHireMeFilePath(newUserPrefs.getHireMeFilePath());
     }
@@ -44,6 +48,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
+        logger.info("Setting new gui settings");
         this.guiSettings = guiSettings;
     }
 
@@ -53,6 +58,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public void setHireMeFilePath(Path hireMeFilePath) {
         requireNonNull(hireMeFilePath);
+        logger.info("Setting new HireMe file path");
         this.hireMeFilePath = hireMeFilePath;
     }
 
