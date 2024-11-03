@@ -59,6 +59,16 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicatePersonWithDifferentNameCase_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        Person differentNameCasePerson = new PersonBuilder().withName("amy bee").build();
+        AddCommand addCommand = new AddCommand(differentNameCasePerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
