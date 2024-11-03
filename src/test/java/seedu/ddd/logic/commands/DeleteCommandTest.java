@@ -10,7 +10,6 @@ import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
 
 import org.junit.jupiter.api.Test;
 
