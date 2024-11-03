@@ -60,10 +60,10 @@ public interface Logic {
     ObservableList<Association> getAssociationList();
 
     /** Return the display index of the first vendor in the assigned list */
-    ObservableIntegerValue getAssignedVendorsDisplayStartIdx();
+    ObservableIntegerValue getStartingIndexOfAssignedVendors();
 
     /** Return the display index of the first event in the assigned list */
-    ObservableIntegerValue getAssignedEventsDisplayStartIdx();
+    ObservableIntegerValue getStartingIndexOfAssignedEvents();
 
     /**
      * Returns the user prefs' EventTory file path.

@@ -268,20 +268,20 @@ public class ModelManagerTest {
 
     @Test
     public void testAssignedEventsDisplayStartIdx_updatesWithEventListSize() {
-        assertEquals(1, modelManager.getAssignedEventsDisplayStartIdx().get());
+        assertEquals(1, modelManager.getStartingIndexOfAssignedEvents().get());
 
         modelManager.addEvent(TypicalEvents.HOON);
 
-        assertEquals(2, modelManager.getAssignedEventsDisplayStartIdx().get());
+        assertEquals(2, modelManager.getStartingIndexOfAssignedEvents().get());
     }
 
     @Test
     public void testAssignedVendorsDisplayStartIdx_updatesWithVendorListSize() {
-        assertEquals(1, modelManager.getAssignedVendorsDisplayStartIdx().get());
+        assertEquals(1, modelManager.getStartingIndexOfAssignedVendors().get());
 
         modelManager.addVendor(TypicalVendors.HOON);
 
-        assertEquals(2, modelManager.getAssignedVendorsDisplayStartIdx().get());
+        assertEquals(2, modelManager.getStartingIndexOfAssignedVendors().get());
     }
 
     @Test

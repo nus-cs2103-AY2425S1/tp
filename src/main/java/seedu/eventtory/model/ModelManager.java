@@ -35,8 +35,8 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private final ObjectProperty<Event> selectedEvent;
     private final ObjectProperty<UiState> currentUiState;
-    private final ObservableIntegerValue assignedVendorsDisplayStartIdx;
-    private final ObservableIntegerValue assignedEventsDisplayStartIdx;
+    private final ObservableIntegerValue startingIndexOfAssignedVendors;
+    private final ObservableIntegerValue startingIndexOfAssignedEvents;
 
     /**
      * Initializes a ModelManager with the given eventTory and userPrefs.
@@ -54,10 +54,10 @@ public class ModelManager implements Model {
         selectedEvent = new SimpleObjectProperty<>(null);
         currentUiState = new SimpleObjectProperty<>(UiState.DEFAULT);
         // one-based index
-        assignedEventsDisplayStartIdx = Bindings.createIntegerBinding(() -> {
+        startingIndexOfAssignedEvents = Bindings.createIntegerBinding(() -> {
             return filteredEvents.size() + 1;
         }, filteredEvents);
-        assignedVendorsDisplayStartIdx = Bindings.createIntegerBinding(() -> {
+        startingIndexOfAssignedVendors = Bindings.createIntegerBinding(() -> {
             return filteredVendors.size() + 1;
         }, filteredVendors);
     }
@@ -216,8 +216,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableIntegerValue getAssignedVendorsDisplayStartIdx() {
-        return assignedVendorsDisplayStartIdx;
+    public ObservableIntegerValue getStartingIndexOfAssignedVendors() {
+        return startingIndexOfAssignedVendors;
     }
 
     // =========== Filtered Event List Accessors =============================================================
@@ -238,8 +238,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableIntegerValue getAssignedEventsDisplayStartIdx() {
-        return assignedEventsDisplayStartIdx;
+    public ObservableIntegerValue getStartingIndexOfAssignedEvents() {
+        return startingIndexOfAssignedEvents;
     }
 
     @Override

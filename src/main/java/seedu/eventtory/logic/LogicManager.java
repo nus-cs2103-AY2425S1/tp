@@ -102,8 +102,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableIntegerValue getAssignedEventsDisplayStartIdx() {
-        return model.getAssignedEventsDisplayStartIdx();
+    public ObservableIntegerValue getStartingIndexOfAssignedEvents() {
+        return model.getStartingIndexOfAssignedEvents();
     }
 
     @Override
@@ -112,8 +112,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableIntegerValue getAssignedVendorsDisplayStartIdx() {
-        return model.getAssignedVendorsDisplayStartIdx();
+    public ObservableIntegerValue getStartingIndexOfAssignedVendors() {
+        return model.getStartingIndexOfAssignedVendors();
     }
 
     @Override

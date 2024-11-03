@@ -29,10 +29,10 @@ public class EventListPanel extends UiPart<Region> {
      * Creates a {@code EventListPanel} with the given {@code ObservableList}.
      */
     public EventListPanel(ObservableList<Event> eventList, String headerText,
-        ObservableIntegerValue displayIndexOffset) {
+        ObservableIntegerValue indexOffset) {
         super(FXML);
         eventListView.setItems(eventList);
-        eventListView.setCellFactory(listView -> new EventListViewCell(displayIndexOffset));
+        eventListView.setCellFactory(listView -> new EventListViewCell(indexOffset));
         header.setText(headerText);
     }
 
@@ -54,11 +54,11 @@ public class EventListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
      */
     class EventListViewCell extends ListCell<Event> {
-        private final ObservableIntegerValue displayIndexOffset;
+        private final ObservableIntegerValue indexOffset;
 
-        public EventListViewCell(ObservableIntegerValue displayIndexOffset) {
+        public EventListViewCell(ObservableIntegerValue indexOffset) {
             super();
-            this.displayIndexOffset = displayIndexOffset;
+            this.indexOffset = indexOffset;
         }
 
         @Override
@@ -69,7 +69,7 @@ public class EventListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + displayIndexOffset.get()).getRoot());
+                setGraphic(new EventCard(event, getIndex() + indexOffset.get()).getRoot());
             }
         }
     }

@@ -247,10 +247,10 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getAssignedEventsDisplayStartIdx_setNewIndex_updateSuccessful() {
+    public void getStartingIndexOfAssignedEvents_setNewIndex_updateSuccessful() {
         ObjectProperty<Integer> observedState = new SimpleObjectProperty<>();
-        int initialIndex = logic.getAssignedEventsDisplayStartIdx().get();
-        logic.getAssignedEventsDisplayStartIdx().addListener((observable, oldValue, newValue) -> {
+        int initialIndex = logic.getStartingIndexOfAssignedEvents().get();
+        logic.getStartingIndexOfAssignedEvents().addListener((observable, oldValue, newValue) -> {
             observedState.set(newValue.intValue());
         });
 
@@ -260,10 +260,10 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getAssignedVendorsDisplayStartIdx_setNewIndex_updateSuccessful() {
+    public void getStartingIndexOfAssignedVendors_setNewIndex_updateSuccessful() {
         ObjectProperty<Integer> observedState = new SimpleObjectProperty<>();
-        int initialIndex = logic.getAssignedVendorsDisplayStartIdx().get();
-        logic.getAssignedVendorsDisplayStartIdx().addListener((observable, oldValue, newValue) -> {
+        int initialIndex = logic.getStartingIndexOfAssignedVendors().get();
+        logic.getStartingIndexOfAssignedVendors().addListener((observable, oldValue, newValue) -> {
             observedState.set(newValue.intValue());
         });
 

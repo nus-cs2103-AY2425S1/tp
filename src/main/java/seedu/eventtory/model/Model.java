@@ -94,7 +94,7 @@ public interface Model {
     /**
      * Returns observable one-based display start index of the assigned vendor list.
      */
-    ObservableIntegerValue getAssignedVendorsDisplayStartIdx();
+    ObservableIntegerValue getStartingIndexOfAssignedVendors();
 
     /**
      * Returns true if the given {@code vendor} is already assigned to the given {@code event}. {@code vendor} and
@@ -170,7 +170,7 @@ public interface Model {
     /**
      * Returns observable one-based display start index of the assigned event list.
      */
-    ObservableIntegerValue getAssignedEventsDisplayStartIdx();
+    ObservableIntegerValue getStartingIndexOfAssignedEvents();
 
     /**
      * Returns the current selected event.

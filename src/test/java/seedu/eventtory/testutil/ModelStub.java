@@ -180,12 +180,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableIntegerValue getAssignedVendorsDisplayStartIdx() {
+    public ObservableIntegerValue getStartingIndexOfAssignedVendors() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ObservableIntegerValue getAssignedEventsDisplayStartIdx() {
+    public ObservableIntegerValue getStartingIndexOfAssignedEvents() {
         throw new AssertionError("This method should not be called.");
     }
 }

@@ -29,10 +29,10 @@ public class VendorListPanel extends UiPart<Region> {
      * Creates a {@code VendorListPanel} with the given {@code ObservableList}.
      */
     public VendorListPanel(ObservableList<Vendor> vendorList, String headerText,
-        ObservableIntegerValue displayIndexOffset) {
+        ObservableIntegerValue indexOffset) {
         super(FXML);
         vendorListView.setItems(vendorList);
-        vendorListView.setCellFactory(listView -> new VendorListViewCell(displayIndexOffset));
+        vendorListView.setCellFactory(listView -> new VendorListViewCell(indexOffset));
         header.setText(headerText);
     }
 
@@ -54,11 +54,11 @@ public class VendorListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Vendor} using a {@code VendorCard}.
      */
     class VendorListViewCell extends ListCell<Vendor> {
-        private final ObservableIntegerValue displayIndexOffset;
+        private final ObservableIntegerValue indexOffset;
 
-        public VendorListViewCell(ObservableIntegerValue displayIndexOffset) {
+        public VendorListViewCell(ObservableIntegerValue indexOffset) {
             super();
-            this.displayIndexOffset = displayIndexOffset;
+            this.indexOffset = indexOffset;
         }
 
         @Override
@@ -69,7 +69,7 @@ public class VendorListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new VendorCard(vendor, getIndex() + displayIndexOffset.get()).getRoot());
+                setGraphic(new VendorCard(vendor, getIndex() + indexOffset.get()).getRoot());
             }
         }
     }

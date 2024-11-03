@@ -44,7 +44,7 @@ public class EventDetailsPanel extends UiPart<Region> {
 
     private ObservableList<Vendor> assignedVendors;
 
-    private ObservableIntegerValue displayAssignedStartIndex;
+    private ObservableIntegerValue startIndexOfAssignedVendors;
 
     /**
      * Creates a {@code VendorListPanel} with the given {@code ObservableList}.
@@ -53,7 +53,7 @@ public class EventDetailsPanel extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         assignedVendors = FXCollections.observableArrayList();
-        displayAssignedStartIndex = logic.getAssignedVendorsDisplayStartIdx();
+        startIndexOfAssignedVendors = logic.getStartingIndexOfAssignedVendors();
 
         ObservableObjectValue<Event> observableEvent = logic.getViewedEvent();
         setEvent(observableEvent.get());
@@ -71,12 +71,12 @@ public class EventDetailsPanel extends UiPart<Region> {
             updateAssignedVendors();
         });
 
-        displayAssignedStartIndex.addListener((observable, oldValue, newValue) -> {
+        startIndexOfAssignedVendors.addListener((observable, oldValue, newValue) -> {
             updateAssignedVendors();
         });
 
         VendorListPanel vendorListPanel = new VendorListPanel(
-            assignedVendors, "Assigned Vendors", displayAssignedStartIndex);
+            assignedVendors, "Assigned Vendors", startIndexOfAssignedVendors);
         detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
 
