@@ -1,12 +1,11 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
-
 # NovaCare User Guide
 
-NovaCare is a **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+NovaCare is a **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -30,10 +29,10 @@ If you can type fast, NovaCare can get your patient management tasks done faster
 
 ## How to use NovaCare
 
-This user guide is tailored for new and existing users of NovaCare. 
+This user guide is tailored for new and existing users of NovaCare.
 
 
-If you are new to NovaCare, we recommend you to start with the [Quick Start](#quick-start) section. 
+If you are new to NovaCare, we recommend you to start with the [Quick Start](#quick-start) section.
 
 If you are an existing user looking for a specific feature, you can jump to the [Features](#features) section or [Command Summary](#Command Summary) section.
 
@@ -52,8 +51,10 @@ As you read through the user guide, you may come across some terms that are unfa
 | **Priority Level** | A priority level is a value assigned to a patient to indicate the urgency of their medical condition. 1 meaning critical 3 meaning non critical |
 | **[word]** | Words in square brackets are optional parameters that can be included in the command.                                                           |
 
-### 
-> [!NOTE]  
+### Annotations box
+The following are annotations throughout this user guide that provide additional information to help you understand the NovaCare features better.
+
+> [!NOTE]
 > Additional information that help you understand more about Commands.
 
 > [!TIP]
@@ -70,7 +71,7 @@ This section provides a quick overview of how to set up and run NovaCare on your
 
 ### Step 1. Ensure you have Java `17` or above installed in your Computer. You can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
-For **Windows** users, you can type **Command Prompt** in the search bar. 
+For **Windows** users, you can type **Command Prompt** in the search bar.
 Type `java -version` to check if you have Java installed.
 Upon successful installation, you should see something like this:
 ![Windows Java](images/windows-java.png)
@@ -78,7 +79,7 @@ Upon successful installation, you should see something like this:
 For **Mac/Linux** users, you can type **Terminal** in the search bar.
 Type `java -version` to check if you have Java installed.
 Upon successful installation, you should see something like this:
-![Mac Java](images/mac-java.png) 
+![Mac Java](images/mac-java.png)
 
 ### Step 2. Download NovaCare from [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
 1. Download the `NovaCareApp.jar` file from the link provided by scrolling down to Assets as shown below.
@@ -109,7 +110,7 @@ The GUI is broken down into different **sections** as shown in the image below:
 Here will be a basic guide on how to use the application.
 1. **Launch help guide**:
    * Type the command in the command box and press Enter to view help window:
-      > `help` 
+      > `help`
 
 2. **Clear all entries**:
    * Type the command in the command box and press Enter to clear all entries:
@@ -282,7 +283,7 @@ Examples:
 
 ### Deleting emergency contact : `delemergency`
 
-Delets an emergency contact and its details from a person in the address book.
+Deletes an emergency contact and its details from a person in the address book.
 
 Format: `delemergency INDEX
 
@@ -387,10 +388,10 @@ _Details coming soon ..._
 |---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ` <br> e.g., `add n/James Ho p/94391857 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/diabetes` |
 | **Edit**                  | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g., `edit 1 p/91234567 e/john13432@gmail.com`                                       |
-| **Change Priority**       | `priority /id INDEX /level PRIORITY_LEVEL` <br> e.g., `priority /id 1 /level 2`                                                                          |
-| **Delete Priority**       | `priority deletelevel INDEX` <br> e.g., `deletelevel 1`                                                                                                  |
+| **Change Priority**       | `priority INDEX l/PRIORITY_LEVEL` <br> e.g., `priority 1 l/2`                                                                                            |
+| **Delete Priority**       | `priority INDEX l/reset` <br> e.g., `priority 2 l/reset`                                                                                                      |
 | **Add Emergency Contact** | `emergency INDEX n/EMERGENCY CONTACT NAME p/EMERGENCY CONTACT NUMBER` <br> e.g., `emergency 1 n/tom tan p/91237171`                                      |
-| **Delete Emergency Contact** | `delemergency INDEX` <br> e.g., `delemergency 1`                                                                                                        |
+| **Delete Emergency Contact** | `delemergency INDEX` <br> e.g., `delemergency 1`                                                                                                         |
 | **List**                  | `list`                                                                                                                                                   |
 | **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
