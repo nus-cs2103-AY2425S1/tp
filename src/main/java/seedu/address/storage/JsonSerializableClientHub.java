@@ -98,8 +98,12 @@ class JsonSerializableClientHub {
     public JsonSerializableClientHub(
             @JsonProperty("persons") List<JsonAdaptedPerson> persons,
             @JsonProperty("reminders") List<JsonAdaptedReminder> reminders) {
-        this.persons.addAll(persons);
-        this.reminders.addAll(reminders);
+        if (persons != null) {
+            this.persons.addAll(persons);
+        }
+        if (reminders != null) {
+            this.reminders.addAll(reminders);
+        }
     }
 
     /**

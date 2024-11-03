@@ -210,12 +210,6 @@ public class ClientHub implements ReadOnlyClientHub {
     }
 
     public ObservableList<Reminder> getReminderList() {
-        //        List<Reminder> allReminders = persons.stream()
-        //                .filter(person -> !person.getReminders().isEmpty())
-        //                .flatMap(person -> person.getReminders().stream())
-        //                .collect(Collectors.toList());
-        //        reminders.setReminders(allReminders);
-        //        return reminders.asUnmodifiableObservableList();
         ObservableList<Reminder> temp = FXCollections.observableArrayList(
                 persons.stream()
                         .flatMap(person -> person.getReminders().stream())
