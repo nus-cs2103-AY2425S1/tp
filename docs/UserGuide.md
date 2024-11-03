@@ -178,6 +178,17 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+#### Shortcuts: Finding blacklisted/whitelisted clients
+
+To find all clients that are blacklisted (with no other parameters), the command `blacklist` can be entered.
+
+Similarly, the `whitelist` command can be entered to find all clients who are whitelisted.
+
+_Note: both of these commands need to be entered without any parameters otherwise the app responds with an error message._
+</div>
+
 ### Delete Client Details : `delete`
 
 Deletes the specified person from Clientele+.
