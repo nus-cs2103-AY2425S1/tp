@@ -125,7 +125,6 @@ public class AddPersonToEventCommandTest {
     @Test
     public void execute_duplicateContactAddedToSameRole_throwsCommandException() {
         attendees.add(Index.fromZeroBased(0));
-
         AddPersonToEventCommand addPersonToEventCommand = new
                 AddPersonToEventCommand(Index.fromZeroBased(0),
                 attendees, volunteers, vendors, sponsors);

@@ -59,7 +59,8 @@ public class TypicalEvents {
      * Returns a list of typical events.
      */
     public static List<Event> getTypicalEvents() {
-        return new ArrayList<>(Arrays.asList(TECH_CONFERENCE, ART_EXHIBITION, SPORTS_FESTIVAL));
+        return new ArrayList<>(Arrays.asList(new Event(TECH_CONFERENCE),
+                new Event(ART_EXHIBITION), new Event(SPORTS_FESTIVAL)));
     }
 
     /**
