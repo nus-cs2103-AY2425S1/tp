@@ -332,15 +332,15 @@ The `DuplicatePhoneTagger` implements the following key operations:
 
 Given below is an example usage scenario and how the duplicate phone tagging mechanism behaves when executing an edit command.
 
-Step 1. Assume the address book has two persons: Alex (phone: 87654321) and Bob (phone: 91234567). With Alex being the 1st entry in the address book and Bob being he 2nd.
+1. Assume the address book has two persons: Alex (phone: 87654321) and Bob (phone: 91234567). With Alex being the 1st entry in the address book and Bob being the 2nd.
 
-Step 2. The user executes `edit 2 p/87654321` to change Bob's phone number to match Alex's.
+2. The user executes `edit 2 p/87654321` to change Bob's phone number to match Alex's.
 
-Step 3. The `edit` command first creates the modified person with the new phone number.
+3. The `edit` command first creates the modified person with the new phone number.
 
-Step 4. After the person is edited, `DuplicatePhoneTagger#tagPhoneDuplicates()` is called. This updates the frequency count of all phone numbers and identifies that "87654321" appears twice.
+4. After the person is edited, `DuplicatePhoneTagger#tagPhoneDuplicates()` is called. This updates the frequency count of all phone numbers and identifies that "87654321" appears twice.
 
-Step 5. Finally, both Alex and Bob are tagged with the "DuplicatePhone" tag since they share the same phone number.
+5. Finally, both Alex and Bob are tagged with the "DuplicatePhone" tag since they share the same phone number.
 
 The following sequence diagrams show how the detection of duplicate phone numbers is carried out in the case of the `edit` operation being executed.
 
@@ -354,9 +354,9 @@ The following sequence diagrams show how the detection of duplicate phone number
 
 </box>
 
-#### Design considerations:
+#### Design considerations
 
-**Aspect: When to perform duplicate phone tagging**
+##### Aspect: When to perform duplicate phone tagging
 
 * **Alternative 1 (current choice):** Perform tagging after any command that could modify phone numbers
     * Pros: Ensures tags are always up-to-date
@@ -366,7 +366,7 @@ The following sequence diagrams show how the detection of duplicate phone number
     * Pros: Better performance as checking is done on-demand
     * Cons: Tags could become outdated if users forget to run the check
 
-**Aspect: Storage of phone number frequencies**
+##### Aspect: Storage of phone number frequencies
 
 * **Alternative 1 (current choice):** Use a HashMap to store phone frequencies
     * Pros: O(1) lookup time for checking duplicates
