@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -52,7 +53,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        Command command = parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
 
@@ -65,7 +66,7 @@ public class AddressBookParserTest {
         String input = AddAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                 + PREFIX_DATE + date + " " + PREFIX_FROM + startTime + " " + PREFIX_TO + endTime;
 
-        AddAppointmentCommand command = (AddAppointmentCommand) parser.parseCommand(input);
+        Command command = parser.parseCommand(input);
         assertEquals(new AddAppointmentCommand(INDEX_FIRST_PERSON, date, startTime, endTime), command);
     }
 
@@ -73,22 +74,22 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        Command command = parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        Command command = parser.parseCommand(DeleteCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_MULTIPLE), command);
     }
 
     @Test
     public void parseCommand_deleteAppointment() throws Exception {
-        DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
-                DeleteAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        Command command = parser.parseCommand(DeleteAppointmentCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteAppointmentCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -105,7 +106,7 @@ public class AddressBookParserTest {
         List<String> priorities = Arrays.asList("high", "medium");
         List<String> incomes = List.of("1500");
 
-        FindCommand command = (FindCommand) parser.parseCommand(
+        Command command = parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + PREFIX_NAME + nameKeywords.get(0) + " "
                         + PREFIX_NAME + nameKeywords.get(1) + " "
                         + PREFIX_ADDRESS + addressKeywords.get(0) + " " + PREFIX_ADDRESS + addressKeywords.get(1) + " "
@@ -117,8 +118,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_get() throws Exception {
-        GetCommand command = (GetCommand) parser.parseCommand(
-                GetCommand.COMMAND_WORD + " " + PARAMS_INPUT_FIRST);
+        Command command = parser.parseCommand(GetCommand.COMMAND_WORD + " " + PARAMS_INPUT_FIRST);
         assertEquals(new GetCommand(PARAMS_ARRAY_FIRST), command);
     }
 
@@ -155,7 +155,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " name");
+        Command command = parser.parseCommand(SortCommand.COMMAND_WORD + " name");
         assertEquals(command, new SortCommand("name"));
     }
 
