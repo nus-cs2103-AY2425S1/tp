@@ -6,8 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonInEventPredicate;
 
 /**
