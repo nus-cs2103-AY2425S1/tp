@@ -7,14 +7,16 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Consolas Bold";
+    -fx-font-family: "Consolas";
+    -fx-font-weight: bold;
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Consolas Bold";
+    -fx-font-family: "Consolas";
+    -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
@@ -28,7 +30,7 @@
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Consolas Bold";
+    -fx-font-family: "Consolas";
 }
 
 .tab-pane {
@@ -123,7 +125,8 @@
 }
 
 .cell_big_label {
-    -fx-font-family: "Consolas Bold";
+    -fx-font-family: "Consolas";
+    -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }

@@ -2,23 +2,22 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
@@ -39,9 +38,6 @@ import seedu.address.logic.commands.UndoCommand;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f12-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the command cheatsheet: "
-        + "\nFor detailed help, refer to the user guide at: " + USERGUIDE_URL;
-
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
     final ObservableList<String[]> data = FXCollections.observableArrayList(
@@ -77,8 +73,6 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Button closeButton;
 
-    @FXML
-    private Label helpMessage;
 
     /**
      * Creates a new HelpWindow.
@@ -87,7 +81,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
     }
 
     /**
@@ -103,7 +96,9 @@ public class HelpWindow extends UiPart<Stage> {
      * If this method is called on a thread other than the JavaFX Application Thread.
      */
     public void show() {
-        Scene scene = new Scene(new Group(), 600, 600);
+        int TABLE_WIDTH = 800;
+        int TABLE_HEIGHT = 600;
+        Scene scene = new Scene(new Group(), TABLE_WIDTH, TABLE_HEIGHT);
         logger.fine("Showing help page about the application.");
         table.setEditable(true);
 
@@ -111,25 +106,35 @@ public class HelpWindow extends UiPart<Stage> {
         table.getColumns().clear();
 
         TableColumn<String[], String> action = new TableColumn<>("Action");
-        action.setMinWidth(100);
+        action.setMinWidth(TABLE_WIDTH * 0.1);
         action.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
 
         TableColumn<String[], String> format = new TableColumn<>("Format");
-        format.setMinWidth(200);
+        format.setMinWidth(TABLE_WIDTH * 0.3);
         format.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
 
         TableColumn<String[], String> examples = new TableColumn<>("Examples");
-        examples.setMinWidth(250);
+        examples.setMinWidth(TABLE_WIDTH * 0.5);
         examples.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[2]));
 
-        // Set the resize policy to automatically adjust columns
+        // Setting style of rows - font
+        StringProperty style = new SimpleStringProperty();
+        style.bind(new SimpleStringProperty("-fx-font-family: Consolas"));
+
+        table.setRowFactory(tv -> {
+            TableRow<String> row = new TableRow<>();
+            row.styleProperty().bind(style);
+            return row ;
+        });
+
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.getColumns().addAll(action, format, examples);
         table.setItems(data);
 
         VBox vbox = new VBox();
         vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 10, 10, 10));
+        // Pseudo Centers the table
+        vbox.setPadding(new Insets(10, TABLE_WIDTH * 0.05, 10, TABLE_WIDTH * 0.05));
         vbox.getChildren().addAll(table);
 
         vbox.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
@@ -146,18 +151,28 @@ public class HelpWindow extends UiPart<Stage> {
             }
         });
 
+        userGuideLink.setFont(new javafx.scene.text.Font("Consolas", 12));
+        copyButton.setFont(new javafx.scene.text.Font("Consolas", 12));
+        closeButton.setFont(new javafx.scene.text.Font("Consolas", 12));
         // Add the hyperlink to the VBox
         vbox.getChildren().addAll(userGuideLink, copyButton, closeButton);
 
-        // Make VBox resizable
-        vbox.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-        vbox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        // Center the VBox
+        vbox.setAlignment(Pos.CENTER);
 
-        ((Group) scene.getRoot()).getChildren().addAll(vbox);
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.getChildren().addAll(vbox);
+        AnchorPane.setTopAnchor(vbox, 0.0);
+        AnchorPane.setLeftAnchor(vbox, 0.0);
+        AnchorPane.setRightAnchor(vbox, 0.0);
+        AnchorPane.setBottomAnchor(vbox, 0.0);
+
+        ((Group) scene.getRoot()).getChildren().addAll(anchorPane);
 
         this.getRoot().setScene(scene);
         getRoot().show();
         getRoot().centerOnScreen();
+        getRoot().setTitle("Command Cheatsheet");
     }
 
     /**
