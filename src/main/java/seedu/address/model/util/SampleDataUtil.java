@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Contains utility methods for populating {@code ClientHub} with sample data.
@@ -67,4 +68,11 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a client type set containing the list of reminders given.
+     */
+    public static Set<Reminder> getReminderSet(Reminder... reminders) {
+        return Arrays.stream(reminders)
+                .collect(Collectors.toSet());
+    }
 }
