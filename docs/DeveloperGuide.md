@@ -692,7 +692,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
     1. Test case: `settle 1 amount/10`<br>
-       Expected: For 1st student, Assuming owed amount is more than 10, owed amount decreases by 10, while paid amount increases by 10. UGTeach displays a message that payment of 10.00 has been settled.
+       Expected: For 1st student, assuming owed amount is more than 10, owed amount decreases by 10, while paid amount increases by 10. UGTeach displays a message that payment of 10.00 has been settled.
 
     1. Test case: `settle 1 amount/-10`<br>
        Expected: No changes. UGTeach displays error message that amount needs to be positive.
@@ -701,7 +701,8 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes. UGTeach displays error message of invalid command format.
 
     1. Test case: `settle 1 amount/10000`<br>
-       Expected: No changes. UGTeach displays error message that entered amount is more than amount owed.
+       Expected: No changes, assuming that the amount entered is more than the amount owed.
+       UGTeach displays error message that entered amount is more than amount owed.
 
 1. Using settle command from a filtered list.
 
