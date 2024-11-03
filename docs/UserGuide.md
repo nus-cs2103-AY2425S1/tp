@@ -8,10 +8,14 @@ MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution 
 
 Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
 
+{: style="page-break-after: always"}
+
 ## Table of Contents
 
 * Table of Contents
 {:toc}
+
+{: style="page-break-after: always"}
 
 ## How to use this User Guide
 Our user guide is tailored to ensure you can fully unlock the potential of MediBase3, whether you're new to MediBase3 or have been using the application for quite some time.
@@ -74,6 +78,8 @@ The following annotated text-boxes are used throught this guide to provide usefu
 > Warns you about potential issues or errors that you might encounter while using MediBase3.
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ## Quick Start
 
@@ -228,8 +234,10 @@ You’re now ready to start using MediBase3.
 For a detailed list of features and instructions, see the [Features](#features) section.  
 For additional assistance or common questions, please refer to our [FAQ](#faq) section.
 
-
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
+
 ## Features
 
 ### Parameter Details
@@ -250,7 +258,7 @@ the constraints of each parameter when used in a command.
 | `GENDER`           | Gender of the patient.                                                                                     | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). <br> - Should not be blank                                                                                                                                                                              | :white_check_mark: `m`<br> :white_check_mark: `F`<br> :x: `Male`                                                                   |
 | `EMAIL`            | Email address of the patient.                                                                              | - Should be in the format `local-part@domain`. <br> - Should not be blank.                                                                                                                                                                                                           | :white_check_mark: `raj@gmail.com`<br>:x: `raj@gmail`                                                                              |
 | `ADDRESS`          | Address of the patient.                                                                                    | - Any value is allowed. <br> - Should not be blank.                                                                                                                                                                                                                                  | :white_check_mark: `Orchard Road, Block 124, #02-01`                                                                               |
-| `PHONE_NUMBER`     | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed.                                                                                                                                         | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
+| `PHONE_NUMBER`     | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - There is no limit on the length of phone number accepted, in order to accommodate international phone numbers.                                                              | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
 | `ALLERGY`          | Allergy of the patient.                                                                                    | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank.                                                                                                                                                                   | :white_check_mark: `Peanuts`<br>:x: `Pe@nuts`                                                                                      |
 | `PRIORITY`         | Priority of the patient.                                                                                   | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. <br> - Should not be blank.                                                                                                                                                                        | :white_check_mark: `NONE` <br> :white_check_mark: `high` <br> :x: `Highpriority`                                                   |
 | `CONDITION`        | Medical Condition of the patient.                                                                          | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. <br> - Should not be blank.                                                                                                                                                          | :white_check_mark: `High Blood Pressure` <br> :x: `@high-bp` <br>:x: `abcde fghijklmnopqrstuvwxyzabcde`                            |
@@ -259,6 +267,8 @@ the constraints of each parameter when used in a command.
 | `APPOINTMENT_NAME` | Description of the appointment with the patient.                                                           | - Must be less than 30 characters. <br> - Only alphanumeric characters are allowed. <br> - Should not be blank                                                                                                                                                                       | :white_check_mark: `Dental` <br> :white_check_mark: `FollowUp1` <br> :x: `Follow-up#1` <br> :x: `abcde fghijklmnopqrstuvwxyzabcde` |
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 {: .alert .alert-info}
 > **:information_source: Notes about the command format:**
@@ -285,6 +295,8 @@ the constraints of each parameter when used in a command.
 > e.g. `add` is not the same as `Add`, `c/` is not the same as `C/`.
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+{: style="page-break-after: always"}
 
 ### Managing Patient
 
@@ -354,7 +366,7 @@ Format: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAI
 > * The NRIC provided must be the full NRIC of the patient to be edited. e.g. `S1234567A` and not `S123`.
 > * **At least one** of the optional fields must be provided. e.g. `edit S1234567A` is invalid.
 > * Existing values will be updated to the given input values.
-> * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel.
+> * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after the patient's details have been edited.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example:
@@ -367,6 +379,8 @@ to `91234567` and `johndoe@example.com` respectively.
 > Editing the patient's `NAME` or `NRIC` will also update their associated appointments in the Appointment List Panel to reflect the new change.
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ### Managing Appointments
 
@@ -401,8 +415,7 @@ Example:
 > * Adding a new appointment will update the Appointment List Panel on the right with the new appointment details.
 > * Appointment List Panel is displayed in chronological order.
 > * Appointment names need not be unique.
-> * Different patients may have overlapping appointment timings, as long as overlapping appointments are not from  
-> the same patient 
+> * Different patients may have overlapping appointment timings, as long as overlapping appointments are not from the same patient 
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -442,21 +455,26 @@ Example:
 * `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200` will delete an appointment on `2024-10-27` from `1100` to `1200` for the patient with NRIC `S1234567A`.
 
 
-  [Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ### Managing Medical Conditions
 
 #### Adding Medical Conditions : `addMedCon`
 
-Adds medical condition to an existing patient in MediBase3.
+Adds medical condition(s) to an existing patient in MediBase3.
 
 Format: `addMedCon i/NRIC c/CONDITION...`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 >
-> * Adds Medical Condition to the patient with the specified `NRIC` in MediBase3.
+> * Adds the specified `CONDITION` to the patient with the specified `NRIC` in MediBase3.
 > * You can add a medical condition to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been added.
+> * **At least one** `CONDITION` must be provided. e.g. `addMedCon i/S1234567A` is invalid.
+> * `CONDITION` is case-insensitive. e.g. `addMedCon i/S1234567A c/Flu` will add the medical condition `FLU` to the patient with the NRIC `S1234567A`.
+> * You cannot add the same `CONDITION` to a patient more than once.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example: 
@@ -465,14 +483,14 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> * User can add more than 1 Medical Condition through using `c/CONDITION` multiple times:
-> * `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+> * You can add multiple medical conditions to a patient by using multiple `c/CONDITION`parameters
+> * e.g. `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Deleting Medical Conditions : `delMedCon`
 
-Deletes Medical Condition from an existing patient in MediBase3.
+Deletes medical condition(s) from an existing patient in MediBase3.
 
 Format: `delMedCon i/NRIC c/CONDITION...`
 
@@ -481,7 +499,9 @@ Format: `delMedCon i/NRIC c/CONDITION...`
 >
 > * Deletes Medical Condition from the patient with the specified `NRIC` in MediBase3.
 > * You can delete a Medical Condition from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been removed.
-> * Patient must have the Medical Condition in order to be able to be deleted, else an error message will show.
+> * **At least one** `CONDITION` must be provided. e.g. `delMedCon i/S1234567A` is invalid.
+> * `CONDITION` is case-insensitive. e.g. `delMedCon i/S1234567A c/Flu` will delete the medical condition `FLU` from the patient with the NRIC `S1234567A`.
+> * Patient must have the given `CONDITION` in order for it to be deleted, else an error message will be displayed.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example:
@@ -490,10 +510,12 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> * User can delete more than 1 Medical Condition through using `c/CONDITION` multiple times:
-> * `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+> * You can delete multiple medical conditions from a patient by using multiple `c/CONDITION`parameters
+> * e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ### Managing Allergies
 
@@ -509,7 +531,8 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
 > * You can add an allergy to a patient even if they are not being currently displayed in the Patient List Panel.
 > * **At least one** `ALLERGY` must be provided. e.g. `addAllergy i/S1234567A` is invalid.
-> * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S123457A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+> * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+> * You cannot add the same `ALLERGY` to a patient more than once.
 > * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
 Example:
@@ -522,12 +545,11 @@ Example:
 > * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 
-
 [Back to Table of Contents](#table-of-contents)
 
 #### Deleting an allergy: `delAllergy`
 
-Deletes an allergy or multiple allergies to an existing patient in MediBase3.
+Deletes an allergy or multiple allergies from an existing patient in MediBase3.
 
 Format: `delAllergy i/NRIC al/ALLERGY…`
 
@@ -537,18 +559,21 @@ Format: `delAllergy i/NRIC al/ALLERGY…`
 > * Deletes the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
 > * **At least one** `ALLERGY` must be provided. e.g. `delAllergy i/S1234567A` is invalid.
 > * `ALLERGY` is case-insensitive. e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
+> * Patient must have the given `ALLERGY` in order for it to be deleted, else an error message will be displayed.
 > * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
-
-{: .alert .alert-success}
-> :bulb: **Tip:**
->
-> * You can delete multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
-> * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 Example:
 * `delAllergy i/S1234567A al/Peanuts` will delete the existing allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
 
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> * You can delete multiple allergies from a patient by using multiple `al/ALLERGY` parameters.
+> * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ### Managing Priority
 
@@ -571,6 +596,8 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
+{: style="page-break-after: always"}
+
 ### Finding Patients
 
 {: .alert .alert-info}
@@ -589,7 +616,7 @@ Format: `list`
 > :bulb: **Tip:**
 >
 > If you have used any other commands under the [Finding Patients](#finding-patients) section to alter the view of the Patient List Panel, 
-> you can use this command to reset to the default view to view all patients!
+> you can use this command to reset to the default view to view all patients.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -616,10 +643,6 @@ Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`
-
 {: .alert .alert-info} 
 > :information_source: **Note:**
 > 
@@ -629,9 +652,11 @@ Examples:
 > * Only **full words** will be matched e.g. `Han` will not match `Hans`
 > * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-> * You can find a patient even if they are not being currently displayed in the Patient List Panel.
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
 
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`
 
 ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -663,10 +688,7 @@ Example:
 
 Finds patients based on their NRIC.
 
-Format: `find NRIC`
-
-Example:
-* `findNric S1234567A` returns `Alex Yeoh`
+Format: `findNric NRIC`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
@@ -675,11 +697,14 @@ Example:
 > * Only the `NRIC` is searched.
 > * The NRIC provided must be the full NRIC of the patient. e.g. `S1234567A` and not `S123`.
 > * Returns an empty Patient List Panel if no matching patients with the given `NRIC` are found.
-> * You can find a patient even if they are not being currently displayed in the Patient List Panel.
 > * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
+Example:
+* `findNric S1234567A` returns `Alex Yeoh`
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ### General Features
 
@@ -742,6 +767,8 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 > Furthermore, certain edits can cause the MediBase3 to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 ## FAQ
 
@@ -840,11 +867,14 @@ This means that your machine is running Java version 17.0.11, which means that J
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
 
+{: style="page-break-after: always"}
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+{: style="page-break-after: always"}
 
 ## Command summary
 
