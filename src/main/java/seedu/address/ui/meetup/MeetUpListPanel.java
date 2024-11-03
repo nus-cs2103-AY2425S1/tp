@@ -49,9 +49,9 @@ public class MeetUpListPanel extends UiPart<Region> {
     }
 
     /**
-     * Checks for overlaps beteen two meetups
+     * Checks for overlaps between two meetups
      */
-    public boolean doDateRangesOverlap(MeetUp meetUp1, MeetUp meetUp2) {
+    private boolean doDateRangesOverlap(MeetUp meetUp1, MeetUp meetUp2) {
         requireNonNull(meetUp1);
         requireNonNull(meetUp2);
         LocalDateTime start1 = meetUp1.getFrom().getDateTime();
