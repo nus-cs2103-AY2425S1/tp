@@ -56,7 +56,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.toLowerCase().equals(otherName.fullName.toLowerCase());
     }
 
     /**
@@ -73,7 +73,7 @@ public class Name {
     }
 
     /**
-     * Compares the {@code fullName} of this Telegram object against another Telegram object.
+     * Compares the {@code fullName} of this Name object against another Name object.
      * Comparison is done using String::CompareTo method.
      */
     public int compareTo(Name otherName) {
