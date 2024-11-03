@@ -151,10 +151,12 @@ public class ModelManager implements Model {
     }
     @Override
     public void addShortCut(ShortCut shortcut) {
+        logger.info("ShortCut Added: " + shortcut.toString());
         addressBook.addShortCut(shortcut);
     }
     @Override
     public void removeShortCut(ShortCut shortcut) {
+        logger.info("ShortCut Removed: " + shortcut.toString());
         addressBook.removeShortCut(shortcut);
     }
     @Override

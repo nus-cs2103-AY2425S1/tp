@@ -56,6 +56,7 @@ class AddShortCutCommandTest {
     @Test
     void toStringMethod() {
         ShortCut shortCut1 = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
-        assertEquals(shortCut1.toString(), "v : Vegan");
+        AddShortCutCommand command = new AddShortCutCommand(shortCut1);
+        assertEquals(command.toString(), "v -> Vegan");
     }
 }

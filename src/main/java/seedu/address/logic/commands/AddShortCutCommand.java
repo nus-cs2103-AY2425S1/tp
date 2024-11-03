@@ -8,7 +8,7 @@ import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.tag.Tag;
 
 /**
- * AddShortCutCommand adds a shortcut to tags
+ * AddShortCutCommand adds a shortcut to applying tags
  */
 public class AddShortCutCommand extends Command {
     public static final String COMMAND_WORD = "addShortCut";
@@ -17,6 +17,10 @@ public class AddShortCutCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New Shortcut added: %1$s";
     public static final String MESSAGE_DUPLICATE_ORDER = "ShortCut with the same alias already exists";
     private ShortCut toAdd;
+
+    /**
+     * Creates a shortcut command to add the specified {@code Shortcut}
+     */
     public AddShortCutCommand(ShortCut shortcut) {
         this.toAdd = shortcut;
     }

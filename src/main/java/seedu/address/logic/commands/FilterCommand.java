@@ -6,12 +6,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.TagsContainsKeywordsPredicate;
-import seedu.address.model.tag.Tag;
 
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {
 
@@ -19,9 +18,13 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters list according to tags "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
-            + Tag.getStringMappings() + "\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " v vg";
+            + "< If the tag 'Vegan' is used > \n"
+            + "Example: " + COMMAND_WORD
+            + " Vegan \n returns all contacts with the tag: Vegan\n"
+            + "< If the shortcut: 'v' is set to 'Vegan' > \n"
+            + "Example: " + COMMAND_WORD
+            + " v \n returns all contacts with tag: Vegan";
 
     private final TagsContainsKeywordsPredicate predicate;
 

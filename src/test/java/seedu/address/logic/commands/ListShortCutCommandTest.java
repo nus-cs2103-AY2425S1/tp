@@ -37,7 +37,7 @@ class ListShortCutCommandTest {
 
     @Test
     void execute_listShortCut_success() throws CommandException {
-        String expectedFormattedShortcuts = "v : Vegan\nvg : Vegetarian";
+        String expectedFormattedShortcuts = "v -> Vegan\nvg -> Vegetarian";
         String expectedFeedbackToUsers = ListShortCutCommand.MESSAGE_SUCCESS + expectedFormattedShortcuts;
         CommandResult result = listShortCutCommand.execute(model);
         assertEquals(expectedFeedbackToUsers, result.getFeedbackToUser());
@@ -46,7 +46,7 @@ class ListShortCutCommandTest {
     @Test
     void formatShortCuts_validShortCuts_correctFormatting() {
         String shortcuts = model.getShortCutList().toString();
-        String expectedFormattedShortcuts = "v : Vegan\nvg : Vegetarian";
+        String expectedFormattedShortcuts = "v -> Vegan\nvg -> Vegetarian";
         String formattedResult = listShortCutCommand.formatShortCuts(shortcuts);
         assertEquals(expectedFormattedShortcuts, formattedResult);
     }
@@ -83,5 +83,11 @@ class ListShortCutCommandTest {
     @Test
     void equals_null_returnsFalse() {
         assertNotEquals(listShortCutCommand, null);
+    }
+
+    @Test
+    void equals_differentInstanceSameClass_returnsTrue() {
+        ListShortCutCommand otherCommand = new ListShortCutCommand();
+        assertEquals(listShortCutCommand, otherCommand);
     }
 }

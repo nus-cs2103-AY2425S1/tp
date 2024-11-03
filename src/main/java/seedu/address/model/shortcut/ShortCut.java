@@ -43,6 +43,6 @@ public class ShortCut {
     }
     @Override
     public String toString() {
-        return alias.toString() + " : " + fullTagName.toString();
+        return alias.toString() + " -> " + fullTagName.toString();
     }
 }

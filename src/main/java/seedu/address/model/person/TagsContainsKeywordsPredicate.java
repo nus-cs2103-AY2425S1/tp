@@ -27,7 +27,7 @@ public class TagsContainsKeywordsPredicate implements Predicate<Person> {
     public TagsContainsKeywordsPredicate(List<String> keywords) {
         List<String> mappedKeywords = new ArrayList<>();
         for (String item : keywords) {
-            String mappedItem = Tag.getDietaryRestrictionsMappings().getOrDefault(item, item);
+            String mappedItem = Tag.getShortCutMappings().getOrDefault(item, item);
             mappedKeywords.add(mappedItem);
         }
         this.keywords = mappedKeywords;

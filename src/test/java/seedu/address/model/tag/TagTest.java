@@ -7,8 +7,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class TagTest {
+import seedu.address.model.shortcut.Alias;
 
+public class TagTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Tag(null));
@@ -27,8 +28,8 @@ public class TagTest {
 
     @Test
     public void hashMapSuccess() {
-        Tag.getDietaryRestrictionsMappings().put("v", "Vegan");
-        Tag.getDietaryRestrictionsMappings().put("vg", "Vegetarian");
+        Tag.getShortCutMappings().put("v", "Vegan");
+        Tag.getShortCutMappings().put("vg", "Vegetarian");
         assertEquals(new Tag("v").toString(), "[Vegan]");
         assertEquals(new Tag("vg").toString(), "[Vegetarian]");
     }
@@ -42,11 +43,10 @@ public class TagTest {
 
     @Test
     public void equalsSuccess() {
-        Tag.getDietaryRestrictionsMappings().put("v", "Vegan");
+        Tag.getShortCutMappings().put("v", "Vegan");
         assertTrue(new Tag("v").equals(new Tag("Vegan")));
-        //testing custom tags
+        assertFalse(new Tag("v").equals(new Alias("v")));
         assertTrue(new Tag("No pork").equals(new Tag("No pork")));
-        //testing against null
         assertFalse(new Tag("Vegan").equals(null));
     }
 }
