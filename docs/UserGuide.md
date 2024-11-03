@@ -154,11 +154,20 @@ Format: `list`
 
 You can add a wedding to the list of weddings.
 
+* Adds a wedding with the specified `NAME & NAME`, `VENUE` and `DATE` to the wedding book.
+* The wedding's details are shown.
+
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE`
 
-<box type="tip" seamless>
+<box type="important" seamless>
 
-**Tip:** Date must be a valid date in the format of **dd/MM/yyyy**
+**IMPORTANT:** Date must be a valid date in the format of **dd/MM/yyyy**
+
+</box>
+
+<box type = "warning" seamless>
+
+Limitations of the add-wedding command: Adding James & June for one wedding and James **Tan** & June for another wedding will be treated as separate weddings. Hence, it is important to ensure that the names are consistent.
 
 </box>
 
@@ -179,6 +188,8 @@ You can delete a person from your list of contacts.
 
 Format: `del-wed w/NAME & NAME` followed by `y` or `n`
 
+<box type="important" seamless>
+
 **IMPORTANT:** `del-wed w/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
 affected.
 
@@ -190,7 +201,7 @@ Examples:
 * `del-wed w/Alice Koh & John Lee` followed by `y` deletes the wedding named `John Doe` from the address book.
 * `del-wed w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
-### Tagging A Contact : `tag-add` / `tag-delete`
+### Tagging A Contact : `tag-add` / `tag-del`
 
 ### Adding Tag(s) to A Contact
 If you need to associate your contacts with a particular wedding, you can use `tag-add` to add them to the wedding.
@@ -199,7 +210,7 @@ Format: `tag-add n/NAME t/TAG...`
 
 <box type="tip" seamless>
 
-**IMPORTANT:** The wedding must already exist in the wedding book to successfully tag a person to a wedding
+**IMPORTANT:** The wedding must already exist in the wedding book to successfully tag a person to a wedding.
 
 **Tip #1:** The name of the tag must match the wedding that you want to add the contact to.
 
@@ -207,7 +218,7 @@ Format: `tag-add n/NAME t/TAG...`
 
 </box>
 
-![tag-add message](images/tagadd1.png)
+![tag-add message](images/tagadd2.png)
 
 Examples:
 *  `tag-add n/John Doe t/Adam and Steve` Adds the tag `Adam and Steve` to John Doe.
@@ -226,7 +237,7 @@ Format: `tag-del n/NAME t/TAG...`
 
 </box>
 
-![tag-delete message](images/tagdeleteMsg.png)
+![tag-delete message](images/tagDelMsg.png)
 
 Examples:
 *  `tag-del n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
@@ -338,7 +349,7 @@ _Details coming soon ..._
 | **Delete**         | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                      |
 | **List**           | `list`                                                                                                                                                                                 |
 | **Edit**           | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                       |
-| **Add Wedding**    | `add-wed w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                           |
+| **Add Wedding**    | `add-wed w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                           |
 | **Delete Wedding** | `del-wed w/NAME & NAME` followed by `y` or `n`                                                                                                                                         |
 | **Clear**          | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                      |
 | **Adding Tags**    | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                               |
