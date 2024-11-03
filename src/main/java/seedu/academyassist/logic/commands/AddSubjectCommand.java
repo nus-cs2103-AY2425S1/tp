@@ -15,13 +15,13 @@ import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 
 /**
- * Adds class(es) to a student in the management system.
+ * Adds subject(s) to a student in the management system.
  */
-public class AddClassCommand extends Command {
+public class AddSubjectCommand extends Command {
 
-    public static final String COMMAND_WORD = "addc";
+    public static final String COMMAND_WORD = "addsubject";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds class(es) to the student with this student id. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds subject(s) to the student with this student id. \n"
             + "Parameters: Student ID (S followed by 5-digit number)\n- "
             + PREFIX_SUBJECT + "Subject \n- "
             + "Example: " + COMMAND_WORD + " S12345 "
@@ -29,7 +29,7 @@ public class AddClassCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "Added %1$s : %2$s to %3$s";
-    public static final String MESSAGE_DUPLICATE_CLASS = "Student is already taking one of those subjects. "
+    public static final String MESSAGE_DUPLICATE_SUBJECT = "Student is already taking one of those subjects. "
             + "Please check the student details and try again";
 
     private final StudentId studentId;
@@ -37,9 +37,9 @@ public class AddClassCommand extends Command {
     private Person student;
 
     /**
-     * Creates an AddClassCommand to add the class(es) to Person with {@code Ic}
+     * Creates an AddSubjectCommand to add the class(es) to Person with {@code Ic}
      */
-    public AddClassCommand(StudentId studentId, Set<Subject> toAddSubjects) {
+    public AddSubjectCommand(StudentId studentId, Set<Subject> toAddSubjects) {
         requireNonNull(studentId);
         requireNonNull(toAddSubjects);
         this.studentId = studentId;
@@ -58,7 +58,7 @@ public class AddClassCommand extends Command {
         student = model.getPersonWithStudentId(studentId);
 
         if (model.personDuplicateClass(toAddSubjects, student)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CLASS);
+            throw new CommandException(MESSAGE_DUPLICATE_SUBJECT);
         }
 
         model.addSubjectsToPerson(toAddSubjects, student);
@@ -74,13 +74,13 @@ public class AddClassCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddClassCommand)) {
+        if (!(other instanceof AddSubjectCommand)) {
             return false;
         }
 
-        AddClassCommand otherAddClassCommand = (AddClassCommand) other;
-        return studentId.equals(otherAddClassCommand.studentId)
-                && toAddSubjects.equals(otherAddClassCommand.toAddSubjects);
+        AddSubjectCommand otherAddSubjectCommand = (AddSubjectCommand) other;
+        return studentId.equals(otherAddSubjectCommand.studentId)
+                && toAddSubjects.equals(otherAddSubjectCommand.toAddSubjects);
     }
 
     @Override

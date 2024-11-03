@@ -10,17 +10,17 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.academyassist.logic.commands.AddClassCommand;
+import seedu.academyassist.logic.commands.AddSubjectCommand;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.testutil.PersonBuilder;
 
-public class AddClassCommandParserTest {
+public class AddSubjectCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClassCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSubjectCommand.MESSAGE_USAGE);
 
-    private AddClassCommandParser parser = new AddClassCommandParser();
+    private AddSubjectCommandParser parser = new AddSubjectCommandParser();
 
 
     @Test
@@ -59,8 +59,8 @@ public class AddClassCommandParserTest {
         Set<Subject> subjects = new HashSet<>();
         subjects.add(new Subject("Math"));
         subjects.add(new Subject("Chinese"));
-        AddClassCommand addClassCommand = new AddClassCommand(new StudentId("S00008"), subjects);
-        assertParseSuccess(parser, "S00008 s/Math s/Chinese", addClassCommand);
+        AddSubjectCommand addSubjectCommand = new AddSubjectCommand(new StudentId("S00008"), subjects);
+        assertParseSuccess(parser, "S00008 s/Math s/Chinese", addSubjectCommand);
     }
 
 
