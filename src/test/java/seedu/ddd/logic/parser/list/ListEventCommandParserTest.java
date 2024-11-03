@@ -1,4 +1,4 @@
-package seedu.ddd.logic.parser;
+package seedu.ddd.logic.parser.list;
 
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
@@ -7,8 +7,8 @@ import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.commands.list.ListEventCommand;
+import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.logic.parser.list.ListEventCommandParser;
 import seedu.ddd.model.event.common.predicate.EventPredicateBuilder;
 
 

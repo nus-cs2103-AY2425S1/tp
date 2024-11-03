@@ -1,6 +1,7 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.Messages.getErrorMessageForPrefix;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
@@ -242,11 +243,11 @@ public class ParserUtil {
      */
     public static void verifyClientParser(ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
-            throw new ParseException("Not allowed to filter by service when you specify -c");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_SERVICE, FLAG_CLIENT));
         } else if (argMultimap.getValue(PREFIX_DESC).isPresent()) {
-            throw new ParseException("Not allowed to filter by description when you specify -c");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_DESC, FLAG_CLIENT));
         } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            throw new ParseException("Not allowed to filter by date when you specify -c");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_DATE, FLAG_CLIENT));
         } else {
 
         }
@@ -263,9 +264,9 @@ public class ParserUtil {
      */
     public static void verifyVendorParser(ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.getValue(PREFIX_DESC).isPresent()) {
-            throw new ParseException("Not allowed to filter by description when you specify -v");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_DESC, FLAG_VENDOR));
         } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            throw new ParseException("Not allowed to filter by date when you specify -v");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_DATE, FLAG_VENDOR));
         } else {
 
         }
@@ -282,15 +283,15 @@ public class ParserUtil {
      */
     public static void verifyEventParser(ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            throw new ParseException("Not allowed to filter by address when you specify -e");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_ADDRESS, FLAG_EVENT));
         } else if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            throw new ParseException("Not allowed to filter by phone when you specify -e");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_PHONE, FLAG_EVENT));
         } else if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
-            throw new ParseException("Not allowed to filter by service when you specify -e");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_SERVICE, FLAG_EVENT));
         } else if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            throw new ParseException("Not allowed to filter by email when you specify -e");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_EMAIL, FLAG_EVENT));
         } else if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            throw new ParseException("Not allowed to filter by tags when you specify -e");
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_TAG, FLAG_EVENT));
         } else {
 
         }

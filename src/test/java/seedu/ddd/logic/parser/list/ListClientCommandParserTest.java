@@ -1,4 +1,4 @@
-package seedu.ddd.logic.parser;
+package seedu.ddd.logic.parser.list;
 
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -6,8 +6,8 @@ import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.commands.list.ListContactCommand;
+import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.logic.parser.list.ListClientCommandParser;
 
 public class ListClientCommandParserTest {
     private ListClientCommandParser parser = new ListClientCommandParser();

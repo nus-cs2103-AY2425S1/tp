@@ -1,4 +1,4 @@
-package seedu.ddd.logic.parser;
+package seedu.ddd.logic.parser.list;
 
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -6,11 +6,13 @@ import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.commands.list.ListContactCommand;
+import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.logic.parser.list.ListVendorCommandParser;
 
-public class ListVendorCommandParserTest {
-    private ListVendorCommandParser parser = new ListVendorCommandParser();
+
+public class ListContactCommandParserTest {
+
+    private ListContactCommandParser parser = new ListContactCommandParser();
 
     @Test
     public void parse_validArgs_returnsListContactCommand() throws ParseException {
@@ -25,3 +27,7 @@ public class ListVendorCommandParserTest {
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedListCommand);
     }
 }
+
+
+
+
