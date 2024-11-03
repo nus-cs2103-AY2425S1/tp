@@ -21,9 +21,12 @@ jobs:
       - name: Merge to master
         run: git checkout --progress --force ${{ github.sha }}
 
-      - name: Install Xvfb and GTK dependencies
+      - name: Install Xvfb and GTK dependencies and start Xvfb
         if: runner.os == 'Linux'
-        run: sudo apt-get install -y xvfb libx11-6 libx11-xcb1 libxext6 libxrender1 libxtst6 libxi6 libfreetype6 libgtk-3-0 libgtk-3-dev
+        run: |
+          sudo apt-get install -y xvfb libx11-6 libx11-xcb1 libxext6 libxrender1 libxtst6 libxi6 libfreetype6 libgtk-3-0 libgtk-3-dev
+          Xvfb :99 -screen 0 1920x1080x24 &
+          export DISPLAY=:99
 
       - name: Run repository-wide tests
         if: runner.os == 'Linux'
