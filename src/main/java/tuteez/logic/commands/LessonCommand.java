@@ -17,16 +17,6 @@ public abstract class LessonCommand extends Command {
     public static final String COMMAND_WORD_DELETE = "deletelesson";
     public static final String COMMAND_WORD_DELETE_ALT = "dellsn";
 
-    public static final String MESSAGE_USAGE = "Add lessons by index in displayed student list: " + COMMAND_WORD_ADD
-            + " (short form: " + COMMAND_WORD_ADD_ALT + ")"
-            + " INDEX l/LESSON [l/LESSON]...\n"
-            + "Example: " + COMMAND_WORD_ADD + " 1 l/monday 0900-1100 l/wednesday 1400-1600\n"
-            + "\n"
-            + "Delete lessons by index in displayed student list: " + COMMAND_WORD_DELETE
-            + " (short form: " + COMMAND_WORD_DELETE_ALT + ")"
-            + " INDEX li/LESSON_INDEX [li/LESSON_INDEX]...\n"
-            + "Example: " + COMMAND_WORD_DELETE + " 1 li/1 li/2";
-
     protected final Index personIndex;
 
     /**

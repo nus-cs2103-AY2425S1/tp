@@ -24,8 +24,12 @@ public class AddLessonCommand extends LessonCommand {
             + "Successfully added:\n%1$s"
             + "Failed to add:\n%2$s";
 
-    private final List<Lesson> lessonsToAdd;
+    public static final String MESSAGE_USAGE = "Add lessons by index in displayed student list: " + COMMAND_WORD_ADD
+            + " (short form: " + COMMAND_WORD_ADD_ALT + ")"
+            + " INDEX l/LESSON [l/LESSON]...\n"
+            + "Example: " + COMMAND_WORD_ADD + " 1 l/monday 0900-1100 l/wednesday 1400-1600\n";
 
+    private final List<Lesson> lessonsToAdd;
 
     /**
      * Adds a Lesson to the student with the specified {@code personIndex} of the displayed list.

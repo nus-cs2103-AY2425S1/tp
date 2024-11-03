@@ -17,6 +17,11 @@ import tuteez.model.person.lesson.Lesson;
 public class DeleteLessonCommand extends LessonCommand {
     public static final String MESSAGE_SUCCESS = "Deleted lessons from %1$s:\n%2$s";
     public static final String MESSAGE_INVALID_LESSON_INDEX = "The following lesson indices are invalid:\n%s";
+    public static final String MESSAGE_USAGE = "Delete lessons by index in displayed student list: "
+            + COMMAND_WORD_DELETE
+            + " (short form: " + COMMAND_WORD_DELETE_ALT + ")"
+            + " INDEX li/LESSON_INDEX [li/LESSON_INDEX]...\n"
+            + "Example: " + COMMAND_WORD_DELETE + " 1 li/1 li/2";
 
     private final List<Index> lessonIndices;
 
