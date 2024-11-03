@@ -249,6 +249,12 @@ _Details coming soon ..._
 
 ## Contact field requirements
 
+### Name
+* Names can contain any characters at all, including spaces, hyphens, and other special characters.
+* Names will be stored in their case-sensitive form, but capitalisation will be ignored when checking for duplicate names.
+  * Eg. Adding a contact as "john Doe" will save them as such, but trying to add a "John Doe" with the same phone number will be marked as a duplicate person and rejected.
+  * To avoid unexpected behaviour with this, it is recommended that users save contacts with consistent capitalisation rules.
+
 ### Phone
 * Phone numbers can only contain 8 numbers, and must begin with a 6, 8, or 9.
 * Spaces in the middle of a phone number are accepted (eg. 9123 4523), as are phone numbers without spaces (eg. 91234523). 
