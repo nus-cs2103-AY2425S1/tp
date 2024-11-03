@@ -13,27 +13,22 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new subclass of DeleteCommand object
  */
-public class DeleteCommandParser implements Parser<DeleteCommand> {
+public class DeleteCommandParser implements Parser<DeleteCommand<?>> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteContactCommand
      * and returns a DeleteCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteCommand parse(String args) throws ParseException {
+    public DeleteCommand<?> parse(String args) throws ParseException {
 
 
-        String[] splitArgs = args.trim().split("\\s+");
-
-        if (args.length() < 1) {
-            throw new ParseException(DELETE_COMMAND_USAGE);
-        } else if (splitArgs.length < 2) {
-            throw new ParseException(MESSAGE_MISSING_INDEX);
-        }
+        String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 2, DeleteCommand.MESSAGE_USAGE);
 
         String entityType = splitArgs[0]; // either "contact, "job" or "company"
         String indexString = splitArgs[1];
 
-        Index index = ParserUtil.parseIndex(indexString);;
+        Index index = ParserUtil.parseIndex(indexString);
 
         switch (entityType) {
         case DeleteContactCommand.ENTITY_WORD:
