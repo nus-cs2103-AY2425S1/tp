@@ -28,12 +28,18 @@ operate than graphical user interfaces commonly found in smartphones.
     * [Showing property listings of a person : `show`](#showing-property-listings-of-a-person--show)
     * [Adding a property listing : `listing add`](#adding-a-property-listing--listing-add)
     * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
+    * [Exporting your contacts : `export`](#exporting-your-contacts--export)
+    * [Sorting all persons : `sort`](#sorting-all-persons--sort)
 * [Saving the data](#saving-the-data)
 * [Editing the data file](#editing-the-data-file)
 * [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 * [FAQ](#faq)
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
+* [Tag Table](#tag-table)
+* [Glossary](#glossary)
+    * [Property Tags](#property-tags)
+    * [Person Tags](#person-tags)
 
 --------------------------------------------------------------------------------------------------------------------
 
