@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -31,8 +33,8 @@ public class NoteCommand extends Command {
 
     public static final String COMMAND_WORD = "note";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the notes of the person identified "
-                                               + "Parameters: NAME (must be an exact match) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the notes of the person identified\n"
+                                               + "Parameters required: NAME (must be an exact match) "
                                                + "[" + PREFIX_APPOINTMENT + "PREVIOUS APPOINTMENT] "
                                                + "[" + PREFIX_REMARK + "REMARK] "
                                                + "[" + PREFIX_MEDICATION + "MEDICATION]...\n"
@@ -40,7 +42,7 @@ public class NoteCommand extends Command {
                                                + PREFIX_APPOINTMENT + "01/01/2025 1200 "
                                                + PREFIX_REMARK + "Allergic to Ibuprofen ";
 
-    public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited Person's Note: %1$s";
+    public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited %1$s's Note: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Name name;
@@ -76,7 +78,7 @@ public class NoteCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_NOTE_SUCCESS, editedPerson.getNote().toString()));
+        return new CommandResult(String.format(MESSAGE_EDIT_NOTE_SUCCESS, name, editedPerson.getNote().toString()));
     }
 
     /**
@@ -93,6 +95,11 @@ public class NoteCommand extends Command {
         if (!updatedAppointment.isEmpty()) {
             updatedAppointment.addAll(personToEditNote.previousAppointments);
         }
+
+        updatedAppointment.forEach(x -> Note.isValidAppointment(x.toString()));
+        List<Appointment> sortedAppointments = new ArrayList<>(updatedAppointment);
+        sortedAppointments.sort(Comparator.comparing(Appointment::getAppointmentDate));
+        updatedAppointment = new HashSet<>(sortedAppointments);
 
         Set<String> updatedMedication = new HashSet<>(noteDescriptor.getMedications()
                 .orElse(personToEditNote.medications));

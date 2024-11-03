@@ -26,7 +26,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -133,11 +133,11 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Name targetName = NAME_FIRST_PERSON;
         String userInput = targetName + PHONE_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                           + NAME_DESC_AMY + TAG_DESC_FRIEND + AGE_DESC_AMY + SEX_DESC_AMY + APPOINTMENT_DESC_ONE;
+                           + NAME_DESC_AMY + TAG_DESC_FRIEND + AGE_DESC_AMY + SEX_DESC_AMY + APPOINTMENT_DESC_TWO;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAppointments(VALID_APPOINTMENT_ONE)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAppointments(VALID_APPOINTMENT_TWO)
                 .withAge(VALID_AGE_AMY).withSex(VALID_SEX_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetName, descriptor);
 
@@ -197,8 +197,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // appointments
-        userInput = targetName + APPOINTMENT_DESC_ONE;
-        descriptor = new EditPersonDescriptorBuilder().withAppointments(VALID_APPOINTMENT_ONE).build();
+        userInput = targetName + APPOINTMENT_DESC_TWO;
+        descriptor = new EditPersonDescriptorBuilder().withAppointments(VALID_APPOINTMENT_TWO).build();
         expectedCommand = new EditCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

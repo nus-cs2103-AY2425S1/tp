@@ -49,10 +49,10 @@ public class NoteTest {
         assertThrows(NullPointerException.class, () -> Note.isValidAppointment(null));
 
         // valid string
-        assertTrue(() -> Note.isValidAppointment(new Appointment("12/12/2023 1200")));
+        assertTrue(() -> Note.isValidAppointment("12/12/2023 1200"));
 
         // invalid string
-        assertFalse(() -> Note.isValidAppointment(new Appointment("31/12/2099 0000")));
+        assertFalse(() -> Note.isValidAppointment("31/12/2099 0000"));
     }
 
     @Test
