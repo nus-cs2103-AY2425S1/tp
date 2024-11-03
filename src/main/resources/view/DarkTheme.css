@@ -396,3 +396,8 @@
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
+
+#autoComplete {
+    -fx-background-color: derive(#1d1d1d, 35%);
+     -fx-border-color: #27272a;
+}

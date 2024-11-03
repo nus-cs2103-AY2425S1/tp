@@ -64,7 +64,7 @@ public class AddressBookParser {
             return new AddCommandParser().parse(arguments);
 
         case ArchiveCommand.COMMAND_WORD:
-            return new ArchiveCommandParser().parse(userInput);
+            return new ArchiveCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -82,7 +82,7 @@ public class AddressBookParser {
             return new ListCommand();
 
         case LoadCommand.COMMAND_WORD:
-            return new LoadCommandParser().parse(userInput);
+            return new LoadCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
