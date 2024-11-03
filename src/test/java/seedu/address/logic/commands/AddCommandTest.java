@@ -204,6 +204,11 @@ public class AddCommandTest {
         public void setTagsCategory(Tag t, TagCategory cat) {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public TagCategory getTagCategory(Tag t) {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**
