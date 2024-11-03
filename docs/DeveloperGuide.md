@@ -348,12 +348,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case 3: View contacts**
+**Use case 3: View all contacts**
 
 **MSS**
 
 1. User requests to view the list of contacts.
-2. Systems displays list of contacts.
+2. The system displays a list of all contacts.
+3. User can scroll through the list to see all the contact listed.
+4. User can click on a contact to view more details.
 
     Use case ends.
 
@@ -447,15 +449,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *a. If the user exists the application without confirming, the event is kept and the use case ends.
 
-**Use case 7: View all upcoming events**
+**Use case 7: View all events**
 
 **MSS**
 
 1. User lists all events.
-2. The system displays a list of all upcoming events.
-3. For each event, the event name, date and time, location and attendees are displayed.
-4. User can scroll through the list to see all the events listed.
-5. User can click on an event to view more details.
+2. The system displays a list of all events.
+3. User can scroll through the list to see all the events listed.
+4. User can click on an event to view more details.
 
     Use case ends
 
