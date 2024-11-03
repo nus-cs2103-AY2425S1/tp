@@ -23,11 +23,6 @@ public class Ingredient extends Product {
      * @return A formatted string with ingredient details.
      */
     @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
     public String toString() {
         return super.toString();
     }
