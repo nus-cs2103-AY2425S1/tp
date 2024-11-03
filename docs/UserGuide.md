@@ -16,6 +16,7 @@ CareLink is a desktop address book application targeted towards independent Geri
     - [Viewing help : `help`](#viewing-help--help)
     - [Adding a person: `add`](#adding-a-person-add)
     - [Linking a patient and a caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
+    - [Deleting a link between a patient and a caregiver: `deletelink`](#deleting-a-link-between-patient-and-a-caregiver-deletelink)
     - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
     - [Listing all persons : `list`](#listing-all-persons--list)
     - [Editing a person : `edit`](#editing-a-person--edit)
@@ -129,15 +130,29 @@ Format: `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC`
 
 Examples:
 
-- `link patient/S6283947C caregiver/S7012345B`
-- `link caregiver/S7012345B patient/S6482983A`
+- `link patient/S6283947C caregiver/S6382947A`
+- `link caregiver/S6382947A patient/S7193475F`
 
 ![Link command example](images/linkcommandexample.png)
 ![Link command success](images/linkcommandsucceed.png)
 
+### Deleting a link between patient and a caregiver: `deletelink`
+
+Removes the link between patient and caregiver in CareLink.
+
+Format: `deletelink patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC`
+
+Examples:
+
+- `deletelink patient/S6283947C caregiver/S6382947A`
+- `deletelink caregiver/S6382947A patient/S7193475F`
+
+![Deletelink command example](images/DeleteLinkCommand.png)
+![Deletelink command success](images/DeleteLinkCommandSuccess.png)
+
 ### Adding Notes to a Person: `addnote`
 
-Adds notes to existing person in the Care Link app.
+Adds notes to existing person in the CareLink app.
 
 Format: `addnote nric/NRIC note/NOTES`
 
@@ -345,6 +360,7 @@ _Details coming soon ..._
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Link**             | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S6283947C caregiver/S7012345B`                                                          |
+| **Deletelink**       | `deletelink patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `deletelink patient/S6283947C caregiver/S6382947A`                                              |
 | **Addnote**          | `addnote nric/NRIC note/NOTES` <br> e.g. `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`                                                      |
 | **Clear**            | `clear`                                                                                                                                                              |
 | **Delete**           | `delete NRIC`<br> e.g., `delete S6483749D`                                                                                                                           |
