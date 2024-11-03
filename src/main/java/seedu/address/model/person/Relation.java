@@ -8,7 +8,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * The relation can be one of the following: "H" for husband, "W" for wife, "U" for unknown.
  * This class enforces the following constraints:
  * Relation should be either "H", "W", or "U".</li>
- * The relation should be represented with only one of the aforementioned characters.</li>
  */
 public class Relation {
 
@@ -63,7 +62,6 @@ public class Relation {
      * @return true if the string is a valid relation; false otherwise.
      */
     public static boolean isValidRelation(String str) {
-
         if (!str.matches(VALIDATION_REGEX)) {
             return false;
         }
@@ -84,7 +82,15 @@ public class Relation {
      */
     @Override
     public String toString() {
-        return relation;
+        if (relation.equals("U")) {
+            return "Unknown";
+
+        } else if (relation.equals("H")) {
+            return "Husband";
+
+        } else {
+            return "Wife";
+        }
     }
 
     /**
@@ -116,5 +122,4 @@ public class Relation {
     public int hashCode() {
         return relation.hashCode();
     }
-
 }

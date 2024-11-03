@@ -19,7 +19,7 @@ public class DeleteVendorCommand extends Command {
     public static final String COMMAND_WORD = "delete_vendor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the vendor identified by the index number used in the displayed vendor list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

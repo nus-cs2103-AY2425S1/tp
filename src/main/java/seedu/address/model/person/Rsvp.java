@@ -4,36 +4,30 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the RSVP status for a person.
- * The RSVP status can be one of the following: "PENDING", "ACCEPTED", "DECLINED".
+ * Represents the RSVP status of a person to the wedding.
+ * The RSVP status can be one of the following: 'P' for pending, 'A' for accepted or 'D' for declined.
  * This class enforces the following constraints:
- * RSVP Status should be either "PENDING", "ACCEPTED", or "DECLINED".</li>
- * The first character of the RSVP status must not be a whitespace.</li>
+ * RSVP should be either "P", "A", or "D".</li>
  */
 public class Rsvp {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "RSVP Status should be 'PENDING', 'ACCEPTED' or 'DECLINED'";
-
+            "Relation should be 'P' for pending, 'A' for accepted or 'D' for declined!";
     /**
      * Represents the RSVP status of a guest.
      *
      * The possible statuses are:
-     * - PENDING
-     * - ACCEPTED
-     * - DECLINED
+     * - P: Pending
+     * - A: Accepted
+     * - D: Declined
      */
     public enum Status {
-        PENDING, ACCEPTED, DECLINED
+        P, A, D;
     }
 
-    /**
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alpha}]";
 
-    public final String value;
+    public final String rsvp;
 
     /**
      * Constructs an {@code Rsvp} object with the specified RSVP status.
@@ -45,7 +39,7 @@ public class Rsvp {
     public Rsvp(String rsvp) {
         requireNonNull(rsvp);
         checkArgument(isValidRsvp(rsvp), MESSAGE_CONSTRAINTS);
-        this.value = rsvp.toUpperCase();
+        this.rsvp = rsvp.toUpperCase();
     }
 
     /**
@@ -55,7 +49,6 @@ public class Rsvp {
      * @return true if the string is a valid RSVP status; false otherwise.
      */
     public static boolean isValidRsvp(String str) {
-
         if (!str.matches(VALIDATION_REGEX)) {
             return false;
         }
@@ -76,7 +69,15 @@ public class Rsvp {
      */
     @Override
     public String toString() {
-        return value;
+        if (rsvp.equals("P")) {
+            return "Pending";
+
+        } else if (rsvp.equals("A")) {
+            return "Accepted";
+
+        } else {
+            return "Declined";
+        }
     }
 
     /**
@@ -96,7 +97,7 @@ public class Rsvp {
             return false;
         }
 
-        return value.equals(otherName.value);
+        return rsvp.equals(otherName.rsvp);
     }
 
     /**
@@ -106,7 +107,7 @@ public class Rsvp {
      */
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return rsvp.hashCode();
     }
 
 }

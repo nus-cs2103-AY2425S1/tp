@@ -7,7 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGuests.AVA;
-import static seedu.address.testutil.TypicalGuests.BRIAN;
+import static seedu.address.testutil.TypicalVendors.BRIAN;
+
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,10 +54,17 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicateGuest_throwsDuplicatePersonException() {
         uniquePersonList.add(AVA);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(AVA));
     }
+
+    @Test
+    public void add_duplicateVendor_throwsDuplicatePersonException() {
+        uniquePersonList.add(BRIAN);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(BRIAN));
+    }
+
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
@@ -157,9 +165,15 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<Person> listWithDuplicatePersons = Arrays.asList(AVA, AVA);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    public void setPersons_listWithDuplicateGuests_throwsDuplicatePersonException() {
+        List<Person> listWithDuplicateGuests = Arrays.asList(AVA, AVA);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicateGuests));
+    }
+
+    @Test
+    public void setPersons_listWithDuplicateVendors_throwsDuplicatePersonException() {
+        List<Person> listWithDuplicateVendors = Arrays.asList(BRIAN, BRIAN);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicateVendors));
     }
 
     @Test

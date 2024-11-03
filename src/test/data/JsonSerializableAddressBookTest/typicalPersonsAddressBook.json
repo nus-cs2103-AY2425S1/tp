@@ -6,7 +6,7 @@
     "phone": "94351253",
     "email": "ava.johnson@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "rsvp": "ACCEPTED",
+    "rsvp": "A",
     "relation": "W",
     "tags": ["friends"]
   }, {
@@ -15,7 +15,7 @@
     "phone": "98765432",
     "email": "brian.lee@example.com",
     "address": "311, Clementi Ave 2, #02-25",
-    "rsvp": "PENDING",
+    "rsvp": "P",
     "relation": "H",
     "tags": ["owesMoney", "friends"]
   }, {
@@ -24,7 +24,7 @@
     "phone": "95352563",
     "email": "cameron.white@example.com",
     "address": "wall street",
-    "rsvp": "DECLINED",
+    "rsvp": "D",
     "relation": "W",
     "tags": [ ]
   }, {
@@ -33,7 +33,7 @@
     "phone": "87652533",
     "email": "david.brown@example.com",
     "address": "10th street",
-    "rsvp": "ACCEPTED",
+    "rsvp": "A",
     "relation": "H",
     "tags": ["friends"]
   }, {
@@ -42,7 +42,7 @@
     "phone": "9482224",
     "email": "ella.thompson@example.com",
     "address": "michegan ave",
-    "rsvp": "PENDING",
+    "rsvp": "P",
     "relation": "W",
     "tags": [ ]
   }, {
@@ -51,7 +51,7 @@
     "phone": "9482442",
     "email": "gavin.kim@example.com",
     "address": "4th street",
-    "rsvp": "ACCEPTED",
+    "rsvp": "A",
     "relation": "H",
     "tags": [ ]
   }]

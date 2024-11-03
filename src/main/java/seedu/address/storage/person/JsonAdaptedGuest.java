@@ -48,7 +48,7 @@ public class JsonAdaptedGuest extends JsonAdaptedPerson {
      */
     public JsonAdaptedGuest(Guest source) {
         super(source);
-        this.rsvp = source.getRsvp().value;
+        this.rsvp = source.getRsvp().rsvp;
         this.relation = source.getRelation().relation;
     }
 

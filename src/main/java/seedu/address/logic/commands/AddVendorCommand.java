@@ -42,7 +42,7 @@ public class AddVendorCommand extends Command {
             + PREFIX_TAG + "responsible";
 
     public static final String MESSAGE_SUCCESS = "New vendor added: %1$s";
-    public static final String MESSAGE_DUPLICATE_VENDOR = "This vendor already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_VENDOR = "This vendor already exists in the vendor list!";
 
     private final Vendor toAdd;
 

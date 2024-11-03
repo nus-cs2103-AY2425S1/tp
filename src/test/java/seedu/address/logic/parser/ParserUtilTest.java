@@ -52,7 +52,7 @@ public class ParserUtilTest {
     private static final String VALID_COMPANY = "The Florist";
     private static final String VALID_BUDGET = "1000";
     private static final String VALID_RELATION = "H";
-    private static final String VALID_RSVP = "ACCEPTED";
+    private static final String VALID_RSVP = "A";
 
     private static final String WHITESPACE = " \t\r\n";
 

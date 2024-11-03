@@ -65,7 +65,7 @@ public class GuestTest {
         assertEquals(new Email(VALID_EMAIL_BOB), guest.getEmail());
         assertEquals(new Address(VALID_ADDRESS_BOB), guest.getAddress());
         assertEquals(new HashSet<>(Collections.singletonList(new Tag(VALID_TAG_HUSBAND))), guest.getTags());
-        assertEquals(new Rsvp("PENDING"), guest.getRsvp()); // Check default RSVP
+        assertEquals(new Rsvp("P"), guest.getRsvp()); // Check default RSVP
         assertEquals(new Relation(VALID_RELATION_BOB), guest.getRelation());
     }
 
@@ -79,7 +79,7 @@ public class GuestTest {
         assertEquals(new Email(VALID_EMAIL_BOB), guest.getEmail());
         assertEquals(new Address(VALID_ADDRESS_BOB), guest.getAddress());
         assertEquals(new HashSet<>(Collections.singletonList(new Tag(VALID_TAG_HUSBAND))), guest.getTags());
-        assertEquals(new Rsvp("PENDING"), guest.getRsvp()); // Check default RSVP
+        assertEquals(new Rsvp("P"), guest.getRsvp()); // Check default RSVP
         assertEquals(new Relation("U"), guest.getRelation()); // Check default relation
     }
 

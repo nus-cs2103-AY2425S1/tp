@@ -60,7 +60,7 @@ public class PersonListCard extends UiPart<Region> {
 
         if (person instanceof Guest) {
             Guest g = (Guest) person;
-            Label rsvpLabel = new Label("RSVP: " + g.getRsvp().value);
+            Label rsvpLabel = new Label("RSVP: " + g.getRsvp());
             addLabel(rsvpLabel);
 
             Label relationLabel = new Label("Relation: " + g.getRelation());

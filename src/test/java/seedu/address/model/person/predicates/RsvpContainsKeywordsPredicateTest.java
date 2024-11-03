@@ -45,29 +45,29 @@ public class RsvpContainsKeywordsPredicateTest {
     public void test_rsvpContainsKeywords_returnsTrue() {
         // One keyword
         RsvpContainsKeywordsPredicate predicate =
-                new RsvpContainsKeywordsPredicate(Collections.singletonList("accepted"));
-        assertTrue(predicate.test(new GuestBuilder().withRsvp("accepted").build()));
+                new RsvpContainsKeywordsPredicate(Collections.singletonList("a"));
+        assertTrue(predicate.test(new GuestBuilder().withRsvp("a").build()));
 
         // Only one matching keyword
-        predicate = new RsvpContainsKeywordsPredicate(Arrays.asList("accepted", "declined"));
-        assertTrue(predicate.test(new GuestBuilder().withRsvp("accepted").build()));
+        predicate = new RsvpContainsKeywordsPredicate(Arrays.asList("a", "d"));
+        assertTrue(predicate.test(new GuestBuilder().withRsvp("a").build()));
     }
 
     @Test
     public void test_rsvpDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         RsvpContainsKeywordsPredicate predicate = new RsvpContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new GuestBuilder().withRsvp("accepted").build()));
+        assertFalse(predicate.test(new GuestBuilder().withRsvp("a").build()));
 
         // Non-matching keyword
         predicate = new RsvpContainsKeywordsPredicate(Arrays.asList("accepted"));
-        assertFalse(predicate.test(new GuestBuilder().withRsvp("pending").build()));
+        assertFalse(predicate.test(new GuestBuilder().withRsvp("p").build()));
 
         // Keywords match name, phone, email and address, but does not match rsvp
         predicate = new RsvpContainsKeywordsPredicate(
                 Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new GuestBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withRsvp("accepted").build()));
+                .withEmail("alice@email.com").withAddress("Main Street").withRsvp("a").build()));
 
         // Non-guest
         predicate = new RsvpContainsKeywordsPredicate(Arrays.asList("accepted"));

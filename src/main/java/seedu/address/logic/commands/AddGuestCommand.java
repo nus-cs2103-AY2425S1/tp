@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -27,19 +28,23 @@ public class AddGuestCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_RSVP + "RSVP_STATUS] "
+            + "[" + PREFIX_RSVP + "RSVP] "
+            + "[" + PREFIX_RELATION + "RELATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "RSVP should be 'P' for pending, 'A' for accepted or 'D' for declined!\n"
+            + "Relation should be 'H' for husband, 'W' for wife or 'U' for unknown!\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_RSVP + "accepted "
+            + PREFIX_RSVP + "A "
+            + PREFIX_RELATION + "U "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the guest list!";
 
     private final Guest toAdd;
 

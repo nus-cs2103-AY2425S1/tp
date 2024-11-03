@@ -60,4 +60,4 @@ Here are the members of our team!
 [[portfolio](team/hovanleong.md)]
 
 * Role: Developer
-* Responsibilities: Documentation
+* Responsibilities: Documentation, Testing
