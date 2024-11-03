@@ -9,7 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGuests.AVA;
 import static seedu.address.testutil.TypicalVendors.BRIAN;
 
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
