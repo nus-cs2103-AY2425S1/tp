@@ -246,7 +246,7 @@ public class ParserUtil {
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        String[] tagSplit = trimmedRole.split(" - ");
+        String[] tagSplit = trimmedRole.split("-");
         String roleType = tagSplit[0];
         return switch (roleType.toLowerCase()) {
         case "athlete" -> {
