@@ -56,9 +56,10 @@ public class AddGradeCommand extends Command {
     private boolean showAssignments;
 
 
-
     private AddGradeCommand(boolean showAssignments) {
-        this("dummy", 0f, "");
+        this.personName = null;
+        this.score = null;
+        this.assignmentName = null;
         this.showAssignments = showAssignments;
     }
 
@@ -120,15 +121,20 @@ public class AddGradeCommand extends Command {
 
     @Override
     public String toString() {
+        if (showAssignments) {
+            return "Show assignments command";
+        }
+
         return personName + " " + assignmentName + " " + score;
     }
 
     @Override
     public boolean equals(Object other) {
         if (other instanceof AddGradeCommand otherCommand) {
-            return otherCommand.personName.equals(personName)
+            return Objects.equals(otherCommand.personName, personName)
                     && Objects.equals(otherCommand.assignmentName, assignmentName)
-                    && Objects.equals(otherCommand.score, score);
+                    && Objects.equals(otherCommand.score, score)
+                    && otherCommand.showAssignments == showAssignments;
         }
         return false;
     }
