@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_NAME;
 import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
 import static seedu.ddd.testutil.contact.TypicalContacts.BENSON;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
@@ -15,6 +16,7 @@ import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_ID;
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_NAME;
 import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_LIST;
 import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_2;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME_1;
 import static seedu.ddd.testutil.event.TypicalEvents.VALID_EVENT;
 import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_A;
 import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_B;
@@ -63,22 +65,27 @@ public class EventTest {
     public void isSameEvent() {
         assertTrue(WEDDING_A.isSameEvent(WEDDING_A));
 
-        // different description
+        // different name
         Event copied = new EventBuilder(WEDDING_A)
+                .withName(VALID_EVENT_NAME_1)
+                .build();
+        assertFalse(WEDDING_A.isSameEvent(copied));
+
+        // different description
+        copied = new EventBuilder(WEDDING_A)
             .withDescription(VALID_EVENT_DESCRIPTION_2)
             .build();
-        assertFalse(WEDDING_A.isSameEvent(copied));
+        assertTrue(WEDDING_A.isSameEvent(copied));
 
         // different clients
         copied = new EventBuilder(WEDDING_A)
             .withClients(ALICE)
             .build();
-        assertFalse(WEDDING_A.isSameEvent(copied));
+        assertTrue(WEDDING_A.isSameEvent(copied));
 
-        // same description and clients
+        // same name
         copied = new EventBuilder(WEDDING_B)
-            .withClients(WEDDING_A.getClients())
-            .withDescription(WEDDING_A.getDescription().description)
+            .withName(WEDDING_A.getName().fullName)
             .build();
         assertTrue(WEDDING_A.isSameEvent(copied));
 
@@ -101,23 +108,29 @@ public class EventTest {
         Event copied = new EventBuilder(WEDDING_A).build();
         assertEquals(WEDDING_A, copied);
 
+        // different name
+        copied = new EventBuilder(WEDDING_A)
+                .withName(VALID_CLIENT_NAME)
+                .build();
+        assertNotEquals(WEDDING_A, copied);
+
         // different clients
         copied = new EventBuilder(WEDDING_A)
-            .withClients(ALICE)
-            .build();
-        assertNotEquals(WEDDING_A, copied);
+                .withClients(ALICE)
+                .build();
+        assertEquals(WEDDING_A, copied);
 
         // different vendors
         copied = new EventBuilder(WEDDING_A)
-            .withVendors(BENSON)
-            .build();
-        assertNotEquals(WEDDING_A, copied);
+                .withVendors(BENSON)
+                .build();
+        assertEquals(WEDDING_A, copied);
 
         // different description
         copied = new EventBuilder(WEDDING_A)
-            .withDescription(WEDDING_B.getDescription().description)
-            .build();
-        assertNotEquals(WEDDING_A, copied);
+                .withDescription(WEDDING_B.getDescription().description)
+                .build();
+        assertEquals(WEDDING_A, copied);
     }
 
 

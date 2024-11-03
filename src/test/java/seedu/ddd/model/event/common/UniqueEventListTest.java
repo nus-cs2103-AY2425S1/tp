@@ -50,21 +50,9 @@ public class UniqueEventListTest {
     public void contains_contactWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEventList.add(WEDDING_A);
         Event editedWeddingA = new EventBuilder(WEDDING_B)
-            .withDescription(WEDDING_A.getDescription().description)
-            .withClients(WEDDING_A.getClients())
+            .withName(WEDDING_A.getName().fullName)
             .build();
         assertTrue(uniqueEventList.contains(editedWeddingA));
-    }
-
-    @Test
-    public void containsName_eventNotInList_returnFalse() {
-        assertFalse(uniqueEventList.containsName(WEDDING_A.getName()));
-    }
-
-    @Test
-    public void containsName_eventInList_returnTrue() {
-        uniqueEventList.add(WEDDING_A);
-        assertTrue(uniqueEventList.containsName(WEDDING_A.getName()));
     }
 
     @Test

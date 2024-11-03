@@ -162,22 +162,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasEventName_validEvent_returnsTrue() {
-        modelManager = new ModelManager(getTypicalAddressBook(), modelManager.getUserPrefs());
-        assertTrue(modelManager.hasEventName(WEDDING_A.getName()));
-    }
-
-    @Test
-    public void hasEventName_invalidEvent_returnsFalse() {
-        // empty addressbook
-        assertFalse(modelManager.hasEventName(WEDDING_A.getName()));
-
-        modelManager = new ModelManager(getTypicalAddressBook(), modelManager.getUserPrefs());
-        assertTrue(modelManager.hasEventName(WEDDING_A.getName()));
-        assertFalse(modelManager.hasEventName(VALID_EVENT.getName()));
-    }
-
-    @Test
     public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
     }
