@@ -9,7 +9,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
- * Container for user and event visible messages.
+ * Container for user visible messages.
  */
 public class Messages {
 

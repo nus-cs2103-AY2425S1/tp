@@ -34,7 +34,7 @@ public class DeleteEventByIndexCommand extends DeleteEventCommand {
 
         model.deleteEvent(eventToDelete);
         return new CommandResult(
-                String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
+                String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)), true);
     }
 
     @Override

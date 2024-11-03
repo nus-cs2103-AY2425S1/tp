@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertEventCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -37,7 +37,7 @@ public class DeleteEventByNameCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
 
-        assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
+        assertEventCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class DeleteEventByNameCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
 
-        assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
+        assertEventCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class DeleteEventByNameCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
 
-        assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
+        assertEventCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
