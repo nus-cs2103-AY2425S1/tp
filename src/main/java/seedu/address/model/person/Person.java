@@ -82,6 +82,14 @@ public class Person {
     }
 
     /**
+     * Checks if this Person already has a specific Tag
+     * @param target The Tag to check
+     */
+    public boolean hasTag(Tag target) {
+        return tags.contains(target);
+    }
+
+    /**
      * Returns true if both persons have the same phone number.
      * This defines a weaker notion of equality between two persons.
      */

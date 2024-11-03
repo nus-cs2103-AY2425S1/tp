@@ -87,6 +87,7 @@ public class UntagCommand extends Command {
     public Set<Tag> removeTags(Set<Tag> originalTags, Set<Tag> tagsToRemove) throws CommandException {
         Set<Tag> modifiedTags = new HashSet<>(originalTags);
 
+        //Collecting Tags from tagsToRemove which don't exist in originalTags
         Set<Tag> nonExistentTags = tagsToRemove.stream()
                 .filter(tag -> !originalTags.contains(tag))
                 .collect(Collectors.toSet());
