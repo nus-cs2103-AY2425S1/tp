@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import careconnect.logic.commands.CommandTestUtil;
 import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.person.Address;
 import careconnect.model.person.Email;
@@ -199,18 +200,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseLogDate_validValueWithoutWhitespace_returnsDate() throws Exception {
-        Date expectedDate = Date.from(
-                LocalDateTime.of(2020, 12, 31, 12, 0)
-                        .atZone(ZoneId.systemDefault()).toInstant());
-        assertEquals(expectedDate, ParserUtil.parseLogDate("2020-12-31 12:00"));
+        assertEquals(CommandTestUtil.DATE, ParserUtil.parseLogDate("2020-12-31 12:00"));
     }
 
     @Test
     public void parseLogDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
-        Date expectedDate = Date.from(
-                LocalDateTime.of(2020, 12, 31, 12, 0)
-                        .atZone(ZoneId.systemDefault()).toInstant());
-        assertEquals(expectedDate, ParserUtil.parseLogDate("  2020-12-31 12:00  "));
+        assertEquals(CommandTestUtil.DATE, ParserUtil.parseLogDate("  2020-12-31 12:00  "));
     }
 
     @Test

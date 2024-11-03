@@ -1,5 +1,6 @@
 package careconnect.logic.commands;
 import static careconnect.testutil.Assert.assertThrows;
+import static careconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static careconnect.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -35,7 +36,7 @@ public class DeleteLogCommandTest {
 
     @Test
     public void execute_invalidIndex_logDeleteFailed() {
-        assertThrows(CommandException.class, () -> new DeleteLogCommand(Index.fromZeroBased(0),
+        assertThrows(CommandException.class, () -> new DeleteLogCommand(INDEX_FIRST_PERSON,
                         Index.fromZeroBased(1000)).execute(model));
         assertThrows(CommandException.class, () -> new DeleteLogCommand(Index.fromZeroBased(1000),
                 Index.fromZeroBased(0)).execute(model));
@@ -57,7 +58,7 @@ public class DeleteLogCommandTest {
         Person validPerson = model.getFilteredPersonList().get(0);
         Log logToDelete = validPerson.getLogs().get(0);
 
-        DeleteLogCommand deleteLogCommand = new DeleteLogCommand(Index.fromZeroBased(0),
+        DeleteLogCommand deleteLogCommand = new DeleteLogCommand(INDEX_FIRST_PERSON,
                 Index.fromZeroBased(0));
         deleteLogCommand.execute(model);
         CommandResult commandResult = new ConfirmationYesCommand().execute(model);

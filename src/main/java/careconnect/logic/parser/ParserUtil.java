@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import careconnect.commons.core.index.Index;
@@ -139,9 +141,18 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         Date parsedDate;
+
+        Pattern strict_date_pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         sdf.setLenient(false); // Disable lenient parsing, strict checking
+
         try {
+            // Check if the date matches the exact pattern
+            Matcher matcher = strict_date_pattern.matcher(trimmedDate);
+            if (!matcher.matches()) {
+                throw new ParseException(Log.MESSAGE_CONSTRAINTS);
+            }
+
             // Attempt to parse the date string
             parsedDate = sdf.parse(trimmedDate);
         } catch (java.text.ParseException e) {

@@ -1,5 +1,6 @@
 package careconnect.logic.commands;
 import static careconnect.testutil.Assert.assertThrows;
+import static careconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static careconnect.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,27 +20,23 @@ import careconnect.model.log.Log;
 import careconnect.model.person.Person;
 
 public class AddLogCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Log log1 = new Log(CommandTestUtil.DATE, "test1");
+    private Log log2 = new Log(CommandTestUtil.DATE, "test2");
 
     @Test
     public void constructor_nullParams_throwsNullPointerException() {
         assertThrows(NullPointerException.class,
                 () -> new AddLogCommand(null, new Log("empty index")));
         assertThrows(NullPointerException.class,
-                () -> new AddLogCommand(Index.fromZeroBased(0), null));
+                () -> new AddLogCommand(INDEX_FIRST_PERSON, null));
     }
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Date date = Date.from(
-            LocalDateTime.of(2020, 12, 31, 12, 0)
-                    .atZone(ZoneId.systemDefault()).toInstant());
-    private Log log1 = new Log(date, "test1");
-    private Log log2 = new Log(date, "test2");
 
     @Test
     public void execute_logAcceptedByModel_addSuccessful() throws Exception {
         Person validPerson = model.getFilteredPersonList().get(0);
         CommandResult commandResult =
-                new AddLogCommand(Index.fromZeroBased(0), log1).execute(model);
+                new AddLogCommand(INDEX_FIRST_PERSON, log1).execute(model);
 
         assertEquals(String.format(AddLogCommand.MESSAGE_SUCCESS, log1.getRemark(),
                         validPerson.getName()),
@@ -77,7 +74,7 @@ public class AddLogCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddLogCommand addLogCommand = new AddLogCommand(Index.fromZeroBased(0), log1);
+        AddLogCommand addLogCommand = new AddLogCommand(INDEX_FIRST_PERSON, log1);
         String expected = AddLogCommand.class.getCanonicalName() + "{toAddLog=" + log1 + "}";
         assertEquals(expected, addLogCommand.toString());
     }

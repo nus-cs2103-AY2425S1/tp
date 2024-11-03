@@ -1,5 +1,6 @@
 package careconnect.model.log;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -81,7 +82,15 @@ public class Log implements Comparable<Log> {
         }
 
         return this.remark.equals(otherLog.remark)
-                && this.date.equals(otherLog.date);
+                && truncateToMinutes(this.date).equals(truncateToMinutes(otherLog.date));
+    }
+
+    private static Date truncateToMinutes(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
     }
 
     @Override

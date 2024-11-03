@@ -1,16 +1,21 @@
 package careconnect.logic.commands;
 
 import static careconnect.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static careconnect.logic.parser.CliSyntax.PREFIX_DATE;
 import static careconnect.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static careconnect.logic.parser.CliSyntax.PREFIX_NAME;
 import static careconnect.logic.parser.CliSyntax.PREFIX_PHONE;
+import static careconnect.logic.parser.CliSyntax.PREFIX_REMARK;
 import static careconnect.logic.parser.CliSyntax.PREFIX_TAG;
 import static careconnect.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import careconnect.commons.core.index.Index;
@@ -37,6 +42,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String INDEX_FIRST_PERSON = "1";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -47,15 +53,25 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String LOG_DATE = " " + PREFIX_DATE + "2020-12-31 12:00";
+    public static final String LOG_REMARK = " " + PREFIX_REMARK + "Meeting 1";
 
+    public static final String INVALID_INDEX_DESC = " " + "0"; // '0' not allowed for indexes
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2020-12-31 12:00pm"; //
+    // invalid date format - 24 hours used
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + " "; // empty string not allowed for remarks
+    
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final Date DATE = Date.from(
+            LocalDateTime.of(2020, 12, 31, 12, 0)
+                    .atZone(ZoneId.systemDefault()).toInstant());
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
