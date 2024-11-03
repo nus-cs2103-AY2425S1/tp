@@ -48,27 +48,41 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     public void initialize() {
-        commandTextField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.UP && !event.isShiftDown()) {
-                String previousCommand = commandHistory.getPreviousCommand();
-                if (previousCommand != null) {
-                    commandTextField.setText(previousCommand);
-                    commandTextField.positionCaret(previousCommand.length()); // Move cursor to end
-                }
-            }
-            if (event.getCode() == KeyCode.DOWN && !event.isShiftDown()) {
-                String nextCommand = commandHistory.getNextCommand();
-                if (nextCommand != null) {
-                    commandTextField.setText(nextCommand);
-                    commandTextField.positionCaret(nextCommand.length()); // Move cursor to end
-                }
-            }
-            if (event.getCode() == KeyCode.ENTER) {
-                handleCommandEntered();
-            }
-        });
+//        commandTextField.setOnKeyPressed(event -> {
+//            if (event.getCode() == KeyCode.UP && !event.isShiftDown()) {
+//               handleUpEntered();
+//            }
+//            if (event.getCode() == KeyCode.DOWN && !event.isShiftDown()) {
+//                handleDownEntered();
+//            }
+//            if (event.getCode() == KeyCode.ENTER) {
+//                handleCommandEntered();
+//            }
+//        });
     }
 
+    /**
+     * Handles the Up button pressed event.
+     */
+    @FXML
+    public void handleUpEntered() {
+        String previousCommand = commandHistory.getPreviousCommand();
+        if (previousCommand != null) {
+            commandTextField.setText(previousCommand);
+            commandTextField.positionCaret(previousCommand.length()); // Move cursor to end
+        }
+    }
+    /**
+     * Handles the Down button pressed event.
+     */
+    @FXML
+    public void handleDownEntered() {
+        String nextCommand = commandHistory.getNextCommand();
+        if (nextCommand != null) {
+            commandTextField.setText(nextCommand);
+            commandTextField.positionCaret(nextCommand.length()); // Move cursor to end
+        }
+    }
 
     /**
      * Handles the Enter button pressed event.

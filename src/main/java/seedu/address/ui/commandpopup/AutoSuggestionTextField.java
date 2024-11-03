@@ -43,7 +43,6 @@ public class AutoSuggestionTextField extends TextField {
     private PopupControl suggestionPopup;
     private ListView<TextFlow> suggestionList;
     private CommandBox commandBox;
-
     private ObservableList<TextFlow> textFlowItems;
 
     /**
@@ -81,6 +80,12 @@ public class AutoSuggestionTextField extends TextField {
 
         // Add key event handler to both the TextField and ListView
         EventHandler<KeyEvent> keyEventHandler = event -> {
+            if (event.getCode() == KeyCode.UP && !event.isShiftDown()) {
+                commandBox.handleUpEntered();
+            }
+            if (event.getCode() == KeyCode.DOWN && !event.isShiftDown()) {
+                commandBox.handleDownEntered();
+            }
             if (event.isShiftDown()) {
                 switch (event.getCode()) {
                 case UP:
@@ -97,6 +102,8 @@ public class AutoSuggestionTextField extends TextField {
             } else if (event.getCode() == KeyCode.TAB) {
                 handleTab();
                 event.consume();
+            } else if (event.getCode() == KeyCode.ENTER) {
+                handleCommandEntered();
             }
         };
 
@@ -112,11 +119,6 @@ public class AutoSuggestionTextField extends TextField {
         // Add the handler to both the TextField and ListView
         this.addEventHandler(KeyEvent.KEY_PRESSED, keyEventHandler);
         suggestionList.addEventHandler(KeyEvent.KEY_PRESSED, keyEventHandler);
-
-        // Ensure the TextField keeps focus when showing popup
-        suggestionPopup.setOnShowing(event -> {
-            Platform.runLater(() -> this.requestFocus());
-        });
 
         // Prevent ListView from handling its default key events
         suggestionList.addEventFilter(KeyEvent.ANY, event -> {
