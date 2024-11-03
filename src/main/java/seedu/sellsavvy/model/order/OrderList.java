@@ -149,10 +149,10 @@ public class OrderList implements Iterable<Order> {
      * Creates a copy of this {@code OrderList} with new Orders.
      */
     public OrderList createCopy() {
-        OrderList orderList = new OrderList();
+        OrderList orderListCopy = new OrderList();
         for (Order order : internalList) {
-            orderList.add(order.createCopy());
+            orderListCopy.add(order.createCopy());
         }
-        return orderList;
+        return orderListCopy;
     }
 }
