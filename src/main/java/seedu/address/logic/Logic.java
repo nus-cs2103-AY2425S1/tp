@@ -50,7 +50,17 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    /**
+     * Returns an unmodifiable view of the list of supply orders.
+     *
+     * @return An observable list containing supply orders.
+     */
     ObservableList<SupplyOrder> getSupplyOrderList();
 
+    /**
+     * Returns an unmodifiable view of the list of customer orders.
+     *
+     * @return An observable list containing customer orders.
+     */
     ObservableList<CustomerOrder> getCustomerOrderList();
 }

@@ -4,11 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.SupplyOrder;
-
-import java.util.concurrent.Flow;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -39,15 +36,16 @@ public class SupplyOrderCard extends UiPart<Region> {
     private Label items;
     @FXML
     private FlowPane status;
+
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code SupplyOrderCard} with the given {@code Supply} and index to display.
      */
     public SupplyOrderCard(SupplyOrder order, int displayedIndex) {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");
         name.setText(order.getPerson().getName().fullName);
-        phone.setText(order.getPhoneNumber());
+        phone.setText(order.getPerson().getPhone().value);
         date.setText(order.getOrderDate());
         items.setText(order.viewOrder());
         status.getChildren().add(new Label(order.getStatus().toString()));

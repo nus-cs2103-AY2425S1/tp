@@ -325,6 +325,18 @@ Use case ends.
 
 *{More to be added}*
 
+**Use case: Viewing Inventory**
+
+**MSS**
+
+1. Bakery owner logs into the system
+2. Bakery owner navigates to the "Inventory" section
+3. Bakery owner clicks on "View Inventory"
+4. System displays a list of all ingredients in stock, showing each ingredient's ID, name, and quantity available
+
+Use case ends.
+
+
 ### Non-Functional Requirements
 
 1. Performance:

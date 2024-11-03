@@ -54,9 +54,10 @@ public class AddPastryCommandTest {
         String expectedMessage = String.format(AddPastryCommand.MESSAGE_ADD_PASTRY_SUCCESS, expectedPastry);
 
         // Create a new expected model (which should reflect the expected state)
-        Model expectedModel = new ModelManager(); // We assume this manages state similarly
+        Model expectedModel = new ModelManager();
 
-        expectedModel.addPastry(expectedPastry); // Add pastry manually
+        // Add pastry manually
+        expectedModel.addPastry(expectedPastry);
 
         // Verify that the command executes successfully
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

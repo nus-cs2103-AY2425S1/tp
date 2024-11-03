@@ -49,7 +49,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
-        requireNonNull(name);
+        if (name == null) {
+            return new Name("Guest");
+        }
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
@@ -79,7 +81,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
+        if (address == null) {
+            return new Address();
+        }
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
@@ -93,7 +97,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code ingredientsSuppliedString} is invalid.
      */
     public static Ingredients parseIngredients(String ingredientsSuppliedString) throws ParseException {
-        requireNonNull(ingredientsSuppliedString);
+        if (ingredientsSuppliedString == null) {
+            return new Ingredients(new ArrayList<>());
+        }
         String trimmedIngredients = ingredientsSuppliedString.trim();
 
         if (trimmedIngredients.isEmpty()) {
@@ -103,7 +109,7 @@ public class ParserUtil {
         List<String> ingredientNames = Arrays.asList(trimmedIngredients.split("\\s*,\\s*"));
         List<Ingredient> ingredientList = new ArrayList<>();
 
-        int ingredientId = 1;  // For now, we use hardcoded IDs.
+        int ingredientId = 1; // For now, we use hardcoded IDs.
         for (String ingredientName : ingredientNames) {
             Ingredient ingredient = new Ingredient(ingredientId++, ingredientName, 0.0); // Assuming cost is 0 for MVP
             ingredientList.add(ingredient);
@@ -119,7 +125,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code dietaryPreference} is invalid.
      */
     public static DietaryPreference parsePreference(String dietaryPreference) throws ParseException {
-        requireNonNull(dietaryPreference);
+        if (dietaryPreference == null) {
+            return new DietaryPreference();
+        }
         String trimmedPreference = dietaryPreference.trim();
         if (!DietaryPreference.isValidDietaryPreference(trimmedPreference)) {
             throw new ParseException(DietaryPreference.MESSAGE_CONSTRAINTS);
@@ -134,7 +142,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
+        if (email == null) {
+            return new Email();
+        }
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
@@ -148,7 +158,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code information} is invalid.
      */
     public static Information parseInformation(String information) throws ParseException {
-        requireNonNull(information);
+        if (information == null) {
+            return new Information();
+        }
         String trimmedInformation = information.trim();
         if (!Information.isValidInformation(trimmedInformation)) {
             throw new ParseException(Information.MESSAGE_CONSTRAINTS);

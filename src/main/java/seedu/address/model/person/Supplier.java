@@ -1,46 +1,38 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Supplier in the address book.
- * Inherits from Person and adds additional fields for Supplier-specific information.
+ * Represents a Supplier with additional details about the ingredients they supply.
  */
 public class Supplier extends Person {
-
-    private final List<SupplyOrder> openSupplyOrders; // stores a list of open/unfulfilled supply orders
-    private final Ingredients ingredientsSupplied; // list of ingredients supplied by the supplier
+    private final Ingredients ingredientsSupplied;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Supplier} with all required fields.
+     *
+     * @param name               The supplier's name.
+     * @param phone              The supplier's phone.
+     * @param email              The supplier's email.
+     * @param address            The supplier's address.
+     * @param ingredientsSupplied A list of ingredients supplied by the supplier.
+     * @param remark             Any remark associated with the supplier.
+     * @param tags               A set of tags related to the supplier.
      */
     public Supplier(Name name, Phone phone, Email email, Address address,
-                     Ingredients ingredientsSupplied,
-                    Remark remark, Set<Tag> tags) {
+                    Ingredients ingredientsSupplied, Remark remark, Set<Tag> tags) {
         super(name, phone, email, address, remark, tags);
         this.ingredientsSupplied = ingredientsSupplied;
-        this.openSupplyOrders = new ArrayList<>();
     }
 
-    public List<SupplyOrder> getOpenSupplyOrders() {
-        return openSupplyOrders;
-    }
-
-    public void addSupplyOrder(SupplyOrder supplyOrder) {
-        openSupplyOrders.add(supplyOrder);
-    }
-
-    public void removeSupplyOrder(SupplyOrder supplyOrder) {
-        openSupplyOrders.remove(supplyOrder);
-    }
-
+    /**
+     * Retrieves the list of ingredients supplied by the supplier.
+     *
+     * @return The {@code Ingredients} object representing supplied ingredients.
+     */
     public Ingredients getIngredientsSupplied() {
         return ingredientsSupplied;
     }
@@ -50,19 +42,11 @@ public class Supplier extends Person {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof Supplier)) {
             return false;
         }
-
         Supplier otherSupplier = (Supplier) other;
-        return super.equals(otherSupplier)
-                && otherSupplier.getIngredientsSupplied().equals(getIngredientsSupplied());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), ingredientsSupplied);
+        return super.equals(otherSupplier) && otherSupplier.getIngredientsSupplied().equals(getIngredientsSupplied());
     }
 
     @Override

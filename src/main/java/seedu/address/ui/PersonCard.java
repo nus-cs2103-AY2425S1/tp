@@ -53,6 +53,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
+        orders.setText(person.getOrders());
 
         // Check if the person is a Customer and display their information field
         if (person instanceof Customer) {
@@ -92,6 +93,15 @@ public class PersonCard extends UiPart<Region> {
                     }
                     tags.getChildren().add(tagLabel);
                 });
+
+        if (person instanceof Customer p) {
+            details.setText(p.getInformation().toString());
+        } else if (person instanceof Supplier p) {
+            details.setText(p.getIngredientsSupplied().toString());
+        } else {
+            details.setText("");
+        }
+
     }
 }
 

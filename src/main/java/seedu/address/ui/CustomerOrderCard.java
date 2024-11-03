@@ -36,17 +36,24 @@ public class CustomerOrderCard extends UiPart<Region> {
     private Label items;
     @FXML
     private FlowPane status;
+
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code CustomerOrderCard} with the given {@code CustomerOrder} and index to display.
      */
     public CustomerOrderCard(CustomerOrder order, int displayedIndex) {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");
         name.setText(order.getPerson().getName().fullName);
-        phone.setText(order.getPhoneNumber());
+        phone.setText(order.getPerson().getPhone().value);
         date.setText(order.getOrderDate());
         items.setText(order.viewOrder());
-        status.getChildren().add(new Label(order.getStatus().toString()));
+
+        Label tagLabel = new Label(order.getStatus().toString());
+        if (order.getStatus().toString().equals("Pending")) {
+            tagLabel.getStyleClass().add("tag-pending");
+        }
+        status.getChildren().add(tagLabel);
+
     }
 }
