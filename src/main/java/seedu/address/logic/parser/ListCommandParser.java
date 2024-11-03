@@ -29,9 +29,11 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
 
-        switch (trimmedArgs) {
+        String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 1, ListCommand.MESSAGE_USAGE);
+        String entityType = splitArgs[0];
+
+        switch (entityType) {
         case ListContactCommand.ENTITY_WORD:
             return new ListContactCommand();
         case ListJobCommand.ENTITY_WORD:
