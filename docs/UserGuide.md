@@ -271,6 +271,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [g/GENDER] [p/PHONE_NUMBER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Grade** | `grade INDEX [m/MODULE s/GRADE]`<br> e.g., `grade 1 m/CS2103T s/85`
 **List** | `list`
 **Help** | `help`
 **Archive** | `archive`
