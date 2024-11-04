@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import spleetwaise.address.MainApp;
 import spleetwaise.address.commons.core.Config;
 import spleetwaise.address.commons.core.GuiSettings;
-import spleetwaise.address.commons.exceptions.DataLoadingException;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
@@ -21,6 +20,7 @@ import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.JsonAddressBookStorage;
 import spleetwaise.address.storage.UserPrefsStorage;
+import spleetwaise.commons.exceptions.DataLoadingException;
 
 /**
  * TestApp extends MainApp to facilitate testing by setting up the application with configurable data and user

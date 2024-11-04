@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import spleetwaise.address.commons.core.Config;
-import spleetwaise.address.commons.exceptions.DataLoadingException;
 import spleetwaise.address.testutil.Assert;
+import spleetwaise.commons.exceptions.DataLoadingException;
 
 public class ConfigUtilTest {
 

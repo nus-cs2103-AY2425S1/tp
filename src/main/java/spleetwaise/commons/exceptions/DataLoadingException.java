@@ -1,4 +1,4 @@
-package spleetwaise.address.commons.exceptions;
+package spleetwaise.commons.exceptions;
 
 /**
  * Represents an error during loading of data from a file.

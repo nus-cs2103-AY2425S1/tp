@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import spleetwaise.address.commons.exceptions.DataLoadingException;
 import spleetwaise.address.commons.util.JsonUtil;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
 import spleetwaise.address.model.UserPrefs;
+import spleetwaise.commons.exceptions.DataLoadingException;
 
 /**
  * A class to access UserPrefs stored in the hard disk as a json file
