@@ -37,8 +37,7 @@ public class ClientCard extends UiPart<Region> {
     private ClientCardField job = new ClientCardField();
     private ClientCardField email = new ClientCardField();
     private ClientCardField income = new ClientCardField();
-    @FXML
-    private Label remark;
+    private ClientCardField remark = new ClientCardField();
     @FXML
     private FlowPane assignedTier;
     @FXML
@@ -63,8 +62,8 @@ public class ClientCard extends UiPart<Region> {
         email.setFields(ClientCardField.ICON_LITERAL_EMAIL, client.getEmail().value);
         job.setFields(ClientCardField.ICON_LITERAL_JOB, client.getJob().value);
         income.setFields(ClientCardField.ICON_LITERAL_INCOME, client.getIncome().toString());
-        remark.setText(client.getRemark().value);
-        cardFields.getChildren().addAll(phone, address, email, job, income);
+        remark.setFields(ClientCardField.ICON_LITERAL_REMARK, client.getRemark().value);
+        cardFields.getChildren().addAll(phone, address, email, job, income, remark);
     }
 
     private void createTier() {
