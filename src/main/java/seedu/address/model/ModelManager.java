@@ -203,6 +203,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ReadOnlyReceiptLog getFilteredGoods() {
+        ReceiptLog receipts = new ReceiptLog();
+        receipts.setReceipts(this.getFilteredReceiptsList().stream().toList());
+        return receipts;
+    }
+
+    @Override
     public void addGoods(GoodsReceipt goodsReceipt) {
         goodsList.addReceipt(goodsReceipt);
     }

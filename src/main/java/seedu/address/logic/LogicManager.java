@@ -55,12 +55,9 @@ public class LogicManager implements Logic {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveGoods(model.getGoods());
             if (model.getExportFilterGoodsStatus()) {
-                ReceiptLog receipts = new ReceiptLog();
-                receipts.setReceipts(model.getFilteredReceiptsList().stream().toList());
-                storage.saveFilteredGoods(receipts);
+                storage.saveFilteredGoods(model.getFilteredGoods());
                 model.setExportFilterGoodsToFalse();
             }
-
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {

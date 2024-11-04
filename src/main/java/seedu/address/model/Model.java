@@ -129,6 +129,11 @@ public interface Model {
     ReadOnlyReceiptLog getGoods();
 
     /**
+     * Returns the filtered goods list.
+     */
+    ReadOnlyReceiptLog getFilteredGoods();
+
+    /**
      * Adds the given goods.
      * {@code goodsReceipt} must not already exist in the address book.
      */
