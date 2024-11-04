@@ -134,6 +134,12 @@ Shows a list of all companies in the address book.
 
 Format: `list company`
 
+### Listing all entities : `list all`
+
+Show all contact, jobs and companies in the address book.
+
+Format: `list all`
+
 ### Editing a contact : `edit`
 
 Edits an existing contact in the address book.
