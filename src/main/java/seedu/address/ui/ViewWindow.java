@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
@@ -19,7 +20,6 @@ public class ViewWindow extends UiPart<Region> {
     private static final String FXML = "ViewWindow.fxml";
 
     public final Person person;
-    private final int maxWeeks = 13;
 
     @FXML
     private VBox cardPane;
@@ -64,7 +64,7 @@ public class ViewWindow extends UiPart<Region> {
 
         if (!person.getWeeksPresent().isEmpty()) {
             weekLabel.getChildren().add(new Label("Weeks attended: "));
-            for (int week = 1; week <= maxWeeks; week++) {
+            for (int week = 0; week <= ParserUtil.MAX_WEEK; week++) {
                 Label weekLabelNode = new Label(String.valueOf(week));
 
                 if (person.getWeeksPresent().contains(week)) {
