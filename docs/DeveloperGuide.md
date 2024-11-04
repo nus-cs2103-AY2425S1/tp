@@ -638,7 +638,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a student with all required details
     1. Prerequisites: Ensure that the tutorial T1001 exists in the system.
 
-    2. Test case: `addStu n/John Doe id/A1234567X t/T1001`<br>
+    2. Test case: `addStu n/John Doe s/A1234567X t/T1001`<br>
        Expected: A new student named "John Doe" with student ID "A1234567X" is added to tutorial "T1001". Confirmation message is displayed with the student's details.
 
 2. Adding a student with missing compulsory fields
@@ -646,15 +646,15 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `addStu n/John Doe t/T1001`<br>
        Expected: Error message indicating that the student ID is missing.
 
-    2. Test case: `addStu id/A1234567X t/T1001`<br>
+    2. Test case: `addStu s/A1234567X t/T1001`<br>
        Expected: Error message indicating that the student's name is missing.
 
 3. Adding a student with invalid data
 
-    1. Test case: `addStu n/John Doe id/INVALID_ID t/T1001`<br>
+    1. Test case: `addStu n/John Doe s/INVALID_ID t/T1001`<br>
        Expected: Error message indicating that the student ID format is invalid.
 
-    2. Test case: `addStu n/John Doe id/A1234567X t/INVALID_TUT`<br>
+    2. Test case: `addStu n/John Doe s/A1234567X t/INVALID_TUT`<br>
        Expected: Error message indicating that the tutorial ID does not exist.
 
 ### Editing a student
@@ -663,7 +663,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least one student exists in the list. For example, a student at index 1.
 
-    2. Test case: `edit 1 n/Jane Smith id/A7654321X t/T2001`<br>
+    2. Test case: `edit 1 n/Jane Smith s/A7654321X t/T2001`<br>
        Expected: Student at index 1 is updated with the new name "Jane Smith", student ID "A7654321X", and assigned to tutorial "T2001". Confirmation message is displayed with the updated details.
 
 2. Editing a student with some fields missing
@@ -708,17 +708,17 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: Student with ID "A1234567X" exists and is assigned to tutorial "T1001".
 
-    2. Test case: `markAtt id/A1234567X t/T1001 d/2023-10-21`<br>
+    2. Test case: `markAtt s/A1234567X t/T1001 d/2023-10-21`<br>
        Expected: Attendance for student "A1234567X" on "2023-10-21" is marked as present in tutorial "T1001". Confirmation message is displayed.
 
 2. Marking attendance for a student not in the tutorial
 
-    1. Test case: `markAtt id/A1234567X t/T2001 d/2023-10-21`<br>
+    1. Test case: `markAtt s/A1234567X t/T2001 d/2023-10-21`<br>
        Expected: Error message indicating that the student is not enrolled in tutorial "T2001".
 
 3. Marking attendance with invalid date format
 
-    1. Test case: `markAtt id/A1234567X t/T1001 d/21-10-2023`<br>
+    1. Test case: `markAtt s/A1234567X t/T1001 d/21-10-2023`<br>
        Expected: Error message indicating that the date format is invalid. Correct format should be "YYYY-MM-DD".
 
 ### Saving data
