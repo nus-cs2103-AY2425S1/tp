@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import seedu.address.logic.commands.findcommand.FindAddressCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
@@ -67,80 +66,53 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean hasWeddingPrefix = argMultimap.getValue(PREFIX_WEDDING).isPresent();
 
         if (hasNamePrefix) {
-            List<String> nameKeywords = new ArrayList<>();
-            for (String address : argMultimap.getAllValues(PREFIX_NAME)) {
-                String nameInput = address.trim();
-                if (nameInput.isEmpty()) {
-                    throw new ParseException(NAME_CANNOT_BE_EMPTY);
-                }
-                nameKeywords.add(nameInput);
-            }
+            ArrayList<String> nameKeywords = new ArrayList<>();
+            collectKeywords(argMultimap, PREFIX_NAME, NAME_CANNOT_BE_EMPTY, nameKeywords);
             return new FindNameCommand(new NameContainsKeywordsPredicate(nameKeywords));
         }
 
         if (hasPhonePrefix) {
-            List<String> phoneKeywords = new ArrayList<>();
-            for (String phoneNumber : argMultimap.getAllValues(PREFIX_PHONE)) {
-                String phoneNumberInput = phoneNumber.trim();
-                if (phoneNumberInput.isEmpty()) {
-                    throw new ParseException(PHONE_NUMBER_CANNOT_BE_EMPTY);
-                }
-                phoneKeywords.add(phoneNumberInput);
-            }
+            ArrayList<String> phoneKeywords = new ArrayList<>();
+            collectKeywords(argMultimap, PREFIX_PHONE, PHONE_NUMBER_CANNOT_BE_EMPTY, phoneKeywords);
             return new FindPhoneCommand(new PhoneContainsKeywordsPredicate(phoneKeywords));
         }
 
         if (hasEmailPrefix) {
-            List<String> emailKeywords = new ArrayList<>();
-            for (String email : argMultimap.getAllValues(PREFIX_EMAIL)) {
-                String emailInput = email.trim();
-                if (emailInput.isEmpty()) {
-                    throw new ParseException(EMAIL_CANNOT_BE_EMPTY);
-                }
-                emailKeywords.add(emailInput);
-            }
+            ArrayList<String> emailKeywords = new ArrayList<>();
+            collectKeywords(argMultimap, PREFIX_EMAIL, EMAIL_CANNOT_BE_EMPTY, emailKeywords);
             return new FindEmailCommand(new EmailContainsKeywordsPredicate(emailKeywords));
         }
 
         if (hasAddressPrefix) {
-            List<String> addressKeywords = new ArrayList<>();
-            for (String address : argMultimap.getAllValues(PREFIX_ADDRESS)) {
-                String addressInput = address.trim();
-                if (addressInput.isEmpty()) {
-                    throw new ParseException(ADDRESS_CANNOT_BE_EMPTY);
-                }
-                addressKeywords.add(addressInput);
-            }
+            ArrayList<String> addressKeywords = new ArrayList<>();
+            collectKeywords(argMultimap, PREFIX_ADDRESS, ADDRESS_CANNOT_BE_EMPTY, addressKeywords);
             return new FindAddressCommand(new AddressContainsKeywordsPredicate(addressKeywords));
         }
 
         if (hasTagPrefix) {
-            List<String> tagKeywords = new ArrayList<>();
-            for (String tag : argMultimap.getAllValues(PREFIX_TAG)) {
-                String tagInput = tag.trim();
-                if (tagInput.isEmpty()) {
-                    throw new ParseException(TAG_CANNOT_BE_EMPTY);
-                }
-                tagKeywords.add(tagInput);
-            }
-
-
+            ArrayList<String> tagKeywords = new ArrayList<>();
+            collectKeywords(argMultimap, PREFIX_TAG, TAG_CANNOT_BE_EMPTY, tagKeywords);
             return new FindTagCommand(new TagContainsKeywordsPredicate(tagKeywords));
         }
 
         if (hasWeddingPrefix) {
-            List<String> weddingKeywords = new ArrayList<>();
-            for (String wedding : argMultimap.getAllValues(PREFIX_WEDDING)) {
-                String weddingInput = wedding.trim();
-                if (weddingInput.isEmpty()) {
-                    throw new ParseException(WEDDING_CANNOT_BE_EMPTY);
-                }
-                weddingKeywords.add(weddingInput);
-            }
+            ArrayList<String> weddingKeywords = new ArrayList<>();
+            collectKeywords(argMultimap, PREFIX_WEDDING, WEDDING_CANNOT_BE_EMPTY, weddingKeywords);
             return new FindWeddingCommand(new WeddingContainsKeywordsPredicate(weddingKeywords));
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    private void collectKeywords(ArgumentMultimap argMultimap, Prefix prefixTag, String keywordCannotBeEmpty,
+                                 ArrayList keywords) throws ParseException {
+        for (String field : argMultimap.getAllValues(prefixTag)) {
+            String prefixTagInput = field.trim();
+            if (prefixTagInput.isEmpty()) {
+                throw new ParseException(keywordCannotBeEmpty);
+            }
+            keywords.add(prefixTagInput);
+        }
     }
 
 }
