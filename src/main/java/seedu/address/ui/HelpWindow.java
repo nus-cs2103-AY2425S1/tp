@@ -85,6 +85,13 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
+     * returns true if the help window is currently minimized.
+     */
+    public boolean isIconified() {
+        return getRoot().isIconified();
+    }
+
+    /**
      * Returns true if the help window is currently being shown.
      */
     public boolean isShowing() {
@@ -96,6 +103,13 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void hide() {
         getRoot().hide();
+    }
+
+    /**
+     * If minimized, restores the help window.
+     */
+    public void restore() {
+        getRoot().setIconified(false);
     }
 
     /**

@@ -146,6 +146,10 @@ public class MainWindow extends UiPart<Stage> {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
+            // Focus on the help window if it is already opened or minimized (Bug from AB3)
+            if (helpWindow.isIconified()) {
+                helpWindow.restore();
+            }
             helpWindow.focus();
         }
     }
