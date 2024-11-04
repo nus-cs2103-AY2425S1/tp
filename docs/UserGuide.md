@@ -1,25 +1,45 @@
 # AdmiNUS User Guide
 
-AdmiNUS is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AdmiNUS can get your contact management tasks done faster than traditional GUI apps.
+## Why AdmiNUS?
+
+AdmiNUS is a contact management tool designed for NUS club administrators, student leaders, and event coordinators. It provides an easy and efficient way to manage contacts via a Command Line Interface (CLI), making it perfect for users who prefer typing over navigating complex menus.
+
+> 💡 **Example Use Case**: Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
+>
+> ```shell
+> student n/John Doe s/A0123456X p/98765432 e/johnd@example.com a/123 Clementi Rd, #02-01 t/volunteer
+> ```
+>
+> This command adds John Doe instantly, tagged as a volunteer. You can then use commands like `filtertag volunteer` to find all volunteers, saving time compared to traditional methods.
+>
+AdmiNUS helps you stay organized and efficient, letting you focus on running successful events.
+
+---
 
 * [Quick start](#Quick-start)
 * [Features](#Features)
-  * [Viewing help: `help`](#viewing-help-help)
-  * [Link to the user guide: `helpwindow`](#link-to-the-user-guide-helpwindow)
-  * [Adding a contact: `student` or `company`](#adding-a-contact-student-or-company)
-  * [Listing all contacts: `list`](#listing-all-contacts-list)
-  * [Viewing a contact: `view`](#viewing-a-contact-view)
-  * [Editing a contact: `edit`](#editing-a-contact-edit)
-  * [Locating persons by name: `find`](#locating-persons-by-name-find)
-  * [Filtering contacts by tag: `filtertag`](#filtering-contacts-by-tags-filtertag)
-  * [Tracking contacts by category: `track`](#tracking-contacts-by-category-track)
-  * [Deleting contact(s): `delete`](#deleting-contacts-delete)
-  * [Adding tag(s) to contact: `tag`](#adding-tags-to-contact-tag)
-  * [Deleting tag(s) from contact: `deletetag`](#deleting-tags-from-contact-deletetag)
-  * [Importing CSV files: `import`](#importing-csv-files-import)
-  * [Exporting CSV files: `export`](#exporting-csv-files)
-  * [Clearing all entries: `clear`](#clearing-all-entries-clear)
-  * [Exiting the program: `exit`](#exiting-the-program-exit)
+  * [Basic Commands](#basic-commands)
+    * [Viewing help: `help`](#viewing-help-help)
+    * [Link to the user guide: `helpwindow`](#link-to-the-user-guide-helpwindow)
+    * [Listing all contacts: `list`](#listing-all-contacts-list)
+    * [Viewing a contact: `view`](#viewing-a-contact-view)
+    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+    * [Exiting the program: `exit`](#exiting-the-program-exit)
+  * [Contact Management](#contact-management)
+    * [Adding a student: `student`](#adding-a-student-student-)
+    * [Adding a company: `company`](#adding-a-company-company)
+    * [Editing a contact: `edit`](#editing-a-contact-edit)
+    * [Deleting contact(s): `delete`](#deleting-contacts-delete)
+  * [Advanced Commands](#advanced-commands)
+    * [Locating persons by name: `find`](#locating-persons-by-name-find)
+    * [Filtering contacts by tag: `filtertag`](#filtering-contacts-by-tags-filtertag)
+    * [Tracking contacts by category: `track`](#tracking-contacts-by-category-track)
+    * [Adding tag(s) to contact: `tag`](#adding-tags-to-contact-tag)
+    * [Deleting tag(s) from contact: `deletetag`](#deleting-tags-from-contact-deletetag)
+  * [File Operations](#file-operations)
+    * [Importing CSV files: `import`](#importing-csv-files-import)
+    * [Exporting CSV files: `export`](#exporting-csv-files)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -38,19 +58,19 @@ AdmiNUS is a **desktop app for managing contacts, optimized for use via a Comman
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list`: Lists all contacts.
 
-   * `student n/John Doe s/A0123456Z p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `student n/John Doe id/A0123456Z p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a student named `John Doe` to the AdmiNUS.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3`: Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear`: Deletes all contacts.
 
-   * `exit` : Exits the app.
+   * `exit`: Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -74,85 +94,189 @@ AdmiNUS is a **desktop app for managing contacts, optimized for use via a Comman
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </div>
 
-### Viewing help: `help`
+### Basic Commands
+
+#### Viewing help: `help`
 
 Shows a message explaining the various commands available.
 
-Format: `help`
+**Format**: `help`
 
-![](images/helpCommandUI.png)
+![Help Command UI](images/helpCommandUI.png)
 
-### Link to the user guide: `helpwindow`
+#### Link to the user guide: `helpwindow`
 
 Pops up a window, where there is a link to the user guide for the user to easily access.
 
-Format: `helpwindow`
+**Format**: `helpwindow`
 
 ![](images/helpWindowUI.png)
 
-### Adding a contact: `student` or `company`
-
-Adds a contact to the address book.
-
-Format 1: `student n/NAME s/STUDENT ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-Format 2: `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">**Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `student n/John Doe s/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`
-
-### Listing all contacts: `list`
+#### Listing all contacts: `list`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+**Format**: `list`
 
-### Viewing a contact: `view`
+#### Viewing a contact: `view`
 
-Show the details of a contact.
+Shows the details of a contact.
 
-Format: `view INDEX`
+**Format**: `view INDEX`
 
-Example: 
+**Example**:
 
-* `view 1` shows the details of the first contact in the list.
+- `view 1` shows the details of the first contact in the list.
 
-![](images/viewContactUI.png)
-//add screenshot here
+![View Contact UI](images/viewContactUI.png)
 
-### Editing a contact: `edit`
+#### Clearing all entries: `clear`
+
+Clears all entries from the address book.
+
+**Format**: `clear`
+
+#### Exiting the program: `exit`
+
+Exits the program.
+
+**Format**: `exit`
+
+---
+
+### Contact Management
+
+#### Adding a student: `student` 
+
+Adds a student to AdmiNUS
+
+**Format**: 
+```shell
+student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+```
+
+| Parameter Name | Description                                                                             | Required    |
+|----------------|-----------------------------------------------------------------------------------------|-------------|
+| `n/NAME`       | Name of the student                                                                     | Compulsory  |
+| `id/STUDENT_ID` | Student ID issued by NUS (must be 7 digits enclosed with two alphabets, e.g., A1234567Z) | Compulsory  |
+| `p/PHONE_NUMBER` | Contact number                                                                          | Compulsory  |
+| `e/EMAIL`      | Email address                                                                           | Compulsory  |
+| `a/ADDRESS`    | Physical address                                                                        | Compulsory  |
+| `t/TAG`        | Tags to categorize contact (cannot contain spaces)                                      | Optional    |
+
+<div markdown="span" class="alert alert-primary">**Tip:**
+A student can have any number of tags (including 0)
+</div>
+
+**Examples**:
+* `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+#### Adding a company: `company`
+
+Adds a company to AdmiNUS
+
+**Format**:
+```
+company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+```
+
+| Parameter Name | Description                                        | Required    |
+|---------------|----------------------------------------------------|-------------|
+| `n/NAME`      | Name of the company                                | Compulsory  |
+| `i/INDUSTRY`  | Industry type (e.g., Security, Education)          | Compulsory  |
+| `p/PHONE_NUMBER` | Contact number                                     | Compulsory  |
+| `e/EMAIL`     | Email address                                      | Compulsory  |
+| `a/ADDRESS`   | Physical address                                   | Compulsory  |
+| `t/TAG`       | Tags to categorize contact (cannot contain spaces) | Optional    |
+
+<div markdown="span" class="alert alert-primary">**Tip:**
+A company can have any number of tags (including 0)
+</div>
+
+Examples:
+* `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`
+
+#### Editing a contact: `edit`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [s/STUDENT ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+**Format**: 
+```
+edit INDEX [n/NAME] [s/STUDENT ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+```
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+| Parameter Name | Description                                                   | Required   |
+|---------------|---------------------------------------------------------------|------------|
+| `INDEX` | Index number of the contact to edit                           | Compulsory 
+| `n/NAME`      | Updated name of the contact                                   | Optional   |
+| `id/STUDENT_ID` | Updated student ID (for students only)                        | Optional   
+| `i/INDUSTRY`  | Updated industry type (for companies only)                    | Optional   |
+| `p/PHONE_NUMBER` | Updated phone number                                          | Optional   |
+| `e/EMAIL`     | Updated email address                                         | Optional   |
+| `a/ADDRESS`   | Updated physical address                                      | Optional   |
+| `t/TAG`       | Updated tags (replaces existing tags, cannot contains spaces) | Optional   |
+
+**Notes**:
+
+* The index refers to the index number shown in the displayed person list. 
+<div markdown="span" class="alert alert-warning"> ⚠️ **Important**: The index must be a positive integer (1, 2, 3, ...). </div>
+
 * At least one of the optional fields must be provided.
-* For student contact, editing industry field is prohibited.
-* For company contact, editing student id field is prohibited.
+
+<div markdown="block" class="alert alert-warning">
+
+* For student contact, editing industry field is **prohibited**.
+* For company contact, editing student id field is **prohibited**.
+
+</div>
+
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+> 💡 **Tip**: You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+#### Deleting contact(s): `delete`
+
+Deletes the specified contacts from AdmiNUS
+
+Format: `delete INDEX [MORE_INDEX]`
+
+| Parameter Name	    | Description                                                          |	Required|
+|--------------------|----------------------------------------------------------------------|------------|
+| `INDEX`            | Index number of the contact to delete                                |Compulsory|	
+| `MORE_INDEX`       | 	Additional index numbers of contacts to delete (separate by spaces) |	Optional|
+
+**Notes**:
+* Deletes the contact(s) at the specified `INDEX`.
+* Split the indices by spaces.
+* The index refers to the index number shown in the displayed person list.
+<div markdown="span" class="alert alert-warning"> ⚠️ **Important**: The index must be a positive integer (1, 2, 3, ...). </div>
+
+**Examples**:
+* `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+---
+### Advanced Commands
+
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+**Notes**:
+
+<div markdown="span" class="alert alert-info"> 🔍 **Note**: The search is case-insensitive. For example, `hans` will match `Hans`. </div>
+
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -164,7 +288,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Filtering contacts by tags: `filtertag`
+#### Filtering contacts by tags: `filtertag`
 
 Finds contacts whose tags are the same as the specified keyword.
 
@@ -174,7 +298,7 @@ Format: `filtertag KEYWORD`
 Examples:
 * `filtertag buddies` finds contacts who have tags saved as `buddies`
 
-### Tracking contacts by category: `track`
+#### Tracking contacts by category: `track`
 
 Tracks and lists all contacts who are in the category of the specified keywords.
 
@@ -185,22 +309,7 @@ Examples:
 * `track student` finds contacts with category `student`
 * `track company` finds contacts with category `company`
 
-### Deleting contact(s): `delete`
-
-Deletes the specified contact from the address book.
-
-Format: `delete INDEX [MORE_INDEX]`
-
-* Deletes the contact(s) at the specified `INDEX`.
-* Split the indices by spaces. 
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Adding tag(s) to contact: `tag`
+#### Adding tag(s) to contact: `tag`
 Adds additional tags to the specified contact.
 
 Format: `tag INDEX t/TAG [t/MORE_TAG]`
@@ -211,7 +320,7 @@ Format: `tag INDEX t/TAG [t/MORE_TAG]`
 Examples:
 * `tag 1 t/year2 t/computerScience` adds the tags `year2` and `computerScience` to the first contact in the list
 
-### Deleting tag(s) from contact: `deletetag`
+#### Deleting tag(s) from contact: `deletetag`
 
 Deletes the specified tag(s) from the specified contact.
 
@@ -224,7 +333,11 @@ Format:  `deletetag INDEX t/TAG [t/MORE_TAG]`
 Examples:
 * `deletetag 1 t/senior t/Y2` deletes the senior and Y2 tags from the first contact in the list
 
-### Importing CSV files: `import`
+---
+
+### File Operations
+
+#### Importing CSV files: `import`
 
 Imports data from a CSV file, use the import command followed by the path to your CSV file. This allows you to quickly load structured data into your application or script for further analysis and processing.
 
@@ -236,18 +349,20 @@ Example:
 
 * `import /home/user/data/hackers_2022.csv` imports the CSV file named hackers_2022 from the data directory located in the user's home directory. Once imported, the data can be manipulated or used within the program
 
-Important Notes:
+<div markdown="span" class="alert alert-info"> 📂 **Important Notes**:
 
-* Make sure to use the correct file path. For Windows, use backslashes or double backslashes, e.g., `C:\Users\username\data\File.csv`.
-* The CSV file should be properly formatted, with each value separated by commas and each row ending with a newline character.
-* Ensure you have the necessary read permissions for the file. If you encounter a permission denied error, you may need to adjust the file permissions or run the command with the required privileges.
+* Make sure to use the correct file path. For Windows, use backslashes or double backslashes (e.g., `C:\Users\username\data\File.csv`). 
+* The CSV file should be properly formatted, with each value separated by commas and each row ending with a newline character.  
+* Ensure you have the necessary read permissions for the file. If you encounter a permission denied error, you may need to adjust the file permissions or run the command with the required privileges. 
+
+</div>
 
 Troubleshooting:
 
 * If you receive an error indicating that the file is not found, double-check the file path and ensure that the CSV file exists in the specified location.
 * If the CSV is not properly formatted, importing may fail. Make sure the file follows the standard CSV format (e.g., no extra commas).
 
-### Exporting CSV Files
+#### Exporting CSV Files
 Export data to a CSV file, use the export command followed by the desired path and filename for your CSV. This command allows you to save the current data in a structured format that can be easily shared or used by other applications.
 
 Format: `export /path/to/data/File.csv`
@@ -269,18 +384,6 @@ Troubleshooting:
 
 * If the directory does not exist, you will receive an error. Create the directory first or specify a valid path.
 * If you do not have the necessary write permissions, you will need to adjust them or choose a different directory.
-
-### Clearing all entries: `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program: `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ### Saving the data
 
