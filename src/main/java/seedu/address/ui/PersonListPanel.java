@@ -43,12 +43,6 @@ public class PersonListPanel extends UiPart<Region> {
             } else {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
-//            getStyleClass().removeAll("first-cell", "last-cell");
-//            if (getIndex() == 0) {
-//                getStyleClass().add("first-cell");
-//            } else if (getIndex() == getListView().getItems().size() - 1) {
-//                getStyleClass().add("last-cell");
-//            }
         }
     }
 
