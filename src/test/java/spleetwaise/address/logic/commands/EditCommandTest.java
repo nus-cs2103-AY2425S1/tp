@@ -13,13 +13,13 @@ import spleetwaise.address.logic.commands.EditCommand.EditPersonDescriptor;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.EditPersonDescriptorBuilder;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 
 /**

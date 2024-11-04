@@ -9,6 +9,7 @@ import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.commons.model.ReadOnlyUserPrefs;
 
 /**
  * The API of the Model component.

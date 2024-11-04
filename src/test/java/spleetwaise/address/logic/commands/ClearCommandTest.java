@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.UserPrefs;
 
 public class ClearCommandTest {
 

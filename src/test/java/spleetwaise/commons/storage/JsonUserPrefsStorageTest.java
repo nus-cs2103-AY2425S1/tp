@@ -1,4 +1,4 @@
-package spleetwaise.address.storage;
+package spleetwaise.commons.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import spleetwaise.address.commons.core.GuiSettings;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.commons.exceptions.DataLoadingException;
+import spleetwaise.commons.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 

@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.

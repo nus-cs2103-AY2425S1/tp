@@ -31,6 +31,6 @@ This project has three types of tests:
 1. *Unit tests* targeting the lowest level methods/classes.<br>
    e.g. `spleetwaise.address.commons.util.StringUtilTest`
 1. *Integration tests* that are checking the integration of multiple code units (those code units are assumed to be working).<br>
-   e.g. `spleetwaise.address.storage.StorageManagerTest`
+   e.g. `spleetwaise.commons.storage.StorageManagerTest`
 1. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
    e.g. `spleetwaise.address.logic.LogicManagerTest`

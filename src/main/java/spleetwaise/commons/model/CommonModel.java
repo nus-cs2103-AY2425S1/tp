@@ -12,7 +12,6 @@ import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
-import spleetwaise.address.model.ReadOnlyUserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;

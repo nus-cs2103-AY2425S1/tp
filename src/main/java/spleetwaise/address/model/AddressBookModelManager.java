@@ -15,6 +15,8 @@ import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.commons.model.ReadOnlyUserPrefs;
+import spleetwaise.commons.model.UserPrefs;
 
 /**
  * Represents the in-memory model of the address book data.

@@ -13,13 +13,13 @@ import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.logic.parser.AddressBookParser;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
-import spleetwaise.address.storage.Storage;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.storage.Storage;
 import spleetwaise.transaction.logic.parser.TransactionParser;
 import spleetwaise.transaction.model.transaction.Transaction;
 

@@ -1,12 +1,12 @@
-package spleetwaise.address.storage;
+package spleetwaise.commons.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import spleetwaise.address.model.ReadOnlyUserPrefs;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.commons.exceptions.DataLoadingException;
+import spleetwaise.commons.model.ReadOnlyUserPrefs;
+import spleetwaise.commons.model.UserPrefs;
 
 /**
  * Represents a storage for {@link UserPrefs}.
