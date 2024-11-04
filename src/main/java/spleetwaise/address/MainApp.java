@@ -47,7 +47,7 @@ import spleetwaise.transaction.storage.TransactionBookStorage;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -63,7 +63,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing SpleetWaise]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -86,6 +86,15 @@ public class MainApp extends Application {
         logic = new LogicManager(storage);
 
         ui = new UiManager(logic);
+
+        // Add shutdown hook
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                stop();
+            } catch (Exception e) {
+                logger.severe("Error during shutdown: " + e.getMessage());
+            }
+        }));
     }
 
     /**
@@ -216,7 +225,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping SpleetWaise ] =============================");
         try {
             storage.saveUserPrefs(addressBookModel.getUserPrefs());
             storage.saveAddressBook(addressBookModel.getAddressBook());

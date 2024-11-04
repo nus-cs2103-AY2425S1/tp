@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import spleetwaise.address.commons.core.GuiSettings;
+import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
@@ -152,6 +153,12 @@ public class CommonModel implements Model {
         requireNonNull(addressBookModel, "AddressBook model cannot be null");
         requireNonNull(phone);
         return addressBookModel.getPersonByPhone(phone);
+    }
+
+    public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
+        requireNonNull(addressBookModel, "AddressBook model cannot be null");
+        requireNonNull(index);
+        return addressBookModel.getPersonByFilteredPersonListIndex(index);
     }
 
     // TransactionBook
