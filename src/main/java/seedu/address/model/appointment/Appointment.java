@@ -150,7 +150,7 @@ public class Appointment {
                 .add("appointmentId", appointmentId)
                 .add("person", person)
                 .add("appointmentType", getAppointmentType())
-                .add("appointmentDateTime", getAppointmentDateTime())
+                .add("appointmentDateTime", getAppointmentDateTime().toString())
                 .add("medicine", getMedicine())
                 .add("sickness", getSickness())
                 .toString();

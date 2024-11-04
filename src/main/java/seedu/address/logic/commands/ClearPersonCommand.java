@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
 
 /**
@@ -10,6 +11,7 @@ public class ClearPersonCommand extends ClearCommand {
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
     protected void clearEntity(Model model) {
+        model.setAppointmentBook(new AppointmentBook());
         model.setAddressBook(new AddressBook());
     }
 
