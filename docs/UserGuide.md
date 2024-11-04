@@ -166,6 +166,28 @@ Examples:
   and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Editing a transaction : `editTxn `
+
+Edits an existing transaction in the transaction book.
+
+Format: `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [cat/CATEGORY]...`
+
+* Edits the transaction at the specified `INDEX`. The index refers to the index number shown in the displayed person
+  list.
+  The index **must be a positive integer** 1, 2, 3, …
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing categories, the existing categories of the person will be removed i.e adding of categories is not
+  cumulative.
+* You can remove all the person’s categories by typing `cat/` without
+  specifying any categories after it.
+
+Examples:
+
+* `editTxn 1 p/91234567 desc/Hello world` Edits the phone number and description of the 1st transaction to be `91234567`
+  and `Hello world` respectively.
+* `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -270,28 +292,6 @@ Format: `clear`
 Clears all entries from the transaction book.
 
 Format: `clearTxn`
-
-### Editing a transaction : `editTxn `
-
-Edits an existing transaction in the transaction book.
-
-Format: `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [cat/CATEGORY]...`
-
-* Edits the transaction at the specified `INDEX`. The index refers to the index number shown in the displayed person
-  list.
-  The index **must be a positive integer** 1, 2, 3, …
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing categories, the existing categories of the person will be removed i.e adding of categories is not
-  cumulative.
-* You can remove all the person’s categories by typing `cat/` without
-  specifying any categories after it.
-
-Examples:
-
-* `editTxn 1 p/91234567 desc/Hello world` Edits the phone number and description of the 1st transaction to be `91234567`
-  and `Hello world` respectively.
-* `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
 
 ### Marking a transaction as done : `markDone`
 
