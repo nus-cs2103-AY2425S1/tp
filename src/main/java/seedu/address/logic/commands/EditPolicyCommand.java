@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_COVERAGE_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_PREMIUM_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import java.util.List;
 
@@ -23,18 +27,21 @@ import seedu.address.model.policy.PremiumAmount;
  */
 public class EditPolicyCommand extends Command {
     public static final String COMMAND_WORD = "edit-policy";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy edited to:\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
     public static final String MESSAGE_POLICY_NOT_FOUND = "Policy of specified type does not exist for client.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates the specified policy for the client identified "
             + "by the index number used in the last client listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]\n"
+            + PREFIX_POLICY_TYPE + "POLICY_TYPE "
+            + "[" + PREFIX_POLICY_PREMIUM_AMOUNT + "PREMIUM_AMOUNT] "
+            + "[" + PREFIX_POLICY_COVERAGE_AMOUNT + "COVERAGE_AMOUNT] "
+            + "[" + PREFIX_POLICY_EXPIRY_DATE + "EXPIRY_DATE]\n"
             + "Example: "
             + COMMAND_WORD
             + " 1 pt/health pa/1500 ca/10000.50 ed/09/14/2024 "
             + " (The last 3 fields are optional but one of them needs to be edited at all times)\n ";
+
     public static final String MESSAGE_SUCCESS = "Edited Policy:\n\n%1$s";
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;
