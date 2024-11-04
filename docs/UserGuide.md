@@ -409,7 +409,7 @@ Examples:
 
 * `delete 1 po/1` deletes the 1st policy of the 1st person in the address book.
 * `delete 2 po/1` deletes the 1st policy of the 2nd person in the address book.
-  ![result for 'delete policy from first client'](images/deletepolicyUI.png)
+  ![result for 'delete policy from first client'](images/DeletePolicyUI.png)
 ---
 ### Undo a command : `undo`
 Undo the last delete. Works for add, edit, delete client and clear commands.
@@ -422,7 +422,7 @@ Format: `undo`
 Examples:
 * `delete 1` followed by `undo` will restore back the deleted client at index 1.
 * `clear` followed by `undo` will restore back all the deleted clients.
-![result for 'undo'](images/undoUI.png)
+![result for 'undo'](images/UndoUI.png)
 
 
 ---
