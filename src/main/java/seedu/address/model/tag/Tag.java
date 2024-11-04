@@ -12,7 +12,7 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final int MAXIMUM_NAME_LENGTH = 40;
     public static final String MESSAGE_NAME_TOO_LONG = "A tag name cannot exceed the maximum length of %d characters";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String tagName;
 
