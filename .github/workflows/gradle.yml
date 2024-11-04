@@ -55,6 +55,9 @@ jobs:
           name: 'checkstyle-report-${{ matrix.platform }}'
           path: 'build/reports/checkstyle'
 
+      - name: test
+        run: echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
+
       - name: Comment on PR with artifact link
         if: github.event_name == 'pull_request' && runner.os == 'Linux'
         uses: actions/github-script@v6
@@ -69,9 +72,6 @@ jobs:
               repo: context.repo.repo,
               body: commentBody
             })
-
-      - name: test
-        run: echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
