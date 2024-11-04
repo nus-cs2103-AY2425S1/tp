@@ -30,6 +30,7 @@ public class CleanCommand extends ConcreteCommand {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_CLEAN_SUCCESS = "Deleted graduated people";
+    public static final String MESSAGE_ALREADY_CLEANED = "All graduated people have already been deleted";
     public static final String MESSAGE_UNDO_SUCCESS = "Restored deleted graduated people";
 
     private final Predicate<Person> predicate;
@@ -51,13 +52,19 @@ public class CleanCommand extends ConcreteCommand {
         Predicate<? super Person> originalPredicate = model.getFilteredPersonListPredicate();
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = model.getFilteredPersonList();
-        for (int i = lastShownList.size() - 1; i >= 0; i--) {
-            model.deletePerson(lastShownList.get(i));
-        }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS.and(originalPredicate));
 
-        isExecuted = true;
-        return new CommandResult(MESSAGE_CLEAN_SUCCESS);
+        if (lastShownList.size() == 0) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS.and(originalPredicate));
+            throw new CommandException(MESSAGE_ALREADY_CLEANED);
+        } else {
+            for (int i = lastShownList.size() - 1; i >= 0; i--) {
+                model.deletePerson(lastShownList.get(i));
+            }
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS.and(originalPredicate));
+
+            isExecuted = true;
+            return new CommandResult(MESSAGE_CLEAN_SUCCESS);
+        }
     }
 
     @Override
