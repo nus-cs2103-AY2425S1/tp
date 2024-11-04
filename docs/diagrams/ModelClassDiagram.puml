@@ -23,8 +23,8 @@ Class PolicySet
 Class LifePolicy
 Class HealthPolicy
 Class EducationPolicy
-Class Policy
-Class ClaimSet
+Class "{abstract}\nPolicy" as Policy
+Class ClaimList
 Class Claim
 
 Class I #FFFFFF
@@ -56,8 +56,8 @@ PolicySet --> EducationPolicy
 LifePolicy --|> Policy
 HealthPolicy --|> Policy
 EducationPolicy --|> Policy
-Policy --> ClaimSet
-ClaimSet --> "*" Claim
+Policy --> ClaimList
+ClaimList --> "*" Claim
 
 Client -[hidden]up--> I
 UniqueClientList -[hidden]right-> I

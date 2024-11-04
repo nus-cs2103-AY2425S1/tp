@@ -41,6 +41,7 @@ JsonPrudyStorage .up.|> PrudyStorage
 JsonPrudyStorage ..> JsonSerializablePrudy
 JsonSerializablePrudy --> "*" JsonAdaptedClient
 JsonAdaptedClient --> "*" JsonAdaptedTag
-JsonAdaptedClient --> "*" JsonAdaptedPolicy
+JsonAdaptedClient --> "0..3" JsonAdaptedPolicy
 JsonAdaptedPolicy --> "*" JsonAdaptedClaim
+
 @enduml
