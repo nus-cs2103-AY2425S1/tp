@@ -52,7 +52,7 @@ public class DeleteTaskForAllGroupsCommand extends Command {
         List<Task> lastShownList = new ArrayList<>(model.getFilteredTaskList());
         List<Group> groupList = new ArrayList<>(model.getFilteredGroupList());
         if (taskIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_DISPLAYED_INDEX);
         }
         Task targetTask = lastShownList.get(taskIndex.getZeroBased());
         List<Group> toBeDeletedFrom = getGroupsToBeDeletedFrom(groupList, targetTask);
