@@ -68,6 +68,7 @@ jobs:
               repo: context.repo.repo,
               body: commentBody
             })
+          github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
