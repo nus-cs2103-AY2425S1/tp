@@ -165,11 +165,12 @@ Examples:
 
 ### Listing all tags: `taglist`
 
-Lists all the current active tags in the address book.
+Lists the active tags across *all* contacts in the address book. An active tag is a tag which is currently assigned to *any* contact.<br>
+As such, tags which are not assigned to any contact are considered inactive and will not appear in taglist.
 
 Format: `taglist`
 
-* Lists the tags in alphabetical order
+* Lists active tags in alphabetical order
 * Useful to keep track of which tags you have used in order to maintain consistency
 
 <br></br>
