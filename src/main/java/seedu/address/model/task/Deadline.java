@@ -12,7 +12,7 @@ import java.time.format.ResolverStyle;
  * Represents a Deadline for a Task.
  */
 public class Deadline implements Comparable<Deadline> {
-    public static final String MESSAGE_CONSTRAINTS = "Deadlines must be given in the form YYYY-MM-DD HHMM";
+    public static final String MESSAGE_CONSTRAINTS = "Deadlines must be given in the form YYYY-MM-DD HHmm";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2} \\d{2}\\d{2}";
     // safer to use 'uuuu' vs 'yyyy'
     // https://stackoverflow.com/questions/
