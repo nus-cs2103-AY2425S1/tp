@@ -90,6 +90,9 @@ public interface Model {
     /** Returns an unmodifiable view of the sorted appointment list */
     ObservableList<Person> getSortedAppointmentList();
 
+    /** Returns date of appointment list filter */
+    String getFilteredAppointmentDate();
+
     /**
      * Updates the filter of the sorted appointment list to filter by the given {@code predicate}.
      */

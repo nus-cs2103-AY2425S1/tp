@@ -21,6 +21,9 @@ public class DateUtil {
      * @return String containing date in "dd MMMM yyyy" format
      */
     public static String getDisplayableDate(LocalDate date) {
+        if (date == null) {
+            return "null";
+        }
         return date.format(DATE_DISPLAY_FORMATTER);
     }
 

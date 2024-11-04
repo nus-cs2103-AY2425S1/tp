@@ -79,7 +79,7 @@
             </StackPane>
 
             <StackPane styleClass="pane-without-border" VBox.vgrow="NEVER">
-              <Label text="APPOINTMENTS:" styleClass="cell_big_label"/>
+              <Label fx:id="appointmentListLabel" styleClass="cell_big_label"/>
               <padding>
                 <Insets top="10"/>
               </padding>
