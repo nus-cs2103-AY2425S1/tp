@@ -15,6 +15,10 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,10 +29,6 @@ import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Telegram;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class MarkAttendanceCommandTest {
 
@@ -129,7 +129,8 @@ public class MarkAttendanceCommandTest {
         Telegram telegramAlice = new Telegram("aliceTelegram");
         Attendance attendance = new Attendance("2024-10-21");
         MarkAttendanceCommand command = new MarkAttendanceCommand(Arrays.asList(telegramAlice), attendance);
-        String expected = MarkAttendanceCommand.class.getCanonicalName() + "{telegrams=[aliceTelegram], attendance=" + attendance + "}";
+        String expected = MarkAttendanceCommand.class.getCanonicalName()
+                + "{telegrams=[aliceTelegram], attendance=" + attendance + "}";
         assertEquals(expected, command.toString());
     }
 }

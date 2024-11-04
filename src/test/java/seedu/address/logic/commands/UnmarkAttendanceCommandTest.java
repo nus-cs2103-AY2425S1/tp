@@ -15,6 +15,11 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,11 +32,6 @@ import seedu.address.model.person.Telegram;
 import seedu.address.model.role.Member;
 import seedu.address.testutil.PersonBuilder;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class UnmarkAttendanceCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -41,9 +41,9 @@ public class UnmarkAttendanceCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         Attendance attendance = new Attendance("2024-10-21");
-        Person validPerson1 = new Person(ALICE.getName(), ALICE.getPhone(),ALICE.getEmail(),
+        Person validPerson1 = new Person(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
                 ALICE.getTelegram(), Set.of(new Member()), Set.of(attendance), ALICE.getFavouriteStatus());
-        Person validPerson2 = new Person(BENSON.getName(), BENSON.getPhone(),BENSON.getEmail(),
+        Person validPerson2 = new Person(BENSON.getName(), BENSON.getPhone(), BENSON.getEmail(),
                 BENSON.getTelegram(), Set.of(new Member()), Set.of(attendance), BENSON.getFavouriteStatus());
         model.setPerson(ALICE, validPerson1);
         model.setPerson(BENSON, validPerson2);
@@ -51,9 +51,9 @@ public class UnmarkAttendanceCommandTest {
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(
                 List.of(ALICE.getTelegram(), BENSON.getTelegram()), attendance);
 
-        Person unmarkedPerson1 = new Person(ALICE.getName(), ALICE.getPhone(),ALICE.getEmail(),
+        Person unmarkedPerson1 = new Person(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
                 ALICE.getTelegram(), Set.of(new Member()), new HashSet<>(), ALICE.getFavouriteStatus());
-        Person unmarkedPerson2 = new Person(BENSON.getName(), BENSON.getPhone(),BENSON.getEmail(),
+        Person unmarkedPerson2 = new Person(BENSON.getName(), BENSON.getPhone(), BENSON.getEmail(),
                 BENSON.getTelegram(), Set.of(new Member()), new HashSet<>(), BENSON.getFavouriteStatus());
         expectedModel.setPerson(ALICE, unmarkedPerson1);
         expectedModel.setPerson(BENSON, unmarkedPerson2);
@@ -116,7 +116,8 @@ public class UnmarkAttendanceCommandTest {
         assertTrue(commandAlice.equals(commandAlice));
 
         // same values -> returns true
-        UnmarkAttendanceCommand commandAliceCopy = new UnmarkAttendanceCommand(Arrays.asList(telegramAlice), attendance);
+        UnmarkAttendanceCommand commandAliceCopy = new UnmarkAttendanceCommand(
+                Arrays.asList(telegramAlice), attendance);
         assertTrue(commandAlice.equals(commandAliceCopy));
 
         // different types -> returns false
@@ -134,7 +135,8 @@ public class UnmarkAttendanceCommandTest {
         Telegram telegramAlice = new Telegram("aliceTelegram");
         Attendance attendance = new Attendance("2024-10-21");
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(Arrays.asList(telegramAlice), attendance);
-        String expected = UnmarkAttendanceCommand.class.getCanonicalName() + "{telegrams=[aliceTelegram], attendance=" + attendance + "}";
+        String expected = UnmarkAttendanceCommand.class.getCanonicalName()
+                + "{telegrams=[aliceTelegram], attendance=" + attendance + "}";
         assertEquals(expected, command.toString());
     }
 }
