@@ -62,6 +62,14 @@ public class AddExamScoreCommandTest {
     }
 
     @Test
+    public void execute_examScoreNotEdited_throwsCommandException() {
+        AddExamScoreCommand addExamScoreCommand = new AddExamScoreCommand(INDEX_FIRST_PERSON,
+                new Exam(VALID_EXAM_FINAL), "NIL");
+        assertThrows(CommandException.class, AddExamScoreCommand.MESSAGE_EXAMSCORE_NOT_EDITED, ()
+                -> addExamScoreCommand.execute(model));
+    }
+
+    @Test
     public void equals() {
         final AddExamScoreCommand standardCommand = new AddExamScoreCommand(INDEX_FIRST_PERSON,
                 new Exam(VALID_EXAM_MIDTERM), VALID_EXAM_SCORE_AMY);
