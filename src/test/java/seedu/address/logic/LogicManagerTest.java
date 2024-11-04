@@ -63,23 +63,28 @@ public class LogicManagerTest {
     @Test
     public void execute_deleteCommandRequiresConfirmation_displaysDeleteConfirmationMessage()
             throws CommandException, ParseException {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete 1";
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + JOB_DESC_AMY + INCOME_DESC_AMY;
+        logic.execute(addCommand);
         assertCommandSuccess(deleteCommand, MESSAGE_DELETE_CONFIRMATION, model);
     }
 
     @Test
     public void execute_cancelDeleteCommand_success() throws CommandException, ParseException {
-        String[] deleteCommand = {"delete 9", "no"};
+        String[] deleteCommand = {"delete 1", "no"};
         Model expectedModel = new ModelManager(model.getAgentAssist(), new UserPrefs());
-        assertCommandSuccess(deleteCommand[0], MESSAGE_DELETE_CONFIRMATION, expectedModel);
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + JOB_DESC_AMY + INCOME_DESC_AMY;
+        logic.execute(addCommand);
+        assertCommandSuccess(deleteCommand[0], MESSAGE_DELETE_CONFIRMATION, model);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() throws CommandException, ParseException {
-        String[] deleteCommand = {"delete 9", "y"};
-        logic.execute(deleteCommand[0]);
+        String deleteCommand = "delete 9";
         assertThrows(CommandException.class, MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX, () ->
-                logic.execute(deleteCommand[1]));
+                logic.execute(deleteCommand));
     }
 
     @Test
