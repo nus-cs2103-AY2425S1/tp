@@ -10,6 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -79,6 +80,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a {@code person} in the address book use this phone number.
+     */
+    public boolean hasPhoneNumber(Phone phone) {
+        requireNonNull(phone);
+        for (Person p : persons) {
+            if (p.getPhone().equals(phone)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

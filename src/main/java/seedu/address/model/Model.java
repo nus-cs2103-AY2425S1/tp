@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * The API of the Model component.
@@ -60,6 +61,11 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a {@code person} in the address book use this phone number.
+     */
+    boolean hasPhoneNumber(Phone phone);
 
     /**
      * Deletes the given person.
