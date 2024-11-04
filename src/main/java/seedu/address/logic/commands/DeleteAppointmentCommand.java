@@ -69,7 +69,10 @@ public class DeleteAppointmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED);
         }
 
-        model.deleteAppointment(personWithAppointmentToDelete, appointment);
+        Person personWithAppointmentDeleted = personWithAppointmentToDelete;
+        personWithAppointmentDeleted.removeAppointment(appointment);
+        model.setPerson(personWithAppointmentToDelete, personWithAppointmentDeleted);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // if the person has no scheduled appointments and a reminder set, delete the reminder
         if (lastShownList.get(index).getSchedules().isEmpty()
