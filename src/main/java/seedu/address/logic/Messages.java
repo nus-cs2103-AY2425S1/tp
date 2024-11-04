@@ -1,9 +1,13 @@
 package seedu.address.logic;
 
+
+import static seedu.address.model.person.PersonUtil.getRoleSpecificInfoString;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Volunteer;
@@ -48,8 +52,16 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        try {
+            String roleSpecificInfo = getRoleSpecificInfoString(person);
+            builder.append("; ").append(roleSpecificInfo);
+        } catch (CommandException e) {
+            builder.append("; Role info unavailable: ").append(e.getMessage());
+        }
         return builder.toString();
     }
+
+
 
     /**
      * Formats the updated {@code volunteer}'s new hours for display to the user.
