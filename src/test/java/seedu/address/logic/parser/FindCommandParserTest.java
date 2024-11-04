@@ -139,6 +139,25 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void test_parseWithNameAndClassIdAndTags_success() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonPredicateBuilder().withNameKeywords(Arrays.asList("Alice", "Ben"))
+                        .withClassIdKeywords(Arrays.asList("1", "2"))
+                        .withTagsKeywords(List.of("tag1", "tag2")));
+        assertParseSuccess(parser, " n/Alice Ben c/1 2 t/tag1 tag2", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " n/ \n Alice \n \t Ben c/ \n 1 \n \t 2  \t t/ \n tag1 \n \t tag2  \t",
+                expectedFindCommand);
+    }
+
+    @Test
+    public void test_nonEmptyPreambleWithValidArgsWithNameAndClassIdAndTags_failure() {
+        assertParseFailure(parser, "asdf n/Test c/Test t/Test",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void test_nonEmptyPreambleWithValidArgsWithClassIdAndTags_failure() {
         assertParseFailure(parser, "asdf c/Test t/Test",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -154,6 +173,23 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " m/ \n 2022-12  \t t/ \n tag1 \n \t tag2  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void test_parseWithAllPrefixes_success() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonPredicateBuilder()
+                        .withNameKeywords(Arrays.asList("Alice", "Bob"))
+                        .withClassIdKeywords(Arrays.asList("1", "2"))
+                        .withMonthPaidKeywords(List.of("2022-12"))
+                        .withNotMonthPaidKeywords(List.of("2022-11"))
+                        .withTagsKeywords(List.of("tag1", "tag2")));
+        assertParseSuccess(parser, " n/Alice Bob c/1 2 m/2022-12 !m/2022-11 t/tag1 tag2", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " n/ \n Alice \n \t Bob c/ \n 1 \n \t 2  \t m/ "
+                        + "\n 2022-12  \t !m/ \n 2022-11  \t t/ \n tag1 \n \t tag2  \t",
+                expectedFindCommand);
     }
 
     @Test
