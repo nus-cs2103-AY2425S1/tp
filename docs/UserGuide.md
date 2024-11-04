@@ -14,18 +14,18 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-2/tp/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your VolunSync application.
+1. Copy the file to the folder you want to use as the _home folder_ for your VolunSync application.
 
-4. Open your computer's command terminal:
+1. Open your computer's command terminal:
     - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
     - On Mac/Linux: Open the Terminal from your Applications.
-5. In the terminal, type `cd` followed by the path to the folder with the .jar file, then run the following command:
+1. In the terminal, type `cd` followed by the path to the folder with the .jar file, then run the following command:
    java -jar name_of_jar_file. For example "java -jar volunsync-v1.4.jar".
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
    Some example commands you can try:
 
     * `list` : Lists all volunteers and events in the VolunSync database.
@@ -40,7 +40,7 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
 
     * `exit` : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
