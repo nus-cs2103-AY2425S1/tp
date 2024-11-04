@@ -40,7 +40,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index provided should be a non-zero unsigned integer.";
 
-    public static final String MESSAGE_INVALID_ID = "Id provided should be a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ID = "ID provided should be a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
