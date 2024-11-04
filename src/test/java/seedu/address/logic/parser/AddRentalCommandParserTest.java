@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddRentalCommand.MESSAGE_INVALID_RENTAL_END_DATE;
+import static seedu.address.logic.commands.AddRentalCommand.MESSAGE_REQUIRE_ADDRESS;
+import static seedu.address.logic.commands.AddRentalCommand.MESSAGE_USAGE;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.CUSTOMER_LIST_DESC_ONE;
@@ -175,27 +178,27 @@ public class AddRentalCommandParserTest {
 
     @Test
     public void parse_missingAddressPrefix_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRentalCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 
-        // missing address prefix
+        // missing address prefix (with address value)
         assertParseFailure(parser, "1" + VALID_ADDRESS_ONE, expectedMessage);
-
         assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE, expectedMessage);
-
         assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
                 + RENTAL_END_DATE_DESC_ONE, expectedMessage);
-
         assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
                 + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE, expectedMessage);
-
         assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
                 + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE, expectedMessage);
-
         assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
                 + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE,
                 expectedMessage);
-
         assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
+                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
+                + CUSTOMER_LIST_DESC_ONE, expectedMessage);
+
+        // missing address prefix
+        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_REQUIRE_ADDRESS);
+        assertParseFailure(parser, "1" + RENTAL_START_DATE_DESC_ONE
                 + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
                 + CUSTOMER_LIST_DESC_ONE, expectedMessage);
     }
@@ -276,6 +279,12 @@ public class AddRentalCommandParserTest {
                 + INVALID_RENTAL_END_DATE_DESC + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
                 + CUSTOMER_LIST_DESC_ONE, RentalDate.MESSAGE_CONSTRAINTS);
 
+        // invalid combination of rental start date and end date
+        assertParseFailure(parser, "1" + ADDRESS_DESC_ONE + " " + PREFIX_RENTAL_START_DATE
+                + VALID_RENTAL_END_DATE_ONE + " " + PREFIX_RENTAL_END_DATE + VALID_RENTAL_START_DATE_ONE
+                + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE + CUSTOMER_LIST_DESC_ONE,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_RENTAL_END_DATE));
+
         // invalid rent due date
         assertParseFailure(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
                 + RENTAL_END_DATE_DESC_ONE + INVALID_RENT_DUE_DATE_DESC + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
@@ -299,7 +308,6 @@ public class AddRentalCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
                         + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
-                        + INVALID_CUSTOMER_LIST_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRentalCommand.MESSAGE_USAGE));
+                        + INVALID_CUSTOMER_LIST_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 }
