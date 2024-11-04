@@ -26,7 +26,7 @@ public class TodayCommand extends Command {
         }
         return new CommandResult(String.format(Messages.MESSAGE_TODAY_APPOINTMENTS,
                                                 model.getFilteredPersonList().size()),
-                                        false, false, false, true);
+                                        false, false, false, false);
     }
 
     @Override
