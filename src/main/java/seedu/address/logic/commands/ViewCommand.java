@@ -9,6 +9,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Telegram;
 
 /**
  * View all information of specified contact
@@ -36,28 +37,6 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Checks if char array given contains any illegal characters (not letters, numbers or underscore)
-     * @param arr char array
-     * @return boolean value
-     */
-    public boolean containsIllegalCharacters(char[] arr) {
-        char[] legalCharacters = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-            'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-            'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '_'};
-        int illegalCount = 0;
-        for (Character c : arr) {
-            boolean isLegal = false;
-            for (Character lc : legalCharacters) {
-                if (!isLegal) {
-                    isLegal = c.equals(lc);
-                }
-            }
-            illegalCount = !isLegal ? illegalCount + 1 : illegalCount;
-        }
-        return illegalCount > 0;
-    }
-
-    /**
      * Checks if telegram handle for this ViewCommand instance is at least 5
      * characters long and that it contains no illegal characters. Otherwise
      * throws relevant exception
@@ -66,8 +45,8 @@ public class ViewCommand extends Command {
     public void isValidHandle() throws CommandException {
         char[] arr = this.tele.toCharArray();
         if (arr.length < 5) {
-            throw new CommandException(Messages.MESSAGE_TOO_SHORT_TELEGRAM);
-        } else if (containsIllegalCharacters(arr)) {
+            throw new CommandException(Messages.MESSAGE_LENGTH_INVALID_TELEGRAM);
+        } else if (Telegram.isValidTelegram(this.tele)) {
             throw new CommandException(Messages.MESSAGE_ILLEGAL_CHARACTERS_IN_TELEGRAM);
         }
     }

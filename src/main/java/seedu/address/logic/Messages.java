@@ -19,8 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_TELEGRAM = "Cannot find person with telegram handle: @%1$s";
-    public static final String MESSAGE_TOO_SHORT_TELEGRAM =
-            "The telegram handle entered is too short (min 5 characters).";
+    public static final String MESSAGE_LENGTH_INVALID_TELEGRAM =
+            "The telegram handle should be 5-32 characters long.";
 
     public static final String MESSAGE_ILLEGAL_CHARACTERS_IN_TELEGRAM =
             "The telegram handle entered contains illegal characters.\n"
