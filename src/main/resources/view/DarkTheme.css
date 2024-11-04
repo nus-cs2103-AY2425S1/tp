@@ -419,3 +419,19 @@
     -fx-border-color: #5a5a5a; /* Medium grey border for a subtle highlight */
     -fx-font-size: 12px;
 }
+
+.student-card-done {
+    -fx-background-color: #93faa5 !important; /* Green when student completed assignment */
+}
+
+.student-card-not-done {
+    -fx-background-color: #d24d57 !important; /* Red when the assignment is not done */
+}
+
+.attendanceFlowPane-done {
+    -fx-background-color: #b7f4d8 !important; /* Moderate green when student completed assignment */
+}
+
+.attendanceFlowPane-not-done {
+    -fx-background-color: #f1828d !important; /* Moderate red when the assignment is not done */
+}

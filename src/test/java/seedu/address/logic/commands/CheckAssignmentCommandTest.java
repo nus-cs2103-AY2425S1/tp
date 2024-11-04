@@ -45,6 +45,17 @@ public class CheckAssignmentCommandTest {
     }
 
     @Test
+    public void execute_isCheckingAssignment_returnsTrue() throws Exception {
+        ReadOnlyAddressBook addressBook = TypicalStudents.getTypicalAddressBook();
+        AssignmentList assignmentList = TypicalAssignments.getTypicalAssignmentList();
+        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList, new TutorialList());
+        CheckAssignmentCommand checkCommand = new CheckAssignmentCommand(ASSIGNMENT1);
+
+        CommandResult result = checkCommand.execute(model);
+        assertTrue(CheckAssignmentCommand.isCheckingAssignment());
+    }
+
+    @Test
     public void equals() {
         CheckAssignmentCommand command1 = new CheckAssignmentCommand(ASSIGNMENT1);
         Assignment assignment2 = new Assignment("Assignment 2", ASSIGNMENT1.getDueDate());

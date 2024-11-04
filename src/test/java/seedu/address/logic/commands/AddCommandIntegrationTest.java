@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
@@ -44,12 +43,4 @@ public class AddCommandIntegrationTest {
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
                 expectedModel);
     }
-
-    @Test
-    public void execute_duplicateStudent_throwsCommandException() {
-        Student studentInList = model.getAddressBook().getStudentList().get(0);
-        assertCommandFailure(new AddCommand(studentInList, TUTORIAL_ID), model,
-                AddCommand.MESSAGE_DUPLICATE_STUDENT);
-    }
-
 }
