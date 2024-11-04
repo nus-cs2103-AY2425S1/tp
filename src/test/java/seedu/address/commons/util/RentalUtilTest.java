@@ -65,23 +65,23 @@ public class RentalUtilTest {
     }
 
     @Test
-    public void isCustomerListSame() {
+    public void areCustomerListsSame() {
         CustomerList sampleList = new CustomerList("David;Steven");
         CustomerList sameAsSample = new CustomerList("David;Steven");
         CustomerList differentOrder = new CustomerList("Steven;David");
         CustomerList differentList = new CustomerList("Andrew;Bryan");
 
         // null one of CustomerList or both
-        assertThrows(NullPointerException.class, () -> RentalUtil.isCustomerListSame(null, sampleList));
-        assertThrows(NullPointerException.class, () -> RentalUtil.isCustomerListSame(sampleList, null));
-        assertThrows(NullPointerException.class, () -> RentalUtil.isCustomerListSame(null, null));
+        assertThrows(NullPointerException.class, () -> RentalUtil.areCustomerListsSame(null, sampleList));
+        assertThrows(NullPointerException.class, () -> RentalUtil.areCustomerListsSame(sampleList, null));
+        assertThrows(NullPointerException.class, () -> RentalUtil.areCustomerListsSame(null, null));
 
         // same customer list
-        assertTrue(RentalUtil.isCustomerListSame(sampleList, sampleList));
-        assertTrue(RentalUtil.isCustomerListSame(sampleList, sameAsSample));
-        assertTrue(RentalUtil.isCustomerListSame(sampleList, differentOrder));
+        assertTrue(RentalUtil.areCustomerListsSame(sampleList, sampleList));
+        assertTrue(RentalUtil.areCustomerListsSame(sampleList, sameAsSample));
+        assertTrue(RentalUtil.areCustomerListsSame(sampleList, differentOrder));
 
         // different customer list
-        assertFalse(RentalUtil.isCustomerListSame(sampleList, differentList));
+        assertFalse(RentalUtil.areCustomerListsSame(sampleList, differentList));
     }
 }

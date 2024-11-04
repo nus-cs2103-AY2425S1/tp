@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RENT_DUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,22 +42,28 @@ public class CommandBox extends UiPart<Region> {
     private static final String DOWN_COMMAND = "downCommand";
 
     private static final ObservableList<String> COMMANDS = FXCollections.observableArrayList(
-            "cadd", "cedit", "clear", "exit", "find", "radd", "redit", "rview"
+            "cadd", "cdelete", "cedit", "clear", "exit", "export", "find", "help", "import", "list", "radd",
+            "redit", "rdelete", "rview", "sort"
     );
     private static final ObservableList<String> NO_PARAMETERS = FXCollections.observableArrayList();
     private static final ObservableList<String> CADD_PARAMETERS = FXCollections.observableArrayList(
             PREFIX_EMAIL.getPrefix(), PREFIX_NAME.getPrefix(), PREFIX_PHONE.getPrefix()
     );
+
     private static final ObservableList<String> CEDIT_PARAMETERS = FXCollections.observableArrayList(
             PREFIX_EMAIL.getPrefix(), PREFIX_NAME.getPrefix(), PREFIX_PHONE.getPrefix()
     );
     private static final ObservableList<String> FIND_PARAMETERS = FXCollections.observableArrayList(
-            PREFIX_KEYWORD.getPrefix()
+            PREFIX_KEYWORD.getPrefix(), PREFIX_NAME.getPrefix(), PREFIX_PHONE.getPrefix(), PREFIX_EMAIL.getPrefix(),
+            PREFIX_TAG.getPrefix()
     );
     private static final ObservableList<String> RADD_PARAMETERS = FXCollections.observableArrayList(
             PREFIX_ADDRESS.getPrefix(), PREFIX_CUSTOMER_LIST.getPrefix(), PREFIX_DEPOSIT.getPrefix(),
             PREFIX_RENT_DUE_DATE.getPrefix(), PREFIX_RENTAL_END_DATE.getPrefix(), PREFIX_MONTHLY_RENT.getPrefix(),
             PREFIX_RENTAL_START_DATE.getPrefix()
+    );
+    private static final ObservableList<String> RDELETE_PARAMETERS = FXCollections.observableArrayList(
+            PREFIX_CLIENT_INDEX.getPrefix(), PREFIX_RENTAL_INDEX.getPrefix()
     );
     private static final ObservableList<String> REDIT_PARAMETERS = FXCollections.observableArrayList(
             PREFIX_ADDRESS.getPrefix(), PREFIX_CLIENT_INDEX.getPrefix(), PREFIX_CUSTOMER_LIST.getPrefix(),
@@ -157,9 +164,11 @@ public class CommandBox extends UiPart<Region> {
             return FIND_PARAMETERS;
         case "radd":
             return RADD_PARAMETERS;
+        case "rdelete":
+            return RDELETE_PARAMETERS;
         case "redit":
             return REDIT_PARAMETERS;
-        case "clear", "exit":
+        case "cdelete", "clear", "exit", "export", "help", "import", "list", "rview", "sort":
             return NO_PARAMETERS;
         default:
             return FXCollections.observableArrayList();

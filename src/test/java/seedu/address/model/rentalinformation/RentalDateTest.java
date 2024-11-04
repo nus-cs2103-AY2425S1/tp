@@ -51,6 +51,44 @@ public class RentalDateTest {
     }
 
     @Test
+    public void isCurrentDateSameAsGivenDate() {
+        RentalDate nullRentalDate = new RentalDate();
+        RentalDate rentalStartDate = new RentalDate("01/01/2024");
+        RentalDate rentalEndDate = new RentalDate("31/12/2024");
+
+        // null given date
+        assertTrue(nullRentalDate.isCurrentDateSameAsGivenDate(rentalEndDate));
+        assertTrue(rentalStartDate.isCurrentDateSameAsGivenDate(nullRentalDate));
+        assertTrue(nullRentalDate.isCurrentDateSameAsGivenDate(nullRentalDate));
+
+        // same date
+        assertTrue(rentalStartDate.isCurrentDateSameAsGivenDate(rentalStartDate));
+
+        // different date
+        assertFalse(rentalStartDate.isCurrentDateSameAsGivenDate(rentalEndDate));
+        assertFalse(rentalEndDate.isCurrentDateSameAsGivenDate(rentalStartDate));
+    }
+
+    @Test
+    public void isCurrentDateLaterThanGivenDate() {
+        RentalDate nullRentalDate = new RentalDate();
+        RentalDate rentalStartDate = new RentalDate("01/01/2024");
+        RentalDate rentalEndDate = new RentalDate("31/12/2024");
+
+        // null given date
+        assertTrue(nullRentalDate.isCurrentDateLaterThanGivenDate(rentalEndDate));
+        assertTrue(rentalStartDate.isCurrentDateLaterThanGivenDate(nullRentalDate));
+        assertTrue(nullRentalDate.isCurrentDateLaterThanGivenDate(nullRentalDate));
+
+        // later date
+        assertTrue(rentalEndDate.isCurrentDateLaterThanGivenDate(rentalStartDate));
+
+        // earlier or same date
+        assertFalse(rentalStartDate.isCurrentDateLaterThanGivenDate(rentalEndDate));
+        assertFalse(rentalStartDate.isCurrentDateLaterThanGivenDate(rentalStartDate));
+    }
+
+    @Test
     public void equals() {
         RentalDate rentalDate = new RentalDate("01/01/2024");
 

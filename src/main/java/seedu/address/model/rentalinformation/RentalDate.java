@@ -66,6 +66,34 @@ public class RentalDate {
         return true;
     }
 
+    /**
+     * Checks if the current rental date is the same date as the given rental date.
+     *
+     * @param givenDate The rental date to compare against.
+     * @return True if the current rental date is the same date as the given rental date; false otherwise.
+     */
+    public boolean isCurrentDateSameAsGivenDate(RentalDate givenDate) {
+        if (this.rentalDate == null || givenDate.rentalDate == null) {
+            return true;
+        }
+
+        return this.rentalDate.isEqual(givenDate.rentalDate);
+    }
+
+    /**
+     * Checks if the current rental date is later date than the given rental date.
+     *
+     * @param givenDate The rental date to compare against.
+     * @return True if the current rental date is later date than the given rental date; false otherwise.
+     */
+    public boolean isCurrentDateLaterThanGivenDate(RentalDate givenDate) {
+        if (this.rentalDate == null || givenDate.rentalDate == null) {
+            return true;
+        }
+
+        return this.rentalDate.isAfter(givenDate.rentalDate);
+    }
+
     @Override
     public String toString() {
         return rentalDate == null

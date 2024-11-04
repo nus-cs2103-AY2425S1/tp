@@ -87,7 +87,7 @@ public class CustomerList {
             return false;
         }
 
-        return RentalUtil.isCustomerListSame(this, otherCustomerList);
+        return RentalUtil.areCustomerListsSame(this, otherCustomerList);
     }
 
     @Override
