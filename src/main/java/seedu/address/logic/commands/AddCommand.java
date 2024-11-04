@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_CONTACTTYPE + "CONTACT TYPE"
             + PREFIX_NAME + "NAME "
-            + PREFIX_TELEHANDLE + "TELEGRAMHANDLE "
+            + "[" + PREFIX_TELEHANDLE + "TELEGRAMHANDLE] "
             + PREFIX_MOD + "MODULE NAME "
             + PREFIX_REMARK + "REMARK "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -46,6 +46,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_NO_CONTACT_DETAIL = "At least one field out of phone, email and " +
+            "telegram handle must be provided";
 
     private final Person toAdd;
 
