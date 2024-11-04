@@ -249,7 +249,7 @@ public class ParserUtil {
         } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             throw new ParseException(getErrorMessageForPrefix(PREFIX_DATE, FLAG_CLIENT));
         } else {
-
+            // All other cases are valid
         }
     }
 
@@ -268,7 +268,7 @@ public class ParserUtil {
         } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             throw new ParseException(getErrorMessageForPrefix(PREFIX_DATE, FLAG_VENDOR));
         } else {
-
+            // All other cases are valid
         }
     }
 
@@ -293,7 +293,7 @@ public class ParserUtil {
         } else if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             throw new ParseException(getErrorMessageForPrefix(PREFIX_TAG, FLAG_EVENT));
         } else {
-
+            // All other cases are valid
         }
     }
 }
