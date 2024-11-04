@@ -367,10 +367,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC3 - Find Patient by Name
 
 **MSS:**
-1. User requests to find a patient by name
-2. MediBase3 request for search requirements
-3. User provides the details required to search for the patient
-4. MediBase3 shows the selected patient information
+1. User requests to find a patient by with a specific keyword in their name
+2. MediBase3 checks each patient's name in the list that contains the keyword
+4. MediBase3 shows the selected patient information that match the criteria
 
    Use case ends
 
@@ -407,10 +406,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC5 - Find Patient by Medical Condition
 
 **MSS:**
-1. User requests to find a patient by medical condition
-2. MediBase3 request for search requirements
-3. User provides the details required to search for the patient
-4. MediBase3 shows the selected patient information
+1. User requests to find a patient by with a specific keyword in their medical condition
+2. MediBase3 checks each patient's medical condition in the list that contains the keyword
+4. MediBase3 shows the selected patient information that match the criteria
 
    Use case ends
 
@@ -475,7 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User requests to add medical condition to the patient detail
 2. User provides the medical condition
-3. MB3 adds the medical condition to the patient detail
+3. MediBase3 adds the medical condition to the patient detail
 
    Use case ends
 
@@ -550,7 +548,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User requests to delete patient contact 
 2. User provides the details required to delete the patient contact
-3. MB3 deletes the patient’s contact
+3. MediBase3 deletes the patient’s contact
 
    Use case ends
 
@@ -616,7 +614,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User requests to delete a patient’s allergies
 2. User provides the details required to delete the patient’s allergies
-3. MB3 deletes the patient’s allergies
+3. MediBase3 deletes the patient’s allergies
 
    Use case ends
 
@@ -649,7 +647,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User requests to delete a patient’s appointment
 2. User provides the details required to delete the patient’s appointment
-3. MB3 deletes the appointment
+3. MediBase3 deletes the appointment
 
    Use case ends.
 
