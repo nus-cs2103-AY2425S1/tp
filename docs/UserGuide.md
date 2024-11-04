@@ -324,7 +324,7 @@ section for detailed information
 Command detail & constraints:
 
 - This command registers a new student in the system with essential details like name and student ID, and optionally assigns them to a tutorial.
-- The field **Format:** `[c/TUTORIAL_ID]`is optional to add. If not provided, the student will not be assigned to any tutorial upon addition.
+- The field format: `[c/TUTORIAL_ID]`is optional to add. If not provided, the student will not be assigned to any tutorial upon addition.
 - Each student must have a unique student ID within the system.
 - Duplicate name with different student ID is allowed
 
