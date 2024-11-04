@@ -25,7 +25,7 @@ public class GroupCommand extends Command {
 
     public static final String MESSAGE_NO_STUDENTS_FOUND = "No matching students found.";
 
-    public static final String MESSAGE_SUCCESS = "Group %s created with %d students";
+    public static final String MESSAGE_SUCCESS = "Group %s created with %d student(s)";
 
     public static final String MESSAGE_DUPLICATE_GROUP = "Group name already taken!!";
     private final String groupName;
