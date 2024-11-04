@@ -18,14 +18,14 @@ import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddMemberCommand object
+ * Parses input arguments and creates a new AddMemberCommand object.
  */
 public class AddMemberCommandParser implements Parser<AddMemberCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddMemberCommand
      * and returns an AddMemberCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public AddMemberCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

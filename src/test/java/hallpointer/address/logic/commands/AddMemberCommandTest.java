@@ -36,7 +36,7 @@ public class AddMemberCommandTest {
         assertEquals(
                 String.format(
                         AddMemberCommand.MESSAGE_SUCCESS,
-                        validMember.getName().fullName,
+                        validMember.getName().value,
                         validMember.getRoom().value,
                         validMember.getTelegram().value
                 ),

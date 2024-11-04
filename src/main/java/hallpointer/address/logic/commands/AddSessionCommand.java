@@ -6,7 +6,7 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,13 +18,13 @@ import hallpointer.address.model.member.Member;
 import hallpointer.address.model.session.Session;
 
 /**
- * Adds a session to the address book.
+ * Adds a session to the member(s) specified by the given index number(s).
  */
 public class AddSessionCommand extends Command {
     public static final String COMMAND_WORD = "add_session";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a session to the address book. "
+            + ": Adds a session to the member(s) in the displayed member list that matches the given index number(s).\n"
             + "Parameters: "
             + PREFIX_SESSION_NAME + "NAME "
             + PREFIX_DATE + "DATE "
@@ -40,19 +40,23 @@ public class AddSessionCommand extends Command {
             + "added successfully with %4$d member attending.";
     public static final String MESSAGE_DUPLICATE_SESSION = "Error: Session already exists.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
+
     private final Session toAdd;
-    private final List<Index> memberIndexes;
+    private final Set<Index> memberIndexes;
 
     /**
-     * Creates an AddSessionCommand to add the specified {@code Session}
+     * Creates an AddSessionCommand to add the session to the specified list of members.
+     *
+     * @param session The session to add to the members.
+     * @param memberIndexes The indexes of the selected members.
      */
     public AddSessionCommand(Session session, Set<Index> memberIndexes) {
         requireNonNull(session);
         requireNonNull(memberIndexes);
-        assert !memberIndexes.isEmpty();
+        assert !memberIndexes.isEmpty() : "memberIndexes should not be empty";
 
         toAdd = session;
-        this.memberIndexes = memberIndexes.stream().toList();
+        this.memberIndexes = memberIndexes;
     }
 
     @Override
@@ -60,7 +64,7 @@ public class AddSessionCommand extends Command {
         requireNonNull(model);
 
         List<Member> lastShownList = model.getFilteredMemberList();
-        List<Member> memberToUpdate = new ArrayList<>();
+        Set<Member> memberToUpdate = new HashSet<>();
         for (Index index : memberIndexes) {
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(MESSAGE_INVALID_INDEX);

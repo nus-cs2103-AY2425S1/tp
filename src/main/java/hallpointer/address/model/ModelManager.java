@@ -85,6 +85,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        requireNonNull(addressBook);
         this.addressBook.resetData(addressBook);
     }
 
@@ -96,11 +97,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteMember(Member target) {
+        requireNonNull(target);
         addressBook.removeMember(target);
     }
 
     @Override
     public void addMember(Member member) {
+        requireNonNull(member);
         addressBook.addMember(member);
         updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }

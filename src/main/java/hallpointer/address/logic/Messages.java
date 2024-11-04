@@ -17,8 +17,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX = "Error: Invalid index specified.";
     public static final String MESSAGE_MEMBERS_LISTED_OVERVIEW = "%1$d members listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_SESSION_DISPLAYED_INDEX = "The session index provided is invalid";
+            "Multiple values specified for the following single-valued field(s): ";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -32,7 +32,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code member} for display to the user.
+     * Formats the {@code member} for display to the user (does not include session details).
      */
     public static String format(Member member) {
         final StringBuilder builder = new StringBuilder();

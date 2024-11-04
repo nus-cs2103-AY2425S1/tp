@@ -55,6 +55,7 @@ public class SessionName {
         }
 
         SessionName otherSessionName = (SessionName) other;
+        // We treat sessionName as case-insensitive
         return sessionName.toLowerCase().equals(otherSessionName.sessionName.toLowerCase());
     }
 

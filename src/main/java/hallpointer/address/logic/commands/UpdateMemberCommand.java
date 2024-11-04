@@ -35,8 +35,8 @@ public class UpdateMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "update_member";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the member identified "
-            + "by the index number used in the displayed member list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the member "
+            + "in the displayed member list that matches the given index number. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -45,11 +45,11 @@ public class UpdateMemberCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_ROOM + "9/10/203 "
+            + PREFIX_ROOM + "9-10-203 "
             + PREFIX_TELEGRAM + "johnDoe123 "
             + PREFIX_TAG + "friend";
 
-    public static final String MESSAGE_UPDATE_MEMBER_SUCCESS = "Member %1$s's details updated successfully.";
+    public static final String MESSAGE_SUCCESS = "Member %1$s's details updated successfully.";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
     public static final String MESSAGE_DUPLICATE_MEMBER = "A member with the same name already exists.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
@@ -87,7 +87,7 @@ public class UpdateMemberCommand extends Command {
 
         model.setMember(memberToUpdate, updatedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
-        return new CommandResult(String.format(MESSAGE_UPDATE_MEMBER_SUCCESS, Messages.format(updatedMember)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedMember)));
     }
 
     /**

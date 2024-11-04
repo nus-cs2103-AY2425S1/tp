@@ -86,6 +86,10 @@ public class Member {
         return totalPoints;
     }
 
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Session> getSessions() {
         return Collections.unmodifiableSet(sessions);
     }

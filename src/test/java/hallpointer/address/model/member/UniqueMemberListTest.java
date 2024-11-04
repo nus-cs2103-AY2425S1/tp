@@ -203,7 +203,7 @@ public class UniqueMemberListTest {
 
         // same member different details -> returns false
         differentUniqueMemberList = new UniqueMemberList();
-        differentUniqueMemberList.add(new MemberBuilder(ALICE).withRoom("1/1/1").build());
+        differentUniqueMemberList.add(new MemberBuilder(ALICE).withRoom("1-1-1").build());
         differentUniqueMemberList.add(BOB);
         assertFalse(uniqueMemberList.equals(differentUniqueMemberList));
     }
