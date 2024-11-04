@@ -286,6 +286,31 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void testSetUiStateValidStates () {
+        modelManager.setUiState(UiState.DEFAULT);
+        assertEquals(UiState.DEFAULT, modelManager.getUiState().get());
+
+        // Test with VENDOR_LIST state
+        modelManager.setUiState(UiState.VENDOR_LIST);
+        assertEquals(UiState.VENDOR_LIST, modelManager.getUiState().get());
+
+        // Test with EVENT_LIST state
+        modelManager.setUiState(UiState.EVENT_LIST);
+        assertEquals(UiState.EVENT_LIST, modelManager.getUiState().get());
+    }
+
+    @Test
+    public void testSetUiStateInvalidStates () {// Test that an assertion error is thrown for EVENT_DETAILS
+        assertThrows(AssertionError.class, () -> {
+            modelManager.setUiState(UiState.EVENT_DETAILS);
+        });
+
+        assertThrows(AssertionError.class, () -> {
+            modelManager.setUiState(UiState.VENDOR_DETAILS);
+        });
+    }
+
+    @Test
     public void equals() {
         EventTory eventTory = new EventToryBuilder().withVendor(ALICE).withVendor(BENSON).build();
         EventTory differentEventTory = new EventTory();
