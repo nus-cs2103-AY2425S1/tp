@@ -96,7 +96,7 @@ public class UnassignCommand extends Command {
             return handleMainView(model);
         }
 
-        Event event = getEventByIndex(model.getAssociatedEvents(vendor), eventIndex);
+        Event event = IndexResolverUtil.resolveEvent(model, eventIndex);
 
         assert model.isVendorAssignedToEvent(vendor, event) : "Vendor is not assigned to event although in association";
 
@@ -116,7 +116,7 @@ public class UnassignCommand extends Command {
             return handleMainView(model);
         }
 
-        Vendor vendor = getVendorByIndex(model.getAssociatedVendors(event), vendorIndex);
+        Vendor vendor = IndexResolverUtil.resolveVendor(model, vendorIndex);
 
         assert model.isVendorAssignedToEvent(vendor, event) : "Vendor is not assigned to event although in association";
 
@@ -124,19 +124,5 @@ public class UnassignCommand extends Command {
 
         return new CommandResult(
                 String.format(MESSAGE_UNASSIGN_SUCCESS, vendor.getName(), event.getName()));
-    }
-
-    private Vendor getVendorByIndex(List<Vendor> vendorList, Index index) throws CommandException {
-        if (index.getZeroBased() >= vendorList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
-        }
-        return vendorList.get(index.getZeroBased());
-    }
-
-    private Event getEventByIndex(List<Event> eventList, Index index) throws CommandException {
-        if (index.getZeroBased() >= eventList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        }
-        return eventList.get(index.getZeroBased());
     }
 }
