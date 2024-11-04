@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CRITERIA_FORMAT;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -160,6 +162,36 @@ public class ParserUtil {
             }
         }
         return criteriaSet;
+    }
+
+    /**
+     * Parses the given {@code String} of age criteria and returns a list of valid age criteria.
+     * A valid age criteria can only contain "<", ">", or numbers.
+     * If it contains "<" or ">", there must only be a single instance of either of them,
+     * and only as the first character. It cannot contain both.
+     *
+     * @param ageCriteria The string of age criteria to parse.
+     * @return A list of valid age criteria.
+     * @throws ParseException if any of the age criteria do not conform to the expected format.
+     */
+    public static List<String> parseAgeCriteria(String ageCriteria) throws ParseException {
+        requireNonNull(ageCriteria);
+        final List<String> ageCriteriaSet = new ArrayList<>();
+        for (String ageCriteriaString : ageCriteria.split(" ")) {
+            if (ageCriteriaString.isEmpty()) {
+                continue;
+            }
+            if (ageCriteriaString.matches("^[<>]?\\d+$")) {
+                ageCriteriaSet.add(ageCriteriaString);
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_CRITERIA_FORMAT,
+                    "Age criteria can only contain \"<\", \">\", or numbers. "
+                    + "If String contains \"<\" or \">\", there must only be a single instance of either of them, "
+                    + "and only as the first character. It cannot contain both."
+                ));
+            }
+        }
+        return ageCriteriaSet;
     }
 
     /**

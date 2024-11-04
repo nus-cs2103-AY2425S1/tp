@@ -23,11 +23,23 @@ public class ListCommandParserTest {
         // sort by email
         assertParseSuccess(parser, " s/email", new ListCommand("email", false));
 
+        // sort by income
+        assertParseSuccess(parser, " s/income", new ListCommand("income", false));
+
+        // sort by age
+        assertParseSuccess(parser, " s/age", new ListCommand("age", false));
+
         // sort by name with reverse
         assertParseSuccess(parser, " s/name r/", new ListCommand("name", true));
 
         // sort by email with reverse
         assertParseSuccess(parser, " s/email r/", new ListCommand("email", true));
+
+        // sort by income with reverse
+        assertParseSuccess(parser, " s/income r/", new ListCommand("income", true));
+
+        // sort by age with reverse
+        assertParseSuccess(parser, " s/age r/", new ListCommand("age", true));
 
     }
 
