@@ -71,7 +71,7 @@ public class TagCommand extends Command {
                 .map(Tag::toString)
                 .collect(Collectors.joining(", "));
 
-        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, addedTags,Messages.format(updatedPerson)));
+        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, addedTags, Messages.format(updatedPerson)));
     }
 
     /**
