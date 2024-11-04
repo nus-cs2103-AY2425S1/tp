@@ -51,4 +51,9 @@ public class FindCommandParserTest {
     public void parse_emptyInput_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse(" "));
     }
+    @Test
+    public void parse_invalidKeyword_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("find Alice -1234"));
+    }
+
 }
