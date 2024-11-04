@@ -7,7 +7,7 @@ Welcome to ResearchRoster! **Your Research, Simplified.**
 
 Designed with researchers in mind. ResearchRoster simplifies participant management so you can focus on what matters most: your research. Easily add and delete participants as required, conduct random sampling with a simple command, and export contacts for seamless communication.
 
-This user guide will walk you through: (this section will link to the individual sections in our UG)​
+This user guide will walk you through:
 - [Setting up](#quick-start) your ResearchRoster application​
 
 - Familiarising with the [Graphical User Interface (GUI)](#introduction-to-the-gui) and [Command Line Interface (CLI)​](#cli-tutorial)
@@ -304,6 +304,6 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
 **Delete** | `delete INDEX [INDEX...] [INDEX-INDEX]...`<br> e.g., `delete 3 6 10-15 20 30-40`
 **Find** | `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ...] [t/STUDY_GROUP_TAGS ...]`<br> e.g., `find n/James Jake`
-**Clear** | `clear`
+**Clear** | `clear` then `confirm`
 **Export** | `export FILENAME`<br> e.g., `export exported_email`
 **Assign** | `assign STUDY_GROUP [STUDY_GROUP ...]`<br> e.g., `assign P90-Control P90-Experiment`
