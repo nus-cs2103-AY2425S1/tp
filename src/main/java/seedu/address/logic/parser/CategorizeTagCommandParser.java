@@ -26,10 +26,12 @@ public class CategorizeTagCommandParser implements Parser<CategorizeTagCommand> 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
         Optional<String> parsedArgs = argMultimap.getValue(PREFIX_TAG);
         if (parsedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CategorizeTagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CategorizeTagCommand.MESSAGE_USAGE));
         }
         String[] split = parsedArgs.get().split("\\s+", 2);
+        if (split.length < 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CategorizeTagCommand.MESSAGE_USAGE));
+        }
         Tag tag = ParserUtil.parseTag(split[0]);
         TagCategory cat = parseCategory(split[1]);
         return new CategorizeTagCommand(tag, cat);

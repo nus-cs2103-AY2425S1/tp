@@ -100,7 +100,7 @@ public class Person {
     }
 
     /**
-     * Checks whether the person has the tags.
+     * Checks whether the person has the tags with the same tag name.
      */
     public boolean hasTag(Tag t) {
         return this.getTags().contains(t);

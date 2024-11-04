@@ -152,6 +152,13 @@ public class CampusConnect implements ReadOnlyCampusConnect {
         persons.addPersonTags(p, tagList);
     }
 
+    /**
+     * Gets the recorded {@code TagCategory} of {@Tag t}.
+     */
+    public TagCategory getTagCategory(Tag t) {
+        return persons.getTagCategory(t);
+    }
+
     //// util methods
 
     @Override
