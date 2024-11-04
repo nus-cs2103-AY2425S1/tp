@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.transaction.logic.Messages;

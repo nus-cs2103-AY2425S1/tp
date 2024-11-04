@@ -1,6 +1,6 @@
 package spleetwaise.transaction.logic.commands;
 
-import spleetwaise.address.commons.core.index.Index;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.util.ToStringBuilder;
 import spleetwaise.transaction.model.transaction.Status;
 

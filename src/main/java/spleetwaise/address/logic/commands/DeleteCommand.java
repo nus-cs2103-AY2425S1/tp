@@ -2,9 +2,9 @@ package spleetwaise.address.logic.commands;
 
 import java.util.List;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;

@@ -6,13 +6,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.util.StringUtil;
 
