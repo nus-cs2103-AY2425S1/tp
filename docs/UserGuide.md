@@ -14,7 +14,7 @@ This user guide will walk you through: (this section will link to the individual
 
 - Learning [different commands available](#features) on the application​
 
-- Utilizing [advanced features](#advanced-features) like Sample Assignment and Filtering​
+- Utilizing [advanced commands](#advanced-commands) like Sample Assignment and Filtering​
 
 By the end of this guide, you'll be a ResearchRoster pro, saving time and streamlining your research process.​
 
@@ -84,14 +84,14 @@ _Refer to the [Features](#features) section for details of each command!_
 
 ## Features
 
-#### Basic Features
+#### Basic Commands
   * [Viewing help : `help`](#viewing-help--help)
   * [Adding a person: `add`](#adding-a-person-add)
   * [Listing all persons : `list`](#listing-all-persons--list)
   * [Editing a person : `edit`](#editing-a-person--edit)
   * [Deleting persons : `delete`](#deleting-persons--delete)
 
-#### Advanced Features
+#### Advanced Commands
   * [Locating persons by criteria: `find`](#locating-persons-by-criteria-find)
   * [Clearing listed persons : `clear`](#clearing-listed-persons--clear)
   * [Exporting persons' emails : `export`](#exporting-persons-emails--export)
@@ -184,7 +184,7 @@ Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
 
 Examples:
 * `delete 2` deletes the 2nd person in the displayed list.
-* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the [`find` command](#locating-persons-by-criteria-find).
 * `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
 
 ### Exiting the program : `exit`
@@ -298,10 +298,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C`
-**Clear** | `clear`
-**Delete** | `delete INDEX [INDEX...] [INDEX-INDEX]...`<br> e.g., `delete 3 6 10-15 20 30-40`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ...] [t/STUDY_GROUP_TAGS ...]`<br> e.g., `find n/James Jake`
-**List** | `list`
 **Help** | `help`
+**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C`
+**List** | `list`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete INDEX [INDEX...] [INDEX-INDEX]...`<br> e.g., `delete 3 6 10-15 20 30-40`
+**Find** | `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ...] [t/STUDY_GROUP_TAGS ...]`<br> e.g., `find n/James Jake`
+**Clear** | `clear`
+**Export** | `export FILENAME`<br> e.g., `export exported_email`
+**Assign** | `assign STUDY_GROUP [STUDY_GROUP ...]`<br> e.g., `assign P90-Control P90-Experiment`
