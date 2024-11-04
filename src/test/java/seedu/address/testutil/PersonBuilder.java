@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.role.Member;
 import seedu.address.model.role.Role;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -111,4 +112,16 @@ public class PersonBuilder {
         return new Person(name, phone, email, telegram, roles, attendance, favouriteStatus);
     }
 
+    public PersonBuilder isMember(boolean b) {
+        this.roles.remove(new Member());
+        if (b) {
+            this.roles.add(new Member());
+        }
+        return this;
+    }
+
+    public PersonBuilder withAttendance(Attendance attendance) {
+        this.attendance.add(attendance);
+        return this;
+    }
 }
