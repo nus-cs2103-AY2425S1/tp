@@ -2,17 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 /**
  * Undoes the latest command.
@@ -26,11 +24,21 @@ public class UndoCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_UNDO_COMMAND_SUCCESS = "Undo successful:\n%s";
-    public static final String MESSAGE_UNDO_ADD = "%s has been unadded from SocialBook";
+    public static final String MESSAGE_UNDO_COMMAND_NEUTRAL = "No action to undo:\n%s";
+    public static final String MESSAGE_UNDO_ADD = "%s has been removed from SocialBook";
     public static final String MESSAGE_UNDO_EDIT = "Edits to %s has been reverted";
-    public static final String MESSAGE_UNDO_DELETE = "%s have been added back to SocialBook";
+    public static final String MESSAGE_UNDO_DELETE =
+            "%s and their appointments have been added back to SocialBook";
     public static final String MESSAGE_UNDO_CLEAR = "Here is the list before clearing";
-    private final ArrayList<Command> pastCommands;
+    public static final String MESSAGE_UNDO_DELETE_APPOINTMENT =
+            "Appointment for %s has been added back to appointments";
+    public static final String MESSAGE_UNDO_ADD_APPOINTMENT =
+            "Appointment for %s has been removed from appointments";
+
+    public static final String MESSAGE_UNDO_ADD_SCHEME = "Scheme for %s has been removed";
+
+    public static final String MESSAGE_UNDO_DELETE_SCHEME = "Scheme for %s has been added back";
+    private final CommandHistory pastCommands;
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     /**
@@ -38,7 +46,7 @@ public class UndoCommand extends Command {
      *
      * @param pastCommands all the past commands during this code run.
      */
-    public UndoCommand(ArrayList<Command> pastCommands) {
+    public UndoCommand(CommandHistory pastCommands) {
         this.pastCommands = pastCommands;
 
     }
@@ -46,87 +54,35 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (pastCommands.isEmpty()) {
+        if (pastCommands.getCommandInputHistory().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_LATEST_COMMAND);
         }
-        Command latestCommand = pastCommands.get(pastCommands.size() - 1);
+        Command latestCommand = pastCommands.getCommandInputHistory().get(pastCommands.getSize() - 1);
         String latestCommandWord = latestCommand.getCommandWord();
         logger.info("----------------[COMMAND UNDONE][" + latestCommandWord + "]");
         String resultMessage = String.format(
                 "No change as command undone (%s) was not an action command", latestCommandWord);
-
-        switch (latestCommandWord) {
-        case "add":
-            AddCommand addCommand = (AddCommand) latestCommand;
-            Person personToRemove = addCommand.getToAdd();
-            model.deletePerson(personToRemove);
-            pastCommands.remove(pastCommands.size() - 1);
-            resultMessage = String.format(MESSAGE_UNDO_ADD, personToRemove.getName());
-            break;
-        case "edit":
-            EditCommand editCommand = (EditCommand) latestCommand;
-            Person bfrEdit = editCommand.getUneditedPerson();
-            Person afterEdit = editCommand.getEditedPerson();
-            model.setPerson(afterEdit, bfrEdit);
-            pastCommands.remove(pastCommands.size() - 1);
-            resultMessage = String.format(MESSAGE_UNDO_EDIT, bfrEdit.getName());
-            break;
-
-        case "delete":
-            DeleteCommand dltCommand = (DeleteCommand) latestCommand;
-            List<Person> personsToAddBack = dltCommand.getPersonsToDelete();
-
-            for (int i = 0; i < personsToAddBack.size(); i++) {
-                model.addPerson(personsToAddBack.get(i), dltCommand.getTargetIndexes()[i].getZeroBased());
-            }
-            String namesAddedBack = personsToAddBack.stream()
-                    .map(person -> person.getName().toString())
-                    .collect(Collectors.joining(", "));
-            pastCommands.remove(pastCommands.size() - 1);
-            resultMessage = String.format(MESSAGE_UNDO_DELETE, namesAddedBack);
-            break;
-
-        case "clear":
-            ClearCommand clearCommand = (ClearCommand) latestCommand;
-            model.setAddressBook(clearCommand.getModel().getAddressBook());
-            model.setUserPrefs(clearCommand.getModel().getUserPrefs());
-            pastCommands.remove(pastCommands.size() - 1);
-            resultMessage = MESSAGE_UNDO_CLEAR;
-            break;
-
-        case "addscheme":
-            AddSchemeCommand addSchemeCommand = (AddSchemeCommand) latestCommand;
-            Person personToEdit = addSchemeCommand.getUneditedPerson();
-            Person editedPerson = addSchemeCommand.getEditedPerson();
-            model.setPerson(editedPerson, personToEdit);
-            pastCommands.remove(pastCommands.size() - 1);
-            resultMessage = String.format(MESSAGE_UNDO_EDIT, personToEdit.getName());
-            break;
-
-        case "deletescheme":
-            DeleteSchemeCommand deleteSchemeCommand = (DeleteSchemeCommand) latestCommand;
-            Person personToEditScheme = deleteSchemeCommand.getUneditedPerson();
-            Person editedPersonScheme = deleteSchemeCommand.getEditedPerson();
-            model.setPerson(editedPersonScheme, personToEditScheme);
-            pastCommands.remove(pastCommands.size() - 1);
-            resultMessage = String.format(MESSAGE_UNDO_EDIT, personToEditScheme.getName());
-            break;
-
-        default:
-            pastCommands.remove(pastCommands.size() - 1);
-            break;
-
+        if (Arrays.asList(ACTION_COMMANDS).contains(latestCommandWord)) {
+            resultMessage = latestCommand.undo(model, pastCommands);
+            return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_SUCCESS, resultMessage));
+        } else {
+            pastCommands.remove();
+            return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_NEUTRAL, resultMessage));
         }
-        return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_SUCCESS, resultMessage));
     }
 
-    public ArrayList<Command> getPastCommands() {
+    public CommandHistory getPastCommands() {
         return pastCommands;
     }
 
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        return null;
     }
 
     @Override
@@ -141,6 +97,7 @@ public class UndoCommand extends Command {
         }
 
         UndoCommand otherUndoCommand = (UndoCommand) other;
-        return pastCommands.equals(otherUndoCommand.getPastCommands());
+        return pastCommands.getCommandInputHistory()
+                .equals(otherUndoCommand.getPastCommands().getCommandInputHistory());
     }
 }

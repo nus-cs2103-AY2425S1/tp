@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import seedu.address.commons.core.index.Index;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -68,5 +69,10 @@ public class ViewPersonSchemeCommand extends Command {
 
         ViewPersonSchemeCommand otherSchemeCommand = (ViewPersonSchemeCommand) other;
         return targetIndex.equals(otherSchemeCommand.targetIndex);
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        return null;
     }
 }

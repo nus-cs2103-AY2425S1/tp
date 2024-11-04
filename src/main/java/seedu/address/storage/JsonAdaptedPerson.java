@@ -76,7 +76,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        if (!schemes.isEmpty()) {
+        if (schemes != null) {
             this.schemes.addAll(schemes);
         }
         this.updatedAt = updatedAt;

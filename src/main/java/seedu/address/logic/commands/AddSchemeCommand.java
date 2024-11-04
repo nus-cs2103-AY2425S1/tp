@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_ADD_SCHEME_PERSON_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD_SCHEME;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_EDIT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -158,5 +161,14 @@ public class AddSchemeCommand extends Command {
 
     public Person getEditedPerson() {
         return editedPerson;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        Person beforeEdit = this.getUneditedPerson();
+        Person afterEdit = this.getEditedPerson();
+        model.setPerson(afterEdit, beforeEdit);
+        pastCommands.remove();
+        return String.format(MESSAGE_UNDO_ADD_SCHEME, beforeEdit.getName());
     }
 }

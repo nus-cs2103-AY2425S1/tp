@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.*;
+import static seedu.address.logic.commands.UndoCommand.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.lang.reflect.Array;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -127,5 +129,14 @@ public class DeleteSchemeCommand extends Command {
 
     public Person getEditedPerson() {
         return editedPerson;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        Person beforeEdit = this.getUneditedPerson();
+        Person afterEdit = this.getEditedPerson();
+        model.setPerson(afterEdit, beforeEdit);
+        pastCommands.remove();
+        return String.format(MESSAGE_UNDO_DELETE_SCHEME, beforeEdit.getName());
     }
 }
