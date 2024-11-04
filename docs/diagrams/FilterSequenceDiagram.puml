@@ -6,8 +6,10 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "s:StatusPredicate" as StatusPredicate LOGIC_COLOR
 participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
+
 end box
 
 box Model MODEL_COLOR_T1
@@ -30,8 +32,15 @@ deactivate FilterCommandParser
 AddressBookParser -> FilterCommandParser : parse(...)
 activate FilterCommandParser
 
+create StatusPredicate
+FilterCommandParser -> StatusPredicate
+activate StatusPredicate
+
+StatusPredicate -> FilterCommandParser
+deactivate StatusPredicate
+
 create FilterCommand
-FilterCommandParser -> FilterCommand
+FilterCommandParser -> FilterCommand : s
 activate FilterCommand
 
 FilterCommand --> FilterCommandParser : f
@@ -50,7 +59,7 @@ deactivate AddressBookParser
 LogicManager -> FilterCommand : execute(m)
 activate FilterCommand
 
-FilterCommand -> Model : updateFilteredList(f.statusPredicate)
+FilterCommand -> Model : updateFilteredList(s)
 activate Model
 
 Model --> FilterCommand

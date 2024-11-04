@@ -4,6 +4,26 @@ HireMe is a **desktop app for managing internship applications, optimized for us
 while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, HireMe can get your internship tracking tasks done faster than traditional GUI apps.
 
+<!-- TOC -->
+* [HireMe User Guide](#hireme-user-guide)
+  * [Quick start](#quick-start)
+  * [Features](#features)
+    * [Viewing help : `/help`](#viewing-help--help)
+    * [Adding an internship application: `/add`](#adding-an-internship-application-add)
+    * [Listing all internship applications : `/list`](#listing-all-internship-applications--list)
+    * [Deleting an internship application : `/delete`](#deleting-an-internship-application--delete)
+    * [Finding applications by company name: `/find`](#finding-applications-by-company-name-find)
+    * [Updating the status of an internship application : `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application--accept-pending-reject)
+    * [Filtering internship applications by status: `/filter`](#filtering-internship-applications-by-status-filter)
+    * [Sorting internship applications: `/sort`](#sorting-internship-applications-sort)
+    * [Clearing all entries : `/clear`](#clearing-all-entries--clear)
+    * [Viewing status chart: `/chart`](#viewing-status-chart-chart)
+    * [Exiting the program : `/exit`](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+  * [Command summary](#command-summary)
+<!-- TOC -->
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -133,7 +153,7 @@ Examples:
 
 ### Filtering internship applications by status: `/filter`
 
-Filters through all the existing internship applications with specified status. Using /filter after /find resets the search and are not stackable.
+Filters through all the existing internship applications with specified status. 
 
 Format: `/filter STATUS`
 

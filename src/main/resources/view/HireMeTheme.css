@@ -138,7 +138,7 @@
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
     -fx-font-size: 13px;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
@@ -184,7 +184,7 @@
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -214,16 +214,16 @@
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 
 .menu-bar {
-    -fx-background-color: #F1ECE6; /* Background color for MenuBar */
+    -fx-background-color: #F1ECE6;
 }
 
 .menu-bar .menu-item {
-    -fx-text-fill: black; /* Text color for MenuItems */
+    -fx-text-fill: black;
 }
 
 .menu:hover, .menu:showing{
@@ -231,10 +231,9 @@
 
 }
 
-/* Override the default styling to prevent bright blue */
 .menu-item:focused {
-    -fx-background-color: derive(#F1ECE6, -10%); /* Background color for focused MenuItem */
-    -fx-text-fill: black; /* Ensure text color is black when focused */
+    -fx-background-color: derive(#F1ECE6, -10%);
+    -fx-text-fill: black;
 }
 
 
