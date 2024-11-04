@@ -218,7 +218,7 @@ public class AddressBookParserTest {
     public void parseCommand_addExamScore() throws Exception {
 
         final String exam = "Midterm";
-        final String score = "85";
+        final String score = "85.0";
 
         AddExamScoreCommand expected = new AddExamScoreCommand(INDEX_FIRST_PERSON, new Exam(exam), score);
         AddExamScoreCommand command = (AddExamScoreCommand) parser.parseCommand(

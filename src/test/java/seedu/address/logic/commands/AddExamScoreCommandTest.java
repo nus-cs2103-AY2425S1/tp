@@ -38,7 +38,7 @@ public class AddExamScoreCommandTest {
         AddExamScoreCommand addExamScoreCommand = new AddExamScoreCommand(INDEX_FIRST_PERSON,
                 new Exam(VALID_EXAM_MIDTERM), VALID_EXAM_SCORE_AMY);
         String expectedMessage = String.format(AddExamScoreCommand.MESSAGE_ADDEXAMSCORE_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getDisplayedName(), new Exam(VALID_EXAM_MIDTERM), VALID_EXAM_SCORE_AMY);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addExamScoreCommand, model, expectedMessage, expectedModel);

@@ -46,14 +46,17 @@ public class ExamTest {
         assertFalse(Exam.isValidExamScore("")); // empty string
         assertFalse(Exam.isValidExamScore(" ")); // spaces only
         assertFalse(Exam.isValidExamScore("hundred")); // non-numbers
-        assertFalse(Exam.isValidExamScore("100a")); // numbers mixed with letters
-        assertFalse(Exam.isValidExamScore("101")); // out of range
+        assertFalse(Exam.isValidExamScore("100.0a")); // numbers mixed with letters
+        assertFalse(Exam.isValidExamScore("101")); // no decimal place
+        assertFalse(Exam.isValidExamScore("100.1")); // out of range
+        assertFalse(Exam.isValidExamScore("00.1")); // extra leading zeros
+        assertFalse(Exam.isValidExamScore("1.00")); // extra decimal place
 
         // valid exam score
-        assertTrue(Exam.isValidExamScore("0")); // min
-        assertTrue(Exam.isValidExamScore("100")); // max
-        assertTrue(Exam.isValidExamScore("5")); // single digit
-        assertTrue(Exam.isValidExamScore("50")); // double digit
+        assertTrue(Exam.isValidExamScore("0.0")); // min
+        assertTrue(Exam.isValidExamScore("100.0")); // max
+        assertTrue(Exam.isValidExamScore("5.5")); // single digit
+        assertTrue(Exam.isValidExamScore("50.9")); // double digit
     }
 
     @Test
