@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.BRIDES_SIDE;
-import static seedu.address.testutil.TypicalTags.FAMILY;
 import static seedu.address.testutil.TypicalTags.FRIENDS;
 
 import java.util.ArrayList;

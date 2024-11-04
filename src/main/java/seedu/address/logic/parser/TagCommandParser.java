@@ -47,13 +47,7 @@ public class TagCommandParser implements Parser<TagCommand> {
         List<String> indexStrs = List.of(input.trim().split("\\s+"));
         checkIndexesValidity(indexStrs);
         checkIndexLength(indexStrs);
-
-        for (String indexStr : indexStrs) {
-            if (!indexStr.isEmpty()) {
-                checkIndex(indexStr);
-                indexSet.add(ParserUtil.parseIndex(indexStr));
-            }
-        }
+        addIndexToSet(indexStrs, indexSet);
 
         return indexSet;
     }
@@ -67,7 +61,6 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
         return tags;
     }
-
 
     /**
      * Validates the given tag name to ensure it adheres to the tag naming conventions.
@@ -98,6 +91,15 @@ public class TagCommandParser implements Parser<TagCommand> {
     private void checkIndexLength(List<String> indexStrings) throws ParseException {
         if (indexStrings.size() > Index.MAX_INDEXES) {
             throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_INDEXES, Index.MAX_INDEXES));
+        }
+    }
+
+    private void addIndexToSet(List<String> indexStrs, Set<Index> indexSet) throws ParseException {
+        for (String indexStr : indexStrs) {
+            if (!indexStr.isEmpty()) {
+                checkIndex(indexStr);
+                indexSet.add(ParserUtil.parseIndex(indexStr));
+            }
         }
     }
 }

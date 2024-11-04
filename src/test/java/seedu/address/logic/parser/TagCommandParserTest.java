@@ -18,7 +18,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.model.tag.Tag;
 
