@@ -10,13 +10,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class GroupName {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Group Names should only contain alphanumeric characters, spaces and hyphens, and it should not be blank.";
+        "Group Names must have 3 sections:\n"
+            + "1. Course type - CS2103 or CS2103T\n"
+            + "2. Tutorial Group - Any letter followed by a number\n"
+            + "3. Group Number - Any number\n"
+            + "e.g. CS2103T-W1-12 or CS2103-I2-9";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} \\-]*";
+    public static final String VALIDATION_REGEX = "^(?i)CS2103T?-[A-Z]\\d+-\\d+$";
 
     private final String fullName;
 
@@ -28,7 +32,7 @@ public class GroupName {
     public GroupName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = name.toUpperCase();
     }
 
     /**

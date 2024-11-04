@@ -27,7 +27,7 @@ public class JsonAdaptedGroupTest {
 
     @Test
     public void toModelType_validGroupDetails_returnsGroup() throws Exception {
-        Group teamOne = new Group(new GroupName("Team1"));
+        Group teamOne = new Group(new GroupName("CS2103T-I12-10"));
         JsonAdaptedGroup group = new JsonAdaptedGroup(teamOne);
         assertEquals(teamOne, group.toModelType());
     }

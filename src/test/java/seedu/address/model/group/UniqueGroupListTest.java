@@ -12,7 +12,7 @@ import seedu.address.model.group.exceptions.GroupNotFoundException;
 
 public class UniqueGroupListTest {
 
-    private static final Group DUMMY_GROUP = new Group(new GroupName("Team1"));
+    private static final Group DUMMY_GROUP = new Group(new GroupName("CS2103-F12-4"));
     private final UniqueGroupList uniqueGroupList = new UniqueGroupList();
 
     @Test
