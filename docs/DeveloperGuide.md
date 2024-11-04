@@ -756,6 +756,8 @@ For all use cases below, unless specified otherwise,
 * **Standard resolutions**: 1920x1080 and 1080x720
 * **Patient**: A person with details such as name, phone number, email, address, and status
 * **Appointment**: A scheduled meeting between a patient and the user, with details such as date, time, sickness, and medicine
+* **Appointment Type**: The type of appointment, such as consultation, follow-up, etc.
+* **Status**: The status of the patient, such as recovered, hospitalised, etc.
 * **User**: The person using the application
 * **CLI**: Command Line Interface
 
