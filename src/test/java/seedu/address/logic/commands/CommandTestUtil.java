@@ -37,7 +37,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_GAME = "LoL";
+    public static final String VALID_GAME = "Legend League";
     public static final String VALID_GAME_USERNAME = "Potato";
     public static final String VALID_GAME_SKILLLEVEL = "Pro";
     public static final String VALID_GAME_ROLE = "Support";
