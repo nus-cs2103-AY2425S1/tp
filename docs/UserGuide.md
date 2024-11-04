@@ -105,12 +105,6 @@ Here are some **key points** to keep in mind when using commands:
 - You can add fields in **any order**. <br>
   _**Example:** If the command specifies `n/NAME p/PHONE_NUMBER`, then `p/PHONE_NUMBER n/NAME` is also acceptable._
 
-- Format of `DATE_TIME` is `YYYY:MM:DD hh:mm:ss`. <br>
-  _**Example:** `2024-12-01 09:30:00`._
-
-- Format of `DATE` is `YYYY-MM-DD`. <br>
-  _**Example:** `2024-12-01`._
-
 - If you add extraneous fields for commands that do not take in fields (such as `help`, `list person`, 
   `list appt`, `exit` and `clear`), they will be ignored. <br>
  _**Example:** If the command specifies `help 123`, then it will be interpreted as `help`._
@@ -135,22 +129,22 @@ The following sections describe the various commands available in the DocTrack p
 
 ### Summary of commands
 
-| Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
-|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **[Add person](#adding-a-person-add-person)**                            | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                                                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
-| **[List all persons](#listing-all-persons-list-person)**                 | `list person`                                             <br/>                                                           | `list person`                                                                                                           |
-| **[Edit person](#editing-a-person-edit-person)**                         | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​`                                 | `edit person 2 n/James Lee e/jameslee@example.com`                                                                      |
-| **[Find person](#finding-persons-by-name-find-person)**                  | `find person KEYWORD [MORE_KEYWORDS]`                                                                                     | `find person n/James Jake`                                                                                              |
-| **[Delete person](#deleting-a-person-delete-person)**                    | `delete person INDEX`                                                                                                     | `delete person 3`                                                                                                       |
-| **[Clear all persons](#clearing-all-persons-clear-person)**              | `clear person`                                                                                                            | `clear person`                                                                                                          |
-| **[Add appointment](#adding-an-appointment-add-appt)**                   | `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE [s/SICKNESS] [m/MEDICINE]`                   <br/>           <br/> | `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`                                            |
-| **[List all appointments](#listing-all-appointments-list-appt)**         | `list appt`                                                                                                               | `list appt`                                                                                                             |
-| **[Edit appointment](#editing-an-appointment-edit-appt)**                | `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                                                                              |
-| **[Find appointment](#finding-appointments-by-name-and-date-find-appt)** | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                  | `find appt d/2024-12-05`                                                                                                |
-| **[Delete appointment](#deleting-an-appointment-delete-appt)**           | `delete appt INDEX`                                                                                                       | `delete appt 2`                                                                                                         |
-| **[Clear all appointments](#clearing-all-appointments-clear-appt)**      | `clear appt`                                                                     <br/>                                    | `clear appt`                                                                                                            |
-| **[Help](#viewing-help-help)**                                           | `help`                                                                                                                    | `help`                                                                                                                  |
-| **[Exit](#exiting-the-program-exit)**                                    | `exit`                                                                                                                    | `exit`                                                                                                                  |
+| Action                                                                   | Format                                                                                                                   | Examples                                                                                                       |
+|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **[Add person](#adding-a-person-add-person)**                            | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                                                 | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
+| **[List all persons](#listing-all-persons-list-person)**                 | `list person`                                             <br/>                                                          | `list person`                                                                                                  |
+| **[Edit person](#editing-a-person-edit-person)**                         | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​`                                | `edit person 2 n/James Lee e/jameslee@example.com`                                                             |
+| **[Find person](#finding-persons-by-name-find-person)**                  | `find person KEYWORD [MORE_KEYWORDS]`                                                                                    | `find person n/James Jake`                                                                                     |
+| **[Delete person](#deleting-a-person-delete-person)**                    | `delete person INDEX`                                                                                                    | `delete person 3`                                                                                              |
+| **[Clear all persons](#clearing-all-persons-clear-person)**              | `clear person`                                                                                                           | `clear person`                                                                                                 |
+| **[Add appointment](#adding-an-appointment-add-appt)**                   | `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`                   <br/>           <br/> | `add appt i/1 ty/Consulation d/2024-12-01 09:30 s/Diabetes m/Insulin`                                          |
+| **[List all appointments](#listing-all-appointments-list-appt)**         | `list appt`                                                                                                              | `list appt`                                                                                                    |
+| **[Edit appointment](#editing-an-appointment-edit-appt)**                | `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                                                                     |
+| **[Find appointment](#finding-appointments-by-name-and-date-find-appt)** | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                      | `find appt d/2024-12-05`                                                                                       |
+| **[Delete appointment](#deleting-an-appointment-delete-appt)**           | `delete appt INDEX`                                                                                                      | `delete appt 2`                                                                                                |
+| **[Clear all appointments](#clearing-all-appointments-clear-appt)**      | `clear appt`                                                                     <br/>                                   | `clear appt`                                                                                                   |
+| **[Help](#viewing-help-help)**                                           | `help`                                                                                                                   | `help`                                                                                                         |
+| **[Exit](#exiting-the-program-exit)**                                    | `exit`                                                                                                                   | `exit`                                                                                                         |
 
 <br>
 
@@ -160,7 +154,9 @@ The following sections describe the various commands available in the DocTrack p
 
 ### Person Commands
 
-A **person** is a patient with several fields: a name, a phone number, an email, an address, a status, and optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. DocTrack allows you interact with patient information through different commands, which can be seen below.
+A **person** is a patient with several fields: a name, a phone number, an email, an address, a status, and 
+optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. 
+DocTrack allows you to interact with patient information through different commands, which can be seen below.
 
 <br>
 
@@ -199,14 +195,16 @@ Edits an existing person in the address book.
 - Edits the person at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
 **Examples**:
 
-- `edit person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit person 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `list` followed by `edit person 1 p/91234567 e/johndoe@example.com` edits the phone number and email 
+  address of the first person in the list to be `91234567` and `johndoe@example.com` respectively.
+- `list` followed by `edit person 2 n/Betsy Crower t/` edits the name of the second person in the list to 
+  be `Betsy Crower` and clears all existing tags.
 
 <br>
 
@@ -217,7 +215,7 @@ Finds persons whose **names** contain any of the given keywords.
 **Format**: `find person KEYWORD [MORE_KEYWORDS]`
 
 - Use the prefix `n/` to search for names.
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -274,7 +272,8 @@ Clears all entries from the address book after a validation check from the user.
 
 ### Appointment Commands
 
-- An **appointment** is defined by several fields: an appointment type, appointment date & time, ID of the person who is associated with the appointment, sickness, and medicine.  
+- An **appointment** is defined by several fields: an appointment type, appointment date and time, ID of the 
+  person associated with the appointment, sickness, and medicine.  
 - You can interact with appointments in DocTrack using the instructions below:
 
 <br>
@@ -283,13 +282,13 @@ Clears all entries from the address book after a validation check from the user.
 
 Adds an appointment to the DocTrack. 
 
-**Format**: `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE s/SICKNESS m/MEDICINE`
-- The format of `DATE_TIME` is `YYYY/MM/DD HH:mm:ss`. For example, `29/03/2025 10:30:00`.
+**Format**: `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`
+- The format of `DATE_TIME` is `YYYY-MM-DD HH:MM`. For example, `2025-03-20 10:30`.
 
 **Examples**:
 
-- `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`
-- `add appt i/2 d/30/01/2024-12-01 16:40:00 ty/Follow-up s/Asthma m/Inhaler`
+- `add appt i/1 ty/Consulation d/2024-12-01 09:30 s/Diabetes m/Insulin` adds an appointment to the person with personId `1`. The appointment has appointment type `Consulation`, date and time `2024-12-01 09:30`, sickness `Diabetes`, and medicine `Insulin`.
+- `add appt i/2 ty/Follow-up d/2024-02-01 16:40 s/Asthma m/Inhaler` adds an appointment to the person with personId `2`. The appointment has appointment type `Follow-up`, date and time `2024-02-01 16:40`, sickness `Asthma`, and medicine `Inhaler`.
 
 <br>
 
@@ -310,10 +309,11 @@ Edits an existing appointment in DocTrack.
 - Edits the appointment at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
+- The format of `DATE_TIME` is `YYYY-MM-DD HH:MM`. For example, `2025-03-20 10:30`.
 
 **Examples**:
 
-- `edit appt 3 d/2024-12-05 13:00 m/Budesonide` Edits the date and time and the medicine to be `29/03/2025 10:30` and `Budesonide` respectively.
+- `edit appt 3 d/2024-12-05 13:00 m/Budesonide` edits the date and time and the medicine to be `2024-12-05 13:00` and `Budesonide` respectively.
 
 <br>
 
@@ -325,7 +325,7 @@ Finds appointments whose person names and / or dates contain any of the given ke
 - Use the prefix `n/` to search for patient names.
 - Use the prefix `d/` to search for dates.
 - At least one keyword must be provided.
-- The format of `DATE` is `YYYY/MM/DD`. For example, `2024-10-16`.
+- The format of `DATE` is `YYYY-MM-DD`. For example, `2024-10-16`.
 
 **Examples**:
 - `find appt n/John` returns appointments with patients named `John`.
