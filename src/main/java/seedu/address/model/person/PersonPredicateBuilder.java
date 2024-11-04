@@ -59,9 +59,10 @@ public class PersonPredicateBuilder {
      */
     public PersonPredicateBuilder withNameKeywords(List<String> nameKeywords) {
         requireNonNull(nameKeywords);
-        this.nameKeywords.addAll(nameKeywords);
-        isSetName = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.nameKeywords.addAll(nameKeywords);
+        newBuilder.isSetName = true;
+        return newBuilder;
     }
 
     /**
@@ -70,9 +71,10 @@ public class PersonPredicateBuilder {
      */
     public PersonPredicateBuilder withClassIdKeywords(List<String> classIdKeywords) {
         requireNonNull(classIdKeywords);
-        this.classIdKeywords.addAll(classIdKeywords);
-        isSetClassId = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.classIdKeywords.addAll(classIdKeywords);
+        newBuilder.isSetClassId = true;
+        return newBuilder;
     }
 
     /**
@@ -81,9 +83,10 @@ public class PersonPredicateBuilder {
      */
     public PersonPredicateBuilder withMonthPaidKeywords(List<String> monthPaidKeywords) {
         requireNonNull(monthPaidKeywords);
-        this.monthPaidKeywords.addAll(monthPaidKeywords);
-        isSetMonthPaid = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.monthPaidKeywords.addAll(monthPaidKeywords);
+        newBuilder.isSetMonthPaid = true;
+        return newBuilder;
     }
 
     /**
@@ -92,9 +95,10 @@ public class PersonPredicateBuilder {
      */
     public PersonPredicateBuilder withNotMonthPaidKeywords(List<String> notMonthPaidKeywords) {
         requireNonNull(notMonthPaidKeywords);
-        this.notMonthPaidKeywords.addAll(notMonthPaidKeywords);
-        isSetNotMonthPaid = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.notMonthPaidKeywords.addAll(notMonthPaidKeywords);
+        newBuilder.isSetNotMonthPaid = true;
+        return newBuilder;
     }
 
     /**
