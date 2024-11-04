@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,17 @@ public class CustomerListTest {
     public void constructor_invalidCustomerList_throwsIllegalArgumentException() {
         String invalidCustomerList = " ";
         assertThrows(IllegalArgumentException.class, () -> new CustomerList(invalidCustomerList));
+    }
+
+    @Test
+    public void constructor_validCustomerList_success() {
+        try {
+            new CustomerList("");
+            new CustomerList("David");
+            new CustomerList("Tan;Ng");
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test

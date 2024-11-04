@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,17 @@ public class DepositTest {
     public void constructor_invalidDeposit_throwsIllegalArgumentException() {
         String invalidDeposit = " ";
         assertThrows(IllegalArgumentException.class, () -> new Deposit(invalidDeposit));
+    }
+
+    @Test
+    public void constructor_validDeposit_success() {
+        try {
+            new Deposit("");
+            new Deposit("100");
+            new Deposit("100.00");
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test

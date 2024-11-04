@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,17 @@ public class RentDueDateTest {
     public void constructor_invalidRentDueDate_throwsIllegalArgumentException() {
         String invalidRentDueDate = " ";
         assertThrows(IllegalArgumentException.class, () -> new RentDueDate(invalidRentDueDate));
+    }
+
+    @Test
+    public void constructor_validRentDueDate_success() {
+        try {
+            new RentDueDate("");
+            new RentDueDate("1");
+            new RentDueDate("31");
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test
