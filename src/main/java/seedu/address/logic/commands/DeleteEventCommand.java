@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,7 +26,7 @@ public class DeleteEventCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * Creates an AddEventCommand to add the specified {@code Event}
+     * Creates a DeleteEventCommand to add the specified {@code Event}
      */
     public DeleteEventCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -42,6 +43,7 @@ public class DeleteEventCommand extends Command {
 
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEvent(eventToDelete);
+        assert (!lastShownList.contains(eventToDelete));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(eventToDelete)));
     }
 
@@ -58,5 +60,12 @@ public class DeleteEventCommand extends Command {
 
         DeleteEventCommand otherDeleteEventCommand = (DeleteEventCommand) other;
         return targetIndex.equals(otherDeleteEventCommand.targetIndex);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
+                .toString();
     }
 }

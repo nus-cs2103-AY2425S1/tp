@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -101,15 +102,13 @@ public class DeleteEventCommandTest {
         assertFalse(deleteFirstEventCommand.equals(deleteSecondEventCommand));
     }
 
-    /*
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(targetIndex);
         String expected = DeleteEventCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteEventCommand.toString());
     }
-    */
 
     /**
      * Updates {@code model}'s filtered list to show no events.
