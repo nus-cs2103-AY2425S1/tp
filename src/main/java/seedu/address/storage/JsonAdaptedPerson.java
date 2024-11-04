@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,6 +21,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.Ingredients;
+import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -72,10 +74,21 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         remark = source.getRemark().value;
-        information = source instanceof Customer ? ((Customer) source).getInformation().value : null;
-        ingredientsSupplied = source instanceof Supplier
-                ? ((Supplier) source).getIngredientsSupplied().getIngredientNames()
-                : null;
+        // Setting the 'information' field
+        if (source instanceof Customer) {
+            Customer customer = (Customer) source;
+            information = customer.getInformation().value;
+        } else {
+            information = null;
+        }
+        // Setting the 'ingredientsSupplied' field
+        if (source instanceof Supplier) {
+            Supplier supplier = (Supplier) source;
+            ingredientsSupplied = supplier.getIngredientsSupplied().getIngredientNames();
+        } else {
+            ingredientsSupplied = null;
+        }
+
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
@@ -86,72 +99,80 @@ class JsonAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
-
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
-        final Email modelEmail;
-
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        } else if (email.isEmpty()) {
-            modelEmail = new Email();
-        } else if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        } else {
-            modelEmail = new Email(email);
-        }
-
-        final Address modelAddress;
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        } else if (address.isEmpty()) {
-            modelAddress = new Address();
-        } else if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        } else {
-            modelAddress = new Address(address);
-        }
-
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Remark.class.getSimpleName()));
-        }
-
-        final Remark modelRemark = new Remark(remark);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        if (information != null) {
-            final Information modelInformation = new Information(information);
-            return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelInformation, modelRemark, modelTags);
-        } else if (ingredientsSupplied != null) {
-            List<Ingredient> ingredientList = new ArrayList<>();
-            for (String name : ingredientsSupplied) {
-                ingredientList.add(new Ingredient(0, name, 0.0)); // Default productId and cost
+        public Person toModelType() throws IllegalValueException {
+            final List<Tag> personTags = new ArrayList<>();
+            for (JsonAdaptedTag tag : tags) {
+                personTags.add(tag.toModelType());
             }
-            final Ingredients modelIngredients = new Ingredients(ingredientList);
-            return new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelIngredients, modelRemark, modelTags);
-        }
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
-    }
+            if (name == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            }
+            if (!Name.isValidName(name)) {
+                throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            }
+            final Name modelName = new Name(name);
+
+            if (phone == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            }
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            final Phone modelPhone = new Phone(phone);
+
+            final Email modelEmail;
+
+            if (email == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            } else if (email.isEmpty()) {
+                modelEmail = new Email();
+            } else if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            } else {
+                modelEmail = new Email(email);
+            }
+
+            final Address modelAddress;
+
+            if (address == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            } else if (address.isEmpty()) {
+                modelAddress = new Address();
+            } else if (!Address.isValidAddress(address)) {
+                throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            } else {
+                modelAddress = new Address(address);
+            }
+
+            if (remark == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Remark.class.getSimpleName()));
+            }
+
+            final Remark modelRemark = new Remark(remark);
+
+            final Set<Tag> modelTags = new HashSet<>(personTags);
+            if (information != null) {
+                final Information modelInformation = new Information(information);
+                return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelInformation, modelRemark, modelTags);
+            } else if (ingredientsSupplied != null) {
+                System.out.println("IngredientsSupplied is not null. Looking up in the catalogue...");
+                List<Ingredient> ingredientList = new ArrayList<>();
+                IngredientCatalogue catalogue = IngredientCatalogue.getInstance(); // Access the singleton
+
+                for (String name : ingredientsSupplied) {
+                    try {
+                        Ingredient catalogueIngredient = catalogue.getIngredientByName(name);
+                        ingredientList.add(catalogueIngredient); // Use the catalogue ingredient
+                    } catch (NoSuchElementException e) {
+                        throw new IllegalValueException("Ingredient '" + name + "' not found in the catalogue. Please add it first.");
+                    }
+                }
+
+                final Ingredients modelIngredients = new Ingredients(ingredientList);
+                return new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelIngredients, modelRemark, modelTags);
+            }
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        }
 }

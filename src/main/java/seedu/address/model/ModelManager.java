@@ -73,7 +73,7 @@ public class ModelManager implements Model {
 
     // Default constructor with properly initialized parameters
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new IngredientCatalogue(),
+        this(new AddressBook(), new UserPrefs(), IngredientCatalogue.getInstance(),
                 new PastryCatalogue(), null, new CustomerOrderList(), new SupplyOrderList());
     }
 
