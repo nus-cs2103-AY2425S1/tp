@@ -10,7 +10,10 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class Appointment {
-
+    public static final String MESSAGE_CONSTRAINTS =
+            "Appointment must contain at least 1 alphabetic character, and has a limit of 50 characters.\n"
+                    + "It cannot be empty.";
+    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z]).{1,50}$";
     private final String description;
     private final LocalDateTime start;
     private final LocalDateTime end;
@@ -55,6 +58,13 @@ public class Appointment {
         return description.equals(otherAppt.description)
                 && start.equals(otherAppt.start)
                 && end.equals(otherAppt.end);
+    }
+
+    /**
+     * Returns true if a given string is a valid appointment description.
+     */
+    public static boolean isValidDescription(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

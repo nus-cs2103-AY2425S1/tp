@@ -14,6 +14,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Email;
@@ -32,6 +33,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String DATETIME_INVALID_INDEX = "Could not recognise the date and time provided, please use "
             + "the format dd-MM-yyyy-HH-mm.";
+    public static final String DATETIME_INVALID_SPECIFY = "\nInput causing the error: ";
     public static final String DATE_INVALID_INDEX = "Could not recognise the date provided, please use the format "
             + "dd-MM-yyyy.";
 
@@ -204,8 +206,8 @@ public class ParserUtil {
     public static String parseAppointmentDescription(String appointmentDescription) throws ParseException {
         requireNonNull(appointmentDescription);
         String trimmedAppointmentDescription = appointmentDescription.trim();
-        if (trimmedAppointmentDescription.isEmpty()) {
-            throw new ParseException("Appointment description cannot be empty.");
+        if (!Appointment.isValidDescription(trimmedAppointmentDescription)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
         return trimmedAppointmentDescription;
     }
@@ -222,7 +224,7 @@ public class ParserUtil {
         try {
             return LocalDateTime.parse(trimmedDateTime, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new ParseException(DATETIME_INVALID_INDEX + "\nInput causing the error: " + trimmedDateTime, e);
+            throw new ParseException(DATETIME_INVALID_INDEX + DATETIME_INVALID_SPECIFY + trimmedDateTime, e);
         }
     }
 
