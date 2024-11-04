@@ -33,7 +33,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         String entityType = splitArgs[0]; // either "contact, "job" or "company"
         String indexString = splitArgs[1];
 
-        Index index = ParserUtil.parseIndex(indexString);;
+        Index index = ParserUtil.parseIndex(indexString);
 
         switch (entityType) {
         case DeleteContactCommand.ENTITY_WORD:
