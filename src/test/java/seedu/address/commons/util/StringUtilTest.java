@@ -140,4 +140,47 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void containsNumber_validInput_correctResult() {
+        // Empty phoneNumber
+        assertFalse(StringUtil.containsNumber("", "123"));
+        assertFalse(StringUtil.containsNumber("    ", "123"));
+
+        // Matches a partial number only
+        assertTrue(StringUtil.containsNumber("12345678", "12"));
+        assertTrue(StringUtil.containsNumber("12345678", "45678"));
+
+        // Matches full number
+        assertTrue(StringUtil.containsNumber("12345678", "12345678"));
+
+        // Does not match partial number
+        assertFalse(StringUtil.containsNumber("12345678", "13"));
+        assertFalse(StringUtil.containsNumber("12345678", "123456789"));
+        assertFalse(StringUtil.containsNumber("12345678", "12347678"));
+    }
+
+    @Test
+    public void containsNumber_nullWord_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsNumber("12345678", null));
+    }
+
+    @Test
+    public void containsNumber_emptyNumber_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Number parameter cannot be empty", ()
+                -> StringUtil.containsNumber("12345678", "  "));
+    }
+
+    @Test
+    public void containsNumbers_multipleNumbers_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Number parameter should be a single word", ()
+                -> StringUtil.containsNumber("12345678", "12 34"));
+
+        assertThrows(IllegalArgumentException.class, "phoneNumber parameter should be a single word", ()
+                -> StringUtil.containsNumber("1234 5678", "1234"));
+    }
+
+    @Test
+    public void containsNumbers_nullPhoneNumber_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsNumber(null, "123"));
+    }
 }

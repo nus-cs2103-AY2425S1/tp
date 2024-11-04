@@ -66,7 +66,7 @@ public class FilterPredicate implements Predicate<Person> {
      */
     private boolean filterPhone(Person person) {
         return filterPersonDescriptor.getPhone()
-                .map(phone -> StringUtil.containsWordIgnoreCase(person.getPhone().value, phone.value))
+                .map(phone -> StringUtil.containsNumber(person.getPhone().value, phone.value))
                 .orElse(true);
     }
 
