@@ -22,9 +22,9 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
     private static final int REFRESH_TIME = 60;
-    private final Logger logger = LogsCenter.getLogger(getClass());
 
     public final Person person;
+    private final Logger logger = LogsCenter.getLogger(getClass());
     private Timeline refreshTimeline;
     private Lesson lastDisplayedLesson = null;
 
