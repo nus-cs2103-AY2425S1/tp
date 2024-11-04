@@ -16,7 +16,7 @@ Given below are my contributions to the project.
 * **New Feature**: UI for internship applications' statuses.
   * What it does: allows the user to see the statuses of the internship applications. The statuses are coloured coded for easier identification.
   * Justification: This feature improves the product significantly because a user should be able to see the statuses of the applications easily.
-  * Highlights: Any modification to any status will be reflected in real time in the UI. 
+  * Highlights: Any modification to any status will be reflected in real time in the UI.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=choaticman&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=choaticman&tabRepo=AY2425S1-CS2103T-W09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
@@ -35,7 +35,7 @@ Given below are my contributions to the project.
     * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
   * Developer Guide:
     * Added implementation details of the application Architecture and `/find` feature (Pull request [#\129](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/129)).
-    * Added user stories (Pull request [\#29](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/29)). 
+    * Added user stories (Pull request [\#29](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/29)).
 
 * **Community**:
   * PRs reviewed with non-trivial review comments (example: [\#110](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/110))

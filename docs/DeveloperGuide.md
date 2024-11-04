@@ -369,7 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. HireMe shows an error message.
 
       Use case ends.
-      
+
 * 1e. The user provided an invalid company name.
     * 1e1. HireMe shows an error message.
 
@@ -382,9 +382,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1g. The user provided an invalid company email.
     * 1g1. HireMe shows an error message.
-  
+
       Use case ends.
-  
+
 * 1h. The user provided an invalid date of application.
     * 1h1. HireMe shows an error message.
 
@@ -638,7 +638,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all internship applications using the `/list` command. Multiple (at least 2) internship applications in the list with different date of applications.
 
     1. Test case: `/sort earliest`<br>
-       Expected: The list of internship applications should now be sorted in ascending order by the date of application. The earliest internship applications should be at the top 
+       Expected: The list of internship applications should now be sorted in ascending order by the date of application. The earliest internship applications should be at the top
        of the list and as you go down the list, the date of applications should be at later dates.
 
     1. Test case: `/sort latest`<br>
