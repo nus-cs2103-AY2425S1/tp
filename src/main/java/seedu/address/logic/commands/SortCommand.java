@@ -22,7 +22,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the contact list by the specified parameter in the specified order.\n"
-            + "Parameters: PARAMETER (" + PREFIX_NAME + ", " + PREFIX_APPOINTMENT + ", " + PREFIX_BIRTHDAY + " or "
+            + "Parameters: CRITERIA (" + PREFIX_NAME + ", " + PREFIX_APPOINTMENT + ", " + PREFIX_BIRTHDAY + " or "
             + PREFIX_NEXT_PAYMENT_DATE + ") " + "ORDER (asc, desc)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " asc";
 

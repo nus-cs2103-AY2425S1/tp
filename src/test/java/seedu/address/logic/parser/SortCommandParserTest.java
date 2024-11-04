@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ORDER_ASC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ORDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARAMETER_APPOINTMENT;
@@ -37,7 +38,9 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_invalidNumberOfArgs_throwsParseException() {
-        assertParseFailure(parser, "n/", SortCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, "n/ asc extra", SortCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "n/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "n/ asc extra",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 }
