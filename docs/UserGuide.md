@@ -172,7 +172,7 @@ Notes:
 * If no arguments are specified, `list` will list all contacts.
 * The `-c`, `-v` and `-e` flags can be used to decide what type of data to list. 
 * If no flags are present, the default behaviour is to list all contacts. e.g. `list asiodhainsd` will be treated as `list` as there are no `-c`, `-v`, or `-e` flags.
-* All user input in between flags are ignore. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
+* All user input in between flags are ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
 * All parameters are optional. Leaving them out will list all contacts by default.
 * The name keyword search is case-insensitive. e.g `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
