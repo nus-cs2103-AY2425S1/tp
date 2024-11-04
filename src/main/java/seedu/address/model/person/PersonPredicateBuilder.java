@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Builder for creating different types of predicates.
+ * Builder for creating predicates of {@code Person}.
  */
 public class PersonPredicateBuilder {
 
@@ -25,7 +25,7 @@ public class PersonPredicateBuilder {
     private boolean isSetNotMonthPaid;
 
     /**
-     * todo
+     * Creates an empty {@code PersonPredicateBuilder}.
      */
     public PersonPredicateBuilder() {
         nameKeywords = new ArrayList<>();
@@ -39,7 +39,8 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * todo
+     * Adds all strings in {@code nameKeywords} into this object's {@code nameKeywords} field.
+     * @return this object
      */
     public PersonPredicateBuilder withNameKeywords(List<String> nameKeywords) {
         requireNonNull(nameKeywords);
@@ -49,7 +50,8 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * todo
+     * Adds all strings in {@code classIdKeywords} into this object's {@code classIdKeywords} field.
+     * @return this object
      */
     public PersonPredicateBuilder withClassIdKeywords(List<String> classIdKeywords) {
         requireNonNull(classIdKeywords);
@@ -59,7 +61,8 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * todo
+     * Adds all strings in {@code monthPaidKeywords} into this object's {@code monthPaidKeywords} field.
+     * @return this object
      */
     public PersonPredicateBuilder withMonthPaidKeywords(List<String> monthPaidKeywords) {
         requireNonNull(monthPaidKeywords);
@@ -69,7 +72,8 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * todo
+     * Adds all strings in {@code notMonthPaidKeywords} into this object's {@code notMonthPaidKeywords} field.
+     * @return this object
      */
     public PersonPredicateBuilder withNotMonthPaidKeywords(List<String> notMonthPaidKeywords) {
         requireNonNull(notMonthPaidKeywords);
@@ -79,7 +83,8 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * todo
+     * Converts this object into a {@code Predicate<Person>} object that tests a {@code Person} for all fields set
+     * in this object.
      */
     public Predicate<Person> build() {
         return person -> {
@@ -130,7 +135,7 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * todo
+     * Returns true if no {@code with} functions of this object has been executed yet.
      */
     public boolean isEmpty() {
         return !isSetName && !isSetClassId && !isSetMonthPaid && !isSetNotMonthPaid;
