@@ -92,11 +92,21 @@ public enum SortOption {
         requireNonNull(sortOption);
         sortOption = sortOption.toLowerCase();
         for (SortOption option : SortOption.values()) {
-            if (option.value.equalsIgnoreCase(sortOption)) {
+            if (option.matchesValue(sortOption)) {
                 return option;
             }
         }
         throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Checks if the value of this {@code SortOption} matches the given string, case-insensitively.
+     *
+     * @param sortOption the string to compare with.
+     * @return {@code true} if the value matches the string, {@code false} otherwise.
+     */
+    private boolean matchesValue(String sortOption) {
+        return value.equalsIgnoreCase(sortOption);
     }
 
     /**
