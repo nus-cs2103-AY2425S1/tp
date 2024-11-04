@@ -76,8 +76,16 @@ public class CommandTestUtil {
     public static final String SOCIALMEDIA_CS_SC = " " + PREFIX_CS + VALID_HANDLE_SC;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_LENGTH_NAME_DESC = " " + PREFIX_NAME
+            + "Maximiliano Alberto de la Cruz Gonzalez de la Torre y Mendoza"; // longer than 50 characters
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_LENGTH_LONG_PHONE_DESC = " " + PREFIX_PHONE + "123456789123456789"; // longer than 15 digits
+    public static final String INVALID_LENGTH_SHORT_PHONE_DESC = " " + PREFIX_PHONE + "12"; // shorter than 3 digits
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_LENGTH_EMAIL_DESC = " " + PREFIX_EMAIL
+            + "john.doe@example.comjohn.doe@example.comjohn.doe@example.comjohn.doe@example.comjohn.doe@example.comjohn.doe@example.com"
+            + "john.doe@example.comjohn.doe@example.comjohn.doe@example.comjohn.doe@example.comjohn.doe@example.comjohn.doe@example.com"
+            + "john.doe@example.comjohn.doe@example.comjohn.doe@example.comjohn.doe@example.com"; // longer than 254 characters
     public static final String INVALID_SCHEDULE_NAME = " " + PREFIX_SCHEDULE_NAME + "appointment!";
     public static final String INVALID_SCHEDULE_DATE = " " + PREFIX_SCHEDULE_DATE + "22-10-2024";
     public static final String INVALID_SCHEDULE_TIME = " " + PREFIX_SCHEDULE_TIME + "4pm";
