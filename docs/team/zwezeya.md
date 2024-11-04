@@ -3,44 +3,35 @@
   title: "Zwe Zeya's Project Portfolio Page"
 ---
 
-### Project: AddressBook Level 3
+### Project: HireMe
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+HireMe is a **desktop application for managing internship applications, optimized for use via a Command Line Interface** (CLI)
+while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, HireMe can get your internship tracking tasks done faster than traditional GUI apps.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the ability add an internship application entry.
+    * What it does: allows the user to add a new internship application entry.
+    * Justification: This feature improves is necessary for the functionality of HireMe.
+    * Highlights: This feature addresses the compatibility issues of the old AddressBook with the functional requirements of HireMe.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added a chart command which summarises the statuses of all internship applications
+  * What it does: displays a pie chart that gives insights to the statuses of all internship applications
+  * Justification: This feature gives a visual representation of the statuses of all internship applications which makes HireMe more interactive.
 
-* **Code contributed**: [RepoSense link]()
-
-* **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=ZweZeya&tabRepo=AY2425S1-CS2103T-W09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+    * Decoupled the validation from the model by creating an abstract class `Validator`
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Added documentation for the `chart` feature
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Added implementation details of the `add` and `chart` features.
+        * Added sequence diagrams for `add`, `chart` and `exit` features.
+        * Added use cases for `add`, `chart` and `exit` features.
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+    * Reviewed PRs

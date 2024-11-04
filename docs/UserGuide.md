@@ -42,7 +42,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
 1. Copy the file to the folder you want to use as the _home folder_ for your HireMe.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hireme.jar` command to run the application.<br>
-   
+
     <br>A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -249,7 +249,7 @@ HireMe data are saved in the hard disk automatically after any command that chan
 Ans: HireMe data are saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
 
 #### Q2: Can I edit the data file directly?
-Ans: You should not be editing the JSON data file directly. You should be using the commands as mentioned above to augment any data. 
+Ans: You should not be editing the JSON data file directly. You should be using the commands as mentioned above to augment any data.
 Should the data file be corrupted, HireMe will discard all data and start with an empty data file.
 
 #### Q3: Can I find followed by filter to filter out the applications with a specific keyword?
