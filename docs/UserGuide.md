@@ -181,11 +181,11 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 #### Shortcuts: Finding blacklisted/whitelisted clients
-
+<br>
 To find all clients that are blacklisted (with no other parameters), the command `blacklist` can be entered.
 
 Similarly, the `whitelist` command can be entered to find all clients who are whitelisted.
-
+<br>
 _Note: both of these commands need to be entered without any parameters otherwise the app responds with an error message._
 </div>
 
@@ -354,6 +354,10 @@ Action | Format, Examples
 **Delete** | `delete [n/NAME] [id/ID]`<br> e.g., `delete n/John Doe` or `delete id/4`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g., `find n/James Jake ps/completed py/paid`
+**Blacklist** | `blacklist INDEX`
+**Whitelist** | `whitelist INDEX`
+**Blacklist list** | `blacklist`
+**Whitelist list** | `whitelist`
 **Sort** | `sort FIELD ORDER` <br> e.g., `sort name ascending` or `sort deadline descending`
 **Archive** | `archive INDEX`
 **Archive-list** | `archive-list`
