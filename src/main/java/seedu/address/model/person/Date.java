@@ -38,18 +38,6 @@ public class Date {
     }
 
     /**
-     * Returns true if a given string is a valid date and time.
-     */
-    public static boolean isValidDateAndTime(String date) {
-        try {
-            checkDateAndTime(date);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
-
-    /**
      * Validates a date string, ensuring it follows the expected format and adheres to logical date constraints.
      * <p>
      * Expected format: {@code 'd/M/yyyy HHmm'} where:
@@ -92,18 +80,6 @@ public class Date {
         validateDateCalendarValue(dateAndTimeArray[0]);
     }
 
-
-    /**
-     * Returns true if a given string is a valid date.
-     */
-    public static boolean isValidDate(String date) {
-        try {
-            checkDate(date);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
 
     /**
      * Validates the format and values of a date string.
