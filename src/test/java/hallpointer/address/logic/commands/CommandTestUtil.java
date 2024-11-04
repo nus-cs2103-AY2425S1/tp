@@ -33,8 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_TELEGRAM_AMY = "happyAmy";
     public static final String VALID_TELEGRAM_BOB = "bobTheTrain";
-    public static final String VALID_ROOM_AMY = "10/10/9";
-    public static final String VALID_ROOM_BOB = "3/1/90";
+    public static final String VALID_ROOM_AMY = "10-10-9";
+    public static final String VALID_ROOM_BOB = "3-1-90";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_SESSION_NAME_REHEARSAL = "Rehearsal W1";
@@ -68,7 +68,7 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_TELEGRAM_DESC = " "
             + PREFIX_TELEGRAM + "#"; // '#' not allowed in telegrams
-    public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "1/1/1a"; // 'a' not allowed in rooms
+    public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "1-1-1a"; // 'a' not allowed in rooms
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_SESSION_NAME_DESC = " "
             + PREFIX_SESSION_NAME + "Competition:"; // ':' not allowed in session names
@@ -141,7 +141,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredMemberList().size());
 
         Member member = model.getFilteredMemberList().get(targetIndex.getZeroBased());
-        final String[] splitName = member.getName().fullName.split("\\s+");
+        final String[] splitName = member.getName().value.split("\\s+");
         model.updateFilteredMemberList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredMemberList().size());

@@ -18,7 +18,7 @@ public class AddMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "add_member";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the CCA. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the CCA.\n"
         + "Parameters: "
         + PREFIX_NAME + "NAME "
         + PREFIX_TELEGRAM + "TELEGRAM_HANDLE "
@@ -26,18 +26,18 @@ public class AddMemberCommand extends Command {
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + "John Doe "
-        + PREFIX_ROOM + "4/3/301 "
+        + PREFIX_ROOM + "4-3-301 "
         + PREFIX_TELEGRAM + "johndoe123 "
         + PREFIX_TAG + "logistics";
 
     public static final String MESSAGE_SUCCESS = "Member %1$s with room %2$s and Telegram username %3$s "
         + "added successfully.";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the CCA system.";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the CCA.";
 
     private final Member toAdd;
 
     /**
-     * Creates an AddMemberCommand to add the specified {@code Member}
+     * Creates an AddMemberCommand to add the specified {@code Member} to the CCA system.
      */
     public AddMemberCommand(Member member) {
         requireNonNull(member);
@@ -58,7 +58,7 @@ public class AddMemberCommand extends Command {
         return new CommandResult(
             String.format(
                 MESSAGE_SUCCESS,
-                toAdd.getName().fullName,
+                toAdd.getName().value,
                 toAdd.getRoom().value,
                 toAdd.getTelegram().value
             )

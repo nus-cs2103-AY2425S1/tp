@@ -18,14 +18,14 @@ import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 
 /**
- * Parses input arguments and creates a new AddSessionCommand object
+ * Parses input arguments and creates a new AddSessionCommand object.
  */
 public class AddSessionCommandParser implements Parser<AddSessionCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddSessionCommand
      * and returns an AddSessionCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public AddSessionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

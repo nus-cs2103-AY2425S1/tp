@@ -35,7 +35,7 @@ public class AddMemberCommandIntegrationTest {
 
         assertCommandSuccess(new AddMemberCommand(validMember), model,
                 String.format(AddMemberCommand.MESSAGE_SUCCESS,
-                        validMember.getName().fullName,
+                        validMember.getName().value,
                         validMember.getRoom().value,
                         validMember.getTelegram().value),
                 expectedModel);

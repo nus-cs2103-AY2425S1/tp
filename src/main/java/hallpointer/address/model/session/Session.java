@@ -32,15 +32,12 @@ public class Session {
         return sessionName;
     }
 
-    public Point getPoints() {
-        return points;
-    }
-
-    /**
-     * Returns the date of the session.
-     */
     public SessionDate getDate() {
         return date;
+    }
+
+    public Point getPoints() {
+        return points;
     }
 
     /**

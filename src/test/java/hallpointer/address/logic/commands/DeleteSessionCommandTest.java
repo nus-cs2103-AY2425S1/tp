@@ -61,7 +61,7 @@ public class DeleteSessionCommandTest {
         CommandResult commandResult = deleteSessionCommand.execute(modelStub);
 
         assertEquals(
-                String.format(DeleteSessionCommand.MESSAGE_DELETE_SESSION_SUCCESS, sessionName.toString(), 1),
+                String.format(DeleteSessionCommand.MESSAGE_SUCCESS, sessionName.toString(), 1),
                 commandResult.getFeedbackToUser()
         );
     }

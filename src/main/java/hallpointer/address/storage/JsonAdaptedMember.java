@@ -53,7 +53,7 @@ class JsonAdaptedMember {
      * Converts a given {@code Member} into this class for Jackson use.
      */
     public JsonAdaptedMember(Member source) {
-        name = source.getName().fullName;
+        name = source.getName().value;
         telegram = source.getTelegram().value;
         room = source.getRoom().value;
         tags.addAll(source.getTags().stream()

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.logic.commands.CommandResult;
-import hallpointer.address.logic.commands.ListMembersCommand;
+import hallpointer.address.logic.commands.ListCommand;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.Model;
@@ -65,10 +65,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListMembersCommand.COMMAND_WORD;
+        String listCommand = ListCommand.COMMAND_WORD;
         CommandResult result = logic.execute(listCommand);
         System.out.println(result.getFeedbackToUser());
-        assertCommandSuccess(listCommand, ListMembersCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test

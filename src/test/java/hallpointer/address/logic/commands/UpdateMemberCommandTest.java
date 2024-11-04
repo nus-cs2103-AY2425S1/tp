@@ -42,7 +42,7 @@ public class UpdateMemberCommandTest {
         UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor);
 
         String expectedMessage = String.format(
-                UpdateMemberCommand.MESSAGE_UPDATE_MEMBER_SUCCESS, Messages.format(updatedMember));
+                UpdateMemberCommand.MESSAGE_SUCCESS, Messages.format(updatedMember));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), updatedMember);
@@ -65,7 +65,7 @@ public class UpdateMemberCommandTest {
         UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(indexLastMember, descriptor);
 
         String expectedMessage = String.format(
-                UpdateMemberCommand.MESSAGE_UPDATE_MEMBER_SUCCESS, Messages.format(updatedMember));
+                UpdateMemberCommand.MESSAGE_SUCCESS, Messages.format(updatedMember));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setMember(lastMember, updatedMember);
@@ -80,7 +80,7 @@ public class UpdateMemberCommandTest {
         Member updatedMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
 
         String expectedMessage = String.format(
-                UpdateMemberCommand.MESSAGE_UPDATE_MEMBER_SUCCESS, Messages.format(updatedMember));
+                UpdateMemberCommand.MESSAGE_SUCCESS, Messages.format(updatedMember));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -97,7 +97,7 @@ public class UpdateMemberCommandTest {
                 new UpdateMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(
-                UpdateMemberCommand.MESSAGE_UPDATE_MEMBER_SUCCESS, Messages.format(updatedMember));
+                UpdateMemberCommand.MESSAGE_SUCCESS, Messages.format(updatedMember));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), updatedMember);
