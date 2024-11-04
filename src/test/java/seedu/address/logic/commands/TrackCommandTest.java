@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.CategoryContainsKeywordsPredicate;
+import seedu.address.model.person.CategoryContainsKeywordPredicate;
 
 
 public class TrackCommandTest {
-    private static final CategoryContainsKeywordsPredicate STUDENT_PREDICATE =
-            new CategoryContainsKeywordsPredicate("student");
-    private static final CategoryContainsKeywordsPredicate COMPANY_PREDICATE =
-            new CategoryContainsKeywordsPredicate("company");
+    private static final CategoryContainsKeywordPredicate STUDENT_PREDICATE =
+            new CategoryContainsKeywordPredicate("student");
+    private static final CategoryContainsKeywordPredicate COMPANY_PREDICATE =
+            new CategoryContainsKeywordPredicate("company");
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test

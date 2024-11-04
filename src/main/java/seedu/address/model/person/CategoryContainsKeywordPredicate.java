@@ -8,10 +8,13 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Category} matches any of the keyword given.
  */
-public class CategoryContainsKeywordsPredicate implements Predicate<Person> {
+public class CategoryContainsKeywordPredicate implements Predicate<Person> {
     private final String keyword;
 
-    public CategoryContainsKeywordsPredicate(String keyword) {
+    /**
+     * @param keyword the category to track
+     */
+    public CategoryContainsKeywordPredicate(String keyword) {
         this.keyword = keyword;
     }
 
@@ -31,17 +34,15 @@ public class CategoryContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CategoryContainsKeywordsPredicate)) {
+        if (!(other instanceof CategoryContainsKeywordPredicate otherNameContainsKeywordsPredicate)) {
             return false;
         }
 
-        CategoryContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
-                (CategoryContainsKeywordsPredicate) other;
         return keyword.equals(otherNameContainsKeywordsPredicate.keyword);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keyword", keyword).toString();
+        return this.keyword;
     }
 }

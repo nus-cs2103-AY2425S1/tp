@@ -8,11 +8,11 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.TrackCommand;
-import seedu.address.model.person.CategoryContainsKeywordsPredicate;
+import seedu.address.model.person.CategoryContainsKeywordPredicate;
 
 public class TrackCommandParserTest {
-    private static final CategoryContainsKeywordsPredicate STUDENT_PREDICATE =
-            new CategoryContainsKeywordsPredicate("student");
+    private static final CategoryContainsKeywordPredicate STUDENT_PREDICATE =
+            new CategoryContainsKeywordPredicate("student");
     private static final String userInput2 = VALID_CATEGORY_COMPANY;
     private TrackCommandParser parser = new TrackCommandParser();
 
