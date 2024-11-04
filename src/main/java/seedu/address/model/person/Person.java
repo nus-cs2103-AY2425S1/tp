@@ -92,8 +92,8 @@ public class Person {
     public static Person getGuest(Name n, Phone p) {
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("Customer"));
-        return new Customer(n, p, new Email("unfilled@unfilled.com"), new Address("unfilled"), new Information(),
-                new Remark("nil"), tags);
+        return new Customer(n, p, new Email(), new Address(), new Information(),
+                new Remark(), tags);
     }
 
     /**
