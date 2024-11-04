@@ -96,4 +96,13 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
+
+    /**
+     * Returns a list containing list of transactions given.
+     */
+    public static List<Transaction> getTransactionList(Transaction... transactions) {
+        return Arrays.stream(transactions)
+                .collect(Collectors.toList());
+    }
+
 }

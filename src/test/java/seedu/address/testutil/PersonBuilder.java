@@ -121,7 +121,8 @@ public class PersonBuilder {
      * Sets the {@code Transaction} of the {@code Person} that we are building.
      */
     public PersonBuilder withTransactions(Transaction ... transactions) {
-        this.transactions.addAll(List.of(transactions));
+        //this.transactions.addAll(List.of(transactions));
+        this.transactions = SampleDataUtil.getTransactionList(transactions);
         return this;
     }
 
