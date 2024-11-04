@@ -113,6 +113,18 @@ Undoes the previous command that changed the data.
 
 Format: `undo`
 
+### Locating person by name: `view`
+
+Views student whose name matches the specified name exactly.
+
+Format: `view NAME`
+
+* The given name must match the student's name exactly. e.g `view John` will not return `John Doe`'s details.
+* If more than one student share the exact same name, all the students with that name will be displayed.
+
+Examples: 
+* `view Alex Yeoh` Displays the details of all students with the name `Alex Yeoh`.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
