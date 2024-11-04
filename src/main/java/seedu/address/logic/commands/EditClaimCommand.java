@@ -37,12 +37,13 @@ public class EditClaimCommand extends Command {
             + PREFIX_CLAIM_STATUS + "[NEW_STATUS] "
             + PREFIX_CLAIM_DESC + "[NEW_DESCRIPTION]\n"
             + "Note: Use the 'list-claims' command to find the appropriate claim index "
-            + "for the specified policy type.\n\n"
+            + "for the specified policy type.\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_POLICY_TYPE + "health "
             + PREFIX_CLAIM_INDEX + "1 "
             + PREFIX_CLAIM_STATUS + "approved "
-            + PREFIX_CLAIM_DESC + "Updated claim details\n";
+            + PREFIX_CLAIM_DESC + "Updated claim details "
+            + "(The last 2 fields are optional but one of them needs to be edited at all times)\n ";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
     public static final String MESSAGE_EDIT_CLAIM_SUCCESS = "Claim edited for policy type '%1$s' of client: %2$s.\n\n"
