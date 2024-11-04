@@ -2,42 +2,105 @@
 layout: page
 title: User Guide
 ---
-
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
-* Table of Contents
-{:toc}
+# Health Connect
+Health Connect is an application designed to **streamline client management** for Singapore based healthcare professionals. It allows users to **efficiently track client details and appointments**, simplifying the management process.
 
 --------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+1. [Quick Start](#quick-start)
+   1. [For Windows Users](#for-windows-users)
+   2. [For Mac Users](#for-mac-users)
+2. [Features](#features)
 
-## Quick start
+--------------------------------------------------------------------------------------------------------------------
+## Quick Start
 
+### For Windows Users:
 1. Ensure you have Java `17` or above installed in your Computer.
-
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+    1. Open Command Prompt. You can do this by clicking the Windows Start or Search button and type `cmd`.
+       ![Opening Terminal on Windows](./images/QuickStartWindowsOpenCommandPrompt.png)
+    2. Once Command Prompt is open, type: `java -version` and click `Enter`.
+       ![Checking Java Version on Windows - Command](./images/QuickStartWindowsCheckVersionCommand.png)
+    3. If Java `17` or higher is displayed, you are good to go! Proceed to **Step 3**.
+       ![Checking Java Version on Windows - Display](./images/QuickStartWindowsCheckVersionDisplay.png)
+    4. Otherwise, proceed to **Step 2**.
+       <br></br>
+2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
+    1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+    2. Download the appropriate installer for Windows.
+    3. After installation, follow the instructions in **Step 1**.
+       <br></br>
+3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/tag/v1.4).
+   <br></br>
+4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+   <br></br>
+5. Use Command Prompt to open the JAR file.
+    1. Find the file path of the file you just copied. To do so, right-click on the file in the folder and press `Properties`.
+       ![Finding File Path on Windows](./images/QuickStartWindowsFindFilePath.png)
+    2. Check the File Path by noticing the path after your username under **Location**.
+       ![Converting File Path on Windows](./images/QuickStartWindowsCheckFilePath.png)
+       For example, in this case, the required `FILEPATH` will be `OneDrive/Documents/CS2103T/AddressBook`
+    3. In Command Prompt, enter `cd FILEPATH`, replacing `FILEPATH` with your own path obtained. Following the previous example, you should enter `cd OneDrive/Documents/CS2103T/AddressBook` as follows:
+       ![Entering File Path on Windows](./images/QuickStartWindowsNavigateFilePath.png)
+    4. In Command Prompt, enter `java -jar healthconnect.jar`.
+       ![Entering JAR Command on Windows](./images/QuickStartWindowsEnteringJarCommand.png)
+    5. A GUI similar to the below should appear in a few seconds.
+       ![Ui](images/Ui.png)
+   <br></br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
+    * `view` : Displays all contacts.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `filter t/High Risk` : Displays all entries which are tagged High Risk.
+    * `clear` : Deletes all contacts.
+    * `exit` : Exits the app.
+   <br></br>
+7. Refer to the [Features](#features) below for details of each command.
 
-   * `view` : Displays all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `filter t/High Risk` : Displays all entries which are tagged High Risk.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+### For Mac Users:
+1. Ensure you have Java `17` or above installed in your Computer.
+   1. Open Terminal. You can do this by searching for it using Spotlight Search. To do so, press `Command + Space` and search "Terminal".
+      ![Opening Terminal on Mac](./images/QuickStartMacOpenTerminal.png)
+   2. Once Terminal is open, type: `java -version` and click `Enter`.
+      ![Checking Java Version on Mac - Command](./images/QuickStartMacCheckVersionCommand.png)
+   3. If Java `17` or higher is displayed, you are good to go! Proceed to **step 3**.
+      ![Checking Java Version on Mac - Display](./images/QuickStartMacCheckVersionDisplay.png)
+   4. Otherwise, proceed to step 2.
+   <br></br>
+2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
+   1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+   2. Download the appropriate installer for Mac.
+   3. After installation, follow the instructions in **Step 1**.
+   <br></br>
+3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/tag/v1.4).
+   <br></br>
+4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+   <br></br>
+5. Use Terminal to open the JAR file.
+   1. Find the file path of the file you just copied. To do so, right-click on the file in Finder and press `Get Info`.
+      ![Finding File Path on Mac](./images/QuickStartMacFindFilePath.png)
+   2. Check the File Path by noting the path after your username under **Where**.
+      ![Converting File Path on Mac](./images/QuickStartMacCheckFilePath.png)
+   For example, in this case, the required `FILEPATH` will be `Documents/CS2103T/AddressBook`
+   3. In Terminal, enter `cd FILEPATH`, replacing `FILEPATH` with your own path obtained. Following the previous example, you should enter `cd Documents/CS2103T/AddressBook` as follows:
+      ![Entering File Path on Mac](./images/QuickStartMacNavigateFilePath.png)
+   4. In Terminal, enter `java -jar healthconnect.jar`.
+      ![Entering JAR Command on Mac](./images/QuickStartMacEnterJarCommand.png)
+   5. A GUI similar to the below should appear in a few seconds.
+      ![Ui](images/Ui.png)
+   <br></br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
+    * `view` : Displays all contacts.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `filter t/High Risk` : Displays all entries which are tagged High Risk.
+    * `clear` : Deletes all contacts.
+    * `exit` : Exits the app.
+   <br></br>
+7. Refer to the [Features](#features) below for details of each command.
+   
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -78,7 +141,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY …​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY`
 
 **PHONE NUMBER**
 - Must be exactly 8 digits long and start with 3, 6, 8 or 9.
