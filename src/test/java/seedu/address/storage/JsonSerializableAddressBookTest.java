@@ -22,6 +22,7 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_typicalStudentsFile_success() throws Exception {
+        // EP: valid student file
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENT_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
@@ -31,6 +32,7 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_invalidStudentFile_throwsIllegalValueException() throws Exception {
+        // EP: invalid student file containing invalid attribute
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
@@ -38,6 +40,7 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_duplicateStudents_throwsIllegalValueException() throws Exception {
+        // EP: invalid student file containing duplicates
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_STUDENT_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_STUDENT,

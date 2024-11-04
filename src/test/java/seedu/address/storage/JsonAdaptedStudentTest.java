@@ -40,12 +40,14 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
+        // EP: valid name with valid parameters
         JsonAdaptedStudent student = new JsonAdaptedStudent(BENSON);
         assertEquals(BENSON, student.toModelType());
     }
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
+        // EP: invalid name with non-alphabetical characters
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(
                         INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_SCHEDULE,
@@ -57,6 +59,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
+        // EP: invalid name with null
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_SCHEDULE, VALID_SUBJECT, VALID_RATE,
                 VALID_PAID_AMOUNT, VALID_OWED_AMOUNT
@@ -67,6 +70,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
+        // EP: invalid phone number with non-numerical characters
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(
                         VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_SCHEDULE,
@@ -78,6 +82,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
+        // EP: invalid phone number with null
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_SCHEDULE, VALID_SUBJECT,
                 VALID_RATE, VALID_PAID_AMOUNT, VALID_OWED_AMOUNT
@@ -88,6 +93,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
+        // EP: invalid email without @
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(
                         VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_SCHEDULE,
@@ -99,6 +105,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
+        // EP: invalid email with null
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 VALID_NAME, VALID_PHONE, null, VALID_ADDRESS, VALID_SCHEDULE, VALID_SUBJECT,
                 VALID_RATE, VALID_PAID_AMOUNT, VALID_OWED_AMOUNT
@@ -109,6 +116,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
+        // EP: invalid address with empty space
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_SCHEDULE,
@@ -120,6 +128,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
+        // EP: invalid address with null
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_SCHEDULE, VALID_SUBJECT,
                 VALID_RATE, VALID_PAID_AMOUNT, VALID_OWED_AMOUNT
@@ -130,6 +139,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidSchedule_throwsIllegalValueException() {
+        // EP: invalid schedule that does not correspond to enum values
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_SCHEDULE,
@@ -141,6 +151,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_nullSchedule_throwsIllegalValueException() {
+        // EP: invalid schedule with null
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null,
                 VALID_SUBJECT, VALID_RATE, VALID_PAID_AMOUNT, VALID_OWED_AMOUNT
@@ -151,6 +162,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidSubject_throwsIllegalValueException() {
+        // EP: invalid subject that does not correspond to enum values
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_SCHEDULE,
@@ -162,6 +174,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_nullSubject_throwsIllegalValueException() {
+        // EP: invalid subject with null
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_SCHEDULE,
                 null, VALID_RATE, VALID_PAID_AMOUNT, VALID_OWED_AMOUNT
@@ -172,6 +185,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidRate_throwsIllegalValueException() {
+        // EP: invalid rate with alphabets
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SCHEDULE, VALID_SUBJECT, INVALID_RATE, VALID_PAID_AMOUNT, VALID_OWED_AMOUNT
@@ -182,6 +196,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_nullRate_throwsIllegalValueException() {
+        // EP: invalid rate with null
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SCHEDULE, VALID_SUBJECT, null, VALID_PAID_AMOUNT, VALID_OWED_AMOUNT);
@@ -191,6 +206,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidOwedAmount_throwsIllegalValueException() {
+        // EP: invalid OwedAmount with empty space
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SCHEDULE, VALID_SUBJECT, VALID_RATE, VALID_PAID_AMOUNT, INVALID_OWED_AMOUNT);
         String expectedMessage = OwedAmount.MESSAGE_CONSTRAINTS;
@@ -199,6 +215,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_nullOwedAmount_throwsIllegalValueException() {
+        // EP: invalid OwedAmount with null
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SCHEDULE, VALID_SUBJECT, VALID_RATE, VALID_PAID_AMOUNT, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, OwedAmount.class.getSimpleName());
@@ -207,6 +224,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidPaidAmount_throwsIllegalValueException() {
+        // EP: invalid PaidAmount with empty space
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SCHEDULE, VALID_SUBJECT, VALID_RATE, INVALID_PAID_AMOUNT, VALID_OWED_AMOUNT);
@@ -216,6 +234,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_nullPaidAmount_throwsIllegalValueException() {
+        // EP: invalid PaidAmount with null
         JsonAdaptedStudent student = new JsonAdaptedStudent(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SCHEDULE, VALID_SUBJECT, VALID_RATE, null, VALID_OWED_AMOUNT);
@@ -223,3 +242,4 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 }
+
