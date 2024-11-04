@@ -145,7 +145,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a GitHub {@code String username} into an {@code Github}.
+     * Parses a GitHub username into an {@code Github} instance.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code username} is invalid.
@@ -171,8 +171,8 @@ public class ParserUtil {
 
         try {
             int parsedWeek = Integer.parseInt(trimmedWeek);
-            if (parsedWeek <= 0) {
-                throw new ParseException("Week number must be a positive integer.");
+            if (parsedWeek < 0) {
+                throw new ParseException("Week number must be a non-negative integer.");
             }
             if (parsedWeek > MAX_WEEK) {
                 throw new ParseException("Week number cannot exceed 13.");

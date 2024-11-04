@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-
+<?import javafx.scene.layout.HBox?>
 <VBox id="cardPane" fx:id="cardPane"
       xmlns:fx="http://javafx.com/fxml/1"
       styleClass = "viewWindow"
@@ -18,11 +18,27 @@
     </padding>
     <Label fx:id="name" text="\$first" />
     <FlowPane fx:id="tags" />
-    <Label fx:id="phone"  text="\$phone" />
-    <Label fx:id="email" text="\$email" />
-    <Label fx:id="assignment" text="\$assignment" />
-    <Label fx:id="telegram" text="\$telegram"/>
-    <Label fx:id="github" text="\$Github" />
+
+    <HBox>
+        <Label id="fieldLabel" text="Phone Number: "/>
+        <Label fx:id="phone"  text="\$phone" />
+    </HBox>
+
+    <HBox>
+        <Label id="fieldLabel" text="Telegram: "/>
+        <Label fx:id="telegram" text="\$telegram"/>
+    </HBox>
+
+    <HBox>
+        <Label id="fieldLabel" text="Github: "/>
+        <Label fx:id="github" text="\$Github" />
+    </HBox>
+
+    <HBox>
+        <Label id="fieldLabel" text="Email: "/>
+        <Label fx:id="email" text="\$email" />
+    </HBox>
     <FlowPane fx:id="weekLabel"/>
+    <Label fx:id="assignment" text="\$assignment" />
 </VBox>
 

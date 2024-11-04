@@ -25,6 +25,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.assignment.ReadOnlyPredefinedAssignmentsData;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -54,6 +55,16 @@ public class AddCommandTest {
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePersonWithDifferentNameCase_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        Person differentNameCasePerson = new PersonBuilder().withName("amy bee").build();
+        AddCommand addCommand = new AddCommand(differentNameCasePerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
@@ -190,6 +201,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasName(Name name) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ReadOnlyPredefinedAssignmentsData getPredefinedAssignments() {
             throw new AssertionError("This method should not be called");
         }
 

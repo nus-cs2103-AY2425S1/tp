@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
@@ -63,13 +64,16 @@ public class ViewWindow extends UiPart<Region> {
 
         if (!person.getWeeksPresent().isEmpty()) {
             weekLabel.getChildren().add(new Label("Weeks attended: "));
-            person.getWeeksPresent().stream()
-                    .sorted(Comparator.comparing(Integer::intValue))
-                    .forEach(weekNumber -> {
-                        Label weekLabelNode = new Label(weekNumber.toString());
-                        weekLabelNode.getStyleClass().add("week-number");
-                        weekLabel.getChildren().add(weekLabelNode);
-                    });
+            for (int week = 0; week <= ParserUtil.MAX_WEEK; week++) {
+                Label weekLabelNode = new Label(String.valueOf(week));
+
+                if (person.getWeeksPresent().contains(week)) {
+                    weekLabelNode.getStyleClass().add("week-number-marked");
+                } else {
+                    weekLabelNode.getStyleClass().add("week-number-unmarked");
+                }
+                weekLabel.getChildren().add(weekLabelNode);
+            }
         } else {
             weekLabel.getChildren().add(new Label("No weeks attended"));
         }
@@ -82,10 +86,13 @@ public class ViewWindow extends UiPart<Region> {
             return;
         }
         StringBuilder sb = new StringBuilder(assignmentMap.size());
-        for (Assignment eachAssignment : assignmentMap.values()) {
-            sb.append(eachAssignment.toString()).append(", ");
-        }
-        sb.setLength(sb.length() - 2); //remove the last ,
+        assignmentMap
+                .values()
+                .stream()
+                .sorted(Comparator.comparing(Assignment::getAssignmentName))
+                .forEach(assignment -> sb.append(assignment).append(", \n"));
+
+        sb.setLength(sb.length() - 3); //remove the last ,
         assignment.setText(sb.toString());
     }
 }
