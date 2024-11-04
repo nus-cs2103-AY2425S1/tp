@@ -171,8 +171,8 @@ public class ParserUtil {
 
         try {
             int parsedWeek = Integer.parseInt(trimmedWeek);
-            if (parsedWeek <= 0) {
-                throw new ParseException("Week number must be a positive integer.");
+            if (parsedWeek < 0) {
+                throw new ParseException("Week number must be a non-negative integer.");
             }
             if (parsedWeek > MAX_WEEK) {
                 throw new ParseException("Week number cannot exceed 13.");
