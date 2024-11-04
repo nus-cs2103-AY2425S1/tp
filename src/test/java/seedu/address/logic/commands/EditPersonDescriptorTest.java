@@ -77,7 +77,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getAddress().orElse(null) + ", dateOfBirth="
                 + editPersonDescriptor.getDateOfBirth().orElse(null) + ", priority="
                 + editPersonDescriptor.getPriority().orElse(null) + ", income="
-                + editPersonDescriptor.getIncome().orElse(null) + ", remark="
+                + editPersonDescriptor.getIncome().orElse(null) + ", familySize="
+                + editPersonDescriptor.getFamilySize().orElse(null) + ", remark="
                 + editPersonDescriptor.getRemark().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());

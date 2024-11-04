@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST_ARCHIVE;
 
 import java.util.function.Predicate;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -74,5 +75,9 @@ public class ListCommand extends Command {
 
     public static ListCommand ofArchive() {
         return new ListCommand(Model.PREDICATE_SHOW_ARCHIVED_PERSONS, MESSAGE_SUCCESS_ARCHIVE);
+    }
+
+    public String undo(Model model, CommandHistory pastCommands) {
+        return null;
     }
 }

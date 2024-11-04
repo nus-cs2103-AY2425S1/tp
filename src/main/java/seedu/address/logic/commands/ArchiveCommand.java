@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -135,5 +136,15 @@ public class ArchiveCommand extends Command {
 
         return this.index.equals(otherArchiveCommand.index)
                 && this.isArchive == otherArchiveCommand.isArchive;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        Person afterArchive = modifyPerson(personToModify);
+        model.setPerson(afterArchive, personToModify);
+        pastCommands.remove();
+        return String.format(
+                isArchive ? MESSAGE_UNARCHIVE_PERSON_SUCCESS : MESSAGE_ARCHIVE_PERSON_SUCCESS,
+                Messages.format(personToModify));
     }
 }

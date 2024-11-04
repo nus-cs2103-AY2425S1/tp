@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
@@ -29,8 +30,8 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_PRIORITY = "CRITICAL";
-    // December is not a valid input, use Dec or dec instead
-    private static final String INVALID_DATE_OF_BIRTH = "31 December 2022";
+    private static final String INVALID_FORMAT_DATE_OF_BIRTH = "31 December 2022";
+    private static final String INVALID_FUTURE_DATE_OF_BIRTH = "9999-01-01";
     private static final double INVALID_INCOME = -1929;
     private static final int INVALID_FAMILY_SIZE = -10;
     private static final String INVALID_TAG = "#friend";
@@ -42,7 +43,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_PRIORITY = BENSON.getPriority().toString();
     private static final String VALID_REMARK = BENSON.getRemark().toString();
-    private static final String VALID_DATE_OF_BIRTH = BENSON.getDateOfBirth().getValue();
+    private static final String VALID_DATE_OF_BIRTH = BENSON.getDateOfBirth().getValue().toString();
     private static final double VALID_INCOME = BENSON.getIncome().getValue();
     private static final int VALID_FAMILY_SIZE = BENSON.getFamilySize().getValue();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
@@ -157,11 +158,21 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
+    public void toModelType_invalidFormatDateOfBirth_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(
+                        VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
+                        INVALID_FORMAT_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+        String expectedMessage = Messages.MESSAGE_INVALID_DATE_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidDateOfBirth_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        INVALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        INVALID_FUTURE_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
         String expectedMessage = DateOfBirth.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

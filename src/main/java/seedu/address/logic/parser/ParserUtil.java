@@ -105,22 +105,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into a {@code Date}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code dateOfBirth} is invalid.
-     */
-    public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
-        requireNonNull(dateOfBirth);
-        String trimmedDate = dateOfBirth.trim();
-
-        if (!DateOfBirth.isValidDate(trimmedDate)) {
-            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS);
-        }
-        return new DateOfBirth(trimmedDate);
-    }
-
-    /**
      * Parses a {@code String priority} into a {@code Priority}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -197,6 +181,20 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
         }
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateOfBirth} is invalid.
+     */
+    public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
+        LocalDate date = parseDate(dateOfBirth);
+        if (!DateOfBirth.isValidDate(date)) {
+            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS);
+        }
+        return new DateOfBirth(date);
     }
 
     /**
