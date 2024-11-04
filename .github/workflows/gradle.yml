@@ -59,21 +59,86 @@ jobs:
 
   deploy:
     needs: build
+    runs-on: ubuntu-latest
+
+    # Only deploy on push to main/master branch
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     strategy:
       matrix:
-        platform: [ ubuntu-latest, macos-latest, windows-latest ]
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+        report_type: [test-report, checkstyle-report]
 
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: 'test-report-${{ matrix.platform }}'
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
     steps:
+      # Create combined directory structure
+      - name: Create directory structure
+        run: |
+          mkdir -p combined-reports/test-reports
+          mkdir -p combined-reports/checkstyle-reports
+
+      # Download artifacts using matrix
+      - name: Download ${{ matrix.report_type }} - ${{ matrix.platform }}
+        uses: actions/download-artifact@v3
+        with:
+          name: '${{ matrix.report_type }}-${{ matrix.platform }}'
+          path: 'combined-reports/${{ matrix.report_type == 'test-report' && 'test-reports' || 'checkstyle-reports' }}/${{ matrix.platform }}'
+
+      # Create index page (only once)
+      - name: Create index page
+        if: matrix.platform == 'ubuntu-latest' && matrix.report_type == 'test-report'
+        run: |
+          cat > combined-reports/index.html << 'EOL'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Test and Checkstyle Reports</title>
+            <style>
+              body { font-family: Arial, sans-serif; margin: 40px; }
+              h1 { color: #333; }
+              .report-section { margin-bottom: 30px; }
+              .platform-list { list-style: none; padding-left: 20px; }
+              .platform-list li { margin: 10px 0; }
+              a { color: #0366d6; text-decoration: none; }
+              a:hover { text-decoration: underline; }
+            </style>
+          </head>
+          <body>
+            <h1>Build Reports</h1>
+          
+            <div class="report-section">
+              <h2>Test Reports</h2>
+              <ul class="platform-list">
+                <li><a href="test-reports/ubuntu-latest/index.html">Ubuntu Test Report</a></li>
+                <li><a href="test-reports/macos-latest/index.html">macOS Test Report</a></li>
+                <li><a href="test-reports/windows-latest/index.html">Windows Test Report</a></li>
+              </ul>
+            </div>
+          
+            <div class="report-section">
+              <h2>Checkstyle Reports</h2>
+              <ul class="platform-list">
+                <li><a href="checkstyle-reports/ubuntu-latest/main.html">Ubuntu Checkstyle Report</a></li>
+                <li><a href="checkstyle-reports/macos-latest/main.html">macOS Checkstyle Report</a></li>
+                <li><a href="checkstyle-reports/windows-latest/main.html">Windows Checkstyle Report</a></li>
+              </ul>
+            </div>
+          </body>
+          </html>
+          EOL
+
+      # Upload combined artifact (only once)
+      - name: Upload combined artifact
+        if: matrix.platform == 'ubuntu-latest' && matrix.report_type == 'test-report'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: combined-reports
+
+      # Deploy to GitHub Pages (only once)
       - name: Deploy to GitHub Pages
+        if: matrix.platform == 'ubuntu-latest' && matrix.report_type == 'test-report'
         id: deployment
         uses: actions/deploy-pages@v4
