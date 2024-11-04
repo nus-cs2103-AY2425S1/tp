@@ -154,6 +154,19 @@ Classes used by multiple components are in the `seedu.hireme.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Getting help
+The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+In this case, since there are no additional parameters for the help command, `AddressBookParser` does not create any parser object.
+
+<puml src="diagrams/HelpSequenceDiagram.puml" alt="HelpSequenceDiagram" />
+
+`AddressBookParser` ensures that there are no additional keywords provided. If there are keywords found, `AddressBookParser` throws a ParseException.
+Otherwise, it creates a new instance of `HelpCommand`.
+
+Upon execution, `HelpCommand` returns an instance of `CommandResult` which contains the help message.
+
+
 ### Create new internship application
 The implementation of the create command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 In this case, `AddressBookParser` creates `AddCommandParser` to parse user input string.
@@ -169,34 +182,7 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
 Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then calls on `model::addItem` to add the internship application into the data.
 
 
-### Find internship applications
-The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
-In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
-
-<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
-
-`AddressBookParser` first obtains the keyword from the user's input.
-`AddressBookParser` ensures that there is at least 1 keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
-Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
-  `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
-
-Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
-`setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword
-
-
-### Filter internship applications
-
-The implementation of the filter command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
-`AddressBookParser` creates `FilterCommandParser` to parse user input string.
-
-<puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram"/>
-
-Refer to AddSequenceDiagram for how `AddressBookParser` creates `FilterCommandParser` and `FilterCommand`.
-`FilterCommandParser` obtains the specified status value and ensures that it is valid.
-
-A new filter command is then created with a `StatusPredicate`.
-
-Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the model through the method `model::updateFilteredList`. The model then uses the predicate internally to update the displayed list of internship applications.
+[//]: # (List section here)
 
 
 ### Delete an internship application
@@ -215,27 +201,19 @@ Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the 
 Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
 
 
-### Sort internship application list
-The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
-In this case, `AddressBookParser` creates `SortCommandParser` to parse user input string.
+### Find internship applications
+The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
 
-<puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
 
-`AddressBookParser` first obtains the order from the user's input.
-`AddressBookParser` ensures that there is only 1 keyword found which is the sorting order. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
-Otherwise, it creates a new instance of `SortCommand` that corresponds to the user input.
-`SortCommand` comprises of a DateComparator which contains the sorting order, according to date of application, that the internship application list should be sorted by.
+`AddressBookParser` first obtains the keyword from the user's input.
+`AddressBookParser` ensures that there is at least 1 keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
+Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
+  `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
 
-Upon execution, `SortCommand` calls on `model::sortFilteredList` which in turns calls on `addressBook::sortItems`.
-`sortItems` updates the `filteredList` in `model` to sort the internship applications in the list according to the order specified by the user.
-
-### View chart
-The implementation of the chart command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
-
-<puml src="diagrams/ChartSequenceDiagram.puml" alt="ChartSequenceDiagram" />
-
-`AddressBookParser` creates `ChartCommand`
-Upon execution, `ChartCommand` gets the chart data which is encapsulated in `CommandResult`
+Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
+`setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
 
 
 ### Update the Status of an Internship Application
@@ -256,6 +234,51 @@ Upon execution, `StatusCommand`:
 3. **Refreshes the Filtered List**: The previous filter predicate is reapplied using `model::updateFilteredList`.
 
 Finally, `StatusCommand` generates a `CommandResult` with a confirmation message, reflecting the updated status. This is then returned to `LogicManager`, completing the command execution.
+
+
+### Filter internship applications
+
+The implementation of the filter command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+`AddressBookParser` creates `FilterCommandParser` to parse user input string.
+
+<puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram"/>
+
+Refer to AddSequenceDiagram for how `AddressBookParser` creates `FilterCommandParser` and `FilterCommand`.
+`FilterCommandParser` obtains the specified status value and ensures that it is valid.
+
+A new filter command is then created with a `StatusPredicate`.
+
+Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the model through the method `model::updateFilteredList`. The model then uses the predicate internally to update the displayed list of internship applications.
+
+
+### Sort internship application list
+The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+In this case, `AddressBookParser` creates `SortCommandParser` to parse user input string.
+
+<puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
+
+`AddressBookParser` first obtains the order from the user's input.
+`AddressBookParser` ensures that there is only 1 keyword found which is the sorting order. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
+Otherwise, it creates a new instance of `SortCommand` that corresponds to the user input.
+`SortCommand` comprises of a DateComparator which contains the sorting order, according to date of application, that the internship application list should be sorted by.
+
+Upon execution, `SortCommand` calls on `model::sortFilteredList` which in turns calls on `addressBook::sortItems`.
+`sortItems` updates the `filteredList` in `model` to sort the internship applications in the list according to the order specified by the user.
+
+
+[//]: # (Clear section here)
+
+
+### View chart
+The implementation of the chart command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
+<puml src="diagrams/ChartSequenceDiagram.puml" alt="ChartSequenceDiagram" />
+
+`AddressBookParser` creates `ChartCommand`
+Upon execution, `ChartCommand` gets the chart data which is encapsulated in `CommandResult`
+
+
+[//]: # (Exit section here)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -300,7 +323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS Undergraduate              | save the internship application data locally                     | I will not lose my data when I exit the application                      |
 | `* * *`  | CS Undergraduate              | load the internship from a saved file                            | I can get back my data when I open the application                       |
 | `* * *`  | CS Undergraduate              | clear the list of internship application I have saved            | I can restart a new list in the next internship application cycle        |
-| `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications                         | I can prioritize follow-ups with older applications                      |
+| `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications by date of application  | I can prioritize follow-ups with older applications                      |
 | `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications  | I can update my schedule accordingly                                     |
 | `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them | I can prioritize my time on checking up on these internship applications |
 | `*`      | Forgetful CS Undergraduate    | remind myself of acceptance deadline                             | I will not miss the deadline to accept                                   |
@@ -361,7 +384,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
+**System**: HireMe application
 **Use Case: UC02 - List all internship entries**
+**Actor**: User
+**MSS**
 
 **MSS**
 
@@ -373,7 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. There are no internship entries.
-    * 1a1. HireMe shows a message indicating "no entries."
+    * 1a1. HireMe shows an empty list.
 
       Use case ends.
 
@@ -407,11 +433,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. HireMe detects an error in the entered data.
+* 1a. User enters an invalid number of arguments.
     * 1a1. HireMe shows an error message that explains how to use the sort command and what parameters are valid.
-    * 1a2. User enters new data.
-    Steps 3a1-3a2 are repeated until the data entered are correct.
+    * 1a2. User enters new command.
+    Steps 1a1-1a2 are repeated until the command entered is valid.
     Use case resumes from step 2.
+
+* 1b. User enters an invalid order.
+    * 1b1. HireMe shows an error message that explains how to use the sort command and what parameters are valid.
+    * 1b2. User enters new command.
+      Steps 1b1-1b2 are repeated until the command entered is valid.
+      Use case resumes from step 2.
+
+* 1c. User sorts an empty list.
+    * 1c1. HireMe shows an empty list.
 
     Use case ends.
 
@@ -442,7 +477,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. The user performs an action that changes the internship list (e.g., adding, editing, or deleting an entry).
-2. The system automatically saves the updated internship list to `HireMe.txt`.
+2. The system automatically saves the updated internship list to `hireme.json`.
 3. The file is saved successfully without displaying a confirmation message.
 
    Use case ends.
@@ -547,6 +582,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+
 ### Deleting an internship application
 
 1. Deleting an internship application while all internship applications are being shown
@@ -563,6 +599,26 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+
+### Sorting the list of internship applications
+
+1. Sort the entire list of internship applications
+
+    1. Prerequisites: List all internship applications using the `/list` command. Multiple (at least 2) internship applications in the list with different date of applications.
+
+    1. Test case: `/sort earliest`<br>
+       Expected: The list of internship applications should now be sorted in ascending order by the date of application. The earliest internship applications should be at the top 
+       of the list and as you go down the list, the date of applications should be at later dates.
+
+    1. Test case: `/sort latest`<br>
+       Expected: The list of internship applications should now be sorted in descending order by the date of application. The latest internship applications should be at the top
+       of the list and as you go down the list, the date of applications should be at earlier dates.
+
+    1. Other incorrect sort commands to try: `/sort`, `/sort test`, `/sort earliest latest`, `/sort 1`<br>
+       Expected: An error message should be shown which explains how to use the sort command and what parameters are valid.
+
+
 
 ### Saving data
 
