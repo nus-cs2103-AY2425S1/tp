@@ -56,8 +56,9 @@ public class FiltersPanel extends UiPart<Region> {
         statusFilters.stream()
                 .forEach(status -> {
                     Label statusLabel = new Label(status.getStatus());
-                    statusLabel.getStyleClass().add("cell_rsvp_status_label");
+
                     statusLabel.setStyle(StatusColourManager.getStatusStyle(status));
+                    statusLabel.getStyleClass().add("rsvp-filter-label");
 
                     filterListFlowPane.getChildren().add(statusLabel);
                 });
