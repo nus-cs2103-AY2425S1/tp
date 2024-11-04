@@ -1,34 +1,33 @@
 {
   "persons" : [ ],
-  "tasks" : [ ],
   "groups" : [ {
     "students" : [ ],
     "tasks" : [ ],
-    "groupName" : "Team5"
+    "groupName" : "CS2103T-F12-5"
   }, {
     "students" : [ ],
     "tasks" : [ ],
-    "groupName" : "Team4"
+    "groupName" : "CS2103T-F12-4"
   }, {
     "students" : [ ],
     "tasks" : [ ],
-    "groupName" : "Team3"
+    "groupName" : "CS2103-F12-3"
   }, {
     "students" : [ ],
     "tasks" : [ ],
-    "groupName" : "Team2"
+    "groupName" : "CS2103-F12-2"
   }, {
     "students" : [ ],
     "tasks" : [ ],
-    "groupName" : "Group1"
+    "groupName" : "CS2103-F12-1"
   }, {
     "students" : [ ],
     "tasks" : [ ],
-    "groupName" : "Team1"
+    "groupName" : "CS2103T-F12-6"
   }, {
     "students" : [ ],
     "tasks" : [ ],
-    "groupName" : "Group10"
+    "groupName" : "CS2103T-F12-7"
   } ],
   "tasks" : [ ]
 }

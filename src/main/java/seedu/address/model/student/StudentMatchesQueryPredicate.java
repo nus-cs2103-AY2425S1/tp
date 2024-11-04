@@ -19,8 +19,8 @@ public class StudentMatchesQueryPredicate implements Predicate<Student> {
 
     @Override
     public boolean test(Student student) {
-        String groupName = student.getGroupName().isPresent() ?
-            student.getGroupName().get().getGroupName() : "!nogroup";
+        String groupName = student.getGroupName().isPresent()
+            ? student.getGroupName().get().getGroupName() : "!nogroup";
         return
             keywords.stream().anyMatch(keyword ->
                 StringUtil.containsWordIgnoreCase(student.getStudentNumber().getStudentNumber(), keyword)

@@ -26,7 +26,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
-    private static final Group DUMMY_GROUP = new Group(new GroupName("Dummy Group"));
+    private static final Group DUMMY_GROUP = new Group(new GroupName("CS2103-F12-4"));
     private final AddressBook addressBook = new AddressBook();
 
     @Test

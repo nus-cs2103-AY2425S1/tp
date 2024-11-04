@@ -5,43 +5,43 @@
     "email" : "alice@u.nus.edu",
     "tags" : [ "friends" ],
     "student number" : "A0111111J",
-    "group" : "Team 1"
+    "group" : "CS2103-F12-1"
   }, {
     "name" : "Benson Meier",
     "email" : "johnd@u.nus.edu",
     "tags" : [ "owesMoney", "friends" ],
     "student number" : "A0222222H",
-    "group" : "Team 2"
+    "group" : "CS2103-F12-2"
   }, {
     "name" : "Carl Kurz",
     "email" : "heinz@u.nus.edu",
     "tags" : [ ],
     "student number" : "A0333333M",
-    "group" : "Team 3"
+    "group" : "CS2103-F12-3"
   }, {
     "name" : "Daniel Meier",
     "email" : "cornelia@u.nus.edu",
     "tags" : [ "friends" ],
     "student number" : "A0444444N",
-    "group" : "Team 2"
+    "group" : "CS2103-F12-4"
   }, {
     "name" : "Elle Meyer",
     "email" : "werner@u.nus.edu",
     "tags" : [ ],
     "student number" : "A0555555H",
-    "group" : "Team 1"
+    "group" : "CS2103-F12-5"
   }, {
     "name" : "Fiona Kunz",
     "email" : "lydia@u.nus.edu",
     "tags" : [ ],
     "student number" : "A0666666J",
-    "group" : "Team 2"
+    "group" : "CS2103-F12-6"
   }, {
     "name" : "George Best",
     "email" : "anna@u.nus.edu",
     "tags" : [ ],
     "student number" : "A0888888M",
-    "group" : "Team 1"
+    "group" : "CS2103-F12-7"
   } ],
   "groups" : [ ],
   "tasks" : [ ]

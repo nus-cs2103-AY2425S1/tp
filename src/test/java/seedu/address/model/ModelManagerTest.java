@@ -22,7 +22,7 @@ import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
-    private static final Group DUMMY_GROUP = new Group(new GroupName("Dummy Group"));
+    private static final Group DUMMY_GROUP = new Group(new GroupName("CS2103-F12-4"));
     private ModelManager modelManager = new ModelManager();
 
     @Test

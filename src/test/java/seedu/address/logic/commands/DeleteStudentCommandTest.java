@@ -31,6 +31,7 @@ public class DeleteStudentCommandTest {
     @Test
     public void execute_validStudentNumber_success() {
         Student studentToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        System.out.println(studentToDelete);
         StudentNumber studentNumber = studentToDelete.getStudentNumber();
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(studentNumber);
 

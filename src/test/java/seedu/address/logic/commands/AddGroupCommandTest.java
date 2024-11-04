@@ -35,7 +35,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddGroupCommandTest {
 
-    private static final GroupName VALID_GROUPNAME = new GroupName("Team1");
+    private static final GroupName VALID_GROUPNAME = new GroupName("CS2103-F12-4");
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
@@ -72,8 +72,8 @@ public class AddGroupCommandTest {
 
     @Test
     public void equals() {
-        Group teamOne = new Group(new GroupName("Team 1"), new HashSet<>(), new HashSet<>());
-        Group teamTwo = new Group(new GroupName("Team 2"), new HashSet<>(), new HashSet<>());
+        Group teamOne = new Group(new GroupName("CS2103T-F1-12"), new HashSet<>(), new HashSet<>());
+        Group teamTwo = new Group(new GroupName("CS2103-F12-2"), new HashSet<>(), new HashSet<>());
         List<Group> testGroups = new ArrayList<Group>();
         testGroups.add(teamOne);
         List<Group> testGroupsSecond = new ArrayList<Group>();
@@ -100,7 +100,7 @@ public class AddGroupCommandTest {
 
     @Test
     public void toStringMethod() {
-        Group teamOne = new Group(new GroupName("Team 1"), new HashSet<>(), new HashSet<>());
+        Group teamOne = new Group(new GroupName("CS2103-F12-2"), new HashSet<>(), new HashSet<>());
         List<Group> testGroups = new ArrayList<Group>();
         testGroups.add(teamOne);
         AddGroupCommand addTeamOneCommand = new AddGroupCommand(testGroups);

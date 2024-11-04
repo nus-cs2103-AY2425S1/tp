@@ -23,17 +23,17 @@ public class EditGroupCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager();
-        originalGroup = new Group(new GroupName("Original Group"));
+        originalGroup = new Group(new GroupName("CS2103-A12-1"));
         model.addGroup(originalGroup);
     }
 
     @Test
     public void execute_duplicateGroup_throwsCommandException() {
-        Group anotherGroup = new Group(new GroupName("Another Group"));
+        Group anotherGroup = new Group(new GroupName("CS2103-F12-4"));
         model.addGroup(anotherGroup);
 
         EditGroupDescriptor descriptorDuplicate = new EditGroupDescriptor();
-        descriptorDuplicate.setGroupName(new GroupName("Original Group"));
+        descriptorDuplicate.setGroupName(new GroupName("CS2103T-S1-12"));
 
         EditGroupCommand editGroupCommand = new EditGroupCommand(Index.fromZeroBased(2),
             descriptorDuplicate);
