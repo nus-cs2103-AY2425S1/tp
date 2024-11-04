@@ -48,7 +48,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void HiredFiredProReadSave() throws Exception {
+    public void hiredFiredProReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonHiredFiredProStorage} class.

@@ -31,7 +31,8 @@ public class JsonHiredFiredProStorageTest {
     }
 
     private java.util.Optional<ReadOnlyHiredFiredPro> readHiredFiredPro(String filePath) throws Exception {
-        return new JsonHiredFiredProStorage(Paths.get(filePath)).readHiredFiredPro(addToTestDataPathIfNotNull(filePath));
+        return new JsonHiredFiredProStorage(Paths.get(filePath))
+                .readHiredFiredPro(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
