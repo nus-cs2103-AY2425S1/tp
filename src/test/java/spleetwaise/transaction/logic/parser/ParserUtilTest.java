@@ -20,6 +20,7 @@ import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 
 public class ParserUtilTest {
     private static final String INVALID_AMOUNT = "+123.456";
@@ -30,6 +31,8 @@ public class ParserUtilTest {
 
     private static final String INVALID_DATE = "112024";
     private static final String VALID_DATE = "01012024";
+
+    private static final String INVALID_STATUS = "invalid";
 
     private static final Phone TEST_PHONE = TypicalPersons.ALICE.getPhone();
     private static final Index TEST_INDEX = Index.fromOneBased(1);
@@ -80,6 +83,27 @@ public class ParserUtilTest {
     public void parseDate_validDate_success() {
         Date result = assertDoesNotThrow(() -> ParserUtil.parseDate(VALID_DATE));
         assertEquals(new Date("01012024"), result);
+    }
+
+    @Test
+    public void parseStatus_null_exceptionThrown() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus(null));
+    }
+
+    @Test
+    public void parseStatus_invalidStatus_exceptionThrown() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_STATUS));
+    }
+
+    @Test
+    public void parseStatus_validStatus_success() {
+        Status result = assertDoesNotThrow(() -> ParserUtil.parseStatus(Status.DONE_STATUS));
+        assertEquals(new Status(Status.DONE_STATUS), result);
+        assertEquals(new Status(true), result);
+
+        result = assertDoesNotThrow(() -> ParserUtil.parseStatus(Status.NOT_DONE_STATUS));
+        assertEquals(new Status(Status.NOT_DONE_STATUS), result);
+        assertEquals(new Status(false), result);
     }
 
     @Test
