@@ -24,7 +24,7 @@ public class CreateTutorialCommand extends Command {
             + PREFIX_TUTORIAL + "TUTORIAL \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TUTORIAL + "English";
     public static final String MESSAGE_SUCCESS_TUTORIAL = "New tutorial added.\n%1$s";
-    public static final String MESSAGE_DUPLICATE_TUTORIAL = "This tutorial already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TUTORIAL = "This tutorial already exists in EduVault";
     private final Logger logger = LogsCenter.getLogger(CreateTutorialCommand.class);
     private final Tutorial toAdd;
 
