@@ -140,7 +140,7 @@ This screenshot shows the result of executing `as sno/A0123456A sn/James Ho e/e0
 
 Explanation of what command does.
 
-**Format**: `del_s sno/A0123456A`
+**Format**: `del_s sno/STUDENT_NUMBER`
 
 ##### Notes
 
@@ -163,7 +163,7 @@ This screenshot shows the result of executing `del_s sno/A0123456A`.
 
 Explanation of what command does.
 
-**Format**: `edit_s sno/A0123456A sn/James Ho Ting Kang`
+**Format**: `edit_s sno/STUDENT_NUMBER [sn/STUDENT_NAME] [e/EMAIL] [t/TAG]`
 
 ##### Notes
 
@@ -186,7 +186,7 @@ This screenshot shows the result of executing `edit_s sno/A0123456A sn/James Ho 
 
 Explanation of what command does.
 
-**Format**: `add_s_g sno/A0123456A gn/CS2103-F12-2`
+**Format**: `add_s_g sno/STUDENT_NUMBER gn/GROUP_NAME`
 
 ##### Notes
 
@@ -209,7 +209,7 @@ This screenshot shows the result of executing `add_s_g sno/A0123456A gn/CS2103-F
 
 Explanation of what command does.
 
-**Format**: `del_s_g sno/A0123456A`
+**Format**: `del_s_g sno/STUDENT_NUMBER`
 
 ##### Notes
 
@@ -230,24 +230,44 @@ This screenshot shows the result of executing `del_s_g sno/A0123456A`.
 
 #### Finding Students: `find_s`, `fs`
 
-Explanation of what command does.
+Searches T_Assistant for students with fields that match the search query.
 
-**Format**: `find_s q/James Ho`
+**Format**: `find_s q/QUERY [q/QUERY]...`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. The command will only match full words. You may search for part of a person's name such as `Doe` to find `John Doe`.
+   > i.e. `Do` will not match `Doe` 
+
+2. Searches the following fields that a student has that matches the query:
+
+   * Student name
+   * Student number
+   * Email
+   * Group name
+      * **Bonus:** If you wish to filter for students with no groups, use the following command: `find_s q/!nogroup`
+      > `!nogroup` is a special query that searches for students with no groups.
+
+<box type="info" seamless>
+Take note that if any other student with a group happens to have a field that matches the special keyword, they will also appear in the results.
+</box>
+
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Find students with the following queries - `TD7` and `Oliveiro`
 
-###### Scenario #1
+This screenshot shows the result of executing `find_s q/TD7 q/Olveiro`.
 
-This screenshot shows the result of executing `find_s q/James Ho`.
+![find_student](images/screenshots/find_s.png)
+
+###### Scenario #2: Find students with no groups
+
+This screenshot shows the result of executing `find_s q/!nogroup`.
+
+![img.png](images/screenshots/find_s_nogroup.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -307,7 +327,7 @@ This screenshot shows the result of executing `list_g`.
 
 Explanation of what command does.
 
-**Format**: `add_g gn/CS2103-F12-2`
+**Format**: `add_g gn/GROUP_NAME`
 
 ##### Notes
 
@@ -330,7 +350,7 @@ This screenshot shows the result of executing `add_g gn/CS2103-F12-2`.
 
 Explanation of what command does.
 
-**Format**: `del_g gn/CS2103-F12-2`
+**Format**: `del_g gn/GROUP_NAME`
 
 ##### Notes
 
@@ -353,7 +373,7 @@ This screenshot shows the result of executing `del_g gn/CS2103-F12-2`.
 
 Explanation of what command does.
 
-**Format**: `edit_g i/1 gn/CS2103-F12-3`
+**Format**: `edit_g i/INDEX gn/GROUP_NAME`
 
 ##### Notes
 
@@ -374,24 +394,27 @@ This screenshot shows the result of executing `edit_g i/1 gn/CS2103-F12-3`.
 
 #### Finding Groups: `find_g`, `fg`
 
-Explanation of what command does.
+Searches T_Assistant for groups with fields that match the search query.
 
-**Format**: `find_g q/CS2103-F12-2`
+**Format**: `find_g q/QUERY [q/QUERY]...`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. The command will match substrings. You may search for part of a group's name such as `F12` to find `CS2103T-F12-10`.
+2. Searches the following field that a group has that matches the query:
+   * Group name
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
 
-###### Scenario #1
+###### Scenario #1: Find groups with the following query - `F12`
 
-This screenshot shows the result of executing `find_g q/CS2103-F12-2`.
+This screenshot shows the result of executing `find_g q/F12`.
+
+![find_g.png](images/screenshots/find_g.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -428,7 +451,7 @@ This screenshot shows the result of executing `sort_g`.
 
 Explanation of what command does.
 
-**Format**: `list_t`
+**Format**: `list_t [gn/GROUP_NAME]`
 
 ##### Notes
 
@@ -451,7 +474,7 @@ This screenshot shows the result of executing `list_t`.
 
 Explanation of what command does.
 
-**Format**: `add_t_g tn/v1.5 Release td/2024-11-07 2359 gn/CS2103-F12-2`
+**Format**: `add_t_g tn/TASK_NAME td/TASK_DEADLINE (YYYY-MM-DD HHmm) gn/GROUP_NAME [gn/GROUP_NAME]...`
 
 ##### Notes
 
@@ -474,7 +497,7 @@ This screenshot shows the result of executing `add_t_g tn/v1.5 Release td/2024-1
 
 Explanation of what command does.
 
-**Format**: `add_t tn/Submit Postmortem td/2024-10-20 1800`
+**Format**: `add_t tn/TASK_NAME td/TASK_DEADLINE (YYYY-MM-DD HHmm)`
 
 ##### Notes
 
@@ -497,7 +520,7 @@ This screenshot shows the result of executing `add_t tn/Submit Postmortem td/202
 
 Explanation of what command does.
 
-**Format**: `add_et_g i/1 gn/CS2103-F12-3`
+**Format**: `add_et_g i/INDEX gn/GROUP_NAME [gn/GROUP_NAME]...`
 
 ##### Notes
 
@@ -520,7 +543,7 @@ This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-F12-3`.
 
 Explanation of what command does.
 
-**Format**: `del_t i/1`
+**Format**: `del_t i/INDEX`
 
 ##### Notes
 
@@ -543,7 +566,7 @@ This screenshot shows the result of executing `del_t i/1`.
 
 Explanation of what command does.
 
-**Format**: `del_t_g i/1 gn/CS2103-F12-2`
+**Format**: `del_t_g i/INDEX gn/GROUP_NAME`
 
 ##### Notes
 
@@ -566,7 +589,7 @@ This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F12-2`.
 
 Explanation of what command does.
 
-**Format**: `edit_t_g i/1 gn/CS2103-F12-3 tn/v1.4 Release`
+**Format**: `edit_t_g i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`
 
 ##### Notes
 
@@ -589,7 +612,7 @@ This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-3 tn/v
 
 Explanation of what command does.
 
-**Format**: `edit_t i/1 td/2024-11-20 1200`
+**Format**: `edit_t i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`
 
 ##### Notes
 
@@ -612,7 +635,7 @@ This screenshot shows the result of executing `edit_t i/1 td/2024-11-20 1200`.
 
 Explanation of what command does.
 
-**Format**: `mark_t gn/CS2103-F12-2 i/2`
+**Format**: `mark_t gn/GROUP_NAME i/INDEX`
 
 ##### Notes
 
@@ -635,7 +658,7 @@ This screenshot shows the result of executing `mark_t gn/CS2103-F12-2 i/2`.
 
 Explanation of what command does.
 
-**Format**: `find_t q/v1.3 Release`
+**Format**: `find_t q/QUERY [q/QUERY]...`
 
 ##### Notes
 

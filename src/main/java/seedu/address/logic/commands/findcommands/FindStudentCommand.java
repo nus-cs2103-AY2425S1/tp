@@ -45,7 +45,7 @@ public class FindStudentCommand extends Command {
             return new CommandResult(NO_STUDENTS_FOUND, LIST_STUDENT_MARKER);
         }
         return new CommandResult(
-            String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+            String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
             LIST_STUDENT_MARKER);
     }
 

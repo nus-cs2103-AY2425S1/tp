@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.findcommands.FindStudentCommand.NO_STUDENTS_FOUND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -62,7 +62,7 @@ public class FindStudentCommandTest {
 
     @Test
     public void execute_singleKeyword_multipleStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
         StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate(List.of("Alice Pauline", "A0888888M"
         ));
         FindStudentCommand command = new FindStudentCommand(predicate);
