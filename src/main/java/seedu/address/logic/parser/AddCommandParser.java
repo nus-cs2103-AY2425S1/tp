@@ -38,7 +38,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         */
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_WARD, PREFIX_DIAGNOSIS)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_WARD)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -56,8 +56,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
         Ward ward = ParserUtil.parseWard(argMultimap.getValue(PREFIX_WARD).get());
-        //Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
-        Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
+        Diagnosis diagnosis = argMultimap.getValue(PREFIX_DIAGNOSIS).isPresent()
+                ? ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get())
+                : ParserUtil.parseDiagnosis("");
         Medication medication = argMultimap.getValue(PREFIX_MEDICATION).isPresent()
                 ? ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get())
                 : ParserUtil.parseMedication("");
