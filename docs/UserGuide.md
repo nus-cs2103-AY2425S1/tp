@@ -241,7 +241,7 @@ Examples:
 * `sort deadline descending` sorts the client list by project deadline (later dates first).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-An unarchive feature is in the works and will be available in the future.
+Clientele+ saves you the hassle of sorting the list every time you open the app, so every time you do a sort, it will save the list
 </div>
 
 ### Archive a Client: `archive`
@@ -256,8 +256,9 @@ Examples:
 * `archive 1` archives the first person in the list, removing it and storing it in an archived list
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Clientele+ saves you the hassle of sorting the list every time you open the app, so every time you do a sort, it will save the list
+An unarchive feature is in the works and will be available in the future.
 </div>
+
 ### Listing all archived clients
 Shows a list of all archived clients' contacts in Clientele+.
 
