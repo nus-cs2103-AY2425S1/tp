@@ -80,21 +80,22 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
     public void updateDetails() {
         if (this.person == null) {
             this.person = defaultPerson;
-        }
-        name.setText(person.getName().fullName);
-        id.setText("ID\t\t: " + displayedIndex);
-        phone.setText("Phone\t: " + person.getPhone().value);
-        address.setText("Address\t: " + person.getAddress().value);
-        email.setText("Email\t: " + person.getEmail().value);
-        role.setText("Role\t\t: " + person.getRole());
-        major.setText("Major\t: " + getMajorFullName(person.getMajor()));
-        tagStart.setText("Tags\t\t: ");
-        tagDetails.getChildren().clear(); // necessary to clear existing tags, cus flowpane keeps memory
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tagDetails.getChildren().add(new Label(tag.tagName)));
+        } else {
+            name.setText(person.getName().fullName);
+            id.setText("ID\t\t: " + displayedIndex);
+            phone.setText("Phone\t: " + person.getPhone().value);
+            address.setText("Address\t: " + person.getAddress().value);
+            email.setText("Email\t: " + person.getEmail().value);
+            role.setText("Role\t\t: " + person.getRole());
+            major.setText("Major\t: " + getMajorFullName(person.getMajor()));
+            tagStart.setText("Tags\t\t: ");
+            tagDetails.getChildren().clear(); // necessary to clear existing tags, cus flowpane keeps memory
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> tagDetails.getChildren().add(new Label(tag.tagName)));
 
-        meetings.setText("Meetings\t:\n" + (person.getMeetings().toDetailPanelString()));
+            meetings.setText("Meetings\t:\n" + (person.getMeetings().toDetailPanelString()));
+        }
     }
 
 
