@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INDEX_FIVE;
+import static seedu.address.logic.commands.CommandTestUtil.INDEX_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.INDEX_THREE;
+import static seedu.address.logic.commands.CommandTestUtil.INDEX_ZERO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -29,7 +33,7 @@ public class StudentTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Student student = new StudentBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(INDEX_ZERO));
     }
 
     @Test
@@ -72,7 +76,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(ALICE.equals(INDEX_FIVE));
 
         // different student -> returns false
         assertFalse(ALICE.equals(BOB));
@@ -133,11 +137,11 @@ public class StudentTest {
         Student student = new StudentBuilder(ALICE).withAssignments(assignments).buildWithAssignment();
 
         // delete first assignment
-        student.deleteAssignment(1);
+        student.deleteAssignment(INDEX_ONE);
 
         // assignment list should contain only the second assignment
-        assertEquals(1, student.getAssignmentList().size());
-        assertEquals(PHYSICS_HOMEWORK, student.getAssignmentList().get(0));
+        assertEquals(INDEX_ONE, student.getAssignmentList().size());
+        assertEquals(PHYSICS_HOMEWORK, student.getAssignmentList().get(INDEX_ZERO));
     }
 
     @Test
@@ -146,8 +150,8 @@ public class StudentTest {
                 new ArrayList<Assignment>(Arrays.asList(MATH_HOMEWORK, PHYSICS_HOMEWORK))).buildWithAssignment();
 
         // invalid index -> throws AssignmentIndexOutOfRangeException
-        assertThrows(AssignmentIndexOutOfRangeException.class, () -> student.deleteAssignment(3));
-        assertThrows(AssignmentIndexOutOfRangeException.class, () -> student.deleteAssignment(0));
+        assertThrows(AssignmentIndexOutOfRangeException.class, () -> student.deleteAssignment(INDEX_THREE));
+        assertThrows(AssignmentIndexOutOfRangeException.class, () -> student.deleteAssignment(INDEX_ZERO));
     }
     @Test
     public void setAssignmentList() {

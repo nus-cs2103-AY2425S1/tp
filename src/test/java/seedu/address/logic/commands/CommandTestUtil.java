@@ -81,6 +81,13 @@ public class CommandTestUtil {
     public static final EditAssignmentCommand.EditAssignmentDescriptor DESC_MATH;
     public static final EditAssignmentCommand.EditAssignmentDescriptor DESC_PHYSICS;
 
+    public static final int INDEX_ZERO = 0;
+    public static final int INDEX_ONE = 1;
+    public static final int INDEX_TWO = 2;
+    public static final int INDEX_THREE = 3;
+    public static final int INDEX_FOUR = 4;
+    public static final int INDEX_FIVE = 5;
+
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
