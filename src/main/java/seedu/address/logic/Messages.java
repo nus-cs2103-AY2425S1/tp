@@ -82,13 +82,10 @@ public class Messages {
      * @return formatted description of the appointment
      */
     public static String formatAppointment(AppointmentDescriptor appointmentDescriptor) {
-        return "\n" + "Appointment Type: " +
-                appointmentDescriptor.getAppointmentType() + "\n" +
-                "Date and Time: " +
-                formatDateTimeForDisplay(appointmentDescriptor.getAppointmentDateTime()) + "\n" +
-                "Sickness: " +
-                appointmentDescriptor.getSickness() + "\n" +
-                "Medicine: " +
-                appointmentDescriptor.getMedicine() + "\n";
+        return "\n" + "Appointment Type: "
+                + appointmentDescriptor.getAppointmentType() + "\n"
+                + "Date and Time: " + formatDateTimeForDisplay(appointmentDescriptor.getAppointmentDateTime())
+                + "\n" + "Sickness: " + appointmentDescriptor.getSickness() + "\n"
+                + "Medicine: " + appointmentDescriptor.getMedicine() + "\n";
     }
 }
