@@ -18,7 +18,7 @@ import hallpointer.address.model.member.Member;
 import hallpointer.address.model.session.Session;
 
 /**
- * Adds a session to the member(s) specified by the given index number(s).
+ * Adds a session to the member(s) identified using its displayed index number(s).
  */
 public class AddSessionCommand extends Command {
     public static final String COMMAND_WORD = "add_session";
