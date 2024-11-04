@@ -3,7 +3,6 @@ package tuteez.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,10 +11,8 @@ import static tuteez.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;

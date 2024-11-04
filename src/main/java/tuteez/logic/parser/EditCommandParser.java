@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,7 +11,6 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -23,7 +21,6 @@ import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.person.Address;
 import tuteez.model.person.Email;
 import tuteez.model.person.TelegramUsername;
-import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**

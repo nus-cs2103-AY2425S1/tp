@@ -1,9 +1,7 @@
 package tuteez.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.logic.commands.CommandTestUtil.DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.DESC_BOB;
@@ -22,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import tuteez.commons.core.index.Index;
 import tuteez.logic.Messages;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
-import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.AddressBook;
 import tuteez.model.Model;
 import tuteez.model.ModelManager;

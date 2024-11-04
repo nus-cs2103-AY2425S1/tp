@@ -10,7 +10,6 @@ import static tuteez.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
-import static tuteez.logic.commands.CommandTestUtil.LESSON_DESC_MON;
 import static tuteez.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.PHONE_DESC_BOB;

@@ -1,6 +1,5 @@
 package tuteez.testutil;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,7 +11,6 @@ import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
-import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**
