@@ -333,59 +333,69 @@ removefromconsult 1 n/John Doe
     * Cons: Higher memory usage for modifications
 
 
-### \[Proposed\] Data Archiving / Export Feature
+### Data Import / Export Feature
 
-[//]: # (_{Explain here how the data archiving feature will be implemented}_)
+The import/export feature allows TAs to archive and transfer their data in CSV format. This functionality is implemented for both students and consultations.
 
-The export feature allows TAs to export their current list of students to a CSV file for external use. This feature is particularly useful for creating backups, sharing data with other applications, or generating reports.
+#### Implementation
 
-#### Proposed Implementation
+The feature is implemented through four main command classes:
+* `ExportCommand`: Exports student data to CSV
+* `ExportConsultCommand`: Exports consultation data to CSV
+* `ImportCommand`: Imports student data from CSV
+* `ImportConsultCommand`: Imports consultation data from CSV
 
-The export functionality is implemented through the `ExportCommand` class which converts the current student list into CSV format and saves it to a file in the project's `data` folder. It is then ready for further use, which could be in the form of a download/import functionality in a separate feature.
+Each export command follows this workflow:
+1. Validates filename input
+2. Creates `data` directory if needed
+3. Writes data to CSV in `data` directory
+4. Copies file to home directory
+5. Handles file overwrite with force flag
 
-Currently, the exported CSV includes the following student information:
-- Name
-- Phone number
-- Email address
-- Enrolled courses (semicolon separated)
+Each import command follows this workflow:
+1. Validates input file existence and format
+2. Parses CSV header
+3. Processes entries line by line
+4. Validates each entry
+5. Logs errors to `error.csv`
 
-#### Implementation Details
+Example sequences:
 
-1. File Handling
-The system aims to implement several safety features:
-- Creates a `data` directory if it does not exist
-- Validates filename for illegal characters
-- Prevents accidental file overwriting
-- Properly escapes special characters in CSV output
-2. Force Flag
-The `-f` flag allows overwriting of existing files:
 ```
-export students     // Creates a new file students.csv
-export students     // Warns the user
-export -f students  // Overwrites the students.csv file
+Student CSV format:
+Name,Phone,Email,Courses
+John Doe,12345678,john@example.com,CS2103T;CS2101
+
+Consultation CSV format:  
+Date,Time,Students
+2024-10-20,14:00,John Doe;Jane Doe
 ```
 
 #### Design Considerations
 
-**Aspect: Export File Format**
-
+**Aspect: File Format**
 * **Alternative 1 (current choice)**: CSV format
-    * Pros: Wide compatibility, easy to read/edit
-    * Cons: Limited formatting options
-
+    * Pros: Widely compatible, human-readable, easy to edit
+    * Cons: Limited structure, requires careful escaping
 * **Alternative 2**: JSON format
-    * Pros: Preserves data structures better
-    * Cons: Less user-friendly for direct editing
+    * Pros: Maintains data structure, less escaping needed
+    * Cons: Less human-readable, harder to edit manually
+
+**Aspect: Error Handling**
+* **Alternative 1 (current choice)**: Log errors to separate file
+    * Pros: Clear error reporting, allows partial imports
+    * Cons: Requires managing additional files
+* **Alternative 2**: Fail entire import on any error
+    * Pros: Ensures data consistency
+    * Cons: Less flexible, requires perfect input
 
 **Aspect: File Location**
-
-* **Alternative 1 (current choice)**: Fixed `data` directory
-    * Pros: Consistent location, prevents scattered files
-    * Cons: Less flexibility for users
-
-* **Alternative 2**: User-specified directory
-    * Pros: More user control
-    * Cons: More complex input validation needed
+* **Alternative 1 (current choice)**: Both data and home directory
+    * Pros: Convenient access, automatic backup
+    * Cons: Duplicate files, more complex implementation
+* **Alternative 2**: Single location
+    * Pros: Simpler implementation
+    * Cons: Less convenient for users
 
 
 --------------------------------------------------------------------------------------------------------------------
