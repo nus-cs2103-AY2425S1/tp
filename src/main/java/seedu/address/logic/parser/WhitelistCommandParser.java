@@ -52,6 +52,7 @@ public class WhitelistCommandParser implements Parser<WhitelistCommand> {
 
         if (argMultimap.getValue(PREFIX_CLIENT_STATUS).isPresent()) {
             newClientStatus = ParserUtil.parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS).get());
+
             if (isValidNewClientStatus(newClientStatus)) {
                 return new WhitelistCommand(index, newClientStatus);
             } else {
