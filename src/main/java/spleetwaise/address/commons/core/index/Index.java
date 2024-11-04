@@ -1,6 +1,6 @@
 package spleetwaise.address.commons.core.index;
 
-import spleetwaise.address.commons.util.ToStringBuilder;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * Represents a zero-based or one-based index.

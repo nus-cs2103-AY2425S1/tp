@@ -5,10 +5,10 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.storage.AddressBookStorage;
+import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.exceptions.DataLoadingException;
 import spleetwaise.commons.model.ReadOnlyUserPrefs;
 import spleetwaise.commons.model.UserPrefs;

@@ -8,13 +8,13 @@ import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * Adds a person to the address book.

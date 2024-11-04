@@ -2,7 +2,7 @@ package spleetwaise.transaction.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 
-import spleetwaise.address.commons.util.AppUtil;
+import spleetwaise.commons.util.AppUtil;
 
 /**
  * Represents a Transaction's categories in the transaction book.

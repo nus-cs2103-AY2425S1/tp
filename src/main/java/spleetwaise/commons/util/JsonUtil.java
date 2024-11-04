@@ -1,4 +1,4 @@
-package spleetwaise.address.commons.util;
+package spleetwaise.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
-import spleetwaise.address.commons.core.LogsCenter;
+import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.exceptions.DataLoadingException;
 
 /**

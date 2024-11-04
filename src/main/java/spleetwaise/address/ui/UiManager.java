@@ -8,9 +8,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import spleetwaise.address.MainApp;
-import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.commons.util.StringUtil;
 import spleetwaise.address.logic.Logic;
+import spleetwaise.commons.core.LogsCenter;
+import spleetwaise.commons.util.StringUtil;
 
 /**
  * The manager of the UI component.

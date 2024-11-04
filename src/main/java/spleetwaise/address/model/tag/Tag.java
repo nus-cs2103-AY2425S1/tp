@@ -2,7 +2,7 @@ package spleetwaise.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
 
-import spleetwaise.address.commons.util.AppUtil;
+import spleetwaise.commons.util.AppUtil;
 
 /**
  * Represents a Tag in the address book. Guarantees: immutable; name is valid as declared in

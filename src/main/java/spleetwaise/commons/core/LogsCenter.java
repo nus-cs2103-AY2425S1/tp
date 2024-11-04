@@ -1,4 +1,4 @@
-package spleetwaise.address.commons.core;
+package spleetwaise.commons.core;
 
 import static java.util.Objects.requireNonNull;
 
@@ -100,6 +100,4 @@ public class LogsCenter {
             logger.warning("Error adding file handler for logger.");
         }
     }
-
-
 }

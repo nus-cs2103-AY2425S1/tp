@@ -1,8 +1,8 @@
-package spleetwaise.address.commons.util;
+package spleetwaise.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static spleetwaise.address.commons.util.CollectionUtil.requireAllNonNull;
+import static spleetwaise.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Arrays;
 import java.util.Collection;

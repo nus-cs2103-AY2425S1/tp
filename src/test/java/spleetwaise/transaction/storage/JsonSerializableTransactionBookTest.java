@@ -8,11 +8,11 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.util.JsonUtil;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.util.JsonUtil;
 import spleetwaise.transaction.model.TransactionBook;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 

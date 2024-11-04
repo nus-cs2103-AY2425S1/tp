@@ -1,7 +1,7 @@
 package spleetwaise.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static spleetwaise.address.commons.util.CollectionUtil.requireAllNonNull;
+import static spleetwaise.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Optional;
@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.commons.core.GuiSettings;
-import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.model.ReadOnlyUserPrefs;
 import spleetwaise.commons.model.UserPrefs;
 

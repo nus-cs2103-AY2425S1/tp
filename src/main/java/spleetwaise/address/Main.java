@@ -3,7 +3,7 @@ package spleetwaise.address;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
-import spleetwaise.address.commons.core.LogsCenter;
+import spleetwaise.commons.core.LogsCenter;
 
 /**
  * The main entry point to the application.

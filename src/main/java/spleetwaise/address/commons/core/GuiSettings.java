@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
 
-import spleetwaise.address.commons.util.ToStringBuilder;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * A Serializable class that contains the GUI settings. Guarantees: immutable.

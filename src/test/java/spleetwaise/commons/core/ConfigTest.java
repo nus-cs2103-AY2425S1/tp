@@ -1,4 +1,4 @@
-package spleetwaise.address.commons.core;
+package spleetwaise.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,6 +22,4 @@ public class ConfigTest {
         assertNotNull(defaultConfig);
         assertTrue(defaultConfig.equals(defaultConfig));
     }
-
-
 }
