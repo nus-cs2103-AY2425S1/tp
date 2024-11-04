@@ -223,6 +223,41 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseRequiredNumberOfArguments_validInput_returnSplitArgs() throws Exception {
+        String inputString = WHITESPACE + "1" + WHITESPACE + "2" + WHITESPACE;
+        int numberOfArguments = 2;
+        String usageMessage = "sample usage message";
+
+        String[] expectedOutput = {"1", "2"};
+        String[] actualOutput = ParserUtil.parseRequiredNumberOfArguments(inputString, numberOfArguments, usageMessage);
+
+        assertEquals(numberOfArguments, expectedOutput.length);
+        assertEquals(expectedOutput.length, actualOutput.length);
+        for (int i = 0; i < numberOfArguments; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+
+    @Test
+    public void parseRequiredNumberOfArguments_incorrectNumberOfArguments_throwException() throws Exception {
+        String inputString = WHITESPACE + "1" + WHITESPACE + "2" + WHITESPACE;
+        int numberOfArguments = 3;
+        String usageMessage = "sample usage message";
+
+        assertThrows(ParseException.class, ()
+                -> ParserUtil.parseRequiredNumberOfArguments(inputString, numberOfArguments, usageMessage));
+    }
+
+    @Test
+    public void parseRequiredNumberOfArguments_emptyInput_throwException() throws Exception {
+        int numberOfArguments = 0;
+        String usageMessage = "sample usage message";
+
+        assertThrows(ParseException.class, ()
+                -> ParserUtil.parseRequiredNumberOfArguments(WHITESPACE, numberOfArguments, usageMessage));
+    }
+
+    @Test
     public void requireValidEntity_validEntity_noExceptionsThrown() throws Exception {
         assertDoesNotThrow(() ->ParserUtil.requireValidEntity("contact"));
         assertDoesNotThrow(() ->ParserUtil.requireValidEntity("job"));
