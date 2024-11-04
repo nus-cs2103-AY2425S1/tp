@@ -1,11 +1,15 @@
 package tuteez.ui;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import tuteez.model.person.Person;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
@@ -16,7 +20,7 @@ import tuteez.model.person.lesson.Lesson;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-
+    private static final int REFRESH_TIME = 60;
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -26,6 +30,8 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+    private Timeline refreshTimeline;
+    private Lesson lastDisplayedLesson = null;
     @FXML
     private Label name;
     @FXML
@@ -57,6 +63,29 @@ public class PersonCard extends UiPart<Region> {
         setEmailText(person);
         setTags(person);
         setNextLesson(person);
+        startRefreshTimeline();
+    }
+
+    /**
+     * Starts the timeline that checks the lesson status every second and updates if necessary.
+     */
+    private void startRefreshTimeline() {
+        refreshTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(REFRESH_TIME), event -> refreshNextLesson())
+        );
+        refreshTimeline.setCycleCount(Timeline.INDEFINITE);
+        refreshTimeline.play();
+    }
+
+    /**
+     * Refreshes the next lesson if there is a change.
+     */
+    private void refreshNextLesson() {
+        Lesson currentLesson = person.nextLessonBasedOnCurrentTime();
+        if (currentLesson != lastDisplayedLesson) {
+            setNextLesson(person);
+            lastDisplayedLesson = currentLesson; // Update to keep track of the last displayed lesson
+        }
     }
 
     /**
