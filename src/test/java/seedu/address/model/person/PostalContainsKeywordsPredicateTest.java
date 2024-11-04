@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -80,5 +82,27 @@ public class PostalContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withPostalCode("123456")
                 .withName("Alice").withPhone("98765432").withEmail("alice@email.com").build()));
     }
+    @Test
+    public void hashCodeTest() {
+        List<String> firstPredicateKeywordList = Collections.singletonList("123456");
+        List<String> secondPredicateKeywordList = Arrays.asList("123456", "654321");
+
+        PostalContainsKeywordsPredicate firstPredicate =
+                new PostalContainsKeywordsPredicate(firstPredicateKeywordList);
+        PostalContainsKeywordsPredicate secondPredicate =
+                new PostalContainsKeywordsPredicate(secondPredicateKeywordList);
+
+        // same object -> returns same hash code
+        assertEquals(firstPredicate.hashCode(), firstPredicate.hashCode());
+
+        // same values -> returns same hash code
+        PostalContainsKeywordsPredicate firstPredicateCopy =
+                new PostalContainsKeywordsPredicate(firstPredicateKeywordList);
+        assertEquals(firstPredicate.hashCode(), firstPredicateCopy.hashCode());
+
+        // different predicate -> returns different hash code
+        assertNotEquals(firstPredicate.hashCode(), secondPredicate.hashCode());
+    }
+
 
 }
