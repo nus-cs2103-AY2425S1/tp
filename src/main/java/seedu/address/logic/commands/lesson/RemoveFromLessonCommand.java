@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -23,10 +24,10 @@ public class RemoveFromLessonCommand extends Command {
     public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes students from the lesson identified by the index.\n"
-            + "Parameters: LESSON_INDEX (must be a positive integer) "
-            + "NAME...\n"
-            + "Example: " + COMMAND_WORD + " 1 n/Alex Yeoh n/Harry Ng";
+            + ": Removes students from the lesson identified by the index."
+            + "\nParameters: LESSON_INDEX "
+            + PREFIX_NAME + "NAME [" + PREFIX_NAME + "NAME]…"
+            + "\nExample: " + COMMAND_WORD + " 1 n/Alex Yeoh n/Harry Ng";
 
     public static final String MESSAGE_REMOVE_FROM_LESSON_SUCCESS = "Removed students from Lesson: Date: %s; Time: %s";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student(s) not found in the lesson.";

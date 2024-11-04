@@ -2,6 +2,7 @@ package seedu.address.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.HashSet;
@@ -32,10 +33,10 @@ public class AddToLessonCommand extends Command {
     public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds students to the lesson identified "
-            + "by the index number used in the displayed lesson list. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME]..."
-            + "[i/INDEX]..."
+            + "by the index number used in the displayed lesson list."
+            + "\nParameters: LESSON_INDEX "
+            + "[" + PREFIX_NAME + "NAME]… "
+            + "[" + PREFIX_INDEX + "INDEX]… "
             + "\nExample: " + COMMAND_WORD + " 1 n/John Doe i/2";
 
     public static final String MESSAGE_ADD_TO_LESSON_SUCCESS = "Added students to the Lesson: %1$s";
