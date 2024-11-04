@@ -12,6 +12,25 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Viewing help : `help`](#viewing-help--help)
+  - [Adding a person : `add`](#adding-a-person-add)
+  - [Listing all persons : `list`](#listing-all-persons--list)
+  - [Editing a person : `edit`](#editing-a-person--edit)
+  - [Locating a persons by name, phone_number, room_number or tag](#locating-persons-by-name-phone_number-room_number-or-tag-find)
+  - [Deleting a person : `delete`](#deleting-a-person--delete)
+  - [Clearing all entries: `clear`](#clearing-all-entries--clear)
+  - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
+  - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Manual saving : `export`](#manual-saving-export)
+  - [Manual data restoration : `import`](#manual-data-restoration-import)
+- [FAQ](#FAQ)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
