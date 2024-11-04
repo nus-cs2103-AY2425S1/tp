@@ -15,7 +15,8 @@ public class TrackCommand extends Command {
     public static final String MESSAGE_INVALID_INPUT_ERROR = COMMAND_WORD
             + " command accepts only 1 predefined category (student or company).";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons under category: %1$s\n";
+    public static final String MESSAGE_SUCCESS = "Listed all persons under category: %1$s\n"
+            + "%2$s persons listed!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Tracks and lists all contacts who are in the category of "
@@ -40,8 +41,7 @@ public class TrackCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(categoryPredicate);
         int size = model.getFilteredPersonList().size();
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, this.category) + size + " persons listed!");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.category, size));
     }
 
     @Override

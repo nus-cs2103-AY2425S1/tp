@@ -20,15 +20,15 @@ public class TrackCommandTest {
             new CategoryContainsKeywordPredicate(VALID_CATEGORY_STUDENT);
     private static final CategoryContainsKeywordPredicate COMPANY_PREDICATE =
             new CategoryContainsKeywordPredicate(VALID_CATEGORY_COMPANY);
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void execute() {
         TrackCommand command = new TrackCommand(STUDENT_PREDICATE);
         expectedModel.updateFilteredPersonList(STUDENT_PREDICATE);
 
-        String expectedMessage = String.format(TrackCommand.MESSAGE_SUCCESS, "student")
-                + expectedModel.getFilteredPersonList().size() + " persons listed!";
+        int size = expectedModel.getFilteredPersonList().size();
+        String expectedMessage = String.format(TrackCommand.MESSAGE_SUCCESS, "student", size);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
