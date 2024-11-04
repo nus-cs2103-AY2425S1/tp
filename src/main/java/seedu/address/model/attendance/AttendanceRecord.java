@@ -48,8 +48,10 @@ public class AttendanceRecord implements Observable {
     public void removeListener(InvalidationListener listener) {
         listeners.remove(listener);
     }
-
-    private void notifyListeners() {
+    /**
+     * Notifies all listeners that the attendance record has been updated.
+     */
+    public void notifyListeners() {
         List<InvalidationListener> listenersCopy = new ArrayList<>(listeners);
         for (InvalidationListener listener : listenersCopy) {
             listener.invalidated(this);
