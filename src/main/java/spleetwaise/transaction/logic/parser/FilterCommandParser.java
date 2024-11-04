@@ -1,7 +1,6 @@
 package spleetwaise.transaction.logic.parser;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static spleetwaise.transaction.logic.commands.FilterCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
@@ -9,11 +8,11 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import java.util.stream.Stream;
 
+import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.parser.ArgumentMultimap;
 import spleetwaise.address.logic.parser.ArgumentTokenizer;
 import spleetwaise.address.logic.parser.Prefix;
 import spleetwaise.address.model.person.Person;
-import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.logic.parser.Parser;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.FilterCommand;
@@ -44,18 +43,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE)
-                || !argMultimap.getPreamble().isEmpty()) {
+                ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE)
+                && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
 
         Person person = null;
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            Phone phone = spleetwaise.address.logic.parser.ParserUtil.parsePhone(
-                    argMultimap.getValue(PREFIX_PHONE).get());
-            person = ParserUtil.getPersonFromPhone(phone);
+        if (!argMultimap.getPreamble().isEmpty()) {
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            person = ParserUtil.getPersonFromAddressBookIndex(index);
         }
 
         Amount amount = null;
