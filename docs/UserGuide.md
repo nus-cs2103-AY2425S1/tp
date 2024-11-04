@@ -6,31 +6,62 @@
 
 # SocialBook User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+SocialBook is a **desktop app specifically designed to ease the administrative process for social workers.**
+
+By providing a **comprehensive way to store the personal details** of those they are helping, as well as **functionalities 
+to make the information managing process efficient**, SocialBook streamlines the process for social workers. 
+
+SocialBook is **optimized for use via a  Line Interface** (CLI) while still having the benefits of a 
+Graphical User Interface (GUI). If you can type fast, SocialBook can get your contact management tasks done faster 
+than traditional GUI apps.
 
 <!-- * Table of Contents -->
-<page-nav-print />
+- [Quick Start](#quick-start)
+- [Features](#features)
+    - [Viewing Help](#viewing-help--help)
+    - [Adding a Person](#adding-a-person-add)
+    - [Listing All Persons](#listing-all-persons--list)
+    - [Editing a Person](#editing-a-person--edit)
+    - [Finding Persons](#finding-persons-find)
+    - [Deleting People](#deleting-people--delete)
+    - [Getting Parameters](#getting-the-parameters-of-these-people-get)
+    - [Clearing All Entries](#clearing-all-entries--clear)
+    - [Undo the Previous Command](#undo-the-previous-command-undo)
+    - [Displaying Statistics](#displaying-overall-statistics--statistics)
+    - [Displaying Eligible Schemes](#displaying-eligible-schemes--scheme)
+    - [Exiting the Program](#exiting-the-program--exit)
+    - [Saving the Data](#saving-the-data)
+    - [Editing the Data File](#editing-the-data-file)
+    - [Archiving Data Files](#archiving-data-files-coming-in-v20)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   *  [How To Install Java](https://www.java.com/en/download/help/download_options.html)
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-1/tp/releases).
+   * Under the **Assests** of the latest version of SocialBook, you should find the latest downloadable `socialbook.jar` file
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy this file to the folder you want to use as the _home folder_ for SocialBook.
+   * Ensure that the _home folder_ is **empty**.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Open a command terminal, `cd` into the empty folder you put the jar file in. After which enter the `java -jar socialbook.jar` in the command terminal to run the application.
+   * How To Open Command Terminal ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) | [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) | [Linux](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))
+   * How To Change Directory (`cd`) To Folder ([Windows](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cd) | [MacOS](https://www.macworld.com/article/221277/command-line-navigating-files-folders-mac-terminal.html) | [Linux](https://phoenixnap.com/kb/linux-cd-command))
+   
+If done correctly, a GUI similar to the image below should appear in a few seconds. Note that the app will contain some sample data for you to get started and familiarise with.<br><br>![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command where "Enter command here..." is seen in the command box and press the **enter / return** key on your computer to execute it. e.g. typing **`help`** and pressing enter / return will open the help window.<br><br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all contacts in SocialBook.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2 #02-25 dob/9 Mar 1999` : Adds a contact named `John Doe` to SocialBook with these specified details.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -38,7 +69,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+<br>6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,6 +78,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
+
+* All words used must be alphanumeric.<br>
+e.g. Use of Chinese characters like 我 not allowed. 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -63,12 +97,14 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `statistics`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
+  e.g. if you copy `add n/John Doe p/98765432` and `p/98765432` is on a new line in the PDF, when copied over into the command box, it may be copied as `add n/John Doep/98765432` instead which is an invalid command format.
 </box>
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page or display how to use a specified command.
+Shows a message explaining how to access the help page as well as all the available commands. If the `[COMMAND]` is specified, the help message for that command
+will be displayed.
 
 ![help message](images/updatedHelpMessage.png)
 
@@ -81,37 +117,40 @@ Examples:
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to SocialBook.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE OF BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY SIZE = 1] [r/REMARK] [t/TAG]...​`
+* Parameters can be inputted in any order.
+* Duplicated names are not allowed to be added.
+* Blank parameters are not allowed.
+* `PHONE` should contain at least 3 digits.
+* For optional parameters like `PRIORITY, INCOME, FAMILY SIZE`, if not specified, their values will be defaulted to `LOW, 0, 1` respectively.
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/9 Mar 1999 famsize/3 income/5000`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 dob/25 Dec 2002 pri/MEDIUM t/criminal`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book, automatically sorted by their priority from HIGH to LOW.
+Shows a list of all persons in the address book. This list is by default sorted based on priority from HIGH to MEDIUM to LOW.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person's details in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [r/REMARK] [famsize/FAMILY SIZE] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** e.g. 1, 2, 3,…​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, all existing tags of the person will be removed and replaced with updated values i.e editing of tags does not cumulatively add them to current tags.
+* You can remove all the person’s tags or remarks by typing `edit INDEX t/` or `edit INDEX r/` where `INDEX` is the person's index.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
