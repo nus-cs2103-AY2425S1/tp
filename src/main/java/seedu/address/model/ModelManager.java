@@ -24,14 +24,13 @@ import seedu.address.model.person.Person;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+    public static final String ARCHIVE_DIRNAME = "archive";
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     // Stack to store the history of address book states for undo functionality
     private final VersionedAddressBook versionedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
-    public static final String ARCHIVE_DIRNAME = "archive";
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -98,6 +97,7 @@ public class ModelManager implements Model {
     public ReadOnlyAddressBook getAddressBook() {
         return versionedAddressBook;
     }
+
     @Override
     public Path getArchiveDirectoryPath() {
         Path source = this.getAddressBookFilePath();
