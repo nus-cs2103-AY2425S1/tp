@@ -49,7 +49,6 @@ public class AddPropertyCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
-
     @Test
     public void execute_addPropertyFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -71,6 +70,24 @@ public class AddPropertyCommandTest {
         expectedModel.setPerson(personInFilteredList, editedPerson);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addDuplicateProperty_failure() {
+        Property existingProperty = Property.of(
+                "123 Main St", "Central", "Condo",
+                85.0, 2, 2, 500000.0);
+
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personWithProperty = new PersonBuilder(personToEdit)
+                .withPropertyList(new PropertyList(existingProperty))
+                .build();
+        model.setPerson(personToEdit, personWithProperty);
+
+        AddPropertyCommand command = new AddPropertyCommand(
+                INDEX_FIRST_PERSON, existingProperty);
+
+        assertCommandFailure(command, model, Messages.MESSAGE_DUPLICATE_PROPERTIES);
     }
 
     @Test
