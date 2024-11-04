@@ -153,6 +153,9 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand("LIST") instanceof ListCommand);
         assertTrue(parser.parseCommand("liST") instanceof ListCommand);
         assertTrue(parser.parseCommand("list") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD.toUpperCase())
+                instanceof ExitCommand);
+
 
     }
 }
