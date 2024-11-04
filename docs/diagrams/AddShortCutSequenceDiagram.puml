@@ -45,31 +45,44 @@ deactivate AddressBookParser
 LogicManager -> AddShortCutCommand : execute(m)
 activate AddShortCutCommand
 
-AddShortCutCommand -> Model : hasAlias("v")
-activate Model
-Model --> AddShortCutCommand : false
-deactivate Model
+alt Alias exists
+    AddShortCutCommand -> Model : hasAlias("v")
+    activate Model
+    Model --> AddShortCutCommand : true
+    deactivate Model
 
-AddShortCutCommand -> Model : addShortCut("v", "Vegan")
-activate Model
+    AddShortCutCommand -> LogicManager : throw CommandException("Alias already exists")
+    deactivate AddShortCutCommand
+else Tag name exists
+    AddShortCutCommand -> Model : hasTagName("Vegan")
+    activate Model
+    Model --> AddShortCutCommand : true
+    deactivate Model
 
-AddShortCutCommand -> Tag : updateShortCutMappings(m)
-activate Tag
-Tag --> AddShortCutCommand
-deactivate Tag
+    AddShortCutCommand -> LogicManager : throw CommandException("Tag name already exists")
+    deactivate AddShortCutCommand
+else Neither exists
+    AddShortCutCommand -> Model : addShortCut(toAdd)
+    activate Model
 
-Model --> AddShortCutCommand
-deactivate Model
+    AddShortCutCommand -> Tag : updateShortCutMappings(m)
+    activate Tag
+    Tag --> AddShortCutCommand
+    deactivate Tag
 
-create CommandResult
-AddShortCutCommand -> CommandResult : new CommandResult("New Shortcut added: v")
-activate CommandResult
+    Model --> AddShortCutCommand
+    deactivate Model
 
-CommandResult --> AddShortCutCommand
-deactivate CommandResult
+    create CommandResult
+    AddShortCutCommand -> CommandResult : new CommandResult("New Shortcut added: v -> Vegan")
+    activate CommandResult
 
-AddShortCutCommand --> LogicManager : r
-deactivate AddShortCutCommand
+    CommandResult --> AddShortCutCommand
+    deactivate CommandResult
+
+    AddShortCutCommand --> LogicManager : r
+    deactivate AddShortCutCommand
+end
 
 [<-- LogicManager
 deactivate LogicManager
