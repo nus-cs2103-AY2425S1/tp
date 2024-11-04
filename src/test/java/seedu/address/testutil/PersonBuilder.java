@@ -6,15 +6,17 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
  */
-public class PersonBuilder {
+public abstract class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -53,6 +55,19 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         isPinned = personToCopy.getPinned();
+    }
+
+    /**
+     * Creates an instance of the appropriate subtype of PersonBuilder from the given Person.
+     */
+    public static PersonBuilder of(Person person) {
+        if (person instanceof Student student) {
+            return new StudentBuilder(student);
+        }
+        if (person instanceof Parent parent) {
+            return new ParentBuilder(parent);
+        }
+        throw new IllegalArgumentException("Unsupported person type: " + person.getClass());
     }
 
     /**
@@ -111,8 +126,34 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags, isPinned, isArchived);
+    public Name getName() {
+        return name;
     }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public boolean isPinned() {
+        return isPinned;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public abstract Person build();
 
 }

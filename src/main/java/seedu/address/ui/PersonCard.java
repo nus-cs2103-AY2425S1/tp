@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.util.ContactType;
@@ -34,6 +35,8 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
+    private Model model;
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -55,7 +58,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(ContactType contactType, Person person, int displayedIndex) {
+    public PersonCard(ContactType contactType, Person person, int displayedIndex, Model model) {
         super(getFxml(contactType));
         this.person = person;
         id.setText(String.valueOf(displayedIndex));
@@ -68,16 +71,17 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         isPinned.set(person.getPinned());
         pinIcon.visibleProperty().bind(isPinned);
+        this.model = model;
     }
 
     /**
      * Factory method for constructing a {@code PersonCard}
      */
-    public static PersonCard of(Person person, int displayedIndex) {
+    public static PersonCard of(Person person, int displayedIndex, Model model) {
         if (person instanceof Student student) {
-            return new StudentCard(student, displayedIndex);
+            return new StudentCard(student, displayedIndex, model);
         }
-        return new PersonCard(PERSON, person, displayedIndex);
+        return new PersonCard(PERSON, person, displayedIndex, model);
     }
 
     public static String getFxml(ContactType contactType) {

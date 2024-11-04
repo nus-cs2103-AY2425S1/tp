@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddParentCommand;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -19,11 +20,13 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListArchiveCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
 import seedu.address.logic.commands.PinCommand;
 import seedu.address.logic.commands.UnarchiveCommand;
+import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -61,8 +64,11 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddStudentCommand.COMMAND_WORD:
+            return new AddStudentCommandParser().parse(arguments);
+
+        case AddParentCommand.COMMAND_WORD:
+            return new AddParentCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -108,6 +114,12 @@ public class AddressBookParser {
 
         case ListArchiveCommand.COMMAND_WORD:
             return new ListArchiveCommand();
+
+        case LinkCommand.COMMAND_WORD:
+            return new LinkCommandParser().parse(arguments);
+
+        case UnlinkCommand.COMMAND_WORD:
+            return new UnlinkCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

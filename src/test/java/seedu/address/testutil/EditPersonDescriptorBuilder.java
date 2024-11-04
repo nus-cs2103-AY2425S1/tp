@@ -50,9 +50,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
         descriptor.setAddress(student.getAddress());
-        descriptor.setParentName(student.getParentName());
-        descriptor.setParentPhone(student.getParentPhone());
-        descriptor.setParentEmail(student.getParentEmail());
         descriptor.setTags(student.getTags());
     }
 
@@ -93,30 +90,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEducation(String education) {
         descriptor.setEducation(new Education(education));
-        return this;
-    }
-
-    /**
-     * Sets the parent {@code Name} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withParentName(String parentName) {
-        descriptor.setParentName(new Name(parentName));
-        return this;
-    }
-
-    /**
-     * Sets the parent {@code Phone} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withParentPhone(String parentPhone) {
-        descriptor.setParentPhone(new Phone(parentPhone));
-        return this;
-    }
-
-    /**
-     * Sets the parent {@code Email} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withParentEmail(String parentEmail) {
-        descriptor.setParentEmail(new Email(parentEmail));
         return this;
     }
 

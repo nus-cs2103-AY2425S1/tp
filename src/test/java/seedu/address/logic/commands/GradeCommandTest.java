@@ -128,6 +128,6 @@ public class GradeCommandTest {
 
         // different Grade -> returns false
         assertFalse(standardCommand.equals(new GradeCommand(INDEX_FIRST_PERSON,
-                new Grade(VALID_GRADE_BOB))));
+                new Grade("1"))));
     }
 }

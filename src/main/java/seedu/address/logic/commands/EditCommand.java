@@ -5,9 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_PERSONS;
@@ -28,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
@@ -51,9 +49,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EDUCATION + "EDUCATION] "
-            + "[" + PREFIX_PARENT_NAME + "PARENT NAME] "
-            + "[" + PREFIX_PARENT_PHONE + "PARENT PHONE] "
-            + "[" + PREFIX_PARENT_EMAIL + "PARENT EMAIL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -62,7 +57,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_ADD_PARENT_TO_NON_STUDENT = "Unable to add parent-related field to non-student!";
+    public static final String MESSAGE_ADD_EDUCATION_TO_NON_STUDENT = "Unable to add education to non-student!";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -91,13 +86,18 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        if (!(personToEdit instanceof Student) && editPersonDescriptor.containsParentField()) {
-            throw new CommandException(MESSAGE_ADD_PARENT_TO_NON_STUDENT);
+        if (!(personToEdit instanceof Student) && editPersonDescriptor.containsEducationField()) {
+            throw new CommandException(MESSAGE_ADD_EDUCATION_TO_NON_STUDENT);
         }
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson;
+
         if (personToEdit instanceof Student studentToEdit) {
             editedPerson = createEditedPerson(studentToEdit, editPersonDescriptor);
+        } else if (personToEdit instanceof Parent parentToEdit) {
+            editedPerson = createEditedPerson(parentToEdit, editPersonDescriptor);
+        } else {
+            throw new IllegalArgumentException("Unsupported person type: " + personToEdit.getClass());
         }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -109,20 +109,17 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Parent createEditedPerson(Parent parentToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert parentToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editPersonDescriptor.getName().orElse(parentToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(parentToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(parentToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(parentToEdit.getAddress());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(parentToEdit.getTags());
+        Name updatedChildName = parentToEdit.getChildName(); // edit command does not allow editing child name
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Parent(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedChildName, updatedTags);
     }
 
     private static Student createEditedPerson(Student personToEdit, EditPersonDescriptor editPersonDescriptor) {
@@ -135,12 +132,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Education updatedEducation = editPersonDescriptor.getEducation().orElse(personToEdit.getEducation());
         Grade updatedGrade = personToEdit.getGrade(); // edit command does not allow editing grade
-        Name updatedParentName = editPersonDescriptor.getParentName().orElse(personToEdit.getParentName());
-        Phone updatedParentPhone = editPersonDescriptor.getParentPhone().orElse(personToEdit.getParentPhone());
-        Email updatedParentEmail = editPersonDescriptor.getParentEmail().orElse(personToEdit.getParentEmail());
+        Name updatedParentName = personToEdit.getParentName(); // edit command does not allow editing parent name
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedEducation, updatedGrade,
-                updatedParentName, updatedParentPhone, updatedParentEmail, updatedTags);
+                updatedParentName, updatedTags);
     }
 
     @Override
@@ -177,9 +172,6 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private Name parentName;
-        private Phone parentPhone;
-        private Email parentEmail;
         private Education education;
 
         public EditPersonDescriptor() {}
@@ -194,9 +186,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setParentName(toCopy.parentName);
-            setParentPhone(toCopy.parentPhone);
-            setParentEmail(toCopy.parentEmail);
             setEducation(toCopy.education);
         }
 
@@ -204,15 +193,11 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, parentName, parentPhone, parentEmail,
-                    education);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, education);
         }
 
-        /**
-         * Returns true if at least one parent field is edited.
-         */
-        public boolean containsParentField() {
-            return CollectionUtil.isAnyNonNull(parentName, parentPhone, parentEmail);
+        public boolean containsEducationField() {
+            return education != null;
         }
 
         public void setName(Name name) {
@@ -264,30 +249,6 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setParentName(Name name) {
-            this.parentName = name;
-        }
-
-        public Optional<Name> getParentName() {
-            return Optional.ofNullable(parentName);
-        }
-
-        public void setParentPhone(Phone phone) {
-            this.parentPhone = phone;
-        }
-
-        public Optional<Phone> getParentPhone() {
-            return Optional.ofNullable(parentPhone);
-        }
-
-        public void setParentEmail(Email email) {
-            this.parentEmail = email;
-        }
-
-        public Optional<Email> getParentEmail() {
-            return Optional.ofNullable(parentEmail);
-        }
-
         public void setEducation(Education education) {
             this.education = education;
         }
@@ -313,10 +274,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(education, otherEditPersonDescriptor.education)
-                    && Objects.equals(parentName, otherEditPersonDescriptor.parentName)
-                    && Objects.equals(parentPhone, otherEditPersonDescriptor.parentPhone)
-                    && Objects.equals(parentEmail, otherEditPersonDescriptor.parentEmail);
+                    && Objects.equals(education, otherEditPersonDescriptor.education);
         }
 
         @Override
@@ -327,9 +285,6 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("education", education)
-                    .add("parent name", parentName)
-                    .add("parent phone", parentPhone)
-                    .add("parent email", parentEmail)
                     .add("tags", tags)
                     .toString();
         }

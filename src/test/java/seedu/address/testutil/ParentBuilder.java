@@ -1,25 +1,21 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalStudents.ALICE;
-
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
-import seedu.address.model.person.Student;
 
 /**
  * A utility class to help with building Parent objects.
  */
 public class ParentBuilder extends PersonBuilder {
 
-    public static final Student DEFAULT_CHILD = ALICE;
-
-    private Student child;
+    private Name childName;
 
     /**
      * Creates a {@code ParentBuilder} with the default details.
      */
     public ParentBuilder() {
         super();
-        child = DEFAULT_CHILD;
+        childName = null;
     }
 
     /**
@@ -27,14 +23,14 @@ public class ParentBuilder extends PersonBuilder {
      */
     public ParentBuilder(Parent parentToCopy) {
         super(parentToCopy);
-        child = parentToCopy.getChild();
+        childName = parentToCopy.getChildName();
     }
 
     /**
      * Sets the {@code child} of the {@code Parent} that we are building.
      */
-    public ParentBuilder withChild(Student child) {
-        this.child = child;
+    public ParentBuilder withChild(Name childName) {
+        this.childName = childName;
         return this;
     }
 
@@ -68,8 +64,12 @@ public class ParentBuilder extends PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the parent.
+     */
     public Parent build() {
-        return new Parent(super.build(), child);
+        return new Parent(getName(), getPhone(), getEmail(), getAddress(), childName, getTags(),
+                isPinned(), isArchived());
     }
 
 }

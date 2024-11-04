@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -12,50 +13,39 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Student;
-import seedu.address.model.tag.Education;
-import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Student}.
+ * Jackson-friendly version of {@link Parent}.
  */
-public class JsonAdaptedStudent extends JsonAdaptedPerson {
+public class JsonAdaptedParent extends JsonAdaptedPerson {
 
-    public static final String MISSING_PARENT_FIELD_MESSAGE_FORMAT = "Person's parent %s field is missing!";
-
-    private final String education;
-    private final String grade;
-    private final String parentName;
+    private final String childName;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given details.
      */
     @JsonCreator
-    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedParent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("education") String education, @JsonProperty("grade") String grade,
-            @JsonProperty("parentName") String parentName, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("childName") String childName, @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("isPinned") boolean isPinned, @JsonProperty("isArchived") boolean isArchived) {
-        super("Student", name, phone, email, address, tags, isPinned, isArchived);
-        this.education = education;
-        this.grade = grade;
-        this.parentName = parentName;
+        super("Parent", name, phone, email, address, tags, isPinned, isArchived);
+        this.childName = childName;
     }
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given {@code Student}.
      */
-    public JsonAdaptedStudent(Student source) {
+    public JsonAdaptedParent(Parent source) {
         super(source);
-        education = source.getEducation() == null ? null : source.getEducation().educationLevel;
-        grade = source.getGrade() == null ? null : source.getGrade().gradeIndex;
-        parentName = source.getParentName() == null ? null : source.getParentName().fullName;
+        childName = Optional.ofNullable(source.getChildName()).map(c -> c.fullName).orElse(null);
     }
 
     @Override
-    public Student toModelType() throws IllegalValueException {
+    public Parent toModelType() throws IllegalValueException {
 
         String name = this.getName();
         String phone = this.getPhone();
@@ -102,35 +92,18 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (education == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Education.class.getSimpleName()));
-        }
-        if (!Education.isValidEducationLevel(education)) {
-            throw new IllegalValueException(Education.MESSAGE_CONSTRAINTS);
-        }
-        final Education modelEducation = new Education(education);
-
-        if (grade == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
-        }
-        if (!Grade.isValidGradeIndex(grade)) {
-            throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
-        }
-        final Grade modelGrade = new Grade(grade);
-
-        final Name modelParentName;
-        if (parentName != null) {
-            if (!Name.isValidName(parentName)) {
+        final Name modelChildName;
+        if (childName != null) {
+            if (!Name.isValidName(childName)) {
                 throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
             }
-            modelParentName = new Name(parentName);
+            modelChildName = new Name(childName);
         } else {
-            modelParentName = null;
+            modelChildName = null;
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelEducation, modelGrade, modelParentName,
-                modelTags, isPinned, isArchived);
+        return new Parent(modelName, modelPhone, modelEmail, modelAddress, modelChildName, modelTags,
+                isPinned, isArchived);
     }
 }
