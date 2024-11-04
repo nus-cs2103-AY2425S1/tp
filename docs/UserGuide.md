@@ -148,7 +148,7 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 
 Finds Udders by specified keywords for each field.
 
-**Format:** `find [n/] [p/] [t/] [a/] [e/] [m/] [r/]
+**Format:** `find [n/] [p/] [t/] [a/] [e/] [m/] [r/]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
