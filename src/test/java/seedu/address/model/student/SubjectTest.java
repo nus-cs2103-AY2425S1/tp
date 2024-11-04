@@ -65,11 +65,59 @@ public class SubjectTest {
     @Test
     public void isValidSubjectsByLevel_invalidLevel_failure() {
         assertFalse(Subject.isValidSubjectsByLevel(new Level("NONE NONE"), SUBJECT_ARRAY));
+        assertFalse(Subject.isValidSubjectsByLevel(null, SUBJECT_ARRAY));
     }
 
     @Test
     public void subject_case_insensitive() {
         assertTrue(new Subject("MATH").equals(new Subject("math")));
+    }
+
+    @Test
+    public void getValidSubjectMessage_invalidLevel() {
+        assertEquals(Subject.getValidSubjectMessage(new Level("NONE NONE")), Subject.MESSAGE_LEVEL_NEEDED);
+        assertEquals(Subject.getValidSubjectMessage(null), Subject.MESSAGE_LEVEL_NEEDED);
+    }
+
+    @Test
+    public void getValidSubjectMessage_validLevel() {
+        String expectedMessageUpperSec = "Subject is not valid for given level. "
+                + "Valid subjects for %s: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
+                + "BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, "
+                + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
+                + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";
+        String expectedMessageLowerSec = "Subject is not valid for given level. "
+                + "Valid subjects for %s: [MATH, SCIENCE, PHYSICS, CHEMISTRY, BIOLOGY, LITERATURE, HISTORY, "
+                + "GEOGRAPHY, SOCIAL_STUDIES, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, HIGHER_MALAY, TAMIL, "
+                + "HIGHER_TAMIL, HINDI]";
+
+        assertEquals(Subject.getValidSubjectMessage(new Level("S3 IP")),
+                String.format(expectedMessageUpperSec, "S3 IP"));
+        assertEquals(Subject.getValidSubjectMessage(new Level("S1 NT")),
+                String.format(expectedMessageLowerSec, "S1 NT"));
+    }
+
+    @Test
+    public void equals() {
+        Subject math = new Subject("MATH");
+
+        // same values -> returns true
+        assertTrue(math.equals(new Subject("MATH")));
+
+        // same object -> returns true
+        assertTrue(math.equals(math));
+
+        // null -> returns false
+        assertFalse(math.equals(null));
+
+        // different types -> returns false
+        assertFalse(math.equals(5.0f));
+
+        // different values -> returns false
+        assertFalse(math.equals(new Subject("Chinese")));
+
+        // case-insensitive -> return true
+        assertTrue(math.equals(new Subject("math")));
     }
 
     @Test

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_SUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
@@ -54,7 +54,7 @@ public class UpdateStudentDescriptorTest {
         updatedAmy = new UpdateStudentDescriptorBuilder(DESC_AMY).withSubjects(VALID_SUBJECT_MATH).build();
         assertFalse(DESC_AMY.equals(updatedAmy));
 
-        updatedAmy = new UpdateStudentDescriptorBuilder(DESC_AMY).withLessonTimes(VALID_LESSON_TIME).build();
+        updatedAmy = new UpdateStudentDescriptorBuilder(DESC_AMY).withLessonTimes(VALID_LESSON_TIME_SUN).build();
         assertFalse(DESC_AMY.equals(updatedAmy));
     }
 

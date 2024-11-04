@@ -30,7 +30,6 @@ import seedu.address.model.student.task.TaskList;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -47,7 +46,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         //Parse all arguments
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMERGENCY_CONTACT, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMERGENCY_CONTACT, PREFIX_ADDRESS,
+                PREFIX_LEVEL);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         EmergencyContact emergencyContact = ParserUtil
@@ -62,13 +62,21 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
             level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
         }
+
         Set<Subject> subjectList = new HashSet<>();
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             if (argMultimap.getValue(PREFIX_LEVEL).isEmpty()) {
                 throw new ParseException(Subject.MESSAGE_LEVEL_NEEDED);
             }
-            subjectList = ParserUtil.parseSubjectsByLevel(level, argMultimap.getAllValues(PREFIX_SUBJECT));
+
+            subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
+
+            if (!Subject.isValidSubjectsByLevel(level,
+                    subjectList)) {
+                throw new ParseException(Subject.getValidSubjectMessage());
+            }
         }
+
         Set<LessonTime> lessonTimes = ParserUtil.parseLessonTimes(argMultimap.getAllValues(PREFIX_LESSON_TIME));
 
         Student student = new Student(name, phone, emergencyContact, address, note, subjectList,
@@ -76,7 +84,4 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         return new AddCommand(student);
     }
-
-
-
 }

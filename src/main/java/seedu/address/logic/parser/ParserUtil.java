@@ -165,34 +165,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String subject} into a {@code Subject}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code subject} is invalid.
-     */
-    public static Subject parseSubjectByLevel(Level level, String subject) throws ParseException {
-        requireNonNull(subject);
-        String trimmedSubject = subject.trim();
-        if (!Subject.isValidSubjectNameByLevel(level, trimmedSubject)) {
-            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
-        }
-        return new Subject(trimmedSubject);
-    }
-
-    /**
-     * Parses {@code Collection<String> subjects} into a {@code Set<Subject>}.
-     */
-    public static Set<Subject> parseSubjectsByLevel(Level level, Collection<String> subjects) throws ParseException {
-        requireNonNull(level);
-        requireNonNull(subjects);
-        final Set<Subject> subjectSet = new HashSet<>();
-        for (String subjectName : subjects) {
-            subjectSet.add(parseSubjectByLevel(level, subjectName));
-        }
-        return subjectSet;
-    }
-
-    /**
      * Parses a {@code String desc} into an {@code TaskDescription}.
      * Leading and trailing whitespaces will be trimmed.
      *
