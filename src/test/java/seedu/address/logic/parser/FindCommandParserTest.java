@@ -16,6 +16,7 @@ import seedu.address.logic.commands.findcommand.FindEmailCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
 import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.commands.findcommand.FindTagCommand;
+import seedu.address.logic.commands.findcommand.FindTaskCommand;
 import seedu.address.logic.commands.findcommand.FindWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
@@ -23,9 +24,18 @@ import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredica
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TaskContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
+
+    public static final String NAME_CANNOT_BE_EMPTY = "Name cannot be empty!";
+    public static final String PHONE_NUMBER_CANNOT_BE_EMPTY = "Phone number cannot be empty!";
+    public static final String EMAIL_CANNOT_BE_EMPTY = "Email address cannot be empty!";
+    public static final String ADDRESS_CANNOT_BE_EMPTY = "Address cannot be empty!";
+    public static final String TAG_CANNOT_BE_EMPTY = "Tag cannot be empty!";
+    public static final String WEDDING_CANNOT_BE_EMPTY = "Wedding cannot be empty!";
+    public static final String TASK_CANNOT_BE_EMPTY = "Task cannot be empty!";
 
     private FindCommandParser parser = new FindCommandParser();
 
@@ -60,7 +70,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Name cannot be empty!", thrown.getMessage());
+        assertEquals(NAME_CANNOT_BE_EMPTY, thrown.getMessage());
 
     }
 
@@ -72,7 +82,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Name cannot be empty!", thrown.getMessage());
+        assertEquals(NAME_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
     @Test
@@ -107,7 +117,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Address cannot be empty!", thrown.getMessage());
+        assertEquals(ADDRESS_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
     @Test
@@ -118,7 +128,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Address cannot be empty!", thrown.getMessage());
+        assertEquals(ADDRESS_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
     @Test
@@ -129,7 +139,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Address cannot be empty!", thrown.getMessage());
+        assertEquals(ADDRESS_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
     @Test
@@ -151,7 +161,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Phone number cannot be empty!", thrown.getMessage());
+        assertEquals(PHONE_NUMBER_CANNOT_BE_EMPTY, thrown.getMessage());
 
     }
 
@@ -163,7 +173,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Phone number cannot be empty!", thrown.getMessage());
+        assertEquals(PHONE_NUMBER_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
     @Test
@@ -185,7 +195,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Email address cannot be empty!", thrown.getMessage());
+        assertEquals(EMAIL_CANNOT_BE_EMPTY, thrown.getMessage());
 
     }
 
@@ -197,7 +207,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Email address cannot be empty!", thrown.getMessage());
+        assertEquals(EMAIL_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
     @Test
@@ -219,7 +229,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Tag cannot be empty!", thrown.getMessage());
+        assertEquals(TAG_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
     @Test
@@ -230,7 +240,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Tag cannot be empty!", thrown.getMessage());
+        assertEquals(TAG_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
     @Test
@@ -252,8 +262,7 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Wedding cannot be empty!", thrown.getMessage());
-
+        assertEquals(WEDDING_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
     @Test
@@ -264,7 +273,50 @@ public class FindCommandParserTest {
         });
 
         // Check for correct error message
-        assertEquals("Wedding cannot be empty!", thrown.getMessage());
+        assertEquals(WEDDING_CANNOT_BE_EMPTY, thrown.getMessage());
+    }
+
+    @Test
+    public void parse_validFindTaskArgs_returnsFindTaskCommand() {
+        // no leading and trailing whitespaces
+        FindTaskCommand expectedFindCommand =
+                new FindTaskCommand(new TaskContainsKeywordsPredicate(Arrays.asList("Order food")));
+        assertParseSuccess(parser, "find tk/Order food", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find tk/ \t Order food", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validMultipleFindTasksArgs_returnsFindTaskCommand() {
+        // no leading and trailing whitespaces
+        FindTaskCommand expectedFindCommand =
+                new FindTaskCommand(new TaskContainsKeywordsPredicate(Arrays.asList("Order food",
+                        "Print photographs")));
+        assertParseSuccess(parser, "find tk/Order food tk/Print photographs", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find tk/ \t Order food \n tk/ Print photographs", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_missingTaskAfterPrefix_throwsParseException() {
+        String input = "find tk/"; // Nothing after task prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        assertEquals(TASK_CANNOT_BE_EMPTY, thrown.getMessage());
+    }
+
+    @Test
+    public void parse_missingTaskWithTrailingWhiteSpace_throwsParseException() {
+        String input = "find tk/ \n \t"; // Nothing after task prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        assertEquals(TASK_CANNOT_BE_EMPTY, thrown.getMessage());
     }
 
 }
