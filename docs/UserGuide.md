@@ -244,6 +244,21 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting a transaction : `deleteTxn`
+
+Deletes the specified transaction from the transaction book.
+
+Format: `deleteTxn INDEX`
+
+* Deletes the transaction at the specified `INDEX`.
+* The index refers to the index number shown in the displayed transaction list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `listTxn` followed by `delete 2` deletes the 2nd person in the address book.
+* `filterTxn 1` followed by `delete 1` deletes the 1st transaction in the results of the `filterTxn` command.
+
 ### Clearing all entries of AddressBook: `clear`
 
 Clears all entries from the address book.
