@@ -27,8 +27,7 @@ import seedu.address.model.policy.PremiumAmount;
  */
 public class EditPolicyCommand extends Command {
     public static final String COMMAND_WORD = "edit-policy";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy edited to:\n%2$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
+    public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated.";
     public static final String MESSAGE_POLICY_NOT_FOUND = "Policy of specified type does not exist for client.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates the specified policy for the client identified "
@@ -90,8 +89,8 @@ public class EditPolicyCommand extends Command {
                 clientToEdit.getAddress(), clientToEdit.getTags(), clientPolicies);
 
         model.setClient(clientToEdit, editedClient);
-        return new CommandResult(String.format("Updated policy\n\n%s policy for %s has been changed to:\n"
-                + "%s ", policyTypeToEdit, clientToEdit.getName(), editedPolicy));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                policyTypeToEdit, clientToEdit.getName(), editedPolicy));
 
     }
 
