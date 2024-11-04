@@ -89,6 +89,17 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_commandWordCaseInsensitive_success() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD.toLowerCase()) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD.toUpperCase()) instanceof ExitCommand);
+        // mixed case
+        assertTrue(parser.parseCommand(
+                ExitCommand.COMMAND_WORD.substring(0, 1).toLowerCase()
+                        + ExitCommand.COMMAND_WORD.substring(1).toUpperCase()
+        ) instanceof ExitCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
                 -> parser.parseCommand(""));
