@@ -505,10 +505,10 @@ Deletes a specific claim from a policy type for the client identified by the spe
 > **Note:** If the specified client, policy type, or claim does not exist, an error message will be shown.
 
 **Examples:**
-- `delete-claim 1 pt/health ci/1`  
+- `delete-claim 1 pt/health c/1`  
   Deletes the claim at index 1 in the health policy of the 1st client.
 
-- `delete-claim 2 pt/life ci/2`  
+- `delete-claim 2 pt/life c/2`  
   Deletes the claim at index 2 in the life policy of the 2nd client.
 
 ### 5.4.3 Editing a Claim: `edit-claim`
