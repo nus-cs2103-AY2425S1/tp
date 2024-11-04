@@ -56,7 +56,7 @@ Fields
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 A person can have any number of tags (including 0)
 </div>
-<div markdown="span" class="alert alert-secondary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
@@ -68,8 +68,8 @@ Example usages
 
 * `enroll 1 tut/physics`
 
+{% raw %}
 <div class="invalid-usage">
-
 Invalid usages
 
 * Enrolling student in a tutorial that has not been created yet
@@ -81,8 +81,8 @@ Invalid usages
     * *Error Message: This person is already in the tutorial*
 
 * Format errors, check [here](#11-format-errors)
-
 </div>
+{% endraw %}
 
 ### 
 
