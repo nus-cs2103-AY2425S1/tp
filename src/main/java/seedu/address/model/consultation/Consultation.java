@@ -103,6 +103,18 @@ public class Consultation {
     }
 
     /**
+     * Sets a student in the consultation.
+     * Method works by removing a Student & Adding a new Student.
+     *
+     * @param target The student to remove.
+     * @param editedStudent The student to add.
+     */
+    public void setStudent(Student target, Student editedStudent) {
+        removeStudent(target);
+        addStudent(editedStudent);
+    }
+
+    /**
      * Returns true if the consultation contains the specified student.
      *
      * @param student The student to check for.
