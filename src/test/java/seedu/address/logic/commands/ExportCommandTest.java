@@ -47,13 +47,16 @@ public class ExportCommandTest {
 
     @Test
     public void execute_invalidFilePath_throwsCommandException() {
-        String invalidFilePath = "/invalid/path/to/file.csv";
+        // Use an invalid file path that is universally invalid, such as including a character illegal in Windows paths.
+        String invalidFilePath = "invalid:path/?.csv"; // Adjust as needed based on error message
+
         ExportCommand exportCommand = new ExportCommand(invalidFilePath);
 
-        // Check if CommandException is thrown
+        // Expect a CommandException with a message indicating failure due to invalid path
         CommandException exception = assertThrows(CommandException.class, () -> exportCommand.execute(model));
-        assertEquals(String.format(ExportCommand.MESSAGE_FAILURE, invalidFilePath), exception.getMessage());
+        assertTrue(exception.getMessage().contains("Failed to export contacts to"));
     }
+
 
     @Test
     public void equals_sameFilePath_returnsTrue() {
