@@ -30,7 +30,6 @@ public class TagTest {
         Tag tag1 = new Tag("friend");
         Tag tag2 = new Tag("friend");
         Tag tag3 = new Tag("family");
-        
         assertTrue(tag1.equals(tag1));
         assertTrue(tag1.equals(tag2));
         assertFalse(tag1.equals(tag3));
