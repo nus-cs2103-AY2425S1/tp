@@ -74,7 +74,7 @@ public class DeleteTagCommandTest {
      * EP: Single non-existent tag.
      */
     @Test
-    public void executeNonExistentTagWithError() {
+    public void execute_nonExistentTag_error() {
         Tag nonExistentTag = BRIDES_SIDE;
         List<Tag> nonExistentTags = List.of(nonExistentTag);
 
@@ -113,7 +113,7 @@ public class DeleteTagCommandTest {
      * EP: Single existing tag with force delete.
      */
     @Test
-    public void executeExistingTagForceDeleteSuccess() {
+    public void execute_existingTagForceDelete_success() {
         // Create existing tag.
         Tag existingTag = BRIDES_SIDE;
 
@@ -132,7 +132,7 @@ public class DeleteTagCommandTest {
      * EP: Attempt to delete tag in use throw error.
      */
     @Test
-    public void executeTagInUseWithError() {
+    public void execute_tagInUse_error() {
         // Create existing tag.
         Tag existingTag = BRIDES_SIDE;
 
@@ -153,7 +153,7 @@ public class DeleteTagCommandTest {
      * EP: Attempt to delete tag in use with force delete.
      */
     @Test
-    public void executeTagInUseForceDeleteSuccess() {
+    public void execute_tagInUseForceDelete_success() {
         // Arrange
         // Set up the existing tag and associate it with ALICE
         Tag existingTag = TypicalTags.BRIDES_SIDE;
@@ -179,7 +179,7 @@ public class DeleteTagCommandTest {
 
 
     @Test
-    public void execute_undoDeleteTagCommand_sucess() {
+    public void execute_undoDeleteTagCommand_success() {
         Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Tag existingFriendsTag = FRIENDS;
         Tag existingColleaguesTag = COLLEAGUES;

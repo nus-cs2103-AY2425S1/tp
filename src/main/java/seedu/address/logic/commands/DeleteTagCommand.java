@@ -57,38 +57,14 @@ public class DeleteTagCommand extends UndoableCommand {
         boolean showErrorMsg = false;
         boolean showSuccessMsg = false;
 
+        // Check if tags exist and populate error message
+        showErrorMsg = addNonExistentTagsToError(model, errorMsg);
+
         // Proceed with force deletion logic
         if (isForceDelete) {
-            for (Tag tag : tags) {
-                if (!model.hasTag(tag)) {
-                    errorMsg.append(tag.toString() + " ");
-                    showErrorMsg = true;
-                }
-            }
-
-            for (Tag tag : tags) {
-                if (model.hasTag(tag)) {
-                    model.deleteTags(List.of(tag)); // Remove from model tags
-                    model.removeTagFromPersons(tag); // Remove from all persons
-                    showSuccessMsg = true;
-                }
-            }
-
-            successMsg.append(MESSAGE_SUCCESS_FORCE);
-            String successMessage = successMsg.toString();
-
-            if (showErrorMsg) {
-                errorMsg.append(MESSAGE_NONEXISTENT);
-                String errorMessage = errorMsg.toString();
-                if (showSuccessMsg) {
-                    return new CommandResult(successMessage + " " + errorMessage);
-                }
-                return new CommandResult(errorMessage);
-            }
-            return new CommandResult(successMessage);
-
+            showSuccessMsg = deleteTagsAndSuccess(model, successMsg, MESSAGE_SUCCESS_FORCE);
         } else {
-            // Check if any tags are in use
+            // If not force delete, check for tags in use and handle accordingly
             Set<Tag> tagsInUse = model.getTagsInUse();
             Set<Tag> matchingTags = tagsInUse.stream().filter(tag -> tags.contains(tag)).collect(Collectors.toSet());
 
@@ -96,46 +72,86 @@ public class DeleteTagCommand extends UndoableCommand {
                 return new CommandResult(String.format(MESSAGE_TAGS_IN_USE, matchingTags));
             }
 
-            for (Tag tag : tags) {
-                if (!model.hasTag(tag)) {
-                    errorMsg.append(tag.toString() + " ");
-                    showErrorMsg = true;
-                }
+            // Perform standard deletion and build success message
+            showSuccessMsg = deleteTagsAndSuccess(model, successMsg, MESSAGE_SUCCESS);
+        }
+        return constructFinalMessage(showErrorMsg, errorMsg, showSuccessMsg, successMsg);
+    }
+
+    /**
+     * Helper to add non-existent tags to the error message
+     *
+     * @param model
+     * @param errorMsg
+     * @return
+     */
+    private boolean addNonExistentTagsToError(Model model, StringBuilder errorMsg) {
+        boolean hasErrors = false;
+        for (Tag tag : tags) {
+            if (!model.hasTag(tag)) {
+                errorMsg.append(tag.toString()).append(" ");
+                hasErrors = true;
             }
+        }
+        if (hasErrors) {
+            errorMsg.append(MESSAGE_NONEXISTENT);
+        }
+        return hasErrors;
+    }
 
-            // Standard delete logic
-            for (Tag tag : tags) {
-                if (model.hasTag(tag)) {
-                    model.deleteTags(List.of(tag)); // Just delete from the tag list
-                    showSuccessMsg = true;
-                }
 
+    /**
+     * Helper method to delete tags and add to success message
+     *
+     * @param model
+     * @param successMsg
+     * @param successMessage
+     * @return
+     */
+    private boolean deleteTagsAndSuccess(Model model, StringBuilder successMsg, String successMessage) {
+        boolean hasSuccess = false;
+        for (Tag tag : tags) {
+            if (model.hasTag(tag)) {
+                model.deleteTags(List.of(tag)); // Remove from model tags
+                model.removeTagFromPersons(tag); // Remove from all persons
+                hasSuccess = true;
             }
+        }
 
-            successMsg.append(MESSAGE_SUCCESS);
-            String successMessage = successMsg.toString();
+        if (hasSuccess) {
+            successMsg.append(successMessage);
+        }
+        return hasSuccess;
 
-            if (showErrorMsg) {
-                errorMsg.append(MESSAGE_NONEXISTENT);
-                String errorMessage = errorMsg.toString();
-                if (showSuccessMsg) {
-                    return new CommandResult(successMessage + " " + errorMessage);
-                }
-                return new CommandResult(errorMessage);
-            } else {
-                return new CommandResult(successMessage);
-            }
+    }
 
-
+    /**
+     * Helper method to construct the final CommandResult message based on flags
+     *
+     * @param showErrorMsg
+     * @param errorMsg
+     * @param showSuccessMsg
+     * @param successMsg
+     * @return
+     */
+    private CommandResult constructFinalMessage(boolean showErrorMsg, StringBuilder errorMsg,
+                                                boolean showSuccessMsg, StringBuilder successMsg) {
+        if (showErrorMsg && showSuccessMsg) {
+            return new CommandResult(successMsg.toString() + " " + errorMsg.toString());
+        } else if (showErrorMsg) {
+            return new CommandResult(errorMsg.toString());
+        } else {
+            return new CommandResult(successMsg.toString());
         }
     }
+
     @Override
     public void undo(Model model) {
         requireNonNull(model);
-        for (Map.Entry<Tag, Set<Person>> entry: deletedSet.entrySet()) {
+        for (Map.Entry<Tag, Set<Person>> entry : deletedSet.entrySet()) {
             Tag deletedTag = entry.getKey();
             model.addTag(deletedTag);
-            for (Person person: entry.getValue()) {
+            for (Person person : entry.getValue()) {
                 Set<Tag> newTags = new HashSet<>(person.getTags());
                 newTags.add(deletedTag);
                 Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
@@ -158,3 +174,4 @@ public class DeleteTagCommand extends UndoableCommand {
                 && isForceDelete == otherCommand.isForceDelete;
     }
 }
+
