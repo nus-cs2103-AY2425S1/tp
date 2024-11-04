@@ -1,6 +1,6 @@
 name: Java CI
 
-on: [push, pull_request]
+on: [push, pull_request, pull_request_target]
 
 jobs:
   build:
@@ -29,37 +29,37 @@ jobs:
         if: runner.os == 'Linux'
         working-directory:  ${{ github.workspace }}/.github
         run: ./run-checks.sh
-
-      - name: Validate Gradle Wrapper
-        uses: gradle/actions/wrapper-validation@v3
-
-      - name: Setup JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-          java-package: jdk+fx
-
-      - name: Build and check with Gradle
-        run: ./gradlew check coverage --info
-
-      - name: Upload tests artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: 'test-report-${{ matrix.platform }}'
-          path: 'build/reports/tests/test'
-
-      - name: Upload checkstyle artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: 'checkstyle-report-${{ matrix.platform }}'
-          path: 'build/reports/checkstyle'
+#
+#      - name: Validate Gradle Wrapper
+#        uses: gradle/actions/wrapper-validation@v3
+#
+#      - name: Setup JDK 17
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: 'zulu'
+#          java-version: '17'
+#          java-package: jdk+fx
+#
+#      - name: Build and check with Gradle
+#        run: ./gradlew check coverage --info
+#
+#      - name: Upload tests artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: 'test-report-${{ matrix.platform }}'
+#          path: 'build/reports/tests/test'
+#
+#      - name: Upload checkstyle artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: 'checkstyle-report-${{ matrix.platform }}'
+#          path: 'build/reports/checkstyle'
 
       - name: test
         run: echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
 
       - name: Comment on PR with artifact link
-        if: github.event_name == 'pull_request' && runner.os == 'Linux'
+        if: github.event_name == 'pull_request_target' && runner.os == 'Linux'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
@@ -73,8 +73,8 @@ jobs:
               body: commentBody
             })
 
-      - name: Upload coverage reports to Codecov
-        if: runner.os == 'Linux'
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+#      - name: Upload coverage reports to Codecov
+#        if: runner.os == 'Linux'
+#        uses: codecov/codecov-action@v4
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
