@@ -66,7 +66,7 @@ public class AddTaskToAllGroupsCommand extends Command {
             model.addTask(task);
         }
         for (Group g : groups) {
-            if (!model.hasTaskInGroup(task, g)) {
+            if (!g.hasTask(task)) {
                 model.addTaskToGroup(task, g);
                 model.increaseGroupWithTask(task);
             }
