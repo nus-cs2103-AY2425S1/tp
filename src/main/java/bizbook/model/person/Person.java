@@ -2,6 +2,7 @@ package bizbook.model.person;
 
 import static bizbook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -26,12 +27,12 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new LinkedHashSet<>();
-    private final Set<Note> notes = new LinkedHashSet<>();
+    private final ArrayList<Note> notes = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Note> notes) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ArrayList<Note> notes) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -66,8 +67,8 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Set<Note> getNotes() {
-        return Collections.unmodifiableSet(notes);
+    public ArrayList<Note> getNotes() {
+        return notes;
     }
 
     /**

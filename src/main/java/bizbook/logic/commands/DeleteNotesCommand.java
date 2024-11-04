@@ -4,9 +4,7 @@ import static bizbook.commons.util.CollectionUtil.requireAllNonNull;
 import static bizbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import bizbook.commons.core.index.Index;
 import bizbook.logic.Messages;
@@ -64,22 +62,22 @@ public class DeleteNotesCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        List<Note> notesToEdit = new ArrayList<>(personToEdit.getNotes());
+        List<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
         // if there are no notes with this index
-        if (noteIndex.getOneBased() > notesToEdit.size()) {
-            throw new CommandException(Messages.NO_EXISTING_NOTE);
+        if (noteIndex.getOneBased() > notesList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_NOTE_INDEX);
         }
 
         // remove the specified note
-        Note noteToRemove = notesToEdit.get(noteIndex.getZeroBased());
-        notesToEdit.remove(noteToRemove);
+        Note noteToRemove = notesList.get(noteIndex.getZeroBased());
+        notesList.remove(noteToRemove);
 
-        Set<Note> updatedNotes = new LinkedHashSet<>(notesToEdit);
+        ArrayList<Note> updatedNotesList = new ArrayList<>(notesList);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), updatedNotes);
+                personToEdit.getAddress(), personToEdit.getTags(), updatedNotesList);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

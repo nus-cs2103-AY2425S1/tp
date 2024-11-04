@@ -1,6 +1,6 @@
 package bizbook.logic.commands;
 
-import static bizbook.logic.Messages.MESSAGE_INVALID_NOTED_INDEX;
+import static bizbook.logic.Messages.MESSAGE_INVALID_NOTE_INDEX;
 import static bizbook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static bizbook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static bizbook.logic.commands.EditNotesCommand.DUPLICATE_MESSAGE_CONSTRAINTS;
@@ -77,6 +77,6 @@ public class EditNotesCommandTest {
     public void execute_invalidNoteIndex_throwsCommandException() {
         EditNotesCommand editNotesCommand = new EditNotesCommand(INDEX_SECOND_PERSON, INDEX_OUTOFBOUND_NOTE,
                 TYPICAL_NOTE);
-        assertThrows(CommandException.class, MESSAGE_INVALID_NOTED_INDEX, () -> editNotesCommand.execute(model));
+        assertThrows(CommandException.class, MESSAGE_INVALID_NOTE_INDEX, () -> editNotesCommand.execute(model));
     }
 }

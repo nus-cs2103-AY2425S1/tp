@@ -92,7 +92,7 @@ class JsonAdaptedPerson {
 
 
         final Set<Tag> modelTags = new LinkedHashSet<>(personTags);
-        final Set<Note> modelNotes = new LinkedHashSet<>(personNotes);
+        final ArrayList<Note> modelNotes = new ArrayList<>(personNotes);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNotes);
     }
