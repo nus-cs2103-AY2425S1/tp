@@ -200,6 +200,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ReadOnlyReceiptLog getGoodsFiltered() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addGoods(GoodsReceipt goodsReceipt) {
             throw new AssertionError("This method should not be called.");
         }

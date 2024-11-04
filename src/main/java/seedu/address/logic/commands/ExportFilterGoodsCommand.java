@@ -16,9 +16,7 @@ public class ExportFilterGoodsCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports goods shown in view goods";
 
-    public static final String MESSAGE_SUCCESS = "Filtered goods file created";
-
-
+    public static final String MESSAGE_SUCCESS = "Filtered goods file created/updated";
 
     /**
      * Creates an ExportFilterGoodsCommand to export filtered goods
