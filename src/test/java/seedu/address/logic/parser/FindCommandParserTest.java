@@ -110,6 +110,14 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void test_nonEmptyPreambleWithValidArgsWithEmail_failure() {
+        assertParseFailure(parser, "asdf e/Test",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+    }
+
+
+    @Test
     public void test_parseWithNameAndTags_success() {
         FindCommand expectedFindCommand =
                 new FindCommand(new PersonPredicateBuilder().withNameKeywords(Arrays.asList("Alice", "Bob"))
@@ -310,6 +318,10 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " m/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
         assertParseFailure(parser, " !m/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
         assertParseFailure(parser, " t/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " e/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " p/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+        assertParseFailure(parser, " f/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+
 
     }
 
