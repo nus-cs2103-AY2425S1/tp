@@ -64,12 +64,17 @@ public class PersonPredicateBuilder {
         monthPaidKeywords = new ArrayList<>(personPredicateBuilder.monthPaidKeywords);
         notMonthPaidKeywords = new ArrayList<>(personPredicateBuilder.notMonthPaidKeywords);
         tagKeywords = new ArrayList<>(personPredicateBuilder.tagKeywords);
-        
+        addressKeywords = new ArrayList<>(personPredicateBuilder.addressKeywords);
+        emailKeywords = new ArrayList<>(personPredicateBuilder.emailKeywords);
+        phoneKeywords = new ArrayList<>(personPredicateBuilder.phoneKeywords);
         isSetName = personPredicateBuilder.isSetName;
         isSetClassId = personPredicateBuilder.isSetClassId;
         isSetMonthPaid = personPredicateBuilder.isSetMonthPaid;
         isSetNotMonthPaid = personPredicateBuilder.isSetNotMonthPaid;
         isSetTag = personPredicateBuilder.isSetTag;
+        isSetEmail = personPredicateBuilder.isSetEmail;
+        isSetPhone = personPredicateBuilder.isSetPhone;
+        isSetAddress = personPredicateBuilder.isSetAddress;
     }
 
     /**
