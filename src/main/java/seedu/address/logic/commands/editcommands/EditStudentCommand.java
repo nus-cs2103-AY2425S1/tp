@@ -89,7 +89,7 @@ public class EditStudentCommand extends Command {
 
         Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
 
-        if (studentToEdit.hasSameFeatures(editedStudent)) {
+        if (studentToEdit.equals(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.setPerson(studentToEdit, editedStudent);
