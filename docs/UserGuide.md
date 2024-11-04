@@ -319,8 +319,8 @@ Adds a **new client** to Prudy.
 
 
 **Examples:**
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add-client n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### 5.2.2 Listing All Clients: `list-clients`
 Shows a **list of all clients** in Prudy.
@@ -347,8 +347,8 @@ Shows a **list of all clients** in Prudy.
   </box>
 
 **Examples:**
-* `find n/John` returns `john` and `John Doe`
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find-client n/John` returns `john` and `John Doe`
+* `find-client n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
   <box type=warning seamless>
@@ -371,8 +371,8 @@ Shows a **list of all clients** in Prudy.
   specifying any tags after it.
 
 **Examples:**
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+*  `edit-client 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit-client 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
 ### 5.2.5 Deleting a Client: `delete-client`
 **Deletes a specified client** at the specified `INDEX`.
