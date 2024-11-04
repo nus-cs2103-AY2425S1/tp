@@ -26,7 +26,9 @@ public class AddExamScoreCommand extends Command {
             + "Parameters: [INDEX] ex/EXAM_NAME sc/EXAM_SCORE\n"
             + "Example: " + COMMAND_WORD + " 1 ex/Midterm sc/70";
 
-    public static final String MESSAGE_ADDEXAMSCORE_SUCCESS = "Added exam score for person: %1$s";
+    public static final String MESSAGE_ADDEXAMSCORE_SUCCESS = "Added exam score for person: %1$s\n"
+            + "Exam: %2$s\n"
+            + "Score: %3$s";
     public static final String MESSAGE_EXAM_NOT_FOUND = "This exam does not exist.";
 
     private final Index index;
@@ -66,7 +68,8 @@ public class AddExamScoreCommand extends Command {
                 updatedExams, personToEdit.getTags(), personToEdit.getAttendances(), personToEdit.getSubmissions());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADDEXAMSCORE_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_ADDEXAMSCORE_SUCCESS, editedPerson.getDisplayedName(),
+                exam, examScore));
     }
 
     @Override
