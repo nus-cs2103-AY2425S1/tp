@@ -1,4 +1,4 @@
-# AdmiNUS User Guide
+# User Guide
 
 ## Why AdmiNUS?
 
