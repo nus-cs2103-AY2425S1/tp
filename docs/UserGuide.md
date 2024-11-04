@@ -195,7 +195,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
@@ -328,15 +328,16 @@ removePastry Croissant
 Adds a customer order by providing the customer's phone number and the product IDs from the catalogue.
 
 ```bash
-addCustomerOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...]
+addCustomerOrder p/PHONE_NUMBER r/REMARK o/PASTRYID [MORE_PASTRYIDs...] [n/NAME]
 ```
 - **Parameters:**
     - `PHONE_NUMBER`: The phone number of the customer.
-    - `PRODUCTID`: One or more product IDs for the items being ordered.
+    - `REMARK`: Details of the order
+    - `PASTRYID`: One or more pastry IDs for the items being ordered in the pastry catalogue.
 
 **Example:**
 ```bash
-addCustomerOrder 12345678 1 2 3
+addCustomerOrder p/98765432 r/Self-collection at 6pm o/1 1 2 3 n/John Doe
 ```
 <img width="1191" alt="Screenshot 2024-10-24 at 5 50 18 PM" src="https://github.com/user-attachments/assets/ebedf898-8319-497e-8f89-e32a9f62c3f3">
 
@@ -360,15 +361,16 @@ deleteCustomerOrder 1
 Adds a supplier order by providing the supplier's phone number and the product IDs from the ingredient catalogue.
 
 ```bash
-addSupplyOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...]
+addSupplyOrder p/PHONE_NUMBER r/REMARK o/INGREDIENTID [more INGREDIENTIDs...] [n/NAME]
 ```
 - **Parameters:**
-    - `PHONE_NUMBER`: The phone number of the supplier.
-    - `PRODUCTID`: One or more product IDs for the items being supplied.
+  - `PHONE_NUMBER`: The phone number of the supplier.
+  - `REMARK`: Details of the order
+  - `INGREDIENTID`: One or more ingredient IDs for the items being supplied in the ingredient catalogue.
 
 **Example:**
 ```bash
-addSupplyOrder 98765432 1 2 3
+addSupplyOrder p/98765432 r/Delivery at 6pm o/1 2 3 n/John Doe
 ```
 <img width="1194" alt="Screenshot 2024-10-24 at 5 51 43 PM" src="https://github.com/user-attachments/assets/59de6ead-e460-419a-807f-30fa5f17b39a">
 
