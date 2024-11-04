@@ -12,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameContainsKeywordsDeletePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.reminder.Reminder;
@@ -21,7 +22,7 @@ import seedu.address.model.reminder.Reminder;
  */
 public class DeleteReminderCommand extends Command {
 
-    public static final String COMMAND_WORD = "Rdelete";
+    public static final String COMMAND_WORD = "rdelete";
     public static final String COMMAND_WORD_SHORT = "rd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the reminder "
@@ -65,9 +66,9 @@ public class DeleteReminderCommand extends Command {
         model.deleteReminder(reminderToDelete);
 
         // Parse input using the NameContainsKeywordsPredicate
-        String fullName = reminderToDelete.getPersonName();
+        String fullName = reminderToDelete.getPersonName() + "/";
         String[] nameKeywords = fullName.split("\\s+");
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(
+        NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(
                 List.of(nameKeywords));
         ObservableList<Person> persons = model.getClientHub().getPersonList();
         List<Person> matchingPersons = persons.filtered(predicate);
