@@ -11,7 +11,7 @@ import tutorease.address.model.Model;
 public class ListContactCommand extends ContactCommand {
 
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_SUCCESS = "Listed all contacts";
+    public static final String MESSAGE_SUCCESS = "Listed all contacts.";
     public static final String MESSAGE_NO_CONTACTS_FOUND = "No contacts found.";
 
     @Override

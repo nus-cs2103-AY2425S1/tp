@@ -22,7 +22,7 @@ public class AddContactCommand extends ContactCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
-            + ": Adds a person to TutorEase. "
+            + ": Adds a person to TutorEase.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -39,7 +39,7 @@ public class AddContactCommand extends ContactCommand {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New contact added: %1$s.";
     public static final String MESSAGE_DUPLICATE_PHONE = "A person with this phone number already exists in the "
             + "address book!";
     public static final String MESSAGE_DUPLICATE_EMAIL = "A person with this email already exists in the "
