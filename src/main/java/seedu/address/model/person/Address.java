@@ -16,6 +16,7 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "\\S.*";
+    public static final String EMPTY_ADDRESS = "[Missing Address]";
 
     public final String value;
 
