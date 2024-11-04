@@ -34,7 +34,7 @@ public class StorageManager implements Storage {
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
                           IngredientCatalogueStorage ingredientCatalogueStorage,
-                          PastryCatalogueStorage pastryCatalogueStorage，CustomerOrderListStorage customerOrderListStorage, SupplyOrderListStorage supplyOrderListStorage) {
+                          PastryCatalogueStorage pastryCatalogueStorage, CustomerOrderListStorage customerOrderListStorage, SupplyOrderListStorage supplyOrderListStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.ingredientCatalogueStorage = ingredientCatalogueStorage;
