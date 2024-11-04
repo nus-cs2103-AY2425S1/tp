@@ -26,7 +26,9 @@ Class EducationPolicy
 Class "{abstract}\nPolicy" as Policy
 Class ClaimList
 Class Claim
-
+Class PremiumAmount
+Class CoverageAmount
+Class ExpiryDate
 Class I #FFFFFF
 }
 
@@ -50,14 +52,17 @@ Client *--> Email
 Client *--> Address
 Client *--> "*" Tag
 Client *--> PolicySet
-PolicySet --> LifePolicy
-PolicySet --> HealthPolicy
-PolicySet --> EducationPolicy
+PolicySet *--> LifePolicy
+PolicySet *--> HealthPolicy
+PolicySet *--> EducationPolicy
 LifePolicy --|> Policy
 HealthPolicy --|> Policy
 EducationPolicy --|> Policy
-Policy --> ClaimList
-ClaimList --> "*" Claim
+Policy *--> ClaimList
+Policy *--> PremiumAmount
+Policy *--> CoverageAmount
+Policy *--> ExpiryDate
+ClaimList *--> "*" Claim
 
 Client -[hidden]up--> I
 UniqueClientList -[hidden]right-> I
