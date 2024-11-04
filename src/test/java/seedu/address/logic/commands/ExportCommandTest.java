@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,16 +22,16 @@ public class ExportCommandTest {
 
     @Test
     public void execute_validFilePath_exportSuccess() throws Exception {
-        // Prepare a temporary file
-        Path tempFile = Files.createTempFile("test", ".csv");
+        // Create a temporary file with platform-independent path handling
+        Path tempFile = Paths.get(System.getProperty("user.dir"), "test-export-valid.csv");
         ExportCommand exportCommand = new ExportCommand(tempFile.toString());
 
-        // Execute the command
+        // Execute the command and check the result
         CommandResult result = exportCommand.execute(model);
         assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, tempFile.toString()), result.getFeedbackToUser());
 
         // Verify the file content
-        try (BufferedReader reader = new BufferedReader(new FileReader(tempFile.toString()))) {
+        try (BufferedReader reader = Files.newBufferedReader(tempFile)) {
             String header = reader.readLine();
             assertEquals("name,category,studentId/industry,phone,email,address,tags", header);
 
@@ -41,7 +41,8 @@ public class ExportCommandTest {
                     + "\"123, Jurong West Ave 6, #08-111\",friends", firstLine);
         }
 
-        Files.deleteIfExists(tempFile); // Clean up the temporary file after the test
+        // Clean up the temporary file after the test
+        Files.deleteIfExists(tempFile);
     }
 
     @Test
@@ -70,13 +71,17 @@ public class ExportCommandTest {
 
     @Test
     public void execute_absoluteFilePath_exportSuccess() throws Exception {
+        // Create a temporary directory and resolve the absolute path for export file
         Path tempDir = Files.createTempDirectory("exportTest");
-        Path absolutePath = tempDir.resolve("export.csv");
+        Path absolutePath = tempDir.resolve("export.csv").toAbsolutePath();
 
         ExportCommand exportCommand = new ExportCommand(absolutePath.toString());
 
+        // Execute the command and check the result
         CommandResult result = exportCommand.execute(model);
         assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, absolutePath.toString()), result.getFeedbackToUser());
+
+        // Verify the file content if necessary (as in previous test)
 
         // Clean up
         Files.deleteIfExists(absolutePath);
