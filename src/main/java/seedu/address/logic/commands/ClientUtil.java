@@ -17,10 +17,10 @@ public class ClientUtil {
      */
     public static Person findViewPerson(String viewCommand, Logic logic) {
         String name = viewCommand.replace("view", "");
-        String trimmedName = name.trim();
+        String trimmedName = name.trim().toLowerCase();
         ObservableList<Person> clientList = logic.getFilteredPersonList();
         Person matchingPerson = clientList.stream()
-                .filter(person -> person.getName().toString().equals(trimmedName))
+                .filter(person -> person.getName().toString().toLowerCase().equals(trimmedName))
                 .findFirst().orElse(null);
         return matchingPerson;
     }
