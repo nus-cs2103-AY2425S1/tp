@@ -44,6 +44,7 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
     - [To mark property already bought: `bought`](#to-mark-property-as-bought-bought)
     - [To mark property already sold: `sold`](#to-mark-property-already-sold-sold)
     - [Pin Contact: `pin`](#pin-contact-pin)
+    - [Unpin Contact: `unpin`]()
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -111,7 +112,7 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -434,6 +435,18 @@ Format `pin INDEX`
 
 Examples:
 * `pin 5` moves the contact at index 5 to index 1.
+
+### Unpin Contact `unpin`
+Pins a contact at a particular index to the top of the list.
+
+![pin_command](images/pinCommand.png)
+
+Format `unpin INDEX`
+
+* The parameter INDEX must be a positive integer.
+
+Examples:
+* `unpin 5` moves the contact at index 5 to index 1.
 
 ### Saving the data
 
