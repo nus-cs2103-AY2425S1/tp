@@ -18,8 +18,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.EditAssignmentDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -41,8 +43,11 @@ public class CommandTestUtil {
     public static final int VALID_MAX_SCORE_MATH = 100;
     public static final int VALID_SCORE_MATH = 100;
     public static final String VALID_ASSIGNMENT_NAME_PHYSICS = "Physics Homework";
+    public static final String INVALID_ASSIGNMENT_NAME = "Physics Homework*";
     public static final int VALID_MAX_SCORE_PHYSICS = 60;
     public static final int VALID_SCORE_PHYSICS = 45;
+    public static final String VALID_ASSIGNMENT_NAME_CS = "CS2103 ip";
+    public static final int VALID_MAX_SCORE_CS = 25;
     public static final String VALID_ASSIGNMENT_INDEX_STRING = "1";
     public static final String VALID_STUDENT_INDEX_STRING = "1";
     public static final String VALID_SCORE_STRING = "100";
@@ -73,6 +78,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditStudentDescriptor DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK;
     public static final EditCommand.EditStudentDescriptor DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK;
     public static final EditCommand.EditStudentDescriptor DESC_BOB_WITH_ASSIGNMENT_WITH_REMARK;
+    public static final EditAssignmentCommand.EditAssignmentDescriptor DESC_MATH;
+    public static final EditAssignmentCommand.EditAssignmentDescriptor DESC_PHYSICS;
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -91,6 +98,12 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRemark(REMARK_DESC_BOB)
                 .withAssignmentList(getTypicalAssignments()).build();
+        DESC_MATH = new EditAssignmentDescriptorBuilder()
+                .withAssignmentName(new AssignmentName(VALID_ASSIGNMENT_NAME_MATH))
+                .withMaxScore(VALID_MAX_SCORE_MATH).build();
+        DESC_PHYSICS = new EditAssignmentDescriptorBuilder()
+                .withAssignmentName(new AssignmentName(VALID_ASSIGNMENT_NAME_PHYSICS))
+                .withMaxScore(VALID_MAX_SCORE_PHYSICS).build();
     }
 
     /**
