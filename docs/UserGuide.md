@@ -127,7 +127,7 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
           ```
 
    After a few seconds, the GUI similar to the one below should appear:
-   ![Screenshot 2024-10-26 at 12.01.46 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_5510gx%2FScreenshot%202024-10-26%20at%2012.01.46%E2%80%AFAM.png)
+   ![StartUpPage](images/StartUpPage.png)
 
    
 5. Type commands in the command box and press Enter to execute them. Some example commands you can try:
@@ -168,9 +168,7 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -185,7 +183,8 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 
 Expected output:
-![Screenshot 2024-10-25 at 11.41.57 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_LjHJ9D%2FScreenshot%202024-10-25%20at%2011.41.57%E2%80%AFPM.png)
+![AddPerson](images/AddPerson.png)
+
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
@@ -202,7 +201,7 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 Expected output:
-![Screenshot 2024-10-25 at 11.43.48 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_jF8XEd%2FScreenshot%202024-10-25%20at%2011.43.48%E2%80%AFPM.png)
+![ListPersons](images/ListPersons.png)
 
 ### Editing a person : `edit`
 
@@ -222,7 +221,7 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` 
 
 Expected output:
-![Screenshot 2024-10-25 at 11.45.25 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_etAWPb%2FScreenshot%202024-10-25%20at%2011.45.25%E2%80%AFPM.png)
+![editPerson](images/editPerson.png)
 
 ### Locating persons by name: `find`
 
@@ -259,7 +258,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 Expected output:
-![Screenshot 2024-10-25 at 11.46.29 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_2FLfCO%2FScreenshot%202024-10-25%20at%2011.46.29%E2%80%AFPM.png)
+![deletePerson](images/deletePerson.png)
 
 ### Adding or editing a grade: `addGrade`
 
@@ -278,7 +277,7 @@ Examples:
 * `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
 
 Expected output:
-![Screenshot 2024-10-25 at 11.47.07 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_xofQdm%2FScreenshot%202024-10-25%20at%2011.47.07%E2%80%AFPM.png)
+![addGrade](images/addGrade.png)
 
 ### Deleting a grade from a person: `deleteGrade`
 
@@ -295,7 +294,7 @@ Examples:
 * `find Betsy` followed by `deleteGrade 1 n/FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
 
 Expected output:
-![Screenshot 2024-10-25 at 11.49.30 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_i8CF6o%2FScreenshot%202024-10-25%20at%2011.49.30%E2%80%AFPM.png)
+![deleteGrade](images/deleteGrade.png)
 
 ### Marking attendance: `mark`
 
@@ -313,7 +312,7 @@ Examples:
 * `find Betsy` followed by `mark 1 d/31/01/2024 10:00 m/Absent` Sets the attendance to 'Absent' on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
-![Screenshot 2024-10-25 at 11.49.57 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_yOZ75B%2FScreenshot%202024-10-25%20at%2011.49.57%E2%80%AFPM.png)
+![markAttendance](images/markAttendance.png)
 
 ### Unmarking attendance: `unmark`
 
@@ -329,7 +328,7 @@ Examples:
 * `find Betsy` followed by `unmark 1 d/31/01/2024 10:00` deletes the attendance on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
-![Screenshot 2024-10-25 at 11.51.05 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_LVUqJ5%2FScreenshot%202024-10-25%20at%2011.51.05%E2%80%AFPM.png)
+![unmarkAttendance](images/unmarkAttendance.png)
 
 ### Clearing all entries : `clear`
 
@@ -338,7 +337,7 @@ Clears all entries from the address book.
 Format: `clear`
 
 Expected output:
-![Screenshot 2024-10-25 at 11.51.56 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_PJ6pA8%2FScreenshot%202024-10-25%20at%2011.51.56%E2%80%AFPM.png)
+![clearMessage](images/clearMessage.png)
 
 ### Exiting the program : `exit`
 
