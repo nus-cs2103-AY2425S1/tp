@@ -310,7 +310,7 @@ Furthermore, certain edits can cause Prudy to behave in unexpected ways (e.g., i
 
 ### 5.2.1 Adding a Client: `add`
 
-Adds a **new client** to Prudy.  
+Adds a **new client** to Prudy.
 
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -456,7 +456,7 @@ List all policies that are **expiring** within a specified number of days. If no
 Format: `list-expiring-policies [DAYS]`
 
 <box type=info seamless>
-  Info: Preceding zeros in the `DAYS` argument will be ignored.  
+  Info: Preceding zeros in the `DAYS` argument will be ignored.
   For example, <code>list-expiring-policies 0023</code> and <code>list-expiring-policies 023</code> will both be treated as <code>list-expiring-policies 23</code>.
 </box>
 
@@ -477,7 +477,7 @@ Claims management commands will be available in Prudy version 2.0. This feature 
 #### 5.4.1 Adding a claim: `add-claim`
 Adds a claim to the policy of the specified `POLICY_TYPE` for the client at the specified `INDEX`.
 
-**Format:**  
+**Format:**
 `add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION`
 
 **Details:**
@@ -489,16 +489,16 @@ Adds a claim to the policy of the specified `POLICY_TYPE` for the client at the 
 > **Note:** This command will not allow adding a claim if the client has no policy of the specified type or if a similar claim already exists.
 
 **Examples:**
-- `add-claim 1 pt/health s/pending d/stomach surgery`  
+- `add-claim 1 pt/health s/pending d/stomach surgery`
   Adds a claim with status "pending" and description "stomach surgery" to the health policy of the 1st client.
 
-- `add-claim 2 pt/life s/approved d/accidental coverage`  
+- `add-claim 2 pt/life s/approved d/accidental coverage`
   Adds a claim with status "approved" and description "accidental coverage" to the life policy of the 2nd client.
 
 ### 5.4.2 Deleting a Claim: `delete-claim`
 Deletes a specific claim from a policy type for the client identified by the specified INDEX.
 
-**Format:**  
+**Format:**
 `delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX`
 
 **Details:**
@@ -510,16 +510,16 @@ Deletes a specific claim from a policy type for the client identified by the spe
 > **Note:** If the specified client, policy type, or claim does not exist, an error message will be shown.
 
 **Examples:**
-- `delete-claim 1 pt/health c/1`  
+- `delete-claim 1 pt/health c/1`
   Deletes the claim at index 1 in the health policy of the 1st client.
 
-- `delete-claim 2 pt/life c/2`  
+- `delete-claim 2 pt/life c/2`
   Deletes the claim at index 2 in the life policy of the 2nd client.
 
 ### 5.4.3 Editing a Claim: `edit-claim`
 Edits a specific claim in a policy for the client identified by the specified INDEX.
 
-**Format:**  
+**Format:**
 `edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/NEW_STATUS] [d/NEW_DESCRIPTION]`
 
 **Details:**
@@ -533,16 +533,16 @@ Edits a specific claim in a policy for the client identified by the specified IN
 > **Note:** At least one of `NEW_STATUS` or `NEW_DESCRIPTION` must be specified. If the claim details are unchanged or duplicate an existing claim, an error message will be shown.
 
 **Examples:**
-- `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`  
+- `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`
   Edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
 
-- `edit-claim 2 pt/life c/2 s/pending`  
+- `edit-claim 2 pt/life c/2 s/pending`
   Updates the status of the second claim in the life policy of the 2nd client to "pending."
 
 ### 5.4.4 Listing All Claims: `list-claims`
 Lists **all claims** under the specified policy type for the client identified by the index number used in the displayed client list.
 
-**Format:**  
+**Format:**
 `list-claims INDEX pt/POLICY_TYPE`
 
 **Details:**
