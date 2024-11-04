@@ -18,22 +18,34 @@ public class FeeTest {
 
     @Test
     public void testInvalidArguments_on_constructor() {
-        assertThrows(IllegalArgumentException.class, () -> new Fee(-1000));
-        assertThrows(IllegalArgumentException.class, () -> new Fee("a98a"));
+        // EP: exceed boundary values
         assertThrows(IllegalArgumentException.class, () -> new Fee(1000000));
         assertThrows(IllegalArgumentException.class, () -> new Fee("1000000"));
-        assertThrows(IllegalArgumentException.class, () -> new Fee("0"));
-        assertThrows(IllegalArgumentException.class, () -> new Fee("0000"));
         assertThrows(IllegalArgumentException.class, () -> new Fee(0));
+        assertThrows(IllegalArgumentException.class, () -> new Fee("0"));
+
+        // EP: negative values
+        assertThrows(IllegalArgumentException.class, () -> new Fee(-1000));
+        assertThrows(IllegalArgumentException.class, () -> new Fee("-1000"));
+
+        // EP: invalid strings
+        assertThrows(IllegalArgumentException.class, () -> new Fee("abcde"));
+        assertThrows(IllegalArgumentException.class, () -> new Fee("1sa"));
     }
 
     @Test
     public void testValidArguments_on_constructor() {
         try {
+            // EP: valid boundary values
             Fee fee1 = new Fee("999999");
             Fee fee2 = new Fee(999999);
-            Fee fee3 = new Fee("100");
-            Fee fee4 = new Fee(100);
+            Fee fee3 = new Fee("1");
+            Fee fee4 = new Fee(1);
+
+            // EP: Typical values
+            Fee fee5 = new Fee("500");
+            Fee fee6 = new Fee(300);
+
         } catch (Exception e) {
             fail();
         }
