@@ -53,7 +53,7 @@ public class BackupCommandTest {
         Path orignalAddressBook = TYPICAL_ADDRESSBOOK;
         Path backupAddressBook = BACKUP_ADDRESSBOOK_PRESENT;
         Model model = new ModelStub(orignalAddressBook, backupAddressBook);
-        String expectedMessage = BackupCommand.MESSAGE_SUCCESS;
+        String expectedMessage = BackupCommand.MESSAGE_SUCCESS + backupAddressBook.toString();
         BackupCommand backupCommand = new BackupCommand();
 
         assertCommandSuccess(backupCommand, model, expectedMessage, model);
@@ -67,7 +67,7 @@ public class BackupCommandTest {
         deleteIfPresent(backupAddressBook);
         deleteIfPresent(MISSING_BACKUP_FILE);
         Model model = new ModelStub(orignalAddressBook, backupAddressBook);
-        String expectedMessage = BackupCommand.MESSAGE_SUCCESS;
+        String expectedMessage = BackupCommand.MESSAGE_SUCCESS + backupAddressBook.toString();
         BackupCommand backupCommand = new BackupCommand();
 
         assertCommandSuccess(backupCommand, model, expectedMessage, model);
