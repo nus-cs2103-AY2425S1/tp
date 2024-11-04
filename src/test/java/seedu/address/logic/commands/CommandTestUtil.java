@@ -90,7 +90,7 @@ public class CommandTestUtil {
     public static final String INVALID_MEDICATION_DESC = " " + PREFIX_MEDICATION + "$<>"; // Only a-z and .()/- allowed
 
     // Only a-z and .()/- allowed
-    public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "$<>";
+    public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "\t";
     public static final String INVALID_START_DATETIME = "10/11/2024"; // Only 0-9 and - allowed
     public static final String INVALID_END_DATETIME = "10-11-202?"; // Only 0-9 and - allowed
     public static final String INVALID_START_DATETIME_DESC = " " + PREFIX_START + INVALID_START_DATETIME;
