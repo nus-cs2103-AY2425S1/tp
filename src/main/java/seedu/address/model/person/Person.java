@@ -90,8 +90,10 @@ public class Person {
      * @return A {@code Customer} instance with default values for other fields.
      */
     public static Person getGuest(Name n, Phone p) {
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("Customer"));
         return new Customer(n, p, new Email(), new Address(), new Information(),
-                new Remark(), Collections.emptySet());
+                new Remark(), tags);
     }
 
     /**
@@ -102,8 +104,10 @@ public class Person {
      * @return A {@code Supplier} instance with default values for other fields.
      */
     public static Person getSupplier(Name n, Phone p) {
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("Supplier"));
         return new Supplier(n, p, new Email(), new Address(), new Ingredients(new ArrayList<>()),
-                new Remark(), Collections.emptySet());
+                new Remark(), tags);
     }
 
     public Name getName() {

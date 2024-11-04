@@ -40,7 +40,7 @@ public class AddSupplyOrderCommandParser implements Parser<AddSupplyOrderCommand
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse(null));
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse("Guest Supplier"));
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
 
         String[] splitArgs = argMultimap.getValue(PREFIX_ORDER).orElse("").split("\\s+");

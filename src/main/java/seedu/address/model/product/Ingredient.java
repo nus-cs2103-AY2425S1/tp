@@ -5,6 +5,10 @@ package seedu.address.model.product;
  * Used as a building block for other products like {@code Pastry}.
  */
 public class Ingredient extends Product {
+    // Default constructor for Jackson
+    public Ingredient() {
+        super(0, "", 0.0);  // Default values for the fields
+    }
 
     /**
      * Constructs an {@code Ingredient} with specified ID, name, and cost.

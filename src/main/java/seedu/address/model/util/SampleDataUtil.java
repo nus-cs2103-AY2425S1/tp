@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -64,6 +66,14 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
+    public static CustomerOrderList getSampleCustomerOrderList() {
+        return new CustomerOrderList();
+    }
+
+    public static SupplyOrderList getSampleSupplyOrderList() {
+        return new SupplyOrderList();
+    }
+
     /**
      * Returns a tag set containing the list of strings given.
      */
@@ -108,6 +118,24 @@ public class SampleDataUtil {
     // Method to retrieve default pastries
     public static List<Pastry> getDefaultPastries() {
         return new ArrayList<>(defaultPastries);  // Defensive copy to prevent modification
+    }
+
+    // Method to retrieve a sample IngredientCatalogue with default ingredients
+    public static IngredientCatalogue getSampleIngredientCatalogue() {
+        IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
+        for (Ingredient ingredient : defaultIngredients.values()) {
+            ingredientCatalogue.addIngredient(ingredient);
+        }
+        return ingredientCatalogue;
+    }
+
+    // Method to retrieve a sample PastryCatalogue with default pastries
+    public static PastryCatalogue getSamplePastryCatalogue() {
+        PastryCatalogue pastryCatalogue = new PastryCatalogue();
+        for (Pastry pastry : defaultPastries) {
+            pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
+        }
+        return pastryCatalogue;
     }
 
 }
