@@ -18,6 +18,7 @@ This user guide will walk you through:
 
 By the end of this guide, you'll be a ResearchRoster pro, saving time and streamlining your research process.​
 
+--------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
 {:toc}
