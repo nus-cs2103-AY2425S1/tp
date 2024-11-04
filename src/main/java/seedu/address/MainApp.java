@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -21,6 +22,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.util.SampleDataUtil;
@@ -52,6 +56,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
@@ -63,10 +68,13 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        IngredientCatalogueStorage ingredientCatalogueStorage = new JsonIngredientCatalogueStorage(config.getIngredientCatalogueFilePath());
+        PastryCatalogueStorage pastryCatalogueStorage = new JsonPastryCatalogueStorage(config.getPastryCatalogueFilePath());
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         CustomerOrderListStorage customerOrderListStorage = new JsonCustomerOrderListStorage(userPrefs.getCustomerOrderListFilePath());
         SupplyOrderListStorage supplyOrderListStorage = new JsonSupplyOrderListStorage(userPrefs.getSupplyOrderListFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, customerOrderListStorage, supplyOrderListStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, ingredientCatalogueStorage, pastryCatalogueStorage, customerOrderListStorage, supplyOrderListStorage);
+
 
         model = initModelManager(storage, userPrefs);
 
@@ -76,28 +84,34 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address book, userPrefs, ingredientCatalogue, and pastryCatalogue.
+     * Sample data is used if any data is not found, or an empty address book if errors occur.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
+        // Initialize AddressBook
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
             addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
-            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            if (!addressBookOptional.isPresent()) {
+                logger.info("Address book file not found. Starting with sample data.");
+            }
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded. Starting with an empty AddressBook.");
             initialData = new AddressBook();
         }
 
+        // Initialize IngredientCatalogue
+        IngredientCatalogue ingredientCatalogue;
+        try {
+            ingredientCatalogue = storage.readIngredientCatalogue().orElseGet(SampleDataUtil::getSampleIngredientCatalogue);
+        } catch (DataLoadingException e) {
+            logger.warning("Could not load ingredient catalogue data. Using default sample catalogue.");
+            ingredientCatalogue = SampleDataUtil.getSampleIngredientCatalogue();
+        }
         Optional<CustomerOrderList> customerOrderListOptional;
         CustomerOrderList initialCustomerOrderListData;
         try {
@@ -131,96 +145,84 @@ public class MainApp extends Application {
         return new ModelManager(initialData, userPrefs, initialCustomerOrderListData, initialSupplyOrderListData);
     }
 
-    private void initLogging(Config config) {
-        LogsCenter.init(config);
+        // Initialize PastryCatalogue
+        PastryCatalogue pastryCatalogue;
+        try {
+            pastryCatalogue = storage.readPastryCatalogue().orElseGet(SampleDataUtil::getSamplePastryCatalogue);
+        } catch (DataLoadingException e) {
+            logger.warning("Could not load pastry catalogue data. Using default sample catalogue.");
+            pastryCatalogue = SampleDataUtil.getSamplePastryCatalogue();
+        }
+
+        // Return the ModelManager with the loaded data
+        return new ModelManager(initialData, userPrefs, ingredientCatalogue, pastryCatalogue, storage);
     }
 
-    /**
-     * Returns a {@code Config} using the file at {@code configFilePath}. <br>
-     * The default file path {@code Config#DEFAULT_CONFIG_FILE} will be used instead
-     * if {@code configFilePath} is null.
-     */
-    protected Config initConfig(Path configFilePath) {
-        Config initializedConfig;
-        Path configFilePathUsed;
 
-        configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
+
+
+    private Config initConfig(Path configFilePath) {
+        Config initializedConfig;
+        Path configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
         if (configFilePath != null) {
-            logger.info("Custom Config file specified " + configFilePath);
+            logger.info("Custom Config file specified: " + configFilePath);
             configFilePathUsed = configFilePath;
         }
 
-        logger.info("Using config file : " + configFilePathUsed);
-
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
-            if (!configOptional.isPresent()) {
-                logger.info("Creating new config file " + configFilePathUsed);
-            }
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
-            logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
-                    + " Using default config properties.");
+            logger.warning("Config file at " + configFilePathUsed + " could not be loaded. Using default config.");
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save config file: " + StringUtil.getDetails(e));
         }
         return initializedConfig;
     }
 
-    /**
-     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
-     * or a new {@code UserPrefs} with default configuration if errors occur when
-     * reading from the file.
-     */
-    protected UserPrefs initPrefs(UserPrefsStorage storage) {
+    private void initLogging(Config config) {
+        LogsCenter.init(config);
+    }
+
+    private UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
         logger.info("Using preference file : " + prefsFilePath);
 
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
-            if (!prefsOptional.isPresent()) {
-                logger.info("Creating new preference file " + prefsFilePath);
-            }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
-            logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                    + " Using default preferences.");
+            logger.warning("Preference file at " + prefsFilePath + " could not be loaded. Using default preferences.");
             initializedPrefs = new UserPrefs();
         }
-
-        // Update prefs file in case it was missing to begin with or there are new/unused fields
-        // try {
-        //     storage.saveUserPrefs(initializedPrefs);
-        // } catch (IOException e) {
-        //     logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
-        // }
 
         return initializedPrefs;
     }
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting AddressBook " + VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("Stopping application and saving data");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveIngredientCatalogue(model.getIngredientCatalogue());
+            storage.savePastryCatalogue(model.getPastryCatalogue());
             storage.saveCustomerOrderList(model.getCustomerOrderList());
             storage.saveSupplyOrderList(model.getSupplyOrderList());
         } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+            logger.severe("Failed to save data on application stop: " + e.getMessage());
         }
     }
 }

@@ -8,23 +8,32 @@ import java.util.NoSuchElementException;
 
 /**
  * Catalogue for managing ingredients. Provides methods to add and retrieve ingredients
- * by ID or name, and initializes with a set of default ingredients.
+ * by ID or name, and initializes with a set of default ingredients if no data is loaded.
  */
 public class IngredientCatalogue extends Catalogue {
 
     private final Map<String, Ingredient> ingredientByName = new HashMap<>();
-    public static Ingredient FLOUR = SampleDataUtil.getDefaultIngredients().get(1);
-    public static Ingredient SUGAR = SampleDataUtil.getDefaultIngredients().get(2);
-    public static Ingredient STRAWBERRY = SampleDataUtil.getDefaultIngredients().get(3);
-    public static Ingredient CHOCOLATE = SampleDataUtil.getDefaultIngredients().get(4);
-    public static Ingredient CHEESE = SampleDataUtil.getDefaultIngredients().get(5);
-    public static Ingredient CREAM = SampleDataUtil.getDefaultIngredients().get(6);
 
     /**
-     * Initializes the ingredient catalogue with default ingredients.
+     * Initializes the ingredient catalogue with provided ingredients.
+     * If no ingredients are provided, initializes with default ingredients.
      */
+    // New constructor to initialize with a given Map of ingredients
+    public IngredientCatalogue(Map<Integer, Ingredient> ingredients) {
+        for (Ingredient ingredient : ingredients.values()) {
+            addIngredient(ingredient);
+        }
+    }
+
+    // Existing no-arg constructor remains for default initialization
     public IngredientCatalogue() {
-        // Populate catalogue with default ingredients from SampleDataUtil
+        this(SampleDataUtil.getDefaultIngredients());
+    }
+
+    /**
+     * Initializes with default ingredients.
+     */
+    private void initializeWithDefaultIngredients() {
         Map<Integer, Ingredient> defaultIngredients = SampleDataUtil.getDefaultIngredients();
         for (Ingredient ingredient : defaultIngredients.values()) {
             addIngredient(ingredient);
@@ -72,4 +81,3 @@ public class IngredientCatalogue extends Catalogue {
         throw new NoSuchElementException("Ingredient with ID " + id + " not found.");
     }
 }
-

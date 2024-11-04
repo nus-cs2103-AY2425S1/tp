@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
+import seedu.address.storage.Storage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -31,21 +33,22 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
-    private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
+    private final PastryCatalogue pastryCatalogue;
+    private final IngredientCatalogue ingredientCatalogue;
     private final SupplyOrderList supplyOrderList;
     private final CustomerOrderList customerOrderList;
     private final ObservableList<SupplyOrder> supplyOrderObservableList;
     private final ObservableList<CustomerOrder> customerOrderObservableList;
-    private final Inventory inventory = new Inventory(ingredientCatalogue);
+    private final Inventory inventory;
+    private final Storage storage;  // Add Storage as a field
 
-    /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, CustomerOrderList customerOrderList, SupplyOrderList supplyOrderList) {
-        requireAllNonNull(addressBook, userPrefs);
-        logger.fine("Initializing with address book: " + addressBook
-                + " and user prefs " + userPrefs);
+
+    // Constructor that accepts IngredientCatalogue, PastryCatalogue, and Storage
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        IngredientCatalogue ingredientCatalogue, PastryCatalogue pastryCatalogue, Storage storage，CustomerOrderList customerOrderList, SupplyOrderList supplyOrderList) {
+        requireAllNonNull(addressBook, userPrefs, ingredientCatalogue, pastryCatalogue, storage);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -55,10 +58,18 @@ public class ModelManager implements Model {
         this.supplyOrderObservableList = supplyOrderList.getOrders();
         this.customerOrderObservableList = customerOrderList.getOrders();
         associateOrdersWithPersons();
+
+        // Initialize catalogues and storage
+        this.ingredientCatalogue = ingredientCatalogue;
+        this.pastryCatalogue = pastryCatalogue;
+        this.storage = storage;
+
+        // Initialize inventory with the ingredient catalogue
+        this.inventory = new Inventory(ingredientCatalogue);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new CustomerOrderList(), new SupplyOrderList());
+        this(new AddressBook(), new UserPrefs(), new IngredientCatalogue(), new PastryCatalogue(), new CustomerOrderList(), new SupplyOrderList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -145,10 +156,6 @@ public class ModelManager implements Model {
 
     //=========== Filtered Person List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
@@ -165,12 +172,9 @@ public class ModelManager implements Model {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof ModelManager)) {
             return false;
         }
-
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
@@ -182,6 +186,14 @@ public class ModelManager implements Model {
     @Override
     public void addPastry(Pastry pastry) {
         pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
+        if (storage != null) {
+            try {
+                storage.savePastryCatalogue(pastryCatalogue);
+                logger.info("Pastry catalogue saved successfully after adding pastry: " + pastry.getName());
+            } catch (IOException e) {
+                logger.warning("Failed to save pastry catalogue: " + e.getMessage());
+            }
+        }
     }
 
     @Override
@@ -192,6 +204,14 @@ public class ModelManager implements Model {
     @Override
     public void addIngredient(Ingredient ingredient) {
         ingredientCatalogue.addIngredient(ingredient);
+        if (storage != null) {
+            try {
+                storage.saveIngredientCatalogue(ingredientCatalogue);
+                logger.info("Ingredient catalogue saved successfully after adding ingredient: " + ingredient.getName());
+            } catch (IOException e) {
+                logger.warning("Failed to save ingredient catalogue: " + e.getMessage());
+            }
+        }
     }
 
     @Override
