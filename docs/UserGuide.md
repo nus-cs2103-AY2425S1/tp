@@ -113,7 +113,7 @@ Examples:
 
 Finds suppliers whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]`
+Format: `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -121,14 +121,14 @@ Format: `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Optionally, one of the category "CONSUMABLES", "LIFESTYLE", "SPECIALTY" can be specified to search for suppliers which has goods which has the specified category. If the category is specified, the keywords are optional.
+* Optionally, a selection of categories "CONSUMABLES", "LIFESTYLE", "SPECIALTY" can be specified to search for suppliers which has goods which has at least one of the specified category. If the category is specified, the keywords are optional.
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 * `find alex c/LIFESTYLE`
-* `find c/CONSUMABLES`
+* `find c/CONSUMABLES c/LIFESTYLE`
 
 ### Deleting a supplier : `delete`
 
@@ -156,6 +156,8 @@ Format: `exit`
 ### Adding of Goods : `addgoods`
 
 To be added.
+
+Note: The goods category of goods will be reflected on the supplier as a tag. For instance, if a supplier has a goods which has a goods category of "CONSUMABLES", a "CONSUMABLES" tag will be added to the supplier (visually). The tag information of the supplier remains as it is.
 
 ### Deletion of Goods : `deletegoods`
 
@@ -207,7 +209,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete NAME`<br> e.g., `delete Amy`
 **Edit** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee`
-**Find** | `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]`<br> e.g., `find James Jake c/CONSUMABLES`
+**Find** | `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`<br> e.g., `find James Jake c/CONSUMABLES`
 **List** | `list`
 **Help** | `help`
 **Add Goods** | `addgoods`
