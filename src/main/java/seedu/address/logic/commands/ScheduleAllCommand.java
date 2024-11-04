@@ -11,7 +11,7 @@ import seedu.address.model.Model;
  */
 public class ScheduleAllCommand extends Command {
 
-    public static final String COMMAND_WORD = "schedule_all";
+    public static final String COMMAND_WORD = "scheduleall";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays all appointments for all days.\n"
