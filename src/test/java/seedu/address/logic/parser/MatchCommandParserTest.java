@@ -1,13 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.MatchCommand;
 
 public class MatchCommandParserTest {
@@ -36,7 +36,7 @@ public class MatchCommandParserTest {
 
     @Test
     public void parse_invalidIndex_failure() {
-        String expectedMessage = Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
+        String expectedMessage = MESSAGE_INVALID_INDEX;
 
         // Arguments not number
         assertParseFailure(parser, "one one", expectedMessage);
