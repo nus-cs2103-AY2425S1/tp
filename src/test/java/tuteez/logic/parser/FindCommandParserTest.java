@@ -1,6 +1,8 @@
 package tuteez.logic.parser;
 
-import static tuteez.logic.Messages.*;
+import static tuteez.logic.Messages.MESSAGE_EMPTY_KEYWORD;
+import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_MISSING_PREFIX_FOR_FIND;
 import static tuteez.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
