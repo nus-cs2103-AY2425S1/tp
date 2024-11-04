@@ -50,11 +50,14 @@ public class ExportCommandTest {
     public void createDirectories_invalidPath_exception() {
         // Get the project root directory path
         String projectDir = System.getProperty("user.dir");
-        String invalidPath = projectDir + "/invalid:path/with*illegal?chars/test.csv";
+        String invalidPath = String.format("%s%s%s",
+            projectDir,
+            File.separator,
+            // Characters that are illegal on both Windows and Unix
+            "\0illegal\0path.csv");
 
         ExportCommand exportCommand = new ExportCommand(invalidPath);
-        assertCommandFailure(exportCommand, model, "Failed to create directory structure for: "
-            + invalidPath);
+        assertCommandFailure(exportCommand, model, "Error writing to the CSV file: Invalid file path");
     }
 
     /**
