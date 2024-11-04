@@ -1,13 +1,20 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.HashSet;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
+import seedu.address.model.tag.Tag;
 
 /**
  * A Detail Panel that displays individual person details in the UI.
@@ -27,6 +34,10 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
      * The FXML file that represents the layout of the DetailPanel.
      */
     private static final String FXML = "DetailPanel.fxml";
+
+    private static Person defaultPerson = new Person(new Name("example person"), new Phone("12345678"),
+            new Email("example@example.com"), new Role("brUdder"), new Major("cs"), new Address("example address"),
+            new HashSet<Tag>());
 
     @FXML
     private Label name;
@@ -67,6 +78,9 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
      *
      */
     public void updateDetails() {
+        if (this.person == null) {
+            this.person = defaultPerson;
+        }
         name.setText(person.getName().fullName);
         id.setText("ID\t\t: " + displayedIndex);
         phone.setText("Phone\t: " + person.getPhone().value);
