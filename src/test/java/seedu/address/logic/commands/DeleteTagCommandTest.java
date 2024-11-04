@@ -25,7 +25,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.TypicalTags;
 
 /**
  * Contains tests for DeleteTagCommand.
