@@ -291,8 +291,6 @@ You can filter the customer list by tags or shortcuts to view only the relevant 
 
 This guide should help you streamline your tagging process and make filtering contacts more efficient!
 
-Here's the updated entry for the `download` command with the `t/` prefix for tags:
-
 ---
 
 ### **Downloading Data: `download`**  
