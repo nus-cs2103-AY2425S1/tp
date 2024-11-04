@@ -106,21 +106,12 @@ public class PersonPredicateBuilder {
      * in this object.
      */
     public Predicate<Person> build() {
-        // guarantee immutability: copy all internal fields
-        List<String> nameKeywordsCopy = new ArrayList<>(nameKeywords);
-        List<String> classIdKeywordsCopy = new ArrayList<>(classIdKeywords);
-        List<String> monthPaidKeywordsCopy = new ArrayList<>(monthPaidKeywords);
-        List<String> notMonthPaidKeywordsCopy = new ArrayList<>(notMonthPaidKeywords);
-        boolean isSetNameCopy = isSetName;
-        boolean isSetClassIdCopy = isSetClassId;
-        boolean isSetMonthPaidCopy = isSetMonthPaid;
-        boolean isSetNotMonthPaidCopy = isSetNotMonthPaid;
         return person -> {
-            boolean nameMatch = nameContainsKeywords(person, isSetNameCopy, nameKeywordsCopy);
-            boolean classIdMatch = classIdContainsKeywords(person, isSetClassIdCopy, classIdKeywordsCopy);
-            boolean monthPaidMatch = monthPaidContainsKeywords(person, isSetMonthPaidCopy, monthPaidKeywordsCopy);
+            boolean nameMatch = nameContainsKeywords(person, isSetName, nameKeywords);
+            boolean classIdMatch = classIdContainsKeywords(person, isSetClassId, classIdKeywords);
+            boolean monthPaidMatch = monthPaidContainsKeywords(person, isSetMonthPaid, monthPaidKeywords);
             boolean notMonthPaidMatch = notMonthPaidContainsKeywords(
-                    person, isSetNotMonthPaidCopy, notMonthPaidKeywordsCopy);
+                    person, isSetNotMonthPaid, notMonthPaidKeywords);
 
             return nameMatch && classIdMatch && monthPaidMatch && notMonthPaidMatch;
         };
