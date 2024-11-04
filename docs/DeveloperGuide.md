@@ -560,9 +560,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting an elderly
 
-1. Deleting an elderly while all elderlies are listed in the `personList`.
+1. Deleting an elderly while all elderly are listed in the `personList`.
 
-   1. Prerequisites: List all elderlies using the `list` command. There must be at least one elderly in the list.
+   1. Prerequisites: List all elderly using the `list` command. There must be at least one elderly in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First elderly shown in the list is deleted from the list. Details of the deleted elderly are displayed in the status message. Timestamp in the status bar is updated.
@@ -575,18 +575,18 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding an elderly
 1. Finding an elderly by name
-    1. Prerequisites: List all elderlies using the `list` command. Multiple elderlies in the list.
+    1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
     2. Test case: `find Alice`<br>
-       Expected: Elderlies with the name `Alice` are shown in the list. Other elderlies are hidden.
+       Expected: Elderly with the name `Alice` are shown in the list. Other elderly are hidden.
 
 2. Finding an elderly by NRIC
-   1. Prerequisites: List all elderlies using the `list` command. Multiple elderlies in the list.
+   1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
    2. Test case: `find S6516486H`<br>
-        Expected: The elderly with the NRIC `S6516486H` is shown in the list. Other elderlies are hidden.
+        Expected: The elderly with the NRIC `S6516486H` is shown in the list. Other elderly are hidden.
 
 ### Marking an elderly as called
 1. Mark an elderly as called by index
-   1. Prerequisites: List all elderlies using the `list` command.
+   1. Prerequisites: List all elderly using the `list` command.
    2. Test case: `mark 1`<br>
     Expected: The elderly at index 1 is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
 2. Mark an elderly as called by NRIC
@@ -595,7 +595,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Call history of an elderly
 1. Viewing call history of an elderly by index
-   1. Prerequisites: List all elderlies using the `list` command. Multiple elderlies in the list.
+   1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
    2. Test case: `history 2`<br>
       Expected: The list is updated to show the call history of the elderly at index 2.
 2. Viewing call history of a elderly by NRIC
