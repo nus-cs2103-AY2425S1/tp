@@ -39,7 +39,10 @@ public class DateUtil {
     }
 
     /**
-     * Returns a formatted local date in the form of MMMM dd, yyyy, hh:mm a.
+     * Returns a formatted local date in the form of month date, year, time.
+     *
+     * @param appointmentDateTime the date and time to be formatted.
+     * @return a formatted string.
      */
     public static String formatDateTimeForDisplay(LocalDateTime appointmentDateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm a");

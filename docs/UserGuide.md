@@ -173,8 +173,10 @@ Adds a person to the address book.
 
 **Examples**:
 
-- `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering`
-- `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/criminal`
+- `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering` 
+  adds a person named `John Doe` with phone number `98765432`, email `johnd@example.com`, and address `John street, block 123, #01-01`, and status `recovering`.
+- `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/criminal` adds a person named `Betsy Crowe` with email `betsycrowe@example.com`, address `Newgate 
+  Prison`, phone number `1234567`, status `recovered`, and the tags `friend` and `criminal`.
 
 <br>
 
@@ -246,8 +248,8 @@ Deletes the specified person from the address book.
 
 **Examples**:
 
-- `list` followed by `delete person 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete person 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete person 2` deletes the second person in the list.
+- `find Betsy` followed by `delete person 1` deletes the first person in the results of the `find` command.
 
 <br>
 
@@ -283,7 +285,7 @@ Clears all entries from the address book after a validation check from the user.
 Adds an appointment to the DocTrack. 
 
 **Format**: `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`
-- The format of `DATE_TIME` is `YYYY-MM-DD HH:MM`. For example, `2025-03-20 10:30`.
+- The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
 
 **Examples**:
 
@@ -309,7 +311,7 @@ Edits an existing appointment in DocTrack.
 - Edits the appointment at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- The format of `DATE_TIME` is `YYYY-MM-DD HH:MM`. For example, `2025-03-20 10:30`.
+- The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
 
 **Examples**:
 
@@ -350,7 +352,9 @@ Deletes the specified appointment from DocTrack.
 
 **Examples**:
 
-- `list appt` followed by `delete appt 2` deletes the 2nd appointment in DocTrack.
+- `list appt` followed by `delete appt 2` deletes the second appointment in the list of appointments.
+- `find appt d/2024-12-05` followed by `delete appt 1` deletes the first appointment in the results of the 
+  `find` command.
 
 <br>
 
