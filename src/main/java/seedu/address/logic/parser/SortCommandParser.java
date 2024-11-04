@@ -1,12 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.tag.Tag.isValidTagName;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
+
 /**
  * Parses input for sort and creates an instance of SortCommand
  */
@@ -31,7 +34,9 @@ public class SortCommandParser implements Parser<SortCommand> {
         // Extract the name and tag from the input
         String tag = matcher.group("tag");
         String sortOrder = matcher.group("sortOrder");
-
+        if (!isValidTagName(tag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
         if ((tag == null || tag.isEmpty())
                 || (sortOrder == null || sortOrder.isEmpty() || (!sortOrder.equalsIgnoreCase("ASC")
                         && !sortOrder.equalsIgnoreCase("DESC")))) {
