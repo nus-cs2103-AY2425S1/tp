@@ -319,6 +319,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When adding/editing a client after filtering**, the application resets to showing _all_ clients, and the filter may need to be applied again. This is to work around the issue that rises when the client that is added or edited may not match the filter and would not be shown to you which makes it confusing to understand if the command has been executed successfully.
 
 --------------------------------------------------------------------------------------------------------------------
 
