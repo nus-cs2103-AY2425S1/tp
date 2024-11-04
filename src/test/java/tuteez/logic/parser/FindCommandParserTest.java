@@ -1,6 +1,7 @@
 package tuteez.logic.parser;
 
-import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.*;
+import static tuteez.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
@@ -102,4 +103,20 @@ public class FindCommandParserTest {
                 + VALID_TAG_DESC_WITH_SPACE + VALID_LESSON_DESC_WITH_SPACE, expectedFindCommand);
     }
 
+    @Test
+    public void parse_noPrefixes_throwsParseException() {
+        String userInput = PREAMBLE_WHITESPACE + "some random words";
+        assertParseFailure(parser, userInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PREFIX_FOR_FIND));
+    }
+
+    @Test
+    public void parse_emptyKeywordAfterPrefix_throwsParseException() {
+        assertParseFailure(parser, " n/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_NAME));
+        assertParseFailure(parser, " a/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_ADDRESS));
+        assertParseFailure(parser, " t/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_TAG));
+        assertParseFailure(parser, " l/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_LESSON));
+
+        assertParseFailure(parser, " n/ a/ t/ l/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_NAME));
+    }
 }

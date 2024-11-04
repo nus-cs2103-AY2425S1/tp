@@ -21,6 +21,10 @@ public class Messages {
             "Person index must be a single, positive number (eg, '1', '2', '3').";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
 
+    public static final String MESSAGE_MISSING_PREFIX_FOR_FIND =
+            "Missing a valid prefix. Please input at least one of the following: n/NAME a/ADDRESS t/TAG l/LESSON";
+    public static final String MESSAGE_EMPTY_KEYWORD = "Keywords cannot be empty after inputting prefix %1$s";
+
     public static final String MESSAGE_REMARK_MULTIPLE_OPERATIONS =
             "Cannot add and delete remarks simultaneously. Please use only one operation at a time.";
     public static final String MESSAGE_REMARK_MISSING_COMMAND_TYPE =

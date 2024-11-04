@@ -1,6 +1,7 @@
 package tuteez.logic.parser;
 
-import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static java.util.Objects.requireNonNull;
+import static tuteez.logic.Messages.*;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -41,12 +43,18 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS,
                 PREFIX_TAG, PREFIX_LESSON);
 
+        boolean hasAtLeastOnePrefix = ArgumentTokenizer.checkHasAtLeastOnePrefix(argMultimap, PREFIX_NAME,
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_LESSON);
+        if (!hasAtLeastOnePrefix) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PREFIX_FOR_FIND));
+        }
+
         List<Predicate<Person>> predicates = createPredicates(argMultimap);
         CombinedPredicate combinedPredicate = new CombinedPredicate(predicates);
         return new FindCommand(combinedPredicate);
     }
 
-    private List<Predicate<Person>> createPredicates(ArgumentMultimap argMultimap) {
+    private List<Predicate<Person>> createPredicates(ArgumentMultimap argMultimap) throws ParseException {
         List<Predicate<Person>> predicates = new ArrayList<>();
 
         addPredicateIfPresent(argMultimap, predicates, PREFIX_NAME, NameContainsKeywordsPredicate::new);
@@ -58,16 +66,23 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     private <T extends Predicate<Person>> void addPredicateIfPresent(ArgumentMultimap argMultimap,
-        List<Predicate<Person>> predicates, Prefix prefix, Function<List<String>, T> predicateConstructor) {
+        List<Predicate<Person>> predicates, Prefix prefix, Function<List<String>, T> predicateConstructor)
+            throws ParseException {
         if (argMultimap.getValue(prefix).isPresent()) {
             predicates.add(parseWithPredicate(argMultimap, prefix, predicateConstructor));
         }
     }
 
-    private <T> T parseWithPredicate(
-            ArgumentMultimap argMultimap, Prefix prefix, Function<List<String>, T> predicateConstructor) {
-        return argMultimap.getValue(prefix)
-                .map(value -> predicateConstructor.apply(Arrays.asList(value.split("\\s+"))))
+    private <T> T parseWithPredicate (ArgumentMultimap argMultimap, Prefix prefix,
+                                      Function<List<String>, T> predicateConstructor) throws ParseException {
+        Optional<String> value = argMultimap.getValue(prefix);
+        String keywords = value.get();
+        if (keywords.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_EMPTY_KEYWORD, prefix));
+        }
+
+        return value
+                .map(v -> predicateConstructor.apply(Arrays.asList(v.split("\\s+"))))
                 .orElseGet(() -> predicateConstructor.apply(Collections.emptyList()));
     }
 }
