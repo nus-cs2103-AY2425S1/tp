@@ -38,8 +38,8 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
         Index index;
         try {
             index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
-        } catch (CommandException ce) {
-            throw new ParseException(String.format(MESSAGE_NON_POSITIVE_INDEX, DeleteTagCommand.MESSAGE_USAGE), ce);
+        } catch (CommandException | ParseException e) {
+            throw new ParseException(String.format(MESSAGE_NON_POSITIVE_INDEX, DeleteTagCommand.MESSAGE_USAGE), e);
         }
         Set<Tag> tagsToDelete = parseTagsToDelete(argumentMultimap.getAllValues(PREFIX_TAG));
 
