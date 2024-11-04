@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 /**
  * Exports a filtered list of goods
  */
-public class ExportFilterGoodsCommand extends Command {
+public class Export extends Command {
 
     public static final String COMMAND_WORD = "export";
 
@@ -21,7 +21,7 @@ public class ExportFilterGoodsCommand extends Command {
     /**
      * Creates an ExportFilterGoodsCommand to export filtered goods
      */
-    public ExportFilterGoodsCommand() {}
+    public Export() {}
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -37,7 +37,7 @@ public class ExportFilterGoodsCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ExportFilterGoodsCommand)) {
+        if (!(other instanceof Export)) {
             return false;
         }
         return true;
