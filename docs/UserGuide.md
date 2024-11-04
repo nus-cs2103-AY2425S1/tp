@@ -277,11 +277,11 @@ Format: `checkA [z/DoctorId] [y/Date]`
 * A _notification message_ will be output if there are no appointments found for the doctor.
 
 Examples:
-*  `checkA z/1 x/2024-12-31` <br>
+*  `checkA z/1 y/2024-12-31` <br>
    **Output**: <br>
    Appointment: `2024-12-31 15:23` for `00` (patient id) with `01` (doctor id). Remarks: `Third physiotherapy session`. <br>
    Appointment: `2024-12-31 16:23` for `00` (patient id) with `01` (doctor id). Remarks: `Fourth physiotherapy session`.
-*  `checkA z/1 x/2024-12-31` <br>
+*  `checkA z/1 y/2024-12-31` <br>
    **Output**: <br>
    No appointment found for Doctor: `Amy Bee`
 
@@ -289,7 +289,7 @@ Examples:
 
 Mark appointment of an existing doctor with the specified `DoctorId` in the MedDict database in address book.
 
-Format: `mark [z/DateTime] [z/PatientId] [z/DoctorId] `
+Format: `mark [x/DateTime] [z/PatientId] [z/DoctorId] `
 
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be output if there is failure in marking appointments.
@@ -306,7 +306,7 @@ Examples:
 
 Delete appointment of a existing patient for both patient and doctor with the specified `PatientId` and `DoctorId` in the MedDict database in address book.
 
-Format: `deleteA [z/DateTime] [z/PatientId] [z/DoctorId] `
+Format: `deleteA [x/DateTime] [z/PatientId] [z/DoctorId] `
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
