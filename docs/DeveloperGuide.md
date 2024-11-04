@@ -13,7 +13,8 @@
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -172,9 +173,13 @@ If the constraints are not met, the `AddCommandParser` will throw a `ParseExcept
 Otherwise, a new instance of `Student` is created with the values obtained from the user input. 
 A new instance of `AddCommand` is then created with the `Student` instance.
 
-On execution, {to be updated by dan / saha}
+On execution, `AddCommand` first queries the supplied model if it contains a student with both an identical name **and** an identical phone number. If no such student exists, `AddCommand` then calls on `model::addStudent` to add the student into the addressBook data.
 
+Finally, `AddCommand` queries the model to see if the student's schedule clashes with others in the address book. If conflicts are found, a warning message is displayed along with the conflicting students.
 
+Below is an activity diagram when [Adding a new student](#add-a-new-student)
+
+<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
 
 
 The following sequence diagram shows how an add operation goes through the `Logic` component:
@@ -189,27 +194,9 @@ The following sequence diagram shows how an add operation goes through the `Logi
 
 Similarly, how an AddCommand operation goes through the `Model` component is shown below:
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+<puml src="diagrams/AddSequenceDiagram-Model.puml" alt="AddSequenceDiagram-Model" height="500"/>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -226,11 +213,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Owe feature
 
-_{Explain here how the data archiving feature will be implemented}_
+The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
+<puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>
 
+#### Design considerations:
 
+**Aspect: How owe executes:**
+
+* **Alternative 1 (current choice):** Calculations for amount owed done by UGTeach.
+    * Pros: User friendly.
+    * Cons: May have performance issues due to the need to fetch data and perform calculations.
+
+* **Alternative 2:** Calculations for amount owed done by the user.
+    * Pros: Easy to implement.
+    * Cons: Might not be user-friendly as user would need to find out what is the 
+    tuition rate charged and calculate how much tuition fee did the student owe.
+
+<puml src="diagrams/OweSequenceDiagram-Model.puml" width="500" />
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -256,7 +257,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, track student performance, and organize schedules using CLI.
+**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, and organize schedules using CLI.
 
 
 ### User stories
@@ -377,29 +378,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 2b1-2b2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
 
-**Use case: UC06 - Receiving tuition fee from a student**
-
-**MSS**
-
-1. User requests to <ins>find a student(UC05)</ins>.
-2. User enters command to record payment received from the specified student after a lesson.
-3. System calculates the tuition fee paid by the student for the lesson.
-4. System updates the total tuition fee paid by the student.
-5. System displays success message.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
-* Use case resumes from step 1.
-
-* 2a. System detects error in entered command.
-    * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters new command.
-* Steps 2a1-2a2 are repeated until all details entered are correct.
-* Use case resumes from step 3.
 
 **Use case: UC05 - Find student entries**
 
@@ -419,6 +397,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 1a1-1a2 are repeated until all details entered are correct.
 * Use case resumes from step 2.
 
+
+**Use case: UC06 - Receiving tuition fee from a student**
+
+**MSS**
+
+1. User requests to <ins>find a student(UC05)</ins>.
+1. User enters command to record payment received from the specified student after a lesson.
+1. System updates the total tuition fee paid by the student.
+1. System displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System cannot find the specified student.
+    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
+* Use case resumes from step 1.
+
+* 2a. System detects error in entered command.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters new command.
+* Steps 2a1-2a2 are repeated until all details entered are correct.
+* Use case resumes from step 3.
+
+
+**Use case: UC07 - Settle outstanding fees for student**
+
+**MSS**
+
+1. User requests to <ins>find a student(UC05)</ins>.
+1. User enters command to settle outstanding fees for the specified student.
+1. System updates the total tuition fee paid and total tuition fee owed by the student.
+1. System displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System cannot find the specified student.
+    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
+* Use case resumes from step 1.
+
+* 2a. System detects error in entered command.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters new command.
+* Steps 2a1-2a2 are repeated until all details entered are correct.
+* Use case resumes from step 3.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -427,32 +453,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Data Requirements**
 1. All the data should be stored in human-editable files and must not be stored using DBMS. 
-2. Data should be saved permanently and not affected by any sudden accidents e.g., power outage, hardware breakdown.
+1. Data should be saved permanently and must not be affected by power outage.
 
 **Performance Requirements**
-1. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage. 
-2. For any simple usage, the application should be able to respond within 2 seconds.
+1. Should be able to hold up to 1000 students without any noticeable sluggishness in performance for typical usage. 
+1. For any simple usage, the application should be able to respond within 2 seconds.
 
 **Accessibility**
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-2. The user interface should be easy to navigate and intuitive, with clear labels, large enough texts, and highlighted error messages. 
-3. The application should provide clear help sections for users, explaining how to use its features.
+1. The user interface should work appear seamlessly for screens with standard resolutions (1920x1080) and higher.
+1. The user interface should be easy to navigate and intuitive, with clear labels, and large enough texts. 
+1. The application should provide clear help sections for users, explaining how to use its features.
 
 **Concurrency Control**
-1. Should only be used by one student at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
+1. Should only be used by one user at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
 
 **Testability**
 1. The software should not depend on any remote server and should be able to run at any time. 
-2. The application should be able to launch without an installer.
-3. Features should be testable without any external installation or access e.g., remote APIs, audio players, user accounts, internet connection. 
+1. The application should be able to launch without an installer.
+1. Features should be testable without any external access e.g., remote APIs, audio players, user accounts, internet connection, after the initial download of the application's jar file.
 
 **Security Requirements**
 1. The application is assumed to be used locally without creating any user account.
-2. Data stored in human-editable files is assumed to be highly secured and not damaged.
+1. Data stored in human-editable files is assumed to be highly secured and not damaged.
 
 **Maintainability Requirements**
 1. The codebase should be modular and well-documented (i.e. JavaDoc, following abstraction and cohesion) to ensure ease of maintenance and updates.
-2. The application must use a version control system to track changes and maintain multiple versions of the software.
+1. The application must use a version control system to track changes and maintain multiple versions of the software.
 
 **Logging**
 1. Activity Logs: The system should log all user activity and critical events for security auditing and troubleshooting.
