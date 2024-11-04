@@ -12,13 +12,14 @@ import java.util.Objects;
 public class NameWithoutNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphabetic characters and spaces, and it should not be blank";
+            "Names should only contain alphabetic characters and spaces, it should not be blank and "
+                    + "should only have one space in between words. The maximum character limit is 747";
 
     /*
      * The first character of the name must be alphabetic, and the rest
      * can only be alphabetic characters or spaces.
      */
-    public static final String VALIDATION_REGEX = "[a-zA-Z][a-zA-Z ]*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z]+( [a-zA-Z]+)*";
 
     public final String fullName;
 
@@ -37,7 +38,7 @@ public class NameWithoutNumber {
      * Returns true if a given string is a valid name without numbers.
      */
     public static boolean isValidNameWithoutNumber(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 747;
     }
 
     @Override
