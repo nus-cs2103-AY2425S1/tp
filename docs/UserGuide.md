@@ -745,9 +745,9 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     - **Description:** Provides additional information about a specific command or feature.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
+      > **Use Case #1**:
       >
-      > **Input**: `
+      > **Input**:
       >
       > **Output**:
       >
