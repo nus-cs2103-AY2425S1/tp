@@ -154,8 +154,9 @@
 
 .cell_rsvp_status_label {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 11px;
+    -fx-font-size: 13px;
     -fx-text-fill: -color-text-dark;
+    -fx-padding: 2, 1, 2, 1;
 }
 
 .stack-pane {

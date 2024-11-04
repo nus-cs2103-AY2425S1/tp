@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private TagListPanel tagListPanel;
+    private FiltersPanel filtersPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -55,6 +56,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private HBox tagListPanelPlaceholder;
+
+    @FXML
+    private HBox filtersPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -129,6 +133,9 @@ public class MainWindow extends UiPart<Stage> {
 
         tagListPanel = new TagListPanel(logic.getTagList());
         tagListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+
+        filtersPanel = new FiltersPanel(logic.getTagFiltersList(), logic.getStatusFiltersList());
+        filtersPanelPlaceholder.getChildren().add(filtersPanel.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

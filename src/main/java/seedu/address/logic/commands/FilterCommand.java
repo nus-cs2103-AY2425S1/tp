@@ -65,10 +65,13 @@ public class FilterCommand extends UndoableCommand {
             predicateSet.add(new RsvpedPredicate(status));
         }
 
+
         for (Predicate<Person> predicateToAdd: predicateSet) {
             predicate = predicate.and(predicateToAdd);
         }
 
+        model.addTagFilters(tagSet);
+        model.addStatusFilters(statusSet);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
@@ -77,6 +80,7 @@ public class FilterCommand extends UndoableCommand {
     @Override
     public void undo(Model model) {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.removeFilters(tagSet, statusSet);
         if (previousPredicate != null) {
             model.updateFilteredPersonList(previousPredicate);
         }

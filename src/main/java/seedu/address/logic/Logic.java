@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -48,6 +49,10 @@ public interface Logic {
      * Returns the user prefs' tag list.
      */
     ObservableList<Tag> getTagList();
+
+    ObservableList<Tag> getTagFiltersList();
+
+    ObservableList<RsvpStatus> getStatusFiltersList();
 
     /**
      * Set the user prefs' GUI settings.

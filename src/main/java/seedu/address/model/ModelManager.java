@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +30,8 @@ public class ModelManager implements Model {
     private FilteredList<Person> filteredPersons;
     private ObservableList<Tag> tagList;
     private Command previousCommand;
+    private ObservableList<Tag> tagFilters = FXCollections.observableArrayList();
+    private ObservableList<RsvpStatus> statusFilters = FXCollections.observableArrayList();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -279,6 +282,38 @@ public class ModelManager implements Model {
         @SuppressWarnings("unchecked")
         Predicate<Person> result = (Predicate<Person>) filteredPersons.getPredicate();
         return result;
+    }
+
+    @Override
+    public ObservableList<Tag> getTagFiltersList() {
+        return tagFilters;
+    }
+
+    @Override
+    public ObservableList<RsvpStatus> getStatusFiltersList() {
+        return statusFilters;
+    }
+
+    @Override
+    public void addTagFilters(Set<Tag> tagFilters) {
+        this.tagFilters.addAll(tagFilters);
+    }
+
+    @Override
+    public void addStatusFilters(Set<RsvpStatus> statusFilters) {
+        this.statusFilters.addAll(statusFilters);
+    }
+
+    @Override
+    public void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters) {
+        this.tagFilters.removeAll(tagFilters);
+        this.statusFilters.removeAll(statusFilters);
+    }
+
+    @Override
+    public void clearFilterSet() {
+        this.tagFilters.clear();
+        this.statusFilters.clear();
     }
 
     @Override

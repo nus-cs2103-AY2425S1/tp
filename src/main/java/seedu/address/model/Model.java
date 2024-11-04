@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -197,4 +198,31 @@ public interface Model {
     Predicate<Person> getCurrentPredicate();
 
     Command getPreviousCommand();
+
+    /**
+     * Returns the tag filter set as an observable list.
+     */
+    ObservableList<Tag> getTagFiltersList();
+
+    /**
+     * Returns the tag filter set as an observable list.
+     */
+    ObservableList<RsvpStatus> getStatusFiltersList();
+
+    /**
+     * Adds tag filters to the model.
+     */
+    void addTagFilters(Set<Tag> tagFilters);
+
+    /**
+     * Adds RSVP status filters to the model.
+     */
+    void addStatusFilters(Set<RsvpStatus> statusFilters);
+
+    void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters);
+    /**
+     *
+     * Clears the filter set in the model.
+     */
+    void clearFilterSet();
 }
