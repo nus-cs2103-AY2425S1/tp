@@ -42,13 +42,13 @@ jobs:
       - name: Upload tests artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: 'test-report'
+          name: 'test-report-${{ matrix.platform }}'
           path: 'build/reports/tests/test'
 
       - name: Upload checkstyle artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: 'checkstyle-report'
+          name: 'checkstyle-report-${{ matrix.platform }}'
           path: 'build/reports/checkstyle'
 
       - name: Upload coverage reports to Codecov
