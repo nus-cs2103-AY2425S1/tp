@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.grouplist.GroupList;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Person;
 
 /**

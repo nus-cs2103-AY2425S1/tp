@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.Group;
-import seedu.address.model.grouplist.GroupList;
+import seedu.address.model.list.GroupList;
 
 /**
  * Represents a Person in the address book.
@@ -70,7 +70,7 @@ public class Person {
      * if modification is attempted.
      */
     public GroupList getGroupList() {
-        return groups.makeUnmodifiable();
+        return groups.makeListUnmodifiable();
     }
 
     /**

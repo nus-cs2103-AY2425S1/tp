@@ -19,7 +19,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.grouplist.GroupList;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
@@ -228,7 +228,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<GroupList> getGroups() {
-            return (groups != null) ? Optional.of(groups.makeUnmodifiable()) : Optional.empty();
+            return (groups != null) ? Optional.of(groups.makeListUnmodifiable()) : Optional.empty();
         }
 
         @Override

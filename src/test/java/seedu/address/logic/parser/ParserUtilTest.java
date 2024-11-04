@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
-import seedu.address.model.grouplist.GroupList;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;

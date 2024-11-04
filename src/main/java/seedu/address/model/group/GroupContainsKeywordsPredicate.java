@@ -10,7 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.grouplist.GroupList;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Person;
 
 /**

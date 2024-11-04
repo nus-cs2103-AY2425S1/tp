@@ -6,9 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
@@ -17,8 +15,7 @@ import seedu.address.model.group.GroupContainsKeywordsPredicate;
  * Parses input arguments and creates a new ShowCommand object
  */
 public class ShowCommandParser implements Parser<ShowCommand> {
-    private static final String VALIDATION_REGEX = "^[a-z0-9 ]*$";
-    private static final Logger logger = LogsCenter.getLogger(ShowCommandParser.class);
+    private static final String VALIDATION_REGEX = "[^\\s].*";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ShowCommand

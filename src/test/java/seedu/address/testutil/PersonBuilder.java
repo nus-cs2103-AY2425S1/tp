@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.group.Group;
-import seedu.address.model.grouplist.GroupList;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
