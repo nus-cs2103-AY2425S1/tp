@@ -37,18 +37,14 @@ public class DateCommandParser implements Parser<DateCommand> {
 
             // Ensure that at least one identifier (name, phone, or email) is present
             if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
-                throw new ParseException(
-                        String.format("At least one identifier (name, phone, or email) must be provided.",
-                                MESSAGE_INVALID_COMMAND_FORMAT,
-                                DateCommand.MESSAGE_USAGE));
+                throw new ParseException("At least one identifier (name, phone, or email) must be provided. "
+                        + String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 
             // Check if the date prefix is present
             if (!areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
-                throw new ParseException(
-                        String.format("A date is required. Please include a date.",
-                                MESSAGE_INVALID_COMMAND_FORMAT,
-                                DateCommand.MESSAGE_USAGE));
+                throw new ParseException("A date is required. Please include a date. "
+                        + String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 
             Optional<String> name = argMultimap.getValue(PREFIX_NAME);

@@ -45,66 +45,43 @@ public class Date {
     }
 
     /**
-     * Validates a date string to ensure it follows the expected format and meets logical calendar constraints.
+     * Validates a date string, ensuring it follows the expected format and adheres to logical date constraints.
      * <p>
-     * The date string must match the pattern {@code 'd/M/yyyy HHmm'}, where:
+     * Expected format: {@code 'd/M/yyyy HHmm'} where:
      * <ul>
-     *      <li>
-     *          {@code d} - day of the month (1-31)
-     *      </li>
-     *      <li>
-     *          {@code M} - month of the year (1-12)
-     *      </li>
-     *      <li>
-     *          {@code yyyy} - 4-digit year
-     *      </li>
-     *      <li>
-     *          {@code HHmm} - time in 24-hour format,
-     *          where {@code HH} represents hours (00-23) and {@code mm} represents minutes (00-59)
-     *      </li>
+     * <li>{@code d} - day of the month (1-31)</li>
+     * <li>{@code M} - month of the year (1-12)</li>
+     * <li>{@code yyyy} - 4-digit year</li>
+     * <li>{@code HHmm} - time in 24-hour format (00-23 for hours, 00-59 for minutes)</li>
      * </ul>
      * Example valid input: {@code "2/12/2024 1800"}.
      * <p>
-     * This method verifies both the format and logical validity of the date, including:
+     * This method checks both format and calendar logic, including:
      * <ul>
-     * <li>Ensuring day-month-year combinations are accurate (e.g., February 29 is valid only in leap years).</li>
-     * <li>Checking month-specific maximum days (e.g., April has a maximum of 30 days).</li>
+     * <li>Day-month-year validity (e.g., February 29 is valid only in leap years).</li>
+     * <li>Month-specific day limits (e.g., April cannot exceed 30 days).</li>
      * </ul>
      *
      * @param date the date string to validate, in the format {@code "d/M/yyyy HHmm"}
-     * @throws ParseException if the date is incorrectly formatted or contains invalid values.
-     * <ul>
-     *     <li>
-     *         Throws {@code "Invalid date format! Please use 'd/M/yyyy HHmm'.
-     *         For example, '2/12/2024 1800'"} if the date format does not match.
-     *     </li>
-     *     <li>
-     *         Throws {@code "Invalid date or time values! Ensure day, month, hour, and minute ranges are correct."}
-     *         if the date format is correct but values exceed valid ranges.
-     *     </li>
-     *     <li>Throws with specific messages when day values exceed valid limits for certain months, such as:
-     *          <ul>
-     *              <li>
-     *                  {@code "Invalid date: February cannot have more than 29 days."} for invalid dates in February.
-     *              </li>
-     *              <li>
-     *                  {@code "Invalid date: April cannot have more than 30 days."} for invalid dates in April.
-     *              </li>
-     *          </ul>
-     *     </li>
-     * </ul>
+     * @throws ParseException if the date format is incorrect or if values exceed valid ranges:
+     *      <ul>
+     *          <li>{@code "Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'"}
+     *          if the format does not match.</li>
+     *          <li>{@code "Invalid date or time values! Ensure day, month, hour, and minute ranges are correct."}
+     *          for incorrect values.</li>
+     *          <li>Specific messages for day limits in certain months,
+     *          such as {@code "February cannot have more than 29 days."}</li>
+     *      </ul>
      */
     public static void checkDate(String date) throws ParseException {
         if (!date.matches(DATE_PATTERN) && !date.matches(FORMAT_PATTERN)) {
             throw new ParseException("Invalid date format! Please use 'd/M/yyyy HHmm'. "
                     + "For example, '2/12/2024 1800'.");
         }
-
         if (!date.matches(DATE_PATTERN)) {
             throw new ParseException("Invalid date or time values! "
                     + "Ensure day, month, hour, and minute ranges are correct.");
         }
-
         validateDateCalendarValue(date);
     }
 
@@ -114,16 +91,16 @@ public class Date {
      *
      * @param date the date string to validate, expected in the format {@code "d/M/yyyy HHmm"}
      * @throws ParseException if the date contains invalid day values based on month and year.
-     * <ul>
-     *     <li>
-     *         Throws {@code "Invalid date: [Month] cannot have more than [day limit] days."}
-     *         for months with restricted day counts.
-     *     </li>
-     *     <li>
-     *         Throws {@code "Invalid date: February [day] is only valid in leap years."}
-     *         if February 29 is specified in a non-leap year.
-     *     </li>
-     * </ul>
+     *      <ul>
+     *          <li>
+     *              Throws {@code "Invalid date: [Month] cannot have more than [day limit] days."}
+     *              for months with restricted day counts.
+     *          </li>
+     *          <li>
+     *              Throws {@code "Invalid date: February [day] is only valid in leap years."}
+     *              if February 29 is specified in a non-leap year.
+     *          </li>
+     *      </ul>
      */
     private static void validateDateCalendarValue(String date) throws ParseException {
         String[] dateAndTimeArray = date.split(" ");
@@ -149,7 +126,7 @@ public class Date {
                         + " is only valid in leap years.");
             } else if (dayValue > 29) {
                 throw new ParseException("Invalid date: "
-                        + Month.of(monthValue) 
+                        + Month.of(monthValue)
                         + " cannot have more than 29 days.");
             }
         }
