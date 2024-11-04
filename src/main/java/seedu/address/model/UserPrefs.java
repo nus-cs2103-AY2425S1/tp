@@ -17,7 +17,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private Path goodsFilePath = Paths.get("data", "goods.csv");
 
-    private Path filterGoodsFilePath = Paths.get("data", "filterGoods.csv");
+    private Path filterGoodsFilePath = Paths.get("data", "filteredGoods.csv");
 
     private Boolean exportFilterGoods = false;
 
