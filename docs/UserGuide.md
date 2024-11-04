@@ -70,52 +70,113 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]` 
     - **Description:** Creates a new buyer profile with specified details.
     - **Successful Execution:**
-      > **Use Case**:
+      > **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `john123@gmail.com`
+      >
+      > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
+      >
+      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: 
+      > 
+      > ---
+      > **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
+      >
+      > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
+      >
+      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+
+      **Failed Execution**
+      > **User Error #1**: Missing `NAME` field 
+      >
+      > **Input**: buyer p/91124444 e/bobby123@gmail.com
+      >
+      > **Output**: <br>
+      Invalid command format! <br>
+      buyer: Adds a buyer to the address book. <br> 
+      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+      > ---
+      > **User Error #2**: Missing `PHONE` field
+      >
+      > **Input**: buyer n/Bobby e/bobby123@gmail.com
+      >
+      > **Output**: <br>
+      Invalid command format! <br>
+      buyer: Adds a buyer to the address book. <br>
+      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com> 
+      > ---
+      > **User Error #3**: Missing `EMAIL` field
+      >
+      > **Input**: buyer n/Bobby p/91124444
+      >
+      > **Output**: <br>
+      Invalid command format! <br>
+      buyer: Adds a buyer to the address book. <br>
+      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+- #### **Add Seller Command**
+    - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
+    - **Description:** Creates a new seller profile with specified details.
+    - **Successful Execution:**
+      > **Use Case #1**: Adding a seller named `Bobby` with phone number `91124444` and email `john123@gmail.com`
+      >
+      > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com`
+      >
+      > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+      >
+      > ---
+      > **Use Case #2**: Adding a seller named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
+      >
+      > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
+      >
+      > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+      
+      **Failed Execution**
+      > **User Error #1**: Missing `NAME` field
+      >
+      > **Input**: seller p/91124444 e/bobby123@gmail.com
+      >
+      > **Output**: <br>
+        Invalid command format! <br>
+        seller: Adds a seller to the address book. <br>
+        Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+        Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+      > ---
+      > **User Error #2**: Missing `PHONE` field
+      >
+      > **Input**: seller n/Bobby e/bobby123@gmail.com
+      >
+      > **Output**: <br>
+        Invalid command format! <br>
+        seller: Adds a seller to the address book. <br>
+        Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+        Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com>
+      > ---
+      > **User Error #3**: Missing `EMAIL` field
+      >
+      > **Input**: seller n/Bobby p/91124444
+      >
+      > **Output**: <br>
+        Invalid command format! <br>
+        seller: Adds a seller to the address book. <br>
+        Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+        Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+
+- #### **Find Command**
+    - **Format:** `find KEYWORD [KEYWORD...]`
+    - **Description:** Finds the specified client(s) based on the provided keywords.
+    - **Successful Execution:**
+      > **Use Case**: 
       >
       > **Input**:
       >
       > **Output**:
-      
+
       **Failed Execution**
       > **User Error**:
       >
       > **Input**:
       >
       > **Output**:
-
-- #### **Add Seller Command**
-    - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
-    - **Description:** Creates a new seller profile with specified details.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
-
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
-
-- #### **Find Command**
-    - **Format:** `find KEYWORD [KEYWORD...]`
-    - **Description:** Finds the specified client(s) based on the provided keywords.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
-
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
 
 - #### **Edit Command**
     - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
@@ -135,8 +196,8 @@ Commands for creating, updating, and deleting buyers and sellers.
     > **Output**:
 
 - #### **Delete Client Command**
-    - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL>`
-    - **Description:** Creates a new client profile with specified details
+    - **Format:** `delete n/<NAME>`
+    - **Description:** Deletes the specified client profile.
   - **Successful Execution:**
     > **Use Case**:
     >
@@ -175,7 +236,6 @@ Commands for managing appointments between user and clients.
   > **Input**:
   >
   > **Output**:
-  > --- 
 
 - #### **Delete Appointment**
     - **Format:** `delapt n/<NAME>`
@@ -202,21 +262,22 @@ Commands for managing property listings and associating clients with listings.
 ![showListings](images/showListings.png)
 
 - #### **Add Listing**
-    - **Command:** `AddListingCommand`
-    - **Description:** Adds a new property listing with specified details.
+  - **Command:** `AddListingCommand`
+  - **Description:** Adds a new property listing with specified details.
   - **Successful Execution:**
-    > **Use Case**:
+    >   **Use Case**:
     >
-    > **Input**:
+    >   **Input**:
+    >
+    >   **Output**:
+
+    **Failed Execution**
+    >   **User Error**:
+    >
+    >   **Input**:
     >
     > **Output**:
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
 - #### **Show Listings**
     - **Command:** `ShowListingsCommand`
     - **Description:** Displays all current listings.
@@ -233,6 +294,8 @@ Commands for managing property listings and associating clients with listings.
     > **Input**:
     >
     > **Output**:
+    >
+    > 
 - #### **Add Buyers to Listing**
     - **Command:** `AddBuyersToListingCommand`
     - **Description:** Associates buyers with a specified listing.
@@ -399,154 +462,8 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     > **Input**:
     >
     > **Output**:
+
 ---
-
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-#### Command Format
-<div class="command-box">
-help
-</div>
-
-### Adding a Person: `add`
-
-Adds a person to the address book.
-
-#### Command Format
-<div class="command-box">
-add n/NAME p/PHONE_NUMBER e/EMAIL
-</div>
-
-
-
-
-### Listing all Persons : `list`
-
-Shows a list of all persons in the address book.
-
-#### Command Format
-<div class="command-box">
-list
-</div>
-
-### Editing a Person : `edit`
-
-Edits an existing person in the address book.
-
-#### Command Format
-<div class="command-box">
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
-</div>
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-
-#### Successful Execution
-**Example 1**
-> **Use Case**: Editing phone number and email address of the 1st person in the list to be `91234567` and `johndoe@example.com` respectively.
->
-> **Input**:  `edit 1 p/91234567 e/johndoe@example.com`
->
-> **Output**:
-
-**Example 2**
-> **Use Case**: Editing the name of the 2nd person in the list to be `Betsy Crower`.
->
-> **Input**: `edit 2 n/Betsy Crower`
->
-> **Output**:
-
-#### Failed Execution
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-#### Command Format
-<div class="command-box">
-find KEYWORD [MORE_KEYWORDS]
-</div>
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-#### Successful Execution
-**Example 1**
-> **Use Case**: Finding all clients with `John` in their names.
->
-> **Input**: `find John`
->
-> **Output**:
-
-**Example 2**
-> **Use Case**: Finding all clients with `Alex` *OR* `David` in their names.
->
-> **Input**: `find alex david`
->
-> **Output**: 2 persons listed!
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-#### Failed Execution
-**Example 1**
-> **User Error**: Attempting to find a user that does not exist.
->
-> **Input**: `find BabyLockEmDoors`
->
-> **Output**:
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-#### Command Format
-<div class="command-box">
-delete n/NAME
-</div>
-
-* Deletes the person with the specified `NAME`.
-
-#### Successful Execution
-**Example**
-> **Use Case**: Deleting `John Doe` from the address book.
->
-> **Input**: `delete n/John Doe`
->
-> **Output**:
-
-#### Failed Execution
-**Example**
-> **User Error**: Attempting to delete someone that does not exist.
->
-> **Input**:
->
-> **Output**:
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-#### Command Format
-<div class="command-box">
-clear
-</div>
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-#### Command Format
-<div class="command-box">
-exit
-</div>
 
 ### Saving the data
 
