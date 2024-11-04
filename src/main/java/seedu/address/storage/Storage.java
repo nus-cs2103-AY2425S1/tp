@@ -17,7 +17,8 @@ import seedu.address.model.order.SupplyOrderList;
  * API of the Storage component
  */
 
-public interface Storage extends AddressBookStorage, UserPrefsStorage, CustomerOrderListStorage, SupplyOrderListStorage，IngredientCatalogueStorage, PastryCatalogueStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage, CustomerOrderListStorage, SupplyOrderListStorage
+        , IngredientCatalogueStorage, PastryCatalogueStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
