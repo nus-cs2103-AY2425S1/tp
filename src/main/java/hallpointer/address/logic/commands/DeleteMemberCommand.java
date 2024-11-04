@@ -11,18 +11,18 @@ import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
 
 /**
- * Deletes a member identified using its displayed index from the CCA system.
+ * Deletes the member identified using its displayed index number from the CCA system.
  */
 public class DeleteMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_member";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the member identified by the index number used in the displayed member list.\n"
+            + ": Deletes the member in the displayed member list that matches the given index number.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Member %1$s with room %2$s and Telegram Handle %3$s "
+    public static final String MESSAGE_SUCCESS = "Member %1$s with room %2$s and Telegram username %3$s "
             + "deleted successfully.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
 
@@ -48,8 +48,8 @@ public class DeleteMemberCommand extends Command {
 
         // Success message with name, room, and telegram details
         return new CommandResult(
-            String.format(MESSAGE_DELETE_MEMBER_SUCCESS,
-                memberToDelete.getName().fullName,
+            String.format(MESSAGE_SUCCESS,
+                memberToDelete.getName().value,
                 memberToDelete.getRoom().value,
                 memberToDelete.getTelegram().value)
         );

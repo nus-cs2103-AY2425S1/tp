@@ -19,15 +19,16 @@ import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 
 /**
- * Deletes a session identified using its name from a member identified using its index from the address book.
+ * Deletes a session identified using its name from the member(s) identified using its displayed index number(s).
  */
 
-
 public class DeleteSessionCommand extends Command {
+
     public static final String COMMAND_WORD = "delete_session";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the session associated to the member identified by the index number used in the session list. "
+            + ": Deletes the session from the member(s) in the displayed member list "
+            + "that matches the given index number(s).\n"
             + "Parameters: "
             + PREFIX_SESSION_NAME + "NAME "
             + "[" + PREFIX_MEMBER + "INDEX]...\n"
@@ -35,18 +36,19 @@ public class DeleteSessionCommand extends Command {
             + PREFIX_SESSION_NAME + "Rehearsal "
             + PREFIX_MEMBER + "1";
 
-    public static final String MESSAGE_DELETE_SESSION_SUCCESS = "Deleted Session: %1$s from %2$s sessions";
+    public static final String MESSAGE_SUCCESS = "Deleted Session: %1$s from %2$s members";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
-    public static final String MESSAGE_DELETE_SESSION_FAIL = "Error: Session %1$s does not exist in member %2$s.";
+    public static final String MESSAGE_SESSION_NOT_IN_MEMBER = "Error: Session %1$s does not exist in member %2$s.";
 
-    private final Set<Index> memberIndexes;
     private final SessionName sessionName;
+    private final Set<Index> memberIndexes;
+
 
     /**
-     * Creates a DeleteSessionCommand to delete the specified session from the specified list of users.
+     * Creates a DeleteSessionCommand to delete the specified session from the specified list of members.
      *
      * @param sessionName The name of the session to delete.
-     * @param memberIndexes The indexes of the members in the list the session can be found in.
+     * @param memberIndexes The indexes of the selected members.
      */
     public DeleteSessionCommand(SessionName sessionName, Set<Index> memberIndexes) {
         requireNonNull(sessionName);
@@ -67,13 +69,13 @@ public class DeleteSessionCommand extends Command {
                 throw new CommandException(MESSAGE_INVALID_INDEX);
             }
             Member member = lastShownList.get(index.getZeroBased());
-            assert member != null : "Member should not be null";
+            requireNonNull(member);
             if (member.getSessions().stream().noneMatch(
                     // dummy values to avoid duplicating isSameSession or add circular dependencies via SessionBuilder
                     element -> element.isSameSession(
                             new Session(sessionName, new SessionDate("01 Dec 2010"), new Point("3"))
                     ))) {
-                throw new CommandException(String.format(MESSAGE_DELETE_SESSION_FAIL, sessionName.toString(),
+                throw new CommandException(String.format(MESSAGE_SESSION_NOT_IN_MEMBER, sessionName.toString(),
                         member.getName().toString()));
             }
             memberToUpdate.add(member);
@@ -84,7 +86,7 @@ public class DeleteSessionCommand extends Command {
         }
 
         return new CommandResult(
-                String.format(MESSAGE_DELETE_SESSION_SUCCESS, sessionName.toString(), memberIndexes.size())
+                String.format(MESSAGE_SUCCESS, sessionName.toString(), memberIndexes.size())
         );
     }
 

@@ -29,7 +29,7 @@ public class MemberUtil {
      */
     public static String getMemberDetails(Member member) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + member.getName().fullName + " ");
+        sb.append(PREFIX_NAME + member.getName().value + " ");
         sb.append(PREFIX_TELEGRAM + member.getTelegram().value + " ");
         sb.append(PREFIX_ROOM + member.getRoom().value + " ");
         member.getTags().stream().forEach(
@@ -43,7 +43,7 @@ public class MemberUtil {
      */
     public static String getUpdateMemberDescriptorDetails(UpdateMemberDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.value).append(" "));
         descriptor.getTelegram().ifPresent(
                 telegram -> sb.append(PREFIX_TELEGRAM).append(telegram.value).append(" "));
         descriptor.getRoom().ifPresent(room -> sb.append(PREFIX_ROOM).append(room.value).append(" "));

@@ -26,9 +26,10 @@ public class ArgumentTokenizer {
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+        String modifiedArgsString = argsString.replaceAll("\\s+", " ");
         List<PrefixPosition> positions = findAllPrefixPositions(
-                argsString.replaceAll("\\s+", " "), prefixes);
-        return extractArguments(argsString.replaceAll("\\s+", " "), positions);
+                modifiedArgsString, prefixes);
+        return extractArguments(modifiedArgsString, positions);
     }
 
     /**

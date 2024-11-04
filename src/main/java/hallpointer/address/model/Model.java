@@ -80,7 +80,7 @@ public interface Model {
     /**
      * Replaces the given member {@code target} with {@code updatedMember}.
      * {@code target} must exist in the address book.
-     * The member identity of {@code updatedMember} must not be the same as another existing member in the address book.
+     * The identity of {@code updatedMember} must not be the same as another existing member in the address book.
      */
     void setMember(Member target, Member updatedMember);
 

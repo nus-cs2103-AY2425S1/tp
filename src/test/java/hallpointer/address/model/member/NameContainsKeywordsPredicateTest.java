@@ -73,9 +73,9 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
 
         // Keywords match telegram and room, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aliceinwonderland", "1/2/3"));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aliceinwonderland", "1-2-3"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice").withTelegram("aliceinwonderland")
-                .withRoom("1/2/3").build()));
+                .withRoom("1-2-3").build()));
     }
 
     @Test

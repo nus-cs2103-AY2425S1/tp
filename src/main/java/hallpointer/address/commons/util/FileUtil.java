@@ -1,5 +1,7 @@
 package hallpointer.address.commons.util;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -23,6 +25,7 @@ public class FileUtil {
      * @param path A string representing the file path. Cannot be null.
      */
     public static boolean isValidPath(String path) {
+        requireNonNull(path);
         try {
             Paths.get(path);
         } catch (InvalidPathException ipe) {

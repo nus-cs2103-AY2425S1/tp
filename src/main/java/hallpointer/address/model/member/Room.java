@@ -9,13 +9,9 @@ import static java.util.Objects.requireNonNull;
  */
 public class Room {
 
-    public static final String MESSAGE_CONSTRAINTS = "Room should be in the format <block>/<floor>/<room_number>";
+    public static final String MESSAGE_CONSTRAINTS = "Room should be in the format <block>-<floor>-<room_number>";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "^[0-9]+/[0-9]+/[0-9]+$";
+    public static final String VALIDATION_REGEX = "^[0-9]+-[0-9]+-[0-9]+$";
 
     public final String value;
 
@@ -27,7 +23,10 @@ public class Room {
     public Room(String room) {
         requireNonNull(room);
         checkArgument(isValidRoom(room), MESSAGE_CONSTRAINTS);
-        value = room;
+
+        // remove zero-padding of block or floor or room number
+        String[] arr = room.split("-");
+        value = Integer.parseInt(arr[0]) + "-" + Integer.parseInt(arr[1]) + "-" + Integer.parseInt(arr[2]);
     }
 
     /**
