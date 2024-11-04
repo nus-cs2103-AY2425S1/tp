@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.ArrayList;
+
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddSchemeCommand;
 import seedu.address.logic.commands.DeleteSchemeCommand;
 import seedu.address.logic.commands.SchemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.ArrayList;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses input arguments and creates a new DeleteSchemeCommand object
@@ -42,7 +42,8 @@ public class DeleteSchemeCommandParser implements Parser<DeleteSchemeCommand> {
             try {
                 schemeIndex.add(ParserUtil.parseIndex(index));
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SchemeCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SchemeCommand.MESSAGE_USAGE), pe);
             }
         }
         return new DeleteSchemeCommand(personIndex, schemeIndex);

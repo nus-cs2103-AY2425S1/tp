@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.Messages.*;
-import static seedu.address.logic.commands.UndoCommand.*;
+import static seedu.address.logic.Messages.MESSAGE_DELETE_SCHEME_PERSON_SUCCESS;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE_SCHEME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +28,6 @@ import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.scheme.Scheme;
-import seedu.address.model.scheme.SchemeRetrieval;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -82,7 +81,7 @@ public class DeleteSchemeCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_DELETE_SCHEME_PERSON_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_DELETE_SCHEME_PERSON_SUCCESS, editedPerson.getName()));
 
     }
 

@@ -2,9 +2,12 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import seedu.address.model.scheme.Scheme;
-import seedu.address.model.scheme.SchemeRetrieval;
 
+import seedu.address.model.scheme.Scheme;
+
+/**
+ * Jackson-friendly version of {@link Scheme}.
+ */
 public class JsonAdaptedScheme {
     private final String schemeName;
 

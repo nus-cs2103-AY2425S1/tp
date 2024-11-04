@@ -1,14 +1,11 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.SchemeCommand;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.ArrayList;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddSchemeCommand;
+import seedu.address.logic.commands.SchemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

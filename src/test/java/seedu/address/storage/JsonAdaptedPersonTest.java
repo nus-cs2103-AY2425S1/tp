@@ -50,7 +50,7 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
     private static final String VALID_UPDATED_AT = LocalDateTime.now().toString();
 
-    private static final  ArrayList<JsonAdaptedScheme> VALID_SCHEMES = new ArrayList<>();
+    private static final ArrayList<JsonAdaptedScheme> VALID_SCHEMES = new ArrayList<>();
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {

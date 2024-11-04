@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_ADD_SCHEME_PERSON_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_PERSON;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD_SCHEME;
-import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_EDIT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -53,6 +52,9 @@ public class AddSchemeCommand extends Command {
     private Person personToEdit;
     private Person editedPerson;
 
+    /**
+     * Creates an AddSchemeCommand to add the specified {@code Scheme} to the person at the specified {@code Index}.
+     */
     public AddSchemeCommand(Index personIndex, Index schemeIndex) {
         requireAllNonNull(personIndex, schemeIndex);
         this.personIndex = personIndex;
@@ -84,7 +86,7 @@ public class AddSchemeCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_ADD_SCHEME_PERSON_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_ADD_SCHEME_PERSON_SUCCESS, editedPerson.getName()));
 
     }
 

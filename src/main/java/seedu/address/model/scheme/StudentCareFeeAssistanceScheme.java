@@ -8,9 +8,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class StudentCareFeeAssistanceScheme extends Scheme {
 
     public static final String SCHEME_NAME = "Student Care Fee Assistance (SCFA)";
-    private static final int INCOME_THRESHOLD = 4500;
-    private static final int FAMILY_SIZE_THRESHOLD = 4;
-    private static final int INCOME_PER_CAPITA_THRESHOLD = 1125;
+    public static final int INCOME_THRESHOLD = 4500;
+    public static final int FAMILY_SIZE_THRESHOLD = 4;
+    public static final int INCOME_PER_CAPITA_THRESHOLD = 1125;
 
     public static final String SCHEME_NAME_SHORT = "SCFA";
 

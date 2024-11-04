@@ -2,19 +2,21 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-
 import java.util.ArrayList;
 import java.util.List;
-import seedu.address.commons.core.index.Index;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.scheme.Scheme;
 import seedu.address.model.scheme.SchemeRetrieval;
 
+/**
+ * Views the schemes of a person is subscribed to in the address book.
+ */
 public class ViewPersonSchemeCommand extends Command {
     public static final String COMMAND_WORD = "viewscheme";
 
@@ -41,13 +43,13 @@ public class ViewPersonSchemeCommand extends Command {
         SchemeRetrieval schemeRetrieval = new SchemeRetrieval(targetFamily);
         ArrayList<Scheme> schemes = schemeRetrieval.getSubscribedSchemes();
         StringBuilder result = new StringBuilder();
-        result.append("Schemes available for family: ").append(targetFamily.getName()).append("\n");
         for (int i = 0; i < schemes.size(); i++) {
             result.append((i + 1 + ". ")).append(schemes.get(i).getSchemeName()).append("\n");
         }
         if (result.toString().equals("")) {
             result = new StringBuilder("No schemes available for this family.");
         }
+        result.insert(0, "Schemes available for family: " + targetFamily.getName() + "\n");
         return new CommandResult(result.toString());
     }
 

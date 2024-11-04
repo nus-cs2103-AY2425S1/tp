@@ -1,8 +1,5 @@
 package seedu.address.model.scheme;
 
-import seedu.address.model.scheme.MoeFinancialAssistanceScheme;
-import seedu.address.model.scheme.StudentCareFeeAssistanceScheme;
-
 /**
  * Represents a financial scheme in the address book.
  */
@@ -24,6 +21,9 @@ public abstract class Scheme {
      */
     public abstract String getSchemeNameShort();
 
+    /**
+     * Create schemes from storage.
+     */
     public static Scheme createScheme(String schemeName) throws IllegalArgumentException {
         switch (schemeName) {
         case MoeFinancialAssistanceScheme.SCHEME_NAME:

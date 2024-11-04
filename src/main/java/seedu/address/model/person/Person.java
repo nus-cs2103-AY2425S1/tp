@@ -2,11 +2,15 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.scheme.Scheme;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -165,7 +169,6 @@ public class Person {
                 && income.equals(otherPerson.income)
                 && familySize.equals(otherPerson.familySize)
                 && tags.equals(otherPerson.tags)
-                && updatedAt.equals(otherPerson.updatedAt)
                 && schemes.containsAll(otherPerson.schemes)
                 && otherPerson.schemes.containsAll(schemes);
     }
