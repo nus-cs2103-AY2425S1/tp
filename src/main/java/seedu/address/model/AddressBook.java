@@ -79,6 +79,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Group g: groups) {
             g.setTaskStatus();
         }
+        for (Task t: tasks) {
+            t.setStatus();
+        }
     }
 
     /**
