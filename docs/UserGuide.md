@@ -150,7 +150,7 @@ Format: `listTxn`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -164,6 +164,7 @@ Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
   and `johndoe@example.com` respectively.
+* `edit 2 r/` Edits the 2nd person by deleting the remark.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Editing a transaction : `editTxn `
@@ -235,21 +236,23 @@ Examples:<br>
   the index of `Bernice Yu` in the displayed person list.<br>
   ![result for 'filterTxn 2 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
 
-### Adding Remarks for a person : `remark`
+### Adding/Deleting Remarks for a person : `remark`
 
-Add remarks for the specified person from the address book.
+Add/Delete remarks for the specified person from the address book.
 
 Format: `remark INDEX r/REMARK`
 
-* Add remarks for the person at the specified `INDEX`.
+* Add/delete remarks for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
 * `list` followed by `remark 2 r/remark for person 2` adds remarks for the 2nd person in the address book.
+* `list` followed by `remark 1 r/` deletes the remarks for the 1st person in the address book.
 * `find Betsy` followed by `remark 1 r/remark for betsy` adds remarks for the 1st person in the results of the `find`
   command.
+* `find Betsy` followed by `remark 1 r/` deletes the remarks for the 1st person in the results of the `find` command.
 
 ### Deleting a person : `delete`
 
