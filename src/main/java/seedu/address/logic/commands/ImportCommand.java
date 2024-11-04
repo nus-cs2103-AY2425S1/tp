@@ -12,8 +12,10 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CsvPersonParser;
+import seedu.address.logic.parser.CsvRowParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Command to import person data from a CSV file into the address book.
@@ -53,68 +55,31 @@ public class ImportCommand extends Command {
 
             // Read header and ensure it is as expected.
             String[] headers = csvReader.readNext();
-            checkHeaders(headers, expectedHeaders);
+            headers = CsvRowParser.cleanRow(headers);
+            CsvRowParser.checkHeaders(headers, expectedHeaders);
 
             // Read each line, parse the person data, then add to newPersons list.
             while ((fields = csvReader.readNext()) != null) {
-                if (fields.length != expectedHeaders.length) {
-                    throw new CommandException("Invalid CSV format.");
+                if (CsvRowParser.isRowEmpty(fields)) {
+                    continue; // Skip empty rows
                 }
-                Person person = CsvPersonParser.parsePerson(fields, model);
+                String[] cleanedFields = CsvRowParser.cleanRow(fields);
+                System.out.println("git" + fields[5]);
+                if (cleanedFields.length != expectedHeaders.length) {
+                    throw new CommandException("Invalid CSV format, ensure that all necessary data are present.");
+                }
+                Person person = CsvPersonParser.parsePerson(cleanedFields, model);
                 newPersons.add(person);
             }
-        } catch (IOException | CsvValidationException e) {
+            model.replaceAllPersons(newPersons);
+        } catch (IOException | CsvValidationException | DuplicatePersonException | CommandException e) {
             throw new CommandException("Error reading from the CSV file: " + e.getMessage());
         }
         // Replace all existing person with those present in the CSV file.
-        model.replaceAllPersons(newPersons);
 
         return new CommandResult(String.format("Successfully imported %d persons.", newPersons.size()));
     }
 
-    /**
-     * Checks if the CSV headers match the expected headers.
-     *
-     * @param headers the headers from the CSV file
-     * @param expectedHeaders the expected headers in the correct order
-     * @throws CommandException if the headers are incorrect
-     */
-    private void checkHeaders(String[] headers, String[] expectedHeaders) throws CommandException {
-        System.out.println(headers.length);
-        System.out.println(headers.toString());
-        if (headers.length == 0) {
-            throw new CommandException("CSV header is empty/contains empty values, please ensure"
-                + " all headers are valid.\n"
-                + CORRECT_HEADER_USAGE);
-        }
-
-        for (int i = 0; i < headers.length; i++) {
-            headers[i] = headers[i].trim(); // Trim whitespace from headers
-        }
-
-        for (String header : headers) {
-            if (header.isEmpty() && headers.length <= 8) {
-                throw new CommandException("CSV header is empty/contains empty values, please ensure"
-                    + " all headers are valid.\n"
-                    + CORRECT_HEADER_USAGE);
-            }
-        }
-
-        if (headers.length > expectedHeaders.length) {
-            throw new CommandException("There is an extra column!\n"
-                + "Please ensure there is only be 8 corresponding header/data columns\n" + CORRECT_HEADER_USAGE);
-        }
-
-        if (headers.length < expectedHeaders.length) {
-            throw new CommandException("There are lesser columns in header than expected!\n" + CORRECT_HEADER_USAGE);
-        }
-
-        for (int i = 0; i < headers.length; i++) {
-            if (!headers[i].trim().equalsIgnoreCase(expectedHeaders[i])) {
-                throw new CommandException("Header is defined incorrectly!\n" + CORRECT_HEADER_USAGE);
-            }
-        }
-    }
 
     @Override
     public boolean equals(Object obj) {
