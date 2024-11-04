@@ -61,17 +61,15 @@ public class AddGradeCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        float totalWeightage = personToEdit.getTotalWeightage();
-        totalWeightage += this.toAdd.getWeightage();
-
-        if (totalWeightage > 100) {
+        try {
+            Person updatedPerson = personToEdit.addGrade(this.toAdd);
+            model.setPerson(personToEdit, updatedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(updatedPerson)));
+        } catch (IllegalStateException e) {
             throw new CommandException("The total weightage of grades cannot exceed 100%");
         }
 
-        Person updatedPerson = personToEdit.addGrade(this.toAdd);
-        model.setPerson(personToEdit, updatedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(updatedPerson)));
     }
 
     /**
