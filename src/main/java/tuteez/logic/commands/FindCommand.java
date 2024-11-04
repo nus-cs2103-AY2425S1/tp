@@ -1,6 +1,10 @@
 package tuteez.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
+import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
+import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -19,10 +23,15 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names, addresses, tags or"
+            + "lessons contain any of the specified keywords (case-insensitive) and displays them as a list with index"
+            + "numbers.\n"
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME_KEYWORDS...] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS...] "
+            + "[" + PREFIX_TAG + "TAG_KEYWORDS...] "
+            + "[" + PREFIX_LESSON + "LESSON_KEYWORDS...]\n"
+            + "Example: " + COMMAND_WORD + PREFIX_NAME + " alice charlie" + PREFIX_ADDRESS + "jurong";
 
     private static final Logger logger = LogsCenter.getLogger(FindCommand.class);
 
