@@ -96,7 +96,8 @@ public class Wedding {
 
         boolean nameEqual = name.equals(otherWedding.name);
 
-        boolean clientEqual = client.equals(otherWedding.client);
+        boolean clientEqual = (client == null && otherWedding.client == null)
+            || (client != null && client.equals(otherWedding.client));
 
         boolean dateEqual = (date == null && otherWedding.date == null)
                 || (date != null && date.equals(otherWedding.date));
