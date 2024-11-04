@@ -38,7 +38,6 @@ class UnassignCommandTest {
     @Test
     public void execute_vendorDetailsView_validAssignment() throws Exception {
         model.viewVendor(vendor); // Simulate viewing a vendor
-        model.setUiState(UiState.VENDOR_DETAILS);
 
         UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
         CommandResult result = unassignCommand.execute(model);
@@ -51,7 +50,6 @@ class UnassignCommandTest {
     @Test
     public void execute_vendorDetailsView_invalidVendorFallbackToMainView() throws CommandException {
         model.viewVendor(TypicalVendors.BOB); // View a different vendor
-        model.setUiState(UiState.VENDOR_DETAILS);
 
         UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
         CommandResult result = unassignCommand.execute(model);
@@ -63,7 +61,6 @@ class UnassignCommandTest {
     @Test
     public void execute_eventDetailsView_validAssignment() throws CommandException {
         model.viewEvent(event); // Simulate viewing an event
-        model.setUiState(UiState.EVENT_DETAILS);
 
         UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
         CommandResult result = unassignCommand.execute(model);
@@ -76,7 +73,6 @@ class UnassignCommandTest {
     @Test
     public void execute_eventDetailsView_invalidEventFallbackToMainView() throws CommandException {
         model.viewEvent(TypicalEvents.BENSON); // View a different event
-        model.setUiState(UiState.EVENT_DETAILS);
 
         UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
         CommandResult result = unassignCommand.execute(model);

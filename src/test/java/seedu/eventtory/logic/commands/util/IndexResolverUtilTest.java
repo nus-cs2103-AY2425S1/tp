@@ -23,16 +23,11 @@ import seedu.eventtory.testutil.TypicalVendors;
 import seedu.eventtory.testutil.TypicalVendorsEventsCombined;
 import seedu.eventtory.ui.UiState;
 
-// TODO: Might have to update index after the association filter is merged #116
 public class IndexResolverUtilTest {
     private static final Index INDEX_OVERFLOW_VENDOR = Index.fromOneBased(
-        INDEX_LAST_VENDOR.getOneBased() + 1);
+        INDEX_LAST_EVENT.getOneBased() + 1);
     private static final Index INDEX_OVERFLOW_EVENT = Index.fromOneBased(
-        INDEX_LAST_VENDOR.getOneBased() + 1);
-    private static final Index INDEX_OVERFLOW_VENDOR_ASSOCIATED = Index.fromOneBased(
-        INDEX_LAST_EVENT.getOneBased() + 2);
-    private static final Index INDEX_OVERFLOW_EVENT_ASSOCIATED = Index.fromOneBased(
-        INDEX_LAST_EVENT.getOneBased() + 2);
+        INDEX_LAST_EVENT.getOneBased() + 1);
     private Model model;
     private Vendor vendor1 = TypicalVendors.ALICE;
     private Vendor vendor2 = TypicalVendors.BENSON;
@@ -43,7 +38,6 @@ public class IndexResolverUtilTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(TypicalVendorsEventsCombined.getTypicalEventTory(), new UserPrefs());
-        model.assignVendorToEvent(vendor2, event1);
     }
 
     @Test
@@ -62,22 +56,20 @@ public class IndexResolverUtilTest {
 
     @Test
     public void testResolveVendor_eventDetailsMainListIndex_valid() throws CommandException {
-        // Set UiState to EVENT_DETAILS with no associated vendors
+        // View event with no associated vendors
         model.viewEvent(event7);
-        model.setUiState(UiState.EVENT_DETAILS);
 
         assertEquals(vendor1, IndexResolverUtil.resolveVendor(model, INDEX_FIRST_VENDOR));
     }
 
     @Test
     public void testResolveVendor_eventDetailsIndexOverflowToAssociatedList_valid() throws CommandException {
-
-        // Set UiState to EVENT_DETAILS with associated vendors
+        // View event with one associated vendor
+        model.assignVendorToEvent(vendor2, event1);
         model.viewEvent(event1);
-        model.setUiState(UiState.EVENT_DETAILS);
 
         // Overflow to associated list
-        assertEquals(vendor2, IndexResolverUtil.resolveVendor(model, INDEX_OVERFLOW_VENDOR));
+        assertEquals(vendor2, IndexResolverUtil.resolveVendor(model, INDEX_LAST_VENDOR));
     }
 
     @Test
@@ -92,13 +84,13 @@ public class IndexResolverUtilTest {
 
     @Test
     public void testResolveVendor_eventDetailsIndex_invalidOverflow() {
-        // Set UiState to EVENT_DETAILS with one associated vendor
-        model.setUiState(UiState.EVENT_DETAILS);
+        // View event with one associated vendor
+        model.assignVendorToEvent(vendor2, event1);
         model.viewEvent(event1);
 
         // Expect CommandException for index exceeding both lists
         CommandException exception = assertThrows(CommandException.class, () -> {
-            IndexResolverUtil.resolveVendor(model, INDEX_OVERFLOW_VENDOR_ASSOCIATED);
+            IndexResolverUtil.resolveVendor(model, INDEX_OVERFLOW_VENDOR);
         });
         assertEquals(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX, exception.getMessage());
     }
@@ -119,8 +111,7 @@ public class IndexResolverUtilTest {
 
     @Test
     public void testResolveEvent_vendorDetailsMainListIndex_valid() throws CommandException {
-        // Set UiState to VENDOR_DETAILS with no associated events
-        model.setUiState(UiState.VENDOR_DETAILS);
+        // View vendor with no associated events
         model.viewVendor(vendor7);
 
         assertEquals(event1, IndexResolverUtil.resolveEvent(model, INDEX_FIRST_EVENT));
@@ -128,12 +119,12 @@ public class IndexResolverUtilTest {
 
     @Test
     public void testResolveEvent_vendorDetailsIndexOverflowToAssociatedList_valid() throws CommandException {
-        // Set UiState to VENDOR_DETAILS with associated events
-        model.setUiState(UiState.VENDOR_DETAILS);
+        model.assignVendorToEvent(vendor2, event1);
+
         model.viewVendor(vendor2);
 
         // Overflow to associated list
-        assertEquals(event1, IndexResolverUtil.resolveEvent(model, INDEX_OVERFLOW_EVENT));
+        assertEquals(event1, IndexResolverUtil.resolveEvent(model, INDEX_LAST_EVENT));
     }
 
     @Test
@@ -148,13 +139,13 @@ public class IndexResolverUtilTest {
 
     @Test
     public void testResolveEvent_vendorDetailsIndex_invalidOverflow() {
-        // Set UiState to VENDOR_DETAILS with one associated event
-        model.setUiState(UiState.VENDOR_DETAILS);
-        model.viewVendor(vendor1);
+        // View vendor with one associated event
+        model.assignVendorToEvent(vendor2, event1);
+        model.viewVendor(vendor2);
 
         // Expect CommandException for index exceeding both lists
         CommandException exception = assertThrows(CommandException.class, () -> {
-            IndexResolverUtil.resolveEvent(model, INDEX_OVERFLOW_EVENT_ASSOCIATED);
+            IndexResolverUtil.resolveEvent(model, INDEX_OVERFLOW_EVENT);
         });
         assertEquals(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, exception.getMessage());
     }

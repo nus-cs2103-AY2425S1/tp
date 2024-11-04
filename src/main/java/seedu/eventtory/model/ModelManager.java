@@ -279,8 +279,10 @@ public class ModelManager implements Model {
 
     private Predicate<Vendor> evaluateVendorPredicate() {
         if (currentUiState.getValue() == UiState.EVENT_DETAILS) {
-            Predicate<Vendor> notAssociatedPredicate = vendor ->
-                !isVendorAssignedToEvent(vendor, selectedEvent.getValue());
+            Predicate<Vendor> notAssociatedPredicate = vendor -> {
+                Event event = selectedEvent.getValue();
+                return event != null && !isVendorAssignedToEvent(vendor, event);
+            };
             return combinePredicates(notAssociatedPredicate, suppliedVendorFilterPredicate.getValue());
         }
         return suppliedVendorFilterPredicate.getValue();
@@ -288,8 +290,10 @@ public class ModelManager implements Model {
 
     private Predicate<Event> evaluateEventPredicate() {
         if (currentUiState.getValue() == UiState.VENDOR_DETAILS) {
-            Predicate<Event> notAssociatedPredicate = event ->
-                !isVendorAssignedToEvent(selectedVendor.getValue(), event);
+            Predicate<Event> notAssociatedPredicate = event -> {
+                Vendor vendor = selectedVendor.getValue();
+                return vendor != null && !isVendorAssignedToEvent(vendor, event);
+            };
             return combinePredicates(notAssociatedPredicate, suppliedEventFilterPredicate.getValue());
         }
         return suppliedEventFilterPredicate.getValue();
@@ -306,6 +310,8 @@ public class ModelManager implements Model {
     public void viewVendor(Vendor vendor) {
         requireNonNull(vendor);
         selectedVendor.setValue(vendor);
+        currentUiState.setValue(UiState.VENDOR_DETAILS);
+        applyFiltersBasedOnUiState();
     }
 
     // =========== Viewed Events Accessors =============================================================
@@ -319,6 +325,8 @@ public class ModelManager implements Model {
     public void viewEvent(Event event) {
         requireNonNull(event);
         selectedEvent.setValue(event);
+        currentUiState.setValue(UiState.EVENT_DETAILS);
+        applyFiltersBasedOnUiState();
     }
 
     // =========== UI State Accessors =============================================================
@@ -330,8 +338,19 @@ public class ModelManager implements Model {
     @Override
     public void setUiState(UiState uiState) {
         requireNonNull(uiState);
-        currentUiState.setValue(uiState);
-        applyFiltersBasedOnUiState();
+        switch (uiState) {
+        case DEFAULT:
+        case VENDOR_LIST:
+        case EVENT_LIST:
+            currentUiState.setValue(uiState);
+            applyFiltersBasedOnUiState();
+            break;
+        case EVENT_DETAILS:
+        case VENDOR_DETAILS:
+            assert false : "UiState should not be set to EVENT_DETAILS or VENDOR_DETAILS directly";
+            break;
+        default:
+            assert false : "Unknown UiState";
+        }
     }
-
 }

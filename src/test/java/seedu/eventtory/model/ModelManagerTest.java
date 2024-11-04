@@ -138,10 +138,11 @@ public class ModelManagerTest {
             observedState.set(newValue);
         });
 
-        modelManager.setUiState(UiState.EVENT_DETAILS);
+        // Set new UI to view using dummy event and vendor
+        modelManager.viewEvent(WEDDING);
         assertEquals(UiState.EVENT_DETAILS, observedState.get());
 
-        modelManager.setUiState(UiState.VENDOR_DETAILS);
+        modelManager.viewVendor(ALICE);
         assertEquals(UiState.VENDOR_DETAILS, observedState.get());
     }
 
