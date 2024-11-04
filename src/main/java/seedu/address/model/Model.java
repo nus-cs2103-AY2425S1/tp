@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.types.common.Name;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
@@ -46,6 +47,16 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Replaces address book event data with the event data in {@code addressBook}.
+     */
+    void setEventList(ReadOnlyAddressBook addressBook);
+
+    /**
+     * Replaces address book person data with the person data in {@code addressBook}.
+     */
+    void setPersonList(ReadOnlyAddressBook addressBook);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -130,7 +141,7 @@ public interface Model {
     /**
      * Returns the event with the same name as {@code event}.
      */
-    Event getEventByName(Event event);
+    Event getEventByName(Name name);
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();

@@ -16,8 +16,8 @@ import seedu.address.model.types.common.EventTagContainsKeywordsPredicate;
 public class SearchEventCommand extends SearchCommand {
     public static final String COMMAND_WORD = "search";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all events who have tags containing any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " e: Searches all events who have tags containing any of "
+            + "the specified keywords (case-insensitive).\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " e friends work";
 

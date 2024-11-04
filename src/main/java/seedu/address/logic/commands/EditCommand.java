@@ -9,4 +9,6 @@ package seedu.address.logic.commands;
  * model must be implemented by the subclasses.</p>
  */
 public abstract class EditCommand extends Command {
+    public static final String MESSAGE_USAGE = "Use \"edit p\" or \"edit e\" to"
+            + " specify person or event to be edited.";
 }

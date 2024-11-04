@@ -15,8 +15,20 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t12-1.github.io/tp/";
+    public static final String HELP_MESSAGE =
+            "Refer to the user guide: " + USERGUIDE_URL + "\n"
+                    + "\n"
+            + "List of commands (type into CLI for explanation)\n"
+                    + "1: Add (p/e)\n"
+                    + "2: Edit (p/e)\n"
+                    + "3: Delete (p/e)\n"
+                    + "4: Find (p/e)\n"
+                    + "5: Search (p/e)\n"
+                    + "6: List (p/e)\n"
+                    + "7: Schedule\n"
+                    + "8: Link\n"
+                    + "9: Clear\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
