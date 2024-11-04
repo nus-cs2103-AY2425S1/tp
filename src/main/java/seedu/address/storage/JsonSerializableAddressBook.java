@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
 
@@ -22,6 +23,7 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_JOB = "Jobs list contains duplicate job(s)";
     public static final String MESSAGE_DUPLICATE_COMPANY = "Company list contains duplicate companies";
     public static final String MESSAGE_DUPLICATE_JOB = "Job list contains duplicate jobs";
 
@@ -69,7 +71,7 @@ class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
+    public AddressBook toModelType() throws IllegalValueException, CompanyNotFoundException {
         AddressBook addressBook = new AddressBook();
 
         for (JsonAdaptedCompany jsonAdaptedCompany : companies) {
@@ -85,7 +87,7 @@ class JsonSerializableAddressBook {
             if (addressBook.hasJob(job)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_JOB);
             }
-            addressBook.addJob(job);
+            addressBook.addJob(job); // this can throw CompanyNotFoundException
         }
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {

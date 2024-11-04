@@ -16,6 +16,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index provided is invalid";
     public static final String MESSAGE_MISSING_INDEX = "The index is missing";
     public static final String DELETE_COMMAND_USAGE = "Invalid delete command. Specify 'company', 'contact' or 'job'.";

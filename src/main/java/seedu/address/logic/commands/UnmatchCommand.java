@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -33,8 +35,10 @@ public class UnmatchCommand extends Command {
     public static final String MESSAGE_CONTACT_NOT_MATCHED = "This contact is not matched with this job!";
     public static final String MESSAGE_CONTACT_HAS_NO_JOBS = "The contact %1$s is not associated with any job";
 
+    private static final Logger logger = LogsCenter.getLogger(UnmatchCommand.class);
     private final Index contactIndex;
     private final Index jobIndex;
+
 
     /**
      * @param contactIndex Index of the contact in the filtered person list to unmatch.
@@ -51,6 +55,9 @@ public class UnmatchCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert contactIndex != null : "Contact index should not be null";
+        assert jobIndex != null : "Job index should not be null";
+        logger.info("Executing UnmatchCommand with contactIndex: " + contactIndex + " and jobIndex: " + jobIndex);
 
         List<Person> lastShownPersonList = model.getFilteredPersonList();
         if (contactIndex.getZeroBased() >= lastShownPersonList.size()) {
@@ -65,8 +72,10 @@ public class UnmatchCommand extends Command {
         Person contactToUnmatch = lastShownPersonList.get(contactIndex.getZeroBased());
         Job jobToUnmatch = lastShownJobList.get(jobIndex.getZeroBased());
 
-        assert contactToUnmatch != null;
-        assert jobToUnmatch != null;
+        assert contactToUnmatch != null : "Contact to unmatch should not be null";
+        assert jobToUnmatch != null : "Job to unmatch should not be null";
+
+        logger.info("Contact to unmatch: " + contactToUnmatch + ", Job to unmatch: " + jobToUnmatch);
 
         validateMatching(contactToUnmatch, jobToUnmatch);
 
@@ -76,9 +85,11 @@ public class UnmatchCommand extends Command {
         // Update the model with the unmatched contact and job
         model.setPerson(contactToUnmatch, unmatchedContact);
 
+        logger.info("Unmatched successfully: " + unmatchedContact + " from Job: " + jobToUnmatch);
+
         return new CommandResult(
-                String.format(MESSAGE_UNMATCH_SUCCESS, Messages.format(unmatchedContact), Messages.format(jobToUnmatch))
-        );
+                String.format(MESSAGE_UNMATCH_SUCCESS, Messages.format(unmatchedContact),
+                        Messages.format(jobToUnmatch)));
     }
 
     /**

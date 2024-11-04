@@ -10,6 +10,9 @@ public class TypicalIndexes {
     public static final Index INDEX_SECOND_PERSON = Index.fromOneBased(2);
     public static final Index INDEX_THIRD_PERSON = Index.fromOneBased(3);
 
+    public static final Index INDEX_FIRST_JOB = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_JOB = Index.fromOneBased(2);
+
     public static final Index INDEX_FIRST_COMPANY = Index.fromOneBased(1);
 
     public static final Index INDEX_OUT_OF_BOUNDS = Index.fromOneBased(100);
