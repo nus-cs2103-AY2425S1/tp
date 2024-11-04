@@ -218,6 +218,7 @@ Format: `addExam ex/EXAMNAME`
 </box>
 
 * The exam name can only contain alphanumeric characters and spaces.
+* The exam name is case-sensitive. e.g. "Midterm" will be treated differently from "midterm".
 
 Examples:
 * `addExam ex/Midterm`
@@ -249,7 +250,7 @@ Format: `addSubmission sm/SUBMISSION_NAME`
 </box>
 
 * The submission name can only contain alphanumeric characters and spaces.
-* The submission name is case-sensitive. e.g. "Assignment 1" will be treated differently from "assignment 1"
+* The submission name is case-sensitive. e.g. "Assignment 1" will be treated differently from "assignment 1".
 
 Examples:
 * `addSubmission sm/Assignment 1`
