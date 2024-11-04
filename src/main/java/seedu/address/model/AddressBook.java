@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -10,6 +11,7 @@ import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -108,6 +110,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return new ToStringBuilder(this)
                 .add("persons", persons)
                 .toString();
+    }
+
+    public Optional<Person> findPersonByPhone(Phone phone) {
+        return persons.findPersonByPhone(phone);
     }
 
     @Override
