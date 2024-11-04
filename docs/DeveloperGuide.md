@@ -167,7 +167,7 @@ This section describes some noteworthy details on how certain features are imple
 Users can seamlessly add tutorials, students and assignments into the TrackMate application. On top of that, users can also add student's tutorial
 attendance to maintain student's accurate attendance record.
 
-### Feature's Architecture Design 
+### Feature's Architecture Design
 
 1. **Centralized Parsing with AddCommandParser** :
 The parsing logic is centralized in AddCommandParser to ensure that input arguments are consistently handled across commands. This prevents each command from having redundant logic and promotes modularity by isolating parsing responsibilities.
@@ -184,7 +184,7 @@ We ensure that duplicate students or non-existent tutorials are caught early in 
 
 #### Add Student
 
-To ensure data integrity and completeness, the system necessitates the inclusion of parameters such as Name and Student ID. The activity diagram below 
+To ensure data integrity and completeness, the system necessitates the inclusion of parameters such as Name and Student ID. The activity diagram below
 shows the sequence of action users will have to take to add a new Student Profile into the TrackMate Application.
 
 [//]: # (<puml src="diagrams/AddCommandActivityDiagram.puml" width="280" />)
@@ -198,16 +198,16 @@ among various classes to add a new Tutorial into the TrackMate Application.
 
 #### Add Attendance
 
-The AttendCommand is responsible for marking the attendance of a student for a specific tutorial session in the TrackMate Application. This command interacts 
+The AttendCommand is responsible for marking the attendance of a student for a specific tutorial session in the TrackMate Application. This command interacts
 with the model to update the attendance record of a given student for a particular tutorial. The sequence diagram below shows how the command
-interact with other classes. 
+interact with other classes.
 
 <puml src="diagrams/AttendCommandSequenceDiagram.puml" width="280" />
 
 #### Add Assignment
 
 Users can also add assignments to the TrackMate Application that are shared among all the students in every tutorials. The activity diagram below will
-demonstrate what the users need to do to add assignment for students. 
+demonstrate what the users need to do to add assignment for students.
 
 <puml src="diagrams/CreateAssignmentActivityDiagram.puml" width="280" />
 
@@ -259,7 +259,7 @@ isolating the edit details from the command execution logic.
 errors requires careful implementation. Ensuring that at least one field is edited and providing appropriate error messages when none are
 requires precise checks.
 
-**Validation Checks in EditCommand**: Before applying edits, several validation checks are performed such that we can ensure that the edited student does not duplicate an 
+**Validation Checks in EditCommand**: Before applying edits, several validation checks are performed such that we can ensure that the edited student does not duplicate an
 existing student in the address book unless it's the same student. Besides, it also validates that the new student ID, if changed, does not
 already exist in the system.
 
@@ -341,7 +341,7 @@ Attendance Records: Deleting attendance marks the student as absent for that dat
 
 #### Delete Student
 To remove a student from the application, the user specifies the student's index in the displayed student list. The system ensures
-that the index is valid and then proceeds to delete the student, updating all related records. Below is the sequence diagram regarding deleting student. 
+that the index is valid and then proceeds to delete the student, updating all related records. Below is the sequence diagram regarding deleting student.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" width="280" />
 
@@ -349,7 +349,7 @@ that the index is valid and then proceeds to delete the student, updating all re
 To delete a tutorial, the user provides the tutorial ID. The system verifies the existence of the tutorial and then removes it, updating any students assigned to it.
 The sequence diagram of deleting tuorial is similar to deleting student.
 
-#### Delete Assignment 
+#### Delete Assignment
 To delete an assignment, the user specifies the assignment title. The system ensures that the assignment exists before deleting it from the model. The
 activity diagram below illustrates what the series of actions the user should do to delete assignment.
 
@@ -357,7 +357,7 @@ activity diagram below illustrates what the series of actions the user should do
 
 #### Delete Attendance
 To delete a student's attendance record for a specific date and tutorial, the user provides the student ID, tutorial ID, and date. The diagram is
-also similar to adding attendance, thus is not given. 
+also similar to adding attendance, thus is not given.
 
 #### Implementation - Design Considerations:
 Alternative 1 (Current Implementation):
@@ -689,8 +689,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a student with all required details
     1. Prerequisites: Ensure that the tutorial T1001 exists in the system.
-   
-    2. Test case: `addStu n/John Doe id/A1234567X t/T1001`<br> 
+
+    2. Test case: `addStu n/John Doe id/A1234567X t/T1001`<br>
        Expected: A new student named "John Doe" with student ID "A1234567X" is added to tutorial "T1001". Confirmation message is displayed with the student's details.
 
 2. Adding a student with missing compulsory fields
@@ -780,7 +780,7 @@ testers are expected to do more *exploratory* testing.
     1. Simulate a missing data file:
         * Close the application.
         * Navigate to the data directory where the application stores its data files.
-        * Delete the data file (e.g., addressbook.json). 
+        * Delete the data file (e.g., addressbook.json).
     2. Re-launch the application.<br>
        Expected: The application starts with an empty data set. A new data file is created automatically.
 
@@ -788,7 +788,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Simulate a corrupted data file:
         * Close the application.
-        * Open the data file (e.g., addressbook.json) with a text editor. 
+        * Open the data file (e.g., addressbook.json) with a text editor.
         * Introduce invalid JSON syntax (e.g., delete a closing brace or add random text).
         * Save the file.
     2. Re-launch the application.<br>
