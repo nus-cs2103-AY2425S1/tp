@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -39,7 +40,7 @@ public class PaidCommandTest {
     }
 
     @Test
-    public void execute_validIndexAndPolicy_success() throws seedu.address.logic.commands.exceptions.CommandException {
+    public void execute_validIndexAndPolicy_success() throws CommandException {
         Person personToUpdate = new PersonBuilder().build();
         Policy oldPolicy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
         personToUpdate.setPolicies(List.of(oldPolicy));
@@ -62,8 +63,7 @@ public class PaidCommandTest {
     }
 
     @Test
-    public void execute_invalidPolicy_throwsCommandException() throws
-            seedu.address.logic.commands.exceptions.CommandException {
+    public void execute_invalidPolicy_throwsCommandException() {
         PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON, NON_EXISTENT_POLICY_NAME);
 
         assertCommandFailure(paidCommand, model, String.format(PaidCommand.MESSAGE_INVALID_POLICY,
@@ -80,8 +80,7 @@ public class PaidCommandTest {
     }
 
     @Test
-    public void execute_policyExpiringSoon_throwsCommandException()
-            throws seedu.address.logic.commands.exceptions.CommandException {
+    public void execute_policyExpiringSoon_throwsCommandException() throws CommandException {
         Person personToUpdate = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Policy policyToUpdate = new Policy(EXPIRING_POLICY_NAME, VALID_DATE_1, VALID_DATE_2,
                 EXPIRING_INSURANCE_PAYMENT);

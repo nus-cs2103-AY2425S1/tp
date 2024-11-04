@@ -162,6 +162,9 @@ public class Person {
         };
     }
 
+    /**
+     * Returns a comparator that compares persons by next payment date in reverse chronological order.
+     */
     public static Comparator<Person> getReversedPayDateComparator() {
         return (person1, person2) -> {
             boolean person1HasPolicies = person1.getReversedPolicies().size() > 0;
@@ -189,6 +192,10 @@ public class Person {
         return Collections.unmodifiableList(policies);
     }
 
+    /**
+     * Returns an immutable policy list in the reversed order, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public List<Policy> getReversedPolicies() {
         policies.sort(Policy.getPolicyPaymentDueDateComparator().reversed());
         return Collections.unmodifiableList(policies);
