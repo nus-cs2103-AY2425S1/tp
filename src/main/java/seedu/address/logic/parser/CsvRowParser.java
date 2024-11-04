@@ -32,8 +32,6 @@ public class CsvRowParser {
      * @throws CommandException if the headers are incorrect
      */
     public static void checkHeaders(String[] headers, String[] expectedHeaders) throws CommandException {
-        System.out.println(headers.length);
-        System.out.println(headers.toString());
         if (headers.length == 0) {
             throw new CommandException("CSV header is empty/contains empty values, please ensure"
                 + " all headers are valid.\n"
@@ -53,7 +51,7 @@ public class CsvRowParser {
         }
 
         if (headers.length > expectedHeaders.length) {
-            throw new CommandException("There is an extra column!\n"
+            throw new CommandException("There are extra columns!\n"
                 + "Please ensure there is only be 8 corresponding header/data columns\n" + CORRECT_HEADER_USAGE);
         }
 
@@ -63,8 +61,6 @@ public class CsvRowParser {
 
         for (int i = 0; i < headers.length; i++) {
             if (!headers[i].trim().equalsIgnoreCase(expectedHeaders[i])) {
-                System.out.println("header:" + headers[2]);
-                System.out.println("\nexpected header:" + expectedHeaders[i]);
                 throw new CommandException("Header is defined incorrectly!\n" + CORRECT_HEADER_USAGE);
             }
         }

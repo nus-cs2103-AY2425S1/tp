@@ -70,10 +70,15 @@ public class ImportCommand extends Command {
                 Person person = CsvPersonParser.parsePerson(cleanedFields, model);
                 newPersons.add(person);
             }
+
+            if (newPersons.isEmpty()) {
+                throw new CommandException("There is no person data present");
+            }
             model.replaceAllPersons(newPersons);
         } catch (IOException | CsvValidationException | DuplicatePersonException | CommandException e) {
             throw new CommandException("Error reading from the CSV file: " + e.getMessage());
         }
+
         // Replace all existing person with those present in the CSV file.
 
         return new CommandResult(String.format("Successfully imported %d persons.", newPersons.size()));
