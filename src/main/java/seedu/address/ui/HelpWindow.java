@@ -7,16 +7,16 @@ import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -34,13 +34,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button openGuideButton;
-
-    @FXML
     private TableView<CommandSummary> commandTable;
-
-    @FXML
-    private WebView helpMessageWebView;
 
     @FXML
     private VBox mainContainer;
@@ -58,21 +52,6 @@ public class HelpWindow extends UiPart<Stage> {
         titleLabel.getStyleClass().add("help-title");
         mainContainer.getChildren().add(0, titleLabel);
         initializeCommandTable();
-        helpMessageWebView.getEngine().loadContent(
-                "<html><body style='display: flex; justify-content: center; align-items: center; height: 100%; "
-                        + "margin: 0; padding: 0; background-color: #2b2b2b;'>"
-                        + "<p style='color: #e6e6e6; font-family: \"Segoe UI\", sans-serif; font-size: 14pt; "
-                        + "text-align: center;'>"
-                        + "For more information, please refer to the user guide."
-                        + "</p></body></html>"
-        );
-
-        helpMessageWebView.setPrefHeight(50);
-
-        openGuideButton.setMaxWidth(Double.MAX_VALUE);
-        openGuideButton.setPrefHeight(40);
-
-        setEventHandlers();
     }
 
     /**
@@ -80,14 +59,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
-    }
-
-    /**
-     * Initializes the event handlers for the help window.
-     * Specifically, it sets the action on the button to open the user guide.
-     */
-    private void setEventHandlers() {
-        openGuideButton.setOnAction(event -> openUserGuide());
     }
 
     /**
@@ -117,23 +88,26 @@ public class HelpWindow extends UiPart<Stage> {
                         "Automatic",
                         "No command required"),
                 new CommandSummary(
-                        "Add New Customer",
+                        "Add New Client",
                         "add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> "
-                                + "[t/ <TIER>] [rn/ <REMARK>]",
+                                + "[t/ <TIER>] [s/ <STATUS>] [r/ <REMARK>]",
                         "add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 "
-                                + "t/ gold rn/ got anger issue"),
-                new CommandSummary("Remove Old Customer",
+                                + "t/ gold s/ urgent r/ got anger issue"),
+                new CommandSummary("Remove Old Client",
                         "delete <INDEX>",
                         "delete 69"),
-                new CommandSummary("Edit Existing Customer",
+                new CommandSummary("Edit Existing Client",
                         "edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> "
-                                + "[t/ <TIER>] "
+                                + "[t/ <TIER>] [s/ <STATUS>]"
                                 + "[rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>]",
-                        "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000"
+                        "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 "
                                 + "ra/ Specialist in eye care"),
-                new CommandSummary("Find a Customer by Details",
+                new CommandSummary("Find a Client by Details",
                         "filter <FLAG>/ <FLAG FIELD>",
                         "filter n/ TAN LESHEW"),
+                new CommandSummary("Undo Previous Command",
+                        "undo",
+                        "undo"),
                 new CommandSummary("Help",
                         "help",
                         "help"),
@@ -277,5 +251,17 @@ public class HelpWindow extends UiPart<Stage> {
         public String getExample() {
             return example;
         }
+
+    }
+
+    /**
+     * Copies the URL to the user guide to the clipboard.
+     */
+    @FXML
+    private void copyUrl() {
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent url = new ClipboardContent();
+        url.putString(USERGUIDE_URL);
+        clipboard.setContent(url);
     }
 }
