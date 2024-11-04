@@ -21,7 +21,7 @@ public class Grade {
             "Score should be in the form of a number and is between 0 "
                     + "and 100 inclusive";
     public static final String MESSAGE_WEIGHTAGE_CONSTRAINTS =
-            "Weightage should be a numeric value between 0 (exclusive) and 100 (inclusive).";
+            "Weightage should be between 0 and 100 (inclusive).";
 
 
     // Validation regex for test name (allows alphanumeric characters and spaces)
@@ -79,7 +79,7 @@ public class Grade {
      * @return true if the weightage is between 0 (exclusive) and 1 (inclusive), false otherwise.
      */
     public static boolean isValidWeightage(float weightage) {
-        return Float.compare(weightage, 0.0f) > 0 && Float.compare(weightage, 100.0f) <= 0;
+        return Float.compare(weightage, 0.0f) >= 0 && Float.compare(weightage, 100.0f) <= 0;
     }
 
     /**
