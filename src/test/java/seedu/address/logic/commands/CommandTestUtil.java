@@ -43,14 +43,17 @@ public class CommandTestUtil {
     public static final int VALID_MAX_SCORE_MATH = 100;
     public static final int VALID_SCORE_MATH = 100;
     public static final String VALID_ASSIGNMENT_NAME_PHYSICS = "Physics Homework";
+    public static final String INVALID_ASSIGNMENT_NAME = "Physics Homework*";
     public static final int VALID_MAX_SCORE_PHYSICS = 60;
     public static final int VALID_SCORE_PHYSICS = 45;
     public static final String VALID_ASSIGNMENT_NAME_CS = "CS2103 ip";
     public static final int VALID_MAX_SCORE_CS = 25;
+    public static final String VALID_ASSIGNMENT_INDEX_STRING = "1";
+    public static final String VALID_STUDENT_INDEX_STRING = "1";
+    public static final String VALID_SCORE_STRING = "100";
     public static final int VALID_SCORE = 0;
     public static final String INVALID_INDEX = "q";
     public static final String INVALID_SCORE = "abc";
-    public static final String INVALID_ASSIGNMENT_NAME = "Physics Homework*";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -75,9 +78,15 @@ public class CommandTestUtil {
     public static final EditCommand.EditStudentDescriptor DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK;
     public static final EditCommand.EditStudentDescriptor DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK;
     public static final EditCommand.EditStudentDescriptor DESC_BOB_WITH_ASSIGNMENT_WITH_REMARK;
-
     public static final EditAssignmentCommand.EditAssignmentDescriptor DESC_MATH;
     public static final EditAssignmentCommand.EditAssignmentDescriptor DESC_PHYSICS;
+
+    public static final int INDEX_ZERO = 0;
+    public static final int INDEX_ONE = 1;
+    public static final int INDEX_TWO = 2;
+    public static final int INDEX_THREE = 3;
+    public static final int INDEX_FOUR = 4;
+    public static final int INDEX_FIVE = 5;
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)

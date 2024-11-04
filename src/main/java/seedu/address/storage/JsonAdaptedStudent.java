@@ -105,12 +105,13 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        final Remark modelRemark = new Remark(remark);
+        final Remark modelRemark;
 
         Student student;
         if (remark == null) {
             student = new Student(modelName, modelPhone, modelEmail, modelTags);
         } else {
+            modelRemark = new Remark(remark);
             student = new Student(modelName, modelPhone, modelEmail, modelTags, modelRemark);
         }
         // Deserialize and associate assignments with the student
