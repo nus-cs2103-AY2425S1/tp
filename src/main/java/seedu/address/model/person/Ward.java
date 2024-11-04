@@ -11,7 +11,6 @@ public class Ward {
     public static final String MESSAGE_CONSTRAINTS =
             "WARD field cannot be an empty text";
     public static final String VALIDATION_REGEX = ".+";
-    public static final String WARNING_SPECIAL_CHARACTER = "Warning! Ward field includes special characters.\n";
     public final String value;
 
     /**

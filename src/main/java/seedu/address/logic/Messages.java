@@ -19,6 +19,9 @@ public class Messages {
     public static final String MESSAGE_APPOINTMENTS_LISTED_OVERVIEW = "%1$d appointments on %2$s listed";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String WARD_SPECIAL_CHARACTER = "Warning! Ward field includes special characters.\n";
+    public static final String ID_SPECIAL_CHARACTER = "Warning! Id field includes special characters.\n";
+    public static final String WARD_ID_SPECIAL_CHARACTER = "Warning! Ward & Id fields include special characters.\n";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

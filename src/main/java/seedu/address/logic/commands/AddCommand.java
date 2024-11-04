@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.ID_SPECIAL_CHARACTER;
+import static seedu.address.logic.Messages.WARD_ID_SPECIAL_CHARACTER;
+import static seedu.address.logic.Messages.WARD_SPECIAL_CHARACTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
@@ -12,7 +15,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Ward;
 
 /**
  * Adds a person to the address book.
@@ -59,8 +61,14 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
 
-        if (toAdd.hasSpecialCharactersInWard()) {
-            return new CommandResult(String.format(Ward.WARNING_SPECIAL_CHARACTER
+        if (toAdd.hasSpecialCharactersInWard() && toAdd.hasSpecialCharactersInId()) {
+            return new CommandResult(String.format(WARD_ID_SPECIAL_CHARACTER
+                    + MESSAGE_SUCCESS, Messages.format(toAdd)));
+        } else if (toAdd.hasSpecialCharactersInWard()) {
+            return new CommandResult(String.format(WARD_SPECIAL_CHARACTER
+                    + MESSAGE_SUCCESS, Messages.format(toAdd)));
+        } else if (toAdd.hasSpecialCharactersInId()) {
+            return new CommandResult(String.format(ID_SPECIAL_CHARACTER
                     + MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else {
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
