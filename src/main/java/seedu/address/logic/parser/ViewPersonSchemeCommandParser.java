@@ -5,8 +5,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.commons.core.index.Index;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-
-
 public class ViewPersonSchemeCommandParser implements Parser<ViewPersonSchemeCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ViewPersonSchemeCommand

@@ -29,8 +29,12 @@ import seedu.address.model.scheme.Scheme;
 import seedu.address.model.scheme.SchemeRetrieval;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Deletes a scheme from a person in the address book.
+ */
 public class DeleteSchemeCommand extends Command {
     public static final String COMMAND_WORD = "deletescheme";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a scheme from the family identified by the "
             + "index number used in the displayed family list.\n"
             + "This command can only be used after Scheme command.\n"
@@ -46,6 +50,10 @@ public class DeleteSchemeCommand extends Command {
     private Person personToEdit;
     private Person editedPerson;
 
+    /**
+     * @param personIndex of the person in the filtered person list to edit
+     * @param schemeIndex of the scheme in the person to be deleted
+     */
     public DeleteSchemeCommand(Index personIndex, ArrayList<Index> schemeIndex) {
         requireAllNonNull(personIndex, schemeIndex);
         this.personIndex = personIndex;
@@ -76,6 +84,13 @@ public class DeleteSchemeCommand extends Command {
 
     }
 
+    /**
+     * Deletes the scheme from the person.
+     * @param targetFamily the person to be edited
+     * @param schemeIndex the index of the scheme to be deleted
+     * @return the edited person
+     * @throws CommandException if the index is invalid
+     */
     private Person deleteSchemeFromPerson(Person targetFamily, ArrayList<Index> schemeIndex) throws CommandException {
         ArrayList<Scheme> currentSchemes = targetFamily.getSchemes();
         for (Index index : schemeIndex) {

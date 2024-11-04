@@ -29,6 +29,9 @@ import seedu.address.model.scheme.Scheme;
 import seedu.address.model.scheme.SchemeRetrieval;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Adds a scheme to a person in the address book.
+ */
 public class AddSchemeCommand extends Command {
 
     public static final String COMMAND_WORD = "addscheme";

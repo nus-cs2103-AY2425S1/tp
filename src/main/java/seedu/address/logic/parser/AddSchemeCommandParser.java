@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.SchemeCommand;
 
 import static java.util.Objects.requireNonNull;
@@ -13,9 +11,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddSchemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
+/**
+ * Parses input arguments and creates a new AddSchemeCommand object
+ */
 public class AddSchemeCommandParser implements Parser<AddSchemeCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddSchemeCommand
+     * and returns an AddSchemeCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AddSchemeCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_INDEX);
