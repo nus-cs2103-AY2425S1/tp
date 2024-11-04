@@ -147,7 +147,7 @@ public class AdvFilterCommand extends Command {
         return switch (operator) {
         case EQUAL -> tag.tagValue.equalsIgnoreCase(tagValue);
         case NOT_EQUAL -> !tag.tagValue.equalsIgnoreCase(tagValue);
-        case GREATER_THAN-> {
+        case GREATER_THAN -> {
             Integer doubleResult = compareDouble(tag.tagValue, tagValue);
             if (doubleResult != null) {
                 yield doubleResult > 0;
