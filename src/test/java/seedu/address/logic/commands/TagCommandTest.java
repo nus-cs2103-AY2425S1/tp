@@ -112,7 +112,7 @@ public class TagCommandTest {
     }
 
     /**
-     * EP: Valid tag successfully tagged on some people but not on others (i.e. Tag is in tag list. is not already on
+     * EP: Valid tag successfully tagged on some people but not on others (i.e. Tag is in tag list, is not already on
      * some but on others).
      */
     @Test
@@ -233,15 +233,13 @@ public class TagCommandTest {
     }
 
     /**
-     * EP: Undo an unsuccessful tag command involving invalid tag.
+     * EP: Attempting to undo an unsuccessful tag command involving invalid tag.
      */
     @Test
     public void execute_undoTagCommandWithTagNotCreated_failure() {
         Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Tag nonExistentTag = new Tag("nonExistentTag");
         assertFalse(model.hasTag(nonExistentTag));
-
-        Person personToTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         Set<Tag> tags = new HashSet<>();
         List<Index> indexes = new ArrayList<>();
@@ -258,7 +256,7 @@ public class TagCommandTest {
     }
 
     /**
-     * EP: Undo an unsuccessful tag command involving invalid index.
+     * EP: Attempting to undo an unsuccessful tag command involving invalid index.
      */
     @Test
     public void execute_undoTagCommandWithInvalidIndex_failure() {
