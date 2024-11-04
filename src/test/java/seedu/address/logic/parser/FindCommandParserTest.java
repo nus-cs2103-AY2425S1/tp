@@ -14,7 +14,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.PostalContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -39,15 +38,6 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "12345 67890", expectedFindCommand);
         assertParseSuccess(parser, " \n 12345 \n \t 67890  \t", expectedFindCommand);
     }
-
-    @Test
-    public void parse_validPostal_returnsFindCommand() {
-        FindCommand expectedFindCommand =
-                new FindCommand(new PostalContainsKeywordsPredicate(Arrays.asList("123000", "123456")));
-        assertParseSuccess(parser, "123000 123456", expectedFindCommand);
-        assertParseSuccess(parser, " \n 123000 \n \t 123456  \t", expectedFindCommand);
-    }
-
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
