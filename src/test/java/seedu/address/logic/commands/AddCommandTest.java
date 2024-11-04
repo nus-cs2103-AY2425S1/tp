@@ -174,6 +174,21 @@ public class AddCommandTest {
         public ObservableList<Person> getSortedAppointmentList() {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public ObservableList<Person> getAllAppointmentsList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void updateAllAppointmentsList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasOverlappingAppointment(Person newAppointmentPerson) {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**

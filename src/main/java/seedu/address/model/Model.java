@@ -97,4 +97,15 @@ public interface Model {
      * Updates the filter of the sorted appointment list to filter by the given {@code predicate}.
      */
     void updateFilteredAppointmentList(AppointmentContainsDatePredicate predicate);
+
+
+    /** Returns an unmodifiable view of the all appointment list */
+    ObservableList<Person> getAllAppointmentsList();
+
+    /**
+     * Updates the filter of the all appointment list to filter by the given {@code predicate}.
+     */
+    void updateAllAppointmentsList(Predicate<Person> predicate);
+
+    boolean hasOverlappingAppointment(Person newAppointmentPerson);
 }
