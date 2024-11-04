@@ -18,6 +18,7 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 - [Features](#features) 
   - [General Commands](#general-commands)
     - [Viewing help: `help`](#viewing-help--help)
+    - [Viewing overall statistics: `stats`](#viewing-overall-statistics--stats)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Exiting the program: `exit`](#exiting-the-program--exit)
   - [Adding Entries Commands](#adding-entries-commands)
@@ -117,6 +118,14 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Viewing overall statistics : `stats`
+
+Displays a comprehensive summary of the address book, including the total number of people, properties, and other key metrics.
+
+![stats_command](images/statsCommand.png)
+
+Format: `clear`
 
 ### Clearing all entries : `clear`
 
