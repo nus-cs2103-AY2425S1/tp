@@ -21,10 +21,12 @@ public class SearchCommand extends Command {
             + "Begin time and end time must be in format yyyy-MM-dd HH:mm.\n"
             + "If begin time is not provided, it will search for all schedule before end time.\n"
             + "If end time is not provided, it will search for all schedule after begin time.\n"
+            + "If no matching result, an empty list will be provided.\n"
             + "Parameters: "
             + PREFIX_BEGIN + "start time "
-            + PREFIX_END + "end time "
-            + "Example: " + COMMAND_WORD + PREFIX_BEGIN + " 2024-10-10 00:00 " + PREFIX_END + " 2024-10-12 00:00";
+            + PREFIX_END + "end time\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_BEGIN + "2024-10-10 00:00 " + PREFIX_END + "2024-10-12 00:00";
 
     public static final String MESSAGE_SUCCESS = "Search successful";
     private LocalDateTime begin;
