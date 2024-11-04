@@ -95,6 +95,7 @@ public class FavouriteCommand extends Command {
                     personToEdit.getHistory(),
                     personToEdit.getPropertyList());
             model.setPerson(personToEdit, editedPerson);
+            ViewCommand.updateDisplay(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(resultString, editedPerson.getFullName()));
         }

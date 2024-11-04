@@ -33,7 +33,10 @@ public class ViewCommand extends Command {
 
     public static final String NO_WINDOWS_OPEN = "No view windows are currently open.";
     private static Stage currentStage;
+    private static Person currentPersonDisplayed;
+    private static PersonDetails personDetailsController;
     private final Index index;
+
 
     /**
      * Constructs a {@code ViewCommand} with the specified {@code Index}.
@@ -43,6 +46,9 @@ public class ViewCommand extends Command {
     public ViewCommand(Index index) {
         requireNonNull(index);
         this.index = index;
+        if (personDetailsController == null) {
+            personDetailsController = new PersonDetails();
+        }
     }
 
     /**
@@ -74,6 +80,7 @@ public class ViewCommand extends Command {
             Parent root = fxmlLoader.load();
 
             PersonDetails controller = fxmlLoader.getController();
+            personDetailsController = controller;
             controller.setPersonDetails(personToShow);
 
             // Create a new stage (window) for the popup
@@ -90,6 +97,7 @@ public class ViewCommand extends Command {
 
             // Keep track of the current stage (for closing later)
             currentStage = newStage;
+            currentPersonDisplayed = personToShow;
 
             // Show the new window without stealing focus
             newStage.show();
@@ -120,6 +128,28 @@ public class ViewCommand extends Command {
 
     public static Stage getCurrentStage() {
         return currentStage;
+    }
+
+    /**
+     * Updates the current display window with any new information for the specified person, if required.
+     * <p>
+     * This method compares the person currently displayed with the updated information provided in {@code newPerson}.
+     * If {@code personToEdit} matches the currently displayed person and the display window (stage) is open,
+     * it refreshes the view with the new data.
+     *
+     * <p>
+     * This method follows the Model-View-Controller (MVC) pattern, where it updates the view based on the model's data
+     * without reopening the display window.
+     *
+     * @param personToEdit the {@code Person} object representing the person currently displayed
+     * @param newPerson the updated {@code Person} object containing the latest information
+     */
+    public static void updateDisplay(Person personToEdit, Person newPerson) {
+        if (!personToEdit.isSamePerson(currentPersonDisplayed) || currentStage == null) {
+            return;
+        }
+        currentPersonDisplayed = newPerson;
+        personDetailsController.refresh(newPerson);
     }
 
     @Override
