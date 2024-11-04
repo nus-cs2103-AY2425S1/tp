@@ -98,20 +98,38 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book. Fields that can be edited: name, phone, address, email.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+If you know the index of the specific contact you want to delete:
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+Format #1: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower` edits the name of the 2nd person to be `Betsy Crower`.
+
+If you do not know the index but know the name of the contact you want to delete:
+
+Format #2: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
+
+* Filters a list of contacts with names that contains the entire NAME keyword
+* If there is only one contact that matches, the contact will be edited directly
+* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `edit INDEX …​` to specify the contact they want to edit
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
+
+Examples:
+*  `edit John Doe p/91234567 e/johndoe@example.com` edits the phone number and email address of `John Doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Betsy n/Betsy Crower` edits the name of `Betsy` to be `Betsy Crower`.
+* `edit Chris p/99998888` returns a filtered list of contacts whose names contain `Chris` and user need to edit their existing command to become
+  `edit [INDEX of specific person] p/99998888` to specify the `Chris` they want to edit.
+
 
 ### Locating persons by name: `find`
 
@@ -135,10 +153,10 @@ Examples:
 
 View the contact of a specified person from the address book.
 
-Format: `view KEYWORD`
+Format: `view NAME`
 
 * This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
-* The keyword can be either the full name or partial name (consisting of only one word).
+* Returns a filtered list made out of the contacts with names that contains the ENTIRE name keyword
 * Only the name can be used for viewing
 
 Examples:
@@ -151,29 +169,28 @@ Deletes the specified person from the address book.
 
 If you know the index of the specific contact you want to delete:
 
-Format: `delete INDEX`
+Format #1: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Example:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 
 If you do not know the index but know the name of the contact you want to delete:
 
-Format: `delete KEYWORD`
+Format #2: `delete KEYWORD`
 
+* Filters a list of contacts with names that contains the ENTIRE name keyword
+* If there is only one contact that matches, the contact will be edited directly
+* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `delete INDEX …​` to specify the contact they want to delete
 * This command is case-insensitive. e.g. `alex tan` will match `Alex Tan`
-* The keyword can be either the full name or partial name.
-* When there are more than one contact, of which name contains the keyword, a filtered list containing those contacts
-  will be given. From that list, you can obtain the index of the specific contact you want to delete. With that index,
-  you can do a `delete INDEX` to delete that specific contact.
 
-Example:
+Examples:
 
 * `delete Betsy` will delete the contact of Betsy Tan directly if there are no duplicates.
-* `delete Alex` will give a list of contacts named `Alex`, and user can choose which contact from filtered list to deleted from.
+* `delete Alex Tan` will give a list of contacts whose names contains `Alex Tan`. User will then edit their command into `delete INDEX …​` to specify the `Alex Tan` they want to delete.
 
 ### Clearing all entries : `clear`
 
@@ -257,8 +274,9 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | #1: `delete INDEX` or <br> #2: `delete NAME`<br> e.g., `delete 1`, `delete Alex`, `delete Alex Tan`
+**Edit**   | #1: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` or <br> #2: `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit James n/James Lee e/jameslee@example.com`
+**View**   | `view NAME`<br> e.g., `view Alex`, `view Alex Tan`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]`<br> e.g., `filter r/friends`
 **View**   | `view KEYWORD`<br> e.g., `view Alex`, `view Alex Tan`
