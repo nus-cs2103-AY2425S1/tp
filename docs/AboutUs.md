@@ -19,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/zwezeya.md)]
 
 * Role: Developer
-* Responsibilities: Goat
+* Responsibilities: Software Developer
 
 ### Raghava Chittidi
 

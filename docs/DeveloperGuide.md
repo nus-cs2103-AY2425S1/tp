@@ -173,7 +173,7 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
 
 <puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
 
-`AddressBookParser` first obtains the values corresponding to the prefixes `c/`, `r/`, `e/` and `d/`.
+`AddressBookParser` first obtains the values corresponding to the prefixes `n/`, `r/`, `e/` and `d/`.
 `AddressBookParser` ensures that:
 - All values corresponding to the prefixes are valid
   If any of the above constraints are violated, `AddressBookParser` throws a ParseException. Otherwise, it creates a new instance of `AddCommand` that corresponds to the user input.
@@ -215,7 +215,6 @@ Otherwise, it creates a new instance of `FindCommand` that corresponds to the us
 Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
 `setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
 
-
 ### Update the Status of an Internship Application
 The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the command input, creating a `StatusCommandParser` to interpret the request.
 
@@ -234,7 +233,6 @@ Upon execution, `StatusCommand`:
 3. **Refreshes the Filtered List**: The previous filter predicate is reapplied using `model::updateFilteredList`.
 
 Finally, `StatusCommand` generates a `CommandResult` with a confirmation message, reflecting the updated status. This is then returned to `LogicManager`, completing the command execution.
-
 
 ### Filter internship applications
 
@@ -279,6 +277,15 @@ Upon execution, `ChartCommand` gets the chart data which is encapsulated in `Com
 
 
 [//]: # (Exit section here)
+
+### Close the application
+The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
+<puml src="diagrams/ExitSequenceDiagram.puml" alt="ExitSequenceDiagram" />
+
+`AddressBookParser` creates `ExitCommand`
+Upon execution, `ExitCommand` gets encapsulates the intent to close the application in `CommandResult`.
+`MainWindow` checks for the intent via `isExit`, after which, it calls `handleExit` to close the application.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -508,6 +515,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use Case: Clear all internship entries**
+
+**MSS**
+
+1. The user requests to clear all internship entries.
+2. HireMe clears all internship entries.
+
+   Use case ends.
+
 **Use Case: Summarise all internship entries**
 
 **MSS**
@@ -517,6 +533,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Use Case: Filter internship entries by status**
+
+**MSS**
+
+1. The user provides a status to filter internship entries.
+2. HireMe shows all internship entries with the given status.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The user provided an invalid status.
+    * 1a1. HireMe shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 

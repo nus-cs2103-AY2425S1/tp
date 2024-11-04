@@ -50,13 +50,13 @@ deactivate AddressBookParser
 LogicManager -> AddCommand : execute(m)
 activate AddCommand
 
-AddCommand -> Model : hasItem(1)
+AddCommand -> Model : hasItem(internship)
 activate Model
 
 Model --> AddCommand
 deactivate Model
 
-AddCommand -> Model : addItem(1)
+AddCommand -> Model : addItem(internship)
 activate Model
 
 Model --> AddCommand
