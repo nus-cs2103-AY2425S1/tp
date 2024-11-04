@@ -10,6 +10,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -20,6 +23,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Student;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for PayCommand.
@@ -34,7 +38,7 @@ public class PayCommandTest {
         PayCommand payCommand = new PayCommand(INDEX_FIRST_STUDENT, hoursPaid);
 
         Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        double amountPaid = studentToEdit.getRate().value * hoursPaid;
+        double amountPaid = studentToEdit.getRateValue() * hoursPaid;
         Student editedStudent = createEditedStudentWithUpdatedPaidAmount(studentToEdit, amountPaid);
 
         String expectedMessage = String.format(PayCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
@@ -62,7 +66,7 @@ public class PayCommandTest {
         PayCommand payCommand = new PayCommand(INDEX_FIRST_STUDENT, hoursPaid);
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        double amountPaid = studentInFilteredList.getRate().value * hoursPaid;
+        double amountPaid = studentInFilteredList.getRateValue() * hoursPaid;
         Student editedStudent = createEditedStudentWithUpdatedPaidAmount(studentInFilteredList, amountPaid);
 
         String expectedMessage = String.format(PayCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
@@ -84,6 +88,41 @@ public class PayCommandTest {
         PayCommand payCommand = new PayCommand(outOfBoundIndex, 3.0);
 
         assertCommandFailure(payCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidPaidAmountFilteredList_failure() {
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        double invalidPaidAmount = 10000000;
+
+        PayCommand payCommand = new PayCommand(INDEX_FIRST_STUDENT, invalidPaidAmount);
+
+        assertCommandFailure(payCommand, model, Messages.MESSAGE_LIMIT);
+    }
+
+    @Test
+    public void execute_exceededLimitUnfilteredList_failure() {
+        Student chosenStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        double currentPaidAmountValue = chosenStudent.getPaidAmountValue();
+        double additionalPaidAmountValue = PaidAmount.MAX_VALUE - currentPaidAmountValue + 1;
+        double hour = BigDecimal.valueOf(additionalPaidAmountValue / chosenStudent.getRateValue())
+                .setScale(0, RoundingMode.UP)
+                .doubleValue();
+        PayCommand payCommand = new PayCommand(INDEX_FIRST_STUDENT, hour);
+        assertCommandFailure(payCommand, model, Messages.MESSAGE_LIMIT);
+    }
+
+    @Test
+    public void execute_exceededLimitFilteredList_failure() {
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        double currentPaidAmountValue = studentInFilteredList.getPaidAmountValue();
+        double additionalPaidAmountValue = PaidAmount.MAX_VALUE - currentPaidAmountValue;
+        double hour = BigDecimal.valueOf(additionalPaidAmountValue / studentInFilteredList.getRateValue())
+                .setScale(0, RoundingMode.UP).doubleValue();
+        PayCommand payCommand = new PayCommand(INDEX_FIRST_STUDENT, hour);
+
+        assertCommandFailure(payCommand, model, Messages.MESSAGE_LIMIT);
     }
 
     @Test
@@ -139,4 +178,3 @@ public class PayCommandTest {
         assertEquals(expected, payCommand.toString());
     }
 }
-

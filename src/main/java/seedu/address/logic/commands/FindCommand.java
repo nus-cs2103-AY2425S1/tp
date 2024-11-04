@@ -21,9 +21,9 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose:\n"
             + "1. name contain any of the specified KEYWORDS (case-insensitive)\n"
-            + "Parameters: [n/KEYWORD [MORE_KEYWORDS]]...\n"
+            + "Parameters: [n/KEYWORD [MORE_KEYWORDS...]] AND\n"
             + "2. schedule is on any of the specified DAY keywords (case-insensitive)\n"
-            + "Parameters: [d/DAY [MORE_DAYS]]...\n"
+            + "Parameters: [d/DAY [MORE_DAYS...]]\n"
             + "and displays them as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD + " n/alice bob charlie" + " d/monday tuesday";
 

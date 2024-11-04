@@ -28,7 +28,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
    <br>
-   ![Ui](images/UGTeach.png)
+   ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
@@ -54,13 +54,14 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
-**Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/yeoh d/Friday`
+**Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **List**   | `list`
 **Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
 **Remind**   | `remind`
 **Help**   | `help`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
+**Exit**   | `exit`
 
 ## Features
 
@@ -115,9 +116,12 @@ Adds a student to the address book.
 
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
-* **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
+* **START_TIME** and **END_TIME** are represented as `HHmm`.
 * **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
-* **RATE**, **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
+* **RATE** is the tuition fee per hour. It must meet the following criteria:
+  * Minimum: $0.01 (must be a positive value)
+  * Maximum: $1000.00 (two decimal places allowed)
+* **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`.
 * **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
@@ -128,18 +132,17 @@ Adds a student to the address book.
 <box type="tip" header="##### Tips">
 
 
-* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit).
-* <b>RATE</b> is the tuition fee per hour.
+* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student-edit).
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.   
 </box>
 
-### Listing all students : `list`
+### Listing all students: `list`
 
 Shows a list of all students in the address book.
 
 Format: `list`
 
-### Editing a student : `edit`
+### Editing a student: `edit`
 
 Edits an existing student in the address book.
 
@@ -167,8 +170,8 @@ Edits an existing student in the address book.
 
 <box type="tip" header="##### Tips">
 
-* You may refer to [`pay`](#receiving-payment-from-a-student--pay), 
-[`owe`](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle`](#settle-payments-from-students-settle) commands 
+* You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
+[`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settle-payments-from-students-settle)
 for convenient ways to update the paid amount and owed amount.
 
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
@@ -176,20 +179,29 @@ for convenient ways to update the paid amount and owed amount.
 
 ### Showing income data: `income`
 
-Shows the total amount of tuition fee you have received from the students and the amount that hasn't been paid.
+Shows the total amount of tuition fee that you have been paid, as well as total amount that is owed.
 
-Format: `income`
+**Format:** `income`
+
+**Examples**
+* `income` when all entries are listed gives the total tuition fee paid, as well as total amount that is owed
+* `find n/Alex` followed by `income` shows total tuition fee paid, as well as owed total amount that is owed, from
+students whose name contains Alex
+
+**Output**
+![result for `income` when all entries listed](images/incomeResult.png)
+
 
 ### Finding students' information: `find`
 
-Finds students whose names contain any of the given keywords or whose tuition day contains any of the given days.
+Finds students whose names contain any of the given keywords *and* their tuition day contains any of the given days.
 
-Format: `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`
+Format: `find [n/KEYWORD [MORE_KEYWORDS...]] [d/DAY [MORE_DAYS...]]`
 
 Examples:
 * `find n/alex` returns `Alex Yeoh` and `Alex Tan`
-* `find n/yeoh d/Friday` returns `Alex Yeoh`, `Alex Tan`<br>
-  ![result for `find n/yeoh d/Friday`](images/findResult.png)
+* `find n/Alex d/Friday` returns `Alex Tan`<br>
+  ![result for `find n/Alex d/Friday`](images/findResult.png)
 
 <box type="important" header="##### Constraints">
 <markdown>
@@ -201,36 +213,44 @@ Examples:
 
 <box type="tip" header="##### Tips">
 <markdown>
+* The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list).
+<br> i.e. The `find` command will not be affected by the previous `find` command. 
 * The search is case-insensitive. e.g. `alex` will match `Alex`
 * Only full words will be matched e.g. `alex` will not match `Alexander`
 * The order of the parameters does not matter. 
-<br/>e.g. `find d/Friday n/yeoh` will return the same result as `find n/yeoh d/Friday`
+<br/>e.g. `find d/Friday n/Alex` will return the same result as `find n/Alex d/Friday`
 * The search finds all the students whose 
-    1. names matches at least one of the keywords **OR** 
-    2. the tuition day matches the days.
-
-  e.g. `find n/yeoh d/Friday` returns `Alex Yeoh`, `Alex Tan` because:
-
-* `Alex Yeoh` matches keyword `yeoh`
-* `Alex Tan` has a tuition on `Friday`.
+    * names matches at least one of the keywords **AND** 
+    * the tuition day matches the days.
+    * e.g. `find n/Alex d/Friday` returns `Alex Tan` because:
+        * while `Alex Yeoh` and `Alex Tan` matches keyword `Alex`,
+        * only `Alex Tan` has a tuition on `Friday`.
 </markdown>
 </box>
 
-### Receiving payment from a student : `pay`
+### Receiving payment from a student: `pay`
 
 Updates the amount of tuition fee paid by the specified student after a lesson.
 
-Format: `pay INDEX hr/HOURS_PAID`
+**Format:** `pay INDEX hr/HOURS_PAID`
 
-Example:
+**Example:**
 * `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
-  ![payResult.png](images/payResult.png)
+  
+**Output:**
+![payResult.png](images/payResult.png)
 
 <box type="important" header="##### Constraints">
 
-1. The index refers to the index number shown in the displayed student list.
-2. The index **must be a positive integer** 1, 2, 3, …​
-3. Hours paid field should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX must be a positive integer** 1, 2, 3, …​
+* **HOURS_PAID** should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+
+</box>
+
+<box type="tip" header="##### Tips">
+
+* In case you accidentally make a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the PAID_AMOUNT as your preference.
 
 </box>
 
@@ -238,19 +258,25 @@ Example:
 
 Updates the amount of tuition fee owed by a specified student after a lesson.
 
-Format: `owe INDEX hr/HOURS_OWED`
+**Format:** `owe INDEX hr/HOURS_OWED`
 
-Example: 
-* `owe 1 hr/1.5` updates the tuition fee owed by the 2nd student in the list.
+**Example:** 
+* `owe 1 hr/1.5` updates the tuition fee owed by the 1st student in the list.
+
+**Output:**
 ![oweResult.png](images/oweResult.png)
 
 <box type="important" header="##### Constraints">
-    Hours owed by a student must be a positive multiple of 0.5.
+
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX must be a positive integer** 1, 2, 3, …​
+* **HOURS_OWED** must be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+
 </box>
 
 <box type="tip" header="##### Tips">
 
-In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the OWE_AMOUNT as your preference.
+* In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the OWE_AMOUNT as your preference.
 
 </box>
 
@@ -258,17 +284,20 @@ In case you accidentally make a mistake using the <md>`owe`</md> command, you ca
 
 Updates the amount of tuition fee paid by the student and the amount of tuition fee owed by the student.
 
-Format: `settle INDEX amount/AMOUNT`
+**Format:** `settle INDEX amount/AMOUNT`
 
-Examples:<br>`settle 1 amount/500.00`
+**Examples:**
+* `settle 1 amount/500.00`
 
-![settleResult.png](images%2FsettleResult.png)
+**Output:**
+
+![settleResult.jpg](images%2FsettleResult.jpg)
 
 <box type="important" header="##### Constraints">
 
-1. The index refers to the index number shown in the displayed student list.
-2. The index **must be a positive integer** 1, 2, 3, …​
-3. Amount must be a positive value and must not be more than owed amount.
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX** **must be a positive integer** 1, 2, 3, …​
+* **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
 
 </box>
 
@@ -292,7 +321,7 @@ Deletes the specified student from the address book.
 
 </box>
 
-### Getting a reminder for today : `remind`
+### Getting a reminder for today: `remind`
 
 Reminds you of all your lessons scheduled for `today`. UGTeach automatically reminds you when you launch it.
 
