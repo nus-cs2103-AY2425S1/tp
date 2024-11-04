@@ -143,14 +143,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
+        if (helpWindow.isShowing()) {
             // Focus on the help window if it is already opened or minimized (Bug from AB3)
             if (helpWindow.isIconified()) {
                 helpWindow.restore();
             }
             helpWindow.focus();
+        } else {
+            helpWindow.show();
         }
     }
 
