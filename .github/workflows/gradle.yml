@@ -58,12 +58,14 @@ jobs:
           script: |
             const artifactLink = `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts`
             const commentBody = `:page_facing_up: [Reports available here](${artifactLink})`
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
+            const prNumber = github.context.payload.pull_request.number;
+
+            await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
+              issue_number: prNumber,
               body: commentBody
-            })
+            });
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
