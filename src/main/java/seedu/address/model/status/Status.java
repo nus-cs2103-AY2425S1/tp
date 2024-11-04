@@ -23,7 +23,7 @@ public class Status {
         requireNonNull(statusString);
         checkArgument(isValidStatus(statusString), MESSAGE_CONSTRAINTS);
         if (statusString.isEmpty()) {
-            this.status = StatusEnum.NONE;
+            this.status = StatusEnum.NA;
         } else {
             this.status = StatusEnum.valueOf(statusString.toUpperCase());
         }
@@ -83,8 +83,8 @@ public class Status {
      * Represent what values Status can take.
      */
     public enum StatusEnum {
-        NONE,
+        URGENT,
         NON_URGENT,
-        URGENT
+        NA
     }
 }

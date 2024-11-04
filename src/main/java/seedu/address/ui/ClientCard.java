@@ -88,9 +88,9 @@ public class ClientCard extends UiPart<Region> {
         // Apply a different style class based on the status value
         Status.StatusEnum status = client.getStatus().status;
         switch (status) {
-        case NONE -> statusLabel.getStyleClass().add("none-status");
-        case NON_URGENT -> statusLabel.getStyleClass().add("nonUrgent-status");
         case URGENT -> statusLabel.getStyleClass().add("urgent-status");
+        case NON_URGENT -> statusLabel.getStyleClass().add("nonUrgent-status");
+        case NA -> statusLabel.getStyleClass().add("none-status");
         default -> statusLabel = null;
         }
         if (statusLabel != null) {
