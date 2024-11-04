@@ -160,7 +160,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in CampusConnect.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding tags to a specific person : `addtag`
+### Adds tags to a specific person : `addtag`
 
 Adds the specified person's tag.
 
