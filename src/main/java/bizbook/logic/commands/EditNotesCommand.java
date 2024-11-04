@@ -1,17 +1,17 @@
 package bizbook.logic.commands;
 
-import static bizbook.commons.util.CollectionUtil.requireAllNonNull;
-import static bizbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import bizbook.commons.core.index.Index;
 import bizbook.logic.Messages;
 import bizbook.logic.commands.exceptions.CommandException;
 import bizbook.model.Model;
 import bizbook.model.person.Note;
 import bizbook.model.person.Person;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static bizbook.commons.util.CollectionUtil.requireAllNonNull;
+import static bizbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Edits a note of an existing person in the address book.
@@ -97,6 +97,22 @@ public class EditNotesCommand extends Command {
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedNotes);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditNotesCommand otherEditNotesCommand)) {
+            return false;
+        }
+
+        return personIndex.equals(otherEditNotesCommand.personIndex) &&
+                noteIndex.equals(otherEditNotesCommand.noteIndex) &&
+                note.equals(otherEditNotesCommand.note);
     }
 
 }
