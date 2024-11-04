@@ -9,6 +9,10 @@ jobs:
         platform: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
 
+    permissions:
+      pull-requests: write
+      contents: read
+
     steps:
       - name: Set up repository
         uses: actions/checkout@main
@@ -58,14 +62,12 @@ jobs:
           script: |
             const artifactLink = `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts`
             const commentBody = `:page_facing_up: [Reports available here](${artifactLink})`
-            const prNumber = github.context.payload.pull_request.number;
-
-            await github.rest.issues.createComment({
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: prNumber,
               body: commentBody
-            });
+            })
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
