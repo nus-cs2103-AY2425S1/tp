@@ -34,7 +34,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String INVALID_PATH_1 = "notjson";
-    private static final String INVALID_PATH_2 = "have/";
+    private static final String INVALID_PATH_2 = "have/invalid.json";
     private static final String VALID_PATH = "TestingParser.json";
 
     private static final String WHITESPACE = " \t\r\n";
