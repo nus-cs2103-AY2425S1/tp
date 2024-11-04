@@ -362,19 +362,27 @@ The sequence diagram below illustrates the above process of editing a person's d
 
 ### List Feature
 
-#### `ListCommand` Implementation Sequence Diagram
-The sequence diagram below illustrates the process of executing the `list` command in TalentSG, which lists all persons in the address book.
+#### **Command Feature**
 
-![ListCommandSequenceDiagram.png](images%2FListCommandSequenceDiagram.png)
+`list`
+
+#### **Command Feature Purpose**
+
+The `list` command allows users to view all people in the `HRPlatform`.
 
 #### Key Components
 - **`ListCommand`**: Executes the listing operation to show all persons in the address book.
-- **`AddressBookParser`**: Parses user input to create a `ListCommand` object.
+- **`HRPlatformParser`**: Parses user input to create a `ListCommand` object.
 - **`LogicManager`**: Invokes the `ListCommand` to execute the list operation.
 - **`ModelManager`**: Implements the `Model` interface and contains the internal list of persons.
 - **`CommandResult`**: Encapsulates the result of the command execution, including any feedback to the user.
 
-#### Component Interaction Details
+### **Sequence of action**
+
+To help you understand how the `list` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `list` as an example.
+
 1. The user executes the command `list`, intending to list all persons in the address book.
 2. The `AddressBookParser` interprets the input and creates a `ListCommand` object.
 3. The `LogicManager` invokes the execute method of `ListCommand`.
@@ -382,13 +390,26 @@ The sequence diagram below illustrates the process of executing the `list` comma
 5. The execute method of `ListCommand` returns a `CommandResult` object, indicating the command was successful with the message "Listed all persons".
 6. The UI reflects the updated list of persons.
 
+:information_source: **Note**:
+
+- At step 2, if an invalid input is detected after `list` (e.g. `list xxxxxx`), an error will be shown and the sequence of action is terminated.
+
+#### `ListCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the above process of executing the `list` command in TalentSG, which lists all persons in the address book.
+
+![ListCommandSequenceDiagram.png](images%2FListCommandSequenceDiagram.png)
+
 ---
 
-### Find Feature ###
-#### `FindCommand` Implementation Sequence Diagram
-The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
+### Find Person Feature ###
 
-<img src="images/FindCommandSequenceDiagram.png" width="550" />
+#### **Command Feature**
+
+`find KEYWORD`
+
+#### **Command Feature Purpose**
+
+The `find` command allows users to find specific people in the `HRPlatform` based on a keyword.
 
 #### Key Components
 - `FindCommand`: Executes the find operation based on the user's input.
@@ -398,7 +419,12 @@ The sequence diagram below illustrates the process of finding all persons based 
 - `Predicate`: Represents the keyword for finding persons whose name contains any of the argument keyword in TalentSG.
 - `AddressBookParser`: Creates an `FindCommand` object based on the user input.
 
-#### Component Interaction Details
+### **Sequence of action**
+
+To help you understand how the `find` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `find John` as an example.
+
 1. The user executes the command `find john`, intending to find all persons whose name contains the keyword.
 2. The `FindCommandParser` interprets the input.
 3. An `FindCommand` object is created.
@@ -406,6 +432,16 @@ The sequence diagram below illustrates the process of finding all persons based 
 5. The execute method of `FindCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the filter of the filtered person list.
 6. The execute method of `FindCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FindCommand`.
 7. The UI reflects this updated filtered `Person` list.
+
+:information_source: **Note**:
+
+- At step 2, if an invalid input is detected after `list` (e.g. `list xxxxxx`), an error will be shown and the sequence of action is terminated.
+
+#### `FindCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
+
+<img src="images/FindCommandSequenceDiagram.png" width="550" />
+
 
 ### \[Proposed\] Undo/redo feature
 
