@@ -451,16 +451,16 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 8a. System detects that user did not enter all the required fields.
-    * 8a1. System shows user an error message.
+* 1a. System detects that user did not enter all the required fields.
+    * 1a1. System shows user an error message.
     * Use case ends.
 
-* 8b. System detects that user entered an invalid field.
-    * 8b1. System shows user an appropriate error message.
+* 1b. System detects that user entered an invalid field.
+    * 1b1. System shows user an appropriate error message.
     * Use case ends.
   
-* 8c. System detects that user tried to mark the attendance of non-member contact.
-    * 8b1. System shows user an appropriate error message.
+* 1c. System detects that user tried to mark the attendance of non-member contact.
+    * 1c1. System shows user an appropriate error message.
     * Use case ends.
 <br>
 
@@ -476,16 +476,16 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 9a. System detects that user did not enter all the required fields.
-    * 9a1. System shows user an error message.
+* 1a. System detects that user did not enter all the required fields.
+    * 1a1. System shows user an error message.
     * Use case ends.
 
-* 9b. System detects that user entered an invalid field.
-    * 9b1. System shows user an appropriate error message.
+* 1b. System detects that user entered an invalid field.
+    * 1b1. System shows user an appropriate error message.
     * Use case ends.
 
-* 9c. System detects that user tried to unmark the attendance of non-member contact.
-    * 9b1. System shows user an appropriate error message.
+* 1c. System detects that user tried to unmark the attendance of non-member contact.
+    * 1c1. System shows user an appropriate error message.
     * Use case ends.
 <br>
 
