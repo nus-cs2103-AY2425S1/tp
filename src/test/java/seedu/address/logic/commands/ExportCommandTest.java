@@ -11,7 +11,6 @@ import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -46,13 +45,10 @@ public class ExportCommandTest {
     }
 
     @Test
-    public void execute_invalidFilePath_throwsCommandException() {
-        String invalidFilePath = "/invalid/path/to/file.csv";
-        ExportCommand exportCommand = new ExportCommand(invalidFilePath);
+    public void execute_invalidFilePath_throwsIllegalArgumentException() {
+        String invalidFilePath = "invalid:path?.csv"; // Example with invalid characters
 
-        // Check if CommandException is thrown
-        CommandException exception = assertThrows(CommandException.class, () -> exportCommand.execute(model));
-        assertEquals(String.format(ExportCommand.MESSAGE_FAILURE, invalidFilePath), exception.getMessage());
+        assertThrows(IllegalArgumentException.class, () -> new ExportCommand(invalidFilePath));
     }
 
     @Test

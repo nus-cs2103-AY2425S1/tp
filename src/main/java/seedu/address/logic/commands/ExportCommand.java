@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Set;
@@ -45,10 +46,25 @@ public class ExportCommand extends Command {
      */
     public ExportCommand(String filePath) {
         requireNonNull(filePath);
-        // Use Paths.get() to handle both relative and absolute paths
+
+        // Check for universally invalid characters for file paths
+        if (filePath.matches(".*[<>:\"\\|?*].*")) {
+            throw new IllegalArgumentException("Invalid file path provided: " + filePath);
+        }
+
+        // Validate the file path using Paths.get()
+        try {
+            Paths.get(filePath);
+        } catch (InvalidPathException e) {
+            throw new IllegalArgumentException("Invalid file path provided: " + filePath, e);
+        }
+
+        // Set the file path as absolute if not already
         this.filePath = Paths.get(filePath).isAbsolute() ? Paths.get(filePath)
                 : Paths.get(System.getProperty("user.dir"), filePath);
     }
+
+
 
     /**
      * Executes the ExportCommand by writing all contacts to a CSV file.
