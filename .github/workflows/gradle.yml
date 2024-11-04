@@ -80,55 +80,21 @@ jobs:
           mkdir -p combined-reports/test-reports
           mkdir -p combined-reports/checkstyle-reports
 
+      - name: Set report path
+        id: set-report-path
+        run: |
+          if [ "${{ matrix.report_type }}" == "test-report" ]; then
+            echo "report_path=combined-reports/test-reports/${{ matrix.platform }}" >> $GITHUB_ENV
+          else
+            echo "report_path=combined-reports/checkstyle-reports/${{ matrix.platform }}" >> $GITHUB_ENV
+          fi
+
       # Download artifacts using matrix
       - name: Download ${{ matrix.report_type }} - ${{ matrix.platform }}
         uses: actions/download-artifact@v3
         with:
           name: '${{ matrix.report_type }}-${{ matrix.platform }}'
-          path: 'combined-reports/${{ matrix.report_type == 'test-report' && 'test-reports' || 'checkstyle-reports' }}/${{ matrix.platform }}'
-
-      # Create index page (only once)
-      - name: Create index page
-        if: matrix.platform == 'ubuntu-latest' && matrix.report_type == 'test-report'
-        run: |
-          cat > combined-reports/index.html << 'EOL'
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <title>Test and Checkstyle Reports</title>
-            <style>
-              body { font-family: Arial, sans-serif; margin: 40px; }
-              h1 { color: #333; }
-              .report-section { margin-bottom: 30px; }
-              .platform-list { list-style: none; padding-left: 20px; }
-              .platform-list li { margin: 10px 0; }
-              a { color: #0366d6; text-decoration: none; }
-              a:hover { text-decoration: underline; }
-            </style>
-          </head>
-          <body>
-            <h1>Build Reports</h1>
-          
-            <div class="report-section">
-              <h2>Test Reports</h2>
-              <ul class="platform-list">
-                <li><a href="test-reports/ubuntu-latest/index.html">Ubuntu Test Report</a></li>
-                <li><a href="test-reports/macos-latest/index.html">macOS Test Report</a></li>
-                <li><a href="test-reports/windows-latest/index.html">Windows Test Report</a></li>
-              </ul>
-            </div>
-          
-            <div class="report-section">
-              <h2>Checkstyle Reports</h2>
-              <ul class="platform-list">
-                <li><a href="checkstyle-reports/ubuntu-latest/main.html">Ubuntu Checkstyle Report</a></li>
-                <li><a href="checkstyle-reports/macos-latest/main.html">macOS Checkstyle Report</a></li>
-                <li><a href="checkstyle-reports/windows-latest/main.html">Windows Checkstyle Report</a></li>
-              </ul>
-            </div>
-          </body>
-          </html>
-          EOL
+          path: ${{ env.report_path }}
 
       # Upload combined artifact (only once)
       - name: Upload combined artifact
