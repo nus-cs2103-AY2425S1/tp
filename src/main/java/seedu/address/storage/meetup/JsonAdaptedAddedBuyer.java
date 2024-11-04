@@ -11,26 +11,26 @@ import seedu.address.model.meetup.AddedBuyer;
  */
 public class JsonAdaptedAddedBuyer {
 
-    private final String addedBuyerName;
+    private final String fullName;
 
     /**
-     * Constructs a {@code JsonAdaptedAddedBuyer} with the given {@code addedBuyerName}.
+     * Constructs a {@code JsonAdaptedAddedBuyer} with the given {@code fullName}.
      */
     @JsonCreator
-    public JsonAdaptedAddedBuyer(String addedBuyerName) {
-        this.addedBuyerName = addedBuyerName;
+    public JsonAdaptedAddedBuyer(String fullName) {
+        this.fullName = fullName;
     }
 
     /**
      * Converts a given {@code AddedBuyer} into this class for Jackson use.
      */
     public JsonAdaptedAddedBuyer(AddedBuyer source) {
-        addedBuyerName = source.addedBuyerName;
+        fullName = source.fullName;
     }
 
     @JsonValue
     public String getAddedBuyerName() {
-        return addedBuyerName;
+        return fullName;
     }
 
     /**
@@ -39,10 +39,10 @@ public class JsonAdaptedAddedBuyer {
      * @throws IllegalValueException if there were any data constraints violated in the adapted addedBuyer.
      */
     public AddedBuyer toModelType() throws IllegalValueException {
-        if (!AddedBuyer.isValidBuyerName(addedBuyerName)) {
+        if (!AddedBuyer.isValidName(fullName)) {
             throw new IllegalValueException(AddedBuyer.MESSAGE_CONSTRAINTS);
         }
-        return new AddedBuyer(addedBuyerName);
+        return new AddedBuyer(fullName);
     }
 
 }

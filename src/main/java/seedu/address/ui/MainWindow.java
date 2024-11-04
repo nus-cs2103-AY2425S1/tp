@@ -140,7 +140,8 @@ public class MainWindow extends UiPart<Stage> {
         buyerListPanel.getRoot().setVisible(true);
         buyerListPane.setVisible(true);
 
-        meetUpListPanel = new MeetUpListPanel(logic.getFilteredMeetUpList(), logic.getMeetUpList().getMeetUpList());
+        meetUpListPanel = new MeetUpListPanel(logic.getFilteredMeetUpList(),
+                logic.getMeetUpList().getMeetUpList(), logic.getBuyerList().getBuyerList());
         meetUpListPanelPlaceholder.getChildren().add(meetUpListPanel.getRoot());
         meetUpListPanel.getRoot().setVisible(false);
         meetUpListPane.setVisible(false);
@@ -214,8 +215,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleMeetUpList() {
-        meetUpListPanel = new MeetUpListPanel(logic.getFilteredMeetUpList(), logic.getMeetUpList().getMeetUpList());
-
+        meetUpListPanel = new MeetUpListPanel(logic.getFilteredMeetUpList(),
+                logic.getUnfilteredMeetUpList(), logic.getUnfilteredBuyerList());
         meetUpListPanelPlaceholder.getChildren().clear();
         meetUpListPanelPlaceholder.getChildren().add(meetUpListPanel.getRoot());
 

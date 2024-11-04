@@ -67,6 +67,10 @@ public class LogicManager implements Logic {
     public ReadOnlyBuyerList getBuyerList() {
         return model.getBuyerList();
     }
+    @Override
+    public ObservableList<Buyer> getUnfilteredBuyerList() {
+        return model.getUnfilteredBuyerList();
+    }
 
     @Override
     public ObservableList<Buyer> getFilteredBuyerList() {
@@ -82,7 +86,10 @@ public class LogicManager implements Logic {
     public ReadOnlyMeetUpList getMeetUpList() {
         return model.getMeetUpList();
     }
-
+    @Override
+    public ObservableList<MeetUp> getUnfilteredMeetUpList() {
+        return model.getUnfilteredMeetUpList();
+    }
     @Override
     public ObservableList<MeetUp> getFilteredMeetUpList() {
         return model.getFilteredMeetUpList();
@@ -97,7 +104,10 @@ public class LogicManager implements Logic {
     public ReadOnlyPropertyList getPropertyList() {
         return model.getPropertyList();
     }
-
+    @Override
+    public ObservableList<Property> getUnfilteredPropertyList() {
+        return model.getUnfilteredPropertyList();
+    }
     @Override
     public ObservableList<Property> getFilteredPropertyList() {
         return model.getFilteredPropertyList();
