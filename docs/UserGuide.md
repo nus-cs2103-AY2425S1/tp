@@ -41,7 +41,7 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
         - 5.2.1 [Adding a Client](#5-2-1-adding-a-client-add)
         - 5.2.2 [Listing All Clients](#5-2-2-listing-all-clients-list)
         - 5.2.3 [Filtering Clients](#5-2-3-filtering-clients-find-client)
-        - 5.2.4 [Editing a Client’s Details](#5-2-4-editing-a-client's-details-edit)
+        - 5.2.4 [Editing a Client](#5-2-4-editing-a-client-edit)
         - 5.2.5 [Deleting a Client](#5-2-5-deleting-a-client-delete)
     - 5.3 [Policy Management Commands](#5-3-policy-management-commands)
         - 5.3.1 [Adding a Policy](#5-3-1-adding-a-policy-add-policy)
@@ -310,7 +310,7 @@ Furthermore, certain edits can cause Prudy to behave in unexpected ways (e.g., i
 
 ### 5.2.1 Adding a Client: `add`
 
-Adds a **new client** to Prudy.  
+Adds a **new client** to Prudy.
 
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -356,7 +356,7 @@ Examples:
                This means that if Prudy has 2 clients: <code>Alex</code> and <code>Bernice</code> given in that order, and you did <code>find-client n/bernice</code> to filter out <code>Alex</code>. An INDEX of <code>1</code> will refer to <code>Bernice</code> instead of <code>Alex</code>.
   </box>
 
-### 5.2.4 Editing a Client’s Details: `edit`
+### 5.2.4 Editing a Client: `edit`
 **Edits an existing client** in Prudy. **Does not edit his/her policies**. See [editing a policy](#5-3-3-editing-a-policy-edit-policy) for more info on the command.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
@@ -442,9 +442,10 @@ Lists **all policies** stored in Prudy.
 Format: `list-policies`
 
 #### Details:
-* This command displays a complete list of all policies associated with every client in Prudy.
-* The policies are listed in the order they were added.
-* No filtering or sorting is applied by this command; it shows all existing policies.
+* `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`.
+* This command displays a complete list of all claims associated with the policy type of the particular client.
+* The claims are listed in the order they were added.
+* No filtering or sorting is applied by this command; it shows all existing claims for the policy.
 
 #### Examples:
 * `list-policies` Displays all policies currently stored in Prudy, regardless of their type or expiry date.
@@ -455,7 +456,7 @@ List all policies that are **expiring** within a specified number of days. If no
 Format: `list-expiring-policies [DAYS]`
 
 <box type=info seamless>
-  Info: Preceding zeros in the `DAYS` argument will be ignored.  
+  Info: Preceding zeros in the `DAYS` argument will be ignored.
   For example, <code>list-expiring-policies 0023</code> and <code>list-expiring-policies 023</code> will both be treated as <code>list-expiring-policies 23</code>.
 </box>
 
@@ -476,7 +477,7 @@ Claims management commands will be available in Prudy version 2.0. This feature 
 #### 5.4.1 Adding a claim: `add-claim`
 Adds a claim to the policy of the specified `POLICY_TYPE` for the client at the specified `INDEX`.
 
-**Format:**  
+**Format:**
 `add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION`
 
 **Details:**
@@ -488,16 +489,16 @@ Adds a claim to the policy of the specified `POLICY_TYPE` for the client at the 
 > **Note:** This command will not allow adding a claim if the client has no policy of the specified type or if a similar claim already exists.
 
 **Examples:**
-- `add-claim 1 pt/health s/pending d/stomach surgery`  
+- `add-claim 1 pt/health s/pending d/stomach surgery`
   Adds a claim with status "pending" and description "stomach surgery" to the health policy of the 1st client.
 
-- `add-claim 2 pt/life s/approved d/accidental coverage`  
+- `add-claim 2 pt/life s/approved d/accidental coverage`
   Adds a claim with status "approved" and description "accidental coverage" to the life policy of the 2nd client.
 
 ### 5.4.2 Deleting a Claim: `delete-claim`
 Deletes a specific claim from a policy type for the client identified by the specified INDEX.
 
-**Format:**  
+**Format:**
 `delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX`
 
 **Details:**
@@ -509,16 +510,16 @@ Deletes a specific claim from a policy type for the client identified by the spe
 > **Note:** If the specified client, policy type, or claim does not exist, an error message will be shown.
 
 **Examples:**
-- `delete-claim 1 pt/health c/1`  
+- `delete-claim 1 pt/health c/1`
   Deletes the claim at index 1 in the health policy of the 1st client.
 
-- `delete-claim 2 pt/life c/2`  
+- `delete-claim 2 pt/life c/2`
   Deletes the claim at index 2 in the life policy of the 2nd client.
 
 ### 5.4.3 Editing a Claim: `edit-claim`
 Edits a specific claim in a policy for the client identified by the specified INDEX.
 
-**Format:**  
+**Format:**
 `edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/NEW_STATUS] [d/NEW_DESCRIPTION]`
 
 **Details:**
@@ -532,11 +533,26 @@ Edits a specific claim in a policy for the client identified by the specified IN
 > **Note:** At least one of `NEW_STATUS` or `NEW_DESCRIPTION` must be specified. If the claim details are unchanged or duplicate an existing claim, an error message will be shown.
 
 **Examples:**
-- `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`  
+- `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`
   Edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
 
-- `edit-claim 2 pt/life c/2 s/pending`  
+- `edit-claim 2 pt/life c/2 s/pending`
   Updates the status of the second claim in the life policy of the 2nd client to "pending."
+
+### 5.4.4 Listing All Claims: `list-claims`
+Lists **all claims** under the specified policy type for the client identified by the index number used in the displayed client list.
+
+**Format:**
+`list-claims INDEX pt/POLICY_TYPE`
+
+**Details:**
+- This command displays a complete list of all policies associated with every client in Prudy.
+- The policies are listed in the order they were added.
+- No filtering or sorting is applied by this command; it shows all existing policies.
+
+**Examples:**
+- `list-claims 1 pt/health`
+  Lists all claims of the first client of the health policy
 
 --------------------------------------------------------------------------------------------------------------------
 

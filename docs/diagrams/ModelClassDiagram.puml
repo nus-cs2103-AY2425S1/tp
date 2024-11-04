@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
+Package Model as ModelPackage <<Rectangle>> {
 Class "<<interface>>\nReadOnlyPrudy" as ReadOnlyPrudy
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
@@ -27,23 +27,22 @@ Class "{abstract}\nPolicy" as Policy
 Class ClaimList
 Class Claim
 
-Enum PolicyType <<enumeration>> {
-    + LIFE
-    + HEALTH
-    + EDUCATION
-}
+    enum PolicyType <<enumeration>> {
+        LIFE
+        HEALTH
+        EDUCATION
+    }
 
-Enum ClaimStatus <<enumeration>> {
-    + PENDING
-    + APPROVED
-    + REJECTED
-}
+    enum ClaimStatus <<enumeration>> {
+        PENDING
+        APPROVED
+        REJECTED
+    }
 
 Class PremiumAmount
 Class CoverageAmount
 Class ExpiryDate
 Class I #FFFFFF
-
 }
 
 Class HiddenOutside #FFFFFF
