@@ -14,7 +14,7 @@ public class LoadCommand extends Command {
 
     public static final String COMMAND_WORD = "load";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_PATH + "FileName\n"
-            + "The file name should be a path of an json file containing an address book "
+            + "The file name should be a path of an existing json file containing an address book "
             + "and not contain any slash `/` \n"
             + "There should be only one path provided.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "mybook.json";
