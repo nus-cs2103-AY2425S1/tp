@@ -25,8 +25,13 @@ public class AddLessonCommand extends LessonCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = LessonCommand.COMMAND_WORD
-            + " " + COMMAND_WORD + ": Adds a lesson to the lesson list. "
+            + " " + COMMAND_WORD + ": Adds a lesson to the lesson list.\n"
             + "Parameters: "
+            + PREFIX_STUDENT_ID + "STUDENTID "
+            + PREFIX_FEE + "PRICEPERHOUR "
+            + PREFIX_START_DATE + "STARTDATETIME "
+            + PREFIX_DURATION + "DURATION\n"
+            + "Example: " + LessonCommand.COMMAND_WORD + " " + COMMAND_WORD + " "
             + PREFIX_STUDENT_ID + "1 "
             + PREFIX_FEE + "10 "
             + PREFIX_START_DATE + dateTimeNowString() + " "
@@ -107,6 +112,7 @@ public class AddLessonCommand extends LessonCommand {
                 && startDateTime.equals(otherAddLessonCommand.startDateTime)
                 && endDateTime.equals(otherAddLessonCommand.endDateTime);
     }
+
     @Override
     public String toString() {
         return String.format(TO_STRING_FORMAT,

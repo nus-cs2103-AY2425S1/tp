@@ -18,6 +18,7 @@ import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Phone;
+import tutorease.address.model.person.Role;
 import tutorease.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -27,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ROLE = "Something";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -34,6 +36,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_ROLE = "Student";
+    private static final String ROLE_WITH_MIXED_CASE = "sTudenT";
 
 
 
@@ -196,4 +200,33 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseRole_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(null));
+    }
+
+    @Test
+    public void parseRole_invalidRole_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE));
+    }
+
+    @Test
+    public void parseRole_validRoleWithoutWhitespace_returnsRole() throws Exception {
+        Role expectedRole = new Role(VALID_ROLE);
+        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE));
+    }
+
+    @Test
+    public void parseRole_validRoleWithWhitespace_returnsTrimmedRole() throws Exception {
+        Role expectedRole = new Role(VALID_ROLE);
+        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE + WHITESPACE));
+    }
+
+    @Test
+    public void parseRole_mixedCaseRole_returnsCapitalizedRole() throws Exception {
+        Role expectedRole = new Role(VALID_ROLE);
+        assertEquals(expectedRole, ParserUtil.parseRole(ROLE_WITH_MIXED_CASE));
+    }
+
 }

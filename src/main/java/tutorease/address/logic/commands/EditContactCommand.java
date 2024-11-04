@@ -8,6 +8,7 @@ import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -93,6 +94,7 @@ public class EditContactCommand extends ContactCommand {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

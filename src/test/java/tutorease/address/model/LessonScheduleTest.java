@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.exceptions.LessonIndexOutOfRange;
+import tutorease.address.model.lesson.exceptions.LessonNotInList;
 import tutorease.address.model.lesson.exceptions.OverlappingLessonException;
 import tutorease.address.testutil.LessonBuilder;
 
@@ -82,15 +83,16 @@ public class LessonScheduleTest {
     }
 
     @Test
-    public void deleteLesson_invalidIndex_throwsIndexOutOfBoundsException() {
-        assertThrows(LessonIndexOutOfRange.class, () -> lessonSchedule.deleteLesson(0));
+    public void deleteLesson_invalidLesson_throwsLessonNotInListException() throws ParseException {
+        Lesson lesson = new LessonBuilder().build();
+        assertThrows(LessonNotInList.class, () -> lessonSchedule.deleteLesson(lesson));
     }
 
     @Test
-    public void deleteLesson_validIndex_removesData() throws ParseException {
+    public void deleteLesson_validLesson_removesData() throws ParseException {
         Lesson lesson = new LessonBuilder().build();
         lessonSchedule.addLesson(lesson);
-        lessonSchedule.deleteLesson(0);
+        lessonSchedule.deleteLesson(lesson);
         assertFalse(lessonSchedule.hasLesson(lesson));
     }
 

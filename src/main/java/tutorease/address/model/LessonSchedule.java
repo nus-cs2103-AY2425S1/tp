@@ -1,16 +1,19 @@
 package tutorease.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.UniqueLessonList;
+import tutorease.address.model.person.Person;
 
 /**
  * Wraps all data at the lesson-schedule level
  * Duplicates are not allowed (by .isOverlapping comparison)
  */
-public class LessonSchedule {
+public class LessonSchedule implements ReadOnlyLessonSchedule {
     private final UniqueLessonList lessons;
 
     {
@@ -23,7 +26,7 @@ public class LessonSchedule {
     /**
      * Creates an LessonSchedule using the Lessons in the {@code toBeCopied}
      */
-    public LessonSchedule(LessonSchedule toBeCopied) {
+    public LessonSchedule(ReadOnlyLessonSchedule toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -53,16 +56,18 @@ public class LessonSchedule {
      * @throws NullPointerException If the specified lesson is null.
      */
     public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
         lessons.add(lesson);
     }
 
     /**
-     * Deletes the lesson at the specified index from the lesson list.
+     * Deletes the specified lesson from the lesson list.
      *
-     * @param index The index of the lesson to be removed. Must be a valid index.
+     * @param lesson The lesson to be removed. Must exist in the lesson list.
      */
-    public void deleteLesson(int index) {
-        lessons.remove(index);
+    public void deleteLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        lessons.remove(lesson);
     }
 
     /**
@@ -87,10 +92,9 @@ public class LessonSchedule {
     /**
      * Replaces the contents of this lesson schedule with {@code newData}.
      */
-    public void resetData(LessonSchedule newData) {
+    public void resetData(ReadOnlyLessonSchedule newData) {
         lessons.setLessons(newData.getLessonList());
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -104,5 +108,14 @@ public class LessonSchedule {
 
         LessonSchedule otherLessonSchedule = (LessonSchedule) other;
         return lessons.equals(otherLessonSchedule.lessons);
+    }
+    /**
+     * Updates the person in all lessons in the list.
+     *
+     * @param target The person to be updated.
+     * @param editedPerson The updated person.
+     */
+    public void updatePersonInLessons(Person target, Person editedPerson) {
+        this.lessons.updatePersonInLessons(target, editedPerson);
     }
 }
