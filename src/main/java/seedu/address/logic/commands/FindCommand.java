@@ -43,7 +43,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(PersonPredicateBuilder personPredicateBuilder) {
         requireNonNull(personPredicateBuilder);
-        this.personPredicateBuilder = personPredicateBuilder;
+        this.personPredicateBuilder = new PersonPredicateBuilder(personPredicateBuilder);
         this.personPredicate = personPredicateBuilder.build();
     }
 

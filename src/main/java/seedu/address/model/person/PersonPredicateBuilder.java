@@ -39,14 +39,30 @@ public class PersonPredicateBuilder {
     }
 
     /**
+     * Creates a {@code PersonPredicateBuilder} with a copy of all internal data from the provided
+     * {@code PersonPredicateBuilder}.
+     */
+    public PersonPredicateBuilder(PersonPredicateBuilder personPredicateBuilder) {
+        nameKeywords = new ArrayList<>(personPredicateBuilder.nameKeywords);
+        classIdKeywords = new ArrayList<>(personPredicateBuilder.classIdKeywords);
+        monthPaidKeywords = new ArrayList<>(personPredicateBuilder.monthPaidKeywords);
+        notMonthPaidKeywords = new ArrayList<>(personPredicateBuilder.notMonthPaidKeywords);
+        isSetName = personPredicateBuilder.isSetName;
+        isSetClassId = personPredicateBuilder.isSetClassId;
+        isSetMonthPaid = personPredicateBuilder.isSetMonthPaid;
+        isSetNotMonthPaid = personPredicateBuilder.isSetNotMonthPaid;
+    }
+
+    /**
      * Adds all strings in {@code nameKeywords} into this object's {@code nameKeywords} field.
      * @return this object
      */
     public PersonPredicateBuilder withNameKeywords(List<String> nameKeywords) {
         requireNonNull(nameKeywords);
-        this.nameKeywords.addAll(nameKeywords);
-        isSetName = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.nameKeywords.addAll(nameKeywords);
+        newBuilder.isSetName = true;
+        return newBuilder;
     }
 
     /**
@@ -55,9 +71,10 @@ public class PersonPredicateBuilder {
      */
     public PersonPredicateBuilder withClassIdKeywords(List<String> classIdKeywords) {
         requireNonNull(classIdKeywords);
-        this.classIdKeywords.addAll(classIdKeywords);
-        isSetClassId = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.classIdKeywords.addAll(classIdKeywords);
+        newBuilder.isSetClassId = true;
+        return newBuilder;
     }
 
     /**
@@ -66,9 +83,10 @@ public class PersonPredicateBuilder {
      */
     public PersonPredicateBuilder withMonthPaidKeywords(List<String> monthPaidKeywords) {
         requireNonNull(monthPaidKeywords);
-        this.monthPaidKeywords.addAll(monthPaidKeywords);
-        isSetMonthPaid = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.monthPaidKeywords.addAll(monthPaidKeywords);
+        newBuilder.isSetMonthPaid = true;
+        return newBuilder;
     }
 
     /**
@@ -77,9 +95,10 @@ public class PersonPredicateBuilder {
      */
     public PersonPredicateBuilder withNotMonthPaidKeywords(List<String> notMonthPaidKeywords) {
         requireNonNull(notMonthPaidKeywords);
-        this.notMonthPaidKeywords.addAll(notMonthPaidKeywords);
-        isSetNotMonthPaid = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.notMonthPaidKeywords.addAll(notMonthPaidKeywords);
+        newBuilder.isSetNotMonthPaid = true;
+        return newBuilder;
     }
 
     /**
@@ -87,21 +106,12 @@ public class PersonPredicateBuilder {
      * in this object.
      */
     public Predicate<Person> build() {
-        // guarantee immutability: copy all internal fields
-        List<String> nameKeywordsCopy = new ArrayList<>(nameKeywords);
-        List<String> classIdKeywordsCopy = new ArrayList<>(classIdKeywords);
-        List<String> monthPaidKeywordsCopy = new ArrayList<>(monthPaidKeywords);
-        List<String> notMonthPaidKeywordsCopy = new ArrayList<>(notMonthPaidKeywords);
-        boolean isSetNameCopy = isSetName;
-        boolean isSetClassIdCopy = isSetClassId;
-        boolean isSetMonthPaidCopy = isSetMonthPaid;
-        boolean isSetNotMonthPaidCopy = isSetNotMonthPaid;
         return person -> {
-            boolean nameMatch = nameContainsKeywords(person, isSetNameCopy, nameKeywordsCopy);
-            boolean classIdMatch = classIdContainsKeywords(person, isSetClassIdCopy, classIdKeywordsCopy);
-            boolean monthPaidMatch = monthPaidContainsKeywords(person, isSetMonthPaidCopy, monthPaidKeywordsCopy);
+            boolean nameMatch = nameContainsKeywords(person, isSetName, nameKeywords);
+            boolean classIdMatch = classIdContainsKeywords(person, isSetClassId, classIdKeywords);
+            boolean monthPaidMatch = monthPaidContainsKeywords(person, isSetMonthPaid, monthPaidKeywords);
             boolean notMonthPaidMatch = notMonthPaidContainsKeywords(
-                    person, isSetNotMonthPaidCopy, notMonthPaidKeywordsCopy);
+                    person, isSetNotMonthPaid, notMonthPaidKeywords);
 
             return nameMatch && classIdMatch && monthPaidMatch && notMonthPaidMatch;
         };
