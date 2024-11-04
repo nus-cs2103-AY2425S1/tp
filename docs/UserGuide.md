@@ -23,7 +23,7 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
     - On Mac/Linux: Open the Terminal from your Applications.
 1. In the terminal, type `cd` followed by the path to the folder with the .jar file, then run the following command:
    `java -jar volunsync.jar`
-1. After entering the command, the window should appear as shown below:
+1. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
@@ -79,6 +79,7 @@ Format: `help`
 Shows a list of all volunteers and events in the database.
 
 Format: `list`
+[Ui](images/Ui.png)
 
 Examples:
 * `list` would show the full list of events and volunteers
@@ -107,7 +108,12 @@ Format: `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE s/ START_TIM
 
 Examples:
 * `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59`
-* `/v new n/ Ellen Joe p/ 81234567 em/ ellen@gmail.com d/ 2024-05-23 s/ 12:00 e/ 15:59`
+
+[New Volunteer Demo](images/commandDemo/NewVolunteerDemo.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+VolunSync cannot store 2 individuals with the same name and phone number. If you try to add a volunteer with the same name as an existing volunteer, so we recommend storing the volunteer's full name. 
+</div>
 
 ### Locating volunteers by name : `/v find`
 
@@ -122,6 +128,12 @@ Format: `/v find KEYWORD`
 
 Examples:
 * `/v find A` returns `Alice Wong`, `Bob Tan` and `David Ng`
+
+[Finding Volunteers](images/commandDemo/FindVolunteerDemo.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+If there are no volunteers whose names match the keyword in the database, the entire list of volunteers will be displayed.
+</div>
 
 ### Deleting a volunteer : `/v del`
 
@@ -141,6 +153,8 @@ is involved in.
 Examples:
 * `/v del 2` deletes the second volunteer in the volunteer list.
 
+[Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+
 ### Assigning a volunteer to event: `assign`
 
 Adds a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
@@ -152,6 +166,8 @@ Format: `assign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`
 
 Examples:
 * `assign v/ 1 e/ 2` assigns the first volunteer on the volunteer list to the list of participants of the second event on the event list.
+
+[Assign Volunteer Demo](images/commandDemo/AssignDemo.png)
 
 ### Removing a volunteer from an event: `unassign`
 
@@ -165,6 +181,7 @@ Format: `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`
 Examples:
 * `unassign v/ 1 e/ 2` removes the first volunteer on the volunteer list from the list of participants of the second event on the event list.
 
+[Unassign Volunteer Demo](images/commandDemo/UnassignDemo.png)
 
 ## Event-related Commands
 
@@ -175,7 +192,10 @@ Adds an event to the database.
 Format: `/e new n/ EVENT_NAME s/ START_TIME e/ END_TIME d/ DATE l/ LOCATION [des/ DESCRIPTION]`
 
 Examples:
+* `/e new n/ Buffet Lunch s/ 12:00 e/ 15:00 d/ 2024-08-09 l/ Blk 123 Woodlands Avenue 12`
 * `/e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam`
+
+[New Event Demo](images/commandDemo/NewEventDemo.png)
 
 ### Locating events by name : `/e find`
 
@@ -189,7 +209,13 @@ Format: `/e find KEYWORD`
     * e.g. `Group` will match `Group Project`, `Grouping Task` and `Group`.
 
 Examples:
-* `/v find e` returns `Beach Cleanup` and `Tree Planting`
+* `/v find beach` returns `Beach Cleanup` and `beach clean2`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+If there are no events with names matching the keyword in the database, the entire list of events will be displayed.
+</div>
+
+[Finding Events](images/commandDemo/FindEventDemo.png)
 
 ### Deleting an event : `/e del `
 
@@ -208,6 +234,8 @@ Deleting an event causes that event to be removed from all participants' list of
 Examples:
 * `/e del 2` deletes the second event in the event list.
 
+[Delete Event Demo](images/commandDemo/DeleteEventDemo.png)
+
 ### Listing all volunteers participating in an event: `/e view`
 
 Displays all volunteers participating in the event at the specified `INDEX` under the `Volunteers` display.
@@ -216,6 +244,11 @@ Format: `/e view EVENT_INDEX`
 
 * The index refers to the number on the left of the event and volunteer's name in their respective lists.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `/e view 1` displayes the volunteers participating in the first event in the event list.
+
+[View Event Demo](images/commandDemo/ViewDemo.png)
 
 ## Saving the data
 
