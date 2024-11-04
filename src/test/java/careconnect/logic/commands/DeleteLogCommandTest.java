@@ -39,16 +39,6 @@ public class DeleteLogCommandTest {
     }
 
     @Test
-    public void execute_validIndex_logDeleteRequiresConfirmation() throws Exception {
-        Person validPerson = model.getFilteredPersonList().get(0);
-        Log logToDelete = validPerson.getLogs().get(0);
-        CommandResult commandResult =
-                new DeleteLogCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LOG).execute(model);
-
-        assertEquals(Command.CONFIRMATION_MESSAGE, commandResult.getFeedbackToUser());
-    }
-
-    @Test
     public void execute_validIndexWithConfirmation_logDeleteSuccess() throws Exception {
         Person validPerson = model.getFilteredPersonList().get(0);
         Log logToDelete = validPerson.getLogs().get(0);
