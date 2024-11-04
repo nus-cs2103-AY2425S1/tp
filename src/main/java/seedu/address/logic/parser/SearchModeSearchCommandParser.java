@@ -49,55 +49,29 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         Set<Predicate<Person>> predicates = new HashSet<>();
         // if a field is present, AND with the predicate for that field
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String name = argMultimap.getValue(PREFIX_NAME).get().trim();
-
-            String[] nameKeywords = name.split("\\s+");
-
-            Predicate<Person> namePred = new NameContainsKeywordsPredicate(
-                    Arrays.stream(nameKeywords).toList());
+            Predicate<Person> namePred = createPersonPredicate(argMultimap);
             predicates.add(namePred);
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            String phone = argMultimap.getValue(PREFIX_PHONE).get().trim();
-            String[] phoneKeywords = phone.split("\\s+");
-
-            Predicate<Person> phonePred = new PhoneNumberContainsKeywordPredicate(
-                    Arrays.stream(phoneKeywords).toList());
+            Predicate<Person> phonePred = createPhonePredicate(argMultimap);
             predicates.add(phonePred);
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            String email = argMultimap.getValue(PREFIX_EMAIL).get().trim();
-            String[] emailKeywords = email.split("\\s+");
-
-            Predicate<Person> emailPred = new EmailContainsKeywordsPredicate(
-                    Arrays.stream(emailKeywords).toList());
+            Predicate<Person> emailPred = createEmailPredicate(argMultimap);
             predicates.add(emailPred);
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            String address = argMultimap.getValue(PREFIX_ADDRESS).get().trim();
-            String[] addressKeywords = address.split("\\s+");
-            Predicate<Person> addressPred = new AddressContainsKeywordsPredicate(
-                    Arrays.stream(addressKeywords).toList());
+            Predicate<Person> addressPred = createAddressPredicate(argMultimap);
 
             predicates.add(addressPred);
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
-            String telegram = argMultimap.getValue(PREFIX_TELEGRAM).get().trim();
-            String[] telegramKeywords = telegram.split("\\s+");
-            Predicate<Person> telegramPred = new TelegramContainsKeywordsPredicate(
-                    Arrays.stream(telegramKeywords).toList());
+            Predicate<Person> telegramPred = createTelegramPredicate(argMultimap);
             predicates.add(telegramPred);
         }
         //role have to use separate predicate
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            String roles = argMultimap.getValue(PREFIX_ROLE).get().trim();
-            // map each word in String roles to a Role object
-
-
-            Set<Role> roleSet = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
-            List<Role> roleList = roleSet.stream().collect(Collectors.toList());
-
-            Predicate<Person> rolePred = new PersonIsRolePredicate(roleList);
+            Predicate<Person> rolePred = createRolePredicate(argMultimap);
             predicates.add(rolePred);
         }
         if (predicates.isEmpty()) {
@@ -105,6 +79,62 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
                     SearchModeSearchCommand.MESSAGE_USAGE));
         }
         return new SearchModeSearchCommand(predicates);
+    }
+
+    private static Predicate<Person> createRolePredicate(ArgumentMultimap argMultimap) throws ParseException {
+        String roles = argMultimap.getValue(PREFIX_ROLE).get().trim();
+        // map each word in String roles to a Role object
+
+
+        Set<Role> roleSet = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
+        List<Role> roleList = roleSet.stream().collect(Collectors.toList());
+
+        Predicate<Person> rolePred = new PersonIsRolePredicate(roleList);
+        return rolePred;
+    }
+
+    private static Predicate<Person> createTelegramPredicate(ArgumentMultimap argMultimap) {
+        String telegram = argMultimap.getValue(PREFIX_TELEGRAM).get().trim();
+        String[] telegramKeywords = telegram.split("\\s+");
+        Predicate<Person> telegramPred = new TelegramContainsKeywordsPredicate(
+                Arrays.stream(telegramKeywords).toList());
+        return telegramPred;
+    }
+
+    private static Predicate<Person> createAddressPredicate(ArgumentMultimap argMultimap) {
+        String address = argMultimap.getValue(PREFIX_ADDRESS).get().trim();
+        String[] addressKeywords = address.split("\\s+");
+        Predicate<Person> addressPred = new AddressContainsKeywordsPredicate(
+                Arrays.stream(addressKeywords).toList());
+        return addressPred;
+    }
+
+    private static Predicate<Person> createEmailPredicate(ArgumentMultimap argMultimap) {
+        String email = argMultimap.getValue(PREFIX_EMAIL).get().trim();
+        String[] emailKeywords = email.split("\\s+");
+
+        Predicate<Person> emailPred = new EmailContainsKeywordsPredicate(
+                Arrays.stream(emailKeywords).toList());
+        return emailPred;
+    }
+
+    private static Predicate<Person> createPhonePredicate(ArgumentMultimap argMultimap) {
+        String phone = argMultimap.getValue(PREFIX_PHONE).get().trim();
+        String[] phoneKeywords = phone.split("\\s+");
+
+        Predicate<Person> phonePred = new PhoneNumberContainsKeywordPredicate(
+                Arrays.stream(phoneKeywords).toList());
+        return phonePred;
+    }
+
+    private static Predicate<Person> createPersonPredicate(ArgumentMultimap argMultimap) {
+        String name = argMultimap.getValue(PREFIX_NAME).get().trim();
+
+        String[] nameKeywords = name.split("\\s+");
+
+        Predicate<Person> namePred = new NameContainsKeywordsPredicate(
+                Arrays.stream(nameKeywords).toList());
+        return namePred;
     }
 
 
