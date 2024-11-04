@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Controller class for displaying a person's details in the UI. Encapsulates
@@ -123,7 +124,8 @@ public class PersonDetails {
         birthdayLabel.setText(person.getBirthday().value.toString());
         remarkLabel.setText(person.getRemark().value);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName)).forEach(tag -> {
+                .sorted(Comparator.comparing((Tag tag) -> !tag.tagName.equalsIgnoreCase("favourite")))
+                .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
                     if (tag.tagName.equalsIgnoreCase("favourite")) {
                         tagLabel.getStyleClass().add("favourite-tag");
