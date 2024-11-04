@@ -190,7 +190,7 @@ public class ParserUtil {
         requireNonNull(groups);
         final GroupList groupList = new GroupList();
         for (String groupName : groups) {
-            groupList.add(parseGroup(groupName));
+            groupList.addGroup(parseGroup(groupName));
         }
         return groupList;
     }

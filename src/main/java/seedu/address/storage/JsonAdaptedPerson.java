@@ -60,7 +60,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         major = source.getMajor().value;
         year = source.getYear().value;
-        groups.addAll(source.getGroupList().getGroups().stream()
+        groups.addAll(source.getGroups().stream()
                 .map(JsonAdaptedGroup::new)
                 .collect(Collectors.toList()));
         comment = source.getComment().value;
@@ -125,10 +125,10 @@ class JsonAdaptedPerson {
         final Comment modelComment = new Comment(comment);
         final GroupList modelGroups = new GroupList();
         for (JsonAdaptedGroup group : groups) {
-            modelGroups.add(group.toModelType());
+            modelGroups.addGroup(group.toModelType());
         }
-        List<Group> invalidGroups = modelGroups.getGroups().stream()
-                .filter(groupName -> !Group.isValidGroupName(groupName.toString()))
+        List<Group> invalidGroups = modelGroups.getUnmodifiableGroups().stream()
+                .filter(groupName -> !Group.isValidGroupName(groupName.getGroupName()))
                 .collect(Collectors.toList());
         if (!invalidGroups.isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));

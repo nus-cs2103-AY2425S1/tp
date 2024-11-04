@@ -2,8 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.Group;
@@ -66,7 +66,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable group list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public GroupList getGroupList() {
@@ -74,22 +74,11 @@ public class Person {
     }
 
     /**
-     * Retrieves the first {@link Group} from the set of groups.
-     *
-     * <p>This method returns the first element of the unmodifiable set of groups
-     * if available. If the set is empty, it returns {@code null}.</p>
-     *
-     * @return the first {@link Group} if it exists, or {@code null} if the set
-     *         of groups is empty.
-     *
+     * Returns an immutable group set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
-    public Group getGroup() {
-        Iterator<Group> iterator = getGroupList().iterator();
-        if (iterator.hasNext()) {
-            return iterator.next(); // Returns the first element
-        } else {
-            return null;
-        }
+    public Set<Group> getGroups() {
+        return groups.getUnmodifiableGroups();
     }
 
     /**

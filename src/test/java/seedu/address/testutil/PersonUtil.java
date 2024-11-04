@@ -34,7 +34,7 @@ public class PersonUtil {
         sb.append(PREFIX_NETID + person.getEmail().value.substring(0, 8) + " ");
         sb.append(PREFIX_MAJOR + person.getMajor().value + " ");
         sb.append(PREFIX_YEAR + person.getYear().value + " ");
-        person.getGroupList().getGroups().stream().forEach(
+        person.getGroups().stream().forEach(
             s -> sb.append(PREFIX_GROUP + s.groupName + " ")
         );
         return sb.toString();

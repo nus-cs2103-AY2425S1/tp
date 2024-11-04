@@ -58,10 +58,17 @@ public class Group {
     }
 
     /**
+     * Get group name
+     */
+    public String getGroupName() {
+        return groupName;
+    }
+
+    /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return groupName;
+        return "[" + groupName + "]";
     }
 
 }

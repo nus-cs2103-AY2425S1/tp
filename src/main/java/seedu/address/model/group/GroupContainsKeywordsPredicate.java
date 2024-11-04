@@ -34,17 +34,17 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
                 return false;
             }
 
-            Set<Group> invalidGroups = groupList.getGroups().stream()
-                    .filter(group -> !Group.isValidGroupName(group.toString())).collect(Collectors.toSet());
+            Set<Group> invalidGroups = groupList.getUnmodifiableGroups().stream()
+                    .filter(group -> !Group.isValidGroupName(group.getGroupName())).collect(Collectors.toSet());
 
             // This should be empty
             if (!invalidGroups.isEmpty()) {
                 throw new ParseException(INVALID_GROUP);
             }
 
-            return groupList.getGroups().stream()
+            return groupList.getUnmodifiableGroups().stream()
                     .anyMatch(group -> keywords.stream()
-                            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(group.toString(), keyword)));
+                            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(group.getGroupName(), keyword)));
 
         } catch (ParseException pe) {
             logger.warning(pe.getMessage());

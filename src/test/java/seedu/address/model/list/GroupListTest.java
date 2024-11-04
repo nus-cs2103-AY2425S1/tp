@@ -33,61 +33,61 @@ public class GroupListTest {
     @Test
     void testAddGroup_lowerCase_whenModifiable() {
         Group group = new Group("group 1");
-        groupList.add(group);
+        groupList.addGroup(group);
         assertFalse(groupList.isEmpty());
-        assertEquals(1, groupList.getGroups().size());
+        assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
     @Test
     void testAddGroup_upperCase_whenModifiable() {
         Group group = new Group("GROUP 1");
-        groupList.add(group);
+        groupList.addGroup(group);
         assertFalse(groupList.isEmpty());
-        assertEquals(1, groupList.getGroups().size());
+        assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
     @Test
     void testAddDuplicateGroup_inSameCase() {
         Group group1 = new Group("group 1");
         Group group2 = new Group("group 1");
-        groupList.add(group1);
-        groupList.add(group2);
-        assertEquals(1, groupList.getGroups().size());
+        groupList.addGroup(group1);
+        groupList.addGroup(group2);
+        assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
     @Test
     void testAddDuplicateGroup_inDifferentCases() {
         Group group1 = new Group("group 1");
         Group group2 = new Group("GROUP 1");
-        groupList.add(group1);
-        groupList.add(group2);
-        assertEquals(1, groupList.getGroups().size());
+        groupList.addGroup(group1);
+        groupList.addGroup(group2);
+        assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
     @Test
     void testMakeListUnmodifiable() {
         groupList.makeListUnmodifiable();
-        assertThrows(UnsupportedOperationException.class, () -> groupList.add(new Group("New Group")));
+        assertThrows(UnsupportedOperationException.class, () -> groupList.addGroup(new Group("New Group")));
     }
     @Test
     void testAddAllGroups_whenModifiable() {
         Group group1 = new Group("group 1");
         Group group2 = new Group("group 2");
         GroupList anotherGroupList = new GroupList();
-        anotherGroupList.add(group1);
-        anotherGroupList.add(group2);
+        anotherGroupList.addGroup(group1);
+        anotherGroupList.addGroup(group2);
 
         groupList.addAll(anotherGroupList);
-        assertEquals(2, groupList.getGroups().size());
+        assertEquals(2, groupList.getUnmodifiableGroups().size());
     }
     @Test
     void testAddAll_whenUnmodifiable() {
         groupList.makeListUnmodifiable();
 
         GroupList anotherGroupList = new GroupList();
-        anotherGroupList.add(new Group("group 1"));
+        anotherGroupList.addGroup(new Group("group 1"));
 
         assertThrows(UnsupportedOperationException.class, () -> groupList.addAll(anotherGroupList));
     }
     @Test
     void testMakeCopy() {
-        groupList.add(new Group("group 1"));
+        groupList.addGroup(new Group("group 1"));
         GroupList copy = groupList.makeCopy();
 
         // The copy should not be the same object as original
@@ -97,14 +97,14 @@ public class GroupListTest {
         assertEquals(groupList, copy);
 
         // The lists have to be of the same size
-        assertEquals(groupList.getGroups().size(), copy.getGroups().size());
+        assertEquals(groupList.getUnmodifiableGroups().size(), copy.getUnmodifiableGroups().size());
     }
     @Test
     void testIterator() {
         Group firstGroup = new Group("group 1");
         Group secondGroup = new Group("group 2");
-        groupList.add(firstGroup);
-        groupList.add(secondGroup);
+        groupList.addGroup(firstGroup);
+        groupList.addGroup(secondGroup);
 
         // Using the iterator to check the groups
         Iterator<Group> iterator = groupList.iterator();
@@ -128,8 +128,8 @@ public class GroupListTest {
 
         GroupList groupsWithVal = new GroupList();
         GroupList groupsWithVal2 = new GroupList();
-        groupsWithVal.add(group);
-        groupsWithVal2.add(group);
+        groupsWithVal.addGroup(group);
+        groupsWithVal2.addGroup(group);
 
         // same object -> returns true
         assertTrue(groups.equals(groups));

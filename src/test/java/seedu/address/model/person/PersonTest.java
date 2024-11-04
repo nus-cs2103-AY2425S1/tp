@@ -22,7 +22,7 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getGroupList().add(new Group("3")));
+        assertThrows(UnsupportedOperationException.class, () -> person.getGroupList().addGroup(new Group("3")));
     }
 
     @Test

@@ -30,7 +30,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_MAJOR = BENSON.getMajor().toString();
     private static final String VALID_YEAR = BENSON.getYear().toString();
-    private static final List<JsonAdaptedGroup> VALID_TAGS = BENSON.getGroupList().getGroups().stream()
+    private static final List<JsonAdaptedGroup> VALID_TAGS = BENSON.getGroups().stream()
             .map(JsonAdaptedGroup::new)
             .collect(Collectors.toList());
     private static final String VALID_COMMENT = BENSON.getComment().toString();

@@ -1,5 +1,6 @@
 package seedu.address.model.list;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -39,11 +40,13 @@ public class GroupList implements Iterable<Group> {
      * @param group The group to add.
      * @throws UnsupportedOperationException if the GroupList is not modifiable.
      */
-    public void add(Group group) {
+    public void addGroup(Group group) {
         if (!isModifiable) {
             throw new UnsupportedOperationException("GroupList is not modifiable");
         }
-        boolean isAdded = groups.stream().noneMatch(existing -> existing.toString().equalsIgnoreCase(group.toString()));
+        boolean isAdded = groups.stream().noneMatch(existing -> existing.getGroupName()
+                .equalsIgnoreCase(group.getGroupName()));
+
         if (isAdded) {
             groups.add(group);
         }
@@ -61,7 +64,7 @@ public class GroupList implements Iterable<Group> {
         if (!isModifiable) {
             throw new UnsupportedOperationException("GroupList is not modifiable");
         }
-        this.groups.addAll(grouplist.getGroups());
+        this.groups.addAll(grouplist.getUnmodifiableGroups());
     }
     @Override
     public Iterator<Group> iterator() {
@@ -76,8 +79,8 @@ public class GroupList implements Iterable<Group> {
         this.isModifiable = false;
         return this;
     }
-    public Set<Group> getGroups() {
-        return groups;
+    public Set<Group> getUnmodifiableGroups() {
+        return Collections.unmodifiableSet(groups);
     }
     public GroupList makeCopy() {
         return new GroupList(this.groups);
