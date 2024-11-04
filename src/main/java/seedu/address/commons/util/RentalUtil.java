@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import seedu.address.model.rentalinformation.CustomerList;
+import seedu.address.model.rentalinformation.RentalDate;
 
 /**
  * Helper functions for handling rental information related operations.
@@ -67,7 +68,7 @@ public class RentalUtil {
      * @param secondList the second {@code CustomerList} to compare.
      * @return {@code true} if both customer lists contain the same set of customers, {@code false} otherwise.
      */
-    public static boolean isCustomerListSame(CustomerList firstList, CustomerList secondList) {
+    public static boolean areCustomerListsSame(CustomerList firstList, CustomerList secondList) {
         requireNonNull(firstList);
         requireNonNull(secondList);
 
@@ -75,5 +76,20 @@ public class RentalUtil {
         HashSet<String> secondHashSet = new HashSet<>(secondList.getCustomerList());
 
         return firstHashSet.equals(secondHashSet);
+    }
+
+    /**
+     * Validates if the rental dates are valid based on the given start and end dates.
+     *
+     * @param startDate The rental start date.
+     * @param endDate The rental end date.
+     * @return True if the rental end date is the same as or later than the rental start date; false otherwise.
+     */
+    public static boolean areRentalDatesValid(RentalDate startDate, RentalDate endDate) {
+        if (endDate.isCurrentDateSameAsGivenDate(startDate)) {
+            return true;
+        }
+
+        return endDate.isCurrentDateLaterThanGivenDate(startDate);
     }
 }

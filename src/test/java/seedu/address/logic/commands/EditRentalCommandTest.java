@@ -151,6 +151,19 @@ public class EditRentalCommandTest {
     }
 
     @Test
+    public void execute_invalidRentalDates_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        EditRentalCommand editRentalCommand = new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL,
+                new EditRentalDescriptorBuilder().withRentalStartDate("01/01/2024").withRentalEndDate("01/01/2023")
+                        .build());
+        assertCommandFailure(editRentalCommand, model, EditRentalCommand.MESSAGE_INVALID_RENTAL_DATES);
+
+        editRentalCommand = new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL,
+                new EditRentalDescriptorBuilder().withRentalEndDate("01/01/2020").build());
+        assertCommandFailure(editRentalCommand, model, EditRentalCommand.MESSAGE_INVALID_RENTAL_DATES);
+    }
+
+    @Test
     public void equals() {
         final EditRentalCommand standardCommand =
                 new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL, EDIT_RENTAL_DESCRIPTOR_ONE);

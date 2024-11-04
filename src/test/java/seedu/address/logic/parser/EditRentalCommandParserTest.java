@@ -26,6 +26,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_RENT_DUE_DATE_O
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_LIST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPOSIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHLY_RENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RENT_DUE_DATE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -103,6 +104,7 @@ public class EditRentalCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
+        // all fields have value
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " r/1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
                 + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
@@ -115,13 +117,24 @@ public class EditRentalCommandParserTest {
         EditRentalCommand expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // all fields without value (except address)
+        userInput = targetIndex.getOneBased() + " r/1" + ADDRESS_DESC_ONE + " " + PREFIX_RENTAL_START_DATE + " "
+                + PREFIX_RENTAL_END_DATE + " " + PREFIX_RENT_DUE_DATE + " " + PREFIX_MONTHLY_RENT + " "
+                + PREFIX_DEPOSIT + " " + PREFIX_CUSTOMER_LIST;
+
+        descriptor = new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_ONE)
+                .withRentalStartDate("").withRentalEndDate("").withRentDueDate("").withMonthlyRent("").withDeposit("")
+                .withCustomerList("").build();
+        expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " r/1" + RENTAL_START_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE;
-
         EditRentalDescriptor descriptor = new EditRentalDescriptorBuilder()
                 .withRentalStartDate(VALID_RENTAL_START_DATE_ONE).withMonthlyRent(VALID_MONTHLY_RENT_ONE).build();
         EditRentalCommand expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
@@ -138,39 +151,75 @@ public class EditRentalCommandParserTest {
         EditRentalCommand expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // rental start date
+        // rental start date with value
         userInput = targetIndex.getOneBased() + " r/1" + RENTAL_START_DATE_DESC_ONE;
         descriptor = new EditRentalDescriptorBuilder().withRentalStartDate(VALID_RENTAL_START_DATE_ONE).build();
         expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // rental end date
+        // rental start date without value
+        userInput = targetIndex.getOneBased() + " r/1 " + PREFIX_RENTAL_START_DATE;
+        descriptor = new EditRentalDescriptorBuilder().withRentalStartDate("").build();
+        expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // rental end date with value
         userInput = targetIndex.getOneBased() + " r/1" + RENTAL_END_DATE_DESC_ONE;
         descriptor = new EditRentalDescriptorBuilder().withRentalEndDate(VALID_RENTAL_END_DATE_ONE).build();
         expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // rent due date
+        // rental end date without value
+        userInput = targetIndex.getOneBased() + " r/1 " + PREFIX_RENTAL_END_DATE;
+        descriptor = new EditRentalDescriptorBuilder().withRentalEndDate("").build();
+        expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // rent due date with value
         userInput = targetIndex.getOneBased() + " r/1" + RENT_DUE_DATE_DESC_ONE;
         descriptor = new EditRentalDescriptorBuilder().withRentDueDate(VALID_RENT_DUE_DATE_ONE).build();
         expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // monthly rent
+        // rent due date without value
+        userInput = targetIndex.getOneBased() + " r/1 " + PREFIX_RENT_DUE_DATE;
+        descriptor = new EditRentalDescriptorBuilder().withRentDueDate("").build();
+        expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // monthly rent with value
         userInput = targetIndex.getOneBased() + " r/1" + MONTHLY_RENT_DESC_ONE;
         descriptor = new EditRentalDescriptorBuilder().withMonthlyRent(VALID_MONTHLY_RENT_ONE).build();
         expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // deposit
+        // monthly rent without value
+        userInput = targetIndex.getOneBased() + " r/1 " + PREFIX_MONTHLY_RENT;
+        descriptor = new EditRentalDescriptorBuilder().withMonthlyRent("").build();
+        expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // deposit with value
         userInput = targetIndex.getOneBased() + " r/1" + DEPOSIT_DESC_ONE;
         descriptor = new EditRentalDescriptorBuilder().withDeposit(VALID_DEPOSIT_ONE).build();
         expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // customer list
+        // deposit without value
+        userInput = targetIndex.getOneBased() + " r/1 " + PREFIX_DEPOSIT;
+        descriptor = new EditRentalDescriptorBuilder().withDeposit("").build();
+        expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // customer list with value
         userInput = targetIndex.getOneBased() + " r/1" + CUSTOMER_LIST_DESC_ONE;
         descriptor = new EditRentalDescriptorBuilder().withCustomerList(VALID_CUSTOMER_LIST_ONE).build();
+        expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // customer list without value
+        userInput = targetIndex.getOneBased() + " r/1 " + PREFIX_CUSTOMER_LIST;
+        descriptor = new EditRentalDescriptorBuilder().withCustomerList("").build();
         expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

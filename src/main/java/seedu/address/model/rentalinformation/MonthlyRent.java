@@ -21,12 +21,18 @@ public class MonthlyRent {
      */
     public MonthlyRent(String monthlyRent) {
         requireNonNull(monthlyRent);
+
+        if (monthlyRent.isEmpty()) {
+            this.monthlyRent = null;
+            return;
+        }
+
         checkArgument(isValidMonthlyRent(monthlyRent), MESSAGE_CONSTRAINTS);
         this.monthlyRent = Double.parseDouble(monthlyRent);
     }
 
     /**
-     * Constructs an {@code MonthlyRent} with monthlyRent as null (not provided).
+     * Constructs a {@code MonthlyRent} with monthlyRent as null (not provided).
      */
     public MonthlyRent() {
         monthlyRent = null;
@@ -36,16 +42,19 @@ public class MonthlyRent {
      * Validates a monthly rent string against a predefined regex pattern.
      *
      * @param test The string to be validated as a monthly rent.
-     * @return {@code true} if the string matches the validation regex;
-     *         {@code false} otherwise.
+     * @return {@code true} if the string matches the validation regex or is empty; {@code false} otherwise.
      */
     public static boolean isValidMonthlyRent(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
+
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return monthlyRent == null ? "null" : String.format("$%.2f", monthlyRent);
+        return monthlyRent == null ? "—" : String.format("$%.2f", monthlyRent);
     }
 
     @Override

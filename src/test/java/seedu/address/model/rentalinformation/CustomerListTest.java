@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,19 @@ public class CustomerListTest {
 
     @Test
     public void constructor_invalidCustomerList_throwsIllegalArgumentException() {
-        String invalidCustomerList = "";
+        String invalidCustomerList = " ";
         assertThrows(IllegalArgumentException.class, () -> new CustomerList(invalidCustomerList));
+    }
+
+    @Test
+    public void constructor_validCustomerList_success() {
+        try {
+            new CustomerList("");
+            new CustomerList("David");
+            new CustomerList("Tan;Ng");
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test
@@ -26,7 +38,6 @@ public class CustomerListTest {
         assertThrows(NullPointerException.class, () -> CustomerList.isValidCustomerList(null));
 
         // invalid customer list
-        assertFalse(CustomerList.isValidCustomerList("")); // empty string
         assertFalse(CustomerList.isValidCustomerList(" ")); // spaces only
         assertFalse(CustomerList.isValidCustomerList(";David")); // invalid semicolon
         assertFalse(CustomerList.isValidCustomerList("David;")); // invalid semicolon
@@ -34,6 +45,7 @@ public class CustomerListTest {
         assertFalse(CustomerList.isValidCustomerList("David;;Steven")); // double semicolon
 
         // valid customer list
+        assertTrue(CustomerList.isValidCustomerList("")); // empty string
         assertTrue(CustomerList.isValidCustomerList("David")); // exactly 1 name
         assertTrue(CustomerList.isValidCustomerList("David;Steven")); // multiple names
         assertTrue(CustomerList.isValidCustomerList("David;Steven;Andrew")); // multiple names
@@ -94,6 +106,6 @@ public class CustomerListTest {
 
         // null value in customer list
         customerList = new CustomerList();
-        assertEquals("null", customerList.toString());
+        assertEquals("—", customerList.toString());
     }
 }

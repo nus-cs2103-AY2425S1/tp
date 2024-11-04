@@ -21,12 +21,18 @@ public class Deposit {
      */
     public Deposit(String deposit) {
         requireNonNull(deposit);
+
+        if (deposit.isEmpty()) {
+            this.deposit = null;
+            return;
+        }
+
         checkArgument(isValidDeposit(deposit), MESSAGE_CONSTRAINTS);
         this.deposit = Double.parseDouble(deposit);
     }
 
     /**
-     * Constructs an {@code Deposit} with deposit as null (not provided).
+     * Constructs a {@code Deposit} with deposit as null (not provided).
      */
     public Deposit() {
         deposit = null;
@@ -36,16 +42,19 @@ public class Deposit {
      * Validates a deposit string against a predefined regex pattern.
      *
      * @param test The string to be validated as a deposit.
-     * @return {@code true} if the string matches the validation regex;
-     *         {@code false} otherwise.
+     * @return {@code true} if the string matches the validation regex or is empty; {@code false} otherwise.
      */
     public static boolean isValidDeposit(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
+
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return deposit == null ? "null" : String.format("$%.2f", deposit);
+        return deposit == null ? "—" : String.format("$%.2f", deposit);
     }
 
     @Override

@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddRentalCommand.MESSAGE_INVALID_RENTAL_END_DATE;
+import static seedu.address.logic.commands.AddRentalCommand.MESSAGE_REQUIRE_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_LIST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPOSIT;
@@ -13,9 +15,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RENT_DUE_DATE;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.RentalUtil;
 import seedu.address.logic.commands.AddRentalCommand;
 import seedu.address.logic.commands.AddRentalCommand.AddRentalDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.rentalinformation.RentalDate;
 import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
@@ -38,7 +42,7 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ADDRESS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddRentalCommand.MESSAGE_REQUIRE_ADDRESS));
+                    MESSAGE_REQUIRE_ADDRESS));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ADDRESS, PREFIX_RENTAL_START_DATE,
@@ -94,7 +98,7 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
         parseCustomerList(argMultimap, descriptor);
 
         if (!descriptor.isAddressFieldEdited()) {
-            throw new ParseException(AddRentalCommand.MESSAGE_REQUIRE_ADDRESS);
+            throw new ParseException(MESSAGE_REQUIRE_ADDRESS);
         }
     }
 
@@ -139,8 +143,18 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
     private void parseRentalEndDate(ArgumentMultimap argMultimap, AddRentalDescriptor descriptor)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_RENTAL_END_DATE).isPresent()) {
-            descriptor.setRentalEndDate(ParserUtil.parseRentalDate(
-                    argMultimap.getValue(PREFIX_RENTAL_END_DATE).get()));
+            RentalDate rentalEndDate = ParserUtil.parseRentalDate(argMultimap.getValue(PREFIX_RENTAL_END_DATE).get());
+
+            if (descriptor.isRentalStartDateFieldEdited()) {
+                RentalDate rentalStartDate = descriptor.getRentalStartDate().orElse(null);
+
+                if (!RentalUtil.areRentalDatesValid(rentalStartDate, rentalEndDate)) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            MESSAGE_INVALID_RENTAL_END_DATE));
+                }
+            }
+
+            descriptor.setRentalEndDate(rentalEndDate);
         }
     }
 

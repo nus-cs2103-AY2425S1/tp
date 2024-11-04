@@ -25,12 +25,18 @@ public class CustomerList {
      */
     public CustomerList(String customerList) {
         requireNonNull(customerList);
+
+        if (customerList.isEmpty()) {
+            this.customerList = null;
+            return;
+        }
+
         checkArgument(isValidCustomerList(customerList), MESSAGE_CONSTRAINTS);
         this.customerList = RentalUtil.convertStringToCustomerArrayList(customerList);
     }
 
     /**
-     * Constructs an {@code CustomerList} with customerList as null (not provided).
+     * Constructs a {@code CustomerList} with customerList as null (not provided).
      */
     public CustomerList() {
         customerList = null;
@@ -40,10 +46,13 @@ public class CustomerList {
      * Validates a customer list string against a predefined regex pattern.
      *
      * @param test The string to be validated as a customer list.
-     * @return {@code true} if the string matches the validation regex;
-     *         {@code false} otherwise.
+     * @return {@code true} if the string matches the validation regex is empty; {@code false} otherwise.
      */
     public static boolean isValidCustomerList(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
+
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -54,7 +63,7 @@ public class CustomerList {
     @Override
     public String toString() {
         if (customerList == null) {
-            return "null";
+            return "—";
         }
 
         StringBuilder allNames = new StringBuilder();
@@ -87,7 +96,7 @@ public class CustomerList {
             return false;
         }
 
-        return RentalUtil.isCustomerListSame(this, otherCustomerList);
+        return RentalUtil.areCustomerListsSame(this, otherCustomerList);
     }
 
     @Override
