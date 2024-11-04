@@ -56,7 +56,13 @@ public class ParserUtil {
             if (trimmedFilePath.isEmpty()) {
                 throw new ParseException(MESSAGE_INVALID_FILE_NAME);
             }
-            return new File(trimmedFilePath);
+            File exportFile = new File(trimmedFilePath + ".txt");
+            int i = 0;
+            while (exportFile.exists()) {
+                i++;
+                exportFile = new File(trimmedFilePath + "(" + i + ").txt");
+            }
+            return exportFile;
         } catch (NullPointerException ioe) {
             throw new ParseException(MESSAGE_INVALID_FILE_NAME);
         }
