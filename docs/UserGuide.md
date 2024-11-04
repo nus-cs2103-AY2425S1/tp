@@ -6,7 +6,6 @@ title: User Guide
 AdmiNUS is a contact management tool designed for NUS club administrators, student leaders, and event coordinators. It provides an easy and efficient way to manage contacts via a Command Line Interface (CLI), making it perfect for users who prefer typing over navigating complex menus.
 
 ---
-
 ## Table of Content
 
 * [Quick start](#Quick-start)
