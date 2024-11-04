@@ -14,6 +14,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -154,5 +156,14 @@ public class PersonTest {
 
         // same value
         assertEquals(0, firstPerson.compareTelegram(firstPerson));
+    }
+
+    @Test
+    public void testEquals_differentType() {
+        Person person = new Person(new Name("John Doe"), new Phone("12345678"),
+                new Email("john@example.com"), new Telegram("@johndoe"),
+                new HashSet<>(), new Github("johndoe123"));
+
+        assertNotEquals(person, new Object());
     }
 }
