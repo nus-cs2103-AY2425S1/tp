@@ -120,7 +120,8 @@ Examples:
 * Upon entering the application, the parser mode is set to `b`.
 * `switch` followed by `m` switches the parser mode to meet-ups.
 
-<img src="images/SwitchMeetUpBefore.png" width="45%"> <img src="images/SwitchMeetUpAfter.png" width="45%">
+![SwitchMeetUpBefore](images/SwitchMeetUpBefore.png)
+![SwitchMeetUpAfter](images/SwitchMeetUpAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -134,9 +135,15 @@ Examples:
 </div>
 
 ## Buyers
+![BuyerModeInitialList](images/BuyerModeInitialList.png)
 <div markdown="block" class="alert alert-info">
 
 **:information_source: These commands are for when the parser is in `b` mode (Buyer mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
+
+* Note how the list already contains sample `Buyer`s (if this is the first time using the app)
+
+* Note how the mode is highlighted by `Viewing: Buyers` above the command line
+
 </div>
 ### Adding a buyer: `add`
 
@@ -208,9 +215,15 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st buyer in the results of the `find` command.
 
 ## Meet Up
+![MeetUpModeInitialList](images/MeetUpModeInitialList.png)
 <div markdown="block" class="alert alert-info">
 
 **:information_source: These commands are for when the parser is in `m` mode (MeetUp mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
+
+* Note how the list already contains sample `Meet Up`s (if this is the first time using the app)
+
+* Note how the mode is highlighted by `Viewing: Meet Ups` above the command line
+
 </div>
 ### Adding a meetup: `add`
 
@@ -228,7 +241,7 @@ Examples:
 
 Meet Ups with clashing timings will be displayed in red. Otherwise, the default display colour for timing is green.
 
-![alt text](images/MeetUpClash.png)
+![MeetUpClash](images/MeetUpClash.png)
 
 ### Viewing all meet-ups : `view`
 
@@ -236,10 +249,7 @@ Shows a list of all meet-ups in the meet-up list.
 
 Format: `view`
 
-<div>
-
 Examples: `view` will show you all meet-ups in the meet-up list.
-</div>
 
 ### Editing a meet-up : `edit`
 
@@ -286,9 +296,15 @@ Examples:
 * `find meet` followed by `delete 1` deletes the 1st meet-up in the results of the `find` command.
 
 ## Properties
+![PropertyModeInitialList](images/PropertyModeInitialList.png)
 <div markdown="block" class="alert alert-info">
 
 **:information_source: These commands are for when the parser is in `p` mode (Property mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
+
+* Note how the list already contains sample `Property`s (if this is the first time using the app)
+
+* Note how the mode is highlighted by `Viewing: Properties` above the command line
+
 </div>
 ### Adding a property: `add`
 
@@ -343,8 +359,14 @@ Examples:
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data files (`buyerlist.json`, `meetuplist.json`, and `propertylist.json`) it creates with the respective files that contain your previous data (which should be in the old `buyerlist.json`, `meetuplist.json`, and `propertylist.json`).
 
+**Q**: Where can I find my local data files?<br>
+**A**: In the same folder that contains your app `Abcli.jar`, there should be a folder called `data` which contains `buyerlist.json`, `meetuplist.json`, and `propertylist.json`.
+
 **Q**: How do I add MeetUps or Properties? I can only add buyers<br>
 **A**: You are likely in the `BuyerMode` indicated by the `Viewing: Buyers` shown at the top bar, to switch to `MeetUpMode`, use `switch m`, and to switch to `Property Mode`, use `switch p`. For more details, see [Switching parser modes](#switching-parser-modes--switch).
+
+**Q**: Is there a separate save command/button, are all my changes auto-saved?<br>
+**A**: Any successfully inputted command will save the changes into the data files, thus there is no need to worry about manually saving your changes.
 
 --------------------------------------------------------------------------------------------------------------------
 
