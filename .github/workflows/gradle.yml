@@ -70,6 +70,9 @@ jobs:
               body: commentBody
             })
 
+      - name: test
+        run: echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
+
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
         uses: codecov/codecov-action@v4
