@@ -12,6 +12,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RENTAL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithRental;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -46,6 +49,8 @@ public class DeleteRentalCommandTest {
                 .withRentalInformation(secondClient.getRentalInformation().get(INDEX_SECOND_RENTAL.getZeroBased()))
                 .build();
         expectedModel.setPerson(secondClient, editedClient);
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
 
         assertCommandPromptsSuccess(deleteRentalCommand, model, expectedPrompt, expectedMessage, expectedModel);
     }

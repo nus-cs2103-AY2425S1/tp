@@ -17,6 +17,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RENTAL;
 import static seedu.address.testutil.TypicalPersons.ALICE_WITH_RENTAL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithRental;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -52,6 +55,9 @@ public class EditRentalCommandTest {
                 .build();
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedClient);
 
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
+
         assertCommandSuccess(editRentalCommand, model, expectedMessage, expectedModel);
     }
 
@@ -78,6 +84,9 @@ public class EditRentalCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastClient, editedClient);
 
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
+
         assertCommandSuccess(editRentalCommand, model, expectedMessage, expectedModel);
     }
 
@@ -93,6 +102,9 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editedRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
 
         assertCommandSuccess(editRentalCommand, model, expectedMessage, expectedModel);
     }
@@ -118,6 +130,9 @@ public class EditRentalCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedClient);
+
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
 
         assertCommandSuccess(editRentalCommand, model, expectedMessage, expectedModel);
     }
