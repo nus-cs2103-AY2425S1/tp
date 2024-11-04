@@ -50,7 +50,7 @@ public class CategorizeTagCommand extends Command {
 
             TagCategory existingCat = model.getTagCategory(targetTag);
             if (isDuplicateCategory(existingCat)) {
-                continue;
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_CATEGORY, targetTag, updatedCategory));
             }
             model.setTagsCategory(targetTag, updatedCategory);
         }
