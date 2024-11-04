@@ -44,6 +44,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<String> postalKeywords = Arrays.stream(keywords)
                 .filter(this::isPostalCode)
+                .map(keyword -> keyword.substring(1))
                 .collect(Collectors.toList());
 
         Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
@@ -81,7 +82,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return True if the string is numeric, false otherwise.
      */
     private boolean isNumeric(String str) {
-        return str.matches("\\d+") && str.length() != 6;
+        return str.matches("\\d+");
     }
 
     /**
@@ -90,7 +91,6 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return True if the string is a postal code, false otherwise.
      */
     private boolean isPostalCode(String str) {
-        // checks that the postal code is exactly 6 digits
-        return str.matches("\\d{6}");
+        return str.matches("S\\d+");
     }
 }
