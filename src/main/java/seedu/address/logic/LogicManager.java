@@ -60,6 +60,15 @@ public class LogicManager implements Logic {
             tempVersionHistory.addVersion(model);
         }
         this.versionHistory = tempVersionHistory;
+        try {
+            if (storage.readAddressBook().isEmpty()) {
+                this.versionHistory = new VersionHistory();
+                versionHistory.addVersion(model);
+            }
+        } catch (DataLoadingException dle) {
+            this.versionHistory = new VersionHistory();
+            versionHistory.addVersion(model);
+        }
         model.setStatus();
     }
 
