@@ -70,6 +70,8 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]` 
     - **Description:** Creates a new buyer profile with specified details.
     - **Successful Execution:**
+      > ---
+      > 
       > **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `john123@gmail.com`
       >
       > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
@@ -77,46 +79,55 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: 
       > 
       > ---
+      > 
       > **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
       >
       > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
       >
       > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
 
-      **Failed Execution**
+    - **Failed Execution:**
+      > ---
+      > 
       > **User Error #1**: Missing `NAME` field 
       >
-      > **Input**: buyer p/91124444 e/bobby123@gmail.com
+      > **Input**: `buyer p/91124444 e/bobby123@gmail.com`
       >
       > **Output**: <br>
       Invalid command format! <br>
       buyer: Adds a buyer to the address book. <br> 
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
       Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+      >
       > ---
+      > 
       > **User Error #2**: Missing `PHONE` field
       >
-      > **Input**: buyer n/Bobby e/bobby123@gmail.com
+      > **Input**: `buyer n/Bobby e/bobby123@gmail.com`
       >
       > **Output**: <br>
       Invalid command format! <br>
       buyer: Adds a buyer to the address book. <br>
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
       Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com> 
+      >
       > ---
+      > 
       > **User Error #3**: Missing `EMAIL` field
       >
-      > **Input**: buyer n/Bobby p/91124444
+      > **Input**: `buyer n/Bobby p/91124444`
       >
       > **Output**: <br>
       Invalid command format! <br>
       buyer: Adds a buyer to the address book. <br>
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
       Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+
 - #### **Add Seller Command**
     - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
     - **Description:** Creates a new seller profile with specified details.
     - **Successful Execution:**
+      > ---
       > **Use Case #1**: Adding a seller named `Bobby` with phone number `91124444` and email `john123@gmail.com`
       >
       > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com`
@@ -124,6 +135,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
       >
       > ---
+      > 
       > **Use Case #2**: Adding a seller named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
       >
       > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
@@ -131,29 +143,33 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
       
       **Failed Execution**
+      > ---
       > **User Error #1**: Missing `NAME` field
       >
-      > **Input**: seller p/91124444 e/bobby123@gmail.com
+      > **Input**: `seller p/91124444 e/bobby123@gmail.com`
       >
       > **Output**: <br>
         Invalid command format! <br>
         seller: Adds a seller to the address book. <br>
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
         Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+      > 
       > ---
+      > 
       > **User Error #2**: Missing `PHONE` field
       >
-      > **Input**: seller n/Bobby e/bobby123@gmail.com
+      > **Input**: `seller n/Bobby e/bobby123@gmail.com`
       >
       > **Output**: <br>
         Invalid command format! <br>
         seller: Adds a seller to the address book. <br>
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
         Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com>
+      > 
       > ---
       > **User Error #3**: Missing `EMAIL` field
       >
-      > **Input**: seller n/Bobby p/91124444
+      > **Input**: `seller n/Bobby p/91124444`
       >
       > **Output**: <br>
         Invalid command format! <br>
@@ -165,52 +181,108 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Format:** `find KEYWORD [KEYWORD...]`
     - **Description:** Finds the specified client(s) based on the provided keywords.
     - **Successful Execution:**
-      > **Use Case**: 
+      > ---
+      > **Use Case #1**: Finding `Bob`
       >
-      > **Input**:
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      > 
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      > 
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > 
+      > **Input**: `find Bob Winter`
       >
       > **Output**:
 
-      **Failed Execution**
-      > **User Error**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
       >
-      > **Input**:
-      >
+      > **Input**: 
+      > 
       > **Output**:
 
 - #### **Edit Command**
     - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
     - **Description:** Edits the details of the specified client.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
 
 - #### **Delete Client Command**
     - **Format:** `delete n/<NAME>`
     - **Description:** Deletes the specified client profile.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+      - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+
+   
 
 ---
 
