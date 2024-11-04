@@ -10,7 +10,7 @@ public class Role {
     public static final String GUARDIAN = "Guardian";
     public static final String STUDENT = "Student";
     public static final String MESSAGE_CONSTRAINTS = "Roles can take 'Guardian' or 'Student', and it should not be "
-            + "blank";
+            + "blank.";
     public final String value;
 
     /**
@@ -21,7 +21,25 @@ public class Role {
     public Role(String role) {
         requireNonNull(role);
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
-        value = role;
+        value = createRole(role);
+    }
+
+    /**
+     * Returns a valid role string for {@code Role} construction.
+     *
+     * @param role A valid name, either GUARDIAN or STUDENT.
+     */
+    public static String createRole(String role) {
+        requireNonNull(role);
+        final String value;
+        if (GUARDIAN.equalsIgnoreCase(role)) {
+            value = GUARDIAN;
+        } else if (STUDENT.equalsIgnoreCase(role)) {
+            value = STUDENT;
+        } else {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
+        return value;
     }
 
     @Override
@@ -35,9 +53,14 @@ public class Role {
                 || (other instanceof Role
                 && value.equals(((Role) other).value));
     }
-    // Validation method
+    /**
+     * Validates whether a string indicates a valid role(Student or Guardian), and is case-insensitive in nature.
+     *
+     * @param role A string.
+     */
     public static boolean isValidRole(String role) {
-        return GUARDIAN.equals(role) || STUDENT.equals(role);
+        requireNonNull(role);
+        return GUARDIAN.equalsIgnoreCase(role) || STUDENT.equalsIgnoreCase(role);
     }
 
     public String getRoleString() {

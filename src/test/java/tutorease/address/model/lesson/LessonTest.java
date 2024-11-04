@@ -95,11 +95,11 @@ public class LessonTest {
     public void toStringTest() {
         assertEquals("Student: "
                 + person.getName().toString()
-                + " Fee: "
+                + "; Fee: "
                 + fee
-                + " Start: "
+                + "; Start: "
                 + startDateTime
-                + " End: "
+                + "; End: "
                 + endDateTime, lesson.toString());
     }
     @Test
