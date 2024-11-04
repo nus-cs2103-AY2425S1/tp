@@ -429,7 +429,7 @@ The following image is the result of executing `view 1`.
 
 <box type="info" seamless>
 
-**Note:** The client's details in the `view` window will remain unchanged even if the client's information is updated. This is intentional as it allows users to compare the client's details before and after the update.
+**Note:** The client's details in the `view` window will remain unchanged even if the client's information is updated. This is intentional as it allows users to reference the client's details before the update.
 
 The `correct as of` timestamp at the top right corner of the `view` window shows the time when the window was opened, helping to avoid any confusion.
 
