@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_PREFIX_SEARCH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_APPOINTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_POLICY;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.SearchAppointmentCommand;
@@ -13,12 +17,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a SearchBirthdayCommand or SearchAppointmentCommand object.
  */
 public class SearchCommandParser implements Parser<Command> {
-
-    public static final String PREFIX_BIRTHDAY = "b/";
-    public static final String PREFIX_APPOINTMENT = "a/";
-
-    public static final String PREFIX_POLICY = "p/";
-
     /**
      * Parses the given {@code String} of arguments and determines whether it's a birthday or an appointment search.
      * Returns the appropriate command for execution.
@@ -28,22 +26,22 @@ public class SearchCommandParser implements Parser<Command> {
     public Command parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException("Search command cannot be empty.");
+            throw new ParseException(MESSAGE_MISSING_PREFIX_SEARCH);
         }
 
         // Check if the command starts with a recognized prefix
-        if (trimmedArgs.contains(PREFIX_BIRTHDAY)) {
-            String date = trimmedArgs.substring(PREFIX_BIRTHDAY.length()).trim();
+        if (trimmedArgs.contains(PREFIX_BIRTHDAY.getPrefix())) {
+            String date = trimmedArgs.substring(PREFIX_BIRTHDAY.getPrefix().length()).trim();
             return parseBirthdayCommand(date);
-        } else if (trimmedArgs.contains(PREFIX_APPOINTMENT)) {
-            String dateTime = trimmedArgs.substring(PREFIX_APPOINTMENT.length()).trim();
+        } else if (trimmedArgs.contains(PREFIX_SEARCH_APPOINTMENT.getPrefix())) {
+            String dateTime = trimmedArgs.substring(PREFIX_SEARCH_APPOINTMENT.getPrefix().length()).trim();
             return parseAppointmentCommand(dateTime);
-        } else if (trimmedArgs.contains(PREFIX_POLICY)) {
-            String policyName = trimmedArgs.substring(PREFIX_POLICY.length()).trim();
+        } else if (trimmedArgs.contains(PREFIX_SEARCH_POLICY.getPrefix())) {
+            String policyName = trimmedArgs.substring(PREFIX_SEARCH_POLICY.getPrefix().length()).trim();
             return parsePolicyCommand(policyName);
         } else {
             throw new ParseException("Invalid prefix. Use 'b/' for birthday or 'a/' for appointment"
-                    + "or '/p' for policy.");
+                    + " or 'p/' for policy.");
         }
     }
 

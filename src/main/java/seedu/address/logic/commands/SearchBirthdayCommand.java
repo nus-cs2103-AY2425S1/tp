@@ -24,7 +24,7 @@ public class SearchBirthdayCommand extends Command {
     public static final String COMMAND_WORD = "search " + PREFIX_BIRTHDAY;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Searches for clients whose birthdays are on the specified date.\n"
+            + ": Searches for clients whose birthdays are on the specified date or a specified date range.\n"
             + "Parameters: DATE (must be in yyyy-MM-dd format)\n"
             + "Example: " + COMMAND_WORD + " 2000-04-25\n"
             + "Example: " + COMMAND_WORD + " 2000-04-25 to 2000-05-25";
