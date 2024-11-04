@@ -79,16 +79,19 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING]...​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tips:** 
+* A person can have either 0 or 1 role.
+* A person can have any number of wedding jobs (including 0).
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/12345678 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 r/Florist`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 w/1`
 
 ### Listing all persons : `list`
 
@@ -225,6 +228,20 @@ Examples:
 * `filter p/91234567` returns person with exact phone number
 * `filter n/John r/vendor` returns persons who either have name `John` OR role `vendor`
 * `filter e/gmail a/jurong` returns persons whose email contains "gmail" OR address contains "jurong"
+
+### Adding a wedding : `addw`
+Adds a wedding to the address book.
+
+Format: `addw n/WEDDING NAME c/CLIENT [d/DATE] [v/VENUE]`
+
+Tip: CLIENT can be inputted by index or name.
+
+Examples:
+* `addw n/Alice's Wedding c/Alice`
+* `addw n/Alice's Wedding c/1`
+* `addw n/Bob's Wedding c/Bob d/2024-12-31`
+* `addw n/Bob's Wedding c/Bob v/Sentosa`
+* `addw n/Bob's Wedding c/Bob d/2024-12-31 v/Sentosa`
 
 ### Exiting the program : `exit`
 
