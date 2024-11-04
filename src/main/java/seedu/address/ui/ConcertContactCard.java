@@ -33,8 +33,6 @@ public class ConcertContactCard extends UiPart<Region> {
 
     @FXML
     private Label id;
-    @FXML
-    private Label description;
 
     //=========== Person Field Labels ======================================================================
     @FXML
@@ -70,7 +68,6 @@ public class ConcertContactCard extends UiPart<Region> {
         Concert concert = concertContact.getConcert();
 
         id.setText(displayedIndex + ". ");
-        description.setText(person.getName().fullName + " attending " + concert.getName().fullName);
 
         personName.setText(concertContact.getPerson().getName().fullName);
         phone.setText(person.getPhone().value);
