@@ -49,6 +49,30 @@ The commands in this section are used to add new records to the system, such as 
 
 #### **2.2 Creating a new tutorial**
 
+Command: `createtut`
+
+Usage: `createtut tut/TUTORIAL_NAME`
+
+<div markdown="1" class="smaller-text">
+Fields
+
+* `TUTORIAL_NAME`: Name of the tutorial to create
+  * Must only contain alphanumeric characters
+</div>
+
+Example usages
+
+* `createtut tut/physics`
+<div markdown="1" class="smaller-text">
+Invalid usages
+
+* Creating a tutorial that has been created already
+  * *Error Message: This tutorial already exists in the system.*
+
+* Format errors, check [here](#11-format-errors).
+
+</div>
+
 #### **2.3 Enrolling student into a tutorial**
 
 Command:  `enroll`
