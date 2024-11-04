@@ -23,7 +23,7 @@ public class UnpinContactCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unpins contact at a particular  "
             + "index to the top of the list.\n"
             + "Parameters: INDEX \n"
-            + "Example: " + COMMAND_WORD + "5";
+            + "Example: " + COMMAND_WORD + " 5";
 
     public static final String MESSAGE_UNPIN_PERSON_SUCCESS = "Unpinned Person: %1$s";
 
