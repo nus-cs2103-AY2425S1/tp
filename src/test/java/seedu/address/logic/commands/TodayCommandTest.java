@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_TODAY_APPOINTMENTS;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
@@ -26,11 +26,9 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for TodayCommand.
  */
 public class TodayCommandTest {
-
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yy");
     private Model model;
     private Model expectedModel;
-
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yy");
 
     @BeforeEach
     public void setUp() {
@@ -43,7 +41,7 @@ public class TodayCommandTest {
         TodayCommand todayCommand = new TodayCommand();
 
         // Ensure model is set to a state with no appointments today
-        model.updateFilteredPersonList(p -> false);  // Predicate that matches no persons
+        model.updateFilteredPersonList(p -> false);
 
         assertCommandFailure(todayCommand, model, TodayCommand.MESSAGE_NO_APPOINTMENTS_TODAY);
     }
@@ -65,7 +63,8 @@ public class TodayCommandTest {
         HasAppointmentTodayPredicate predicate = new HasAppointmentTodayPredicate();
         expectedModel.updateFilteredPersonList(predicate);
 
-        String expectedMessage = String.format(MESSAGE_TODAY_APPOINTMENTS, expectedModel.getFilteredPersonList().size());
+        String expectedMessage = String.format(MESSAGE_TODAY_APPOINTMENTS,
+                                    expectedModel.getFilteredPersonList().size());
 
         TodayCommand todayCommand = new TodayCommand();
 
@@ -97,7 +96,8 @@ public class TodayCommandTest {
         HasAppointmentTodayPredicate predicate = new HasAppointmentTodayPredicate();
         expectedModel.updateFilteredPersonList(predicate);
 
-        String expectedMessage = String.format(MESSAGE_TODAY_APPOINTMENTS, expectedModel.getFilteredPersonList().size());
+        String expectedMessage = String.format(MESSAGE_TODAY_APPOINTMENTS,
+                                    expectedModel.getFilteredPersonList().size());
 
         TodayCommand todayCommand = new TodayCommand();
 
@@ -125,7 +125,8 @@ public class TodayCommandTest {
     @Test
     public void toStringMethod() {
         TodayCommand todayCommand = new TodayCommand();
-        String expected = TodayCommand.class.getCanonicalName() + "{predicate=" + new HasAppointmentTodayPredicate() + "}";
+        String expected = TodayCommand.class.getCanonicalName()
+                + "{predicate=" + new HasAppointmentTodayPredicate() + "}";
         assertEquals(expected, todayCommand.toString());
     }
 }
