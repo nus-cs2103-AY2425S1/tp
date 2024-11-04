@@ -14,7 +14,7 @@ public class CliSyntax {
 
     /* Order Prefix definitions */
     public static final Prefix PREFIX_ITEM = new Prefix("i/");
-    public static final Prefix PREFIX_QUANTITY = new Prefix("c/");
+    public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
 
 }

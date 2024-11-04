@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_ATLAS;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
@@ -40,10 +39,10 @@ public class OrderListTest {
     }
 
     @Test
-    public void contains_orderWithSameItemInList_returnsTrue() {
+    public void contains_orderWithSameFieldsInList_returnsTrue() {
         orderList.add(ATLAS);
-        Order editedAtlas = new OrderBuilder(ATLAS).withDate(VALID_DATE_BOTTLE).build();
-        assertTrue(orderList.contains(editedAtlas));
+        Order atlasCopy = new OrderBuilder(ATLAS).build();
+        assertTrue(orderList.contains(atlasCopy));
     }
 
     @Test

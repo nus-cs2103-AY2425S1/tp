@@ -18,7 +18,7 @@ public class Name {
                     + "with the name of person with stated relationship.";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of a name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ALPHANUMERIC_WITH_SPACE = "[\\p{Alnum}][\\p{Alnum} ]*";

@@ -36,11 +36,11 @@ public class AddOrderCommand extends Command {
             + PREFIX_ITEM + "Lamp "
             + PREFIX_DATE + "20-12-2024 "
             + PREFIX_QUANTITY + "2\n"
-            + "If [" + PREFIX_QUANTITY + "QUANTITY] is not provided, the quantity will be set to 1";
+            + "If [" + PREFIX_QUANTITY + "QUANTITY] is not provided, the quantity will be set to 1.";
 
     public static final String MESSAGE_ADD_ORDER_SUCCESS = "New order added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
-            + "This customer already has an order for this item, "
+            + "This customer already has a pending order with the same details, "
             + "verify if this is a mistake\n";
 
     private final Index index;
@@ -76,6 +76,7 @@ public class AddOrderCommand extends Command {
                 ? MESSAGE_OUTDATED_WARNING
                 : "";
         orderList.add(toAdd);
+        model.updateSelectedPerson(personToAddUnder);
         personToAddUnder.resetFilteredOrderList();
 
         return new CommandResult(feedbackToUser

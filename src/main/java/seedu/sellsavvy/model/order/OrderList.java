@@ -25,7 +25,7 @@ public class OrderList implements Iterable<Order> {
      */
     public boolean contains(Order toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameOrder);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
