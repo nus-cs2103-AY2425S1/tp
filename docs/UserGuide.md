@@ -1,59 +1,136 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
-
 # NovaCare User Guide
 
-NovaCare is a **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+NovaCare is a **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
 --------------------------------------------------------------------------------------------------------------------
+
 ## Table of Contents
 - [How to use NovaCare](#how-to-use-novacare)
+  - [Glossary](#glossary)
 - [Quick start](#quick-start)
+  - [Installation](#step-1-ensure-you-have-java-17-or-above-installed-in-your-computer-you-can-download-java-from-here)
+  - Overview of features, target audience with friendly tone, have glossary to make sure they understand stuffs.
+  - [How to run NovaCare](#step-3-run-the-application)
+  - [Overview of GUI](#overview-of-gui)
+  - [Get started with NovaCare](#get-started-with-novacare)
 - [Features](#features)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
-
+  - [Person-related commands](#person-related-commands)
+  - [Task-related commands](#task-related-commands)
+  - [Other commands](#other-commands)
 --------------------------------------------------------------------------------------------------------------------
 
 ## How to use NovaCare
 
-This user guide is tailored for new and existing users of NovaCare. 
+This user guide is tailored for new and existing users of NovaCare.
 
 
-If you are new to NovaCare, we recommend you to start with the [Quick Start](#quick-start) section. 
+If you are new to NovaCare, we recommend you to start with the [Quick Start](#quick-start) section.
 
 If you are an existing user looking for a specific feature, you can jump to the [Features](#features) section or [Command Summary](#Command Summary) section.
 
+### Glossary
+As you read through the user guide, you may come across some terms that are unfamiliar to you. Here is a glossary of terms that you may encounter:
+
+| Term    | Definition                                                                                                                                      |
+|---------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **JAR** | A Java ARchive (JAR) is a package file that compresses many Java files into a single executable file used for Java applications.                |
+| **CLI** | A Command Line Interface (CLI) is a text-based interface used to interact with software using text commands.                                    |
+| **Parameter** | A parameter is the text that is passed to a software to perform a specific action.                                                              |
+| **GUI** | A Graphical User Interface (GUI) is a visual interface that allows users to interact with software using graphical icons and indicators.        |
+| **Command** | A command is an input action given to the software to perform a specific action.                                                                |
+| **Index** | An index is a unique number assigned to each item in a GUI list to identify and reference the item.                                             |
+| **Tag** | A tag is a label that is assigned to a patient to take note of their medical conditions.                                                        |
+| **Priority Level** | A priority level is a value assigned to a patient to indicate the urgency of their medical condition. 1 meaning critical 3 meaning non critical |
+| **[word]** | Words in square brackets are optional parameters that can be included in the command.                                                           |
+
+### Annotations box
+The following are annotations throughout this user guide that provide additional information to help you understand the NovaCare features better.
+
+> [!NOTE]
+> Additional information that help you understand more about Commands.
+
+> [!TIP]
+> Provide tips to help users understand the command usage better.
+
+> [!WARNING]
+> Warns you about potential errors that you may face when using the NovaCare.
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer. You can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
+This section provides a quick overview of how to set up and run NovaCare on your computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
+### Step 1. Ensure you have Java `17` or above installed in your Computer. You can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+For **Windows** users, you can type **Command Prompt** in the search bar.
+Type `java -version` to check if you have Java installed.
+Upon successful installation, you should see something like this:
+![Windows Java](images/windows-java.png)
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+For **Mac/Linux** users, you can type **Terminal** in the search bar.
+Type `java -version` to check if you have Java installed.
+Upon successful installation, you should see something like this:
+![Mac Java](images/mac-java.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Step 2. Download NovaCare from [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
+1. Download the `NovaCareApp.jar` file from the link provided by scrolling down to Assets as shown below.
+   ![Assets](images/assets.png)
+2. Click on the `NovaCareApp.jar` file to download it.
+3. Upon downloading save the app to your preferred location. (e.g. `Desktop`)
 
-   * `list` : Lists all contacts.
+### Step 3. Run the application
+1. Open `Command Prompt` for Windows users or `Terminal` for Mac/Linux users.
+2. Navigate to the preferred location where you saved the `NovaCareApp.jar` file. <br>
+> e.g. `cd Desktop`
+3. Run the application by typing <br>
+> `java -jar NovaCareApp.jar`.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+Upon successful execution, you should see the GUI of NovaCare covered in the next section.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+## Overview of GUI
 
-   * `clear` : Deletes all contacts.
+The GUI is broken down into different **sections** as shown in the image below:
+![GUI Overview](images/GUIOverview.png)
+1. Command Box: This is where you can type your commands to interact with the application.
+2. Result Display Box: Displays the result of commands.
+3. Patient List: Displays all the patients in the application.
+4. Task List: Displays all the task for all patients.
+5. Menu Bar: Contains the `File` and `Help` menu. (to exit or view the help menu)
 
-   * `exit` : Exits the app.
+## Get started with NovaCare
+Here will be a basic guide on how to use the application.
+1. **Launch help guide**:
+   * Type the command in the command box and press Enter to view help window:
+      > `help`
+
+2. **Clear all entries**:
+   * Type the command in the command box and press Enter to clear all entries:
+      > `clear`
+
+3. **Add a patient**:
+   * Type the command in the command box and press Enter to add a person:
+      > `add n/Johnson p/98765432 e/johnson123@gmail.com a/123, Clementi Rd, 1234665 t/diabetes`
+
+4. **Edit patient information**:
+   * Type the command in the command box and press Enter to edit a patients's information:
+      > `edit 1 p/91234567`
+
+5. **Delete a patient**:
+   * Type the command in the command box and press Enter to delete a patient:
+      > `delete 1`
+
+6. Add a task
+    * Type the command in the command box and press Enter to add a task to the patient:
+        > `addtask 1 d/Eat paracetamol 1000mg`
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -206,7 +283,7 @@ Examples:
 
 ### Deleting emergency contact : `delemergency`
 
-Delets an emergency contact and its details from a person in the address book.
+Deletes an emergency contact and its details from a person in the address book.
 
 Format: `delemergency INDEX
 
@@ -259,7 +336,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all patient and tasks entry from NovaCare.
 
 Format: `clear`
 
@@ -306,19 +383,32 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                      |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Add Priority**      | `priority /id INDEX /level PRIORITY_LEVEL` <br> e.g., `priority /id 1 /level 2`                                                                                       |
-| **Add Task**          | `addtask INDEX d/TASK_DESCRIPTION` <br> e.g., `addtask 1 d/Eat paracetamol 1000mg`                                                                                    |
-| **Clear**             | `clear`                                                                                                                                                               |
-| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Delete Priority**   | `deletelevel INDEX` <br> e.g., `deletelevel 1`                                                                                                                        |
-| **Delete Task**       | `deletetask INDEX`<br> e.g., `deletetask 3`                                                                                                                           |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Emergency Contact** | `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`<br> e.g., `emergency 3 n/Tom Tan p/97151717`                                                    |
-| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**              | `list`                                                                                                                                                                |
-| **Mark Task**         | `marktask INDEX`<br> e.g., `marktask 1`                                                                                                                               |
-| **Help**              | `help`                                                                                                                                                                |
+### Person-related commands:
+| Action                    | Format Examples                                                                                                                                          |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ` <br> e.g., `add n/James Ho p/94391857 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/diabetes` |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g., `edit 1 p/91234567 e/john13432@gmail.com`                                       |
+| **Change Priority**       | `priority INDEX l/PRIORITY_LEVEL` <br> e.g., `priority 1 l/2`                                                                                            |
+| **Delete Priority**       | `priority INDEX l/reset` <br> e.g., `priority 2 l/reset`                                                                                                      |
+| **Add Emergency Contact** | `emergency INDEX n/EMERGENCY CONTACT NAME p/EMERGENCY CONTACT NUMBER` <br> e.g., `emergency 1 n/tom tan p/91237171`                                      |
+| **Delete Emergency Contact** | `delemergency INDEX` <br> e.g., `delemergency 1`                                                                                                         |
+| **List**                  | `list`                                                                                                                                                   |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
+| **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
+| **Clear**                 | `clear`                                                                                                                                                  |
 
+
+### Task-related commands:
+| Action              | Format, Examples                                                                   |
+|---------------------|------------------------------------------------------------------------------------|
+| **Add Task**        | `addtask INDEX d/TASK_DESCRIPTION` <br> e.g., `addtask 1 d/Eat paracetamol 1000mg` |
+| **Delete Task**     | `deletetask INDEX`<br> e.g., `deletetask 1`                                        |
+| **Find Task**       | `findtask INDEX`<br> e.g., `findtask 1`                                            |
+| **List Task**       | `listtask`                                                                         |
+| **Mark Task**       | `marktask INDEX`<br> e.g., `marktask 1`                                            |
+| **List Incomplete** | `listincomplete`                                                                   |
+### Other commands:
+| Action                | Format, Examples       |
+|-----------------------|------------------------|
+|**Help**               | `help`                 |
+|**Exit**               | `exit`                 |
