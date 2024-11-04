@@ -75,6 +75,21 @@
     -fx-padding: 10 0 10 15;
 }
 
+#dashboard #scrollPane {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 0 0 0 0;
+    -fx-border-width: 0;
+}
+
+.tutorial-pane .scroll-bar .thumb {
+    -fx-background-color: derive(#9b9b9b, 70%);
+    -fx-background-insets: 2;
+}
+
+.tutorial-pane .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 4 0 4 0;
+}
+
 #total {
     -fx-background-color: #F1F1F1;
     -fx-background-radius: 5;

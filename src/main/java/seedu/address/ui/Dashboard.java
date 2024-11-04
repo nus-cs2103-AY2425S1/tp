@@ -54,6 +54,7 @@ public class Dashboard extends UiPart<Region> {
         initializeTutorialCards();
         updateStudentSummary();
         addParticipationListListener();
+        addTutorialListListener();
     }
 
 
@@ -62,7 +63,7 @@ public class Dashboard extends UiPart<Region> {
             List<Participation> initialParticipationList = getParticipationListForTutorial(tutorial);
             TutorialCard card = new TutorialCard(tutorial.getSubject(), initialParticipationList);
             tutorials.getChildren().add(card.getRoot());
-            tutorialCards.put(tutorial, card);  // Store each card in the map
+            tutorialCards.put(tutorial, card);
         }
     }
 
@@ -70,6 +71,13 @@ public class Dashboard extends UiPart<Region> {
         return participationList.stream()
                 .filter(p -> p.getTutorial().equals(tutorial))
                 .collect(Collectors.toList());
+    }
+
+    private void createAndAddTutorialCard(Tutorial tutorial) {
+        List<Participation> initialParticipationList = getParticipationListForTutorial(tutorial);
+        TutorialCard card = new TutorialCard(tutorial.getSubject(), initialParticipationList);
+        tutorials.getChildren().add(card.getRoot());
+        tutorialCards.put(tutorial, card);  // Store the card in the map for future reference
     }
 
     private void addParticipationListListener() {
@@ -87,6 +95,27 @@ public class Dashboard extends UiPart<Region> {
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
                     updateStudentSummary();
+                }
+            }
+        });
+    }
+
+    private void addTutorialListListener() {
+        tutorialList.addListener((ListChangeListener<Tutorial>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Tutorial addedTutorial : change.getAddedSubList()) {
+                        createAndAddTutorialCard(addedTutorial);  // Add new TutorialCard for each new tutorial
+                    }
+                }
+
+                if (change.wasRemoved()) {
+                    for (Tutorial removedTutorial : change.getRemoved()) {
+                        TutorialCard card = tutorialCards.remove(removedTutorial);  // Remove from map
+                        if (card != null) {
+                            tutorials.getChildren().remove(card.getRoot());  // Remove from HBox
+                        }
+                    }
                 }
             }
         });
