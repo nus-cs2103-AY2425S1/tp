@@ -106,6 +106,9 @@ public class DuplicatePhoneTagger {
         }
     }
 
+    /**
+     * Updates the person's tags based on whether their phone number is a duplicate of another person's
+     */
     private Person updatePerson(Person person, boolean isPhoneDuplicate) {
         assert person != null : "Person must exist";
         Name name = person.getName();
