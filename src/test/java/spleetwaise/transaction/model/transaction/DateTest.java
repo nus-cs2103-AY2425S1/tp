@@ -31,6 +31,8 @@ public class DateTest {
     @Test
     public void isValidDate_invalidInput_returnsFalse() {
         assertFalse(Date.isValidDate(""));
+        assertFalse(Date.isValidDate("     "));
+        assertFalse(Date.isValidDate("30022024")); // Feb edge case
         assertFalse(Date.isValidDate("01/01/2024"));
         assertFalse(Date.isValidDate("012025"));
         assertFalse(Date.isValidDate("0101"));
