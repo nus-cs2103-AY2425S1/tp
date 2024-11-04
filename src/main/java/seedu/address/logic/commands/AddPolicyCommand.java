@@ -34,8 +34,8 @@ public class AddPolicyCommand extends Command {
             + "[" + PREFIX_POLICY_EXPIRY_DATE + "EXPIRY_DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_POLICY_TYPE + "life "
-            + PREFIX_POLICY_PREMIUM_AMOUNT + "300 "
-            + PREFIX_POLICY_COVERAGE_AMOUNT + "4000.00 "
+            + PREFIX_POLICY_PREMIUM_AMOUNT + "300.25 "
+            + PREFIX_POLICY_COVERAGE_AMOUNT + "4000.50 "
             + PREFIX_POLICY_EXPIRY_DATE + "12/23/2024";
     public static final String MESSAGE_SUCCESS = "Added the following policy to %1$s:\n\n%2$s";
 
