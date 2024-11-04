@@ -26,7 +26,7 @@ public class Email {
             + "    - info@co.sg\n"
             + "    - user-name@example.com\n"
             + "    - user.name@example.com\n"
-            + "    - user@sub.example.org\n";
+            + "    - user@sub.example.org";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
     private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
