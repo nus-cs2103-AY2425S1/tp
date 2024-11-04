@@ -5,10 +5,10 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyHRPlatform" as ReadOnlyHRPlatform
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class HRPlatform
 Class ModelManager
 Class UserPrefs
 
@@ -18,6 +18,11 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class DesiredRole
+Class Experience
+Class Skills
+Class Status
+Class Note
 Class Tag
 
 Class I #FFFFFF
@@ -26,21 +31,26 @@ Class I #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+HRPlatform .up.|> ReadOnlyHRPlatform
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyHRPlatform
+ModelManager -left-> "1" HRPlatform
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+HRPlatform *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
+Person *--> "1" DesiredRole
+Person *--> "1" Experience
+Person *--> "1" Skills
+Person *--> "1" Status
+Person *--> "0..1" Note
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
