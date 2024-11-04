@@ -64,10 +64,11 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * Removes the specified lesson from the list.
      *
      * @param lesson The lesson to be removed.
-     * @throws LessonNotInList If the lesson is not found in the list.
+     * @throws LessonNotInList If the lesson is not in the list
      */
     public void remove(Lesson lesson) {
-        if (!internalList.contains(lesson)) {
+        requireNonNull(lesson);
+        if (!contains(lesson)) {
             throw new LessonNotInList();
         } else {
             internalList.remove(lesson);

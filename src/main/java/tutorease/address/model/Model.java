@@ -124,7 +124,7 @@ public interface Model {
      */
     boolean hasLessons(Lesson lesson);
     /**
-     * Deletes the lesson given the lesson as the inpyt.
+     * Deletes the given lesson.
      *
      * @param lesson The lesson to delete.
      */
@@ -139,16 +139,31 @@ public interface Model {
     Lesson getLesson(int index);
 
     /**
+     * Returns lesson at the specified index from the filtered list.
+     *
+     * @param index The index of the lesson to get from the filtered list.
+     * @return The lesson at the specified index.
+     */
+    Lesson getFilteredLesson(int index);
+
+    /**
      * Returns size of lesson schedule.
      *
-     * @return The size of the lesson schedule
+     * @return The size of the lesson schedule.
      */
     int getLessonScheduleSize();
 
     /**
-     * Deletes all the lessons of a particular student
+     * Returns size of filtered lesson list.
      *
-     * @param student The student whose lessons we are deleting
+     * @return The size of the filtered lesson list.
+     */
+    int getFilteredLessonListSize();
+
+    /**
+     * Deletes all the lessons of a particular student.
+     *
+     * @param student The student whose lessons we are deleting.
      */
     void deleteStudentLesson(Person student);
 }

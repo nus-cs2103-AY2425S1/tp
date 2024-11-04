@@ -40,6 +40,7 @@ public class UniqueLessonListTest {
     @AfterEach
     public void tearDown() {
         while (uniqueLessonList.size() > 0) {
+            Lesson lesson = uniqueLessonList.get(0);
             uniqueLessonList.remove(lesson);
         }
     }
@@ -96,10 +97,11 @@ public class UniqueLessonListTest {
     }
 
     @Test
-    public void remove_validIndex_lessonSuccessfullyRemoved() {
+    public void remove_validLesson_lessonSuccessfullyRemoved() {
         assertTrue(uniqueLessonList.contains(lesson));
 
         // Remove the first lesson and verify it's removed
+        Lesson lesson = uniqueLessonList.get(0);
         uniqueLessonList.remove(lesson);
         assertEquals(0, uniqueLessonList.size());
         assertFalse(uniqueLessonList.contains(lesson));
