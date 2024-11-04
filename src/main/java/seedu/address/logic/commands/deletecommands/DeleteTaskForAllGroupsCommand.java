@@ -34,7 +34,7 @@ public class DeleteTaskForAllGroupsCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_INDEX + "2";
 
-    public static final String MESSAGE_SUCCESS = "Deleted task: %1$s from %2$s";
+    public static final String MESSAGE_SUCCESS = "Deleted task: %1$s from:\n %2$s";
 
     private final Index taskIndex;
 
@@ -60,7 +60,7 @@ public class DeleteTaskForAllGroupsCommand extends Command {
         model.setStateGroupTask();
         String formattedGroups = toBeDeletedFrom.stream()
             .map(group -> Messages.format(group))
-            .collect(Collectors.joining(", "));
+            .collect(Collectors.joining("\n"));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(targetTask), formattedGroups),
             LIST_GROUP_TASK_MARKER);
     }
