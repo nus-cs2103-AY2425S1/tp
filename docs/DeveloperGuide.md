@@ -629,8 +629,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `clear` on an already empty address book  
        Expected: No change, as there are no entries to delete. Message "Address book has been cleared!" is displayed again. Status bar remains the same.
 
-    1. Other incorrect clear commands to try: `clear x`, `clear 123`, `clear all`  
-       Expected: Error message indicating an unrecognized command format. Address book remains unaffected.
+    1. Other clear commands to try: `clear x`, `clear 123`, `clear all`  
+       Expected: Address book will ignore parameters after the "clear" keyword, hence the address book will still be cleared.
 
 ### Undoing and Redoing changes
 
