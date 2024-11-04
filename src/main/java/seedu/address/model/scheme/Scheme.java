@@ -1,11 +1,8 @@
 package seedu.address.model.scheme;
 
-<<<<<<< HEAD
 import seedu.address.model.scheme.MoeFinancialAssistanceScheme;
 import seedu.address.model.scheme.StudentCareFeeAssistanceScheme;
 
-=======
->>>>>>> master
 /**
  * Represents a financial scheme in the address book.
  */
@@ -20,7 +17,7 @@ public abstract class Scheme {
      * Returns the name of the scheme.
      */
     public abstract String getSchemeName();
-<<<<<<< HEAD
+
 
     /**
      * Returns the short name of the scheme.
@@ -37,6 +34,5 @@ public abstract class Scheme {
             throw new IllegalArgumentException("Scheme not found");
         }
     }
-=======
->>>>>>> master
+
 }
