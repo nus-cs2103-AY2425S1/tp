@@ -228,12 +228,12 @@ So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 
 **Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity `person` or `appt`. This is followed by appropriate arguments and prefixes.
 **Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command.
-**Step 3**. The `AddressBookParser` creates a `xyzEntityCommand` object, and call the `xyzCommandParser::parse` method, which is returned to the `LogicManager`.
+**Step 3**. The `AddressBookParser` creates a `xyzEntityCommand` object, and call the `xyzCommandParser::parse` method, which is returned to the `LogicManager`. This may be different based on the entity type as commands like `addPersonCommand` and `addApptCommand` have a different set of arguments the user can provide. 
 **Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
 **Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
 <puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
-- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindApptCommand` because we have two entities called person and appointment on which operations can be performed.
+- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand` because we have two entities called person and appointment on which operations can be performed.
 
 #### Find Appointment Command
 **Aspect: How to show find appointment.**
