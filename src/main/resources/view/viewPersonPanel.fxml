@@ -4,7 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" minWidth="400" prefWidth="400" styleClass="details-base" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToWidth="true" minWidth="400" prefWidth="400" styleClass="details-base"
+            HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="TOP_CENTER" minWidth="400" prefWidth="400" styleClass="details-pane"
           HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"
           style="-fx-padding: 10;">
