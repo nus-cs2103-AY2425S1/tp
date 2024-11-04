@@ -219,9 +219,12 @@ public interface Model {
      */
     void addStatusFilters(Set<RsvpStatus> statusFilters);
 
-    void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters);
     /**
-     *
+     * Removes the tag and RSVP status filters in the sets from the model.
+     */
+    void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters);
+
+    /**
      * Clears the filter set in the model.
      */
     void clearFilterSet();

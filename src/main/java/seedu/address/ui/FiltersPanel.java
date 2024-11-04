@@ -7,11 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
-import java.util.Comparator;
 
 /**
  * Panel containing the list of current filters.
