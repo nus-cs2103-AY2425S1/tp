@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandCommons.getErrorMessage;
+import static seedu.address.logic.commands.CommandCommons.parseField;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
@@ -12,11 +14,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -93,51 +93,63 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         // lambda predicates which ensures that the combined predicate can be easily tested and debugged.
 
         List<Predicate<Client>> predicates = new ArrayList<>();
+        Set<String> errors = new LinkedHashSet<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String substring = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName
+                    , errors));
             predicates.add(new NameContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            String substring = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()).value;
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()).value
+                    , errors));
             predicates.add(new PhoneContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            String substring = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()).value;
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()).value
+                    , errors));
             predicates.add(new EmailContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()).value;
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parseAddress(
+                    argMultimap.getValue(PREFIX_ADDRESS).get()).value, errors));
             predicates.add(new AddressContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
-            String substring = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()).value;
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parseJob(
+                    argMultimap.getValue(PREFIX_JOB).get()).value, errors));
             predicates.add(new JobContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
             String operatorAndIncome = argMultimap.getValue(PREFIX_INCOME).get();
             try {
-                IncomeComparisonOperator operator =
-                        ParserUtil.parseIncomeComparisonOperator(operatorAndIncome.substring(0, 1));
+                IncomeComparisonOperator operator = ParserUtil.parseIncomeComparisonOperator(operatorAndIncome.substring(0, 1));
                 int income = ParserUtil.parseIncome(operatorAndIncome.substring(1)).value;
                 predicates.add(new IncomeComparisonPredicate(operator, income));
             } catch (StringIndexOutOfBoundsException e) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        "i/ has not been provided with a comparison operator.\n"
-                                + IncomeComparisonOperator.MESSAGE_CONSTRAINTS ));
+                errors.add("i/ has not been provided with a comparison operator.\n"
+                                + IncomeComparisonOperator.MESSAGE_CONSTRAINTS);
+            } catch (ParseException e) {
+                errors.add(e.getMessage());
             }
         }
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            String substring = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()).value;
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parseRemark(
+                    argMultimap.getValue(PREFIX_REMARK).get()).value, errors));
             predicates.add(new RemarkContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
-            String substring = argMultimap.getValue(PREFIX_TIER).get();
+            String substring = parseFieldForFilterCommand(
+                    () -> parseField(() -> argMultimap.getValue(PREFIX_TIER).get(), errors));
             predicates.add(new TierStartsWithSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            String substring = argMultimap.getValue(PREFIX_STATUS).get();
+            String substring = parseFieldForFilterCommand(
+                    () -> parseField(() -> argMultimap.getValue(PREFIX_STATUS).get(), errors));
             predicates.add(new StatusStartsWithSubstringPredicate(substring));
+        }
+        if (!errors.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, getErrorMessage(errors)));
         }
         return predicates;
     }
@@ -157,5 +169,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         return new CombinedPredicate(predicates);
+    }
+
+    private String parseFieldForFilterCommand(Supplier<String> otherMethodCall) {
+        String possibleValue = otherMethodCall.get();
+        return possibleValue == null ? "" : possibleValue;
     }
 }

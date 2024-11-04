@@ -201,8 +201,7 @@ public class ParserUtil {
         requireNonNull(operator);
         String trimmedOperator = operator.trim();
         if (!IncomeComparisonOperator.isValidComparisonOperator(trimmedOperator)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    IncomeComparisonOperator.MESSAGE_CONSTRAINTS));
+            throw new ParseException(IncomeComparisonOperator.MESSAGE_CONSTRAINTS);
         }
         return new IncomeComparisonOperator(trimmedOperator);
     }
