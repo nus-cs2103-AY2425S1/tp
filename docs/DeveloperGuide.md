@@ -368,7 +368,7 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 <br>
 
---- 
+---
 
 <br>
 
@@ -569,13 +569,9 @@ For all use cases below, unless specified otherwise,
 
   Use case ends.
 
-* 3a. The given index is invalid.
+<br>
 
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Add an appointment**
+#### Use case (UC05): Find a patient
 
 **MSS**
 
@@ -673,7 +669,7 @@ For all use cases below, unless specified otherwise,
 
 * 1a. The given index is invalid.
 
-      Use case resumes at step 2.
+    * 1a1. DocTrack shows an error message.
 
       Use case resumes at step 1.
 
