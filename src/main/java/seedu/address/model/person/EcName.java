@@ -40,6 +40,13 @@ public class EcName implements Comparable<EcName> {
         return name != null && (name.matches(VALIDATION_REGEX) || name.isEmpty());
     }
 
+    /**
+     * Returns true if the value of EcName is empty.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
     @Override
     public String toString() {
         return value;
@@ -65,8 +72,17 @@ public class EcName implements Comparable<EcName> {
         return value.hashCode();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * If the String is empty, the String will be considered to be greater than a non-empty String.
+     */
     @Override
     public int compareTo(EcName e) {
-        return this.toString().compareTo(e.toString());
+        if (this.isEmpty() || e.isEmpty()) {
+            return e.toString().compareTo(this.toString());
+        } else {
+            return this.toString().compareTo(e.toString());
+        }
     }
 }
