@@ -1,6 +1,8 @@
 package seedu.address.commons.util;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +36,13 @@ public class DateUtil {
             dateList.add(ParserUtil.parseAppointmentDate(s)); // This can throw ParseException
         }
         return dateList;
+    }
+
+    /**
+     * Returns a formatted local date in the form of MMMM dd, yyyy, hh:mm a.
+     */
+    public static String formatDateTimeForDisplay(LocalDateTime appointmentDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm a");
+        return appointmentDateTime.format(formatter);
     }
 }

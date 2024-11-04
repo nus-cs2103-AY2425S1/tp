@@ -27,7 +27,7 @@ import seedu.address.model.person.Person;
 
 
 /**
- * Edits the details of an existing apppointment in the appointment book.
+ * Edits the details of an existing appointment in the appointment book.
  */
 public class EditAppointmentCommand extends EditCommand {
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
