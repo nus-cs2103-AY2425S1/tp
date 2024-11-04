@@ -29,18 +29,15 @@ public class PersonUtil {
         switch (role) {
         case VOLUNTEER:
             Volunteer volunteer = (Volunteer) person;
-            String hoursString = volunteer.getHours().toString();
-            return "Hours: " + hoursString;
+            return "Hours: " + volunteer.getHours();
         case DONOR:
             Donor donor = (Donor) person;
-            String donatedAmountString = donor.getDonatedAmount().toString();
-            return "Donated Amount: " + donatedAmountString;
+            return "Donated Amount: " + donor.getDonatedAmount();
         case PARTNER:
             Partner partner = (Partner) person;
-            String partnershipEndDateString = partner.getEndDate().toString();
-            return "Partnership End Date: " + partnershipEndDateString;
+            return "Partnership End Date: " + partner.getEndDate();
         default:
-            throw new CommandException("Unknown role: " + role);
+            return ""; //return an empty string by default
         }
     }
 }
