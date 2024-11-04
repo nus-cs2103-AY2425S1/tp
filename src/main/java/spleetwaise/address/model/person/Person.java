@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import spleetwaise.address.model.tag.Tag;
-import spleetwaise.commons.IdUtil;
 import spleetwaise.commons.util.CollectionUtil;
+import spleetwaise.commons.util.IdUtil;
 import spleetwaise.commons.util.ToStringBuilder;
 
 /**

@@ -1,4 +1,4 @@
-package spleetwaise.commons;
+package spleetwaise.commons.util;
 
 import java.util.UUID;
 

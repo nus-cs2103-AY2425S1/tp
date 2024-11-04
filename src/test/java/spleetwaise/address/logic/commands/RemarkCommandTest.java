@@ -22,10 +22,10 @@ import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.testutil.PersonBuilder;
-import spleetwaise.commons.IdUtil;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.commons.model.UserPrefs;
+import spleetwaise.commons.util.IdUtil;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
