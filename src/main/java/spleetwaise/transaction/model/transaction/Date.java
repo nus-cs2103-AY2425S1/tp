@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import spleetwaise.address.commons.util.AppUtil;
 
@@ -13,11 +14,12 @@ import spleetwaise.address.commons.util.AppUtil;
  * {@link #isValidDate(String)}
  */
 public class Date {
-    public static final String MESSAGE_CONSTRAINTS = "Date should only in the format of DDMMYYYY";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be valid and in the format of DDMMYYYY";
 
-    public static final DateTimeFormatter VALIDATION_FORMATTER = DateTimeFormatter.ofPattern("ddMMyyyy");
+    public static final DateTimeFormatter VALIDATION_FORMATTER = DateTimeFormatter.ofPattern("ddMMuuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
-    public static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/uuuu");
 
     public final LocalDate date;
 

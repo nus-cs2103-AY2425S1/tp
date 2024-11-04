@@ -31,6 +31,9 @@ public class DateTest {
     @Test
     public void isValidDate_invalidInput_returnsFalse() {
         assertFalse(Date.isValidDate(""));
+        assertFalse(Date.isValidDate("     "));
+        assertFalse(Date.isValidDate("29022022")); // 2022 is not a leap year
+        assertFalse(Date.isValidDate("30022024")); // Feb does not have 30 days
         assertFalse(Date.isValidDate("01/01/2024"));
         assertFalse(Date.isValidDate("012025"));
         assertFalse(Date.isValidDate("0101"));
@@ -41,6 +44,9 @@ public class DateTest {
     @Test
     public void isValidDate_validInput_returnsTrue() {
         assertTrue(Date.isValidDate("01012024"));
+        assertTrue(Date.isValidDate("28022022"));
+        assertTrue(Date.isValidDate("28022024"));
+        assertTrue(Date.isValidDate("29022024")); // 2024 is a leap year
     }
 
     @Test
