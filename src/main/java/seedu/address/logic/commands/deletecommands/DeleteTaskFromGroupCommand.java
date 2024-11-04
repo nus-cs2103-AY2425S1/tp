@@ -43,7 +43,7 @@ public class DeleteTaskFromGroupCommand extends Command {
     private final GroupName toDeleteFrom;
 
     /**
-     * Creates an DeleteTaskToGroupCommand to delete the task on {@code index} from the
+     * Creates an DeleteTaskFromGroupCommand to delete the task on {@code index} from the
      * group with {@code groupName}.
      */
     public DeleteTaskFromGroupCommand(Index index, GroupName groupName) {

@@ -150,10 +150,15 @@ public class Group {
             && otherGroup.getGroupName().equals(getGroupName());
     }
     /**
-     * Returns true if the group has given task.
+     * Returns true if the group has given task regardless of status.
      */
     public boolean hasTask(Task task) {
-        return tasks.contains(task);
+        for (Task t : tasks) {
+            if (t.equals(task)) {
+                return true;
+            }
+        }
+        return false;
     }
     /**
      * Returns true if both group have the same identity and data fields.
