@@ -29,7 +29,7 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
         validatePrefixes(argMultimap);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX);
 
-        PolicyType policyType = parsePolicyType(argMultimap);
+        PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
         Index claimIndex = parseClaimIndex(argMultimap);
 
         return new DeleteClaimsCommand(clientIndex, policyType, claimIndex);
@@ -61,22 +61,6 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
         if (argMultimap.getValue(PREFIX_POLICY_TYPE).isEmpty()
                 || argMultimap.getValue(PREFIX_CLAIM_INDEX).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
-        }
-    }
-
-    /**
-     * Parses the policy type from the given argument multimap.
-     *
-     * @param argMultimap The argument multimap containing the parsed arguments.
-     * @return The parsed policy type.
-     * @throws ParseException If the policy type is invalid.
-     */
-    private PolicyType parsePolicyType(ArgumentMultimap argMultimap) throws ParseException {
-        try {
-            return ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
-                    pe);
         }
     }
 

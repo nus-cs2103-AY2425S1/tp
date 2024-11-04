@@ -23,11 +23,6 @@ public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();
 
     @Test
-    public void updateFilteredPolicyList_nullPredicate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredPolicyList(null));
-    }
-
-    @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());

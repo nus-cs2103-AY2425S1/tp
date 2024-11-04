@@ -17,9 +17,9 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting Up and Getting Started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -127,12 +127,10 @@ The `Model` component,
 * stores the currently 'selected' `Client` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-* Each client may contain 1 Education, Health and Life Policy contained in PolicySet.
-* Each policy contains a ClaimList which can contain any number of claims.
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Prudy`, which `Client` references. This allows `Prudy` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Prudy`, which `Client` references. This allows `Prudy` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects. (Note that the details of PolicySet has been omitted from this diagram as they are not relevant)<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -182,7 +180,7 @@ Step 2. The user executes `delete-client 5` command to delete the 5th client in 
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitPrudy()`, causing another modified Prudy state to be saved into the `prudyStateList`.
+Step 3. The user executes `add-client n/David …​` to add a new client. The `add-client` command also calls `Model#commitPrudy()`, causing another modified Prudy state to be saved into the `prudyStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -226,11 +224,11 @@ The `redo` command does the opposite — it calls `Model#redoPrudy()`, which
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify Prudy, such as `list`, will usually not call `Model#commitPrudy()`, `Model#undoPrudy()` or `Model#redoPrudy()`. Thus, the `prudyStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list-client`. Commands that do not modify Prudy, such as `list-client`, will usually not call `Model#commitPrudy()`, `Model#undoPrudy()` or `Model#redoPrudy()`. Thus, the `prudyStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitPrudy()`. Since the `currentStatePointer` is not pointing at the end of the `prudyStateList`, all Prudy states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitPrudy()`. Since the `currentStatePointer` is not pointing at the end of the `prudyStateList`, all Prudy states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add-client n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -260,7 +258,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -278,13 +276,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * is a Prudential insurance agent
 * has a need to manage a significant number of clients
-* has a need to manage clients policies and claims
+* has a need to manage clients' policies and claims
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: We firstly improve efficiency through easy client management. Agents can quickly retrieve key information such as a client's insurance policies. Next, also improve client relationships. Ensures agents never miss a client policy renewal. Manage clients pending claims effectively.
+**Value proposition**: We firstly improve efficiency through easy client management. Agents can quickly retrieve key information such as a client's insurance policy. Next, also improve client's relationships. Ensures agents never miss a client policy renewal. Manage clients' pending claims effectively.
 
 
 ### User stories
@@ -297,20 +295,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Responsible insurance agent    | receive timely reminders for clients' policies which are expiring soon | remind individual clients to renew their policies           |
 | `* * *`  | Forgetful insurance agent      | track the status of my clients' claims           | keep track of pending claims that require my attention                          |
 | `* * *`  | Insurance agent                | store all my client contact information in one place | easily access their details and communicate with them without searching across multiple platforms |
+| `* * *`  | Insurance agent                | track clients' claims and their status    | ensure all client issues are addressed promptly and effectively                 |
+| `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter Prudy. |
+| `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
+| `* * *`  | Insurance agent                        | add new claims or resolve old ones                | I can organize my actionables. |
 | `* *`    | Busy insurance agent           | have a powerful search function that allows me to quickly find clients by name, policy type, or claims | respond promptly to inquiries                                                   |
 | `* *`    | Busy insurance agent           | receive notifications when a client’s claim has not been resolved after a long time | be reminded to prioritize actioning these claims                                 |
 | `* *`    | Organized insurance agent      | have a visual dashboard that shows me a summary of my client portfolio at a glance, including policy types, claims, and follow-up tasks | plan my activities without having to navigate too much                           |
+| `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
 | `*`      | Eager insurance agent          | receive reminders for key client milestones (e.g., birthdays, policy anniversaries) | send personalized messages or offers, strengthening client relationships         |
 | `*`      | Responsible insurance agent    | Track the status of any claims my clients have made | I can provide updates and assistance throughout the claim process. |
 | `*`      | Insurance agent                | import and export client data                    | work with the data outside of the platform when necessary                       |
 | `*`      | Forgetful insurance agent      | set reminders for client meetings                | never miss important meetings or calls                                          |
-| `* * *`  | Insurance agent                | track clients' claims and their remark status    | ensure all client issues are addressed promptly and effectively                 |
 | `*`      | Insurance agent                | view detailed information about client referrals and their referees | know which of my clients are related and show my appreciation to clients with large referrals |
 | `*`      | Time-efficient insurance agent | assign different priority levels to my clients based on factors like policy value or renewal date | prioritize my work and focus on the most important or time-sensitive client needs |
-| `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
-| `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter Prudy. |
-| `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
-| `* * *`  | Insurance agent                        | add new claims or resolve old ones                | I can organize my actionables. |
 
 
 
@@ -318,9 +316,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`, unless specified otherwise)
+<box type="info" seamless>
+**Note:** For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`.
+</box>
 
-**Use case: UC1 - List clients**
+<box type="info" seamless>
+**Note:** For all use cases below, if the user enters an invalid input, or there is an error when executing the command, the use case simply ends.
+</box>
+
+**Use case: UC1 - List clients (Find client has a similar use case)**
 
 **MSS**
 
@@ -329,123 +333,69 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC2 - Delete a client**
-
-**Preconditions: User has done <u>UC1 - List clients</u>**
+**Use case: UC2 - Add a client**
 
 **MSS**
 
+1. User requests to add client
+1. Prudy adds the client
+
+   Use case ends.
+
+**Use case: UC3 - Delete a client**
+
+**MSS**
+
+1. User <u>list clients (UC1)</u> to look for index of client
 1. User requests to delete a specific client in the list
 1. Prudy deletes the client
 
    Use case ends.
 
-**Extensions**
-
-* 1a. The given index is invalid.
-
-    * 1a1. Prudy shows an error message.
-
-      Use case ends.
-
-**Use case: UC3 - Add a client**
+**Use case: UC4 - Add a policy to client**
 
 **MSS**
 
-1. User requests to add client
-1. Prudy deletes the client
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The client already exists.
-
-    * 1a1. Prudy shows that the client already exists.
-
-      Use case ends.
-
-**Use case: UC4 - Edit a client details (does not include editing of client policies or claims)**
-
-**Preconditions: User has done <u>UC1 - List clients</u>**
-
-**MSS**
-
-1. User requests to edit a specific client in the list with the specified changes
-1. Prudy edits the client details
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The given index is invalid.
-
-    * 1a1. Prudy shows an error message.
-
-      Use case ends.
-
-**Use case: UC5 - Add a policy to client**
-
-1. User requests to add a policy (or multiple policies) to a specific client in the list
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User requests to add a policy to a specific client in the list
 1. Prudy adds the policy under the client
 
    Use case ends.
 
-**Extensions**
-
-* 1a. The given index is invalid.
-
-    * 1a1. Prudy shows an error message.
-
-      Use case ends.
-
-* 1b. The client already has the stated policy.
-
-    * 1b1. Prudy shows an error message.
-
-      Use case ends.
-
-* 1c. The user indicated an invalid policy.
-
-    * 1c1. Prudy shows an error message.
-
-      Use case ends.
-    *
-**Use case: UC6 - Add a claim to a policy**
+**Use case: UC5 - Add a claim to a policy**
 
 **MSS**
 
-1. User requests to add a claim to a specific policy for a client in the list.
-2. Prudy adds the claim under the specified policy for the client.
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User requests to add a claim to a specific policy for a client in the list
+1. Prudy adds the claim under the specified policy for the client
 
    Use case ends.
 
-**Extensions**
+**Use case: UC6 - List claims for a policy**
 
-* 1a. The given client index is invalid.
-    * 1a1. Prudy shows an error message indicating the invalid client index.
+**MSS**
 
-      Use case ends.
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User requests to list claims for a specific policy under the client
+1. Prudy lists the claims under the specified policy
 
-* 1b. The specified policy type is invalid.
-    * 1b1. Prudy shows an error message indicating that the policy type not valid.
+   Use case ends.
 
-      Use case ends.
+**Use case: UC7 - Resolve a claim**
 
-* 1c. The claim details are invalid (e.g., missing required fields or incorrect format).
-    * 1c1. Prudy shows an error message indicating the invalid claim details.
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User <u>list claims for a policy (UC6)</u>
+1. User requests to edit a claim to mark its status as resolved
+1. Prudy edits the claim under the specified policy for the client
 
-      Use case ends.
+   Use case ends.
 
-* 1d. The same claim already exists under the specified policy.
-    * 1d1. Prudy shows an error message indicating the duplicate claim.
-
-      Use case ends.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be intuitive, agents can perform core functions with 30 minutes training
 5.  The system should provide feedback for user inputs for basic commands (eg. add client, update client) within 1 second.
 6.  The app should not exceed 500MB of memory.
@@ -463,13 +413,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Commands**: A text instruction that triggers a defined function in the app (e.g., add-client, list-policies).
 * **Command Prefix**: A marker used in commands to specify the type of input (e.g., n/ for name, p/ for phone number).
 * **Premium**: Amount of money paid for an insurance policy
-* **Coverage amount**: Maximum amount an insurance company will pay under a policy.
-* **Claim Status**: The current state of a claim, such as Pending, In Progress, Resolved, or Closed.
+* **Coverage**: Maximum amount an insurance company will pay under a policy.
+* **Claim Status**: The current state of a claim, such as Pending, Approved, or Rejected.
 * **Error Message**: Message displayed to the user providing guidance on how to correct the issue.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -482,42 +432,106 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+#### Initial Launch
 
-   1. Download the jar file and copy into an empty folder
+1. **Step**: Download the jar file and copy it into an empty folder.
+2. **Step**: Double-click the jar file to launch the application.
+3. **Expected**: The GUI should display with a set of sample contacts. Note that the window size may need adjustment.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+### Saving Window Preferences
 
-1. Saving window preferences
+1. **Step**: Resize the window to a comfortable size.
+2. **Step**: Move the window to a different location on your screen.
+3. **Step**: Close the window.
+4. **Step**: Re-open the app by double-clicking the jar file.
+5. **Expected**: The window should open in the last used size and location.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+---
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### Client Management
 
-1. _{ more test cases …​ }_
+#### Deleting a Client
 
-### Deleting a client
+1. **Prerequisites**: Ensure there are multiple clients listed using `list-client`.
+2. **Test Case**: `delete-client 1`
+    - **Expected**: Deletes the first client in the list. The status message displays details of the deletion, and the timestamp updates.
+3. **Test Case**: `delete-client 0`
+    - **Expected**: No client is deleted. An error message is shown, and the status bar remains unchanged.
+4. **Incorrect Commands**:
+    - `delete-client` (no index specified)
+    - `delete-client x` (where `x` is greater than the number of clients)
+    - **Expected**: An error message for invalid input or index.
 
-1. Deleting a client while all clients are being shown
+---
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+### Policy and Claim Management
 
-   1. Test case: `delete-client 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+#### Listing Policies
 
-   1. Test case: `delete-client 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+1. **Prerequisites**: Ensure `list-client` is used to verify that the client has policies.
+2. **Test Case**: `list-policies 1`
+    - **Expected**: Lists all policies for the first client. If there are no policies, an appropriate message is displayed.
 
-   1. Other incorrect delete commands to try: `delete-client`, `delete-client x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+---
 
-1. _{ more test cases …​ }_
+### Claim Management
 
-### Saving data
+#### Listing Claims
 
-1. Dealing with missing/corrupted data files
+1. **Prerequisites**: Ensure policies with claims are present by using `list-client` and `list-policies`.
+2. **Test Case**: `list-claims 1 pt/health`
+    - **Expected**: Lists all claims under the health policy for the first client. If no claims are found, an appropriate message is shown.
+3. **Invalid Policy Type**: `list-claims 2 pt/lifee`
+    - **Expected**: An error indicating an invalid policy type, not a generic format error.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+#### Adding a Claim
 
-1. _{ more test cases …​ }_
+1. **Prerequisites**: Ensure there is a valid policy for the client using `list-policies`.
+2. **Test Case**: `add-claim 1 pt/health s/PENDING d/Medical Expenses`
+    - **Expected**: Adds a new claim to the health policy. Success message is displayed.
+3. **Invalid Inputs**: Test with incorrect claim statuses, policy types, or invalid claim descriptions.
+    - **Expected**: Validation error messages are displayed.
+
+---
+
+### Data Persistence
+
+#### Saving Data
+
+1. **Step**: Perform various add/delete operations on clients or policies.
+2. **Expected**: Data should save automatically and persist when the application is closed and reopened.
+
+---
+
+### Handling Missing/Corrupted Data Files
+
+1. **Simulating Missing Data File**:
+    - **Step**: Navigate to the app's data directory and remove the data file.
+    - **Step**: Re-launch the app.
+    - **Expected**: The app should load with default data and display a warning about missing data.
+
+2. **Simulating Corrupted Data File**:
+    - **Step**: Open the data file and corrupt the contents (e.g., remove part of the JSON structure).
+    - **Step**: Re-launch the app.
+    - **Expected**: The app should show an error message and initialize with default data.
+
+---
+
+### Error Handling and Edge Cases
+
+1. **Extreme Input Values**:
+    - **Test Case**: Enter long strings or special characters in client or claim fields.
+    - **Expected**: Proper validation errors and handling without app crashes.
+2. **Invalid Command Inputs**:
+    - **Test Case**: Commands like `add-client` with missing parameters.
+    - **Expected**: Informative error messages are displayed.
+
+---
+
+### Exploratory Testing Tips
+
+- Try boundary values for indices and numeric inputs.
+- Ensure the app remains responsive when handling multiple sequential commands.
+- Check how the app handles rapid commands and actions in succession.
+
+---

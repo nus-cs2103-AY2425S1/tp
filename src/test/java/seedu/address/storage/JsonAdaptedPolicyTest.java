@@ -3,11 +3,13 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.EducationPolicy;
@@ -20,6 +22,9 @@ import seedu.address.model.policy.PremiumAmount;
 
 
 class JsonAdaptedPolicyTest {
+    final String life = "life";
+    final String health = "health";
+    final String education = "education";
     final double premiumAmount = 400.0;
     final double coverageAmount = 4000.0;
     final String expiryDate = "12/23/2024";
@@ -33,7 +38,7 @@ class JsonAdaptedPolicyTest {
 
     @Test
     public void testToModelType_validLifePolicy() throws Exception {
-        final JsonAdaptedPolicy policy = new JsonAdaptedPolicy("life", premiumAmount, coverageAmount,
+        final JsonAdaptedPolicy policy = new JsonAdaptedPolicy(life, premiumAmount, coverageAmount,
                 expiryDate, claims);
 
         Policy modelPolicy = policy.toModelType();
@@ -46,7 +51,7 @@ class JsonAdaptedPolicyTest {
 
     @Test
     public void testToModelType_validHealthPolicy() throws Exception {
-        final JsonAdaptedPolicy policy = new JsonAdaptedPolicy("health", premiumAmount, coverageAmount,
+        final JsonAdaptedPolicy policy = new JsonAdaptedPolicy(health, premiumAmount, coverageAmount,
                 expiryDate, claims);
 
         Policy modelPolicy = policy.toModelType();
@@ -58,7 +63,7 @@ class JsonAdaptedPolicyTest {
 
     @Test
     public void testToModelType_validEducationPolicy() throws Exception {
-        final JsonAdaptedPolicy policy = new JsonAdaptedPolicy("education", premiumAmount, coverageAmount,
+        final JsonAdaptedPolicy policy = new JsonAdaptedPolicy(education, premiumAmount, coverageAmount,
                 expiryDate, claims);
 
         Policy modelPolicy = policy.toModelType();
@@ -77,27 +82,27 @@ class JsonAdaptedPolicyTest {
 
     @Test
     public void testToModelType_invalidPremiumAmount_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy("health", -1, coverageAmount,
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(life, -1, coverageAmount,
                 expiryDate, claims);
         assertThrows(IllegalValueException.class, policy::toModelType, PremiumAmount.MESSAGE_CONSTRAINTS);
 
-        policy = new JsonAdaptedPolicy("health", 1.555, coverageAmount, expiryDate, claims);
+        policy = new JsonAdaptedPolicy(life, 1.555, coverageAmount, expiryDate, claims);
         assertThrows(IllegalValueException.class, policy::toModelType, PremiumAmount.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void testToModelType_invalidCoverageAmount_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy("health", premiumAmount, -1,
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(life, premiumAmount, -1,
                 expiryDate, claims);
         assertThrows(IllegalValueException.class, policy::toModelType, CoverageAmount.MESSAGE_CONSTRAINTS);
 
-        policy = new JsonAdaptedPolicy("health", premiumAmount, 1.555, expiryDate, claims);
+        policy = new JsonAdaptedPolicy(life, premiumAmount, 1.555, expiryDate, claims);
         assertThrows(IllegalValueException.class, policy::toModelType, CoverageAmount.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void testToModelType_invalidExpiryDate_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy("health", premiumAmount, coverageAmount,
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(life, premiumAmount, coverageAmount,
                 "12-23-2024", claims);
         assertThrows(IllegalValueException.class, policy::toModelType, ExpiryDate.MESSAGE_CONSTRAINTS);
     }
@@ -113,10 +118,25 @@ class JsonAdaptedPolicyTest {
     @Test
     void toModelType_nullExpiryDate_throwsIllegalValueException() {
         JsonAdaptedPolicy adaptedPolicy = new JsonAdaptedPolicy(
-                "health", premiumAmount, coverageAmount, null, claims);
+                life, premiumAmount, coverageAmount, null, claims);
 
         IllegalValueException exception = assertThrows(IllegalValueException.class, adaptedPolicy::toModelType);
         assertEquals(String.format(JsonAdaptedPolicy.MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()),
                 exception.getMessage());
+    }
+
+    @Test
+    public void testToModelType_duplicateClaimTypes_throwsIllegalValueException() {
+        JsonAdaptedClaim duplicateClaim = new JsonAdaptedClaim(new Claim(ClaimStatus.APPROVED, "foo"));
+        List<JsonAdaptedClaim> invalidClaims = new ArrayList<>();
+
+        // add duplicateClaim twice
+        invalidClaims.add(duplicateClaim);
+        invalidClaims.add(duplicateClaim);
+
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(life, premiumAmount, coverageAmount,
+                expiryDate, invalidClaims);
+
+        assertThrows(IllegalValueException.class, policy::toModelType);
     }
 }

@@ -24,7 +24,7 @@ public class ListPoliciesCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_LIST_POLICIES_SUCCESS = "Policies listed for client: %1$s\n%2$s";
+    public static final String MESSAGE_SUCCESS = "Policies listed for client: %1$s\n%2$s";
     public static final String MESSAGE_NO_POLICIES = "No policies found for client: %1$s";
     public static final String MESSAGE_INVALID_CLIENT_INDEX = "The index you provided exceeds the total number of "
             + "clients you have.\nPlease check the index of the client you are looking for using the 'list' command!";
@@ -56,7 +56,7 @@ public class ListPoliciesCommand extends Command {
                 .map(Policy::toString)
                 .collect(Collectors.joining("\n"));
 
-        return new CommandResult(String.format(MESSAGE_LIST_POLICIES_SUCCESS, client.getName(), policies));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, client.getName(), policies));
     }
 
     @Override

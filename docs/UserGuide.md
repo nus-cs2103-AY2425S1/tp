@@ -32,7 +32,7 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
 
 5. [Commands Overview](#5-commands-overview)
     - 5.1 [General Commands](#5-1-general-commands)
-        - 5.1.1 [Viewing Help](#5-1-1-viewing-help)
+        - 5.1.1 [Viewing Help](#5-1-1-viewing-help-help)
         - 5.1.2 [Clearing All Entries](#5-1-2-clearing-all-entries-clear)
         - 5.1.3 [Exiting the Program](#5-1-3-exiting-the-program-exit)
         - 5.1.4 [Saving the Data](#5-1-4-saving-the-data)
@@ -41,16 +41,20 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
         - 5.2.1 [Adding a Client](#5-2-1-adding-a-client-add)
         - 5.2.2 [Listing All Clients](#5-2-2-listing-all-clients-list)
         - 5.2.3 [Filtering Clients](#5-2-3-filtering-clients-find-client)
-        - 5.2.4 [Editing a Client’s Details](#5-2-4-editing-a-clients-details-edit)
+        - 5.2.4 [Editing a Client’s Details](#5-2-4-editing-a-client's-details-edit)
         - 5.2.5 [Deleting a Client](#5-2-5-deleting-a-client-delete)
     - 5.3 [Policy Management Commands](#5-3-policy-management-commands)
         - 5.3.1 [Adding a Policy](#5-3-1-adding-a-policy-add-policy)
         - 5.3.2 [Deleting a Policy](#5-3-2-deleting-a-policy-delete-policy)
         - 5.3.3 [Editing a Policy](#5-3-3-editing-a-policy-edit-policy)
-        - 5.3.4 [Listing All Policies](#5-3-4-listing-all-policies-list-policy)
-        - 5.3.5 [Listing Expiring Policies](#5-3-5-listing-expiring-policies-listexpiringpolicies)
+        - 5.3.4 [Listing All Policies](#5-3-4-listing-all-policies-list-policies)
+        - 5.3.5 [Listing Expiring Policies](#5-3-5-listing-expiring-policies-list-expiring-policies)
     - 5.4 [Claims Management Commands](#5-4-claims-management-commands)
-        - 5.4.1 [Adding Claims \[coming in v2.0\]](#5-1-4-saving-the-data)
+        - 5.4.1 [Adding a Claim](#5-4-1-adding-a-claim-add-claim)
+        - 5.4.2 [Deleting a Claim](#5-4-2-deleting-a-claim-delete-claim)
+        - 5.4.3 [Editing a Claim](#5-4-3-editing-a-claim-edit-claim)
+        - 5.4.4 [Listing All Claims](#5-4-4-listing-all-claims-list-claims)
+
 
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
@@ -236,7 +240,7 @@ These are just some of the basic commands, please refer to [Commands Overview](#
 In Prudy, arguments ensure that the command functions as expected. Without correct arguments, Prudy may display an error message indicating the input is invalid.
 
 <box type="info" seamless>
-Info: In the following commands section below, arguments and flags enclosed in square brackets `[]` are optional. For example, in the command `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`, the `[t/TAG]` part is optional and can be omitted if not needed.
+Info: In the following commands section below, arguments and flags enclosed in square brackets <code>[]</code> are optional. For example, in the command <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​</code>, the <code>[t/TAG]</code> part is optional and can be omitted if not needed.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -469,8 +473,70 @@ Examples:
 
 Claims management commands will be available in Prudy version 2.0. This feature will introduce new commands to add, edit, delete, and list claims for clients.
 
-#### Adding Claims `[coming in v2.0]`
-Details coming soon ...
+#### 5.4.1 Adding a claim: `add-claim`
+Adds a claim to the policy of the specified `POLICY_TYPE` for the client at the specified `INDEX`.
+
+**Format:**  
+`add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION`
+
+**Details:**
+- `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
+- `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
+- `CLAIM_STATUS` specifies the current status of the claim (e.g., pending, approved).
+- `CLAIM_DESCRIPTION` provides a brief description of the claim details.
+
+> **Note:** This command will not allow adding a claim if the client has no policy of the specified type or if a similar claim already exists.
+
+**Examples:**
+- `add-claim 1 pt/health s/pending d/stomach surgery`  
+  Adds a claim with status "pending" and description "stomach surgery" to the health policy of the 1st client.
+
+- `add-claim 2 pt/life s/approved d/accidental coverage`  
+  Adds a claim with status "approved" and description "accidental coverage" to the life policy of the 2nd client.
+
+### 5.4.2 Deleting a Claim: `delete-claim`
+Deletes a specific claim from a policy type for the client identified by the specified INDEX.
+
+**Format:**  
+`delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX`
+
+**Details:**
+- `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
+- `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
+- `CLAIM_INDEX` is the position of the claim in the policy's claim list and must be a positive integer.
+- Use the `list-claims` command to find the appropriate claim index for the specified policy type.
+
+> **Note:** If the specified client, policy type, or claim does not exist, an error message will be shown.
+
+**Examples:**
+- `delete-claim 1 pt/health c/1`  
+  Deletes the claim at index 1 in the health policy of the 1st client.
+
+- `delete-claim 2 pt/life c/2`  
+  Deletes the claim at index 2 in the life policy of the 2nd client.
+
+### 5.4.3 Editing a Claim: `edit-claim`
+Edits a specific claim in a policy for the client identified by the specified INDEX.
+
+**Format:**  
+`edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/NEW_STATUS] [d/NEW_DESCRIPTION]`
+
+**Details:**
+- `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
+- `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
+- `CLAIM_INDEX` is the position of the claim in the policy's claim list and must be a positive integer.
+- `NEW_STATUS` updates the claim status (e.g., approved, pending).
+- `NEW_DESCRIPTION` updates the description of the claim.
+- Use the `list-claims` command to find the appropriate claim index for the specified policy type.
+
+> **Note:** At least one of `NEW_STATUS` or `NEW_DESCRIPTION` must be specified. If the claim details are unchanged or duplicate an existing claim, an error message will be shown.
+
+**Examples:**
+- `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`  
+  Edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
+
+- `edit-claim 2 pt/life c/2 s/pending`  
+  Updates the status of the second claim in the life policy of the 2nd client to "pending."
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -503,6 +569,10 @@ Details coming soon ...
 | `edit-policy`            | `edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]` | `edit-policy 1 pt/health ca/40000`                                                                 |
 | `list-policies`          | `list-policy`                                                                                |                                                                                                    |
 | `List-expiring-policies` | `list-expiring-policies [DAYS]`                                                              | `list-expiring-policies 50`                                                                        |
+| `add-claim`              | `add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION`                          | `add-claim 1 pt/health s/pending d/stomach surgery`                                                |
+| `delete-claim`           | `delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX`                                            | `delete-claim 1 pt/health c/1`                                                                     |
+| `edit-claim`             | `edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/NEW_STATUS] [d/NEW_DESCRIPTION]`           | `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`                                  |
+| `list-claims`            | `list-claims INDEX pt/POLICY_TYPE`                                                           | `list-claims 1 pt/health`                                                                          |
 | `clear`                  | `clear`                                                                                      | `clear`                                                                                            |
 | `exit`                   | `exit`                                                                                       | `exit`                                                                                             |
 
