@@ -72,16 +72,6 @@ Format: `help`
 
 ---
 
-### Viewing help if user does not have access to internet: `offlinehelp`
-
-Shows you a full list of commands within the jar file.
-
-![offlinehelp message](images/offlinehelp.png)
-
-Format: `offlinehelp`
-
----
-
 ### Adding a student: `add`
 
 Adds a student to Teacher’s Pet
@@ -148,12 +138,14 @@ Format: `list`
 
 ### Displaying students in a group : `show`
 
-**You can display members in a group easily**
+Shows a list of students in the same group(s)
 
-<span style="color:#4CAF50;">Format: show GROUP_NUMBER</span>
+<span style="color:#4CAF50;">Format: show KEYWORDS</span>
 
-* The GROUP_NUMBER is the group you would like to search for in your current list. For instance, use `1` (for group 1), `2` (for group 2), …​
-* Ensure that GROUP_NUMBER is an integer greater than or equal to 0.
+* The KEYWORDS is the name of the group you would like to search for in your current list. For instance, use `group 1` (for group 1) …​
+* The search is case-insensitive. e.g., `group 1` will match `GROUP 1`.
+* The order of the keywords does not matter. e.g., `1 group` will match `group 1`.
+* Only full words will be matched for names. e.g., `gro` will not match `group 1`.
 
 Examples:
 * `show 1` returns students with who are in group 1.
@@ -303,4 +295,3 @@ Action | Format, Examples
 **Show** | `show GROUP_NUMBER`
 **List** | `list`
 **Help** | `help`
-**Offline Help** | `offlinehelp`
