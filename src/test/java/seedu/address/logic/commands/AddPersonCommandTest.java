@@ -147,7 +147,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public boolean hasPhone(Person person, Phone phone) {
+        public boolean hasPhoneNumber(Phone phone) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -239,8 +239,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public boolean hasPhone(Person person, Phone phone) {
-            requireNonNull(person);
+        public boolean hasPhoneNumber(Phone phone) {
             requireNonNull(phone);
             Phone personPhone = this.person.getPhone();
             return personPhone.equals(phone);
@@ -260,8 +259,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public boolean hasPhone(Person person, Phone phone) {
-            requireNonNull(person);
+        public boolean hasPhoneNumber(Phone phone) {
             requireNonNull(phone);
             return personsAdded.stream().anyMatch(p -> p.getPhone().equals(phone));
         }

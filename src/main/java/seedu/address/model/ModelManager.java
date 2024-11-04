@@ -98,9 +98,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPhone(Person person, Phone phone) {
+    public boolean hasPhoneNumber(Phone phone) {
         requireNonNull(phone);
-        return addressBook.hasPhone(person, phone);
+        return addressBook.hasPhone(phone);
     }
 
     @Override

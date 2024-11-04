@@ -65,7 +65,7 @@ public interface Model {
     /**
      * Returns true if a {@code person} in the address book use this phone number.
      */
-    boolean hasPhone(Person person, Phone phone);
+    boolean hasPhoneNumber(Phone phone);
 
     /**
      * Deletes the given person.
