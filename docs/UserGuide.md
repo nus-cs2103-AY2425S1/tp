@@ -38,11 +38,11 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
         - 5.1.4 [Saving the Data](#5-1-4-saving-the-data)
         - 5.1.5 [Editing the Data File](#5-1-5-editing-the-data-file)
     - 5.2 [Client Management Commands](#5-2-client-management-commands)
-        - 5.2.1 [Adding a Client](#5-2-1-adding-a-client-add)
-        - 5.2.2 [Listing All Clients](#5-2-2-listing-all-clients-list)
+        - 5.2.1 [Adding a Client](#5-2-1-adding-a-client-add-client)
+        - 5.2.2 [Listing All Clients](#5-2-2-listing-all-clients-list-clients)
         - 5.2.3 [Filtering Clients](#5-2-3-filtering-clients-find-client)
-        - 5.2.4 [Editing a Client’s Details](#5-2-4-editing-a-client's-details-edit)
-        - 5.2.5 [Deleting a Client](#5-2-5-deleting-a-client-delete)
+        - 5.2.4 [Editing a Client](#5-2-4-editing-a-client-edit-client)
+        - 5.2.5 [Deleting a Client](#5-2-5-deleting-a-client-delete-client)
     - 5.3 [Policy Management Commands](#5-3-policy-management-commands)
         - 5.3.1 [Adding a Policy](#5-3-1-adding-a-policy-add-policy)
         - 5.3.2 [Deleting a Policy](#5-3-2-deleting-a-policy-delete-policy)
@@ -143,7 +143,7 @@ You should see java version 17
 
    Some example commands you can try:
 
-   * `list-client` : Lists all clients.
+   * `list-clients` : Lists all clients.
 
    * `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to Prudy.
 
@@ -310,7 +310,7 @@ Furthermore, certain edits can cause Prudy to behave in unexpected ways (e.g., i
 
 ### 5.2.1 Adding a Client: `add-client`
 
-Adds a **new client** to Prudy.  
+Adds a **new client** to Prudy.
 
 **Format:** `add-client n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -356,7 +356,8 @@ Shows a **list of all clients** in Prudy.
                This means that if Prudy has 2 clients: <code>Alex</code> and <code>Bernice</code> given in that order, and you did <code>find-client n/bernice</code> to filter out <code>Alex</code>. An INDEX of <code>1</code> will refer to <code>Bernice</code> instead of <code>Alex</code>.
   </box>
 
-### 5.2.4 Editing a Client’s Details: `edit-client`
+### 5.2.4 Editing a Client: `edit-client`
+
 **Edits an existing client** in Prudy. **Does not edit his/her policies**. See [editing a policy](#5-3-3-editing-a-policy-edit-policy) for more info on the command.
 
 **Format:** `edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
@@ -460,7 +461,7 @@ List all policies that are **expiring** within a specified number of days. If no
 **Format:** `list-expiring-policies [DAYS]`
 
 <box type=info seamless>
-  Info: Preceding zeros in the `DAYS` argument will be ignored.  
+  Info: Preceding zeros in the `DAYS` argument will be ignored.
   For example, <code>list-expiring-policies 0023</code> and <code>list-expiring-policies 023</code> will both be treated as <code>list-expiring-policies 23</code>.
 </box>
 
@@ -494,10 +495,9 @@ Info: This command will not allow adding a claim if the client has no policy of 
 </box>
 
 **Examples:**
-* `add-claim 1 pt/health s/pending d/stomach surgery`  
-  Adds a claim with status "pending" and description "stomach surgery" to the health policy of the 1st client.
-* `add-claim 2 pt/life s/approved d/accidental coverage`  
-  Adds a claim with status "approved" and description "accidental coverage" to the life policy of the 2nd client.
+
+* `add-claim 1 pt/health s/pending d/stomach surgery` Adds a claim with status "pending" and description "stomach surgery" to the health policy of the 1st client.
+* `add-claim 2 pt/life s/approved d/accidental coverage` Adds a claim with status "approved" and description "accidental coverage" to the life policy of the 2nd client.
 
 ### 5.4.2 Deleting a Claim: `delete-claim`
 Deletes a specific claim from a policy type for the client identified by the specified INDEX.
@@ -515,10 +515,8 @@ Info: If the specified client, policy type, or claim does not exist, an error me
 </box>
 
 **Examples:**
-* `delete-claim 1 pt/health c/1`  
-  Deletes the claim at index 1 in the health policy of the 1st client.
-* `delete-claim 2 pt/life c/2`  
-  Deletes the claim at index 2 in the life policy of the 2nd client.
+* `delete-claim 1 pt/health c/1` Deletes the claim at index 1 in the health policy of the 1st client.
+* `delete-claim 2 pt/life c/2` Deletes the claim at index 2 in the life policy of the 2nd client.
 
 ### 5.4.3 Editing a Claim: `edit-claim`
 Edits a specific claim in a policy for the client identified by the specified INDEX.
@@ -538,11 +536,22 @@ Info: At least one of `NEW_STATUS` or `NEW_DESCRIPTION` must be specified. If th
 </box>
 
 **Examples:**
-* `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`  
-  Edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
 
-* `edit-claim 2 pt/life c/2 s/pending`  
-  Updates the status of the second claim in the life policy of the 2nd client to "pending."
+* `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details` Edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
+* `edit-claim 2 pt/life c/2 s/pending` Updates the status of the second claim in the life policy of the 2nd client to "pending."
+
+### 5.4.4 Listing All Claims: `list-claims`
+Lists **all claims** under the specified policy type for the client identified by the index number used in the displayed client list.
+
+**Format:** `list-claims INDEX pt/POLICY_TYPE`
+
+**Details:**
+* This command displays a complete list of all policies associated with every client in Prudy.
+* The policies are listed in the order they were added.
+* No filtering or sorting is applied by this command; it shows all existing policies.
+
+**Examples:**
+* `list-claims 1 pt/health` Lists all claims of the first client of the health policy
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -562,23 +571,23 @@ Info: At least one of `NEW_STATUS` or `NEW_DESCRIPTION` must be specified. If th
 
 ## 8. Command summary
 
-| **Keyword**              | **Format**                                                                                   | **Examples**                                                                                       |
-|--------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `help`                   | `help`                                                                                       | `help`                                                                                             |
-| `add`                    | `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`                                             | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| `list`                   | `list`                                                                                       | `list`                                                                                             |
-| `find-client`            | `find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…`                     | `find-client n/alex pt/life`                                                                       |
-| `edit`                   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`                              | `edit 2 n/James Lee e/jameslee@example.com`                                                        |
-| `delete`                 | `delete INDEX`                                                                               | `delete 3`                                                                                         |
-| `add-policy`             | `add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]`  | `add-policy 1 pt/life pa/100`                                                                      |
-| `delete-policy`          | `delete-policy INDEX pt/POLICY_TYPE…`                                                        | `delete-policy 1 pt/life`                                                                          |
-| `edit-policy`            | `edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]` | `edit-policy 1 pt/health ca/40000`                                                                 |
-| `list-policies`          | `list-policies INDEX`                                                                        | `list-policies 1`                                                                                   |
-| `List-expiring-policies` | `list-expiring-policies [DAYS]`                                                              | `list-expiring-policies 50`                                                                        |
-| `add-claim`              | `add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION`                          | `add-claim 1 pt/health s/pending d/stomach surgery`                                                |
-| `delete-claim`           | `delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX`                                            | `delete-claim 1 pt/health c/1`                                                                     |
-| `edit-claim`             | `edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/NEW_STATUS] [d/NEW_DESCRIPTION]`           | `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`                                  |
-| `list-claims`            | `list-claims INDEX pt/POLICY_TYPE`                                                           | `list-claims 1 pt/health`                                                                          |
-| `clear`                  | `clear`                                                                                      | `clear`                                                                                            |
-| `exit`                   | `exit`                                                                                       | `exit`                                                                                             |
+| **Keyword**              | **Format**                                                                                   | **Examples**                                                                                              |
+|--------------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `help`                   | `help`                                                                                       | `help`                                                                                                    |
+| `add-client`             | `add-client n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`                                      | `add-client n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| `list-clients`           | `list-clients`                                                                               | `list-clients`                                                                                            |
+| `find-client`            | `find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…`                     | `find-client n/alex pt/life`                                                                              |
+| `edit-client`            | `edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`                       | `edit-client 2 n/James Lee e/jameslee@example.com`                                                        |
+| `delete-client`          | `delete-client INDEX`                                                                        | `delete-client 3`                                                                                         |
+| `add-policy`             | `add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]`  | `add-policy 1 pt/life pa/100`                                                                             |
+| `delete-policy`          | `delete-policy INDEX pt/POLICY_TYPE…`                                                        | `delete-policy 1 pt/life`                                                                                 |
+| `edit-policy`            | `edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]` | `edit-policy 1 pt/health ca/40000`                                                                        |
+| `list-policies`          | `list-policies INDEX`                                                                        | `list-policies 1`                                                                                         |
+| `List-expiring-policies` | `list-expiring-policies [DAYS]`                                                              | `list-expiring-policies 50`                                                                               |
+| `add-claim`              | `add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION`                          | `add-claim 1 pt/health s/pending d/stomach surgery`                                                       |
+| `delete-claim`           | `delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX`                                            | `delete-claim 1 pt/health c/1`                                                                            |
+| `edit-claim`             | `edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/NEW_STATUS] [d/NEW_DESCRIPTION]`           | `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`                                         |
+| `list-claims`            | `list-claims INDEX pt/POLICY_TYPE`                                                           | `list-claims 1 pt/health`                                                                                 |
+| `clear`                  | `clear`                                                                                      | `clear`                                                                                                   |
+| `exit`                   | `exit`                                                                                       | `exit`                                                                                                    |
 
