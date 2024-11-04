@@ -477,6 +477,6 @@ testers are expected to do more *exploratory* testing.
 * Company
   * Edit a company
   * Locating company by name
-  * Enhance company ali
+  * Enhance company contact details by having contacts as company liaises 
 * Archiving capability
 * Set a contact as potential candidate of a job
