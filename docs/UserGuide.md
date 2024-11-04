@@ -267,7 +267,7 @@ This screenshot shows the result of executing `find_s q/TD7 q/Olveiro`.
 
 This screenshot shows the result of executing `find_s q/!nogroup`.
 
-![img.png](images/screenshots/find_s_nogroup.png)
+![find_student_nogrp.png](images/screenshots/find_s_nogroup.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -348,24 +348,25 @@ This screenshot shows the result of executing `add_g gn/CS2103-F12-2`.
 
 #### Deleting a Group: `del_g`, `dg`
 
-Explanation of what command does.
+Deletes the specified group from T_Assistant.
 
 **Format**: `del_g gn/GROUP_NAME`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. This command is case-insensitive.
+   > `del_g gn/CS2103-F12-2` and `del_g gn/cs2103-f12-2` will delete the same group.
+2. This command will also inform you on the number of students that were affected by this command.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
-
-###### Scenario #1
+###### Scenario #1: Deleting a group `CS2103-F12-2`
 
 This screenshot shows the result of executing `del_g gn/CS2103-F12-2`.
+
+![del_g.png](images/screenshots/del_g.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -406,9 +407,7 @@ Searches T_Assistant for groups with fields that match the search query.
 3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
-
-Add more scenarios if necessary
+##### Usage Scenario
 
 ###### Scenario #1: Find groups with the following query - `F12`
 
