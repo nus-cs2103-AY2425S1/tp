@@ -68,7 +68,7 @@ Example usages
 * `enroll 1 tut/physics`
 
 {% raw %}
-<div markdown="1" class="invalid-usage">
+<div markdown="1" class="smaller-text">
 Invalid usages
 
 * Enrolling student in a tutorial that has not been created yet
