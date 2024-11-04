@@ -304,7 +304,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 Home-based healthcare providers who
-* Has a need to manage a significant number of patients information 
+* Has a need to manage a significant number of patients information
 * Needs to see their daily schedule of patient appointments
 * Needs to be reminded up upcoming appointments
 * Tag patients based on allergies and other medical information
@@ -319,7 +319,7 @@ Home-based healthcare providers who
 
 ### User stories
 
-Priorities: 
+Priorities:
 - High (must have): `***`
 - Medium (nice to have) - `**`
 - Low (unlikely to have) - `*`
@@ -329,14 +329,14 @@ Priorities:
 | `***`    | home-based healthcare provider | add the data of new clients                                            | register new clients in the system for tracking                                              |
 | `**`     | home-based healthcare provider | tag patients based on their urgency                                    | prioritise higher-risk patients                                                              |
 | `**`     | home-based healthcare provider | tag a client's entry or information                                    | keep track of special instructions, preferences, medical allergies or urgency                |
-| `**`     | home-based healthcare provider | store prescription                                                     | add prescription records to keep track of which medications patients should take             |
-| `**`     | home-based healthcare provider | add relevant reports such as X-rays                                    | access such details for reference when explaining the conditions to patients                 |
+| `*`      | home-based healthcare provider | store prescription                                                     | add prescription records to keep track of which medications patients should take             |
+| `*`      | home-based healthcare provider | add relevant reports such as X-rays                                    | access such details for reference when explaining the conditions to patients                 |
 | `**`     | home-based healthcare provider | add notes for reference during future visits                           | recall important details upon next visit                                                     |
 | `*`      | home-based healthcare provider | record patients' feedback                                              | address them in future visits                                                                |
-| `*`      | home-based healthcare provider | be notified of overlapping names and addresses                         | avoid duplicate client entries                                                               |
+| `***`    | home-based healthcare provider | be notified of overlapping names and addresses                         | avoid duplicate client entries                                                               |
 | `***`    | home-based healthcare provider | see my patients' records                                               | understand how my patient is doing                                                           |
 | `***`    | home-based healthcare provider | see my patients' allergies                                             | provide the correct prescription for my patients                                             |
-| `***`    | home-based healthcare provider | view my patient's emergency contacts quickly                           | reach them in case of emergency                                                              |
+| `**`     | home-based healthcare provider | view my patient's emergency contacts quickly                           | reach them in case of emergency                                                              |
 | `*`      | home-based healthcare provider | view all clients sorted by their last visit date                       | priortise follow up visits                                                                   |
 | `*`      | home-based healthcare provider | track medicine and medical equipment used for each patient's treatment | maintain an accurate log and ensure consistency in care plan                                 |
 | `*`      | home-based healthcare provider | check number of visits for a particular patient in a given time period | ensure balance between patients' needs and my availability                                   |
@@ -346,17 +346,17 @@ Priorities:
 | `***`    | home-based healthcare provider | have the contact details of my patients for easy access                | update the details accordingly if there are any changes                                      |
 | `***`    | home-based healthcare provider | add new appointment details                                            | add appointments in my schedule for tracking later on                                        |
 | `***`    | home-based healthcare provider | see my schedule for the day                                            | organise my time and ensure that there are no clashes in appointments                        |
-| `**`     | home-based healthcare provider | be reminded of my clients' appointments nearer to the date             | organise my time                                                                             |
+| `*`      | home-based healthcare provider | be reminded of my clients' appointments nearer to the date             | organise my time                                                                             |
 | `*`      | home-based healthcare provider | generate the route for the day                                         | efficiently travel to different locations and save time                                      |
 | `*`      | home-based healthcare provider | send notifications to patients                                         | they can expect my arrival                                                                   |
 | `*`      | home-based healthcare provider | schedule recurring visits for clients directly in the address book     | avoid re-entering their information each time                                                |
 | `*`      | home-based healthcare provider | check last month's payment and visits summary                          | track my workload                                                                            |
-| `*`      | home-based healthcare provider | group patients according to patient and priority                       | save travel time or focus on more urgent cases                                               |
+| `*`      | home-based healthcare provider | group patients according to address and priority                       | save travel time or focus on more urgent cases                                               |
 | `*`      | home-based healthcare provider | get notifications in the event an emergency occurs                     | respond as quickly as possible and know whether there is a need to go to the patient's house |
 | `**`     | home-based healthcare provider | see the services provided for each patient                             | know how much I should be charging my patients                                               |
-| `**`     | home-based healthcare provider | see which of my patients have paid                                     | keep track of how much my patients owe me                                                    |
-| `**`     | home-based healthcare provider | record when my patients pay for their appointment                      | keep track of which patients have paid for my services                                                                     
-| `**`     | home-based healthcare provider | show insurance details for patients                                    | generate patient's bill accordingly
+| `*`      | home-based healthcare provider | see which of my patients have paid                                     | keep track of how much my patients owe me                                                    |
+| `*`      | home-based healthcare provider | record when my patients pay for their appointment                      | keep track of which patients have paid for my services                                       |
+| `*`      | home-based healthcare provider | show insurance details for patients                                    | generate patient's bill accordingly                                                          |
 
 ### Use cases
 
@@ -367,7 +367,7 @@ Priorities:
 **MSS**
 
 1.  User requests to add a client and provides the required client details.
-2.  AddressBook validates the input 
+2.  AddressBook validates the input
 3.  AddressBook adds the client data.
 4.  AddressBook confirms the successful addition of the client.
 
@@ -383,7 +383,7 @@ Priorities:
 * 2b. Duplicate Client
 
     * 2b1. AddressBook shows an error message.
-      
+
   Use case ends.
 
 
@@ -393,7 +393,7 @@ Priorities:
 
 1.  User requests to list clients
 2.  AddressBook shows a list of clients
-3.  User requests to delete a client’s data and inputs the required client details.
+3.  User requests to delete a client’s data and inputs of the client's attributes (name, phone number, or email).
 4.  AddressBook validates the input
 5.  AddressBook deletes the person
 
@@ -408,13 +408,17 @@ Priorities:
 
 * 4b. Duplicate Client
 
-    * 4b1. AddressBook shows an error message.
+    * 4b1. AddressBook detects multiple entries matching the provided attribute (name, phone number, or email).
+    * 4b2. AddressBook shows an error message indicating that multiple clients match the input
+    * 4b3. User requests to delete the client's data with at least 2 of the 3 client's attributes
+    * 4b4. AddressBook validates the input
+    * 4b5. Addressbook deletes the person
 
   Use case ends.
 
 * 4c. Information mismatch
 
-    * 4c1. AddressBook shows an error message.
+    * 4c1. AddressBook shows an error message
 
   Use case ends.
 
@@ -488,8 +492,8 @@ Priorities:
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should respond within 5 seconds for any commands given.
 5. Command syntax should be consistent throughout the application to minimize the learning curve.
 6. Users should be able to run the application from the downloaded JAR file without an additional installer.
@@ -505,11 +509,12 @@ Priorities:
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Patient Record**: A collection of patient's personal and medical information. This includes, but is not limited to, name, contact number, email, address, allergies, injuries sustained.
-* **Appointment**: A scheduled session between the healthcare provider and patient for medical consultation or treatment. This is marked in the AddressBook by the time, location and patient.
+* **Appointment**: A scheduled session between the healthcare provider and patient for medical consultation or treatment. This is marked in the AddressBook by the time, date and patient.
 * **Schedule**: A list of all patients' appointments, displaying the date and time and location of the appointments.
 * **Tag**: A label applied to a patient record, used to categorise and highlight specific medical information, such as allergies or conditions.
 * **Medical History**: Documentation of patient's past illnesses, treatments, surgeries and other medical related information.
 * **Inactive Client**: A client who is no longer receiving care or whose records have not been accessed in a significant amount of time
+* **Allergy**: A known medical condition or sensitivity that a client has to specific substances or environmental factors (e.g., certain foods, medications, pollen). This information is recorded in the client’s profile to help healthcare providers avoid potential triggers and deliver appropriate care during visits.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -527,24 +532,45 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.<br> Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Exiting the Application
+
+   1. Use the `exit` command or close the window directly.<br> Expected: The application should close without any errors or delays.
+
+
+### Adding a person
+
+1. Adding a valid person
+
+    1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
+       Expected: "John Doe" is added to the list of contacts. Details of the added contact shown in the status message.
+
+2. Adding a person with missing fields
+
+    1. Test case: `add n/John`<br>
+       Expected: No person is added. Invalid command format shown in the status message.
+
+3. Adding a duplicate person
+
+    1. Prerequisites: Ensure "John Doe" with the contact details in "Adding a valid person" is already in the contact list.
+
+    2. Test Case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
+       Expected: Error message displayed indicating that the person already exists.
+
+    3. Other duplicate person add command to try: `add n/John Doe p/98765432 e/differentemail@example.com a/123 Main St t/Low Risk m/None`,
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete n/Alex Yeoh`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>

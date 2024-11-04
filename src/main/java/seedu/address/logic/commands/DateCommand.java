@@ -40,7 +40,8 @@ public class DateCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Person: %1$s, Date: %2$s";
     public static final String MESSAGE_ADD_DATE_SUCCESS = "Added date to Person: %1$s";
     public static final String MESSAGE_DELETE_DATE_SUCCESS = "Removed date from Person: %1$s";
-    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found.";
+    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found. "
+            + "Use more attributes (name, phone number, email) to identify the exact person";
     public static final String MESSAGE_NO_PERSON_FOUND = "No matching person found. Please check the details.";
 
     private final Optional<String> name;
