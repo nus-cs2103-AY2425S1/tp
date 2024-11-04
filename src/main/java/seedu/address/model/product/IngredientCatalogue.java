@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  * by ID or name, and initializes with a set of default ingredients if no data is loaded.
  */
 public class IngredientCatalogue extends Catalogue {
-
+    private static IngredientCatalogue instance; // Singleton instance
     private final Map<String, Ingredient> ingredientByName = new HashMap<>();
 
     /**
@@ -26,10 +26,21 @@ public class IngredientCatalogue extends Catalogue {
     }
 
     // Existing no-arg constructor remains for default initialization
-    public IngredientCatalogue() {
+    private IngredientCatalogue() {
         this(SampleDataUtil.getDefaultIngredients());
     }
-
+    /**
+     * Returns the singleton instance of IngredientCatalogue.
+     *
+     * @return The singleton instance.
+     */
+    public static IngredientCatalogue getInstance() {
+        if (instance == null) {
+            instance = new IngredientCatalogue();
+            instance.initializeWithDefaultIngredients();
+        }
+        return instance;
+    }
     /**
      * Initializes with default ingredients.
      */
@@ -63,6 +74,7 @@ public class IngredientCatalogue extends Catalogue {
         if (ingredient == null) {
             throw new NoSuchElementException("Ingredient with name '" + name + "' not found.");
         }
+        System.out.println("Looking up ingredient: " + name);
         return ingredient;
     }
 

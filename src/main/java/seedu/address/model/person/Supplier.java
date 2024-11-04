@@ -10,7 +10,7 @@ import seedu.address.model.util.Remark;
  * Represents a Supplier with additional details about the ingredients they supply.
  */
 public class Supplier extends Person {
-    private final Ingredients ingredientsSupplied;
+    private Ingredients ingredientsSupplied;
 
     /**
      * Constructs a {@code Supplier} with all required fields.
@@ -36,6 +36,10 @@ public class Supplier extends Person {
      */
     public Ingredients getIngredientsSupplied() {
         return ingredientsSupplied;
+    }
+    // New method to update the ingredients supplied
+    public void setIngredientsSupplied(Ingredients ingredientsSupplied) {
+        this.ingredientsSupplied = ingredientsSupplied;
     }
 
     @Override

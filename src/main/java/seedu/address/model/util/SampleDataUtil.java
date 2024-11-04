@@ -120,7 +120,7 @@ public class SampleDataUtil {
 
     // Method to retrieve a sample IngredientCatalogue with default ingredients
     public static IngredientCatalogue getSampleIngredientCatalogue() {
-        IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
+        IngredientCatalogue ingredientCatalogue = IngredientCatalogue.getInstance();
         for (Ingredient ingredient : defaultIngredients.values()) {
             ingredientCatalogue.addIngredient(ingredient);
         }
