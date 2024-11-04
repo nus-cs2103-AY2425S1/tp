@@ -52,7 +52,11 @@
         <Label styleClass="cell_header_label" text="Contact" style="-fx-font-size: 14pt; -fx-font-weight: bold;" />
 
         <!-- Phone label -->
-        <Label fx:id="phone" styleClass="cell_small_label" text="Phone: \$phone" />
+        <Label fx:id="phone" styleClass="cell_small_label" text="Phone: \$phone"
+               wrapText="true"
+               textAlignment="CENTER"
+               alignment="CENTER"
+               maxWidth="400" />
 
         <!-- Email label -->
         <Label fx:id="email" styleClass="cell_small_label" text="Email: \$email" />
