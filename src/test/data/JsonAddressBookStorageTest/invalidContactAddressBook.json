@@ -1,0 +1,10 @@
+{
+  "contacts": [ {
+    "name": "Contact with invalid name field: Ha!ns Mu@ster",
+    "telegramHandle": "9482424",
+    "email": "hans@example.com",
+    "studentStatus": "phd",
+    "roles": [ "Vice President" ],
+    "nickname": ""
+  } ]
+}

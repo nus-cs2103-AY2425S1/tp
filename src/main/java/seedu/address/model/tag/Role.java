@@ -11,22 +11,30 @@ import java.util.Arrays;
  */
 public class Role {
 
+    public static final String PRESIDENT = "President";
+    public static final String VICE_PRESIDENT = "Vice President";
+    public static final String ADMIN = "Admin";
+    public static final String MARKETING = "Marketing";
+    public static final String EVENTS_INTERNAL = "Events (Internal)";
+    public static final String EVENTS_EXTERNAL = "Events (External)";
+    public static final String EXTERNAL_RELATIONS = "External Relations";
+
     public static final String MESSAGE_CONSTRAINTS = "Role must be one of the following: \n"
-            + "1. President\n"
-            + "2. Vice President\n"
-            + "3. Admin\n"
-            + "4. Marketing\n"
-            + "5. Events (internal)\n"
-            + "6. Events (external)\n"
-            + "7. External Relations";
+            + "1. " + PRESIDENT + "\n"
+            + "2. " + VICE_PRESIDENT + "\n"
+            + "3. " + ADMIN + "\n"
+            + "4. " + MARKETING + "\n"
+            + "5. " + EVENTS_INTERNAL + "\n"
+            + "6. " + EVENTS_EXTERNAL + "\n"
+            + "7. " + EXTERNAL_RELATIONS + "\n";
     public static final String[] AVAILABLE_ROLES = {
-        "President",
-        "Vice President",
-        "Admin",
-        "Marketing",
-        "Events (internal)",
-        "Events (external)",
-        "External Relations"};
+        PRESIDENT,
+        VICE_PRESIDENT,
+        ADMIN,
+        MARKETING,
+        EVENTS_INTERNAL,
+        EVENTS_EXTERNAL,
+        EXTERNAL_RELATIONS};
 
     public final String roleName;
 
@@ -38,7 +46,7 @@ public class Role {
     public Role(String roleName) {
         requireNonNull(roleName);
         checkArgument(isValidRoleName(roleName), MESSAGE_CONSTRAINTS);
-        this.roleName = roleName;
+        this.roleName = toOfficialCase(roleName);
     }
 
     /**
@@ -46,7 +54,16 @@ public class Role {
      */
     public static boolean isValidRoleName(String test) {
         requireNonNull(test);
-        return Arrays.asList(AVAILABLE_ROLES).contains(test);
+        return Arrays.stream(AVAILABLE_ROLES)
+                .map(role -> role.toLowerCase())
+                .anyMatch(role -> role.equals(test.trim().toLowerCase()));
+    }
+
+    private String toOfficialCase(String input) {
+        assert Role.isValidRoleName(input);
+        return Arrays.stream(AVAILABLE_ROLES)
+                .filter(role -> role.equalsIgnoreCase(input))
+                .reduce("", (roleToReturn, role) -> roleToReturn + role);
     }
 
     @Override

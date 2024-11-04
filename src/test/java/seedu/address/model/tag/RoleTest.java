@@ -21,23 +21,25 @@ public class RoleTest {
 
     @Test
     public void isValidRoleName() {
-        // null tag name
+        // null role
         assertThrows(NullPointerException.class, () -> Role.isValidRoleName(null));
 
-        // invalid tag name
+        // invalid role
         assertFalse(Role.isValidRoleName("friends"));
         assertFalse(Role.isValidRoleName(" "));
-        assertFalse(Role.isValidRoleName("admin"));
-        assertFalse(Role.isValidRoleName("marketing"));
 
-        // valid tag name
+        // valid role
         assertTrue(Role.isValidRoleName("President"));
         assertTrue(Role.isValidRoleName("Vice President"));
         assertTrue(Role.isValidRoleName("Admin"));
         assertTrue(Role.isValidRoleName("Marketing"));
+        assertTrue(Role.isValidRoleName("Events (Internal)  "));
+        assertTrue(Role.isValidRoleName("Events (External)"));
+        assertTrue(Role.isValidRoleName("External Relations"));
+        assertTrue(Role.isValidRoleName("admin"));
+        assertTrue(Role.isValidRoleName("  marketing"));
         assertTrue(Role.isValidRoleName("Events (internal)"));
         assertTrue(Role.isValidRoleName("Events (external)"));
-        assertTrue(Role.isValidRoleName("External Relations"));
     }
 
 }

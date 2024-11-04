@@ -53,7 +53,7 @@ Materials Science and Engineering Student.
 
 <img src="images/somethingfishyfishy.png" width="200px">
 
-[[github](http://github.com/somethingfishyfishy)] 
+[[github](http://github.com/somethingfishyfishy)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Supervisor, Developer
