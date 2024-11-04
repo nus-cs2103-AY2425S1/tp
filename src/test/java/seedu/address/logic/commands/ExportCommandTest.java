@@ -2,11 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,8 +39,8 @@ public class ExportCommandTest {
 
             // Check if content was written for one of the typical contacts (example: Alex Yeoh)
             String firstLine = reader.readLine();
-            assertEquals("Alice Pauline,student,A1234567X,94351253,alice@example.com,123, Jurong West Ave 6, "
-                    + "#08-111,friends", firstLine);
+            assertEquals("Alice Pauline,student,A1234567X,94351253,alice@example.com,"
+                    + "\"123, Jurong West Ave 6, #08-111\",friends", firstLine);
         }
 
         Files.deleteIfExists(tempFile); // Clean up the temporary file after the test
@@ -69,4 +71,50 @@ public class ExportCommandTest {
 
         assertThrows(AssertionError.class, () -> assertEquals(exportCommand1, exportCommand2));
     }
+
+    @Test
+    public void execute_absoluteFilePath_exportSuccess() throws Exception {
+        String absoluteFilePath = Paths.get("data").toAbsolutePath().toString() + "/absolute_export.csv";
+        ExportCommand exportCommand = new ExportCommand(absoluteFilePath);
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message and CSV file creation
+        assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, absoluteFilePath), result.getFeedbackToUser());
+        assertTrue(Files.exists(Paths.get(absoluteFilePath)));
+
+        // Cleanup
+        Files.deleteIfExists(Paths.get(absoluteFilePath));
+    }
+
+    @Test
+    public void execute_relativeFilePath_exportSuccess() throws Exception {
+        String relativeFilePath = "data/relative_export.csv";
+        ExportCommand exportCommand = new ExportCommand(relativeFilePath);
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message and CSV file creation
+        assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, Paths.get(System.getProperty("user.dir"),
+                relativeFilePath)), result.getFeedbackToUser());
+        assertTrue(Files.exists(Paths.get(relativeFilePath)));
+
+        // Cleanup
+        Files.deleteIfExists(Paths.get(relativeFilePath));
+    }
+
+    @Test
+    public void escapeCsv_fieldWithSpecialCharacters_correctlyEscaped() {
+        // Placeholder for context if escapeCsv is non-static
+        ExportCommand exportCommand = new ExportCommand("dummy/path");
+
+        // Define test cases with expected escaped output
+        assertEquals("\"123, Main St\"", exportCommand.escapeCsv("123, Main St"),
+                "Address with comma should be enclosed in quotes");
+        assertEquals("\"He said, \"\"Hello!\"\"\"", exportCommand.escapeCsv("He said, \"Hello!\""),
+                "Quotes within text should be doubled and text enclosed in quotes");
+        assertEquals("\"Line 1\nLine 2\"", exportCommand.escapeCsv("Line 1\nLine 2"),
+                "Newline should trigger enclosing quotes");
+        assertEquals("SimpleText", exportCommand.escapeCsv("SimpleText"),
+                "Text without special characters should remain unchanged");
+    }
+
 }
