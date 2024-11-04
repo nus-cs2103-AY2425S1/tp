@@ -7,6 +7,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import careconnect.commons.core.index.Index;
@@ -135,13 +138,26 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseLogDate(String date) throws ParseException {
+    public static Date parseLogDate(String date, boolean isUtc) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
         Date parsedDate;
+
+        Pattern strictDatePattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        if (isUtc) {
+            // Set to UTC timezone for testing compatibility
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        }
         sdf.setLenient(false); // Disable lenient parsing, strict checking
+
         try {
+            // Check if the date matches the exact pattern
+            Matcher matcher = strictDatePattern.matcher(trimmedDate);
+            if (!matcher.matches()) {
+                throw new ParseException(Log.MESSAGE_CONSTRAINTS);
+            }
+
             // Attempt to parse the date string
             parsedDate = sdf.parse(trimmedDate);
         } catch (java.text.ParseException e) {
@@ -149,6 +165,10 @@ public class ParserUtil {
             throw new ParseException(Log.MESSAGE_CONSTRAINTS);
         }
         return parsedDate;
+    }
+
+    public static Date parseLogDate(String date) throws ParseException {
+        return parseLogDate(date, true);
     }
 
     /**

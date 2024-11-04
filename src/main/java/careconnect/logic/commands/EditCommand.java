@@ -82,7 +82,7 @@ public class EditCommand extends Command {
         Address updatedAddress =
                 editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        ArrayList<Log> updatedLogs = new ArrayList<>(personToEdit.getLogs());
+        ArrayList<Log> updatedLogs = personToEdit.getLogs();
         AppointmentDate updatedAppointmentDate = personToEdit.getAppointmentDate();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
@@ -145,6 +145,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private ArrayList<Log> logs;
 
         public EditPersonDescriptor() {
         }

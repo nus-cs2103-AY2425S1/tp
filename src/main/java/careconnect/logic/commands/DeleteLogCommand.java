@@ -1,5 +1,6 @@
 package careconnect.logic.commands;
 
+import static careconnect.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class DeleteLogCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToDeleteLog}
      */
     private Person createPersonWithoutLog(Person personToDeleteLog, Index deletedLogIndex) {
-        requireNonNull(personToDeleteLog);
+        requireAllNonNull(personToDeleteLog, deletedLogIndex);
 
         Name name = personToDeleteLog.getName();
         Phone phone = personToDeleteLog.getPhone();
@@ -74,8 +75,7 @@ public class DeleteLogCommand extends Command {
         ArrayList<Log> updatedLogs = new ArrayList<>(personToDeleteLog.getLogs());
         AppointmentDate appointmentDate = personToDeleteLog.getAppointmentDate();
 
-        this.deletedLog = updatedLogs.get(deletedLogIndex.getZeroBased());
-        updatedLogs.remove(deletedLogIndex.getZeroBased());
+        this.deletedLog = updatedLogs.remove(deletedLogIndex.getZeroBased());
 
         return new Person(name, phone, email, address, tags, updatedLogs, appointmentDate);
     }
@@ -122,13 +122,15 @@ public class DeleteLogCommand extends Command {
         DeleteLogCommand otherDeleteLogCommand = (DeleteLogCommand) other;
 
         return personIndex.equals(otherDeleteLogCommand.personIndex)
-                && deletedLog.equals(otherDeleteLogCommand.deletedLog);
+                && logIndex.equals(otherDeleteLogCommand.logIndex)
+                && (requireConfirmation // if confirmation not completed, deletedLog is null
+                || deletedLog.equals(otherDeleteLogCommand.deletedLog));
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("log", deletedLog)
+                .add("deletedLog", deletedLog)
                 .toString();
     }
 }

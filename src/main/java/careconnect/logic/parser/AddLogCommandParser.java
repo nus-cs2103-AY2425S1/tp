@@ -50,7 +50,8 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
 
         if (argMultimap.getValue(CliSyntax.PREFIX_DATE).isPresent()) {
             Date date =
-                    ParserUtil.parseLogDate((argMultimap.getValue(CliSyntax.PREFIX_DATE).get()));
+                    ParserUtil.parseLogDate((argMultimap.getValue(CliSyntax.PREFIX_DATE).get()),
+                            false);
             log = new Log(date, remark);
         } else {
             log = new Log(remark);

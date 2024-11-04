@@ -3,8 +3,9 @@ package careconnect.testutil;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+import careconnect.logic.parser.ParserUtil;
+import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
 import careconnect.model.person.AppointmentDate;
@@ -108,12 +109,22 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Logs} of the {@code Person} that we are building.
+     * Adds the {@code Log} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLog(String date, String time) {
+        try {
+            this.logs.add(new Log(ParserUtil.parseLogDate(date), time));
+        } catch (ParseException e) {
+            assert(false);
+        }
+        return this;
+    }
+
+    /**
+     * Adds the {@code Logs} of the {@code Person} that we are building.
      */
     public PersonBuilder withLogs(ArrayList<Log> logs) {
-        this.logs = logs.stream()
-                .map(log -> new Log(log.getDate(), log.getRemark()))
-                .collect(Collectors.toCollection(ArrayList::new));
+        this.logs.addAll(logs);
         return this;
     }
 

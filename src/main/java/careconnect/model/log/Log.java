@@ -1,5 +1,6 @@
 package careconnect.model.log;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ import careconnect.commons.util.ToStringBuilder;
  * Represents a Log of a Person in the address book.
  * Guarantees: immutable; remark is valid as declared in {@link #isValidLogRemark(String)}
  */
-public class Log {
+public class Log implements Comparable<Log> {
     public static final String MESSAGE_CONSTRAINTS = "Log remark can take any values, and it "
             + "should not be blank. "
             + "Log date should be in the format yyyy-MM-dd HH:mm, if provided.";
@@ -81,7 +82,19 @@ public class Log {
         }
 
         return this.remark.equals(otherLog.remark)
-                && this.date.equals(otherLog.date);
+                && truncateToMinutes(this.date).equals(truncateToMinutes(otherLog.date));
+    }
+
+    /**
+     * Truncates the seconds and milliseconds of a date to zero.
+     * This is used to compare dates without considering seconds and milliseconds.
+     */
+    private static Date truncateToMinutes(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
     }
 
     @Override
@@ -97,4 +110,8 @@ public class Log {
                 .toString();
     }
 
+    @Override
+    public int compareTo(Log other) {
+        return this.date.compareTo(other.date);
+    }
 }

@@ -52,7 +52,8 @@
                       <Insets left="10.0" />
                   </padding>
                   <StackPane fx:id="personListPanelPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
-  </VBox>
+              </VBox>
+
               <VBox fx:id="personDetail" minWidth="340">
                   <padding>
                       <Insets right="10.0" />
@@ -60,7 +61,8 @@
                   <StackPane fx:id="personDetailPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                      <padding>
                         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
-                     </padding></StackPane>
+                     </padding>
+                  </StackPane>
               </VBox>
                <padding>
                   <Insets top="5.0" />

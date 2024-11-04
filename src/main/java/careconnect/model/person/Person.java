@@ -3,7 +3,6 @@ package careconnect.model.person;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -73,11 +72,10 @@ public class Person {
     }
 
     /**
-     * Returns an immutable log list, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a true copy of the logs list, modifying the returned list will not affect the original list.
      */
-    public List<Log> getLogs() {
-        return Collections.unmodifiableList(this.logs);
+    public ArrayList<Log> getLogs() {
+        return new ArrayList<>(Collections.unmodifiableList(this.logs));
     }
 
     /**

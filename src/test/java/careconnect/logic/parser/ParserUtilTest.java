@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import careconnect.logic.commands.CommandTestUtil;
 import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.person.Address;
 import careconnect.model.person.Email;
@@ -192,5 +193,48 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseLogDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        assertEquals(CommandTestUtil.DATE, ParserUtil.parseLogDate("2020-12-31 12:00"));
+    }
+
+    @Test
+    public void parseLogDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        assertEquals(CommandTestUtil.DATE, ParserUtil.parseLogDate("  2020-12-31 12:00  "));
+    }
+
+    @Test
+    public void parseLogDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLogDate(null));
+    }
+
+    @Test
+    public void parseLogDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLogDate("2020-13-32"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLogDate("2020-12-32 2:00pm"));
+    }
+
+    @Test
+    public void parseLogRemark_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLogRemark(null));
+    }
+
+    @Test
+    public void parseLogRemark_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLogRemark(""));
+    }
+
+    @Test
+    public void parseLogRemark_validValueWithoutWhitespace_returnsTrimmedRemark() throws Exception {
+        String expectedRemark = "This is a valid remark";
+        assertEquals(expectedRemark, ParserUtil.parseLogRemark("This is a valid remark"));
+    }
+
+    @Test
+    public void parseLogRemark_validValueWithWhitespace_returnsTrimmedRemark() throws Exception {
+        String expectedRemark = "This is a valid remark";
+        assertEquals(expectedRemark, ParserUtil.parseLogRemark("  This is a valid remark  "));
     }
 }
