@@ -86,6 +86,24 @@ public class AppointmentTest {
     }
 
     @Test
+    public void isWithinInterval() {
+        Appointment validAppointment = new Appointment("12/12/2024 12:30");
+
+        // within interval -> false
+        assertTrue(validAppointment.isWithinInterval(new Appointment("12/12/2024 12:16")));
+        assertTrue(validAppointment.isWithinInterval(new Appointment("12/12/2024 12:44")));
+
+        // outside interval or empty interval -> true
+        assertFalse(validAppointment.isWithinInterval(new Appointment("11/12/2024 12:30")));
+        assertFalse(validAppointment.isWithinInterval(new Appointment("12/12/2024 12:45")));
+        assertFalse(validAppointment.isWithinInterval(new Appointment("12/12/2024 12:45")));
+        assertFalse(new Appointment("-").isWithinInterval(validAppointment));
+        assertFalse(validAppointment.isWithinInterval(new Appointment("-")));
+        assertFalse(validAppointment.isWithinInterval(new Appointment(null)));
+
+    }
+
+    @Test
     public void equals() {
         Appointment validAppointment = new Appointment("12/12/2024 12:30");
 
@@ -102,11 +120,17 @@ public class AppointmentTest {
 
         assertTrue(new Appointment("-").equals(new Appointment(null)));
 
+        // Other appointment within 15 minute interval but same date
+        assertTrue(validAppointment.equals(new Appointment("12/12/2024 12:31")));
+
+        // Other appointment not within 15 minute interval but same date
+        assertFalse(validAppointment.equals(new Appointment("12/12/2024 12:29")));
+
         // different types
         assertFalse(validAppointment.equals(new Appointment(null)));
 
-        // different times same date
-        assertFalse(validAppointment.equals(new Appointment("12/12/2024 16:30")));
+        assertFalse(new Appointment("-").equals(validAppointment));
+
     }
 
 }

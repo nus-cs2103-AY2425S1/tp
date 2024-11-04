@@ -17,9 +17,10 @@ information such as their treatment, contact information, visit records and futu
 1. <b>Create</b> patient records
 2. <b>Update</b> patient records
 3. <b>Delete</b> patient records
-4. <b>Search</b> patient by Nric or name
+4. <b>Search</b> patient by NRIC or Name
 5. <b>Backup</b> patient records automatically
 6. <b>Book</b> appointments for patients
+7. <b>Find</b> bookings on a specific date
 7. <b>Update</b> appointments
 8. <b>Restore</b> backup file
 

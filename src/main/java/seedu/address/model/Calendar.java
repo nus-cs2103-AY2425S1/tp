@@ -55,7 +55,18 @@ public class Calendar {
      */
     public boolean hasAppointment(Person person) {
         requireNonNull(person);
-        return appointments.contains(person.getAppointment());
+
+        // person has no appointment
+        if (person.getAppointment().equals(new Appointment(null))) {
+            return false;
+        }
+
+        for (Appointment appt : appointments) {
+            if (person.getAppointment().isWithinInterval(appt)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

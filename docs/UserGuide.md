@@ -92,7 +92,7 @@ benefits of a Graphical User Interface (GUI).
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a simplified version of this User Guide and a link to access this page.
 
 ![help message](images/helpMessage.png)
 
@@ -103,6 +103,24 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the fields:**<br>
+
+* Names must contain alphanumeric characters and spaces.
+* Age should only contain numbers and should be between `1-3` digits long inclusive.
+* Gender is for biological gender and should only contain `M` for Male or `F` for Female.
+* NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter.
+* Phone numbers should only contain numbers, and it should be `3-10` digits long.
+* Addresses can take any values.
+* Emails should be of the format local-part@domain.
+* Appointments should be in a format of `dd/MM/yyyy HH:mm`.
+* Tags are alphanumeric.
+</div>
+
+* Appointments are made in 15 minute intervals starting from given time
+* Appointments can accept other date-time formats such as `dd-MM-yyyy HH:mm` , `dd MM yyyy HH:mm`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -116,12 +134,6 @@ Examples:
 * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient`
 * `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BloodDonor`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An appointment can be entered in the following formats : '-' , '02 10 2024 12:30' , '02/10/2024 12:30' , '02-10-2024 12:30' and timings must fall within the Operating Hours displayed above
-</div>
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Appointments can only be made between '08:30' to '21:30' and only one appointment can be made per timeslot
-</div>
 
 ### Listing all persons : `list`
 
@@ -218,8 +230,8 @@ Format: `bookings DATE`
 * `DATE` has to be of the format `dd/MM/yyyy` OR `dd-MM-yyyy` OR `dd MM yyyy`
 
 Examples:
-* `bookings 01/02/2024`
-* `bookings 01-02-2024`
+* `bookings 12/08/2024`
+* `bookings 12-08-2024`
 
   ![result for 'bookings 01/02/2024'](./images/bookings01-02-2024.png)
 
@@ -230,9 +242,9 @@ Updates Operating Hours
 Format: `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]`
 
 * Opening & Closing hours have to be of the format `HH:mm`.
-* Default Opening & Closing hours are 00:00 & 23:59 respectively.
+* Default Opening & Closing hours are `00:00` & `23:59` respectively.
 * If an argument is empty, it will set the hours to default.
-* All current appointments must fall within operating hours for update to take effect.
+* All current appointments must fall within new operating hours for update to take effect.
 
 Examples:
 * `hours`
@@ -379,5 +391,7 @@ the data of your previous AddressBook home folder.
 | **Backup** | `backup`  <br/>  `backup <DESCRIPTION>` <br/> e.g., `backup After updating John's contact info`  
 **Restore** | `restore <INDEX>`<br> e.g., `restore 1`       
 **ListBackups** | `listbackups`                                                                                                                                                         
+**Bookings** | `bookings DATE`                                                                                                                                                         
+**Hours** | `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]`                                                                                                                                                         
 
 
