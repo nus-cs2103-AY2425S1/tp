@@ -105,6 +105,17 @@ public class Date {
         }
     }
 
+    /**
+     * Validates the format and values of a date string.
+     * <p>
+     * This method checks if the input date matches the expected patterns for formatting
+     * and valid day/month ranges. If the format or values are invalid, it throws a
+     * {@link ParseException} with an appropriate message.
+     * </p>
+     *
+     * @param date the date string to validate, expected in the format "d/M/yyyy" (e.g., "2/12/2024")
+     * @throws ParseException if the date format is invalid or the date values are out of range
+     */
     public static void checkDate(String date) throws ParseException {
         if (!date.matches(DATE_PATTERN) && !date.matches(FORMAT_PATTERN_DATE)) {
             throw new ParseException("Invalid date format! Please use 'd/M/yyyy'. "
