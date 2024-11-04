@@ -1,4 +1,4 @@
-package spleetwaise.transaction.ui;
+package systemtests;
 
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.mock;
@@ -13,10 +13,12 @@ import java.lang.reflect.Method;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
@@ -28,8 +30,9 @@ import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.testutil.TypicalTransactions;
+import spleetwaise.transaction.ui.RightPanel;
 
-public class RightPanelTest extends GuiUnitTest {
+public class RightPanelTest {
 
     private RightPanel rightPanel;
     private CommonModel mockCommonModel;
@@ -57,7 +60,6 @@ public class RightPanelTest extends GuiUnitTest {
         when(mockCommonModel.getCurrentPredicate()).thenReturn(mockPredicateProperty);
 
         rightPanel = spy(new RightPanel(mockCommandBox));
-        uiPartExtension.setUiPart(rightPanel);
     }
 
     @AfterEach

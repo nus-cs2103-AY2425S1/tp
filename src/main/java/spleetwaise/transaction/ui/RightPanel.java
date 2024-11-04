@@ -152,9 +152,9 @@ public class RightPanel extends UiPart<Region> {
     }
 
     /**
-     * Resets the filter to show all transactions. Package-private for testability.
+     * Resets the filter to show all transactions. public for testability.
      */
-    void resetFilter() {
+    public void resetFilter() {
         CommonModel.getInstance().updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
     }
 }
