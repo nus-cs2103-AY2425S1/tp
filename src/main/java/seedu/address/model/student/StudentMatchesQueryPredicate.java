@@ -3,6 +3,7 @@ package seedu.address.model.student;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -18,12 +19,16 @@ public class StudentMatchesQueryPredicate implements Predicate<Student> {
 
     @Override
     public boolean test(Student student) {
+        String groupName = student.getGroupName().isPresent() ?
+            student.getGroupName().get().getGroupName() : "!nogroup";
         return
             keywords.stream().anyMatch(keyword ->
-                student.getStudentNumber().getStudentNumber().equalsIgnoreCase(keyword)
-                    || student.getName().getFullName().equalsIgnoreCase(keyword)
-                    || student.getTags().stream().anyMatch(tag -> tag.getTagName().equalsIgnoreCase(keyword))
-                    || student.getEmail().getEmail().equalsIgnoreCase(keyword));
+                StringUtil.containsWordIgnoreCase(student.getStudentNumber().getStudentNumber(), keyword)
+                    || StringUtil.containsWordIgnoreCase(student.getName().getFullName(), keyword)
+                    || student.getTags().stream().anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.getTagName(),
+                    keyword))
+                    || StringUtil.containsWordIgnoreCase(student.getEmail().getEmail(), keyword)
+                    || groupName.equals(keyword));
     }
 
     @Override
