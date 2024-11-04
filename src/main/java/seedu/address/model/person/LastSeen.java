@@ -14,7 +14,7 @@ public class LastSeen {
 
     public static final String MESSAGE_CONSTRAINTS = "Date should be in the format DD-MM-YYYY";
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final LocalDate value;
 
     /**
@@ -25,7 +25,7 @@ public class LastSeen {
     public LastSeen(String lastSeen) {
         requireNonNull(lastSeen);
         checkArgument(isValidDate(lastSeen), MESSAGE_CONSTRAINTS);
-        this.value = LocalDate.parse(lastSeen, formatter);
+        this.value = LocalDate.parse(lastSeen, FORMATTER);
     }
 
     /**
@@ -33,7 +33,7 @@ public class LastSeen {
      */
     public static boolean isValidDate(String test) {
         try {
-            LocalDate.parse(test, formatter);
+            LocalDate.parse(test, FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -42,7 +42,7 @@ public class LastSeen {
 
     @Override
     public String toString() {
-        return formatter.format(value);
+        return FORMATTER.format(value);
     }
 
     @Override
