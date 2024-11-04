@@ -7,8 +7,9 @@ import static seedu.edulog.commons.util.AppUtil.checkArgument;
  * Represents a student tuition fee
  */
 public class Fee {
-    public static final String MESSAGE_CONSTRAINTS = "Fee should only contain digits and be less than 1 million.";
-    public static final String VALIDATION_REGEX = "^\\d+$";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Fee should only contain digits, have at least 1 digit, no leading 0s and be less than 1 million.";
+    public static final String VALIDATION_REGEX = "^[1-9]\\d{0,5}$";
     public static final int LIMIT = 1000000;
 
     public final int value;

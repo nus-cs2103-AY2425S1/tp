@@ -22,6 +22,9 @@ public class FeeTest {
         assertThrows(IllegalArgumentException.class, () -> new Fee("a98a"));
         assertThrows(IllegalArgumentException.class, () -> new Fee(1000000));
         assertThrows(IllegalArgumentException.class, () -> new Fee("1000000"));
+        assertThrows(IllegalArgumentException.class, () -> new Fee("0"));
+        assertThrows(IllegalArgumentException.class, () -> new Fee("0000"));
+        assertThrows(IllegalArgumentException.class, () -> new Fee(0));
     }
 
     @Test
