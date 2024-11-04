@@ -15,7 +15,6 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_CONFIRMATION = "Are you sure you want to clear the address book? ";
     public static final String MESSAGE_ABORT = "Clear command aborted.";
-    
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
