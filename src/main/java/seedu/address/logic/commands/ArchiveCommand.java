@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -39,21 +38,21 @@ public class ArchiveCommand extends Command {
             "This person is already unarchived in the address book.";
 
     private final Index index;
-    private final boolean isArchive;
+    private final boolean shouldArchive;
 
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+    private final Logger logger = LogsCenter.getLogger(ArchiveCommand.class);
 
     private Person personToModify;
 
     /**
      * @param index of the person in the filtered person list to archive/unarchive
-     * @param isArchive depending on whether the person should be archived or not
+     * @param shouldArchive depending on whether the person should be archived or not
      */
-    public ArchiveCommand(Index index, boolean isArchive) {
+    public ArchiveCommand(Index index, boolean shouldArchive) {
         requireNonNull(index);
 
         this.index = index;
-        this.isArchive = isArchive;
+        this.shouldArchive = shouldArchive;
     }
 
     @Override
@@ -67,8 +66,8 @@ public class ArchiveCommand extends Command {
 
         personToModify = lastShownList.get(index.getZeroBased());
 
-        if (isArchive == personToModify.isArchived()) {
-            throw new CommandException(isArchive
+        if (shouldArchive == personToModify.isArchived()) {
+            throw new CommandException(shouldArchive
                     ? MESSAGE_PERSON_IS_ALREADY_ARCHIVED
                     : MESSAGE_PERSON_IS_ALREADY_UNARCHIVED);
         }
@@ -81,14 +80,14 @@ public class ArchiveCommand extends Command {
 
     private CommandResult generateCommandResult(Person modifiedPerson) {
         return new CommandResult(String.format(
-                isArchive ? MESSAGE_ARCHIVE_PERSON_SUCCESS : MESSAGE_UNARCHIVE_PERSON_SUCCESS,
+                shouldArchive ? MESSAGE_ARCHIVE_PERSON_SUCCESS : MESSAGE_UNARCHIVE_PERSON_SUCCESS,
                 Messages.format(modifiedPerson)));
     }
 
     private void logArchiveInfo(Person modifiedPerson) {
         logger.info(String.format(
                 "%s %s",
-                isArchive ? "Archived" : "Unarchived",
+                shouldArchive ? "Archived" : "Unarchived",
                 Messages.format(modifiedPerson)
         ));
     }
@@ -106,7 +105,7 @@ public class ArchiveCommand extends Command {
                 personToModify.getFamilySize(),
                 personToModify.getTags(),
                 personToModify.getUpdatedAt(),
-                this.isArchive
+                shouldArchive
         );
     }
 
@@ -120,7 +119,7 @@ public class ArchiveCommand extends Command {
 
     @Override
     public String getCommandWord() {
-        return isArchive ? COMMAND_WORD_ARCHIVE : COMMAND_WORD_UNARCHIVE;
+        return shouldArchive ? COMMAND_WORD_ARCHIVE : COMMAND_WORD_UNARCHIVE;
     }
 
     @Override
@@ -135,7 +134,7 @@ public class ArchiveCommand extends Command {
         }
 
         return this.index.equals(otherArchiveCommand.index)
-                && this.isArchive == otherArchiveCommand.isArchive;
+                && this.shouldArchive == otherArchiveCommand.shouldArchive;
     }
 
     @Override
@@ -144,7 +143,7 @@ public class ArchiveCommand extends Command {
         model.setPerson(afterArchive, personToModify);
         pastCommands.remove();
         return String.format(
-                isArchive ? MESSAGE_UNARCHIVE_PERSON_SUCCESS : MESSAGE_ARCHIVE_PERSON_SUCCESS,
+                shouldArchive ? MESSAGE_UNARCHIVE_PERSON_SUCCESS : MESSAGE_ARCHIVE_PERSON_SUCCESS,
                 Messages.format(personToModify));
     }
 }

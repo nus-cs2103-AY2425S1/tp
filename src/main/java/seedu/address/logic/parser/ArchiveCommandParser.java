@@ -12,10 +12,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ArchiveCommandParser implements Parser<ArchiveCommand> {
 
-    private final boolean isArchive;
+    private final boolean shouldArchive;
 
-    public ArchiveCommandParser(boolean isArchive) {
-        this.isArchive = isArchive;
+    public ArchiveCommandParser(boolean shouldArchive) {
+        this.shouldArchive = shouldArchive;
     }
 
     /**
@@ -35,7 +35,7 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE), pe);
         }
 
-        return new ArchiveCommand(index, isArchive);
+        return new ArchiveCommand(index, shouldArchive);
     }
 
 }
