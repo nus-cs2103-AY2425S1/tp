@@ -64,7 +64,6 @@ public class ImportCommand extends Command {
                     continue; // Skip empty rows
                 }
                 String[] cleanedFields = CsvRowParser.cleanRow(fields);
-                System.out.println("git" + fields[5]);
                 if (cleanedFields.length != expectedHeaders.length) {
                     throw new CommandException("Invalid CSV format, ensure that all necessary data are present.");
                 }

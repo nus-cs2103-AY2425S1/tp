@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -48,7 +47,7 @@ public class ExportCommandTest {
      * Tests that an exception is thrown when attempting to create directories with an invalid path.
      */
     @Test
-    public void createDirectories_invalidPath_Exception() {
+    public void createDirectories_invalidPath_exception() {
         // Get the project root directory path
         String projectDir = System.getProperty("user.dir");
         String invalidPath = projectDir + "/invalid:path/with*illegal?chars/test.csv";
@@ -64,7 +63,7 @@ public class ExportCommandTest {
      * @throws IOException if there is an issue creating the temporary file for testing.
      */
     @Test
-    public void createDirectories_pathConflict_Exception() throws IOException {
+    public void createDirectories_pathConflict_exception() throws IOException {
         String projectDir = System.getProperty("user.dir");
         File tempFile = new File(projectDir + "/conflict.txt");
         tempFile.createNewFile(); // Create the file to simulate a conflict
