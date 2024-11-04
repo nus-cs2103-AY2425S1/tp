@@ -623,7 +623,7 @@ For all use cases below, unless specified otherwise,
 
       Use case resumes at step 1.
 
-* 1b. User enters an appointment that already exists.
+* 1b. User enters an appointment with the same date and time.
 
     * 1b1. DocTrack shows an error message.
 
