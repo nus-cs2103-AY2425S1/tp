@@ -34,7 +34,7 @@ public class AddPropertyCommand extends Command {
             + PREFIX_TOWN + "TOWN "
             + PREFIX_TYPE + "PROPERTY_TYPE "
             + PREFIX_SIZE + "SIZE "
-            + PREFIX_BEDROOMS + "NUMBER_OF_BEDROOMS"
+            + PREFIX_BEDROOMS + "NUMBER_OF_BEDROOMS "
             + PREFIX_BATHROOMS + "NUMBER_OF_BATHROOMS "
             + PREFIX_PRICE + "PRICE\n"
             + "Example: " + COMMAND_WORD + " 1 "
