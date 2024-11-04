@@ -339,18 +339,13 @@ public class ModelManager implements Model {
     public void setUiState(UiState uiState) {
         requireNonNull(uiState);
         switch (uiState) {
-        case DEFAULT:
-        case VENDOR_LIST:
-        case EVENT_LIST:
-            currentUiState.setValue(uiState);
-            applyFiltersBasedOnUiState();
-            break;
         case EVENT_DETAILS:
         case VENDOR_DETAILS:
             assert false : "UiState should not be set to EVENT_DETAILS or VENDOR_DETAILS directly";
             break;
         default:
-            assert false : "Unknown UiState";
+            currentUiState.setValue(uiState);
+            applyFiltersBasedOnUiState();
         }
     }
 }
