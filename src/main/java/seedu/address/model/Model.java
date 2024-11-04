@@ -114,4 +114,7 @@ public interface Model {
 
     /** Pins the given person to the top of the list */
     void pinPerson(Person target);
+
+    /** Unpins the given person from the top of the list */
+    void unpinPerson(Person target);
 }

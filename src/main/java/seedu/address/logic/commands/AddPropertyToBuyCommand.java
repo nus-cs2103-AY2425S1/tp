@@ -36,10 +36,10 @@ public class AddPropertyToBuyCommand extends Command {
             + PREFIX_BUYING_PRICE + "1650000 "
             + PREFIX_POSTAL_CODE + "567510 "
             + PREFIX_UNIT_NUMBER + "10-65 "
-            + PREFIX_TAG + "Extremely spacious"
+            + PREFIX_TAG + "Extremely spacious "
             + PREFIX_TAG + "Near MRT";
 
-    public static final String MESSAGE_SUCCESS = "New property added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New property added: \n%1$s";
     public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists "
             + "in the list of properties to buy";
 

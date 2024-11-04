@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.BUYING_PRICE_DESC_1650000;
 import static seedu.address.logic.commands.CommandTestUtil.HOUSING_TYPE_DESC_HDB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BUYING_PRICE_DESC;
@@ -124,5 +125,23 @@ public class AddPropertyToBuyParserTest {
         // invalid housing type
         // assertParseFailure(parser, PREAMBLE_INDEX + INVALID_HOUSING_TYPE_DESC + BUYING_PRICE_DESC_1650000
         // + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT, Hdb.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_emptyPreamble_throwsParseException() {
+        assertParseFailure(parser, " ht/HDB bp/1650000 pc/567510 un/03-11 t/near MRT",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPropertyToBuyCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_blankPreamble_throwsParseException() {
+        assertParseFailure(parser, "  ht/HDB bp/1650000 pc/567510 un/03-11 t/near MRT",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPropertyToBuyCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidIndexInPreamble_throwsParseException() {
+        assertParseFailure(parser, "a ht/HDB bp/1650000 pc/567510 un/03-11 t/near MRT",
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, AddPropertyToBuyCommand.MESSAGE_USAGE));
     }
 }

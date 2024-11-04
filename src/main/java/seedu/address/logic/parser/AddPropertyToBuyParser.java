@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPropertyToBuyCommand;
+import seedu.address.logic.commands.AddPropertyToSellCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Apartment;
 import seedu.address.model.person.Bto;
@@ -47,11 +49,16 @@ public class AddPropertyToBuyParser implements Parser<AddPropertyToBuyCommand> {
         }
 
         Index index;
+        String preamble = argMultimap.getPreamble();
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+        if (preamble.isEmpty() || preamble.equals(" ")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddPropertyToBuyCommand.MESSAGE_USAGE));
+        }
+        try {
+            index = ParserUtil.parseIndex(preamble);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                     AddPropertyToBuyCommand.MESSAGE_USAGE), pe);
         }
 
@@ -62,6 +69,9 @@ public class AddPropertyToBuyParser implements Parser<AddPropertyToBuyCommand> {
         Price buyingPrice = ParserUtil.parseBuyingPrice(argMultimap.getValue(PREFIX_BUYING_PRICE).get());
         PostalCode postalCode = ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTAL_CODE).get());
         UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNIT_NUMBER).get());
+        if (!ParserUtil.isValidNumberOfPropertyTags(argMultimap.getAllValues(PREFIX_TAG))) {
+            throw new ParseException(AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LIMIT);
+        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Property property = getSpecificPropertyObject(housingType, buyingPrice, postalCode, unitNumber, tagList);

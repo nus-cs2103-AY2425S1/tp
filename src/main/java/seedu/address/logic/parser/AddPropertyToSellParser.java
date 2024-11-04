@@ -41,17 +41,17 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
                 ArgumentTokenizer.tokenize(args, PREFIX_HOUSING_TYPE, PREFIX_SELLING_PRICE,
                         PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER, PREFIX_TAG);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
         if (!arePrefixesPresent(argMultimap, PREFIX_HOUSING_TYPE, PREFIX_SELLING_PRICE,
                 PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddPropertyToSellCommand.MESSAGE_USAGE));
+        }
+
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         // Create a new Property object here and pass it to AddPropertyToSellCommand(Property property);
@@ -61,10 +61,11 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
         Price sellingPrice = ParserUtil.parseSellingPrice(argMultimap.getValue(PREFIX_SELLING_PRICE).get());
         PostalCode postalCode = ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTAL_CODE).get());
         UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNIT_NUMBER).get());
+        if (!ParserUtil.isValidNumberOfPropertyTags(argMultimap.getAllValues(PREFIX_TAG))) {
+            throw new ParseException(AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LIMIT);
+        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
         Property property = getSpecificPropertyObject(housingType, sellingPrice, postalCode, unitNumber, tagList);
-
         return new AddPropertyToSellCommand(index, property);
     }
 

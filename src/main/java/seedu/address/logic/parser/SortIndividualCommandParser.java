@@ -37,6 +37,7 @@ public class SortIndividualCommandParser implements Parser<SortIndividualCommand
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SortIndividualCommand.MESSAGE_USAGE));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD, PREFIX_ORDER);
         if (!areValidOrderArguments(argMultimap.getValue(PREFIX_FIELD).get(),
                 argMultimap.getValue(PREFIX_ORDER).get())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

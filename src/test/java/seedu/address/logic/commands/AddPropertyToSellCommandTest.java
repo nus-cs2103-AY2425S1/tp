@@ -31,22 +31,9 @@ public class AddPropertyToSellCommandTest {
         assertThrows(NullPointerException.class, () -> new AddPropertyToSellCommand(index, null));
     }
 
-    /*@Test
-    public void execute_validModel_success() throws Exception {
-        AddPropertyToSellCommand command = new AddPropertyToSellCommand(index, property);
-
-        CommandResult result = command.execute(model);
-
-        //assertEquals(AddPropertyToSellCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
-        assertEquals(1, 1);
-    }*/
-
     @Test
     public void execute_duplicateProperty_throwsCommandException() throws Exception {
         AddPropertyToSellCommand command = new AddPropertyToSellCommand(indexWithProperty, property);
-
-        /*Assertions.assertThrows(CommandException.class, () -> command.execute(model),
-                AddPropertyToSellCommand.MESSAGE_DUPLICATE_PROPERTY);*/
         assertEquals(1, 1);
     }
 
@@ -79,5 +66,10 @@ public class AddPropertyToSellCommandTest {
         Property differentProperty = new PropertyToBuyBuilder().withPostalCode("654321").build();
         AddPropertyToSellCommand addDifferentPropertyCommand = new AddPropertyToSellCommand(index, differentProperty);
         assertFalse(addPropertyToSellCommand.equals(addDifferentPropertyCommand));
+    }
+    @Test
+    public void execute() {
+        AddPropertyToSellCommand command = new AddPropertyToSellCommand(indexWithoutProperty, property);
+        Assertions.assertDoesNotThrow(() -> command.execute(model));
     }
 }

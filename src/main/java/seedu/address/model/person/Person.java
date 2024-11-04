@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,6 +29,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private boolean isPinned = false;
 
     // Property details
     private ObservableList<Property> sellingProperties = FXCollections.observableArrayList();
@@ -187,8 +189,13 @@ public class Person {
      * @param property Property to check
      * @return boolean
      */
-    public boolean containsSellProperty(Property property) {
-        return sellingProperties.contains(property);
+    public boolean containsSellProperty(Property property, List<Person> lastShownList) {
+        for (Person person : lastShownList) {
+            if (person.getListOfSellingProperties().contains(property)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -274,8 +281,6 @@ public class Person {
         sellingProperties.remove(oldPropertyIndex.getZeroBased());
     }
 
-
-
     /**
      * Returns True if the propertyIndex {@code Index} is within the range of the list of selling properties.
      *
@@ -294,6 +299,27 @@ public class Person {
     public boolean isValidBuyingPropertyIndex(Index propertyIndex) {
         int index = propertyIndex.getZeroBased();
         return (index >= 0 && index < buyingProperties.size());
+    }
+
+    /**
+     * Sets the isPinned status to true.
+     */
+    public void pin() {
+        this.isPinned = true;
+    }
+
+    /**
+     * Sets the isPinned status to false.
+     */
+    public void unpin() {
+        this.isPinned = false;
+    }
+
+    /**
+     * Returns the isPinned status of the person.
+     */
+    public boolean isPinned() {
+        return this.isPinned;
     }
 
     /**
