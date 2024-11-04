@@ -55,14 +55,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_PROJECT_STATUS + "PROJECT_STATUS] "
             + "[" + PREFIX_PAYMENT_STATUS + "PAYMENT_STATUS] "
-            + "[" + PREFIX_CLIENT_STATUS + "CLIENT_STATUS]"
+            + "[" + PREFIX_CLIENT_STATUS + "CLIENT_STATUS] "
             + "[" + PREFIX_DEADLINE + "DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_PROJECT_STATUS + "complete "
             + PREFIX_PAYMENT_STATUS + "paid "
-            + PREFIX_CLIENT_STATUS + "active"
+            + PREFIX_CLIENT_STATUS + "active "
             + PREFIX_DEADLINE + "20-10-2024";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";

@@ -64,7 +64,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 </div>
 
 ## General Commands
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -72,19 +72,19 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Listing all Client : `list`
+### Listing all Client: `list`
 
 Show a list of all clients contacts in Clientele+.
 
 Format: `list`
 
-### Clearing All Entries : `clear`
+### Clearing All Entries: `clear`
 
 Clears all entries from Clientele+.
 
 Format: `clear`
 
-### Exiting the Program : `exit`
+### Exiting the Program: `exit`
 
 Exits the program.
 
@@ -125,7 +125,7 @@ Examples:
 3. You may hover over the Payment Status Icon to view the payment status as text.
 </div>
 
-### Update Client Details : `edit`
+### Update Client Details: `edit`
 
 Allows updating of various statuses of an existing client.
 
@@ -178,7 +178,7 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Delete Client Details : `delete`
+### Delete Client Details: `delete`
 
 Deletes the specified person from Clientele+.
 
@@ -199,7 +199,7 @@ Examples:
 If you try to delete by name but there are 2 or more clients in the list that same name, then you will be shown a list of those clients and prompted to delete by index instead.
 </div>
 
-### Blacklist a Client : `blacklist`
+### Blacklist a Client: `blacklist`
 
 Marks a client as "blacklisted".
 
@@ -212,7 +212,7 @@ Format: `blacklist INDEX`
 Examples:
 * `blacklist 2` marks the second person in the list as blacklisted
 
-### Whitelist a Client : `whitelist`
+### Whitelist a Client: `whitelist`
 
 Whitelists a previously-blacklisted client.
 
@@ -227,7 +227,7 @@ Examples:
 * `whitelist 2 cs/active` whitelists the second person in the list and marks them as an `active` client.
 * `whitelist 1 cs/old` whitelists the first person in the list and marks them as an `old` client.
 
-### Sort Client list : `sort`
+### Sort Client list: `sort`
 
 Sorts the client list in ascending order by the specified field.
 
@@ -243,6 +243,26 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Clientele+ saves you the hassle of sorting the list every time you open the app, so every time you do a sort, it will save the list
 </div>
+
+### Archive a Client: `archive`
+Archives a client present in the main address book.
+
+Format: `archive INDEX`
+
+* `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+* `archive 1` archives the first person in the list, removing it and storing it in an archived list
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+An unarchive feature is in the works and will be available in the future.
+</div>
+
+### Listing all archived clients
+Shows a list of all archived clients' contacts in Clientele+.
+
+Format: `archive-list`
 
 ### Deadline Reminder
 
@@ -274,7 +294,9 @@ Clientele+ data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-Clientele+ data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Clientele+ data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+Data of archived clients is saved automatically as a separate JSON file `[JAR file location]/data/archivedAddressBook.json`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Clientele+ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -311,5 +333,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g., `find n/James Jake ps/completed py/paid`
 **Sort** | `sort FIELD ORDER` <br> e.g., `sort name ascending` or `sort deadline descending`
+**Archive** | `archive INDEX`
+**Archive-list** | `archive-list`
 **List** | `list`
 **Help** | `help`
